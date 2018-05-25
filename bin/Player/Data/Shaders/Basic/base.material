@@ -1,0 +1,82 @@
+material base {
+	set $ar 0.5
+	set $ag 0.5
+	set $ab 0.5
+	set $aa 1
+
+	set $dr 0.8
+	set $dg 0.8
+	set $db 0.8
+	set $da 1
+
+	set $sr 0
+	set $sg 0
+	set $sb 0
+	set $sa 1
+	set $ss 0
+	
+	set $scaleU 1
+	set $scaleV 1
+	set $offsetU 0
+	set $offsetV 0
+
+	technique 0 {
+		pass 0 {
+            ambient $ar $ag $ab $aa
+			diffuse $dr $dg $db $da
+			specular $sr $sg $sb $sa $ss
+			cull_hardware none
+			cull_software none
+			texture_unit tex{
+				texture_alias diffuseMap
+				texture white.bmp
+				scale $scaleU $scaleV
+				scroll $offsetU $offsetV
+			}
+		}
+	}
+}
+
+
+material base/alpha : base {
+	technique 0 {
+		pass 0 {
+			alpha_rejection greater 0
+			alpha_to_coverage on
+		}
+	}
+}
+
+material base/alpha/eye{
+	set $ar 0
+	set $ag 0
+	set $ab 0
+	set $aa 1
+
+	set $dr 0
+	set $dg 0
+	set $db 0
+	set $da 1
+
+	set $sr 1
+	set $sg 1
+	set $sb 1
+	set $sa 1
+	set $ss 127
+	technique {
+		pass {
+            ambient $ar $ag $ab $aa
+			diffuse $dr $dg $db $da
+			specular $sr $sg $sb $sa $ss
+			scene_blend add
+			depth_check on
+			depth_write off
+			transparent_sorting on
+			texture_unit {
+				colour_op_ex blend_manual src_manual src_current 0.1405 1 1 1
+				colour_op_multipass_fallback dest_colour zero
+				alpha_op_ex source1 src_manual src_current 0.1405
+			}
+		}
+	}
+}

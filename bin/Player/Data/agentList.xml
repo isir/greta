@@ -1,0 +1,479 @@
+<agents>
+	<agent name="greta" type="composite" scale="0.009">
+		<head>
+			<position x="0" y="12" z="-1"/>
+			<scale x="0.00005" y="0.00005" z="0.00005"/>
+			
+			<face mesh="greta/face.mesh" type="pose">
+				<!--
+				targets:
+				   0: skin
+				   1: eyebrows
+				   2: lips
+				   3: eyelids
+				   more or less: nothing
+				no traget: all
+				-->
+				<material name="hair" target="1"/>
+				<material name="lipstick" target="2"/>
+			</face>
+			<eye_right>
+				<position x="-76000" y="0" z="119000"/>
+				<scale x="2.75" y="2.75" z="2.75"/>
+				<!-- no sub mesh, so no target for material -->
+			</eye_right>
+			<eye_left>
+				<position x="76000" y="0" z="119000"/>
+				<scale x="2.75" y="2.75" z="2.75"/>
+				<!-- no sub mesh, so no target for material -->
+			</eye_left>
+			<jaw>
+				<position x="0" y="3000" z="-4000"/>
+			</jaw>
+			<object mesh="greta/hair.mesh">
+				<position x="0" y="0" z="-40000"/>
+				<scale x="52" y="60" z="60"/>
+				<rotation x="1" y="0" z="0" angle="-90" angle_unit="degree"/>
+				<!-- no sub mesh, so no target for material -->
+			</object>
+		</head>
+		<body mesh="greta/body.mesh" >
+			<!--
+			targets:
+				0: shoes
+				1: jacket
+				2: pants
+				3: shirt
+				4: nail
+				5: sole
+				6: neck
+				7: hands
+				8: feet
+				more or less: nothing
+			no traget: all
+			-->
+		</body>
+	</agent>
+
+	<agent name="poppy" type="composite" scale="1">
+		<head>
+			<position x="-0.00095" y="-1.50822" z="-0.03059"/>
+			
+			<scale x="0.0000019" y="0.0000019" z="0.0000019"/>
+			<face mesh="poppy/face.mesh" type="pose">
+				<wrinkles_material name="poppy_face_wrinkles" />
+				<!-- no sub mesh, so no target for material -->
+			</face>
+			<eye_right>
+				<position x="-16700" y="846000" z="51100"/>
+				<scale x="0.7" y="0.7" z="0.7"/>
+				<!-- no sub mesh, so no target for material -->
+				<material name="poppy_eyes"/>
+			</eye_right>
+			<eye_left>
+				<position x="16700" y="846000" z="51100"/>
+				<scale x="0.7" y="0.7" z="0.7"/>
+				<!-- no sub mesh, so no target for material -->
+				<material name="poppy_eyes"/>
+			</eye_left>
+			<jaw>
+				<position x="-800" y="848000" z="16200"/>
+				<scale x="0.25" y="0.25" z="0.25"/>
+			</jaw>
+			<object mesh="poppy/hair.mesh">
+				<scale x="0.9" y="1" z="1"/>
+				<!-- no sub mesh, so no target for material -->
+			</object>
+		</head>
+		<body mesh="poppy/body.mesh" >
+			<!--
+			targets:
+			   0: bolero
+			   1: dress
+			   2: neck
+			   3: nails
+			   4: arms and legs
+			   5: shoes
+			   6: sole
+			   7: pendant
+			   8: necklass
+			   more or less: nothing
+			no traget: all
+			-->
+			<material name="poppy_bolero_black_2" target="0" />
+			<material name="poppy_dress_purple" target="1" />
+		</body>
+	</agent>
+	
+	
+	<agent name="spike" type="composite" scale="0.02">
+		<head>
+			<position x="-0.0508" y="-79.75616" z="-0.254"/>
+			
+			<scale x="0.0001" y="0.0001" z="0.0001"/>
+			<face mesh="spike/face.mesh" type="pose" />
+			<eye_right>
+				<position x="-16000" y="846000" z="53000"/>
+				<scale x="0.55" y="0.55" z="0.55"/>
+				<!-- no sub mesh, so no target for material -->
+				<material name="spike_eyes"/>
+			</eye_right>
+			<eye_left>
+				<position x="16000" y="846000" z="53000"/>
+				<scale x="0.55" y="0.55" z="0.55"/>
+				<!-- no sub mesh, so no target for material -->
+				<material name="spike_eyes"/>
+			</eye_left>
+			<jaw>
+				<position x="0" y="845500" z="18000"/>
+				<scale x="0.25" y="0.25" z="0.25"/>
+			</jaw>
+		</head>
+		<body mesh="spike/body.mesh" >
+			<!--
+			targets:
+			   0: arms
+			   1: nails
+			   2: t-shirt
+			   3: neck
+			   4: jean
+			   5: shoes
+			   more or less: nothing
+			no traget: all
+			-->
+		</body>
+	</agent>
+	
+	
+	<agent name="obadiah" type="composite" scale="0.02">
+		<head>
+			<position x="-0.04" y="-80.823" z="-0.25"/>
+			<scale x="0.00001008" y="0.00001008" z="0.00001008"/>
+			
+			<face mesh="obadiah/face_sad.mesh" type="pose">
+				<!-- no sub mesh, so no target for material -->
+				<wrinkles_material name="obadiah_face_wrinkles" />
+			</face>
+			<eye_right>
+				<position x="-180000" y="8480000" z="530000"/>
+				<scale x="5.5" y="5.5" z="5.5"/>
+				<!-- no sub mesh, so no target for material -->
+				<material name="obadiah_eyes"/>
+			</eye_right>
+			<eye_left>
+				<position x="180000" y="8480000" z="530000"/>
+				<scale x="5.5" y="5.5" z="5.5"/>
+				<!-- no sub mesh, so no target for material -->
+				<material name="obadiah_eyes"/>
+			</eye_left>
+			<jaw>
+				<position x="0" y="8470000" z="167000"/>
+				<scale x="2.5" y="2.5" z="2.5"/>
+			</jaw>
+			<object mesh="obadiah/hair.mesh">
+				<scale x="10" y="10" z="10"/>
+				<!-- no sub mesh, so no target for material -->
+			</object>
+		</head>
+		<body mesh="obadiah/body.mesh" >
+			<!--
+			targets:
+				0: shoes
+				1: neck
+				2: pants
+				3: shirt
+				4: shirt collar
+				5: jacket
+				6: hands
+				7: nail
+				8: jacket buttons
+				9: jacket pocket
+				10: jacket collar
+				more or less: nothing
+			no traget: all
+			-->
+		</body>
+	</agent>
+	
+	
+	<agent name="prudence" type="composite" scale="0.009">
+		<head>
+			<position x="0.087" y="-0.304" z="-7.41"/>
+			<scale x="0.00023" y="0.00023" z="0.00023"/>
+			
+			<face mesh="prudence/face.mesh" type="pose">
+			</face>
+			<eye_right>
+				<position x="18500" y="57000" z="53000"/>
+				<scale x="0.55" y="0.55" z="0.55"/>
+				<!-- no sub mesh, so no target for material -->
+				<material name="prudence_eyes"/>
+			</eye_right>
+			<eye_left>
+				<position x="-17500" y="57000" z="53000"/>
+				<scale x="0.55" y="0.55" z="0.55"/>
+				<!-- no sub mesh, so no target for material -->
+				<material name="prudence_eyes"/>
+			</eye_left>
+			<jaw>
+				<position x="-500" y="61000" z="16500"/>
+				<scale x="0.25" y="0.25" z="0.25"/>
+			</jaw>
+			<object mesh="prudence/hair.mesh">
+				<position x="500" y="-787000" z="0"/>
+				<!-- no sub mesh, so no target for material -->
+			</object>
+			<object mesh="prudence/glasses.mesh">
+				<position x="700" y="55000" z="57000"/>
+				<!-- no sub mesh, so no target for material -->
+			</object>
+		</head>
+		<body mesh="greta/body.mesh" >
+			<!--
+			targets:
+				0: shoes
+				1: jacket
+				2: pants
+				3: shirt
+				4: nail
+				5: sole
+				6: neck
+				7: hands
+				8: feet
+				more or less: nothing
+			no traget: all
+			-->
+		</body>
+	</agent>
+	
+	<!-- obadiah familly -->
+	<agent name="oldbadiah" type="composite" scale="0.02">
+		<head>
+			<position x="-0.04" y="-80.823" z="-0.25"/>
+			<scale x="0.00001008" y="0.00001008" z="0.00001008"/>
+			
+			<face mesh="obadiah/face_sad.mesh" type="pose">
+				<material name="obadiah_face_old"/>
+				<wrinkles_material name="obadiah_face_wrinkles" />
+			</face>
+			<eye_right>
+				<position x="-180000" y="8480000" z="530000"/>
+				<scale x="5.5" y="5.5" z="5.5"/>
+				<material name="obadiah_eyes"/>
+			</eye_right>
+			<eye_left>
+				<position x="180000" y="8480000" z="530000"/>
+				<scale x="5.5" y="5.5" z="5.5"/>
+				<material name="obadiah_eyes"/>
+			</eye_left>
+			<jaw>
+				<position x="0" y="8470000" z="167000"/>
+				<scale x="2.5" y="2.5" z="2.5"/>
+			</jaw>
+			<object mesh="obadiah/hair.mesh">
+				<scale x="10" y="10" z="10"/>
+				<material name="obadiah_hair_old"/>
+			</object>
+		</head>
+		<body mesh="obadiah/body.mesh" >
+			<material name="obadiah_face_old" target="1" />
+		</body>
+	</agent>
+	
+	<agent name="chauvebadiah" type="composite" scale="0.02">
+		<head>
+			<position x="-0.04" y="-80.823" z="-0.25"/>
+			<scale x="0.00001008" y="0.00001008" z="0.00001008"/>
+			
+			<face mesh="obadiah/face_neutral.mesh" type="pose">
+				<material name="obadiah_face_old"/>
+				<wrinkles_material name="obadiah_face_wrinkles" />
+			</face>
+			<eye_right>
+				<position x="-180000" y="8480000" z="530000"/>
+				<scale x="5.5" y="5.5" z="5.5"/>
+				<material name="obadiah_eyes"/>
+			</eye_right>
+			<eye_left>
+				<position x="180000" y="8480000" z="530000"/>
+				<scale x="5.5" y="5.5" z="5.5"/>
+				<material name="obadiah_eyes"/>
+			</eye_left>
+			<jaw>
+				<position x="0" y="8470000" z="167000"/>
+				<scale x="2.5" y="2.5" z="2.5"/>
+			</jaw>
+			<object mesh="prudence/glasses.mesh">
+				<position x="0" y="8450000" z="570000"/>
+				<scale x="10" y="10" z="10"/>
+				<material name="prudence_black_glasses" />
+			</object>
+		</head>
+		<body mesh="obadiah/body.mesh" >
+			<material name="obadiah_face_old" target="1" />
+		</body>
+	</agent>
+	
+	<agent name="obadiahNeutral" type="composite" scale="0.02">
+		<head>
+			<position x="-0.04" y="-80.823" z="-0.25"/>
+			<scale x="0.00001008" y="0.00001008" z="0.00001008"/>
+			
+			<face mesh="obadiah/face_neutral.mesh" type="pose" >
+				<wrinkles_material name="obadiah_face_wrinkles" />
+			</face>
+			<eye_right>
+				<position x="-180000" y="8480000" z="530000"/>
+				<scale x="5.5" y="5.5" z="5.5"/>
+				<material name="obadiah_eyes"/>
+			</eye_right>
+			<eye_left>
+				<position x="180000" y="8480000" z="530000"/>
+				<scale x="5.5" y="5.5" z="5.5"/>
+				<material name="obadiah_eyes"/>
+			</eye_left>
+			<jaw>
+				<position x="0" y="8470000" z="167000"/>
+				<scale x="2.5" y="2.5" z="2.5"/>
+			</jaw>
+			<object mesh="obadiah/hair.mesh">
+				<scale x="10" y="10" z="10"/>
+			</object>
+		</head>
+		<body mesh="obadiah/body.mesh" />
+	</agent>
+	
+	<!-- poppy familly -->
+	<agent name="poppence" type="composite" scale="1">
+		<head>
+			<position x="-0.00095" y="-1.50822" z="-0.03059"/>
+			
+			<scale x="0.0000019" y="0.0000019" z="0.0000019"/>
+			
+			<face mesh="poppy/face.mesh" type="pose">
+				<wrinkles_material name="poppy_face_wrinkles" />
+			</face>
+			<eye_right>
+				<position x="-16700" y="846000" z="51100"/>
+				<scale x="0.7" y="0.7" z="0.7"/>
+				<material name="poppy_eyes"/>
+			</eye_right>
+			<eye_left>
+				<position x="16700" y="846000" z="51100"/>
+				<scale x="0.7" y="0.7" z="0.7"/>
+				<material name="poppy_eyes"/>
+			</eye_left>
+			<jaw>
+				<position x="-800" y="848000" z="16200"/>
+				<scale x="0.25" y="0.25" z="0.25"/>
+			</jaw>
+			<object mesh="prudence/hair.mesh">
+				<position x="0" y="-1000" z="5000"/>
+			</object>
+			<object mesh="prudence/glasses.mesh">
+				<position x="0.0" y="845000" z="57000"/>
+				<scale x="0.95" y="0.9" z="1"/>
+				<!-- no sub mesh, so no target for material -->
+			</object>
+		</head>
+		<body mesh="poppy/body.mesh" >
+		</body>
+	</agent>
+	
+	<!-- spike familly -->
+	<agent name="brice" type="composite" scale="0.02">
+		<head>
+			<position x="-0.0508" y="-79.75616" z="-0.254"/>
+			
+			<scale x="0.0001" y="0.0001" z="0.0001"/>
+			<face mesh="spike/face.mesh" type="pose" />
+			<eye_right>
+				<position x="-16000" y="846000" z="53000"/>
+				<scale x="0.55" y="0.55" z="0.55"/>
+				<material name="spike_eyes"/>
+			</eye_right>
+			<eye_left>
+				<position x="16000" y="846000" z="53000"/>
+				<scale x="0.55" y="0.55" z="0.55"/>
+				<material name="spike_eyes"/>
+			</eye_left>
+			<jaw>
+				<position x="0" y="845500" z="18000"/>
+				<scale x="0.25" y="0.25" z="0.25"/>
+			</jaw>
+			
+			<object mesh="poppy/hair.mesh">
+				<scale x="-0.9" y="1.2" z="1"/>
+				<position x="3000" y="-183000" z="2000"/>
+				<material name="brice_hair" />
+			</object>
+		</head>
+		<body mesh="spike/body.mesh" >
+			<material name="brice_tshirt" target="2" />
+		</body>
+	</agent>
+
+	<!-- autodesk familly -->
+	<agent name="camille" type="autodesk" scale="1">
+		<all mesh="camille/body.mesh" />
+		<wrinklesmaterial name="camille_wrinkles" target="0" />
+	</agent>
+	<agent name="camille.football" type="autodesk" scale="1">
+		<all mesh="camille/foot.mesh" />
+	</agent>
+	<agent name="camille.patient" type="autodesk" scale="1">
+		<all mesh="camille/patient.mesh" />
+	</agent>
+	
+	<agent name="laure" type="autodesk" scale="1">
+		<all mesh="laure/body.mesh" />
+		<wrinklesmaterial name="laure_wrinkles" target="0" />
+	</agent>
+	
+	<agent name="laure.football" type="autodesk" scale="1">
+		<all mesh="laure/foot.mesh" />
+	</agent>
+	
+	<agent name="rodrigue" type="autodesk" scale="1">
+		<all mesh="rodrigue/body.mesh" />
+	</agent>
+	
+	<agent name="rodrigue.football" type="autodesk" scale="1">
+		<all mesh="rodrigue/foot.mesh" />
+	</agent>
+	
+	<agent name="greto" type="autodesk" scale="1">
+		<all mesh="greto/body.mesh" />
+	</agent>
+	
+	<agent name="beatrice" type="autodesk" scale="1">
+		<all mesh="beatrice/body.mesh" />
+	</agent>
+	
+	<agent name="diane" type="autodesk" scale="1">
+		<all mesh="diane/body.mesh" />
+	</agent>
+	
+	<agent name="stephanie" type="autodesk" scale="1">
+		<all mesh="stephanie/body.mesh" />
+	</agent>
+	
+	<agent name="alice" type="autodesk" scale="1">
+		<all mesh="alice/body.mesh" />
+	</agent>
+	
+	<agent name="melanie" type="autodesk" scale="1">
+		<all mesh="melanie/body.mesh" />
+		<wrinklesmaterial name="melanie_wrinkles" target="0" />
+	</agent>
+	
+	<agent name="jonathan" type="autodesk" scale="1">
+		<all mesh="jonathan/body.mesh" />
+		<wrinklesmaterial name="jonathan_wrinkles" target="0" />
+	</agent>
+	
+	<agent name="nathan" type="autodesk" scale="1">
+		<all mesh="nathan/body.mesh" />
+		<wrinklesmaterial name="nathan_wrinkles" target="0" />
+	</agent>
+</agents>

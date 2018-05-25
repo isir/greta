@@ -1,0 +1,9 @@
+<!ELEMENT durations (duration)*>
+
+<!ELEMENT duration (position1)*>
+
+<!ELEMENT duration (position2)*>
+
+<!ELEMENT duration (min)*>
+
+<!ELEMENT duration (fitt)*>

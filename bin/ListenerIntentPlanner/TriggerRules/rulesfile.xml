@@ -1,0 +1,310 @@
+<?xml version="1.0"?>
+<!DOCTYPE rules SYSTEM "rulesfile.dtd" []>
+
+<rules>
+
+	<rule name="trigger-head_nod">
+
+		<usersignals>
+			<usersignal id="1" name="nod" modality="head"/>
+		</usersignals>
+
+		<backchannels probability="0.8" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="head=Nod_Middle" modality="head"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+
+
+	<rule name="trigger-head_shake">
+
+		<usersignals>
+			<usersignal id="1" name="shake" modality="head"/>
+		</usersignals>
+
+		<backchannels probability="0.8" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="head=Shake_Middle" modality="head"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+
+	<rule name="trigger-head_aside_r">
+
+		<usersignals>
+			<usersignal id="1" name="aside_right" modality="head"/>
+		</usersignals>
+
+		<backchannels probability="0.8" priority="1">
+			<mimicry probability="0.7">
+				<mimicry_signal name="Aside_Right" modality="head"/>
+			</mimicry>
+
+			<response_reactive probability="0.3"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-head_aside_l">
+
+		<usersignals>
+			<usersignal id="1" name="aside_left" modality="head"/>
+		</usersignals>
+
+		<backchannels probability="0.8" priority="1">
+			<mimicry probability="0.7">
+				<mimicry_signal name="Aside_Left" modality="head"/>
+			</mimicry>
+
+			<response_reactive probability="0.3"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-AU4">
+
+		<usersignals>
+			<usersignal id="1" name="faceexp=AU4" modality="face"/>
+		</usersignals>
+
+		<backchannels probability="0.8" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="faceexp=AU4" modality="face"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-AU5">
+
+		<usersignals>
+			<usersignal id="1" name="faceexp=AU5" modality="face"/>
+		</usersignals>
+
+		<backchannels probability="0.8" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="faceexp=AU5" modality="face"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-AU7">
+
+		<usersignals>
+			<usersignal id="1" name="faceexp=AU7" modality="face"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="faceexp=AU7" modality="face"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-AU2">
+
+		<usersignals>
+			<usersignal id="1" name="faceexp=AU2" modality="face"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="faceexp=AU2" modality="face"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-AU12">
+
+		<usersignals>
+			<usersignal id="1" name="faceexp=AU12" modality="face"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="faceexp=AU12" modality="face"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-AU15">
+
+		<usersignals>
+			<usersignal id="1" name="faceexp=AU15" modality="face"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="faceexp=AU15" modality="face"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-smile">
+
+		<usersignals>
+			<usersignal id="1" name="smile" modality="face"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="faceexp=AU12" modality="face"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-frown">
+
+		<usersignals>
+			<usersignal id="1" name="frown" modality="face"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="faceexp=AU4" modality="face"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-raise_eyebrows">
+
+		<usersignals>
+			<usersignal id="1" name="raise_eyebrows" modality="face"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+			<mimicry probability="0.6">
+				<mimicry_signal name="faceexp=AU2" modality="face"/>
+			</mimicry>
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-silence">
+
+		<usersignals>
+			<usersignal id="1" name="silence" modality="speech"/>
+		</usersignals>
+
+		<backchannels probability="1" priority="1">
+			
+			<mimicry probability="1">
+				<mimicry_signal name="head=Nod_Big" modality="head"/>
+			</mimicry>
+			
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-fall">
+
+		<usersignals>
+			<usersignal id="1" name="fall" modality="speech"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+			
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-fall-rise">
+	<usersignals>
+			<usersignal id="1" name="fall-rise" modality="speech"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-rise-fall">
+	<usersignals>
+			<usersignal id="1" name="rise-fall" modality="speech"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-rise">
+
+		<usersignals>
+			<usersignal id="1" name="rise" modality="speech"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+
+	<rule name="trigger-high">
+
+		<usersignals>
+			<usersignal id="1" name="high" modality="speech"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+
+			<response_reactive probability="0.4"/>
+		</backchannels>
+	</rule>
+	
+	<!-- This rule corresponds to the situation where the user expresses a positive appreciation on something (eg. "This is beautiful"). -->
+	<rule name="trigger-appreciation-positive">
+		<usersignals>
+			<usersignal id="1" name="appreciation-positive" modality="speech"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+		<mimicry probability="1">
+				<mimicry_signal name="head=Nod_Middle" modality="head"/>
+			</mimicry>
+			<response_reactive probability="1"/>
+		</backchannels>
+	</rule>
+	
+	<!-- This rule corresponds to the situation where the user expresses a negative appreciation on something (eg. "This is awful"). -->
+	<rule name="trigger-appreciation-negative">
+		<usersignals>
+			<usersignal id="1" name="appreciation-negative" modality="speech"/>
+		</usersignals>
+
+		<backchannels probability="1.0" priority="2">
+		<mimicry probability="1">
+				<mimicry_signal name="head=Shake_Middle" modality="head"/>
+			</mimicry>
+			<response_reactive probability="1"/>
+		</backchannels>
+	</rule>
+	
+	
+
+
+
+</rules>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- min and max of each amount in degree-->
+<TorsoIntervals>
+
+	<SagittalTilt>
+		<sagittal_amount direction="Backward">
+			<min>0</min>
+			<max>45</max>
+		</sagittal_amount>
+
+		<sagittal_amount direction="Forward">
+			<min>0</min>
+			<max>45</max>
+		</sagittal_amount>
+	</SagittalTilt>
+
+	<VerticalTorsion>
+		<vertical_amount direction="Leftward">
+			<min>0</min>
+			<max>45</max>
+		</vertical_amount>
+
+		<vertical_amount direction="Rightward">
+			<min>0</min>
+			<max>45</max>
+		</vertical_amount>
+	</VerticalTorsion>
+
+	<LateralRoll>
+		<lateral_amount direction="Leftward">
+			<min>0</min>
+			<max>45</max>
+		</lateral_amount>
+
+		<lateral_amount direction="Rightward">
+			<min>0</min>
+			<max>45</max>
+		</lateral_amount>
+	</LateralRoll>
+
+	<Collapse direction="Forward">
+		<collapse_amount>
+			<min>0</min> <!--Check if we can apply a negatif value of rotation-->
+			<max>30</max>
+		</collapse_amount>
+	</Collapse>
+
+</TorsoIntervals>

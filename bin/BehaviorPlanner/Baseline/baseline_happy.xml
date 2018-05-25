@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Common/Data/xml/profiles.xsd">
+	<parameter-set name="face">
+		<Parameter name="preference.value" value="0.9"/><Parameter name="preference.min" value="0.0"/><Parameter name="preference.max" value="1.0"/>
+		<Parameter name="OAC.value" value="0.95"/><Parameter name="OAC.min" value="0"/><Parameter name="OAC.max" value="1.0"/>
+		<Parameter name="SPC.value" value="0.0"/><Parameter name="SPC.min" value="-1.0"/><Parameter name="SPC.max" value="1.0"/>
+		<Parameter name="TMP.value" value="0.05"/><Parameter name="TMP.min" value="-1.0"/><Parameter name="TMP.max" value="1.0"/>
+		<Parameter name="FLD.value" value="-0.05"/><Parameter name="FLD.min" value="-1.0"/><Parameter name="FLD.max" value="1.0"/>
+		<Parameter name="PWR.value" value="0.1"/><Parameter name="PWR.min" value="-1.0"/><Parameter name="PWR.max" value="1.0"/>
+		<Parameter name="REP.value" value="-0.1"/><Parameter name="REP.min" value="-1.0"/><Parameter name="REP.max" value="1.0"/>
+	</parameter-set>
+	<parameter-set name="gesture">
+		<Parameter name="preference.value" value="1.0"/><Parameter name="preference.min" value="0.0"/><Parameter name="preference.max" value="1.0"/>
+		<Parameter name="OAC.value" value="1.0"/><Parameter name="OAC.min" value="0"/><Parameter name="OAC.max" value="1.0"/>
+		<Parameter name="SPC.value" value="1.0"/><Parameter name="SPC.min" value="-1.0"/><Parameter name="SPC.max" value="1.0"/>
+		<Parameter name="TMP.value" value="1.0"/><Parameter name="TMP.min" value="-1.0"/><Parameter name="TMP.max" value="1.0"/>
+		<Parameter name="FLD.value" value="-1.0"/><Parameter name="FLD.min" value="-1.0"/><Parameter name="FLD.max" value="1.0"/>
+		<Parameter name="PWR.value" value="-1.0"/><Parameter name="PWR.min" value="-1.0"/><Parameter name="PWR.max" value="1.0"/>
+		<Parameter name="REP.value" value="0.0"/><Parameter name="REP.min" value="-1.0"/><Parameter name="REP.max" value="1.0"/>
+	</parameter-set>
+	<parameter-set name="gaze">
+		<Parameter name="preference.value" value="0.9"/><Parameter name="preference.min" value="0.0"/><Parameter name="preference.max" value="1.0"/>
+		<Parameter name="OAC.value" value="0.95"/><Parameter name="OAC.min" value="0"/><Parameter name="OAC.max" value="1.0"/>
+		<Parameter name="SPC.value" value="0.0"/><Parameter name="SPC.min" value="-1.0"/><Parameter name="SPC.max" value="1.0"/>
+		<Parameter name="TMP.value" value="0.05"/><Parameter name="TMP.min" value="-1.0"/><Parameter name="TMP.max" value="1.0"/>
+		<Parameter name="FLD.value" value="-0.05"/><Parameter name="FLD.min" value="-1.0"/><Parameter name="FLD.max" value="1.0"/>
+		<Parameter name="PWR.value" value="0.1"/><Parameter name="PWR.min" value="-1.0"/><Parameter name="PWR.max" value="1.0"/>
+		<Parameter name="REP.value" value="-0.1"/><Parameter name="REP.min" value="-1.0"/><Parameter name="REP.max" value="1.0"/>
+	</parameter-set>
+	<parameter-set name="torso">
+		<Parameter name="preference.value" value="1.0"/><Parameter name="preference.min" value="0.0"/><Parameter name="preference.max" value="1.0"/>
+		<Parameter name="OAC.value" value="1.00"/><Parameter name="OAC.min" value="0"/><Parameter name="OAC.max" value="1.0"/>
+		<Parameter name="SPC.value" value="1.00"/><Parameter name="SPC.min" value="-1.0"/><Parameter name="SPC.max" value="1.0"/>
+		<Parameter name="TMP.value" value="1.00"/><Parameter name="TMP.min" value="-1.0"/><Parameter name="TMP.max" value="1.0"/>
+		<Parameter name="FLD.value" value="1.00"/><Parameter name="FLD.min" value="-1.0"/><Parameter name="FLD.max" value="1.0"/>
+		<Parameter name="PWR.value" value="1.00"/><Parameter name="PWR.min" value="-1.0"/><Parameter name="PWR.max" value="1.0"/>
+		<Parameter name="REP.value" value="0.50"/><Parameter name="REP.min" value="-1.0"/><Parameter name="REP.max" value="1.0"/>
+	</parameter-set>
+	<parameter-set name="head">
+		<Parameter name="preference.value" value="1.0"/><Parameter name="preference.min" value="0.0"/><Parameter name="preference.max" value="1.0"/>
+		<Parameter name="OAC.value" value="1.00"/><Parameter name="OAC.min" value="0"/><Parameter name="OAC.max" value="1.0"/>
+		<Parameter name="SPC.value" value="1.0"/><Parameter name="SPC.min" value="-1.0"/><Parameter name="SPC.max" value="1.0"/>
+		<Parameter name="TMP.value" value="1.00"/><Parameter name="TMP.min" value="-1.0"/><Parameter name="TMP.max" value="1.0"/>
+		<Parameter name="FLD.value" value="1.00"/><Parameter name="FLD.min" value="-1.0"/><Parameter name="FLD.max" value="1.0"/>
+		<Parameter name="PWR.value" value="1.00"/><Parameter name="PWR.min" value="-1.0"/><Parameter name="PWR.max" value="1.0"/>
+		<Parameter name="REP.value" value="0.50"/><Parameter name="REP.min" value="-1.0"/><Parameter name="REP.max" value="1.0"/>
+	</parameter-set>
+	<parameter-set name="speech">
+		<Parameter name="preference.value" value="1"/><Parameter name="preference.min" value="0.0"/><Parameter name="preference.max" value="1.0"/>
+		<Parameter name="OAC.value" value="1"/><Parameter name="OAC.min" value="0"/><Parameter name="OAC.max" value="1.0"/>
+		<Parameter name="SPC.value" value="0"/><Parameter name="SPC.min" value="-1.0"/><Parameter name="SPC.max" value="1.0"/>
+		<Parameter name="TMP.value" value="0"/><Parameter name="TMP.min" value="-1.0"/><Parameter name="TMP.max" value="1.0"/>
+		<Parameter name="FLD.value" value="0"/><Parameter name="FLD.min" value="-1.0"/><Parameter name="FLD.max" value="1.0"/>
+		<Parameter name="PWR.value" value="0"/><Parameter name="PWR.min" value="-1.0"/><Parameter name="PWR.max" value="1.0"/>
+		<Parameter name="REP.value" value="0"/><Parameter name="REP.min" value="-1.0"/><Parameter name="REP.max" value="1.0"/>
+	</parameter-set>
+</profile>

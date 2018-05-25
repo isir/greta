@@ -1,0 +1,120 @@
+/*
+ *  This file is part of the auxiliaries of VIB (Virtual Interactive Behaviour).
+ */
+package vib.auxiliary.activemq.semaine;
+
+import java.util.HashMap;
+import java.util.List;
+import vib.auxiliary.activemq.TextSender;
+import vib.auxiliary.activemq.WhiteBoard;
+import vib.core.keyframes.GestureKeyframe;
+import vib.core.keyframes.HeadKeyframe;
+import vib.core.keyframes.Keyframe;
+import vib.core.keyframes.KeyframePerformer;
+import vib.core.keyframes.SpeechKeyframe;
+import vib.core.keyframes.TorsoKeyframe;
+import vib.core.util.Mode;
+import vib.core.util.id.ID;
+import vib.core.util.log.Logs;
+
+/**
+ *
+ * @author Andre-Marie Pez
+ */
+public class KeyFrameSender extends TextSender implements KeyframePerformer{
+    private HashMap<String,Object> semaineMap;
+
+    public KeyFrameSender(){
+        this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
+             WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
+             "Keyframes");
+        semaineMap = new HashMap<String,Object>();
+        semaineMap.put("content-type", "utterance");
+        semaineMap.put("datatype", "KF");
+        semaineMap.put("source", "Greta");
+        semaineMap.put("event", "single");
+    }
+    public KeyFrameSender(String host, String port, String topic){
+        super(host, port, topic);
+    }
+
+    @Override
+    public void performKeyframes(List<Keyframe> keyframes, ID requestId) {
+        try {
+            //TODO translates the keyframe list into a String
+            String keyframeString = "";
+
+            keyframeString = keyframeString.concat("<?xml version="+'"'+"1.0"+'"'+" encoding="+'"'+"UTF-8"+'"'+"?>\n");
+            keyframeString = keyframeString.concat("<keyframes>\n");
+            for(Keyframe key : keyframes){
+
+            // speech keyframe
+            if(key instanceof SpeechKeyframe){
+              keyframeString = keyframeString.concat("   <keyframe onset="+'"'+((SpeechKeyframe)key).getOnset()+'"'
+                     + " modality="+'"'+((SpeechKeyframe)key).getModality()+'"'
+                     + " filename="+'"'+((SpeechKeyframe)key).getFileName()+'"'
+                     + ">\n");
+              keyframeString = keyframeString.concat("   </keyframe>\n");
+            }
+
+            // gesture keyframe
+            if(key instanceof GestureKeyframe) {
+                    if (((GestureKeyframe)key).getPhaseType().compareToIgnoreCase("START") != 0){
+                 keyframeString = keyframeString.concat("   <keyframe onset="+'"'+((GestureKeyframe)key).getOnset()+'"'
+                         +" offset="+'"'+((GestureKeyframe)key).getOffset()+'"'
+                         + " modality="+'"'+((GestureKeyframe)key).getModality()+'"'
+                         + " side="+'"'+((GestureKeyframe)key).getSide()+'"'
+                         + " id="+'"'+((GestureKeyframe)key).getId()+'"'
+                         + " phase="+'"'+((GestureKeyframe)key).getPhaseType()+'"'
+                         + ">\n");
+                 keyframeString = keyframeString.concat(((GestureKeyframe)key).getHand().getStringPosition());
+                 keyframeString = keyframeString.concat("       <handShape>"+((GestureKeyframe)key).getHand().getHandShape()+"</handShape>\n");
+//                 keyframeString = keyframeString.concat("       <palmOrientation>"+((GestureKeyframe)key).getHand().getStringPalmOrientation()+"</palmOrientation>\n");
+//                 keyframeString = keyframeString.concat("       <fingersOrientation>"+((GestureKeyframe)key).getHand().getStringFingersOrientation()+"</fingersOrientation>\n");
+
+                 keyframeString = keyframeString.concat("       <SPC>"+((GestureKeyframe)key).getParameters().spc+"</SPC>\n");
+                 keyframeString = keyframeString.concat("       <TMP>"+((GestureKeyframe)key).getParameters().tmp+"</TMP>\n");
+                 keyframeString = keyframeString.concat("       <PWR>"+((GestureKeyframe)key).getParameters().pwr+"</PWR>\n");
+                 keyframeString = keyframeString.concat("       <FLD>"+((GestureKeyframe)key).getParameters().fld+"</FLD>\n");
+                 keyframeString = keyframeString.concat("       <Tension>"+((GestureKeyframe)key).getParameters().tension+"</Tension>\n");
+                 keyframeString = keyframeString.concat("   </keyframe>\n");
+                }
+                }
+
+            // head keyframe
+            if(key instanceof HeadKeyframe){
+             keyframeString = keyframeString.concat("   <keyframe onset="+'"'+((HeadKeyframe)key).getOnset()+'"'
+                     + " offset="+'"'+((HeadKeyframe)key).getOffset()+'"'
+                     + " modality="+'"'+((HeadKeyframe)key).getModality()+'"'
+                     + " category="+'"'+((HeadKeyframe)key).getCategory()+'"'
+                     + "/>\n");
+            }
+
+            // torso keyframe
+            if(key instanceof TorsoKeyframe){
+             keyframeString = keyframeString.concat("   <keyframe onset="+'"'+((TorsoKeyframe)key).getOnset()+'"'
+                     + " offset="+'"'+((TorsoKeyframe)key).getOffset()+'"'
+                     + " modality="+'"'+((TorsoKeyframe)key).getModality()+'"'
+                     + " category="+'"'+((TorsoKeyframe)key).getCategory()+'"'
+                     + "/>\n");
+                }
+            }
+
+            keyframeString = keyframeString.concat("</keyframes>\n");
+
+            semaineMap.put("content-id", requestId.toString());
+            semaineMap.put("usertime", System.currentTimeMillis());
+            semaineMap.put("content-creation-time", System.currentTimeMillis());
+            this.send(keyframeString,semaineMap);
+
+        } catch (Exception ex) {
+            Logs.error("Can not send Keyframes");
+        }
+    }
+
+    @Override
+    public void performKeyframes(List<Keyframe> keyframes, ID requestId, Mode mode) {
+        // TODO : Mode management in progress
+        performKeyframes(keyframes, requestId);
+    }
+}

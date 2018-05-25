@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="HeadGestures" type="HeadGesturesType"/>
+
+    <xsd:complexType name="HeadGesturesType">
+        <xsd:sequence>
+            <xsd:element name="head" type="headType" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="headDirectionShift" type="headDirectionShiftType" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="headType">
+        <xsd:sequence>
+            <xsd:element name="KeyPoint" type="KeyPointType" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="lexeme" type="xsd:string" use="required"/>
+        <xsd:attribute name="repetition" type="xsd:integer" use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="headDirectionShiftType">
+        <xsd:sequence>
+            <xsd:element name="VerticalTorsion" type="HeadParamType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="SagittalTilt" type="HeadParamType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="LateralRoll" type="HeadParamType" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="target" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="KeyPointType">
+        <xsd:sequence>
+            <xsd:element name="VerticalTorsion" type="HeadParamType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="SagittalTilt" type="HeadParamType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="LateralRoll" type="HeadParamType" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute name="type" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="HeadParamType">
+        <xsd:attribute name="direction" type="xsd:string" use="required"/>
+        <xsd:attribute name="min" type="xsd:float" use="optional"/>
+        <xsd:attribute name="max" type="xsd:float" use="optional"/>
+    </xsd:complexType>
+
+</xsd:schema>

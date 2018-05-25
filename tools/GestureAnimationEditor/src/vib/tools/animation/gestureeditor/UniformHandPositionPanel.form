@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JPanelFormInfo">
+  <Properties>
+    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+        <TitledBorder title="Position"/>
+      </Border>
+    </Property>
+  </Properties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="xLabel" max="32767" attributes="0"/>
+                  <Component id="yLabel" max="32767" attributes="0"/>
+                  <Component id="zLabel" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="zValue" pref="50" max="32767" attributes="0"/>
+                  <Component id="xValue" alignment="0" pref="50" max="32767" attributes="0"/>
+                  <Component id="yValue" alignment="0" pref="50" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="xParameter" alignment="1" pref="156" max="32767" attributes="0"/>
+                  <Component id="yParameter" pref="156" max="32767" attributes="0"/>
+                  <Component id="zParameter" pref="156" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Component id="yFixedButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="yInvariantButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" attributes="0">
+                      <Component id="zFixedButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="zInvariantButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="xFixedButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="xInvariantButton" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="xParameter" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                      <Component id="xValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="xLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="103" alignment="1" groupAlignment="3" attributes="0">
+                                      <Component id="xFixedButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="xInvariantButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="yParameter" min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="yFixedButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="yInvariantButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="yValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="yLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="zParameter" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="zFixedButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="zInvariantButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="zValue" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="zLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="xLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="X:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="yLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Y:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="zLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Z:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="xValue">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="valueFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="valueActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="xValueKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="yValue">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="valueFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="valueActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="yValueKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="zValue">
+      <Events>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="valueFocusLost"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="valueActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="zValueKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSlider" name="xParameter">
+      <Properties>
+        <Property name="maximum" type="int" value="1000"/>
+        <Property name="minimum" type="int" value="-1000"/>
+        <Property name="value" type="int" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="parameterStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSlider" name="yParameter">
+      <Properties>
+        <Property name="maximum" type="int" value="1000"/>
+        <Property name="minimum" type="int" value="-1000"/>
+        <Property name="value" type="int" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="parameterStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JSlider" name="zParameter">
+      <Properties>
+        <Property name="maximum" type="int" value="1000"/>
+        <Property name="minimum" type="int" value="-1000"/>
+        <Property name="value" type="int" value="0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="parameterStateChanged"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="xFixedButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fixed"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="yFixedButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fixed"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="zFixedButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Fixed"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="xInvariantButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Invariant"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="yInvariantButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Invariant"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="zInvariantButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Invariant"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="settingButtonActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

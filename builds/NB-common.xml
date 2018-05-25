@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="VIB_Build_Netbeans_Common" default="default" xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" >
+    <description>VIB Builder for Netbeans</description>
+
+
+    <target name="-print-netbeans-num">
+        <echo level="info">Netbeans build number = ${netbeans.buildnumber}</echo>
+    </target>
+
+    <!-- Override : Netbeans must not erase the dist directory !!! -->
+    <target depends="init" name="-do-clean">
+        <delete dir="${build.dir}"/>
+        <delete file="${dist.jar}"/>
+    </target>
+
+
+    <!-- Macro that computes relative path -->
+    <target name="-relmap.macro" >
+        <macrodef name="relmap">
+            <attribute name="path"/>
+            <attribute name="base"/>
+            <attribute name="property" default="relmap.result"/>
+            <sequential>
+                <property location="@{base}" name="relmap.base.dir"/>
+                <pathconvert pathsep=" " property="@{property}">
+                    <path path="@{path}"/>
+                    <scriptmapper language="javascript">
+                        <![CDATA[
+                        allbackSlashes = /\\/g;
+                        base = String(project.getProperty("relmap.base.dir"));
+                        base = base.replace(allbackSlashes,"/");
+                        base += "//";
+                        base = base.replace(new RegExp("//", 'g'),"/");
+                        source = source.replace(allbackSlashes,"/");
+                        source0 = source;
+                        counter = 0;
+                        while(base.indexOf("/")!=-1 && source.indexOf("/")!=-1
+                            && base.substr(0,base.indexOf("/")) == source.substr(0,source.indexOf("/"))
+                        ){
+                            base = base.substr(base.indexOf("/")+1);
+                            source = source.substr(source.indexOf("/")+1);
+                            ++counter;
+                        }
+                        if(base=="")
+                            source = "./"+source;
+                        else{
+                            if(counter>1){
+                                parents = "";
+                                while(base.indexOf("/")!=-1){
+                                    base = base.substr(base.indexOf("/")+1);
+                                    parents+="../"
+                                }
+                                source = parents+source;
+                            }
+                            else
+                                source = source0;
+                        }
+                        self.addMappedName(source);
+                        ]]>
+                    </scriptmapper>
+                </pathconvert>
+            </sequential>
+        </macrodef>
+    </target>
+
+
+    <!-- Macro that manifest file without moving lib in ${dist.dir}/lib -->
+    <target name="-vib.pack.macro" depends="-relmap.macro">
+        <macrodef name="vibPack">
+            <attribute default="${manifest.file}" name="manifest"/>
+            <element name="customize" optional="true"/>
+            <sequential>
+                <property location="${build.classes.dir}" name="build.classes.dir.resolved"/>
+                <property location="${dist.jar}" name="dist.jar.resolved"/>
+                <pathconvert property="run.classpath.without.build.classes.dir">
+                    <path path="${run.classpath}"/>
+                    <map from="${build.classes.dir.resolved}" to=""/>
+                </pathconvert>
+                <relmap path="${run.classpath.without.build.classes.dir}" base="${dist.dir}" property="jar.classpath" />
+                <j2seproject1:jar manifest="@{manifest}" compress="${jar.compress}" >
+                    <j2seproject1:manifest>
+                        <j2seproject1:attribute name="Main-Class" value="${main.class}"/>
+                        <j2seproject1:attribute name="Class-Path" value="${jar.classpath}"/>
+                    </j2seproject1:manifest>
+                </j2seproject1:jar>
+                <echo>To run this application from the command line without Ant, try:</echo>
+                <echo>java -jar "${dist.jar.resolved}"</echo>
+            </sequential>
+        </macrodef>
+    </target>
+
+
+    <!-- Override : Discard warnings on UMLGraph tags in Javadoc -->
+    <target depends="init" if="have.sources" name="-javadoc-build">
+        <mkdir dir="${dist.javadoc.dir}"/>
+        <javadoc additionalparam="${javadoc.additionalparam}"
+			     author="${javadoc.author}"
+				 charset="UTF-8"
+				 destdir="${dist.javadoc.dir}"
+				 docencoding="UTF-8"
+				 encoding="${javadoc.encoding.used}"
+				 failonerror="true"
+				 noindex="${javadoc.noindex}"
+				 nonavbar="${javadoc.nonavbar}"
+				 notree="${javadoc.notree}"
+				 private="${javadoc.private}"
+				 source="${javac.source}"
+				 splitindex="${javadoc.splitindex}"
+				 use="${javadoc.use}"
+				 useexternalfile="true"
+				 version="${javadoc.version}"
+				 windowtitle="${javadoc.windowtitle}">
+            <classpath>
+                <path path="${javac.classpath}"/>
+            </classpath>
+            <fileset dir="${src.dir}" excludes="${excludes}" includes="${includes}">
+                <filename name="**/*.java"/>
+            </fileset>
+            <fileset dir="${build.generated.sources.dir}" erroronmissingdir="false">
+                <include name="**/*.java"/>
+            </fileset>
+            <!-- to discard warnings on UMLGraph tags -->
+            <tag name="depend" scope="all" enabled="false"/>
+            <tag name="composed" scope="all" enabled="false"/>
+            <tag name="has" scope="all" enabled="false"/>
+            <tag name="navassoc" scope="all" enabled="false"/>
+            <tag name="inavassoc" scope="all" enabled="false"/>
+        </javadoc>
+    </target>
+</project>

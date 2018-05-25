@@ -1,0 +1,148 @@
+import * from "base.material"
+
+material Chaises_Armoires : base
+{
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 5
+	set_texture_alias diffuseMap office/Chaises_Armoires_texture.jpg
+	set_texture_alias celShadingMap office/Chaises_Armoires_texture_cel.png
+}
+
+material objets_divers_1 : base
+{
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 5
+	set_texture_alias diffuseMap office/objets_divers_1.jpg
+	set_texture_alias celShadingMap office/objets_divers_1.jpg
+}
+
+material objets_divers_2 : base
+{
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 5
+	set_texture_alias diffuseMap office/objets_divers_2.jpg
+	set_texture_alias celShadingMap office/objets_divers_2_cel.jpg
+}
+
+material objets_divers_3 : base
+{
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 5
+	set_texture_alias diffuseMap office/objets_divers_3.jpg
+	set_texture_alias celShadingMap office/objets_divers_3_cel.png
+}
+
+material objets_divers_4 : base
+{
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 5
+	set_texture_alias diffuseMap office/objets_divers_4.jpg
+	set_texture_alias celShadingMap office/objets_divers_4.jpg
+}
+
+material glassDoor : base/alpha {
+	set $sr 0.9
+	set $sg 0.9
+	set $sb 0.9
+	set $ss 100
+	set_texture_alias diffuseMap office/Portes_texture.png
+	set_texture_alias celShadingMap office/Portes_texture.png
+}
+
+material Fenetres : base/alpha {
+	set $sr 0.9
+	set $sg 0.9
+	set $sb 0.9
+	set $ss 100
+	set_texture_alias diffuseMap office/Fenetres_texture.png
+	set_texture_alias celShadingMap office/Fenetres_texture.png
+}
+
+material Bureau : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 10
+	set $inkWidth 0.1
+	set_texture_alias diffuseMap office/Bureau_texture.jpg
+	set_texture_alias celShadingMap office/Bureau_texture_cel.png
+}
+
+material moquette3 : base {
+	set $inkWidth 0
+	set_texture_alias diffuseMap office/moquette3.jpg
+	set_texture_alias celShadingMap office/moquette3_cel.bmp
+}
+
+material Leather : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 10
+	set $inkWidth 0
+	set_texture_alias diffuseMap office/Leather0045_2_S.jpg
+	set_texture_alias celShadingMap office/Leather0045_2_S_cel.bmp
+}
+
+material Murs : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 10
+	set $inkWidth 0
+	set_texture_alias diffuseMap office/Murs_texture.jpg
+	set_texture_alias celShadingMap office/Murs_texture_cel.png
+}
+
+material computer_base : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 10
+	set $inkWidth 0.5
+	set_texture_alias diffuseMap office/computer_color.bmp
+	set_texture_alias celShadingMap office/computer_color.bmp
+}
+
+material computer_base2 : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 10
+	set $inkWidth 0.5
+	set_texture_alias diffuseMap office/computer_color2.bmp
+	set_texture_alias celShadingMap office/computer_color2.bmp
+}
+
+material screen_content : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 10
+	set $inkWidth 0.1
+	set_texture_alias diffuseMap office/screen_content.png
+	set_texture_alias celShadingMap office/screen_content_cel.png
+}
+
+
+material plante_01 : base/alpha {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 10
+	set_texture_alias diffuseMap office/plante_01.png
+	set_texture_alias celShadingMap office/plante_01_cel.png
+}
+
+
+

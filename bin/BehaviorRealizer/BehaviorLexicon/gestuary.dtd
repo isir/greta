@@ -1,0 +1,9 @@
+<!ELEMENT lexicon (gesture)*>
+
+<!ATTLIST gesture id ID #REQUIRED>
+<!ATTLIST gesture category (POINT|REACH|BEAT|DEPICT|SIGNAL|ICONIC|DEICTIC|METAPHORIC) "BEAT">
+<!ATTLIST gesture hand CDATA #IMPLIED>
+
+<!ELEMENT gesture (phase)*>
+
+<!ELEMENT phase (hand)*>

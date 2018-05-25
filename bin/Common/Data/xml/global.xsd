@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified">
+
+<xs:simpleType name="parametersetNameType">
+	<xs:restriction base="xs:string">
+		<xs:whiteSpace value="collapse"/>
+		<xs:enumeration value="face"/>
+		<xs:enumeration value="head"/>
+		<xs:enumeration value="gaze"/>
+		<xs:enumeration value="gesture"/>
+		<xs:enumeration value="torso"/>
+		<xs:enumeration value="speech"/>
+
+		<xs:enumeration value="listener_function"/>
+		<xs:enumeration value="interest_level"/>
+		<xs:enumeration value="mimicry_level"/>
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="parameterNameType">
+	<xs:restriction base="xs:string">
+		<xs:whiteSpace value="collapse"/>
+		<xs:enumeration value="OAC.min"/>
+		<xs:enumeration value="OAC.max"/>
+		<xs:enumeration value="OAC.value"/>
+		<xs:enumeration value="SPC.min"/>
+		<xs:enumeration value="SPC.max"/>
+		<xs:enumeration value="SPC.value"/>
+		<xs:enumeration value="TMP.min"/>
+		<xs:enumeration value="TMP.max"/>
+		<xs:enumeration value="TMP.value"/>
+		<xs:enumeration value="FLD.min"/>
+		<xs:enumeration value="FLD.max"/>
+		<xs:enumeration value="FLD.value"/>
+		<xs:enumeration value="PWR.min"/>
+		<xs:enumeration value="PWR.max"/>
+		<xs:enumeration value="PWR.value"/>
+		<xs:enumeration value="REP.min"/>
+		<xs:enumeration value="REP.max"/>
+		<xs:enumeration value="REP.value"/>
+		<xs:enumeration value="preference.min"/>
+		<xs:enumeration value="preference.max"/>
+		<xs:enumeration value="preference.value"/>
+
+		<xs:enumeration value="agreement.min"/>
+		<xs:enumeration value="agreement.max"/>
+		<xs:enumeration value="agreement.value"/>
+		<xs:enumeration value="disagreement.min"/>
+		<xs:enumeration value="disagreement.max"/>
+		<xs:enumeration value="disagreement.value"/>
+		<xs:enumeration value="acceptance.min"/>
+		<xs:enumeration value="acceptance.max"/>
+		<xs:enumeration value="acceptance.value"/>
+		<xs:enumeration value="refusal.min"/>
+		<xs:enumeration value="refusal.max"/>
+		<xs:enumeration value="refusal.value"/>
+		<xs:enumeration value="belief.min"/>
+		<xs:enumeration value="belief.max"/>
+		<xs:enumeration value="belief.value"/>
+		<xs:enumeration value="disbelief.min"/>
+		<xs:enumeration value="disbelief.max"/>
+		<xs:enumeration value="disbelief.value"/>
+		<xs:enumeration value="liking.min"/>
+		<xs:enumeration value="liking.max"/>
+		<xs:enumeration value="liking.value"/>
+		<xs:enumeration value="disliking.min"/>
+		<xs:enumeration value="disliking.max"/>
+		<xs:enumeration value="disliking.value"/>
+		<xs:enumeration value="interest.min"/>
+		<xs:enumeration value="interest.max"/>
+		<xs:enumeration value="interest.value"/>
+		<xs:enumeration value="no_interest.min"/>
+		<xs:enumeration value="no_interest.max"/>
+		<xs:enumeration value="no_interest.value"/>
+		<xs:enumeration value="understanding.min"/>
+		<xs:enumeration value="understanding.max"/>
+		<xs:enumeration value="understanding.value"/>
+		<xs:enumeration value="no_understanding.min"/>
+		<xs:enumeration value="no_understanding.max"/>
+		<xs:enumeration value="no_understanding.value"/>
+		<xs:enumeration value="low-anticipation.min"/>
+		<xs:enumeration value="low-anticipation.max"/>
+		<xs:enumeration value="low-anticipation.value"/>
+		<xs:enumeration value="high-anticipation.min"/>
+		<xs:enumeration value="high-anticipation.max"/>
+		<xs:enumeration value="high-anticipation.value"/>
+		<xs:enumeration value="low-solidarity.min"/>
+		<xs:enumeration value="low-solidarity.max"/>
+		<xs:enumeration value="low-solidarity.value"/>
+		<xs:enumeration value="high-solidarity.min"/>
+		<xs:enumeration value="high-solidarity.max"/>
+		<xs:enumeration value="high-solidarity.value"/>
+		<xs:enumeration value="low-antagonism.min"/>
+		<xs:enumeration value="low-antagonism.max"/>
+		<xs:enumeration value="low-antagonism.value"/>
+		<xs:enumeration value="high-antagonism.min"/>
+		<xs:enumeration value="high-antagonism.max"/>
+		<xs:enumeration value="high-antagonism.value"/>
+		<xs:enumeration value="anger.min"/>
+		<xs:enumeration value="anger.max"/>
+		<xs:enumeration value="anger.value"/>
+		<xs:enumeration value="contempt.min"/>
+		<xs:enumeration value="contempt.max"/>
+		<xs:enumeration value="contempt.value"/>
+		<xs:enumeration value="happiness.min"/>
+		<xs:enumeration value="happiness.max"/>
+		<xs:enumeration value="happiness.value"/>
+		<xs:enumeration value="amusement.min"/>
+		<xs:enumeration value="amusement.max"/>
+		<xs:enumeration value="amusement.value"/>
+		<xs:enumeration value="sadness.min"/>
+		<xs:enumeration value="sadness.max"/>
+		<xs:enumeration value="sadness.value"/>
+
+		<xs:enumeration value="interest.min"/>
+		<xs:enumeration value="interest.max"/>
+		<xs:enumeration value="interest.value"/>
+		<xs:enumeration value="mimicry.min"/>
+		<xs:enumeration value="mimicry.max"/>
+		<xs:enumeration value="mimicry.value"/>
+
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:simpleType name="operatorNameType">
+	<xs:restriction base="xs:string">
+		<xs:whiteSpace value="collapse"/>
+		<xs:enumeration value="REL"/>
+		<xs:enumeration value="LIM"/>
+		<xs:enumeration value="ADD"/>
+		<xs:enumeration value="SUB"/>
+		<xs:enumeration value="MUL"/>
+		<xs:enumeration value="DIV"/>
+		<xs:enumeration value="VAL"/>
+		<xs:enumeration value="INTENSIFY"/>
+	</xs:restriction>
+</xs:simpleType>
+
+</xs:schema>

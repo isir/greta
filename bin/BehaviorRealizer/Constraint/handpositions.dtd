@@ -1,0 +1,8 @@
+<!ELEMENT ChoregraphePositionLibrary (position)*>
+<!ELEMENT position (Motors,name,description,bitmap)>
+<!ELEMENT Motors (Motor)*>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT description (#PCDATA)>
+<!ELEMENT bitmap (#PCDATA)>
+<!ELEMENT Motor (name,value)>
+<!ELEMENT value (#PCDATA)>

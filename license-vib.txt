@@ -1,0 +1,7 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix} This file is part of VIB (Virtual Interactive Behaviour).
+<#if licenseLast??>
+${licenseLast}
+</#if>

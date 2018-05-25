@@ -1,0 +1,899 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.JFileChooser" name="fileChooser">
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="fileChooser.setCurrentDirectory(new File(&quot;./&quot;));"/>
+      </AuxValues>
+    </Component>
+  </NonVisualComponents>
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+      <Dimension value="[555, 640]"/>
+    </Property>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="reactionBehaviorPanel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="mainSeparator1" max="32767" attributes="0"/>
+                  <Component id="mainSeparator2" alignment="0" max="32767" attributes="0"/>
+                  <Component id="mainSeparator3" alignment="0" max="32767" attributes="0"/>
+                  <Component id="mainSeparator4" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="testInterruptionButton" min="-2" pref="75" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                  </Group>
+                  <Component id="fmlFilePanel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="reactionPanel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="interruptionPanel" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="fmlFilePanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="mainSeparator1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="interruptionPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="mainSeparator2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="reactionPanel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="mainSeparator3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="reactionBehaviorPanel" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <Component id="mainSeparator4" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="testInterruptionButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JPanel" name="fmlFilePanel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="fmlLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="fmlFileNameLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="fmlFileNameTextField" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="fmlFileOpenButton" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="fmlLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="fmlFileNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="fmlFileOpenButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="fmlFileNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="fmlLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="FML:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="fmlFileNameLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="File:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="fmlFileNameTextField">
+        </Component>
+        <Component class="javax.swing.JButton" name="fmlFileOpenButton">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Open"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fmlFileOpenButtonActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JSeparator" name="mainSeparator1">
+    </Component>
+    <Container class="javax.swing.JPanel" name="interruptionPanel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="interruptionLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="interruptionOnOffCheckBox" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="interruptionTimeLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="interruptionTimeSpinner" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Component id="_debugAudioOnlyModeCheckBox" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="interruptionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="interruptionTimeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="interruptionTimeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="_debugAudioOnlyModeCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="interruptionOnOffCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="interruptionLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Interruption:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="interruptionOnOffCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ON / OFF"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="interruptionOnOffCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="interruptionTimeLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Time (sec):"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="interruptionTimeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.5" maximum="100.0" minimum="0.01" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="_debugAudioOnlyModeCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Audio Only (debug)"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="_debugAudioOnlyModeCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JSeparator" name="mainSeparator2">
+    </Component>
+    <Container class="javax.swing.JPanel" name="reactionPanel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="reactionLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="reactionDurationLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionTypeLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="reactionDurationComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionTypeComboBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="reactionReplanPanel" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="reactionLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="reactionTypeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="reactionTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="reactionDurationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="reactionDurationComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Component id="reactionReplanPanel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="reactionLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Reaction:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionTypeLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Type:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="reactionTypeComboBox">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="3">
+                <StringItem index="0" value="HALT"/>
+                <StringItem index="1" value="OVERLAP"/>
+                <StringItem index="2" value="REPLAN"/>
+              </StringArray>
+            </Property>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reactionTypeComboBoxActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionDurationLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Duration:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JComboBox" name="reactionDurationComboBox">
+          <Properties>
+            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+              <StringArray count="4">
+                <StringItem index="0" value="EXTRA_SHORT"/>
+                <StringItem index="1" value="SHORT"/>
+                <StringItem index="2" value="MEDIUM"/>
+                <StringItem index="3" value="LONG"/>
+              </StringArray>
+            </Property>
+          </Properties>
+        </Component>
+        <Container class="javax.swing.JPanel" name="reactionReplanPanel">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Component id="reactionReplanFMLFileNameLabel" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="reactionReplanFMLFileNameTextField" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="reactionReplanFMLFileOpenButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="reactionReplanFMLFileNameLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="reactionReplanFMLFileNameTextField" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="reactionReplanFMLFileOpenButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="reactionReplanFMLFileNameLabel">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="With File:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="reactionReplanFMLFileNameTextField">
+            </Component>
+            <Component class="javax.swing.JButton" name="reactionReplanFMLFileOpenButton">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Open"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reactionReplanFMLFileOpenButtonActionPerformed"/>
+              </Events>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JSeparator" name="mainSeparator3">
+    </Component>
+    <Container class="javax.swing.JPanel" name="reactionBehaviorPanel">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Component id="reactionBehaviorLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="reactionBehaviorSeparator3" max="32767" attributes="0"/>
+                      <Component id="reactionBehaviorSeparator4" max="32767" attributes="0"/>
+                      <Component id="reactionBehaviorSeparator2" alignment="0" max="32767" attributes="0"/>
+                      <Component id="reactionBehaviorSeparator1" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="reactionBehaviorModalityLabel" max="32767" attributes="0"/>
+                                  <Component id="reactionBehaviorModalityArrowLabel" alignment="0" min="-2" pref="44" max="-2" attributes="0"/>
+                                  <Component id="reactionBehaviorSmileLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="reactionBehaviorEyesLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="reactionBehaviorHeadLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="reactionBehaviorGesturesLabel" min="-2" max="-2" attributes="0"/>
+                              <Component id="reactionBehaviorShouldersLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="reactionBehaviorHeadTiltCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="reactionBehaviorBehaviorArrowLabel" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="reactionBehaviorBehaviorLabel" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <Component id="reactionBehaviorGestureHoldCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="reactionBehaviorSmileSmileCheckBox" min="-2" max="-2" attributes="0"/>
+                              <Component id="reactionBehaviorEyesLidsCloseCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="reactionBehaviorShouldersUpForwardCheckBox" alignment="0" max="-2" attributes="0"/>
+                              <Component id="reactionBehaviorHeadNodTossCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="reactionBehaviorGestureRetractCheckBox" alignment="0" max="-2" attributes="0"/>
+                              <Component id="reactionBehaviorEyesBrowsCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="reactionBehaviorEyesSqueezeCheckBox" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="reactionBehaviorAmplitudeLabel" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorHeadTiltAmplitudeSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorAmplitudeArrowLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorEyesLidsCloseAmplitudeSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorSmileSmileAmplitudeSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorShouldersUpForwardAmplitudeSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorGestureRetractAmplitudeSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorGestureHoldAmplitudeSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorEyesSqueezeAmplitudeSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorEyesBrowsAmplitudeSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorHeadNodTossAmplitudeSpinner" alignment="0" min="-2" pref="51" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="reactionBehaviorGestureRetractDurationSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorGestureHoldDurationSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorSmileSmileDurationSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorEyesBrowsDurationSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorEyesLidsCloseDurationSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorHeadNodTossDurationSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorHeadTiltDurationSpinner" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorDurationArrowLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorDurationLabel" alignment="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorShouldersUpForwardDurationSpinner" pref="0" max="32767" attributes="0"/>
+                              <Component id="reactionBehaviorEyesSqueezeDurationSpinner" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorModalityLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorBehaviorLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorAmplitudeLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorDurationLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorModalityArrowLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorBehaviorArrowLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorAmplitudeArrowLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorDurationArrowLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorHeadLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorHeadTiltCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorHeadTiltAmplitudeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorHeadTiltDurationSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorHeadNodTossCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorHeadNodTossAmplitudeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorHeadNodTossDurationSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="reactionBehaviorSeparator1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorEyesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorEyesLidsCloseCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorEyesLidsCloseAmplitudeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorEyesLidsCloseDurationSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorEyesBrowsCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorEyesBrowsAmplitudeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorEyesBrowsDurationSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorEyesSqueezeDurationSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorEyesSqueezeAmplitudeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorEyesSqueezeCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="reactionBehaviorSeparator2" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorSmileLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorSmileSmileCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorSmileSmileAmplitudeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorSmileSmileDurationSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="reactionBehaviorSeparator3" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorGesturesLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorGestureHoldCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorGestureHoldAmplitudeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorGestureHoldDurationSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorGestureRetractCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorGestureRetractAmplitudeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorGestureRetractDurationSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="reactionBehaviorSeparator4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="reactionBehaviorShouldersLabel" alignment="3" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorShouldersUpForwardCheckBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorShouldersUpForwardAmplitudeSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="reactionBehaviorShouldersUpForwardDurationSpinner" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Reaction Behavior:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorModalityLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Modality:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorBehaviorLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Behavior:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorAmplitudeLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Amplitude:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorDurationLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Duration (sec):"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorModalityArrowLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="18" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;#x21E3;&lt;/html&gt;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorBehaviorArrowLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="18" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;#x21E3;&lt;/html&gt;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorAmplitudeArrowLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="18" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;#x21E3;&lt;/html&gt;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorDurationArrowLabel">
+          <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="18" style="0"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;&amp;#x21E3;&lt;/html&gt;"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorHeadLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Head:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="reactionBehaviorHeadTiltCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Tilt"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="reactionBehaviorHeadTiltCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorHeadTiltAmplitudeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorHeadTiltDurationSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="2.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="reactionBehaviorHeadNodTossCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Nod / Toss"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="reactionBehaviorHeadNodTossCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorHeadNodTossAmplitudeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="1.0" minimum="-1.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorHeadNodTossDurationSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="2.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="reactionBehaviorSeparator1">
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorEyesLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Eyes:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="reactionBehaviorEyesLidsCloseCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Lids close"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="reactionBehaviorEyesLidsCloseCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorEyesLidsCloseAmplitudeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorEyesLidsCloseDurationSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="2.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="reactionBehaviorEyesBrowsCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Brows"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="reactionBehaviorEyesBrowsCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorEyesBrowsAmplitudeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="1.0" minimum="-1.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorEyesBrowsDurationSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="2.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="reactionBehaviorEyesSqueezeCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Squeeze"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="reactionBehaviorEyesSqueezeCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorEyesSqueezeAmplitudeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorEyesSqueezeDurationSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="2.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="reactionBehaviorSeparator2">
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorSmileLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Smile:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="reactionBehaviorSmileSmileCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Smile"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="reactionBehaviorSmileSmileCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorSmileSmileAmplitudeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="1.0" minimum="-1.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorSmileSmileDurationSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="2.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="reactionBehaviorSeparator3">
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorGesturesLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Gestures:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="reactionBehaviorGestureHoldCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Hold"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="reactionBehaviorGestureHoldCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorGestureHoldAmplitudeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="100.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorGestureHoldDurationSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="2.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="reactionBehaviorGestureRetractCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Retract"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="reactionBehaviorGestureRetractCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorGestureRetractAmplitudeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="100.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorGestureRetractDurationSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="2.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSeparator" name="reactionBehaviorSeparator4">
+        </Component>
+        <Component class="javax.swing.JLabel" name="reactionBehaviorShouldersLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Shoulders:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="reactionBehaviorShouldersUpForwardCheckBox">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Up / Forward"/>
+          </Properties>
+          <Events>
+            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="reactionBehaviorShouldersUpForwardCheckBoxItemStateChanged"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorShouldersUpForwardAmplitudeSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JSpinner" name="reactionBehaviorShouldersUpForwardDurationSpinner">
+          <Properties>
+            <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+              <SpinnerModel initial="0.0" maximum="1.0" minimum="0.0" numberType="java.lang.Double" stepSize="0.1" type="number"/>
+            </Property>
+            <Property name="editor" type="javax.swing.JComponent" editor="org.netbeans.modules.form.editors.SpinnerEditorEditor">
+              <SpinnerEditor format="0.00" type="3"/>
+            </Property>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Component class="javax.swing.JSeparator" name="mainSeparator4">
+    </Component>
+    <Component class="javax.swing.JButton" name="testInterruptionButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Test"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="testInterruptionButtonActionPerformed"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

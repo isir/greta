@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelibrary>
+    <expression class="faceexp" instance="agree">
+        <action intensity="0.6" name="AU5"/>
+    </expression>
+    <expression class="faceexp" instance="anger">
+        <action intensity="0.8" name="AU4"/>
+        <action intensity="0.3" name="AU5"/>
+        <action intensity="0.3" name="AU7"/>
+        <action name="AU23"/>
+    </expression>
+    <expression class="faceexp" instance="anger_signal_1">
+        <action intensity="0.5" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="anger_signal_2">
+        <action intensity="0.5" name="AU4"/>
+        <action intensity="0.3" name="AU15"/>
+        <action intensity="0.6" name="AU10"/>
+        <action intensity="0.3" name="AU23"/>
+    </expression>
+    <expression class="faceexp" instance="anger_signal_7">
+        <action name="AU4"/>
+        <action intensity="0.8" name="AU23"/>
+        <action intensity="0.4" name="AU20"/>
+    </expression>
+    <expression class="faceexp" instance="anxiety">
+        <action name="AU24" side="LEFT"/>
+        <action intensity="0.5" name="AU24" side="RIGHT"/>
+    </expression>
+    <expression class="faceexp" instance="anxiety_signal_1">
+        <action intensity="0.8" name="AU1"/>
+        <action intensity="0.8" name="AU2"/>
+        <action intensity="0.3" name="AU5"/>
+    </expression>
+    <expression class="faceexp" instance="anxiety_signal_2">
+        <action name="AU16"/>
+        <action intensity="0.4" name="AU20"/>
+    </expression>
+    <expression class="faceexp" instance="anxiety_signal_3">
+        <action intensity="0.2" name="AU20"/>
+        <action intensity="0.4" name="AU16"/>
+        <action intensity="0.4" name="AU1"/>
+        <action intensity="0.4" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="anxiety_signal_4">
+        <action intensity="0.8" name="AU23"/>
+    </expression>
+    <expression class="faceexp" instance="anxiety_signal_6">
+        <action intensity="0.8" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="AU1">
+        <action name="AU1"/>
+    </expression>
+    <expression class="faceexp" instance="AU10">
+        <action name="AU10"/>
+    </expression>
+    <expression class="faceexp" instance="AU11">
+        <action name="AU11"/>
+    </expression>
+    <expression class="faceexp" instance="AU12">
+        <action name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="AU13">
+        <action name="AU13"/>
+    </expression>
+    <expression class="faceexp" instance="AU14">
+        <action name="AU14"/>
+    </expression>
+    <expression class="faceexp" instance="AU15">
+        <action name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="AU16">
+        <action name="AU16"/>
+    </expression>
+    <expression class="faceexp" instance="AU17">
+        <action name="AU17"/>
+    </expression>
+    <expression class="faceexp" instance="AU18">
+        <action name="AU18"/>
+    </expression>
+    <expression class="faceexp" instance="AU19">
+        <action name="AU19"/>
+    </expression>
+    <expression class="faceexp" instance="AU2">
+        <action name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="AU20">
+        <action name="AU20"/>
+    </expression>
+    <expression class="faceexp" instance="AU21">
+        <action name="AU21"/>
+    </expression>
+    <expression class="faceexp" instance="AU22">
+        <action name="AU22"/>
+    </expression>
+    <expression class="faceexp" instance="AU23">
+        <action name="AU23"/>
+    </expression>
+    <expression class="faceexp" instance="AU24">
+        <action name="AU24"/>
+    </expression>
+    <expression class="faceexp" instance="AU25">
+        <action name="AU25"/>
+    </expression>
+    <expression class="faceexp" instance="AU26">
+        <action name="AU26"/>
+    </expression>
+    <expression class="faceexp" instance="AU27">
+        <action name="AU27"/>
+    </expression>
+    <expression class="faceexp" instance="AU28">
+        <action name="AU28"/>
+    </expression>
+    <expression class="faceexp" instance="AU29">
+        <action name="AU29"/>
+    </expression>
+    <expression class="faceexp" instance="AU3">
+        <action name="AU3"/>
+    </expression>
+    <expression class="faceexp" instance="AU30">
+        <action name="AU30"/>
+    </expression>
+    <expression class="faceexp" instance="AU31">
+        <action name="AU31"/>
+    </expression>
+    <expression class="faceexp" instance="AU32">
+        <action name="AU32"/>
+    </expression>
+    <expression class="faceexp" instance="AU33">
+        <action name="AU33"/>
+    </expression>
+    <expression class="faceexp" instance="AU34">
+        <action name="AU34"/>
+    </expression>
+    <expression class="faceexp" instance="AU35">
+        <action name="AU35"/>
+    </expression>
+    <expression class="faceexp" instance="AU36">
+        <action name="AU36"/>
+    </expression>
+    <expression class="faceexp" instance="AU37">
+        <action name="AU37"/>
+    </expression>
+    <expression class="faceexp" instance="AU38">
+        <action name="AU38"/>
+    </expression>
+    <expression class="faceexp" instance="AU39">
+        <action name="AU39"/>
+    </expression>
+    <expression class="faceexp" instance="AU4">
+        <action name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="AU40">
+        <action name="AU40"/>
+    </expression>
+    <expression class="faceexp" instance="AU41">
+        <action name="AU41"/>
+    </expression>
+    <expression class="faceexp" instance="AU42">
+        <action name="AU42"/>
+    </expression>
+    <expression class="faceexp" instance="AU43">
+        <action name="AU43"/>
+    </expression>
+    <expression class="faceexp" instance="AU44">
+        <action name="AU44"/>
+    </expression>
+    <expression class="faceexp" instance="AU45">
+        <action name="AU45"/>
+    </expression>
+    <expression class="faceexp" instance="AU46">
+        <action name="AU46"/>
+    </expression>
+    <expression class="faceexp" instance="AU47">
+        <action name="AU47"/>
+    </expression>
+    <expression class="faceexp" instance="AU48">
+        <action name="AU48"/>
+    </expression>
+    <expression class="faceexp" instance="AU49">
+        <action name="AU49"/>
+    </expression>
+    <expression class="faceexp" instance="AU5">
+        <action name="AU5"/>
+    </expression>
+    <expression class="faceexp" instance="AU50">
+        <action name="AU50"/>
+    </expression>
+    <expression class="faceexp" instance="AU6">
+        <action name="AU6"/>
+    </expression>
+    <expression class="faceexp" instance="AU61">
+        <action name="AU61"/>
+    </expression>
+    <expression class="faceexp" instance="AU62">
+        <action name="AU62"/>
+    </expression>
+    <expression class="faceexp" instance="AU63">
+        <action name="AU63"/>
+    </expression>
+    <expression class="faceexp" instance="AU64">
+        <action name="AU64"/>
+    </expression>
+    <expression class="faceexp" instance="AU65">
+        <action name="AU65"/>
+    </expression>
+    <expression class="faceexp" instance="AU66">
+        <action name="AU66"/>
+    </expression>
+    <expression class="faceexp" instance="AU67">
+        <action name="AU67"/>
+    </expression>
+    <expression class="faceexp" instance="AU68">
+        <action name="AU68"/>
+    </expression>
+    <expression class="faceexp" instance="AU7">
+        <action name="AU7"/>
+    </expression>
+    <expression class="faceexp" instance="AU8">
+        <action name="AU8"/>
+    </expression>
+    <expression class="faceexp" instance="AU9">
+        <action name="AU9"/>
+    </expression>
+    <expression class="faceexp" instance="boredom">
+        <action intensity="0.52" name="AU7"/>
+    </expression>
+    <expression class="faceexp" instance="certain">
+        <action intensity="0.8" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="Contempt">
+        <action intensity="0.5" name="AU4"/>
+        <action intensity="0.38" name="AU10"/>
+        <action intensity="0.71" name="AU38"/>
+    </expression>
+    <expression class="faceexp" instance="despair">
+        <action intensity="0.5" name="AU1"/>
+        <action intensity="0.5" name="AU4"/>
+        <action intensity="0.5" name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="disagree">
+        <action intensity="0.56" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="disappointment">
+        <action intensity="0.6" name="AU15"/>
+        <action intensity="0.3" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="disbelief">
+        <action intensity="0.5" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="disgust">
+        <action intensity="0.6" name="AU9"/>
+        <action intensity="0.6" name="AU6"/>
+        <action name="AU15"/>
+        <action name="AU16"/>
+    </expression>
+    <expression class="faceexp" instance="Disliking">
+        <action intensity="0.3" name="AU4"/>
+        <action intensity="0.5" name="AU5"/>
+        <action intensity="0.5" name="AU7"/>
+        <action intensity="0.5" name="AU23"/>
+    </expression>
+    <expression class="faceexp" instance="doubt">
+        <action intensity="0.45" name="AU1"/>
+        <action intensity="0.39" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="embarrassment">
+		<action name="AU18"/>
+        <action intensity="0.6" name="AU39"/>
+	</expression>
+    <expression class="faceexp" instance="embarrassment_signal_6">
+        <action intensity="0.8" name="AU12"/>
+        <action intensity="0.8" name="AU6"/>
+    </expression>
+    <expression class="faceexp" instance="embarrassment_signal_7">
+        <action intensity="0.8" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="embarrassment_signal_8">
+        <action intensity="0.6" name="AU12"/>
+        <action intensity="0.8" name="AU23"/>
+        <action intensity="0.6" name="AU20"/>
+    </expression>
+    <expression class="faceexp" instance="embarrassment_signal_9"/>
+    <expression class="faceexp" instance="envy">
+        <action intensity="0.33" name="AU7"/>
+        <action intensity="0.15" name="AU15"/>
+        <action intensity="0.28" name="AU20"/>
+    </expression>
+    <expression class="faceexp" instance="Eyebrows_Frown">
+        <action intensity="0.8" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="Eyebrows_Raise">
+        <action intensity="0.8" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="Eyes_Big_Open">
+        <action name="AU5"/>
+    </expression>
+    <expression class="faceexp" instance="Eyes_Closed">
+        <action name="AU43"/>
+    </expression>
+    <expression class="faceexp" instance="Eyes_RollUp">
+        <action name="AU63"/>
+    </expression>
+    <expression class="faceexp" instance="fear">
+        <action name="AU1"/>
+        <action name="AU2"/>
+        <action name="AU4"/>
+        <action name="AU5"/>
+        <action intensity="0.3" name="AU20"/>
+        <action name="AU26"/>
+    </expression>
+    <expression class="faceexp" instance="gloating">
+        <action intensity="0.15" name="AU7"/>
+        <action intensity="0.59" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="greet">
+        <action intensity="0.8" name="AU6"/>
+        <action intensity="0.4" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="happy-for">
+        <action intensity="0.36" name="AU6"/>
+        <action intensity="0.38" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="hate">
+        <action name="AU4"/>
+        <action intensity="0.6" name="AU5"/>
+        <action intensity="0.6" name="AU7"/>
+        <action intensity="0.6" name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="Hstar">
+        <action intensity="0.3" name="AU1"/>
+        <action intensity="0.3" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="incite">
+        <action intensity="0.59" name="AU12"/>
+        <action intensity="0.43" name="AU35"/>
+    </expression>
+    <expression class="faceexp" instance="joy">
+        <action name="AU6"/>
+        <action name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="joy_signal_1">
+        <action intensity="0.8" name="AU6"/>
+        <action intensity="0.8" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="joy_signal_14">
+        <action intensity="0.8" name="AU12"/>
+        <action name="AU25"/>
+        <action name="AU6"/>
+    </expression>
+    <expression class="faceexp" instance="joy_signal_15">
+        <action intensity="0.6" name="AU6"/>
+    </expression>
+    <expression class="faceexp" instance="joy_signal_3">
+        <action intensity="0.8" name="AU14"/>
+        <action intensity="0.8" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="joy_signal_4">
+        <action intensity="0.1" name="AU43"/>
+        <action intensity="0.3" name="AU7"/>
+        <action intensity="0.8" name="AU14"/>
+        <action intensity="0.8" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="joy_signal_6">
+        <action intensity="0.1" name="AU43"/>
+        <action intensity="0.3" name="AU7"/>
+        <action intensity="0.6" name="AU1"/>
+        <action intensity="0.6" name="AU2"/>
+        <action intensity="0.8" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="joy_signal_9">
+        <action intensity="0.8" name="AU12"/>
+        <action name="AU25"/>
+    </expression>
+    <expression class="faceexp" instance="joyStrong">
+        <action name="AU12"/>
+        <action name="AU25"/>
+    </expression>
+    <expression class="faceexp" instance="Liking">
+        <action intensity="0.8" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="lower_brows">
+        <action name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="lower_left_brow">
+        <action name="AU4" side="LEFT"/>
+    </expression>
+    <expression class="faceexp" instance="lower_left_mouth_corner">
+        <action name="AU15" side="LEFT"/>
+    </expression>
+    <expression class="faceexp" instance="lower_mouth_corners">
+        <action name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="lower_right_brow">
+        <action name="AU4" side="RIGHT"/>
+    </expression>
+    <expression class="faceexp" instance="lower_right_mouth_corner">
+        <action name="AU15" side="RIGHT"/>
+    </expression>
+    <expression class="faceexp" instance="neutral"/>
+    <expression class="faceexp" instance="oblique_brows">
+        <action name="AU1"/>
+        <action name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="open_lips">
+        <action name="AU25"/>
+    </expression>
+    <expression class="faceexp" instance="open_mouth">
+        <action name="AU25"/>
+        <action name="AU26"/>
+    </expression>
+    <expression class="faceexp" instance="panic">
+        <action name="AU1"/>
+        <action name="AU2"/>
+        <action name="AU5"/>
+        <action intensity="0.8" name="AU26"/>
+    </expression>
+    <expression class="faceexp" instance="panic_fear_signal_1">
+        <action name="AU25"/>
+        <action name="AU26"/>
+        <action name="AU16"/>
+        <action intensity="0.8" name="AU1"/>
+        <action intensity="0.8" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="panic_fear_signal_10">
+        <action intensity="0.8" name="AU1"/>
+        <action intensity="0.8" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="panic_fear_signal_11">
+        <action intensity="0.8" name="AU1"/>
+        <action intensity="0.8" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="panic_fear_signal_5">
+        <action intensity="0.8" name="AU1"/>
+        <action intensity="0.8" name="AU2"/>
+        <action intensity="0.4" name="AU15"/>
+        <action name="AU18"/>
+    </expression>
+    <expression class="faceexp" instance="panic_fear_signal_9">
+        <action intensity="0.8" name="AU1"/>
+        <action intensity="0.8" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="politeness">
+        <action intensity="0.7" name="AU12"/>
+        <action intensity="0.9" name="AU24"/>
+    </expression>
+    <expression class="faceexp" instance="pout">
+        <action intensity="0.5" name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="Pout_Eyes_HalfClosed">
+        <action name="AU1"/>
+        <action intensity="0.45" name="AU7"/>
+        <action intensity="0.38" name="AU20"/>
+    </expression>
+    <expression class="faceexp" instance="Pout_Eyes_Open">
+        <action name="AU1"/>
+        <action intensity="0.38" name="AU20"/>
+    </expression>
+    <expression class="faceexp" instance="praise">
+        <action intensity="0.3" name="AU1"/>
+        <action intensity="0.41" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="Pride">
+        <action intensity="0.8" name="AU6"/>
+        <action intensity="0.43" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="pride_signal_10">
+        <action intensity="0.8" name="AU6"/>
+        <action intensity="0.8" name="AU12"/>
+        <action intensity="0.6" name="AU23"/>
+    </expression>
+    <expression class="faceexp" instance="Pride_Small">
+        <action intensity="0.48" name="AU6"/>
+        <action intensity="0.28" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="propose">
+        <action intensity="0.6" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="raise_brows">
+        <action name="AU1"/>
+        <action name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="raise_left_brow">
+        <action name="AU1" side="LEFT"/>
+        <action name="AU2" side="LEFT"/>
+    </expression>
+    <expression class="faceexp" instance="raise_left_mouth_corner">
+        <action name="AU15" side="LEFT"/>
+    </expression>
+    <expression class="faceexp" instance="raise_mouth_corner">
+        <action name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="raise_right_brow">
+        <action name="AU1" side="RIGHT"/>
+        <action name="AU2" side="RIGHT"/>
+    </expression>
+    <expression class="faceexp" instance="raise_right_mouth_corner">
+        <action name="AU15" side="RIGHT"/>
+    </expression>
+    <expression class="faceexp" instance="relief">
+        <action intensity="0.25" name="AU43"/>
+        <action intensity="0.3" name="AU25"/>
+        <action intensity="0.25" name="AU26"/>
+        <action intensity="0.4" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_1">
+        <action intensity="0.8" name="AU1"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_12">
+        <action intensity="0.8" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_18">
+        <action intensity="0.8" name="AU24"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_19">
+        <action intensity="0.8" name="AU24"/>
+        <action intensity="0.8" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_2">
+        <action intensity="0.8" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_20"/>
+    <expression class="faceexp" instance="relief_signal_21">
+        <action intensity="0.8" name="AU1"/>
+        <action intensity="0.8" name="AU24"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_22">
+        <action intensity="0.8" name="AU2"/>
+        <action intensity="0.8" name="AU1"/>
+        <action intensity="0.8" name="AU24"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_25">
+        <action name="AU43"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_3">
+        <action intensity="0.8" name="AU7"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_4">
+        <action intensity="0.8" name="AU10"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_5">
+        <action intensity="0.8" name="AU25"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_6">
+        <action name="AU16"/>
+        <action intensity="0.4" name="AU23"/>
+        <action name="AU25"/>
+        <action name="AU26"/>
+        <action intensity="0.2" name="AU7"/>
+        <action intensity="0.2" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_7">
+        <action intensity="0.8" name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_8">
+        <action intensity="0.8" name="AU15"/>
+        <action intensity="0.8" name="AU10"/>
+    </expression>
+    <expression class="faceexp" instance="relief_signal_9">
+        <action intensity="0.8" name="AU10"/>
+        <action intensity="0.8" name="AU18"/>
+    </expression>
+    <expression class="faceexp" instance="sadness">
+        <action name="AU1"/>
+        <action name="AU4"/>
+        <action name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="small_anger">
+        <action intensity="0.5" name="AU4"/>
+        <action intensity="0.5" name="AU5"/>
+        <action intensity="0.5" name="AU7"/>
+        <action intensity="0.5" name="AU23"/>
+    </expression>
+    <expression class="faceexp" instance="small_joy">
+        <action intensity="0.5" name="AU6"/>
+        <action intensity="0.5" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="small_open_joy">
+        <action intensity="0.8" name="AU6"/>
+        <action intensity="0.7" name="AU12"/>
+        <action intensity="0.8" name="AU25"/>
+        <action intensity="0.6" name="AU26"/>
+    </expression>
+    <expression class="faceexp" instance="small_sadness">
+        <action intensity="0.5" name="AU1"/>
+        <action intensity="0.5" name="AU4"/>
+        <action intensity="0.5" name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="Smile_Big_Open">
+        <action name="AU25"/>
+        <action intensity="0.8" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="Smile_Small_Closed">
+        <action intensity="0.3" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="Smile_Small_Open">
+        <action intensity="0.8" name="AU25"/>
+        <action intensity="0.3" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="sorry-for">
+        <action intensity="0.5" name="AU1"/>
+    </expression>
+    <expression class="faceexp" instance="suggest">
+        <action intensity="0.6" name="AU2"/>
+        <action intensity="0.6" name="AU55"/>
+    </expression>
+    <expression class="faceexp" instance="suggest1">
+        <action intensity="0.6" name="AU2"/>
+        <action intensity="0.6" name="AU56"/>
+    </expression>
+    <expression class="faceexp" instance="suggest2">
+        <action intensity="0.8" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="surprise">
+        <action name="AU1"/>
+        <action name="AU2"/>
+        <action name="AU5"/>
+        <action name="AU26"/>
+    </expression>
+    <expression class="faceexp" instance="surprise-happy">
+        <action intensity="0.64" name="AU1"/>
+        <action name="AU2"/>
+        <action name="AU5"/>
+        <action intensity="0.41" name="AU12"/>
+        <action name="AU25"/>
+        <action intensity="0.3" name="AU27"/>
+    </expression>
+    <expression class="faceexp" instance="tension">
+        <action intensity="0.8" name="AU24"/>
+    </expression>
+    <expression class="faceexp" instance="tension_signal_1">
+        <action intensity="0.8" name="AU14" side="LEFT"/>
+        <action intensity="0.8" name="AU18" side="RIGHT"/>
+        <action intensity="0.2" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="tension_signal_2">
+        <action intensity="0.8" name="AU18"/>
+        <action intensity="0.2" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="tension_signal_3">
+        <action intensity="0.8" name="AU14" side="RIGHT"/>
+        <action intensity="0.8" name="AU18" side="LEFT"/>
+        <action intensity="0.2" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="tension_signal_4">
+        <action name="AU18" side="LEFT"/>
+        <action intensity="0.2" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="tension_signal_5">
+        <action name="AU18" side="RIGHT"/>
+        <action intensity="0.2" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="tension_signal_6">
+        <action intensity="0.8" name="AU32" side="RIGHT"/>
+    </expression>
+    <expression class="faceexp" instance="tension_signal_7">
+        <action intensity="0.8" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="uncertain">
+        <action intensity="0.5" name="AU1"/>
+        <action intensity="0.2" name="AU12"/>
+        <action intensity="0.2" name="AU6"/>
+        <action intensity="0.4" name="AU17"/>
+        <action intensity="0.7" name="AU20"/>
+    </expression>
+    <expression class="faceexp" instance="understand">
+        <action intensity="0.42" name="AU4"/>
+        <action intensity="0.53" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="widen_eyes">
+        <action name="AU5"/>
+        <action name="AU7"/>
+    </expression>
+    <expression class="faceexp" instance="worry">
+        <action intensity="0.6" name="AU1"/>
+        <action intensity="0.6" name="AU4"/>
+        <action intensity="0.6" name="AU15"/>
+    </expression>
+    <expression class="gaze" instance="eyes_closed">
+        <action name="AU43"/>
+    </expression>
+    <expression class="gaze" instance="look_down">
+        <action intensity="0.8" name="AU64"/>
+    </expression>
+    <expression class="gaze" instance="look_down_left">
+        <action name="AU64"/>
+        <action name="AU61"/>
+    </expression>
+    <expression class="gaze" instance="look_down_right">
+        <action name="AU64"/>
+        <action name="AU62"/>
+    </expression>
+    <expression class="gaze" instance="look_left">
+        <action name="AU61"/>
+    </expression>
+    <expression class="gaze" instance="look_right">
+        <action name="AU62"/>
+    </expression>
+    <expression class="gaze" instance="look_up">
+        <action name="AU63"/>
+    </expression>
+    <expression class="gaze" instance="look_up_left">
+        <action name="AU63"/>
+        <action name="AU61"/>
+    </expression>
+    <expression class="gaze" instance="look_up_right">
+        <action name="AU63"/>
+        <action name="AU62"/>
+    </expression>
+    <expression class="performative" instance="warn">
+        <action intensity="0.5" name="AU4"/>
+        <action intensity="0.5" name="AU55"/>
+    </expression>
+	<expression class="faceexp" instance="negative_pout">
+        <action name="AU20"/>
+		<action name="AU24"/>
+    </expression>
+</facelibrary>

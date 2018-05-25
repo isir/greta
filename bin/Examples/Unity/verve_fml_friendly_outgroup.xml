@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE fml-apml SYSTEM "fml-apml.dtd" []>
+<fml-apml>
+
+<fml> 
+
+  <emotion id="p0" type="joyStrong" start="0" end="5"  importance="1" intensity="1.0"/>   
+  
+  
+</fml>
+</fml-apml>

@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            xmlns="org.mindmakers.bml"
+            targetNamespace="org.mindmakers.bml"
+            elementFormDefault="qualified" xmlns:tns="org.mindmakers.bml">
+    <xsd:element name="bmlRoot">
+        <xsd:complexType>
+            <xsd:sequence>
+                <xsd:element name="bml" type="Bml"/>
+            </xsd:sequence>
+        </xsd:complexType>
+    </xsd:element>
+    <xsd:complexType name="BehaviorBlock">
+        <xsd:sequence maxOccurs="unbounded">
+            <xsd:element name="gaze" type="Gaze" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="gesture" type="Gesture" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="speech" type="Speech" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="locomotion" type="Locomotion" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="head" type="Head" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="face" type="Face" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="lips" type="Lips" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="constraint" type="Constraint" minOccurs="0" maxOccurs="unbounded"/>
+            <xsd:element name="emit" type="Emit" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Bml">
+        <xsd:complexContent>
+            <xsd:extension base="BehaviorBlock">
+                <xsd:sequence>
+                    <xsd:element name="required" type="BehaviorBlock" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+                <xsd:attribute name="id" type="xsd:string" use="required"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Behavior">
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="start" type="xsd:string"/>
+        <xsd:attribute name="end" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:simpleType name="Direction">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="RIGHT"/>
+            <xsd:enumeration value="LEFT"/>
+            <xsd:enumeration value="UP"/>
+            <xsd:enumeration value="DOWN"/>
+            <xsd:enumeration value="UPRIGHT"/>
+            <xsd:enumeration value="UPLEFT"/>
+            <xsd:enumeration value="DOWNLEFT"/>
+            <xsd:enumeration value="DOWNRIGHT"/>
+            <xsd:enumeration value="POLAR"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="GazeModality">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="EYES"/>
+            <xsd:enumeration value="HEAD"/>
+            <xsd:enumeration value="NECK"/>
+            <xsd:enumeration value="TORSO"/>
+            <xsd:enumeration value="LEGS"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Gaze">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                    <xsd:element name="modality" type="GazeModality" minOccurs="0" maxOccurs="5"/>
+                </xsd:sequence>
+                <xsd:attribute name="target" type="xsd:string"/>
+                <xsd:attribute name="offsetangle" type="xsd:float"/>
+                <xsd:attribute name="offsetdirection" type="Direction"/>
+                <!-- 
+                The polar attribute is only looked at if the offsetdirection is set to POLAR 
+                -->
+                <xsd:attribute name="polarangle" type="xsd:float"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="GestureType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="POINT"/>
+            <xsd:enumeration value="BEAT"/>
+            <xsd:enumeration value="CONDUIT"/>
+            <xsd:enumeration value="GENERIC"/>
+            <xsd:enumeration value="LEXICALIZED"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Side">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="LEFT"/>
+            <xsd:enumeration value="RIGHT"/>
+            <xsd:enumeration value="BOTH"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="HandShape">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="INDEXFINGER"/>
+            <xsd:enumeration value="THUMB"/>
+            <xsd:enumeration value="OPENHAND"/>
+            <xsd:enumeration value="FIST"/>
+            <xsd:enumeration value="FINGER-RING"/>
+            <xsd:enumeration value="CUP"/>
+            <xsd:enumeration value="PURSE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Trajectory">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="STRAIGHT"/>
+            <xsd:enumeration value="CURVED"/>
+            <xsd:enumeration value="CIRCULAR"/>
+            <xsd:enumeration value="RECTANGULAR"/>
+            <xsd:enumeration value="TRIANGULAR"/>
+            <xsd:enumeration value="WAVE-LIKE"/>
+            <xsd:enumeration value="ZIGZAG"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="TwoHanded">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="MIRROR"/>
+            <xsd:enumeration value="ALTERNATE"/>
+            <xsd:enumeration value="PARALLEL"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="VerticalLocation">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="LOW"/>
+            <xsd:enumeration value="CENTER"/>
+            <xsd:enumeration value="HIGH"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="HorizontalLocation">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="LEFT"/>
+            <xsd:enumeration value="CENTER"/>
+            <xsd:enumeration value="RIGHT"/>
+            <xsd:enumeration value="INWARD"/>
+            <xsd:enumeration value="OUTWARD"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Distance">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CONTACT"/>
+            <xsd:enumeration value="NEAR"/>
+            <xsd:enumeration value="MEDIUM"/>
+            <xsd:enumeration value="FAR"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Amplitude">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SMALL"/>
+            <xsd:enumeration value="MEDIUM"/>
+            <xsd:enumeration value="LARGE"/>
+            <xsd:enumeration value="EXTRA-LARGE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Power">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="WEAK"/>
+            <xsd:enumeration value="NORMAL"/>
+            <xsd:enumeration value="FORCEFUL"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Gesture">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="GestureType" use="required"/>
+                <xsd:attribute name="hand" type="Side"/>
+                <xsd:attribute name="repetition" type="xsd:int"/>
+                <xsd:attribute name="target" type="xsd:string"/>
+                <xsd:attribute name="handshape" type="HandShape"/>
+                <xsd:attribute name="extendedfingerdirection" type="Direction"/>
+                <xsd:attribute name="palmdirection" type="Direction"/>
+                <xsd:attribute name="trajectory" type="Trajectory"/>
+                <xsd:attribute name="twohanded" type="TwoHanded"/>
+                <xsd:attribute name="location_vertical" type="VerticalLocation"/>
+                <xsd:attribute name="location_horizontal" type="HorizontalLocation"/>
+                <xsd:attribute name="location_distance" type="Distance"/>
+                <xsd:attribute name="movementdirection" type="Direction"/>
+                <xsd:attribute name="lexeme" type="xsd:string"/>
+                <xsd:attribute name="amplitude" type="Amplitude"/>
+                <xsd:attribute name="power" type="Power"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Sync">
+        <xsd:sequence>
+        </xsd:sequence>
+        <xsd:attribute name="ref" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="Text" mixed="true">
+        <xsd:sequence>
+            <xsd:element name="sync" type="Sync"/>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="Speech">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                    <xsd:element name="text" type="Text"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="LocomotionType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="VECTOR"/>
+            <xsd:enumeration value="TARGET"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="LocomotionManner">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="RUNNING"/>
+            <xsd:enumeration value="SWIMMING"/>
+            <xsd:enumeration value="FLYING"/>
+            <xsd:enumeration value="WALKING"/>
+            <xsd:enumeration value="CRAWLING"/>
+            <xsd:enumeration value="CREEPING"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Locomotion">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="LocomotionType"/>
+                <xsd:attribute name="proximity" type="xsd:float"/>
+                <xsd:attribute name="facing" type="xsd:float"/>
+                <xsd:attribute name="manner" type="LocomotionManner"/>
+                <xsd:attribute name="dynamic" type="xsd:boolean"/>
+                <xsd:attribute name="velocity" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="BodyPart">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="WHOLE"/>
+            <xsd:enumeration value="UPPER"/>
+            <xsd:enumeration value="LOWER"/>
+            <xsd:enumeration value="LEFT"/>
+            <xsd:enumeration value="RIGHT"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Stance">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="SITTING"/>
+            <xsd:enumeration value="STANDING"/>
+            <xsd:enumeration value="KNEELING"/>
+            <xsd:enumeration value="SQUATTING"/>
+            <xsd:enumeration value="LYING"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Shape">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="CROSSED"/>
+            <xsd:enumeration value="OPEN"/>
+            <xsd:enumeration value="STRETCHED"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Posture">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                </xsd:sequence>
+                <xsd:attribute name="part" type="BodyPart"/>
+                <xsd:attribute name="stance" type="Stance"/>
+                <xsd:attribute name="shape" type="Shape"/>
+                <xsd:attribute name="target" type="xsd:string"/>
+                <xsd:attribute name="facing" type="Direction"/>
+                <xsd:attribute name="leaning" type="Direction"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="HeadMovementType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="NOD"/>
+            <xsd:enumeration value="SHAKE"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Head">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="HeadMovementType"/>
+                <xsd:attribute name="repeats" type="xsd:int"/>
+                <xsd:attribute name="amount" type="xsd:float"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:simpleType name="FaceMovementType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FACS"/>
+            <xsd:enumeration value="EYEBROWS"/>
+            <xsd:enumeration value="EYELIDS"/>
+            <xsd:enumeration value="MOUTH"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="EyebrowShape">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FLAT"/>
+            <xsd:enumeration value="POINTDOWN"/>
+            <xsd:enumeration value="POINTUP"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="Eyelid">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="BOTH"/>
+            <xsd:enumeration value="UPPER"/>
+            <xsd:enumeration value="LOWER"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:simpleType name="MouthShape">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="FLAT"/>
+            <xsd:enumeration value="SMILE"/>
+            <xsd:enumeration value="LAUGH"/>
+            <xsd:enumeration value="PUCKER"/>
+            <xsd:enumeration value="FROWN"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+    <xsd:complexType name="Face">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                </xsd:sequence>
+                <xsd:attribute name="type" type="FaceMovementType" use="required"/>
+                <xsd:attribute name="amount" type="xsd:float"/>
+                <xsd:attribute name="side" type="Side"/>
+                <xsd:attribute name="au" type="xsd:int"/>
+                <xsd:attribute name="eyebrow-shape" type="EyebrowShape"/>
+                <xsd:attribute name="separation" type="xsd:float"/>
+                <xsd:attribute name="lid" type="Eyelid"/>
+                <xsd:attribute name="mouth-shape" type="MouthShape"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Lips">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                </xsd:sequence>
+                <xsd:attribute name="viseme" type="xsd:string" use="required"/>
+                <xsd:attribute name="articulation" type="xsd:float"/>
+                <xsd:attribute name="flapping" type="xsd:boolean"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Wait">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                </xsd:sequence>
+                <xsd:attribute name="duration" type="xsd:float"/>
+                <xsd:attribute name="event" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="Emit">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                    <xsd:element name="event" type="Behavior"/>
+                </xsd:sequence>
+                <xsd:attribute name="source" type="xsd:string"/>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+    <xsd:complexType name="SyncBlock">
+        <xsd:sequence>
+            <xsd:element name="sync" type="Sync" minOccurs="0" maxOccurs="unbounded"/>
+        </xsd:sequence>
+        <xsd:attribute name="ref" type="xsd:string"/>
+    </xsd:complexType>
+    <xsd:complexType name="Constraint">
+        <xsd:complexContent>
+            <xsd:extension base="Behavior">
+                <xsd:sequence>
+                    <xsd:element name="before" type="SyncBlock" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="synchronize" type="SyncBlock" minOccurs="0" maxOccurs="unbounded"/>
+                    <xsd:element name="after" type="SyncBlock" minOccurs="0" maxOccurs="unbounded"/>
+                </xsd:sequence>
+            </xsd:extension>
+        </xsd:complexContent>
+    </xsd:complexType>
+</xsd:schema>
+ 

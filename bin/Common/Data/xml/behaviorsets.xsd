@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+	
+	<xsd:include schemaLocation="global.xsd"/>
+	
+	<xsd:element name="behaviorsets" type="behaviorsetsListType"/>
+	
+	<xsd:complexType name="behaviorsetsListType">
+		<xsd:sequence>
+			<xsd:element name="behaviorset" type="behaviorsetType" minOccurs="1" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="behaviorsetType">
+		<xsd:sequence>
+			<xsd:element name="signals" type="signalsType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="constraints" type="constraintsType" minOccurs="1" maxOccurs="1"/>	
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="type" type="xsd:string"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="constraintsType">
+		<xsd:sequence>
+			<xsd:element name="core" type="coreType" minOccurs="0" maxOccurs="1"/>
+			<xsd:element name="rules" type="rulesType" minOccurs="0" maxOccurs="1"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="coreType">
+		<xsd:sequence>
+			<xsd:element name="item" type="itemType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="implicationType">
+		<xsd:sequence>
+			<xsd:element name="ifpresent" type="itemType" minOccurs="1" maxOccurs="1"/>
+			<xsd:element name="thenpresent" type="itemType" minOccurs="0" maxOccurs="unbounded"/>
+			<xsd:element name="thennotpresent" type="itemType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="rulesType">
+		<xsd:sequence>
+			<xsd:element name="implication" type="implicationType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="signalsType">
+		<xsd:sequence>
+			<xsd:element name="signal" type="signalType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+	</xsd:complexType>
+	
+	<xsd:complexType name="itemType">
+		<xsd:attribute name="id" type="xsd:integer" use="required"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="signalType">
+		<xsd:sequence>
+			<xsd:element name="alternative" type="alternativeShapeType" minOccurs="0" maxOccurs="unbounded"/>
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:integer" use="required"/>
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="modality" type="parametersetNameType" use="required"/>
+		<xsd:attribute name="min" type="xsd:float"/>
+		<xsd:attribute name="max" type="xsd:float"/>
+		<xsd:attribute name="content" type="xsd:string"/>
+		<xsd:attribute name="meaning" type="xsd:string"/>
+		<xsd:attribute name="intonation" type="xsd:string"/>
+		<xsd:attribute name="voicequality" type="xsd:string"/>
+		<xsd:attribute name="excludelist" type="xsd:string"/>
+		<xsd:attribute name="repetitivity" type="xsd:integer"/>
+		<xsd:attribute name="probability_start" type="xsd:float"/>
+		<xsd:attribute name="probability_end" type="xsd:float"/>
+	</xsd:complexType>
+	
+	<xsd:complexType name="alternativeShapeType">
+		<xsd:attribute name="name" type="xsd:string" use="required"/>
+		<xsd:attribute name="probability" type="xsd:decimal" use="required"/>
+		<xsd:attribute name="min" type="xsd:float"/>
+		<xsd:attribute name="max" type="xsd:float"/>
+		<xsd:attribute name="content" type="xsd:string"/>
+		<xsd:attribute name="meaning" type="xsd:string"/>
+		<xsd:attribute name="intonation" type="xsd:string"/>
+		<xsd:attribute name="voicequality" type="xsd:string"/>
+	</xsd:complexType>
+</xsd:schema>

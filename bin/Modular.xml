@@ -1,0 +1,1326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modular>
+    <!-- menu gives access to modules from the GUI -->
+    <menus>
+        <menu name="${GUI.add}">
+            <item module="IniManager" name="Ini Manager"/>
+            <item module="CharacterManager" name="Character Manager"/>
+            <menu name="Logs">
+                <item module="Logs" name="Controller"/>
+                <item module="LogPrinter" name="Log Printer"/>
+                <item module="LogFile" name="Log File"/>
+                <item module="LogFrame" name="Log Frame"/>
+            </menu>
+            <menu name="Inputs">
+                <item module="FMLFileReader" name="FML File Reader"/>
+                <item module="BMLFileReader" name="BML File Reader"/>
+                <item module="KeyframeFileReader" name="Keyframe File Reader"/>
+                <item module="FAPFileReader" name="FAP File Reader"/>
+                <item module="FAPHeadFileReader" name="FAP-Head FileReader"/>
+                <item module="MPEG4FileReader" name="MPEG4 File Reader"/>
+                <item module="BVHFileReader" name="BVH File Reader"/>
+                <item module="EmotionMLFileReader" name="EmotionML File Reader"/>
+                <item module="SynchroBVHFileReader" name="Synchro BVH File Reader"/>
+                <item module="BAPFileReader" name="BAP File Reader"/>
+                <item module="oldBAP2newBAP" name="old BAP to new BAP"/>
+                <item module="Body Head Noise" name="Body Head Noise"/>
+            </menu>
+            <menu name="Interruptions">
+                <item module="InterruptionManager" name="Interruption Manager"/>
+            </menu>
+            <menu name="Planners">
+                <item module="ListenerIntentPlanner" name="Listener Intent Planner"/>
+                <item module="BehaviorPlanner" name="Behavior Planner"/>
+                <item module="IntentionQueue" name="Intention Queue"/>
+                <menu name="Subject Planner">
+                    <item module="SubjectPlanner" name="Subject Planner"/>
+                </menu>
+            </menu>
+            <item module="BehaviorRealizer" name="Behavior Realizer"/>
+            <menu name="Keyframe Performers">
+                <item module="IKKeyframePerformer" name="IK"/>
+                <item module="FaceKeyframePerformer" name="Face"/>
+                <item module="LipModel" name="Lip Model"/>
+                <item module="AudioKeyframePerformer" name="Audio"/>
+                <item module="BodyArmNoise" name="Body Arm Noise"/>
+                <item module="AnimationKeyframePerformer" name="Animation KeyFrame Performer"/>
+            </menu>
+            <menu name="AU Performers">
+                <item module="SimpleAUPerformer" name="Simple AU Performer"/>
+                <item module="SimpleHeadPerformer" name="Simple Head Performer"/>
+            </menu>
+            <menu name="Outputs">
+                <item module="FMLFileWriter" name="FML File Writer"/>
+                <item module="BMLFileWriter" name="BML File Writer"/>
+                <item module="FAPFileWriter" name="FAP File Writer"/>
+                <item module="BAPFileWriter" name="BAP File Writer"/>
+                <item module="AudioFileWriter" name="Audio File Writer"/>
+            </menu>
+            <menu name="Tools">
+                <item module="FMLEditor" name="FML Editor"/>
+                <item module="BMLEditor" name="BML Editor"/>
+                <item module="GestureAnimationEditor" name="Gesture Editor"/>
+                <item module="TorsoEditor" name="TorsoEditor"/>
+                <item module="HandShapeEditor" name="Hand Shape Editor"/>
+                <item module="FaceLibraryViewer" name="Face Library Viewer"/>
+                <item module="AULibraryEditor" name="AU Library Editor"/>
+                <item module="EnvEditor" name="Env Editor"/>
+                <!-- more tools comming soon -->
+            </menu>
+            <menu name="TTS">
+                <item module="TTS" name="Controller"/>
+                <item module="OpenMary ClientTTS" name="Open Mary Client"/>
+                <item module="OpenMary SemaineTTS" name="Open Mary Semaine"/>
+                <item module="Cereproc TTS" name="Cereproc TTS"/>
+            </menu>
+            <menu name="LaughSynthetizer">
+                <item module="LaughSynthetizer" name="Controller"/>
+                <item module="PhonemeGeneratorLaughSynthetizer" name="PhonemeGeneratorLaughSynthetizer"/>
+            </menu>
+            <menu name="Animation Filters">
+                <menu name="Face">
+                    <item module="NulFilter" name="NulFilter"/>
+                    <item module="IdleMovementFilter" name="IdleMovementFilter"/>
+                    <item module="IdleMovementEmitter" name="IdleMovementEmitter"/>
+                    <item module="LipBlender" name="Lip blender"/>
+                </menu>
+                <menu name="Body">
+                    <item module="HeadNoise" name="HeadNoise"/>
+                    <item module="ConcatenateJoints" name="Concatenate Joints"/>
+                    <item module="BodyBlender" name="Body blender"/>
+                </menu>
+            </menu>
+            <menu name="Feedbacks">
+                <item module="Feedbacks" name="Feedbacks"/>
+                <item module="Feedbacks2Logs" name="Feedbacks2Logs"/>
+            </menu>
+            <menu name="Environment">
+                <item module="Environment" name="Environment"/>
+                <item module="MPEG4Animatable" name="MPEG-4 Animatable"/>
+            </menu>
+            <menu name="Player">
+                <item module="PlayerOgre" name="Player Ogre"/>
+                <item module="CaptureController" name="Capture Controller"/>
+                <item module="XuggleVideoCapture" name="Video Capture Output"/>
+            </menu>
+            <menu name="NetworkConnections">
+                <menu name="ActiveMQ">
+                    <item module="ActiveMQBroker" name="Broker"/>
+                    <menu name="Senders">
+                        <item module="FMLSender" name="FML Sender"/>
+                        <item module="BMLSender" name="BML Sender"/>
+                        <item module="BMLCallbacksSender" name="BML Callbacks Sender"/>
+                        <item module="EmotionMLSender" name="EmotionML Sender"/>
+                        <item module="KeyFrameSender" name="Key Frame Sender"/>
+                        <item module="FeedbacksSender" name="Feedbacks Sender"/>
+                        <item module="BAPSender" name="BAP Sender"/>
+                        <item module="FAPSender" name="FAP Sender"/>
+                        <item module="AudioSender" name="Audio Sender"/>
+                        <item module="SSISender" name="SSISender"/>
+                    </menu>
+                    <menu name="Receivers">
+                        <item module="FMLReceiver" name="FML Receiver"/>
+                        <item module="BMLReceiver" name="BML Receiver"/>
+                        <item module="FMLBMLFileNameReceiver" name="FML/BML Receiver (file names)"/>
+                        <item module="EmotionMLReceiver" name="EmotionML Receiver"/>
+                        <item module="BAPReceiver" name="BAP Receiver"/>
+                        <item module="FAPReceiver" name="FAP Receiver"/>
+                        <item module="CallbacksReceiver" name="Callbacks Receiver"/>
+                        <item module="SSITranslator" name="SSI XML-to-Frame Translator"/>
+                        <item module="SSIFilter" name="SSI XML Filter"/>
+                        <item module="SSIFrameToSignal" name="SSI Frame-To-Signal Translator"/>
+                        <item module="MessageLogger" name="Message Logger"/>
+                        <item module="BMLCallbacksReceiver" name="BML Callbacks Receiver"/>
+                    </menu>
+                    <item module="TextEditor" name="Text Editor"/>
+                    <item module="IntentionQueuing" name="Intention Queuing"/>
+                </menu>
+                <menu name="Thrift">
+                    <menu name="Senders">
+                        <item module="Thrift.FAPSender" name="FAP Sender"/>
+                        <item module="Thrift.FAPServerToExternal" name="FAP ServerToExternal"/>
+                        <item module="Thrift.BAPServerToExternal" name="BAP ServerToExternal"/>
+                        <item module="Thrift.AudioServerToExternal" name="Audio ServerToExternal"/>
+                        <item module="Thrift.BAPSender" name="BAP Sender"/>
+                        <item module="Thrift.FMLSender" name="FML Sender"/>
+                        <item module="Thrift.BMLSender" name="BML Sender"/>
+                        <item module="Thrift.AudioSender" name="Audio Sender"/>
+                    </menu>
+                    <menu name="Receivers">
+                        <item module="Thrift.FAPReceiver" name="FAP Receiver"/>
+                        <item module="Thrift.CommandReceiver" name="Command Receiver"/>
+                        <item module="Thrift.FAPExternalClient" name="FAP ExternalClient"/>
+                        <item module="Thrift.BAPReceiver" name="BAP Receiver"/>
+                        <item module="Thrift.FMLReceiver" name="FML Receiver"/>
+                        <item module="Thrift.BMLReceiver" name="BML Receiver"/>
+                        <item module="Thrift.ShoreReceiverToSignal" name="Shore Receiver to Signal"/>
+                        <item module="Thrift.ShoreReceiverToAU" name="Shore Receiver to AU"/>
+                        <item module="Thrift.MessageToLogs" name="Message To Logs"/>
+                    </menu>
+                </menu>
+            </menu>
+        </menu>
+    </menus>
+    <!-- list of all modules that can be used -->
+    <modules>
+        <module name="IniManager" restrict="1" style="VIBDefault">
+            <object class="vib.core.utilx.gui.GlobalIniManagerFrame" lib_id="vib_utilx"/>
+            <frame type="object"/>
+            <parameter default="" get_method="getDefinition" get_on="object" name="file" set_method="setDefinition" set_on="object" type="string"/>
+            <!-- TODO set/get ini file -->
+        </module>
+        <module name="EnvEditor" style="VIBDefault">
+            <object class="vib.tools.editors.environment.EnvTool" lib_id="vib_editors"/>
+            <frame type="object"/>
+        </module>
+        <module name="CharacterManager" restrict="1" style="VIBDefault">
+            <object class="vib.core.utilx.gui.CharacterIniManagerFrame" lib_id="vib_utilx"/>
+            <frame type="object"/>
+            <parameter default="" get_method="getCurrentCaracter" get_on="object" name="character_name" set_method="setCurrentCaracter" set_on="object" type="string"/>
+        </module>
+        <module name="Logs" restrict="1" style="VIBDefault">
+            <object class="vib.core.utilx.gui.LogsController" lib_id="vib_utilx"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="hasDebug" get_on="object" name="debug" set_method="setDebug" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="hasInfo" get_on="object" name="info" set_method="setInfo" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="hasWarning" get_on="object" name="warning" set_method="setWarning" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="hasError" get_on="object" name="error" set_method="setError" set_on="object" type="boolean"/>
+        </module>
+        <module name="LogPrinter" restrict="1" style="VIBDefault">
+            <object class="vib.core.util.log.LogPrinter" lib_id="vib_util"/>
+        </module>
+        <module name="LogFile" style="VIBDefault">
+            <object class="vib.core.utilx.gui.LogFileAccessor" lib_id="vib_utilx"/>
+            <frame type="object"/>
+            <parameter default="./Log/vib.log" get_method="getLogFile" get_on="object" name="file" set_method="setLogFile" set_on="object" type="string"/>
+        </module>
+        <module name="LogFrame" style="VIBDefault">
+            <object class="vib.core.utilx.gui.DocOutput" lib_id="vib_utilx"/>
+            <frame class="vib.core.utilx.gui.DocOutputFrame" lib_id="vib_utilx" type="frame">
+                <link method="setDocOutput" on="frame"/>
+            </frame>
+            <parameter default="false" get_method="isBlack" get_on="frame" name="blackBackground" set_method="setBlack" set_on="frame" type="boolean"/>
+        </module>
+        <module name="FMLFileReader" style="Intentions">
+            <object class="vib.core.intentions.FMLFileReader" lib_id="vib_intentions"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="EmotionMLFileReader" style="Intentions">
+            <object class="vib.auxiliary.emotionml.EmotionMLFileReader" lib_id="vib_emotionml"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="BMLFileReader" style="Signals">
+            <object class="vib.core.signals.BMLFileReader" lib_id="vib_signals"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="KeyframeFileReader" style="Animations">
+            <object class="vib.core.keyframes.KeyframeFileReader" lib_id="vib_signals"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="FAPFileReader" style="Animations">
+            <object class="vib.core.animation.mpeg4.fap.file.FAPFileReader" lib_id="vib_mpeg4"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="FAPHeadFileReader" style="Animations">
+            <object class="vib.core.animation.mpeg4.fap.file.FAPHeadFileReader" lib_id="vib_mpeg4"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="MPEG4FileReader" style="Animations">
+            <object class="vib.core.animation.mpeg4.MPEG4FileReader" lib_id="vib_mpeg4"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="BVHFileReader" style="Animations">
+            <object class="vib.auxiliary.BvhMocap.BvhReader" lib_id="vib_bvh"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="FaceLibraryViewer" style="Animations">
+            <object class="vib.tools.editors.facelibrary.FaceLibraryEditor" lib_id="vib_editors"/>
+            <frame type="object"/>
+        </module>
+        <module name="AULibraryEditor" style="Animations">
+            <object class="vib.tools.editors.aulibrary.AULibraryEditor" lib_id="vib_editors"/>
+            <frame type="object"/>
+        </module>
+        <module name="SynchroBVHFileReader" style="Animations">
+            <object class="vib.auxiliary.BvhMocap.SynchroBvhReader" lib_id="vib_bvh"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="BAPFileReader" style="Animations">
+            <object class="vib.core.animation.mpeg4.bap.file.BAPFileReader" lib_id="vib_mpeg4"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="oldBAP2newBAP" style="Animations">
+            <object class="vib.core.animation.mpeg4.bap.file.oldBAP2newBAP" lib_id="vib_mpeg4"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="ListenerIntentPlanner" style="IntentPlanner">
+            <object class="vib.core.intentplanner.listener.ListenerIntentPlanner" lib_id="vib_listener_intent_planner"/>
+        </module>
+        <module name="BehaviorPlanner" style="BehaviorPlanner">
+            <object class="vib.core.behaviorplanner.Planner" lib_id="vib_behavior_planner"/>
+        </module>
+        <!--<module name="MultiLayerSequencePlanner" style="BehaviorPlanner">
+            <object class="vib.auxiliary.multilayerattitudeplanner.SequencePlanner" lib_id="vib_multilayer_attitude_planner"/>
+            <frame type="frame" class="vib.auxiliary.multilayerattitudeplanner.SequenceSenderFrame" lib_id="vib_multilayer_attitude_planner">
+                <link method="setPlanner" on="frame"/>
+            </frame>
+        </module>-->
+        <module name="SSITranslator" style="VIBDefault">
+            <object class="vib.auxiliary.ssi.SSIXMLToFrameTranslator" lib_id="vib_ssi"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="semaine.data.ssi.text" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="SSIFilter" style="VIBDefault">
+            <object class="vib.auxiliary.ssi.SSIFilterForm" lib_id="vib_ssi"/>
+            <frame type="object"/>
+        </module>
+        <module name="SSIFrameToSignal" style="VIBDefault">
+            <object class="vib.auxiliary.ssi.SSIFrameToSignal" lib_id="vib_ssi"/>
+        </module>
+        <module name="BehaviorRealizer" style="BehaviorRealizer">
+            <object class="vib.core.behaviorrealizer.Realizer" lib_id="vib_behavior_realizer"/>
+        </module>
+        <module name="FMLFileWriter" style="Intentions">
+            <object class="vib.core.intentions.FMLFileWriter" lib_id="vib_intentions"/>
+        </module>
+        <module name="BMLFileWriter" style="Signals">
+            <object class="vib.core.signals.BMLFileWriter" lib_id="vib_signals"/>
+        </module>
+        <module name="FAPFileWriter" style="Animations">
+            <object class="vib.core.animation.mpeg4.fap.file.FAPFileWriter" lib_id="vib_mpeg4"/>
+        </module>
+        <module name="AudioFileWriter" style="Animations">
+            <object class="vib.core.util.audio.SaveAudioPerformer" lib_id="vib_util"/>
+        </module>
+        <module name="BAPFileWriter" style="Animations">
+            <object class="vib.core.animation.mpeg4.bap.file.BAPFileWriter" lib_id="vib_mpeg4"/>
+            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="LaughSynthetizer" restrict="1" style="VIBDefault">
+            <object class="vib.core.utilx.gui.LaughSynthetizerController" lib_id="vib_utilx"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
+        </module>
+        <module name="PhonemeGeneratorLaughSynthetizer">
+            <object class="vib.core.util.laugh.PhonemeGeneratorLaughSynthetizer" lib_id="vib_util"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="TTS" restrict="1" style="VIBDefault">
+            <object class="vib.core.utilx.gui.TTSController" lib_id="vib_utilx"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
+        </module>
+        <module name="OpenMary ClientTTS">
+            <object class="vib.auxiliary.tts.openmary.OpenMaryClientTTS" lib_id="vib_openmary"/>
+            <frame type="noFrame"/>
+            <!-- TODO -->
+        </module>
+        <module name="OpenMary SemaineTTS">
+            <object class="vib.auxiliary.tts.openmary.OpenMarySemaineTTS" lib_id="vib_openmary"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Cereproc TTS">
+            <object class="vib.auxiliary.tts.cereproc.CereprocTTS" lib_id="vib_cereproc"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="ActiveMQBroker">
+            <object class="vib.auxiliary.activemq.Broker" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.BrokerFrame" lib_id="vib_activemq" type="frame">
+                <link method="setBroker" on="frame"/>
+            </frame>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="FMLSender">
+            <object class="vib.auxiliary.activemq.semaine.FMLSender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="FMLReceiver">
+            <object class="vib.auxiliary.activemq.semaine.FMLReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="vib.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="EmotionMLReceiver">
+            <object class="vib.auxiliary.activemq.semaine.EmotionMLReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="EmotionML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="EmotionMLSender">
+            <object class="vib.auxiliary.activemq.semaine.EmotionMLSender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="EmotionML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="BMLReceiver">
+            <object class="vib.auxiliary.activemq.semaine.BMLReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="FMLBMLFileNameReceiver">
+            <object class="vib.auxiliary.activemq.semaine.FmlBmlFileNameReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="FileNames" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="BAPReceiver">
+            <object class="vib.auxiliary.activemq.semaine.BAPReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="FAPReceiver">
+            <object class="vib.auxiliary.activemq.semaine.FAPReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="FAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="BMLSender">
+            <object class="vib.auxiliary.activemq.semaine.BMLSender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="IntentionQueuing">
+            <object class="vib.auxiliary.activemq.semaine.IntentionQueuing" lib_id="vib_activemq"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="TextEditor">
+            <object class="vib.auxiliary.activemq.semaine.TextEditor" lib_id="vib_activemq"/>
+            <frame type="object"/>
+        </module>
+        <module name="KeyFrameSender">
+            <object class="vib.auxiliary.activemq.semaine.KeyFrameSender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Keyframes" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="BAPSender">
+            <object class="vib.auxiliary.activemq.semaine.BAPSender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="FAPSender">
+            <object class="vib.auxiliary.activemq.semaine.FAPSender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="semaine.data.synthesis.lowlevel.video.FAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="IKKeyframePerformer" style="Animations">
+            <object class="vib.core.animation.common.IKKeyframePerformer" lib_id="vib_gesture_animation"/>
+            <parameter default="true" get_method="getExpressiveTorso" get_on="object" name="ExpressiveTorso" set_method="setExpressiveTorso" set_on="object" type="boolean"/>
+        </module>
+        <module name="Body Head Noise" style="Animations">
+            <object class="vib.core.animation.performer.BodyAnimationNoiseGenerator" lib_id="vib_body_animation_performer"/>
+            <parameter default="true" get_method="isUseHead" get_on="object" name="useHead" set_method="setUseHead" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="isUseTorso" get_on="object" name="useTorso" set_method="setUseTorso" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="isUseLowerBody" get_on="object" name="useLowerBody" set_method="setUseLowerBody" set_on="object" type="boolean"/>
+            <parameter default="1" get_method="getIntensityHead" get_on="object" name="setIntensityHead" set_method="setIntensityHead" set_on="object" type="double"/>
+            <parameter default="1" get_method="getIntensityTorso" get_on="object" name="setIntensityTorso" set_method="setIntensityTorso" set_on="object" type="double"/>
+            <parameter default="1" get_method="getStep" get_on="object" name="step" set_method="setStep" set_on="object" type="double"/>
+        </module>
+        <module name="LipModel" style="Animations">
+            <object class="vib.core.animation.lipmodel.LipModel" lib_id="vib_lipmodel"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="AudioKeyframePerformer" style="Animations">
+            <object class="vib.core.keyframes.AudioKeyFramePerformer" lib_id="vib_signals"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="FaceKeyframePerformer" style="Animations">
+            <object class="vib.core.keyframes.face.FaceKeyframePerformer" lib_id="vib_signals"/>
+            <parameter default="true" get_method="isBlinking" get_on="object" name="blinking" set_method="setBlinking" set_on="object" type="boolean"/>
+        </module>
+        <module name="SimpleAUPerformer" style="Animations">
+            <object class="vib.core.keyframes.face.SimpleAUPerformer" lib_id="vib_signals"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="SimpleHeadPerformer" style="Animations">
+            <object class="vib.core.keyframes.face.SimpleHeadPerformer" lib_id="vib_signals"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="NulFilter" style="Animations">
+            <object class="vib.core.animation.mpeg4.fap.filters.NulFilter" lib_id="vib_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="IdleMovementFilter" style="Animations">
+            <object class="vib.core.animation.mpeg4.fap.filters.IdleMovementFilter" lib_id="vib_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="HeadNoise" style="Animations">
+            <object class="vib.core.animation.mpeg4.bap.filters.HeadNoise" lib_id="vib_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="IdleMovementEmitter" style="Animations">
+            <object class="vib.core.animation.mpeg4.fap.filters.IdleMovementEmitter" lib_id="vib_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="CallbacksReceiver">
+            <object class="vib.auxiliary.activemq.semaine.CallbacksReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="semaine.callback.output.Animation" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="FeedbacksSender">
+            <object class="vib.auxiliary.activemq.semaine.FeedbacksSender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="semaine.callback.output.feedback" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="Feedbacks" style="VIBDefault">
+            <object class="vib.core.feedbacks.Feedbacks" lib_id="vib_feedbacks"/>
+        </module>
+        <module name="Feedbacks2Logs" style="VIBDefault">
+            <object class="vib.core.feedbacks.Feedbacks2Logs" lib_id="vib_feedbacks"/>
+            <frame class="vib.core.feedbacks.gui.FeedbackPerformerFrame" lib_id="vib_feedbacks" type="frame">
+                <link method="setFeedbackPerformer" on="frame"/>
+            </frame>
+            <parameter default="false" get_method="getDetailedFeedbacks" get_on="frame" name="detailedFeedbacks" set_method="setDetailedFeedbacks" set_on="frame" type="boolean"/>
+            <parameter default="false" get_method="getDetailsOnFace" get_on="frame" name="face" set_method="setDetailsOnFace" set_on="frame" type="boolean"/>
+            <parameter default="false" get_method="getDetailsOnGestures" get_on="frame" name="gesture" set_method="setDetailsOnGestures" set_on="frame" type="boolean"/>
+        </module>
+        <module name="Environment" style="VIBDefault">
+            <object class="vib.core.util.environment.Environment" lib_id="vib_util"/>
+        </module>
+        <module name="MPEG4Animatable" style="Animations">
+            <object class="vib.core.animation.mpeg4.MPEG4Animatable" lib_id="vib_mpeg4"/>
+            <frame class="vib.core.utilx.gui.TreeNodeController" lib_id="vib_utilx" type="frame">
+                <link method="setTreeNode" on="frame"/>
+            </frame>
+            <parameter default="0" get_method="getCoordinateX" get_on="object" name="posX" set_method="setCoordinateX" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCoordinateY" get_on="object" name="posY" set_method="setCoordinateY" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCoordinateZ" get_on="object" name="posZ" set_method="setCoordinateZ" set_on="object" type="double"/>
+            <parameter default="0" get_method="getOrientationX" get_on="object" name="rotX" set_method="setOrientationX" set_on="object" type="double"/>
+            <parameter default="0" get_method="getOrientationY" get_on="object" name="rotY" set_method="setOrientationY" set_on="object" type="double"/>
+            <parameter default="0" get_method="getOrientationZ" get_on="object" name="rotZ" set_method="setOrientationZ" set_on="object" type="double"/>
+            <parameter default="1" get_method="getOrientationW" get_on="object" name="rotW" set_method="setOrientationW" set_on="object" type="double"/>
+            <parameter default="1" get_method="getScaleX" get_on="object" name="scaleX" set_method="setScaleX" set_on="object" type="double"/>
+            <parameter default="1" get_method="getScaleY" get_on="object" name="scaleY" set_method="setScaleY" set_on="object" type="double"/>
+            <parameter default="1" get_method="getScaleZ" get_on="object" name="scaleZ" set_method="setScaleZ" set_on="object" type="double"/>
+        </module>
+        <module name="PlayerOgre" style="Player">
+            <object class="vib.auxiliary.player.ogre.OgreFrame" lib_id="vib_playerOgre"/>
+            <frame type="object" windowed_only="true"/>
+            <parameter default="0" get_method="getCameraPositionX" get_on="object" name="posX" set_method="setCameraPositionX" set_on="object" type="double"/>
+            <parameter default="1.5" get_method="getCameraPositionY" get_on="object" name="posY" set_method="setCameraPositionY" set_on="object" type="double"/>
+            <parameter default="1.3" get_method="getCameraPositionZ" get_on="object" name="posZ" set_method="setCameraPositionZ" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCameraPitch" get_on="object" name="pitch" set_method="setCameraPitch" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCameraYaw" get_on="object" name="yaw" set_method="setCameraYaw" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCameraRoll" get_on="object" name="roll" set_method="setCameraRoll" set_on="object" type="double"/>
+        </module>
+        <module name="CaptureController" style="Player">
+            <object class="vib.auxiliary.player.ogre.capture.Capturecontroller" lib_id="vib_playerOgre"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="isRealTimeCapture" get_on="object" name="RealTime" set_method="setRealTimeCapture" set_on="object" type="boolean"/>
+            <parameter default="false" get_method="isUseTexture" get_on="object" name="UseTexture" set_method="setUseTexture" set_on="object" type="boolean"/>
+        </module>
+        <module name="XuggleVideoCapture" style="Player">
+            <object class="vib.tools.ogre.capture.video.XuggleVideoCapture" lib_id="vib_videoCapture"/>
+            <frame class="vib.tools.ogre.capture.video.CodecSelector" lib_id="vib_videoCapture" type="frame">
+                <link method="setXuggleVideoCapture" on="frame"/>
+            </frame>
+        </module>
+        <module name="FMLEditor" style="Intentions">
+            <object class="vib.tools.editors.fml.FMLEditor" lib_id="vib_editors"/>
+            <frame type="object"/>
+            <parameter default="false" get_method="isUpdatedFromEvent" get_on="object" name="updatedFromEvent" set_method="setUpdatedFromEvent" set_on="object" type="boolean"/>
+        </module>
+        <module name="BMLEditor" style="Signals">
+            <object class="vib.tools.editors.bml.BMLEditor" lib_id="vib_editors"/>
+            <frame type="object"/>
+            <parameter default="false" get_method="isUpdatedFromEvent" get_on="object" name="updatedFromEvent" set_method="setUpdatedFromEvent" set_on="object" type="boolean"/>
+        </module>
+        <module name="HandShapeEditor" style="Animations">
+            <object class="vib.tools.editors.handshape.HandShapeEditor" lib_id="vib_editors"/>
+            <frame type="object"/>
+        </module>
+        <module name="ConcatenateJoints" style="Animations">
+            <description>This module simplify BAPs for a more simple skeleton</description>
+            <object class="vib.core.animation.mpeg4.bap.filters.ConcatenateJoints" lib_id="vib_mpeg4"/>
+            <frame class="vib.tools.editors.ConcatenateJointsFrame" lib_id="vib_editors" type="frame">
+                <link method="setConcatenateJoints" on="frame"/>
+            </frame>
+            <parameter default="111111111111111111111111111111111111111001111111111111111111111111111111111111111111111110" get_method="getJointToUseString" get_on="object" name="jointToUse" set_method="parseJointToUseString" set_on="object" type="string"/>
+        </module>
+        <module name="GestureAnimationEditor" style="BehaviorRealizer">
+            <object class="vib.tools.animation.gestureeditor.GestureEditor" lib_id="GestureAnimationEditorLib"/>
+            <frame type="object"/>
+        </module>
+        <module name="TorsoEditor" style="BehaviorRealizer">
+            <object class="vib.core.animation.body.TorsoEditor" lib_id="vib_body_animation_performer"/>
+            <frame type="object"/>
+        </module>
+        <module name="AudioSender">
+            <object class="vib.auxiliary.activemq.semaine.AudioSender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="audio" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="LipBlender" style="Animations">
+            <object class="vib.core.animation.mpeg4.fap.filters.LipBlender" lib_id="vib_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="BodyBlender" style="Animations">
+            <object class="vib.core.animation.mpeg4.bap.filters.BodyBlender" lib_id="vib_mpeg4"/>
+            <frame type="noFrame"/>
+            <parameter default="1" get_method="getK_factor" get_on="object" name="k_factor" set_method="setK_factor" set_on="object" type="double"/>
+        </module>
+        <module name="Thrift.FAPSender">
+            <object class="vib.auxiliary.thrift.FAPSender" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.FAPServerToExternal">
+            <object class="vib.auxiliary.thrift.FAPServerToExternal" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.BAPServerToExternal">
+            <object class="vib.auxiliary.thrift.BAPServerToExternal" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9900" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.FAPReceiver">
+            <object class="vib.auxiliary.thrift.FAPReceiver" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.FAPExternalClient">
+            <object class="vib.auxiliary.thrift.FAPExternalClient" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.BAPSender">
+            <object class="vib.auxiliary.thrift.BAPSender" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.BAPReceiver">
+            <object class="vib.auxiliary.thrift.BAPReceiver" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.FMLSender">
+            <object class="vib.auxiliary.thrift.FMLSender" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.BMLSender">
+            <object class="vib.auxiliary.thrift.BMLSender" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.AudioSender">
+            <object class="vib.auxiliary.thrift.AudioSender" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="true" get_method="getSendAudioBuffer" get_on="object" name="sendAudioBuffer" set_method="setSendAudioBuffer" set_on="object" type="boolean"/>
+        </module>
+        <module name="Thrift.AudioServerToExternal">
+            <object class="vib.auxiliary.thrift.AudioServerToExternal" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9009" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="true" get_method="getSendAudioBuffer" get_on="object" name="sendAudioBuffer" set_method="setSendAudioBuffer" set_on="object" type="boolean"/>
+        </module>
+        <module name="Thrift.CommandReceiver">
+            <object class="vib.auxiliary.thrift.CommandReceiver" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9911" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.ShoreReceiverToSignal">
+            <object class="vib.auxiliary.thrift.ShoreReceiverToSignal" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.ShoreReceiverToAU">
+            <object class="vib.auxiliary.thrift.ShoreReceiverToAU" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.FMLReceiver">
+            <object class="vib.auxiliary.thrift.FMLReceiver" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.BMLReceiver">
+            <object class="vib.auxiliary.thrift.BMLReceiver" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift.MessageToLogs">
+            <object class="vib.auxiliary.thrift.ThriftMessageToLogs" lib_id="vib_thrift"/>
+            <frame class="vib.auxiliary.thrift.gui.ThriftFrame" lib_id="vib_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="SubjectPlanner" style="IntentPlanner">
+            <object class="vib.core.SubjectPlanner.SubjectPlanner" lib_id="vib_subjects"/>
+            <parameter default="5" get_method="getUserEngagementValue" get_on="object" name="userEngagement" set_method="setUserEngagementValue" set_on="object" type="double"/>
+        </module>
+        <module name="IntentionQueue" style="Intentions">
+            <object class="vib.core.behaviorplanner.IntentionQueue" lib_id="vib_behavior_planner"/>
+        </module>
+        <module name="SSISender">
+            <object class="vib.auxiliary.activemq.semaine.SSISender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="SSI" get_method="getTopic" get_on="object" name="Topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="Port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="Host" set_method="setHost" set_on="object" type="string"/>
+        </module>
+        <module name="BMLCallbacksSender">
+            <object class="vib.auxiliary.activemq.semaine.BMLCallbacksSender" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="vib.output.feedback.BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="MessageLogger">
+            <object class="vib.auxiliary.activemq.semaine.MessageLogger" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="InterruptionManager" style="Intentions">
+            <object class="vib.core.interruptions.InterruptionManager" lib_id="vib_interruptions"/>
+        </module>
+        <module name="BMLCallbacksReceiver">
+            <object class="vib.auxiliary.activemq.semaine.BMLCallbacksReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="BodyArmNoise" style="Animations">
+            <object class="vib.core.animation.performer.BodyAnimationArmNoise" lib_id="vib_body_animation_performer"/>
+        </module>
+        <module name="AnimationKeyframePerformer" style="Animations">
+            <object class="vib.core.animation.performer.AnimationKeyframePerformer" lib_id="vib_body_animation_performer"/>
+        </module>
+    </modules>
+    <!-- list of libraries and their dependencies -->
+    <libs>
+        <lib id="vib_util" path="./Common/Lib/Internal/Util.jar">
+            <needs path="./vib.ini"/>
+            <needs path="./empty.xml"/>
+            <needs path="./Common/Data/characters/*"/>
+            <needs path="./Locale/*"/>
+        </lib>
+        <lib id="vib_utilx" path="./Common/Lib/Internal/Utilx.jar">
+            <depends lib_id="vib_util"/>
+        </lib>
+        <lib id="vib_intentions" path="./Common/Lib/Internal/Intentions.jar">
+            <depends lib_id="vib_util"/>
+        </lib>
+        <lib id="vib_signals" path="./Common/Lib/Internal/Signals.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_mpeg4"/>
+            <needs path="./BehaviorRealizer/BehaviorLexicon/*.xml"/>
+            <needs path="./BehaviorRealizer/BehaviorLexicon/*.xsd"/>
+            <needs path="./BehaviorRealizer/BehaviorLexicon/*.dtd"/>
+            <needs path="./Common/Data/xml/*.xsd"/>
+            <needs path="./BehaviorRealizer/Constraint/GestureSpace.xml"/>
+        </lib>
+        <lib id="vib_mpeg4" path="./Common/Lib/Internal/MPEG4.jar">
+            <depends lib_id="vib_util"/>
+        </lib>
+        <lib id="vib_bvh" path="./Common/Lib/Internal/BvhMocap.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_mpeg4"/>
+            <depends lib_id="vib_gesture_animation"/>
+        </lib>
+        <lib id="vib_listener_intent_planner" path="./Common/Lib/Internal/ListenerIntentPlanner.jar">
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_util"/>
+            <needs path="./ListenerIntentPlanner/**"/>
+            <needs path="./Common/Data/xml/profiles.xsd"/>
+        </lib>
+        <lib id="vib_behavior_planner" path="./Common/Lib/Internal/BehaviorPlanner.jar">
+            <depends lib_id="vib_feedbacks"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_util"/>
+            <needs path="./BehaviorPlanner/**"/>
+            <needs path="./Common/Data/xml/behaviorsets.xsd"/>
+            <needs path="./Common/Data/xml/profiles.xsd"/>
+            <needs path="./Common/Data/xml/qualifiers.xsd"/>
+            <needs path="./Common/Data/xml/multimodal.dtd"/>
+        </lib>
+        <lib id="vib_behavior_realizer" path="./Common/Lib/Internal/BehaviorRealizer.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_feedbacks"/>
+        </lib>
+        <lib id="ext_openmary_3.6" path="./Common/Lib/External/maryclient-3.6.jar"/>
+        <lib id="ext_openmary_4.3" path="./Common/Lib/External/maryclient-4.3.jar"/>
+        <lib id="vib_openmary" path="./Common/Lib/Internal/openMary.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="ext_openmary_3.6"/>
+            <depends lib_id="ext_openmary_4.3"/>
+        </lib>
+        <lib id="vib_cereproc" path="./Common/Lib/Internal/Cereproc.jar">
+            <depends lib_id="vib_util"/>
+            <needs path="./Common/Lib/External/cereproc/**"/>
+            <needs path="./Common/Data/Cereproc/*"/>
+            <depends lib_id="ext_cereproc"/>
+        </lib>
+        <lib id="ext_activemq" path="./Common/Lib/External/activemq-all-5.10.0.jar">
+            <depends lib_id="ext_thrift.httpclient-4.3.4"/>
+            <depends lib_id="ext_thrift.httpcore-4.3.2"/>
+            <depends lib_id="ext_thrift.servlet-api-2.5"/>
+        </lib>
+        <lib id="vib_activemq" path="./Common/Lib/Internal/activemq.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="ext_activemq"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_mpeg4"/>
+            <depends lib_id="vib_feedbacks"/>
+            <depends lib_id="vib_emotionml"/>
+            <depends lib_id="vib_NN"/>
+            <depends lib_id="vib_GraphicNN"/>
+        </lib>
+        <lib id="vib_gesture_animation" path="./Common/Lib/Internal/GestureAnimation.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_mpeg4"/>
+            <needs path="./BehaviorRealizer/Skeleton/*"/>
+            <needs path="./BehaviorRealizer/AnimationLexicon/*"/>
+        </lib>
+        <lib id="vib_animation_core" path="./Common/Lib/Internal/AnimationCore.jar">
+            <depends lib_id="vib_util"/>
+        </lib>
+        <lib id="vib_animation_dynamics" path="./Common/Lib/Internal/AnimationDynamics.jar">
+            <depends lib_id="ext_commons-math3-3.3"/>
+        </lib>
+        <lib id="ext_commons-math3-3.3" path="./Common/Lib/External/commons-math3-3.3.jar"/>
+        <lib id="vib_body_animation_performer" path="./Common/Lib/Internal/BodyAnimationPerformer.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_mpeg4"/>
+            <depends lib_id="vib_animation_core"/>
+            <depends lib_id="ode"/>
+            <depends lib_id="vib_animation_dynamics"/>
+            <depends lib_id="ext_commons-math3-3.3"/>
+            <needs path="./BehaviorRealizer/Skeleton/*"/>
+            <needs path="./BehaviorRealizer/AnimationLexicon/*"/>
+        </lib>
+        <lib id="vib_lipmodel" path="./Common/Lib/Internal/LipModel.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_mpeg4"/>
+            <needs path="./BehaviorRealizer/LipModel/*"/>
+        </lib>
+        <lib id="vib_feedbacks" path="./Common/Lib/Internal/Feedbacks.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_intentions"/>
+        </lib>
+        <lib id="vib_playerOgre" path="./Player/Lib/Internal/playerOgre.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_mpeg4"/>
+            <needs path="./Player/Data/*"/>
+            <needs path="./Player/Data/Shaders/**"/>
+            <needs path="./Player/Data/media/*"/>
+            <needs path="./Player/Data/media/dynamicfacialcolor/**"/>
+            <needs path="./Player/Data/media/greta/**"/>
+            <needs path="./Player/Data/media/obadiah/**"/>
+            <needs path="./Player/Data/media/office/*"/>
+            <needs path="./Player/Data/media/poppy/**"/>
+            <needs path="./Player/Data/media/prudence/**"/>
+            <needs path="./Player/Data/media/spike/**"/>
+            <needs path="./Player/Data/media/camille/**"/>
+            <needs path="./Player/Lib/External/Linux32/**"/>
+            <needs path="./Player/Lib/External/Linux64/**"/>
+            <needs path="./Player/Lib/External/Win32/**"/>
+            <needs path="./Player/Lib/External/Win64/**"/>
+            <needs path="./Player/Lib/External/xuggle-xuggler-5.4.jar"/>
+        </lib>
+        <lib id="vib_videoCapture" path="./Player/Lib/Internal/VideoCapture.jar">
+            <depends lib_id="vib_playerOgre"/>
+            <depends lib_id="ext_xuggle"/>
+            <depends lib_id="ext_slf4j_api"/>
+        </lib>
+        <lib id="ext_xuggle" path="./Player/Lib/External/xuggle-xuggler-5.4.jar">
+            <depends lib_id="ext_rmq.commons-cli-1.1"/>
+        </lib>
+        <!-- gpl -->
+        <lib id="ext_slf4j_api" path="./Common/Lib/External/slf4j-api-1.7.2.jar"/>
+        <lib id="ext_log4j" path="./Common/Lib/External/log4j-1.2.15.jar"/>
+        <lib id="ext_slf4j_log4j" path="./Common/Lib/External/log4j-over-slf4j-1.7.2.jar"/>
+        <lib id="GestureAnimationEditorLib" path="./Common/Lib/Internal/GestureAnimationEditor.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_utilx"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_animation_core"/>
+            <depends lib_id="vib_body_animation_performer"/>
+        </lib>
+        <lib id="vib_editors" path="./Common/Lib/Internal/Editors.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_utilx"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_intentions"/>
+            <needs path="./BehaviorRealizer/AnimationLexicon/HandShape*"/>
+        </lib>
+        <lib id="vib_environment_manager_generic" path="./Common/Lib/Internal/EnvironmentManager.jar">
+            <depends lib_id="vib_environment_manager_activemq"/>
+            <depends lib_id="vib_environment_manager_thrift"/>
+        </lib>
+        <lib id="vib_environment_manager_activemq" path="./Common/Lib/Internal/EnvironmentManager.jar">
+            <depends lib_id="vib_activemq"/>
+            <depends lib_id="vib_mpeg4"/>
+            <depends lib_id="vib_util"/>
+        </lib>
+        <lib id="vib_environment_manager_thrift" path="./Common/Lib/Internal/EnvironmentManager.jar">
+            <depends lib_id="vib_mpeg4"/>
+            <depends lib_id="vib_thrift"/>
+            <depends lib_id="vib_util"/>
+        </lib>
+        <lib id="vib_thrift" path="./Common/Lib/Internal/Thrift.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_mpeg4"/>
+            <depends lib_id="vib_speech"/>
+            <depends lib_id="vib_socialparameters"/>
+            <depends lib_id="ext_thrift.codec-1.6"/>
+            <depends lib_id="ext_thrift.logging-1.1.3"/>
+            <depends lib_id="ext_thrift.httpclient-4.3.4"/>
+            <depends lib_id="ext_thrift.httpcore-4.3.2"/>
+            <depends lib_id="ext_thrift.libthrift-0.9.2"/>
+            <depends lib_id="ext_thrift.servlet-api-2.5"/>
+            <depends lib_id="ext_thrift.slf4j-api-1.5.8"/>
+            <depends lib_id="ext_thrift.slf4j-log4j12-1.5.8"/>
+            <depends lib_id="ext_log4j"/>
+        </lib>
+        <lib id="ext_thrift.codec-1.6" path="./Common/Lib/External/Thrift/commons-codec-1.6.jar"/>
+        <lib id="ext_thrift.logging-1.1.3" path="./Common/Lib/External/Thrift/commons-logging-1.1.3.jar"/>
+        <lib id="ext_thrift.httpclient-4.3.4" path="./Common/Lib/External/Thrift/httpclient-4.3.4.jar"/>
+        <lib id="ext_thrift.httpcore-4.3.2" path="./Common/Lib/External/Thrift/httpcore-4.3.2.jar"/>
+        <lib id="ext_thrift.libthrift-0.9.2" path="./Common/Lib/External/Thrift/libthrift-0.9.2-rc1.jar"/>
+        <lib id="ext_thrift.servlet-api-2.5" path="./Common/Lib/External/Thrift/servlet-api-2.5.jar"/>
+        <lib id="ext_thrift.slf4j-api-1.5.8" path="./Common/Lib/External/slf4j-api-1.5.8.jar"/>
+        <lib id="ext_thrift.slf4j-log4j12-1.5.8" path="./Common/Lib/External/slf4j-log4j12-1.5.8.jar"/>
+        <lib id="vib_emotionml" path="./Common/Lib/Internal/EmotionML.jar">
+            <depends lib_id="vib_socialparameters"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_util"/>
+        </lib>
+        <lib id="vib_socialparameters" path="./Common/Lib/Internal/SocialParameters.jar">
+            <depends lib_id="vib_util"/>
+        </lib>
+        <lib id="ext_rmq.junit" path="./Common/Lib/External/junit-4.11.jar"/>
+        <lib id="vib_subjects" path="./Common/Lib/Internal/SubjectPlanner.jar">
+            <depends lib_id="vib_util"/>
+        </lib>
+        <lib id="ext_jcommon-1.0.23" path="./Common/Lib/External/jcommon-1.0.23.jar"/>
+        <lib id="vib_ssi" path="./Common/Lib/Internal/SSI.jar">
+            <depends lib_id="vib_activemq"/>
+            <depends lib_id="ext_activemq"/>
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_signals"/>
+        </lib>
+        <lib id="ext_cereproc" path="Common/Lib/External/cerevoice_eng.jar">
+            <needs path="Common/Data/Cereproc/**"/>
+        </lib>
+        <lib id="vib_interruptions" path="./Common/Lib/Internal/Interruptions.jar">
+            <depends lib_id="vib_feedbacks"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_util"/>
+        </lib>
+    </libs>
+    <!-- list of how to connect and disconnect modules -->
+    <connectors>
+        <connector id="SSIFrameEmitterToSSIFramePerformer">
+            <input class="vib.auxiliary.ssi.SSIFrameEmitter" lib_id="vib_ssi"/>
+            <output class="vib.auxiliary.ssi.SSIFramePerfomer" lib_id="vib_ssi"/>
+            <connect from="input" method="addSSIFramePerformer" to="output"/>
+            <disconnect from="input" method="removeSSIFramePerformer" to="output"/>
+        </connector>
+        <connector id="InterruptionReactionEmitterToInterruptionReactionPerformer">
+            <input class="vib.core.interruptions.reactions.InterruptionReactionEmitter" lib_id="vib_interruptions"/>
+            <output class="vib.core.interruptions.reactions.InterruptionReactionPerformer" lib_id="vib_interruptions"/>
+            <connect from="input" method="addInterruptionReactionPerformer" to="output"/>
+            <disconnect from="input" method="removeInterruptionReactionPerformer" to="output"/>
+        </connector>
+        <connector id="IntentionEmitterToIntentionPerformer">
+            <input class="vib.core.intentions.IntentionEmitter" lib_id="vib_intentions"/>
+            <output class="vib.core.intentions.IntentionPerformer" lib_id="vib_intentions"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
+            <!-- it will call input.removeIntentionPerformer(output) -->
+        </connector>
+        <connector id="SignalEmitterToSignalPerformer">
+            <input class="vib.core.signals.SignalEmitter" lib_id="vib_signals"/>
+            <output class="vib.core.signals.SignalPerformer" lib_id="vib_signals"/>
+            <connect from="input" method="addSignalPerformer" to="output"/>
+            <!-- it will call input.addSignalPerformer(output) -->
+            <disconnect from="input" method="removeSignalPerformer" to="output"/>
+            <!-- it will call input.removeSignalPerformer(output) -->
+        </connector>
+        <connector id="AudioEmitter To AudioPerformer">
+            <input class="vib.core.util.audio.AudioEmitter" lib_id="vib_util"/>
+            <output class="vib.core.util.audio.AudioPerformer" lib_id="vib_util"/>
+            <connect from="input" method="addAudioPerformer" to="output"/>
+            <disconnect from="input" method="removeAudioPerformer" to="output"/>
+        </connector>
+        <connector id="SignalEmitterToBMLSignalPerformer">
+            <input class="vib.core.signals.BMLSignalEmitter" lib_id="vib_signals"/>
+            <output class="vib.core.signals.BMLSignalPerformer" lib_id="vib_signals"/>
+            <connect from="input" method="add" to="output"/>
+            <!-- it will call input.add(output) -->
+            <disconnect from="null" method="" to="null"/>
+            <!-- TODO -->
+        </connector>
+        <connector id="SignalEmitterToFMLIntentionPerformer">
+            <input class="vib.core.signals.FMLIntentionEmitter" lib_id="vib_signals"/>
+            <output class="vib.core.signals.FMLIntentionPerformer" lib_id="vib_signals"/>
+            <connect from="input" method="add" to="output"/>
+            <!-- it will call input.add(output) -->
+            <disconnect from="null" method="" to="null"/>
+            <!-- TODO -->
+        </connector>
+        <connector id="addSignalSelectorInBehaviorPlanner">
+            <input class="vib.core.behaviorplanner.SignalSelector" lib_id="vib_behavior_planner"/>
+            <output class="vib.core.behaviorplanner.Planner" lib_id="vib_behavior_planner"/>
+            <connect from="output" method="addSelector" to="input"/>
+            <!-- it will call output.addSelector(input) -->
+            <disconnect from="null" method="" to="null"/>
+            <!-- TODO -->
+        </connector>
+        <connector id="AnimationFrameEmitter To AnimationFramePerformer">
+            <input class="vib.core.util.animation.AnimationFrameEmitter" lib_id="vib_util"/>
+            <output class="vib.core.util.animation.AnimationFramePerformer" lib_id="vib_util"/>
+            <connect from="input" method="addAnimationFramePerformer" to="output"/>
+            <disconnect from="input" method="removeAnimationFramePerformer" to="output"/>
+        </connector>
+        <connector id="BAPFramesEmitterToBAPFramesPerformer">
+            <input class="vib.core.animation.mpeg4.bap.BAPFramesEmitter" lib_id="vib_mpeg4"/>
+            <output class="vib.core.animation.mpeg4.bap.BAPFramesPerformer" lib_id="vib_mpeg4"/>
+            <connect from="input" method="addBAPFramesPerformer" to="output"/>
+            <!-- it will call input.addBAPFramesPerformer(output) -->
+            <disconnect from="input" method="removeBAPFramesPerformer" to="output"/>
+            <!-- it will call input.removeBAPFramesPerformer(output) -->
+        </connector>
+        <connector id="FAPFramesEmitterToFAPFramesPerformer">
+            <input class="vib.core.animation.mpeg4.fap.FAPFrameEmitter" lib_id="vib_mpeg4"/>
+            <output class="vib.core.animation.mpeg4.fap.FAPFramePerformer" lib_id="vib_mpeg4"/>
+            <connect from="input" method="addFAPFramePerformer" to="output"/>
+            <!-- it will call input.addFAPFramePerformer(output) -->
+            <disconnect from="input" method="removeFAPFramePerformer" to="output"/>
+            <!-- it will call input.removeFAPFramePerformer(output) -->
+        </connector>
+        <connector id="LipSourceForLipBlender">
+            <input class="vib.core.animation.mpeg4.fap.FAPFrameEmitter" lib_id="vib_mpeg4"/>
+            <output class="vib.core.animation.mpeg4.fap.filters.LipBlender" lib_id="vib_mpeg4"/>
+            <connect from="output" method="setLipSource" to="input"/>
+            <disconnect from="output" method="dettachLipSource" to="input"/>
+        </connector>
+        <connector id="LaughterSourceForBodyBlender">
+            <input class="vib.core.animation.mpeg4.bap.BAPFramesEmitter" lib_id="vib_mpeg4"/>
+            <output class="vib.core.animation.mpeg4.bap.filters.BodyBlender" lib_id="vib_mpeg4"/>
+            <connect from="output" method="setLaughterSource" to="input"/>
+            <disconnect from="output" method="dettachLaughterSource" to="input"/>
+        </connector>
+        <connector id="AUEmitterToAUPerformer">
+            <input class="vib.core.keyframes.face.AUEmitter" lib_id="vib_signals"/>
+            <output class="vib.core.keyframes.face.AUPerformer" lib_id="vib_signals"/>
+            <connect from="input" method="addAUPerformer" to="output"/>
+            <!-- it will call input.add(output) -->
+            <disconnect from="input" method="removeAUPerformer" to="output"/>
+            <!-- TODO -->
+        </connector>
+        <connector id="addLogOutput">
+            <input class="vib.core.utilx.gui.LogsController" lib_id="vib_utilx"/>
+            <output class="vib.core.util.log.LogOutput" lib_id="vib_util"/>
+            <connect from="input" method="addLogOutput" to="output"/>
+            <disconnect from="input" method="removeLogOutput" to="output"/>
+        </connector>
+        <connector id="setTTS" unique="true">
+            <input class="vib.core.utilx.gui.TTSController" lib_id="vib_utilx"/>
+            <output class="vib.core.util.speech.TTS" lib_id="vib_util"/>
+            <connect from="input" method="setTTS" to="output"/>
+            <disconnect from="input" method="setTTS" to="null"/>
+        </connector>
+        <connector id="setLaughSynthetizer" unique="true">
+            <input class="vib.core.utilx.gui.LaughSynthetizerController" lib_id="vib_utilx"/>
+            <output class="vib.core.util.laugh.LaughSynthetizer" lib_id="vib_util"/>
+            <connect from="input" method="setLaughSynthetizer" to="output"/>
+            <disconnect from="input" method="setLaughSynthetizer" to="null"/>
+        </connector>
+        <connector id="SignalEmitterToKeyFramePerformer">
+            <input class="vib.core.keyframes.KeyframeEmitter" lib_id="vib_signals"/>
+            <output class="vib.core.keyframes.KeyframePerformer" lib_id="vib_signals"/>
+            <connect from="input" method="addKeyframePerformer" to="output"/>
+            <!-- it will call input.addKeyframePerformer(output) -->
+            <disconnect from="input" method="removeKeyframePerformer" to="output"/>
+            <!-- it will call input.removeKeyframePerformer(output) -->
+        </connector>
+        <connector id="TextEditor" unique="true">
+            <input class="vib.auxiliary.activemq.semaine.TextEditor" lib_id="vib_activemq"/>
+            <output class="vib.auxiliary.activemq.TextSender" lib_id="vib_activemq"/>
+            <connect from="input" method="setSender" to="output"/>
+            <disconnect from="input" method="setSender" to="null"/>
+        </connector>
+        <connector id="addFeedbackInput">
+            <input class="vib.core.feedbacks.CallbackEmitter" lib_id="vib_feedbacks"/>
+            <output class="vib.core.feedbacks.CallbackPerformer" lib_id="vib_feedbacks"/>
+            <connect from="input" method="addCallbackPerformer" to="output"/>
+            <disconnect from="input" method="removeCallbackPerformer" to="output"/>
+        </connector>
+        <connector id="addFeedbackOutput">
+            <input class="vib.core.feedbacks.FeedbackEmitter" lib_id="vib_feedbacks"/>
+            <output class="vib.core.feedbacks.FeedbackPerformer" lib_id="vib_feedbacks"/>
+            <connect from="input" method="addFeedbackPerformer" to="output"/>
+            <disconnect from="input" method="removeFeedbackPerformer" to="output"/>
+        </connector>
+        <connector id="connectPlayerToEnvironment" unique="true">
+            <input class="vib.auxiliary.player.ogre.OgreFrame" lib_id="vib_playerOgre"/>
+            <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>
+            <connect from="input" method="setEnvironment" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="EnvToolToEnvironment" unique="true">
+            <input class="vib.tools.editors.environment.EnvTool" lib_id="vib_editors"/>
+            <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>
+            <connect from="input" method="setEnvironment" to="output"/>
+            <disconnect from="input" method="setEnvironment" to="null"/>
+        </connector>
+        <connector id="connectActiveMQPrimaryEnvironmentServerToEnvironment" unique="true">
+            <input class="vib.auxiliary.environmentmanager.impl.activemq.PrimaryEnvironmentServer" lib_id="vib_environment_manager_activemq"/>
+            <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>
+            <connect from="input" method="setLocalEnvironment" to="output"/>
+            <disconnect from="input" method="setLocalEnvironment" to="null"/>
+        </connector>
+        <connector id="connectActiveMQReplicaEnvironmentServerToEnvironment" unique="true">
+            <input class="vib.auxiliary.environmentmanager.impl.activemq.ReplicaEnvironmentServer" lib_id="vib_environment_manager_activemq"/>
+            <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>
+            <connect from="input" method="setLocalEnvironment" to="output"/>
+            <disconnect from="input" method="setLocalEnvironment" to="null"/>
+        </connector>
+        <connector id="connectCaptureControllerToCapturable" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.Capturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.auxiliary.player.ogre.capture.Capturable" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCapturable" to="output"/>
+            <disconnect from="input" method="setCapturable" to="null"/>
+        </connector>
+        <connector id="connectCaptureControllerToCaptureOutput" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.Capturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.auxiliary.player.ogre.capture.CaptureOutput" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCaptureOutput" to="output"/>
+            <disconnect from="input" method="setCaptureOutput" to="null"/>
+        </connector>
+        <connector id="connectEnvironmentToRealizer" unique="true">
+            <input class="vib.core.util.environment.Environment" lib_id="vib_util"/>
+            <output class="vib.core.behaviorrealizer.Realizer" lib_id="vib_behavior_realizer"/>
+            <connect from="output" method="setEnvironment" to="input"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="connectAnimatableToEnvironment" unique="true">
+            <input class="vib.core.util.environment.Animatable" lib_id="vib_util"/>
+            <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>
+            <connect from="output" method="addNode" to="input"/>
+            <disconnect from="output" method="removeNode" to="input"/>
+        </connector>
+        <connector id="Semaine Command Bridge">
+            <input class="vib.auxiliary.activemq.semaine.SemaineCommandEmitter" lib_id="vib_activemq"/>
+            <output class="vib.auxiliary.activemq.semaine.SemaineCommandPerformer" lib_id="vib_activemq"/>
+            <connect from="input" method="addSemaineCommandPerformer" to="output"/>
+            <disconnect from="input" method="removeSemaineCommandPerformer" to="output"/>
+        </connector>
+        <connector id="FileNameEmitterToFileNamePerformer">
+            <input class="vib.core.util.file.FileNameEmitter" lib_id="vib_util"/>
+            <output class="vib.core.util.file.FileNamePerformer" lib_id="vib_util"/>
+            <connect from="input" method="addFileNamePerformer" to="output"/>
+            <disconnect from="input" method="removeFileNamePerformer" to="output"/>
+        </connector>
+        <connector id="SocialParameterEmitterToSocialParameterPerformer">
+            <input class="vib.auxiliary.socialparameters.SocialParameterEmitter" lib_id="vib_socialparameters"/>
+            <output class="vib.auxiliary.socialparameters.SocialParameterPerformer" lib_id="vib_socialparameters"/>
+            <connect from="input" method="addSocialParameterPerformer" to="output"/>
+            <disconnect from="input" method="removeSocialParameterPerformer" to="output"/>
+        </connector>
+        <connector id="connectSSIFilterToSSITranslator" unique="true">
+            <input class="vib.auxiliary.ssi.SSIFilterForm" lib_id="vib_ssi"/>
+            <output class="vib.auxiliary.ssi.SSIXMLToFrameTranslator" lib_id="vib_ssi"/>
+            <connect from="input" method="setSSITranslator" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+    </connectors>
+    <!-- list of styles -->
+    <styles>
+        <style color="0xFFAAAA" name="IntentPlanner"/>
+        <style color="0xFFDD99" name="Intentions"/>
+        <style color="0xFFFF88" name="BehaviorPlanner"/>
+        <style color="0xDDFF88" name="Signals"/>
+        <style color="0x88FF88" name="BehaviorRealizer"/>
+        <style color="0x88FFDD" name="Animations"/>
+        <style color="0x77EEFF" name="Player"/>
+        <style color="0xCCCCFF" name="VIBDefault"/>
+        <default/>
+    </styles>
+</modular>

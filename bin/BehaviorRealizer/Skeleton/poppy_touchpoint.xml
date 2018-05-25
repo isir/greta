@@ -1,0 +1,114 @@
+<touchpoints>
+<touchpoint id="skullbase_L" type="bone" reference="skullbase">
+ <posOffset x="3" y="-3" z="4"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="skullbase_R" type="bone" reference="skullbase">
+ <posOffset x="-3" y="-3" z="4"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="skulltop_L" type="bone" reference="skullbase">
+ <posOffset x="4" y="8" z="4"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="skulltop_R" type="bone" reference="skullbase">
+ <posOffset x="-4" y="8" z="4"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="nose" type="bone" reference="skullbase">
+ <posOffset x="2" y="0" z="8"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="nose_L" type="bone" reference="skullbase">
+ <posOffset x="2" y="0" z="8"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="nose_R" type="bone" reference="skullbase">
+ <posOffset x="-2" y="0" z="8"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="chin" type="bone" reference="skullbase">
+ <posOffset x="0" y="-3" z="7"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="chin_L" type="bone" reference="skullbase">
+ <posOffset x="2" y="-3" z="7"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="chin_R" type="bone" reference="skullbase">
+ <posOffset x="-2" y="-3" z="7"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="shoulder_L" type="bone" reference="l_shoulder">
+ <posOffset x="-4" y="2" z="6"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="shoulder_R" type="bone" reference="r_shoulder">
+ <posOffset x="4" y="2" z="6"/>
+ <rotOffset x="0" y="0" z="-1"/>
+</touchpoint>
+<touchpoint id="chest" type="bone" reference="vt5">
+ <posOffset x="0" y="0" z="12"/>
+ <rotOffset x="0" y="1" z="-1"/>
+</touchpoint>
+<touchpoint id="wrist_L" type="bone" reference="l_wrist">
+ <posOffset x="0" y="0" z="0"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="wrist_R" type="bone" reference="r_wrist">
+ <posOffset x="0" y="0" z="0"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="elbow_L" type="bone" reference="l_elbow">
+ <posOffset x="0" y="0" z="5"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="elbow_R" type="bone" reference="r_elbow">
+ <posOffset x="0" y="0" z="5"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="belly" type="bone" reference="HumanoidRoot">
+ <posOffset x="0" y="10" z="10"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="belly_L" type="bone" reference="HumanoidRoot">
+ <posOffset x="5" y="10" z="10"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="belly_R" type="bone" reference="HumanoidRoot">
+ <posOffset x="-5" y="10" z="10"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="hip_L" type="bone" reference="l_hip">
+ <posOffset x="0" y="10" z="6"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="hip_R" type="bone" reference="r_hip">
+ <posOffset x="0" y="10" z="6"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="hipwide_L" type="bone" reference="l_hip">
+ <posOffset x="6" y="10" z="3"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="hipwide_R" type="bone" reference="r_hip">
+ <posOffset x="-6" y="10" z="3"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="thive_L" type="bone" reference="l_hip">
+ <posOffset x="0" y="0" z="6"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="thive_R" type="bone" reference="r_hip">
+ <posOffset x="0" y="0" z="6"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="knee_L" type="bone" reference="l_knee">
+ <posOffset x="0" y="0" z="6"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+<touchpoint id="knee_R" type="bone" reference="r_knee">
+ <posOffset x="0" y="0" z="6"/>
+ <rotOffset x="0" y="1" z="0"/>
+</touchpoint>
+</touchpoints>

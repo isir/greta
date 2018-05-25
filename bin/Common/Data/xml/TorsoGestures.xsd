@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+    <xsd:element name="TorsoGestures" type="TorsoGesturesType"/>
+
+    <xsd:complexType name="TorsoGesturesType">
+        <xsd:sequence>
+            <xsd:element name="torso" type="torsoType" minOccurs="1" maxOccurs="unbounded"/>
+            <xsd:element name="torsoDirectionShift" type="torsoDirectionShiftType" minOccurs="1" maxOccurs="unbounded"/>
+        </xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="torsoType">
+        <xsd:sequence>
+            <xsd:element name="KeyPoint" type="KeyPointType" minOccurs="0" maxOccurs="2"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="lexeme" type="xsd:string" use="required"/>
+        <xsd:attribute name="amount" type="xsd:float" use="optional"/>
+        <xsd:attribute name="repetition" type="xsd:integer" use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="torsoDirectionShiftType">
+        <xsd:sequence>
+            <xsd:element name="VerticalTorsion" type="TorsoParamType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="SagittalTilt" type="TorsoParamType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="LateralRoll" type="TorsoParamType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="Collapse" type="TorsoParamType" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute name="id" type="xsd:string" use="required"/>
+        <xsd:attribute name="target" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="KeyPointType">
+        <xsd:sequence>
+            <xsd:element name="VerticalTorsion" type="TorsoParamType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="SagittalTilt" type="TorsoParamType" minOccurs="0" maxOccurs="1"/>
+            <xsd:element name="LateralRoll" type="TorsoParamType" minOccurs="0" maxOccurs="1"/>
+        </xsd:sequence>
+        <xsd:attribute name="type" type="xsd:string" use="optional"/>
+    </xsd:complexType>
+
+    <xsd:complexType name="TorsoParamType">
+        <xsd:attribute name="direction" type="xsd:string" use="required"/>
+        <xsd:attribute name="amount" type="xsd:float" use="optional"/>
+        <xsd:attribute name="min" type="xsd:float" use="required"/>
+        <xsd:attribute name="max" type="xsd:float" use="required"/>
+    </xsd:complexType>
+    
+</xsd:schema>

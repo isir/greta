@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="VIB_Build_Netbeans_V6" default="default" xmlns:j2seproject1="http://www.netbeans.org/ns/j2se-project/1" >
+    <description>VIB Builder for Netbeans 6.x</description>
+
+    <!-- include common task for Netbeans -->
+    <import file="./NB-common.xml" optional="false"/>
+
+
+    <!-- redefinition of -do-jar-with-libraries-pack task
+    because Netbeans moves librairies in a "lib" directory
+    and we don't want to move them
+    and we want to make the good path in the manifest file -->
+    <target depends="init,compile,-pre-pre-jar,-pre-jar,-vib.pack.macro" if="manifest.available+main.class+mkdist.available" name="-do-jar-with-libraries" >
+        <vibPack manifest="${manifest.file}" />
+    </target>
+
+    <!-- this redefinition is for a very old vertion of nebeans. which one ? -->
+    <target depends="init,compile,-pre-pre-jar,-pre-jar" if="libs.CopyLibs.classpath" name="-do-jar-with-libraries-without-manifest" unless="manifest.available+main.class">
+        <j2seproject1:jar compress="${jar.compress}"/>
+    </target>
+</project>

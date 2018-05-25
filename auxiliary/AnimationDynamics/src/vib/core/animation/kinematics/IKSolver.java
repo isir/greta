@@ -1,0 +1,84 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package vib.core.animation.kinematics;
+
+import vib.core.animation.math.Vector3d;
+
+/**
+ *
+ * @author Jing Huang
+ * <gabriel.jing.huang@gmail.com or jing.huang@telecom-paristech.fr>
+ */
+public abstract class IKSolver {
+
+    int m_maxTries = 300;
+    double m_targetThreshold = 0.001;
+    double m_stepweight = 0.5;
+    IKChain m_chain;
+    public abstract String getIKSolverName();
+
+    public IKSolver(int maxTries, double targetThreshold, double stepweight) {
+        m_maxTries = maxTries;
+        m_targetThreshold = targetThreshold;
+        m_stepweight = stepweight;
+    }
+    
+    public IKSolver(IKChain chain){
+        m_chain = chain;
+    }
+
+    public abstract boolean solve(Vector3d target);
+
+    public double getSingleStepValue() {
+        return m_stepweight;
+    }
+
+    public void setSingleStepValue(double v) {
+        this.m_stepweight = v;
+    }
+
+    public double getTargetThreshold() {
+        return m_targetThreshold;
+    }
+
+    public void setTargetThreshold(double targetThreshold) {
+        this.m_targetThreshold = targetThreshold;
+    }
+
+    public int getMaxNumberOfTries() {
+        return m_maxTries;
+    }
+
+    public void setMaxNumberOfTries(int tries) {
+        this.m_maxTries = tries;
+    }
+
+    public double castPiRange(double value) {
+        while (value > 3.14159265) {
+            value -= 3.14159265 * 2;
+        }
+        while (value < -3.14159265) {
+            value += 3.14159265 * 2;
+        }
+        return value;
+    }
+
+    double clamp(double value, double minV, double maxV) {
+        if (value > maxV) {
+            value -= 3.14159265 * 2;
+            if (value < minV){
+                value = maxV;
+            }
+        }
+        if (value < minV) {
+            value += 3.14159265 * 2;
+            if (value > maxV) {
+                value = minV;
+            }
+        }
+        return value;
+    }
+}

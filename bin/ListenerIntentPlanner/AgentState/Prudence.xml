@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Common/Data/xml/profiles.xsd">
+
+	<parameter-set name="listener_function">
+		<Parameter name="disagreement" value="0.0"/>
+		<Parameter name="agreement" value="0.0"/>
+		<Parameter name="acceptance" value="0.0"/>
+		<Parameter name="refusal" value="0.0"/>
+		<Parameter name="belief" value="0.0"/>
+		<Parameter name="disbelief" value="0.0"/>
+		<Parameter name="liking" value="0.0"/>
+		<Parameter name="disliking" value="0.0"/>
+		<Parameter name="interest" value="0.0"/>
+		<Parameter name="no_interest" value="0.0"/>
+		<Parameter name="understanding" value="0.0"/>
+		<Parameter name="no_understanding" value="0.0"/>
+
+		<Parameter name="anger" value="0.0"/>
+		<Parameter name="sadness" value="0.0"/>
+		<Parameter name="amusement" value="0.0"/>
+		<Parameter name="happiness" value="0.0"/>
+		<Parameter name="contempt" value="0.0"/>
+		<Parameter name="low-anticipation" value="0.0"/>
+		<Parameter name="high-anticipation" value="0.0"/>
+		<Parameter name="low-solidarity" value="0.0"/>
+		<Parameter name="high-solidarity" value="0.0"/>
+		<Parameter name="low-antagonism" value="0.0"/>
+		<Parameter name="high-antagonism" value="0.0"/>
+	</parameter-set>
+
+	<parameter-set name="interest_level">
+		<Parameter name="interest" value="0.5"/>
+	</parameter-set>
+
+	<parameter-set name="mimicry_level">
+		<Parameter name="mimicry" value="0.0"/>
+	</parameter-set>
+
+</profile>

@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <Properties>
+    <Property name="defaultCloseOperation" type="int" value="3"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                  <Component id="jLabel1" max="32767" attributes="0"/>
+                  <Component id="posLabel" max="32767" attributes="0"/>
+                  <Component id="idLabel" alignment="0" max="32767" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="xLabel" alignment="0" max="32767" attributes="1"/>
+                          <Component id="posXField" alignment="0" pref="100" max="32767" attributes="1"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="yLabel" max="32767" attributes="1"/>
+                          <Component id="posYField" alignment="1" pref="100" max="32767" attributes="1"/>
+                      </Group>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="zLabel" max="32767" attributes="1"/>
+                          <Component id="posZField" alignment="1" pref="100" max="32767" attributes="1"/>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="meterLabel" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                      <Component id="idField" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jTextField1" alignment="0" pref="312" max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="xLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="yLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="zLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="posXField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="posYField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="posZField" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="posLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="meterLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="idLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="idField" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Component class="javax.swing.JLabel" name="posLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Size"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="posXField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0.0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="posXFieldActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="posXFieldFocusLost"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="posXFieldKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="posYField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0.0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="posYFieldActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="posYFieldFocusLost"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="posYFieldKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="posZField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="0.0"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="posZFieldActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="posZFieldFocusLost"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="posZFieldKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="meterLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="&quot;(&quot;+IniManager.getLocaleProperty(&quot;unit.meter&quot;).toLowerCase() +&quot;) &quot;" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="xLabel">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+        <Property name="text" type="java.lang.String" value="X"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="yLabel">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+        <Property name="text" type="java.lang.String" value="Y"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="zLabel">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+        <Property name="text" type="java.lang.String" value="Z"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JFormattedTextField" name="idField">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+        <Property name="toolTipText" type="java.lang.String" value=""/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="idFieldActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="idFieldFocusLost"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="idFieldKeyTyped"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="idLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+          <Connection code="IniManager.getLocaleProperty(&quot;word.identifier&quot;)" type="code"/>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ref"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jTextField1">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+        <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTextField1FocusLost"/>
+      </Events>
+    </Component>
+  </SubComponents>
+</Form>

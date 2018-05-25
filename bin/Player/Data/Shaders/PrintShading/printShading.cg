@@ -1,0 +1,153 @@
+//
+// The maximum number of lights per-object. Decrease this value if you need some extra performance.
+//
+// If you change this, then you must enter 'CelShading.program' and change the '$numLights'
+// variable to match this definition.
+#define NUM_LIGHTS 2
+ 
+//
+// Vertex program
+float4 main_vp(
+		float4 iPos		: POSITION,
+		float3 iNorm		: NORMAL,
+		float2 iUV		: TEXCOORD0,
+		out float3 oPos		: TEXCOORD0,
+		out float3 oNorm	: TEXCOORD1,
+		out float2 oUV		: TEXCOORD2,
+		out float oNormProj: TEXCOORD3,
+		out float4 srceenpos: TEXCOORD4,
+		uniform float4x4 worldViewProj,
+		uniform float4x4 uvTransform
+		) : POSITION
+{
+	oPos = iPos.xyz;
+	oNorm = iNorm;
+	oUV = mul(uvTransform, float4(iUV, 0, 1)).xy;
+	oNormProj = normalize(mul(worldViewProj, float4(iNorm.xyz,0)).xyz).z;
+	srceenpos = mul(worldViewProj, iPos);
+	return srceenpos;
+}
+
+
+float4 main_fp(
+		float3 iPos 	: TEXCOORD0,
+		float3 iNorm	: TEXCOORD1,
+		float3 iUV	: TEXCOORD2,
+		float iNormProjz	: TEXCOORD3,
+		float4 screenPos	: TEXCOORD4,
+		
+		uniform float width,
+		uniform float height,
+		uniform float pointSize,
+		uniform float inkWidth,
+		
+		uniform float3 eyePosition,
+ 
+		uniform float4 ambientColor,
+		uniform float4 diffuseColor,
+		uniform float4 specularColor,
+		uniform float shininess,
+		uniform float3 ambientLight,
+		
+		// Light params
+		uniform float4 lightDiffuse[NUM_LIGHTS],
+		uniform float4 lightSpecular[NUM_LIGHTS],
+		uniform float4 lightPosition[NUM_LIGHTS],
+		uniform float4 lightAttenuation[NUM_LIGHTS],
+ 
+		// Texture params
+		uniform sampler1D diffuseRamp	: register(s0),
+		uniform sampler1D specRamp		: register(s1),
+		uniform sampler2D bnwRamp		: register(s2),
+		uniform sampler2D bnwRamp2		: register(s3),
+		uniform sampler2D decalTex		: register(s4)
+		) : COLOR
+{
+
+	float4 texColor		= tex2D(decalTex, iUV);
+	float alpha = texColor.w;
+	float3 norm = normalize(iNorm);
+	float3 eyeVec = normalize(eyePosition - iPos);
+	float angle = dot(norm, eyeVec);
+	if(angle < 0.3*inkWidth){
+		return float4(0,0,0,alpha);
+	}
+	float4 surfaceColor = float4(ambientLight,1)*ambientColor;
+	float4 specularSurface = 0;
+	
+	for (int i = 0; i < NUM_LIGHTS; i++)
+	{
+		//
+		// Calculate light vector and distance
+		float3 lightVec = 0;
+		if (lightPosition[i].w == 1)
+			lightVec = lightPosition[i].xyz - iPos*lightPosition[i].w;
+		else
+			lightVec = lightPosition[i].xyz;
+ 
+		float lightDist = length(lightVec);
+		lightVec = normalize(lightVec);
+ 
+ 
+		//
+		// Calculate luminosity based on light attenuation
+		float luminosity = 1.f;
+		if(lightAttenuation[i].x > lightDist && lightPosition[i].w == 1)
+			luminosity = 1.f / 
+				( lightAttenuation[i].y + lightAttenuation[i].z*lightDist + 
+				  lightAttenuation[i].w*(lightDist*lightDist) );
+ 
+		//
+		// Get diffuse component based on the dot product of the normal and the light direction,
+		// multiplied by the luminosity component.
+		float diffComponent = max(dot(norm, lightVec), 0)*luminosity;
+		float diffuse = tex1D(diffuseRamp, diffComponent).r;
+		surfaceColor += diffuse*diffuseColor*lightDiffuse[i];
+ 
+		if(shininess>=100){
+			//
+			// Calculate the direction in-between the light direction and the camera's direction.
+			float3 halfDir = normalize(lightVec + eyeVec);
+			//
+			// Get specular component based on the dot product of the normal and the half-camera-light
+			// direction, multiplied by the luminosity component.
+			float specComponent = pow(max(dot(norm, halfDir), 0), shininess)*luminosity;
+	 
+			float specular = tex1D(specRamp, specComponent).r;
+	 
+			specularSurface += specular*lightSpecular[i]*specularColor;
+		}
+	}
+ 
+	float4 cel = texColor*surfaceColor + specularSurface;
+	
+	
+	
+	
+	// float greyScale = max(cel.x,max(cel.y,cel.z)); //HSV - v
+	// float greyScale = (cel.x+cel.y+cel.z)/3; //HSL - I
+	float greyScale = 0.3*cel.x + 0.59*cel.y + 0.11*cel.z; //luma Y
+	
+	if(greyScale<0.4){ //
+		return float4(0,0,0,alpha);
+	}
+	if(greyScale>0.8){
+		return float4(1,1,1,alpha);
+	}
+	
+	float2 uv = ((screenPos.xy / screenPos.w) +1)*0.1 / pointSize;
+	uv.x *= width;
+	uv.y *= height;
+	// return float4(uv,0, 1);
+	if(greyScale<0.6){
+		return tex2D(bnwRamp,uv) * (1, 1, 1, alpha);
+	}
+	if(greyScale<0.8){
+		return tex2D(bnwRamp2,uv) * (1, 1, 1, alpha);
+	}
+	return float4(1,1,1,alpha);
+
+}
+
+
+

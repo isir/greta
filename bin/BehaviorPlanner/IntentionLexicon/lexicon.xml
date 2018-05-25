@@ -1,0 +1,1452 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<behaviorsets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Common/Data/xml/behaviorsets.xsd">
+	<!-- empty behaviorsets -->
+	<behaviorset name="theme-*">
+		<signals/>
+		<constraints/>
+	</behaviorset>
+	<behaviorset name="rheme-*">
+		<signals/>
+		<constraints/>
+	</behaviorset>
+	<behaviorset name="speech-*">
+		<signals/>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="other-culture">
+		<signals>
+			<signal id="1" name="ADJECTIVAL=culture3" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="performative-restpose">
+		<signals>
+			<signal id="1" name="rest=rest_Ges_B_Belly" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<!-- EMOTIONS  DEFAULT DEFINITIONS - you can edit and add new items -->
+	
+	<behaviorset name="emotion-panic_fear">
+		<signals>
+			<signal id="1" name="faceexp=panic_fear_signal_1" modality="face"/>
+			<signal id="2" name="UP" modality="head"/>
+			<signal id="3" name="panic_fear_signal_3" modality="torso"/>
+			<signal id="4" name="emotion=panic_fear_signal_4" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+				<item id="4"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-anxiety">
+		<signals>
+			<signal id="1" name="faceexp=anxiety_signal_4" modality="face"/>
+			<signal id="2" name="emotion=anxiety_signal_10" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+				<item id="2"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-sadness">
+		<signals>
+			<signal id="1" name="DOWN" modality="head"/>
+			<signal id="2" name="adjectival=dispersed" modality="gesture" min="0.2" max="10"/>
+			<signal id="3" name="gaze=look_down" modality="gaze"/>
+			<signal id="4" name="faceexp=sadness" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="4"/>
+			</core>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="3"/>
+				</implication>
+				<implication>
+					<ifpresent id="3"/>
+					<thenpresent id="2"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-envy">
+    <signals>
+      <signal id="1" name="faceexp=envy" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+	
+	<behaviorset name="emotion-anger">
+		<signals>
+			<signal id="1" name="head=head_infront" modality="head"/>
+			<signal id="2" name="emotion=anger_signal_5" modality="gesture" />
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+			<signal id="4" name="faceexp=anger" modality="face"/>
+			<!--<signal id="5" name="anger" modality="torso"/>-->
+		</signals>
+		<constraints>
+			<core>
+				<item id="4"/>
+			</core>
+			<rules>
+				<implication>
+					<ifpresent id="3"/>
+					<thenpresent id="1"/>
+				</implication>
+				<implication>
+					<ifpresent id="5"/>
+					<thenpresent id="2"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-joyStrong">
+		<signals>
+			<signal id="1" name="faceexp=smile_big_open" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+			</core>
+			<rules>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-joy">
+		<signals>
+			<signal id="1" name="head=head_infront" modality="head"/>
+			<signal id="2" name="faceexp=joy" modality="face"/>
+			<signal id="3" name="emotion=joy_signal_12" modality="gesture" />
+		</signals>
+		<constraints>
+			<core>
+				<item id="2"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-despair">
+		<signals>
+			<signal id="1" name="gaze=look_down" modality="gaze"/>
+			<signal id="2" name="faceexp=despair" modality="face" max="6.0"/>
+			<signal id="3" name="DOWN" modality="head" max="6.0"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="2"/>
+				<item id="3"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-disgust">
+		<signals>
+			<signal id="1" name="faceexp=disgust" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-hate">
+		<signals>
+			<signal id="1" name="faceexp=hate" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-worried">
+		<signals>
+			<signal id="1" name="faceexp=worry" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-disappointment">
+		<signals>
+			<signal id="1" name="faceexp=disappointment" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>.
+	
+	<behaviorset name="emotion-neutral">
+		<signals>
+			<signal id="1" name="faceexp=neutral" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-pride">
+		<signals>
+			<signal id="1" name="faceexp=pride_signal_10" modality="face"/>
+			<signal id="2" name="UP" modality="head"/>
+			<signal id="3" name="pride_signal_3" modality="torso"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+				<item id="3"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-tension">
+		<signals>
+			<signal id="1" name="faceexp=tension_signal_1" modality="face"/>
+			<signal id="2" name="emotion=tension_signal_8" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>.
+	
+	<behaviorset name="emotion-relief">
+		<signals>
+			<signal id="1" name="emotion=relief_signal_13" modality="gesture"/>
+			<signal id="2" name="faceexp=relief_signal_2" modality="face"/>
+			<signal id="3" name="UP" modality="head"/>
+			<signal id="4" name="relief_signal_4" modality="torso"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+				<item id="2"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-embarrassment">
+		<signals>
+			<signal id="1" name="DOWN" modality="head"/>
+			<signal id="2" name="gaze=look_left" modality="gaze"/>
+			<signal id="3" name="faceexp=embarrassment_signal_8" modality="face"/>
+			<signal id="4" name="emotion=embarrassment_signal_10" modality="gesture"/>
+			<signal id="5" name="embarrassment_signal_11" modality="torso"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="3"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-surprise">
+		<signals>
+			<signal id="1" name="faceexp=surprise" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-bored">
+		<signals>
+			<signal id="1" name="ASIDE_RIGHT" modality="head"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<!-- DEICTIC       -->
+	<behaviorset name="deictic-down">
+		<signals>
+			<signal id="1" name="deictic=down_Ges_R" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="deictic-slide">
+		<signals>
+			<signal id="1" name="deictic=slide_Ges_R" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="deictic-move">
+		<signals>
+			<signal id="1" name="deictic=move_Ges_R" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="deictic-index">
+		<signals>
+			<signal id="1" name="deictic=index_Ges_R" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="deictic-onmyleft">
+		<signals>
+			<signal id="1" name="deictic=on_my_left_Ges_L" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<!-- ICONIC        -->
+	<behaviorset name="iconic-chop">
+		<signals>
+			<signal id="1" name="iconic=chop_Ges_R" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<!-- BEAT        -->
+	<behaviorset name="beat-left">
+		<signals>
+			<signal id="1" name="beat=beat_Ges_L" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="beat-right">
+		<signals>
+			<signal id="1" name="beat=beat_Ges_R_Open" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<!-- PERFORMATIVES -->
+	
+	<behaviorset name="deictic-you">
+		<signals>
+			<signal id="1" name="deictic=you_Ges_B" modality="gesture">
+				<alternative name="deictic=you_Ges_R_Center" probability="0.2"/>
+				<alternative name="deictic=you_Ges_R_Drop" probability="0.2"/>
+				<alternative name="deictic=you_Ges_R_High" probability="0.3"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="deictic-selftouch">
+		<signals>
+			<signal id="1" name="deictic=self_Pos_R" modality="gesture">
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="iconic-byebye">
+		<signals>
+			<signal id="1" name="iconic=handwave_Ges_R" modality="gesture">
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="performative-beatsocial">
+		<signals>
+			<signal id="1" name="beat=beat_Ges_B_Social" modality="gesture">
+				<alternative name="beat=beat_Ges_L" probability="0.2"/>
+				<alternative name="beat=beat_Ges_R_Open" probability="0.2"/>
+				<alternative name="beat=beat_Ges_R_Pointing" probability="0.2"/>
+				<alternative name="beat=beat_Ges_L" probability="0.2"/>
+				<alternative name="performative=inform_Ges_B_Spread" probability="0.2"/>
+				<alternative name="performative=inform_Ges_B_Drop" probability="0.2"/>
+				<alternative name="performative=inform_Ges_B_Up" probability="0.2"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="performative-deny">
+		<signals>
+			<signal id="1" name="SHAKE" modality="head">
+				<alternative name="UP" probability="0.5"/>
+			</signal>
+			<signal id="2" name="certainty=uncertain_Ges_R" modality="gesture"/>
+			<signal id="3" name="gaze=eyes_closed" modality="gaze"/>
+			<signal id="4" name="faceexp=frown" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="2"/>
+			</core>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="3"/>
+				</implication>
+				<implication>
+					<ifpresent id="3"/>
+					<thenpresent id="2"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="performative-greet">
+		<signals>
+			<signal id="1" name="faceexp=greet" modality="face"/>
+			<signal id="2" name="performative=greetnew_Ges_R" modality="gesture"/>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+			<signal id="4" name="NOD" modality="head"/>
+			<signal id="5" name="LinearNeutralFrontalSwing" modality="torso"/>
+			<!-- Doesn't work anymore in the GRETA platform. -->
+			<!-- <signal id="5" name="bow" modality="torso"/> -->
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="5"/>
+					<thenpresent id="4"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	 <behaviorset name="performative-disagree">
+    <signals>
+      <signal id="1" name="faceexp=disagree" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+	
+	<behaviorset name="performative-inform">
+		<signals>
+			<signal id="1" name="performative=inform" modality="gaze"/>
+			<signal id="2" name="adjectival=ShowHand_Pos_L_Low" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="performative-propose">
+		<signals>
+			<signal id="1" name="faceexp=propose" modality="face"/>
+			<signal id="2" name="adjectival=OPEN_MOVING_HAND" modality="gesture"/>
+			<signal id="3" name="NOD" modality="head"/>
+			<signal id="4" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="performative-suggest">
+		<signals>
+			<signal id="1" name="faceexp=suggest" modality="face">
+				<alternative name="faceexp=suggest1" probability="0.5"/>
+			</signal>
+			<signal id="2" name="Aside_Right" modality="head">
+        <alternative name="Aside_Left" probability="0.5"/>
+      </signal>
+			<signal id="3" name="performative=suggest_Ges_B" modality="gesture" min="1.0" max="10.0">	
+			</signal>
+			
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+				<item id="2"/>
+				<item id="3"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="performative-warn">
+		<signals>
+			<signal id="1" name="faceexp=warn" modality="face"/>
+			<signal id="2" name="adjectival=warning_Ges_R" modality="gesture"/>
+			<signal id="3" name="NOD" modality="head"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	
+	<behaviorset name="performative-lookright">
+		<signals>
+			<signal id="1" name="gaze=look_right" modality="gaze" repetitivity="1" min="1" max="2"  probability_start="1" probability_end="1"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="performative-lookleft">
+		<signals>
+			<signal id="1" name="gaze=look_left" modality="gaze" repetitivity="1" min="1" max="2"  probability_start="1" probability_end="1"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<!-- certainty -->
+	
+	<behaviorset name="certainty-certain">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="adjectival=ShowHand_Pos_L_Low" modality="gesture"/>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+			<signal id="4" name="faceexp=certain" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	
+	<!-- TURN -->
+	
+	<behaviorset name="turntaking-takethefloor">
+		<signals>
+			<signal id="1" name="gaze=take" modality="gaze">
+				<alternative name="faceexp=neutral" probability="0.3"/>
+			</signal>
+			<signal id="2" name="raise" modality="torso">
+				<alternative name="none" probability="0.3"/>
+			</signal>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="turntaking-givethefloor">
+		<signals>
+			<signal id="1" name="gaze=give" modality="gaze" >
+				<alternative name="gaze=look_at" probability="0.2"/>
+			</signal>
+			<signal id="2" name="raise" modality="torso">
+				<alternative name="none" probability="0.3"/>
+			</signal>
+			<signal id="4" name="adjectival=OPEN_MOVING_HAND2" modality="gesture">
+				<alternative name="rest=legs" probability="0.3"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="turntaking-*">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+			<signal id="3" name="faceexp=raise_eyebrows" modality="face"/>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="1"/>
+					<thennotpresent id="2"/>
+					<thennotpresent id="3"/>
+				</implication>
+				<implication>
+					<ifpresent id="2"/>
+					<thennotpresent id="1"/>
+					<thennotpresent id="3"/>
+				</implication>
+				<implication>
+					<ifpresent id="3"/>
+					<thennotpresent id="1"/>
+					<thennotpresent id="2"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	
+	<!-- beliefs -->
+	
+	<behaviorset name="belief-relation-enumerate">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="adjectival=warning_Ges_R" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="belief-relation-enumerate1">
+		<signals>
+			<signal id="1" name="ADJECTIVAL=one" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="belief-relation-enumerate2">
+		<signals>
+			<signal id="1" name="ADJECTIVAL=two" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="belief-relation-enumerate3">
+		<signals>
+			<signal id="1" name="adjectival=three_Ges_R" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="belief-relation-metaphoric">
+		<signals>
+			<signal id="1" name="ADJECTIVAL=METAPHORIC2" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	
+	<!-- world -->
+	
+	<behaviorset name="world-*">
+		<signals>
+			<signal id="1" name="hand_shape=FORM_OPEN" modality="pointing" >
+				<alternative name="hand_shape=FORM_POINT2" probability="0.2"/>
+				<alternative name="hand_shape=FORM_POINT1" probability="0.4"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="world-object-large">
+		<signals>
+			<signal id="1" name="adjectival=large_Ges_B" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="world-object-location">
+		<signals>
+			<signal id="1" name="adjectival=wipe_Ges_B" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="world-object-quantity">
+		<signals>
+			<signal id="1" name="adjectival=many" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="world-object-tiny">
+		<signals>
+			<signal id="1" name="adjectival=tiny" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="world-object-service">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="adjectival=OPEN_DEICTIC_HAND" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="world-object-shape">
+		<signals>
+			<signal id="1" name="deictic=view3" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="world-person-self">
+		<signals>
+			<!--signal id="1" name="NOD" modality="head"/-->
+			<signal id="2" name="deictic=self_Pos_L" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="world-place-away">
+		<signals>
+			<signal id="1" name="LEFT" modality="head"/>
+			<signal id="2" name="gaze=look_left" modality="gaze"/>
+			<signal id="3" name="deictic=there" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="world-place-here">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="adjectival=DEICTIC_RHAND" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="world-place-hereleft">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="adjectival=DEICTIC_LHAND" modality="gesture"/>
+			<signal id="3" name="gaze=look_down_left" modality="gaze"/>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="3"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="world-place-hereright">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="adjectival=DEICTIC_RHAND" modality="gesture"/>
+			<signal id="3" name="gaze=look_down_right" modality="gaze"/>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="3"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="world-place-location">
+		<signals>
+			<signal id="1" name="adjectival=upright" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	
+	<!-- backchannels -->
+	
+	<behaviorset name="backchannel-agreement">
+		<signals>
+			<signal id="1" name="Nod_Middle" modality="head">
+				<alternative name="Nod_Big" probability="0.3"/>
+				<alternative name="Nod_Small" probability="0.2"/>
+			</signal>
+			<signal id="2" name="faceexp=Liking" modality="face">
+				<alternative name="faceexp=raise_brows" probability="0.2"/>
+				<alternative name="faceexp=Smile_Small_Closed" probability="0.2"/>
+				<alternative name="faceexp=Smile_Small_Open" probability="0.2"/>
+			</signal>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="3"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-disagreement">
+		<signals>
+			<signal id="1" name="Shake_Middle" modality="head">
+				<alternative name="Shake_Big" probability="0.3"/>
+				<alternative name="Shake_Small" probability="0.2"/>
+			</signal>
+			<signal id="2" name="faceexp=Disliking" modality="face">
+				<alternative name="faceexp=Eyebrows_Frown" probability="0.5"/>
+				<alternative name="faceexp=tension" probability="0.3"/>
+			</signal>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="3"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-acceptance">
+		<signals>
+			<signal id="1" name="Nod_Middle" modality="head">
+				<alternative name="Nod_Big" probability="0.3"/>
+				<alternative name="Nod_Small" probability="0.2"/>
+			</signal>
+			<signal id="2" name="faceexp=raise_brows" modality="face">
+				<alternative name="faceexp=Smile_Small_Closed" probability="0.4"/>
+				<alternative name="faceexp=Smile_Small_Open" probability="0.2"/>
+			</signal>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="3"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-refusal">
+		<signals>
+			<signal id="1" name="Shake_Middle" modality="head">
+				<alternative name="Shake_Big" probability="0.3"/>
+				<alternative name="Shake_Small" probability="0.2"/>
+			</signal>
+			<signal id="2" name="faceexp=Eyebrows_Frown" modality="face">
+				<alternative name="faceexp=tension" probability="0.5"/>
+			</signal>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="3"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-liking">
+		<signals>
+			<signal id="1" name="faceexp=Liking" modality="face"/>
+				<!--<alternative name="faceexp=little_smile" probability="0.4"/> -->
+				<!--<alternative name="faceexp=little_smile_open" probability="0.2"/>-->
+				<!--<alternative name="faceexp=liking_open" probability="0.2"/>-->
+			<!--</signal>-->
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-disliking">
+		<signals>
+			<signal id="1" name="faceexp=Disliking" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-understanding">
+		<signals>
+			<signal id="1" name="faceexp=Liking" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-no_understanding">
+		<signals>
+			<signal id="1" name="faceexp=Eyebrows_Frown" modality="face"/>
+			<signal id="2" name="Aside_Left" modality="head">
+				<alternative name="Aside_Right" probability="0.5"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-interest">
+		<signals>
+			<signal id="1" name="faceexp=raise_brows" modality="face"/>
+			<signal id="2" name="Aside_Left" modality="head">
+				<alternative name="Aside_Right" probability="0.3"/>
+				<alternative name="Nod_Big" probability="0.1"/>
+				<alternative name="Nod_Middle" probability="0.1"/>
+				<alternative name="Nod_Small" probability="0.1"/>
+			</signal>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="1"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-no_interest">
+		<signals>
+			<signal id="1" name="gaze=look_up" modality="gaze"/>
+			<signal id="2" name="Aside_Left" modality="head">
+				<alternative name="Aside_Right" probability="0.5"/>
+			</signal>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-belief">
+		<signals>
+			<signal id="1" name="faceexp=raise_brows" modality="face">
+				<alternative name="faceexp=Smile_Small_Closed" probability="0.5"/>
+			</signal>
+			<signal id="2" name="Aside_Left" modality="head">
+				<alternative name="Aside_Right" probability="0.5"/>
+			</signal>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="1"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-disbelief">
+		<signals>
+			<signal id="1" name="faceexp=Eyebrows_Frown" modality="face">
+				<alternative name="faceexp=raise_left_brow" probability="0.5"/>
+			</signal>
+			<signal id="2" name="Aside_Left" modality="head">
+				<alternative name="Aside_Right" probability="0.5"/>
+			</signal>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	
+	<!-- TRASH -->
+	<behaviorset name="emotion-small_sadness">
+		<signals>
+			<signal id="1" name="faceexp=small_sadness" modality="face"/>
+			<signal id="2" name="DOWN" modality="head"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-small_anger">
+		<signals>
+			<signal id="1" name="faceexp=small_anger" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-small_joy">
+		<signals>
+			<signal id="1" name="faceexp=small_joy" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	
+	<!-- emphasis -->
+	<behaviorset name="emphasis-medium">
+		<signals>
+			<signal id="1" name="DOWN_ASIDE_RIGHT" modality="head">
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.4"/>
+				<alternative name="NOD" probability="0.2"/>
+			</signal>
+			<signal id="3" name="faceexp=Hstar" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	
+	<!-- pitchaccent -->
+	<behaviorset name="pitchaccent-Hstar">
+		<signals>
+			<signal id="1" name="DOWN_ASIDE_RIGHT" modality="head">
+				<alternative name="nod_middle" probability="0.2"/>
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.4"/>
+			</signal>
+			<signal id="2" name="faceexp=Hstar" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="pitchaccent-LplusHstar">
+		<signals>
+			<signal id="1" name="DOWN_ASIDE_RIGHT" modality="head">
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.2"/>
+				<alternative name="NOD" probability="0.5"/>
+			</signal>
+			<signal id="3" name="faceexp=Hstar" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="pitchaccent-Lstar">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="faceexp=frown" modality="face"/>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="1"/>
+					<thenpresent id="3"/>
+				</implication>
+				<implication>
+					<ifpresent id="3"/>
+					<thenpresent id="1"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	
+	<!-- boundary -->
+	<behaviorset name="boundary-L">
+		<signals>
+			<signal id="1" name="DOWN_LEFT" modality="head">
+				<alternative name="DOWN_RIGHT" probability="0.3"/>
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.1"/>
+				<alternative name="DOWN_ASIDE_RIGHT" probability="0.2"/>
+				<alternative name="NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-HL">
+		<signals>
+			<signal id="1" name="DOWN_LEFT" modality="head">
+				<alternative name="DOWN_RIGHT" probability="0.2"/>
+				<alternative name="DOWN" probability="0.3"/>
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.1"/>
+				<alternative name="DOWN_ASIDE_RIGHT" probability="0.1"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-H">
+		<signals>
+			<signal id="1" name="UP_RIGHT" modality="head">
+				<alternative name="UP_LEFT" probability="0.3"/>
+				<alternative name="UP_ASIDE_LEFT" probability="0.1"/>
+				<alternative name="UP_ASIDE_RIGHT" probability="0.2"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-HH">
+		<signals>
+			<signal id="1" name="UP_RIGHT" modality="head">
+				<alternative name="UP_LEFT" probability="0.3"/>
+				<alternative name="UP_ASIDE_LEFT" probability="0.2"/>
+				<alternative name="UP_ASIDE_RIGHT" probability="0.1"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="faceexp=raise_eyebrows" modality="face">
+				<alternative name="faceexp=neutral" probability="0.2"/>
+			</signal>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-LL">
+		<signals>
+			<signal id="1" name="DOWN_LEFT" modality="head">
+				<alternative name="DOWN_RIGHT" probability="0.2"/>
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.2"/>
+				<alternative name="DOWN_ASIDE_RIGHT" probability="0.1"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="faceexp=frown" modality="face">
+				<alternative name="faceexp=neutral" probability="0.3"/>
+			</signal>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-LH">
+		<signals>
+			<signal id="1" name="UP_RIGHT" modality="head">
+				<alternative name="UP_LEFT" probability="0.3"/>
+				<alternative name="UP_ASIDE_LEFT" probability="0.2"/>
+				<alternative name="UP_ASIDE_RIGHT" probability="0.1"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>  
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	
+	<!-- MSE DO NOT TOUCH -->
+	
+	<behaviorset name="emotion-panic_fear" type="mse">
+		<signals> 
+			<signal id="1" name="faceexp=panic_fear_signal_1" modality="face" repetitivity="0" min="2" max="3"  probability_start="0.8" probability_end="0.1"/>
+			<signal id="2" name="UP" modality="head" repetitivity="0" min="2" max="3"  probability_start="0.8" probability_end="0.1"/>
+			<signal id="3" name="panic_fear_signal_3" modality="torso" repetitivity="0" min="5" max="6"  probability_start="0.8" probability_end="0.1"/>
+			<signal id="4" name="emotion=panic_fear_signal_4" modality="gesture" repetitivity="0" min="3" max="5"  probability_start="0.5" probability_end="0.7"/>
+			<signal id="5" name="faceexp=panic_fear_signal_5" modality="face" repetitivity="0" min="2" max="5"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="6" name="faceexp=panic_fear_signal_6" modality="gesture" excludelist="panic_fear_signal_7,panic_fear_signal_8,panic_fear_signal_12" repetitivity="0" min="3" max="5"  probability_start="0.6" probability_end="0.2"/>
+			<signal id="7" name="emotion=panic_fear_signal_7" modality="gesture" excludelist="panic_fear_signal_6,panic_fear_signal_8,panic_fear_signal_12" repetitivity="0" min="3" max="5"  probability_start="0.6" probability_end="0.3"/>
+			<signal id="8" name="emotion=panic_fear_signal_8" modality="gesture" excludelist="panic_fear_signal_7,panic_fear_signal_6,panic_fear_signal_12" repetitivity="0" min="3" max="5"  probability_start="0.4" probability_end="0.3"/>
+			<signal id="9" name="faceexp=panic_fear_signal_9" modality="face" repetitivity="0" min="2" max="3"  probability_start="0" probability_end="0.4"/>
+			<signal id="10" name="faceexp=panic_fear_signal_10" modality="face" repetitivity="0" min="2" max="3"  probability_start="0" probability_end="0"/>
+			<signal id="11" name="faceexp=panic_fear_signal_11" modality="face" repetitivity="0" min="2" max="3"  probability_start="0" probability_end="0"/>
+			<signal id="12" name="emotion=panic_fear_signal_12" modality="gesture" excludelist="panic_fear_signal_7,panic_fear_signal_8,panic_fear_signal_6" repetitivity="0" min="2" max="4"  probability_start="0.5" probability_end="0.2"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-pride" type="mse">
+		<signals>
+			<signal id="1" name="faceexp=pride_signal_1" modality="face" repetitivity="1" min="2" max="4"  probability_start="0.5" probability_end="0.8"/>
+			<signal id="2" name="UP" modality="head" repetitivity="0" min="2" max="6"  probability_start="0.8" probability_end="0.8"/>
+			<signal id="3" name="pride_signal_3" modality="torso" repetitivity="0" min="3" max="7"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="4" name="pride_signal_4" modality="torso" repetitivity="0" min="3" max="7"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="5" name="emotion=pride_signal_5" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="6" name="faceexp=pride_signal_6" modality="face" repetitivity="0" min="2" max="4"  probability_start="0" probability_end="0"/>
+			<signal id="7" name="emotion=pride_signal_7" modality="gesture" repetitivity="0" min="2" max="4"  probability_start="0" probability_end="0"/>
+			<signal id="8" name="pride_signal_8" modality="head" repetitivity="0" min="2" max="3"  probability_start="0.5" probability_end="0.1"/>
+			<signal id="9" name="pride_signal_9" modality="head" repetitivity="0" min="2" max="3"  probability_start="0.5" probability_end="0.1"/>
+			<signal id="10" name="emotion=pride_signal_10" modality="gesture" repetitivity="0" min="3" max="5"  probability_start="0.7" probability_end="0.7"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-anxiety" type="mse">
+		<signals>
+			<signal id="1" name="faceexp=anxiety_signal_1" modality="face" repetitivity="1" min="1" max="4"  probability_start="0.7" probability_end="0.2"/>
+			<signal id="2" name="faceexp=anxiety_signal_2" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.1" probability_end="0.6"/>
+			<signal id="3" name="faceexp=anxiety_signal_3" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.1" probability_end="0.6"/>
+			<signal id="4" name="faceexp=anxiety_signal_4" modality="face" repetitivity="1" min="1" max="4"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="5" name="faceexp=blink" modality="face" repetitivity="1" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="6" name="faceexp=anxiety_signal_6" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.0" probability_end="0.7"/>
+			<signal id="7" name="gaze=look_right" modality="gaze" repetitivity="1" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="8" name="gaze=look_left" modality="gaze" repetitivity="1" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="9" name="emotion=anxiety_signal_9" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0.6" probability_end="0.6"/>
+			<signal id="10" name="emotion=anxiety_signal_10" modality="gesture" repetitivity="0" min="3" max="6"  probability_start="0.6" probability_end="0.6"/>
+			<signal id="11" name="emotion=anxiety_signal_11" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0.6" probability_end="0.6"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-tension" type="mse">
+		<signals>
+			<signal id="1" name="faceexp=tension_signal_1" modality="face" repetitivity="1" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="2" name="faceexp=tension_signal_2" modality="face" repetitivity="1" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="3" name="faceexp=tension_signal_3" modality="face" repetitivity="1" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="4" name="faceexp=tension_signal_4" modality="face" repetitivity="1" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="5" name="faceexp=tension_signal_5" modality="face" repetitivity="1" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="6" name="faceexp=tension_signal_6" modality="face" repetitivity="1" min="1" max="4"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="7" name="faceexp=tension_signal_7" modality="face" repetitivity="1" min="1" max="4"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="8" name="emotion=tension_signal_10" modality="gesture" repetitivity="0" min="2" max="4"  probability_start="0.5" probability_end="0.5"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-relief" type="mse">
+		<signals>
+			<signal id="1" name="emotion=relief_signal_1" modality="gesture" excludelist="relief_signal_13" repetitivity="0" min="2" max="4"  probability_start="0.3" probability_end="0.0"/>
+			<signal id="2" name="faceexp=relief_signal_2" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.9" probability_end="0.0"/>
+			<signal id="3" name="UP" modality="head" repetitivity="0" min="1" max="3"  probability_start="0.7" probability_end="0.0"/>
+			<signal id="4" name="relief_signal_4" modality="torso" repetitivity="0" min="5" max="8"  probability_start="0" probability_end="0"/>
+			<signal id="5" name="head=relief_signal_5" modality="head" repetitivity="0" min="2" max="5"  probability_start="0" probability_end="0"/>
+			<!-- it is similar to signal number 2 so we use only the 2 at the moment -see bugs in lexicon -->
+			<signal id="6" name="faceexp=relief_signal_6" modality="face" repetitivity="0" min="1" max="5"  probability_start="0" probability_end="0"/>
+			<signal id="7" name="gaze=relief_signal_7" modality="gaze" repetitivity="0" min="0.7" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="8" name="faceexp=relief_signal_8" modality="face" repetitivity="0" min="1" max="2"  probability_start="0.0" probability_end="0.1"/>
+			<signal id="9" name="faceexp=relief_signal_9" modality="face" repetitivity="0" min="1" max="5"  probability_start="0" probability_end="0"/>
+			<signal id="10" name="relief_signal_10" modality="torso" excludelist="relief_signal_11" repetitivity="0" min="4" max="8" probability_start="0.6" probability_end="0.1"/>
+			<signal id="11" name="relief_signal_11" modality="torso" excludelist="relief_signal_10" repetitivity="0" min="4" max="8" probability_start="0.6" probability_end="0.1"/>
+			<signal id="12" name="faceexp=relief_signal_12" modality="face" repetitivity="0" min="2" max="4"  probability_start="0" probability_end="0.8"/>
+			<signal id="13" name="emotion=relief_signal_13" modality="gesture" excludelist="relief_signal_1" repetitivity="0" min="2" max="4"  probability_start="0.3" probability_end="0.6"/>
+			<signal id="14" name="relief_signal_14" modality="head" repetitivity="0" min="1" max="3"  probability_start="0.3" probability_end="0.1"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-anger" type="mse">
+		<signals>
+			<signal id="1" name="faceexp=anger_signal_1" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.7" probability_end="0.7"/>
+			<signal id="2" name="faceexp=anger_signal_2" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.2" probability_end="0.2"/>
+			<signal id="3" name="anger_signal_3" modality="torso" repetitivity="0" min="2" max="5"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="4" name="emotion=anger_signal_4" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0.7" probability_end="0.7"/>
+			<signal id="5" name="emotion=anger_signal_5" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0.7" probability_end="0.7"/>
+			<signal id="6" name="emotion=anger_signal_6" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0.7" probability_end="0.7"/>
+			<signal id="7" name="faceexp=anger_signal_7" modality="face" repetitivity="1" min="1" max="4"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="8" name="NOD" modality="head" repetitivity="0" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="9" name="head=head_infront" modality="head" repetitivity="0" min="1" max="2"  probability_start="0" probability_end="0"/>
+			<signal id="10" name="emotion=anger_signal_10" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0.2" probability_end="0.2"/>
+			<signal id="11" name="gaze=look_at" modality="gaze" repetitivity="0" min="1" max="2"  probability_start="0" probability_end="0"/>
+			<signal id="12" name="anger" modality="torso" repetitivity="0" min="2" max="5"  probability_start="0" probability_end="0"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-embarrassment" type="mse">
+		<signals>
+			<signal id="1" name="embarrassment_signal_1" modality="head" repetitivity="0" min="2" max="4"  probability_start="0.8" probability_end="0.3"/>
+			<signal id="2" name="embarrassment_signal_2" modality="head" repetitivity="0" min="3" max="5"  probability_start="0.1" probability_end="0.9"/>
+			<signal id="3" name="gaze=embarrassment_signal_3" modality="gaze" repetitivity="0" min="1.5" max="2.5"  probability_start="0.9" probability_end="0.9"/>
+			<signal id="4" name="gaze=embarrassment_signal_4" modality="gaze" repetitivity="1" min="1" max="2"  probability_start="0.1" probability_end="0.2"/>
+			<signal id="5" name="gaze=embarrassment_signal_5" modality="gaze" repetitivity="1" min="1" max="2"  probability_start="0.1" probability_end="0.2"/>
+			<signal id="6" name="faceexp=embarrassment_signal_6" modality="face" repetitivity="0" min="2" max="3"  probability_start="0.6" probability_end="0.7"/>
+			<signal id="7" name="faceexp=embarrassment_signal_7" modality="face" repetitivity="0" min="2" max="4"  probability_start="0.6" probability_end="0.7"/>
+			<signal id="8" name="faceexp=embarrassment_signal_8" modality="face" repetitivity="0" min="2" max="4"  probability_start="0.6" probability_end="0.6"/>
+			<signal id="9" name="faceexp=embarrassment_signal_9" modality="face" repetitivity="0" min="1" max="2"  probability_start="0" probability_end="0"/>
+			<signal id="10" name="emotion=embarrassment_signal_10" modality="gesture" repetitivity="0" min="2" max="3"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="11" name="embarrassment_signal_11" modality="torso" repetitivity="0" min="3" max="4"  probability_start="0.1" probability_end="0.1"/>
+			<signal id="12" name="emotion=embarrassment_signal_12" modality="gesture" repetitivity="0" min="2" max="4"  probability_start="0.2" probability_end="0.35"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-joy" type="mse">
+		<signals>
+			<signal id="1" name="faceexp=joy_signal_1" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="2" name="joy_signal_2" modality="torso" repetitivity="0" min="2" max="5"  probability_start="0" probability_end="0"/>
+			<signal id="3" name="faceexp=joy_signal_3" modality="face" repetitivity="0" min="1" max="5"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="4" name="faceexp=joy_signal_4" modality="face" repetitivity="0" min="1" max="5"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="5" name="NOD" modality="head" repetitivity="0" min="1" max="2"  probability_start="0.0" probability_end="0.0"/>
+			<signal id="6" name="faceexp=joy_signal_6" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="7" name="joy_signal_7" modality="head" repetitivity="0" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="8" name="joy_signal_8" modality="head" repetitivity="0" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="9" name="faceexp=joy_signal_9" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="10" name="emotion=joy_signal_10" modality="gesture" repetitivity="0" min="2" max="4"  probability_start="0.9" probability_end="0.2"/>
+			<signal id="11" name="emotion=joy_signal_11" modality="gesture" repetitivity="0" min="3" max="5"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="12" name="emotion=joy_signal_12" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0" probability_end="0"/>
+			<signal id="13" name="emotion=joy_signal_13" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="14" name="faceexp=joy_signal_14" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="15" name="faceexp=joy_signal_15" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.5" probability_end="0.5"/>
+			<signal id="16" name="joy_signal_16" modality="torso" repetitivity="0" min="2" max="4"  probability_start="0" probability_end="0"/>
+			<signal id="17" name="joy_signal_17" modality="torso" repetitivity="0" min="2" max="4"  probability_start="0" probability_end="0"/>
+			<signal id="18" name="joy_signal_18" modality="torso" repetitivity="0" min="2" max="4"  probability_start="0" probability_end="0"/>
+			<signal id="19" name="joy_signal_19" modality="torso" repetitivity="0" min="2" max="4"  probability_start="0" probability_end="0"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-regret" type="mse">
+		<signals>
+			<signal id="1" name="faceexp=regret_signal_1" modality="face" excludelist="regret_signal_2" repetitivity="0"  min="0.5" max="1"  probability_start="0.1" probability_end="0.01"/>
+			<signal id="2" name="faceexp=regret_signal_2" modality="face" excludelist="regret_signal_1" repetitivity="0"  min="0.5" max="1"  probability_start="0.1" probability_end="0.01"/>
+			<signal id="3" name="faceexp=regret_signal_3" modality="face" repetitivity="0"  min="1" max="1.5"  probability_start="0.1" probability_end="0.01"/>
+			<signal id="4" name="faceexp=regret_signal_4" modality="face" excludelist="regret_signal_5,regret_signal_25,regret_signal_7,regret_signal_8,regret_signal_9" repetitivity="0"  min="1" max="4"  probability_start="0.01" probability_end="0.01"/>
+			<signal id="5" name="faceexp=regret_signal_5" modality="face" excludelist="regret_signal_4,regret_signal_25,regret_signal_7,regret_signal_8,regret_signal_9" repetitivity="0"  min="1" max="4"  probability_start="0.01" probability_end="0.01"/>
+			<!-- zamiana is ok-->
+			<signal id="6" name="faceexp=regret_signal_25" modality="face" repetitivity="0" min="0" max="0"  probability_start="0" probability_end="0"/>
+			<signal id="7" name="faceexp=regret_signal_7" modality="face" excludelist="regret_signal_5,regret_signal_25,regret_signal_4,regret_signal_8,regret_signal_9" repetitivity="0" min="2" max="3"  probability_start="0.1" probability_end="0.1"/>
+			<signal id="8" name="faceexp=regret_signal_8" modality="face" excludelist="regret_signal_5,regret_signal_25,regret_signal_7,regret_signal_4,regret_signal_9" repetitivity="0" min="2" max="3"  probability_start="0.1" probability_end="0.1"/>
+			<signal id="9" name="faceexp=regret_signal_9" modality="face" excludelist="regret_signal_5,regret_signal_25,regret_signal_7,regret_signal_8,regret_signal_4" repetitivity="0" min="2" max="3"  probability_start="0.1" probability_end="0.1"/>
+			<signal id="10" name="faceexp=regret_signal_10" modality="face" repetitivity="0" min="1.5" max="3"  probability_start="0.0" probability_end="0.0"/>
+			<signal id="11" name="SHAKE1" modality="head" repetitivity="1" min="1" max="2"  probability_start="0.1" probability_end="0.1"/>
+			<signal id="12" name="NOD1" modality="head" excludelist="regret_signal_13,regret_signal_14" repetitivity="0" min="1.2" max="2.5"  probability_start="0.01" probability_end="0.01"/>
+			<signal id="13" name="regret_signal_13" modality="head" excludelist="NOD1,regret_signal_14" repetitivity="0" min="1.2" max="2.5"  probability_start="0.01" probability_end="0.01"/>
+			<signal id="14" name="regret_signal_14" modality="head" excludelist="NOD1,regret_signal_13" repetitivity="0" min="1.2" max="2.5"  probability_start="0.01" probability_end="0.01"/>
+			<signal id="15" name="regret_signal_15" modality="torso" repetitivity="0" min="3.5" max="4.5"  probability_start="0.5" probability_end="0.01"/>
+			<signal id="16" name="regret_signal_16" modality="head" repetitivity="1" min="1.5" max="3.2"  probability_start="0.9" probability_end="0.8"/>
+			<signal id="17" name="gaze=regret_signal_17" modality="gaze" repetitivity="0" min="1" max="2.5"  probability_start="0.8" probability_end="0.7"/>
+			<signal id="18" name="faceexp=regret_signal_18" modality="face" repetitivity="0" min="1" max="2.5"  probability_start="0.8" probability_end="0.8"/>
+			<signal id="19" name="faceexp=regret_signal_19" modality="face" repetitivity="0" min="1" max="2.5"  probability_start="0.8" probability_end="0.8"/>
+			<signal id="20" name="faceexp=regret_signal_20" modality="face" repetitivity="0" min="0.5" max="1.5"  probability_start="0.6" probability_end="0.1"/>
+			<signal id="21" name="faceexp=regret_signal_21" modality="face" repetitivity="0" min="1.5" max="3"  probability_start="0.8" probability_end="0.5"/>
+			<signal id="22" name="faceexp=regret_signal_22" modality="face" repetitivity="0" min="1.5" max="2"  probability_start="0.5" probability_end="0.8"/>
+			<signal id="23" name="gaze=regret_signal_23" modality="gaze" repetitivity="0" min="2" max="4"  probability_start="0.5" probability_end="0.7"/>
+			<signal id="24" name="regret_signal_24" modality="head" repetitivity="0" min="1.5" max="2"  probability_start="0.4" probability_end="0.8"/>
+			<!-- zamiana is ok-->
+			<signal id="25" name="faceexp=regret_signal_6" modality="face" excludelist="regret_signal_5,regret_signal_4,regret_signal_7,regret_signal_8,regret_signal_9" repetitivity="0" min="1.2" max="2.5"  probability_start="0.7" probability_end="0.8"/>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="12"/>
+					<thennotpresent id="13"/>
+				</implication>
+				<implication>
+					<ifpresent id="13"/>
+					<thennotpresent id="12"/>
+				</implication>
+				<implication>
+					<ifpresent id="12"/>
+					<thennotpresent id="14"/>
+				</implication>
+				<implication>
+					<ifpresent id="14"/>
+					<thennotpresent id="12"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="emotion-rejoiceS" type="mse">
+		<signals>
+			<signal id="1" name="faceexp=rejoice_signal_1" modality="face" excludelist="rejoice_signal_5,rejoice_signal_9" repetitivity="0" min="2" max="4"  probability_start="0.25" probability_end="0.85"/>
+			<signal id="2" name="faceexp=rejoice_signal_2" modality="face" repetitivity="0" min="0" max="0"  probability_start="0" probability_end="0"/>
+			<signal id="3" name="faceexp=rejoice_signal_3" modality="face" excludelist="rejoice_signal_7" repetitivity="0" min="2" max="4"  probability_start="0.0" probability_end="0.0"/>
+			<signal id="4" name="faceexp=rejoice_signal_4" modality="face" excludelist="rejoice_signal_8" repetitivity="0" min="2" max="4"  probability_start="0.0" probability_end="0.0"/>
+			<signal id="5" name="faceexp=rejoice_signal_5" modality="face" excludelist="rejoice_signal_1,rejoice_signal_9" repetitivity="0" min="2" max="4"  probability_start="0.25" probability_end="0.85"/>
+			<signal id="6" name="faceexp=rejoice_signal_6" modality="face" repetitivity="0" min="0" max="0"  probability_start="0" probability_end="0"/>
+			<signal id="7" name="faceexp=rejoice_signal_7" modality="face" excludelist="rejoice_signal_3" repetitivity="0" min="0.5" max="1"  probability_start="0.1" probability_end="0.01"/>
+			<signal id="8" name="faceexp=rejoice_signal_8" modality="face" excludelist="rejoice_signal_4" repetitivity="0" min="0.5" max="1"  probability_start="0.1" probability_end="0.01"/>
+			<signal id="9" name="faceexp=rejoice_signal_9" modality="face" excludelist="rejoice_signal_5,rejoice_signal_1" repetitivity="0" min="2" max="2"  probability_start="0.3" probability_end="0.01"/>
+			<signal id="10" name="faceexp=rejoice_signal_10" modality="face" repetitivity="0" min="0" max="0"  probability_start="0" probability_end="0"/>
+			<signal id="11" name="faceexp=rejoice_signal_11" modality="face" repetitivity="0" min="0.5" max="1"  probability_start="0.1" probability_end="0.01"/>
+			<signal id="12" name="faceexp=rejoice_signal_12" modality="face" repetitivity="0" min="0.5" max="1"  probability_start="0.1" probability_end="0.01"/>
+			<signal id="13" name="rejoice_signal_13" modality="head" repetitivity="0" min="0.4" max="0.7"  probability_start="0.0" probability_end="0.0"/>
+			<signal id="14" name="rejoice_signal_14" modality="head" repetitivity="0" min="2" max="3"  probability_start="0.8" probability_end="0.9"/>
+			<signal id="15" name="gaze=rejoice_signal_15" modality="gaze" repetitivity="0" min="2" max="4"  probability_start="0.3" probability_end="0.7"/>
+			<signal id="16" name="rejoice_signal_16" modality="torso" repetitivity="0" min="3.6" max="5"  probability_start="0.3" probability_end="0.5"/>
+			<signal id="17" name="gaze=rejoice_signal_17" modality="gaze" repetitivity="0" min="2" max="3"  probability_start="0.5" probability_end="0.01"/>
+			<signal id="18" name="faceexp=rejoice_signal_18" modality="face" repetitivity="0" min="2.5" max="4"  probability_start="0.9" probability_end="0.35"/>
+			<signal id="19" name="faceexp=rejoice_signal_19" modality="face" repetitivity="0" min="2.1" max="3.3"  probability_start="0.35" probability_end="0.9"/>
+			<!-- zamiana is ok-->
+			<signal id="20" name="rejoice_signal_21" modality="head" repetitivity="0" min="0.5" max="1.0"  probability_start="0.55" probability_end="0.85"/>
+			<signal id="21" name="rejoice_signal_20" modality="head" repetitivity="0" min="0.5" max="1.0"  probability_start="0.85" probability_end="0.55"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="emotion-test" type="mse">
+		<signals>
+			<signal id="1" name="faceexp=test_signal_1" modality="face" repetitivity="0" min="1" max="2"  probability_start="0.7" probability_end="0.7"/>
+			<signal id="2" name="faceexp=test_signal_2" modality="face" repetitivity="0" min="1" max="2"  probability_start="0.7" probability_end="0.7"/>
+			<signal id="3" name="faceexp=test_signal_3" modality="face" repetitivity="0" min="1" max="2"  probability_start="0.0" probability_end="0.0"/>
+			<signal id="4" name="faceexp=test_signal_4" modality="face" excludelist="test_signal_3,test_signal_1,test_signal_5" repetitivity="0" min="1" max="2" probability_start="0.0" probability_end="0.0"/>
+			<signal id="5" name="faceexp=test_signal_5" modality="face" excludelist="test_signal_3,test_signal_4,test_signal_1" repetitivity="0" min="1" max="2" probability_start="0.0" probability_end="0.0"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<!--END OF  MSE -->
+</behaviorsets>

@@ -1,0 +1,87 @@
+import * from "base.material"
+
+material wos_border : base {
+	set_texture_alias celShadingMap office/wos/border.png
+}
+
+material wos001 : base {
+	set_texture_alias diffuseMap office/wos/wos001.png
+	set_texture_alias celShadingMap office/wos/wos001_cel.png
+}
+material wos002 : base {
+	set_texture_alias diffuseMap office/wos/wos002.png
+	set_texture_alias celShadingMap office/wos/wos002_cel.png
+}
+material wos003 : base {
+	set_texture_alias diffuseMap office/wos/wos003.png
+	set_texture_alias celShadingMap office/wos/wos003_cel.png
+}
+material wos004 : base {
+	set_texture_alias diffuseMap office/wos/wos004.png
+	set_texture_alias celShadingMap office/wos/wos004_cel.png
+}
+material wos005 : base {
+	set_texture_alias diffuseMap office/wos/wos005.png
+	set_texture_alias celShadingMap office/wos/wos005_cel.png
+}
+material wos006 : base {
+	set_texture_alias diffuseMap office/wos/wos006.png
+	set_texture_alias celShadingMap office/wos/wos006_cel.png
+}
+material wos007 : base {
+	set_texture_alias diffuseMap office/wos/wos007.png
+	set_texture_alias celShadingMap office/wos/wos007_cel.png
+}
+material wos008 : base {
+	set_texture_alias diffuseMap office/wos/wos008.png
+	set_texture_alias celShadingMap office/wos/wos008_cel.png
+}
+material wos009 : base {
+	set_texture_alias diffuseMap office/wos/wos009.png
+	set_texture_alias celShadingMap office/wos/wos009_cel.png
+}
+material wos010 : base {
+	set_texture_alias diffuseMap office/wos/wos010.png
+	set_texture_alias celShadingMap office/wos/wos010_cel.png
+}
+
+material wos011 : base {
+	set_texture_alias diffuseMap office/wos/wos011.png
+	set_texture_alias celShadingMap office/wos/wos011_cel.png
+}
+material wos012 : base {
+	set_texture_alias diffuseMap office/wos/wos012.png
+	set_texture_alias celShadingMap office/wos/wos012_cel.png
+}
+material wos013 : base {
+	set_texture_alias diffuseMap office/wos/wos013.png
+	set_texture_alias celShadingMap office/wos/wos013_cel.png
+}
+material wos014 : base {
+	set_texture_alias diffuseMap office/wos/wos014.png
+	set_texture_alias celShadingMap office/wos/wos014_cel.png
+}
+material wos015 : base {
+	set_texture_alias diffuseMap office/wos/wos015.png
+	set_texture_alias celShadingMap office/wos/wos015_cel.png
+}
+material wos016 : base {
+	set_texture_alias diffuseMap office/wos/wos016.png
+	set_texture_alias celShadingMap office/wos/wos016_cel.png
+}
+material wos017 : base {
+	set_texture_alias diffuseMap office/wos/wos017.png
+	set_texture_alias celShadingMap office/wos/wos017_cel.png
+}
+material wos018 : base {
+	set_texture_alias diffuseMap office/wos/wos018.png
+	set_texture_alias celShadingMap office/wos/wos018_cel.png
+}
+material wos019 : base {
+	set_texture_alias diffuseMap office/wos/wos019.png
+	set_texture_alias celShadingMap office/wos/wos019_cel.png
+}
+material wos020 : base {
+	set_texture_alias diffuseMap office/wos/wos020.png
+	set_texture_alias celShadingMap office/wos/wos020_cel.png
+}

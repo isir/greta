@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ssi>
+    <prosody>
+        <voice activity="1">
+            <speech></speech>
+            <laughter></laughter>
+        </voice>
+        <praat>
+            <feature name="Pitch median (Hz)"></feature>
+            <feature name="Pitch mean (Hz)"></feature>
+            <feature name="Pitch sd (Hz)"></feature>
+            <feature name="Pitch min (Hz)"></feature>
+            <feature name="Pitch max (Hz)"></feature>
+            <feature name="Pulses number"></feature>
+            <feature name="Pulses per sec (pulses/sec)"></feature>
+            <feature name="Periods number"></feature>
+            <feature name="Period mean (sec)"></feature>
+            <feature name="Period sd (sec)"></feature>
+            <feature name="Fraction locally unvoiced frames (%)"></feature>
+            <feature name="Voice breaks number"></feature>
+            <feature name="Voice breaks degree (%)"></feature>
+            <feature name="Jitter local (%)"></feature>
+            <feature name="Jitter local abs (sec)"></feature>
+            <feature name="Jitter rap (%)"></feature>
+            <feature name="Jitter ppq5 (%)"></feature>
+            <feature name="Jitter ddp (%)"></feature>
+            <feature name="Shimmer local (%)"></feature>
+            <feature name="Shimmer local (dB)"></feature>
+            <feature name="Shimmer apq3 (%)"></feature>
+            <feature name="Shimmer apq5 (%)"></feature>
+            <feature name="Shimmer apq11 (%)"></feature>
+            <feature name="Shimmer dda (%)"></feature>
+            <feature name="Harmonicity mean autocor"></feature>
+            <feature name="Harmonicity mean noise-to-harmonics ratio"></feature>
+            <feature name="Harmonicity mean harmonics-to-noise ratio (dB)"></feature>
+            <feature name="Speechrate duration (sec)"></feature>
+            <feature name="Speechrate voiced count"></feature>
+            <feature name="Speechrate (syllables/sec)"></feature>
+            <feature name="Intensity minimum (dB)"></feature>
+            <feature name="Intensity maximum (dB)"></feature>
+            <feature name="Intensity median (dB)"></feature>
+            <feature name="Intensity average (dB)"></feature>
+        </praat>
+        <opensmile>
+            <feature name="Pitch"></feature>
+            <feature name="PitchDirection"></feature>
+            <feature name="Energy"></feature>
+            <GenevaMinimalFeatureSet>
+                <feature name="F0semitoneFrom55Hz_sma3nz_amean"></feature>
+                <feature name="F0semitoneFrom55Hz_sma3nz_stddevNorm"></feature>
+                <feature name="F0semitoneFrom55Hz_sma3nz_percentile20"></feature>
+                <feature name="F0semitoneFrom55Hz_sma3nz_percentile50"></feature>
+                <feature name="F0semitoneFrom55Hz_sma3nz_percentile80"></feature>
+                <feature name="F0semitoneFrom55Hz_sma3nz_pctlrange0-2"></feature>
+                <feature name="StddevUnvoicedSegmentLength"></feature>
+            </GenevaMinimalFeatureSet>
+        </opensmile>
+		<keyword>hello</keyword>
+    </prosody>
+    <head>
+        <headposition>
+            <xpos>15.244831</xpos>
+            <ypos>0.000000</ypos>
+        </headposition>
+        <headorientation>
+            <pitch>302.401489</pitch>
+			<roll>234.510056</roll>
+            <yaw>0.000000</yaw>
+            <headfocus>1.000000</headfocus>
+            <headtilt>0.000000</headtilt>
+        </headorientation>
+        <headnod>0.000000</headnod>
+        <headshake>0.000000</headshake>
+        <smile>-91.000000</smile>
+    </head>
+    <body>
+        <leanposture>0.000000</leanposture>
+        <openness>0.000000</openness>
+        <overallactivity>0.000000</overallactivity>
+        <energy>0.000000</energy>
+        <gesture name="ArmsOpen"></gesture>
+        <gesture name="ArmsCrossed"></gesture>
+        <gesture name="LeftHandHeadTouch"></gesture>
+        <gesture name="RightHandHeadTouch"></gesture>
+        <gesture name="LeanFront"></gesture>
+        <gesture name="LeanBack"></gesture>
+    </body>
+</ssi>

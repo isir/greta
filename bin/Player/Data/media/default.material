@@ -1,0 +1,109 @@
+
+material camera_debug_marker
+{
+	receive_shadows off
+	technique
+	{
+		pass
+		{
+            diffuse 1 1 1 0.6
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+
+
+material light_debug_marker
+{
+	receive_shadows off
+	technique
+	{
+		pass
+		{
+			ambient 1 1 1 1
+			diffuse 1 1 1 0.8
+			//emissive 1 1 1 1
+			//cull_hardware none
+			//cull_software none
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+
+material red
+{
+	technique
+	{
+		pass
+		{
+			ambient 0.7 0 0 1
+            diffuse 0.7 0 0 1
+			specular 0.9 0.7 0.7 50
+		}
+	}
+}
+material green
+{
+	technique
+	{
+		pass
+		{
+            ambient 0 0.7 0 1
+            diffuse 0 0.7 0 1
+			specular 0.7 0.9 0.7 50
+		}
+	}
+}
+material blue
+{
+	technique
+	{
+		pass
+		{
+            ambient 0 0 0.7 1
+            diffuse 0 0 0.7 1
+			specular 0.7 0.7 0.9 50
+		}
+	}
+}
+
+material black
+{
+	technique
+	{
+		pass
+		{
+            ambient 0.05 0.05 0.05 1
+            diffuse 0.05 0.05 0.05 1
+			specular 0.3 0.3 0.3 50
+		}
+	}
+}
+
+material dark_grey
+{
+	technique
+	{
+		pass
+		{
+            ambient 0.3 0.3 0.3 1
+            diffuse 0.3 0.3 0.3 1
+			specular 0.7 0.7 0.7 50
+		}
+	}
+}
+
+material light_grey
+{
+	technique
+	{
+		pass
+		{
+            ambient 0.7 0.7 0.7 1
+            diffuse 0.7 0.7 0.7 1
+			specular 0.9 0.9 0.9 50
+		}
+	}
+}

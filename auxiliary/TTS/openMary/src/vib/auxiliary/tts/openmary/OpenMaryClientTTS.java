@@ -1,0 +1,230 @@
+/*
+ *  This file is part of the auxiliaries of VIB (Virtual Interactive Behaviour).
+ */
+
+package vib.auxiliary.tts.openmary;
+
+import vib.core.util.IniManager;
+import vib.core.util.audio.Audio;
+import vib.core.util.log.Logs;
+import vib.core.util.speech.Phoneme;
+import vib.core.util.speech.Speech;
+import vib.core.util.speech.TTS;
+import vib.core.util.xml.XML;
+import vib.core.util.xml.XMLParser;
+import vib.core.util.xml.XMLTree;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
+
+
+/**
+ * Implementation of the interface {@link vib.core.util.speech.TTS TTS} that use <a href="http://mary.dfki.de">Open Mary</a>. <br/>
+ * This class call the Open Mary server (version 3.x.x or 4.x.x) to synthetise the Speech.<br/>
+ * It is necessary that the Open Mary's sever is already started when the constructor of this class is called.
+ * @author Andre-Marie Pez
+ */
+public class OpenMaryClientTTS implements TTS{
+
+
+    private marytts.client.MaryClient mary_4_3_0;
+    private de.dfki.lt.mary.client.MaryClient mary_3_6_0;
+    private int maryVersion;
+
+    private XMLParser maryparser;
+    private String voice;
+    private String lang;
+
+    private Speech speech;
+    private List<Phoneme> phonemes;
+    private Audio audio;
+    private double timer;
+    private boolean interreuptionReactionSupported = false;
+
+    /**
+     * Default constructor.<br/>
+     * Tries to make a connection with one of Mary server 3.x.x or 4.x.x and determines the version of this one.<br/>
+     * Values MARY_HOST and MARY_PORT must be defined in the global {@code IniManager}.
+     */
+    public OpenMaryClientTTS(){
+        startClient();
+        clean();
+        maryparser = XML.createParser();
+        maryparser.setValidating(false);
+    }
+
+    private void startClient(){
+        maryVersion=0;
+        Thread starter = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                String host = IniManager.getGlobals().getValueString("MARY_HOST");
+                int port = IniManager.getGlobals().getValueInt("MARY_PORT");
+                //TODO perhaps make an HTTP client instead of using a MaryClient objects (but how to know the Mary's version?)
+
+                System.setProperty("mary.client.quiet", "true");//to shut up mary
+                while(maryVersion==0){
+                    try{
+                        //we try to find a server using the target host and port
+                        //if it don't exist it's useless to try to connect to mary 4 then mary 3
+                        java.net.Socket test = new java.net.Socket(host, port);
+                        test.close();
+
+                        //first, we try to connect to mary 4.3
+                        try {
+                            mary_4_3_0 = marytts.client.MaryClient.getMaryClient(new marytts.client.http.Address(host, port));
+                            maryVersion=OpenMaryConstants.MARY_4;
+                        }
+                        catch (Exception mary4FailExeption) {
+                            //if we fail to connect to mary 4.3, we try mary 3.6
+                            mary_3_6_0 = new de.dfki.lt.mary.client.MaryClient(host, port);
+                            maryVersion=OpenMaryConstants.MARY_3;
+                        }
+                    }
+                    catch (Exception testSocketOrMary3FailException) {
+                        try{
+                            Thread.sleep(500);
+                        }
+                        catch (Exception sleepExeption) {
+                        }
+                    }
+                }
+            }
+        });
+        starter.start();
+    }
+
+    @Override
+    public void setSpeech(Speech speech) {
+        clean();
+        this.speech = speech;
+        lang = OpenMaryConstants.toMaryLang(speech.getLanguage(),maryVersion);
+        voice = OpenMaryConstants.toMaryVoice(speech.getLanguage(), maryVersion);
+    }
+    
+    @Override
+    public boolean isInterruptionReactionSupported() {
+        return interreuptionReactionSupported;
+    }
+
+    @Override
+    public void compute(boolean doTemporize, boolean doAudio, boolean doPhonems) {
+        String text = OpenMaryConstants.toMaryXML(speech, lang);
+        if(doTemporize || doPhonems){
+            if(maryVersion==0){
+                //try to start a Mary client
+                startClient();
+            }
+            ByteArrayOutputStream out = new ByteArrayOutputStream();
+            try {
+                //case Mary 4.3
+                if(maryVersion==OpenMaryConstants.MARY_4) {
+                    mary_4_3_0.process(
+                        text,
+                        OpenMaryConstants.IN_TYPE_MARYXML,
+                        OpenMaryConstants.OUT_TYPE_PARAMS,
+                        lang,
+                        OpenMaryConstants.AUDIO_TYPE_WAVE,
+                        voice,
+                        out);
+                }
+                else
+                    //case Mary 3.6
+                    if(maryVersion==OpenMaryConstants.MARY_3) {
+                    mary_3_6_0.process(
+                        text,
+                        OpenMaryConstants.IN_TYPE_MARYXML,
+                        OpenMaryConstants.OUT_TYPE_PARAMS,
+                        OpenMaryConstants.AUDIO_TYPE_WAVE,
+                        voice,
+                        out);
+                }
+                XMLTree result = maryparser.parseBuffer(out.toString());
+                timer = speech.getStart().getValue();
+                extractPhonemes(result);
+            }
+            catch (Exception ex) {Logs.error(this.getClass().getName()+" Cant receives params from Open Mary server.");}
+        }
+        if(doAudio){
+            if(maryVersion==0){
+                //try to start a Mary client
+                startClient();
+            }
+            try {
+                ByteArrayOutputStream out = new ByteArrayOutputStream();
+                //case Mary 4.3
+                if(maryVersion==OpenMaryConstants.MARY_4) {
+                    mary_4_3_0.process(
+                        text,
+                        OpenMaryConstants.IN_TYPE_MARYXML,
+                        OpenMaryConstants.OUT_TYPE_AUDIO,
+                        lang,
+                        OpenMaryConstants.AUDIO_TYPE_WAVE,
+                        voice,
+                        out);
+                }
+                else
+                    //case Mary 3.6
+                    if(maryVersion==OpenMaryConstants.MARY_3) {
+                    mary_3_6_0.process(
+                        text,
+                        OpenMaryConstants.IN_TYPE_MARYXML,
+                        OpenMaryConstants.OUT_TYPE_AUDIO,
+                        OpenMaryConstants.AUDIO_TYPE_WAVE,
+                        voice,
+                        out);
+                }
+                audio = Audio.getAudio(new ByteArrayInputStream(out.toByteArray()));
+            }
+            catch (Exception ex) {Logs.error(this.getClass().getName()+" Cant receives audio from Open Mary server.");}
+        }
+    }
+
+    @Override
+    public List<Phoneme> getPhonemes() {
+        return phonemes;
+    }
+
+    @Override
+    public Audio getAudio() {
+        return audio;
+    }
+
+    private void clean(){
+        audio = null;
+        phonemes = new ArrayList<Phoneme>();
+        speech = null;
+        timer = 0;
+    }
+
+    private void extractPhonemes(XMLTree t){
+        //read phonemes
+        if(t.getName().equalsIgnoreCase("ph")){
+            double duration = t.getAttributeNumber("d") / 1000.0;
+            Phoneme.PhonemeType [] phos = OpenMaryConstants.convertPhoneme(t.getAttribute("p"));
+            for(Phoneme.PhonemeType pho : phos) {
+                phonemes.add(new Phoneme(pho,duration/((double)phos.length)));
+            }
+            //TODO add sressingpoint ? (but it's only with openMary) - see maryinterface.cpp line 1138 to 1146
+            timer += duration;
+        }
+
+        //read boundaries
+        if(t.getName().equalsIgnoreCase("boundary") && !t.getAttribute("duration").isEmpty()){
+            double duration = t.getAttributeNumber("duration")/1000.0;
+            phonemes.add(new Phoneme(Phoneme.PhonemeType.pause,duration));
+            timer += duration;
+        }
+
+        //read time markers
+        if(t.getName().equalsIgnoreCase("mark")) {
+            speech.getTimeMarker(t.getAttribute("name")).setValue(timer);
+        }
+
+        //same thing on children
+        for(XMLTree child : t.getChildrenElement()) {
+            extractPhonemes(child);
+        }
+    }
+}

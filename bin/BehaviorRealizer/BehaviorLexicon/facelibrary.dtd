@@ -1,0 +1,34 @@
+<!ELEMENT facelibrary ((declaration,implementation)|((actiondeclaration)*|(expression)*))>
+
+<!ELEMENT declaration (actiondeclaration)*>
+
+<!ELEMENT actiondeclaration (fap|action|eyesdirection|headdirection|headmovement)*>
+<!ATTLIST  actiondeclaration name CDATA #REQUIRED>
+
+<!ELEMENT fap EMPTY>
+<!ATTLIST fap num CDATA #REQUIRED value CDATA #REQUIRED>
+
+<!ELEMENT implementation (expression)*>
+
+<!ELEMENT expression (((action*)|(probability*)),(channel*))>
+<!ATTLIST expression class CDATA #REQUIRED
+                                   instance CDATA #REQUIRED comment CDATA "unknown">
+
+<!ELEMENT probability (action)+>
+<!ATTLIST probability value CDATA #REQUIRED>
+
+<!ELEMENT action EMPTY>
+<!ATTLIST action name CDATA #REQUIRED intensity CDATA "1" side CDATA "BOTH">
+
+<!ELEMENT channel EMPTY>
+<!ATTLIST channel name CDATA #REQUIRED>
+
+<!ELEMENT eyesdirection EMPTY>
+<!ATTLIST eyesdirection h CDATA #REQUIRED v CDATA #REQUIRED>
+
+<!ELEMENT headdirection EMPTY>
+<!ATTLIST headdirection h CDATA #REQUIRED v CDATA #REQUIRED t CDATA #REQUIRED>
+
+<!ELEMENT headmovement EMPTY>
+<!ATTLIST headmovement type CDATA #REQUIRED amplitude CDATA #REQUIRED period CDATA #REQUIRED>
+

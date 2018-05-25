@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gestuary xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Common/Data/xml/gestuary.xsd">
+    <gesture category="_test" id="Bateau_Pos_B">
+        <phase>
+            <hand openness="1.0" side="LEFT">
+                <uniformPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="0.08"/>
+                    <verticalLocation fixed="false" overridable="true" value="-0.2"/>
+                    <frontalLocation fixed="false" overridable="false" value="0.5"/>
+                </uniformPosition>
+                <handShape overridable="false" value="FORM_OPEN"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.8827765682127073" x="-0.10238216331397239"
+                    y="0.3984666858989583" z="0.22682090617588005"/>
+            </hand>
+            <hand openness="1.0" side="RIGHT">
+                <uniformPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="0.08"/>
+                    <verticalLocation fixed="false" overridable="true" value="-0.2"/>
+                    <frontalLocation fixed="false" overridable="false" value="0.5"/>
+                </uniformPosition>
+                <handShape overridable="false" value="FORM_OPEN"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.8827765682127073" x="-0.10238216331397239"
+                    y="-0.3984666858989583" z="-0.22682090617588005"/>
+            </hand>
+        </phase>
+    </gesture>
+    <gesture category="_test" id="Micropieux_Ges_B">
+        <phase>
+            <hand openness="0.6999999999999993" side="LEFT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YUpperC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZMiddle"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="CLOSED_STRAIGHT"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.9685831665992737" x="-0.24868988990783691"
+                    y="0.0" z="0.0"/>
+            </hand>
+            <hand openness="0.6999999999999993" side="RIGHT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YUpperC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZMiddle"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="CLOSED_STRAIGHT"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.9685831665992737" x="-0.24868988990783691"
+                    y="0.0" z="0.0"/>
+            </hand>
+        </phase>
+        <phase>
+            <hand openness="0.6999999999999993" side="LEFT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YCC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZFar"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="CLOSED_INSIDE"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.9685831665992737" x="-0.24868988990783691"
+                    y="0.0" z="0.0"/>
+            </hand>
+            <hand openness="0.6999999999999993" side="RIGHT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YCC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZFar"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="CLOSED_INSIDE"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.9685831665992737" x="-0.24868988990783691"
+                    y="0.0" z="0.0"/>
+            </hand>
+        </phase>
+    </gesture>
+    <gesture category="_test" id="MonteeDesCrues_Ges_B">
+        <phase>
+            <hand side="LEFT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XP"/>
+                    <verticalLocation fixed="false" overridable="false" value="YLowerEP"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZFar"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="FORM_OPEN"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.7803943753242493" x="0.0"
+                    y="0.6252875924110413" z="0.0"/>
+            </hand>
+            <hand side="RIGHT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XP"/>
+                    <verticalLocation fixed="false" overridable="false" value="YLowerEP"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZFar"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="FORM_OPEN"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.7803943753242493" x="0.0"
+                    y="-0.6252875924110413" z="0.0"/>
+            </hand>
+        </phase>
+        <phase>
+            <hand side="LEFT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XP"/>
+                    <verticalLocation fixed="false" overridable="false" value="YUpperC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZFar"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="FORM_OPEN"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.7997005581855774" x="0.0"
+                    y="0.6003990173339844" z="0.0"/>
+            </hand>
+            <hand side="RIGHT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XP"/>
+                    <verticalLocation fixed="false" overridable="false" value="YUpperC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZFar"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="FORM_OPEN"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.7997005581855774" x="0.0"
+                    y="-0.6003990173339844" z="0.0"/>
+            </hand>
+        </phase>
+    </gesture>
+    <gesture category="_test" id="SousLeMusee_Ges_R">
+        <phase>
+            <hand openness="0.5" side="RIGHT">
+                <uniformPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="0.5"/>
+                    <verticalLocation fixed="false" overridable="false" value="0.0"/>
+                    <frontalLocation fixed="false" overridable="false" value="0.65"/>
+                </uniformPosition>
+                <handShape overridable="true" value="FORM_POINT1"/>
+                <wristOrientation global="false" overridable="false"
+                    w="1.0" x="0.0" y="0.0" z="0.0"/>
+            </hand>
+        </phase>
+        <phase>
+            <hand openness="0.3000000000000007" side="RIGHT">
+                <uniformPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="0.3"/>
+                    <verticalLocation fixed="false" overridable="false" value="-0.2"/>
+                    <frontalLocation fixed="false" overridable="false" value="0.65"/>
+                </uniformPosition>
+                <handShape overridable="true" value="FORM_POINT1"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.9239703416824341" x="0.173463836312294"
+                    y="0.29342690110206604" z="0.173463836312294"/>
+            </hand>
+        </phase>
+    </gesture>
+    <gesture category="beat" id="Beat_Ges_L">
+        <phase>
+            <hand openness="0.22000000000000064" side="LEFT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YCC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZMiddle"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="BEND_ANGLED"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.9381855726242065" x="-0.1783389151096344"
+                    y="0.2936151623725891" z="-0.042346853762865067"/>
+            </hand>
+        </phase>
+        <phase>
+            <hand openness="0.2400000000000002" side="LEFT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YLowerC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZMiddle"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="BEND_ANGLED"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.9309112429618835" x="-0.12987548112869263"
+                    y="0.2725246548652649" z="-0.20558924973011017"/>
+            </hand>
+        </phase>
+    </gesture>
+    <gesture category="beat" id="Beat_Ges_R">
+        <phase>
+            <hand openness="0.22000000000000064" side="RIGHT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YCC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZMiddle"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="BEND_ANGLED"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.9381855726242065" x="-0.1783389151096344"
+                    y="-0.2936151623725891" z="0.042346853762865067"/>
+            </hand>
+        </phase>
+        <phase>
+            <hand openness="0.2400000000000002" side="RIGHT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YLowerC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZMiddle"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="BEND_ANGLED"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.9334424734115601" x="-0.1345231682062149"
+                    y="-0.2582613229751587" z="0.2094988077878952"/>
+            </hand>
+        </phase>
+    </gesture>
+    <gesture category="performative" id="Ask_Ges_L">
+        <phase>
+            <hand openness="1.0" side="LEFT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XCC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YLowerC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZMiddle"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="EMPTY"/>
+                <wristOrientation global="false" overridable="false"
+                    w="1.0" x="0.0" y="0.0" z="0.0"/>
+            </hand>
+        </phase>
+        <phase>
+            <hand openness="0.4500000000000002" side="LEFT">
+                <symbolicPosition>
+                    <horizontalLocation fixed="false"
+                        overridable="false" value="XC"/>
+                    <verticalLocation fixed="false" overridable="false" value="YLowerC"/>
+                    <frontalLocation fixed="false" overridable="false" value="ZMiddle"/>
+                </symbolicPosition>
+                <handShape overridable="false" value="EMPTY"/>
+                <wristOrientation global="false" overridable="false"
+                    w="0.818149745464325" x="0.0" y="0.5750052332878113" z="0.0"/>
+            </hand>
+        </phase>
+    </gesture>
+</gestuary>

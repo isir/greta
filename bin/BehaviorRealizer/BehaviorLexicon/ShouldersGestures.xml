@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ShouldersGestures xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Common/Data/xml/ShouldersGestures.xsd">
+<!--
+verticalGesture : the shoulder is lifted up relative to the anatomical standard position, or dropped down lowered to the ground relative to the anatomical standard position
+horizontalGesture : the shoulder is put to the front relative to the anatomical standard position, or pulled back relative to the anatomical standard position
+-->
+	<ShoulderGesture id="shoulderUp" >
+		<shoulder side="left">
+			<verticalGesture>up</verticalGesture>
+			<horizontalGesture>middle</horizontalGesture>
+		</shoulder>
+		
+		<shoulder side="right">
+			<verticalGesture>up</verticalGesture>
+			<horizontalGesture>middle</horizontalGesture>
+		</shoulder> 
+	</ShoulderGesture>
+	
+	<ShoulderGesture id="shoulderDown" >
+		<shoulder side="left">
+			<verticalGesture>down</verticalGesture>
+			<horizontalGesture>middle</horizontalGesture>
+		</shoulder>
+		
+ 		<shoulder side="right">
+			<verticalGesture>down</verticalGesture>
+			<horizontalGesture>middle</horizontalGesture>
+		</shoulder> 
+	</ShoulderGesture>
+	
+	<ShoulderGesture id="shoulderFront" >
+		<shoulder side="left">
+			<verticalGesture>middle</verticalGesture>
+			<horizontalGesture>forward</horizontalGesture>
+		</shoulder>
+		
+ 		<shoulder side="right">
+			<verticalGesture>middle</verticalGesture>
+			<horizontalGesture>forward</horizontalGesture>
+		</shoulder> 
+	</ShoulderGesture>
+
+	<ShoulderGesture id="shoulderback" >
+		<shoulder side="left">
+			<verticalGesture>middle</verticalGesture>
+			<horizontalGesture>backward</horizontalGesture>
+		</shoulder>
+ 		
+		<shoulder side="right">
+			<verticalGesture>middle</verticalGesture>
+			<horizontalGesture>backward</horizontalGesture>
+		</shoulder> 
+	</ShoulderGesture>
+</ShouldersGestures> 

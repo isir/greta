@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- min and max of each amount in degree-->
+<HeadIntervals>
+
+	<SagittalTilt>
+		<sagittal_amount direction="Backward">
+			<min>0</min>
+			<max>50</max>
+		</sagittal_amount>
+
+		<sagittal_amount direction="Forward">
+			<min>0</min>
+			<max>50</max>
+		</sagittal_amount>
+	</SagittalTilt>
+
+	<VerticalTorsion>
+		<vertical_amount direction="Leftward">
+			<min>0</min>
+			<max>90</max>
+		</vertical_amount>
+
+		<vertical_amount direction="Rightward">
+			<min>0</min>
+			<max>90</max>
+		</vertical_amount>
+	</VerticalTorsion>
+
+	<LateralRoll>
+		<lateral_amount direction="Leftward">
+			<min>0</min>
+			<max>60</max>
+		</lateral_amount>
+
+		<lateral_amount direction="Rightward">
+			<min>0</min>
+			<max>60</max>
+		</lateral_amount>
+	</LateralRoll>
+
+</HeadIntervals>

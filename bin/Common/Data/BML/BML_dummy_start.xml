@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bml xmlns="http://www.mindmakers.org/projects/BML" character="Greta"
+    composition="replace" id="bml1">
+    <gesture end="1.540" id="gesture_1376816504769"
+        lexeme="INFORM_GES_B_UP" start="0.448">
+        <description priority="1" type="gretabml">
+            <reference>PERFORMATIVE=INFORM_GES_B_UP</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.000</TMP.value>
+            <FLD.value>0.000</FLD.value>
+            <PWR.value>0.000</PWR.value>
+            <REP.value>0.000</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <gesture end="1.540" id="gesture_1376816504769"
+        lexeme="rest=Lap" start="0.448">
+        <description priority="1" type="gretabml">
+            <reference>rest=Lap</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.000</TMP.value>
+            <FLD.value>0.000</FLD.value>
+            <PWR.value>0.000</PWR.value>
+            <REP.value>0.000</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+	<gazeShift influence="HEAD" start="0.0" end="915"
+	offsetDirection="UP" offsetAngle="0.1" 
+	id ="bmlstartgaze"/>
+</bml>
+<!-- used for setting rest pose +gaze at start of tardis-->

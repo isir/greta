@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+    <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="scrollPane" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <Component id="scrollPane" alignment="0" max="32767" attributes="0"/>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="scrollPane">
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Container class="javax.swing.JPanel" name="panel">
+
+          <Layout>
+            <DimensionLayout dim="0">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="labelEnvironmentManager" alignment="0" max="32767" attributes="0"/>
+                          <Component id="separator1" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelType" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelProtocol" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelHost" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelPortRange" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="fieldType" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldProtocol" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldHost" min="-2" max="-2" attributes="0"/>
+                                  <Group type="102" attributes="0">
+                                      <Component id="fieldStartingPort" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="labelPortRangeSeparator" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="fieldEndingPort" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="separator2" min="-2" pref="2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="labelSendersPorts" alignment="0" max="32767" attributes="0"/>
+                          <Component id="separator3" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelMessageSenderPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelFAPSenderPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelBAPSenderPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelAudioSenderPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="fieldMessageSenderPort" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldFAPSenderPort" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldBAPSenderPort" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldAudioSenderPort" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="separator4" min="-2" pref="2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="labelReceiversPorts" alignment="0" max="32767" attributes="0"/>
+                          <Component id="separator5" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labelMessageReceiverPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelFAPReceiverPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelBAPReceiverPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelAudioReceiverPort" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="fieldMessageReceiverPort" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldFAPReceiverPort" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldBAPReceiverPort" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldAudioReceiverPort" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+            <DimensionLayout dim="1">
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="labelEnvironmentManager" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="separator1" min="-2" pref="2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelType" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldType" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelProtocol" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldProtocol" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelHost" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldHost" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelPortRange" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldStartingPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="labelPortRangeSeparator" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldEndingPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="separator2" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="labelSendersPorts" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="separator3" min="-2" pref="2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelMessageSenderPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldMessageSenderPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelFAPSenderPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldFAPSenderPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelBAPSenderPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldBAPSenderPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelAudioSenderPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldAudioSenderPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="separator4" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="labelReceiversPorts" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="separator5" min="-2" pref="2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelMessageReceiverPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldMessageReceiverPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelFAPReceiverPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldFAPReceiverPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelBAPReceiverPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldBAPReceiverPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="labelAudioReceiverPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="fieldAudioReceiverPort" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+              </Group>
+            </DimensionLayout>
+          </Layout>
+          <SubComponents>
+            <Component class="javax.swing.JLabel" name="labelEnvironmentManager">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Environment Manager:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSeparator" name="separator1">
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelType">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Type:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldType">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelProtocol">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Protocol:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldProtocol">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelHost">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Host:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="fieldHost">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[96, 20]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fieldHostActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelPortRange">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Port Range:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="fieldStartingPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[40, 20]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fieldStartingPortActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="fieldStartingPortKeyTyped"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelPortRangeSeparator">
+              <Properties>
+                <Property name="text" type="java.lang.String" value=".."/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="fieldEndingPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[40, 20]"/>
+                </Property>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="fieldEndingPortActionPerformed"/>
+                <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="fieldEndingPortKeyTyped"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JSeparator" name="separator2">
+              <Properties>
+                <Property name="orientation" type="int" value="1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelSendersPorts">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Senders Ports:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSeparator" name="separator3">
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelMessageSenderPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Message Sender:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldMessageSenderPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[30, 14]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelFAPSenderPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="FAP Sender:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldFAPSenderPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[30, 14]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelBAPSenderPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="BAP Sender:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldBAPSenderPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[30, 14]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelAudioSenderPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Audio Sender:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldAudioSenderPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[30, 14]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSeparator" name="separator4">
+              <Properties>
+                <Property name="orientation" type="int" value="1"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelReceiversPorts">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="Receivers Ports:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JSeparator" name="separator5">
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelMessageReceiverPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Message Receiver:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldMessageReceiverPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[30, 14]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelFAPReceiverPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="FAP Receiver:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldFAPReceiverPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[30, 14]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelBAPReceiverPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="BAP Receiver:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldBAPReceiverPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[30, 14]"/>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="labelAudioReceiverPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Audio Receiver:"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="fieldAudioReceiverPort">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="undefined"/>
+                <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                  <Dimension value="[30, 14]"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

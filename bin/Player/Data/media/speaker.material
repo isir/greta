@@ -1,0 +1,34 @@
+import * from "base.material"
+
+material Speaker_Baffle : base 
+{
+	set $sr 0.2
+	set $sg 0.2
+	set $sb 0.2
+	set $ss 10
+	
+	set_texture_alias diffuseMap black.png
+	set_texture_alias celShadingMap black.png
+}
+
+material Speaker_Metal : base 
+{
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 50
+	
+	set_texture_alias diffuseMap grey.bmp
+	set_texture_alias celShadingMap grey.bmp
+}
+
+material Speaker_Metal_Black : base 
+{
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 50
+	
+	set_texture_alias diffuseMap darkgrey.bmp
+	set_texture_alias celShadingMap darkgrey.bmp
+}

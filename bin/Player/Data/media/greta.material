@@ -1,0 +1,276 @@
+import * from "base.material"
+
+material greta_skin : base {
+	set $ar 0.4
+	set $ag 0.3
+	set $ab 0.25
+
+	set $dr 0.64
+	set $dg 0.48
+	set $db 0.4
+
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 10
+}
+material greta_face : base {
+	set $sr 0.2
+	set $sg 0.2
+	set $sb 0.2
+	set $ss 5
+	set_texture_alias diffuseMap greta/greta_face.png
+	set_texture_alias celShadingMap greta/greta_face.png
+}
+
+material hair : base {
+
+	set $ar 0.092
+	set $ag 0.053
+	set $ab 0.029
+
+	set $dr 0.15
+	set $dg 0.085
+	set $db 0.047
+
+	set $sr 0.2
+	set $sg 0.2
+	set $sb 0.2
+	set $ss 10
+}
+
+material hair_red_head
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.24 0.15 0.05 1.0
+			diffuse 0.48 0.24 0.08 1.0
+			specular 0.2 0.2 0.2 10
+		}
+	}
+}
+
+material lipstick : base {
+	set $sr 0.4
+	set $sg 0.4
+	set $sb 0.4
+	set $ss 30
+	set_texture_alias diffuseMap greta/greta_face.png
+	set_texture_alias celShadingMap greta/greta_face.png
+}
+
+material lipstick_red
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.5 0.5 1
+			diffuse 0.3 0.0 0.1 1
+			specular 0.5 0.5 0.5 30
+			texture_unit
+			{
+				texture greta/greta_face.png
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material gum : base {
+	set $ar 0.3
+	set $ag 0.15
+	set $ab 0.15
+
+	set $dr 0.48
+	set $dg 0.24
+	set $db 0.24
+
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 20
+}
+
+material glottis : base {
+	set $ar 0.4
+	set $ag 0.4
+	set $ab 0.4
+
+	set $dr 0.7
+	set $dg 0.7
+	set $db 0.7
+
+	set_texture_alias diffuseMap glottis.jpg
+	set_texture_alias celShadingMap glottis.jpg
+}
+
+material teeth : base {
+	set $ar 0.5
+	set $ag 0.5
+	set $ab 0.45
+
+	set $dr 0.8
+	set $dg 0.8
+	set $db 0.75
+
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.45
+	set $ss 50
+}
+
+material green_eye : base {
+	set $sr 1
+	set $sg 1
+	set $sb 1
+	set $ss 127
+	set_texture_alias diffuseMap green_eye.jpg
+	set_texture_alias celShadingMap green_eye_cel.png
+}
+
+material greta_jacket : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 3
+	set_texture_alias diffuseMap greta/jacket.png
+	set_texture_alias celShadingMap greta/jacket_cel.bmp
+}
+
+material greta_pants : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 3
+	set_texture_alias diffuseMap greta/pants.png
+	set_texture_alias celShadingMap greta/pants_cel.bmp
+}
+
+material greta_shirt: base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 3
+	set_texture_alias diffuseMap greta/shirt.png
+	set_texture_alias celShadingMap greta/shirt_cel.bmp
+}
+
+material greta_nail : base {
+	set $ar 0.43
+	set $ag 0.31
+	set $ab 0.31
+
+	set $dr 0.69
+	set $dg 0.5
+	set $db 0.5
+
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 10
+}
+
+material greta_sole : base {
+	set $ar 0.19
+	set $ag 0.11
+	set $ab 0.01
+
+	set $dr 0.30
+	set $dg 0.18
+	set $db 0.01
+
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 1
+}
+
+material body_materials1
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.5 0.5 1.0
+			diffuse 0.8 0.8 0.8 1.0
+			specular 0.3 0.3 0.3 3
+			//cull_hardware none
+			//cull_software none
+			texture_unit
+			{
+				texture greta/body_materials1.jpg
+				colour_op modulate
+			}
+		}
+	}
+
+}
+
+material body_materials2
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.5 0.5 1.0
+			diffuse 0.8 0.8 0.8 1.0
+			specular 0.3 0.3 0.3 3
+			cull_hardware none
+			cull_software none
+			texture_unit
+			{
+				texture greta/body_materials2.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material body_materials3
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.5 0.5 1.0
+			diffuse 0.8 0.8 0.8 1.0
+			specular 0.3 0.3 0.3 3
+			cull_hardware none
+			cull_software none
+			texture_unit
+			{
+				texture greta/body_materials3.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material body_materials4
+{
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.5 0.5 1.0
+			diffuse 0.8 0.8 0.8 1.0
+			specular 0.3 0.3 0.3 3
+			cull_hardware none
+			cull_software none
+			texture_unit
+			{
+				texture greta/body_materials4.jpg
+				colour_op modulate
+			}
+		}
+	}
+}

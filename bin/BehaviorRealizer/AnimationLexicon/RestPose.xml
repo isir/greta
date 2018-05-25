@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<RestPoses>	
+	<HandRestPose id="middle" side="right" handShape="form_openapart">
+		<r_shoulder x="10" y="40" z="0"></r_shoulder>
+		<r_elbow x="-90" y="0" z="0"></r_elbow>
+		<r_wrist x="0" y="0" z="45"></r_wrist>
+	</HandRestPose>	
+	<HandRestPose id="middle" side="left" handShape="form_openapart">
+		<l_shoulder x="10" y="-45" z="0"></l_shoulder>
+		<l_elbow x="-90" y="0" z="0"></l_elbow>
+		<l_wrist x="0" y="0" z="-45"></l_wrist>
+	</HandRestPose>	
+	<HandRestPose id="Lap" side="right" handShape="form_openapart">
+		<r_shoulder x="10" y="40" z="0"></r_shoulder>
+		<r_elbow x="-90" y="0" z="0"></r_elbow>
+		<r_wrist x="0" y="0" z="45"></r_wrist>
+	</HandRestPose>	
+	<HandRestPose id="Lap" side="left" handShape="form_openapart">
+		<l_shoulder x="10" y="-45" z="0"></l_shoulder>
+		<l_elbow x="-90" y="0" z="0"></l_elbow>
+		<l_wrist x="0" y="0" z="-45"></l_wrist>
+	</HandRestPose>	
+	<HandRestPose id="OverDesk" side="right" handShape="form_fist">
+		<r_shoulder x="-40" y="35" z="-20"></r_shoulder>
+		<r_elbow x="-86" y="50" z="0"></r_elbow>
+		<r_wrist x="0" y="0" z="0"></r_wrist>
+	</HandRestPose>	
+	<HandRestPose id="OverDesk" side="left" handShape="form_fist">
+		<l_shoulder x="-42" y="-35" z="20"></l_shoulder>
+		<l_elbow x="-84" y="-45" z="0"></l_elbow>
+		<l_wrist x="0" y="0" z="0"></l_wrist>
+	</HandRestPose>	
+	<HandRestPose id="OverDeskLean" side="right" handShape="form_fist">
+		<r_shoulder x="-40" y="35" z="-20"></r_shoulder>
+		<r_elbow x="-86" y="50" z="0"></r_elbow>
+		<r_wrist x="0" y="0" z="0"></r_wrist>
+	</HandRestPose>	
+	<HandRestPose id="OverDeskLean" side="left" handShape="form_fist">
+		<l_shoulder x="-42" y="-35" z="20"></l_shoulder>
+		<l_elbow x="-84" y="-45" z="0"></l_elbow>
+		<l_wrist x="0" y="0" z="0"></l_wrist>
+	</HandRestPose>	
+	<HandRestPose id="UnderTable" side="right" handShape="form_openapart">
+		<r_shoulder x="-15" y="50" z="-15"></r_shoulder>
+		<r_elbow x="-45" y="0" z="0"></r_elbow>
+		<r_wrist x="0" y="0" z="45"></r_wrist>
+	</HandRestPose>	
+	<HandRestPose id="UnderTable" side="left" handShape="form_openapart">
+		<l_shoulder x="-15" y="-50" z="15"></l_shoulder>
+		<l_elbow x="-45" y="0" z="0"></l_elbow>
+		<l_wrist x="0" y="0" z="-45"></l_wrist>
+	</HandRestPose>	
+	<HandRestPose id="Akimbo" side="left" handShape="form_fist">
+		<l_shoulder x="0" y="-90" z="55"></l_shoulder>
+		<l_elbow x="-110" y="0" z="0"></l_elbow>
+		<l_wrist x="0" y="0" z="0"></l_wrist>
+	</HandRestPose>	
+	<HandRestPose id="Akimbo" side="right" handShape="form_fist">
+		<r_shoulder x="0" y="90" z="-55"></r_shoulder>
+		<r_elbow x="-110" y="0" z="0"></r_elbow>
+		<r_wrist x="0" y="0" z="0"></r_wrist>
+	</HandRestPose>	
+	<HandRestPose id="HandsTogether" side="right" handShape="bend_curved">
+		<r_shoulder x="10" y="40" z="0"></r_shoulder>
+		<r_elbow x="-90" y="0" z="0"></r_elbow>
+		<r_wrist x="0" y="0" z="45"></r_wrist>
+	</HandRestPose>	
+	<HandRestPose id="HandsTogether" side="left" handShape="form_fist">
+		<l_shoulder x="10" y="-45" z="0"></l_shoulder>
+		<l_elbow x="-90" y="0" z="0"></l_elbow>
+		<l_wrist x="0" y="0" z="-45"></l_wrist>
+	</HandRestPose>	
+	<HandRestPose id="HandsTogetherLean" side="right" handShape="bend_curved">
+		<r_shoulder x="10" y="40" z="0"></r_shoulder>
+		<r_elbow x="-90" y="0" z="0"></r_elbow>
+		<r_wrist x="0" y="0" z="45"></r_wrist>
+	</HandRestPose>	
+	<HandRestPose id="HandsTogetherLean" side="left" handShape="form_fist">
+		<l_shoulder x="10" y="-45" z="0"></l_shoulder>
+		<l_elbow x="-90" y="0" z="0"></l_elbow>
+		<l_wrist x="0" y="0" z="-45"></l_wrist>
+	</HandRestPose>	
+	<HandRestPose id="ArmsCrossed" side="right" handShape="bend_curved">
+		<r_shoulder x="-40" y="35" z="-20"></r_shoulder>
+		<r_elbow x="-86" y="50" z="0"></r_elbow>
+		<r_wrist x="0" y="0" z="0"></r_wrist>
+	</HandRestPose>	
+	<HandRestPose id="ArmsCrossed" side="left" handShape="form_openapart">
+		<l_shoulder x="-42" y="-35" z="20"></l_shoulder>
+		<l_elbow x="-84" y="-45" z="0"></l_elbow>
+		<l_wrist x="0" y="0" z="0"></l_wrist>
+	</HandRestPose>	
+</RestPoses>	

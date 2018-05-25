@@ -1,0 +1,124 @@
+vertex_program face/dynamicfacialcolor_vert glsl
+{
+    source dynamicfacialcolor.vert
+}
+
+fragment_program face/dynamicfacialcolor_frag glsl
+{
+    source dynamicfacialcolor.frag
+    default_params
+    {
+        param_named textureMap int 0
+        param_named biasTex int 1
+        param_named scaleTex int 2
+		param_named hemoglobinMeanFreeTex int 3
+		param_named melaninTex int 4
+		param_named skinTex int 5
+        param_named id float 2
+    }
+}
+
+
+
+abstract pass basicPass {	
+	// vertex_program_ref CelShadingVP {}
+	// fragment_program_ref CelShadingFP {}
+	// texture_unit tex {}
+}
+
+material base 
+{
+set $ar 0.5
+	set $ag 0.5
+	set $ab 0.5
+	set $aa 1
+
+	set $dr 0.8
+	set $dg 0.8
+	set $db 0.8
+	set $da 1
+
+	set $sr 0
+	set $sg 0
+	set $sb 0
+	set $sa 1
+	set $ss 0
+	
+	technique {
+		pass : basicPass{
+            ambient $ar $ag $ab $aa
+			diffuse $dr $dg $db $da
+			specular $sr $sg $sb $sa $ss
+			cull_hardware none
+			cull_software none
+			texture_unit tex{
+				texture_alias diffuseMap
+				texture white.bmp
+			}
+			
+			texture_unit tex2{
+				texture_alias diffuseMap
+				texture white.bmp
+			}
+		}
+	}
+	
+}
+
+material base_face : base
+{
+
+	technique {
+		pass : basicPass{
+            ambient $ar $ag $ab $aa
+			diffuse $dr $dg $db $da
+			specular $sr $sg $sb $sa $ss
+			cull_hardware none
+			cull_software none
+
+            vertex_program_ref face/dynamicfacialcolor_vert
+            {
+            }
+
+            fragment_program_ref face/dynamicfacialcolor_frag
+            {
+            }
+
+			texture_unit tex
+			{
+				texture_alias diffuseMap
+				texture white.bmp
+			}
+			
+			texture_unit 
+			{
+				texture_alias bias
+				texture dynamicfacialcolor/obbadiah/bias.dds  3d
+			}
+			
+			texture_unit 
+			{
+				texture_alias scale
+				texture dynamicfacialcolor/obbadiah/scale.dds  3d
+			}
+			
+			texture_unit 
+			{
+				texture_alias hemoglobine
+				texture dynamicfacialcolor/obbadiah/hemoglobine.jpg
+			}
+       
+			texture_unit 
+			{
+				texture_alias melanine
+				texture dynamicfacialcolor/obbadiah/melanine.jpg
+			}
+			texture_unit 
+			{
+				texture_alias melanine
+				texture dynamicfacialcolor/skinTex.EXR
+			}
+        }
+    }
+}
+

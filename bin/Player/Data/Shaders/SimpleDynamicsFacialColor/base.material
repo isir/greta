@@ -1,0 +1,154 @@
+vertex_program face/simpledynamicfacialcolor_vert glsl
+{
+    source simpledynamicfacialcolor.vert
+}
+
+fragment_program face/simpledynamicfacialcolor_frag glsl
+{
+    source simpledynamicfacialcolor.frag
+    default_params
+    {
+        param_named textureMap int 0
+        param_named baseTexture int 1
+        param_named surpriseTexture int 2
+		param_named smileTexture int 3
+		param_named sadTexture int 4
+		param_named neutralTexture int 5
+		param_named fearTexture int 6
+		param_named exerciseTexture int 7
+		param_named disgustTexture int 8
+		param_named alcoholTexture int 8
+		param_named angerTexture int 8
+    }
+}
+
+
+
+abstract pass basicPass {	
+	// vertex_program_ref CelShadingVP {}
+	// fragment_program_ref CelShadingFP {}
+	// texture_unit tex {}
+}
+
+material base 
+{
+set $ar 0.5
+	set $ag 0.5
+	set $ab 0.5
+	set $aa 1
+
+	set $dr 0.8
+	set $dg 0.8
+	set $db 0.8
+	set $da 1
+
+	set $sr 0.0
+	set $sg 0.0
+	set $sb 0.0
+	set $sa 1
+	set $ss 0
+	
+	technique {
+		pass : basicPass{
+            ambient $ar $ag $ab $aa
+			diffuse $dr $dg $db $da
+			specular $sr $sg $sb $sa $ss
+			cull_hardware none
+			cull_software none
+			
+			texture_unit tex{
+				texture_alias diffuseMap
+				texture white.bmp
+			}
+			
+			texture_unit tex2{
+				texture_alias diffuseMap
+				texture white.bmp
+			}
+		}
+	}
+	
+}
+
+material base_face : base
+{
+
+	technique {
+		pass : basicPass{
+            ambient $ar $ag $ab $aa
+			diffuse $dr $dg $db $da
+			specular $sr $sg $sb $sa $ss
+			cull_hardware none
+			cull_software none
+
+            vertex_program_ref face/simpledynamicfacialcolor_vert
+            {
+            }
+
+            fragment_program_ref face/simpledynamicfacialcolor_frag
+            {
+            }
+
+			texture_unit tex
+			{
+				texture_alias diffuseMap
+				texture white.bmp
+			}
+			
+			texture_unit 
+			{
+				texture_alias baseTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000_base.png
+			}
+			
+			texture_unit 
+			{
+				texture_alias surpriseTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000s_0000_surprise.png
+			}
+			
+			texture_unit 
+			{
+				texture_alias smileTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000s_0001_smile.png
+			}
+			texture_unit 
+			{
+				texture_alias sadTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000s_0002_sad.png
+			}
+			texture_unit 
+			{
+				texture_alias neutralTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000s_0003_neutral.png
+			}
+			texture_unit 
+			{
+				texture_alias fearTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000s_0004_fear.png
+			}
+			texture_unit 
+			{
+				texture_alias exerciseTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000s_0005_exercise.png
+			}
+			texture_unit 
+			{
+				texture_alias disgustTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000s_0006_disgust.png
+			}
+			texture_unit 
+			{
+				texture_alias alcoholTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000s_0007_alcohol.png
+			}
+			texture_unit 
+			{
+				texture_alias angerTexture
+				texture dynamicfacialcolor/prudence/prudence_face_0000s_0008_anger.png
+			}
+			
+        }
+    }
+}
+

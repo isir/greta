@@ -1,0 +1,51 @@
+<!ELEMENT rules (rule+)>
+	
+<!ELEMENT rule (usersignals,constraints?,backchannels)>
+<!ATTLIST rule
+	name CDATA #REQUIRED>
+
+<!ELEMENT usersignals (usersignal+)>
+
+<!ELEMENT usersignal EMPTY>
+<!ATTLIST usersignal
+	id CDATA #REQUIRED
+	name CDATA #REQUIRED
+	modality CDATA #REQUIRED>
+
+<!ELEMENT constraints (core?,implications?)>
+
+<!ELEMENT core (item+)>
+
+<!ELEMENT item EMPTY>
+<!ATTLIST item
+	id CDATA #REQUIRED>
+
+<!ELEMENT implications (implication+)>
+
+<!ELEMENT implication (ifpresent,thenpresent)>
+
+<!ELEMENT ifpresent EMPTY>
+<!ATTLIST ifpresent
+	id CDATA #REQUIRED>
+
+<!ELEMENT thenpresent EMPTY>
+<!ATTLIST thenpresent
+	id CDATA #REQUIRED>
+
+<!ELEMENT backchannels (mimicry?,response_reactive?)>
+<!ATTLIST backchannels
+	probability CDATA #REQUIRED
+	priority CDATA #REQUIRED>
+
+<!ELEMENT mimicry (mimicry_signal+)>
+<!ATTLIST mimicry
+	probability CDATA #REQUIRED>
+
+<!ELEMENT mimicry_signal EMPTY>
+<!ATTLIST mimicry_signal
+	name CDATA #REQUIRED
+	modality CDATA #REQUIRED>
+
+<!ELEMENT response_reactive EMPTY>
+<!ATTLIST response_reactive
+	probability CDATA #REQUIRED>

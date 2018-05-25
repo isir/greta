@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified">
+
+<xs:include schemaLocation="global.xsd"/>
+
+<xs:simpleType name="CollapsedString">
+	<xs:restriction base="xs:string">
+		<xs:whiteSpace value="collapse"/>
+	</xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="modulationType">
+
+	<xs:sequence>
+	
+		<xs:element name="destination" type="parametersetNameType" minOccurs="1" maxOccurs="1"/>
+	
+		<xs:element name="parameter" type="parameterNameType" minOccurs="1" maxOccurs="1"/>
+
+		<xs:element name="operator" type="operatorNameType" minOccurs="1" maxOccurs="1"/>
+		
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="op1_name" type="parametersetNameType"/>
+					<xs:element name="op1_attribute" type="parameterNameType"/>
+				</xs:sequence>
+				<xs:element name="op1_value" type="xs:decimal"/>
+			</xs:choice>
+		</xs:sequence>
+		
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element name="op2_name" type="parametersetNameType" minOccurs="0" maxOccurs="1"/>
+					<xs:element name="op2_attribute" type="parameterNameType" minOccurs="0" maxOccurs="1"/>
+				</xs:sequence>
+				<xs:element name="op2_value" type="xs:decimal"/>
+			</xs:choice>
+		</xs:sequence>
+		
+		<xs:element name="op3_value" type="xs:decimal" minOccurs="0" maxOccurs="1"/>
+		
+	</xs:sequence>
+
+</xs:complexType>
+
+<xs:complexType name="qualifierType">
+	<xs:sequence>
+		<xs:element name="modulation" type="modulationType" minOccurs="0" maxOccurs="unbounded"/>
+	</xs:sequence>
+	<xs:attribute name="name" type="xs:string" use="required"/>
+</xs:complexType>
+
+
+<xs:complexType name="qualifiersType">
+	<xs:sequence>
+		<xs:element name="qualifier" type="qualifierType" minOccurs="0" maxOccurs="unbounded">
+		</xs:element>
+	</xs:sequence>
+</xs:complexType>
+
+<xs:element name="qualifiers" type="qualifiersType">
+</xs:element>
+
+</xs:schema>

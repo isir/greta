@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified">
+
+<xsd:include schemaLocation="global.xsd"/>
+
+<xsd:element name="durations" type="durationsType"/>
+
+<xsd:complexType name="durationsType">
+	<xsd:sequence>
+		<xsd:element name="duration" type="durationType" minOccurs="1" maxOccurs="unbounded"/>
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="durationType">
+	<xsd:sequence>
+		<xsd:element name="position1" type="xsd:string" minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="position2" type="xsd:string" minOccurs="1" maxOccurs="1"/>	
+		<xsd:element name="min" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+		<xsd:element name="fitt" type="xsd:float" minOccurs="1" maxOccurs="1"/>
+	</xsd:sequence>
+</xsd:complexType>
+	
+</xsd:schema>

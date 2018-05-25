@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<symblicposition>
+	<x>
+		<XEP>-45.0</XEP>
+		<XP>-30</XP>
+		<XC>-15</XC>
+		<XCC>-10.0</XCC>
+		<XOppC>10.0</XOppC>
+	</x>
+	<y>
+		<YUpperEP>60</YUpperEP>
+		<YUpperP>40</YUpperP>
+		<YUpperC>20</YUpperC>
+		<YCC>10</YCC>
+		<YLowerC>0</YLowerC>
+		<YLowerP>-10</YLowerP>
+		<YLowerEP>-20</YLowerEP>
+	</y>
+	<z>
+		<ZNear>25</ZNear>
+		<ZMiddle>35</ZMiddle>
+		<ZFar>45</ZFar>
+	</z>
+</symblicposition>

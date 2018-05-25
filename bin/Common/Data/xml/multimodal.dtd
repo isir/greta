@@ -1,0 +1,28 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT multimodals (multimodal)*>
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT multimodal (con)*>
+<!ATTLIST multimodal
+    emotion CDATA #REQUIRED
+  >
+
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT con ( (arg*) )>
+
+<!ATTLIST con
+    type (rightinc | included | excludes | preceded | exists | morethan | lessthan | equal | and | or | not) #REQUIRED
+    label CDATA #IMPLIED
+  >
+
+<!--- Put your DTDDoc comment here. -->
+<!ELEMENT arg ((con*) | EMPTY ) >
+
+<!ATTLIST arg
+    type (start|stop) #IMPLIED
+    id CDATA #IMPLIED
+  >
+

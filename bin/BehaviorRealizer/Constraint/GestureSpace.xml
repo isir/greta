@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GestureSpace xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Common/Data/xml/GestureSpace.xsd">
+	<scale id="YUpperEP" value="60"/>
+	<scale id="YUpperP" value="40"/>
+	<scale id="YUpperC" value="20"/>
+	<scale id="YCC" value="10"/>
+	<scale id="YLowerC" value="0"/>
+	<scale id="YLowerP" value="-10"/>
+	<scale id="YLowerEP" value="-20"/>
+	<scale id="YR" value="0"/>
+	<scale id="YRF" value="-10"/>
+
+	<scale id="XEP" value="45"/>
+	<scale id="XP" value="30"/>
+	<scale id="XC" value="15"/>
+	<scale id="XCC" value="0"/>
+	<scale id="XOppC" value="-15"/>
+	<scale id="XR" value="15"/>
+	<scale id="XRF" value="0"/>
+	
+	<scale id="ZNear" value="10"/>
+	<scale id="ZMiddle" value="20"/>
+	<scale id="ZFar" value="40"/>
+	<scale id="ZR" value="13"/>
+	<scale id="ZRF" value="5"/>
+</GestureSpace>	

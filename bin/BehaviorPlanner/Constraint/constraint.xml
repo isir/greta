@@ -1,0 +1,2513 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE multimodals SYSTEM "./../../Common/Data/xml/multimodal.dtd">
+<multimodals>
+  <multimodal emotion="test">
+  
+      <con type="equal" label="test_label_1">
+        <arg id="1" type="start"/>
+        <arg id="2" type="start"/>
+      </con>
+    
+
+  </multimodal>
+  <multimodal emotion="regret">
+   
+      <!-- head conflicts -->
+      <con type="or" label="regret_label_1">
+        <arg>
+          <con type="not" label="regret_label_1_sub_1">
+            <arg>
+              <con type="rightinc" label="regret_label_1_sub2">
+                <arg id="16" type="start"/>
+                <arg id="16" type="start"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="not" label="regret_label_1_sub2">
+            <arg>
+              <con type="exists" label="regret_label_1_sub3">
+                <arg id="3"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- 2000102S6V video -->
+      <!-- trucco  al inizio ci vuole 21, 22 or 16 or -->
+      <con type="or" label="regret_label_2">
+        <arg>
+          <con type="or" label="regret_label_2_sub_1">
+            <arg>
+              <con type="exists" label="regret_label_2_sub_2">
+                <arg id="21"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="regret_label_2_sub_2">
+                <arg id="16"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="regret_label_2_sub_1">
+            <arg id="22"/>
+          </con>
+        </arg>
+      </con>
+      <con type="excludes" label="reget_label_3">
+        <arg id="19"/>
+        <arg id="18"/>
+      </con>
+      <!-- .... 19 in 16 -->
+      <con type="included" label="reget_label_4">
+        <arg id="19"/>
+        <arg id="16"/>
+      </con>
+      <!-- .... 18 in 16 -->
+      <con type="included" label="reget_label_5">
+        <arg id="18"/>
+        <arg id="16"/>
+      </con>
+      <!-- .... 17 in 16 -->
+      <con type="included"  label="reget_label_6">
+        <arg id="17"/>
+        <arg id="16"/>
+      </con>
+      <!-- .... 25 in 16 -->
+      <con type="included"  label="reget_label_7">
+        <arg id="25"/>
+        <arg id="16"/>
+      </con>
+      <!-- .... 18 in 17 -->
+      <con type="included"  label="reget_label_8">
+        <arg id="18"/>
+        <arg id="17"/>
+      </con>
+      <!-- .... 19 in 17 -->
+      <con type="included"  label="reget_label_9">
+        <arg id="19"/>
+        <arg id="17"/>
+      </con>
+      <!-- .... 18 in 6 -->
+      <con type="included"  label="reget_label_10">
+        <arg id="18"/>
+        <arg id="6"/>
+      </con>
+      <!-- .... 19 in 6 -->
+      <con type="included"  label="reget_label_11">
+        <arg id="19"/>
+        <arg id="6"/>
+      </con>
+      <!-- .... trucco 19 nie moze istniec bez 16, ale 16 moze istniec bez 19 -->
+      <!-- ...(.not16 and not 19) or (.16 and 19) or (.16 and not 19) -->
+      <con type="or"  label="reget_label_12">
+        <arg>
+          <con type="and"  label="reget_label_12_sb_1">
+            <arg>
+              <con type="exists" label="reget_label_12_sb_2">
+                <arg id="16"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="reget_label_12_sb_2">
+                <arg id="19"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="or" label="reget_label_12_sb_1">
+            <arg>
+              <con type="and" label="reget_label_12_sb_2">
+                <arg>
+                  <con type="not" label="reget_label_12_sb_3">
+                    <arg>
+                      <con type="exists" label="reget_label_12_sb_4">
+                        <arg id="16"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="reget_label_12_sb_3">
+                    <arg>
+                      <con type="exists" label="reget_label_12_sb_4">
+                        <arg id="19"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="and"  label="reget_label_12_sb_2">
+                <arg>
+                  <con type="exists" label="reget_label_12_sb_3">
+                    <arg id="16"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="reget_label_12_sb_3">
+                    <arg>
+                      <con type="exists" label="reget_label_12_sb_4">
+                        <arg id="19"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .... ????? -->
+      <!-- .... trucco 17 nie moze istniec bez 16, ale 16 moze istniec bez 17 -->
+      <!-- ...(.not16 and not 17) or (.16 and 17) or (.16 and not 17) -->
+      <con type="or" label="reget_label_13">
+        <arg>
+          <con type="and" label="reget_label_13_sb_1">
+            <arg>
+              <con type="exists" label="reget_label_13_sb_2">
+                <arg id="16"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="reget_label_13_sb_2">
+                <arg id="17"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="or" label="reget_label_13_sb_1">
+            <arg>
+              <con type="and" label="reget_label_13_sb_2">
+                <arg>
+                  <con type="not" label="reget_label_13_sb_3">
+                    <arg>
+                      <con type="exists" label="reget_label_13_sb_4">
+                        <arg id="16"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="reget_label_13_sb_3">
+                    <arg>
+                      <con type="exists" label="reget_label_13_sb_4">
+                        <arg id="17"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="and" label="reget_label_13_sb_2">
+                <arg>
+                  <con type="exists" label="reget_label_13_sb_3">
+                    <arg id="16"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="reget_label_13_sb_3">
+                    <arg>
+                      <con type="exists" label="reget_label_13_sb_4">
+                        <arg id="17"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .... ????? -->
+      <!-- .... trucco 18 nie moze istniec bez 16, ale 16 moze istniec bez 18 -->
+      <!-- ...(.not16 and not 18) or (.16 and 18) or (.16 and not 18) -->
+      <con type="or" label="reget_label_14">
+        <arg>
+          <con type="and" label="reget_label_14_sb_1">
+            <arg>
+              <con type="exists" label="reget_label_14_sb_2">
+                <arg id="16"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="reget_label_14_sb_2">
+                <arg id="18"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="or" label="reget_label_14_sb_1">
+            <arg>
+              <con type="and" label="reget_label_14_sb_2">
+                <arg>
+                  <con type="not" label="reget_label_14_sb_3">
+                    <arg>
+                      <con type="exists" label="reget_label_14_sb_4">
+                        <arg id="16"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="reget_label_14_sb_3">
+                    <arg>
+                      <con type="exists" label="reget_label_14_sb_4">
+                        <arg id="18"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="and" label="reget_label_14_sb_2">
+                <arg>
+                  <con type="exists" label="reget_label_14_sb_3">
+                    <arg id="16"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="reget_label_14_sb_3">
+                    <arg>
+                      <con type="exists" label="reget_label_14_sb_4">
+                        <arg id="18"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .... ????? -->
+      <!-- 2000102Y1V video -->
+      <!-- .... 23 in 22 -->
+      <con type="included" label="reget_label_15">
+        <arg id="23"/>
+        <arg id="22"/>
+      </con>
+      <!-- .... 23 in 24 -->
+      <con type="included" label="reget_label_16">
+        <arg id="23"/>
+        <arg id="24"/>
+      </con>
+      <!-- .... 24 in 22 -->
+      <con type="included" label="reget_label_17">
+        <arg id="24"/>
+        <arg id="22"/>
+      </con>
+      <!-- .... 21 contiene inizio di 22 -->
+      <con type="preceded" label="reget_label_18">
+        <arg id="22" type="start"/>
+        <arg id="21" type="start"/>
+      </con>
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- ,,FACE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="reget_label_19">
+        <arg id="1"/>
+        <arg id="2"/>
+      </con>
+      <con type="excludes" label="reget_label_20">
+        <arg id="1"/>
+        <arg id="3"/>
+      </con>
+      <con type="excludes" label="reget_label_21">
+        <arg id="3"/>
+        <arg id="2"/>
+      </con>
+      <con type="excludes" label="reget_label_22">
+        <arg id="5"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="reget_label_23">
+        <arg id="4"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="reget_label_24">
+        <arg id="4"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="reget_label_25">
+        <arg id="4"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="reget_label_26">
+        <arg id="5"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="reget_label_27">
+        <arg id="5"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="reget_label_28">
+        <arg id="5"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="reget_label_29">
+        <arg id="7"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="reget_label_30">
+        <arg id="7"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="reget_label_31">
+        <arg id="8"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="reget_label_32">
+        <arg id="18"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="reget_label_33">
+        <arg id="18"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="reget_label_34">
+        <arg id="18"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="reget_label_35">
+        <arg id="19"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="reget_label_36">
+        <arg id="19"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="reget_label_37">
+        <arg id="19"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="reget_label_38">
+        <arg id="19"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="reget_label_39">
+        <arg id="19"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="reget_label_40">
+        <arg id="21"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="reget_label_41">
+        <arg id="21"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="reget_label_42">
+        <arg id="21"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="reget_label_43">
+        <arg id="21"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="reget_label_44">
+        <arg id="22"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="reget_label_45">
+        <arg id="22"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="reget_label_46">
+        <arg id="22"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="reget_label_47">
+        <arg id="22"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="reget_label_48">
+        <arg id="18"/>
+        <arg id="21"/>
+      </con>
+      <con type="excludes" label="reget_label_49">
+        <arg id="18"/>
+        <arg id="22"/>
+      </con>
+      <con type="excludes" label="reget_label_50">
+        <arg id="19"/>
+        <arg id="21"/>
+      </con>
+      <con type="excludes" label="reget_label_51">
+        <arg id="19"/>
+        <arg id="22"/>
+      </con>
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- ,,HEAD,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="reget_label_52">
+        <arg id="11"/>
+        <arg id="12"/>
+      </con>
+      <con type="excludes" label="reget_label_53">
+        <arg id="13"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="reget_label_54">
+        <arg id="11"/>
+        <arg id="13"/>
+      </con>
+      <con type="excludes" label="reget_label_55">
+        <arg id="11"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="reget_label_56">
+        <arg id="12"/>
+        <arg id="13"/>
+      </con>
+      <con type="excludes" label="reget_label_57">
+        <arg id="12"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="reget_label_58">
+        <arg id="16"/>
+        <arg id="24"/>
+      </con>
+      <con type="excludes" label="reget_label_59">
+        <arg id="16"/>
+        <arg id="11"/>
+      </con>
+      <con type="excludes" label="reget_label_60">
+        <arg id="16"/>
+        <arg id="12"/>
+      </con>
+      <con type="excludes" label="reget_label_61">
+        <arg id="16"/>
+        <arg id="13"/>
+      </con>
+      <con type="excludes" label="reget_label_62">
+        <arg id="16"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="reget_label_63">
+        <arg id="24"/>
+        <arg id="11"/>
+      </con>
+      <con type="excludes" label="reget_label_64">
+        <arg id="24"/>
+        <arg id="12"/>
+      </con>
+      <con type="excludes" label="reget_label_65">
+        <arg id="24"/>
+        <arg id="13"/>
+      </con>
+      <con type="excludes" label="reget_label_66">
+        <arg id="24"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="reget_label_67">
+        <arg id="24"/>
+        <arg id="15"/>
+      </con>
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- ,,GAZE,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="reget_label_68">
+        <arg id="17"/>
+        <arg id="23"/>
+      </con>
+    
+
+  </multimodal>
+  <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+  <multimodal emotion="rejoice">
+   
+    
+
+      <con type="preceded" label="rejoice_label_1">
+        <arg id="20" type="start"/>
+        <arg id="21" type="start"/>
+      </con>
+      <con type="or" label="rejoice_label_2">
+        <arg>
+          <con type="exists"  label="rejoice_label_2_sub_1">
+            <arg id="18"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="or" label="rejoice_label_2_sub_1">
+            <arg>
+              <con type="exists" label="rejoice_label_2_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="rejoice_label_2_sub_2">
+                <arg id="5"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .... trucco 1 nie moze istniec bez 14, ale 16 moze istniec bez 17 -->
+      <!-- ...(.not16 and not 17) or (.16 and 17) or (.16 and not 17) -->
+      <con type="or" label="rejoice_label_3">
+        <arg>
+          <con type="or" label="rejoice_label_3_sub_1">
+            <arg>
+              <con type="and" label="rejoice_label_3_sub_2">
+                <arg>
+                  <con type="exists" label="rejoice_label_3_sub_3">
+                    <arg id="1"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="exists" label="rejoice_label_3_sub_3">
+                    <arg id="14"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="or" label="rejoice_label_3_sub_2">
+                <arg>
+                  <con type="and" label="rejoice_label_3_sub_3">
+                    <arg>
+                      <con type="not" label="rejoice_label_3_sub_4">
+                        <arg>
+                          <con type="exists" label="rejoice_label_3_sub_5">
+                            <arg id="1"/>
+                          </con>
+                        </arg>
+                      </con>
+                    </arg>
+                    <arg>
+                      <con type="not" label="rejoice_label_3_sub_4">
+                        <arg>
+                          <con type="exists" label="rejoice_label_3_sub_5">
+                            <arg id="14"/>
+                          </con>
+                        </arg>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="and" label="rejoice_label_3_sub_3">
+                    <arg>
+                      <con type="exists" label="rejoice_label_3_sub_4">
+                        <arg id="1"/>
+                      </con>
+                    </arg>
+                    <arg>
+                      <con type="not" label="rejoice_label_3_sub_5">
+                        <arg>
+                          <con type="exists" label="rejoice_label_3_sub_6">
+                            <arg id="14"/>
+                          </con>
+                        </arg>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <!-- .... ????? -->
+        <arg>
+          <con type="or" label="rejoice_label_3_sub_1">
+            <arg>
+              <con type="and" label="rejoice_label_3_sub_2">
+                <arg>
+                  <con type="exists" label="rejoice_label_3_sub_3">
+                    <arg id="5"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="exists" label="rejoice_label_3_sub_3">
+                    <arg id="14"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="or" label="rejoice_label_3_sub_2">
+                <arg>
+                  <con type="and" label="rejoice_label_3_sub_3">
+                    <arg>
+                      <con type="not" label="rejoice_label_3_sub_4">
+                        <arg>
+                          <con type="exists" label="rejoice_label_3_sub_5">
+                            <arg id="5"/>
+                          </con>
+                        </arg>
+                      </con>
+                    </arg>
+                    <arg>
+                      <con type="not" label="rejoice_label_3_sub_4">
+                        <arg>
+                          <con type="exists" label="rejoice_label_3_sub_5">
+                            <arg id="14"/>
+                          </con>
+                        </arg>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="and" label="rejoice_label_3_sub_3">
+                    <arg>
+                      <con type="exists" label="rejoice_label_3_sub_4">
+                        <arg id="5"/>
+                      </con>
+                    </arg>
+                    <arg>
+                      <con type="not" label="rejoice_label_3_sub_4">
+                        <arg>
+                          <con type="exists" label="rejoice_label_3_sub_5">
+                            <arg id="14"/>
+                          </con>
+                        </arg>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+          <!-- .... ????? -->
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_4">
+        <arg>
+          <con type="included" label="rejoice_label_4_sub_1">
+            <arg id="14"/>
+            <arg id="1"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="included" label="rejoice_label_4_sub_1">
+            <arg id="14"/>
+            <arg id="5"/>
+          </con>
+        </arg>
+      </con>
+      <!-- .... trucco 20 nie moze istniec bez 18 ale 18 moze istniec bez 20 -->
+      <!-- ...(.not16 and not ) or (.16 and 19) or (.16 and not 19) -->
+      <con type="or"  label="rejoice_label_5">
+        <arg>
+          <con type="and" label="rejoice_label_5_sub_1">
+            <arg>
+              <con type="exists" label="rejoice_label_5_sub_2">
+                <arg id="19"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="rejoice_label_5_sub_2">
+                <arg id="21"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="or" label="rejoice_label_5_sub_1">
+            <arg>
+              <con type="and" label="rejoice_label_5_sub_2">
+                <arg>
+                  <con type="not" label="rejoice_label_5_sub_3">
+                    <arg>
+                      <con type="exists" label="rejoice_label_5_sub_4">
+                        <arg id="19"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="rejoice_label_5_sub_3">
+                    <arg>
+                      <con type="exists" label="rejoice_label_5_sub_4">
+                        <arg id="21"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="and" label="rejoice_label_5_sub_2">
+                <arg>
+                  <con type="exists" label="rejoice_label_5_sub_3">
+                    <arg id="19"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="rejoice_label_5_sub_3">
+                    <arg>
+                      <con type="exists" label="rejoice_label_5_sub_4">
+                        <arg id="21"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .... ????? -->
+      <!-- .... trucco 20 nie moze istniec bez 18 ale 18 moze istniec bez 20 -->
+      <!-- ...(.not16 and not ) or (.16 and 19) or (.16 and not 19) -->
+      <con type="or" label="rejoice_label_6">
+        <arg>
+          <con type="and" label="rejoice_label_6_sub_1">
+            <arg>
+              <con type="exists" label="rejoice_label_6_sub_2">
+                <arg id="18"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="rejoice_label_6_sub_2">
+                <arg id="20"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="or" label="rejoice_label_6_sub_1">
+            <arg>
+              <con type="and" label="rejoice_label_6_sub_2">
+                <arg>
+                  <con type="not" label="rejoice_label_6_sub_3">
+                    <arg>
+                      <con type="exists" label="rejoice_label_6_sub_4">
+                        <arg id="18"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="rejoice_label_6_sub_3">
+                    <arg>
+                      <con type="exists" label="rejoice_label_6_sub_4">
+                        <arg id="20"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="and" label="rejoice_label_6_sub_2">
+                <arg>
+                  <con type="exists" label="rejoice_label_6_sub_3">
+                    <arg id="18"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="not" label="rejoice_label_6_sub_3">
+                    <arg>
+                      <con type="exists" label="rejoice_label_6_sub_4">
+                        <arg id="20"/>
+                      </con>
+                    </arg>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .... ????? -->
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- ,,FACE ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="or" label="rejoice_label_7">
+        <arg>
+          <con type="rightinc" label="rejoice_label_7_sub_1">
+            <arg id="1" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_7_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_8">
+        <arg>
+          <con type="rightinc" label="rejoice_label_8_sub_1">
+            <arg id="1" type="start"/>
+            <arg id="7" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_8_sub_1">
+            <arg id="7" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_9">
+        <arg>
+          <con type="rightinc" label="rejoice_label_9_sub_1">
+            <arg id="1" type="start"/>
+            <arg id="8" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_9_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_10">
+        <arg>
+          <con type="rightinc" label="rejoice_label_10_sub_1">
+            <arg id="1" type="start"/>
+            <arg id="9" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_10_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_11">
+        <arg>
+          <con type="rightinc" label="rejoice_label_11_sub_1">
+            <arg id="1" type="start"/>
+            <arg id="11" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_11_sub_1">
+            <arg id="11" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_12">
+        <arg>
+          <con type="rightinc" label="rejoice_label_12_sub_1">
+            <arg id="1" type="start"/>
+            <arg id="18" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_12_sub_1">
+            <arg id="18" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_13">
+        <arg>
+          <con type="rightinc" label="rejoice_label_13_sub_1">
+            <arg id="1" type="start"/>
+            <arg id="19" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_13_sub_1">
+            <arg id="19" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_14">
+        <arg>
+          <con type="rightinc" label="rejoice_label_14_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="7" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_14_sub_1">
+            <arg id="7" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_15">
+        <arg>
+          <con type="rightinc" label="rejoice_label_15_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="8" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_15_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_16">
+        <arg>
+          <con type="rightinc" label="rejoice_label_16_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="9" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_16_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_17">
+        <arg>
+          <con type="rightinc" label="rejoice_label_17_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="11" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_17_sub_1">
+            <arg id="11" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_18">
+        <arg>
+          <con type="rightinc" label="rejoice_label_18_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="18" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_18_sub_1">
+            <arg id="18" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_19">
+        <arg>
+          <con type="rightinc" label="rejoice_label_19_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="19" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_19_sub_1">
+            <arg id="19" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_20">
+        <arg>
+          <con type="rightinc" label="rejoice_label_20_sub_1">
+            <arg id="7" type="start"/>
+            <arg id="8" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_20_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="7" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_21">
+        <arg>
+          <con type="rightinc" label="rejoice_label_21_sub_1">
+            <arg id="7" type="start"/>
+            <arg id="9" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_21_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="7" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_22">
+        <arg>
+          <con type="rightinc" label="rejoice_label_22_sub_1">
+            <arg id="7" type="start"/>
+            <arg id="11" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_22_sub_1">
+            <arg id="11" type="start"/>
+            <arg id="7" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_23">
+        <arg>
+          <con type="rightinc" label="rejoice_label_23_sub_1">
+            <arg id="7" type="start"/>
+            <arg id="18" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_23_sub_1">
+            <arg id="18" type="start"/>
+            <arg id="7" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_24">
+        <arg>
+          <con type="rightinc" label="rejoice_label_24_sub_1">
+            <arg id="7" type="start"/>
+            <arg id="19" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_24_sub_1">
+            <arg id="19" type="start"/>
+            <arg id="7" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_25">
+        <arg>
+          <con type="rightinc" label="rejoice_label_25_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="7" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_25_sub_1">
+            <arg id="7" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_26">
+        <arg>
+          <con type="rightinc" label="rejoice_label_26_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="8" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_26_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_27">
+        <arg>
+          <con type="rightinc" label="rejoice_label_27_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="9" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_27_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_28">
+        <arg>
+          <con type="rightinc" label="rejoice_label_28_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="11" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_28_sub_1">
+            <arg id="11" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_29">
+        <arg>
+          <con type="rightinc" label="rejoice_label_29_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="18" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_29_sub_1">
+            <arg id="18" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_30">
+        <arg>
+          <con type="rightinc" label="rejoice_label_30_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="19" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_30_sub_1">
+            <arg id="19" type="start"/>
+            <arg id="5" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_31">
+        <arg>
+          <con type="rightinc" label="rejoice_label_31_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="9" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_31_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="8" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_32">
+        <arg>
+          <con type="rightinc" label="rejoice_label_32_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="11" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_32_sub_1">
+            <arg id="11" type="start"/>
+            <arg id="8" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_33">
+        <arg>
+          <con type="rightinc" label="rejoice_label_33_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="18" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_33_sub_1">
+            <arg id="18" type="start"/>
+            <arg id="8" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_34">
+        <arg>
+          <con type="rightinc" label="rejoice_label_34_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="19" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_34_sub_1">
+            <arg id="19" type="start"/>
+            <arg id="8" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_35">
+        <arg>
+          <con type="rightinc" label="rejoice_label_35_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="11" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_35_sub_1">
+            <arg id="11" type="start"/>
+            <arg id="9" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_36">
+        <arg>
+          <con type="rightinc" label="rejoice_label_36_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="18" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_36_sub_1">
+            <arg id="18" type="start"/>
+            <arg id="9" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_37">
+        <arg>
+          <con type="rightinc" label="rejoice_label_37_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="19" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_37_sub_1">
+            <arg id="19" type="start"/>
+            <arg id="9" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_38">
+        <arg>
+          <con type="rightinc" label="rejoice_label_38_sub_1">
+            <arg id="11" type="start"/>
+            <arg id="19" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_sub_1">
+            <arg id="19" type="start"/>
+            <arg id="11" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_39">
+        <arg>
+          <con type="rightinc" label="rejoice_label_39_sub_1">
+            <arg id="11" type="start"/>
+            <arg id="18" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_39_sub_1" >
+            <arg id="18" type="start"/>
+            <arg id="11" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="rejoice_label_40">
+        <arg>
+          <con type="rightinc" label="rejoice_label_41_sub_1">
+            <arg id="19" type="start"/>
+            <arg id="18" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="rightinc" label="rejoice_label_42_sub_1">
+            <arg id="18" type="start"/>
+            <arg id="19" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <!-- ,,HEAD,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="rejoice_label_43">
+        <arg id="20"/>
+        <arg id="21"/>
+      </con>
+      <con type="excludes" label="rejoice_label_44">
+        <arg id="13"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="rejoice_label_45">
+        <arg id="20"/>
+        <arg id="13"/>
+      </con>
+      <con type="excludes" label="rejoice_label_46">
+        <arg id="20"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="rejoice_label_47">
+        <arg id="21"/>
+        <arg id="13"/>
+      </con>
+      <con type="excludes" label="rejoice_label_48">
+        <arg id="21"/>
+        <arg id="14"/>
+      </con>
+    
+
+  </multimodal>
+  <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+  <multimodal emotion="embarrassment">
+   
+    
+
+      <con type="exists" label="embarrassment_label_1">
+        <arg id="1"/>
+      </con>
+      <con type="equal" label="embarrassment_label_2">
+        <arg id="11" type="start"/>
+        <arg id="1" type="start"/>
+      </con>
+      <con type="and" label="embarrassment_label_3">
+        <arg>
+          <con type="rightinc" label="embarrassment_label_3_sub_1">
+            <arg id="11" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="embarrassment_label_3_sub_1">
+            <arg id="1"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="embarrassment_label_4">
+        <arg>
+          <con type="included" label="embarrassment_label_4_sub_1">
+            <arg id="3" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="embarrassment_label_4_sub_1">
+            <arg id="1"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="embarrassment_label_5">
+        <arg>
+          <con type="included" label="embarrassment_label_5_sub_1">
+            <arg id="6" type="start"/>
+            <arg id="10" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="included" label="embarrassment_label_5_sub_1">
+            <arg id="6" type="start"/>
+            <arg id="12" type="start"/>
+          </con>
+        </arg>
+      </con>
+      <con type="excludes" label="embarrassment_label_6">
+        <arg id="4"/>
+        <arg id="1"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_7">
+        <arg id="5"/>
+        <arg id="2"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_8">
+        <arg id="5"/>
+        <arg id="1"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_9">
+        <arg id="4"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_10">
+        <arg id="4"/>
+        <arg id="3"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_11">
+        <arg id="3"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_12">
+        <arg id="10"/>
+        <arg id="1"/>
+      </con>
+      <con type="preceded" label="embarrassment_label_13">
+        <arg id="2"/>
+        <arg id="10"/>
+      </con>
+      <con type="preceded" label="embarrassment_label_14">
+        <arg id="2"/>
+        <arg id="12"/>
+      </con>
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- ,,head,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- ,,face,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="embarrassment_label_15">
+        <arg id="6"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_16">
+        <arg id="6"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_17">
+        <arg id="7"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_18">
+        <arg id="1"/>
+        <arg id="2"/>
+      </con>
+      <con type="excludes" label="embarrassment_label_19">
+        <arg id="10"/>
+        <arg id="12"/>
+      </con>
+    
+
+  </multimodal>
+  <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+  <multimodal emotion="tension">
+   
+    
+
+      <!-- ,others,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- sequence 1 2 3 -->
+      <con type="and" label="tension_label_1">
+        <arg>
+          <con type="equal" label="tension_label_1_sub_1">
+            <arg id="2" type="start"/>
+            <arg id="1" type="stop"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="tension_label_1_sub_1">
+            <arg id="1"/>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="tension_label_2">
+        <arg>
+          <con type="equal" label="tension_label_2_sub_1">
+            <arg id="3" type="start"/>
+            <arg id="2" type="stop"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="tension_label_2_sub_1">
+            <arg id="2"/>
+          </con>
+        </arg>
+      </con>
+      <!-- sequence 4 5 -->
+      <con type="and" label="tension_label_3">
+        <arg>
+          <con type="equal" label="tension_label_3_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="4" type="stop"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="tension_label_3_sub_1">
+            <arg id="4"/>
+          </con>
+        </arg>
+      </con>
+    
+
+  </multimodal>
+  <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+  <multimodal emotion="joy">
+   
+    
+
+      <!-- ,others,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- 2 occurs after 1 or after 3-->
+      <con type="or" label="joy_label_1">
+        <arg>
+          <con type="and" label="joy_label_1_sub_1">
+            <arg>
+              <con type="preceded" label="joy_label_1_sub_2">
+                <arg id="2"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="joy_label_1_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="and" label="joy_label_1_sub_1">
+            <arg>
+              <con type="preceded" label="joy_label_1_sub_2">
+                <arg id="2"/>
+                <arg id="3"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="joy_label_1_sub_2">
+                <arg id="3"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- the sequence "7 8" is after 1 or 3 or 5 -->
+      <con type="and" label="joy_label_2">
+        <arg>
+          <con type="or" label="joy_label_2_sub_1">
+            <arg>
+              <con type="morethan" label="joy_label_2_sub_2">
+                <arg id="7" type="start"/>
+                <arg id="8" type="stop"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="morethan" label="joy_label_2_sub_2">
+                <arg id="8" type="start"/>
+                <arg id="7" type="stop"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="or" label="joy_label_3">
+            <arg>
+              <con type="exists" label="joy_label_3_sub_1">
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="or" label="joy_label_3_sub_1">
+                <arg>
+                  <con type="exists" label="joy_label_1_sub_2">
+                    <arg id="3"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="exists" label="joy_label_1_sub_2">
+                    <arg id="4"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- 5 is after 1 or 3 or 4 -->
+      <con type="and" label="joy_label_4">
+        <arg>
+          <con type="or" label="joy_label_4_sub_1">
+            <arg>
+              <con type="rightinc" label="joy_label_4_sub_2">
+                <arg id="5"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="or" label="joy_label_4_sub_2">
+                <arg>
+                  <con type="rightinc" label="joy_label_4_sub_3">
+                    <arg id="4"/>
+                    <arg id="1"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="rightinc" label="joy_label_4_sub_3">
+                    <arg id="5"/>
+                    <arg id="3"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="or" label="joy_label_4_sub_1">
+            <arg>
+              <con type="exists" label="joy_label_4_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="or" label="joy_label_4_sub_2">
+                <arg>
+                  <con type="exists" label="joy_label_4_sub_2">
+                    <arg id="3"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="exists" label="joy_label_4_sub_2">
+                    <arg id="4"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="joy_label_5">
+        <arg id="1"/>
+        <arg id="3"/>
+      </con>
+      <con type="excludes" label="joy_label_6">
+        <arg id="1"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="joy_label_7">
+        <arg id="1"/>
+        <arg id="6"/>
+      </con>
+      <con type="excludes" label="joy_label_8">
+        <arg id="1"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="joy_label_9">
+        <arg id="1"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="joy_label_10">
+        <arg id="1"/>
+        <arg id="15"/>
+      </con>
+      <con type="excludes" label="joy_label_11">
+        <arg id="4"/>
+        <arg id="3"/>
+      </con>
+      <con type="excludes" label="joy_label_12">
+        <arg id="6"/>
+        <arg id="3"/>
+      </con>
+      <con type="excludes" label="joy_label_13">
+        <arg id="9"/>
+        <arg id="3"/>
+      </con>
+      <con type="excludes" label="joy_label_14">
+        <arg id="14"/>
+        <arg id="3"/>
+      </con>
+      <con type="excludes" label="joy_label_15">
+        <arg id="15"/>
+        <arg id="3"/>
+      </con>
+      <con type="excludes" label="joy_label_16">
+        <arg id="6"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="joy_label_17">
+        <arg id="9"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="joy_label_18">
+        <arg id="19"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="joy_label_19">
+        <arg id="15"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="joy_label_20">
+        <arg id="6"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="joy_label_21">
+        <arg id="6"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="joy_label_22">
+        <arg id="6"/>
+        <arg id="15"/>
+      </con>
+      <con type="excludes" label="joy_label_23">
+        <arg id="14"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="joy_label_24">
+        <arg id="5"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="joy_label_25">
+        <arg id="14"/>
+        <arg id="15"/>
+      </con>
+      <con type="excludes" label="joy_label_26">
+        <arg id="10"/>
+        <arg id="11"/>
+      </con>
+      <con type="excludes" label="joy_label_27">
+        <arg id="10"/>
+        <arg id="13"/>
+      </con>
+      <con type="excludes" label="joy_label_28">
+        <arg id="11"/>
+        <arg id="13"/>
+      </con>
+    
+
+  </multimodal>
+  <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+  <multimodal emotion="anger">
+   
+    
+
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="anger_label_1">
+        <arg id="5"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="anger_label_2">
+        <arg id="4"/>
+        <arg id="6"/>
+      </con>
+      <con type="excludes" label="anger_label_3">
+        <arg id="6"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="anger_label_4">
+        <arg id="1"/>
+        <arg id="2"/>
+      </con>
+      <con type="excludes" label="anger_label_5">
+        <arg id="1"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="anger_label_6">
+        <arg id="2"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="anger_label_7">
+        <arg id="8"/>
+        <arg id="9"/>
+      </con>
+      <!-- ,others,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- .... ????? -->
+      <con type="morethan" label="anger_label_8">
+        <arg id="5" type="start"/>
+        <arg id="8" type="stop"/>
+      </con>
+      <!-- .... 3 in 1 or 2 or 7 -->
+      <con type="or" label="anger_label_9">
+        <arg>
+          <con type="and" label="anger_label_9_sub_1">
+            <arg>
+              <con type="included" label="anger_label_9_sub_2">
+                <arg id="3"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="anger_label_9_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="or" label="anger_label_9_sub_1">
+            <arg>
+              <con type="and" label="anger_label_9_sub_2">
+                <arg>
+                  <con type="included" label="anger_label_9_sub_3">
+                    <arg id="3"/>
+                    <arg id="2"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="exists" label="anger_label_9_sub_3">
+                    <arg id="2"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="and" label="anger_label_9_sub_2">
+                <arg>
+                  <con type="included" label="anger_label_9_sub_3">
+                    <arg id="3"/>
+                    <arg id="7"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="exists" label="anger_label_9_sub_3">
+                    <arg id="7"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .... ????? -->
+      <con type="excludes" label="anger_label_10">
+        <arg id="5"/>
+        <arg id="8"/>
+      </con>
+    
+
+  </multimodal>
+  <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+  <multimodal emotion="anxiety">
+  
+    
+
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="anxiety_label_1">
+        <arg id="9"/>
+        <arg id="10"/>
+      </con>
+      <con type="excludes" label="anxiety_label_2">
+        <arg id="11"/>
+        <arg id="10"/>
+      </con>
+      <con type="excludes" label="anxiety_label_3">
+        <arg id="1"/>
+        <arg id="6"/>
+      </con>
+      <con type="excludes" label="anxiety_label_4">
+        <arg id="2"/>
+        <arg id="6"/>
+      </con>
+      <con type="excludes" label="anxiety_label_5">
+        <arg id="3"/>
+        <arg id="6"/>
+      </con>
+      <con type="excludes" label="anxiety_label_6">
+        <arg id="4"/>
+        <arg id="6"/>
+      </con>
+    
+
+  </multimodal>
+  <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+  <multimodal emotion="relief">
+   
+    
+
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="relief_label_1">
+        <arg id="13"/>
+        <arg id="1"/>
+      </con>
+      <con type="excludes" label="relief_label_2">
+        <arg id="2"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="relief_label_3">
+        <arg id="2"/>
+        <arg id="6"/>
+      </con>
+      <con type="excludes" label="relief_label_4">
+        <arg id="2"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="relief_label_5">
+        <arg id="2"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="relief_label_6">
+        <arg id="12"/>
+        <arg id="2"/>
+      </con>
+      <con type="excludes" label="relief_label_7">
+        <arg id="6"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="relief_label_8">
+        <arg id="5"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="relief_label_9">
+        <arg id="9"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="relief_label_10">
+        <arg id="12"/>
+        <arg id="5"/>
+      </con>
+      <con type="excludes" label="relief_label_11">
+        <arg id="6"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="relief_label_12">
+        <arg id="6"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="relief_label_13">
+        <arg id="12"/>
+        <arg id="6"/>
+      </con>
+      <con type="excludes" label="relief_label_14">
+        <arg id="9"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="relief_label_15">
+        <arg id="12"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="relief_label_16">
+        <arg id="12"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="relief_label_17">
+        <arg id="12"/>
+        <arg id="9"/>
+      </con>
+      <con type="excludes" label="relief_label_18">
+        <arg id="10"/>
+        <arg id="13"/>
+      </con>
+      <con type="excludes" label="relief_label_19">
+        <arg id="11"/>
+        <arg id="13"/>
+      </con>
+      <con type="excludes" label="relief_label_20">
+        <arg id="5"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="relief_label_21">
+        <arg id="11"/>
+        <arg id="10"/>
+      </con>
+      <con type="excludes" label="relief_label_22">
+        <arg id="3"/>
+        <arg id="10"/>
+      </con>
+      <con type="excludes" label="relief_label_23">
+        <arg id="5"/>
+        <arg id="10"/>
+      </con>
+      <!-- torso forward cannot be with some mobements-->
+      <con type="excludes" label="relief_label_24">
+        <arg id="11"/>
+        <arg id="14"/>
+      </con>
+      <con type="excludes" label="relief_label_25">
+        <arg id="11"/>
+        <arg id="1"/>
+      </con>
+      <con type="equal" label="relief_label_26">
+        <arg id="3" type="start"/>
+        <arg id="2" type="start"/>
+      </con>
+      <con type="rightinc" label="relief_label_27">
+        <arg id="14" type="start"/>
+        <arg id="3" type="start"/>
+      </con>
+      <con type="rightinc" label="relief_label_28">
+        <arg id="1" type="start"/>
+        <arg id="2" type="start"/>
+      </con>
+      <con type="and" label="relief_label_29">
+        <arg>
+          <con type="rightinc" label="relief_label_29_sub_1">
+            <arg id="3" type="start"/>
+            <arg id="2" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="relief_label_29_sub_1">
+            <arg id="2"/>
+          </con>
+        </arg>
+      </con>
+      <!-- torso zaczyna -->
+      <con type="or" label="relief_label_30">
+        <arg>
+          <con type="or" label="relief_label_30_sub_1">
+            <arg>
+              <con type="and" label="relief_label_30_sub_2">
+                <arg>
+                  <con type="equal" label="relief_label_30_sub_3">
+                    <arg id="10" type="start"/>
+                    <arg id="2" type="start"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="exists" label="relief_label_30_sub_3">
+                    <arg id="10"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="and" label="relief_label_30_sub_2">
+                <arg>
+                  <con type="equal" label="relief_label_30_sub_3">
+                    <arg id="11" type="start"/>
+                    <arg id="2" type="start"/>
+                  </con>
+                </arg>
+                <arg>
+                  <con type="exists" label="relief_label_30_sub_3">
+                    <arg id="11"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="and" label="relief_label_30_sub_1">
+            <arg>
+              <con type="not" label="relief_label_30_sub_2">
+                <arg>
+                  <con type="exists" label="relief_label_30_sub_3">
+                    <arg id="10"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+            <arg>
+              <con type="not" label="relief_label_30_sub_2">
+                <arg>
+                  <con type="exists" label="relief_label_30_sub_3">
+                    <arg id="11"/>
+                  </con>
+                </arg>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="relief_label_31">
+        <arg>
+          <con type="preceded" label="relief_label_31_sub_1">
+            <arg id="12"/>
+            <arg id="2"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="relief_label_31_sub_1">
+            <arg id="2"/>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="relief_label_32">
+        <arg>
+          <con type="preceded" label="relief_label_32_sub_1">
+            <arg id="12"/>
+            <arg id="3"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="relief_label_32_sub_1">
+            <arg id="2"/>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="relief_label_33">
+        <arg>
+          <con type="preceded" label="relief_label_33_sub_1">
+            <arg id="12"/>
+            <arg id="14"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="relief_label_33_sub_1">
+            <arg id="2"/>
+          </con>
+        </arg>
+      </con>
+    
+
+  </multimodal>
+  <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+  <multimodal emotion="pride">
+    
+    
+
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="or" label="pride_label_1">
+        <arg>
+          <con type="morethan" label="pride_label_1_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="8" type="stop"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="morethan" label="pride_label_1_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="9" type="stop"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="pride_label_2">
+        <arg>
+          <con type="morethan" label="pride_label_2_sub_1">
+            <arg id="9" type="start"/>
+            <arg id="2" type="stop"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="morethan" label="pride_label_2_sub_1">
+            <arg id="2" type="start"/>
+            <arg id="9" type="stop"/>
+          </con>
+        </arg>
+      </con>
+      <con type="or" label="pride_label_3">
+        <arg>
+          <con type="morethan" label="pride_label_3_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="2" type="stop"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="morethan" label="pride_label_3_sub_1">
+            <arg id="2" type="start"/>
+            <arg id="8" type="stop"/>
+          </con>
+        </arg>
+      </con>
+      <con type="excludes" label="pride_label_4">
+        <arg id="3"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="pride_label5">
+        <arg id="2"/>
+        <arg id="4"/>
+      </con>
+      <con type="and" label="pride_label_6">
+        <arg>
+          <con type="equal" label="pride_label_6_sub_1">
+            <arg id="3" type="start"/>
+            <arg id="2" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="pride_label_6_sub_1">
+            <arg id="2"/>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="pride_label_7">
+        <arg>
+          <con type="equal" label="pride_label_7_sub_1">
+            <arg id="1" type="start"/>
+            <arg id="2" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="pride_label_7_sub_1">
+            <arg id="2"/>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="pride_label_8">
+        <arg>
+          <con type="equal" label="pride_label_8_sub_1">
+            <arg id="5" type="start"/>
+            <arg id="2" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="pride_label_8_sub_1">
+            <arg id="2"/>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="pride_label_9">
+        <arg>
+          <con type="equal" label="pride_label_9_sub_1">
+            <arg id="10" type="start"/>
+            <arg id="2" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="pride_label_9_sub_1">
+            <arg id="2"/>
+          </con>
+        </arg>
+      </con>
+    
+
+  </multimodal>
+  <!-- ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+  <multimodal emotion="panic_fear">
+   
+    
+
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- ,,face,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="panic_fear_label_1">
+        <arg id="9"/>
+        <arg id="10"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_2">
+        <arg id="9"/>
+        <arg id="11"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_3">
+        <arg id="10"/>
+        <arg id="11"/>
+      </con>
+      <!-- ,,gestures,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <con type="excludes" label="panic_fear_label_4">
+        <arg id="6"/>
+        <arg id="7"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_5">
+        <arg id="6"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_6">
+        <arg id="6"/>
+        <arg id="12"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_7">
+        <arg id="6"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_8">
+        <arg id="7"/>
+        <arg id="4"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_9">
+        <arg id="7"/>
+        <arg id="8"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_10">
+        <arg id="7"/>
+        <arg id="12"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_11">
+        <arg id="8"/>
+        <arg id="12"/>
+      </con>
+      <con type="excludes" label="panic_fear_label_12">
+        <arg id="4"/>
+        <arg id="12"/>
+      </con>
+      <!-- ,,EXCLUDES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,, -->
+      <!-- .. 4 after 8  -->
+      <con type="preceded" label="panic_fear_label_13">
+        <arg id="4"/>
+        <arg id="8"/>
+      </con>
+      <!-- .. 4 after 8  -->
+      <con type="preceded" label="panic_fear_label_14">
+        <arg id="4"/>
+        <arg id="12"/>
+      </con>
+      <!-- .. 4 after 7  -->
+      <con type="preceded" label="panic_fear_label_15">
+        <arg id="4"/>
+        <arg id="7"/>
+      </con>
+      <con type="and" label="panic_fear_label_16">
+        <arg>
+          <con type="preceded" label="panic_fear_label_16_sub_1">
+            <arg id="5"/>
+            <arg id="1"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="panic_fear_label_16_sub_1">
+            <arg id="1"/>
+          </con>
+        </arg>
+      </con>
+      <!-- .. 4 after 1  -->
+      <con type="or"  label="panic_fear_label_17">
+        <arg>
+          <con type="and" label="panic_fear_label_17_sub_1">
+            <arg>
+              <con type="rightinc" label="panic_fear_label_17_sub_2">
+                <arg id="4"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_17_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="and" label="panic_fear_label_17_sub_1">
+            <arg>
+              <con type="preceded" label="panic_fear_label_17_sub_2">
+                <arg id="4"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_17_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .. 6 after 1  -->
+      <con type="or" label="panic_fear_label_18">
+        <arg>
+          <con type="and" label="panic_fear_label_18_sub_1">
+            <arg>
+              <con type="rightinc" label="panic_fear_label_18_sub_2">
+                <arg id="6"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_18_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="and" label="panic_fear_label_18_sub_1">
+            <arg>
+              <con type="preceded" label="panic_fear_label_18_sub_2">
+                <arg id="6"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_18_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .. 7 after 1  -->
+      <con type="or"  label="panic_fear_label_19">
+        <arg>
+          <con type="and" label="panic_fear_label_19_sub_1">
+            <arg>
+              <con type="rightinc" label="panic_fear_label_19_sub_2">
+                <arg id="7"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_19_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="and" label="panic_fear_label_19_sub_1">
+            <arg>
+              <con type="preceded" label="panic_fear_label_19_sub_2">
+                <arg id="7"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_19_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .. 8 after 1  -->
+      <con type="or" label="panic_fear_label_20">
+        <arg>
+          <con type="and" label="panic_fear_label_20_sub_1">
+            <arg>
+              <con type="rightinc" label="panic_fear_label_20_sub_2">
+                <arg id="8"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_20_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="and" label="panic_fear_label_20_sub_1">
+            <arg>
+              <con type="preceded" label="panic_fear_label_20_sub_2">
+                <arg id="8"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_20_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <!-- .. 12 ter 1  -->
+      <con type="or" label="panic_fear_label_21">
+        <arg>
+          <con type="and" label="panic_fear_label_21_sub_1">
+            <arg>
+              <con type="rightinc" label="panic_fear_label_21_sub_2">
+                <arg id="12"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_21_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+        <arg>
+          <con type="and" label="panic_fear_label_21_sub_1" >
+            <arg>
+              <con type="preceded" label="panic_fear_label_21_sub_2">
+                <arg id="12"/>
+                <arg id="1"/>
+              </con>
+            </arg>
+            <arg>
+              <con type="exists" label="panic_fear_label_21_sub_2">
+                <arg id="1"/>
+              </con>
+            </arg>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="panic_fear_label_22">
+        <arg>
+          <con type="equal" label="panic_fear_label_22_sub_1">
+            <arg id="3" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="panic_fear_label_22_sub_1">
+            <arg id="1"/>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="panic_fear_label_23">
+        <arg>
+          <con type="equal" label="panic_fear_label_23_sub_1">
+            <arg id="2" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="panic_fear_label_23_sub_1">
+            <arg id="1"/>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="panic_fear_label_24">
+        <arg>
+          <con type="equal" label="panic_fear_label_24_sub_1">
+            <arg id="7" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="panic_fear_label_24_sub_1">
+            <arg id="1"/>
+          </con>
+        </arg>
+      </con>
+      <con type="and" label="panic_fear_label_25">
+        <arg>
+          <con type="equal" label="panic_fear_label_25_sub_1">
+            <arg id="8" type="start"/>
+            <arg id="1" type="start"/>
+          </con>
+        </arg>
+        <arg>
+          <con type="exists" label="panic_fear_label_25_sub_1">
+            <arg id="1"/>
+          </con>
+        </arg>
+      </con>
+      <con type="equal" label="panic_fear_label_26">
+        <arg id="3" type="start"/>
+        <arg id="2" type="start"/>
+      </con>
+    
+
+  </multimodal>
+</multimodals>

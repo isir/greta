@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+elementFormDefault="qualified">
+<!-- useless
+<xs:include schemaLocation="global.xsd"/>
+-->
+<xs:complexType name="parameterType">
+	<xs:attribute name="name" type="xs:string" use="required"/>
+	<xs:attribute name="value" type="xs:decimal" use="required"/>
+	<xs:attribute name="min" type="xs:decimal" default="0.0"/>
+	<xs:attribute name="max" type="xs:decimal" default="1.0"/>
+</xs:complexType>
+		
+<xs:complexType name="parsetType">
+	<xs:sequence>
+		<xs:element name="Parameter" type="parameterType" minOccurs="1" maxOccurs="unbounded"/>
+	</xs:sequence>
+	<xs:attribute name="name" type="xs:string" use="required"/>
+</xs:complexType>
+
+<xs:complexType name="parsetsType">
+	<xs:sequence>
+		<xs:element name="parameter-set" type="parsetType" minOccurs="1" maxOccurs="unbounded"/>
+	</xs:sequence>
+</xs:complexType>
+
+<xs:element name="profile" type="parsetsType">
+</xs:element>
+
+</xs:schema>

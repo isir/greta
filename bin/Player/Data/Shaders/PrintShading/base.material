@@ -1,0 +1,138 @@
+//
+// The maximum number of lights per-object (for now we can go no higher than 6). Decrease this value if you need some extra performance.
+//
+// If you change this, then you must enter 'printShading.cg' and change the 'NUM_LIGHTS'
+// definition to match this variable.
+set $numLights 2
+ 
+vertex_program printShadingVP cg {
+	source printShading.cg
+	entry_point main_vp
+	profiles vs_1_1 arbvp1
+ 
+	default_params {
+		param_named_auto worldViewProj worldviewproj_matrix
+		param_named_auto width viewport_width
+		param_named_auto height viewport_height
+		param_named_auto uvTransform texture_matrix 4
+	}
+}
+
+fragment_program printShadingFP cg {
+	source printShading.cg
+	entry_point main_fp
+	profiles ps_2_x arbfp1
+ 
+	default_params {
+		param_named_auto eyePosition camera_position_object_space
+ 
+		param_named_auto ambientColor surface_ambient_colour
+		param_named_auto diffuseColor surface_diffuse_colour
+		param_named_auto specularColor surface_specular_colour
+		param_named_auto shininess surface_shininess
+ 
+		param_named_auto ambientLight ambient_light_colour
+		
+		param_named_auto lightDiffuse light_diffuse_colour_array $numLights
+		param_named_auto lightSpecular light_specular_colour_array $numLights
+		param_named_auto lightPosition light_position_object_space_array $numLights
+		param_named_auto lightAttenuation light_attenuation_array $numLights
+		
+		param_named_auto width viewport_width
+		param_named_auto height viewport_height
+	}
+}
+
+material base/ancestor {
+	set $ar 0.5 
+	set $ag 0.5
+	set $ab 0.5
+	set $aa 1
+
+
+	set $dr 0.8
+	set $dg 0.8
+	set $db 0.8
+	set $da 1
+
+	set $sr 0
+	set $sg 0
+	set $sb 0
+	set $sa 1
+	set $ss 0
+	
+	set $scaleU 1
+	set $scaleV 1
+	set $offsetU 0
+	set $offsetV 0
+	
+	set $inkWidth 1
+	set $pointSize 0.8
+	
+
+	technique 0 {
+		pass printShading {
+			ambient $ar $ag $ab $aa
+			diffuse $dr $dg $db $da
+			specular $sr $sg $sb $sa $ss
+			cull_hardware none
+			cull_software none
+			
+			vertex_program_ref printShadingVP {}
+			fragment_program_ref printShadingFP {
+				param_named inkWidth float $inkWidth
+				param_named pointSize float $pointSize
+			}
+			
+			
+			texture_unit diffRamp {
+				texture cel_shading_diffuse.png 1d
+				tex_address_mode clamp
+			}
+			texture_unit specRamp {
+				texture cel_shading_specular.png 1d
+				tex_address_mode clamp
+			}
+			texture_unit grey {
+				texture greyBnW.png 2d 1
+				tex_address_mode mirror
+			}
+			texture_unit lightGrey {
+				texture lightgreyBnW.png 2d 1
+				tex_address_mode mirror
+			}
+			texture_unit decal {
+				texture_alias celShadingMap
+				texture white.bmp
+				scale $scaleU $scaleV
+				scroll $offsetU $offsetV
+			}
+		}
+	}
+}
+ 
+material base : base/ancestor{
+	technique 0 {
+		pass printShading {}
+		pass Outline{
+			cull_hardware anticlockwise
+			diffuse 0 0 0 1
+			ambient 0 0 0 1
+			specular 0 0 0 1 0
+			shading flat
+			polygon_mode wireframe
+		}
+	}
+}
+
+material base/alpha : base/ancestor {
+	technique 0 {
+		pass printShading {
+			alpha_rejection greater 0
+			alpha_to_coverage on
+		}
+	}
+}
+
+material base/alpha/eye : base/alpha{
+}

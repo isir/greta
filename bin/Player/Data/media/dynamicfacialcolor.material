@@ -1,0 +1,100 @@
+vertex_program face/dynamicfacialcolor_vert glsl
+{
+    source dynamicfacialcolor.vert
+}
+
+fragment_program face/dynamicfacialcolor_frag glsl
+{
+    source dynamicfacialcolor.frag
+    default_params
+    {
+        param_named textureMap int 0
+        param_named normalMap int 1
+        param_named bumpMap int 2
+        param_named id float 2
+    }
+}
+
+material poppy_face_dynamicfacialcolor
+{
+    receive_shadows on
+    technique
+    {
+        pass as
+        {
+            ambient 0.5 0.5 0.5 1
+            diffuse 0.8 0.8 0.8 1
+            emissive 0 0 0 1
+            specular 0.2 0.2 0.2 5
+            cull_hardware none
+            cull_software none
+
+            vertex_program_ref face/dynamicfacialcolor_vert
+            {
+            }
+
+            fragment_program_ref face/dynamicfacialcolor_frag
+            {
+            }
+
+            texture_unit a
+            {
+                texture poppy/face.jpg
+                colour_op modulate
+            }
+
+            texture_unit b
+            {
+                //texture poppy_face_high_normal.jpg
+            }
+
+            texture_unit c
+            {
+                texture poppy/poppy_face_bump.dds 3d 0
+                filtering bilinear
+            }
+        }
+    }
+}
+
+material obadiah_face_dynamicfacialcolor
+{
+    receive_shadows on
+    technique
+    {
+        pass as
+        {
+            ambient 0.5 0.5 0.5 1
+            diffuse 0.8 0.8 0.8 1
+            emissive 0 0 0 1
+            specular 0.2 0.2 0.2 5
+            cull_hardware none
+            cull_software none
+
+            vertex_program_ref face/dynamicfacialcolor_vert
+            {
+            }
+
+            fragment_program_ref face/dynamicfacialcolor_frag
+            {
+            }
+
+            texture_unit a
+            {
+                texture obadiah/face.jpg
+                colour_op modulate
+            }
+
+            texture_unit b
+            {
+                //texture obadiah_face_high_normal.jpg
+            }
+
+            texture_unit c
+            {
+                texture obadiah/obadiah_face_bump.dds 3d 0
+                filtering bilinear
+            }
+        }
+    }
+}

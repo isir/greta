@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+  <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+ 
+ <xsd:element name="ShouldersGestures" type="ShouldersGesturesType"/>
+
+<xsd:complexType name="ShouldersGesturesType">
+	<xsd:sequence>
+		<xsd:element name="ShoulderGesture" type="ShoulderGestureType" minOccurs="1" maxOccurs="unbounded"/>		
+	</xsd:sequence>
+</xsd:complexType>
+
+<xsd:complexType name="ShoulderGestureType">	
+	<xsd:sequence>
+		<xsd:element name="shoulder" type="shoulderType" minOccurs="0" maxOccurs="2"/>
+	</xsd:sequence>	 
+	<xsd:attribute name="id" type="xsd:string" use="required"/>
+</xsd:complexType>
+
+<xsd:complexType name="shoulderType">	
+	<xsd:sequence>
+		<xsd:element name="verticalGesture" type="verticalGestureType" minOccurs="0" maxOccurs="1"/>
+		<xsd:element name="horizontalGesture" type="horizontalGestureType" minOccurs="0" maxOccurs="1"/>
+	</xsd:sequence>	 
+	<xsd:attribute name="side" type="xsd:string"/>
+</xsd:complexType>
+
+      <xsd:simpleType name="verticalGestureType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="up"/>
+            <xsd:enumeration value="down"/>
+			<xsd:enumeration value="middle"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+	
+	 <xsd:simpleType name="horizontalGestureType">
+        <xsd:restriction base="xsd:string">
+            <xsd:enumeration value="forward"/>
+            <xsd:enumeration value="backward"/>
+			<xsd:enumeration value="middle"/>
+        </xsd:restriction>
+    </xsd:simpleType>
+
+	
+	</xsd:schema>

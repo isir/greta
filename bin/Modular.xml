@@ -70,7 +70,6 @@
             <menu name="TTS">
                 <item module="TTS" name="Controller"/>
                 <item module="OpenMary ClientTTS" name="Open Mary Client"/>
-                <item module="OpenMary SemaineTTS" name="Open Mary Semaine"/>
                 <item module="Cereproc TTS" name="Cereproc TTS"/>
             </menu>
             <menu name="LaughSynthetizer">
@@ -350,10 +349,6 @@
             <object class="vib.auxiliary.tts.openmary.OpenMaryClientTTS" lib_id="vib_openmary"/>
             <frame type="noFrame"/>
             <!-- TODO -->
-        </module>
-        <module name="OpenMary SemaineTTS">
-            <object class="vib.auxiliary.tts.openmary.OpenMarySemaineTTS" lib_id="vib_openmary"/>
-            <frame type="noFrame"/>
         </module>
         <module name="Cereproc TTS">
             <object class="vib.auxiliary.tts.cereproc.CereprocTTS" lib_id="vib_cereproc"/>

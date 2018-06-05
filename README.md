@@ -1,7 +1,7 @@
 # Greta
 Realtime platform to control socio-emotional virtual characters 
 
-![Greta logo](https://github.com/gretaproject/Greta/tree/master/pictures/Greta_hello.png)
+![Greta logo](https://github.com/gretaproject/Greta/blob/master/pictures/Greta_hello.png)
 
 Welcome to the public repository of the Greta project.
 Greta is a virtual character engine that allows generating socio-emotional behaviors in order to build natural interactional scenario with human users.
@@ -51,6 +51,7 @@ In Troisième Workshop sur les Agents Conversationnels Animés.
 
 Greta animation engine produces MPEG4 compatible animation. The system outputs frame of Body Animation Parameters and Facial Animation Parameters.
 The Greta platform is also capable of taking as inputs these animation parameters to render the animation on a virtual character using Ogre3D or Unity3D.
+
 Niewiadomski, R., Bevacqua, E., Mancini, M., & Pelachaud, C. (2009, May).
 Greta: an interactive expressive ECA system.
 In Proceedings of The 8th International Conference on Autonomous Agents and Multiagent Systems-Volume 2 (pp. 1399-1400).

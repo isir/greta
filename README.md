@@ -59,7 +59,7 @@ International Foundation for Autonomous Agents and Multiagent Systems.
 
 ### Listener Backchannels
 
-An important part of human communication is performed by the subtle behaviors one produces when listening. These behaviors, called backchannels, includes head nods and other small sounds like "hmm hmm".
+An important part of human communication is performed by the subtle behaviors one produces when listening. These behaviors, called backchannels, include head nods and other small sounds like "hmm hmm".
 Greta provides a system to configure and use these behaviors in an automatic fashion in order to design more life-like interaction.
 
 Bevacqua, E., Pammi, S., Hyniewska, S. J., Schröder, M., & Pelachaud, C. (2010, September).

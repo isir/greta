@@ -24,7 +24,7 @@
 			</core>
 		</constraints>
 	</behaviorset>
-	<behaviorset name="performative-restpose">
+	<behaviorset name="rest-restpose">
 		<signals>
 			<signal id="1" name="rest=Belly_Ges_B" modality="gesture"/>
 		</signals>
@@ -578,6 +578,15 @@
 			<signal id="2" name="adjectival=ShowHand_Pos_L_Low" modality="gesture"/>
 			<signal id="3" name="gaze=look_at" modality="gaze"/>
 			<signal id="4" name="faceexp=certain" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="certainty-uncertain">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+			<signal id="3" name="faceexp=uncertain" modality="face"/>
 		</signals>
 		<constraints/>
 	</behaviorset>

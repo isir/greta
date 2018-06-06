@@ -31,7 +31,7 @@ Greta is the result of different research projects conducted by Catherine Pelach
 ## Functionality
 
 The Greta project is divided into a public repository (this one) and a private one where future functionnalities are being developed by Catherine Pelachaud's research group.
-If you use any of the resources provided on this page in any of your publications we ask you to cite the following work and the work for a relevant submodule you used.
+If you use any of the resources provided on this page in any of your publications we ask you to cite the corresponding paper(s).
 
 ### Overall project
 (to be completed)

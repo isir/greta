@@ -26,7 +26,7 @@ Greta is the result of different research projects conducted by Catherine Pelach
 
 ## WIKI
 
-**For instructions of how to install/compile/use the project please see [WIKI](http://greta.isir.upmc.fr)**
+**For instructions of how to install/compile/use the project please see [WIKI](https://github.com/gretaproject/greta/wiki)**
 
 ## Functionality
 

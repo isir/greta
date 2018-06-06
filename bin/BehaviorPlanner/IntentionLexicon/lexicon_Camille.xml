@@ -518,7 +518,7 @@
 	<behaviorset name="performative-propose">
 		<signals>
 			<signal id="1" name="faceexp=propose" modality="face"/>
-			<signal id="2" name="adjectival=OPEN_MOVING_HAND" modality="gesture"/>
+			<signal id="2" name="performative=Inform_Ges_B_Spread" modality="gesture"/>
 			<signal id="3" name="NOD" modality="head"/>
 			<signal id="4" name="gaze=look_at" modality="gaze"/>
 		</signals>

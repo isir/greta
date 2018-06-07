@@ -1,4 +1,4 @@
-# Greta
+﻿# Greta
 Realtime platform to control socio-emotional virtual characters 
 
 ![Greta logo](https://github.com/gretaproject/Greta/blob/master/pictures/Greta_hello.png)
@@ -9,7 +9,7 @@ Greta is a virtual character engine that allows generating socio-emotional behav
 Greta is a Java modular software designed to run on Java 1.8 only and mainly on Windows, it is not ready for Java 1.9 yet.
 All parts of Greta/VIB are licensed under the GNU GPL v3.
 
-Greta depends on external software for Speech Synthesis, Cereproc or OpenMary, and 3D Rendering, Ogre or Unity.
+Greta depends on external software for Speech Synthesis, Cereproc or [OpenMary](http://mary.dfki.de/), and 3D Rendering, Ogre or Unity.
 Therefore, some configuration is required once you retrieve the source files of the project before being able to start it.
 
 # Quick start

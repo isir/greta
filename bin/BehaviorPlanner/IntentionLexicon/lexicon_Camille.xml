@@ -481,7 +481,7 @@
 			<signal id="2" name="performative=GreetNew_Ges_R" modality="gesture"/>
 			<signal id="3" name="gaze=look_at" modality="gaze"/>
 			<signal id="4" name="NOD" modality="head"/>
-			<signal id="5" name="LinearNeutralFrontalSwing" modality="torso"/>
+			<!--<signal id="5" name="LinearNeutralFrontalSwing" modality="torso"/>-->
 			<!-- Doesn't work anymore in the GRETA platform. -->
 			<!-- <signal id="5" name="bow" modality="torso"/> -->
 		</signals>

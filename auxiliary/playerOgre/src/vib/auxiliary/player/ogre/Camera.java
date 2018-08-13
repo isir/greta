@@ -23,6 +23,8 @@ import vib.auxiliary.player.ogre.natives.SceneManager;
 import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Quaternion;
 import vib.auxiliary.player.ogre.natives.Vector3;
+import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 
 /**
  * This class is an helper to manipulate the cameras from Ogre.<br/>
@@ -34,7 +36,7 @@ import vib.auxiliary.player.ogre.natives.Vector3;
  * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_ camera
  * @author Andre-Marie Pez
  */
-public class Camera {
+public class Camera extends CharacterDependentAdapter{
 
     private SceneNode translationNode;
     private SceneNode yawNode;
@@ -47,12 +49,13 @@ public class Camera {
 
     /**
      * Creates a new {@code Camera}
+     * @param cm the {@code CharacterManager} to inform the CharactedManager of its camera's id
      * @param sceneManager the {@code SceneManager} that will creates the OgreCamera
      * @param parentNode the {@code SceneNode} where this {@code Camera} is attached to
      * @param idCamera the identifier of this {@code Camera}, it must be unique in the sceneManager
      */
-    public Camera(SceneManager sceneManager, SceneNode parentNode, String idCamera){
-
+    public Camera(CharacterManager cm,SceneManager sceneManager, SceneNode parentNode, String idCamera){
+        setCharacterManager(cm);
         translationNode = parentNode.createChildSceneNode();
         yawNode         = translationNode.createChildSceneNode();
         pitchNode       = yawNode.createChildSceneNode();
@@ -74,7 +77,7 @@ public class Camera {
         rotationAdaptor = new vib.core.util.math.Quaternion(new Vec3d(0, 1, 0), (float)Math.PI);
         backgroundColor = new Vec3d(0.5f, 0.5f, 0.5f);
         
-        vib.core.util.CharacterManager.currentCameraId = mic.getIdentifier();
+        cm.currentCameraId = mic.getIdentifier();
     }
 
     public void setBackgroundColor(Vec3d color){
@@ -239,5 +242,10 @@ public class Camera {
 
     public Mixer getMic(){
         return mic;
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        getCharacterManager().currentCameraId = mic.getIdentifier();
     }
 }

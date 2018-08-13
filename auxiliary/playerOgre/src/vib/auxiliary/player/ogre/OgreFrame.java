@@ -23,6 +23,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import vib.auxiliary.player.ogre.capture.Capturable;
+import vib.core.util.CharacterManager;
 import vib.core.util.audio.Line;
 import vib.core.util.environment.Environment;
 
@@ -34,11 +35,11 @@ public class OgreFrame extends JFrame implements Capturable{
 
     OgreAwt ogreView;
     protected static final int BUTTON_WIREFRAME = 1;
-    public OgreFrame(){
-        this(Ogre.DEBUG ? 1 : 0); // 0 - Without the 'Wireframe' button
+    public OgreFrame(CharacterManager cm){
+        this(cm,Ogre.DEBUG ? 1 : 0); // 0 - Without the 'Wireframe' button
                                   // 1 - With the 'Wireframe' button
     }
-    protected OgreFrame(int buttons){
+    protected OgreFrame(CharacterManager cm,int buttons){
         super("Player");
         Dimension d = new Dimension(
                 720, 576 //HD
@@ -47,7 +48,7 @@ public class OgreFrame extends JFrame implements Capturable{
         setSize(d);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ogreView = new OgreAwt(new Line());
+        ogreView = new OgreAwt(cm, new Line());
         ogreView.setPreferredSize(d);
         add(ogreView);
         if(buttons>0){

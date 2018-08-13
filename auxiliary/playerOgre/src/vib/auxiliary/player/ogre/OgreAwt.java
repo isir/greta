@@ -26,6 +26,7 @@ import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Vector3;
 import vib.auxiliary.player.ogre.natives.PixelBox;
 import vib.auxiliary.player.ogre.capture.Capturable;
+import vib.core.util.CharacterManager;
 import vib.core.util.audio.AudioOutput;
 import vib.core.util.environment.Environment;
 import vib.core.util.environment.Leaf;
@@ -50,8 +51,9 @@ public class OgreAwt extends java.awt.Canvas implements Capturable{
     private double cameraDefaultRoll;
     private boolean initialized;
     private AudioOutput defaultAudioOutput;
+    private CharacterManager cm;
 
-    public OgreAwt(AudioOutput audioOutput) {
+    public OgreAwt(CharacterManager cm, AudioOutput audioOutput) {
         cameraDefaultPosX = 0;
         cameraDefaultPosY = 0.7;
         cameraDefaultPosZ = 1.3;
@@ -60,10 +62,11 @@ public class OgreAwt extends java.awt.Canvas implements Capturable{
         cameraDefaultRoll = 0;
         initialized = false;
         defaultAudioOutput = audioOutput;
+        this.cm = cm;
     }
 
-    public OgreAwt() {
-        this(null);
+    public OgreAwt(CharacterManager cm) {
+        this(cm,null);
     }
 
     @Override
@@ -103,7 +106,7 @@ public class OgreAwt extends java.awt.Canvas implements Capturable{
                 SceneNode rootSceneNode = oel.rootSceneNode;
 
                 // create camera
-                camera = new Camera(sceneManager, rootSceneNode, "AWT Camera " + (cameraCount++));
+                camera = new Camera(cm,sceneManager, rootSceneNode, "AWT Camera " + (cameraCount++));
                 camera.setPosition(cameraDefaultPosX, cameraDefaultPosY, cameraDefaultPosZ);
                 camera.pitch(cameraDefaultPitch);
                 camera.yaw(cameraDefaultYaw);

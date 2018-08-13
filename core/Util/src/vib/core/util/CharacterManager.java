@@ -33,33 +33,54 @@ import java.util.Map;
  */
 public class CharacterManager {
 
-    /**
-     * Don't let anyone instantiate this class.
-     */
-    private CharacterManager() {
-    }
-
     private static final String DEFAULT_CHARACTER_NAME = "GRETA";
-    private static IniManager characterDefinitions;
-    private static Map<String, String> characterMapFile;
-    private static List<CharacterDependent> dependents;
-    private static String currentCaracterName;
+    private static final String DEFAULT_CHARACTER_KEY = "DEFAULT_CHARACTER";
+       
+    private static CharacterManager staticInstance;
+    private static int count=0;
+    
+    
+    private Map<String, String> characterMapFile;     
+    private IniManager characterDefinitions;
+    private List<CharacterDependent> dependents;
+    private String currentCaracterName;    
 
-    public static String currentCharacterId; //TODO find a better way to give the id from the environment
-    public static String currentCameraId;
-
-    static {
-        dependents = new ArrayList<CharacterDependent>();
+    public String currentCharacterId; //TODO find a better way to give the id from the environment
+    public String currentCameraId;
+    private String id;
+    
+    static{
+        getStaticInstance();
+    }
+    
+    public String toString(){
+        return id;
+    }    
+    
+    public CharacterManager(String id){
+        this.id = id;
+        dependents = new ArrayList<>();
         characterMapFile = new HashMap<String, String>();
-        currentCaracterName = "DEFAULT_CHARACTER";
-        String filename = IniManager.getGlobals().getValueString("DEFAULT_CHARACTER");
+        currentCaracterName = "DEFAULT_CHARACTER";      
+        String filename = IniManager.getGlobals().getValueString(DEFAULT_CHARACTER_KEY);
         if (!(new File(filename)).exists()) {
             currentCaracterName = DEFAULT_CHARACTER_NAME;
             filename = characterMapFile.get(DEFAULT_CHARACTER_NAME);
         }
         characterMapFile.put(currentCaracterName, (new File(filename)).getAbsolutePath());
         characterDefinitions = new IniManager((new File(filename)).getAbsolutePath());
-        setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER"));
+        setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER")); 
+        count++;
+    }
+    
+    public CharacterManager(){
+        this("CharacterManager-"+(count));               
+    }
+    
+    public static CharacterManager getStaticInstance(){
+        if(staticInstance==null)
+            staticInstance = new CharacterManager("CharacterManager-static");
+        return staticInstance;
     }
 
     /**
@@ -67,7 +88,8 @@ public class CharacterManager {
      * All {@code CharacterDependent} added will be informed when the character change.
      * @param dependent the {@code CharacterDependent} to add
      */
-    public static void add(CharacterDependent dependent) {
+    public void add(CharacterDependent dependent) {
+        System.out.println(String.format("Adding to %s : %s",toString(),dependent.toString()));
         if( ! dependents.contains(dependent)) {
             dependents.add(dependent);
         }
@@ -78,7 +100,7 @@ public class CharacterManager {
      * This {@code CharacterDependent} will not be informed when the character change.
      * @param dependent the {@code CharacterDependent} to remove
      */
-    public static void remove(CharacterDependent dependent){
+    public void remove(CharacterDependent dependent){
         try{
             dependents.remove(dependent);
         }catch(Exception e){/* remove may throw an exception but we dont take care of it */}
@@ -87,16 +109,17 @@ public class CharacterManager {
     /**
      * Removes all {@code CharacterDependent} added.
      */
-    public static void clearListOfDependents(){
+    public void clearListOfDependents(){
         dependents.clear();
     }
 
     /**
      * Send a notification to all {@code CharacterDependent} added.
      */
-    public static void notifyChanges() {
+    public void notifyChanges() {
         for (CharacterDependent dependent : dependents) {
             dependent.onCharacterChanged();
+            System.out.println(String.format("%s notifying %s",toString(),dependent.toString()));
         }
     }
 
@@ -106,7 +129,7 @@ public class CharacterManager {
      * @param name the name of the character to set
      * @see #addCharacter(java.lang.String)
      */
-    public static void setCharacter(String name) {
+    public void setCharacter(String name) {
         String filename = fileNameOfCharacter(name);
 
         if (filename != null) {
@@ -122,7 +145,7 @@ public class CharacterManager {
      * i.e. if {@code name="prudence"}, in the global ini file you must have {@code prudence=prud.ini}.
      * @param name the name of the character to add
      */
-    public static void addCharacter(String name) {
+    public void addCharacter(String name) {
         if (characterMapFile.get(name) == null) { //else it is already added
             String filename = IniManager.getGlobals().getValueString(name);
             if (!filename.isEmpty()) {
@@ -138,7 +161,7 @@ public class CharacterManager {
      * @param name the name of the parameter
      * @return the value from the default character
      */
-    public static String getDefaultValueString(String name) {
+    public String getDefaultValueString(String name) {
         return characterDefinitions.getDefault(name).getParamValue();
     }
 
@@ -147,7 +170,7 @@ public class CharacterManager {
      * @param name the name of the parameter
      * @return the list of all known values
      */
-    public static List<String> getAllValuesString(String name) {
+    public List<String> getAllValuesString(String name) {
         List<IniParameter> params = characterDefinitions.getAllFromOne(name);
         ArrayList<String> values = new ArrayList<String>(params.size());
         for (IniParameter param : params) {
@@ -174,7 +197,7 @@ public class CharacterManager {
      * @param name the name of the parameter
      * @return the integer value of the parameter
      */
-    public static int getValueInt(String name) {
+    public int getValueInt(String name) {
         return characterDefinitions.getValueInt(name);
     }
 
@@ -185,7 +208,7 @@ public class CharacterManager {
      * @param name the name of the parameter
      * @return the double value of the parameter
      */
-    public static double getValueDouble(String name) {
+    public double getValueDouble(String name) {
         return characterDefinitions.getValueDouble(name);
     }
 
@@ -196,7 +219,7 @@ public class CharacterManager {
      * @param name the name of the parameter
      * @return the string value of the parameter
      */
-    public static String getValueString(String name) {
+    public String getValueString(String name) {
         return characterDefinitions.getValueString(name);
     }
 
@@ -220,7 +243,7 @@ public class CharacterManager {
      * @param characterName the name of the character
      * @return the integer value of the parameter
      */
-    public static int getValueInt(String name, String characterName) {
+    public int getValueInt(String name, String characterName) {
         return characterDefinitions.getValueInt(name, fileNameOfCharacter(characterName));
     }
 
@@ -232,7 +255,7 @@ public class CharacterManager {
      * @param characterName the name of the character
      * @return the double value of the parameter
      */
-    public static double getValueDouble(String name, String characterName) {
+    public double getValueDouble(String name, String characterName) {
         return characterDefinitions.getValueDouble(name, fileNameOfCharacter(characterName));
     }
 
@@ -244,7 +267,7 @@ public class CharacterManager {
      * @param characterName the name of the character
      * @return the string value of the parameter
      */
-    public static String getValueString(String name, String characterName) {
+    public String getValueString(String name, String characterName) {
         return characterDefinitions.getValueString(name, fileNameOfCharacter(characterName));
     }
 
@@ -263,7 +286,7 @@ public class CharacterManager {
      * @param name the name of the parameter
      * @param value the value of the parameter
      */
-    public static void setValueInt(String name, int value) {
+    public void setValueInt(String name, int value) {
         characterDefinitions.setValueInt(name, value);
         notifyChanges();
     }
@@ -273,7 +296,7 @@ public class CharacterManager {
      * @param name the name of the parameter
      * @param value the value of the parameter
      */
-    public static void setValueDouble(String name, double value) {
+    public void setValueDouble(String name, double value) {
         characterDefinitions.setValueDouble(name, value);
         notifyChanges();
     }
@@ -283,7 +306,7 @@ public class CharacterManager {
      * @param name the name of the parameter
      * @param value the value of the parameter
      */
-    public static void setValueString(String name, String value) {
+    public void setValueString(String name, String value) {
         characterDefinitions.setValueString(name, value);
         notifyChanges();
     }
@@ -293,7 +316,7 @@ public class CharacterManager {
      * @param name the name of the parameter
      * @param value the value of the parameter
      */
-    public static void addValueString(String name, String value){
+    public void addValueString(String name, String value){
         characterDefinitions.addValueString(name, value);
         notifyChanges();
     }
@@ -302,7 +325,7 @@ public class CharacterManager {
      * Returns the name of the current character.
      * @return the name of the current character
      */
-    public static String getCurrentCharacterName() {
+    public String getCurrentCharacterName() {
         return currentCaracterName;
     }
 
@@ -318,7 +341,7 @@ public class CharacterManager {
      * Returns the file name of the current character.
      * @return the file name of the current character
      */
-    public static String getCurrentCharacterFile() {
+    public String getCurrentCharacterFile() {
         return fileNameOfCharacter(currentCaracterName);
     }
 
@@ -326,7 +349,7 @@ public class CharacterManager {
      * Returns the file name of the default character.
      * @return the file name of the default character
      */
-    public static String getDefaultCharacterFile() {
+    public String getDefaultCharacterFile() {
         return fileNameOfCharacter(DEFAULT_CHARACTER_NAME);
     }
 
@@ -334,11 +357,11 @@ public class CharacterManager {
      * Returns the {@code IniManager} used to manage Ini files of chararters.
      * @return the {@code IniManager} used
      */
-    public static IniManager getIniManager() {
+    public IniManager getIniManager() {
         return characterDefinitions;
     }
 
-    private static String fileNameOfCharacter(String characterName) {
+    private String fileNameOfCharacter(String characterName) {
         String filename = characterMapFile.get(characterName);
 
         if (filename == null) {

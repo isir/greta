@@ -5,7 +5,7 @@
         <menu name="${GUI.add}">
             <item module="IniManager" name="Ini Manager"/>
             <item module="CharacterManager" name="Character Manager"/>
-            <menu name="Logs">
+			<menu name="Logs">
                 <item module="Logs" name="Controller"/>
                 <item module="LogPrinter" name="Log Printer"/>
                 <item module="LogFile" name="Log File"/>
@@ -172,11 +172,22 @@
             <object class="vib.tools.editors.environment.EnvTool" lib_id="vib_editors"/>
             <frame type="object"/>
         </module>
-        <module name="CharacterManager" restrict="1" style="VIBDefault">
-            <object class="vib.core.utilx.gui.CharacterIniManagerFrame" lib_id="vib_utilx"/>
+        <module name="CharacterManager" style="VIBDefault">
+            <object class="vib.core.util.CharacterManager" lib_id="vib_util"/>
+            <frame class="vib.core.utilx.gui.CharacterIniManagerFrame" lib_id="vib_utilx" type="frame">
+                <link method="setCharacterManager" on="frame"/>
+            </frame>
+            <parameter default="" 
+			get_on="frame" get_method="getCharacterName" name="character_name" 
+			set_on="frame" set_method="setCharacterName" type="string"/>
+        </module>
+		<!--
+		<module name="CharacterInstance" style="VIBDefault">
+            <object class="vib.core.utilx.gui.CharacterInstanceFrame" lib_id="vib_utilx"/>
             <frame type="object"/>
             <parameter default="" get_method="getCurrentCaracter" get_on="object" name="character_name" set_method="setCurrentCaracter" set_on="object" type="string"/>
         </module>
+		-->
         <module name="Logs" restrict="1" style="VIBDefault">
             <object class="vib.core.utilx.gui.LogsController" lib_id="vib_utilx"/>
             <frame type="object"/>
@@ -862,8 +873,14 @@
             <needs path="./Common/Data/characters/*"/>
             <needs path="./Locale/*"/>
         </lib>
+		<lib id="vib_behavior_realizer" path="./Common/Lib/Internal/BehaviorRealizer.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_feedbacks"/>
+        </lib>
         <lib id="vib_utilx" path="./Common/Lib/Internal/Utilx.jar">
             <depends lib_id="vib_util"/>
+			<depends lib_id="vib_behavior_realizer"/>
         </lib>
         <lib id="vib_intentions" path="./Common/Lib/Internal/Intentions.jar">
             <depends lib_id="vib_util"/>
@@ -903,11 +920,7 @@
             <needs path="./Common/Data/xml/qualifiers.xsd"/>
             <needs path="./Common/Data/xml/multimodal.dtd"/>
         </lib>
-        <lib id="vib_behavior_realizer" path="./Common/Lib/Internal/BehaviorRealizer.jar">
-            <depends lib_id="vib_util"/>
-            <depends lib_id="vib_signals"/>
-            <depends lib_id="vib_feedbacks"/>
-        </lib>
+        
         <lib id="ext_openmary_3.6" path="./Common/Lib/External/maryclient-3.6.jar"/>
         <lib id="ext_openmary_4.3" path="./Common/Lib/External/maryclient-4.3.jar"/>
         <lib id="vib_openmary" path="./Common/Lib/Internal/openMary.jar">
@@ -1089,6 +1102,15 @@
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>
+	<!-- Phil start -->
+		<!-- <connector id="connectCharacterInstanceFrameToRealizer" unique="true">
+            <input class="vib.core.utilx.gui.CharacterInstanceFrame" lib_id="vib_utilx"/>
+			<output class="vib.core.behaviorrealizer.Realizer" lib_id="vib_behavior_realizer"/>           
+            <connect from="input" method="setCharacter" to="output"/>
+            <disconnect from="input" method="unsetCharacter" to="output"/>
+        </connector> -->
+	<!-- Phil end -->
+	
         <connector id="SSIFrameEmitterToSSIFramePerformer">
             <input class="vib.auxiliary.ssi.SSIFrameEmitter" lib_id="vib_ssi"/>
             <output class="vib.auxiliary.ssi.SSIFramePerfomer" lib_id="vib_ssi"/>
@@ -1195,6 +1217,7 @@
             <connect from="input" method="addLogOutput" to="output"/>
             <disconnect from="input" method="removeLogOutput" to="output"/>
         </connector>
+		
         <connector id="setTTS" unique="true">
             <input class="vib.core.utilx.gui.TTSController" lib_id="vib_utilx"/>
             <output class="vib.core.util.speech.TTS" lib_id="vib_util"/>
@@ -1275,6 +1298,9 @@
             <connect from="output" method="setEnvironment" to="input"/>
             <disconnect from="null" method="" to="null"/>
         </connector>
+		
+		
+	
         <connector id="connectAnimatableToEnvironment" unique="true">
             <input class="vib.core.util.environment.Animatable" lib_id="vib_util"/>
             <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>

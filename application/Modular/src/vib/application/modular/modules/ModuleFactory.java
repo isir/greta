@@ -19,12 +19,15 @@ package vib.application.modular.modules;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.view.mxGraph;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
+import vib.core.util.CharacterManager;
+import vib.core.utilx.gui.CharacterIniManagerFrame;
 
 /**
  *
@@ -34,11 +37,11 @@ public class ModuleFactory {
 
     public static List<ModuleInfo> moduleInfos = new ArrayList<ModuleInfo>();
 
-    public static Module create(mxGraph graph, String moduleType){
-        return create(graph, moduleType, moduleType,moduleType+"-"+System.currentTimeMillis()+"-"+(int)(Math.random()*1000.0), 15, 15, 80, 50, null);
+    public static Module create(mxGraph graph, String moduleType, Module parent){
+        return create(graph, moduleType, moduleType,moduleType+"-"+System.currentTimeMillis()+"-"+(int)(Math.random()*1000.0), 15, 15, 80, 50, null, parent);
     }
 
-    public static Module create(mxGraph graph, String moduleType, String cellName, String id, double x, double y, double w, double h, Map<String,String> params){
+    public static Module create(mxGraph graph, String moduleType, String cellName, String id, double x, double y, double w, double h, Map<String,String> params, Module parent){
         //Create an empty Map
         if(params==null) {
             params = new HashMap<String,String>();
@@ -47,7 +50,21 @@ public class ModuleFactory {
 
         if(moduleInfo!=null){
             try {
-                Object object = moduleInfo.objectClass.newInstance();
+                
+                Object object = null;
+                //First try to instanciate constructor a parent instance as param
+                if(parent!=null){
+                    try{
+                        Class parentClass = parent.getObject().getClass();
+                        Constructor<?> cons = moduleInfo.objectClass.getConstructor(parentClass);
+                        object = cons.newInstance(parent.getObject());
+                    }
+                    catch(NoSuchMethodException e){}                   
+                }
+                //Then if no constructor available, use the default one
+                if(object==null)
+                    object = moduleInfo.objectClass.newInstance();
+                
                 for(ParameterInfo parameterInfo : moduleInfo.parameterInfos){
                     if(parameterInfo.setOn.equals("object")){
                         String value = parameterInfo.defaultvalue;

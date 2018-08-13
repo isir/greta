@@ -45,6 +45,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.TreeSet;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JInternalFrame;
@@ -61,6 +62,7 @@ import vib.application.modular.tools.PrimitiveTypes;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
 import vib.core.util.IniManager;
+import vib.core.util.TreeNode;
 import vib.core.util.log.LogPrinter;
 import vib.core.util.log.Logs;
 import vib.core.util.xml.XML;
@@ -75,6 +77,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
 
     private List<Connection> connections = new ArrayList<Connection>();
     private List<Module> modules = new ArrayList<Module>();
+    private TreeNode<Module> treeModules = new TreeNode<Module>();
     private JInternalFrame internalFrame = null;
     private Container internalFrameContent = null;
     private Container emptyPanel = new JPanel();
@@ -104,9 +107,48 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
             deleteModule(modules.get(i));
         }
         connections.clear();
+        treeModules.clear();
         updateInternalFrame(null);
 
         gc();
+    }
+    
+    
+    private void createXMLTreeElement(TreeNode<Module> currentNode, XMLTree currentXmlNode){
+        Module module = currentNode.getData();
+        XMLTree element = currentXmlNode.createChild("element");
+        element.setAttribute("id", module.getId());
+        element.setAttribute("module", module.getType());
+        element.setAttribute("name", module.getCell().getValue().toString());
+        element.setAttribute("x", "" + module.getCell().getGeometry().getX());
+        element.setAttribute("y", "" + module.getCell().getGeometry().getY());
+        element.setAttribute("w", "" + module.getCell().getGeometry().getWidth());
+        element.setAttribute("h", "" + module.getCell().getGeometry().getHeight());
+        Map<String, String> params = module.getParams();
+        if (params != null && !params.isEmpty()) {
+            for (Entry<String, String> param : params.entrySet()) {
+                XMLTree parameter = element.createChild("parameter");
+                parameter.setAttribute("name", param.getKey());
+                parameter.setAttribute("value", param.getValue());
+            }
+        }
+        JFrame jf = module.getFrame();
+        if (jf != null) {
+            XMLTree window = element.createChild("window");
+            window.setAttribute("visible", "" + jf.isVisible());
+            window.setAttribute("x", "" + jf.getLocation().x);
+            window.setAttribute("y", "" + jf.getLocation().y);
+            window.setAttribute("w", "" + jf.getWidth());
+            window.setAttribute("h", "" + jf.getHeight());
+        }
+        
+        
+        List<TreeNode> children = currentNode.getChildren();
+        if(children.size()>0){
+            for(TreeNode node:children){
+                createXMLTreeElement(node,element);
+            }
+        }
     }
 
     /**
@@ -119,33 +161,10 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         XMLTree elements = modulated.createChild("elements");
         XMLTree connectionsXML = modulated.createChild("connections");
 
-        for(Module module :modules){
+        for(TreeNode<Module> moduleNode :treeModules.getChildren()){
+            Module module = moduleNode.getData();
             if (module != null) {
-                XMLTree element = elements.createChild("element");
-                element.setAttribute("id", module.getId());
-                element.setAttribute("module", module.getType());
-                element.setAttribute("name", module.getCell().getValue().toString());
-                element.setAttribute("x", "" + module.getCell().getGeometry().getX());
-                element.setAttribute("y", "" + module.getCell().getGeometry().getY());
-                element.setAttribute("w", "" + module.getCell().getGeometry().getWidth());
-                element.setAttribute("h", "" + module.getCell().getGeometry().getHeight());
-                Map<String, String> params = module.getParams();
-                if (params != null && !params.isEmpty()) {
-                    for (Entry<String, String> param : params.entrySet()) {
-                        XMLTree parameter = element.createChild("parameter");
-                        parameter.setAttribute("name", param.getKey());
-                        parameter.setAttribute("value", param.getValue());
-                    }
-                }
-                JFrame jf = module.getFrame();
-                if (jf != null) {
-                    XMLTree window = element.createChild("window");
-                    window.setAttribute("visible", "" + jf.isVisible());
-                    window.setAttribute("x", "" + jf.getLocation().x);
-                    window.setAttribute("y", "" + jf.getLocation().y);
-                    window.setAttribute("w", "" + jf.getWidth());
-                    window.setAttribute("h", "" + jf.getHeight());
-                }
+                createXMLTreeElement(moduleNode,elements);                
             }
         }
 
@@ -161,6 +180,53 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         modulated.save(modulesFile);
 
     }
+    
+    private void loadGraph(TreeNode<Module> moduleNode, XMLTree elements){
+        TreeNode<Module> currentNode = moduleNode;
+        Module parent = currentNode.getData();
+        CharacterManager cm=null ;
+        if(parent!=null && parent.getObject() instanceof CharacterManager)
+            cm = (CharacterManager)parent.getObject();
+        for (XMLTree element : elements.getChildrenElement()) {
+            if (element.isNamed("element")) {
+                Map<String, String> params = new HashMap<String, String>();
+                for (XMLTree parameter : element.getChildrenElement()) {
+                    if (parameter.isNamed("parameter")) {
+                        params.put(parameter.getAttribute("name"), parameter.getAttribute("value"));
+                    }
+                }
+
+
+                Module module = ModuleFactory.create(graph,
+                        element.getAttribute("module"),
+                        element.getAttribute("name"),
+                        element.getAttribute("id"),
+                        element.getAttributeNumber("x"),
+                        element.getAttributeNumber("y"),
+                        element.getAttributeNumber("w"),
+                        element.getAttributeNumber("h"),
+                        params, parent);
+                if (module != null) {
+                    if(parent!=null)
+                        module.setParent(parent);
+                    currentNode = moduleNode.addChild(module);
+                    modules.add(module);
+                    XMLTree window = element.findNodeCalled("window");
+                    JFrame jf = module.getFrame();
+                    if (window != null && jf != null) {
+                        jf.setLocation((int) window.getAttributeNumber("x"), (int) window.getAttributeNumber("y"));
+                        jf.setSize((int) window.getAttributeNumber("w"), (int) window.getAttributeNumber("h"));
+                        jf.setTitle(element.getAttribute("name"));
+                        jf.setVisible(Boolean.parseBoolean(window.getAttribute("visible")));
+                    }
+                }
+                else
+                    System.err.println(String.format("Could not create module : %s",element.getAttribute("module")));
+                
+                loadGraph(currentNode,element);                   
+            }
+        }
+    }
 
     /**
      * Load the modules and their connections from an XML file.
@@ -175,37 +241,8 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         Logs.remove(lp);
         XMLTree elements = modulated.findNodeCalled("elements");
         XMLTree connectionsXML = modulated.findNodeCalled("connections");
-
-        for (XMLTree element : elements.getChildrenElement()) {
-            if (element.isNamed("element")) {
-                Map<String, String> params = new HashMap<String, String>();
-                for (XMLTree parameter : element.getChildrenElement()) {
-                    if (parameter.isNamed("parameter")) {
-                        params.put(parameter.getAttribute("name"), parameter.getAttribute("value"));
-                    }
-                }
-                Module module = ModuleFactory.create(graph,
-                        element.getAttribute("module"),
-                        element.getAttribute("name"),
-                        element.getAttribute("id"),
-                        element.getAttributeNumber("x"),
-                        element.getAttributeNumber("y"),
-                        element.getAttributeNumber("w"),
-                        element.getAttributeNumber("h"),
-                        params);
-                if (module != null) {
-                    modules.add(module);
-                    XMLTree window = element.findNodeCalled("window");
-                    JFrame jf = module.getFrame();
-                    if (window != null && jf != null) {
-                        jf.setLocation((int) window.getAttributeNumber("x"), (int) window.getAttributeNumber("y"));
-                        jf.setSize((int) window.getAttributeNumber("w"), (int) window.getAttributeNumber("h"));
-                        jf.setTitle(element.getAttribute("name"));
-                        jf.setVisible(Boolean.parseBoolean(window.getAttribute("visible")));
-                    }
-                }
-            }
-        }
+        
+        loadGraph(treeModules,elements);        
 
         for (XMLTree connectionXML : connectionsXML.getChildrenElement()) {
             if (connectionXML.isNamed("connection")) {
@@ -245,6 +282,16 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         }
         return connec;
     }
+    
+    private void sortCellsAndModulesTree(TreeNode<Module> node){
+        for(TreeNode<Module> m :node.getChildren()){
+            for(Connection c : getConnectionsOfModule(m.getData())){
+                graph.orderCells(false, new Object[]{c.getCell()});
+            }
+            graph.orderCells(false, new Object[]{m.getData().getCell()});
+            sortCellsAndModulesTree(m);
+        }
+    }
 
     private void sortCellsAndModules(){
 
@@ -253,12 +300,14 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
             modules.remove(selsected);
             modules.add(selsected);
         }
+        sortCellsAndModulesTree(treeModules);
+       /*
         for(Module m : modules){
             for(Connection c : getConnectionsOfModule(m)){
                 graph.orderCells(false, new Object[]{c.getCell()});
             }
             graph.orderCells(false, new Object[]{m.getCell()});
-        }
+        }*/
 
     }
 
@@ -323,9 +372,13 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
      * Instanciates and adds in the graph a new {@code Module}
      * @param moduleType the type of the {@code Module} to add.
      */
-    public void addModule(String moduleType) {
-        Module module = ModuleFactory.create(graph, moduleType);
+    
+    public void addModule(String moduleType, Module parent) {
+        Module module = ModuleFactory.create(graph, moduleType, parent);
         if (module != null) {
+            if(module.getObject() instanceof CharacterDependent){
+                ((CharacterDependent)module.getObject()).setCharacterManager(module.getCharacterManager());
+            }
             modules.add(module);
         }
         checkConnectables();
@@ -344,10 +397,10 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
 
         //clean up the CharacterManager
         if(module.getObject() instanceof CharacterDependent){
-            CharacterManager.remove((CharacterDependent)(module.getObject()));
+            module.getCharacterManager().remove((CharacterDependent)(module.getObject()));
         }
         if(module.getFrame() instanceof CharacterDependent){
-            CharacterManager.remove((CharacterDependent)(module.getFrame()));
+            module.getCharacterManager().remove((CharacterDependent)(module.getFrame()));
         }
 
         garbage.add(module);
@@ -638,6 +691,10 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
             hasoutput = hasoutput || isoutput;
         }
         module.getCell().setConnectable(hasoutput);
+    }
+    
+    public Module getSelectedModule(){
+        return findModuleByCell((mxCell)graph.getSelectionCell());
     }
 
     private void checkArrows() {

@@ -244,6 +244,14 @@ public class Style {
         public void highLightModule(mxGraph graph, Module m){
             putStyle(graph, m.getCell(), getVertexHighLightStyle(m.getInfo().style), false);
         }
+        
+        public void greyModule(mxGraph graph, Module m){
+            putStyle(graph, m.getCell(), getVertexGreyStyle(m.getInfo().style), false);
+        }
+        
+        public void unGreyModule(mxGraph graph, Module m){
+            setupModule(graph, m);
+        }
 
         public void unHighLightModule(mxGraph graph, Module m){
             setupModule(graph, m);
@@ -274,6 +282,7 @@ public class Style {
         public abstract Color getHighLightColor();
         public abstract String getVertexStyle(String styleName);
         public abstract String getVertexHighLightStyle(String styleName);
+        public abstract String getVertexGreyStyle(String styleName);
         public abstract String getEdgeStyle(String styleName);
         public abstract String getEdgeBrokenStyle(String styleName);
 
@@ -348,6 +357,11 @@ public class Style {
             return "[Basic][edge][broken]";
         }
 
+        @Override
+        public String getVertexGreyStyle(String styleName) {
+            return "[Basic][broken]";
+        }
+
     }
 
     public static class Original extends Mapper{
@@ -416,6 +430,11 @@ public class Style {
         public String getEdgeBrokenStyle(String styleName) {
             return "[Original][edge][broken]";
         }
+
+        @Override
+        public String getVertexGreyStyle(String styleName) {
+            return "[Original][broken]"+styleName;
+        }
     }
 
     public static class Soft extends Mapper{
@@ -447,6 +466,7 @@ public class Style {
         protected Style[] createNewStyle(String name, String vertexColor, String edgeColor, String dashPattern, String startForm, String endForm) {
             HashMap<String, Object> styleMap = new HashMap<String, Object>(defaultVertexMap);
             HashMap<String, Object> styleHighLightMap = new HashMap<String, Object>(defaultVertexMap);
+            HashMap<String, Object> styleGreyedHighLightMap = new HashMap<String, Object>(defaultVertexMap);
             HashMap<String, Object> edgeMap = new HashMap<String, Object>(defaultEdgeMap);
             HashMap<String, Object> brokenEdgeMap = new HashMap<String, Object>(defaultEdgeMap);
 
@@ -461,6 +481,12 @@ public class Style {
             styleHighLightMap.put(mxConstants.STYLE_GRADIENTCOLOR, vertexColor);
             styleHighLightMap.put(mxConstants.STYLE_STROKECOLOR, scaleColor(vertexColor, 0.7));
             styleHighLightMap.put(mxConstants.STYLE_STROKEWIDTH, 2.5);
+            
+            styleGreyedHighLightMap.put(mxConstants.STYLE_FONTCOLOR, scaleColor(vertexColor, 0.3));
+            styleGreyedHighLightMap.put(mxConstants.STYLE_FILLCOLOR, "0xaaaaaa");
+            styleGreyedHighLightMap.put(mxConstants.STYLE_STROKECOLOR, scaleColor(vertexColor, 0.3));
+            styleGreyedHighLightMap.put(mxConstants.STYLE_DASH_PATTERN, "1 3");
+            styleGreyedHighLightMap.put(mxConstants.STYLE_DASHED, true);
 
             //edge:
             String dash = convertDashPatern(dashPattern);
@@ -496,6 +522,7 @@ public class Style {
             return asArray(
                     new Style(getVertexStyle(name), styleMap),
                     new Style(getVertexHighLightStyle(name), styleHighLightMap),
+                    new Style(getVertexGreyStyle(name), styleGreyedHighLightMap),
                     new Style(getEdgeStyle(name), edgeMap),
                     new Style(getEdgeBrokenStyle(name), brokenEdgeMap)
                     );
@@ -515,7 +542,7 @@ public class Style {
         public String getVertexHighLightStyle(String styleName) {
             return "[Soft][HighLight]"+styleName;
         }
-
+        
         @Override
         public String getEdgeStyle(String styleName) {
             return "[Soft][edge]"+styleName;
@@ -524,6 +551,11 @@ public class Style {
         @Override
         public String getEdgeBrokenStyle(String styleName) {
             return "[Soft][edge][broken]"+styleName;
+        }
+
+        @Override
+        public String getVertexGreyStyle(String styleName) {
+            return "[Soft][Greyed]"+styleName;
         }
     }
 }

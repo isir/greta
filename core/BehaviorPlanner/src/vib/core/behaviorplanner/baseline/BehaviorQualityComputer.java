@@ -54,17 +54,19 @@ public class BehaviorQualityComputer extends ParameterSet<Qualifier> implements 
     /**
      * Construct a {@code BehaviorQualityComputer}.
      */
-    public BehaviorQualityComputer() {
+    public BehaviorQualityComputer(CharacterManager cm) {
         //get the default qualifiers :
-        super(CharacterManager.getDefaultValueString(CHARACTER_PARAMETER_QUALIFIERS));
+        super();
+        setCharacterManager(cm);
+        setDefaultDefinition(cm.getDefaultValueString(CHARACTER_PARAMETER_QUALIFIERS));
 
         //load additionnal qualifiers :
-        for (String filename : CharacterManager.getAllValuesString(CHARACTER_PARAMETER_QUALIFIERS)) {
+        for (String filename : cm.getAllValuesString(CHARACTER_PARAMETER_QUALIFIERS)) {
             addDefinition(filename);
         }
 
         //set the current qulifiers to use :
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_QUALIFIERS));
+        setDefinition(cm.getValueString(CHARACTER_PARAMETER_QUALIFIERS));
     }
 
     /**
@@ -356,7 +358,7 @@ public class BehaviorQualityComputer extends ParameterSet<Qualifier> implements 
 
     @Override
     public void onCharacterChanged() {
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_QUALIFIERS));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_QUALIFIERS));
     }
 
     private static EngineParameterAdaptor getAdaptor(DynamicLine dl, String modality, String paramNameExtended) {
@@ -469,5 +471,28 @@ public class BehaviorQualityComputer extends ParameterSet<Qualifier> implements 
         public void setValue(double value) {
             ep.setMin(value);
         }
+    }
+    
+    private CharacterManager characterManager;
+
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
     }
 }

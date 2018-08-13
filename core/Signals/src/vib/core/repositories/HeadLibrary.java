@@ -33,7 +33,7 @@ import vib.core.util.xml.XMLTree;
  *
  * @author Andre-Marie Pez
  */
-public class HeadLibrary extends SignalLibrary<HeadSignal> implements CharacterDependent{
+public class HeadLibrary extends SignalLibrary<HeadSignal> implements CharacterDependent {
 
     private static String library_file_key; // key in a character ini file
     private static String xsd_file_key; // key in the global ini file
@@ -42,8 +42,31 @@ public class HeadLibrary extends SignalLibrary<HeadSignal> implements CharacterD
     static {
         library_file_key = "HEADGESTURES";
         xsd_file_key = "XSD_HEADGESTURES";
-        globalLibrary = new HeadLibrary();
-        CharacterManager.add(globalLibrary);
+        CharacterManager cm = CharacterManager.getStaticInstance();
+        globalLibrary = new HeadLibrary(cm);        
+    }
+    
+    private CharacterManager characterManager;
+
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
     }
 
     /**
@@ -59,8 +82,10 @@ public class HeadLibrary extends SignalLibrary<HeadSignal> implements CharacterD
         return intervals;
     }
 
-    public HeadLibrary(){
-        super(CharacterManager.getValueString(library_file_key));
+    public HeadLibrary(CharacterManager cm){
+        super();
+        setCharacterManager(cm);
+        setDefaultDefinition(getCharacterManager().getValueString(library_file_key));
         intervals = new HeadIntervals();
     }
 
@@ -203,7 +228,7 @@ public class HeadLibrary extends SignalLibrary<HeadSignal> implements CharacterD
 
     @Override
     public void onCharacterChanged() {
-        setDefinition(CharacterManager.getValueString(library_file_key));
+        setDefinition(getCharacterManager().getValueString(library_file_key));
         intervals.onCharacterChanged();
     }
 

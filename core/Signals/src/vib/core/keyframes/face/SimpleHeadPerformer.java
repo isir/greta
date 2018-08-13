@@ -26,6 +26,8 @@ import vib.core.repositories.AUItem;
 import vib.core.repositories.AULibrary;
 import vib.core.repositories.FLExpression;
 import vib.core.repositories.FLExpression.FAPItem;
+import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependent;
 import vib.core.util.id.ID;
 
 
@@ -37,8 +39,32 @@ import vib.core.util.id.ID;
  * @author Radoslaw Niewiadomski
  */
 
-public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerformer {
+public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerformer, CharacterDependent {
+    private AULibrary auLibrary;
+    private CharacterManager characterManager;
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
 
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
+    }
+    
+    public SimpleHeadPerformer(CharacterManager cm){
+        setCharacterManager(cm);
+        auLibrary = new AULibrary(cm);
+    }
+    
     public void performAUItems(AUItem animation[][][], int frame_offset, int animation_duration_frames, ID requestId) {
 
         //int animation_duration_frames = animation.length;
@@ -87,7 +113,7 @@ public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerfo
         int max_sagittal = 0;
         int min_sagittal = 0;
 
-        FLExpression expression51 = AULibrary.global_aulibrary.findExpression("AU" + 51);
+        FLExpression expression51 = auLibrary.findExpression("AU" + 51);
 
         List<FAPItem> au_faps_51 = expression51.getFAPs();
 
@@ -97,7 +123,7 @@ public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerfo
             }
         }
 
-        FLExpression expression52 = AULibrary.global_aulibrary.findExpression("AU" + 52);
+        FLExpression expression52 = auLibrary.findExpression("AU" + 52);
 
         List<FAPItem> au_faps_52 = expression52.getFAPs();
 
@@ -107,7 +133,7 @@ public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerfo
             }
         }
 
-        FLExpression expression53 = AULibrary.global_aulibrary.findExpression("AU" + 53);
+        FLExpression expression53 = auLibrary.findExpression("AU" + 53);
 
         List<FAPItem> au_faps_53 = expression53.getFAPs();
 
@@ -118,7 +144,7 @@ public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerfo
         }
 
 
-        FLExpression expression54 = AULibrary.global_aulibrary.findExpression("AU" + 54);
+        FLExpression expression54 = auLibrary.findExpression("AU" + 54);
 
         List<FAPItem> au_faps_54 = expression54.getFAPs();
 
@@ -128,7 +154,7 @@ public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerfo
             }
         }
 
-        FLExpression expression55 = AULibrary.global_aulibrary.findExpression("AU" + 55);
+        FLExpression expression55 = auLibrary.findExpression("AU" + 55);
 
         List<FAPItem> au_faps_55 = expression55.getFAPs();
 
@@ -139,7 +165,7 @@ public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerfo
         }
 
 
-        FLExpression expression56 = AULibrary.global_aulibrary.findExpression("AU" + 56);
+        FLExpression expression56 = auLibrary.findExpression("AU" + 56);
 
         List<FAPItem> au_faps_56 = expression56.getFAPs();
 
@@ -200,5 +226,10 @@ public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerfo
     @Override
     public void performAUAPFrames(List<AUAPFrame> auapAnimation, ID requestId) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

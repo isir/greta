@@ -38,6 +38,7 @@ import vib.core.util.xml.XMLTree;
 import java.util.ArrayList;
 import java.util.List;
 import vib.core.intentions.EmotionIntention;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.enums.CompositionType;
 
 /**
@@ -46,7 +47,7 @@ import vib.core.util.enums.CompositionType;
  *
  * @author Elisabetta Bevacqua
  */
-public class BackchannelTrigger implements IntentionEmitter, SignalEmitter, CharacterDependent {
+public class BackchannelTrigger extends CharacterDependentAdapter implements IntentionEmitter, SignalEmitter, CharacterDependent {
 
     // This perfomers are used to send the backchannels
     private ArrayList<IntentionPerformer> intentionPerformers = new ArrayList<IntentionPerformer>();
@@ -101,7 +102,7 @@ public class BackchannelTrigger implements IntentionEmitter, SignalEmitter, Char
      * This function loads backchannel trigger rules
      */
     private void loadBackchannelTriggerRules() {
-        String rulesFile = CharacterManager.getValueString("BACKCHANNELTRIGGERRULES");
+        String rulesFile = getCharacterManager().getValueString("BACKCHANNELTRIGGERRULES");
         if (currentRulesFile == null || !currentRulesFile.equalsIgnoreCase(rulesFile)) {
             currentRulesFile = rulesFile;
 

@@ -20,6 +20,7 @@ package vib.core.signals;
 import java.util.ArrayList;
 import java.util.List;
 import vib.core.repositories.AUItem;
+import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
 import vib.core.util.enums.GazeDirection;
 import vib.core.util.enums.Influence;
@@ -33,7 +34,7 @@ import vib.core.util.xml.XMLTree;
  * @author Mathieu Chollet
  */
 
-public class GazeSignal extends ParametricSignal implements SignalTargetable{
+public class GazeSignal extends ParametricSignal implements SignalTargetable, CharacterDependent {
 
     private String id;
     private TimeMarker start;
@@ -51,6 +52,32 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable{
     private GazeDirection offsetDirection = null;
     private Double offsetAngle = null;
     private boolean isScheduled = false;
+    
+    private CharacterManager characterManager;
+    
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
+    }
+    
+    @Override
+    public void onCharacterChanged() {
+        //set the current library to use :
+        setOrigin(getCharacterManager().currentCharacterId);
+    }
 
     public GazeSignal(String id){
         this.actionUnits = new ArrayList<AUItem>();
@@ -65,7 +92,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable{
         end = new TimeMarker("end");
         timeMarkers.add(end);
 
-        origin=CharacterManager.currentCharacterId;
+        origin=getCharacterManager().currentCharacterId;
         target="";
         offsetDirection=GazeDirection.FRONT;
         offsetAngle=0.0;

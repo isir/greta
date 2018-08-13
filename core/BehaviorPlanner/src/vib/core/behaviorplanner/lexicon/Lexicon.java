@@ -45,17 +45,19 @@ public class Lexicon extends ParameterSet<BehaviorSet> implements CharacterDepen
     public static final String CHARACTER_PARAMETER_INTENTION_LEXICON = "LEXICON";
     private static final String xsdFile = IniManager.getGlobals().getValueString("XSD_BEHAVIORSETS");
 
-    public Lexicon(){
+    public Lexicon(CharacterManager cm){        
         //get the default Lexicon :
-        super(CharacterManager.getDefaultValueString(CHARACTER_PARAMETER_INTENTION_LEXICON));
+        super();
+        setCharacterManager(cm);
+        setDefaultDefinition(cm.getDefaultValueString(CHARACTER_PARAMETER_INTENTION_LEXICON));
 
         //load additionnal Lexicon :
-        for(String filename : CharacterManager.getAllValuesString(CHARACTER_PARAMETER_INTENTION_LEXICON)) {
+        for(String filename : cm.getAllValuesString(CHARACTER_PARAMETER_INTENTION_LEXICON)) {
             addDefinition(filename);
         }
 
         //set the current Lexicon to use :
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_INTENTION_LEXICON));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_INTENTION_LEXICON));
     }
 
     @Override
@@ -237,12 +239,35 @@ public class Lexicon extends ParameterSet<BehaviorSet> implements CharacterDepen
 
     @Override
     public void onCharacterChanged() {
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_INTENTION_LEXICON));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_INTENTION_LEXICON));
     }
 
     @Override
     protected void save(String string, List<BehaviorSet> list) {
         //TODO but how ?
         Logs.warning("Impossible to save the Lexicon. \"core\" and \"implications\" are lost, they were only used during initialization.");
+    }
+    
+     private CharacterManager characterManager;
+
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
     }
 }

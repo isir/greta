@@ -34,13 +34,14 @@ import vib.core.util.time.Timer;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.ListIterator;
+import vib.core.util.CharacterDependentAdapter;
 
 /**
  *
  * @author Andre-Marie
  * @author Elisabetta Bevacqua
  */
-public class ListenerIntentPlanner implements IntentionEmitter, SignalEmitter, SignalPerformer, CharacterDependent {
+public class ListenerIntentPlanner extends CharacterDependentAdapter implements IntentionEmitter, SignalEmitter, SignalPerformer, CharacterDependent {
 
     public static final String BACKCHANNEL_SET_NAME = "listener_function";
     private static final long SLEEP_TIME = 50; //miliiseconds
@@ -55,12 +56,13 @@ public class ListenerIntentPlanner implements IntentionEmitter, SignalEmitter, S
     private Thread listenLoop;
     private boolean isListening;
 
-    public ListenerIntentPlanner() {
+    public ListenerIntentPlanner(CharacterManager cm) {
+        setCharacterManager(cm);
         btr = new BackchannelTrigger();
         stopSpeaking = -1;
         currentUserSignals = new LinkedList<EmbededSignal>();
         pendingUserSignals = new LinkedList<EmbededSignal>();
-        CharacterManager.add(this);
+        getCharacterManager().add(this);
         speakerPresent = true; // needs to be detected
         startListening();
     }
@@ -401,7 +403,7 @@ public class ListenerIntentPlanner implements IntentionEmitter, SignalEmitter, S
     @Override
     protected void finalize() throws Throwable {
         isListening = false;
-        CharacterManager.remove(this);
+        getCharacterManager().remove(this);
         super.finalize();
     }
 

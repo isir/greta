@@ -41,7 +41,8 @@ import vib.core.util.id.ID;
  *
  * @author Andre-Marie Pez
  */
-public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BAPFramesPerformer, AudioPerformer, FAPFrameEmitter, BAPFramesEmitter, AudioEmitter, CharacterDependent {
+public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BAPFramesPerformer, AudioPerformer, FAPFrameEmitter, 
+        BAPFramesEmitter, AudioEmitter, CharacterDependent {
 
     private static final String ASPECT = "ASPECT";
     private APFrameList<BAPFrame> bapFrames;
@@ -50,12 +51,45 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
     private BAPFramesEmitterImpl bapEmitter = new BAPFramesEmitterImpl();
     private FAPFrameEmitterImpl fapEmitter = new FAPFrameEmitterImpl();
     private AudioEmitterImpl audioEmitter = new AudioEmitterImpl();
+    
+    private CharacterManager characterManager;
 
-    public MPEG4Animatable() {
-        this(true);
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
     }
 
-    public MPEG4Animatable(boolean connectToCaracterManager) {
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
+    }
+    
+    public static CharacterManager getCharacterManagerStatic(){
+        return CharacterManager.getStaticInstance();
+    }
+    
+    public MPEG4Animatable() {
+        this(null,false);        
+    }
+
+    public MPEG4Animatable(CharacterManager cm) {
+        this(cm,true);        
+    }
+
+    public MPEG4Animatable(CharacterManager cm,boolean connectToCaracterManager) {
+        if(connectToCaracterManager)
+            setCharacterManager(cm);
         BAPFrame firstBapFrame = new BAPFrame();
         firstBapFrame.setFrameNumber(0);
         bapFrames = new APFrameList<BAPFrame>(firstBapFrame);
@@ -66,9 +100,9 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
 
         getAttachedLeaf().setSize(0.50f, 1.75f, 0.3f);
         if (connectToCaracterManager) {
-            setAspect(CharacterManager.getValueString(ASPECT));
-            CharacterManager.currentCharacterId = this.getIdentifier();
-            CharacterManager.add(this);
+            setAspect(getCharacterManager().getValueString(ASPECT));
+            getCharacterManager().currentCharacterId = this.getIdentifier();
+            getCharacterManager().add(this);
         } else {
             getAttachedLeaf().setReference("agent.greta");
         }
@@ -136,7 +170,7 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
 
     @Override
     public void onCharacterChanged() {
-        setAspect(CharacterManager.getValueString(ASPECT));
+        setAspect(getCharacterManager().getValueString(ASPECT));
     }
 
     @Override

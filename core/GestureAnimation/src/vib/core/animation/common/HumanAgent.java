@@ -23,6 +23,7 @@ import vib.core.animation.common.IK.MassSpringSolver;
 import vib.core.animation.common.body.Arm;
 import vib.core.animation.common.body.Torse;
 import vib.core.animation.common.symbolic.SymbolicConverter;
+import vib.core.util.CharacterManager;
 import vib.core.util.math.Quaternion;
 import vib.core.util.math.Vec3d;
 
@@ -33,7 +34,7 @@ import vib.core.util.math.Vec3d;
  */
 public class HumanAgent {
 
-    SymbolicConverter _symbolicConverter = new SymbolicConverter();
+    SymbolicConverter _symbolicConverter;
 
     public SymbolicConverter getSymbolicConverter() {
         return _symbolicConverter;
@@ -55,7 +56,8 @@ public class HumanAgent {
         return _expTorso;
     }
 
-    public HumanAgent() {
+    public HumanAgent(CharacterManager cm) {
+        _symbolicConverter = new SymbolicConverter(cm);        
     }
 
     Vec3d getOriginalJointPosition(String name) {

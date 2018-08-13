@@ -254,6 +254,36 @@
 			<xs:field xpath="@style"/>
 		</xs:keyref>
 	</xs:element>
+	
+	<xs:element name="element">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="parameter" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="name" type="xs:string" use="required"/>
+						<xs:attribute name="value" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="window" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:attribute name="visible" type="xs:boolean" use="required"/>
+						<xs:attribute name="x" type="xs:integer" use="required"/>
+						<xs:attribute name="y" type="xs:integer" use="required"/>
+						<xs:attribute name="w" type="xs:integer" use="required"/>
+						<xs:attribute name="h" type="xs:integer" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="element" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" use="required"/>
+			<xs:attribute name="module" type="xs:string" use="required"/>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="x" type="xs:decimal" use="required"/>
+			<xs:attribute name="y" type="xs:decimal" use="required"/>
+			<xs:attribute name="w" type="xs:decimal" use="required"/>
+			<xs:attribute name="h" type="xs:decimal" use="required"/>
+		</xs:complexType>
+	</xs:element>
 
 	<xs:element name="modulated">
 		<xs:complexType>
@@ -261,34 +291,7 @@
 				<xs:element name="elements">
 					<xs:complexType>
 						<xs:sequence>
-							<xs:element name="element" minOccurs="0" maxOccurs="unbounded">
-								<xs:complexType>
-									<xs:sequence>
-										<xs:element name="parameter" minOccurs="0" maxOccurs="unbounded">
-											<xs:complexType>
-												<xs:attribute name="name" type="xs:string" use="required"/>
-												<xs:attribute name="value" type="xs:string" use="required"/>
-											</xs:complexType>
-										</xs:element>
-										<xs:element name="window" minOccurs="0" maxOccurs="1">
-											<xs:complexType>
-												<xs:attribute name="visible" type="xs:boolean" use="required"/>
-												<xs:attribute name="x" type="xs:integer" use="required"/>
-												<xs:attribute name="y" type="xs:integer" use="required"/>
-												<xs:attribute name="w" type="xs:integer" use="required"/>
-												<xs:attribute name="h" type="xs:integer" use="required"/>
-											</xs:complexType>
-										</xs:element>
-									</xs:sequence>
-									<xs:attribute name="id" type="xs:string" use="required"/>
-									<xs:attribute name="module" type="xs:string" use="required"/>
-									<xs:attribute name="name" type="xs:string" use="required"/>
-									<xs:attribute name="x" type="xs:decimal" use="required"/>
-									<xs:attribute name="y" type="xs:decimal" use="required"/>
-									<xs:attribute name="w" type="xs:decimal" use="required"/>
-									<xs:attribute name="h" type="xs:decimal" use="required"/>
-								</xs:complexType>
-							</xs:element>
+							<xs:element ref="element" minOccurs="0" maxOccurs="unbounded"/>
 						</xs:sequence>
 					</xs:complexType>
 					<xs:key name="elementid" >

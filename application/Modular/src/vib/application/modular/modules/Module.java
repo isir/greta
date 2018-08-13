@@ -22,6 +22,8 @@ import com.mxgraph.model.mxCell;
 import java.util.Map;
 import javax.swing.JFrame;
 import vib.application.modular.Modular;
+import vib.core.util.CharacterManager;
+import vib.core.utilx.gui.CharacterInstanceFrame;
 
 /**
  *
@@ -34,6 +36,7 @@ public class Module {
     private JFrame controlFrame;
     private String id;
     private ModuleFactory.ModuleInfo type;
+    private Module parent;
 
     public Module(ModuleFactory.ModuleInfo type, String id, Object object, mxCell cell, JFrame control) {
         this.type = type;
@@ -52,9 +55,32 @@ public class Module {
             }
         }
     }
+    
+    public CharacterManager getCharacterManager(){
+        if(parent!=null && parent.getObject() instanceof CharacterManager){
+            return (CharacterManager)parent.getObject();
+        }
+        else
+            return CharacterManager.getStaticInstance();
+    }
 
     public Module(ModuleFactory.ModuleInfo type, String id, Object object, mxCell cell) {
         this(type, id, object, cell, null);
+    }
+    
+    
+    /**
+     * @return the parent
+     */
+    public Module getParent() {
+        return parent;
+    }
+
+    /**
+     * @param parent the parent to set
+     */
+    public void setParent(Module parent) {
+        this.parent = parent;
     }
 
     public Object getObject() {

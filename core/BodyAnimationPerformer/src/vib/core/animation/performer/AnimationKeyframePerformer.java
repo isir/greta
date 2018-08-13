@@ -62,15 +62,16 @@ import vib.core.util.math.easefunctions.EaseOutBack;
 import vib.core.util.math.easefunctions.EaseOutBounce;
 import vib.core.util.math.easefunctions.EaseOutQuad;
 import vib.core.signals.gesture.UniformPosition;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.enums.CompositionType;
 
 /**
  *
  * @author Jing Huang
  */
-public class AnimationKeyframePerformer implements KeyframePerformer, BAPFramesEmitter, CharacterDependent, AnimationFrameEmitter {
+public class AnimationKeyframePerformer extends CharacterDependentAdapter implements KeyframePerformer, BAPFramesEmitter, CharacterDependent, AnimationFrameEmitter {
 
-    SymbolicConverter _symbolicConverter = new SymbolicConverter();
+    SymbolicConverter _symbolicConverter;
     CharacterBody _cb;
     ExpressiveTorso _exTorso = new ExpressiveTorso();
     boolean expressiveTorso = true;
@@ -80,7 +81,7 @@ public class AnimationKeyframePerformer implements KeyframePerformer, BAPFramesE
     private Vec3d gravity = new Vec3d(0, -9.8f, 0);
     boolean _useFakedDynamics = true;
     //BodyAnimationBAPFrameEmitter _be = new BodyAnimationBAPFrameEmitter();
-    BodyAnimationBapBlender _be = new BodyAnimationBapBlender();
+    BodyAnimationBapBlender _be;
     IdleMovement _idle;
     int _incre = 0;
     boolean _usePropagation = true;
@@ -89,8 +90,12 @@ public class AnimationKeyframePerformer implements KeyframePerformer, BAPFramesE
 
     ArrayList<AnimationFramePerformer> afperformers = new ArrayList<AnimationFramePerformer>();
 
-    public AnimationKeyframePerformer() {
-        CharacterManager.add(this);
+    public AnimationKeyframePerformer(CharacterManager cm) {
+        _symbolicConverter = new SymbolicConverter(cm);
+        _be = new BodyAnimationBapBlender(cm);
+        setCharacterManager(cm);
+        //cm.add(this);
+        //To-do link it the on the graph level.
         _cb = new CharacterBody(_symbolicConverter.getOriginalSkeleton());
         _cb.initMassSystemByOriginalSkeleton();
         _idle = new IdleMovement(_symbolicConverter.getOriginalSkeleton().clone());

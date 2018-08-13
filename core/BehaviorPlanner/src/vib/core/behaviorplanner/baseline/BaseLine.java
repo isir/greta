@@ -38,21 +38,45 @@ public class BaseLine extends EngineParameterSetOfSet implements CharacterDepend
     /**
      * Construct a base line with the default base line and all additionnal base line found in the {@code CharacterManager}.
      */
-    public BaseLine(){
+    public BaseLine(CharacterManager cm){
         //get the default baseline :
-        super(CharacterManager.getDefaultValueString(CHARACTER_PARAMETER_BASELINE));
-
+        super();
+        setCharacterManager(cm);
+        set(cm.getDefaultValueString(CHARACTER_PARAMETER_BASELINE));
         //load additionnal baseLines :
-        for(String filename : CharacterManager.getAllValuesString(CHARACTER_PARAMETER_BASELINE)) {
+        for(String filename : cm.getAllValuesString(CHARACTER_PARAMETER_BASELINE)) {
             add(filename);
         }
 
         //set the current baseLines to use :
-        set(CharacterManager.getValueString(CHARACTER_PARAMETER_BASELINE));
+        set(getCharacterManager().getValueString(CHARACTER_PARAMETER_BASELINE));
     }
 
     @Override
     public void onCharacterChanged() {
-        set(CharacterManager.getValueString(CHARACTER_PARAMETER_BASELINE));
+        set(getCharacterManager().getValueString(CHARACTER_PARAMETER_BASELINE));
+    }
+    
+    private CharacterManager characterManager;
+
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
     }
 }

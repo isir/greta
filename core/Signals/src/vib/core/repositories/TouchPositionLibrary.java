@@ -39,20 +39,42 @@ public class TouchPositionLibrary extends ParameterSet<TouchPosition> implements
     static{
         globalTouchPositionlibrary = new TouchPositionLibrary();
     }
+    
+    private CharacterManager characterManager;
+    
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
+    }
+    
     public TouchPositionLibrary() {
         //get the default library :
-        super(CharacterManager.getDefaultValueString(CHARACTER_PARAMETER_TOUCHPOINT));
-
+        super();
+        setDefaultDefinition(getCharacterManager().getDefaultValueString(CHARACTER_PARAMETER_TOUCHPOINT));
         //load additionnal library :
-        for(String filename : CharacterManager.getAllValuesString(CHARACTER_PARAMETER_TOUCHPOINT)) {
+        for(String filename : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_TOUCHPOINT)) {
             addDefinition(filename);
         }
 
         //set the current library to use :
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_TOUCHPOINT));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_TOUCHPOINT));
 
         //to be notify when the character change :
-        CharacterManager.add(this);
+        //CharacterManager.add(this);
+        //Phil removed to be handled in the tree construction
     }
 
 
@@ -62,7 +84,7 @@ public class TouchPositionLibrary extends ParameterSet<TouchPosition> implements
         try {
             XMLParser xmlparser = XML.createParser();
             xmlparser.setValidating(false);
-            String touchFile = CharacterManager.getValueString("TOUCHPOINT");
+            String touchFile = getCharacterManager().getValueString("TOUCHPOINT");
             XMLTree _tree = xmlparser.parseFile(touchFile);
             XMLTree rootNodeBase = _tree.getRootNode();
             List<XMLTree> listNode = rootNodeBase.getChildrenElement();
@@ -99,6 +121,6 @@ public class TouchPositionLibrary extends ParameterSet<TouchPosition> implements
     @Override
     public void onCharacterChanged() {
         //set the current library to use :
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_TOUCHPOINT));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_TOUCHPOINT));
     }
 }

@@ -52,17 +52,34 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
 
     private ArrayList<IntentionPerformer> intentionPerformers = new ArrayList<>();
     private ArrayList<InterruptionReactionPerformer> interruptionReactionPerformers = new ArrayList<>();
+    private CharacterManager characterManager;
 
+    /**
+     * @return the characterManager
+     */
+    public CharacterManager getCharacterManager() {
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
+    }
     /**
      * Creates new form InterruptionTester
      */
-    public InterruptionTester() {
+    public InterruptionTester(CharacterManager cm) {
+        setCharacterManager(cm);
         Locale.setDefault(Locale.Category.FORMAT, Locale.ENGLISH);
 
         initComponents();
         initPanels(interruptionOnOffCheckBox.isSelected());
 
-        CharacterManager.add(this);
         setLoader(this);
     }
 
@@ -951,8 +968,8 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
         reactionBehaviorGestureHoldAmplitudeSpinner.setEnabled(enabled);
         reactionBehaviorGestureHoldDurationSpinner.setEnabled(enabled);
 
-        if (!CharacterManager.getValueString("INTERRUPTION_GESTURE_HOLD_DUR").trim().isEmpty()) {
-            reactionBehaviorGestureHoldDurationSpinner.setValue(CharacterManager.getValueDouble("INTERRUPTION_GESTURE_HOLD_DUR"));
+        if (!getCharacterManager().getValueString("INTERRUPTION_GESTURE_HOLD_DUR").trim().isEmpty()) {
+            reactionBehaviorGestureHoldDurationSpinner.setValue(getCharacterManager().getValueDouble("INTERRUPTION_GESTURE_HOLD_DUR"));
         } else {
             reactionBehaviorGestureHoldDurationSpinner.setValue(0);
         }
@@ -962,8 +979,8 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
         reactionBehaviorGestureRetractAmplitudeSpinner.setEnabled(enabled);
         reactionBehaviorGestureRetractDurationSpinner.setEnabled(enabled);
 
-        if (!CharacterManager.getValueString("INTERRUPTION_GESTURE_RETRACT_DUR").trim().isEmpty()) {
-            reactionBehaviorGestureRetractDurationSpinner.setValue(CharacterManager.getValueDouble("INTERRUPTION_GESTURE_RETRACT_DUR"));
+        if (!getCharacterManager().getValueString("INTERRUPTION_GESTURE_RETRACT_DUR").trim().isEmpty()) {
+            reactionBehaviorGestureRetractDurationSpinner.setValue(getCharacterManager().getValueDouble("INTERRUPTION_GESTURE_RETRACT_DUR"));
         } else {
             reactionBehaviorGestureRetractDurationSpinner.setValue(0);
         }
@@ -1253,7 +1270,7 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
 
     @Override
     protected void finalize() throws Throwable {
-        CharacterManager.remove(this);
+        getCharacterManager().remove(this);
         super.finalize();
     }
 }

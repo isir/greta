@@ -41,12 +41,35 @@ public class TorsoLibrary extends SignalLibrary<TorsoSignal> implements Characte
     private static final String TORSO_LIBRARY_PARAM_NAME;
     private static final String TORSO_LIBRARY_XSD;
     public static final TorsoLibrary globalLibrary;
+    private CharacterManager characterManager;
+    
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
+    }
 
     static {
         TORSO_LIBRARY_PARAM_NAME = "TORSOGESTURES";
         TORSO_LIBRARY_XSD = IniManager.getGlobals().getValueString("XSD_TORSOGESTURES");
-        globalLibrary = new TorsoLibrary();
-        CharacterManager.add(globalLibrary);
+        CharacterManager cm = CharacterManager.getStaticInstance();
+        globalLibrary = new TorsoLibrary(cm);
+        cm.add(globalLibrary);
     }
 
     /**
@@ -62,9 +85,11 @@ public class TorsoLibrary extends SignalLibrary<TorsoSignal> implements Characte
         return intervals;
     }
 
-    public TorsoLibrary() {
-        super(CharacterManager.getDefaultValueString(TORSO_LIBRARY_PARAM_NAME));
-        setDefinition(CharacterManager.getValueString(TORSO_LIBRARY_PARAM_NAME));
+    public TorsoLibrary(CharacterManager cm) {
+        super();
+        setCharacterManager(cm);
+        setDefaultDefinition(getCharacterManager().getDefaultValueString(TORSO_LIBRARY_PARAM_NAME));
+        setDefinition(getCharacterManager().getValueString(TORSO_LIBRARY_PARAM_NAME));
     }
 
     @Override
@@ -174,7 +199,7 @@ public class TorsoLibrary extends SignalLibrary<TorsoSignal> implements Characte
 
     @Override
     public void onCharacterChanged() {
-        setDefinition(CharacterManager.getValueString(TORSO_LIBRARY_PARAM_NAME));
+        setDefinition(getCharacterManager().getValueString(TORSO_LIBRARY_PARAM_NAME));
     }
 
 }

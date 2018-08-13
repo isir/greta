@@ -24,6 +24,7 @@ import vib.core.signals.HeadSignal;
 import vib.core.signals.ShoulderSignal;
 import vib.core.signals.Signal;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.enums.Side;
 import vib.core.util.log.Logs;
 
@@ -31,12 +32,13 @@ import vib.core.util.log.Logs;
  *
  * @author Angelo Cafaro
  */
-public class ReactionSignalsMapper {
+public class ReactionSignalsMapper extends CharacterDependentAdapter {
 
     private int idBML;
     private List<Signal> reactionSignals;
 
-    public ReactionSignalsMapper() {
+    public ReactionSignalsMapper(CharacterManager cm) {
+        setCharacterManager(cm);
         idBML = 0;
         reactionSignals = new ArrayList<Signal>();
     }
@@ -161,11 +163,11 @@ public class ReactionSignalsMapper {
                     break;
                 }
                 case GESTURE_HOLD: {
-                    CharacterManager.setValueDouble("INTERRUPTION_GESTURE_HOLD_DUR", (double) Math.round(duration * 100) / 100);
+                    getCharacterManager().setValueDouble("INTERRUPTION_GESTURE_HOLD_DUR", (double) Math.round(duration * 100) / 100);
                     break;
                 }
                 case GESTURE_RETRACT: {
-                    CharacterManager.setValueDouble("INTERRUPTION_GESTURE_RETRACT_DUR", (double) Math.round(duration * 100) / 100);
+                    getCharacterManager().setValueDouble("INTERRUPTION_GESTURE_RETRACT_DUR", (double) Math.round(duration * 100) / 100);
                     break;
                 }
                 case SHOULDERS_UP_FORWARD: {
@@ -191,5 +193,10 @@ public class ReactionSignalsMapper {
                 reactionSignals.add(convertedSignal);
             }
         }
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        throw new UnsupportedOperationException("ReactionSignalsMapper.onCharacterChanged() Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

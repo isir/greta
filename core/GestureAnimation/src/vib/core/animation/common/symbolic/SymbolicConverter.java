@@ -43,6 +43,7 @@ import vib.core.signals.gesture.TouchPosition;
 import vib.core.signals.gesture.TrajectoryDescription;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.enums.Side;
 import vib.core.util.math.Quaternion;
 import vib.core.util.math.Vec3d;
@@ -65,7 +66,7 @@ import vib.core.util.xml.XMLTree;
  * XEP, XP, XC, XCC, XOppC, YUpperEP, YUpperP, YUpperC, YCC, YLowerC, YLowerP,
  * YLowerEP, ZNear, ZMiddle, ZFar; }
  */
-public class SymbolicConverter implements CharacterDependent {
+public class SymbolicConverter extends CharacterDependentAdapter implements CharacterDependent {
 
     Skeleton _skeleton = new Skeleton("agent");
     Skeleton _skeleton_original = new Skeleton("agent");
@@ -87,17 +88,13 @@ public class SymbolicConverter implements CharacterDependent {
     double _scaleFactorY = 1f;
     double _scaleFactorZ = 1f;
 
-    public SymbolicConverter() {
-        CharacterManager.add(this);
-        xmlFile = CharacterManager.getValueString("IK_SKELETON");
-        touchFile = CharacterManager.getValueString("TOUCHPOINT");
+    public SymbolicConverter(CharacterManager cm) {
+        setCharacterManager(cm);
         reloadData();
     }
 
     @Override
     public void onCharacterChanged() {
-        xmlFile = CharacterManager.getValueString("IK_SKELETON");
-        touchFile = CharacterManager.getValueString("TOUCHPOINT");
         reloadData();
     }
 
@@ -140,6 +137,8 @@ public class SymbolicConverter implements CharacterDependent {
     }
 
     void loadData() {
+        xmlFile = getCharacterManager().getValueString("IK_SKELETON");
+        touchFile = getCharacterManager().getValueString("TOUCHPOINT");
         XMLParser xmlparser = XML.createParser();
         xmlparser.setValidating(false);
         _tree = xmlparser.parseFile(xmlFile);

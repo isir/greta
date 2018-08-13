@@ -45,6 +45,7 @@ import vib.core.signals.gesture.TrajectoryDescription;
 import vib.core.signals.gesture.UniformPosition;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.enums.Side;
 import vib.core.util.math.Quaternion;
 import vib.core.util.math.Vec3d;
@@ -63,7 +64,7 @@ import vib.core.util.xml.XMLTree;
  *
  * @author Jing Huang
  */
-public class SymbolicConverter implements CharacterDependent {
+public class SymbolicConverter extends CharacterDependentAdapter implements CharacterDependent {
 
     ArmIKsolver _leftIK = new ArmIKsolver();
     ArmIKsolver _rightIK = new ArmIKsolver();
@@ -91,17 +92,18 @@ public class SymbolicConverter implements CharacterDependent {
     double _scaleFactorY = 1f;
     double _scaleFactorZ = 1f;
 
-    public SymbolicConverter() {
-        CharacterManager.add(this);
-        xmlFile = CharacterManager.getValueString("IK_SKELETON");
-        touchFile = CharacterManager.getValueString("TOUCHPOINT");
+    public SymbolicConverter(CharacterManager cm) {
+        setCharacterManager(cm);
+        
+        xmlFile = getCharacterManager().getValueString("IK_SKELETON");
+        touchFile = getCharacterManager().getValueString("TOUCHPOINT");
         reloadData();
     }
 
     @Override
     public void onCharacterChanged() {
-        xmlFile = CharacterManager.getValueString("IK_SKELETON");
-        touchFile = CharacterManager.getValueString("TOUCHPOINT");
+        xmlFile = getCharacterManager().getValueString("IK_SKELETON");
+        touchFile = getCharacterManager().getValueString("TOUCHPOINT");
         reloadData();
     }
 

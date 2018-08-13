@@ -37,6 +37,7 @@ import vib.core.signals.SignalEmitter;
 import vib.core.signals.SignalPerformer;
 import vib.core.signals.gesture.GestureSignal;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.Mode;
 import vib.core.util.id.ID;
 import vib.core.util.log.Logs;
@@ -66,7 +67,7 @@ import vib.core.util.time.TimeMarker;
  * @navassoc - - * vib.core.signals.Signal
  * @inavassoc - - * vib.core.intentions.Intention
  */
-public class Planner implements IntentionPerformer, SignalEmitter {
+public class Planner extends CharacterDependentAdapter implements IntentionPerformer, SignalEmitter {
 
     //contains Behaviors relating to intentions
     private Lexicon lexicon;
@@ -84,13 +85,12 @@ public class Planner implements IntentionPerformer, SignalEmitter {
     private List<SignalPerformer> signalPerformers;
     private StrokeFiller strokeFiller;
 
-    public Planner() {
-        lexicon = new Lexicon();
-        CharacterManager.add(lexicon);
-        baseline = new BaseLine();
-        CharacterManager.add(baseline);
-        bqc = new BehaviorQualityComputer();
-        CharacterManager.add(bqc);
+    public Planner(CharacterManager cm) {
+        setCharacterManager(cm);
+        lexicon = new Lexicon(cm);
+        baseline = new BaseLine(cm);        
+        bqc = new BehaviorQualityComputer(cm);
+        
         mseSelector = new MSESelector();
         defaultSelector = new MultimodalSignalSelector();
         otherSelector = new ArrayList<SignalSelector>();
@@ -189,9 +189,9 @@ public class Planner implements IntentionPerformer, SignalEmitter {
 
             //character playing
             if (intention.hasCharacter()) {
-                baseline.set(CharacterManager.getValueString(BaseLine.CHARACTER_PARAMETER_BASELINE, intention.getCharacter()));
-                lexicon.setDefinition(CharacterManager.getValueString(Lexicon.CHARACTER_PARAMETER_INTENTION_LEXICON, intention.getCharacter()));
-                bqc.setDefinition(CharacterManager.getValueString(BehaviorQualityComputer.CHARACTER_PARAMETER_QUALIFIERS, intention.getCharacter()));
+                baseline.set(getCharacterManager().getValueString(BaseLine.CHARACTER_PARAMETER_BASELINE, intention.getCharacter()));
+                lexicon.setDefinition(getCharacterManager().getValueString(Lexicon.CHARACTER_PARAMETER_INTENTION_LEXICON, intention.getCharacter()));
+                bqc.setDefinition(getCharacterManager().getValueString(BehaviorQualityComputer.CHARACTER_PARAMETER_QUALIFIERS, intention.getCharacter()));
             }
 
             //compute the dynimicline
@@ -278,9 +278,9 @@ public class Planner implements IntentionPerformer, SignalEmitter {
 
             //reset character playing
             if (intention.hasCharacter()) {
-                baseline.set(CharacterManager.getValueString(BaseLine.CHARACTER_PARAMETER_BASELINE));
-                lexicon.setDefinition(CharacterManager.getValueString(Lexicon.CHARACTER_PARAMETER_INTENTION_LEXICON));
-                bqc.setDefinition(CharacterManager.getValueString(BehaviorQualityComputer.CHARACTER_PARAMETER_QUALIFIERS));
+                baseline.set(getCharacterManager().getValueString(BaseLine.CHARACTER_PARAMETER_BASELINE));
+                lexicon.setDefinition(getCharacterManager().getValueString(Lexicon.CHARACTER_PARAMETER_INTENTION_LEXICON));
+                bqc.setDefinition(getCharacterManager().getValueString(BehaviorQualityComputer.CHARACTER_PARAMETER_QUALIFIERS));
             }
         }
 
@@ -372,13 +372,13 @@ public class Planner implements IntentionPerformer, SignalEmitter {
     @Override
     protected void finalize() throws Throwable {
         System.err.println(this.getClass().getSimpleName() + " finalize");
-        CharacterManager.remove(lexicon);
+        getCharacterManager().remove(lexicon);
         lexicon = null;
 
-        CharacterManager.remove(baseline);
+        getCharacterManager().remove(baseline);
         baseline = null;
 
-        CharacterManager.remove(bqc);
+        getCharacterManager().remove(bqc);
         bqc = null;
 
         mseSelector = null;
@@ -397,5 +397,10 @@ public class Planner implements IntentionPerformer, SignalEmitter {
         strokeFiller = null;
 
         super.finalize();
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        Logs.info("Planner received onCharacterChanged, but does nothing itself. Should it ?");
     }
 }

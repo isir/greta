@@ -20,13 +20,12 @@ import com.cereproc.cerevoice_eng.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.sound.sampled.*;
-import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.Constants;
 import vib.core.util.IniManager;
 import vib.core.util.audio.Audio;
@@ -48,7 +47,7 @@ import vib.core.util.xml.XMLTree;
  * @author Mathieu Chollet
  * @author Angelo Cafaro
  */
-public class CereprocTTS implements TTS, CharacterDependent {
+public class CereprocTTS extends CharacterDependentAdapter implements TTS {
 
     private static boolean initialized = false;
     private static boolean functional = false;
@@ -194,9 +193,9 @@ public class CereprocTTS implements TTS, CharacterDependent {
             return false;
         }
 
-        // Load the voice
-        String language = CharacterManager.getValueString("CEREPROC_LANG");
-        String voice = CharacterManager.getValueString("CEREPROC_VOICE");
+        // Load the voice //TO-do change of static ref
+        String language = getCharacterManagerStatic().getValueString("CEREPROC_LANG");
+        String voice = getCharacterManagerStatic().getValueString("CEREPROC_VOICE");
 
         boolean loadDefault = false;
         if ((language == null) || (voice == null) || (language.isEmpty()) || (voice.isEmpty())) {
@@ -264,9 +263,11 @@ public class CereprocTTS implements TTS, CharacterDependent {
 
     /**
      * Constructor.
+     * @param characterManager reference to use
      */
-    public CereprocTTS() {
-
+    public CereprocTTS(CharacterManager characterManager) {
+        setCharacterManager(characterManager);        
+      
         init();
 
         interreuptionReactionSupported = true;
@@ -277,7 +278,6 @@ public class CereprocTTS implements TTS, CharacterDependent {
 
         tmnumber = 0;
 
-        CharacterManager.add(this);
     }
 
     /**
@@ -774,8 +774,8 @@ public class CereprocTTS implements TTS, CharacterDependent {
 
     @Override
     public void onCharacterChanged() {
-        String newLanguage = CharacterManager.getValueString("CEREPROC_LANG");
-        String newVoiceName = CharacterManager.getValueString("CEREPROC_VOICE").toLowerCase().trim();
+        String newLanguage = getCharacterManager().getValueString("CEREPROC_LANG");
+        String newVoiceName = getCharacterManager().getValueString("CEREPROC_VOICE").toLowerCase().trim();
 
         if (newVoiceName.trim().isEmpty() || newLanguage.trim().isEmpty()) {
             // No voice or language definition found in character configuration, loads the default voice
@@ -845,7 +845,7 @@ public class CereprocTTS implements TTS, CharacterDependent {
 
     @Override
     protected void finalize() throws Throwable {
-        CharacterManager.remove(this);
+        getCharacterManager().remove(this);
         super.finalize();
     }
 

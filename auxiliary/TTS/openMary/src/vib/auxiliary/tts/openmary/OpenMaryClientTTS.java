@@ -30,6 +30,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import vib.core.util.CharacterManager;
 
 
 /**
@@ -54,15 +55,19 @@ public class OpenMaryClientTTS implements TTS{
     private Audio audio;
     private double timer;
     private boolean interreuptionReactionSupported = false;
+    private CharacterManager cm;
+    private OpenMaryConstants omc;
 
     /**
      * Default constructor.<br/>
      * Tries to make a connection with one of Mary server 3.x.x or 4.x.x and determines the version of this one.<br/>
      * Values MARY_HOST and MARY_PORT must be defined in the global {@code IniManager}.
      */
-    public OpenMaryClientTTS(){
+    public OpenMaryClientTTS(CharacterManager cm){
         startClient();
         clean();
+        this.cm = cm;
+        omc = new OpenMaryConstants(cm);
         maryparser = XML.createParser();
         maryparser.setValidating(false);
     }
@@ -112,8 +117,8 @@ public class OpenMaryClientTTS implements TTS{
     public void setSpeech(Speech speech) {
         clean();
         this.speech = speech;
-        lang = OpenMaryConstants.toMaryLang(speech.getLanguage(),maryVersion);
-        voice = OpenMaryConstants.toMaryVoice(speech.getLanguage(), maryVersion);
+        lang = omc.toMaryLang(speech.getLanguage(),maryVersion);
+        voice = omc.toMaryVoice(speech.getLanguage(), maryVersion);
     }
     
     @Override
@@ -123,7 +128,7 @@ public class OpenMaryClientTTS implements TTS{
 
     @Override
     public void compute(boolean doTemporize, boolean doAudio, boolean doPhonems) {
-        String text = OpenMaryConstants.toMaryXML(speech, lang);
+        String text = omc.toMaryXML(speech, lang);
         if(doTemporize || doPhonems){
             if(maryVersion==0){
                 //try to start a Mary client
@@ -215,7 +220,7 @@ public class OpenMaryClientTTS implements TTS{
         //read phonemes
         if(t.getName().equalsIgnoreCase("ph")){
             double duration = t.getAttributeNumber("d") / 1000.0;
-            Phoneme.PhonemeType [] phos = OpenMaryConstants.convertPhoneme(t.getAttribute("p"));
+            Phoneme.PhonemeType [] phos = omc.convertPhoneme(t.getAttribute("p"));
             for(Phoneme.PhonemeType pho : phos) {
                 phonemes.add(new Phoneme(pho,duration/((double)phos.length)));
             }

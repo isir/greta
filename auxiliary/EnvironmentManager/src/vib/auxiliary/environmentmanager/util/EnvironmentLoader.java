@@ -584,7 +584,7 @@ public class EnvironmentLoader {
 
         } else if (xmlChild.isNamed("mpeg4animatable")) {
 
-            MPEG4Animatable childMPEG4animatable = new MPEG4Animatable(false);
+            MPEG4Animatable childMPEG4animatable = new MPEG4Animatable();
             fillAnimatableWithXMLAnimatable(childMPEG4animatable, xmlChild);
             return childMPEG4animatable;
 

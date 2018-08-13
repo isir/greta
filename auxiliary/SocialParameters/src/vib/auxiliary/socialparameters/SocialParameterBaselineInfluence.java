@@ -17,7 +17,7 @@
 package vib.auxiliary.socialparameters;
 
 import java.util.List;
-import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.id.ID;
 import vib.core.util.log.Logs;
 
@@ -27,7 +27,7 @@ import vib.core.util.log.Logs;
  */
 
 
-public class SocialParameterBaselineInfluence implements SocialParameterPerformer {
+public class SocialParameterBaselineInfluence extends CharacterDependentAdapter implements SocialParameterPerformer {
     
     private double currentLikingValue = -2;
     @Override
@@ -56,18 +56,23 @@ public class SocialParameterBaselineInfluence implements SocialParameterPerforme
                 Logs.info("New Liking Value received [" + newLikingValue + "] changing baseline");
                 
                 if (newLikingValue < -0.5) {
-                    CharacterManager.setValueString("BASELINE", "./BehaviorPlanner/Baseline/baseline_angry.xml");
+                    getCharacterManager().setValueString("BASELINE", "./BehaviorPlanner/Baseline/baseline_angry.xml");
                 }
                 else if (newLikingValue >= 0.5) 
                 {
-                    CharacterManager.setValueString("BASELINE", "./BehaviorPlanner/Baseline/baseline_happy_medium.xml");
+                    getCharacterManager().setValueString("BASELINE", "./BehaviorPlanner/Baseline/baseline_happy_medium.xml");
                 } 
                 else {
-                    CharacterManager.setValueString("BASELINE", "./BehaviorPlanner/Baseline/baseline_neutral.xml");
+                    getCharacterManager().setValueString("BASELINE", "./BehaviorPlanner/Baseline/baseline_neutral.xml");
                 }
             }
             currentLikingValue = newLikingValue;
         }
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        Logs.info("SocialParameterBaselineInfluence.onCharacterChanged(): nothing to do");
     }
     
 }

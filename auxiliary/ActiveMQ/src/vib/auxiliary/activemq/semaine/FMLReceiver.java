@@ -31,6 +31,7 @@ import vib.core.util.xml.XMLTree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import vib.core.util.CharacterManager;
 
 /**
  *
@@ -40,15 +41,18 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
 
     private ArrayList<IntentionPerformer> performers;
     private XMLParser fmlParser;
+    private CharacterManager cm;
 
-    public FMLReceiver() {
+    public FMLReceiver(CharacterManager cm) {
         this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
                 WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
-                "vib.FML");
+                "vib.FML",cm);
+        
     }
 
-    public FMLReceiver(String host, String port, String topic) {
+    public FMLReceiver(String host, String port, String topic, CharacterManager cm) {
         super(host, port, topic);
+        this.cm = cm;
         performers = new ArrayList<IntentionPerformer>();
         fmlParser = XML.createParser();
         fmlParser.setValidating(false);
@@ -76,7 +80,7 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
             mode.setSocialAttitude(fml.getAttribute("social_attitude"));
         }
 
-        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml);
+        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, cm);
 
         Object contentId = null;
         if (fml.hasAttribute("id")) {

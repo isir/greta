@@ -62,6 +62,7 @@ public class OpenMaryClientTTS implements TTS{
      * Default constructor.<br/>
      * Tries to make a connection with one of Mary server 3.x.x or 4.x.x and determines the version of this one.<br/>
      * Values MARY_HOST and MARY_PORT must be defined in the global {@code IniManager}.
+     * @param cm the characterManager associated containing the params
      */
     public OpenMaryClientTTS(CharacterManager cm){
         startClient();
@@ -119,6 +120,7 @@ public class OpenMaryClientTTS implements TTS{
         this.speech = speech;
         lang = omc.toMaryLang(speech.getLanguage(),maryVersion);
         voice = omc.toMaryVoice(speech.getLanguage(), maryVersion);
+        System.out.println(String.format("%s: %s.%s",cm.toString(),lang,voice));
     }
     
     @Override

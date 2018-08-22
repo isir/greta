@@ -110,7 +110,8 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
         //get the intentions of the FML file
         fmlParser.setValidating(true);
         XMLTree fml = fmlParser.parseFile(fmlFileName);
-        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml);
+        CharacterManager cm = CharacterManager.getStaticInstance();
+        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, cm);
 
         Mode mode = FMLTranslator.getDefaultFMLMode();
         if (fml.hasAttribute("composition")) {
@@ -1094,7 +1095,7 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
             //get the intentions of the FML file
             fmlParser.setValidating(true);
             XMLTree fml = fmlParser.parseFile(interruptionFile.getPath());
-            List<Intention> intentions = FMLTranslator.FMLToIntentions(fml);
+            List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, CharacterManager.getStaticInstance());
 
             Mode mode = FMLTranslator.getDefaultFMLMode();
             mode.setCompositionType("replace");

@@ -34,6 +34,7 @@ import vib.core.signals.ParametricSignal;
 import vib.core.signals.Signal;
 import vib.core.signals.SignalProvider;
 import vib.core.signals.SpeechSignal;
+import vib.core.util.CharacterManager;
 import vib.core.util.laugh.Laugh;
 import vib.core.util.speech.Speech;
 
@@ -120,12 +121,12 @@ public class MultimodalSignalSelector implements SignalSelector{
     }
     
     @Override
-    public List<Signal> selectFrom(Intention intention, BehaviorSet behaviorSet, DynamicLine dynamicLine, List<Signal> existingSignals) {
+    public List<Signal> selectFrom(Intention intention, BehaviorSet behaviorSet, DynamicLine dynamicLine, List<Signal> existingSignals, CharacterManager cm) {
         List<Signal> toReturn = new ArrayList<Signal>();
 
         //if the intention is Speech, return corresponding SpeechSignal
         if(intention instanceof Speech){
-            toReturn.add(new SpeechSignal((Speech)intention));
+            toReturn.add(new SpeechSignal(cm,(Speech)intention));
             return toReturn;
         }
         //if the intention is Laugh, return corresponding LaughSignal

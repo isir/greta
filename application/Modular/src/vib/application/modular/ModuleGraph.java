@@ -94,6 +94,23 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         this.getGraph().setEdgeLabelsMovable(false);
         this.getGraph().setDropEnabled(false);
     }
+    
+    private TreeNode<Module> getTreeNode(TreeNode<Module> curNode, Module module){
+        for(TreeNode<Module> node : curNode.getChildren()){
+            if(module.equals(node.getData()))
+                return node;
+        }
+        for(TreeNode<Module> child : curNode.getChildren()){
+            TreeNode<Module> node = getTreeNode(child,module);
+            if(node!=null)
+                return node;
+        }
+        return null;
+    }
+    
+    public TreeNode<Module> getTreeNode(Module module){
+        return getTreeNode(treeModules, module);
+    }
 
     /**
      * Clear all the graph.<br/>
@@ -371,14 +388,18 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
     /**
      * Instanciates and adds in the graph a new {@code Module}
      * @param moduleType the type of the {@code Module} to add.
+     * @param parent the optionnal parent Module.
      */
     
     public void addModule(String moduleType, Module parent) {
         Module module = ModuleFactory.create(graph, moduleType, parent);
-        if (module != null) {
-            if(module.getObject() instanceof CharacterDependent){
-                ((CharacterDependent)module.getObject()).setCharacterManager(module.getCharacterManager());
+        if (module != null){
+            if(parent!=null){
+                module.setParent(parent);
+                getTreeNode(parent).addChild(module); 
+                
             }
+            
             modules.add(module);
         }
         checkConnectables();
@@ -588,6 +609,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
                 if (highlighted != m) {
                     unHighLight();
                     Style.getMapper().highLightModule(graph, m);
+                    //Style.getMapper().greyModule(graph, m); //To test the style
                     highlighted = m;
                 }
             } else {

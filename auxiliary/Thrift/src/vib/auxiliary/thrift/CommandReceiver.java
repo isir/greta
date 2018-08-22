@@ -41,6 +41,7 @@ import vib.auxiliary.socialparameters.SocialDimension;
 import vib.auxiliary.socialparameters.SocialParameterEmitter;
 import vib.auxiliary.socialparameters.SocialParameterFrame;
 import vib.auxiliary.socialparameters.SocialParameterPerformer;
+import vib.core.util.CharacterManager;
 import vib.core.util.time.TimeController;
 import vib.core.util.time.Timer;
 
@@ -56,10 +57,12 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
    private ArrayList<SignalPerformer> signalPerformers;
     private XMLParser parser;
     int cpt ;
+    private CharacterManager cm;
 
 
-    public CommandReceiver() {
+    public CommandReceiver(CharacterManager cm) {
         super();
+        this.cm = cm;
         intentionPerformers = new ArrayList<IntentionPerformer>();
         signalPerformers = new ArrayList<SignalPerformer>();
         parser = XML.createParser();
@@ -67,8 +70,9 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
         cpt=0;
     }
 
-    public CommandReceiver(int port) {
+    public CommandReceiver(CharacterManager cm,int port) {
         super(port);
+        this.cm = cm;
         intentionPerformers = new ArrayList<IntentionPerformer>();
         signalPerformers = new ArrayList<SignalPerformer>();
         parser = XML.createParser();
@@ -133,7 +137,7 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
                         mode.setSocialAttitude(xml.getAttribute("social_attitude"));
                     }
 
-                    propagateIntentions(FMLTranslator.FMLToIntentions(xml), IDProvider.createID(filename, messageID), mode);
+                    propagateIntentions(FMLTranslator.FMLToIntentions(xml, cm), IDProvider.createID(filename, messageID), mode);
                 }
             } catch (Exception e) {
                 e.printStackTrace();

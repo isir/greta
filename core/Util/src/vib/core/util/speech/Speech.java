@@ -20,6 +20,7 @@ package vib.core.util.speech;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
+import vib.core.util.CharacterManager;
 import vib.core.util.audio.Audio;
 import vib.core.util.enums.interruptions.ReactionDuration;
 import vib.core.util.enums.interruptions.ReactionType;
@@ -63,8 +64,11 @@ public class Speech implements Temporizable{
     private ReactionType reactionType;
     private ReactionDuration reactionDuration;
     private String generatedSSML; // Specific to cereproc for the moment
+    private TTS ttsToUse;
+    private CharacterManager cm;
     
-    public Speech(){
+    public Speech(CharacterManager cm){
+        this.cm = cm;
         markers = new  ArrayList<TimeMarker>();
         speechElements = new ArrayList<Object>();
         boundaries = new ArrayList<Boundary>();
@@ -80,7 +84,8 @@ public class Speech implements Temporizable{
         generatedSSML = null;
     }
 
-    public Speech(Speech s){
+    public Speech(CharacterManager cm, Speech s){
+        this.cm = cm;
         speechElements = new ArrayList<Object>(s.speechElements);
         markers = new ArrayList<TimeMarker>(s.markers);
         start = s.start;
@@ -129,6 +134,7 @@ public class Speech implements Temporizable{
     @Override
     public void schedule(){
         synchronized (lock){
+            ttsToUse = cm.getTTS();
             if(ttsToUse==null){
                 Logs.error(this.getClass().getName() + " : no TTS found.");
             }
@@ -906,7 +912,7 @@ public class Speech implements Temporizable{
 
 
 //Static fields :
-    private static TTS ttsToUse;
+    //private static TTS ttsToUse;
     private static boolean ttsDoTemporize = true;
     private static boolean ttsDoAudio = true;
     private static boolean ttsDoPhonemes = true;
@@ -994,7 +1000,7 @@ public class Speech implements Temporizable{
      * Sets the {@code TTS} that all {@code Speech} will use to be scheduled.
      * @param toUse the {@code TTS} to use
      */
-    public static void setTTS(TTS toUse){
+    public void setTTS(TTS toUse){
         synchronized (lock){
             ttsToUse = toUse;
             scheduledSpeeches.clear();
@@ -1005,7 +1011,7 @@ public class Speech implements Temporizable{
      * Returns the {@code TTS} that all {@code Speech} will use to be scheduled.
      * @return the {@code TTS} used
      */
-    public static TTS getTTS(){
+    public TTS getTTS(){
         return ttsToUse;
     }
 

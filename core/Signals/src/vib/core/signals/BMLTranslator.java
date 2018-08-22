@@ -23,6 +23,7 @@ import vib.core.repositories.AUItem;
 import vib.core.repositories.HeadLibrary;
 import vib.core.signals.gesture.GestureSignal;
 import vib.core.signals.gesture.PointingSignal;
+import vib.core.util.CharacterManager;
 import vib.core.util.IniManager;
 import vib.core.util.Mode;
 import vib.core.util.enums.CompositionType;
@@ -93,7 +94,7 @@ public class BMLTranslator {
      * @param bml the XMLTree in BML
      * @return the List of Signals
      */
-    public static synchronized List<Signal> BMLToSignals(XMLTree bml) {
+    public static synchronized List<Signal> BMLToSignals(XMLTree bml, CharacterManager cm) {
         List<Signal> signals = new ArrayList<Signal>();
 
         XMLTree root = bml.getRootNode();
@@ -149,7 +150,7 @@ public class BMLTranslator {
 
             //<editor-fold defaultstate="collapsed" desc="speech">
             if (bmlchild.getName().equalsIgnoreCase("speech")) {
-                SpeechSignal speech = new SpeechSignal();
+                SpeechSignal speech = new SpeechSignal(cm);
                 speech.readFromXML(bmlchild, endAsDuration);
                 signals.add(speech);
             }

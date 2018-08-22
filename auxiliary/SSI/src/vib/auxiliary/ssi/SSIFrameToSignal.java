@@ -21,6 +21,7 @@ import vib.core.signals.Signal;
 import vib.core.signals.SignalEmitter;
 import vib.core.signals.SignalPerformer;
 import vib.core.signals.SpeechSignal;
+import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
 import vib.core.util.enums.CompositionType;
 import vib.core.util.id.ID;
@@ -41,6 +42,12 @@ public class SSIFrameToSignal implements SSIFramePerfomer, SignalEmitter {
     private Double previousSmile = 0.0;
     private Double smile= 0.0;
     private int pitchDirection = 0;
+    private CharacterManager cm;
+    
+    public SSIFrameToSignal(CharacterManager cm){
+        this.cm = cm;
+    }
+            
 
     @Override
     public void performSSIFrames(List<SSIFrame> ssi_frames_list, ID requestId) {
@@ -55,7 +62,7 @@ public class SSIFrameToSignal implements SSIFramePerfomer, SignalEmitter {
 
         speaking = ssi_frame.getIntValue(SSITypes.SSIFeatureNames.prosody_voice_activity);
         if (previousSpeaking == 1 && speaking == 0) {
-            SpeechSignal ss = new SpeechSignal();
+            SpeechSignal ss = new SpeechSignal(cm);
 
             //dummy time values
             ss.getTimeMarker("start").setValue(0.0);
@@ -108,7 +115,7 @@ public class SSIFrameToSignal implements SSIFramePerfomer, SignalEmitter {
 
         pitchDirection = ssi_frame.getIntValue(SSITypes.SSIFeatureNames.prosody_opensmile_pitch_direction_cat);
         if(pitchDirection!=0){
-            SpeechSignal ss = new SpeechSignal();
+            SpeechSignal ss = new SpeechSignal(cm);
             ss.getTimeMarker("start").setValue(0.0);
             ss.getTimeMarker("end").setValue(0.0);
             ss.setReference(SSITypes.SSIPitchDirectionValues.getPitchDirectionValueName(pitchDirection).name());

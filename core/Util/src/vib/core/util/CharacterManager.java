@@ -21,6 +21,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import vib.core.util.speech.TTS;
 
 /**
  * This class contains informations about characters that can be used by the system.<br/>
@@ -48,6 +49,7 @@ public class CharacterManager {
     public String currentCharacterId; //TODO find a better way to give the id from the environment
     public String currentCameraId;
     private String id;
+    private TTS tts;
     
     static{
         getStaticInstance();
@@ -370,5 +372,16 @@ public class CharacterManager {
             filename = characterMapFile.get(characterName);
         }
         return filename;
+    }
+
+    /**
+     * @return the tts
+     */
+    public TTS getTTS() {
+        return tts;
+    }
+    
+    public void setTTS(TTS tts){
+        this.tts = tts;
     }
 }

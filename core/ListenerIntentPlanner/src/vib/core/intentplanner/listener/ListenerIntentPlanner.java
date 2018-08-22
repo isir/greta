@@ -316,7 +316,7 @@ public class ListenerIntentPlanner extends CharacterDependentAdapter implements 
 
         if (stopSpeaking != -1 && (Timer.getTimeMillis() - stopSpeaking) > SILENCE_THRESHOLD) {
             Logs.debug("silence at = "+Timer.getTimeMillis());
-            SpeechSignal sig = new SpeechSignal();
+            SpeechSignal sig = new SpeechSignal(getCharacterManager());
             sig.setReference("silence");
             EmbededSignal es = new EmbededSignal(sig);
             es.receivedTime = stopSpeaking/1000.0;

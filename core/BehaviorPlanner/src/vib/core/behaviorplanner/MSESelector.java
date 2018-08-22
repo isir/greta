@@ -34,6 +34,7 @@ import vib.core.signals.Signal;
 import vib.core.signals.SpeechSignal;
 import vib.core.signals.TorsoSignal;
 import vib.core.signals.gesture.GestureSignal;
+import vib.core.util.CharacterManager;
 import vib.core.util.log.Logs;
 import vib.core.util.speech.Speech;
 import vib.core.util.time.TimeMarker;
@@ -54,11 +55,11 @@ public class MSESelector implements SignalSelector {
     }
 
     @Override
-    public List<Signal> selectFrom(Intention intention, BehaviorSet behaviorSet, DynamicLine dynamicLine, List<Signal> existingSignals) {
+    public List<Signal> selectFrom(Intention intention, BehaviorSet behaviorSet, DynamicLine dynamicLine, List<Signal> existingSignals, CharacterManager cm) {
         List<Signal> toReturn = new ArrayList<Signal>();
 
         if (intention instanceof Speech) {
-            toReturn.add(new SpeechSignal((Speech) intention));
+            toReturn.add(new SpeechSignal(cm,(Speech) intention));
             return toReturn;
         }
 

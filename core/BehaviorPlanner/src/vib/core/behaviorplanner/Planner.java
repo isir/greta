@@ -242,7 +242,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             }
 
             //let the selector choose the signals
-            List<Signal> signalsReturned = selector.selectFrom(intention, set, dynamicline, existingSignals);
+            List<Signal> signalsReturned = selector.selectFrom(intention, set, dynamicline, existingSignals, getCharacterManager());
             //if signalsReturned is empty, it means that no Signal can be added.
             //  It's normal !
             //but if signalsReturned is null, it means that the selector cannot performe this kind of intention

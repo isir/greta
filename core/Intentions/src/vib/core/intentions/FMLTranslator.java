@@ -27,6 +27,7 @@ import vib.core.util.xml.XML;
 import vib.core.util.xml.XMLTree;
 import java.util.ArrayList;
 import java.util.List;
+import vib.core.util.CharacterManager;
 import vib.core.util.enums.CompositionType;
 import vib.core.util.laugh.Laugh;
 
@@ -66,7 +67,7 @@ public class FMLTranslator {
      * @param fml the XMLTree in FML-APML
      * @return the List of Intentions
      */
-    public static synchronized List<Intention> FMLToIntentions(XMLTree fml) {
+    public static synchronized List<Intention> FMLToIntentions(XMLTree fml, CharacterManager cm) {
         List<Intention> intentions = new ArrayList<Intention>();
         for (XMLTree fmlchild : fml.getChildrenElement()) {
             //load the speeches, boundaries and pitch accents :
@@ -74,7 +75,7 @@ public class FMLTranslator {
                 for (XMLTree bmlchild : fmlchild.getChildrenElement()) {
                     if (bmlchild.getName().equalsIgnoreCase("speech")) {
                         //add speech :
-                        PseudoIntentionSpeech speech = new PseudoIntentionSpeech();
+                        PseudoIntentionSpeech speech = new PseudoIntentionSpeech(cm);
                         speech.readFromXML(bmlchild, endAsDuration);
                         intentions.add(speech);
                         //add boundaries :

@@ -22,6 +22,7 @@ import vib.core.behaviorplanner.lexicon.BehaviorSet;
 import vib.core.intentions.Intention;
 import vib.core.signals.Signal;
 import java.util.List;
+import vib.core.util.CharacterManager;
 
 /**
  * This interface encapsulates algorithms of signal selection from a communicative intention.<br/>
@@ -48,7 +49,7 @@ public interface SignalSelector {
      * @return the list of selected {@code Signal}. If no signal was selected (because time constraint etc.), the list is empty. It returns {@code null} if this cannot oparate with this {@code Intention}.
      */
 
-    public List<Signal> selectFrom(Intention intention, BehaviorSet behaviorSet, DynamicLine dynamicLine, List<Signal> existingSignals);
+    public List<Signal> selectFrom(Intention intention, BehaviorSet behaviorSet, DynamicLine dynamicLine, List<Signal> existingSignals, CharacterManager cm);
 
     /**
      * Allows to know if this {@code SignalSelector} can select {@code Signals} from a specific {@code Intention} within a specific context.

@@ -25,6 +25,7 @@ import vib.core.util.xml.XMLTree;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import vib.core.util.CharacterManager;
 
 /**
  * This class is an implementation of {@code IntentionEmitter} interface.<br>
@@ -39,6 +40,11 @@ public class FMLFileReader implements IntentionEmitter {
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private XMLParser fmlparser = XML.createParser();
     private static String markup = "fml-apml";
+    private CharacterManager cm;
+    
+    public FMLFileReader(CharacterManager cm){
+        this.cm = cm;
+    }
 
     @Override
     public void addIntentionPerformer(IntentionPerformer performer) {
@@ -64,7 +70,7 @@ public class FMLFileReader implements IntentionEmitter {
         //get the intentions of the FML file
         fmlparser.setValidating(true);
         XMLTree fml = fmlparser.parseFile(fmlfilename);
-        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml);
+        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml,cm);
         Mode mode = FMLTranslator.getDefaultFMLMode();
         if (fml.hasAttribute("composition")) {
             mode.setCompositionType(fml.getAttribute("composition"));

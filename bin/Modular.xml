@@ -946,8 +946,8 @@
             <depends lib_id="vib_signals"/>
             <depends lib_id="vib_mpeg4"/>
             <depends lib_id="vib_feedbacks"/>
-            <depends lib_id="vib_emotionml"/>
-            <depends lib_id="vib_NN"/>
+            <depends lib_id="vib_emotionml"/>			
+            <depends lib_id="vib_NN"/><!-- not in the core -->
             <depends lib_id="vib_GraphicNN"/>
         </lib>
         <lib id="vib_gesture_animation" path="./Common/Lib/Internal/GestureAnimation.jar">

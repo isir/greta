@@ -21,6 +21,7 @@ import vib.core.behaviorplanner.lexicon.Lexicon;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import vib.core.util.CharacterManager;
 
 /**
  *
@@ -38,7 +39,7 @@ public class IntentionsAviable {
         }
     }
     static {
-        Lexicon l = new Lexicon();
+        Lexicon l = new Lexicon(CharacterManager.getStaticInstance());
         List<String> emotions = new LinkedList<String>();
         List<String> performatives = new LinkedList<String>();
         List<String> backchannels = new LinkedList<String>();

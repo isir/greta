@@ -23,6 +23,7 @@ import java.util.Collections;
 import java.util.List;
 import javax.swing.JOptionPane;
 import vib.core.util.time.TimeMarker;
+import vib.core.util.CharacterManager;
 
 /**
  *
@@ -33,9 +34,9 @@ public class SpeechUtil{
     private static int speechSignalCount = 0;
     private static int displayIdDigits = 3;
 
-    public static Speech instanciateTemporizable(double startTime, double endTime) {
+    public static Speech instanciateTemporizable(CharacterManager cm,double startTime, double endTime) {
         //Create Speech element
-        Speech s = new Speech();
+        Speech s = new Speech(cm);
         s.getStart().setValue(startTime);
         s.getEnd().setValue(endTime);
 
@@ -109,7 +110,7 @@ public class SpeechUtil{
         //Get Speech text input and parse it into words and TimeMarkers in between
         String text = JOptionPane.showInputDialog("Edit the speech here",old_text);
         
-        Speech newspeech = new Speech();
+        Speech newspeech = new Speech(temporizable.getCharacterManager());
         // 
         newspeech = SpeechUtil.addSpeechElementsFromText(newspeech, text);
         newspeech.getStart().setValue(temporizable.getStart().getValue());

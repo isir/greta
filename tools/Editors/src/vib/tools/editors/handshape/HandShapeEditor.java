@@ -58,11 +58,13 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFramesEmit
     private int oldPos = 0;
     private int eventButton = 0;
     private HandShape currentshape = null;
+    private CharacterManager cm;
 
     /**
      * Creates new form HandShapeEditor
      */
-    public HandShapeEditor() {
+    public HandShapeEditor(CharacterManager cm) {
+        setCharacterManager(cm);
         initComponents();
         setEnabledX(false);
         setEnabledY(false);
@@ -76,7 +78,7 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFramesEmit
         jFileChooser1.setAcceptAllFileFilterUsed(false);
         jFileChooser1.addChoosableFileFilter(new XMLFileChooser());
         updateFrame(jComboBox1.getSelectedItem().toString());
-        CharacterManager.add(this);
+        
         onCharacterChanged();
     }
 
@@ -342,7 +344,7 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFramesEmit
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         //check file name
-        String handShapeFileName = CharacterManager.getValueString(HandShapeLibrary.CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY);
+        String handShapeFileName = cm.getValueString(HandShapeLibrary.CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY);
         if(! (new File(handShapeFileName)).exists()){
             //there is no specific file: we ask to create a new one
             jFileChooser1.setLocale(Locale.getDefault());
@@ -356,9 +358,9 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFramesEmit
                     if( ! choosenFileName.equals(handShapeFileName)){
                         handShapeFileName = choosenFileName;
                         lib.getCurrentDefinition().setName(choosenFileName);
-                        CharacterManager.addValueString(HandShapeLibrary.CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY, handShapeFileName);
+                        cm.addValueString(HandShapeLibrary.CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY, handShapeFileName);
                     }
-                    CharacterManager.getIniManager().saveCurrentDefinition();
+                    cm.getIniManager().saveCurrentDefinition();
                 } catch (Exception ex) {}
             }
             else{
@@ -561,20 +563,33 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFramesEmit
     @Override
     public void onCharacterChanged() {
         lib.onCharacterChanged();
-        if( ! CharacterManager.getDefaultCharacterFile().equals(
-            CharacterManager.getCurrentCharacterFile())){
+        if( ! cm.getDefaultCharacterFile().equals(
+            cm.getCurrentCharacterFile())){
             if(lib.getCurrentDefinition()==lib.getDefaultDefinition()){
-                String filename = "./BehaviorRealizer/AnimationLexicon/HandShape_"+CharacterManager.getCurrentCharacterName()+".xml";
+                String filename = "./BehaviorRealizer/AnimationLexicon/HandShape_"+cm.getCurrentCharacterName()+".xml";
                 int count = 1;
                 while((new File(filename)).exists()){
-                    filename = "./BehaviorRealizer/AnimationLexicon/HandShape_"+CharacterManager.getCurrentCharacterName()+count+".xml";
+                    filename = "./BehaviorRealizer/AnimationLexicon/HandShape_"+cm.getCurrentCharacterName()+count+".xml";
                     count++;
                 }
                 lib.createEmptyDefinition(filename);
                 lib.setDefinition(filename);
-                CharacterManager.addValueString(HandShapeLibrary.CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY, filename);
+                cm.addValueString(HandShapeLibrary.CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY, filename);
             }
         }
         updateFrame(jComboBox1.getSelectedItem().toString());
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+        return cm;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager cm) {
+        if(this.cm!=null)
+            this.cm.remove(this);
+        this.cm = cm;
+        cm.add(this);
     }
 }

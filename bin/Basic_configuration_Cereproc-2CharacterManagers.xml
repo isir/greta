@@ -87,22 +87,20 @@
                 <parameter name="saveFileName" value="Examples\DemoEN\1-Welcome.xml"/>
                 <window h="108" visible="true" w="517" x="10" y="11"/>
             </element>
-            <element h="50.0" id="OpenMary ClientTTS-1527260713615-711"
-                module="OpenMary ClientTTS" name="OpenMary ClientTTS"
-                w="80.0" x="700.0" y="100.0"/>
+            
             <element h="50.0" id="PlayerOgre-1527250260600-793"
                 module="PlayerOgre" name="PlayerOgre" w="80.0" x="890.0" y="270.0">
                 <parameter name="posX" value="0.6300183534622192"/>
                 <parameter name="posY" value="1.3827651739120483"/>
                 <parameter name="posZ" value="0.06465750932693481"/>
                 <parameter name="roll" value="0.0"/>
-                <parameter name="pitch" value="-0.07103806734085083"/>
-                <parameter name="yaw" value="1.1960209608078003"/>
+                <parameter name="pitch" value="-0.07275039702653885"/>
+                <parameter name="yaw" value="1.1946357488632202"/>
                 <window h="623" visible="true" w="738" x="1159" y="57"/>
             </element>
             <element h="50.0" id="Cereproc TTS-1535729881954-510"
                 module="Cereproc TTS" name="Cereproc TTS" w="80.0"
-                x="700.0" y="100.0"/>
+                x="700.0" y="90.0"/>
         </element>
         <element h="510.0" id="CharacterManager-2399294977720-682"
             module="CharacterManager" name="Character Manager" w="780.0"
@@ -169,47 +167,31 @@
                 x="100.0" y="590.0">
                 <parameter name="saveFileName" value="Examples\DemoEN\1-Welcome.xml"/>
                 <window h="108" visible="true" w="517" x="9" y="274"/>
-            </element>
-            <element h="50.0" id="OpenMary ClientTTS-2527260713615-711"
-                module="OpenMary ClientTTS" name="OpenMary ClientTTS"
-                w="80.0" x="690.0" y="610.0"/>
+            </element>            
             <element h="50.0" id="Cereproc TTS-1535732033474-390"
                 module="Cereproc TTS" name="Cereproc TTS" w="80.0"
                 x="690.0" y="610.0"/>
-            <element h="50.0" id="OpenMary ClientTTS-1535732117781-85"
-                module="OpenMary ClientTTS" name="OpenMary ClientTTS"
-                w="80.0" x="690.0" y="610.0"/>
         </element>
     </elements>
     <connections>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="AnimationKeyframePerformer-2527250736795-648" target="MPEG4Animatable-2399294936433-809"/>
-        <connection connector="setTTS" source="TTS-1399295010169-541" target="OpenMary ClientTTS-1527260713615-711"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="LipBlender-2399294913649-928" target="MPEG4Animatable-2399294936433-809"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BehaviorPlanner-2399293781312-494" target="BehaviorRealizer-2399293788592-686"/>
-        <connection connector="LipSourceForLipBlender"
-            source="LipModel-2399293841961-576" target="LipBlender-2399294913649-928"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BehaviorPlanner-1399293781312-494" target="BehaviorRealizer-1399293788592-686"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="AudioKeyframePerformer-1399293852121-170" target="MPEG4Animatable-1399294936433-809"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="PlayerOgre-1527250260600-793" target="Environment-1399294930513-476"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="LipBlender-1399294913649-928" target="MPEG4Animatable-1399294936433-809"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="AudioKeyframePerformer-2399293852121-170" target="MPEG4Animatable-2399294936433-809"/>
         <connection connector="addLogOutput"
             source="Logs-1399294983408-198" target="LogFrame-1399294990657-788"/>
-        <connection connector="LipSourceForLipBlender"
-            source="LipModel-1399293841961-576" target="LipBlender-1399294913649-928"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="AnimationKeyframePerformer-1527250736795-648" target="MPEG4Animatable-1399294936433-809"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BMLFileReader-1399293802729-519" target="BehaviorRealizer-1399293788592-686"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4Animatable-1399294936433-809" target="Environment-1399294930513-476"/>
-        <connection connector="setTTS" source="TTS-2399295010169-541" target="OpenMary ClientTTS-1535732117781-85"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1399293788592-686" target="FaceKeyframePerformer-1399293828449-719"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1399293788592-686" target="AudioKeyframePerformer-1399293852121-170"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1399293788592-686" target="AnimationKeyframePerformer-1527250736795-648"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1399293788592-686" target="LipModel-1399293841961-576"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="LipBlender-1399294913649-928" target="MPEG4Animatable-1399294936433-809"/>
         <connection connector="AUEmitterToAUPerformer"
             source="FaceKeyframePerformer-2399293828449-719" target="SimpleAUPerformer-2399293868968-624"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -220,29 +202,39 @@
             source="BehaviorRealizer-2399293788592-686" target="AnimationKeyframePerformer-2527250736795-648"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="BehaviorRealizer-2399293788592-686" target="LipModel-2399293841961-576"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1399293788592-686" target="FaceKeyframePerformer-1399293828449-719"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1399293788592-686" target="AudioKeyframePerformer-1399293852121-170"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1399293788592-686" target="AnimationKeyframePerformer-1527250736795-648"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1399293788592-686" target="LipModel-1399293841961-576"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="FaceKeyframePerformer-1399293828449-719" target="SimpleAUPerformer-1399293868968-624"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FMLFileReader-1399293768562-603" target="BehaviorPlanner-1399293781312-494"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="PlayerOgre-1527250260600-793" target="Environment-1399294930513-476"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="FMLFileReader-2399293768562-603" target="BehaviorPlanner-2399293781312-494"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4Animatable-2399294936433-809" target="Environment-1399294930513-476"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BMLFileReader-1399293802729-519" target="BehaviorRealizer-1399293788592-686"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="BMLFileReader-2399293802729-519" target="BehaviorRealizer-2399293788592-686"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="SimpleAUPerformer-1399293868968-624" target="LipBlender-1399294913649-928"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="SimpleAUPerformer-2399293868968-624" target="LipBlender-2399294913649-928"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FMLFileReader-1399293768562-603" target="BehaviorPlanner-1399293781312-494"/>
+        <connection connector="setTTS" source="TTS-2399295010169-541" target="Cereproc TTS-1535732033474-390"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BehaviorPlanner-1399293781312-494" target="BehaviorRealizer-1399293788592-686"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BehaviorPlanner-2399293781312-494" target="BehaviorRealizer-2399293788592-686"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-1399293868968-624" target="LipBlender-1399294913649-928"/>
+        <connection connector="LipSourceForLipBlender"
+            source="LipModel-1399293841961-576" target="LipBlender-1399294913649-928"/>
+        <connection connector="setTTS" source="TTS-1399295010169-541" target="Cereproc TTS-1535729881954-510"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="LipBlender-2399294913649-928" target="MPEG4Animatable-2399294936433-809"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="AnimationKeyframePerformer-1527250736795-648" target="MPEG4Animatable-1399294936433-809"/>
+        <connection connector="LipSourceForLipBlender"
+            source="LipModel-2399293841961-576" target="LipBlender-2399294913649-928"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="AudioKeyframePerformer-1399293852121-170" target="MPEG4Animatable-1399294936433-809"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4Animatable-2399294936433-809" target="Environment-1399294930513-476"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="FaceKeyframePerformer-1399293828449-719" target="SimpleAUPerformer-1399293868968-624"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="AnimationKeyframePerformer-2527250736795-648" target="MPEG4Animatable-2399294936433-809"/>
     </connections>
 </modulated>

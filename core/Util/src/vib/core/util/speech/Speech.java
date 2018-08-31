@@ -84,8 +84,8 @@ public class Speech implements Temporizable{
         generatedSSML = null;
     }
 
-    public Speech(CharacterManager cm, Speech s){
-        this.cm = cm;
+    public Speech(Speech s){
+        this.cm = s.cm;
         speechElements = new ArrayList<Object>(s.speechElements);
         markers = new ArrayList<TimeMarker>(s.markers);
         start = s.start;
@@ -105,6 +105,10 @@ public class Speech implements Temporizable{
         reactionType = s.reactionType;
         reactionDuration = s.reactionDuration;
         generatedSSML = s.generatedSSML;
+    }
+    
+    public CharacterManager getCharacterManager(){
+        return cm;
     }
 
     @Override

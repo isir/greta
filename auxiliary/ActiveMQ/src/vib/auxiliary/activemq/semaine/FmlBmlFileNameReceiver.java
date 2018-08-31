@@ -85,7 +85,7 @@ public class FmlBmlFileNameReceiver extends TextReceiver implements IntentionEmi
                     mode.setSocialAttitude(xml.getAttribute("social_attitude"));
                 }
 
-                propagateSignals(BMLTranslator.BMLToSignals(xml), IDProvider.createID(filename), mode);
+                propagateSignals(BMLTranslator.BMLToSignals(xml,cm), IDProvider.createID(filename), mode);
             }
             if (xml.getName().equalsIgnoreCase("fml-apml")) {
 

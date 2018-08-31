@@ -48,7 +48,8 @@ public class RestPoseFactory extends CharacterDependentAdapter{
     XMLTree _tree;
     boolean _isInit = false;
 
-    public RestPoseFactory() {
+    public RestPoseFactory(CharacterManager cm) {
+        setCharacterManager(cm);
     }
 
     public void reloadData() {

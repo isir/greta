@@ -31,8 +31,8 @@ public class PseudoIntentionSpeech extends Speech implements Intention{
         super(cm);
     }
 
-    public PseudoIntentionSpeech(CharacterManager cm,Speech s){
-        super(cm,s);
+    public PseudoIntentionSpeech(Speech s){
+        super(s);
     }
 
     @Override

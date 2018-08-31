@@ -31,6 +31,7 @@ import vib.core.util.xml.XMLTree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import vib.core.util.CharacterManager;
 
 /**
  *
@@ -40,15 +41,17 @@ public class BMLReceiver extends TextReceiver implements SignalEmitter {
 
     private ArrayList<SignalPerformer> performers;
     private XMLParser bmlParser;
+    private CharacterManager cm;
 
-    public BMLReceiver() {
-        this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
+    public BMLReceiver(CharacterManager cm) {
+        this(cm,WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
                 WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
                 "vib.BML");
     }
 
-    public BMLReceiver(String host, String port, String topic) {
+    public BMLReceiver(CharacterManager cm,String host, String port, String topic) {
         super(host, port, topic);
+        this.cm = cm;
         performers = new ArrayList<SignalPerformer>();
         bmlParser = XML.createParser();
         bmlParser.setValidating(false);
@@ -76,7 +79,7 @@ public class BMLReceiver extends TextReceiver implements SignalEmitter {
             mode.setSocialAttitude(bml.getAttribute("social_attitude"));
         }
 
-        List<Signal> signals = BMLTranslator.BMLToSignals(bml);
+        List<Signal> signals = BMLTranslator.BMLToSignals(bml,cm);
         
         Object contentId = null;
         if (bml.hasAttribute("id")) {

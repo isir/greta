@@ -74,7 +74,7 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
     private String xmlFile;
     private String touchFile;
     XMLTree _tree;
-    RestPoseFactory _restPoseFactory = new RestPoseFactory();
+    RestPoseFactory _restPoseFactory;
     HeadIntervals _headIntervals = HeadLibrary.getGlobalLibrary().getHeadIntervals();
     TorsoIntervals _torsoIntervals = TorsoLibrary.getGlobalLibrary().getTorsoIntervals();
     HandShapeLibrary _handshapelib = new HandShapeLibrary();
@@ -94,6 +94,7 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
 
     public SymbolicConverter(CharacterManager cm) {
         setCharacterManager(cm);
+         _restPoseFactory = new RestPoseFactory(cm);
         
         xmlFile = getCharacterManager().getValueString("IK_SKELETON");
         touchFile = getCharacterManager().getValueString("TOUCHPOINT");

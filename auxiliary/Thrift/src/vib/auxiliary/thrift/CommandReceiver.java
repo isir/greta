@@ -119,7 +119,7 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
                         mode.setSocialAttitude(xml.getAttribute("social_attitude"));
                     }
 
-                    propagateSignals(BMLTranslator.BMLToSignals(xml), IDProvider.createID(filename, messageID), mode);
+                    propagateSignals(BMLTranslator.BMLToSignals(xml,cm), IDProvider.createID(filename, messageID), mode);
                 }
                 if (xml.getName().equalsIgnoreCase("fml-apml")) {
 

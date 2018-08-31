@@ -32,7 +32,7 @@ public class SpeechSignal extends Speech implements Signal{
     }
 
     public SpeechSignal(CharacterManager cm,Speech s){
-        super(cm,s);
+        super(s);
     }
 
     public String getModality() {

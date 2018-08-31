@@ -49,10 +49,10 @@ import vib.core.util.xml.XMLTree;
  */
 public class CereprocTTS extends CharacterDependentAdapter implements TTS {
 
-    private static boolean initialized = false;
-    private static boolean functional = false;
-    private static String LOAD_ABSOLUTE_PATH = null;
-    private static String VOICES_ABSOLUTE_PATH = null;
+    private boolean initialized = false;
+    private boolean functional = false;
+    private String LOAD_ABSOLUTE_PATH = null;
+    private String VOICES_ABSOLUTE_PATH = null;
 
     private boolean interreuptionReactionSupported;
     private Audio audio; //audio buffer
@@ -60,14 +60,14 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
     private List<Phoneme> phonemes;//phoneme list computed by the native cereproc library
     private Speech speech; //speech object, input to the TTS engine
     private List<TimeMarker> tmOfSpeechList; //time markers list outputed by the native cereproc library
-    private static long ptr; //pointer to c++ cereproc
+   
     int tmnumber; //time marker number
 
     private String languageID; // Character's language specified using <LANGUAGE_CODE_ISO>-<COUNTRY_CODE_ISO> in character's .ini file (e.g. en-GB)
     private String voiceName; // Character's voice specified in character's .ini file (e.g. en-GB)
 
     // Variable used by the cereproc engine
-    static SWIGTYPE_p_CPRCEN_engine engineCereproc;
+    private SWIGTYPE_p_CPRCEN_engine engineCereproc;
     static int channelHandle, cereprocVoiceLoadedFlag;
     static String cereprocSampleRate;
     static float cereprocSampleRateFloat;
@@ -76,8 +76,9 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
     float earliestReactionTimeOffset = 0.1f;
     static byte[] emptyBufferInterruptionFallback;
 
-    static {
-        init();
+    static{
+        // Init constants and make phonemes mappings
+        CereprocConstants.init();
     }
 
     private static boolean checkFolder(String path) {
@@ -87,16 +88,14 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
     /*
      * Initialization function, CereprocConstants.init() reads parameters from bin/vib.ini file
      */
-    private static void init() {
-
+    private void init() {
             if (initialized && functional) {
                 return;
             }
 
             initialized = true;
 
-            // Init constants and make phonemes mappings
-            CereprocConstants.init();
+            
 
             // Get System Architecture and OS
             int jvmArchitecture = Integer.parseInt(System.getProperty("sun.arch.data.model"));
@@ -172,6 +171,7 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
 
             if (initSuccess) {
                 Logs.info("CereprocTTS successfully initialized.");
+                onCharacterChanged();
                 functional = true;
             }
             else {
@@ -180,7 +180,7 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
             }
     }
 
-    private static boolean initCereprocEngine() {
+    private boolean initCereprocEngine() {
 
         // Creates the engine
 	Logs.info("CereprocTTS is creating CereVoice Engine");
@@ -266,18 +266,13 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
      * @param characterManager reference to use
      */
     public CereprocTTS(CharacterManager characterManager) {
-        setCharacterManager(characterManager);        
-      
+        setCharacterManager(characterManager);
+        characterManager.setTTS(this);
         init();
-
         interreuptionReactionSupported = true;
-        
         setupCharacterLanguageVoiceParameters();
-
         clean();
-
         tmnumber = 0;
-
     }
 
     /**
@@ -736,7 +731,6 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
     }
 
     private void setupCharacterLanguageVoiceParameters() {
-
         // Get language and country code from the voice currently loaded
         String languageCode = cerevoice_eng.CPRCEN_channel_get_voice_info(engineCereproc, channelHandle, "LANGUAGE_CODE_ISO");
         String countryCode = cerevoice_eng.CPRCEN_channel_get_voice_info(engineCereproc, channelHandle, "COUNTRY_CODE_ISO");
@@ -758,7 +752,7 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
      * @param characterVoice the voice name retrieved from the {@code CharacterManager}
      * @return the path to the Cereproc's voice for the current character
      */
-    public static String toCereprocVoicePath(String characterLanguage, String characterVoice) {
+    public String toCereprocVoicePath(String characterLanguage, String characterVoice) {
         return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_3.2.0_48k.voice";
     }
 
@@ -768,7 +762,7 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
      * @param characterVoice the voice name retrieved from the {@code CharacterManager}
      * @return the path to the Cereproc's license for the current character's voice
      */
-    public static String toCereprocLicensePath(String characterLanguage, String characterVoice) {
+    public String toCereprocLicensePath(String characterLanguage, String characterVoice) {
         return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/" + characterVoice.toLowerCase() + ".lic";
     }
 
@@ -849,7 +843,7 @@ public class CereprocTTS extends CharacterDependentAdapter implements TTS {
         super.finalize();
     }
 
-    private static boolean loadDefaultVoiceLanguage() {
+    private boolean loadDefaultVoiceLanguage() {
         String licensePath = toCereprocLicensePath(CereprocConstants.DEFAULT_LANGUAGE, CereprocConstants.DEFAULT_VOICE);
         String voicePath = toCereprocVoicePath(CereprocConstants.DEFAULT_LANGUAGE, CereprocConstants.DEFAULT_VOICE);
         if (cerevoice_eng.CPRCEN_engine_load_voice(engineCereproc, licensePath, "", voicePath, CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD) == 0)

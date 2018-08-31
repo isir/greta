@@ -284,7 +284,7 @@ public class CereprocConstants {
     }
 
     public static TTS getCereprocTTS(CharacterManager cm,boolean useNativeTTS) throws IOException, UnsupportedAudioFileException {
-        TTS tts = new CereprocTTS(cm);
+        TTS tts = cm.getTTS();//new CereprocTTS(cm);
         Logs.info("CereprocTTS : new instance of " + tts.getClass().getName());
         return tts;
     }

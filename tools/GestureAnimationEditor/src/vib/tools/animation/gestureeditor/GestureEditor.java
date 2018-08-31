@@ -11,7 +11,8 @@
 * 
 * You should have received a copy of the GNU General Public License
 * along with Greta.If not, see <http://www.gnu.org/licenses/>.
-*/package vib.tools.animation.gestureeditor;
+*/
+package vib.tools.animation.gestureeditor;
 
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
@@ -66,8 +67,12 @@ public class GestureEditor extends javax.swing.JFrame implements SignalEmitter, 
     private boolean _ready = false;
     private boolean canSendKeyFrames = false;
     private int newDefaultGestureAdded = -1;
+    private CharacterManager cm;
+    
+    
 
-    public GestureEditor() {
+    public GestureEditor(CharacterManager cm) {
+        this.cm = cm;
         initComponents();
         initField(spatialityValue);
         initField(temporalityValue);
@@ -76,7 +81,7 @@ public class GestureEditor extends javax.swing.JFrame implements SignalEmitter, 
         initField(stiffnessValue);
         initField(tensionValue);
 
-        CharacterManager.add(this);
+        cm.add(this);
 
         _ready = true;
         canSendKeyFrames = true;
@@ -1234,5 +1239,21 @@ public class GestureEditor extends javax.swing.JFrame implements SignalEmitter, 
 //            }
 //            updatePhaseNames();
 //        }
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+       return cm;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager cm) {
+        this.cm = cm;
+    }
+    
+    @Override
+    protected void finalize() throws Throwable {
+        cm.remove(this);
+        super.finalize();
     }
 }

@@ -23,7 +23,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import vib.auxiliary.player.ogre.capture.Capturable;
-import vib.core.util.CharacterManager;
 import vib.core.util.audio.Line;
 import vib.core.util.environment.Environment;
 

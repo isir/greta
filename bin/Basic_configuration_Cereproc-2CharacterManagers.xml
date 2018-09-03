@@ -22,12 +22,12 @@
         <element h="260.0" id="Environment-1399294930513-476"
             module="Environment" name="Environment" w="90.0" x="880.0" y="370.0"/>
         <element h="490.0" id="CharacterManager-1399294977720-682"
-            module="CharacterManager" name="Character Manager" w="770.0"
-            x="40.0" y="10.0">
+            module="CharacterManager" name="Character Manager" w="790.0"
+            x="30.0" y="10.0">
             <parameter name="character_name" value="DEFAULT_CHARACTER"/>
             <window h="84" visible="false" w="136" x="0" y="0"/>
             <element h="50.0" id="TTS-1399295010169-541" module="TTS"
-                name="TTS" w="80.0" x="700.0" y="30.0">
+                name="TTS" w="80.0" x="670.0" y="20.0">
                 <parameter name="doPhonemes" value="true"/>
                 <parameter name="doTemporize" value="true"/>
                 <parameter name="doAudio" value="true"/>
@@ -36,24 +36,24 @@
             <element h="50.0"
                 id="FaceKeyframePerformer-1399293828449-719"
                 module="FaceKeyframePerformer" name="Face" w="80.0"
-                x="360.0" y="260.0">
+                x="330.0" y="260.0">
                 <parameter name="blinking" value="true"/>
             </element>
             <element h="120.0" id="LipBlender-1399294913649-928"
                 module="LipBlender" name="Lip Blender" w="80.0"
-                x="580.0" y="260.0"/>
+                x="550.0" y="260.0"/>
             <element h="50.0" id="SimpleAUPerformer-1399293868968-624"
                 module="SimpleAUPerformer" name="AU to FAP" w="80.0"
-                x="470.0" y="260.0"/>
+                x="440.0" y="260.0"/>
             <element h="50.0" id="LipModel-1399293841961-576"
-                module="LipModel" name="Lips" w="190.0" x="360.0" y="330.0"/>
+                module="LipModel" name="Lips" w="210.0" x="310.0" y="330.0"/>
             <element h="50.0"
                 id="AudioKeyframePerformer-1399293852121-170"
                 module="AudioKeyframePerformer" name="Audio" w="300.0"
-                x="360.0" y="400.0"/>
-            <element h="260.0" id="MPEG4Animatable-1399294936433-809"
+                x="310.0" y="400.0"/>
+            <element h="180.0" id="MPEG4Animatable-1399294936433-809"
                 module="MPEG4Animatable" name="MPEG4 Animatable"
-                w="80.0" x="690.0" y="190.0">
+                w="80.0" x="680.0" y="230.0">
                 <parameter name="posX" value="-3.5"/>
                 <parameter name="scaleX" value="1.0"/>
                 <parameter name="posY" value="0.0"/>
@@ -68,28 +68,27 @@
             </element>
             <element h="270.0" id="BehaviorRealizer-1399293788592-686"
                 module="BehaviorRealizer" name="Behavior Realizer"
-                w="80.0" x="230.0" y="190.0"/>
+                w="80.0" x="170.0" y="150.0"/>
             <element h="270.0" id="BehaviorPlanner-1399293781312-494"
                 module="BehaviorPlanner" name="Behavior Planner"
-                w="80.0" x="100.0" y="190.0"/>
+                w="80.0" x="30.0" y="160.0"/>
             <element h="50.0" id="BMLFileReader-1399293802729-519"
                 module="BMLFileReader" name="BML File Reader" w="80.0"
-                x="230.0" y="90.0">
+                x="180.0" y="30.0">
                 <window h="108" visible="true" w="517" x="11" y="120"/>
             </element>
             <element h="50.0"
                 id="AnimationKeyframePerformer-1527250736795-648"
                 module="AnimationKeyframePerformer" name="Body&#xa;"
-                w="300.0" x="360.0" y="180.0"/>
+                w="300.0" x="310.0" y="160.0"/>
             <element h="50.0" id="FMLFileReader-1399293768562-603"
                 module="FMLFileReader" name="FML File Reader" w="80.0"
-                x="100.0" y="90.0">
+                x="30.0" y="30.0">
                 <parameter name="saveFileName" value="Examples\DemoEN\1-Welcome.xml"/>
                 <window h="108" visible="true" w="517" x="10" y="11"/>
             </element>
-            
             <element h="50.0" id="PlayerOgre-1527250260600-793"
-                module="PlayerOgre" name="PlayerOgre" w="80.0" x="890.0" y="270.0">
+                module="PlayerOgre" name="PlayerOgre" w="80.0" x="890.0" y="260.0">
                 <parameter name="posX" value="0.6300183534622192"/>
                 <parameter name="posY" value="1.3827651739120483"/>
                 <parameter name="posZ" value="0.06465750932693481"/>
@@ -100,15 +99,15 @@
             </element>
             <element h="50.0" id="Cereproc TTS-1535729881954-510"
                 module="Cereproc TTS" name="Cereproc TTS" w="80.0"
-                x="700.0" y="90.0"/>
+                x="670.0" y="80.0"/>
         </element>
-        <element h="510.0" id="CharacterManager-2399294977720-682"
+        <element h="420.0" id="CharacterManager-2399294977720-682"
             module="CharacterManager" name="Character Manager" w="780.0"
             x="40.0" y="510.0">
             <parameter name="character_name" value="CAMILLE"/>
             <window h="84" visible="false" w="136" x="0" y="0"/>
             <element h="50.0" id="TTS-2399295010169-541" module="TTS"
-                name="TTS" w="80.0" x="690.0" y="540.0">
+                name="TTS" w="80.0" x="550.0" y="10.0">
                 <parameter name="doPhonemes" value="true"/>
                 <parameter name="doTemporize" value="true"/>
                 <parameter name="doAudio" value="true"/>
@@ -117,24 +116,24 @@
             <element h="50.0"
                 id="FaceKeyframePerformer-2399293828449-719"
                 module="FaceKeyframePerformer" name="Face" w="80.0"
-                x="360.0" y="760.0">
+                x="330.0" y="160.0">
                 <parameter name="blinking" value="true"/>
             </element>
             <element h="120.0" id="LipBlender-2399294913649-928"
                 module="LipBlender" name="Lip Blender" w="80.0"
-                x="580.0" y="760.0"/>
+                x="540.0" y="170.0"/>
             <element h="50.0" id="SimpleAUPerformer-2399293868968-624"
                 module="SimpleAUPerformer" name="AU to FAP" w="80.0"
-                x="470.0" y="760.0"/>
+                x="430.0" y="160.0"/>
             <element h="50.0" id="LipModel-2399293841961-576"
-                module="LipModel" name="Lips" w="190.0" x="360.0" y="830.0"/>
+                module="LipModel" name="Lips" w="190.0" x="330.0" y="250.0"/>
             <element h="50.0"
                 id="AudioKeyframePerformer-2399293852121-170"
-                module="AudioKeyframePerformer" name="Audio" w="300.0"
-                x="360.0" y="910.0"/>
-            <element h="260.0" id="MPEG4Animatable-2399294936433-809"
+                module="AudioKeyframePerformer" name="Audio" w="310.0"
+                x="310.0" y="320.0"/>
+            <element h="180.0" id="MPEG4Animatable-2399294936433-809"
                 module="MPEG4Animatable" name="MPEG4 Animatable"
-                w="80.0" x="690.0" y="690.0">
+                w="80.0" x="680.0" y="140.0">
                 <parameter name="posX" value="-3.5"/>
                 <parameter name="scaleX" value="1.0"/>
                 <parameter name="posY" value="0.0"/>
@@ -149,39 +148,40 @@
             </element>
             <element h="270.0" id="BehaviorRealizer-2399293788592-686"
                 module="BehaviorRealizer" name="Behavior Realizer"
-                w="80.0" x="230.0" y="690.0"/>
+                w="80.0" x="160.0" y="100.0"/>
             <element h="270.0" id="BehaviorPlanner-2399293781312-494"
                 module="BehaviorPlanner" name="Behavior Planner"
-                w="80.0" x="100.0" y="690.0"/>
+                w="80.0" x="40.0" y="100.0"/>
             <element h="50.0" id="BMLFileReader-2399293802729-519"
                 module="BMLFileReader" name="BML File Reader" w="80.0"
-                x="230.0" y="590.0">
+                x="160.0" y="20.0">
                 <window h="108" visible="true" w="517" x="9" y="390"/>
             </element>
             <element h="50.0"
                 id="AnimationKeyframePerformer-2527250736795-648"
                 module="AnimationKeyframePerformer" name="Body&#xa;"
-                w="300.0" x="360.0" y="680.0"/>
+                w="300.0" x="320.0" y="80.0"/>
             <element h="50.0" id="FMLFileReader-2399293768562-603"
                 module="FMLFileReader" name="FML File Reader" w="80.0"
-                x="100.0" y="590.0">
-                <parameter name="saveFileName" value="Examples\DemoEN\1-Welcome.xml"/>
+                x="40.0" y="20.0">
+                <parameter name="saveFileName" value="D:\projets\2018\greta\bin\Examples\DemoEN\2-SeeYou.xml"/>
                 <window h="108" visible="true" w="517" x="9" y="274"/>
-            </element>            
+            </element>
             <element h="50.0" id="Cereproc TTS-1535732033474-390"
                 module="Cereproc TTS" name="Cereproc TTS" w="80.0"
-                x="690.0" y="610.0"/>
+                x="670.0" y="10.0"/>
         </element>
     </elements>
     <connections>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="AudioKeyframePerformer-2399293852121-170" target="MPEG4Animatable-2399294936433-809"/>
-        <connection connector="addLogOutput"
-            source="Logs-1399294983408-198" target="LogFrame-1399294990657-788"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BMLFileReader-1399293802729-519" target="BehaviorRealizer-1399293788592-686"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="FaceKeyframePerformer-2399293828449-719" target="SimpleAUPerformer-2399293868968-624"/>
+        <connection connector="LipSourceForLipBlender"
+            source="LipModel-2399293841961-576" target="LipBlender-2399294913649-928"/>
+        <connection connector="setTTS" source="TTS-2399295010169-541" target="Cereproc TTS-1535732033474-390"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4Animatable-1399294936433-809" target="Environment-1399294930513-476"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-2399293868968-624" target="LipBlender-2399294913649-928"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="BehaviorRealizer-1399293788592-686" target="FaceKeyframePerformer-1399293828449-719"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -190,10 +190,22 @@
             source="BehaviorRealizer-1399293788592-686" target="AnimationKeyframePerformer-1527250736795-648"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="BehaviorRealizer-1399293788592-686" target="LipModel-1399293841961-576"/>
+        <connection connector="LipSourceForLipBlender"
+            source="LipModel-1399293841961-576" target="LipBlender-1399294913649-928"/>
+        <connection connector="addLogOutput"
+            source="Logs-1399294983408-198" target="LogFrame-1399294990657-788"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="FaceKeyframePerformer-1399293828449-719" target="SimpleAUPerformer-1399293868968-624"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="AudioKeyframePerformer-2399293852121-170" target="MPEG4Animatable-2399294936433-809"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BMLFileReader-2399293802729-519" target="BehaviorRealizer-2399293788592-686"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="LipBlender-1399294913649-928" target="MPEG4Animatable-1399294936433-809"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="FaceKeyframePerformer-2399293828449-719" target="SimpleAUPerformer-2399293868968-624"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="AnimationKeyframePerformer-2527250736795-648" target="MPEG4Animatable-2399294936433-809"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FMLFileReader-1399293768562-603" target="BehaviorPlanner-1399293781312-494"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="BehaviorRealizer-2399293788592-686" target="FaceKeyframePerformer-2399293828449-719"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -202,39 +214,26 @@
             source="BehaviorRealizer-2399293788592-686" target="AnimationKeyframePerformer-2527250736795-648"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="BehaviorRealizer-2399293788592-686" target="LipModel-2399293841961-576"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FMLFileReader-1399293768562-603" target="BehaviorPlanner-1399293781312-494"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="PlayerOgre-1527250260600-793" target="Environment-1399294930513-476"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FMLFileReader-2399293768562-603" target="BehaviorPlanner-2399293781312-494"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BMLFileReader-2399293802729-519" target="BehaviorRealizer-2399293788592-686"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="SimpleAUPerformer-2399293868968-624" target="LipBlender-2399294913649-928"/>
-        <connection connector="setTTS" source="TTS-2399295010169-541" target="Cereproc TTS-1535732033474-390"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BehaviorPlanner-1399293781312-494" target="BehaviorRealizer-1399293788592-686"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BehaviorPlanner-2399293781312-494" target="BehaviorRealizer-2399293788592-686"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="SimpleAUPerformer-1399293868968-624" target="LipBlender-1399294913649-928"/>
-        <connection connector="LipSourceForLipBlender"
-            source="LipModel-1399293841961-576" target="LipBlender-1399294913649-928"/>
-        <connection connector="setTTS" source="TTS-1399295010169-541" target="Cereproc TTS-1535729881954-510"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="LipBlender-2399294913649-928" target="MPEG4Animatable-2399294936433-809"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="AnimationKeyframePerformer-1527250736795-648" target="MPEG4Animatable-1399294936433-809"/>
-        <connection connector="LipSourceForLipBlender"
-            source="LipModel-2399293841961-576" target="LipBlender-2399294913649-928"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="AudioKeyframePerformer-1399293852121-170" target="MPEG4Animatable-1399294936433-809"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="PlayerOgre-1527250260600-793" target="Environment-1399294930513-476"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BehaviorPlanner-2399293781312-494" target="BehaviorRealizer-2399293788592-686"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BehaviorPlanner-1399293781312-494" target="BehaviorRealizer-1399293788592-686"/>
+        <connection connector="setTTS" source="TTS-1399295010169-541" target="Cereproc TTS-1535729881954-510"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4Animatable-2399294936433-809" target="Environment-1399294930513-476"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="FaceKeyframePerformer-1399293828449-719" target="SimpleAUPerformer-1399293868968-624"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="LipBlender-2399294913649-928" target="MPEG4Animatable-2399294936433-809"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FMLFileReader-2399293768562-603" target="BehaviorPlanner-2399293781312-494"/>
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="AnimationKeyframePerformer-2527250736795-648" target="MPEG4Animatable-2399294936433-809"/>
+            source="AnimationKeyframePerformer-1527250736795-648" target="MPEG4Animatable-1399294936433-809"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-1399293868968-624" target="LipBlender-1399294913649-928"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BMLFileReader-1399293802729-519" target="BehaviorRealizer-1399293788592-686"/>
     </connections>
 </modulated>

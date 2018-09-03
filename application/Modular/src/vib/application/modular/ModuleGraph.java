@@ -318,14 +318,6 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
             modules.add(selsected);
         }
         sortCellsAndModulesTree(treeModules);
-       /*
-        for(Module m : modules){
-            for(Connection c : getConnectionsOfModule(m)){
-                graph.orderCells(false, new Object[]{c.getCell()});
-            }
-            graph.orderCells(false, new Object[]{m.getCell()});
-        }*/
-
     }
 
 
@@ -396,10 +388,8 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         if (module != null){
             if(parent!=null){
                 module.setParent(parent);
-                getTreeNode(parent).addChild(module); 
-                
-            }
-            
+                getTreeNode(parent).addChild(module);                
+            }            
             modules.add(module);
         }
         checkConnectables();
@@ -662,7 +652,6 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
     @Override
     protected mxGraphHandler createGraphHandler() {
         return new mxGraphHandler(this) {
-
             @Override
             public void mouseClicked(MouseEvent me) {
                 super.mouseClicked(me);
@@ -684,7 +673,8 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                super.mouseReleased(me);
+                super.mouseReleased(me);                
+               
                 sortCellsAndModules();
                 checkArrows();
                 checkConnectables();

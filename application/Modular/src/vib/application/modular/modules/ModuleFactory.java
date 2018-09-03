@@ -122,12 +122,12 @@ public class ModuleFactory {
                         }
                     }
                 }
-
+                mxCell parentCell = parent!=null?parent.getCell():null;
                 return new Module(
                     moduleInfo,
                     id,
                     object,
-                    (mxCell)(graph.insertVertex(null, id, cellName, x, y , w, h, Style.getMapper().getVertexStyle(moduleInfo.style))),
+                    (mxCell)(graph.insertVertex(parentCell, id, cellName, x, y , w, h, Style.getMapper().getVertexStyle(moduleInfo.style))),
                     jFrame){
                         @Override
                         public Map<String, String> getParams() {

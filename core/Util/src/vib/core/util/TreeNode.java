@@ -51,6 +51,10 @@ public class TreeNode<T>{
     public List<TreeNode> getChildren() {
         return children;
     }
+    
+    public int getChildrenCount() {
+        return children.size();
+    }
 
     public T getData() {
         return data;

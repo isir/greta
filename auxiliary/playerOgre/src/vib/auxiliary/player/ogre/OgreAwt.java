@@ -26,7 +26,6 @@ import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Vector3;
 import vib.auxiliary.player.ogre.natives.PixelBox;
 import vib.auxiliary.player.ogre.capture.Capturable;
-import vib.core.util.CharacterManager;
 import vib.core.util.audio.AudioOutput;
 import vib.core.util.environment.Environment;
 import vib.core.util.environment.Leaf;

@@ -23,8 +23,6 @@ import vib.auxiliary.player.ogre.natives.SceneManager;
 import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Quaternion;
 import vib.auxiliary.player.ogre.natives.Vector3;
-import vib.core.util.CharacterManager;
-import vib.core.util.CharacterDependentAdapter;
 
 /**
  * This class is an helper to manipulate the cameras from Ogre.<br/>

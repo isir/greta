@@ -51,9 +51,9 @@ public class OgreAwt extends java.awt.Canvas implements Capturable{
     private double cameraDefaultRoll;
     private boolean initialized;
     private AudioOutput defaultAudioOutput;
-    private CharacterManager cm;
 
-    public OgreAwt(CharacterManager cm, AudioOutput audioOutput) {
+
+    public OgreAwt(AudioOutput audioOutput) {
         cameraDefaultPosX = 0;
         cameraDefaultPosY = 0.7;
         cameraDefaultPosZ = 1.3;
@@ -62,11 +62,11 @@ public class OgreAwt extends java.awt.Canvas implements Capturable{
         cameraDefaultRoll = 0;
         initialized = false;
         defaultAudioOutput = audioOutput;
-        this.cm = cm;
+        
     }
 
-    public OgreAwt(CharacterManager cm) {
-        this(cm,null);
+    public OgreAwt() {
+        this(null);
     }
 
     @Override
@@ -106,7 +106,7 @@ public class OgreAwt extends java.awt.Canvas implements Capturable{
                 SceneNode rootSceneNode = oel.rootSceneNode;
 
                 // create camera
-                camera = new Camera(cm,sceneManager, rootSceneNode, "AWT Camera " + (cameraCount++));
+                camera = new Camera(sceneManager, rootSceneNode, "AWT Camera " + (cameraCount++));
                 camera.setPosition(cameraDefaultPosX, cameraDefaultPosY, cameraDefaultPosZ);
                 camera.pitch(cameraDefaultPitch);
                 camera.yaw(cameraDefaultYaw);

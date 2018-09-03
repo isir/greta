@@ -36,7 +36,7 @@ import vib.core.util.CharacterDependentAdapter;
  * &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|_ camera
  * @author Andre-Marie Pez
  */
-public class Camera extends CharacterDependentAdapter{
+public class Camera {
 
     private SceneNode translationNode;
     private SceneNode yawNode;
@@ -49,13 +49,13 @@ public class Camera extends CharacterDependentAdapter{
 
     /**
      * Creates a new {@code Camera}
-     * @param cm the {@code CharacterManager} to inform the CharactedManager of its camera's id
+     
      * @param sceneManager the {@code SceneManager} that will creates the OgreCamera
      * @param parentNode the {@code SceneNode} where this {@code Camera} is attached to
      * @param idCamera the identifier of this {@code Camera}, it must be unique in the sceneManager
      */
-    public Camera(CharacterManager cm,SceneManager sceneManager, SceneNode parentNode, String idCamera){
-        setCharacterManager(cm);
+    public Camera(SceneManager sceneManager, SceneNode parentNode, String idCamera){
+        
         translationNode = parentNode.createChildSceneNode();
         yawNode         = translationNode.createChildSceneNode();
         pitchNode       = yawNode.createChildSceneNode();
@@ -77,7 +77,7 @@ public class Camera extends CharacterDependentAdapter{
         rotationAdaptor = new vib.core.util.math.Quaternion(new Vec3d(0, 1, 0), (float)Math.PI);
         backgroundColor = new Vec3d(0.5f, 0.5f, 0.5f);
         
-        cm.currentCameraId = mic.getIdentifier();
+        //cm.currentCameraId = mic.getIdentifier();
     }
 
     public void setBackgroundColor(Vec3d color){
@@ -243,9 +243,10 @@ public class Camera extends CharacterDependentAdapter{
     public Mixer getMic(){
         return mic;
     }
-
+/*
     @Override
     public void onCharacterChanged() {
         getCharacterManager().currentCameraId = mic.getIdentifier();
     }
+    */
 }

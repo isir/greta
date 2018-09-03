@@ -35,11 +35,11 @@ public class OgreFrame extends JFrame implements Capturable{
 
     OgreAwt ogreView;
     protected static final int BUTTON_WIREFRAME = 1;
-    public OgreFrame(CharacterManager cm){
-        this(cm,Ogre.DEBUG ? 1 : 0); // 0 - Without the 'Wireframe' button
+    public OgreFrame(){
+        this(Ogre.DEBUG ? 1 : 0); // 0 - Without the 'Wireframe' button
                                   // 1 - With the 'Wireframe' button
     }
-    protected OgreFrame(CharacterManager cm,int buttons){
+    protected OgreFrame(int buttons){
         super("Player");
         Dimension d = new Dimension(
                 720, 576 //HD
@@ -48,7 +48,7 @@ public class OgreFrame extends JFrame implements Capturable{
         setSize(d);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ogreView = new OgreAwt(cm, new Line());
+        ogreView = new OgreAwt( new Line());
         ogreView.setPreferredSize(d);
         add(ogreView);
         if(buttons>0){

@@ -6,6 +6,16 @@
             <parameter name="file" value="vib.ini"/>
             <window h="531" visible="false" w="505" x="0" y="0"/>
         </element>
+		<element h="50.0" id="PlayerOgre-1527250260600-793"
+			module="PlayerOgre" name="PlayerOgre" w="80.0" x="890.0" y="260.0">
+			<parameter name="posX" value="0.6300183534622192"/>
+			<parameter name="posY" value="1.3827651739120483"/>
+			<parameter name="posZ" value="0.06465750932693481"/>
+			<parameter name="roll" value="0.0"/>
+			<parameter name="pitch" value="-0.07275039702653885"/>
+			<parameter name="yaw" value="1.1946357488632202"/>
+			<window h="623" visible="true" w="738" x="1159" y="57"/>
+		</element>
         <element h="50.0" id="Logs-1399294983408-198" module="Logs"
             name="Logs" w="80.0" x="890.0" y="90.0">
             <parameter name="debug" value="true"/>
@@ -86,17 +96,7 @@
                 x="30.0" y="30.0">
                 <parameter name="saveFileName" value="Examples\DemoEN\1-Welcome.xml"/>
                 <window h="108" visible="true" w="517" x="10" y="11"/>
-            </element>
-            <element h="50.0" id="PlayerOgre-1527250260600-793"
-                module="PlayerOgre" name="PlayerOgre" w="80.0" x="890.0" y="260.0">
-                <parameter name="posX" value="0.6300183534622192"/>
-                <parameter name="posY" value="1.3827651739120483"/>
-                <parameter name="posZ" value="0.06465750932693481"/>
-                <parameter name="roll" value="0.0"/>
-                <parameter name="pitch" value="-0.07275039702653885"/>
-                <parameter name="yaw" value="1.1946357488632202"/>
-                <window h="623" visible="true" w="738" x="1159" y="57"/>
-            </element>
+            </element>            
             <element h="50.0" id="Cereproc TTS-1535729881954-510"
                 module="Cereproc TTS" name="Cereproc TTS" w="80.0"
                 x="670.0" y="80.0"/>

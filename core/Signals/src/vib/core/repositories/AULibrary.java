@@ -86,9 +86,8 @@ public class AULibrary extends ParameterSet<FLExpression> implements CharacterDe
         //XMLTree facialexpressions = parser.parseFileWithXSD(definition,xsdFile);
         XMLTree facialexpressions = parser.parseFile(definition);
 
-        XMLTree root = facialexpressions.getRootNode();
-
         if (facialexpressions != null) {
+            XMLTree root = facialexpressions.getRootNode();
             for (XMLTree facialexpression : root.getChildrenElement()) {
                 if (facialexpression.isNamed("actiondeclaration")) {
                     //create FLE

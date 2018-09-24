@@ -90,4 +90,10 @@ public class PseudoIntentionBoundary extends Boundary implements Intention{
     public String getMode() {
         return "replace";
     }
+    
+    @Override
+    public String getTarget (){
+        return null;
+    }
+    
 }

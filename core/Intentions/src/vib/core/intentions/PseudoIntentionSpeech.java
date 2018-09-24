@@ -63,4 +63,10 @@ public class PseudoIntentionSpeech extends Speech implements Intention{
     public String getMode() {
         return "replace";
     }
+    
+    @Override
+    public String getTarget (){
+        return null;
+    }
+
 }

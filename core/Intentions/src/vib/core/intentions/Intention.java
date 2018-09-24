@@ -51,4 +51,7 @@ public interface Intention extends Temporizable{
     public boolean hasCharacter();
 
     public String getCharacter();
+    
+    public String getTarget ();
+    
 }

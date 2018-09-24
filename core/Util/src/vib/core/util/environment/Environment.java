@@ -217,16 +217,33 @@ public class Environment {
         }
         Vec3d relativeTargetPos = getRelativeTargetVector(target, source, sourceOrient);
 
-        Vec3d onHorizontalPlane = new Vec3d(relativeTargetPos.x(), 0, relativeTargetPos.z());
+        Vec3d onHorizontalPlane = new Vec3d(relativeTargetPos.x(), 0.0, relativeTargetPos.z());
         onHorizontalPlane.normalize();
-        double yawAngle = Math.acos(onHorizontalPlane.z()) * Math.signum(onHorizontalPlane.x());
+        double yawAngle = 0.0;
+        
+        // according to the head orientation and the target position the rotation angle will be different
+        // the head it is supposed to be the center of the coordinate axis
+        // according to the quadrant in which is positioned the target the rotation anlge will be changed 
+        
+            if (onHorizontalPlane.x() >= 0.0 && onHorizontalPlane.z() > 0.0){
+                yawAngle = Math.toDegrees(Math.abs(Math.acos(onHorizontalPlane.z())));
+            }else if (onHorizontalPlane.x() >= 0 && onHorizontalPlane.z() < 0){
+                yawAngle = 90.0 + Math.toDegrees(Math.abs(Math.asin(onHorizontalPlane.z())));
+            }else if (onHorizontalPlane.x() <= 0 && onHorizontalPlane.z() < 0){
+                yawAngle = -90 -1*Math.toDegrees(Math.abs(Math.asin(onHorizontalPlane.z())));
+            }else if (onHorizontalPlane.x() <= 0 && onHorizontalPlane.z() > 0){
+                yawAngle =  -1*Math.toDegrees(Math.abs(Math.acos(onHorizontalPlane.z())));
+            }else{
+                yawAngle = 0.0;
+            }
+
         relativeTargetPos.normalize();
         double pitchAngle = Math.asin(relativeTargetPos.y());
 
         //theta (yaw, horizontal), phi (pitch, vertical), 0 (roll, "dutch angle")
         //if theta is positive, target to the left
         //if phi is positive, target is upwards
-        return new Vec3d(yawAngle, pitchAngle, 0.0f);
+        return new Vec3d(Math.toRadians(yawAngle), pitchAngle, 0.0f);
     }
 
     /* This should work for two eyes... However, best use symbolic notations

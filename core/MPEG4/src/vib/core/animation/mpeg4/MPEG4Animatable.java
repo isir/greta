@@ -16,6 +16,8 @@
  */
 package vib.core.animation.mpeg4;
 
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import vib.core.animation.mpeg4.bap.BAPFrame;
 import vib.core.animation.mpeg4.bap.BAPFramesEmitter;
@@ -25,8 +27,10 @@ import vib.core.animation.mpeg4.fap.FAPFrame;
 import vib.core.animation.mpeg4.fap.FAPFrameEmitter;
 import vib.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
 import vib.core.animation.mpeg4.fap.FAPFramePerformer;
+import vib.core.animation.mpeg4.fap.FAPType;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
+import vib.core.util.IniParameter;
 import vib.core.util.Mode;
 import vib.core.util.animationparameters.APFrameList;
 import vib.core.util.audio.Audio;
@@ -52,6 +56,9 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
     private FAPFrameEmitterImpl fapEmitter = new FAPFrameEmitterImpl();
     private AudioEmitterImpl audioEmitter = new AudioEmitterImpl();
     
+    public HashMap<String,List<IniParameter>> curPos = new HashMap<String,List<IniParameter>>();  
+    public List<IniParameter> ListcurPos = Arrays.asList(new IniParameter[13]);
+    
     private CharacterManager characterManager;
 
     /**
@@ -73,7 +80,7 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
             this.characterManager.remove(this);
         this.characterManager = characterManager;
         characterManager.add(this);
-    }
+    }    
     
     public static CharacterManager getCharacterManagerStatic(){
         return CharacterManager.getStaticInstance();
@@ -165,6 +172,25 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
     }
 
     public FAPFrame getCurrentFAPFrame() {
+        
+        
+        
+        ListcurPos.set(0, new IniParameter("head_pitch", String.valueOf(this.getRotationNode().getOrientation().x())));
+        ListcurPos.set(1, new IniParameter("head_yaw", String.valueOf(this.getRotationNode().getOrientation().y())));
+        ListcurPos.set(2, new IniParameter("head_roll", String.valueOf(this.getRotationNode().getOrientation().z())));
+        ListcurPos.set(3, new IniParameter("head_w", String.valueOf(this.getRotationNode().getOrientation().w())));
+        ListcurPos.set(4, new IniParameter("pitch_l_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.pitch_l_eyeball))));
+        ListcurPos.set(5, new IniParameter("yaw_l_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.yaw_l_eyeball))));
+        ListcurPos.set(6, new IniParameter("thrust_l_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.thrust_l_eyeball))));
+        ListcurPos.set(7, new IniParameter("pitch_r_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.pitch_r_eyeball))));
+        ListcurPos.set(8, new IniParameter("yaw_r_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.yaw_r_eyeball))));
+        ListcurPos.set(9, new IniParameter("thrust_r_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.thrust_r_eyeball))));
+        ListcurPos.set(10, new IniParameter("head_x", String.valueOf(headNode.getGlobalCoordinates().x())));
+        ListcurPos.set(11, new IniParameter("head_y", String.valueOf(headNode.getGlobalCoordinates().y())));
+        ListcurPos.set(12, new IniParameter("head_z", String.valueOf(headNode.getGlobalCoordinates().z())));
+
+        getCharacterManager().currentPosition = ListcurPos;  
+
         return fapFrames.getCurrentFrame();
     }
 

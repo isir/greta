@@ -23,6 +23,7 @@ import vib.core.behaviorplanner.baseline.BehaviorQualityComputer;
 import vib.core.behaviorplanner.baseline.DynamicLine;
 import vib.core.behaviorplanner.lexicon.BehaviorSet;
 import vib.core.behaviorplanner.lexicon.Lexicon;
+import vib.core.behaviorplanner.lexicon.SignalItem;
 import vib.core.behaviorplanner.strokefillers.EmptyStrokeFiller;
 import vib.core.behaviorplanner.strokefillers.StrokeFiller;
 import vib.core.ideationalunits.IdeationalUnit;
@@ -31,6 +32,7 @@ import vib.core.intentions.IdeationalUnitIntention;
 import vib.core.intentions.Intention;
 import vib.core.intentions.IntentionTargetable;
 import vib.core.intentions.IntentionPerformer;
+import vib.core.signals.GazeSignal;
 import vib.core.signals.Signal;
 import vib.core.signals.SignalTargetable;
 import vib.core.signals.SignalEmitter;
@@ -225,6 +227,13 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             //find the correponding BehaviorSet
             BehaviorSet set = lexicon.fromIntentionToBehaviorSet(intention, selector.getType());
 
+            // in diectic if we have the target attribute the Agent have to use the gaze 
+            BehaviorSet deict_set = new BehaviorSet("deictic-gaze");
+            // if target attribute is != null a new behaviorset for the gaze is crated 
+            if (intention.getName().equals("deictic") && (intention.getTarget()!= null || intention.getTarget()!= "")){
+                SignalItem gaz = new SignalItem("1", "gaze", null);
+                deict_set.add(gaz);
+            }
 
             //search existing signals durring the intention :
             List<Signal> existingSignals = new ArrayList<Signal>();
@@ -248,6 +257,15 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             //but if signalsReturned is null, it means that the selector cannot performe this kind of intention
             //  so there is a problem with the choice of the selector.
 
+            // if the behaviorset for the gaze is != null it is created a GazeSignal with target like find in the fml, influence null and it is reported also the character_id
+            if (deict_set.getBaseSignals().size() != 0){
+                List<Signal> sign = selector.selectFrom(intention, deict_set, dynamicline, existingSignals, getCharacterManager());
+                GazeSignal signa = (GazeSignal) sign.get(0);
+                signa.setTarget(intention.getTarget());
+                signa.setInfluence(null);
+                signa.setCharacterManager(this.getCharacterManager());
+                signalsReturned.add(signa);
+            }
 
             if (signalsReturned != null) {
                 for (Signal toAdd : signalsReturned) {

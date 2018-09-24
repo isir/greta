@@ -164,6 +164,14 @@ public class FMLTranslator {
                     } else {
                         //juste instanciate other functions
                         intention = new BasicIntention(function.getName(), f_id, f_type, f_start, f_end, f_importance);
+                        if (function.getName().equals("deictic")){
+                            String targ = function.getAttribute("target");
+                            if (targ != null || targ != ""){
+                                BasicIntention intent = new BasicIntention (function.getName(), f_id, f_type, f_start, f_end, f_importance);
+                                intent.setTarget(targ);
+                                intention = intent;              
+                            }
+                        }
                     }
 
                     if (function.hasAttribute("character") && intention instanceof BasicIntention) {

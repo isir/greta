@@ -63,5 +63,9 @@ public class LaughIntention extends Laugh implements Intention{
     public String getCharacter() {
         return null;
     }
-
+    
+    @Override
+    public String getTarget (){
+        return null;
+    }
 }

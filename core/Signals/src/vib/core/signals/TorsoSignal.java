@@ -24,7 +24,10 @@ package vib.core.signals;
  * @author Brice Donval
  */
 public class TorsoSignal extends SpineSignal {
-
+    
+    // variable to know if we have to move just the shoulder or also the rest of the torso 
+    public boolean shoulder = false;
+    
     public TorsoSignal(String id) {
         super(id);
     }
@@ -32,6 +35,13 @@ public class TorsoSignal extends SpineSignal {
     @Override
     public String getModality() {
         return "torso";
+    }
+    
+    public boolean getShoulder() {
+        return shoulder;
+    }
+    
+    public void setModality(String modality) {
     }
 
 }

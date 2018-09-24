@@ -18,6 +18,7 @@ package vib.core.util;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,6 +52,11 @@ public class CharacterManager {
     private String id;
     private TTS tts;
     
+    
+    //public static  List<IniParameter> CurrentPosition = Arrays.asList(new IniParameter[13]);
+    // Hashmap to store for each agent the current position of each body part
+    public  List<IniParameter> currentPosition = new ArrayList<IniParameter>();
+    
     static{
         getStaticInstance();
     }
@@ -73,6 +79,7 @@ public class CharacterManager {
         characterDefinitions = new IniManager((new File(filename)).getAbsolutePath());
         setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER")); 
         count++;
+        
     }
     
     public CharacterManager(){

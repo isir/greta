@@ -38,6 +38,9 @@ import vib.core.repositories.SignalFiller;
 import vib.core.signals.Signal;
 import vib.core.signals.SignalPerformer;
 import vib.core.signals.gesture.PointingSignal;
+import vib.core.util.CharacterDependent;
+import vib.core.util.CharacterManager;
+import vib.core.util.IniManager;
 import vib.core.util.Mode;
 import vib.core.util.enums.CompositionType;
 import vib.core.util.environment.Environment;
@@ -56,7 +59,7 @@ import vib.core.util.time.Temporizer;
  * @navassoc - - * vib.core.keyframes.Keyframe
  * @inavassoc - - * vib.core.signals.Signal
  */
-public class Realizer extends CallbackSender implements SignalPerformer, KeyframeEmitter {
+public class Realizer extends CallbackSender implements SignalPerformer, KeyframeEmitter, CharacterDependent {
 
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
@@ -65,10 +68,12 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     private FaceKeyframeGenerator faceGenerator;
     private GestureKeyframeGenerator gestureGenerator;
     private Comparator<Keyframe> keyframeComparator;
-    private Environment environment;
+    private Environment environment = new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));;
     private double lastKeyFrameTime;
+    private CharacterManager characterManager;
 
-    public Realizer() {
+    public Realizer(CharacterManager cm) {
+        setCharacterManager(cm);
         keyframePerformers = new ArrayList<KeyframePerformer>();
         generators = new ArrayList<KeyframeGenerator>();
 
@@ -82,7 +87,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         //experimental
         generators.add(new ShoulderKeyframeGenerator());
         generators.add(new TorsoKeyframeGenerator());
-        gazeGenerator = new GazeKeyframeGenerator(generators);
+        gazeGenerator = new GazeKeyframeGenerator(cm,generators);
         faceGenerator = new FaceKeyframeGenerator();
 
         keyframeComparator = new Comparator<Keyframe>() {
@@ -132,7 +137,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
 
         // Gaze keyframes for other modalities than eyes are generated before the others
         // and act as "shifts"
-        gazeGenerator.generateBodyKeyframes(keyframes);
+        gazeGenerator.generateBodyKeyframes(keyframes, environment);
 
         for (KeyframeGenerator generator : generators) {
             keyframes.addAll(generator.generateKeyframes());
@@ -140,7 +145,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         Collections.sort(keyframes, keyframeComparator);
 
         // Gaze keyframes for the eyes are generated last
-        gazeGenerator.generateEyesKeyframes(keyframes);
+        gazeGenerator.generateEyesKeyframes(keyframes, environment);
 
         faceGenerator.findExistingAU(keyframes);
         keyframes.addAll(faceGenerator.generateKeyframes());
@@ -234,5 +239,20 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
 
     public void setGestureModifier(GestureKeyframeGenerator.GestureModifier modifier){
         gestureGenerator.setGestureModifier(modifier);
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        //is there something else to do ?
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+        return characterManager;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
     }
 }

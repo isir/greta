@@ -48,7 +48,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
 
     private String origin;
     private String target;
-    private Influence influence = Influence.EYES;
+    private Influence influence;
     private GazeDirection offsetDirection = null;
     private Double offsetAngle = null;
     private boolean isScheduled = false;
@@ -174,7 +174,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
                 return ;
             }
             //TODO : change depending on influence ?
-            if(influence==Influence.EYES || influence == Influence.HEAD) {
+            /*if(influence==Influence.EYES || influence == Influence.HEAD || influence == Influence.SHOULDER || influence == Influence.TORSO ) {*/
                 if(!ready.isConcretized() && !relax.isConcretized())
                 {
                     double totalTime = this.end.getValue() - this.start.getValue();
@@ -190,11 +190,11 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
                     ready.setValue(start.getValue()+(relax.getValue()-start.getValue())/2);
                 }
             isScheduled=true;
-            }
+            /*}
             else
             {
                 //TODO unimplemented yet
-            }
+            }*/
         }
         else
         {
@@ -314,8 +314,11 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
             else
             {
                 //unrecognized influence : should throw exception !
+                // Default null. the influence will be calculated in gazekeyframeGenerator class automaticaly,
+                // according to the rotation anlge to reaéch the target object
+                setInfluence(null); //
                 //default : eyes
-                setInfluence(Influence.EYES);
+                //setInfluence(Influence.EYES);
             }
         }
         //offset
@@ -440,6 +443,21 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         return onesideAUs;
     }//end of method
 
+     public ArrayList<AUItem> getActionUnits() {
+        return actionUnits;
+    }//end of method
+    
+    /**
+     * Adds a {@code AUItem} in the face library item.<br/>
+     *
+     * @param item the {@code AUItem} to add in the set
+     */
+    public void add(AUItem item) {
+        if (item == null) {
+            return; //never add a null objec
+        }
+        actionUnits.add(item);
+    }//end of method
 
     @Override
     public TimeMarker getStart() {
@@ -449,5 +467,8 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     @Override
     public TimeMarker getEnd() {
         return end;
+    }
+    
+    public void setModality(String modality) {
     }
 }

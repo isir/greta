@@ -1831,10 +1831,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 withinEyesLimit = true;
             }
             // N.B. --> limited angles for the eyes have to be positive for both rotation direction 
-            l_limitedYaw = (Math.min(Math.abs(l_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)) / EYES_YAW_LIMIT; // Math.signum(l_yawAngle) * 
-            r_limitedYaw = (Math.min(Math.abs(r_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)) / EYES_YAW_LIMIT; // Math.signum(r_yawAngle) * 
-            l_limitedPitch = (Math.min(Math.abs(l_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedYaw)) / EYES_PITCH_LIMIT; // Math.signum(l_pitchAngle) * 
-            r_limitedPitch = (Math.min(Math.abs(r_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedYaw)) / EYES_PITCH_LIMIT; // Math.signum(r_pitchAngle) * 
+            l_limitedYaw = (Math.min(Math.abs(l_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT; // Math.signum(l_yawAngle) * 
+            r_limitedYaw = (Math.min(Math.abs(r_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT; // Math.signum(r_yawAngle) * 
+            l_limitedPitch = (Math.min(Math.abs(l_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT; // ToDo: distinguish between up and down head pitch limit. now the two values are equal.
+            r_limitedPitch = (Math.min(Math.abs(r_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT;  
 
             return withinEyesLimit;
         }

@@ -1801,24 +1801,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 withinHeadLimit = true;
             }
             
-            
-            /*double ang = Math.abs(h_yawAngle) - 0.261799; // 15°
-            if (ang > Math.PI/2 + 0.261799){ // 90°
-                h_limitedYaw = 1.0;
-                r_limitedYaw = (Math.abs(r_yawAngle) - h_limitedYaw*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT;
-                l_limitedYaw = (Math.abs(l_yawAngle) - h_limitedYaw*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT;
-                
-                if (r_limitedYaw > 1.0 || l_limitedYaw > 1.0){
-                    r_limitedYaw = 1.0;
-                    l_limitedYaw = 1.0;
-                }
-            } else {
-                h_limitedYaw = ang / HEAD_YAW_LIMIT;
-                r_limitedYaw = (Math.abs(r_yawAngle) - h_limitedYaw*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT;
-                l_limitedYaw = (Math.abs(l_yawAngle) - h_limitedYaw*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT;
-            }*/ 
             h_limitedYaw = Math.signum(h_yawAngle) * Math.min(Math.abs(h_yawAngle), HEAD_YAW_LIMIT) / HEAD_YAW_LIMIT; // Math.signum(h_yawAngle) * 
-            //h_limitedPitch = Math.signum(h_pitchAngle) * Math.min(Math.abs(h_pitchAngle), HEAD_YAW_LIMIT) / HEAD_YAW_LIMIT;;
+
             if (h_pitchAngle >= 0.0872665) { // 5°
                 h_limitedPitch = Math.signum(h_pitchAngle) * Math.min(Math.abs(h_pitchAngle), HEAD_PITCH_LIMIT_UP) / HEAD_PITCH_LIMIT_UP; // Math.signum(h_pitchAngle) * 
             }
@@ -1847,10 +1831,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 withinEyesLimit = true;
             }
             // N.B. --> limited angles for the eyes have to be positive for both rotation direction 
-            l_limitedYaw = Math.min(Math.abs(l_yawAngle), EYES_YAW_LIMIT) / EYES_YAW_LIMIT; // Math.signum(l_yawAngle) * 
-            r_limitedYaw = Math.min(Math.abs(r_yawAngle), EYES_YAW_LIMIT) / EYES_YAW_LIMIT; // Math.signum(r_yawAngle) * 
-            l_limitedPitch = Math.min(Math.abs(l_pitchAngle), EYES_PITCH_LIMIT) / EYES_PITCH_LIMIT; // Math.signum(l_pitchAngle) * 
-            r_limitedPitch = Math.min(Math.abs(r_pitchAngle), EYES_PITCH_LIMIT) / EYES_PITCH_LIMIT; // Math.signum(r_pitchAngle) * 
+            l_limitedYaw = (Math.min(Math.abs(l_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)) / EYES_YAW_LIMIT; // Math.signum(l_yawAngle) * 
+            r_limitedYaw = (Math.min(Math.abs(r_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)) / EYES_YAW_LIMIT; // Math.signum(r_yawAngle) * 
+            l_limitedPitch = (Math.min(Math.abs(l_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedYaw)) / EYES_PITCH_LIMIT; // Math.signum(l_pitchAngle) * 
+            r_limitedPitch = (Math.min(Math.abs(r_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedYaw)) / EYES_PITCH_LIMIT; // Math.signum(r_pitchAngle) * 
 
             return withinEyesLimit;
         }
@@ -2101,11 +2085,21 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 }         
             }else {    
                 if (ha.h_pitchAngle > 0.0){
-                    ha.h_limitedPitch =  Math.signum(ha.h_pitchAngle) * (Math.abs(ha.h_pitchAngle) - 0.174533)/HEAD_PITCH_LIMIT_UP;
+                    if (ha.h_pitchAngle > 0.174533) { // 10°
+                        ha.h_limitedPitch = Math.signum(ha.h_pitchAngle) * Math.abs(ha.h_pitchAngle)/HEAD_PITCH_LIMIT_UP;
+                    }else {
+                        ha.h_limitedPitch = 0.0;
+                    }
+                    //ha.h_limitedPitch =  Math.signum(ha.h_pitchAngle) * (Math.abs(ha.h_pitchAngle) - 0.174533)/HEAD_PITCH_LIMIT_UP; //Math.signum(ha.h_pitchAngle) * 
                     ha.r_pitchAngle = (Math.abs(ha.r_pitchAngle) - Math.abs(ha.h_limitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT;
                     ha.l_pitchAngle = (Math.abs(ha.l_pitchAngle) - Math.abs(ha.h_limitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT;
                 }else {
-                    ha.h_limitedPitch =  Math.signum(ha.h_pitchAngle) * (Math.abs(ha.h_pitchAngle) - 0.174533)/HEAD_PITCH_LIMIT_DOWN;
+                    if (ha.h_pitchAngle < -0.174533) { // 10°
+                        ha.h_limitedPitch = Math.signum(ha.h_pitchAngle) * Math.abs(ha.h_pitchAngle)/HEAD_PITCH_LIMIT_DOWN;
+                    }else {
+                        ha.h_limitedPitch = 0.0;
+                    }
+                    //ha.h_limitedPitch =  Math.signum(ha.h_pitchAngle) * (Math.abs(ha.h_pitchAngle) - 0.174533)/HEAD_PITCH_LIMIT_DOWN;// Math.signum(ha.h_pitchAngle) * 
                     ha.r_pitchAngle = (Math.abs(ha.r_pitchAngle) - Math.abs(ha.h_limitedPitch)*HEAD_PITCH_LIMIT_DOWN) / EYES_PITCH_LIMIT;
                     ha.l_pitchAngle = (Math.abs(ha.l_pitchAngle) - Math.abs(ha.h_limitedPitch)*HEAD_PITCH_LIMIT_DOWN) / EYES_PITCH_LIMIT;
                 }

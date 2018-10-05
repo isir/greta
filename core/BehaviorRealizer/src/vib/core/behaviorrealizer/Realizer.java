@@ -68,7 +68,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     private FaceKeyframeGenerator faceGenerator;
     private GestureKeyframeGenerator gestureGenerator;
     private Comparator<Keyframe> keyframeComparator;
-    private Environment environment = new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));;
+    private Environment environment = new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
     private CharacterManager characterManager;
 

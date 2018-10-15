@@ -1032,7 +1032,12 @@ public class BMLTranslator {
      */
     public static synchronized XMLTree SignalsToBML(List<Signal> signals, Mode mode) {
         XMLTree bml = XML.createTree("bml", bmlNameSpace);
-        bml.setAttribute("id", "bml1");
+        // if the bml id is written in the fml file we put the same id in the bml
+        if (mode.getBml_id() != "" || mode.getBml_id() != null){
+            bml.setAttribute("id", mode.getBml_id());
+        }else {// otherwise we put a stadanrd id in the bml file
+            bml.setAttribute("id", "bml1");
+        }
         bml.setAttribute("character", "Greta");
         bml.setAttribute("composition", mode.getCompositionType().toString());
         bml.setAttribute("reaction_type", mode.getReactionType().toString());

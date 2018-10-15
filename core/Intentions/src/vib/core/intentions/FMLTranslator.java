@@ -162,8 +162,14 @@ public class FMLTranslator {
                         ideationalUnit.setMainIntentionId(function.getAttribute("main"));
                         intention = ideationalUnit;
                     } else {
-                        //juste instanciate other functions
-                        intention = new BasicIntention(function.getName(), f_id, f_type, f_start, f_end, f_importance);
+                        intention = null;
+                        // check the type of the function (f_type)
+                        // if the f_tyoe is empty that could be a deictic intention with only the target to gaze so we
+                        // don't need to create an intention because we have just a geze signal created after
+                        if (f_type != ""){
+                            //juste instanciate other functions
+                            intention = new BasicIntention(function.getName(), f_id, f_type, f_start, f_end, f_importance);
+                        }
                         if (function.getName().equals("deictic")){
                             String targ = function.getAttribute("target");
                             if (targ != null || targ != ""){

@@ -1864,9 +1864,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
             withinEyesLimit = false;
             withinHeadLimit = false;
-            
-            
-            
+                  
             //can compute angles to target only if we have an environment
             if (env != null) {
                 
@@ -1881,51 +1879,94 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 Vec3d sizeTarget = null;
                 String id_target = "";
                 
+                Vec3d vec2target = null;
+                
                 if (gaze.getTarget() != null && !gaze.getTarget().isEmpty()) {
                     List<Leaf> lf_tg = env.getListLeaf();
-                    // search the object (leaf) between evironment objects 
-                    for (int iter=0; iter< lf_tg.size()-1; iter++){
-                        Leaf check = lf_tg.get(iter);
-                        boolean test = check.getIdentifier().equals(gaze.getTarget());
-                        // once find the object, take the ID
-                        if (test){
-                            id_target = check.getIdentifier();
-                            sizeTarget = check.getSize();
-                            break;
+                    String T = gaze.getTarget();
+                    if (T.equals("camera")){
+                        for (int iter=0; iter< lf_tg.size()-1; iter++){
+                            Leaf check = lf_tg.get(iter);
+                            boolean test = check.getIdentifier().equals(gaze.getTarget());
+                            // once find the object, take the ID
+                            if (test){
+                                System.out.println("trovato");
+                                //id_target = check.getIdentifier();
+                                //sizeTarget = check.getSize();
+                                //break;
+                            }
                         }
+                    }else if(T.equals("Agent")){
+                        //System.out.println(CharacterManager.getStaticInstance().currentPosition.size());
+                        //System.out.println(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue());              
+                        Vec3d headAgent = new Vec3d( Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue()),
+                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(11).getParamValue()),
+                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(12).getParamValue()));
+                        
+                        Quaternion OrientAgent = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(0).getParamValue()),
+                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(1).getParamValue()),
+                                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(2).getParamValue()),
+                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(3).getParamValue()));
+                        
+                        Vec3d Agl_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_l_eye_offset));
+                        Vec3d Agr_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_r_eye_offset));
+                        
+                        /*Vec3d A_eye_l = new Vec3d(Agl_eye.x(), 0.0, Agl_eye.z());
+                        Vec3d A_eye_r = new Vec3d(Agr_eye.x(), 0.0, Agr_eye.z());
+                        
+                        Vec3d pnt = Vec3d.substraction(A_eye_l, A_eye_r);*/
+                        
+                        // find the poit in the meddle between the two eyes
+                        vec2target = new Vec3d((Agl_eye.x()+Agr_eye.x())/2, Agl_eye.y(), (Agl_eye.z()+Agr_eye.z())/2);
+                        
+                    }else{
+                        // search the object (leaf) between evironment objects 
+                        for (int iter=0; iter< lf_tg.size()-1; iter++){
+                            Leaf check = lf_tg.get(iter);
+                            boolean test = check.getIdentifier().equals(gaze.getTarget());
+                            // once find the object, take the ID
+                            if (test){
+                                id_target = check.getIdentifier();
+                                sizeTarget = check.getSize();
+                                break;
+                            }
+                        }
+                        targetNode = env.getNode(id_target);
                     }
-                    targetNode = env.getNode(id_target);
+                    
                 }       
                 
-                if (targetNode != null) {
+                if (targetNode != null || vec2target != null) {
                     
                     // head position 
-                    Vec3d headPosition = new Vec3d(Double.parseDouble(cm.currentPosition.get(10).getParamValue()), //get(10).getParamValue()),
-                                                    Double.parseDouble(cm.currentPosition.get(11).getParamValue()),
-                                                        Double.parseDouble(cm.currentPosition.get(12).getParamValue()));//((TreeNode) originAudioTreeNode).getGlobalCoordinates();
+                    Vec3d headPosition = new Vec3d(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(10).getParamValue()), //get(10).getParamValue()),
+                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(11).getParamValue()), // cm.currentPosition.get(11).getParamValue()
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(12).getParamValue()));//((TreeNode) originAudioTreeNode).getGlobalCoordinates();
                     
                     
                     //if target is animatable, look at head (for now ! ideally it should be specified in the target attribute)
-                    if (gaze.getTarget() != "Agent"){
-                        if (Animatable.class.isInstance(targetNode)) {
-                            vec2target = ((TreeNode) env.getNode(gaze.getTarget() + "_AudioTreeNode")).getGlobalCoordinates();
-                            vec2target = new Vec3d(vec2target.x(), vec2target.y() + 0.09f, vec2target.z() + 0.13f); // TODO: offsets are in local values, they must be in global values
-                        } else {
+                    
+                    if (Animatable.class.isInstance(targetNode)) {
+                        vec2target = ((TreeNode) env.getNode(gaze.getTarget() + "_AudioTreeNode")).getGlobalCoordinates();
+                        vec2target = new Vec3d(vec2target.x(), vec2target.y() + 0.09f, vec2target.z() + 0.13f); // TODO: offsets are in local values, they must be in global values
+                    } else {
+                        if (vec2target == null){
                             if(targetNode instanceof Leaf){
                                 targetNode = targetNode.getParent();
                             }
                             vec2target = ((TreeNode) targetNode).getGlobalCoordinates();
-                            vec2target.setY(vec2target.y() + sizeTarget.y()/2); // take the center of the Target long y axis
+                            // the objects are placed on the floor. To take the hight we need to take the size along y axis
+                            vec2target.setY(vec2target.y() + sizeTarget.y()/2); // take the center of the Target long y axis (size.y / 2)
                         }
                     }
                     
                     //TO BE: check that it takes the position of correct character 
                     //head oreintation
-                    Quaternion orient = new Quaternion(Double.parseDouble(cm.currentPosition.get(0).getParamValue()),
-                                                        Double.parseDouble(cm.currentPosition.get(1).getParamValue()),
-                                                        Double.parseDouble(cm.currentPosition.get(2).getParamValue()),
-                                                        Double.parseDouble(cm.currentPosition.get(3).getParamValue()));
-                 
+                    Quaternion orient = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(0).getParamValue()),
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(1).getParamValue()),
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(2).getParamValue()),
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(3).getParamValue()));
+                               
                     Vec3d head = Vec3d.addition(headPosition, orient.rotate(headAngles_head_offset));
                     Vec3d l_eye = Vec3d.addition(headPosition, orient.rotate(headAngles_l_eye_offset));
                     Vec3d r_eye = Vec3d.addition(headPosition, orient.rotate(headAngles_r_eye_offset));
@@ -1987,6 +2028,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             withinHeadLimit = limitHeadAngle();
             withinEyesLimit = limitEyesAngles();
         }
+        
     }
 
     public class ShouldersAngles {
@@ -2137,48 +2179,89 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 Vec3d sizeTarget = null;
                 Node targetNode = null;
                 String id_target = "";
+                Vec3d vec2target = null;
                 
                 if (gaze.getTarget() != null && !gaze.getTarget().isEmpty()) {
                     List<Leaf> lf_tg = env.getListLeaf();
-                    // search the object (leaf) between evironment objects 
-                    for (int iter=0; iter< lf_tg.size()-1; iter++){
-                        Leaf check = lf_tg.get(iter);
-                        boolean test = check.getIdentifier().equals(gaze.getTarget());
-                        // once find the object, take the ID
-                        if (test){
-                            id_target = check.getIdentifier(); // TODO not ever the leaf_id is the same of node_id
-                            sizeTarget = check.getSize();
-                            
-                            break;
+                    String T = gaze.getTarget();
+                    if (T.equals("Agent")){                           
+                        //System.out.println(CharacterManager.getStaticInstance().currentPosition.size());
+                        //System.out.println(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue());              
+                        Vec3d headAgent = new Vec3d( Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue()),
+                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(11).getParamValue()),
+                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(12).getParamValue()));
+                        
+                        Quaternion OrientAgent = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(0).getParamValue()),
+                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(1).getParamValue()),
+                                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(2).getParamValue()),
+                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(3).getParamValue()));
+                        
+                        Vec3d Agl_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_l_eye_offset));
+                        Vec3d Agr_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_r_eye_offset));
+                        
+                        /*Vec3d A_eye_l = new Vec3d(Agl_eye.x(), 0.0, Agl_eye.z());
+                        Vec3d A_eye_r = new Vec3d(Agr_eye.x(), 0.0, Agr_eye.z());
+                        
+                        Vec3d pnt = Vec3d.substraction(A_eye_l, A_eye_r);*/
+                        
+                        // find the poit in the meddle between the two eyes
+                        vec2target = new Vec3d((Agl_eye.x()+Agr_eye.x())/2, Agl_eye.y(), (Agl_eye.z()+Agr_eye.z())/2);
+                        
+                        }else if (T.equals("camera")){
+                            for (int iter=0; iter< lf_tg.size()-1; iter++){
+                                Leaf check = lf_tg.get(iter);
+                                boolean test = check.getIdentifier().equals(gaze.getTarget());
+                                // once find the object, take the ID
+                                if (test){
+                                    System.out.println("trovato");
+                                    //id_target = check.getIdentifier();
+                                    //sizeTarget = check.getSize();
+                                    //break;
+                                }
+                            }
+                        }else{
+                        // search the object (leaf) between evironment objects 
+                        for (int iter=0; iter< lf_tg.size()-1; iter++){
+                            Leaf check = lf_tg.get(iter);
+                            boolean test = check.getIdentifier().equals(gaze.getTarget());
+                            // once find the object, take the ID
+                            if (test){
+                                id_target = check.getIdentifier();
+                                sizeTarget = check.getSize();
+                                break;
+                            }
                         }
+                        targetNode = env.getNode(id_target);
                     }
-                    targetNode = env.getNode(id_target);
-                }
+                    
+                }       
                  		
-                Vec3d headPosition = new Vec3d(Double.parseDouble(cm.currentPosition.get(10).getParamValue()),
-                                                Double.parseDouble(cm.currentPosition.get(11).getParamValue()),
-                                                Double.parseDouble(cm.currentPosition.get(12).getParamValue()));//((TreeNode) originAudioTreeNode).getGlobalCoordinates();
-                
-                if (targetNode != null) {
-                        Vec3d vec2target;
+                Vec3d headPosition = new Vec3d(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(10).getParamValue()), //get(10).getParamValue()),
+                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(11).getParamValue()), // cm.currentPosition.get(11).getParamValue()
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(12).getParamValue()));//((TreeNode) originAudioTreeNode).getGlobalCoordinates();
+                    
+                if (targetNode != null || vec2target != null) {
                         //if target is animatable, look at head (for now ! ideally it should be specified in the target attribute)
                         if (Animatable.class.isInstance(targetNode)) {
                                 vec2target = ((TreeNode) env.getNode(gaze.getTarget() + "_AudioTreeNode")).getGlobalCoordinates();
                                 vec2target = new Vec3d(vec2target.x(), vec2target.y() + 0.09f, vec2target.z() + 0.13f); // TODO: offsets are in local values, they must be in global values
                         } else {
+                            if (vec2target == null){
                                 if(targetNode instanceof Leaf){
-                                        targetNode = targetNode.getParent();
+                                    targetNode = targetNode.getParent();
                                 }
-                                vec2target = ((TreeNode) targetNode).getGlobalCoordinates(); // target position
-                                vec2target.setY(vec2target.y() + sizeTarget.y()/2); // take the center of the Target long y axis
+                                vec2target = ((TreeNode) targetNode).getGlobalCoordinates();
+                                // the objects are placed on the floor. To take the hight we need to take the size along y axis
+                                vec2target.setY(vec2target.y() + sizeTarget.y()/2); // take the center of the Target long y axis (size.y / 2)
+                            }
                         }
 
                         // orientation body from MPEG4
-                        Quaternion orient = new Quaternion(Double.parseDouble(cm.currentPosition.get(0).getParamValue()),
-                                                            Double.parseDouble(cm.currentPosition.get(1).getParamValue()),
-                                                            Double.parseDouble(cm.currentPosition.get(2).getParamValue()),
-                                                            Double.parseDouble(cm.currentPosition.get(3).getParamValue()));
-
+                        Quaternion orient = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(0).getParamValue()),
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(1).getParamValue()),
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(2).getParamValue()),
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.currentCharacterId).get(3).getParamValue()));
+                 
                         //TODO : adapt with scale,character meshes
                         Vec3d shoulder = Vec3d.addition(headPosition, orient.rotate(shoulderAngles_head_offset));
 

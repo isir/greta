@@ -262,23 +262,24 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                 List<Signal> sign = selector.selectFrom(intention, deict_set, dynamicline, existingSignals, getCharacterManager());
                 if (sign.size() > 0){
                     GazeSignal signa = (GazeSignal) sign.get(0);
-                    signa.setTarget(intention.getTarget());
                     signa.setInfluence(null);
-                    if (intention.getTarget().equals("Agent")){
+                                      
+                    String tg = intention.getTarget();
+                    int underscoreIndex = tg.indexOf(":");
+                    if (underscoreIndex != -1){
+                        // name agent to gaze
+                        String agent = tg.substring(underscoreIndex + 1).trim();
+                        signa.setTarget(agent); // set agent name as target
                         //System.out.println(CharacterManager.getStaticInstance().currentPosition.keySet().size());
                         for ( String key : CharacterManager.getStaticInstance().currentPosition.keySet() ) {
-
-                            if(key != this.getCharacterManager().currentCharacterId){
-                                signa.setOrigin(key);
+                            // if equal to the character get as target, take the id
+                            //System.out.println(key.get(1));
+                            if(key.equals(agent)){ // check the name of the agent to gaze
+                                signa.setOrigin(key); // take the character id 
                             }
                         }
-                        /*List<String> chars = (List<String>) CharacterMan  ager.getStaticInstance().currentPosition.keySet();
-                        for (int i = 0; i< CharacterManager.getStaticInstance().currentPosition.keySet().size(); ++i){             
-                            if(chars.get(i) != this.getCharacterManager().currentCharacterId){
-                                signa.setOrigin(chars.get(i));
-                            }
-                        }*/
                     }else {
+                        signa.setTarget(intention.getTarget());
                         signa.setCharacterManager(this.getCharacterManager());
                     }
                     signalsReturned.add(signa);

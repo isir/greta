@@ -16,6 +16,7 @@
  */
 package vib.core.animation.mpeg4;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -188,7 +189,12 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
         ListcurPos.set(11, new IniParameter("head_y", String.valueOf(headNode.getGlobalCoordinates().y())));
         ListcurPos.set(12, new IniParameter("head_z", String.valueOf(headNode.getGlobalCoordinates().z())));
 
-        CharacterManager.getStaticInstance().currentPosition.put(getCharacterManager().currentCharacterId, ListcurPos);
+        /*List<String> charName_id = new ArrayList<String>();
+        charName_id.add(0, getCharacterManager().currentCharacterId);
+        charName_id.add(1, getCharacterManager().getCurrentCharacterName());*/
+        
+        // save the live data in CharacterManager variable in order to be able to get the wanted data when needed
+        CharacterManager.getStaticInstance().currentPosition.put(getCharacterManager().getCurrentCharacterName() , ListcurPos);
         //System.out.println(getCharacterManager().currentCharacterId);
         //getCharacterManager().currentPosition = ListcurPos;  
 

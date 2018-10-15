@@ -362,7 +362,9 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         if(origin!=null) {
             tree.setAttribute("origin", origin);
         }
-        tree.setAttribute("influence", influence.name());
+        if(influence!=null) {
+            tree.setAttribute("influence", influence.name());
+        }
         if(offsetAngle!=null) {
             tree.setAttribute("offsetAngle", offsetAngle.toString());
         }

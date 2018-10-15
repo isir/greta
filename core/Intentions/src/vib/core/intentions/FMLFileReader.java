@@ -72,7 +72,17 @@ public class FMLFileReader implements IntentionEmitter {
         XMLTree fml = fmlparser.parseFile(fmlfilename);
         List<Intention> intentions = FMLTranslator.FMLToIntentions(fml,cm);
         Mode mode = FMLTranslator.getDefaultFMLMode();
-        if (fml.hasAttribute("composition")) {
+        for (XMLTree fmlchild : fml.getChildrenElement()) {
+            // store the bml id in the mode class in order
+            if (fmlchild.isNamed("bml")) {   
+                //System.out.println(fmlchild.getName());
+                if(fmlchild.hasAttribute("id")){
+                    
+                    mode.setBml_id(fmlchild.getAttribute("id"));
+                }
+            }
+        }
+		if (fml.hasAttribute("composition")) {
             mode.setCompositionType(fml.getAttribute("composition"));
         }
         if (fml.hasAttribute("reaction_type")) {

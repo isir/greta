@@ -79,6 +79,15 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
         if (fml.hasAttribute("social_attitude")) {
             mode.setSocialAttitude(fml.getAttribute("social_attitude"));
         }
+		for (XMLTree fmlchild : fml.getChildrenElement()) {
+            // store the bml id in the mode class
+            if (fmlchild.isNamed("bml")) {   
+                //System.out.println(fmlchild.getName());
+                if(fmlchild.hasAttribute("id")){
+                    mode.setBml_id(fmlchild.getAttribute("id"));
+                }
+            }
+        }
 
         List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, cm);
 

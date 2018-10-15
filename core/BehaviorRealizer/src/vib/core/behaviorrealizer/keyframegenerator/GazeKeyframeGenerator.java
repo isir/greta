@@ -1904,17 +1904,19 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                                     Double.parseDouble(cm.currentPosition.get(11).getParamValue()),
                                                         Double.parseDouble(cm.currentPosition.get(12).getParamValue()));//((TreeNode) originAudioTreeNode).getGlobalCoordinates();
                     
-                    Vec3d vec2target;
+                    
                     //if target is animatable, look at head (for now ! ideally it should be specified in the target attribute)
-                    if (Animatable.class.isInstance(targetNode)) {
-                        vec2target = ((TreeNode) env.getNode(gaze.getTarget() + "_AudioTreeNode")).getGlobalCoordinates();
-                        vec2target = new Vec3d(vec2target.x(), vec2target.y() + 0.09f, vec2target.z() + 0.13f); // TODO: offsets are in local values, they must be in global values
-                    } else {
-                        if(targetNode instanceof Leaf){
-                            targetNode = targetNode.getParent();
+                    if (gaze.getTarget() != "Agent"){
+                        if (Animatable.class.isInstance(targetNode)) {
+                            vec2target = ((TreeNode) env.getNode(gaze.getTarget() + "_AudioTreeNode")).getGlobalCoordinates();
+                            vec2target = new Vec3d(vec2target.x(), vec2target.y() + 0.09f, vec2target.z() + 0.13f); // TODO: offsets are in local values, they must be in global values
+                        } else {
+                            if(targetNode instanceof Leaf){
+                                targetNode = targetNode.getParent();
+                            }
+                            vec2target = ((TreeNode) targetNode).getGlobalCoordinates();
+                            vec2target.setY(vec2target.y() + sizeTarget.y()/2); // take the center of the Target long y axis
                         }
-                        vec2target = ((TreeNode) targetNode).getGlobalCoordinates();
-                        vec2target.setY(sizeTarget.y()/2); // take the center of the Target long y axis
                     }
                     
                     //TO BE: check that it takes the position of correct character 
@@ -2168,7 +2170,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                         targetNode = targetNode.getParent();
                                 }
                                 vec2target = ((TreeNode) targetNode).getGlobalCoordinates(); // target position
-                                vec2target.setY(sizeTarget.y()/2); // take the center of the Target long y axis
+                                vec2target.setY(vec2target.y() + sizeTarget.y()/2); // take the center of the Target long y axis
                         }
 
                         // orientation body from MPEG4

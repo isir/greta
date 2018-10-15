@@ -260,11 +260,29 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             // if the behaviorset for the gaze is != null it is created a GazeSignal with target like find in the fml, influence null and it is reported also the character_id
             if (deict_set.getBaseSignals().size() != 0){
                 List<Signal> sign = selector.selectFrom(intention, deict_set, dynamicline, existingSignals, getCharacterManager());
-                GazeSignal signa = (GazeSignal) sign.get(0);
-                signa.setTarget(intention.getTarget());
-                signa.setInfluence(null);
-                signa.setCharacterManager(this.getCharacterManager());
-                signalsReturned.add(signa);
+                if (sign.size() > 0){
+                    GazeSignal signa = (GazeSignal) sign.get(0);
+                    signa.setTarget(intention.getTarget());
+                    signa.setInfluence(null);
+                    if (intention.getTarget().equals("Agent")){
+                        //System.out.println(CharacterManager.getStaticInstance().currentPosition.keySet().size());
+                        for ( String key : CharacterManager.getStaticInstance().currentPosition.keySet() ) {
+
+                            if(key != this.getCharacterManager().currentCharacterId){
+                                signa.setOrigin(key);
+                            }
+                        }
+                        /*List<String> chars = (List<String>) CharacterMan  ager.getStaticInstance().currentPosition.keySet();
+                        for (int i = 0; i< CharacterManager.getStaticInstance().currentPosition.keySet().size(); ++i){             
+                            if(chars.get(i) != this.getCharacterManager().currentCharacterId){
+                                signa.setOrigin(chars.get(i));
+                            }
+                        }*/
+                    }else {
+                        signa.setCharacterManager(this.getCharacterManager());
+                    }
+                    signalsReturned.add(signa);
+                }
             }
 
             if (signalsReturned != null) {

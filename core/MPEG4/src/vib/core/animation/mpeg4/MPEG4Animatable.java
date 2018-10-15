@@ -40,6 +40,7 @@ import vib.core.util.audio.AudioPerformer;
 import vib.core.util.audio.AudioTreeNode;
 import vib.core.util.environment.Animatable;
 import vib.core.util.id.ID;
+import vib.core.util.math.Vec3d;
 
 /**
  *
@@ -173,8 +174,6 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
 
     public FAPFrame getCurrentFAPFrame() {
         
-        
-        
         ListcurPos.set(0, new IniParameter("head_pitch", String.valueOf(this.getRotationNode().getOrientation().x())));
         ListcurPos.set(1, new IniParameter("head_yaw", String.valueOf(this.getRotationNode().getOrientation().y())));
         ListcurPos.set(2, new IniParameter("head_roll", String.valueOf(this.getRotationNode().getOrientation().z())));
@@ -189,7 +188,9 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
         ListcurPos.set(11, new IniParameter("head_y", String.valueOf(headNode.getGlobalCoordinates().y())));
         ListcurPos.set(12, new IniParameter("head_z", String.valueOf(headNode.getGlobalCoordinates().z())));
 
-        getCharacterManager().currentPosition = ListcurPos;  
+        CharacterManager.getStaticInstance().currentPosition.put(getCharacterManager().currentCharacterId, ListcurPos);
+        //System.out.println(getCharacterManager().currentCharacterId);
+        //getCharacterManager().currentPosition = ListcurPos;  
 
         return fapFrames.getCurrentFrame();
     }

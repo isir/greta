@@ -482,13 +482,20 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
             shoulders_7_12.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.2)));
             shoulders_7_12.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.2)));
             
+            Quaternion nll = new Quaternion(new Vec3d(0, 1, 0), (double) 0); 
+            shoulders_7_12.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) 0));
+            shoulders_7_12.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) 0));
+            
             if (t.getonlyshoulder()){
-                torse.addRotation("vt3", shoulders);
+                /*torse.addRotation("vt3", shoulders);
                 torse.addRotation("vt6", shoulders);
                 torse.addRotation("vt7", shoulders_7_12);
                 torse.addRotation("vt9", shoulders);
-                torse.addRotation("vt10", shoulders);
-                torse.addRotation("vt12", shoulders_7_12);
+                torse.addRotation("vt10", shoulders);*/
+                torse.addRotation("vl5", nll);
+                torse.addRotation("vl3", nll);
+                torse.addRotation("vt7", nll);
+                torse.addRotation("vt12", q);
             }else {
                 //Quaternion each2 = Quaternion.slerp(new Quaternion(), each, 0.5, true);
                 torse.addRotation("vl5", each_lomb);

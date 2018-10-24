@@ -25,6 +25,7 @@ import vib.core.util.CharacterManager;
 import vib.core.util.enums.GazeDirection;
 import vib.core.util.enums.Influence;
 import vib.core.util.enums.Side;
+import vib.core.util.math.Quaternion;
 import vib.core.util.time.TimeMarker;
 import vib.core.util.xml.XMLTree;
 
@@ -92,7 +93,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         end = new TimeMarker("end");
         timeMarkers.add(end);
 
-        origin=getCharacterManager().currentCharacterId;
+        origin = getCharacterManager().currentCharacterId;
         target="";
         offsetDirection=GazeDirection.FRONT;
         offsetAngle=0.0;
@@ -174,7 +175,6 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
                 return ;
             }
             //TODO : change depending on influence ?
-            /*if(influence==Influence.EYES || influence == Influence.HEAD || influence == Influence.SHOULDER || influence == Influence.TORSO ) {*/
                 if(!ready.isConcretized() && !relax.isConcretized())
                 {
                     double totalTime = this.end.getValue() - this.start.getValue();
@@ -190,34 +190,27 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
                     ready.setValue(start.getValue()+(relax.getValue()-start.getValue())/2);
                 }
             isScheduled=true;
-            /*}
-            else
-            {
-                //TODO unimplemented yet
-            }*/
         }
-        else
+        else // if gazeShift
         {
             if(!end.isConcretized())
             {
                 end.setValue(Double.MAX_VALUE);
             }
-            if(!relax.isConcretized())
+            //TODO : change depending on influence ?
+            if(!ready.isConcretized() && !relax.isConcretized())
             {
-                relax.setValue(Double.MAX_VALUE);
+                double totalTime = this.end.getValue() - this.start.getValue();
+                ready.setValue(start.getValue()+totalTime/3);
+                relax.setValue(ready.getValue()+totalTime/3);
             }
-            if(!ready.isConcretized())
+            else if(ready.isConcretized() && !relax.isConcretized())
             {
-                //TODO : change depending on influence ?
-                if(influence==Influence.TORSO ) {
-                    ready.setValue(start.getValue()+1.5);
-                }
-                else if( influence == Influence.HEAD) {
-                    ready.setValue(start.getValue()+0.75);
-                }
-                else  if(influence==Influence.EYES) {
-                    ready.setValue(start.getValue()+0.33);
-                }
+                relax.setValue(ready.getValue()+(end.getValue()-ready.getValue())/2);
+            }
+            else if(!ready.isConcretized() && relax.isConcretized())
+            {
+                ready.setValue(start.getValue()+(relax.getValue()-start.getValue())/2);
             }
             isScheduled=true;
         }
@@ -297,7 +290,15 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     public void readFromXML(XMLTree tree, boolean endAsDuration) {
         //target
         if(tree.hasAttribute("target")) {
-            setTarget(tree.getAttribute("target"));
+            String tg = tree.getAttribute("target");
+            int underscoreIndex = tg.indexOf(":");
+            if (underscoreIndex != -1){
+                // name agent to gaze
+                String agent = tg.substring(underscoreIndex + 1).trim();
+                setTarget(agent); // set agent name as target
+            }else {
+               setTarget(tree.getAttribute("target"));
+            }
         }
         //origin
         if(tree.hasAttribute("origin")) {

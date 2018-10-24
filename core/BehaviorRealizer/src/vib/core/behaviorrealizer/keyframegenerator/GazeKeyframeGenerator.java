@@ -100,6 +100,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
     private List<KeyframeGenerator> otherModalitiesKFGenerators;
 
     private Map<GazeSignal, Long> currentGazes;
+    /** The current position */
+    private AUKeyFrame defaultGaze_l;
+    private AUKeyFrame defaultGaze_r;
+            
     private List<SignalPerformer> performers;
     
     // vector for thr rest position of eyes, head, shoulder and torso
@@ -111,7 +115,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
        
                     
     // the head move after a latency time in a range (0, 100)ms
-    // we take the default a latency time of 50 ms
+    // we take as default latency time: 50 ms
     private double head_latency = 0.05; 
     
     private CharacterManager cm; 
@@ -138,6 +142,16 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
         otherModalitiesKFGenerators = otherGenerators;
         currentGazes = new ConcurrentHashMap<GazeSignal, Long>();
         performers = new ArrayList<SignalPerformer>();
+        defaultGaze_l = new AUKeyFrame("rest_l", 0.0, new AUAPFrame());
+        defaultGaze_r = new AUKeyFrame("rest_r", 0.0, new AUAPFrame());
+    }
+    
+    private void setGazeRestPosition(AUKeyFrame gaze_l, AUKeyFrame gaze_r){
+        defaultGaze_l = gaze_l;
+        defaultGaze_r = gaze_r;
+        
+        /*CharacterManager.getStaticInstance().defaultFrame.add(2, (Object) defaultGaze_l);
+        CharacterManager.getStaticInstance().defaultFrame.add(3, (Object) defaultGaze_l);*/
     }
 
     private void cleanGazeShifts() {
@@ -189,14 +203,47 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
         if (!signals.isEmpty()) {
             Collections.sort(signals, getComparator());
         }
-        SpinePhase lastShift = null; ///TODO get the last from the previous anim
+        // Spinephase for each body part involved in the gaze in order to store the information about the last position after a gazeShift
+        SpinePhase lastShift_head = new SpinePhase("head", 0, 0);
+        SpinePhase lastShift_torso = new SpinePhase("torso", 0, 0);
+        
+        // last target with a gazeshift
+        /*String last_target = "";
+        Quaternion orient_last = null; // last angle add to the original vertical orientation of head in 
+        */
+        int i = 0;
         for (Signal signal : signals) {
             GazeSignal gaze = (GazeSignal) signal;
             currentGazes.put(gaze, Long.valueOf(Timer.getTimeMillis()));
 
+            // check if there was a gazeShift before anc
+            /*if (gaze.isGazeShift()){
+                i++;
+                last_target = gaze.getTarget(); // store the last target gaze by the agent
+            }*/
+           
             //euler angles to target + offset, for head
             HeadAngles ha = new HeadAngles(envi, gaze);
-
+            
+            // trying to correct a little difect in the gazeShift. Each time we have a gazeShift behavior are calculated only the keyframe at the target and not at the starting time. This is because the position
+            // of any body part can be different to the rest position if a gazeShift happend before. Therefore instead to calculate the rotation angle's difference between the actual position and the target position 
+            // it is just calculated the angle between the rest position and the target one, updating the position like we delate the last position and put the new one at the target time. 
+            // the only proble is that when the rotation angle to reach the target (calculated respect to the rest position) is bigger than the actual angle. In this case the movement of the eyes, that start to move before the 
+            // head are not correct. A way to overcome this difect is to delate the head_latency in this case.  
+            Quaternion actualheadorientation = new Quaternion( new Vec3d (1,0,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(13).getParamValue()));
+                    actualheadorientation.multiply(new Quaternion( new Vec3d (0,1,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(14).getParamValue())));
+                    actualheadorientation.multiply(new Quaternion( new Vec3d (0,0,1),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(15).getParamValue())));
+                    // add the rotation of the root
+                    actualheadorientation.multiply(new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(0).getParamValue()),
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue())));
+            Vec3d headActualAngle = actualheadorientation.toEulerXYZ();
+            
+            if (headActualAngle.y() < ha.h_yawAngle){
+                head_latency = 0.0;
+            }
+                    
             //times computation
             //start keyframe : all influences at original position
             double start = gaze.getStart().getValue();
@@ -218,344 +265,371 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     inf = Influence.HEAD;
                 }else{
                     inf = Influence.EYES;
+
                 }                   
             }
+            gaze.setInfluence(inf);           
             
-            if (inf.ordinal() >= Influence.TORSO.ordinal()) {
+            if (inf.ordinal() >= Influence.SHOULDER.ordinal()) {
                 // if the influence involve the torso we create the keyframe just for the torse that already include the movement of 
-                            // vt12 vertebrae (the same we move just for the shoulder). So we don't need to create the keyframe also for teh shoulder
-                    //********************************************************************************//             
-                        
-                        ShouldersAngles sha = new ShouldersAngles(envi, gaze, ha );
-                         
-                        // calculate the shoulder max speed depending on the rotation angle
-                        double maxVel_shoulder = Math.toRadians(Math.abs((4/3 * Math.toDegrees(Math.abs(sha.sh_minimumAlign*TORSO_YAW_LIMIT))/15 + 2)*Math.toDegrees(TORSO_ANGULAR_SPEED)));
-                        //double maxVel_shoulder_pitch = Math.toRadians(Math.abs((4/3 * Math.toDegrees(Math.abs(sha.sh_limitedYaw*TORSO_YAW_LIMIT))/15 + 2)*Math.toDegrees(TORSO_ANGULAR_SPEED)));
+                // vt12 vertebrae (the same we move just for the shoulder). So we don't need to create the keyframe also for teh shoulder
+                //********************************************************************************//             
+                ShouldersAngles sha = new ShouldersAngles(envi, gaze, ha );
 
-                        double timeShoulderAtTarget = start + sha.sh_latency + Math.max(Math.abs(sha.sh_minimumAlign), Math.abs(sha.sh_limitedPitch)) / maxVel_shoulder;
-                        if (timeShoulderAtTarget > ready){
-                            timeShoulderAtTarget = ready;
-                        }
-                        double timeBackShoulderAtZero = relax + Math.max(Math.abs(sha.sh_minimumAlign), Math.abs(sha.sh_limitedPitch)) / maxVel_shoulder;
-                        if (timeBackShoulderAtZero > end){
-                            timeBackShoulderAtZero = end;
-                        }
-                        TorsoSignal ts1 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
-                        ts1.setDirectionShift(true);
-                        SpinePhase tp1 = createTorsoPhase("end", timeShoulderAtTarget, timeShoulderAtTarget, sha.sh_minimumAlign, sha.sh_limitedPitch); // ready
-                        tp1.setStartTime(timeShoulderAtTarget); // ready
-                        ts1.getPhases().add(tp1);
-                        ts1.getStart().setValue(start+sha.sh_latency); // +sha.sh_latency
-                        ts1.getEnd().setValue(timeShoulderAtTarget); // ready
-                        ts1.shoulder = false; 
+                // calculate the shoulder max speed depending on the rotation angle
+                double maxVel_shoulder = Math.toRadians(Math.abs((4/3 * Math.toDegrees(Math.abs(sha.sh_minimumAlign*TORSO_YAW_LIMIT))/15 + 2)*Math.toDegrees(TORSO_ANGULAR_SPEED)));
+                //double maxVel_shoulder_pitch = Math.toRadians(Math.abs((4/3 * Math.toDegrees(Math.abs(sha.sh_limitedYaw*TORSO_YAW_LIMIT))/15 + 2)*Math.toDegrees(TORSO_ANGULAR_SPEED)));
 
-                        if(!gaze.isGazeShift()) {
-                            // hs2 head signal at rest position
-                            TorsoSignal ts2 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
-                            ts2.setDirectionShift(true);
-                            SpinePhase tp2 = null;
-                            if(lastShift==null){
-                                tp2 = createTorsoPhase("end", timeBackShoulderAtZero, timeBackShoulderAtZero, 0.0, 0.0) ; // end
-                            } else {
-                                tp2 = new SpinePhase(lastShift);
-                            }
-                            tp2.setStartTime(timeBackShoulderAtZero); // end
-                            ts2.getPhases().add(tp2);
-                            ts2.getStart().setValue(relax+sha.sh_latency);
-                            ts2.getEnd().setValue(timeBackShoulderAtZero); // end
-                            ts2.shoulder = false; 
+                double timeShoulderAtTarget = start + sha.sh_latency + (Math.max(Math.abs(sha.sh_minimumAlign), Math.abs(sha.sh_limitedPitch)) / maxVel_shoulder);
+                if (timeShoulderAtTarget > ready){
+                    timeShoulderAtTarget = ready;
+                }
+                double timeBackShoulderAtZero = relax + (Math.max(Math.abs(sha.sh_minimumAlign), Math.abs(sha.sh_limitedPitch)) / maxVel_shoulder);
+                if (timeBackShoulderAtZero > end){
+                    timeBackShoulderAtZero = end;
+                }
+                // ts1 torso signal at target position 
+                TorsoSignal ts1 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
+                ts1.setDirectionShift(true);
+                SpinePhase tp1 = createTorsoPhase("end", timeShoulderAtTarget, timeShoulderAtTarget, sha.sh_minimumAlign, sha.sh_limitedPitch); // ready
+                tp1.setStartTime(timeShoulderAtTarget); // ready
+                ts1.getPhases().add(tp1);
+                ts1.getStart().setValue(start+sha.sh_latency);
+                ts1.getEnd().setValue(timeShoulderAtTarget);
+                if (inf.ordinal() != Influence.TORSO.ordinal()){
+                    ts1.shoulder = true; 
+                }
 
-                            // add both head signals to HeadKeyFrameGenerator
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(ts1) && kg.accept(ts2)) {
-                                    break;
-                                }
-                            }
-                        }
-                        else {
-                            lastShift = tp1;
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(ts1)) {
-                                    break;
-                                }
-                            }
-                        }
-                        
-                        
-                        /*********************************************************************
-                        * HEAD
-                        **********************************************************************/
-                        
-                        double maxVel_head = 0.0;
-                        // calculate the head max speed depending on the rotation angle
-                        if (Math.abs(sha.ha.h_limitedYaw) > Math.abs(sha.ha.h_limitedPitch)){
-                            maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedYaw*HEAD_YAW_LIMIT)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
-                        } else {
-                            if (sha.ha.h_limitedPitch < 0.0) {
-                                maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedPitch*HEAD_PITCH_LIMIT_DOWN)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
-                            } else {
-                                maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedPitch*HEAD_PITCH_LIMIT_UP)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
-                            }
-                        }
-
-
-                        // time head reach the target position and come back
-                        double timeHeadAtTarget = start + head_latency + Math.max(Math.abs(sha.ha.h_limitedYaw), Math.abs(sha.ha.h_limitedPitch)) / maxVel_head; // 0.1 is the latency time 
-                        if (timeHeadAtTarget > ready){
-                            timeHeadAtTarget = ready;
-                        }
-                        double timeBackHeadAtZero = relax + Math.max(Math.abs(sha.ha.h_limitedYaw), Math.abs(sha.ha.h_limitedPitch)) / maxVel_head;
-                        if (timeBackHeadAtZero > end){
-                            timeBackHeadAtZero = end;
-                        }
-
-                        // hs1 head signal when look to the target 
-                        HeadSignal hs1 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
-                        hs1.setDirectionShift(true);
-
-                        SpinePhase hp1 = null;
-                        // if the movement involves also the shoulder or all torso, the movement of the head is enhanced by the movement of the shoulder/torso 
-                        hp1 = createHeadPhase("end", timeHeadAtTarget, timeHeadAtTarget, sha.ha.h_limitedYaw, sha.ha.h_limitedPitch); // ready
-
-                        hp1.setStartTime(timeHeadAtTarget);  // ready
-                        hs1.getPhases().add(hp1);
-                        hs1.getStart().setValue(start+head_latency); // head latency eauql to 100 ms
-                        hs1.getEnd().setValue(timeHeadAtTarget); // ready
-
-                        if(!gaze.isGazeShift()) {
-                            // hs2 head signal at rest position
-                            HeadSignal hs2 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
-                            hs2.setDirectionShift(true);
-                            SpinePhase hp2 = null;
-                            if(lastShift==null){
-                                hp2 = createHeadPhase("end", timeBackHeadAtZero, timeBackHeadAtZero, 0.0, 0.0) ; // end
-                            } else {
-                                hp2 = new SpinePhase(lastShift);
-                            }
-                            hp2.setStartTime(timeBackHeadAtZero); // end
-                            hs2.getPhases().add(hp2);
-                            hs2.getStart().setValue(relax);
-                            hs2.getEnd().setValue(timeBackHeadAtZero); // end
-
-                            // add both head signals to HeadKeyFrameGenerator
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(hs1) && kg.accept(hs2)) {
-                                    break;
-                                }
-                            }
-                        }
-                        else {
-                            lastShift = hp1;
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(hs1)) {
-                                    break;
-                                }
-                            }
-                        }
-                        
-                // if the influence involves the shoulder we create the keyframe just for the shoulder        
-            } else if (inf.ordinal() >= Influence.SHOULDER.ordinal()) {
-                        
-                        ShouldersAngles sha = new ShouldersAngles(envi, gaze, ha );
-                        
-                        // calculate the shoulder max speed depending on the rotation angle
-                        double maxVel_shoulder = Math.toRadians(Math.abs((4/3 * Math.toDegrees(Math.abs(sha.sh_minimumAlign*TORSO_YAW_LIMIT))/15 + 2)*Math.toDegrees(TORSO_ANGULAR_SPEED)));
-                        //double maxVel_shoulder_pitch = Math.toRadians(Math.abs((4/3 * Math.toDegrees(Math.abs(sha.sh_limitedYaw*TORSO_YAW_LIMIT))/15 + 2)*Math.toDegrees(TORSO_ANGULAR_SPEED)));
-
-                        double timeShoulderAtTarget = start + sha.sh_latency + Math.max(Math.abs(sha.sh_minimumAlign), Math.abs(sha.sh_limitedPitch)) / maxVel_shoulder;
-                        // for angle too large the time to reach the target can be more than the time the gaze have to reach the target
-                        if (timeShoulderAtTarget > ready){
-                            timeShoulderAtTarget = ready;
-                        }
-                        
-                        double timeBackShoulderAtZero = relax + Math.max(Math.abs(sha.sh_minimumAlign), Math.abs(sha.sh_limitedPitch)) / maxVel_shoulder;
-                        if (timeBackShoulderAtZero > end){
-                            timeBackShoulderAtZero = end;
-                        }                        
-                        
-                        TorsoSignal ts1 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
-                        ts1.setDirectionShift(true);
-                        SpinePhase tp1 = createTorsoPhase("end", timeShoulderAtTarget, timeShoulderAtTarget, sha.sh_minimumAlign, sha.sh_limitedPitch); // ready
-                        tp1.setStartTime(timeShoulderAtTarget); // ready
-                        ts1.getPhases().add(tp1);
-                        ts1.getStart().setValue(start+sha.sh_latency); // +sha.sh_latency
-                        ts1.getEnd().setValue(timeShoulderAtTarget); // ready
+                if(!gaze.isGazeShift()) {
+                    // ts2 torso signal at rest position
+                    TorsoSignal ts2 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
+                    SpinePhase tp2 = null;
+                    //otherModalitiesKFGenerators.get(6).
+                    /*if(lastShift_torso==null){
+                        TorsoKeyframe tt = (TorsoKeyframe) cm.getStaticInstance().defaultFrame.get(1);
+                        tp2 = createTorsoPhase("end", timeBackShoulderAtZero, timeBackShoulderAtZero, tt.verticalTorsion.value, tt.sagittalTilt.value) ; // end
+                    } else {*/
+                        tp2 = new SpinePhase(lastShift_torso);
+                    //}
+                    tp2.setStartTime(timeBackShoulderAtZero); // end
+                    tp2.setEndTime(timeBackShoulderAtZero); 
+                    ts2.getPhases().add(tp2);
+                    ts2.getStart().setValue(relax+sha.sh_latency);
+                    ts2.getEnd().setValue(timeBackShoulderAtZero); // end
+                    if (inf.ordinal() != Influence.TORSO.ordinal()){
                         ts1.shoulder = true; 
-
-                        if(!gaze.isGazeShift()) {
-                            // hs2 head signal at rest position
-                            TorsoSignal ts2 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
-                            ts2.setDirectionShift(true);
-                            SpinePhase tp2 = null;
-                            if(lastShift==null){
-                                tp2 = createTorsoPhase("end", timeBackShoulderAtZero, timeBackShoulderAtZero, 0.0, 0.0) ; // end
-                            } else {
-                                tp2 = new SpinePhase(lastShift);
-                            }
-                            tp2.setStartTime(timeBackShoulderAtZero); // end
-                            ts2.getPhases().add(tp2);
-                            ts2.getStart().setValue(relax+sha.sh_latency);
-                            ts2.getEnd().setValue(timeBackShoulderAtZero); // end
-                            ts2.shoulder = true; 
-
-                            // add both head signals to HeadKeyFrameGenerator
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(ts1) && kg.accept(ts2)) {
-                                    break;
-                                }
-                            }
-                        }
-                        else {
-                            lastShift = tp1;
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(ts1)) {
-                                    break;
-                                }
-                            }
-                        }
-                        
-                         /*********************************************************************
-                        * HEAD
-                        **********************************************************************/
-                        
-                        double maxVel_head = 0.0;
-                        // calculate the head max speed depending on the rotation angle
-                        if (Math.abs(sha.ha.h_limitedYaw) > Math.abs(sha.ha.h_limitedPitch)){
-                            maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedYaw*HEAD_YAW_LIMIT)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
-                        } else {
-                            if (sha.ha.h_limitedPitch < 0.0) {
-                                maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedPitch*HEAD_PITCH_LIMIT_DOWN)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
-                            } else {
-                                maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedPitch*HEAD_PITCH_LIMIT_UP)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
-                            }
-                        }
-
-
-                        // time head reach the target position and come back
-                        double timeHeadAtTarget = start + head_latency + Math.max(Math.abs(sha.ha.h_limitedYaw), Math.abs(sha.ha.h_limitedPitch)) / maxVel_head; // 0.1 is the latency time 
-                        if (timeHeadAtTarget > ready){
-                            timeHeadAtTarget = ready;
-                        }
-                        double timeBackHeadAtZero = relax + Math.max(Math.abs(sha.ha.h_limitedYaw), Math.abs(sha.ha.h_limitedPitch)) / maxVel_head;
-                        if (timeBackHeadAtZero > end){
-                            timeBackHeadAtZero = end;
-                        }
-
-                        // hs1 head signal when look to the target 
-                        HeadSignal hs1 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
-                        hs1.setDirectionShift(true);
-
-                        SpinePhase hp1 = null;
-                        // if the movement involves also the shoulder or all torso, the movement of the head is enhanced by the movement of the shoulder/torso 
-                        hp1 = createHeadPhase("end", timeHeadAtTarget, timeHeadAtTarget, sha.ha.h_limitedYaw, sha.ha.h_limitedPitch); // ready
-
-                        hp1.setStartTime(timeHeadAtTarget);  // ready
-                        hs1.getPhases().add(hp1);
-                        hs1.getStart().setValue(start+head_latency); // head latency eauql to 100 ms
-                        hs1.getEnd().setValue(timeHeadAtTarget); // ready
-
-                        if(!gaze.isGazeShift()) {
-                            // hs2 head signal at rest position
-                            HeadSignal hs2 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
-                            hs2.setDirectionShift(true);
-                            SpinePhase hp2 = null;
-                            if(lastShift==null){
-                                hp2 = createHeadPhase("end", timeBackHeadAtZero, timeBackHeadAtZero, 0.0, 0.0) ; // end
-                            } else {
-                                hp2 = new SpinePhase(lastShift);
-                            }
-                            hp2.setStartTime(timeBackHeadAtZero); // end
-                            hs2.getPhases().add(hp2);
-                            hs2.getStart().setValue(relax);
-                            hs2.getEnd().setValue(timeBackHeadAtZero); // end
-
-                            // add both head signals to HeadKeyFrameGenerator
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(hs1) && kg.accept(hs2)) {
-                                    break;
-                                }
-                            }
-                        }
-                        else {
-                            lastShift = hp1;
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(hs1)) {
-                                    break;
-                                }
-                            }
-                        }
-                        
-                    
-                    } else if(inf.ordinal() >= Influence.HEAD.ordinal()) {
-
-                        double maxVel_head = 0.0;
-                        // calculate the head max speed depending on the rotation angle
-                        if (Math.abs(ha.h_limitedYaw) > Math.abs(ha.h_limitedPitch)){
-                            maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(ha.h_limitedYaw*HEAD_YAW_LIMIT)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
-                        } else {
-                            if (ha.h_limitedPitch < 0.0) {
-                                maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(ha.h_limitedPitch*HEAD_PITCH_LIMIT_DOWN)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
-                            } else {
-                                maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(ha.h_limitedPitch*HEAD_PITCH_LIMIT_UP)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
-                            }
-                        }
-
-
-                        // time head reach the target position and come back
-                        double timeHeadAtTarget = start + head_latency + Math.max(Math.abs(ha.h_limitedYaw), Math.abs(ha.h_limitedPitch)) / maxVel_head; // 0.1 is the latency time 
-                        if (timeHeadAtTarget > ready){
-                            timeHeadAtTarget = ready;
-                        }
-                        double timeBackHeadAtZero = relax + Math.max(Math.abs(ha.h_limitedYaw), Math.abs(ha.h_limitedPitch)) / maxVel_head;
-                        if (timeBackHeadAtZero > end){
-                            timeBackHeadAtZero = end;
-                        }
-
-                        // hs1 head signal when look to the target 
-                        HeadSignal hs1 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
-                        hs1.setDirectionShift(true);
-
-                        SpinePhase hp1 = null;
-                        // if the movement involves also the shoulder or all torso, the movement of the head is enhanced by the movement of the shoulder/torso 
-                        hp1 = createHeadPhase("end", timeHeadAtTarget, timeHeadAtTarget, ha.h_limitedYaw, ha.h_limitedPitch); // ready
-
-                        hp1.setStartTime(timeHeadAtTarget);  // ready
-                        hs1.getPhases().add(hp1);
-                        hs1.getStart().setValue(start+head_latency); // head latency eauql to 100 ms
-                        hs1.getEnd().setValue(timeHeadAtTarget); // ready
-
-                        if(!gaze.isGazeShift()) {
-                            // hs2 head signal at rest position
-                            HeadSignal hs2 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
-                            hs2.setDirectionShift(true);
-                            SpinePhase hp2 = null;
-                            if(lastShift==null){
-                                hp2 = createHeadPhase("end", timeBackHeadAtZero, timeBackHeadAtZero, 0.0, 0.0) ; // end
-                            } else {
-                                hp2 = new SpinePhase(lastShift);
-                            }
-                            hp2.setStartTime(timeBackHeadAtZero); // end
-                            hs2.getPhases().add(hp2);
-                            hs2.getStart().setValue(relax);
-                            hs2.getEnd().setValue(timeBackHeadAtZero); // end
-
-                            // add both head signals to HeadKeyFrameGenerator
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(hs1) && kg.accept(hs2)) {
-                                    break;
-                                }
-                            }
-                        }
-                        else {
-                            lastShift = hp1;
-                            for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
-                                if (kg.accept(hs1)) {
-                                    break;
-                                }
-                            }
-                        }
                     }
 
+                    // add both torso signals to TorsoKeyFrameGenerator
+                    for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                        if (kg.accept(ts1) && kg.accept(ts2)) {
+                            break;
+                        }
+                    }
+                }
+                else {
+                    lastShift_torso = tp1;
+                    for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                        if (kg.accept(ts1)) {
+                            break;
+                        }
+                    }
+                }
+
+                /*********************************************************************
+                * HEAD
+                **********************************************************************/
+
+                double maxVel_head = 0.0;
+                // calculate the head max speed depending on the rotation angle
+                if (Math.abs(sha.ha.h_limitedYaw) > Math.abs(sha.ha.h_limitedPitch)){
+                    maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedYaw*HEAD_YAW_LIMIT)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
+                } else {
+                    if (sha.ha.h_limitedPitch < 0.0) {
+                        maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedPitch*HEAD_PITCH_LIMIT_DOWN)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
+                    } else {
+                        maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedPitch*HEAD_PITCH_LIMIT_UP)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
+                    }
+                }
+
+
+                // time head reach the target position and come back
+                double timeHeadAtTarget = start + head_latency + (Math.abs(sha.ha.h_limitedYaw*HEAD_YAW_LIMIT)/ maxVel_head); // 0.1 is the latency time 
+                if (timeHeadAtTarget > ready){
+                    timeHeadAtTarget = ready;
+                }
+                double timeBackHeadAtZero = relax + (Math.abs(sha.ha.h_limitedYaw*HEAD_YAW_LIMIT)/ maxVel_head);
+                if (timeBackHeadAtZero > end){
+                    timeBackHeadAtZero = end;
+                }
+
+                // hs1 head signal when look to the target 
+                HeadSignal hs1 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
+                hs1.setDirectionShift(true);
+                SpinePhase hp1 = null;
+                // if the movement involves also the shoulder or all torso, the movement of the head is enhanced by the movement of the shoulder/torso 
+                hp1 = createHeadPhase("end", timeHeadAtTarget, timeHeadAtTarget, sha.ha.h_limitedYaw, sha.ha.h_limitedPitch); // read
+                hp1.setStartTime(timeHeadAtTarget);  // ready
+                hs1.getPhases().add(hp1);
+                hs1.getStart().setValue(start+head_latency); // head latency eauql to 100 ms
+                hs1.getEnd().setValue(timeHeadAtTarget); // ready
+
+                if(!gaze.isGazeShift()) {
+                    // hs2 head signal at rest position
+                    HeadSignal hs2 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
+                    hs2.setDirectionShift(true);
+                    SpinePhase hp2 = null;
+                    //if(lastShift_head==null){
+                        /*HeadKeyframe hh = (HeadKeyframe) cm.getStaticInstance().defaultFrame.get(0);
+                        double pitch;
+                        if (hh.sagittalTilt.direction != null){
+                            if (hh.sagittalTilt.direction.name() == "FORWARD"){
+                                pitch = - hh.sagittalTilt.value;
+                            }else{
+                                pitch = hh.sagittalTilt.value;
+                            } 
+                        }else{
+                            pitch = 0.0;
+                        }
+                        double yaw;
+                        if (hh.verticalTorsion.direction != null){
+                            if (hh.verticalTorsion.direction.name() == "RIGHTWARD"){
+                                yaw = - hh.verticalTorsion.value;
+                            }else{
+                                yaw = hh.verticalTorsion.value;
+                            } 
+                        }else{
+                            yaw = 0.0;
+                        } 
+                        hp2 = createHeadPhase("end", timeBackHeadAtZero, timeBackHeadAtZero, yaw, pitch) ; // end*/
+                        hp2 = new SpinePhase(lastShift_head);
+                    /*} else {
+                        hp2 = new SpinePhase(lastShift_head);
+                    }*/
+                    hp2.setStartTime(timeBackHeadAtZero); // end
+                    hs2.getPhases().add(hp2);
+                    hs2.getStart().setValue(relax);
+                    hs2.getEnd().setValue(timeBackHeadAtZero); // end
+
+                    // add both head signals to HeadKeyFrameGenerator
+                    for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                        if (kg.accept(hs1) && kg.accept(hs2)) {
+                            break;
+                        }
+                    }
+                }
+                else {
+                    lastShift_head = hp1;
+                    for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                        if (kg.accept(hs1)) {
+                            break;
+                        }
+                    }
+                }
+                        
+                // if the influence involves the shoulder we create the keyframe just for the shoulder        
+            } else if(inf.ordinal() == Influence.HEAD.ordinal()) {
+    
+                // Head Signals
+                double maxVel_head = 0.0;
+                // calculate the head max speed depending on the rotation angle
+                if (Math.abs(ha.h_limitedYaw) > Math.abs(ha.h_limitedPitch)){
+                    maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(ha.h_limitedYaw*HEAD_YAW_LIMIT)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
+                } else {
+                    if (ha.h_limitedPitch < 0.0) {
+                        maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(ha.h_limitedPitch*HEAD_PITCH_LIMIT_DOWN)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
+                    } else {
+                        maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(ha.h_limitedPitch*HEAD_PITCH_LIMIT_UP)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
+                    }
+                }
+
+
+                // time head reach the target position and come back
+                double timeHeadAtTarget = start + head_latency + Math.max(Math.abs(ha.h_limitedYaw*HEAD_YAW_LIMIT), Math.abs(ha.h_limitedPitch*HEAD_YAW_LIMIT)) / maxVel_head; // 0.1 is the latency time 
+                if (timeHeadAtTarget > ready){
+                    timeHeadAtTarget = ready;
+                }
+                double timeBackHeadAtZero = relax + Math.max(Math.abs(ha.h_limitedYaw*HEAD_YAW_LIMIT), Math.abs(ha.h_limitedPitch*HEAD_YAW_LIMIT)) / maxVel_head;
+                if (timeBackHeadAtZero > end){
+                    timeBackHeadAtZero = end;
+                }
+
+                // hs1 head signal when look to the target 
+                HeadSignal hs1 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
+                hs1.setDirectionShift(true);
+                SpinePhase hp1 = null;
+                hp1 = createHeadPhase("end", timeHeadAtTarget, timeHeadAtTarget, ha.h_limitedYaw, ha.h_limitedPitch); // ready
+                hp1.setStartTime(timeHeadAtTarget); 
+                hs1.getPhases().add(hp1);
+                hs1.getStart().setValue(start+head_latency); // head latency equal to 50 ms
+                hs1.getEnd().setValue(timeHeadAtTarget); // ready
+
+                if(!gaze.isGazeShift()) {
+                    // hs2 head signal at rest position
+                    HeadSignal hs2 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
+                    hs2.setDirectionShift(true);
+                    SpinePhase hp2 = null;
+                    /*if(lastShift_head==null){
+                        HeadKeyframe hh = (HeadKeyframe) cm.getStaticInstance().defaultFrame.get(0);
+                        double pitch;
+                        if (hh.sagittalTilt.direction != null){
+                            if (hh.sagittalTilt.direction.name() == "FORWARD"){
+                                pitch = - hh.sagittalTilt.value;
+                            }else{
+                                pitch = hh.sagittalTilt.value;
+                            } 
+                        }else{
+                            pitch = 0.0;
+                        }
+                        double yaw;
+                        if (hh.verticalTorsion.direction != null){
+                            if (hh.verticalTorsion.direction.name() == "RIGHTWARD"){
+                                yaw = - hh.verticalTorsion.value;
+                            }else{
+                                yaw = hh.verticalTorsion.value;
+                            } 
+                        }else{
+                            yaw = 0.0;
+                        } 
+                        hp2 = createHeadPhase("end", timeBackHeadAtZero, timeBackHeadAtZero, yaw, pitch) ; // end
+                    } else {*/
+                        hp2 = new SpinePhase(lastShift_head);
+                        hp2.setStartTime(timeBackHeadAtZero); // end
+                        hp2.setEndTime(timeBackHeadAtZero); // end 
+                    //}
+
+                    hs2.getPhases().add(hp2);
+                    hs2.getStart().setValue(relax);
+                    hs2.getEnd().setValue(timeBackHeadAtZero); // end
+
+                    // add both head signals to HeadKeyFrameGenerator
+                    for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                        if (kg.accept(hs1) && kg.accept(hs2)) {
+                            break;
+                        }
+                    }
+                }
+                else {
+                    lastShift_head = hp1;
+                    for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                        if (kg.accept(hs1)) {
+                            break;
+                        }
+                    }
+                }
+                
+                // in the case there was a gazeShift before and there was a rotation of the torso, this rotation has to be canceled  if  the next gaze 
+                // involve just the head. So it is create a trosoSignel with rotation equal to 0.0                 
+                // ts1 torso signal at target position 
+                TorsoSignal ts1 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
+                ts1.setDirectionShift(true);
+                SpinePhase tp1 = createTorsoPhase("end", timeHeadAtTarget, timeHeadAtTarget, 0.0, 0.0); // ready
+                tp1.setStartTime(timeHeadAtTarget); // ready
+                ts1.getPhases().add(tp1);
+                ts1.getStart().setValue(start+head_latency);
+                ts1.getEnd().setValue(timeHeadAtTarget);
+                
+                if(!gaze.isGazeShift()) {
+                    // ts2 torso signal at rest position
+                    TorsoSignal ts2 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
+                    SpinePhase tp2 = null;
+                    //otherModalitiesKFGenerators.get(6).
+                    /*if(lastShift_torso==null){
+                        TorsoKeyframe tt = (TorsoKeyframe) cm.getStaticInstance().defaultFrame.get(1);
+                        tp2 = createTorsoPhase("end", timeBackHeadAtZero, timeBackHeadAtZero, tt.verticalTorsion.value, tt.sagittalTilt.value) ; // end
+                    } else {*/
+                        tp2 = new SpinePhase(lastShift_torso);
+                    //}
+                    tp2.setStartTime(timeBackHeadAtZero); // end
+                    tp2.setEndTime(timeBackHeadAtZero);
+                    ts2.getPhases().add(tp2);
+                    ts2.getStart().setValue(relax);
+                    ts2.getEnd().setValue(timeBackHeadAtZero); // end
+
+                    // add both torso signals to TorsoKeyFrameGenerator
+                    for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                        if (kg.accept(ts1) && kg.accept(ts2)) {
+                            break;
+                        }
+                    }
+                }
+                else {
+                    lastShift_torso = tp1;
+                    for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                        if (kg.accept(ts1)) {
+                            break;
+                        }
+                    }
+                }
+                         
+            } else { 
+                /**********************************************************************************************
+                 * ************************************JUST EYES**********************************************
+                 * *******************************************************************************************/
+                
+                // there was a gaze shift that involved torso and head and now just the eyes we have to delated the rotation of head and torso  
+                // torso signal at target position 
+                TorsoSignal ts1 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
+                ts1.setDirectionShift(true);            
+                SpinePhase tp1;
+                if(!gaze.isGazeShift()){
+                    TorsoKeyframe tt = (TorsoKeyframe) cm.getStaticInstance().defaultFrame.get(1);
+                    tp1 = createTorsoPhase("end", end, end, tt.verticalTorsion.value, tt.sagittalTilt.value); // ready
+                }else{
+                    tp1 = createTorsoPhase("end", end, end, 0.0, 0.0); // ready
+                }   
+                tp1.setStartTime(end); // ready
+                tp1.setEndTime(end);
+                ts1.getPhases().add(tp1);
+                ts1.getStart().setValue(start+head_latency);
+                ts1.getEnd().setValue(end);
+                for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                    if (kg.accept(ts1)) {
+                        break;
+                    }
+                }
+                
+                // head signal at target position 
+                HeadSignal hs1 = new HeadSignal(IDProvider.createID("gazegenerator").toString());
+                hs1.setDirectionShift(true); 
+                SpinePhase hp1;
+                if(!gaze.isGazeShift()){
+                    HeadKeyframe hh = (HeadKeyframe) cm.getStaticInstance().defaultFrame.get(0);
+                    double pitch;
+                    if (hh.sagittalTilt.direction != null){
+                        if (hh.sagittalTilt.direction.name() == "FORWARD"){
+                            pitch = - hh.sagittalTilt.value;
+                        }else{
+                            pitch = hh.sagittalTilt.value;
+                        } 
+                    }else{
+                        pitch = 0.0;
+                    }
+                    double yaw;
+                    if (hh.verticalTorsion.direction != null){
+                        if (hh.verticalTorsion.direction.name() == "RIGHTWARD"){
+                            yaw = - hh.verticalTorsion.value;
+                        }else{
+                            yaw = hh.verticalTorsion.value;
+                        } 
+                    }else{
+                        yaw = 0.0;
+                    }
+                    hp1 = createHeadPhase("end", end, end, yaw, pitch) ; // end
+                } else {
+                    hp1 = createHeadPhase("end", end, end, 0.0, 0.0); // ready
+                }
+                    hp1.setStartTime(end); // ready
+                    hp1.setEndTime(end);
+                    hs1.getPhases().add(hp1);
+                    hs1.getStart().setValue(start+head_latency);
+                    hs1.getEnd().setValue(end);
+                    for (KeyframeGenerator kg : otherModalitiesKFGenerators) {
+                        if (kg.accept(hs1)) {
+                            break;
+                        }
+                    }  
+            }
         }
         return outputKeyframe;
     }
@@ -601,6 +675,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             String gazeId = gaze.getId();
             
             // check if the gaze expression is in the facelibrary 
+            // if we look at a taget there is no information in the library   
             if ((gaze.getTarget() == null || gaze.getTarget().isEmpty()) && gaze.getOffsetDirection() == GazeDirection.FRONT && gaze.getOffsetAngle() == 0.0) {
                 AUExpression flexpression = FaceLibrary.global_facelibrary.get(gaze.getReference());
                 if (flexpression != null) {
@@ -614,12 +689,12 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     Logs.error("Their is no entry in the FaceLibrary for " + gaze.getReference());
                 }
                 
-                if (gaze.isScheduled()) {
+                if (gaze.isScheduled() && gaze.isFilled()) {
                    
-                    AUAPFrame start = generateAUAPFrameFromAUItems(gaze, "start", gaze.getStartValue());
+                    AUAPFrame start = generateAUAPFrameFromAUItems(gaze, "start", gaze.getStart().getValue());
                     AUAPFrame ready = generateAUAPFrameFromAUItems(gaze, "ready", gaze.getTimeMarker("ready").getValue());
                     AUAPFrame relax = generateAUAPFrameFromAUItems(gaze, "relax", gaze.getTimeMarker("relax").getValue());
-                    AUAPFrame end = generateAUAPFrameFromAUItems(gaze, "end", 0.0);
+                    AUAPFrame end = generateAUAPFrameFromAUItems(gaze, "end", gaze.getEnd().getValue());
 
                     interpolator.blendSegment(start, ready, ready, relax, end);
                     
@@ -627,8 +702,26 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     double time = frame.getFrameNumber() * Constants.FRAME_DURATION_SECONDS;
                     AUKeyFrame auKeyFrame = new AUKeyFrame("AUs_at_"+time, time, frame);
                     outputKeyframe.add(auKeyFrame);
-                    }
-                }    
+                    }         
+                }else {                  
+                    addEyesAUFeyFrame(outputKeyframe, gazeId + "_back", "end", gaze.getEnd().getValue(), Side.LEFT, GazeDirection.FRONT, 0.0, 0.0);
+                    addEyesAUFeyFrame(outputKeyframe, gazeId + "_back", "end", gaze.getEnd().getValue(), Side.RIGHT, GazeDirection.FRONT, 0.0, 0.0);   
+                    
+                    AUAPFrame auFrame_l = new AUAPFrame();
+                    AUAPFrame auFrame_r = new AUAPFrame();
+
+                    auFrame_l.setAUAP(61, 0.0, Side.LEFT);
+                    auFrame_l.setAUAP(62, 0.0, Side.LEFT);
+                    auFrame_l.setAUAP(63, 0.0, Side.LEFT);
+                    auFrame_l.setAUAP(64, 0.0, Side.LEFT);
+
+                    auFrame_r.setAUAP(61, 0.0, Side.RIGHT);
+                    auFrame_r.setAUAP(62, 0.0, Side.RIGHT);
+                    auFrame_r.setAUAP(63, 0.0, Side.RIGHT);
+                    auFrame_r.setAUAP(64, 0.0, Side.RIGHT);
+
+                    setGazeRestPosition(new AUKeyFrame(gazeId + "_back", gaze.getEnd().getValue(), auFrame_l), new AUKeyFrame(gazeId + "_back", gaze.getEnd().getValue(), auFrame_r));
+                }
             } else {
                 //euler angles to target + offset, for head
                 HeadAngles ha = new HeadAngles(envi, gaze);
@@ -655,7 +748,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         if (kf instanceof TorsoKeyframe) {
                             timesWithEyesKeyframes.add(kf.getOffset());
                         }
-
                     }
                 }
 
@@ -674,14 +766,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     }else{
                         inf = Influence.EYES;
                     }                   
-                }
-
-                //add to outputkeyframe the eyes keyframe at START time
-                addEyesAUFeyFrame(outputKeyframe, gazeId + "_to", "start", start, Side.LEFT, ha.l_GazeDirection, 0.0, 0.0); //TODO: use shifts
-                addEyesAUFeyFrame(outputKeyframe, gazeId + "_to", "start", start, Side.RIGHT, ha.r_GazeDirection, 0.0, 0.0); //TODO: use shifts
-
-                
-                /*********************************************************************************************************************************************************************************************************************/
+                }               
+                gaze.setInfluence(inf);
+                /*********************************************************************************************************************************************************************************************************************/ 
                 
                 // calculate the SHOULDER max speed depending on the rotation angle
                 double maxVel_shoulder = Math.toRadians(Math.abs((4/3 * Math.toDegrees(Math.abs(sha.sh_minimumAlign*TORSO_YAW_LIMIT))/15 + 2)*Math.toDegrees(TORSO_ANGULAR_SPEED)));
@@ -698,7 +785,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 double timeEyesAtTarget = 0.0;
                 double timeBackEyesAtZero = 0.0;
                 
-                if(inf.ordinal()>Influence.HEAD.ordinal())
+                if(inf.ordinal()> Influence.HEAD.ordinal())
                 {// time head reach the target position and come back
                     timeShoulderAtTarget = start + sha.sh_latency + Math.max(Math.abs(sha.sh_minimumAlign), Math.abs(sha.sh_limitedPitch)) / maxVel_shoulder;
                     double timeBackShoulderAtZero = relax + Math.max(Math.abs(sha.sh_minimumAlign), Math.abs(sha.sh_limitedPitch)) / maxVel_shoulder;
@@ -720,11 +807,12 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     
                     // calculate the max speed of the head depending on the rotation angle
                     Amin = Math.toDegrees(Math.abs(Math.min(sha.ha.l_limitedYaw*EYES_YAW_LIMIT, sha.ha.r_limitedYaw*EYES_YAW_LIMIT)));                
-                    Amin_pitch = Math.toDegrees(Math.abs(Math.min(sha.ha.l_limitedPitch*EYES_PITCH_LIMIT, sha.ha.r_limitedPitch*EYES_PITCH_LIMIT)));              
+                    //Amin_pitch = Math.toDegrees(Math.abs(Math.min(sha.ha.l_limitedPitch*EYES_PITCH_LIMIT, sha.ha.r_limitedPitch*EYES_PITCH_LIMIT)));              
                     maxVel_eyes = Math.toRadians((2*Amin/75 + 1/6)*Math.toDegrees(EYES_ANGULAR_SPEED));
-                    maxVel_eyes_pitch = Math.toRadians((2*Amin_pitch/75 + 1/6)*Math.toDegrees(EYES_ANGULAR_SPEED)); 
-                    timeEyesAtTarget = Math.min(start + Math.max(Math.abs(sha.ha.l_limitedYaw), Math.abs(sha.ha.l_limitedPitch))/ maxVel_eyes, start + Math.max(Math.abs(sha.ha.r_limitedYaw), Math.abs(sha.ha.r_limitedPitch))/ maxVel_eyes);
-                    timeBackEyesAtZero = Math.min(relax + Math.max(Math.abs(sha.ha.l_limitedYaw), Math.abs(sha.ha.l_limitedPitch))/ maxVel_eyes, relax + Math.max(Math.abs(sha.ha.r_limitedYaw), Math.abs(sha.ha.r_limitedPitch)) / maxVel_eyes);
+                    //maxVel_eyes_pitch = Math.toRadians((2*Amin_pitch/75 + 1/6)*Math.toDegrees(EYES_ANGULAR_SPEED)); 
+                    timeEyesAtTarget = Math.min(start +Math.abs(sha.ha.l_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes, start + Math.abs(sha.ha.r_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes);
+                    timeBackEyesAtZero = Math.min(relax + Math.abs(sha.ha.l_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes, relax + Math.abs(sha.ha.r_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes);
+                    //timeBackEyesAtZero = Math.min(relax + Math.max(Math.abs(sha.ha.l_limitedYaw), Math.abs(sha.ha.l_limitedPitch))/ maxVel_eyes, relax + Math.max(Math.abs(sha.ha.r_limitedYaw), Math.abs(sha.ha.r_limitedPitch)) / maxVel_eyes);
                     timesWithEyesKeyframes.add(timeEyesAtTarget);
                     timesWithEyesKeyframes.add(timeBackEyesAtZero);   
                 
@@ -743,25 +831,26 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     timesWithEyesKeyframes.add(timeBackHeadAtZero); 
                     
                     // calculate the max speed of the head depending on the rotation angle
-                    Amin = Math.toDegrees(Math.abs(Math.min(ha.l_limitedYaw*EYES_YAW_LIMIT, ha.r_limitedYaw*EYES_YAW_LIMIT)));                
-                    Amin_pitch = Math.toDegrees(Math.abs(Math.min(ha.l_limitedPitch*EYES_PITCH_LIMIT, ha.r_limitedPitch*EYES_PITCH_LIMIT)));              
-                    maxVel_eyes = Math.toRadians((2*Amin/75 + 1/6)*Math.toDegrees(EYES_ANGULAR_SPEED));
-                    maxVel_eyes_pitch = Math.toRadians((2*Amin_pitch/75 + 1/6)*Math.toDegrees(EYES_ANGULAR_SPEED)); 
-                    timeEyesAtTarget = Math.min(start + Math.max(Math.abs(ha.l_limitedYaw), Math.abs(ha.l_limitedPitch))/ maxVel_eyes, start + Math.max(Math.abs(ha.r_limitedYaw), Math.abs(ha.r_limitedPitch))/ maxVel_eyes);
-                    timeBackEyesAtZero = Math.min(relax + Math.max(Math.abs(ha.l_limitedYaw), Math.abs(ha.l_limitedPitch))/ maxVel_eyes, relax + Math.max(Math.abs(ha.r_limitedYaw), Math.abs(ha.r_limitedPitch)) / maxVel_eyes);
+                    Amin = Math.toDegrees(Math.abs(Math.min(Math.abs(ha.l_limitedYaw)*EYES_YAW_LIMIT, Math.abs(ha.r_limitedYaw)*EYES_YAW_LIMIT)));                
+                    //Amin_pitch = Math.toDegrees(Math.abs(Math.min(ha.l_limitedPitch*EYES_PITCH_LIMIT, ha.r_limitedPitch*EYES_PITCH_LIMIT)));              
+                    maxVel_eyes = Math.toRadians((2*Amin/75 + (1/6))*Math.toDegrees(EYES_ANGULAR_SPEED));
+                    //maxVel_eyes_pitch = Math.toRadians((2*Amin_pitch/75 + 1/6)*Math.toDegrees(EYES_ANGULAR_SPEED)); 
+                    timeEyesAtTarget = Math.min(start +Math.abs(ha.l_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes, start + Math.abs(ha.r_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes);
+                    timeBackEyesAtZero = Math.min(relax + Math.abs(ha.l_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes, relax + Math.abs(ha.r_limitedYaw*EYES_YAW_LIMIT) / maxVel_eyes);
+                    //timeEyesAtTarget = Math.min(start + Math.max(Math.abs(ha.l_limitedYaw*EYES_YAW_LIMIT), Math.abs(ha.l_limitedPitch*EYES_PITCH_LIMIT))/ maxVel_eyes, start + Math.max(Math.abs(ha.r_limitedYaw*EYES_YAW_LIMIT), Math.abs(ha.r_limitedPitch*EYES_PITCH_LIMIT))/ maxVel_eyes);
+                    //timeBackEyesAtZero = Math.min(relax + Math.max(Math.abs(ha.l_limitedYaw*EYES_YAW_LIMIT), Math.abs(ha.l_limitedPitch*EYES_PITCH_LIMIT))/ maxVel_eyes, relax + Math.max(Math.abs(ha.r_limitedYaw*EYES_YAW_LIMIT), Math.abs(ha.r_limitedPitch*EYES_PITCH_LIMIT)) / maxVel_eyes);
                     timesWithEyesKeyframes.add(timeEyesAtTarget);
                     timesWithEyesKeyframes.add(timeBackEyesAtZero);
                 }else {  
                     // calculate the max speed of the head depending on the rotation angle
                     Amin = Math.toDegrees(Math.abs(Math.min(ha.l_limitedYaw*EYES_YAW_LIMIT, ha.r_limitedYaw*EYES_YAW_LIMIT)));                
-                    Amin_pitch = Math.toDegrees(Math.abs(Math.min(ha.l_limitedPitch*EYES_PITCH_LIMIT, ha.r_limitedPitch*EYES_PITCH_LIMIT)));              
+                    //Amin_pitch = Math.toDegrees(Math.abs(Math.min(ha.l_limitedPitch*EYES_PITCH_LIMIT, ha.r_limitedPitch*EYES_PITCH_LIMIT)));              
                     maxVel_eyes = Math.toRadians((2*Amin/75 + 1/6)*Math.toDegrees(EYES_ANGULAR_SPEED));
-                    maxVel_eyes_pitch = Math.toRadians((2*Amin_pitch/75 + 1/6)*Math.toDegrees(EYES_ANGULAR_SPEED)); 
-                    timeEyesAtTarget = Math.min(start + Math.max(Math.abs(ha.l_limitedYaw), Math.abs(ha.l_limitedPitch))/ maxVel_eyes, start + Math.max(Math.abs(ha.r_limitedYaw), Math.abs(ha.r_limitedPitch))/ maxVel_eyes);
-                    timeBackEyesAtZero = Math.min(relax + Math.max(Math.abs(ha.l_limitedYaw), Math.abs(ha.l_limitedPitch))/ maxVel_eyes, relax + Math.max(Math.abs(ha.r_limitedYaw), Math.abs(ha.r_limitedPitch)) / maxVel_eyes);
-                    timesWithEyesKeyframes.add(timeEyesAtTarget);
+                    //maxVel_eyes_pitch = Math.toRadians((2*Amin_pitch/75 + 1/6)*Math.toDegrees(EYES_ANGULAR_SPEED)); 
+                    timeEyesAtTarget = Math.min(start +Math.abs(ha.l_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes, start + Math.abs(ha.r_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes);
+                    timeBackEyesAtZero = Math.min(relax + Math.abs(ha.l_limitedYaw*EYES_YAW_LIMIT)/ maxVel_eyes, relax + Math.abs(ha.r_limitedYaw*EYES_YAW_LIMIT) / maxVel_eyes);
                     timesWithEyesKeyframes.add(timeBackEyesAtZero);                   
-                }          
+                }      
                 
                 //else, just use ready and relax of the gaze
                 timesWithEyesKeyframes.add(ready);
@@ -774,7 +863,13 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 if (head_latency > sha.sh_latency){
                     head_latency = 0.0;
                 }
-
+                
+                //add to outputkeyframe the eyes keyframe at START time
+                if (!gaze.isGazeShift()){
+                    addEyesAUFeyFrame(outputKeyframe, gazeId + "_to", "start", start, Side.LEFT, ha.l_GazeDirection, 0.0, 0.0);
+                    addEyesAUFeyFrame(outputKeyframe, gazeId + "_to", "start", start, Side.RIGHT, ha.r_GazeDirection, 0.0, 0.0);
+                }
+                
                 // add Keyframes for the eyes at every moment there is a body keyframe between start and end
                 // for instance, when there is a nod, the eyes should keep on the target
                 if (!timesWithEyesKeyframes.isEmpty()) {
@@ -802,13 +897,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                             l_limitPitch = sha.ha.l_limitedPitch;
                                             r_limitPitch = sha.ha.r_limitedPitch;
 
-                                        } else if (time < timeEyesAtTarget) {
-                                            l_limitYaw = (sha.ha.l_limitedYaw - (timeEyesAtTarget - time)*maxVel_eyes);
-                                            r_limitYaw = (sha.ha.r_limitedYaw - (timeEyesAtTarget - time)*maxVel_eyes);
-                                            l_limitPitch = (sha.ha.l_limitedPitch - (timeEyesAtTarget - time)*maxVel_eyes_pitch);
-                                            r_limitPitch = (sha.ha.r_limitedPitch- (timeEyesAtTarget - time)*maxVel_eyes_pitch);
-
-                                        }
+                                        } /*else if (time < timeEyesAtTarget){
+                                            if (!gaze.isGazeShift()){
+                                                l_limitYaw = (sha.ha.l_limitedYaw - (timeEyesAtTarget - time)*maxVel_eyes);
+                                                r_limitYaw = (sha.ha.r_limitedYaw - (timeEyesAtTarget - time)*maxVel_eyes);
+                                                l_limitPitch = (sha.ha.l_limitedPitch - (timeEyesAtTarget - time)*maxVel_eyes_pitch);
+                                                r_limitPitch = (sha.ha.r_limitedPitch- (timeEyesAtTarget - time)*maxVel_eyes_pitch);
+                                            }
+                                        }*/
                                     }
                                 /* -------------------------------------------------
                                 * INFLUENCE INVOLVES JUST THE HEAD    
@@ -820,48 +916,134 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                             r_limitYaw = ha.r_limitedYaw;
                                             l_limitPitch = ha.l_limitedPitch;
                                             r_limitPitch = ha.r_limitedPitch;
-
-                                        }else if (time < timeEyesAtTarget) {
-                                            l_limitYaw = ha.l_limitedYaw - (timeEyesAtTarget - time)*maxVel_eyes;
-                                            r_limitYaw = ha.r_limitedYaw - (timeEyesAtTarget - time)*maxVel_eyes;
-                                            l_limitPitch = ha.l_limitedPitch - (timeEyesAtTarget - time)*maxVel_eyes_pitch;
-                                            r_limitPitch = ha.r_limitedPitch - (timeEyesAtTarget - time)*maxVel_eyes_pitch;
-                                        }
+                                        }/*else if (time < timeEyesAtTarget) {
+                                            if (!gaze.isGazeShift()){
+                                                l_limitYaw = ha.l_limitedYaw - (timeEyesAtTarget - time)*maxVel_eyes;
+                                                r_limitYaw = ha.r_limitedYaw - (timeEyesAtTarget - time)*maxVel_eyes;
+                                                l_limitPitch = ha.l_limitedPitch - (timeEyesAtTarget - time)*maxVel_eyes_pitch;
+                                                r_limitPitch = ha.r_limitedPitch - (timeEyesAtTarget - time)*maxVel_eyes_pitch;
+                                            }
+                                        }*/
                                 }
                             /************************************************* 
                              * BACK TO ZERO
                             **************************************************/    
                             } else if (time > relax && time < end && !gaze.isGazeShift()) {                            
-                                        // if the eyes reach already the target position
-                                        if (time < timeBackEyesAtZero){        
-                                            l_limitYaw = (timeBackEyesAtZero - time)*maxVel_eyes;
-                                            r_limitYaw = (timeBackEyesAtZero - time)*maxVel_eyes;
-                                            l_limitPitch = (timeBackEyesAtZero - time)*maxVel_eyes_pitch;
-                                            r_limitPitch = (timeBackEyesAtZero - time)*maxVel_eyes_pitch;                                            
-                                        } else if ( time >= timeBackEyesAtZero ){
-                                            l_limitYaw = 0.0;
-                                            r_limitYaw = 0.0;
-                                            l_limitPitch = 0.0;
-                                            r_limitPitch = 0.0;
-                                        }  
-                            }
+                                // if the eyes reach already the target position
+                                /*if (time < timeBackEyesAtZero){        
+                                    l_limitYaw = (timeBackEyesAtZero - time)*maxVel_eyes;
+                                    r_limitYaw = (timeBackEyesAtZero - time)*maxVel_eyes;
+                                    l_limitPitch = (timeBackEyesAtZero - time)*maxVel_eyes_pitch;
+                                    r_limitPitch = (timeBackEyesAtZero - time)*maxVel_eyes_pitch;                                            
+                                } else */if ( time >= timeBackEyesAtZero ){
+                                    if (defaultGaze_l.getAus().getAUAP(61, Side.LEFT).getValue() != 0 || defaultGaze_r.getAus().getAUAP(62, Side.RIGHT).getValue() != 0 
+                                            || defaultGaze_l.getAus().getAUAP(63, Side.LEFT).getValue() != 0 || defaultGaze_r.getAus().getAUAP(63, Side.RIGHT).getValue() != 0
+                                            || defaultGaze_l.getAus().getAUAP(64, Side.LEFT).getValue() != 0|| defaultGaze_r.getAus().getAUAP(64, Side.RIGHT).getValue() != 0){
+                                        defaultGaze_l.setOnset(time);
+                                        defaultGaze_l.setOffset(time);
+                                        defaultGaze_r.setOnset(time);
+                                        defaultGaze_r.setOffset(time);
+                                        outputKeyframe.add(defaultGaze_l);
+                                        outputKeyframe.add(defaultGaze_r);  
+                                        
+                                        l_limitYaw = -10; 
+                                        r_limitYaw = -10;
+                                        l_limitPitch = -10;
+                                        r_limitPitch = -10;
+                                    }else {
+                                        l_limitYaw = 0.0;
+                                        r_limitYaw = 0.0;
+                                        l_limitPitch = 0.0;
+                                        r_limitPitch = 0.0;
+                                    }
+                                    
+                                }  
+                            }    
                             
-                            // add eyeskeyframe
-                            addEyesAUFeyFrame(outputKeyframe, gazeId + "_to", gazeId + "_to_kf" + time, time, Side.LEFT,
-                                ha.l_GazeDirection, l_limitYaw, l_limitPitch);
-                            addEyesAUFeyFrame(outputKeyframe, gazeId + "_to", gazeId + "_to_kf" + time, time, Side.RIGHT,
-                                ha.r_GazeDirection, r_limitYaw, r_limitPitch);  
+                           // add eyeskeyframe
+                            if (l_limitYaw != -10 && r_limitYaw != -10 && l_limitPitch != -10 && r_limitPitch != -10){
+                                addEyesAUFeyFrame(outputKeyframe, gazeId + "_to", gazeId + "_to_kf" + time, time, Side.LEFT,
+                                    ha.l_GazeDirection, l_limitYaw, l_limitPitch);
+                                addEyesAUFeyFrame(outputKeyframe, gazeId + "_to", gazeId + "_to_kf" + time, time, Side.RIGHT,
+                                    ha.r_GazeDirection, r_limitYaw, r_limitPitch);  
+                            }
 
                             latestTime = time;                        
                         }
                     }
-                    // Add gazekeyframe for the end of the gaze
-                    if(!gaze.isGazeShift())
-                    {
-                        addEyesAUFeyFrame(outputKeyframe, gazeId + "_back", "end", end, Side.LEFT, GazeDirection.FRONT, 0.0, 0.0); //TODO: use shifts               
-                        addEyesAUFeyFrame(outputKeyframe, gazeId + "_back", "end", end, Side.RIGHT, GazeDirection.FRONT, 0.0, 0.0); //TODO: use shifts
-                    }
+                    
+                    // Add gazekeyframe for the END of the gaze
+                    if(!gaze.isGazeShift()){
+                        if (defaultGaze_l.getAus().getAUAP(61, Side.LEFT).getValue() != 0 || defaultGaze_r.getAus().getAUAP(62, Side.RIGHT).getValue() != 0 
+                                || defaultGaze_l.getAus().getAUAP(63, Side.LEFT).getValue() != 0 || defaultGaze_r.getAus().getAUAP(63, Side.RIGHT).getValue() != 0
+                                || defaultGaze_l.getAus().getAUAP(64, Side.LEFT).getValue() != 0|| defaultGaze_r.getAus().getAUAP(64, Side.RIGHT).getValue() != 0){
+                            defaultGaze_l.setOnset(end);
+                            defaultGaze_l.setOffset(end);
+                            defaultGaze_r.setOnset(end);
+                            defaultGaze_r.setOffset(end);
+                            outputKeyframe.add(defaultGaze_l);
+                            outputKeyframe.add(defaultGaze_r);
+                        }else {
+                            addEyesAUFeyFrame(outputKeyframe, gazeId + "_back", "end", end, Side.LEFT, GazeDirection.FRONT, 0.0, 0.0); 
+                            addEyesAUFeyFrame(outputKeyframe, gazeId + "_back", "end", end, Side.RIGHT, GazeDirection.FRONT, 0.0, 0.0);  
+                            
+                            AUAPFrame auFrame_l = new AUAPFrame();
+                            AUAPFrame auFrame_r = new AUAPFrame();
+                        
+                            auFrame_l.setAUAP(61, 0.0, Side.LEFT);
+                            auFrame_l.setAUAP(62, 0.0, Side.LEFT);
+                            auFrame_l.setAUAP(63, 0.0, Side.LEFT);
+                            auFrame_l.setAUAP(64, 0.0, Side.LEFT);
 
+                            auFrame_r.setAUAP(61, 0.0, Side.RIGHT);
+                            auFrame_r.setAUAP(62, 0.0, Side.RIGHT);
+                            auFrame_r.setAUAP(63, 0.0, Side.RIGHT);
+                            auFrame_r.setAUAP(64, 0.0, Side.RIGHT);
+                            
+                            setGazeRestPosition(new AUKeyFrame(gazeId + "_back", end, auFrame_l), new AUKeyFrame(gazeId + "_back", end, auFrame_r));
+                        }
+                    }else{
+                        addEyesAUFeyFrame(outputKeyframe, gazeId + "_back", "end", end, Side.LEFT, ha.l_GazeDirection, l_limitYaw, l_limitPitch);
+                        addEyesAUFeyFrame(outputKeyframe, gazeId + "_back", "end", end, Side.RIGHT, ha.r_GazeDirection, r_limitYaw, r_limitPitch);
+                        
+                        AUAPFrame auFrame_l = new AUAPFrame();
+                        AUAPFrame auFrame_r = new AUAPFrame();
+                        //AU61: eyes turn left
+                        if (ha.l_GazeDirection == GazeDirection.DOWNLEFT || ha.l_GazeDirection == GazeDirection.LEFT || ha.l_GazeDirection == GazeDirection.UPLEFT) {
+                            auFrame_l.setAUAP(61, l_limitYaw / EYES_YAW_LIMIT, Side.LEFT);
+                        }
+                        //AU62: eyes turn right
+                        if (ha.l_GazeDirection == GazeDirection.DOWNRIGHT || ha.l_GazeDirection == GazeDirection.RIGHT || ha.l_GazeDirection == GazeDirection.UPRIGHT) {
+                            auFrame_l.setAUAP(62, l_limitYaw / EYES_YAW_LIMIT, Side.LEFT);
+                        }
+                        //AU63: eyes up
+                        if (ha.l_GazeDirection == GazeDirection.UPRIGHT || ha.l_GazeDirection == GazeDirection.UP || ha.l_GazeDirection == GazeDirection.UPLEFT) {
+                            auFrame_l.setAUAP(63, l_limitPitch / EYES_PITCH_LIMIT, Side.LEFT);
+                        }
+                        //AU64: eyes down
+                        if (ha.l_GazeDirection == GazeDirection.DOWNRIGHT || ha.l_GazeDirection == GazeDirection.DOWN || ha.l_GazeDirection == GazeDirection.DOWNLEFT) {
+                            auFrame_l.setAUAP(64, l_limitPitch / EYES_PITCH_LIMIT, Side.LEFT);
+                        }
+                        
+                        //AU61: eyes turn left
+                        if (ha.l_GazeDirection == GazeDirection.DOWNLEFT || ha.l_GazeDirection == GazeDirection.LEFT || ha.l_GazeDirection == GazeDirection.UPLEFT) {
+                            auFrame_r.setAUAP(61, r_limitYaw / EYES_YAW_LIMIT, Side.RIGHT);
+                        }
+                        //AU62: eyes turn right
+                        if (ha.l_GazeDirection == GazeDirection.DOWNRIGHT || ha.l_GazeDirection == GazeDirection.RIGHT || ha.l_GazeDirection == GazeDirection.UPRIGHT) {
+                            auFrame_r.setAUAP(62, r_limitYaw / EYES_YAW_LIMIT, Side.RIGHT);
+                        }
+                        //AU63: eyes up
+                        if (ha.l_GazeDirection == GazeDirection.UPRIGHT || ha.l_GazeDirection == GazeDirection.UP || ha.l_GazeDirection == GazeDirection.UPLEFT) {
+                            auFrame_r.setAUAP(63, r_limitPitch / EYES_PITCH_LIMIT, Side.RIGHT);
+                        }
+                        //AU64: eyes down
+                        if (ha.l_GazeDirection == GazeDirection.DOWNRIGHT || ha.l_GazeDirection == GazeDirection.DOWN || ha.l_GazeDirection == GazeDirection.DOWNLEFT) {
+                            auFrame_r.setAUAP(64, r_limitPitch / EYES_PITCH_LIMIT, Side.RIGHT);
+                        }
+                            
+                        setGazeRestPosition(new AUKeyFrame(gazeId + "_back", end, auFrame_l), new AUKeyFrame(gazeId + "_back", end, auFrame_r));
+                    }
                 }
             }
         }
@@ -1833,10 +2015,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 withinEyesLimit = true;
             }
             // N.B. --> limited angles for the eyes have to be positive for both rotation direction 
-            l_limitedYaw = (Math.min(Math.abs(l_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT; // Math.signum(l_yawAngle) * 
-            r_limitedYaw = (Math.min(Math.abs(r_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT; // Math.signum(r_yawAngle) * 
-            l_limitedPitch = (Math.min(Math.abs(l_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT; // ToDo: distinguish between up and down head pitch limit. now the two values are equal.
-            r_limitedPitch = (Math.min(Math.abs(r_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT;  
+            l_limitedYaw = Math.abs((Math.min(Math.abs(l_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT); // Math.signum(l_yawAngle) * 
+            r_limitedYaw = Math.abs((Math.min(Math.abs(r_yawAngle), EYES_YAW_LIMIT)- Math.abs(h_limitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT); // Math.signum(r_yawAngle) * 
+            l_limitedPitch = Math.abs((Math.min(Math.abs(l_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT); // ToDo: distinguish between up and down head pitch limit. now the two values are equal.
+            r_limitedPitch = Math.abs((Math.min(Math.abs(r_pitchAngle), EYES_PITCH_LIMIT)- Math.abs(h_limitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT);  
 
             return withinEyesLimit;
         }
@@ -1902,14 +2084,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 
                                 //System.out.println(CharacterManager.getStaticInstance().currentPosition.size());
                                 //System.out.println(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue());              
-                                Vec3d headAgent = new Vec3d( Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue()),
-                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(11).getParamValue()),
-                                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(12).getParamValue()));
+                                Vec3d headAgent = new Vec3d( Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(10).getParamValue()),
+                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(11).getParamValue()),
+                                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(12).getParamValue()));
 
-                                Quaternion OrientAgent = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(0).getParamValue()),
-                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(1).getParamValue()),
-                                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(2).getParamValue()),
-                                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(3).getParamValue()));
+                                Quaternion OrientAgent = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(0).getParamValue()),
+                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(1).getParamValue()),
+                                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(2).getParamValue()),
+                                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(3).getParamValue()));
 
                                 Vec3d Agl_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_l_eye_offset));
                                 Vec3d Agr_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_r_eye_offset));
@@ -1939,14 +2121,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 
                 if (targetNode != null || vec2target != null) {
                     
-                    // head position 
-                    Vec3d headPosition = new Vec3d(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(10).getParamValue()), //get(10).getParamValue()),
-                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(11).getParamValue()), // cm.currentPosition.get(11).getParamValue()
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(12).getParamValue()));//((TreeNode) originAudioTreeNode).getGlobalCoordinates();
-                    
-                    
                     //if target is animatable, look at head (for now ! ideally it should be specified in the target attribute)
-                    
                     if (Animatable.class.isInstance(targetNode)) {
                         vec2target = ((TreeNode) env.getNode(gaze.getTarget() + "_AudioTreeNode")).getGlobalCoordinates();
                         vec2target = new Vec3d(vec2target.x(), vec2target.y() + 0.09f, vec2target.z() + 0.13f); // TODO: offsets are in local values, they must be in global values
@@ -1961,13 +2136,34 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         }
                     }
                     
-                    //TO BE: check that it takes the position of correct character 
+                    // head position
+                    Vec3d headPosition = new Vec3d(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(10).getParamValue()), //get(10).getParamValue()),
+                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(11).getParamValue()), // cm.currentPosition.get(11).getParamValue()
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(12).getParamValue()));//((TreeNode) originAudioTreeNode).getGlobalCoordinates();
+                    
                     //head oreintation
+                    
                     Quaternion orient = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(0).getParamValue()),
+                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
+                                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
+                                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue()));
+                    
+                    /*Quaternion orient = new Quaternion( new Vec3d (1,0,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(13).getParamValue()));
+                    orient.multiply(new Quaternion( new Vec3d (0,1,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(14).getParamValue())));
+                    orient.multiply(new Quaternion( new Vec3d (0,0,1),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(15).getParamValue())));
+                    // add the rotation of the root
+                    orient.multiply(new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(0).getParamValue()),
                                                         Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
                                                         Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue()));
-                               
+                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue())));
+                    Vec3d nn = orient.toEulerXYZInDegrees();
+                    nn.normalized();
+                    if (gaze.isGazeShift()){
+                        if (gaze.getOrigin_orientation() != null){
+                            orient.multiply(gaze.getOrigin_orientation());
+                        }
+                    }*/
+                    
                     Vec3d head = Vec3d.addition(headPosition, orient.rotate(headAngles_head_offset));
                     Vec3d l_eye = Vec3d.addition(headPosition, orient.rotate(headAngles_l_eye_offset));
                     Vec3d r_eye = Vec3d.addition(headPosition, orient.rotate(headAngles_r_eye_offset));
@@ -2195,14 +2391,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 
                                 //System.out.println(CharacterManager.getStaticInstance().currentPosition.size());
                                 //System.out.println(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue());              
-                                Vec3d headAgent = new Vec3d( Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue()),
-                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(11).getParamValue()),
-                                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(12).getParamValue()));
+                                Vec3d headAgent = new Vec3d( Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(10).getParamValue()),
+                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(11).getParamValue()),
+                                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(12).getParamValue()));
 
-                                Quaternion OrientAgent = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(0).getParamValue()),
-                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(1).getParamValue()),
-                                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(2).getParamValue()),
-                                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(3).getParamValue()));
+                                Quaternion OrientAgent = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(0).getParamValue()),
+                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(1).getParamValue()),
+                                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(2).getParamValue()),
+                                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(3).getParamValue()));
 
                                 Vec3d Agl_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_l_eye_offset));
                                 Vec3d Agr_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_r_eye_offset));
@@ -2254,6 +2450,21 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                                         Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
                                                         Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
                                                         Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue()));
+                        //head oreintation
+                        /*Quaternion orient = new Quaternion( new Vec3d (1,0,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(13).getParamValue()));
+                        orient.multiply(new Quaternion( new Vec3d (0,1,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(14).getParamValue())));
+                        orient.multiply(new Quaternion( new Vec3d (0,0,1),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(15).getParamValue())));
+                        //add the rotation of the root
+                        orient.multiply(new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(0).getParamValue()),
+                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
+                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
+                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue())));
+
+                        if (gaze.isGazeShift()){
+                            if (gaze.getOrigin_orientation() != null){
+                                orient.multiply(gaze.getOrigin_orientation());
+                            }
+                        }*/
                  
                         //TODO : adapt with scale,character meshes
                         Vec3d shoulder = Vec3d.addition(headPosition, orient.rotate(shoulderAngles_head_offset));

@@ -26,6 +26,7 @@ import vib.core.signals.Signal;
 import vib.core.signals.SpineDirection;
 import vib.core.signals.SpinePhase;
 import vib.core.signals.TorsoSignal;
+import vib.core.util.CharacterManager;
 
 /**
  *
@@ -44,7 +45,6 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
     protected void generateKeyframes(List<Signal> inputSignals, List<Keyframe> outputKeyframes) {
 
         for (Signal signal : inputSignals) {
-
             TorsoSignal torso = (TorsoSignal) signal;
             torso.schedulePhases();
             
@@ -55,7 +55,7 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
                 startKeyframe = new TorsoKeyframe(defaultPosition);
             }
             else if(keyframes.peekLast().getOffset()<=torso.getPhases().get(0).getStartTime()){
-                startKeyframe = new TorsoKeyframe(keyframes.peekLast());
+                    startKeyframe = new TorsoKeyframe(keyframes.peekLast());
             }
 
             if(startKeyframe != null){
@@ -75,7 +75,10 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
                 keyframes.add(startKeyframe);
             }
 
-            keyframes.add(createKeyFrame(torso, torso.getPhases().get(torso.getPhases().size()-1)));
+            TorsoKeyframe kf = null;
+                kf = createKeyFrame(torso, torso.getPhases().get(torso.getPhases().size()-1));
+            keyframes.add(kf);
+            //keyframes.add(createKeyFrame(torso, torso.getPhases().get(torso.getPhases().size()-1)));
             
             //V) add the ShoulderKeyframe into the output list
             outputKeyframes.addAll(keyframes);
@@ -97,6 +100,7 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
     
     private void setRestPosition(TorsoKeyframe phase){
         defaultPosition.verticalTorsion = new SpineDirection(phase.verticalTorsion); //phase.verticalTorsion;
+        CharacterManager.getStaticInstance().defaultFrame.add(1, (Object) defaultPosition);
         return;
     }
     

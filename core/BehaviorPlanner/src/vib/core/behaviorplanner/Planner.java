@@ -230,7 +230,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             // in diectic if we have the target attribute the Agent have to use the gaze 
             BehaviorSet deict_set = new BehaviorSet("deictic-gaze");
             // if target attribute is != null a new behaviorset for the gaze is crated 
-            if (intention.getName().equals("deictic") && (intention.getTarget()!= null || intention.getTarget()!= "")){
+            if (intention.getName().equals("deictic") && intention.getTarget()!= null && intention.getTarget()!= ""){
                 SignalItem gaz = new SignalItem("1", "gaze", null);
                 deict_set.add(gaz);
             }
@@ -271,13 +271,13 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                         String agent = tg.substring(underscoreIndex + 1).trim();
                         signa.setTarget(agent); // set agent name as target
                         //System.out.println(CharacterManager.getStaticInstance().currentPosition.keySet().size());
-                        for ( String key : CharacterManager.getStaticInstance().currentPosition.keySet() ) {
+                        /*for ( String key : CharacterManager.getStaticInstance().currentPosition.keySet() ) {
                             // if equal to the character get as target, take the id
                             //System.out.println(key.get(1));
                             if(key.equals(agent)){ // check the name of the agent to gaze
                                 signa.setOrigin(key); // take the character id 
                             }
-                        }
+                        }*/
                     }else {
                         signa.setTarget(intention.getTarget());
                         signa.setCharacterManager(this.getCharacterManager());

@@ -25,7 +25,6 @@ import vib.core.util.math.Vec3d;
 import vib.core.util.xml.XML;
 import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
-import vib.core.util.environment.CameraInfo;
 
 /**
  *

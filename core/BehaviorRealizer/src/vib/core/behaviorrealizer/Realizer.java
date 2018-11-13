@@ -68,7 +68,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     private FaceKeyframeGenerator faceGenerator;
     private GestureKeyframeGenerator gestureGenerator;
     private Comparator<Keyframe> keyframeComparator;
-    private Environment environment = new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
+    private Environment environment;  //new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
     private CharacterManager characterManager;
 
@@ -96,11 +96,15 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
                 return (int) Math.signum(o1.getOffset() - o2.getOffset());
             }
         };
+        
+        // environment
+        environment = IniManager.getGlobals().getEnvi();        
     }
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
 
+        environment = IniManager.getGlobals().getEnvi();  
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<Keyframe>();
 

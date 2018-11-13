@@ -104,8 +104,28 @@ public class OgreFrame extends JFrame implements Capturable{
     }
 
 
-    public void setEnvironment(Environment env){
+    public void setEnvironment(Environment env){  
+        // copy the environment
+        /*AllObj = env;
+        // create a Leaf where put the info abou the camra position, id and orientation 
+        Leaf Cam = new Leaf();
+        //id
+        Cam.setIdentifier("Camera");
+        Cam.setReference("Camera");
+        
+        TreeNode camer = new TreeNode();
+        //position
+        camer.setCoordinates(new Vec3d(ogreView.getCameraDefaultPosX(), ogreView.getCameraDefaultPosY(),ogreView.getCameraDefaultPosZ()));
+        //orientation    
+        camer.setOrientation(ogreView.getCameraDefaultPitch(), ogreView.getCameraDefaultYaw(), ogreView.getCameraDefaultRoll());
+        // scale
+        camer.setScale(1.0, 1.0, 1.0);
+        
+        Cam.setParent(camer);
+        env.addLeaf(Cam);//addNode((Node) Cam);*/
+        
         ogreView.setEnvironment(env);
+        //env.setCameraInfo(this);
         ogreView.repaint();
     }
 

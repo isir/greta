@@ -52,7 +52,11 @@ public class HandShapeLibrary extends ParameterSet<HandShape> implements Charact
      */
     @Override
     public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
         this.characterManager = characterManager;
+        characterManager.add(this);
+        //this.characterManager = characterManager;
     }
 
     public HandShapeLibrary() {

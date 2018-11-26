@@ -143,4 +143,10 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerforme
     public void onCharacterChanged() {
         System.out.println("SimpleAUPerformer.onCharacterChanged(): nothing done.");
     }
+    
+    public void UpdateLexicon(){
+        //remove the old lexicon to be sure to not have two lexicons
+        this.getCharacterManager().remove(auLibrary);        
+        auLibrary = new AULibrary(this.getCharacterManager());  
+    }
 }

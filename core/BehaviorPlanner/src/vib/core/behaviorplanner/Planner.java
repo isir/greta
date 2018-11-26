@@ -440,4 +440,10 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
     public void onCharacterChanged() {
         Logs.info("Planner received onCharacterChanged, but does nothing itself. Should it ?");
     }
+    
+    public void UpdateLexicon(){
+        //remove the old lexicon to be sure to not have two lexicons
+        this.getCharacterManager().remove(lexicon);        
+        lexicon = new Lexicon(this.getCharacterManager());    
+    }
 }

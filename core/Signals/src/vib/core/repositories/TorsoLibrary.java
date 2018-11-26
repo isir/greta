@@ -40,7 +40,7 @@ public class TorsoLibrary extends SignalLibrary<TorsoSignal> implements Characte
 
     private static final String TORSO_LIBRARY_PARAM_NAME;
     private static final String TORSO_LIBRARY_XSD;
-    public static final TorsoLibrary globalLibrary;
+    public static TorsoLibrary globalLibrary;
     private CharacterManager characterManager;
     
     /**

@@ -292,6 +292,9 @@
         </module>
         <module name="BehaviorPlanner" style="BehaviorPlanner">
             <object class="vib.core.behaviorplanner.Planner" lib_id="vib_behavior_planner"/>
+			<frame class="vib.core.behaviorplanner.gui.UpdateLexiconPlanner" lib_id="vib_behavior_planner" type="frame">
+                <link method="UpdateLexicon" on="frame"/>
+            </frame>
         </module>
         <!--<module name="MultiLayerSequencePlanner" style="BehaviorPlanner">
             <object class="vib.auxiliary.multilayerattitudeplanner.SequencePlanner" lib_id="vib_multilayer_attitude_planner"/>
@@ -318,6 +321,9 @@
         </module>
         <module name="BehaviorRealizer" style="BehaviorRealizer">
             <object class="vib.core.behaviorrealizer.Realizer" lib_id="vib_behavior_realizer"/>
+			<frame class="vib.core.behaviorrealizer.gui.RealizerGui" lib_id="vib_behavior_realizer" type="frame">
+                <link method="UpdateLibraries" on="frame"/>
+            </frame>
         </module>
         <module name="FMLFileWriter" style="Intentions">
             <object class="vib.core.intentions.FMLFileWriter" lib_id="vib_intentions"/>
@@ -527,7 +533,9 @@
         </module>
         <module name="SimpleAUPerformer" style="Animations">
             <object class="vib.core.keyframes.face.SimpleAUPerformer" lib_id="vib_signals"/>
-            <frame type="noFrame"/>
+			<frame class="vib.core.keyframes.face.SimpleAUPerfGui" lib_id="vib_signals" type="frame">
+                <link method="UpdateLexicon" on="frame"/>
+            </frame>
         </module>
         <module name="SimpleHeadPerformer" style="Animations">
             <object class="vib.core.keyframes.face.SimpleHeadPerformer" lib_id="vib_signals"/>

@@ -34,7 +34,14 @@ import vib.core.keyframes.Keyframe;
 import vib.core.keyframes.KeyframeEmitter;
 import vib.core.keyframes.KeyframePerformer;
 import vib.core.keyframes.PhonemSequence;
+import vib.core.repositories.AULibrary;
+import static vib.core.repositories.AULibrary.CHARACTER_PARAMETER_AULIBRARY;
+import vib.core.repositories.FaceLibrary;
+import vib.core.repositories.Gestuary;
+import vib.core.repositories.HandShapeLibrary;
+import vib.core.repositories.HeadLibrary;
 import vib.core.repositories.SignalFiller;
+import vib.core.repositories.TorsoLibrary;
 import vib.core.signals.Signal;
 import vib.core.signals.SignalPerformer;
 import vib.core.signals.gesture.PointingSignal;
@@ -259,4 +266,81 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
     }
+    
+    public void UpdateFaceLibrary(){
+        
+        this.getCharacterManager().remove(FaceLibrary.global_facelibrary);    
+        FaceLibrary.global_facelibrary = new FaceLibrary(this.getCharacterManager());
+        //get the default Lexicon :
+        FaceLibrary.global_facelibrary.setDefaultDefinition(this.getCharacterManager().getDefaultValueString("FACELIBRARY"));
+        //load additionnal Lexicon :
+        for (String filename : this.getCharacterManager().getAllValuesString("FACELIBRARY")) {
+            FaceLibrary.global_facelibrary.addDefinition(filename);
+        }
+        //set the current Lexicon to use :
+        FaceLibrary.global_facelibrary.setDefinition(this.getCharacterManager().getValueString("FACELIBRARY"));
+        // System.out.println("ok");
+    }
+    
+    public void UpdateAULibrary(){
+        
+        /*this.getCharacterManager().remove(AULibrary);     
+        //get the default Lexicon :
+        AULibrary.setDefaultDefinition(this.getCharacterManager().getDefaultValueString("AULIBRARY"));
+
+        //load additionnal Lexicon :
+        for (String filename : this.getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_AULIBRARY)) {
+            AULibrary.addDefinition(filename);
+        }
+
+        //set the current Lexicon to use :
+        AULibrary.setDefinition(this.getCharacterManager().getValueString(CHARACTER_PARAMETER_AULIBRARY));*/
+    }
+    
+    public void UpdateGestureLibrary(){
+
+        this.getCharacterManager().remove(Gestuary.global_gestuary);       
+        Gestuary.global_gestuary = new Gestuary(this.getCharacterManager());
+        Gestuary.global_gestuary.setCharacterManager(this.getCharacterManager());
+        //get the default Lexicon :
+        Gestuary.global_gestuary.setDefaultDefinition(getCharacterManager().getDefaultValueString("GESTUARY"));
+        //set the current Lexicon to use :
+        Gestuary.global_gestuary.setDefinition(getCharacterManager().getValueString("GESTUARY"));
+    }
+    
+    public void UpdateHeadLibrary(){
+        
+        this.getCharacterManager().remove(HeadLibrary.globalLibrary);     
+        HeadLibrary.globalLibrary = new HeadLibrary(this.getCharacterManager());
+        HeadLibrary.globalLibrary.setCharacterManager(this.getCharacterManager());
+        HeadLibrary.globalLibrary.setDefaultDefinition(getCharacterManager().getValueString("HEADGESTURES"));
+        HeadLibrary.globalLibrary.setDefinition(getCharacterManager().getValueString("HEADGESTURES"));
+        // intervals = new HeadIntervals();
+    }
+    
+    public void UpdateTorsoLibrary(){
+        
+        this.getCharacterManager().remove(TorsoLibrary.globalLibrary);   
+        TorsoLibrary.globalLibrary = new TorsoLibrary(this.getCharacterManager());
+        TorsoLibrary.globalLibrary.setCharacterManager(this.getCharacterManager());
+        TorsoLibrary.globalLibrary.setDefaultDefinition(getCharacterManager().getDefaultValueString("TORSOGESTURES"));
+        TorsoLibrary.globalLibrary.setDefinition(getCharacterManager().getValueString("TORSOGESTURES"));
+    }
+     
+    public void UpdateShoulderLibrary(){
+    
+    }  
+    
+    public void UpdateHandLibrary(){
+        /*this.getCharacterManager().remove(HandShapeLibrary);   
+        setDefaultDefinition(getCharacterManager().getDefaultValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
+
+        //load additionnal library :
+        for(String filename : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY)) {
+            addDefinition(filename);
+        }
+
+        //set the current library to use :
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));*/
+    }  
 }

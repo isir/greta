@@ -37,7 +37,7 @@ public class HeadLibrary extends SignalLibrary<HeadSignal> implements CharacterD
 
     private static String library_file_key; // key in a character ini file
     private static String xsd_file_key; // key in the global ini file
-    private static final HeadLibrary globalLibrary; // the global head library
+    public static HeadLibrary globalLibrary; // the global head library
 
     static {
         library_file_key = "HEADGESTURES";

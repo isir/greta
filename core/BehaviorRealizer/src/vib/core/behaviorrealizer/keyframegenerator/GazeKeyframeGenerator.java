@@ -46,6 +46,7 @@ import vib.core.signals.TorsoSignal;
 import vib.core.util.CharacterManager;
 import vib.core.util.Constants;
 import vib.core.util.Mode;
+import vib.core.util.audio.Mixer;
 import vib.core.util.enums.CompositionType;
 import vib.core.util.enums.GazeDirection;
 import vib.core.util.enums.Influence;

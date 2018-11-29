@@ -27,9 +27,9 @@
             <parameter name="posY" value="1.6845022439956665"/>
             <parameter name="posZ" value="-0.8846789002418518"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="-0.09158594161272049"/>
+            <parameter name="pitch" value="-0.09158597141504288"/>
             <parameter name="yaw" value="1.5173500776290894"/>
-            <window h="623" visible="true" w="738" x="1680" y="276"/>
+            <window h="623" visible="false" w="738" x="2942" y="308"/>
         </element>
         <element h="340.0" id="CharacterManager-1399294977720-682"
             module="CharacterManager" name="Character Manager" w="750.0"
@@ -38,14 +38,18 @@
             <window h="531" visible="false" w="505" x="0" y="0"/>
             <element h="230.0" id="BehaviorPlanner-1540978968451-808"
                 module="BehaviorPlanner" name="BehaviorPlanner" w="70.0"
-                x="50.0" y="90.0"/>
+                x="50.0" y="90.0">
+                <window h="121" visible="false" w="172" x="0" y="0"/>
+            </element>
             <element h="230.0" id="BehaviorRealizer-1540978990002-625"
                 module="BehaviorRealizer" name="BehaviorRealizer"
-                w="70.0" x="150.0" y="90.0"/>
+                w="70.0" x="150.0" y="90.0">
+                <window h="310" visible="false" w="209" x="0" y="0"/>
+            </element>
             <element h="50.0" id="FMLFileReader-1540979009842-370"
                 module="FMLFileReader" name="FML File Reader" w="70.0"
                 x="50.0" y="10.0">
-                <parameter name="saveFileName" value=""/>
+                <parameter name="saveFileName" value="D:\mergeMultiCharactersGaze\bin\Examples\DemoEN\1-Welcome.xml"/>
                 <window h="109" visible="false" w="497" x="0" y="0"/>
             </element>
             <element h="50.0" id="BMLFileReader-1540979017522-492"
@@ -72,7 +76,9 @@
                 x="280.0" y="90.0"/>
             <element h="50.0" id="SimpleAUPerformer-1540979104026-426"
                 module="SimpleAUPerformer" name="SimpleAU Performer"
-                w="80.0" x="380.0" y="150.0"/>
+                w="80.0" x="380.0" y="150.0">
+                <window h="339" visible="false" w="416" x="0" y="0"/>
+            </element>
             <element h="230.0" id="MPEG4Animatable-1540979191371-864"
                 module="MPEG4Animatable" name="MPEG4 Animatable"
                 w="80.0" x="630.0" y="90.0">
@@ -104,26 +110,22 @@
     </elements>
     <connections>
         <connection connector="setTTS" source="TTS-1540979340660-357" target="OpenMary ClientTTS-1540979345770-669"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="LipBlender-1540979582318-723" target="MPEG4Animatable-1540979191371-864"/>
-        <connection connector="addLogOutput"
-            source="Logs-1399294983408-198" target="LogFrame-1399294990657-788"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="SimpleAUPerformer-1540979104026-426" target="LipBlender-1540979582318-723"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BehaviorPlanner-1540978968451-808" target="BehaviorRealizer-1540978990002-625"/>
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"
             source="AnimationKeyframePerformer-1540979047683-47" target="MPEG4Animatable-1540979191371-864"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="PlayerOgre-1527250260600-793" target="Environment-1540980436525-772"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BMLFileReader-1540979017522-492" target="BehaviorRealizer-1540978990002-625"/>
         <connection connector="LipSourceForLipBlender"
             source="LipModel-1540979033186-520" target="LipBlender-1540979582318-723"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FMLFileReader-1540979009842-370" target="BehaviorPlanner-1540978968451-808"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4Animatable-1540979191371-864" target="Environment-1540980436525-772"/>
         <connection connector="AUEmitterToAUPerformer"
             source="FaceKeyframePerformer-1540979026250-796" target="SimpleAUPerformer-1540979104026-426"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="PlayerOgre-1543509821625-111" target="Environment-1540980436525-772"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-1540979104026-426" target="LipBlender-1540979582318-723"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BMLFileReader-1540979017522-492" target="BehaviorRealizer-1540978990002-625"/>
+        <connection connector="addLogOutput"
+            source="Logs-1399294983408-198" target="LogFrame-1399294990657-788"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="AudioKeyframePerformer-1540979039498-468" target="MPEG4Animatable-1540979191371-864"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -132,7 +134,13 @@
             source="BehaviorRealizer-1540978990002-625" target="FaceKeyframePerformer-1540979026250-796"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="BehaviorRealizer-1540978990002-625" target="AudioKeyframePerformer-1540979039498-468"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BehaviorPlanner-1540978968451-808" target="BehaviorRealizer-1540978990002-625"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1540978990002-625" target="LipModel-1540979033186-520"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4Animatable-1540979191371-864" target="Environment-1540980436525-772"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="LipBlender-1540979582318-723" target="MPEG4Animatable-1540979191371-864"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FMLFileReader-1540979009842-370" target="BehaviorPlanner-1540978968451-808"/>
     </connections>
 </modulated>

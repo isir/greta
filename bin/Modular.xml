@@ -1339,6 +1339,12 @@
             <connect from="input" method="setSSITranslator" to="output"/>
             <disconnect from="null" method="" to="null"/>
         </connector>
+		<connector id="connectFMLAttitudeControllerToFMLFileReader" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.Capturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.core.intentions.FMLFileReader" lib_id="vib_intentions"/>
+            <connect from="input" method="setFMLFileReader" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
     </connectors>
     <!-- list of styles -->
     <styles>

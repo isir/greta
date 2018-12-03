@@ -20,7 +20,7 @@ Therefore, some configuration is required once you retrieve the source files of 
 If you plan on using Cereproc, you need to acquire a license and place the voices and their respective license files in the "bin\Common\Data\Cereproc" folder. 
 If you plan on using OpenMary, you need to:
   * First download  [OpenMary](http://mary.dfki.de/);
-  * run ".\marytts-5.2\bin\marytts-component-installer" and download the voices after checking in the character file (".\bin\Common\Data\characters") which voices are used;
+  * run ".\marytts-5.2\bin\marytts-component-installer" and download the voices after checking in the character .ini files (go to the folder ".\bin\Common\Data\characters") which voices are used;
   * OpenMary server running (".\marytts-5.2\bin\marytts-server");
   * Check if the address and the port number of your server are the same in the file ".\bin\vib.ini". If they are different, change  the port number ("MARY_PORT =") in the file ".\bin\vib.ini".
 5) The main project (the runnable one) is called "Modular". You can now launch it. A blank window should appear from where you can choose File/Open to load a module configuration. 2 configurations are available, one that uses OpenMary and another one that uses Cereproc.

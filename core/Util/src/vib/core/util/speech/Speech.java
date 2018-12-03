@@ -73,6 +73,7 @@ public class Speech implements Temporizable{
         speechElements = new ArrayList<Object>();
         boundaries = new ArrayList<Boundary>();
         pitchaccents = new ArrayList<PitchAccent>();
+        phonems = new ArrayList<Phoneme>();
         start = new TimeMarker("start");//must always be the first element
         end = new TimeMarker("end");//must always be the last element
         markers.add(start);
@@ -253,6 +254,14 @@ public class Speech implements Temporizable{
      */
     public List<Phoneme> getPhonems(){
         return phonems;
+    }
+    
+    public void addPhonem (Phoneme ph){
+        phonems.add(ph);
+    }
+    
+    public void addPhonems ( List<Phoneme> ph){
+        phonems.addAll(ph);
     }
 
     /**

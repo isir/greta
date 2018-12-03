@@ -512,6 +512,9 @@
         </module>
         <module name="Body Head Noise" style="Animations">
             <object class="vib.core.animation.performer.BodyAnimationNoiseGenerator" lib_id="vib_body_animation_performer"/>
+			<frame class="vib.core.animation.performer.BodyNoiseGui" lib_id="vib_body_animation_performer" type="frame">
+                <link method="setGui" on="frame"/>
+            </frame>
             <parameter default="true" get_method="isUseHead" get_on="object" name="useHead" set_method="setUseHead" set_on="object" type="boolean"/>
             <parameter default="true" get_method="isUseTorso" get_on="object" name="useTorso" set_method="setUseTorso" set_on="object" type="boolean"/>
             <parameter default="true" get_method="isUseLowerBody" get_on="object" name="useLowerBody" set_method="setUseLowerBody" set_on="object" type="boolean"/>

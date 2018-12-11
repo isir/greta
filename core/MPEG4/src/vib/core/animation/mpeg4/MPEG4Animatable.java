@@ -189,6 +189,7 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
         ListcurPos.set(10, new IniParameter("head_x", String.valueOf(headNode.getGlobalCoordinates().x())));
         ListcurPos.set(11, new IniParameter("head_y", String.valueOf(headNode.getGlobalCoordinates().y())));
         ListcurPos.set(12, new IniParameter("head_z", String.valueOf(headNode.getGlobalCoordinates().z())));
+        // head angles give by the additional rotation of each cervical vertebrae
         ListcurPos.set(13, new IniParameter("head_pitch", String.valueOf(bapFrames.getCurrentFrame().getRadianValue(BAPType.vc1_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc2_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc3_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc4_tilt) + 
                                                                                   bapFrames.getCurrentFrame().getRadianValue(BAPType.vc5_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc6_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc7_tilt))));
         ListcurPos.set(14, new IniParameter("head_yaw", String.valueOf(bapFrames.getCurrentFrame().getRadianValue(BAPType.vc1_torsion) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc2_torsion) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc3_torsion) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc4_torsion) + 
@@ -196,16 +197,8 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
         ListcurPos.set(15, new IniParameter("head_roll", String.valueOf(bapFrames.getCurrentFrame().getRadianValue(BAPType.vc1_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc2_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc3_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc4_roll) + 
                                                                                   bapFrames.getCurrentFrame().getRadianValue(BAPType.vc5_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc6_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc7_roll))));
         
-
-        //System.out.println(String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.yaw_l_eyeball)));
-        /*List<String> charName_id = new ArrayList<String>();
-        charName_id.add(0, getCharacterManager().currentCharacterId);
-        charName_id.add(1, getCharacterManager().getCurrentCharacterName());*/
-        
         // save the live data in CharacterManager variable in order to be able to get the wanted data when needed
-        CharacterManager.getStaticInstance().currentPosition.put(getCharacterManager().getCurrentCharacterName() , ListcurPos);
-        //System.out.println(getCharacterManager().currentCharacterId);
-        //getCharacterManager().currentPosition = ListcurPos;  
+        //CharacterManager.getStaticInstance().currentPosition.put(getCharacterManager().getCurrentCharacterName() , ListcurPos); 
 
         return fapFrames.getCurrentFrame();
     }

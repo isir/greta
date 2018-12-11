@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
+import vib.core.animation.mpeg4.MPEG4Animatable;
 import vib.core.behaviorrealizer.keyframegenerator.GazeKeyframeGenerator.HeadAngles;
 import vib.core.keyframes.HeadKeyframe;
 import vib.core.keyframes.Keyframe;
@@ -208,20 +209,23 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
         SpinePhase lastShift_head = new SpinePhase("head", 0, 0);
         SpinePhase lastShift_torso = new SpinePhase("torso", 0, 0);
         
-        // last target with a gazeshift
-        /*String last_target = "";
-        Quaternion orient_last = null; // last angle add to the original vertical orientation of head in 
-        */
+        // take the MPAG4 for the agent target, i.e. the agent to look at
+        //MPEG4Animatable targetAgent = new MPEG4Animatable();
+        // take the MPAG4 for the agent whom is performing the gaze
+        MPEG4Animatable currentAgent = new MPEG4Animatable();
+        for (int f = 0; f < envi.getTreeNode().getChildren().size(); ++f){
+            if (envi.getTreeNode().getChildren().get(f) instanceof MPEG4Animatable){
+                MPEG4Animatable ag = (MPEG4Animatable) envi.getTreeNode().getChildren().get(f);
+                if (ag.getCharacterManager().getCurrentCharacterName().equals(cm.getCurrentCharacterName())){
+                    currentAgent = (MPEG4Animatable) envi.getTreeNode().getChildren().get(f);
+                }
+            }
+        }
+
         int i = 0;
         for (Signal signal : signals) {
             GazeSignal gaze = (GazeSignal) signal;
             currentGazes.put(gaze, Long.valueOf(Timer.getTimeMillis()));
-
-            // check if there was a gazeShift before anc
-            /*if (gaze.isGazeShift()){
-                i++;
-                last_target = gaze.getTarget(); // store the last target gaze by the agent
-            }*/
            
             //euler angles to target + offset, for head
             HeadAngles ha = new HeadAngles(envi, gaze);
@@ -229,16 +233,18 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             // trying to correct a little difect in the gazeShift. Each time we have a gazeShift behavior are calculated only the keyframe at the target and not at the starting time. This is because the position
             // of any body part can be different to the rest position if a gazeShift happend before. Therefore instead to calculate the rotation angle's difference between the actual position and the target position 
             // it is just calculated the angle between the rest position and the target one, updating the position like we delate the last position and put the new one at the target time. 
-            // the only proble is that when the rotation angle to reach the target (calculated respect to the rest position) is bigger than the actual angle. In this case the movement of the eyes, that start to move before the 
+            // the only problem is that when the rotation angle to reach the target (calculated respect to the rest position) is bigger than the actual angle. In this case the movement of the eyes, that start to move before the 
             // head are not correct. A way to overcome this difect is to delate the head_latency in this case.  
-            Quaternion actualheadorientation = new Quaternion( new Vec3d (1,0,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(13).getParamValue()));
-                    actualheadorientation.multiply(new Quaternion( new Vec3d (0,1,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(14).getParamValue())));
-                    actualheadorientation.multiply(new Quaternion( new Vec3d (0,0,1),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(15).getParamValue())));
-                    // add the rotation of the root
-                    actualheadorientation.multiply(new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(0).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue())));
+            Quaternion actualheadorientation = new Quaternion( new Vec3d (1,0,0),Double.parseDouble(currentAgent.ListcurPos.get(13).getParamValue()));
+                    actualheadorientation.multiply(new Quaternion( new Vec3d (0,1,0),Double.parseDouble(currentAgent.ListcurPos.get(14).getParamValue())));
+                    actualheadorientation.multiply(new Quaternion( new Vec3d (0,0,1),Double.parseDouble(currentAgent.ListcurPos.get(15).getParamValue())));
+            
+            // add the rotation of the root
+            actualheadorientation.multiply(new Quaternion(currentAgent.getRotationNode().getOrientation().x(),
+                                                currentAgent.getRotationNode().getOrientation().y(),
+                                                currentAgent.getRotationNode().getOrientation().z(),
+                                                currentAgent.getRotationNode().getOrientation().w()));
+            
             Vec3d headActualAngle = actualheadorientation.toEulerXYZ();
             
             if (headActualAngle.y() < ha.h_yawAngle){
@@ -352,7 +358,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         maxVel_head = Math.toRadians(Math.abs((4/3 * Math.toDegrees(sha.ha.h_limitedPitch*HEAD_PITCH_LIMIT_UP)/50 + 2/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
                     }
                 }
-
 
                 // time head reach the target position and come back
                 double timeHeadAtTarget = start + head_latency + (Math.abs(sha.ha.h_limitedYaw*HEAD_YAW_LIMIT)/ maxVel_head); // 0.1 is the latency time 
@@ -574,8 +579,13 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 ts1.setDirectionShift(true);            
                 SpinePhase tp1;
                 if(!gaze.isGazeShift()){
-                    TorsoKeyframe tt = (TorsoKeyframe) cm.getStaticInstance().defaultFrame.get(1);
-                    tp1 = createTorsoPhase("end", end, end, tt.verticalTorsion.value, tt.sagittalTilt.value); // ready
+                    System.out.println(cm.getStaticInstance().defaultFrame.size() );
+                    if (cm.getStaticInstance().defaultFrame.size() > 1) {
+                        TorsoKeyframe tt = (TorsoKeyframe) cm.getStaticInstance().defaultFrame.get(1);
+                        tp1 = createTorsoPhase("end", end, end, tt.verticalTorsion.value, tt.sagittalTilt.value); // ready
+                    }else{
+                        tp1 = createTorsoPhase("end", end, end, 0.0, 0.0); // ready
+                    }
                 }else{
                     tp1 = createTorsoPhase("end", end, end, 0.0, 0.0); // ready
                 }   
@@ -595,28 +605,32 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 hs1.setDirectionShift(true); 
                 SpinePhase hp1;
                 if(!gaze.isGazeShift()){
-                    HeadKeyframe hh = (HeadKeyframe) cm.getStaticInstance().defaultFrame.get(0);
-                    double pitch;
-                    if (hh.sagittalTilt.direction != null){
-                        if (hh.sagittalTilt.direction.name() == "FORWARD"){
-                            pitch = - hh.sagittalTilt.value;
+                    if (cm.getStaticInstance().defaultFrame.size() != 0){
+                        HeadKeyframe hh = (HeadKeyframe) cm.getStaticInstance().defaultFrame.get(0);
+                        double pitch;
+                        if (hh.sagittalTilt.direction != null){
+                            if (hh.sagittalTilt.direction.name() == "FORWARD"){
+                                pitch = - hh.sagittalTilt.value;
+                            }else{
+                                pitch = hh.sagittalTilt.value;
+                            } 
                         }else{
-                            pitch = hh.sagittalTilt.value;
-                        } 
-                    }else{
-                        pitch = 0.0;
-                    }
-                    double yaw;
-                    if (hh.verticalTorsion.direction != null){
-                        if (hh.verticalTorsion.direction.name() == "RIGHTWARD"){
-                            yaw = - hh.verticalTorsion.value;
+                            pitch = 0.0;
+                        }
+                        double yaw;
+                        if (hh.verticalTorsion.direction != null){
+                            if (hh.verticalTorsion.direction.name() == "RIGHTWARD"){
+                                yaw = - hh.verticalTorsion.value;
+                            }else{
+                                yaw = hh.verticalTorsion.value;
+                            } 
                         }else{
-                            yaw = hh.verticalTorsion.value;
-                        } 
+                            yaw = 0.0;
+                        }
+                        hp1 = createHeadPhase("end", end, end, yaw, pitch) ; // end
                     }else{
-                        yaw = 0.0;
-                    }
-                    hp1 = createHeadPhase("end", end, end, yaw, pitch) ; // end
+                        hp1 = createHeadPhase("end", end, end, 0.0, 0.0); // ready
+                    }           
                 } else {
                     hp1 = createHeadPhase("end", end, end, 0.0, 0.0); // ready
                 }
@@ -633,6 +647,18 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             }
         }
         return outputKeyframe;
+    }
+    
+    /**
+     * This function take into account the head and torso signals happening in the same time lapse and that are involved and not in the gaze behavior.
+     * If we have a gaze signal and in the same moment an external head signal or torso signal, the keyframe for the haed or torso should be a new one
+     * that take into account the two rotation and give the sum of them.
+     * @param outputKeyframe 
+     */
+    private void BodyKeyframeOverlapping (List<Keyframe> outputKeyframe){
+    
+        
+        
     }
 
     private AUAPFrame generateAUAPFrameFromAUItems(GazeSignal face, String tmName, double scale) {
@@ -2049,7 +2075,34 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
             withinEyesLimit = false;
             withinHeadLimit = false;
-                  
+            
+            // load the list of characters in the environment  
+            List<String> l_a = new ArrayList<String>();
+            for (int i = 0; i < env.getTreeNode().getChildren().size(); ++i){
+                    if (env.getTreeNode().getChildren().get(i) instanceof MPEG4Animatable){                       
+                        MPEG4Animatable ag = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
+                        l_a.add(ag.getCharacterManager().getCurrentCharacterName());
+                    }
+            } 
+            
+            // take the MPAG4 for the agent target, i.e. the agent to look at
+            MPEG4Animatable targetAgent = new MPEG4Animatable();
+            // take the MPAG4 for the agent whom is performing the gaze
+            MPEG4Animatable currentAgent = new MPEG4Animatable();
+            if (gaze.getTarget() != null || !gaze.getTarget().isEmpty()){
+                for (int i = 0; i < env.getTreeNode().getChildren().size(); ++i){
+                    if (env.getTreeNode().getChildren().get(i) instanceof MPEG4Animatable){
+                        MPEG4Animatable ag = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
+                        if (ag.getCharacterManager().getCurrentCharacterName().equals(gaze.getTarget())){
+                            targetAgent = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
+                        }
+                        if (ag.getCharacterManager().getCurrentCharacterName().equals(gaze.getCharacterManager().getCurrentCharacterName())){
+                            currentAgent = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
+                        }
+                    }
+                }
+            }
+            
             //can compute angles to target only if we have an environment
             if (env != null) {
                 
@@ -2060,14 +2113,11 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 
                 if (gaze.getTarget() != null && !gaze.getTarget().isEmpty()) {
                     
-                    ListAgents l_a = new ListAgents(); // load the list of characters 
+                    
                     List<Leaf> lf_tg = env.getListLeaf();
                     String T = gaze.getTarget();
                     if (T.equals("Camera")){                       
                         for (int iter = 0; iter<= env.getListeners().size()-1; iter++){
-                            /*System.out.println(iter);
-                            System.out.println(env.getListeners().size());
-                            System.out.println(env.getListeners().get(iter).getClass().toString());*/
                             String listner = env.getListeners().get(iter).getClass().toString();
                             if (listner.indexOf("Mixer") != -1){
                                 Mixer Cam = (Mixer) env.getListeners().get(iter);
@@ -2075,33 +2125,38 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 break;
                             }
                         }   
-                    }else{
-                        
+                    }else{   
                         int ok = 0; // if 0 the target is not an agent, if 1 the target is one of the agent in the scene
-                        for (int i = 0; i < l_a.getAgents().size() - 1; i++){
-                            String agent = l_a.getAgents().get(i);
+                        //Check first if the target is the agent
+                        for (int i = 0; i < l_a.size(); i++){
+                            String agent = l_a.get(i);
                             if(T.equals(agent)){    
                                 ok = 1; // agent find
                                 
-                                //System.out.println(CharacterManager.getStaticInstance().currentPosition.size());
-                                //System.out.println(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue());              
-                                Vec3d headAgent = new Vec3d( Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(10).getParamValue()),
-                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(11).getParamValue()),
-                                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(12).getParamValue()));
-
-                                Quaternion OrientAgent = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(0).getParamValue()),
-                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(1).getParamValue()),
-                                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(2).getParamValue()),
-                                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(3).getParamValue()));
-
-                                Vec3d Agl_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_l_eye_offset));
-                                Vec3d Agr_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_r_eye_offset));
+                                // position head
+                                Vec3d headAgent = new Vec3d(targetAgent.getHeadNode().getCoordinateX(),
+                                                                targetAgent.getHeadNode().getCoordinateY(), 
+                                                                        targetAgent.getHeadNode().getCoordinateZ());
+                                
+                                // position skeleton 
+                                Vec3d positionAgent = new Vec3d(targetAgent.getCoordinateX(),
+                                                                    targetAgent.getCoordinateY(), 
+                                                                        targetAgent.getCoordinateZ());
+                                
+                                // orientation skeleton
+                                /*Quaternion OrientAgent = new Quaternion( targetAgent.getRotationNode().getOrientation().x(), 
+                                                                            targetAgent.getRotationNode().getOrientation().y(), 
+                                                                                targetAgent.getRotationNode().getOrientation().z(),
+                                                                                    targetAgent.getRotationNode().getOrientation().w());*/
+                                
+                                //Vec3d Agl_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_l_eye_offset));
+                                //Vec3d Agr_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_r_eye_offset));
 
                                 // find the poit in the meddle between the two eyes
-                                vec2target = new Vec3d((Agl_eye.x()+Agr_eye.x())/2, Agl_eye.y(), (Agl_eye.z()+Agr_eye.z())/2);
+                                vec2target = new Vec3d(positionAgent.x(), headAgent.y(), positionAgent.z());
                             } 
                         }
-                        
+                        // if the target is not the agent I look the target in the environment objects
                         if (ok ==0){
                             // search the object (leaf) between evironment objects 
                             for (int iter=0; iter< lf_tg.size()-1; iter++){
@@ -2137,33 +2192,26 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         }
                     }
                     
-                    // head position
-                    Vec3d headPosition = new Vec3d(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(10).getParamValue()), //get(10).getParamValue()),
-                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(11).getParamValue()), // cm.currentPosition.get(11).getParamValue()
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(12).getParamValue()));//((TreeNode) originAudioTreeNode).getGlobalCoordinates();
+                    // skelaton position
+                    Vec3d currentPosition = new Vec3d(currentAgent.getCoordinateX(),
+                                                        currentAgent.getCoordinateY(), 
+                                                                currentAgent.getCoordinateZ());
                     
-                    //head oreintation
+                    // head position 
+                    Vec3d headPosition = new Vec3d(currentAgent.getHeadNode().getCoordinateX(),
+                                                        currentAgent.getHeadNode().getCoordinateY(), 
+                                                                currentAgent.getHeadNode().getCoordinateZ());
                     
-                    Quaternion orient = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(0).getParamValue()),
-                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
-                                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
-                                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue()));
+                    // headPosition have not the rigth x and z position
+                    headPosition.setX(currentPosition.x());
+                    headPosition.setZ(currentPosition.z());
                     
-                    /*Quaternion orient = new Quaternion( new Vec3d (1,0,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(13).getParamValue()));
-                    orient.multiply(new Quaternion( new Vec3d (0,1,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(14).getParamValue())));
-                    orient.multiply(new Quaternion( new Vec3d (0,0,1),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(15).getParamValue())));
-                    // add the rotation of the root
-                    orient.multiply(new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(0).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue())));
-                    Vec3d nn = orient.toEulerXYZInDegrees();
-                    nn.normalized();
-                    if (gaze.isGazeShift()){
-                        if (gaze.getOrigin_orientation() != null){
-                            orient.multiply(gaze.getOrigin_orientation());
-                        }
-                    }*/
+                    // orientation skeleton
+                    Quaternion orient = new Quaternion( currentAgent.getRotationNode().getOrientation().x(), 
+                                                                currentAgent.getRotationNode().getOrientation().y(), 
+                                                                    currentAgent.getRotationNode().getOrientation().z(),
+                                                                        currentAgent.getRotationNode().getOrientation().w());
+                    
                     
                     Vec3d head = Vec3d.addition(headPosition, orient.rotate(headAngles_head_offset));
                     Vec3d l_eye = Vec3d.addition(headPosition, orient.rotate(headAngles_l_eye_offset));
@@ -2370,6 +2418,33 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             sh_limitedPitch = 0.0f;
 			
             //withinShoulderLimit = false;
+            
+            // load the list of characters in the environment  
+            List<String> l_a = new ArrayList<String>();
+            for (int i = 0; i < env.getTreeNode().getChildren().size(); ++i){
+                    if (env.getTreeNode().getChildren().get(i) instanceof MPEG4Animatable){                       
+                        MPEG4Animatable ag = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
+                        l_a.add(ag.getCharacterManager().getCurrentCharacterName());
+                    }
+            } 
+            
+            // take the MPAG4 for the agent target, i.e. the agent to look at
+            MPEG4Animatable targetAgent = new MPEG4Animatable();
+            // take the MPAG4 for the agent whom is performing the gaze
+            MPEG4Animatable currentAgent = new MPEG4Animatable();
+            if (gaze.getTarget() != null || !gaze.getTarget().isEmpty()){
+                for (int i = 0; i < env.getTreeNode().getChildren().size(); ++i){
+                    if (env.getTreeNode().getChildren().get(i) instanceof MPEG4Animatable){
+                        MPEG4Animatable ag = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
+                        if (ag.getCharacterManager().getCurrentCharacterName().equals(gaze.getTarget())){
+                            targetAgent = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
+                        }
+                        if (ag.getCharacterManager().getCurrentCharacterName().equals(gaze.getCharacterManager().getCurrentCharacterName())){
+                            currentAgent = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
+                        }
+                    }
+                }
+            }
                 
             //can compute angles to target only if we have an environment
             if (env != null) {
@@ -2381,7 +2456,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 
                 if (gaze.getTarget() != null && !gaze.getTarget().isEmpty()) {
                     
-                    ListAgents l_a = new ListAgents(); // load the list of characters 
                     List<Leaf> lf_tg = env.getListLeaf();
                     String T = gaze.getTarget();
  
@@ -2399,27 +2473,30 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         }   
                     }else{
                         int ok = 0  ; // if 0 the target is not an agent, if 1 the target is one of the agent in the scene
-                            for (int i = 0; i < l_a.getAgents().size() - 1; i++){
-                                String agent = l_a.getAgents().get(i);
+                            for (int i = 0; i < l_a.size(); i++){
+                                String agent = l_a.get(i);
                                 if(T.equals(agent)){    
                                     ok = 1; // agent find
 
-                                    //System.out.println(CharacterManager.getStaticInstance().currentPosition.size());
-                                    //System.out.println(CharacterManager.getStaticInstance().currentPosition.get(gaze.getOrigin()).get(10).getParamValue());              
-                                    Vec3d headAgent = new Vec3d( Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(10).getParamValue()),
-                                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(11).getParamValue()),
-                                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(12).getParamValue()));
+                                    // head position
+                                    Vec3d headAgent = new Vec3d(targetAgent.getHeadNode().getCoordinateX(),
+                                                                    targetAgent.getHeadNode().getCoordinateY(), 
+                                                                            targetAgent.getHeadNode().getCoordinateZ());
+                                    // skeleton position
+                                    Vec3d positionAgent = new Vec3d(targetAgent.getCoordinateX(),
+                                                                    targetAgent.getCoordinateY(), 
+                                                                        targetAgent.getCoordinateZ());
+                                    // orientation skeleton
+                                    /*Quaternion OrientAgent = new Quaternion( targetAgent.getRotationNode().getOrientation().x(), 
+                                                                                targetAgent.getRotationNode().getOrientation().y(), 
+                                                                                    targetAgent.getRotationNode().getOrientation().z(),
+                                                                                        targetAgent.getRotationNode().getOrientation().w());*/
 
-                                    Quaternion OrientAgent = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(0).getParamValue()),
-                                                                                Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(1).getParamValue()),
-                                                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(2).getParamValue()),
-                                                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(gaze.getTarget()).get(3).getParamValue()));
+                                    //Vec3d Agl_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_l_eye_offset));
+                                    //Vec3d Agr_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_r_eye_offset));
 
-                                    Vec3d Agl_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_l_eye_offset));
-                                    Vec3d Agr_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_r_eye_offset));
-
-                                    // find the poit in the meddle between the two eyes
-                                    vec2target = new Vec3d((Agl_eye.x()+Agr_eye.x())/2, Agl_eye.y(), (Agl_eye.z()+Agr_eye.z())/2);
+                                    // find the point in the meddle of the two eyes
+                                    vec2target = new Vec3d(positionAgent.x(), headAgent.y(), positionAgent.z());
                                 } 
                             }
 
@@ -2440,10 +2517,25 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     }
                 }       
                  		
-                Vec3d headPosition = new Vec3d(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(10).getParamValue()), //get(10).getParamValue()),
-                                                    Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(11).getParamValue()), // cm.currentPosition.get(11).getParamValue()
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(12).getParamValue()));//((TreeNode) originAudioTreeNode).getGlobalCoordinates();
-                    
+                // head position
+                Vec3d headPosition = new Vec3d(currentAgent.getHeadNode().getCoordinateX(),
+                                                    currentAgent.getHeadNode().getCoordinateY(), 
+                                                        currentAgent.getHeadNode().getCoordinateZ());
+                // skeleton position
+                Vec3d currentPosition = new Vec3d(currentAgent.getCoordinateX(),
+                                                    currentAgent.getCoordinateY(), 
+                                                        currentAgent.getCoordinateZ());
+                
+                // headPosition has not the exact x and z position
+                headPosition.setX(currentPosition.x());
+                headPosition.setY(currentPosition.y());
+                
+                // skeleton orientation
+                Quaternion orient = new Quaternion( currentAgent.getRotationNode().getOrientation().x(), 
+                                                                currentAgent.getRotationNode().getOrientation().y(), 
+                                                                    currentAgent.getRotationNode().getOrientation().z(),
+                                                                        currentAgent.getRotationNode().getOrientation().w());
+                
                 if (targetNode != null || vec2target != null) {
                         //if target is animatable, look at head (for now ! ideally it should be specified in the target attribute)
                         if (Animatable.class.isInstance(targetNode)) {
@@ -2460,27 +2552,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                             }
                         }
 
-                        // orientation body from MPEG4
-                        Quaternion orient = new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(0).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
-                                                        Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue()));
-                        //head oreintation
-                        /*Quaternion orient = new Quaternion( new Vec3d (1,0,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(13).getParamValue()));
-                        orient.multiply(new Quaternion( new Vec3d (0,1,0),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(14).getParamValue())));
-                        orient.multiply(new Quaternion( new Vec3d (0,0,1),Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(15).getParamValue())));
-                        //add the rotation of the root
-                        orient.multiply(new Quaternion(Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(0).getParamValue()),
-                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(1).getParamValue()),
-                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(2).getParamValue()),
-                                                            Double.parseDouble(CharacterManager.getStaticInstance().currentPosition.get(cm.getCurrentCharacterName()).get(3).getParamValue())));
-
-                        if (gaze.isGazeShift()){
-                            if (gaze.getOrigin_orientation() != null){
-                                orient.multiply(gaze.getOrigin_orientation());
-                            }
-                        }*/
-                 
                         //TODO : adapt with scale,character meshes
                         Vec3d shoulder = Vec3d.addition(headPosition, orient.rotate(shoulderAngles_head_offset));
 

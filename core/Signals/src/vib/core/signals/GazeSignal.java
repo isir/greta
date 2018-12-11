@@ -290,7 +290,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     public void readFromXML(XMLTree tree, boolean endAsDuration) {
         //target
         if(tree.hasAttribute("target")) {
-            String tg = tree.getAttribute("target");
+            /*String tg = tree.getAttribute("target");
             int underscoreIndex = tg.indexOf(":");
             if (underscoreIndex != -1){
                 // name agent to gaze
@@ -298,7 +298,9 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
                 setTarget(agent); // set agent name as target
             }else {
                setTarget(tree.getAttribute("target"));
-            }
+            }*/
+            
+            setTarget(tree.getAttribute("target"));
         }
         //origin
         if(tree.hasAttribute("origin")) {

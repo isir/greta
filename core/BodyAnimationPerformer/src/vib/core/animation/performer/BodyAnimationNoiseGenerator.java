@@ -70,9 +70,9 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
         if (isUseTorso()) {
             computeUpperBody(frame, idx);
         }
-        if (isUseLowerBody()) {
-            computeLowerBody(frame, idx);
-        }
+        //if (isUseLowerBody()) {
+            computeLowerBody(frame, idx,isUseLowerBody());
+        //}
         //computeLowerBody(frame, idx);
         BAPFrame bapframe = getBapFrame(frame, idx);
         return bapframe;
@@ -255,7 +255,7 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
     int currentIdx = 0;
     int signed = 1;
 
-    void computeLowerBody(Frame frame, int idx) {
+    void computeLowerBody(Frame frame, int idx, boolean enable) {
         if (_ms == null) {
             return;
         }
@@ -264,7 +264,8 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
         int size = frames.size();
 
         Frame current = frames.get(currentIdx);
-        {
+        
+        if (enable){
             frame.setRootTranslation(current.getRootTranslation());
             frame.addRotation("HumanoidRoot", Quaternion.slerp(new Quaternion(), current.getRotation("HumanoidRoot"), 0.8f, true));
             frame.addRotation("vl5", Quaternion.slerp(new Quaternion(), current.getRotation("HumanoidRoot").inverse(), 0.8f, true));
@@ -274,7 +275,18 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
             frame.addRotation("r_ankle", current.getRotation("r_ankle"));
             frame.addRotation("l_hip", current.getRotation("l_hip"));
             frame.addRotation("r_hip", current.getRotation("r_hip"));
+        }else{
+            frame.setRootTranslation(new Vec3d());
+            frame.addRotation("HumanoidRoot", new Quaternion());
+            frame.addRotation("vl5", new Quaternion());
+            frame.addRotation("l_knee", new Quaternion());
+            frame.addRotation("r_knee", new Quaternion());
+            frame.addRotation("l_ankle", new Quaternion());
+            frame.addRotation("r_ankle", new Quaternion());
+            frame.addRotation("l_hip", new Quaternion());
+            frame.addRotation("r_hip", new Quaternion());
         }
+        
         if (currentIdx >= size) {
             currentIdx = size - 1;
             signed = signed * -1;
@@ -290,6 +302,11 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
             currentIdx = 0;
             signed = signed * -1;
         }
+    }
+    
+    private void RestposeLowenBody() {
+        
+        
     }
 
     @Override
@@ -356,4 +373,6 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
     public double getStep(){
         return step;
     }
+
+    
 }

@@ -73,10 +73,11 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
             if(keyframes.isEmpty()) {
                 startKeyframe = new HeadKeyframe(getDefaultPosition());
             }
-            else if(keyframes.peekLast().getOffset()<=head.getPhases().get(0).getStartTime()){
+            else if(keyframes.peekLast().getOffset() <= head.getPhases().get(0).getStartTime()){
+                startKeyframe = new HeadKeyframe(keyframes.peekLast());
+            }else{
                 startKeyframe = new HeadKeyframe(keyframes.peekLast());
             }
-            
 
             if(startKeyframe != null){
                 setTimeOn(startKeyframe, head.getStartValue());

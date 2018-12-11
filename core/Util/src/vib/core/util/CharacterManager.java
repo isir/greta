@@ -56,7 +56,7 @@ public class CharacterManager {
     
     //public static  List<IniParameter> CurrentPosition = Arrays.asList(new IniParameter[13]);
     // Hashmap to store for each agent the current position of each body part
-    public HashMap<String, List<IniParameter>> currentPosition = new HashMap<String, List<IniParameter>>();
+    //public HashMap<String, List<IniParameter>> currentPosition = new HashMap<String, List<IniParameter>>();
     //public List<IniParameter> currentPosition = new ArrayList<IniParameter>();
     
     static{

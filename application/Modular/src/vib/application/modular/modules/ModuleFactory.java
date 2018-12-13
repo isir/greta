@@ -19,14 +19,18 @@ package vib.application.modular.modules;
 
 import com.mxgraph.model.mxCell;
 import com.mxgraph.view.mxGraph;
+import java.awt.Component;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import vib.core.util.CharacterManager;
+import vib.core.util.log.Logs;
 import vib.core.utilx.gui.CharacterIniManagerFrame;
 
 /**
@@ -37,11 +41,11 @@ public class ModuleFactory {
 
     public static List<ModuleInfo> moduleInfos = new ArrayList<ModuleInfo>();
 
-    public static Module create(mxGraph graph, String moduleType, Module parent){
-        return create(graph, moduleType, moduleType,moduleType+"-"+System.currentTimeMillis()+"-"+(int)(Math.random()*1000.0), 15, 15, 80, 50, null, parent);
+    public static Module create(Component uiComponent,mxGraph graph, String moduleType, Module parent){
+        return create(uiComponent, graph, moduleType, moduleType,moduleType+"-"+System.currentTimeMillis()+"-"+(int)(Math.random()*1000.0), 15, 15, 80, 50, null, parent);
     }
 
-    public static Module create(mxGraph graph, String moduleType, String cellName, String id, double x, double y, double w, double h, Map<String,String> params, Module parent){
+    public static Module create(Component uiComponent,mxGraph graph, String moduleType, String cellName, String id, double x, double y, double w, double h, Map<String,String> params, Module parent){
         //Create an empty Map
         if(params==null) {
             params = new HashMap<String,String>();
@@ -52,103 +56,86 @@ public class ModuleFactory {
             try {
                 
                 Object object = null;
-                //First try to instanciate constructor a parent instance as param
-                if(parent!=null){
+                try{                  
+                    object = moduleInfo.create(parent, params);
+                    
+                    JFrame jFrame = null;
                     try{
-                        Class parentClass = parent.getObject().getClass();
-                        Constructor<?> cons = moduleInfo.objectClass.getConstructor(parentClass);
-                        object = cons.newInstance(parent.getObject());
-                    }
-                    catch(NoSuchMethodException e){}                   
-                }
-                //Then if no constructor available, use the default one
-                if(object==null)
-                    object = moduleInfo.objectClass.newInstance();
-                
-                for(ParameterInfo parameterInfo : moduleInfo.parameterInfos){
-                    if(parameterInfo.setOn.equals("object")){
-                        String value = parameterInfo.defaultvalue;
-                        if(params.containsKey(parameterInfo.name)) {
-                            value = params.get(parameterInfo.name);
-                        }
-                        try{
-                            parameterInfo.setMethod.invoke(
-                                object,
-                                new Object[]{castStringToTypedObject(
-                                    parameterInfo.type,
-                                    value)});
-                        }
-                        catch(Exception e){
-                            e.printStackTrace();
-                            //TODO say something
-                        }
-                    }
-                }
-
-                JFrame jFrame = null;
-                try{
-                    if(moduleInfo.frameType.equals("frame") && moduleInfo.frameClass!=null){
-                        jFrame = (JFrame)moduleInfo.frameClass.newInstance();
-                        if(moduleInfo.linkOn!=null){
-                            moduleInfo.linkMethod.invoke(
-                                moduleInfo.linkOn.equals("object")? object : jFrame,
-                                    new Object[]{
-                                        moduleInfo.linkOn.equals("object")? jFrame : object
-                                    });
-                        }
-                    }
-                    else if(moduleInfo.frameType.equals("object")) {
-                        jFrame = (JFrame)object;
-                    }
-                }
-                catch(Exception e){System.err.println("Wrong type for frame in module "+moduleInfo.name);}
-
-                for(ParameterInfo parameterInfo : moduleInfo.parameterInfos){
-                    if( ! parameterInfo.setOn.equals("object")){
-                        String value = parameterInfo.defaultvalue;
-                        if(params.containsKey(parameterInfo.name)) {
-                            value = params.get(parameterInfo.name);
-                        }
-                        try{
-                            parameterInfo.setMethod.invoke(
-                                jFrame,
-                                new Object[]{castStringToTypedObject(
-                                    parameterInfo.type,
-                                    value)});
-                        }
-                        catch(Exception e){
-                            e.printStackTrace();
-                            //TODO say something
-                        }
-                    }
-                }
-                mxCell parentCell = parent!=null?parent.getCell():null;
-                return new Module(
-                    moduleInfo,
-                    id,
-                    object,
-                    (mxCell)(graph.insertVertex(parentCell, id, cellName, x, y , w, h, Style.getMapper().getVertexStyle(moduleInfo.style))),
-                    jFrame){
-                        @Override
-                        public Map<String, String> getParams() {
-                            Map<String,String> parameters = new HashMap<String,String>();
-                            ModuleInfo moduleInfo = getInfo();
-                            for(ParameterInfo parameterInfo : moduleInfo.parameterInfos){
-                                try{
-                                    Object value = parameterInfo.getMethod.invoke(
-                                        parameterInfo.getOn.equals("object")?
-                                            getObject() : getFrame(),
-                                        new  Object[]{});
-                                    parameters.put(parameterInfo.name, value.toString());
-                                }
-                                catch(Exception e){
-                                    e.printStackTrace();
-                                    //TODO say something
-                                }
+                        if(moduleInfo.frameType.equals("frame") && moduleInfo.frameClass!=null){
+                            jFrame = (JFrame)moduleInfo.frameClass.newInstance();
+                            if(moduleInfo.linkOn!=null){
+                                moduleInfo.linkMethod.invoke(
+                                    moduleInfo.linkOn.equals("object")? object : jFrame,
+                                        new Object[]{
+                                            moduleInfo.linkOn.equals("object")? jFrame : object
+                                        });
                             }
-                            return parameters;
                         }
-                    };
+                        else if(moduleInfo.frameType.equals("object")) {
+                            jFrame = (JFrame)object;
+                        }
+                    }
+                    catch(Exception e){System.err.println("Wrong type for frame in module "+moduleInfo.name);}
+
+                    for(ParameterInfo parameterInfo : moduleInfo.parameterInfos){
+                        if( ! parameterInfo.setOn.equals("object")){
+                            String value = parameterInfo.defaultvalue;
+                            if(params.containsKey(parameterInfo.name)) {
+                                value = params.get(parameterInfo.name);
+                            }
+                            try{
+                                parameterInfo.setMethod.invoke(
+                                    jFrame,
+                                    new Object[]{castStringToTypedObject(
+                                        parameterInfo.type,
+                                        value)});
+                            }
+                            catch(Exception e){
+                                e.printStackTrace();
+                                //TODO say something
+                            }
+                        }
+                    }
+                    mxCell parentCell = parent!=null?parent.getCell():null;
+                    return new Module(
+                        moduleInfo,
+                        id,
+                        object,
+                        (mxCell)(graph.insertVertex(parentCell, id, cellName, x, y , w, h, Style.getMapper().getVertexStyle(moduleInfo.style))),
+                        jFrame){
+                            @Override
+                            public Map<String, String> getParams() {
+                                Map<String,String> parameters = new HashMap<String,String>();
+                                ModuleInfo moduleInfo = getInfo();
+                                for(ParameterInfo parameterInfo : moduleInfo.parameterInfos){
+                                    try{
+                                        Object value = parameterInfo.getMethod.invoke(
+                                            parameterInfo.getOn.equals("object")?
+                                                getObject() : getFrame(),
+                                            new  Object[]{});
+                                        parameters.put(parameterInfo.name, value.toString());
+                                    }
+                                    catch(Exception e){
+                                        e.printStackTrace();
+                                        //TODO say something
+                                    }
+                                }
+                                return parameters;
+                            }
+                        };
+                }
+                catch(InstantiationException ex){
+                    String constructorsMsg = String.join("\n - ",moduleInfo.getPossibleConstructors());
+                    String msg = String.format("Can't create component \"%s(%s)\".\nPlease select first (and create if needed):\n - %s",
+                                            moduleInfo.name,
+                                            parent!=null?parent.getInfo().name:"",
+                                            constructorsMsg);
+                    
+                    Logs.error(msg);
+                    JOptionPane.showMessageDialog(uiComponent,msg);
+                };
+                
+                
             }
             catch (Throwable ex) {
                 while(ex.getCause() != null){
@@ -231,6 +218,59 @@ public class ModuleFactory {
                 }
             }
             return null;
+        }
+        
+        public Object create(Module parent,Map<String,String> params) throws InstantiationException, InvocationTargetException, IllegalAccessException{
+            Object object=null;
+           
+            //First try to instanciate constructor a parent instance as param
+            if(parent!=null){
+                try{
+                    Class parentClass = parent.getObject().getClass();
+
+                    Constructor<?> cons = objectClass.getConstructor(parentClass);
+                    object = cons.newInstance(parent.getObject());
+                }
+                catch(NoSuchMethodException e){}
+            }
+            //Then if no constructor available, use the default one
+            if(object==null)
+                object = objectClass.newInstance();
+
+            for(ParameterInfo parameterInfo : parameterInfos){
+                if(parameterInfo.setOn.equals("object")){
+                    String value = parameterInfo.defaultvalue;
+                    if(params.containsKey(parameterInfo.name)) {
+                        value = params.get(parameterInfo.name);
+                    }
+                    try{
+                        parameterInfo.setMethod.invoke(
+                            object,
+                            new Object[]{castStringToTypedObject(
+                                parameterInfo.type,
+                                value)});
+                    }
+                    catch(Exception e){
+                        e.printStackTrace();
+                        //TODO say something
+                    }
+                }
+            }
+            return object;
+        }
+        
+        public List<String> getPossibleConstructors(){
+            List<String> constructors = new ArrayList<>();
+            for(Constructor c:objectClass.getConstructors()){
+                Class[] params = c.getParameterTypes();
+                if(params.length==0)
+                    constructors.add("Nothing");
+                else if(params.length==1)
+                    constructors.add(params[0].getSimpleName());
+                else
+                    Logs.warning(String.format("Module %s constructor has to many parameters.",name));
+            }
+            return constructors;
         }
 
     }

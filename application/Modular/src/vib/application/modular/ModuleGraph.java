@@ -96,10 +96,9 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
     }
     
     private TreeNode<Module> getTreeNode(TreeNode<Module> curNode, Module module){
-        for(TreeNode<Module> node : curNode.getChildren()){
-            if(module.equals(node.getData()))
-                return node;
-        }
+        if(module.equals(curNode.getData()))
+            return curNode;
+       
         for(TreeNode<Module> child : curNode.getChildren()){
             TreeNode<Module> node = getTreeNode(child,module);
             if(node!=null)
@@ -214,7 +213,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
                 }
 
 
-                Module module = ModuleFactory.create(graph,
+                Module module = ModuleFactory.create(parentFrame, graph,
                         element.getAttribute("module"),
                         element.getAttribute("name"),
                         element.getAttribute("id"),
@@ -384,12 +383,13 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
      */
     
     public void addModule(String moduleType, Module parent) {
-        Module module = ModuleFactory.create(graph, moduleType, parent);
+        Module module = ModuleFactory.create(parentFrame, graph, moduleType, parent);
         if (module != null){
             if(parent!=null){
                 module.setParent(parent);
-                getTreeNode(parent).addChild(module);                
-            }            
+                getTreeNode(parent).addChild(module);          
+            }else
+                treeModules.addChild(module);
             modules.add(module);
         }
         checkConnectables();

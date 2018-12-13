@@ -89,9 +89,9 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
         return CharacterManager.getStaticInstance();
     }
     
-    public MPEG4Animatable() {
+    /*public MPEG4Animatable() {
         this(null,false);        
-    }
+    }*/
 
     public MPEG4Animatable(CharacterManager cm) {
         this(cm,true);        

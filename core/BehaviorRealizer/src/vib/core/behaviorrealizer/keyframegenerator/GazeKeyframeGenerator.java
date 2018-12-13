@@ -212,7 +212,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
         // take the MPAG4 for the agent target, i.e. the agent to look at
         //MPEG4Animatable targetAgent = new MPEG4Animatable();
         // take the MPAG4 for the agent whom is performing the gaze
-        MPEG4Animatable currentAgent = new MPEG4Animatable();
+        MPEG4Animatable currentAgent = new MPEG4Animatable(cm);
         for (int f = 0; f < envi.getTreeNode().getChildren().size(); ++f){
             if (envi.getTreeNode().getChildren().get(f) instanceof MPEG4Animatable){
                 MPEG4Animatable ag = (MPEG4Animatable) envi.getTreeNode().getChildren().get(f);
@@ -2086,9 +2086,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             } 
             
             // take the MPAG4 for the agent target, i.e. the agent to look at
-            MPEG4Animatable targetAgent = new MPEG4Animatable();
+            MPEG4Animatable targetAgent = new MPEG4Animatable(cm);
             // take the MPAG4 for the agent whom is performing the gaze
-            MPEG4Animatable currentAgent = new MPEG4Animatable();
+            MPEG4Animatable currentAgent = new MPEG4Animatable(cm);
             if (gaze.getTarget() != null || !gaze.getTarget().isEmpty()){
                 for (int i = 0; i < env.getTreeNode().getChildren().size(); ++i){
                     if (env.getTreeNode().getChildren().get(i) instanceof MPEG4Animatable){
@@ -2429,9 +2429,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             } 
             
             // take the MPAG4 for the agent target, i.e. the agent to look at
-            MPEG4Animatable targetAgent = new MPEG4Animatable();
+            MPEG4Animatable targetAgent = new MPEG4Animatable(cm);
             // take the MPAG4 for the agent whom is performing the gaze
-            MPEG4Animatable currentAgent = new MPEG4Animatable();
+            MPEG4Animatable currentAgent = new MPEG4Animatable(cm);
             if (gaze.getTarget() != null || !gaze.getTarget().isEmpty()){
                 for (int i = 0; i < env.getTreeNode().getChildren().size(); ++i){
                     if (env.getTreeNode().getChildren().get(i) instanceof MPEG4Animatable){

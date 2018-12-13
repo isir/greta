@@ -29,9 +29,7 @@ import java.util.List;
 import java.util.Map;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import vib.core.util.CharacterManager;
 import vib.core.util.log.Logs;
-import vib.core.utilx.gui.CharacterIniManagerFrame;
 
 /**
  *
@@ -96,8 +94,9 @@ public class ModuleFactory {
                             }
                         }
                     }
-                    mxCell parentCell = parent!=null?parent.getCell():null;
-                    return new Module(
+                    
+                    mxCell parentCell = moduleInfo.parent!=null?moduleInfo.parent.getCell():null;
+                    Module m = new Module(
                         moduleInfo,
                         id,
                         object,
@@ -123,6 +122,9 @@ public class ModuleFactory {
                                 return parameters;
                             }
                         };
+                    if(moduleInfo.parent!=null)
+                        m.setParent(parent);
+                    return m;
                 }
                 catch(InstantiationException ex){
                     String constructorsMsg = String.join("\n - ",moduleInfo.getPossibleConstructors());
@@ -133,9 +135,7 @@ public class ModuleFactory {
                     
                     Logs.error(msg);
                     JOptionPane.showMessageDialog(uiComponent,msg);
-                };
-                
-                
+                };                
             }
             catch (Throwable ex) {
                 while(ex.getCause() != null){
@@ -206,6 +206,7 @@ public class ModuleFactory {
         public ArrayList<ParameterInfo> parameterInfos = new ArrayList<ParameterInfo>();
         public Library objectLib;
         public Library frameLib;
+        public Module parent;
 
         public void addParameter(String type, String name, String defaultvalue, String setOn, Method setMethod, String getOn, Method getMethod){
             parameterInfos.add(new ParameterInfo(type, name, defaultvalue, setOn, setMethod, getOn, getMethod));
@@ -230,12 +231,15 @@ public class ModuleFactory {
 
                     Constructor<?> cons = objectClass.getConstructor(parentClass);
                     object = cons.newInstance(parent.getObject());
+                    this.parent = parent;
                 }
                 catch(NoSuchMethodException e){}
             }
             //Then if no constructor available, use the default one
-            if(object==null)
+            if(object==null){                
                 object = objectClass.newInstance();
+                this.parent = null;
+            }
 
             for(ParameterInfo parameterInfo : parameterInfos){
                 if(parameterInfo.setOn.equals("object")){

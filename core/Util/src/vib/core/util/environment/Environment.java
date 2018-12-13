@@ -106,7 +106,6 @@ public class Environment{
         event.newParentNode = parent;
         event.modifType = TreeEvent.MODIF_ADD;
         fireTreeEvent(event);  
-        IniManager.getGlobals().setEnvi(this);
     }
 
     public void addNode(Node n, TreeNode parent, int index) {

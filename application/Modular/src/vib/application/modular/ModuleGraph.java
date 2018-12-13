@@ -385,8 +385,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
     public void addModule(String moduleType, Module parent) {
         Module module = ModuleFactory.create(parentFrame, graph, moduleType, parent);
         if (module != null){
-            if(parent!=null){
-                module.setParent(parent);
+            if(parent!=null&&module.hasParent()){
                 getTreeNode(parent).addChild(module);          
             }else
                 treeModules.addChild(module);
@@ -400,6 +399,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
             updateInternalFrame(null);
         }
         deleteCell(module.getCell());
+        
         modules.remove(module);
         if (module.getFrame() != null) {
             module.getFrame().dispose();
@@ -414,6 +414,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
             module.getCharacterManager().remove((CharacterDependent)(module.getFrame()));
         }
 
+        treeModules.removeChild(module);
         garbage.add(module);
     }
 

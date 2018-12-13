@@ -105,13 +105,13 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         };
         
         // environment
-        environment = IniManager.getGlobals().getEnvi();        
+        environment = cm.getEnvironment();        
     }
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
 
-        environment = IniManager.getGlobals().getEnvi();  
+        environment = characterManager.getEnvironment();  
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<Keyframe>();
 

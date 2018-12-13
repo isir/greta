@@ -24,6 +24,7 @@
                 <item module="BAPFileReader" name="BAP File Reader"/>
                 <item module="oldBAP2newBAP" name="old BAP to new BAP"/>
                 <item module="Body Head Noise" name="Body Head Noise"/>
+				<item module="GretaWOZ" name="GretaWOZ"/>
             </menu>
             <menu name="Interruptions">
                 <item module="InterruptionManager" name="Interruption Manager"/>
@@ -355,7 +356,7 @@
             <object class="vib.core.util.laugh.PhonemeGeneratorLaughSynthetizer" lib_id="vib_util"/>
             <frame type="noFrame"/>
         </module>
-        <module name="TTS" restrict="1" style="VIBDefault">
+        <module name="TTS" style="VIBDefault"> <!-- restrict="1"-->
             <object class="vib.core.utilx.gui.TTSController" lib_id="vib_utilx"/>
             <frame type="object"/>
             <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
@@ -592,7 +593,7 @@
             <parameter default="false" get_method="getDetailsOnFace" get_on="frame" name="face" set_method="setDetailsOnFace" set_on="frame" type="boolean"/>
             <parameter default="false" get_method="getDetailsOnGestures" get_on="frame" name="gesture" set_method="setDetailsOnGestures" set_on="frame" type="boolean"/>
         </module>
-        <module name="Environment" style="VIBDefault">
+        <module name="Environment" style="Environment">
             <object class="vib.core.util.environment.Environment" lib_id="vib_util"/>
         </module>
         <module name="MPEG4Animatable" style="Animations">
@@ -875,6 +876,10 @@
         <module name="AnimationKeyframePerformer" style="Animations">
             <object class="vib.core.animation.performer.AnimationKeyframePerformer" lib_id="vib_body_animation_performer"/>
         </module>
+		<module name="GretaWOZ" style="Signals">
+            <object class="vib.auxiliary.gretawoz.GretaWOZ" lib_id="ext_gretaWOZ"/>
+			<frame type="object"/>
+        </module>
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1110,6 +1115,28 @@
             <depends lib_id="vib_signals"/>
             <depends lib_id="vib_util"/>
         </lib>
+		<lib id="vib_NN" path="./Common/Lib/Internal/NeuralNetworkEngine.jar">
+            <depends lib_id="vib_util"/>
+        </lib>
+		<lib id="ext_gretaWOZ" path="./Common/Lib/External/GretaWOZ.jar">
+			<depends lib_id="vib_util"/>
+			<depends lib_id="vib_intentions"/>
+			<depends lib_id="vib_behavior_planner"/>
+        </lib>
+		<lib id="vib_plancap" path="./Common/Lib/Internal/PlanCapture.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_playerOgre"/>
+            <depends lib_id="vib_behavior_planner"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_signals"/>
+			<depends lib_id="vib_meaningminer"/>
+            <depends lib_id="vib_feedbacks"/>
+            <depends lib_id="vib_social"/>
+            <depends lib_id="vib_multilayer_attitude_planner"/>
+            <depends lib_id="vib_nuance"/>
+            <depends lib_id="vib_bap2bvh"/>
+            <depends lib_id="vib_socialparameters"/>
+        </lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>
@@ -1342,6 +1369,18 @@
             <connect from="input" method="setSSITranslator" to="output"/>
             <disconnect from="null" method="" to="null"/>
         </connector>
+		<connector id="connectPlanCaptureControllerToCapturable" unique="true">
+            <input class="vib.plancapture.PlanCapturecontroller" lib_id="vib_plancap"/>
+            <output class="vib.auxiliary.player.ogre.capture.Capturable" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCapturable" to="output"/>
+            <disconnect from="input" method="setCapturable" to="null"/>
+        </connector>
+        <connector id="connectPlanCaptureControllerToCaptureOutput" unique="true">
+            <input class="vib.plancapture.PlanCapturecontroller" lib_id="vib_plancap"/>
+            <output class="vib.auxiliary.player.ogre.capture.CaptureOutput" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCaptureOutput" to="output"/>
+            <disconnect from="input" method="setCaptureOutput" to="null"/>
+        </connector>
 		<connector id="connectFMLAttitudeControllerToFMLFileReader" unique="true">
             <input class="vib.auxiliary.player.ogre.capture.Capturecontroller" lib_id="vib_playerOgre"/>
             <output class="vib.core.intentions.FMLFileReader" lib_id="vib_intentions"/>
@@ -1359,6 +1398,7 @@
         <style color="0x88FFDD" name="Animations"/>
         <style color="0x77EEFF" name="Player"/>
         <style color="0xCCCCFF" name="VIBDefault"/>
+		<style color="0x80AAFF" name="Environment"/>
         <default/>
     </styles>
 </modular>

@@ -12,7 +12,7 @@
             <parameter name="warning" value="true"/>
             <parameter name="error" value="true"/>
             <parameter name="info" value="true"/>
-            <window h="174" visible="false" w="212" x="0" y="0"/>
+            <window h="532" visible="false" w="505" x="0" y="0"/>
         </element>
 		<element h="50.0" id="LogFrame-1544700702468-724"
 			module="LogFrame" name="LogFrame" w="80.0" x="540.0" y="20.0">
@@ -99,10 +99,9 @@
                     <parameter name="doAudio" value="true"/>
                     <window h="128" visible="false" w="369" x="0" y="0"/>
                 </element>
-                <element h="50.0"
-                    id="OpenMary ClientTTS-1544700946314-81"
-                    module="OpenMary ClientTTS"
-                    name="OpenMary ClientTTS" w="80.0" x="430.0" y="10.0"/>
+                <element h="50.0" id="Cereproc TTS-1544705772596-81"
+                    module="Cereproc TTS" name="Cereproc TTS" w="80.0"
+                    x="440.0" y="10.0"/>
             </element>
         </element>
         <element h="50.0" id="PlayerOgre-1544700973529-249"
@@ -141,7 +140,7 @@
             source="LipBlender-1544700803251-512" target="MPEG4Animatable-1544700808257-513"/>
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"
             source="AnimationKeyframePerformer-1544700747777-220" target="MPEG4Animatable-1544700808257-513"/>
-        <connection connector="setTTS" source="TTS-1544700939858-569" target="OpenMary ClientTTS-1544700946314-81"/>
+        <connection connector="setTTS" source="TTS-1544700939858-569" target="Cereproc TTS-1544705772596-81"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="SimpleAUPerformer-1544700795765-328" target="LipBlender-1544700803251-512"/>
         <connection connector="AudioEmitter To AudioPerformer"

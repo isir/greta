@@ -22,6 +22,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import vib.core.util.environment.Environment;
+import vib.core.util.log.Logs;
 import vib.core.util.speech.TTS;
 
 /**
@@ -62,13 +64,15 @@ public class CharacterManager {
     static{
         getStaticInstance();
     }
+    private final Environment env;
     
     public String toString(){
         return id;
     }    
     
-    public CharacterManager(String id){
+    public CharacterManager(Environment env, String id){
         this.id = id;
+        this.env = env;
         dependents = new ArrayList<>();
         characterMapFile = new HashMap<String, String>();
         currentCaracterName = "DEFAULT_CHARACTER";      
@@ -81,19 +85,21 @@ public class CharacterManager {
         characterDefinitions = new IniManager((new File(filename)).getAbsolutePath());
         setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER")); 
         count++;
-        
-        
-        
+        Logs.info(String.format("CharacterManager '%s' created",id));
     }
     
-    public CharacterManager(){
-        this("CharacterManager-"+(count));               
+    public CharacterManager(Environment env){
+        this(env,"CharacterManager-"+(count));               
     }
     
     public static CharacterManager getStaticInstance(){
         if(staticInstance==null)
-            staticInstance = new CharacterManager("CharacterManager-static");
+            staticInstance = new CharacterManager(null,"CharacterManager-static");
         return staticInstance;
+    }
+    
+    public Environment getEnvironment(){
+        return env;
     }
 
     /**

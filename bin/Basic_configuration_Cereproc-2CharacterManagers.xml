@@ -32,12 +32,6 @@
                     w="80.0" x="40.0" y="130.0">
                     <window h="121" visible="false" w="172" x="0" y="0"/>
                 </element>
-                <element h="160.0"
-                    id="BehaviorRealizer-1544700740374-732"
-                    module="BehaviorRealizer" name="Behavior Realizer"
-                    w="80.0" x="140.0" y="130.0">
-                    <window h="310" visible="false" w="209" x="0" y="0"/>
-                </element>
                 <element h="40.0"
                     id="AnimationKeyframePerformer-1544700747777-220"
                     module="AnimationKeyframePerformer"
@@ -46,7 +40,7 @@
                 <element h="50.0"
                     id="FaceKeyframePerformer-1544700752898-144"
                     module="FaceKeyframePerformer"
-                    name="Face Keyframe Performer" w="90.0" x="240.0" y="150.0">
+                    name="Face Keyframe Performer" w="90.0" x="430.0" y="310.0">
                     <parameter name="blinking" value="true"/>
                 </element>
                 <element h="50.0" id="LipModel-1544700770889-684"
@@ -55,7 +49,7 @@
                 <element h="40.0"
                     id="AudioKeyframePerformer-1544700783338-431"
                     module="AudioKeyframePerformer"
-                    name="Audio Keyframe Performer" w="190.0" x="240.0" y="270.0"/>
+                    name="Audio Keyframe Performer" w="190.0" x="430.0" y="430.0"/>
                 <element h="50.0"
                     id="SimpleAUPerformer-1544700795765-328"
                     module="SimpleAUPerformer" name="SimpleAUPerformer"
@@ -64,7 +58,7 @@
                 </element>
                 <element h="50.0" id="LipBlender-1544700803251-512"
                     module="LipBlender" name="Lip Blender" w="80.0"
-                    x="350.0" y="210.0"/>
+                    x="540.0" y="370.0"/>
                 <element h="180.0"
                     id="MPEG4Animatable-1544700808257-513"
                     module="MPEG4Animatable" name="MPEG4 Animatable"
@@ -102,6 +96,12 @@
                 <element h="50.0" id="Cereproc TTS-1544705585227-183"
                     module="Cereproc TTS" name="Cereproc TTS" w="80.0"
                     x="370.0" y="10.0"/>
+                <element h="160.0"
+                    id="BehaviorRealizer-1544713059210-837"
+                    module="BehaviorRealizer" name="BehaviorRealizer"
+                    w="80.0" x="140.0" y="130.0">
+                    <window h="310" visible="false" w="209" x="0" y="0"/>
+                </element>
             </element>
             <element h="350.0" id="CharacterManager-1544701056241-381"
                 module="CharacterManager" name="CharacterManager"
@@ -125,12 +125,6 @@
                     w="80.0" x="20.0" y="120.0">
                     <window h="121" visible="false" w="172" x="0" y="0"/>
                 </element>
-                <element h="160.0"
-                    id="BehaviorRealizer-1544701077369-466"
-                    module="BehaviorRealizer" name="Behavior Realizer"
-                    w="80.0" x="110.0" y="120.0">
-                    <window h="310" visible="false" w="209" x="0" y="0"/>
-                </element>
                 <element h="40.0"
                     id="AnimationKeyframePerformer-1544701084817-460"
                     module="AnimationKeyframePerformer"
@@ -139,13 +133,13 @@
                 <element h="40.0"
                     id="AudioKeyframePerformer-1544701088466-524"
                     module="AudioKeyframePerformer"
-                    name="Audio Keyframe Performer" w="200.0" x="210.0" y="250.0"/>
+                    name="Audio Keyframe Performer" w="200.0" x="390.0" y="800.0"/>
                 <element h="50.0" id="LipModel-1544701091338-924"
                     module="LipModel" name="LipModel" w="90.0" x="210.0" y="190.0"/>
                 <element h="50.0"
                     id="FaceKeyframePerformer-1544701093857-811"
                     module="FaceKeyframePerformer"
-                    name="Face Keyframe Performer" w="90.0" x="210.0" y="130.0">
+                    name="Face Keyframe Performer" w="90.0" x="390.0" y="680.0">
                     <parameter name="blinking" value="true"/>
                 </element>
                 <element h="50.0"
@@ -172,7 +166,7 @@
                 </element>
                 <element h="50.0" id="LipBlender-1544701268402-961"
                     module="LipBlender" name="Lip Blender" w="80.0"
-                    x="320.0" y="190.0"/>
+                    x="500.0" y="740.0"/>
                 <element h="50.0" id="TTS-1544704550664-449"
                     module="TTS" name="TTS" w="80.0" x="280.0" y="10.0">
                     <parameter name="doPhonemes" value="true"/>
@@ -183,6 +177,12 @@
                 <element h="50.0" id="Cereproc TTS-1544705594100-905"
                     module="Cereproc TTS" name="Cereproc TTS" w="80.0"
                     x="380.0" y="10.0"/>
+                <element h="160.0"
+                    id="BehaviorRealizer-1544713076933-225"
+                    module="BehaviorRealizer" name="BehaviorRealizer"
+                    w="80.0" x="110.0" y="120.0">
+                    <window h="310" visible="false" w="209" x="0" y="0"/>
+                </element>
             </element>
         </element>
         <element h="50.0" id="PlayerOgre-1544700973529-249"
@@ -191,73 +191,73 @@
             <parameter name="posY" value="1.767417311668396"/>
             <parameter name="posZ" value="-1.102582335472107"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="-0.06249997019767761"/>
+            <parameter name="pitch" value="-0.062499962747097015"/>
             <parameter name="yaw" value="1.5750120878219604"/>
             <window h="615" visible="true" w="736" x="2959" y="181"/>
         </element>
     </elements>
     <connections>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FMLFileReader-1544701069074-506" target="BehaviorPlanner-1544701075130-575"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="FaceKeyframePerformer-1544700752898-144" target="SimpleAUPerformer-1544700795765-328"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="AudioKeyframePerformer-1544701088466-524" target="MPEG4Animatable-1544701103065-914"/>
         <connection connector="setTTS" source="TTS-1544704550664-449" target="Cereproc TTS-1544705594100-905"/>
+        <connection connector="LipSourceForLipBlender"
+            source="LipModel-1544700770889-684" target="LipBlender-1544700803251-512"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FMLFileReader-1544700908962-428" target="BehaviorPlanner-1544700734561-356"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="AnimationKeyframePerformer-1544701084817-460" target="MPEG4Animatable-1544701103065-914"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BehaviorPlanner-1544700734561-356" target="BehaviorRealizer-1544713059210-837"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4Animatable-1544700808257-513" target="Environment-1544700713383-564"/>
+        <connection connector="setTTS" source="TTS-1544705330204-766" target="Cereproc TTS-1544705585227-183"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="AudioKeyframePerformer-1544700783338-431" target="MPEG4Animatable-1544700808257-513"/>
+        <connection connector="addLogOutput"
+            source="Logs-1544700696093-682" target="LogFrame-1544700702468-724"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BMLFileReader-1544701071961-590" target="BehaviorRealizer-1544713076933-225"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FMLFileReader-1544701069074-506" target="BehaviorPlanner-1544701075130-575"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="LipBlender-1544700803251-512" target="MPEG4Animatable-1544700808257-513"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4Animatable-1544701103065-914" target="Environment-1544700713383-564"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4Animatable-1544700808257-513" target="Environment-1544700713383-564"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BMLFileReader-1544701071961-590" target="BehaviorRealizer-1544701077369-466"/>
-        <connection connector="setTTS" source="TTS-1544705330204-766" target="Cereproc TTS-1544705585227-183"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BehaviorPlanner-1544701075130-575" target="BehaviorRealizer-1544701077369-466"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1544701077369-466" target="AnimationKeyframePerformer-1544701084817-460"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1544701077369-466" target="FaceKeyframePerformer-1544701093857-811"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1544701077369-466" target="LipModel-1544701091338-924"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1544701077369-466" target="AudioKeyframePerformer-1544701088466-524"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="FaceKeyframePerformer-1544701093857-811" target="SimpleAUPerformer-1544701096226-322"/>
-        <connection connector="LipSourceForLipBlender"
-            source="LipModel-1544700770889-684" target="LipBlender-1544700803251-512"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="SimpleAUPerformer-1544700795765-328" target="LipBlender-1544700803251-512"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="AnimationKeyframePerformer-1544701084817-460" target="MPEG4Animatable-1544701103065-914"/>
-        <connection connector="LipSourceForLipBlender"
-            source="LipModel-1544701091338-924" target="LipBlender-1544701268402-961"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="AnimationKeyframePerformer-1544700747777-220" target="MPEG4Animatable-1544700808257-513"/>
-        <connection connector="addLogOutput"
-            source="Logs-1544700696093-682" target="LogFrame-1544700702468-724"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BehaviorPlanner-1544700734561-356" target="BehaviorRealizer-1544700740374-732"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FMLFileReader-1544700908962-428" target="BehaviorPlanner-1544700734561-356"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="SimpleAUPerformer-1544701096226-322" target="LipBlender-1544701268402-961"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="AudioKeyframePerformer-1544700783338-431" target="MPEG4Animatable-1544700808257-513"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="LipBlender-1544701268402-961" target="MPEG4Animatable-1544701103065-914"/>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="BMLFileReader-1544700914641-19" target="BehaviorRealizer-1544700740374-732"/>
+            source="BMLFileReader-1544700914641-19" target="BehaviorRealizer-1544713059210-837"/>
         <connection connector="AUEmitterToAUPerformer"
-            source="FaceKeyframePerformer-1544700752898-144" target="SimpleAUPerformer-1544700795765-328"/>
+            source="FaceKeyframePerformer-1544701093857-811" target="SimpleAUPerformer-1544701096226-322"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-1544701096226-322" target="LipBlender-1544701268402-961"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="AnimationKeyframePerformer-1544700747777-220" target="MPEG4Animatable-1544700808257-513"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1544700740374-732" target="AnimationKeyframePerformer-1544700747777-220"/>
+            source="BehaviorRealizer-1544713076933-225" target="AnimationKeyframePerformer-1544701084817-460"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1544700740374-732" target="FaceKeyframePerformer-1544700752898-144"/>
+            source="BehaviorRealizer-1544713076933-225" target="FaceKeyframePerformer-1544701093857-811"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1544700740374-732" target="LipModel-1544700770889-684"/>
+            source="BehaviorRealizer-1544713076933-225" target="LipModel-1544701091338-924"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1544700740374-732" target="AudioKeyframePerformer-1544700783338-431"/>
+            source="BehaviorRealizer-1544713076933-225" target="AudioKeyframePerformer-1544701088466-524"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-1544700795765-328" target="LipBlender-1544700803251-512"/>
         <connection connector="connectPlayerToEnvironment"
             source="PlayerOgre-1544700973529-249" target="Environment-1544700713383-564"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BehaviorPlanner-1544701075130-575" target="BehaviorRealizer-1544713076933-225"/>
+        <connection connector="LipSourceForLipBlender"
+            source="LipModel-1544701091338-924" target="LipBlender-1544701268402-961"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1544713059210-837" target="AnimationKeyframePerformer-1544700747777-220"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1544713059210-837" target="FaceKeyframePerformer-1544700752898-144"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1544713059210-837" target="LipModel-1544700770889-684"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1544713059210-837" target="AudioKeyframePerformer-1544700783338-431"/>
     </connections>
 </modulated>

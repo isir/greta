@@ -57,9 +57,6 @@ public class IniManager extends ParameterSet<IniParameter> {
     private static NumberFormat numberFormat;
 
     private static double javaVersion;
-    
-    // store the environment in order to have access from every module
-    private Environment envi;
 
     static {
         programPath = System.getProperty("user.dir");
@@ -449,20 +446,5 @@ public class IniManager extends ParameterSet<IniParameter> {
     public String getValueString(String name, String definition) {
         IniParameter param = get(name, definition);
         return param == null ? "" : param.getParamValue();
-    }
-
-    /**
-     * @return the envi
-     */
-    public Environment getEnvi() {
-        return envi;
-    }
-
-    /**
-     * @param envi the envi to set
-     */
-    public void setEnvi(Environment envi) {
-        this.envi = envi;
-    }
-            
+    }           
 }

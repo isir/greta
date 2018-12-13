@@ -40,6 +40,20 @@ public class TreeNode<T>{
         children.add(newChild);
         return newChild;
     }
+    
+    public void removeChild(T data) {
+        TreeNode nodeToDelete = null;
+        for(TreeNode c : children) {
+            if(c.data.equals(data)){
+                nodeToDelete = c;
+                break;
+            }
+            else
+                c.removeChild(data);            
+        }
+        if(nodeToDelete!=null)
+            children.remove(nodeToDelete);
+    }
 
     public void addChildren(List<TreeNode> children) {
         for(TreeNode t : children) {

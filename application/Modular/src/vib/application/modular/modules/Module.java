@@ -56,6 +56,10 @@ public class Module {
         }
     }
     
+    public boolean hasParent(){
+        return parent!=null;
+    }
+    
     public CharacterManager getCharacterManager(){
         if(parent!=null && parent.getObject() instanceof CharacterManager){
             return (CharacterManager)parent.getObject();

@@ -141,6 +141,18 @@
 		</constraints>
 	</behaviorset>
 	
+	<behaviorset name="emotion-joyStrong">
+		<signals>
+			<signal id="1" name="faceexp=smile_big_open" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+			</core>
+			<rules>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
 	<behaviorset name="emotion-joybody">
 		<signals>
 			<signal id="1" name="head=head_infront" modality="head"/>
@@ -413,6 +425,28 @@
 			</core>
 		</constraints>
 	</behaviorset>
+	<behaviorset name="deictic-us1">
+		<signals>
+			<signal id="1" name="deictic=indicateAt_R" modality="gesture"/>
+
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="deictic-us2">
+		<signals>
+			<signal id="1" name="deictic=Self_Pos_L" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
 	
 	<!-- ICONICS -->
 	<behaviorset name="iconic-chop">

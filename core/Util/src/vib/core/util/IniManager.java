@@ -27,9 +27,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
-import vib.core.util.environment.Environment;
 import vib.core.util.log.Logs;
-import vib.core.util.math.Vec3d;
 import vib.core.util.parameter.ParameterSet;
 
 /**

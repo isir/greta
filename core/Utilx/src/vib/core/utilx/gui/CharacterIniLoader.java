@@ -71,12 +71,15 @@ public class CharacterIniLoader extends IniLoader implements CharacterDependent{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
-                    getCharacterManager().setCharacter(e.getItem().toString());
+                    String characterFileName = e.getItem().toString();
+                    getCharacterManager().setCharacter(characterFileName);
+                   
+                    //managerFrame.setDefinition(characterFileName);
                 }
             }
         });
         jComboBox1.setSelectedItem(getCharacterManager().getCurrentCharacterName().toUpperCase());
-        //getCharacterManager().add(this);
+        getCharacterManager().add(this);
         // Phil : To-do while constructing the tree
     }
 
@@ -117,9 +120,10 @@ public class CharacterIniLoader extends IniLoader implements CharacterDependent{
 
     @Override
     public void onCharacterChanged() {
-        jComboBox1.setSelectedItem(getCharacterManager().getCurrentCharacterName().toUpperCase());
+        String characterName = getCharacterManager().getCurrentCharacterName();
+        jComboBox1.setSelectedItem(characterName.toUpperCase());
         Logs.info("Current character parameters changed.");
-        IniManager.getGlobals().get("CURRENT_CHARACTER").setParamValue(getCharacterManager().getCurrentCharacterName().toUpperCase());
+        IniManager.getGlobals().get("CURRENT_CHARACTER").setParamValue(characterName.toUpperCase());
         fire = false;
         managerFrame.updateIniParameters();
         fire = true;

@@ -515,12 +515,12 @@
 			<frame class="vib.core.animation.performer.BodyNoiseGui" lib_id="vib_body_animation_performer" type="frame">
                 <link method="setGui" on="frame"/>
             </frame>
-            <parameter default="true" get_method="isUseHead" get_on="object" name="useHead" set_method="setUseHead" set_on="object" type="boolean"/>
-            <parameter default="true" get_method="isUseTorso" get_on="object" name="useTorso" set_method="setUseTorso" set_on="object" type="boolean"/>
-            <parameter default="true" get_method="isUseLowerBody" get_on="object" name="useLowerBody" set_method="setUseLowerBody" set_on="object" type="boolean"/>
+            <!--<parameter default="false" get_method="isUseHead" get_on="object" name="useHead" set_method="setUseHead" set_on="object" type="boolean"/>
+            <parameter default="false" get_method="isUseTorso" get_on="object" name="useTorso" set_method="setUseTorso" set_on="object" type="boolean"/>
+            <parameter default="false" get_method="isUseLowerBody" get_on="object" name="useLowerBody" set_method="setUseLowerBody" set_on="object" type="boolean"/>
             <parameter default="1" get_method="getIntensityHead" get_on="object" name="setIntensityHead" set_method="setIntensityHead" set_on="object" type="double"/>
             <parameter default="1" get_method="getIntensityTorso" get_on="object" name="setIntensityTorso" set_method="setIntensityTorso" set_on="object" type="double"/>
-            <parameter default="1" get_method="getStep" get_on="object" name="step" set_method="setStep" set_on="object" type="double"/>
+            <parameter default="1" get_method="getStep" get_on="object" name="step" set_method="setStep" set_on="object" type="double"/> -->
         </module>
         <module name="LipModel" style="Animations">
             <object class="vib.core.animation.lipmodel.LipModel" lib_id="vib_lipmodel"/>
@@ -1025,6 +1025,7 @@
         <lib id="ext_xuggle" path="./Player/Lib/External/xuggle-xuggler-5.4.jar">
             <depends lib_id="ext_rmq.commons-cli-1.1"/>
         </lib>
+		<lib id="ext_rmq.commons-cli-1.1" path="./Common/Lib/External/rabbitMQ/commons-cli-1.1.jar"/>
         <!-- gpl -->
         <lib id="ext_slf4j_api" path="./Common/Lib/External/slf4j-api-1.7.2.jar"/>
         <lib id="ext_log4j" path="./Common/Lib/External/log4j-1.2.15.jar"/>

@@ -30,6 +30,8 @@ import vib.core.animation.mpeg4.bap.BAPFramesEmitter;
 import vib.core.animation.mpeg4.bap.BAPFramesPerformer;
 import vib.core.animation.mpeg4.bap.BAPType;
 import vib.core.animation.mpeg4.bap.JointType;
+import vib.core.util.CharacterDependent;
+import vib.core.util.CharacterManager;
 import vib.core.util.Constants;
 import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
@@ -42,24 +44,28 @@ import vib.core.util.time.Timer;
  *
  * @author Jing Huang
  */
-public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmitter {
+public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmitter, CharacterDependent{
 
     ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
     MotionSequence _ms;
     //Skeleton _sk_original = null;
     //Skeleton _sk = null;
     CharacterLowerBody _lowerbody = new CharacterLowerBody();
-    double _intensityTorso = 0.2f;
+    double _intensityTorso = 1;
     double _intensityHead = 1;
     private boolean requestStop = false;
-    boolean _useHead = true;
-    boolean _useTorso = true;
-    boolean _useLowerBody = true;
+    boolean _useHead = false;
+    boolean _useTorso = false;
+    boolean _useLowerBody = false;
     double step = 1;
-    public BodyAnimationNoiseGenerator() {
+    
+    private CharacterManager characterManager;
+    
+    public BodyAnimationNoiseGenerator(CharacterManager cm) {
         String currentDir = System.getProperty("user.dir");
         _ms = MocapXML.load(currentDir + "\\BehaviorRealizer\\AnimationLexicon\\noise.xml");
         this.start();
+        setCharacterManager(cm);
     }
 
     public BAPFrame generateNoise(int idx) {
@@ -372,6 +378,26 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
 
     public double getStep(){
         return step;
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        //
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager cm) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = cm;
+        characterManager.add(this);
     }
 
     

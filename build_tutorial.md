@@ -7,6 +7,16 @@ You can download ANT from [https://ant.apache.org/](https://ant.apache.org/). Do
 
 You are ready to use ANT! (don't forget to close the existing command line window, though)
 
+## Running the ANT Build Scripts
+
+From the ``application/Modular`` directory, run ``ant -buildfile build_manual.xml -Dant.build.javac.target=1.8 -Dant.build.javac.source=1.8``.
+
+If you want to build from a clean slate, do the following:
+1. Delete the ``bin/Common/Lib/Internal`` directory
+2. Delete the ``bin/Player/Lib/Internal`` directory
+3. Delete tje ``bin/Modular.jar``
+4. From the ``application/Modular`` directory, run ``ant -buildfile build_manual.xml -Dant.build.javac.target=1.8 -Dant.build.javac.source=1.8``
+
 ## Basic
 
 We use ANT to perform the build. It does the necessary clean up, compilation, and packaging. If the project depends on another projects which have not been packaged, the script will automatically calls the build scripts of those projects (and thus taking care of the dependency problem).

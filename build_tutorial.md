@@ -1,3 +1,12 @@
+## ANT Installation and Setup
+
+You can download ANT from [https://ant.apache.org/](https://ant.apache.org/). Download the binary distribution, unzip it, and move it to a directory of your choice. After that, set these environment variables:
+1. ANT_HOME: <the-unzipped-ANT-directory>
+2. Path: add the <the-unzipped-ANT-directory\bin>
+3. JAVA_HOME: <your-default-JDK-directory> (you might already have this set)
+
+You are ready to use ANT! (don't forget to close the existing command line window, though)
+
 ## Basic
 
 We use ANT to perform the build. It does the necessary clean up, compilation, and packaging. If the project depends on another projects which have not been packaged, the script will automatically calls the build scripts of those projects (and thus taking care of the dependency problem).

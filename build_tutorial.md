@@ -1,11 +1,11 @@
-## ANT Installation and Setup
+## ANT Installation and Setup (in Windows)
 
 You can download ANT from [https://ant.apache.org/](https://ant.apache.org/). Download the binary distribution, unzip it, and move it to a directory of your choice. After that, set these environment variables:
-1. ANT_HOME: <the-unzipped-ANT-directory>
-2. Path: add the <the-unzipped-ANT-directory\bin>
-3. JAVA_HOME: <your-default-JDK-directory> (you might already have this set)
+1. ANT_HOME: \<the-unzipped-ANT-directory\>
+2. Path: add the \<the-unzipped-ANT-directory\\bin\>
+3. JAVA_HOME: \<your-default-JDK-directory\> (you might already have this set)
 
-You are ready to use ANT! (don't forget to close the existing command line window, though)
+You are ready to use ANT! (don't forget to close the existing command line windows, though)
 
 ## Running the ANT Build Scripts
 
@@ -14,7 +14,7 @@ From the ``application/Modular`` directory, run ``ant -buildfile build_manual.xm
 If you want to build from a clean slate, do the following:
 1. Delete the ``bin/Common/Lib/Internal`` directory
 2. Delete the ``bin/Player/Lib/Internal`` directory
-3. Delete tje ``bin/Modular.jar``
+3. Delete the ``bin/Modular.jar``
 4. From the ``application/Modular`` directory, run ``ant -buildfile build_manual.xml -Dant.build.javac.target=1.8 -Dant.build.javac.source=1.8``
 
 ## Basic

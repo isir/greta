@@ -51,6 +51,7 @@ public class OgreAwt extends java.awt.Canvas implements Capturable{
     private boolean initialized;
     private AudioOutput defaultAudioOutput;
 
+
     public OgreAwt(AudioOutput audioOutput) {
         cameraDefaultPosX = 0;
         cameraDefaultPosY = 0.7;
@@ -60,6 +61,7 @@ public class OgreAwt extends java.awt.Canvas implements Capturable{
         cameraDefaultRoll = 0;
         initialized = false;
         defaultAudioOutput = audioOutput;
+        
     }
 
     public OgreAwt() {

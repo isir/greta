@@ -30,6 +30,8 @@ import vib.core.animation.mpeg4.bap.BAPFramesEmitter;
 import vib.core.animation.mpeg4.bap.BAPFramesPerformer;
 import vib.core.animation.mpeg4.bap.BAPType;
 import vib.core.animation.mpeg4.bap.JointType;
+import vib.core.util.CharacterDependent;
+import vib.core.util.CharacterManager;
 import vib.core.util.Constants;
 import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
@@ -42,24 +44,28 @@ import vib.core.util.time.Timer;
  *
  * @author Jing Huang
  */
-public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmitter {
+public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmitter, CharacterDependent{
 
     ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
     MotionSequence _ms;
     //Skeleton _sk_original = null;
     //Skeleton _sk = null;
     CharacterLowerBody _lowerbody = new CharacterLowerBody();
-    double _intensityTorso = 0.2f;
+    double _intensityTorso = 1;
     double _intensityHead = 1;
     private boolean requestStop = false;
-    boolean _useHead = true;
-    boolean _useTorso = true;
-    boolean _useLowerBody = true;
+    boolean _useHead = false;
+    boolean _useTorso = false;
+    boolean _useLowerBody = false;
     double step = 1;
-    public BodyAnimationNoiseGenerator() {
+    
+    private CharacterManager characterManager;
+    
+    public BodyAnimationNoiseGenerator(CharacterManager cm) {
         String currentDir = System.getProperty("user.dir");
         _ms = MocapXML.load(currentDir + "\\BehaviorRealizer\\AnimationLexicon\\noise.xml");
         this.start();
+        setCharacterManager(cm);
     }
 
     public BAPFrame generateNoise(int idx) {
@@ -70,9 +76,9 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
         if (isUseTorso()) {
             computeUpperBody(frame, idx);
         }
-        if (isUseLowerBody()) {
-            computeLowerBody(frame, idx);
-        }
+        //if (isUseLowerBody()) {
+            computeLowerBody(frame, idx,isUseLowerBody());
+        //}
         //computeLowerBody(frame, idx);
         BAPFrame bapframe = getBapFrame(frame, idx);
         return bapframe;
@@ -255,7 +261,7 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
     int currentIdx = 0;
     int signed = 1;
 
-    void computeLowerBody(Frame frame, int idx) {
+    void computeLowerBody(Frame frame, int idx, boolean enable) {
         if (_ms == null) {
             return;
         }
@@ -264,7 +270,8 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
         int size = frames.size();
 
         Frame current = frames.get(currentIdx);
-        {
+        
+        if (enable){
             frame.setRootTranslation(current.getRootTranslation());
             frame.addRotation("HumanoidRoot", Quaternion.slerp(new Quaternion(), current.getRotation("HumanoidRoot"), 0.8f, true));
             frame.addRotation("vl5", Quaternion.slerp(new Quaternion(), current.getRotation("HumanoidRoot").inverse(), 0.8f, true));
@@ -274,7 +281,18 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
             frame.addRotation("r_ankle", current.getRotation("r_ankle"));
             frame.addRotation("l_hip", current.getRotation("l_hip"));
             frame.addRotation("r_hip", current.getRotation("r_hip"));
+        }else{
+            frame.setRootTranslation(new Vec3d());
+            frame.addRotation("HumanoidRoot", new Quaternion());
+            frame.addRotation("vl5", new Quaternion());
+            frame.addRotation("l_knee", new Quaternion());
+            frame.addRotation("r_knee", new Quaternion());
+            frame.addRotation("l_ankle", new Quaternion());
+            frame.addRotation("r_ankle", new Quaternion());
+            frame.addRotation("l_hip", new Quaternion());
+            frame.addRotation("r_hip", new Quaternion());
         }
+        
         if (currentIdx >= size) {
             currentIdx = size - 1;
             signed = signed * -1;
@@ -290,6 +308,11 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
             currentIdx = 0;
             signed = signed * -1;
         }
+    }
+    
+    private void RestposeLowenBody() {
+        
+        
     }
 
     @Override
@@ -356,4 +379,26 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
     public double getStep(){
         return step;
     }
+
+    @Override
+    public void onCharacterChanged() {
+        //
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager cm) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = cm;
+        characterManager.add(this);
+    }
+
+    
 }

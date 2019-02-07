@@ -27,6 +27,7 @@ import vib.core.util.math.Vec3d;
  */
 public class Torso extends ExpressiveFrame {
 
+    Quaternion _r = new Quaternion(); // torso rotation
 
     public Torso() {
     }
@@ -50,6 +51,14 @@ public class Torso extends ExpressiveFrame {
     @Override
     public Torso clone() {
         return new Torso(this);
+    }
+    
+    public void setRotation(Quaternion q) {
+        _r = new Quaternion(q);
+    }
+    
+    public Quaternion getRotation() {
+        return _r;
     }
 
    

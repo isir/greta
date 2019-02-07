@@ -17,21 +17,21 @@
 package vib.core.repositories;
 
 import vib.core.util.CharacterDependent;
-import vib.core.util.CharacterManager;
 import vib.core.util.xml.XML;
 import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
 import java.util.List;
+import vib.core.util.CharacterDependentAdapter;
 
 /**
  *
  * @author Jing Huang
  */
-public class HeadIntervals implements CharacterDependent {
+public class HeadIntervals extends CharacterDependentAdapter implements CharacterDependent {
 
     private XMLTree _tree;
 
-    String headIntervalsFile = CharacterManager.getValueString("HEAD_INTERVALS");
+    String headIntervalsFile = getCharacterManager().getValueString("HEAD_INTERVALS");
 
     public double verticalLeftMin, verticalLeftMax;
     public double verticalRightMin, verticalRightMax;
@@ -56,7 +56,7 @@ public class HeadIntervals implements CharacterDependent {
 
     @Override
     public void onCharacterChanged() {
-        headIntervalsFile = CharacterManager.getValueString("HEAD_INTERVALS");
+        headIntervalsFile = getCharacterManager().getValueString("HEAD_INTERVALS");
         loadHeadIntervals();
     }
 

@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<HeadGestures xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Common/Data/xml/HeadGestures.xsd">
+<!--
+	SagittalTilt is an backward/forward rotation in the sagittal plan (around x axis)
+	VerticalTorsion is a leftward/rightward rotation around the vertical axis (around y axis)
+	LateralRoll is leftward/rightward rotation in the lateral plan (around z axis)
+-->
+
+<!-- 
+	In the SagittalTilt, the rotation in the backward direction correspond to a backward rotation
+						 the rotation in the forward direction correspond to a forward rotation
+
+	In the VerticalTorsion, the rotation in the leftward direction correspond to a leftward rotation
+							the rotation in the rightward direction correspond to a rightward rotation
+
+	In the LateralRoll, the rotation in the rightward direction correspond to a rightward rotation
+						the rotation in the leftward direction correspond to a leftward rotation
+
+	***for the head gestures (<head>)
+	the symbolic value of rotation for SagittalTilt, VerticalTorsion or LateralRoll is defined by : min+spc*(max-min)
+		where spc is the spacial parameter (computed at runtime in the interval [0,1])
+	To obtain the real value of rotation, the symbolic value must be multiplied by |max_degree| which is defined in the HeadIntervals.xml file (with respect to the human anatomy)
+
+	***for the head postures (<headDirectionShift>)
+	the symbolic value of rotation for SagittalTilt, VerticalTorsion or LateralRoll are equal to the corresponding max.
+	To obtain the real value of rotation, the symbolic value must be multiplied by |max_degree| which is defined in the HeadIntervals.xml file (with respect to the human anatomy)
+-->
+
+	<!-- Used in the lexicon -->
+
+	<head id="Neutral" lexeme="Neutral">
+		<KeyPoint>
+			<SagittalTilt direction="Backward" min="0.0" max="0.0"/>
+			<VerticalTorsion direction="Leftward" min="0.0" max="0.0"/>
+			<LateralRoll direction="Leftward" min="0.0" max="0.0"/>
+		</KeyPoint>
+	</head>
+
+	<head id="Up" lexeme="Up">
+		<KeyPoint>
+			<SagittalTilt direction="Backward" min="0.15" max="0.15"/>
+		</KeyPoint>
+	</head>
+	<head id="Down" lexeme="Down">
+		<KeyPoint>
+			<SagittalTilt direction="Forward" min="0.15" max="0.15"/>
+		</KeyPoint>
+	</head>
+	<head id="Leftward" lexeme="Leftward">
+		<KeyPoint>
+			<VerticalTorsion direction="Leftward" min="0.10" max="0.10"/>
+		</KeyPoint>
+	</head>
+	<head id="Rightward" lexeme="Rightward">
+		<KeyPoint>
+			<VerticalTorsion direction="Rightward" min="0.10" max="0.10"/>
+		</KeyPoint>
+	</head>
+	<head id="Nod_Small" lexeme="NOD">
+		<KeyPoint type="strokeEnd">
+			<SagittalTilt direction="Forward" min="0.05" max="0.1"/>
+		</KeyPoint>
+	</head>
+	<head id="Nod_Middle" lexeme="NOD">
+		<KeyPoint type="strokeEnd">
+			<SagittalTilt direction="Forward" min="0.05" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Nod_Big" lexeme="NOD">
+		<KeyPoint type="strokeEnd">
+			<SagittalTilt direction="Forward" min="0.1" max="0.4"/>
+		</KeyPoint>
+	</head>
+	<head id="Nod_VeryBig" lexeme="NOD">
+		<KeyPoint type="strokeEnd">
+			<SagittalTilt direction="Forward" min="0.1" max="0.8"/>
+		</KeyPoint>
+	</head>
+	<head id="Toss_Small" lexeme="TOSS">
+		<KeyPoint type="strokeStart">
+			<SagittalTilt direction="Backward" min="0.05" max="0.1"/>
+		</KeyPoint>
+	</head>
+	<head id="Toss_Middle" lexeme="TOSS">
+		<KeyPoint type="strokeStart">
+			<SagittalTilt direction="Backward" min="0.05" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Toss_Big" lexeme="TOSS">
+		<KeyPoint type="strokeStart">
+			<SagittalTilt direction="Backward" min="0.1" max="0.4"/>
+		</KeyPoint>
+	</head>
+	<head id="Toss_VeryBig" lexeme="TOSS">
+		<KeyPoint type="strokeStart">
+			<SagittalTilt direction="Backward" min="0.1" max="0.8"/>
+		</KeyPoint>
+	</head>
+	<head id="Shake_Middle" lexeme="SHAKE">
+		<KeyPoint type="strokeStart">
+			<VerticalTorsion direction="Leftward" min="0.05" max="0.2"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<VerticalTorsion direction="Rightward" min="0.05" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Shake_Big" lexeme="SHAKE">
+		<KeyPoint type="strokeStart">
+			<VerticalTorsion direction="Leftward" min="0.2" max="0.5"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<VerticalTorsion direction="Rightward" min="0.2" max="0.5"/>
+		</KeyPoint>
+	</head>
+	<head id="Shake_Small" lexeme="SHAKE">
+		<KeyPoint type="strokeStart">
+			<VerticalTorsion direction="Leftward" min="0.05" max="0.1"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<VerticalTorsion direction="Rightward" min="0.05" max="0.1"/>
+		</KeyPoint>
+	</head>
+	<head id="Aside_Right" lexeme="Aside_Right">
+		<KeyPoint>
+			<LateralRoll direction="Rightward" min="0.1" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Aside_Left" lexeme="Aside_Left">
+		<KeyPoint>
+			<LateralRoll direction="Leftward" min="0.1" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Aside_Right_Reaction" lexeme="Aside_Right_Reaction">
+		<KeyPoint>
+			<LateralRoll direction="Rightward" min="0.1" max="0.15"/>
+		</KeyPoint>
+	</head>
+	<head id="Aside_Left_Reaction" lexeme="Aside_Left_Reaction">
+		<KeyPoint>
+			<LateralRoll direction="Leftward" min="0.1" max="0.15"/>
+		</KeyPoint>
+	</head>
+	<head id="Down_Right" lexeme="Down_Right">
+		<KeyPoint>
+			<SagittalTilt direction="Forward" min="0.1" max="0.2"/>
+			<VerticalTorsion direction="Rightward" min="0.1" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Down_Left" lexeme="Down_Left">
+		<KeyPoint>
+			<SagittalTilt direction="Forward" min="0.1" max="0.2"/>
+			<VerticalTorsion direction="Leftward" min="0.1" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Up_Right" lexeme="Up_Right">
+		<KeyPoint>
+			<SagittalTilt direction="Backward" min="0.1" max="0.2"/>
+			<VerticalTorsion direction="Rightward" min="0.1" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Up_Left" lexeme="Up_Left">
+		<KeyPoint>
+			<SagittalTilt direction="Backward" min="0.1" max="0.2"/>
+			<VerticalTorsion direction="Leftward" min="0.1" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Up_Aside_Right" lexeme="Up_Aside_Right">
+		<KeyPoint>
+			<SagittalTilt direction="Backward" min="0.05" max="0.2"/>
+			<LateralRoll direction="Rightward" min="0.05" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Up_Aside_Left" lexeme="Up_Aside_Left">
+		<KeyPoint>
+			<SagittalTilt direction="Backward" min="0.05" max="0.2"/>
+			<LateralRoll direction="Leftward" min="0.05" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Down_Aside_Right" lexeme="Down_Aside_Right">
+		<KeyPoint>
+			<SagittalTilt direction="Forward" min="0.05" max="0.2"/>
+			<LateralRoll direction="Rightward" min="0.05" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="Down_Aside_Left" lexeme="Down_Aside_Left">
+		<KeyPoint>
+			<SagittalTilt direction="Forward" min="0.05" max="0.2"/>
+			<LateralRoll direction="Leftward" min="0.05" max="0.2"/>
+		</KeyPoint>
+	</head>
+
+	<!-- Used in MSE -->
+
+	<head id="relief_signal_14" lexeme="RELIEF_SIGNAL">
+		<KeyPoint>
+			<LateralRoll direction="Rightward" min="0.04" max="0.15"/>
+			<SagittalTilt direction="Backward" min="0.04" max="0.15"/>
+			<VerticalTorsion direction="Rightward" min="0.04" max="0.15"/> 
+		</KeyPoint>
+	</head>
+	<head id="pride_signal_8" lexeme="PRIDE_SIGNAL">
+		<KeyPoint>
+			<SagittalTilt direction="Forward" min="0.04" max="0.15"/>
+			<VerticalTorsion direction="Leftward" min="0.07" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="pride_signal_9" lexeme="PRIDE_SIGNAL">
+		<KeyPoint>
+			<SagittalTilt direction="Forward" min="0.04" max="0.15"/>
+			<VerticalTorsion direction="Rightward" min="0.07" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="embarrassment_signal_1" lexeme="EMBARRASSMENT_SIGNAL">
+		<KeyPoint>
+			<SagittalTilt direction="Forward" min="0.15" max="0.5"/>
+		</KeyPoint>
+	</head>
+	<head id="embarrassment_signal_2" lexeme="EMBARRASSMENT_SIGNAL">
+		<KeyPoint>
+			<VerticalTorsion direction="Leftward" min="0.15" max="0.5"/>
+		</KeyPoint>
+	</head>
+	<head id="joy_signal_7" lexeme="JOY_SIGNAL">
+		<KeyPoint>
+			<LateralRoll direction="Rightward" min="0.04" max="0.2"/>
+			<VerticalTorsion direction="Leftward" min="0.01" max="0.05"/>
+		</KeyPoint>
+	</head>
+	<head id="joy_signal_8" lexeme="JOY_SIGNAL">
+		<KeyPoint>
+			<LateralRoll direction="Leftward" min="0.04" max="0.2"/>
+			<VerticalTorsion direction="Rightward" min="0.01" max="0.05"/>
+		</KeyPoint>
+	</head>
+	<head id="regret_signal_13" lexeme="REGRET_SIGNAL">
+		<KeyPoint>
+			<LateralRoll direction="Rightward" min="0.04" max="0.2"/>
+			<VerticalTorsion direction="Leftward" min="0.01" max="0.05"/>
+		</KeyPoint>
+	</head>
+	<head id="regret_signal_14" lexeme="REGRET_SIGNAL">
+		<KeyPoint>
+			<LateralRoll direction="Leftward" min="0.04" max="0.2"/>
+			<VerticalTorsion direction="Rightward" min="0.01" max="0.05"/>
+		</KeyPoint>
+	</head>
+	<head id="regret_signal_16" lexeme="SHAKE">
+		<KeyPoint type="strokeStart">
+			<SagittalTilt direction="Forward" min="0.15" max="0.3"/>
+			<VerticalTorsion direction="Rightward" min="0.04" max="0.2"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<SagittalTilt direction="Forward" min="0.15" max="0.3"/>
+			<VerticalTorsion direction="Leftward" min="0.04" max="0.2"/>
+		</KeyPoint>
+	</head>
+	<head id="regret_signal_24" lexeme="REGRET_SIGNAL">
+		<KeyPoint>
+			<SagittalTilt direction="Forward" min="0.1" max="0.25"/>
+		</KeyPoint>
+	</head>
+	<head id="rejoice_signal_14" lexeme="REJOICE_SIGNAL">
+		<KeyPoint>
+			<LateralRoll direction="Leftward" min="0.04" max="0.2"/>
+			<VerticalTorsion direction="Rightward" min="0.01" max="0.05"/>
+		</KeyPoint>
+	</head>
+	<head id="rejoice_signal_13" lexeme="SHAKE">
+		<KeyPoint type="strokeStart">
+			<VerticalTorsion direction="Rightward" min="0.01" max="0.02"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<VerticalTorsion direction="Leftward" min="0.01" max="0.02"/>
+		</KeyPoint>
+	</head>
+	<head id="rejoice_signal_20" lexeme="SHAKE">
+		<KeyPoint type="strokeStart">
+			<VerticalTorsion direction="Rightward" min="0.008" max="0.015"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<VerticalTorsion direction="Leftward" min="0.008" max="0.015"/>
+		</KeyPoint>
+	</head>
+	<head id="rejoice_signal_21" lexeme="NOD">
+		<KeyPoint type="strokeStart">
+			<SagittalTilt direction="Backward" min="0.008" max="0.015"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<SagittalTilt direction="Forward" min="0.008" max="0.015"/>
+		</KeyPoint>
+	</head>
+
+	<!-- end : Used in the lexicon -->
+
+	<!-- Movement of the head -->
+	<!-- NODS -->
+	<head id="NodUpDown" lexeme="NOD">
+		<KeyPoint type="strokeStart">
+			<SagittalTilt direction="Backward" min="0.2" max="0.4"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<SagittalTilt direction="Forward" min="0.1" max="0.4"/>
+		</KeyPoint>
+	</head>
+
+	<head id="NodDownUp" lexeme="NOD">
+		<KeyPoint type="strokeStart">
+			<SagittalTilt direction="Forward" min="0.1" max="0.4"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<SagittalTilt direction="Backward" min="0.2" max="0.4"/>
+		</KeyPoint>
+	</head>
+
+	<!-- SHAKES -->
+	<head id="ShakeRightLeft" lexeme="SHAKE">
+		<KeyPoint type="strokeStart">
+			<VerticalTorsion direction="Rightward" min="0.2" max="0.5"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<VerticalTorsion direction="Leftward" min="0.2" max="0.5"/>
+		</KeyPoint>
+	</head>
+	<head id="ShakeLeftRight" lexeme="SHAKE">
+		<KeyPoint type="strokeStart">
+			<VerticalTorsion direction="Leftward" min="0.2" max="0.5"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<VerticalTorsion direction="Rightward" min="0.2" max="0.5"/>
+		</KeyPoint>
+	</head>
+
+	<!-- TILTS -->
+	<head id="TiltRightLeft" lexeme="TILT">
+		<KeyPoint type="strokeStart">
+			<LateralRoll direction="Rightward" min="0.2" max="0.5"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<LateralRoll direction="Leftward" min="0.2" max="0.5"/>
+		</KeyPoint>
+	</head>
+	<head id="TiltLeftRight" lexeme="TILT">
+		<KeyPoint type="strokeStart">
+			<LateralRoll direction="Leftward" min="0.2" max="0.5"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<LateralRoll direction="Rightward" min="0.2" max="0.5"/>
+		</KeyPoint>
+	</head>
+
+	<!-- Quoc Anh added some different configurations -->
+	<head id="ShakeLeftUpRight" lexeme="ShakeLeftUpRight" repetition="2">
+		<KeyPoint type="strokeStart">
+			<VerticalTorsion direction="Leftward" min="0.0" max="0.5"/>
+		</KeyPoint>
+		<KeyPoint type="stroke">
+			<VerticalTorsion direction="Backward" min="0.0" max="0.5"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<VerticalTorsion direction="Rightward" min="0.0" max="0.5"/>
+		</KeyPoint>
+	</head>
+
+	<head id="ShakeRightDownLeft" lexeme="ShakeRightDownLeft" repetition="2">
+		<KeyPoint type="strokeStart">
+			<VerticalTorsion direction="Rightward" min="0.0" max="0.5"/>
+		</KeyPoint>
+		<KeyPoint type="stroke">
+			<VerticalTorsion direction="Forward" min="0.0" max="0.5"/>
+		</KeyPoint>
+		<KeyPoint type="strokeEnd">
+			<VerticalTorsion direction="Leftward" min="0.0" max="0.5"/>
+		</KeyPoint>
+	</head>
+
+	<!-- ****************************************************************************************************** -->
+	<!-- Head postures -->
+
+	<!-- Return to the neutral position (look foward as default) -->
+	<headDirectionShift id="NeutralPosition">
+	</headDirectionShift>
+
+	<!-- Turn to object target -->
+	<headDirectionShift id="TargetTurn" target="id1">
+		<!--
+		<VerticalTorsion direction="" min="0.0" max="1.0"></VerticalTorsion>
+	 	<SagittalTilt direction="" min="0.0" max="1.0"></SagittalTilt>
+	 	<LateralRoll direction="" min="0.0" max="1.0"></LateralRoll>
+		-->
+	</headDirectionShift>
+
+	<headDirectionShift id="RightTurn">
+		<!-- AU51 : Right turn (rotation) around the vertical axis -->
+		<VerticalTorsion direction="Rightward" min="0.0" max="0.8"></VerticalTorsion>
+	</headDirectionShift>
+
+	<headDirectionShift id="LeftTurn">
+		<!-- AU52 : small Left turn (rotation) around the vertical axis -->
+		<VerticalTorsion direction="Leftward" min="0.0" max="0.2"></VerticalTorsion>
+	</headDirectionShift>
+
+	<headDirectionShift id="RightTilt">
+		<!-- AU55 : lateral Right tilt -->
+		<LateralRoll direction="Rightward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<headDirectionShift id="LeftTilt">
+		<!-- AU56 : lateral Left tilt -->
+		<LateralRoll direction="Leftward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<headDirectionShift id="Forward">
+		<!-- AU53 : Downward head tilt -->
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+	</headDirectionShift>
+
+	<headDirectionShift id="Backward">
+		<!-- AU54 : Upward head tilt-->
+		<SagittalTilt direction="Backward" min="0.0" max="0.5"></SagittalTilt>
+	</headDirectionShift>
+
+	<!--**********************************************************-->
+	<!-- combined head postures -->
+	<!--UpDownward-->
+	<headDirectionShift id="UpDownward">
+		<VerticalTorsion direction="Backward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+	</headDirectionShift>
+
+	<!--LeftTurnUpward-->
+	<headDirectionShift id="LeftTurnUpward">
+		<VerticalTorsion direction="Leftward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Backward" min="0.0" max="0.5"></SagittalTilt>
+	</headDirectionShift>
+
+	<!--LeftTurnDownward-->
+	<headDirectionShift id="LeftTurnDownward">
+		<VerticalTorsion direction="Leftward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+	</headDirectionShift>
+
+	<!--RightTurnUpward-->
+	<headDirectionShift id="RightTurnUpward">
+		<VerticalTorsion direction="Rightward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Backward" min="0.0" max="0.5"></SagittalTilt>
+	</headDirectionShift>
+
+	<!--RightTurnDownward-->
+	<headDirectionShift id="RightTurnDownward">
+		<VerticalTorsion direction="Rightward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+	</headDirectionShift>
+
+	<!--RightTurnRightTilt-->
+	<headDirectionShift id="RightTurnRightTilt">
+		<VerticalTorsion direction="Rightward" min="0.0" max="0.5"></VerticalTorsion>
+		<LateralRoll direction="Rightward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--RightTurnLeftTilt-->
+	<headDirectionShift id="RightTurnLeftTilt">
+		<VerticalTorsion direction="Rightward" min="0.0" max="0.5"></VerticalTorsion>
+		<LateralRoll direction="Leftward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--LeftTurnRightTilt-->
+	<headDirectionShift id="LeftTurnRightTilt">
+		<VerticalTorsion direction="Leftward" min="0.0" max="0.5"></VerticalTorsion>
+		<LateralRoll direction="Rightward" min="0.0" max="0.5"></LateralRoll>
+
+	</headDirectionShift>
+
+	<!--LeftTurnLeftTilt-->
+	<headDirectionShift id="LeftTurnLeftTilt">
+		<VerticalTorsion direction="Leftward" min="0.0" max="0.5"></VerticalTorsion>
+		<LateralRoll direction="Leftward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--LeftTiltUpward-->
+	<headDirectionShift id="LeftTiltUpward">
+		<SagittalTilt direction="Backward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Leftward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--LeftTiltDownward-->
+	<headDirectionShift id="LeftTiltDownward">
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Leftward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--RightTiltUpward-->
+	<headDirectionShift id="RightTiltUpward">
+		<SagittalTilt direction="Backward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Rightward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--RightTiltDownward-->
+	<headDirectionShift id="RightTiltDownward">
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Rightward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--**********************************************************-->
+	<!-- multiple rotation-->
+	<!--RightTurnDownwardRightTilt-->
+	<headDirectionShift id="RightTurnDownwardRightTilt">
+		<VerticalTorsion direction="Rightward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Rightward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--RightTurnDownwardLeftTilt-->
+	<headDirectionShift id="RightTurnDownwardLeftTilt">
+		<VerticalTorsion direction="Rightward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Leftward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--LeftTurnDownwardRightTilt-->
+	<headDirectionShift id="LeftTurnDownwardRightTilt">
+		<VerticalTorsion direction="Leftward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Rightward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--LeftTurnDownwardLeftTilt-->
+	<headDirectionShift id="LeftTurnDownwardLeftTilt">
+		<VerticalTorsion direction="Leftward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Forward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Leftward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--RightTurnUpwardRightTilt-->
+	<headDirectionShift id="RightTurnUpwardRightTilt">
+		<VerticalTorsion direction="Rightward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Backward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Rightward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--RightTurnUpwardLeftTilt-->
+	<headDirectionShift id="RightTurnUpwardLeftTilt">
+		<VerticalTorsion direction="Rightward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Backward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Leftward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--LeftTurnUpwardRightTilt-->
+	<headDirectionShift id="LeftTurnUpwardRightTilt">
+		<VerticalTorsion direction="Leftward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Backward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Rightward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+	<!--LeftTurnUpwardLeftTilt-->
+	<headDirectionShift id="LeftTurnUpwardLeftTilt">
+		<VerticalTorsion direction="Leftward" min="0.0" max="0.5"></VerticalTorsion>
+		<SagittalTilt direction="Backward" min="0.0" max="0.5"></SagittalTilt>
+		<LateralRoll direction="Leftward" min="0.0" max="0.5"></LateralRoll>
+	</headDirectionShift>
+
+</HeadGestures>

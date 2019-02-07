@@ -51,13 +51,16 @@ public class EngineParameterSetOfSet {
 
 
 //public methods :
+    public EngineParameterSetOfSet(){
+        knownDefinition = new ArrayList<String>();
+        engineSets = new ArrayList<EngineParameterSet>();        
+    }
     /**
      * Constructs an {@code EngineParameterSetOfSet} with a default definition for all contained {@code EngineParameterSet}.
      * @param fileName the name of the file of the default definition.
      */
     public EngineParameterSetOfSet(String fileName){
-        knownDefinition = new ArrayList<String>();
-        engineSets = new ArrayList<EngineParameterSet>();
+        this();
         set(fileName);
     }
 

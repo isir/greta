@@ -16,6 +16,7 @@
  */
 package vib.core.utilx.gui;
 
+import vib.core.util.CharacterManager;
 import vib.core.util.speech.Speech;
 import vib.core.util.speech.TTS;
 
@@ -25,8 +26,11 @@ import vib.core.util.speech.TTS;
  */
 public class TTSController extends javax.swing.JFrame {
 
+    private CharacterManager cm;
+
     /** Creates new form TTSController */
-    public TTSController() {
+    public TTSController(CharacterManager cm) {       
+        this.cm = cm;
         initComponents();
         updateTTSOptions();
     }
@@ -38,8 +42,8 @@ public class TTSController extends javax.swing.JFrame {
                 doPhonem.isSelected());
     }
 
-    public void setTTS(TTS tts){
-        Speech.setTTS(tts);
+    public void setTTS(TTS tts){        
+        cm.setTTS(tts);
     }
 
     public void setDoTemporize(boolean todo){

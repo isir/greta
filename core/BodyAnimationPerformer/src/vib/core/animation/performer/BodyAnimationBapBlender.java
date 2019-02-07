@@ -31,6 +31,7 @@ import vib.core.animation.mpeg4.bap.BAPType;
 import vib.core.animation.mpeg4.bap.JointType;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapterThread;
 import vib.core.util.Constants;
 import vib.core.util.Mode;
 import vib.core.util.enums.interruptions.ReactionType;
@@ -44,7 +45,7 @@ import vib.core.util.time.Timer;
  * @author Jing Huang
  * @author Brice Donval
  */
-public class BodyAnimationBapBlender extends Thread implements BAPFramesEmitter, CharacterDependent {
+public class BodyAnimationBapBlender extends CharacterDependentAdapterThread implements BAPFramesEmitter, CharacterDependent {
 
     private final List<BAPFramesPerformer> bapFramesPerformers = new ArrayList<BAPFramesPerformer>();
 
@@ -55,19 +56,19 @@ public class BodyAnimationBapBlender extends Thread implements BAPFramesEmitter,
     private double initialHoldDurationInSecond = 0;
     private double followingHoldDurationInSecond = 0;
 
-    public BodyAnimationBapBlender() {
-
+    public BodyAnimationBapBlender(CharacterManager cm) {
+        setCharacterManager(cm);
         this.start();
 
-        if (!CharacterManager.getValueString("INTERRUPTION_GESTURE_HOLD_DUR").trim().isEmpty()) {
-            initialHoldDurationInSecond = CharacterManager.getValueDouble("INTERRUPTION_GESTURE_HOLD_DUR");
+        if (!getCharacterManager().getValueString("INTERRUPTION_GESTURE_HOLD_DUR").trim().isEmpty()) {
+            initialHoldDurationInSecond = getCharacterManager().getValueDouble("INTERRUPTION_GESTURE_HOLD_DUR");
         }
 
-        if (!CharacterManager.getValueString("INTERRUPTION_GESTURE_RETRACT_DUR").trim().isEmpty()) {
-            followingHoldDurationInSecond = CharacterManager.getValueDouble("INTERRUPTION_GESTURE_RETRACT_DUR");
+        if (!getCharacterManager().getValueString("INTERRUPTION_GESTURE_RETRACT_DUR").trim().isEmpty()) {
+            followingHoldDurationInSecond = getCharacterManager().getValueDouble("INTERRUPTION_GESTURE_RETRACT_DUR");
         }
 
-        CharacterManager.add(this);
+        //getCharacterManager().add(this);
     }
 
     @Override
@@ -497,14 +498,14 @@ public class BodyAnimationBapBlender extends Thread implements BAPFramesEmitter,
     @Override
     public void onCharacterChanged() {
 
-        if (!CharacterManager.getValueString("INTERRUPTION_GESTURE_HOLD_DUR").trim().isEmpty()) {
-            initialHoldDurationInSecond = CharacterManager.getValueDouble("INTERRUPTION_GESTURE_HOLD_DUR");
+        if (!getCharacterManager().getValueString("INTERRUPTION_GESTURE_HOLD_DUR").trim().isEmpty()) {
+            initialHoldDurationInSecond = getCharacterManager().getValueDouble("INTERRUPTION_GESTURE_HOLD_DUR");
         } else {
             initialHoldDurationInSecond = 0;
         }
 
-        if (!CharacterManager.getValueString("INTERRUPTION_GESTURE_RETRACT_DUR").trim().isEmpty()) {
-            followingHoldDurationInSecond = CharacterManager.getValueDouble("INTERRUPTION_GESTURE_RETRACT_DUR");
+        if (!getCharacterManager().getValueString("INTERRUPTION_GESTURE_RETRACT_DUR").trim().isEmpty()) {
+            followingHoldDurationInSecond = getCharacterManager().getValueDouble("INTERRUPTION_GESTURE_RETRACT_DUR");
         } else {
             followingHoldDurationInSecond = 0;
         }
@@ -512,7 +513,7 @@ public class BodyAnimationBapBlender extends Thread implements BAPFramesEmitter,
 
     @Override
     protected void finalize() throws Throwable {
-        CharacterManager.remove(this);
+        getCharacterManager().remove(this);
         super.finalize();
     }
 }

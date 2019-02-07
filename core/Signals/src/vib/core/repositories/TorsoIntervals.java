@@ -22,17 +22,21 @@ import vib.core.util.xml.XML;
 import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
 import java.util.List;
+import static vib.core.repositories.HandShapeLibrary.CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY;
+import vib.core.util.CharacterDependent;
+import vib.core.util.CharacterDependentAdapter;
 
 /**
  *
  * @author Jing Huang
  */
-public class TorsoIntervals {
+public class TorsoIntervals extends CharacterDependentAdapter implements CharacterDependent {
 
     private XMLTree _tree;
 
     //private static final String xsdFile = IniManager.getGlobals().getValueString("TORSO_INTERVALS");
-    private static final String xmlFile = CharacterManager.getValueString("TORSO_INTERVALS");
+    private String xmlFile = getCharacterManagerStatic().getValueString("TORSO_INTERVALS");
+    private XMLParser xmlparser;
 
     public double verticalR = 0;
     public double verticalL = 0;
@@ -44,8 +48,15 @@ public class TorsoIntervals {
     public double collapseMax = 0;
 
     public TorsoIntervals() {
-        XMLParser xmlparser = XML.createParser();
+        xmlparser = XML.createParser();
         xmlparser.setValidating(false);
+        _tree = xmlparser.parseFile(xmlFile);
+        loadTorsoIntervals();
+    }
+    
+    @Override
+    public void onCharacterChanged() {
+        xmlFile = getCharacterManager().getValueString("TORSO_INTERVALS");
         _tree = xmlparser.parseFile(xmlFile);
         loadTorsoIntervals();
     }

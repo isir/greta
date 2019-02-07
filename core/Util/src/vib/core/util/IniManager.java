@@ -56,7 +56,6 @@ public class IniManager extends ParameterSet<IniParameter> {
 
     private static double javaVersion;
 
-
     static {
         programPath = System.getProperty("user.dir");
 
@@ -445,5 +444,5 @@ public class IniManager extends ParameterSet<IniParameter> {
     public String getValueString(String name, String definition) {
         IniParameter param = get(name, definition);
         return param == null ? "" : param.getParamValue();
-    }
+    }           
 }

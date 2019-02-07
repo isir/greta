@@ -17,6 +17,7 @@
 package vib.core.signals.gesture;
 
 import vib.core.signals.SignalTargetable;
+import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
 import vib.core.util.enums.GazeDirection;
 import vib.core.util.enums.Side;
@@ -25,18 +26,44 @@ import vib.core.util.enums.Side;
  *
  * @author Elisabetta
  */
-public class PointingSignal extends GestureSignal implements SignalTargetable {
+public class PointingSignal extends GestureSignal implements SignalTargetable, CharacterDependent {
     private String origin;
     private String target;
     private Side mode;
     private GazeDirection offsetDirection = null;
     private Double offsetAngle = null;
+    
+    private CharacterManager characterManager;
+    
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
+    }
+    
+    @Override
+    public void onCharacterChanged() {
+        //set the current library to use :
+        origin= getCharacterManager().currentCharacterId;
+    }
 
     public PointingSignal(String id) {
         super(id);
         this.target = "";
         this.mode = Side.RIGHT;
-        origin=CharacterManager.currentCharacterId;
+        origin=getCharacterManager().currentCharacterId;
         target="";
         offsetDirection=GazeDirection.FRONT;
         offsetAngle=0.0;

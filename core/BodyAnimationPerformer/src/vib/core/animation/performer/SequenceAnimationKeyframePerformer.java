@@ -42,6 +42,7 @@ import vib.core.keyframes.ShoulderKeyframe;
 import vib.core.keyframes.TorsoKeyframe;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.Constants;
 import vib.core.util.Mode;
 import vib.core.util.enums.Side;
@@ -52,17 +53,18 @@ import vib.core.util.math.Function;
  *
  * @author Jing Huang
  */
-public class SequenceAnimationKeyframePerformer implements KeyframePerformer, BAPFramesEmitter, CharacterDependent {
+public class SequenceAnimationKeyframePerformer extends CharacterDependentAdapter implements KeyframePerformer, BAPFramesEmitter, CharacterDependent {
 
-    SymbolicConverter _symbolicConverter = new SymbolicConverter();
+    SymbolicConverter _symbolicConverter;
     SequenceIKCharacterBody _cb;
     ExpressiveTorso _exTorso = new ExpressiveTorso();
     boolean expressiveTorso = true;
 //    int _framePerSecond = Constants.FRAME_PER_SECOND;
     BodyAnimationBAPFrameEmitter _be = new BodyAnimationBAPFrameEmitter();
 
-    public SequenceAnimationKeyframePerformer() {
-        CharacterManager.add(this);
+    public SequenceAnimationKeyframePerformer(CharacterManager cm) {
+        setCharacterManager(cm);
+        _symbolicConverter = new SymbolicConverter(cm);
         _cb = new SequenceIKCharacterBody(_symbolicConverter.getOriginalSkeleton());
         _cb.initMassSystemByOriginalSkeleton();
     }

@@ -17,6 +17,7 @@
 
 package vib.core.intentions;
 
+import vib.core.util.CharacterManager;
 import vib.core.util.speech.Speech;
 
 /**
@@ -26,8 +27,8 @@ import vib.core.util.speech.Speech;
  */
 public class PseudoIntentionSpeech extends Speech implements Intention{
 
-    public PseudoIntentionSpeech(){
-        super();
+    public PseudoIntentionSpeech(CharacterManager cm){
+        super(cm);
     }
 
     public PseudoIntentionSpeech(Speech s){
@@ -62,4 +63,10 @@ public class PseudoIntentionSpeech extends Speech implements Intention{
     public String getMode() {
         return "replace";
     }
+    
+    @Override
+    public String getTarget (){
+        return null;
+    }
+
 }

@@ -23,12 +23,13 @@ import vib.core.util.xml.XML;
 import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
 import java.util.Map;
+import vib.core.util.CharacterDependent;
 
 /**
  *
  * @author Andre-Marie Pez
  */
-public class SemaineCharacterChangeReceiver extends TextReceiver{
+public class SemaineCharacterChangeReceiver extends TextReceiver implements CharacterDependent{
     XMLParser stateParser;
 
     public SemaineCharacterChangeReceiver(){
@@ -49,7 +50,31 @@ public class SemaineCharacterChangeReceiver extends TextReceiver{
         XMLTree state = stateParser.parseBuffer(content.toString());
         XMLTree character = state.findNodeCalled("character");
         if(character!=null) {
-            CharacterManager.setCharacter(character.getAttribute("name"));
+            CharacterManager.getStaticInstance().setCharacter(character.getAttribute("name"));
         }
+    }
+
+    
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
+    }
+    
+    private CharacterManager characterManager;
+
+    @Override
+    public void onCharacterChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

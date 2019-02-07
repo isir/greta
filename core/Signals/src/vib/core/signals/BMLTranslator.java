@@ -23,6 +23,7 @@ import vib.core.repositories.AUItem;
 import vib.core.repositories.HeadLibrary;
 import vib.core.signals.gesture.GestureSignal;
 import vib.core.signals.gesture.PointingSignal;
+import vib.core.util.CharacterManager;
 import vib.core.util.IniManager;
 import vib.core.util.Mode;
 import vib.core.util.enums.CompositionType;
@@ -93,7 +94,7 @@ public class BMLTranslator {
      * @param bml the XMLTree in BML
      * @return the List of Signals
      */
-    public static synchronized List<Signal> BMLToSignals(XMLTree bml) {
+    public static synchronized List<Signal> BMLToSignals(XMLTree bml, CharacterManager cm) {
         List<Signal> signals = new ArrayList<Signal>();
 
         XMLTree root = bml.getRootNode();
@@ -149,7 +150,7 @@ public class BMLTranslator {
 
             //<editor-fold defaultstate="collapsed" desc="speech">
             if (bmlchild.getName().equalsIgnoreCase("speech")) {
-                SpeechSignal speech = new SpeechSignal();
+                SpeechSignal speech = new SpeechSignal(cm);
                 speech.readFromXML(bmlchild, endAsDuration);
                 signals.add(speech);
             }
@@ -897,9 +898,7 @@ public class BMLTranslator {
             //Read gaze
             if (bmlchild.getName().equalsIgnoreCase("greta:gaze") || bmlchild.getName().equalsIgnoreCase("gaze")) {
                 GazeSignal gazeSignal = new GazeSignal(bmlchild.getAttribute("id"));
-
                 gazeSignal.readFromXML(bmlchild, endAsDuration);
-
                 signals.add(gazeSignal);
             }
 
@@ -1031,7 +1030,12 @@ public class BMLTranslator {
      */
     public static synchronized XMLTree SignalsToBML(List<Signal> signals, Mode mode) {
         XMLTree bml = XML.createTree("bml", bmlNameSpace);
-        bml.setAttribute("id", "bml1");
+        // if the bml id is written in the fml file we put the same id in the bml
+        if (mode.getBml_id() != "" || mode.getBml_id() != null){
+            bml.setAttribute("id", mode.getBml_id());
+        }else {// otherwise we put a stadanrd id in the bml file
+            bml.setAttribute("id", "bml1");
+        }
         bml.setAttribute("character", "Greta");
         bml.setAttribute("composition", mode.getCompositionType().toString());
         bml.setAttribute("reaction_type", mode.getReactionType().toString());

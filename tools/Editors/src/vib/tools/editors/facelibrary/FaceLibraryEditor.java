@@ -60,8 +60,13 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
     private AUAPFrame frame = new AUAPFrame();
     private ArrayList<AUPerformer> perfomers = new ArrayList<AUPerformer>();
     private JComboBox instancesComboBox;
+    private CharacterManager cm;
+    private AULibrary auLibrary;
 
-    public FaceLibraryEditor() {
+    public FaceLibraryEditor(CharacterManager cm) {
+        setCharacterManager(cm);
+        
+        auLibrary = new AULibrary(cm);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
         for (int i = 0; i < AUAPFrame.NUM_OF_AUS; ++i) {
@@ -71,7 +76,7 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
                     FaceLibraryEditor.this.send();
                 }
             };
-            aus[i].setEnabled(AULibrary.global_aulibrary.get("AU" + (i+1)) != null); //disable au when not implemented in AU lib
+            aus[i].setEnabled(auLibrary.get("AU" + (i+1)) != null); //disable au when not implemented in AU lib
         }
 
         JButton resetButton = new JButton("reset");//TODO use localizedJButton
@@ -170,7 +175,6 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
 
         applySelectedExpression();
         this.pack();
-        CharacterManager.add(this);
     }
 
     private void addTab(JTabbedPane tabbedPane, String title, int... auIndex) {
@@ -360,8 +364,19 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
 
     @Override
     protected void finalize() throws Throwable {
-        CharacterManager.remove(this);
+        cm.remove(this);
         super.finalize();
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+        return cm;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager cm) {
+        this.cm = cm;
+        cm.add(this);
     }
 
 

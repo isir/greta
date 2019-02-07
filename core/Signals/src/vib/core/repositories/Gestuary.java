@@ -50,17 +50,41 @@ public class Gestuary extends SignalLibrary<GestureSignal> implements CharacterD
     private static final String GESTUARY_PARAM_NAME;
     private static final String GESTUARY_XSD;
     public static Gestuary global_gestuary;
+    
+    private CharacterManager characterManager;
+
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
+    }
 
     static {
         GESTUARY_PARAM_NAME = "GESTUARY";
         GESTUARY_XSD = IniManager.getGlobals().getValueString("XSD_GESTUARY");
-        global_gestuary = new Gestuary();
-        CharacterManager.add(global_gestuary);
+        global_gestuary = new Gestuary(CharacterManager.getStaticInstance());        
     }
 
-    public Gestuary() {
-        super(CharacterManager.getDefaultValueString(GESTUARY_PARAM_NAME));
-        setDefinition(CharacterManager.getValueString(GESTUARY_PARAM_NAME));
+    public Gestuary(CharacterManager cm) {
+        super();
+        setCharacterManager(cm);
+        setDefaultDefinition(getCharacterManager().getDefaultValueString(GESTUARY_PARAM_NAME));
+        setDefinition(getCharacterManager().getValueString(GESTUARY_PARAM_NAME));
     }
 
     @Override
@@ -221,7 +245,7 @@ public class Gestuary extends SignalLibrary<GestureSignal> implements CharacterD
 
     @Override
     public void onCharacterChanged() {
-        setDefinition(CharacterManager.getValueString(GESTUARY_PARAM_NAME));
+        setDefinition(getCharacterManager().getValueString(GESTUARY_PARAM_NAME));
     }
 
     private void saveHand(XMLTree phaseTree, Hand hand) {

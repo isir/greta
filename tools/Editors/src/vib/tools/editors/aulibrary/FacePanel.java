@@ -27,6 +27,7 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.AffineTransform;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import vib.core.util.CharacterManager;
 
 /**
  *
@@ -232,7 +233,7 @@ public class FacePanel extends JPanel{
     }
 
     public static void main(String [] ss){
-        JFrame jf = new AULibraryEditor();
+        JFrame jf = new AULibraryEditor(CharacterManager.getStaticInstance());
         jf.setSize(1000, 1000);
         jf.setVisible(true);
     }

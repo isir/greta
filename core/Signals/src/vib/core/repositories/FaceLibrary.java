@@ -38,22 +38,48 @@ public class FaceLibrary extends ParameterSet<AUExpression> implements Character
 
     public static final String CHARACTER_PARAMETER_FACELIBRARY = "FACELIBRARY";
     private static final String xsdFile = IniManager.getGlobals().getValueString("XSD_FACELIBRARY");
-    public static FaceLibrary global_facelibrary = new FaceLibrary();
+    public static FaceLibrary global_facelibrary = new FaceLibrary(CharacterManager.getStaticInstance());
+    private CharacterManager characterManager;
+    
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
 
-    public FaceLibrary() {
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
+        //this.characterManager = characterManager;
+    }
+
+    public FaceLibrary(CharacterManager cm) {
         //get the default Lexicon :
-        super(CharacterManager.getDefaultValueString(CHARACTER_PARAMETER_FACELIBRARY));
+        super();
+        this.setCharacterManager(cm);
+        setDefaultDefinition(getCharacterManager().getDefaultValueString(CHARACTER_PARAMETER_FACELIBRARY));
 
         //load additionnal Lexicon :
-        for (String filename : CharacterManager.getAllValuesString(CHARACTER_PARAMETER_FACELIBRARY)) {
+        for (String filename : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_FACELIBRARY)) {
             addDefinition(filename);
         }
 
         //set the current Lexicon to use :
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_FACELIBRARY));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_FACELIBRARY));
 
         //to be notify when the character change :
-        CharacterManager.add(this);
+        //getCharacterManager().add(this);
+        // Phil : removed, to be done while constructing the tree graph
     }
 
     @Override
@@ -95,7 +121,7 @@ public class FaceLibrary extends ParameterSet<AUExpression> implements Character
 
     @Override
     public void onCharacterChanged() {
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_FACELIBRARY));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_FACELIBRARY));
     }
 
     @Override

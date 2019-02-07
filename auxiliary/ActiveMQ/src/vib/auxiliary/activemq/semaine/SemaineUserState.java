@@ -34,6 +34,7 @@ import vib.core.util.xml.XMLTree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import vib.core.util.CharacterManager;
 import vib.core.util.enums.CompositionType;
 
 /**
@@ -49,15 +50,17 @@ public class SemaineUserState extends TextReceiver implements SignalEmitter{
     private List<SignalPerformer> signalPerformers;
     private SpeechSignal currentSpeech;
     private long currentSpeechReceivedTime = Timer.getTimeMillis();
+    private CharacterManager cm;
 
-    public SemaineUserState(){
+    public SemaineUserState(CharacterManager cm){
         this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
              WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
-             "semaine.data.state.user.behaviour");
+             "semaine.data.state.user.behaviour", cm);
     }
 
-    public SemaineUserState(String host, String port, String topic){
+    public SemaineUserState(String host, String port, String topic,CharacterManager cm){
         super(host, port, topic);
+        this.cm = cm;
         stateParser = XML.createParser();
         stateParser.setValidating(false);
         signalPerformers = new ArrayList<SignalPerformer>();
@@ -65,7 +68,7 @@ public class SemaineUserState extends TextReceiver implements SignalEmitter{
 
     private synchronized SpeechSignal startSpeaking(){
         stopSpeaking(); // finish the last speak
-        currentSpeech = new SpeechSignal();
+        currentSpeech = new SpeechSignal(cm);
         currentSpeech.getStart().setValue(0);//now
         currentSpeech.getEnd().setValue(604800); // we don't know the end yet... we put it to one week (une semaine ;) )
         currentSpeechReceivedTime = Timer.getTimeMillis();

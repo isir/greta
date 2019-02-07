@@ -45,6 +45,7 @@ import vib.core.signals.gesture.TrajectoryDescription;
 import vib.core.signals.gesture.UniformPosition;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.enums.Side;
 import vib.core.util.math.Quaternion;
 import vib.core.util.math.Vec3d;
@@ -63,7 +64,7 @@ import vib.core.util.xml.XMLTree;
  *
  * @author Jing Huang
  */
-public class SymbolicConverter implements CharacterDependent {
+public class SymbolicConverter extends CharacterDependentAdapter implements CharacterDependent {
 
     ArmIKsolver _leftIK = new ArmIKsolver();
     ArmIKsolver _rightIK = new ArmIKsolver();
@@ -73,7 +74,7 @@ public class SymbolicConverter implements CharacterDependent {
     private String xmlFile;
     private String touchFile;
     XMLTree _tree;
-    RestPoseFactory _restPoseFactory = new RestPoseFactory();
+    RestPoseFactory _restPoseFactory;
     HeadIntervals _headIntervals = HeadLibrary.getGlobalLibrary().getHeadIntervals();
     TorsoIntervals _torsoIntervals = TorsoLibrary.getGlobalLibrary().getTorsoIntervals();
     HandShapeLibrary _handshapelib = new HandShapeLibrary();
@@ -91,17 +92,19 @@ public class SymbolicConverter implements CharacterDependent {
     double _scaleFactorY = 1f;
     double _scaleFactorZ = 1f;
 
-    public SymbolicConverter() {
-        CharacterManager.add(this);
-        xmlFile = CharacterManager.getValueString("IK_SKELETON");
-        touchFile = CharacterManager.getValueString("TOUCHPOINT");
+    public SymbolicConverter(CharacterManager cm) {
+        setCharacterManager(cm);
+         _restPoseFactory = new RestPoseFactory(cm);
+        
+        xmlFile = getCharacterManager().getValueString("IK_SKELETON");
+        touchFile = getCharacterManager().getValueString("TOUCHPOINT");
         reloadData();
     }
 
     @Override
     public void onCharacterChanged() {
-        xmlFile = CharacterManager.getValueString("IK_SKELETON");
-        touchFile = CharacterManager.getValueString("TOUCHPOINT");
+        xmlFile = getCharacterManager().getValueString("IK_SKELETON");
+        touchFile = getCharacterManager().getValueString("TOUCHPOINT");
         reloadData();
     }
 
@@ -391,6 +394,10 @@ public class SymbolicConverter implements CharacterDependent {
             torse.addRotations(t._rotations);
             return torse;
         }
+        
+        double rx = 0.0;
+        double ry = 0.0;
+        double rz = 0.0;
 
         /*
          * if (pwr >= 0.1) { if (pwr < 0.3) { torse.setFunction(new
@@ -403,53 +410,58 @@ public class SymbolicConverter implements CharacterDependent {
         Quaternion q = new Quaternion();
         if (t.verticalTorsion.flag == true) {
             if (t.verticalTorsion.direction == SpineDirection.Direction.LEFTWARD) {
-                double v = t.verticalTorsion.value * _torsoIntervals.verticalL;
-                double radian = (double) (v * java.lang.Math.PI / 180.0 * 0.45);
+                ry = t.verticalTorsion.value*Math.toRadians(_torsoIntervals.lateralL) ;
+                //double v = t.verticalTorsion.value * _torsoIntervals.verticalL;
+                //double radian = (double) (v * java.lang.Math.PI / 180.0 * 0.45);
                 Quaternion r = new Quaternion();
-                r.setAxisAngle(new Vec3d(0, 1, 0), radian);
+                r.setAxisAngle(new Vec3d(0, 1, 0), ry);
                 q = Quaternion.multiplication(q, r);
             } else {
-                double v = t.verticalTorsion.value * _torsoIntervals.verticalR;
-                double radian = (double) (v * java.lang.Math.PI / 180.0 * 0.45);
+                ry = - t.verticalTorsion.value*Math.toRadians(_torsoIntervals.lateralR) ; //* _torsoIntervals.verticalL;
+                //double v = t.verticalTorsion.value * _torsoIntervals.verticalR;
+                //double radian = (double) (v * java.lang.Math.PI / 180.0 * 0.45);
                 Quaternion r = new Quaternion();
-                r.setAxisAngle(new Vec3d(0, 1, 0), -radian);
+                r.setAxisAngle(new Vec3d(0, 1, 0), ry);
                 q = Quaternion.multiplication(q, r);
             }
         }
         if (t.sagittalTilt.flag == true) {
             if (t.sagittalTilt.direction == SpineDirection.Direction.FORWARD) {
-                double v = t.sagittalTilt.value * _torsoIntervals.sagittalF;
-                double radian = (double) (v * java.lang.Math.PI / 180.0 * 0.45);
+                rx = t.sagittalTilt.value * _torsoIntervals.sagittalF;
+                //double v = t.sagittalTilt.value * _torsoIntervals.sagittalF;
+                double radian = (double) (rx * java.lang.Math.PI / 180.0 * 0.45);
                 Quaternion r = new Quaternion();
                 r.setAxisAngle(new Vec3d(1, 0, 0), radian);
                 q = Quaternion.multiplication(q, r);
             } else {
-                double v = t.sagittalTilt.value * _torsoIntervals.sagittalB;
-                double radian = (double) (v * java.lang.Math.PI / 180.0 * 0.45);
+                rx = - t.sagittalTilt.value * _torsoIntervals.sagittalB;
+                //double v = t.sagittalTilt.value * _torsoIntervals.sagittalB;
+                double radian = (double) (rx * java.lang.Math.PI / 180.0 * 0.45);
                 Quaternion r = new Quaternion();
-                r.setAxisAngle(new Vec3d(1, 0, 0), -radian);
+                r.setAxisAngle(new Vec3d(1, 0, 0), radian);
                 q = Quaternion.multiplication(q, r);
             }
         }
         if (t.lateralRoll.flag == true) {
             if (t.lateralRoll.direction == SpineDirection.Direction.LEFTWARD) {
-                double v = t.lateralRoll.value * _torsoIntervals.lateralL;
-                double radian = (double) (v * java.lang.Math.PI / 180.0 * 0.45);
+                rz = - t.lateralRoll.value * _torsoIntervals.lateralL;
+                double radian = (double) (rz * java.lang.Math.PI / 180.0 * 0.45);
                 Quaternion r = new Quaternion();
-                r.setAxisAngle(new Vec3d(0, 0, 1), -radian);
+                r.setAxisAngle(new Vec3d(0, 0, 1), radian);
                 q = Quaternion.multiplication(q, r);
             } else {
-                double v = t.lateralRoll.value * _torsoIntervals.lateralR;
-                double radian = (double) (v * java.lang.Math.PI / 180.0 * 0.45);
+                rz = t.lateralRoll.value * _torsoIntervals.lateralR;
+                double radian = (double) (rz * java.lang.Math.PI / 180.0 * 0.45);
                 Quaternion r = new Quaternion();
                 r.setAxisAngle(new Vec3d(0, 0, 1), radian);
                 q = Quaternion.multiplication(q, r);
             }
         }
         //torse.setRotation(q);
+        torse.setRotation(q);
         if (t.collapse.flag == true) {
             String list[] = {"vt3", "vt5", "vt12", "vl5"};
-            Quaternion each = Quaternion.slerp(new Quaternion(), q, 0.25f, true);
+            //Quaternion each = Quaternion.slerp(new Quaternion(), q, 0.25f, true);
             Quaternion each2 = Quaternion.slerp(new Quaternion(), q, 0.5f, true);
             torse.addRotation("vt2", each2);
             torse.addRotation("vt5", q);
@@ -459,7 +471,40 @@ public class SymbolicConverter implements CharacterDependent {
 //                torse.addRotation(name, each);
 //            }
         } else {
-            torse.addRotation("vl5", q);
+            Quaternion each_torac = Quaternion.slerp(new Quaternion(), q, 0.2, true);
+            Quaternion each_lomb = Quaternion.slerp(new Quaternion(), q, 0.3, true);
+            
+            Quaternion shoulders = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.1)); 
+            shoulders.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.1)));
+            shoulders.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.1)));
+            
+            Quaternion shoulders_7_12 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.2)); 
+            shoulders_7_12.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.2)));
+            shoulders_7_12.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.2)));
+            
+            Quaternion nll = new Quaternion(new Vec3d(0, 1, 0), (double) 0); 
+            shoulders_7_12.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) 0));
+            shoulders_7_12.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) 0));
+            
+            if (t.getonlyshoulder()){
+                /*torse.addRotation("vt3", shoulders);
+                torse.addRotation("vt6", shoulders);
+                torse.addRotation("vt7", shoulders_7_12);
+                torse.addRotation("vt9", shoulders);
+                torse.addRotation("vt10", shoulders);*/
+                torse.addRotation("vl5", nll);
+                torse.addRotation("vl3", nll);
+                torse.addRotation("vt7", nll);
+                torse.addRotation("vt12", q);
+            }else {
+                //Quaternion each2 = Quaternion.slerp(new Quaternion(), each, 0.5, true);
+                torse.addRotation("vl5", each_lomb);
+                torse.addRotation("vl3", each_lomb);
+                torse.addRotation("vt7", each_torac);
+                torse.addRotation("vt12", each_torac);
+                //torse.addRotation("vl4", each);
+                //torse.addRotation("vl3", each);
+            }
         }
         return torse;
     }
@@ -520,20 +565,26 @@ public class SymbolicConverter implements CharacterDependent {
 
         head.setRotation(q);
         {
-            Quaternion qvc1 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry / 3.0));
-            qvc1.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.7)));
+            // The rotation of head is achieved through a simultaneous rotation of cervical vertebrae.
+            // the full angle rotation have to be destribuited between all the cervical vertebrae 
+            Quaternion qvc1 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.1)); 
+            qvc1.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.1)));
             qvc1.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.1)));
 
-            Quaternion qvc4 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry / 3.0));
+            Quaternion qvc4 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.2));
             qvc4.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.2)));
-            qvc4.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.3)));
+            qvc4.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.2)));
 
-            Quaternion qvc7 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry / 3.0));
-            qvc7.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.1)));
-            qvc7.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.6)));
-
+            Quaternion qvc7 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.2)); // *
+            qvc7.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.2)));
+            qvc7.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.2)));
+            
             head.addRotation("vc1", qvc1);
+            head.addRotation("vc2", qvc1);
+            head.addRotation("vc3", qvc1);
             head.addRotation("vc4", qvc4);
+            head.addRotation("vc5", qvc1);
+            head.addRotation("vc6", qvc1);
             head.addRotation("vc7", qvc7);
 
         }

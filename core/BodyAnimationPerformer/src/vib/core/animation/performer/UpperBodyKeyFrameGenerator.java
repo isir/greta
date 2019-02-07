@@ -28,6 +28,7 @@ import vib.core.keyframes.Keyframe;
 import vib.core.keyframes.KeyframePerformer;
 import vib.core.keyframes.ShoulderKeyframe;
 import vib.core.keyframes.TorsoKeyframe;
+import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
 import vib.core.util.enums.Side;
 import vib.core.util.id.ID;
@@ -40,7 +41,11 @@ import vib.core.util.id.ID;
 
 //TODO: wait for AndreMarie pour nouveau structure de keyframe
 public class UpperBodyKeyFrameGenerator  implements KeyframePerformer{
-    SymbolicConverter _symbolicConverter = new SymbolicConverter();
+    SymbolicConverter _symbolicConverter;
+    
+    public UpperBodyKeyFrameGenerator(CharacterManager cm){
+        _symbolicConverter = new SymbolicConverter(cm);
+    }
     @Override
     public void performKeyframes(List<Keyframe> keyframes, ID id) {
         LinkedList<Arm> _left = new LinkedList<Arm>();

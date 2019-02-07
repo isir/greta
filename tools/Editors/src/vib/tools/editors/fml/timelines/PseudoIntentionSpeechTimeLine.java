@@ -20,6 +20,7 @@ import vib.tools.editors.SpeechUtil;
 import vib.tools.editors.TimeLine;
 import vib.core.intentions.PseudoIntentionSpeech;
 import java.awt.FontMetrics;
+import vib.core.util.CharacterManager;
 import vib.tools.editors.TemporizableContainer;
 
 /**
@@ -27,11 +28,16 @@ import vib.tools.editors.TemporizableContainer;
  * @author Andre-Marie
  */
 public class PseudoIntentionSpeechTimeLine extends TimeLine<PseudoIntentionSpeech> {
+    private CharacterManager cm;
+    
+    public PseudoIntentionSpeechTimeLine(CharacterManager cm){
+        this.cm = cm;
+    }
 
     @Override
     protected TemporizableContainer<PseudoIntentionSpeech> instanciateTemporizable(double startTime, double endTime) {
         return new TemporizableContainer<PseudoIntentionSpeech>(
-                            new PseudoIntentionSpeech(SpeechUtil.instanciateTemporizable(startTime, endTime)),
+                            new PseudoIntentionSpeech(SpeechUtil.instanciateTemporizable(cm, startTime, endTime)),
                             manager.getLabel());
     }
 

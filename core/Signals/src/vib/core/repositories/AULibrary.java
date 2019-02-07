@@ -35,24 +35,54 @@ import java.util.List;
  */
 public class AULibrary extends ParameterSet<FLExpression> implements CharacterDependent {
 
-    public static final String CHARACTER_PARAMETER_AULIBRARY = "AULIBRARY";
-    private static final String xsdFile = IniManager.getGlobals().getValueString("XSD_AULIBRARY");
-    public static AULibrary global_aulibrary = new AULibrary();
+    public static final String CHARACTER_PARAMETER_AULIBRARY;
+    private static final String xsdFile;
+    public static AULibrary global_aulibrary;
+    
+    private CharacterManager characterManager;
 
-    public AULibrary() {
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
+        //this.characterManager = characterManager;
+    }
+    
+    static {
+        CHARACTER_PARAMETER_AULIBRARY = "AULIBRARY";
+        xsdFile = IniManager.getGlobals().getValueString("XSD_AULIBRARY");
+        global_aulibrary = new AULibrary(CharacterManager.getStaticInstance());        
+    }
+
+    public AULibrary(CharacterManager cm) {
         //get the default Lexicon :
-        super(CharacterManager.getDefaultValueString(CHARACTER_PARAMETER_AULIBRARY));
-
+        super();
+        setCharacterManager(cm);
+        setDefaultDefinition(cm.getDefaultValueString(CHARACTER_PARAMETER_AULIBRARY));
         //load additionnal Lexicon :
-        for (String filename : CharacterManager.getAllValuesString(CHARACTER_PARAMETER_AULIBRARY)) {
+        for (String filename : cm.getAllValuesString(CHARACTER_PARAMETER_AULIBRARY)) {
             addDefinition(filename);
         }
-
         //set the current Lexicon to use :
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_AULIBRARY));
+        setDefinition(cm.getValueString(CHARACTER_PARAMETER_AULIBRARY));
 
-        //to be notify when the character change :
-        CharacterManager.add(this);
+        //to be notify when the character change : //To-do to remove depend on the tree
+        //cm.add(this);
     }
 
     @Override
@@ -98,7 +128,7 @@ public class AULibrary extends ParameterSet<FLExpression> implements CharacterDe
 
     @Override
     public void onCharacterChanged() {
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_AULIBRARY));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_AULIBRARY));
     }
 
     @Override

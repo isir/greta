@@ -23,6 +23,7 @@ import vib.core.behaviorplanner.baseline.BehaviorQualityComputer;
 import vib.core.behaviorplanner.baseline.DynamicLine;
 import vib.core.behaviorplanner.lexicon.BehaviorSet;
 import vib.core.behaviorplanner.lexicon.Lexicon;
+import vib.core.behaviorplanner.lexicon.SignalItem;
 import vib.core.behaviorplanner.strokefillers.EmptyStrokeFiller;
 import vib.core.behaviorplanner.strokefillers.StrokeFiller;
 import vib.core.ideationalunits.IdeationalUnit;
@@ -31,12 +32,14 @@ import vib.core.intentions.IdeationalUnitIntention;
 import vib.core.intentions.Intention;
 import vib.core.intentions.IntentionTargetable;
 import vib.core.intentions.IntentionPerformer;
+import vib.core.signals.GazeSignal;
 import vib.core.signals.Signal;
 import vib.core.signals.SignalTargetable;
 import vib.core.signals.SignalEmitter;
 import vib.core.signals.SignalPerformer;
 import vib.core.signals.gesture.GestureSignal;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.Mode;
 import vib.core.util.id.ID;
 import vib.core.util.log.Logs;
@@ -66,7 +69,7 @@ import vib.core.util.time.TimeMarker;
  * @navassoc - - * vib.core.signals.Signal
  * @inavassoc - - * vib.core.intentions.Intention
  */
-public class Planner implements IntentionPerformer, SignalEmitter {
+public class Planner extends CharacterDependentAdapter implements IntentionPerformer, SignalEmitter {
 
     //contains Behaviors relating to intentions
     private Lexicon lexicon;
@@ -84,13 +87,12 @@ public class Planner implements IntentionPerformer, SignalEmitter {
     private List<SignalPerformer> signalPerformers;
     private StrokeFiller strokeFiller;
 
-    public Planner() {
-        lexicon = new Lexicon();
-        CharacterManager.add(lexicon);
-        baseline = new BaseLine();
-        CharacterManager.add(baseline);
-        bqc = new BehaviorQualityComputer();
-        CharacterManager.add(bqc);
+    public Planner(CharacterManager cm) {
+        setCharacterManager(cm);
+        lexicon = new Lexicon(cm);
+        baseline = new BaseLine(cm);        
+        bqc = new BehaviorQualityComputer(cm);
+        
         mseSelector = new MSESelector();
         defaultSelector = new MultimodalSignalSelector();
         otherSelector = new ArrayList<SignalSelector>();
@@ -189,9 +191,9 @@ public class Planner implements IntentionPerformer, SignalEmitter {
 
             //character playing
             if (intention.hasCharacter()) {
-                baseline.set(CharacterManager.getValueString(BaseLine.CHARACTER_PARAMETER_BASELINE, intention.getCharacter()));
-                lexicon.setDefinition(CharacterManager.getValueString(Lexicon.CHARACTER_PARAMETER_INTENTION_LEXICON, intention.getCharacter()));
-                bqc.setDefinition(CharacterManager.getValueString(BehaviorQualityComputer.CHARACTER_PARAMETER_QUALIFIERS, intention.getCharacter()));
+                baseline.set(getCharacterManager().getValueString(BaseLine.CHARACTER_PARAMETER_BASELINE, intention.getCharacter()));
+                lexicon.setDefinition(getCharacterManager().getValueString(Lexicon.CHARACTER_PARAMETER_INTENTION_LEXICON, intention.getCharacter()));
+                bqc.setDefinition(getCharacterManager().getValueString(BehaviorQualityComputer.CHARACTER_PARAMETER_QUALIFIERS, intention.getCharacter()));
             }
 
             //compute the dynimicline
@@ -225,6 +227,13 @@ public class Planner implements IntentionPerformer, SignalEmitter {
             //find the correponding BehaviorSet
             BehaviorSet set = lexicon.fromIntentionToBehaviorSet(intention, selector.getType());
 
+            // in diectic if we have the target attribute the Agent have to use the gaze 
+            BehaviorSet deict_set = new BehaviorSet("deictic-gaze");
+            // if target attribute is != null a new behaviorset for the gaze is crated 
+            if (intention.getName().equals("deictic") && intention.getTarget()!= null && intention.getTarget()!= ""){
+                SignalItem gaz = new SignalItem("1", "gaze", null);
+                deict_set.add(gaz);
+            }
 
             //search existing signals durring the intention :
             List<Signal> existingSignals = new ArrayList<Signal>();
@@ -242,12 +251,40 @@ public class Planner implements IntentionPerformer, SignalEmitter {
             }
 
             //let the selector choose the signals
-            List<Signal> signalsReturned = selector.selectFrom(intention, set, dynamicline, existingSignals);
+            List<Signal> signalsReturned = selector.selectFrom(intention, set, dynamicline, existingSignals, getCharacterManager());
             //if signalsReturned is empty, it means that no Signal can be added.
             //  It's normal !
             //but if signalsReturned is null, it means that the selector cannot performe this kind of intention
             //  so there is a problem with the choice of the selector.
 
+            // if the behaviorset for the gaze is != null it is created a GazeSignal with target like find in the fml, influence null and it is reported also the character_id
+            if (deict_set.getBaseSignals().size() != 0){
+                List<Signal> sign = selector.selectFrom(intention, deict_set, dynamicline, existingSignals, getCharacterManager());
+                if (sign.size() > 0){
+                    GazeSignal signa = (GazeSignal) sign.get(0);
+                    signa.setInfluence(null);
+                                      
+                    String tg = intention.getTarget();
+                    int underscoreIndex = tg.indexOf(":");
+                    if (underscoreIndex != -1){
+                        // name agent to gaze
+                        String agent = tg.substring(underscoreIndex + 1).trim();
+                        signa.setTarget(agent); // set agent name as target
+                        //System.out.println(CharacterManager.getStaticInstance().currentPosition.keySet().size());
+                        /*for ( String key : CharacterManager.getStaticInstance().currentPosition.keySet() ) {
+                            // if equal to the character get as target, take the id
+                            //System.out.println(key.get(1));
+                            if(key.equals(agent)){ // check the name of the agent to gaze
+                                signa.setOrigin(key); // take the character id 
+                            }
+                        }*/
+                    }else {
+                        signa.setTarget(intention.getTarget());
+                        signa.setCharacterManager(this.getCharacterManager());
+                    }
+                    signalsReturned.add(signa);
+                }
+            }
 
             if (signalsReturned != null) {
                 for (Signal toAdd : signalsReturned) {
@@ -278,9 +315,9 @@ public class Planner implements IntentionPerformer, SignalEmitter {
 
             //reset character playing
             if (intention.hasCharacter()) {
-                baseline.set(CharacterManager.getValueString(BaseLine.CHARACTER_PARAMETER_BASELINE));
-                lexicon.setDefinition(CharacterManager.getValueString(Lexicon.CHARACTER_PARAMETER_INTENTION_LEXICON));
-                bqc.setDefinition(CharacterManager.getValueString(BehaviorQualityComputer.CHARACTER_PARAMETER_QUALIFIERS));
+                baseline.set(getCharacterManager().getValueString(BaseLine.CHARACTER_PARAMETER_BASELINE));
+                lexicon.setDefinition(getCharacterManager().getValueString(Lexicon.CHARACTER_PARAMETER_INTENTION_LEXICON));
+                bqc.setDefinition(getCharacterManager().getValueString(BehaviorQualityComputer.CHARACTER_PARAMETER_QUALIFIERS));
             }
         }
 
@@ -372,13 +409,13 @@ public class Planner implements IntentionPerformer, SignalEmitter {
     @Override
     protected void finalize() throws Throwable {
         System.err.println(this.getClass().getSimpleName() + " finalize");
-        CharacterManager.remove(lexicon);
+        getCharacterManager().remove(lexicon);
         lexicon = null;
 
-        CharacterManager.remove(baseline);
+        getCharacterManager().remove(baseline);
         baseline = null;
 
-        CharacterManager.remove(bqc);
+        getCharacterManager().remove(bqc);
         bqc = null;
 
         mseSelector = null;
@@ -397,5 +434,16 @@ public class Planner implements IntentionPerformer, SignalEmitter {
         strokeFiller = null;
 
         super.finalize();
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        Logs.info("Planner received onCharacterChanged, but does nothing itself. Should it ?");
+    }
+    
+    public void UpdateLexicon(){
+        //remove the old lexicon to be sure to not have two lexicons
+        this.getCharacterManager().remove(lexicon);        
+        lexicon = new Lexicon(this.getCharacterManager());    
     }
 }

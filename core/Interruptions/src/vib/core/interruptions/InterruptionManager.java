@@ -32,6 +32,8 @@ import vib.core.interruptions.reactions.ReactionSignalsMapper;
 import vib.core.signals.Signal;
 import vib.core.signals.SignalEmitter;
 import vib.core.signals.SignalPerformer;
+import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.Constants;
 import vib.core.util.Mode;
 import vib.core.util.enums.interruptions.ReactionType;
@@ -46,7 +48,7 @@ import vib.core.util.time.TimeMarker;
  * @author Brice Donval
  * @author Angelo Cafaro
  */
-public class InterruptionManager implements IntentionPerformer, InterruptionReactionPerformer, CallbackPerformer, IntentionEmitter, SignalEmitter {
+public class InterruptionManager extends CharacterDependentAdapter implements IntentionPerformer, InterruptionReactionPerformer, CallbackPerformer, IntentionEmitter, SignalEmitter {
 
     public static boolean _debugAudioOnlyMode = false;
 
@@ -58,7 +60,12 @@ public class InterruptionManager implements IntentionPerformer, InterruptionReac
     private static final Object intentionsHistoryLock = new Object(); // Used to synchronize threads on intentionsHistory
     private final Map<ID, List<Intention>> intentionsHistory = new HashMap<>();
 
-    private ReactionSignalsMapper reactionSignalsMapper = new ReactionSignalsMapper();
+    private ReactionSignalsMapper reactionSignalsMapper;
+    
+    public InterruptionManager(CharacterManager cm){
+        setCharacterManager(cm);
+        reactionSignalsMapper = new ReactionSignalsMapper(cm);
+    }
 
     /* ---------------------------------------------------------------------- */
     /*                           IntentionPerformer                           */
@@ -394,6 +401,11 @@ public class InterruptionManager implements IntentionPerformer, InterruptionReac
     @Override
     public void removeSignalPerformer(SignalPerformer performer) {
         signalPerformers.remove(performer);
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

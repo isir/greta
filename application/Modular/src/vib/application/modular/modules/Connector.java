@@ -20,6 +20,7 @@ package vib.application.modular.modules;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import vib.core.utilx.gui.TTSController;
 
 /**
  *
@@ -135,6 +136,8 @@ public class Connector {
     public boolean connect(Object i, Object o) {
         if (connect != null) {
             try {
+                /*if(i instanceof TTSController)
+                    System.out.println("debug");*/
                 if (connectInToOut) {
                     connect.invoke(i, new Object[]{
                                 connectToNull ? null : o
@@ -149,9 +152,8 @@ public class Connector {
                 }
                 return true;
             } catch (Exception ex) {
-                System.out.println("connection failled between "
-                        + in.getCanonicalName() + " and "
-                        + out.getCanonicalName());
+                System.out.println(String.format("connection failled between %s and %s: %s",
+                        in.getCanonicalName(), out.getCanonicalName(), ex.getLocalizedMessage()));
             }
         }
         return false;

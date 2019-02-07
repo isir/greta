@@ -28,6 +28,7 @@ import vib.core.signals.HeadSignal;
 import vib.core.signals.Signal;
 import vib.core.signals.SpineDirection;
 import vib.core.signals.SpinePhase;
+import vib.core.util.CharacterManager;
 
 /**
  * This {@code KeyframeGenerator} gererates {@code HeadKeyframes} from {@code HeadSignals}
@@ -65,15 +66,16 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
         }
 
         LinkedList<HeadKeyframe> keyframes = new LinkedList<HeadKeyframe>();
-
+              
         //II) get the shifts
         for (HeadSignal head : shifts) {
-
             HeadKeyframe startKeyframe = null;
             if(keyframes.isEmpty()) {
-                startKeyframe = new HeadKeyframe(defaultPosition);
+                startKeyframe = new HeadKeyframe(getDefaultPosition());
             }
-            else if(keyframes.peekLast().getOffset()<=head.getPhases().get(0).getStartTime()){
+            else if(keyframes.peekLast().getOffset() <= head.getPhases().get(0).getStartTime()){
+                startKeyframe = new HeadKeyframe(keyframes.peekLast());
+            }else{
                 startKeyframe = new HeadKeyframe(keyframes.peekLast());
             }
 
@@ -81,15 +83,18 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
                 setTimeOn(startKeyframe, head.getStartValue());
                 keyframes.add(startKeyframe);
             }
-
-            keyframes.add(createKeyFrame(head, head.getPhases().get(head.getPhases().size()-1)));
+            
+            HeadKeyframe kf = null;
+            kf = createKeyFrame(head, head.getPhases().get(head.getPhases().size()-1));
+    
+            keyframes.add(kf);
         }
 
 
-        //add one keyframe at the end of the whole animation
+        //add one keyframe at the end of the who    le animation
         if(keyframes.isEmpty() || (!nonShift.isEmpty() && nonShift.peekLast().getEndValue() > keyframes.peekLast().getOffset())){
             HeadKeyframe endKeyframe = new HeadKeyframe(
-                    keyframes.isEmpty() ? defaultPosition : keyframes.peekLast());
+                    keyframes.isEmpty() ? getDefaultPosition() : keyframes.peekLast());
             setTimeOn(endKeyframe, nonShift.peekLast().getEndValue());
             keyframes.addLast(endKeyframe);
         }
@@ -99,7 +104,7 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
 
         //add one keyframe at the begining of the whole animation
         if(keyframes.isEmpty() || (!nonShift.isEmpty() && nonShift.peekFirst().getStartValue() < keyframes.peekFirst().getOffset())){
-            HeadKeyframe startKeyframe = new HeadKeyframe(defaultPosition);
+            HeadKeyframe startKeyframe = new HeadKeyframe(getDefaultPosition());
             setTimeOn(startKeyframe, nonShift.peekFirst().getStartValue());
             keyframes.addFirst(startKeyframe);
         }
@@ -120,7 +125,7 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
         outputKeyframe.addAll(keyframes);
 
         //VI) save the last position
-        setRestPosition(keyframes.peekLast());
+        setRestPosition(keyframes.peekLast()); // put in defaultPosition the last 
     }
 
     @Override
@@ -155,6 +160,8 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
         defaultPosition.lateralRoll = new SpineDirection(phase.lateralRoll);
         defaultPosition.sagittalTilt = new SpineDirection(phase.sagittalTilt);
         defaultPosition.verticalTorsion = new SpineDirection(phase.verticalTorsion);
+        
+        CharacterManager.getStaticInstance().defaultFrame.add(0, (Object) defaultPosition);
     }
 
     /**
@@ -302,5 +309,12 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
         if(headDirection.value > 1) {
             headDirection.value = 1 + (headDirection.value/10);
         }
+    }
+
+    /**
+     * @return the defaultPosition
+     */
+    public HeadKeyframe getDefaultPosition() {
+        return defaultPosition;
     }
 }

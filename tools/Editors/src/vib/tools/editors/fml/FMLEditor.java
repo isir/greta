@@ -31,6 +31,7 @@ import vib.core.intentions.IntentionEmitter;
 import vib.core.intentions.IntentionPerformer;
 import vib.core.intentions.PseudoIntentionSpeech;
 import vib.core.intentions.WorldIntention;
+import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
 import vib.core.util.enums.CompositionType;
 import vib.core.util.id.ID;
@@ -62,12 +63,14 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
     private TimeLineManager<BasicIntention> backchannels;
     private TimeLineManager<BasicIntention> certainties;
     private FMLFileReader fmlFileReader;
+    private CharacterManager cm;
 
-    public FMLEditor() {
-
+    public FMLEditor(CharacterManager cm) {
+        this.cm = cm;
+        
         performers = new ArrayList<IntentionPerformer>();
         //speech
-        speech = new TimeLineManager<PseudoIntentionSpeech>(new PseudoIntentionSpeechTimeLine());
+        speech = new TimeLineManager<PseudoIntentionSpeech>(new PseudoIntentionSpeechTimeLine(cm));
         speech.setLabel("\nSpeech");
 
         //emotions
@@ -104,7 +107,7 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
         addTimeLine(certainties);
         addTimeLine(backchannels);
 
-        fmlFileReader = new FMLFileReader();
+        fmlFileReader = new FMLFileReader(cm);
         fmlFileReader.addIntentionPerformer(new IntentionPerformer() {
 
             @Override
@@ -142,8 +145,8 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
 
     private void diplayIntentions(List<Intention> intentions) {
         synchronized (fakeTTS) {
-            if (Speech.getTTS() == null) {
-                Speech.setTTS(fakeTTS);
+            if (cm.getTTS() == null) {
+                cm.setTTS(fakeTTS);
             }
             clearTimeLines();
             Temporizer t = new Temporizer();
@@ -179,8 +182,8 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
                 }
             }
             setTime((int) (duration + 1));
-            if (Speech.getTTS() == fakeTTS) {
-                Speech.setTTS(null);
+            if (cm.getTTS() == fakeTTS) {
+                cm.setTTS(null);
             }
         }
     }
@@ -201,7 +204,7 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
         } catch (Exception ex) {
         }
         //</editor-fold>
-        FMLEditor fe = new FMLEditor();
+        FMLEditor fe = new FMLEditor(CharacterManager.getStaticInstance());
         fe.addIntentionPerformer(fe);
         fe.setVisible(true);
         Logs.add(new LogPrinter());

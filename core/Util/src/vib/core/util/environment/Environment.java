@@ -31,14 +31,16 @@ import vib.core.util.xml.XMLTree;
  * @author Pierre Philippe
  * @author Andre-Marie Pez
  */
-public class Environment {
+public class Environment{
+
+    
 
     // add a global static variable: TIME ???
 
     private Root root = null;
     private List<Leaf> listleaf = null;
     private final List<EnvironmentEventListener> listeners = new ArrayList<EnvironmentEventListener>();
-
+    
     // initialize the environment
     public Environment() {
         this(IniManager.getGlobals().getValueString("ENVIRONMENT"));
@@ -58,6 +60,8 @@ public class Environment {
         else {
             load(envName);
         }
+        
+        
         //TODO must be better
 //        move in the load function
 //        for (Iterator<Node> iter = root.getChildren().iterator(); iter.hasNext();) {
@@ -67,7 +71,17 @@ public class Environment {
 //            }
 //        }
     }
-
+    
+    // add a leaf
+    public void addLeaf (Leaf lf){
+        this.listleaf.add(lf);
+    }
+    
+    
+    /*public void addLeaf(Leaf lf){
+        this.listleaf.add(lf);
+    }*/
+    
     /**
      *
      * @param n
@@ -75,7 +89,8 @@ public class Environment {
     public void addNode(Node n) {
         addNode(n, root);
     }
-
+    
+   
     /**
      *
      * @param n
@@ -90,7 +105,7 @@ public class Environment {
         event.childNode = n;
         event.newParentNode = parent;
         event.modifType = TreeEvent.MODIF_ADD;
-        fireTreeEvent(event);
+        fireTreeEvent(event);  
     }
 
     public void addNode(Node n, TreeNode parent, int index) {
@@ -217,16 +232,33 @@ public class Environment {
         }
         Vec3d relativeTargetPos = getRelativeTargetVector(target, source, sourceOrient);
 
-        Vec3d onHorizontalPlane = new Vec3d(relativeTargetPos.x(), 0, relativeTargetPos.z());
+        Vec3d onHorizontalPlane = new Vec3d(relativeTargetPos.x(), 0.0, relativeTargetPos.z());
         onHorizontalPlane.normalize();
-        double yawAngle = Math.acos(onHorizontalPlane.z()) * Math.signum(onHorizontalPlane.x());
+        double yawAngle = 0.0;
+        
+        // according to the head orientation and the target position the rotation angle will be different
+        // the head it is supposed to be the center of the coordinate axis
+        // according to the quadrant in which is positioned the target the rotation anlge will be changed 
+        
+            if (onHorizontalPlane.x() >= 0.0 && onHorizontalPlane.z() > 0.0){
+                yawAngle = Math.toDegrees(Math.abs(Math.acos(onHorizontalPlane.z())));
+            }else if (onHorizontalPlane.x() >= 0 && onHorizontalPlane.z() < 0){
+                yawAngle = 90.0 + Math.toDegrees(Math.abs(Math.asin(onHorizontalPlane.z())));
+            }else if (onHorizontalPlane.x() <= 0 && onHorizontalPlane.z() < 0){
+                yawAngle = -90 -1*Math.toDegrees(Math.abs(Math.asin(onHorizontalPlane.z())));
+            }else if (onHorizontalPlane.x() <= 0 && onHorizontalPlane.z() > 0){
+                yawAngle =  -1*Math.toDegrees(Math.abs(Math.acos(onHorizontalPlane.z())));
+            }else{
+                yawAngle = 0.0;
+            }
+
         relativeTargetPos.normalize();
         double pitchAngle = Math.asin(relativeTargetPos.y());
 
         //theta (yaw, horizontal), phi (pitch, vertical), 0 (roll, "dutch angle")
         //if theta is positive, target to the left
         //if phi is positive, target is upwards
-        return new Vec3d(yawAngle, pitchAngle, 0.0f);
+        return new Vec3d(Math.toRadians(yawAngle), pitchAngle, 0.0f);
     }
 
     /* This should work for two eyes... However, best use symbolic notations
@@ -452,8 +484,8 @@ public class Environment {
      * @param listener
      */
     public void addEnvironementListener(EnvironmentEventListener listener) {
-        synchronized(listeners){
-            listeners.add(listener);
+        synchronized(getListeners()){
+            getListeners().add(listener);
         }
     }
 
@@ -462,8 +494,8 @@ public class Environment {
      * @param listener
      */
     public void removeEnvironementListener(EnvironmentEventListener listener) {
-        synchronized(listeners){
-            listeners.remove(listener);
+        synchronized(getListeners()){
+            getListeners().remove(listener);
         }
     }
 
@@ -472,8 +504,8 @@ public class Environment {
      * @param event
      */
     private void fireTreeEvent(TreeEvent event) {
-        synchronized(listeners){
-            for (EnvironmentEventListener listener : listeners) {
+        synchronized(getListeners()){
+            for (EnvironmentEventListener listener : getListeners()) {
                 listener.onTreeChange(event);
             }
         }
@@ -484,18 +516,25 @@ public class Environment {
      * @param event
      */
     protected void fireNodeEvent(NodeEvent event) {
-        synchronized(listeners){
-            for (EnvironmentEventListener listener : listeners) {
+        synchronized(getListeners()){
+            for (EnvironmentEventListener listener : getListeners()) {
                 listener.onNodeChange(event);
             }
         }
     }
 
     protected void fireLeafEvent(LeafEvent event) {
-        synchronized(listeners){
-            for (EnvironmentEventListener listener : listeners) {
+        synchronized(getListeners()){
+            for (EnvironmentEventListener listener : getListeners()) {
                 listener.onLeafChange(event);
             }
         }
+    } 
+
+    /**
+     * @return the listeners
+     */
+    public List<EnvironmentEventListener> getListeners() {
+        return listeners;
     }
 }

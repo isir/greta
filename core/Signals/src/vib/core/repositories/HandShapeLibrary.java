@@ -35,18 +35,42 @@ import java.util.List;
 public class HandShapeLibrary extends ParameterSet<HandShape> implements CharacterDependent{
 
     public static final String CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY = "HANDSHAPE_REPOSITORY";
+    private CharacterManager characterManager;
+
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
+        //this.characterManager = characterManager;
+    }
 
     public HandShapeLibrary() {
         //get the default library :
-        super(CharacterManager.getDefaultValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
+        super();
+        setDefaultDefinition(getCharacterManager().getDefaultValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
 
         //load additionnal library :
-        for(String filename : CharacterManager.getAllValuesString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY)) {
+        for(String filename : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY)) {
             addDefinition(filename);
         }
 
         //set the current library to use :
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
     }
 
 
@@ -78,7 +102,7 @@ public class HandShapeLibrary extends ParameterSet<HandShape> implements Charact
 
     @Override
     public void onCharacterChanged() {
-        setDefinition(CharacterManager.getValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
     }
 
     private XMLTree toXML(Collection<HandShape> handShapes){

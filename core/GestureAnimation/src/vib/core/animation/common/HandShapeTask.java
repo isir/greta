@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import vib.core.animation.common.Frame.JointFrame;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.enums.Side;
 import vib.core.util.math.Quaternion;
 import vib.core.util.xml.XML;
@@ -30,9 +31,9 @@ import vib.core.util.xml.XMLTree;
  *  load all the hand shape from xml files
  * @author Jing Huang
  */
-public class HandShapeTask {
+public class HandShapeTask extends CharacterDependentAdapter {
 
-    private static String xmlFile = CharacterManager.getValueString("HANDSHAPE_REPOSITORY");
+    private static String xmlFile = getCharacterManagerStatic().getValueString("HANDSHAPE_REPOSITORY");
     XMLTree _tree;
     HashMap<String, HashMap<String, JointFrame>> _leftshapeList = new HashMap<String, HashMap<String, JointFrame>>();
     HashMap<String, HashMap<String, JointFrame>> _rightshapeList = new HashMap<String, HashMap<String, JointFrame>>();
@@ -53,7 +54,7 @@ public class HandShapeTask {
 //    }
 
     public void reload(){
-        xmlFile = CharacterManager.getValueString("HANDSHAPE_REPOSITORY");
+        xmlFile = getCharacterManager().getValueString("HANDSHAPE_REPOSITORY");
         _leftshapeList.clear();
         _rightshapeList.clear();
         loadData();
@@ -128,5 +129,10 @@ public class HandShapeTask {
             _rightshapeList.put(shape, input);
         }
 
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        reload();
     }
 }

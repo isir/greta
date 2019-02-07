@@ -34,10 +34,16 @@ import vib.core.keyframes.Keyframe;
 import vib.core.keyframes.KeyframeEmitter;
 import vib.core.keyframes.KeyframePerformer;
 import vib.core.keyframes.PhonemSequence;
+import vib.core.repositories.FaceLibrary;
+import vib.core.repositories.Gestuary;
+import vib.core.repositories.HeadLibrary;
 import vib.core.repositories.SignalFiller;
+import vib.core.repositories.TorsoLibrary;
 import vib.core.signals.Signal;
 import vib.core.signals.SignalPerformer;
 import vib.core.signals.gesture.PointingSignal;
+import vib.core.util.CharacterDependent;
+import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
 import vib.core.util.enums.CompositionType;
 import vib.core.util.environment.Environment;
@@ -56,7 +62,7 @@ import vib.core.util.time.Temporizer;
  * @navassoc - - * vib.core.keyframes.Keyframe
  * @inavassoc - - * vib.core.signals.Signal
  */
-public class Realizer extends CallbackSender implements SignalPerformer, KeyframeEmitter {
+public class Realizer extends CallbackSender implements SignalPerformer, KeyframeEmitter, CharacterDependent {
 
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
@@ -65,10 +71,12 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     private FaceKeyframeGenerator faceGenerator;
     private GestureKeyframeGenerator gestureGenerator;
     private Comparator<Keyframe> keyframeComparator;
-    private Environment environment;
+    private Environment environment;  //new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
+    private CharacterManager characterManager;
 
-    public Realizer() {
+    public Realizer(CharacterManager cm) {
+        setCharacterManager(cm);
         keyframePerformers = new ArrayList<KeyframePerformer>();
         generators = new ArrayList<KeyframeGenerator>();
 
@@ -82,7 +90,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         //experimental
         generators.add(new ShoulderKeyframeGenerator());
         generators.add(new TorsoKeyframeGenerator());
-        gazeGenerator = new GazeKeyframeGenerator(generators);
+        gazeGenerator = new GazeKeyframeGenerator(cm,generators);
         faceGenerator = new FaceKeyframeGenerator();
 
         keyframeComparator = new Comparator<Keyframe>() {
@@ -91,11 +99,15 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
                 return (int) Math.signum(o1.getOffset() - o2.getOffset());
             }
         };
+        
+        // environment
+        environment = cm.getEnvironment();        
     }
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
 
+        environment = characterManager.getEnvironment();  
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<Keyframe>();
 
@@ -132,7 +144,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
 
         // Gaze keyframes for other modalities than eyes are generated before the others
         // and act as "shifts"
-        gazeGenerator.generateBodyKeyframes(keyframes);
+        gazeGenerator.generateBodyKeyframes(keyframes, environment);
 
         for (KeyframeGenerator generator : generators) {
             keyframes.addAll(generator.generateKeyframes());
@@ -140,7 +152,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         Collections.sort(keyframes, keyframeComparator);
 
         // Gaze keyframes for the eyes are generated last
-        gazeGenerator.generateEyesKeyframes(keyframes);
+        gazeGenerator.generateEyesKeyframes(keyframes, environment);
 
         faceGenerator.findExistingAU(keyframes);
         keyframes.addAll(faceGenerator.generateKeyframes());
@@ -235,4 +247,96 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     public void setGestureModifier(GestureKeyframeGenerator.GestureModifier modifier){
         gestureGenerator.setGestureModifier(modifier);
     }
+
+    @Override
+    public void onCharacterChanged() {
+        //is there something else to do ?
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+        return characterManager;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
+    }
+    
+    public void UpdateFaceLibrary(){
+        
+        this.getCharacterManager().remove(FaceLibrary.global_facelibrary);    
+        FaceLibrary.global_facelibrary = new FaceLibrary(this.getCharacterManager());
+        //get the default Lexicon :
+        FaceLibrary.global_facelibrary.setDefaultDefinition(this.getCharacterManager().getDefaultValueString("FACELIBRARY"));
+        //load additionnal Lexicon :
+        for (String filename : this.getCharacterManager().getAllValuesString("FACELIBRARY")) {
+            FaceLibrary.global_facelibrary.addDefinition(filename);
+        }
+        //set the current Lexicon to use :
+        FaceLibrary.global_facelibrary.setDefinition(this.getCharacterManager().getValueString("FACELIBRARY"));
+        // System.out.println("ok");
+    }
+    
+    public void UpdateAULibrary(){
+        
+        /*this.getCharacterManager().remove(AULibrary);     
+        //get the default Lexicon :
+        AULibrary.setDefaultDefinition(this.getCharacterManager().getDefaultValueString("AULIBRARY"));
+
+        //load additionnal Lexicon :
+        for (String filename : this.getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_AULIBRARY)) {
+            AULibrary.addDefinition(filename);
+        }
+
+        //set the current Lexicon to use :
+        AULibrary.setDefinition(this.getCharacterManager().getValueString(CHARACTER_PARAMETER_AULIBRARY));*/
+    }
+    
+    public void UpdateGestureLibrary(){
+
+        this.getCharacterManager().remove(Gestuary.global_gestuary);       
+        Gestuary.global_gestuary = new Gestuary(this.getCharacterManager());
+        Gestuary.global_gestuary.setCharacterManager(this.getCharacterManager());
+        //get the default Lexicon :
+        Gestuary.global_gestuary.setDefaultDefinition(getCharacterManager().getDefaultValueString("GESTUARY"));
+        //set the current Lexicon to use :
+        Gestuary.global_gestuary.setDefinition(getCharacterManager().getValueString("GESTUARY"));
+    }
+    
+    public void UpdateHeadLibrary(){
+        
+        this.getCharacterManager().remove(HeadLibrary.globalLibrary);     
+        HeadLibrary.globalLibrary = new HeadLibrary(this.getCharacterManager());
+        HeadLibrary.globalLibrary.setCharacterManager(this.getCharacterManager());
+        HeadLibrary.globalLibrary.setDefaultDefinition(getCharacterManager().getValueString("HEADGESTURES"));
+        HeadLibrary.globalLibrary.setDefinition(getCharacterManager().getValueString("HEADGESTURES"));
+        // intervals = new HeadIntervals();
+    }
+    
+    public void UpdateTorsoLibrary(){
+        
+        this.getCharacterManager().remove(TorsoLibrary.globalLibrary);   
+        TorsoLibrary.globalLibrary = new TorsoLibrary(this.getCharacterManager());
+        TorsoLibrary.globalLibrary.setCharacterManager(this.getCharacterManager());
+        TorsoLibrary.globalLibrary.setDefaultDefinition(getCharacterManager().getDefaultValueString("TORSOGESTURES"));
+        TorsoLibrary.globalLibrary.setDefinition(getCharacterManager().getValueString("TORSOGESTURES"));
+    }
+     
+    public void UpdateShoulderLibrary(){
+    
+    }  
+    
+    public void UpdateHandLibrary(){
+        /*this.getCharacterManager().remove(HandShapeLibrary);   
+        setDefaultDefinition(getCharacterManager().getDefaultValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
+
+        //load additionnal library :
+        for(String filename : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY)) {
+            addDefinition(filename);
+        }
+
+        //set the current library to use :
+        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));*/
+    }  
 }

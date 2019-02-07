@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
 import vib.core.animation.mpeg4.MPEG4Animatable;
+import vib.core.util.CharacterManager;
 import vib.core.util.audio.AudioTreeNode;
 import vib.core.util.environment.Animatable;
 import vib.core.util.environment.Environment;
@@ -584,7 +585,7 @@ public class EnvironmentLoader {
 
         } else if (xmlChild.isNamed("mpeg4animatable")) {
 
-            MPEG4Animatable childMPEG4animatable = new MPEG4Animatable(false);
+            MPEG4Animatable childMPEG4animatable = new MPEG4Animatable(CharacterManager.getStaticInstance());
             fillAnimatableWithXMLAnimatable(childMPEG4animatable, xmlChild);
             return childMPEG4animatable;
 

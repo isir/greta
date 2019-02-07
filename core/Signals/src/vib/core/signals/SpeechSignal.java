@@ -17,6 +17,7 @@
 
 package vib.core.signals;
 
+import vib.core.util.CharacterManager;
 import vib.core.util.speech.Speech;
 
 /**
@@ -26,11 +27,11 @@ import vib.core.util.speech.Speech;
 public class SpeechSignal extends Speech implements Signal{
     
 
-    public SpeechSignal(){
-        super();
+    public SpeechSignal(CharacterManager cm){
+        super(cm);
     }
 
-    public SpeechSignal(Speech s){
+    public SpeechSignal(CharacterManager cm,Speech s){
         super(s);
     }
 

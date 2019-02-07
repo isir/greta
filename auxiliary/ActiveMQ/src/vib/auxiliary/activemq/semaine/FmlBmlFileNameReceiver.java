@@ -35,6 +35,7 @@ import vib.core.util.xml.XMLTree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import vib.core.util.CharacterManager;
 
 /**
  *
@@ -45,15 +46,17 @@ public class FmlBmlFileNameReceiver extends TextReceiver implements IntentionEmi
     private ArrayList<IntentionPerformer> intentionPerformers;
     private ArrayList<SignalPerformer> signalPerformers;
     private XMLParser parser;
+    private CharacterManager cm;
 
-    public FmlBmlFileNameReceiver() {
+    public FmlBmlFileNameReceiver(CharacterManager cm) {
         this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
                 WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
-                "filnames");
+                "filnames", cm);
     }
 
-    public FmlBmlFileNameReceiver(String host, String port, String topic) {
+    public FmlBmlFileNameReceiver(String host, String port, String topic, CharacterManager cm) {
         super(host, port, topic);
+        this.cm = cm;
         intentionPerformers = new ArrayList<IntentionPerformer>();
         signalPerformers = new ArrayList<SignalPerformer>();
         parser = XML.createParser();
@@ -82,7 +85,7 @@ public class FmlBmlFileNameReceiver extends TextReceiver implements IntentionEmi
                     mode.setSocialAttitude(xml.getAttribute("social_attitude"));
                 }
 
-                propagateSignals(BMLTranslator.BMLToSignals(xml), IDProvider.createID(filename), mode);
+                propagateSignals(BMLTranslator.BMLToSignals(xml,cm), IDProvider.createID(filename), mode);
             }
             if (xml.getName().equalsIgnoreCase("fml-apml")) {
 
@@ -100,7 +103,7 @@ public class FmlBmlFileNameReceiver extends TextReceiver implements IntentionEmi
                     mode.setSocialAttitude(xml.getAttribute("social_attitude"));
                 }
 
-                propagateIntentions(FMLTranslator.FMLToIntentions(xml), IDProvider.createID(filename), mode);
+                propagateIntentions(FMLTranslator.FMLToIntentions(xml,cm), IDProvider.createID(filename), mode);
             }
         } catch (Exception e) {
         }

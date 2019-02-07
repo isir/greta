@@ -31,6 +31,7 @@ import vib.core.keyframes.KeyframePerformer;
 import vib.core.keyframes.PhonemSequence;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapterThread;
 import vib.core.util.Constants;
 import vib.core.util.Mode;
 import vib.core.util.enums.CompositionType;
@@ -44,7 +45,7 @@ import vib.core.util.time.Timer;
  * @author Yu Ding
  * @author Brice Donval
  */
-public class LipModel extends Thread implements KeyframePerformer, FAPFrameEmitter, CharacterDependent {
+public class LipModel extends CharacterDependentAdapterThread implements KeyframePerformer, FAPFrameEmitter, CharacterDependent {
 
     public static final int NUM_LABIALS = 8; //12 is useless for now
     public static final double STRONG = 4.5;
@@ -67,9 +68,10 @@ public class LipModel extends Thread implements KeyframePerformer, FAPFrameEmitt
     private final SortedMap<Integer, ID> requestIds = new TreeMap<Integer, ID>();
     private final SortedMap<Integer, FAPFrame> requestFrames = new TreeMap<Integer, FAPFrame>();
 
-    public LipModel() {
+    public LipModel(CharacterManager cm) {
+        setCharacterManager(cm);
         onCharacterChanged();
-        CharacterManager.add(this);
+        
         this.start();
     }
 
@@ -447,17 +449,17 @@ public class LipModel extends Thread implements KeyframePerformer, FAPFrameEmitt
 
     @Override
     public void onCharacterChanged() {
-        if (lipdata == null || !CharacterManager.getValueString("LIP_DATA").equals(lipdata.fileName)) {
-            lipdata = new Lipdata(CharacterManager.getValueString("LIP_DATA"));
+        if (lipdata == null || !getCharacterManager().getValueString("LIP_DATA").equals(lipdata.fileName)) {
+            lipdata = new Lipdata(getCharacterManager().getValueString("LIP_DATA"));
         }
-        WEIGHT_ULO = CharacterManager.getValueDouble("WEIGHT_ULO");
-        WEIGHT_LLO = CharacterManager.getValueDouble("WEIGHT_LLO");
-        WEIGHT_JAW = CharacterManager.getValueDouble("WEIGHT_JAW");
-        WEIGHT_LW = CharacterManager.getValueDouble("WEIGHT_LW");
-        WEIGHT_ULP = CharacterManager.getValueDouble("WEIGHT_ULP");
-        WEIGHT_LLP = CharacterManager.getValueDouble("WEIGHT_LLP");
-        WEIGHT_CR = CharacterManager.getValueDouble("WEIGHT_CR");
-        BaseTensionSup = (float) CharacterManager.getValueDouble("BaseTensionSup");
-        BaseTensionInf = (float) CharacterManager.getValueDouble("BaseTensionInf");
+        WEIGHT_ULO = getCharacterManager().getValueDouble("WEIGHT_ULO");
+        WEIGHT_LLO = getCharacterManager().getValueDouble("WEIGHT_LLO");
+        WEIGHT_JAW = getCharacterManager().getValueDouble("WEIGHT_JAW");
+        WEIGHT_LW = getCharacterManager().getValueDouble("WEIGHT_LW");
+        WEIGHT_ULP = getCharacterManager().getValueDouble("WEIGHT_ULP");
+        WEIGHT_LLP = getCharacterManager().getValueDouble("WEIGHT_LLP");
+        WEIGHT_CR = getCharacterManager().getValueDouble("WEIGHT_CR");
+        BaseTensionSup = (float) getCharacterManager().getValueDouble("BaseTensionSup");
+        BaseTensionInf = (float) getCharacterManager().getValueDouble("BaseTensionInf");
     }
 }

@@ -43,13 +43,26 @@ public abstract class ParameterSet<P extends Parameter> {
     protected Definition<P> currentDefinition;
 
 //public methods :
+    public ParameterSet() {        
+        otherDefinition = new ArrayList<Definition<P>>();
+    }
     /**
      * Contructor.
      * @param defaultDefinitionName the name of the default definition to use
      */
     public ParameterSet(String defaultDefinitionName) {
-        defaultDefinition = new Definition<P>(defaultDefinitionName, load(defaultDefinitionName));
-        otherDefinition = new ArrayList<Definition<P>>();
+        this();
+        setDefaultDefinition(defaultDefinitionName);        
+    }
+    
+    /**
+     * Sets the target definition as the definition to use.<br/>
+     * If the definition is not found, it tries to add it or uses the default one.
+     * @param definitionName the definition name
+     * @see #load(String)
+     */
+    public void setDefaultDefinition(String defaultDefinitionName) {
+         defaultDefinition = new Definition<P>(defaultDefinitionName, load(defaultDefinitionName));
     }
 
     /**

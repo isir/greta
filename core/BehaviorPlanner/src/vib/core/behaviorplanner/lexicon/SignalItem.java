@@ -51,9 +51,17 @@ public class SignalItem implements Signal {
         this.id = id;
         this.modality = modality;
         mainShape = shape;
-        totalProb = mainShape.getProbability();
-        aternatives = new ArrayList<Shape>();
-        minSignalDuration = shape.getMin();
+        if (mainShape != null){
+            totalProb = mainShape.getProbability();
+            aternatives = new ArrayList<Shape>();
+            minSignalDuration = shape.getMin();
+        } else {
+            double inf = Double.POSITIVE_INFINITY;
+            mainShape = new Shape(modality, 0.0, inf,"" ,"" ,"" ,"");
+            totalProb = 0.0;
+            aternatives = null;
+            minSignalDuration = 0.0;
+        }
     }
 
     /**

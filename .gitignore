@@ -1,0 +1,10 @@
+**/nbproject/private/
+**/build/
+bin/Log/
+bin/Common/Data/Cereproc/
+bin/Player/Lib/External/Win64/*\.cfg
+bin/ModularSave\.xml
+**/genfiles\.properties
+*.log
+*.form
+build-impl\.xml

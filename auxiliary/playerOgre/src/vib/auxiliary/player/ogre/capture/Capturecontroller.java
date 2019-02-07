@@ -20,12 +20,19 @@ import vib.auxiliary.player.ogre.OgreRenderTexture;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Locale;
+import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import vib.core.feedbacks.CallbackPerformer;
+import vib.core.intentions.FMLFileReader;
 
 /**
  *
  * @author Andre-Marie Pez
  */
-public class Capturecontroller extends javax.swing.JFrame implements CaptureListener {
+public class Capturecontroller extends javax.swing.JFrame implements CallbackPerformer, CaptureListener {
 
     private AWTImageCaptureOutput imageCaptureOutput;
     private OneShotCapturer screenShotCapturer;
@@ -35,6 +42,8 @@ public class Capturecontroller extends javax.swing.JFrame implements CaptureList
     private Capturable currentCapturable;
     private OgreRenderTexture textureCapturable;
     protected Capturer currentVideoCapturer;
+    
+    
     private ActionListener startCaptureAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -47,6 +56,14 @@ public class Capturecontroller extends javax.swing.JFrame implements CaptureList
             stopVideoCapture();
         }
     };
+    
+    
+    private volatile boolean iscapturing = false;
+    private boolean mustcapture = false;
+    private File[] listFiles;
+    private FMLFileReader filereader;
+    private JFileChooser jFileChooser1;
+    
 
     /**
      * Creates new form Capturecontroller
@@ -65,6 +82,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CaptureList
         realTimeVideoCapturer.addCaptureListener(this);
         offLineVideoCapturer.addCaptureListener(this);
         videoButton.addActionListener(startCaptureAction);
+        jFileChooser1 = new JFileChooser();
     }
 
     public void setCapturable(Capturable capturable) {
@@ -119,6 +137,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CaptureList
         Capturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         ensureCapturable(currentVideoCapturer);
         currentVideoCapturer.startCapture(filename);
+        //System.out.println(filename);
     }
 
     public void stopVideoCapture() {
@@ -126,7 +145,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CaptureList
         currentVideoCapturer.stopCapture();
     }
 
-    private void ensureCapturable(Capturer capturer) {
+    public void ensureCapturable(Capturer capturer) {
         if (textureCheckBox.isSelected() && !(currentCapturable instanceof OgreRenderTexture)) {
             if (textureCapturable == null) {
                 textureCapturable = new OgreRenderTexture(currentCapturable.getCamera());
@@ -163,7 +182,67 @@ public class Capturecontroller extends javax.swing.JFrame implements CaptureList
         ensureCapturable(screenShotCapturer);
         screenShotCapturer.startCapture(filename);
     }
+    
+    public void FMLVideoRecord() {
+        
+        //take the files name from the directory selected
+        if (!FolderName.getText().isEmpty()){
+            File dir = new File(FolderName.getText());
+            listFiles = dir.listFiles();
 
+            mustcapture = true;
+            // for each file create a file .avi 
+            for(File f : listFiles){
+                String videoNameH = constructVideoName(f,""); //"H"
+                //String videoNameN = constructVideoName(f,"N");
+                //String videoNameF = constructVideoName(f,"F");
+                File vf = new File(videoNameH + ".avi");
+
+                if (!vf.exists()) {
+                    try {
+                        Thread.sleep(3000);
+                    } catch (InterruptedException ex) {
+                        //Logger.getLogger(PlanCapturecontroller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    setBaseFileName(videoNameH);
+                    /*sap = new SocialParameterFrame();
+                    sap.setDoubleValue(SocialDimension.Dominance, 1);
+                    sap.setDoubleValue(SocialDimension.Liking, -1);*/
+                    startVideoCapture();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        //Logger.getLogger(PlanCapturecontroller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    iscapturing = true;
+                     filereader.load(f.getAbsolutePath());
+                    while (iscapturing) {
+                    }
+                }
+            }
+        }else{
+            JPanel panel = new JPanel();
+            JOptionPane.showMessageDialog(panel, "Select a folder");
+        }
+        
+    }
+    
+    private String constructVideoName(File f,String appendix) {
+        return f.getName().substring(0,f.getName().length()-4) + "-"+appendix;
+    }
+    
+    public void setFMLFileReader(FMLFileReader ffr){
+        this.filereader = ffr;
+    }
+    
+     public void setFileName(String fileName){
+        this.FolderName.setText(fileName);
+    }
+    
+    public String getFileName(){
+        return this.FolderName.getText();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -177,6 +256,9 @@ public class Capturecontroller extends javax.swing.JFrame implements CaptureList
         videoButton = new javax.swing.JButton();
         realTimeCheckBox = new javax.swing.JCheckBox();
         textureCheckBox = new javax.swing.JCheckBox();
+        FMLVideo = new javax.swing.JButton();
+        FolderName = new javax.swing.JTextField();
+        SelectFolder = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -199,32 +281,62 @@ public class Capturecontroller extends javax.swing.JFrame implements CaptureList
 
         textureCheckBox.setText("Use texture");
 
+        FMLVideo.setText("FML Videos");
+        FMLVideo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                FMLVideoActionPerformed(evt);
+            }
+        });
+
+        FolderName.setToolTipText("");
+
+        SelectFolder.setText("Select Folder");
+        SelectFolder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectFolderActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(screenShotButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(videoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(realTimeCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textureCheckBox)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(FMLVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(screenShotButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(videoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(39, 39, 39)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(realTimeCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textureCheckBox))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(FolderName, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(SelectFolder)))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addComponent(screenShotButton)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(videoButton)
-                    .addComponent(realTimeCheckBox)
-                    .addComponent(textureCheckBox))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(realTimeCheckBox)
+                        .addComponent(textureCheckBox)))
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(FMLVideo)
+                    .addComponent(FolderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(SelectFolder))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         pack();
@@ -242,10 +354,44 @@ public class Capturecontroller extends javax.swing.JFrame implements CaptureList
             currentVideoCapturer = offLineVideoCapturer;
         }
     }//GEN-LAST:event_realTimeCheckBoxActionPerformed
+
+    private void FMLVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FMLVideoActionPerformed
+        FMLVideoRecord();
+    }//GEN-LAST:event_FMLVideoActionPerformed
+
+    private void SelectFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectFolderActionPerformed
+        jFileChooser1.setLocale(Locale.getDefault());
+        jFileChooser1.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        jFileChooser1.updateUI();
+        if(jFileChooser1.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION){
+            File file = jFileChooser1.getSelectedFile();
+            this.FolderName.setText(file.getAbsolutePath());
+        }
+    }//GEN-LAST:event_SelectFolderActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton FMLVideo;
+    private javax.swing.JTextField FolderName;
+    private javax.swing.JButton SelectFolder;
     protected javax.swing.JCheckBox realTimeCheckBox;
     protected javax.swing.JButton screenShotButton;
     protected javax.swing.JCheckBox textureCheckBox;
     protected javax.swing.JButton videoButton;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void performCallback(vib.core.feedbacks.Callback clbck) {
+        if (mustcapture) {
+            if ((clbck.type().equalsIgnoreCase("dead") || clbck.type().equalsIgnoreCase("end"))) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    //Logger.getLogger(FMLAttitudeCaptureController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                stopVideoCapture();
+
+                iscapturing = false;
+            }
+        }
+    }
 }

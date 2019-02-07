@@ -23,6 +23,7 @@ import vib.tools.editors.TimeLine;
 import vib.core.signals.SpeechSignal;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import vib.core.util.CharacterManager;
 import vib.core.util.time.Temporizable;
 import vib.core.util.time.TimeMarker;
 import vib.tools.editors.MultiTimeLineEditors;
@@ -38,14 +39,16 @@ public class SpeechSignalTimeLine extends TimeLine<SpeechSignal>{
     private static final int SPEECH_SIGNAL_ID_X_POS_OFFSET = 4;
     private static final int SPEECH_SIGNAL_ID_Y_POS_OFFSET = 12;
     private static final int SPEECH_SIGNAL_WORD_Y_POS_OFFSET = 4;
+    private CharacterManager cm;
 
-    public SpeechSignalTimeLine(MultiTimeLineEditors<? extends Temporizable> _bmlEditor) {
-        super(_bmlEditor);    
+    public SpeechSignalTimeLine(CharacterManager cm,MultiTimeLineEditors<? extends Temporizable> _bmlEditor) {
+        super(_bmlEditor);
+        this.cm = cm;
     }
     
     @Override
     protected  TemporizableContainer<SpeechSignal> instanciateTemporizable(double startTime, double endTime) {
-        return new TemporizableContainer<SpeechSignal>(new SpeechSignal(SpeechUtil.instanciateTemporizable(startTime, endTime)), manager.getLabel());
+        return new TemporizableContainer<SpeechSignal>(new SpeechSignal(cm,SpeechUtil.instanciateTemporizable(cm,startTime, endTime)), manager.getLabel());
     }
 
     @Override
@@ -94,7 +97,7 @@ public class SpeechSignalTimeLine extends TimeLine<SpeechSignal>{
     // Added method to try to display a popup when willing to edit a speech.
     @Override
     protected TemporizableContainer<SpeechSignal> editTemporizable(TemporizableContainer<SpeechSignal> temporizableContainer){
-        return new TemporizableContainer<SpeechSignal>(new SpeechSignal(SpeechUtil.editTemporizable(temporizableContainer.getTemporizable())), manager.getLabel());
+        return new TemporizableContainer<SpeechSignal>(new SpeechSignal(cm,SpeechUtil.editTemporizable(temporizableContainer.getTemporizable())), manager.getLabel());
     }
     
 }

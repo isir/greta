@@ -30,6 +30,7 @@ import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
 import java.util.ArrayList;
 import java.util.List;
+import vib.core.util.CharacterManager;
 
 /**
  *
@@ -37,14 +38,17 @@ import java.util.List;
  * @author Brian Ravenet
  */
 public class FMLReceiver extends Receiver implements IntentionEmitter {
-
-    public FMLReceiver() {
+    private CharacterManager cm;
+    
+    public FMLReceiver(CharacterManager cm) {
         super();
+        this.cm = cm;
         performers = new ArrayList<IntentionPerformer>();
     }
 
-    public FMLReceiver(int port) {
+    public FMLReceiver(CharacterManager cm,int port) {
         super(port);
+        this.cm = cm;
         performers = new ArrayList<IntentionPerformer>();
     }
 
@@ -54,7 +58,7 @@ public class FMLReceiver extends Receiver implements IntentionEmitter {
     @Override
     public void perform(Message m) {
         XMLTree fml = fmlparser.parseBuffer(m.getString_content());
-        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml);
+        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml,cm);
         Mode mode = FMLTranslator.getDefaultFMLMode();
         if (fml.hasAttribute("composition")) {
             mode.setCompositionType(fml.getAttribute("composition"));

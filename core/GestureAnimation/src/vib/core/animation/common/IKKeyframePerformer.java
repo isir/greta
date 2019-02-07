@@ -31,6 +31,7 @@ import vib.core.keyframes.Keyframe;
 import vib.core.keyframes.KeyframePerformer;
 import vib.core.keyframes.ShoulderKeyframe;
 import vib.core.keyframes.TorsoKeyframe;
+import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
 import vib.core.util.enums.Side;
 import vib.core.util.id.ID;
@@ -48,11 +49,12 @@ public class IKKeyframePerformer implements KeyframePerformer, BAPFramesEmitter 
 
     IKFramesGenerator _ikFramesGenerator = new IKFramesGenerator();
     FramesController _framesController = new FramesController();
-    HumanAgent _agent = new HumanAgent();
+    HumanAgent _agent;
     GesturePathInterpolator path = new GesturePathInterpolator();
 
-    public IKKeyframePerformer() {
+    public IKKeyframePerformer(CharacterManager cm) {
         super();
+        _agent = new HumanAgent(cm);
         addFramesReceiver(_framesController);
         _ikFramesGenerator.start();
         _framesController.start();

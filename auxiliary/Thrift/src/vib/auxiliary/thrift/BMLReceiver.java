@@ -24,6 +24,7 @@ import vib.core.signals.BMLTranslator;
 import vib.core.signals.Signal;
 import vib.core.signals.SignalEmitter;
 import vib.core.signals.SignalPerformer;
+import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
 import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
@@ -37,13 +38,17 @@ import vib.core.util.xml.XMLTree;
  */
 public class BMLReceiver extends Receiver implements SignalEmitter {
 
-    public BMLReceiver() {
+    private CharacterManager cm;
+    
+    public BMLReceiver(CharacterManager cm) {
         super();
+        this.cm = cm;
         performers = new ArrayList<SignalPerformer>();
     }
 
-    public BMLReceiver(int port) {
+    public BMLReceiver(CharacterManager cm,int port) {
         super(port);
+        this.cm = cm;
         performers = new ArrayList<SignalPerformer>();
     }
 
@@ -53,7 +58,7 @@ public class BMLReceiver extends Receiver implements SignalEmitter {
     @Override
     public void perform(Message m) {
         XMLTree bml = bmlparser.parseBuffer(m.getString_content());
-        List<Signal> signals = BMLTranslator.BMLToSignals(bml);
+        List<Signal> signals = BMLTranslator.BMLToSignals(bml,cm);
         Mode mode = BMLTranslator.getDefaultBMLMode();
         if (bml.hasAttribute("composition")) {
             mode.setCompositionType(bml.getAttribute("composition"));

@@ -28,13 +28,33 @@ import vib.core.util.parameter.EngineParameterSetOfSet;
  *
  * @author Elisabetta Bevacqua
  */
-public class AgentState extends EngineParameterSetOfSet implements CharacterDependent{
+public class AgentState extends EngineParameterSetOfSet implements CharacterDependent {
 
     private static final String AGENT_STATE_PARAMETER_NAME = "AGENTSTATE";
     private static final AgentState globalState;
     static{
-        globalState = new AgentState();
-        CharacterManager.add(globalState);
+        globalState = new AgentState(CharacterManager.getStaticInstance());      
+    }
+    
+    private CharacterManager characterManager;
+
+    /**
+     * @return the characterManager
+     */
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.characterManager!=null)
+            this.characterManager.remove(this);
+        this.characterManager = characterManager;
+        characterManager.add(this);
     }
 
     public static AgentState getGlobalState(){
@@ -44,20 +64,22 @@ public class AgentState extends EngineParameterSetOfSet implements CharacterDepe
     /**
      * Construct an agent state with the default values found in the {@code CharacterManager}.
      */
-    public AgentState(){
+    public AgentState(CharacterManager cm){
         //get the default agent state :
-        super(CharacterManager.getDefaultValueString(AGENT_STATE_PARAMETER_NAME));
+        super();
+        setCharacterManager(cm);
+        set(getCharacterManager().getDefaultValueString(AGENT_STATE_PARAMETER_NAME));
         //load additionnal agent state :
-        for(String filename : CharacterManager.getAllValuesString(AGENT_STATE_PARAMETER_NAME)) {
+        for(String filename : getCharacterManager().getAllValuesString(AGENT_STATE_PARAMETER_NAME)) {
             add(filename);
         }
         //set the current agent state to use :
-        set(CharacterManager.getValueString(AGENT_STATE_PARAMETER_NAME));
+        set( getCharacterManager().getValueString(AGENT_STATE_PARAMETER_NAME));
     }
 
     @Override
     public void onCharacterChanged() {
-        set(CharacterManager.getValueString(AGENT_STATE_PARAMETER_NAME));
+        set( getCharacterManager().getValueString(AGENT_STATE_PARAMETER_NAME));
     }
 
     public void modifyState(String setName, String paramName, double newValue){

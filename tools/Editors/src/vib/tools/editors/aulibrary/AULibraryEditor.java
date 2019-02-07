@@ -72,10 +72,13 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
     private FAPFrameEmitterImpl fapEmitter = new FAPFrameEmitterImpl();
     private FAPFrame fapFrame = new FAPFrame();
     private JComboBox auComboBox;
+    private CharacterManager cm;
+    private AULibrary auLibrary;
 
 
-
-    public AULibraryEditor(){
+    public AULibraryEditor(CharacterManager cm){
+        setCharacterManager(cm);
+        auLibrary = new AULibrary(cm);
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         facePanel = new FacePanel(this);
         facePanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -161,7 +164,6 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
 
         applySelectedAU();
         this.pack();
-        CharacterManager.add(this);
     }
 
     public void setRightPanel(JPanel p){
@@ -192,7 +194,7 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
 
     private void refreshCombobox(Object selected) {
         LinkedList<String> auNames = new LinkedList<String>();
-        for (FLExpression faceexp : AULibrary.global_aulibrary.getAll()) {
+        for (FLExpression faceexp : auLibrary.getAll()) {
             auNames.add(faceexp.getParamName().toUpperCase());
         }
         Collections.sort(auNames, auNameComparator);
@@ -208,7 +210,7 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
     }
 
     private FLExpression getAU(String name){
-        return AULibrary.global_aulibrary.get(name);
+        return auLibrary.get(name);
     }
 
     private void applySelectedAU() {
@@ -248,7 +250,7 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
             }
             else{
                 FLExpression newFaceExp = new FLExpression(name);
-                AULibrary.global_aulibrary.getDefaultDefinition().addParameter(newFaceExp);
+                auLibrary.getDefaultDefinition().addParameter(newFaceExp);
             }
             refreshCombobox(name.toLowerCase());
         }
@@ -257,7 +259,7 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
 
     private void applyModifications(){
         boolean isInLocalDefinition = true;
-        FLExpression localAU = AULibrary.global_aulibrary.getCurrentDefinition().getParameter(auComboBox.getSelectedItem().toString());
+        FLExpression localAU = auLibrary.getCurrentDefinition().getParameter(auComboBox.getSelectedItem().toString());
         if(localAU == null){
             FLExpression globalAU = getAU(auComboBox.getSelectedItem().toString());
             if(globalAU.getFAPs().isEmpty()){
@@ -269,7 +271,7 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
             else{
                 //create new local
                 localAU = new FLExpression(auComboBox.getSelectedItem().toString());
-                AULibrary.global_aulibrary.getCurrentDefinition().addParameter(localAU);
+                auLibrary.getCurrentDefinition().addParameter(localAU);
             }
         }
         //update localExpression
@@ -287,9 +289,9 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
             }
         }
         if(isInLocalDefinition){
-            AULibrary.global_aulibrary.saveCurrentDefinition();
+            auLibrary.saveCurrentDefinition();
         } else {
-            AULibrary.global_aulibrary.saveDefaultDefinition();
+            auLibrary.saveDefaultDefinition();
         }
     }
 
@@ -300,8 +302,19 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
     }
     @Override
     protected void finalize() throws Throwable {
-        CharacterManager.remove(this);
+        cm.remove(this);
         super.finalize();
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+        return cm;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager cm) {
+        this.cm = cm;          
+        cm.add(this);
     }
 
 }

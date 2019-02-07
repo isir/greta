@@ -34,6 +34,7 @@ import vib.core.signals.SignalPerformer;
 import vib.core.signals.SpeechSignal;
 import vib.core.signals.TorsoSignal;
 import vib.core.signals.gesture.GestureSignal;
+import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
 import vib.core.util.enums.CompositionType;
 import vib.core.util.id.ID;
@@ -65,6 +66,7 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
     private TimeLineManager<GestureSignal> gestures;
     private TimeLineManager<TorsoSignal> torsoes;
     private BMLFileReader bmlFileReader;
+    private CharacterManager cm;
 
     public List<SpeechSignal> getSpeechList(){
         return this.speech.getTimeLine().getItems();
@@ -146,10 +148,11 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
         return output;
     }
 
-    public BMLEditor() {
+    public BMLEditor(CharacterManager cm) {
+        this.cm = cm;
         performers = new ArrayList<SignalPerformer>();
         //speech
-        speech = new TimeLineManager<SpeechSignal>(new SpeechSignalTimeLine(this));
+        speech = new TimeLineManager<SpeechSignal>(new SpeechSignalTimeLine(cm,this));
         speech.setLabel("Speech");
 
         //gestures
@@ -187,7 +190,7 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
         addTimeLine(gestures);
         addTimeLine(torsoes);
 
-        bmlFileReader = new BMLFileReader();
+        bmlFileReader = new BMLFileReader(cm);
         bmlFileReader.addSignalPerformer(new SignalPerformer() {
 
             @Override
@@ -221,8 +224,8 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
 
     private void diplaySignals(List<Signal> signals) {
         synchronized (fakeTTS) {
-            if (Speech.getTTS() == null) {
-                Speech.setTTS(fakeTTS);
+            if (cm.getTTS() == null) {
+                cm.setTTS(fakeTTS);
             }
 
             clearTimeLines();
@@ -257,8 +260,8 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
 
             setTime((int) (duration + 1));
 
-            if (Speech.getTTS() == fakeTTS) {
-                Speech.setTTS(null);
+            if (cm.getTTS() == fakeTTS) {
+                cm.setTTS(null);
             }
         }
     }

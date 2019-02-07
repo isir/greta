@@ -23,14 +23,15 @@ import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
 import java.util.HashMap;
 import java.util.List;
+import vib.core.util.CharacterDependentAdapter;
 
 /**
  *
  * @author Jing Huang
  */
-public class RestPoseFactory {
+public class RestPoseFactory extends CharacterDependentAdapter{
 
-    private String xmlFileRESTPOSE = CharacterManager.getValueString("RESTPOSE_REPOSITORY");
+    private String xmlFileRESTPOSE = getCharacterManager().getValueString("RESTPOSE_REPOSITORY");
 
     public String getXmlFileRESTPOSE() {
         return xmlFileRESTPOSE;
@@ -47,7 +48,8 @@ public class RestPoseFactory {
     XMLTree _tree;
     boolean _isInit = false;
 
-    public RestPoseFactory() {
+    public RestPoseFactory(CharacterManager cm) {
+        setCharacterManager(cm);
     }
 
     public void reloadData() {
@@ -58,7 +60,7 @@ public class RestPoseFactory {
     }
 
     public void loadData() {
-        xmlFileRESTPOSE = CharacterManager.getValueString("RESTPOSE_REPOSITORY");
+        xmlFileRESTPOSE = getCharacterManager().getValueString("RESTPOSE_REPOSITORY");
         XMLParser xmlparser = XML.createParser();
         xmlparser.setValidating(false);
         // System.out.println("RestPoseFactory:"+xmlFileRESTPOSE);
@@ -193,5 +195,10 @@ public class RestPoseFactory {
             return _rightHandList.get(name);
         }
         return _rightHandList.get("middle");
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        reloadData();
     }
 }

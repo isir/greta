@@ -25,6 +25,7 @@ import vib.core.util.xml.XMLTree;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import vib.core.util.CharacterManager;
 
 /**
  * This class is an implementation of {@code SignalEmitter} interface.<br/> When
@@ -38,6 +39,11 @@ public class BMLFileReader implements SignalEmitter {
 
     private ArrayList<SignalPerformer> signalPerformers = new ArrayList<SignalPerformer>();
     private XMLParser bmlparser = XML.createParser();
+    private CharacterManager cm;
+    
+    public BMLFileReader(CharacterManager cm){
+        this.cm = cm;
+    }
 
     @Override
     public void addSignalPerformer(SignalPerformer performer) {
@@ -83,7 +89,7 @@ public class BMLFileReader implements SignalEmitter {
         if (bml.hasAttribute("social_attitude")) {
             mode.setSocialAttitude(bml.getAttribute("social_attitude"));
         }
-        List<Signal> signals = BMLTranslator.BMLToSignals(bml);
+        List<Signal> signals = BMLTranslator.BMLToSignals(bml, cm);
 
         ID id = IDProvider.createID(base);
         //send to all SignalPerformer added

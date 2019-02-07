@@ -26,6 +26,8 @@ import vib.core.repositories.AUAPFrame;
 import vib.core.repositories.AULibrary;
 import vib.core.repositories.FLExpression;
 import vib.core.repositories.FLExpression.FAPItem;
+import vib.core.util.CharacterDependent;
+import vib.core.util.CharacterManager;
 import vib.core.util.enums.Side;
 import vib.core.util.id.ID;
 
@@ -35,9 +37,34 @@ import vib.core.util.id.ID;
  * @author Ken Prepin
  * @author Andre-Marie Pez
  */
-public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerformer {
+public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerformer, CharacterDependent {
 
     private static Side[] wantedSides = {Side.RIGHT, Side.LEFT};
+    private CharacterManager characterManager;
+    private AULibrary auLibrary;
+
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
+    }
+    
+    public SimpleAUPerformer(CharacterManager cm){
+        characterManager = cm;
+        auLibrary = new AULibrary(cm);
+    }
 
     @Override
     public void performAUAPFrame(AUAPFrame auapAnimation, ID requestId) {
@@ -59,12 +86,12 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerforme
      * @param auFrame the Action Unit frame to translate
      * @return the corresponding {@code FAPFrame}
      */
-    public static FAPFrame toFAPFrame(AUAPFrame auFrame) {
+    public FAPFrame toFAPFrame(AUAPFrame auFrame) {
         FAPFrame min = new FAPFrame(auFrame.getFrameNumber());
         FAPFrame max = new FAPFrame(auFrame.getFrameNumber());
         for (int au_nr = 1; au_nr <= AUAPFrame.NUM_OF_AUS; au_nr++) {
             if (auFrame.useActionUnit(au_nr)) {
-                FLExpression expression = AULibrary.global_aulibrary.findExpression("AU" + au_nr);
+                FLExpression expression = auLibrary.findExpression("AU" + au_nr);
                 if (expression != null) {
                     List<FAPItem> au_faps = expression.getFAPs();
                     for (Side side : wantedSides) {
@@ -110,5 +137,16 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerforme
             }
         }
         return result;
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        System.out.println("SimpleAUPerformer.onCharacterChanged(): nothing done.");
+    }
+    
+    public void UpdateLexicon(){
+        //remove the old lexicon to be sure to not have two lexicons
+        this.getCharacterManager().remove(auLibrary);        
+        auLibrary = new AULibrary(this.getCharacterManager());  
     }
 }

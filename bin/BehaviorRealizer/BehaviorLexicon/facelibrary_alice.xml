@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelibrary>
+	<expression class="gaze" instance="neutral"/>
+    <expression class="faceexp" instance="raise_brows">
+        <action intensity="0.25" name="AU1"/>
+        <action intensity="0.25" name="AU2"/>
+    </expression>
+    <expression class="faceexp" instance="warn">
+        <action intensity="0.7" name="AU4"/>
+        <action intensity="0.7" name="AU55"/>
+    </expression>
+	<expression class="gaze" instance="look_down">
+        <action intensity="0.5" name="AU64"/>
+    </expression>
+    <expression class="gaze" instance="look_down_left">
+        <action intensity="0.5" name="AU64"/>
+        <action intensity="0.5" name="AU61"/>
+    </expression>
+    <expression class="gaze" instance="look_down_right">
+        <action intensity="0.5" name="AU64"/>
+        <action intensity="0.5" name="AU62"/>
+    </expression>
+    <expression class="gaze" instance="look_left">
+        <action intensity="0.6" name="AU61"/>
+    </expression>
+    <expression class="gaze" instance="look_right">
+        <action intensity="0.6" name="AU62"/>
+    </expression>
+    <expression class="gaze" instance="look_up">
+        <action intensity="0.5" name="AU63"/>
+    </expression>
+    <expression class="gaze" instance="look_up_left">
+        <action intensity="0.5" name="AU63"/>
+        <action intensity="0.5" name="AU61"/>
+    </expression>
+    <expression class="gaze" instance="look_up_right">
+        <action intensity="0.5" name="AU63"/>
+        <action intensity="0.5" name="AU62"/>
+    </expression>
+</facelibrary>

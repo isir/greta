@@ -20,6 +20,7 @@ package vib.auxiliary.tts.openmary;
 import java.util.HashMap;
 import java.util.Map;
 import vib.core.util.CharacterManager;
+import vib.core.util.CharacterDependentAdapter;
 import vib.core.util.log.Logs;
 import vib.core.util.speech.Boundary;
 import vib.core.util.speech.Phoneme.PhonemeType;
@@ -32,7 +33,9 @@ import vib.core.util.time.TimeMarker;
  * Contains useful constants and functions with <a href="http://mary.dfki.de">Open Mary</a>.
  * @author Andre-Marie Pez
  */
-public class OpenMaryConstants {
+public class OpenMaryConstants extends CharacterDependentAdapter{
+    
+    
 
     /** Mary's parameter : used when sending a simple text */
     public static final String IN_TYPE_TEXT = "TEXT";
@@ -113,10 +116,10 @@ public class OpenMaryConstants {
         pho("0", PhonemeType.O1);
     }
 
-    /**
-     * Don't let anyone instantiate this class.
-     */
-    private OpenMaryConstants(){};
+   
+    public OpenMaryConstants(CharacterManager cm){
+        setCharacterManager(cm);
+    };
 
     /**
      * Converts a VIB's {@code Speech} object to MaryXML format.
@@ -178,9 +181,9 @@ public class OpenMaryConstants {
      * @param version the Mary's version
      * @return the Mary's language-code of the current character
      */
-    public static String toMaryLang(String language, int version){
-        String lang = CharacterManager.getValueString("MARY_"+version+"_"+language.substring(0, 2)+"_LANG");
-        return lang.isEmpty() ? CharacterManager.getValueString("MARY_"+version+"_EN_LANG") : lang;
+    public String toMaryLang(String language, int version){
+        String lang = getCharacterManager().getValueString("MARY_"+version+"_"+language.substring(0, 2)+"_LANG");
+        return lang.isEmpty() ? getCharacterManager().getValueString("MARY_"+version+"_EN_LANG") : lang;
     }
 
     /**
@@ -192,9 +195,9 @@ public class OpenMaryConstants {
      * @param version the Mary's version
      * @return the Mary's voice of the current character
      */
-    public static String toMaryVoice(String language, int version){
-        String voice = CharacterManager.getValueString("MARY_"+version+"_"+language.substring(0, 2)+"_VOICE");
-        return voice.isEmpty() ? CharacterManager.getValueString("MARY_"+version+"_EN_VOICE") : voice;
+    public  String toMaryVoice(String language, int version){
+        String voice = getCharacterManager().getValueString("MARY_"+version+"_"+language.substring(0, 2)+"_VOICE");
+        return voice.isEmpty() ? getCharacterManager().getValueString("MARY_"+version+"_EN_VOICE") : voice;
     }
 
     /**
@@ -260,5 +263,10 @@ public class OpenMaryConstants {
             }
         }
         return false;
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        //throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

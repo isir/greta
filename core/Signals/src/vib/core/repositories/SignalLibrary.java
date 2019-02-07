@@ -26,6 +26,10 @@ import vib.core.util.parameter.ParameterSet;
  */
 public abstract class SignalLibrary<S extends Signal> extends ParameterSet<SignalEntry<S>> {
 
+    public SignalLibrary() {
+        super();
+    }
+    
     public SignalLibrary(String defaultDefinitionName) {
         super(defaultDefinitionName);
     }

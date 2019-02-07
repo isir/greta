@@ -16,6 +16,8 @@
  */
 package vib.core.utilx.gui;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import vib.core.util.CharacterManager;
 
 /**
@@ -23,20 +25,30 @@ import vib.core.util.CharacterManager;
  * @author Andre-Marie Pez
  */
 public class CharacterIniManagerFrame extends IniManagerFrame{
+    private CharacterManager cm;
+   
     /**
      * Default constructor
      */
-    public CharacterIniManagerFrame(){
-        setIniManager(CharacterManager.getIniManager());
-        connect(new CharacterIniLoader());
+    public CharacterIniManagerFrame(){        
+        
+    }
+    
+    public void setCharacterManager(CharacterManager cm){
+        this.cm = cm;
+        setIniManager(cm.getIniManager());
+        connect(new CharacterIniLoader(cm));        
+    }
+    
+    public CharacterManager getCharacterManager(){
+        return cm;
     }
 
-    public String getCurrentCaracter(){
-        return CharacterManager.getCurrentCharacterName();
+    public String getCharacterName(){       
+        return cm.getCurrentCharacterName();        
     }
 
-    public void setCurrentCaracter(String name){
-        if(name!=null && !name.isEmpty())
-        CharacterManager.setCharacter(name);
-    }
+    public void setCharacterName(String name){
+        cm.setCharacter(name);        
+    }    
 }

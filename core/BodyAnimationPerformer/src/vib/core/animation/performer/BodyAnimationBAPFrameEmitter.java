@@ -29,13 +29,16 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import vib.core.util.CharacterDependent;
+import vib.core.util.CharacterManager;
 
 /**
  *
  * @author Jing Huang
  */
-public class BodyAnimationBAPFrameEmitter implements BAPFramesEmitter {
-    BodyAnimationNoiseGenerator _bodyNoise = new BodyAnimationNoiseGenerator();
+public class BodyAnimationBAPFrameEmitter implements BAPFramesEmitter{
+    
+    BodyAnimationNoiseGenerator _bodyNoise = new BodyAnimationNoiseGenerator(CharacterManager.getStaticInstance());
     ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
 
     @Override

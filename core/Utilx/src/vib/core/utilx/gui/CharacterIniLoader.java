@@ -32,9 +32,30 @@ import vib.core.util.log.Logs;
  * @author Andre-Marie Pez
  */
 public class CharacterIniLoader extends IniLoader implements CharacterDependent{
+    
+    private CharacterManager characterManager;
+    
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(characterManager==null)
+            characterManager = CharacterManager.getStaticInstance();
+        return characterManager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.characterManager = characterManager;
+    }
 
     /** Creates new form CharacterIniLoader */
-    public CharacterIniLoader() {
+    public CharacterIniLoader(CharacterManager cm) {
+        setCharacterManager(cm);
         initComponents();
 
         ArrayList<String>names = new ArrayList<String>();
@@ -50,12 +71,16 @@ public class CharacterIniLoader extends IniLoader implements CharacterDependent{
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(e.getStateChange() == ItemEvent.SELECTED){
-                    CharacterManager.setCharacter(e.getItem().toString());
+                    String characterFileName = e.getItem().toString();
+                    getCharacterManager().setCharacter(characterFileName);
+                   
+                    //managerFrame.setDefinition(characterFileName);
                 }
             }
         });
-        jComboBox1.setSelectedItem(CharacterManager.getCurrentCharacterName().toUpperCase());
-        CharacterManager.add(this);
+        jComboBox1.setSelectedItem(getCharacterManager().getCurrentCharacterName().toUpperCase());
+        getCharacterManager().add(this);
+        // Phil : To-do while constructing the tree
     }
 
     /** This method is called from within the constructor to
@@ -95,9 +120,10 @@ public class CharacterIniLoader extends IniLoader implements CharacterDependent{
 
     @Override
     public void onCharacterChanged() {
-        jComboBox1.setSelectedItem(CharacterManager.getCurrentCharacterName().toUpperCase());
+        String characterName = getCharacterManager().getCurrentCharacterName();
+        jComboBox1.setSelectedItem(characterName.toUpperCase());
         Logs.info("Current character parameters changed.");
-        IniManager.getGlobals().get("CURRENT_CHARACTER").setParamValue(CharacterManager.getCurrentCharacterName().toUpperCase());
+        IniManager.getGlobals().get("CURRENT_CHARACTER").setParamValue(characterName.toUpperCase());
         fire = false;
         managerFrame.updateIniParameters();
         fire = true;
@@ -107,7 +133,7 @@ public class CharacterIniLoader extends IniLoader implements CharacterDependent{
     @Override
     public void fireIniChanged() {
         if(fire){
-            CharacterManager.notifyChanges();
+            getCharacterManager().notifyChanges();
         }
     }
 

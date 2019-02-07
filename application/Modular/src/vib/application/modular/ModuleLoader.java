@@ -37,6 +37,7 @@ import javax.swing.JToolTip;
 import vib.application.modular.MultiLineToolTip.JMultiLineToolTip;
 import vib.application.modular.modules.Connector;
 import vib.application.modular.modules.Library;
+import vib.application.modular.modules.Module;
 import vib.application.modular.modules.ModuleFactory;
 import vib.application.modular.modules.ModuleFactory.ModuleInfo;
 import vib.application.modular.modules.Style;
@@ -462,7 +463,8 @@ public class ModuleLoader {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(moduleInfo.restriction<=0 || moduleGraph.countModuleByType(moduleInfo.name)<moduleInfo.restriction) {
-                this.moduleGraph.addModule(moduleInfo.name);
+                Module parent = moduleGraph.getSelectedModule();
+                moduleGraph.addModule(moduleInfo.name, parent);
             }
             else{
                 Logs.warning("Can not add module "+moduleInfo.name+": restriction="+moduleInfo.restriction+" number of instances="+moduleGraph.countModuleByType(moduleInfo.name));

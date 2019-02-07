@@ -105,7 +105,6 @@
 		<signals>
 			<signal id="1" name="head=head_infront" modality="head"/>
 			<signal id="2" name="emotion=Anger_Signal_5" modality="gesture" />
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 			<signal id="4" name="faceexp=anger" modality="face"/>
 			<!--<signal id="5" name="anger" modality="torso"/>-->
 		</signals>
@@ -479,7 +478,6 @@
 		<signals>
 			<signal id="1" name="faceexp=greet" modality="face"/>
 			<signal id="2" name="performative=GreetNew_Ges_R" modality="gesture"/>
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 			<signal id="4" name="NOD" modality="head"/>
 			<!--<signal id="5" name="LinearNeutralFrontalSwing" modality="torso"/>-->
 			<!-- Doesn't work anymore in the GRETA platform. -->
@@ -520,7 +518,6 @@
 			<signal id="1" name="faceexp=propose" modality="face"/>
 			<signal id="2" name="performative=Inform_Ges_B_Spread" modality="gesture"/>
 			<signal id="3" name="NOD" modality="head"/>
-			<signal id="4" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints/>
 	</behaviorset>
@@ -576,7 +573,6 @@
 		<signals>
 			<signal id="1" name="NOD" modality="head"/>
 			<signal id="2" name="adjectival=ShowHand_Pos_L_Low" modality="gesture"/>
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 			<signal id="4" name="faceexp=certain" modality="face"/>
 		</signals>
 		<constraints/>
@@ -585,7 +581,6 @@
 	<behaviorset name="certainty-uncertain">
 		<signals>
 			<signal id="1" name="NOD" modality="head"/>
-			<signal id="2" name="gaze=look_at" modality="gaze"/>
 			<signal id="3" name="faceexp=uncertain" modality="face"/>
 		</signals>
 		<constraints/>
@@ -609,7 +604,6 @@
 	<behaviorset name="turntaking-givethefloor">
 		<signals>
 			<signal id="1" name="gaze=give" modality="gaze" >
-				<alternative name="gaze=look_at" probability="0.2"/>
 			</signal>
 			<signal id="2" name="raise" modality="torso">
 				<alternative name="none" probability="0.3"/>
@@ -628,7 +622,6 @@
 	<behaviorset name="turntaking-*">
 		<signals>
 			<signal id="1" name="NOD" modality="head"/>
-			<signal id="2" name="gaze=look_at" modality="gaze"/>
 			<signal id="3" name="faceexp=raise_eyebrows" modality="face"/>
 		</signals>
 		<constraints>
@@ -857,7 +850,6 @@
 				<alternative name="faceexp=Smile_Small_Closed" probability="0.2"/>
 				<alternative name="faceexp=Smile_Small_Open" probability="0.2"/>
 			</signal>
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints>
 			<core>
@@ -882,7 +874,6 @@
 				<alternative name="faceexp=Eyebrows_Frown" probability="0.5"/>
 				<alternative name="faceexp=tension" probability="0.3"/>
 			</signal>
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints>
 			<core>
@@ -907,7 +898,6 @@
 				<alternative name="faceexp=Smile_Small_Closed" probability="0.4"/>
 				<alternative name="faceexp=Smile_Small_Open" probability="0.2"/>
 			</signal>
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints>
 			<rules>
@@ -928,7 +918,6 @@
 			<signal id="2" name="faceexp=Eyebrows_Frown" modality="face">
 				<alternative name="faceexp=tension" probability="0.5"/>
 			</signal>
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints>
 			<core>
@@ -950,7 +939,6 @@
 				<!--<alternative name="faceexp=little_smile_open" probability="0.2"/>-->
 				<!--<alternative name="faceexp=liking_open" probability="0.2"/>-->
 			<!--</signal>-->
-			<signal id="2" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints>
 			<core>
@@ -1113,7 +1101,6 @@
 		<signals>
 			<signal id="1" name="NOD" modality="head"/>
 			<signal id="2" name="faceexp=frown" modality="face"/>
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints>
 			<rules>
@@ -1139,7 +1126,6 @@
 				<alternative name="DOWN_ASIDE_RIGHT" probability="0.2"/>
 				<alternative name="NeutralPosition" probability="0.1"/><!-- head_none -->
 			</signal>
-			<signal id="2" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints/>
 	</behaviorset>
@@ -1153,7 +1139,6 @@
 				<alternative name="DOWN_ASIDE_RIGHT" probability="0.1"/>
 				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
 			</signal>
-			<signal id="2" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints/>
 	</behaviorset>
@@ -1166,7 +1151,6 @@
 				<alternative name="UP_ASIDE_RIGHT" probability="0.2"/>
 				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
 			</signal>
-			<signal id="2" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints/>
 	</behaviorset>
@@ -1182,7 +1166,6 @@
 			<signal id="2" name="faceexp=raise_eyebrows" modality="face">
 				<alternative name="faceexp=neutral" probability="0.2"/>
 			</signal>
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints/>
 	</behaviorset>
@@ -1198,7 +1181,6 @@
 			<signal id="2" name="faceexp=frown" modality="face">
 				<alternative name="faceexp=neutral" probability="0.3"/>
 			</signal>
-			<signal id="3" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints/>
 	</behaviorset>
@@ -1211,7 +1193,6 @@
 				<alternative name="UP_ASIDE_RIGHT" probability="0.1"/>
 				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
 			</signal>  
-			<signal id="2" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints/>
 	</behaviorset>
@@ -1317,7 +1298,6 @@
 			<signal id="8" name="NOD" modality="head" repetitivity="0" min="1" max="2"  probability_start="0.5" probability_end="0.5"/>
 			<signal id="9" name="head=head_infront" modality="head" repetitivity="0" min="1" max="2"  probability_start="0" probability_end="0"/>
 			<signal id="10" name="emotion=Anger_Signal_10" modality="gesture" repetitivity="0" min="2" max="5"  probability_start="0.2" probability_end="0.2"/>
-			<signal id="11" name="gaze=look_at" modality="gaze" repetitivity="0" min="1" max="2"  probability_start="0" probability_end="0"/>
 			<signal id="12" name="anger" modality="torso" repetitivity="0" min="2" max="5"  probability_start="0" probability_end="0"/>
 		</signals>
 		<constraints/>

@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import static vib.auxiliary.tts.cereproc.CereprocTTS.cereprocSampleRateFloat;
+import vib.core.util.CharacterManager;
 import vib.core.util.enums.interruptions.ReactionDuration;
 import vib.core.util.enums.interruptions.ReactionType;
 
@@ -282,8 +283,8 @@ public class CereprocConstants {
         }
     }
 
-    public static TTS getCereprocTTS(boolean useNativeTTS) throws IOException, UnsupportedAudioFileException {
-        TTS tts = new CereprocTTS();
+    public static TTS getCereprocTTS(CharacterManager cm,boolean useNativeTTS) throws IOException, UnsupportedAudioFileException {
+        TTS tts = cm.getTTS();//new CereprocTTS(cm);
         Logs.info("CereprocTTS : new instance of " + tts.getClass().getName());
         return tts;
     }

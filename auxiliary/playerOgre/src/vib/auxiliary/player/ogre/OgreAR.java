@@ -16,6 +16,7 @@
  */
 package vib.auxiliary.player.ogre;
 import vib.auxiliary.player.ogre.natives.SceneNode;
+import vib.core.util.audio.AudioOutput;
 
 /**
  *
@@ -23,6 +24,10 @@ import vib.auxiliary.player.ogre.natives.SceneNode;
  */
 
 public class OgreAR extends OgreAwt{
+
+    public OgreAR(AudioOutput audioOutput) {
+        super( audioOutput);
+    }
 
     @Override
     public void initializeOgre() {

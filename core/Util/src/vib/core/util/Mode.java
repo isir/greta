@@ -32,22 +32,26 @@ public final class Mode {
     private ReactionType reactionType;
     private ReactionDuration reactionDuration;
     private SocialAttitude socialAttitude;
+    
+    // create a variable to store the bml id
+    private String bml_id;
 
     /* ---------------------------------------------------------------------- */
 
-    public Mode(CompositionType compositionType, ReactionType reactionType, ReactionDuration reactionDuration, SocialAttitude socialAttitude) {
+    public Mode(CompositionType compositionType, ReactionType reactionType, ReactionDuration reactionDuration, SocialAttitude socialAttitude, String id) {
         setCompositionType(compositionType);
         setReactionType(reactionType);
         setReactionDuration(reactionDuration);
         setSocialAttitude(socialAttitude);
+        setBml_id(id);
     }
     
     public Mode(CompositionType compositionType, ReactionType reactionType, ReactionDuration reactionDuration) {
-        this(compositionType, reactionType, reactionDuration, null);
+        this(compositionType, reactionType, reactionDuration, null, "");
     }
 
     public Mode(CompositionType compositionType) {
-        this(compositionType, null, null, null);
+        this(compositionType, null, null, null, "");
     }
 
     /* -------------------------------------------------- */
@@ -140,5 +144,19 @@ public final class Mode {
     
     public void setSocialAttitude(String socialAttitude) {
         this.socialAttitude = SocialAttitude.interpret(socialAttitude);
+    }
+
+    /**
+     * @return the bml_id
+     */
+    public String getBml_id() {
+        return bml_id;
+    }
+
+    /**
+     * @param bml_id the bml_id to set
+     */
+    public void setBml_id(String bml_id) {
+        this.bml_id = bml_id;
     }
 }

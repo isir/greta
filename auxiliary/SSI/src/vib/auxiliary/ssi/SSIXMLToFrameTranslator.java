@@ -23,16 +23,11 @@ import vib.auxiliary.activemq.TextReceiver;
 import vib.auxiliary.activemq.WhiteBoard;
 import static vib.auxiliary.ssi.SSITypes.INVALID_OR_EMPTY_DOUBLE_FEATURE_VALUE;
 import static vib.auxiliary.ssi.SSITypes.INVALID_OR_EMPTY_INTEGER_FEATURE_VALUE;
-import vib.auxiliary.ssi.SSITypes.SSIFeatureNames;
 import static vib.auxiliary.ssi.SSITypes.SSIFeatureNames;
-import vib.auxiliary.ssi.SSITypes.SSIPitchDirectionValues;
 import static vib.auxiliary.ssi.SSITypes.SSIPitchDirectionValues;
-import vib.auxiliary.ssi.SSITypes.SSIPitchValues;
 import static vib.auxiliary.ssi.SSITypes.SSIPitchValues;
-import vib.auxiliary.ssi.SSITypes.SSIVoiceEnergyValues;
 import static vib.auxiliary.ssi.SSITypes.SSIVoiceEnergyValues;
 import vib.auxiliary.ssi.SSIXMLToFrameTranslator.SSIParsingFilterOption;
-import vib.core.signals.SpeechSignal;
 import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
 import vib.core.util.time.Timer;
@@ -310,6 +305,11 @@ public class SSIXMLToFrameTranslator extends TextReceiver implements SSIFrameEmi
                 textNode = headNode.findNodeCalled("headposition").findNodeCalled("ypos").findNodeCalled(XML.TEXT_NODE_NAME);
                 textNodeValue = (textNode != null) ? textNode.getTextValue() : null;
                 frame.applyValue(SSIFeatureNames.head_position_y, ParseDoubleAdvanced(textNodeValue));
+                
+                // ********************* adding z position of the head *****************
+                textNode = headNode.findNodeCalled("headposition").findNodeCalled("zpos").findNodeCalled(XML.TEXT_NODE_NAME);
+                textNodeValue = (textNode != null) ? textNode.getTextValue() : null;
+                frame.applyValue(SSIFeatureNames.head_position_z, ParseDoubleAdvanced(textNodeValue));
 
                 textNode = headNode.findNodeCalled("headorientation").findNodeCalled("roll").findNodeCalled(XML.TEXT_NODE_NAME);
                 textNodeValue = (textNode != null) ? textNode.getTextValue() : null;

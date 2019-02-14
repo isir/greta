@@ -1,0 +1,491 @@
+<?xml version="1.0"?>
+<project name="Modular" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <property name="src.dir" location="src" />
+    <property name="classes.dir" location="compilation" />
+    
+    <property name="jar.dir" location="../../bin/Common/Lib/Internal" />
+    <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
+    
+    <property name="modular.jar.output" location="../../bin/Modular.jar" />
+    
+    <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
+    
+    <property name="internal.player.dir" location="../../bin/Player/Lib/Internal" />
+    
+    <target name="delete.jar.output">
+        <delete file="${jar.output}"/>
+    </target>
+    
+    <target name="delete.classes">
+        <delete dir="${classes.dir}"/>
+    </target>    
+
+    <target name="clean" depends="delete.jar.output, delete.classes"/>
+    
+    <target name="makedir">
+        <mkdir dir="${classes.dir}" />
+        <mkdir dir="${jar.dir}" />
+    </target>
+    
+    <!-- DEPENDENCY TASKS HERE -->
+    <target name="build.dependency.activemq" if="${need.activemq}">
+        <ant antfile="../../auxiliary/ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>   
+
+    <target name="build.dependency.animationdynamics" if="${need.animationdynamics}">
+        <ant antfile="../../auxiliary/AnimationDynamics/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>    
+    
+    <target name="build.dependency.bvhmocap" if="${need.bvhmocap}">
+        <ant antfile="../../auxiliary/BvhMocap/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>      
+    
+    <target name="build.dependency.emotionml" if="${need.emotionml}">
+        <ant antfile="../../auxiliary/EmotionML/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>      
+    
+    <target name="build.dependency.environmentmanager" if="${need.environmentmanager}">
+        <ant antfile="../../auxiliary/EnvironmentManager/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>  
+    
+    <target name="build.dependency.playerogre" if="${need.playerogre}">
+        <ant antfile="../../auxiliary/playerOgre/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>      
+    
+    <target name="build.dependency.socialparameters" if="${need.socialparameters}">
+        <ant antfile="../../auxiliary/SocialParameters/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>      
+    
+    <target name="build.dependency.ssi" if="${need.ssi}">
+        <ant antfile="../../auxiliary/SSI/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>     
+    
+    <target name="build.dependency.thrift" if="${need.thrift}">
+        <ant antfile="../../auxiliary/Thrift/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>      
+    
+    <target name="build.dependency.cereproc" if="${need.cereproc}">
+        <ant antfile="../../auxiliary/TTS/Cereproc/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>     
+    
+    <target name="build.dependency.openmary" if="${need.openmary}">
+        <ant antfile="../../auxiliary/TTS/openMary/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>     
+    
+    <target name="build.dependency.animationcore" if="${need.animationcore}">
+        <ant antfile="../../core/AnimationCore/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>    
+    
+    <target name="build.dependency.behaviorplanner" if="${need.behaviorplanner}">
+        <ant antfile="../../core/BehaviorPlanner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>    
+    
+    <target name="build.dependency.behaviorrealizer" if="${need.behaviorrealizer}">
+        <ant antfile="../../core/BehaviorRealizer/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>    
+
+    <target name="build.dependency.bodyanimationperformer" if="${need.bodyanimationperformer}">
+        <ant antfile="../../core/BodyAnimationPerformer/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>    
+    
+    <target name="build.dependency.feedbacks" if="${need.feedbacks}">
+        <ant antfile="../../core/Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>    
+    
+    <target name="build.dependency.gestureanimation" if="${need.gestureanimation}">
+        <ant antfile="../../core/GestureAnimation/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>    
+    
+    <target name="build.dependency.intentions" if="${need.intentions}">
+        <ant antfile="../../core/Intentions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>    
+    
+    <target name="build.dependency.interruptions" if="${need.interruptions}">
+        <ant antfile="../../core/Interruptions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>    
+
+    <target name="build.dependency.lipmodel" if="${need.lipmodel}">
+        <ant antfile="../../core/LipModel/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>        
+    
+    <target name="build.dependency.listenerintentplanner" if="${need.listenerintentplanner}">
+        <ant antfile="../../core/ListenerIntentPlanner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>        
+    
+    <target name="build.dependency.mpeg4" if="${need.mpeg4}">
+        <ant antfile="../../core/MPEG4/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>        
+    
+    <target name="build.dependency.signals" if="${need.signals}">
+        <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>        
+    
+    <target name="build.dependency.subjectplanner" if="${need.subjectplanner}">
+        <ant antfile="../../core/SubjectPlanner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>        
+    
+    <target name="build.dependency.util" if="${need.util}">
+        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.utilx" if="${need.utilx}">
+        <ant antfile="../../core/Utilx/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.videocapture" if="${need.videocapture}">
+        <ant antfile="../../tools/VideoCapture/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>  
+    
+    <target name="build.dependency.editors" if="${need.editors}">
+        <ant antfile="../../tools/Editors/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.gestureanimationeditor" if="${need.gestureanimationeditor}">
+        <ant antfile="../../tools/GestureAnimationEditor/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    <!-- -->
+    
+    <path id="path.jars">
+        <fileset dir="${jar.dir}">
+            <include name="Util.jar"/>
+            <include name="Utilx.jar"/>
+        </fileset>
+        <fileset dir="${external.jar.dir}">
+            <include name="jgraphx.jar"/>
+        </fileset>
+    </path>
+    
+    <target name="build.dependencies">
+        <!-- DEPENDENCY TASKS HERE -->
+        <condition property="need.activemq">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/ActiveMQ.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.activemq"/>
+        
+        <condition property="need.animationdynamics">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/AnimationDynamics.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.animationdynamics"/>        
+        
+        <condition property="need.bvhmocap">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/BvhMocap.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.bvhmocap"/>
+        
+        <condition property="need.emotionml">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/EmotionML.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.emotionml"/>
+        
+        <condition property="need.environmentmanager">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/EnvironmentManager.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.environmentmanager"/>
+        
+        <condition property="need.playerogre">
+            <not>
+                <and>
+                    <available file="${internal.player.dir}" type="dir"/>
+                    <available file="${internal.player.dir}/playerOgre.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.playerogre"/>
+        
+        <condition property="need.videocapture">
+            <not>
+                <and>
+                    <available file="${internal.player.dir}" type="dir"/>
+                    <available file="${internal.player.dir}/VideoCapture.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.videocapture"/>
+        
+        <condition property="need.socialparameters">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/SocialParameters.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.socialparameters"/>
+        
+        <condition property="need.ssi">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/SSI.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.ssi"/>        
+        
+        <condition property="need.thrift">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Thrift.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.thrift"/>    
+
+        <condition property="need.cereproc">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Cereproc.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.cereproc"/>       
+
+        <condition property="need.openmary">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/openMary.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.openmary"/>            
+        
+        <condition property="need.animationcore">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/AnimationCore.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.animationcore"/>       
+
+        <condition property="need.behaviorplanner">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/BehaviorPlanner.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.behaviorplanner"/>       
+
+        <condition property="need.behaviorrealizer">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/BehaviorRealizer.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.behaviorrealizer"/>         
+
+        <condition property="need.bodyanimationperformer">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/BodyAnimationPerformer.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.bodyanimationperformer"/>      
+
+        <condition property="need.feedbacks">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Feedbacks.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.feedbacks"/>        
+
+        <condition property="need.gestureanimation">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/GestureAnimation.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.gestureanimation"/>         
+
+        <condition property="need.intentions">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Intentions.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.intentions"/>           
+
+        <condition property="need.interruptions">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Interruptions.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.interruptions"/>          
+
+        <condition property="need.lipmodel">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/LipModel.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.lipmodel"/>      
+
+        <condition property="need.listenerintentplanner">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/ListenerIntentPlanner.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.listenerintentplanner"/>       
+
+        <condition property="need.mpeg4">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/MPEG4.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.mpeg4"/>           
+
+        <condition property="need.signals">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Signals.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.signals"/>    
+
+        <condition property="need.subjectplanner">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/SubjectPlanner.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.subjectplanner"/>          
+        
+        <condition property="need.util">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Util.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.util"/>
+        
+        <condition property="need.utilx">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Utilx.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.utilx"/>
+        
+        <condition property="need.editors">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Editors.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.editors"/>
+        
+        <condition property="need.gestureanimationeditor">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/GestureAnimationEditor.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.gestureanimationeditor"/>
+        <!-- -->
+    </target>
+    
+    <target name="compile" depends="delete.classes, makedir, build.dependencies">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false">
+            <classpath refid="path.jars"/>
+        </javac>
+        <copy todir="${classes.dir}">
+          <fileset dir="${src.dir}">
+            <exclude name="**/*.java"/>
+          </fileset>
+        </copy>
+    </target>
+    
+    <target name="build" depends="clean, compile">
+        <path id="path.jars.manifest">
+            <fileset dir="${jar.dir}">
+                <include name="*.jar"/>
+            </fileset>
+            <fileset dir="${external.jar.dir}">
+                <include name="jgraphx.jar"/>
+            </fileset>
+            <fileset dir="${internal.player.dir}">
+                <include name="*.jar"/>
+            </fileset>
+        </path>
+        
+        <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars.manifest" pathsep=" ">
+            <map from="${jar.dir}" to="./Common/Lib/Internal"/>
+            <map from="${external.jar.dir}" to="./Common/Lib/External"/>
+            <map from="${internal.player.dir}" to="./Player/Lib/Internal"/>
+        </pathconvert> 
+        <jar destfile="${modular.jar.output}" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="vib.application.modular.Modular"/>
+                <attribute name="Class-Path" value="${path.jars.manifest.converted}"/>
+            </manifest>
+        </jar>
+        <antcall target="delete.classes"/>
+    </target>
+    
+</project>

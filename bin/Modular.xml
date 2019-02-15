@@ -128,6 +128,7 @@
                         <item module="SSITranslator" name="SSI XML-to-Frame Translator"/>
                         <item module="SSIFilter" name="SSI XML Filter"/>
                         <item module="SSIFrameToSignal" name="SSI Frame-To-Signal Translator"/>
+						<item module="SSIFrameToGazeSignal" name="SSI Frame-To-GazeSignal Translator"/>
                         <item module="MessageLogger" name="Message Logger"/>
                         <item module="BMLCallbacksReceiver" name="BML Callbacks Receiver"/>
                     </menu>
@@ -318,6 +319,12 @@
         </module>
         <module name="SSIFrameToSignal" style="VIBDefault">
             <object class="vib.auxiliary.ssi.SSIFrameToSignal" lib_id="vib_ssi"/>
+        </module>
+		<module name="SSIFrameToGazeSignal" style="Signals">
+            <object class="vib.auxiliary.ssi.SSIFrameToGazeSignal" lib_id="vib_ssi"/>
+			<frame class="vib.auxiliary.ssi.gui.GazeUserGui" lib_id="vib_ssi" type="frame">
+                <link method="setPosandOrient" on="frame"/>
+            </frame>
         </module>
         <module name="BehaviorRealizer" style="BehaviorRealizer">
             <object class="vib.core.behaviorrealizer.Realizer" lib_id="vib_behavior_realizer"/>
@@ -1327,9 +1334,6 @@
             <connect from="output" method="setEnvironment" to="input"/>
             <disconnect from="null" method="" to="null"/>
         </connector>
-		
-		
-	
         <connector id="connectAnimatableToEnvironment" unique="true">
             <input class="vib.core.util.environment.Animatable" lib_id="vib_util"/>
             <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>

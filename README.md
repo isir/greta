@@ -1,4 +1,6 @@
-﻿# Greta
+## **For instructions of how to install/compile/use the project please see [WIKI](https://github.com/gretaproject/greta/wiki)**
+
+# Greta
 Realtime platform to control socio-emotional virtual characters 
 
 ![Greta logo](https://github.com/gretaproject/Greta/blob/master/pictures/Greta_hello.png)
@@ -27,12 +29,8 @@ If you plan on using OpenMary, you need to:
 6) The module FML File Reader allows you to launch an FML File and see the resulting animation.
 
 
-
 Greta is the result of different research projects conducted by Catherine Pelachaud in her research group.
 
-## WIKI
-
-**For instructions of how to install/compile/use the project please see [WIKI](https://github.com/gretaproject/greta/wiki)**
 
 ## Functionality
 

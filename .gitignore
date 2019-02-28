@@ -15,3 +15,6 @@ build-impl\.xml
 *.jar
 
 out/
+
+bin/javadoc/
+bin/Common/Lib/

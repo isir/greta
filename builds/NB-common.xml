@@ -93,7 +93,7 @@
     <!-- Override : Discard warnings on UMLGraph tags in Javadoc -->
     <target depends="init" if="have.sources" name="-javadoc-build">
         <mkdir dir="${dist.javadoc.dir}"/>
-        <javadoc additionalparam="${javadoc.additionalparam}"
+        <javadoc additionalparam="${javadoc.additionalparam} -Xdoclint:none"
 			     author="${javadoc.author}"
 				 charset="UTF-8"
 				 destdir="${dist.javadoc.dir}"

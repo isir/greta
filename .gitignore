@@ -8,3 +8,10 @@ bin/ModularSave\.xml
 *.log
 *.form
 build-impl\.xml
+\.idea/
+
+*.iml
+
+*.jar
+
+out/

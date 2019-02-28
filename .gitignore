@@ -12,7 +12,7 @@ build-impl\.xml
 
 *.iml
 
-*.jar
+bin/Common/Lib/Internal/*\.jar
 
 out/
 

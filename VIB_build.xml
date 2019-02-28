@@ -31,7 +31,11 @@
                     }
                     else{
                         //TODO other supported IDE
-                        self.setValue(true);
+                        // self.setValue(true);
+
+                        // HOTFIX if IDE is not Netbeans, just run the usual build script
+                        project.setProperty("vib.build.file", "./builds/NB-common.xml" );
+                        self.setValue(false);
                     }
                     ]]>
                 </scriptcondition>

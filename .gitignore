@@ -11,13 +11,8 @@ bin/ModularSave\.xml
 
 *.iml
 
-bin/Common/Lib/Internal/*\.jar
-bin/Common/Lib/Internal/lib/*\.jar
+bin/Common/Lib/Internal/javadoc/
 
 out/
 
 bin/javadoc/
-
-bin/Modular\.jar
-
-bin/Player/Lib/Internal/playerOgre\.jar

@@ -1,189 +1,188 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modulated>
     <elements>
-        <element h="50.0" id="FaceKeyframePerformer-1354616860516-385"
+        <element h="510.0" id="Environment-1545228639037-145"
+            module="Environment" name="Environment" w="670.0" x="40.0" y="120.0">
+            <element h="430.0" id="CharacterManager-1545228650268-259"
+                module="CharacterManager" name="CharacterManager"
+                w="510.0" x="70.0" y="50.0">
+                <parameter name="character_name" value="CAMILLE"/>
+                <window h="532" visible="false" w="505" x="0" y="0"/>
+                <element h="50.0" id="FMLFileReader-1545228674948-209"
+                    module="FMLFileReader" name="FMLFileReader" w="80.0"
+                    x="20.0" y="80.0">
+                    <parameter name="saveFileName" value=""/>
+                    <window h="109" visible="false" w="497" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="BMLFileReader-1545228678860-536"
+                    module="BMLFileReader" name="BMLFileReader" w="80.0"
+                    x="110.0" y="80.0">
+                    <window h="109" visible="false" w="497" x="0" y="0"/>
+                </element>
+                <element h="150.0"
+                    id="BehaviorPlanner-1545228689924-565"
+                    module="BehaviorPlanner" name="BehaviorPlanner"
+                    w="80.0" x="20.0" y="150.0">
+                    <window h="121" visible="false" w="172" x="0" y="0"/>
+                </element>
+                <element h="150.0"
+                    id="BehaviorRealizer-1545228702171-304"
+                    module="BehaviorRealizer" name="BehaviorRealizer"
+                    w="80.0" x="110.0" y="150.0">
+                    <window h="310" visible="false" w="209" x="0" y="0"/>
+                </element>
+                <element h="40.0"
+                    id="AnimationKeyframePerformer-1545228717780-228"
+                    module="AnimationKeyframePerformer"
+                    name="AnimationKeyframePerformer" w="200.0"
+                    x="210.0" y="110.0"/>
+                <element h="50.0" id="LipModel-1545228738636-406"
+                    module="LipModel" name="LipModel" w="80.0" x="220.0" y="220.0"/>
+                <element h="50.0"
+                    id="SimpleAUPerformer-1545228776323-11"
+                    module="SimpleAUPerformer" name="SimpleAUPerformer"
+                    w="80.0" x="330.0" y="160.0">
+                    <window h="339" visible="false" w="416" x="0" y="0"/>
+                </element>
+                <element h="220.0"
+                    id="MPEG4Animatable-1545228808979-301"
+                    module="MPEG4Animatable" name="MPEG4Animatable"
+                    w="80.0" x="420.0" y="100.0">
+                    <parameter name="posX" value="-1.0"/>
+                    <parameter name="scaleX" value="1.0"/>
+                    <parameter name="posY" value="0.0"/>
+                    <parameter name="scaleY" value="1.0"/>
+                    <parameter name="posZ" value="-1.0"/>
+                    <parameter name="rotX" value="0.0"/>
+                    <parameter name="rotW" value="0.7071067811865476"/>
+                    <parameter name="rotZ" value="0.0"/>
+                    <parameter name="rotY" value="0.7071067811865475"/>
+                    <parameter name="scaleZ" value="1.0"/>
+                    <window h="179" visible="false" w="463" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="TTS-1545228829579-75" module="TTS"
+                    name="TTS" w="80.0" x="300.0" y="10.0">
+                    <parameter name="doPhonemes" value="true"/>
+                    <parameter name="doTemporize" value="true"/>
+                    <parameter name="doAudio" value="true"/>
+                    <window h="128" visible="false" w="369" x="0" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="OpenMary ClientTTS-1545228836179-501"
+                    module="OpenMary ClientTTS"
+                    name="OpenMary ClientTTS" w="80.0" x="400.0" y="10.0"/>
+                <element h="50.0" id="Body Head Noise-1545232758094-182"
+                    module="Body Head Noise" name="Body Head Noise"
+                    w="80.0" x="410.0" y="340.0">
+                    <window h="339" visible="false" w="416" x="0" y="0"/>
+                </element>
+            </element>
+        </element>
+        <element h="50.0" id="FaceKeyframePerformer-1545228730132-297"
             module="FaceKeyframePerformer" name="FaceKeyframePerformer"
-            w="210.0" x="520.0" y="70.0">
+            w="80.0" x="330.0" y="330.0">
             <parameter name="blinking" value="true"/>
         </element>
-        <element h="50.0" id="SimpleAUPerformer-1354616833893-982"
-            module="SimpleAUPerformer" name="SimpleAUPerformer"
-            w="210.0" x="520.0" y="130.0"/>
-        <element h="50.0" id="LipModel-1364482028748-407"
-            module="LipModel" name="LipModel" w="210.0" x="520.0" y="190.0"/>
-        <element h="50.0" id="AudioKeyframePerformer-1365580260490-756"
+        <element h="40.0" id="AudioKeyframePerformer-1545228746491-323"
             module="AudioKeyframePerformer"
-            name="AudioKeyframePerformer" w="210.0" x="520.0" y="260.0"/>
-        <element h="50.0" id="TTS-1364481783324-512" module="TTS"
-            name="TTS" w="80.0" x="1070.0" y="20.0">
-            <parameter name="doPhonemes" value="true"/>
-            <parameter name="doTemporize" value="true"/>
-            <parameter name="doAudio" value="true"/>
-            <window h="127" visible="false" w="369" x="0" y="0"/>
+            name="AudioKeyframePerformer" w="200.0" x="320.0" y="450.0"/>
+        <element h="50.0" id="LipBlender-1545228769564-988"
+            module="LipBlender" name="LipBlender" w="80.0" x="440.0" y="390.0"/>
+        <element h="50.0" id="IniManager-1545228843011-310"
+            module="IniManager" name="IniManager" w="80.0" x="500.0" y="50.0">
+            <parameter name="file" value="vib.ini"/>
+            <window h="532" visible="false" w="505" x="0" y="0"/>
         </element>
-        <element h="50.0" id="Cereproc TTS-1453728909564-442"
-            module="Cereproc TTS" name="Cereproc TTS" w="80.0"
-            x="1070.0" y="90.0"/>
-        <element h="50.0" id="FMLFileReader-1364311746395-332"
-            module="FMLFileReader" name="FMLFileReader" w="80.0"
-            x="330.0" y="20.0">
-            <parameter name="saveFileName" value="Examples\DemoUnity\Welcome.xml"/>
-            <window h="108" visible="true" w="497" x="6" y="346"/>
-        </element>
-        <element h="50.0" id="Thrift.CommandReceiver-1395924914248-518"
-            module="Thrift.CommandReceiver"
-            name="Thrift.CommandReceiver" w="80.0" x="180.0" y="20.0">
-            <parameter name="port" value="9912"/>
-            <parameter name="host" value="localhost"/>
-            <window h="166" visible="false" w="357" x="0" y="0"/>
-        </element>
-        <element h="50.0" id="BehaviorPlanner-1527253622246-900"
-            module="BehaviorPlanner" name="BehaviorPlanner" w="230.0"
-            x="180.0" y="120.0"/>
-        <element h="50.0" id="CharacterManager-1404387993138-795"
-            module="CharacterManager" name="CharacterManager" w="80.0"
-            x="980.0" y="20.0">
-            <parameter name="character_name" value="CAMILLE"/>
-            <window h="531" visible="false" w="505" x="0" y="0"/>
-        </element>
-        <element h="50.0" id="LogFrame-1361207302064-195"
-            module="LogFrame" name="LogFrame" w="80.0" x="890.0" y="20.0">
-            <parameter name="blackBackground" value="true"/>
-            <window h="262" visible="true" w="469" x="7" y="584"/>
-        </element>
-        <element h="50.0" id="Logs-1361207295272-646" module="Logs"
-            name="Logs" w="80.0" x="790.0" y="20.0">
-            <parameter name="debug" value="false"/>
+        <element h="50.0" id="Logs-1545228847405-168" module="Logs"
+            name="Logs" w="80.0" x="620.0" y="50.0">
+            <parameter name="debug" value="true"/>
             <parameter name="warning" value="true"/>
             <parameter name="error" value="true"/>
-            <parameter name="info" value="false"/>
-            <window h="173" visible="false" w="212" x="0" y="0"/>
+            <parameter name="info" value="true"/>
+            <window h="174" visible="false" w="212" x="0" y="0"/>
         </element>
-        <element h="50.0" id="BMLFileReader-1361266854998-697"
-            module="BMLFileReader" name="BMLFileReader" w="80.0"
-            x="60.0" y="220.0">
-            <window h="108" visible="true" w="497" x="5" y="463"/>
+        <element h="50.0" id="LogFrame-1545228852107-958"
+            module="LogFrame" name="LogFrame" w="80.0" x="730.0" y="50.0">
+            <parameter name="blackBackground" value="false"/>
+            <window h="436" visible="false" w="618" x="0" y="0"/>
         </element>
-        <element h="50.0" id="BehaviorRealizer-1354616822508-693"
-            module="BehaviorRealizer" name="BehaviorRealizer" w="230.0"
-            x="180.0" y="190.0"/>
-        <element h="110.0" id="LipBlender-1364482048451-657"
-            module="LipBlender" name="LipBlender" w="80.0" x="790.0" y="120.0"/>
-        <element h="50.0" id="Thrift.FAPSender-1395840376340-6"
-            module="Thrift.FAPSender" name="Thrift.FAPSender" w="80.0"
-            x="1070.0" y="150.0">
-            <parameter name="port" value="9700"/>
-            <parameter name="host" value="localhost"/>
-            <window h="166" visible="false" w="357" x="0" y="0"/>
-        </element>
-        <element h="50.0" id="Thrift.AudioSender-1395840396355-411"
-            module="Thrift.AudioSender" name="Thrift.AudioSender"
-            w="80.0" x="580.0" y="540.0">
-            <parameter name="sendAudioBuffer" value="true"/>
-            <parameter name="port" value="9007"/>
-            <parameter name="host" value="localhost"/>
-            <window h="166" visible="false" w="357" x="0" y="0"/>
-        </element>
-        <element h="190.0" id="MPEG4Animatable-1354266856237-722"
-            module="MPEG4Animatable" name="MPEG4Animatable" w="80.0"
-            x="930.0" y="250.0">
-            <parameter name="posX" value="0.0"/>
-            <parameter name="scaleX" value="1.0"/>
-            <parameter name="posY" value="0.0"/>
-            <parameter name="scaleY" value="1.0"/>
-            <parameter name="posZ" value="0.0"/>
-            <parameter name="rotX" value="0.0"/>
-            <parameter name="rotW" value="1.0"/>
-            <parameter name="rotZ" value="0.0"/>
-            <parameter name="rotY" value="0.0"/>
-            <parameter name="scaleZ" value="1.0"/>
-            <window h="152" visible="false" w="457" x="0" y="0"/>
-        </element>
-        <element h="50.0" id="Environment-1354266539813-112"
-            module="Environment" name="Environment" w="80.0" x="930.0" y="460.0"/>
-        <element h="50.0" id="PlayerOgre-1453729044987-221"
-            module="PlayerOgre" name="PlayerOgre" w="80.0" x="930.0" y="540.0">
-            <parameter name="posX" value="-0.40271082520484924"/>
-            <parameter name="posY" value="1.3784887790679932"/>
-            <parameter name="posZ" value="8.499999046325684"/>
+        <element h="50.0" id="PlayerOgre-1545228862451-308"
+            module="PlayerOgre" name="PlayerOgre" w="80.0" x="770.0" y="160.0">
+            <parameter name="posX" value="1.4670641422271729"/>
+            <parameter name="posY" value="1.6783608198165894"/>
+            <parameter name="posZ" value="-0.9125995635986328"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="0.0"/>
-            <parameter name="yaw" value="0.0"/>
-            <window h="615" visible="true" w="736" x="1001" y="162"/>
+            <parameter name="pitch" value="-0.09895946830511093"/>
+            <parameter name="yaw" value="1.5333625078201294"/>
+            <window h="615" visible="true" w="736" x="1113" y="265"/>
         </element>
-        <element h="50.0" id="Thrift.BAPSender-1395840388114-787"
-            module="Thrift.BAPSender" name="Thrift.BAPSender" w="80.0"
-            x="1070.0" y="320.0">
-            <parameter name="port" value="9070"/>
+        <element h="50.0" id="Thrift.FAPSender-1551782056618-620"
+            module="Thrift.FAPSender" name="Thrift.FAPSender" w="80.0"
+            x="220.0" y="520.0">
+            <parameter name="port" value="9090"/>
             <parameter name="host" value="localhost"/>
-            <window h="166" visible="false" w="357" x="0" y="0"/>
+            <window h="167" visible="false" w="357" x="0" y="0"/>
         </element>
-        <element h="50.0" id="Body Head Noise-1453727992428-383"
-            module="Body Head Noise" name="Body Head Noise" w="80.0"
-            x="720.0" y="430.0">
-            <parameter name="useHead" value="true"/>
-            <parameter name="useLowerBody" value="false"/>
-            <parameter name="setIntensityTorso" value="1.0"/>
-            <parameter name="step" value="1.0"/>
-            <parameter name="useTorso" value="true"/>
-            <parameter name="setIntensityHead" value="1.0"/>
+        <element h="50.0" id="BAPSender-1551782062205-986"
+            module="BAPSender" name="BAPSender" w="80.0" x="310.0" y="200.0">
+            <parameter name="isQueue" value="false"/>
+            <parameter name="port" value="61616"/>
+            <parameter name="host" value="localhost"/>
+            <parameter name="topic" value="BAP"/>
+            <window h="221" visible="false" w="240" x="0" y="0"/>
         </element>
-        <element h="50.0" id="BVHFileReader-1453731406122-272"
-            module="BVHFileReader" name="BVHFileReader" w="80.0"
-            x="720.0" y="490.0">
-            <parameter name="saveFileName" value="Examples\BvhMocap\sad_walk_rd.bvh"/>
-            <window h="109" visible="false" w="517" x="0" y="0"/>
+        <element h="50.0" id="Thrift.AudioSender-1551782070029-170"
+            module="Thrift.AudioSender" name="Thrift.AudioSender"
+            w="80.0" x="380.0" y="520.0">
+            <parameter name="sendAudioBuffer" value="true"/>
+            <parameter name="port" value="9090"/>
+            <parameter name="host" value="localhost"/>
+            <window h="167" visible="false" w="357" x="0" y="0"/>
         </element>
-        <element h="50.0"
-            id="AnimationKeyframePerformer-1422456065418-288"
-            module="AnimationKeyframePerformer"
-            name="AnimationKeyframePerformer" w="210.0" x="520.0" y="340.0"/>
     </elements>
     <connections>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="AudioKeyframePerformer-1365580260490-756" target="Thrift.AudioSender-1395840396355-411"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="AudioKeyframePerformer-1365580260490-756" target="MPEG4Animatable-1354266856237-722"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="PlayerOgre-1453729044987-221" target="Environment-1354266539813-112"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="AnimationKeyframePerformer-1422456065418-288" target="MPEG4Animatable-1354266856237-722"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Thrift.CommandReceiver-1395924914248-518" target="BehaviorPlanner-1527253622246-900"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="Body Head Noise-1453727992428-383" target="MPEG4Animatable-1354266856237-722"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="SimpleAUPerformer-1354616833893-982" target="LipBlender-1364482048451-657"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1354616822508-693" target="FaceKeyframePerformer-1354616860516-385"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1354616822508-693" target="LipModel-1364482028748-407"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1354616822508-693" target="AudioKeyframePerformer-1365580260490-756"/>
-        <connection connector="SignalEmitterToKeyFramePerformer"
-            source="BehaviorRealizer-1354616822508-693" target="AnimationKeyframePerformer-1422456065418-288"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BMLFileReader-1361266854998-697" target="BehaviorRealizer-1354616822508-693"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BehaviorPlanner-1527253622246-900" target="BehaviorRealizer-1354616822508-693"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FMLFileReader-1364311746395-332" target="BehaviorPlanner-1527253622246-900"/>
-        <connection connector="LipSourceForLipBlender"
-            source="LipModel-1364482028748-407" target="LipBlender-1364482048451-657"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="LipBlender-1364482048451-657" target="MPEG4Animatable-1354266856237-722"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="LipBlender-1364482048451-657" target="Thrift.FAPSender-1395840376340-6"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="MPEG4Animatable-1354266856237-722" target="Thrift.BAPSender-1395840388114-787"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4Animatable-1354266856237-722" target="Environment-1354266539813-112"/>
-        <connection connector="addLogOutput"
-            source="Logs-1361207295272-646" target="LogFrame-1361207302064-195"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="BVHFileReader-1453731406122-272" target="MPEG4Animatable-1354266856237-722"/>
         <connection connector="AUEmitterToAUPerformer"
-            source="FaceKeyframePerformer-1354616860516-385" target="SimpleAUPerformer-1354616833893-982"/>
-        <connection connector="setTTS" source="TTS-1364481783324-512" target="Cereproc TTS-1453728909564-442"/>
+            source="FaceKeyframePerformer-1545228730132-297" target="SimpleAUPerformer-1545228776323-11"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="Body Head Noise-1545232758094-182" target="MPEG4Animatable-1545228808979-301"/>
+        <connection connector="setTTS" source="TTS-1545228829579-75" target="OpenMary ClientTTS-1545228836179-501"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BehaviorPlanner-1545228689924-565" target="BehaviorRealizer-1545228702171-304"/>
+        <connection connector="LipSourceForLipBlender"
+            source="LipModel-1545228738636-406" target="LipBlender-1545228769564-988"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FMLFileReader-1545228674948-209" target="BehaviorPlanner-1545228689924-565"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4Animatable-1545228808979-301" target="Environment-1545228639037-145"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="AudioKeyframePerformer-1545228746491-323" target="MPEG4Animatable-1545228808979-301"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="AudioKeyframePerformer-1545228746491-323" target="Thrift.AudioSender-1551782070029-170"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="PlayerOgre-1545228862451-308" target="Environment-1545228639037-145"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="AnimationKeyframePerformer-1545228717780-228" target="MPEG4Animatable-1545228808979-301"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="AnimationKeyframePerformer-1545228717780-228" target="BAPSender-1551782062205-986"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="LipBlender-1545228769564-988" target="MPEG4Animatable-1545228808979-301"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-1545228776323-11" target="LipBlender-1545228769564-988"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-1545228776323-11" target="MPEG4Animatable-1545228808979-301"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-1545228776323-11" target="Thrift.FAPSender-1551782056618-620"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1545228702171-304" target="AnimationKeyframePerformer-1545228717780-228"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1545228702171-304" target="FaceKeyframePerformer-1545228730132-297"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1545228702171-304" target="LipModel-1545228738636-406"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1545228702171-304" target="AudioKeyframePerformer-1545228746491-323"/>
+        <connection connector="addLogOutput"
+            source="Logs-1545228847405-168" target="LogFrame-1545228852107-958"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BMLFileReader-1545228678860-536" target="BehaviorRealizer-1545228702171-304"/>
     </connections>
 </modulated>

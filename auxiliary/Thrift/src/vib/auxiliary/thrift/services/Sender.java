@@ -20,6 +20,8 @@ package vib.auxiliary.thrift.services;
 import vib.auxiliary.thrift.gen_java.Message;
 import vib.auxiliary.thrift.gen_java.SimpleCom;
 import vib.core.util.log.Logs;
+
+import java.net.ConnectException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.apache.thrift.protocol.TBinaryProtocol;
@@ -70,7 +72,11 @@ public abstract class Sender extends Connector<Sender> {
                 senderThread.start();
             }
         } catch (Throwable ex) {
-            System.err.println("Exception " + ex.getMessage());
+            if (ex.getCause() instanceof ConnectException) {
+                System.err.println("ConnectException : could not connect, have you tried launching Unity ?");
+            } else {
+                ex.printStackTrace();
+            }
         }
     }
     @Override

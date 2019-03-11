@@ -27,6 +27,10 @@ import vib.core.signals.Signal;
 import vib.core.signals.SignalEmitter;
 import vib.core.signals.SignalPerformer;
 import vib.core.util.Mode;
+import vib.core.util.environment.Environment;
+import vib.core.util.environment.Leaf;
+import vib.core.util.environment.Node;
+import vib.core.util.environment.TreeNode;
 import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
 import vib.core.util.log.Logs;
@@ -34,15 +38,16 @@ import vib.core.util.xml.XML;
 import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
 import java.io.File;
-import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+
 import vib.auxiliary.socialparameters.SocialDimension;
 import vib.auxiliary.socialparameters.SocialParameterEmitter;
 import vib.auxiliary.socialparameters.SocialParameterFrame;
 import vib.auxiliary.socialparameters.SocialParameterPerformer;
 import vib.core.util.CharacterManager;
-import vib.core.util.time.TimeController;
 import vib.core.util.time.Timer;
 
 /**
@@ -51,10 +56,10 @@ import vib.core.util.time.Timer;
  */
 public class CommandReceiver extends Receiver  implements IntentionEmitter, SignalEmitter, SocialParameterEmitter{
 
-   private ArrayList<IntentionPerformer> intentionPerformers;
-   private ArrayList<SocialParameterPerformer> socialParamPerformers = new ArrayList<SocialParameterPerformer>();
+    private ArrayList<IntentionPerformer> intentionPerformers;
+    private ArrayList<SocialParameterPerformer> socialParamPerformers = new ArrayList<SocialParameterPerformer>();
 
-   private ArrayList<SignalPerformer> signalPerformers;
+    private ArrayList<SignalPerformer> signalPerformers;
     private XMLParser parser;
     int cpt ;
     private CharacterManager cm;
@@ -82,69 +87,115 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
 
     @Override
     public void perform(Message m) {
-       // if(messageID>cpt){
-       //     cpt = messageID;
-        if(m.getProperties() != null && !m.getProperties().isEmpty()){
-            double dominance = Double.parseDouble(m.getProperties().get("Dominance"));
-            double liking = Double.parseDouble(m.getProperties().get("Liking"));
-            ArrayList<SocialParameterFrame> listSPF = new ArrayList<SocialParameterFrame>();
-                SocialParameterFrame spf = new SocialParameterFrame(Timer.getCurrentFrameNumber());
-                spf.setDoubleValue(SocialDimension.Dominance, dominance);
-                spf.setDoubleValue(SocialDimension.Liking, liking);
-                listSPF.add(spf);
-            for(SocialParameterPerformer spp : socialParamPerformers)
-            {
-                spp.performSocialParameter(listSPF, IDProvider.createID("Thrift command receiver"));
-            }
-            Logs.debug("attitude sent : Dominance " +dominance+"; Liking "+liking);
+        // if(messageID>cpt){
+        //     cpt = messageID;
+        switch (m.getType()) {
+            case "animID" :
+                if(m.getProperties() != null && !m.getProperties().isEmpty()){
+                    double dominance = Double.parseDouble(m.getProperties().get("Dominance"));
+                    double liking = Double.parseDouble(m.getProperties().get("Liking"));
+                    ArrayList<SocialParameterFrame> listSPF = new ArrayList<SocialParameterFrame>();
+                    SocialParameterFrame spf = new SocialParameterFrame(Timer.getCurrentFrameNumber());
+                    spf.setDoubleValue(SocialDimension.Dominance, dominance);
+                    spf.setDoubleValue(SocialDimension.Liking, liking);
+                    listSPF.add(spf);
+                    for(SocialParameterPerformer spp : socialParamPerformers)
+                    {
+                        spp.performSocialParameter(listSPF, IDProvider.createID("Thrift command receiver"));
+                    }
+                    Logs.debug("attitude sent : Dominance " +dominance+"; Liking "+liking);
+                }
+                Logs.debug("animation to play received: " + m.getString_content())  ;
+                String filename = (new File(m.getString_content())).getName().replaceAll("\\.xml$", "");
+                ID messageID = IDProvider.createID(m.getId());
+                try {
+                    XMLTree xml = parser.parseFile(m.getString_content());
+                    if (xml.getName().equalsIgnoreCase("bml")) {
+                        Mode mode = BMLTranslator.getDefaultBMLMode();
+                        setModeParametersForAnimationSignal(xml, mode);
+                        propagateSignals(BMLTranslator.BMLToSignals(xml,cm), IDProvider.createID(filename, messageID), mode);
+                    }
+                    if (xml.getName().equalsIgnoreCase("fml-apml")) {
+                        Mode mode = FMLTranslator.getDefaultFMLMode();
+                        setModeParametersForAnimationSignal(xml, mode);
+                        propagateIntentions(FMLTranslator.FMLToIntentions(xml, cm), IDProvider.createID(filename, messageID), mode);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                break;
+            case "object":
+                Environment environment = cm.getEnvironment();
+                Map<String, String> gameObjectProperties = m.getProperties();
+                // If object has already been created
+                String gameObjectId = gameObjectProperties.get("id");
+                Optional<Leaf> eventualGameObjectLeaf = environment.getListLeaf().stream().filter(leaf -> leaf.getIdentifier().equals("GameObject-" + gameObjectId)).findFirst();
+                if (eventualGameObjectLeaf.isPresent()) {
+                    Leaf gameObjectLeaf = eventualGameObjectLeaf.get();
+                    TreeNode gameObjectLeafParent = gameObjectLeaf.getParent();
+                    // Change coordinates
+                    updateNodeProperties(gameObjectLeafParent, gameObjectProperties);
+                } else {
+                    // Try get UnityObjectsNode
+                    Optional<Node> eventualUnityObjectsNode = environment.getGuests().stream().filter(node -> node.getIdentifier().equals("UnityObjectsNode")).findFirst();
+                    TreeNode unityObjectsNode;
+                    if (eventualUnityObjectsNode.isPresent()) {
+                        unityObjectsNode = (TreeNode)eventualUnityObjectsNode.get();
+                    } else {
+                        // If node has not been created, create the node
+                        unityObjectsNode = new TreeNode();
+                        unityObjectsNode.setIdentifier("UnityObjectsNode");
+                        unityObjectsNode.setGuest(true);
+                        environment.addNode(unityObjectsNode);
+                    }
+                    // Create object with node as parent
+                    TreeNode gameObjectLeafParent = new TreeNode();
+                    gameObjectLeafParent.setIdentifier("GameObject-" + gameObjectId + "Parent");
+                    updateNodeProperties(gameObjectLeafParent, gameObjectProperties);
+                    unityObjectsNode.addChildNode(gameObjectLeafParent);
+                    Leaf gameObjectLeaf = new Leaf();
+                    gameObjectLeaf.setIdentifier("GameObject-" + gameObjectId);
+                    gameObjectLeaf.setReference("GameObject-" + gameObjectId);
+                    gameObjectLeafParent.addChildNode(gameObjectLeaf);
+                    environment.addLeaf(gameObjectLeaf);
+                }
+                break;
+            default:
+                System.err.println("Error : message type not recognized in CommandReceiver. Message id : " + m.getId());
         }
-          Logs.debug("animation to play received: " + m.getString_content())  ;
-        String filename = (new File(m.getString_content())).getName().replaceAll("\\.xml$", "");
-        ID messageID = IDProvider.createID(m.getId());
-            try {
-                XMLTree xml = parser.parseFile(m.getString_content());
-                if (xml.getName().equalsIgnoreCase("bml")) {
-
-                    Mode mode = BMLTranslator.getDefaultBMLMode();
-                    if (xml.hasAttribute("composition")) {
-                        mode.setCompositionType(xml.getAttribute("composition"));
-                    }
-                    if (xml.hasAttribute("reaction_type")) {
-                        mode.setReactionType(xml.getAttribute("reaction_type"));
-                    }
-                    if (xml.hasAttribute("reaction_duration")) {
-                        mode.setReactionDuration(xml.getAttribute("reaction_duration"));
-                    }
-                    if (xml.hasAttribute("social_attitude")) {
-                        mode.setSocialAttitude(xml.getAttribute("social_attitude"));
-                    }
-
-                    propagateSignals(BMLTranslator.BMLToSignals(xml,cm), IDProvider.createID(filename, messageID), mode);
-                }
-                if (xml.getName().equalsIgnoreCase("fml-apml")) {
-
-                    Mode mode = FMLTranslator.getDefaultFMLMode();
-                    if (xml.hasAttribute("composition")) {
-                        mode.setCompositionType(xml.getAttribute("composition"));
-                    }
-                    if (xml.hasAttribute("reaction_type")) {
-                        mode.setReactionType(xml.getAttribute("reaction_type"));
-                    }
-                    if (xml.hasAttribute("reaction_duration")) {
-                        mode.setReactionDuration(xml.getAttribute("reaction_duration"));
-                    }
-                    if (xml.hasAttribute("social_attitude")) {
-                        mode.setSocialAttitude(xml.getAttribute("social_attitude"));
-                    }
-
-                    propagateIntentions(FMLTranslator.FMLToIntentions(xml, cm), IDProvider.createID(filename, messageID), mode);
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-       // }
+        // }
     }
+
+    private static void updateNodeProperties (TreeNode node, Map<String, String> gameObjectProperties) {
+        node.setCoordinates(Float.parseFloat(gameObjectProperties.get("position.x")),
+                Float.parseFloat(gameObjectProperties.get("position.y")),
+                Float.parseFloat(gameObjectProperties.get("position.z")));
+
+        node.setOrientation(Float.parseFloat(gameObjectProperties.get("quaternion.x")),
+                Float.parseFloat(gameObjectProperties.get("quaternion.y")),
+                Float.parseFloat(gameObjectProperties.get("quaternion.z")),
+                Float.parseFloat(gameObjectProperties.get("quaternion.w")));
+
+        node.setScale(Float.parseFloat(gameObjectProperties.get("scale.x")),
+                Float.parseFloat(gameObjectProperties.get("scale.y")),
+                Float.parseFloat(gameObjectProperties.get("scale.z")));
+    }
+
+    static void setModeParametersForAnimationSignal(XMLTree xml, Mode mode) {
+        if (xml.hasAttribute("composition")) {
+            mode.setCompositionType(xml.getAttribute("composition"));
+        }
+        if (xml.hasAttribute("reaction_type")) {
+            mode.setReactionType(xml.getAttribute("reaction_type"));
+        }
+        if (xml.hasAttribute("reaction_duration")) {
+            mode.setReactionDuration(xml.getAttribute("reaction_duration"));
+        }
+        if (xml.hasAttribute("social_attitude")) {
+            mode.setSocialAttitude(xml.getAttribute("social_attitude"));
+        }
+    }
+
     private void propagateSignals(List<Signal> signals, ID request, Mode mode) {
         for (SignalPerformer performer : signalPerformers) {
             performer.performSignals(signals, request, mode);

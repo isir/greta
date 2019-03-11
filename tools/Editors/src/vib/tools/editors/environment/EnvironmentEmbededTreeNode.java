@@ -187,7 +187,7 @@ public class EnvironmentEmbededTreeNode implements javax.swing.tree.MutableTreeN
     @Override
     public void removeFromParent() {
         javax.swing.tree.TreeNode parent = this.getParent();
-        if(parent != null && parent instanceof javax.swing.tree.MutableTreeNode){
+        if(parent instanceof javax.swing.tree.MutableTreeNode){
             ((javax.swing.tree.MutableTreeNode)parent).remove(this);
         }
     }

@@ -9,10 +9,6 @@ bin/ModularSave\.xml
 *.form
 \.idea/
 
-*.iml
-
-bin/Common/Lib/Internal/javadoc/
-
+**/javadoc/
 out/
-
-bin/javadoc/
+*.iml

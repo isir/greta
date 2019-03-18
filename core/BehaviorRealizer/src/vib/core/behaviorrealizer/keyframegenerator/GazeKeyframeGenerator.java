@@ -578,10 +578,11 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 TorsoSignal ts1 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
                 ts1.setDirectionShift(true);            
                 SpinePhase tp1;
+                CharacterManager staticCharacterManager = cm.getStaticInstance();
                 if(!gaze.isGazeShift()){
-                    System.out.println(cm.getStaticInstance().defaultFrame.size() );
-                    if (cm.getStaticInstance().defaultFrame.size() > 1) {
-                        TorsoKeyframe tt = (TorsoKeyframe) cm.getStaticInstance().defaultFrame.get(1);
+                    System.out.println(staticCharacterManager.defaultFrame.size() );
+                    if (staticCharacterManager.defaultFrame.size() > 1) {
+                        TorsoKeyframe tt = (TorsoKeyframe) staticCharacterManager.defaultFrame.get(1);
                         tp1 = createTorsoPhase("end", end, end, tt.verticalTorsion.value, tt.sagittalTilt.value); // ready
                     }else{
                         tp1 = createTorsoPhase("end", end, end, 0.0, 0.0); // ready
@@ -605,8 +606,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 hs1.setDirectionShift(true); 
                 SpinePhase hp1;
                 if(!gaze.isGazeShift()){
-                    if (cm.getStaticInstance().defaultFrame.size() != 0){
-                        HeadKeyframe hh = (HeadKeyframe) cm.getStaticInstance().defaultFrame.get(0);
+                    if (staticCharacterManager.defaultFrame.size() != 0){
+                        HeadKeyframe hh = (HeadKeyframe) staticCharacterManager.defaultFrame.get(0);
                         double pitch;
                         if (hh.sagittalTilt.direction != null){
                             if (hh.sagittalTilt.direction.name() == "FORWARD"){

@@ -94,6 +94,10 @@
                 <item module="Feedbacks" name="Feedbacks"/>
                 <item module="Feedbacks2Logs" name="Feedbacks2Logs"/>
             </menu>
+			<menu name="FaceToFaceConversation">
+                <item module="AgentGazeUser" name="AgentGazeUser"/>
+				<item module="ConversationalGroup" name="ConversationalGroup"/>
+            </menu>
             <menu name="Environment">
                 <item module="Environment" name="Environment"/>
                 <item module="MPEG4Animatable" name="MPEG-4 Animatable"/>
@@ -130,7 +134,6 @@
                         <item module="SSITranslator" name="SSI XML-to-Frame Translator"/>
                         <item module="SSIFilter" name="SSI XML Filter"/>
                         <item module="SSIFrameToSignal" name="SSI Frame-To-Signal Translator"/>
-						<item module="SSIFrameToGazeSignal" name="SSI Frame-To-GazeSignal Translator"/>
                         <item module="MessageLogger" name="Message Logger"/>
                         <item module="BMLCallbacksReceiver" name="BML Callbacks Receiver"/>
                     </menu>
@@ -322,10 +325,16 @@
         <module name="SSIFrameToSignal" style="VIBDefault">
             <object class="vib.auxiliary.ssi.SSIFrameToSignal" lib_id="vib_ssi"/>
         </module>
-		<module name="SSIFrameToGazeSignal" style="Signals">
-            <object class="vib.auxiliary.ssi.SSIFrameToGazeSignal" lib_id="vib_ssi"/>
-			<frame class="vib.auxiliary.ssi.gui.GazeUserGui" lib_id="vib_ssi" type="frame">
+		<module name="AgentGazeUser" style="Signals">
+            <object class="vib.auxiliary.conversationalGaze.AgentGazeUser" lib_id="vib_facetoface"/>
+			<frame class="vib.auxiliary.conversationalGaze.Gui.SetCamPos" lib_id="vib_facetoface" type="frame">
                 <link method="setPosandOrient" on="frame"/>
+            </frame>
+        </module>
+		<module name="ConversationalGroup" style="Signals">
+            <object class="vib.auxiliary.conversationalGaze.ConversationalGroup" lib_id="vib_facetoface"/>
+			<frame class="vib.auxiliary.conversationalGaze.Gui.ConversationGroup_Gui" lib_id="vib_facetoface" type="frame">
+                <link method="setGui" on="frame"/>
             </frame>
         </module>
         <module name="BehaviorRealizer" style="BehaviorRealizer">
@@ -951,7 +960,6 @@
             <needs path="./Common/Data/xml/qualifiers.xsd"/>
             <needs path="./Common/Data/xml/multimodal.dtd"/>
         </lib>
-        
         <lib id="ext_openmary_3.6" path="./Common/Lib/External/maryclient-3.6.jar"/>
         <lib id="ext_openmary_4.3" path="./Common/Lib/External/maryclient-4.3.jar"/>
         <lib id="vib_openmary" path="./Common/Lib/Internal/openMary.jar">
@@ -1134,20 +1142,47 @@
 		<lib id="vib_NN" path="./Common/Lib/Internal/NeuralNetworkEngine.jar">
             <depends lib_id="vib_util"/>
         </lib>
+		<lib id="vib_GraphicNN" path="./Common/Lib/Internal/NeuralNetworks.jar">
+            <depends lib_id="vib_NN"/>
+            <depends lib_id="vib_utilx"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_socialparameters"/>
+        </lib>
 		<lib id="vib_plancap" path="./Common/Lib/Internal/PlanCapture.jar">
             <depends lib_id="vib_util"/>
             <depends lib_id="vib_playerOgre"/>
             <depends lib_id="vib_behavior_planner"/>
             <depends lib_id="vib_intentions"/>
             <depends lib_id="vib_signals"/>
-			<depends lib_id="vib_meaningminer"/>
+			<!--<depends lib_id="vib_meaningminer"/> -->
             <depends lib_id="vib_feedbacks"/>
-            <depends lib_id="vib_social"/>
+            <!--<depends lib_id="vib_social"/> 
             <depends lib_id="vib_multilayer_attitude_planner"/>
             <depends lib_id="vib_nuance"/>
-            <depends lib_id="vib_bap2bvh"/>
+            <depends lib_id="vib_bap2bvh"/>-->
             <depends lib_id="vib_socialparameters"/>
         </lib>
+		<lib id="ode" path="./Common/Lib/Internal/ODE.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_mpeg4"/>
+            <depends lib_id="vib_animation_core"/>
+        </lib>
+		<lib id="vib_speech" path="./Common/Lib/Internal/SpeechRecognition.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_thrift"/>
+			<depends lib_id="vib_feedbacks"/>
+            <!--<depends lib_id="ext_javaFlac"/> 
+            <depends lib_id="ext_speechAPI"/> -->
+        </lib>
+		<lib id="vib_facetoface" path="./Common/Lib/Internal/ConversationalGaze.jar">
+            <depends lib_id="vib_ssi"/>
+			<depends lib_id="vib_signals"/>
+            <depends lib_id="vib_feedbacks"/>
+			<depends lib_id="vib_activemq"/>
+			<depends lib_id="vib_util"/>			
+        </lib>
+		
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>

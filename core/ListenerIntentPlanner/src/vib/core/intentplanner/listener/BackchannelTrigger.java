@@ -27,7 +27,6 @@ import vib.core.signals.SignalEmitter;
 import vib.core.signals.SignalPerformer;
 import vib.core.signals.SignalProvider;
 import vib.core.util.CharacterDependent;
-import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
 import vib.core.util.id.IDProvider;
 import vib.core.util.log.Logs;

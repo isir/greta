@@ -24,6 +24,7 @@
                 <item module="BAPFileReader" name="BAP File Reader"/>
                 <item module="oldBAP2newBAP" name="old BAP to new BAP"/>
                 <item module="Body Head Noise" name="Body Head Noise"/>
+				<item module="AUParserFileReader" name="AU parser reader"/>  
             </menu>
             <menu name="Interruptions">
                 <item module="InterruptionManager" name="Interruption Manager"/>
@@ -101,6 +102,7 @@
                 <item module="PlayerOgre" name="Player Ogre"/>
                 <item module="CaptureController" name="Capture Controller"/>
                 <item module="XuggleVideoCapture" name="Video Capture Output"/>
+				<item module="ParserCaptureController_AU" name="Parser Capture Controller AU"/>
             </menu>
             <menu name="NetworkConnections">
                 <menu name="ActiveMQ">
@@ -882,6 +884,17 @@
         <module name="AnimationKeyframePerformer" style="Animations">
             <object class="vib.core.animation.performer.AnimationKeyframePerformer" lib_id="vib_body_animation_performer"/>
         </module>
+		<module name="AUParserFileReader" style="Signals">
+            <object class="vib.core.signals.AUParserFileReader" lib_id="vib_signals"/>
+			<frame class="vib.core.utilx.gui.AUParserFileReaderController" lib_id="vib_utilx" type="frame">
+            <!-- <frame class="vib.core.signals.AUParserFileReader" lib_id="vib_utilx" type="frame"> -->
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+		<module name="ParserCaptureController_AU" style="Player">
+            <object class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plancap"/>
+            <frame type="object"/>
+        </module>
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1382,6 +1395,31 @@
             <connect from="input" method="setFMLFileReader" to="output"/>
             <disconnect from="null" method="" to="null"/>
         </connector>
+		<connector id="ParticipantsAddedintheGroup">
+            <input class="vib.auxiliary.conversationalGaze.AgentGazeUser" lib_id="vib_signals"/>
+            <output class="vib.auxiliary.conversationalGaze.ConversationalGroup" lib_id="vib_signals"/>
+            <connect from="output" method="AddParticipant" to="input"/>
+            <disconnect from="output" method="RemoveParticipant" to="input"/>
+        </connector>
+		<connector id="connectParserCaptureController_AUToAUParserFileReader" unique="true">
+            <input class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plancap"/>
+            <output class="vib.core.signals.AUParserFileReader" lib_id="vib_signals"/>
+            <connect from="input" method="setAUParserFileReader" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+		<connector id="connectAUCapturecontrollerToCapturable" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.AUCapturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.auxiliary.player.ogre.capture.Capturable" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCapturable" to="output"/>
+            <disconnect from="input" method="setCapturable" to="null"/>
+        </connector>
+        <connector id="connectAUCapturecontrollerToCaptureOutput" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.AUCapturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.auxiliary.player.ogre.capture.CaptureOutput" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCaptureOutput" to="output"/>
+            <disconnect from="input" method="setCaptureOutput" to="null"/>
+        </connector>
+		
     </connectors>
     <!-- list of styles -->
     <styles>

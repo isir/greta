@@ -100,7 +100,6 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
     
     private void setRestPosition(TorsoKeyframe phase){
         defaultPosition.verticalTorsion = new SpineDirection(phase.verticalTorsion); //phase.verticalTorsion;
-        return;
     }
     
     private TorsoKeyframe createKeyFrame(TorsoSignal sh, SpinePhase phase) {

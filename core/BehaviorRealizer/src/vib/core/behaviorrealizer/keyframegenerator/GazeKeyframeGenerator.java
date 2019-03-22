@@ -17,10 +17,8 @@ package vib.core.behaviorrealizer.keyframegenerator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 import vib.core.animation.mpeg4.MPEG4Animatable;
 import vib.core.behaviorrealizer.keyframegenerator.GazeKeyframeGenerator.HeadAngles;
@@ -51,7 +49,6 @@ import vib.core.util.audio.Mixer;
 import vib.core.util.enums.CompositionType;
 import vib.core.util.enums.GazeDirection;
 import vib.core.util.enums.Influence;
-import vib.core.util.enums.ListAgents;
 import vib.core.util.enums.Side;
 import vib.core.util.environment.Animatable;
 import vib.core.util.environment.Environment;
@@ -67,13 +64,13 @@ import vib.core.util.id.IDProvider;
 import vib.core.util.log.Logs;
 import vib.core.util.math.Quaternion;
 import vib.core.util.math.Vec3d;
-import static vib.core.util.speech.Phoneme.PhonemeType.i;
 import vib.core.util.time.Timer;
 
 /**
  *
  * @author Mathieu Chollet
  * @author André-Marie Pez
+ * @author Donatella Simonetti
  */
 public class GazeKeyframeGenerator extends KeyframeGenerator implements EnvironmentEventListener, SignalEmitter{
 
@@ -243,7 +240,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                                 currentAgent.getRotationNode().getOrientation().z(),
                                                 currentAgent.getRotationNode().getOrientation().w()));
             
-            Vec3d headActualAngle = actualheadorientation.toEulerXYZ();
+            Vec3d headActualAngle = actualheadorientation.toEulerXYZ(); // radians
             
             if (headActualAngle.y() < ha.h_yawAngle){
                 head_latency = 0.0;
@@ -2320,8 +2317,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     headPosition.setX(currentPosition.x());
                     headPosition.setZ(currentPosition.z());
                     
+                    Vec3d posTarget = new Vec3d();
                     if (gaze.getTarget() == "user"){
-                        vec2target.add(headPosition);
+                        //vec2target.add(headPosition);
+                        posTarget.setX(headPosition.x() + vec2target.x());
+                        posTarget.setY(headPosition.y() + vec2target.y());
+                        posTarget.setZ(headPosition.z() + vec2target.z());
+                    }else{
+                        posTarget = vec2target;
                     }
                     
                     // orientation skeleton
@@ -2336,11 +2339,11 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     Vec3d r_eye = Vec3d.addition(headPosition, orient.rotate(headAngles_r_eye_offset));
 
                     l_relativeEulerAngles =
-                            env.getTargetRelativeEulerAngles(vec2target, l_eye, orient);
+                            env.getTargetRelativeEulerAngles(posTarget, l_eye, orient);
                     r_relativeEulerAngles =
-                            env.getTargetRelativeEulerAngles(vec2target, r_eye, orient);
+                            env.getTargetRelativeEulerAngles(posTarget, r_eye, orient);
                     h_relativeEulerAngles =
-                            env.getTargetRelativeEulerAngles(vec2target, head, orient);
+                            env.getTargetRelativeEulerAngles(posTarget, head, orient);
 
                     l_yawAngle = l_relativeEulerAngles.x();
                     l_pitchAngle = l_relativeEulerAngles.y();
@@ -2649,8 +2652,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 
                 // headPosition has not the exact x and z position
                 headPosition.setX(currentPosition.x());
-                headPosition.setY(currentPosition.y());
-                
+                headPosition.setZ(currentPosition.z());
+                    
                 // skeleton orientation
                 Quaternion orient = new Quaternion( currentAgent.getRotationNode().getOrientation().x(), 
                                                                 currentAgent.getRotationNode().getOrientation().y(), 
@@ -2672,21 +2675,29 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 vec2target.setY(vec2target.y() + sizeTarget.y()/2); // take the center of the Target long y axis (size.y / 2)
                             }
                         }
-
-                        //TODO : adapt with scale,character meshes
-                        Vec3d shoulder = Vec3d.addition(headPosition, orient.rotate(shoulderAngles_head_offset));
-
-                        // relative angle 
-                        sh_relativeEulerAngles = env.getTargetRelativeEulerAngles(vec2target, shoulder, orient);	
-
-                        // according to the angle amplitude, the head and shoulder will contribute with different movement 
-                        this.sh_yawAngle = sh_relativeEulerAngles.x();
-                        sh_pitchAngle = 0.0;
-
                 } else {
                         //look in front
                 }
+                
+                Vec3d posTarget = new Vec3d();
+                if (gaze.getTarget() == "user"){
+                    //vec2target.add(headPosition);
+                    posTarget.setX(headPosition.x() + vec2target.x());
+                    posTarget.setY(headPosition.y() + vec2target.y());
+                    posTarget.setZ(headPosition.z() + vec2target.z());
+                }else{
+                    posTarget = vec2target;
+                }
+                
+                //TODO : adapt with scale,character meshes
+                Vec3d shoulder = Vec3d.addition(headPosition, orient.rotate(shoulderAngles_head_offset));
 
+                // relative angle 
+                sh_relativeEulerAngles = env.getTargetRelativeEulerAngles(posTarget, shoulder, orient);	
+
+                // according to the angle amplitude, the head and shoulder will contribute with different movement 
+                this.sh_yawAngle = sh_relativeEulerAngles.x();
+                sh_pitchAngle = 0.0;
             }
 
             /**

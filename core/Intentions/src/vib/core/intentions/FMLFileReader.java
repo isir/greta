@@ -67,6 +67,7 @@ public class FMLFileReader implements IntentionEmitter {
         //get the base file name to use it as requestId
         String base = (new File(fmlfilename)).getName().replaceAll("\\.xml$", "");
 
+        String fml_id = "";
         //get the intentions of the FML file
         fmlparser.setValidating(true);
         XMLTree fml = fmlparser.parseFile(fmlfilename);
@@ -77,12 +78,15 @@ public class FMLFileReader implements IntentionEmitter {
             if (fmlchild.isNamed("bml")) {   
                 //System.out.println(fmlchild.getName());
                 if(fmlchild.hasAttribute("id")){
-                    
                     mode.setBml_id(fmlchild.getAttribute("id"));
+                    fml_id = fmlchild.getAttribute("id");
                 }
             }
         }
-		if (fml.hasAttribute("composition")) {
+        if(fml.hasAttribute("id")){
+            fml_id = fml.getAttribute("id");
+        }
+        if (fml.hasAttribute("composition")) {
             mode.setCompositionType(fml.getAttribute("composition"));
         }
         if (fml.hasAttribute("reaction_type")) {
@@ -95,6 +99,7 @@ public class FMLFileReader implements IntentionEmitter {
             mode.setSocialAttitude(fml.getAttribute("social_attitude"));
         }
         ID id = IDProvider.createID(base);
+        id.setFmlID(fml_id);
         //send to all SignalPerformer added
         for (IntentionPerformer performer : performers) {
             performer.performIntentions(intentions, id, mode);

@@ -27,6 +27,9 @@ import vib.core.util.time.Temporizable;
 import vib.core.util.time.Timer;
 import java.util.ArrayList;
 import java.util.List;
+import vib.core.signals.SpeechSignal;
+import vib.core.util.CharacterManager;
+import vib.core.util.time.TimeMarker;
 
 /**
  * This class is the VIB's Feedbacks manager<br/><br/> It manages feedbacks
@@ -64,12 +67,34 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
                     //System.out.println("listStartedAnimations.isEmpty()"+listStartedAnimations.isEmpty());
                     if (!listStartedAnimations.isEmpty()) {
                         for (int i = 0; i < listStartedAnimations.size(); i++) {
+                            
                             TemporizableList tmpList = listStartedAnimations.get(i);
+
+                            if (speech_sgnl == null || speech_sgnl.getId().equals("")){
+                                List<Temporizable> array_signal = tmpList.getPendingList();
+                                for(Temporizable tze : array_signal){
+                                    if (tze instanceof SpeechSignal){
+                                        speech_sgnl = (SpeechSignal) tze;
+                                    }
+                                }
+                            }
+                            
                             tmpList.update();
+                            
+                            TimeMarker last_timemarker = tmpList.updateTimeMarker(speech_sgnl);
+                            
+                            if(last_timemarker.getName() != "" && last_timemarker.getName() != oldTimeMarker_ID){
+                                oldTimeMarker_ID = last_timemarker.getName();
+                                for (FeedbackPerformer feedbackPerformer : listFeedbackPerformer) {
+                                    feedbackPerformer.performFeedback(tmpList.getID(), "end", speech_sgnl, last_timemarker);
+                                }
+                            }
+                            
                             List<Temporizable> listLastStarted = tmpList.listLastStarted();
                             List<Temporizable> listFinished = tmpList.listFinished();
                             if (!listLastStarted.isEmpty()) {
                                 for (FeedbackPerformer feedbackPerformer : listFeedbackPerformer) {
+                                    //feedbackPerformer.performFeedback(tmpList.getID(), "started", listLastStarted, last_timemarker);
                                     feedbackPerformer.performFeedback(tmpList.getID(), "started", listLastStarted);
                                 }
                             }
@@ -78,6 +103,8 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
                                     feedbackPerformer.performFeedback(tmpList.getID(), "ended", listFinished);
                                 }
                             }
+                            
+                            
                             if (tmpList.isFinished()) {
                                 listStartedAnimations.remove(i);
                                 i--;
@@ -111,6 +138,8 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
     private List<Callback> listCallbacksWithoutAnim;
     private List<FeedbackPerformer> listFeedbackPerformer;
     private FeedbackThread feedbackThread;
+    private SpeechSignal speech_sgnl;
+    public String oldTimeMarker_ID = "";
 
     public Feedbacks() {
         listPendingAnimations = new ArrayList<TemporizableList>();
@@ -140,6 +169,8 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
         listPendingAnimations.add(new TemporizableList(requestId, temporizables));
         // Cases when a callback on this anim was received before the animation
         Callback callback = findCallback(requestId);
+        
+        //while (vib.core.util.time.Timer.getTime() < )
         if (callback != null) {
             Logs.debug("[Feedbacks] Animation already has a callback " + requestId);
             performCallback(callback);
@@ -167,6 +198,7 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
             }
         }
         if ("start".equals(callback.type())) {
+            
             tmpList = findAnim(listPendingAnimations, callback.animId());
             if (tmpList != null) {
                 tmpList.setStartTime(callback.time());
@@ -193,6 +225,7 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
                 listStartedAnimations.remove(tmpList);
             }
         }
+
         for (FeedbackPerformer feedbackPerformer : listFeedbackPerformer) {
             feedbackPerformer.performFeedback(callback);
         }

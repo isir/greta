@@ -33,6 +33,7 @@ public final class ID {
     private final String source;
     private final List<ID> parents;
     private final String pid;
+    private String fmlID = "";
 
     protected ID(long unicNumber, long time, String source, String pid){
         this.unicNumber = unicNumber;
@@ -114,6 +115,20 @@ public final class ID {
             allParentsString += "@"+parent.toString();
         }
         return allParentsString;
+    }
+
+    /**
+     * @return the fmlID
+     */
+    public String getFmlID() {
+        return fmlID;
+    }
+
+    /**
+     * @param fmlID the fmlID to set
+     */
+    public void setFmlID(String fmlID) {
+        this.fmlID = fmlID;
     }
 
 }

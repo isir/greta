@@ -62,11 +62,16 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
     protected void onMessage(String content, Map<String, Object> properties) {
         XMLTree fml = fmlParser.parseBuffer(content.toString());
 
+        String fml_id = "";
+        
         if (fml == null) {
             return;
         }
 
         Mode mode = FMLTranslator.getDefaultFMLMode();
+        if(fml.hasAttribute("id")){
+            fml_id = fml.getAttribute("id");
+        }
         if (fml.hasAttribute("composition")) {
             mode.setCompositionType(fml.getAttribute("composition"));
         }
@@ -100,6 +105,7 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
         }
 
         ID id = IDProvider.createID(contentId == null ? "FMLReceiver" : contentId.toString());
+        id.setFmlID(fml_id);
         for (IntentionPerformer performer : performers) {
             performer.performIntentions(intentions, id, mode);
         }

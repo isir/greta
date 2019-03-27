@@ -22,6 +22,7 @@ import vib.core.signals.GazeSignal;
 import vib.core.signals.Signal;
 import vib.core.signals.SignalEmitter;
 import vib.core.signals.SignalPerformer;
+import vib.core.signals.SpeechSignal;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
@@ -35,6 +36,7 @@ import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
 import vib.core.util.math.Vec3d;
 import vib.core.util.time.Temporizable;
+import vib.core.util.time.TimeMarker;
 import vib.core.util.time.Timer;
 
 /**
@@ -537,6 +539,11 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
      */
     public void setT_bothAway(double t_bothAway) {
         this.t_bothAway = t_bothAway;
+    }
+
+    @Override
+    public void performFeedback(ID id, String string, SpeechSignal ss, TimeMarker tm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

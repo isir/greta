@@ -24,7 +24,11 @@
                 <item module="BAPFileReader" name="BAP File Reader"/>
                 <item module="oldBAP2newBAP" name="old BAP to new BAP"/>
                 <item module="Body Head Noise" name="Body Head Noise"/>
-				<item module="AUParserFileReader" name="AU parser reader"/>  
+				<item module="AUParserFileReader" name="AU parser reader"/> 
+				<item module="FMLAnnotator" name="FML Annotator"/>				
+				<menu name="MeaningMiner">
+                    <item module="ImageSchemaExtractor" name="ImageSchemaExtractor"/>
+                </menu>
             </menu>
             <menu name="Interruptions">
                 <item module="InterruptionManager" name="Interruption Manager"/>
@@ -125,6 +129,7 @@
                     </menu>
                     <menu name="Receivers">
                         <item module="FMLReceiver" name="FML Receiver"/>
+						<item module="FMLReceiver_MeaningMiner" name="FMLReceiver_MeaningMiner"/>
                         <item module="BMLReceiver" name="BML Receiver"/>
                         <item module="FMLBMLFileNameReceiver" name="FML/BML Receiver (file names)"/>
                         <item module="EmotionMLReceiver" name="EmotionML Receiver"/>
@@ -408,6 +413,16 @@
         </module>
         <module name="FMLReceiver">
             <object class="vib.auxiliary.activemq.semaine.FMLReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="vib.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+		<module name="FMLReceiver_MeaningMiner">
+            <object class="vib.auxiliary.MeaningMiner.FMLReceiver_MeaningMiner" lib_id="vib_meaningminer"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
             </frame>
@@ -904,6 +919,16 @@
             <object class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plancap"/>
             <frame type="object"/>
         </module>
+		<module name="ImageSchemaExtractor" style="VIBDefault">
+            <object class="vib.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="vib_meaningminer"/>
+            <frame class="vib.auxiliary.MeaningMiner.MeaningMinerFrame" lib_id="vib_meaningminer" type="frame">
+                <link method="setModule" on="frame"/>
+            </frame>
+        </module>
+		<module name="FMLAnnotator" style="Intentions">
+            <object class="vib.auxiliary.fmlannotator.View" lib_id="vib_fml_annotator"/>
+            <frame type="object"/>
+        </module>
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1182,7 +1207,37 @@
 			<depends lib_id="vib_activemq"/>
 			<depends lib_id="vib_util"/>			
         </lib>
-		
+		<lib id="ext_stanfordparser" path="Common/Lib/External/stanfordparser/stanford-parser.jar">
+            <needs path="Common/Data/stanfordparser/englishPCFG.ser.gz"/>
+        </lib>
+		<lib id="ext_jwiwordnet" path="Common/Lib/External/edu.mit.jwi_2.4.0_jdk.jar">
+            <needs path="Common/Data/wordnet30/dict/data.adj"/>
+            <needs path="Common/Data/wordnet30/dict/data.adv"/>
+            <needs path="Common/Data/wordnet30/dict/data.noun"/>
+            <needs path="Common/Data/wordnet30/dict/data.verb"/>
+            <needs path="Common/Data/wordnet30/dict/index.adj"/>
+            <needs path="Common/Data/wordnet30/dict/index.adv"/>
+            <needs path="Common/Data/wordnet30/dict/index.noun"/>
+            <needs path="Common/Data/wordnet30/dict/index.sense"/>
+            <needs path="Common/Data/wordnet30/dict/index.verb"/>
+        </lib>
+		<lib id="ext_opennlp" path="Common/Lib/External/opennlp/opennlp-tools-1.8.2.jar"/>
+		<lib id="vib_meaningminer" path="Common/Lib/Internal/MeaningMiner.jar">
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_util"/>
+            <depends lib_id="ext_stanfordparser"/>
+            <depends lib_id="ext_jwiwordnet"/>
+            <needs path="Common/Data/MeaningMiner/imageschemaSynset.xml"/>
+            <needs path="Common/Data/MeaningMiner/imageschemaSynset.dtd"/>
+            <needs path="Common/Data/MeaningMiner/imageschemaGesture.dtd"/>
+            <needs path="Common/Data/MeaningMiner/imageschemaGesture.xml"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="ext_opennlp"/>
+        </lib>
+		<lib id="vib_fml_annotator" path="./Common/Lib/Internal/FMLAnnotator.jar">
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_util"/>
+        </lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>
@@ -1454,7 +1509,18 @@
             <connect from="input" method="setCaptureOutput" to="output"/>
             <disconnect from="input" method="setCaptureOutput" to="null"/>
         </connector>
-		
+		<connector id="connectMeaningMinerControllerToImageSchemaExtractor" unique="true">
+            <input class="vib.plancapture.MeaningMinerCaptureController" lib_id="vib_plancap"/>
+            <output class="vib.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="vib_meaningminer"/>
+            <connect from="input" method="setImageSchemaExtractor" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+		<connector id="ImageSchemaExtractorToInterpreter" unique="true">
+            <input class="vib.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="vib_meaningminer"/>
+            <output class="vib.auxiliary.MeaningMiner.ImageSchemaInterpreter" lib_id="vib_meaningminer"/>
+            <connect from="input" method="setISInterpreter" to="output"/>
+            <disconnect from="input" method="setISInterpreter" to="output"/>
+        </connector>
     </connectors>
     <!-- list of styles -->
     <styles>

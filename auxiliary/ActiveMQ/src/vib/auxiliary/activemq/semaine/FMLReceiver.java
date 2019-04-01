@@ -68,10 +68,10 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
             return;
         }
 
-        Mode mode = FMLTranslator.getDefaultFMLMode();
         if(fml.hasAttribute("id")){
             fml_id = fml.getAttribute("id");
         }
+        Mode mode = FMLTranslator.getDefaultFMLMode();
         if (fml.hasAttribute("composition")) {
             mode.setCompositionType(fml.getAttribute("composition"));
         }
@@ -84,7 +84,7 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
         if (fml.hasAttribute("social_attitude")) {
             mode.setSocialAttitude(fml.getAttribute("social_attitude"));
         }
-		for (XMLTree fmlchild : fml.getChildrenElement()) {
+        for (XMLTree fmlchild : fml.getChildrenElement()) {
             // store the bml id in the mode class
             if (fmlchild.isNamed("bml")) {   
                 //System.out.println(fmlchild.getName());

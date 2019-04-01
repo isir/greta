@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<project name="MeaningMiner" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
+
+    <property name="src.dir" location="src" />
+    <property name="classes.dir" location="compilation" />
+    
+    <property name="jar.dir" location="../../bin/Common/Lib/Internal" />
+    <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
+    
+    <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
+    <property name="stanfordparser.external.jar.dir" location="../../bin/Common/Lib/External/stanfordparser" />
+    <property name="opennlp.external.jar.dir" location="../../bin/Common/Lib/External/opennlp" />
+    
+    <target name="delete.jar.output">
+        <delete file="${jar.output}"/>
+    </target>
+    
+    <target name="delete.classes">
+        <delete dir="${classes.dir}"/>
+    </target>    
+
+    <target name="clean" depends="delete.jar.output, delete.classes"/>
+    
+    <target name="makedir">
+        <mkdir dir="${classes.dir}" />
+        <mkdir dir="${jar.dir}" />
+    </target>
+    
+    <!-- DEPENDENCY TASKS HERE -->
+    <target name="build.dependency.util" if="${need.util}">
+        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>   
+    
+    <target name="build.dependency.signals" if="${need.signals}">
+        <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.intentions" if="${need.intentions}">
+        <ant antfile="../../core/Intentions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.activemq" if="${need.activemq}">
+        <ant antfile="../ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    <!-- -->
+    
+    <path id="path.jars">
+        <fileset dir="${jar.dir}">
+            <include name="Util.jar"/>
+            <include name="Signals.jar"/>
+            <include name="Intentions.jar"/>
+            <include name="ActiveMQ.jar"/>
+        </fileset>
+        <fileset dir="${stanfordparser.external.jar.dir}">
+            <include name="stanford-parser.jar"/>
+        </fileset>
+        <fileset dir="${opennlp.external.jar.dir}">
+            <include name="opennlp-tools-1.8.2.jar"/>
+        </fileset>
+        <fileset dir="${external.jar.dir}">
+            <include name="edu.mit.jwi_2.4.0_jdk.jar"/>
+            <include name="activemq-all-5.10.0.jar"/>
+        </fileset>
+    </path>
+    
+    <target name="build.dependencies">
+        <!-- DEPENDENCY TASKS HERE -->
+        <condition property="need.util">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Util.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.util"/>
+        
+        <condition property="need.signals">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Signals.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.signals"/>
+        
+        <condition property="need.intentions">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Intentions.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.intentions"/>
+        
+        <condition property="need.activemq">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/ActiveMQ.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.activemq"/>
+        <!-- -->
+    </target>
+    
+    <target name="compile" depends="delete.classes, makedir, build.dependencies">
+        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false">
+            <classpath refid="path.jars"/>
+        </javac>
+        <copy todir="${classes.dir}">
+          <fileset dir="${src.dir}">
+            <exclude name="**/*.java"/>
+          </fileset>
+        </copy>
+    </target>
+    
+    <target name="build" depends="clean, compile">
+        <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
+            <map from="${jar.dir}" to="."/>
+            <map from="${external.jar.dir}" to="../External"/>
+            <map from="${stanfordparser.external.jar.dir}" to="../External/stanfordparser"/>
+            <map from="${opennlp.external.jar.dir}" to="../External/opennlp"/>
+        </pathconvert>
+        <jar destfile="${jar.output}" basedir="${classes.dir}">
+            <manifest>
+                <attribute name="Class-Path" value="${path.jars.manifest.converted}"/>
+            </manifest>
+        </jar>
+        <antcall target="delete.classes"/>
+    </target>
+    
+</project>

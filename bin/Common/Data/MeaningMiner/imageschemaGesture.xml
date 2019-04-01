@@ -1,0 +1,472 @@
+<?xml version="1.0"?>
+<!DOCTYPE imageschemaGesture SYSTEM "imageschemaGesture.dtd">
+<liste_imageschemas>
+<imageschema type="UP">
+<phase 
+		leftHandY="0.75"
+		rightHandY="0.75"
+		/>
+</imageschema>
+<imageschema type="DOWN">
+<phase 
+		leftHandY="-0.25"
+		rightHandY="-0.25"
+		/>
+</imageschema>
+<imageschema type="FRONT">
+<phase 
+		leftHandZ="1"
+		rightHandZ="1"
+		/>
+</imageschema>
+<imageschema type="BACK">
+<phase leftHandX="0.75"
+		rightHandX="0.15"
+		leftHandZ="0.5"
+		rightHandZ="0.5"
+		/>
+</imageschema>
+<imageschema type="LEFT">
+<phase leftHandX="0.75"
+		rightHandX="0.15"
+		/>
+</imageschema>
+<imageschema type="RIGHT">
+<phase leftHandX="0.15"
+		rightHandX="0.75"
+		/>
+</imageschema>
+<imageschema type="NEAR">
+<phase 
+		leftHandZ="0.5"
+		rightHandZ="0.5"
+		/>
+</imageschema>
+<imageschema type="FAR">
+<phase 
+		leftHandZ="0.9"
+		rightHandZ="0.9"
+		/>
+</imageschema>
+<imageschema type="CENTER">
+<phase leftHandX="0.30"
+		rightHandX="0.30"
+		leftHandY="-0.25"
+		rightHandY="-0.25"
+		leftHandZ="0.7"
+		rightHandZ="0.7"
+		/>
+</imageschema>
+<imageschema type="PERIPHERY">
+<phase leftHandX="0.75"
+		rightHandX="0.75"
+		leftHandY="0"
+		rightHandY="0"
+		leftHandZ="0.9"
+		rightHandZ="0.9"
+		/>
+</imageschema>
+<imageschema type="CONTACT">
+<phase leftHandX="0.30"
+		rightHandX="0.30"
+		leftHandY="0"
+		rightHandY="0"
+		leftHandZ="0.5"
+		rightHandZ="0.5"
+		/>
+</imageschema>
+<imageschema type="PATH">
+<phase />
+<phase />
+</imageschema>
+<imageschema type="SMALL">
+<phase leftHandX="0.25"
+		rightHandX="0.25"
+		bothHand="true"
+		/>
+</imageschema>
+<imageschema type="BIG">
+<phase leftHandX="0.75"
+		rightHandX="0.75"
+		bothHand="true"
+		/>
+</imageschema>
+<imageschema type="CONTAINMENT">
+<phase  leftHandX="0.35"
+		rightHandX="0.35"
+		leftOrientation="0.0,0.0,0.0"
+		rightOrientation="0.0,0.0,0.0"
+		leftShape="bend_angled"
+		rightShape="bend_angled"/>
+</imageschema>
+<imageschema type="IN">
+<phase leftHandX="0.35"
+		rightHandX="0"
+		leftHandY="-0.4"
+		rightHandY="0"
+		leftHandZ="0.6"
+		rightHandZ="0.6"
+		leftOrientation="0,1,0"
+		rightOrientation="0,-0.427,0.0"
+		leftShape="bend_angled"
+		rightShape="form_point1"
+		opennessRight="700"
+		bothHand="true"/>
+</imageschema>
+<imageschema type="OUT">
+<phase leftHandX="0.35"
+		rightHandX="0.50"
+		leftHandY="-0.4"
+		rightHandY="0"
+		leftHandZ="0.6"
+		rightHandZ="0.6"
+		leftOrientation="0,1,0"
+		rightOrientation="0,-0.427,0.0"
+		leftShape="bend_angled"
+		rightShape="form_point1"
+		opennessRight="700"
+		bothHand="true"/>
+</imageschema>
+<imageschema type="SURFACE">
+<phase leftHandX="0.45"
+		rightHandX="0.45"
+		leftOrientation="0.0,-1.5,0.0"
+		rightOrientation="0.0,1.5,0.0"
+		leftShape="thumb_default"
+		rightShape="thumb_default"
+		/>
+<phase leftHandX="0.75"
+		rightHandX="0.75"
+		leftOrientation="-0.7,-1.5,0.0"
+		rightOrientation="-0.7,1.5,0.0"
+		leftShape="thumb_default"
+		rightShape="thumb_default"
+		/>
+</imageschema>
+<imageschema type="FULL">
+<phase leftHandX="0.45"
+		rightHandX="0.45"
+		leftShape="form_fist"
+		rightShape="form_fist"
+		/>
+</imageschema>
+<imageschema type="EMPTY">
+<phase leftHandX="0.30"
+		rightHandX="0.30"
+		leftShape="form_openapart"
+		rightShape="form_openapart"
+		/>
+</imageschema>
+<imageschema type="CONTENT">
+<phase leftHandX="0.25"
+		rightHandX="0"
+		leftHandY="-0.4"
+		rightHandY="0"
+		leftHandZ="0.6"
+		rightHandZ="0.6"
+		leftOrientation="0,1,0"
+		rightOrientation="0,-0.427,0.0"
+		leftShape="bend_angled"
+		rightShape="bend_angled"
+		opennessRight="700"
+		bothHand="true"/>
+</imageschema>
+<imageschema type="BALANCE">
+<phase 
+		leftHandY="0"
+		rightHandY="0"
+		bothHand="true"
+		/>
+</imageschema>
+<imageschema type="UNBALANCE">
+<phase 
+		leftHandY="0.25"
+		rightHandY="-0.25"
+		bothHand="true"
+		/>
+</imageschema>
+<imageschema type="COUNTERFORCE">
+<phase leftHandX="0.75"
+		rightHandX="0.75"
+		leftOrientation="0,0,-1"
+		rightOrientation="0,0,1"
+		bothHand="true"
+		/>
+<phase leftHandX="0.45"
+		rightHandX="0.45"
+		leftOrientation="0,0,-1"
+		rightOrientation="0,0,1"
+		bothHand="true"
+		/>
+</imageschema>
+<imageschema type="COMPULSION">
+<phase 
+		leftHandY="-0.25"
+		rightHandY="-0.25"
+		
+		/>
+<phase 
+		leftHandY="0.25"
+		rightHandY="0.25"
+		/>
+</imageschema>
+<imageschema type="RESTRAINT">
+<phase 
+		leftHandZ="0.45"
+		rightHandZ="0.45"
+		leftOrientation="0,1.5,0"
+		rightOrientation="0,-1.5,0"
+		leftShape="form_fist"
+		rightShape="form_fist"
+		/>
+<phase 
+		leftHandZ="0.30"
+		rightHandZ="0.30"
+		leftOrientation="0,1.5,0"
+		rightOrientation="0,-1.5,0"
+		leftShape="form_fist"
+		rightShape="form_fist"
+		/>
+</imageschema>
+<imageschema type="ENABLEMENT">
+<phase 
+		leftHandZ="0.45"
+		rightHandZ="0.45"
+		leftOrientation="0,1.5,0"
+		rightOrientation="0,-1.5,0"
+		leftShape="form_fist"
+		rightShape="form_fist"
+		/>
+<phase 
+		leftHandZ="0.9"
+		rightHandZ="0.9"
+		leftOrientation="0,1.5,0"
+		rightOrientation="0,-1.5,0"
+		leftShape="thumb_default"
+		rightShape="thumb_default"
+		/>
+</imageschema>
+<imageschema type="BLOCKAGE">
+<phase 
+		
+		leftOrientation="1.5,-2.5,-2"
+		rightOrientation="-1.5,0.5,-1.3"
+		leftShape="thumb_default"
+		rightShape="thumb_default"
+		/>
+</imageschema>
+<imageschema type="DIVERSION">
+<phase leftHandX="0.75"
+		rightHandX="0.15"
+		leftHandZ="0.5"
+		rightHandZ="0.5"
+		/>
+</imageschema>
+<imageschema type="ATTRACTION">
+<phase 
+		leftHandZ="0.9"
+		rightHandZ="0.9"
+		leftOrientation="0,1.5,0"
+		rightOrientation="0,-1.5,0"
+		/>
+<phase 
+		leftHandZ="0.45"
+		rightHandZ="0.45"
+		leftOrientation="0,1.5,0"
+		rightOrientation="0,-1.5,0"
+		leftShape="form_fist"
+		rightShape="form_fist"
+		/>
+</imageschema>
+<imageschema type="MERGING">
+<phase leftHandX="0.75"
+		rightHandX="0.75"
+		leftOrientation="0,0,-1"
+		rightOrientation="0,0,1"
+		leftShape="form_openapart"
+		rightShape="form_openapart"
+		bothHand="true"
+		/>
+<phase leftHandX="0.30"
+		rightHandX="0.30"
+		leftOrientation="0,0,-1"
+		rightOrientation="0,0,1"
+		leftShape="form_openapart"
+		rightShape="form_openapart"
+		bothHand="true"
+		/>
+</imageschema>
+<imageschema type="COLLECTION">
+<phase leftHandX="0.20"
+		rightHandX="0.20"
+		leftOrientation="0.0,1.5,0.0"
+		rightOrientation="0.0,-1.5,0.0"
+		leftShape="form_2apart"
+		rightShape="form_3apart"
+		/>
+</imageschema>
+<imageschema type="SPLITTING">
+<phase leftHandX="0.30"
+		rightHandX="0.30"
+		
+		/>
+<phase leftHandX="0.60"
+		rightHandX="0.60"
+		
+		/>
+</imageschema>
+<imageschema type="ITERATION">
+<phase leftHandZ="0.45"
+		rightHandZ="0.45"
+		leftShape="form_point2"
+		rightShape="form_point2"/>
+<phase leftHandZ="0.9"
+		rightHandZ="0.9"
+		leftShape="form_point2"
+		rightShape="form_point2"/>
+</imageschema>
+<imageschema type="PART">
+<phase leftHandX="0.15"
+		rightHandX="0.15"
+		leftHandY="-0.25"
+		rightHandY="-0.25"
+		leftHandZ="0.7"
+		rightHandZ="0.7"
+		/>
+</imageschema>
+<imageschema type="WHOLE">
+<phase 	leftHandX="0.70"
+		rightHandX="0.70"
+		leftOrientation="0.0,1.5,0.0"
+		rightOrientation="0.0,-1.5,0.0"
+		leftShape="form_openapart"
+		rightShape="form_openapart"
+		bothHand="true"
+		/>
+</imageschema>
+<imageschema type="MASS">
+<phase  leftHandX="0.15"
+		rightHandX="0.15"
+		leftOrientation="0.0,1.5,0.0"
+		rightOrientation="0.0,-1.5,0.0"
+		leftShape="symbol_2_closed"
+		rightShape="symbol_2_closed"
+		/>
+</imageschema>
+<imageschema type="COUNT">
+<phase leftShape="form_point1"
+		rightShape="form_point1"/>
+</imageschema>
+<imageschema type="LINK">
+<phase 	leftOrientation="0,0,-1"
+		rightOrientation="0,0,1"
+		leftShape="form_point1"
+		rightShape="form_point1"
+		bothHand="true"
+		/>
+</imageschema>
+<imageschema type="MATCHING">
+<phase leftHandX="0.25"
+		rightHandX="0"
+		leftHandY="-0.4"
+		rightHandY="0"
+		leftHandZ="0.6"
+		rightHandZ="0.6"
+		leftOrientation="0,1,0"
+		rightOrientation="0,-0.427,0.0"
+		leftShape="form_open"
+		rightShape="form_open"
+		opennessRight="700"
+		bothHand="true"/>
+</imageschema>
+<imageschema type="SUPERIMPOSITION">
+<phase leftHandX="0.25"
+		rightHandX="0"
+		leftHandY="-0.4"
+		rightHandY="0"
+		leftHandZ="0.6"
+		rightHandZ="0.6"
+		leftOrientation="0,-1,0"
+		rightOrientation="0,-0.427,0.0"
+		leftShape="form_open"
+		rightShape="form_open"
+		opennessRight="700"
+		bothHand="true"/>
+</imageschema>
+<imageschema type="REMOVAL">
+<phase leftHandX="0.35"
+		rightHandX="0"
+		leftHandY="-0.4"
+		rightHandY="0"
+		leftHandZ="0.6"
+		rightHandZ="0.6"
+		leftOrientation="0,1,0"
+		rightOrientation="0,-0.427,0.0"
+		leftShape="bend_angled"
+		rightShape="symbol_2_closed"
+		opennessRight="700"
+		bothHand="true"/>
+<phase leftHandX="0.35"
+		rightHandX="0.4"
+		leftHandY="-0.3"
+		rightHandY="0.2"
+		leftHandZ="0.6"
+		rightHandZ="0.6"
+		leftOrientation="0,1,0"
+		rightOrientation="0,-0.427,0.0"
+		leftShape="bend_angled"
+		rightShape="symbol_2_closed"
+		bothHand="true"/>
+</imageschema>
+<imageschema type="BOUNDEDSPACE">
+<phase leftHandX="0.45"
+		rightHandX="0.45"
+		leftHandY="0"
+		rightHandY="0"
+		leftHandZ="0.5"
+		rightHandZ="0.5"
+		leftOrientation="0.0,0.0,0.0"
+		rightOrientation="0.0,0.0,0.0"
+		leftShape="bend_angled"
+		rightShape="bend_angled"/>
+</imageschema>
+<imageschema type="CYCLE">
+<phase leftHandZ="0.45"
+		rightHandZ="0.45"
+		leftHandY="0.6"
+		rightHandY="0.6"
+		leftOrientation="0.0,0.0,-0.9"
+		rightOrientation="0.0,0.0,0.9"
+		leftShape="form_point2"
+		rightShape="form_point2"/>
+<phase leftHandZ="0.9"
+		rightHandZ="0.9"
+		leftHandY="-0.2"
+		rightHandY="-0.2"
+		leftOrientation="0.0,0.0,-0.9"
+		rightOrientation="0.0,0.0,0.9"
+		leftShape="form_open"
+		rightShape="form_open"/>
+</imageschema>
+<imageschema type="OBJECT">
+<phase 	leftOrientation="0.0,1.5,0.0"
+		rightOrientation="0.0,-1.5,0.0"
+		leftShape="symbol_2_closed"
+		rightShape="symbol_2_closed"
+		/>
+</imageschema>
+<imageschema type="PROCESS">
+<phase leftHandZ="0.45"
+		rightHandZ="0.45"
+		leftOrientation="0.0,0.0,-0.9"
+		rightOrientation="0.0,0.0,0.9"
+		leftShape="form_point2"
+		rightShape="form_point2"/>
+<phase leftHandZ="0.9"
+		rightHandZ="0.9"
+		leftOrientation="0.0,0.0,-0.9"
+		rightOrientation="0.0,0.0,0.9"
+		leftShape="form_open"
+		rightShape="form_open"/>
+</imageschema>
+</liste_imageschemas>

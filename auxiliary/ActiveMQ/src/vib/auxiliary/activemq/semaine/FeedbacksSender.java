@@ -26,6 +26,7 @@ import vib.core.util.time.Timer;
 import java.util.HashMap;
 import java.util.List;
 import vib.core.signals.SpeechSignal;
+import vib.core.util.CharacterManager;
 import vib.core.util.time.TimeMarker;
 
 
@@ -36,17 +37,18 @@ import vib.core.util.time.TimeMarker;
 
 public class FeedbacksSender extends TextSender implements FeedbackPerformer{
 
+    private CharacterManager charactermanager;
     private HashMap<String,Object> semaineMap;
     private boolean detailedFeedbacks;
     private boolean detailsOnFace;
     private boolean detailsOnGestures;
 
-    public FeedbacksSender(){
+    public FeedbacksSender(CharacterManager cm){
         this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
              WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
-             "semaine.callback.output.feedback");
+             "semaine.callback.output.feedback", cm);
     }
-    public FeedbacksSender(String host, String port, String topic){
+    public FeedbacksSender(String host, String port, String topic, CharacterManager cm){
         super(host, port, topic);
         semaineMap = new HashMap<String,Object>();
         semaineMap.put("content-type", "utterance");
@@ -55,11 +57,12 @@ public class FeedbacksSender extends TextSender implements FeedbackPerformer{
         semaineMap.put("event", "single");
         semaineMap.put("xml", true);
         detailedFeedbacks = false; // TODO implement the possibility to use detailedFeedbacks
+        this.charactermanager = cm;
     }
 
     @Override
     public void performFeedback(ID AnimId, String Type, SpeechSignal speechsignal, TimeMarker tm) {
-        String content = "{\"fml_id\": \"" + AnimId.getFmlID() + "\"," +" \"TimeMarker_id\": \"" + tm.getName() + "\"," + " \"type\": \"" + Type + "\"" + ", \"time\": " + tm.getValue() + "}\n";
+        String content = "{" + "\"agent\": \""+ this.charactermanager.getCurrentCharacterName() + "\", " + "\"fml_id\": \"" + AnimId.getFmlID() + "\"," +" \"TimeMarker_id\": \"" + tm.getName() + "\"," + " \"type\": \"" + Type + "\"" + ", \"time\": " + tm.getValue() + "}\n";
   
         semaineMap.put("AnimId", AnimId.toString());
         semaineMap.put("type", "ongoing");
@@ -96,7 +99,7 @@ public class FeedbacksSender extends TextSender implements FeedbackPerformer{
     @Override
     public void performFeedback(Callback callback) {
         
-       String content = "{\"fml_id\": \"" + callback.animId().getFmlID() +"\", "+"\"type\": \""+callback.type()+"\", "+ "\"time\": " + String.valueOf(callback.time()) + "}";
+       String content = "{" + "\"agent\": \""+ this.charactermanager.getCurrentCharacterName() + "\", " + "\"fml_id\": \"" + callback.animId().getFmlID() +"\", "+"\"type\": \""+callback.type()+"\", "+ "\"time\": " + String.valueOf(callback.time()) + "}";
         semaineMap.put("AnimId", callback.animId().toString());
         semaineMap.put("type", callback.type());
         semaineMap.put("current-time", Timer.getTimeMillis());

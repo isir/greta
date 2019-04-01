@@ -43,6 +43,20 @@ import vib.core.util.xml.XMLTree;
  * @has - - * vib.core.util.speech.Phoneme
  */
 public class Speech implements Temporizable{
+
+    /**
+     * @return the markers
+     */
+    public List<TimeMarker> getMarkers() {
+        return markers;
+    }
+
+    /**
+     * @param markers the markers to set
+     */
+    public void setMarkers(List<TimeMarker> markers) {
+        this.markers = markers;
+    }
 //TODO add sressingpoint ? but it is only aviable with open Mary
     private List<Object> speechElements;
     private TimeMarker start;
@@ -88,7 +102,7 @@ public class Speech implements Temporizable{
     public Speech(Speech s){
         this.cm = s.cm;
         speechElements = new ArrayList<Object>(s.speechElements);
-        markers = new ArrayList<TimeMarker>(s.markers);
+        markers = new ArrayList<TimeMarker>(s.getMarkers());
         start = s.start;
         end = s.end;
         boundaries = new ArrayList<Boundary>(s.boundaries);
@@ -114,12 +128,12 @@ public class Speech implements Temporizable{
 
     @Override
     public List<TimeMarker> getTimeMarkers() {
-        return markers;
+        return getMarkers();
     }
 
     @Override
     public TimeMarker getTimeMarker(String name) {
-        for(TimeMarker tm : markers) {
+        for(TimeMarker tm : getMarkers()) {
             if(tm.getName().equals(name)) {
                 return tm;
             }
@@ -460,7 +474,7 @@ public class Speech implements Temporizable{
                         if(!((TimeMarker)o).getName().equalsIgnoreCase("start")
                                 && !((TimeMarker)o).getName().equalsIgnoreCase("end"))
                         {
-                            toReturn += "\\mrk="+markers.indexOf(o)+"\\ ";
+                            toReturn += "\\mrk="+getMarkers().indexOf(o)+"\\ ";
                         }
                     }
                     else{
@@ -518,10 +532,10 @@ public class Speech implements Temporizable{
         }
         String startSynchPoint = tree.getAttribute("start");
         if(! startSynchPoint.isEmpty()) {
-            markers.get(0).addReference(startSynchPoint);
+            getMarkers().get(0).addReference(startSynchPoint);
         }
         else {
-            markers.get(0).setValue(0);
+            getMarkers().get(0).setValue(0);
         }
 
         String endSynchPoint = tree.getAttribute("end");
@@ -731,7 +745,7 @@ public class Speech implements Temporizable{
         else{
             toReturn = XML.createTree("speech");
             toReturn.setAttribute("id", id);
-            TimeMarker start = markers.get(0);
+            TimeMarker start = getMarkers().get(0);
             SynchPoint synchRef = start.getFirstSynchPointWithTarget();
             if(synchRef != null) {
                 toReturn.setAttribute("start", synchRef.toString());
@@ -882,7 +896,7 @@ public class Speech implements Temporizable{
             indexToAdd = temp_index == -1 ? indexToAdd : temp_index+1;
         }
         if(o instanceof TimeMarker) {
-            markers.add(markers.size()-1,(TimeMarker)o);
+            getMarkers().add(getMarkers().size()-1,(TimeMarker)o);
         }
         if(o instanceof String){
             String text = (String)o;

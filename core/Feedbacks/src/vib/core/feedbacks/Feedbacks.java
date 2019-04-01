@@ -115,6 +115,8 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
             }
         }
     }
+    
+    private CharacterManager charactermanager;
     /**
      * List of Pending Animations (waiting start or death) filled with every
      * incoming Intention or Signal (by IntentionPerforme and SignalPerformer)
@@ -141,7 +143,8 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
     private SpeechSignal speech_sgnl;
     public String oldTimeMarker_ID = "";
 
-    public Feedbacks() {
+    public Feedbacks(CharacterManager cm) {
+        this.charactermanager = cm;
         listPendingAnimations = new ArrayList<TemporizableList>();
         listDeadAnimations = new ArrayList<TemporizableList>();
         listStartedAnimations = new ArrayList<TemporizableList>();

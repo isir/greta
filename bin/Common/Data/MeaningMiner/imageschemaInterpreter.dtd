@@ -1,0 +1,8 @@
+<!ELEMENT imageschemainterpreter (speech,imageschemas)>
+<!ELEMENT speech (#PCDATA|tm)*>
+<!ELEMENT tm (#PCDATA)>
+<!ELEMENT imageschemas (imageschema+)>
+<!ELEMENT imageschema (#PCDATA)>
+<!ATTLIST tm id CDATA #REQUIRED>
+<!ATTLIST imageschema value CDATA #REQUIRED
+				ref CDATA #REQUIRED>

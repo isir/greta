@@ -79,7 +79,6 @@ public class FMLFileReader implements IntentionEmitter {
                 //System.out.println(fmlchild.getName());
                 if(fmlchild.hasAttribute("id")){
                     mode.setBml_id(fmlchild.getAttribute("id"));
-                    fml_id = fmlchild.getAttribute("id");
                 }
             }
         }
@@ -98,6 +97,7 @@ public class FMLFileReader implements IntentionEmitter {
         if (fml.hasAttribute("social_attitude")) {
             mode.setSocialAttitude(fml.getAttribute("social_attitude"));
         }
+        
         ID id = IDProvider.createID(base);
         id.setFmlID(fml_id);
         //send to all SignalPerformer added

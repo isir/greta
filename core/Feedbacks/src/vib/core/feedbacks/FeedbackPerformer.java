@@ -19,6 +19,8 @@ package vib.core.feedbacks;
 import vib.core.util.id.ID;
 import vib.core.util.time.Temporizable;
 import java.util.List;
+import vib.core.signals.SpeechSignal;
+import vib.core.util.time.TimeMarker;
 
 /**
  *
@@ -26,6 +28,8 @@ import java.util.List;
  */
 public interface FeedbackPerformer {
 
+   public void performFeedback(ID AnimId, String type, SpeechSignal speechSignal, TimeMarker tm); 
+    
    public void performFeedback(ID AnimId, String type, List<Temporizable> listTmp);
 
    public void performFeedback(Callback callback);

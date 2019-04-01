@@ -1,0 +1,411 @@
+<?xml version="1.0"?>
+<!DOCTYPE imageschemaSynset SYSTEM "imageschemaSynset.dtd">
+<liste_synsets>
+<!---   SPACE   -->    
+<imageschema type="UP">
+<synset id="SID-00156601-V" type="VERB" lemma="increase"/>
+<synset id="SID-00153263-V" type="VERB" lemma="increase"/>
+<synset id="SID-01974062-V" type="VERB" lemma="lift"/>
+<synset id="SID-00158503-V" type="VERB" lemma="raise"/>
+<synset id="SID-02397637-V" type="VERB" lemma="elevate"/>
+<synset id="SID-00205885-V" type="VERB" lemma="improve"/>
+<synset id="SID-00020133-V" type="VERB" lemma="wake"/>
+<synset id="SID-01968569-V" type="VERB" lemma="rise"/>
+<synset id="SID-01983264-V" type="VERB" lemma="rise"/>
+<synset id="SID-09623038-N" type="NOUN" lemma="leader"/>
+<synset id="SID-00096333-R" type="ADV" lemma="up"/>
+<synset id="SID-02545349-A" type="ADV" lemma="increasing"/>
+</imageschema>
+<imageschema type="DOWN">
+<synset id="SID-01973125-V" type="VERB" lemma="lower"/>
+<synset id="SID-00151689-V" type="VERB" lemma="decrease"/>
+<synset id="SID-01970826-V" type="VERB" lemma="descend"/>
+<synset id="SID-08511241-N" type="NOUN" lemma="bottom"/>
+<synset id="SID-08511970-N" type="NOUN" lemma="bottom"/>
+<synset id="SID-13951215-N" type="NOUN" lemma="lowness"/>
+<synset id="SID-13951444-N" type="NOUN" lemma="inferiority"/>
+<synset id="SID-05133944-N" type="NOUN" lemma="shortness"/>
+<synset id="SID-02491961-A" type="ADJ" lemma="down"/>
+<synset id="SID-01212469-A" type="ADJ" lemma="low"/>
+<synset id="SID-02340213-A" type="ADJ" lemma="inferior"/>
+<synset id="SID-02386612-A" type="ADJ" lemma="short"/>
+</imageschema> 
+<imageschema type="FRONT">
+<synset id="SID-08573472-N" type="NOUN" lemma="front"/>
+<synset id="SID-03398467-N" type="NOUN" lemma="front"/>
+<synset id="SID-08626080-N" type="NOUN" lemma="front"/>
+<synset id="SID-00742320-V" type="VERB" lemma="communicate"/>
+<synset id="SID-00198147-A" type="ADJ" lemma="front"/>
+</imageschema>
+<imageschema type="BACK">
+<synset id="SID-05558717-N" type="NOUN" lemma="back"/>
+<synset id="SID-08629508-N" type="NOUN" lemma="rear"/>
+<synset id="SID-02004874-V" type="VERB" lemma="return"/>
+<synset id="SID-00138508-V" type="VERB" lemma="reverse"/>
+<synset id="SID-00197576-A" type="ADJ" lemma="back"/>
+<synset id="SID-00075161-R" type="ADV" lemma="back"/>
+</imageschema>
+<imageschema type="LEFT">
+<synset id="SID-08625462-N" type="NOUN" lemma="left"/>
+<synset id="SID-15120823-N" type="NOUN" lemma="past"/>
+<synset id="SID-15141693-N" type="NOUN" lemma="past"/>
+<synset id="SID-06330262-N" type="NOUN" lemma="past"/>
+<synset id="SID-05049656-N" type="NOUN" lemma="pastness"/>
+<synset id="SID-02032953-A" type="ADJ" lemma="left"/>
+<synset id="SID-01727926-A" type="ADJ" lemma="past"/>
+<synset id="SID-01730329-A" type="ADJ" lemma="last"/>
+<synset id="SID-01013279-A" type="ADJ" lemma="last"/>
+<synset id="SID-01010271-A" type="ADJ" lemma="last"/>
+<synset id="SID-01412912-A" type="ADJ" lemma="last"/>
+<synset id="SID-00004296-A" type="ADJ" lemma="last"/>
+<synset id="SID-01579128-A" type="ADJ" lemma="last"/>
+<synset id="SID-01212095-A" type="ADJ" lemma="last"/>
+<synset id="SID-00349894-A" type="ADJ" lemma="last"/>
+<synset id="SID-00230076-A" type="ADJ" lemma="last"/>
+<synset id="SID-00387666-R" type="ADV" lemma="left"/>
+</imageschema>
+<imageschema type="RIGHT">
+<synset id="SID-08625073-N" type="NOUN" lemma="right"/>
+<synset id="SID-15121625-N" type="NOUN" lemma="future"/>
+<synset id="SID-06330401-N" type="NOUN" lemma="future"/>
+<synset id="SID-03408721-N" type="NOUN" lemma="future"/>
+<synset id="SID-02031986-A" type="ADJ" lemma="right"/>
+<synset id="SID-01732270-A" type="ADJ" lemma="future"/>
+<synset id="SID-00127948-A" type="ADJ" lemma="next"/>
+<synset id="SID-00447472-A" type="ADJ" lemma="next"/>
+<synset id="SID-01294975-A" type="ADJ" lemma="next"/>
+<synset id="SID-00387828-R" type="ADV" lemma="right"/>
+</imageschema>
+<imageschema type="NEAR">
+<synset id="SID-05085572-N" type="NOUN" lemma="nearness"/>
+<synset id="SID-07530124-N" type="NOUN" lemma="closeness"/>
+<synset id="SID-05112474-N" type="NOUN" lemma="closeness"/>
+<synset id="SID-04833687-N" type="NOUN" lemma="closeness"/>
+<synset id="SID-04657407-N" type="NOUN" lemma="closeness"/>
+<synset id="SID-04655442-N" type="NOUN" lemma="closeness"/>
+<synset id="SID-00444519-A" type="ADJ" lemma="near"/>
+<synset id="SID-00409709-R" type="ADV" lemma="near"/>
+<synset id="SID-00446921-A" type="ADJ" lemma="close"/>
+</imageschema>
+<imageschema type="FAR">
+<synset id="SID-05084201-N" type="NOUN" lemma="distance"/>
+<synset id="SID-08556386-N" type="NOUN" lemma="distance"/>
+<synset id="SID-05085165-N" type="NOUN" lemma="farness"/>
+<synset id="SID-00442361-A" type="ADJ" lemma="far"/>
+<synset id="SID-00101323-R" type="ADV" lemma="far"/>
+<synset id="SID-00232936-R" type="ADV" lemma="away"/>
+<synset id="SID-00109151-R" type="ADV" lemma="there"/>
+</imageschema>
+<!--<imageschema type="CENTER">
+<synset id="SID-08523483-N" type="NOUN" lemma="center"/>
+<synset id="SID-01852701-V" type="VERB" lemma="center"/>
+<synset id="SID-00108479-R" type="ADV" lemma="here"/>
+</imageschema>
+<imageschema type="PERIPHERY">
+<synset id="SID-01881180-V" type="VERB" lemma="wander"/>
+<synset id="SID-00071840-R" type="ADV" lemma="around"/>
+<synset id="SID-00071165-R" type="ADV" lemma="around"/>
+</imageschema>
+<imageschema type="CONTACT">
+<synset id="SID-07409592-N" type="NOUN" lemma="touch"/>
+<synset id="SID-01206218-V" type="VERB" lemma="touch"/>
+</imageschema>-->
+<!--- SCALE -->
+
+<imageschema type="INTERVAL">
+<synset id="SID-05084201-N" type="NOUN" lemma="distance"/>
+<synset id="SID-15133621-N" type="NOUN" lemma="duration"/>
+<synset id="SID-15133488-N" type="NOUN" lemma="duration"/>
+<synset id="SID-05051249-N" type="NOUN" lemma="duration"/>
+<synset id="SID-05129201-N" type="NOUN" lemma="length"/>
+<synset id="SID-05051249-N" type="NOUN" lemma="length"/>
+<synset id="SID-05133107-N" type="NOUN" lemma="length"/>
+<synset id="SID-05129565-N" type="NOUN" lemma="length"/>
+<synset id="SID-03656231-N" type="NOUN" lemma="length"/>
+<synset id="SID-00028270-N" type="NOUN" lemma="time"/>
+<synset id="SID-00279835-N" type="NOUN" lemma="move"/>
+<synset id="SID-02683127-V" type="VERB" lemma="distance"/>
+<synset id="SID-00490968-V" type="VERB" lemma="time"/>
+<synset id="SID-01835496-V" type="VERB" lemma="move"/>
+</imageschema>
+<imageschema type="SMALL">
+<synset id="SID-05110583-N" type="NOUN" lemma="smallness"/>
+<synset id="SID-13458571-N" type="NOUN" lemma="decrease"/>
+<synset id="SID-07355887-N" type="NOUN" lemma="decrease"/>
+<synset id="SID-05109808-N" type="NOUN" lemma="decrease"/>
+<synset id="SID-00351638-N" type="NOUN" lemma="decrease"/>
+<synset id="SID-00360757-N" type="NOUN" lemma="subtraction"/>
+<synset id="SID-00441445-V" type="VERB" lemma="decrease"/>
+<synset id="SID-00586973-V" type="VERB" lemma="subtract"/>
+<synset id="SID-01555416-A" type="ADJ" lemma="less"/>
+<synset id="SID-02233680-A" type="ADJ" lemma="small"/>
+<synset id="SID-00099868-R" type="ADV" lemma="less"/>
+</imageschema>
+<imageschema type="BIG">
+<synset id="SID-05103946-N" type="NOUN" lemma="bigness"/>
+<synset id="SID-13754293-N" type="NOUN" lemma="increase"/>
+<synset id="SID-07356676-N" type="NOUN" lemma="increase"/>
+<synset id="SID-13497135-N" type="NOUN" lemma="increase"/>
+<synset id="SID-05108947-N" type="NOUN" lemma="increase"/>
+<synset id="SID-00363260-N" type="NOUN" lemma="increase"/>
+<synset id="SID-00182406-N" type="NOUN" lemma="addition"/>
+<synset id="SID-00156601-V" type="VERB" lemma="increase"/>
+<synset id="SID-00182551-V" type="VERB" lemma="add"/>
+<synset id="SID-01556355-A" type="ADJ" lemma="more"/>
+<synset id="SID-01382086-A" type="ADJ" lemma="big"/>
+</imageschema>
+<imageschema type="CONTAINER">
+<synset id="SID-03094503-N" type="NOUN" lemma="container"/>
+<synset id="SID-02629535-V" type="VERB" lemma="contain"/>
+</imageschema>
+<!--- PATH -->
+<imageschema type="IN">
+<synset id="SID-08588294-N" type="NOUN" lemma="inside"/>
+<synset id="SID-02471327-V" type="VERB" lemma="enroll"/>
+<synset id="SID-02020375-V" type="VERB" lemma="enter"/>
+<synset id="SID-01693799-A" type="ADJ" lemma="inside"/>
+<synset id="SID-00110815-R" type="ADV" lemma="inside"/>
+<synset id="SID-00501990-R" type="ADV" lemma="in"/>
+</imageschema>
+<imageschema type="OUT">
+<synset id="SID-08613593-N" type="NOUN" lemma="outside"/>
+<synset id="SID-02015598-V" type="VERB" lemma="exit"/>
+<synset id="SID-00173338-V" type="VERB" lemma="remove"/>
+<synset id="SID-00448680-V" type="VERB" lemma="empty"/>
+<synset id="SID-01692969-A" type="ADJ" lemma="outside"/>
+<synset id="SID-00948514-A" type="ADJ" lemma="outside"/>
+<synset id="SID-00233413-R" type="ADV" lemma="out"/>
+</imageschema>
+<imageschema type="SURFACE">
+<synset id="SID-04362025-N" type="NOUN" lemma="surface"/>
+<synset id="SID-08660339-N" type="NOUN" lemma="surface"/>
+<synset id="SID-05853449-N" type="NOUN" lemma="surface"/>
+<synset id="SID-13861050-N" type="NOUN" lemma="plane"/>
+<synset id="SID-05063349-N" type="NOUN" lemma="flatness"/>
+<synset id="SID-00463778-V" type="VERB" lemma="flatten"/>
+<synset id="SID-00659259-A" type="ADJ" lemma="flat"/>
+</imageschema>
+<imageschema type="FULL">
+<synset id="SID-04353803-N" type="NOUN" lemma="total"/>
+<synset id="SID-14461519-N" type="NOUN" lemma="fullness"/>
+<synset id="SID-00452512-V" type="VERB" lemma="fill"/>
+<synset id="SID-00515380-A" type="ADJ" lemma="full"/>
+<synset id="SID-00010466-R" type="ADV" lemma="fully"/>
+</imageschema>
+<imageschema type="EMPTY">
+<synset id="SID-03284308-N" type="NOUN" lemma="empty"/>
+<synset id="SID-14455206-N" type="NOUN" lemma="emptiness"/>
+<synset id="SID-00073343-V" type="VERB" lemma="empty"/>
+<synset id="SID-01086545-A" type="ADJ" lemma="empty"/>
+</imageschema>
+<imageschema type="CONTRAST">
+<synset id="SID-00027384-R" type="ADV" lemma="however"/>
+<synset id="SID-00028797-R" type="ADV" lemma="however"/>
+<synset id="SID-00028578-R" type="ADV" lemma="however"/>
+<synset id="SID-00028424-R" type="ADV" lemma="however"/>
+<synset id="SID-00004722-R" type="ADV" lemma="but"/>
+<synset id="SID-00119139-R" type="ADV" lemma="though"/>
+<synset id="SID-00046002-R" type="ADV" lemma="otherwise"/>
+<synset id="SID-00113082-R" type="ADV" lemma="otherwise"/>
+</imageschema>
+<!--
+<imageschema type="CONTENT">
+<synset id="SID-07955057-N" type="NOUN" lemma="content"/>
+</imageschema>-->
+<!--- FORCE -->
+<!--<imageschema type="BALANCE">
+<synset id="SID-13934900-N" type="NOUN" lemma="equilibrium"/>
+<synset id="SID-00296178-V" type="VERB" lemma="adjust"/>
+<synset id="SID-00893441-A" type="ADJ" lemma="balanced"/>
+</imageschema>
+<imageschema type="UNBALANCE">
+<synset id="SID-13934274-N" type="NOUN" lemma="disequilibrium"/>
+<synset id="SID-02673630-V" type="VERB" lemma="unbalance"/>
+<synset id="SID-00894757-A" type="ADJ" lemma="unbalanced"/>
+</imageschema>
+<imageschema type="COUNTERFORCE">
+<synset id="SID-00202284-N" type="NOUN" lemma="resistance"/>
+<synset id="SID-13854649-N" type="NOUN" lemma="opposition"/>
+<synset id="SID-01091427-V" type="VERB" lemma="confront"/>
+<synset id="SID-02666531-V" type="VERB" lemma="oppose"/>
+<synset id="SID-02070887-A" type="ADJ" lemma="opposite"/>
+</imageschema>
+<imageschema type="COMPULSION">
+<synset id="SID-07290905-N" type="NOUN" lemma="beginning"/>
+<synset id="SID-01645601-V" type="VERB" lemma="cause"/>
+<synset id="SID-00770437-V" type="VERB" lemma="induce"/>
+</imageschema>
+<imageschema type="RESTRAINT">
+<synset id="SID-01145359-N" type="NOUN" lemma="restraint"/>
+<synset id="SID-05117660-N" type="NOUN" lemma="moderation"/>
+<synset id="SID-00233335-V" type="VERB" lemma="restrain"/>
+<synset id="SID-02452885-V" type="VERB" lemma="prevent"/>
+<synset id="SID-02000118-A" type="ADJ" lemma="restrained"/>
+</imageschema>-->
+<imageschema type="ENABLEMENT">
+<synset id="SID-01207609-N" type="NOUN" lemma="help"/>
+<synset id="SID-01215902-N" type="NOUN" lemma="support"/>
+<synset id="SID-01212519-N" type="NOUN" lemma="support"/>
+<synset id="SID-05693919-N" type="NOUN" lemma="support"/>
+<synset id="SID-00971463-N" type="NOUN" lemma="support"/>
+<synset id="SID-00154433-N" type="NOUN" lemma="support"/>
+<synset id="SID-13365286-N" type="NOUN" lemma="support"/>
+<synset id="SID-04360501-N" type="NOUN" lemma="support"/>
+<synset id="SID-01017320-N" type="NOUN" lemma="support"/>
+<synset id="SID-07031752-N" type="NOUN" lemma="support"/>
+<synset id="SID-04359589-N" type="NOUN" lemma="support"/>
+<synset id="SID-13365698-N" type="NOUN" lemma="support"/>
+<synset id="SID-00752764-V" type="VERB" lemma="request"/>
+<synset id="SID-00797697-V" type="VERB" lemma="accept"/>
+<synset id="SID-02670398-V" type="VERB" lemma="serve"/>
+<synset id="SID-02453889-V" type="VERB" lemma="support"/>
+<synset id="SID-02556126-V" type="VERB" lemma="support"/>
+<synset id="SID-02423183-V" type="VERB" lemma="allow"/>
+<synset id="SID-00802318-V" type="VERB" lemma="allow"/>
+<synset id="SID-02255462-V" type="VERB" lemma="allow"/>
+<synset id="SID-00724150-V" type="VERB" lemma="allow"/>
+<synset id="SID-02721438-V" type="VERB" lemma="allow"/>
+<synset id="SID-00723545-V" type="VERB" lemma="allow"/>
+<synset id="SID-02745486-V" type="VERB" lemma="allow"/>
+<synset id="SID-02423650-V" type="VERB" lemma="allow"/>
+<synset id="SID-02319669-V" type="VERB" lemma="allow"/>
+<synset id="SID-00802946-V" type="VERB" lemma="allow"/>
+<synset id="SID-02352650-A" type="ADJ" lemma="supported"/>
+</imageschema>
+<!--
+<imageschema type="BLOCKAGE">
+<synset id="SID-01073995-N" type="NOUN" lemma="interference"/>
+<synset id="SID-00209943-N" type="NOUN" lemma="ending"/>
+<synset id="SID-00352826-V" type="VERB" lemma="end"/>
+<synset id="SID-02609764-V" type="VERB" lemma="stop"/>
+<synset id="SID-01010271-A" type="ADJ" lemma="end"/>
+</imageschema>
+<imageschema type="DIVERSION">
+<synset id="SID-00350380-N" type="NOUN" lemma="diversion"/>
+<synset id="SID-01791756-V" type="VERB" lemma="distract"/>
+</imageschema>
+-->
+<imageschema type="ATTRACTION">
+<synset id="SID-11426530-N" type="NOUN" lemma="attraction"/>
+<synset id="SID-00114431-N" type="NOUN" lemma="pull"/>
+<synset id="SID-01013367-V" type="VERB" lemma="stress"/>
+<synset id="SID-01448100-V" type="VERB" lemma="pull"/>
+<synset id="SID-01320009-V" type="VERB" lemma="harvest"/>
+<synset id="SID-00175804-V" type="VERB" lemma="harvest"/>
+</imageschema>
+<!--- UNITY_MULTIPLICITY -->
+<imageschema type="MERGING">
+<synset id="SID-00145218-N" type="NOUN" lemma="joining"/>
+<synset id="SID-00378985-N" type="NOUN" lemma="combination"/>
+<synset id="SID-00380083-N" type="NOUN" lemma="mix"/>
+<synset id="SID-01229938-N" type="NOUN" lemma="gathering"/>
+<synset id="SID-01014990-N" type="NOUN" lemma="gathering"/>
+<synset id="SID-00466651-V" type="VERB" lemma="integrate"/>
+<synset id="SID-02622234-V" type="VERB" lemma="join"/>
+<synset id="SID-00394813-V" type="VERB" lemma="blend"/>
+<synset id="SID-01380638-V" type="VERB" lemma="gather"/>
+<synset id="SID-02428924-V" type="VERB" lemma="gather"/>
+<synset id="SID-00158804-V" type="VERB" lemma="gather"/>
+<synset id="SID-00945125-V" type="VERB" lemma="gather"/>
+<synset id="SID-01330822-V" type="VERB" lemma="gather"/>
+<synset id="SID-02598143-V" type="VERB" lemma="gather"/>
+<synset id="SID-01349893-V" type="VERB" lemma="gather"/>
+<synset id="SID-01316619-V" type="VERB" lemma="gather"/>
+<synset id="SID-00157462-V" type="VERB" lemma="gather"/>
+<synset id="SID-00367685-V" type="VERB" lemma="merging"/>
+<synset id="SID-00394813-V" type="VERB" lemma="merging"/>
+<synset id="SID-00243124-V" type="VERB" lemma="merging"/>
+<synset id="SID-00612383-A" type="ADJ" lemma="merging"/>
+<synset id="SID-01199083-A" type="ADJ" lemma="mixed"/>
+</imageschema>
+<!--
+<imageschema type="COLLECTION">
+<synset id="SID-00031264-N" type="NOUN" lemma="group"/>
+<synset id="SID-02304982-V" type="VERB" lemma="collect"/>
+</imageschema>
+<imageschema type="SPLITTING">
+<synset id="SID-00383606-N" type="NOUN" lemma="separation"/>
+<synset id="SID-14414503-N" type="NOUN" lemma="separateness"/>
+<synset id="SID-02467662-V" type="VERB" lemma="split"/>
+<synset id="SID-00334186-V" type="VERB" lemma="separate"/>
+<synset id="SID-00328802-A" type="ADJ" lemma="separate"/>
+<synset id="SID-02067063-A" type="ADJ" lemma="distinct"/>
+<synset id="SID-00207668-R" type="ADV" lemma="individually"/>
+</imageschema>-->
+
+<imageschema type="ITERATION">
+<synset id="SID-01018630-N" type="NOUN" lemma="repetition"/>
+<synset id="SID-00637259-V" type="VERB" lemma="calculate"/>
+<synset id="SID-00343334-V" type="VERB" lemma="recur"/>
+<synset id="SID-00176880-R" type="ADV" lemma="repeatedly"/>
+<synset id="SID-00047534-R" type="ADV" lemma="also"/>
+<synset id="SID-00339866-R" type="ADV" lemma="fifthly"/>
+<synset id="SID-00344771-R" type="ADV" lemma="fourthly"/>
+<synset id="SID-00102986-R" type="ADV" lemma="thirdly"/>
+<synset id="SID-00102881-R" type="ADV" lemma="secondly"/>
+<synset id="SID-00102736-R" type="ADV" lemma="firstly"/>
+</imageschema>
+<!--<imageschema type="PART">
+<synset id="SID-13809207-N" type="NOUN" lemma="part"/>
+<synset id="SID-01557774-V" type="VERB" lemma="part"/>
+</imageschema>-->
+<imageschema type="WHOLE">
+<synset id="SID-00003553-N" type="NOUN" lemma="whole"/>
+<synset id="SID-02620587-V" type="VERB" lemma="constitute"/>
+</imageschema>
+<!--
+<imageschema type="MASS">
+<synset id="SID-00033615-N" type="NOUN" lemma="measure"/>
+<synset id="SID-05026843-N" type="NOUN" lemma="weight"/>
+<synset id="SID-00670261-V" type="VERB" lemma="judge"/>
+<synset id="SID-01190683-A" type="ADJ" lemma="heavy"/>
+<synset id="SID-00176654-R" type="ADV" lemma="heavily"/>
+</imageschema>
+<imageschema type="COUNT">
+<synset id="SID-13582013-N" type="NOUN" lemma="number"/>
+<synset id="SID-00948071-V" type="VERB" lemma="count"/>
+</imageschema>-->
+<imageschema type="LINK">
+<synset id="SID-00031921-N" type="NOUN" lemma="relation"/>
+<synset id="SID-02622234-V" type="VERB" lemma="join"/>
+<synset id="SID-00713167-V" type="VERB" lemma="link"/>
+</imageschema>
+<!--- IDENTITY -->
+<!--<imageschema type="MATCHING">
+<synset id="SID-05695554-N" type="NOUN" lemma="equivalent"/>
+<synset id="SID-00417001-V" type="VERB" lemma="match"/>
+<synset id="SID-01486854-A" type="ADJ" lemma="matching"/>
+<synset id="SID-00138060-R" type="ADV" lemma="similarly"/>
+</imageschema>
+<imageschema type="SUPERIMPOSITION">
+<synset id="SID-02688794-V" type="VERB" lemma="overlap"/>
+<synset id="SID-00162688-V" type="VERB" lemma="replace"/>
+<synset id="SID-01207951-V" type="VERB" lemma="cover"/>
+</imageschema>-->
+<!--- EXISTENCE -->
+<!--<imageschema type="REMOVAL">
+<synset id="SID-00391599-N" type="NOUN" lemma="removal"/>
+<synset id="SID-00173338-V" type="VERB" lemma="remove"/>
+<synset id="SID-00451155-A" type="ADJ" lemma="removed"/>
+</imageschema>
+<imageschema type="BOUNDEDSPACE">
+<synset id="SID-05661996-N" type="NOUN" lemma="system"/>
+</imageschema>
+<imageschema type="CYCLE">
+<synset id="SID-15287830-N" type="NOUN" lemma="cycle"/>
+<synset id="SID-00343771-V" type="VERB" lemma="cycle"/>
+</imageschema>-->
+<imageschema type="OBJECT">
+<synset id="SID-00001740-N" type="NOUN" lemma="entity"/>
+<synset id="SID-00940384-V" type="VERB" lemma="express"/>
+<synset id="SID-01617192-V" type="VERB" lemma="make"/>
+<synset id="SID-02603699-V" type="VERB" lemma="exist"/>
+</imageschema>
+<!--
+<imageschema type="PROCESS">
+<synset id="SID-00029378-N" type="NOUN" lemma="event"/>
+<synset id="SID-00339934-V" type="VERB" lemma="happen"/>
+</imageschema>
+-->
+</liste_synsets>
+

@@ -70,6 +70,8 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
 
         if(fml.hasAttribute("id")){
             fml_id = fml.getAttribute("id");
+        }else{
+            fml_id = "fml_1";
         }
         Mode mode = FMLTranslator.getDefaultFMLMode();
         if (fml.hasAttribute("composition")) {

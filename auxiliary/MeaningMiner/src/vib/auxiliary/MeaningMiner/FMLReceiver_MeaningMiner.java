@@ -175,6 +175,8 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         }
         if(fml.hasAttribute("id")){
             fml_id = fml.getAttribute("id");
+        }else{
+            fml_id = "fml_1";
         }
         
         for (XMLTree fmlchild : fml.getChildrenElement()) {

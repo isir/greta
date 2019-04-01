@@ -1805,4 +1805,331 @@
 			</core>
 		</constraints>
 	</behaviorset>
+	
+	<!-- Meaning Miner behaviorsets -->
+	<behaviorset name="imageschema-object">
+		<signals>
+			<signal id="1" name="imageschema=OBJECT_Ges_B" modality="gesture">
+				<alternative name="imageschema=OBJECT_Ges_L" probability="0.33"/>
+				<alternative name="imageschema=OBJECT_Ges_R" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-up">
+		<signals>
+			<signal id="1" name="imageschema=UP_Ges_B" modality="gesture">
+				<alternative name="imageschema=UP_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=UP_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-down">
+		<signals>
+			<signal id="1" name="imageschema=DOWN_Ges_B" modality="gesture">
+				<alternative name="imageschema=DOWN_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=DOWN_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-full">
+		<signals>
+			<signal id="1" name="imageschema=FULL_Ges_B" modality="gesture">
+				<alternative name="imageschema=FULL_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=FULL_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-empty">
+		<signals>
+			<signal id="1" name="imageschema=EMPTY_Ges_B" modality="gesture">
+				<alternative name="imageschema=EMPTY_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=EMPTY_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-left">
+		<signals>
+			<signal id="1" name="imageschema=LEFT_Ges_B" modality="gesture">
+				<alternative name="imageschema=LEFT_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=LEFT_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-right">
+		<signals>
+			<signal id="1" name="imageschema=RIGHT_Ges_B" modality="gesture">
+				<alternative name="imageschema=RIGHT_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=RIGHT_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-front">
+		<signals>
+			<signal id="1" name="imageschema=FRONT_Ges_B" modality="gesture">
+				<alternative name="imageschema=FRONT_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=FRONT_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-back">
+		<signals>
+			<signal id="1" name="imageschema=BACK_Ges_B" modality="gesture">
+				<alternative name="imageschema=BACK_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=BACK_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-near">
+		<signals>
+			<signal id="1" name="imageschema=NEAR_Ges_B" modality="gesture">
+				<alternative name="imageschema=NEAR_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=NEAR_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-far">
+		<signals>
+			<signal id="1" name="imageschema=FAR_Ges_B" modality="gesture">
+				<alternative name="imageschema=FAR_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=FAR_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-interval">
+		<signals>
+			<signal id="1" name="imageschema=INTERVAL_Ges_B" modality="gesture">
+				<alternative name="imageschema=INTERVAL_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=INTERVAL_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-big">
+		<signals>
+			<signal id="1" name="imageschema=BIG_Ges_B" modality="gesture">
+				<alternative name="imageschema=BIG_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=BIG_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-small">
+		<signals>
+			<signal id="1" name="imageschema=SMALL_Ges_B" modality="gesture">
+				<alternative name="imageschema=SMALL_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=SMALL_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-container">
+		<signals>
+			<signal id="1" name="imageschema=CONTAINER_Ges_B" modality="gesture">
+				<alternative name="imageschema=CONTAINER_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=CONTAINER_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-in">
+		<signals>
+			<signal id="1" name="imageschema=IN_Ges_B" modality="gesture">
+				<alternative name="imageschema=IN_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=IN_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-out">
+		<signals>
+			<signal id="1" name="imageschema=OUT_Ges_B" modality="gesture">
+				<alternative name="imageschema=OUT_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=OUT_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-surface">
+		<signals>
+			<signal id="1" name="imageschema=SURFACE_Ges_B" modality="gesture">
+				<alternative name="imageschema=SURFACE_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=SURFACE_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-attraction">
+		<signals>
+			<signal id="1" name="imageschema=ATTRACTION_Ges_B" modality="gesture">
+				<alternative name="imageschema=ATTRACTION_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=ATTRACTION_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-enablement">
+		<signals>
+			<signal id="1" name="imageschema=ENABLEMENT_Ges_B" modality="gesture">
+				<alternative name="imageschema=ENABLEMENT_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=ENABLEMENT_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-iteration">
+		<signals>
+			<signal id="1" name="imageschema=ITERATION_Ges_B" modality="gesture">
+				<alternative name="imageschema=ITERATION_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=ITERATION_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-contrast">
+		<signals>
+			<signal id="1" name="imageschema=CONTRAST_Ges_B" modality="gesture">
+				<alternative name="imageschema=CONTRAST_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=CONTRAST_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-merging">
+		<signals>
+			<signal id="1" name="imageschema=MERGING_Ges_B" modality="gesture">
+				<alternative name="imageschema=MERGING_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=MERGING_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-link">
+		<signals>
+			<signal id="1" name="imageschema=LINK_Ges_B" modality="gesture">
+				<alternative name="imageschema=LINK_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=LINK_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-whole">
+		<signals>
+			<signal id="1" name="imageschema=WHOLE_Ges_B" modality="gesture">
+				<alternative name="imageschema=WHOLE_Ges_R" probability="0.33"/>
+				<alternative name="imageschema=WHOLE_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
 </behaviorsets>

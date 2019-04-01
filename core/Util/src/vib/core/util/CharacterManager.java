@@ -53,7 +53,6 @@ public class CharacterManager {
     private String id;
     private TTS tts;
     
-    public List<Object> defaultFrame = new ArrayList<Object>();
     
     //public static  List<IniParameter> CurrentPosition = Arrays.asList(new IniParameter[13]);
     // Hashmap to store for each agent the current position of each body part

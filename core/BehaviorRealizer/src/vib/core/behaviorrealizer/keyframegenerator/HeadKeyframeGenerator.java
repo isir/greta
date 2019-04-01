@@ -160,8 +160,6 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
         defaultPosition.lateralRoll = new SpineDirection(phase.lateralRoll);
         defaultPosition.sagittalTilt = new SpineDirection(phase.sagittalTilt);
         defaultPosition.verticalTorsion = new SpineDirection(phase.verticalTorsion);
-        
-        CharacterManager.getStaticInstance().defaultFrame.add(0, (Object) defaultPosition);
     }
 
     /**
@@ -316,5 +314,12 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
      */
     public HeadKeyframe getDefaultPosition() {
         return defaultPosition;
+    }
+
+    /**
+     * @param defaultPosition the defaultPosition to set
+     */
+    public void setDefaultPosition(HeadKeyframe defaultPosition) {
+        this.defaultPosition = defaultPosition;
     }
 }

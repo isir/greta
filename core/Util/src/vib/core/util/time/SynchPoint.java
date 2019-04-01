@@ -28,6 +28,13 @@ package vib.core.util.time;
 public class SynchPoint {
 
     /**
+     * @param offset the offset to set
+     */
+    public void setOffset(double offset) {
+        this.offset = offset;
+    }
+
+    /**
      * Time constraint : is around a time but not after
      */
     public static final byte BEFORE = -1;
@@ -156,7 +163,7 @@ public class SynchPoint {
      */
     public void setTimeMarker(TimeMarker timeMarker, double offset){
         this.target = timeMarker;
-        this.offset = offset;
+        this.setOffset(offset);
     }
 
     /**
@@ -268,7 +275,7 @@ public class SynchPoint {
             synchPoint = synchPoint.substring(0, first_index)+"+0+"+synchPoint.substring(last_index);
         }
         synchPoint = synchPoint.replaceAll(" ", "");
-        offset = valueOf(synchPoint);
+        setOffset(valueOf(synchPoint));
     }
 
     /**

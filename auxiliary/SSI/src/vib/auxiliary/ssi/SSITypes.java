@@ -95,50 +95,51 @@ public class SSITypes {
         prosody_msspeech_function_confidence,                       // Double, [0..1] representing the recognition confidence of the keyword (the function value) (if "semantics_prolog" option is used in SSI), otherwise -1 (if option "keyword" is used in SSI). 
         head_position_x,                                            // Double, coordinates in relation to camera
         head_position_y, // 55                                      // Double, coordinates in relation to camera
+        head_position_z,                                            // Double, coordinates in relation to camera *************************************************
         head_orientation_roll,                                      // Double, coordinates from Kinect SDK [-90,90] -91 = invalid value
         head_orientation_pitch,                                     // Double, coordinates from Kinect SDK [-90,90] -91 = invalid value
         head_orientation_yaw,                                       // Double, coordinates from Kinect SDK [-90,90] -91 = invalid value
         head_focus,                                                 // Double [0..1] where 1 = focused head position (centered), 0 = looking away, .. between values possible
-        head_tilt, // 60                                            // Double [0..1] where 1 = tilted head, 0 = straight head, .. between values possible
+        head_tilt, // 61                                            // Double [0..1] where 1 = tilted head, 0 = straight head, .. between values possible
         head_nod_cat,                                               // Integer, 1 = yes head nod, 0 = no head nod
         head_shake_cat,                                             // Integer, 1 = yes head shake, 0 = no head shake
         head_smile,                                                 // Double, values 0 - ~100
         body_posture_lean,                                          // Double, [0..1] where 1 = front, 0.5 = center, 0 = back
-        body_arms_openness, // 65                                   // Double [0..1] where 1  = open, 0 = closed, .. between values possible
+        body_arms_openness, // 66                                   // Double [0..1] where 1  = open, 0 = closed, .. between values possible
         body_overall_activity,                                      // Double, [0..50?] where the movement is in 30 second timespan
         body_hands_energy,                                          // Double, [0..1?] where it represents the energy of hand movement
         body_gesture_arms_open,                                     // Integer, where 1 = present, 0 = not present
         body_gesture_arms_crossed,                                  // Integer, where 1 = present, 0 = not present
-        body_gesture_left_hand_head_touch, // 70                    // Integer, where 1 = present, 0 = not present
+        body_gesture_left_hand_head_touch, // 71                    // Integer, where 1 = present, 0 = not present
         body_gesture_right_hand_head_touch,                         // Integer, where 1 = present, 0 = not present
         body_gesture_lean_front,                                    // Integer, where 1 = present, 0 = not present
-        body_gesture_lean_back, // 73                               // Integer, where 1 = present, 0 = not present
+        body_gesture_lean_back, // 74                               // Integer, where 1 = present, 0 = not present
 
         agender_active,                                             // Integer, where 1 = present, 0 = not present
-        agender_gender_male, // 75                                  // Double, [0..1] representing the probability of the user being male
+        agender_gender_male, // 76                                  // Double, [0..1] representing the probability of the user being male
         agender_gender_female,                                      // Double, [0..1] representing the probability of the user being female
         agender_gender_child,                                       // Double, [0..1] representing the probability of the user being child
         agender_age_child,                                          // Double, [0..1] representing the probability of the user being child
         agender_age_youth,                                          // Double, [0..1] representing the probability of the user being youth
-        agender_age_adult, // 80                                    // Double, [0..1] representing the probability of the user being adult
+        agender_age_adult, // 81                                    // Double, [0..1] representing the probability of the user being adult
         agender_age_senior,                                         // Double, [0..1] representing the probability of the user being senior
 
         emax_face1_id,                                              // Integer, id of the first face, -1 = not present, >= 0 face id
         emax_face1_neutral,                                         // Double, if positive emotion is present
-        emax_face1_anger, // 85                                     // -----
+        emax_face1_anger, // 86                                     // -----
         emax_face1_disgust,                                         // -----
         emax_face1_fear,                                            // -----
         emax_face1_happiness,                                       // -----
         emax_face1_sadness,                                         // -----
-        emax_face1_surprised, // 90                                 // -----
+        emax_face1_surprised, // 91                                 // -----
         emax_face2_id,                                              // Integer, id of the second face, -1 = not present, >= 0 face id
         emax_face2_neutral,                                         // Double, if positive emotion is present
         emax_face2_anger,                                           // -----
         emax_face2_disgust,                                         // -----
-        emax_face2_fear, // 95                                      // -----
+        emax_face2_fear, // 96                                      // -----
         emax_face2_happiness,                                       // -----
         emax_face2_sadness,                                         // -----
-        emax_face2_surprised; // 98                                 // -----
+        emax_face2_surprised; // 99                                 // -----
 
 
         // public static final int NUM_SSI_FEATURES = 73; // This is the number of features provided by SSI, note that the null_ssi item is excluded from the count

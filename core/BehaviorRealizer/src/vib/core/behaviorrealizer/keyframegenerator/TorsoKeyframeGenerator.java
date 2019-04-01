@@ -52,7 +52,7 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
             TorsoKeyframe startKeyframe = null;
 
             if(keyframes.isEmpty()) {
-                startKeyframe = new TorsoKeyframe(defaultPosition);
+                startKeyframe = new TorsoKeyframe(getDefaultPosition());
             }
             else if(keyframes.peekLast().getOffset()<=torso.getPhases().get(0).getStartTime()){
                     startKeyframe = new TorsoKeyframe(keyframes.peekLast());
@@ -100,8 +100,6 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
     
     private void setRestPosition(TorsoKeyframe phase){
         defaultPosition.verticalTorsion = new SpineDirection(phase.verticalTorsion); //phase.verticalTorsion;
-        CharacterManager.getStaticInstance().defaultFrame.add(1, (Object) defaultPosition);
-        return;
     }
     
     private TorsoKeyframe createKeyFrame(TorsoSignal sh, SpinePhase phase) {
@@ -158,5 +156,19 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
         //first.lateralRoll.add(second.lateralRoll);
         //first.sagittalTilt.add(second.sagittalTilt);
         first.verticalTorsion.add(second.verticalTorsion);
+    }
+
+    /**
+     * @return the defaultPosition
+     */
+    public TorsoKeyframe getDefaultPosition() {
+        return defaultPosition;
+    }
+
+    /**
+     * @param defaultPosition the defaultPosition to set
+     */
+    public void setDefaultPosition(TorsoKeyframe defaultPosition) {
+        this.defaultPosition = defaultPosition;
     }
 }

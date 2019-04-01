@@ -230,6 +230,7 @@ public class SSIFrame extends AnimationParametersFrame<SSI> {
                 "---- HEAD ----\n" +
                 "Head position X [" + this.getDoubleValue(SSIFeatureNames.head_position_x) + "]\n" +
                 "Head position Y [" + this.getDoubleValue(SSIFeatureNames.head_position_y) + "]\n" +
+                "Head position Z [" + this.getDoubleValue(SSIFeatureNames.head_position_z) + "]\n" + // ************** z coordinate adde **********
                 "Head orientation roll [" + this.getDoubleValue(SSIFeatureNames.head_orientation_roll) + "]\n" +
                 "Head orientation pitch [" + this.getDoubleValue(SSIFeatureNames.head_orientation_pitch) + "]\n" +
                 "Head orientation yaw [" + this.getDoubleValue(SSIFeatureNames.head_orientation_yaw) + "]\n" +

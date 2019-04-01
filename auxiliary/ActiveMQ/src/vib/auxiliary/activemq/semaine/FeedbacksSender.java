@@ -25,6 +25,10 @@ import vib.core.util.time.Temporizable;
 import vib.core.util.time.Timer;
 import java.util.HashMap;
 import java.util.List;
+import vib.core.signals.SpeechSignal;
+import vib.core.util.CharacterManager;
+import vib.core.util.time.TimeMarker;
+
 
 /**
  *
@@ -33,17 +37,18 @@ import java.util.List;
 
 public class FeedbacksSender extends TextSender implements FeedbackPerformer{
 
+    private CharacterManager charactermanager;
     private HashMap<String,Object> semaineMap;
     private boolean detailedFeedbacks;
     private boolean detailsOnFace;
     private boolean detailsOnGestures;
 
-    public FeedbacksSender(){
+    public FeedbacksSender(CharacterManager cm){
         this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
              WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
-             "semaine.callback.output.feedback");
+             "semaine.callback.output.feedback", cm);
     }
-    public FeedbacksSender(String host, String port, String topic){
+    public FeedbacksSender(String host, String port, String topic, CharacterManager cm){
         super(host, port, topic);
         semaineMap = new HashMap<String,Object>();
         semaineMap.put("content-type", "utterance");
@@ -52,29 +57,52 @@ public class FeedbacksSender extends TextSender implements FeedbackPerformer{
         semaineMap.put("event", "single");
         semaineMap.put("xml", true);
         detailedFeedbacks = false; // TODO implement the possibility to use detailedFeedbacks
+        this.charactermanager = cm;
     }
 
     @Override
-    public void performFeedback(ID AnimId, String Type, List<Temporizable> listTmp) {
-        String content = Type + "\n";
-        for(Temporizable tmp : listTmp){
-            content += tmp.getId() + "\n" + tmp.toString() + "\n";
-        }
+    public void performFeedback(ID AnimId, String Type, SpeechSignal speechsignal, TimeMarker tm) {
+        String content = "{" + "\"agent\": \""+ this.charactermanager.getCurrentCharacterName() + "\", " + "\"fml_id\": \"" + AnimId.getFmlID() + "\"," +" \"TimeMarker_id\": \"" + tm.getName() + "\"," + " \"type\": \"" + Type + "\"" + ", \"time\": " + tm.getValue() + "}\n";
+  
         semaineMap.put("AnimId", AnimId.toString());
         semaineMap.put("type", "ongoing");
         semaineMap.put("current-time", Timer.getTimeMillis());
         semaineMap.put("content-id", AnimId.toString());
         semaineMap.put("usertime", Timer.getTimeMillis());
         semaineMap.put("content-creation-time", Timer.getTimeMillis());
+        
         this.send(content, semaineMap);
+    }
+    
+    @Override
+    public void performFeedback(ID AnimId, String Type, List<Temporizable> listTmp) {
+        
+        // information about start and end of each gesture, facial expression
+        // if you want this you should be sure that the format of the string sent as feedback will be in the json format
+        // How it is implemented now it sent more id in the same sting and this it is not good so it need to be changed
+        
+        /*String content = "{\"type\": \"" +Type + "\",\n";
+        for(Temporizable tmp : listTmp){
+            content += "\"id\": \"" + tmp.getId() + "\",\n" + "\"time\": " + tmp.toString() + "}\n";
+        }
+        System.out.println(content);
+        semaineMap.put("AnimId", AnimId.toString());
+        semaineMap.put("type", "ongoing");
+        semaineMap.put("current-time", Timer.getTimeMillis());
+        semaineMap.put("content-id", AnimId.toString());
+        semaineMap.put("usertime", Timer.getTimeMillis());
+        semaineMap.put("content-creation-time", Timer.getTimeMillis());
+        
+        this.send(content, semaineMap);*/
      }
 
     @Override
     public void performFeedback(Callback callback) {
-       String content=callback.animId()+" "+callback.type()+" "+String.valueOf(callback.time());
-         semaineMap.put("AnimId", callback.animId().toString());
+        
+       String content = "{" + "\"agent\": \""+ this.charactermanager.getCurrentCharacterName() + "\", " + "\"fml_id\": \"" + callback.animId().getFmlID() +"\", "+"\"type\": \""+callback.type()+"\", "+ "\"time\": " + String.valueOf(callback.time()) + "}";
+        semaineMap.put("AnimId", callback.animId().toString());
         semaineMap.put("type", callback.type());
-         semaineMap.put("current-time", Timer.getTimeMillis());
+        semaineMap.put("current-time", Timer.getTimeMillis());
         semaineMap.put("content-id", callback.animId().toString());
         semaineMap.put("usertime", Timer.getTimeMillis());
         semaineMap.put("content-creation-time", Timer.getTimeMillis());

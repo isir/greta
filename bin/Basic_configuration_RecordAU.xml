@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modulated>
+    <elements>
+        <element h="50.0" id="IniManager-1544700691170-189"
+            module="IniManager" name="IniManager" w="80.0" x="330.0" y="20.0">
+            <parameter name="file" value="vib.ini"/>
+            <window h="532" visible="false" w="505" x="0" y="0"/>
+        </element>
+        <element h="50.0" id="Logs-1544700696093-682" module="Logs"
+            name="Logs" w="90.0" x="430.0" y="20.0">
+            <parameter name="debug" value="true"/>
+            <parameter name="warning" value="true"/>
+            <parameter name="error" value="true"/>
+            <parameter name="info" value="true"/>
+            <window h="532" visible="false" w="505" x="0" y="0"/>
+        </element>
+        <element h="50.0" id="LogFrame-1544700702468-724"
+            module="LogFrame" name="LogFrame" w="80.0" x="540.0" y="20.0">
+            <parameter name="blackBackground" value="false"/>
+            <window h="436" visible="false" w="618" x="2345" y="252"/>
+        </element>
+        <element h="500.0" id="Environment-1544700713383-564"
+            module="Environment" name="Environment" w="720.0" x="30.0" y="80.0">
+            <element h="440.0" id="CharacterManager-1544700726358-960"
+                module="CharacterManager" name="CharacterManager"
+                w="570.0" x="50.0" y="40.0">
+                <parameter name="character_name" value="CAMILLE"/>
+                <window h="532" visible="false" w="505" x="0" y="0"/>
+                <element h="160.0"
+                    id="BehaviorPlanner-1544700734561-356"
+                    module="BehaviorPlanner" name="Behavior Planner"
+                    w="80.0" x="40.0" y="130.0">
+                    <window h="121" visible="false" w="172" x="0" y="0"/>
+                </element>
+                <element h="40.0"
+                    id="AnimationKeyframePerformer-1544700747777-220"
+                    module="AnimationKeyframePerformer"
+                    name="Animation Keyframe Performer" w="190.0"
+                    x="240.0" y="100.0"/>
+                <element h="50.0"
+                    id="FaceKeyframePerformer-1544700752898-144"
+                    module="FaceKeyframePerformer"
+                    name="Face Keyframe Performer" w="90.0" x="320.0" y="270.0">
+                    <parameter name="blinking" value="true"/>
+                </element>
+                <element h="50.0" id="LipModel-1544700770889-684"
+                    module="LipModel" name="Lip Model" w="90.0"
+                    x="240.0" y="210.0"/>
+                <element h="40.0"
+                    id="AudioKeyframePerformer-1544700783338-431"
+                    module="AudioKeyframePerformer"
+                    name="Audio Keyframe Performer" w="190.0" x="320.0" y="400.0"/>
+                <element h="50.0"
+                    id="SimpleAUPerformer-1544700795765-328"
+                    module="SimpleAUPerformer" name="SimpleAUPerformer"
+                    w="80.0" x="350.0" y="150.0">
+                    <window h="339" visible="false" w="416" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="LipBlender-1544700803251-512"
+                    module="LipBlender" name="Lip Blender" w="80.0"
+                    x="430.0" y="330.0"/>
+                <element h="180.0"
+                    id="MPEG4Animatable-1544700808257-513"
+                    module="MPEG4Animatable" name="MPEG4 Animatable"
+                    w="80.0" x="470.0" y="120.0">
+                    <parameter name="posX" value="-1.0"/>
+                    <parameter name="scaleX" value="1.0"/>
+                    <parameter name="posY" value="0.0"/>
+                    <parameter name="scaleY" value="1.0"/>
+                    <parameter name="posZ" value="-1.0"/>
+                    <parameter name="rotX" value="0.0"/>
+                    <parameter name="rotW" value="0.7071067811865476"/>
+                    <parameter name="rotZ" value="0.0"/>
+                    <parameter name="rotY" value="0.7071067811865475"/>
+                    <parameter name="scaleZ" value="1.0"/>
+                    <window h="179" visible="false" w="463" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="FMLFileReader-1544700908962-428"
+                    module="FMLFileReader" name="FMLFileReader" w="80.0"
+                    x="40.0" y="70.0">
+                    <parameter name="saveFileName" value="D:\mergeMultiCharactersGaze\bin\Examples\DemoEN\1-Welcome.xml"/>
+                    <window h="109" visible="false" w="497" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="BMLFileReader-1544700914641-19"
+                    module="BMLFileReader" name="BMLFileReader" w="80.0"
+                    x="140.0" y="70.0">
+                    <window h="109" visible="false" w="497" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="TTS-1544700939858-569"
+                    module="TTS" name="TTS" w="80.0" x="330.0" y="10.0">
+                    <parameter name="doPhonemes" value="true"/>
+                    <parameter name="doTemporize" value="true"/>
+                    <parameter name="doAudio" value="true"/>
+                    <window h="128" visible="false" w="369" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="Cereproc TTS-1544705772596-81"
+                    module="Cereproc TTS" name="Cereproc TTS" w="80.0"
+                    x="440.0" y="10.0"/>
+                <element h="160.0"
+                    id="BehaviorRealizer-1544712964888-667"
+                    module="BehaviorRealizer" name="BehaviorRealizer"
+                    w="80.0" x="140.0" y="130.0">
+                    <window h="310" visible="false" w="209" x="0" y="0"/>
+                </element>
+            </element>
+        </element>
+        <element h="50.0" id="PlayerOgre-1544700973529-249"
+            module="PlayerOgre" name="PlayerOgre" w="80.0" x="860.0" y="330.0">
+            <parameter name="posX" value="0.4568801522254944"/>
+            <parameter name="posY" value="1.7556565999984741"/>
+            <parameter name="posZ" value="-0.9734514355659485"/>
+            <parameter name="roll" value="0.0"/>
+            <parameter name="pitch" value="-0.14583313465118408"/>
+            <parameter name="yaw" value="1.5241034030914307"/>
+            <window h="615" visible="true" w="523" x="2085" y="189"/>
+        </element>
+        <element h="50.0"
+            id="ParserCaptureController_AU-1553258901322-720"
+            module="ParserCaptureController_AU"
+            name="ParserCaptureController_AU" w="80.0" x="860.0" y="470.0">
+            <window h="113" visible="false" w="279" x="0" y="0"/>
+        </element>
+        <element h="50.0" id="AUParserFileReader-1553258904365-905"
+            module="AUParserFileReader" name="AUParserFileReader"
+            w="80.0" x="250.0" y="490.0">
+            <window h="522" visible="false" w="579" x="0" y="0"/>
+        </element>
+        <element h="50.0" id="XuggleVideoCapture-1553258917568-480"
+            module="XuggleVideoCapture" name="XuggleVideoCapture"
+            w="80.0" x="860.0" y="560.0">
+            <window h="143" visible="false" w="404" x="0" y="0"/>
+        </element>
+    </elements>
+    <connections>
+        <connection connector="LipSourceForLipBlender"
+            source="LipModel-1544700770889-684" target="LipBlender-1544700803251-512"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="AudioKeyframePerformer-1544700783338-431" target="MPEG4Animatable-1544700808257-513"/>
+        <connection connector="addLogOutput"
+            source="Logs-1544700696093-682" target="LogFrame-1544700702468-724"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1544712964888-667" target="AnimationKeyframePerformer-1544700747777-220"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1544712964888-667" target="FaceKeyframePerformer-1544700752898-144"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1544712964888-667" target="LipModel-1544700770889-684"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="BehaviorRealizer-1544712964888-667" target="AudioKeyframePerformer-1544700783338-431"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BehaviorPlanner-1544700734561-356" target="BehaviorRealizer-1544712964888-667"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="AnimationKeyframePerformer-1544700747777-220" target="MPEG4Animatable-1544700808257-513"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="PlayerOgre-1544700973529-249" target="Environment-1544700713383-564"/>
+        <connection
+            connector="connectAUCapturecontrollerToCaptureOutput"
+            source="ParserCaptureController_AU-1553258901322-720" target="XuggleVideoCapture-1553258917568-480"/>
+        <connection connector="connectAUCapturecontrollerToCapturable"
+            source="ParserCaptureController_AU-1553258901322-720" target="PlayerOgre-1544700973529-249"/>
+        <connection
+            connector="connectParserCaptureController_AUToAUParserFileReader"
+            source="ParserCaptureController_AU-1553258901322-720" target="AUParserFileReader-1553258904365-905"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="LipBlender-1544700803251-512" target="MPEG4Animatable-1544700808257-513"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4Animatable-1544700808257-513" target="Environment-1544700713383-564"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BMLFileReader-1544700914641-19" target="BehaviorRealizer-1544712964888-667"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="SimpleAUPerformer-1544700795765-328" target="LipBlender-1544700803251-512"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FMLFileReader-1544700908962-428" target="BehaviorPlanner-1544700734561-356"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="AUParserFileReader-1553258904365-905" target="SimpleAUPerformer-1544700795765-328"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="FaceKeyframePerformer-1544700752898-144" target="SimpleAUPerformer-1544700795765-328"/>
+        <connection connector="setTTS" source="TTS-1544700939858-569" target="Cereproc TTS-1544705772596-81"/>
+    </connections>
+</modulated>

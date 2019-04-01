@@ -41,6 +41,7 @@ import vib.core.keyframes.Keyframe;
 import vib.core.keyframes.KeyframePerformer;
 import vib.core.keyframes.ShoulderKeyframe;
 import vib.core.keyframes.TorsoKeyframe;
+import vib.core.signals.SpinePhase;
 import vib.core.signals.gesture.Hand;
 import vib.core.signals.gesture.Position;
 import vib.core.signals.gesture.TrajectoryDescription;
@@ -87,6 +88,8 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
     boolean _usePropagation = true;
     double _weightPropagation = 0.1;
     String _probagationJoint = "vt6";
+    
+    CharacterManager cm;
 
     ArrayList<AnimationFramePerformer> afperformers = new ArrayList<AnimationFramePerformer>();
 
@@ -100,9 +103,14 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         _cb.initMassSystemByOriginalSkeleton();
         _idle = new IdleMovement(_symbolicConverter.getOriginalSkeleton().clone());
         dynSk = _symbolicConverter.getOriginalSkeleton().clone();
+        
         //testFunction();
     }
 
+    public void setCharacterManager(CharacterManager cm) {
+        this.cm = cm;
+    }
+    
     @Override
     public void onCharacterChanged() {
         _cb = new CharacterBody(_symbolicConverter.getOriginalSkeleton());

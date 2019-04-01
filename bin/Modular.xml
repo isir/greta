@@ -24,6 +24,11 @@
                 <item module="BAPFileReader" name="BAP File Reader"/>
                 <item module="oldBAP2newBAP" name="old BAP to new BAP"/>
                 <item module="Body Head Noise" name="Body Head Noise"/>
+				<item module="AUParserFileReader" name="AU parser reader"/> 
+				<item module="FMLAnnotator" name="FML Annotator"/>				
+				<menu name="MeaningMiner">
+                    <item module="ImageSchemaExtractor" name="ImageSchemaExtractor"/>
+                </menu>
             </menu>
             <menu name="Interruptions">
                 <item module="InterruptionManager" name="Interruption Manager"/>
@@ -93,6 +98,10 @@
                 <item module="Feedbacks" name="Feedbacks"/>
                 <item module="Feedbacks2Logs" name="Feedbacks2Logs"/>
             </menu>
+			<menu name="FaceToFaceConversation">
+                <item module="AgentGazeUser" name="AgentGazeUser"/>
+				<item module="ConversationalGroup" name="ConversationalGroup"/>
+            </menu>
             <menu name="Environment">
                 <item module="Environment" name="Environment"/>
                 <item module="MPEG4Animatable" name="MPEG-4 Animatable"/>
@@ -101,6 +110,7 @@
                 <item module="PlayerOgre" name="Player Ogre"/>
                 <item module="CaptureController" name="Capture Controller"/>
                 <item module="XuggleVideoCapture" name="Video Capture Output"/>
+				<item module="ParserCaptureController_AU" name="Parser Capture Controller AU"/>
             </menu>
             <menu name="NetworkConnections">
                 <menu name="ActiveMQ">
@@ -119,6 +129,7 @@
                     </menu>
                     <menu name="Receivers">
                         <item module="FMLReceiver" name="FML Receiver"/>
+						<item module="FMLReceiver_MeaningMiner" name="FMLReceiver_MeaningMiner"/>
                         <item module="BMLReceiver" name="BML Receiver"/>
                         <item module="FMLBMLFileNameReceiver" name="FML/BML Receiver (file names)"/>
                         <item module="EmotionMLReceiver" name="EmotionML Receiver"/>
@@ -319,6 +330,18 @@
         <module name="SSIFrameToSignal" style="VIBDefault">
             <object class="vib.auxiliary.ssi.SSIFrameToSignal" lib_id="vib_ssi"/>
         </module>
+		<module name="AgentGazeUser" style="Signals">
+            <object class="vib.auxiliary.conversationalGaze.AgentGazeUser" lib_id="vib_facetoface"/>
+			<frame class="vib.auxiliary.conversationalGaze.Gui.SetCamPos" lib_id="vib_facetoface" type="frame">
+                <link method="setPosandOrient" on="frame"/>
+            </frame>
+        </module>
+		<module name="ConversationalGroup" style="Signals">
+            <object class="vib.auxiliary.conversationalGaze.ConversationalGroup" lib_id="vib_facetoface"/>
+			<frame class="vib.auxiliary.conversationalGaze.Gui.ConversationGroup_Gui" lib_id="vib_facetoface" type="frame">
+                <link method="setGui" on="frame"/>
+            </frame>
+        </module>
         <module name="BehaviorRealizer" style="BehaviorRealizer">
             <object class="vib.core.behaviorrealizer.Realizer" lib_id="vib_behavior_realizer"/>
 			<frame class="vib.core.behaviorrealizer.gui.RealizerGui" lib_id="vib_behavior_realizer" type="frame">
@@ -390,6 +413,16 @@
         </module>
         <module name="FMLReceiver">
             <object class="vib.auxiliary.activemq.semaine.FMLReceiver" lib_id="vib_activemq"/>
+            <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="vib.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+		<module name="FMLReceiver_MeaningMiner">
+            <object class="vib.auxiliary.MeaningMiner.FMLReceiver_MeaningMiner" lib_id="vib_meaningminer"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
             </frame>
@@ -875,6 +908,27 @@
         <module name="AnimationKeyframePerformer" style="Animations">
             <object class="vib.core.animation.performer.AnimationKeyframePerformer" lib_id="vib_body_animation_performer"/>
         </module>
+		<module name="AUParserFileReader" style="Signals">
+            <object class="vib.core.signals.AUParserFileReader" lib_id="vib_signals"/>
+			<frame class="vib.core.utilx.gui.AUParserFileReaderController" lib_id="vib_utilx" type="frame">
+            <!-- <frame class="vib.core.signals.AUParserFileReader" lib_id="vib_utilx" type="frame"> -->
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+		<module name="ParserCaptureController_AU" style="Player">
+            <object class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plancap"/>
+            <frame type="object"/>
+        </module>
+		<module name="ImageSchemaExtractor" style="VIBDefault">
+            <object class="vib.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="vib_meaningminer"/>
+            <frame class="vib.auxiliary.MeaningMiner.MeaningMinerFrame" lib_id="vib_meaningminer" type="frame">
+                <link method="setModule" on="frame"/>
+            </frame>
+        </module>
+		<module name="FMLAnnotator" style="Intentions">
+            <object class="vib.auxiliary.fmlannotator.View" lib_id="vib_fml_annotator"/>
+            <frame type="object"/>
+        </module>
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -931,7 +985,6 @@
             <needs path="./Common/Data/xml/qualifiers.xsd"/>
             <needs path="./Common/Data/xml/multimodal.dtd"/>
         </lib>
-        
         <lib id="ext_openmary_3.6" path="./Common/Lib/External/maryclient-3.6.jar"/>
         <lib id="ext_openmary_4.3" path="./Common/Lib/External/maryclient-4.3.jar"/>
         <lib id="vib_openmary" path="./Common/Lib/Internal/openMary.jar">
@@ -1114,19 +1167,76 @@
 		<lib id="vib_NN" path="./Common/Lib/Internal/NeuralNetworkEngine.jar">
             <depends lib_id="vib_util"/>
         </lib>
+		<lib id="vib_GraphicNN" path="./Common/Lib/Internal/NeuralNetworks.jar">
+            <depends lib_id="vib_NN"/>
+            <depends lib_id="vib_utilx"/>
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_socialparameters"/>
+        </lib>
 		<lib id="vib_plancap" path="./Common/Lib/Internal/PlanCapture.jar">
             <depends lib_id="vib_util"/>
             <depends lib_id="vib_playerOgre"/>
             <depends lib_id="vib_behavior_planner"/>
             <depends lib_id="vib_intentions"/>
             <depends lib_id="vib_signals"/>
-			<depends lib_id="vib_meaningminer"/>
+			<!--<depends lib_id="vib_meaningminer"/> -->
             <depends lib_id="vib_feedbacks"/>
-            <depends lib_id="vib_social"/>
+            <!--<depends lib_id="vib_social"/> 
             <depends lib_id="vib_multilayer_attitude_planner"/>
             <depends lib_id="vib_nuance"/>
-            <depends lib_id="vib_bap2bvh"/>
+            <depends lib_id="vib_bap2bvh"/>-->
             <depends lib_id="vib_socialparameters"/>
+        </lib>
+		<lib id="ode" path="./Common/Lib/Internal/ODE.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_mpeg4"/>
+            <depends lib_id="vib_animation_core"/>
+        </lib>
+		<lib id="vib_speech" path="./Common/Lib/Internal/SpeechRecognition.jar">
+            <depends lib_id="vib_util"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_thrift"/>
+			<depends lib_id="vib_feedbacks"/>
+            <!--<depends lib_id="ext_javaFlac"/> 
+            <depends lib_id="ext_speechAPI"/> -->
+        </lib>
+		<lib id="vib_facetoface" path="./Common/Lib/Internal/ConversationalGaze.jar">
+            <depends lib_id="vib_ssi"/>
+			<depends lib_id="vib_signals"/>
+            <depends lib_id="vib_feedbacks"/>
+			<depends lib_id="vib_activemq"/>
+			<depends lib_id="vib_util"/>			
+        </lib>
+		<lib id="ext_stanfordparser" path="Common/Lib/External/stanfordparser/stanford-parser.jar">
+            <needs path="Common/Data/stanfordparser/englishPCFG.ser.gz"/>
+        </lib>
+		<lib id="ext_jwiwordnet" path="Common/Lib/External/edu.mit.jwi_2.4.0_jdk.jar">
+            <needs path="Common/Data/wordnet30/dict/data.adj"/>
+            <needs path="Common/Data/wordnet30/dict/data.adv"/>
+            <needs path="Common/Data/wordnet30/dict/data.noun"/>
+            <needs path="Common/Data/wordnet30/dict/data.verb"/>
+            <needs path="Common/Data/wordnet30/dict/index.adj"/>
+            <needs path="Common/Data/wordnet30/dict/index.adv"/>
+            <needs path="Common/Data/wordnet30/dict/index.noun"/>
+            <needs path="Common/Data/wordnet30/dict/index.sense"/>
+            <needs path="Common/Data/wordnet30/dict/index.verb"/>
+        </lib>
+		<lib id="ext_opennlp" path="Common/Lib/External/opennlp/opennlp-tools-1.8.2.jar"/>
+		<lib id="vib_meaningminer" path="Common/Lib/Internal/MeaningMiner.jar">
+            <depends lib_id="vib_signals"/>
+            <depends lib_id="vib_util"/>
+            <depends lib_id="ext_stanfordparser"/>
+            <depends lib_id="ext_jwiwordnet"/>
+            <needs path="Common/Data/MeaningMiner/imageschemaSynset.xml"/>
+            <needs path="Common/Data/MeaningMiner/imageschemaSynset.dtd"/>
+            <needs path="Common/Data/MeaningMiner/imageschemaGesture.dtd"/>
+            <needs path="Common/Data/MeaningMiner/imageschemaGesture.xml"/>
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="ext_opennlp"/>
+        </lib>
+		<lib id="vib_fml_annotator" path="./Common/Lib/Internal/FMLAnnotator.jar">
+            <depends lib_id="vib_intentions"/>
+            <depends lib_id="vib_util"/>
         </lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->
@@ -1327,9 +1437,6 @@
             <connect from="output" method="setEnvironment" to="input"/>
             <disconnect from="null" method="" to="null"/>
         </connector>
-		
-		
-	
         <connector id="connectAnimatableToEnvironment" unique="true">
             <input class="vib.core.util.environment.Animatable" lib_id="vib_util"/>
             <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>
@@ -1377,6 +1484,42 @@
             <output class="vib.core.intentions.FMLFileReader" lib_id="vib_intentions"/>
             <connect from="input" method="setFMLFileReader" to="output"/>
             <disconnect from="null" method="" to="null"/>
+        </connector>
+		<connector id="ParticipantsAddedintheGroup">
+            <input class="vib.auxiliary.conversationalGaze.AgentGazeUser" lib_id="vib_signals"/>
+            <output class="vib.auxiliary.conversationalGaze.ConversationalGroup" lib_id="vib_signals"/>
+            <connect from="output" method="AddParticipant" to="input"/>
+            <disconnect from="output" method="RemoveParticipant" to="input"/>
+        </connector>
+		<connector id="connectParserCaptureController_AUToAUParserFileReader" unique="true">
+            <input class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plancap"/>
+            <output class="vib.core.signals.AUParserFileReader" lib_id="vib_signals"/>
+            <connect from="input" method="setAUParserFileReader" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+		<connector id="connectAUCapturecontrollerToCapturable" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.AUCapturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.auxiliary.player.ogre.capture.Capturable" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCapturable" to="output"/>
+            <disconnect from="input" method="setCapturable" to="null"/>
+        </connector>
+        <connector id="connectAUCapturecontrollerToCaptureOutput" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.AUCapturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.auxiliary.player.ogre.capture.CaptureOutput" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCaptureOutput" to="output"/>
+            <disconnect from="input" method="setCaptureOutput" to="null"/>
+        </connector>
+		<connector id="connectMeaningMinerControllerToImageSchemaExtractor" unique="true">
+            <input class="vib.plancapture.MeaningMinerCaptureController" lib_id="vib_plancap"/>
+            <output class="vib.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="vib_meaningminer"/>
+            <connect from="input" method="setImageSchemaExtractor" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+		<connector id="ImageSchemaExtractorToInterpreter" unique="true">
+            <input class="vib.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="vib_meaningminer"/>
+            <output class="vib.auxiliary.MeaningMiner.ImageSchemaInterpreter" lib_id="vib_meaningminer"/>
+            <connect from="input" method="setISInterpreter" to="output"/>
+            <disconnect from="input" method="setISInterpreter" to="output"/>
         </connector>
     </connectors>
     <!-- list of styles -->

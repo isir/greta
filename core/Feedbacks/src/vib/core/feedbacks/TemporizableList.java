@@ -18,8 +18,10 @@ package vib.core.feedbacks;
 
 import java.util.ArrayList;
 import java.util.List;
+import vib.core.signals.SpeechSignal;
 import vib.core.util.id.ID;
 import vib.core.util.time.Temporizable;
+import vib.core.util.time.TimeMarker;
 import vib.core.util.time.Timer;
 
 /**
@@ -27,6 +29,27 @@ import vib.core.util.time.Timer;
  * @author Ken Prepin
  */
 public class TemporizableList {
+
+    /**
+     * @return the pendingList
+     */
+    public List<Temporizable> getPendingList() {
+        return pendingList;
+    }
+
+    /**
+     * @param pendingList the pendingList to set
+     */
+    public void setPendingList(List<Temporizable> pendingList) {
+        this.pendingList = pendingList;
+    }
+
+    /**
+     * @return the startTime
+     */
+    public Double getStartTime() {
+        return startTime;
+    }
     private ID id;
     private Double deadTime;
     private Double startTime;
@@ -37,6 +60,8 @@ public class TemporizableList {
     private ArrayList<Temporizable> lastStartedList;
     private ArrayList<Temporizable> finishedList;
     private boolean allTmpFinished;
+    private ArrayList<TimeMarker> speech_timeMrk; /******************/
+    private TimeMarker currentTimeMarker_ended;
 
     public TemporizableList(ID Id){
         id=Id;
@@ -48,6 +73,8 @@ public class TemporizableList {
         startedList = new ArrayList<Temporizable>();
         lastStartedList = new ArrayList<Temporizable>();
         finishedList = new ArrayList<Temporizable>();
+        //speech_timeMrk = new ArrayList<TimeMarker>();
+        currentTimeMarker_ended = new TimeMarker("");
         allTmpFinished = false;
     }
     public TemporizableList(ID Id, List<? extends Temporizable> PendingList){
@@ -57,10 +84,12 @@ public class TemporizableList {
         startedList = new ArrayList<Temporizable>();
         lastStartedList = new ArrayList<Temporizable>();
         finishedList = new ArrayList<Temporizable>();
+        //speech_timeMrk = new ArrayList<TimeMarker>();
+        currentTimeMarker_ended = new TimeMarker("");
         allTmpFinished = false;
    }
     public void addTemporizable(Temporizable NewTmp){
-        pendingList.add(NewTmp);
+        getPendingList().add(NewTmp);
     }
     public void setDeadTime(Double DeadTime){deadTime=DeadTime;}
     public void setStartTime(Double StartTime){startTime=StartTime;}
@@ -85,27 +114,66 @@ public class TemporizableList {
     public boolean isFinished(){
         return allTmpFinished;
     }
-    public void update(){
-        if (startTime!=0){
-            Double currentTime = Timer.getTime() - startTime;
+    
+    public TimeMarker updateTimeMarker(SpeechSignal speechSign){
+         if (getStartTime()!=0){
+            Double currentTime = Timer.getTime() - getStartTime();               
+            speech_timeMrk = (ArrayList) speechSign.getTimeMarkers();
+            int j = 1; 
+            if (j+1 < speech_timeMrk.size()){
+                while( speech_timeMrk.get(j).getValue() < currentTime){ // check the time progressing and the timeMarker values                               
+                    setCurrentTimeMarker_ended(speech_timeMrk.get(j));
+                    // remove the timemarker from the list so I don't have to update j 
+                    speech_timeMrk.remove(j);
+                    if (j+1 >= speech_timeMrk.size()){
+                        speechSign.setId("");
+                        break;  
+                    }
+                }
+            }
+        }
+        return getCurrentTimeMarker_ended();
+    }
+    
+    public TimeMarker update(){
+        
+        if (getStartTime()!=0){
+            Double currentTime = Timer.getTime() - getStartTime();
             for(int i=0; i<startedList.size();i++){
-                if (startedList.get(i).getEnd().getValue()<currentTime){
-                    finishedList.add(startedList.get(i));
+                
+                if (startedList.get(i).getEnd().getValue() < currentTime){
+                    finishedList.add(startedList.get(i));                    
                     startedList.remove(i);
                     i--;
                 }
+                
             }
-            for(int i=0; i<pendingList.size();i++){
-                if (pendingList.get(i).getStart().getValue()<currentTime){
-                    startedList.add(pendingList.get(i));
-                    lastStartedList.add(pendingList.get(i));
-                    pendingList.remove(i);
+            for(int i=0; i<getPendingList().size();i++){
+                if (getPendingList().get(i).getStart().getValue()<currentTime){
+                    startedList.add(getPendingList().get(i));
+                    lastStartedList.add(getPendingList().get(i));
+                    getPendingList().remove(i);
                     i--;
                 }
             }
-            if(pendingList.isEmpty()&&startedList.isEmpty()){
+            if(getPendingList().isEmpty()&&startedList.isEmpty()){
                 allTmpFinished = true;
             }
         }
+        return getCurrentTimeMarker_ended();
+    }
+
+    /**
+     * @return the currentTimeMarker_ended
+     */
+    public TimeMarker getCurrentTimeMarker_ended() {
+        return currentTimeMarker_ended;
+    }
+
+    /**
+     * @param currentTimeMarker_ended the currentTimeMarker_ended to set
+     */
+    public void setCurrentTimeMarker_ended(TimeMarker currentTimeMarker_ended) {
+        this.currentTimeMarker_ended = currentTimeMarker_ended;
     }
 }

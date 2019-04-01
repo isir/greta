@@ -84,6 +84,8 @@ public class FMLFileReader implements IntentionEmitter {
         }
         if(fml.hasAttribute("id")){
             fml_id = fml.getAttribute("id");
+        }else{
+            fml_id = "fml_1";
         }
         if (fml.hasAttribute("composition")) {
             mode.setCompositionType(fml.getAttribute("composition"));

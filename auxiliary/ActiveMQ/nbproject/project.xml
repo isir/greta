@@ -45,22 +45,6 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>NeuralNetworkEngine</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
-                <foreign-project>NeuralNetworks</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
                 <foreign-project>Signals</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>

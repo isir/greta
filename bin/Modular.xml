@@ -25,7 +25,7 @@
                 <item module="oldBAP2newBAP" name="old BAP to new BAP"/>
                 <item module="Body Head Noise" name="Body Head Noise"/>
 				<item module="AUParserFileReader" name="AU parser reader"/> 
-				<item module="FMLAnnotator" name="FML Annotator"/>				
+				<!--<item module="FMLAnnotator" name="FML Annotator"/> -->			
 				<menu name="MeaningMiner">
                     <item module="ImageSchemaExtractor" name="ImageSchemaExtractor"/>
                 </menu>
@@ -925,10 +925,10 @@
                 <link method="setModule" on="frame"/>
             </frame>
         </module>
-		<module name="FMLAnnotator" style="Intentions">
+		<!--<module name="FMLAnnotator" style="Intentions">
             <object class="vib.auxiliary.fmlannotator.View" lib_id="vib_fml_annotator"/>
             <frame type="object"/>
-        </module>
+        </module> -->
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1508,18 +1508,6 @@
             <output class="vib.auxiliary.player.ogre.capture.CaptureOutput" lib_id="vib_playerOgre"/>
             <connect from="input" method="setCaptureOutput" to="output"/>
             <disconnect from="input" method="setCaptureOutput" to="null"/>
-        </connector>
-		<connector id="connectMeaningMinerControllerToImageSchemaExtractor" unique="true">
-            <input class="vib.plancapture.MeaningMinerCaptureController" lib_id="vib_plancap"/>
-            <output class="vib.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="vib_meaningminer"/>
-            <connect from="input" method="setImageSchemaExtractor" to="output"/>
-            <disconnect from="null" method="" to="null"/>
-        </connector>
-		<connector id="ImageSchemaExtractorToInterpreter" unique="true">
-            <input class="vib.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="vib_meaningminer"/>
-            <output class="vib.auxiliary.MeaningMiner.ImageSchemaInterpreter" lib_id="vib_meaningminer"/>
-            <connect from="input" method="setISInterpreter" to="output"/>
-            <disconnect from="input" method="setISInterpreter" to="output"/>
         </connector>
     </connectors>
     <!-- list of styles -->

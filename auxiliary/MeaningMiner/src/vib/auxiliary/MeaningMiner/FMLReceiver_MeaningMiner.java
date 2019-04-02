@@ -232,7 +232,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         }    
         
         HashMap<String, String> wordandTimeMarker = new HashMap<String, String>();
-        TimeMarker lastTimeMarker = new TimeMarker("tm"); 
+        
 
         int numWords = 0;
         if (speech != null){
@@ -254,7 +254,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                         }else if (array_obj instanceof TimeMarker){
                             String actualTM = ((TimeMarker) array_obj).getName();
                             wordandTimeMarker.put(actualTM, "tm"+numWords);
-                            //lastTimeMarker.setName(((TimeMarker) array_obj).getName());
+                            
                         }
                     }
                     break;
@@ -339,7 +339,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         String input = bmlRoot.toString();        
         List<Intention> newIntentionsfromSpeech = processText(input, listPitchAccent);
           
-        // add the intentions find with the mining miner to the others
+        // add the intentions found with the mining miner to the others
         if (newIntentionsfromSpeech.size() > 0){
             for (int i = 0; i < newIntentionsfromSpeech.size(); i++)
             if (newIntentionsfromSpeech.get(i) instanceof PseudoIntentionSpeech){

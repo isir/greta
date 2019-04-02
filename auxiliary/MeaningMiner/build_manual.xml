@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="ActiveMQ" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
+<project name="MeaningMiner" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
 
     <property name="src.dir" location="src" />
     <property name="classes.dir" location="compilation" />
@@ -8,8 +8,9 @@
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
     <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
-    <property name="jackson.jar.dir" location="../../bin/Common/Lib/External/jackson" />
-	
+    <property name="stanfordparser.external.jar.dir" location="../../bin/Common/Lib/External/stanfordparser" />
+    <property name="opennlp.external.jar.dir" location="../../bin/Common/Lib/External/opennlp" />
+    
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
     </target>
@@ -28,15 +29,7 @@
     <!-- DEPENDENCY TASKS HERE -->
     <target name="build.dependency.util" if="${need.util}">
         <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
-    <target name="build.dependency.utilx" if="${need.utilx}">
-        <ant antfile="../../core/Utilx/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
-    <target name="build.dependency.mpeg4" if="${need.mpeg4}">
-        <ant antfile="../../core/MPEG4/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
+    </target>   
     
     <target name="build.dependency.signals" if="${need.signals}">
         <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
@@ -46,37 +39,27 @@
         <ant antfile="../../core/Intentions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.feedbacks" if="${need.feedbacks}">
-        <ant antfile="../../core/Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
-    <target name="build.dependency.emotionml" if="${need.emotionml}">
-        <ant antfile="../EmotionML/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
-    <target name="build.dependency.socialparameters" if="${need.socialparameters}">
-        <ant antfile="../SocialParameters/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.activemq" if="${need.activemq}">
+        <ant antfile="../ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     <!-- -->
     
     <path id="path.jars">
         <fileset dir="${jar.dir}">
             <include name="Util.jar"/>
-            <include name="Utilx.jar"/>
-            <include name="MPEG4.jar"/>
             <include name="Signals.jar"/>
             <include name="Intentions.jar"/>
-            <include name="Feedbacks.jar"/>
-            <include name="EmotionML.jar"/>
-            <include name="SocialParameters.jar"/>
+            <include name="ActiveMQ.jar"/>
+        </fileset>
+        <fileset dir="${stanfordparser.external.jar.dir}">
+            <include name="stanford-parser.jar"/>
+        </fileset>
+        <fileset dir="${opennlp.external.jar.dir}">
+            <include name="opennlp-tools-1.8.2.jar"/>
         </fileset>
         <fileset dir="${external.jar.dir}">
+            <include name="edu.mit.jwi_2.4.0_jdk.jar"/>
             <include name="activemq-all-5.10.0.jar"/>
-        </fileset>
-        <fileset dir="${jackson.jar.dir}">
-            <include name="jackson-annotations-2.9.0.jar"/>
-            <include name="jackson-core-2.9.8.jar"/>
-            <include name="jackson-databind-2.9.8.jar"/>
         </fileset>
     </path>
     
@@ -91,26 +74,6 @@
             </not>
         </condition>
         <antcall target="build.dependency.util"/>
-        
-        <condition property="need.utilx">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Utilx.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.utilx"/>
-        
-        <condition property="need.mpeg4">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/MPEG4.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.mpeg4"/>
         
         <condition property="need.signals">
             <not>
@@ -132,35 +95,15 @@
         </condition>
         <antcall target="build.dependency.intentions"/>
         
-        <condition property="need.feedbacks">
+        <condition property="need.activemq">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Feedbacks.jar" type="file"/>
+                    <available file="${jar.dir}/ActiveMQ.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.feedbacks"/>
-        
-        <condition property="need.emotionml">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/EmotionML.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.emotionml"/>
-        
-        <condition property="need.socialparameters">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/SocialParameters.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.socialparameters"/>
+        <antcall target="build.dependency.activemq"/>
         <!-- -->
     </target>
     
@@ -179,7 +122,8 @@
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
             <map from="${external.jar.dir}" to="../External"/>
-            <map from="${jackson.jar.dir}" to="../External/jackson"/>
+            <map from="${stanfordparser.external.jar.dir}" to="../External/stanfordparser"/>
+            <map from="${opennlp.external.jar.dir}" to="../External/opennlp"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

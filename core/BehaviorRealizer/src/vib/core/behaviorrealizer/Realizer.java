@@ -101,20 +101,18 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         };
         
         // environment
-        environment = cm.getEnvironment();        
+        environment = characterManager.getEnvironment();        
     }
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
 
-        environment = characterManager.getEnvironment();  
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<Keyframe>();
 
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
         // The value of Start and End should be calculated in this step. So that we can sort
-
 
         for (Signal signal : list) {
             if(signal instanceof PointingSignal)
@@ -144,7 +142,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
 
         // Gaze keyframes for other modalities than eyes are generated before the others
         // and act as "shifts"
-        gazeGenerator.generateBodyKeyframes(keyframes, environment);
+        gazeGenerator.generateBodyKeyframes(keyframes);
 
         for (KeyframeGenerator generator : generators) {
             keyframes.addAll(generator.generateKeyframes());
@@ -152,7 +150,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         Collections.sort(keyframes, keyframeComparator);
 
         // Gaze keyframes for the eyes are generated last
-        gazeGenerator.generateEyesKeyframes(keyframes, environment);
+        gazeGenerator.generateEyesKeyframes(keyframes);
 
         faceGenerator.findExistingAU(keyframes);
         keyframes.addAll(faceGenerator.generateKeyframes());
@@ -230,7 +228,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
 
     public void setEnvironment(Environment env) {
         this.environment = env;
-        gazeGenerator.setEnvironment(env);
+        //gazeGenerator.setEnvironment(env);
         gazeGenerator.addSignalPerformer(this);
         gestureGenerator.setEnvironment(env);
     }
@@ -275,22 +273,6 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         }
         //set the current Lexicon to use :
         FaceLibrary.global_facelibrary.setDefinition(this.getCharacterManager().getValueString("FACELIBRARY"));
-        // System.out.println("ok");
-    }
-    
-    public void UpdateAULibrary(){
-        
-        /*this.getCharacterManager().remove(AULibrary);     
-        //get the default Lexicon :
-        AULibrary.setDefaultDefinition(this.getCharacterManager().getDefaultValueString("AULIBRARY"));
-
-        //load additionnal Lexicon :
-        for (String filename : this.getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_AULIBRARY)) {
-            AULibrary.addDefinition(filename);
-        }
-
-        //set the current Lexicon to use :
-        AULibrary.setDefinition(this.getCharacterManager().getValueString(CHARACTER_PARAMETER_AULIBRARY));*/
     }
     
     public void UpdateGestureLibrary(){
@@ -328,15 +310,6 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     }  
     
     public void UpdateHandLibrary(){
-        /*this.getCharacterManager().remove(HandShapeLibrary);   
-        setDefaultDefinition(getCharacterManager().getDefaultValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
-
-        //load additionnal library :
-        for(String filename : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY)) {
-            addDefinition(filename);
-        }
-
-        //set the current library to use :
-        setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));*/
+        
     }  
 }

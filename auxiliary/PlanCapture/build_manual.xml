@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="ActiveMQ" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
+<project name="PlanCapture" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
 
     <property name="src.dir" location="src" />
     <property name="classes.dir" location="compilation" />
@@ -8,8 +8,9 @@
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
     <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
-    <property name="jackson.jar.dir" location="../../bin/Common/Lib/External/jackson" />
 	
+    <property name="internal.player.dir" location="../../bin/Player/Lib/Internal" />
+    
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
     </target>
@@ -30,14 +31,6 @@
         <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.utilx" if="${need.utilx}">
-        <ant antfile="../../core/Utilx/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
-    <target name="build.dependency.mpeg4" if="${need.mpeg4}">
-        <ant antfile="../../core/MPEG4/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
     <target name="build.dependency.signals" if="${need.signals}">
         <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
@@ -50,33 +43,43 @@
         <ant antfile="../../core/Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.emotionml" if="${need.emotionml}">
-        <ant antfile="../EmotionML/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
     <target name="build.dependency.socialparameters" if="${need.socialparameters}">
         <ant antfile="../SocialParameters/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+	
+    <target name="build.dependency.behaviorplanner" if="${need.behaviorplanner}">
+        <ant antfile="../../core/BehaviorPlanner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+	
+    <target name="build.dependency.playerogre" if="${need.playerogre}">
+        <ant antfile="../playerOgre/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+	
+    <target name="build.dependency.meaningminer" if="${need.meaningminer}">
+        <ant antfile="../MeaningMiner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.mpeg4" if="${need.mpeg4}">
+        <ant antfile="../../core/MPEG4/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     <!-- -->
     
     <path id="path.jars">
         <fileset dir="${jar.dir}">
             <include name="Util.jar"/>
-            <include name="Utilx.jar"/>
-            <include name="MPEG4.jar"/>
             <include name="Signals.jar"/>
             <include name="Intentions.jar"/>
             <include name="Feedbacks.jar"/>
-            <include name="EmotionML.jar"/>
             <include name="SocialParameters.jar"/>
+            <include name="BehaviorPlanner.jar"/>
+            <include name="MeaningMiner.jar"/>
+            <include name="MPEG4.jar"/>
+        </fileset>
+        <fileset dir="${internal.player.dir}">
+            <include name="playerOgre.jar"/>
         </fileset>
         <fileset dir="${external.jar.dir}">
             <include name="activemq-all-5.10.0.jar"/>
-        </fileset>
-        <fileset dir="${jackson.jar.dir}">
-            <include name="jackson-annotations-2.9.0.jar"/>
-            <include name="jackson-core-2.9.8.jar"/>
-            <include name="jackson-databind-2.9.8.jar"/>
         </fileset>
     </path>
     
@@ -91,26 +94,6 @@
             </not>
         </condition>
         <antcall target="build.dependency.util"/>
-        
-        <condition property="need.utilx">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Utilx.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.utilx"/>
-        
-        <condition property="need.mpeg4">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/MPEG4.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.mpeg4"/>
         
         <condition property="need.signals">
             <not>
@@ -142,16 +125,6 @@
         </condition>
         <antcall target="build.dependency.feedbacks"/>
         
-        <condition property="need.emotionml">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/EmotionML.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.emotionml"/>
-        
         <condition property="need.socialparameters">
             <not>
                 <and>
@@ -161,6 +134,46 @@
             </not>
         </condition>
         <antcall target="build.dependency.socialparameters"/>
+    	
+        <condition property="need.behaviorplanner">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/BehaviorPlanner.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.behaviorplanner"/>
+    	
+        <condition property="need.playerogre">
+            <not>
+                <and>
+                    <available file="${internal.player.dir}" type="dir"/>
+                    <available file="${internal.player.dir}/playerOgre.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.playerogre"/>
+    	
+        <condition property="need.meaningminer">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/MeaningMiner.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.meaningminer"/>
+        
+        <condition property="need.mpeg4">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/MPEG4.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.mpeg4"/>
         <!-- -->
     </target>
     
@@ -179,7 +192,7 @@
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
             <map from="${external.jar.dir}" to="../External"/>
-            <map from="${jackson.jar.dir}" to="../External/jackson"/>
+            <map from="${internal.player.dir}" to="../../../Player/Lib/Internal"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

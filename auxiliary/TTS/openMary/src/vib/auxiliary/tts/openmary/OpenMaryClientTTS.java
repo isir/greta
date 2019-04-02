@@ -28,6 +28,9 @@ import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import vib.core.util.CharacterManager;
@@ -72,6 +75,54 @@ public class OpenMaryClientTTS implements TTS{
         maryparser = XML.createParser();
         maryparser.setValidating(false);
     }
+    
+    private boolean isSocketOpen(String host, int port, boolean throwIOException) throws UnknownHostException, IOException {
+    	boolean output;
+    	try (java.net.Socket test = new java.net.Socket(host, port)) {
+    		output = true;
+    	} catch (UnknownHostException e) {
+			throw e;
+		} catch (IOException e) {
+			if (throwIOException) {
+				throw e;
+			} else {
+				output = false;
+			}
+			
+		}
+    	return output;
+    }
+    
+    private void startOpenMary() throws IOException {
+    	boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
+    	if (!isWindows) {
+    		throw new IllegalArgumentException("We only support Windows");
+    	}
+    	ProcessBuilder pb = new ProcessBuilder();
+    	String maryServerDirectory = IniManager.getGlobals().getValueString("MARY_SERVER_DIRECTORY");
+    	if (maryServerDirectory == null) {
+    		throw new IllegalArgumentException("MARY_SERVER_DIRECTORY is required to autostart OpenMary");
+    	}
+    	String maryServerFile = IniManager.getGlobals().getValueString("MARY_SERVER_FILE");
+    	if (maryServerFile == null) {
+    		throw new IllegalArgumentException("MARY_SERVER_FILE is required to autostart OpenMary");
+    	}    	
+    	pb.directory(new File(maryServerDirectory));
+    	pb.command(new String[] {"cmd.exe", "/C", maryServerFile});
+    	Process proc = pb.start();
+    	Runtime.getRuntime().addShutdownHook(new Thread() {
+    		@Override
+    		public void run() {
+    			proc.destroy();
+    			try {
+					proc.waitFor();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+    		}
+    	});
+    }
 
     private void startClient(){
         maryVersion=0;
@@ -85,10 +136,13 @@ public class OpenMaryClientTTS implements TTS{
                 System.setProperty("mary.client.quiet", "true");//to shut up mary
                 while(maryVersion==0){
                     try{
+                        if (!isSocketOpen(host, port, false)) {
+                        	startOpenMary();
+                        }
+                        
                         //we try to find a server using the target host and port
                         //if it don't exist it's useless to try to connect to mary 4 then mary 3
-                        java.net.Socket test = new java.net.Socket(host, port);
-                        test.close();
+                        isSocketOpen(host, port, true);
 
                         //first, we try to connect to mary 4.3
                         try {

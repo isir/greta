@@ -8,7 +8,8 @@
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
     <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
-    
+    <property name="jackson.jar.dir" location="../../bin/Common/Lib/External/jackson" />
+	
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
     </target>
@@ -71,6 +72,11 @@
         </fileset>
         <fileset dir="${external.jar.dir}">
             <include name="activemq-all-5.10.0.jar"/>
+        </fileset>
+        <fileset dir="${jackson.jar.dir}">
+            <include name="jackson-annotations-2.9.0.jar"/>
+            <include name="jackson-core-2.9.8.jar"/>
+            <include name="jackson-databind-2.9.8.jar"/>
         </fileset>
     </path>
     
@@ -173,6 +179,7 @@
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
             <map from="${external.jar.dir}" to="../External"/>
+            <map from="${jackson.jar.dir}" to="../External/jackson"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

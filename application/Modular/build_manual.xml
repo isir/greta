@@ -144,6 +144,14 @@
     <target name="build.dependency.gestureanimationeditor" if="${need.gestureanimationeditor}">
         <ant antfile="../../tools/GestureAnimationEditor/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
+    
+    <target name="build.dependency.meaningminer" if="${need.meaningminer}">
+        <ant antfile="../../auxiliary/MeaningMiner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.plancapture" if="${need.plancapture}">
+        <ant antfile="../../auxiliary/PlanCapture/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     <!-- -->
     
     <path id="path.jars">
@@ -447,6 +455,26 @@
             </not>
         </condition>
         <antcall target="build.dependency.gestureanimationeditor"/>
+        
+        <condition property="need.meaningminer">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/MeaningMiner.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.meaningminer"/>
+        
+        <condition property="need.plancapture">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/PlanCapture.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.plancapture"/>
         <!-- -->
     </target>
     

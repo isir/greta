@@ -137,7 +137,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
      */
     @Override
     public void processText(String input) {
-        System.out.println(input);
+        //System.out.println(input);
         XMLParser xmlParser = XML.createParser();
         XMLTree inputXML = xmlParser.parseBuffer(input);
         List<int[]> listPitchAccent = new ArrayList<>();
@@ -186,7 +186,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             Tree parse = lp.apply(sentence);
             parse.pennPrint();
 
-            System.out.println();
+            //System.out.println();
             List<TypedDependency> tdl = null;
             //retrieve the grammatical dependencies
             if (gsf != null) {
@@ -326,11 +326,11 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
                             //we retrieve the synset
                             ISynset synset = this.simplifiedLesk(idxWord, SentenceUtils.listToOriginalTextString(sentence));
-                            System.out.println("Stem : " + stem + " POS:" + pos);
+                            /*System.out.println("Stem : " + stem + " POS:" + pos);
                             for (IWordID idw : idxWord.getWordIDs()) {
                                 System.out.println("ID : " + idw.getSynsetID().getOffset());
                             }
-                            System.out.println(stem + " id:" + synset.getOffset());
+                            System.out.println(stem + " id:" + synset.getOffset());*/
                             //THE IMPORTANT PART : we retrieve the image schemas for this synset
                             Set<String> imscSet = getImageSchemas(synset, 10);
 
@@ -468,7 +468,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                 }
 
                 negation = posTag.equalsIgnoreCase("DT") && value.equalsIgnoreCase("no") || posTag.equalsIgnoreCase("RB") && value.equalsIgnoreCase("not");
-                System.out.println(negation);
+                //System.out.println(negation);
 
             }
             countSentenceMarkers += sentence.size();

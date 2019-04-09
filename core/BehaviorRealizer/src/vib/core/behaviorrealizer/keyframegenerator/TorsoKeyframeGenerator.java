@@ -76,7 +76,7 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
             }
 
             TorsoKeyframe kf = null;
-                kf = createKeyFrame(torso, torso.getPhases().get(torso.getPhases().size()-1));
+            kf = createKeyFrame(torso, torso.getPhases().get(torso.getPhases().size()-1));
             keyframes.add(kf);
             //keyframes.add(createKeyFrame(torso, torso.getPhases().get(torso.getPhases().size()-1)));
             

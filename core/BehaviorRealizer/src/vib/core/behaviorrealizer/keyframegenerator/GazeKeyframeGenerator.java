@@ -21,6 +21,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import vib.core.animation.mpeg4.MPEG4Animatable;
+import vib.core.animation.mpeg4.bap.BAPType;
 import vib.core.behaviorrealizer.keyframegenerator.GazeKeyframeGenerator.HeadAngles;
 import vib.core.keyframes.HeadKeyframe;
 import vib.core.keyframes.Keyframe;
@@ -44,6 +45,7 @@ import vib.core.signals.SpinePhase;
 import vib.core.signals.TorsoSignal;
 import vib.core.util.CharacterManager;
 import vib.core.util.Constants;
+import vib.core.util.IniParameter;
 import vib.core.util.Mode;
 import vib.core.util.audio.Mixer;
 import vib.core.util.enums.CompositionType;
@@ -224,14 +226,22 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             //euler angles to target + offset, for head
             HeadAngles ha = new HeadAngles(this.env, gaze);
             
+            // head angles give by the additional rotation of each cervical vertebrae
+            Double agent_head_pitch = currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc1_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc2_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc3_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc4_tilt) + 
+                                        currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc5_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc6_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc7_tilt);
+            Double agent_head_yaw = currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc1_torsion) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc2_torsion) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc3_torsion) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc4_torsion) + 
+                                        currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc5_torsion) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc6_torsion) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc7_torsion);
+            Double agent_head_roll = currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc1_roll) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc2_roll) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc3_roll) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc4_roll) + 
+                                        currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc5_roll) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc6_roll) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc7_roll);
+            
             // trying to correct a little difect in the gazeShift. Each time we have a gazeShift behavior are calculated only the keyframe at the target and not at the starting time. This is because the position
             // of any body part can be different to the rest position if a gazeShift happend before. Therefore instead to calculate the rotation angle's difference between the actual position and the target position 
             // it is just calculated the angle between the rest position and the target one, updating the position like we delate the last position and put the new one at the target time. 
             // the only problem is that when the rotation angle to reach the target (calculated respect to the rest position) is bigger than the actual angle. In this case the movement of the eyes, that start to move before the 
             // head are not correct. A way to overcome this difect is to delate the head_latency in this case.  
-            Quaternion actualheadorientation = new Quaternion( new Vec3d (1,0,0),Double.parseDouble(currentAgent.ListcurPos.get(13).getParamValue()));
-                    actualheadorientation.multiply(new Quaternion( new Vec3d (0,1,0),Double.parseDouble(currentAgent.ListcurPos.get(14).getParamValue())));
-                    actualheadorientation.multiply(new Quaternion( new Vec3d (0,0,1),Double.parseDouble(currentAgent.ListcurPos.get(15).getParamValue())));
+            Quaternion actualheadorientation = new Quaternion( new Vec3d (1,0,0),agent_head_pitch);
+            actualheadorientation.multiply(new Quaternion( new Vec3d (0,1,0),agent_head_yaw));
+            actualheadorientation.multiply(new Quaternion( new Vec3d (0,0,1),agent_head_roll));
             
             // add the rotation of the root
             actualheadorientation.multiply(new Quaternion(currentAgent.getRotationNode().getOrientation().x(),
@@ -1807,6 +1817,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         }
                         // if the target is not the agent I look the target in the environment objects
                         if (ok ==0){
+                            
+                            targetNode = env.getNode(gaze.getTarget());
                             // search the object (leaf) between evironment objects 
                             for (int iter=0; iter< lf_tg.size()-1; iter++){
                                 Leaf check = lf_tg.get(iter);
@@ -1817,6 +1829,12 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                     sizeTarget = check.getSize();
                                     break;
                                 }
+                            }
+                            // if it is not a leaf but a TreeNode children 
+                            if (id_target.equals("")){
+                                TreeNode target = (TreeNode) env.getNode(T);
+                                id_target = target.getIdentifier();
+                                sizeTarget = target.getScale();
                             }
                             targetNode = env.getNode(id_target);
                         }
@@ -1837,6 +1855,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                             }
                             vec2target = ((TreeNode) targetNode).getGlobalCoordinates();
                             // the objects are placed on the floor. To take the hight we need to take the size along y axis
+
                             vec2target.setY(vec2target.y() + sizeTarget.y()/2); // take the center of the Target long y axis (size.y / 2)
                         }
                     }
@@ -2162,6 +2181,12 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                         sizeTarget = check.getSize();
                                         break;
                                     }
+                                }
+                                 // if it is not a leaf but a TreeNode children 
+                                if (id_target.equals("")){
+                                    TreeNode target = (TreeNode) env.getNode(T);
+                                    id_target = target.getIdentifier();
+                                    sizeTarget = target.getScale();
                                 }
                                 targetNode = env.getNode(id_target);
                             }

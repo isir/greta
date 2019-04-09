@@ -16,7 +16,7 @@
  */
 package vib.core.animation.mpeg4;
 
-import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -24,12 +24,10 @@ import vib.core.animation.mpeg4.bap.BAPFrame;
 import vib.core.animation.mpeg4.bap.BAPFramesEmitter;
 import vib.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
 import vib.core.animation.mpeg4.bap.BAPFramesPerformer;
-import vib.core.animation.mpeg4.bap.BAPType;
 import vib.core.animation.mpeg4.fap.FAPFrame;
 import vib.core.animation.mpeg4.fap.FAPFrameEmitter;
 import vib.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
 import vib.core.animation.mpeg4.fap.FAPFramePerformer;
-import vib.core.animation.mpeg4.fap.FAPType;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
 import vib.core.util.IniParameter;
@@ -42,7 +40,6 @@ import vib.core.util.audio.AudioPerformer;
 import vib.core.util.audio.AudioTreeNode;
 import vib.core.util.environment.Animatable;
 import vib.core.util.id.ID;
-import vib.core.util.math.Vec3d;
 
 /**
  *
@@ -58,9 +55,6 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
     private BAPFramesEmitterImpl bapEmitter = new BAPFramesEmitterImpl();
     private FAPFrameEmitterImpl fapEmitter = new FAPFrameEmitterImpl();
     private AudioEmitterImpl audioEmitter = new AudioEmitterImpl();
-    
-    public HashMap<String,List<IniParameter>> curPos = new HashMap<String,List<IniParameter>>();  
-    public List<IniParameter> ListcurPos = Arrays.asList(new IniParameter[16]);
     
     private CharacterManager characterManager;
 
@@ -175,31 +169,6 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
     }
 
     public FAPFrame getCurrentFAPFrame() {
-        
-        ListcurPos.set(0, new IniParameter("root_pitch", String.valueOf(this.getRotationNode().getOrientation().x()))); // here I take the orientation of all body. Is the same values found in MPEG4 gui for the orientation of the agent
-        ListcurPos.set(1, new IniParameter("root_yaw", String.valueOf(this.getRotationNode().getOrientation().y())));
-        ListcurPos.set(2, new IniParameter("root_roll", String.valueOf(this.getRotationNode().getOrientation().z())));
-        ListcurPos.set(3, new IniParameter("root_w", String.valueOf(this.getRotationNode().getOrientation().w())));
-        ListcurPos.set(4, new IniParameter("pitch_l_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.pitch_l_eyeball))));
-        ListcurPos.set(5, new IniParameter("yaw_l_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.yaw_l_eyeball))));
-        ListcurPos.set(6, new IniParameter("thrust_l_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.thrust_l_eyeball))));
-        ListcurPos.set(7, new IniParameter("pitch_r_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.pitch_r_eyeball))));
-        ListcurPos.set(8, new IniParameter("yaw_r_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.yaw_r_eyeball))));
-        ListcurPos.set(9, new IniParameter("thrust_r_eyeball", String.valueOf(fapFrames.getCurrentFrame().getValue(FAPType.thrust_r_eyeball))));
-        ListcurPos.set(10, new IniParameter("head_x", String.valueOf(headNode.getGlobalCoordinates().x())));
-        ListcurPos.set(11, new IniParameter("head_y", String.valueOf(headNode.getGlobalCoordinates().y())));
-        ListcurPos.set(12, new IniParameter("head_z", String.valueOf(headNode.getGlobalCoordinates().z())));
-        // head angles give by the additional rotation of each cervical vertebrae
-        ListcurPos.set(13, new IniParameter("head_pitch", String.valueOf(bapFrames.getCurrentFrame().getRadianValue(BAPType.vc1_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc2_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc3_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc4_tilt) + 
-                                                                                  bapFrames.getCurrentFrame().getRadianValue(BAPType.vc5_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc6_tilt) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc7_tilt))));
-        ListcurPos.set(14, new IniParameter("head_yaw", String.valueOf(bapFrames.getCurrentFrame().getRadianValue(BAPType.vc1_torsion) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc2_torsion) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc3_torsion) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc4_torsion) + 
-                                                                                  bapFrames.getCurrentFrame().getRadianValue(BAPType.vc5_torsion) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc6_torsion) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc7_torsion))));
-        ListcurPos.set(15, new IniParameter("head_roll", String.valueOf(bapFrames.getCurrentFrame().getRadianValue(BAPType.vc1_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc2_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc3_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc4_roll) + 
-                                                                                  bapFrames.getCurrentFrame().getRadianValue(BAPType.vc5_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc6_roll) + bapFrames.getCurrentFrame().getRadianValue(BAPType.vc7_roll))));
-        
-        // save the live data in CharacterManager variable in order to be able to get the wanted data when needed
-        //CharacterManager.getStaticInstance().currentPosition.put(getCharacterManager().getCurrentCharacterName() , ListcurPos); 
-
         return fapFrames.getCurrentFrame();
     }
 

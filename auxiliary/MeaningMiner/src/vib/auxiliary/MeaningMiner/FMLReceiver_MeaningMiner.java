@@ -763,11 +763,11 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
 
                             //we retrieve the synset
                             ISynset synset = this.simplifiedLesk(idxWord, SentenceUtils.listToOriginalTextString(sentence));
-                            System.out.println("Stem : " + stem + " POS:" + pos);
-                            for (IWordID idw : idxWord.getWordIDs()) {
+                            //System.out.println("Stem : " + stem + " POS:" + pos);
+                            /*for (IWordID idw : idxWord.getWordIDs()) {
                                 System.out.println("ID : " + idw.getSynsetID().getOffset());
-                            }
-                            System.out.println(stem + " id:" + synset.getOffset());
+                            }*/
+                            //System.out.println(stem + " id:" + synset.getOffset());
                             //THE IMPORTANT PART : we retrieve the image schemas for this synset
                             Set<String> imscSet = getImageSchemas(synset, 10);
 
@@ -905,7 +905,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                 }
 
                 negation = posTag.equalsIgnoreCase("DT") && value.equalsIgnoreCase("no") || posTag.equalsIgnoreCase("RB") && value.equalsIgnoreCase("not");
-                System.out.println(negation);
+                //System.out.println(negation);
 
             }
             countSentenceMarkers += sentence.size();

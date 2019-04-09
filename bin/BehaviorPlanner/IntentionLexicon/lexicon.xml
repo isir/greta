@@ -35,6 +35,52 @@
 		</constraints>
 	</behaviorset>
 	
+	<behaviorset name="rest-restposeAkimbo">
+		<signals>
+			<signal id="1" name="rest=Akimbo" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="performative-raiseHand_R">
+		<signals>
+			<signal id="1" name="performative=raiseHand_R" modality="gesture">
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="performative-GoodThumbup">
+		<signals>
+			<signal id="1" name="performative=good" modality="gesture">
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="rest-restposealong_big">
+		<signals>
+			<signal id="1" name="rest=along_big" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
 	<!-- EMOTIONS  DEFAULT DEFINITIONS - you can edit and add new items -->
 	
 	<behaviorset name="emotion-panic_fear">
@@ -223,7 +269,7 @@
 		<signals>
 			<signal id="1" name="faceexp=pride_signal_10" modality="face"/>
 			<signal id="2" name="UP" modality="head"/>
-			<signal id="3" name="pride_signal_3" modality="torso"/>
+			<!--<signal id="3" name="pride_signal_3" modality="torso"/>-->
 		</signals>
 		<constraints>
 			<core>
@@ -479,8 +525,8 @@
 			<signal id="1" name="faceexp=greet" modality="face"/>
 			<signal id="2" name="performative=greetnew_Ges_R" modality="gesture"/>
 			<signal id="4" name="NOD" modality="head"/>
-			<signal id="5" name="LinearNeutralFrontalSwing" modality="torso"/>
-			<!-- Doesn't work anymore in the GRETA platform. -->
+			<!--<signal id="5" name="LinearNeutralFrontalSwing" modality="torso"/>
+			 Doesn't work anymore in the GRETA platform. -->
 			<!-- <signal id="5" name="bow" modality="torso"/> -->
 		</signals>
 		<constraints>

@@ -23,6 +23,7 @@ import vib.core.keyframes.Keyframe;
 import vib.core.keyframes.KeyframePerformer;
 import vib.core.repositories.AUAP;
 import vib.core.repositories.AUAPFrame;
+import vib.core.util.CharacterManager;
 import vib.core.util.Constants;
 import vib.core.util.Mode;
 import vib.core.util.enums.CompositionType;
@@ -40,6 +41,7 @@ import vib.core.util.time.Timer;
  */
 public class FaceKeyframePerformer implements KeyframePerformer, AUEmitter {
 
+    private CharacterManager charactermanager;
     private boolean interpolate;
 
     private int frameDelay = 5;
@@ -54,7 +56,8 @@ public class FaceKeyframePerformer implements KeyframePerformer, AUEmitter {
 
     private final AUAPFrameInterpolator interpolator;
 
-    public FaceKeyframePerformer(){
+    public FaceKeyframePerformer(CharacterManager cm){
+        this.charactermanager = cm; 
         interpolator = new AUAPFrameInterpolator();
         startInterpolation();
     }

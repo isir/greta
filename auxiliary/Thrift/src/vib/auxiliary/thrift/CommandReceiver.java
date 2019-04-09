@@ -34,15 +34,19 @@ import vib.core.util.xml.XML;
 import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
 import java.io.File;
-import java.sql.Time;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import vib.auxiliary.socialparameters.SocialDimension;
 import vib.auxiliary.socialparameters.SocialParameterEmitter;
 import vib.auxiliary.socialparameters.SocialParameterFrame;
 import vib.auxiliary.socialparameters.SocialParameterPerformer;
 import vib.core.util.CharacterManager;
-import vib.core.util.time.TimeController;
+import vib.core.util.environment.TreeNode;
+import vib.core.util.environment.Environment;
+import vib.core.util.environment.Node;
+import vib.core.util.math.Quaternion;
+import vib.core.util.math.Vec3d;
 import vib.core.util.time.Timer;
 
 /**
@@ -51,10 +55,12 @@ import vib.core.util.time.Timer;
  */
 public class CommandReceiver extends Receiver  implements IntentionEmitter, SignalEmitter, SocialParameterEmitter{
 
-   private ArrayList<IntentionPerformer> intentionPerformers;
-   private ArrayList<SocialParameterPerformer> socialParamPerformers = new ArrayList<SocialParameterPerformer>();
+    private Environment environment;
+    
+    private ArrayList<IntentionPerformer> intentionPerformers;
+    private ArrayList<SocialParameterPerformer> socialParamPerformers = new ArrayList<SocialParameterPerformer>();
 
-   private ArrayList<SignalPerformer> signalPerformers;
+    private ArrayList<SignalPerformer> signalPerformers;
     private XMLParser parser;
     int cpt ;
     private CharacterManager cm;
@@ -63,6 +69,7 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
     public CommandReceiver(CharacterManager cm) {
         super();
         this.cm = cm;
+        this.environment = cm.getEnvironment();
         intentionPerformers = new ArrayList<IntentionPerformer>();
         signalPerformers = new ArrayList<SignalPerformer>();
         parser = XML.createParser();
@@ -73,6 +80,7 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
     public CommandReceiver(CharacterManager cm,int port) {
         super(port);
         this.cm = cm;
+        this.environment = cm.getEnvironment();
         intentionPerformers = new ArrayList<IntentionPerformer>();
         signalPerformers = new ArrayList<SignalPerformer>();
         parser = XML.createParser();
@@ -82,9 +90,12 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
 
     @Override
     public void perform(Message m) {
-       // if(messageID>cpt){
-       //     cpt = messageID;
-        if(m.getProperties() != null && !m.getProperties().isEmpty()){
+        boolean isAnObject = false;
+
+        if(m.getProperties() != null && !m.getProperties().isEmpty() && m.getType().equals("object")){
+            addObjectInEnvironment((HashMap<String,String>) m.getProperties(), m.getId(), m.getType());
+            isAnObject = true;
+        }else{
             double dominance = Double.parseDouble(m.getProperties().get("Dominance"));
             double liking = Double.parseDouble(m.getProperties().get("Liking"));
             ArrayList<SocialParameterFrame> listSPF = new ArrayList<SocialParameterFrame>();
@@ -98,9 +109,12 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
             }
             Logs.debug("attitude sent : Dominance " +dominance+"; Liking "+liking);
         }
-          Logs.debug("animation to play received: " + m.getString_content())  ;
-        String filename = (new File(m.getString_content())).getName().replaceAll("\\.xml$", "");
-        ID messageID = IDProvider.createID(m.getId());
+        
+        // if it is not an objec t could be a bml or fml
+        if (!isAnObject){
+            Logs.debug("animation to play received: " + m.getString_content())  ;
+            String filename = (new File(m.getString_content())).getName().replaceAll("\\.xml$", "");
+            ID messageID = IDProvider.createID(m.getId());
             try {
                 XMLTree xml = parser.parseFile(m.getString_content());
                 if (xml.getName().equalsIgnoreCase("bml")) {
@@ -142,7 +156,7 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
+        }
        // }
     }
     private void propagateSignals(List<Signal> signals, ID request, Mode mode) {
@@ -193,6 +207,32 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
         if (performer != null) {
             socialParamPerformers.remove(performer);
         }
+    }
+    
+    public void addObjectInEnvironment(HashMap<String,String> properties, String Id, String type){
+
+        TreeNode object = (TreeNode) this.environment.getNode(properties.get("id"));
+        // check if the object it's already in the environment
+        if(object != null){ // if so, just update in the env
+            
+            Vec3d position = new Vec3d(Double.parseDouble(properties.get("position.x")), Double.parseDouble(properties.get("position.y")), Double.parseDouble(properties.get("position.z")));
+            object.setCoordinates(position);
+            
+            Quaternion orientation = new Quaternion(Double.parseDouble(properties.get("quaternion.x")), Double.parseDouble(properties.get("quaternion.y")), Double.parseDouble(properties.get("quaternion.z")), Double.parseDouble(properties.get("quaternion.w")));
+            object.setOrientation(orientation);
+            
+            Vec3d scale = new Vec3d(Double.parseDouble(properties.get("scale.x")), Double.parseDouble(properties.get("scale.y")), Double.parseDouble(properties.get("scale.z")));
+            object.setScale(scale);
+
+        }else{// if not, add it in the env
+            
+            TreeNode obj = new TreeNode(Double.parseDouble(properties.get("position.x")), Double.parseDouble(properties.get("position.y")), Double.parseDouble(properties.get("position.z")), 
+                                            Double.parseDouble(properties.get("quaternion.x")), Double.parseDouble(properties.get("quaternion.y")), Double.parseDouble(properties.get("quaternion.z")), Double.parseDouble(properties.get("quaternion.w")),
+                                                Double.parseDouble(properties.get("scale.x")), Double.parseDouble(properties.get("scale.y")), Double.parseDouble(properties.get("scale.z")));           
+            obj.setIdentifier(properties.get("id"));
+            this.environment.addNode(obj);
+        }
+        
     }
 
 

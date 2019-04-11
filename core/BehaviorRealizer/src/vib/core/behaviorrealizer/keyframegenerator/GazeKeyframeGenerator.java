@@ -214,6 +214,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 MPEG4Animatable ag = (MPEG4Animatable) this.env.getTreeNode().getChildren().get(f);
                 if (ag.getCharacterManager().getCurrentCharacterName().equals(cm.getCurrentCharacterName())){
                     currentAgent = (MPEG4Animatable) this.env.getTreeNode().getChildren().get(f);
+                    break;
                 }
             }
         }
@@ -1744,13 +1745,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             // take the MPAG4 for the agent target, i.e. the agent to look at
             MPEG4Animatable targetAgent = new MPEG4Animatable(cm);
             // take the MPAG4 for the agent whom is performing the gaze
-            MPEG4Animatable currentAgent = new MPEG4Animatable(cm);
+            MPEG4Animatable currentAgent = new MPEG4Animatable(gaze.getCharacterManager());
             if (gaze.getTarget() != null || !gaze.getTarget().isEmpty()){
                 for (int i = 0; i < env.getTreeNode().getChildren().size(); ++i){
                     if (env.getTreeNode().getChildren().get(i) instanceof MPEG4Animatable){
                         MPEG4Animatable ag = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
                         if (ag.getCharacterManager().getCurrentCharacterName().equals(gaze.getTarget())){
                             targetAgent = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
+                            
                         }
                         if (ag.getCharacterManager().getCurrentCharacterName().equals(gaze.getCharacterManager().getCurrentCharacterName())){
                             currentAgent = (MPEG4Animatable) env.getTreeNode().getChildren().get(i);
@@ -1760,7 +1762,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             }
             
             //can compute angles to target only if we have an environment
-            if (env != null) {
+            if (env != null && !gaze.getTarget().equals(cm.getCurrentCharacterName())) {
                 
                 Node targetNode = null;
                 Vec3d sizeTarget = null;
@@ -1813,6 +1815,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
                                 // find the poit in the meddle between the two eyes
                                 vec2target = new Vec3d(positionAgent.x(), headAgent.y(), positionAgent.z());
+                                break;
                             } 
                         }
                         // if the target is not the agent I look the target in the environment objects
@@ -1909,6 +1912,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     h_yawAngle = h_relativeEulerAngles.x();
                     h_pitchAngle = h_relativeEulerAngles.y();
                 }
+            }else if(gaze.getTarget().equals(cm.getCurrentCharacterName())) { // if look at my self just look down
+                /*gaze.setOffsetDirection(GazeDirection.DOWN);
+                gaze.setOffsetAngle(30);*/
             }
 
             double offsetAngle = Math.toRadians(gaze.getOffsetAngle());
@@ -2101,7 +2107,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             // take the MPAG4 for the agent target, i.e. the agent to look at
             MPEG4Animatable targetAgent = new MPEG4Animatable(cm);
             // take the MPAG4 for the agent whom is performing the gaze
-            MPEG4Animatable currentAgent = new MPEG4Animatable(cm);
+            MPEG4Animatable currentAgent = new MPEG4Animatable(gaze.getCharacterManager());
             if (gaze.getTarget() != null || !gaze.getTarget().isEmpty()){
                 for (int i = 0; i < env.getTreeNode().getChildren().size(); ++i){
                     if (env.getTreeNode().getChildren().get(i) instanceof MPEG4Animatable){
@@ -2117,7 +2123,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             }
                 
             //can compute angles to target only if we have an environment
-            if (env != null) {
+            if (env != null && !gaze.getTarget().equals(cm.getCurrentCharacterName())) {
                 
                 Vec3d sizeTarget = null;
                 Node targetNode = null;

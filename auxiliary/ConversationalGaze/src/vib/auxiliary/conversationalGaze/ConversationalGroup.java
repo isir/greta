@@ -57,7 +57,7 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
     private int[] vecGazeState = new int[6]; 
     private int counter = 0;
     
-    public boolean groupActive = false;
+    public boolean groupActive = true;
     
     private List<GazeDirection> listGazeDirection;
     
@@ -116,7 +116,15 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
                     if (!cp.getName().equals("user")){
                         if (cp.isIsTalking()){ // speaker
 
-                            if (cp.getGazeStatus() == 0){// if it is looking at someone
+                            System.out.println(cp.getName() + " is talking ");
+                            GazeSignal gs = new GazeSignal("gaze");
+                            gs.setOffsetDirection(GazeDirection.FRONT);
+                            gs.setOffsetAngle(0.0);
+                            gs.setGazeShift(true);
+                            gs.getTimeMarker("start").setValue(0.0);
+                            gs.getTimeMarker("end").setValue(0.4);
+                            
+                        /*    if (cp.getGazeStatus() == 0){// if it is looking at someone
                                 if (!cp.lastGazeTarget.isEmpty()){ // make sure the last target wasn't the env or empty
                                     if((currentTime - cp.timeGazingatTarget) > cp.getTime_MG() ){ // if the mutual gaze time is over 
 
@@ -188,7 +196,7 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
                                     cp.addGzSignal(gs);
                                 }
                             }
-                        }else { // Hearer
+                        */}else { // Hearer
                             boolean speakerFound = false;
                             if (cp.getGazeStatus() == 0){// it is looking at someone
 
@@ -230,9 +238,14 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
                                                 while(choice.equals(cp.getName())){
                                                     choice = RandomName(list_names);
                                                 }
-                                                // create the gaze signal to look at the agent
-                                                gs = createGazeSignal(choice, cp);
-                                                cp.lastGazeTarget = choice;
+                                                if (choice.equals("env")){
+                                                    gs = createGazeSignal("", cp);
+                                                    cp.setGazeStatus(1);
+                                                }else{
+                                                    // create the gaze signal to look at the agent
+                                                    gs = createGazeSignal(choice, cp);
+                                                    cp.lastGazeTarget = choice;
+                                                }
                                             }else{
                                                 gs = createGazeSignal(choice, cp);
                                                 cp.lastGazeTarget = choice;
@@ -281,9 +294,15 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
                                                 while(choice.equals(cp.getName())){
                                                     choice = RandomName(list_names);
                                                 }
-                                                // create the gaze signal to look at the agent
-                                                gs = createGazeSignal(choice, cp);
-                                                cp.lastGazeTarget = choice; // update target
+                                                if(choice.equals("env")){ // if the target is the env, the GazeStatus is look away = 1
+                                                    cp.setGazeStatus(1);
+                                                    // create the gaze signal to look at the agent
+                                                    gs = createGazeSignal("", cp);
+                                                }else {
+                                                    // create the gaze signal to look at the agent
+                                                    gs = createGazeSignal(choice, cp);
+                                                    cp.lastGazeTarget = choice; // update target
+                                                }
                                             }else {
                                                 gs = createGazeSignal(choice, cp);
                                                 cp.lastGazeTarget = choice; // update target

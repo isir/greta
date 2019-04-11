@@ -1,0 +1,5 @@
+avec plaisir	gratitude	-	acceptance	accept	answer	warm	-	-	-
+de rien	gratitude	-	acceptance	accept	answer	warm	-	-	-
+je m’appelle	self_introduction	-	-	inform	-	-	-	-	-
+je vous demande	pardon	-	-	no_understanding	request	-	-	-	-	-
+je vous en prie	gratitude	-	acceptance	accept	answer	warm	-	-	-

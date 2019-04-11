@@ -646,6 +646,19 @@
 			</core>
 		</constraints>
 	</behaviorset>
+	
+	<behaviorset name="performative-inciateAtBoth">
+		<signals>
+			<signal id="1" name="performative=presentTheOthers" modality="gesture">
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
 	<!-- certainty -->
 	
 	<behaviorset name="certainty-certain">
@@ -1843,6 +1856,28 @@
 			<signal id="1" name="imageschema=WHOLE_Ges_B" modality="gesture">
 				<alternative name="imageschema=WHOLE_Ges_R" probability="0.33"/>
 				<alternative name="imageschema=WHOLE_Ges_L" probability="0.33"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-object_ges_r">
+		<signals>
+			<signal id="1" name="imageschema=OBJECT_Ges_R" modality="gesture">
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	<behaviorset name="imageschema-object_ges_l">
+		<signals>
+			<signal id="1" name="imageschema=OBJECT_Ges_L" modality="gesture">
 			</signal>
 		</signals>
 		<constraints>

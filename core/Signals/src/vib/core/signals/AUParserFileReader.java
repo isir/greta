@@ -11,15 +11,12 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import vib.core.animation.mpeg4.bap.BAPFrame;
@@ -185,12 +182,12 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
         int cpt=1; 
         try {
             br = new BufferedReader(new FileReader(csvFile));
-            int [] au_correspondance = {1,2,4,5,6,7,9,10,12,14,15,17,20,23,24,26,45};
+            int [] au_correspondance = {1,2,4,5,6,7,9,10,12,14,15,17,20,23,25,26,45}; // 24
             double [] prev_value_au = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
             
             double prev_gaze_x = 0.0;
             double prev_gaze_y = 0.0;
-            
+
             double prev_blink = 0.0;
             int col_blink = 412;            
             double alpha = 0.75;//1.0; 
@@ -212,19 +209,34 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
                     Logs.debug("header["+h+"] = "+value);
                 }
                 
+                int iii = 0;
                 while ((line = br.readLine()) != null) {
-
                     String[] values = line.split(cvsSplitBy);
                     double time;
                     String val = values[0];                    
                     Logs.debug("time: "+val);
                     time = Double.parseDouble(val);
-                    
-                    long long_tt;
+
                     list_val.add(time);
                     if (list_val.size() == 2 ){
                         timeConstantFrame =  (1/(list_val.get(1) - list_val.get(0)));
+                        break;
                     }
+                }  
+                
+                while ((line = br.readLine()) != null) {
+                    
+                    //check if read all the frames
+                    //System.out.println(iii);
+                    //iii++;
+                    
+                    String[] values = line.split(cvsSplitBy);
+                    double time;
+                    String val = values[0];                    
+                    Logs.debug("time: "+val);
+                    time = Double.parseDouble(val);
+
+                    list_val.add(time);
                     
                     if (timeConstantFrame != 0) {
                         if( time > max_time){
@@ -235,8 +247,11 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
                         }
                         AUAPFrame au_frame = new AUAPFrame();
                         au_frame.setFrameNumber((int) (time * timeConstantFrame) + 1);
+                        
+                        // be carefull: if the format of the excel file will change, also this parameter should change  
                         int indice_intensity=15;
-                        for(int au=0; au<17; au++)
+                        
+                        for(int au=0; au < au_correspondance.length; au++)
                         {
                             if(au_correspondance[au]==1||au_correspondance[au]==2||au_correspondance[au]==4||au_correspondance[au]==5||au_correspondance[au]==6||au_correspondance[au]==7||au_correspondance[au]==12 ||au_correspondance[au]==10
                                                         ||au_correspondance[au]==14 ||au_correspondance[au]==15 ||au_correspondance[au]==17 ||au_correspondance[au]==20 ||au_correspondance[au]==23 ||au_correspondance[au]==25 ||au_correspondance[au]==26)
@@ -244,7 +259,7 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
                                 String value = values[au+indice_intensity];
                                 if(isNumeric(value)){
                                     double intensity =alpha*( Double.parseDouble(value)/3.5) + (1-alpha)*prev_value_au[au];
-                                    System.out.println("AU["+au_correspondance[au]+"] : "+intensity+ " cpt "+ cpt);
+                                    //System.out.println("AU["+au_correspondance[au]+"] : "+intensity+ " cpt "+ cpt);
                                     au_frame.setAUAPboth(au_correspondance[au], intensity);
                                     prev_value_au[au]=intensity;
                                 }
@@ -301,7 +316,7 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
                         hmFrame.setDegreeValue(BAPType.vc3_torsion, rot_Y_deg);
                         hmFrame.setDegreeValue(BAPType.vc3_roll, rot_Z_deg);      
 
-                        System.out.println("BAP["+time+"] : ["+rot_X_rad+"; "+rot_Y_rad+"; "+rot_Z_rad+"]");
+                        //System.out.println("BAP["+time+"] : ["+rot_X_rad+"; "+rot_Y_rad+"; "+rot_Z_rad+"]");
 
                         prev_rot_X = rot_X_deg;
                         prev_rot_Y = rot_Y_deg;
@@ -311,7 +326,7 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
                     }
                 }  
             }
-            System.out.println("Program fini finifffffffffffffffffffffffffffffff ");
+            //System.out.println("Program fini finifffffffffffffffffffffffffffffff ");
             
         } catch (IOException e) {
             Logs.error(e.getLocalizedMessage());

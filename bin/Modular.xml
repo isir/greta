@@ -25,7 +25,7 @@
                 <item module="oldBAP2newBAP" name="old BAP to new BAP"/>
                 <item module="Body Head Noise" name="Body Head Noise"/>
 				<item module="AUParserFileReader" name="AU parser reader"/> 
-				<!--<item module="FMLAnnotator" name="FML Annotator"/> -->			
+				<item module="FMLAnnotator" name="FML Annotator"/>		
 				<menu name="MeaningMiner">
                     <item module="ImageSchemaExtractor" name="ImageSchemaExtractor"/>
                 </menu>
@@ -111,6 +111,7 @@
                 <item module="CaptureController" name="Capture Controller"/>
                 <item module="XuggleVideoCapture" name="Video Capture Output"/>
 				<item module="ParserCaptureController_AU" name="Parser Capture Controller AU"/>
+				<item module="MeaningMinerCaptureController" name="MeaningMinerCaptureController"/>
             </menu>
             <menu name="NetworkConnections">
                 <menu name="ActiveMQ">
@@ -915,6 +916,10 @@
                 <link method="setLoader" on="frame"/>
             </frame>
         </module>
+		<module name="MeaningMinerCaptureController" style="Player">
+            <object class="vib.plancapture.MeaningMinerCaptureController" lib_id="vib_plancap"/>
+            <frame type="object"/>
+        </module>
 		<module name="ParserCaptureController_AU" style="Player">
             <object class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plancap"/>
             <frame type="object"/>
@@ -925,10 +930,10 @@
                 <link method="setModule" on="frame"/>
             </frame>
         </module>
-		<!--<module name="FMLAnnotator" style="Intentions">
+		<module name="FMLAnnotator" style="Intentions">
             <object class="vib.auxiliary.fmlannotator.View" lib_id="vib_fml_annotator"/>
             <frame type="object"/>
-        </module> -->
+        </module>
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>

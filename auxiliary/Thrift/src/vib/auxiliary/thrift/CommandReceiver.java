@@ -44,7 +44,6 @@ import vib.auxiliary.socialparameters.SocialParameterPerformer;
 import vib.core.util.CharacterManager;
 import vib.core.util.environment.TreeNode;
 import vib.core.util.environment.Environment;
-import vib.core.util.environment.Node;
 import vib.core.util.math.Quaternion;
 import vib.core.util.math.Vec3d;
 import vib.core.util.time.Timer;

@@ -19,6 +19,7 @@ package vib.core.keyframes;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
 import vib.core.util.audio.Audio;
 import vib.core.util.audio.AudioEmitter;
@@ -32,8 +33,14 @@ import vib.core.util.id.ID;
  */
 public class AudioKeyFramePerformer implements KeyframePerformer, AudioEmitter {
 
-    private ArrayList<AudioPerformer> audioPerformers = new ArrayList<AudioPerformer>();
+    private CharacterManager charactermanager;
+    private ArrayList<AudioPerformer> audioPerformers;
 
+    public AudioKeyFramePerformer(CharacterManager cm){
+        this.charactermanager = cm;
+        this.audioPerformers = new ArrayList<AudioPerformer>();
+    }
+    
     @Override
     public void performKeyframes(List<Keyframe> keyframes, ID requestId) {
         performKeyframes(keyframes, requestId, new Mode(CompositionType.blend));

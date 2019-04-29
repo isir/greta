@@ -20,11 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 import vib.core.repositories.AUItem;
 import vib.core.signals.FaceSignal;
+import vib.core.signals.SpeechSignal;
 import vib.core.signals.gesture.GesturePose;
 import vib.core.signals.gesture.GestureSignal;
 import vib.core.util.id.ID;
 import vib.core.util.log.Logs;
 import vib.core.util.time.Temporizable;
+import vib.core.util.time.TimeMarker;
+import vib.core.util.time.Timer;
 
 /**
  *
@@ -85,6 +88,7 @@ public class Feedbacks2Logs implements FeedbackPerformer {
     @Override
     public void performFeedback(Callback callback) {
         String content = callback.animId() + " " + callback.type() + " " + String.valueOf(callback.time());
+        //String content = "{id: \"" + callback.animId() +"\", "+"type: \""+callback.type()+"\", "+ "time: " + String.valueOf(callback.time()) + "}";
         Logs.info(content);
     }
 
@@ -116,5 +120,13 @@ public class Feedbacks2Logs implements FeedbackPerformer {
     @Override
     public boolean areDetailsOnGestures() {
         return this.detailsOnGestures;
+    }
+
+    @Override
+    public void performFeedback(ID AnimId, String type, SpeechSignal speechsignal, TimeMarker tm) {
+        String content = "{\"type\": \"" +type + "\",\n";
+        
+        content += "\"TimeMarker_id\": " + tm.getName() +", \"time\": " + tm.getValue() + "}\n";
+        Logs.info(content);
     }
 }

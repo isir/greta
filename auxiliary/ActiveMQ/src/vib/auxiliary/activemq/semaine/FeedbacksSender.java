@@ -26,6 +26,14 @@ import vib.core.util.time.Timer;
 import java.util.HashMap;
 import java.util.List;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import vib.core.signals.SpeechSignal;
+import vib.core.util.CharacterManager;
+import vib.core.util.time.TimeMarker;
+
+
 /**
  *
  * @author Ken Prepin
@@ -33,17 +41,18 @@ import java.util.List;
 
 public class FeedbacksSender extends TextSender implements FeedbackPerformer{
 
+    private CharacterManager charactermanager;
     private HashMap<String,Object> semaineMap;
     private boolean detailedFeedbacks;
     private boolean detailsOnFace;
     private boolean detailsOnGestures;
 
-    public FeedbacksSender(){
+    public FeedbacksSender(CharacterManager cm){
         this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
              WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
-             "semaine.callback.output.feedback");
+             "semaine.callback.output.feedback", cm);
     }
-    public FeedbacksSender(String host, String port, String topic){
+    public FeedbacksSender(String host, String port, String topic, CharacterManager cm){
         super(host, port, topic);
         semaineMap = new HashMap<String,Object>();
         semaineMap.put("content-type", "utterance");
@@ -52,29 +61,166 @@ public class FeedbacksSender extends TextSender implements FeedbackPerformer{
         semaineMap.put("event", "single");
         semaineMap.put("xml", true);
         detailedFeedbacks = false; // TODO implement the possibility to use detailedFeedbacks
+        this.charactermanager = cm;
     }
 
     @Override
-    public void performFeedback(ID AnimId, String Type, List<Temporizable> listTmp) {
-        String content = Type + "\n";
-        for(Temporizable tmp : listTmp){
-            content += tmp.getId() + "\n" + tmp.toString() + "\n";
-        }
+    public void performFeedback(ID AnimId, String Type, SpeechSignal speechsignal, TimeMarker tm) {
+    	@SuppressWarnings(value = "unused")
+    	class FeedbackContent {
+    		private String fml_id;
+    		private String TimeMarker_id;
+    		private String type;
+    		private double time;
+    		private String agent;
+    		
+    		public FeedbackContent(String fml_id, String TimeMarker_id, String type, double time, String agent) {
+    			this.fml_id = fml_id;
+    			this.TimeMarker_id = TimeMarker_id;
+    			this.type = type;
+    			this.time = time;
+    			this.agent = agent;
+    		}
+
+			public String getFml_id() {
+				return fml_id;
+			}
+
+			public void setFml_id(String fml_id) {
+				this.fml_id = fml_id;
+			}
+
+			public String getTimeMarker_id() {
+				return TimeMarker_id;
+			}
+
+			public void setTimeMarker_id(String timeMarker_id) {
+				TimeMarker_id = timeMarker_id;
+			}
+
+			public String getType() {
+				return type;
+			}
+
+			public void setType(String type) {
+				this.type = type;
+			}
+
+			public double getTime() {
+				return time;
+			}
+
+			public void setTime(double time) {
+				this.time = time;
+			}
+
+			public String getAgent() {
+				return agent;
+			}
+
+			public void setAgent(String agent) {
+				this.agent = agent;
+			}
+    	}
+    	
+    	String content;
+    	try {
+    		content = (new ObjectMapper()).writeValueAsString(new FeedbackContent(AnimId.getFmlID(), tm.getName(), Type, tm.getValue(), this.charactermanager.getCurrentCharacterName()));
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException(e);
+		}
+    	 
         semaineMap.put("AnimId", AnimId.toString());
         semaineMap.put("type", "ongoing");
         semaineMap.put("current-time", Timer.getTimeMillis());
         semaineMap.put("content-id", AnimId.toString());
         semaineMap.put("usertime", Timer.getTimeMillis());
         semaineMap.put("content-creation-time", Timer.getTimeMillis());
+        
         this.send(content, semaineMap);
+    }
+    
+    @Override
+    public void performFeedback(ID AnimId, String Type, List<Temporizable> listTmp) {
+        
+        // information about start and end of each gesture, facial expression
+        // if you want this you should be sure that the format of the string sent as feedback will be in the json format
+        // How it is implemented now it sent more id in the same sting and this it is not good so it need to be changed
+        
+        /*String content = "{\"type\": \"" +Type + "\",\n";
+        for(Temporizable tmp : listTmp){
+            content += "\"id\": \"" + tmp.getId() + "\",\n" + "\"time\": " + tmp.toString() + "}\n";
+        }
+        System.out.println(content);
+        semaineMap.put("AnimId", AnimId.toString());
+        semaineMap.put("type", "ongoing");
+        semaineMap.put("current-time", Timer.getTimeMillis());
+        semaineMap.put("content-id", AnimId.toString());
+        semaineMap.put("usertime", Timer.getTimeMillis());
+        semaineMap.put("content-creation-time", Timer.getTimeMillis());
+        
+        this.send(content, semaineMap);*/
      }
 
     @Override
     public void performFeedback(Callback callback) {
-       String content=callback.animId()+" "+callback.type()+" "+String.valueOf(callback.time());
-         semaineMap.put("AnimId", callback.animId().toString());
+    	@SuppressWarnings(value = "unused")
+    	class FeedbackContent {
+    		private String fml_id;
+    		private String type;
+    		private double time;
+    		private String agent;
+    		
+    		public FeedbackContent(String fml_id, String type, double time, String agent) {
+    			this.fml_id = fml_id;
+    			this.type = type;
+    			this.time = time;
+    			this.agent = agent;
+    		}
+
+			public String getFml_id() {
+				return fml_id;
+			}
+
+			public void setFml_id(String fml_id) {
+				this.fml_id = fml_id;
+			}
+
+			public String getType() {
+				return type;
+			}
+
+			public void setType(String type) {
+				this.type = type;
+			}
+
+			public double getTime() {
+				return time;
+			}
+
+			public void setTime(double time) {
+				this.time = time;
+			}
+
+			public String getAgent() {
+				return agent;
+			}
+
+			public void setAgent(String agent) {
+				this.agent = agent;
+			}
+    	}
+    	
+    	String content;
+    	try {
+    		content = (new ObjectMapper()).writeValueAsString(new FeedbackContent(callback.animId().getFmlID(), callback.type(), callback.time(), this.charactermanager.getCurrentCharacterName()));
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException(e);
+		}
+    	
+        semaineMap.put("AnimId", callback.animId().toString());
         semaineMap.put("type", callback.type());
-         semaineMap.put("current-time", Timer.getTimeMillis());
+        semaineMap.put("current-time", Timer.getTimeMillis());
         semaineMap.put("content-id", callback.animId().toString());
         semaineMap.put("usertime", Timer.getTimeMillis());
         semaineMap.put("content-creation-time", Timer.getTimeMillis());

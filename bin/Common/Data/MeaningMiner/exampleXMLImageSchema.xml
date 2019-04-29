@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE imageschemaInterpreter SYSTEM "imageschemaInterpreter.dtd">
+<imageschemainterpreter>
+<speech><tm id="tm1"/>One departs from a <tm id="tm2"/>world of <tm id="tm3"/>yesterday in which one <tm id="tm4"/>accumulated knowledge.
+		<tm id="tm5"/>One goes towards a <tm id="tm6"/>world of <tm id="tm7"/>tomorrow in which one tries to comprehend the <tm id="tm8"/>behaviours of actors whom one will need.
+		<tm id="tm9"/>And it’s on the basis of these <tm id="tm10"/>behaviours of actors that, <tm id="tm11"/>going in the <tm id="tm12"/>reverse direction, <tm id="tm13"/>one constructs a <tm id="tm14"/>method of teaching.</speech>
+<imageschemas>
+<imageschema ref="tm2" value="LEFT"/>
+<imageschema ref="tm4" value="PATH|BIG"/>
+<imageschema ref="tm6" value="RIGHT"/>
+<imageschema ref="tm7" value="RIGHT"/>
+<imageschema ref="tm8" value="OBJECT"/>
+<imageschema ref="tm10" value="FRONT"/>
+<imageschema ref="tm11" value="FRONT"/>
+<imageschema ref="tm12" value="PATH|NEAR"/>
+<imageschema ref="tm13" value="NEAR"/>
+<imageschema ref="tm14" value="ENABLEMENT"/>
+</imageschemas>
+</imageschemainterpreter>

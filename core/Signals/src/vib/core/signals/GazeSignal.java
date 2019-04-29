@@ -77,7 +77,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     @Override
     public void onCharacterChanged() {
         //set the current library to use :
-        setOrigin(getCharacterManager().currentCharacterId);
+        //setOrigin(getCharacterManager().currentCharacterId);
     }
 
     public GazeSignal(String id){
@@ -93,7 +93,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         end = new TimeMarker("end");
         timeMarkers.add(end);
 
-        origin = getCharacterManager().currentCharacterId;
+        //origin = getCharacterManager().currentCharacterId;
         target="";
         offsetDirection=GazeDirection.FRONT;
         offsetAngle=0.0;

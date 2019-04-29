@@ -26,6 +26,7 @@ import vib.core.animation.mpeg4.fap.FAPFrameEmitter;
 import vib.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
 import vib.core.animation.mpeg4.fap.FAPFramePerformer;
 import vib.core.animation.mpeg4.fap.FAPType;
+import vib.core.util.CharacterManager;
 import vib.core.util.Constants;
 import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
@@ -38,6 +39,7 @@ import vib.core.util.time.Timer;
 public class LipBlender extends FAPFrameEmitterImpl implements FAPFramePerformer{
 
     public int blending_delay = 0;
+    private CharacterManager charactermanager;
 
     private static Comparator<FAPFrame> fapComp = new Comparator<FAPFrame>(){
         @Override
@@ -56,7 +58,8 @@ public class LipBlender extends FAPFrameEmitterImpl implements FAPFramePerformer
     private Blender blender;
 
 
-    public LipBlender(){
+    public LipBlender(CharacterManager cm){
+        this.charactermanager = cm;
         faceAnimation = new LinkedList<FAPIDPair>();
         lipAnimation = new LinkedList<FAPIDPair>();
         lipReceiver = new FAPFramePerformer(){

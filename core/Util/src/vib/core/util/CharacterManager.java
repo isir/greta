@@ -36,7 +36,7 @@ import vib.core.util.speech.TTS;
  */
 public class CharacterManager {
 
-    private static final String DEFAULT_CHARACTER_NAME = "GRETA";
+    //private static final String DEFAULT_CHARACTER_NAME = "CAMILLE";
     private static final String DEFAULT_CHARACTER_KEY = "DEFAULT_CHARACTER";
        
     private static CharacterManager staticInstance;
@@ -52,13 +52,6 @@ public class CharacterManager {
     public String currentCameraId;
     private String id;
     private TTS tts;
-    
-    public List<Object> defaultFrame = new ArrayList<Object>();
-    
-    //public static  List<IniParameter> CurrentPosition = Arrays.asList(new IniParameter[13]);
-    // Hashmap to store for each agent the current position of each body part
-    //public HashMap<String, List<IniParameter>> currentPosition = new HashMap<String, List<IniParameter>>();
-    //public List<IniParameter> currentPosition = new ArrayList<IniParameter>();
     
     static{
         getStaticInstance();
@@ -76,10 +69,10 @@ public class CharacterManager {
         characterMapFile = new HashMap<String, String>();
         currentCaracterName = "DEFAULT_CHARACTER";      
         String filename = IniManager.getGlobals().getValueString(DEFAULT_CHARACTER_KEY);
-        if (!(new File(filename)).exists()) {
+        /*if (!(new File(filename)).exists()) {
             currentCaracterName = DEFAULT_CHARACTER_NAME;
             filename = characterMapFile.get(DEFAULT_CHARACTER_NAME);
-        }
+        }*/
         characterMapFile.put(currentCaracterName, (new File(filename)).getAbsolutePath());
         characterDefinitions = new IniManager((new File(filename)).getAbsolutePath());
         setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER")); 
@@ -351,8 +344,10 @@ public class CharacterManager {
      * Returns the name of the default character.
      * @return the name of the default character
      */
-    public static String getDefaultCharacterName() {
-        return DEFAULT_CHARACTER_NAME;
+    public String getDefaultCharacterName() {
+        String def_agent_filename = IniManager.getGlobals().getValueString(DEFAULT_CHARACTER_KEY);
+        String default_agent = fileNameOfCharacter(def_agent_filename);
+        return default_agent;
     }
 
     /**
@@ -368,7 +363,7 @@ public class CharacterManager {
      * @return the file name of the default character
      */
     public String getDefaultCharacterFile() {
-        return fileNameOfCharacter(DEFAULT_CHARACTER_NAME);
+        return fileNameOfCharacter(IniManager.getGlobals().getValueString(DEFAULT_CHARACTER_KEY));
     }
 
     /**

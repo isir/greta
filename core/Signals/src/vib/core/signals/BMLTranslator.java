@@ -899,6 +899,7 @@ public class BMLTranslator {
             if (bmlchild.getName().equalsIgnoreCase("greta:gaze") || bmlchild.getName().equalsIgnoreCase("gaze")) {
                 GazeSignal gazeSignal = new GazeSignal(bmlchild.getAttribute("id"));
                 gazeSignal.readFromXML(bmlchild, endAsDuration);
+                gazeSignal.setCharacterManager(cm);
                 signals.add(gazeSignal);
             }
 
@@ -909,6 +910,7 @@ public class BMLTranslator {
                 GazeSignal gazeSignal = new GazeSignal(bmlchild.getAttribute("id"));
                 gazeSignal.setGazeShift(true);
                 gazeSignal.readFromXML(bmlchild, endAsDuration);
+                gazeSignal.setCharacterManager(cm);
                 signals.add(gazeSignal);
             }
             //</editor-fold>

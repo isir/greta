@@ -1,17 +1,6 @@
-/* This file is part of Greta.
- * Greta is free software: you can redistribute it and / or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation, either version 3 of the License, or
-* (at your option) any later version.
-* 
-* Greta is distributed in the hope that it will be useful,
-* but WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
-* GNU General Public License for more details.
-* 
-* You should have received a copy of the GNU General Public License
-* along with Greta.If not, see <http://www.gnu.org/licenses/>.
-*//*
+/*
+/*
+/*
  * This file is part of VIB (Virtual Interactive Behaviour).
  */
 package vib.core.signals;
@@ -22,15 +11,12 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import vib.core.animation.mpeg4.bap.BAPFrame;
@@ -56,7 +42,7 @@ import vib.core.util.time.Timer;
  * a specified BML file to all {@code SignalPerformers} added with the
  * {@code addSignalPerformer} function.
  *
- * @author Thomas Janssoone
+ * @author Thomas Janssoone and soumia dermouche
  */
 public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFramesEmitter, SignalEmitter {
     private static final Logger LOGGER = Logger.getLogger( AUParserFileReader.class.getName() );
@@ -159,15 +145,7 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
         
         File f = new File(csvFile);
         if(f.exists()){
-            if(csvFile.endsWith("openface")){
-                length = loadOpenFace(csvFile);
-            }
-            else if(csvFile.endsWith("nicolle")){
-                length = loadNicolle(csvFile);
-            }
-            else if(csvFile.endsWith("csv")){
-                length = loadNicolle(csvFile);
-            }
+            length = loadOpenFace(csvFile);
         }
         if(length==0)
             Logs.warning("File invalid: "+f.getAbsolutePath());
@@ -179,8 +157,202 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
         return dirPath;
     }
     
+        
     //Format based on https://github.com/TadasBaltrusaitis/OpenFace
+    //timestamp, gaze_0_x, gaze_0_y, gaze_0_z, gaze_1_x, gaze_1_y, gaze_1_z, gaze_angle_x, gaze_angle_y, pose_Tx, pose_Ty, pose_Tz, pose_Rx, pose_Ry, pose_Rz, AU01_r, AU02_r, AU04_r, AU05_r, AU06_r, AU07_r, AU09_r, AU10_r, AU12_r, AU14_r, AU15_r, AU17_r, AU20_r, AU23_r, AU25_r, AU26_r, AU45_r, AU01_c, AU02_c, AU04_c, AU05_c, AU06_c, AU07_c, AU09_c, AU10_c, AU12_c, AU14_c, AU15_c, AU17_c, AU20_c, AU23_c, AU25_c, AU26_c, AU28_c, AU45_c
+
     public int loadOpenFace(String csvFile) { 
+        Logs.info(String.format("AUParserFileReader.loadOpenFace(%s)", csvFile));
+        
+        isPerforming = true;
+        au_frames.clear();
+        bap_frames.clear();
+        
+        double prev_rot_X = 0.0;
+        double prev_rot_Y = 0.0;
+        double prev_rot_Z = 0.0;
+        
+        // open the file  
+        BufferedReader br = null;
+        String line = "";
+        String cvsSplitBy = ",";
+        
+        double min_time = Double.MAX_VALUE;
+        double max_time = 0.0;
+        int cpt=1; 
+        try {
+            br = new BufferedReader(new FileReader(csvFile));
+            int [] au_correspondance = {1,2,4,5,6,7,9,10,12,14,15,17,20,23,25,26,45}; // 24
+            double [] prev_value_au = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+            
+            double prev_gaze_x = 0.0;
+            double prev_gaze_y = 0.0;
+
+            double prev_blink = 0.0;
+            int col_blink = 412;            
+            double alpha = 0.75;//1.0; 
+            
+            double timeConstantFrame = 0;
+            
+            List<Double> list_val = new ArrayList<>();
+            //lecture header
+            if ((line = br.readLine()) != null) {
+                String[] header  = line.split(cvsSplitBy);
+                
+                for(int h=0; h < header.length; h++){
+                    String value = header[h];
+                    value = value.replace(" ", "");
+                                        
+                    if("AU45_r".equals(value))
+                        col_blink = h;
+                    
+                    Logs.debug("header["+h+"] = "+value);
+                }
+                
+                int iii = 0;
+                while ((line = br.readLine()) != null) {
+                    String[] values = line.split(cvsSplitBy);
+                    double time;
+                    String val = values[0];                    
+                    Logs.debug("time: "+val);
+                    time = Double.parseDouble(val);
+
+                    list_val.add(time);
+                    if (list_val.size() == 2 ){
+                        timeConstantFrame =  (1/(list_val.get(1) - list_val.get(0)));
+                        break;
+                    }
+                }  
+                
+                while ((line = br.readLine()) != null) {
+                    
+                    //check if read all the frames
+                    //System.out.println(iii);
+                    //iii++;
+                    
+                    String[] values = line.split(cvsSplitBy);
+                    double time;
+                    String val = values[0];                    
+                    Logs.debug("time: "+val);
+                    time = Double.parseDouble(val);
+
+                    list_val.add(time);
+                    
+                    if (timeConstantFrame != 0) {
+                        if( time > max_time){
+                            max_time = time;
+                        }
+                        if( time < min_time){
+                            min_time = time;
+                        }
+                        AUAPFrame au_frame = new AUAPFrame();
+                        au_frame.setFrameNumber((int) (time * timeConstantFrame) + 1);
+                        
+                        // be carefull: if the format of the excel file will change, also this parameter should change  
+                        int indice_intensity=15;
+                        
+                        for(int au=0; au < au_correspondance.length; au++)
+                        {
+                            if(au_correspondance[au]==1||au_correspondance[au]==2||au_correspondance[au]==4||au_correspondance[au]==5||au_correspondance[au]==6||au_correspondance[au]==7||au_correspondance[au]==12 ||au_correspondance[au]==10
+                                                        ||au_correspondance[au]==14 ||au_correspondance[au]==15 ||au_correspondance[au]==17 ||au_correspondance[au]==20 ||au_correspondance[au]==23 ||au_correspondance[au]==25 ||au_correspondance[au]==26)
+                            {
+                                String value = values[au+indice_intensity];
+                                if(isNumeric(value)){
+                                    double intensity =alpha*( Double.parseDouble(value)/3.5) + (1-alpha)*prev_value_au[au];
+                                    //System.out.println("AU["+au_correspondance[au]+"] : "+intensity+ " cpt "+ cpt);
+                                    au_frame.setAUAPboth(au_correspondance[au], intensity);
+                                    prev_value_au[au]=intensity;
+                                }
+                            }
+                        }
+                        cpt++;
+
+                        //gaze
+                        double gaze_x = alpha*(0.5*(Double.parseDouble(values[4])+Double.parseDouble(values[7])))+(1-alpha)*prev_gaze_x;
+                        double gaze_y = alpha*(0.5*(Double.parseDouble(values[5])+Double.parseDouble(values[8])))+(1-alpha)*prev_gaze_y;
+                        if(gaze_x<0){
+                            au_frame.setAUAPboth(62, gaze_x);
+                        }
+                        else{
+                            au_frame.setAUAPboth(61, gaze_x);
+                        }
+
+                        if(gaze_y<0){
+                            au_frame.setAUAPboth(64, gaze_y);
+                        }
+                        else{
+                            au_frame.setAUAPboth(63, gaze_y);
+                        }
+                        prev_gaze_x = gaze_x;
+                        prev_gaze_y = gaze_y;
+
+                        //blink
+                        // double blink = alpha*(Double.parseDouble(values[col_blink].replace(',', '.'))/5.0)+(1-alpha)*prev_blink;
+                        double blink = Double.parseDouble(values[col_blink].replace(',', '.'))/3.0 ;
+                        au_frame.setAUAPboth(43, blink);
+                        prev_blink = blink;
+
+                        au_frames.add(au_frame);
+                        BAPFrame hmFrame = new BAPFrame();
+                        hmFrame.setFrameNumber((int) (time * timeConstantFrame) + 1);
+
+                        double rot_X_rad = -1.0*Double.parseDouble(values[12]);
+
+
+                        double rot_Y_rad = -1.0*Double.parseDouble(values[13]);
+
+
+                        double rot_Z_rad = -1.0*Double.parseDouble(values[14]);
+
+                        double rot_X_deg =  -rot_X_rad*180/Math.PI;
+                        double rot_Y_deg =  rot_Y_rad*180/Math.PI;
+                        double rot_Z_deg =  rot_Z_rad*180/Math.PI;
+
+                        rot_X_deg =  alpha*(rot_X_deg)+(1-alpha)*prev_rot_X;
+                        rot_Y_deg = alpha*(rot_Y_deg)+(1-alpha)*prev_rot_Y;
+                        rot_Z_deg = alpha*(rot_Z_deg)+(1-alpha)*prev_rot_Z;
+
+                        hmFrame.setDegreeValue(BAPType.vc3_tilt , rot_X_deg);
+                        hmFrame.setDegreeValue(BAPType.vc3_torsion, rot_Y_deg);
+                        hmFrame.setDegreeValue(BAPType.vc3_roll, rot_Z_deg);      
+
+                        //System.out.println("BAP["+time+"] : ["+rot_X_rad+"; "+rot_Y_rad+"; "+rot_Z_rad+"]");
+
+                        prev_rot_X = rot_X_deg;
+                        prev_rot_Y = rot_Y_deg;
+                        prev_rot_Z = rot_Z_deg; 
+
+                        bap_frames.add(hmFrame);
+                    }
+                }  
+            }
+            //System.out.println("Program fini finifffffffffffffffffffffffffffffff ");
+            
+        } catch (IOException e) {
+            Logs.error(e.getLocalizedMessage());
+            LOGGER.log( Level.SEVERE, e.toString(), e );
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    Logs.error(e.getLocalizedMessage());
+                    LOGGER.log( Level.SEVERE, e.toString(), e );
+                }
+            }
+        }
+                             
+        int length = (int) ((int ) max_time-min_time);
+        
+        send(length);
+        
+        //ID id = IDProvider.createID("From_AU_Parser");
+        
+        return length;
+    }
+    
+    //Format based on https://github.com/TadasBaltrusaitis/OpenFace
+    public int loadOpenFacesave(String csvFile) { 
         Logs.info(String.format("AUParserFileReader.loadOpenFace(%s)", csvFile));
         
         isPerforming = true;
@@ -226,7 +398,7 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
                 au_correspondance[auc] = Integer.parseInt( val);
             }
             
-            double alpha = 0.75;//1.0;
+            double alpha = 0.75;//1.0;     
             
             //lecture header
             if ((line = br.readLine()) != null) {
@@ -296,7 +468,7 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
                     
                     //blink
                     double blink = alpha*(Double.parseDouble(values[col_blink].replace(',', '.'))/5.0)+(1-alpha)*prev_blink;
-                    au_frame.setAUAPboth(43, gaze_y);
+                    au_frame.setAUAPboth(43, blink);
                     prev_blink = blink;
                     
                     au_frames.add(au_frame);

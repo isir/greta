@@ -39,6 +39,7 @@ import vib.core.util.xml.XMLParser;
 import vib.core.util.xml.XMLTree;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -48,6 +49,10 @@ import vib.auxiliary.socialparameters.SocialParameterEmitter;
 import vib.auxiliary.socialparameters.SocialParameterFrame;
 import vib.auxiliary.socialparameters.SocialParameterPerformer;
 import vib.core.util.CharacterManager;
+import vib.core.util.environment.TreeNode;
+import vib.core.util.environment.Environment;
+import vib.core.util.math.Quaternion;
+import vib.core.util.math.Vec3d;
 import vib.core.util.time.Timer;
 
 /**
@@ -56,6 +61,8 @@ import vib.core.util.time.Timer;
  */
 public class CommandReceiver extends Receiver  implements IntentionEmitter, SignalEmitter, SocialParameterEmitter{
 
+    private Environment environment;
+    
     private ArrayList<IntentionPerformer> intentionPerformers;
     private ArrayList<SocialParameterPerformer> socialParamPerformers = new ArrayList<SocialParameterPerformer>();
 
@@ -68,6 +75,7 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
     public CommandReceiver(CharacterManager cm) {
         super();
         this.cm = cm;
+        this.environment = cm.getEnvironment();
         intentionPerformers = new ArrayList<IntentionPerformer>();
         signalPerformers = new ArrayList<SignalPerformer>();
         parser = XML.createParser();
@@ -78,6 +86,7 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
     public CommandReceiver(CharacterManager cm,int port) {
         super(port);
         this.cm = cm;
+        this.environment = cm.getEnvironment();
         intentionPerformers = new ArrayList<IntentionPerformer>();
         signalPerformers = new ArrayList<SignalPerformer>();
         parser = XML.createParser();
@@ -125,28 +134,22 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
                 }
                 break;
             case "object":
-                Environment environment = cm.getEnvironment();
                 Map<String, String> gameObjectProperties = m.getProperties();
                 // If object has already been created
                 String gameObjectId = gameObjectProperties.get("id");
-                Optional<Leaf> eventualGameObjectLeaf = environment.getListLeaf().stream().filter(leaf -> leaf.getIdentifier().equals("GameObject-" + gameObjectId)).findFirst();
-                if (eventualGameObjectLeaf.isPresent()) {
-                    Leaf gameObjectLeaf = eventualGameObjectLeaf.get();
+                TreeNode gameObjectLeaf = (TreeNode) this.environment.getNode(gameObjectId);
+                if (gameObjectLeaf != null) {
                     TreeNode gameObjectLeafParent = gameObjectLeaf.getParent();
                     // Change coordinates
                     updateNodeProperties(gameObjectLeafParent, gameObjectProperties);
                 } else {
                     // Try get UnityObjectsNode
-                    Optional<Node> eventualUnityObjectsNode = environment.getGuests().stream().filter(node -> node.getIdentifier().equals("UnityObjectsNode")).findFirst();
-                    TreeNode unityObjectsNode;
-                    if (eventualUnityObjectsNode.isPresent()) {
-                        unityObjectsNode = (TreeNode)eventualUnityObjectsNode.get();
-                    } else {
+                    TreeNode unityObjectsNode = (TreeNode) this.environment.getNode("UnityObjectsNode");
+                    if (unityObjectsNode == null) {
                         // If node has not been created, create the node
                         unityObjectsNode = new TreeNode();
                         unityObjectsNode.setIdentifier("UnityObjectsNode");
-                        unityObjectsNode.setGuest(true);
-                        environment.addNode(unityObjectsNode);
+                        this.environment.addNode(unityObjectsNode);
                     }
                     // Create object with node as parent
                     TreeNode gameObjectLeafParent = new TreeNode();
@@ -157,7 +160,7 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
                     gameObjectLeaf.setIdentifier("GameObject-" + gameObjectId);
                     gameObjectLeaf.setReference("GameObject-" + gameObjectId);
                     gameObjectLeafParent.addChildNode(gameObjectLeaf);
-                    environment.addLeaf(gameObjectLeaf);
+                    this.environment.addLeaf(gameObjectLeaf);
                 }
                 break;
             default:
@@ -245,6 +248,4 @@ public class CommandReceiver extends Receiver  implements IntentionEmitter, Sign
             socialParamPerformers.remove(performer);
         }
     }
-
-
 }

@@ -93,7 +93,7 @@ public abstract class Sender<O> extends WhiteBoard{
                     }
                 }
             }
-            producer.send(message);
+            producer.send(message);  
         } catch (Exception ex) {
             //Logs.error("could not send message");
         }

@@ -10,7 +10,7 @@ import vib.core.behaviorrealizer.Realizer;
 
 /**
  *
- * @author donat
+ * @author Donatella Simonetti
  */
 public class RealizerGui extends JFrame{
     

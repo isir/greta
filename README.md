@@ -69,3 +69,5 @@ Greta provides a system to configure and use these behaviors in an automatic fas
 Bevacqua, E., Pammi, S., Hyniewska, S. J., Schröder, M., & Pelachaud, C. (2010, September).
 Multimodal backchannels for embodied conversational agents.
 In International Conference on Intelligent Virtual Agents (pp. 194-200). Springer, Berlin, Heidelberg.
+
+SMALL TEST

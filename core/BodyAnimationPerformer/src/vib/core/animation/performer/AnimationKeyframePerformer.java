@@ -41,7 +41,6 @@ import vib.core.keyframes.Keyframe;
 import vib.core.keyframes.KeyframePerformer;
 import vib.core.keyframes.ShoulderKeyframe;
 import vib.core.keyframes.TorsoKeyframe;
-import vib.core.signals.SpinePhase;
 import vib.core.signals.gesture.Hand;
 import vib.core.signals.gesture.Position;
 import vib.core.signals.gesture.TrajectoryDescription;
@@ -71,38 +70,37 @@ import vib.core.util.enums.CompositionType;
  * @author Jing Huang
  */
 public class AnimationKeyframePerformer extends CharacterDependentAdapter implements KeyframePerformer, BAPFramesEmitter, CharacterDependent, AnimationFrameEmitter {
-
-    SymbolicConverter _symbolicConverter;
-    CharacterBody _cb;
-    ExpressiveTorso _exTorso = new ExpressiveTorso();
-    boolean expressiveTorso = true;
-    boolean useTraj = true;
+    private SymbolicConverter symbolicConverter;
+    private CharacterBody cb;
+    private ExpressiveTorso exTorso = new ExpressiveTorso();
+    private boolean expressiveTorso = true;
+    private boolean useTraj = true;
 
     private Skeleton dynSk = null;
     private Vec3d gravity = new Vec3d(0, -9.8f, 0);
-    boolean _useFakedDynamics = true;
-    //BodyAnimationBAPFrameEmitter _be = new BodyAnimationBAPFrameEmitter();
-    BodyAnimationBapBlender _be;
-    IdleMovement _idle;
-    int _incre = 0;
-    boolean _usePropagation = true;
-    double _weightPropagation = 0.1;
-    String _probagationJoint = "vt6";
+    private boolean useFakedDynamics = true;
+    //BodyAnimationBAPFrameEmitter be = new BodyAnimationBAPFrameEmitter();
+    BodyAnimationBapBlender be;
+    private IdleMovement idle;
+    private int incre = 0;
+    private boolean usePropagation = true;
+    private double weightPropagation = 0.1;
+    private String propagationJoint = "vt6";
     
-    CharacterManager cm;
+    private CharacterManager cm;
 
-    ArrayList<AnimationFramePerformer> afperformers = new ArrayList<AnimationFramePerformer>();
+    private ArrayList<AnimationFramePerformer> afperformers = new ArrayList<>();
 
     public AnimationKeyframePerformer(CharacterManager cm) {
-        _symbolicConverter = new SymbolicConverter(cm);
-        _be = new BodyAnimationBapBlender(cm);
+        symbolicConverter = new SymbolicConverter(cm);
+        be = new BodyAnimationBapBlender(cm);
         setCharacterManager(cm);
         //cm.add(this);
         //To-do link it the on the graph level.
-        _cb = new CharacterBody(_symbolicConverter.getOriginalSkeleton());
-        _cb.initMassSystemByOriginalSkeleton();
-        _idle = new IdleMovement(_symbolicConverter.getOriginalSkeleton().clone());
-        dynSk = _symbolicConverter.getOriginalSkeleton().clone();
+        cb = new CharacterBody(symbolicConverter.getOriginalSkeleton());
+        cb.initMassSystemByOriginalSkeleton();
+        idle = new IdleMovement(symbolicConverter.getOriginalSkeleton().clone());
+        dynSk = symbolicConverter.getOriginalSkeleton().clone();
         
         //testFunction();
     }
@@ -113,10 +111,10 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
     
     @Override
     public void onCharacterChanged() {
-        _cb = new CharacterBody(_symbolicConverter.getOriginalSkeleton());
-        _cb.initMassSystemByOriginalSkeleton();
-        _idle = new IdleMovement(_symbolicConverter.getOriginalSkeleton().clone());
-        dynSk = _symbolicConverter.getOriginalSkeleton().clone();
+        cb = new CharacterBody(symbolicConverter.getOriginalSkeleton());
+        cb.initMassSystemByOriginalSkeleton();
+        idle = new IdleMovement(symbolicConverter.getOriginalSkeleton().clone());
+        dynSk = symbolicConverter.getOriginalSkeleton().clone();
     }
 
     public void setExpressiveTorso(boolean t) {
@@ -124,22 +122,22 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
     }
 
     public boolean isUsePropagation() {
-        return _usePropagation;
+        return usePropagation;
     }
 
     public void setUsePropagation(boolean _usePropagation) {
-        this._usePropagation = _usePropagation;
+        this.usePropagation = _usePropagation;
     }
 
     public double getWeightPropagation() {
-        return _weightPropagation;
+        return weightPropagation;
     }
 
     public void setWeightPropagation(double _weightPropagation) {
-        this._weightPropagation = _weightPropagation;
+        this.weightPropagation = _weightPropagation;
     }
 
-    double _timeThreasure = 0.01;
+    private double timeThreasure = 0.01;
 
     @Override
     public void performKeyframes(List<Keyframe> keyframes, ID requestId) {
@@ -155,15 +153,15 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         }
         double start = keyframes.get(0).getOffset();
         double end = keyframes.get(size - 1).getOffset();
-        LinkedList<GestureKeyframe> _leftGestureKeyframe = new LinkedList<GestureKeyframe>();
-        LinkedList<GestureKeyframe> _rightGestureKeyframe = new LinkedList<GestureKeyframe>();
+        LinkedList<GestureKeyframe> leftGestureKeyframe = new LinkedList<>();
+        LinkedList<GestureKeyframe> rightGestureKeyframe = new LinkedList<>();
 
-        LinkedList<ExpressiveFrame> _left = new LinkedList<ExpressiveFrame>();
-        LinkedList<ExpressiveFrame> _right = new LinkedList<ExpressiveFrame>();
-        LinkedList<ExpressiveFrame> _torse = new LinkedList<ExpressiveFrame>();
-        LinkedList<ExpressiveFrame> _head = new LinkedList<ExpressiveFrame>();
-        LinkedList<ExpressiveFrame> _leftShoulder = new LinkedList<ExpressiveFrame>();
-        LinkedList<ExpressiveFrame> _rightShoulder = new LinkedList<ExpressiveFrame>();
+        LinkedList<ExpressiveFrame> left = new LinkedList<>();
+        LinkedList<ExpressiveFrame> right = new LinkedList<>();
+        LinkedList<ExpressiveFrame> torso = new LinkedList<>();
+        LinkedList<ExpressiveFrame> head = new LinkedList<>();
+        LinkedList<ExpressiveFrame> leftShoulder = new LinkedList<>();
+        LinkedList<ExpressiveFrame> rightShoulder = new LinkedList<>();
         double previousT_left = -1;
         double previousT_right = -1;
         double previousT_torse = -1;
@@ -176,57 +174,57 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
                 GestureKeyframe keyframe = (GestureKeyframe) kf;
                 Side side = keyframe.getSide();
                 if (side == Side.LEFT) {
-                    if (Math.abs(previousT_left - keyframe.getOffset()) < _timeThreasure) {
+                    if (Math.abs(previousT_left - keyframe.getOffset()) < timeThreasure) {
                         continue;
                     } else {
                         previousT_left = keyframe.getOffset();
                     }
 
-                    _leftGestureKeyframe.add(keyframe);
+                    leftGestureKeyframe.add(keyframe);
                 } else if (side == Side.RIGHT) {
-                    if (Math.abs(previousT_right - keyframe.getOffset()) < _timeThreasure) {
+                    if (Math.abs(previousT_right - keyframe.getOffset()) < timeThreasure) {
                         continue;
                     } else {
                         previousT_right = keyframe.getOffset();
                     }
-                    _rightGestureKeyframe.add(keyframe);
+                    rightGestureKeyframe.add(keyframe);
                    // System.out.println(keyframe.getHand().getPosition().getX()+" "+keyframe.getHand().getPosition().getY()+" "+keyframe.getHand().getPosition().getZ());
                 } else {
                     System.out.println("IKKeyFramePerformer: GestureKeyframe side error:" + side);
                 }
             } else if (kf instanceof TorsoKeyframe) {
                 TorsoKeyframe keyframe = (TorsoKeyframe) kf;
-                if (Math.abs(previousT_torse - keyframe.getOffset()) < _timeThreasure) {
+                if (Math.abs(previousT_torse - keyframe.getOffset()) < timeThreasure) {
                     continue;
                 } else {
                     previousT_torse = keyframe.getOffset();
                 }
-                _torse.add(_symbolicConverter.getTorse(keyframe));
+                torso.add(symbolicConverter.getTorse(keyframe));
             } else if (kf instanceof HeadKeyframe) {
                 HeadKeyframe keyframe = (HeadKeyframe) kf;
-                if (Math.abs(previousT_head - keyframe.getOffset()) < _timeThreasure) {
+                if (Math.abs(previousT_head - keyframe.getOffset()) < timeThreasure) {
                     continue;
                 } else {
                     previousT_head = keyframe.getOffset();
                 }
-                _head.add(_symbolicConverter.getHead(keyframe));
+                head.add(symbolicConverter.getHead(keyframe));
             } else if (kf instanceof ShoulderKeyframe) {
                 ShoulderKeyframe keyframe = (ShoulderKeyframe) kf;
                 String side = keyframe.getSide();
                 if (side.equalsIgnoreCase("LEFT")) {
-                    if (Math.abs(previousT_leftShoulder - keyframe.getOffset()) < _timeThreasure) {
+                    if (Math.abs(previousT_leftShoulder - keyframe.getOffset()) < timeThreasure) {
                         continue;
                     } else {
                         previousT_leftShoulder = keyframe.getOffset();
                     }
-                    _leftShoulder.add(_symbolicConverter.getShoulder(keyframe));
+                    leftShoulder.add(symbolicConverter.getShoulder(keyframe));
                 } else if (side.equalsIgnoreCase("RIGHT")) {
-                    if (Math.abs(previousT_rightShoulder - keyframe.getOffset()) < _timeThreasure) {
+                    if (Math.abs(previousT_rightShoulder - keyframe.getOffset()) < timeThreasure) {
                         continue;
                     } else {
                         previousT_rightShoulder = keyframe.getOffset();
                     }
-                    _rightShoulder.add(_symbolicConverter.getShoulder(keyframe));
+                    rightShoulder.add(symbolicConverter.getShoulder(keyframe));
                 }
             } else {
                 //System.out.println("IKKeyFramePerformer: Keyframe type error : "+kf.getClass().getSimpleName());
@@ -235,21 +233,21 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
 
 
         if(useTraj){
-            applyTraj(_leftGestureKeyframe);
-            applyTraj(_rightGestureKeyframe);
+            applyTraj(leftGestureKeyframe);
+            applyTraj(rightGestureKeyframe);
         }
 
         //replanify the position
-        applyTCB(_leftGestureKeyframe);
-        applyTCB(_rightGestureKeyframe);
+        applyTCB(leftGestureKeyframe);
+        applyTCB(rightGestureKeyframe);
 
         //build by IK
         int i = 0;
         Arm previousLeft = null;
         Arm previousRight = null;
-        for (GestureKeyframe keyframe : _leftGestureKeyframe) {
-            Arm arm = _symbolicConverter.getArm(keyframe);
-            _left.add(arm);
+        for (GestureKeyframe keyframe : leftGestureKeyframe) {
+            Arm arm = symbolicConverter.getArm(keyframe);
+            left.add(arm);
             if (i != 0) {
                 applyPropagation(previousLeft, arm);
             }
@@ -257,9 +255,9 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
             i++;
         }
         i = 0;
-        for (GestureKeyframe keyframe : _rightGestureKeyframe) {
-            Arm arm = _symbolicConverter.getArm(keyframe);
-            _right.add(arm);
+        for (GestureKeyframe keyframe : rightGestureKeyframe) {
+            Arm arm = symbolicConverter.getArm(keyframe);
+            right.add(arm);
             if (i != 0) {
                 applyPropagation(previousRight, arm);
             }
@@ -267,15 +265,15 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
             i++;
         }
 
-        //sendTotally(_left, _right, _torse, _head, _leftShoulder, _rightShoulder, requestId);
-//        for(ExpressiveFrame arm : _right){
+        //sendTotally(left, right, torso, head, leftShoulder, rightShoulder, requestId);
+//        for(ExpressiveFrame arm : right){
 //            System.out.println(((Arm)arm).getTime() + " "+((Arm)arm).getTarget());
 //        }
-        sendByFrame(start, end, _left, _right, _torse, _head, _leftShoulder, _rightShoulder, requestId, mode);
+        sendByFrame(start, end, left, right, torso, head, leftShoulder, rightShoulder, requestId, mode);
     }
 
-    void applyPropagation(Arm armprevious, Arm arm) {
-        if (_usePropagation) {
+    private void applyPropagation(Arm armprevious, Arm arm) {
+        if (usePropagation) {
             Vec3d t0 = armprevious.getTarget();
             Vec3d t1 = arm.getTarget();
             double scale = 1;
@@ -284,35 +282,35 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
             Quaternion q = new Quaternion();
             if(Math.abs(dir.z()) > 1 || Math.abs(dir.x()) > 1) scale = 170;
             //System.out.println(dir.z() +" "+ dir.x());
-            q.setAxisAngle(axisX, dir.z() * _weightPropagation / scale /* arm.getExpressivityParameters().spc*/);
-            arm.accumulateRotation(_probagationJoint, q);
+            q.setAxisAngle(axisX, dir.z() * weightPropagation / scale /* arm.getExpressivityParameters().spc*/);
+            arm.accumulateRotation(propagationJoint, q);
 
             Vec3d axisY = new Vec3d(0, 1, 0);
             Quaternion q2 = new Quaternion();
-            q2.setAxisAngle(axisY, dir.x() * _weightPropagation / scale /* arm.getExpressivityParameters().spc*/);
-            arm.accumulateRotation(_probagationJoint, q2);
+            q2.setAxisAngle(axisY, dir.x() * weightPropagation / scale /* arm.getExpressivityParameters().spc*/);
+            arm.accumulateRotation(propagationJoint, q2);
 
 //            if (arm.getSide() == Side.LEFT) {
 //                Vec3d axisZ = new Vec3d(0, 0, 1);
 //                Quaternion q3 = new Quaternion();
-//                q3.setAxisAngle(axisZ, dir.x() * _weightPropagation * arm.getExpressivityParameters().spc);
-//                arm.accumulateRotation(_probagationJoint, q3);
+//                q3.setAxisAngle(axisZ, dir.x() * weightPropagation * arm.getExpressivityParameters().spc);
+//                arm.accumulateRotation(propagationJoint, q3);
 //
 //            } else if (arm.getSide() == Side.RIGHT) {
 //                Vec3d axisZ = new Vec3d(0, 0, 1);
 //                Quaternion q3 = new Quaternion();
-//                q3.setAxisAngle(axisZ, dir.x() * _weightPropagation * arm.getExpressivityParameters().spc);
-//                arm.accumulateRotation(_probagationJoint, q3);
+//                q3.setAxisAngle(axisZ, dir.x() * weightPropagation * arm.getExpressivityParameters().spc);
+//                arm.accumulateRotation(propagationJoint, q3);
 //
 //            }
         }
     }
 
 
-    void applyTraj(LinkedList<GestureKeyframe> gests){
+    private void applyTraj(LinkedList<GestureKeyframe> gests){
         if(gests.isEmpty())
             return ;
-        LinkedList<GestureKeyframe> result =  new LinkedList();
+        LinkedList<GestureKeyframe> result = new LinkedList<>();
         for(int i = 0; i < gests.size() - 1; ++i){
             GestureKeyframe first = gests.get(i);
             GestureKeyframe next = gests.get(i + 1);
@@ -326,7 +324,7 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
                 frameNB *= 0.9;  //for avoiding the pb with precision  when frameNB = keyframe * dure < 1 then will not create the frame in the interpolator
             }
             if(frameNB < 1) continue;
-            if(trj != null && !trj.getName().equalsIgnoreCase("Linear") && !trj.getName().isEmpty() && trj.isUsed() && duration >= 0.1){
+            if(!trj.getName().equalsIgnoreCase("Linear") && !trj.getName().isEmpty() && trj.isUsed() && duration >= 0.1){
                 TrajectoryDescription.Variation v;
                 if (first.getParameters().pwr > 0) {
                     v = TrajectoryDescription.Variation.GREATER;
@@ -365,7 +363,7 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         }
     }
 
-    void applyTCB(LinkedList<GestureKeyframe> gestureKeyframe) {
+    private void applyTCB(LinkedList<GestureKeyframe> gestureKeyframe) {
         if (gestureKeyframe.size() > 4) {
             ArrayList<Vec3d> newPos = new ArrayList<Vec3d>();
             for (int i = 2; i < gestureKeyframe.size() - 2; ++i) {
@@ -419,24 +417,24 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
      FrameSequence fsarml = generateExpressiveSequence(left, Constants.FRAME_PER_SECOND, null);
 
      if (fsarmr != null) {
-     _be.updateFrameList(fsarmr, requestId);
+     be.updateFrameList(fsarmr, requestId);
      }
 
      if (fsarml != null) {
-     _be.updateFrameList(fsarml, requestId);
+     be.updateFrameList(fsarml, requestId);
      }
 
      if (fsHead != null) {
-     _be.updateFrameList(fsHead, requestId);
+     be.updateFrameList(fsHead, requestId);
      }
      if (fsTorso != null) {
-     _be.updateFrameList(fsTorso, requestId);
+     be.updateFrameList(fsTorso, requestId);
      }
      if (fsShoulderLeft != null) {
-     _be.updateFrameList(fsShoulderLeft, requestId);
+     be.updateFrameList(fsShoulderLeft, requestId);
      }
      if (fsShoulderRight != null) {
-     _be.updateFrameList(fsShoulderRight, requestId);
+     be.updateFrameList(fsShoulderRight, requestId);
      }
      //            if (_useFakedDynamics) {
      //                ArrayList<AnimationFrame> afs = new ArrayList<AnimationFrame>();
@@ -500,7 +498,7 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         return expressiveFrame;
     }
 
-    void sendByFrame(double start, double end,
+    private void sendByFrame(double start, double end,
             LinkedList<ExpressiveFrame> left,
             LinkedList<ExpressiveFrame> right,
             LinkedList<ExpressiveFrame> torso,
@@ -518,9 +516,8 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         ExpressiveFrame ls1 = null;//leftShoulder.poll();
         ExpressiveFrame rs1 = null;//rightShoulder.poll();
 
-        List<BAPFrame> bapFrames = new ArrayList<BAPFrame>();
-        for (double i = start; i <= end + 0.04; i = i + diff) {
-
+        List<BAPFrame> bapFrames = new ArrayList<>();
+        for (double i = start; i <= end + diff; i = i + diff) {
             Frame f = new Frame();
             left1 = fillFrame2(i, left, left1, f);
             right1 = fillFrame2(i, right, right1, f);
@@ -533,10 +530,10 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
             bapFrames.add(bf);
         }
 
-        _be.updateFrames(bapFrames, requestId, mode);
+        be.updateFrames(bapFrames, requestId, mode);
     }
 
-    FrameSequence generateExpressiveSequence(LinkedList<ExpressiveFrame> typeframes, int framePerSecond, Function function) {
+    private FrameSequence generateExpressiveSequence(LinkedList<ExpressiveFrame> typeframes, int framePerSecond, Function function) {
         if (typeframes.size() < 1) {
             return null;
         } else if (typeframes.size() == 1) {
@@ -569,15 +566,15 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
 
     @Override
     public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        _be.addBAPFramesPerformer(bapfp);
+        be.addBAPFramesPerformer(bapfp);
     }
 
     @Override
     public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        _be.removeBAPFramesPerformer(bapfp);
+        be.removeBAPFramesPerformer(bapfp);
     }
 
-    Function getFunction(ExpressiveFrame expFrame) {
+    private Function getFunction(ExpressiveFrame expFrame) {
         Function toReturn = X.x;
         double pwr = 0;
                 if (expFrame.getExpressivityParameters() != null) {
@@ -603,11 +600,11 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
 
     }
 
-    int getFrameNb(double current, double start, double secondPerFrame) {
+    private int getFrameNb(double current, double start, double secondPerFrame) {
         return (int) ((current - start) / secondPerFrame);
     }
 
-    boolean isKeyframesSorted(List<Keyframe> keyframes) {
+    private boolean isKeyframesSorted(List<Keyframe> keyframes) {
         Keyframe k0 = keyframes.get(0);
         for (int i = 1; i < keyframes.size(); ++i) {
             Keyframe k1 = keyframes.get(i);
@@ -619,7 +616,7 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         return true;
     }
 
-    ArrayList<Skeleton> getSkeletons(FrameSequence fs) {
+    private ArrayList<Skeleton> getSkeletons(FrameSequence fs) {
         ArrayList<Skeleton> sks = new ArrayList<Skeleton>();
         for (Frame f : fs.getSequence()) {
             sks.add(getSkeleton(f));
@@ -627,8 +624,8 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         return sks;
     }
 
-    Skeleton getSkeleton(Frame f) {
-        Skeleton sk = _cb.getOriginalSkeleton().clone();
+    private Skeleton getSkeleton(Frame f) {
+        Skeleton sk = cb.getOriginalSkeleton().clone();
         sk.getJoint(0).setLocalPosition(f.getRootTranslation());
         for (String name : f.getRotations().keySet()) {
             sk.getJoint(name).setLocalRotation(f.getRotation(name));
@@ -683,8 +680,8 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         return bf;
     }
 
-    void testFunction() {
-        RelaxArmDynamicsMotion ram = new RelaxArmDynamicsMotion("left", _symbolicConverter.getOriginalSkeleton());
+    private void testFunction() {
+        RelaxArmDynamicsMotion ram = new RelaxArmDynamicsMotion("left", symbolicConverter.getOriginalSkeleton());
         ram.setDesireAngles(-0.3, -0.4);
         ram.setTime(0, 100);
         ram.setInputs(-0.5, -0.3);
@@ -704,7 +701,7 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         writer.performBAPFrames(frames, id);
     }
 
-    Vec3d getTorque(Vec3d shoulder, Vec3d elbow, Vec3d wrist, Vec3d gestureSpaceScale) {
+    private Vec3d getTorque(Vec3d shoulder, Vec3d elbow, Vec3d wrist, Vec3d gestureSpaceScale) {
         Vec3d low = Vec3d.addition(wrist, elbow);
         low.scale(0.5f, 0.5f, 0.5f);
         low.minus(shoulder);
@@ -720,7 +717,7 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         return t0;
     }
 
-    void applyFakedDynamics(Frame current) {
+    private void applyFakedDynamics(Frame current) {
         dynSk.reset();
         dynSk.loadFrame(current);
         dynSk.update();
@@ -728,12 +725,12 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
                 dynSk.getJoint("l_shoulder").getWorldPosition(),
                 dynSk.getJoint("l_elbow").getWorldPosition(),
                 dynSk.getJoint("l_wrist").getWorldPosition(),
-                _symbolicConverter.gestureSpace_LeftScale);
+                symbolicConverter.gestureSpace_LeftScale);
         Vec3d torqueR = getTorque(
                 dynSk.getJoint("r_shoulder").getWorldPosition(),
                 dynSk.getJoint("r_elbow").getWorldPosition(),
                 dynSk.getJoint("r_wrist").getWorldPosition(),
-                _symbolicConverter.gestureSpace_RightScale);
+                symbolicConverter.gestureSpace_RightScale);
 
         Vec3d torque = Vec3d.addition(torqueL, torqueR).opposite();
 //        double tx = tx = compute(0, torque.x(), 0, 0);

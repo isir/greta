@@ -151,7 +151,7 @@ We set ``need.util`` according to whether the ``Util.jar`` file not exists (fals
 ```
 The path in the ``antfile`` is relative to the path of the current project.
 
-With the dependent JARs are taen care of, we are ready to compile our project. This task is to do the compilation:
+With the dependent JARs taken care of, we are ready to compile our project. This task is to do the compilation:
 ```xml
 <property name="src.dir" location="src" />
 <property name="classes.dir" location="compilation" />
@@ -175,7 +175,7 @@ With the dependent JARs are taen care of, we are ready to compile our project. T
     </copy>
 </target>
 ```
-The ``javac`` command is to compile the java files inside ``${src.dir}`` and write the resulting class files to ``${classes.dir}``. Sometimes, we also put non-java files in the sorce folder. A case example when it might happen is when we create a GUI application and we have a few images we want to use in the application, we might put those images in the source directory. To deal with such cases, we also perform the ``copy`` command which copies all non-java files from ``${src.dir}`` to ``${classes.dir}``.
+The ``javac`` command is to compile the java files inside ``${src.dir}`` and write the resulting class files to ``${classes.dir}``. Sometimes, we also put non-java files in the sorce folder. A case example when it might happen is when we create a GUI application and we have some images we want to use in the application, we might put those images in the source directory. To deal with such cases, we also perform the ``copy`` command which copies all non-java files from ``${src.dir}`` to ``${classes.dir}``.
 
 To perform the ``javac`` command, we must specify where to look for the dependent JARs. We do so by specifying ``<classpath refid="path.jars"/>``. The ``${jar.dir}`` is the path of the directory of the internal jar files relative to the project we are building.
 

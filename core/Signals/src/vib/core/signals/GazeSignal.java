@@ -30,9 +30,10 @@ import vib.core.util.time.TimeMarker;
 import vib.core.util.xml.XMLTree;
 
 /**
- * This class contains informations about gaze Signals.
+ * This class contains information about gaze Signals.
  * @author Andre-Marie Pez
  * @author Mathieu Chollet
+ * @author Nawhal Sayarh
  */
 
 public class GazeSignal extends ParametricSignal implements SignalTargetable, CharacterDependent {
@@ -50,8 +51,8 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     private String origin;
     private String target;
     private Influence influence;
-    private GazeDirection offsetDirection = null;
-    private Double offsetAngle = null;
+    private GazeDirection offsetDirection;
+    private Double offsetAngle;
     private boolean isScheduled = false;
     
     private CharacterManager characterManager;
@@ -61,7 +62,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
      */
     @Override
     public CharacterManager getCharacterManager() {
-        if(characterManager==null)
+        if(characterManager == null)
             characterManager = CharacterManager.getStaticInstance();
         return characterManager;
     }
@@ -81,9 +82,9 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     }
 
     public GazeSignal(String id){
-        this.actionUnits = new ArrayList<AUItem>();
+        this.actionUnits = new ArrayList<>();
         this.id = id;
-        timeMarkers = new ArrayList<TimeMarker>(4);
+        timeMarkers = new ArrayList<>(4);
         start = new TimeMarker("start");
         timeMarkers.add(start);
         ready = new TimeMarker("ready");
@@ -93,10 +94,10 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         end = new TimeMarker("end");
         timeMarkers.add(end);
 
-        //origin = getCharacterManager().currentCharacterId;
-        target="";
-        offsetDirection=GazeDirection.FRONT;
-        offsetAngle=0.0;
+        origin = getCharacterManager().currentCharacterId;
+        target = "";
+        offsetDirection = GazeDirection.FRONT;
+        offsetAngle = 0.0;
     }
 
     public boolean isGazeShift() {
@@ -189,13 +190,13 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
                 {
                     ready.setValue(start.getValue()+(relax.getValue()-start.getValue())/2);
                 }
-            isScheduled=true;
+            isScheduled = true;
         }
         else // if gazeShift
         {
             if(!end.isConcretized())
             {
-                end.setValue(Double.MAX_VALUE);
+                end.setValue(start.getValue() + 0.5); // gazeShift stays anyway, so the signal doesn't need to stay for more than half a second
             }
             //TODO : change depending on influence ?
             if(!ready.isConcretized() && !relax.isConcretized())
@@ -212,7 +213,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
             {
                 ready.setValue(start.getValue()+(relax.getValue()-start.getValue())/2);
             }
-            isScheduled=true;
+            isScheduled = true;
         }
     }
 
@@ -238,7 +239,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     }
 
      /**
-     * @return the target
+     * @return the origin
      */
     public String getOrigin()    {
         return origin;
@@ -308,7 +309,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         }
         //influence
         if(tree.hasAttribute("influence")) {
-            String xmlinfluence= tree.getAttribute("influence");
+            String xmlinfluence = tree.getAttribute("influence");
             //maybe these checks should be in behavior realizer instead ?
             if(correctInfluence(xmlinfluence))
             {
@@ -317,8 +318,8 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
             else
             {
                 //unrecognized influence : should throw exception !
-                // Default null. the influence will be calculated in gazekeyframeGenerator class automaticaly,
-                // according to the rotation anlge to reaéch the target object
+                // Default null. the influence will be calculated in gazeKeyframeGenerator class automatically,
+                // according to the rotation angle to reach the target object
                 setInfluence(null); //
                 //default : eyes
                 //setInfluence(Influence.EYES);
@@ -359,19 +360,19 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     public void toXML(XMLTree tree, boolean endAsDuration)
     {
         tree.setAttribute("id", id);
-        if(target!=null) {
+        if(target != null) {
             tree.setAttribute("target", target);
         }
-        if(origin!=null) {
+        if(origin != null) {
             tree.setAttribute("origin", origin);
         }
-        if(influence!=null) {
+        if(influence != null) {
             tree.setAttribute("influence", influence.name());
         }
-        if(offsetAngle!=null) {
+        if(offsetAngle != null) {
             tree.setAttribute("offsetAngle", offsetAngle.toString());
         }
-        if(offsetDirection!=null) {
+        if(offsetDirection != null) {
             tree.setAttribute("offsetDirection", offsetDirection.name());
         }
         String stringofstart = TimeMarker.convertTimeMarkerToSynchPointString(start, "0", true);
@@ -437,7 +438,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
      * @return the list of action units used in this facial expression
      */
     public ArrayList<AUItem> getActionUnits(Side side) {
-        ArrayList<AUItem> onesideAUs = new ArrayList<AUItem>();
+        ArrayList<AUItem> onesideAUs = new ArrayList<>();
         for (AUItem auitem : actionUnits) {
             if ((auitem.getSide() == Side.BOTH)
                     || (auitem.getSide() == side)) {

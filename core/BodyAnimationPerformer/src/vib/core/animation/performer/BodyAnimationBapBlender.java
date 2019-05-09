@@ -47,10 +47,10 @@ import vib.core.util.time.Timer;
  */
 public class BodyAnimationBapBlender extends CharacterDependentAdapterThread implements BAPFramesEmitter, CharacterDependent {
 
-    private final List<BAPFramesPerformer> bapFramesPerformers = new ArrayList<BAPFramesPerformer>();
+    private final List<BAPFramesPerformer> bapFramesPerformers = new ArrayList<>();
 
-    private final SortedMap<Integer, ID> requestIds = new TreeMap<Integer, ID>();
-    private final SortedMap<Integer, BAPFrame> requestFrames = new TreeMap<Integer, BAPFrame>();
+    private final SortedMap<Integer, ID> requestIds = new TreeMap<>();
+    private final SortedMap<Integer, BAPFrame> requestFrames = new TreeMap<>();
 
     // Parameters for the replaceFramesWithInterruption methods
     private double initialHoldDurationInSecond = 0;
@@ -87,20 +87,16 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
 
     @Override
     public void run() {
-
         int currentFrameNumber;
         int lastBAPFrameSent = 0;
 
         while (true) {
-
             synchronized (this) {
-
                 currentFrameNumber = Timer.getCurrentFrameNumber() + 1;
-
                 SortedMap<Integer, ID> currentRequestIds = requestIds.headMap(currentFrameNumber);
 
                 for (Map.Entry<Integer, ID> entry : currentRequestIds.entrySet()) {
-                    ID currentRequestId = requestIds.get(entry.getKey());
+                    ID currentRequestId = entry.getValue();
                     BAPFrame currentBAPFrame = requestFrames.remove(entry.getKey());
                     if (currentBAPFrame.getFrameNumber() > lastBAPFrameSent) {
                         sendFrame(currentBAPFrame, currentRequestId);
@@ -114,14 +110,14 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
     }
 
     private void sendFrame(BAPFrame bapFrame, ID requestId) {
-        List<BAPFrame> bapFrames = new ArrayList<BAPFrame>(1);
+        List<BAPFrame> bapFrames = new ArrayList<>(1);
         bapFrames.add(bapFrame);
         sendFrames(bapFrames, requestId);
     }
 
     private void sendFrames(List<BAPFrame> bapFrames, ID requestId) {
         for (BAPFramesPerformer performer : bapFramesPerformers) {
-            performer.performBAPFrames(new ArrayList<BAPFrame>(bapFrames), requestId);
+            performer.performBAPFrames(new ArrayList<>(bapFrames), requestId);
         }
     }
 
@@ -130,54 +126,41 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
     }
 
     private void updateFrame(BAPFrame bapFrame, ID requestId) {
-
         synchronized (this) {
-
             int bapFrameNumber = bapFrame.getFrameNumber();
-
             requestIds.put(bapFrameNumber, requestId);
             requestFrames.put(bapFrameNumber, bapFrame);
         }
     }
 
     public void updateFrames(List<BAPFrame> bapFrames, ID requestId, Mode mode) {
-
         switch (mode.getCompositionType()) {
-
             case append: {
                 appendFrames(bapFrames, requestId, mode);
                 break;
             }
-
             case blend: {
                 blendFrames(bapFrames, requestId, mode);
                 break;
             }
-
             case replace: {
-
                 switch (mode.getReactionType()) {
-
                     case NONE: {
                         replaceFrames(bapFrames, requestId, mode);
                         break;
                     }
-
                     case HALT: {
                         replaceFramesWithInterruption(bapFrames, requestId, mode);
                         break;
                     }
-
                     case OVERLAP: {
                         replaceFramesWithInterruption(bapFrames, requestId, mode);
                         break;
                     }
-
                     case REPLAN: {
                         replaceFrames(bapFrames, requestId, mode);
                         break;
                     }
-
                     default: {
                         replaceFrames(bapFrames, requestId, mode);
                         break;
@@ -185,7 +168,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
                 }
                 break;
             }
-
             default: {
                 System.out.println("[BodyAnimationBapBlender] updateFrames() : mode is wrong");
                 break;
@@ -206,9 +188,7 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
     }
 
     public void replaceFrames(List<BAPFrame> bapFrames, ID requestId, Mode mode) {
-
         synchronized (this) {
-
             BAPFrame lastNewBAPFrame = bapFrames.get(bapFrames.size() - 1);
             int lastNewBAPFrameNumber = lastNewBAPFrame.getFrameNumber();
             int fadeDurationInFrame = Math.min(10, bapFrames.size());
@@ -232,17 +212,13 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
     }
 
     public void replaceFramesWithInterruption(List<BAPFrame> bapFrames, ID requestId, Mode mode) {
-
         synchronized (this) {
-
             // Removes the useless first bapFrame of the input
-            //
             bapFrames.remove(0);
 
             /* -------------------------------------------------- */
 
             // In OVERLAP reactions the gesture is not held but expanded instead
-            //
             if (mode.getReactionType() == ReactionType.OVERLAP) {
                 initialHoldDurationInSecond = 0;
             }
@@ -263,21 +239,17 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             /* -------------------------------------------------- */
 
             // Defines the output list of bapFrames to send
-            //
             List<BAPFrame> bapFramesToSend = new ArrayList<>();
 
             // Defines the list of hold and expanded or retracted hold bapFrames to blend with the output list of bapFrames to send
-            //
             List<BAPFrame> initialAndFollowingHoldBAPFramesToBlend = new ArrayList<>();
 
             /* ------------------------------ */
 
             // Duplicates the first current frame to create the hold
-            //
             BAPFrame firstInitialHoldBAPFrame = requestFrames.get(bapFrames.get(0).getFrameNumber());
 
             // Filters the first hold bapFrame to keep only arms and legs baps
-            //
             for (int i = 0; i < firstInitialHoldBAPFrame.getAnimationParametersList().size(); ++i) {
                 if ((i < 4) || (i > 47 && i < 123) || (i > 180)) {
                     firstInitialHoldBAPFrame.getAnimationParametersList().get(i).set(false, 0);
@@ -285,7 +257,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             }
 
             // Creates the hold and adds it to the list of hold and expanded or retracted hold bapFrames to blend with the output list of bapFrames to send
-            //
             List<BAPFrame> initialHoldBAPFrames = new ArrayList<>();
             int lastInitialHoldBAPFrameNumber = firstInitialHoldBAPFrame.getFrameNumber();
             for (int i = 0; i < initialHoldDurationInFrame; ++i) {
@@ -298,7 +269,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             /* ------------------------------ */
 
             // Creates a fade between the hold and the future expanded or retracted hold and adds it to the list of hold and expanded or retracted hold bapFrames to blend with the output list of bapFrames to send
-            //
             List<BAPFrame> fadeWithFollowingHoldBAPFrames = new ArrayList<>();
             int lastFadeWithFollowingHoldBAPFrameNumber = lastInitialHoldBAPFrameNumber;
             for (int i = 0; i < fadeDurationWithFollowingHoldInFrame; ++i) {
@@ -322,7 +292,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             /* ------------------------------ */
 
             // Duplicates the last pose to create the expanded or retracted hold and adds it to the list of hold and expanded or retracted hold bapFrames to blend with the output list of bapFrames to send
-            //
             BAPFrame firstFollowingHoldBAPFrame = fadeWithFollowingHoldBAPFrames.get(fadeWithFollowingHoldBAPFrames.size() - 1);
 
             List<BAPFrame> followingHoldBAPFrames = new ArrayList<>();
@@ -337,7 +306,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             /* ------------------------------ */
 
             // Creates a fade between the expanded or retracted hold and the future gestures and adds it to the list of hold and expanded or retracted hold bapFrames to blend with the output list of bapFrames to send
-            //
             BAPFrame firstAfterBAPFrame = new BAPFrame();
             if (bapFrames.size() > initialAndFollowingHoldBAPFramesToBlend.size() + fadeDurationWithAfterInFrame) {
                 firstAfterBAPFrame = bapFrames.get(initialAndFollowingHoldBAPFramesToBlend.size() + fadeDurationWithAfterInFrame);
@@ -372,24 +340,18 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             /* ------------------------------ */
 
             // Creates a map of input bapFrames indexed by frame numbers
-            //
             SortedMap<Integer, BAPFrame> indexedBAPFrames = new TreeMap<>();
             for (BAPFrame bapFrame : bapFrames) {
                 indexedBAPFrames.put(bapFrame.getFrameNumber(), bapFrame);
             }
 
             // Blends the first and the following hold with the output list of bapFrames to send
-            //
             for (BAPFrame initialAndFollowingHoldBAPFrameToBlend : initialAndFollowingHoldBAPFramesToBlend) {
-
                 BAPFrame bapFrame = indexedBAPFrames.get(initialAndFollowingHoldBAPFrameToBlend.getFrameNumber());
 
                 if (bapFrame == null) {
-
                     bapFramesToSend.add(initialAndFollowingHoldBAPFrameToBlend);
-
                 } else {
-
                     BAPFrame fromBAPFrame = initialAndFollowingHoldBAPFrameToBlend;
                     BAPFrame toBAPFrame = bapFrame;
 
@@ -400,7 +362,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
                             toBAP.applyValue(fromBAP.getValue());
                         }
                     }
-
                     bapFramesToSend.add(toBAPFrame);
                 }
             }
@@ -408,7 +369,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             /* ------------------------------ */
 
             // Adds the rest of the input bapFrames to the output list of bapFrames to send
-            //
             for (int i = bapFramesToSend.size(); i < bapFrames.size(); ++i) {
                 bapFramesToSend.add(bapFrames.get(i));
             }
@@ -416,7 +376,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             /* ------------------------------ */
 
             // Sends the output list of bapFrames
-            //
             for (BAPFrame bapFrameToSend : bapFramesToSend) {
                 updateFrame(bapFrameToSend, requestId);
             }
@@ -468,7 +427,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
      * @return the {@code BAPFrame} at the specified index
      */
     public static BAPFrame getBapFrame(Frame info, int index) {
-
         BAPFrame bapFrame = new BAPFrame();
         bapFrame.setFrameNumber(index);
         HashMap<String, Quaternion> results = info.getRotations();
@@ -497,7 +455,6 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
 
     @Override
     public void onCharacterChanged() {
-
         if (!getCharacterManager().getValueString("INTERRUPTION_GESTURE_HOLD_DUR").trim().isEmpty()) {
             initialHoldDurationInSecond = getCharacterManager().getValueDouble("INTERRUPTION_GESTURE_HOLD_DUR");
         } else {

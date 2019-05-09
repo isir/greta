@@ -63,7 +63,6 @@ import vib.core.util.time.Temporizer;
  * @inavassoc - - * vib.core.signals.Signal
  */
 public class Realizer extends CallbackSender implements SignalPerformer, KeyframeEmitter, CharacterDependent {
-
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
@@ -77,8 +76,8 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
 
     public Realizer(CharacterManager cm) {
         setCharacterManager(cm);
-        keyframePerformers = new ArrayList<KeyframePerformer>();
-        generators = new ArrayList<KeyframeGenerator>();
+        keyframePerformers = new ArrayList<>();
+        generators = new ArrayList<>();
 
         lastKeyFrameTime = vib.core.util.time.Timer.getTime();
         gestureGenerator = new GestureKeyframeGenerator();
@@ -93,12 +92,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         gazeGenerator = new GazeKeyframeGenerator(cm,generators);
         faceGenerator = new FaceKeyframeGenerator();
 
-        keyframeComparator = new Comparator<Keyframe>() {
-            @Override
-            public int compare(Keyframe o1, Keyframe o2) {
-                return (int) Math.signum(o1.getOffset() - o2.getOffset());
-            }
-        };
+        keyframeComparator = (o1, o2) -> (int) Math.signum(o1.getOffset() - o2.getOffset());
         
         // environment
         environment = characterManager.getEnvironment();        
@@ -106,14 +100,12 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
-
         // list of created keyframes
-        List<Keyframe> keyframes = new ArrayList<Keyframe>();
+        List<Keyframe> keyframes = new ArrayList<>();
 
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
         // The value of Start and End should be calculated in this step. So that we can sort
-
         for (Signal signal : list) {
             if(signal instanceof PointingSignal)
                 gestureGenerator.fillPointing((PointingSignal)signal);
@@ -135,7 +127,6 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
             faceGenerator.accept(signal);
         }
 
-
         // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
         // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
         // Step 3: create all key frames
@@ -147,7 +138,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         for (KeyframeGenerator generator : generators) {
             keyframes.addAll(generator.generateKeyframes());
         }
-        Collections.sort(keyframes, keyframeComparator);
+        keyframes.sort(keyframeComparator);
 
         // Gaze keyframes for the eyes are generated last
         gazeGenerator.generateEyesKeyframes(keyframes);
@@ -155,11 +146,9 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         faceGenerator.findExistingAU(keyframes);
         keyframes.addAll(faceGenerator.generateKeyframes());
 
+        // Step 4: adjust the timing of all key frame
 
-        // Step 4: adjust the timming of all key frame
-
-        Collections.sort(keyframes, keyframeComparator);
-
+        keyframes.sort(keyframeComparator);
 
         //  here:
         //      - we must manage the time for the three addition modes:
@@ -167,25 +156,23 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         //          - replace:  offset + now
         //          - append:   offset + the previous last time
         //
-        //      - finaly, update the "previous last time"
+        //      - finally, update the "previous last time"
         //          - blend:   previousLastTime = max(previousLastTime, the last time of the new keyframes)
         //          - replace: previousLastTime = the last time of the new keyframes
         //          - append:  previousLastTime = the last time of the new keyframes
 
-
         double startTime = keyframes.isEmpty() ? 0 : keyframes.get(0).getOffset();
         // if the start time to start signals is less than 0, all signals' time have to be increased so that they start from 0
         double absoluteStartTime = vib.core.util.time.Timer.getTime();
-        if(mode.getCompositionType() == CompositionType.append){
+        if (mode.getCompositionType() == CompositionType.append){
             absoluteStartTime = Math.max(lastKeyFrameTime, absoluteStartTime);
         }
         absoluteStartTime -= (startTime < 0 ? startTime : 0);
-        if(mode.getCompositionType() != CompositionType.blend && !keyframes.isEmpty()){
+        if (mode.getCompositionType() != CompositionType.blend && !keyframes.isEmpty()) {
             lastKeyFrameTime = 0;
         }
         //add this info to the keyframe - save this info in some special variable
         for (Keyframe keyframe : keyframes) {
-
             keyframe.setOnset(keyframe.getOnset() + absoluteStartTime);
             keyframe.setOffset(keyframe.getOffset() + absoluteStartTime);
             if (lastKeyFrameTime < keyframe.getOffset()) {
@@ -207,11 +194,10 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
 
         this.sendKeyframes(keyframes, requestId, mode);
         // Add animation to callbacks
-        if(mode.getCompositionType() == CompositionType.replace){
+        if (mode.getCompositionType() == CompositionType.replace) {
             this.stopAllAnims();
         }
         this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
-
     }
 
     @Override
@@ -242,7 +228,7 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         }
     }
 
-    public void setGestureModifier(GestureKeyframeGenerator.GestureModifier modifier){
+    public void setGestureModifier(GestureKeyframeGenerator.GestureModifier modifier) {
         gestureGenerator.setGestureModifier(modifier);
     }
 
@@ -262,7 +248,6 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     }
     
     public void UpdateFaceLibrary(){
-        
         this.getCharacterManager().remove(FaceLibrary.global_facelibrary);    
         FaceLibrary.global_facelibrary = new FaceLibrary(this.getCharacterManager());
         //get the default Lexicon :
@@ -276,7 +261,6 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     }
     
     public void UpdateGestureLibrary(){
-
         this.getCharacterManager().remove(Gestuary.global_gestuary);       
         Gestuary.global_gestuary = new Gestuary(this.getCharacterManager());
         Gestuary.global_gestuary.setCharacterManager(this.getCharacterManager());
@@ -286,9 +270,8 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         Gestuary.global_gestuary.setDefinition(getCharacterManager().getValueString("GESTUARY"));
     }
     
-    public void UpdateHeadLibrary(){
-        
-        this.getCharacterManager().remove(HeadLibrary.globalLibrary);     
+    public void UpdateHeadLibrary() {
+        this.getCharacterManager().remove(HeadLibrary.globalLibrary);
         HeadLibrary.globalLibrary = new HeadLibrary(this.getCharacterManager());
         HeadLibrary.globalLibrary.setCharacterManager(this.getCharacterManager());
         HeadLibrary.globalLibrary.setDefaultDefinition(getCharacterManager().getValueString("HEADGESTURES"));
@@ -296,20 +279,17 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
         // intervals = new HeadIntervals();
     }
     
-    public void UpdateTorsoLibrary(){
-        
-        this.getCharacterManager().remove(TorsoLibrary.globalLibrary);   
+    public void UpdateTorsoLibrary() {
+        this.getCharacterManager().remove(TorsoLibrary.globalLibrary);
         TorsoLibrary.globalLibrary = new TorsoLibrary(this.getCharacterManager());
         TorsoLibrary.globalLibrary.setCharacterManager(this.getCharacterManager());
         TorsoLibrary.globalLibrary.setDefaultDefinition(getCharacterManager().getDefaultValueString("TORSOGESTURES"));
         TorsoLibrary.globalLibrary.setDefinition(getCharacterManager().getValueString("TORSOGESTURES"));
     }
      
-    public void UpdateShoulderLibrary(){
-    
+    public void UpdateShoulderLibrary() {
     }  
     
     public void UpdateHandLibrary(){
-        
     }  
 }

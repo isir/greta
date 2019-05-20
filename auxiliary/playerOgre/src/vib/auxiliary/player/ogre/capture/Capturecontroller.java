@@ -27,6 +27,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import vib.core.feedbacks.CallbackPerformer;
 import vib.core.intentions.FMLFileReader;
+import vib.core.util.log.Logs;
 
 /**
  *
@@ -193,7 +194,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
             mustcapture = true;
             // for each file create a file .avi 
             for(File f : listFiles){
-                String videoNameH = constructVideoName(f,""); //"H"
+                String videoNameH = f.getAbsolutePath().substring(0,f.getAbsolutePath().length()-4);//constructVideoName(f,""); //"H"
                 //String videoNameN = constructVideoName(f,"N");
                 //String videoNameF = constructVideoName(f,"F");
                 File vf = new File(videoNameH + ".avi");
@@ -205,19 +206,20 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
                         //Logger.getLogger(PlanCapturecontroller.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     setBaseFileName(videoNameH);
+                    
                     /*sap = new SocialParameterFrame();
                     sap.setDoubleValue(SocialDimension.Dominance, 1);
                     sap.setDoubleValue(SocialDimension.Liking, -1);*/
-                    startVideoCapture();
-                    try {
-                        Thread.sleep(1000);
-                    } catch (InterruptedException ex) {
-                        //Logger.getLogger(PlanCapturecontroller.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    
                     iscapturing = true;
-                     filereader.load(f.getAbsolutePath());
+                    
+                    filereader.load(f.getAbsolutePath());
+                    startVideoCapture();
+                    
                     while (iscapturing) {
+                        
                     }
+
                 }
             }
         }else{
@@ -326,11 +328,11 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
                 .addGap(18, 18, 18)
                 .addComponent(screenShotButton)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(videoButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(realTimeCheckBox)
-                        .addComponent(textureCheckBox)))
+                        .addComponent(textureCheckBox))
+                    .addComponent(videoButton))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(FMLVideo)

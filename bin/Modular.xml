@@ -25,7 +25,7 @@
                 <item module="oldBAP2newBAP" name="old BAP to new BAP"/>
                 <item module="Body Head Noise" name="Body Head Noise"/>
 				<item module="AUParserFileReader" name="AU parser reader"/> 
-				<!--<item module="FMLAnnotator" name="FML Annotator"/> -->			
+				<item module="FMLAnnotator" name="FML Annotator"/>		
 				<menu name="MeaningMiner">
                     <item module="ImageSchemaExtractor" name="ImageSchemaExtractor"/>
                 </menu>
@@ -105,12 +105,23 @@
             <menu name="Environment">
                 <item module="Environment" name="Environment"/>
                 <item module="MPEG4Animatable" name="MPEG-4 Animatable"/>
+				<menu name="Environment Manager">
+                    <menu name="Generic">
+                        <item module="Generic.EnvironmentManager" name="Environment Manager"/>
+                    </menu>
+                    <menu name="ActiveMQ">
+                        <item module="ActiveMQ.PrimaryEnvironmentServer" name="Primary Environment Server"/>
+                        <item module="ActiveMQ.ReplicaEnvironmentServer" name="Replica Environment Server"/>
+                    </menu>
+                </menu>
             </menu>
             <menu name="Player">
                 <item module="PlayerOgre" name="Player Ogre"/>
                 <item module="CaptureController" name="Capture Controller"/>
                 <item module="XuggleVideoCapture" name="Video Capture Output"/>
 				<item module="ParserCaptureController_AU" name="Parser Capture Controller AU"/>
+				<item module="MeaningMinerCaptureController" name="Meaning Miner Capture Controller"/>
+				<item module="BVHCapturecontroller" name="BVH Capture controller"/>
             </menu>
             <menu name="NetworkConnections">
                 <menu name="ActiveMQ">
@@ -266,11 +277,13 @@
             </frame>
         </module>
         <module name="BVHFileReader" style="Animations">
-            <object class="vib.auxiliary.BvhMocap.BvhReader" lib_id="vib_bvh"/>
-            <frame class="vib.core.utilx.gui.OpenAndLoad" lib_id="vib_utilx" type="frame">
+            <object class="vib.auxiliary.BvhMocap.BvhReadergui" lib_id="vib_bvh"/>
+            <frame type="object"/>
+			<!-- <frame class="vib.auxiliary.BvhMocap.gui.BvhReadergui" lib_id="vib_bvh" type="frame">
                 <link method="setLoader" on="frame"/>
-            </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            </frame> 
+			-->
+            <!--<parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/> -->
         </module>
         <module name="FaceLibraryViewer" style="Animations">
             <object class="vib.tools.editors.facelibrary.FaceLibraryEditor" lib_id="vib_editors"/>
@@ -660,6 +673,12 @@
             <parameter default="true" get_method="isRealTimeCapture" get_on="object" name="RealTime" set_method="setRealTimeCapture" set_on="object" type="boolean"/>
             <parameter default="false" get_method="isUseTexture" get_on="object" name="UseTexture" set_method="setUseTexture" set_on="object" type="boolean"/>
         </module>
+		<module name="BVHCapturecontroller" style="Player">
+            <object class="vib.auxiliary.player.ogre.capture.BVHCapturecontroller" lib_id="vib_playerOgre"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="isRealTimeCapture" get_on="object" name="RealTime" set_method="setRealTimeCapture" set_on="object" type="boolean"/>
+            <parameter default="false" get_method="isUseTexture" get_on="object" name="UseTexture" set_method="setUseTexture" set_on="object" type="boolean"/>
+        </module>
         <module name="XuggleVideoCapture" style="Player">
             <object class="vib.tools.ogre.capture.video.XuggleVideoCapture" lib_id="vib_videoCapture"/>
             <frame class="vib.tools.ogre.capture.video.CodecSelector" lib_id="vib_videoCapture" type="frame">
@@ -915,6 +934,10 @@
                 <link method="setLoader" on="frame"/>
             </frame>
         </module>
+		<module name="MeaningMinerCaptureController" style="Player">
+            <object class="vib.plancapture.MeaningMinerCaptureController" lib_id="vib_plancap"/>
+            <frame type="object"/>
+        </module>
 		<module name="ParserCaptureController_AU" style="Player">
             <object class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plancap"/>
             <frame type="object"/>
@@ -925,10 +948,26 @@
                 <link method="setModule" on="frame"/>
             </frame>
         </module>
-		<!--<module name="FMLAnnotator" style="Intentions">
+		<module name="FMLAnnotator" style="Intentions">
             <object class="vib.auxiliary.fmlannotator.View" lib_id="vib_fml_annotator"/>
             <frame type="object"/>
-        </module> -->
+        </module>
+		<module name="Generic.EnvironmentManager" style="VIBDefault">
+            <object class="vib.auxiliary.environmentmanager.core.mvc.EnvironmentManagerController" lib_id="vib_environment_manager_generic"/>
+            <frame type="object"/>
+        </module>
+        <module name="ActiveMQ.PrimaryEnvironmentServer" style="VIBDefault">
+            <object class="vib.auxiliary.environmentmanager.impl.activemq.PrimaryEnvironmentServer" lib_id="vib_environment_manager_activemq"/>
+            <frame class="vib.auxiliary.environmentmanager.core.mvc.EnvironmentManagerFrame" lib_id="vib_environment_manager_activemq" type="frame">
+                <link method="setCore" on="frame"/>
+            </frame>
+        </module>
+        <module name="ActiveMQ.ReplicaEnvironmentServer" style="VIBDefault">
+            <object class="vib.auxiliary.environmentmanager.impl.activemq.ReplicaEnvironmentServer" lib_id="vib_environment_manager_activemq"/>
+            <frame class="vib.auxiliary.environmentmanager.core.mvc.EnvironmentManagerFrame" lib_id="vib_environment_manager_activemq" type="frame">
+                <link method="setCore" on="frame"/>
+            </frame>
+        </module>
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1053,6 +1092,7 @@
         <lib id="vib_playerOgre" path="./Player/Lib/Internal/playerOgre.jar">
             <depends lib_id="vib_util"/>
             <depends lib_id="vib_mpeg4"/>
+			<depends lib_id="vib_bvh"/>
             <needs path="./Player/Data/*"/>
             <needs path="./Player/Data/Shaders/**"/>
             <needs path="./Player/Data/media/*"/>
@@ -1509,6 +1549,36 @@
             <connect from="input" method="setCaptureOutput" to="output"/>
             <disconnect from="input" method="setCaptureOutput" to="null"/>
         </connector>
+		<connector id="connectBvhCaptureControllerToCapturable" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.BVHCapturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.auxiliary.player.ogre.capture.Capturable" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCapturable" to="output"/>
+            <disconnect from="input" method="setCapturable" to="null"/>
+        </connector>
+        <connector id="connectBvhCaptureControllerToCaptureOutput" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.BVHCapturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.auxiliary.player.ogre.capture.CaptureOutput" lib_id="vib_playerOgre"/>
+            <connect from="input" method="setCaptureOutput" to="output"/>
+            <disconnect from="input" method="setCaptureOutput" to="null"/>
+        </connector>
+		<connector id="connectBvhAttitudeControllerToFMLFileReader" unique="true">
+            <input class="vib.auxiliary.player.ogre.capture.BVHCapturecontroller" lib_id="vib_playerOgre"/>
+            <output class="vib.auxiliary.BvhMocap.BvhReadergui" lib_id="vib_bvh"/>
+            <connect from="input" method="setBVHFileReader" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="connectActiveMQPrimaryEnvironmentServerToEnvironment" unique="true">
+            <input class="vib.auxiliary.environmentmanager.impl.activemq.PrimaryEnvironmentServer" lib_id="vib_environment_manager_activemq"/>
+            <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>
+            <connect from="input" method="setLocalEnvironment" to="output"/>
+            <disconnect from="input" method="setLocalEnvironment" to="null"/>
+        </connector>
+        <connector id="connectActiveMQReplicaEnvironmentServerToEnvironment" unique="true">
+            <input class="vib.auxiliary.environmentmanager.impl.activemq.ReplicaEnvironmentServer" lib_id="vib_environment_manager_activemq"/>
+            <output class="vib.core.util.environment.Environment" lib_id="vib_util"/>
+            <connect from="input" method="setLocalEnvironment" to="output"/>
+            <disconnect from="input" method="setLocalEnvironment" to="null"/>
+        </connector>     
     </connectors>
     <!-- list of styles -->
     <styles>

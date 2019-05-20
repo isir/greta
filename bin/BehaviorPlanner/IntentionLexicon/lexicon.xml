@@ -46,6 +46,17 @@
 		</constraints>
 	</behaviorset>
 	
+	<behaviorset name="rest-restposealong_big">
+		<signals>
+			<signal id="1" name="rest=along_big" modality="gesture"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
 	<behaviorset name="performative-raiseHand_R">
 		<signals>
 			<signal id="1" name="performative=raiseHand_R" modality="gesture">
@@ -396,6 +407,64 @@
 			<core>
 				<item id="1"/>
 			</core>
+		</constraints>
+	</behaviorset>
+	
+	<!-- TURN -->
+	
+	<behaviorset name="turntaking-takethefloor">
+		<signals>
+			<signal id="1" name="gaze=take" modality="gaze">
+				<alternative name="faceexp=neutral" probability="0.3"/>
+			</signal>
+			<signal id="2" name="raise" modality="torso">
+				<alternative name="none" probability="0.3"/>
+			</signal>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="turntaking-givethefloor">
+		<signals>
+			<signal id="1" name="gaze=give" modality="gaze" >
+			</signal>
+			<signal id="2" name="raise" modality="torso">
+				<alternative name="none" probability="0.3"/>
+			</signal>
+			<signal id="4" name="adjectival=OPEN_MOVING_HAND2" modality="gesture">
+				<alternative name="rest=legs" probability="0.3"/>
+			</signal>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="turntaking-*">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="3" name="faceexp=raise_eyebrows" modality="face"/>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="1"/>
+					<thennotpresent id="2"/>
+					<thennotpresent id="3"/>
+				</implication>
+				<implication>
+					<ifpresent id="2"/>
+					<thennotpresent id="1"/>
+					<thennotpresent id="3"/>
+				</implication>
+				<implication>
+					<ifpresent id="3"/>
+					<thennotpresent id="1"/>
+					<thennotpresent id="2"/>
+				</implication>
+			</rules>
 		</constraints>
 	</behaviorset>
 	

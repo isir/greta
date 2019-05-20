@@ -543,7 +543,7 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
 
     @Override
     public void performFeedback(ID id, String string, SpeechSignal ss, TimeMarker tm) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // info about the signals
     }
 
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" text="" type="SAPI4" voice="openmary">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <boundary end="s1:tm1" id="b1" start="s1:tm0" type="LH"/>Hello, <tm id="tm1" value="2"/>
+      <pause duration_sym="short" id="p1" ref="2"/>how are <tm id="tm2" value="0"/>
+    </speech>
+  </bml>
+  <fml>
+    <social end="s1:tm1" id="s1" start="s1:tm0" type="hello"/>
+    <turntaking end="s1:tm1" id="tt1" start="s1:tm0" type="salutation"/>
+    <backchannel end="s1:tm1" id="bk1" start="s1:tm0" type="takethefloor"/>
+    <performative end="s1:tm1" id="p1" start="s1:tm0" type="joy"/>
+    <functional-relation end="s1:tm1" id="fr1" start="s1:tm0" type="high"/>
+  </fml>
+</fml-apml>

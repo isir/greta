@@ -363,7 +363,7 @@ public class CharacterManager {
      * @return the file name of the default character
      */
     public String getDefaultCharacterFile() {
-        return fileNameOfCharacter(IniManager.getGlobals().getValueString(DEFAULT_CHARACTER_KEY));
+        return fileNameOfCharacter(DEFAULT_CHARACTER_KEY);
     }
 
     /**

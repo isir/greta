@@ -1,0 +1,77 @@
+import * from "base.material"
+
+material spike_base : base {
+	set $sr 0.2
+	set $sg 0.2
+	set $sb 0.2
+	set $ss 5
+}
+
+material spike_face : spike_base {
+	set_texture_alias diffuseMap spike/face.jpg
+	set_texture_alias celShadingMap spike/face_cel.png
+}
+
+material spike_eyes : base {
+	set $sr 1
+	set $sg 1
+	set $sb 1
+	set $ss 127
+	set_texture_alias diffuseMap  moyenBleu.jpg
+	set_texture_alias celShadingMap moyenBleu_cel.png
+}
+
+material spike_skin : spike_base {
+	set_texture_alias diffuseMap spike/skin.jpg
+	set_texture_alias celShadingMap spike/skin_cel.bmp
+}
+
+material spike_nail : base {
+	set $sr 0.2
+	set $sg 0.2
+	set $sb 0.2
+	set $ss 50
+	set_texture_alias diffuseMap spike/skin_cel.bmp
+	set_texture_alias celShadingMap spike/skin_cel.bmp
+}
+
+material spike_tshirt : spike_base {
+	set_texture_alias diffuseMap spike/tshirt_black.jpg
+	set_texture_alias celShadingMap spike/tshirt_black.jpg
+}
+
+material spike_jean : spike_base {
+	set_texture_alias diffuseMap spike/jean.jpg
+	set_texture_alias celShadingMap spike/jean_cel.png
+}
+
+material spike_shoes : spike_base {
+	set_texture_alias diffuseMap spike/shoes.jpg
+	set_texture_alias celShadingMap spike/shoes_cel.png
+}
+
+material brice_tshirt : spike_base {
+	set_texture_alias diffuseMap spike/tshirt_brice.jpg
+	set_texture_alias celShadingMap spike/tshirt_brice.jpg
+}
+
+
+material brice_hair : base {
+	set $ar 1
+	set $ag 1
+	set $ab 0.7
+	
+	set $dr 1
+	set $dg 1
+	set $db 0.7
+	
+	set $sr 0.9
+	set $sg 0.9
+	set $sb 0.6
+	set $ss 5
+	
+	set $scaleU 2
+	set $scaleV 0.2
+	set_texture_alias diffuseMap poppy/hair.jpg
+	set_texture_alias celShadingMap poppy/hair_cel.png
+}

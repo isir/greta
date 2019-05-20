@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE facelibrary SYSTEM "facelibrary.dtd">
+<facelibrary>
+
+    <actiondeclaration name="AU1">
+        <fap num="31" value="190"/>
+        <fap num="32" value="190"/>
+        <fap num="33" value="130"/>
+        <fap num="34" value="130"/>
+        <fap num="36" value="80"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU7">
+        <fap num="19" value="130"/>
+        <fap num="20" value="130"/>
+        <fap num="21" value="540"/>
+        <fap num="22" value="540"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU12">
+        <fap num="8" value="-100"/>
+        <fap num="9" value="-100"/>
+        <fap num="13" value="910"/>
+        <fap num="39" value="-13"/>
+        <fap num="40" value="-13"/>
+        <fap num="41" value="160"/>
+        <fap num="42" value="160"/>
+        <fap num="51" value="-250"/>
+        <fap num="53" value="210"/>
+        <fap num="54" value="210"/>
+        <fap num="55" value="90"/>
+        <fap num="56" value="90"/>
+        <fap num="59" value="400"/>
+        <fap num="60" value="400"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU15">
+                
+        <fap num="5" value="70"/>
+        <fap num="10" value="240"/>
+        <fap num="11" value="240"/>
+        <fap num="16" value="175"/>
+        <fap num="17" value="26"/>
+        <fap num="51" value="31"/>
+        <fap num="52" value="110"/>
+        <fap num="55" value="113"/>
+        <fap num="56" value="113"/>
+        <fap num="57" value="309"/>
+        <fap num="58" value="309"/>
+        <fap num="59" value="-186"/>
+        <fap num="60" value="-186"/>
+    </actiondeclaration>
+
+    <actiondeclaration name="AU16">
+        <fap num="5" value="-340"/>
+        <fap num="10" value="-830"/>
+        <fap num="11" value="-830"/>
+        <fap num="52" value="-180"/>
+        <fap num="57" value="-180"/>
+        <fap num="58" value="-150"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU17">
+        <fap num="4" value="-18"/>
+        <fap num="5" value="218"/>
+        <fap num="8" value="-12"/>
+        <fap num="9" value="-3"/>
+        <fap num="10" value="98"/>
+        <fap num="11" value="98"/>
+        <fap num="17" value="21"/>
+        <fap num="18" value="250"/>
+        <fap num="51" value="-12"/>
+        <fap num="52" value="300"/>
+        <fap num="53" value="12"/>
+        <fap num="54" value="12"/>
+        <fap num="57" value="126"/>
+        <fap num="58" value="126"/>
+        <fap num="59" value="-30"/>
+        <fap num="60" value="-30"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU18">
+        <fap num="4" value="-50"/>
+        <fap num="5" value="-500"/>
+        <fap num="8" value="100"/>
+        <fap num="9" value="100"/>
+        <fap num="10" value="690"/>
+        <fap num="11" value="690"/>
+        <fap num="16" value="400"/>
+        <fap num="17" value="240"/>
+        <fap num="51" value="-70"/>
+        <fap num="52" value="-70"/>
+        <fap num="53" value="-180"/>
+        <fap num="54" value="-180"/>
+        <fap num="55" value="40"/>
+        <fap num="56" value="40"/>
+        <fap num="57" value="340"/>
+        <fap num="58" value="340"/>
+        <fap num="59" value="50"/>
+        <fap num="60" value="50"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU20">
+        <fap num="6" value="130"/>
+        <fap num="7" value="130"/>
+        <fap num="39" value="200"/>
+        <fap num="40" value="200"/>
+        <fap num="51" value="50"/>
+        <fap num="53" value="200"/>
+        <fap num="54" value="200"/>
+        <fap num="55" value="80"/>
+        <fap num="56" value="80"/>
+        <fap num="57" value="20"/>
+        <fap num="58" value="20"/>
+        <fap num="59" value="10"/>
+        <fap num="60" value="10"/>
+        <fap num="61" value="26"/>
+        <fap num="62" value="26"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU22">
+        <fap num="4" value="-250"/>
+        <fap num="5" value="-200"/>
+        <fap num="6" value="-400"/>
+        <fap num="7" value="-400"/>
+        <fap num="8" value="-700"/>
+        <fap num="9" value="-700"/>
+        <fap num="10" value="-990"/>
+        <fap num="11" value="-930"/>
+        <fap num="16" value="270"/>
+        <fap num="17" value="270"/>
+        <fap num="51" value="-340"/>
+        <fap num="53" value="-180"/>
+        <fap num="54" value="-180"/>
+        <fap num="55" value="90"/>
+        <fap num="56" value="110"/>
+        <fap num="59" value="120"/>
+        <fap num="60" value="120"/>
+        <fap num="61" value="-20"/>
+        <fap num="62" value="-20"/>
+        <fap num="63" value="-10"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU23">
+        <fap num="4" value="-22"/>
+        <fap num="5" value="210"/>
+        <fap num="8" value="-121"/>
+        <fap num="9" value="-121"/>
+        <fap num="10" value="76"/>
+        <fap num="11" value="76"/>
+        <fap num="16" value="390"/>
+        <fap num="17" value="310"/>
+        <fap num="18" value="190"/>
+        <fap num="39" value="4"/>
+        <fap num="40" value="4"/>
+        <fap num="51" value="80"/>
+        <fap num="52" value="240"/>
+        <fap num="53" value="-50"/>
+        <fap num="54" value="-50"/>
+        <fap num="55" value="40"/>
+        <fap num="56" value="40"/>
+        <fap num="57" value="211"/>
+        <fap num="58" value="211"/>
+        <fap num="59" value="60"/>
+        <fap num="60" value="60"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU24">
+        <fap num="4" value="-22"/>
+        <fap num="5" value="68"/>
+        <fap num="8" value="-121"/>
+        <fap num="9" value="-121"/>
+        <fap num="10" value="76"/>
+        <fap num="11" value="76"/>
+        <fap num="16" value="-71"/>
+        <fap num="17" value="-111"/>
+        <fap num="39" value="4"/>
+        <fap num="40" value="4"/>
+        <fap num="51" value="90"/>
+        <fap num="52" value="170"/>
+        <fap num="53" value="15"/>
+        <fap num="54" value="15"/>
+        <fap num="55" value="84"/>
+        <fap num="56" value="84"/>
+        <fap num="57" value="211"/>
+        <fap num="58" value="211"/>
+        <fap num="59" value="60"/>
+        <fap num="60" value="60"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU25">
+        <fap num="5" value="-480"/>
+
+        <fap num="8" value="-55"/>
+        <fap num="9" value="-55"/>
+        <fap num="10" value="-320"/>
+        <fap num="11" value="-320"/>
+        <fap num="16" value="-110"/>
+        <fap num="18" value="12"/>
+        <fap num="51" value="-24"/>
+        <fap num="52" value="-200"/>
+        <fap num="55" value="-12"/>
+        <fap num="56" value="-12"/>
+
+    </actiondeclaration>
+    <actiondeclaration name="AU26">
+        <fap num="3" value="220"/>
+        <fap num="4" value="70"/>
+        <fap num="6" value="1"/>
+        <fap num="7" value="1"/>
+        <fap num="8" value="-1"/>
+        <fap num="9" value="-1"/>
+        <fap num="10" value="-18"/>
+        <fap num="11" value="-18"/>
+        <fap num="16" value="-1"/>
+        <fap num="17" value="1"/>
+        <fap num="18" value="220"/>
+        <fap num="39" value="1"/>
+        <fap num="40" value="1"/>
+        <fap num="41" value="4"/>
+        <fap num="42" value="4"/>
+        <fap num="51" value="-2"/>
+        <fap num="53" value="-1"/>
+        <fap num="54" value="-1"/>
+        <fap num="55" value="-1"/>
+        <fap num="56" value="-1"/>
+        <fap num="57" value="-8"/>
+        <fap num="58" value="-8"/>
+        <fap num="59" value="-100"/>
+        <fap num="60" value="-100"/>
+        <fap num="61" value="1"/>
+        <fap num="62" value="1"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU27">
+        <fap num="3" value="600"/>
+        <fap num="5" value="-1030"/>
+        <fap num="10" value="-1800"/>
+        <fap num="11" value="-1800"/>
+        <fap num="14" value="-150"/>
+        <fap num="16" value="40"/>
+        <fap num="18" value="-250"/>
+        <fap num="41" value="300"/>
+        <fap num="42" value="300"/>
+        <fap num="52" value="-610"/>
+        <fap num="53" value="-60"/>
+        <fap num="54" value="-60"/>
+        <fap num="57" value="-900"/>
+        <fap num="58" value="-900"/>
+    </actiondeclaration>
+    <actiondeclaration name="AU43">
+        <fap num="19" value="940"/>
+        <fap num="20" value="940"/>
+        <fap num="21" value="200"/>
+        <fap num="22" value="200"/>
+    </actiondeclaration>
+
+		<actiondeclaration name="AU58">
+<fap num="4" value="-125"/>
+<fap num="5" value="-98"/>
+<fap num="6" value="90"/>
+<fap num="7" value="90"/>
+<fap num="8" value="-69"/>
+<fap num="9" value="-69"/>
+<fap num="10" value="-110"/>
+<fap num="11" value="-110"/>
+<fap num="12" value="320"/>
+<fap num="13" value="-300"/>
+<fap num="16" value="500"/>
+<fap num="41" value="400"/>
+<fap num="42" value="400"/>
+<fap num="51" value="-30"/>
+<fap num="52" value="-88"/>
+<fap num="53" value="90"/>
+<fap num="54" value="90"/>
+<fap num="55" value="-15"/>
+<fap num="56" value="-15"/>
+<fap num="57" value="-76"/>
+<fap num="58" value="-76"/>
+<fap num="59" value="320"/>
+<fap num="60" value="300"/>
+<fap num="61" value="18"/>
+<fap num="62" value="18"/>
+</actiondeclaration>
+<actiondeclaration name="AU59">
+<fap num="3" value="60"/>
+<fap num="4" value="-125"/>
+<fap num="5" value="-287"/>
+<fap num="6" value="140"/>
+<fap num="7" value="140"/>
+<fap num="8" value="-69"/>
+<fap num="9" value="-69"/>
+<fap num="10" value="-320"/>
+<fap num="11" value="-320"/>
+<fap num="12" value="320"/>
+<fap num="13" value="300"/>
+<fap num="16" value="-400"/>
+<fap num="17" value="-340"/>
+<fap num="41" value="400"/>
+<fap num="42" value="400"/>
+<fap num="51" value="-30"/>
+<fap num="52" value="-256"/>
+<fap num="53" value="140"/>
+<fap num="54" value="140"/>
+<fap num="55" value="-15"/>
+<fap num="56" value="-15"/>
+<fap num="57" value="-223"/>
+<fap num="58" value="-223"/>
+<fap num="59" value="320"/>
+<fap num="60" value="300"/>
+<fap num="61" value="28"/>
+<fap num="62" value="28"/>
+<fap num="63" value="10"/>
+</actiondeclaration>
+</facelibrary>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelibrary>
+    <expression class="faceexp" instance="disbelief">
+        <action intensity="0.55" name="AU1"/>
+        <action intensity="0.45" name="AU6"/>
+        <action intensity="0.21" name="AU7"/>
+        <action intensity="0.25" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="disgust">
+        <action intensity="0.6" name="AU9"/>
+        <action intensity="0.8" name="AU15"/>
+        <action name="AU16"/>
+    </expression>
+    <expression class="faceexp" instance="eyes_big">
+        <action name="AU5"/>
+    </expression>
+    <expression class="faceexp" instance="liking">
+        <action intensity="0.36" name="AU1"/>
+        <action intensity="0.56" name="AU12"/>
+        <action intensity="0.37" name="AU35"/>
+    </expression>
+    <expression class="faceexp" instance="sadness">
+        <action name="AU1"/>
+        <action name="AU4"/>
+        <action intensity="0.8" name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="small_joy">
+        <action intensity="0.3" name="AU6"/>
+        <action intensity="0.3" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="smile_big_open">
+        <action intensity="0.8" name="AU6"/>
+        <action name="AU12"/>
+        <action intensity="0.4" name="AU27"/>
+    </expression>
+    <expression class="faceexp" instance="surprise">
+        <action name="AU1"/>
+        <action name="AU2"/>
+        <action name="AU5"/>
+        <action name="AU26"/>
+        <action name="AU25"/>
+    </expression>
+</facelibrary>

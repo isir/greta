@@ -55,14 +55,14 @@ public class BvhMocap {
        // String bvhfilepath= file.getPath();
         //System.out.println(bvhfilepath);
         //String bvhfilename=file.getName();
-               String bvhpath="C:\\Users\\fourati\\Documents\\MotionCapture Database\\Janina\\Anger\\Simple Walk\\Action_repetitions\\";
-      String bvhname="Ag1SW_Janina";
+        String bvhpath="C:\\Users\\fourati\\Documents\\MotionCapture Database\\Janina\\Anger\\Simple Walk\\Action_repetitions\\";
+        String bvhname="Ag1SW_Janina";
 //
-        BvhReader bvhread=new BvhReader(bvhpath + bvhname+".bvh");
+        BvhReader bvhread = new BvhReader(bvhpath + bvhname+".bvh");
         Bvh bvh = bvhread.JFTableBasedBvhCreator();
         AllJointFramesTable jointframestable = bvh.GetAllJointFramesTable();
-       //System.out.println(jointframestable.GetNbFrame());
-       SkeletonRelatedPositions SekeltonRelatedPos=new SkeletonRelatedPositions(jointframestable);
+        //System.out.println(jointframestable.GetNbFrame());
+        SkeletonRelatedPositions SekeltonRelatedPos=new SkeletonRelatedPositions(jointframestable);
         SekeltonRelatedPos.CreateSkeletonRelatedPositions();
         AllJointFramesTable newjointframestable=SekeltonRelatedPos.GetAllJointFramesTable();
         Quaternion q=new Quaternion(new Vec3d(0,1,0),(float) -0.5);

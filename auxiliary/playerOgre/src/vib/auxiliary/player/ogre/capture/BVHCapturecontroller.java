@@ -21,19 +21,27 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import vib.core.feedbacks.CallbackPerformer;
-import vib.core.intentions.FMLFileReader;
+import vib.auxiliary.BvhMocap.BvhReader;
+import vib.auxiliary.BvhMocap.BvhReadergui;
+import vib.core.animation.mpeg4.bap.BAPFrame;
+import vib.core.animation.mpeg4.bap.BAPFramesEmitter;
+import vib.core.animation.mpeg4.bap.BAPFramesPerformer;
+import vib.core.util.id.ID;
+import vib.core.util.id.IDProvider;
 import vib.core.util.log.Logs;
 
 /**
  *
- * @author Andre-Marie Pez
+ * @author Donatella Simonetti
  */
-public class Capturecontroller extends javax.swing.JFrame implements CallbackPerformer, CaptureListener {
+public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureListener, BAPFramesEmitter { // CallbackPerformer,
 
     private AWTImageCaptureOutput imageCaptureOutput;
     private OneShotCapturer screenShotCapturer;
@@ -44,6 +52,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     private OgreRenderTexture textureCapturable;
     protected Capturer currentVideoCapturer;
     
+    private ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
     
     private ActionListener startCaptureAction = new ActionListener() {
         @Override
@@ -62,14 +71,14 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     private volatile boolean iscapturing = false;
     private boolean mustcapture = false;
     private File[] listFiles;
-    private FMLFileReader filereader;
+    private BvhReadergui bvhfilereader;
     private JFileChooser jFileChooser1;
     
 
     /**
      * Creates new form Capturecontroller
      */
-    public Capturecontroller() {
+    public BVHCapturecontroller() {
         initComponents();
         imageCaptureOutput = new AWTImageCaptureOutput();
 
@@ -135,14 +144,19 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     }
 
     public void startVideoCapture() {
-        Capturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        BVHCapturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         ensureCapturable(currentVideoCapturer);
         currentVideoCapturer.startCapture(filename);
+
         //System.out.println(filename);
+    }
+    
+    public void run() {
+
     }
 
     public void stopVideoCapture() {
-        Capturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        BVHCapturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         currentVideoCapturer.stopCapture();
     }
 
@@ -194,10 +208,9 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
             mustcapture = true;
             // for each file create a file .avi 
             for(File f : listFiles){
-                String videoNameH = f.getAbsolutePath().substring(0,f.getAbsolutePath().length()-4);//constructVideoName(f,""); //"H"
-                //String videoNameN = constructVideoName(f,"N");
-                //String videoNameF = constructVideoName(f,"F");
-                File vf = new File(videoNameH + ".avi");
+                String videoName = f.getAbsolutePath().substring(0,f.getAbsolutePath().length()-4);//constructVideoName(f,""); //"H"
+
+                File vf = new File(videoName + ".avi");
 
                 if (!vf.exists()) {
                     try {
@@ -205,21 +218,44 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
                     } catch (InterruptedException ex) {
                         //Logger.getLogger(PlanCapturecontroller.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    setBaseFileName(videoNameH);
-                    
-                    /*sap = new SocialParameterFrame();
-                    sap.setDoubleValue(SocialDimension.Dominance, 1);
-                    sap.setDoubleValue(SocialDimension.Liking, -1);*/
-                    
-                    iscapturing = true;
-                    
-                    filereader.load(f.getAbsolutePath());
-                    startVideoCapture();
-                    
-                    while (iscapturing) {
-                        
-                    }
+                    setBaseFileName(videoName);
 
+                    startVideoCapture();
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException ex) {
+                        //Logger.getLogger(PlanCapturecontroller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    bvhfilereader.load(f.getAbsolutePath());
+                    
+                    // take the frametime and number of frame to compute the mength of the video
+                    List<Object> frametimeandnum = bvhfilereader.fileAndFrame.get(f.getAbsolutePath());
+                    
+                    int length = Math.round((int) frametimeandnum.get(0)* (float) frametimeandnum.get(1));
+                    
+                    //wait until the end of the video + 1 sec
+                    try {
+                    TimeUnit.SECONDS.sleep(length+1);
+                    } catch (InterruptedException ex) {
+                        Logs.error(ex.getLocalizedMessage());
+                        //LOGGER.log(Level.SEVERE, ex.toString(), ex);
+                    }
+            
+                    // stop video
+                    stopVideoCapture();
+                    iscapturing = false;
+                    Logs.debug("---- isCapturing : False !!");
+                    
+                    // once ended a video send to the agent the BAp values for the rest position
+                    ArrayList<BAPFrame> bap_animation = new ArrayList<BAPFrame>();
+                    BAPFrame restpose = new BAPFrame();
+                    
+                    bap_animation.add(restpose);
+                    ID id = IDProvider.createID("restpose");//today
+                    for (int i = 0; i < _bapframesPerformer.size(); ++i) {
+                        BAPFramesPerformer performer = _bapframesPerformer.get(i);
+                        performer.performBAPFrames(bap_animation, id);
+                    }
                 }
             }
         }else{
@@ -233,8 +269,8 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
         return f.getName().substring(0,f.getName().length()-4) + "-"+appendix;
     }
     
-    public void setFMLFileReader(FMLFileReader ffr){
-        this.filereader = ffr;
+    public void setBVHFileReader(BvhReadergui ffr){
+        this.bvhfilereader = ffr;
     }
     
      public void setFileName(String fileName){
@@ -258,7 +294,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
         videoButton = new javax.swing.JButton();
         realTimeCheckBox = new javax.swing.JCheckBox();
         textureCheckBox = new javax.swing.JCheckBox();
-        FMLVideo = new javax.swing.JButton();
+        BVHVideo = new javax.swing.JButton();
         FolderName = new javax.swing.JTextField();
         SelectFolder = new javax.swing.JButton();
 
@@ -283,10 +319,10 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
 
         textureCheckBox.setText("Use texture");
 
-        FMLVideo.setText("FML Videos");
-        FMLVideo.addActionListener(new java.awt.event.ActionListener() {
+        BVHVideo.setText("BVH Videos");
+        BVHVideo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                FMLVideoActionPerformed(evt);
+                BVHVideoActionPerformed(evt);
             }
         });
 
@@ -306,7 +342,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FMLVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(BVHVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(screenShotButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(videoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -335,7 +371,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
                     .addComponent(videoButton))
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(FMLVideo)
+                    .addComponent(BVHVideo)
                     .addComponent(FolderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SelectFolder))
                 .addContainerGap(24, Short.MAX_VALUE))
@@ -357,9 +393,17 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
         }
     }//GEN-LAST:event_realTimeCheckBoxActionPerformed
 
-    private void FMLVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FMLVideoActionPerformed
-        FMLVideoRecord();
-    }//GEN-LAST:event_FMLVideoActionPerformed
+    private void BVHVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BVHVideoActionPerformed
+        Thread t = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                FMLVideoRecord();
+            }
+        });
+        //t.setDaemon(true);
+        t.start();
+        
+    }//GEN-LAST:event_BVHVideoActionPerformed
 
     private void SelectFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectFolderActionPerformed
         jFileChooser1.setLocale(Locale.getDefault());
@@ -372,7 +416,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     }//GEN-LAST:event_SelectFolderActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton FMLVideo;
+    private javax.swing.JButton BVHVideo;
     private javax.swing.JTextField FolderName;
     private javax.swing.JButton SelectFolder;
     protected javax.swing.JCheckBox realTimeCheckBox;
@@ -382,18 +426,15 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void performCallback(vib.core.feedbacks.Callback clbck) {
-        if (mustcapture) {
-            if ((clbck.type().equalsIgnoreCase("dead") || clbck.type().equalsIgnoreCase("end"))) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException ex) {
-                    //Logger.getLogger(FMLAttitudeCaptureController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                stopVideoCapture();
-
-                iscapturing = false;
-            }
+    public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {
+        if (bapfp != null) {
+            _bapframesPerformer.add(bapfp);
         }
     }
+
+    @Override
+    public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
+         _bapframesPerformer.remove(bapfp);
+    }
+
 }

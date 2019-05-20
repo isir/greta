@@ -1,0 +1,1 @@
+Ceci est un texte d’essai, il ne prends pas en compte les différents accès fichiers, mémoire et bases de données.

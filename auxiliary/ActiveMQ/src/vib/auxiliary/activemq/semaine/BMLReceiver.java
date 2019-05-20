@@ -31,13 +31,14 @@ import vib.core.util.xml.XMLTree;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
 
 /**
  *
  * @author Andre-Marie Pez
  */
-public class BMLReceiver extends TextReceiver implements SignalEmitter {
+public class BMLReceiver extends TextReceiver implements SignalEmitter, CharacterDependent {
 
     private ArrayList<SignalPerformer> performers;
     private XMLParser bmlParser;
@@ -51,7 +52,7 @@ public class BMLReceiver extends TextReceiver implements SignalEmitter {
 
     public BMLReceiver(CharacterManager cm,String host, String port, String topic) {
         super(host, port, topic);
-        this.cm = cm;
+        setCharacterManager(cm);
         performers = new ArrayList<SignalPerformer>();
         bmlParser = XML.createParser();
         bmlParser.setValidating(false);
@@ -105,5 +106,20 @@ public class BMLReceiver extends TextReceiver implements SignalEmitter {
     @Override
     public void removeSignalPerformer(SignalPerformer performer) {
         performers.remove(performer);
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        //
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+        return cm;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        this.cm = characterManager;
     }
 }

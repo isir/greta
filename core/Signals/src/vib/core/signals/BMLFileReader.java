@@ -89,7 +89,7 @@ public class BMLFileReader implements SignalEmitter {
         if (bml.hasAttribute("social_attitude")) {
             mode.setSocialAttitude(bml.getAttribute("social_attitude"));
         }
-        List<Signal> signals = BMLTranslator.BMLToSignals(bml, cm);
+        List<Signal> signals = BMLTranslator.BMLToSignals(bml, this.cm);
 
         ID id = IDProvider.createID(base);
         //send to all SignalPerformer added

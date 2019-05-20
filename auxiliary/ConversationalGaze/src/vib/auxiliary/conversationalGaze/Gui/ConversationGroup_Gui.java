@@ -86,12 +86,12 @@ public class ConversationGroup_Gui extends javax.swing.JFrame {
                 group.groupActive = false;
                 group.listParticipants.remove("user");     
                 group.groupActive = true;
-                group.run();
+                group.start();
         }else {
             group.groupActive = false;
             group.listParticipants.add(new ConversationParticipant("user"));   
             group.groupActive = true;
-            group.run();
+            group.start();
         }
     }//GEN-LAST:event_check_userActionPerformed
 

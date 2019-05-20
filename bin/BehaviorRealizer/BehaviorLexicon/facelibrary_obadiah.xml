@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelibrary>
+    <expression class="faceexp" instance="anger">
+        <action name="AU4"/>
+        <action name="AU5"/>
+        <action name="AU7"/>
+        <action name="AU23"/>
+    </expression>
+    <expression class="faceexp" instance="AU58">
+        <action name="AU58"/>
+    </expression>
+    <expression class="faceexp" instance="AU59">
+        <action name="AU59"/>
+    </expression>
+    <expression class="faceexp" instance="disbelief">
+        <action intensity="0.79" name="AU1"/>
+        <action intensity="0.45" name="AU7"/>
+        <action intensity="0.23" name="AU15"/>
+        <action intensity="0.66" name="AU20"/>
+    </expression>
+    <expression class="faceexp" instance="disgust">
+        <action name="AU9"/>
+        <action intensity="0.7" name="AU15"/>
+        <action intensity="0.7" name="AU16"/>
+    </expression>
+    <expression class="faceexp" instance="Eyebrows_Sad">
+        <action intensity="0.6" name="AU1"/>
+        <action intensity="0.6" name="AU4"/>
+    </expression>
+    <expression class="faceexp" instance="fear">
+        <action name="AU1"/>
+        <action name="AU2"/>
+        <action name="AU4"/>
+        <action name="AU5"/>
+        <action name="AU20"/>
+        <action name="AU26"/>
+    </expression>
+    <expression class="faceexp" instance="joystrong">
+        <action intensity="0.15" name="AU1"/>
+        <action intensity="0.4" name="AU2"/>
+        <action intensity="0.2" name="AU5"/>
+        <action name="AU12"/>
+        <action intensity="0.25" name="AU18"/>
+        <action intensity="0.4" name="AU22"/>
+        <action intensity="0.75" name="AU23"/>
+        <action intensity="0.06" name="AU25"/>
+    </expression>
+    <expression class="faceexp" instance="liking">
+        <action intensity="0.42" name="AU1"/>
+        <action intensity="0.58" name="AU6"/>
+        <action intensity="0.5" name="AU12"/>
+        <action intensity="0.09" name="AU25"/>
+    </expression>
+    <expression class="faceexp" instance="Mouth_Sad">
+        <action intensity="0.6" name="AU15"/>
+    </expression>
+    <expression class="faceexp" instance="sadness">
+        <action name="AU1"/>
+        <action name="AU4"/>
+        <action intensity="0.7" name="AU15"/>
+    </expression>
+</facelibrary>

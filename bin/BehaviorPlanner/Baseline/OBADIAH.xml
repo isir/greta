@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<profile xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Common/Data/xml/profiles.xsd">
+	<parameter-set name="face">
+		<Parameter name="preference" value="0.9"/>
+		<Parameter name="OAC" value="0.95"/>
+		<Parameter name="SPC" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="TMP" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="FLD" value="0.0" min="-1.0" max="1.0"/>
+		<Parameter name="PWR" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="REP" value="0" min="-1.0" max="1.0"/>
+	</parameter-set>
+	<parameter-set name="gesture">
+		<Parameter name="preference" value="0.9"/>
+		<Parameter name="OAC" value="0.95"/>
+		<Parameter name="SPC" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="TMP" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="FLD" value="0.0" min="-1.0" max="1.0"/>
+		<Parameter name="PWR" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="REP" value="0.0" min="-1.0" max="1.0"/>
+	</parameter-set>
+	<parameter-set name="gaze">
+		<Parameter name="preference" value="0.9"/>
+		<Parameter name="OAC" value="0.95"/>
+		<Parameter name="SPC" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="TMP" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="FLD" value="0.0" min="-1.0" max="1.0"/>
+		<Parameter name="PWR" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="REP" value="0.0" min="-1.0" max="1.0"/>
+	</parameter-set>
+	<parameter-set name="torso">
+		<Parameter name="preference" value="0.9"/>
+		<Parameter name="OAC" value="0.95"/>
+		<Parameter name="SPC" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="TMP" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="FLD" value="0.0" min="-1.0" max="1.0"/>
+		<Parameter name="PWR" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="REP" value="0.0" min="-1.0" max="1.0"/>
+	</parameter-set>
+	<parameter-set name="head">
+		<Parameter name="preference" value="0.9"/>
+		<Parameter name="OAC" value="0.95"/>
+		<Parameter name="SPC" value="-0.4" min="-1.0" max="1.0"/>
+		<Parameter name="TMP" value="-0.9" min="-1.0" max="1.0"/>
+		<Parameter name="FLD" value="0.0" min="-1.0" max="1.0"/>
+		<Parameter name="PWR" value="-0.9" min="-1.0" max="1.0"/>
+		<Parameter name="REP" value="0.0" min="-1.0" max="1.0"/>
+	</parameter-set>
+	<parameter-set name="speech">
+		<Parameter name="preference" value="1"/>
+		<Parameter name="OAC" value="0.4"/>
+		<Parameter name="SPC" value="0" min="-1.0" max="1.0"/>
+		<Parameter name="TMP" value="0" min="-1.0" max="1.0"/>
+		<Parameter name="FLD" value="0" min="-1.0" max="1.0"/>
+		<Parameter name="PWR" value="0" min="-1.0" max="1.0"/>
+		<Parameter name="REP" value="0" min="-1.0" max="1.0"/>
+	</parameter-set>
+</profile>

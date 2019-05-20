@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<facelibrary>
+    <expression class="faceexp" instance="agreement">
+        <action intensity="0.21" name="AU2"/>
+        <action intensity="0.3" name="AU43"/>
+    </expression>
+    <expression class="faceexp" instance="anger">
+        <action name="AU4"/>
+        <action intensity="0.3" name="AU5"/>
+        <action intensity="0.3" name="AU7"/>
+        <action name="AU23"/>
+    </expression>
+    <expression class="faceexp" instance="Disagree_Small">
+        <action intensity="0.28" name="AU4"/>
+        <action intensity="0.44" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="disbelief">
+        <action intensity="0.55" name="AU1"/>
+        <action intensity="0.45" name="AU6"/>
+        <action intensity="0.21" name="AU7"/>
+        <action intensity="0.25" name="AU12"/>
+    </expression>
+    <expression class="faceexp" instance="disgust">
+        <action name="AU9"/>
+        <action name="AU15"/>
+        <action name="AU16"/>
+    </expression>
+    <expression class="faceexp" instance="fear">
+        <action name="AU1"/>
+        <action name="AU2"/>
+        <action name="AU4"/>
+        <action name="AU5"/>
+        <action name="AU20"/>
+        <action name="AU26"/>
+    </expression>
+</facelibrary>

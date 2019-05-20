@@ -1,0 +1,147 @@
+import * from "base.material"
+
+material poppy_base : base {
+	set $sr 0.2
+	set $sg 0.2
+	set $sb 0.2
+	set $ss 5
+}
+material poppy_face : poppy_base {
+	set_texture_alias diffuseMap poppy/face.jpg
+	set_texture_alias celShadingMap poppy/face_cel.jpg
+}
+
+material poppy_hair : base {
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 20
+	set $scaleV 0.1
+	set_texture_alias diffuseMap poppy/hair.jpg
+	set_texture_alias celShadingMap poppy/hair_cel.png
+}
+
+material poppy_eyes : base {
+	set $sr 1
+	set $sg 1
+	set $sb 1
+	set $ss 127
+	set_texture_alias diffuseMap  moyenBleu.jpg
+	set_texture_alias celShadingMap moyenBleu_cel.png
+}
+
+material poppy_bolero : poppy_base {
+	set_texture_alias diffuseMap poppy/BOLERO-Orange.jpg
+	set_texture_alias celShadingMap poppy/BOLERO-Orange_cel.bmp
+}
+
+material poppy_bolero_beige : poppy_base {
+	set_texture_alias diffuseMap poppy/BOLERO-Beige.jpg
+	set_texture_alias celShadingMap poppy/BOLERO-Beige_cel.bmp
+	set $scaleU 0.5
+	set $scaleV 0.5
+}
+
+material poppy_bolero_black : poppy_base {
+	set_texture_alias diffuseMap poppy/BOLERO-Black.jpg
+	set_texture_alias celShadingMap poppy/BOLERO-Black_cel.bmp
+}
+
+material poppy_bolero_black_2 : base {
+	set_texture_alias diffuseMap poppy/BOLERO-Black-2.jpg
+	set_texture_alias celShadingMap poppy/BOLERO-Black_cel.bmp
+	set $ar 0.3
+	set $ag 0.3
+	set $ab 0.3
+	set $dr 0.5
+	set $dg 0.5
+	set $db 0.5
+}
+
+material poppy_bolero_red : poppy_base {
+	set_texture_alias diffuseMap poppy/BOLERO-Red.jpg
+	set_texture_alias celShadingMap poppy/BOLERO-Red_cel.bmp
+	set $scaleU 0.5
+	set $scaleV 0.5
+}
+
+material poppy_dress : poppy_base {
+	set_texture_alias diffuseMap poppy/ROBE-Pop.jpg
+	set_texture_alias celShadingMap poppy/ROBE-Pop_cel.png
+}
+
+material poppy_dress_white : poppy_base {
+	set_texture_alias diffuseMap poppy/ROBE-White.jpg
+	set_texture_alias celShadingMap poppy/ROBE-White_cel.bmp
+	set $scaleU 0.5
+	set $scaleV 0.5
+}
+
+material poppy_dress_grey : poppy_base {
+	set_texture_alias diffuseMap poppy/ROBE-Grey.jpg
+	set_texture_alias celShadingMap poppy/ROBE-Grey_cel.bmp
+}
+
+material poppy_dress_purple : base {
+	set_texture_alias diffuseMap poppy/ROBE-Purple.jpg
+	set_texture_alias celShadingMap poppy/ROBE-Purple_cel.bmp
+	set $scaleU 0.5
+	set $scaleV 0.5
+	set $ar 0.25
+	set $ag 0.25
+	set $ab 0.25
+	set $dr 0.4
+	set $dg 0.4
+	set $db 0.4
+	set $sr 0.02
+	set $sg 0.02
+	set $sb 0.02
+	set $ss 5
+}
+
+
+material poppy_nail : base {
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 7
+	set_texture_alias diffuseMap poppy/nail_color.bmp
+	set_texture_alias celShadingMap poppy/nail_color.bmp
+}
+
+material poppy_skin : poppy_base {
+	set_texture_alias diffuseMap poppy/skin_color.bmp
+	set_texture_alias celShadingMap poppy/skin_color.bmp
+}
+
+material poppy_shoes : base {
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 10
+	set_texture_alias diffuseMap poppy/shoes_color.bmp
+	set_texture_alias celShadingMap poppy/shoes_color.bmp
+}
+
+material poppy_sole : poppy_base {
+	set_texture_alias diffuseMap poppy/sole_color.bmp
+	set_texture_alias celShadingMap poppy/sole_color.bmp
+}
+
+material poppy_necklace : base {
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 10
+	set_texture_alias diffuseMap poppy/necklace_color.bmp
+	set_texture_alias celShadingMap poppy/necklace_color.bmp
+}
+
+material poppy_gold : base {
+	set $sr 1
+	set $sg 1
+	set $sb 1
+	set $ss 100
+	set_texture_alias diffuseMap poppy/gold.bmp
+	set_texture_alias celShadingMap poppy/gold.bmp
+}

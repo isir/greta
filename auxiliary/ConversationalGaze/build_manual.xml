@@ -39,11 +39,11 @@
     </target>
 	
 	<target name="build.dependency.activemq" if="${need.activemq}">
-        <ant antfile="../../internal/ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+        <ant antfile="../ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
 	
 	<target name="build.dependency.ssi" if="${need.ssi}">
-        <ant antfile="../../internal/SSI/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+        <ant antfile="../SSI/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
 
     <!-- -->
@@ -54,7 +54,7 @@
             <include name="Signals.jar"/>
             <include name="Feedbacks.jar"/>
 			<include name="ActiveMQ.jar"/>
-			<include name="SSi.jar"/>
+			<include name="SSI.jar"/>
         </fileset>
     </path>
     

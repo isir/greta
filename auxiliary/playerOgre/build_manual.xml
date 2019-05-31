@@ -43,6 +43,10 @@
     <target name="build.dependency.feedbacks" if="${need.feedbacks}">
         <ant antfile="../../core/Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
+	
+	<target name="build.dependency.bvhmocap" if="${need.bvhmocap}">
+        <ant antfile="../../auxiliary/BvhMocap/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     <!-- -->
     
     <path id="path.jars">
@@ -52,6 +56,7 @@
             <include name="MPEG4.jar"/>
             <include name="Intentions.jar"/>
             <include name="Feedbacks.jar"/>
+			<include name="BvhMocap.jar"/>
         </fileset>
     </path>
     
@@ -106,6 +111,16 @@
             </not>
         </condition>
         <antcall target="build.dependency.feedbacks"/>
+		
+		<condition property="need.bvhmocap">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/BvhMocap.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.bvhmocap"/>
         <!-- -->
     </target>
     

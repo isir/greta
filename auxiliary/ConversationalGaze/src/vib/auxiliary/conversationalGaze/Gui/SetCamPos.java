@@ -4,6 +4,7 @@
 package vib.auxiliary.conversationalGaze.Gui;
 
 import vib.auxiliary.conversationalGaze.AgentGazeUser;
+import vib.core.util.time.Timer;
 
 /**
  *
@@ -12,12 +13,15 @@ import vib.auxiliary.conversationalGaze.AgentGazeUser;
 public class SetCamPos extends javax.swing.JFrame {
 
     AgentGazeUser gazeuser;
+    private Thread statusgazeDisplay;
+    private static final long SLEEP_TIME = 50; //miliiseconds
     /**
      * Creates new form GazeUserGui
      */
     public SetCamPos() {
         initComponents();
         
+        //this.agentgazestatus.
         this.pos_x.setText(Double.toString(0.0));
         this.pos_y.setText(Double.toString(0.0));
         this.pos_z.setText(Double.toString(0.0));
@@ -27,6 +31,19 @@ public class SetCamPos extends javax.swing.JFrame {
         this.rot_roll.setText(Double.toString(0.0));   
         
         //this.image.imageUpdate(image, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH);
+        
+        statusgazeDisplay = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    agentgazestatus.setText(Integer.toString(gazeuser.getStatus_AU()[0]));
+                    usergazestatus.setText(Integer.toString(gazeuser.getStatus_AU()[1]));
+                    Timer.sleep(SLEEP_TIME);
+                }
+            }
+        });
+        statusgazeDisplay.setDaemon(true);
+        statusgazeDisplay.start();
                 
     }
 
@@ -69,6 +86,12 @@ public class SetCamPos extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        agentgazestatus = new javax.swing.JTextField();
+        usergazestatus = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -180,6 +203,25 @@ public class SetCamPos extends javax.swing.JFrame {
 
         jSeparator3.setMaximumSize(new java.awt.Dimension(50, 10));
 
+        agentgazestatus.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        agentgazestatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agentgazestatusActionPerformed(evt);
+            }
+        });
+
+        usergazestatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usergazestatusActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Gaze Stutus");
+
+        jLabel7.setText("Agent");
+
+        jLabel8.setText("User");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -190,10 +232,9 @@ public class SetCamPos extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, 225, Short.MAX_VALUE)
                                     .addComponent(jLabel1)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(10, 10, 10)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,13 +247,30 @@ public class SetCamPos extends javax.swing.JFrame {
                                             .addComponent(agent_MG, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(agent_LA, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(AU_mutualGaze, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(AU_lookAway, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(AU_lookAway, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel7)
+                                        .addGap(50, 50, 50)
+                                        .addComponent(jLabel8)
+                                        .addGap(26, 26, 26))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(agentgazestatus, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(31, 31, 31)
+                                                .addComponent(usergazestatus, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addGap(43, 43, 43)))
                                 .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Cam_label)
-                                    .addComponent(jLabel5)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -226,11 +284,18 @@ public class SetCamPos extends javax.swing.JFrame {
                                                 .addComponent(lbl_pos_y, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(59, 59, 59)
                                                 .addComponent(lbl_pos_z, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(117, 117, 117)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(pos_x, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pos_y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(pos_z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(rot_yaw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -247,14 +312,8 @@ public class SetCamPos extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(rot_pitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(18, 18, 18)
-                                        .addComponent(rot_roll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(pos_x, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pos_y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pos_z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                                        .addComponent(rot_roll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(106, 167, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -266,10 +325,6 @@ public class SetCamPos extends javax.swing.JFrame {
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89)
-                        .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cam_position)
@@ -294,22 +349,40 @@ public class SetCamPos extends javax.swing.JFrame {
                             .addComponent(rot_pitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(rot_roll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(15, 15, 15)
-                        .addComponent(jLabel1)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(jLabel2)
+                                    .addComponent(agent_MG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel8))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(agentgazestatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(usergazestatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89)
+                        .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel2)
-                            .addComponent(agent_MG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel3)
-                    .addComponent(agent_LA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(2, 2, 2)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                            .addComponent(jLabel3)
+                            .addComponent(agent_LA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                        .addComponent(jLabel5)
+                        .addGap(2, 2, 2)
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(12, 12, 12)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(AU_mutualGaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_mg_au))
@@ -317,7 +390,7 @@ public class SetCamPos extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(label_la_au)
                     .addComponent(AU_lookAway, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -329,21 +402,28 @@ public class SetCamPos extends javax.swing.JFrame {
     private void pos_xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pos_xActionPerformed
         if (pos_x != null){
             double px = Double.parseDouble(pos_x.getText());
-            this.gazeuser.cam_px = px;
+            synchronized(pos_x){
+                this.gazeuser.cam_px = px;
+            }
         }
     }//GEN-LAST:event_pos_xActionPerformed
 
     private void pos_yActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pos_yActionPerformed
        if (pos_y != null){
             double py = Double.parseDouble(pos_y.getText());
-            this.gazeuser.cam_py = py;
+            synchronized(pos_y){
+                this.gazeuser.cam_py = py;
+            }  
         }
     }//GEN-LAST:event_pos_yActionPerformed
 
     private void pos_zActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pos_zActionPerformed
         if (pos_z != null){
             double pz = Double.parseDouble(pos_z.getText());
-            this.gazeuser.cam_pz = pz;
+            synchronized(pos_z){
+                this.gazeuser.cam_pz = pz;
+            } 
+            
         }
     }//GEN-LAST:event_pos_zActionPerformed
 
@@ -351,7 +431,10 @@ public class SetCamPos extends javax.swing.JFrame {
     private void rot_yawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rot_yawActionPerformed
         if (rot_yaw != null){
             double yaw = Double.parseDouble(rot_yaw.getText());
-            this.gazeuser.cam_ry = yaw;
+            synchronized(rot_yaw){
+                this.gazeuser.cam_ry = yaw;
+            }
+            
         }
     }//GEN-LAST:event_rot_yawActionPerformed
 
@@ -359,7 +442,10 @@ public class SetCamPos extends javax.swing.JFrame {
     private void rot_pitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rot_pitchActionPerformed
         if (rot_pitch != null){
             double pitch = Double.parseDouble(rot_pitch.getText());
-            this.gazeuser.cam_rx = pitch;
+            synchronized(rot_pitch){
+                this.gazeuser.cam_rx = pitch;
+            }
+            
         }
     }//GEN-LAST:event_rot_pitchActionPerformed
 
@@ -367,33 +453,56 @@ public class SetCamPos extends javax.swing.JFrame {
     private void rot_rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rot_rollActionPerformed
         if (rot_roll != null){
             double roll = Double.parseDouble(rot_roll.getText());
-            this.gazeuser.cam_rz = roll;
+            synchronized(rot_roll){
+                this.gazeuser.cam_rz = roll;
+            }
+            
         }
     }//GEN-LAST:event_rot_rollActionPerformed
 
     private void agent_MGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agent_MGActionPerformed
         if (agent_MG.getText()!= null){
-            this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_MG.getText()));
+            synchronized(agent_MG){
+                this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_MG.getText()));
+            } 
+           
         }
     }//GEN-LAST:event_agent_MGActionPerformed
 
     private void agent_LAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agent_LAActionPerformed
         if (agent_LA.getText()!= null){
-            this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_LA.getText()));
+            synchronized(agent_LA){
+                this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_LA.getText()));
+            }
+            
         }
     }//GEN-LAST:event_agent_LAActionPerformed
 
     private void AU_mutualGazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AU_mutualGazeActionPerformed
        if (AU_mutualGaze.getText()!= null){
-            this.gazeuser.setT_bothMG(Double.parseDouble(AU_mutualGaze.getText()));
+            synchronized(AU_mutualGaze){
+                this.gazeuser.setT_bothMG(Double.parseDouble(AU_mutualGaze.getText()));
+            }
+            
         }
     }//GEN-LAST:event_AU_mutualGazeActionPerformed
 
     private void AU_lookAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AU_lookAwayActionPerformed
         if (AU_lookAway.getText()!= null){
-            this.gazeuser.setT_bothAway(Double.parseDouble(AU_lookAway.getText()));
+            synchronized(AU_lookAway){
+                this.gazeuser.setT_bothAway(Double.parseDouble(AU_lookAway.getText()));
+            }
+            
         }
     }//GEN-LAST:event_AU_lookAwayActionPerformed
+
+    private void agentgazestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentgazestatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agentgazestatusActionPerformed
+
+    private void usergazestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usergazestatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usergazestatusActionPerformed
     
     public void setPosandOrient (AgentGazeUser gazeuser){
         this.gazeuser = gazeuser;
@@ -409,6 +518,7 @@ public class SetCamPos extends javax.swing.JFrame {
     private javax.swing.JLabel Cam_label;
     private javax.swing.JTextField agent_LA;
     private javax.swing.JTextField agent_MG;
+    private javax.swing.JTextField agentgazestatus;
     private javax.swing.JLabel cam_position;
     private javax.swing.Box.Filler filler1;
     private java.awt.Canvas image;
@@ -417,9 +527,13 @@ public class SetCamPos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel lab_pitch;
     private javax.swing.JLabel lab_roll;
     private javax.swing.JLabel lab_yaw;
@@ -434,5 +548,6 @@ public class SetCamPos extends javax.swing.JFrame {
     private javax.swing.JTextField rot_pitch;
     private javax.swing.JTextField rot_roll;
     private javax.swing.JTextField rot_yaw;
+    private javax.swing.JTextField usergazestatus;
     // End of variables declaration//GEN-END:variables
 }

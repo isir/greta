@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import vib.core.animation.mpeg4.fap.FAP;
 import vib.core.animation.mpeg4.fap.FAPFrame;
 import vib.core.animation.mpeg4.fap.FAPFrameEmitter;
@@ -299,6 +301,11 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
                 }
 
                 currentRequestIds.clear();
+            }
+            try {
+                Thread.sleep(10); // in ms
+            } catch (InterruptedException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

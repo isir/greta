@@ -109,8 +109,8 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         this.agent = new ConversationParticipant(characterManager);
         
         // initialize the time (msec) to look away and look mutual
-        this.agent.setTime_MG(4000);
-        this.agent.setTime_LA(2000);
+        //this.agent.setTime_MG(6000);
+        //this.agent.setTime_LA(1500);
         this.agent.setIsTalking(false);
         this.agent.setGazeStatus(1);
         this.agent.setOldGazeStatus(1);
@@ -132,8 +132,8 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         this.last_gs = new GazeSignal("gaze");
 
         //
-        this.t_bothAway = 3000;
-        this.t_bothMG = 3000;
+        //this.t_bothAway = 2000;
+        //this.t_bothMG = 5000;
 
         this.startLA = vib.core.util.time.Timer.getTime();
         
@@ -144,14 +144,14 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         this.oldStatus_AU = this.status_AU;
         //
         this.listGazeDirection = new ArrayList<GazeDirection>();
-        this.listGazeDirection.add(GazeDirection.FRONT);
-        this.listGazeDirection.add(GazeDirection.UP);
-        this.listGazeDirection.add(GazeDirection.UPRIGHT);
+        //this.listGazeDirection.add(GazeDirection.FRONT);
+        //this.listGazeDirection.add(GazeDirection.UP);
+        //this.listGazeDirection.add(GazeDirection.UPRIGHT);
         this.listGazeDirection.add(GazeDirection.DOWN);
         this.listGazeDirection.add(GazeDirection.LEFT);
         this.listGazeDirection.add(GazeDirection.RIGHT);
         this.listGazeDirection.add(GazeDirection.DOWNLEFT);
-        this.listGazeDirection.add(GazeDirection.UPLEFT);
+        //this.listGazeDirection.add(GazeDirection.UPLEFT);
         this.listGazeDirection.add(GazeDirection.DOWNRIGHT);
         
         startListening();
@@ -187,15 +187,17 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
             } 
         }
         
-        if (!currentAgentSignals.isEmpty() ) {
-            String request = "SSI"; //to change
-            ID id = IDProvider.createID(request);
-            this.performSignals(currentAgentSignals, id, new Mode(CompositionType.blend));
+        synchronized (currentAgentSignals){      
+            if (!currentAgentSignals.isEmpty() ) {
+                String request = "SSI"; //to change
+                ID id = IDProvider.createID(request);
+                this.performSignals(currentAgentSignals, id, new Mode(CompositionType.blend));
+            }
+
+            currentAgentSignals.clear();
+            list.clear();
+            agent.getGzSignals().clear();
         }
-        
-        currentAgentSignals.clear();
-        list.clear();
-        agent.getGzSignals().clear();
         
         //clean the current inputs signals
         synchronized (currentAgentSignals){
@@ -240,7 +242,7 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
             double h_pos_x = head_pos_x*Math.cos(cam_rx) + Math.sin(cam_rx)*(head_pos_z);
             double h_pos_z = -head_pos_x*Math.sin(cam_rx) + Math.cos(cam_rx)*(head_pos_z);
             
-            head_rx += - Math.toDegrees(cam_rx);
+            head_rx += - cam_rx;//Math.toDegrees(cam_rx);
             head_pos_x = h_pos_x;
             head_pos_z = h_pos_z; 
         }
@@ -249,7 +251,7 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
             double h_pos_y = head_pos_y*Math.cos(cam_ry) - Math.sin(cam_ry)*(head_pos_z);
             double h_pos_z = head_pos_y*Math.sin(cam_ry) + Math.cos(cam_ry)*(head_pos_z);
             
-            head_ry += - Math.toDegrees(cam_ry);
+            head_ry += - cam_ry;//Math.toDegrees(cam_ry);
             head_pos_y = h_pos_y;
             head_pos_z = h_pos_z; 
         }
@@ -258,7 +260,7 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
             double h_pos_x = head_pos_x*Math.cos(cam_rz) - Math.sin(cam_rz)*head_pos_y;
             double h_pos_y = head_pos_x*Math.sin(cam_rz) + Math.cos(cam_rz)*head_pos_y;
             
-            head_rz += - Math.toDegrees(cam_rz);
+            head_rz += - cam_rz;//Math.toDegrees(cam_rz);
             head_pos_x = h_pos_x;
             head_pos_y = h_pos_y; 
         }
@@ -286,6 +288,12 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         }else{// look at the agent
             currentUserState = 0;
         }
+        
+        /*System.out.println(Math.abs(head_rx) + "       " + Math.abs(head_ry));
+        if (Math.abs(head_rx) > 15 || Math.abs(head_ry) > 10){
+            currentUserState = 1;
+        }*/
+        
         
         // TODO: replace the head position with gaze_pos to better recognize if the user is looking at the agent face       
         // or find a better way to identify the agent face
@@ -425,13 +433,13 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         }else { // look away
                         
             // take randomly a direction 
-            int max = 8; // total number of GazeDirection
+            int max = 4; // total number of GazeDirection -1
             int min = 1; 
             Random rn = new Random();
             int randomDirection = rn.nextInt(max - min + 1) + min;
             
             gs.setOffsetDirection(listGazeDirection.get(randomDirection));
-            // shift angle set to 30
+            // shift angle set to 15
             gs.setOffsetAngle(15); // we move also the head 
             gs.setInfluence(Influence.HEAD);
         }
@@ -477,20 +485,42 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
     public void performSignals(List<Signal> list, ID id, Mode mode) {
         // send the Gaze Signals to Realizer
         for(SignalPerformer sp : signalPerformers){
+            synchronized(list){
             sp.performSignals(list, id, mode);
+            }
         }
     }
 
     @Override
     public void performFeedback(ID id, String string, List<Temporizable> list) {
-          // info about the signals    
-    }
+        
+            if (string.equals("started")){
+                for(Temporizable tmp : list){
+                    System.out.println(tmp.getId() + "  " + string );
+                    if (tmp.getClass().getName().equals("vib.core.signals.SpeechSignal")){             
+                        this.agent.setIsTalking(true);
+                        System.out.println(this.agent.getName() + " speech started ******************");
+                    }   
+                }
+            } else if (string.equals("ended") || string.equals("dead") || string.equals("stopped")){
+                for(Temporizable tmp : list){
+                    System.out.println(tmp.getId() + "  " + string );
+                    if (tmp.getClass().getName().equals("vib.core.signals.SpeechSignal")){
+                        this.agent.setIsTalking(false);
+                        System.out.println(this.agent.getName() + " speech ended ***************");
+                    }
+
+                }
+            }
+        }   
+    
 
     @Override
     public void performFeedback(Callback clbck) { 
-        if (clbck.type() == "start"){
-            this.agent.setIsTalking(true);
-        }else if(clbck.type() == "end"){
+        if(clbck.animId().getSource() != "SSI"){
+            //this.agent.setIsTalking(false);
+            //System.out.println(this.agent.isIsTalking());
+            System.out.println("callback" + clbck.type());
             this.agent.setIsTalking(false);
         }
     }
@@ -569,7 +599,21 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
 
     @Override
     public void performFeedback(ID id, String string, SpeechSignal ss, TimeMarker tm) {
-        // info about the signals
+        //List<TimeMarker> listTM = ss.getMarkers();
+        //int size_listTM = listTM.size();
+        
+        //String lastT = listTM.get(size_listTM - 1).getName();   
+        
+        /*System.out.println(tm.getName());
+        System.out.println(lastT);
+        System.out.println(size_listTM);*/
+        
+        /*if (tm.getName().equals("tm0") || tm.getName().equals("tm1")) {
+            this.agent.setIsTalking(true);
+        }else if (size_listTM == 2 && lastT.equals("end")){
+            this.agent.setIsTalking(false);
+        }*/
+        //System.out.println(this.agent.isIsTalking());
     }
     
     /**

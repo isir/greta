@@ -495,7 +495,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.meaningminer"/>
+        <antcall target="build.dependency.conversationalgaze"/>
 		
         <!-- -->
     </target>

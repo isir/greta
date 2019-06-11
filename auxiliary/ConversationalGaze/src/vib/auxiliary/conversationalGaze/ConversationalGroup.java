@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import vib.auxiliary.ssi.SSIFrame;
 import vib.auxiliary.ssi.SSIFramePerfomer;
 import vib.auxiliary.ssi.SSITypes;
+import vib.core.animation.mpeg4.MPEG4Animatable;
 import vib.core.signals.GazeSignal;
 import vib.core.util.enums.GazeDirection;
 import vib.core.util.environment.Animatable;
@@ -66,7 +67,9 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
     private List<String> list_names = new ArrayList <String>();
     
     private String speaker = ""; 
-    
+    private String old_speaker = "";
+    private double startNotspeakingTime = 0.0;
+        
     public ConversationalGroup(Environment env){
         this.listParticipants = new ArrayList<>();
         this.pending_Participants = new ArrayList<>();
@@ -74,6 +77,7 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         
         this.user.setGazeStatus(1);  // initialize gaze state at look away
         this.user.setOldGazeStatus(1); 
+        this.user.setMpeg4_id("user");
         
         // create a node user where can we send and store the position/orientation of user head
         Animatable user = new Animatable();
@@ -99,10 +103,10 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
     }
     
     public void run() {
-        
         while(groupActive){
                     
             synchronized(listParticipants){
+                
                 if (listParticipants.size() > 1){ // check if there are at least 2 participants
 
                     double currentTime = vib.core.util.time.Timer.getTimeMillis();
@@ -111,257 +115,218 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
                     // something different from one of the participant
                     // list_names.add("env");
                
+                    //TO DO: now the assumption is there is one speaker at time. Change when more than 1 agent is talking contemporary
+                    //int num_speaker = 0; 
+                    speaker = "";
+                    if (startNotspeakingTime == 0.0){
+                        startNotspeakingTime = currentTime;
+                    }
                     
                     for (ConversationParticipant cp : listParticipants){
                         synchronized(cp){
                             if (cp.isIsTalking()){
-                                speaker = cp.getName();
+                                speaker = cp.getMpeg4_id();//getName();
+                                startNotspeakingTime = 0.0;
                                 break;
                             }
-                            speaker = "";
+                            //speaker = "";
                         }
                     }
                     
-                    //System.out.println("********************* speaker***********************: " + speaker);
-
-                    // add the environment to the list of tha participant so we can chose also to look at 
-                    // something different from one of the participant
-                    // list_names.add("env");
+                    
+                    //System.out.println("oldSpeaker:" + old_speaker + "    speaker: " + speaker);
                     
                     if (!speaker.isEmpty()){
                         for (ConversationParticipant cp : listParticipants){
-                            if (!cp.getName().equals("user") && !cp.getName().equals(speaker)){ //hearer
-                                GazeSignal gs = new GazeSignal("gaze");
-                                gs = createGazeSignal(speaker, cp);
-                                cp.addGzSignal(gs);
-                                if (cp.getGazeStatus() == 1){
-                                    cp.timeGazingatTarget = currentTime;
-                                }
-                                if (!cp.lastGazeTarget.equals(speaker)){
-                                    cp.lastGazeTarget = speaker;
-                                }
-                                cp.setGazeStatus(0); 
-                            }else if(cp.getName().equals(speaker)){ // speaker
-                                GazeSignal gs = new GazeSignal("gaze");
-                                gs.setOffsetDirection(GazeDirection.FRONT);
-                                gs.setOffsetAngle(0.0);
-                                gs.setGazeShift(true);
-                                gs.getTimeMarker("start").setValue(0.0);
-                                gs.getTimeMarker("end").setValue(0.4);
+                            if (!cp.getMpeg4_id().equals("user") && !cp.getMpeg4_id().equals(speaker)){ //hearer
+                                // look at the speaker for a certain time and then look away 
                                 
-                                cp.addGzSignal(gs);
-                                if (cp.getGazeStatus() == 0){
-                                    cp.timeGazingatTarget = currentTime;
-                                }
-                                cp.setGazeStatus(1);
-                            }
-                        }
-                    }else{
-                        for (ConversationParticipant cp : listParticipants){
-                            if (!cp.getName().equals("user")){
-                                if (cp.getGazeStatus() == 0){// it is looking at someone
-                                    if((currentTime - cp.timeGazingatTarget) > cp.getTime_MG() + cp.Timeplus_lookingAtSpeaker){ 
-                                    
-                                            GazeSignal gs = new GazeSignal("gaze");
-
-                                            if (list_names.size() > 2){ // randomly choose where to gaze
-
-                                                list_names.add("env"); // add the environment to the choices 
-
-                                               String choice = RandomName(list_names);
-
-                                                if (choice.equals("env")){
-                                                    gs = createGazeSignal("", cp);
-                                                    cp.setGazeStatus(1);
-                                                }else if(choice.equals(cp.getName())){
-                                                    while(choice.equals(cp.getName())){
-                                                        choice = RandomName(list_names);
-                                                    }
-                                                    if (choice.equals("env")){
-                                                        gs = createGazeSignal("", cp);
-                                                        cp.setGazeStatus(1);
-                                                    }else{
-                                                        // create the gaze signal to look at the agent
-                                                        gs = createGazeSignal(choice, cp);
-                                                        cp.lastGazeTarget = choice;
-                                                    }
-                                                }else{
-                                                    gs = createGazeSignal(choice, cp);
-                                                    cp.lastGazeTarget = choice;
-                                                }
-
-                                                list_names.remove("env");
-
-                                                // add the signal to the list of gazeSignal of the current considered agent
-                                                cp.addGzSignal(gs);                           
-                                                cp.timeGazingatTarget = currentTime; // new target so reset the time
-
-                                            }else{// just two participant, so once finish to gaze to the other one, gaze at env
-
-                                                cp.setGazeStatus(1);
-                                                gs = createGazeSignal("", cp);
-                                                // add the signal to the list of gazeSignal of the current considered agent
-                                                cp.addGzSignal(gs);
-                                                cp.timeGazingatTarget = currentTime;
-                                            }
-                                        }
-                                }else{ // GazeStatus = 1 --> look away                                   
-                                    if((currentTime - cp.timeGazingatTarget) > cp.getTime_LA()){
-                                        GazeSignal gs = new GazeSignal("gaze");
-                                        if (list_names.size() > 2){// if more than two participant no problem
-
-                                            String choice = RandomName(list_names);
-
-                                            if (choice.equals(cp.getName())){
-                                                while(choice.equals(cp.getName())){
-                                                    choice = RandomName(list_names);
-                                                }
-                                            }                                  
-                                            // create the gaze signal to look at the agent
-                                            gs = createGazeSignal(choice, cp);
-                                            cp.lastGazeTarget = choice; // update target
-                                        }else{                                   
-                                            String targetname = "";
-                                            for (String s: list_names){
-                                                if (!s.equals(cp.getName())){
-                                                    targetname = s;
-                                                } 
-                                            }
-                                            gs = createGazeSignal(targetname, cp);
-                                            cp.lastGazeTarget = targetname; // update target
-                                        }
-
-                                        cp.setGazeStatus(0);
-                                        // add the signal to the list of gazeSignal of the current considered agent
-                                        cp.addGzSignal(gs);
-                                        cp.timeGazingatTarget = currentTime; // new target so reset the time
-                                    }
-                                }
-                            }    
-                        }
-                    }
-                    
-                    /*speaker = "";
-                    for (ConversationParticipant cp : listParticipants){
-                        if (!cp.getName().equals("user")){
-                            if (cp.isIsTalking()){ // speaker
-
-                                speaker = cp.getName();
-                                //System.out.println(cp.getName() + " is talking ");
+                                //create the gaze
                                 GazeSignal gs = new GazeSignal("gaze");
-                                gs.setOffsetDirection(GazeDirection.FRONT);
-                                gs.setOffsetAngle(0.0);
-                                gs.setGazeShift(true);
-                                gs.getTimeMarker("start").setValue(0.0);
-                                gs.getTimeMarker("end").setValue(0.4);
                                 
-                                cp.addGzSignal(gs);
-                                cp.setGazeStatus(1); 
-
-                            }else { // Hearer
-                                //boolean speakerFound = false;
-                                if (cp.getGazeStatus() == 0){// it is looking at someone
-                                    
-                                    if (!speaker.isEmpty()){ // look at the speaker
-                                        
-                                        GazeSignal gs = new GazeSignal("gaze");
-                                        gs = createGazeSignal(speaker, cp);
-                                        cp.addGzSignal(gs);
-                                        
-                                    }else { // no one is speaking
-                                        
-                                        if((currentTime - cp.timeGazingatTarget) > cp.getTime_MG() + cp.Timeplus_lookingAtSpeaker){ 
-
-                                            GazeSignal gs = new GazeSignal("gaze");
-
-                                            if (list_names.size() > 2){ // randomly choose where to gaze
-
-                                                list_names.add("env"); // add the environment to the choices 
-
-                                               String choice = RandomName(list_names);
-
-                                                if (choice.equals("env")){
-                                                    gs = createGazeSignal("", cp);
-                                                    cp.setGazeStatus(1);
-                                                }else if(choice.equals(cp.getName())){
-                                                    while(choice.equals(cp.getName())){
-                                                        choice = RandomName(list_names);
-                                                    }
-                                                    if (choice.equals("env")){
-                                                        gs = createGazeSignal("", cp);
-                                                        cp.setGazeStatus(1);
-                                                    }else{
-                                                        // create the gaze signal to look at the agent
-                                                        gs = createGazeSignal(choice, cp);
-                                                        cp.lastGazeTarget = choice;
-                                                    }
-                                                }else{
-                                                    gs = createGazeSignal(choice, cp);
-                                                    cp.lastGazeTarget = choice;
-                                                }
-
-                                                list_names.remove("env");
-
-                                                // add the signal to the list of gazeSignal of the current considered agent
-                                                cp.addGzSignal(gs);                           
-                                                cp.timeGazingatTarget = currentTime; // new target so reset the time
-
-                                            }else{// just two participant, so once finish to gaze to the other one, gaze at env
-
-                                                cp.setGazeStatus(1);
-                                                gs = createGazeSignal("", cp);
-                                                // add the signal to the list of gazeSignal of the current considered agent
-                                                cp.addGzSignal(gs);
-                                                cp.timeGazingatTarget = currentTime;
-                                            }
-                                        }
-                                    }
-                                }else{ // GazeStatus = 1 --> look away
-                                    
-                                    if (!speaker.isEmpty()){
-                                        
-                                        GazeSignal gs = new GazeSignal("gaze");
-                                        gs = createGazeSignal(speaker, cp);
-                                        cp.addGzSignal(gs);
-                                        cp.setGazeStatus(0);
-                                        
+                                // check if the agent is looking at the speaker and how long
+                                if (cp.lastGazeTarget.equals(speaker)){
+                                    if (currentTime - cp.timeGazingatTarget > cp.getTime_MG() + cp.Timeplus_lookingAtSpeaker){
+                                        gs = createGazeSignal("", cp); // look away
+                                        cp.setGazeStatus(1); // update gaze status
+                                        cp.timeGazingatTarget = currentTime; // update time                                       
                                     }else{
-                                        if((currentTime - cp.timeGazingatTarget) > cp.getTime_LA()){
-                                            GazeSignal gs = new GazeSignal("gaze");
-                                            if (list_names.size() > 2){// if more than two participant no problem
+                                        String gazeTarget = extractNameSpeaker(speaker);
+                                        gs = createGazeSignal(gazeTarget, cp); // look at the speaker
+                                        
+                                    }
+                                    cp.addSignal(gs); 
+                                }else {
+                                    if (currentTime - cp.timeGazingatTarget > cp.getTime_LA()){ // look at the speaker 
+                                        String gazeTarget = extractNameSpeaker(speaker);
+                                        gs = createGazeSignal(gazeTarget, cp); // look at the speaker
+                                        cp.setGazeStatus(0); // update gaze status
+                                        cp.timeGazingatTarget = currentTime; // update time 
+                                        cp.lastGazeTarget = speaker; // update gaze target 
+                                        
+                                        cp.addSignal(gs); 
+                                    }
+                                }
+                                    
+                            }else if(cp.getMpeg4_id().equals(speaker)){ // speaker
+                                
+                                // at the first moment the agent start to speak look down
+                                GazeSignal gs = new GazeSignal("gaze");
+                                if (!old_speaker.equals(speaker) ){
+                                    // look down
+                                    String gazeTarget = extractNameSpeaker(cp.lastGazeTarget);
+                                    gs = createGazeSignal( gazeTarget, cp);
+                                    gs.setOffsetDirection(GazeDirection.DOWN);
+                                    gs.setOffsetAngle(18.0);
 
+                                    cp.timeGazingatTarget = currentTime;
+                                    cp.setGazeStatus(1);
+                                }else{
+                                    if (cp.getGazeStatus() == 1){
+                                        if (currentTime - cp.timeGazingatTarget > cp.getTime_LA() + 1000){
+
+                                            if (list_names.size() > 2){// if more than two participant no problem
                                                 String choice = RandomName(list_names);
 
-                                                if (choice.equals(cp.getName())){
-                                                    while(choice.equals(cp.getName())){
+                                                if (choice.equals(cp.getMpeg4_id())){
+                                                    while(choice.equals(cp.getMpeg4_id())){
                                                         choice = RandomName(list_names);
                                                     }
                                                 }                                  
                                                 // create the gaze signal to look at the agent
-                                                gs = createGazeSignal(choice, cp);
+                                                String gazeTarget = extractNameSpeaker(choice);
+                                                gs = createGazeSignal(gazeTarget, cp);
                                                 cp.lastGazeTarget = choice; // update target
                                             }else{                                   
                                                 String targetname = "";
                                                 for (String s: list_names){
-                                                    if (!s.equals(cp.getName())){
+                                                    if (!s.equals(cp.getMpeg4_id())){
                                                         targetname = s;
                                                     } 
                                                 }
-                                                gs = createGazeSignal(targetname, cp);
+                                                String gazeTarget = extractNameSpeaker(targetname);
+                                                gs = createGazeSignal(gazeTarget, cp);
                                                 cp.lastGazeTarget = targetname; // update target
                                             }
 
                                             cp.setGazeStatus(0);
                                             // add the signal to the list of gazeSignal of the current considered agent
-                                            cp.addGzSignal(gs);
                                             cp.timeGazingatTarget = currentTime; // new target so reset the time
+                                        }  
+                                        cp.addSignal(gs);
+                                    }else {
+                                        if (currentTime - cp.timeGazingatTarget > cp.getTime_MG()){
+                                            
+                                            String gazeTarget = extractNameSpeaker(cp.lastGazeTarget);
+                                            gs = createGazeSignal(gazeTarget , cp);
+                                            gs.setOffsetDirection(GazeDirection.DOWN);
+                                            gs.setOffsetAngle(10.0);
+
+                                            cp.timeGazingatTarget = currentTime;
+                                            cp.setGazeStatus(1);
+                                            cp.addSignal(gs);
                                         }
                                     }
                                 }
+                                
                             }
                         }
-                    }*/
+                    }else{ // no one is spaeking 
+                        for (ConversationParticipant cp : listParticipants){
+                                if (!cp.getMpeg4_id().equals("user")){
+                                    if (cp.getGazeStatus() == 0){// it is looking at someone
+                                        if((currentTime - cp.timeGazingatTarget) > cp.getTime_MG() ){ 
+
+                                                GazeSignal gs = new GazeSignal("gaze");
+
+                                                if (list_names.size() > 2){ // randomly choose where to gaze
+
+                                                    list_names.add("env"); // add the environment to the choices 
+
+                                                   String choice = RandomName(list_names);
+
+                                                    if (choice.equals("env")){
+                                                        gs = createGazeSignal("", cp);
+                                                        cp.setGazeStatus(1);
+                                                    }else if(choice.equals(cp.getMpeg4_id())){
+                                                        while(choice.equals(cp.getMpeg4_id())){ // check if the target is the agent itself
+                                                            choice = RandomName(list_names);
+                                                        }
+                                                        if (choice.equals("env")){
+                                                            gs = createGazeSignal("", cp);
+                                                            cp.setGazeStatus(1);
+                                                        }else{
+                                                            // create the gaze signal to look at the agent or user
+                                                            //System.out.println("*************** target " + choice);
+                                                            String gazeTarget = extractNameSpeaker(choice);
+                                                            gs = createGazeSignal(gazeTarget, cp);
+                                                            cp.lastGazeTarget = choice;
+                                                        }
+                                                    }else{
+                                                        //System.out.println("*************** target " + choice);
+                                                        String gazeTarget = extractNameSpeaker(choice);
+                                                        gs = createGazeSignal(gazeTarget, cp);
+                                                        cp.lastGazeTarget = choice;
+                                                    }
+
+                                                    list_names.remove("env");
+
+                                                    // add the signal to the list of gazeSignal of the current considered agent
+                                                    cp.addSignal(gs);                           
+                                                    cp.timeGazingatTarget = currentTime; // new target so reset the time
+
+                                                }else{// just two participant, so once finish to gaze to the other one, gaze at env
+
+                                                    cp.setGazeStatus(1);
+                                                    gs = createGazeSignal("", cp);
+                                                    // add the signal to the list of gazeSignal of the current considered agent
+                                                    cp.addSignal(gs);
+                                                    cp.timeGazingatTarget = currentTime;
+                                                }
+                                            }
+                                    }else{ // GazeStatus = 1 --> look away                                   
+                                        if((currentTime - cp.timeGazingatTarget) > cp.getTime_LA() ){
+                                            GazeSignal gs = new GazeSignal("gaze");
+                                            if (list_names.size() > 2){// if more than two participant no problem
+
+                                                String choice = RandomName(list_names);
+
+                                                if (choice.equals(cp.getMpeg4_id())){
+                                                    while(choice.equals(cp.getMpeg4_id())){
+                                                        choice = RandomName(list_names);
+                                                    }
+                                                }                                  
+                                                // create the gaze signal to look at the agent
+                                                //System.out.println("*************** target " + choice);
+                                                String gazeTarget = extractNameSpeaker(choice);
+                                                gs = createGazeSignal(gazeTarget, cp);
+                                                cp.lastGazeTarget = choice; // update target
+                                            }else{                                   
+                                                String targetname = "";
+                                                for (String s: list_names){
+                                                    if (!s.equals(cp.getMpeg4_id())){
+                                                        targetname = s;
+                                                    } 
+                                                }
+                                                //System.out.println("*************** target " + targetname);
+                                                String gazeTarget = extractNameSpeaker(targetname);
+                                                gs = createGazeSignal(gazeTarget, cp);
+                                                cp.lastGazeTarget = targetname; // update target
+                                            }
+
+                                            cp.setGazeStatus(0);
+                                            // add the signal to the list of gazeSignal of the current considered agent
+                                            cp.addSignal(gs);
+                                            cp.timeGazingatTarget = currentTime; // new target so reset the time
+                                        }
+                                    }
+   //                             }    
+                            }
+                        }
+                    }
                 }
+                
+                old_speaker = speaker;
                 
                 synchronized(pending_Participants){
                     if (!pending_Participants.isEmpty()){
@@ -392,7 +357,9 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         // create the gaze signal to look at the agent
         String choice = list_names.get(randomName);
         
+       //System.out.println(choice);
         return choice;
+        
     }
     
     public GazeSignal createGazeSignal(String target, ConversationParticipant agent){
@@ -434,8 +401,8 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
             int randomDirection = rn.nextInt(max - min + 1) + min;
             
             gs.setOffsetDirection(listGazeDirection.get(randomDirection));
-            // shift angle set to 30
-            gs.setOffsetAngle(15); // we move also the head 
+            // shift angle set to 10 degree
+            gs.setOffsetAngle(10); // we move also the head 
             //gs.setInfluence(Influence.HEAD);
         }
         //}
@@ -454,6 +421,7 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         
         if (!useradded){
             this.listParticipants.add(this.user);
+            this.list_names.add("user");
             useradded = true;
         }
         //this.userIsParticipating = true;
@@ -557,8 +525,8 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         this.pending_Participants.add(agu.getAgent());
         
         // add the participants name to the list 
-        if (!listParticipants.contains(agu.getAgent().getName())){
-            list_names.add(agu.getAgent().getName());
+        if (!listParticipants.contains(agu.getAgent().getMpeg4_id())){
+            list_names.add(agu.getAgent().getMpeg4_id());
         }
 
     }
@@ -567,8 +535,18 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         this.listParticipants.remove(agu.getAgent());
         
         // add the participants name to the list 
-        if (listParticipants.contains(agu.getAgent().getName())){
-            listParticipants.remove(agu.getAgent().getName());
+        if (listParticipants.contains(agu.getAgent().getMpeg4_id())){
+            listParticipants.remove(agu.getAgent().getMpeg4_id());
         }
     }
+    
+    public String extractNameSpeaker (String mpeg4_id){
+        if (mpeg4_id.equals("user")){
+            return "user";
+        }else{
+            MPEG4Animatable agentSpeaker = (MPEG4Animatable) this.envi.getNode(mpeg4_id);      
+            return agentSpeaker.getCharacterManager().getCurrentCharacterName();
+        }
+    }
+    
 }

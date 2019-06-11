@@ -102,7 +102,7 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
         getAttachedLeaf().setSize(0.50f, 1.75f, 0.3f);
         if (connectToCaracterManager) {
             setAspect(getCharacterManager().getValueString(ASPECT));
-            getCharacterManager().currentCharacterId = this.getIdentifier();
+            getCharacterManager().setCurrentCharacterId(this.getIdentifier());
             getCharacterManager().add(this);
         } else {
             getAttachedLeaf().setReference("agent.greta");

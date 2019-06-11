@@ -45,6 +45,10 @@
 	<target name="build.dependency.ssi" if="${need.ssi}">
         <ant antfile="../SSI/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
+	
+	<target name="build.dependency.mpeg4" if="${need.mpeg4}">
+        <ant antfile="../MPEG4/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
 
     <!-- -->
     
@@ -55,6 +59,7 @@
             <include name="Feedbacks.jar"/>
 			<include name="ActiveMQ.jar"/>
 			<include name="SSI.jar"/>
+			<include name="MPEG4.jar"/>
         </fileset>
     </path>
     
@@ -109,6 +114,16 @@
             </not>
         </condition>
         <antcall target="build.dependency.ssi"/>
+		
+		<condition property="need.mpeg4">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/MPEG4.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.mpeg4"/>
         
         <!-- -->
     </target>

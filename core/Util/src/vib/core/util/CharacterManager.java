@@ -48,7 +48,7 @@ public class CharacterManager {
     private List<CharacterDependent> dependents;
     private String currentCaracterName;    
 
-    public String currentCharacterId; //TODO find a better way to give the id from the environment
+    private String currentCharacterId; //TODO find a better way to give the id from the environment
     public String currentCameraId;
     private String id;
     private TTS tts;
@@ -100,7 +100,7 @@ public class CharacterManager {
      * @param dependent the {@code CharacterDependent} to add
      */
     public void add(CharacterDependent dependent) {
-        System.out.println(String.format("Adding to %s : %s",toString(),dependent.toString()));
+        //System.out.println(String.format("Adding to %s : %s",toString(),dependent.toString()));
         if( ! dependents.contains(dependent)) {
             dependents.add(dependent);
         }
@@ -394,5 +394,19 @@ public class CharacterManager {
     
     public void setTTS(TTS tts){
         this.tts = tts;
+    }
+
+    /**
+     * @return the currentCharacterId
+     */
+    public String getCurrentCharacterId() {
+        return currentCharacterId;
+    }
+
+    /**
+     * @param currentCharacterId the currentCharacterId to set
+     */
+    public void setCurrentCharacterId(String currentCharacterId) {
+        this.currentCharacterId = currentCharacterId;
     }
 }

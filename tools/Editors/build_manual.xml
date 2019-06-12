@@ -124,7 +124,7 @@
     </target>
     
     <target name="compile" depends="delete.classes, makedir, build.dependencies">
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false">
+        <javac encoding="UTF-8" srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false">
             <classpath refid="path.jars"/>
         </javac>
         <copy todir="${classes.dir}">

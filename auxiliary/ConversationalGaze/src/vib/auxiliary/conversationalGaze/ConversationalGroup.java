@@ -17,6 +17,7 @@ import vib.auxiliary.ssi.SSITypes;
 import vib.core.animation.mpeg4.MPEG4Animatable;
 import vib.core.signals.GazeSignal;
 import vib.core.util.enums.GazeDirection;
+import vib.core.util.enums.Influence;
 import vib.core.util.environment.Animatable;
 import vib.core.util.environment.Environment;
 import vib.core.util.environment.Node;
@@ -177,10 +178,12 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
                                     String gazeTarget = extractNameSpeaker(cp.lastGazeTarget);
                                     gs = createGazeSignal( gazeTarget, cp);
                                     gs.setOffsetDirection(GazeDirection.DOWN);
-                                    gs.setOffsetAngle(18.0);
+                                    gs.setOffsetAngle(25.0);
 
                                     cp.timeGazingatTarget = currentTime;
                                     cp.setGazeStatus(1);
+                                    
+                                    cp.addSignal(gs);
                                 }else{
                                     if (cp.getGazeStatus() == 1){
                                         if (currentTime - cp.timeGazingatTarget > cp.getTime_LA() + 1000){
@@ -402,7 +405,7 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
             
             gs.setOffsetDirection(listGazeDirection.get(randomDirection));
             // shift angle set to 10 degree
-            gs.setOffsetAngle(10); // we move also the head 
+            gs.setOffsetAngle(15); // we move also the head 
             //gs.setInfluence(Influence.HEAD);
         }
         //}

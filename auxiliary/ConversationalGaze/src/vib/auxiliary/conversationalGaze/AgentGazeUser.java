@@ -348,7 +348,7 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         this.voiceEnergy = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.prosody_opensmile_energy_cat);
         //System.out.println(voiceEnergy);
         
-        if (getVoiceEnergy() > 0.25 && !agent.isIsTalking()){ // user is talking 
+        if (getVoiceEnergy() > threshouldIntensity && !agent.isIsTalking()){ // user is talking 
             if (!userIsSpeaking){
                 isStatuschanged = true;
             }else{

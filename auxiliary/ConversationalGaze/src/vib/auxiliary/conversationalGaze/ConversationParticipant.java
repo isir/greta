@@ -7,10 +7,17 @@ package vib.auxiliary.conversationalGaze;
 
 import java.util.ArrayList;
 import java.util.List;
+import vib.core.animation.mpeg4.MPEG4Animatable;
 import vib.core.signals.GazeSignal;
 import vib.core.signals.Signal;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
+import vib.core.util.enums.GazeDirection;
+import vib.core.util.environment.Environment;
+import vib.core.util.environment.Node;
+import vib.core.util.environment.TreeNode;
+import vib.core.util.id.IDProvider;
+import vib.core.util.log.Logs;
 
 /**
  *
@@ -20,6 +27,7 @@ public class ConversationParticipant implements CharacterDependent{
 
     private CharacterManager characterManager;
     private String name;
+    private String mpeg4_id;
     private Role role;
     private boolean isTalking;
     
@@ -32,7 +40,7 @@ public class ConversationParticipant implements CharacterDependent{
     private int gazeStatus; // 0 if mutual gaze; 1 if look away
     private int oldGazeStatus;
     
-    private ArrayList<Signal> gzSignals;
+    private ArrayList<Signal> ListSignals;
     public String lastGazeTarget = "";
     public double timeGazingatTarget = 0.0;
     
@@ -40,12 +48,19 @@ public class ConversationParticipant implements CharacterDependent{
     
     public boolean isGazing = true;
     
+    private List<Node> idleGazeTargets = new ArrayList<>();
+    private String idleGazeTargetsRootID;
+    
+    
     public ConversationParticipant(CharacterManager cm){
         
         this.characterManager = cm;
         this.name = cm.getCurrentCharacterName();
+        this.mpeg4_id = cm.getCurrentCharacterId();
         this.isTalking = false;
-        this.gzSignals = new ArrayList <Signal>();
+        this.ListSignals = new ArrayList <Signal>();
+        
+        idleGazeTargetsRootID = IDProvider.createID("IdleGazeTargetsRoot").toString();
         
     }
     
@@ -184,23 +199,30 @@ public class ConversationParticipant implements CharacterDependent{
         this.oldGazeStatus = oldGazeStatus;
     }
     
-    public List<Signal> addGzSignal(GazeSignal gs){
-        this.getGzSignals().add(gs);
-        return getGzSignals();
+    public List<Signal> addSignal(GazeSignal gs){
+        this.getSignal().add(gs);
+        return getSignal();
     }
     
-    public List<Signal> addGzSignal(List<GazeSignal> lgs){
+    public List<Signal> addListGazeSignal(List<GazeSignal> lgs){
         for (GazeSignal gs : lgs){
-            this.getGzSignals().add(gs);
+            this.getSignal().add(gs);
         }
-        return getGzSignals();
+        return getSignal();
+    }
+    
+    public List<Signal> addListSignal(List<Signal> lgs){
+        for (Signal gs : lgs){
+            this.getSignal().add(gs);
+        }
+        return getSignal();
     }
     
     /**
-     * @return the gzSignals
+     * @return the ListSignals
      */
-    public List<Signal> getGzSignals() {
-        return gzSignals;
+    public List<Signal> getSignal() {
+        return ListSignals;
     }
 
     /**
@@ -215,5 +237,171 @@ public class ConversationParticipant implements CharacterDependent{
      */
     public void setName(String name) {
         this.name = name;
+    }
+
+    /**
+     * @return the mpeg4_id
+     */
+    public String getMpeg4_id() {
+        return mpeg4_id;
+    }
+
+    /**
+     * @param mpag4_id the mpeg4_id to set
+     */
+    public void setMpeg4_id(String mpag4_id) {
+        this.mpeg4_id = mpag4_id;
+    }
+    
+    public void generateRandomIdleGazeTargets(String getMpeg4_id) {
+
+        Environment envi = this.getCharacterManager().getEnvironment();
+        if (envi != null)
+        {
+                getIdleGazeTargets().clear();
+                //System.out.println(this.characterManager);
+                //System.out.println(this.characterManager.getCurrentCharacterId());
+                //MPEG4Animatable agentmpeg = new MPEG4Animatable(this.characterManager);
+                String identifier = getMpeg4_id;
+                TreeNode agentNode = (TreeNode) envi.getNode(identifier);
+                if (agentNode == null){
+                    for (Node nd : envi.getRoot().getChildren()){
+                        if (nd instanceof MPEG4Animatable){
+                            System.out.println(nd.getIdentifier());
+                            System.out.println(identifier);
+                            if (nd.getIdentifier().equals(identifier)){
+                                agentNode = (TreeNode) nd;
+                            }      
+                        }
+                    }
+                }
+                
+                if (agentNode != null){
+                    TreeNode rootNodeIdleGazeTargets = (TreeNode) envi.getNode(idleGazeTargetsRootID);
+
+                if (rootNodeIdleGazeTargets == null) {
+
+                    // Create root node
+                    TreeNode root = new TreeNode();
+                    root.setIdentifier(idleGazeTargetsRootID);
+                    envi.addNode(root, agentNode);
+
+                    // Set root node coordinates
+                    /*GazeSignal gs = new GazeSignal("gazeLeft");
+                    gs.setCharacterManager(characterManager);
+                    gs.setGazeShift(true);
+                    gs.setOffsetAngle(30);
+                    gs.setOffsetDirection(GazeDirection.LEFT);
+                    //gs.set
+                    idleGazeTargets.add(gs);
+                    
+                    GazeSignal gs2 = new GazeSignal("gazeRight");
+                    gs.setCharacterManager(characterManager);
+                    gs.setGazeShift(true);
+                    gs.setOffsetAngle(30);
+                    gs.setOffsetDirection(GazeDirection.RIGHT);
+                    
+                    idleGazeTargets.add(gs2);
+                    
+                    GazeSignal gs3 = new GazeSignal("gazeRight");
+                    gs.setCharacterManager(characterManager);
+                    gs.setGazeShift(true);
+                    gs.setOffsetAngle(30);
+                    gs.setOffsetDirection(GazeDirection.DOWN);
+                    
+                    idleGazeTargets.add(gs3);
+                    
+                    GazeSignal gs4 = new GazeSignal("gazeRight");
+                    gs.setCharacterManager(characterManager);
+                    gs.setGazeShift(true);
+                    gs.setOffsetAngle(30);
+                    gs.setOffsetDirection(GazeDirection.UP);
+                    
+                    idleGazeTargets.add(gs4);*/
+                    root.setCoordinates(0.0, 1.5, 1.5);
+
+                    // Create nodes for random IDLE gaze targets
+                    TreeNode nodeAgentLeft = new TreeNode();
+                    nodeAgentLeft.setIdentifier(IDProvider.createID("IdleGazeTarget").toString());
+                    envi.addNode(nodeAgentLeft, root);
+                    TreeNode nodeAgentLeftTarget = new TreeNode();
+                    nodeAgentLeftTarget.setIdentifier(IDProvider.createID("IdleGazeTarget").toString());
+                    envi.addNode(nodeAgentLeftTarget, nodeAgentLeft);
+
+                    nodeAgentLeft.setCoordinates(1.5, 0.0, 0.0);
+                    getIdleGazeTargets().add(nodeAgentLeftTarget);
+
+                    TreeNode nodeAgentRight = new TreeNode();
+                    nodeAgentRight.setIdentifier(IDProvider.createID("IdleGazeTarget").toString());
+                    envi.addNode(nodeAgentRight, root);
+                    TreeNode nodeAgentRightTarget = new TreeNode();
+                    nodeAgentRightTarget.setIdentifier(IDProvider.createID("IdleGazeTarget").toString());
+                    envi.addNode(nodeAgentRightTarget, nodeAgentRight);
+
+                    nodeAgentRight.setCoordinates(-1.5, 0.0, 0.0);
+                    getIdleGazeTargets().add(nodeAgentRightTarget);
+
+                    TreeNode nodeAgentUp = new TreeNode();
+                    nodeAgentUp.setIdentifier(IDProvider.createID("IdleGazeTarget").toString());
+                    envi.addNode(nodeAgentUp, root);
+                    TreeNode nodeAgentUpTarget = new TreeNode();
+                    nodeAgentUpTarget.setIdentifier(IDProvider.createID("IdleGazeTarget").toString());
+                    envi.addNode(nodeAgentUpTarget, nodeAgentUp);
+
+                    nodeAgentUp.setCoordinates(0.0, 0.2, 0.0);
+                    getIdleGazeTargets().add(nodeAgentUpTarget);
+
+                    TreeNode nodeAgentDown = new TreeNode();
+                    nodeAgentDown.setIdentifier(IDProvider.createID("IdleGazeTarget").toString());
+                    envi.addNode(nodeAgentDown, root);
+                    TreeNode nodeAgentDownTarget = new TreeNode();
+                    nodeAgentDownTarget.setIdentifier(IDProvider.createID("IdleGazeTarget").toString());
+                    envi.addNode(nodeAgentDownTarget, nodeAgentDown);
+
+                    nodeAgentDown.setCoordinates(0.0, -0.1, 0.0);
+                    getIdleGazeTargets().add(nodeAgentDownTarget);
+
+                    // Debug
+                    /*
+                    Leaf right = new Leaf();
+                    right.setSize(0.1, 0.1, 0.1);
+                    environment.addNode(right, nodeAgentRightTarget);
+                    Leaf left = new Leaf();
+                    left.setSize(0.1, 0.1, 0.1);
+                    environment.addNode(left, nodeAgentLeftTarget);
+                    Leaf up = new Leaf();
+                    up.setSize(0.1, 0.1, 0.1);
+                    environment.addNode(up, nodeAgentUpTarget);
+                    Leaf down = new Leaf();
+                    down.setSize(0.1, 0.1, 0.1);
+                    environment.addNode(down, nodeAgentDownTarget);
+                    
+                    // End Debug
+                    */
+                    Logs.info(": random idle gaze target nodes generated.");
+                }else {
+                    // Load nodes
+                    //getIdleGazeTargets().addAll(rootNodeIdleGazeTargets.getChildren());
+                }
+                }
+                
+            
+        }else {
+            Logs.warning(": Environment not set, cannot generate random idle gaze target nodes.");
+        }
+    }
+    
+        /**
+     * @return the idleGazeTargets
+     */
+    public List<Node> getIdleGazeTargets() {
+        return idleGazeTargets;
+    }
+
+    /**
+     * @param idleGazeTargets the idleGazeTargets to set
+     */
+    public void setIdleGazeTargets(List<Node> idleGazeTargets) {
+        this.idleGazeTargets = idleGazeTargets;
     }
 }

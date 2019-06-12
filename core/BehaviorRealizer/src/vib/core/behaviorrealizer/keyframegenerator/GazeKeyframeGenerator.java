@@ -268,7 +268,12 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     inf = Influence.EYES;
                 }                   
             }
-            gaze.setInfluence(inf);            
+            gaze.setInfluence(inf);
+            
+            /*if (inf == null) {
+                inf = Influence.TORSO;
+                gaze.setInfluence(Influence.TORSO);
+            }*/
             
             //times computation
             //start keyframe : all influences at original position
@@ -740,29 +745,29 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     double pitch = 0.0;
                     
                     // take the last gaze shift angle
-                    double yl = defaultGaze_l.getAus().getAUAP(61, Side.LEFT).getNormalizedValue(); // yaw left
-                    double yr = defaultGaze_l.getAus().getAUAP(62, Side.RIGHT).getNormalizedValue(); // yaw right
-                    double pu_l = defaultGaze_l.getAus().getAUAP(63, Side.LEFT).getNormalizedValue(); // pitch up
-                    double pu_r = defaultGaze_l.getAus().getAUAP(63, Side.RIGHT).getNormalizedValue();
-                    double pd_l = defaultGaze_l.getAus().getAUAP(64, Side.LEFT).getNormalizedValue(); // pitch DOWN
-                    double pd_r = defaultGaze_l.getAus().getAUAP(64, Side.RIGHT).getNormalizedValue();
+                    double yl = defaultGaze_l.getAus().getAUAP(61, Side.LEFT).getNormalizedValue(); // eye left, yaw left
+                    double yr = defaultGaze_l.getAus().getAUAP(62, Side.LEFT).getNormalizedValue(); // eye left, yaw right
+                    double pu = defaultGaze_l.getAus().getAUAP(63, Side.LEFT).getNormalizedValue(); // eye left, pitch up
+                    //double pu_r = defaultGaze_l.getAus().getAUAP(63, Side.RIGHT).getNormalizedValue();
+                    double pd = defaultGaze_l.getAus().getAUAP(64, Side.LEFT).getNormalizedValue(); // eye left, pitch DOWN
+                    //double pd_r = defaultGaze_l.getAus().getAUAP(64, Side.RIGHT).getNormalizedValue();
                     
-                    if (yl != 0.0  || pu_l != 0.0 || pd_l != 0.0){ // gazedirection = left
+                    if (yl != 0.0 ){ // gazedirection = left
                         left = true;
                         yaw = yl;
-                        if (pu_l != 0.0){ // up
-                            pitch = pu_l;
+                        if (pu != 0.0){ // up
+                            pitch = pu;
                             up = true;
                         }else{ // down
-                            pitch = pd_l;
+                            pitch = pd;
                         }
                     }else { // gazedirection = right 
                         yaw = yr;
-                        if (pu_r != 0.0){ // up
+                        if (pu != 0.0){ // up
                             up = true;
-                            pitch = pd_r;
+                            pitch = pu;
                         }else{ // down
-                            pitch = pu_r;
+                            pitch = pd;
                         }
                     }
                     
@@ -1042,7 +1047,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     
                     // Add gazekeyframe for the END of the gaze
                     if(!gaze.isGazeShift()){
-                        if (defaultGaze_l.getAus().getAUAP(61, Side.LEFT).getValue() != 0 || defaultGaze_r.getAus().getAUAP(62, Side.RIGHT).getValue() != 0 
+                        if (defaultGaze_l.getAus().getAUAP(61, Side.LEFT).getValue() != 0  || defaultGaze_r.getAus().getAUAP(62, Side.RIGHT).getValue() != 0 
                                 || defaultGaze_l.getAus().getAUAP(63, Side.LEFT).getValue() != 0 || defaultGaze_r.getAus().getAUAP(63, Side.RIGHT).getValue() != 0
                                 || defaultGaze_l.getAus().getAUAP(64, Side.LEFT).getValue() != 0|| defaultGaze_r.getAus().getAUAP(64, Side.RIGHT).getValue() != 0){
                             defaultGaze_l.setOnset(end);
@@ -1079,21 +1084,25 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         //AU61: eyes turn left
                         if (ha.l_GazeDirection == GazeDirection.DOWNLEFT || ha.l_GazeDirection == GazeDirection.LEFT || ha.l_GazeDirection == GazeDirection.UPLEFT) {
                             auFrame_l.setAUAP(61, l_limitYaw / EYES_YAW_LIMIT, Side.LEFT);
+                            auFrame_r.setAUAP(61, r_limitYaw / EYES_YAW_LIMIT, Side.RIGHT);
                         }
                         //AU62: eyes turn right
                         if (ha.l_GazeDirection == GazeDirection.DOWNRIGHT || ha.l_GazeDirection == GazeDirection.RIGHT || ha.l_GazeDirection == GazeDirection.UPRIGHT) {
                             auFrame_l.setAUAP(62, l_limitYaw / EYES_YAW_LIMIT, Side.LEFT);
+                            auFrame_r.setAUAP(62, r_limitYaw / EYES_YAW_LIMIT, Side.RIGHT);
                         }
                         //AU63: eyes up
                         if (ha.l_GazeDirection == GazeDirection.UPRIGHT || ha.l_GazeDirection == GazeDirection.UP || ha.l_GazeDirection == GazeDirection.UPLEFT) {
                             auFrame_l.setAUAP(63, l_limitPitch / EYES_PITCH_LIMIT, Side.LEFT);
+                            auFrame_r.setAUAP(63, r_limitPitch / EYES_PITCH_LIMIT, Side.RIGHT);
                         }
                         //AU64: eyes down
                         if (ha.l_GazeDirection == GazeDirection.DOWNRIGHT || ha.l_GazeDirection == GazeDirection.DOWN || ha.l_GazeDirection == GazeDirection.DOWNLEFT) {
                             auFrame_l.setAUAP(64, l_limitPitch / EYES_PITCH_LIMIT, Side.LEFT);
+                            auFrame_r.setAUAP(64, r_limitPitch / EYES_PITCH_LIMIT, Side.RIGHT);
                         }
                         
-                        //AU61: eyes turn left
+                        /*//AU61: eyes turn left
                         if (ha.l_GazeDirection == GazeDirection.DOWNLEFT || ha.l_GazeDirection == GazeDirection.LEFT || ha.l_GazeDirection == GazeDirection.UPLEFT) {
                             auFrame_r.setAUAP(61, r_limitYaw / EYES_YAW_LIMIT, Side.RIGHT);
                         }
@@ -1108,7 +1117,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         //AU64: eyes down
                         if (ha.l_GazeDirection == GazeDirection.DOWNRIGHT || ha.l_GazeDirection == GazeDirection.DOWN || ha.l_GazeDirection == GazeDirection.DOWNLEFT) {
                             auFrame_r.setAUAP(64, r_limitPitch / EYES_PITCH_LIMIT, Side.RIGHT);
-                        }
+                        }*/
                             
                         setGazeRestPosition(new AUKeyFrame(gazeId + "_back", timeBackEyesAtZero, auFrame_l), new AUKeyFrame(gazeId + "_back", timeBackEyesAtZero, auFrame_r));
                     }

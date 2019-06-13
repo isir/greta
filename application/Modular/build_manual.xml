@@ -158,6 +158,11 @@
 	<target name="build.dependency.conversationalgaze" if="${need.conversationalgaze}">
         <ant antfile="../../auxiliary/ConversationalGaze/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
+	
+	<target name="build.dependency.fmlannotator" if="${need.fmlannotator}">
+        <ant antfile="../../auxiliary/FMLAnnotator/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+	
     <!-- -->
     
     <path id="path.jars">
@@ -496,6 +501,16 @@
             </not>
         </condition>
         <antcall target="build.dependency.conversationalgaze"/>
+		
+		<condition property="need.fmlannotator">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/FMLAnnotator.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.fmlannotator"/>
 		
         <!-- -->
     </target>

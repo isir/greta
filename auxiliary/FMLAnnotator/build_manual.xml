@@ -8,7 +8,6 @@
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
     <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
-    <property name="jackson.jar.dir" location="../../bin/Common/Lib/External/jackson" />
 	
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>

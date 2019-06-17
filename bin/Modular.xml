@@ -100,6 +100,7 @@
             </menu>
 			<menu name="FaceToFaceConversation">
                 <item module="AgentGazeUser" name="AgentGazeUser"/>
+				<item module="User" name="User"/>
 				<item module="ConversationalGroup" name="ConversationalGroup"/>
             </menu>
             <menu name="Environment">
@@ -348,17 +349,23 @@
 			<frame class="vib.auxiliary.conversationalGaze.Gui.SetCamPos" lib_id="vib_facetoface" type="frame">
                 <link method="setPosandOrient" on="frame"/>
             </frame>
+            <parameter default="6000" get_method="getMutualGaze" get_on="frame" name="agent_MG" set_method="setAgentMG" set_on="frame" type="double"/>
+            <parameter default="1500" get_method="getLookAway" get_on="frame" name="agent_LA" set_method="setAgentLA" set_on="frame" type="double"/>
+            <parameter default="5000" get_method="getAU_MG" get_on="frame" name="AU_mutualGaze" set_method="setAU_MG" set_on="frame" type="double"/>
+			<parameter default="1500" get_method="getAU_LA" get_on="frame" name="AU_lookAway" set_method="setAU_LA" set_on="frame" type="double"/>
+			<parameter default="0.2" get_method="getThreshold" get_on="frame" name="threshold" set_method="setThreshold" set_on="frame" type="double"/>
+        </module>
+		<module name="User" style="Signals">
+            <object class="vib.auxiliary.conversationalGaze.User" lib_id="vib_facetoface"/>
+			<frame class="vib.auxiliary.conversationalGaze.Gui.UserGui" lib_id="vib_facetoface" type="frame">
+                <link method="setUserParticipant" on="frame"/>
+            </frame>
 			<parameter default="0" get_method="getCoordinateX" get_on="frame" name="pos_x" set_method="setCoordinateX" set_on="frame" type="double"/>
             <parameter default="0" get_method="getCoordinateY" get_on="frame" name="pos_y" set_method="setCoordinateY" set_on="frame" type="double"/>
             <parameter default="0" get_method="getCoordinateZ" get_on="frame" name="pos_z" set_method="setCoordinateZ" set_on="frame" type="double"/>
             <parameter default="0" get_method="getOrientationX" get_on="frame" name="rot_yaw" set_method="setOrientationX" set_on="frame" type="double"/>
             <parameter default="0" get_method="getOrientationY" get_on="frame" name="rot_pitch" set_method="setOrientationY" set_on="frame" type="double"/>
             <parameter default="0" get_method="getOrientationZ" get_on="frame" name="rot_roll" set_method="setOrientationZ" set_on="frame" type="double"/>
-            <parameter default="6000" get_method="getMutualGaze" get_on="frame" name="agent_MG" set_method="setAgentMG" set_on="frame" type="double"/>
-            <parameter default="1500" get_method="getLookAway" get_on="frame" name="agent_LA" set_method="setAgentLA" set_on="frame" type="double"/>
-            <parameter default="5000" get_method="getAU_MG" get_on="frame" name="AU_mutualGaze" set_method="setAU_MG" set_on="frame" type="double"/>
-			<parameter default="1500" get_method="getAU_LA" get_on="frame" name="AU_lookAway" set_method="setAU_LA" set_on="frame" type="double"/>
-			<parameter default="0.2" get_method="getThreshold" get_on="frame" name="threshold" set_method="setThreshold" set_on="frame" type="double"/>
         </module>
 		<module name="ConversationalGroup" style="Signals">
             <object class="vib.auxiliary.conversationalGaze.ConversationalGroup" lib_id="vib_facetoface"/>
@@ -1541,6 +1548,18 @@
             <output class="vib.auxiliary.conversationalGaze.ConversationalGroup" lib_id="vib_signals"/>
             <connect from="output" method="AddParticipant" to="input"/>
             <disconnect from="output" method="RemoveParticipant" to="input"/>
+        </connector>
+		<connector id="AddedUser">
+            <input class="vib.auxiliary.conversationalGaze.User" lib_id="vib_signals"/>
+            <output class="vib.auxiliary.conversationalGaze.AgentGazeUser" lib_id="vib_signals"/>
+            <connect from="output" method="AddParticipant" to="input"/>
+            <disconnect from="output" method="RemoveParticipant" to="input"/>
+        </connector>
+		<connector id="AddUserinGroup">
+            <input class="vib.auxiliary.conversationalGaze.User" lib_id="vib_signals"/>
+            <output class="vib.auxiliary.conversationalGaze.ConversationalGroup" lib_id="vib_signals"/>
+            <connect from="output" method="AddParticipantUser" to="input"/>
+            <disconnect from="output" method="RemoveParticipantUser" to="input"/>
         </connector>
 		<connector id="connectParserCaptureController_AUToAUParserFileReader" unique="true">
             <input class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plancap"/>

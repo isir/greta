@@ -1825,7 +1825,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 //Vec3d Agl_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_l_eye_offset));
                                 //Vec3d Agr_eye = Vec3d.addition(headAgent, OrientAgent.rotate(headAngles_r_eye_offset));
 
-                                // find the poit in the meddle between the two eyes
+                                // find the point in the middle between the two eyes
                                 vec2target = new Vec3d(positionAgent.x(), headAgent.y(), positionAgent.z());
                                 break;
                             } 

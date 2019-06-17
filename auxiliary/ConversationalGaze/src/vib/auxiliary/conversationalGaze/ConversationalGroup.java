@@ -11,29 +11,23 @@ import java.util.List;
 import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import vib.auxiliary.ssi.SSIFrame;
-import vib.auxiliary.ssi.SSIFramePerfomer;
-import vib.auxiliary.ssi.SSITypes;
 import vib.core.animation.mpeg4.MPEG4Animatable;
 import vib.core.signals.GazeSignal;
 import vib.core.util.enums.GazeDirection;
-import vib.core.util.enums.Influence;
 import vib.core.util.environment.Animatable;
 import vib.core.util.environment.Environment;
 import vib.core.util.environment.Node;
-import vib.core.util.id.ID;
-import vib.core.util.math.Vec3d;
 
 /**
  * @author Donatella Simonetti
  */
-public class ConversationalGroup extends Thread implements SSIFramePerfomer{
+public class ConversationalGroup extends Thread{
 
     public List<ConversationParticipant> listParticipants;
     public List<ConversationParticipant> pending_Participants;
     
     ConversationParticipant user = new ConversationParticipant("user");
-    boolean useradded = false;
+    boolean userActive = false;
     public Environment envi;
     
     private boolean userIsParticipating = false;
@@ -45,15 +39,6 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
     public double head_rx = 0;
     public double head_ry = 0;
     public double head_rz = 0;
-    
-    // cam position
-    public double cam_px = 0.0;
-    public double cam_py = 0.0;
-    public double cam_pz = 0.0;
-    
-    public double cam_rx = 0.0;
-    public double cam_ry = 0.0;
-    public double cam_rz = 0.0;
     
     // vector were we store if the User is looking to the agent(0) or not(1) 
     // 0 --> mutual look
@@ -75,11 +60,7 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         this.listParticipants = new ArrayList<>();
         this.pending_Participants = new ArrayList<>();
         envi = env;
-        
-        this.user.setGazeStatus(1);  // initialize gaze state at look away
-        this.user.setOldGazeStatus(1); 
-        this.user.setMpeg4_id("user");
-        
+                
         // create a node user where can we send and store the position/orientation of user head
         Animatable user = new Animatable();
         // check if the node for the user has been already created 
@@ -87,6 +68,10 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         if (check == null){
             user.setIdentifier("user");
             envi.addNode(user);
+            
+            this.user.setGazeStatus(1);  // initialize gaze state at look away
+            this.user.setOldGazeStatus(1); 
+            this.user.setMpeg4_id("user");
         }
         
         this.listGazeDirection = new ArrayList<GazeDirection>();
@@ -105,6 +90,14 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
     
     public void run() {
         while(groupActive){
+            
+            if (this.userActive){
+                compureUserStatusAndGazeSignal();
+                if (!listParticipants.contains("user")){
+                    list_names.add("user");
+                }
+            }
+            this.userActive = false;
                     
             synchronized(listParticipants){
                 
@@ -122,6 +115,7 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
                     if (startNotspeakingTime == 0.0){
                         startNotspeakingTime = currentTime;
                     }
+                    
                     
                     for (ConversationParticipant cp : listParticipants){
                         synchronized(cp){
@@ -411,69 +405,11 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         //}
         return gs;
     }
-    @Override
-    public void performSSIFrames(List<SSIFrame> ssi_frames_list, ID requestId) {
-        for (SSIFrame ssf : ssi_frames_list) {
-            performSSIFrame(ssf, requestId);
-        }
-    }
-
-    @Override
-    public void performSSIFrame(SSIFrame ssi_frame, ID requestId) {
-        
-        
-        if (!useradded){
-            this.listParticipants.add(this.user);
-            this.list_names.add("user");
-            useradded = true;
-        }
+    
+    public void compureUserStatusAndGazeSignal() {
         //this.userIsParticipating = true;
         double currentTime = vib.core.util.time.Timer.getTime();
-        
-        // gazeSignal to sent to the Realizer
-        //ArrayList<Signal> toSend = new ArrayList<Signal>();
-        
-        // take the head position from the xml message
-        head_pos_x = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_position_x);
-        head_pos_y = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_position_y);
-        head_pos_z = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_position_z);
-        
-        head_rx = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_orientation_pitch);
-        head_ry = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_orientation_yaw);
-        head_rz = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_orientation_roll);
-        
-        // update the head position according the camera setting
-        //cam position
-        if (cam_px!=0 || cam_py!=0 || cam_pz!=0){
-            head_pos_x += cam_px;
-            head_pos_y += cam_py;
-            head_pos_z += cam_pz;
-        }
-        // rotate around horizontal (x for cam), i.e. z axis of GRETA
-        if (cam_rx != 0.0){
-            double h_pos_x = head_pos_x*Math.cos(cam_rx) + Math.sin(cam_rx)*(head_pos_z);
-            double h_pos_z = -head_pos_x*Math.sin(cam_rx) + Math.cos(cam_rx)*(head_pos_z);
-            
-            head_pos_x = h_pos_x;
-            head_pos_z = h_pos_z; 
-        }
-        // rotate around vertical (y for cam), i.e. y axis of GRETA
-        if (cam_ry != 0.0){
-            double h_pos_y = head_pos_y*Math.cos(cam_ry) - Math.sin(cam_ry)*(head_pos_z);
-            double h_pos_z = head_pos_y*Math.sin(cam_ry) + Math.cos(cam_ry)*(head_pos_z);
-            
-            head_pos_y = h_pos_y;
-            head_pos_z = h_pos_z; 
-        }
-         // rotate around depth axis(z for cam), i.e. x axis of GRETA
-        if (cam_rz != 0.0){
-            double h_pos_x = head_pos_x*Math.cos(cam_rz) - Math.sin(cam_rz)*head_pos_y;
-            double h_pos_y = head_pos_x*Math.sin(cam_rz) + Math.cos(cam_rz)*head_pos_y;
-            
-            head_pos_x = h_pos_x;
-            head_pos_y = h_pos_y; 
-        }    
-        
+
         // check that the user is looking at certain region of the screen = agent face 
         // if the user is looking at agent face the state is 0
         // otherway state = 1 (look away)
@@ -508,19 +444,6 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
             
             counter = 0;
         }
-        
-        
-        // update the position of the user in the environment
-        Animatable us = (Animatable) envi.getNode("user");
-        // the eyesweb give a coordination system different from what we have in Greta
-        // eyw-->Grata: x-->-z, z-->x
-        us.setCoordinates(new Vec3d(1+head_pos_z,head_pos_y, -head_pos_x));
-        //us.setOrientation(0, 0, 0); // send also the orientation
-        
-        //TODO : think a smart way to check if we are receiving the data for the user and how
-        // make the variable false or true 
-        //this.userIsParticipating = false;
-        
     }
 
     public void AddParticipant(AgentGazeUser agu){
@@ -543,6 +466,28 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         }
     }
     
+    public void AddParticipantUser(User user){
+        
+        this.pending_Participants.add(user.getUser());
+        
+        // add the participants name to the list 
+        if (!listParticipants.contains(user.getUser().getMpeg4_id()) && this.userActive){
+            list_names.add(user.getUser().getMpeg4_id());
+        }
+        
+        user.setGroup(this);
+        this.user = user.getUser();
+    }
+    
+    public void RemoveParticipantUser (User user){
+        this.listParticipants.remove(user.getUser());
+        
+        // add the participants name to the list 
+        if (listParticipants.contains(user.getUser().getMpeg4_id())){
+            listParticipants.remove(user.getUser().getMpeg4_id());
+        }
+    }
+    
     public String extractNameSpeaker (String mpeg4_id){
         if (mpeg4_id.equals("user")){
             return "user";
@@ -552,4 +497,11 @@ public class ConversationalGroup extends Thread implements SSIFramePerfomer{
         }
     }
     
+    public ConversationParticipant getUser() {
+        return user;
+    }
+
+    public void setUser(ConversationParticipant user) {
+        this.user = user;
+    }
 }

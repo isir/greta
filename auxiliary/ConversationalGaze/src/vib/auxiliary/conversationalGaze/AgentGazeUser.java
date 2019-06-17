@@ -12,9 +12,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Random;
 import java.util.concurrent.CopyOnWriteArrayList;
-import vib.auxiliary.ssi.SSIFrame;
-import vib.auxiliary.ssi.SSIFramePerfomer;
-import vib.auxiliary.ssi.SSITypes;
 import vib.core.feedbacks.Callback;
 import vib.core.feedbacks.FeedbackPerformer;
 import vib.core.signals.GazeSignal;
@@ -33,7 +30,6 @@ import vib.core.util.environment.Environment;
 import vib.core.util.environment.Node;
 import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
-import vib.core.util.math.Vec3d;
 import vib.core.util.time.Temporizable;
 import vib.core.util.time.TimeMarker;
 import vib.core.util.time.Timer;
@@ -42,7 +38,7 @@ import vib.core.util.time.Timer;
  *
  * @author Donatella Simonetti
  */
-public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPerformer, CharacterDependent, FeedbackPerformer{
+public class AgentGazeUser implements SignalEmitter, SignalPerformer, CharacterDependent, FeedbackPerformer{
 
     private List<SignalPerformer> signalPerformers = new ArrayList<SignalPerformer>();
     private CharacterManager characterManager;
@@ -50,6 +46,8 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
     
     private ConversationParticipant agent;
     private ConversationParticipant user;
+    boolean userin = false;
+    boolean userActive = false;
     
     // User head positions
     public double head_pos_x = 0;
@@ -60,17 +58,8 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
     public double head_ry = 0;
     public double head_rz = 0;
     
-    // cam position
-    public double cam_px = 0.0;
-    public double cam_py = 0.0;
-    public double cam_pz = 0.0;
-    
-    public double cam_rx = 0.0;
-    public double cam_ry = 0.0;
-    public double cam_rz = 0.0;
-    
     // last gazeSignal
-    private GazeSignal last_gs;
+    //private GazeSignal last_gs;
             
     // vector were we store if the User is looking to the agent(0) or not(1) 
     // 0 --> mutual look
@@ -86,11 +75,11 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
     private double startLA;// time start to look away
     
     //
-    private double startBothMG; // time start to look at the user
-    private double startBothLA;// time start to look away
+   // private double startBothMG; // time start to look at the user
+    //private double startBothLA;// time start to look away
     
     private int[] status_AU = new int[2]; ; // AU = AgentUser
-    private int[] oldStatus_AU = new int[2];
+    //private int[] oldStatus_AU = new int[2];
     private double startStatus_AU;
     private boolean isStatuschanged = false;
     
@@ -124,10 +113,7 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         this.agent.setGazeStatus(1);
         this.agent.setOldGazeStatus(1);
         
-        this.user = new ConversationParticipant("user");
-        // if mean vecGazeState >= 0,66 --> mutual_gaze else look_away
-        this.user.setGazeStatus(0);  // initialize gaze state at look away
-        this.user.setOldGazeStatus(0);       
+              
         
         // create a node user where can we send and store the position/orientation of user head
         Node check = envi.getNode("user");
@@ -138,7 +124,7 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         }
         
         // initialize the gaze for the agent
-        this.last_gs = new GazeSignal("gaze");
+        //this.last_gs = new GazeSignal("gaze");
 
         //
         //this.t_bothAway = 2000;
@@ -150,7 +136,7 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         this.status_AU[0] = 1;
         this.status_AU[1] = 1;
         
-        this.oldStatus_AU = this.status_AU;
+        //this.oldStatus_AU = this.status_AU;
         //
         this.listGazeDirection = new ArrayList<GazeDirection>();
         //this.listGazeDirection.add(GazeDirection.FRONT);
@@ -181,8 +167,154 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
         sendGazeSignal.start();
     }
     
+    public void compureUserStatusAndGazeSignal(){
+        
+            double currentTime = vib.core.util.time.Timer.getTimeMillis();
+
+            // gazeSignal to sent to the Realizer
+            ArrayList<Signal> toSend = new ArrayList<Signal>();
+
+
+            //TODO ???
+            // set the first gaze for the agent
+            // maybe a model that make the agent gaze randomly at the environment
+
+
+            /* check that the user is looking at certain region of the screen = agent face 
+               if the user is looking at agent face the state is 0
+               otherway state = 1 (look away) */
+            int currentUserState = 0; // to be changed 
+
+            // normalize the head position
+            double posX_norm = head_pos_x/Math.sqrt(Math.pow(head_pos_x, 2)+Math.pow(head_pos_z, 2));
+            double posY_norm = head_pos_y/Math.sqrt(Math.pow(head_pos_y, 2)+Math.pow(head_pos_z, 2));
+            // check the user is looking at the agent face
+            double ratio1 = posX_norm/Math.sin(head_ry);
+            double ratio2 = posY_norm/Math.sin(head_rx);
+
+            //System.out.println(ratio1 + "  " +  ratio2);
+            // compute currentUserState
+            if(Math.abs(ratio1) > 0.3 || Math.abs(ratio2) > 2.0){ // look away
+                currentUserState = 1;
+            }else{// look at the agent
+                currentUserState = 0;
+            }
+
+            //System.out.println(Math.abs(head_rx) + "       " + Math.abs(head_ry));
+            if (Math.abs(head_rx) > 15 || Math.abs(head_ry) > 10){
+                currentUserState = 1;
+            }
+
+            // TODO: replace the head position with gaze_pos to better recognize if the user is looking at the agent face       
+            // or find a better way to identify the agent face
+
+            // check if the user is talking 
+            // TODO: voice eyesweb
+
+            // check that 6 frames are passed
+            if (counter < 5){
+                vecGazeState[counter] = currentUserState;
+                counter += 1;        
+            }else{ // check each 6 frames if generate the gaze for the agent 
+                vecGazeState[counter] = currentUserState;
+                //System.out.println(vecGazeState.toString());
+                double sumW = Arrays.stream(vecGazeState).sum();
+                if ((sumW/vecGazeState.length) >= 0.66){
+                    this.getUser().setGazeStatus(1);
+                }else{
+                    this.getUser().setGazeStatus(0);
+                }
+
+                counter = 0;
+            }
+
+            // TODO: consider who is speaking 
+            // according to talking or listening state the duration of mutual gaze or gaze away can change. The longue mutual gaze for the listener than the Speaker
+
+            getStatus_AU()[0] = getAgent().getGazeStatus();
+            getStatus_AU()[1] = this.getUser().getGazeStatus();
+            if (isStatuschanged){
+                startStatus_AU =  currentTime; //vib.core.util.time.Timer.getTimeMillis(); // starting time of each status
+            }
+
+            if (user.isIsTalking() && !agent.isIsTalking()){ // user is talking 
+                if (!userIsSpeaking){
+                    isStatuschanged = true;
+                }else{
+                    isStatuschanged = false;
+                }
+                userIsSpeaking = true;
+                GazeSignal gs = createGazeSignal(0, head_pos_x, head_pos_y, head_pos_z);
+                getStatus_AU()[0] = 0; 
+                toSend.add(gs);
+            }else{
+                userIsSpeaking = false;
+                //create the agent gaze according to the status (A,U)
+                if (getStatus_AU()[0] == 1 && getStatus_AU()[1] == 0){
+                    if ((currentTime - startLA) > getAgent().getTime_LA() + this.getMoreGaze_at()){ 
+                        getAgent().setGazeStatus(0); // the aversion last too much so the agent gaze at the user
+                        isStatuschanged = true;
+                        getStatus_AU()[0] = 0; // agent mutual gaze 
+                        startMG = vib.core.util.time.Timer.getTimeMillis(); // mutual gaze start time 
+                        GazeSignal gs = createGazeSignal(getAgent().getGazeStatus(), head_pos_x, head_pos_y, head_pos_z);
+                        toSend.add(gs);
+                    }else{
+                        isStatuschanged = false;
+                    }
+                }else if(getStatus_AU()[0] == 1 && getStatus_AU()[1] == 1){
+                    if ((currentTime - startStatus_AU) > getT_bothAway() + this.getMoreGaze_at()){ 
+                        getAgent().setGazeStatus(0); 
+                        isStatuschanged = true;
+                        getStatus_AU()[0] = 0;
+                        startMG = vib.core.util.time.Timer.getTimeMillis();
+                        GazeSignal gs = createGazeSignal(getAgent().getGazeStatus(), head_pos_x, head_pos_y, head_pos_z);
+                        toSend.add(gs);
+                    }else {
+                        isStatuschanged = false;
+                    }
+                }else if(getStatus_AU()[0] == 0 && getStatus_AU()[1] == 0){
+                    if ((currentTime - startStatus_AU) > getT_bothMG() + this.getMoreGaze_at()){ 
+                        getAgent().setGazeStatus(1); // set agent state to look away
+                        isStatuschanged = true;
+                        getStatus_AU()[0] = 1; // look away
+                        startLA = vib.core.util.time.Timer.getTimeMillis();
+                        GazeSignal gs = createGazeSignal(getAgent().getGazeStatus(), head_pos_x, head_pos_y, head_pos_z);
+                        toSend.add(gs);
+                    }else{ // gaze at user 
+                        isStatuschanged = false;
+                        GazeSignal gs = createGazeSignal(0, head_pos_x, head_pos_y, head_pos_z);
+                        toSend.add(gs);
+                    }
+                }else{
+                    if ((currentTime - startMG) > getAgent().getTime_MG() + this.getMoreGaze_at()){ 
+                        getAgent().setGazeStatus(1); 
+                        isStatuschanged = true;
+                        getStatus_AU()[0] = 1; // look away
+                        startLA = vib.core.util.time.Timer.getTimeMillis();
+                        GazeSignal gs = createGazeSignal(getAgent().getGazeStatus(), head_pos_x, head_pos_y, head_pos_z);
+                        toSend.add(gs);
+                    }else{ // gaze at user 
+                        isStatuschanged = false;
+                        GazeSignal gs = createGazeSignal(0, head_pos_x, head_pos_y, head_pos_z);
+                        toSend.add(gs);
+                    }
+                } 
+            }
+
+            ID requestId = IDProvider.createID("user");
+            this.performSignals(toSend, requestId, new Mode(CompositionType.blend));
+    
+    }
+    
+    
     // if there are gazeSignals
     public void listen() {
+        
+        
+        if (this.userActive){
+            compureUserStatusAndGazeSignal();
+        }
+        this.userActive = false;
         
         CopyOnWriteArrayList<Signal> list = new CopyOnWriteArrayList<Signal>();
         
@@ -222,211 +354,6 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
                 }
             }
         }
-    }
-    
-    @Override
-    public void performSSIFrame(SSIFrame ssi_frame, ID requestId) {
-
-        double currentTime = vib.core.util.time.Timer.getTimeMillis();
-        
-        // gazeSignal to sent to the Realizer
-        ArrayList<Signal> toSend = new ArrayList<Signal>();
-        
-        // take the head position from the xml message (in meters)
-        head_pos_x = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_position_x);
-        head_pos_y = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_position_y);
-        head_pos_z = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_position_z);
-        
-        // (degree)
-        head_rx = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_orientation_pitch);
-        head_ry = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_orientation_yaw);
-        head_rz = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_orientation_roll);
-        
-        // update the head position according the camera settings
-        //cam position
-        if (cam_px!=0 || cam_py!=0 || cam_pz!=0){
-            head_pos_x += cam_px;
-            head_pos_y += cam_py;
-            head_pos_z += cam_pz;
-        }
-        // rotate around horizontal (x for cam), i.e. z axis of GRETA
-        if (cam_rx != 0.0){
-            double h_pos_x = head_pos_x*Math.cos(cam_rx) + Math.sin(cam_rx)*(head_pos_z);
-            double h_pos_z = -head_pos_x*Math.sin(cam_rx) + Math.cos(cam_rx)*(head_pos_z);
-            
-            head_rx += - cam_rx;//Math.toDegrees(cam_rx);
-            head_pos_x = h_pos_x;
-            head_pos_z = h_pos_z; 
-        }
-        // rotate around vertical (y for cam), i.e. y axis of GRETA
-        if (cam_ry != 0.0){
-            double h_pos_y = head_pos_y*Math.cos(cam_ry) - Math.sin(cam_ry)*(head_pos_z);
-            double h_pos_z = head_pos_y*Math.sin(cam_ry) + Math.cos(cam_ry)*(head_pos_z);
-            
-            head_ry += - cam_ry;//Math.toDegrees(cam_ry);
-            head_pos_y = h_pos_y;
-            head_pos_z = h_pos_z; 
-        }
-         // rotate around depth axis(z for cam), i.e. x axis of GRETA
-        if (cam_rz != 0.0){
-            double h_pos_x = head_pos_x*Math.cos(cam_rz) - Math.sin(cam_rz)*head_pos_y;
-            double h_pos_y = head_pos_x*Math.sin(cam_rz) + Math.cos(cam_rz)*head_pos_y;
-            
-            head_rz += - cam_rz;//Math.toDegrees(cam_rz);
-            head_pos_x = h_pos_x;
-            head_pos_y = h_pos_y; 
-        }
-        //TODO ???
-        // set the first gaze for the agent
-        // maybe a model that make the agent gaze randomly at the environment
-        
-        
-        /* check that the user is looking at certain region of the screen = agent face 
-           if the user is looking at agent face the state is 0
-           otherway state = 1 (look away) */
-        int currentUserState = 0; // to be changed 
-        
-        // normalize the head position
-        double posX_norm = head_pos_x/Math.sqrt(Math.pow(head_pos_x, 2)+Math.pow(head_pos_z, 2));
-        double posY_norm = head_pos_y/Math.sqrt(Math.pow(head_pos_y, 2)+Math.pow(head_pos_z, 2));
-        // check the user is looking at the agent face
-        double ratio1 = posX_norm/Math.sin(head_ry);
-        double ratio2 = posY_norm/Math.sin(head_rx);
-        
-        //System.out.println(ratio1 + "  " +  ratio2);
-        // compute currentUserState
-        if(Math.abs(ratio1) > 0.3 || Math.abs(ratio2) > 2.0){ // look away
-            currentUserState = 1;
-        }else{// look at the agent
-            currentUserState = 0;
-        }
-        
-        //System.out.println(Math.abs(head_rx) + "       " + Math.abs(head_ry));
-        if (Math.abs(head_rx) > 15 || Math.abs(head_ry) > 10){
-            currentUserState = 1;
-        }
-        
-        
-        // TODO: replace the head position with gaze_pos to better recognize if the user is looking at the agent face       
-        // or find a better way to identify the agent face
-        
-        /*System.out.println(head_pos_x + "  " + head_pos_y + "  " + head_pos_z );
-        System.out.println("User: " + currentUserState);
-        System.out.println("Agent: " + getAgent().getGazeStatus());*/
-        
-        // check if the user is talking 
-        // TODO: voice eyesweb
-        
-        // check that 6 frames are passed
-        if (counter < 5){
-            vecGazeState[counter] = currentUserState;
-            counter += 1;        
-        }else{ // check each 6 frames if generate the gaze for the agent 
-            vecGazeState[counter] = currentUserState;
-            //System.out.println(vecGazeState.toString());
-            double sumW = Arrays.stream(vecGazeState).sum();
-            if ((sumW/vecGazeState.length) >= 0.66){
-                this.user.setGazeStatus(1);
-            }else{
-                 this.user.setGazeStatus(0);
-            }
-            
-            counter = 0;
-        }
-        
-        // TODO: consider who is speaking 
-        // according to talking or listening state the duration of mutual gaze or gaze away can change. The longue mutual gaze for the listener than the Speaker
-
-        getStatus_AU()[0] = getAgent().getGazeStatus();
-        getStatus_AU()[1] = this.user.getGazeStatus();
-        if (isStatuschanged){
-            startStatus_AU =  currentTime; //vib.core.util.time.Timer.getTimeMillis(); // starting time of each status
-        }
-        
-        /*System.out.println(getStatus_AU()[0] + "   " + getStatus_AU()[1] + "   " + currentTime);
-        System.out.println("LATime " + startLA + " MGTime " + startMG + "  " + startStatus_AU);*/
-        this.voiceEnergy = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.prosody_opensmile_energy_cat);
-        //System.out.println(voiceEnergy);
-        
-        if (getVoiceEnergy() > threshouldIntensity && !agent.isIsTalking()){ // user is talking 
-            if (!userIsSpeaking){
-                isStatuschanged = true;
-            }else{
-                isStatuschanged = false;
-            }
-            userIsSpeaking = true;
-            GazeSignal gs = createGazeSignal(0, head_pos_x, head_pos_y, head_pos_z);
-            getStatus_AU()[0] = 0; 
-            toSend.add(gs);
-        }else{
-            userIsSpeaking = false;
-            //create the agent gaze according to the status (A,U)
-            if (getStatus_AU()[0] == 1 && getStatus_AU()[1] == 0){
-                if ((currentTime - startLA) > getAgent().getTime_LA() + this.getMoreGaze_at()){ 
-                    getAgent().setGazeStatus(0); // the aversion last too much so the agent gaze at the user
-                    isStatuschanged = true;
-                    getStatus_AU()[0] = 0; // agent mutual gaze 
-                    startMG = vib.core.util.time.Timer.getTimeMillis(); // mutual gaze start time 
-                    GazeSignal gs = createGazeSignal(getAgent().getGazeStatus(), head_pos_x, head_pos_y, head_pos_z);
-                    toSend.add(gs);
-                }else{
-                    isStatuschanged = false;
-                }
-            }else if(getStatus_AU()[0] == 1 && getStatus_AU()[1] == 1){
-                if ((currentTime - startStatus_AU) > getT_bothAway() + this.getMoreGaze_at()){ 
-                    getAgent().setGazeStatus(0); 
-                    isStatuschanged = true;
-                    getStatus_AU()[0] = 0;
-                    startMG = vib.core.util.time.Timer.getTimeMillis();
-                    GazeSignal gs = createGazeSignal(getAgent().getGazeStatus(), head_pos_x, head_pos_y, head_pos_z);
-                    toSend.add(gs);
-                }else {
-                    isStatuschanged = false;
-                }
-            }else if(getStatus_AU()[0] == 0 && getStatus_AU()[1] == 0){
-                if ((currentTime - startStatus_AU) > getT_bothMG() + this.getMoreGaze_at()){ 
-                    getAgent().setGazeStatus(1); // set agent state to look away
-                    isStatuschanged = true;
-                    getStatus_AU()[0] = 1; // look away
-                    startLA = vib.core.util.time.Timer.getTimeMillis();
-                    GazeSignal gs = createGazeSignal(getAgent().getGazeStatus(), head_pos_x, head_pos_y, head_pos_z);
-                    toSend.add(gs);
-                }else{ // gaze at user 
-                    isStatuschanged = false;
-                    GazeSignal gs = createGazeSignal(0, head_pos_x, head_pos_y, head_pos_z);
-                    toSend.add(gs);
-                }
-            }else{
-                if ((currentTime - startMG) > getAgent().getTime_MG() + this.getMoreGaze_at()){ 
-                    getAgent().setGazeStatus(1); 
-                    isStatuschanged = true;
-                    getStatus_AU()[0] = 1; // look away
-                    startLA = vib.core.util.time.Timer.getTimeMillis();
-                    GazeSignal gs = createGazeSignal(getAgent().getGazeStatus(), head_pos_x, head_pos_y, head_pos_z);
-                    toSend.add(gs);
-                }else{ // gaze at user 
-                    isStatuschanged = false;
-                    GazeSignal gs = createGazeSignal(0, head_pos_x, head_pos_y, head_pos_z);
-                    toSend.add(gs);
-                }
-            } 
-        }
-        
-        
-        // update
-        //getAgent().setOldGazeStatus(getAgent().getGazeStatus());
-        //this.user.setOldGazeStatus(this.user.getGazeStatus());
-        
-        
-        
-        // update the position of the user in the environment
-        Animatable us = (Animatable) envi.getNode("user");
-        // the eyesweb give a coordination system different from what we have in Greta
-        // eyw-->Grata: x-->-z, z-->x
-        us.setCoordinates(new Vec3d(1+head_pos_z,head_pos_y,-head_pos_x));
-        //us.setOrientation(0, 0, 0); // send also the orientation
-        
-        this.performSignals(toSend, requestId, new Mode(CompositionType.blend));
     }
     
     public GazeSignal createGazeSignal(int agentGazeStatus, double head_pos_x, double head_pos_y, double head_pos_z){
@@ -501,13 +428,6 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
     @Override
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
-    }
-
-    @Override
-    public void performSSIFrames(List<SSIFrame> list, ID id) {  
-         for (SSIFrame ssf : list) {
-            performSSIFrame(ssf, id);
-        }
     }
     
     @Override
@@ -693,6 +613,22 @@ public class AgentGazeUser implements SSIFramePerfomer, SignalEmitter, SignalPer
     public void setThreshouldIntensity(double threshouldIntensity) {
         this.threshouldIntensity = threshouldIntensity;
     }
+    
+    public ConversationParticipant getUser() {
+        return user;
+    }
 
-
+    public void setUser(ConversationParticipant user) {
+        this.user = user;
+    }
+    
+    public void AddParticipant(User user){
+        this.user = user.getUser(); 
+        user.setAgent(this);
+        userin =  true;
+    }
+    
+    public void RemoveParticipant (User user){
+        // TODO: creta a funwtion to clear the ConversationalParticipant class
+    }
 }

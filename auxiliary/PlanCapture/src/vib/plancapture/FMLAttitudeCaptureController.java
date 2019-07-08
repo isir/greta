@@ -3,24 +3,14 @@
  */
 package vib.plancapture;
 
-import java.awt.Cursor;
 import vib.core.feedbacks.Callback;
 import vib.core.feedbacks.CallbackPerformer;
 import vib.core.intentions.FMLFileReader;
-import vib.core.signals.Signal;
-import vib.core.signals.SignalPerformer;
-import vib.core.util.Mode;
 import vib.core.util.id.ID;
-import vib.core.util.id.IDProvider;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import vib.auxiliary.player.ogre.OgreRenderTexture;
-import vib.auxiliary.player.ogre.capture.Capturecontroller;
-import vib.auxiliary.player.ogre.capture.Capturer;
-import vib.auxiliary.socialparameters.SocialDimension;
 import vib.auxiliary.socialparameters.SocialParameterFrame;
 import vib.auxiliary.socialparameters.SocialParameterPerformer;
 

@@ -4,6 +4,7 @@
 package vib.auxiliary.conversationalGaze.Gui;
 
 import vib.auxiliary.conversationalGaze.AgentGazeUser;
+import vib.core.util.time.Timer;
 
 /**
  *
@@ -12,21 +13,27 @@ import vib.auxiliary.conversationalGaze.AgentGazeUser;
 public class SetCamPos extends javax.swing.JFrame {
 
     AgentGazeUser gazeuser;
+    private Thread statusgazeDisplay;
+    private static final long SLEEP_TIME = 50; //miliiseconds
     /**
      * Creates new form GazeUserGui
      */
     public SetCamPos() {
         initComponents();
-        
-        this.pos_x.setText(Double.toString(0.0));
-        this.pos_y.setText(Double.toString(0.0));
-        this.pos_z.setText(Double.toString(0.0));
-        
-        this.rot_yaw.setText(Double.toString(0.0));
-        this.rot_pitch.setText(Double.toString(0.0));
-        this.rot_roll.setText(Double.toString(0.0));   
-        
-        //this.image.imageUpdate(image, WIDTH, WIDTH, WIDTH, WIDTH, WIDTH);
+ 
+        statusgazeDisplay = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while(true){
+                    agentgazestatus.setText(Integer.toString(gazeuser.getStatus_AU()[0]));
+                    usergazestatus.setText(Integer.toString(gazeuser.getStatus_AU()[1]));
+                    voiceEnergy.setText(Double.toString(gazeuser.getVoiceEnergy()));
+                    Timer.sleep(SLEEP_TIME);
+                }
+            }
+        });
+        statusgazeDisplay.setDaemon(true);
+        statusgazeDisplay.start();
                 
     }
 
@@ -39,21 +46,6 @@ public class SetCamPos extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Cam_label = new javax.swing.JLabel();
-        cam_position = new javax.swing.JLabel();
-        pos_x = new javax.swing.JTextField();
-        pos_y = new javax.swing.JTextField();
-        pos_z = new javax.swing.JTextField();
-        lbl_pos_x = new javax.swing.JLabel();
-        lbl_pos_y = new javax.swing.JLabel();
-        lbl_pos_z = new javax.swing.JLabel();
-        lab_yaw = new javax.swing.JLabel();
-        lab_pitch = new javax.swing.JLabel();
-        lab_roll = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        rot_yaw = new javax.swing.JTextField();
-        rot_pitch = new javax.swing.JTextField();
-        rot_roll = new javax.swing.JTextField();
         image = new java.awt.Canvas();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -66,77 +58,22 @@ public class SetCamPos extends javax.swing.JFrame {
         AU_mutualGaze = new javax.swing.JTextField();
         AU_lookAway = new javax.swing.JTextField();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(1, 0), new java.awt.Dimension(1, 0), new java.awt.Dimension(1, 32767));
-        jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
         jSeparator3 = new javax.swing.JSeparator();
+        agentgazestatus = new javax.swing.JTextField();
+        usergazestatus = new javax.swing.JTextField();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jSeparator5 = new javax.swing.JSeparator();
+        jLabel9 = new javax.swing.JLabel();
+        voiceEnergy = new javax.swing.JTextField();
+        thresholdIsSpeaking = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        Cam_label.setText("Camera");
-
-        cam_position.setText("Position (meters)");
-
-        pos_x.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        pos_x.setPreferredSize(new java.awt.Dimension(60, 20));
-        pos_x.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pos_xActionPerformed(evt);
-            }
-        });
-
-        pos_y.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        pos_y.setPreferredSize(new java.awt.Dimension(60, 20));
-        pos_y.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pos_yActionPerformed(evt);
-            }
-        });
-
-        pos_z.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        pos_z.setPreferredSize(new java.awt.Dimension(60, 20));
-        pos_z.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                pos_zActionPerformed(evt);
-            }
-        });
-
-        lbl_pos_x.setText("x");
-
-        lbl_pos_y.setText("y");
-
-        lbl_pos_z.setText("z");
-
-        lab_yaw.setText("rot_x");
-
-        lab_pitch.setText("rot_y");
-
-        lab_roll.setText("rot_z");
-
-        jLabel4.setText("Orientation (degree)");
-
-        rot_yaw.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        rot_yaw.setPreferredSize(new java.awt.Dimension(60, 20));
-        rot_yaw.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rot_yawActionPerformed(evt);
-            }
-        });
-
-        rot_pitch.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        rot_pitch.setPreferredSize(new java.awt.Dimension(60, 20));
-        rot_pitch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rot_pitchActionPerformed(evt);
-            }
-        });
-
-        rot_roll.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
-        rot_roll.setPreferredSize(new java.awt.Dimension(60, 20));
-        rot_roll.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rot_rollActionPerformed(evt);
-            }
-        });
 
         jLabel1.setText("Agent");
 
@@ -174,226 +111,240 @@ public class SetCamPos extends javax.swing.JFrame {
             }
         });
 
-        jSeparator1.setMaximumSize(new java.awt.Dimension(50, 10));
-
         jSeparator2.setMaximumSize(new java.awt.Dimension(50, 10));
 
         jSeparator3.setMaximumSize(new java.awt.Dimension(50, 10));
+
+        agentgazestatus.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        agentgazestatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agentgazestatusActionPerformed(evt);
+            }
+        });
+
+        usergazestatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                usergazestatusActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Gaze Status");
+
+        jLabel7.setText("Agent");
+
+        jLabel8.setText("User");
+
+        jLabel9.setText("User Voice");
+
+        voiceEnergy.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                voiceEnergyActionPerformed(evt);
+            }
+        });
+
+        thresholdIsSpeaking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                thresholdIsSpeakingActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Intensity");
+
+        jLabel11.setText("Threshold");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(10, 10, 10)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(label_mg_au)
-                                            .addComponent(label_la_au)
-                                            .addComponent(jLabel3)
-                                            .addComponent(jLabel2))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                                            .addComponent(agent_MG, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(agent_LA, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(AU_mutualGaze, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(AU_lookAway, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(Cam_label)
-                                    .addComponent(jLabel5)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel4)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(cam_position)
-                                                .addGap(45, 45, 45)
-                                                .addComponent(lbl_pos_x)
-                                                .addGap(69, 69, 69)
-                                                .addComponent(lbl_pos_y, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(59, 59, 59)
-                                                .addComponent(lbl_pos_z, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))))
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(agent_MG, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(agent_LA, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 131, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(50, 50, 50)
+                                .addComponent(jLabel8)
+                                .addGap(16, 16, 16))
+                            .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(agentgazestatus, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(usergazestatus, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(33, 33, 33))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(117, 117, 117)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(rot_yaw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lab_yaw)
-                                        .addGap(19, 19, 19)))
-                                .addGap(18, 18, 18)
+                                .addGap(10, 10, 10)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addComponent(lab_pitch)
-                                        .addGap(56, 56, 56)
-                                        .addComponent(lab_roll))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(rot_pitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(rot_roll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(pos_x, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(label_mg_au)
+                                    .addComponent(label_la_au))
                                 .addGap(18, 18, 18)
-                                .addComponent(pos_y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(pos_z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(AU_mutualGaze, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(AU_lookAway, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 175, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel10)
+                                        .addGap(4, 4, 4)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(thresholdIsSpeaking, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(voiceEnergy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel9)
+                        .addGap(38, 38, 38)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(Cam_label)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
                         .addComponent(filler1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(89, 89, 89)
                         .addComponent(image, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cam_position)
-                            .addComponent(lbl_pos_x)
-                            .addComponent(lbl_pos_y)
-                            .addComponent(lbl_pos_z))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(pos_x, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pos_y, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(pos_z, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(21, 21, 21)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lab_yaw)
-                            .addComponent(lab_pitch)
-                            .addComponent(lab_roll))
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(rot_yaw, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rot_pitch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(rot_roll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(59, 59, 59)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                    .addComponent(jLabel3)
+                                    .addComponent(agent_LA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel6))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                                            .addComponent(jLabel2)
+                                            .addComponent(agent_MG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel8))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(agentgazestatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(usergazestatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(2, 2, 2)
+                                .addComponent(jLabel5)
+                                .addGap(2, 2, 2))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addGap(4, 4, 4)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator5)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(12, 12, 12)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(AU_mutualGaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(label_mg_au)
+                            .addComponent(voiceEnergy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(jLabel2)
-                            .addComponent(agent_MG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(jLabel3)
-                    .addComponent(agent_LA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(2, 2, 2)
-                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(AU_mutualGaze, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(label_mg_au))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(label_la_au)
-                    .addComponent(AU_lookAway, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                            .addComponent(label_la_au)
+                            .addComponent(AU_lookAway, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(thresholdIsSpeaking, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))))
+                .addContainerGap(170, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    // check if the camera is used
-    // if so, made translation and rotation according to the different position
-    // between camera anche eyes of the agent 
-    private void pos_xActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pos_xActionPerformed
-        if (pos_x != null){
-            double px = Double.parseDouble(pos_x.getText());
-            this.gazeuser.cam_px = px;
-        }
-    }//GEN-LAST:event_pos_xActionPerformed
-
-    private void pos_yActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pos_yActionPerformed
-       if (pos_y != null){
-            double py = Double.parseDouble(pos_y.getText());
-            this.gazeuser.cam_py = py;
-        }
-    }//GEN-LAST:event_pos_yActionPerformed
-
-    private void pos_zActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_pos_zActionPerformed
-        if (pos_z != null){
-            double pz = Double.parseDouble(pos_z.getText());
-            this.gazeuser.cam_pz = pz;
-        }
-    }//GEN-LAST:event_pos_zActionPerformed
-
-    // rotate around horizontal (x for cam), i.e. z axis of GRETA
-    private void rot_yawActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rot_yawActionPerformed
-        if (rot_yaw != null){
-            double yaw = Double.parseDouble(rot_yaw.getText());
-            this.gazeuser.cam_ry = yaw;
-        }
-    }//GEN-LAST:event_rot_yawActionPerformed
-
-    // rotate around vertical (y for cam), i.e. y axis of GRETA
-    private void rot_pitchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rot_pitchActionPerformed
-        if (rot_pitch != null){
-            double pitch = Double.parseDouble(rot_pitch.getText());
-            this.gazeuser.cam_rx = pitch;
-        }
-    }//GEN-LAST:event_rot_pitchActionPerformed
-
-    // rotate around depth axis(z for cam), i.e. x axis of GRETA
-    private void rot_rollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rot_rollActionPerformed
-        if (rot_roll != null){
-            double roll = Double.parseDouble(rot_roll.getText());
-            this.gazeuser.cam_rz = roll;
-        }
-    }//GEN-LAST:event_rot_rollActionPerformed
-
     private void agent_MGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agent_MGActionPerformed
         if (agent_MG.getText()!= null){
-            this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_MG.getText()));
+            synchronized(agent_MG){
+                this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_MG.getText()));
+            } 
+           
         }
     }//GEN-LAST:event_agent_MGActionPerformed
 
     private void agent_LAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agent_LAActionPerformed
         if (agent_LA.getText()!= null){
-            this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_LA.getText()));
+            synchronized(agent_LA){
+                this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_LA.getText()));
+            }
+            
         }
     }//GEN-LAST:event_agent_LAActionPerformed
 
     private void AU_mutualGazeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AU_mutualGazeActionPerformed
        if (AU_mutualGaze.getText()!= null){
-            this.gazeuser.setT_bothMG(Double.parseDouble(AU_mutualGaze.getText()));
+            synchronized(AU_mutualGaze){
+                this.gazeuser.setT_bothMG(Double.parseDouble(AU_mutualGaze.getText()));
+            }
+            
         }
     }//GEN-LAST:event_AU_mutualGazeActionPerformed
 
     private void AU_lookAwayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AU_lookAwayActionPerformed
         if (AU_lookAway.getText()!= null){
-            this.gazeuser.setT_bothAway(Double.parseDouble(AU_lookAway.getText()));
+            synchronized(AU_lookAway){
+                this.gazeuser.setT_bothAway(Double.parseDouble(AU_lookAway.getText()));
+            }
+            
         }
     }//GEN-LAST:event_AU_lookAwayActionPerformed
+
+    private void agentgazestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agentgazestatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_agentgazestatusActionPerformed
+
+    private void usergazestatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usergazestatusActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_usergazestatusActionPerformed
+
+    private void voiceEnergyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voiceEnergyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_voiceEnergyActionPerformed
+
+    private void thresholdIsSpeakingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_thresholdIsSpeakingActionPerformed
+        if (thresholdIsSpeaking.getText()!= null){
+            synchronized(thresholdIsSpeaking){
+                this.gazeuser.setThreshouldIntensity(Double.parseDouble(thresholdIsSpeaking.getText()));
+            }
+        }
+    }//GEN-LAST:event_thresholdIsSpeakingActionPerformed
     
     public void setPosandOrient (AgentGazeUser gazeuser){
         this.gazeuser = gazeuser;
@@ -406,33 +357,78 @@ public class SetCamPos extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AU_lookAway;
     private javax.swing.JTextField AU_mutualGaze;
-    private javax.swing.JLabel Cam_label;
     private javax.swing.JTextField agent_LA;
     private javax.swing.JTextField agent_MG;
-    private javax.swing.JLabel cam_position;
+    private javax.swing.JTextField agentgazestatus;
     private javax.swing.Box.Filler filler1;
     private java.awt.Canvas image;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JLabel lab_pitch;
-    private javax.swing.JLabel lab_roll;
-    private javax.swing.JLabel lab_yaw;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JLabel label_la_au;
     private javax.swing.JLabel label_mg_au;
-    private javax.swing.JLabel lbl_pos_x;
-    private javax.swing.JLabel lbl_pos_y;
-    private javax.swing.JLabel lbl_pos_z;
-    private javax.swing.JTextField pos_x;
-    private javax.swing.JTextField pos_y;
-    private javax.swing.JTextField pos_z;
-    private javax.swing.JTextField rot_pitch;
-    private javax.swing.JTextField rot_roll;
-    private javax.swing.JTextField rot_yaw;
+    private javax.swing.JTextField thresholdIsSpeaking;
+    private javax.swing.JTextField usergazestatus;
+    private javax.swing.JTextField voiceEnergy;
     // End of variables declaration//GEN-END:variables
+
+public double getMutualGaze(){
+    return Double.parseDouble(agent_MG.getText());
+}
+
+public double getLookAway(){
+    return Double.parseDouble(agent_LA.getText());
+}
+
+public double getAU_MG(){
+    return Double.parseDouble(AU_mutualGaze.getText());
+}
+
+public double getAU_LA(){
+    return Double.parseDouble(AU_lookAway.getText());
+}
+
+public void setAgentMG(double value){
+    agent_MG.setText(Double.toString(value));
+    gazeuser.getAgent().setTime_MG(value);
+}
+
+public void setAgentLA(double value){
+    agent_LA.setText(Double.toString(value));
+    gazeuser.getAgent().setTime_LA(value);
+}
+
+public void setAU_MG(double value){
+    AU_mutualGaze.setText(Double.toString(value));
+    gazeuser.setT_bothMG(value);
+}
+
+public void setAU_LA(double value){
+    AU_lookAway.setText(Double.toString(value));
+    gazeuser.setT_bothAway(value);
+}
+
+public void setThreshold(double value){
+    thresholdIsSpeaking.setText(Double.toString(value));
+    gazeuser.setThreshouldIntensity(value);
+}
+
+public double getThreshold(){
+    return Double.parseDouble(thresholdIsSpeaking.getText());
+}
+
+
+
+
 }

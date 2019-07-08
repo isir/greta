@@ -1,0 +1,50 @@
+import * from "base.material"
+
+material prudence_face : base {
+
+	set $ar 0.5
+	set $ag 0.43
+	set $ab 0.4
+	
+	set $sr 0.2
+	set $sg 0.2
+	set $sb 0.2
+	set $ss 5
+	set_texture_alias diffuseMap prudence/face.jpg
+	set_texture_alias celShadingMap prudence/face_cel.png
+}
+material prudence_hair : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 10
+	set $scaleU 2
+	set $scaleV 0.1
+	set_texture_alias diffuseMap prudence/hair.jpg
+	set_texture_alias celShadingMap prudence/hair_cel.png
+}
+
+material prudence_eyes : base {
+	set $sr 1
+	set $sg 1
+	set $sb 1
+	set $ss 127
+	set_texture_alias diffuseMap prudence/noisette.jpg
+	set_texture_alias celShadingMap prudence/noisette_cel.png
+}
+
+material prudence_glasses : base {
+	set $sr 0.6
+	set $sg 0.6
+	set $sb 0.6
+	set $ss 50
+}
+material prudence_lunettes : prudence_glasses {
+	set_texture_alias diffuseMap prudence/red_glasses_color.bmp
+	set_texture_alias celShadingMap prudence/red_glasses_color.bmp
+}
+
+material prudence_black_glasses : prudence_glasses {
+	set_texture_alias diffuseMap prudence/black_glasses_color.bmp
+	set_texture_alias celShadingMap prudence/black_glasses_color.bmp
+}

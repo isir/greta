@@ -23,6 +23,7 @@ import vib.core.signals.FaceSignal;
 import vib.core.signals.SpeechSignal;
 import vib.core.signals.gesture.GesturePose;
 import vib.core.signals.gesture.GestureSignal;
+import vib.core.util.CharacterManager;
 import vib.core.util.id.ID;
 import vib.core.util.log.Logs;
 import vib.core.util.time.Temporizable;
@@ -38,8 +39,10 @@ public class Feedbacks2Logs implements FeedbackPerformer {
     private boolean detailedFeedbacks;
     private boolean detailsOnFace;
     private boolean detailsOnGestures;
+    private CharacterManager charactermanager;
 
-    public Feedbacks2Logs() {
+    public Feedbacks2Logs(CharacterManager cm) {
+        this.charactermanager = cm;
         detailedFeedbacks = true;
     }
 
@@ -87,7 +90,8 @@ public class Feedbacks2Logs implements FeedbackPerformer {
 
     @Override
     public void performFeedback(Callback callback) {
-        String content = callback.animId() + " " + callback.type() + " " + String.valueOf(callback.time());
+        String content = "fml_id: " + callback.animId().getFmlID() + ", type: " + callback.type() + ", time: " + callback.time() + ", agent: " + this.charactermanager.getCurrentCharacterName();
+        //String content = callback.animId() + " " + callback.type() + " " + String.valueOf(callback.time());
         //String content = "{id: \"" + callback.animId() +"\", "+"type: \""+callback.type()+"\", "+ "time: " + String.valueOf(callback.time()) + "}";
         Logs.info(content);
     }

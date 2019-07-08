@@ -549,18 +549,26 @@ public class SSIXMLToFrameTranslator extends TextReceiver implements SSIFrameEmi
                                 SSIVoiceEnergyValues energyValue = SSIVoiceEnergyValues.none;
 
                                 if (energyStringValue != null) {
-                                    if (energyStringValue.equalsIgnoreCase("Low")){
-                                        energyValue = SSIVoiceEnergyValues.low;
-                                    }
-                                    else if (energyStringValue.equalsIgnoreCase("Medium")){
-                                        energyValue = SSIVoiceEnergyValues.medium;
-                                    }
-                                    else if (energyStringValue.equalsIgnoreCase("High")){
-                                        energyValue = SSIVoiceEnergyValues.high;
+                                    
+                                    if (!energyStringValue.equals("Low") && !energyStringValue.equals("Medium") && !energyStringValue.equals("High")){
+                                        double energy = Double.parseDouble(energyStringValue);
+                                        frame.applyValue(SSIFeatureNames.prosody_opensmile_energy_cat, energy);
+                                    }else{
+                                        if (energyStringValue.equalsIgnoreCase("Low")){
+                                            energyValue = SSIVoiceEnergyValues.low;
+                                        }
+                                        else if (energyStringValue.equalsIgnoreCase("Medium")){
+                                            energyValue = SSIVoiceEnergyValues.medium;
+                                        }
+                                        else if (energyStringValue.equalsIgnoreCase("High")){
+                                            energyValue = SSIVoiceEnergyValues.high;
+                                        }
+                                        
+                                        frame.applyValue(SSIFeatureNames.prosody_opensmile_energy_cat, energyValue.ordinal());
                                     }
                                 }
 
-                                frame.applyValue(SSIFeatureNames.prosody_opensmile_energy_cat, energyValue.ordinal());
+                                
                             }
                         } // End of if children is feature
                     } // End for opensmile children

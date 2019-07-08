@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import vib.core.animation.Frame;
 import vib.core.animation.mpeg4.bap.BAP;
 import vib.core.animation.mpeg4.bap.BAPFrame;
@@ -105,6 +107,11 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
                 }
 
                 currentRequestIds.clear();
+            }
+            try {
+                Thread.sleep(10); // in ms
+            } catch (InterruptedException ex) {
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
             }
         }
     }

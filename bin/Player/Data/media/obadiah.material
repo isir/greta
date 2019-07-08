@@ -1,0 +1,146 @@
+import * from "base.material"
+
+material obadiah_face : base {
+	set $sr 0.2
+	set $sg 0.2
+	set $sb 0.2
+	set $ss 5
+	set_texture_alias diffuseMap obadiah/face.jpg
+	set_texture_alias celShadingMap obadiah/face_cel.png
+}
+
+
+material obadiah_hair : base {
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 20
+	set $scaleU 5
+	set $scaleV 1
+	set_texture_alias diffuseMap obadiah/hair.jpg
+	set_texture_alias celShadingMap obadiah/hair_cel.bmp
+}
+
+material obadiah_eyes : base {
+	set $sr 1
+	set $sg 1
+	set $sb 1
+	set $ss 127
+	set_texture_alias diffuseMap obadiah/vertMarron.jpg	
+	set_texture_alias celShadingMap obadiah/vertMarron_cel.png	
+}
+
+material obadiah_shoes : base {
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 105
+	set_texture_alias diffuseMap obadiah/shoes_color.bmp
+	set_texture_alias celShadingMap obadiah/shoes_color.bmp
+}
+
+material obadiah_face_old {
+	receive_shadows on
+	technique {
+		pass {
+			ambient 0.5 0.5 0.5 1
+			diffuse 0.8 0.8 0.8 1
+            specular 0.2 0.2 0.2 5
+			texture_unit
+			{
+				texture obadiah/face_old.jpg
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material obadiah_hair_old {
+	receive_shadows on
+	technique
+	{
+		pass
+		{
+			ambient 0.5 0.5 0.5 1
+			diffuse 0.8 0.8 0.8 1
+            specular 0.5 0.5 0.5 20
+			cull_hardware none
+			cull_software none
+			texture_unit
+			{
+				texture obadiah/hair_old.jpg
+				scale 0.225 2.0
+				colour_op modulate
+			}
+		}
+	}
+}
+
+material obadiah_pants : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 5
+	set_texture_alias diffuseMap obadiah/gray_pant.png
+	set_texture_alias celShadingMap obadiah/gray_pant_cel.bmp
+}
+
+material obadiah_shirt : base {
+	set $sr 0.4
+	set $sg 0.4
+	set $sb 0.4
+	set $ss 5
+	set_texture_alias diffuseMap obadiah/shirt.jpg
+	set_texture_alias celShadingMap obadiah/shirt_cel.png
+}
+
+material obadiah_collar : base {
+	set $sr 0.4
+	set $sg 0.4
+	set $sb 0.4
+	set $ss 5
+	set_texture_alias diffuseMap obadiah/shirt-collar.jpg
+	set_texture_alias celShadingMap obadiah/shirt-collar_cel.png
+}
+
+material obadiah_jacket : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 5
+	set_texture_alias diffuseMap obadiah/jacket.jpg
+	set_texture_alias celShadingMap obadiah/jacket_cel.bmp
+}
+
+material obadiah_pocket : base {
+	set $sr 0.3
+	set $sg 0.3
+	set $sb 0.3
+	set $ss 5
+	set_texture_alias diffuseMap obadiah/pocket.jpg
+	set_texture_alias celShadingMap obadiah/jacket_cel.bmp
+}
+
+material obadiah_button : base {
+	set $sr 0.5
+	set $sg 0.5
+	set $sb 0.5
+	set $ss 10
+	set_texture_alias diffuseMap obadiah/button_color.bmp
+	set_texture_alias celShadingMap obadiah/button_color.bmp
+}
+
+material obadiah_skin : base {
+	set_texture_alias diffuseMap obadiah/skin.jpg
+	set_texture_alias celShadingMap obadiah/skin_cel.bmp
+}
+
+material obadiah_nail: base {
+	set $sr 0.2
+	set $sg 0.2
+	set $sb 0.2
+	set $ss 50
+	set_texture_alias diffuseMap obadiah/skin_cel.bmp
+	set_texture_alias celShadingMap obadiah/skin_cel.bmp
+}
+

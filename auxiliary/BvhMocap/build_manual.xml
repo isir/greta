@@ -42,6 +42,10 @@
     <target name="build.dependency.animationcore" if="${need.animationcore}">
         <ant antfile="../../core/AnimationCore/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
+	
+	<target name="build.dependency.utilx" if="${need.utilx}">
+        <ant antfile="../../core/Utilx/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     <!-- -->
     
     <path id="path.jars">
@@ -51,6 +55,7 @@
             <include name="MPEG4.jar"/>
             <include name="GestureAnimation.jar"/>
             <include name="AnimationCore.jar"/>
+			<include name="Utilx.jar"/>
         </fileset>    
     </path>
     
@@ -105,11 +110,22 @@
             </not>
         </condition>
         <antcall target="build.dependency.animationcore"/>
+		
+		<condition property="need.utilx">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Utilx.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.utilx"/>
+		
         <!-- -->
     </target>
     
     <target name="compile" depends="delete.classes, makedir, build.dependencies">
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false">
+        <javac encoding="UTF-8" srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false">
             <classpath refid="path.jars"/>
         </javac>
         <copy todir="${classes.dir}">

@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<behaviorsets xmlns="http://www.w3schools.com" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="mmsystem/xsd/behaviorsets.xsd">
+
+
+<!-- affect -->
+
+<behaviorset name="emotion-boredom">
+    <signals>
+      <signal id="1" name="faceexp=boredom" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+<behaviorset name="emotion-sadness">
+    <signals>
+      <signal id="1" name="Down" modality="head"/>
+      <signal id="2" name="faceexp=sadness" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="2"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+<behaviorset name="emotion-despair">
+    <signals>
+      <signal id="1" name="Down" modality="head"/>
+      <signal id="2" name="faceexp=despair" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="2"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+<behaviorset name="emotion-envy">
+    <signals>
+      <signal id="1" name="faceexp=envy" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+
+
+<!-- performative -->
+
+ <behaviorset name="performative-disagree">
+    <signals>
+      <signal id="1" name="faceexp=disagree" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+ <behaviorset name="performative-agree">
+    <signals>
+      <signal id="1" name="faceexp=agree" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+<behaviorset name="performative-dislike">
+    <signals>
+      <signal id="1" name="faceexp=Disliking" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+<behaviorset name="performative-like">
+    <signals>
+      <signal id="1" name="faceexp=liking" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+<behaviorset name="performative-disbelief">
+    <signals>
+      <signal id="1" name="faceexp=disbelief" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+<behaviorset name="performative-understand">
+    <signals>
+      <signal id="1" name="faceexp=understand" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+<behaviorset name="performative-doubt">
+    <signals>
+      <signal id="1" name="faceexp=doubt" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+
+<!-- backchannels -->
+
+
+  <behaviorset name="backchannel-agreement">
+    <signals>
+      <signal id="1" name="Nod_Middle" modality="head">
+        <alternative name="Nod_Big" probability="0.6"/>
+      </signal>
+      <signal id="2" name="faceexp=Pout_Eyes_HalfClosed" modality="face">
+        <alternative name="faceexp=Eyebrows_Raise" probability="0.2"/>
+        <alternative name="faceexp=Pout_Eyes_Open" probability="0.2"/>
+      </signal>
+      <signal id="3" name="gaze=look_down" modality="gaze">
+	<alternative name="gaze=look_down_right" probability="0.2"/>
+	<alternative name="gaze=look_at" probability="0.2"/>
+      </signal>
+      <signal id="4" name="text" modality="speech" content="yeah" intonation="low" voicequality="modal" meaning="agreeing">
+	<alternative name="text" content="right" intonation="low" voicequality="modal" meaning="agreeing" probability="0.3"/>
+	<alternative name="text" content="yeah" intonation="rising" voicequality="modal" meaning="agreeing" probability="0.2"/>   
+	<alternative name="text" content="definitely" intonation="rising" voicequality="modal" meaning="agreeing" probability="0.2"/>
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+        <implication>
+          <ifpresent id="2"/>
+          <thenpresent id="3"/>
+        </implication>
+      </rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-disagreement">
+    <signals>
+      <signal id="1" name="Shake_Small" modality="head">
+        <alternative name="Shake_Big" probability="0.3"/>
+      </signal>
+      <signal id="2" name="faceexp=sadness" modality="face">
+        <alternative name="faceexp=Eyebrows_Sad" probability="0.5"/>
+	<alternative name="faceexp=Mouth_Sad" probability="0.2"/>
+      </signal>
+      <signal id="3" name="gaze=look_down_left" modality="gaze">
+	<alternative name="gaze=look_down" probability="0.5"/>
+	<alternative name="gaze=look_at" probability="0.2"/>
+      </signal>
+      <signal id="4" name="text" modality="speech" content="yeah" intonation="low" voicequality="modal" meaning="disagreeing">
+	<alternative name="text" content="nae" intonation="rising" voicequality="modal" meaning="disagreeing" probability="0.2"/>   
+	<alternative name="text" content="well" intonation="rising" voicequality="modal" meaning="disagreeing" probability="0.2"/>   
+	<alternative name="text" content="mhmh" intonation="rising" voicequality="modal" meaning="disagreeing" probability="0.2"/>   
+	<alternative name="text" content="(sigh)" intonation="rising" voicequality="modal" meaning="disagreeing" probability="0.2"/> 
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+        <implication>
+          <ifpresent id="2"/>
+          <thenpresent id="3"/>
+        </implication>
+      </rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-acceptance">
+    <signals>
+      <signal id="1" name="Nod_Middle" modality="head">
+        <alternative name="Nod_Big" probability="0.6"/>
+      </signal>
+      <signal id="2" name="faceexp=Pout_Eyes_HalfClosed" modality="face">
+        <alternative name="faceexp=Eyebrows_Raise" probability="0.2"/>
+        <alternative name="faceexp=Pout_Eyes_Open" probability="0.2"/>
+      </signal>
+      <signal id="3" name="gaze=look_down_left" modality="gaze">
+	<alternative name="gaze=look_down_right" probability="0.3"/>
+	<alternative name="gaze=look_down" probability="0.5"/>
+	<alternative name="gaze=look_at" probability="0.2"/>
+      </signal>
+      <signal id="4" name="text" modality="speech" content="mhmh_yeah" intonation="low" voicequality="modal" meaning="accept">
+	<alternative name="text" content="yeah" intonation="low" voicequality="modal" meaning="accept" probability="0.4"/>
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+
+			</core>
+      <rules>
+        <implication>
+          <ifpresent id="2"/>
+          <thenpresent id="4"/>
+        </implication>
+      </rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-refusal">
+    <signals>
+      <signal id="1" name="Shake_Small" modality="head">
+        <alternative name="Shake_Big" probability="0.4"/>
+      </signal>
+      <signal id="2" name="faceexp=Eyerows_Sad" modality="face">
+        <alternative name="faceexp=disbelief" probability="0.6"/>
+      </signal>
+      <signal id="3" name="gaze=look_left" modality="gaze">
+	<alternative name="gaze=look_right" probability="0.3"/>
+	<alternative name="gaze=look_at" probability="0.2"/>
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+        <implication>
+          <ifpresent id="2"/>
+          <thenpresent id="3"/>
+        </implication>
+      </rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-liking">
+    <signals>
+      <signal id="1" name="faceexp=Liking" modality="face">
+        <alternative name="faceexp=Smile_Small_Closed" probability="0.4"/>
+      </signal>
+      <signal id="2" name="gaze=look_at" modality="gaze">
+	<alternative name="gaze=look_down" probability="0.2"/>
+      </signal>
+      <signal id="3" name="text" modality="speech" content="no" meaning="friendly" intonation="rising" voicequality="breathy">
+        <alternative name="text" content="of course not" meaning="friendly" intonation="rising" voicequality="breathy" probability="0.3"/>
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+
+			</core>
+      <rules>
+
+			</rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-disliking">
+    <signals>
+      <signal id="1" name="faceexp=Disliking" modality="face">
+	<alternative name="faceexp=disbelief" probability="0.8"/>
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+
+			</core>
+      <rules>
+
+			</rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-understanding">
+    <signals>
+      <signal id="1" name="Nod_Middle" modality="head">
+        <alternative name="Nod_Big" probability="0.3"/>
+      </signal>
+      <signal id="2" name="faceexp=Eyebrows_Raise" modality="face"/>
+      <signal id="3" name="text" modality="speech" content="yeah" intonation="low" voicequality="modal" meaning="understand">
+	<alternative name="text" content="mhmh" intonation="low" voicequality="modal" meaning="understand" probability="0.4"/>
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+
+			</core>
+      <rules>
+
+			</rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-no_understanding">
+    <signals>
+      <signal id="1" name="faceexp=Eyebrows_Frown" modality="face"/>
+      <signal id="2" name="Aside_Left" modality="head">
+        <alternative name="Aside_Right" probability="0.5"/>
+      </signal>
+      <signal id="3" name="text" modality="speech" content="ma" intonation="low" voicequality="modal" meaning="dontunderstand"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+
+			</rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-interest">
+    <signals>
+      <signal id="1" name="faceexp=Eyebrows_Raise" modality="face"/>
+      <signal id="2" name="Aside_Left" modality="head">
+        <alternative name="Aside_Right" probability="0.3"/>
+        <alternative name="Nod_Middle" probability="0.1"/>
+        <alternative name="Nod_Big" probability="0.1"/>
+        <alternative name="Nod_Small" probability="0.1"/>
+      </signal>
+      <signal id="3" name="text" modality="speech" content="yeah" intonation="low" voicequality="modal" meaning="interested">
+	<alternative name="text" content="yeah" intonation="rising" voicequality="modal" meaning="interested" probability="0.5"/>   
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+
+			</core>
+      <rules>
+        <implication>
+          <ifpresent id="2"/>
+          <thenpresent id="1"/>
+        </implication>
+      </rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-no_interest">
+    <signals>
+      <signal id="1" name="gaze=look_down_right" modality="gaze">
+	<alternative name="gaze=look_down_left" probability="0.5"/>
+      </signal>
+      <signal id="2" name="Aside_Left" modality="head">
+        <alternative name="Aside_Right" probability="0.5"/>
+      </signal>
+      <signal id="3" name="text" modality="speech" content="(sigh)" intonation="rising" voicequality="modal" meaning="uninterested">
+	<alternative name="text" content="nae" intonation="rising" voicequality="modal" meaning="uninterested" probability="0.2"/>   
+	<alternative name="text" content="ma" intonation="rising" voicequality="modal" meaning="uninterested" probability="0.2"/>   
+	<alternative name="text" content="well" intonation="rising" voicequality="modal" meaning="uninterested" probability="0.1"/>   
+	<alternative name="text" content="yeah" intonation="rising" voicequality="modal" meaning="uninterested" probability="0.1"/>   
+	<alternative name="text" content="mhmh" intonation="rising" voicequality="modal" meaning="uninterested" probability="0.1"/>   
+	<alternative name="text" content="alright" intonation="rising" voicequality="modal" meaning="uninterested" probability="0.1"/>
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+
+			</core>
+      <rules>
+
+			</rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-belief">
+    <signals>
+      <signal id="1" name="faceexp=Eyebrows_Raise" modality="face">
+        <alternative name="faceexp=Smile_Small_Closed" probability="0.5"/>
+      </signal>
+      <signal id="2" name="Aside_Left" modality="head">
+        <alternative name="Aside_Right" probability="0.5"/>
+      </signal>
+      <signal id="3" name="text" modality="speech" content="yeah" intonation="rising" voicequality="modal" meaning="certain">  
+	<alternative name="text" content="right" intonation="rising" voicequality="modal" meaning="certain" probability="0.2"/>   
+	<alternative name="text" content="mhmh" intonation="rising" voicequality="modal" meaning="certain" probability="0.2"/>   
+	<alternative name="text" content="oh_right" intonation="rising" voicequality="modal" meaning="certain" probability="0.2"/>   
+	<alternative name="text" content="definitely" intonation="rising" voicequality="modal" meaning="certain" probability="0.2"/> 
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+
+			</core>
+      <rules>
+        <implication>
+          <ifpresent id="2"/>
+          <thenpresent id="1"/>
+        </implication>
+      </rules>
+    </constraints>
+  </behaviorset>
+  <behaviorset name="backchannel-disbelief">
+    <signals>
+      <signal id="1" name="faceexp=Eyebrows_Frown" modality="face">
+        <alternative name="faceexp=disbelief" probability="0.5"/>
+      </signal>
+      <signal id="2" name="Aside_Left" modality="head">
+        <alternative name="Aside_Right" probability="0.5"/>
+      </signal>
+      <signal id="3" name="text" modality="speech" content="mhmh" intonation="rising" voicequality="modal" meaning="uncertain">
+	<alternative name="text" content="mhmh" intonation="rising" voicequality="modal" meaning="uncertain" probability="0.2"/>   
+	<alternative name="text" content="nae" intonation="rising" voicequality="modal" meaning="uncertain" probability="0.2"/>   
+	<alternative name="text" content="(sigh)" intonation="rising" voicequality="modal" meaning="uncertain" probability="0.2"/>   
+	<alternative name="text" content="mhmh_yeah" intonation="rising" voicequality="breathy" meaning="uncertain" probability="0.2"/>
+      </signal>
+    </signals>
+    <constraints>
+      <core>
+
+			</core>
+      <rules>
+
+			</rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-amusement">
+    <signals>
+      <signal id="1" name="faceexp=joy" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+
+  <behaviorset name="backchannel-anger">
+    <signals>
+      <signal id="1" name="faceexp=anger" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-sadness">
+    <signals>
+      <signal id="1" name="faceexp=sadness" modality="face"/>
+      <signal id="2" name="text" modality="speech" content="well" intonation="rising" voicequality="modal" meaning="sadness">
+	<alternative name="text" content="right" intonation="rising" voicequality="modal" meaning="sadness" probability="0.3"/>   
+	<alternative name="text" content="ma" intonation="rising" voicequality="modal" meaning="sadness" probability="0.2"/>   
+	<alternative name="text" content="(sigh)" intonation="rising" voicequality="modal" meaning="sadness" probability="0.2"/> 
+     </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-happiness">
+    <signals>
+      <signal id="1" name="faceexp=happy-for" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-contempt">
+    <signals>
+      <signal id="1" name="faceexp=contempt" modality="face"/>
+      <signal id="2" name="text" modality="speech" content="right" intonation="rising" voicequality="modal" meaning="contempt">  
+	<alternative name="text" content="ma" intonation="rising" voicequality="modal" meaning="contempt" probability="0.3"/>   
+	<alternative name="text" content="well" intonation="rising" voicequality="modal" meaning="contempt" probability="0.3"/> 
+     </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-low-anticipation">
+    <signals>
+      <signal id="1" name="text" modality="speech" content="ma" intonation="rising" voicequality="modal" meaning="low-anticipation"> 	
+	<alternative name="text" content="nae" intonation="rising" voicequality="modal" meaning="low-anticipation" probability="0.3"/>   
+	<alternative name="text" content="yeah" intonation="rising" voicequality="breathy" meaning="low-anticipation" probability="0.2"/>   
+	<alternative name="text" content="(sigh)" intonation="rising" voicequality="modal" meaning="low-anticipation" probability="0.2"/>
+     </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-high-anticipation">
+    <signals>
+      <signal id="1" name="text" modality="speech" content="yeah" intonation="rising" voicequality="modal" meaning="high-anticipation"> 
+	<alternative name="text" content="mhmh" intonation="rising" voicequality="modal" meaning="high-anticipation" probability="0.2"/>   
+	<alternative name="text" content="oh_right" intonation="rising" voicequality="modal" meaning="high-anticipation" probability="0.2"/>   
+	<alternative name="text" content="mhmh_yeah" intonation="rising" voicequality="breathy" meaning="high-anticipation" probability="0.2"/>   
+	<alternative name="text" content="definitely" intonation="rising" voicequality="modal" meaning="high-anticipation" probability="0.2"/>
+     </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-low-solidarity">
+    <signals>
+      <signal id="1" name="text" modality="speech" content="nae" intonation="rising" voicequality="modal" meaning="low-solidarity">
+	<alternative name="text" content="(sigh)" intonation="rising" voicequality="modal" meaning="low-solidarity" probability="0.2"/>   
+	<alternative name="text" content="mhmh" intonation="rising" voicequality="modal" meaning="low-solidarity" probability="0.2"/>   
+	<alternative name="text" content="mhmh_yeah" intonation="rising" voicequality="breathy" meaning="low-solidarity" probability="0.2"/>   
+	<alternative name="text" content="alright" intonation="rising" voicequality="modal" meaning="low-solidarity" probability="0.1"/>   
+	<alternative name="text" content="right" intonation="rising" voicequality="modal" meaning="low-solidarity" probability="0.1"/>
+     </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-high-solidarity">
+    <signals>
+      <signal id="1" name="text" modality="speech" content="oh_right" intonation="rising" voicequality="modal" meaning="high-solidarity"> 
+	<alternative name="text" content="yeah" intonation="rising" voicequality="modal" meaning="high-solidarity" probability="0.3"/>   
+	<alternative name="text" content="oh_yeah" intonation="rising" voicequality="modal" meaning="high-solidarity" probability="0.2"/>   
+	<alternative name="text" content="definitely" intonation="rising" voicequality="modal" meaning="high-solidarity" probability="0.2"/>
+     </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-low-antagonism">
+    <signals>
+      <signal id="1" name="text" modality="speech" content="right" intonation="rising" voicequality="modal" meaning="low-antagonism">   
+	<alternative name="text" content="yeah" intonation="rising" voicequality="modal" meaning="low-antagonism" probability="0.2"/>   
+	<alternative name="text" content="mh_yeah" intonation="rising" voicequality="modal" meaning="low-antagonism" probability="0.2"/>   
+	<alternative name="text" content="oh_yeah" intonation="rising" voicequality="modal" meaning="low-antagonism" probability="0.2"/>   
+	<alternative name="text" content="right" intonation="rising" voicequality="modal" meaning="low-antagonism" probability="0.1"/>   
+	<alternative name="text" content="definitely" intonation="rising" voicequality="modal" meaning="low-antagonism" probability="0.1"/> 
+     </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="backchannel-high-antagonism">
+    <signals>
+      <signal id="1" name="text" modality="speech" content="ma" intonation="rising" voicequality="modal" meaning="high-antagonism"> 
+	<alternative name="text" content="well" intonation="rising" voicequality="modal" meaning="high-antagonism" probability="0.2"/>   
+	<alternative name="text" content="yeah" intonation="rising" voicequality="modal" meaning="high-antagonism" probability="0.2"/>   
+	<alternative name="text" content="mhmh" intonation="rising" voicequality="modal" meaning="high-antagonism" probability="0.2"/>   
+	<alternative name="text" content="yeah" intonation="rising" voicequality="breathy" meaning="high-antagonism" probability="0.2"/>
+     </signal>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+
+</behaviorsets>

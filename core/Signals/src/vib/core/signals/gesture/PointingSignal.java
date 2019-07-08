@@ -56,14 +56,14 @@ public class PointingSignal extends GestureSignal implements SignalTargetable, C
     @Override
     public void onCharacterChanged() {
         //set the current library to use :
-        origin= getCharacterManager().currentCharacterId;
+        origin= getCharacterManager().getCurrentCharacterId();
     }
 
     public PointingSignal(String id) {
         super(id);
         this.target = "";
         this.mode = Side.RIGHT;
-        origin=getCharacterManager().currentCharacterId;
+        origin=getCharacterManager().getCurrentCharacterId();
         target="";
         offsetDirection=GazeDirection.FRONT;
         offsetAngle=0.0;

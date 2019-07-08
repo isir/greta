@@ -12,6 +12,8 @@
     <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
     
     <property name="internal.player.dir" location="../../bin/Player/Lib/Internal" />
+	
+	<property name="jackson.jar.dir" location="../../bin/Common/Lib/External/jackson" />
     
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
@@ -152,6 +154,15 @@
     <target name="build.dependency.plancapture" if="${need.plancapture}">
         <ant antfile="../../auxiliary/PlanCapture/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
+	
+	<target name="build.dependency.conversationalgaze" if="${need.conversationalgaze}">
+        <ant antfile="../../auxiliary/ConversationalGaze/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+	
+	<target name="build.dependency.fmlannotator" if="${need.fmlannotator}">
+        <ant antfile="../../auxiliary/FMLAnnotator/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+	
     <!-- -->
     
     <path id="path.jars">
@@ -161,6 +172,11 @@
         </fileset>
         <fileset dir="${external.jar.dir}">
             <include name="jgraphx.jar"/>
+        </fileset>
+		<fileset dir="${jackson.jar.dir}">
+            <include name="jackson-annotations-2.9.0.jar"/>
+            <include name="jackson-core-2.9.8.jar"/>
+            <include name="jackson-databind-2.9.8.jar"/>
         </fileset>
     </path>
     
@@ -475,11 +491,32 @@
             </not>
         </condition>
         <antcall target="build.dependency.plancapture"/>
+		
+		<condition property="need.conversationalgaze">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/ConversationalGaze.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.conversationalgaze"/>
+		
+		<condition property="need.fmlannotator">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/FMLAnnotator.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.fmlannotator"/>
+		
         <!-- -->
     </target>
     
     <target name="compile" depends="delete.classes, makedir, build.dependencies">
-        <javac srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false">
+        <javac encoding="UTF-8" srcdir="${src.dir}" destdir="${classes.dir}" includeAntRuntime="false">
             <classpath refid="path.jars"/>
         </javac>
         <copy todir="${classes.dir}">
@@ -506,6 +543,7 @@
             <map from="${jar.dir}" to="./Common/Lib/Internal"/>
             <map from="${external.jar.dir}" to="./Common/Lib/External"/>
             <map from="${internal.player.dir}" to="./Player/Lib/Internal"/>
+			<map from="${jackson.jar.dir}" to="../External/jackson"/>
         </pathconvert> 
         <jar destfile="${modular.jar.output}" basedir="${classes.dir}">
             <manifest>

@@ -57,4 +57,15 @@ public class FAPFrameEmitterImpl implements FAPFrameEmitter {
         sendFAPFrames(requestId, frame);
     }
 
+    /**
+     * Sends a message to cancel all the {@code FAPFrame} with the given {@code ID} to all linked FAPFramePerformer.
+     * @param requestId ID of the frames to cancel
+     */
+    public void cancelFramesWithIDInLinkedPerformers(ID requestId) {
+        for (FAPFramePerformer performer : performers) {
+            if (performer instanceof CancelableFAPFramePerformer) {
+                ((CancelableFAPFramePerformer) performer).cancelFAPFramesById(requestId);
+            }
+        }
+    }
 }

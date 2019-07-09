@@ -16,21 +16,11 @@
  */
 package vib.core.animation.performer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import vib.core.animation.Frame;
-import vib.core.animation.mpeg4.bap.BAP;
-import vib.core.animation.mpeg4.bap.BAPFrame;
-import vib.core.animation.mpeg4.bap.BAPFramesEmitter;
-import vib.core.animation.mpeg4.bap.BAPFramesPerformer;
-import vib.core.animation.mpeg4.bap.BAPType;
-import vib.core.animation.mpeg4.bap.JointType;
+import vib.core.animation.mpeg4.bap.*;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
 import vib.core.util.CharacterDependentAdapterThread;
@@ -137,6 +127,24 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             int bapFrameNumber = bapFrame.getFrameNumber();
             requestIds.put(bapFrameNumber, requestId);
             requestFrames.put(bapFrameNumber, bapFrame);
+        }
+    }
+
+    public void cancelFramesWithId(ID requestId) {
+        synchronized (this) {
+            Iterator<Map.Entry<Integer, ID>> requestIdsIterator = requestIds.entrySet().iterator();
+            while (requestIdsIterator.hasNext()) {
+                Map.Entry<Integer, ID> frameNumberIdPair = requestIdsIterator.next();
+                if (frameNumberIdPair.getValue() == requestId) {
+                    requestFrames.remove(frameNumberIdPair.getKey());
+                    requestIdsIterator.remove();
+                }
+            }
+            for (BAPFramesPerformer performer : bapFramesPerformers) {
+                if (performer instanceof CancelableBAPFramesPerformer) {
+                    ((CancelableBAPFramesPerformer) performer).cancelBAPFramesById(requestId);
+                }
+            }
         }
     }
 

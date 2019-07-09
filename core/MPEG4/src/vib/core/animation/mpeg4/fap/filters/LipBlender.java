@@ -92,44 +92,40 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
         faceAnimation.add(new FAPIDPair(requestId,fap_anim));
     }
 
+    @Override
+    public void cancelFAPFramesById(ID requestId) {
+        faceAnimation.removeIf(fapIdPair -> fapIdPair.animId == requestId);
+        cancelFramesWithIDInLinkedPerformers(requestId);
+    }
 
     private void computeAndSend(){
-        //check identique frame numbers in both list
-        ArrayList<FAPFrame> blended = new ArrayList<FAPFrame>();
-        int f=0;
-        int l=0;
-        ArrayList<ID> animIDs = new ArrayList<ID>(2);
-        synchronized (this){
-            while(f<faceAnimation.size() && l<lipAnimation.size()){
-                int f_num = faceAnimation.get(f).frame.getFrameNumber();
-                int l_num = lipAnimation.get(l).frame.getFrameNumber();
-                if(f_num<l_num){
-                    ++f;
-                }
-                else{
-                    if(f_num>l_num){
-                        ++l;
+        Map<ID, List<FAPFrame>> blendedFapFramesWithId = new HashMap<>();
+        int faceAnimationIndex = 0;
+        int lipAnimationIndex = 0;
+        synchronized (this) {
+            while (faceAnimationIndex < faceAnimation.size() && lipAnimationIndex < lipAnimation.size()) {
+                FAPIDPair faceAnimationPair = faceAnimation.get(faceAnimationIndex);
+                int faceFrameNb = faceAnimationPair.frame.getFrameNumber();
+                FAPIDPair lipAnimationPair = lipAnimation.get(lipAnimationIndex);
+                int lipFrameNb = lipAnimationPair.frame.getFrameNumber();
+                if (faceFrameNb < lipFrameNb){
+                    ++faceAnimationIndex;
+                } else if (faceFrameNb > lipFrameNb){
+                    ++lipAnimationIndex;
+                } else {
+                    // We choose to consider face movement more important than lip movement.
+                    // If IDs are equal, the common id is used, otherwise the face id is used : the face id is always used.
+                    if (!blendedFapFramesWithId.containsKey(faceAnimationPair.animId)) {
+                        blendedFapFramesWithId.put(faceAnimationPair.animId, new ArrayList<>());
                     }
-                    else{
-                        //they are equal
-                        blended.add(blend(faceAnimation.get(f).frame, lipAnimation.get(l).frame));
-                        if( ! animIDs.contains(faceAnimation.get(f).animId)){
-                            animIDs.add(faceAnimation.get(f).animId);
-                        }
-                        if( ! animIDs.contains(lipAnimation.get(l).animId)){
-                            animIDs.add(lipAnimation.get(l).animId);
-                        }
-                        faceAnimation.remove(f);
-                        lipAnimation.remove(l);
-                    }
+                    blendedFapFramesWithId.get(faceAnimationPair.animId).add(blend(faceAnimationPair.frame, lipAnimationPair.frame));
+                    faceAnimation.remove(faceAnimationIndex);
+                    lipAnimation.remove(lipAnimationIndex);
                 }
             }
         }
-        if(!blended.isEmpty()){
-            ID id = animIDs.size()>1 ?
-                        IDProvider.createID("LipBlender", animIDs) :
-                        animIDs.get(0);
-            sendFAPFrames(id, blended);
+        for (Map.Entry<ID, List<FAPFrame>> idWithCorrespondingFrames : blendedFapFramesWithId.entrySet()) {
+            sendFAPFrames(idWithCorrespondingFrames.getKey(), idWithCorrespondingFrames.getValue());
         }
     }
 

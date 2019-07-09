@@ -57,4 +57,16 @@ public class BAPFramesEmitterImpl implements BAPFramesEmitter{
     public void sendBAPFrame(ID requestId, BAPFrame frame){
         sendBAPFrames(requestId, frame);
     }
+
+    /**
+     * Sends a message to cancel all the {@code BAPFrame} with the given {@code ID} to all linked BAPFramesPerformer.
+     * @param requestId ID of the frames to cancel
+     */
+    public void cancelFramesWithIDInLinkedPerformers(ID requestId) {
+        for (BAPFramesPerformer performer : performers) {
+            if (performer instanceof CancelableBAPFramesPerformer) {
+                ((CancelableBAPFramesPerformer) performer).cancelBAPFramesById(requestId);
+            }
+        }
+    }
 }

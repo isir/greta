@@ -17,7 +17,6 @@
 package vib.core.behaviorrealizer;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import vib.core.behaviorrealizer.keyframegenerator.FaceKeyframeGenerator;
@@ -29,18 +28,14 @@ import vib.core.behaviorrealizer.keyframegenerator.LaughKeyframeGenerator;
 import vib.core.behaviorrealizer.keyframegenerator.ShoulderKeyframeGenerator;
 import vib.core.behaviorrealizer.keyframegenerator.SpeechKeyframeGenerator;
 import vib.core.behaviorrealizer.keyframegenerator.TorsoKeyframeGenerator;
-import vib.core.keyframes.AudioKeyFrame;
-import vib.core.keyframes.Keyframe;
-import vib.core.keyframes.KeyframeEmitter;
-import vib.core.keyframes.KeyframePerformer;
-import vib.core.keyframes.PhonemSequence;
+import vib.core.keyframes.*;
 import vib.core.repositories.FaceLibrary;
 import vib.core.repositories.Gestuary;
 import vib.core.repositories.HeadLibrary;
 import vib.core.repositories.SignalFiller;
 import vib.core.repositories.TorsoLibrary;
+import vib.core.signals.CancelableSignalPerformer;
 import vib.core.signals.Signal;
-import vib.core.signals.SignalPerformer;
 import vib.core.signals.gesture.PointingSignal;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
@@ -62,7 +57,7 @@ import vib.core.util.time.Temporizer;
  * @navassoc - - * vib.core.keyframes.Keyframe
  * @inavassoc - - * vib.core.signals.Signal
  */
-public class Realizer extends CallbackSender implements SignalPerformer, KeyframeEmitter, CharacterDependent {
+public class Realizer extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent {
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
@@ -201,6 +196,15 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     }
 
     @Override
+    public void cancelSignalsById(ID requestId) {
+        for (KeyframePerformer performer : keyframePerformers) {
+            if (performer instanceof CancelableKeyframePerformer) {
+                ((CancelableKeyframePerformer) performer).cancelKeyframesById(requestId);
+            }
+        }
+    }
+
+    @Override
     public void addKeyframePerformer(KeyframePerformer kp) {
         if (kp != null) {
             keyframePerformers.add(kp);
@@ -291,5 +295,5 @@ public class Realizer extends CallbackSender implements SignalPerformer, Keyfram
     }  
     
     public void UpdateHandLibrary(){
-    }  
+    }
 }

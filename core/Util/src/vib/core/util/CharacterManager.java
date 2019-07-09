@@ -100,7 +100,7 @@ public class CharacterManager {
      * @param dependent the {@code CharacterDependent} to add
      */
     public void add(CharacterDependent dependent) {
-        //System.out.println(String.format("Adding to %s : %s",toString(),dependent.toString()));
+        // System.out.println(String.format("Adding to %s : %s",toString(),dependent.toString()));
         if( ! dependents.contains(dependent)) {
             dependents.add(dependent);
         }

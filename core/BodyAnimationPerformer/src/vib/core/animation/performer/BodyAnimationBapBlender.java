@@ -152,20 +152,20 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
             }
             case replace: {
                 switch (mode.getReactionType()) {
-                    case NONE: {
+                    /*case NONE: {
                         replaceFrames(bapFrames, requestId, mode);
-                        break;
-                    }
-                    case HALT: {
-                        replaceFramesWithInterruption(bapFrames, requestId, mode);
-                        break;
-                    }
-                    case OVERLAP: {
-                        replaceFramesWithInterruption(bapFrames, requestId, mode);
                         break;
                     }
                     case REPLAN: {
                         replaceFrames(bapFrames, requestId, mode);
+                        break;
+                    }*/ // Same as default case
+                    case HALT: /*{
+                        replaceFramesWithInterruption(bapFrames, requestId, mode);
+                        break;
+                    }*/ // Same as OVERLAP case
+                    case OVERLAP: {
+                        replaceFramesWithInterruption(bapFrames, requestId, mode);
                         break;
                     }
                     default: {

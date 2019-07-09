@@ -23,12 +23,12 @@ import java.util.List;
 
 /**
  * This class is a basic implementation of {@code BAPFramesEmitter}.<br/>
- * It provides some methods to send {@code BAPFrames} to all {@code BAPFramesPerfomers} added.
+ * It provides some methods to send {@code BAPFrames} to all {@code BAPFramesPerformer} added.
  * @author Andre-Marie Pez
  */
 public class BAPFramesEmitterImpl implements BAPFramesEmitter{
 
-    private ArrayList<BAPFramesPerformer> performers = new ArrayList<BAPFramesPerformer>();
+    private ArrayList<BAPFramesPerformer> performers = new ArrayList<>();
 
     @Override
     public void addBAPFramesPerformer(BAPFramesPerformer performer) {
@@ -47,7 +47,6 @@ public class BAPFramesEmitterImpl implements BAPFramesEmitter{
     public void sendBAPFrames(ID requestId, BAPFrame... frames){
         sendBAPFrames(requestId, Arrays.asList(frames));
     }
-
 
     public void sendBAPFrames(ID requestId, List<BAPFrame> frames){
         for(BAPFramesPerformer performer : performers){

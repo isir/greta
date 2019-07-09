@@ -28,7 +28,6 @@ import java.util.concurrent.TimeUnit;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import vib.auxiliary.BvhMocap.BvhReader;
 import vib.auxiliary.BvhMocap.BvhReadergui;
 import vib.core.animation.mpeg4.bap.BAPFrame;
 import vib.core.animation.mpeg4.bap.BAPFramesEmitter;

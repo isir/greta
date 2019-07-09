@@ -89,7 +89,7 @@ public abstract class MPEG4Agent extends Thread {
     }
 
     public void update() {
-        //here we use double sychronization in this order to prevent mutual blocking between this thread and the OgreThread.
+        //here we use double synchronisation in this order to prevent mutual blocking between this thread and the OgreThread.
         //in general, all synchronizations on this object must be call by the OgreThread.
         Ogre.callSync(new vib.auxiliary.player.ogre.OgreThread.Callback() {public void run() {
             synchronized (MPEG4Agent.this) {

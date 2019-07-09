@@ -18,14 +18,8 @@ package vib.core.animation.mpeg4;
 
 
 import java.util.List;
-import vib.core.animation.mpeg4.bap.BAPFrame;
-import vib.core.animation.mpeg4.bap.BAPFramesEmitter;
-import vib.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import vib.core.animation.mpeg4.bap.BAPFramesPerformer;
-import vib.core.animation.mpeg4.fap.FAPFrame;
-import vib.core.animation.mpeg4.fap.FAPFrameEmitter;
-import vib.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
-import vib.core.animation.mpeg4.fap.FAPFramePerformer;
+import vib.core.animation.mpeg4.bap.*;
+import vib.core.animation.mpeg4.fap.*;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
 import vib.core.util.Mode;

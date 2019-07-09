@@ -18,7 +18,7 @@
 package vib.core.intentions;
 
 /**
- * This interface descibes an object that can send a list of {@code Signal} to all {@code SignalPerformer} added.
+ * This interface describes an object that can send a list of {@code Intention} to all {@code IntentionPerformer} added.
  *
  * @author Andre-Marie Pez
  *
@@ -28,7 +28,6 @@ package vib.core.intentions;
  * @navassoc - "emmits" * vib.core.intentions.Intention
  */
 public interface IntentionEmitter {
-
     /**
      * Adds an {@code IntentionPerformer}.<br>
      * The function {@code performIntentions} of all {@code IntentionPerformer}
@@ -36,11 +35,11 @@ public interface IntentionEmitter {
      * @param performer the {@code IntentionPerformer} to add
      * @see vib.core.intentions.IntentionPerformer#performIntentions(java.util.List, vib.core.util.id.ID, vib.core.util.Mode) performIntentions
      */
-    public void addIntentionPerformer(IntentionPerformer performer);
+    void addIntentionPerformer(IntentionPerformer performer);
 
     /**
-     * Removes the first occurence of an {@code IntentionPerformer}.
+     * Removes the first occurrence of an {@code IntentionPerformer}.
      * @param performer the {@code IntentionPerformer} to remove
      */
-    public void removeIntentionPerformer(IntentionPerformer performer);
+    void removeIntentionPerformer(IntentionPerformer performer);
 }

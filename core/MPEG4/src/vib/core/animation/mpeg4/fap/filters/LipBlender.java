@@ -17,15 +17,9 @@
 
 package vib.core.animation.mpeg4.fap.filters;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.LinkedList;
-import java.util.List;
-import vib.core.animation.mpeg4.fap.FAPFrame;
-import vib.core.animation.mpeg4.fap.FAPFrameEmitter;
-import vib.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
-import vib.core.animation.mpeg4.fap.FAPFramePerformer;
-import vib.core.animation.mpeg4.fap.FAPType;
+import java.util.*;
+
+import vib.core.animation.mpeg4.fap.*;
 import vib.core.util.CharacterManager;
 import vib.core.util.Constants;
 import vib.core.util.id.ID;
@@ -36,17 +30,17 @@ import vib.core.util.time.Timer;
  *
  * @author Andre-Marie Pez
  */
-public class LipBlender extends FAPFrameEmitterImpl implements FAPFramePerformer{
+public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFramePerformer {
 
-    public int blending_delay = 0;
-    private CharacterManager charactermanager;
+    public int blendingDelay = 0;
+    private CharacterManager characterManager;
 
-    private static Comparator<FAPFrame> fapComp = new Comparator<FAPFrame>(){
+    /*private static Comparator<FAPFrame> fapComp = new Comparator<>(){
         @Override
         public int compare(FAPFrame o1, FAPFrame o2) {
             return o2.getFrameNumber()-o1.getFrameNumber();
         }
-    };
+    };*/ // TODO FIXME fapComp is never used
 
     private List<FAPIDPair> faceAnimation;
     private List<FAPIDPair> lipAnimation;
@@ -57,11 +51,10 @@ public class LipBlender extends FAPFrameEmitterImpl implements FAPFramePerformer
     private FAPFramePerformer lipReceiver;
     private Blender blender;
 
-
-    public LipBlender(CharacterManager cm){
-        this.charactermanager = cm;
-        faceAnimation = new LinkedList<FAPIDPair>();
-        lipAnimation = new LinkedList<FAPIDPair>();
+    public LipBlender (CharacterManager cm) {
+        this.characterManager = cm;
+        faceAnimation = new LinkedList<>();
+        lipAnimation = new LinkedList<>();
         lipReceiver = new FAPFramePerformer(){
             @Override
             public void performFAPFrames(List<FAPFrame> fap_animation, ID requestId) {
@@ -140,17 +133,18 @@ public class LipBlender extends FAPFrameEmitterImpl implements FAPFramePerformer
         }
     }
 
-    private void expulseLatedFrame(){
-        synchronized (LipBlender.this){
-            while(!faceAnimation.isEmpty() && faceAnimation.get(0).frame.getFrameNumber()<Timer.getTime()*Constants.FRAME_PER_SECOND+blending_delay){
-                sendFAPFrame(faceAnimation.get(0).animId,faceAnimation.get(0).frame);
-                faceAnimation.remove(0);
-            }
-        }
-        synchronized (LipBlender.this){
-            while(!lipAnimation.isEmpty() && lipAnimation.get(0).frame.getFrameNumber()<Timer.getTime()*Constants.FRAME_PER_SECOND+blending_delay){
-                sendFAPFrame(lipAnimation.get(0).animId, lipAnimation.get(0).frame);
-                lipAnimation.remove(0);
+    private void popLatestFrame(){
+        popLatestFrameInList(faceAnimation);
+        popLatestFrameInList(lipAnimation);
+    }
+
+    private void popLatestFrameInList(List<FAPIDPair> animation) {
+        synchronized (LipBlender.this) {
+            FAPIDPair firstFapIdPair = animation.isEmpty() ? null : animation.get(0);
+            while(firstFapIdPair != null && firstFapIdPair.frame.getFrameNumber()<Timer.getTime()*Constants.FRAME_PER_SECOND+blendingDelay){
+                sendFAPFrame(firstFapIdPair.animId, firstFapIdPair.frame);
+                animation.remove(0);
+                firstFapIdPair = animation.isEmpty() ? null : animation.get(0);
             }
         }
     }
@@ -168,7 +162,7 @@ public class LipBlender extends FAPFrameEmitterImpl implements FAPFramePerformer
     }
 
     private void blendValueFrom(int fapIndex, FAPFrame target, FAPFrame source) {
-        double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000.0 ;
+        double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000;
         target.applyValue(fapIndex, (int) (target.getValue(fapIndex)*(1-blendCoef) + source.getValue(fapIndex)*(blendCoef)));
     }
 
@@ -219,15 +213,15 @@ public class LipBlender extends FAPFrameEmitterImpl implements FAPFramePerformer
         return blended;
     }
 
-    private class Blender extends Thread{
-
+    private class Blender extends Thread {
         boolean end = false;
+
         @Override
         public void run() {
             while(!end){
-                expulseLatedFrame();
+                popLatestFrame();
                 computeAndSend();
-                try{sleep(10);}catch(Throwable t){}
+                try { sleep(10); } catch (Throwable t) {}
             }
         }
     }
@@ -241,7 +235,7 @@ public class LipBlender extends FAPFrameEmitterImpl implements FAPFramePerformer
     private class FAPIDPair {
         ID animId;
         FAPFrame frame;
-        FAPIDPair(ID animId, FAPFrame frame){
+        FAPIDPair (ID animId, FAPFrame frame) {
             this.animId = animId;
             this.frame = frame;
         }

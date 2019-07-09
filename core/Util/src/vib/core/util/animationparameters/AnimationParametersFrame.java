@@ -28,7 +28,7 @@ import java.util.StringTokenizer;
 public abstract class AnimationParametersFrame<AP extends AnimationParameter> implements Iterable<AP>, Comparable<AnimationParametersFrame> {
 
     public ArrayList<AP> APVector;
-    int frameNumber = 0;
+    private int frameNumber;
 
     public AnimationParametersFrame(int numAPs) {
         this(numAPs, 0);
@@ -41,7 +41,7 @@ public abstract class AnimationParametersFrame<AP extends AnimationParameter> im
         }
     }
     public AnimationParametersFrame(int numAPs, int frameNum) {
-        APVector = new ArrayList<AP>(numAPs);
+        APVector = new ArrayList<>(numAPs);
         this.frameNumber = frameNum;
         init(numAPs);
     }

@@ -1731,7 +1731,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     Vec3d vec2target = null;
 
                     if (gazeTargetNotEmpty) {
-                        List<Leaf> environmentLeafs = env.getListLeaf();
+                        List<Leaf> environmentLeaves = env.getListLeaf();
                         String gazeTarget = gaze.getTarget();
                         if (gazeTarget.equals("Camera")) {
                             for (EnvironmentEventListener environmentEventListener : env.getListeners()) {
@@ -1779,7 +1779,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                             // if the target is not the agent I look the target in the environment objects
                             if (!targetIsAgent) {
                                 // search the object (leaf) between environment objects
-                                for (Leaf leafToCheck : environmentLeafs) {
+                                for (Leaf leafToCheck : environmentLeaves) {
                                     // once we find the object, take the ID
                                     if (leafToCheck.getIdentifier().equals(gaze.getTarget())) {
                                         idTarget = leafToCheck.getIdentifier();
@@ -2050,7 +2050,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             // according to the angle amplitude, the head and shoulder will contribute with different movement
             this.shoulderYawAngle = shoulderRelativeEulerAngles.x();
             shoulderPitchAngle = 0;
-
             /**
              * for the coordination eyes-head-torso it is followed the paper:
              * "Gaze and Attention Management for Embodied Conversational Agents"

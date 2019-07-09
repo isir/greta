@@ -94,7 +94,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         end = new TimeMarker("end");
         timeMarkers.add(end);
 
-        origin = getCharacterManager().currentCharacterId;
+        origin = getCharacterManager().getCurrentCharacterId();
         target = "";
         offsetDirection = GazeDirection.FRONT;
         offsetAngle = 0.0;

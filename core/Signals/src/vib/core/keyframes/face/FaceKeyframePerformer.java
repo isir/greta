@@ -19,6 +19,9 @@ package vib.core.keyframes.face;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+
+import vib.core.keyframes.CancelableKeyframePerformer;
 import vib.core.keyframes.Keyframe;
 import vib.core.keyframes.KeyframePerformer;
 import vib.core.repositories.AUAP;
@@ -38,10 +41,10 @@ import vib.core.util.time.Timer;
  * @author Ken Prepin
  * @author Andre-Marie Pez
  * @author Brice Donval
+ * @author Nawhal Sayarh
  */
-public class FaceKeyframePerformer implements KeyframePerformer, AUEmitter {
-
-    private CharacterManager charactermanager;
+public class FaceKeyframePerformer implements CancelableKeyframePerformer, AUEmitter {
+    private CharacterManager characterManager;
     private boolean interpolate;
 
     private int frameDelay = 5;
@@ -52,37 +55,34 @@ public class FaceKeyframePerformer implements KeyframePerformer, AUEmitter {
     private int timeLapsMillis = framesPerLaps * Constants.FRAME_DURATION_MILLIS;
     private Thread blinker = null;
 
-    private final ArrayList<AUPerformer> auPerformers = new ArrayList<AUPerformer>();
+    private final ArrayList<AUPerformer> auPerformers = new ArrayList<>();
 
     private final AUAPFrameInterpolator interpolator;
 
-    public FaceKeyframePerformer(CharacterManager cm){
-        this.charactermanager = cm; 
+    public FaceKeyframePerformer (CharacterManager cm) {
+        this.characterManager = cm;
         interpolator = new AUAPFrameInterpolator();
         startInterpolation();
     }
 
-    private void startInterpolation(){
+    private void startInterpolation () {
         interpolate = true;
-        Thread t = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while(interpolate){
-                    long begin = Timer.getTimeMillis();
-                    int timeFrame = (int)(begin/Constants.FRAME_DURATION_MILLIS) + frameDelay;
-                    if( ! interpolator.isEmptyAt(timeFrame)){
-                        interpolator.cleanOldFrames();
-                        List<AUAPFrame> interpolated = new ArrayList<AUAPFrame>(framesPerLaps);
-                        for(int i = 0; i<framesPerLaps; ++i){
-                            int frameNum = timeFrame + i;
-                            interpolated.add(interpolator.getAUAPFrameAt(frameNum));
+        Thread t = new Thread(() -> {
+            while(interpolate){
+                long begin = Timer.getTimeMillis();
+                int timeFrame = (int)(begin/Constants.FRAME_DURATION_MILLIS) + frameDelay;
+                if(!interpolator.isEmptyAt(timeFrame)){
+                    Map<ID, List<AUAPFrame>> auapFramesWithId = interpolator.getAUAPFramesWithIdAt(timeFrame, timeFrame+framesPerLaps);
+                    for (Map.Entry<ID, List<AUAPFrame>> idWithCorrespondingFrames : auapFramesWithId.entrySet()) {
+                        ID framesID = idWithCorrespondingFrames.getKey();
+                        if (framesID == null) {
+                            framesID = IDProvider.createID("AU Interpolation");
                         }
-                        //TODO : create a correct ID from requests received
-                        sendAUs(interpolated,IDProvider.createID("AU Interpolation"));
-                        Timer.sleep(timeLapsMillis+begin-Timer.getTimeMillis());
-                    } else {
-                        Timer.sleep(100);
+                        sendAUs(idWithCorrespondingFrames.getValue(), framesID);
                     }
+                    Timer.sleep(timeLapsMillis+begin-Timer.getTimeMillis());
+                } else {
+                    Timer.sleep(100);
                 }
             }
         });
@@ -90,19 +90,18 @@ public class FaceKeyframePerformer implements KeyframePerformer, AUEmitter {
         t.start();
     }
 
-    public void setBlinking(boolean blink){
-        if(blink){
+    public void setBlinking (boolean blink) {
+        if (blink) {
             if(blinker == null){
                 startBlinking();
             }
-        }
-        else{
+        } else {
             blinker = null;
         }
     }
 
-    public boolean isBlinking(){
-        return blinker!=null;
+    public boolean isBlinking () {
+        return blinker != null;
     }
 
     private void startBlinking() {
@@ -119,7 +118,7 @@ public class FaceKeyframePerformer implements KeyframePerformer, AUEmitter {
         blinker.start();
     }
 
-    private void blink() {
+    private void blink () {
         int currentFrameTime = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
         AUAPFrame start = new AUAPFrame(currentFrameTime + Constants.FRAME_PER_SECOND);//delay of 1 second
         AUAPFrame down1 = new AUAPFrame(currentFrameTime + Constants.FRAME_PER_SECOND + 3);
@@ -132,26 +131,26 @@ public class FaceKeyframePerformer implements KeyframePerformer, AUEmitter {
         interpolator.blendSegment(start, down1, down2, end);
     }
 
-    private void stopInterpolate(){
+    private void stopInterpolate () {
         interpolate = false;
     }
 
     @Override
-    protected void finalize() throws Throwable {
+    protected void finalize () throws Throwable {
         stopInterpolate();
         super.finalize();
     }
 
     @Override
-    public void performKeyframes(List<Keyframe> keyframes, ID requestId) {
+    public void performKeyframes (List<Keyframe> keyframes, ID requestId) {
         // TODO : Mode management in progress
         performKeyframes(keyframes, requestId, new Mode(CompositionType.replace));
     }
 
     @Override
-    public void performKeyframes(List<Keyframe> keyframes, ID requestId, Mode mode) {
+    public void performKeyframes (List<Keyframe> keyframes, ID requestId, Mode mode) {
         //get AUKeyFrame and set the good time from relative to the current time
-        LinkedList<AUAPFrame> received = new LinkedList<AUAPFrame>();
+        LinkedList<AUAPFrame> received = new LinkedList<>();
         for(Keyframe keyframe : keyframes){
             if(keyframe instanceof AUKeyFrame){
                 AUAPFrame auFrame = ((AUKeyFrame)keyframe).getAus();
@@ -162,30 +161,21 @@ public class FaceKeyframePerformer implements KeyframePerformer, AUEmitter {
         updateAUs(received, requestId, mode);
     }
 
-    public void sendAUs(List<AUAPFrame> auAnimation, ID requestId) {
+    public void sendAUs (List<AUAPFrame> auAnimation, ID requestId) {
         for (AUPerformer auPerformer : auPerformers) {
             auPerformer.performAUAPFrames(auAnimation, requestId);
         }
     }
 
-    public void updateAUs(LinkedList<AUAPFrame> auAnimation, ID requestId, Mode mode) {
-
-        int currentTime = Timer.getCurrentFrameNumber();
-
+    public void updateAUs (LinkedList<AUAPFrame> auAnimation, ID requestId, Mode mode) {
         switch (mode.getCompositionType()) {
-
-            case append: {
-                interpolator.blendSegment(auAnimation);
+            case append:
+            case blend:
+                interpolator.blendSegment(auAnimation, requestId);
                 break;
-            }
 
-            case blend: {
-                interpolator.blendSegment(auAnimation);
-                break;
-            }
-
-            case replace: {
-
+            case replace:
+                int currentTime = Timer.getCurrentFrameNumber();
                 LinkedList<AUAPFrame> returnToNeutral = new LinkedList<>();
                 AUAPFrame currentFrame = interpolator.getAUAPFrameAt(currentTime + frameDelay);
                 AUAPFrame neutralFrame = new AUAPFrame(currentTime + RESET_DURATION_IN_FRAME_NUM);
@@ -202,24 +192,32 @@ public class FaceKeyframePerformer implements KeyframePerformer, AUEmitter {
                 interpolator.clear();
 
                 interpolator.blendSegment(returnToNeutral);
-                interpolator.blendSegment(auAnimation);
+                interpolator.blendSegment(auAnimation, requestId);
                 break;
-            }
 
-            default: {
-                System.out.println("[FaceKeyframePerformer] updateAUs() : mode is wrong");
+            default:
+                System.err.println("[FaceKeyframePerformer] updateAUs() : mode is wrong");
                 break;
+        }
+    }
+
+    @Override
+    public void cancelKeyframesById (ID requestId) {
+        interpolator.cleanKeysWithId(requestId);
+        for (AUPerformer auPerformer : auPerformers) {
+            if (auPerformer instanceof CancelableAUPerformer) {
+                ((CancelableAUPerformer) auPerformer).cancelAUKeyFramesById(requestId);
             }
         }
     }
 
     @Override
-    public void addAUPerformer(AUPerformer auPerformer) {
+    public void addAUPerformer (AUPerformer auPerformer) {
         auPerformers.add(auPerformer);
     }
 
     @Override
-    public void removeAUPerformer(AUPerformer auPerformer) {
+    public void removeAUPerformer (AUPerformer auPerformer) {
         auPerformers.remove(auPerformer);
     }
 }

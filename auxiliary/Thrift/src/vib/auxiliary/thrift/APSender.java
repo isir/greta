@@ -28,24 +28,21 @@ import vib.core.util.time.Timer;
 import java.util.ArrayList;
 import java.util.List;
 
-
-
 /**
  *
  * @author Ken Prepin
  */
 public abstract class APSender<APF extends AnimationParametersFrame> extends Sender{
-
     public APSender(){
-        this(Sender.DEFAULT_THRIFT_HOST,Sender.DEFAULT_THRIFT_PORT);
+        this(Sender.DEFAULT_THRIFT_HOST, Sender.DEFAULT_THRIFT_PORT);
     }
+
     public APSender(String host, int port){
         super(host, port);
     }
 
-
-    public void sendAnimParamFrameList(List<APF> vibAPframes, String type, ID requestId) {
-       List<ThriftAnimParamFrame> thriftAPFrameList = vibAPFrameList2thriftAPFrameList(vibAPframes);
+    public void sendAnimParamFrameList(List<APF> vibAPFrames, String type, ID requestId) {
+       List<ThriftAnimParamFrame> thriftAPFrameList = vibAPFrameListToThriftAPFrameList(vibAPFrames);
        Message m = new Message();
        m.type = type;
        m.id = requestId.toString();
@@ -54,18 +51,16 @@ public abstract class APSender<APF extends AnimationParametersFrame> extends Sen
        send(m);
     }
 
-    private List<ThriftAnimParamFrame> vibAPFrameList2thriftAPFrameList(List<APF> vibAPframes) {
+    private List<ThriftAnimParamFrame> vibAPFrameListToThriftAPFrameList(List<APF> vibAPFrames) {
+        List<ThriftAnimParamFrame> thriftAPFrameList  = new ArrayList<>(vibAPFrames.size());
 
-        List<ThriftAnimParamFrame> thriftAPFrameList  = new ArrayList<ThriftAnimParamFrame>(vibAPframes.size());
-
-        for(AnimationParametersFrame vibFrame:vibAPframes){
-
+        for (AnimationParametersFrame vibFrame : vibAPFrames) {
             ThriftAnimParamFrame thriftFrame = new ThriftAnimParamFrame();
             thriftFrame.frameNumber = vibFrame.getFrameNumber();
-            Logs.debug("thriftFrame.frameNumber: "+thriftFrame.frameNumber);
-            thriftFrame.animParamList = new ArrayList<ThriftAnimParam>(vibFrame.size());
-            List<AnimationParameter> apList= vibFrame.getAnimationParametersList();
-            for(AnimationParameter ap:apList){
+            Logs.debug("thriftFrame.frameNumber: " + thriftFrame.frameNumber);
+            thriftFrame.animParamList = new ArrayList<>(vibFrame.size());
+            List<AnimationParameter> apList = vibFrame.getAnimationParametersList();
+            for (AnimationParameter ap : apList){
                 ThriftAnimParam thriftAP = new ThriftAnimParam(ap.getMask(), ap.getValue());
                 thriftFrame.animParamList.add(thriftAP);
             }

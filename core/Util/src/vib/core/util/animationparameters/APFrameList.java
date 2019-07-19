@@ -16,58 +16,75 @@
  */
 package vib.core.util.animationparameters;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ListIterator;
+import java.util.*;
 import vib.core.util.Constants;
+import vib.core.util.id.ID;
 import vib.core.util.time.Timer;
 
+// TODO see if we don't need to clear sometimes ?
 /**
  *
  * @author Andre-Marie Pez
  * @author Ken Prepin
  */
-public class APFrameList <APF extends AnimationParametersFrame>{
+public class APFrameList <APF extends AnimationParametersFrame> {
     private LinkedList<APF> apFrameList;
-    public APFrameList(APF firstAPFrame){
-        apFrameList = new LinkedList<APF>();
+
+    /**
+     * Ids of frames corresponding to their frame number.
+     * We consider that we can't have 2 frames at the same frame number as in addFrame we blend in this case.
+     */
+    private Map<Integer, ID> idsForFrameNumbers;
+
+    public APFrameList (APF firstAPFrame) {
+        apFrameList = new LinkedList<>();
         apFrameList.add(firstAPFrame);
         firstAPFrame.setFrameNumber(0);
+        idsForFrameNumbers = new TreeMap<>();
+        idsForFrameNumbers.put(0, null);
     }
 
-    public synchronized void addFrame(APF apFrame){
+    public synchronized void addFrame (APF apFrame) {
+        addFrame(apFrame, null);
+    }
+
+    public synchronized void addFrame (APF apFrame, ID requestId) {
         ListIterator<APF> iter = apFrameList.listIterator(apFrameList.size());
-        APF inlist=null;
+        APF inlist;
 
-        while(iter.hasPrevious()){
-            inlist=iter.previous();
+        while (iter.hasPrevious()) {
+            inlist = iter.previous();
+            int frameNumber = apFrame.getFrameNumber();
 
-            if(apFrame.getFrameNumber()>inlist.getFrameNumber()) {
+            if (frameNumber > inlist.getFrameNumber()) {
                 iter.next();
                 iter.add(apFrame);
+                idsForFrameNumbers.put(frameNumber, requestId);
                 break;
             }
 
-            if(apFrame.getFrameNumber() == inlist.getFrameNumber()){
+            if (frameNumber == inlist.getFrameNumber()) {
                 blend(inlist, apFrame);
                 break;
             }
         }
     }
 
-    public void addFrames(List<APF> apframeList){
-        for(APF apf : apframeList)
-        {
-            addFrame(apf);
+    public void addFrames (List<APF> apframeList) {
+        addFrames(apframeList, null);
+    }
+
+    public void addFrames (List<APF> apframeList, ID requestId) {
+        for (APF apf : apframeList) {
+            addFrame(apf, requestId);
         }
     }
 
-    public synchronized List<APF> getListCopy(){
-        return new ArrayList<APF>(apFrameList);
+    public synchronized List<APF> getListCopy () {
+        return new ArrayList<>(apFrameList);
     }
     
-    private void blend(APF firstAPFrame, APF newAPFrame) {
+    private void blend (APF firstAPFrame, APF newAPFrame) {
         for (int i = 0; i < newAPFrame.size(); ++i) {
             AnimationParameter ap = (AnimationParameter) newAPFrame.getAnimationParametersList().get(i);
             if (ap.getMask()) {
@@ -76,51 +93,67 @@ public class APFrameList <APF extends AnimationParametersFrame>{
         }
     }
 
-    public synchronized void updateFrames(){
-        long currentFrame = (long) (Timer.getTime() * Constants.FRAME_PER_SECOND);
+    public synchronized void updateFrames () {
+        updateFramesToTime((int) (Timer.getTime() * Constants.FRAME_PER_SECOND));
+    }
 
-        APF firstAPFrame = apFrameList.peek();
+    public synchronized void updateFramesToTime (int firstFrame) {
+        if (apFrameList.isEmpty()) { return; }
 
+        APF firstAPFrame = apFrameList.getFirst();
         ListIterator<APF> iter = apFrameList.listIterator();
-        while(iter.hasNext()){
+
+        while (iter.hasNext()) {
             APF frame = iter.next();
-            if(frame.getFrameNumber()>currentFrame) {
+            int frameNumber = frame.getFrameNumber();
+            if (frameNumber > firstFrame) {
                 break;
             }
-
-            if(frame != firstAPFrame){
+            if (frame != firstAPFrame) {
                 blend(firstAPFrame, frame);
                 iter.remove();
+                idsForFrameNumbers.remove(frameNumber);
             }
         }
-        firstAPFrame.setFrameNumber((int)currentFrame);
+
+        int firstAPFrameNumber = firstAPFrame.getFrameNumber();
+        ID firstAPFrameId = idsForFrameNumbers.get(firstAPFrameNumber);
+        idsForFrameNumbers.remove(firstAPFrameNumber);
+        firstAPFrame.setFrameNumber(firstFrame);
+        idsForFrameNumbers.put(firstFrame, firstAPFrameId);
     }
-    
 
-    public synchronized void updateFramesToTime(long firstFrame){
-        APF firstAPFrame = apFrameList.peek();
-
-        ListIterator<APF> iter = apFrameList.listIterator();
-        while(iter.hasNext()){
-            APF frame = iter.next();
-            if(frame.getFrameNumber()>firstFrame) {
-                break;
-            }
-
-            if(frame != firstAPFrame){
-                blend(firstAPFrame, frame);
-                iter.remove();
-            }
-        }
-        firstAPFrame.setFrameNumber((int)firstFrame);
-    }
-    public synchronized APF getFrameAtTime(long targetFrame){
+    public synchronized APF getFrameAtTime (int targetFrame) {
         updateFramesToTime(targetFrame);
         return apFrameList.peek();
     }
 
-    public synchronized APF getCurrentFrame(){
+    public synchronized APF getCurrentFrame () {
         updateFrames();
         return apFrameList.peek();
+    }
+
+    /**
+     * Deletes from apFrameList the frames with the given {@code ID}.
+     * @param requestId id which's corresponding frames have to be deleted
+     */
+    public synchronized void deleteFramesWithId (ID requestId) {
+        Iterator<APF> framesIterator = apFrameList.iterator();
+        while (framesIterator.hasNext()) {
+            APF frame = framesIterator.next();
+            int frameNumber = frame.getFrameNumber();
+            if (idsForFrameNumbers.get(frameNumber) == requestId){
+                idsForFrameNumbers.remove(frameNumber);
+                framesIterator.remove();
+            }
+        }
+    }
+
+    /**
+     * Removes the given frame if it is in the list.
+     * @param frameToDelete frame to be deleted
+     */
+    public synchronized void deleteFrame (APF frameToDelete) {
+        apFrameList.remove(frameToDelete);
     }
 }

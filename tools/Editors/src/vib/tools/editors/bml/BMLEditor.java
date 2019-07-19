@@ -40,7 +40,6 @@ import vib.core.util.enums.CompositionType;
 import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
 import vib.core.util.speech.FakeTTS;
-import vib.core.util.speech.Speech;
 import vib.core.util.time.Temporizer;
 import vib.tools.editors.MultiTimeLineEditors;
 import vib.tools.editors.TimeLineManager;
@@ -195,7 +194,7 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
 
             @Override
             public void performSignals(List<Signal> list, ID requestId, Mode mode) {
-                diplaySignals(list);
+                displaySignals(list);
             }
         });
 
@@ -222,7 +221,7 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
         super.setTitle(title);
     }
 
-    private void diplaySignals(List<Signal> signals) {
+    private void displaySignals(List<Signal> signals) {
         synchronized (fakeTTS) {
             if (cm.getTTS() == null) {
                 cm.setTTS(fakeTTS);
@@ -284,7 +283,7 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
     @Override
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
         if (this.isUpdatedFromEvent()) {
-            diplaySignals(list);
+            displaySignals(list);
         }
     }
 

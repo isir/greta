@@ -16,14 +16,29 @@
  */
 package vib.auxiliary.socialparameters;
 
+import vib.core.util.id.ID;
+
+import java.util.List;
+
 /**
+ * This interface describes an object that can send a list of {@code SocialParameterPerformer} to all
+ * {@code SocialParameterPerformerPerformer} added.
  *
  * @author Florian Pecune
  */
 public interface SocialParameterEmitter {
-    
-    public void addSocialParameterPerformer(SocialParameterPerformer performer);
+    /**
+     * Adds a {@code SocialParameterPerformer}.<br/>
+     * The function {@code performSignals} of all {@code SignalPerformer}
+     * added will be called when this emmits a list of {@code Signal}.
+     * @param performer the {@code SocialParameterPerformer} to add
+     * @see vib.auxiliary.socialparameters.SocialParameterPerformer#performSocialParameter(List, ID) performeSocialParameter
+     */
+    void addSocialParameterPerformer(SocialParameterPerformer performer);
 
-    public void removeSocialParameterPerformer(SocialParameterPerformer performer);
-    
+    /**
+     * Removes a {@code SocialParameterPerformer} from the list.
+     * @param performer the {@code SocialParameterPerformer} to be removed
+     */
+    void removeSocialParameterPerformer(SocialParameterPerformer performer);
 }

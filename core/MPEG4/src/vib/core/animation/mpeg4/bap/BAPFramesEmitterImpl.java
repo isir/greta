@@ -23,12 +23,12 @@ import java.util.List;
 
 /**
  * This class is a basic implementation of {@code BAPFramesEmitter}.<br/>
- * It provides some methods to send {@code BAPFrames} to all {@code BAPFramesPerfomers} added.
+ * It provides some methods to send {@code BAPFrames} to all {@code BAPFramesPerformer} added.
  * @author Andre-Marie Pez
  */
 public class BAPFramesEmitterImpl implements BAPFramesEmitter{
 
-    private ArrayList<BAPFramesPerformer> performers = new ArrayList<BAPFramesPerformer>();
+    private ArrayList<BAPFramesPerformer> performers = new ArrayList<>();
 
     @Override
     public void addBAPFramesPerformer(BAPFramesPerformer performer) {
@@ -48,7 +48,6 @@ public class BAPFramesEmitterImpl implements BAPFramesEmitter{
         sendBAPFrames(requestId, Arrays.asList(frames));
     }
 
-
     public void sendBAPFrames(ID requestId, List<BAPFrame> frames){
         for(BAPFramesPerformer performer : performers){
             performer.performBAPFrames(frames, requestId);
@@ -57,5 +56,17 @@ public class BAPFramesEmitterImpl implements BAPFramesEmitter{
 
     public void sendBAPFrame(ID requestId, BAPFrame frame){
         sendBAPFrames(requestId, frame);
+    }
+
+    /**
+     * Sends a message to cancel all the {@code BAPFrame} with the given {@code ID} to all linked BAPFramesPerformer.
+     * @param requestId ID of the frames to cancel
+     */
+    public void cancelFramesWithIDInLinkedPerformers(ID requestId) {
+        for (BAPFramesPerformer performer : performers) {
+            if (performer instanceof CancelableBAPFramesPerformer) {
+                ((CancelableBAPFramesPerformer) performer).cancelBAPFramesById(requestId);
+            }
+        }
     }
 }

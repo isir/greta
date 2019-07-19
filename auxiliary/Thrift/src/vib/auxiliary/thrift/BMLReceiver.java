@@ -60,18 +60,7 @@ public class BMLReceiver extends Receiver implements SignalEmitter {
         XMLTree bml = bmlparser.parseBuffer(m.getString_content());
         List<Signal> signals = BMLTranslator.BMLToSignals(bml,cm);
         Mode mode = BMLTranslator.getDefaultBMLMode();
-        if (bml.hasAttribute("composition")) {
-            mode.setCompositionType(bml.getAttribute("composition"));
-        }
-        if (bml.hasAttribute("reaction_type")) {
-            mode.setReactionType(bml.getAttribute("reaction_type"));
-        }
-        if (bml.hasAttribute("reaction_duration")) {
-            mode.setReactionDuration(bml.getAttribute("reaction_duration"));
-        }
-        if (bml.hasAttribute("social_attitude")) {
-            mode.setSocialAttitude(bml.getAttribute("social_attitude"));
-        }
+        CommandReceiver.setModeParametersForAnimationSignal(bml, mode);
         //send to all SignalPerformer added
         ID id = IDProvider.createID(m.getId());
         for (SignalPerformer performer : performers) {

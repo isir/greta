@@ -37,8 +37,7 @@ import vib.core.util.id.ID;
  * @author Ken Prepin
  * @author Andre-Marie Pez
  */
-public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerformer, CharacterDependent {
-
+public class SimpleAUPerformer extends FAPFrameEmitterImpl implements CancelableAUPerformer, CharacterDependent {
     private static Side[] wantedSides = {Side.RIGHT, Side.LEFT};
     private CharacterManager characterManager;
     private AULibrary auLibrary;
@@ -47,9 +46,10 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerforme
      * @return the characterManager
      */
     @Override
-    public CharacterManager getCharacterManager() {
-        if(characterManager==null)
+    public CharacterManager getCharacterManager () {
+        if (characterManager == null) {
             characterManager = CharacterManager.getStaticInstance();
+        }
         return characterManager;
     }
 
@@ -57,27 +57,32 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerforme
      * @param characterManager the characterManager to set
      */
     @Override
-    public void setCharacterManager(CharacterManager characterManager) {
+    public void setCharacterManager (CharacterManager characterManager) {
         this.characterManager = characterManager;
     }
     
-    public SimpleAUPerformer(CharacterManager cm){
+    public SimpleAUPerformer (CharacterManager cm){
         characterManager = cm;
         auLibrary = new AULibrary(cm);
     }
 
     @Override
-    public void performAUAPFrame(AUAPFrame auapAnimation, ID requestId) {
+    public void performAUAPFrame (AUAPFrame auapAnimation, ID requestId) {
         sendFAPFrame(requestId, toFAPFrame(auapAnimation));
     }
 
     @Override
-    public void performAUAPFrames(List<AUAPFrame> auapsAnimation, ID requestId) {
-        ArrayList<FAPFrame> fapframes = new ArrayList<FAPFrame>(auapsAnimation.size());
+    public void performAUAPFrames (List<AUAPFrame> auapsAnimation, ID requestId) {
+        ArrayList<FAPFrame> fapFrames = new ArrayList<>(auapsAnimation.size());
         for (AUAPFrame auFrame : auapsAnimation) {
-            fapframes.add(toFAPFrame(auFrame));
+            fapFrames.add(toFAPFrame(auFrame));
         }
-        sendFAPFrames(requestId, fapframes);
+        sendFAPFrames(requestId, fapFrames);
+    }
+
+    @Override
+    public void cancelAUKeyFramesById(ID requestId) {
+        cancelFramesWithIDInLinkedPerformers(requestId);
     }
 
     /**
@@ -89,25 +94,25 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerforme
     public FAPFrame toFAPFrame(AUAPFrame auFrame) {
         FAPFrame min = new FAPFrame(auFrame.getFrameNumber());
         FAPFrame max = new FAPFrame(auFrame.getFrameNumber());
-        for (int au_nr = 1; au_nr <= AUAPFrame.NUM_OF_AUS; au_nr++) {
-            if (auFrame.useActionUnit(au_nr)) {
-                FLExpression expression = auLibrary.findExpression("AU" + au_nr);
+        for (int auNb = 1; auNb <= AUAPFrame.NUM_OF_AUS; auNb++) {
+            if (auFrame.useActionUnit(auNb)) {
+                FLExpression expression = auLibrary.findExpression("AU" + auNb);
                 if (expression != null) {
-                    List<FAPItem> au_faps = expression.getFAPs();
+                    List<FAPItem> auFaps = expression.getFAPs();
                     for (Side side : wantedSides) {
-                        AUAP auap = auFrame.getAUAP(au_nr, side);
+                        AUAP auap = auFrame.getAUAP(auNb, side);
                         if (auap.getMask()) {
-                            double temp_intensity = auap.getNormalizedValue();
-                            for (FAPItem fap : au_faps) {
+                            double auapNormalizedValue = auap.getNormalizedValue();
+                            for (FAPItem fap : auFaps) {
                                 if (((side == Side.RIGHT) && fap.type.isRight()) || ((side == Side.LEFT) && fap.type.isLeft())) {
-                                    int fap_intensity = (int) (fap.value * temp_intensity);
+                                    int fapIntensity = (int) (fap.value * auapNormalizedValue);
                                     //find max
-                                    if ((!max.getMask(fap.type)) || max.getValue(fap.type) < fap_intensity) {
-                                        max.applyValue(fap.type, fap_intensity);
+                                    if ((!max.getMask(fap.type)) || max.getValue(fap.type) < fapIntensity) {
+                                        max.applyValue(fap.type, fapIntensity);
                                     }
                                     //find min
-                                    if ((!min.getMask(fap.type)) || min.getValue(fap.type) > fap_intensity) {
-                                        min.applyValue(fap.type, fap_intensity);
+                                    if ((!min.getMask(fap.type)) || min.getValue(fap.type) > fapIntensity) {
+                                        min.applyValue(fap.type, fapIntensity);
                                     }
                                 }
                             }
@@ -117,26 +122,25 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements AUPerforme
             }
         }
 
-        FAPFrame result = max;
         for (int i = 0; i < FAPType.NUMFAPS; i++) {
             if (min.getMask(i)) {
                 if (max.getMask(i)) {
                     //if there is only positive values, we use the max.
                     if (min.getValue(i) < 0) {
                         if (max.getValue(i) <= 0) {
-                            //if ther is only negative values, we use the min. (max of the absolute values)
-                            result.applyValue(i, min.getValue(i));
+                            //if there is only negative values, we use the min. (max of the absolute values)
+                            max.applyValue(i, min.getValue(i));
                         } else {
                             //if there is positive AND negative values, we use the sum of min and max.
-                            result.applyValue(i, min.getValue(i) + max.getValue(i));
+                            max.applyValue(i, min.getValue(i) + max.getValue(i));
                         }
                     }
                 } else {
-                    result.applyValue(i, min.getValue(i));
+                    max.applyValue(i, min.getValue(i));
                 }
             }
         }
-        return result;
+        return max;
     }
 
     @Override

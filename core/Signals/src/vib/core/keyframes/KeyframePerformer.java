@@ -26,9 +26,9 @@ import vib.core.util.id.ID;
  */
 public interface KeyframePerformer {
 
-    public void performKeyframes(List<Keyframe> keyframes, ID requestId);
+    void performKeyframes(List<Keyframe> keyframes, ID requestId);
 
     // TODO : Mode management in progress
-    public void performKeyframes(List<Keyframe> keyframes, ID requestId, Mode mode);
+    void performKeyframes(List<Keyframe> keyframes, ID requestId, Mode mode);
 
 }

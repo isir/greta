@@ -26,9 +26,8 @@ import java.util.List;
  * It provides some methods to send {@code FAPFrames} to all {@code FAPFramePerfomers} added.
  * @author Andre-Marie Pez
  */
-public class FAPFrameEmitterImpl implements FAPFrameEmitter{
-
-    private ArrayList<FAPFramePerformer> performers = new ArrayList<FAPFramePerformer>();
+public class FAPFrameEmitterImpl implements FAPFrameEmitter {
+    private ArrayList<FAPFramePerformer> performers = new ArrayList<>();
 
     @Override
     public void addFAPFramePerformer(FAPFramePerformer performer) {
@@ -44,19 +43,29 @@ public class FAPFrameEmitterImpl implements FAPFrameEmitter{
         }
     }
 
-    public void sendFAPFrames(ID requestId, FAPFrame... frames){
+    public void sendFAPFrames(ID requestId, FAPFrame... frames) {
         sendFAPFrames(requestId, Arrays.asList(frames));
     }
 
-
-    public void sendFAPFrames(ID requestId, List<FAPFrame> frames){
-        for(FAPFramePerformer performer : performers){
+    public void sendFAPFrames(ID requestId, List<FAPFrame> frames) {
+        for (FAPFramePerformer performer : performers) {
             performer.performFAPFrames(frames, requestId);
         }
     }
 
-    public void sendFAPFrame(ID requestId, FAPFrame frame){
+    public void sendFAPFrame(ID requestId, FAPFrame frame) {
         sendFAPFrames(requestId, frame);
     }
 
+    /**
+     * Sends a message to cancel all the {@code FAPFrame} with the given {@code ID} to all linked FAPFramePerformer.
+     * @param requestId ID of the frames to cancel
+     */
+    public void cancelFramesWithIDInLinkedPerformers(ID requestId) {
+        for (FAPFramePerformer performer : performers) {
+            if (performer instanceof CancelableFAPFramePerformer) {
+                ((CancelableFAPFramePerformer) performer).cancelFAPFramesById(requestId);
+            }
+        }
+    }
 }

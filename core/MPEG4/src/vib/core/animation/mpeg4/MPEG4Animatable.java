@@ -172,6 +172,22 @@ public class MPEG4Animatable extends Animatable implements CancelableFAPFramePer
         return fapFrames.getCurrentFrame();
     }
 
+    /**
+     * Deletes the given {@code FAPFrame} from the kept list.
+     * @param frameToDelete frame to be deleted
+     */
+    public void deleteFAPFrame (FAPFrame frameToDelete) {
+        fapFrames.deleteFrame(frameToDelete);
+    }
+
+    /**
+     * Deletes the given {@code BAPFrame} from the kept list.
+     * @param frameToDelete frame to be deleted
+     */
+    public void deleteBAPFrame (BAPFrame frameToDelete) {
+        bapFrames.deleteFrame(frameToDelete);
+    }
+
     @Override
     public void onCharacterChanged() {
         setAspect(getCharacterManager().getValueString(ASPECT));

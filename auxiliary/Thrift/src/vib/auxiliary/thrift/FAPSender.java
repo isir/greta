@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @author Ken Prepin
  */
-public class FAPSender extends APSender implements FAPFramePerformer {
+public class FAPSender extends APSender<FAPFrame> implements FAPFramePerformer {
 
     public FAPSender() {
     }
@@ -42,9 +42,8 @@ public class FAPSender extends APSender implements FAPFramePerformer {
 
     @Override
     public void performFAPFrame(FAPFrame fapf, ID idRequest) {
-        List<FAPFrame> fapFrameList = new ArrayList<FAPFrame>(1);
-        if(fapFrameList.add(fapf)) {
-            sendAnimParamFrameList(fapFrameList, "FAPFrames", idRequest);
-        }
+        List<FAPFrame> fapFrameList = new ArrayList<>(1);
+        fapFrameList.add(fapf);
+        sendAnimParamFrameList(fapFrameList, "FAPFrames", idRequest);
     }
 }

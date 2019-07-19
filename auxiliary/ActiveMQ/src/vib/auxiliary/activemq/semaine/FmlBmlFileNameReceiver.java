@@ -72,40 +72,33 @@ public class FmlBmlFileNameReceiver extends TextReceiver implements IntentionEmi
             if (xml.getName().equalsIgnoreCase("bml")) {
 
                 Mode mode = BMLTranslator.getDefaultBMLMode();
-                if (xml.hasAttribute("composition")) {
-                    mode.setCompositionType(xml.getAttribute("composition"));
-                }
-                if (xml.hasAttribute("reaction_type")) {
-                    mode.setReactionType(xml.getAttribute("reaction_type"));
-                }
-                if (xml.hasAttribute("reaction_duration")) {
-                    mode.setReactionDuration(xml.getAttribute("reaction_duration"));
-                }
-                if (xml.hasAttribute("social_attitude")) {
-                    mode.setSocialAttitude(xml.getAttribute("social_attitude"));
-                }
+                setModeParametersForAnimationSignal(xml, mode);
 
                 propagateSignals(BMLTranslator.BMLToSignals(xml,cm), IDProvider.createID(filename), mode);
             }
             if (xml.getName().equalsIgnoreCase("fml-apml")) {
 
                 Mode mode = FMLTranslator.getDefaultFMLMode();
-                if (xml.hasAttribute("composition")) {
-                    mode.setCompositionType(xml.getAttribute("composition"));
-                }
-                if (xml.hasAttribute("reaction_type")) {
-                    mode.setReactionType(xml.getAttribute("reaction_type"));
-                }
-                if (xml.hasAttribute("reaction_duration")) {
-                    mode.setReactionDuration(xml.getAttribute("reaction_duration"));
-                }
-                if (xml.hasAttribute("social_attitude")) {
-                    mode.setSocialAttitude(xml.getAttribute("social_attitude"));
-                }
+                setModeParametersForAnimationSignal(xml, mode);
 
                 propagateIntentions(FMLTranslator.FMLToIntentions(xml,cm), IDProvider.createID(filename), mode);
             }
         } catch (Exception e) {
+        }
+    }
+
+    private static void setModeParametersForAnimationSignal(XMLTree xml, Mode mode) {
+        if (xml.hasAttribute("composition")) {
+            mode.setCompositionType(xml.getAttribute("composition"));
+        }
+        if (xml.hasAttribute("reaction_type")) {
+            mode.setReactionType(xml.getAttribute("reaction_type"));
+        }
+        if (xml.hasAttribute("reaction_duration")) {
+            mode.setReactionDuration(xml.getAttribute("reaction_duration"));
+        }
+        if (xml.hasAttribute("social_attitude")) {
+            mode.setSocialAttitude(xml.getAttribute("social_attitude"));
         }
     }
 

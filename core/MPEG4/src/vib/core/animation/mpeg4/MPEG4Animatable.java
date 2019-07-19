@@ -18,14 +18,8 @@ package vib.core.animation.mpeg4;
 
 
 import java.util.List;
-import vib.core.animation.mpeg4.bap.BAPFrame;
-import vib.core.animation.mpeg4.bap.BAPFramesEmitter;
-import vib.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import vib.core.animation.mpeg4.bap.BAPFramesPerformer;
-import vib.core.animation.mpeg4.fap.FAPFrame;
-import vib.core.animation.mpeg4.fap.FAPFrameEmitter;
-import vib.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
-import vib.core.animation.mpeg4.fap.FAPFramePerformer;
+import vib.core.animation.mpeg4.bap.*;
+import vib.core.animation.mpeg4.fap.*;
 import vib.core.util.CharacterDependent;
 import vib.core.util.CharacterManager;
 import vib.core.util.Mode;
@@ -42,8 +36,8 @@ import vib.core.util.id.ID;
  *
  * @author Andre-Marie Pez
  */
-public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BAPFramesPerformer, AudioPerformer, FAPFrameEmitter, 
-        BAPFramesEmitter, AudioEmitter, CharacterDependent {
+public class MPEG4Animatable extends Animatable implements CancelableFAPFramePerformer, CancelableBAPFramesPerformer,
+        AudioPerformer, FAPFrameEmitter, BAPFramesEmitter, AudioEmitter, CharacterDependent {
 
     private static final String ASPECT = "ASPECT";
     private APFrameList<BAPFrame> bapFrames;
@@ -60,8 +54,9 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
      */
     @Override
     public CharacterManager getCharacterManager() {
-        if(characterManager==null)
+        if (characterManager == null) {
             characterManager = CharacterManager.getStaticInstance();
+        }
         return characterManager;
     }
 
@@ -70,8 +65,9 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
      */
     @Override
     public void setCharacterManager(CharacterManager characterManager) {
-        if(this.characterManager!=null)
+        if (this.characterManager != null) {
             this.characterManager.remove(this);
+        }
         this.characterManager = characterManager;
         characterManager.add(this);
     }    
@@ -88,22 +84,21 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
         this(cm,true);        
     }
 
-    public MPEG4Animatable(CharacterManager cm,boolean connectToCaracterManager) {
-        if(connectToCaracterManager)
+    public MPEG4Animatable(CharacterManager cm, boolean connectToCharacterManager) {
+        if(connectToCharacterManager)
             setCharacterManager(cm);
         BAPFrame firstBapFrame = new BAPFrame();
         firstBapFrame.setFrameNumber(0);
-        bapFrames = new APFrameList<BAPFrame>(firstBapFrame);
+        bapFrames = new APFrameList<>(firstBapFrame);
 
         FAPFrame firstFapFrame = new FAPFrame();
         firstFapFrame.setFrameNumber(0);
-        fapFrames = new APFrameList<FAPFrame>(firstFapFrame);
+        fapFrames = new APFrameList<>(firstFapFrame);
 
         getAttachedLeaf().setSize(0.50f, 1.75f, 0.3f);
-        if (connectToCaracterManager) {
-            setAspect(getCharacterManager().getValueString(ASPECT));
-            getCharacterManager().setCurrentCharacterId(this.getIdentifier());
-            getCharacterManager().add(this);
+        if (connectToCharacterManager) {
+            setAspect(cm.getValueString(ASPECT));
+            cm.setCurrentCharacterId(this.getIdentifier());
         } else {
             getAttachedLeaf().setReference("agent.greta");
         }
@@ -136,37 +131,61 @@ public class MPEG4Animatable extends Animatable implements FAPFramePerformer, BA
     public String getAspect(){
         return getAttachedLeaf().getReference();
     }
+
     @Override
-    public void performFAPFrames(List<FAPFrame> fap_animation, ID requestId) {
-        fapEmitter.sendFAPFrames(requestId, fap_animation);//pass throw
-        for (FAPFrame frame : fap_animation) {
-            fapFrames.addFrame(frame);
-        }
+    public void performFAPFrames(List<FAPFrame> newFapFrames, ID requestId) {
+        fapEmitter.sendFAPFrames(requestId, newFapFrames); //pass throw
+        fapFrames.addFrames(newFapFrames, requestId);
         fapFrames.updateFrames();
     }
 
     @Override
-    public void performFAPFrame(FAPFrame fap_anim, ID requestId) {
-        fapEmitter.sendFAPFrame(requestId, fap_anim);//pass throw
-        fapFrames.addFrame(fap_anim);
+    public void performFAPFrame(FAPFrame fapFrame, ID requestId) {
+        fapEmitter.sendFAPFrame(requestId, fapFrame); //pass throw
+        fapFrames.addFrame(fapFrame, requestId);
     }
 
     @Override
-    public void performBAPFrames(List<BAPFrame> bapframes, ID requestId) {
-        bapEmitter.sendBAPFrames(requestId, bapframes);//pass throw
-        for (BAPFrame frame : bapframes) {
-            bapFrames.addFrame(frame);
-        }
+    public void cancelFAPFramesById(ID requestId) {
+        fapEmitter.cancelFramesWithIDInLinkedPerformers(requestId);
+        fapFrames.deleteFramesWithId(requestId);
+    }
+
+    @Override
+    public void performBAPFrames(List<BAPFrame> newBapFrames, ID requestId) {
+        bapEmitter.sendBAPFrames(requestId, newBapFrames); //pass throw
+        bapFrames.addFrames(newBapFrames, requestId);
         bapFrames.updateFrames();
     }
 
+    @Override
+    public void cancelBAPFramesById(ID requestId) {
+        bapEmitter.cancelFramesWithIDInLinkedPerformers(requestId);
+        bapFrames.deleteFramesWithId(requestId);
+    }
+
     public BAPFrame getCurrentBAPFrame() {
-        BAPFrame current = bapFrames.getCurrentFrame();
-        return current;
+        return bapFrames.getCurrentFrame();
     }
 
     public FAPFrame getCurrentFAPFrame() {
         return fapFrames.getCurrentFrame();
+    }
+
+    /**
+     * Deletes the given {@code FAPFrame} from the kept list.
+     * @param frameToDelete frame to be deleted
+     */
+    public void deleteFAPFrame (FAPFrame frameToDelete) {
+        fapFrames.deleteFrame(frameToDelete);
+    }
+
+    /**
+     * Deletes the given {@code BAPFrame} from the kept list.
+     * @param frameToDelete frame to be deleted
+     */
+    public void deleteBAPFrame (BAPFrame frameToDelete) {
+        bapFrames.deleteFrame(frameToDelete);
     }
 
     @Override

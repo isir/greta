@@ -497,7 +497,7 @@ public class EnvironmentLoader {
 
         loadingLog += "\n";
 
-        // update the environment list of leafs
+        // update the environment list of leaves
         updateEnvironmentListLeaf(environment);
     }
 
@@ -507,12 +507,12 @@ public class EnvironmentLoader {
      */
     private static void updateEnvironmentListLeaf(Environment environment) {
 
-        loadingLog += "    - Removing obsolete leafs from list of leafs :\n";
-        removeObsoleteLeafsFromEnvironmentListLeaf(environment);
+        loadingLog += "    - Removing obsolete leaves from list of leaves :\n";
+        removeObsoleteLeavesFromEnvironmentListLeaf(environment);
         loadingLog += "\n";
 
-        loadingLog += "    - Adding finded leafs into list of leafs :\n";
-        addFindedLeafsToEnvironmentListLeaf(environment, environment.getRoot());
+        loadingLog += "    - Adding found leaves into list of leaves :\n";
+        addFoundLeavesToEnvironmentListLeaf(environment, environment.getRoot());
         loadingLog += "\n";
     }
 
@@ -520,14 +520,14 @@ public class EnvironmentLoader {
      *
      * @param environment
      */
-    private static void removeObsoleteLeafsFromEnvironmentListLeaf(Environment environment) {
+    private static void removeObsoleteLeavesFromEnvironmentListLeaf(Environment environment) {
 
         ListIterator<Leaf> environmentLeafIterator = environment.getListLeaf().listIterator();
 
         while (environmentLeafIterator.hasNext()) {
             Leaf leaf = environmentLeafIterator.next();
             if (leaf.getRoot() != environment.getRoot()) {
-                loadingLog += "        - removing leaf " + leaf.getIdentifier() + " from list of leafs.\n";
+                loadingLog += "        - removing leaf " + leaf.getIdentifier() + " from list of leaves.\n";
                 environmentLeafIterator.remove();
             }
         }
@@ -538,7 +538,7 @@ public class EnvironmentLoader {
      * @param environment
      * @param treeNode
      */
-    private static void addFindedLeafsToEnvironmentListLeaf(Environment environment, TreeNode treeNode) {
+    private static void addFoundLeavesToEnvironmentListLeaf(Environment environment, TreeNode treeNode) {
 
         List<Node> nodes = treeNode.getChildren();
 
@@ -546,13 +546,13 @@ public class EnvironmentLoader {
             if (node instanceof Leaf) {
                 Leaf leaf = (Leaf) node;
                 if (!environment.getListLeaf().contains(leaf)) {
-                    loadingLog += "        - adding leaf " + leaf.getIdentifier() + " into list of leafs.\n";
+                    loadingLog += "        - adding leaf " + leaf.getIdentifier() + " into list of leaves.\n";
                     environment.getListLeaf().add(leaf);
                 } else {
-                    loadingLog += "        - finding leaf " + leaf.getIdentifier() + " in list of leafs.\n";
+                    loadingLog += "        - finding leaf " + leaf.getIdentifier() + " in list of leaves.\n";
                 }
             } else if (node instanceof TreeNode) {
-                addFindedLeafsToEnvironmentListLeaf(environment, (TreeNode) node);
+                addFoundLeavesToEnvironmentListLeaf(environment, (TreeNode) node);
             }
         }
     }
@@ -673,7 +673,7 @@ public class EnvironmentLoader {
 
         }
 
-        // update the environment list of leafs
+        // update the environment list of leaves
         updateEnvironmentListLeaf(environment);
 
         return node;

@@ -49,7 +49,7 @@ public abstract class MPEG4Agent extends Thread {
     private boolean showSkeleton = IniManager.getGlobals().getValueBoolean("OGRE_SHOW_SKELETON");
     private boolean showBody = !showSkeleton;
     private Skeleton skeleton;
-    boolean visible = false;
+    boolean visible;
 
     public MPEG4Agent(String id, SceneNode parent) {
         super("MPEG4Agent-" + id);
@@ -142,7 +142,6 @@ public abstract class MPEG4Agent extends Thread {
     }
 
     public void setVisible(final boolean visible) {
-        
         //here we use double sychronizations in this order to prevent mutual blocking between this thread and the OgreThread.
         //in general, all synchronizations on this object must be call by the OgreThread.
         Ogre.callSync(new vib.auxiliary.player.ogre.OgreThread.Callback() {public void run() {

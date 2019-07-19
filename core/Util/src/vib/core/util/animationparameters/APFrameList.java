@@ -148,4 +148,12 @@ public class APFrameList <APF extends AnimationParametersFrame> {
             }
         }
     }
+
+    /**
+     * Removes the given frame if it is in the list.
+     * @param frameToDelete frame to be deleted
+     */
+    public synchronized void deleteFrame (APF frameToDelete) {
+        apFrameList.remove(frameToDelete);
+    }
 }

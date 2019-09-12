@@ -35,6 +35,7 @@
  THE SOFTWARE.
 
  */
+
 package org.joml.camera;
 
 import org.joml.Matrix4f;

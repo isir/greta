@@ -35,6 +35,7 @@
  THE SOFTWARE.
 
  */
+
 package org.joml.camera;
 
 public class ScalarMover {

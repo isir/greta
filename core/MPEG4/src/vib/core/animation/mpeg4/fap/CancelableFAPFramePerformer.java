@@ -14,6 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Greta.If not, see <http://www.gnu.org/licenses/>.
  */
+
 package vib.core.animation.mpeg4.fap;
 
 import vib.core.util.id.ID;

@@ -14,11 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with Greta.If not, see <http://www.gnu.org/licenses/>.
  */
-/*
- * TextEditor.java
- *
- * Created on 20 juin 2012, 12:52:39
- */
+
 package vib.auxiliary.activemq.semaine;
 
 import vib.auxiliary.activemq.TextSender;

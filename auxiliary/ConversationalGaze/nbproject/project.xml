@@ -37,7 +37,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>SSI</foreign-project>
+                <foreign-project>Signals</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>
@@ -45,7 +45,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>Signals</foreign-project>
+                <foreign-project>SSI</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

@@ -1,14 +1,14 @@
-**/nbproject/private/
 **/build/
-bin/Log/
-bin/Common/Data/Cereproc/
-bin/Player/Lib/External/Win64/*\.cfg
-bin/ModularSave\.xml
-**/genfiles\.properties
-*.log
-*.form
-\.idea/
+**/dist/
+**/test/
 
-**/javadoc/
-out/
-*.iml
+**/nbproject/build-impl.xml
+**/nbproject/genfiles.properties
+**/nbproject/private/
+
+/bin/Common/Data/Cereproc/*
+/bin/Log/*
+/bin/ModularSave.xml
+/bin/Player/Lib/External/Win64/*.cfg
+
+*.log

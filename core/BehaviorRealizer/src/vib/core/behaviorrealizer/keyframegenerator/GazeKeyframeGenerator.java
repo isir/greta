@@ -198,10 +198,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
         SpinePhase lastShiftHead = new SpinePhase("head", 0, 0);
         SpinePhase lastShiftTorso = new SpinePhase("torso", 0, 0);
 
-        // take the MPEG4 for the agent target, i.e. the agent to look at
-        //MPEG4Animatable targetAgent = new MPEG4Animatable();
         // take the MPEG4 for the agent whom is performing the gaze
-        MPEG4Animatable currentAgent = new MPEG4Animatable(cm);
+        MPEG4Animatable currentAgent = null;
         for (Node node : this.env.getTreeNode().getChildren()) {
             if (node instanceof MPEG4Animatable) {
                 MPEG4Animatable agent = (MPEG4Animatable) node;
@@ -1706,9 +1704,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             }
 
             // take the MPEG4 for the agent target, i.e. the agent to look at
-            MPEG4Animatable targetAgent = new MPEG4Animatable(cm);
+            MPEG4Animatable targetAgent = null;
             // take the MPEG4 for the agent whom is performing the gaze
-            MPEG4Animatable currentAgent = new MPEG4Animatable(gaze.getCharacterManager());
+            MPEG4Animatable currentAgent = null;
             if (gaze.getTarget() != null) {
                 boolean gazeTargetNotEmpty = !gaze.getTarget().isEmpty();
                 if (gazeTargetNotEmpty) {

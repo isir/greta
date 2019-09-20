@@ -111,8 +111,7 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
         //get the intentions of the FML file
         fmlParser.setValidating(true);
         XMLTree fml = fmlParser.parseFile(fmlFileName);
-        CharacterManager cm = CharacterManager.getStaticInstance();
-        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, cm);
+        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, characterManager);
 
         Mode mode = FMLTranslator.getDefaultFMLMode();
         if (fml.hasAttribute("composition")) {
@@ -1067,7 +1066,6 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
 
             String interruptionFileContent = "";
             interruptionFileContent += "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n";
-            interruptionFileContent += "<!DOCTYPE fml-apml SYSTEM \"Common/Data/ARIA-ValuspaFMLTranslator/fml-apml.dtd\" []>\n";
             interruptionFileContent += "<fml-apml>\n";
             interruptionFileContent += "\t<bml>\n";
             interruptionFileContent += "\t\t<speech id=\"s1\" start=\"0.0\" language=\"english\" text=\"\" voice=\"cereproc\">\n";
@@ -1096,7 +1094,7 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
             //get the intentions of the FML file
             fmlParser.setValidating(true);
             XMLTree fml = fmlParser.parseFile(interruptionFile.getPath());
-            List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, CharacterManager.getStaticInstance());
+            List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, characterManager);
 
             Mode mode = FMLTranslator.getDefaultFMLMode();
             mode.setCompositionType("replace");

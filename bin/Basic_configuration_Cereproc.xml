@@ -36,7 +36,7 @@
                 <element h="50.0"
                     id="Cereproc TTS-1544700946314-81"
                     module="Cereproc TTS"
-                    name="OpenMary Client TTS" w="80.0" x="540.0" y="20.0"/>
+                    name="Cereproc TTS" w="80.0" x="540.0" y="20.0"/>
                 <element h="50.0" id="FMLFileReader-1544700908962-428"
                     module="FMLFileReader" name="FML File Reader"
                     w="80.0" x="30.0" y="30.0">

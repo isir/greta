@@ -36,7 +36,7 @@
                 <element h="50.0"
                     id="Cereproc TTS-1544701108513-960"
                     module="Cereproc TTS"
-                    name="OpenMary Client TTS #1" w="80.0" x="540.0" y="30.0"/>
+                    name="Cereproc TTS #1" w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FMLFileReader-1544701069074-506"
                     module="FMLFileReader" name="FML File Reader #1"
                     w="80.0" x="30.0" y="30.0">
@@ -117,7 +117,7 @@
                 <element h="50.0"
                     id="Cereproc TTS-1544705335787-254"
                     module="Cereproc TTS"
-                    name="OpenMary Client TTS #2" w="80.0" x="540.0" y="30.0"/>
+                    name="Cereproc TTS #2" w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FMLFileReader-1544700908962-428"
                     module="FMLFileReader" name="FML File Reader #2"
                     w="80.0" x="30.0" y="30.0">

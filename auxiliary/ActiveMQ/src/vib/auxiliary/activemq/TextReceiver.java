@@ -26,7 +26,7 @@ import javax.jms.TextMessage;
  *
  * @author Andre-Marie Pez
  */
-public class TextReceiver extends Receiver<String>{
+public abstract class TextReceiver extends Receiver<String>{
 
     public TextReceiver(){
         super();
@@ -36,9 +36,7 @@ public class TextReceiver extends Receiver<String>{
     }
 
     @Override
-    protected void onMessage(String content, Map<String, Object> properties) {
-        // Must be overrided to use the content received and/or the map
-    }
+    protected abstract void onMessage(String content, Map<String, Object> properties);
 
     @Override
     protected String getContent(Message message) throws JMSException {

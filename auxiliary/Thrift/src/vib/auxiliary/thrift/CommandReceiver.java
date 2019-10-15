@@ -214,7 +214,7 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
      */
     private void handleObjectMessage (Message message) {
         Map<String, String> gameObjectProperties = message.getProperties();
-        String gameObjectId = "GameObject-" + gameObjectProperties.get("id");
+        String gameObjectId = gameObjectProperties.get("id");
         // Get the object's node
         TreeNode gameObjectNode = (TreeNode) this.environment.getNode(gameObjectId);
         if (gameObjectNode == null) {

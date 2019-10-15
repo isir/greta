@@ -33,6 +33,7 @@ import vib.core.util.speech.TTS;
  * If a parameter of the current character is changed or if an other character is set, all {@code CharacterDependent} added
  * with {@code add(CharacterDependent)} will be informed that a change occurs.
  * @author Andre-Marie Pez
+ * @author Fajrian Yunus
  * @see vib.core.util.CharacterDependent CharacterDependent
  */
 public class CharacterManager {
@@ -53,6 +54,8 @@ public class CharacterManager {
     public String currentCameraId;
     private String id;
     private TTS tts;
+    
+    private vib.core.util.environment.TreeNode thisCharacterComponentInUnity;
     
     static{
         getStaticInstance();
@@ -77,6 +80,7 @@ public class CharacterManager {
         characterMapFile.put(currentCaracterName, (new File(filename)).getAbsolutePath());
         characterDefinitions = new IniManager((new File(filename)).getAbsolutePath());
         setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER")); 
+        this.thisCharacterComponentInUnity = null;
         count++;
         Logs.info(String.format("CharacterManager '%s' created",id));
     }
@@ -410,4 +414,12 @@ public class CharacterManager {
     public void setCurrentCharacterId(String currentCharacterId) {
         this.currentCharacterId = currentCharacterId;
     }
+
+	public vib.core.util.environment.TreeNode getThisCharacterComponentInUnity() {
+		return this.thisCharacterComponentInUnity;
+	}
+
+	public void setThisCharacterComponentInUnity(vib.core.util.environment.TreeNode thisCharacterComponentInUnity) {
+		this.thisCharacterComponentInUnity = thisCharacterComponentInUnity;
+	}
 }

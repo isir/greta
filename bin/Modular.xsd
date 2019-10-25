@@ -295,7 +295,7 @@
 						</xs:sequence>
 					</xs:complexType>
 					<xs:key name="elementid" >
-						<xs:selector xpath="element"/>
+						<xs:selector xpath=".//element"/>
 						<xs:field xpath="@id"/>
 					</xs:key>
 				</xs:element>

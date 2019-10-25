@@ -27,7 +27,7 @@
                 <parameter name="character_name" value="CAMILLE"/>
                 <window h="531" visible="false" w="505" x="10" y="10"/>
                 <element h="50.0" id="TTS-1544700939858-569"
-                    module="TTS" name="TTS" w="80.0" x="440.0" y="20.0">
+                    module="TTS" name="TTS" w="80.0" x="440.0" y="30.0">
                     <parameter name="doPhonemes" value="true"/>
                     <parameter name="doTemporize" value="true"/>
                     <parameter name="doAudio" value="true"/>
@@ -36,7 +36,7 @@
                 <element h="50.0"
                     id="OpenMary ClientTTS-1544700946314-81"
                     module="OpenMary ClientTTS"
-                    name="OpenMary Client TTS" w="80.0" x="540.0" y="20.0"/>
+                    name="OpenMary Client TTS" w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FMLFileReader-1544700908962-428"
                     module="FMLFileReader" name="FML File Reader"
                     w="80.0" x="30.0" y="30.0">
@@ -103,8 +103,8 @@
                 </element>
             </element>
         </element>
-        <element h="420.0" id="PlayerOgre-1544700973529-249"
-            module="PlayerOgre" name="Player Ogre" w="80.0" x="770.0" y="110.0">
+        <element h="260.0" id="PlayerOgre-1544700973529-249"
+            module="PlayerOgre" name="Player Ogre" w="100.0" x="770.0" y="110.0">
             <parameter name="posX" value="0.0"/>
             <parameter name="posY" value="1.5"/>
             <parameter name="posZ" value="1.3"/>
@@ -112,6 +112,22 @@
             <parameter name="pitch" value="0.0"/>
             <parameter name="yaw" value="0.0"/>
             <window h="614" visible="true" w="736" x="10" y="230"/>
+        </element>
+        <element h="50.0" id="AUParserFileReader-1570200726321-119"
+            module="AUParserFileReader" name="AU Parser File Reader"
+            w="140.0" x="600.0" y="560.0">
+            <window h="521" visible="false" w="579" x="10" y="10"/>
+        </element>
+        <element h="50.0"
+            id="ParserCaptureController_AU-1570200744017-74"
+            module="ParserCaptureController_AU"
+            name="Parser Capture Controller AU" w="100.0" x="770.0" y="400.0">
+            <window h="112" visible="false" w="279" x="10" y="10"/>
+        </element>
+        <element h="50.0" id="XuggleVideoCapture-1570200767793-47"
+            module="XuggleVideoCapture" name="Xuggle Video Capture"
+            w="100.0" x="770.0" y="480.0">
+            <window h="142" visible="false" w="404" x="10" y="10"/>
         </element>
     </elements>
     <connections>
@@ -148,5 +164,15 @@
             source="MPEG4Animatable-1544700808257-513" target="Environment-1544700713383-564"/>
         <connection connector="connectPlayerToEnvironment"
             source="PlayerOgre-1544700973529-249" target="Environment-1544700713383-564"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="AUParserFileReader-1570200726321-119" target="SimpleAUPerformer-1544700795765-328"/>
+        <connection connector="connectAUCapturecontrollerToCapturable"
+            source="ParserCaptureController_AU-1570200744017-74" target="PlayerOgre-1544700973529-249"/>
+        <connection
+            connector="connectParserCaptureController_AUToAUParserFileReader"
+            source="ParserCaptureController_AU-1570200744017-74" target="AUParserFileReader-1570200726321-119"/>
+        <connection
+            connector="connectAUCapturecontrollerToCaptureOutput"
+            source="ParserCaptureController_AU-1570200744017-74" target="XuggleVideoCapture-1570200767793-47"/>
     </connections>
 </modulated>

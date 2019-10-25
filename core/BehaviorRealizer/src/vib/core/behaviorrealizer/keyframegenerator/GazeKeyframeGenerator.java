@@ -68,6 +68,7 @@ import vib.core.util.time.Timer;
  * @author André-Marie Pez
  * @author Donatella Simonetti
  * @author Nawhal Sayarh
+ * @author Fajrian Yunus
  */
 public class GazeKeyframeGenerator extends KeyframeGenerator implements EnvironmentEventListener, SignalEmitter{
 
@@ -1790,9 +1791,13 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 }
                                 // if it is not a leaf but a TreeNode children
                                 if (idTarget.equals("")){
-                                    TreeNode target = (TreeNode) env.getNode(gazeTarget);
-                                    idTarget = target.getIdentifier();
-                                    sizeTarget = target.getScale();
+                                	Node n = env.getNode(gazeTarget);
+                                	if (n != null) {
+                                        TreeNode target = (TreeNode) n;
+                                        idTarget = target.getIdentifier();
+                                        sizeTarget = target.getScale();                                		
+                                	}
+
                                 }
                                 targetNode = env.getNode(idTarget);
                             }
@@ -1828,6 +1833,15 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         // headPosition don't have the right x and z position
                         headPosition.setX(currentPosition.x());
                         headPosition.setZ(currentPosition.z());
+
+                        // update the Y coordinate only
+                        // it is possible that Greta is standing in Ogre but is sitting in Unity
+                        // in this case, we use the height (i.e. Y value) given by Unity
+                        if (GazeKeyframeGenerator.this.cm.getThisCharacterComponentInUnity() != null) {
+                        	this.headPosition.setY(
+                        			GazeKeyframeGenerator.this.cm.getThisCharacterComponentInUnity().getGlobalCoordinates().y()
+                        				+ GazeKeyframeGenerator.this.cm.getThisCharacterComponentInUnity().getScaleY() / 2);
+                        }
 
                         if (gaze.getTarget().equals("user")) {
                             //vec2target.add(headPosition);

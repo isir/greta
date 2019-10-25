@@ -425,8 +425,12 @@ public class ModuleLoader {
             if(style.hasAttribute("edge-end")){
                 edge_end = style.getAttribute("edge-end");
             }
+            String vAlign = "center";
+            if(style.hasAttribute("v-align")){
+                vAlign = style.getAttribute("v-align");
+            }
 
-            Style.createNewStyle(name, color, edge_color, edge_dash, edge_start, edge_end);
+            Style.createNewStyle(name, color, edge_color, edge_dash, edge_start, edge_end, vAlign);
 
         }
     }

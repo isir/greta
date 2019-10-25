@@ -21,15 +21,24 @@
 			<xs:enumeration value="diamond"/>
 		</xs:restriction>
 	</xs:simpleType>
+	
+	<xs:simpleType name="v-align-format">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="center"/>
+			<xs:enumeration value="top"/>
+			<xs:enumeration value="bottom"/>
+		</xs:restriction>
+	</xs:simpleType>
 
 	<xs:element name="style">
 		<xs:complexType>
 			<xs:attribute name="name" type="xs:string" use="required"/>
 			<xs:attribute name="color" type="xs:string" default="0xFDFDFD" />
-                        <xs:attribute name="edge-color" type="xs:string"/>
-                        <xs:attribute name="edge-dash" type="xs:string" default=""/>
-                        <xs:attribute name="edge-start" type="edgeformat" default="none"/>
-                        <xs:attribute name="edge-end" type="edgeformat" default="arrow"/>
+			<xs:attribute name="edge-color" type="xs:string"/>
+			<xs:attribute name="edge-dash" type="xs:string" default=""/>
+			<xs:attribute name="edge-start" type="edgeformat" default="none"/>
+			<xs:attribute name="edge-end" type="edgeformat" default="arrow"/>
+			<xs:attribute name="v-align" type="v-align-format" default="center"/>
 		</xs:complexType>
 	</xs:element>
 

@@ -92,7 +92,7 @@ public class Style {
         return edgeColor;
     }
     
-    public static void createNewStyle(String styleName, String fillColor, String edgeColor, String dashPattern, String startForm, String endForm) {
+    public static void createNewStyle(String styleName, String fillColor, String edgeColor, String dashPattern, String startForm, String endForm, String vAlign) {
         edgeColor = ensureEdgeColor(fillColor, edgeColor);
         if(dashPattern==null){
             dashPattern = "";
@@ -103,8 +103,11 @@ public class Style {
         if(endForm==null || endForm.isEmpty()){
             endForm = "arrow";
         }
+        if(vAlign==null || vAlign.isEmpty()){
+            vAlign = mxConstants.ALIGN_CENTER;
+        }
         for(Mapper mapper : allStyleMapper){
-            knownStyles.addAll(Arrays.asList(mapper.createNewStyle(styleName, fillColor, edgeColor, dashPattern, startForm, endForm)));
+            knownStyles.addAll(Arrays.asList(mapper.createNewStyle(styleName, fillColor, edgeColor, dashPattern, startForm, endForm, vAlign)));
         }
     }
 
@@ -278,7 +281,7 @@ public class Style {
 
         protected abstract void fillDefaultEdgeMap();
         protected abstract void fillDefaultVertexMap();
-        protected abstract Style[] createNewStyle(String name, String vertexColor, String edgeColor, String dashPattern, String startForm, String endForm);
+        protected abstract Style[] createNewStyle(String name, String vertexColor, String edgeColor, String dashPattern, String startForm, String endForm, String vAlign);
         public abstract Color getHighLightColor();
         public abstract String getVertexStyle(String styleName);
         public abstract String getVertexHighLightStyle(String styleName);
@@ -328,7 +331,7 @@ public class Style {
         }
 
         @Override
-        protected Style[] createNewStyle(String name, String vertexColor, String edgeColor, String dashPattern, String startForm, String endForm) {
+        protected Style[] createNewStyle(String name, String vertexColor, String edgeColor, String dashPattern, String startForm, String endForm, String vAlign) {
             return asArray();
         }
 
@@ -398,10 +401,11 @@ public class Style {
         }
 
         @Override
-        protected Style[] createNewStyle(String name, String vertexColor, String edgeColor, String dashPattern, String startForm, String endForm) {
+        protected Style[] createNewStyle(String name, String vertexColor, String edgeColor, String dashPattern, String startForm, String endForm, String vAlign) {
             HashMap<String, Object> newStyleMap = new HashMap<String, Object>(defaultVertexMap);
             newStyleMap.put(mxConstants.STYLE_FILLCOLOR, vertexColor);
             newStyleMap.put(mxConstants.STYLE_GRADIENTCOLOR, vertexColor);
+            newStyleMap.put(mxConstants.STYLE_VERTICAL_ALIGN, vAlign);
             Style style = new Style(getVertexStyle(name), newStyleMap);
             return asArray(style);
         }
@@ -463,7 +467,7 @@ public class Style {
         }
 
         @Override
-        protected Style[] createNewStyle(String name, String vertexColor, String edgeColor, String dashPattern, String startForm, String endForm) {
+        protected Style[] createNewStyle(String name, String vertexColor, String edgeColor, String dashPattern, String startForm, String endForm, String vAlign) {
             HashMap<String, Object> styleMap = new HashMap<String, Object>(defaultVertexMap);
             HashMap<String, Object> styleHighLightMap = new HashMap<String, Object>(defaultVertexMap);
             HashMap<String, Object> styleGreyedHighLightMap = new HashMap<String, Object>(defaultVertexMap);
@@ -517,6 +521,14 @@ public class Style {
             if("diamond".equalsIgnoreCase(endForm)){
                 edgeMap.put(mxConstants.STYLE_ENDSIZE, 8);
                 brokenEdgeMap.put(mxConstants.STYLE_ENDSIZE, 8);
+            }
+            //newStyleMap.put(mxConstants.STYLE_VERTICAL_ALIGN, vAlign);
+            if(mxConstants.ALIGN_TOP.equals(vAlign)){
+                styleMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);
+                styleHighLightMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);
+                styleGreyedHighLightMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);                
+                edgeMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);
+                brokenEdgeMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);
             }
 
             return asArray(

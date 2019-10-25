@@ -52,6 +52,7 @@ public class ModularWindow extends javax.swing.JFrame {
 
     private ModuleGraph moduleGraph;
     private String title = "Modular";
+    private File configsDirectory = new File("Configurations");
     private File currentConfigFile;
     private String currentConfigSimpleName = "";
     private EditorFrame editor;
@@ -499,6 +500,8 @@ public class ModularWindow extends javax.swing.JFrame {
     private void openConfigItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openConfigItemActionPerformed
         if(currentConfigFile!=null) {
             openDialog.setCurrentDirectory(currentConfigFile);
+        } else if(configsDirectory.exists()) {
+            openDialog.setCurrentDirectory(configsDirectory);
         }
         openDialog.updateUI();
         if(openDialog.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION){
@@ -509,6 +512,8 @@ public class ModularWindow extends javax.swing.JFrame {
     private void saveAsConfigItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveAsConfigItemActionPerformed
         if(currentConfigFile!=null) {
             openDialog.setCurrentDirectory(currentConfigFile);
+        } else if(configsDirectory.exists()) {
+            openDialog.setCurrentDirectory(configsDirectory);
         }
         openDialog.updateUI();
         if(openDialog.showSaveDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION){

@@ -204,7 +204,7 @@
             module="PlayerOgre" name="Player Ogre" w="80.0" x="1490.0" y="110.0">
             <parameter name="posX" value="0.0"/>
             <parameter name="posY" value="1.5"/>
-            <parameter name="posZ" value="1.2999999523162842"/>
+            <parameter name="posZ" value="1.3"/>
             <parameter name="roll" value="0.0"/>
             <parameter name="pitch" value="0.0"/>
             <parameter name="yaw" value="0.0"/>

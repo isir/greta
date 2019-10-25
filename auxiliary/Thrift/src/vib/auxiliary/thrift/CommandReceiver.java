@@ -34,6 +34,7 @@ import vib.core.intentions.IntentionEmitter;
 import vib.core.intentions.IntentionPerformer;
 import vib.core.signals.*;
 import vib.core.util.CharacterManager;
+import vib.core.util.Constants;
 import vib.core.util.Mode;
 import vib.core.util.enums.Influence;
 import vib.core.util.environment.Environment;
@@ -51,6 +52,7 @@ import vib.core.util.xml.XMLTree;
  * Class that receives and handles Thrift messages.
  * @author Ken Prepin
  * @author Nawhal Sayarh
+ * @author Fajrian Yunus
  */
 public class CommandReceiver extends Receiver implements IntentionEmitter, SignalEmitter, SocialParameterEmitter {
     private Environment environment;
@@ -219,6 +221,10 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         TreeNode gameObjectNode = (TreeNode) this.environment.getNode(gameObjectId);
         if (gameObjectNode == null) {
             gameObjectNode = createObjectNode(gameObjectId);
+                       
+            if (this.cm != null && gameObjectProperties.containsKey(Constants.UNITY_IS_SENDER_COMPONENT_KEY)) {
+            	this.cm.setThisCharacterComponentInUnity(gameObjectNode);
+            }
         }
         // Update coordinates
         updateNodeProperties(gameObjectNode, gameObjectProperties);

@@ -52,6 +52,7 @@ public abstract class Sender extends Connector<Sender> {
             System.out.println("Closing the simple client...");
             transport.close();
         }
+        starter = null;
         super.finalize();
     }
 

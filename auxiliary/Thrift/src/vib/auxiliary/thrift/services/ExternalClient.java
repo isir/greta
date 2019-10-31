@@ -86,6 +86,7 @@ public abstract class ExternalClient extends Connector<ExternalClient>{
             System.out.println("Closing the simple client...");
             transport.close();
         }
+        starter = null;
         super.finalize();
     }
 

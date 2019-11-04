@@ -48,11 +48,12 @@ public abstract class Sender extends Connector<Sender> {
 
     @Override
     protected void finalize() throws Throwable {
-        if (transport != null) {
-            System.out.println("Closing the simple client...");
-            transport.close();
+        synchronized (this) {
+            if (transport != null) {
+                System.out.println("Closing the simple client...");
+                transport.close();
+            }
         }
-        starter = null;
         super.finalize();
     }
 

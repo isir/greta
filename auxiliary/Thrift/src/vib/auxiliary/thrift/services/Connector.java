@@ -68,6 +68,12 @@ public abstract class Connector<C extends Connector> {
         this.startConnection();
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        starter = null;
+        super.finalize();
+    }
+
     public String getHost() {
         return host;
     }

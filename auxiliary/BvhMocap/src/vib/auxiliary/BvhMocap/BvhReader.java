@@ -15,7 +15,7 @@
  * along with Greta.If not, see <http://www.gnu.org/licenses/>.
  */
 
-package vib.auxiliary.BvhMocap;
+package vib.auxiliary.BVHMocap;
 
 import vib.core.animation.mpeg4.bap.BAPFrame;
 import vib.core.animation.common.Joint;
@@ -36,7 +36,7 @@ import vib.core.util.time.Timer;
  *
  * @author Nesrine Fourati
  */
-public class BvhReader implements BAPFramesEmitter {
+public class BVHReader implements BAPFramesEmitter {
 
     public String filename;//path + name+ ".bvh"
     public Dictionary dictionary;
@@ -44,13 +44,13 @@ public class BvhReader implements BAPFramesEmitter {
     private boolean USE_COORDINATES_OFFSET = false;
     private boolean USE_DICTIONNARY = true;
 
-    public BvhReader() {
+    public BVHReader() {
         this("");
         USE_COORDINATES_OFFSET = false;
         USE_DICTIONNARY = true;
     }
 
-    public BvhReader(String fname) {
+    public BVHReader(String fname) {
         filename = fname;
         dictionary = new Dictionary();
         dictionary.Initialize();
@@ -116,7 +116,7 @@ public class BvhReader implements BAPFramesEmitter {
 
 
             BufferedReader br = ReadFile(filename);
-            Skeleton skeleton = BvhSkeleton(br);
+            Skeleton skeleton = BVHSkeleton(br);
             int nbframe = GetFrameNumber(br);
             float frameTime = GetFrameTime(br);
             int EulerAngleOrder = EulerOrder();
@@ -139,9 +139,9 @@ public class BvhReader implements BAPFramesEmitter {
 
     }
 
-//    public ArrayList<BAPFrame> BvhToBAPFrames() throws FileNotFoundException, IOException {
+//    public ArrayList<BAPFrame> BVHToBAPFrames() throws FileNotFoundException, IOException {
 //        BufferedReader br = ReadFile(filename);
-//        Skeleton skeleton = BvhSkeleton(br);
+//        Skeleton skeleton = BVHSkeleton(br);
 //        int nbframe = GetFrameNumber(br);
 //
 //        float frameTime = GetFrameTime(br);
@@ -149,24 +149,24 @@ public class BvhReader implements BAPFramesEmitter {
 //        ArrayList<BAPFrame> bap_animation = BAPFramesCreator(br, skeleton, nbframe, EulerAngleOrder, frameTime, 0);
 //        return bap_animation;
 //    }
-    public Bvh MotionBasedBvhCreator() throws FileNotFoundException, IOException {
+    public BVH MotionBasedBVHCreator() throws FileNotFoundException, IOException {
         BufferedReader br = ReadFile(filename);
-        Skeleton skeleton = BvhSkeleton(br);
+        Skeleton skeleton = BVHSkeleton(br);
         int nbframe = GetFrameNumber(br);
         float frameTime = GetFrameTime(br);
         int EulerAngleOrder = EulerOrder();
         ArrayList motion = bvhMotionList(br, skeleton, nbframe, EulerAngleOrder);
-        return new Bvh(motion, nbframe, skeleton, frameTime, EulerAngleOrder);
+        return new BVH(motion, nbframe, skeleton, frameTime, EulerAngleOrder);
     }
 
-    public Bvh JFTableBasedBvhCreator() throws FileNotFoundException, IOException {   //  Bvh Creater is based on Joint Frame Table
+    public BVH JFTableBasedBVHCreator() throws FileNotFoundException, IOException {   //  BVH Creater is based on Joint Frame Table
         BufferedReader br = ReadFile(filename);
-        Skeleton skeletonWithES = BvhSkeletonWithEndSite(br);
+        Skeleton skeletonWithES = BVHSkeletonWithEndSite(br);
         int nbframe = GetFrameNumber(br);
         float frameTime = GetFrameTime(br);
         int EulerAngleOrder = EulerOrder();
         AllJointFramesTable jointframestable = bvhJFTable(br, skeletonWithES, nbframe, EulerAngleOrder);
-        return new Bvh(jointframestable, nbframe, skeletonWithES, frameTime, EulerAngleOrder);
+        return new BVH(jointframestable, nbframe, skeletonWithES, frameTime, EulerAngleOrder);
     }
 
     public AllJointFramesTable bvhJFTable(BufferedReader br, Skeleton skeleton, int nbframe, int EulerAngleOrder) throws IOException {
@@ -468,7 +468,7 @@ public class BvhReader implements BAPFramesEmitter {
         return word_index;
     }
 
-    public Skeleton BvhSkeletonWithEndSite(BufferedReader br) throws FileNotFoundException, IOException {
+    public Skeleton BVHSkeletonWithEndSite(BufferedReader br) throws FileNotFoundException, IOException {
         Skeleton skeleton = new Skeleton(filename.split("[.]")[0]);
         String line;
         String name;
@@ -587,7 +587,7 @@ public class BvhReader implements BAPFramesEmitter {
         return skeleton;
     }
 
-    public Skeleton BvhSkeleton(BufferedReader br) throws FileNotFoundException, IOException {
+    public Skeleton BVHSkeleton(BufferedReader br) throws FileNotFoundException, IOException {
         Skeleton skeleton = new Skeleton(filename.split("[.]")[0]);
         String line;
         String name;
@@ -682,7 +682,7 @@ public class BvhReader implements BAPFramesEmitter {
     }
 
     public Quaternion JointQuaternion90(String jname, float vx, float vy, float vz, int EulerAngleOrder) {
-        Bvh bvh = new Bvh();
+        BVH bvh = new BVH();
         Quaternion rotationx = new Quaternion();
         Quaternion rotationy = new Quaternion();
         Quaternion rotationz = new Quaternion();
@@ -770,7 +770,7 @@ public class BvhReader implements BAPFramesEmitter {
     }
 
     public Quaternion JointQuaternion(float vx, float vy, float vz, int EulerAngleOrder) {
-        Bvh bvh = new Bvh();
+        BVH bvh = new BVH();
         Quaternion rotationx = new Quaternion();
         Quaternion rotationy = new Quaternion();
         Quaternion rotationz = new Quaternion();
@@ -888,7 +888,7 @@ public class BvhReader implements BAPFramesEmitter {
         int ix = EulerAngleOrder / 100;
         int iy = (EulerAngleOrder % 100) / 10;
         int iz = (EulerAngleOrder % 100) % 10;
-        //System.out.println("Euler Angles Orientation Order in Bvh file: x=" + ix + "  y=" + iy + "  z=" + iz);
+        //System.out.println("Euler Angles Orientation Order in BVH file: x=" + ix + "  y=" + iy + "  z=" + iz);
         int firstCharacter;
         int jjoint = 0;
         int f = 0;
@@ -1056,10 +1056,10 @@ public class BvhReader implements BAPFramesEmitter {
 //                        q=Quaternion.multiplication(JointQuaternion(vx, vy, vz, EulerAngleOrder) ,AllPreRotation.get(dict_name) );
 //                        if (f==0)
 //                        {
-//                            System.out.println(dict_name+"   "+"old rotation:  "+Bvh.RTOD*AllPreRotation.get(dict_name).angle()+ "  "+AllPreRotation.get(dict_name).axis());
-//                            System.out.println(dict_name+"   "+"new rotation:  "+Bvh.RTOD*JointQuaternion(vx, vy, vz, EulerAngleOrder) .angle()+ "  "+JointQuaternion(vx, vy, vz, EulerAngleOrder).axis());
+//                            System.out.println(dict_name+"   "+"old rotation:  "+BVH.RTOD*AllPreRotation.get(dict_name).angle()+ "  "+AllPreRotation.get(dict_name).axis());
+//                            System.out.println(dict_name+"   "+"new rotation:  "+BVH.RTOD*JointQuaternion(vx, vy, vz, EulerAngleOrder) .angle()+ "  "+JointQuaternion(vx, vy, vz, EulerAngleOrder).axis());
 //                             System.out.println(dict_name+"   "+"new rotation:  "+vx+" "+vy+" "+vz);
-//                            System.out.println(dict_name+"   "+"obtained rotation:  "+Bvh.RTOD*q.angle()+ "  "+q.axis());
+//                            System.out.println(dict_name+"   "+"obtained rotation:  "+BVH.RTOD*q.angle()+ "  "+q.axis());
 //                        }
 //                    }
 //                    else
@@ -1295,7 +1295,7 @@ public class BvhReader implements BAPFramesEmitter {
         return bapframes;
     }
 
-    public ArrayList<BAPFrame> BAPFramesCreatorJFTBased(Bvh bvh, int bapframe_startTime) throws IOException {
+    public ArrayList<BAPFrame> BAPFramesCreatorJFTBased(BVH bvh, int bapframe_startTime) throws IOException {
         ArrayList<BAPFrame> bap_animation = new ArrayList<BAPFrame>();
         AllJointFramesTable jointframestable = bvh.GetAllJointFramesTable();
         BapAnimationConverter bapconverter = new BapAnimationConverter();

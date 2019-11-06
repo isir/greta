@@ -40,7 +40,7 @@
     </target>    
     
     <target name="build.dependency.bvhmocap" if="${need.bvhmocap}">
-        <ant antfile="../../auxiliary/BvhMocap/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+        <ant antfile="../../auxiliary/BVHMocap/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>      
     
     <target name="build.dependency.emotionml" if="${need.emotionml}">
@@ -51,8 +51,8 @@
         <ant antfile="../../auxiliary/EnvironmentManager/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>  
     
-    <target name="build.dependency.playerogre" if="${need.playerogre}">
-        <ant antfile="../../auxiliary/playerOgre/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.ogreplayer" if="${need.ogreplayer}">
+        <ant antfile="../../auxiliary/OgrePlayer/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>      
     
     <target name="build.dependency.socialparameters" if="${need.socialparameters}">
@@ -72,7 +72,7 @@
     </target>     
     
     <target name="build.dependency.openmary" if="${need.openmary}">
-        <ant antfile="../../auxiliary/TTS/openMary/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+        <ant antfile="../../auxiliary/TTS/OpenMary/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>     
     
     <target name="build.dependency.animationcore" if="${need.animationcore}">
@@ -206,7 +206,7 @@
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/BvhMocap.jar" type="file"/>
+                    <available file="${jar.dir}/BVHMocap.jar" type="file"/>
                 </and>
             </not>
         </condition>
@@ -232,15 +232,15 @@
         </condition>
         <antcall target="build.dependency.environmentmanager"/>
         
-        <condition property="need.playerogre">
+        <condition property="need.ogreplayer">
             <not>
                 <and>
                     <available file="${internal.player.dir}" type="dir"/>
-                    <available file="${internal.player.dir}/playerOgre.jar" type="file"/>
+                    <available file="${internal.player.dir}/OgrePlayer.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.playerogre"/>
+        <antcall target="build.dependency.ogreplayer"/>
         
         <condition property="need.videocapture">
             <not>
@@ -296,7 +296,7 @@
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/openMary.jar" type="file"/>
+                    <available file="${jar.dir}/OpenMary.jar" type="file"/>
                 </and>
             </not>
         </condition>

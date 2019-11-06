@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="openMary" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
+<project name="OpenMary" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
 
     <property name="src.dir" location="src" />
     <property name="classes.dir" location="compilation" />
@@ -7,7 +7,7 @@
     <property name="jar.dir" location="../../../bin/Common/Lib/Internal" />
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
-    <property name="external.jar.dir" location="../../../bin/Common/Lib/External" />
+    <property name="external.openmary.jar.dir" location="../../../bin/Common/Lib/External/openmary" />
     
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
@@ -34,7 +34,7 @@
         <fileset dir="${jar.dir}">
             <include name="Util.jar"/>
         </fileset>
-        <fileset dir="${external.jar.dir}">
+        <fileset dir="${external.openmary.jar.dir}">
             <include name="maryclient-3.6.jar"/>
             <include name="maryclient-4.3.jar"/>
         </fileset>
@@ -68,7 +68,7 @@
     <target name="build" depends="clean, compile">
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
-            <map from="${external.jar.dir}" to="../External"/>
+            <map from="${external.openmary.jar.dir}" to="../External"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

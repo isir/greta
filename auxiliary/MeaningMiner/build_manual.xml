@@ -8,8 +8,6 @@
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
     <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
-    <property name="stanfordparser.external.jar.dir" location="../../bin/Common/Lib/External/stanfordparser" />
-    <property name="opennlp.external.jar.dir" location="../../bin/Common/Lib/External/opennlp" />
     
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
@@ -51,15 +49,10 @@
             <include name="Intentions.jar"/>
             <include name="ActiveMQ.jar"/>
         </fileset>
-        <fileset dir="${stanfordparser.external.jar.dir}">
-            <include name="stanford-parser.jar"/>
-        </fileset>
-        <fileset dir="${opennlp.external.jar.dir}">
-            <include name="opennlp-tools-1.8.2.jar"/>
-        </fileset>
         <fileset dir="${external.jar.dir}">
             <include name="edu.mit.jwi_2.4.0_jdk.jar"/>
-            <include name="activemq-all-5.10.0.jar"/>
+            <include name="opennlp-tools-1.8.2.jar"/>
+            <include name="stanford-parser.jar"/>
         </fileset>
     </path>
     
@@ -122,8 +115,6 @@
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
             <map from="${external.jar.dir}" to="../External"/>
-            <map from="${stanfordparser.external.jar.dir}" to="../External/stanfordparser"/>
-            <map from="${opennlp.external.jar.dir}" to="../External/opennlp"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

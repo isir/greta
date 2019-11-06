@@ -7,7 +7,7 @@
     <property name="jar.dir" location="../../../bin/Common/Lib/Internal" />
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
-    <property name="external.jar.dir" location="../../../bin/Common/Lib/External" />
+    <property name="external.cereproc.jar.dir" location="../../bin/Common/Lib/External/cereproc" />
     
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
@@ -34,7 +34,7 @@
         <fileset dir="${jar.dir}">
             <include name="Util.jar"/>
         </fileset>
-        <fileset dir="${external.jar.dir}">
+        <fileset dir="${external.cereproc.jar.dir}">
             <include name="cerevoice_eng.jar"/>
         </fileset>
     </path>
@@ -67,7 +67,7 @@
     <target name="build" depends="clean, compile">
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
-            <map from="${external.jar.dir}" to="../External"/>
+            <map from="${external.cereproc.jar.dir}" to="../External/cereproc"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

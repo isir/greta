@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<project name="BvhMocap" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
+<project name="BVHMocap" default="build" basedir="." xmlns:if="ant:if" xmlns:unless="ant:unless">
 
     <property name="src.dir" location="src" />
     <property name="classes.dir" location="compilation" />

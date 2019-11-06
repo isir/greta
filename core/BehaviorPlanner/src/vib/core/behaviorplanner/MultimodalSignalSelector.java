@@ -264,7 +264,7 @@ public class MultimodalSignalSelector implements SignalSelector{
         //      intensity of intention if it is an emotion else 1
         //   4) affect epressivity parameters from dynamicline
         //   5) affect timming
-        //   6) affect multi strokes (gesture only) from stress point of speech ? (only with openMary)
+        //   6) affect multi strokes (gesture only) from stress point of speech ? (only with OpenMary)
         int signalcount = 0;
         String intentionId = intention.getId();
         for(SignalItem s : lastCombination){

@@ -15,7 +15,7 @@
  * along with Greta.If not, see <http://www.gnu.org/licenses/>.
  */
 
-package vib.auxiliary.BvhMocap;
+package vib.auxiliary.BVHMocap;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,8 +52,8 @@ public class BVHToBAP  implements BAPFramesEmitter {
     
     public static void main(String[] args) throws FileNotFoundException, IOException {
         BVHLoader bvhloader = new BVHLoader();
-        //bvhloader.load("C:\\Users\\Jing\\Desktop\\greta_svn\\vib\\bin\\Examples\\BvhMocap\\fast_gesture.bvh");
-        bvhloader.load("K:\\Yu_Bvh_Files\\test\\CarolineSd20.bvh");
+        //bvhloader.load("C:\\Users\\Jing\\Desktop\\greta_svn\\vib\\bin\\Examples\\BVHMocap\\fast_gesture.bvh");
+        bvhloader.load("K:\\Yu_BVH_Files\\test\\CarolineSd20.bvh");
 
         BVHAnimation ani = bvhloader.getAnimation();
         ArrayList<BAPFrame> bapframes = new ArrayList<BAPFrame>();

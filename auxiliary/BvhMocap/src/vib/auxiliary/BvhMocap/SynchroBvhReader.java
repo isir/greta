@@ -15,7 +15,7 @@
  * along with Greta.If not, see <http://www.gnu.org/licenses/>.
  */
 
-package vib.auxiliary.BvhMocap;
+package vib.auxiliary.BVHMocap;
 
 //import vib.core.signals.EventPerformer;
 
@@ -26,14 +26,14 @@ package vib.auxiliary.BvhMocap;
  */
 
 
-public class SynchroBvhReader extends BvhReader //implements EventPerformer
+public class SynchroBVHReader extends BVHReader //implements EventPerformer
 {
 
-    public SynchroBvhReader() {
+    public SynchroBVHReader() {
         this("");
     }
 
-    public SynchroBvhReader(String fname) {
+    public SynchroBVHReader(String fname) {
         filename = fname;
         dictionary = new Dictionary();
         dictionary.Initialize();

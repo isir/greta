@@ -31,8 +31,8 @@
         <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.playerogre" if="${need.playerogre}">
-        <ant antfile="../../auxiliary/playerOgre/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.ogreplayer" if="${need.ogreplayer}">
+        <ant antfile="../../auxiliary/OgrePlayer/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     <!-- -->
     
@@ -41,7 +41,7 @@
             <include name="Util.jar"/>
         </fileset>
         <fileset dir="${dir.output}">
-            <include name="playerOgre.jar"/>
+            <include name="OgrePlayer.jar"/>
         </fileset>
         <fileset dir="${external.jar.dir}">
             <include name="log4j-over-slf4j-1.7.2.jar"/>
@@ -64,15 +64,15 @@
         </condition>
         <antcall target="build.dependency.util"/>
         
-        <condition property="need.playerogre">
+        <condition property="need.ogreplayer">
             <not>
                 <and>
                     <available file="${dir.output}" type="dir"/>
-                    <available file="${dir.output}/playerOgre.jar" type="file"/>
+                    <available file="${dir.output}/OgrePlayer.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.playerogre"/>
+        <antcall target="build.dependency.ogreplayer"/>
         <!-- -->
     </target>
     

@@ -52,7 +52,7 @@ public class ModularWindow extends javax.swing.JFrame {
 
     private ModuleGraph moduleGraph;
     private String title = "Modular";
-    private File configsDirectory = new File("Configurations");
+    private File configsDirectory = new File("./Configurations");
     private File currentConfigFile;
     private String currentConfigSimpleName = "";
     private EditorFrame editor;

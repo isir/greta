@@ -40,7 +40,7 @@ public class ModuleFactory {
     public static List<ModuleInfo> moduleInfos = new ArrayList<ModuleInfo>();
 
     public static Module create(Component uiComponent,mxGraph graph, String moduleType, Module parent){
-        return create(uiComponent, graph, moduleType, moduleType,moduleType+"-"+System.currentTimeMillis()+"-"+(int)(Math.random()*1000.0), 15, 15, 80, 50, null, parent);
+        return create(uiComponent, graph, moduleType, moduleType,moduleType+" - "+System.currentTimeMillis()+"-"+(int)(Math.random()*1000.0), 15, 15, 80, 50, null, parent);
     }
 
     public static Module create(Component uiComponent,mxGraph graph, String moduleType, String cellName, String id, double x, double y, double w, double h, Map<String,String> params, Module parent){

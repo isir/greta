@@ -96,7 +96,7 @@
                 <item module="Feedbacks" name="Feedbacks"/>
                 <item module="Feedbacks To Logs" name="Feedbacks to Logs"/>
             </menu>
-            <menu name="Face to Face Conversation">
+            <menu name="Face-to-Face Conversation">
                 <item module="Agent Gaze User" name="Agent Gaze User"/>
                 <item module="User" name="User"/>
                 <item module="Conversational Group" name="Conversational Group"/>
@@ -141,14 +141,14 @@
                         <item module="FML Receiver" name="FML Receiver"/>
                         <item module="Meaning Miner FML Receiver" name="Meaning Miner FML Receiver"/>
                         <item module="BML Receiver" name="BML Receiver"/>
-                        <item module="FML-BML File Name Receiver" name="FML/BML Receiver (file names)"/>
+                        <item module="FML_BML File Name Receiver" name="FML/BML File Name Receiver"/>
                         <item module="EmotionML Receiver" name="EmotionML Receiver"/>
                         <item module="BAP Receiver" name="BAP Receiver"/>
                         <item module="FAP Receiver" name="FAP Receiver"/>
                         <item module="Callbacks Receiver" name="Callbacks Receiver"/>
                         <item module="SSI Translator" name="SSI XML-to-Frame Translator"/>
                         <item module="SSI Filter" name="SSI XML Filter"/>
-                        <item module="SSI Frame To Signal" name="SSI Frame-To-Signal Translator"/>
+                        <item module="SSI Frame To Signal" name="SSI Frame-to-Signal Translator"/>
                         <item module="Message Logger" name="Message Logger"/>
                         <item module="BML Callbacks Receiver" name="BML Callbacks Receiver"/>
                     </menu>
@@ -489,7 +489,7 @@
             <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="FML-BML File Name Receiver">
+        <module name="FML_BML File Name Receiver">
             <object class="vib.auxiliary.activemq.semaine.FmlBmlFileNameReceiver" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -1591,16 +1591,16 @@
     </connectors>
     <!-- list of styles -->
     <styles>
-        <style color="0xFFAAAA" name="IntentPlanner"/>
-        <style color="0xFFDD99" name="Intentions"/>
-        <style color="0xFFFF88" name="BehaviorPlanner"/>
-        <style color="0xDDFF88" name="Signals"/>
-        <style color="0x88FF88" name="BehaviorRealizer"/>
         <style color="0x88FFDD" name="Animations"/>
-        <style color="0x77EEFF" name="Player"/>
-        <style color="0xCCCCFF" name="VIBDefault"/>
-        <style color="0x80AAFF" name="Environment" v-align="top"/>
+        <style color="0xFFFF88" name="BehaviorPlanner"/>
+        <style color="0x88FF88" name="BehaviorRealizer"/>
         <style color="0xFFBBAA" name="CharacterManager" v-align="top"/>
+        <style color="0x80AAFF" name="Environment" v-align="top"/>
+        <style color="0xFFDD99" name="Intentions"/>
+        <style color="0xFFAAAA" name="IntentPlanner"/>
+        <style color="0x77EEFF" name="Player"/>
+        <style color="0xDDFF88" name="Signals"/>
+        <style color="0xCCCCFF" name="VIBDefault"/>
         <default/>
     </styles>
 </modular>

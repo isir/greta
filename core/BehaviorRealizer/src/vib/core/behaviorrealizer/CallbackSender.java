@@ -172,7 +172,7 @@ public class CallbackSender implements CallbackEmitter {
         @Override
         public void run() {
             running = true;
-            System.out.println("Callback thread started");
+            //System.out.println("Callback thread started");
             ID tempId = IDProvider.createID("temp");
             while (running) {
                 synchronized (cbSender) {

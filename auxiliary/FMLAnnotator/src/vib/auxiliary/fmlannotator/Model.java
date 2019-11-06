@@ -73,9 +73,9 @@ public class Model implements IntentionEmitter {
     };
 
     // Configuration Directories
-    public static final String FMLANNOTATOR_BASEDIR = "/Common/Data/FMLAnnotator/";
-    public static final String CONFIG_FILES_DIR = FMLANNOTATOR_BASEDIR + "Configs/";
-    public static final String OUTPUT_DIR = FMLANNOTATOR_BASEDIR + "Output/";
+    public static final String FMLANNOTATOR_BASEDIR = "./Common/Data/FMLAnnotator/";
+    public static final String CONFIG_FILES_DIR = FMLANNOTATOR_BASEDIR + "./Configs/";
+    public static final String OUTPUT_DIR = FMLANNOTATOR_BASEDIR + "./Output/";
 
     // Configuration Files
     public static final String CONFIG_FILE_CONJUNCTIONS_FILENAME = "conjunctions";

@@ -15,7 +15,7 @@
  * along with Greta.If not, see <http://www.gnu.org/licenses/>.
  */
 
-package vib.auxiliary.BvhMocap;
+package vib.auxiliary.BVHMocap;
 
 import java.util.Vector;
 import vib.core.animation.mpeg4.bap.BAP;

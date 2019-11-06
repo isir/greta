@@ -113,7 +113,7 @@ public class Library {
                 method.invoke(systemCL, new Object[]{getURLFromPath(libFile)});
                 System.setProperty("java.class.path", System.getProperty("java.class.path")+";"+(new File(libFile).getCanonicalPath()));//needed to compile
             } catch (Exception ex) {
-                Logs.error("Fail to load library: %s\n"+ id);
+                Logs.error("Fail to load library: \"%s\"\n"+ id);
             }
         }
     }

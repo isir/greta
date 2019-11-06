@@ -15,7 +15,7 @@
  * along with Greta.If not, see <http://www.gnu.org/licenses/>.
  */
 
-package vib.auxiliary.BvhMocap;
+package vib.auxiliary.BVHMocap;
 
 import vib.core.util.math.Quaternion;
 import vib.core.util.math.Vec3d;
@@ -46,11 +46,11 @@ public class PreRotationDefinition // For TARDIS Project
     }
     public void SetJointsPreRotation() throws IOException
     {
-        BufferedReader br1 = BvhReader.ReadFile(filename);
+        BufferedReader br1 = BVHReader.ReadFile(filename);
         String line;
         line=br1.readLine();// Joint	Pre-rotations in Maya:		
         line=br1.readLine(); // Orientation order
-        BvhReader bvhreader=new BvhReader();
+        BVHReader bvhreader=new BVHReader();
         line=br1.readLine();
         int      EulerAngleOrder=102; // 18/09
         int ix = EulerAngleOrder / 100;
@@ -71,7 +71,7 @@ public class PreRotationDefinition // For TARDIS Project
          //    System.out.println(line);
            JointsPreRotation.put(JointName,bvhreader.JointQuaternion(rx, ry, rz, EulerAngleOrder).inverse()); // 
 
-         //  System.out.println("New rotation of "+JointName+ "  "+Bvh.RTOD*JointsPreRotation.get(JointName).angle()+"  "+JointsPreRotation.get(JointName).axis())     ;
+         //  System.out.println("New rotation of "+JointName+ "  "+BVH.RTOD*JointsPreRotation.get(JointName).angle()+"  "+JointsPreRotation.get(JointName).axis())     ;
         
             line=br1.readLine();
             //  System.out.println(line);

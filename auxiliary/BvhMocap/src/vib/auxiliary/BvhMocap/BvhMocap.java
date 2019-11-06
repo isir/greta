@@ -15,7 +15,7 @@
  * along with Greta.If not, see <http://www.gnu.org/licenses/>.
  */
 
-package vib.auxiliary.BvhMocap;
+package vib.auxiliary.BVHMocap;
 
 import vib.core.util.math.Quaternion;
 import vib.core.util.math.Vec3d;
@@ -30,7 +30,7 @@ import javax.swing.filechooser.FileSystemView;
  *
  * @author Nesrine Fourati
  */
-public class BvhMocap {
+public class BVHMocap {
 
     /**
      * @param args the command line arguments
@@ -59,8 +59,8 @@ public class BvhMocap {
         String bvhpath="C:\\Users\\fourati\\Documents\\MotionCapture Database\\Janina\\Anger\\Simple Walk\\Action_repetitions\\";
         String bvhname="Ag1SW_Janina";
 //
-        BvhReader bvhread = new BvhReader(bvhpath + bvhname+".bvh");
-        Bvh bvh = bvhread.JFTableBasedBvhCreator();
+        BVHReader bvhread = new BVHReader(bvhpath + bvhname+".bvh");
+        BVH bvh = bvhread.JFTableBasedBVHCreator();
         AllJointFramesTable jointframestable = bvh.GetAllJointFramesTable();
         //System.out.println(jointframestable.GetNbFrame());
         SkeletonRelatedPositions SekeltonRelatedPos=new SkeletonRelatedPositions(jointframestable);
@@ -73,7 +73,7 @@ public class BvhMocap {
 
 
 
-//        ArrayList<BAPFrame> bapframes=bvhread.BvhToBAPFrames();
+//        ArrayList<BAPFrame> bapframes=bvhread.BVHToBAPFrames();
 //        BapAnimationConverter converter=new BapAnimationConverter();
 //        BAPFrame bapframe=bapframes.get(bapframes.size()-1);
 
@@ -81,7 +81,7 @@ public class BvhMocap {
 
         //converter.BapOutput(bapframes, "C:/Users/fourati/Documents/Bap files/", bvhfilename.split("[.]")[0], "____.bap", "0.0 xxx 25 1\n");
 
-       // Bvh bvh=bvhread.BvhCreator();
+       // BVH bvh=bvhread.BVHCreator();
 //       ArrayList<Motion> molist= bvh.GetMotionList();
 //      molist.get(9).DisplayEulerAngle(1);
         //bvh.JointsDisplay();

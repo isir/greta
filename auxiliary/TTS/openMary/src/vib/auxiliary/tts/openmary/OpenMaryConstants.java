@@ -30,7 +30,7 @@ import vib.core.util.time.SynchPoint;
 import vib.core.util.time.TimeMarker;
 
 /**
- * Contains useful constants and functions with <a href="http://mary.dfki.de">Open Mary</a>.
+ * Contains useful constants and functions with <a href="http://mary.dfki.de">OpenMary</a>.
  * @author Andre-Marie Pez
  */
 public class OpenMaryConstants extends CharacterDependentAdapter{
@@ -57,10 +57,10 @@ public class OpenMaryConstants extends CharacterDependentAdapter{
     /** Mary's parameter : used to obtain the audio stream in MP3 format */
     public static final String AUDIO_TYPE_MP3 = "MP3";
 
-    /** values used with Open Mary 3.x.x */
+    /** values used with OpenMary 3.x.x */
     public static final int MARY_3 = 3;
 
-    /** values used with Open Mary 4.x.x */
+    /** values used with OpenMary 4.x.x */
     public static final int MARY_4 = 4;
 
     /** Correspondence array of boundaries between VIB and Mary */

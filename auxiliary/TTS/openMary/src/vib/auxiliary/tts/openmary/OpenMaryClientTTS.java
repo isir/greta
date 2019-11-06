@@ -37,9 +37,9 @@ import vib.core.util.CharacterManager;
 
 
 /**
- * Implementation of the interface {@link vib.core.util.speech.TTS TTS} that use <a href="http://mary.dfki.de">Open Mary</a>. <br/>
- * This class call the Open Mary server (version 3.x.x or 4.x.x) to synthetise the Speech.<br/>
- * It is necessary that the Open Mary's sever is already started when the constructor of this class is called.
+ * Implementation of the interface {@link vib.core.util.speech.TTS TTS} that use <a href="http://mary.dfki.de">OpenMary</a>. <br/>
+ * This class call the OpenMary server (version 3.x.x or 4.x.x) to synthetise the Speech.<br/>
+ * It is necessary that the OpenMary's sever is already started when the constructor of this class is called.
  * @author Andre-Marie Pez
  */
 public class OpenMaryClientTTS implements TTS{
@@ -218,7 +218,7 @@ public class OpenMaryClientTTS implements TTS{
                 timer = speech.getStart().getValue();
                 extractPhonemes(result);
             }
-            catch (Exception ex) {Logs.error(this.getClass().getName()+" Cant receives params from Open Mary server.");}
+            catch (Exception ex) {Logs.error(this.getClass().getName()+" Cant receives params from OpenMary server.");}
         }
         if(doAudio){
             if(maryVersion==0){
@@ -251,7 +251,7 @@ public class OpenMaryClientTTS implements TTS{
                 }
                 audio = Audio.getAudio(new ByteArrayInputStream(out.toByteArray()));
             }
-            catch (Exception ex) {Logs.error(this.getClass().getName()+" Cant receives audio from Open Mary server.");}
+            catch (Exception ex) {Logs.error(this.getClass().getName()+" Cant receives audio from OpenMary server.");}
         }
     }
 
@@ -280,7 +280,7 @@ public class OpenMaryClientTTS implements TTS{
             for(Phoneme.PhonemeType pho : phos) {
                 phonemes.add(new Phoneme(pho,duration/((double)phos.length)));
             }
-            //TODO add sressingpoint ? (but it's only with openMary) - see maryinterface.cpp line 1138 to 1146
+            //TODO add sressingpoint ? (but it's only with OpenMary) - see maryinterface.cpp line 1138 to 1146
             timer += duration;
         }
 

@@ -15,7 +15,7 @@
  * along with Greta.If not, see <http://www.gnu.org/licenses/>.
  */
 
-package vib.auxiliary.BvhMocap;
+package vib.auxiliary.BVHMocap;
 
 //import vib.core.animation.mpeg4.bap.*;
 import java.util.*;
@@ -29,7 +29,7 @@ import vib.core.animation.common.Joint;
  * @author Nesrine Fourati
  */
 
-public class Bvh {
+public class BVH {
     /** Degrees-to-Radians multiplication constant */
     static final double DTOR = 0.017453293;
     /** Radians-to-Degrees multiplication constant */
@@ -41,26 +41,26 @@ public class Bvh {
     private float frame_time = 0.01f;
     private int EulerAngleOrder = 120;// ix=1 , iy=2, iz=0 => the order is zxy
 
-    public Bvh() {
+    public BVH() {
     }
 
-    public Bvh(Skeleton s) {
+    public BVH(Skeleton s) {
         skeleton = s;
     }
 
-    public Bvh(ArrayList<Motion> mlist, int nbf)
+    public BVH(ArrayList<Motion> mlist, int nbf)
     {
         motionlist = mlist;
         nb_frame = nbf;
         jointframestable = new AllJointFramesTable(motionlist);
     }
 
-    public Bvh(Skeleton s, int nbf) {
+    public BVH(Skeleton s, int nbf) {
         skeleton = s;
         nb_frame = nbf;
     }
 
-    public Bvh(ArrayList<Motion> mlist, int nbf, Skeleton s, float frame_t) {
+    public BVH(ArrayList<Motion> mlist, int nbf, Skeleton s, float frame_t) {
         motionlist = mlist;
         nb_frame = nbf;
         skeleton = s;
@@ -68,7 +68,7 @@ public class Bvh {
         jointframestable = new AllJointFramesTable(s);
     }
 
-    public Bvh(ArrayList<Motion> mlist, int nbf, Skeleton s, float frame_t, int order) {
+    public BVH(ArrayList<Motion> mlist, int nbf, Skeleton s, float frame_t, int order) {
         motionlist = mlist;
         nb_frame = nbf;
         skeleton = s;
@@ -77,7 +77,7 @@ public class Bvh {
         jointframestable = new AllJointFramesTable(s);
     }
 
-    public Bvh(AllJointFramesTable JFtable, int nbf, Skeleton s, float frame_t, int order) {
+    public BVH(AllJointFramesTable JFtable, int nbf, Skeleton s, float frame_t, int order) {
         nb_frame = nbf;
         skeleton = s;
         frame_time = frame_t;

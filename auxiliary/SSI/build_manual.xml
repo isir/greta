@@ -7,8 +7,6 @@
     <property name="jar.dir" location="../../bin/Common/Lib/Internal" />
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
-    <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
-    
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
     </target>
@@ -43,10 +41,7 @@
             <include name="Util.jar"/>
             <include name="Signals.jar"/>
             <include name="ActiveMQ.jar"/>
-        </fileset>    
-        <fileset dir="${external.jar.dir}">
-            <include name="activemq-all-5.10.0.jar"/>
-        </fileset>  
+        </fileset>
     </path>
     
     <target name="build.dependencies">
@@ -97,7 +92,6 @@
     <target name="build" depends="clean, compile">
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
-            <map from="${external.jar.dir}" to="../External"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

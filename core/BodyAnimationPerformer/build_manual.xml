@@ -55,7 +55,7 @@
             <include name="AnimationCore.jar"/>
         </fileset>    
         <fileset dir="${external.jar.dir}">
-            <include name="commons-math3-3.3.jar"/>
+            <include name="commons-math3-3.6.1.jar"/>
         </fileset> 
     </path>
     

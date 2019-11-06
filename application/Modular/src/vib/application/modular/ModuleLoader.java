@@ -179,7 +179,7 @@ public class ModuleLoader {
                         ((Boolean) disconnectMethod[2]).booleanValue(),
                         connection.getAttribute("style"));
             } catch (Throwable ex) {
-                printError(ex, "Fail to load rule %s: %s\n", connection.getAttribute("id"), ex.getLocalizedMessage());
+                printError(ex, "Failed to load rule: \"%s\" (%s)\n", connection.getAttribute("id"), ex.getLocalizedMessage());
             }
         }
     }
@@ -258,14 +258,14 @@ public class ModuleLoader {
                                 moduleInfo.addParameter(parameterType, parameterName, defaultValue, set_on, getMethod, get_on, setMethod);
 
                             } catch (Exception e) {
-                                printError(e, "Fail to load parameter in module %s: %s\n", module.getAttribute("name"), e.getLocalizedMessage());
+                                printError(e, "Failed to load parameter in module: \"%s\" (%s)\n", module.getAttribute("name"), e.getLocalizedMessage());
                             }
                         }
                     }
                     ModuleFactory.moduleInfos.add(moduleInfo);
-                    System.out.println(moduleInfo.name+" added ");
+                    System.out.printf("Loaded module: \"%s\".\n", moduleInfo.name);
                 } catch (Throwable ex) {
-                    printError(ex, "Fail to load module %s: %s\n", module.getAttribute("name"), ex.getLocalizedMessage());
+                    printError(ex, "Failed to load module: \"%s\" (%s)\n", module.getAttribute("name"), ex.getLocalizedMessage());
                 }
             }
         }

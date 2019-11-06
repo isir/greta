@@ -37,14 +37,6 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>MeaningMiner</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
                 <foreign-project>MPEG4</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
@@ -53,7 +45,7 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>playerOgre</foreign-project>
+                <foreign-project>OgrePlayer</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

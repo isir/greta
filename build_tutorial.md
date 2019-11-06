@@ -269,7 +269,7 @@ There are some cases where the project depends on JARs from multiple directories
         <include name="ActiveMQ.jar"/>
     </fileset>
     <fileset dir="${external.jar.dir}">
-        <include name="activemq-all-5.10.0.jar"/>
+        <include name="activemq-all-5.14.5.jar"/>
     </fileset>
 </path>
 

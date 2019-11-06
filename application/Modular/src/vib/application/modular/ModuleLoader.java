@@ -263,7 +263,7 @@ public class ModuleLoader {
                         }
                     }
                     ModuleFactory.moduleInfos.add(moduleInfo);
-                    System.out.printf("Loaded module: \"%s\".\n", moduleInfo.name);
+                    System.out.printf("Loaded module: \"%s\"\n", moduleInfo.name);
                 } catch (Throwable ex) {
                     printError(ex, "Failed to load module: \"%s\" (%s)\n", module.getAttribute("name"), ex.getLocalizedMessage());
                 }

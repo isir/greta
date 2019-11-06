@@ -135,7 +135,7 @@ public class CharacterManager {
     public void notifyChanges() {
         for (CharacterDependent dependent : dependents) {
             dependent.onCharacterChanged();
-            System.out.println(String.format("%s notifying %s",toString(),dependent.toString()));
+            //System.out.println(String.format("%s notifying %s",toString(),dependent.toString()));
         }
     }
 

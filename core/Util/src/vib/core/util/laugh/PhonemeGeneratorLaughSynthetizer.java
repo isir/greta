@@ -320,7 +320,7 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
             //================= new code =====================================//
             int[] phoSeqIndex0 = null;
             int[] durSeq0 = null;
-            String pathInputInformation = IniManager.getProgramPath()+"/Common/Data/laughMotionTorsoHeadLHMM/audioInformation/";
+            String pathInputInformation = IniManager.getProgramPath()+"./Common/Data/laughMotionTorsoHeadLHMM/audioInformation/";
             if ((duration >= 22) && (duration <= 25) && (intensity > 0.7)){
                 System.out.println(" getAudioSignal: "+"new codes"); 
                 signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"phoSeqIndex0.txt";           

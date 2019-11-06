@@ -46,7 +46,7 @@ public class SpeechKeyframeGenerator extends KeyframeGenerator {
             double speechStartTime = speech.getStart().getValue();
 
             //only for NAO
-            SpeechKeyframe keyframe = new SpeechKeyframe(speechStartTime, IniManager.getProgramPath() + "/acapelaTemp.wav");
+            SpeechKeyframe keyframe = new SpeechKeyframe(speechStartTime, IniManager.getProgramPath() + "./acapelaTemp.wav");
             outputKeyframes.add(keyframe);
             //end "only for NAO"
 

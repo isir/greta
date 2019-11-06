@@ -699,7 +699,7 @@ public class SubMesh {
         drawUV(g2, width, height, printVertices, onlyClockVised);
 
         try {
-            File outputfile = new File("Player/Data/media/" + name + ".png");
+            File outputfile = new File("./Player/Data/media/" + name + ".png");
             if (ImageIO.write(off_Image, "png", outputfile)) {
                 System.out.println("Image saved as: " + outputfile.getCanonicalPath());
             } else {

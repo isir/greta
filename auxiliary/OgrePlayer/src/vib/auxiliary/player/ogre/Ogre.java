@@ -56,13 +56,13 @@ public class Ogre {
     public static final boolean DEBUG;
     private static String resourceGroup;
     public static boolean realTime = true;
-    private static String externalLibPath = IniManager.getProgramPath() + "/Player/Lib/External/";
+    private static String externalLibPath = IniManager.getProgramPath() + "./Player/Lib/External/";
 
     static {
         DEBUG = IniManager.getGlobals().getValueBoolean("OGRE_DEBUG");
         int jvmArchitecture = Integer.parseInt(System.getProperty("sun.arch.data.model"));
         
-        externalLibPath = IniManager.getProgramPath() + "/Player/Lib/External/";
+        externalLibPath = IniManager.getProgramPath() + "./Player/Lib/External/";
         
         //define path where are Ogre's native libraries
         if (System.getProperty("os.name").toLowerCase().contains("windows")) {

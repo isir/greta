@@ -82,7 +82,7 @@ public class LaughSignal extends Laugh implements Signal {
 
     @Deprecated
     public void setFileName(String filename) {
-        this.file_reference = IniManager.getProgramPath() + "/Examples/ilhaire/" + filename;
+        this.file_reference = IniManager.getProgramPath() + "./Examples/ilhaire/" + filename;
     }
 
     @Deprecated

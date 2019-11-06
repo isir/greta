@@ -409,7 +409,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
 
     @Override
     protected void finalize() throws Throwable {
-        System.err.println(this.getClass().getSimpleName() + " finalize");
+        System.out.println(this.getClass().getSimpleName() + " finalized!");
         getCharacterManager().remove(lexicon);
         lexicon = null;
 

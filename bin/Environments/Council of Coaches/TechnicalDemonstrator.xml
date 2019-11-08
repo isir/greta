@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<environment>
+    <node id="background">
+        <node id="floor_node">
+            <position x="-50.0" y="-0.04" z="-50.0"/>
+            <leaf id="floor" reference="object.floor">
+                <size x="100.0" y="0.01" z="100.0"/>
+            </leaf>
+        </node>
+        <leaf id="backgroundColor" reference="color.background">
+            <size x="0.5" y="0.6" z="0.8"/>
+        </leaf>
+    </node>
+    <node id="scene">
+        <leaf id="axes" reference="debug.axes">
+            <size x="1.0" y="1.0" z="1.0"/>
+        </leaf>
+        <node id="Sun">
+            <position x="0.0" y="5.0" z="0.0"/>
+            <orientation x="50.000023" y="45.000023" z="0.0"/>
+            <leaf id="SunLight" reference="light.directional">
+                <size x="0.1" y="0.1" z="0.1"/>
+            </leaf>
+        </node>
+        <node id="office">
+            <node id="browser_container">
+                <position x="-2.0" y="0.5" z="-2.0"/>
+                <orientation x="0" y="0" z="0.0"/>
+                <leaf id="BrowserGazeTarget_OLD" reference="office.papers">
+                    <size x="0.1" y="0.1" z="0.1"/>
+                </leaf>
+            </node>
+        </node>
+        <node id="other_agents">
+            <node id="container1">
+                <position x="-0.1" y="-0.5" z="-2"/>
+                <orientation x="0" y="0" z="0.0"/>
+                <leaf id="head_COUCH_F_1_OLD" reference="office.papers">
+                    <size x="0.1" y="0.1" z="0.1"/>
+                </leaf>
+            </node>
+            <node id="container2">
+                <position x="0" y="-0.5" z="-0.5"/>
+                <orientation x="0" y="0" z="0.0"/>
+                <leaf id="head_COUCH_M_2_OLD" reference="office.papers">
+                    <size x="0.1" y="0.1" z="0.1"/>
+                </leaf>
+            </node>
+            <node id="container3">
+                <position x="0" y="-0.5" z="-1.5"/>
+                <orientation x="0" y="0" z="0.0"/>
+                <leaf id="head_COUCH_M_1_OLD" reference="office.papers">
+                    <size x="0.1" y="0.1" z="0.1"/>
+                </leaf>
+            </node>
+            <node id="container4">
+                <position x="0" y="0.2" z="-0.8"/>
+                <orientation x="0" y="0" z="0.0"/>
+                <leaf id="head_COUCH_USER_OLD" reference="office.papers">
+                    <size x="0.1" y="0.1" z="0.1"/>
+                </leaf>
+            </node>
+        </node>
+        <leaf id="ambient_light" reference="light.ambient">
+            <size x="0.1" y="0.1" z="0.1"/>
+        </leaf>
+    </node>
+</environment>

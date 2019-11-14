@@ -28,6 +28,7 @@ import vib.auxiliary.socialparameters.SocialParameterFrame;
 import vib.auxiliary.socialparameters.SocialParameterPerformer;
 import vib.auxiliary.thrift.gen_java.Message;
 import vib.auxiliary.thrift.services.Receiver;
+import vib.core.animation.mpeg4.MPEG4Animatable;
 import vib.core.intentions.FMLTranslator;
 import vib.core.intentions.Intention;
 import vib.core.intentions.IntentionEmitter;
@@ -39,6 +40,7 @@ import vib.core.util.Mode;
 import vib.core.util.enums.Influence;
 import vib.core.util.environment.Environment;
 import vib.core.util.environment.Leaf;
+import vib.core.util.environment.Node;
 import vib.core.util.environment.TreeNode;
 import vib.core.util.id.ID;
 import vib.core.util.id.IDProvider;
@@ -105,6 +107,9 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         switch (message.getType()) {
             case "animID" :
                 handleAnimIdMessage(message);
+                break;
+            case "character":
+                handleCharacterMessage(message);
                 break;
             case "object":
                 handleObjectMessage(message);
@@ -211,17 +216,54 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
     }
 
     /**
+     * Updates the character's position.
+     * @param message message with all data concerning the unity game object
+     */
+    private void handleCharacterMessage (Message message) {
+
+        Map<String, String> gameObjectProperties = message.getProperties();
+        String gameObjectId = gameObjectProperties.get("id");
+
+        TreeNode gameObjectNode = null;
+        List<Node> environmentGuests = this.environment.getGuests();
+        for (Node environmentGuest : environmentGuests) {
+            if (environmentGuest instanceof MPEG4Animatable) {
+                MPEG4Animatable mpeg4Animatable = (MPEG4Animatable) environmentGuest;
+                String mpeg4AnimatableName = mpeg4Animatable.getCharacterManager().getCurrentCharacterName();
+                if (gameObjectId.equalsIgnoreCase(mpeg4AnimatableName)) {
+                    gameObjectNode = mpeg4Animatable;
+                }
+            }
+        }
+
+        if (gameObjectNode == null) {
+            gameObjectNode = createObjectNode(gameObjectId);
+
+            if (this.cm != null && gameObjectProperties.containsKey(Constants.UNITY_IS_SENDER_COMPONENT_KEY)) {
+            	this.cm.setThisCharacterComponentInUnity(gameObjectNode);
+            }
+        }
+        // Update coordinates
+        updateNodeProperties(gameObjectNode, gameObjectProperties);
+        if (gameObjectProperties.get("gaze") != null) {
+            handleGazeMessage(gameObjectId, gameObjectProperties.get("influence"));
+        }
+    }
+
+    /**
      * Updates the object's position and updates the gaze if needed.
      * @param message message with all data concerning the unity game object
      */
     private void handleObjectMessage (Message message) {
+
         Map<String, String> gameObjectProperties = message.getProperties();
         String gameObjectId = gameObjectProperties.get("id");
+
         // Get the object's node
         TreeNode gameObjectNode = (TreeNode) this.environment.getNode(gameObjectId);
         if (gameObjectNode == null) {
             gameObjectNode = createObjectNode(gameObjectId);
-                       
+
             if (this.cm != null && gameObjectProperties.containsKey(Constants.UNITY_IS_SENDER_COMPONENT_KEY)) {
             	this.cm.setThisCharacterComponentInUnity(gameObjectNode);
             }

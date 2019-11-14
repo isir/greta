@@ -129,7 +129,7 @@
             <element h="450.0" id="Character Manager - 1571047080299-260"
                 module="Character Manager" name="Character Manager #2"
                 w="650.0" x="710.0" y="30.0">
-                <parameter name="character_name" value="ALICE"/>
+                <parameter name="character_name" value="LAURA"/>
                 <window h="532" visible="false" w="505" x="0" y="0"/>
                 <element h="230.0"
                     id="Behavior Planner - 1571048020905-618"

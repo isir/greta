@@ -425,12 +425,20 @@
 		<all mesh="camille/patient.mesh" />
 	</agent>
 	
-	<agent name="alice" type="autodesk" scale="1">
-		<all mesh="alice/body.mesh" />
-	</agent>
-	
 	<agent name="laure" type="autodesk" scale="1">
 		<all mesh="laure/body.mesh" />
+		<wrinklesmaterial name="laure_wrinkles" target="0" />
+	</agent>
+	<agent name="laure.football" type="autodesk" scale="1">
+		<all mesh="laure/foot.mesh" />
+	</agent>
+	
+	<agent name="laura" type="autodesk" scale="1">
+		<all mesh="laura/body.mesh" />
+	</agent>
+	
+	<agent name="alice" type="autodesk" scale="1">
+		<all mesh="alice/body.mesh" />
 	</agent>
 	
 	<agent name="rodrigue" type="autodesk" scale="1">

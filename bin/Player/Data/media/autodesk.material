@@ -24,6 +24,34 @@ set_texture_alias celShadingMap camille/hair_color_cel.bmp
 
 
 
+material Laure_Autodesk_Body : base {
+set_texture_alias diffuseMap laure/color.jpg
+set_texture_alias celShadingMap laure/color_cel.png
+}
+
+material Laure_Football_Autodesk_Body : base {
+set_texture_alias diffuseMap laure/foot_color.jpg
+set_texture_alias celShadingMap laure/foot_color.jpg
+}
+
+material Laure_Autodesk_Hair : base {
+set_texture_alias diffuseMap laure/hair_color.jpg
+set_texture_alias celShadingMap laure/hair_color_cel.bmp
+}
+
+
+
+material Laura_Autodesk_Body : base {
+	set_texture_alias diffuseMap laura/color.jpg
+	set_texture_alias celShadingMap laura/color.jpg
+}
+material Laura_Autodesk_Hair : base {
+	set_texture_alias diffuseMap laura/hair_color.jpg
+	set_texture_alias celShadingMap laura/hair_color.jpg
+}
+
+
+
 material Alice_Autodesk_Body : base {
 set_texture_alias diffuseMap alice/color.jpg
 set_texture_alias celShadingMap alice/color.jpg
@@ -32,17 +60,6 @@ set_texture_alias celShadingMap alice/color.jpg
 material Alice_Autodesk_Hair : base {
 set_texture_alias diffuseMap alice/hair_color.jpg
 set_texture_alias celShadingMap alice/hair_color.jpg
-}
-
-
-
-material Laure_Autodesk_Body : base {
-	set_texture_alias diffuseMap laure/color.jpg
-	set_texture_alias celShadingMap laure/color.jpg
-}
-material Laure_Autodesk_Hair : base {
-	set_texture_alias diffuseMap laure/hair_color.jpg
-	set_texture_alias celShadingMap laure/hair_color.jpg
 }
 
 

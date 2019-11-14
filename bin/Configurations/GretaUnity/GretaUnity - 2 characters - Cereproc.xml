@@ -113,7 +113,7 @@
             <element h="430.0" id="Character Manager - 1544700726358-960"
                 module="Character Manager" name="Character Manager #2"
                 w="650.0" x="710.0" y="30.0">
-                <parameter name="character_name" value="ALICE"/>
+                <parameter name="character_name" value="LAURA"/>
                 <window h="531" visible="false" w="505" x="10" y="10"/>
                 <element h="50.0" id="TTS - 1544705330204-766"
                     module="TTS" name="TTS #2" w="80.0" x="440.0" y="30.0">

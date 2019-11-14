@@ -425,19 +425,17 @@
 		<all mesh="camille/patient.mesh" />
 	</agent>
 	
-	<agent name="laure" type="autodesk" scale="1">
-		<all mesh="laure/body.mesh" />
-		<wrinklesmaterial name="laure_wrinkles" target="0" />
+	<agent name="alice" type="autodesk" scale="1">
+		<all mesh="alice/body.mesh" />
 	</agent>
 	
-	<agent name="laure.football" type="autodesk" scale="1">
-		<all mesh="laure/foot.mesh" />
+	<agent name="laure" type="autodesk" scale="1">
+		<all mesh="laure/body.mesh" />
 	</agent>
 	
 	<agent name="rodrigue" type="autodesk" scale="1">
 		<all mesh="rodrigue/body.mesh" />
 	</agent>
-	
 	<agent name="rodrigue.football" type="autodesk" scale="1">
 		<all mesh="rodrigue/foot.mesh" />
 	</agent>
@@ -458,22 +456,15 @@
 		<all mesh="stephanie/body.mesh" />
 	</agent>
 	
-	<agent name="alice" type="autodesk" scale="1">
-		<all mesh="alice/body.mesh" />
-	</agent>
-	
 	<agent name="melanie" type="autodesk" scale="1">
 		<all mesh="melanie/body.mesh" />
-		<wrinklesmaterial name="melanie_wrinkles" target="0" />
 	</agent>
 	
 	<agent name="jonathan" type="autodesk" scale="1">
 		<all mesh="jonathan/body.mesh" />
-		<wrinklesmaterial name="jonathan_wrinkles" target="0" />
 	</agent>
 	
 	<agent name="nathan" type="autodesk" scale="1">
 		<all mesh="nathan/body.mesh" />
-		<wrinklesmaterial name="nathan_wrinkles" target="0" />
 	</agent>
 </agents>

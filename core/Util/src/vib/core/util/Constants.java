@@ -20,7 +20,6 @@ package vib.core.util;
 /**
  * This class contains several constants
  * @author Andre-Marie Pez
- * @author Fajrian Yunus
  */
 public final class Constants {
     private Constants(){
@@ -39,8 +38,6 @@ public final class Constants {
     
     // This time marker ID has an absolute value that refers to Reaction that replaces the Intention (i.e. Speech) currently played in VIB when the interruption occurs
     public static final String TIME_MARKER_INTERRUPTION_REACTION_END_ID = "reaction_end";
-    
-    public static final String UNITY_IS_SENDER_COMPONENT_KEY = "is.sender.component";
 
     //TODO: move enums from vib.core.util.enums to here and perhaps simplify these enums
 

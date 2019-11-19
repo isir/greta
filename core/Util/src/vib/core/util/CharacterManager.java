@@ -55,7 +55,7 @@ public class CharacterManager {
     private String id;
     private TTS tts;
     
-    private vib.core.util.environment.TreeNode thisCharacterComponentInUnity;
+    private vib.core.util.environment.TreeNode currentCharacterHeadInUnity;
     
     static{
         getStaticInstance();
@@ -80,7 +80,7 @@ public class CharacterManager {
         characterMapFile.put(currentCaracterName, (new File(filename)).getAbsolutePath());
         characterDefinitions = new IniManager((new File(filename)).getAbsolutePath());
         setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER")); 
-        this.thisCharacterComponentInUnity = null;
+        this.currentCharacterHeadInUnity = null;
         count++;
         Logs.info(String.format("CharacterManager '%s' created",id));
     }
@@ -414,12 +414,12 @@ public class CharacterManager {
     public void setCurrentCharacterId(String currentCharacterId) {
         this.currentCharacterId = currentCharacterId;
     }
-
-	public vib.core.util.environment.TreeNode getThisCharacterComponentInUnity() {
-		return this.thisCharacterComponentInUnity;
-	}
-
-	public void setThisCharacterComponentInUnity(vib.core.util.environment.TreeNode thisCharacterComponentInUnity) {
-		this.thisCharacterComponentInUnity = thisCharacterComponentInUnity;
-	}
+    
+    public vib.core.util.environment.TreeNode getCurrentCharacterHeadInUnity() {
+        return this.currentCharacterHeadInUnity;
+    }
+    
+    public void setCurrentCharacterHeadInUnity(vib.core.util.environment.TreeNode currentCharacterHeadInUnity) {
+        this.currentCharacterHeadInUnity = currentCharacterHeadInUnity;
+    }
 }

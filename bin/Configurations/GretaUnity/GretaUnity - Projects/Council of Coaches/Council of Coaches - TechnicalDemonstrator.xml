@@ -48,15 +48,15 @@
                     id="MPEG4 Animatable - 1545228808979-301"
                     module="MPEG4 Animatable" name="MPEG4 Animatable #1"
                     w="80.0" x="540.0" y="100.0">
-                    <parameter name="posX" value="0.5171552"/>
+                    <parameter name="posX" value="0.7590000033378601"/>
                     <parameter name="scaleX" value="1.0"/>
-                    <parameter name="posY" value="-0.85"/>
+                    <parameter name="posY" value="-0.3499999940395355"/>
                     <parameter name="scaleY" value="1.0"/>
-                    <parameter name="posZ" value="-1.264463"/>
+                    <parameter name="posZ" value="-0.6000000238418579"/>
                     <parameter name="rotX" value="0.0"/>
-                    <parameter name="rotW" value="0.976296"/>
+                    <parameter name="rotW" value="0.9762961268424988"/>
                     <parameter name="rotZ" value="0.0"/>
-                    <parameter name="rotY" value="-0.2164396"/>
+                    <parameter name="rotY" value="-0.2164396047592163"/>
                     <parameter name="scaleZ" value="1.0"/>
                     <window h="179" visible="false" w="463" x="0" y="0"/>
                 </element>
@@ -202,15 +202,15 @@
                     id="MPEG4 Animatable - 1571048631079-434"
                     module="MPEG4 Animatable" name="MPEG4 Animatable #2"
                     w="80.0" x="540.0" y="100.0">
-                    <parameter name="posX" value="-1.454372"/>
+                    <parameter name="posX" value="-0.8420000076293945"/>
                     <parameter name="scaleX" value="1.0"/>
-                    <parameter name="posY" value="-0.85"/>
+                    <parameter name="posY" value="-0.3499999940395355"/>
                     <parameter name="scaleY" value="1.0"/>
-                    <parameter name="posZ" value="-1.215553"/>
+                    <parameter name="posZ" value="-0.8619999885559082"/>
                     <parameter name="rotX" value="0.0"/>
-                    <parameter name="rotW" value="0.9914449"/>
+                    <parameter name="rotW" value="0.9914448857307434"/>
                     <parameter name="rotZ" value="0.0"/>
-                    <parameter name="rotY" value="0.1305262"/>
+                    <parameter name="rotY" value="0.13052619993686676"/>
                     <parameter name="scaleZ" value="1.0"/>
                     <window h="179" visible="false" w="463" x="0" y="0"/>
                 </element>
@@ -314,13 +314,13 @@
         </element>
         <element h="510.0" id="Ogre Player - 1571853444753-284"
             module="Ogre Player" name="Ogre Player" w="80.0" x="1440.0" y="110.0">
-            <parameter name="posX" value="0.0"/>
-            <parameter name="posY" value="0.0"/>
+            <parameter name="posX" value="-0.3"/>
+            <parameter name="posY" value="0.7"/>
             <parameter name="posZ" value="5.0"/>
             <parameter name="roll" value="0.0"/>
             <parameter name="pitch" value="0.0"/>
             <parameter name="yaw" value="0.0"/>
-            <window h="623" visible="false" w="738" x="0" y="0"/>
+            <window h="623" visible="true" w="738" x="0" y="0"/>
         </element>
     </elements>
     <connections>

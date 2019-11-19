@@ -35,7 +35,6 @@ import vib.core.intentions.IntentionEmitter;
 import vib.core.intentions.IntentionPerformer;
 import vib.core.signals.*;
 import vib.core.util.CharacterManager;
-import vib.core.util.Constants;
 import vib.core.util.Mode;
 import vib.core.util.enums.Influence;
 import vib.core.util.environment.Environment;
@@ -110,6 +109,9 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
                 break;
             case "character":
                 handleCharacterMessage(message);
+                break;
+            case "character_head":
+                handleCharacterHeadMessage(message);
                 break;
             case "object":
                 handleObjectMessage(message);
@@ -217,36 +219,54 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
 
     /**
      * Updates the character's position.
-     * @param message message with all data concerning the unity game object
+     * @param message message with all data concerning the unity game character
      */
     private void handleCharacterMessage (Message message) {
 
-        Map<String, String> gameObjectProperties = message.getProperties();
-        String gameObjectId = gameObjectProperties.get("id");
+        Map<String, String> gameCharacterProperties = message.getProperties();
+        String gameCharacterId = gameCharacterProperties.get("id");
 
-        TreeNode gameObjectNode = null;
+        TreeNode gameCharacterNode = null;
         List<Node> environmentGuests = this.environment.getGuests();
         for (Node environmentGuest : environmentGuests) {
             if (environmentGuest instanceof MPEG4Animatable) {
                 MPEG4Animatable mpeg4Animatable = (MPEG4Animatable) environmentGuest;
                 String mpeg4AnimatableName = mpeg4Animatable.getCharacterManager().getCurrentCharacterName();
-                if (gameObjectId.equalsIgnoreCase(mpeg4AnimatableName)) {
-                    gameObjectNode = mpeg4Animatable;
+                if (gameCharacterId.equalsIgnoreCase(mpeg4AnimatableName)) {
+                    gameCharacterNode = mpeg4Animatable;
                 }
             }
         }
 
-        if (gameObjectNode == null) {
-            gameObjectNode = createObjectNode(gameObjectId);
-
-            if (this.cm != null && gameObjectProperties.containsKey(Constants.UNITY_IS_SENDER_COMPONENT_KEY)) {
-            	this.cm.setThisCharacterComponentInUnity(gameObjectNode);
-            }
+        if (gameCharacterNode == null) {
+            gameCharacterNode = createObjectNode(gameCharacterId);
         }
         // Update coordinates
-        updateNodeProperties(gameObjectNode, gameObjectProperties);
-        if (gameObjectProperties.get("gaze") != null) {
-            handleGazeMessage(gameObjectId, gameObjectProperties.get("influence"));
+        updateNodeProperties(gameCharacterNode, gameCharacterProperties);
+        if (gameCharacterProperties.get("gaze") != null) {
+            handleGazeMessage(gameCharacterId, gameCharacterProperties.get("influence"));
+        }
+    }
+
+    /**
+     * Updates the character's head's position and updates the gaze if needed.
+     * @param message message with all data concerning the unity game character's head
+     */
+    private void handleCharacterHeadMessage (Message message) {
+
+        Map<String, String> gameCharacterHeadProperties = message.getProperties();
+        String gameCharacterHeadId = gameCharacterHeadProperties.get("id");
+
+        // Get the character's head's node
+        TreeNode gameCharacterHeadNode = (TreeNode) this.environment.getNode(gameCharacterHeadId);
+        if (gameCharacterHeadNode == null) {
+            gameCharacterHeadNode = createCharacterHeadNode(gameCharacterHeadId);
+            this.cm.setCurrentCharacterHeadInUnity(gameCharacterHeadNode);
+        }
+        // Update coordinates
+        updateNodeProperties(gameCharacterHeadNode, gameCharacterHeadProperties);
+        if (gameCharacterHeadProperties.get("gaze") != null) {
+            handleGazeMessage(gameCharacterHeadId, gameCharacterHeadProperties.get("influence"));
         }
     }
 
@@ -263,16 +283,30 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         TreeNode gameObjectNode = (TreeNode) this.environment.getNode(gameObjectId);
         if (gameObjectNode == null) {
             gameObjectNode = createObjectNode(gameObjectId);
-
-            if (this.cm != null && gameObjectProperties.containsKey(Constants.UNITY_IS_SENDER_COMPONENT_KEY)) {
-            	this.cm.setThisCharacterComponentInUnity(gameObjectNode);
-            }
         }
         // Update coordinates
         updateNodeProperties(gameObjectNode, gameObjectProperties);
         if (gameObjectProperties.get("gaze") != null) {
             handleGazeMessage(gameObjectId, gameObjectProperties.get("influence"));
         }
+    }
+
+    /**
+     * Creates and returns the node corresponding to the game character's head with the given id.
+     * @param gameCharacterHeadId id of the game character's head who's node shall be created
+     * @return the node corresponding to the given id
+     */
+    private TreeNode createCharacterHeadNode (String gameCharacterHeadId) {
+        TreeNode unityObjectsNode = getUnityObjectsNode();
+        // Create head with node as parent
+        TreeNode gameCharacterHeadNode = new TreeNode();
+        gameCharacterHeadNode.setIdentifier(gameCharacterHeadId);
+        unityObjectsNode.addChildNode(gameCharacterHeadNode);
+        Leaf gameCharacterHeadLeaf = new Leaf();
+        gameCharacterHeadLeaf.setIdentifier(gameCharacterHeadId);
+        gameCharacterHeadLeaf.setReference("head." + cm.getCurrentCharacterName());
+        gameCharacterHeadNode.addChildNode(gameCharacterHeadLeaf);
+        return gameCharacterHeadNode;
     }
 
     /**
@@ -287,8 +321,8 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         gameObjectNode.setIdentifier(gameObjectId);
         unityObjectsNode.addChildNode(gameObjectNode);
         Leaf gameObjectLeaf = new Leaf();
-        gameObjectLeaf.setIdentifier(gameObjectId + "Leaf");
-        gameObjectLeaf.setReference(gameObjectId + "Leaf");
+        gameObjectLeaf.setIdentifier(gameObjectId);
+        gameObjectLeaf.setReference("object." + gameObjectId);
         gameObjectNode.addChildNode(gameObjectLeaf);
         return gameObjectNode;
     }
@@ -299,11 +333,11 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
      */
     private TreeNode getUnityObjectsNode () {
         // Try get UnityObjectsNode
-        TreeNode unityObjectsNode = (TreeNode) this.environment.getNode("UnityObjectsNode");
+        TreeNode unityObjectsNode = (TreeNode) this.environment.getNode("UnityObjects");
         if (unityObjectsNode == null) {
             // If node has not been created, create the node
             unityObjectsNode = new TreeNode();
-            unityObjectsNode.setIdentifier("UnityObjectsNode");
+            unityObjectsNode.setIdentifier("UnityObjects");
             this.environment.addNode(unityObjectsNode);
         }
         return unityObjectsNode;

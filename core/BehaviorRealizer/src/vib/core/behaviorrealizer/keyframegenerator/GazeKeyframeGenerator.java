@@ -1805,6 +1805,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     }
 
                     if (targetNode != null || vec2target != null) {
+
+                        TreeNode currentCharacterHeadInUnity = GazeKeyframeGenerator.this.cm.getCurrentCharacterHeadInUnity();
+
                         //if target is animatable, look at head (for now ! ideally it should be specified in the target attribute)
                         if (targetNode instanceof Animatable) {
                             vec2target = ((TreeNode) env.getNode(gaze.getTarget() + "_AudioTreeNode")).getGlobalCoordinates();
@@ -1837,10 +1840,13 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         // update the Y coordinate only
                         // it is possible that Greta is standing in Ogre but is sitting in Unity
                         // in this case, we use the height (i.e. Y value) given by Unity
-                        if (GazeKeyframeGenerator.this.cm.getThisCharacterComponentInUnity() != null) {
-                        	this.headPosition.setY(
-                        			GazeKeyframeGenerator.this.cm.getThisCharacterComponentInUnity().getGlobalCoordinates().y()
-                        				+ GazeKeyframeGenerator.this.cm.getThisCharacterComponentInUnity().getScaleY() / 2);
+                        if (currentCharacterHeadInUnity != null) {
+                        	this.headPosition.setX(currentCharacterHeadInUnity.getGlobalCoordinates().x()
+                                                        + (currentCharacterHeadInUnity.getScaleX() / 2));
+                        	this.headPosition.setY(currentCharacterHeadInUnity.getGlobalCoordinates().y()
+                                                        + (currentCharacterHeadInUnity.getScaleY() / 2));
+                        	this.headPosition.setZ(currentCharacterHeadInUnity.getGlobalCoordinates().z()
+                                                        - (currentCharacterHeadInUnity.getScaleZ() / 2));
                         }
 
                         if (gaze.getTarget().equals("user")) {

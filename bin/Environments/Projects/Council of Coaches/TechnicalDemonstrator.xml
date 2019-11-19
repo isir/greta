@@ -1,15 +1,53 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <environment>
-    <node id="background">
-        <node id="floor_node">
-            <position x="-50.0" y="-0.04" z="-50.0"/>
-            <leaf id="floor" reference="object.floor">
-                <size x="100.0" y="0.01" z="100.0"/>
-            </leaf>
-        </node>
-        <leaf id="backgroundColor" reference="color.background">
+    <node>
+        <leaf id="backgroundColor" reference="color.background" >
             <size x="0.5" y="0.6" z="0.8"/>
         </leaf>
+    </node>
+    <node>
+        <position x="0" y="0" z="0" />
+        
+        <node>
+            <position x="-50" y="0" z="-50" />
+            <leaf id="flour" reference="object.flour" >
+                <size x="100" y="0" z="100"/>
+            </leaf>
+        </node>
+        <node> <!-- light -->
+            <leaf id="ambient_light" reference="light.ambient" >
+            <!--
+                <size x="0.9" y="0.7" z="0.7"/>
+                -->
+                <size x="0.7" y="0.6" z="0.5"/>
+            </leaf>
+            <node>
+                <position x="-200" y="200" z="200" />
+                <leaf id="light_0" reference="light.point" >
+                <!--
+                    <size x="0.99" y="0.8" z="0.8"/>
+                    -->
+                <!--    <size x="0.8" y="0.8" z="0.8"/>
+                -->
+                <size x="0.4" y="0.4" z="0.4"/>
+                </leaf>
+            </node>
+            <node>
+                <position x="200" y="001.5" z="200" />
+                <leaf id="light_2" reference="light.point" >
+                <!--
+                    <size x="0.99" y="0.8" z="0.8"/>
+                    -->
+                    <size x="0.7" y="0.7" z="0.7"/>
+                </leaf>
+            </node>
+            <node>
+                <position x="0" y="500" z="-1500" />
+                <leaf id="light_1" reference="light.point" >
+                    <size x="0.2" y="0.2" z="0.2"/>
+                </leaf>
+            </node>
+        </node>
     </node>
     <node id="scene">
         <leaf id="axes" reference="debug.axes">

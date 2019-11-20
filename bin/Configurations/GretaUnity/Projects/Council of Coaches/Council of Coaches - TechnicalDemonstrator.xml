@@ -320,7 +320,7 @@
             <parameter name="roll" value="0.0"/>
             <parameter name="pitch" value="0.0"/>
             <parameter name="yaw" value="0.0"/>
-            <window h="623" visible="true" w="738" x="0" y="0"/>
+            <window h="623" visible="false" w="738" x="0" y="0"/>
         </element>
     </elements>
     <connections>

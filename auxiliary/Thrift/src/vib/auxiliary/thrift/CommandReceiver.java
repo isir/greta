@@ -261,7 +261,7 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         TreeNode gameCharacterHeadNode = (TreeNode) this.environment.getNode(gameCharacterHeadId);
         if (gameCharacterHeadNode == null) {
             gameCharacterHeadNode = createCharacterHeadNode(gameCharacterHeadId);
-            this.cm.setCurrentCharacterHeadInUnity(gameCharacterHeadNode);
+            this.cm.setCurrentCharacterHeadFromUnity(gameCharacterHeadNode);
         }
         // Update coordinates
         updateNodeProperties(gameCharacterHeadNode, gameCharacterHeadProperties);
@@ -304,7 +304,7 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         unityObjectsNode.addChildNode(gameCharacterHeadNode);
         Leaf gameCharacterHeadLeaf = new Leaf();
         gameCharacterHeadLeaf.setIdentifier(gameCharacterHeadId);
-        gameCharacterHeadLeaf.setReference("head." + cm.getCurrentCharacterName());
+        gameCharacterHeadLeaf.setReference("head." + cm.getCurrentCharacterName().toLowerCase());
         gameCharacterHeadNode.addChildNode(gameCharacterHeadLeaf);
         return gameCharacterHeadNode;
     }

@@ -8,7 +8,6 @@
     <property name="dir.output" location="../../bin/Player/Lib/Internal" />
     <property name="jar.output" location="${dir.output}/${ant.project.name}.jar" />
     
-    <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
     <property name="external.player.jar.dir" location="../../bin/Player/Lib/External" />
     
     <target name="delete.jar.output">
@@ -42,10 +41,6 @@
         </fileset>
         <fileset dir="${dir.output}">
             <include name="OgrePlayer.jar"/>
-        </fileset>
-        <fileset dir="${external.jar.dir}">
-            <include name="log4j-over-slf4j-1.7.2.jar"/>
-            <include name="slf4j-api-1.7.2.jar"/>
         </fileset>
         <fileset dir="${external.player.jar.dir}">
             <include name="xuggle-xuggler-5.4.jar"/>
@@ -91,7 +86,6 @@
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="../../../Common/Lib/Internal"/>
             <map from="${dir.output}" to="."/>
-            <map from="${external.jar.dir}" to="../../../Common/Lib/External"/>
             <map from="${external.player.jar.dir}" to="../../../Player/Lib/External"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">

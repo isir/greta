@@ -73,7 +73,7 @@
             <menu name="TTS">
                 <item module="TTS" name="Controller"/>
                 <item module="MaryTTS Client" name="MaryTTS Client"/>
-                <item module="Cereproc" name="Cereproc"/>
+                <item module="CereProc" name="CereProc"/>
             </menu>
             <menu name="Laugh Synthetizer">
                 <item module="Laugh Synthetizer" name="Controller"/>
@@ -418,8 +418,8 @@
             <frame type="noFrame"/>
             <!-- TODO -->
         </module>
-        <module name="Cereproc">
-            <object class="vib.auxiliary.tts.cereproc.CereprocTTS" lib_id="vib_cereproc"/>
+        <module name="CereProc">
+            <object class="vib.auxiliary.tts.cereproc.CereProcTTS" lib_id="vib_cereproc"/>
             <frame type="noFrame"/>
         </module>
         <module name="ActiveMQ Broker">
@@ -988,7 +988,7 @@
     <libs>
         <lib id="ext_activemq-all" path="./Common/Lib/External/activemq-all-5.15.10.jar"/>
         <lib id="ext_cereproc" path="./Common/Lib/External/cereproc/cerevoice_eng.jar">
-            <needs path="./Common/Data/Cereproc/**"/>
+            <needs path="./Common/Data/CereProc/**"/>
         </lib>
         <lib id="ext_commons-math_3" path="./Common/Lib/External/commons-math3-3.6.1.jar"/>
         <lib id="ext_jackson-annotations" path="./Common/Lib/External/jackson/jackson-annotations-2.9.9.jar"/>
@@ -1076,10 +1076,10 @@
             <depends lib_id="vib_util"/>
             <depends lib_id="vib_utilx"/>
         </lib>
-        <lib id="vib_cereproc" path="./Common/Lib/Internal/Cereproc.jar">
+        <lib id="vib_cereproc" path="./Common/Lib/Internal/CereProc.jar">
             <depends lib_id="ext_cereproc"/>
             <depends lib_id="vib_util"/>
-            <needs path="./Common/Data/Cereproc/*"/>
+            <needs path="./Common/Data/CereProc/*"/>
             <needs path="./Common/Lib/External/cereproc/**"/>
         </lib>
         <lib id="vib_conversational_gaze" path="./Common/Lib/Internal/ConversationalGaze.jar">

@@ -106,9 +106,9 @@
                     <window h="166" visible="false" w="352" x="0" y="0"/>
                 </element>
                 <element h="50.0"
-                    id="Cereproc - 1571148425368-281"
-                    module="Cereproc"
-                    name="Cereproc" w="80.0" x="540.0" y="30.0"/>
+                    id="CereProc - 1571148425368-281"
+                    module="CereProc"
+                    name="CereProc" w="80.0" x="540.0" y="30.0"/>
             </element>
         </element>
         <element h="490.0" id="Ogre Player - 1544700973529-249"
@@ -187,6 +187,6 @@
             source="Animation Keyframe Performer - 1544701084817-460" target="Thrift BAP Sender - 1571145020192-201"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="Simple AU Performer - 1544701096226-322" target="Lip Blender - 1554477549928-147"/>
-        <connection connector="setTTS" source="TTS - 1544704550664-449" target="Cereproc - 1571148425368-281"/>
+        <connection connector="setTTS" source="TTS - 1544704550664-449" target="CereProc - 1571148425368-281"/>
     </connections>
 </modulated>

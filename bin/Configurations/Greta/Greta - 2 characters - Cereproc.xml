@@ -33,8 +33,8 @@
                     <parameter name="doAudio" value="true"/>
                     <window h="127" visible="false" w="437" x="10" y="10"/>
                 </element>
-                <element h="50.0" id="Cereproc - 1544701108513-960"
-                    module="Cereproc" name="Cereproc #1"
+                <element h="50.0" id="CereProc - 1544701108513-960"
+                    module="CereProc" name="CereProc #1"
                     w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FML File Reader - 1544701069074-506"
                     module="FML File Reader" name="FML File Reader #1"
@@ -114,8 +114,8 @@
                     <parameter name="doAudio" value="true"/>
                     <window h="127" visible="false" w="437" x="10" y="10"/>
                 </element>
-                <element h="50.0" id="Cereproc - 1544705335787-254"
-                    module="Cereproc" name="Cereproc #2"
+                <element h="50.0" id="CereProc - 1544705335787-254"
+                    module="CereProc" name="CereProc #2"
                     w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FML File Reader - 1544700908962-428"
                     module="FML File Reader" name="FML File Reader #2"
@@ -210,7 +210,7 @@
             source="Behavior Realizer - 1544713001984-351" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544713001984-351" target="Audio Keyframe Performer - 1554477488803-405"/>
-        <connection connector="setTTS" source="TTS - 1544704550664-449" target="Cereproc - 1544701108513-960"/>
+        <connection connector="setTTS" source="TTS - 1544704550664-449" target="CereProc - 1544701108513-960"/>
         <connection connector="addLogOutput"
             source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
@@ -239,7 +239,7 @@
             source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477506450-994"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4 Animatable - 1544701103065-914" target="Environment - 1544700713383-564"/>
-        <connection connector="setTTS" source="TTS - 1544705330204-766" target="Cereproc - 1544705335787-254"/>
+        <connection connector="setTTS" source="TTS - 1544705330204-766" target="CereProc - 1544705335787-254"/>
         <connection connector="LipSourceForLipBlender"
             source="Lip Model - 1544701091338-924" target="Lip Blender - 1554477549928-147"/>
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"

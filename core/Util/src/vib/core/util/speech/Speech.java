@@ -355,7 +355,7 @@ public class Speech implements Temporizable{
      * Instructs a prosody change conforming to the SSML standard with the Pitch and Rate attributes.
      * @param pitch relative change in pitch (10 = +10% in pitch)
      * @param replaceBrackets if true, replace the open "&lt;" and closed brackets "&gt;" that are found in text nodes with the two given replacements, respectively, openBracketReplacement and closedBracketReplacement
-     * (for internal use with specific TTS engines, e.g. Cereproc, in order to include in the speak element TTS specific tags such as <voice>)
+     * (for internal use with specific TTS engines, e.g. CereProc, in order to include in the speak element TTS specific tags such as <voice>)
      * @param openBracketReplacement
      * @param closedBracketReplacement
      * @return the text in SSML format
@@ -670,7 +670,7 @@ public class Speech implements Temporizable{
                                 }
                                 else {
                                     
-                                    if (child.getName().equalsIgnoreCase("voice")) { // from Cereproc TTS
+                                    if (child.getName().equalsIgnoreCase("voice")) { // from CereProc TTS
                                         String voiceStartTag = "<voice ";
                                         if (child.hasAttribute("emotion")) {
                                             voiceStartTag+="emotion='" + child.getAttribute("emotion").toString() + "'";

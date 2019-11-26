@@ -6,7 +6,7 @@
 **/nbproject/genfiles.properties
 **/nbproject/private/
 
-/bin/Common/Data/Cereproc/*
+/bin/Common/Data/CereProc/*
 /bin/Log/*
 /bin/ModularSave.xml
 /bin/Player/Lib/External/Win64/*.cfg

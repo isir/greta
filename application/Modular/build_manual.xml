@@ -68,7 +68,7 @@
     </target>      
     
     <target name="build.dependency.cereproc" if="${need.cereproc}">
-        <ant antfile="../../auxiliary/TTS/Cereproc/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+        <ant antfile="../../auxiliary/TTS/CereProc/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>     
     
     <target name="build.dependency.marytts" if="${need.marytts}">
@@ -286,7 +286,7 @@
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Cereproc.jar" type="file"/>
+                    <available file="${jar.dir}/CereProc.jar" type="file"/>
                 </and>
             </not>
         </condition>

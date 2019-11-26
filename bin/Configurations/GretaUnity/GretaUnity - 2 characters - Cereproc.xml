@@ -106,8 +106,8 @@
                     <parameter name="host" value="localhost"/>
                     <window h="166" visible="false" w="352" x="0" y="0"/>
                 </element>
-                <element h="50.0" id="Cereproc TTS - 1571148425368-281"
-                    module="Cereproc TTS" name="Cereproc TTS #1"
+                <element h="50.0" id="Cereproc - 1571148425368-281"
+                    module="Cereproc" name="Cereproc #1"
                     w="80.0" x="540.0" y="30.0"/>
             </element>
             <element h="430.0" id="Character Manager - 1544700726358-960"
@@ -195,8 +195,8 @@
                     <parameter name="host" value="localhost"/>
                     <window h="166" visible="false" w="352" x="0" y="0"/>
                 </element>
-                <element h="50.0" id="Cereproc TTS - 1571148453512-764"
-                    module="Cereproc TTS" name="Cereproc TTS #2"
+                <element h="50.0" id="Cereproc - 1571148453512-764"
+                    module="Cereproc" name="Cereproc #2"
                     w="80.0" x="540.0" y="30.0"/>
             </element>
         </element>
@@ -282,7 +282,7 @@
             source="Thrift Command Receiver - 1571145261856-809" target="Behavior Planner - 1544701075130-575"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="setTTS" source="TTS - 1544704550664-449" target="Cereproc TTS - 1571148425368-281"/>
+        <connection connector="setTTS" source="TTS - 1544704550664-449" target="Cereproc - 1571148425368-281"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4 Animatable - 1544701103065-914" target="Environment - 1544700713383-564"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
@@ -323,7 +323,7 @@
             source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"
             source="Animation Keyframe Performer - 1544700747777-220" target="Thrift BAP Sender - 1571145351080-681"/>
-        <connection connector="setTTS" source="TTS - 1544705330204-766" target="Cereproc TTS - 1571148453512-764"/>
+        <connection connector="setTTS" source="TTS - 1544705330204-766" target="Cereproc - 1571148453512-764"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1554477470123-914" target="Simple AU Performer - 1544700795765-328"/>
         <connection connector="SignalEmitterToKeyFramePerformer"

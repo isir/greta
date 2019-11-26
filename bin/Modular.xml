@@ -73,7 +73,7 @@
             <menu name="TTS">
                 <item module="TTS" name="Controller"/>
                 <item module="MaryTTS Client" name="MaryTTS Client"/>
-                <item module="Cereproc TTS" name="Cereproc"/>
+                <item module="Cereproc" name="Cereproc"/>
             </menu>
             <menu name="Laugh Synthetizer">
                 <item module="Laugh Synthetizer" name="Controller"/>
@@ -418,7 +418,7 @@
             <frame type="noFrame"/>
             <!-- TODO -->
         </module>
-        <module name="Cereproc TTS">
+        <module name="Cereproc">
             <object class="vib.auxiliary.tts.cereproc.CereprocTTS" lib_id="vib_cereproc"/>
             <frame type="noFrame"/>
         </module>

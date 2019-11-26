@@ -72,7 +72,7 @@
             </menu>
             <menu name="TTS">
                 <item module="TTS" name="Controller"/>
-                <item module="OpenMary Client TTS" name="OpenMary Client"/>
+                <item module="MaryTTS Client" name="MaryTTS Client"/>
                 <item module="Cereproc TTS" name="Cereproc"/>
             </menu>
             <menu name="Laugh Synthetizer">
@@ -413,8 +413,8 @@
             <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
             <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
         </module>
-        <module name="OpenMary Client TTS">
-            <object class="vib.auxiliary.tts.openmary.OpenMaryClientTTS" lib_id="vib_openmary"/>
+        <module name="MaryTTS Client">
+            <object class="vib.auxiliary.tts.marytts.MaryTTSClient" lib_id="vib_marytts"/>
             <frame type="noFrame"/>
             <!-- TODO -->
         </module>
@@ -1007,8 +1007,7 @@
             <needs path="./Common/Data/wordnet30/dict/index.verb"/>
         </lib>
         <lib id="ext_lwjgl" path="./Common/Lib/External/lwjgl/jar/lwjgl.jar"/>
-        <lib id="ext_openmary_3" path="./Common/Lib/External/openmary/maryclient-3.6.jar"/>
-        <lib id="ext_openmary_4" path="./Common/Lib/External/openmary/maryclient-4.3.jar"/>
+        <lib id="ext_marytts-client" path="./Common/Lib/External/marytts-client-5.2.jar"/>
         <lib id="ext_opennlp" path="./Common/Lib/External/opennlp-tools-1.8.2.jar"/>
         <lib id="ext_stanfordparser" path="./Common/Lib/External/stanford-parser.jar">
             <needs path="./Common/Data/stanfordparser/englishPCFG.ser.gz"/>
@@ -1166,6 +1165,10 @@
             <needs path="./Common/Data/xml/profiles.xsd"/>
             <needs path="./ListenerIntentPlanner/**"/>
         </lib>
+        <lib id="vib_marytts" path="./Common/Lib/Internal/MaryTTS.jar">
+            <depends lib_id="ext_marytts-client"/>
+            <depends lib_id="vib_util"/>
+        </lib>
         <lib id="vib_meaning_miner" path="./Common/Lib/Internal/MeaningMiner.jar">
             <depends lib_id="ext_activemq-all"/>
             <depends lib_id="ext_jwiwordnet"/>
@@ -1204,11 +1207,6 @@
             <needs path="./Player/Lib/External/Win32/**"/>
             <needs path="./Player/Lib/External/Win64/**"/>
             <needs path="./Player/Lib/External/xuggle-xuggler-5.4.jar"/>
-        </lib>
-        <lib id="vib_openmary" path="./Common/Lib/Internal/OpenMary.jar">
-            <depends lib_id="ext_openmary_3"/>
-            <depends lib_id="ext_openmary_4"/>
-            <depends lib_id="vib_util"/>
         </lib>
         <lib id="vib_plan_capture" path="./Common/Lib/Internal/PlanCapture.jar">
             <depends lib_id="vib_behavior_planner"/>

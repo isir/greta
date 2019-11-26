@@ -57,7 +57,7 @@ public class Speech implements Temporizable{
     public void setMarkers(List<TimeMarker> markers) {
         this.markers = markers;
     }
-//TODO add sressingpoint ? but it is only aviable with OpenMary
+//TODO add sressingpoint ? but it is only aviable with MaryTTS
     private List<Object> speechElements;
     private TimeMarker start;
     private TimeMarker end;

@@ -71,8 +71,8 @@
         <ant antfile="../../auxiliary/TTS/Cereproc/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>     
     
-    <target name="build.dependency.openmary" if="${need.openmary}">
-        <ant antfile="../../auxiliary/TTS/OpenMary/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.marytts" if="${need.marytts}">
+        <ant antfile="../../auxiliary/TTS/MaryTTS/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>     
     
     <target name="build.dependency.animationcore" if="${need.animationcore}">
@@ -292,15 +292,15 @@
         </condition>
         <antcall target="build.dependency.cereproc"/>       
 
-        <condition property="need.openmary">
+        <condition property="need.marytts">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/OpenMary.jar" type="file"/>
+                    <available file="${jar.dir}/MaryTTS.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.openmary"/>            
+        <antcall target="build.dependency.marytts"/>            
         
         <condition property="need.animationcore">
             <not>

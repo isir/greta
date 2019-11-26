@@ -107,9 +107,9 @@
                     <window h="166" visible="false" w="352" x="0" y="0"/>
                 </element>
                 <element h="50.0"
-                    id="OpenMary Client TTS - 1571148425368-281"
-                    module="OpenMary Client TTS"
-                    name="OpenMary Client TTS #1" w="80.0" x="540.0" y="30.0"/>
+                    id="MaryTTS Client - 1571148425368-281"
+                    module="MaryTTS Client"
+                    name="MaryTTS Client #1" w="80.0" x="540.0" y="30.0"/>
             </element>
             <element h="430.0" id="Character Manager - 1544700726358-960"
                 module="Character Manager" name="Character Manager #2"
@@ -197,9 +197,9 @@
                     <window h="166" visible="false" w="352" x="0" y="0"/>
                 </element>
                 <element h="50.0"
-                    id="OpenMary Client TTS - 1571148453512-764"
-                    module="OpenMary Client TTS"
-                    name="OpenMary Client TTS #2" w="80.0" x="540.0" y="30.0"/>
+                    id="MaryTTS Client - 1571148453512-764"
+                    module="MaryTTS Client"
+                    name="MaryTTS Client #2" w="80.0" x="540.0" y="30.0"/>
             </element>
         </element>
         <element h="490.0" id="Ogre Player - 1544700973529-249"
@@ -274,7 +274,7 @@
             source="Audio Keyframe Performer - 1554477488803-405" target="Thrift Audio Sender - 1571145456016-916"/>
         <connection connector="LipSourceForLipBlender"
             source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477506450-994"/>
-        <connection connector="setTTS" source="TTS - 1544705330204-766" target="OpenMary Client TTS - 1571148453512-764"/>
+        <connection connector="setTTS" source="TTS - 1544705330204-766" target="MaryTTS Client - 1571148453512-764"/>
         <connection connector="LipSourceForLipBlender"
             source="Lip Model - 1544701091338-924" target="Lip Blender - 1554477549928-147"/>
         <connection connector="AUEmitterToAUPerformer"
@@ -285,7 +285,7 @@
             source="Lip Blender - 1554477506450-994" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="Lip Blender - 1554477506450-994" target="Thrift FAP Sender - 1571145324935-400"/>
-        <connection connector="setTTS" source="TTS - 1544704550664-449" target="OpenMary Client TTS - 1571148425368-281"/>
+        <connection connector="setTTS" source="TTS - 1544704550664-449" target="MaryTTS Client - 1571148425368-281"/>
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"
             source="Animation Keyframe Performer - 1544701084817-460" target="MPEG4 Animatable - 1544701103065-914"/>
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"

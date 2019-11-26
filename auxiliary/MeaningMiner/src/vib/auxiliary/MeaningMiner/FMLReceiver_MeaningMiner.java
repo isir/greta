@@ -451,7 +451,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
             toReturn = XML.createTree("speech");
             toReturn.setAttribute("id", newSpeech.getId());
             toReturn.setAttribute("language", newSpeech.getLanguage());
-            toReturn.setAttribute("voice","openmary");
+            toReturn.setAttribute("voice","marytts");
             toReturn.setAttribute("type", "SAPI4");
             TimeMarker start = newSpeech.getMarkers().get(0);
             SynchPoint synchRef = start.getFirstSynchPointWithTarget();

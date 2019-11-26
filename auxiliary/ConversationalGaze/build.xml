@@ -9,6 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="ConversationalGaze" default="default" basedir=".">
     <description>Builds, tests, and runs the project ConversationalGaze.</description>
+    <import file="../../VIB_build.xml"/>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

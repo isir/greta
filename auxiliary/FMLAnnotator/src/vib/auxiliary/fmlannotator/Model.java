@@ -421,7 +421,7 @@ public class Model implements IntentionEmitter {
             speechElement.setAttributeNode(lang);
 
             Attr voice = doc.createAttribute("voice");
-            voice.setValue("openmary");
+            voice.setValue("marytts");
             speechElement.setAttributeNode(voice);
 
             Attr type = doc.createAttribute("type");

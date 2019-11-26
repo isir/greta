@@ -37,7 +37,7 @@
 <!ELEMENT backchannel EMPTY>
 <!ELEMENT other EMPTY>
 
-<!ATTLIST speech id ID #REQUIRED start CDATA "0" type CDATA #IMPLIED text CDATA #IMPLIED speed_num CDATA #IMPLIED speed_sym (fast|medium|slow) "medium" language CDATA #REQUIRED voice (openmary|realspeech) #REQUIRED>
+<!ATTLIST speech id ID #REQUIRED start CDATA "0" type CDATA #IMPLIED text CDATA #IMPLIED speed_num CDATA #IMPLIED speed_sym (fast|medium|slow) "medium" language CDATA #REQUIRED voice (marytts|realspeech) #REQUIRED>
 
 <!ATTLIST tm id ID #REQUIRED>
 

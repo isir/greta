@@ -34,9 +34,9 @@
                     <window h="127" visible="false" w="437" x="10" y="10"/>
                 </element>
                 <element h="50.0"
-                    id="OpenMary Client TTS - 1544700946314-81"
-                    module="OpenMary Client TTS"
-                    name="OpenMary Client TTS" w="80.0" x="540.0" y="30.0"/>
+                    id="MaryTTS Client - 1544700946314-81"
+                    module="MaryTTS Client"
+                    name="MaryTTS Client" w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FML File Reader - 1544700908962-428"
                     module="FML File Reader" name="FML File Reader"
                     w="80.0" x="30.0" y="30.0">
@@ -133,7 +133,7 @@
     <connections>
         <connection connector="addLogOutput"
             source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="OpenMary Client TTS - 1544700946314-81"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="MaryTTS Client - 1544700946314-81"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="SignalEmitterToSignalPerformer"

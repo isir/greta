@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" text="" type="SAPI4" voice="openmary">
+    <speech id="s1" language="english" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>

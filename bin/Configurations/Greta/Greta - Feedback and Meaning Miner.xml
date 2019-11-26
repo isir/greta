@@ -34,9 +34,9 @@
                     <window h="127" visible="false" w="437" x="10" y="10"/>
                 </element>
                 <element h="50.0"
-                    id="OpenMary Client TTS - 1544700946314-81"
-                    module="OpenMary Client TTS"
-                    name="OpenMary Client TTS" w="80.0" x="540.0" y="30.0"/>
+                    id="MaryTTS Client - 1544700946314-81"
+                    module="MaryTTS Client"
+                    name="MaryTTS Client" w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FML File Reader - 1544700908962-428"
                     module="FML File Reader" name="FML File Reader"
                     w="80.0" x="30.0" y="30.0">
@@ -143,7 +143,7 @@
             source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="OpenMary Client TTS - 1544700946314-81"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="MaryTTS Client - 1544700946314-81"/>
         <connection connector="addFeedbackOutput"
             source="Feedbacks - 1571996970388-168" target="Feedbacks Sender - 1571997112492-640"/>
         <connection connector="addLogOutput"

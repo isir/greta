@@ -34,9 +34,9 @@
                     <window h="127" visible="false" w="437" x="10" y="10"/>
                 </element>
                 <element h="50.0"
-                    id="OpenMary Client TTS - 1544701108513-960"
-                    module="OpenMary Client TTS"
-                    name="OpenMary Client TTS #1" w="80.0" x="540.0" y="30.0"/>
+                    id="MaryTTS Client - 1544701108513-960"
+                    module="MaryTTS Client"
+                    name="MaryTTS Client #1" w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FML File Reader - 1544701069074-506"
                     module="FML File Reader" name="FML File Reader #1"
                     w="80.0" x="30.0" y="30.0">
@@ -116,9 +116,9 @@
                     <window h="127" visible="false" w="437" x="10" y="10"/>
                 </element>
                 <element h="50.0"
-                    id="OpenMary Client TTS - 1544705335787-254"
-                    module="OpenMary Client TTS"
-                    name="OpenMary Client TTS #2" w="80.0" x="540.0" y="30.0"/>
+                    id="MaryTTS Client - 1544705335787-254"
+                    module="MaryTTS Client"
+                    name="MaryTTS Client #2" w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FML File Reader - 1544700908962-428"
                     module="FML File Reader" name="FML File Reader #2"
                     w="80.0" x="30.0" y="30.0">
@@ -228,7 +228,7 @@
             source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477506450-994"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="Lip Blender - 1554477549928-147" target="MPEG4 Animatable - 1544701103065-914"/>
-        <connection connector="setTTS" source="TTS - 1544704550664-449" target="OpenMary Client TTS - 1544701108513-960"/>
+        <connection connector="setTTS" source="TTS - 1544704550664-449" target="MaryTTS Client - 1544701108513-960"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -239,7 +239,7 @@
             source="Behavior Realizer - 1544713018144-582" target="Lip Model - 1544701091338-924"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544713018144-582" target="Audio Keyframe Performer - 1554477564140-572"/>
-        <connection connector="setTTS" source="TTS - 1544705330204-766" target="OpenMary Client TTS - 1544705335787-254"/>
+        <connection connector="setTTS" source="TTS - 1544705330204-766" target="MaryTTS Client - 1544705335787-254"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1554477470123-914" target="Simple AU Performer - 1544700795765-328"/>
         <connection connector="AudioEmitter To AudioPerformer"

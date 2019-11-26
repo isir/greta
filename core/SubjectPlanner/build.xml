@@ -9,7 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="SubjectPlanner" default="default" basedir=".">
     <description>Builds, tests, and runs the project SubjectPlanner.</description>
-	<import file="../../VIB_build.xml"/>
+    <import file="../../VIB_build.xml"/>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -52,15 +52,14 @@
       -init-macrodef-junit:     defines macro for junit execution
       -init-macrodef-debug:     defines macro for class debugging
       -init-macrodef-java:      defines macro for class execution
-      -do-jar-with-manifest:    JAR building (if you are using a manifest)
-      -do-jar-without-manifest: JAR building (if you are not using a manifest)
+      -do-jar:                  JAR building
       run:                      execution of project 
       -javadoc-build:           Javadoc generation
       test-report:              JUnit report generation
 
     An example of overriding the target for project execution could look like this:
 
-        <target name="run" depends="SubjectPlanner.jar">
+        <target name="run" depends="SubjectPlanner-impl.jar">
             <exec dir="bin" executable="launcher.exe">
                 <arg file="${dist.jar}"/>
             </exec>

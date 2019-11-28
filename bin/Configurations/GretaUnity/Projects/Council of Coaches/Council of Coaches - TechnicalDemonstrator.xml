@@ -132,7 +132,7 @@
                     id="Body Head Noise - 1574959313203-398"
                     module="Body Head Noise" name="Body Head Noise #1"
                     w="80.0" x="540.0" y="100.0">
-                    <window h="215" visible="true" w="225" x="0" y="440"/>
+                    <window h="215" visible="true" w="520" x="0" y="440"/>
                 </element>
             </element>
             <element h="450.0"
@@ -264,7 +264,7 @@
                     id="Body Head Noise - 1574959329659-302"
                     module="Body Head Noise" name="Body Head Noise #2"
                     w="80.0" x="540.0" y="100.0">
-                    <window h="215" visible="true" w="225" x="530" y="440"/>
+                    <window h="215" visible="true" w="520" x="530" y="440"/>
                 </element>
             </element>
         </element>
@@ -342,67 +342,52 @@
         </element>
     </elements>
     <connections>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1571853444753-284" target="Environment - 1545228639037-145"/>
-        <connection connector="addFeedbackOutput"
-            source="Feedbacks - 1571048300087-491" target="Feedbacks Sender - 1571048330040-648"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="BML Receiver - 1571048178752-311" target="Behavior Realizer - 1571048038311-347"/>
-        <connection connector="setTTS" source="TTS - 1571048583671-185" target="MaryTTS Client - 1571048597550-655"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1571048124960-179" target="Behavior Realizer - 1571048038311-347"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1571048970414-731" target="Lip Blender - 1571049000695-539"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1545228689924-565" target="Behavior Realizer - 1545228702171-304"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1545228689924-565" target="Feedbacks - 1554132717338-53"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="Animation Keyframe Performer - 1545228717780-228" target="MPEG4 Animatable - 1545228808979-301"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="Animation Keyframe Performer - 1545228717780-228" target="Thrift BAP Sender - 1553697836829-985"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1571048020905-618" target="Behavior Realizer - 1571048038311-347"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1571048020905-618" target="Feedbacks - 1571048300087-491"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1571048749984-846" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1571048749984-846" target="Thrift Audio Sender - 1551782070029-170"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1571049025511-665" target="Simple AU Performer - 1571049043503-295"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="Lip Blender - 1571049000695-539" target="MPEG4 Animatable - 1571048631079-434"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="Lip Blender - 1571049000695-539" target="Thrift FAP Sender - 1571048942447-446"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="Simple AU Performer - 1545228776323-11" target="Lip Blender - 1554807347732-921"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1545228678860-536" target="Behavior Realizer - 1545228702171-304"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554807302252-267" target="Simple AU Performer - 1545228776323-11"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML File Reader - 1571048114448-838" target="Behavior Planner - 1571048020905-618"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="Body Head Noise - 1574959206987-998" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1571048970414-731" target="Lip Blender - 1571049000695-539"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1554132717338-53" target="Feedbacks Sender - 1554132744307-154"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554807323260-420" target="MPEG4 Animatable - 1545228808979-301"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554807323260-420" target="Thrift Audio Sender - 1571137893257-728"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1545228847405-168" target="Log Frame - 1545228852107-958"/>
+        <connection connector="setTTS" source="TTS - 1571048583671-185" target="MaryTTS Client - 1571048597550-655"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1545228808979-301" target="Environment - 1545228639037-145"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1571048124960-179" target="Behavior Realizer - 1571048038311-347"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="Body Head Noise - 1574959313203-398" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Thrift Command Receiver - 1571227173930-849" target="Behavior Realizer - 1571048038311-347"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Thrift Command Receiver - 1571227173930-849" target="Behavior Planner - 1571048020905-618"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1571048631079-434" target="Environment - 1545228639037-145"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="Lip Blender - 1554807347732-921" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="Lip Blender - 1554807347732-921" target="Thrift FAP Sender - 1551782056618-620"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="Simple AU Performer - 1545228776323-11" target="Lip Blender - 1554807347732-921"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1571048300087-491" target="Feedbacks Sender - 1571048330040-648"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Meaning Miner FML Receiver - 1571048164657-48" target="Behavior Planner - 1571048020905-618"/>
+        <connection connector="setTTS" source="TTS - 1545228829579-75" target="MaryTTS Client - 1545228836179-501"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Thrift Command Receiver - 1553697843141-325" target="Behavior Realizer - 1545228702171-304"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="Thrift Command Receiver - 1553697843141-325" target="Behavior Planner - 1545228689924-565"/>
-        <connection connector="addFeedbackOutput"
-            source="Feedbacks - 1554132717338-53" target="Feedbacks Sender - 1554132744307-154"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1545228808979-301" target="Environment - 1545228639037-145"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1545228738636-406" target="Lip Blender - 1554807347732-921"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="Simple AU Performer - 1571049043503-295" target="Lip Blender - 1571049000695-539"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="Animation Keyframe Performer - 1571048776230-901" target="MPEG4 Animatable - 1571048631079-434"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="Animation Keyframe Performer - 1571048776230-901" target="Thrift BAP Sender - 1571048800983-957"/>
         <connection connector="addFeedbackInput"
             source="Behavior Realizer - 1545228702171-304" target="Feedbacks - 1554132717338-53"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -413,21 +398,32 @@
             source="Behavior Realizer - 1545228702171-304" target="Lip Model - 1545228738636-406"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1545228702171-304" target="Audio Keyframe Performer - 1554807323260-420"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1571048631079-434" target="Environment - 1545228639037-145"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1571048749984-846" target="MPEG4 Animatable - 1571048631079-434"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1571048749984-846" target="Thrift Audio Sender - 1551782070029-170"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1545228847405-168" target="Log Frame - 1545228852107-958"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="Animation Keyframe Performer - 1571048776230-901" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="Animation Keyframe Performer - 1571048776230-901" target="Thrift BAP Sender - 1571048800983-957"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Meaning Miner FML Receiver - 1554132728732-441" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="Body Head Noise - 1574959329659-302" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1545228689924-565" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1545228689924-565" target="Feedbacks - 1554132717338-53"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1545228738636-406" target="Lip Blender - 1554807347732-921"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1545228678860-536" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1571048114448-838" target="Behavior Planner - 1571048020905-618"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="BML Receiver - 1554117362832-889" target="Behavior Realizer - 1545228702171-304"/>
-        <connection connector="setTTS" source="TTS - 1545228829579-75" target="MaryTTS Client - 1545228836179-501"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="Lip Blender - 1554807347732-921" target="MPEG4 Animatable - 1545228808979-301"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="Lip Blender - 1554807347732-921" target="Thrift FAP Sender - 1551782056618-620"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML File Reader - 1545228674948-209" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="Animation Keyframe Performer - 1545228717780-228" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="Animation Keyframe Performer - 1545228717780-228" target="Thrift BAP Sender - 1553697836829-985"/>
         <connection connector="addFeedbackInput"
             source="Behavior Realizer - 1571048038311-347" target="Feedbacks - 1571048300087-491"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -438,15 +434,19 @@
             source="Behavior Realizer - 1571048038311-347" target="Lip Model - 1571048970414-731"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1571048038311-347" target="Audio Keyframe Performer - 1571048749984-846"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1545228674948-209" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1571853444753-284" target="Environment - 1545228639037-145"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="Lip Blender - 1571049000695-539" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="Lip Blender - 1571049000695-539" target="Thrift FAP Sender - 1571048942447-446"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554807302252-267" target="Simple AU Performer - 1545228776323-11"/>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="Thrift Command Receiver - 1571227173930-849" target="Behavior Realizer - 1571048038311-347"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Thrift Command Receiver - 1571227173930-849" target="Behavior Planner - 1571048020905-618"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="Body Head Noise - 1574959183692-650" target="MPEG4 Animatable - 1545228808979-301"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Meaning Miner FML Receiver - 1554132728732-441" target="Behavior Planner - 1545228689924-565"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Meaning Miner FML Receiver - 1571048164657-48" target="Behavior Planner - 1571048020905-618"/>
+            source="Behavior Planner - 1571048020905-618" target="Behavior Realizer - 1571048038311-347"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1571048020905-618" target="Feedbacks - 1571048300087-491"/>
     </connections>
 </modulated>

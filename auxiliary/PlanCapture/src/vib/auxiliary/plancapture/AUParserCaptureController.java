@@ -1,23 +1,24 @@
 /*
  * This file is part of the auxiliaries of Greta.
- * 
- * Greta is free software: you can redistribute it and / or modify
+ *
+ * Greta is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * Greta is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.See the
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
- * along with Greta.If not, see <http://www.gnu.org/licenses/>.
+ * along with Greta.  If not, see <http://www.gnu.org/licenses/>.
+ *
  */
-
-package vib.plancapture;
+package vib.auxiliary.plancapture;
 
 import java.io.File;
+import java.io.FilenameFilter;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -29,8 +30,8 @@ import vib.core.util.log.Logs;
  *
  * @author Thomas Janssoone
  */
-public class ParserCaptureController_AU extends vib.auxiliary.player.ogre.capture.AUCapturecontroller implements CallbackPerformer {
-    private static final Logger LOGGER = Logger.getLogger(ParserCaptureController_AU.class.getName() );
+public class AUParserCaptureController extends vib.auxiliary.player.ogre.capture.Capturecontroller implements CallbackPerformer {
+    private static final Logger LOGGER = Logger.getLogger( AUParserCaptureController.class.getName() );
     
     private volatile boolean isCapturing = false;
     private boolean mustcapture = false;
@@ -38,7 +39,7 @@ public class ParserCaptureController_AU extends vib.auxiliary.player.ogre.captur
     private AUParserFileReader filereader;
     
     
-    public ParserCaptureController_AU(){
+    public AUParserCaptureController(){
         videoButton.setEnabled(false);
         screenShotButton.setText("Record all files");
         

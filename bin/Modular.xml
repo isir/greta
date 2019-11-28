@@ -950,11 +950,11 @@
             </frame>
         </module>
         <module name="Meaning Miner Capture Controller" style="Player">
-            <object class="vib.plancapture.MeaningMinerCaptureController" lib_id="vib_plan_capture"/>
+            <object class="vib.auxiliary.plancapture.MeaningMinerCaptureController" lib_id="vib_plan_capture"/>
             <frame type="object"/>
         </module>
         <module name="Parser Capture Controller AU" style="Player">
-            <object class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plan_capture"/>
+            <object class="vib.auxiliary.plancapture.ParserCaptureController_AU" lib_id="vib_plan_capture"/>
             <frame type="object"/>
         </module>
         <module name="Image Schema Extractor" style="VIBDefault">
@@ -1174,6 +1174,7 @@
             <depends lib_id="ext_jwiwordnet"/>
             <depends lib_id="ext_opennlp"/>
             <depends lib_id="ext_stanfordparser"/>
+            <depends lib_id="vib_activemq"/>
             <depends lib_id="vib_intentions"/>
             <depends lib_id="vib_signals"/>
             <depends lib_id="vib_util"/>
@@ -1267,6 +1268,7 @@
         <lib id="vib_video_capture" path="./Player/Lib/Internal/VideoCapture.jar">
             <depends lib_id="ext_xuggle-xuggler"/>
             <depends lib_id="vib_ogre_player"/>
+            <depends lib_id="vib_util"/>
         </lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->
@@ -1496,13 +1498,13 @@
             <disconnect from="null" method="" to="null"/>
         </connector>
         <connector id="connectPlanCaptureControllerToCapturable" unique="true">
-            <input class="vib.plancapture.PlanCapturecontroller" lib_id="vib_plan_capture"/>
+            <input class="vib.auxiliary.plancapture.PlanCapturecontroller" lib_id="vib_plan_capture"/>
             <output class="vib.auxiliary.player.ogre.capture.Capturable" lib_id="vib_ogre_player"/>
             <connect from="input" method="setCapturable" to="output"/>
             <disconnect from="input" method="setCapturable" to="null"/>
         </connector>
         <connector id="connectPlanCaptureControllerToCaptureOutput" unique="true">
-            <input class="vib.plancapture.PlanCapturecontroller" lib_id="vib_plan_capture"/>
+            <input class="vib.auxiliary.plancapture.PlanCapturecontroller" lib_id="vib_plan_capture"/>
             <output class="vib.auxiliary.player.ogre.capture.CaptureOutput" lib_id="vib_ogre_player"/>
             <connect from="input" method="setCaptureOutput" to="output"/>
             <disconnect from="input" method="setCaptureOutput" to="null"/>
@@ -1532,7 +1534,7 @@
             <disconnect from="output" method="RemoveParticipantUser" to="input"/>
         </connector>
         <connector id="connectParserCaptureController_AUToAUParserFileReader" unique="true">
-            <input class="vib.plancapture.ParserCaptureController_AU" lib_id="vib_plan_capture"/>
+            <input class="vib.auxiliary.plancapture.ParserCaptureController_AU" lib_id="vib_plan_capture"/>
             <output class="vib.core.signals.AUParserFileReader" lib_id="vib_signals"/>
             <connect from="input" method="setAUParserFileReader" to="output"/>
             <disconnect from="null" method="" to="null"/>

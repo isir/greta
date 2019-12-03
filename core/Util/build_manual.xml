@@ -13,7 +13,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -45,7 +45,7 @@
     
     <target name="build" depends="clean, compile">
         <jar destfile="${jar.output}" basedir="${classes.dir}">
-            <!-- Add class pat if it has dependency -->
+            <!-- Add class path if it has dependency -->
         </jar>
         <antcall target="delete.classes"/>
     </target>

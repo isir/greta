@@ -13,7 +13,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -23,34 +23,24 @@
     </target>
     
     <!-- DEPENDENCY TASKS HERE -->
-    <target name="build.dependency.util" if="${need.util}">
-        <ant antfile="../Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>   
-    
     <target name="build.dependency.behaviorrealizer" if="${need.behaviorrealizer}">
         <ant antfile="../BehaviorRealizer/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>  
+    </target>
+    
+    <target name="build.dependency.util" if="${need.util}">
+        <ant antfile="../Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     <!-- -->
     
     <path id="path.jars">
         <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
             <include name="BehaviorRealizer.jar"/>
-        </fileset>    
+            <include name="Util.jar"/>
+        </fileset>
     </path>
     
     <target name="build.dependencies">
         <!-- DEPENDENCY TASKS HERE -->
-        <condition property="need.util">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Util.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.util"/>
-        
         <condition property="need.behaviorrealizer">
             <not>
                 <and>
@@ -60,6 +50,16 @@
             </not>
         </condition>
         <antcall target="build.dependency.behaviorrealizer"/>
+        
+        <condition property="need.util">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Util.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.util"/>
         <!-- -->
     </target>
     

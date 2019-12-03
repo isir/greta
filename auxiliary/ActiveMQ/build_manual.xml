@@ -8,15 +8,15 @@
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
     <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
-    <property name="jackson.jar.dir" location="../../bin/Common/Lib/External/jackson" />
-	
+    <property name="external.jackson.jar.dir" location="../../bin/Common/Lib/External/jackson" />
+    
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
     </target>
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -26,12 +26,16 @@
     </target>
     
     <!-- DEPENDENCY TASKS HERE -->
-    <target name="build.dependency.util" if="${need.util}">
-        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.emotionml" if="${need.emotionml}">
+        <ant antfile="../EmotionML/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.utilx" if="${need.utilx}">
-        <ant antfile="../../core/Utilx/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.feedbacks" if="${need.feedbacks}">
+        <ant antfile="../../core/Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.intentions" if="${need.intentions}">
+        <ant antfile="../../core/Intentions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
     <target name="build.dependency.mpeg4" if="${need.mpeg4}">
@@ -42,65 +46,66 @@
         <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.intentions" if="${need.intentions}">
-        <ant antfile="../../core/Intentions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
-    <target name="build.dependency.feedbacks" if="${need.feedbacks}">
-        <ant antfile="../../core/Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
-    <target name="build.dependency.emotionml" if="${need.emotionml}">
-        <ant antfile="../EmotionML/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
     <target name="build.dependency.socialparameters" if="${need.socialparameters}">
         <ant antfile="../SocialParameters/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.util" if="${need.util}">
+        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     <!-- -->
     
     <path id="path.jars">
-        <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
-            <include name="Utilx.jar"/>
-            <include name="MPEG4.jar"/>
-            <include name="Signals.jar"/>
-            <include name="Intentions.jar"/>
-            <include name="Feedbacks.jar"/>
-            <include name="EmotionML.jar"/>
-            <include name="SocialParameters.jar"/>
-        </fileset>
         <fileset dir="${external.jar.dir}">
             <include name="activemq-all-5.15.10.jar"/>
         </fileset>
-        <fileset dir="${jackson.jar.dir}">
-            <include name="jackson-annotations-2.9.0.jar"/>
-            <include name="jackson-core-2.9.8.jar"/>
-            <include name="jackson-databind-2.9.8.jar"/>
+        <fileset dir="${external.jackson.jar.dir}">
+            <include name="jackson-annotations-2.9.9.jar"/>
+            <include name="jackson-core-2.9.9.jar"/>
+            <include name="jackson-databind-2.9.9.3.jar"/>
+        </fileset>
+        <fileset dir="${jar.dir}">
+            <include name="EmotionML.jar"/>
+            <include name="Feedbacks.jar"/>
+            <include name="Intentions.jar"/>
+            <include name="MPEG4.jar"/>
+            <include name="Signals.jar"/>
+            <include name="SocialParameters.jar"/>
+            <include name="Util.jar"/>
         </fileset>
     </path>
     
     <target name="build.dependencies">
         <!-- DEPENDENCY TASKS HERE -->
-        <condition property="need.util">
+        <condition property="need.emotionml">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Util.jar" type="file"/>
+                    <available file="${jar.dir}/EmotionML.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.util"/>
+        <antcall target="build.dependency.emotionml"/>
         
-        <condition property="need.utilx">
+        <condition property="need.feedbacks">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Utilx.jar" type="file"/>
+                    <available file="${jar.dir}/Feedbacks.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.utilx"/>
+        <antcall target="build.dependency.feedbacks"/>
+        
+        <condition property="need.intentions">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Intentions.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.intentions"/>
         
         <condition property="need.mpeg4">
             <not>
@@ -122,36 +127,6 @@
         </condition>
         <antcall target="build.dependency.signals"/>
         
-        <condition property="need.intentions">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Intentions.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.intentions"/>
-        
-        <condition property="need.feedbacks">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Feedbacks.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.feedbacks"/>
-        
-        <condition property="need.emotionml">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/EmotionML.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.emotionml"/>
-        
         <condition property="need.socialparameters">
             <not>
                 <and>
@@ -161,6 +136,16 @@
             </not>
         </condition>
         <antcall target="build.dependency.socialparameters"/>
+        
+        <condition property="need.util">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Util.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.util"/>
         <!-- -->
     </target>
     
@@ -179,7 +164,7 @@
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
             <map from="${external.jar.dir}" to="../External"/>
-            <map from="${jackson.jar.dir}" to="../External/jackson"/>
+            <map from="${external.jackson.jar.dir}" to="../External/jackson"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

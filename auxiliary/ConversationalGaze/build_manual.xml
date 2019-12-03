@@ -7,16 +7,14 @@
     <property name="jar.dir" location="../../bin/Common/Lib/Internal" />
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
-    <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
     
-	
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
     </target>
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -26,54 +24,73 @@
     </target>
     
     <!-- DEPENDENCY TASKS HERE -->
-    <target name="build.dependency.util" if="${need.util}">
-        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.activemq" if="${need.activemq}">
+        <ant antfile="../ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.feedbacks" if="${need.feedbacks}">
+        <ant antfile="../../core/Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.mpeg4" if="${need.mpeg4}">
+        <ant antfile="../MPEG4/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
     <target name="build.dependency.signals" if="${need.signals}">
         <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.feedbacks" if="${need.feedbacks}">
-        <ant antfile="../../core/Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-	
-	<target name="build.dependency.activemq" if="${need.activemq}">
-        <ant antfile="../ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-	
-	<target name="build.dependency.ssi" if="${need.ssi}">
+    <target name="build.dependency.ssi" if="${need.ssi}">
         <ant antfile="../SSI/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
-	
-	<target name="build.dependency.mpeg4" if="${need.mpeg4}">
-        <ant antfile="../MPEG4/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    
+    <target name="build.dependency.util" if="${need.util}">
+        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
-
     <!-- -->
     
     <path id="path.jars">
         <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
-            <include name="Signals.jar"/>
+            <include name="ActiveMQ.jar"/>
             <include name="Feedbacks.jar"/>
-			<include name="ActiveMQ.jar"/>
-			<include name="SSI.jar"/>
-			<include name="MPEG4.jar"/>
+            <include name="MPEG4.jar"/>
+            <include name="Signals.jar"/>
+            <include name="SSI.jar"/>
+            <include name="Util.jar"/>
         </fileset>
     </path>
     
     <target name="build.dependencies">
         <!-- DEPENDENCY TASKS HERE -->
-        <condition property="need.util">
+        <condition property="need.activemq">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Util.jar" type="file"/>
+                    <available file="${jar.dir}/ActiveMQ.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.util"/>
+        <antcall target="build.dependency.activemq"/>
+        
+        <condition property="need.feedbacks">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Feedbacks.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.feedbacks"/>
+        
+        <condition property="need.mpeg4">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/MPEG4.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.mpeg4"/>
         
         <condition property="need.signals">
             <not>
@@ -85,27 +102,7 @@
         </condition>
         <antcall target="build.dependency.signals"/>
         
-        <condition property="need.feedbacks">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Feedbacks.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.feedbacks"/>
-		
-		<condition property="need.activemq">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/ActiveMQ.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.activemq"/>
-		
-		<condition property="need.ssi">
+        <condition property="need.ssi">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
@@ -114,17 +111,16 @@
             </not>
         </condition>
         <antcall target="build.dependency.ssi"/>
-		
-		<condition property="need.mpeg4">
+        
+        <condition property="need.util">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/MPEG4.jar" type="file"/>
+                    <available file="${jar.dir}/Util.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.mpeg4"/>
-        
+        <antcall target="build.dependency.util"/>
         <!-- -->
     </target>
     
@@ -142,7 +138,6 @@
     <target name="build" depends="clean, compile">
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
-            <map from="${external.jar.dir}" to="../External"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

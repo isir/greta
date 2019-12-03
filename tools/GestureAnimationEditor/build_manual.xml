@@ -13,7 +13,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -23,18 +23,6 @@
     </target>
     
     <!-- DEPENDENCY TASKS HERE -->
-    <target name="build.dependency.util" if="${need.util}">
-        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
-    <target name="build.dependency.utilx" if="${need.utilx}">
-        <ant antfile="../../core/Utilx/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
-    <target name="build.dependency.signals" if="${need.signals}">
-        <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-    
     <target name="build.dependency.animationcore" if="${need.animationcore}">
         <ant antfile="../../core/AnimationCore/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
@@ -42,50 +30,32 @@
     <target name="build.dependency.bodyanimationperformer" if="${need.bodyanimationperformer}">
         <ant antfile="../../core/BodyAnimationPerformer/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
+    
+    <target name="build.dependency.signals" if="${need.signals}">
+        <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.util" if="${need.util}">
+        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.utilx" if="${need.utilx}">
+        <ant antfile="../../core/Utilx/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     <!-- -->
     
     <path id="path.jars">
         <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
-            <include name="Utilx.jar"/>
-            <include name="Signals.jar"/>
             <include name="AnimationCore.jar"/>
             <include name="BodyAnimationPerformer.jar"/>
+            <include name="Signals.jar"/>
+            <include name="Util.jar"/>
+            <include name="Utilx.jar"/>
         </fileset>
     </path>
     
     <target name="build.dependencies">
         <!-- DEPENDENCY TASKS HERE -->
-        <condition property="need.util">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Util.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.util"/>
-        
-        <condition property="need.utilx">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Utilx.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.utilx"/>
-        
-        <condition property="need.signals">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Signals.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.signals"/>
-        
         <condition property="need.animationcore">
             <not>
                 <and>
@@ -105,6 +75,36 @@
             </not>
         </condition>
         <antcall target="build.dependency.bodyanimationperformer"/>
+        
+        <condition property="need.signals">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Signals.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.signals"/>
+        
+        <condition property="need.util">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Util.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.util"/>
+        
+        <condition property="need.utilx">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Utilx.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.utilx"/>
         <!-- -->
     </target>
     

@@ -15,7 +15,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -31,11 +31,11 @@
     <!-- -->
     
     <path id="path.jars">
-        <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
-        </fileset>
         <fileset dir="${external.jar.dir}">
             <include name="marytts-client-5.2.jar"/>
+        </fileset>
+        <fileset dir="${jar.dir}">
+            <include name="Util.jar"/>
         </fileset>
     </path>
     

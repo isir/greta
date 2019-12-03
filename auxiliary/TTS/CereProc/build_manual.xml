@@ -7,7 +7,7 @@
     <property name="jar.dir" location="../../../bin/Common/Lib/Internal" />
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
-    <property name="external.cereproc.jar.dir" location="../../bin/Common/Lib/External/cereproc" />
+    <property name="external.cereproc.jar.dir" location="../../../bin/Common/Lib/External/cereproc" />
     
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
@@ -15,7 +15,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -31,11 +31,11 @@
     <!-- -->
     
     <path id="path.jars">
-        <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
-        </fileset>
         <fileset dir="${external.cereproc.jar.dir}">
             <include name="cerevoice_eng.jar"/>
+        </fileset>
+        <fileset dir="${jar.dir}">
+            <include name="Util.jar"/>
         </fileset>
     </path>
     

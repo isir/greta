@@ -13,7 +13,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -31,7 +31,7 @@
     <path id="path.jars">
         <fileset dir="${jar.dir}">
             <include name="Util.jar"/>
-        </fileset>    
+        </fileset>
     </path>
     
     <target name="build.dependencies">
@@ -62,7 +62,7 @@
     <target name="build" depends="clean, compile">
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
-        </pathconvert> 
+        </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Class-Path" value="${path.jars.manifest.converted}"/>

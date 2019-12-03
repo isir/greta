@@ -13,7 +13,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -23,53 +23,43 @@
     </target>
     
     <!-- DEPENDENCY TASKS HERE -->
-    <target name="build.dependency.util" if="${need.util}">
-        <ant antfile="../Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>   
-    
-    <target name="build.dependency.signals" if="${need.signals}">
-        <ant antfile="../Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.feedbacks" if="${need.feedbacks}">
+        <ant antfile="../Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
     <target name="build.dependency.intentions" if="${need.mpeg4}">
         <ant antfile="../Intentions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.feedbacks" if="${need.feedbacks}">
-        <ant antfile="../Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.signals" if="${need.signals}">
+        <ant antfile="../Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.util" if="${need.util}">
+        <ant antfile="../Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     <!-- -->
     
     <path id="path.jars">
         <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
-            <include name="Signals.jar"/>
-            <include name="Intentions.jar"/>
             <include name="Feedbacks.jar"/>
-        </fileset>    
+            <include name="Intentions.jar"/>
+            <include name="Signals.jar"/>
+            <include name="Util.jar"/>
+        </fileset>
     </path>
     
     <target name="build.dependencies">
         <!-- DEPENDENCY TASKS HERE -->
-        <condition property="need.util">
+        <condition property="need.feedbacks">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Util.jar" type="file"/>
+                    <available file="${jar.dir}/Feedbacks.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.util"/>
-        
-        <condition property="need.signals">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Signals.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.signals"/>
+        <antcall target="build.dependency.feedbacks"/>
         
         <condition property="need.intentions">
             <not>
@@ -81,15 +71,25 @@
         </condition>
         <antcall target="build.dependency.intentions"/>
         
-        <condition property="need.feedbacks">
+        <condition property="need.signals">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Feedbacks.jar" type="file"/>
+                    <available file="${jar.dir}/Signals.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.feedbacks"/>
+        <antcall target="build.dependency.signals"/>
+        
+        <condition property="need.util">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Util.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.util"/>
         <!-- -->
     </target>
     
@@ -107,7 +107,7 @@
     <target name="build" depends="clean, compile">
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
-        </pathconvert> 
+        </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Class-Path" value="${path.jars.manifest.converted}"/>

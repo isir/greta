@@ -7,13 +7,11 @@
     <property name="jar.dir" location="../../bin/Common/Lib/Internal" />
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
-    <property name="modular.jar.output" location="../../bin/Modular.jar" />
-    
     <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
     
     <property name="internal.player.dir" location="../../bin/Player/Lib/Internal" />
-	
-	<property name="jackson.jar.dir" location="../../bin/Common/Lib/External/jackson" />
+    
+    <property name="modular.jar.output" location="../../bin/Modular.jar" />
     
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
@@ -21,7 +19,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -33,99 +31,115 @@
     <!-- DEPENDENCY TASKS HERE -->
     <target name="build.dependency.activemq" if="${need.activemq}">
         <ant antfile="../../auxiliary/ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>   
+    </target>
 
     <target name="build.dependency.animationdynamics" if="${need.animationdynamics}">
         <ant antfile="../../auxiliary/AnimationDynamics/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>    
+    </target>
     
     <target name="build.dependency.bvhmocap" if="${need.bvhmocap}">
         <ant antfile="../../auxiliary/BVHMocap/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>      
+    </target>
+    
+    <target name="build.dependency.conversationalgaze" if="${need.conversationalgaze}">
+        <ant antfile="../../auxiliary/ConversationalGaze/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     
     <target name="build.dependency.emotionml" if="${need.emotionml}">
         <ant antfile="../../auxiliary/EmotionML/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>      
+    </target>
     
     <target name="build.dependency.environmentmanager" if="${need.environmentmanager}">
         <ant antfile="../../auxiliary/EnvironmentManager/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>  
+    </target>
+    
+    <target name="build.dependency.fmlannotator" if="${need.fmlannotator}">
+        <ant antfile="../../auxiliary/FMLAnnotator/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
+    
+    <target name="build.dependency.meaningminer" if="${need.meaningminer}">
+        <ant antfile="../../auxiliary/MeaningMiner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     
     <target name="build.dependency.ogreplayer" if="${need.ogreplayer}">
         <ant antfile="../../auxiliary/OgrePlayer/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>      
+    </target>
+    
+    <target name="build.dependency.plancapture" if="${need.plancapture}">
+        <ant antfile="../../auxiliary/PlanCapture/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     
     <target name="build.dependency.socialparameters" if="${need.socialparameters}">
         <ant antfile="../../auxiliary/SocialParameters/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>      
+    </target>
     
     <target name="build.dependency.ssi" if="${need.ssi}">
         <ant antfile="../../auxiliary/SSI/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>     
+    </target>
     
     <target name="build.dependency.thrift" if="${need.thrift}">
         <ant antfile="../../auxiliary/Thrift/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>      
+    </target>
     
     <target name="build.dependency.cereproc" if="${need.cereproc}">
         <ant antfile="../../auxiliary/TTS/CereProc/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>     
+    </target>
     
     <target name="build.dependency.marytts" if="${need.marytts}">
         <ant antfile="../../auxiliary/TTS/MaryTTS/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>     
+    </target>
     
     <target name="build.dependency.animationcore" if="${need.animationcore}">
         <ant antfile="../../core/AnimationCore/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>    
+    </target>
     
     <target name="build.dependency.behaviorplanner" if="${need.behaviorplanner}">
         <ant antfile="../../core/BehaviorPlanner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>    
+    </target>
     
     <target name="build.dependency.behaviorrealizer" if="${need.behaviorrealizer}">
         <ant antfile="../../core/BehaviorRealizer/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>    
+    </target>
 
     <target name="build.dependency.bodyanimationperformer" if="${need.bodyanimationperformer}">
         <ant antfile="../../core/BodyAnimationPerformer/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>    
+    </target>
     
     <target name="build.dependency.feedbacks" if="${need.feedbacks}">
         <ant antfile="../../core/Feedbacks/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>    
+    </target>
     
     <target name="build.dependency.gestureanimation" if="${need.gestureanimation}">
         <ant antfile="../../core/GestureAnimation/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>    
+    </target>
     
     <target name="build.dependency.intentions" if="${need.intentions}">
         <ant antfile="../../core/Intentions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>    
+    </target>
     
     <target name="build.dependency.interruptions" if="${need.interruptions}">
         <ant antfile="../../core/Interruptions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>    
+    </target>
 
     <target name="build.dependency.lipmodel" if="${need.lipmodel}">
         <ant antfile="../../core/LipModel/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>        
+    </target>
     
     <target name="build.dependency.listenerintentplanner" if="${need.listenerintentplanner}">
         <ant antfile="../../core/ListenerIntentPlanner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>        
+    </target>
     
     <target name="build.dependency.mpeg4" if="${need.mpeg4}">
         <ant antfile="../../core/MPEG4/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>        
+    </target>
     
     <target name="build.dependency.signals" if="${need.signals}">
         <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>        
+    </target>
     
     <target name="build.dependency.subjectplanner" if="${need.subjectplanner}">
         <ant antfile="../../core/SubjectPlanner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>        
+    </target>
     
     <target name="build.dependency.util" if="${need.util}">
         <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
@@ -135,10 +149,6 @@
         <ant antfile="../../core/Utilx/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.videocapture" if="${need.videocapture}">
-        <ant antfile="../../tools/VideoCapture/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>  
-    
     <target name="build.dependency.editors" if="${need.editors}">
         <ant antfile="../../tools/Editors/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
@@ -147,36 +157,18 @@
         <ant antfile="../../tools/GestureAnimationEditor/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.meaningminer" if="${need.meaningminer}">
-        <ant antfile="../../auxiliary/MeaningMiner/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.videocapture" if="${need.videocapture}">
+        <ant antfile="../../tools/VideoCapture/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
-    
-    <target name="build.dependency.plancapture" if="${need.plancapture}">
-        <ant antfile="../../auxiliary/PlanCapture/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-	
-	<target name="build.dependency.conversationalgaze" if="${need.conversationalgaze}">
-        <ant antfile="../../auxiliary/ConversationalGaze/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-	
-	<target name="build.dependency.fmlannotator" if="${need.fmlannotator}">
-        <ant antfile="../../auxiliary/FMLAnnotator/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>
-	
     <!-- -->
     
     <path id="path.jars">
-        <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
-            <include name="Utilx.jar"/>
-        </fileset>
         <fileset dir="${external.jar.dir}">
             <include name="jgraphx.jar"/>
         </fileset>
-		<fileset dir="${jackson.jar.dir}">
-            <include name="jackson-annotations-2.9.0.jar"/>
-            <include name="jackson-core-2.9.8.jar"/>
-            <include name="jackson-databind-2.9.8.jar"/>
+        <fileset dir="${jar.dir}">
+            <include name="Util.jar"/>
+            <include name="Utilx.jar"/>
         </fileset>
     </path>
     
@@ -200,7 +192,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.animationdynamics"/>        
+        <antcall target="build.dependency.animationdynamics"/>
         
         <condition property="need.bvhmocap">
             <not>
@@ -211,6 +203,16 @@
             </not>
         </condition>
         <antcall target="build.dependency.bvhmocap"/>
+        
+        <condition property="need.conversationalgaze">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/ConversationalGaze.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.conversationalgaze"/>
         
         <condition property="need.emotionml">
             <not>
@@ -232,6 +234,26 @@
         </condition>
         <antcall target="build.dependency.environmentmanager"/>
         
+        <condition property="need.fmlannotator">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/FMLAnnotator.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.fmlannotator"/>
+        
+        <condition property="need.meaningminer">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/MeaningMiner.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.meaningminer"/>
+        
         <condition property="need.ogreplayer">
             <not>
                 <and>
@@ -242,15 +264,15 @@
         </condition>
         <antcall target="build.dependency.ogreplayer"/>
         
-        <condition property="need.videocapture">
+        <condition property="need.plancapture">
             <not>
                 <and>
-                    <available file="${internal.player.dir}" type="dir"/>
-                    <available file="${internal.player.dir}/VideoCapture.jar" type="file"/>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/PlanCapture.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.videocapture"/>
+        <antcall target="build.dependency.plancapture"/>
         
         <condition property="need.socialparameters">
             <not>
@@ -270,7 +292,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.ssi"/>        
+        <antcall target="build.dependency.ssi"/>
         
         <condition property="need.thrift">
             <not>
@@ -280,7 +302,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.thrift"/>    
+        <antcall target="build.dependency.thrift"/>
 
         <condition property="need.cereproc">
             <not>
@@ -290,7 +312,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.cereproc"/>       
+        <antcall target="build.dependency.cereproc"/>
 
         <condition property="need.marytts">
             <not>
@@ -300,7 +322,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.marytts"/>            
+        <antcall target="build.dependency.marytts"/>
         
         <condition property="need.animationcore">
             <not>
@@ -310,7 +332,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.animationcore"/>       
+        <antcall target="build.dependency.animationcore"/>
 
         <condition property="need.behaviorplanner">
             <not>
@@ -320,7 +342,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.behaviorplanner"/>       
+        <antcall target="build.dependency.behaviorplanner"/>
 
         <condition property="need.behaviorrealizer">
             <not>
@@ -330,7 +352,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.behaviorrealizer"/>         
+        <antcall target="build.dependency.behaviorrealizer"/>
 
         <condition property="need.bodyanimationperformer">
             <not>
@@ -340,7 +362,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.bodyanimationperformer"/>      
+        <antcall target="build.dependency.bodyanimationperformer"/>
 
         <condition property="need.feedbacks">
             <not>
@@ -350,7 +372,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.feedbacks"/>        
+        <antcall target="build.dependency.feedbacks"/>
 
         <condition property="need.gestureanimation">
             <not>
@@ -360,7 +382,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.gestureanimation"/>         
+        <antcall target="build.dependency.gestureanimation"/>
 
         <condition property="need.intentions">
             <not>
@@ -370,7 +392,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.intentions"/>           
+        <antcall target="build.dependency.intentions"/>
 
         <condition property="need.interruptions">
             <not>
@@ -380,7 +402,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.interruptions"/>          
+        <antcall target="build.dependency.interruptions"/>
 
         <condition property="need.lipmodel">
             <not>
@@ -390,7 +412,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.lipmodel"/>      
+        <antcall target="build.dependency.lipmodel"/>
 
         <condition property="need.listenerintentplanner">
             <not>
@@ -400,7 +422,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.listenerintentplanner"/>       
+        <antcall target="build.dependency.listenerintentplanner"/>
 
         <condition property="need.mpeg4">
             <not>
@@ -410,7 +432,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.mpeg4"/>           
+        <antcall target="build.dependency.mpeg4"/>
 
         <condition property="need.signals">
             <not>
@@ -420,7 +442,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.signals"/>    
+        <antcall target="build.dependency.signals"/>
 
         <condition property="need.subjectplanner">
             <not>
@@ -430,7 +452,7 @@
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.subjectplanner"/>          
+        <antcall target="build.dependency.subjectplanner"/>
         
         <condition property="need.util">
             <not>
@@ -472,46 +494,15 @@
         </condition>
         <antcall target="build.dependency.gestureanimationeditor"/>
         
-        <condition property="need.meaningminer">
+        <condition property="need.videocapture">
             <not>
                 <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/MeaningMiner.jar" type="file"/>
+                    <available file="${internal.player.dir}" type="dir"/>
+                    <available file="${internal.player.dir}/VideoCapture.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.meaningminer"/>
-        
-        <condition property="need.plancapture">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/PlanCapture.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.plancapture"/>
-		
-		<condition property="need.conversationalgaze">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/ConversationalGaze.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.conversationalgaze"/>
-		
-		<condition property="need.fmlannotator">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/FMLAnnotator.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.fmlannotator"/>
-		
+        <antcall target="build.dependency.videocapture"/>
         <!-- -->
     </target>
     
@@ -528,13 +519,13 @@
     
     <target name="build" depends="clean, compile">
         <path id="path.jars.manifest">
-            <fileset dir="${jar.dir}">
-                <include name="*.jar"/>
-            </fileset>
             <fileset dir="${external.jar.dir}">
                 <include name="jgraphx.jar"/>
             </fileset>
             <fileset dir="${internal.player.dir}">
+                <include name="*.jar"/>
+            </fileset>
+            <fileset dir="${jar.dir}">
                 <include name="*.jar"/>
             </fileset>
         </path>
@@ -543,8 +534,7 @@
             <map from="${jar.dir}" to="./Common/Lib/Internal"/>
             <map from="${external.jar.dir}" to="./Common/Lib/External"/>
             <map from="${internal.player.dir}" to="./Player/Lib/Internal"/>
-			<map from="${jackson.jar.dir}" to="../External/jackson"/>
-        </pathconvert> 
+        </pathconvert>
         <jar destfile="${modular.jar.output}" basedir="${classes.dir}">
             <manifest>
                 <attribute name="Main-Class" value="vib.application.modular.Modular"/>

@@ -15,7 +15,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -25,35 +25,28 @@
     </target>
     
     <!-- DEPENDENCY TASKS HERE -->
-    <target name="build.dependency.util" if="${need.util}">
-        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>   
-    
-    <target name="build.dependency.signals" if="${need.signals}">
-        <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.intentions" if="${need.intentions}">
+        <ant antfile="../../core/Intentions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
     <target name="build.dependency.mpeg4" if="${need.mpeg4}">
         <ant antfile="../../core/MPEG4/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.intentions" if="${need.intentions}">
-        <ant antfile="../../core/Intentions/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.signals" if="${need.signals}">
+        <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
     <target name="build.dependency.socialparameters" if="${need.socialparameters}">
         <ant antfile="../SocialParameters/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
+    
+    <target name="build.dependency.util" if="${need.util}">
+        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     <!-- -->
     
     <path id="path.jars">
-        <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
-            <include name="Signals.jar"/>
-            <include name="MPEG4.jar"/>
-            <include name="Intentions.jar"/>
-            <include name="SocialParameters.jar"/>
-        </fileset>
         <fileset dir="${external.thrift.jar.dir}">
             <include name="commons-codec-1.10.jar"/>
             <include name="commons-logging-1.2.jar"/>
@@ -64,29 +57,26 @@
             <include name="servlet-api-2.5.jar"/>
             <include name="slf4j-api-1.7.25.jar"/>
         </fileset>
+        <fileset dir="${jar.dir}">
+            <include name="Intentions.jar"/>
+            <include name="MPEG4.jar"/>
+            <include name="Signals.jar"/>
+            <include name="SocialParameters.jar"/>
+            <include name="Util.jar"/>
+        </fileset>
     </path>
     
     <target name="build.dependencies">
         <!-- DEPENDENCY TASKS HERE -->
-        <condition property="need.util">
+        <condition property="need.intentions">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Util.jar" type="file"/>
+                    <available file="${jar.dir}/Intentions.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.util"/>
-        
-        <condition property="need.signals">
-            <not>
-                <and>
-                    <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Signals.jar" type="file"/>
-                </and>
-            </not>
-        </condition>
-        <antcall target="build.dependency.signals"/>
+        <antcall target="build.dependency.intentions"/>
         
         <condition property="need.mpeg4">
             <not>
@@ -98,15 +88,15 @@
         </condition>
         <antcall target="build.dependency.mpeg4"/>
         
-        <condition property="need.intentions">
+        <condition property="need.signals">
             <not>
                 <and>
                     <available file="${jar.dir}" type="dir"/>
-                    <available file="${jar.dir}/Intentions.jar" type="file"/>
+                    <available file="${jar.dir}/Signals.jar" type="file"/>
                 </and>
             </not>
         </condition>
-        <antcall target="build.dependency.intentions"/>
+        <antcall target="build.dependency.signals"/>
         
         <condition property="need.socialparameters">
             <not>
@@ -117,6 +107,16 @@
             </not>
         </condition>
         <antcall target="build.dependency.socialparameters"/>
+        
+        <condition property="need.util">
+            <not>
+                <and>
+                    <available file="${jar.dir}" type="dir"/>
+                    <available file="${jar.dir}/Util.jar" type="file"/>
+                </and>
+            </not>
+        </condition>
+        <antcall target="build.dependency.util"/>
         <!-- -->
     </target>
     

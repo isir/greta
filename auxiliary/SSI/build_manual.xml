@@ -7,13 +7,15 @@
     <property name="jar.dir" location="../../bin/Common/Lib/Internal" />
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
+    <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
+    
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
     </target>
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -23,24 +25,27 @@
     </target>
     
     <!-- DEPENDENCY TASKS HERE -->
-    <target name="build.dependency.util" if="${need.util}">
-        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>   
+    <target name="build.dependency.activemq" if="${need.activemq}">
+        <ant antfile="../ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    </target>
     
     <target name="build.dependency.signals" if="${need.signals}">
         <ant antfile="../../core/Signals/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     
-    <target name="build.dependency.activemq" if="${need.activemq}">
-        <ant antfile="../ActiveMQ/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
+    <target name="build.dependency.util" if="${need.util}">
+        <ant antfile="../../core/Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
     </target>
     <!-- -->
     
     <path id="path.jars">
+        <fileset dir="${external.jar.dir}">
+            <include name="activemq-all-5.15.10.jar"/>
+        </fileset>
         <fileset dir="${jar.dir}">
-            <include name="Util.jar"/>
-            <include name="Signals.jar"/>
             <include name="ActiveMQ.jar"/>
+            <include name="Signals.jar"/>
+            <include name="Util.jar"/>
         </fileset>
     </path>
     
@@ -92,6 +97,7 @@
     <target name="build" depends="clean, compile">
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
+            <map from="${external.jar.dir}" to="../External"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

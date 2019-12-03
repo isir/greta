@@ -13,7 +13,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -25,13 +25,13 @@
     <!-- DEPENDENCY TASKS HERE -->
     <target name="build.dependency.util" if="${need.util}">
         <ant antfile="../Util/build_manual.xml" target="build" useNativeBasedir="true" inheritAll="false"/>
-    </target>   
+    </target>
     <!-- -->
     
     <path id="path.jars">
         <fileset dir="${jar.dir}">
             <include name="Util.jar"/>
-        </fileset>    
+        </fileset>
     </path>
     
     <target name="build.dependencies">

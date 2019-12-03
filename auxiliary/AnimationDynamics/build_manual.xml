@@ -8,7 +8,7 @@
     <property name="jar.output" location="${jar.dir}/${ant.project.name}.jar" />
     
     <property name="external.jar.dir" location="../../bin/Common/Lib/External" />
-    <property name="lwjgl.jar.dir" location="../../bin/Common/Lib/External/lwjgl/jar" />
+    <property name="external.lwjgl.jar.dir" location="../../bin/Common/Lib/External/lwjgl/jar" />
     
     <target name="delete.jar.output">
         <delete file="${jar.output}"/>
@@ -16,7 +16,7 @@
     
     <target name="delete.classes">
         <delete dir="${classes.dir}"/>
-    </target>    
+    </target>
 
     <target name="clean" depends="delete.jar.output, delete.classes"/>
     
@@ -35,12 +35,12 @@
         <fileset dir="${external.jar.dir}">
             <include name="commons-math3-3.6.1.jar"/>
         </fileset>
-        <fileset dir="${lwjgl.jar.dir}">
+        <fileset dir="${external.lwjgl.jar.dir}">
             <include name="lwjgl.jar"/>
-        </fileset> 
+        </fileset>
         <fileset dir="${jar.dir}">
             <include name="Util.jar"/>
-        </fileset>    
+        </fileset>
     </path>
     
     <target name="build.dependencies">
@@ -72,7 +72,7 @@
         <pathconvert targetos="unix" property="path.jars.manifest.converted" refid="path.jars" pathsep=" ">
             <map from="${jar.dir}" to="."/>
             <map from="${external.jar.dir}" to="../External"/>
-            <map from="${lwjgl.jar.dir}" to="../External/lwjgl/jar"/>
+            <map from="${external.lwjgl.jar.dir}" to="../External/lwjgl/jar"/>
         </pathconvert>
         <jar destfile="${jar.output}" basedir="${classes.dir}">
             <manifest>

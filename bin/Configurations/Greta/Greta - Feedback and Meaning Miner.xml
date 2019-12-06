@@ -108,7 +108,7 @@
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
                     <parameter name="host" value="localhost"/>
-                    <parameter name="topic" value="vib.input.FML"/>
+                    <parameter name="topic" value="greta.input.FML"/>
                     <window h="220" visible="false" w="240" x="0" y="0"/>
                 </element>
                 <element h="70.0" id="Feedbacks - 1571996970388-168"

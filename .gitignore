@@ -5,6 +5,9 @@
 **/nbproject/genfiles.properties
 **/nbproject/private/
 
+/bin/Common/Lib/Internal/*
+/bin/Player/Lib/Internal/*
+
 /bin/Common/Data/CereProc/*
 /bin/Log/*
 /bin/ModularSave.xml

@@ -9,7 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="SocialParameters" default="default" basedir=".">
     <description>Builds, tests, and runs the project SocialParameters.</description>
-    <import file="../../VIB_build.xml"/>
+    <import file="../../nbbuild.xml"/>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

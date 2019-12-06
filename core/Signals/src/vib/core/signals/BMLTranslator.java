@@ -55,7 +55,7 @@ public class BMLTranslator {
     /**
      *
      */
-    public static String vibNameSpace = "VIBNameSpace";
+    public static String gretaNameSpace = "GretaNameSpace";
 
     public static Mode getDefaultBMLMode() {
         return new Mode(IniManager.getGlobals().getValueString("DEFAULT_BML_MODE"), CompositionType.blend);
@@ -73,9 +73,9 @@ public class BMLTranslator {
      */
     private static final boolean endAsDuration = IniManager.getGlobals().getValueBoolean("BML_END_TAG_AS_DURATION");
     /**
-     * defines the name of the descriptions specific to VIB
+     * defines the name of the descriptions specific to Greta
      */
-    private static String vib_s_descrition_type;
+    private static String greta_s_description_type;
     /**
      * To define the String format of numbers
      */
@@ -86,7 +86,7 @@ public class BMLTranslator {
      */
     static {
         numberFormat = IniManager.getNumberFormat();
-        vib_s_descrition_type = "gretabml";
+        greta_s_description_type = "gretabml";
     }
 
     /**
@@ -989,7 +989,7 @@ public class BMLTranslator {
         if (description != null
                 && description.getName().equalsIgnoreCase("description")
                 && description.hasAttribute("type")
-                && description.getAttribute("type").equalsIgnoreCase(vib_s_descrition_type)) {
+                && description.getAttribute("type").equalsIgnoreCase(greta_s_description_type)) {
 
             for (XMLTree parameter : description.getChildrenElement()) {
                 if (parameter.getName().equalsIgnoreCase("reference")) {
@@ -1130,7 +1130,7 @@ public class BMLTranslator {
                 //descrition
                 XMLTree description = signalxml.createChild("description");
                 description.setAttribute("priority", "1");
-                description.setAttribute("type", vib_s_descrition_type);
+                description.setAttribute("type", greta_s_description_type);
                 //reference
                 description.createChild("reference").addText(parametric.getReference());
                 //intensity
@@ -1184,7 +1184,7 @@ public class BMLTranslator {
                 //descrition
                 XMLTree description = signalxml.createChild("description");
                 description.setAttribute("priority", "1");
-                description.setAttribute("type", vib_s_descrition_type);
+                description.setAttribute("type", greta_s_description_type);
                 //reference
                 description.createChild("reference").addText(headSignal.getReference());
                 //intensity
@@ -1207,7 +1207,7 @@ public class BMLTranslator {
             //TORSO (exceptionel)
             if (signal instanceof TorsoSignal) {
                 TorsoSignal parametric = (TorsoSignal) signal;
-                XMLTree signalxml = bml.createChild("greta:torso", vibNameSpace);
+                XMLTree signalxml = bml.createChild("greta:torso", gretaNameSpace);
 
                 signalxml.setAttribute("id", parametric.getId());
 
@@ -1236,7 +1236,7 @@ public class BMLTranslator {
                 //descrition
                 XMLTree description = signalxml.createChild("description");
                 description.setAttribute("priority", "1");
-                description.setAttribute("type", vib_s_descrition_type);
+                description.setAttribute("type", greta_s_description_type);
                 //reference
                 description.createChild("reference").addText(parametric.getReference());
                 //intensity

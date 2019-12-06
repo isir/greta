@@ -28,7 +28,7 @@ public interface CaptureOutput {
      * It specifies the size of the image during the whole capture, and the begin time.
      * @param w the width of the image in pixel
      * @param h the height of the image in pixel
-     * @param beginTime the VIB's time in milliseconds.
+     * @param beginTime the Greta's time in milliseconds.
      */
     public void begin(int w, int h, long beginTime, String id);
 
@@ -36,16 +36,16 @@ public interface CaptureOutput {
      * Adds a new frame.<br/>
      * It is supposed that the pixel are in 3 bytes RGB.
      * @param data the pixel data of the frame.
-     * @param time the VIB's time in milliseconds of the frame.
+     * @param time the Greta's time in milliseconds of the frame.
      */
     public void newFrame(byte[] data, long time);
 
     /**
      * Adds a new audio packet.<br/>
-     * It is supposed that the audio is in VIB's audio format.
+     * It is supposed that the audio is in Greta's audio format.
      * @param data the audio data of the frame.
-     * @param time the VIB's time in milliseconds of the frame.
-     * @see vib.core.util.audio.Audio#VIB_AUDIO_FORMAT VIB's audio format
+     * @param time the Greta's time in milliseconds of the frame.
+     * @see vib.core.util.audio.Audio#GRETA_AUDIO_FORMAT Greta's audio format
      */
     public void newAudioPacket(byte[] data, long time);
 

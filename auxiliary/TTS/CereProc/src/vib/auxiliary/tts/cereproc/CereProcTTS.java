@@ -41,7 +41,7 @@ import vib.core.util.time.Timer;
 import vib.core.util.xml.XMLTree;
 
 /**
- * This class manages the CereProc implementation of TTS for VIB<br/>
+ * This class manages the CereProc implementation of TTS for Greta<br/>
  * CereProc has a native library, this class uses a Java wrapper provided by CereProc (com.cereproc.cerevoice_eng) to access the native interface. <br/>
  *
  * @author Andre-Marie Pez
@@ -87,7 +87,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     }
 
     /*
-     * Initialization function, CereProcConstants.init() reads parameters from bin/vib.ini file
+     * Initialization function, CereProcConstants.init() reads parameters from {Greta}/bin/Greta.ini file
      */
     private void init() {
             if (initialized && functional) {
@@ -123,7 +123,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     System.load(LOAD_ABSOLUTE_PATH + "cerevoice_eng.dll");
                 }
                 else {
-                    Logs.error("CereProcTTS failed to find required dependencies (libgcc_s_sjlj-1.dll, libstdc++-6.dll and cerevoice_eng.dll) at [" + LOAD_ABSOLUTE_PATH + "], please check the CEREPROC_DEPENDENCIES_PATH option in vib.ini.");
+                    Logs.error("CereProcTTS failed to find required dependencies (libgcc_s_sjlj-1.dll, libstdc++-6.dll and cerevoice_eng.dll) at [" + LOAD_ABSOLUTE_PATH + "], please check the CEREPROC_DEPENDENCIES_PATH option in {Greta}/bin/Greta.ini.");
                     functional = false;
                 }
 
@@ -139,7 +139,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     System.load(LOAD_ABSOLUTE_PATH + "libcerevoice_eng.dylib");
                 }
                 else {
-                    Logs.error("CereProcTTS failed to find required dependency (libcerevoice_eng.dylib) at [" + LOAD_ABSOLUTE_PATH + "], please check the CEREPROC_DEPENDENCIES_PATH option in vib.ini.");
+                    Logs.error("CereProcTTS failed to find required dependency (libcerevoice_eng.dylib) at [" + LOAD_ABSOLUTE_PATH + "], please check the CEREPROC_DEPENDENCIES_PATH option in {Greta}/bin/Greta.ini.");
                     functional = false;
                 }
 
@@ -159,7 +159,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     System.load(LOAD_ABSOLUTE_PATH + "libcerevoice_eng.so");
                 }
                 else {
-                    Logs.error("CereProcTTS failed to find required dependency (libcerevoice_eng.so) at [" + LOAD_ABSOLUTE_PATH + "], please check the CEREPROC_DEPENDENCIES_PATH option in vib.ini.");
+                    Logs.error("CereProcTTS failed to find required dependency (libcerevoice_eng.so) at [" + LOAD_ABSOLUTE_PATH + "], please check the CEREPROC_DEPENDENCIES_PATH option in {Greta}/bin/Greta.ini.");
                     functional = false;
                 }
             } else {
@@ -190,7 +190,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         // Check if voices folder exist
         VOICES_ABSOLUTE_PATH = IniManager.getProgramPath() + CereProcConstants.VOICES_PATH;
         if (!checkFolder(VOICES_ABSOLUTE_PATH)) {
-            Logs.error("CereProcTTS failed to find voice folder at [" + VOICES_ABSOLUTE_PATH + "], please check if the CEREPROC_VOICES_PATH option is correctly set in vib.ini.");
+            Logs.error("CereProcTTS failed to find voice folder at [" + VOICES_ABSOLUTE_PATH + "], please check if the CEREPROC_VOICES_PATH option is correctly set in {Greta}/bin/Greta.ini.");
             return false;
         }
 
@@ -389,7 +389,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     if (currentPlayingSpeech != null) {
                         currentPlayingBufferPos = currentPlayingSpeech.getAudio().getPlayingBufferPos();
                         currentPlayingBufferSSML = currentPlayingSpeech.getGeneratedSSML();
-                        interruptionTime_s = CereProcConstants.fromVIBBufferPositionToCEREPROC(currentPlayingBufferPos);
+                        interruptionTime_s = CereProcConstants.fromGRETABufferPositionToCEREPROC(currentPlayingBufferPos);
                     }
                     
                     // Add the offset for the earliest interruption time
@@ -400,8 +400,8 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                             currentPlayingBufferSSML, 
                             currentPlayingBufferSSML.length(),
                             earliestReactionTime_s,
-                            CereProcConstants.fromVIBReactionDurationToCEREPROC(speech.getInterruptionReactionDuration()),
-                            CereProcConstants.fromVIBReactionTypeToCEREPROC(speech.getInterruptionReactionType()),
+                            CereProcConstants.fromGRETAReactionDurationToCEREPROC(speech.getInterruptionReactionDuration()),
+                            CereProcConstants.fromGRETAReactionTypeToCEREPROC(speech.getInterruptionReactionType()),
                             1
                     );
                     
@@ -433,7 +433,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                 if (currentPlayingSpeech != null) {
                     newcurrentPlayingBufferPos = currentPlayingSpeech.getAudio().getPlayingBufferPos();
                 }
-                float currentPlayingTime_s = CereProcConstants.fromVIBBufferPositionToCEREPROC(newcurrentPlayingBufferPos);
+                float currentPlayingTime_s = CereProcConstants.fromGRETABufferPositionToCEREPROC(newcurrentPlayingBufferPos);
                 double interruptionReactionStartTime_s = 0;
                 double interruptionReactionEndTime_s = 0;
                 double interruptionBufferEndTime_s = 0;
@@ -445,7 +445,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     // The time marker name can start with:
                     // - tmarkercptk (special cereproc)
                     // - tmarkercprc (special cereproc)
-                    // - tmarker<vib name> (e.g. tmarkertm1, tmarkertm2, tmarkerend, etc...)
+                    // - tmarker<greta name> (e.g. tmarkertm1, tmarkertm2, tmarkerend, etc...)
                     String[] parts = eventCereProcBuffer.split("/");
                     double startT = Double.valueOf(parts[0]);
                     double endT = Double.valueOf(parts[1]);
@@ -478,7 +478,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                                 }
                             }
                         }                        
-                        // Process VIB Time Markers
+                        // Process Greta Time Markers
                         else {
                             // Process the Time Markers received in the buffer received by cereproc
                             
@@ -518,7 +518,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                                     }
                                 }
                             }
-                        } // End else VIB Time Marker only
+                        } // End else Greta Time Marker only
                     }
                     // Else Process Phonemes
                     else 

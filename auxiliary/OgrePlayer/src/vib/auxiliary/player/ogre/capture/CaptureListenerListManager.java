@@ -50,7 +50,7 @@ public class CaptureListenerListManager {
     /**
      * Notifies to all {@code CaptureListener} added that a capture is started.
      * @param source the {@code Capturer} which starts the capture.
-     * @param time the VIB's time in milliseconds.
+     * @param time the Greta's time in milliseconds.
      */
     public synchronized void notifyCaptureStarted(Capturer source, long time){
         for(CaptureListener listener : listeners){
@@ -61,7 +61,7 @@ public class CaptureListenerListManager {
     /**
      * Notifies to all {@code CaptureListener} added that a new frame is captured.
      * @param source the {@code Capturer} which captures the new frame.
-     * @param time the VIB's time in milliseconds.
+     * @param time the Greta's time in milliseconds.
      */
     public synchronized void notifyCaptureNewFrame(Capturer source, long time){
         for(CaptureListener listener : listeners){
@@ -72,7 +72,7 @@ public class CaptureListenerListManager {
     /**
      * Notifies to all {@code CaptureListener} added that a capture is ended.
      * @param source the {@code Capturer} which ends the capture.
-     * @param time the VIB's time in milliseconds.
+     * @param time the Greta's time in milliseconds.
      */
     public synchronized void notifyCaptureEnded(Capturer source, long time){
         for(CaptureListener listener : listeners){

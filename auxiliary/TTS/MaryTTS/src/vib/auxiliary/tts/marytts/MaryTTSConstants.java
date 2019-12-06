@@ -57,13 +57,13 @@ public class MaryTTSConstants extends CharacterDependentAdapter{
     /** Mary's parameter : used to obtain the audio stream in MP3 format */
     public static final String AUDIO_TYPE_MP3 = "MP3";
 
-    /** Correspondence array of boundaries between VIB and Mary */
+    /** Correspondence array of boundaries between Greta and Mary */
     public static final String[] BOUNDARY = {"L-", "H-", "L-%", "L-H%", "H-%", "H-^H%"};
 
-    /** Correspondence array of pitch accents between VIB and Mary */
+    /** Correspondence array of pitch accents between Greta and Mary */
     public static final String[] PITCHACCENT = {"L*", "L*+H", "L+H*", "H*+L", "H+L*", "H*"};
 
-    /** Correspondence map of phoneme between VIB and Mary */
+    /** Correspondence map of phoneme between Greta and Mary */
     private static final Map<String,PhonemeType[]> correspondingPhonemes = new HashMap<String,PhonemeType[]>();
 
     /**
@@ -116,7 +116,7 @@ public class MaryTTSConstants extends CharacterDependentAdapter{
     };
 
     /**
-     * Converts a VIB's {@code Speech} object to MaryXML format.
+     * Converts a Greta's {@code Speech} object to MaryXML format.
      * @param s the {@code Speech}
      * @param lang the Mary's language-code
      * @return the corresponding MaryXML
@@ -193,9 +193,9 @@ public class MaryTTSConstants extends CharacterDependentAdapter{
     }
 
     /**
-     * Returns the sequence of VIB's {@code phonenes} corresponding to the specified Mary's phoneme.
+     * Returns the sequence of Greta's {@code phonenes} corresponding to the specified Mary's phoneme.
      * @param maryPhoneme the Mary's phoneme
-     * @return a sequence of VIB's {@code phonemes}
+     * @return a sequence of Greta's {@code phonemes}
      */
     public static PhonemeType[] convertPhoneme(String maryPhoneme){
         PhonemeType[] toReturn = correspondingPhonemes.get(maryPhoneme);
@@ -216,7 +216,7 @@ public class MaryTTSConstants extends CharacterDependentAdapter{
     /**
      * function to add corresponding phonemes in the map
      * @param maryPhoneme the Mary's phoneme
-     * @param phoneme the VIB's phoneme
+     * @param phoneme the Greta's phoneme
      */
     private static void pho(String maryPhoneme, PhonemeType phoneme){
         PhonemeType[] phonemes = {phoneme};
@@ -224,10 +224,10 @@ public class MaryTTSConstants extends CharacterDependentAdapter{
     }
     /**
      * function to add corresponding phonemes in the map<br/>
-     * used when a Mary's one correspond to a sequence of two VIB's phonemes
+     * used when a Mary's one correspond to a sequence of two Greta's phonemes
      * @param maryPhoneme the Mary's phoneme
-     * @param phoneme1 first VIB's phoneme
-     * @param phoneme2 second VIB's phoneme
+     * @param phoneme1 first Greta's phoneme
+     * @param phoneme2 second Greta's phoneme
      */
     private static void pho(String maryPhoneme, PhonemeType phoneme1, PhonemeType phoneme2){
         PhonemeType[] phonemes = {phoneme1, phoneme2};

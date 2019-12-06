@@ -88,7 +88,7 @@ public class MixerSource{
     }
     private AudioInputStream convert(AudioFormat format, byte[] buffer) {
         return AudioSystem.getAudioInputStream(
-                Audio.VIB_AUDIO_FORMAT,
+                Audio.GRETA_AUDIO_FORMAT,
                 new AudioInputStream(
                     new ByteArrayInputStream(buffer),
                     format,
@@ -96,7 +96,7 @@ public class MixerSource{
     }
     
     private void updateCurrentAudioBufferPos(long read){
-        int reallyRead = (int)(read * currentAudio.getFormat().getFrameRate() * currentAudio.getFormat().getFrameSize() / (Audio.VIB_AUDIO_FORMAT.getFrameRate() * Audio.VIB_AUDIO_FORMAT.getFrameSize()));
+        int reallyRead = (int)(read * currentAudio.getFormat().getFrameRate() * currentAudio.getFormat().getFrameSize() / (Audio.GRETA_AUDIO_FORMAT.getFrameRate() * Audio.GRETA_AUDIO_FORMAT.getFrameSize()));
         currentAudio.addToPlayingBufferPos(reallyRead);
     }
 

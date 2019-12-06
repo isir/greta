@@ -36,8 +36,8 @@ public class Line implements AudioOutput{
 
     public Line() {
         try {
-            sdl = AudioSystem.getSourceDataLine(Audio.VIB_AUDIO_FORMAT);
-            sdl.open(Audio.VIB_AUDIO_FORMAT, Mixer.BUFFER_SIZE);
+            sdl = AudioSystem.getSourceDataLine(Audio.GRETA_AUDIO_FORMAT);
+            sdl.open(Audio.GRETA_AUDIO_FORMAT, Mixer.BUFFER_SIZE);
             audioBufferQueue = new ArrayBlockingQueue<byte[]>(AUDIO_BUFFER_QUEUE_SIZE);
             lineUpdater = new Thread() {
                 @Override

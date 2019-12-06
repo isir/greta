@@ -43,9 +43,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 public class Audio {
 
     /**
-     * Format used by the VIB's system
+     * Format used by the Greta's system
      */
-    public static final AudioFormat VIB_AUDIO_FORMAT = new AudioFormat(
+    public static final AudioFormat GRETA_AUDIO_FORMAT = new AudioFormat(
             AudioFormat.Encoding.PCM_SIGNED,
             16000, //Hz - sample rate
             16, //bits - sample size
@@ -89,7 +89,7 @@ public class Audio {
     }
 
     public static Audio getEmptyAudio(){
-        return new Audio(Audio.VIB_AUDIO_FORMAT, new byte[Audio.VIB_AUDIO_FORMAT.getFrameSize()], 0);
+        return new Audio(Audio.GRETA_AUDIO_FORMAT, new byte[Audio.GRETA_AUDIO_FORMAT.getFrameSize()], 0);
     }
 
 

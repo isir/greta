@@ -41,25 +41,25 @@ public abstract class APExternalClient<APF extends AnimationParametersFrame> ext
 
     protected abstract APF newAnimParamFrame(int frameNumber);
 
-    public List<APF> getVibAPFrameList(Message m) {
-        return thriftAPFrameList2VibAPFrameList(m.getAPFrameList());
+    public List<APF> getGretaAPFrameList(Message m) {
+        return thriftAPFrameList2GretaAPFrameList(m.getAPFrameList());
     }
 
-    public List<APF> thriftAPFrameList2VibAPFrameList(List<ThriftAnimParamFrame> thriftAPframes) {
-        List<APF> vibAPFrameList = new ArrayList<APF>(thriftAPframes.size());
+    public List<APF> thriftAPFrameList2GretaAPFrameList(List<ThriftAnimParamFrame> thriftAPframes) {
+        List<APF> gretaAPFrameList = new ArrayList<APF>(thriftAPframes.size());
 
         for (ThriftAnimParamFrame thriftFrame : thriftAPframes) {
-            APF vibFrame = newAnimParamFrame(thriftFrame.getFrameNumber());
+            APF gretaFrame = newAnimParamFrame(thriftFrame.getFrameNumber());
             List<ThriftAnimParam> thriftAPList = thriftFrame.getAnimParamList();
             int i=0;
             for (ThriftAnimParam thriftAP : thriftAPList) {
-                AnimationParameter vibAP = vibFrame.newAnimationParameter(thriftAP.isMask(), thriftAP.getValue());
-                vibFrame.getAnimationParametersList().set(i,vibAP);
+                AnimationParameter gretaAP = gretaFrame.newAnimationParameter(thriftAP.isMask(), thriftAP.getValue());
+                gretaFrame.getAnimationParametersList().set(i,gretaAP);
                 ++i;
             }
-            vibAPFrameList.add(vibFrame);
+            gretaAPFrameList.add(gretaFrame);
         }
-        return vibAPFrameList;
+        return gretaAPFrameList;
     }
 
 }

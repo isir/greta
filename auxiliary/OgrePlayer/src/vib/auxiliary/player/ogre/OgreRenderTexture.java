@@ -66,10 +66,10 @@ public class OgreRenderTexture implements Capturable {
                     if(renderTexture!=null){
                         renderTexture.setActive(false);
                         renderTexture.setAutoUpdated(false);
-                        vib.auxiliary.player.ogre.natives.TextureManager.getSingleton().remove("VIBRenderTexture-"+this.toString());
+                        vib.auxiliary.player.ogre.natives.TextureManager.getSingleton().remove("GretaRenderTexture-"+this.toString());
                     }
                     vib.auxiliary.player.ogre.natives.Texture texture = vib.auxiliary.player.ogre.natives.TextureManager.getSingleton().createRenderTexture(
-                            "VIBRenderTexture-"+this.toString(),
+                            "GretaRenderTexture-"+this.toString(),
                             textureWidth,
                             textureHeight
                     );

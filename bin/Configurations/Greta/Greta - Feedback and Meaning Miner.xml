@@ -3,7 +3,7 @@
     <elements>
         <element h="50.0" id="Ini Manager - 1544700691170-189"
             module="Ini Manager" name="Ini Manager" w="80.0" x="90.0" y="30.0">
-            <parameter name="file" value="vib.ini"/>
+            <parameter name="file" value="Greta.ini"/>
             <window h="531" visible="false" w="505" x="10" y="10"/>
         </element>
         <element h="50.0" id="Logs - 1544700696093-682" module="Logs"

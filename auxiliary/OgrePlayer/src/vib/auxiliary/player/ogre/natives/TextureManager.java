@@ -44,7 +44,7 @@ public class TextureManager extends _Object_ {
     
 //        vib.auxiliary.player.ogre.natives.TextureManager.getSingleton().createManual(
 //                            texturePtr,
-//                            "VIBRenderTexture-"+this.toString(),
+//                            "GretaRenderTexture-"+this.toString(),
 //                            vib.auxiliary.player.ogre.natives.ResourceGroupManager.getDEFAULT_RESOURCE_GROUP_NAME(),
 //                            vib.auxiliary.player.ogre.natives.TextureType.TEX_TYPE_2D,
 //                            textureWidth,

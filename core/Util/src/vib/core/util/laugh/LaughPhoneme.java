@@ -77,7 +77,7 @@ public class LaughPhoneme {
         return intensity;
     }
     /**
-     * Enumeration of all laugh phoneme types used by VIB.
+     * Enumeration of all laugh phoneme types used by Greta.
      */
 
     public static enum LaughPhonemeType{

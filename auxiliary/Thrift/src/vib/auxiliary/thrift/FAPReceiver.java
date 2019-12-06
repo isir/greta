@@ -51,7 +51,7 @@ public class FAPReceiver extends APReceiver implements FAPFrameEmitter{
     public void perform(Message m) {
         ID id = IDProvider.createID(m.getId());
         for(FAPFramePerformer performer:fapFramesPerfList){
-            performer.performFAPFrames(getVibAPFrameList(m), id);
+            performer.performFAPFrames(getGretaAPFrameList(m), id);
         }
     }
 

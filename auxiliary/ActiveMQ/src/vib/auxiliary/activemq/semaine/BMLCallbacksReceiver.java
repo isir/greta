@@ -37,7 +37,7 @@ public class BMLCallbacksReceiver extends TextReceiver implements CallbackEmitte
     public BMLCallbacksReceiver() {
         this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
                 WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
-                "vib.input.feedback.BML");
+                "greta.input.feedback.BML");
     }
 
     public BMLCallbacksReceiver(String host, String port, String topic) {

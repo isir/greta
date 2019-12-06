@@ -47,7 +47,7 @@ public class APServerToExternal<APF extends AnimationParametersFrame> extends Se
    public void updateAnimParamFrameList() {
         updateAnimParamFrameList(new ArrayList<APF>(), message.getType(), "");
    }
-   public void updateAnimParamFrameList(List<APF> vibAPframes, String type, String requestId) {
+   public void updateAnimParamFrameList(List<APF> gretaAPframes, String type, String requestId) {
         List<ThriftAnimParamFrame> thriftAPFrameList = new ArrayList<ThriftAnimParamFrame>();
         synchronized (messageLock) {
 
@@ -80,7 +80,7 @@ public class APServerToExternal<APF extends AnimationParametersFrame> extends Se
             } else {
                 Logs.debug(" Message outdated " + message.getId() + " content "+ message.getString_content() + " type " + message.getType());
             }
-            for (ThriftAnimParamFrame apframe : vibAPFrameList2thriftAPFrameList(vibAPframes)) {
+            for (ThriftAnimParamFrame apframe : gretaAPFrameList2thriftAPFrameList(gretaAPframes)) {
 
                 // Put in MessageTmp the frames of FrameNumber > currentFrame + DELAY_IN_NUM_OF_FRAMES
                 if (apframe.getFrameNumber() > (Timer.getCurrentFrameNumber()) + DELAY_IN_NUM_OF_FRAMES) {
@@ -96,7 +96,7 @@ public class APServerToExternal<APF extends AnimationParametersFrame> extends Se
                 }
             }
 
-            //thriftAPFrameList.addAll(vibAPFrameList2thriftAPFrameList(vibAPframes));
+            //thriftAPFrameList.addAll(gretaAPFrameList2thriftAPFrameList(gretaAPframes));
         }
         // Update of Message with the frames of frameNumber between currentFrame  - DELAY_IN_NUM_OF_FRAMES and currentFrame + DELAY_IN_NUM_OF_FRAMES
         Message m = new Message();
@@ -104,7 +104,7 @@ public class APServerToExternal<APF extends AnimationParametersFrame> extends Se
         m.setId(requestId + Timer.getTime());
         m.setTime(Timer.getTimeMillis());
         m.setAPFrameList(thriftAPFrameList);
-        // m.APFrameList = vibAPFrameList2thriftAPFrameList(vibAPframes);
+        // m.APFrameList = gretaAPFrameList2thriftAPFrameList(gretaAPframes);
 
         if (!thriftAPFrameList.isEmpty()) {
             m.setFirstFrameNumber(thriftAPFrameList.get(0).getFrameNumber());
@@ -134,17 +134,17 @@ public class APServerToExternal<APF extends AnimationParametersFrame> extends Se
         }
         }
     }
-    private List<ThriftAnimParamFrame> vibAPFrameList2thriftAPFrameList(List<APF> vibAPframes) {
+    private List<ThriftAnimParamFrame> gretaAPFrameList2thriftAPFrameList(List<APF> gretaAPframes) {
 
-        List<ThriftAnimParamFrame> thriftAPFrameList = new ArrayList<ThriftAnimParamFrame>(vibAPframes.size());
+        List<ThriftAnimParamFrame> thriftAPFrameList = new ArrayList<ThriftAnimParamFrame>(gretaAPframes.size());
 
-        for (AnimationParametersFrame vibFrame : vibAPframes) {
+        for (AnimationParametersFrame gretaFrame : gretaAPframes) {
 
             ThriftAnimParamFrame thriftFrame = new ThriftAnimParamFrame();
-            thriftFrame.frameNumber = vibFrame.getFrameNumber();
+            thriftFrame.frameNumber = gretaFrame.getFrameNumber();
             //   Logs.debug("thriftFrame.frameNumber: "+thriftFrame.frameNumber);
-            thriftFrame.animParamList = new ArrayList<ThriftAnimParam>(vibFrame.size());
-            List<AnimationParameter> apList = vibFrame.getAnimationParametersList();
+            thriftFrame.animParamList = new ArrayList<ThriftAnimParam>(gretaFrame.size());
+            List<AnimationParameter> apList = gretaFrame.getAnimationParametersList();
             for (AnimationParameter ap : apList) {
                 ThriftAnimParam thriftAP = new ThriftAnimParam(ap.getMask(), ap.getValue());
                 thriftFrame.animParamList.add(thriftAP);

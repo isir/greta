@@ -1258,8 +1258,8 @@
         <lib id="vib_util" path="./Common/Lib/Internal/Util.jar">
             <needs path="./Common/Data/characters/*"/>
             <needs path="./Environments/empty.xml"/>
+            <needs path="./Greta.ini"/>
             <needs path="./Locale/*"/>
-            <needs path="./vib.ini"/>
         </lib>
         <lib id="vib_utilx" path="./Common/Lib/Internal/Utilx.jar">
             <depends lib_id="vib_behavior_realizer"/>

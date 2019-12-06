@@ -18,7 +18,7 @@
 package vib.core.util.enums;
 
 /**
- * Open set item for BML influences (specific to VIB).
+ * Open set item for BML influences (specific to Greta).
  * @author Mathieu Chollet
  */
 

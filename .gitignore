@@ -5,8 +5,9 @@
 **/nbproject/genfiles.properties
 **/nbproject/private/
 
-/bin/Common/Lib/Internal/*
-/bin/Player/Lib/Internal/*
+/bin/*.jar
+/bin/Common/Lib/Internal/*.jar
+/bin/Player/Lib/Internal/*.jar
 
 /bin/Common/Data/CereProc/*
 /bin/Log/*

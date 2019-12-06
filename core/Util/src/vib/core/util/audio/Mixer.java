@@ -41,8 +41,8 @@ import java.util.ListIterator;
 public class Mixer extends TreeNode implements EnvironmentEventListener {
 
     protected static final int MIX_FRAME_RATE = 25;
-    public static final int BUFFER_SIZE = Audio.VIB_AUDIO_FORMAT.getFrameSize() * (int) (Audio.VIB_AUDIO_FORMAT.getFrameRate() / MIX_FRAME_RATE);
-    public static final int BYTES_PER_MILLIS = (int)(Audio.VIB_AUDIO_FORMAT.getFrameRate()/1000.0)*Audio.VIB_AUDIO_FORMAT.getFrameSize();
+    public static final int BUFFER_SIZE = Audio.GRETA_AUDIO_FORMAT.getFrameSize() * (int) (Audio.GRETA_AUDIO_FORMAT.getFrameRate() / MIX_FRAME_RATE);
+    public static final int BYTES_PER_MILLIS = (int)(Audio.GRETA_AUDIO_FORMAT.getFrameRate()/1000.0)*Audio.GRETA_AUDIO_FORMAT.getFrameSize();
 
     private final ArrayList<MixerSource> sources;
     private double[] mixed; //mix buffer

@@ -42,8 +42,8 @@ public abstract class APSender<APF extends AnimationParametersFrame> extends Sen
         super(host, port);
     }
 
-    public void sendAnimParamFrameList(List<APF> vibAPFrames, String type, ID requestId) {
-       List<ThriftAnimParamFrame> thriftAPFrameList = vibAPFrameListToThriftAPFrameList(vibAPFrames);
+    public void sendAnimParamFrameList(List<APF> gretaAPFrames, String type, ID requestId) {
+       List<ThriftAnimParamFrame> thriftAPFrameList = gretaAPFrameListToThriftAPFrameList(gretaAPFrames);
        Message m = new Message();
        m.type = type;
        m.id = requestId.toString();
@@ -52,15 +52,15 @@ public abstract class APSender<APF extends AnimationParametersFrame> extends Sen
        send(m);
     }
 
-    private List<ThriftAnimParamFrame> vibAPFrameListToThriftAPFrameList(List<APF> vibAPFrames) {
-        List<ThriftAnimParamFrame> thriftAPFrameList  = new ArrayList<>(vibAPFrames.size());
+    private List<ThriftAnimParamFrame> gretaAPFrameListToThriftAPFrameList(List<APF> gretaAPFrames) {
+        List<ThriftAnimParamFrame> thriftAPFrameList  = new ArrayList<>(gretaAPFrames.size());
 
-        for (AnimationParametersFrame vibFrame : vibAPFrames) {
+        for (AnimationParametersFrame gretaFrame : gretaAPFrames) {
             ThriftAnimParamFrame thriftFrame = new ThriftAnimParamFrame();
-            thriftFrame.frameNumber = vibFrame.getFrameNumber();
+            thriftFrame.frameNumber = gretaFrame.getFrameNumber();
             Logs.debug("thriftFrame.frameNumber: " + thriftFrame.frameNumber);
-            thriftFrame.animParamList = new ArrayList<>(vibFrame.size());
-            List<AnimationParameter> apList = vibFrame.getAnimationParametersList();
+            thriftFrame.animParamList = new ArrayList<>(gretaFrame.size());
+            List<AnimationParameter> apList = gretaFrame.getAnimationParametersList();
             for (AnimationParameter ap : apList){
                 ThriftAnimParam thriftAP = new ThriftAnimParam(ap.getMask(), ap.getValue());
                 thriftFrame.animParamList.add(thriftAP);

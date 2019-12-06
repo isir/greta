@@ -33,7 +33,7 @@ import vib.core.util.CharacterManager;
 import vib.core.util.time.TimeMarker;
 
 /**
- * This class is the VIB's Feedbacks manager<br/><br/> It manages feedbacks
+ * This class is the Greta's Feedbacks manager<br/><br/> It manages feedbacks
  * for "Intentions" and "Signals": begin, stop, end, dead of "Intentions"
  * (communicative intentions level, FML) begin, stop, end, dead of "Signals"
  * (behaviour level, BML) To do that, it maintain updated four lists of

@@ -643,7 +643,7 @@ public class Quaternion {
     }
 
     //// euler x - y - z  =>  z * y * x * v
-    // this may namely run xyz or zyx  in vib z * y * x * v
+    // this may namely run xyz or zyx  in greta z * y * x * v
     public void fromEulerXYZ(double roll, double pitch, double yaw) {
         double y = yaw / 2.0;
         double p = pitch / 2.0;

@@ -33,7 +33,7 @@ import vib.core.util.enums.interruptions.ReactionDuration;
 import vib.core.util.enums.interruptions.ReactionType;
 
 /**
- * Class containing phonemes mapping and constants for the CereProc TTS VIB implementation
+ * Class containing phonemes mapping and constants for the CereProc TTS Greta implementation
  * @author Andre-Marie Pez
  * @author Mathieu Chollet
  * @author Angelo Cafaro
@@ -51,28 +51,28 @@ public class CereProcConstants {
     public static final String DEFAULT_LANGUAGE = "en-GB";
     public static final String DEFAULT_VOICE = "sarah";
 
-    /** Correspondence map of phonemes between VIB and CereProc */
+    /** Correspondence map of phonemes between Greta and CereProc */
     public static final Map<String,Map<String,PhonemeType[]>> correspondingPhonemes = new HashMap<String,Map<String,PhonemeType[]>>();   // Map of correspondences for all available languages
 
     /**
      * Function to add a phoneme-CereProc correspondence in the map of correspondence depending on the specified language<br/>
      * @param language the CereProc's language
      * @param cerePhoneme the CereProc's phoneme
-     * @param phoneme the VIB's phoneme
+     * @param phoneme the Greta's phoneme
      */
-    private static void addVIBCereProcPhonemeCorrespondence(String language, String cerePhoneme, PhonemeType phoneme){
+    private static void addGretaCereProcPhonemeCorrespondence(String language, String cerePhoneme, PhonemeType phoneme){
         PhonemeType[] phonemes = {phoneme};
         correspondingPhonemes.get(language).put(cerePhoneme, phonemes);
     }
     /**
      * Function to add a phoneme-CereProc correspondence in the map of correspondence depending on the specified language<br/>
-     * This function is used when a CereProc's phoneme correspond to a sequence of two VIB's phonemes
+     * This function is used when a CereProc's phoneme correspond to a sequence of two Greta's phonemes
      * @param language the CereProc's language
      * @param cerePhoneme the CereProc's phoneme
-     * @param phoneme1 first VIB's phoneme
-     * @param phoneme2 second VIB's phoneme
+     * @param phoneme1 first Greta's phoneme
+     * @param phoneme2 second Greta's phoneme
      */
-    private static void addDoubleVIBCereProcPhonemeCorrespondence(String language, String cerePhoneme, PhonemeType phoneme1, PhonemeType phoneme2){
+    private static void addDoubleGretaCereProcPhonemeCorrespondence(String language, String cerePhoneme, PhonemeType phoneme1, PhonemeType phoneme2){
         PhonemeType[] phonemes = {phoneme1, phoneme2};
         correspondingPhonemes.get(language).put(cerePhoneme, phonemes);
     }
@@ -99,162 +99,162 @@ public class CereProcConstants {
     public static void InitPhonemes() {
 
         // French
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "sil", PhonemeType.pause);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "aa", PhonemeType.a);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "a", PhonemeType.a1);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "ai", PhonemeType.a, PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "e", PhonemeType.E1);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "an", PhonemeType.a);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "au", PhonemeType.o);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "b", PhonemeType.b);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "ch", PhonemeType.SS);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "sh", PhonemeType.SS);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "d", PhonemeType.d);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "dh", PhonemeType.th);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "@", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "e@", PhonemeType.E1);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "ee", PhonemeType.e);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "ei", PhonemeType.e,PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "ex", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "f", PhonemeType.f);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "g", PhonemeType.g);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "h", PhonemeType.r);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "i", PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "i@", PhonemeType.i1);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "ii", PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "in", PhonemeType.a);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "zh", PhonemeType.SS);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "jh", PhonemeType.SS);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "k", PhonemeType.k);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "l", PhonemeType.l);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "m", PhonemeType.m);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "n", PhonemeType.n);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "ng", PhonemeType.g);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "ny", PhonemeType.n);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "oi", PhonemeType.o, PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "@@", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "on", PhonemeType.O1);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "oo", PhonemeType.o);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "ou", PhonemeType.u);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "o", PhonemeType.o);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "u", PhonemeType.u);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "p", PhonemeType.p);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "r", PhonemeType.r);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "rr", PhonemeType.r);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "s", PhonemeType.s);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "t", PhonemeType.t);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "th", PhonemeType.f);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "u@", PhonemeType.u);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "uh", PhonemeType.e);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "un", PhonemeType.e, PhonemeType.n);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "uu", PhonemeType.u1);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "yy", PhonemeType.u);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "uy", PhonemeType.u, PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "v", PhonemeType.v);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "w", PhonemeType.w);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "y", PhonemeType.y);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "z", PhonemeType.z);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "wa", PhonemeType.o, PhonemeType.a);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "wi", PhonemeType.o, PhonemeType.E1);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "yn", PhonemeType.i, PhonemeType.o);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "ye", PhonemeType.i, PhonemeType.E1);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "ya", PhonemeType.i, PhonemeType.a);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "yo", PhonemeType.i, PhonemeType.o);
-        addDoubleVIBCereProcPhonemeCorrespondence("fr-FR", "yz", PhonemeType.i, PhonemeType.z);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "R", PhonemeType.r);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "Z", PhonemeType.z);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "ZZ", PhonemeType.z);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "TT", PhonemeType.t);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "NN", PhonemeType.n);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "KK", PhonemeType.g);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "PP", PhonemeType.p);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "RR", PhonemeType.r);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "HH", PhonemeType.SS);
-        addVIBCereProcPhonemeCorrespondence("fr-FR", "EE", PhonemeType.pause);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "sil", PhonemeType.pause);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "aa", PhonemeType.a);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "a", PhonemeType.a1);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "ai", PhonemeType.a, PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "e", PhonemeType.E1);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "an", PhonemeType.a);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "au", PhonemeType.o);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "b", PhonemeType.b);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "ch", PhonemeType.SS);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "sh", PhonemeType.SS);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "d", PhonemeType.d);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "dh", PhonemeType.th);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "@", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "e@", PhonemeType.E1);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "ee", PhonemeType.e);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "ei", PhonemeType.e,PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "ex", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "f", PhonemeType.f);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "g", PhonemeType.g);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "h", PhonemeType.r);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "i", PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "i@", PhonemeType.i1);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "ii", PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "in", PhonemeType.a);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "zh", PhonemeType.SS);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "jh", PhonemeType.SS);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "k", PhonemeType.k);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "l", PhonemeType.l);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "m", PhonemeType.m);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "n", PhonemeType.n);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "ng", PhonemeType.g);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "ny", PhonemeType.n);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "oi", PhonemeType.o, PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "@@", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "on", PhonemeType.O1);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "oo", PhonemeType.o);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "ou", PhonemeType.u);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "o", PhonemeType.o);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "u", PhonemeType.u);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "p", PhonemeType.p);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "r", PhonemeType.r);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "rr", PhonemeType.r);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "s", PhonemeType.s);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "t", PhonemeType.t);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "th", PhonemeType.f);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "u@", PhonemeType.u);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "uh", PhonemeType.e);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "un", PhonemeType.e, PhonemeType.n);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "uu", PhonemeType.u1);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "yy", PhonemeType.u);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "uy", PhonemeType.u, PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "v", PhonemeType.v);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "w", PhonemeType.w);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "y", PhonemeType.y);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "z", PhonemeType.z);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "wa", PhonemeType.o, PhonemeType.a);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "wi", PhonemeType.o, PhonemeType.E1);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "yn", PhonemeType.i, PhonemeType.o);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "ye", PhonemeType.i, PhonemeType.E1);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "ya", PhonemeType.i, PhonemeType.a);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "yo", PhonemeType.i, PhonemeType.o);
+        addDoubleGretaCereProcPhonemeCorrespondence("fr-FR", "yz", PhonemeType.i, PhonemeType.z);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "R", PhonemeType.r);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "Z", PhonemeType.z);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "ZZ", PhonemeType.z);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "TT", PhonemeType.t);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "NN", PhonemeType.n);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "KK", PhonemeType.g);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "PP", PhonemeType.p);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "RR", PhonemeType.r);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "HH", PhonemeType.SS);
+        addGretaCereProcPhonemeCorrespondence("fr-FR", "EE", PhonemeType.pause);
 
         // British English
-        addVIBCereProcPhonemeCorrespondence("en-GB", "sil", PhonemeType.pause);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "aa", PhonemeType.a);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "a", PhonemeType.a1);
-        addDoubleVIBCereProcPhonemeCorrespondence("en-GB", "ai", PhonemeType.a, PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "e", PhonemeType.E1);
-        addDoubleVIBCereProcPhonemeCorrespondence("en-GB", "au", PhonemeType.a, PhonemeType.u);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "b", PhonemeType.b);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "ch", PhonemeType.tS);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "sh", PhonemeType.SS);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "d", PhonemeType.d);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "dh", PhonemeType.th);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "@", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "e@", PhonemeType.E1);
-        addDoubleVIBCereProcPhonemeCorrespondence("en-GB", "ei", PhonemeType.e,PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "f", PhonemeType.f);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "g", PhonemeType.g);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "h", PhonemeType.r); // TODO: change for english (now using r as in french)
-        addVIBCereProcPhonemeCorrespondence("en-GB", "i", PhonemeType.i);
-        addDoubleVIBCereProcPhonemeCorrespondence("en-GB", "i@", PhonemeType.i,PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "ii", PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "zh", PhonemeType.SS);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "jh", PhonemeType.tS);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "k", PhonemeType.k);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "l", PhonemeType.l);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "m", PhonemeType.m);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "n", PhonemeType.n);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "ng", PhonemeType.g);
-        addDoubleVIBCereProcPhonemeCorrespondence("en-GB", "oi", PhonemeType.o, PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "@@", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "oo", PhonemeType.o);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "ou", PhonemeType.u);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "o", PhonemeType.o);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "u", PhonemeType.u);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "p", PhonemeType.p);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "r", PhonemeType.r);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "s", PhonemeType.s);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "t", PhonemeType.t);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "th", PhonemeType.f);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "u@", PhonemeType.u);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "uh", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "uu", PhonemeType.u1);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "v", PhonemeType.v);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "w", PhonemeType.w);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "y", PhonemeType.y);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "z", PhonemeType.z);
-        addVIBCereProcPhonemeCorrespondence("en-GB", "R", PhonemeType.r);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "sil", PhonemeType.pause);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "aa", PhonemeType.a);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "a", PhonemeType.a1);
+        addDoubleGretaCereProcPhonemeCorrespondence("en-GB", "ai", PhonemeType.a, PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "e", PhonemeType.E1);
+        addDoubleGretaCereProcPhonemeCorrespondence("en-GB", "au", PhonemeType.a, PhonemeType.u);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "b", PhonemeType.b);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "ch", PhonemeType.tS);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "sh", PhonemeType.SS);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "d", PhonemeType.d);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "dh", PhonemeType.th);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "@", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "e@", PhonemeType.E1);
+        addDoubleGretaCereProcPhonemeCorrespondence("en-GB", "ei", PhonemeType.e,PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "f", PhonemeType.f);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "g", PhonemeType.g);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "h", PhonemeType.r); // TODO: change for english (now using r as in french)
+        addGretaCereProcPhonemeCorrespondence("en-GB", "i", PhonemeType.i);
+        addDoubleGretaCereProcPhonemeCorrespondence("en-GB", "i@", PhonemeType.i,PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "ii", PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "zh", PhonemeType.SS);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "jh", PhonemeType.tS);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "k", PhonemeType.k);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "l", PhonemeType.l);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "m", PhonemeType.m);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "n", PhonemeType.n);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "ng", PhonemeType.g);
+        addDoubleGretaCereProcPhonemeCorrespondence("en-GB", "oi", PhonemeType.o, PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "@@", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "oo", PhonemeType.o);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "ou", PhonemeType.u);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "o", PhonemeType.o);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "u", PhonemeType.u);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "p", PhonemeType.p);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "r", PhonemeType.r);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "s", PhonemeType.s);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "t", PhonemeType.t);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "th", PhonemeType.f);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "u@", PhonemeType.u);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "uh", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "uu", PhonemeType.u1);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "v", PhonemeType.v);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "w", PhonemeType.w);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "y", PhonemeType.y);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "z", PhonemeType.z);
+        addGretaCereProcPhonemeCorrespondence("en-GB", "R", PhonemeType.r);
 
         // German
-        addVIBCereProcPhonemeCorrespondence("de-DE", "sil", PhonemeType.pause);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "a", PhonemeType.a1);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "ah", PhonemeType.a);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "ae", PhonemeType.E1);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "aeh", PhonemeType.E1);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "e", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "eh", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "i", PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "ih", PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "o", PhonemeType.o);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "oh", PhonemeType.o);
-        addDoubleVIBCereProcPhonemeCorrespondence("de-DE", "oi", PhonemeType.o, PhonemeType.i);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "oe", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "oeh", PhonemeType.e);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "u", PhonemeType.u);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "uh", PhonemeType.u);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "ue", PhonemeType.u1);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "ueh", PhonemeType.u1);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "p", PhonemeType.p);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "b", PhonemeType.b);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "t", PhonemeType.t);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "d", PhonemeType.d);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "g", PhonemeType.g);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "k", PhonemeType.k);
-        addVIBCereProcPhonemeCorrespondence("de-DE", "f", PhonemeType.f);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "sil", PhonemeType.pause);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "a", PhonemeType.a1);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "ah", PhonemeType.a);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "ae", PhonemeType.E1);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "aeh", PhonemeType.E1);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "e", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "eh", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "i", PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "ih", PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "o", PhonemeType.o);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "oh", PhonemeType.o);
+        addDoubleGretaCereProcPhonemeCorrespondence("de-DE", "oi", PhonemeType.o, PhonemeType.i);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "oe", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "oeh", PhonemeType.e);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "u", PhonemeType.u);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "uh", PhonemeType.u);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "ue", PhonemeType.u1);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "ueh", PhonemeType.u1);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "p", PhonemeType.p);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "b", PhonemeType.b);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "t", PhonemeType.t);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "d", PhonemeType.d);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "g", PhonemeType.g);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "k", PhonemeType.k);
+        addGretaCereProcPhonemeCorrespondence("de-DE", "f", PhonemeType.f);
 
         // TODO complete mappings for german language
     }
 
 
     /**
-     * Returns the sequence of VIB's {@code phonenes} corresponding to the specified CereProc's phoneme.
+     * Returns the sequence of Greta's {@code phonenes} corresponding to the specified CereProc's phoneme.
      * @param cerePhoneme the CereProc's phoneme
-     * @return a sequence of VIB's {@code phonemes}
+     * @return a sequence of Greta's {@code phonemes}
      */
     public static PhonemeType[] convertPhoneme(String language, String cerePhoneme){
 
@@ -290,7 +290,7 @@ public class CereProcConstants {
         return tts;
     }
 
-    public static CPRCEN_INTERRUPT_BOUNDARY_TYPE fromVIBReactionDurationToCEREPROC(ReactionDuration reactionDuration) {
+    public static CPRCEN_INTERRUPT_BOUNDARY_TYPE fromGRETAReactionDurationToCEREPROC(ReactionDuration reactionDuration) {
         switch (reactionDuration) {
             case EXTRA_SHORT: return CPRCEN_INTERRUPT_BOUNDARY_TYPE.CPRCEN_INTERRUPT_BOUNDARY_PHONE;
             case SHORT: return CPRCEN_INTERRUPT_BOUNDARY_TYPE.CPRCEN_INTERRUPT_BOUNDARY_NATURAL;
@@ -300,7 +300,7 @@ public class CereProcConstants {
         }
     }
 
-    public static CPRCEN_INTERRUPT_INTERRUPT_TYPE fromVIBReactionTypeToCEREPROC(ReactionType reactionType) {
+    public static CPRCEN_INTERRUPT_INTERRUPT_TYPE fromGRETAReactionTypeToCEREPROC(ReactionType reactionType) {
         switch (reactionType) {
             case HALT: return CPRCEN_INTERRUPT_INTERRUPT_TYPE.CPRCEN_INTERRUPT_INTERRUPT_HALT;
             case OVERLAP: return CPRCEN_INTERRUPT_INTERRUPT_TYPE.CPRCEN_INTERRUPT_INTERRUPT_OVERLAP;
@@ -309,9 +309,9 @@ public class CereProcConstants {
         }
     }
 
-    public static float fromVIBBufferPositionToCEREPROC(int bufferPositionVIB) {
-        if (bufferPositionVIB != 0) {
-            return ((bufferPositionVIB / 2) / cereprocSampleRateFloat);
+    public static float fromGRETABufferPositionToCEREPROC(int bufferPositionGreta) {
+        if (bufferPositionGreta != 0) {
+            return ((bufferPositionGreta / 2) / cereprocSampleRateFloat);
         }
         else {
             return 0;

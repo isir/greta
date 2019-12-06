@@ -63,7 +63,7 @@ public class BAPReceiver extends APReceiver implements BAPFramesEmitter {
     public void perform(Message m) {
         ID id = IDProvider.createID(m.getId());
         for (BAPFramesPerformer performer : bapFramesPerfList) {
-            performer.performBAPFrames(getVibAPFrameList(m), id);
+            performer.performBAPFrames(getGretaAPFrameList(m), id);
         }
     }
 }

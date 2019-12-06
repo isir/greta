@@ -48,7 +48,7 @@ import vib.core.util.time.Temporizer;
 import vib.core.util.time.TimeMarker;
 
 /**
- * This class is the VIB's behavior planner.<br/><br/> The
+ * This class is the Greta's behavior planner.<br/><br/> The
  * {@link #performIntentions(java.util.List, vib.core.util.id.ID, vib.core.util.Mode) performIntentions}
  * function (defined in {@link vib.core.intentions.IntentionPerformer}
  * interface) is its main function.<br/> it plans behaviors (as {@code Signals})

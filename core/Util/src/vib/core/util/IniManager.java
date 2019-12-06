@@ -48,7 +48,7 @@ import vib.core.util.parameter.ParameterSet;
 public class IniManager extends ParameterSet<IniParameter> {
 
 //static field :
-    private static final String defaultIniFileName = "./vib.ini";
+    private static final String defaultIniFileName = "./Greta.ini";
     private static final IniManager globalIniManager = new IniManager(); //Singleton
 
     private static String programPath;

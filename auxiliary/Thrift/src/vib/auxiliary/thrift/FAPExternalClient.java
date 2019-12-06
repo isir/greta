@@ -60,7 +60,7 @@ public class FAPExternalClient extends APExternalClient implements FAPFrameEmitt
         if(m.APFrameList!=null){
             ID id = IDProvider.createID(m.getId());
             for(FAPFramePerformer performer:fapFramesPerfList){
-                performer.performFAPFrames(getVibAPFrameList(m), id);
+                performer.performFAPFrames(getGretaAPFrameList(m), id);
             }
         }
     }

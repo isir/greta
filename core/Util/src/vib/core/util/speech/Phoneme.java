@@ -105,7 +105,7 @@ public class Phoneme {
     }
 
     /**
-     * Enumeration of all phoneme types used by VIB.
+     * Enumeration of all phoneme types used by Greta.
      */
     public static enum PhonemeType{ pause,
                                     a1,

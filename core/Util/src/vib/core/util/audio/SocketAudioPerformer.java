@@ -43,7 +43,7 @@ public class SocketAudioPerformer implements AudioPerformer{
         if(audios.size()==1){
             try {
                 Socket s = new Socket(host, port);
-                audios.get(0).save(s.getOutputStream(), Audio.VIB_AUDIO_FORMAT);
+                audios.get(0).save(s.getOutputStream(), Audio.GRETA_AUDIO_FORMAT);
                 s.close();
             } catch (UnknownHostException ex) {
                 Logger.getLogger(SocketAudioPerformer.class.getName()).log(Level.SEVERE, null, ex);
@@ -56,7 +56,7 @@ public class SocketAudioPerformer implements AudioPerformer{
             for(int i=0; i<audios.size();++i){
                 try {
                 Socket s = new Socket(host, port);
-                audios.get(i).save(s.getOutputStream(), Audio.VIB_AUDIO_FORMAT);
+                audios.get(i).save(s.getOutputStream(), Audio.GRETA_AUDIO_FORMAT);
                 s.close();
             } catch (UnknownHostException ex) {
                 Logger.getLogger(SocketAudioPerformer.class.getName()).log(Level.SEVERE, null, ex);

@@ -30,13 +30,13 @@ public final class Constants {
     public static final int FRAME_DURATION_MILLIS = 1000/FRAME_PER_SECOND;
     public static final double FRAME_DURATION_SECONDS = 1.0/FRAME_PER_SECOND;
     
-    // This time marker ID has an absolute value that refers to the Intention (i.e. Speech) currently played in VIB when the interruption occurs
+    // This time marker ID has an absolute value that refers to the Intention (i.e. Speech) currently played in Greta when the interruption occurs
     public static final String _TIME_MARKER_INTERRUPTION_DETECTED_ID = "_interruption_detected";
     
-    // This time marker ID has an absolute value that refers to the Intention (i.e. Speech) currently played in VIB when the interruption occurs
+    // This time marker ID has an absolute value that refers to the Intention (i.e. Speech) currently played in Greta when the interruption occurs
     public static final String _TIME_MARKER_INTERRUPTION_REACTION_STARTED_ID = "_reaction_started";
     
-    // This time marker ID has an absolute value that refers to Reaction that replaces the Intention (i.e. Speech) currently played in VIB when the interruption occurs
+    // This time marker ID has an absolute value that refers to Reaction that replaces the Intention (i.e. Speech) currently played in Greta when the interruption occurs
     public static final String TIME_MARKER_INTERRUPTION_REACTION_END_ID = "reaction_end";
 
     //TODO: move enums from vib.core.util.enums to here and perhaps simplify these enums

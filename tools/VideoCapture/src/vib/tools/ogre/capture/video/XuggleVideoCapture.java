@@ -43,8 +43,8 @@ import vib.core.util.log.Logs;
  */
 public class XuggleVideoCapture implements CaptureOutput {
 
-    public static IPixelFormat.Type VIBsPixelType = IPixelFormat.Type.RGB24;
-    public static IAudioSamples.Format VIBsSamplesFormat = IAudioSamples.Format.FMT_S16;
+    public static IPixelFormat.Type GretaPixelType = IPixelFormat.Type.RGB24;
+    public static IAudioSamples.Format GretaSamplesFormat = IAudioSamples.Format.FMT_S16;
     private IContainer outContainer;
     private IStreamCoder outVideoStreamCoder;
     private IStreamCoder outAudioStreamCoder;
@@ -106,8 +106,8 @@ public class XuggleVideoCapture implements CaptureOutput {
         IStream outVideoStream = container.addNewStream(wantedVideoCodec);
         IStreamCoder videoStreamCoder = outVideoStream.getStreamCoder();
         videoStreamCoder.setNumPicturesInGroupOfPictures(50);
-        if (wantedVideoCodec.getSupportedVideoPixelFormats().contains(VIBsPixelType)) {
-            videoStreamCoder.setPixelType(VIBsPixelType);
+        if (wantedVideoCodec.getSupportedVideoPixelFormats().contains(GretaPixelType)) {
+            videoStreamCoder.setPixelType(GretaPixelType);
         } else {
             videoStreamCoder.setPixelType(wantedVideoCodec.getSupportedVideoPixelFormat(0));
         }
@@ -129,27 +129,27 @@ public class XuggleVideoCapture implements CaptureOutput {
         IStream outAudioStream = container.addNewStream(wantedAudioCodec);
         IStreamCoder audioStreamCoder = outAudioStream.getStreamCoder();
 
-//        if (wantedAudioCodec.getSupportedAudioChannelLayouts().contains((long) Audio.VIB_AUDIO_FORMAT.getChannels())) {
-        audioStreamCoder.setChannels(Audio.VIB_AUDIO_FORMAT.getChannels());
+//        if (wantedAudioCodec.getSupportedAudioChannelLayouts().contains((long) Audio.GRETA_AUDIO_FORMAT.getChannels())) {
+        audioStreamCoder.setChannels(Audio.GRETA_AUDIO_FORMAT.getChannels());
 //        } else {
 //            audioStreamCoder.setChannels(2);
 //        }
 
-//        if (wantedAudioCodec.getSupportedAudioSampleRates().contains((int) Audio.VIB_AUDIO_FORMAT.getSampleRate())) {
-        audioStreamCoder.setSampleRate((int) Audio.VIB_AUDIO_FORMAT.getSampleRate());
+//        if (wantedAudioCodec.getSupportedAudioSampleRates().contains((int) Audio.GRETA_AUDIO_FORMAT.getSampleRate())) {
+        audioStreamCoder.setSampleRate((int) Audio.GRETA_AUDIO_FORMAT.getSampleRate());
 //        } else {
 //            audioStreamCoder.setSampleRate(wantedAudioCodec.getSupportedAudioSampleRate(0));
 //        }
 
-        if (wantedAudioCodec.getSupportedAudioSampleFormats().contains(VIBsSamplesFormat)) {
-            audioStreamCoder.setSampleFormat(VIBsSamplesFormat);
+        if (wantedAudioCodec.getSupportedAudioSampleFormats().contains(GretaSamplesFormat)) {
+            audioStreamCoder.setSampleFormat(GretaSamplesFormat);
         } else {
             audioStreamCoder.setSampleFormat(wantedAudioCodec.getSupportedAudioSampleFormat(0));
         }
 
-        long numsamples = Mixer.BUFFER_SIZE / Audio.VIB_AUDIO_FORMAT.getFrameSize();
+        long numsamples = Mixer.BUFFER_SIZE / Audio.GRETA_AUDIO_FORMAT.getFrameSize();
 //        if (audioStreamCoder.getDefaultAudioFrameSize() < numsamples) {
-        audioStreamCoder.setDefaultAudioFrameSize((int) numsamples); //try to set to the VIB's frame size
+        audioStreamCoder.setDefaultAudioFrameSize((int) numsamples); //try to set to the Greta's frame size
 //        }
 
         audioStreamCoder.setGlobalQuality(0);
@@ -175,21 +175,21 @@ public class XuggleVideoCapture implements CaptureOutput {
         outAudioStreamCoder = instanciateAudioStreamCoder(outContainer);
         writeHeader();
 
-        if (!VIBsPixelType.equals(outVideoStreamCoder.getPixelType())) {
+        if (!GretaPixelType.equals(outVideoStreamCoder.getPixelType())) {
             mToPictureResampler = IVideoResampler.make(
                     width, height, outVideoStreamCoder.getPixelType(),
-                    width, height, VIBsPixelType);
+                    width, height, GretaPixelType);
         } else {
             mToPictureResampler = null;
         }
 
-        if (outAudioStreamCoder.getChannels() != Audio.VIB_AUDIO_FORMAT.getChannels()
-                || outAudioStreamCoder.getSampleRate() != Audio.VIB_AUDIO_FORMAT.getSampleRate()
-                || !outAudioStreamCoder.getSampleFormat().equals(VIBsSamplesFormat)) {
+        if (outAudioStreamCoder.getChannels() != Audio.GRETA_AUDIO_FORMAT.getChannels()
+                || outAudioStreamCoder.getSampleRate() != Audio.GRETA_AUDIO_FORMAT.getSampleRate()
+                || !outAudioStreamCoder.getSampleFormat().equals(GretaSamplesFormat)) {
             audioResampler = IAudioResampler.make(
-                    outAudioStreamCoder.getChannels(), Audio.VIB_AUDIO_FORMAT.getChannels(),
-                    outAudioStreamCoder.getSampleRate(), (int) Audio.VIB_AUDIO_FORMAT.getSampleRate(),
-                    outAudioStreamCoder.getSampleFormat(), VIBsSamplesFormat);
+                    outAudioStreamCoder.getChannels(), Audio.GRETA_AUDIO_FORMAT.getChannels(),
+                    outAudioStreamCoder.getSampleRate(), (int) Audio.GRETA_AUDIO_FORMAT.getSampleRate(),
+                    outAudioStreamCoder.getSampleFormat(), GretaSamplesFormat);
         } else {
             audioResampler = null;
         }
@@ -203,41 +203,41 @@ public class XuggleVideoCapture implements CaptureOutput {
         if (outContainer != null && outAudioStreamCoder != null && time>beginTime) {
             int read = 0;
             if (currentSamples != null){
-                long  wantedTime = (long)((samplesWriten/(Audio.VIB_AUDIO_FORMAT.getSampleRate()/1000f))+currentSamples.getTimeStamp()/1000+beginTime);
+                long  wantedTime = (long)((samplesWriten/(Audio.GRETA_AUDIO_FORMAT.getSampleRate()/1000f))+currentSamples.getTimeStamp()/1000+beginTime);
 
                 if (time  > wantedTime) {
-                    int buffsize = (int)((time-wantedTime) * (Audio.VIB_AUDIO_FORMAT.getFrameRate()/1000.0)*Audio.VIB_AUDIO_FORMAT.getFrameSize());
+                    int buffsize = (int)((time-wantedTime) * (Audio.GRETA_AUDIO_FORMAT.getFrameRate()/1000.0)*Audio.GRETA_AUDIO_FORMAT.getFrameSize());
 //if(buffsize%512 != 0 ){
 //    System.err.println("nombre de milliseconds flottant !! "+buffsize);
-//    System.err.println("(long)((("+samplesWriten+"/"+Audio.VIB_AUDIO_FORMAT.getSampleRate()+")*1000000f)+"+currentSamples.getTimeStamp()+"+"+beginTime+"*1000)");
+//    System.err.println("(long)((("+samplesWriten+"/"+Audio.GRETA_AUDIO_FORMAT.getSampleRate()+")*1000000f)+"+currentSamples.getTimeStamp()+"+"+beginTime+"*1000)");
 //}
                     newAudioPacket(new byte[buffsize], wantedTime);
                 }
                 else{
                     if(time < wantedTime){
                         //skip lated bytes
-                        read = (int)((wantedTime - time) * (Audio.VIB_AUDIO_FORMAT.getFrameRate()/1000.0));
+                        read = (int)((wantedTime - time) * (Audio.GRETA_AUDIO_FORMAT.getFrameRate()/1000.0));
 //if(read%16!=0){
-//    System.err.println(read+"  = (int)(("+wantedTime+" - "+time+") * ("+Audio.VIB_AUDIO_FORMAT.getFrameRate()/1000+"))");
-//    System.err.println("(long)((("+samplesWriten+"/"+Audio.VIB_AUDIO_FORMAT.getSampleRate()+")*1000000f)+"+currentSamples.getTimeStamp()+"+"+beginTime+"*1000)");
+//    System.err.println(read+"  = (int)(("+wantedTime+" - "+time+") * ("+Audio.GRETA_AUDIO_FORMAT.getFrameRate()/1000+"))");
+//    System.err.println("(long)((("+samplesWriten+"/"+Audio.GRETA_AUDIO_FORMAT.getSampleRate()+")*1000000f)+"+currentSamples.getTimeStamp()+"+"+beginTime+"*1000)");
 //}
                     }
                 }
             }
 
-            long numsamples = data.length / Audio.VIB_AUDIO_FORMAT.getFrameSize();
+            long numsamples = data.length / Audio.GRETA_AUDIO_FORMAT.getFrameSize();
 
             while (read < numsamples) {
                 if (currentSamples == null) {
                     currentSamples = IAudioSamples.make(
                             outAudioStreamCoder.getAudioFrameSize(),
-                            Audio.VIB_AUDIO_FORMAT.getChannels(),
-                            VIBsSamplesFormat);
+                            Audio.GRETA_AUDIO_FORMAT.getChannels(),
+                            GretaSamplesFormat);
                     samplesWriten = 0;
 //if(read%16 != 0){
 //    System.err.println(read);
 //}
-                    long timeStamp = (time - beginTime) * 1000 + (long) (read * (1000000 / Audio.VIB_AUDIO_FORMAT.getFrameRate())); // convert to microseconds
+                    long timeStamp = (time - beginTime) * 1000 + (long) (read * (1000000 / Audio.GRETA_AUDIO_FORMAT.getFrameRate())); // convert to microseconds
 //if(timeStamp%1000 != 0){
 //    System.err.println("timestamp : nombre de milliseconds flottant !!");
 //}
@@ -246,17 +246,17 @@ public class XuggleVideoCapture implements CaptureOutput {
                 long samplesToRead = Math.min(outAudioStreamCoder.getAudioFrameSize() - samplesWriten, numsamples - read);
 
                 currentSamples.put(data,
-                        (int) (read * Audio.VIB_AUDIO_FORMAT.getFrameSize()),
-                        (int) (samplesWriten * Audio.VIB_AUDIO_FORMAT.getFrameSize()),
-                        (int) (samplesToRead * Audio.VIB_AUDIO_FORMAT.getFrameSize()));
+                        (int) (read * Audio.GRETA_AUDIO_FORMAT.getFrameSize()),
+                        (int) (samplesWriten * Audio.GRETA_AUDIO_FORMAT.getFrameSize()),
+                        (int) (samplesToRead * Audio.GRETA_AUDIO_FORMAT.getFrameSize()));
 
                 samplesWriten += samplesToRead;
                 if (samplesWriten == outAudioStreamCoder.getAudioFrameSize()) {
                     currentSamples.setComplete(
                             true, outAudioStreamCoder.getAudioFrameSize(),
-                            (int) Audio.VIB_AUDIO_FORMAT.getFrameRate(),
-                            Audio.VIB_AUDIO_FORMAT.getChannels(),
-                            VIBsSamplesFormat, currentSamples.getTimeStamp());
+                            (int) Audio.GRETA_AUDIO_FORMAT.getFrameRate(),
+                            Audio.GRETA_AUDIO_FORMAT.getChannels(),
+                            GretaSamplesFormat, currentSamples.getTimeStamp());
 
                     //resample as needed
                     IAudioSamples reSampled;
@@ -336,11 +336,11 @@ public class XuggleVideoCapture implements CaptureOutput {
                 new AtomicReference<JNIReference>(null);
         IVideoPicture resamplePicture = null;
         try {
-            IVideoPicture picture = IVideoPicture.make(VIBsPixelType, width, height);
+            IVideoPicture picture = IVideoPicture.make(GretaPixelType, width, height);
 
             picture.getByteBuffer(ref).put(imageBytes);
 
-            picture.setComplete(true, VIBsPixelType, width, height, timestamp);
+            picture.setComplete(true, GretaPixelType, width, height, timestamp);
 
             // resample as needed
             if (mToPictureResampler != null) {

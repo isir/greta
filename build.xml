@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Greta_Build" default="default">
+    <description>Greta Builder</description>
+
+    <target name="default">
+        <ant target="jar" useNativeBasedir="true" dir="application/Modular"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/ActiveMQ"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/AnimationDynamics"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/BVHMocap"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/ConversationalGaze"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/EmotionML"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/EnvironmentManager"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/FMLAnnotator"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/MeaningMiner"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/OgrePlayer"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/PlanCapture"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/SocialParameters"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/SSI"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/Thrift"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/TTS/CereProc"/>
+        <ant target="jar" useNativeBasedir="true" dir="auxiliary/TTS/MaryTTS"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/AnimationCore"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/BehaviorPlanner"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/BehaviorRealizer"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/BodyAnimationPerformer"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/Feedbacks"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/GestureAnimation"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/Intentions"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/Interruptions"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/LipModel"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/ListenerIntentPlanner"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/MPEG4"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/Signals"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/SubjectPlanner"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/Util"/>
+        <ant target="jar" useNativeBasedir="true" dir="core/Utilx"/>
+        <ant target="jar" useNativeBasedir="true" dir="tools/Editors"/>
+        <ant target="jar" useNativeBasedir="true" dir="tools/GestureAnimationEditor"/>
+        <ant target="jar" useNativeBasedir="true" dir="tools/VideoCapture"/>
+    </target>
+</project>

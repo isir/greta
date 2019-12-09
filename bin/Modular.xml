@@ -126,34 +126,34 @@
                 <menu name="ActiveMQ">
                     <item module="ActiveMQ Broker" name="Broker"/>
                     <menu name="Senders">
-                        <item module="FML Sender" name="FML Sender"/>
-                        <item module="BML Sender" name="BML Sender"/>
-                        <item module="BML Callbacks Sender" name="BML Callbacks Sender"/>
-                        <item module="EmotionML Sender" name="EmotionML Sender"/>
-                        <item module="KeyFrame Sender" name="Key Frame Sender"/>
-                        <item module="Feedbacks Sender" name="Feedbacks Sender"/>
-                        <item module="BAP Sender" name="BAP Sender"/>
-                        <item module="FAP Sender" name="FAP Sender"/>
-                        <item module="Audio Sender" name="Audio Sender"/>
-                        <item module="SSI Sender" name="SSI Sender"/>
+                        <item module="ActiveMQ FML Sender" name="FML Sender"/>
+                        <item module="ActiveMQ BML Sender" name="BML Sender"/>
+                        <item module="ActiveMQ BML Callbacks Sender" name="BML Callbacks Sender"/>
+                        <item module="ActiveMQ EmotionML Sender" name="EmotionML Sender"/>
+                        <item module="ActiveMQ KeyFrame Sender" name="KeyFrame Sender"/>
+                        <item module="ActiveMQ Feedbacks Sender" name="Feedbacks Sender"/>
+                        <item module="ActiveMQ BAP Sender" name="BAP Sender"/>
+                        <item module="ActiveMQ FAP Sender" name="FAP Sender"/>
+                        <item module="ActiveMQ Audio Sender" name="Audio Sender"/>
+                        <item module="ActiveMQ SSI Sender" name="SSI Sender"/>
                     </menu>
                     <menu name="Receivers">
-                        <item module="FML Receiver" name="FML Receiver"/>
-                        <item module="Meaning Miner FML Receiver" name="Meaning Miner FML Receiver"/>
-                        <item module="BML Receiver" name="BML Receiver"/>
-                        <item module="FML_BML File Name Receiver" name="FML/BML File Name Receiver"/>
-                        <item module="EmotionML Receiver" name="EmotionML Receiver"/>
-                        <item module="BAP Receiver" name="BAP Receiver"/>
-                        <item module="FAP Receiver" name="FAP Receiver"/>
-                        <item module="Callbacks Receiver" name="Callbacks Receiver"/>
-                        <item module="SSI Translator" name="SSI XML-to-Frame Translator"/>
-                        <item module="SSI Filter" name="SSI XML Filter"/>
-                        <item module="SSI Frame To Signal" name="SSI Frame-to-Signal Translator"/>
-                        <item module="Message Logger" name="Message Logger"/>
-                        <item module="BML Callbacks Receiver" name="BML Callbacks Receiver"/>
+                        <item module="ActiveMQ FML Receiver" name="FML Receiver"/>
+                        <item module="ActiveMQ Meaning Miner FML Receiver" name="Meaning Miner FML Receiver"/>
+                        <item module="ActiveMQ BML Receiver" name="BML Receiver"/>
+                        <item module="ActiveMQ FML_BML File Name Receiver" name="FML/BML File Name Receiver"/>
+                        <item module="ActiveMQ EmotionML Receiver" name="EmotionML Receiver"/>
+                        <item module="ActiveMQ BAP Receiver" name="BAP Receiver"/>
+                        <item module="ActiveMQ FAP Receiver" name="FAP Receiver"/>
+                        <item module="ActiveMQ Callbacks Receiver" name="Callbacks Receiver"/>
+                        <item module="ActiveMQ SSI Translator" name="SSI XML-to-Frame Translator"/>
+                        <item module="ActiveMQ SSI Filter" name="SSI XML Filter"/>
+                        <item module="ActiveMQ SSI Frame To Signal" name="SSI Frame-to-Signal Translator"/>
+                        <item module="ActiveMQ Message Logger" name="Message Logger"/>
+                        <item module="ActiveMQ BML Callbacks Receiver" name="BML Callbacks Receiver"/>
                     </menu>
-                    <item module="Text Editor" name="Text Editor"/>
-                    <item module="Intention Queuing" name="Intention Queuing"/>
+                    <item module="ActiveMQ Text Editor" name="Text Editor"/>
+                    <item module="ActiveMQ Intention Queuing" name="Intention Queuing"/>
                 </menu>
                 <menu name="Thrift">
                     <menu name="Senders">
@@ -201,12 +201,12 @@
             <parameter default="" get_method="getCharacterName" get_on="frame" name="character_name" set_method="setCharacterName" set_on="frame" type="string"/>
         </module>
         <!--
-		<module name="CharacterInstance" style="VIBDefault">
+        <module name="CharacterInstance" style="VIBDefault">
             <object class="vib.core.utilx.gui.CharacterInstanceFrame" lib_id="vib_utilx"/>
             <frame type="object"/>
             <parameter default="" get_method="getCurrentCaracter" get_on="object" name="character_name" set_method="setCurrentCaracter" set_on="object" type="string"/>
         </module>
-		-->
+        -->
         <module name="Logs" restrict="1" style="VIBDefault">
             <object class="vib.core.utilx.gui.LogsController" lib_id="vib_utilx"/>
             <frame type="object"/>
@@ -278,8 +278,8 @@
             <frame type="object"/>
             <!-- <frame class="vib.auxiliary.BVHMocap.gui.BVHReaderGUI" lib_id="vib_bvh_mocap" type="frame">
                 <link method="setLoader" on="frame"/>
-            </frame> 
-			-->
+            </frame>
+            -->
             <!--<parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/> -->
         </module>
         <module name="Face Library Viewer" style="Animations">
@@ -323,7 +323,7 @@
                 <link method="setPlanner" on="frame"/>
             </frame>
         </module>-->
-        <module name="SSI Translator" style="VIBDefault">
+        <module name="ActiveMQ SSI Translator" style="VIBDefault">
             <object class="vib.auxiliary.ssi.SSIXMLToFrameTranslator" lib_id="vib_ssi"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -333,11 +333,11 @@
             <parameter default="semaine.data.ssi.text" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="SSI Filter" style="VIBDefault">
+        <module name="ActiveMQ SSI Filter" style="VIBDefault">
             <object class="vib.auxiliary.ssi.SSIFilterForm" lib_id="vib_ssi"/>
             <frame type="object"/>
         </module>
-        <module name="SSI Frame To Signal" style="VIBDefault">
+        <module name="ActiveMQ SSI Frame To Signal" style="VIBDefault">
             <object class="vib.auxiliary.ssi.SSIFrameToSignal" lib_id="vib_ssi"/>
         </module>
         <module name="Agent Gaze User" style="Signals">
@@ -429,7 +429,7 @@
             </frame>
             <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
         </module>
-        <module name="FML Sender">
+        <module name="ActiveMQ FML Sender">
             <object class="vib.auxiliary.activemq.semaine.FMLSender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -439,7 +439,7 @@
             <parameter default="FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="FML Receiver">
+        <module name="ActiveMQ FML Receiver">
             <object class="vib.auxiliary.activemq.semaine.FMLReceiver" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -449,7 +449,7 @@
             <parameter default="greta.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="Meaning Miner FML Receiver">
+        <module name="ActiveMQ Meaning Miner FML Receiver">
             <object class="vib.auxiliary.MeaningMiner.FMLReceiver_MeaningMiner" lib_id="vib_meaning_miner"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -459,7 +459,7 @@
             <parameter default="greta.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="EmotionML Receiver">
+        <module name="ActiveMQ EmotionML Receiver">
             <object class="vib.auxiliary.activemq.semaine.EmotionMLReceiver" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -469,7 +469,7 @@
             <parameter default="EmotionML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="EmotionML Sender">
+        <module name="ActiveMQ EmotionML Sender">
             <object class="vib.auxiliary.activemq.semaine.EmotionMLSender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -479,7 +479,7 @@
             <parameter default="EmotionML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="BML Receiver">
+        <module name="ActiveMQ BML Receiver">
             <object class="vib.auxiliary.activemq.semaine.BMLReceiver" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -489,7 +489,7 @@
             <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="FML_BML File Name Receiver">
+        <module name="ActiveMQ FML_BML File Name Receiver">
             <object class="vib.auxiliary.activemq.semaine.FmlBmlFileNameReceiver" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -499,7 +499,7 @@
             <parameter default="FileNames" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="BAP Receiver">
+        <module name="ActiveMQ BAP Receiver">
             <object class="vib.auxiliary.activemq.semaine.BAPReceiver" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -509,7 +509,7 @@
             <parameter default="BAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="FAP Receiver">
+        <module name="ActiveMQ FAP Receiver">
             <object class="vib.auxiliary.activemq.semaine.FAPReceiver" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -519,7 +519,7 @@
             <parameter default="FAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="BML Sender">
+        <module name="ActiveMQ BML Sender">
             <object class="vib.auxiliary.activemq.semaine.BMLSender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -529,15 +529,15 @@
             <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="Intention Queuing">
+        <module name="ActiveMQ Intention Queuing">
             <object class="vib.auxiliary.activemq.semaine.IntentionQueuing" lib_id="vib_activemq"/>
             <frame type="noFrame"/>
         </module>
-        <module name="Text Editor">
+        <module name="ActiveMQ Text Editor">
             <object class="vib.auxiliary.activemq.semaine.TextEditor" lib_id="vib_activemq"/>
             <frame type="object"/>
         </module>
-        <module name="KeyFrame Sender">
+        <module name="ActiveMQ KeyFrame Sender">
             <object class="vib.auxiliary.activemq.semaine.KeyFrameSender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -547,7 +547,7 @@
             <parameter default="Keyframes" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="BAP Sender">
+        <module name="ActiveMQ BAP Sender">
             <object class="vib.auxiliary.activemq.semaine.BAPSender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -557,7 +557,7 @@
             <parameter default="BAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="FAP Sender">
+        <module name="ActiveMQ FAP Sender">
             <object class="vib.auxiliary.activemq.semaine.FAPSender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -621,7 +621,7 @@
             <object class="vib.core.animation.mpeg4.fap.filters.IdleMovementEmitter" lib_id="vib_mpeg4"/>
             <frame type="noFrame"/>
         </module>
-        <module name="Callbacks Receiver">
+        <module name="ActiveMQ Callbacks Receiver">
             <object class="vib.auxiliary.activemq.semaine.CallbacksReceiver" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -631,7 +631,7 @@
             <parameter default="semaine.callback.output.Animation" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="Feedbacks Sender">
+        <module name="ActiveMQ Feedbacks Sender">
             <object class="vib.auxiliary.activemq.semaine.FeedbacksSender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -730,7 +730,7 @@
             <object class="vib.core.animation.body.TorsoEditor" lib_id="vib_body_animation_performer"/>
             <frame type="object"/>
         </module>
-        <module name="Audio Sender">
+        <module name="ActiveMQ Audio Sender">
             <object class="vib.auxiliary.activemq.semaine.AudioSender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -894,7 +894,7 @@
         <module name="Intention Queue" style="Intentions">
             <object class="vib.core.behaviorplanner.IntentionQueue" lib_id="vib_behavior_planner"/>
         </module>
-        <module name="SSI Sender">
+        <module name="ActiveMQ SSI Sender">
             <object class="vib.auxiliary.activemq.semaine.SSISender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -903,7 +903,7 @@
             <parameter default="61616" get_method="getPort" get_on="object" name="Port" set_method="setPort" set_on="object" type="string"/>
             <parameter default="localhost" get_method="getHost" get_on="object" name="Host" set_method="setHost" set_on="object" type="string"/>
         </module>
-        <module name="BML Callbacks Sender">
+        <module name="ActiveMQ BML Callbacks Sender">
             <object class="vib.auxiliary.activemq.semaine.BMLCallbacksSender" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -913,7 +913,7 @@
             <parameter default="vib.output.feedback.BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <module name="Message Logger">
+        <module name="ActiveMQ Message Logger">
             <object class="vib.auxiliary.activemq.semaine.MessageLogger" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -926,7 +926,7 @@
         <module name="Interruption Manager" style="Intentions">
             <object class="vib.core.interruptions.InterruptionManager" lib_id="vib_interruptions"/>
         </module>
-        <module name="BML Callbacks Receiver">
+        <module name="ActiveMQ BML Callbacks Receiver">
             <object class="vib.auxiliary.activemq.semaine.BMLCallbacksReceiver" lib_id="vib_activemq"/>
             <frame class="vib.auxiliary.activemq.gui.WhitboardFrame" lib_id="vib_activemq" type="frame">
                 <link method="setWhitboard" on="frame"/>
@@ -1276,7 +1276,7 @@
         <!-- Phil start -->
         <!-- <connector id="connectCharacterInstanceFrameToRealizer" unique="true">
             <input class="vib.core.utilx.gui.CharacterInstanceFrame" lib_id="vib_utilx"/>
-			<output class="vib.core.behaviorrealizer.Realizer" lib_id="vib_behavior_realizer"/>           
+            <output class="vib.core.behaviorrealizer.Realizer" lib_id="vib_behavior_realizer"/>
             <connect from="input" method="setCharacter" to="output"/>
             <disconnect from="input" method="unsetCharacter" to="output"/>
         </connector> -->

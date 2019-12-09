@@ -102,9 +102,9 @@
                     <window h="178" visible="false" w="457" x="10" y="10"/>
                 </element>
                 <element h="70.0"
-                    id="Meaning Miner FML Receiver - 1571996864364-375"
-                    module="Meaning Miner FML Receiver"
-                    name="Meaning Miner FML Receiver" w="80.0" x="30.0" y="350.0">
+                    id="ActiveMQ Meaning Miner FML Receiver - 1571996864364-375"
+                    module="ActiveMQ Meaning Miner FML Receiver"
+                    name="ActiveMQ Meaning Miner FML Receiver" w="80.0" x="30.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
                     <parameter name="host" value="localhost"/>
@@ -114,8 +114,8 @@
                 <element h="70.0" id="Feedbacks - 1571996970388-168"
                     module="Feedbacks" name="Feedbacks" w="80.0"
                     x="130.0" y="350.0"/>
-                <element h="70.0" id="Feedbacks Sender - 1571997112492-640"
-                    module="Feedbacks Sender" name="Feedbacks Sender"
+                <element h="70.0" id="ActiveMQ Feedbacks Sender - 1571997112492-640"
+                    module="ActiveMQ Feedbacks Sender" name="ActiveMQ Feedbacks Sender"
                     w="80.0" x="240.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
@@ -145,7 +145,7 @@
             source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
         <connection connector="setTTS" source="TTS - 1544700939858-569" target="MaryTTS Client - 1544700946314-81"/>
         <connection connector="addFeedbackOutput"
-            source="Feedbacks - 1571996970388-168" target="Feedbacks Sender - 1571997112492-640"/>
+            source="Feedbacks - 1571996970388-168" target="ActiveMQ Feedbacks Sender - 1571997112492-640"/>
         <connection connector="addLogOutput"
             source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
@@ -177,6 +177,6 @@
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Meaning Miner FML Receiver - 1571996864364-375" target="Behavior Planner - 1544700734561-356"/>
+            source="ActiveMQ Meaning Miner FML Receiver - 1571996864364-375" target="Behavior Planner - 1544700734561-356"/>
     </connections>
 </modulated>

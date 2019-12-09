@@ -82,8 +82,8 @@
                     <parameter name="host" value="localhost"/>
                     <window h="170" visible="true" w="260" x="740" y="400"/>
                 </element>
-                <element h="70.0" id="BML Receiver - 1554117362832-889"
-                    module="BML Receiver" name="BML Receiver #1"
+                <element h="70.0" id="ActiveMQ BML Receiver - 1554117362832-889"
+                    module="ActiveMQ BML Receiver" name="ActiveMQ BML Receiver #1"
                     w="80.0" x="160.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
@@ -95,9 +95,9 @@
                     module="Feedbacks" name="Feedbacks #1" w="80.0"
                     x="240.0" y="30.0"/>
                 <element h="70.0"
-                    id="Meaning Miner FML Receiver - 1554132728732-441"
-                    module="Meaning Miner FML Receiver"
-                    name="Meaning Miner FML Receiver #1" w="80.0"
+                    id="ActiveMQ Meaning Miner FML Receiver - 1554132728732-441"
+                    module="ActiveMQ Meaning Miner FML Receiver"
+                    name="ActiveMQ Meaning Miner FML Receiver #1" w="80.0"
                     x="0.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
@@ -106,8 +106,8 @@
                     <window h="221" visible="false" w="240" x="0" y="0"/>
                 </element>
                 <element h="50.0"
-                    id="Feedbacks Sender - 1554132744307-154"
-                    module="Feedbacks Sender" name="Feedbacks Sender #1"
+                    id="ActiveMQ Feedbacks Sender - 1554132744307-154"
+                    module="ActiveMQ Feedbacks Sender" name="ActiveMQ Feedbacks Sender #1"
                     w="80.0" x="340.0" y="30.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
@@ -167,9 +167,9 @@
                     <window h="100" visible="false" w="520" x="0" y="0"/>
                 </element>
                 <element h="70.0"
-                    id="Meaning Miner FML Receiver - 1571048164657-48"
-                    module="Meaning Miner FML Receiver"
-                    name="Meaning Miner FML Receiver #2" w="80.0"
+                    id="ActiveMQ Meaning Miner FML Receiver - 1571048164657-48"
+                    module="ActiveMQ Meaning Miner FML Receiver"
+                    name="ActiveMQ Meaning Miner FML Receiver #2" w="80.0"
                     x="0.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
@@ -177,8 +177,8 @@
                     <parameter name="topic" value="COUCH/FML/REQUEST/COUCH_LAURA"/>
                     <window h="221" visible="false" w="240" x="0" y="0"/>
                 </element>
-                <element h="70.0" id="BML Receiver - 1571048178752-311"
-                    module="BML Receiver" name="BML Receiver #2"
+                <element h="70.0" id="ActiveMQ BML Receiver - 1571048178752-311"
+                    module="ActiveMQ BML Receiver" name="ActiveMQ BML Receiver #2"
                     w="80.0" x="160.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
@@ -190,8 +190,8 @@
                     module="Feedbacks" name="Feedbacks #2" w="80.0"
                     x="240.0" y="30.0"/>
                 <element h="50.0"
-                    id="Feedbacks Sender - 1571048330040-648"
-                    module="Feedbacks Sender" name="Feedbacks Sender #2"
+                    id="ActiveMQ Feedbacks Sender - 1571048330040-648"
+                    module="ActiveMQ Feedbacks Sender" name="ActiveMQ Feedbacks Sender #2"
                     w="80.0" x="340.0" y="30.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
@@ -392,7 +392,7 @@
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"
             source="Body Head Noise - 1574959329659-302" target="MPEG4 Animatable - 1571048631079-434"/>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="BML Receiver - 1571048178752-311" target="Behavior Realizer - 1571048038311-347"/>
+            source="ActiveMQ BML Receiver - 1571048178752-311" target="Behavior Realizer - 1571048038311-347"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="Lip Blender - 1554807347732-921" target="MPEG4 Animatable - 1545228808979-301"/>
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
@@ -401,7 +401,7 @@
         <connection connector="addLogOutput"
             source="Logs - 1545228847405-168" target="Log Frame - 1545228852107-958"/>
         <connection connector="addFeedbackOutput"
-            source="Feedbacks - 1554132717338-53" target="Feedbacks Sender - 1554132744307-154"/>
+            source="Feedbacks - 1554132717338-53" target="ActiveMQ Feedbacks Sender - 1554132744307-154"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Behavior Planner - 1571048020905-618" target="Behavior Realizer - 1571048038311-347"/>
         <connection connector="SignalEmitterToSignalPerformer"
@@ -411,7 +411,7 @@
         <connection connector="SignalEmitterToSignalPerformer"
             source="Behavior Planner - 1545228689924-565" target="Feedbacks - 1554132717338-53"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Meaning Miner FML Receiver - 1571048164657-48" target="Behavior Planner - 1571048020905-618"/>
+            source="ActiveMQ Meaning Miner FML Receiver - 1571048164657-48" target="Behavior Planner - 1571048020905-618"/>
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"
             source="Animation Keyframe Performer - 1545228717780-228" target="MPEG4 Animatable - 1545228808979-301"/>
         <connection connector="BAPFramesEmitterToBAPFramesPerformer"
@@ -423,9 +423,9 @@
         <connection connector="FAPFramesEmitterToFAPFramesPerformer"
             source="Simple AU Performer - 1571049043503-295" target="Lip Blender - 1571049000695-539"/>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="BML Receiver - 1554117362832-889" target="Behavior Realizer - 1545228702171-304"/>
+            source="ActiveMQ BML Receiver - 1554117362832-889" target="Behavior Realizer - 1545228702171-304"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Meaning Miner FML Receiver - 1554132728732-441" target="Behavior Planner - 1545228689924-565"/>
+            source="ActiveMQ Meaning Miner FML Receiver - 1554132728732-441" target="Behavior Planner - 1545228689924-565"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4 Animatable - 1571048631079-434" target="Environment - 1545228639037-145"/>
         <connection connector="SignalEmitterToSignalPerformer"
@@ -433,7 +433,7 @@
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="Thrift Command Receiver - 1571227173930-849" target="Behavior Planner - 1571048020905-618"/>
         <connection connector="addFeedbackOutput"
-            source="Feedbacks - 1571048300087-491" target="Feedbacks Sender - 1571048330040-648"/>
+            source="Feedbacks - 1571048300087-491" target="ActiveMQ Feedbacks Sender - 1571048330040-648"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554807323260-420" target="MPEG4 Animatable - 1545228808979-301"/>
         <connection connector="AudioEmitter To AudioPerformer"

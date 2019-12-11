@@ -1003,7 +1003,6 @@
         <lib id="ext_jackson-annotations" path="./Common/Lib/External/jackson/jackson-annotations-2.9.9.jar"/>
         <lib id="ext_jackson-core" path="./Common/Lib/External/jackson/jackson-core-2.9.9.jar"/>
         <lib id="ext_jackson-databind" path="./Common/Lib/External/jackson/jackson-databind-2.9.9.3.jar"/>
-        <lib id="ext_jcommon" path="./Common/Lib/External/jcommon-1.0.23.jar"/>
         <lib id="ext_jwiwordnet" path="./Common/Lib/External/edu.mit.jwi_2.4.0_jdk.jar">
             <needs path="./Common/Data/wordnet30/dict/data.adj"/>
             <needs path="./Common/Data/wordnet30/dict/data.adv"/>

@@ -20,7 +20,7 @@
                     id="BML File Reader - 1545228678860-536"
                     module="BML File Reader" name="BML File Reader #1"
                     w="80.0" x="130.0" y="30.0">
-                    <window h="100" visible="false" w="520" x="0" y="0"/>
+                    <window h="100" visible="true" w="520" x="740" y="400"/>
                 </element>
                 <element h="230.0"
                     id="Behavior Planner - 1545228689924-565"
@@ -80,7 +80,7 @@
                     name="Thrift Command Receiver #1" w="80.0" x="80.0" y="350.0">
                     <parameter name="port" value="9911"/>
                     <parameter name="host" value="localhost"/>
-                    <window h="170" visible="true" w="260" x="740" y="400"/>
+                    <window h="170" visible="true" w="260" x="740" y="500"/>
                 </element>
                 <element h="70.0" id="ActiveMQ BML Receiver - 1554117362832-889"
                     module="ActiveMQ BML Receiver" name="ActiveMQ BML Receiver #1"
@@ -132,7 +132,7 @@
                     id="Body Head Noise - 1574959313203-398"
                     module="Body Head Noise" name="Body Head Noise #1"
                     w="80.0" x="540.0" y="100.0">
-                    <window h="215" visible="true" w="520" x="740" y="740"/>
+                    <window h="215" visible="true" w="520" x="740" y="840"/>
                 </element>
             </element>
             <element h="450.0"
@@ -164,7 +164,7 @@
                     id="BML File Reader - 1571048124960-179"
                     module="BML File Reader" name="BML File Reader #2"
                     w="80.0" x="130.0" y="30.0">
-                    <window h="100" visible="false" w="520" x="0" y="0"/>
+                    <window h="100" visible="true" w="520" x="1270" y="400"/>
                 </element>
                 <element h="70.0"
                     id="ActiveMQ Meaning Miner FML Receiver - 1571048164657-48"
@@ -258,13 +258,13 @@
                     name="Thrift Command Receiver #2" w="80.0" x="80.0" y="350.0">
                     <parameter name="port" value="8911"/>
                     <parameter name="host" value="localhost"/>
-                    <window h="170" visible="true" w="260" x="1270" y="400"/>
+                    <window h="170" visible="true" w="260" x="1270" y="500"/>
                 </element>
                 <element h="50.0"
                     id="Body Head Noise - 1574959329659-302"
                     module="Body Head Noise" name="Body Head Noise #2"
                     w="80.0" x="540.0" y="100.0">
-                    <window h="215" visible="true" w="520" x="1270" y="740"/>
+                    <window h="215" visible="true" w="520" x="1270" y="840"/>
                 </element>
             </element>
         </element>
@@ -291,7 +291,7 @@
             w="80.0" x="290.0" y="490.0">
             <parameter name="port" value="9090"/>
             <parameter name="host" value="localhost"/>
-            <window h="170" visible="true" w="260" x="740" y="570"/>
+            <window h="170" visible="true" w="260" x="740" y="670"/>
         </element>
         <element h="70.0" id="Thrift Audio Sender - 1551782070029-170"
             module="Thrift Audio Sender" name="Thrift Audio Sender #2"
@@ -299,28 +299,28 @@
             <parameter name="sendAudioBuffer" value="true"/>
             <parameter name="port" value="8080"/>
             <parameter name="host" value="localhost"/>
-            <window h="170" visible="true" w="260" x="1530" y="400"/>
+            <window h="170" visible="true" w="260" x="1530" y="500"/>
         </element>
         <element h="70.0" id="Thrift BAP Sender - 1553697836829-985"
             module="Thrift BAP Sender" name="Thrift BAP Sender #1"
             w="80.0" x="440.0" y="490.0">
             <parameter name="port" value="9070"/>
             <parameter name="host" value="localhost"/>
-            <window h="170" visible="true" w="260" x="1000" y="570"/>
+            <window h="170" visible="true" w="260" x="1000" y="670"/>
         </element>
         <element h="70.0" id="Thrift BAP Sender - 1571048800983-957"
             module="Thrift BAP Sender" name="Thrift BAP Sender #2"
             w="80.0" x="1120.0" y="490.0">
             <parameter name="port" value="8070"/>
             <parameter name="host" value="localhost"/>
-            <window h="170" visible="true" w="260" x="1530" y="570"/>
+            <window h="170" visible="true" w="260" x="1530" y="670"/>
         </element>
         <element h="70.0" id="Thrift FAP Sender - 1571048942447-446"
             module="Thrift FAP Sender" name="Thrift FAP Sender #2"
             w="80.0" x="970.0" y="490.0">
             <parameter name="port" value="8090"/>
             <parameter name="host" value="localhost"/>
-            <window h="170" visible="true" w="260" x="1270" y="570"/>
+            <window h="170" visible="true" w="260" x="1270" y="670"/>
         </element>
         <element h="70.0" id="Thrift Audio Sender - 1571137893257-728"
             module="Thrift Audio Sender" name="Thrift Audio Sender #1"
@@ -328,7 +328,7 @@
             <parameter name="sendAudioBuffer" value="true"/>
             <parameter name="port" value="9080"/>
             <parameter name="host" value="localhost"/>
-            <window h="170" visible="true" w="260" x="1000" y="400"/>
+            <window h="170" visible="true" w="260" x="1000" y="500"/>
         </element>
         <element h="50.0" id="Environment Editor - 1574255848859-867"
             module="Environment Editor" name="Environment Editor"

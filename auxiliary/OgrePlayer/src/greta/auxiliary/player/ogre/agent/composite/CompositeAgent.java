@@ -19,17 +19,17 @@ package greta.auxiliary.player.ogre.agent.composite;
 
 import greta.auxiliary.player.ogre.Ogre;
 import greta.auxiliary.player.ogre.agent.MPEG4Agent;
+import greta.core.animation.mpeg4.bap.BAPFrame;
+import greta.core.animation.mpeg4.fap.FAPFrame;
+import greta.core.util.math.Vec3d;
+import java.util.Map;
+import java.util.Map.Entry;
 import vib.auxiliary.player.ogre.natives.AxisAlignedBox;
 import vib.auxiliary.player.ogre.natives.Entity;
 import vib.auxiliary.player.ogre.natives.Quaternion;
 import vib.auxiliary.player.ogre.natives.SceneManager;
 import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Vector3;
-import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.fap.FAPFrame;
-import greta.core.util.math.Vec3d;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /**
  *

@@ -19,6 +19,12 @@ package greta.auxiliary.player.ogre.agent.composite;
 
 import greta.auxiliary.player.ogre.Ogre;
 import greta.auxiliary.player.ogre.OgreThread;
+import greta.core.animation.mpeg4.fap.FAP;
+import greta.core.animation.mpeg4.fap.FAPFrame;
+import greta.core.animation.mpeg4.fap.FAPType;
+import greta.core.util.IniManager;
+import greta.core.util.log.Logs;
+import java.util.List;
 import vib.auxiliary.player.ogre.natives.AnimationState;
 import vib.auxiliary.player.ogre.natives.Entity;
 import vib.auxiliary.player.ogre.natives.Mesh;
@@ -26,12 +32,6 @@ import vib.auxiliary.player.ogre.natives.SceneManager;
 import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.VertexAnimationTrack;
 import vib.auxiliary.player.ogre.natives.VertexPoseKeyFrame;
-import greta.core.animation.mpeg4.fap.FAP;
-import greta.core.animation.mpeg4.fap.FAPFrame;
-import greta.core.animation.mpeg4.fap.FAPType;
-import greta.core.util.IniManager;
-import greta.core.util.log.Logs;
-import java.util.List;
 
 /**
  *

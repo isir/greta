@@ -18,11 +18,6 @@
 package greta.auxiliary.player.ogre;
 
 import greta.auxiliary.player.ogre.capture.Capturable;
-import vib.auxiliary.player.ogre.natives.PixelBox;
-import vib.auxiliary.player.ogre.natives.RenderWindow;
-import vib.auxiliary.player.ogre.natives.SceneManager;
-import vib.auxiliary.player.ogre.natives.SceneNode;
-import vib.auxiliary.player.ogre.natives.Vector3;
 import greta.core.util.audio.AudioOutput;
 import greta.core.util.environment.Environment;
 import greta.core.util.environment.Leaf;
@@ -30,6 +25,11 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.HierarchyEvent;
 import java.awt.event.HierarchyListener;
+import vib.auxiliary.player.ogre.natives.PixelBox;
+import vib.auxiliary.player.ogre.natives.RenderWindow;
+import vib.auxiliary.player.ogre.natives.SceneManager;
+import vib.auxiliary.player.ogre.natives.SceneNode;
+import vib.auxiliary.player.ogre.natives.Vector3;
 
 /**
  * Display the Ogre's rendering in an AWT {@code Component}

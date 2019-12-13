@@ -19,14 +19,14 @@ package greta.auxiliary.player.ogre.agent.composite;
 
 import greta.auxiliary.player.ogre.Ogre;
 import greta.auxiliary.player.ogre.OgreThread;
-import vib.auxiliary.player.ogre.natives.Bone;
-import vib.auxiliary.player.ogre.natives.Node;
-import vib.auxiliary.player.ogre.natives.SkeletonInstance;
 import greta.core.animation.mpeg4.bap.BAP;
 import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.util.math.Vec3d;
+import vib.auxiliary.player.ogre.natives.Bone;
+import vib.auxiliary.player.ogre.natives.Node;
+import vib.auxiliary.player.ogre.natives.SkeletonInstance;
 
 /**
  *

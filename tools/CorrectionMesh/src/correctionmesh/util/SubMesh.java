@@ -17,6 +17,9 @@
  */
 package correctionmesh.util;
 
+import greta.core.util.math.Functions;
+import greta.core.util.math.Quaternion;
+import greta.core.util.math.Vec3d;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -32,9 +35,6 @@ import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
-import vib.core.util.math.Functions;
-import vib.core.util.math.Quaternion;
-import vib.core.util.math.Vec3d;
 
 /**
  *

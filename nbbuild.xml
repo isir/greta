@@ -65,7 +65,7 @@
         </target>
 
         <!-- Macro that manifest file without moving lib in ${dist.dir}/lib -->
-        <target name="-vib.pack.macro" depends="-relmap.macro">
+        <target name="-greta.pack.macro" depends="-relmap.macro">
             <macrodef name="gretaPack">
                 <attribute default="${manifest.file}" name="manifest"/>
                 <element name="customize" optional="true"/>
@@ -135,7 +135,7 @@
         because Netbeans moves librairies in a "lib" directory
         and we don't want to move them
         and we want to make the good path in the manifest file -->
-        <target depends="init,compile,-pre-pre-jar,-pre-jar,-do-jar-create-manifest,-do-jar-copy-manifest,-do-jar-set-mainclass,-do-jar-set-profile,-do-jar-set-splashscreen,-vib.pack.macro" if="do.archive+manifest.available" name="-do-jar-with-libraries">
+        <target depends="init,compile,-pre-pre-jar,-pre-jar,-do-jar-create-manifest,-do-jar-copy-manifest,-do-jar-set-mainclass,-do-jar-set-profile,-do-jar-set-splashscreen,-greta.pack.macro" if="do.archive+manifest.available" name="-do-jar-with-libraries">
             <gretaPack manifest="${tmp.manifest.file}"/>
         </target>
 

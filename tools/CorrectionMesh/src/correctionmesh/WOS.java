@@ -22,7 +22,7 @@ import correctionmesh.util.OgreXML;
 import correctionmesh.util.SubMesh;
 import correctionmesh.util.Vertex;
 import correctionmesh.util.VertexBuffer;
-import vib.core.util.xml.XMLTree;
+import greta.core.util.xml.XMLTree;
 
 /**
  *

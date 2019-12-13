@@ -17,8 +17,8 @@
  */
 package correctionmesh.util;
 
+import greta.core.util.math.Vec3d;
 import java.util.Comparator;
-import vib.core.util.math.Vec3d;
 
 /**
  *

@@ -17,14 +17,14 @@
  */
 package correctionmesh.util;
 
+import greta.core.util.environment.Node;
+import greta.core.util.math.Quaternion;
+import greta.core.util.math.Vec3d;
+import greta.core.util.xml.XML;
+import greta.core.util.xml.XMLTree;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import vib.core.util.environment.Node;
-import vib.core.util.math.Quaternion;
-import vib.core.util.math.Vec3d;
-import vib.core.util.xml.XML;
-import vib.core.util.xml.XMLTree;
 
 /**
  *

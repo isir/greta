@@ -19,8 +19,8 @@ package correctionmesh;
 
 import correctionmesh.util.Mesh;
 import correctionmesh.util.OgreXML;
-import vib.core.util.xml.XML;
-import vib.core.util.xml.XMLParser;
+import greta.core.util.xml.XML;
+import greta.core.util.xml.XMLParser;
 
 /**
  *

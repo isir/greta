@@ -19,13 +19,13 @@ package correctionmesh;
 
 import correctionmesh.util.Bone;
 import correctionmesh.util.OgreXML;
+import greta.core.util.environment.Node;
+import greta.core.util.math.Quaternion;
+import greta.core.util.math.Vec3d;
+import greta.core.util.xml.XML;
+import greta.core.util.xml.XMLParser;
+import greta.core.util.xml.XMLTree;
 import java.util.ArrayList;
-import vib.core.util.environment.Node;
-import vib.core.util.math.Quaternion;
-import vib.core.util.math.Vec3d;
-import vib.core.util.xml.XML;
-import vib.core.util.xml.XMLParser;
-import vib.core.util.xml.XMLTree;
 
 /**
  *
@@ -41,7 +41,7 @@ public class AutodeskSkeletonToAnimationSkeleton {
         parser.setValidating(false);
         Bone skel = OgreXML.readSkeleton(parser.parseFile(original));
 
-        //T-pose to N-pose - should be the same as in vib.auxiliary.player.ogre.agent.autodesk.AutodeskAgent constructor
+        //T-pose to N-pose - should be the same as in greta.auxiliary.player.ogre.agent.autodesk.AutodeskAgent constructor
         double clavC = Math.PI/20;
         Quaternion rclavC = new Quaternion(new Vec3d(0, -1, 0), clavC);
         Quaternion lclavC = new Quaternion(new Vec3d(0, 1, 0), clavC);

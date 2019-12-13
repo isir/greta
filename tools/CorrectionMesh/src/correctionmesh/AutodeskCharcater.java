@@ -21,6 +21,10 @@ import correctionmesh.util.Bone;
 import correctionmesh.util.Mesh;
 import correctionmesh.util.OgreXML;
 import correctionmesh.util.SubMesh;
+import greta.core.util.math.Quaternion;
+import greta.core.util.math.Vec3d;
+import greta.core.util.xml.XML;
+import greta.core.util.xml.XMLParser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
@@ -28,10 +32,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.List;
-import vib.core.util.math.Quaternion;
-import vib.core.util.math.Vec3d;
-import vib.core.util.xml.XML;
-import vib.core.util.xml.XMLParser;
 
 /**
  *

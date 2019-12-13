@@ -17,10 +17,10 @@
  */
 package correctionmesh.util;
 
-import vib.core.util.environment.Node;
-import vib.core.util.environment.TreeNode;
-import vib.core.util.math.Quaternion;
-import vib.core.util.math.Vec3d;
+import greta.core.util.environment.Node;
+import greta.core.util.environment.TreeNode;
+import greta.core.util.math.Quaternion;
+import greta.core.util.math.Vec3d;
 
 /**
  *

@@ -21,11 +21,11 @@ import correctionmesh.util.Mesh;
 import correctionmesh.util.OgreXML;
 import correctionmesh.util.SubMesh;
 import correctionmesh.util.Vertex;
+import greta.core.util.math.Quaternion;
+import greta.core.util.math.Vec3d;
+import greta.core.util.xml.XML;
+import greta.core.util.xml.XMLParser;
 import java.util.ArrayList;
-import vib.core.util.math.Quaternion;
-import vib.core.util.math.Vec3d;
-import vib.core.util.xml.XML;
-import vib.core.util.xml.XMLParser;
 
 /**
  *

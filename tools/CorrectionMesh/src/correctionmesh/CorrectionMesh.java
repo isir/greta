@@ -17,7 +17,7 @@
  */
 package correctionmesh;
 
-import vib.core.util.xml.XMLTree;
+import greta.core.util.xml.XMLTree;
 
 /**
  *

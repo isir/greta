@@ -19,11 +19,6 @@ package greta.auxiliary.player.ogre.agent.autodesk;
 
 import greta.auxiliary.player.ogre.Ogre;
 import greta.auxiliary.player.ogre.agent.MPEG4Agent;
-import vib.auxiliary.player.ogre.natives.Bone;
-import vib.auxiliary.player.ogre.natives.Entity;
-import vib.auxiliary.player.ogre.natives.SceneManager;
-import vib.auxiliary.player.ogre.natives.SceneNode;
-import vib.auxiliary.player.ogre.natives.SkeletonInstance;
 import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
@@ -35,6 +30,11 @@ import greta.core.util.math.Quaternion;
 import greta.core.util.math.Vec3d;
 import java.util.ArrayList;
 import java.util.List;
+import vib.auxiliary.player.ogre.natives.Bone;
+import vib.auxiliary.player.ogre.natives.Entity;
+import vib.auxiliary.player.ogre.natives.SceneManager;
+import vib.auxiliary.player.ogre.natives.SceneNode;
+import vib.auxiliary.player.ogre.natives.SkeletonInstance;
 
 /**
  *

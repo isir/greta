@@ -20,14 +20,14 @@ package greta.auxiliary.player.ogre.agent;
 import greta.auxiliary.player.ogre.Ogre;
 import greta.auxiliary.player.ogre.agent.autodesk.AutodeskAgent;
 import greta.auxiliary.player.ogre.agent.composite.CompositeAgent;
-import vib.auxiliary.player.ogre.natives.Quaternion;
-import vib.auxiliary.player.ogre.natives.SceneManager;
-import vib.auxiliary.player.ogre.natives.SceneNode;
-import vib.auxiliary.player.ogre.natives.Vector3;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLParser;
 import greta.core.util.xml.XMLTree;
 import java.util.HashMap;
+import vib.auxiliary.player.ogre.natives.Quaternion;
+import vib.auxiliary.player.ogre.natives.SceneManager;
+import vib.auxiliary.player.ogre.natives.SceneNode;
+import vib.auxiliary.player.ogre.natives.Vector3;
 
 /**
  *

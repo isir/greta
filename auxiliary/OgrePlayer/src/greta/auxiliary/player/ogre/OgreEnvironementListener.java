@@ -19,16 +19,6 @@ package greta.auxiliary.player.ogre;
 
 import greta.auxiliary.player.ogre.agent.AgentFactory;
 import greta.auxiliary.player.ogre.agent.MPEG4Agent;
-import vib.auxiliary.player.ogre.natives.ColourValue;
-import vib.auxiliary.player.ogre.natives.Entity;
-import vib.auxiliary.player.ogre.natives.Light;
-import vib.auxiliary.player.ogre.natives.Material;
-import vib.auxiliary.player.ogre.natives.MaterialManager;
-import vib.auxiliary.player.ogre.natives.MovableObject;
-import vib.auxiliary.player.ogre.natives.SceneManager;
-import vib.auxiliary.player.ogre.natives.SceneManager.PrefabType;
-import vib.auxiliary.player.ogre.natives.SceneNode;
-import vib.auxiliary.player.ogre.natives.Vector3;
 import greta.core.animation.mpeg4.MPEG4Animatable;
 import greta.core.util.IniManager;
 import greta.core.util.environment.Animatable;
@@ -43,6 +33,16 @@ import greta.core.util.environment.TreeNode;
 import greta.core.util.log.Logs;
 import java.util.ArrayList;
 import java.util.ListIterator;
+import vib.auxiliary.player.ogre.natives.ColourValue;
+import vib.auxiliary.player.ogre.natives.Entity;
+import vib.auxiliary.player.ogre.natives.Light;
+import vib.auxiliary.player.ogre.natives.Material;
+import vib.auxiliary.player.ogre.natives.MaterialManager;
+import vib.auxiliary.player.ogre.natives.MovableObject;
+import vib.auxiliary.player.ogre.natives.SceneManager;
+import vib.auxiliary.player.ogre.natives.SceneManager.PrefabType;
+import vib.auxiliary.player.ogre.natives.SceneNode;
+import vib.auxiliary.player.ogre.natives.Vector3;
 
 /**
  *

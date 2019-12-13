@@ -18,11 +18,11 @@
 package greta.auxiliary.player.ogre.agent.autodesk;
 
 import greta.auxiliary.player.ogre.Ogre;
-import vib.auxiliary.player.ogre.natives.Entity;
 import greta.core.animation.mpeg4.fap.FAP;
 import greta.core.animation.mpeg4.fap.FAPFrame;
 import greta.core.util.log.Logs;
 import java.util.List;
+import vib.auxiliary.player.ogre.natives.Entity;
 
 /**
  *

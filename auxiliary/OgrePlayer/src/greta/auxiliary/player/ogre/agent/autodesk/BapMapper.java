@@ -18,12 +18,12 @@
 package greta.auxiliary.player.ogre.agent.autodesk;
 
 import greta.auxiliary.player.ogre.Ogre;
-import vib.auxiliary.player.ogre.natives.Bone;
-import vib.auxiliary.player.ogre.natives.Node;
 import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.util.math.Quaternion;
 import greta.core.util.math.Vec3d;
+import vib.auxiliary.player.ogre.natives.Bone;
+import vib.auxiliary.player.ogre.natives.Node;
 
 /**
  *

@@ -17,13 +17,6 @@
  */
 package greta.auxiliary.player.ogre;
 
-import vib.auxiliary.player.ogre.natives.Entity;
-import vib.auxiliary.player.ogre.natives.Ray;
-import vib.auxiliary.player.ogre.natives.RaySceneQuery;
-import vib.auxiliary.player.ogre.natives.RaySceneQueryResult;
-import vib.auxiliary.player.ogre.natives.SceneManager;
-import vib.auxiliary.player.ogre.natives.SceneNode;
-import vib.auxiliary.player.ogre.natives.Vector3;
 import greta.core.util.IniManager;
 import greta.core.util.math.Vec3d;
 import java.awt.event.InputEvent;
@@ -32,6 +25,13 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+import vib.auxiliary.player.ogre.natives.Entity;
+import vib.auxiliary.player.ogre.natives.Ray;
+import vib.auxiliary.player.ogre.natives.RaySceneQuery;
+import vib.auxiliary.player.ogre.natives.RaySceneQueryResult;
+import vib.auxiliary.player.ogre.natives.SceneManager;
+import vib.auxiliary.player.ogre.natives.SceneNode;
+import vib.auxiliary.player.ogre.natives.Vector3;
 
 /**
  *

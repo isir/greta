@@ -17,13 +17,13 @@
  */
 package greta.auxiliary.player.ogre;
 
+import greta.core.util.audio.Mixer;
+import greta.core.util.environment.Environment;
+import greta.core.util.math.Vec3d;
 import vib.auxiliary.player.ogre.natives.Quaternion;
 import vib.auxiliary.player.ogre.natives.SceneManager;
 import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Vector3;
-import greta.core.util.audio.Mixer;
-import greta.core.util.environment.Environment;
-import greta.core.util.math.Vec3d;
 
 /**
  * This class is an helper to manipulate the cameras from Ogre.<br/>

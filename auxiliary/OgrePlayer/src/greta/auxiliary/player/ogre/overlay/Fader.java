@@ -19,11 +19,11 @@ package greta.auxiliary.player.ogre.overlay;
 
 import greta.auxiliary.player.ogre.Ogre;
 import greta.auxiliary.player.ogre.OgreThread;
-import vib.auxiliary.player.ogre.natives.SceneManager;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import vib.auxiliary.player.ogre.natives.SceneManager;
 
 /**
  * Class for performing Fades (fade-in and fade-out effects)

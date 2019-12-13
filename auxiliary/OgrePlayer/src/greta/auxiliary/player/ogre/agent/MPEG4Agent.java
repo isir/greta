@@ -19,16 +19,16 @@ package greta.auxiliary.player.ogre.agent;
 
 import greta.auxiliary.player.ogre.Ogre;
 import greta.auxiliary.player.ogre.OgreThread;
-import vib.auxiliary.player.ogre.natives.Entity;
-import vib.auxiliary.player.ogre.natives.Quaternion;
-import vib.auxiliary.player.ogre.natives.SceneNode;
-import vib.auxiliary.player.ogre.natives.Vector3;
 import greta.core.animation.mpeg4.MPEG4Animatable;
 import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.fap.FAPFrame;
 import greta.core.util.IniManager;
 import greta.core.util.time.Timer;
+import vib.auxiliary.player.ogre.natives.Entity;
+import vib.auxiliary.player.ogre.natives.Quaternion;
+import vib.auxiliary.player.ogre.natives.SceneNode;
+import vib.auxiliary.player.ogre.natives.Vector3;
 
 /**
  *

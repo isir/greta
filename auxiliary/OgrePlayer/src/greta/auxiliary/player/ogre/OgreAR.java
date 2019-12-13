@@ -17,8 +17,8 @@
  */
 package greta.auxiliary.player.ogre;
 
-import vib.auxiliary.player.ogre.natives.SceneNode;
 import greta.core.util.audio.AudioOutput;
+import vib.auxiliary.player.ogre.natives.SceneNode;
 
 /**
  *

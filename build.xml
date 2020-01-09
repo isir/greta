@@ -19,76 +19,51 @@
     </target>
 
     <target name="clean">
-        <ant target="clean" useNativeBasedir="true" dir="application/Modular"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/ActiveMQ"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/AnimationDynamics"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/BVHMocap"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/ConversationalGaze"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/EmotionML"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/EnvironmentManager"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/FMLAnnotator"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/MeaningMiner"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/OgrePlayer"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/PlanCapture"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/SocialParameters"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/SSI"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/Thrift"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/TTS/CereProc"/>
-        <ant target="clean" useNativeBasedir="true" dir="auxiliary/TTS/MaryTTS"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/AnimationCore"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/BehaviorPlanner"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/BehaviorRealizer"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/BodyAnimationPerformer"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/Feedbacks"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/GestureAnimation"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/Intentions"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/Interruptions"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/LipModel"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/ListenerIntentPlanner"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/MPEG4"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/Signals"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/SubjectPlanner"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/Util"/>
-        <ant target="clean" useNativeBasedir="true" dir="core/Utilx"/>
-        <ant target="clean" useNativeBasedir="true" dir="tools/Editors"/>
-        <ant target="clean" useNativeBasedir="true" dir="tools/GestureAnimationEditor"/>
-        <ant target="clean" useNativeBasedir="true" dir="tools/VideoCapture"/>
+        <antcall target="-applyAction">
+            <param name="action" value="clean"/>
+        </antcall>
     </target>
 
     <target name="build">
-        <ant target="jar" useNativeBasedir="true" dir="application/Modular"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/ActiveMQ"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/AnimationDynamics"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/BVHMocap"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/ConversationalGaze"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/EmotionML"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/EnvironmentManager"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/FMLAnnotator"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/MeaningMiner"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/OgrePlayer"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/PlanCapture"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/SocialParameters"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/SSI"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/Thrift"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/TTS/CereProc"/>
-        <ant target="jar" useNativeBasedir="true" dir="auxiliary/TTS/MaryTTS"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/AnimationCore"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/BehaviorPlanner"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/BehaviorRealizer"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/BodyAnimationPerformer"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/Feedbacks"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/GestureAnimation"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/Intentions"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/Interruptions"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/LipModel"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/ListenerIntentPlanner"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/MPEG4"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/Signals"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/SubjectPlanner"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/Util"/>
-        <ant target="jar" useNativeBasedir="true" dir="core/Utilx"/>
-        <ant target="jar" useNativeBasedir="true" dir="tools/Editors"/>
-        <ant target="jar" useNativeBasedir="true" dir="tools/GestureAnimationEditor"/>
-        <ant target="jar" useNativeBasedir="true" dir="tools/VideoCapture"/>
+        <antcall target="-applyAction">
+            <param name="action" value="jar"/>
+        </antcall>
+    </target>
+
+    <target name="-applyAction">
+        <ant target="${action}" useNativeBasedir="true" dir="application/Modular"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/ActiveMQ"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/AnimationDynamics"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/BVHMocap"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/ConversationalGaze"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/EmotionML"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/EnvironmentManager"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/FMLAnnotator"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/MeaningMiner"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/OgrePlayer"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/PlanCapture"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SocialParameters"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SSI"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/Thrift"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/TTS/CereProc"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/TTS/MaryTTS"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/AnimationCore"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/BehaviorPlanner"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/BehaviorRealizer"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/BodyAnimationPerformer"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/Feedbacks"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/GestureAnimation"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/Intentions"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/Interruptions"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/LipModel"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/ListenerIntentPlanner"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/MPEG4"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/Signals"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/SubjectPlanner"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/Util"/>
+        <ant target="${action}" useNativeBasedir="true" dir="core/Utilx"/>
+        <ant target="${action}" useNativeBasedir="true" dir="tools/Editors"/>
+        <ant target="${action}" useNativeBasedir="true" dir="tools/GestureAnimationEditor"/>
+        <ant target="${action}" useNativeBasedir="true" dir="tools/VideoCapture"/>
     </target>
 </project>

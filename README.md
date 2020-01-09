@@ -17,14 +17,14 @@ Therefore, some configuration is required once you retrieve the source files of 
 # Quick start
 1) Clone the repository to retrieve all files from the Greta Projects.
 2) Greta is composed of several Java projects, you need to open them in your favorite Java IDE and to build them.
-3) Go to the folder "\bin\Player\Lib\External\{your platform}\" . You need to edit the plugins configuration file and change the PluginFolder variable so it uses the absolute path (starting from "C:/...") instead of the relative path. By default (you can edit this in the configuration file "{Greta}\bin\Greta.ini"), Greta uses openGL so you should edit the Plugins_OpenGL.cfg.
+3) Go to the folder `<GRETA_DIR>/bin/Player/Lib/External/{your platform}/`. You need to edit the plugins configuration file and change the PluginFolder variable so it uses the absolute path (starting from `C:/...`) instead of the relative path. By default (you can edit this in the configuration file `<GRETA_DIR>/bin/Greta.ini`), Greta uses openGL so you should edit the Plugins_OpenGL.cfg.
 4) 2 Speech Synthesizers are compatible with Greta so far, MaryTTS and CereProc.
-If you plan on using CereProc, you need to acquire a license and place the voices and their respective license files in the "bin\Common\Data\CereProc" folder. 
+If you plan on using CereProc, you need to acquire a license and place the voices and their respective license files in the `<GRETA_DIR>/bin/Common/Data/CereProc/` folder. 
 If you plan on using MaryTTS, you need to:
   * First download  [MaryTTS](http://mary.dfki.de/);
-  * run ".\marytts-5.2\bin\marytts-component-installer" and download the voices after checking in the character .ini files (go to the folder ".\bin\Common\Data\characters") which voices are used;
-  * MaryTTS server running (".\marytts-5.2\bin\marytts-server");
-  * Check if the address and the port number of your server are the same in the file "{Greta}\bin\Greta.ini". If they are different, change  the port number ("MARY_PORT =") in the file "{Greta}\bin\Greta.ini".
+  * run `<MARYTTS_DIR>/marytts-5.2/bin/marytts-component-installer` and download the voices after checking in the character .ini files (go to the folder `<GRETA_DIR>/bin/Common/Data/characters`) which voices are used;
+  * MaryTTS server running (`<MARYTTS_DIR>/marytts-5.2/bin/marytts-server`);
+  * Check if the address and the port number of your server are the same in the file `<GRETA_DIR>/bin/Greta.ini`. If they are different, change  the port number (`MARY_PORT = `) in the file `<GRETA_DIR>/bin/Greta.ini`.
 5) The main project (the runnable one) is called "Modular". You can now launch it. A blank window should appear from where you can choose File/Open to load a module configuration. 2 configurations are available, one that uses MaryTTS and another one that uses CereProc.
 6) The module FML File Reader allows you to launch an FML File and see the resulting animation.
 

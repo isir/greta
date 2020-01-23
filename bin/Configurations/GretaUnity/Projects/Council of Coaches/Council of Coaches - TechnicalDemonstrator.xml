@@ -2,7 +2,7 @@
 <modulated>
     <elements>
         <element h="510.0" id="Environment - 1545228639037-145"
-            module="Environment" name="Environment" w="1390.0" x="20.0" y="110.0">
+            module="Environment" name="Environment" w="1390.0" x="30.0" y="110.0">
             <element h="450.0"
                 id="Character Manager - 1545228650268-259"
                 module="Character Manager" name="Character Manager #1"
@@ -331,7 +331,7 @@
             <window h="170" visible="true" w="260" x="260" y="200"/>
         </element>
         <element h="510.0" id="Ogre Player - 1571853444753-284"
-            module="Ogre Player" name="Ogre Player" w="80.0" x="1440.0" y="110.0">
+            module="Ogre Player" name="Ogre Player" w="80.0" x="1450.0" y="110.0">
             <parameter name="posX" value="-0.30000001192092896"/>
             <parameter name="posY" value="0.699999988079071"/>
             <parameter name="posZ" value="5.0"/>

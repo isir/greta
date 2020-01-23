@@ -20,7 +20,7 @@
             <window h="435" visible="false" w="618" x="10" y="10"/>
         </element>
         <element h="490.0" id="Environment - 1544700713383-564"
-            module="Environment" name="Environment" w="1390.0" x="20.0" y="110.0">
+            module="Environment" name="Environment" w="1390.0" x="30.0" y="110.0">
             <element h="430.0" id="Character Manager - 1544701056241-381"
                 module="Character Manager" name="Character Manager #1"
                 w="650.0" x="30.0" y="30.0">
@@ -203,7 +203,7 @@
             </element>
         </element>
         <element h="490.0" id="Ogre Player - 1544700973529-249"
-            module="Ogre Player" name="Ogre Player" w="80.0" x="1440.0" y="110.0">
+            module="Ogre Player" name="Ogre Player" w="80.0" x="1450.0" y="110.0">
             <parameter name="posX" value="0.0"/>
             <parameter name="posY" value="1.5"/>
             <parameter name="posZ" value="1.3"/>

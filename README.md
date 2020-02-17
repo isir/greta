@@ -9,7 +9,8 @@ Welcome to the public repository of the Greta project.
 Greta is a virtual character engine that allows generating socio-emotional behaviors in order to build natural interactional scenario with human users.
 
 Greta is a Java modular software designed to run on Java 1.8 only and mainly on Windows, it is not ready for Java 1.9 yet.
-All parts of Greta are licensed under the GNU GPL v3.
+Most parts of Greta are licensed under the GNU LGPL v3 (the master branch of the GitHub repository).
+Some parts of Greta are licensed under the GNU GPL v3 (the gpl branch of the GitHub repository); so if you use this branch, be aware that Greta will become GNU GPL v3 at the same time.
 
 Greta depends on external software for Speech Synthesis, CereProc or [MaryTTS](http://mary.dfki.de/), and 3D Rendering, Ogre or Unity.
 Therefore, some configuration is required once you retrieve the source files of the project before being able to start it.

@@ -43,7 +43,7 @@ public class AutodeskCharcater {
 
 
 
-    static private String characterName = "francois";
+    static private String characterName = "Camille";
     static private String baseName = "body";
     
     static private String exportPath = playerMediaPath + characterName.toLowerCase()+"/export/";

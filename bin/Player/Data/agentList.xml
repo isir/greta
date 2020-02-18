@@ -104,8 +104,7 @@
 			<material name="poppy_dress_purple" target="1" />
 		</body>
 	</agent>
-	
-	
+
 	<agent name="spike" type="composite" scale="0.02">
 		<head>
 			<position x="-0.0508" y="-79.75616" z="-0.254"/>
@@ -143,8 +142,7 @@
 			-->
 		</body>
 	</agent>
-	
-	
+
 	<agent name="obadiah" type="composite" scale="0.02">
 		<head>
 			<position x="-0.04" y="-80.823" z="-0.25"/>
@@ -194,8 +192,7 @@
 			-->
 		</body>
 	</agent>
-	
-	
+
 	<agent name="prudence" type="composite" scale="0.009">
 		<head>
 			<position x="0.087" y="-0.304" z="-7.41"/>
@@ -245,7 +242,8 @@
 			-->
 		</body>
 	</agent>
-	
+
+
 	<!-- obadiah familly -->
 	<agent name="oldbadiah" type="composite" scale="0.02">
 		<head>
@@ -279,7 +277,7 @@
 			<material name="obadiah_face_old" target="1" />
 		</body>
 	</agent>
-	
+
 	<agent name="chauvebadiah" type="composite" scale="0.02">
 		<head>
 			<position x="-0.04" y="-80.823" z="-0.25"/>
@@ -313,7 +311,7 @@
 			<material name="obadiah_face_old" target="1" />
 		</body>
 	</agent>
-	
+
 	<agent name="obadiahNeutral" type="composite" scale="0.02">
 		<head>
 			<position x="-0.04" y="-80.823" z="-0.25"/>
@@ -342,7 +340,8 @@
 		</head>
 		<body mesh="obadiah/body.mesh" />
 	</agent>
-	
+
+
 	<!-- poppy familly -->
 	<agent name="poppence" type="composite" scale="1">
 		<head>
@@ -379,7 +378,8 @@
 		<body mesh="poppy/body.mesh" >
 		</body>
 	</agent>
-	
+
+
 	<!-- spike familly -->
 	<agent name="brice" type="composite" scale="0.02">
 		<head>
@@ -413,7 +413,20 @@
 		</body>
 	</agent>
 
+
 	<!-- autodesk familly -->
+	<agent name="alice" type="autodesk" scale="1">
+		<all mesh="alice/body.mesh" />
+	</agent>
+
+	<agent name="eddy" type="autodesk" scale="1">
+		<all mesh="eddy/body.mesh" />
+	</agent>
+
+	<agent name="emma" type="autodesk" scale="1">
+		<all mesh="emma/body.mesh" />
+	</agent>
+
 	<agent name="camille" type="autodesk" scale="1">
 		<all mesh="camille/body.mesh" />
 		<wrinklesmaterial name="camille_wrinkles" target="0" />
@@ -424,55 +437,24 @@
 	<agent name="camille.patient" type="autodesk" scale="1">
 		<all mesh="camille/patient.mesh" />
 	</agent>
-	
-	<agent name="laure" type="autodesk" scale="1">
-		<all mesh="laure/body.mesh" />
-		<wrinklesmaterial name="laure_wrinkles" target="0" />
+
+	<agent name="jack" type="autodesk" scale="1">
+		<all mesh="jack/body.mesh" />
 	</agent>
-	<agent name="laure.football" type="autodesk" scale="1">
-		<all mesh="laure/foot.mesh" />
+
+	<agent name="john" type="autodesk" scale="1">
+		<all mesh="john/body.mesh" />
 	</agent>
-	
+
 	<agent name="laura" type="autodesk" scale="1">
 		<all mesh="laura/body.mesh" />
 	</agent>
-	
-	<agent name="alice" type="autodesk" scale="1">
-		<all mesh="alice/body.mesh" />
+
+	<agent name="lena" type="autodesk" scale="1">
+		<all mesh="lena/body.mesh" />
 	</agent>
-	
-	<agent name="rodrigue" type="autodesk" scale="1">
-		<all mesh="rodrigue/body.mesh" />
-	</agent>
-	<agent name="rodrigue.football" type="autodesk" scale="1">
-		<all mesh="rodrigue/foot.mesh" />
-	</agent>
-	
-	<agent name="greto" type="autodesk" scale="1">
-		<all mesh="greto/body.mesh" />
-	</agent>
-	
-	<agent name="beatrice" type="autodesk" scale="1">
-		<all mesh="beatrice/body.mesh" />
-	</agent>
-	
-	<agent name="diane" type="autodesk" scale="1">
-		<all mesh="diane/body.mesh" />
-	</agent>
-	
-	<agent name="stephanie" type="autodesk" scale="1">
-		<all mesh="stephanie/body.mesh" />
-	</agent>
-	
-	<agent name="melanie" type="autodesk" scale="1">
-		<all mesh="melanie/body.mesh" />
-	</agent>
-	
-	<agent name="jonathan" type="autodesk" scale="1">
-		<all mesh="jonathan/body.mesh" />
-	</agent>
-	
-	<agent name="nathan" type="autodesk" scale="1">
-		<all mesh="nathan/body.mesh" />
+
+	<agent name="tom" type="autodesk" scale="1">
+		<all mesh="tom/body.mesh" />
 	</agent>
 </agents>

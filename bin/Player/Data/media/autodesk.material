@@ -2,6 +2,18 @@ import * from "base.material"
 
 
 
+material Alice_Autodesk_Body : base {
+set_texture_alias diffuseMap alice/color.jpg
+set_texture_alias celShadingMap alice/color.jpg
+}
+
+material Alice_Autodesk_Hair : base {
+set_texture_alias diffuseMap alice/hair_color.jpg
+set_texture_alias celShadingMap alice/hair_color.jpg
+}
+
+
+
 material Camille_Autodesk_Body : base {
 set_texture_alias diffuseMap camille/color.jpg
 set_texture_alias celShadingMap camille/color_cel.png
@@ -24,19 +36,33 @@ set_texture_alias celShadingMap camille/hair_color_cel.bmp
 
 
 
-material Laure_Autodesk_Body : base {
-set_texture_alias diffuseMap laure/color.jpg
-set_texture_alias celShadingMap laure/color_cel.png
+material Eddy_Autodesk_Body : base {
+	set_texture_alias diffuseMap eddy/color.jpg
+	set_texture_alias celShadingMap eddy/color.jpg
 }
 
-material Laure_Football_Autodesk_Body : base {
-set_texture_alias diffuseMap laure/foot_color.jpg
-set_texture_alias celShadingMap laure/foot_color.jpg
+
+material Emma_Autodesk_Body : base {
+	set_texture_alias diffuseMap emma/color.jpg
+	set_texture_alias celShadingMap emma/color.jpg
+}
+material Emma_Autodesk_Hair : base {
+	set_texture_alias diffuseMap emma/hair_color.jpg
+	set_texture_alias celShadingMap emma/hair_color.jpg
 }
 
-material Laure_Autodesk_Hair : base {
-set_texture_alias diffuseMap laure/hair_color.jpg
-set_texture_alias celShadingMap laure/hair_color_cel.bmp
+
+
+material Jack_Autodesk_Body : base {
+	set_texture_alias diffuseMap jack/color.jpg
+	set_texture_alias celShadingMap jack/color.jpg
+}
+
+
+
+material John_Autodesk_Body : base {
+	set_texture_alias diffuseMap john/color.jpg
+	set_texture_alias celShadingMap john/color.jpg
 }
 
 
@@ -52,85 +78,16 @@ material Laura_Autodesk_Hair : base {
 
 
 
-material Alice_Autodesk_Body : base {
-set_texture_alias diffuseMap alice/color.jpg
-set_texture_alias celShadingMap alice/color.jpg
-}
-
-material Alice_Autodesk_Hair : base {
-set_texture_alias diffuseMap alice/hair_color.jpg
-set_texture_alias celShadingMap alice/hair_color.jpg
+material Lena_Autodesk_Body : base {
+	set_texture_alias diffuseMap lena/color.jpg
+	set_texture_alias celShadingMap lena/color.jpg
 }
 
 
 
-material Rodrigue_Autodesk_Body : base {
-set_texture_alias diffuseMap rodrigue/color.jpg
-set_texture_alias celShadingMap rodrigue/color_cel.png
-}
-
-material Rodrigue_Football_Autodesk_Body : base {
-set_texture_alias diffuseMap rodrigue/foot_color.jpg
-set_texture_alias celShadingMap rodrigue/foot_color.jpg
-}
-
-
-
-material Greto_Autodesk_Body : base {
-set_texture_alias diffuseMap greto/color.jpg
-set_texture_alias celShadingMap greto/color.jpg
-}
-
-
-
-material Beatrice_Autodesk_Body : base {
-set_texture_alias diffuseMap beatrice/color.jpg
-set_texture_alias celShadingMap beatrice/color.jpg
-}
-
-
-
-material Diane_Autodesk_Body : base {
-set_texture_alias diffuseMap diane/color.jpg
-set_texture_alias celShadingMap diane/color.jpg
-}
-
-material Diane_Autodesk_Hair : base {
-set_texture_alias diffuseMap diane/hair_color.jpg
-set_texture_alias celShadingMap diane/hair_color.jpg
-}
-
-
-
-material Stephanie_Autodesk_Body : base {
-set_texture_alias diffuseMap stephanie/color.jpg
-set_texture_alias celShadingMap stephanie/color.jpg
-}
-
-material Stephanie_Autodesk_Hair : base {
-set_texture_alias diffuseMap stephanie/hair_color.jpg
-set_texture_alias celShadingMap stephanie/hair_color.jpg
-}
-
-
-
-material Melanie_Autodesk_Body : base {
-	set_texture_alias diffuseMap melanie/color.jpg
-	set_texture_alias celShadingMap melanie/color.jpg
-}
-
-
-
-material Jonathan_Autodesk_Body : base {
-	set_texture_alias diffuseMap jonathan/color.jpg
-	set_texture_alias celShadingMap jonathan/color.jpg
-}
-
-
-
-material Nathan_Autodesk_Body : base {
-	set_texture_alias diffuseMap nathan/color.jpg
-	set_texture_alias celShadingMap nathan/color.jpg
+material Tom_Autodesk_Body : base {
+	set_texture_alias diffuseMap tom/color.jpg
+	set_texture_alias celShadingMap tom/color.jpg
 }
 
 

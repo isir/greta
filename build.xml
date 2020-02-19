@@ -40,6 +40,7 @@
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/EnvironmentManager"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/FMLAnnotator"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/GroupBehavior"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/MeaningMiner"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/OgrePlayer"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/PlanCapture"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SocialParameters"/>
@@ -65,5 +66,6 @@
         <ant target="${action}" useNativeBasedir="true" dir="core/Utilx"/>
         <ant target="${action}" useNativeBasedir="true" dir="tools/Editors"/>
         <ant target="${action}" useNativeBasedir="true" dir="tools/GestureAnimationEditor"/>
+        <ant target="${action}" useNativeBasedir="true" dir="tools/VideoCapture"/>
     </target>
 </project>

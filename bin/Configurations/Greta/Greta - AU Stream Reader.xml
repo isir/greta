@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modulated>
+    <elements>
+        <element h="50.0" id="Ini Manager - 1544700691170-189"
+            module="Ini Manager" name="Ini Manager" w="80.0" x="90.0" y="30.0">
+            <parameter name="file" value="Greta.ini"/>
+            <window h="531" visible="false" w="505" x="10" y="10"/>
+        </element>
+        <element h="50.0" id="Logs - 1544700696093-682" module="Logs"
+            name="Logs" w="80.0" x="190.0" y="30.0">
+            <parameter name="debug" value="true"/>
+            <parameter name="warning" value="true"/>
+            <parameter name="error" value="true"/>
+            <parameter name="info" value="true"/>
+            <window h="173" visible="false" w="212" x="10" y="10"/>
+        </element>
+        <element h="50.0" id="Log Frame - 1544700702468-724"
+            module="Log Frame" name="Log Frame" w="80.0" x="300.0" y="30.0">
+            <parameter name="blackBackground" value="true"/>
+            <window h="435" visible="false" w="618" x="10" y="10"/>
+        </element>
+        <element h="420.0" id="Environment - 1544700713383-564"
+            module="Environment" name="Environment" w="710.0" x="30.0" y="110.0">
+            <element h="360.0"
+                id="Character Manager - 1544700726358-960"
+                module="Character Manager" name="Character Manager"
+                w="650.0" x="30.0" y="30.0">
+                <parameter name="character_name" value="CAMILLE"/>
+                <window h="531" visible="false" w="505" x="10" y="10"/>
+                <element h="50.0" id="TTS - 1544700939858-569"
+                    module="TTS" name="TTS" w="80.0" x="440.0" y="30.0">
+                    <parameter name="doPhonemes" value="true"/>
+                    <parameter name="doTemporize" value="true"/>
+                    <parameter name="doAudio" value="true"/>
+                    <window h="127" visible="false" w="437" x="10" y="10"/>
+                </element>
+                <element h="50.0" id="MaryTTS Client - 1544700946314-81"
+                    module="MaryTTS Client" name="MaryTTS Client" w="80.0" x="540.0" y="30.0"/>
+                <element h="50.0"
+                    id="FML File Reader - 1544700908962-428"
+                    module="FML File Reader" name="FML File Reader"
+                    w="80.0" x="30.0" y="30.0">
+                    <parameter name="saveFileName" value="./Examples/DemoEN/1-Welcome.xml"/>
+                    <window h="108" visible="true" w="517" x="10" y="10"/>
+                </element>
+                <element h="50.0"
+                    id="BML File Reader - 1544700914641-19"
+                    module="BML File Reader" name="BML File Reader"
+                    w="80.0" x="130.0" y="30.0">
+                    <parameter name="saveFileName" value=""/>
+                    <window h="108" visible="true" w="517" x="10" y="120"/>
+                </element>
+                <element h="230.0"
+                    id="Behavior Planner - 1544700734561-356"
+                    module="Behavior Planner" name="Behavior Planner"
+                    w="80.0" x="30.0" y="100.0">
+                    <window h="120" visible="false" w="172" x="10" y="10"/>
+                </element>
+                <element h="230.0"
+                    id="Behavior Realizer - 1544712930520-534"
+                    module="Behavior Realizer" name="Behavior Realizer"
+                    w="80.0" x="130.0" y="100.0">
+                    <window h="309" visible="false" w="209" x="10" y="10"/>
+                </element>
+                <element h="50.0"
+                    id="Animation Keyframe Performer - 1544700747777-220"
+                    module="Animation Keyframe Performer" name="Body"
+                    w="280.0" x="240.0" y="100.0"/>
+                <element h="50.0"
+                    id="Face Keyframe Performer - 1554477289165-429"
+                    module="Face Keyframe Performer" name="Face"
+                    w="80.0" x="240.0" y="160.0">
+                    <parameter name="blinking" value="true"/>
+                </element>
+                <element h="50.0"
+                    id="Simple AU Performer - 1544700795765-328"
+                    module="Simple AU Performer" name="AU to FAP"
+                    w="80.0" x="340.0" y="160.0">
+                    <window h="338" visible="false" w="416" x="10" y="10"/>
+                </element>
+                <element h="50.0" id="Lip Model - 1544700770889-684"
+                    module="Lip Model" name="Lips" w="180.0" x="240.0" y="220.0"/>
+                <element h="110.0" id="Lip Blender - 1554477283159-751"
+                    module="Lip Blender" name="Lip Blender" w="80.0"
+                    x="440.0" y="160.0"/>
+                <element h="50.0"
+                    id="Audio Keyframe Performer - 1554477294171-845"
+                    module="Audio Keyframe Performer" name="Audio"
+                    w="280.0" x="240.0" y="280.0"/>
+                <element h="230.0"
+                    id="MPEG4 Animatable - 1544700808257-513"
+                    module="MPEG4 Animatable" name="MPEG4 Animatable"
+                    w="80.0" x="540.0" y="100.0">
+                    <parameter name="posX" value="0.0"/>
+                    <parameter name="scaleX" value="1.0"/>
+                    <parameter name="posY" value="0.0"/>
+                    <parameter name="scaleY" value="1.0"/>
+                    <parameter name="posZ" value="0.0"/>
+                    <parameter name="rotX" value="0.0"/>
+                    <parameter name="rotW" value="1.0"/>
+                    <parameter name="rotZ" value="0.0"/>
+                    <parameter name="rotY" value="0.0"/>
+                    <parameter name="scaleZ" value="1.0"/>
+                    <window h="178" visible="false" w="457" x="10" y="10"/>
+                </element>
+            </element>
+        </element>
+        <element h="420.0" id="Ogre Player - 1544700973529-249"
+            module="Ogre Player" name="Ogre Player" w="80.0" x="770.0" y="110.0">
+            <parameter name="posX" value="0.0"/>
+            <parameter name="posY" value="1.5"/>
+            <parameter name="posZ" value="1.2999999523162842"/>
+            <parameter name="roll" value="0.0"/>
+            <parameter name="pitch" value="0.0"/>
+            <parameter name="yaw" value="0.0"/>
+            <window h="614" visible="true" w="736" x="10" y="230"/>
+        </element>
+        <element h="50.0"
+            id="AU Parser Stream Reader - 1582128915292-665"
+            module="AU Parser Stream Reader"
+            name="AU Parser Stream Reader" w="80.0" x="310.0" y="170.0">
+            <parameter name="url" value=""/>
+            <window h="519" visible="false" w="579" x="0" y="0"/>
+        </element>
+    </elements>
+    <connections>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="MaryTTS Client - 1544700946314-81"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1544712930520-534" target="Face Keyframe Performer - 1554477289165-429"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+    </connections>
+</modulated>

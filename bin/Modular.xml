@@ -28,6 +28,7 @@
                 <item module="FML Annotator" name="FML Annotator"/>
                 <menu name="OpenFace">
                     <item module="OpenFace Output File Reader" name="OpenFace Output File Reader"/>
+                    <item module="AU Parser Stream Reader" name="AU Parser Stream Reader"/>
                 </menu>
             </menu>
             <menu name="Interruptions">
@@ -975,6 +976,13 @@
             </frame>
             <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
+        <module name="AU Parser Stream Reader" style="Signals">
+            <object class="greta.auxiliary.openface.streamreader.AUParserStreamReader" lib_id="greta_openface"/>
+            <frame class="greta.auxiliary.openface.streamreader.gui.AUParserStreamReaderController" lib_id="greta_openface" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getUrl" get_on="frame" name="url" set_method="setUrl" set_on="frame" type="string"/>
+        </module>
         <module name="Group Behavior" style="DEFAULT">
             <object class="greta.auxiliary.groupbehavior.GroupBehaviorMain" lib_id="greta_group_behavior"/>
             <frame class="greta.auxiliary.groupbehavior.GroupBehaviorFrame" lib_id="greta_group_behavior" type="frame">
@@ -996,6 +1004,7 @@
         <lib id="ext_jackson-annotations" path="./Common/Lib/External/jackson/jackson-annotations-2.9.9.jar"/>
         <lib id="ext_jackson-core" path="./Common/Lib/External/jackson/jackson-core-2.9.9.jar"/>
         <lib id="ext_jackson-databind" path="./Common/Lib/External/jackson/jackson-databind-2.9.9.3.jar"/>
+        <lib id="ext_jeromq" path="./Common/Lib/External/jeromq/jeromq-0.5.1.jar"/>
         <lib id="ext_lwjgl" path="./Common/Lib/External/lwjgl/jar/lwjgl.jar"/>
         <lib id="ext_marytts-client" path="./Common/Lib/External/marytts-client-5.2.jar"/>
         <lib id="ext_thrift.commons-codec" path="./Common/Lib/External/thrift/commons-codec-1.10.jar"/>
@@ -1190,6 +1199,7 @@
             <needs path="./Player/Lib/External/Win64/**"/>
         </lib>
         <lib id="greta_openface" path="./Common/Lib/Internal/OpenFace.jar">
+            <depends lib_id="ext_jeromq"/>
             <depends lib_id="greta_mpeg4"/>
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_util"/>

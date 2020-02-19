@@ -26,6 +26,9 @@
                 <item module="Body Head Noise" name="Body Head Noise"/>
                 <item module="AU Parser File Reader" name="AU Parser File Reader"/>
                 <item module="FML Annotator" name="FML Annotator"/>
+                <menu name="Meaning Miner">
+                    <item module="Image Schema Extractor" name="Image Schema Extractor"/>
+                </menu>
             </menu>
             <menu name="Interruptions">
                 <item module="Interruption Manager" name="Interruption Manager"/>
@@ -114,7 +117,9 @@
             <menu name="Player">
                 <item module="Ogre Player" name="Ogre Player"/>
                 <item module="Capture Controller" name="Capture Controller"/>
+                <item module="Xuggle Video Capture" name="Video Capture Output"/>
                 <item module="Parser Capture Controller AU" name="Parser Capture Controller AU"/>
+                <item module="Meaning Miner Capture Controller" name="Meaning Miner Capture Controller"/>
                 <item module="BVH Capture Controller" name="BVH Capture Controller"/>
             </menu>
             <menu name="Network Connections">
@@ -134,6 +139,7 @@
                     </menu>
                     <menu name="Receivers">
                         <item module="ActiveMQ FML Receiver" name="FML Receiver"/>
+                        <item module="ActiveMQ Meaning Miner FML Receiver" name="Meaning Miner FML Receiver"/>
                         <item module="ActiveMQ BML Receiver" name="BML Receiver"/>
                         <item module="ActiveMQ FML_BML File Name Receiver" name="FML/BML File Name Receiver"/>
                         <item module="ActiveMQ EmotionML Receiver" name="EmotionML Receiver"/>
@@ -457,6 +463,16 @@
             <parameter default="greta.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
+        <module name="ActiveMQ Meaning Miner FML Receiver">
+            <object class="greta.auxiliary.MeaningMiner.FMLReceiver_MeaningMiner" lib_id="greta_meaning_miner"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
         <module name="ActiveMQ EmotionML Receiver">
             <object class="greta.auxiliary.activemq.semaine.EmotionMLReceiver" lib_id="greta_activemq"/>
             <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
@@ -691,6 +707,12 @@
             <frame type="object"/>
             <parameter default="true" get_method="isRealTimeCapture" get_on="object" name="RealTime" set_method="setRealTimeCapture" set_on="object" type="boolean"/>
             <parameter default="false" get_method="isUseTexture" get_on="object" name="UseTexture" set_method="setUseTexture" set_on="object" type="boolean"/>
+        </module>
+        <module name="Xuggle Video Capture" style="Player">
+            <object class="greta.tools.ogre.capture.video.XuggleVideoCapture" lib_id="greta_video_capture"/>
+            <frame class="greta.tools.ogre.capture.video.CodecSelector" lib_id="greta_video_capture" type="frame">
+                <link method="setXuggleVideoCapture" on="frame"/>
+            </frame>
         </module>
         <module name="FML Editor" style="Intentions">
             <object class="greta.tools.editors.fml.FMLEditor" lib_id="greta_editors"/>
@@ -941,9 +963,19 @@
                 <link method="setLoader" on="frame"/>
             </frame>
         </module>
+        <module name="Meaning Miner Capture Controller" style="Player">
+            <object class="greta.auxiliary.plancapture.MeaningMinerCaptureController" lib_id="greta_plan_capture"/>
+            <frame type="object"/>
+        </module>
         <module name="Parser Capture Controller AU" style="Player">
             <object class="greta.auxiliary.plancapture.ParserCaptureController_AU" lib_id="greta_plan_capture"/>
             <frame type="object"/>
+        </module>
+        <module name="Image Schema Extractor" style="DEFAULT">
+            <object class="greta.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="greta_meaning_miner"/>
+            <frame class="greta.auxiliary.MeaningMiner.MeaningMinerFrame" lib_id="greta_meaning_miner" type="frame">
+                <link method="setModule" on="frame"/>
+            </frame>
         </module>
         <module name="FML Annotator" style="Intentions">
             <object class="greta.auxiliary.fmlannotator.View" lib_id="greta_fml_annotator"/>
@@ -986,8 +1018,23 @@
         <lib id="ext_jackson-annotations" path="./Common/Lib/External/jackson/jackson-annotations-2.9.9.jar"/>
         <lib id="ext_jackson-core" path="./Common/Lib/External/jackson/jackson-core-2.9.9.jar"/>
         <lib id="ext_jackson-databind" path="./Common/Lib/External/jackson/jackson-databind-2.9.9.3.jar"/>
+        <lib id="ext_jwiwordnet" path="./Common/Lib/External/edu.mit.jwi_2.4.0_jdk.jar">
+            <needs path="./Common/Data/wordnet30/dict/data.adj"/>
+            <needs path="./Common/Data/wordnet30/dict/data.adv"/>
+            <needs path="./Common/Data/wordnet30/dict/data.noun"/>
+            <needs path="./Common/Data/wordnet30/dict/data.verb"/>
+            <needs path="./Common/Data/wordnet30/dict/index.adj"/>
+            <needs path="./Common/Data/wordnet30/dict/index.adv"/>
+            <needs path="./Common/Data/wordnet30/dict/index.noun"/>
+            <needs path="./Common/Data/wordnet30/dict/index.sense"/>
+            <needs path="./Common/Data/wordnet30/dict/index.verb"/>
+        </lib>
         <lib id="ext_lwjgl" path="./Common/Lib/External/lwjgl/jar/lwjgl.jar"/>
         <lib id="ext_marytts-client" path="./Common/Lib/External/marytts-client-5.2.jar"/>
+        <lib id="ext_opennlp" path="./Common/Lib/External/opennlp-tools-1.8.2.jar"/>
+        <lib id="ext_stanfordparser" path="./Common/Lib/External/stanford-parser.jar">
+            <needs path="./Common/Data/stanfordparser/englishPCFG.ser.gz"/>
+        </lib>
         <lib id="ext_thrift.commons-codec" path="./Common/Lib/External/thrift/commons-codec-1.10.jar"/>
         <lib id="ext_thrift.commons-logging" path="./Common/Lib/External/thrift/commons-logging-1.2.jar"/>
         <lib id="ext_thrift.httpclient" path="./Common/Lib/External/thrift/httpclient-4.5.6.jar"/>
@@ -999,6 +1046,7 @@
         <lib id="ext_voxygen" path="./Common/Lib/External/voxygen/voxygen.jar">
             <needs path="./Common/Data/Voxygen/**"/>
         </lib>
+        <lib id="ext_xuggle-xuggler" path="./Player/Lib/External/xuggle-xuggler-5.4.jar"/>
         <lib id="greta_activemq" path="./Common/Lib/Internal/ActiveMQ.jar">
             <depends lib_id="ext_activemq-all"/>
             <depends lib_id="ext_jackson-annotations"/>
@@ -1154,6 +1202,20 @@
             <depends lib_id="ext_marytts-client"/>
             <depends lib_id="greta_util"/>
         </lib>
+        <lib id="greta_meaning_miner" path="./Common/Lib/Internal/MeaningMiner.jar">
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="ext_jwiwordnet"/>
+            <depends lib_id="ext_opennlp"/>
+            <depends lib_id="ext_stanfordparser"/>
+            <depends lib_id="greta_activemq"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./Common/Data/MeaningMiner/imageschemaGesture.dtd"/>
+            <needs path="./Common/Data/MeaningMiner/imageschemaGesture.xml"/>
+            <needs path="./Common/Data/MeaningMiner/imageschemaSynset.xml"/>
+            <needs path="./Common/Data/MeaningMiner/imageschemaSynset.dtd"/>
+        </lib>
         <lib id="greta_mpeg4" path="./Common/Lib/Internal/MPEG4.jar">
             <depends lib_id="greta_util"/>
         </lib>
@@ -1178,6 +1240,7 @@
             <needs path="./Player/Lib/External/Linux64/**"/>
             <needs path="./Player/Lib/External/Win32/**"/>
             <needs path="./Player/Lib/External/Win64/**"/>
+            <needs path="./Player/Lib/External/xuggle-xuggler-5.4.jar"/>
         </lib>
         <lib id="greta_plan_capture" path="./Common/Lib/Internal/PlanCapture.jar">
             <depends lib_id="greta_behavior_planner"/>
@@ -1239,6 +1302,11 @@
             <depends lib_id="greta_util"/>
             <needs path="./Common/Data/Voxygen/*"/>
             <needs path="./Common/Lib/External/voxygen/**"/>
+        </lib>
+        <lib id="greta_video_capture" path="./Player/Lib/Internal/VideoCapture.jar">
+            <depends lib_id="ext_xuggle-xuggler"/>
+            <depends lib_id="greta_ogre_player"/>
+            <depends lib_id="greta_util"/>
         </lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->

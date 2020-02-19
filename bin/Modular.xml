@@ -26,6 +26,9 @@
                 <item module="Body Head Noise" name="Body Head Noise"/>
                 <item module="AU Parser File Reader" name="AU Parser File Reader"/>
                 <item module="FML Annotator" name="FML Annotator"/>
+                <menu name="OpenFace">
+                    <item module="OpenFace Output File Reader" name="OpenFace Output File Reader"/>
+                </menu>
             </menu>
             <menu name="Interruptions">
                 <item module="Interruption Manager" name="Interruption Manager"/>
@@ -965,6 +968,13 @@
                 <link method="setCore" on="frame"/>
             </frame>
         </module>
+        <module name="OpenFace Output File Reader" style="Signals">
+            <object class="greta.auxiliary.openface.OpenFaceOutputFileReader" lib_id="greta_openface"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
         <module name="Group Behavior" style="DEFAULT">
             <object class="greta.auxiliary.groupbehavior.GroupBehaviorMain" lib_id="greta_group_behavior"/>
             <frame class="greta.auxiliary.groupbehavior.GroupBehaviorFrame" lib_id="greta_group_behavior" type="frame">
@@ -1178,6 +1188,11 @@
             <needs path="./Player/Lib/External/Linux64/**"/>
             <needs path="./Player/Lib/External/Win32/**"/>
             <needs path="./Player/Lib/External/Win64/**"/>
+        </lib>
+        <lib id="greta_openface" path="./Common/Lib/Internal/OpenFace.jar">
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
         </lib>
         <lib id="greta_plan_capture" path="./Common/Lib/Internal/PlanCapture.jar">
             <depends lib_id="greta_behavior_planner"/>

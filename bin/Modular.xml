@@ -27,8 +27,8 @@
                 <item module="AU Parser File Reader" name="AU Parser File Reader"/>
                 <item module="FML Annotator" name="FML Annotator"/>
                 <menu name="OpenFace">
-                    <item module="OpenFace Output File Reader" name="OpenFace Output File Reader"/>
-                    <item module="AU Parser Stream Reader" name="AU Parser Stream Reader"/>
+                    <item module="OpenFace CSV Output File Reader" name="CSV Output File Reader"/>
+                    <item module="OpenFace AU Stream Reader" name="AU Stream Reader"/>
                 </menu>
             </menu>
             <menu name="Interruptions">
@@ -969,16 +969,16 @@
                 <link method="setCore" on="frame"/>
             </frame>
         </module>
-        <module name="OpenFace Output File Reader" style="Signals">
-            <object class="greta.auxiliary.openface.OpenFaceOutputFileReader" lib_id="greta_openface"/>
+        <module name="OpenFace CSV Output File Reader" style="Signals">
+            <object class="greta.auxiliary.openface.CSVOutputFileReader" lib_id="greta_openface"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
             <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
-        <module name="AU Parser Stream Reader" style="Signals">
-            <object class="greta.auxiliary.openface.streamreader.AUParserStreamReader" lib_id="greta_openface"/>
-            <frame class="greta.auxiliary.openface.streamreader.gui.AUParserStreamReaderController" lib_id="greta_openface" type="frame">
+        <module name="OpenFace AU Stream Reader" style="Signals">
+            <object class="greta.auxiliary.openface.AUStreamReader" lib_id="greta_openface"/>
+            <frame class="greta.auxiliary.openface.gui.AUStreamReaderController" lib_id="greta_openface" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
             <parameter default="" get_method="getUrl" get_on="frame" name="url" set_method="setUrl" set_on="frame" type="string"/>

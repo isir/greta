@@ -1,5 +1,5 @@
 /*
- * This file is part of Greta.
+ * This file is part of the auxiliaries of Greta.
  *
  * Greta is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -15,7 +15,7 @@
  * along with Greta.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-package greta.auxiliary.openface.streamreader;
+package greta.auxiliary.openface;
 
 import greta.core.util.StringArrayListener;
 import greta.core.animation.mpeg4.bap.BAPFrame;
@@ -40,8 +40,6 @@ import org.zeromq.ZMQ;
 import org.zeromq.ZMQ.Socket;
 import org.zeromq.ZMQException;
 
-
-
 /**
  * This class is an implementation of {@code SignalEmitter} interface.<br/> When
  * calling the {@code load} function, It sends the {@code Signals} contained in
@@ -50,11 +48,11 @@ import org.zeromq.ZMQException;
  *
  * @author Thomas Janssoone and soumia dermouche
  */
-public class AUParserStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFramesEmitter, Runnable {
-    private static final Logger LOGGER = Logger.getLogger(AUParserStreamReader.class.getName() );
+public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFramesEmitter, Runnable {
+    private static final Logger LOGGER = Logger.getLogger(AUStreamReader.class.getName() );
     private List<StringArrayListener> headerListeners = new ArrayList<>();
     private Thread t;
-    private String threadName = "AUParserStreamReader";
+    private String threadName = "AUStreamReader";
     
     private ArrayList<AUPerformer> au_perfomers = new ArrayList<>();
     BAPFramesEmitterImpl bapFramesEmitterImpl = new BAPFramesEmitterImpl();
@@ -75,8 +73,8 @@ public class AUParserStreamReader extends FAPFrameEmitterImpl implements AUEmitt
     int col_blink = 412;
     double fps = 0.;
     double frameDuration = 0.;
-    OFFrame curFrame = new OFFrame();
-    OFFrame prevFrame;
+    OpenFaceFrame curFrame = new OpenFaceFrame();
+    OpenFaceFrame prevFrame;
     
     // loop variables
     double prev_rot_X = 0.0;
@@ -93,7 +91,7 @@ public class AUParserStreamReader extends FAPFrameEmitterImpl implements AUEmitt
 
     double alpha = 0.75;//1.0; 
     
-    public AUParserStreamReader(){        
+    public AUStreamReader(){        
     }
     
     public void listen(String url) {     
@@ -188,9 +186,9 @@ public class AUParserStreamReader extends FAPFrameEmitterImpl implements AUEmitt
                     processFrame(lastDataStr);
                 }
                 else if(line.startsWith("HEADER:")){
-                    boolean changed = OFFrame.readHeader(line.substring(7));
+                    boolean changed = OpenFaceFrame.readHeader(line.substring(7));
                     if(changed){
-                        headerChanged(OFFrame.headers);
+                        headerChanged(OpenFaceFrame.headers);
                     }
                 }
             }
@@ -212,7 +210,7 @@ public class AUParserStreamReader extends FAPFrameEmitterImpl implements AUEmitt
     //Format based on https://github.com/TadasBaltrusaitis/OpenFace
     //timestamp, gaze_0_x, gaze_0_y, gaze_0_z, gaze_1_x, gaze_1_y, gaze_1_z, gaze_angle_x, gaze_angle_y, pose_Tx, pose_Ty, pose_Tz, pose_Rx, pose_Ry, pose_Rz, AU01_r, AU02_r, AU04_r, AU05_r, AU06_r, AU07_r, AU09_r, AU10_r, AU12_r, AU14_r, AU15_r, AU17_r, AU20_r, AU23_r, AU25_r, AU26_r, AU45_r, AU01_c, AU02_c, AU04_c, AU05_c, AU06_c, AU07_c, AU09_c, AU10_c, AU12_c, AU14_c, AU15_c, AU17_c, AU20_c, AU23_c, AU25_c, AU26_c, AU28_c, AU45_c
     private void processOpenFace() { 
-        LOGGER.info("AUParserFileReader.processOpenFace()");
+        LOGGER.info("AUStreamReader.processOpenFace()");
         
         if (isConnected && isPerforming()) {                
             if (frameDuration != 0) {
@@ -232,13 +230,13 @@ public class AUParserStreamReader extends FAPFrameEmitterImpl implements AUEmitt
         AUAPFrame au_frame = new AUAPFrame();                        
         au_frame.setFrameNumber(curFrame.fid);
 
-        for(int i=0;i<OFFrame.auRealSize;i++)
+        for(int i=0;i<OpenFaceFrame.auRealSize;i++)
         { 
             double value = curFrame.au_c[i];
             double prevValue = prevFrame.intensity[i];                            
             double intensity = alpha*( value/3.5) + (1-alpha)*prevValue;
             //System.out.println("AU["+au_correspondance[au]+"] : "+intensity+ " cpt "+ cpt);
-            au_frame.setAUAPboth(OFFrame.getAUIndex(i), intensity);
+            au_frame.setAUAPboth(OpenFaceFrame.getAUIndex(i), intensity);
         }
 
         //gaze
@@ -300,14 +298,14 @@ public class AUParserStreamReader extends FAPFrameEmitterImpl implements AUEmitt
     }
     
     private void sendAUFrame(AUAPFrame frame){    
-        ID id = IDProvider.createID("From_AU_ParserStreamReader");
+        ID id = IDProvider.createID("From_OpenFace_AUStreamReader");
         for(AUPerformer performer : au_perfomers) {
             performer.performAUAPFrame(frame, id);
         }
     }
     
-     private void sendBAPFrame(BAPFrame frame){
-        ID id = IDProvider.createID("From_AU_ParserStreamReader");
+    private void sendBAPFrame(BAPFrame frame){
+        ID id = IDProvider.createID("From_OpenFace_AUStreamReader");
         bapFramesEmitterImpl.sendBAPFrame(id, frame);        
     }
 
@@ -331,7 +329,8 @@ public class AUParserStreamReader extends FAPFrameEmitterImpl implements AUEmitt
             au_perfomers.add(aup);
         }
     }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @Override
+
+    @Override
     public void removeAUPerformer(AUPerformer aup) {
         if (aup != null) {
             au_perfomers.remove(aup);

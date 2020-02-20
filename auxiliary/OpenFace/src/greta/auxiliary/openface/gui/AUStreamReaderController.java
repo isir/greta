@@ -1,5 +1,5 @@
 /*
- * This file is part of Greta.
+ * This file is part of the auxiliaries of Greta.
  *
  * Greta is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -15,7 +15,7 @@
  * along with Greta.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-package greta.auxiliary.openface.streamreader.gui;
+package greta.auxiliary.openface.gui;
 
 import greta.core.util.StringArrayListener;
 import greta.core.util.log.Logs;
@@ -35,12 +35,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Philippe Gauthier
  */
-public class AUParserStreamReaderController extends javax.swing.JFrame implements StringArrayListener{
-    private static final Logger LOGGER = Logger.getLogger(AUParserStreamReaderController.class.getName() );
+public class AUStreamReaderController extends javax.swing.JFrame implements StringArrayListener{
+    private static final Logger LOGGER = Logger.getLogger(AUStreamReaderController.class.getName() );
     
 
     /** Creates new form TreeNodeController */
-    public AUParserStreamReaderController() {
+    public AUStreamReaderController() {
         initComponents();
         //jTable1.setDragEnabled(true);
         //jTable1.setDropMode(DropMode.INSERT_ROWS);

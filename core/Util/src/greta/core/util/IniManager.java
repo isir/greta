@@ -58,7 +58,7 @@ public class IniManager extends ParameterSet<IniParameter> {
     private static double javaVersion;
 
     static {
-        programPath = System.getProperty("user.dir");
+        programPath = System.getProperty("user.dir").replaceAll("\\\\", "/") + "/";
 
         DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.ENGLISH);
         symbols.setInfinity(""+Double.POSITIVE_INFINITY);

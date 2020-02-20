@@ -19,6 +19,11 @@ package greta.auxiliary.player.ogre;
 
 import greta.core.util.IniManager;
 import greta.core.util.log.Logs;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.LinkedList;
@@ -55,13 +60,13 @@ public class Ogre {
     public static final boolean DEBUG;
     private static String resourceGroup;
     public static boolean realTime = true;
-    private static String externalLibPath = IniManager.getProgramPath() + "./Player/Lib/External/";
+    private static String externalLibPath = IniManager.getProgramPath() + "Player/Lib/External/";
 
     static {
         DEBUG = IniManager.getGlobals().getValueBoolean("OGRE_DEBUG");
         int jvmArchitecture = Integer.parseInt(System.getProperty("sun.arch.data.model"));
         
-        externalLibPath = IniManager.getProgramPath() + "./Player/Lib/External/";
+        externalLibPath = IniManager.getProgramPath() + "Player/Lib/External/";
         
         //define path where are Ogre's native libraries
         if (System.getProperty("os.name").toLowerCase().contains("windows")) {
@@ -118,6 +123,29 @@ public class Ogre {
                     pluginsFile = externalLibPath + "Plugins_DX9.cfg";
                 } else {
                     pluginsFile = externalLibPath + "Plugins_OpenGL.cfg";
+                }
+
+                // Little Hack for Windows 8 and 10:
+                //     rewrite the pluginsFile with an absolute path for the "PluginFolder"
+                //     attribute because the relative path does not work anymore!
+                try {
+                    StringBuilder pluginsFileContent = new StringBuilder();
+
+                    BufferedReader reader = new BufferedReader(new FileReader(pluginsFile));
+                    String currentLine;
+                    while ((currentLine = reader.readLine()) != null) {
+                        if (currentLine.trim().startsWith("PluginFolder=")) {
+                            currentLine = "PluginFolder=" + externalLibPath + "DLL";
+                        }
+                        pluginsFileContent.append(currentLine).append("\n");
+                    }
+
+                    FileWriter writer = new FileWriter(new File(pluginsFile));
+                    writer.write(pluginsFileContent.toString());
+                    writer.close();
+
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
             Root tempRoot = new Root(pluginsFile, "", "./Log/Ogre.log");

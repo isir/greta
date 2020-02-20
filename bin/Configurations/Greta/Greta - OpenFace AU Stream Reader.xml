@@ -35,7 +35,8 @@
                     <window h="127" visible="false" w="437" x="10" y="10"/>
                 </element>
                 <element h="50.0" id="MaryTTS Client - 1544700946314-81"
-                    module="MaryTTS Client" name="MaryTTS Client" w="80.0" x="540.0" y="30.0"/>
+                    module="MaryTTS Client" name="MaryTTS Client"
+                    w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0"
                     id="FML File Reader - 1544700908962-428"
                     module="FML File Reader" name="FML File Reader"
@@ -116,31 +117,25 @@
             <window h="614" visible="true" w="736" x="10" y="230"/>
         </element>
         <element h="50.0"
-            id="AU Parser Stream Reader - 1582128915292-665"
-            module="AU Parser Stream Reader"
-            name="AU Parser Stream Reader" w="80.0" x="310.0" y="170.0">
+            id="OpenFace AU Stream Reader - 1582128915292-665"
+            module="OpenFace AU Stream Reader"
+            name="OpenFace AU Stream Reader" w="100.0" x="300.0" y="170.0">
             <parameter name="url" value=""/>
             <window h="519" visible="false" w="579" x="0" y="0"/>
         </element>
     </elements>
     <connections>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
-            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="MaryTTS Client - 1544700946314-81"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
-            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
         <connection connector="LipSourceForLipBlender"
             source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="MaryTTS Client - 1544700946314-81"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -149,13 +144,19 @@
             source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
         <connection connector="addLogOutput"
             source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
     </connections>
 </modulated>

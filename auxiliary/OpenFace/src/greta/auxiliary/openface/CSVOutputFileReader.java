@@ -1,5 +1,5 @@
 /*
- * This file is part of Greta.
+ * This file is part of the auxiliaries of Greta.
  *
  * Greta is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -32,11 +32,12 @@ import java.util.ArrayList;
 import java.util.logging.Logger;
 
 /**
+ *
  * @author Brice Donval
  */
-public class OpenFaceOutputFileReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFramesEmitter {
+public class CSVOutputFileReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFramesEmitter {
 
-    private static final Logger LOGGER = Logger.getLogger(OpenFaceOutputFileReader.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(CSVOutputFileReader.class.getName());
 
     private ArrayList<AUPerformer> auPerfomers = new ArrayList<>();
     private ArrayList<AUAPFrame> auFrames = new ArrayList<>();

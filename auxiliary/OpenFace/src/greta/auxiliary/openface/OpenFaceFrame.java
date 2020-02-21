@@ -43,7 +43,7 @@ public class OpenFaceFrame {
         }
     }*/
     private final static int MAX_AUS = 100;
-    int fid = 0;
+    int frameId = 0;
     int face_id = 0;
 
     double timeStamp = 0;
@@ -113,7 +113,7 @@ public class OpenFaceFrame {
         String[] cols = data.split(separator);
         int i = 0;
 
-        fid = Integer.parseInt(cols[i++]);
+        frameId = Integer.parseInt(cols[i++]);
         face_id = Integer.parseInt(cols[i++]);
         timeStamp = Double.parseDouble(cols[i++]);
         confidence = Double.parseDouble(cols[i++]);
@@ -151,7 +151,7 @@ public class OpenFaceFrame {
         return f;
     }
     void copy(OpenFaceFrame f) {
-        fid 		=	f.fid;
+        frameId 		=	f.frameId;
         face_id 	=	f.face_id;
         timeStamp 	=	f.timeStamp;
         confidence 	=	f.confidence;

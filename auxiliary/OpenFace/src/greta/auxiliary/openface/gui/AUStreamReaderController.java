@@ -61,12 +61,12 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
         jLabel1 = new javax.swing.JLabel();
         zeroMQURLTextField = new javax.swing.JTextField();
         sendButton = new javax.swing.JButton();
+        jCheckBoxPerform = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jButtonSetSelected = new javax.swing.JButton();
-        jToggleButtonPerform = new javax.swing.JToggleButton();
         jSeparator2 = new javax.swing.JSeparator();
         jButtonSelectAll = new javax.swing.JButton();
         jButtonSelectAll1 = new javax.swing.JButton();
@@ -103,6 +103,14 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
             }
         });
         jPanel3.add(sendButton);
+
+        jCheckBoxPerform.setText("Perform");
+        jCheckBoxPerform.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBoxPerformActionPerformed(evt);
+            }
+        });
+        jPanel3.add(jCheckBoxPerform);
 
         jPanel1.add(jPanel3, java.awt.BorderLayout.NORTH);
 
@@ -151,14 +159,6 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
             }
         });
         jPanel4.add(jButtonSetSelected);
-
-        jToggleButtonPerform.setText("Perform");
-        jToggleButtonPerform.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButtonPerformActionPerformed(evt);
-            }
-        });
-        jPanel4.add(jToggleButtonPerform);
         jPanel4.add(jSeparator2);
 
         jButtonSelectAll.setText("Select All");
@@ -257,14 +257,14 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
         }
     }//GEN-LAST:event_jButtonSelectAll1ActionPerformed
 
-    private void jToggleButtonPerformActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPerformActionPerformed
-        perform(jToggleButtonPerform.isSelected());
-    }//GEN-LAST:event_jToggleButtonPerformActionPerformed
-
     private void zeroMQURLTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_zeroMQURLTextFieldPropertyChange
         // TODO add your handling code here:
         url = zeroMQURLTextField.getText();
     }//GEN-LAST:event_zeroMQURLTextFieldPropertyChange
+
+    private void jCheckBoxPerformActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBoxPerformActionPerformed
+        perform(jCheckBoxPerform.isSelected());
+    }//GEN-LAST:event_jCheckBoxPerformActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDown;
@@ -272,6 +272,7 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
     private javax.swing.JButton jButtonSelectAll1;
     private javax.swing.JButton jButtonSetSelected;
     private javax.swing.JButton jButtonUp;
+    private javax.swing.JCheckBox jCheckBoxPerform;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -281,7 +282,6 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JToggleButton jToggleButtonPerform;
     private javax.swing.JButton sendButton;
     private javax.swing.JTextField zeroMQURLTextField;
     // End of variables declaration//GEN-END:variables
@@ -300,7 +300,7 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
     private String url;
     
     public void perform(boolean b){
-        
+        LOGGER.info(String.format("Performing: %b", b));
         if(performMethod!=null){
             try {
                 performMethod.invoke(loader, b);
@@ -378,6 +378,7 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
      * @return the url
      */
     public String getUrl() {
+        this.url = zeroMQURLTextField.getText();
         return url;
     }
 

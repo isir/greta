@@ -89,6 +89,11 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
                 zeroMQURLTextFieldActionPerformed(evt);
             }
         });
+        zeroMQURLTextField.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                zeroMQURLTextFieldPropertyChange(evt);
+            }
+        });
         jPanel3.add(zeroMQURLTextField);
 
         sendButton.setText("Connect");
@@ -209,7 +214,8 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
     }//GEN-LAST:event_zeroMQURLTextFieldActionPerformed
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        listen(zeroMQURLTextField.getText());
+        url = zeroMQURLTextField.getText();        
+        listen(url);
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void jButtonUpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonUpActionPerformed
@@ -228,7 +234,7 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
         try {
             String[] selected = getSelected();
             if(selected!=null)
-            setSelectedMethod.invoke(loader, (Object[])selected);
+            setSelectedMethod.invoke(loader, new Object[]{selected});
             else
                 LOGGER.log(Level.WARNING, "Select some features first");
         } catch (Exception ex) {
@@ -254,6 +260,11 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
     private void jToggleButtonPerformActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButtonPerformActionPerformed
         perform(jToggleButtonPerform.isSelected());
     }//GEN-LAST:event_jToggleButtonPerformActionPerformed
+
+    private void zeroMQURLTextFieldPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_zeroMQURLTextFieldPropertyChange
+        // TODO add your handling code here:
+        url = zeroMQURLTextField.getText();
+    }//GEN-LAST:event_zeroMQURLTextFieldPropertyChange
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonDown;
@@ -351,6 +362,8 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
             listenMethod = loader.getClass().getMethod("listen", String.class);
             performMethod = loader.getClass().getMethod("setIsPerforming", Boolean.class);            
             setSelectedMethod = loader.getClass().getMethod("setSelected",String[].class);
+            Method m = loader.getClass().getMethod("addHeaderListener", StringArrayListener.class);
+            m.invoke(loader, this);
         } catch (Exception ex) {
             System.err.println("Can not load methods by reflection: "+loader.getClass().getCanonicalName()+"\n"+ex.getLocalizedMessage());
         }        
@@ -373,5 +386,6 @@ public class AUStreamReaderController extends javax.swing.JFrame implements Stri
      */
     public void setUrl(String url) {
         this.url = url;
+        zeroMQURLTextField.setText(url);
     }
 }

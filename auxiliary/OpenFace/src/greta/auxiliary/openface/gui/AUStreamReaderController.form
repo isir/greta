@@ -53,6 +53,7 @@
             <Component class="javax.swing.JTextField" name="zeroMQURLTextField">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="zeroMQURLTextFieldActionPerformed"/>
+                <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="zeroMQURLTextFieldPropertyChange"/>
               </Events>
             </Component>
             <Component class="javax.swing.JButton" name="sendButton">

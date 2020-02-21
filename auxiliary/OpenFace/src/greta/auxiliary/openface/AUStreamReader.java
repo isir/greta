@@ -66,7 +66,6 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     final static String DEFAULTURL = "tcp://localhost:5000";
     final static String TOPIC = "";
     String[] selectedHeaders = null;
-    String[] headers = null;
     ZContext zContext;
     Socket zSubscriber; 
     String lastDataStr=null;
@@ -74,7 +73,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     double fps = 0.;
     double frameDuration = 0.;
     OpenFaceFrame curFrame = new OpenFaceFrame();
-    OpenFaceFrame prevFrame;
+    OpenFaceFrame prevFrame = new OpenFaceFrame();;
     
     // loop variables
     double prev_rot_X = 0.0;
@@ -94,6 +93,10 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     public AUStreamReader(){        
     }
     
+    public String[] getHeaders(){
+        return OpenFaceFrame.headers;
+    }
+    
     public void listen(String url) {     
         if (zContext == null)
             zContext = new ZContext();
@@ -105,13 +108,15 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
             zSubscriber = zContext.createSocket(SocketType.SUB);
             if (url.length() == 0)
                 url = DEFAULTURL;
-            LOGGER.info(String.format("Opening: %s",url));
+            
             isConnected = zSubscriber.connect(url);
-            start();
+            
             if(isConnected){
                 zSubscriber.subscribe(TOPIC.getBytes(ZMQ.CHARSET));
                 LOGGER.info(String.format("Connected to: %s",url));
-            }
+                start();
+            }else
+                LOGGER.warning(String.format("Failed to open: %s",url));
             
         }
         catch(ZMQException ex){
@@ -150,7 +155,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     }
         
     public void start () {
-      System.out.println("Starting " +  threadName );
+      LOGGER.fine(String.format("Starting %s..", threadName ));
       if (t == null) {
          t = new Thread (this, threadName);
          isAlive = true;
@@ -162,7 +167,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     public void run() {        
         LOGGER.info(String.format("Running %s", threadName ));
         try {                        
-            LOGGER.info(String.format("Thread: %s", threadName));
+            LOGGER.fine(String.format("Thread: %s", threadName));
             do{
                 do{
                     processLine(); 
@@ -172,7 +177,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
             }while(isAlive);
                       
         } catch (InterruptedException e) {
-           LOGGER.info(String.format("Thread: %s interrupted", threadName));
+           LOGGER.warning(String.format("Thread: %s interrupted", threadName));
         }
         LOGGER.info(String.format("Thread: %s exiting", threadName));
     }
@@ -185,24 +190,32 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
                     lastDataStr = line.substring(5);
                     processFrame(lastDataStr);
                 }
-                else if(line.startsWith("HEADER:")){
+                else if(line.startsWith("HEADER:")){                    
                     boolean changed = OpenFaceFrame.readHeader(line.substring(7));
                     if(changed){
+                        LOGGER.info("Header headerChanged");
                         headerChanged(OpenFaceFrame.headers);
                     }
                 }
-            }
+                else
+                    LOGGER.warning(String.format("Line not recognized: %s", line));
+                    
+            }else
+                LOGGER.warning(String.format("Line is empty"));
         }
     }
     
     private void processFrame(String line){
         if(line!=null && isPerforming){
-            prevFrame = curFrame;
+            if(curFrame!=null)
+                prevFrame.copy(curFrame);
             curFrame.readDataLine(line);
-            if(prevFrame!=null)
+            if(prevFrame.timeStamp>0.)
                 frameDuration = curFrame.timeStamp - prevFrame.timeStamp;
+            
             if(frameDuration>0)
                 fps = 1./frameDuration;
+            LOGGER.info(String.format("frameid: %d, fps:%f, f dur:%f, timeStamp: %f, prev id: %d,  prev timeStamp; %f",curFrame.fid, fps, frameDuration, curFrame.timeStamp, prevFrame.fid, prevFrame.timeStamp));
             processOpenFace();
         }        
     }
@@ -210,8 +223,6 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     //Format based on https://github.com/TadasBaltrusaitis/OpenFace
     //timestamp, gaze_0_x, gaze_0_y, gaze_0_z, gaze_1_x, gaze_1_y, gaze_1_z, gaze_angle_x, gaze_angle_y, pose_Tx, pose_Ty, pose_Tz, pose_Rx, pose_Ry, pose_Rz, AU01_r, AU02_r, AU04_r, AU05_r, AU06_r, AU07_r, AU09_r, AU10_r, AU12_r, AU14_r, AU15_r, AU17_r, AU20_r, AU23_r, AU25_r, AU26_r, AU45_r, AU01_c, AU02_c, AU04_c, AU05_c, AU06_c, AU07_c, AU09_c, AU10_c, AU12_c, AU14_c, AU15_c, AU17_c, AU20_c, AU23_c, AU25_c, AU26_c, AU28_c, AU45_c
     private void processOpenFace() { 
-        LOGGER.info("AUStreamReader.processOpenFace()");
-        
         if (isConnected && isPerforming()) {                
             if (frameDuration != 0) {
                 if( frameDuration > max_time){
@@ -236,6 +247,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
             double prevValue = prevFrame.intensity[i];                            
             double intensity = alpha*( value/3.5) + (1-alpha)*prevValue;
             //System.out.println("AU["+au_correspondance[au]+"] : "+intensity+ " cpt "+ cpt);
+            LOGGER.info(String.format("i: %d, auIndex: %d, intensity: %f", i, OpenFaceFrame.getAUIndex(i), intensity));
             au_frame.setAUAPboth(OpenFaceFrame.getAUIndex(i), intensity);
         }
 
@@ -300,18 +312,21 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     private void sendAUFrame(AUAPFrame frame){    
         ID id = IDProvider.createID("From_OpenFace_AUStreamReader");
         for(AUPerformer performer : au_perfomers) {
+            LOGGER.info(String.format("Sending AUAPFrame to: %s",performer.toString()));
             performer.performAUAPFrame(frame, id);
         }
     }
     
     private void sendBAPFrame(BAPFrame frame){
         ID id = IDProvider.createID("From_OpenFace_AUStreamReader");
+        LOGGER.info("Sending bap frame");
         bapFramesEmitterImpl.sendBAPFrame(id, frame);        
     }
 
     @Override
     public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {        
-        if (bapfp != null) {           
+        if (bapfp != null) {        
+            LOGGER.info("addBAPFramesPerformer");
             bapFramesEmitterImpl.addBAPFramesPerformer(bapfp);
         }
     }
@@ -326,6 +341,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     @Override
     public void addAUPerformer(AUPerformer aup) {
         if (aup != null) {
+            LOGGER.info("addAUPerformer");
             au_perfomers.add(aup);
         }
     }
@@ -347,7 +363,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
             headerListeners.remove(hl);
     }
     
-    private void headerChanged(String[] headers){
+    private void headerChanged(String[] headers){        
         headerListeners.forEach((hl) -> {
             hl.stringArrayChanged(headers);
         });

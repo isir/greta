@@ -25,10 +25,13 @@ import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
 import greta.core.keyframes.face.AUEmitter;
+import greta.core.keyframes.face.AUEmitterImpl;
 import greta.core.keyframes.face.AUPerformer;
 import greta.core.repositories.AUAPFrame;
+import greta.core.util.Constants;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
+import greta.core.util.time.Timer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -52,10 +55,12 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     private static final Logger LOGGER = Logger.getLogger(AUStreamReader.class.getName() );
     private List<StringArrayListener> headerListeners = new ArrayList<>();
     private Thread t;
-    private String threadName = "AUStreamReader";
+    private final String threadName = "AUStreamReader";
+    private int startInputFrame = 0;
+    private final int offsetFrame = 0;
     
-    private ArrayList<AUPerformer> au_perfomers = new ArrayList<>();
-    BAPFramesEmitterImpl bapFramesEmitterImpl = new BAPFramesEmitterImpl();
+    private AUEmitterImpl auEmitterImpl = new AUEmitterImpl();
+    private BAPFramesEmitterImpl bapFramesEmitterImpl = new BAPFramesEmitterImpl();
     
     private boolean isPerforming = false;
     private boolean isAlive = true;
@@ -204,19 +209,26 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
                 LOGGER.warning(String.format("Line is empty"));
         }
     }
-    
-    private void processFrame(String line){
-        if(line!=null && isPerforming){
-            if(curFrame!=null)
-                prevFrame.copy(curFrame);
-            curFrame.readDataLine(line);
-            if(prevFrame.timeStamp>0.)
-                frameDuration = curFrame.timeStamp - prevFrame.timeStamp;
+        
+    private void processFrame(String line){        
+        if(line!=null && isPerforming){            
+            int curGretaFrame = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
+            prevFrame.copy(curFrame);
             
-            if(frameDuration>0)
+            if(startInputFrame==0)
+                startInputFrame = curFrame.frameId;
+            
+            curFrame.readDataLine(line);
+            //curFrame.frameId += offsetFrame-startInputFrame + curGretaFrame;
+            curFrame.frameId = offsetFrame + curGretaFrame;
+            int frameDiff = curFrame.frameId-prevFrame.frameId;
+            if(frameDiff<10 && frameDiff>0){ // If less than 10 frame delay
+                frameDuration = curFrame.timeStamp - prevFrame.timeStamp;            
+            
                 fps = 1./frameDuration;
-            LOGGER.info(String.format("frameid: %d, fps:%f, f dur:%f, timeStamp: %f, prev id: %d,  prev timeStamp; %f",curFrame.fid, fps, frameDuration, curFrame.timeStamp, prevFrame.fid, prevFrame.timeStamp));
-            processOpenFace();
+                //LOGGER.info(String.format("frameid: %d, fps:%f, f dur:%f",curFrame.frameId, fps, frameDuration));
+                processOpenFace();
+            }
         }        
     }
     
@@ -239,15 +251,13 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     
     private AUAPFrame makeAUFrame(){
         AUAPFrame au_frame = new AUAPFrame();                        
-        au_frame.setFrameNumber(curFrame.fid);
+        au_frame.setFrameNumber(curFrame.frameId);
 
         for(int i=0;i<OpenFaceFrame.auRealSize;i++)
         { 
             double value = curFrame.au_c[i];
             double prevValue = prevFrame.intensity[i];                            
-            double intensity = alpha*( value/3.5) + (1-alpha)*prevValue;
-            //System.out.println("AU["+au_correspondance[au]+"] : "+intensity+ " cpt "+ cpt);
-            LOGGER.info(String.format("i: %d, auIndex: %d, intensity: %f", i, OpenFaceFrame.getAUIndex(i), intensity));
+            double intensity = alpha*( value/3.5) + (1-alpha)*prevValue;            
             au_frame.setAUAPboth(OpenFaceFrame.getAUIndex(i), intensity);
         }
 
@@ -279,9 +289,8 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     }
     
     private BAPFrame makeBAPFrame(){
-        // TO-DO : Send Frame au_frames.add(au_frame);
         BAPFrame hmFrame = new BAPFrame();
-        hmFrame.setFrameNumber(curFrame.fid);
+        hmFrame.setFrameNumber(curFrame.frameId);
 
         // pose_Rx                                        
         double rot_X_rad = -1.0*curFrame.headRot.x();
@@ -309,17 +318,13 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
         return hmFrame;
     }
     
-    private void sendAUFrame(AUAPFrame frame){    
-        ID id = IDProvider.createID("From_OpenFace_AUStreamReader");
-        for(AUPerformer performer : au_perfomers) {
-            LOGGER.info(String.format("Sending AUAPFrame to: %s",performer.toString()));
-            performer.performAUAPFrame(frame, id);
-        }
+    private void sendAUFrame(AUAPFrame frame){        
+        ID id = IDProvider.createID("AUStreamReader_sendAUFrame");
+        auEmitterImpl.performAUAPFrame(frame, id);
     }
     
     private void sendBAPFrame(BAPFrame frame){
-        ID id = IDProvider.createID("From_OpenFace_AUStreamReader");
-        LOGGER.info("Sending bap frame");
+        ID id = IDProvider.createID("AUStreamReader_sendBAPFrame");        
         bapFramesEmitterImpl.sendBAPFrame(id, frame);        
     }
 
@@ -333,7 +338,8 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
 
     @Override
     public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        if (bapfp != null) {            
+        if (bapfp != null) {          
+            LOGGER.info("removeBAPFramesPerformer");
             bapFramesEmitterImpl.removeBAPFramesPerformer(bapfp);
         }
     }
@@ -342,14 +348,15 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     public void addAUPerformer(AUPerformer aup) {
         if (aup != null) {
             LOGGER.info("addAUPerformer");
-            au_perfomers.add(aup);
+            auEmitterImpl.addAUPerformer(aup);
         }
     }
 
     @Override
     public void removeAUPerformer(AUPerformer aup) {
         if (aup != null) {
-            au_perfomers.remove(aup);
+            LOGGER.info("addAUPerformer");
+            auEmitterImpl.removeAUPerformer(aup);
         }
     }
     
@@ -369,30 +376,19 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
         });
     }
 
-    /**
-     * @return the isPerforming
-     */
     public boolean isPerforming() {
         return isPerforming;
     }
 
-    /**
-     * @param isPerforming the isPerforming to set
-     */
     public void setIsPerforming(Boolean isPerforming) {
+        startInputFrame = 0;
         this.isPerforming = isPerforming;
     }
 
-    /**
-     * @return the isAlive
-     */
     public boolean isIsAlive() {
         return isAlive;
     }
 
-    /**
-     * @param isAlive the isAlive to set
-     */
     public void setIsAlive(boolean isAlive) {
         this.isAlive = isAlive;
     }

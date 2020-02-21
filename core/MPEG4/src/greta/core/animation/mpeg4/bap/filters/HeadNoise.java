@@ -18,8 +18,8 @@
 package greta.core.animation.mpeg4.bap.filters;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.util.id.ID;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ import java.util.Random;
  *
  * @author Radoslaw Niewiadomski
  */
-public class HeadNoise extends BAPFramesEmitterImpl implements BAPFramesPerformer{
+public class HeadNoise extends BAPFrameEmitterImpl implements BAPFramePerformer{
 
     private int x;
     private int y;

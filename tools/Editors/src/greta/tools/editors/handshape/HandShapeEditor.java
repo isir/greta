@@ -18,8 +18,8 @@
 package greta.tools.editors.handshape;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.repositories.HandShape;
@@ -47,9 +47,9 @@ import javax.swing.JFileChooser;
  *
  * @author Andre-Marie
  */
-public class HandShapeEditor extends javax.swing.JFrame implements BAPFramesEmitter, CharacterDependent{
+public class HandShapeEditor extends javax.swing.JFrame implements BAPFrameEmitter, CharacterDependent{
 
-    private ArrayList<BAPFramesPerformer> bapPerformers = new ArrayList<BAPFramesPerformer>();
+    private ArrayList<BAPFramePerformer> bapPerformers = new ArrayList<BAPFramePerformer>();
     private BAPFrame frame = new BAPFrame();
     private int bapIndexX = BAPType.null_bap.ordinal();
     private int bapIndexY = BAPType.null_bap.ordinal();
@@ -390,14 +390,14 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFramesEmit
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {
+    public void addBAPFramePerformer(BAPFramePerformer bapfp) {
         if(bapfp!=null) {
             bapPerformers.add(bapfp);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
+    public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
         bapPerformers.remove(bapfp);
     }
 
@@ -423,7 +423,7 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFramesEmit
         frames.get(0).setFrameNumber((int)(Timer.getTime()*Constants.FRAME_PER_SECOND));
 
         ID id = IDProvider.createID("HandShapeEditor");
-        for(BAPFramesPerformer performer : bapPerformers){
+        for(BAPFramePerformer performer : bapPerformers){
             performer.performBAPFrames(frames, id);
         }
     }

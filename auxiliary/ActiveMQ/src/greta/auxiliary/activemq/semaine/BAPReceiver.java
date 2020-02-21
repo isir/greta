@@ -20,9 +20,9 @@ package greta.auxiliary.activemq.semaine;
 import greta.auxiliary.activemq.TextReceiver;
 import greta.auxiliary.activemq.WhiteBoard;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPParser;
 import greta.core.util.id.IDProvider;
 import java.util.List;
@@ -32,9 +32,9 @@ import java.util.Map;
  *
  * @author Andre-Marie Pez
  */
-public class BAPReceiver extends TextReceiver implements BAPFramesEmitter {
+public class BAPReceiver extends TextReceiver implements BAPFrameEmitter {
 
-    private BAPFramesEmitterImpl bapEmitter = new BAPFramesEmitterImpl();
+    private BAPFrameEmitterImpl bapEmitter = new BAPFrameEmitterImpl();
     private BAPParser parser = new BAPParser();
 
     public BAPReceiver() {
@@ -66,13 +66,13 @@ public class BAPReceiver extends TextReceiver implements BAPFramesEmitter {
     }
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapFramesPerformer) {
-        bapEmitter.addBAPFramesPerformer(bapFramesPerformer);
+    public void addBAPFramePerformer(BAPFramePerformer bapFramePerformer) {
+        bapEmitter.addBAPFramePerformer(bapFramePerformer);
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapFramesPerformer) {
-        bapEmitter.removeBAPFramesPerformer(bapFramesPerformer);
+    public void removeBAPFramePerformer(BAPFramePerformer bapFramePerformer) {
+        bapEmitter.removeBAPFramePerformer(bapFramePerformer);
     }
 
 }

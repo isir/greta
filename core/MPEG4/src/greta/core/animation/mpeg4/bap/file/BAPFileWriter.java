@@ -31,7 +31,7 @@ import java.util.List;
  * @author Andre-Marie Pez
  * @author Ken Prepin
  */
-public class BAPFileWriter implements greta.core.animation.mpeg4.bap.BAPFramesPerformer {
+public class BAPFileWriter implements greta.core.animation.mpeg4.bap.BAPFramePerformer {
 
     private boolean sequencialWriting = true;
     private String path;

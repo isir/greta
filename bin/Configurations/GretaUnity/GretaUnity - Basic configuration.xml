@@ -177,15 +177,15 @@
             source="MPEG4 Animatable - 1544701103065-914" target="Environment - 1544700713383-564"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="FML File Reader - 1544701069074-506" target="Behavior Planner - 1544701075130-575"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477549928-147" target="MPEG4 Animatable - 1544701103065-914"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477549928-147" target="Thrift FAP Sender - 1571144928392-464"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544701084817-460" target="MPEG4 Animatable - 1544701103065-914"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544701084817-460" target="Thrift BAP Sender - 1571145020192-201"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Simple AU Performer - 1544701096226-322" target="Lip Blender - 1554477549928-147"/>
         <connection connector="setTTS" source="TTS - 1544704550664-449" target="MaryTTS Client - 1571148425368-281"/>
     </connections>

@@ -18,9 +18,9 @@
 package greta.core.animation.mpeg4.bap.filters;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.util.Constants;
 import greta.core.util.id.ID;
@@ -36,7 +36,7 @@ import java.util.List;
  * @author Jing Huang
  * <gabriel.jing.huang@gmail.com or jing.huang@telecom-paristech.fr>
  */
-public class BodyBlender extends BAPFramesEmitterImpl implements BAPFramesPerformer {
+public class BodyBlender extends BAPFrameEmitterImpl implements BAPFramePerformer {
 
     public int blending_delay = 0;
     public double k_factor = 1;
@@ -62,13 +62,13 @@ public class BodyBlender extends BAPFramesEmitterImpl implements BAPFramesPerfor
      * this enclosed {@code FAPFramePerformer} is used to collect FAPs from the
      * lips.
      */
-    private BAPFramesPerformer laughterReceiver;
+    private BAPFramePerformer laughterReceiver;
     private Blender blender;
 
     public BodyBlender(){
         bodyAnimation = new LinkedList<BAPIDPair>();
         laughterAnimation = new LinkedList<BAPIDPair>();
-        laughterReceiver = new BAPFramesPerformer(){
+        laughterReceiver = new BAPFramePerformer(){
             @Override
             public void performBAPFrames(List<BAPFrame> bap_animation, ID requestId) {
                 synchronized(BodyBlender.this){
@@ -165,12 +165,12 @@ public class BodyBlender extends BAPFramesEmitterImpl implements BAPFramesPerfor
         }
     }
 
-    public void setLaughterSource(BAPFramesEmitter laughterSource) {
-        laughterSource.addBAPFramesPerformer(laughterReceiver);
+    public void setLaughterSource(BAPFrameEmitter laughterSource) {
+        laughterSource.addBAPFramePerformer(laughterReceiver);
     }
 
-    public void dettachLaughterSource(BAPFramesEmitter laughterSource) {
-        laughterSource.removeBAPFramesPerformer(laughterReceiver);
+    public void dettachLaughterSource(BAPFrameEmitter laughterSource) {
+        laughterSource.removeBAPFramePerformer(laughterReceiver);
     }
 
     private void addValueFrom(int bapIndex, BAPFrame target, BAPFrame source){

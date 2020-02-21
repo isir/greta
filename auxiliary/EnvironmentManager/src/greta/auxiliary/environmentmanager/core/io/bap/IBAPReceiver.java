@@ -19,13 +19,13 @@ package greta.auxiliary.environmentmanager.core.io.bap;
 
 import greta.auxiliary.environmentmanager.core.IEnvironmentServer;
 import greta.core.animation.mpeg4.MPEG4Animatable;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
 
 /**
  *
  * @author Brice Donval
  */
-public interface IBAPReceiver extends BAPFramesEmitter {
+public interface IBAPReceiver extends BAPFrameEmitter {
 
     public IEnvironmentServer getEnvironmentServer();
 

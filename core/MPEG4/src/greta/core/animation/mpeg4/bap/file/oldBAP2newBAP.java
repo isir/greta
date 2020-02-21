@@ -18,7 +18,7 @@
 package greta.core.animation.mpeg4.bap.file;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.util.Constants;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
@@ -35,7 +35,7 @@ import java.util.StringTokenizer;
  *
  * @author Van Hanh Nguyen
  */
-public class oldBAP2newBAP implements greta.core.animation.mpeg4.bap.BAPFramesEmitter{
+public class oldBAP2newBAP implements greta.core.animation.mpeg4.bap.BAPFrameEmitter{
 
     public int[] from169to296 = {//matrix of convertion from 169 BAPs to 296 BAPs
                           0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
@@ -134,23 +134,23 @@ public class oldBAP2newBAP implements greta.core.animation.mpeg4.bap.BAPFramesEm
 
         //send to all BAPPerformer added
         ID id = IDProvider.createID(base);
-        for (int i = 0; i < _bapframesPerformer.size(); ++i) {
-            BAPFramesPerformer performer = _bapframesPerformer.get(i);
+        for (int i = 0; i < _bapFramePerformer.size(); ++i) {
+            BAPFramePerformer performer = _bapFramePerformer.get(i);
             performer.performBAPFrames(bap_animation, id);
         }
 
     }
 
-    ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
+    ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
         if(performer!=null)
-            _bapframesPerformer.add(performer);
+            _bapFramePerformer.add(performer);
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
-        _bapframesPerformer.remove(performer);
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
+        _bapFramePerformer.remove(performer);
     }
 }

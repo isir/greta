@@ -154,25 +154,25 @@
             source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="AU Library Editor - 1576664859072-989" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Body Head Noise - 1576674423688-149" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Hand Shape Editor - 1576665006215-970" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="LipSourceForLipBlender"
             source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Gesture Animation Editor - 1576665065207-12" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Gesture Animation Editor - 1576665065207-12" target="Animation Keyframe Performer - 1544700747777-220"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>

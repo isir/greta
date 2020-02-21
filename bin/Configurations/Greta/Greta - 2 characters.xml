@@ -200,7 +200,7 @@
     <connections>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4 Animatable - 1544701103065-914" target="Environment - 1544700713383-564"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477506450-994"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Behavior Planner - 1544701075130-575" target="Behavior Realizer - 1544713018144-582"/>
@@ -226,7 +226,7 @@
             source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
         <connection connector="LipSourceForLipBlender"
             source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477506450-994"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477549928-147" target="MPEG4 Animatable - 1544701103065-914"/>
         <connection connector="setTTS" source="TTS - 1544704550664-449" target="MaryTTS Client - 1544701108513-960"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
@@ -244,11 +244,11 @@
             source="Face Keyframe Performer - 1554477470123-914" target="Simple AU Performer - 1544700795765-328"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554477488803-405" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477506450-994" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544701084817-460" target="MPEG4 Animatable - 1544701103065-914"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Simple AU Performer - 1544701096226-322" target="Lip Blender - 1554477549928-147"/>
         <connection connector="connectPlayerToEnvironment"
             source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
@@ -258,7 +258,7 @@
             source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544713001984-351"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544713001984-351"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
     </connections>
 </modulated>

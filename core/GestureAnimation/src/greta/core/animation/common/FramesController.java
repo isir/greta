@@ -20,8 +20,8 @@ package greta.core.animation.common;
 import greta.core.animation.common.Frame.JointFrame;
 import greta.core.animation.common.Frame.KeyFrame;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.util.Constants;
@@ -37,27 +37,27 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- *  streaming BAP frame from FramesGenerato  to BAPFramesPerformer
+ *  streaming BAP frame from FramesGenerato  to BAPFramePerformer
  * @author Jing Huang
  */
-public class FramesController extends Thread implements BAPFramesEmitter, FramesReceiver {
+public class FramesController extends Thread implements BAPFrameEmitter, FramesReceiver {
 
-    ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
+    ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
     LinkedList<KeyFrame> _framesList = new LinkedList<KeyFrame>();
     BAPFrame _bframe = new BAPFrame();
     private boolean requestStop = false;
     int numberFramesPerSend = 30;
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
         if(performer!=null) {
-            _bapframesPerformer.add(performer);
+            _bapFramePerformer.add(performer);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
-        _bapframesPerformer.remove(performer);
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
+        _bapFramePerformer.remove(performer);
     }
 
     @Override
@@ -180,8 +180,8 @@ public class FramesController extends Thread implements BAPFramesEmitter, Frames
 
 
 
-        for (int i = 0; i < _bapframesPerformer.size(); ++i) {
-            BAPFramesPerformer performer = _bapframesPerformer.get(i);
+        for (int i = 0; i < _bapFramePerformer.size(); ++i) {
+            BAPFramePerformer performer = _bapFramePerformer.get(i);
             performer.performBAPFrames(bapframes, requestId);
         }
     }

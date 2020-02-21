@@ -18,8 +18,8 @@
 package greta.core.animation.performer;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.util.id.ID;
 import java.util.ArrayList;
@@ -30,9 +30,9 @@ import java.util.Random;
  *
  * @author Brian Ravenet
  */
-public class BodyAnimationArmNoise implements BAPFramesEmitter, BAPFramesPerformer {
+public class BodyAnimationArmNoise implements BAPFrameEmitter, BAPFramePerformer {
 
-    private final List<BAPFramesPerformer> bapFramesPerformers = new ArrayList<BAPFramesPerformer>();
+    private final List<BAPFramePerformer> bapFramePerformers = new ArrayList<BAPFramePerformer>();
     private double leftShoulderTimer = 0;
     private double rightShoulderTimer = 0;
     private double leftElbowFlexTimer = 0;
@@ -45,16 +45,16 @@ public class BodyAnimationArmNoise implements BAPFramesEmitter, BAPFramesPerform
     }
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapFramesPerformer) {
-        if (bapFramesPerformer != null) {
-            bapFramesPerformers.add(bapFramesPerformer);
+    public void addBAPFramePerformer(BAPFramePerformer bapFramePerformer) {
+        if (bapFramePerformer != null) {
+            bapFramePerformers.add(bapFramePerformer);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapFramesPerformer) {
-        if (bapFramesPerformer != null) {
-            bapFramesPerformers.remove(bapFramesPerformer);
+    public void removeBAPFramePerformer(BAPFramePerformer bapFramePerformer) {
+        if (bapFramePerformer != null) {
+            bapFramePerformers.remove(bapFramePerformer);
         }
     }
 
@@ -79,7 +79,7 @@ public class BodyAnimationArmNoise implements BAPFramesEmitter, BAPFramesPerform
             // leftShoulderFlex = leftShoulderFlex * ((Math.sin(leftElbowFlex)+1)/2);
         }
 
-        for (BAPFramesPerformer bfp : bapFramesPerformers) {
+        for (BAPFramePerformer bfp : bapFramePerformers) {
             bfp.performBAPFrames(list, id);
         }//To change body of generated methods, choose Tools | Templates.
     }

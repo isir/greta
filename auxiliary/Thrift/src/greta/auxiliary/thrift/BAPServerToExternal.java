@@ -18,7 +18,7 @@
 package greta.auxiliary.thrift;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.util.id.ID;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ import java.util.List;
  *
  * @author Ken Prepin
  */
-public class BAPServerToExternal extends APServerToExternal implements BAPFramesPerformer {
+public class BAPServerToExternal extends APServerToExternal implements BAPFramePerformer {
    public BAPServerToExternal() {
     }
 

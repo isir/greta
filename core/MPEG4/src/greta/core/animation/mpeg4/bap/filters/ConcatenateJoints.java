@@ -18,8 +18,8 @@
 package greta.core.animation.mpeg4.bap.filters;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.util.id.ID;
@@ -33,7 +33,7 @@ import java.util.List;
  *
  * @author Andre-Marie Pez
  */
-public class ConcatenateJoints extends BAPFramesEmitterImpl implements BAPFramesPerformer {
+public class ConcatenateJoints extends BAPFrameEmitterImpl implements BAPFramePerformer {
 
     private ArrayList<Concatenator> concatenators;
     private List<JointType> currentJointUsed;

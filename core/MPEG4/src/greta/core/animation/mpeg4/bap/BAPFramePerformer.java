@@ -17,11 +17,13 @@
  */
 package greta.core.animation.mpeg4.bap;
 
+import greta.core.util.id.ID;
+import java.util.List;
+
 /**
  *
  * @author Jing Huang
  */
-public interface BAPFramesEmitter {
-    void addBAPFramesPerformer(BAPFramesPerformer performer);
-    void removeBAPFramesPerformer(BAPFramesPerformer performer);
+public interface BAPFramePerformer {
+    void performBAPFrames(List<BAPFrame> bapframes, ID requestId);
 }

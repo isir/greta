@@ -18,7 +18,7 @@
 package greta.core.keyframes.face;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
 import greta.core.animation.mpeg4.fap.FAPType;
 import greta.core.repositories.AUAPFrame;
 import greta.core.repositories.AUItem;
@@ -37,7 +37,7 @@ import java.util.List;
  *
  * @author Radoslaw Niewiadomski
  */
-public class SimpleHeadPerformer extends BAPFramesEmitterImpl implements AUPerformer, CharacterDependent {
+public class SimpleHeadPerformer extends BAPFrameEmitterImpl implements AUPerformer, CharacterDependent {
     private AULibrary auLibrary;
     private CharacterManager characterManager;
     /**

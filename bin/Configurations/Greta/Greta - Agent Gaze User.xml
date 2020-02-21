@@ -161,7 +161,7 @@
             source="Agent Gaze User - 1579007583830-985" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="connectPlayerToEnvironment"
             source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
         <connection connector="addFeedbackOutput"
             source="Feedbacks - 1579007610695-773" target="Agent Gaze User - 1579007583830-985"/>
@@ -186,7 +186,7 @@
             source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Behavior Planner - 1544700734561-356" target="Feedbacks - 1579007610695-773"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="addFeedbackInput"
             source="Behavior Realizer - 1544712930520-534" target="Feedbacks - 1579007610695-773"/>
@@ -200,7 +200,7 @@
             source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
         <connection connector="AddedUser"
             source="User - 1579007516735-724" target="Agent Gaze User - 1579007583830-985"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
     </connections>
 </modulated>

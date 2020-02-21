@@ -20,8 +20,8 @@ package greta.auxiliary.player.ogre.capture;
 import greta.auxiliary.BVHMocap.BVHReaderGUI;
 import greta.auxiliary.player.ogre.OgreRenderTexture;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
 import greta.core.util.log.Logs;
@@ -41,7 +41,7 @@ import javax.swing.JPanel;
  *
  * @author Donatella Simonetti
  */
-public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureListener, BAPFramesEmitter { // CallbackPerformer,
+public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureListener, BAPFrameEmitter { // CallbackPerformer,
 
     private AWTImageCaptureOutput imageCaptureOutput;
     private OneShotCapturer screenShotCapturer;
@@ -52,7 +52,7 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
     private OgreRenderTexture textureCapturable;
     protected Capturer currentVideoCapturer;
     
-    private ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
+    private ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
     
     private ActionListener startCaptureAction = new ActionListener() {
         @Override
@@ -252,8 +252,8 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
                     
                     bap_animation.add(restpose);
                     ID id = IDProvider.createID("restpose");//today
-                    for (int i = 0; i < _bapframesPerformer.size(); ++i) {
-                        BAPFramesPerformer performer = _bapframesPerformer.get(i);
+                    for (int i = 0; i < _bapFramePerformer.size(); ++i) {
+                        BAPFramePerformer performer = _bapFramePerformer.get(i);
                         performer.performBAPFrames(bap_animation, id);
                     }
                 }
@@ -426,15 +426,15 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
     // End of variables declaration//GEN-END:variables
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {
+    public void addBAPFramePerformer(BAPFramePerformer bapfp) {
         if (bapfp != null) {
-            _bapframesPerformer.add(bapfp);
+            _bapFramePerformer.add(bapfp);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
-         _bapframesPerformer.remove(bapfp);
+    public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
+         _bapFramePerformer.remove(bapfp);
     }
 
 }

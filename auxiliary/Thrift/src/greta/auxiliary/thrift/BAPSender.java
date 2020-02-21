@@ -18,7 +18,7 @@
 package greta.auxiliary.thrift;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.util.id.ID;
 import java.util.List;
 
@@ -26,7 +26,7 @@ import java.util.List;
  *
  * @author Ken Prepin
  */
-public class BAPSender extends APSender implements BAPFramesPerformer{
+public class BAPSender extends APSender implements BAPFramePerformer{
 
     public BAPSender(){
 

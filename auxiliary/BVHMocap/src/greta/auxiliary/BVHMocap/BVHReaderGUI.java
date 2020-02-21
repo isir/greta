@@ -20,8 +20,8 @@ package greta.auxiliary.BVHMocap;
 import greta.core.animation.common.Joint;
 import greta.core.animation.common.Skeleton;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.util.Constants;
 import greta.core.util.id.ID;
@@ -58,7 +58,7 @@ import javax.swing.JTextField;
  *
  * @author Donatella Simonetti
  */
-public class BVHReaderGUI extends JFrame implements BAPFramesEmitter{
+public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
     
     
     //BVHreader variables
@@ -396,8 +396,8 @@ public class BVHReaderGUI extends JFrame implements BAPFramesEmitter{
         }
 
         ID id = IDProvider.createID(filename);//today
-        for (int i = 0; i < _bapframesPerformer.size(); ++i) {
-            BAPFramesPerformer performer = _bapframesPerformer.get(i);
+        for (int i = 0; i < _bapFramePerformer.size(); ++i) {
+            BAPFramePerformer performer = _bapFramePerformer.get(i);
             performer.performBAPFrames(bap_animation, id);
 
         }
@@ -1557,18 +1557,18 @@ public class BVHReaderGUI extends JFrame implements BAPFramesEmitter{
 
         return mylist;
     }
-    ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
+    ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
         if (performer != null) {
-            _bapframesPerformer.add(performer);
+            _bapFramePerformer.add(performer);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
-        _bapframesPerformer.remove(performer);
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
+        _bapFramePerformer.remove(performer);
     }
 
     public ArrayList<BAPFrame> OneBAPFrame(int bapframe_startTime) {

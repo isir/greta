@@ -23,23 +23,23 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * This class is a basic implementation of {@code BAPFramesEmitter}.<br/>
- * It provides some methods to send {@code BAPFrames} to all {@code BAPFramesPerformer} added.
+ * This class is a basic implementation of {@code BAPFrameEmitter}.<br/>
+ * It provides some methods to send {@code BAPFrames} to all {@code BAPFramePerformer} added.
  * @author Andre-Marie Pez
  */
-public class BAPFramesEmitterImpl implements BAPFramesEmitter{
+public class BAPFrameEmitterImpl implements BAPFrameEmitter{
 
-    private ArrayList<BAPFramesPerformer> performers = new ArrayList<>();
+    private ArrayList<BAPFramePerformer> performers = new ArrayList<>();
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
         if (performer != null) {
             performers.add(performer);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
         if (performer != null) {
             performers.remove(performer);
         }
@@ -50,7 +50,7 @@ public class BAPFramesEmitterImpl implements BAPFramesEmitter{
     }
 
     public void sendBAPFrames(ID requestId, List<BAPFrame> frames){
-        for(BAPFramesPerformer performer : performers){
+        for(BAPFramePerformer performer : performers){
             performer.performBAPFrames(frames, requestId);
         }
     }
@@ -60,13 +60,13 @@ public class BAPFramesEmitterImpl implements BAPFramesEmitter{
     }
 
     /**
-     * Sends a message to cancel all the {@code BAPFrame} with the given {@code ID} to all linked BAPFramesPerformer.
+     * Sends a message to cancel all the {@code BAPFrame} with the given {@code ID} to all linked BAPFramePerformer.
      * @param requestId ID of the frames to cancel
      */
     public void cancelFramesWithIDInLinkedPerformers(ID requestId) {
-        for (BAPFramesPerformer performer : performers) {
-            if (performer instanceof CancelableBAPFramesPerformer) {
-                ((CancelableBAPFramesPerformer) performer).cancelBAPFramesById(requestId);
+        for (BAPFramePerformer performer : performers) {
+            if (performer instanceof CancelableBAPFramePerformer) {
+                ((CancelableBAPFramePerformer) performer).cancelBAPFramesById(requestId);
             }
         }
     }

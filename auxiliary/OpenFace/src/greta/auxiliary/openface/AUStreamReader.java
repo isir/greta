@@ -19,9 +19,9 @@ package greta.auxiliary.openface;
 
 import greta.core.util.StringArrayListener;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
 import greta.core.keyframes.face.AUEmitter;
@@ -51,7 +51,7 @@ import org.zeromq.ZMQException;
  *
  * @author Thomas Janssoone and soumia dermouche
  */
-public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFramesEmitter, Runnable {
+public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFrameEmitter, Runnable {
     private static final Logger LOGGER = Logger.getLogger(AUStreamReader.class.getName() );
     private List<StringArrayListener> headerListeners = new ArrayList<>();
     private Thread t;
@@ -60,7 +60,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     private final int offsetFrame = 0;
     
     private AUEmitterImpl auEmitterImpl = new AUEmitterImpl();
-    private BAPFramesEmitterImpl bapFramesEmitterImpl = new BAPFramesEmitterImpl();
+    private BAPFrameEmitterImpl bapFramesEmitterImpl = new BAPFrameEmitterImpl();
     
     private boolean isPerforming = false;
     private boolean isAlive = true;
@@ -78,7 +78,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     double fps = 0.;
     double frameDuration = 0.;
     OpenFaceFrame curFrame = new OpenFaceFrame();
-    OpenFaceFrame prevFrame = new OpenFaceFrame();;
+    OpenFaceFrame prevFrame = new OpenFaceFrame();
     
     // loop variables
     double prev_rot_X = 0.0;
@@ -262,8 +262,8 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
         }
 
         //gaze
-        double gaze_x = alpha*(0.5*(curFrame.gaze1.x()+curFrame.gazeAngleX))+(1-alpha)*prev_gaze_x;
-        double gaze_y = alpha*(0.5*(curFrame.gaze1.y()+curFrame.gazeAngleY))+(1-alpha)*prev_gaze_y;
+        double gaze_x = alpha*(0.5*(curFrame.gaze1.x()+curFrame.gazeAngleX*Math.PI/360.))+(1-alpha)*prev_gaze_x;
+        double gaze_y = alpha*(0.5*(curFrame.gaze1.y()+curFrame.gazeAngleY*Math.PI/360.))+(1-alpha)*prev_gaze_y;
         if(gaze_x<0){
             au_frame.setAUAPboth(62, gaze_x);
         }
@@ -292,18 +292,11 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
         BAPFrame hmFrame = new BAPFrame();
         hmFrame.setFrameNumber(curFrame.frameId);
 
-        // pose_Rx                                        
-        double rot_X_rad = -1.0*curFrame.headRot.x();
-        // pose_Ry
-        double rot_Y_rad = -1.0*curFrame.headRot.y();
-        // pose_Rz
-        double rot_Z_rad = -1.0*curFrame.headRot.z();
+        double rot_X_deg =  curFrame.headRot.x();
+        double rot_Y_deg =  -1.0*curFrame.headRot.y();
+        double rot_Z_deg =  -1.0*curFrame.headRot.z();
 
-        double rot_X_deg =  -rot_X_rad*180/Math.PI;
-        double rot_Y_deg =  rot_Y_rad*180/Math.PI;
-        double rot_Z_deg =  rot_Z_rad*180/Math.PI;
-
-        rot_X_deg =  alpha*(rot_X_deg)+(1-alpha)*prev_rot_X;
+        rot_X_deg = alpha*(rot_X_deg)+(1-alpha)*prev_rot_X;
         rot_Y_deg = alpha*(rot_Y_deg)+(1-alpha)*prev_rot_Y;
         rot_Z_deg = alpha*(rot_Z_deg)+(1-alpha)*prev_rot_Z;
 
@@ -329,18 +322,18 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
     }
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {        
+    public void addBAPFramePerformer(BAPFramePerformer bapfp) {        
         if (bapfp != null) {        
             LOGGER.info("addBAPFramesPerformer");
-            bapFramesEmitterImpl.addBAPFramesPerformer(bapfp);
+            bapFramesEmitterImpl.addBAPFramePerformer(bapfp);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
+    public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
         if (bapfp != null) {          
             LOGGER.info("removeBAPFramesPerformer");
-            bapFramesEmitterImpl.removeBAPFramesPerformer(bapfp);
+            bapFramesEmitterImpl.removeBAPFramePerformer(bapfp);
         }
     }
     

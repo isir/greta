@@ -301,7 +301,7 @@ public abstract class AbstractEnvironmentServer implements IEnvironmentManagerCo
                 IAudioSender audioSender = AudioSender.getConstructor(IEnvironmentServer.class, MPEG4Animatable.class).newInstance(this, mpeg4Animatable);
 
                 mpeg4Animatable.addFAPFramePerformer(fapSender);
-                mpeg4Animatable.addBAPFramesPerformer(bapSender);
+                mpeg4Animatable.addBAPFramePerformer(bapSender);
                 mpeg4Animatable.addAudioPerformer(audioSender);
 
                 fapSenders.put(mpeg4AnimatableId, fapSender);
@@ -329,7 +329,7 @@ public abstract class AbstractEnvironmentServer implements IEnvironmentManagerCo
                 IAudioReceiver audioReceiver = AudioReceiver.getConstructor(IEnvironmentServer.class, MPEG4Animatable.class).newInstance(this, mpeg4Animatable);
 
                 fapReceiver.addFAPFramePerformer(mpeg4Animatable);
-                bapReceiver.addBAPFramesPerformer(mpeg4Animatable);
+                bapReceiver.addBAPFramePerformer(mpeg4Animatable);
                 audioReceiver.addAudioPerformer(mpeg4Animatable);
 
                 fapReceivers.put(mpeg4AnimatableId, fapReceiver);
@@ -358,7 +358,7 @@ public abstract class AbstractEnvironmentServer implements IEnvironmentManagerCo
             IAudioSender audioSender = audioSenders.get(mpeg4AnimatableId);
 
             mpeg4Animatable.removeFAPFramePerformer(fapSender);
-            mpeg4Animatable.removeBAPFramesPerformer(bapSender);
+            mpeg4Animatable.removeBAPFramePerformer(bapSender);
             mpeg4Animatable.removeAudioPerformer(audioSender);
 
             fapSenders.remove(mpeg4AnimatableId);
@@ -385,7 +385,7 @@ public abstract class AbstractEnvironmentServer implements IEnvironmentManagerCo
             IAudioReceiver audioReceiver = audioReceivers.get(mpeg4AnimatableId);
 
             fapReceiver.removeFAPFramePerformer(mpeg4Animatable);
-            bapReceiver.removeBAPFramesPerformer(mpeg4Animatable);
+            bapReceiver.removeBAPFramePerformer(mpeg4Animatable);
             audioReceiver.removeAudioPerformer(mpeg4Animatable);
 
             fapReceivers.remove(mpeg4AnimatableId);

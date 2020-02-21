@@ -18,9 +18,9 @@
 package greta.core.animation.mpeg4;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPParser;
 import greta.core.animation.mpeg4.fap.FAPFrame;
 import greta.core.animation.mpeg4.fap.FAPFrameEmitter;
@@ -42,22 +42,22 @@ import java.util.List;
  * @author Radoslaw Niewiadomski
  * @author Andre-Marie Pez
  */
-public class MPEG4FileReader implements FAPFrameEmitter, BAPFramesEmitter, AudioEmitter{
+public class MPEG4FileReader implements FAPFrameEmitter, BAPFrameEmitter, AudioEmitter{
 
     private final FAPFrameEmitterImpl FAPEmitters = new FAPFrameEmitterImpl();
-    private final BAPFramesEmitterImpl BAPEmitters = new BAPFramesEmitterImpl();
+    private final BAPFrameEmitterImpl BAPEmitters = new BAPFrameEmitterImpl();
     private final AudioEmitterImpl audioEmitters = new AudioEmitterImpl();
     private final BAPParser BAPParser = new BAPParser();
     private final FAPParser FAPParser = new FAPParser();
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
-        BAPEmitters.addBAPFramesPerformer(performer);
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
+        BAPEmitters.addBAPFramePerformer(performer);
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
-        BAPEmitters.removeBAPFramesPerformer(performer);
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
+        BAPEmitters.removeBAPFramePerformer(performer);
     }
 
     @Override

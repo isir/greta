@@ -20,8 +20,8 @@ package greta.core.animation.performer;
 import greta.core.animation.Frame;
 import greta.core.animation.FrameSequence;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.util.CharacterManager;
@@ -40,36 +40,36 @@ import java.util.List;
  *
  * @author Jing Huang
  */
-public class BodyAnimationBAPFrameEmitter implements BAPFramesEmitter{
+public class BodyAnimationBAPFrameEmitter implements BAPFrameEmitter{
     
     BodyAnimationNoiseGenerator _bodyNoise = new BodyAnimationNoiseGenerator(CharacterManager.getStaticInstance());
-    ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
+    ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
         if (performer != null) {
-            _bapframesPerformer.add(performer);
+            _bapFramePerformer.add(performer);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
-        _bapframesPerformer.remove(performer);
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
+        _bapFramePerformer.remove(performer);
     }
 
     public void updateFrameList(FrameSequence fs) {
         ArrayList<BAPFrame> bf = getBapFrames(fs);
         ID id = IDProvider.createID("BodyAnimationBAPFrameEmitter");
-        for (int i = 0; i < _bapframesPerformer.size(); ++i) {
-            BAPFramesPerformer performer = _bapframesPerformer.get(i);
+        for (int i = 0; i < _bapFramePerformer.size(); ++i) {
+            BAPFramePerformer performer = _bapFramePerformer.get(i);
             performer.performBAPFrames(bf, id);
         }
     }
 
     public void updateFrameList(List<BAPFrame> frames) {
         ID id = IDProvider.createID("BodyAnimationBAPFrameEmitter");
-        for (int i = 0; i < _bapframesPerformer.size(); ++i) {
-            BAPFramesPerformer performer = _bapframesPerformer.get(i);
+        for (int i = 0; i < _bapFramePerformer.size(); ++i) {
+            BAPFramePerformer performer = _bapFramePerformer.get(i);
             performer.performBAPFrames(frames, id);
         }
     }

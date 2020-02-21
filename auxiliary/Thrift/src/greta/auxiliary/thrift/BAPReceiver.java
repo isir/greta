@@ -19,8 +19,8 @@ package greta.auxiliary.thrift;
 
 import greta.auxiliary.thrift.gen_java.Message;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.util.animationparameters.AnimationParametersFrame;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
@@ -30,27 +30,27 @@ import java.util.ArrayList;
  *
  * @author Ken Prepin
  */
-public class BAPReceiver extends APReceiver implements BAPFramesEmitter {
+public class BAPReceiver extends APReceiver implements BAPFrameEmitter {
 
-    private ArrayList<BAPFramesPerformer> bapFramesPerfList;
+    private ArrayList<BAPFramePerformer> bapFramesPerfList;
 
     public BAPReceiver() {
         super();
-        bapFramesPerfList = new ArrayList<BAPFramesPerformer>();
+        bapFramesPerfList = new ArrayList<BAPFramePerformer>();
     }
 
     public BAPReceiver(int port) {
         super(port);
-        bapFramesPerfList = new ArrayList<BAPFramesPerformer>();
+        bapFramesPerfList = new ArrayList<BAPFramePerformer>();
     }
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
         bapFramesPerfList.add(performer);
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
         bapFramesPerfList.remove(performer);
     }
 
@@ -62,7 +62,7 @@ public class BAPReceiver extends APReceiver implements BAPFramesEmitter {
     @Override
     public void perform(Message m) {
         ID id = IDProvider.createID(m.getId());
-        for (BAPFramesPerformer performer : bapFramesPerfList) {
+        for (BAPFramePerformer performer : bapFramesPerfList) {
             performer.performBAPFrames(getGretaAPFrameList(m), id);
         }
     }

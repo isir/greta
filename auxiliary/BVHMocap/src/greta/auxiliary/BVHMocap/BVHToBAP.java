@@ -22,8 +22,8 @@ import greta.core.animation.bvh.BVHChannel;
 import greta.core.animation.bvh.BVHFrame;
 import greta.core.animation.bvh.BVHLoader;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.animation.mpeg4.bap.file.BAPFileWriter;
@@ -39,17 +39,17 @@ import java.util.ArrayList;
  *
  * @author Jing Huang
  */
-public class BVHToBAP  implements BAPFramesEmitter {
+public class BVHToBAP  implements BAPFrameEmitter {
     
-    ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
+    ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        _bapframesPerformer.add(bapfp);
+    public void addBAPFramePerformer(BAPFramePerformer bapfp) {
+        _bapFramePerformer.add(bapfp);
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        _bapframesPerformer.remove(bapfp);
+    public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
+        _bapFramePerformer.remove(bapfp);
     }
     
     public static void main(String[] args) throws FileNotFoundException, IOException {

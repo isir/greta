@@ -18,12 +18,16 @@
 package greta.core.animation.mpeg4.bap;
 
 import greta.core.util.id.ID;
-import java.util.List;
 
 /**
+ * This interface describes a {@code BAPFramePerformer} which's frames are cancelable.
  *
- * @author Jing Huang
+ * @author Nawhal Sayarh
  */
-public interface BAPFramesPerformer {
-    void performBAPFrames(List<BAPFrame> bapframes, ID requestId);
+public interface CancelableBAPFramePerformer extends BAPFramePerformer {
+    /**
+     * Cancels all the {@code BAPFrame} with the given {@code ID} if possible.
+     * @param requestId ID of the frames to cancel
+     */
+    void cancelBAPFramesById (ID requestId);
 }

@@ -18,8 +18,8 @@
 package greta.core.animation.mpeg4.fap.file;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.fap.FAPFrame;
 import greta.core.animation.mpeg4.fap.FAPFrameEmitter;
 import greta.core.animation.mpeg4.fap.FAPFramePerformer;
@@ -40,21 +40,21 @@ import java.util.StringTokenizer;
  *
  * @author Radoslaw Niewiadomski
  */
-public class FAPHeadFileReader implements FAPFrameEmitter, BAPFramesEmitter {
+public class FAPHeadFileReader implements FAPFrameEmitter, BAPFrameEmitter {
 
     private ArrayList<FAPFramePerformer> performers = new ArrayList<FAPFramePerformer>();
-    private ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
+    private ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
         if (performer != null) {
-            _bapframesPerformer.add(performer);
+            _bapFramePerformer.add(performer);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
-        _bapframesPerformer.remove(performer);
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
+        _bapFramePerformer.remove(performer);
     }
 
     public void load(String fapfilename) {
@@ -460,7 +460,7 @@ public class FAPHeadFileReader implements FAPFrameEmitter, BAPFramesEmitter {
          */
         //send to all FAPFramePerformer added
         ID id = IDProvider.createID(base);
-        for (BAPFramesPerformer performer : _bapframesPerformer) {
+        for (BAPFramePerformer performer : _bapFramePerformer) {
             performer.performBAPFrames(bapframes, id);
         }
 

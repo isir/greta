@@ -18,9 +18,9 @@
 package greta.core.signals;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
 import greta.core.keyframes.face.AUEmitter;
@@ -49,16 +49,16 @@ import java.util.logging.Logger;
  *
  * @author Thomas Janssoone and soumia dermouche
  */
-public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFramesEmitter, SignalEmitter {
+public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFrameEmitter, SignalEmitter {
     private static final Logger LOGGER = Logger.getLogger( AUParserFileReader.class.getName() );
     
     private ArrayList<AUPerformer> au_perfomers = new ArrayList<>();
     private ArrayList<AUAPFrame> au_frames = new ArrayList<>();
 
-    private ArrayList<BAPFramesPerformer> bap_perfomers = new ArrayList<>();
+    private ArrayList<BAPFramePerformer> bap_perfomers = new ArrayList<>();
     private ArrayList<BAPFrame> bap_frames = new ArrayList<>();
     
-    BAPFramesEmitterImpl bapFramesEmitterImpl = new BAPFramesEmitterImpl();
+    BAPFrameEmitterImpl bapFrameEmitterImpl = new BAPFrameEmitterImpl();
     
     boolean isPerforming = false;
     //Phil
@@ -774,10 +774,10 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
         }
         
         int p =0;
-        for (BAPFramesPerformer performer : bap_perfomers) {
+        for (BAPFramePerformer performer : bap_perfomers) {
             performer.performBAPFrames(curr_bap_frames, id);
         }
-        bapFramesEmitterImpl.sendBAPFrames(id, curr_bap_frames);
+        bapFrameEmitterImpl.sendBAPFrames(id, curr_bap_frames);
         
         Logs.debug("--Post BAP");
       
@@ -786,19 +786,19 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
 
     
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        //System.out.println("addBAPFramesPerformer");
+    public void addBAPFramePerformer(BAPFramePerformer bapfp) {
+        //System.out.println("addBAPFramePerformer");
         if (bapfp != null) {
             bap_perfomers.add(bapfp);
-            bapFramesEmitterImpl.addBAPFramesPerformer(bapfp);
+            bapFrameEmitterImpl.addBAPFramePerformer(bapfp);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
+    public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
         if (bapfp != null) {
             bap_perfomers.remove(bapfp);
-            bapFramesEmitterImpl.removeBAPFramesPerformer(bapfp);
+            bapFrameEmitterImpl.removeBAPFramePerformer(bapfp);
         }
     }
 

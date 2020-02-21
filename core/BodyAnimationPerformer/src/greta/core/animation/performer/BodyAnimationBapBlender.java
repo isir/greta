@@ -20,10 +20,10 @@ package greta.core.animation.performer;
 import greta.core.animation.Frame;
 import greta.core.animation.mpeg4.bap.BAP;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
-import greta.core.animation.mpeg4.bap.CancelableBAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.CancelableBAPFramePerformer;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.util.CharacterDependent;
 import greta.core.util.CharacterDependentAdapterThread;
@@ -50,9 +50,9 @@ import java.util.logging.Logger;
  * @author Jing Huang
  * @author Brice Donval
  */
-public class BodyAnimationBapBlender extends CharacterDependentAdapterThread implements BAPFramesEmitter, CharacterDependent {
+public class BodyAnimationBapBlender extends CharacterDependentAdapterThread implements BAPFrameEmitter, CharacterDependent {
 
-    private final List<BAPFramesPerformer> bapFramesPerformers = new ArrayList<>();
+    private final List<BAPFramePerformer> bapFramePerformers = new ArrayList<>();
 
     private final SortedMap<Integer, ID> requestIds = new TreeMap<>();
     private final SortedMap<Integer, BAPFrame> requestFrames = new TreeMap<>();
@@ -77,16 +77,16 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
     }
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapFramesPerformer) {
-        if (bapFramesPerformer != null) {
-            bapFramesPerformers.add(bapFramesPerformer);
+    public void addBAPFramePerformer(BAPFramePerformer bapFramePerformer) {
+        if (bapFramePerformer != null) {
+            bapFramePerformers.add(bapFramePerformer);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapFramesPerformer) {
-        if (bapFramesPerformer != null) {
-            bapFramesPerformers.remove(bapFramesPerformer);
+    public void removeBAPFramePerformer(BAPFramePerformer bapFramePerformer) {
+        if (bapFramePerformer != null) {
+            bapFramePerformers.remove(bapFramePerformer);
         }
     }
 
@@ -126,7 +126,7 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
     }
 
     private void sendFrames(List<BAPFrame> bapFrames, ID requestId) {
-        for (BAPFramesPerformer performer : bapFramesPerformers) {
+        for (BAPFramePerformer performer : bapFramePerformers) {
             performer.performBAPFrames(new ArrayList<>(bapFrames), requestId);
         }
     }
@@ -153,9 +153,9 @@ public class BodyAnimationBapBlender extends CharacterDependentAdapterThread imp
                     requestIdsIterator.remove();
                 }
             }
-            for (BAPFramesPerformer performer : bapFramesPerformers) {
-                if (performer instanceof CancelableBAPFramesPerformer) {
-                    ((CancelableBAPFramesPerformer) performer).cancelBAPFramesById(requestId);
+            for (BAPFramePerformer performer : bapFramePerformers) {
+                if (performer instanceof CancelableBAPFramePerformer) {
+                    ((CancelableBAPFramePerformer) performer).cancelBAPFramesById(requestId);
                 }
             }
         }

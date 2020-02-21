@@ -22,8 +22,8 @@ import greta.core.animation.common.body.Body;
 import greta.core.animation.common.body.Head;
 import greta.core.animation.common.body.Shoulder;
 import greta.core.animation.common.body.Torse;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.keyframes.GestureKeyframe;
 import greta.core.keyframes.HeadKeyframe;
 import greta.core.keyframes.Keyframe;
@@ -46,7 +46,7 @@ import java.util.List;
  *
  * @author Jing Huang
  */
-public class IKKeyframePerformer implements KeyframePerformer, BAPFramesEmitter {
+public class IKKeyframePerformer implements KeyframePerformer, BAPFrameEmitter {
 
     IKFramesGenerator _ikFramesGenerator = new IKFramesGenerator();
     FramesController _framesController = new FramesController();
@@ -166,13 +166,13 @@ public class IKKeyframePerformer implements KeyframePerformer, BAPFramesEmitter 
 
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
-        _framesController.addBAPFramesPerformer(performer);
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
+        _framesController.addBAPFramePerformer(performer);
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
-        _framesController.removeBAPFramesPerformer(performer);
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
+        _framesController.removeBAPFramePerformer(performer);
     }
 
 

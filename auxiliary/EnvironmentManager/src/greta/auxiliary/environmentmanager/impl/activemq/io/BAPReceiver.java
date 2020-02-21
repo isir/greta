@@ -23,7 +23,7 @@ import greta.auxiliary.environmentmanager.core.io.bap.AbstractBAPReceiver;
 import greta.auxiliary.environmentmanager.impl.activemq.util.ActiveMQConstants;
 import greta.auxiliary.environmentmanager.util.Toolbox;
 import greta.core.animation.mpeg4.MPEG4Animatable;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 
 /**
  *
@@ -82,17 +82,17 @@ public class BAPReceiver extends AbstractBAPReceiver implements ConnectionListen
     }
 
     /* ---------------------------------------------------------------------- */
-    /*                            BAPFramesEmitter                            */
+    /*                            BAPFrameEmitter                            */
     /* ---------------------------------------------------------------------- */
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        bapReceiver.addBAPFramesPerformer(bapfp);
+    public void addBAPFramePerformer(BAPFramePerformer bapfp) {
+        bapReceiver.addBAPFramePerformer(bapfp);
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        bapReceiver.removeBAPFramesPerformer(bapfp);
+    public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
+        bapReceiver.removeBAPFramePerformer(bapfp);
     }
 
     /* ---------------------------------------------------------------------- */

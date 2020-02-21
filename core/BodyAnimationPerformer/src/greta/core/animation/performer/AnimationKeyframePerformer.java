@@ -26,8 +26,8 @@ import greta.core.animation.body.Arm;
 import greta.core.animation.body.ExpressiveFrame;
 import greta.core.animation.body.ExpressiveTorso;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.animation.mpeg4.bap.file.BAPFileWriter;
@@ -71,7 +71,7 @@ import java.util.List;
  * @author Jing Huang
  * @author Nawhal Sayarh
  */
-public class AnimationKeyframePerformer extends CharacterDependentAdapter implements CancelableKeyframePerformer, BAPFramesEmitter, CharacterDependent, AnimationFrameEmitter {
+public class AnimationKeyframePerformer extends CharacterDependentAdapter implements CancelableKeyframePerformer, BAPFrameEmitter, CharacterDependent, AnimationFrameEmitter {
     private SymbolicConverter symbolicConverter;
     private CharacterBody cb;
     private ExpressiveTorso exTorso = new ExpressiveTorso();
@@ -558,13 +558,13 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
     }
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        be.addBAPFramesPerformer(bapfp);
+    public void addBAPFramePerformer(BAPFramePerformer bapfp) {
+        be.addBAPFramePerformer(bapfp);
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        be.removeBAPFramesPerformer(bapfp);
+    public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
+        be.removeBAPFramePerformer(bapfp);
     }
 
     private Function getFunction(ExpressiveFrame expFrame) {

@@ -18,7 +18,7 @@
 package greta.core.animation.mpeg4.bap.file;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
 import greta.core.animation.mpeg4.bap.BAPParser;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
@@ -29,7 +29,7 @@ import java.util.List;
  *
  * @author Andre-Marie Pez
  */
-public class BAPFileReader extends BAPFramesEmitterImpl{
+public class BAPFileReader extends BAPFrameEmitterImpl{
 
     private BAPParser parser = new BAPParser();
 

@@ -84,7 +84,7 @@ public class BAPSender extends AbstractBAPSender implements ConnectionListener {
     }
 
     /* ---------------------------------------------------------------------- */
-    /*                           BAPFramesPerformer                           */
+    /*                           BAPFramePerformer                           */
     /* ---------------------------------------------------------------------- */
 
     @Override

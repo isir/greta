@@ -1285,15 +1285,15 @@
             <connect from="input" method="addAnimationFramePerformer" to="output"/>
             <disconnect from="input" method="removeAnimationFramePerformer" to="output"/>
         </connector>
-        <connector id="BAPFramesEmitterToBAPFramesPerformer">
-            <input class="greta.core.animation.mpeg4.bap.BAPFramesEmitter" lib_id="greta_mpeg4"/>
-            <output class="greta.core.animation.mpeg4.bap.BAPFramesPerformer" lib_id="greta_mpeg4"/>
-            <connect from="input" method="addBAPFramesPerformer" to="output"/>
-            <!-- it will call input.addBAPFramesPerformer(output) -->
-            <disconnect from="input" method="removeBAPFramesPerformer" to="output"/>
-            <!-- it will call input.removeBAPFramesPerformer(output) -->
+        <connector id="BAPFrameEmitterToBAPFramePerformer">
+            <input class="greta.core.animation.mpeg4.bap.BAPFrameEmitter" lib_id="greta_mpeg4"/>
+            <output class="greta.core.animation.mpeg4.bap.BAPFramePerformer" lib_id="greta_mpeg4"/>
+            <connect from="input" method="addBAPFramePerformer" to="output"/>
+            <!-- it will call input.addBAPFramePerformer(output) -->
+            <disconnect from="input" method="removeBAPFramePerformer" to="output"/>
+            <!-- it will call input.removeBAPFramePerformer(output) -->
         </connector>
-        <connector id="FAPFramesEmitterToFAPFramesPerformer">
+        <connector id="FAPFrameEmitterToFAPFramePerformer">
             <input class="greta.core.animation.mpeg4.fap.FAPFrameEmitter" lib_id="greta_mpeg4"/>
             <output class="greta.core.animation.mpeg4.fap.FAPFramePerformer" lib_id="greta_mpeg4"/>
             <connect from="input" method="addFAPFramePerformer" to="output"/>
@@ -1308,7 +1308,7 @@
             <disconnect from="output" method="dettachLipSource" to="input"/>
         </connector>
         <connector id="LaughterSourceForBodyBlender">
-            <input class="greta.core.animation.mpeg4.bap.BAPFramesEmitter" lib_id="greta_mpeg4"/>
+            <input class="greta.core.animation.mpeg4.bap.BAPFrameEmitter" lib_id="greta_mpeg4"/>
             <output class="greta.core.animation.mpeg4.bap.filters.BodyBlender" lib_id="greta_mpeg4"/>
             <connect from="output" method="setLaughterSource" to="input"/>
             <disconnect from="output" method="dettachLaughterSource" to="input"/>

@@ -18,10 +18,10 @@
 package greta.core.animation.mpeg4;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
-import greta.core.animation.mpeg4.bap.CancelableBAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
+import greta.core.animation.mpeg4.bap.CancelableBAPFramePerformer;
 import greta.core.animation.mpeg4.fap.CancelableFAPFramePerformer;
 import greta.core.animation.mpeg4.fap.FAPFrame;
 import greta.core.animation.mpeg4.fap.FAPFrameEmitter;
@@ -44,14 +44,14 @@ import java.util.List;
  *
  * @author Andre-Marie Pez
  */
-public class MPEG4Animatable extends Animatable implements CancelableFAPFramePerformer, CancelableBAPFramesPerformer,
-        AudioPerformer, FAPFrameEmitter, BAPFramesEmitter, AudioEmitter, CharacterDependent {
+public class MPEG4Animatable extends Animatable implements CancelableFAPFramePerformer, CancelableBAPFramePerformer,
+        AudioPerformer, FAPFrameEmitter, BAPFrameEmitter, AudioEmitter, CharacterDependent {
 
     private static final String ASPECT = "ASPECT";
     private APFrameList<BAPFrame> bapFrames;
     private APFrameList<FAPFrame> fapFrames;
     private AudioTreeNode headNode;
-    private BAPFramesEmitterImpl bapEmitter = new BAPFramesEmitterImpl();
+    private BAPFrameEmitterImpl bapEmitter = new BAPFrameEmitterImpl();
     private FAPFrameEmitterImpl fapEmitter = new FAPFrameEmitterImpl();
     private AudioEmitterImpl audioEmitter = new AudioEmitterImpl();
     
@@ -221,13 +221,13 @@ public class MPEG4Animatable extends Animatable implements CancelableFAPFramePer
     }
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer performer) {
-        bapEmitter.addBAPFramesPerformer(performer);
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
+        bapEmitter.addBAPFramePerformer(performer);
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer performer) {
-        bapEmitter.removeBAPFramesPerformer(performer);
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
+        bapEmitter.removeBAPFramePerformer(performer);
     }
 
     @Override

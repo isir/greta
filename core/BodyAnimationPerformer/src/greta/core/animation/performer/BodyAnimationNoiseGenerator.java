@@ -23,8 +23,8 @@ import greta.core.animation.Skeleton;
 import greta.core.animation.mocap.MocapXML;
 import greta.core.animation.mocap.MotionSequence;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
 import greta.core.util.CharacterDependent;
@@ -45,9 +45,9 @@ import java.util.List;
  *
  * @author Jing Huang
  */
-public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmitter, CharacterDependent{
+public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitter, CharacterDependent{
 
-    ArrayList<BAPFramesPerformer> _bapframesPerformer = new ArrayList<BAPFramesPerformer>();
+    ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
     MotionSequence _ms;
     //Skeleton _sk_original = null;
     //Skeleton _sk = null;
@@ -317,15 +317,15 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
     }
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapfp) {
+    public void addBAPFramePerformer(BAPFramePerformer bapfp) {
         if (bapfp != null) {
-            _bapframesPerformer.add(bapfp);
+            _bapFramePerformer.add(bapfp);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapfp) {
-        _bapframesPerformer.remove(bapfp);
+    public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
+        _bapFramePerformer.remove(bapfp);
     }
 
     public void requestStop() {
@@ -349,8 +349,8 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFramesEmit
     }
 
     void sendFrames(List<BAPFrame> bapframes, ID requestId) {
-        for (int i = 0; i < _bapframesPerformer.size(); ++i) {
-            BAPFramesPerformer performer = _bapframesPerformer.get(i);
+        for (int i = 0; i < _bapFramePerformer.size(); ++i) {
+            BAPFramePerformer performer = _bapFramePerformer.get(i);
             performer.performBAPFrames(bapframes, requestId);
         }
     }

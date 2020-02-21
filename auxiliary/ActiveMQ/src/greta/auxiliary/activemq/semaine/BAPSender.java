@@ -20,7 +20,7 @@ package greta.auxiliary.activemq.semaine;
 import greta.auxiliary.activemq.TextSender;
 import greta.auxiliary.activemq.WhiteBoard;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.util.id.ID;
 import greta.core.util.time.Timer;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ import java.util.Map;
  *
  * @author Andre-Marie Pez
  */
-public class BAPSender extends TextSender implements BAPFramesPerformer{
+public class BAPSender extends TextSender implements BAPFramePerformer{
 
     private HashMap<String,Object> semaineMap;
     private BapCommander commander = new BapCommander();//semaine tricks

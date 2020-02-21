@@ -17,6 +17,8 @@
  */
 package greta.core.keyframes.face;
 
+import greta.core.repositories.AUAPFrame;
+import greta.core.util.id.ID;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +28,7 @@ import java.util.List;
  */
 
 
-public class AUEmitterImpl implements AUEmitter {
+public class AUEmitterImpl implements AUEmitter, AUPerformer {
     protected List<AUPerformer> performers = new ArrayList<>();
     @Override
     public void addAUPerformer(AUPerformer performer) {
@@ -39,6 +41,20 @@ public class AUEmitterImpl implements AUEmitter {
     public void removeAUPerformer(AUPerformer performer) {
         if(performer!=null && performers.contains(performer))
             performers.remove(performer);
+    }
+
+    @Override
+    public void performAUAPFrame(AUAPFrame auapAnimation, ID requestId) {
+        performers.forEach((performer) -> {
+            performer.performAUAPFrame(auapAnimation, requestId);
+        });
+    }
+
+    @Override
+    public void performAUAPFrames(List<AUAPFrame> auapAnimation, ID requestId) {
+        performers.forEach((performer) -> {
+            performer.performAUAPFrames(auapAnimation, requestId);
+        });
     }
     
 }

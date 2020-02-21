@@ -18,9 +18,9 @@
 package greta.auxiliary.openface;
 
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitter;
-import greta.core.animation.mpeg4.bap.BAPFramesEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramesPerformer;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
 import greta.core.keyframes.face.AUEmitter;
 import greta.core.keyframes.face.AUPerformer;
@@ -35,17 +35,17 @@ import java.util.logging.Logger;
  *
  * @author Brice Donval
  */
-public class CSVOutputFileReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFramesEmitter {
+public class CSVOutputFileReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFrameEmitter {
 
     private static final Logger LOGGER = Logger.getLogger(CSVOutputFileReader.class.getName());
 
     private ArrayList<AUPerformer> auPerfomers = new ArrayList<>();
     private ArrayList<AUAPFrame> auFrames = new ArrayList<>();
 
-    private ArrayList<BAPFramesPerformer> bapFramesPerfomers = new ArrayList<>();
+    private ArrayList<BAPFramePerformer> bapFramesPerfomers = new ArrayList<>();
     private ArrayList<BAPFrame> bapFrames = new ArrayList<>();
 
-    BAPFramesEmitterImpl bapFramesEmitter = new BAPFramesEmitterImpl();
+    BAPFrameEmitterImpl bapFramesEmitter = new BAPFrameEmitterImpl();
 
     @Override
     public void addAUPerformer(AUPerformer auPerfomer) {
@@ -62,18 +62,18 @@ public class CSVOutputFileReader extends FAPFrameEmitterImpl implements AUEmitte
     }
 
     @Override
-    public void addBAPFramesPerformer(BAPFramesPerformer bapFramesPerformer) {
+    public void addBAPFramePerformer(BAPFramePerformer bapFramesPerformer) {
         if (bapFramesPerformer != null) {
             bapFramesPerfomers.add(bapFramesPerformer);
-            bapFramesEmitter.addBAPFramesPerformer(bapFramesPerformer);
+            bapFramesEmitter.addBAPFramePerformer(bapFramesPerformer);
         }
     }
 
     @Override
-    public void removeBAPFramesPerformer(BAPFramesPerformer bapFramesPerformer) {
+    public void removeBAPFramePerformer(BAPFramePerformer bapFramesPerformer) {
         if (bapFramesPerformer != null) {
             bapFramesPerfomers.remove(bapFramesPerformer);
-            bapFramesEmitter.removeBAPFramesPerformer(bapFramesPerformer);
+            bapFramesEmitter.removeBAPFramePerformer(bapFramesPerformer);
         }
     }
 

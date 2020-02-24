@@ -176,7 +176,7 @@ public class OpenFaceFrame {
              
         int j = 0;
         for (String key : keysAUROrder.keySet()) {   
-            au_r[j] = readAUDataCol(key, cols, keysAUROrder);
+            au_r[j] = readAUDataCol(key, cols, keysAUROrder)/5.; // AU**_r are between 0-5.
             if(BLINK_AU.equals(key))
                 blink = au_r[j];            
             j++;

@@ -152,7 +152,10 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
      */
     public void setSelected(String[] selected){
         if(selected!=null){
-            selectedHeaders = selected;
+            if(selected!=null && !selected.equals(selectedHeaders)){
+                selectedHeaders = selected;
+                OpenFaceFrame.setSelectedHeaders(selectedHeaders);
+            }
             LOGGER.info(String.format("Setting selected headers to: %s",Arrays.toString(selected)));
         }
         else
@@ -223,7 +226,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
             curFrame.frameId = offsetFrame + curGretaFrame;
             int frameDiff = curFrame.frameId-prevFrame.frameId;
             if(frameDiff<10 && frameDiff>0){ // If less than 10 frame delay
-                frameDuration = curFrame.timeStamp - prevFrame.timeStamp;            
+                frameDuration = curFrame.timestamp - prevFrame.timestamp;            
             
                 fps = 1./frameDuration;
                 //LOGGER.info(String.format("frameid: %d, fps:%f, f dur:%f",curFrame.frameId, fps, frameDuration));
@@ -244,7 +247,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
                     min_time = frameDuration;
                 }
                 sendAUFrame(makeAUFrame());
-                //sendBAPFrame(makeBAPFrame());
+                sendBAPFrame(makeBAPFrame());
             }
         }        
     }
@@ -257,22 +260,23 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
         { 
             double value = curFrame.au_c[i];
             double prevValue = prevFrame.intensity[i];                            
-            double intensity = alpha*( value/3.5) + (1-alpha)*prevValue;            
+            double intensity = alpha*value/5. + (1-alpha)*prevValue;            
             au_frame.setAUAPboth(OpenFaceFrame.getAUCIndex(i), intensity);
         }
 
         //gaze
-        double gaze_x = alpha*(0.5*(prevFrame.gaze0.x()+curFrame.gazeAngleX*Math.PI/360.))+(1-alpha)*prev_gaze_x;
-        double gaze_y = alpha*(0.5*(prevFrame.gaze0.y()+curFrame.gazeAngleY*Math.PI/360.))+(1-alpha)*prev_gaze_y;
+        double gaze_x = alpha*(0.5*(curFrame.gaze0.x()+curFrame.gaze1.x()))+(1-alpha)*prev_gaze_x;
+        double gaze_y = alpha*(0.5*(curFrame.gaze0.y()+curFrame.gaze1.y()))+(1-alpha)*prev_gaze_y;
+        
         if(gaze_x<0){
-            au_frame.setAUAPboth(62, gaze_x);
+            au_frame.setAUAPboth(62, -gaze_x);
         }
         else{
             au_frame.setAUAPboth(61, gaze_x);
         }
 
         if(gaze_y<0){
-            au_frame.setAUAPboth(64, gaze_y);
+            au_frame.setAUAPboth(64, -gaze_y);
         }
         else{
             au_frame.setAUAPboth(63, gaze_y);
@@ -282,7 +286,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
 
         //blink
         // double blink = alpha*(Double.parseDouble(values[col_blink].replace(',', '.'))/5.0)+(1-alpha)*prev_blink;
-        double blink = curFrame.getBlink()/3.0 ;
+        double blink = curFrame.blink/5.0 ;
         au_frame.setAUAPboth(43, blink);
         prev_blink = blink;
         return au_frame;

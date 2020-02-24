@@ -244,7 +244,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
                     min_time = frameDuration;
                 }
                 sendAUFrame(makeAUFrame());
-                sendBAPFrame(makeBAPFrame());
+                //sendBAPFrame(makeBAPFrame());
             }
         }        
     }
@@ -253,17 +253,17 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
         AUAPFrame au_frame = new AUAPFrame();                        
         au_frame.setFrameNumber(curFrame.frameId);
 
-        for(int i=0;i<OpenFaceFrame.auRealSize;i++)
+        for(int i=0;i<OpenFaceFrame.getAUCCount();i++)
         { 
             double value = curFrame.au_c[i];
             double prevValue = prevFrame.intensity[i];                            
             double intensity = alpha*( value/3.5) + (1-alpha)*prevValue;            
-            au_frame.setAUAPboth(OpenFaceFrame.getAUIndex(i), intensity);
+            au_frame.setAUAPboth(OpenFaceFrame.getAUCIndex(i), intensity);
         }
 
         //gaze
-        double gaze_x = alpha*(0.5*(curFrame.gaze1.x()+curFrame.gazeAngleX*Math.PI/360.))+(1-alpha)*prev_gaze_x;
-        double gaze_y = alpha*(0.5*(curFrame.gaze1.y()+curFrame.gazeAngleY*Math.PI/360.))+(1-alpha)*prev_gaze_y;
+        double gaze_x = alpha*(0.5*(prevFrame.gaze0.x()+curFrame.gazeAngleX*Math.PI/360.))+(1-alpha)*prev_gaze_x;
+        double gaze_y = alpha*(0.5*(prevFrame.gaze0.y()+curFrame.gazeAngleY*Math.PI/360.))+(1-alpha)*prev_gaze_y;
         if(gaze_x<0){
             au_frame.setAUAPboth(62, gaze_x);
         }

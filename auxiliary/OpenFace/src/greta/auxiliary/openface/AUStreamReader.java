@@ -258,10 +258,13 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
 
         for(int i=0;i<OpenFaceFrame.getAUCCount();i++)
         { 
-            double value = curFrame.au_c[i];
-            double prevValue = prevFrame.intensity[i];                            
-            double intensity = alpha*value/5. + (1-alpha)*prevValue;            
-            au_frame.setAUAPboth(OpenFaceFrame.getAUCIndex(i), intensity);
+            // we assume both tables have corresponding values. AU**_c acts as a mask
+            if(curFrame.au_c[i]>0.){
+                double value = Math.pow(curFrame.au_r[i], .5); // non linear curve to get to 1.
+                double prevValue = prevFrame.intensity[i];                            
+                double intensity = alpha*value + (1-alpha)*prevValue;// filter         
+                au_frame.setAUAPboth(OpenFaceFrame.getAUCIndex(i), intensity);
+            }
         }
 
         //gaze

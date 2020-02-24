@@ -36,12 +36,12 @@ import java.util.regex.Pattern;
 public class OpenFaceFrame {
     private static final Logger LOGGER = Logger.getLogger(AUStreamReader.class.getName() );
     private static class AU{
-        public int index;
-        public int num;
+        public int index;// integer representing the column index where it's read from
+        public int num;// number representing the AU (ex: 1, for key "AU01_r")
         public AU(int i, int n){index = i;num = n;}
         public AU(int i, String s){index = i;num = Integer.parseInt(s);}
     }
-    
+    public final static String BLINK_AU = "AU45_r";
     private final static int MAX_AUS = 100;
     private final static List<String> expectedPreAUHeader = 
             Arrays.asList(("frame_id,face_id,timestamp,confidence,success,"
@@ -49,7 +49,6 @@ public class OpenFaceFrame {
             + "gaze_0_x,gaze_0_y,gaze_0_z,gaze_1_x,gaze_1_y,"
             + "gaze_1_z,gaze_angle_x,gaze_angle_y").split(","));
     
-    static int[] readOrder = new int[MAX_AUS];
     static Map<String,Integer> keysOrder = new HashMap<>();
     static Map<String,AU> keysAUROrder = new HashMap<>();
     static Map<String,AU> keysAUCOrder = new HashMap<>();
@@ -67,7 +66,7 @@ public class OpenFaceFrame {
     int frameId = 0;
     int faceId = 0;
 
-    double timeStamp = 0;
+    double timestamp = 0;
     double confidence = 0;
 
     boolean success = false;
@@ -84,13 +83,14 @@ public class OpenFaceFrame {
     double[] au_r = new double[MAX_AUS];
     double[] au_c = new double[MAX_AUS];
     double[] intensity = new double[MAX_AUS];
+    double blink=0;
     
 
     public static boolean readHeader(String line) {
         String[] headPoseCols = line.split(separator);
         Pattern p = Pattern.compile("AU([0-9]+)_[rc]");
         
-        if (headers != null && Arrays.equals(headers, headPoseCols)){
+        if (OpenFaceFrame.headers != null && Arrays.equals(OpenFaceFrame.headers, headPoseCols)){
             return false;
         }      
         keysOrder.clear();
@@ -101,13 +101,12 @@ public class OpenFaceFrame {
                 keysOrder.put(headPoseCols[i], i);
             }
                 
-            if ("AU45_r".equals(headPoseCols[i])) {
-                col_blink = i;
-            }
+            
             Matcher m = p.matcher(headPoseCols[i]);
             if (m.matches()) {
                 if(headPoseCols[i].endsWith("r")){
-                    keysAUROrder.put(headPoseCols[i], new AU(i, m.group(1)));
+                    AU au = new AU(i, m.group(1));
+                    keysAUROrder.put(headPoseCols[i], au);
                     aurKeys.add(headPoseCols[i]);
                 }
                 if(headPoseCols[i].endsWith("c")){
@@ -117,7 +116,7 @@ public class OpenFaceFrame {
             }
         }
 
-        headers = headPoseCols;        
+        OpenFaceFrame.headers = headPoseCols;        
 
         return true;
     }
@@ -131,11 +130,6 @@ public class OpenFaceFrame {
         String key = aucKeys.get(index);
         return keysAUCOrder.get(key).num;
     }
-
-
-    public double getBlink() {
-        return au_r[col_blink];
-    }
     
     private boolean isHeaderSelected(String h){
         return selectedHeaders==null || selectedHeaders.contains(h);
@@ -148,7 +142,7 @@ public class OpenFaceFrame {
             else
                 LOGGER.warning(String.format("Map doesn't contains key: %s",key));
         }
-        return "";
+        return "0";
     }
     
     private double readAUDataCol(String key, String[] cols, Map<String,AU> set){
@@ -162,7 +156,7 @@ public class OpenFaceFrame {
         
         frameId     = Integer.parseInt(readDataCol("frame_id", cols, keysOrder));
         faceId      = Integer.parseInt(readDataCol("face_id", cols, keysOrder));
-        timeStamp   = Double.parseDouble(readDataCol("timestamp", cols, keysOrder));
+        timestamp   = Double.parseDouble(readDataCol("timestamp", cols, keysOrder));
         confidence  = Double.parseDouble(readDataCol("confidence", cols, keysOrder));
         success     = Integer.parseInt(readDataCol("success", cols, keysOrder)) == 1;
         headPos.set(Double.parseDouble(readDataCol("head_x", cols, keysOrder)),
@@ -181,8 +175,11 @@ public class OpenFaceFrame {
         gazeAngleX  = Double.parseDouble(readDataCol("gaze_angle_y", cols, keysOrder));
              
         int j = 0;
-        for (String key : keysAUROrder.keySet()) {            
-            au_r[j++] = readAUDataCol(key, cols, keysAUROrder);
+        for (String key : keysAUROrder.keySet()) {   
+            au_r[j] = readAUDataCol(key, cols, keysAUROrder);
+            if(BLINK_AU.equals(key))
+                blink = au_r[j];            
+            j++;
         }
         j=0;
         for (String key : keysAUCOrder.keySet()) {            
@@ -202,7 +199,7 @@ public class OpenFaceFrame {
     void copy(OpenFaceFrame f) {
         frameId 		=	f.frameId;
         faceId 	=	f.faceId;
-        timeStamp 	=	f.timeStamp;
+        timestamp 	=	f.timestamp;
         confidence 	=	f.confidence;
         success 	=	f.success;
         headPos 	=	f.headPos.clone();
@@ -230,6 +227,12 @@ public class OpenFaceFrame {
         selectedHeaders = aSelectedHeaders;
     }
     
+    /**
+     * @param headers the selectedHeaders to set
+     */
+    public static void setSelectedHeaders(String[] headers) {
+        selectedHeaders = Arrays.asList(headers);
+    }
     
 
 }

@@ -117,37 +117,45 @@ public class Ogre {
     private static OgreThread.Callback initRoot = new OgreThread.Callback() {
         @Override
         public void run() {
+
+            // Little Hack:
+            //     we write a fonctionnal pluginsFile from the pluginsFileModel
+            //     with an absolute path for the "PluginFolder" attribute because
+            //     the relative path does not work anymore on Windows 8 and 10!
+
+            String pluginsFileModel = externalLibPath + "Configs/Plugins.cfg";
             String pluginsFile = externalLibPath + "Plugins.cfg";
+
             if (System.getProperty("os.name").toLowerCase().contains("windows")) {
                 if (IniManager.getGlobals().getValueBoolean("OGRE_DIRECTX_9")) {
+                    pluginsFileModel = externalLibPath + "Configs/Plugins_DX9.cfg";
                     pluginsFile = externalLibPath + "Plugins_DX9.cfg";
                 } else {
+                    pluginsFileModel = externalLibPath + "Configs/Plugins_OpenGL.cfg";
                     pluginsFile = externalLibPath + "Plugins_OpenGL.cfg";
                 }
-
-                // Little Hack for Windows 8 and 10:
-                //     rewrite the pluginsFile with an absolute path for the "PluginFolder"
-                //     attribute because the relative path does not work anymore!
-                try {
-                    StringBuilder pluginsFileContent = new StringBuilder();
-
-                    BufferedReader reader = new BufferedReader(new FileReader(pluginsFile));
-                    String currentLine;
-                    while ((currentLine = reader.readLine()) != null) {
-                        if (currentLine.trim().startsWith("PluginFolder=")) {
-                            currentLine = "PluginFolder=" + externalLibPath + "DLL";
-                        }
-                        pluginsFileContent.append(currentLine).append("\n");
-                    }
-
-                    FileWriter writer = new FileWriter(new File(pluginsFile));
-                    writer.write(pluginsFileContent.toString());
-                    writer.close();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
+
+            try {
+                StringBuilder pluginsFileContent = new StringBuilder();
+
+                BufferedReader reader = new BufferedReader(new FileReader(pluginsFileModel));
+                String currentLine;
+                while ((currentLine = reader.readLine()) != null) {
+                    if (currentLine.trim().startsWith("PluginFolder=")) {
+                        currentLine = "PluginFolder=" + externalLibPath + "Libs";
+                    }
+                    pluginsFileContent.append(currentLine).append("\n");
+                }
+
+                FileWriter writer = new FileWriter(new File(pluginsFile));
+                writer.write(pluginsFileContent.toString());
+                writer.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
             Root tempRoot = new Root(pluginsFile, "", "./Log/Ogre.log");
             if (DEBUG) {
                 vib.auxiliary.player.ogre.natives.LogManager.set_LL_BOREME();

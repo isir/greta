@@ -289,7 +289,7 @@ public class AUStreamReader extends FAPFrameEmitterImpl implements AUEmitter, BA
 
         //blink
         // double blink = alpha*(Double.parseDouble(values[col_blink].replace(',', '.'))/5.0)+(1-alpha)*prev_blink;
-        double blink = curFrame.blink/5.0 ;
+        double blink = curFrame.blink ;
         au_frame.setAUAPboth(43, blink);
         prev_blink = blink;
         return au_frame;

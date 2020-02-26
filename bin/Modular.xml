@@ -1207,7 +1207,6 @@
             <needs path="./Locale/*"/>
         </lib>
         <lib id="greta_utilx" path="./Common/Lib/Internal/Utilx.jar">
-            <depends lib_id="greta_behavior_realizer"/>
             <depends lib_id="greta_util"/>
         </lib>
     </libs>

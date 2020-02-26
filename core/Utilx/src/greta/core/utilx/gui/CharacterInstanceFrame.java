@@ -17,7 +17,6 @@
  */
 package greta.core.utilx.gui;
 
-import greta.core.behaviorrealizer.Realizer;
 import greta.core.util.CharacterManager;
 import greta.core.util.IniManager;
 import greta.core.util.IniParameter;
@@ -37,7 +36,6 @@ public class CharacterInstanceFrame extends javax.swing.JFrame{
     private static HashMap<Integer,CharacterInstanceFrame> instances=new HashMap<>();
     private int ID;
     private String character=null;
-    private Realizer realizer;
     
     public static CharacterInstanceFrame get(int ID){
         if(instances.containsKey(ID))
@@ -47,19 +45,7 @@ public class CharacterInstanceFrame extends javax.swing.JFrame{
             return null;
         }
     }
-    
-    /*
-    * UI link methods    
-    */
-    public void setCharacter(Realizer realizer){
-        this.realizer = realizer;
-       
-    }
-    public void unsetCharacter(Realizer realizer){
-        realizer = null;
-    }
-    
-    
+
     /**
      * Default constructor
      */

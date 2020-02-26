@@ -19,25 +19,26 @@ package greta.core.util;
 
 /**
  *
- * @author Philippe Gauthier <philippe.gauthier@upmc.fr>
+ * @author Philippe Gauthier <philippe.gauthier@sorbonne-universite.fr>
  */
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeNode<T>{
+public class TreeNode<T> {
+
     private T data = null;
     private List<TreeNode> children = new ArrayList<>();
     private TreeNode parent = null;
 
-    public TreeNode(){
-        
+    public TreeNode() {
+
     }
     public TreeNode(T data) {
         this.data = data;
     }
-    
-    public void clear(){
-        for(TreeNode child : children){
+
+    public void clear() {
+        for(TreeNode child : children) {
             child.clear();
         }
         children.clear();
@@ -54,16 +55,16 @@ public class TreeNode<T>{
         children.add(newChild);
         return newChild;
     }
-    
+
     public void removeChild(T data) {
         TreeNode nodeToDelete = null;
         for(TreeNode c : children) {
-            if(c.data.equals(data)){
+            if(c.data.equals(data)) {
                 nodeToDelete = c;
                 break;
             }
             else
-                c.removeChild(data);            
+                c.removeChild(data);
         }
         if(nodeToDelete!=null)
             children.remove(nodeToDelete);
@@ -79,7 +80,7 @@ public class TreeNode<T>{
     public List<TreeNode> getChildren() {
         return children;
     }
-    
+
     public int getChildrenCount() {
         return children.size();
     }

@@ -19,8 +19,8 @@ package greta.core.util;
 
 /**
  * Update 2018-08-13 : now we keep a reference to the CharacterManager Instance
- * @author Philippe Gauthier <philippe.gauthier@upmc.fr>
- * 
+ * @author Philippe Gauthier <philippe.gauthier@sorbonne-universite.fr>
+ *
  * This interface describes an object that depends of the character displaying,
  * and that wants to know if the character change.<br/>
  * when the current character is changed, the function {@code onCharacterChanged()} of all
@@ -38,10 +38,12 @@ public interface CharacterDependent {
      * calling the {@code CharacterManager}.
      */
     public void onCharacterChanged();
-    
+
     public CharacterManager getCharacterManager();
+
     public void setCharacterManager(CharacterManager characterManager);
-    public static CharacterManager getCharacterManagerStatic(){
+
+    public static CharacterManager getCharacterManagerStatic() {
         return CharacterManager.getStaticInstance();
     }
 

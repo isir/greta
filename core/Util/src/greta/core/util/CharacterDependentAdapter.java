@@ -19,9 +19,10 @@ package greta.core.util;
 
 /**
  *
- * @author Philippe Gauthier <philippe.gauthier@upmc.fr>
+ * @author Philippe Gauthier <philippe.gauthier@sorbonne-universite.fr>
  */
-public abstract class CharacterDependentAdapter implements CharacterDependent{
+public abstract class CharacterDependentAdapter implements CharacterDependent {
+
     private CharacterManager characterManager;
 
     /**
@@ -29,8 +30,9 @@ public abstract class CharacterDependentAdapter implements CharacterDependent{
      */
     @Override
     public CharacterManager getCharacterManager() {
-        if(characterManager==null)
+        if (characterManager == null) {
             characterManager = CharacterManager.getStaticInstance();
+        }
         return characterManager;
     }
 
@@ -39,15 +41,14 @@ public abstract class CharacterDependentAdapter implements CharacterDependent{
      */
     @Override
     public void setCharacterManager(CharacterManager characterManager) {
-        if(this.characterManager!=null)
+        if (this.characterManager != null) {
             this.characterManager.remove(this);
+        }
         this.characterManager = characterManager;
         characterManager.add(this);
     }
-    
-    public static CharacterManager getCharacterManagerStatic(){
+
+    public static CharacterManager getCharacterManagerStatic() {
         return CharacterManager.getStaticInstance();
     }
-    
-   
 }

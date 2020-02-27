@@ -26,35 +26,33 @@ import java.util.List;
  *
  * @author Philippe Gauthier <philippe.gauthier@sorbonne-universite.fr>
  */
-
-
 public class AUEmitterImpl implements AUEmitter, AUPerformer {
-    protected List<AUPerformer> performers = new ArrayList<>();
+
+    protected List<AUPerformer> auPerformers = new ArrayList<>();
+
     @Override
-    public void addAUPerformer(AUPerformer performer) {
-        if(performer!=null && !performers.contains(performer))
-            performers.add(performer);
-        
+    public void addAUPerformer(AUPerformer auPerformer) {
+        if (auPerformer != null && !auPerformers.contains(auPerformer))
+            auPerformers.add(auPerformer);
     }
 
     @Override
-    public void removeAUPerformer(AUPerformer performer) {
-        if(performer!=null && performers.contains(performer))
-            performers.remove(performer);
+    public void removeAUPerformer(AUPerformer auPerformer) {
+        if (auPerformer != null && auPerformers.contains(auPerformer))
+            auPerformers.remove(auPerformer);
     }
 
     @Override
     public void performAUAPFrame(AUAPFrame auapAnimation, ID requestId) {
-        performers.forEach((performer) -> {
+        auPerformers.forEach((performer) -> {
             performer.performAUAPFrame(auapAnimation, requestId);
         });
     }
 
     @Override
     public void performAUAPFrames(List<AUAPFrame> auapAnimation, ID requestId) {
-        performers.forEach((performer) -> {
+        auPerformers.forEach((performer) -> {
             performer.performAUAPFrames(auapAnimation, requestId);
         });
     }
-    
 }

@@ -40,7 +40,7 @@
                 <element h="50.0" id="FML File Reader - 1544700908962-428"
                     module="FML File Reader" name="FML File Reader"
                     w="80.0" x="30.0" y="30.0">
-                    <parameter name="saveFileName" value="./Examples/DemoEN/1-Welcome.xml"/>
+                    <parameter name="fileName" value="./Examples/DemoEN/1-Welcome.xml"/>
                     <window h="108" visible="true" w="517" x="10" y="10"/>
                 </element>
                 <element h="50.0" id="BML File Reader - 1544700914641-19"

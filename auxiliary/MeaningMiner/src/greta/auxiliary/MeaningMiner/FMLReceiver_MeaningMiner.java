@@ -82,7 +82,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
     private ArrayList<IntentionPerformer> performers;
     private XMLParser fmlParser;
     private CharacterManager cm;
-    
+
     private ImageSchemaExtractor imgSchmext;
 
     private ArrayList<IntentionPerformer> intentionsPerformers = new ArrayList<>();
@@ -97,15 +97,15 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
     private TreebankLanguagePack tlp;
     private GrammaticalStructureFactory gsf;
     private IDictionary dict;
-    
+
     public FMLReceiver_MeaningMiner(CharacterManager cm) {
-        
+
         this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
                 WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
                 "greta.FML",cm);
-        
+
         this.cm = cm;
-        
+
         //this.imgSchmext = new ImageSchemaExtractor(this.cm);
         //load the JWI wordnet classes
         URL url = null;
@@ -149,7 +149,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
             Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
         chunker = new ChunkerME(chunkerModel);
-        
+
     }
 
     public FMLReceiver_MeaningMiner(String host, String port, String topic, CharacterManager cm) {
@@ -166,14 +166,14 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         XMLTree fml = fmlParser.parseBuffer(content.toString());
         //XMLTree bmlxml = fmlParser.parseBuffer(content.toString());
         XMLTree pitchxml = XML.createTree("speech");
-        
+
         String fml_id = "";
         List<int[]> listPitchAccent = new ArrayList<>();
-        
+
         if (fml == null) {
             return;
         }
-                
+
         Mode mode = FMLTranslator.getDefaultFMLMode();
         if (fml.hasAttribute("composition")) {
             mode.setCompositionType(fml.getAttribute("composition"));
@@ -192,10 +192,10 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         }else{
             fml_id = "fml_1";
         }
-        
+
         for (XMLTree fmlchild : fml.getChildrenElement()) {
             // store the bml id in the Mode class
-            if (fmlchild.isNamed("bml")) {  
+            if (fmlchild.isNamed("bml")) {
                 if(fmlchild.hasAttribute("id")){
                     mode.setBml_id(fmlchild.getAttribute("id"));
                 }
@@ -208,20 +208,20 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                                 pitchxml.addChild(child); // add the pitchaccent in a XML tree specific
                             }
                         }
-                    }                  
+                    }
                 }
             }
         }
-        
+
         String plaintext = "";
         // take the speech elements end translate them in a simple text
         /*plaintext = bmlxml.toString().replaceAll("<[^>]+>", "");
         plaintext = plaintext.trim().replaceAll(" +", " "); // delete multiple spaces*/
-        
+
         List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, cm);
 
         PseudoIntentionSpeech speech = new PseudoIntentionSpeech(this.cm);
-        
+
         // set if the timemearker name start from tmO or tm1
         int startfrom = 0;
         List<TimeMarker> justcheck = speech.getTimeMarkers();
@@ -231,7 +231,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         }else if(st.lastIndexOf('1') != -1){
             startfrom = 1;
         }
-                
+
         // take the PseudoIntentionSpeech in order to put a timemarker for each word
         for (Intention intent : intentions){
             if (intent instanceof PseudoIntentionSpeech){
@@ -243,10 +243,10 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                 intentions.remove(intent);
                 break;
             }
-        }    
-        
+        }
+
         HashMap<String, String> wordandTimeMarker = new HashMap<String, String>();
-        
+
 
         int numWords = 0;
         if (speech != null){
@@ -257,22 +257,22 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                             String w =(String) array_obj;
                             if (!w.equals(" ")){
                                 plaintext += (String) array_obj;
-                                
+
                                 String utterence = (String) array_obj;
                                 utterence.trim();
                                 //utterence.replace(" +", " ");
                                 List<String> words = Arrays.asList(utterence.split(" "));
                                 numWords += words.size() - 1;
-                                
-                            }   
+
+                            }
                         }else if (array_obj instanceof TimeMarker){
                             String actualTM = ((TimeMarker) array_obj).getName();
                             wordandTimeMarker.put(actualTM, "tm"+numWords);
-                            
+
                         }
                     }
                     break;
-                }     
+                }
             }
         }
 
@@ -282,7 +282,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         newSpeech.setId(speech.getId());
         newSpeech.setReference(speech.getReference());
         newSpeech.getStart().addReference("start");
-        
+
         //add the markers in a list
         List<TimeMarker> tm_list = new ArrayList<TimeMarker>();
         for (Object obj: newSpeech.getSpeechElements()){
@@ -298,61 +298,61 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                 }
             }
         }
-        
-        // create a bml xmltree with the new speech and timemarker to put as input for the meaningMiner computation 
+
+        // create a bml xmltree with the new speech and timemarker to put as input for the meaningMiner computation
         XMLTree treebml = toXML(newSpeech); // speech child
-        
+
         //newSpeech set timemarkers list
         newSpeech.setMarkers(tm_list);
-        
+
         // update the timemarker for each intention according the newSpeech markers
         for(Intention intens : intentions){
-            
-            TimeMarker end = intens.getEnd();            
+
+            TimeMarker end = intens.getEnd();
             TimeMarker start = intens.getStart();
             int[] strt_end = new int[2];
             int counter = 0;
-            
+
             List<TimeMarker> list_tm = new ArrayList<TimeMarker>();
             list_tm.add(end);
             list_tm.add(start);
             for (TimeMarker m : list_tm){
                 List<SynchPoint> list_sypoint = m.getReferences();
-                
+
                 double offset_synchpnt = m.getReferences().get(0).getOffset();
-                
-                String targetname = list_sypoint.get(0).getTargetName(); 
+
+                String targetname = list_sypoint.get(0).getTargetName();
                 // index of number in the string
                 int column = targetname.indexOf(":");// example s1:tm2
                 String nametm = targetname.substring(column + 1, targetname.length());
-                // TODO intentions have correct timemarkers 
+                // TODO intentions have correct timemarkers
                 String new_nametm = wordandTimeMarker.get(nametm);
                 m.removeReferences();
                 String newtm = targetname.substring(0,targetname.indexOf(":") + 1) + new_nametm;
                 m.addReference(newtm);
                 m.getReferences().get(0).setOffset(offset_synchpnt);
-                
+
                 int nmb = Integer.parseInt(new_nametm.substring(2, new_nametm.length()));
-                
+
                 strt_end[counter] = nmb;
                 counter++;
             }
-            
+
             if (intens instanceof PseudoIntentionPitchAccent){
                 Arrays.sort(strt_end);
                 int[] pitchAccent = {strt_end[0], strt_end[1]};
                 listPitchAccent.add(pitchAccent);
             }
         }
-        
+
         // create the input for the MeaningMiner computation
         XMLTree bmlRoot = XML.createTree("bml");
-        bmlRoot.addChild(treebml); // bml part where after each word is set a timemarker 
-        
+        bmlRoot.addChild(treebml); // bml part where after each word is set a timemarker
+
         //MeaningMiner
-        String input = bmlRoot.toString();        
+        String input = bmlRoot.toString();
         List<Intention> newIntentionsfromSpeech = processText(input, listPitchAccent);
-          
+
         // add the intentions found with the mining miner to the others
         if (newIntentionsfromSpeech.size() > 0){
             for (int i = 0; i < newIntentionsfromSpeech.size(); i++)
@@ -364,7 +364,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                 intentions.add(newIntentionsfromSpeech.get(i));
             }
         }
-        
+
         Object contentId = null;
         if (fml.hasAttribute("id")) {
             contentId = fml.getAttribute("id");
@@ -379,10 +379,10 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
             performer.performIntentions(intentions, id, mode);
         }
     }
-    
+
     public PseudoIntentionSpeech createSpeechIntention(String plaintext, HashMap<String, String> wordandTimeMarker){
         PseudoIntentionSpeech pis = new PseudoIntentionSpeech(this.cm);
-        
+
         ArrayList<String> listofSpeechElement = new ArrayList<String>();
         int lastcharposition = 0;
         boolean reading_word = false;
@@ -397,27 +397,27 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                 //char c = plaintext.charAt(i);
                 if (plaintext.charAt(i) != ' ' && plaintext.charAt(i) != '\n'){
                     listofSpeechElement.add(String.valueOf(plaintext.charAt(i))); // add the special caracter
-                }      
+                }
                 lastcharposition = i+1;
                 reading_word = false;
             }else{
                 reading_word = true;
             }
         }
-        
+
         // create a PseudoIntentionSpeech with the new speechElement and timemarker
         ArrayList<Object> speechelement = new ArrayList<Object>();
         int counter = 0;
         for (String str : listofSpeechElement){
             speechelement.add(new TimeMarker("tm"+counter)); //add the TimeMarker
-            speechelement.add(str);// add the word 
+            speechelement.add(str);// add the word
             counter++;
-        }    
+        }
         speechelement.add(new TimeMarker("tm"+counter)); //add last TimeMarker
         pis.addSpeechElement(speechelement);
         return pis;
     }
-    
+
     //Insert a new xml imageschema in the XML tree. This object will be completed later or even deleted if no Image Schema could be put there.
     private XMLTree createXMLImageSchema(XMLTree fmlRoot, int countImageSchema, int countTimeMarker) {
         XMLTree imageschema = fmlRoot.createChild("imageschema");
@@ -427,7 +427,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
 
         return imageschema;
     }
-    
+
     //Set the Image Schema to this xml imageschema. It checks if this was the root of the sentence to decide if it should be the main of the current ideational unit.
     private void setImageSchemaType(XMLTree imageschema, String imageRef, String pos, XMLTree ideationalUnit, List<TypedDependency> tdl, Integer indexWord) {
 
@@ -444,7 +444,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
             }
         }
     }
-    
+
     public XMLTree toXML( PseudoIntentionSpeech newSpeech){
         XMLTree toReturn;
 
@@ -478,17 +478,17 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                             XMLTree tm = toReturn.createChild("tm");
                             tm.setAttribute("id", ((TimeMarker)obj).getName());
                                 // time ?
-                        } 
+                        }
                     }
-                    
+
                 }
-                  
+
             }
-            
+
         return toReturn;
     }
-    
-    //Perform the simplified Lesk algorithm for Word disambiguation. 
+
+    //Perform the simplified Lesk algorithm for Word disambiguation.
     //It looks up in the WordNet dictionnary the glossary of each meaning for the word.
     //The meaning that has more word in common with the current context is the selected meaning
     public ISynset simplifiedLesk(IIndexWord idxWord, String context) {
@@ -522,7 +522,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         }
         return null;
     }
-    
+
     //Return the Image Schemas that can be found for this Synset (meaning).
     //This is a recursive function that starts at the synset of the word,
     //looks for Image Schemas and then continue up the tree by following the hypernyms (more global meaning) of the current set
@@ -554,7 +554,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                 break;
         }
         List<ISynsetID> relatedSynset = synset.getRelatedSynsets(Pointer.HYPERNYM);
-        //FOR NOW WE STOP AS SOON AS WE FIND ONE IMAGE SCHEMA. If I remove the toReturn.size()>0, 
+        //FOR NOW WE STOP AS SOON AS WE FIND ONE IMAGE SCHEMA. If I remove the toReturn.size()>0,
         //we will continue as long as there is an hypernym to this synset
         if (relatedSynset.isEmpty() || depth <= 0 || toReturn.size() > 0) {
             return toReturn;
@@ -565,7 +565,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         }
         //return toReturn;
     }
-    
+
     private boolean isWithinPitchAccent(List<int[]> listPitchAccent, int indexWord) {
 
         for (int[] pa : listPitchAccent) {
@@ -575,23 +575,23 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
         }
         return false;
     }
-    
+
     @Override
     public void addIntentionPerformer(IntentionPerformer ip) {
         performers.add(ip);
     }
-    
+
     @Override
     public void removeIntentionPerformer(IntentionPerformer performer) {
         performers.remove(performer);
     }
-    
+
     public List<Intention> processText(String input, List<int[]> listPitchAccent) {
         System.out.println(input);
         XMLParser xmlParser = XML.createParser();
         XMLTree inputXML = xmlParser.parseBuffer(input);
         //List<int[]> listPitchAccent = new ArrayList<>();
-        //remove the description tag that creates trouble with the parser and 
+        //remove the description tag that creates trouble with the parser and
         //retrieve the pitch accent for future access
 
         for (XMLTree xmltbml : inputXML.getChildren()) {
@@ -657,7 +657,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
             String[] listPos = new String[sentence.size()];
             //A first loop that checks if there is a verb in the sentence and prepare the sentence for chunking
             for (int i = 0; i < sentence.size(); i++) {
-                //retrieve the word and its grammar posTag 
+                //retrieve the word and its grammar posTag
                 CoreLabel cl = (CoreLabel) sentence.get(i);
                 String type = cl.tag();
 
@@ -722,7 +722,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                     case "JJ":
                         pos = POS.ADJECTIVE;
                         break;
-                    //Adjective Comparative    
+                    //Adjective Comparative
                     case "JJR":
                         pos = POS.ADJECTIVE;
                         break;
@@ -933,7 +933,7 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
 
             }
 
-            //If no root could be found, 
+            //If no root could be found,
             if (!ideationalUnit.hasAttribute("main")) {
                 //If no root could be found, delete the ideational unit.
                 if (imageSchemasGenerated.size() > 0) {

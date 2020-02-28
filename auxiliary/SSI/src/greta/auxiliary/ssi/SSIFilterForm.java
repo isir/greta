@@ -57,8 +57,6 @@ public class SSIFilterForm extends javax.swing.JFrame {
         ssiFilterFormChoice = new javax.swing.JComboBox();
         ssiFilterFormLbl = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         ssiFilterFormChoice.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "All", "Prosody Only", "Head Only", "Body Only" }));
         ssiFilterFormChoice.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

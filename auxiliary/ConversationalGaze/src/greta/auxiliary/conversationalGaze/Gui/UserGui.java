@@ -59,8 +59,6 @@ public class UserGui extends javax.swing.JFrame {
         lab_pitch = new javax.swing.JLabel();
         lab_roll = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         pos_x.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
         pos_x.setPreferredSize(new java.awt.Dimension(60, 20));
         pos_x.addActionListener(new java.awt.event.ActionListener() {

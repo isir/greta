@@ -292,7 +292,6 @@ public class GestureEditor extends javax.swing.JFrame implements SignalEmitter, 
         separator = new javax.swing.JPopupMenu.Separator();
         generateMirrorGestureMenuItem = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GestureEditor");
         setMinimumSize(new java.awt.Dimension(600, 600));
 

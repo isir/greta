@@ -298,8 +298,6 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
         FolderName = new javax.swing.JTextField();
         SelectFolder = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         screenShotButton.setText("Screen Shot");
         screenShotButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

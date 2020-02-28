@@ -183,8 +183,6 @@ public class EnvTool extends javax.swing.JFrame implements EnvironmentEventListe
         jMenuItem1 = new greta.core.utilx.gui.ToolBox.LocalizedJMenuItem("GUI.save");
         jMenuItem2 = new greta.core.utilx.gui.ToolBox.LocalizedJMenuItem("GUI.saveAs");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jButton1.setText("create node");
         jButton1.setEnabled(false);
         jButton1.addActionListener(new java.awt.event.ActionListener() {

@@ -47,8 +47,6 @@ public class TestJFrame extends javax.swing.JFrame {
 
         drawingPanel = new greta.core.utilx.draw.DrawingPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         javax.swing.GroupLayout drawingPanelLayout = new javax.swing.GroupLayout(drawingPanel);
         drawingPanel.setLayout(drawingPanelLayout);
         drawingPanelLayout.setHorizontalGroup(

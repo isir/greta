@@ -179,8 +179,6 @@ public class AUCapturecontroller extends javax.swing.JFrame implements CaptureLi
         realTimeCheckBox = new javax.swing.JCheckBox();
         textureCheckBox = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         screenShotButton.setText("Screen Shot");
         screenShotButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

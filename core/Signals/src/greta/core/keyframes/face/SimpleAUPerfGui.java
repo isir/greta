@@ -48,8 +48,6 @@ public class SimpleAUPerfGui extends javax.swing.JFrame implements CharacterDepe
         AULibrary = new javax.swing.JLabel();
         Update = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         AULibrary.setText("AULibrary:");
         AULibrary.setToolTipText("");
 

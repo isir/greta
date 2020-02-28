@@ -114,8 +114,6 @@ public class InterpersonalCircumplexFrame extends javax.swing.JFrame implements 
         jCheckBox1 = new javax.swing.JCheckBox();
         jPanel1 = circumplexPanel;
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jCheckBox1.setText("Edit");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

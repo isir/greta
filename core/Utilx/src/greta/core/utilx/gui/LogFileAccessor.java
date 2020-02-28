@@ -99,8 +99,6 @@ public class LogFileAccessor extends javax.swing.JFrame implements LogOutput{
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.open");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel1.setPreferredSize(new java.awt.Dimension(50, 50));
 
         jTextField1.addActionListener(new java.awt.event.ActionListener() {

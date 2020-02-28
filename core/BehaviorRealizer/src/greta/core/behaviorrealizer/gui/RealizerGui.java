@@ -67,7 +67,6 @@ public class RealizerGui extends JFrame{
         UpdateHand = new javax.swing.JButton();
         UpdateAll = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(213, 392));
 
         AULibrary.setText("AU Library");

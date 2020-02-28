@@ -101,8 +101,6 @@ public class FeedbackPerformerFrame extends javax.swing.JFrame {
         RadioButton1_Face = new javax.swing.JRadioButton();
         RadioButton2_Gesture = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         CheckBoxDetailedFeedbacks.setText(IniManager.getLocaleProperty("feedbacks.details"));
         CheckBoxDetailedFeedbacks.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

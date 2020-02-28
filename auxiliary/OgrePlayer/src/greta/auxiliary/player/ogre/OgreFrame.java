@@ -45,7 +45,6 @@ public class OgreFrame extends JFrame implements Capturable{
                 //1920, 1080 //full HD
                 );
         setSize(d);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ogreView = new OgreAwt( new Line());
         ogreView.setPreferredSize(d);

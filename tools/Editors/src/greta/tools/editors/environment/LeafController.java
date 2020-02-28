@@ -155,8 +155,6 @@ public class LeafController extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         posLabel.setText("Size");
 
         posXField.setText("0.0");

@@ -46,8 +46,6 @@ public class ConversationGroup_Gui extends javax.swing.JFrame {
 
         check_user = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         check_user.setText("Remove the User from participant list");
         check_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

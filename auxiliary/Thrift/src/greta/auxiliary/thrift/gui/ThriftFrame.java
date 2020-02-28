@@ -145,8 +145,6 @@ public class ThriftFrame extends javax.swing.JFrame implements ConnectionListene
         hostLabel = new javax.swing.JLabel();
         hostField = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         connectedLabel.setText(IniManager.getLocaleProperty("network.notconnected"));
 
         statusLabel.setText(IniManager.getLocaleProperty("word.status")+":");

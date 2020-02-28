@@ -82,8 +82,6 @@ public class LaughSynthetizerController extends javax.swing.JFrame {
         doAudio = new greta.core.utilx.gui.ToolBox.LocalizedJCheckBox("utilx.tts.audio");
         doPhonem = new greta.core.utilx.gui.ToolBox.LocalizedJCheckBox("utilx.tts.phonems");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         doTemporize.setSelected(true);
         doTemporize.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

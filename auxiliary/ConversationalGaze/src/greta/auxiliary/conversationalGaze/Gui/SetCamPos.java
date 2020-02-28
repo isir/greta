@@ -87,8 +87,6 @@ public class SetCamPos extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel1.setText("Agent");
 
         jLabel2.setText("Time Mutual Gaze (ms)");
@@ -129,7 +127,7 @@ public class SetCamPos extends javax.swing.JFrame {
 
         jSeparator3.setMaximumSize(new java.awt.Dimension(50, 10));
 
-        agentgazestatus.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        agentgazestatus.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         agentgazestatus.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 agentgazestatusActionPerformed(evt);
@@ -278,11 +276,9 @@ public class SetCamPos extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(2, 2, 2)
-                                .addComponent(jLabel5)
-                                .addGap(2, 2, 2))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel9)
-                                .addGap(4, 4, 4)))
+                                .addComponent(jLabel5))
+                            .addComponent(jLabel9))
+                        .addGap(2, 2, 2)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jSeparator5)
                             .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))

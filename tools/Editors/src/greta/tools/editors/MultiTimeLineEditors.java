@@ -92,8 +92,6 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
         saveMenuItem = new greta.core.utilx.gui.ToolBox.LocalizedJMenuItem("GUI.save");
         saveAsMenuItem = new greta.core.utilx.gui.ToolBox.LocalizedJMenuItem("GUI.saveAs");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel1.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
                 jPanel1MouseWheelMoved(evt);

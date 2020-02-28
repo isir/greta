@@ -209,8 +209,6 @@ public class TreeNodeController extends javax.swing.JFrame {
         idField = new javax.swing.JFormattedTextField();
         idLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         posLabel.setText(IniManager.getLocaleProperty("word.position"));
 
         posXField.setText("0.0");

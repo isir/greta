@@ -129,7 +129,6 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
         torsoComb = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(400, 1800));
         setPreferredSize(new java.awt.Dimension(541, 947));
 

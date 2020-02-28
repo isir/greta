@@ -78,8 +78,6 @@ public class AUParserFileReaderController extends javax.swing.JFrame {
         sendButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.send");
         openButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.open");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jPanel1.setLayout(new java.awt.BorderLayout(10, 10));
 
         jPanel3.setLayout(new javax.swing.BoxLayout(jPanel3, javax.swing.BoxLayout.LINE_AXIS));

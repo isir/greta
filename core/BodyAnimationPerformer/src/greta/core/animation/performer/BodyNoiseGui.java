@@ -53,8 +53,6 @@ public class BodyNoiseGui extends javax.swing.JFrame {
         lowerbodyvalue = new javax.swing.JTextField();
         intensitylable = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         headlabel.setText("Head");
 
         torsolabel.setText("Torso");

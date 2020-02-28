@@ -138,7 +138,7 @@ public class TextEditor extends javax.swing.JFrame {
         {
             public boolean getScrollableTracksViewportWidth()
             {
-                return getUI().getPreferredSize(this).width
+                return getUI().getPreferredSize(this).width 
                 <= getParent().getSize().width;
             }
         };
@@ -152,8 +152,6 @@ public class TextEditor extends javax.swing.JFrame {
         editMenu = new javax.swing.JMenu();
 
         openFileChooser.setCurrentDirectory(new java.io.File("./"));
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jScrollPane1.setViewportView(jTextPane1);
 

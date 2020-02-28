@@ -353,7 +353,6 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
         mainSeparator4 = new javax.swing.JSeparator();
         testInterruptionButton = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(555, 640));
 
         fmlLabel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N

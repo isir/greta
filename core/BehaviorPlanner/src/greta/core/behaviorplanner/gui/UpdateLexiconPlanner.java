@@ -43,8 +43,6 @@ public class UpdateLexiconPlanner extends JFrame implements CharacterDependent {
         LexiconUpdate = new JLabel();
         Update = new JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         LexiconUpdate.setText("Lexicon");
         LexiconUpdate.setToolTipText("");
 

@@ -76,7 +76,7 @@ import opennlp.tools.chunker.ChunkerModel;
 public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitter, CharacterDependent {
 
     private CharacterManager charactermanager;
-    
+
     private ArrayList<IntentionPerformer> intentionsPerformers = new ArrayList<>();
     private DictionnarySynsetImageSchema dictSynsetToImageSchema = new DictionnarySynsetImageSchema();
     private DictionnaryImageSchemaGesture dictImageSchemaToGesture = new DictionnaryImageSchemaGesture();
@@ -155,7 +155,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         XMLParser xmlParser = XML.createParser();
         XMLTree inputXML = xmlParser.parseBuffer(input);
         List<int[]> listPitchAccent = new ArrayList<>();
-        //remove the description tag that creates trouble with the parser and 
+        //remove the description tag that creates trouble with the parser and
         //retrieve the pitch accent for future access
 
         for (XMLTree xmltbml : inputXML.getChildren()) {
@@ -220,7 +220,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             String[] listPos = new String[sentence.size()];
             //A first loop that checks if there is a verb in the sentence and prepare the sentence for chunking
             for (int i = 0; i < sentence.size(); i++) {
-                //retrieve the word and its grammar posTag 
+                //retrieve the word and its grammar posTag
                 CoreLabel cl = (CoreLabel) sentence.get(i);
                 String type = cl.tag();
 
@@ -285,7 +285,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                     case "JJ":
                         pos = POS.ADJECTIVE;
                         break;
-                    //Adjective Comparative    
+                    //Adjective Comparative
                     case "JJR":
                         pos = POS.ADJECTIVE;
                         break;
@@ -496,7 +496,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
             }
 
-            //If no root could be found, 
+            //If no root could be found,
             if (!ideationalUnit.hasAttribute("main")) {
                 //If no root could be found, delete the ideational unit.
                 if (imageSchemasGenerated.size() > 0) {
@@ -577,7 +577,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                 break;
         }
         List<ISynsetID> relatedSynset = synset.getRelatedSynsets(Pointer.HYPERNYM);
-        //FOR NOW WE STOP AS SOON AS WE FIND ONE IMAGE SCHEMA. If I remove the toReturn.size()>0, 
+        //FOR NOW WE STOP AS SOON AS WE FIND ONE IMAGE SCHEMA. If I remove the toReturn.size()>0,
         //we will continue as long as there is an hypernym to this synset
         if (relatedSynset.isEmpty() || depth <= 0 || toReturn.size() > 0) {
             return toReturn;
@@ -588,7 +588,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         }
     }
 
-    //Perform the simplified Lesk algorithm for Word disambiguation. 
+    //Perform the simplified Lesk algorithm for Word disambiguation.
     //It looks up in the WordNet dictionnary the glossary of each meaning for the word.
     //The meaning that has more word in common with the current context is the selected meaning
     public ISynset simplifiedLesk(IIndexWord idxWord, String context) {
@@ -645,7 +645,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
     @Override
     public void onCharacterChanged() {
-        
+
     }
 
     /**

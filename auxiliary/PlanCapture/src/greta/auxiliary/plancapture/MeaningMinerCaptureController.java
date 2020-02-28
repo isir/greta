@@ -102,7 +102,7 @@ public class MeaningMinerCaptureController extends greta.auxiliary.player.ogre.c
             }
             /*imageSchemaExtractor.processText(content);
             while (iscapturing) {
-                
+
             }*/
         }
     }

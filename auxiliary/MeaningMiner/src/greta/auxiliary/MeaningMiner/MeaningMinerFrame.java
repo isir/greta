@@ -41,7 +41,7 @@ import javax.swing.JTextArea;
 public class MeaningMinerFrame extends JFrame{
 
     private MeaningMinerModule module;
-    
+
     private final int vertical = JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED;
     private final int horizontal = JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS;
 
@@ -56,11 +56,11 @@ public class MeaningMinerFrame extends JFrame{
 
     private JButton sendButton;
     private JButton opButton;
-    
+
     public MeaningMinerFrame(){
         SEND_BUTTON = "Send";
         OPEN_BUTTON = "Open";
-        
+
         panel = new JPanel();
         layout = new GroupLayout(panel);
         panel.setLayout(layout);
@@ -74,11 +74,8 @@ public class MeaningMinerFrame extends JFrame{
         area.setLineWrap(true);
         // Création d'un JScrollPane pour Area
         scPan1 = new JScrollPane(area, vertical, horizontal);
-        
 
-        
-        
-        
+
         openFileChooser = new JFileChooser();
         openFileChooser .setCurrentDirectory(new File("./"));
 
@@ -99,10 +96,6 @@ public class MeaningMinerFrame extends JFrame{
             }
         });
 
-        
-
-        
-       
 
         layout.setHorizontalGroup(
                 layout.createSequentialGroup()
@@ -127,10 +120,10 @@ public class MeaningMinerFrame extends JFrame{
         setText("");
         setMinimumSize(new Dimension(600, 400));
         pack();
-        
-        
+
+
     }
-    
+
     public void read() throws FileNotFoundException, IOException {
         StringBuilder sb = new StringBuilder();
         BufferedReader in = new BufferedReader(
@@ -147,7 +140,7 @@ public class MeaningMinerFrame extends JFrame{
     public void setText(String text) {
         area.setText(text);
     }
-    
+
     public void openText() {
         openFileChooser.showOpenDialog(null);
         try {
@@ -157,11 +150,11 @@ public class MeaningMinerFrame extends JFrame{
             e.printStackTrace();
         }
     }
-    
+
     public void setModule(MeaningMinerModule mmm){
         this.module = mmm;
     }
-    
+
     private void process(){
         this.module.processText(area.getText());
     }

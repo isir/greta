@@ -184,8 +184,6 @@ public class CodecSelector extends javax.swing.JFrame {
         audioCodecComboBox = new javax.swing.JComboBox();
         containerComboBox = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jLabel1.setText("Container");
 
         videoCodecComboBox.addActionListener(new java.awt.event.ActionListener() {

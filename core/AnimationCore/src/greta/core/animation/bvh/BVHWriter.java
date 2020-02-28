@@ -28,15 +28,15 @@ import java.util.List;
  * @author Jing
  */
 public class BVHWriter {
-    
+
     private String path;
     private Skeleton skelet;
     private String bvhheader;
     private SkeletonToBVH bap2bvh;
-    
-    protected String filename;
+
+    protected String fileName;
     private boolean fileNameExternallyDefined=false;
-    
+
     public BVHWriter(Skeleton sk)
     {
         skelet = sk;
@@ -46,11 +46,11 @@ public class BVHWriter {
 
     public void setBVHFilename(String bvh)
     {
-        filename=bvh;
+        fileName=bvh;
         fileNameExternallyDefined=true;
     }
-    
-    
+
+
     public void writeFile(List<Frame> frames,double frametime, String fileName) {
         try {
             java.io.FileWriter fos;
@@ -70,7 +70,7 @@ public class BVHWriter {
             fos.write("Frames: "+frames.size()+"\n"+
                     "Frame Time: "+frametime);
             System.out.println("BVHWriter: Frames: "+frames.size());
-            
+
             for (Frame frame : frames) {
                 String bvhframe = bap2bvh.frame2BVHFrameString(frame);
                 fos.write(bvhframe);
@@ -82,5 +82,3 @@ public class BVHWriter {
         }
     }
 }
-
-

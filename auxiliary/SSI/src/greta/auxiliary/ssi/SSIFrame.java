@@ -29,7 +29,7 @@ import java.util.ArrayList;
  * @author Angelo Cafaro
  */
 public class SSIFrame extends AnimationParametersFrame<SSI> {
-    
+
     private ArrayList<String> stringFeaturesList;
     private int[] stringFeaturesListIndexes;
     private int nextAvailableStringIndexPos;
@@ -50,8 +50,8 @@ public class SSIFrame extends AnimationParametersFrame<SSI> {
         super(ssiFrame);
         this.setupStringLists();
     }
-    
-    
+
+
     private void setupStringLists() {
         nextAvailableStringIndexPos = 0;
         stringFeaturesList = new ArrayList<String>(NUM_SSI_STRING_FEATURES);
@@ -61,9 +61,9 @@ public class SSIFrame extends AnimationParametersFrame<SSI> {
             stringFeaturesListIndexes[i] = EMPTY_STRING_FEATURE;
         }
     }
-    
+
     private int searchValueInStringIndexes(int targetValue) {
-	
+
         int indexOf = STRING_FEATURE_INDEX_NOTFOUND;
         for (int i=0; i < NUM_SSI_STRING_FEATURES; i++) {
             if(stringFeaturesListIndexes[i] == targetValue) {
@@ -73,8 +73,8 @@ public class SSIFrame extends AnimationParametersFrame<SSI> {
 	}
 	return indexOf;
     }
-    
-    
+
+
     @Override
     public SSIFrame clone(){
         return new SSIFrame(this);
@@ -91,33 +91,33 @@ public class SSIFrame extends AnimationParametersFrame<SSI> {
     public void applyValue(SSIFeatureNames which, int value) {
         getAnimationParameter(which.ordinal()).applyValue(value);
     }
-    
+
     public void applyValue(SSIFeatureNames which, String value) {
         if (SSITypes.SSIFeatureNames.isStringFeature(which.ordinal()) )
         {
             int index = searchValueInStringIndexes(which.ordinal());
-            
+
             if (index == STRING_FEATURE_INDEX_NOTFOUND) {
                 stringFeaturesListIndexes[nextAvailableStringIndexPos] = which.ordinal();
                 index = nextAvailableStringIndexPos;
                 nextAvailableStringIndexPos++;
             }
-            
+
             stringFeaturesList.set(index, value);
         }
     }
-    
+
     public String getStringValue(SSIFeatureNames which) {
-        
+
         String val = INVALID_OR_EMPTY_STRING_FEATURE_VALUE;
-        
+
         if (SSITypes.SSIFeatureNames.isStringFeature(which.ordinal()) )
         {
             int index = searchValueInStringIndexes(which.ordinal());
             if (index != STRING_FEATURE_INDEX_NOTFOUND) {
                 val = stringFeaturesList.get(index);
             }
-  
+
             if (val == null) {
                 val = INVALID_OR_EMPTY_STRING_FEATURE_VALUE;
             }
@@ -125,7 +125,7 @@ public class SSIFrame extends AnimationParametersFrame<SSI> {
                 val = INVALID_OR_EMPTY_STRING_FEATURE_VALUE;
             }
         }
-        
+
         return val;
     }
 

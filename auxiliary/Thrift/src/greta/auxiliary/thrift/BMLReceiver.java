@@ -40,7 +40,7 @@ import java.util.List;
 public class BMLReceiver extends Receiver implements SignalEmitter {
 
     private CharacterManager cm;
-    
+
     public BMLReceiver(CharacterManager cm) {
         super();
         this.cm = cm;

@@ -67,10 +67,10 @@ public class DBody {
      * \param mass the mass of the body \param com the position of the center of
      * mass in the bodies coordinates \param gyration_radii the radii of
      * gyration at the center of mass of the body
-     * 
+     *
      */
     /***
-     * 
+     *
      * @param mass
      * @param com  the center of mass is the position in local space
      * @param gyration_radii pages 171 John J.Craig  Introduction to robotics mechanics and control     relative to x y z unidisribution with mass
@@ -278,8 +278,8 @@ public class DBody {
         Matrix3d com_cross = com.toCrossMatrix();
         return inertia.add(com_cross.multiple(com_cross.transpose()).multiple(mass));
     }
-    
-    
+
+
     public static Matrix3d generateRotationInertia(double x, double y, double z, double mass, Matrix3d rotation){
         Matrix3d inertia = new Matrix3d();
         inertia.setEntry(0, 0, mass /12.0 * (y * y + z * z));
@@ -288,7 +288,7 @@ public class DBody {
         inertia = rotation.multiple(inertia.multiple(rotation.transpose()));
         return inertia;
     }
-    
+
     public static Matrix3d generateRotationInertia(double x, double y, double z, double mass, Vector3d dir, Vector3d dirOriginal){
         dir = dir.divide(dir.getNorm());
         dirOriginal = dirOriginal.divide(dirOriginal.getNorm());
@@ -298,7 +298,7 @@ public class DBody {
         rotation.setEntry(1, 0, dirOriginal.cross(dir).getNorm());
         rotation.setEntry(1, 1, dirOriginal.dotProduct(dir));
         rotation.setEntry(3, 3, 1);
-        
+
         Matrix3d inertia = new Matrix3d();
         inertia.setEntry(0, 0, mass /12.0 * (y * y + z * z));
         inertia.setEntry(1, 1, mass /12.0 * (z * z + x * x));

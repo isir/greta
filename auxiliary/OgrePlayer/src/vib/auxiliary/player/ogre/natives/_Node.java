@@ -38,7 +38,7 @@ public class _Node extends _Object_ implements Node{
         return new Quaternion(__getDerivedOrientation(getNativePointer()));
     }
     private native long __getDerivedOrientation(long thisPointer);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

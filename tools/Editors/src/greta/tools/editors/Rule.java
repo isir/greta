@@ -77,10 +77,10 @@ public class Rule<T extends Temporizable> extends TimeLine<T>{
 
     @Override
     protected TemporizableContainer<T> instanciateTemporizable(double startTime, double endTime) {return null;}
-    
+
     @Override
     protected String getDescription(TemporizableContainer<T> temporizableContainer, FontMetrics metrics, int limitSize){return null;}
-    
+
     @Override
     protected TemporizableContainer<T> editTemporizable(TemporizableContainer<T> temporizableContainer) {return null;}
 

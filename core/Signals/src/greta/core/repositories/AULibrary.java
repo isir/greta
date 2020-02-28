@@ -39,7 +39,7 @@ public class AULibrary extends ParameterSet<FLExpression> implements CharacterDe
     public static final String CHARACTER_PARAMETER_AULIBRARY;
     private static final String xsdFile;
     public static AULibrary global_aulibrary;
-    
+
     private CharacterManager characterManager;
 
     /**
@@ -63,11 +63,11 @@ public class AULibrary extends ParameterSet<FLExpression> implements CharacterDe
         characterManager.add(this);
         //this.characterManager = characterManager;
     }
-    
+
     static {
         CHARACTER_PARAMETER_AULIBRARY = "AULIBRARY";
         xsdFile = IniManager.getGlobals().getValueString("XSD_AULIBRARY");
-        global_aulibrary = new AULibrary(CharacterManager.getStaticInstance());        
+        global_aulibrary = new AULibrary(CharacterManager.getStaticInstance());
     }
 
     public AULibrary(CharacterManager cm) {
@@ -76,8 +76,8 @@ public class AULibrary extends ParameterSet<FLExpression> implements CharacterDe
         setCharacterManager(cm);
         setDefaultDefinition(cm.getDefaultValueString(CHARACTER_PARAMETER_AULIBRARY));
         //load additionnal Lexicon :
-        for (String filename : cm.getAllValuesString(CHARACTER_PARAMETER_AULIBRARY)) {
-            addDefinition(filename);
+        for (String fileName : cm.getAllValuesString(CHARACTER_PARAMETER_AULIBRARY)) {
+            addDefinition(fileName);
         }
         //set the current Lexicon to use :
         setDefinition(cm.getValueString(CHARACTER_PARAMETER_AULIBRARY));

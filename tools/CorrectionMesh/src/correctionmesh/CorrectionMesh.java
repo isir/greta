@@ -48,7 +48,7 @@ public class CorrectionMesh {
     }
 
     private static void exec(String commandLine, boolean wait){
-        
+
         try {
             Process p = Runtime.getRuntime().exec(commandLine);
             while(wait){
@@ -69,7 +69,7 @@ public class CorrectionMesh {
             ex.printStackTrace();
         }
     }
-    
+
     public static void main(String[] aaa){
         startModular();
     }

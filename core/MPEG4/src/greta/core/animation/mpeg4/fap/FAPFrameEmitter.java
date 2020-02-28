@@ -27,8 +27,3 @@ public interface FAPFrameEmitter {
     public void removeFAPFramePerformer(FAPFramePerformer performer);
 
 }
-
-
-
-
-

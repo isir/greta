@@ -111,9 +111,9 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
         loadData();
     }
 
-    private void setSkeleton(String filename) {
+    private void setSkeleton(String fileName) {
         IKSkeletonParser p = new IKSkeletonParser();
-        boolean re = p.loadFile(filename);
+        boolean re = p.loadFile(fileName);
         if (re) {
             p.readSkeletonInfo();
             p.buildFullSkeleton(_skeleton_original);
@@ -206,10 +206,6 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
         {
             System.err.println("Problem while opening TouchPoint description file");
         }
-
-
-
-
 
 
     }

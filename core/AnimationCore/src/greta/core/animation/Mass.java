@@ -156,7 +156,7 @@ public class Mass {
         }
         _externalConstraintList.remove(i);
     }*/
-    
+
     public String getName() {
         return _name;
     }

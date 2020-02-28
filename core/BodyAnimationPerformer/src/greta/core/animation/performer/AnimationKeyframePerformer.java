@@ -88,7 +88,7 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
     private boolean usePropagation = true;
     private double weightPropagation = 0.1;
     private String propagationJoint = "vt6";
-    
+
     private CharacterManager cm;
 
     private ArrayList<AnimationFramePerformer> afperformers = new ArrayList<>();
@@ -103,14 +103,14 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         cb.initMassSystemByOriginalSkeleton();
         idle = new IdleMovement(symbolicConverter.getOriginalSkeleton().clone());
         dynSk = symbolicConverter.getOriginalSkeleton().clone();
-        
+
         //testFunction();
     }
 
     public void setCharacterManager(CharacterManager cm) {
         this.cm = cm;
     }
-    
+
     @Override
     public void onCharacterChanged() {
         cb = new CharacterBody(symbolicConverter.getOriginalSkeleton());
@@ -470,7 +470,7 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         }
         if (expressiveFrame != null) {
             if (expressiveFrames.size() > 0) {
-                
+
                 Function function = getFunction(expressiveFrames.get(0));
                 double first = expressiveFrame.getTime();
                 double second = expressiveFrames.get(0).getTime();

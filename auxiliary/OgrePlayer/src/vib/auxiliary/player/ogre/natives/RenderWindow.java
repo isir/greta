@@ -81,8 +81,8 @@ public class RenderWindow extends _Object_ implements RenderTarget{
         _copyContentsToMemory(getNativePointer(), pib.getNativePointer());
     }
     private native void _copyContentsToMemory(long p, long b);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

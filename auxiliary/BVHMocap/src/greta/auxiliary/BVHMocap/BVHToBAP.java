@@ -40,7 +40,7 @@ import java.util.ArrayList;
  * @author Jing Huang
  */
 public class BVHToBAP  implements BAPFrameEmitter {
-    
+
     ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
     @Override
     public void addBAPFramePerformer(BAPFramePerformer bapfp) {
@@ -51,7 +51,7 @@ public class BVHToBAP  implements BAPFrameEmitter {
     public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
         _bapFramePerformer.remove(bapfp);
     }
-    
+
     public static void main(String[] args) throws FileNotFoundException, IOException {
         BVHLoader bvhloader = new BVHLoader();
         //bvhloader.load("C:\\Users\\Jing\\Desktop\\greta_svn\\bin\\Examples\\BVHMocap\\fast_gesture.bvh");
@@ -73,7 +73,7 @@ public class BVHToBAP  implements BAPFrameEmitter {
                 BAPType x = joint.rotationX;
                 bf.setRadianValue(z, angle.z());
                 bf.setRadianValue(y, angle.y());
-                bf.setRadianValue(x, angle.x());    
+                bf.setRadianValue(x, angle.x());
             }
             bapframes.add(bf);
         }

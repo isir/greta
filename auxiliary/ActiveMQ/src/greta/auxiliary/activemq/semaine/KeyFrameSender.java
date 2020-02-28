@@ -66,7 +66,7 @@ public class KeyFrameSender extends TextSender implements KeyframePerformer{
             if(key instanceof SpeechKeyframe){
               keyframeString = keyframeString.concat("   <keyframe onset="+'"'+((SpeechKeyframe)key).getOnset()+'"'
                      + " modality="+'"'+((SpeechKeyframe)key).getModality()+'"'
-                     + " filename="+'"'+((SpeechKeyframe)key).getFileName()+'"'
+                     + " fileName="+'"'+((SpeechKeyframe)key).getFileName()+'"'
                      + ">\n");
               keyframeString = keyframeString.concat("   </keyframe>\n");
             }

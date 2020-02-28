@@ -29,7 +29,7 @@ import javax.sound.sampled.SourceDataLine;
 public class Line implements AudioOutput{
 
     public static final int AUDIO_BUFFER_QUEUE_SIZE = 1;
-    
+
     private SourceDataLine sdl;
     private ArrayBlockingQueue<byte[]> audioBufferQueue;
     private Thread lineUpdater;
@@ -45,8 +45,8 @@ public class Line implements AudioOutput{
                     sdl.start();
                     while (true) {
                         try {
-                            sdl.write(audioBufferQueue.take(), 0, Mixer.BUFFER_SIZE);  
-                        }   
+                            sdl.write(audioBufferQueue.take(), 0, Mixer.BUFFER_SIZE);
+                        }
                         catch (Exception ex){
                             ex.printStackTrace();
                         }
@@ -59,7 +59,7 @@ public class Line implements AudioOutput{
             ex.printStackTrace();
         } catch (IllegalArgumentException ex){
             ex.printStackTrace();
-        } 
+        }
     }
     @Override
     public void setCurrentAudio(byte[] current) {
@@ -74,7 +74,7 @@ public class Line implements AudioOutput{
                     this.audioBufferQueue.offer(current);
                 }
             }
-        }   
+        }
         catch (InterruptedException ex){
             ex.printStackTrace();
         }

@@ -33,32 +33,32 @@ public class CharacterLowerBody {
     Vec3d _rootOffset = new Vec3d();
     Vec3d _l_ankleOffset = new Vec3d();
     Vec3d _r_ankleOffset = new Vec3d();
-    
+
     Joint l_hip;
     Joint l_knee;
     Joint l_ankle;
     Joint r_hip;
     Joint r_knee;
     Joint r_ankle;
-    
+
     int maxLoop = 500;
     double thresholdDis = 0.01f;
     double beta = 3f;
     double stepRange = 0.01f;
 
     HashMap<String, Quaternion> _rotations = new HashMap<String, Quaternion>();
-            
+
     public CharacterLowerBody() {
         _leftleg = new Skeleton("leftleg");
          l_hip = _leftleg.createJoint("l_hip", -1);
-         l_knee = _leftleg.createJoint("l_knee", 0);   
-         l_ankle = _leftleg.createJoint("l_ankle", 1); 
-        
-        
+         l_knee = _leftleg.createJoint("l_knee", 0);
+         l_ankle = _leftleg.createJoint("l_ankle", 1);
+
+
         _rightleg = new Skeleton("rightleg");
          r_hip = _rightleg.createJoint("r_hip", -1);
-         r_knee = _rightleg.createJoint("r_knee", 0);   
-         r_ankle = _rightleg.createJoint("r_ankle", 1);   
+         r_knee = _rightleg.createJoint("r_knee", 0);
+         r_ankle = _rightleg.createJoint("r_ankle", 1);
 
     }
 
@@ -70,7 +70,7 @@ public class CharacterLowerBody {
         r_hip.setLocalPosition(sk.getJoint("r_hip").getWorldPosition());
         r_knee.setLocalPosition(sk.getJoint("r_knee").getLocalPosition());
         r_ankle.setLocalPosition(sk.getJoint("r_ankle").getLocalPosition());
-        
+
         _leftleg.update();
         _rightleg.update();
     }
@@ -83,7 +83,7 @@ public class CharacterLowerBody {
         Vec3d p_r_kneeo = _sk_original.getJoint("r_knee").getWorldPosition();
         Vec3d p_l_ankleo = _sk_original.getJoint("l_ankle").getWorldPosition();
         Vec3d p_r_ankleo = _sk_original.getJoint("r_ankle").getWorldPosition();
-        
+
         Vec3d p_root = Vec3d.addition(p_rooto, _rootOffset);
         Vec3d centerHipO = Vec3d.addition(p_l_hipo, p_r_hipo);
         centerHipO.divide(2);
@@ -94,14 +94,14 @@ public class CharacterLowerBody {
             Vec3d xO = Vec3d.substraction(centerHipO, p_r_hipo);
             Vec3d zO = new Vec3d(0,0,1);
             Vec3d yO = Vec3d.cross3(zO, xO);
-            
+
             Vec3d x = Vec3d.substraction(centerHip, p_r_hip);
             Vec3d z = new Vec3d(0,0,1);
             Vec3d y = Vec3d.cross3(z, x);
-            
+
         }
     }
-    
+
     public void compute(){
         //left
         {
@@ -145,19 +145,19 @@ public class CharacterLowerBody {
                     axis[1].normalize();
                     //axis[1] = Vec3d.cross3(ve, vg);
                     //axis[1].normalize();
-                    
+
                     Vec3d xyz = Vec3d.cross3(axis[1], ve);
                     xyz.normalize();
                     jacobian.elements[0][1] = xyz.x();
                     jacobian.elements[1][1] = xyz.y();
                     jacobian.elements[2][1] = xyz.z();
-               
-                    axis[1] = Quaternion.multiplication(current.getWorldOrientation().inverse(), axis[1]);       
+
+                    axis[1] = Quaternion.multiplication(current.getWorldOrientation().inverse(), axis[1]);
                 }
 
                 MatrixMN transpose = jacobian.transpose();
                 MatrixMN rotations = transpose.multiply(t);
-   
+
                 {
                     Joint current = l_hip;
                     double r = rotations.elements[0][0];
@@ -188,12 +188,11 @@ public class CharacterLowerBody {
             // System.out.println("loop left: " +loop);
              _rotations.put("l_hip", l_hip.getLocalRotation());
              _rotations.put("l_knee", l_knee.getLocalRotation());
-             
+
              _rotations.put("l_ankle", l_ankle.getWorldOrientation().inverse());
         }
-    
-        
-        
+
+
         //right
         {
             Vec3d currentEndR = r_ankle.getWorldPosition();// Vec3d.substraction(r_ankle.getWorldPosition(), _rootOffset);
@@ -234,19 +233,19 @@ public class CharacterLowerBody {
 
                     axis[1] = new Vec3d(1,0,0);
                     axis[1].normalize();
-                    
+
                     Vec3d xyz = Vec3d.cross3(axis[1], ve);
                     xyz.normalize();
                     jacobian.elements[0][1] = xyz.x();
                     jacobian.elements[1][1] = xyz.y();
                     jacobian.elements[2][1] = xyz.z();
-               
-                    axis[1] = Quaternion.multiplication(current.getWorldOrientation().inverse(), axis[1]);       
+
+                    axis[1] = Quaternion.multiplication(current.getWorldOrientation().inverse(), axis[1]);
                 }
 
                 MatrixMN transpose = jacobian.transpose();
                 MatrixMN rotations = transpose.multiply(t);
-   
+
                 {
                     Joint current = r_hip;
                     double r = rotations.elements[0][0];
@@ -278,8 +277,8 @@ public class CharacterLowerBody {
              _rotations.put("r_knee", r_knee.getLocalRotation());
              _rotations.put("r_ankle", r_ankle.getWorldOrientation().inverse());
         }
-        
-        
+
+
     }
 
     public Quaternion getL_ankleQuaternion() {
@@ -305,8 +304,8 @@ public class CharacterLowerBody {
     public Quaternion getR_kneeQuaternion() {
         return r_knee.getLocalRotation();
     }
-    
-    
+
+
     public Vec3d getL_ankleOffset() {
         return _l_ankleOffset;
     }
@@ -334,14 +333,14 @@ public class CharacterLowerBody {
     public HashMap<String, Quaternion> getRotations(){
         return _rotations;
     }
-    
+
     public Frame getFrame(){
         Frame f = new Frame();
         f.addRotations(_rotations);
         f.setRootTranslation(_rootOffset);
         return f;
     }
-    
+
     public void applyConstraint(Joint j, double xMin, double xMax, double yMin, double yMax, double zMin, double zMax){
         Quaternion q = j.getLocalRotation();
         Vec3d v = q.getEulerAngleXYZ();

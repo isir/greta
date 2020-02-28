@@ -32,7 +32,7 @@ public class AUCapturecontroller extends javax.swing.JFrame implements CaptureLi
     private OneShotCapturer screenShotCapturer;
     private RealTimeVideoCapturer realTimeVideoCapturer;
     private OffLineVideoCapturer offLineVideoCapturer;
-    private String filename = null;
+    private String fileName = null;
     private Capturable currentCapturable;
     private OgreRenderTexture textureCapturable;
     protected Capturer currentVideoCapturer;
@@ -113,13 +113,13 @@ public class AUCapturecontroller extends javax.swing.JFrame implements CaptureLi
     }
 
     public void setBaseFileName(String baseFileName) {
-        filename = baseFileName;
+        fileName = baseFileName;
     }
 
     public void startVideoCapture() {
         AUCapturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         ensureCapturable(currentVideoCapturer);
-        currentVideoCapturer.startCapture(filename);
+        currentVideoCapturer.startCapture(fileName);
     }
 
     public void stopVideoCapture() {
@@ -162,7 +162,7 @@ public class AUCapturecontroller extends javax.swing.JFrame implements CaptureLi
 
     public void screenShot() {
         ensureCapturable(screenShotCapturer);
-        screenShotCapturer.startCapture(filename);
+        screenShotCapturer.startCapture(fileName);
     }
 
     /**

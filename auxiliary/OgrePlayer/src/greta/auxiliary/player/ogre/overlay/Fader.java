@@ -37,7 +37,7 @@ public class Fader {
 //    private ITextureUnitState tus; //duration
     private SceneManager sceneManager;
     private float fadeAmount=0f;
-    
+
     public Fader(SceneManager sceneManager)
     {
         super();
@@ -47,7 +47,7 @@ public class Fader {
         this.duration=1;
         this.type=false;
         createFaderOverlay();
-        
+
         Runnable r = new Runnable(){
             @Override
             public void run()
@@ -74,21 +74,21 @@ public class Fader {
                 }
             });
         }};
-        
+
         ScheduledExecutorService execserv = Executors.newSingleThreadScheduledExecutor();
         Future<?> f =execserv.scheduleAtFixedRate(r, 0, 50, TimeUnit.MILLISECONDS);
     }
-    
+
     public void fade(long dur, boolean fadeOut)
     {
         this.type=fadeOut;
         this.startTime=System.currentTimeMillis();
         this.duration=dur;
     }
-    
-    
+
+
     private void createFaderOverlay()//boolean fadeIn)
-    {   
+    {
         /*  this part must be redo : we don't use ogre4j anymore
         Rectangle2D rect = new Rectangle2D(true);
         Ogre.dontDelete(rect);
@@ -99,7 +99,7 @@ public class Fader {
         tus = mptr.get().getTechnique(0).getPass(0).getTextureUnitState(0);
         Ogre.dontDelete(tus);
         mptr.get().getTechnique(0).getPass(0).setSceneBlending(SceneBlendType.SBT_TRANSPARENT_ALPHA);
-        
+
         // Use infinite AAB to always stay visible
         AxisAlignedBox aab = new AxisAlignedBox();
         Ogre.dontDelete(aab);
@@ -112,7 +112,7 @@ public class Fader {
         node.attachObject(rect);
         */
     }
-    
+
     public void updateFader(float amount)
     {
         /*  this part must be redo : we don't use ogre4j anymore

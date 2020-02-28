@@ -40,7 +40,7 @@ public class ShoulderSignal extends ParametricSignal {
     private String id;
     private double repetition;
     private Side side;
-    
+
     private double front;
     private double up;
 
@@ -63,7 +63,7 @@ public class ShoulderSignal extends ParametricSignal {
     public boolean isScheduled() {
         return is_scheduled;
     }
-    
+
     public ShoulderSignal(String id) {
         this.id = id;
         timeMarkers = new ArrayList<TimeMarker>(5);
@@ -78,10 +78,10 @@ public class ShoulderSignal extends ParametricSignal {
         end = new TimeMarker("end");
         timeMarkers.add(end);
         side = Side.BOTH;
-        
+
         front = 0.0;
         up = 0.0d;
-        
+
         //phases = new ArrayList<SpinePhase>();
     }
 
@@ -153,7 +153,7 @@ public class ShoulderSignal extends ParametricSignal {
             up = 0.0;
         }
     }
-    
+
     private double checkTimming(TimeMarker first, TimeMarker second) throws Exception {
         double duration = first.isConcretized() && second.isConcretized() ? second.getValue() - first.getValue() : Double.NEGATIVE_INFINITY;
         if (Double.NEGATIVE_INFINITY < duration && duration < 0) {
@@ -336,7 +336,7 @@ public class ShoulderSignal extends ParametricSignal {
         }
         //*/
         //</editor-fold>
-        
+
         //<editor-fold defaultstate="collapsed" desc="Radek code">
         /*
         int any_problem = 0;
@@ -379,7 +379,6 @@ public class ShoulderSignal extends ParametricSignal {
             //give up, destroy itself
             return; //enough? check
         }
-
 
 
         if (!(start.isConcretized())) {
@@ -654,7 +653,7 @@ public class ShoulderSignal extends ParametricSignal {
         //Logs.info("signal :" + this.getId() +  " start: " + start.getValue() +  " attack: " +  attack.getValue() +  " decay: "  + decay.getValue() +  " sustain: " + sustain.getValue() +  " end: " + end.getValue() );
         //*/
         //</editor-fold>
-                
+
         is_scheduled = true;
 
     }
@@ -707,7 +706,7 @@ public class ShoulderSignal extends ParametricSignal {
     public double getRepetition() {
         return repetition;
     }
-    
+
     @Override
     public TimeMarker getStart() {
         return start;
@@ -717,7 +716,7 @@ public class ShoulderSignal extends ParametricSignal {
     public TimeMarker getEnd() {
         return end;
     }
-    
+
     private double warpTMP() {
         return Functions.changeInterval(Math.max(0, Math.min(getTMP(), 1)), 0, 1, 3, 1);
     }

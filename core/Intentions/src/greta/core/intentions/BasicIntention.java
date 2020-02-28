@@ -39,9 +39,9 @@ public class BasicIntention implements Intention{
     private List<TimeMarker> markers;
     private String character;
     private String mode;
-    // add a variable to store the target to which gaze to 
+    // add a variable to store the target to which gaze to
     private String Target;
-    
+
     public BasicIntention(String name, String id, String type, TimeMarker start, TimeMarker end, double importance){
         this.name = name;
         this.id = id;
@@ -65,17 +65,17 @@ public class BasicIntention implements Intention{
         this(name, id, type, start, end, 0.5);
         this.Target = "";
     }
-    
-    // set the Target 
+
+    // set the Target
     public void setTarget (String Target){
         this.Target = Target;
     }
-    
+
     @Override
     public String getTarget (){
         return Target;
     }
-    
+
     /**
      * Sets the importance of this {@code Intention}.
      * @param importance the value of importance to set

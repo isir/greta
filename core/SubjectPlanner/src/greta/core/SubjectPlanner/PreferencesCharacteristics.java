@@ -24,20 +24,17 @@ import greta.core.util.parameter.EngineParameterSetOfSet;
  * @author Nadine
  */
 public class PreferencesCharacteristics extends EngineParameterSetOfSet{
-    
-    
+
 
     public static final String PREF_CHARACTERISTICS = "SubjectPlanner/Data/PreferencesCharacteristics.xml";//CHARACTER_OPINION
-    
+
     public static PreferencesCharacteristics global_preferences_characteristics;
-    
 
-    public PreferencesCharacteristics(String filename){
+
+    public PreferencesCharacteristics(String fileName){
         //get the default Lexicon :
-        super(filename);
-    }  
-
-    
+        super(fileName);
+    }
 
 
 }

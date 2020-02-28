@@ -53,7 +53,7 @@ public abstract class MatrixNd<M extends MatrixNd> extends Array2DRowRealMatrix 
             }
         }
     }
-    
+
     public void set(M v){
         for (int j = 0; j < this.getRowDimension(); ++j) {
             for (int i = 0; i < this.getColumnDimension(); ++i) {

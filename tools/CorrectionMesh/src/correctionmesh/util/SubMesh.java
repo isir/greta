@@ -672,18 +672,18 @@ public class SubMesh {
         createUVImage(width, height, printVertices, onlyClockVised, null);
     }
 
-    public void createUVImage(int width, int height, boolean printVertices, boolean onlyClockVised, String filename) {
-        createUVImage(width, height, printVertices, onlyClockVised, filename, 0, 0, 1, 1);
+    public void createUVImage(int width, int height, boolean printVertices, boolean onlyClockVised, String fileName) {
+        createUVImage(width, height, printVertices, onlyClockVised, fileName, 0, 0, 1, 1);
     }
 
-    public void createUVImage(int width, int height, boolean printVertices, boolean onlyClockVised, String filename, double x, double y, double scalex, double scaley) {
+    public void createUVImage(int width, int height, boolean printVertices, boolean onlyClockVised, String fileName, double x, double y, double scalex, double scaley) {
 
         BufferedImage off_Image = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = off_Image.createGraphics();
 
-        if (filename != null && (new File(filename)).exists()) {
+        if (fileName != null && (new File(fileName)).exists()) {
             try {
-                BufferedImage img = ImageIO.read(new File(filename));
+                BufferedImage img = ImageIO.read(new File(fileName));
 
 //                System.out.format("x=%d y=%d w=%d h=%d\n",(int)(x * width * scalex), (int)(y * height * scaley), (int) (off_Image.getWidth()*scalex), (int) (off_Image.getHeight()*scaley));
                 g2.drawImage(img, (int) (x * width * scalex), (int) (y * height * scaley), (int) (width * scalex), (int) (height * scaley), null);

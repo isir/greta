@@ -25,5 +25,5 @@ public enum SocialDimension {
     Liking,
     Dominance,
     Familiarity;
-    
+
 }

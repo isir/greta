@@ -314,7 +314,7 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
 
     @Override
     public void setCharacterManager(CharacterManager cm) {
-        this.cm = cm;          
+        this.cm = cm;
         cm.add(this);
     }
 

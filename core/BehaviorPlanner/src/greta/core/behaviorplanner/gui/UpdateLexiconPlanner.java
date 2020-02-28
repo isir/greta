@@ -29,17 +29,17 @@ import javax.swing.JLabel;
  * @author donat
  */
 public class UpdateLexiconPlanner extends JFrame implements CharacterDependent {
-    
+
     private CharacterManager cm;
     //private Planner plan;
     private JLabel LexiconUpdate;
     private JButton Update;
     private Planner parent;
 
-    public UpdateLexiconPlanner(){   
-        
+    public UpdateLexiconPlanner(){
+
         this.cm = CharacterManager.getStaticInstance();
-        
+
         LexiconUpdate = new JLabel();
         Update = new JButton();
 
@@ -83,19 +83,19 @@ public class UpdateLexiconPlanner extends JFrame implements CharacterDependent {
         pack();
         }
 
-    // action performed when click the button 
-    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {                                       
+    // action performed when click the button
+    private void UpdateActionPerformed(java.awt.event.ActionEvent evt) {
        parent.UpdateLexicon();
-    }   
-    
+    }
+
     // update lexicon in planner in order to do not restart the platform
     public void UpdateLexicon(Planner parent) {
-        this.parent = parent;       
+        this.parent = parent;
     }
 
     @Override
     public void onCharacterChanged() {
-        // to do 
+        // to do
     }
 
     @Override

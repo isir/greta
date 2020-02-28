@@ -32,7 +32,7 @@ public abstract class VectorNd<V extends VectorNd> extends ArrayRealVector {
     public VectorNd(int dimension){
         super(dimension);
     }
-    
+
     public V add(V a) {
         return copyData(super.add(a));
     }
@@ -54,13 +54,13 @@ public abstract class VectorNd<V extends VectorNd> extends ArrayRealVector {
             this.setEntry(j, v[j]);
         }
     }
-    
+
     public void set(V v) {
         for (int j = 0; j < this.getDimension(); ++j) {
             this.setEntry(j, v.getEntry(j));
         }
     }
-    
+
     public Array2DRowRealMatrix transpose() {
         Array2DRowRealMatrix m = new Array2DRowRealMatrix(1, this.getDimension());
         m.setRowVector(0, this);
@@ -72,13 +72,13 @@ public abstract class VectorNd<V extends VectorNd> extends ArrayRealVector {
         m.setColumnVector(0, this);
         return m;
     }
-    
+
     public Array2DRowRealMatrix toTransposeMatrix(){
         Array2DRowRealMatrix m = new Array2DRowRealMatrix(1, this.getDimension());
         m.setRowVector(0, this);
         return m;
     }
-    
+
     public void negative() {
         this.multiple(-1);
     }
@@ -88,7 +88,7 @@ public abstract class VectorNd<V extends VectorNd> extends ArrayRealVector {
             this.addToEntry(i, a.getEntry(i));
         }
     }
-    
+
     public static VectorNd add(VectorNd v1, VectorNd v2, VectorNd v3){
         return v1.add(v2).add(v3);
     }

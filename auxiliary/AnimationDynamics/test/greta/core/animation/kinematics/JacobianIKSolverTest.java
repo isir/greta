@@ -31,22 +31,22 @@ import org.junit.Test;
  * <gabriel.jing.huang@gmail.com or jing.huang@telecom-paristech.fr>
  */
 public class JacobianIKSolverTest {
-    
+
     public JacobianIKSolverTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -58,7 +58,7 @@ public class JacobianIKSolverTest {
     public void testSolve() {
         System.out.println("solve");
         Vector3d target = new Vector3d(1,1,1);
-       
+
         IKChain chain = new IKChain("chain");
         IKJoint j0 = new IKJoint(chain, -1, 3, "j0");
         chain.m_axis.get(j0.m_dims.get(0).m_idx).set(0,0,1);
@@ -72,21 +72,21 @@ public class JacobianIKSolverTest {
         chain.m_anglelimites.get(j1.m_dims.get(0).m_idx).set(-3, 0);
         chain.m_localTranslations.get(j1.m_dims.get(0).m_idx).set(0,1,0);
 
-        
+
         IKJoint j2 = new IKJoint(chain, 1, 3, "j2");
         chain.m_axis.get(j2.m_dims.get(0).m_idx).set(0,0,1);
         chain.m_axis.get(j2.m_dims.get(1).m_idx).set(0,1,0);
         chain.m_axis.get(j2.m_dims.get(2).m_idx).set(1,0,0);
         chain.m_localTranslations.get(j2.m_dims.get(0).m_idx).set(0,1,0);
 
-        
+
 //        chain._joints.add(j0);
 //        j0._maxs.set(0, 0.4);
 //        j1._maxs.set(0, 0.4);
 //        chain._joints.add(j1);
 //        chain._joints.add(j2);
-        
-        
+
+
         JacobianIKSolver instance = new JacobianIKSolver(chain);
         boolean r = instance.solve(target);
         boolean expResult = false;
@@ -95,5 +95,5 @@ public class JacobianIKSolverTest {
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
-    
+
 }

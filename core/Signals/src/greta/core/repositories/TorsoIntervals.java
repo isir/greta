@@ -52,7 +52,7 @@ public class TorsoIntervals extends CharacterDependentAdapter implements Charact
         _tree = xmlparser.parseFile(xmlFile);
         loadTorsoIntervals();
     }
-    
+
     @Override
     public void onCharacterChanged() {
         xmlFile = getCharacterManager().getValueString("TORSO_INTERVALS");

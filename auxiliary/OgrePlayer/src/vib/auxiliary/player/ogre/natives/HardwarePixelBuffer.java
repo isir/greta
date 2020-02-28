@@ -36,8 +36,8 @@ public class HardwarePixelBuffer extends _Object_ {
         _blitToMemory(getNativePointer(), pib.getNativePointer());
     }
     private native void _blitToMemory(long p, long i);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

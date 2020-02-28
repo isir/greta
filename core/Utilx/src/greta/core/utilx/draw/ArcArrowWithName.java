@@ -192,7 +192,6 @@ public class ArcArrowWithName extends ArcArrow {
         // set the initial color of Graphics back
 
 
-
 //        arcBegin.draw(g);
 //        arcEndWithArrow.draw(g);
 

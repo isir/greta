@@ -36,7 +36,6 @@ public class Body {
     Arm _rightArm;
 
 
-
     public Body(double starttime) {
         _time = starttime;
     }
@@ -120,7 +119,6 @@ public class Body {
             Quaternion qvc7 = new Quaternion(new Vec3d(0,1,0), angles.y()/3);
             qvc7.multiply(new Quaternion(new Vec3d(1,0,0), angles.x()*0.1f));
             qvc7.multiply(new Quaternion(new Vec3d(0,0,1), angles.z()*0.6f));
-
 
 
             JointFrame jf1 = new JointFrame();

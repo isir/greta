@@ -36,7 +36,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class AUParserFileReaderController extends javax.swing.JFrame {
     private static final Logger LOGGER = Logger.getLogger(AUParserFileReaderController.class.getName() );
-    
+
 
     /** Creates new form TreeNodeController */
     public AUParserFileReaderController() {
@@ -212,17 +212,17 @@ public class AUParserFileReaderController extends javax.swing.JFrame {
     }//GEN-LAST:event_directoryTextFieldActionPerformed
 
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
-        // TODO add your handling code here:                                                   
-        jFileChooser1.setLocale(Locale.getDefault());        
+        // TODO add your handling code here:
+        jFileChooser1.setLocale(Locale.getDefault());
         //For directoryOnly
         jFileChooser1.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         jFileChooser1.updateUI();
         if(jFileChooser1.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION){
             File dir = jFileChooser1.getSelectedFile();
             if(dir!=null){
-                this.directoryTextField.setText(dir.getAbsolutePath());                   
-            }            
-        }    
+                this.directoryTextField.setText(dir.getAbsolutePath());
+            }
+        }
     }//GEN-LAST:event_openButtonActionPerformed
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
@@ -237,7 +237,7 @@ public class AUParserFileReaderController extends javax.swing.JFrame {
 
     private void jButtonDownActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonDownActionPerformed
         int selectedIndex = jTable1.getSelectedRow();
-        if(selectedIndex>0)   
+        if(selectedIndex>0)
             moveSelected(selectedIndex, selectedIndex+1);
     }//GEN-LAST:event_jButtonDownActionPerformed
 
@@ -286,23 +286,23 @@ public class AUParserFileReaderController extends javax.swing.JFrame {
     private javax.swing.JButton sendButton;
     // End of variables declaration//GEN-END:variables
 
-    
+
     private void moveSelected(int old, int newIndex){
         DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
         model.moveRow(old, old, newIndex);
         jTable1.setRowSelectionInterval(old,newIndex);
     }
-    
+
     private Method loadMethod;
     private Method listMethod;
     private Method setSelectedMethod;
     private Object loader;
 
-    protected void send(String filename) {
-        if(filename==null || filename.isEmpty()) return ;
+    protected void send(String fileName) {
+        if(fileName==null || fileName.isEmpty()) return ;
         if(loadMethod!=null){
             try {
-                loadMethod.invoke(loader, filename);
+                loadMethod.invoke(loader, fileName);
                 String[] strList = (String[])listMethod.invoke(loader);
                 if(strList!=null)
                     updateHeaders(strList);
@@ -317,8 +317,8 @@ public class AUParserFileReaderController extends javax.swing.JFrame {
         else{
             System.out.println("load is null");
         }
-    }   
-    
+    }
+
     public String[] getSelected(){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         List<String> selected = new ArrayList<>();
@@ -328,14 +328,14 @@ public class AUParserFileReaderController extends javax.swing.JFrame {
         }
         return selected.toArray(new String[selected.size()]);
     }
-    
+
     public void updateHeaders(String headers[]){
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();
         for(int i=0;i<model.getRowCount();i++)
             model.removeRow(0);
-        
+
         for(String h:headers){
-            model.addRow(new Object[]{h,false});            
+            model.addRow(new Object[]{h,false});
         }
     }
 

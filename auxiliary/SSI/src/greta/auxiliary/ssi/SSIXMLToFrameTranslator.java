@@ -306,7 +306,7 @@ public class SSIXMLToFrameTranslator extends TextReceiver implements SSIFrameEmi
                 textNode = headNode.findNodeCalled("headposition").findNodeCalled("ypos").findNodeCalled(XML.TEXT_NODE_NAME);
                 textNodeValue = (textNode != null) ? textNode.getTextValue() : null;
                 frame.applyValue(SSIFeatureNames.head_position_y, ParseDoubleAdvanced(textNodeValue));
-                
+
                 // ********************* adding z position of the head *****************
                 textNode = headNode.findNodeCalled("headposition").findNodeCalled("zpos").findNodeCalled(XML.TEXT_NODE_NAME);
                 textNodeValue = (textNode != null) ? textNode.getTextValue() : null;
@@ -550,7 +550,7 @@ public class SSIXMLToFrameTranslator extends TextReceiver implements SSIFrameEmi
                                 SSIVoiceEnergyValues energyValue = SSIVoiceEnergyValues.none;
 
                                 if (energyStringValue != null) {
-                                    
+
                                     if (!energyStringValue.equals("Low") && !energyStringValue.equals("Medium") && !energyStringValue.equals("High")){
                                         double energy = Double.parseDouble(energyStringValue);
                                         frame.applyValue(SSIFeatureNames.prosody_opensmile_energy_cat, energy);
@@ -564,12 +564,12 @@ public class SSIXMLToFrameTranslator extends TextReceiver implements SSIFrameEmi
                                         else if (energyStringValue.equalsIgnoreCase("High")){
                                             energyValue = SSIVoiceEnergyValues.high;
                                         }
-                                        
+
                                         frame.applyValue(SSIFeatureNames.prosody_opensmile_energy_cat, energyValue.ordinal());
                                     }
                                 }
 
-                                
+
                             }
                         } // End of if children is feature
                     } // End for opensmile children
@@ -733,7 +733,7 @@ public class SSIXMLToFrameTranslator extends TextReceiver implements SSIFrameEmi
     public void removeSSIFramePerformer(SSIFramePerfomer ssifp) {
         ssiPerformers.remove(ssifp);
     }
-    
+
     public void setSSIFrameToSignal(SSIFrameToSignal ssiFtS){
         this.ssiFtS = ssiFtS;
     }

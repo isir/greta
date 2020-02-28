@@ -315,7 +315,7 @@ public class SkeletonViewer {
         glLineWidth(1);
         glPointSize(1);
     }
-    
+
     public void applyIK(int indexEd, Vector3d position){
         sk.m_endeffectorsPositions.set(indexEd, position);
 
@@ -323,5 +323,3 @@ public class SkeletonViewer {
 
     Skeleton sk = new Skeleton();
 }
-
-

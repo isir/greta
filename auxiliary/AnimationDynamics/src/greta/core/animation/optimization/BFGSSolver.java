@@ -42,7 +42,7 @@ public class BFGSSolver extends QuasiNewtonSolver{
         RealMatrix firstTerm = yk.multiply(dxT).multiply(MatrixUtils.inverse(ykT.multiply(dx)));
         firstTerm = MatrixUtils.createRealIdentityMatrix(firstTerm.getRowDimension()).subtract(firstTerm);
         RealMatrix secondTerm = dx.multiply(dxT).multiply(MatrixUtils.inverse(ykT.multiply(dx)));
-        
+
         _firstG = firstGxk1;
         _X = xk1;
         return firstTerm.transpose().multiply(current).multiply(firstTerm).add(secondTerm);
@@ -52,5 +52,5 @@ public class BFGSSolver extends QuasiNewtonSolver{
     protected double computeLamda() {
         return 1;
     }
-    
+
 }

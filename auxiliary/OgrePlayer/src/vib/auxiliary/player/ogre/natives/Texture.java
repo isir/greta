@@ -31,7 +31,7 @@ public class Texture extends _Object_ {
         return new HardwarePixelBuffer(_getBuffer(getNativePointer(), i, i0));
     }
     private native long _getBuffer(long p, int i, int i0);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

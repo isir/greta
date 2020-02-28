@@ -27,7 +27,7 @@ package org.joml.camera;
  * direction with the shortest distance on the circle.
  * <p>
  * Angles are specified in radians.
- * 
+ *
  * @author Kai Burjack
  */
 public class ArcRotor {

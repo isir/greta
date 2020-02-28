@@ -32,7 +32,6 @@ public class SpiralTrajectoryDescription extends TrajectoryDescription{
     }
 
 
-
     public void makeSpiral(int A, int B, Variation space, Variation temps) {
         spatialVariation[A] = space;
         spatialVariation[B] = space;

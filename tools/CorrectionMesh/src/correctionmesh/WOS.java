@@ -108,7 +108,6 @@ public class WOS {
          sm2.createTriangle(v4i, v1i, v1_);
 
 
-
          sm2.smoothNormals();
 
          XMLTree xml = OgreXML.writMesh(m);

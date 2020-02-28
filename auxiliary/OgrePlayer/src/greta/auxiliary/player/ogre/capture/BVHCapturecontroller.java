@@ -47,13 +47,13 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
     private OneShotCapturer screenShotCapturer;
     private RealTimeVideoCapturer realTimeVideoCapturer;
     private OffLineVideoCapturer offLineVideoCapturer;
-    private String filename = null;
+    private String fileName = null;
     private Capturable currentCapturable;
     private OgreRenderTexture textureCapturable;
     protected Capturer currentVideoCapturer;
-    
+
     private ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
-    
+
     private ActionListener startCaptureAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -66,14 +66,14 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
             stopVideoCapture();
         }
     };
-    
-    
+
+
     private volatile boolean iscapturing = false;
     private boolean mustcapture = false;
     private File[] listFiles;
     private BVHReaderGUI bvhfilereader;
     private JFileChooser jFileChooser1;
-    
+
 
     /**
      * Creates new form Capturecontroller
@@ -140,17 +140,17 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
     }
 
     public void setBaseFileName(String baseFileName) {
-        filename = baseFileName;
+        fileName = baseFileName;
     }
 
     public void startVideoCapture() {
         BVHCapturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         ensureCapturable(currentVideoCapturer);
-        currentVideoCapturer.startCapture(filename);
+        currentVideoCapturer.startCapture(fileName);
 
-        //System.out.println(filename);
+        //System.out.println(fileName);
     }
-    
+
     public void run() {
 
     }
@@ -195,18 +195,18 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
 
     public void screenShot() {
         ensureCapturable(screenShotCapturer);
-        screenShotCapturer.startCapture(filename);
+        screenShotCapturer.startCapture(fileName);
     }
-    
+
     public void FMLVideoRecord() {
-        
+
         //take the files name from the directory selected
         if (!FolderName.getText().isEmpty()){
             File dir = new File(FolderName.getText());
             listFiles = dir.listFiles();
 
             mustcapture = true;
-            // for each file create a file .avi 
+            // for each file create a file .avi
             for(File f : listFiles){
                 String videoName = f.getAbsolutePath().substring(0,f.getAbsolutePath().length()-4);//constructVideoName(f,""); //"H"
 
@@ -227,12 +227,12 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
                         //Logger.getLogger(PlanCapturecontroller.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     bvhfilereader.load(f.getAbsolutePath());
-                    
+
                     // take the frametime and number of frame to compute the mength of the video
                     List<Object> frametimeandnum = bvhfilereader.fileAndFrame.get(f.getAbsolutePath());
-                    
+
                     int length = Math.round((int) frametimeandnum.get(0)* (float) frametimeandnum.get(1));
-                    
+
                     //wait until the end of the video + 1 sec
                     try {
                     TimeUnit.SECONDS.sleep(length+1);
@@ -240,16 +240,16 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
                         Logs.error(ex.getLocalizedMessage());
                         //LOGGER.log(Level.SEVERE, ex.toString(), ex);
                     }
-            
+
                     // stop video
                     stopVideoCapture();
                     iscapturing = false;
                     Logs.debug("---- isCapturing : False !!");
-                    
+
                     // once ended a video send to the agent the BAp values for the rest position
                     ArrayList<BAPFrame> bap_animation = new ArrayList<BAPFrame>();
                     BAPFrame restpose = new BAPFrame();
-                    
+
                     bap_animation.add(restpose);
                     ID id = IDProvider.createID("restpose");//today
                     for (int i = 0; i < _bapFramePerformer.size(); ++i) {
@@ -262,25 +262,25 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
             JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "Select a folder");
         }
-        
+
     }
-    
+
     private String constructVideoName(File f,String appendix) {
         return f.getName().substring(0,f.getName().length()-4) + "-"+appendix;
     }
-    
+
     public void setBVHFileReader(BVHReaderGUI ffr){
         this.bvhfilereader = ffr;
     }
-    
+
      public void setFileName(String fileName){
         this.FolderName.setText(fileName);
     }
-    
+
     public String getFileName(){
         return this.FolderName.getText();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -402,7 +402,7 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
         });
         //t.setDaemon(true);
         t.start();
-        
+
     }//GEN-LAST:event_BVHVideoActionPerformed
 
     private void SelectFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectFolderActionPerformed

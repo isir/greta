@@ -23,15 +23,15 @@ package greta.core.animation.lipmodel;
  */
 public class TCBSpline {
 
-    double[] val = null; 
+    double[] val = null;
     double[] time = null;
-    float[] tension = null; 
-    float[] continuity = null; 
+    float[] tension = null;
+    float[] continuity = null;
     float[] bias = null;
-    float startSpeed = 0.0f; 
+    float startSpeed = 0.0f;
     float endSpeed = 0.0f;
-    
-    double timeEnd = 0.0f; 
+
+    double timeEnd = 0.0f;
     // this interpolation operation ends at timeEnd
     // timeEnd may not be last time of control points
 
@@ -42,7 +42,7 @@ public class TCBSpline {
     public void setTimeEnd(double timeEnd) {
         this.timeEnd = timeEnd;
     }
-    
+
     int len = 0; // original number of control points
 
     public double[] getVal() {
@@ -164,7 +164,7 @@ public class TCBSpline {
     public void setTo(double[] To) {
         this.To = To;
     }
-    
+
     double[] A = null;
     double[] B = null;
     double[] C = null;
@@ -172,22 +172,22 @@ public class TCBSpline {
     double[] delta = null;
     double[] Ti = null;
     double[] To = null;
-    
+
     //float timeGo = 0.0f;
-    
+
     public TCBSpline(double[] val, double[] time, float t, float c, float b, float startSpeed, float endSpeed){
         this.len = val.length;
-        
+
         // set parameters
-        tension = new float[len-1]; 
-        continuity = new float[len-1]; 
-        bias = new float[len-1];        
-        A = new double[len-1]; 
-        B = new double[len-1]; 
-        C = new double[len-1]; 
-        D = new double[len-1];   
-        delta = new double[len-1];   
-                
+        tension = new float[len-1];
+        continuity = new float[len-1];
+        bias = new float[len-1];
+        A = new double[len-1];
+        B = new double[len-1];
+        C = new double[len-1];
+        D = new double[len-1];
+        delta = new double[len-1];
+
         for (int f = 0; f < tension.length; f++)
         {
             tension[f] = t;
@@ -198,15 +198,15 @@ public class TCBSpline {
         this.time = time;
         this.startSpeed = startSpeed;
         this.endSpeed = endSpeed;
-        
+
         Ti = new double[this.val.length];
         To = new double[this.val.length];
-        
+
         //System.out.println("in construction fonction: time[end]:  "+ time[time.length-1]);
-        
+
         this.calculateABCD();
     }
-    
+
     public void calculateABCD()
     {
         // calculate delta
@@ -224,9 +224,9 @@ public class TCBSpline {
             // calculate D
             D[p] = -2*(val[p+1]-val[p]) + delta[p]*(To[p]+Ti[p+1]);
         }
-        
+
     }
-    
+
     public void calculateDelta()
     {
         for (int p = 0; p < delta.length; p++)
@@ -234,25 +234,25 @@ public class TCBSpline {
              delta[p] = time[p+1]-time[p];
         }
     }
- 
+
     public void calculateTiAndTo()
     {
         // 1st control point
         int p = 0;
         Ti[p] = startSpeed;//(((1-tension[p])*(1+continuity[p])*(1-bias[p]))/2)*(val[p+1]-val[p])/delta[p] + (((1-tension[p])*(1-continuity[p])*(1+bias[p]))/2)*startSpeed;
-        To[p] = startSpeed;//(((1-tension[p])*(1-continuity[p])*(1-bias[p])/2*(val[p+1]-val[p])/delta[p]))+(((1-tension[p])*(1+continuity[p])*(1-bias[p]))/2)*startSpeed;      
+        To[p] = startSpeed;//(((1-tension[p])*(1-continuity[p])*(1-bias[p])/2*(val[p+1]-val[p])/delta[p]))+(((1-tension[p])*(1+continuity[p])*(1-bias[p]))/2)*startSpeed;
         // the end control point
         p = val.length-1;
         Ti[p] = endSpeed;// + (((1-tension[p])*(1-continuity[p])*(1+bias[p]))/2)*((val[p]-val[p-1]))/delta[p-1];
-        To[p] = endSpeed;//(((1-tension[p])*(1-continuity[p])*(1-bias[p])/2*endSpeed))+(((1-tension[p])*(1+continuity[p])*(1-bias[p]))/2)*((val[p]-val[p-1]))/delta[p-1];    
-        
+        To[p] = endSpeed;//(((1-tension[p])*(1-continuity[p])*(1-bias[p])/2*endSpeed))+(((1-tension[p])*(1+continuity[p])*(1-bias[p]))/2)*((val[p]-val[p-1]))/delta[p-1];
+
         // the other control point
-        for (p = 1; p < (Ti.length-1); p++){   
+        for (p = 1; p < (Ti.length-1); p++){
              Ti[p] = this.calculateOneTi(p);
              To[p] = this.calculateOneTo(p);
         }
     }
-    
+
     public double calculateOneTi(int p)
     {
         double ti;
@@ -261,25 +261,25 @@ public class TCBSpline {
         //ti = 0.5f*(val[p+1]-val[p-1]);
         return ti;
     }
-    
+
     public double calculateOneTo(int p)
     {
         double to;
-        //to = (((1-tension[p])*(1-continuity[p])*(1-bias[p])/2*(val[p+1]-val[p])/delta[p]))+(((1-tension[p])*(1+continuity[p])*(1-bias[p]))/2)*((val[p]-val[p-1]))/delta[p-1];   
-        to = (2*delta[p-1]/(delta[p]+delta[p-1]))*((((1-tension[p])*(1-continuity[p])*(1-bias[p])/2*(val[p+1]-val[p])))+(((1-tension[p])*(1+continuity[p])*(1-bias[p]))/2)*((val[p]-val[p-1])));  
+        //to = (((1-tension[p])*(1-continuity[p])*(1-bias[p])/2*(val[p+1]-val[p])/delta[p]))+(((1-tension[p])*(1+continuity[p])*(1-bias[p]))/2)*((val[p]-val[p-1]))/delta[p-1];
+        to = (2*delta[p-1]/(delta[p]+delta[p-1]))*((((1-tension[p])*(1-continuity[p])*(1-bias[p])/2*(val[p+1]-val[p])))+(((1-tension[p])*(1+continuity[p])*(1-bias[p]))/2)*((val[p]-val[p-1])));
         //to = 0.5f*(val[p+1]-val[p-1]);
         return to;
     }
-    
+
     //public double[] getOutputStream(float duration, float timeStep)
     //public double[] getOutputStream(int nbOutput, float timeStep)
     public double[] getOutputStream(double timeStart, float timeStep)
-    {   
+    {
         //int nbOuput = (int) (duration / timeStep);
         //nbOuput = nbOuput + 1;
         //double[] output = new double[nbOutput];
         //float timeTemp = time[0];
-        
+
         double timeTemp = timeStart;
         int nbOutput = 0;
         //System.out.println(" out of while structure  "+ timeTemp + " < " + +time[time.length-1]);
@@ -291,21 +291,20 @@ public class TCBSpline {
         }
         //System.out.println("nbOutput = " + nbOutput);
         double[] output = new double[nbOutput];
-        
+
         int seg = 0;
         timeTemp = timeStart;
 
-        
-        
+
         for (int f = 0; f < output.length; f++)
         {
              timeTemp = timeStart + f * timeStep;
 
                       while (timeTemp > time[seg+1])
                       {
-                          seg ++ ; // 
+                          seg ++ ; //
                       }
-                      output[f] = A[seg] + ((timeTemp-time[seg])/delta[seg])*B[seg]+Math.pow((double)(timeTemp-time[seg])/delta[seg],2.0)*C[seg]+Math.pow((double)(timeTemp-time[seg])/delta[seg],3.0)*D[seg];  
+                      output[f] = A[seg] + ((timeTemp-time[seg])/delta[seg])*B[seg]+Math.pow((double)(timeTemp-time[seg])/delta[seg],2.0)*C[seg]+Math.pow((double)(timeTemp-time[seg])/delta[seg],3.0)*D[seg];
 
                       //double segTime = (timeTemp-time[seg])/delta[seg];
                       //System.out.println("segTimePorportion = "+segTime+ "  timeTemp = " + timeTemp + "time[seg] = " + time[seg] + "    delta[seg] = "+delta[seg]);
@@ -317,9 +316,8 @@ public class TCBSpline {
 
         this.timeEnd = timeTemp;
         return output;
-        
-    }        
-           
-          
-    
+
+    }
+
+
 }

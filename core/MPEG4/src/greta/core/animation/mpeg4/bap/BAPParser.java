@@ -29,5 +29,5 @@ public class BAPParser extends AnimationParametersFrameParser<BAPFrame> {
     protected BAPFrame instanciateFrame() {
         return new BAPFrame();
     }
-    
+
 }

@@ -95,7 +95,6 @@ public class InterpersonalCircumplexFrame extends javax.swing.JFrame implements 
     }
 
 
-
     @Override
     protected void finalize() throws Throwable {
         killed = true;

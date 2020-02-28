@@ -331,8 +331,8 @@ public class IdeationalUnit extends Unit {
                 removeSignal(currentGesture);
             }
         }
-        
-        
+
+
         //BRIAN : JE NE COMPRENDS PAS L4INTERET DU CODE CI-DESSOUS ALORS JE l'AI MIS EN COMMENTAIRE
         //LE CHANGEMENT DANS LE TIMEMARKER END DU DERNIER GESTE M4EMPECHE DE LE PLACER CORRECTEMENT
         //A DISCUTER AVEC BRICE

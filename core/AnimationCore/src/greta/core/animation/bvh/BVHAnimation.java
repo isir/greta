@@ -32,7 +32,7 @@ public class BVHAnimation {
     String _name;
     ArrayList<BVHFrame> _sequence = new ArrayList<BVHFrame>();
     BVHFrame _channel = new BVHFrame();
-    
+
     public BVHAnimation(String name) {
         _name = name;
     }
@@ -84,6 +84,6 @@ public class BVHAnimation {
     public void setChannel(BVHFrame channel) {
         this._channel = channel;
     }
-    
-    
+
+
 }

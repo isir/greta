@@ -57,12 +57,12 @@ public class FAPHeadFileReader implements FAPFrameEmitter, BAPFrameEmitter {
         _bapFramePerformer.remove(performer);
     }
 
-    public void load(String fapfilename) {
+    public void load(String fapFileName) {
 
         ArrayList<FAPFrame> fap_animation = new ArrayList<FAPFrame>();
         ArrayList<BAPFrame> bapframes = new ArrayList<BAPFrame>();
 
-        String base = (new File(fapfilename)).getName().replaceAll("\\.fap$", "");
+        String base = (new File(fapFileName)).getName().replaceAll("\\.fap$", "");
 
         InputStream fapfile = null;
         String readline;
@@ -70,7 +70,7 @@ public class FAPHeadFileReader implements FAPFrameEmitter, BAPFrameEmitter {
         int fapframe_startTime = (int) (Timer.getTime()*Constants.FRAME_PER_SECOND);
 
         try {
-            fapfile = new FileInputStream(fapfilename);
+            fapfile = new FileInputStream(fapFileName);
             InputStreamReader fapfilesr = new InputStreamReader(fapfile);
             BufferedReader br = new BufferedReader(fapfilesr);
 

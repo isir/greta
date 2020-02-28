@@ -50,7 +50,7 @@ public class BMLCallbacksReceiver extends TextReceiver implements CallbackEmitte
         String callbackType = properties.get("feedback-type").toString();
         double callbackTime = Double.parseDouble(properties.get("feedback-time").toString()) / 1000;
         String requestId = properties.get("feedback-id").toString();
-        
+
         Callback callback = new Callback(callbackType, callbackTime, IDProvider.createID(requestId));
         for (CallbackPerformer performer : callbackPerformersfList) {
             performer.performCallback(callback);

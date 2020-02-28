@@ -35,16 +35,16 @@ public class RenderEnv {
     private boolean g_MouseZoomPressed = false;
     double unit = 0.05;
     public boolean _useIK = false;
-    
+
     public void draw(){
         drawPlane();
     }
-    
+
     public void drawPlane(){
         glLineWidth((float) 0.5);
         glColor3f(0.0f,0.8f,0.8f);
 	glPushMatrix();
-        
+
         glColor3f(0.1f,0.1f,0.1f);
 	glRotated(90,1,0,0);
 
@@ -60,15 +60,15 @@ public class RenderEnv {
 		glVertex2f(-size, pos);
 		glVertex2f( size, pos);
 	}
-	glEnd();		
+	glEnd();
 	glPopMatrix();
     }
-    
+
     public void drawSk(){
-    
-    
+
+
     }
-    
+
      public void mouseExited(MouseEvent me) {
     }
     int ox = 0, oy = 0;

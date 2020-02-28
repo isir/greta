@@ -70,7 +70,7 @@ public class FeedbacksSender extends TextSender implements FeedbackPerformer{
     		private String type;
     		private double time;
     		private String agent;
-    		
+
     		public FeedbackContent(String fml_id, String TimeMarker_id, String type, double time, String agent) {
     			this.fml_id = fml_id;
     			this.TimeMarker_id = TimeMarker_id;
@@ -119,31 +119,31 @@ public class FeedbacksSender extends TextSender implements FeedbackPerformer{
 				this.agent = agent;
 			}
     	}
-    	
+
     	String content;
     	try {
     		content = (new ObjectMapper()).writeValueAsString(new FeedbackContent(AnimId.getFmlID(), tm.getName(), Type, tm.getValue(), this.charactermanager.getCurrentCharacterName()));
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
-    	 
+
         semaineMap.put("AnimId", AnimId.toString());
         semaineMap.put("type", "ongoing");
         semaineMap.put("current-time", Timer.getTimeMillis());
         semaineMap.put("content-id", AnimId.toString());
         semaineMap.put("usertime", Timer.getTimeMillis());
         semaineMap.put("content-creation-time", Timer.getTimeMillis());
-        
+
         this.send(content, semaineMap);
     }
-    
+
     @Override
     public void performFeedback(ID AnimId, String Type, List<Temporizable> listTmp) {
-        
+
         // information about start and end of each gesture, facial expression
         // if you want this you should be sure that the format of the string sent as feedback will be in the json format
         // How it is implemented now it sent more id in the same sting and this it is not good so it need to be changed
-        
+
         /*String content = "{\"type\": \"" +Type + "\",\n";
         for(Temporizable tmp : listTmp){
             content += "\"id\": \"" + tmp.getId() + "\",\n" + "\"time\": " + tmp.toString() + "}\n";
@@ -155,7 +155,7 @@ public class FeedbacksSender extends TextSender implements FeedbackPerformer{
         semaineMap.put("content-id", AnimId.toString());
         semaineMap.put("usertime", Timer.getTimeMillis());
         semaineMap.put("content-creation-time", Timer.getTimeMillis());
-        
+
         this.send(content, semaineMap);*/
      }
 
@@ -167,7 +167,7 @@ public class FeedbacksSender extends TextSender implements FeedbackPerformer{
     		private String type;
     		private double time;
     		private String agent;
-    		
+
     		public FeedbackContent(String fml_id, String type, double time, String agent) {
     			this.fml_id = fml_id;
     			this.type = type;
@@ -207,14 +207,14 @@ public class FeedbacksSender extends TextSender implements FeedbackPerformer{
 				this.agent = agent;
 			}
     	}
-    	
+
     	String content;
     	try {
     		content = (new ObjectMapper()).writeValueAsString(new FeedbackContent(callback.animId().getFmlID(), callback.type(), callback.time(), this.charactermanager.getCurrentCharacterName()));
 		} catch (JsonProcessingException e) {
 			throw new RuntimeException(e);
 		}
-    	
+
         semaineMap.put("AnimId", callback.animId().toString());
         semaineMap.put("type", callback.type());
         semaineMap.put("current-time", Timer.getTimeMillis());

@@ -24,7 +24,7 @@ import static org.lwjgl.system.MemoryUtil.memAddress;
  * Like the {@link PolygonDrawer} but it rotates everything around the viewport center.
  * <p>
  * Intersection tests and drawing at the right position still work! :)
- * 
+ *
  * @author Kai Burjack
  */
 public class PolygonDrawer2 {
@@ -67,11 +67,11 @@ public class PolygonDrawer2 {
             errorCallback.free();
         }
     }
-    
+
     void updateStats() {
         glfwSetWindowTitle(window, "Polygon Demo (" + num + " vertices @ " + querymicroseconds + " µs.)");
     }
-    
+
     void intersect() {
         if (pointIntersection != null) {
             long time1 = System.nanoTime();

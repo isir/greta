@@ -43,5 +43,5 @@ public class BSplineInterpolator implements Interpolator<Double>{
         }
         return re;
     }
-    
+
 }

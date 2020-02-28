@@ -58,7 +58,7 @@ public class HumanAgent {
     }
 
     public HumanAgent(CharacterManager cm) {
-        _symbolicConverter = new SymbolicConverter(cm);        
+        _symbolicConverter = new SymbolicConverter(cm);
     }
 
     Vec3d getOriginalJointPosition(String name) {

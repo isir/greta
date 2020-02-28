@@ -29,7 +29,7 @@ public class BodyNoiseGui extends javax.swing.JFrame {
      */
     public BodyNoiseGui() {
         initComponents();
-        
+
     }
 
     /**
@@ -209,7 +209,7 @@ public class BodyNoiseGui extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -236,12 +236,12 @@ public class BodyNoiseGui extends javax.swing.JFrame {
             }
         });
     }
-    
+
     public void setGui(BodyAnimationNoiseGenerator node){
         this.bodyheadnoise = node;
         readIntensityvalues();
         CheckIfEnable();
-        
+
     }
 
     private void readIntensityvalues() {
@@ -252,32 +252,32 @@ public class BodyNoiseGui extends javax.swing.JFrame {
         }
     }
 
-    private void CheckIfEnable() {   
+    private void CheckIfEnable() {
         if(bodyheadnoise!=null){
             this.headCheckBox1.setSelected(bodyheadnoise._useHead);
             this.torsoCheckBox2.setSelected(bodyheadnoise._useTorso);
             this.lowerbodyCheckBox3.setSelected(bodyheadnoise._useLowerBody);
-        }   
+        }
     }
-    
+
     public void updateHeadvalue(){
         if(bodyheadnoise!=null){
             bodyheadnoise.setIntensityHead(valueOf(Headvalue, Double.parseDouble(Headvalue.getText())));
         }
     }
-    
+
     public void updateTorsovalue(){
         if(bodyheadnoise!=null){
             bodyheadnoise.setIntensityTorso(valueOf(Torsovalue, Double.parseDouble(Torsovalue.getText())));
         }
     }
-    
+
     public void updateLowerBodyvalue(){
         if(bodyheadnoise!=null){
             bodyheadnoise.setStep(valueOf(lowerbodyvalue, Double.parseDouble(lowerbodyvalue.getText())));
         }
     }
-    
+
     private double valueOf(javax.swing.JTextField field, double defaultValue){
         try{
             return Double.parseDouble(field.getText());
@@ -286,7 +286,7 @@ public class BodyNoiseGui extends javax.swing.JFrame {
         field.setText(""+defaultValue);
         return defaultValue;
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField Headvalue;
     private javax.swing.JTextField Torsovalue;
@@ -301,5 +301,5 @@ public class BodyNoiseGui extends javax.swing.JFrame {
     private javax.swing.JLabel torsolabel;
     // End of variables declaration//GEN-END:variables
 
-    
+
 }

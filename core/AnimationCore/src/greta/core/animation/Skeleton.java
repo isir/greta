@@ -72,12 +72,12 @@ public class Skeleton {
         this._name = s._name;
         this._parentJ = s._parentJ;
     }
-    
+
     @Override
     public Skeleton clone() {
         return new Skeleton(this);
     }
-    
+
     public void reset() {
         for (Joint j : _joints) {
             j.setLocalRotation(new Quaternion());
@@ -231,7 +231,7 @@ public class Skeleton {
     public ArrayList<Integer> getParentJ() {
         return _parentJ;
     }
-    
+
     public int getParent(int id){
         return _parentJ.get(id);
     }
@@ -239,7 +239,7 @@ public class Skeleton {
     public ArrayList<ArrayList<Integer>> getChildren() {
         return _children;
     }
-    
+
     public ArrayList<Integer> getChildren(int id) {
         return _children.get(id);
     }
@@ -247,7 +247,7 @@ public class Skeleton {
     public ArrayList<Quaternion> getLocalRotations() {
         return _localRotations;
     }
-    
+
     public Quaternion getLocalRotation(int id) {
         return _localRotations.get(id);
     }
@@ -255,7 +255,7 @@ public class Skeleton {
     public ArrayList<Quaternion> getGlobalRotations() {
         return _globalRotations;
     }
-    
+
     public Quaternion getGlobalRotation(int id) {
         return _globalRotations.get(id);
     }
@@ -263,7 +263,7 @@ public class Skeleton {
     public ArrayList<Vec3d> getLocalPositions() {
         return _localPosition;
     }
-    
+
     public Vec3d getLocalPosition(int id) {
         return _localPosition.get(id);
     }
@@ -271,7 +271,7 @@ public class Skeleton {
     public ArrayList<Vec3d> getGlobalPositions() {
         return _globalPosition;
     }
-    
+
     public Vec3d getGlobalPosition(int id) {
         return _globalPosition.get(id);
     }
@@ -279,7 +279,7 @@ public class Skeleton {
     public ArrayList<Matrix4d> getLocalMatrixs() {
         return _localMs;
     }
-    
+
     public Matrix4d getLocalMatrix(int id) {
         return _localMs.get(id);
     }
@@ -287,11 +287,11 @@ public class Skeleton {
     public ArrayList<Matrix4d> getGlobalMatrixs() {
         return _globalMs;
     }
-    
+
     public Matrix4d getGlobalMatrix(int id) {
         return _globalMs.get(id);
     }
-    
+
 
     public void loadFrame(Frame frame) {
         Quaternion zero = new Quaternion();

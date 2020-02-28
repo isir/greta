@@ -37,16 +37,16 @@ public class GestureTimeLine extends TimeLine<GestureSignal>{
     private static int gestureSignalCount = 0;
 
     public GestureTimeLine(MultiTimeLineEditors<? extends Temporizable> _bmlEditor) {
-        super(_bmlEditor);    
+        super(_bmlEditor);
     }
-    
+
     @Override
     protected TemporizableContainer<GestureSignal> instanciateTemporizable(double startTime, double endTime) {
         String name = Integer.toString(gestureSignalCount);
         while (name.length() < NUM_DISPLAYIED_DIGITS_ID) name = "0" + name;
         Signal gesture = SignalProvider.create("gesture", "gesture_" + name);
         gestureSignalCount ++;
-        
+
         if(gesture instanceof GestureSignal){
             ((GestureSignal)gesture).setCategory("EMPTY");
             ((GestureSignal)gesture).setReference("EMPTY=empty");
@@ -67,7 +67,7 @@ public class GestureTimeLine extends TimeLine<GestureSignal>{
             id += ":" + gestLib.getInstanceNameOf(temporizableContainer.getTemporizable());
         }
         catch(Exception e){}
-        
+
         return isGoodSize(id, metrics, limitSize) ? id : null;
     }
 

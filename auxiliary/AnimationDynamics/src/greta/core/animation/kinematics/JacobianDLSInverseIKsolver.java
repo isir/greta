@@ -100,7 +100,7 @@ public class JacobianDLSInverseIKsolver extends IKSolver {
                 double value = s.getEntry(i, i);
                 e_s_inverse.setEntry(i, i, value / (value * value + lamda2));
             }
-            
+
             RealMatrix dlsInverse = v.multiply(e_s_inverse).multiply(uT);
 
 //            RealMatrix nullspace = MatrixUtils.createRealIdentityMatrix(dls.getRowDimension()).subtract(dls.multiply(jacobian)) ;

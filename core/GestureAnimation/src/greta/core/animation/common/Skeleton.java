@@ -186,7 +186,7 @@ public class Skeleton {
          if(_joints.size() > 0)
             _joints.get(0).update();
     }
-    
+
     public void loadRotations(HashMap<String, Quaternion> current){
         for(String name : current.keySet()){
             Joint j = getJoint(name);

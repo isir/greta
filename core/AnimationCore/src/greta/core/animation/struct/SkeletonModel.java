@@ -30,11 +30,11 @@ public class SkeletonModel {
     public class Joint{
         public String _name;
     }
-    
+
     public class Body{
         public String _name;
     }
-    
+
     //joint info
     ArrayList<Joint> _joints = new ArrayList<Joint>();
     HashMap<String, Integer> _jointNameIds = new HashMap<String, Integer>();
@@ -43,7 +43,7 @@ public class SkeletonModel {
     ArrayList<Quaternion> _globalRotations = new ArrayList<Quaternion>();
     ArrayList<Vec3d> _localPosition = new ArrayList<Vec3d>();
     ArrayList<Vec3d> _globalPosition = new ArrayList<Vec3d>();
-    
+
     //body info
     ArrayList<Body> _bodys = new ArrayList<Body>();
     ArrayList<Integer> _connectedParentJoint = new ArrayList<Integer>();

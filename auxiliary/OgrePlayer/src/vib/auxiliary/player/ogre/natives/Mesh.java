@@ -67,8 +67,8 @@ public class Mesh extends _Object_ {
     }
     private native long _getSubMesh(long nativePointer, int index);
 
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

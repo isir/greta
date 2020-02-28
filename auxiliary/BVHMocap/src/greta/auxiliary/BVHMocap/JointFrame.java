@@ -34,7 +34,7 @@ public class JointFrame {
      BAP CurrentBapY=new BAP();
       BAP CurrentBapZ=new BAP();
       //end add bap
-      
+
     Vec3d EulerAngles=new Vec3d();
     Vec3d PositionInTheWorld=new Vec3d();//The coordinate system of the world is fixed, so the positions measured in this coordinate system are dependent on the skeleton root motion
     Vec3d PositionInSkeletonRootCoordSystem=new Vec3d();// the coordinate system of root skeleton is related the root motion, So the positions measured in this coordinate system are independent on the skeleton root motion
@@ -85,8 +85,8 @@ public class JointFrame {
     {
         return BAPjoint_name;
     }
-    
-    
+
+
     public void SetBAPJointName(String jointname)
     {
          BAPjoint_name=jointname;
@@ -104,7 +104,7 @@ public class JointFrame {
     {
         return PositionInTheWorld;
     }
-    
+
         public Vector GetBAPRotationXYZ()
     {
         Vector BAPRotationXYZ=new Vector();
@@ -125,7 +125,7 @@ public class JointFrame {
         {
             return CurrentBapZ;
         }
-        
+
         public void SetRotation(Quaternion q)
     {
          rotation=q;

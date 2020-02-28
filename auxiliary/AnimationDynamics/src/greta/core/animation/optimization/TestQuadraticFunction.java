@@ -50,5 +50,5 @@ public class TestQuadraticFunction implements Function{
         v.setEntry(0, 0, y);
         return v;
     }
-    
+
 }

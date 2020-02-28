@@ -181,12 +181,12 @@ public class Model implements IntentionEmitter {
     public java.io.FileFilter getFileFilter() {
         return new java.io.FileFilter() {
             @Override
-            public boolean accept(File pathname) {
-                String filename = pathname.getName().toLowerCase();
-                if (filename.endsWith(".xml") || filename.endsWith(".fml")) {
+            public boolean accept(File pathName) {
+                String fileName = pathName.getName().toLowerCase();
+                if (fileName.endsWith(".xml") || fileName.endsWith(".fml")) {
                     try {
                         fmlparser.setValidating(false);
-                        return fmlparser.parseFile(pathname.getAbsolutePath()).getName().equalsIgnoreCase(markup);
+                        return fmlparser.parseFile(pathName.getAbsolutePath()).getName().equalsIgnoreCase(markup);
                     } catch (Exception e) {
                         // TODO
                         e.printStackTrace();

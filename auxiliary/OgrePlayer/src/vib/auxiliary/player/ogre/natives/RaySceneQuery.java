@@ -36,8 +36,8 @@ public class RaySceneQuery extends _Object_ {
         return new RaySceneQueryResult(_execute(getNativePointer()));
     }
     private native long _execute(long p);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

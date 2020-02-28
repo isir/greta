@@ -51,7 +51,7 @@ public class Gestuary extends SignalLibrary<GestureSignal> implements CharacterD
     private static final String GESTUARY_PARAM_NAME;
     private static final String GESTUARY_XSD;
     public static Gestuary global_gestuary;
-    
+
     private CharacterManager characterManager;
 
     /**
@@ -78,7 +78,7 @@ public class Gestuary extends SignalLibrary<GestureSignal> implements CharacterD
     static {
         GESTUARY_PARAM_NAME = "GESTUARY";
         GESTUARY_XSD = IniManager.getGlobals().getValueString("XSD_GESTUARY");
-        global_gestuary = new Gestuary(CharacterManager.getStaticInstance());        
+        global_gestuary = new Gestuary(CharacterManager.getStaticInstance());
     }
 
     public Gestuary(CharacterManager cm) {

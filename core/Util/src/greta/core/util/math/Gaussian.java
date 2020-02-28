@@ -38,7 +38,7 @@ public class Gaussian implements Function{
     public String toString() {
         return gauss.toString();
     }
-    
+
     @Override
     public Function getDerivative() {
         return gauss.getDerivative();
@@ -48,5 +48,5 @@ public class Gaussian implements Function{
     public Function simplified() {
         return this;
     }
-    
+
 }

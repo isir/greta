@@ -51,7 +51,7 @@ public class MaryTTSSemaine implements TTS{
         clean();
         this.speech = speech;
     }
-    
+
     @Override
     public boolean isInterruptionReactionSupported() {
         return interreuptionReactionSupported;

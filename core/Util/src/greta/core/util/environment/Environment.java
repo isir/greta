@@ -34,19 +34,18 @@ import java.util.List;
  */
 public class Environment{
 
-    
 
     // add a global static variable: TIME ???
 
     private Root root = null;
     private List<Leaf> listleaf = null;
     private final List<EnvironmentEventListener> listeners = new ArrayList<EnvironmentEventListener>();
-    
+
     // initialize the environment
     public Environment() {
         this(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     }
-    
+
     public Environment(String envName) {
          // initialize the time
         // xxx.setTimeMillis(0.0);
@@ -54,15 +53,15 @@ public class Environment{
         // creating the tree (the root) with the landscape
         // load the environment from file
         listleaf = new ArrayList<Leaf>();
-        
+
         if ((envName == null) || (envName.trim().isEmpty())) {
             load(IniManager.getGlobals().getValueString("ENVIRONMENT"));
         }
         else {
             load(envName);
         }
-        
-        
+
+
         //TODO must be better
 //        move in the load function
 //        for (Iterator<Node> iter = root.getChildren().iterator(); iter.hasNext();) {
@@ -72,17 +71,17 @@ public class Environment{
 //            }
 //        }
     }
-    
+
     // add a leaf
     public void addLeaf (Leaf lf){
         this.listleaf.add(lf);
     }
-    
-    
+
+
     /*public void addLeaf(Leaf lf){
         this.listleaf.add(lf);
     }*/
-    
+
     /**
      *
      * @param n
@@ -90,8 +89,8 @@ public class Environment{
     public void addNode(Node n) {
         addNode(n, root);
     }
-    
-   
+
+
     /**
      *
      * @param n
@@ -106,7 +105,7 @@ public class Environment{
         event.childNode = n;
         event.newParentNode = parent;
         event.modifType = TreeEvent.MODIF_ADD;
-        fireTreeEvent(event);  
+        fireTreeEvent(event);
     }
 
     public void addNode(Node n, TreeNode parent, int index) {
@@ -236,11 +235,11 @@ public class Environment{
         Vec3d onHorizontalPlane = new Vec3d(relativeTargetPos.x(), 0.0, relativeTargetPos.z());
         onHorizontalPlane.normalize();
         double yawAngle = 0.0;
-        
+
         // according to the head orientation and the target position the rotation angle will be different
         // the head it is supposed to be the center of the coordinate axis
-        // according to the quadrant in which is positioned the target the rotation anlge will be changed 
-        
+        // according to the quadrant in which is positioned the target the rotation anlge will be changed
+
             if (onHorizontalPlane.x() >= 0.0 && onHorizontalPlane.z() > 0.0){
                 yawAngle = Math.toDegrees(Math.abs(Math.acos(onHorizontalPlane.z())));
             }else if (onHorizontalPlane.x() >= 0 && onHorizontalPlane.z() < 0){
@@ -346,16 +345,16 @@ public class Environment{
 
     /**
      *
-     * @param filename
+     * @param fileName
      */
-    public void load(String filename) {
+    public void load(String fileName) {
         XMLParser parser = XML.createParser();
         parser.setValidating(false);
-        XMLTree xmlRoot = parser.parseFile(filename);
+        XMLTree xmlRoot = parser.parseFile(fileName);
         // verify the file
         root = new Root(this);
         if (xmlRoot == null) {
-            Logs.warning(this.getClass().getName() + ": problem with loading file " + filename);
+            Logs.warning(this.getClass().getName() + ": problem with loading file " + fileName);
             return;
         }
         load(xmlRoot, root);
@@ -530,7 +529,7 @@ public class Environment{
                 listener.onLeafChange(event);
             }
         }
-    } 
+    }
 
     /**
      * @return the listeners

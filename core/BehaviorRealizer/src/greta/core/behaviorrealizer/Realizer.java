@@ -94,9 +94,9 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         faceGenerator = new FaceKeyframeGenerator();
 
         keyframeComparator = (o1, o2) -> (int) Math.signum(o1.getOffset() - o2.getOffset());
-        
+
         // environment
-        environment = characterManager.getEnvironment();        
+        environment = characterManager.getEnvironment();
     }
 
     @Override //TODO add the use of modes: blend, replace, append
@@ -256,22 +256,22 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
     }
-    
+
     public void UpdateFaceLibrary(){
-        this.getCharacterManager().remove(FaceLibrary.global_facelibrary);    
+        this.getCharacterManager().remove(FaceLibrary.global_facelibrary);
         FaceLibrary.global_facelibrary = new FaceLibrary(this.getCharacterManager());
         //get the default Lexicon :
         FaceLibrary.global_facelibrary.setDefaultDefinition(this.getCharacterManager().getDefaultValueString("FACELIBRARY"));
         //load additionnal Lexicon :
-        for (String filename : this.getCharacterManager().getAllValuesString("FACELIBRARY")) {
-            FaceLibrary.global_facelibrary.addDefinition(filename);
+        for (String fileName : this.getCharacterManager().getAllValuesString("FACELIBRARY")) {
+            FaceLibrary.global_facelibrary.addDefinition(fileName);
         }
         //set the current Lexicon to use :
         FaceLibrary.global_facelibrary.setDefinition(this.getCharacterManager().getValueString("FACELIBRARY"));
     }
-    
+
     public void UpdateGestureLibrary(){
-        this.getCharacterManager().remove(Gestuary.global_gestuary);       
+        this.getCharacterManager().remove(Gestuary.global_gestuary);
         Gestuary.global_gestuary = new Gestuary(this.getCharacterManager());
         Gestuary.global_gestuary.setCharacterManager(this.getCharacterManager());
         //get the default Lexicon :
@@ -279,7 +279,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         //set the current Lexicon to use :
         Gestuary.global_gestuary.setDefinition(getCharacterManager().getValueString("GESTUARY"));
     }
-    
+
     public void UpdateHeadLibrary() {
         this.getCharacterManager().remove(HeadLibrary.globalLibrary);
         HeadLibrary.globalLibrary = new HeadLibrary(this.getCharacterManager());
@@ -288,7 +288,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         HeadLibrary.globalLibrary.setDefinition(getCharacterManager().getValueString("HEADGESTURES"));
         // intervals = new HeadIntervals();
     }
-    
+
     public void UpdateTorsoLibrary() {
         this.getCharacterManager().remove(TorsoLibrary.globalLibrary);
         TorsoLibrary.globalLibrary = new TorsoLibrary(this.getCharacterManager());
@@ -296,10 +296,10 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         TorsoLibrary.globalLibrary.setDefaultDefinition(getCharacterManager().getDefaultValueString("TORSOGESTURES"));
         TorsoLibrary.globalLibrary.setDefinition(getCharacterManager().getValueString("TORSOGESTURES"));
     }
-     
+
     public void UpdateShoulderLibrary() {
-    }  
-    
+    }
+
     public void UpdateHandLibrary(){
     }
 }

@@ -44,7 +44,6 @@ public class Shape {
     private String excludelist;
 
 
-
     /**
      * Construct a {@code Shape} specifying the name (or id).
      * @param shapeName the id of this {@code Shape}

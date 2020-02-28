@@ -52,8 +52,8 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
     double oldDuration;
     int doublePrecision = 3;
     String doublePrecisionReset = "0.000";
-    
-    
+
+
     protected ParametricSignalEditor(java.awt.Frame parent, boolean modal) {
         this(parent, modal, null, null, true,null);
     }
@@ -62,11 +62,11 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         super(parent, modal);
         this.useModalityAsCategory = useModalityAsCategory;
         this.edited = signal;
-        
+
         this.startAbsolute = !this.edited.hasStartRef();
         this.startMarker = new TimeMarker("Start Ref Marker");
         this.startMarkerName = new String();
-        
+
         this.endAuto = !this.edited.hasEndRef();
         this.endAbsolute = !this.edited.hasEndRef();
         this.endMarkerName = new String();
@@ -74,18 +74,18 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         this.bmlEditor = _bmlEditor;
         this.setTitle("Edit \"" + signal.getId() + "\"");
         initComponents();
-        
+
         for(String item : this.bmlEditor.getNonEmptyTimeLineLables()){
             this.startTypeCombo.addItem(item);
             this.endTypeCombo.addItem(item);
         }
         this.resetAllStartCombo();
         this.resetAllEndCombo();
-        
+
         if(startAbsolute){
             this.startAbsRadio.doClick();
         }
-        
+
         else{
             this.startRelRadio.doClick();
             this.startRef = this.edited.getStartRef();
@@ -96,7 +96,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
             this.startTMCombo.setSelectedItem(this.startMarkerName);
             this.startOffsetField.setText(String.format(Locale.ENGLISH,"%." + doublePrecision + "f", this.edited.getStartOffset()));
         }
-        
+
         if(endAuto){
             this.endAutoRadio.setSelected(false);
             this.endAutoRadio.doClick();
@@ -116,7 +116,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
             this.endOffsetField.setText(String.format("%." + doublePrecision + "f",this.edited.getEndOffset()));
         }
 
-        
+
         Hashtable<Integer, JComponent> dic =  new Hashtable<Integer, JComponent>();
         dic.put(0, new javax.swing.JLabel("0"));
         dic.put(50, new javax.swing.JLabel("0.5"));
@@ -136,7 +136,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
 //                instances.add(param.getId().toUpperCase());
 //            }
         }
-        
+
         javax.swing.DefaultComboBoxModel model = new javax.swing.DefaultComboBoxModel(this.library.keySet().toArray());
         classComboBox.setModel(model);
         classComboBox.addItemListener(new ItemListener(){
@@ -156,7 +156,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         javax.swing.DefaultComboBoxModel model2 = new javax.swing.DefaultComboBoxModel(instances==null ? new String[0] : instances.toArray());
         instanceComboBox.setModel(model2);
         instanceComboBox.setEnabled( ! instances.isEmpty());
-        
+
         if(edited!=null){
             idField.setText(edited.getId());
 
@@ -195,24 +195,24 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         }
         TimeMarker start = edited.getStart();
         TimeMarker end = edited.getEnd();
-        
+
         if(endAuto){
             oldDuration = end.getValue() - start.getValue();
         }
-        
+
         if(edited.hasStartRef()){
             edited.getStartRef().deleteLinkedSignal(edited.getId().toString());
         }
-        
+
         if(edited.hasEndRef()){
             edited.getEndRef().deleteLinkedSignal(edited.getId().toString());
         }
-        
+
         //If start reference is absolute
         if(this.startAbsolute)
-        {    
+        {
             try{
-                double startValue = Double.parseDouble(startField.getText()); //if it is not number, it throws an exception 
+                double startValue = Double.parseDouble(startField.getText()); //if it is not number, it throws an exception
                 if(start.getValue() != startValue)
                 {
                     for(String linkedID : edited.getLinkedSignal())
@@ -235,10 +235,10 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
                 JOptionPane.showMessageDialog(this, "Please check that start time is integer.\nChanges were not applied.\n", "Start time not integer", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
-        } 
+        }
         //If start reference is relative
         else
-        {    
+        {
             //Check that elements are properly chosen in combo boxes
             //Or else throw a popup
             if(this.startTMCombo.getSelectedItem().toString().equals("<Select TM>")){
@@ -263,7 +263,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
                 JOptionPane.showMessageDialog(this, "Please check that start offset is integer.\nChanges were not applied.\n", "Start offset not integer", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
-            
+
             if(startValue + startOffset != edited.getStart().getValue())
             {
                 for(String linkedID : edited.getLinkedSignal())
@@ -279,29 +279,29 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
                     }
                 }
             }
-            
+
             start.setValue(startValue + startOffset);
             start.removeReferences();
 
             String startID = this.edited.getStartRef().getId();
             String startMarker = this.edited.getStartMarker().getName();
             String ref = startID + ":" + startMarker ;
-            
-            start.addReference(this.startMarker,startOffset);            
+
+            start.addReference(this.startMarker,startOffset);
             start.getReferences().get(0).setTargetName(ref);
             edited.setStartOffset(startOffset);
-            
+
         }
-        
+
         //If end reference is to compute automatically with old duration
         if(this.endAuto){
             double endValue = start.getValue() + oldDuration;
             end.setValue(endValue);
-        }        
+        }
         //If end reference is absolute
         else if(this.endAbsolute){
             try{
-                double endValue = Double.parseDouble(endField.getText()); //if it is not number, it throws an exception   
+                double endValue = Double.parseDouble(endField.getText()); //if it is not number, it throws an exception
                 if(end.getValue() != endValue)
                 {
                     for(String linkedID : edited.getLinkedSignal())
@@ -350,7 +350,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
                 JOptionPane.showMessageDialog(this, "Please check that end offset is integer.\nChanges were not applied.\n", "End offset not integer", JOptionPane.WARNING_MESSAGE);
                 return false;
             }
-            
+
             if(end.getValue() != endValue + endOffset)
             {
                 for(String linkedID : edited.getLinkedSignal())
@@ -366,20 +366,20 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
                     }
                 }
             }
-            
+
             end.setValue(endValue + endOffset);
-            edited.setEndOffset(endOffset);            
+            edited.setEndOffset(endOffset);
             end.removeReferences();
-            
+
             String endID = this.edited.getEndRef().getId();
             String endMarker = this.edited.getEndMarker().getName();
-            String ref = endID + ":" + endMarker;            
-            
+            String ref = endID + ":" + endMarker;
+
             end.addReference(this.endMarker,endOffset);
             end.getReferences().get(0).setTargetName(ref);
             edited.setEndOffset(endOffset);
         }
-        
+
         return true;
     }
 
@@ -770,7 +770,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         String s = this.startTypeCombo.getSelectedItem().toString();
         List<String>IDArray = new ArrayList<String>();
         this.resetStartIDAndTMCombo();
-        
+
         TimeLineManager<? extends Temporizable> tlm = bmlEditor.getTimeLineManager(s);
         if (tlm != null) {
             TimeLine<? extends Temporizable> tl =  tlm.getTimeLine();
@@ -778,7 +778,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
                 IDArray.add(id);
             }
         }
-        
+
         // If elements are found, put them in startIDCombo and enable it
         if(!IDArray.isEmpty()){
             for(String item : IDArray) {
@@ -786,7 +786,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
                 {
                     startIDCombo.addItem(item);
                 }
-            }    
+            }
             startIDCombo.setEnabled(true);
         }
     }//GEN-LAST:event_startTypeComboActionPerformed
@@ -811,14 +811,14 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         String id = this.startIDCombo.getSelectedItem().toString();
         //Reset and empty TMCombo
         this.resetStartTMCombo();
-        
+
         // Avoid computing when default element selected.
         if(id.equals("<Select ID>"))
             return;
-        
+
         // Find start temporizable by Type and ID
         TimeLineManager<? extends Temporizable> tlm = bmlEditor.getTimeLineManager(s);
-       
+
         if (tlm != null) {
              TimeLine<? extends Temporizable> tl =  tlm.getTimeLine();
             for(TemporizableContainer<? extends Temporizable> tmpCont : tl.getItems()){
@@ -828,7 +828,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
                 }
             }
         }
-        
+
         // Whend found, get TimeMarkers from start temporizable
         TMarkersArray = startRef.getTimeMarkers();
         for(TimeMarker tm: TMarkersArray){
@@ -858,7 +858,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         String s = this.endTypeCombo.getSelectedItem().toString();
         List<String>IDArray = new ArrayList<String>();
         this.resetEndIDAndTMCombo();
-        
+
         // Display elements of one type
          TimeLineManager<? extends Temporizable> tlm = bmlEditor.getTimeLineManager(s);
         if (tlm != null) {
@@ -894,10 +894,10 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         // Avoid computing when default element selected.
         if(id.equals("<Select ID>"))
             return;
-       
+
         // Find end temporizable by Type and ID
         TimeLineManager<? extends Temporizable> tlm = bmlEditor.getTimeLineManager(s);
-        
+
         if (tlm != null) {
             TimeLine<? extends Temporizable> tl =  tlm.getTimeLine();
             for(TemporizableContainer<? extends Temporizable> tmpCont : tl.getItems()){
@@ -907,7 +907,7 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
                 }
             }
         }
-        
+
         // Whend found, get TimeMarkers from end temporizable
         TMarkersArray = endRef.getTimeMarkers();
         for(TimeMarker tm: TMarkersArray){
@@ -978,27 +978,27 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         this.startTypeCombo.setEnabled(false);
         this.resetStartIDAndTMCombo();
     }
-    
+
     private void resetAllEndCombo(){
         this.endTypeCombo.setSelectedIndex(0);
         this.endTypeCombo.setEnabled(false);
         this.resetEndIDAndTMCombo();
     }
-        
+
     private void resetStartIDAndTMCombo(){
         this.startIDCombo.setEnabled(false);
         this.startIDCombo.removeAllItems();
         this.startIDCombo.addItem("<Select ID>");
         this.resetStartTMCombo();
     }
-    
+
     private void resetEndIDAndTMCombo(){
         this.endIDCombo.setEnabled(false);
         this.endIDCombo.removeAllItems();
         this.endIDCombo.addItem("<Select ID>");
         this.resetEndTMCombo();
     }
-        
+
 
     private void resetStartTMCombo(){
         this.startTMCombo.setEnabled(false);
@@ -1006,24 +1006,24 @@ public class ParametricSignalEditor<P extends ParametricSignal> extends javax.sw
         this.startTMCombo.addItem("<Select TM>");
         this.resetStartOffset();
     }
-    
+
     private void resetEndTMCombo(){
         this.endTMCombo.setEnabled(false);
         this.endTMCombo.removeAllItems();
         this.endTMCombo.addItem("<Select TM>");
         this.resetEndOffset();
-    }    
-    
+    }
+
     private void resetStartOffset(){
         this.startOffsetField.setEnabled(false);
         this.startOffsetField.setText(doublePrecisionReset);
     }
-    
+
     private void resetEndOffset(){
         this.endOffsetField.setEnabled(false);
         this.endOffsetField.setText(doublePrecisionReset);
     }
-    
+
     /**
      * @param args the command line arguments
      */

@@ -66,7 +66,7 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
         }
 
         LinkedList<HeadKeyframe> keyframes = new LinkedList<HeadKeyframe>();
-              
+
         //II) get the shifts
         for (HeadSignal head : shifts) {
             HeadKeyframe startKeyframe = null;
@@ -83,10 +83,10 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
                 setTimeOn(startKeyframe, head.getStartValue());
                 keyframes.add(startKeyframe);
             }
-            
+
             HeadKeyframe kf = null;
             kf = createKeyFrame(head, head.getPhases().get(head.getPhases().size()-1));
-    
+
             keyframes.add(kf);
         }
 
@@ -125,7 +125,7 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
         outputKeyframe.addAll(keyframes);
 
         //VI) save the last position
-        setRestPosition(keyframes.peekLast()); // put in defaultPosition the last 
+        setRestPosition(keyframes.peekLast()); // put in defaultPosition the last
     }
 
     @Override

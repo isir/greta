@@ -127,26 +127,26 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.TYPE, new org.apache.thrift.meta_data.FieldMetaData("type", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.TYPE, new org.apache.thrift.meta_data.FieldMetaData("type", org.apache.thrift.TFieldRequirementType.DEFAULT,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.ID, new org.apache.thrift.meta_data.FieldMetaData("id", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.ID, new org.apache.thrift.meta_data.FieldMetaData("id", org.apache.thrift.TFieldRequirementType.DEFAULT,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.TIME, new org.apache.thrift.meta_data.FieldMetaData("time", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.TIME, new org.apache.thrift.meta_data.FieldMetaData("time", org.apache.thrift.TFieldRequirementType.DEFAULT,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
-    tmpMap.put(_Fields.APFRAME_LIST, new org.apache.thrift.meta_data.FieldMetaData("APFrameList", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
-        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+    tmpMap.put(_Fields.APFRAME_LIST, new org.apache.thrift.meta_data.FieldMetaData("APFrameList", org.apache.thrift.TFieldRequirementType.OPTIONAL,
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST,
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftAnimParamFrame.class))));
-    tmpMap.put(_Fields.STRING_CONTENT, new org.apache.thrift.meta_data.FieldMetaData("string_content", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.STRING_CONTENT, new org.apache.thrift.meta_data.FieldMetaData("string_content", org.apache.thrift.TFieldRequirementType.OPTIONAL,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING)));
-    tmpMap.put(_Fields.BINARY_CONTENT, new org.apache.thrift.meta_data.FieldMetaData("binary_content", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.BINARY_CONTENT, new org.apache.thrift.meta_data.FieldMetaData("binary_content", org.apache.thrift.TFieldRequirementType.OPTIONAL,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING        , true)));
-    tmpMap.put(_Fields.PROPERTIES, new org.apache.thrift.meta_data.FieldMetaData("properties", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
-        new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP, 
-            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING), 
+    tmpMap.put(_Fields.PROPERTIES, new org.apache.thrift.meta_data.FieldMetaData("properties", org.apache.thrift.TFieldRequirementType.OPTIONAL,
+        new org.apache.thrift.meta_data.MapMetaData(org.apache.thrift.protocol.TType.MAP,
+            new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING),
             new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.STRING))));
-    tmpMap.put(_Fields.FIRST_FRAME_NUMBER, new org.apache.thrift.meta_data.FieldMetaData("firstFrameNumber", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.FIRST_FRAME_NUMBER, new org.apache.thrift.meta_data.FieldMetaData("firstFrameNumber", org.apache.thrift.TFieldRequirementType.OPTIONAL,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
-    tmpMap.put(_Fields.LAST_FRAME_NUMBER, new org.apache.thrift.meta_data.FieldMetaData("lastFrameNumber", org.apache.thrift.TFieldRequirementType.OPTIONAL, 
+    tmpMap.put(_Fields.LAST_FRAME_NUMBER, new org.apache.thrift.meta_data.FieldMetaData("lastFrameNumber", org.apache.thrift.TFieldRequirementType.OPTIONAL,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I64)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(Message.class, metaDataMap);
@@ -990,7 +990,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
       while (true)
       {
         schemeField = iprot.readFieldBegin();
-        if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+        if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
           break;
         }
         switch (schemeField.id) {
@@ -998,7 +998,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.type = iprot.readString();
               struct.setTypeIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -1006,7 +1006,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.id = iprot.readString();
               struct.setIdIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -1014,7 +1014,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
             if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
               struct.time = iprot.readI64();
               struct.setTimeIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -1033,7 +1033,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
                 iprot.readListEnd();
               }
               struct.setAPFrameListIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -1041,7 +1041,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.string_content = iprot.readString();
               struct.setString_contentIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -1049,7 +1049,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
             if (schemeField.type == org.apache.thrift.protocol.TType.STRING) {
               struct.binary_content = iprot.readBinary();
               struct.setBinary_contentIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -1069,7 +1069,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
                 iprot.readMapEnd();
               }
               struct.setPropertiesIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -1077,7 +1077,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
             if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
               struct.firstFrameNumber = iprot.readI64();
               struct.setFirstFrameNumberIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -1085,7 +1085,7 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
             if (schemeField.type == org.apache.thrift.protocol.TType.I64) {
               struct.lastFrameNumber = iprot.readI64();
               struct.setLastFrameNumberIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -1326,4 +1326,3 @@ public class Message implements org.apache.thrift.TBase<Message, Message._Fields
     return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
   }
 }
-

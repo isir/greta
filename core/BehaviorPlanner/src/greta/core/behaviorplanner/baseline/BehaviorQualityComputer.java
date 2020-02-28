@@ -62,8 +62,8 @@ public class BehaviorQualityComputer extends ParameterSet<Qualifier> implements 
         setDefaultDefinition(cm.getDefaultValueString(CHARACTER_PARAMETER_QUALIFIERS));
 
         //load additionnal qualifiers :
-        for (String filename : cm.getAllValuesString(CHARACTER_PARAMETER_QUALIFIERS)) {
-            addDefinition(filename);
+        for (String fileName : cm.getAllValuesString(CHARACTER_PARAMETER_QUALIFIERS)) {
+            addDefinition(fileName);
         }
 
         //set the current qulifiers to use :
@@ -425,7 +425,7 @@ public class BehaviorQualityComputer extends ParameterSet<Qualifier> implements 
         }
         qualifiersTree.save(definition);
     }
-    
+
     private static abstract class EngineParameterAdaptor {
 
         protected EngineParameter ep;
@@ -473,7 +473,7 @@ public class BehaviorQualityComputer extends ParameterSet<Qualifier> implements 
             ep.setMin(value);
         }
     }
-    
+
     private CharacterManager characterManager;
 
     /**

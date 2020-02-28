@@ -25,29 +25,29 @@ import greta.core.util.CharacterManager;
  */
 public class CharacterIniManagerFrame extends IniManagerFrame{
     private CharacterManager cm;
-   
+
     /**
      * Default constructor
      */
-    public CharacterIniManagerFrame(){        
-        
+    public CharacterIniManagerFrame(){
+
     }
-    
+
     public void setCharacterManager(CharacterManager cm){
         this.cm = cm;
         setIniManager(cm.getIniManager());
-        connect(new CharacterIniLoader(cm));        
+        connect(new CharacterIniLoader(cm));
     }
-    
+
     public CharacterManager getCharacterManager(){
         return cm;
     }
 
-    public String getCharacterName(){       
-        return cm.getCurrentCharacterName();        
+    public String getCharacterName(){
+        return cm.getCurrentCharacterName();
     }
 
     public void setCharacterName(String name){
-        cm.setCharacter(name);        
-    }    
+        cm.setCharacter(name);
+    }
 }

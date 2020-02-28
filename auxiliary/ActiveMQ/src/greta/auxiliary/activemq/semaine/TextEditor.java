@@ -97,7 +97,6 @@ public class TextEditor extends javax.swing.JFrame {
     }
 
 
-
     /** Creates new form TextEditor */
     public TextEditor() {
         initComponents();
@@ -139,7 +138,7 @@ public class TextEditor extends javax.swing.JFrame {
         {
             public boolean getScrollableTracksViewportWidth()
             {
-                return getUI().getPreferredSize(this).width 
+                return getUI().getPreferredSize(this).width
                 <= getParent().getSize().width;
             }
         };

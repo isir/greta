@@ -89,10 +89,10 @@ public class ThriftAnimParamFrame implements org.apache.thrift.TBase<ThriftAnimP
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.ANIM_PARAM_LIST, new org.apache.thrift.meta_data.FieldMetaData("animParamList", org.apache.thrift.TFieldRequirementType.DEFAULT, 
-        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST, 
+    tmpMap.put(_Fields.ANIM_PARAM_LIST, new org.apache.thrift.meta_data.FieldMetaData("animParamList", org.apache.thrift.TFieldRequirementType.DEFAULT,
+        new org.apache.thrift.meta_data.ListMetaData(org.apache.thrift.protocol.TType.LIST,
             new org.apache.thrift.meta_data.StructMetaData(org.apache.thrift.protocol.TType.STRUCT, ThriftAnimParam.class))));
-    tmpMap.put(_Fields.FRAME_NUMBER, new org.apache.thrift.meta_data.FieldMetaData("frameNumber", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.FRAME_NUMBER, new org.apache.thrift.meta_data.FieldMetaData("frameNumber", org.apache.thrift.TFieldRequirementType.DEFAULT,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ThriftAnimParamFrame.class, metaDataMap);
@@ -400,7 +400,7 @@ public class ThriftAnimParamFrame implements org.apache.thrift.TBase<ThriftAnimP
       while (true)
       {
         schemeField = iprot.readFieldBegin();
-        if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+        if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
           break;
         }
         switch (schemeField.id) {
@@ -419,7 +419,7 @@ public class ThriftAnimParamFrame implements org.apache.thrift.TBase<ThriftAnimP
                 iprot.readListEnd();
               }
               struct.setAnimParamListIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -427,7 +427,7 @@ public class ThriftAnimParamFrame implements org.apache.thrift.TBase<ThriftAnimP
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.frameNumber = iprot.readI32();
               struct.setFrameNumberIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -529,4 +529,3 @@ public class ThriftAnimParamFrame implements org.apache.thrift.TBase<ThriftAnimP
     return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
   }
 }
-

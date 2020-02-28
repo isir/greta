@@ -96,7 +96,7 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
     public SymbolicConverter(CharacterManager cm) {
         setCharacterManager(cm);
          _restPoseFactory = new RestPoseFactory(cm);
-        
+
         xmlFile = getCharacterManager().getValueString("IK_SKELETON");
         touchFile = getCharacterManager().getValueString("TOUCHPOINT");
         reloadData();
@@ -117,9 +117,9 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
         loadData();
     }
 
-    private void setSkeleton(String filename) {
+    private void setSkeleton(String fileName) {
         IKSkeletonParser p = new IKSkeletonParser();
-        boolean re = p.loadFile(filename);
+        boolean re = p.loadFile(fileName);
         if (re) {
             p.readSkeletonInfo(_skeleton_original);
             _skeleton = _skeleton_original.clone();
@@ -245,7 +245,7 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
 
     public Arm getArm(GestureKeyframe gesture) {
         Arm arm = new Arm();
-        
+
         arm.setIsStrokeEnd(gesture.getPhaseType().equals("stroke_end"));
         arm.setTime((double) gesture.getOffset());
         arm.setSide(gesture.getSide());
@@ -395,7 +395,7 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
             torse.addRotations(t._rotations);
             return torse;
         }
-        
+
         double rx = 0.0;
         double ry = 0.0;
         double rz = 0.0;
@@ -474,19 +474,19 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
         } else {
             Quaternion each_torac = Quaternion.slerp(new Quaternion(), q, 0.2, true);
             Quaternion each_lomb = Quaternion.slerp(new Quaternion(), q, 0.3, true);
-            
-            Quaternion shoulders = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.1)); 
+
+            Quaternion shoulders = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.1));
             shoulders.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.1)));
             shoulders.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.1)));
-            
-            Quaternion shoulders_7_12 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.2)); 
+
+            Quaternion shoulders_7_12 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.2));
             shoulders_7_12.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.2)));
             shoulders_7_12.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.2)));
-            
-            Quaternion nll = new Quaternion(new Vec3d(0, 1, 0), (double) 0); 
+
+            Quaternion nll = new Quaternion(new Vec3d(0, 1, 0), (double) 0);
             shoulders_7_12.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) 0));
             shoulders_7_12.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) 0));
-            
+
             if (t.getonlyshoulder()){
                 /*torse.addRotation("vt3", shoulders);
                 torse.addRotation("vt6", shoulders);
@@ -567,8 +567,8 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
         head.setRotation(q);
         {
             // The rotation of head is achieved through a simultaneous rotation of cervical vertebrae.
-            // the full angle rotation have to be destribuited between all the cervical vertebrae 
-            Quaternion qvc1 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.1)); 
+            // the full angle rotation have to be destribuited between all the cervical vertebrae
+            Quaternion qvc1 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.1));
             qvc1.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.1)));
             qvc1.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.1)));
 
@@ -579,7 +579,7 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
             Quaternion qvc7 = new Quaternion(new Vec3d(0, 1, 0), (double) (ry * 0.2)); // *
             qvc7.multiply(new Quaternion(new Vec3d(1, 0, 0), (double) (rx * 0.2)));
             qvc7.multiply(new Quaternion(new Vec3d(0, 0, 1), (double) (rz * 0.2)));
-            
+
             head.addRotation("vc1", qvc1);
             head.addRotation("vc2", qvc1);
             head.addRotation("vc3", qvc1);

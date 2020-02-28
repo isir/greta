@@ -20,7 +20,7 @@ import static org.lwjgl.system.MemoryUtil.memAddress;
 /**
  * This demo showcases the {@link PolygonsIntersection} algorithm. The outlines of a polygon can be drawn with the mouse and an intersection test is
  * performed on every mouse movement to color the polygon in red if the mouse cursor is inside; or black if not.
- * 
+ *
  * @author Kai Burjack
  */
 public class PolygonDrawer {
@@ -99,7 +99,7 @@ public class PolygonDrawer {
     // // just ignore everything :)
     // }
     // }
-    
+
     void updateStats() {
         glfwSetWindowTitle(window, "Polygon Demo (" + num + " vertices @ " + querymicroseconds + " µs.)");
     }

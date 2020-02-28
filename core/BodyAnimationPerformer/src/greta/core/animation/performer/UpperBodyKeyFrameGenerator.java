@@ -43,7 +43,7 @@ import java.util.List;
 //TODO: wait for AndreMarie pour nouveau structure de keyframe
 public class UpperBodyKeyFrameGenerator  implements KeyframePerformer{
     SymbolicConverter _symbolicConverter;
-    
+
     public UpperBodyKeyFrameGenerator(CharacterManager cm){
         _symbolicConverter = new SymbolicConverter(cm);
     }

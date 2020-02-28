@@ -35,7 +35,7 @@ public class JacobianIKSolver extends IKSolver {
     public JacobianIKSolver(IKChain chain) {
         super(chain);
     }
-    
+
     public void setDampingConstant(double damping){
         damping_constant = damping;
     }
@@ -51,7 +51,7 @@ public class JacobianIKSolver extends IKSolver {
 //        for(int i = 0; i < columnDim; ++i){
 //            factors[i] = (i + 1) / 2.0;
 //        }
-        
+
         double beta = 0.5;
 m_maxTries = 1000;
         while (++tries < m_maxTries
@@ -105,7 +105,7 @@ m_maxTries = 1000;
         //System.out.println(m_chain.m_values.get(0));
 System.out.println(getIKSolverName()+" try: " + tries + "  " +distance.getNorm());
         if (tries == m_maxTries) {
-            
+
             return false;
         }
         return true;

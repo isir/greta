@@ -53,7 +53,7 @@ public class FaceLib extends SignalLib<FaceSignal>{
 
     @Override
     public List<String> getAllInstanceNamesOf(String className) {
-        
+
         LinkedList<String> instances = new LinkedList<>();
         for (AUExpression faceexp : FaceLibrary.global_facelibrary.getAll()) {
             if (faceexp.getType().equalsIgnoreCase("faceexp")) {//only faceexps
@@ -72,7 +72,7 @@ public class FaceLib extends SignalLib<FaceSignal>{
                 classes.add(faceexp.getType().toLowerCase());
             }
         }
-        
+
         Collections.sort(classes, String.CASE_INSENSITIVE_ORDER);
         return classes;
     }

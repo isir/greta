@@ -96,7 +96,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
     // constraint on horizontal(yaw) an vertical(pitch)  head movement
     private static final double HEAD_YAW_LIMIT = Math.toRadians(HeadLibrary.getGlobalLibrary().getHeadIntervals().verticalLeftMax);//(2 * Math.PI / 360) * HeadLibrary.getGlobalLibrary().getHeadIntervals().verticalLeftMax;
     private static final double HEAD_PITCH_LIMIT_UP = Math.toRadians(HeadLibrary.getGlobalLibrary().getHeadIntervals().sagittalUpMax);//(2 * Math.PI / 360) * HeadLibrary.getGlobalLibrary().getHeadIntervals().sagittalUpMax;
-    private static final double HEAD_PITCH_LIMIT_DOWN = Math.toRadians(HeadLibrary.getGlobalLibrary().getHeadIntervals().sagittalDownMax);//(2 * Math.PI / 360) * HeadLibrary.getGlobalLibrary().getHeadIntervals().sagittalDownMax;    
+    private static final double HEAD_PITCH_LIMIT_DOWN = Math.toRadians(HeadLibrary.getGlobalLibrary().getHeadIntervals().sagittalDownMax);//(2 * Math.PI / 360) * HeadLibrary.getGlobalLibrary().getHeadIntervals().sagittalDownMax;
 
     // constraint on horizontal torso/shoulder movement
     private static final double TORSO_YAW_LIMIT = Math.toRadians(TorsoLibrary.getGlobalLibrary().getTorsoIntervals().verticalL); //Math.toRadians(35); // 30°-40°
@@ -260,7 +260,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 headLatency = 0;
             }
 
-            //Compute the influence according the gaze amplitude 
+            //Compute the influence according the gaze amplitude
             Influence inf = gaze.getInfluence();
             if (inf == null) {
                 if (Math.max(Math.abs(headAngles.headPitchAngle), Math.abs(headAngles.headYawAngle)) > 0.523599){ // 30°
@@ -274,7 +274,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 }
             }
             gaze.setInfluence(inf);
-            
+
             /*if (inf == null) {
                 inf = Influence.TORSO;
                 gaze.setInfluence(Influence.TORSO);
@@ -386,7 +386,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 // headSignalLookToTarget head signal when look to the target
                 HeadSignal headSignalLookToTarget = createHeadSignalWithDirectionShift();
                 SpinePhase spinePhaseLookToTarget;
-                // if the movement involves also the shoulder or all torso, the movement of the head is enhanced by the movement of the shoulder/torso 
+                // if the movement involves also the shoulder or all torso, the movement of the head is enhanced by the movement of the shoulder/torso
                 spinePhaseLookToTarget = createSpinePhase("end", timeHeadAtTarget, timeHeadAtTarget, shouldersAngles.headAngles.headLimitedYaw, shouldersAngles.headAngles.headLimitedPitch); // read
                 spinePhaseLookToTarget.setStartTime(timeHeadAtTarget);  // ready
                 // head latency equals to 100 ms
@@ -406,7 +406,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     addSignalToKeyframeGenerator(headSignalLookToTarget);
                 }
 
-                // if the influence involves the shoulder we create the keyframe just for the shoulder        
+                // if the influence involves the shoulder we create the keyframe just for the shoulder
             } else if (gazeInfluence.ordinal() == Influence.HEAD.ordinal()) {
 
                 // Head Signals
@@ -468,7 +468,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     addSignalToKeyframeGenerator(headSignalToTarget);
                 }
 
-                // in the case there was a gazeShift before and there was a rotation of the torso, this rotation has to be canceled  if  the next gaze 
+                // in the case there was a gazeShift before and there was a rotation of the torso, this rotation has to be canceled  if  the next gaze
                 // involve just the head. So it is create a torsoSignel with rotation equal to 0
                 // torsoSignalTargetPosition torso signal at target position
                 TorsoSignal torsoSignalTargetPosition = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
@@ -499,8 +499,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                  * ************************************JUST EYES**********************************************
                  * *******************************************************************************************/
 
-                // there was a gaze shift that involved torso and head and now just the eyes, 
-                // so we have to delete the rotation of head and torso  
+                // there was a gaze shift that involved torso and head and now just the eyes,
+                // so we have to delete the rotation of head and torso
 
                 // compute the time to go back in the front position
                 TorsoKeyframeGenerator torsoKeyframeGenerator = (TorsoKeyframeGenerator) this.otherModalitiesKFGenerators.get(5);
@@ -518,7 +518,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     timeShoulderAtTarget = end;
                 }
 
-                // torso signal at target position 
+                // torso signal at target position
                 TorsoSignal torsoSignalTargetPosition = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
                 torsoSignalTargetPosition.setDirectionShift(true);
                 SpinePhase spinePhaseTargetPosition;
@@ -540,7 +540,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 double headMaxSpeed = Math.toRadians(Math.abs((4f/3 * Math.toDegrees(angleHead*HEAD_YAW_LIMIT)/50 + 2f/5) * Math.toDegrees(HEAD_ANGULAR_SPEED)));
                 double timeHeadAtTarget = angleHead == 0 ? end : (start + (Math.abs(angleHead) / headMaxSpeed));
 
-                // head signal at target position 
+                // head signal at target position
                 HeadSignal headSignalWithDirectionShift = createHeadSignalWithDirectionShift();
                 SpinePhase headPhase;
                 double headPhaseTime = gaze.isGazeShift() ? timeHeadAtTarget : end;
@@ -607,7 +607,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             //euler angles to target + offset, for shoulder (same for torso)
             ShouldersAngles shouldersAngles = new ShouldersAngles(this.env, gaze, headAngles);
 
-            // check if the gaze expression is in the facelibrary 
+            // check if the gaze expression is in the facelibrary
             // if we look at a target there is no information in the library
             if ((gaze.getTarget() == null || gaze.getTarget().isEmpty())
                     && gaze.getOffsetDirection() == GazeDirection.FRONT && gaze.getOffsetAngle() == 0) {
@@ -658,7 +658,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         } else { // down
                             pitch = pitchDown;
                         }
-                    } else { // gazedirection = right 
+                    } else { // gazedirection = right
                         yaw = yawRight;
                         if (pitchUp != 0){ // up
                             up = true;
@@ -670,7 +670,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
                     // calculate the max speed of the head depending on the rotation angle
                     double Amin = Math.toDegrees(Math.abs(yaw*EYES_YAW_LIMIT));
-                    //Amin_pitch = Math.toDegrees(Math.abs(Math.min(shouldersAngles.ha.l_limitedPitch*EYES_PITCH_LIMIT, shouldersAngles.ha.r_limitedPitch*EYES_PITCH_LIMIT)));              
+                    //Amin_pitch = Math.toDegrees(Math.abs(Math.min(shouldersAngles.ha.l_limitedPitch*EYES_PITCH_LIMIT, shouldersAngles.ha.r_limitedPitch*EYES_PITCH_LIMIT)));
                     // double eyesMaxSpeed = Math.toRadians((2*Amin/75 + 1f/6) * Math.toDegrees(EYES_ANGULAR_SPEED));
                     // TODO FIXME eyesMaxSpeed is assigned but never used, why keep it ?
                     //eyesMaxSpeed = Math.toRadians((2*Amin_pitch/75 + 1f/6)*Math.toDegrees(EYES_ANGULAR_SPEED));
@@ -703,7 +703,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     }
                 }
 
-                // check the influence. if null the influence is automatically calculated according to the gaze rotation angle 
+                // check the influence. if null the influence is automatically calculated according to the gaze rotation angle
                 // - after 15° the head move
                 // - with a gaze rotation more than 20, the shoulder start to move
                 // - with a gaze rotation more than 30, the all torso start to move
@@ -1552,7 +1552,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
         //can the head reach the target without moving other modalities
         public boolean withinHeadLimit;
 
-        // load the list of characters in the environment  
+        // load the list of characters in the environment
         Vec3d posTarget = new Vec3d();
         Vec3d headPosition = new Vec3d();
         Quaternion orient = new Quaternion();
@@ -1670,7 +1670,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     && rightYawAngleAbs < EYES_YAW_LIMIT
                     && leftPitchAngleAbs < EYES_PITCH_LIMIT
                     && rightPitchAngleAbs < EYES_PITCH_LIMIT;
-            // N.B. --> limited angles for the eyes have to be positive for both rotation direction 
+            // N.B. --> limited angles for the eyes have to be positive for both rotation direction
             leftLimitedYaw = Math.abs((Math.min(leftYawAngleAbs, EYES_YAW_LIMIT)- Math.abs(headLimitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT); // Math.signum(leftYawAngle) *
             rightLimitedYaw = Math.abs((Math.min(rightYawAngleAbs, EYES_YAW_LIMIT)- Math.abs(headLimitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT); // Math.signum(rightYawAngle) *
             leftLimitedPitch = Math.abs((Math.min(leftPitchAngleAbs, EYES_PITCH_LIMIT)- Math.abs(headLimitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT); // ToDo: distinguish between up and down head pitch limit. now the two values are equal.
@@ -1703,7 +1703,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             withinEyesLimit = false;
             withinHeadLimit = false;
 
-            // load the list of characters in the environment  
+            // load the list of characters in the environment
             List<String> charactersInScene = new ArrayList<>();
             for (Node node : env.getTreeNode().getChildren()) {
                 if (node instanceof MPEG4Animatable) {
@@ -1803,7 +1803,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 	if (n != null) {
                                         TreeNode target = (TreeNode) n;
                                         idTarget = target.getIdentifier();
-                                        sizeTarget = target.getScale();                                		
+                                        sizeTarget = target.getScale();
                                 	}
 
                                 }

@@ -64,7 +64,7 @@ public class SpatialVector6d extends VectorNd<SpatialVector6d> {
         this.setEntry(4, v4);
         this.setEntry(5, v5);
     }
-    
+
 
     public void setZero() {
         this.set(0, 0, 0, 0, 0, 0);
@@ -130,7 +130,7 @@ public class SpatialVector6d extends VectorNd<SpatialVector6d> {
                 -v1.getEntry(1) * v2.getEntry(3) + v1.getEntry(0) * v2.getEntry(4)
         );
     }
-    
+
     public boolean isZero(){
         if(getEntry(0) == 0 && getEntry(1) == 0&& getEntry(2) == 0&& getEntry(3) == 0&& getEntry(4) == 0&& getEntry(5) == 0){
             return true;

@@ -53,11 +53,11 @@ public class Module {
             }
         }
     }
-    
+
     public boolean hasParent(){
         return parent!=null;
     }
-    
+
     public CharacterManager getCharacterManager(){
         if(parent!=null && parent.getObject() instanceof CharacterManager){
             return (CharacterManager)parent.getObject();
@@ -69,8 +69,8 @@ public class Module {
     public Module(ModuleFactory.ModuleInfo type, String id, Object object, mxCell cell) {
         this(type, id, object, cell, null);
     }
-    
-    
+
+
     /**
      * @return the parent
      */

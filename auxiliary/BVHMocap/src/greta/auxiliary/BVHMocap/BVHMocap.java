@@ -52,9 +52,9 @@ public class BVHMocap {
         // Generate a BAP file from a bvh file
 
        // File file=LoadFile();
-       // String bvhfilepath= file.getPath();
-        //System.out.println(bvhfilepath);
-        //String bvhfilename=file.getName();
+       // String bvhFilePath= file.getPath();
+        //System.out.println(bvhFilePath);
+        //String bvhFileName=file.getName();
         String bvhpath="C:\\Users\\fourati\\Documents\\MotionCapture Database\\Janina\\Anger\\Simple Walk\\Action_repetitions\\";
         String bvhname="Ag1SW_Janina";
 //
@@ -70,15 +70,12 @@ public class BVHMocap {
         System.out.println(newjointframestable.GetJFListfromDictName("r_acromioclavicular").GetJointFrameAt(0).PositionInSkeletonRootCoordSystem);
 
 
-
-
 //        ArrayList<BAPFrame> bapframes=bvhread.BVHToBAPFrames();
 //        BapAnimationConverter converter=new BapAnimationConverter();
 //        BAPFrame bapframe=bapframes.get(bapframes.size()-1);
 
 
-
-        //converter.BapOutput(bapframes, "C:/Users/fourati/Documents/Bap files/", bvhfilename.split("[.]")[0], "____.bap", "0.0 xxx 25 1\n");
+        //converter.BapOutput(bapframes, "C:/Users/fourati/Documents/Bap files/", bvhFileName.split("[.]")[0], "____.bap", "0.0 xxx 25 1\n");
 
        // BVH bvh=bvhread.BVHCreator();
 //       ArrayList<Motion> molist= bvh.GetMotionList();

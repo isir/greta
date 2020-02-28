@@ -65,9 +65,9 @@ public class Ogre {
     static {
         DEBUG = IniManager.getGlobals().getValueBoolean("OGRE_DEBUG");
         int jvmArchitecture = Integer.parseInt(System.getProperty("sun.arch.data.model"));
-        
+
         externalLibPath = IniManager.getProgramPath() + "Player/Lib/External/";
-        
+
         //define path where are Ogre's native libraries
         if (System.getProperty("os.name").toLowerCase().contains("windows")) {
             //Windows:
@@ -97,7 +97,7 @@ public class Ogre {
         } catch (Throwable e) {
             e.printStackTrace();
         }
-        
+
         //only "cg" is needed on windows. there is several better ways to do that (like using some config files)
         //but i don't have the time...
         String[] dependenciesToLoad = {"boost_system", "boost_thread", "openjpeg", "jpeg", "raw", "Half", "Iex", "IlmThread", "IlmImf", "freeimage", "zzip", "Cg"};
@@ -298,7 +298,7 @@ public class Ogre {
                 //initialize resources after the first window was ceated
                 initialiseResources();
 
-                
+
                 printThread("createWindow");
             }
         });
@@ -320,8 +320,8 @@ public class Ogre {
         }
     }
 
-    public static boolean isResourceExists(String filename){
-        return ResourceGroupManager.getSingleton().resourceExists(resourceGroup, filename);
+    public static boolean isResourceExists(String fileName){
+        return ResourceGroupManager.getSingleton().resourceExists(resourceGroup, fileName);
     }
 
     /**

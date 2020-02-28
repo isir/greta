@@ -22,17 +22,17 @@ package greta.core.animation.kinematics;
  * @author Jing Huang
  */
 public class Dof {
-    
+
     public Dof(double value){
         _value = value;
     }
-    
+
     public Dof(double value, double minV, double maxV){
         _value = value;
         _minValue = minV;
         _maxValue = maxV;
     }
-    
+
     void setName(String name){
         _name = name;
     }
@@ -40,7 +40,7 @@ public class Dof {
     public String getName() {
         return _name;
     }
-    
+
     public double getValue() {
         return _value;
     }
@@ -88,9 +88,8 @@ public class Dof {
     public void setMaxTorque(double _maxTorque) {
         this._maxTorque = _maxTorque;
     }
-    
-    
-    
+
+
     protected String _name;
     protected double _value;
     protected double _minValue = Double.NEGATIVE_INFINITY;

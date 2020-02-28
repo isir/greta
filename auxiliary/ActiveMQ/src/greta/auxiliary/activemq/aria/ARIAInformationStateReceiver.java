@@ -68,11 +68,11 @@ public class ARIAInformationStateReceiver extends TextReceiver implements ARIAIn
         Object language = properties.get("language");
 
         for(ARIAInformationStatePerformer performer : ariaInfoStatePerformers){
-            
+
             if (interactionState != null) {
                 performer.performStateChange(interactionState.toString().trim());
             }
-            
+
             if (language != null) {
                 performer.performLanguageChange(language.toString().trim());
             }

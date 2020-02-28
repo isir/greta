@@ -22,8 +22,8 @@ package greta.auxiliary.activemq.aria;
  * @author Angelo Cafaro
  */
 public interface ARIAInformationStatePerformer {
-    
+
     public void performStateChange(String state);
     public void performLanguageChange(String language);
-    
+
 }

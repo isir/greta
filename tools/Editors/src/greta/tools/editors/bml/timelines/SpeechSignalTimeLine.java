@@ -35,7 +35,7 @@ import java.awt.Graphics;
  * @author Andre-Marie
  */
 public class SpeechSignalTimeLine extends TimeLine<SpeechSignal>{
-    
+
     private static final int SPEECH_SIGNAL_ID_FONTSIZE = 8;
     private static final int SPEECH_SIGNAL_ID_X_POS_OFFSET = 4;
     private static final int SPEECH_SIGNAL_ID_Y_POS_OFFSET = 12;
@@ -46,7 +46,7 @@ public class SpeechSignalTimeLine extends TimeLine<SpeechSignal>{
         super(_bmlEditor);
         this.cm = cm;
     }
-    
+
     @Override
     protected  TemporizableContainer<SpeechSignal> instanciateTemporizable(double startTime, double endTime) {
         return new TemporizableContainer<SpeechSignal>(new SpeechSignal(cm,SpeechUtil.instanciateTemporizable(cm,startTime, endTime)), manager.getLabel());
@@ -56,7 +56,7 @@ public class SpeechSignalTimeLine extends TimeLine<SpeechSignal>{
     protected String getDescription(TemporizableContainer<SpeechSignal> temporizableContainer, FontMetrics metrics, int limitSize) {
         return SpeechUtil.getDescription(temporizableContainer.getTemporizable(), metrics, limitSize);
     }
-    
+
     // Override method to display words according to TimeMarkers
     @Override
     protected void paintComponent(Graphics g) {
@@ -65,12 +65,12 @@ public class SpeechSignalTimeLine extends TimeLine<SpeechSignal>{
         int y = h/2;
         g.setColor(Color.black);
         g.drawLine(0, 0, 0, h);
-        
+
         for(TemporizableContainer<SpeechSignal> t : this.getItems()){
             int x = getPosOf(t.getStart().getValue());
             int w = getPosOf(t.getEnd().getValue()) - x;
             String description = getDescription(t,g.getFontMetrics(), w-10);
-            
+
             int currentFontSize = (int) g.getFont().getSize2D();
             g.setFont(new Font("default", Font.BOLD, SPEECH_SIGNAL_ID_FONTSIZE));
             String id = new String("id");
@@ -94,11 +94,11 @@ public class SpeechSignalTimeLine extends TimeLine<SpeechSignal>{
             }
         }
     }
-    
+
     // Added method to try to display a popup when willing to edit a speech.
     @Override
     protected TemporizableContainer<SpeechSignal> editTemporizable(TemporizableContainer<SpeechSignal> temporizableContainer){
         return new TemporizableContainer<SpeechSignal>(new SpeechSignal(cm,SpeechUtil.editTemporizable(temporizableContainer.getTemporizable())), manager.getLabel());
     }
-    
+
 }

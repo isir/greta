@@ -53,10 +53,10 @@ public class PseudoIntentionPitchAccent extends PitchAccent implements Intention
     public String getMode() {
         return "replace";
     }
-    
+
     @Override
     public String getTarget (){
         return null;
     }
-    
+
 }

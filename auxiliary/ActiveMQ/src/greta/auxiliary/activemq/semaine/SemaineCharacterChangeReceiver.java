@@ -55,7 +55,7 @@ public class SemaineCharacterChangeReceiver extends TextReceiver implements Char
         }
     }
 
-    
+
     /**
      * @return the characterManager
      */
@@ -71,7 +71,7 @@ public class SemaineCharacterChangeReceiver extends TextReceiver implements Char
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
     }
-    
+
     private CharacterManager characterManager;
 
     @Override

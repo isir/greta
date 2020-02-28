@@ -39,12 +39,12 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     private OneShotCapturer screenShotCapturer;
     private RealTimeVideoCapturer realTimeVideoCapturer;
     private OffLineVideoCapturer offLineVideoCapturer;
-    private String filename = null;
+    private String fileName = null;
     private Capturable currentCapturable;
     private OgreRenderTexture textureCapturable;
     protected Capturer currentVideoCapturer;
-    
-    
+
+
     private ActionListener startCaptureAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -57,14 +57,14 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
             stopVideoCapture();
         }
     };
-    
-    
+
+
     private volatile boolean iscapturing = false;
     private boolean mustcapture = false;
     private File[] listFiles;
     private FMLFileReader filereader;
     private JFileChooser jFileChooser1;
-    
+
 
     /**
      * Creates new form Capturecontroller
@@ -131,14 +131,14 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     }
 
     public void setBaseFileName(String baseFileName) {
-        filename = baseFileName;
+        fileName = baseFileName;
     }
 
     public void startVideoCapture() {
         Capturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         ensureCapturable(currentVideoCapturer);
-        currentVideoCapturer.startCapture(filename);
-        //System.out.println(filename);
+        currentVideoCapturer.startCapture(fileName);
+        //System.out.println(fileName);
     }
 
     public void stopVideoCapture() {
@@ -181,18 +181,18 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
 
     public void screenShot() {
         ensureCapturable(screenShotCapturer);
-        screenShotCapturer.startCapture(filename);
+        screenShotCapturer.startCapture(fileName);
     }
-    
+
     public void FMLVideoRecord() {
-        
+
         //take the files name from the directory selected
         if (!FolderName.getText().isEmpty()){
             File dir = new File(FolderName.getText());
             listFiles = dir.listFiles();
 
             mustcapture = true;
-            // for each file create a file .avi 
+            // for each file create a file .avi
             for(File f : listFiles){
                 String videoNameH = f.getAbsolutePath().substring(0,f.getAbsolutePath().length()-4);//constructVideoName(f,""); //"H"
                 //String videoNameN = constructVideoName(f,"N");
@@ -206,18 +206,18 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
                         //Logger.getLogger(PlanCapturecontroller.class.getName()).log(Level.SEVERE, null, ex);
                     }
                     setBaseFileName(videoNameH);
-                    
+
                     /*sap = new SocialParameterFrame();
                     sap.setDoubleValue(SocialDimension.Dominance, 1);
                     sap.setDoubleValue(SocialDimension.Liking, -1);*/
-                    
+
                     iscapturing = true;
-                    
+
                     filereader.load(f.getAbsolutePath());
                     startVideoCapture();
-                    
+
                     while (iscapturing) {
-                        
+
                     }
 
                 }
@@ -226,25 +226,25 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
             JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "Select a folder");
         }
-        
+
     }
-    
+
     private String constructVideoName(File f,String appendix) {
         return f.getName().substring(0,f.getName().length()-4) + "-"+appendix;
     }
-    
+
     public void setFMLFileReader(FMLFileReader ffr){
         this.filereader = ffr;
     }
-    
+
      public void setFileName(String fileName){
         this.FolderName.setText(fileName);
     }
-    
+
     public String getFileName(){
         return this.FolderName.getText();
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

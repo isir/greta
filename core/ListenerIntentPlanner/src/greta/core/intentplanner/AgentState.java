@@ -33,9 +33,9 @@ public class AgentState extends EngineParameterSetOfSet implements CharacterDepe
     private static final String AGENT_STATE_PARAMETER_NAME = "AGENTSTATE";
     private static final AgentState globalState;
     static{
-        globalState = new AgentState(CharacterManager.getStaticInstance());      
+        globalState = new AgentState(CharacterManager.getStaticInstance());
     }
-    
+
     private CharacterManager characterManager;
 
     /**
@@ -70,8 +70,8 @@ public class AgentState extends EngineParameterSetOfSet implements CharacterDepe
         setCharacterManager(cm);
         set(getCharacterManager().getDefaultValueString(AGENT_STATE_PARAMETER_NAME));
         //load additionnal agent state :
-        for(String filename : getCharacterManager().getAllValuesString(AGENT_STATE_PARAMETER_NAME)) {
-            add(filename);
+        for(String fileName : getCharacterManager().getAllValuesString(AGENT_STATE_PARAMETER_NAME)) {
+            add(fileName);
         }
         //set the current agent state to use :
         set( getCharacterManager().getValueString(AGENT_STATE_PARAMETER_NAME));

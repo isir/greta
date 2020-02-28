@@ -176,7 +176,7 @@ public class FMLTranslator {
                             if (targ != null || targ != ""){
                                 BasicIntention intent = new BasicIntention (function.getName(), f_id, f_type, f_start, f_end, f_importance);
                                 intent.setTarget(targ);
-                                intention = intent;              
+                                intention = intent;
                             }
                         }
                     }

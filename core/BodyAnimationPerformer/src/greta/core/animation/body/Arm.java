@@ -95,7 +95,7 @@ public class Arm extends ExpressiveFrame {
         this._traj = traj;
     }
 
-    
+
     public Quaternion getWrist() {
         return _wrist;
     }

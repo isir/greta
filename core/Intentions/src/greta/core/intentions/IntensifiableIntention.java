@@ -22,8 +22,8 @@ package greta.core.intentions;
  * @author Angelo Cafaro
  */
 public interface IntensifiableIntention extends Intention {
-    
+
     public double getIntensity();
-    
+
     public void setIntensity(double intensity);
 }

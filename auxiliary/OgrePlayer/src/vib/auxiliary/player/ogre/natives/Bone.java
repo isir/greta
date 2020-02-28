@@ -52,11 +52,11 @@ public class Bone extends _Object_ implements Node{
         _setOrientation(getNativePointer(), convert.getNativePointer());
     }
     private native void _setOrientation(long thisPointer, long quaternionPointer);
-    
+
     public void setOrientation(greta.core.util.math.Quaternion q) {
         _setOrientation(getNativePointer(), q.w(), q.x(), q.y(), q.z());
     }
-    
+
     public void setOrientation(double w, double x, double y, double z) {
         _setOrientation(getNativePointer(), w, x, y, z);
     }
@@ -70,7 +70,7 @@ public class Bone extends _Object_ implements Node{
     public void setPosition(greta.core.util.math.Vec3d vec) {
         setPosition(vec.x(), vec.y(), vec.z());
     }
-    
+
     public void setPosition(double d, double d0, double d1) {
         _setPosition(getNativePointer(),d, d0, d1);
     }
@@ -90,7 +90,7 @@ public class Bone extends _Object_ implements Node{
         return _numChildren(getNativePointer());
     }
     private native int _numChildren(long thisPointer);
-    
+
     public String getChild_getName(int i) {
         return _getChild_getName(getNativePointer(), i);
     }
@@ -105,7 +105,7 @@ public class Bone extends _Object_ implements Node{
         return new _Node(_getParent(getNativePointer()));
     }
     private native long _getParent(long thisPointer);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

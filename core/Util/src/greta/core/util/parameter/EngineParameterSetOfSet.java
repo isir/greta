@@ -53,7 +53,7 @@ public class EngineParameterSetOfSet {
 //public methods :
     public EngineParameterSetOfSet(){
         knownDefinition = new ArrayList<String>();
-        engineSets = new ArrayList<EngineParameterSet>();        
+        engineSets = new ArrayList<EngineParameterSet>();
     }
     /**
      * Constructs an {@code EngineParameterSetOfSet} with a default definition for all contained {@code EngineParameterSet}.

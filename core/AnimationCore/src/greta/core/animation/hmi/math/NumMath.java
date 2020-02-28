@@ -35,7 +35,7 @@ public class NumMath
      * Differentiates the values x in the array, assumes equidistant data in x, with distance h
      * assumes dst.length >= x.length-1
      * dst[0]=(x[1]-x[0])/h
-     * dst[i]=(x[i+1]-x[i-1])/2*h      
+     * dst[i]=(x[i+1]-x[i-1])/2*h
      */
     public static void diff(double[] dst, double[]x, double h)
     {
@@ -43,9 +43,9 @@ public class NumMath
         {
             dst[i]= (x[i+1]-x[i-1])/(2*h);
         }
-        dst[0]=(x[1]-x[0])/h;        
+        dst[0]=(x[1]-x[0])/h;
     }
-    
+
     /**
      * Differentiates the values x in the array twice, assumes equidistant data in x with distance h
      * assumes dst.length >= x.length-1
@@ -59,68 +59,68 @@ public class NumMath
             dst[i]= (x[i+1]-2*x[i]+x[i-1])/(h*h);
         }
     }
-    
-    
+
+
     /**
      * Numerical differentiation of x(t)
      * diff = (x(t+h)-x(t-h))/h
      * @param xPrev x(t-h)
      * @param xNext x(t+h)
-     * @param h distance 
+     * @param h distance
      * @return dx/dt
      */
     public static float diff(float xPrev, float xNext, float h)
     {
         return (xNext-xPrev)/(2*h);
     }
-    
+
     /**
      * Numerical differentiation of x(t)
      * diff = (x(t+h)-x(t-h))/h
      * @param xPrev x(t-h)
      * @param xNext x(t+h)
-     * @param h distance 
+     * @param h distance
      * @return dx/dt
      */
     public static double diff(double xPrev, double xNext, double h)
     {
         return (xNext-xPrev)/(2*h);
     }
-    
+
     /**
      * differerentiates x twice
      * diff2 = (x(t+h)-2*x(t)+x(t-h))/(h*h)
      * @param xPrev x(t-h)
      * @param xCurr x(t)
      * @param xNext x(t+h)
-     * @param h distance 
+     * @param h distance
      * @return d2x/dt2
-     */    
+     */
     public static float diff2(float xPrev, float xCurr, float xNext, float h)
     {
         return (xNext-2*xCurr+xPrev)/(h*h);
     }
-    
+
     /**
      * differerentiates x twice
      * diff2 = (x(t+h)-2*x(t)+x(t-h))/(h*h)
      * @param xPrev x(t-h)
      * @param xCurr x(t)
      * @param xNext x(t+h)
-     * @param h distance 
+     * @param h distance
      * @return d2x/dt2
-     */    
+     */
     public static double diff2(double xPrev, double xCurr, double xNext, double h)
     {
         return (xNext-2*xCurr+xPrev)/(h*h);
     }
-    
+
     /**
      * Differentiates the values x in the array, assumes equidistant data in x, with distance h
      * assumes dst.length >= x.length-1
      * dst[0]=(x[1]-x[0])/h
-     * dst[i]=(x[i+1]-x[i-1])/2*h      
-     * Assumes the data is aligned in blocks of width, differentiates the block elements seperately 
+     * dst[i]=(x[i+1]-x[i-1])/2*h
+     * Assumes the data is aligned in blocks of width, differentiates the block elements seperately
      */
     public static void diff(double[] dst, double[]x, double h, int width)
     {
@@ -136,13 +136,13 @@ public class NumMath
             dst[j]=(x[width+j]-x[j])/h;
         }
     }
-    
+
     /**
      * Differentiates the values x in the array, assumes equidistant data in x, with distance h
      * assumes dst.length >= x.length-1
      * dst[0]=(x[1]-x[0])/h
-     * dst[i]=(x[i+1]-x[i-1])/2*h      
-     * Assumes the data is aligned in blocks of width, differentiates the block elements seperately 
+     * dst[i]=(x[i+1]-x[i-1])/2*h
+     * Assumes the data is aligned in blocks of width, differentiates the block elements seperately
      */
     public static void diff(float[] dst, float[]x, float h, int width)
     {
@@ -154,14 +154,14 @@ public class NumMath
                 dst[i*width+j]= (x[(i+1)*width+j]-x[(i-1)*width+j])/(2*h);
             }
         }
-        
+
         //dst[0]=(x[1]-x[0])/h
         for(int j=0;j<width;j++)
         {
             dst[j]=(x[width+j]-x[j])/h;
         }
     }
-    
+
     /**
      * Differentiates the values x in the array twice, assumes equidistant data in x with distance h
      * assumes dst.length >= x.length-1
@@ -179,14 +179,14 @@ public class NumMath
                 dst[i*width+j]= (x[(i+1)*width+j]-2*x[i*width+j]+x[(i-1)*width+j])/(h*h);
             }
         }
-        
+
         //dst[0]=dst[1]
         for(int i=0;i<width;i++)
         {
             dst[i]=dst[width+i];
         }
     }
-    
+
     /**
      * Differentiates the values x in the array twice, assumes equidistant data in x with distance h
      * assumes dst.length >= x.length-1
@@ -210,55 +210,55 @@ public class NumMath
     }
     /**
      * Linear interpolation of equadistantly placed points, the distance between the points is h:
-     * x(t) = x[i] + (x(i)-x(i+1)/h * (t-i*h) with i*h<=t, (i+h)*h>=t 
+     * x(t) = x[i] + (x(i)-x(i+1)/h * (t-i*h) with i*h<=t, (i+h)*h>=t
      */
     public static double interpolate(double x[], double h, double t)
     {
         int i = (int)(t/h);
-        
+
         //give boundary values if boundaries are crossed
         if(i>x.length-1)
         {
             return x[x.length-1];
         }
         if(i<0)
-        {    
+        {
             return x[0];
         }
-        
-        return (t-i*h) * (x[i+1]-x[i])/h  + x[i];        
+
+        return (t-i*h) * (x[i+1]-x[i])/h  + x[i];
     }
-    
+
     /**
      * Linear interpolation of equadistantly placed points, the distance between the points is h:
-     * x(t) = x[i] + (x(i)-x(i+1)/h * (t-i*h) with i*h<=t, (i+h)*h>=t 
+     * x(t) = x[i] + (x(i)-x(i+1)/h * (t-i*h) with i*h<=t, (i+h)*h>=t
      */
     public static float interpolate(float x[], float h, float t)
     {
         int i = (int)(t/h);
-        
+
         //give boundary values if boundaries are crossed
         if(i>x.length-1)
         {
             return x[x.length-1];
         }
         if(i<0)
-        {    
+        {
             return x[0];
         }
-        
-        return (t-i*h) * (x[i+1]-x[i])/h  + x[i];        
+
+        return (t-i*h) * (x[i+1]-x[i])/h  + x[i];
     }
-    
+
     /**
      * Linear interpolation of equadistantly placed points, the distance between the points is h:
-     * x(t) = x[i] + (x(i)-x(i+1)/h * (t-i*h) with i*h<=t, (i+h)*h>=t  
+     * x(t) = x[i] + (x(i)-x(i+1)/h * (t-i*h) with i*h<=t, (i+h)*h>=t
      */
     public static void interpolate(double dst[], double x[], double h, double t)
     {
         int i = (int)(t/h);
         int width = dst.length;
-        
+
         //give boundary values if boundaries are crossed
         if(i>x.length/width-width)
         {
@@ -266,27 +266,27 @@ public class NumMath
             return;
         }
         if(i<=0)
-        {    
+        {
             System.arraycopy(x, 0, dst, 0, width);
             return;
-        }        
-        
+        }
+
         for(int j=0;j<width;j++)
         {
             int k = i*width+j;
             dst[j] = (t-i*h) * (x[k+width]-x[k])/h + x[k];
-        }            
+        }
     }
-    
+
     /**
      * Linear interpolation of equadistantly placed points, the distance between the points is h:
-     * x(t) = x[i] + (x(i)-x(i+1)/h * (t-i*h) with i*h<=t, (i+h)*h>=t  
+     * x(t) = x[i] + (x(i)-x(i+1)/h * (t-i*h) with i*h<=t, (i+h)*h>=t
      */
     public static void interpolate(float dst[], float x[], float h, float t)
     {
         int i = (int)(t/h);
         int width = dst.length;
-        
+
         //give boundary values if boundaries are crossed
         if(i>x.length/width-width)
         {
@@ -294,15 +294,15 @@ public class NumMath
             return;
         }
         if(i<0)
-        {    
+        {
             System.arraycopy(x, 0, dst, 0, width);
             return;
-        }        
-        
+        }
+
         for(int j=0;j<width;j++)
         {
             int k = i*width+j;
             dst[j] = (t-i*h) * (x[k+width]-x[k])/h + x[k];
-        }            
+        }
     }
 }

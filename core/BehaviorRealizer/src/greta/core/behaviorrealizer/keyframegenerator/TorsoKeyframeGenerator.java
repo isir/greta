@@ -35,7 +35,7 @@ import java.util.List;
 public class TorsoKeyframeGenerator extends KeyframeGenerator {
 
     private TorsoKeyframe defaultPosition;
-    
+
     public TorsoKeyframeGenerator() {
         super(TorsoSignal.class);
         defaultPosition = new TorsoKeyframe("rest", new SpinePhase("rest", 0, 0), "rest");
@@ -47,8 +47,8 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
         for (Signal signal : inputSignals) {
             TorsoSignal torso = (TorsoSignal) signal;
             torso.schedulePhases();
-            
-            LinkedList<TorsoKeyframe> keyframes = new LinkedList<TorsoKeyframe>();                   
+
+            LinkedList<TorsoKeyframe> keyframes = new LinkedList<TorsoKeyframe>();
             TorsoKeyframe startKeyframe = null;
 
             if(keyframes.isEmpty()) {
@@ -67,11 +67,11 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
                 e.tmp = torso.getTMP();
                 e.tension = torso.getTension();
                 startKeyframe.setParameters(e);
-                
+
                 if (torso.shoulder){
                     startKeyframe.setOnlytheShoulder();
                 }
-                
+
                 keyframes.add(startKeyframe);
             }
 
@@ -79,7 +79,7 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
             kf = createKeyFrame(torso, torso.getPhases().get(torso.getPhases().size()-1));
             keyframes.add(kf);
             //keyframes.add(createKeyFrame(torso, torso.getPhases().get(torso.getPhases().size()-1)));
-            
+
             //V) add the ShoulderKeyframe into the output list
             outputKeyframes.addAll(keyframes);
 
@@ -92,21 +92,21 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
     protected Comparator<Signal> getComparator() {
         return emptyComparator;
     }
-    
+
     private void setTimeOn(TorsoKeyframe kf, double time){
         kf.setOffset(time);
         kf.setOnset(time);
     }
-    
+
     private void setRestPosition(TorsoKeyframe phase){
         defaultPosition.verticalTorsion = new SpineDirection(phase.verticalTorsion); //phase.verticalTorsion;
     }
-    
+
     private TorsoKeyframe createKeyFrame(TorsoSignal sh, SpinePhase phase) {
         TorsoKeyframe keyframe = new TorsoKeyframe(sh.getId(), phase, sh.getCategory());
         if (sh.shoulder){
             keyframe.setOnlytheShoulder();}
-        
+
         ExpressivityParameters e = new ExpressivityParameters();
 
         e.fld = sh.getFLD();
@@ -117,24 +117,24 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
         keyframe.setParameters(e);
         return keyframe;
     }
-    
+
     protected TorsoKeyframe interpolate(TorsoKeyframe first, TorsoKeyframe second, double time){
         double t = (time - first.getOffset()) / (second.getOffset()-first.getOffset());
-  
+
         TorsoKeyframe result = new TorsoKeyframe(); // first
         //result = first
-        
+
         SpineDirection vert = new SpineDirection(first.verticalTorsion);
         vert.inverse();
-        
+
         result.verticalTorsion= vert;
         result.verticalTorsion.add(second.verticalTorsion);
-        
+
         //result.lateralRoll.inverse();
         //result.sagittalTilt.inverse();
         //result.verticalTorsion.inverse();
         //result = -first
-        
+
         //blend(result, second);
         //result = second+(-first)
 
@@ -151,7 +151,7 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
         setTimeOn(result, time);
         return result;
     }
-    
+
     protected void blend(TorsoKeyframe first, TorsoKeyframe second) {
         //first.lateralRoll.add(second.lateralRoll);
         //first.sagittalTilt.add(second.sagittalTilt);

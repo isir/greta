@@ -306,7 +306,7 @@ public class CustomURLClassPath {
                 f = new File(f.getCanonicalPath());
 
             } catch (IOException x) {
-                // use the non-canonicalized filename
+                // use the non-canonicalized fileName
             }
             try {
                 urls[count++] = (URL) Factory.ParseUtil_fileToEncodedURL.invoke(null, f);

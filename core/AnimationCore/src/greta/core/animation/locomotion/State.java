@@ -44,7 +44,7 @@ public class State {
         _currentState[4] = 0;
         _currentState[5] = 0;
         _currentState[6] = 0;
-        
+
 //        _currentState[0] = 0;
 //        _currentState[1] = -0.4;
 //        _currentState[2] = 0.1;
@@ -52,8 +52,8 @@ public class State {
 //        _currentState[4] = 0.05;
 //        _currentState[5] = -.2;
 //        _currentState[6] = -.2;
-        
-        
+
+
 //        _currentState[0] = 0.25;
 //        _currentState[1] = 0;
 //        _currentState[2] = 0.92;
@@ -68,7 +68,7 @@ public class State {
             _currentState[i] = state[i];
         }
     }
-    
+
     public static double[] _desireState = new double[nrStates];
     static int _index = 0;
     public static void setWalk() {
@@ -88,8 +88,8 @@ public class State {
         ++_index;
         _desireState[_index] = -.1;
         ++_index;
-        
-        
+
+
         _desireState[_index] = -0.02;
         ++_index;
         _desireState[_index] = 0.5;
@@ -104,8 +104,8 @@ public class State {
         ++_index;
         _desireState[_index] = -.1;
         ++_index;
-        
-        
+
+
         _desireState[_index] = 0.03;
         ++_index;
         _desireState[_index] = 0;
@@ -121,8 +121,8 @@ public class State {
         ++_index;
         _desireState[_index] = -.1;
         ++_index;
-        
-        
+
+
         _desireState[_index] = -0.02;
         ++_index;
         _desireState[_index] = -0.2;
@@ -138,9 +138,9 @@ public class State {
         ++_index;
         _desireState[_index] = -.1;
         ++_index;
-        
+
     }
-    
+
 //    public static void setWalk() {
 //        _desireState = new double[nrStates];
 //        _desireState[_index] = -0.1;
@@ -157,8 +157,8 @@ public class State {
 //        ++_index;
 //        _desireState[_index] = -.2;
 //        ++_index;
-//        
-//        
+//
+//
 //        _desireState[_index] = -0.1;
 //        ++_index;
 //        _desireState[_index] = 0;
@@ -173,8 +173,8 @@ public class State {
 //        ++_index;
 //        _desireState[_index] = -.2;
 //        ++_index;
-//        
-//        
+//
+//
 //        _desireState[_index] = -0.1;
 //        ++_index;
 //        _desireState[_index] = 0.7;
@@ -189,7 +189,7 @@ public class State {
 //        ++_index;
 //        _desireState[_index] = -.2;
 //        ++_index;
-//        
+//
 //        _desireState[_index] = -0.1;
 //        ++_index;
 //        _desireState[_index] = 0;
@@ -204,9 +204,9 @@ public class State {
 //        ++_index;
 //        _desireState[_index] = -.2;
 //        ++_index;
-//        
+//
 //    }
-    
+
     public static void setCrouch() {
         _desireState = new double[nrStates];
         _desireState[_index] = 0.18;
@@ -224,8 +224,8 @@ public class State {
         ++_index;
         _desireState[_index] = -0.44;
         ++_index;
-        
-        
+
+
         _desireState[_index] = 0.25;
         ++_index;
         _desireState[_index] = 0.7;
@@ -241,8 +241,8 @@ public class State {
         ++_index;
         _desireState[_index] = -.44;
         ++_index;
-        
-        
+
+
         _desireState[_index] = 0.18;
         ++_index;
         _desireState[_index] = 0;
@@ -258,8 +258,8 @@ public class State {
         ++_index;
         _desireState[_index] = -.62;
         ++_index;
-        
-        
+
+
         _desireState[_index] = 0.25;
         ++_index;
         _desireState[_index] = 0;
@@ -275,9 +275,9 @@ public class State {
         ++_index;
         _desireState[_index] = -.2;
         ++_index;
-        
+
     }
-    
+
     public static void setStop() {
         _index = 28;
         _desireState[_index] = 0;

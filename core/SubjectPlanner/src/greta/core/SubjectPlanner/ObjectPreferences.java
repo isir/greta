@@ -47,7 +47,7 @@ public class ObjectPreferences {
         }
         return ObjectPreferenceAgent;
     }
-    
+
     public double GetMaxObjectPreferenceAgent(){
         double max = 0;
         ArrayList<Double> prefValues = new ArrayList();
@@ -57,7 +57,7 @@ public class ObjectPreferences {
         }
         return Collections.max(prefValues);
     }
-    
+
         public double GetObjectPreferenceUser(String ObjectName) {
         double ObjectPreferenceUser = 0;
         EngineParameterSet prefs = userPreferenceObject.find("preferences");
@@ -68,5 +68,5 @@ public class ObjectPreferences {
         }
         return ObjectPreferenceUser;
     }
-    
+
 }

@@ -20,12 +20,12 @@ package greta.core.animation.optimization;
 import org.apache.commons.math3.linear.RealMatrix;
 
 /**
- * GradientDescentSolver is using gradientdescent to compute the minimum by going down 
+ * GradientDescentSolver is using gradientdescent to compute the minimum by going down
  * with a step length in the -tangent direction(the first derivative).
  * @author Huang
  */
 public class GradientDescentSolver extends FunctionMinimizationSolver {
-    
+
     public GradientDescentSolver(Function f) {
         super(f);
         _lamda = 0.01;
@@ -46,5 +46,5 @@ public class GradientDescentSolver extends FunctionMinimizationSolver {
         }
         return _X;
     }
- 
+
 }

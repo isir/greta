@@ -41,7 +41,7 @@ import org.joml.Vector3f;
  * function between two given points. It instead uses a simulation based on
  * velocity and acceleration and allowing to alter the {@link #target} to any
  * value at any time.
- * 
+ *
  * @author Kai Burjack
  */
 public class Vector3Mover {
@@ -98,7 +98,7 @@ public class Vector3Mover {
 
     /**
      * Update the simulation based on the elapsed time since the last update.
-     * 
+     *
      * @param elapsedTimeInSeconds
      *            the elapsed time in seconds since the last update
      */

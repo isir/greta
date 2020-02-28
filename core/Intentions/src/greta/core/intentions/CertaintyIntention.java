@@ -43,7 +43,7 @@ public class CertaintyIntention extends BasicIntention implements IntensifiableI
     public double getIntensity(){
         return intensity;
     }
-    
+
     public void setIntensity(double intensity) {
         this.intensity = intensity;
     }

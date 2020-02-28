@@ -36,7 +36,7 @@ public class NameValuePairList extends _Object_ {
         _insert(getNativePointer(), externalWindowHandle, windowHandlePointer);
     }
     private native void _insert(long p, String s1, String s2);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

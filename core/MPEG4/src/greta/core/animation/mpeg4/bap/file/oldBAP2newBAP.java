@@ -57,12 +57,12 @@ public class oldBAP2newBAP implements greta.core.animation.mpeg4.bap.BAPFrameEmi
                           113, 114, 115, 116, 117, 118, 119, 120, 121, 122
                          };
 
-    public void load(String bapfilename) {
+    public void load(String bapFileName) {
 
 
         ArrayList<BAPFrame> bap_animation = new ArrayList<BAPFrame>();
 
-        String base = (new File(bapfilename)).getName().replaceAll("\\.bap$", "_newBAP");
+        String base = (new File(bapFileName)).getName().replaceAll("\\.bap$", "_newBAP");
 
         InputStream bapfile = null;
         String readline;
@@ -72,7 +72,7 @@ public class oldBAP2newBAP implements greta.core.animation.mpeg4.bap.BAPFrameEmi
 
         try {
 
-            bapfile = new FileInputStream(bapfilename);
+            bapfile = new FileInputStream(bapFileName);
             InputStreamReader bapfilesr = new InputStreamReader(bapfile);
             BufferedReader br = new BufferedReader(bapfilesr);
 

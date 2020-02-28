@@ -41,7 +41,7 @@ public class FaceLibrary extends ParameterSet<AUExpression> implements Character
     private static final String xsdFile = IniManager.getGlobals().getValueString("XSD_FACELIBRARY");
     public static FaceLibrary global_facelibrary = new FaceLibrary(CharacterManager.getStaticInstance());
     private CharacterManager characterManager;
-    
+
     /**
      * @return the characterManager
      */
@@ -71,8 +71,8 @@ public class FaceLibrary extends ParameterSet<AUExpression> implements Character
         setDefaultDefinition(getCharacterManager().getDefaultValueString(CHARACTER_PARAMETER_FACELIBRARY));
 
         //load additionnal Lexicon :
-        for (String filename : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_FACELIBRARY)) {
-            addDefinition(filename);
+        for (String fileName : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_FACELIBRARY)) {
+            addDefinition(fileName);
         }
 
         //set the current Lexicon to use :

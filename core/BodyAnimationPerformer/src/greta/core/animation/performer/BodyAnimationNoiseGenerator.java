@@ -59,9 +59,9 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitt
     boolean _useTorso = false;
     boolean _useLowerBody = false;
     double step = 1;
-    
+
     private CharacterManager characterManager;
-    
+
     public BodyAnimationNoiseGenerator(CharacterManager cm) {
         String currentDir = System.getProperty("user.dir");
         _ms = MocapXML.load(currentDir + "\\BehaviorRealizer\\AnimationLexicon\\noise.xml");
@@ -271,7 +271,7 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitt
         int size = frames.size();
 
         Frame current = frames.get(currentIdx);
-        
+
         if (enable){
             frame.setRootTranslation(current.getRootTranslation());
             frame.addRotation("HumanoidRoot", Quaternion.slerp(new Quaternion(), current.getRotation("HumanoidRoot"), 0.8f, true));
@@ -293,7 +293,7 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitt
             frame.addRotation("l_hip", new Quaternion());
             frame.addRotation("r_hip", new Quaternion());
         }
-        
+
         if (currentIdx >= size) {
             currentIdx = size - 1;
             signed = signed * -1;
@@ -310,10 +310,10 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitt
             signed = signed * -1;
         }
     }
-    
+
     private void RestposeLowenBody() {
-        
-        
+
+
     }
 
     @Override
@@ -401,5 +401,5 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitt
         characterManager.add(this);
     }
 
-    
+
 }

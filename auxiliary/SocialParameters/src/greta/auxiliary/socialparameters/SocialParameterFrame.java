@@ -63,7 +63,6 @@ public class SocialParameterFrame extends AnimationParametersFrame<SocialParamet
     }
 
 
-
     public void setDoubleValue(int which, double value){
         getAnimationParameter(which).setDoubleValue(value);
     }

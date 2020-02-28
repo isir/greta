@@ -119,8 +119,6 @@ private List<SignalPerformer> signalPerformers = new ArrayList<SignalPerformer>(
         Logs.info("Ouverture des yeux : " + m.APFrameList.get(0).getAnimParamList().get(12).value + " pour l'oeil gauche et " + m.APFrameList.get(0).getAnimParamList().get(13).value + " pour l'oeil droit");
 
 
-
-
         //Logs.info("Emotion reçue de FAtiMA : " + m.id + " d'une intensité de " + m.type);
         //sendFacialExpression("faceexp="+m.id);
     }
@@ -158,6 +156,3 @@ private List<SignalPerformer> signalPerformers = new ArrayList<SignalPerformer>(
     }
 
 }
-
-
-

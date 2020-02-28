@@ -137,7 +137,7 @@ public class Vec4d {
         data[2] = v.z();
         data[2] = v.w();
     }
-    
+
     public void set(int index, double d0) {
         data[index] = d0;
     }

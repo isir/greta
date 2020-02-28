@@ -34,7 +34,7 @@ public class SetCamPos extends javax.swing.JFrame {
      */
     public SetCamPos() {
         initComponents();
- 
+
         statusgazeDisplay = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -48,7 +48,7 @@ public class SetCamPos extends javax.swing.JFrame {
         });
         statusgazeDisplay.setDaemon(true);
         statusgazeDisplay.start();
-                
+
     }
 
     /**
@@ -308,8 +308,8 @@ public class SetCamPos extends javax.swing.JFrame {
         if (agent_MG.getText()!= null){
             synchronized(agent_MG){
                 this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_MG.getText()));
-            } 
-           
+            }
+
         }
     }//GEN-LAST:event_agent_MGActionPerformed
 
@@ -318,7 +318,7 @@ public class SetCamPos extends javax.swing.JFrame {
             synchronized(agent_LA){
                 this.gazeuser.getAgent().setTime_MG(Double.parseDouble(agent_LA.getText()));
             }
-            
+
         }
     }//GEN-LAST:event_agent_LAActionPerformed
 
@@ -327,7 +327,7 @@ public class SetCamPos extends javax.swing.JFrame {
             synchronized(AU_mutualGaze){
                 this.gazeuser.setT_bothMG(Double.parseDouble(AU_mutualGaze.getText()));
             }
-            
+
         }
     }//GEN-LAST:event_AU_mutualGazeActionPerformed
 
@@ -336,7 +336,7 @@ public class SetCamPos extends javax.swing.JFrame {
             synchronized(AU_lookAway){
                 this.gazeuser.setT_bothAway(Double.parseDouble(AU_lookAway.getText()));
             }
-            
+
         }
     }//GEN-LAST:event_AU_lookAwayActionPerformed
 
@@ -359,7 +359,7 @@ public class SetCamPos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_thresholdIsSpeakingActionPerformed
-    
+
     public void setPosandOrient (AgentGazeUser gazeuser){
         this.gazeuser = gazeuser;
         this.agent_LA.setText(Double.toString(this.gazeuser.getAgent().getTime_LA()));
@@ -367,7 +367,7 @@ public class SetCamPos extends javax.swing.JFrame {
         this.AU_lookAway.setText(Double.toString(this.gazeuser.getT_bothAway()));
         this.AU_mutualGaze.setText(Double.toString(this.gazeuser.getT_bothMG()));
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField AU_lookAway;
     private javax.swing.JTextField AU_mutualGaze;
@@ -441,8 +441,6 @@ public void setThreshold(double value){
 public double getThreshold(){
     return Double.parseDouble(thresholdIsSpeaking.getText());
 }
-
-
 
 
 }

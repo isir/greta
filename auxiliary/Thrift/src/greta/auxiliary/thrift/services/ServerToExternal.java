@@ -43,7 +43,6 @@ public abstract class ServerToExternal extends Connector<ServerToExternal>{
     public final Object messageLock = new Object();
 
 
-
     public ServerToExternal() {
         this(DEFAULT_THRIFT_PORT);
     }

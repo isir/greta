@@ -152,9 +152,9 @@ public abstract class MPEG4Agent extends Thread {
                     setEntitiesVisible(showBody);
                 }
                 if(visible){
-                    if(//showSkeleton && 
+                    if(//showSkeleton &&
                             /* even if the skeleton is not visible, entities created
-                            with the instance of Skeleton class will update the 
+                            with the instance of Skeleton class will update the
                             bounding box of the main entity and then ensure a better
                             visibility */
                         skeleton==null){

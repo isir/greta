@@ -43,7 +43,7 @@ public abstract class ParameterSet<P extends Parameter> {
     protected Definition<P> currentDefinition;
 
 //public methods :
-    public ParameterSet() {        
+    public ParameterSet() {
         otherDefinition = new ArrayList<Definition<P>>();
     }
     /**
@@ -52,9 +52,9 @@ public abstract class ParameterSet<P extends Parameter> {
      */
     public ParameterSet(String defaultDefinitionName) {
         this();
-        setDefaultDefinition(defaultDefinitionName);        
+        setDefaultDefinition(defaultDefinitionName);
     }
-    
+
     /**
      * Sets the target definition as the definition to use.<br/>
      * If the definition is not found, it tries to add it or uses the default one.

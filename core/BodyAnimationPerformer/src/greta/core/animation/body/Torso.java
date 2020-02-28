@@ -51,14 +51,14 @@ public class Torso extends ExpressiveFrame {
     public Torso clone() {
         return new Torso(this);
     }
-    
+
     public void setRotation(Quaternion q) {
         _r = new Quaternion(q);
     }
-    
+
     public Quaternion getRotation() {
         return _r;
     }
 
-   
+
 }

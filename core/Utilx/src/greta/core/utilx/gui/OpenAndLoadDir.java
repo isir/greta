@@ -33,11 +33,11 @@ public class OpenAndLoadDir extends javax.swing.JFrame {
     public OpenAndLoadDir() {
         initComponents();
     }
-    
+
     public void setFileName(String fileName){
         this.dirnameTextField.setText(fileName);
     }
-    
+
     public String getFileName(){
         return this.dirnameTextField.getText();
     }
@@ -124,7 +124,7 @@ public class OpenAndLoadDir extends javax.swing.JFrame {
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
-        jFileChooser1.setLocale(Locale.getDefault());        
+        jFileChooser1.setLocale(Locale.getDefault());
         //For directoryOnly
         jFileChooser1.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         jFileChooser1.updateUI();
@@ -147,15 +147,14 @@ public class OpenAndLoadDir extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-
     private Method loadMethod;
     private Object loader;
 
-    protected void send(String filename) {
-        if(filename==null || filename.isEmpty()) return ;
+    protected void send(String fileName) {
+        if(fileName==null || fileName.isEmpty()) return ;
         if(loadMethod!=null){
             try {
-                loadMethod.invoke(loader, filename);
+                loadMethod.invoke(loader, fileName);
             }
             catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();

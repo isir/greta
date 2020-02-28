@@ -36,7 +36,7 @@ public class Butterworth
      * @param Fin input data
      * @param fc cutt-off frequency
      * @param fs sample frequency
-     * @param pass pass nr      
+     * @param pass pass nr
      * @param Fout output data
      */
     public static void butterworth(double Fin[],double fc,double fs,int pass, double Fout[])
@@ -59,13 +59,13 @@ public class Butterworth
             Fout[i] = (double)(a0*Fin[i]+a1*Fin[i-1]+a2*Fin[i-2]+b1*Fout[i-1]+b2*Fout[i-2]);
         }
     }
-    
+
     /**
-     * Butterworth-filters the data, assumes the input is aligned in blocks of width doubles 
+     * Butterworth-filters the data, assumes the input is aligned in blocks of width doubles
      * @param Fin input data
      * @param fc cutt-off frequency
      * @param fs sample frequency
-     * @param pass pass nr      
+     * @param pass pass nr
      * @param width block sizes
      * @param Fout output data
      */
@@ -84,7 +84,7 @@ public class Butterworth
         int length = Fin.length/width;
         for(int i=0;i<width*2;i++)
         {
-            Fout[i]=Fin[i];            
+            Fout[i]=Fin[i];
         }
         for (int i=2;i<length;i++)
         {

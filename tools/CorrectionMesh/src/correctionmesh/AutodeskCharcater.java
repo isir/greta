@@ -42,10 +42,9 @@ public class AutodeskCharcater {
     static private String playerMediaPath = "./Player/Data/media/";
 
 
-
     static private String characterName = "Camille";
     static private String baseName = "body";
-    
+
     static private String exportPath = playerMediaPath + characterName.toLowerCase()+"/export/";
     static private String localTargetPath = characterName.toLowerCase();
     static private String bodyMaterialAfter = characterName+"_Autodesk_Body";
@@ -63,7 +62,6 @@ public class AutodeskCharcater {
     static private String skeltonName = targetName + ".skeleton";
     static private String meterialFile = playerMediaPath+targetName + ".material";
     static private String newskeletonFile = playerMediaPath + skeltonName;
-
 
 
     public static void main(String[] aaa){
@@ -118,12 +116,10 @@ public class AutodeskCharcater {
         }
 
 
-
         m.setSkeleton(skeltonName);
 
 
         Bone skeleton= skeletons.get(0);
-
 
 
         skeleton.setCoordinates(0,0,0);
@@ -142,7 +138,6 @@ public class AutodeskCharcater {
 
         System.out.println("Save skeleton as "+ newskeletonFile);
         CorrectionMesh.saveAndConvert1dot6(OgreXML.writeSkeleton(skeleton), newskeletonFile+".xml");
-
 
 
         System.out.println("Save XML");
@@ -166,7 +161,7 @@ public class AutodeskCharcater {
         String hairColorSuffix = "wig_color.jpg";
         String hairNmSuffix = "wig_nm.jpg";
         String hairSpecSuffix = "wig_spec.jpg";
-        
+
         String colorSuffixFinal = "color.jpg";
         String nmSuffixFinal = "nm.jpg";
         String specSuffixFinal = "spec.jpg";

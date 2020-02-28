@@ -54,7 +54,7 @@ public class MPEG4Animatable extends Animatable implements CancelableFAPFramePer
     private BAPFrameEmitterImpl bapEmitter = new BAPFrameEmitterImpl();
     private FAPFrameEmitterImpl fapEmitter = new FAPFrameEmitterImpl();
     private AudioEmitterImpl audioEmitter = new AudioEmitterImpl();
-    
+
     private CharacterManager characterManager;
 
     /**
@@ -78,18 +78,18 @@ public class MPEG4Animatable extends Animatable implements CancelableFAPFramePer
         }
         this.characterManager = characterManager;
         characterManager.add(this);
-    }    
-    
+    }
+
     public static CharacterManager getCharacterManagerStatic(){
         return CharacterManager.getStaticInstance();
     }
-    
+
     /*public MPEG4Animatable() {
-        this(null,false);        
+        this(null,false);
     }*/
 
     public MPEG4Animatable(CharacterManager cm) {
-        this(cm,true);        
+        this(cm,true);
     }
 
     public MPEG4Animatable(CharacterManager cm, boolean connectToCharacterManager) {

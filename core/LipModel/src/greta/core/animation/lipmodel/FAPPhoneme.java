@@ -37,13 +37,13 @@ public class FAPPhoneme {
             }
         }
     }
-    
+
     //=== test ====//
     public void printKeyFrame()
     {
-        int keyTargetNum = (pho.isVowel() ? 3 : 1);               
+        int keyTargetNum = (pho.isVowel() ? 3 : 1);
         int[] fapIndex = {4,5,6,7,8,9,10,11,12,13,51,52,53,54,55,56,57,58,59,60,16,17,3};
-        
+
         for (int fm = 0; fm<keyTargetNum; fm++){
              for (int fp = 0; fp<23; fp++){
                  //System.out.print("  fp="+fp+"  "+ "fapIndex[fp]"+fapIndex[fp]);
@@ -55,23 +55,23 @@ public class FAPPhoneme {
 
     public void printKeyTime()
     {
-        int keyTargetNum = (pho.isVowel() ? 3 : 1);               
+        int keyTargetNum = (pho.isVowel() ? 3 : 1);
         int[] fapIndex = {4,5,6,7,8,9,10,11,12,13,51,52,53,54,55,56,57,58,59,60,16,17,3};
- 
+
         //System.out.println(" time as follows:");
         for (int fm = 0; fm<keyTargetNum; fm++){
-            for (int fp = 0; fp<23; fp++){        
+            for (int fp = 0; fp<23; fp++){
                  int type = getTypeNumber(fapIndex[fp]);
-                 System.out.print("  "+time[fm][type]); 
+                 System.out.print("  "+time[fm][type]);
             }
             System.out.println(" ");
         }
-    }    
-    
+    }
+
     public int getTypeNumber(int fapIndex)
     {
         int type = -1;
-        
+
         if ((fapIndex==4)||(fapIndex==8)||(fapIndex==9)||(fapIndex==51)||(fapIndex==55)||(fapIndex==56))
                 {
                     type = 0;
@@ -91,19 +91,19 @@ public class FAPPhoneme {
         else if ((fapIndex==17)||(fapIndex==63))
         {
             type = 4;
-        }       
+        }
         else if (fapIndex==16)
         {
             type = 5;
-        }     
+        }
         else if ((fapIndex==12)||(fapIndex==13)||(fapIndex==59)||(fapIndex==60))
         {
             type = 6;
-        }   
+        }
 
-            
-        return type;    
+
+        return type;
     }
     //=============//
-    
-};
+
+}

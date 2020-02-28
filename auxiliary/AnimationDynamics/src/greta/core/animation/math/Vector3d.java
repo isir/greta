@@ -43,7 +43,7 @@ public class Vector3d extends VectorNd<Vector3d> {
         super(3);
         this.set(x, y, z);
     }
-    
+
     public Vector3d(double[] v) {
         super(3);
         this.set(v[0], v[1], v[2]);
@@ -62,7 +62,7 @@ public class Vector3d extends VectorNd<Vector3d> {
                 -getEntry(1), getEntry(0), 0.
         );
     }
-        
+
     public Vector3d cross(Vector3d v){
         Vector3d c = new Vector3d(getEntry(1) * v.getEntry(2) - getEntry(2) * v.getEntry(1),
                                   getEntry(2) * v.getEntry(0) - getEntry(0) * v.getEntry(2),
@@ -75,21 +75,21 @@ public class Vector3d extends VectorNd<Vector3d> {
     public Vector3d copyData(RealVector arv) {
         return new Vector3d(arv);
     }
-    
+
     public void normalize(){
         double norm = this.getNorm();
         this.setEntry(0, getEntry(0) / norm);
         this.setEntry(1, getEntry(1) / norm);
         this.setEntry(2, getEntry(2) / norm);
     }
-    
+
     public static Vector3d zero(){
         return new Vector3d();
     }
-    
-    
+
+
     public static Vector3d add(Vector3d a, Vector3d b){
         return new Vector3d(a.getEntry(0) + b.getEntry(0), a.getEntry(1) + b.getEntry(1),a.getEntry(2) + b.getEntry(2));
     }
-    
+
 }

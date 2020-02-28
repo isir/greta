@@ -22,7 +22,7 @@ import greta.auxiliary.activemq.WhiteBoard;
 import java.util.HashMap;
 
 /**
- * 
+ *
  * @author Radoslaw Niewiadomski
  */
 public class FapCommander extends TextSender{

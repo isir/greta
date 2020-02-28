@@ -52,11 +52,11 @@ public class ModuleFactory {
 
         if(moduleInfo!=null){
             try {
-                
+
                 Object object = null;
-                try{                  
+                try{
                     object = moduleInfo.create(parent, params);
-                    
+
                     JFrame jFrame = null;
                     try{
                         if(moduleInfo.frameType.equals("frame") && moduleInfo.frameClass!=null){
@@ -94,7 +94,7 @@ public class ModuleFactory {
                             }
                         }
                     }
-                    
+
                     mxCell parentCell = moduleInfo.parent!=null?moduleInfo.parent.getCell():null;
                     Module m = new Module(
                         moduleInfo,
@@ -132,10 +132,10 @@ public class ModuleFactory {
                                             moduleInfo.name,
                                             parent!=null?parent.getInfo().name:"",
                                             constructorsMsg);
-                    
+
                     Logs.error(msg);
                     JOptionPane.showMessageDialog(uiComponent,msg);
-                };                
+                };
             }
             catch (Throwable ex) {
                 while(ex.getCause() != null){
@@ -220,10 +220,10 @@ public class ModuleFactory {
             }
             return null;
         }
-        
+
         public Object create(Module parent,Map<String,String> params) throws InstantiationException, InvocationTargetException, IllegalAccessException{
             Object object=null;
-           
+
             //First try to instanciate constructor a parent instance as param
             if(parent!=null){
                 try{
@@ -236,7 +236,7 @@ public class ModuleFactory {
                 catch(NoSuchMethodException e){}
             }
             //Then if no constructor available, use the default one
-            if(object==null){                
+            if(object==null){
                 object = objectClass.newInstance();
                 this.parent = null;
             }
@@ -262,7 +262,7 @@ public class ModuleFactory {
             }
             return object;
         }
-        
+
         public List<String> getPossibleConstructors(){
             List<String> constructors = new ArrayList<>();
             for(Constructor c:objectClass.getConstructors()){

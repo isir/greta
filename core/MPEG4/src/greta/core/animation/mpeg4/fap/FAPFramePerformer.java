@@ -31,6 +31,3 @@ public interface FAPFramePerformer {
     public void performFAPFrame(FAPFrame fap_anim, ID requestId);
 
 }
-
-
-

@@ -22,8 +22,8 @@ package greta.auxiliary.activemq.aria;
  * @author Angelo Cafaro
  */
 public interface ARIAInformationStateEmitter {
-    
+
     public void addARIAInformationStatePerformer(ARIAInformationStatePerformer ariaInformationStatePerformer);
     public void removeARIAInformationStatePerformer(ARIAInformationStatePerformer ariaInformationStatePerformer);
-    
+
 }

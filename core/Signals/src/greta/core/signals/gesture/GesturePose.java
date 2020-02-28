@@ -87,7 +87,7 @@ public class GesturePose {
     public void setIsStrokeEnd(boolean isStrokeEnd) {
         this.isStrokeEnd = isStrokeEnd;
     }
-    
+
     public void switchHands() {
 
         Hand originaLeftHand = leftHand;

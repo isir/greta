@@ -22,9 +22,9 @@ package greta.core.animation.kinematics;
  * @author Jing Huang
  */
 public class MassDistribution {
-    
+
     //double _inertiaMatrix[] = new double[9];
-    
+
     /**
      *  the center of mass in the middle
      * @param y   y
@@ -45,11 +45,11 @@ public class MassDistribution {
         inertiaMatrix[7] = 0;
         inertiaMatrix[8] = mass /12.0 * (x * x + y * y);
     }
-    
+
     /**
-     * 
+     *
      * @param r the distance of mass particle to center of mass
-     * @param return skewMatrix 
+     * @param return skewMatrix
      */
     public void getSkewMatrix(double[] r, double[] skewMatrix){
         skewMatrix[0] = 0;
@@ -62,15 +62,15 @@ public class MassDistribution {
         skewMatrix[7] = r[0];
         skewMatrix[8] = 0;
     }
-    
+
     /**
-     * 
+     *
      * @param inertia
      * @param mass
      * @param x
      * @param y
      * @param z
-     * @param outputinertia 
+     * @param outputinertia
      */
     public void translationInertia(double[] inertia, double mass, double x, double y, double z, double[] outputinertia ){
         outputinertia[0] = inertia[0] + mass * (y * y + z * z);
@@ -83,12 +83,12 @@ public class MassDistribution {
         outputinertia[7] = inertia[7] + mass * z * y;
         outputinertia[8] = inertia[8] + mass * (x * x + y * y);
     }
-    
+
     /**
-     * 
+     *
      * @param inertia
      * @param matrixrotation
-     * @param return outputinertia 
+     * @param return outputinertia
      */
     public void rotateInertia(double[] inertia, double[] matrixrotation, double[] outputinertia){
         double[] middle = new double[9];
@@ -99,7 +99,7 @@ public class MassDistribution {
                 }
             }
         }
-        
+
         for (int y = 0; y < 3; y++) {
             for (int x = 0; x < 3; x++) {
                 for (int i = 0; i < 3; i++) {
@@ -107,7 +107,7 @@ public class MassDistribution {
                 }
             }
         }
-        
-        
+
+
     }
 }

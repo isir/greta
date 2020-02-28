@@ -357,7 +357,7 @@ public class ArrowWithName extends PathFormDrawable<Shape> {
     public void setTextAlongLine(boolean textAlongLine) {
         this.arcArrow.setTextAlongLine(textAlongLine);
     }
-    
+
     public boolean isArc(){
         return this.isArc;
     }

@@ -29,8 +29,8 @@ import java.util.List;
  */
 public interface FeedbackPerformer {
 
-   public void performFeedback(ID AnimId, String type, SpeechSignal speechSignal, TimeMarker tm); 
-    
+   public void performFeedback(ID AnimId, String type, SpeechSignal speechSignal, TimeMarker tm);
+
    public void performFeedback(ID AnimId, String type, List<Temporizable> listTmp);
 
    public void performFeedback(Callback callback);

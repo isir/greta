@@ -41,7 +41,7 @@ public class BMLFileReader implements SignalEmitter {
     private ArrayList<SignalPerformer> signalPerformers = new ArrayList<SignalPerformer>();
     private XMLParser bmlparser = XML.createParser();
     private CharacterManager cm;
-    
+
     public BMLFileReader(CharacterManager cm){
         this.cm = cm;
     }
@@ -67,16 +67,16 @@ public class BMLFileReader implements SignalEmitter {
      * {@link greta.core.signals.SignalPerformer#performSignals(java.util.List, greta.core.util.id.ID, greta.core.util.Mode) performSignals}
      * function.
      *
-     * @param bmlfilename the name of the file to load
+     * @param bmlFileName the name of the file to load
      * @return The ID of the generated event
      */
-    public ID load(String bmlfilename) {
+    public ID load(String bmlFileName) {
         //get the base file name to use it as requestId
-        String base = (new File(bmlfilename)).getName().replaceAll("\\.xml$", "");
+        String base = (new File(bmlFileName)).getName().replaceAll("\\.xml$", "");
 
         //get the signals of the BML file
         bmlparser.setValidating(true);
-        XMLTree bml = bmlparser.parseFile(bmlfilename);
+        XMLTree bml = bmlparser.parseFile(bmlFileName);
         Mode mode = BMLTranslator.getDefaultBMLMode();
         if (bml.hasAttribute("composition")) {
             mode.setCompositionType(bml.getAttribute("composition"));
@@ -108,12 +108,12 @@ public class BMLFileReader implements SignalEmitter {
     public java.io.FileFilter getFileFilter() {
         return new java.io.FileFilter() {
             @Override
-            public boolean accept(File pathname) {
-                String filename = pathname.getName().toLowerCase();
-                if (filename.endsWith(".xml") || filename.endsWith(".bml")) {
+            public boolean accept(File pathName) {
+                String fileName = pathName.getName().toLowerCase();
+                if (fileName.endsWith(".xml") || fileName.endsWith(".bml")) {
                     try {
                         bmlparser.setValidating(false);
-                        return bmlparser.parseFile(pathname.getAbsolutePath()).getName().equalsIgnoreCase("bml");
+                        return bmlparser.parseFile(pathName.getAbsolutePath()).getName().equalsIgnoreCase("bml");
                     } catch (Exception e) {
                     }
                 }

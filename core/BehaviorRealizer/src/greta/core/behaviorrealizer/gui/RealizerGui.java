@@ -27,9 +27,9 @@ import javax.swing.JLabel;
  * @author Donatella Simonetti
  */
 public class RealizerGui extends JFrame{
-    
-    private Realizer parent;   
-    // Variables declaration                   
+
+    private Realizer parent;
+    // Variables declaration
     private JLabel AULibrary;
     private JLabel FaceLibrary;
     private JLabel GestureLibrary;
@@ -46,10 +46,10 @@ public class RealizerGui extends JFrame{
     private JButton UpdateSh;
     private JButton UpdateTorso;
     private JLabel jLabel1;
-    // End of variables declaration                   
+    // End of variables declaration
 
     public RealizerGui() {
-        
+
         AULibrary = new javax.swing.JLabel();
         UpdateAU = new javax.swing.JButton();
         FaceLibrary = new javax.swing.JLabel();
@@ -224,40 +224,40 @@ public class RealizerGui extends JFrame{
 
         pack();
     }
-    
+
     public void UpdateLibraries(Realizer parent) {
-        this.parent = parent;       
+        this.parent = parent;
     }
-        
-    /*private void UpdateAUActionPerformed(java.awt.event.ActionEvent evt) {                                         
+
+    /*private void UpdateAUActionPerformed(java.awt.event.ActionEvent evt) {
         this.parent.UpdateAULibrary();
-    }*/                                   
+    }*/
 
-    private void UpdateFaceActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void UpdateFaceActionPerformed(java.awt.event.ActionEvent evt) {
         this.parent.UpdateFaceLibrary();
-    }                                          
+    }
 
-    private void UpdateGesturesActionPerformed(java.awt.event.ActionEvent evt) {                                               
+    private void UpdateGesturesActionPerformed(java.awt.event.ActionEvent evt) {
         this.parent.UpdateGestureLibrary();
-    }                                              
+    }
 
-    private void UpdateHeadActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void UpdateHeadActionPerformed(java.awt.event.ActionEvent evt) {
         this.parent.UpdateHeadLibrary();
-    }                                          
+    }
 
-    /*private void UpdateShActionPerformed(java.awt.event.ActionEvent evt) {                                         
+    /*private void UpdateShActionPerformed(java.awt.event.ActionEvent evt) {
         this.parent.UpdateShoulderLibrary();
-    }*/                                        
+    }*/
 
-    private void UpdateTorsoActionPerformed(java.awt.event.ActionEvent evt) {                                            
+    private void UpdateTorsoActionPerformed(java.awt.event.ActionEvent evt) {
         this.parent.UpdateTorsoLibrary();
-    }                                           
+    }
 
-    private void UpdateHandActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void UpdateHandActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
-    }                                          
+    }
 
-    private void UpdateAllActionPerformed(java.awt.event.ActionEvent evt) {                                          
+    private void UpdateAllActionPerformed(java.awt.event.ActionEvent evt) {
         //this.parent.UpdateAULibrary();
         this.parent.UpdateFaceLibrary();
         this.parent.UpdateGestureLibrary();
@@ -265,6 +265,6 @@ public class RealizerGui extends JFrame{
         //this.parent.UpdateShoulderLibrary();
         this.parent.UpdateTorsoLibrary();
         this.parent.UpdateHandLibrary();
-    }         
-    
+    }
+
 }

@@ -33,7 +33,7 @@ public class HingeJoinController implements BaseController{
     double _kD; //derivative parameter
     double _torqueOutput;
     boolean _active = true;
-    
+
     private static final float KP_DEFAULT = 1000;
     private static final float KD_DEFAULT = 100.5f;
 
@@ -45,16 +45,16 @@ public class HingeJoinController implements BaseController{
         this._kP = kP;
         this._kD = kD;
     }
-    
-    
+
+
     public HingeJoinController(){
         this("",0,0,0,KP_DEFAULT,KD_DEFAULT);
     }
-    
+
     public HingeJoinController(double desireAngle){
         this("",0,desireAngle,0,KP_DEFAULT,KD_DEFAULT);
     }
-    
+
     @Override
     public void update(double dt) {
         if(!_active) return;
@@ -68,7 +68,7 @@ public class HingeJoinController implements BaseController{
         _currentAngle = angle;
         _lastAngle = lastangle;
     }
-    
+
     public double getDesireAngle() {
         return _desireAngle;
     }
@@ -111,7 +111,7 @@ public class HingeJoinController implements BaseController{
 
     public double getTorqueOutput() {
         return _torqueOutput;
-    } 
+    }
 
     public double getFriction() {
         return _friction;
@@ -120,9 +120,8 @@ public class HingeJoinController implements BaseController{
     public void setFriction(double friction) {
         this._friction = friction;
     }
-    
-    
-    
+
+
     @Override
     public String getName() {
         return _name;
@@ -152,5 +151,5 @@ public class HingeJoinController implements BaseController{
     public boolean isActive() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }

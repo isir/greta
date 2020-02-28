@@ -25,7 +25,7 @@ import greta.core.util.speech.Speech;
  * @author Andre-Marie Pez
  */
 public class SpeechSignal extends Speech implements Signal{
-    
+
 
     public SpeechSignal(CharacterManager cm){
         super(cm);

@@ -29,7 +29,7 @@ package org.joml;
  * <p>
  * To obtain the origin of the rays call {@link #origin(Vector3f)}.
  * Then to compute the directions of subsequent rays use {@link #dir(float, float, Vector3f)}.
- * 
+ *
  * @author Kai Burjack
  */
 public class FrustumRayBuilder {
@@ -50,7 +50,7 @@ public class FrustumRayBuilder {
 
     /**
      * Create a new {@link FrustumRayBuilder} from the given {@link Matrix4f matrix} by extracing the matrix's frustum.
-     * 
+     *
      * @param m
      *          the {@link Matrix4f} to create the frustum from
      */
@@ -65,7 +65,7 @@ public class FrustumRayBuilder {
      * Fast Extraction of Viewing Frustum Planes from the World-View-Projection Matrix</a>
      * <p>
      * Reference: <a href="http://geomalgorithms.com/a05-_intersect-1.html">http://geomalgorithms.com</a>
-     * 
+     *
      * @param m
      *          the {@link Matrix4f matrix} to update the frustum corner rays and origin with
      * @return this
@@ -105,7 +105,7 @@ public class FrustumRayBuilder {
 
     /**
      * Store the eye/origin of the perspective frustum in the given <code>origin</code>.
-     * 
+     *
      * @param origin
      *          will hold the perspective origin
      * @return the <code>origin</code> vector
@@ -118,12 +118,12 @@ public class FrustumRayBuilder {
     }
 
     /**
-     * Obtain the normalized direction of a ray starting at the center of the coordinate system and going 
+     * Obtain the normalized direction of a ray starting at the center of the coordinate system and going
      * through the near frustum plane.
      * <p>
      * The parameters <code>x</code> and <code>y</code> are used to interpolate the generated ray direction
      * from the bottom-left to the top-right frustum corners.
-     * 
+     *
      * @param x
      *          the interpolation factor along the left-to-right frustum planes, within <tt>[0..1]</tt>
      * @param y

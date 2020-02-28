@@ -156,9 +156,9 @@ public class ConstraintSetsContainer {
         String csFile = IniManager.getGlobals().getValueString("CONSTRAINT_SET");
 
         if (csFile.equals("")) {
-            Logs.warning("ConstraintsContainer: no filename given");
+            Logs.warning("ConstraintsContainer: no fileName given");
             return null;
-            //throw Exception("ConstraintsContainer: no filename given",1);
+            //throw Exception("ConstraintsContainer: no fileName given",1);
         }
 
         XMLTree constraintsets = parser.parseFile(csFile);
@@ -344,4 +344,3 @@ public class ConstraintSetsContainer {
 
     }//end of translate
 }//end of class
-

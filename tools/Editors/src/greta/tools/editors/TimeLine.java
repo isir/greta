@@ -48,7 +48,7 @@ implements MouseListener, MouseMotionListener, FocusListener, KeyListener{
 
     //Number of digits for ID displayed in Editor
     protected static int NUM_DISPLAYIED_DIGITS_ID = 3;
-    
+
     public static final int NOTHING_MODE = 0;
     public static final int ADD_MODE = 1;
     public static final int MOVE_MODE = 2;
@@ -76,7 +76,7 @@ implements MouseListener, MouseMotionListener, FocusListener, KeyListener{
         this.addKeyListener(this);
         this.setBackground(Color.white);
     }
-    
+
     public TimeLine(MultiTimeLineEditors<? extends Temporizable> anEditor){
         this.multiTimeLineEditor = anEditor;
         this.addMouseListener(this);
@@ -93,7 +93,7 @@ implements MouseListener, MouseMotionListener, FocusListener, KeyListener{
         this.totalDuration = totalDuration;
         repaint();
     }
-    
+
     public void setManager(TimeLineManager<T> aManager) {
        this.manager = aManager;
     }
@@ -127,7 +127,7 @@ implements MouseListener, MouseMotionListener, FocusListener, KeyListener{
     public List<TemporizableContainer<T>> getItems() {
         return items;
     }
-    
+
     public List<String> getItemsNamesList(){
         List<String> output = new ArrayList<String>();
         for(TemporizableContainer<T> tmp : this.getItems()){
@@ -357,10 +357,10 @@ implements MouseListener, MouseMotionListener, FocusListener, KeyListener{
             startSelected = min;
             endSelected = max;
             sort();
-            
+
             for(String linkedID : selected.getLinkedSignal()){
                 if(this.multiTimeLineEditor != null){
-                    
+
                     for(TemporizableContainer tmp : this.multiTimeLineEditor.getAllTemporizableContainers()){
                         if(linkedID.equals(tmp.getId())){
                             tmp.setReferencesState(TemporizableContainer.ReferencesState.CHANGED);
@@ -459,7 +459,7 @@ implements MouseListener, MouseMotionListener, FocusListener, KeyListener{
     @Override
     public void keyPressed(KeyEvent e){
         if (e.getKeyCode() == KeyEvent.VK_DELETE ) {
-          
+
             for(String signal : selected.getLinkedSignal()){
                 if(this.multiTimeLineEditor != null){
                     for(TemporizableContainer tmp : this.multiTimeLineEditor.getAllTemporizableContainers()){
@@ -475,7 +475,7 @@ implements MouseListener, MouseMotionListener, FocusListener, KeyListener{
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
-        
+
     @Override
     public void keyTyped(KeyEvent e) {}
 

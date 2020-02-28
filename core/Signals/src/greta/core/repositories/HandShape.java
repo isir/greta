@@ -100,5 +100,4 @@ public class HandShape implements Parameter<HandShape> {
     }
 
 
-
 }

@@ -230,12 +230,12 @@ public class AutodeskAgent extends MPEG4Agent{
         map(typesUsed, skel, "Spine2V", JointType.vl1, -0.5);
         map(typesUsed, skel, "Spine1V", JointType.vl3, -0.5);
         map(typesUsed, skel, "SpineV", JointType.vl5, -0.5);
-        
+
         //map(typesUsed, skel, "Spine4Right", JointType.vt12, -0.5); // ???
         //map(typesUsed, skel, "Spine4Left", JointType.vt12, -0.5); // ???
 
         // </editor-fold>
-        
+
         // <editor-fold defaultstate="collapsed" desc="legs">
         map(typesUsed, skel, "LeftUpLeg","LeftUpLegRoll", JointType.l_hip, 0.5, false);
         map(typesUsed, skel, "LeftLeg", JointType.l_knee);
@@ -318,7 +318,7 @@ public class AutodeskAgent extends MPEG4Agent{
         root = skel.getRootBone();
         concat.setJointToUse(typesUsed);
     }
-    
+
     public void setWrinklesMaterial(String materialName, int target){
         if(Ogre.useOpenGL() && IniManager.getGlobals().getValueBoolean("OGRE_WRINKLES") && materialName!=null){
             WrinklesFapMapper wfm = new WrinklesFapMapper(body, materialName, target);
@@ -406,7 +406,7 @@ public class AutodeskAgent extends MPEG4Agent{
             typesUsed.add(joint);
         }
     }
-    
+
     private void mapShoulder(List<JointType> typesUsed, SkeletonInstance skel, String boneName, String twistBoneName, JointType shoulderJoint, JointType acromiumJoint, double twistFactor) {
         if (skel.hasBone(boneName)) {
             ArrayList<Vec3d> dofs = new ArrayList<Vec3d>(3);
@@ -442,7 +442,7 @@ public class AutodeskAgent extends MPEG4Agent{
             typesUsed.add(shoulderJoint);
         }
     }
-    
+
     void sortDegreeOfFreedom(ArrayList<BAPType> types, ArrayList<Vec3d> dofs){
         if(sortForMPEG4Compleance){
             //bubble sort

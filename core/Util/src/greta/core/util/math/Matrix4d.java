@@ -167,7 +167,7 @@ public class Matrix4d {
     public void set(int x, int y, double v) {
         data[y][x] = v;
     }
-    
+
     public void set(Matrix4d m) {
         for (int y = 0; y < 4; y++) {
             for (int x = 0; x < 4; x++) {
@@ -289,7 +289,7 @@ public class Matrix4d {
          m.data[1][3] = +m.get(2, 0) * fA5 - m.get(2, 2) * fA2 + m.get(2, 3) * fA1;
          m.data[2][3] = -m.get(2, 0) * fA4 + m.get(2, 1) * fA2 - m.get(2, 3) * fA0;
          m.data[3][3] = +m.get(2, 0) * fA3 - m.get(2, 1) * fA1 + m.get(2, 2) * fA0;
-        
+
          m = multiplication(m, 1.0f / fDet);*/
         return true;
     }

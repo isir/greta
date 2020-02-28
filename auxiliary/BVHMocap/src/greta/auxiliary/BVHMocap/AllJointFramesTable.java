@@ -16,7 +16,7 @@
  *
  */
 package greta.auxiliary.BVHMocap;
- 
+
 import greta.core.animation.common.Joint;
 import greta.core.animation.common.Skeleton;
 import greta.core.util.math.Vec3d;

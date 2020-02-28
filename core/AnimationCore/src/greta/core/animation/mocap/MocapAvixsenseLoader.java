@@ -123,7 +123,7 @@ public class MocapAvixsenseLoader {
                     f.addRotation(name, Quaternion.multiplication(rs.get("T8").inverse(),rs.get(name)));
                 } else if (name.equalsIgnoreCase("Head")) {
                     f.addRotation(name, Quaternion.multiplication(rs.get("NECK").inverse(),rs.get(name)));
-                } 
+                }
                 else if (name.equalsIgnoreCase("LEFT_HAND")) {
                     f.addRotation(name, Quaternion.multiplication(rs.get("LEFT_FOREARM").inverse(),rs.get(name)));
                 } else if (name.equalsIgnoreCase("LEFT_FOREARM")) {
@@ -132,7 +132,7 @@ public class MocapAvixsenseLoader {
                     f.addRotation(name, Quaternion.multiplication(rs.get("LEFT_SHOULDER").inverse(),rs.get(name)));
                 }else if (name.equalsIgnoreCase("LEFT_SHOULDER")) {
                     f.addRotation(name, Quaternion.multiplication(rs.get("T8").inverse(),rs.get(name)));
-                } 
+                }
                 else if (name.equalsIgnoreCase("RIGHT_HAND")) {
                     f.addRotation(name, Quaternion.multiplication(rs.get("RIGHT_FOREARM").inverse(),rs.get(name)));
                 } else if (name.equalsIgnoreCase("RIGHT_FOREARM")) {
@@ -141,7 +141,7 @@ public class MocapAvixsenseLoader {
                     f.addRotation(name, Quaternion.multiplication(rs.get("RIGHT_SHOULDER").inverse(),rs.get(name)));
                 }else if (name.equalsIgnoreCase("RIGHT_SHOULDER")) {
                     f.addRotation(name, Quaternion.multiplication(rs.get("T8").inverse(),rs.get(name)));
-                } 
+                }
                 else if (name.equalsIgnoreCase("RIGHT_FOOT")) {
                     f.addRotation(name, Quaternion.multiplication(rs.get("RIGHT_LOWER_LEG").inverse(),rs.get(name)));
                 } else if (name.equalsIgnoreCase("RIGHT_LOWER_LEG")) {
@@ -149,7 +149,7 @@ public class MocapAvixsenseLoader {
                 } else if (name.equalsIgnoreCase("RIGHT_UPPER_LEG")) {
                     f.addRotation(name, Quaternion.multiplication(rs.get("PELVIS").inverse(),rs.get(name)));
                 }
-                
+
                 else if (name.equalsIgnoreCase("LEFT_FOOT")) {
                     f.addRotation(name, Quaternion.multiplication(rs.get("LEFT_LOWER_LEG").inverse(),rs.get(name)));
                 } else if (name.equalsIgnoreCase("LEFT_LOWER_LEG")) {

@@ -29,7 +29,7 @@ import java.nio.FloatBuffer;
 
 /**
  * Helper class to do efficient memory copies.
- * 
+ *
  * @author The LWJGL authors
  * @author Kai Burjack
  */

@@ -13,7 +13,7 @@
                     id="FML File Reader - 1545228674948-209"
                     module="FML File Reader" name="FML File Reader #1"
                     w="80.0" x="30.0" y="30.0">
-                    <parameter name="saveFileName" value="./Examples/Restposes/Restpose.xml"/>
+                    <parameter name="fileName" value="./Examples/Restposes/Restpose.xml"/>
                     <window h="100" visible="true" w="520" x="740" y="300"/>
                 </element>
                 <element h="50.0"
@@ -157,7 +157,7 @@
                     id="FML File Reader - 1571048114448-838"
                     module="FML File Reader" name="FML File Reader #2"
                     w="80.0" x="30.0" y="30.0">
-                    <parameter name="saveFileName" value="./Examples/Restposes/Restpose.xml"/>
+                    <parameter name="fileName" value="./Examples/Restposes/Restpose.xml"/>
                     <window h="100" visible="true" w="520" x="1270" y="300"/>
                 </element>
                 <element h="50.0"

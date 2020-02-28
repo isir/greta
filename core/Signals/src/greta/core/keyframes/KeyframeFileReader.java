@@ -168,12 +168,12 @@ public class KeyframeFileReader implements KeyframeEmitter {
         return new java.io.FileFilter() {
 
             @Override
-            public boolean accept(File pathname) {
-                String filename = pathname.getName().toLowerCase();
-                if (filename.endsWith(".xml")) {
+            public boolean accept(File pathName) {
+                String fileName = pathName.getName().toLowerCase();
+                if (fileName.endsWith(".xml")) {
                     try {
                         xmlparser.setValidating(false);
-                        return xmlparser.parseFile(pathname.getAbsolutePath()).getName().equalsIgnoreCase("keyframes");
+                        return xmlparser.parseFile(pathName.getAbsolutePath()).getName().equalsIgnoreCase("keyframes");
                     } catch (Exception e) {
                     }
                 }

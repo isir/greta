@@ -97,8 +97,6 @@ public class LibListModel extends AbstractListModel<LibElement>{
     }
 
 
-
-
     public class LibElement implements Comparable<LibElement>{
 
         XMLTree lib;

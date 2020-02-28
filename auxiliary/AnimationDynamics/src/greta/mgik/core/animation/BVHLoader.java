@@ -109,23 +109,23 @@ public class BVHLoader {
             for(int i = 0; i < nbChan; i++){
                 String ax = order.get(i);
                 if(ax.equalsIgnoreCase("Zposition")){
-                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,0,1)); 
+                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,0,1));
                 }else if(ax.equalsIgnoreCase("Yposition")){
-                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,1,0)); 
+                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,1,0));
                 }else if(ax.equalsIgnoreCase("Xposition")){
-                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(1,0,0)); 
+                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(1,0,0));
                 }else if(ax.equalsIgnoreCase("Zrotation")){
-                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,0,1)); 
+                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,0,1));
                 }else if(ax.equalsIgnoreCase("Yrotation")){
-                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,1,0)); 
+                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,1,0));
                 }else if(ax.equalsIgnoreCase("Xrotation")){
-                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(1,0,0)); 
+                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(1,0,0));
                 }else{
-                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,0,0)); 
+                    sk.m_dim_axis.set(joint.m_dims.get(i), new Vector3d(0,0,0));
                     System.out.println("load joint axis error " +name+" "+i);
                 }
             }
-            
+
             while (token.equals("JOINT") || token.equals("End")) {
                 if (token.equals("End")) {
                     skelet.m_endeffectors.add(joint.m_index);

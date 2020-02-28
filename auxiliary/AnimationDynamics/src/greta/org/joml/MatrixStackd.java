@@ -32,7 +32,7 @@ import java.io.ObjectOutput;
  * This {@link MatrixStackd} class inherits from {@link Matrix4d}, so the current/top matrix is always the {@link MatrixStackd}/{@link Matrix4d} itself. This
  * affects all operations in {@link Matrix4d} that take another {@link Matrix4d} as parameter. If a {@link MatrixStackd} is used as argument to those methods,
  * the effective argument will always be the <i>current</i> matrix of the matrix stack.
- * 
+ *
  * @author Kai Burjack
  */
 public class MatrixStackd extends Matrix4d {
@@ -53,7 +53,7 @@ public class MatrixStackd extends Matrix4d {
      * Create a new {@link MatrixStackd} of the given size.
      * <p>
      * Initially the stack pointer is at zero and the current matrix is set to identity.
-     * 
+     *
      * @param stackSize
      *            the size of the stack. This must be at least 1, in which case the {@link MatrixStackd} simply only consists of <code>this</code>
      *            {@link Matrix4d}
@@ -72,7 +72,7 @@ public class MatrixStackd extends Matrix4d {
     /**
      * Do not invoke manually! Only meant for serialization.
      * <p>
-     * Invoking this constructor from client code will result in an inconsistent state of the 
+     * Invoking this constructor from client code will result in an inconsistent state of the
      * created {@link MatrixStackd} instance.
      */
     public MatrixStackd() {
@@ -81,7 +81,7 @@ public class MatrixStackd extends Matrix4d {
 
     /**
      * Set the stack pointer to zero and set the current/bottom matrix to {@link #identity() identity}.
-     * 
+     *
      * @return this
      */
     public MatrixStackd clear() {
@@ -92,7 +92,7 @@ public class MatrixStackd extends Matrix4d {
 
     /**
      * Increment the stack pointer by one and set the values of the new current matrix to the one directly below it.
-     * 
+     *
      * @return this
      */
     public MatrixStackd pushMatrix() {
@@ -107,7 +107,7 @@ public class MatrixStackd extends Matrix4d {
      * Decrement the stack pointer by one.
      * <p>
      * This will effectively dispose of the current matrix.
-     * 
+     *
      * @return this
      */
     public MatrixStackd popMatrix() {
@@ -130,12 +130,12 @@ public class MatrixStackd extends Matrix4d {
 
     /*
      * Contract between Matrix4d and MatrixStackd:
-     * 
+     *
      * - Matrix4d.equals(MatrixStackd) is true iff all the 16 matrix elements are equal
      * - MatrixStackd.equals(Matrix4d) is true iff all the 16 matrix elements are equal
      * - MatrixStackd.equals(MatrixStackd) is true iff all 16 matrix elements are equal AND the matrix arrays as well as the stack pointer are equal
      * - everything else is inequal
-     * 
+     *
      * (non-Javadoc)
      * @see org.joml.Matrix4f#equals(java.lang.Object)
      */

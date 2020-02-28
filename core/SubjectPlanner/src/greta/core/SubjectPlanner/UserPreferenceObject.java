@@ -26,11 +26,11 @@ import greta.core.util.parameter.EngineParameterSetOfSet;
 public class UserPreferenceObject extends EngineParameterSetOfSet{
 
     public static final String OBJECT_PREF_USER_LIB = "SubjectPlanner/Data/ObjectPreferencesUser.xml";
-    
+
     public static Sentences global_obj_pref_user_library;
-     
-    public UserPreferenceObject(String filename){
-      super(filename);
+
+    public UserPreferenceObject(String fileName){
+      super(fileName);
     }
-    
+
 }

@@ -19,7 +19,7 @@ import static org.lwjgl.system.MemoryUtil.memAddress;
  * {@link Matrix4f#reflect(Quaternionf, Vector3f) Matrix4f.reflect()} with stencil reflections.
  * <p>
  * This demo also makes use of joml-camera with the {@link ArcBallCamera}.
- * 
+ *
  * @author Kai Burjack
  */
 public class ReflectDemo {
@@ -219,7 +219,7 @@ public class ReflectDemo {
         cam.setBeta((float) Math.toRadians(20));
 
         Vector3f mirrorPosition = new Vector3f(0.0f, 3.0f, -5.0f);
-        /* Build orientation quaternion of mirror. */        
+        /* Build orientation quaternion of mirror. */
         Quaternionf mirrorOrientation = new Quaternionf();
         mirrorOrientation.rotateY((float) Math.toRadians(45))
                          .rotateX((float) Math.toRadians(45));

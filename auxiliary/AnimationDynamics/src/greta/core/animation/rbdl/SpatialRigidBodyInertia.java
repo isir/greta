@@ -75,7 +75,7 @@ public class SpatialRigidBodyInertia {
         result.setSubMatrix(m.getData(), 3, 3);
         return result;
     }
-    
+
     @Override
     public String toString(){
         return "spatial rigid body inertia: mass "+ mass + " center " + center.toString() + " inertia " + inertia.toString();

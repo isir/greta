@@ -96,11 +96,11 @@ public class SimpleAUPerfGui extends javax.swing.JFrame implements CharacterDepe
     private javax.swing.JLabel AULibrary;
     private javax.swing.JButton Update;
     // End of variables declaration//GEN-END:variables
-  
-    
+
+
     // update lexicon in planner in order to do not restart the platform
     public void UpdateLexicon(SimpleAUPerformer parent) {
-        this.parent = parent;       
+        this.parent = parent;
     }
 
     @Override

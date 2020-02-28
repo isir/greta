@@ -76,7 +76,7 @@ public class Entity extends _Object_ implements MovableObject {
     public TagPoint attachObjectToBone(String name, MovableObject bone) {
         return new TagPoint(_attachObjectToBone(getNativePointer(), name, bone.getNativePointer()));
     }
-    
+
     private native long _attachObjectToBone(long thisPointer, String name, long boneP);
 
     public SubEntity getSubEntity(int i) {
@@ -93,8 +93,8 @@ public class Entity extends _Object_ implements MovableObject {
         return new AnimationState(_getAnimationState(getNativePointer(), fapAnimationName));
     }
     private native long _getAnimationState(long thisPointer, String i);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

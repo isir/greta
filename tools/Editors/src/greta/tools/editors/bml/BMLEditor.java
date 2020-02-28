@@ -93,7 +93,6 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
     }
 
 
-
     public ArrayList<String> getSpeechIDs(){
         ArrayList<String> output = new ArrayList<String>();
         List<SpeechSignal> liste = this.speech.getTimeLine().getItems();
@@ -301,15 +300,15 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
     }
 
     @Override
-    protected void saveAs(String filename) {
+    protected void saveAs(String fileName) {
 
         boolean doUniqueFilename = false;
 
-        if (filename == null) {
+        if (fileName == null) {
             doUniqueFilename = true;
         }
         else {
-            if (filename.trim().isEmpty() ) {
+            if (fileName.trim().isEmpty() ) {
                 doUniqueFilename = true;
             }
         }
@@ -318,17 +317,17 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
             SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
             Date now = new Date();
             String strDate = sdfDate.format(now);
-            filename = "BML-Editor-" + strDate + ".xml";
+            fileName = "BML-Editor-" + strDate + ".xml";
         }
         else {
-            if (! ((filename.endsWith(".xml")) || (filename.endsWith(".bml"))) ) {
-                filename = filename.concat(".xml");
+            if (! ((fileName.endsWith(".xml")) || (fileName.endsWith(".bml"))) ) {
+                fileName = fileName.concat(".xml");
             }
         }
 
-        this.changeTitle("BML Editor - " + filename);
+        this.changeTitle("BML Editor - " + fileName);
 
-        BMLTranslator.SignalsToBML(getAllTemporizable(), new Mode(CompositionType.blend)).save(filename);
+        BMLTranslator.SignalsToBML(getAllTemporizable(), new Mode(CompositionType.blend)).save(fileName);
     }
 
     @Override

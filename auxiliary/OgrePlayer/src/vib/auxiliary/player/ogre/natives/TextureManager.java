@@ -40,8 +40,8 @@ public class TextureManager extends _Object_ {
     public Texture createRenderTexture(String string, int textureWidth, int textureHeight) {
         return new Texture(_createRenderTexture(getNativePointer(), string, textureWidth, textureHeight));
     }
-    
-    
+
+
 //        greta.auxiliary.player.ogre.natives.TextureManager.getSingleton().createManual(
 //                            texturePtr,
 //                            "GretaRenderTexture-"+this.toString(),
@@ -57,7 +57,7 @@ public class TextureManager extends _Object_ {
 //                            false,
 //                            4);
     private native long _createRenderTexture(long p, String string, int textureWidth, int textureHeight);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

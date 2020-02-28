@@ -223,7 +223,6 @@ public class FunctionGraph extends javax.swing.JPanel {
         g.drawLine(0, posX0, this.getWidth(), posX0);
 
 
-
         double first = minX-minX%xInterval;
         int written = -1;
         for(double label = first; label< maxX; label+=xInterval){

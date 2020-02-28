@@ -147,7 +147,7 @@ public class BVHLoader {
         return _animation;
     }
 
-    
+
     public static void main(String[] args) {
         BVHLoader loader = new BVHLoader();
         loader.load("C:\\Users\\Jing\\Downloads\\bvh\\test-data\\Animations\\10_02.bvh");

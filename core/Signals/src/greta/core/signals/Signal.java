@@ -42,5 +42,5 @@ public interface Signal extends Temporizable{
      * @return the name of the modality
      */
     public String getModality();
-    
+
 }

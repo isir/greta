@@ -298,7 +298,6 @@ public class MiscObjects {
         wave2.translate(0, 0, bubbleCenter.z());
 
 
-
         finalizeSubmesh(base, "black");
         finalizeSubmesh(membrane, "dark_grey");
         finalizeSubmesh(bubble, "black");
@@ -376,7 +375,6 @@ public class MiscObjects {
                 } else {
 
 
-
                     double deltaAngle = 90.0 / (circNum + 1);
                     ArrayList<Vertex> last = nextCirc;
                     for (int k = 0; k < circNum; ++k) {
@@ -414,9 +412,6 @@ public class MiscObjects {
             } else {
                 if (lastCirc != null) {
                     angle = -(360.0 / num) * (i - 1);
-
-
-
 
 
                     double deltaAngle = -90.0 / (circNum + 1);

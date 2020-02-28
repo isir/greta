@@ -47,7 +47,7 @@ import java.util.Vector;
  */
 public class BVHReader implements BAPFrameEmitter {
 
-    public String filename;//path + name+ ".bvh"
+    public String fileName;//path + name+ ".bvh"
     public Dictionary dictionary;
     private float[] coordOffset;//Today
     private boolean USE_COORDINATES_OFFSET = false;
@@ -60,7 +60,7 @@ public class BVHReader implements BAPFrameEmitter {
     }
 
     public BVHReader(String fname) {
-        filename = fname;
+        fileName = fname;
         dictionary = new Dictionary();
         dictionary.Initialize();
 
@@ -90,22 +90,22 @@ public class BVHReader implements BAPFrameEmitter {
         return USE_DICTIONNARY;
     }
 
-    public static BufferedReader ReadFile(String filename) {
+    public static BufferedReader ReadFile(String fileName) {
         BufferedReader lecteurAvecBuffer = null;
 
         try {
-            FileInputStream fileinput = new FileInputStream(filename);
+            FileInputStream fileinput = new FileInputStream(fileName);
             InputStreamReader streamreader = new InputStreamReader(fileinput);
             lecteurAvecBuffer = new BufferedReader(streamreader);
         } catch (FileNotFoundException exc) {
             //exc.printStackTrace();
-            System.out.println("Erreur d'ouverture du fichier " + filename);
+            System.out.println("Erreur d'ouverture du fichier " + fileName);
         }
         return lecteurAvecBuffer;
     }
 
-    public long load(String bvhfilename) {
-        filename = bvhfilename;
+    public long load(String bvhFileName) {
+        fileName = bvhFileName;
         return process();
     }
 
@@ -124,12 +124,12 @@ public class BVHReader implements BAPFrameEmitter {
             // *** end for tardis project
 
 
-            BufferedReader br = ReadFile(filename);
+            BufferedReader br = ReadFile(fileName);
             Skeleton skeleton = BVHSkeleton(br);
             int nbframe = GetFrameNumber(br);
             float frameTime = GetFrameTime(br);
             int EulerAngleOrder = EulerOrder();
-            System.out.println(filename);
+            System.out.println(fileName);
             bap_animation = BAPFramesCreator(AllPreRotation, br, skeleton, nbframe, EulerAngleOrder, frameTime, bapframe_startTime);
 
 
@@ -137,7 +137,7 @@ public class BVHReader implements BAPFrameEmitter {
         } catch (Exception e) {
         }
 
-        ID id = IDProvider.createID(filename);//today
+        ID id = IDProvider.createID(fileName);//today
         for (int i = 0; i < _bapFramePerformer.size(); ++i) {
             BAPFramePerformer performer = _bapFramePerformer.get(i);
             performer.performBAPFrames(bap_animation, id);
@@ -149,7 +149,7 @@ public class BVHReader implements BAPFrameEmitter {
     }
 
 //    public ArrayList<BAPFrame> BVHToBAPFrames() throws FileNotFoundException, IOException {
-//        BufferedReader br = ReadFile(filename);
+//        BufferedReader br = ReadFile(fileName);
 //        Skeleton skeleton = BVHSkeleton(br);
 //        int nbframe = GetFrameNumber(br);
 //
@@ -159,7 +159,7 @@ public class BVHReader implements BAPFrameEmitter {
 //        return bap_animation;
 //    }
     public BVH MotionBasedBVHCreator() throws FileNotFoundException, IOException {
-        BufferedReader br = ReadFile(filename);
+        BufferedReader br = ReadFile(fileName);
         Skeleton skeleton = BVHSkeleton(br);
         int nbframe = GetFrameNumber(br);
         float frameTime = GetFrameTime(br);
@@ -169,7 +169,7 @@ public class BVHReader implements BAPFrameEmitter {
     }
 
     public BVH JFTableBasedBVHCreator() throws FileNotFoundException, IOException {   //  BVH Creater is based on Joint Frame Table
-        BufferedReader br = ReadFile(filename);
+        BufferedReader br = ReadFile(fileName);
         Skeleton skeletonWithES = BVHSkeletonWithEndSite(br);
         int nbframe = GetFrameNumber(br);
         float frameTime = GetFrameTime(br);
@@ -478,7 +478,7 @@ public class BVHReader implements BAPFrameEmitter {
     }
 
     public Skeleton BVHSkeletonWithEndSite(BufferedReader br) throws FileNotFoundException, IOException {
-        Skeleton skeleton = new Skeleton(filename.split("[.]")[0]);
+        Skeleton skeleton = new Skeleton(fileName.split("[.]")[0]);
         String line;
         String name;
         int id_joint;
@@ -597,7 +597,7 @@ public class BVHReader implements BAPFrameEmitter {
     }
 
     public Skeleton BVHSkeleton(BufferedReader br) throws FileNotFoundException, IOException {
-        Skeleton skeleton = new Skeleton(filename.split("[.]")[0]);
+        Skeleton skeleton = new Skeleton(fileName.split("[.]")[0]);
         String line;
         String name;
         int id_joint;
@@ -1026,7 +1026,6 @@ public class BVHReader implements BAPFrameEmitter {
                     //*********** end for Tardis project
 
 
-
 //                    if (f==0)
 //                    {System.out.println("joint id="+jjoint+"   joint name: "+bvh_joint+ "   vx="+ vx+"  vy="+vy+"  vz="+vz);//now
 //                    }
@@ -1080,7 +1079,6 @@ public class BVHReader implements BAPFrameEmitter {
                     //*********** end for Tardis Project
 
 
-
                     bapframe = bapconverter.setBAPframeRotation(bapframe, dict_name, q);
                     if (dict_name.equals("vt1") || dict_name.equals("vt6") || dict_name.equals("vt12")) {
                         spine_interpo.spineKeys.put(dict_name, q);
@@ -1105,15 +1103,15 @@ public class BVHReader implements BAPFrameEmitter {
     public java.io.FileFilter getFileFilter() {
         return new java.io.FileFilter() {
             @Override
-            public boolean accept(File pathname) {
+            public boolean accept(File pathName) {
                 return true;//
-                //pathname.getName().toLowerCase().endsWith(".bvh");//Today
+                //pathName.getName().toLowerCase().endsWith(".bvh");//Today
             }
         };
     }
 
     public int EulerOrder() throws FileNotFoundException, IOException {
-        BufferedReader br = ReadFile(filename);
+        BufferedReader br = ReadFile(fileName);
         String line;
         line = br.readLine();
         Hashtable tablech = new Hashtable();
@@ -1145,7 +1143,7 @@ public class BVHReader implements BAPFrameEmitter {
     public String ChannelsStyle() throws FileNotFoundException, IOException {
         //6channels style means offset and rotation; For every joint in the bvh file we have; CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
         //3channels style means only rotation (except for the hips channels); For every joint in the bvh file we have; CHANNELS 3 Yrotation Xrotation Zrotation
-        BufferedReader br = ReadFile(filename);
+        BufferedReader br = ReadFile(fileName);
         String line = br.readLine();
         String style;
         Vector channels = new Vector();

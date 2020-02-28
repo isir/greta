@@ -59,7 +59,7 @@ public interface TTS {
      * @return the audio
      */
     public Audio getAudio();
-    
+
     /**
      * Returns a boolean value indicating whether interruption reactions are supported by the TTS in use
      * @return true if interruption reactions are supported by {@code compute()}, false otherwise.

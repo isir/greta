@@ -26,47 +26,47 @@ OTHER DEALINGS IN THE SOFTWARE.
 package greta.core.animation.hmi.math.digitalfilter;
 
 /**
- * Winter's low-pass filter. This is a 2-pass Butterworth filter, in which the second 'backward' pass 
- * corrects the phase-lag introduced by 1-pass Butterworth filtering.   
+ * Winter's low-pass filter. This is a 2-pass Butterworth filter, in which the second 'backward' pass
+ * corrects the phase-lag introduced by 1-pass Butterworth filtering.
  * Implementation from:
  * Winter, David A., Biomechanics and Motor Control of Human Movement, Wiley, 2004
  * @author welberge
  */
 public class Winters
 {
-    private static void reverse(double[] b) 
+    private static void reverse(double[] b)
     {
-        int left  = 0;          
+        int left  = 0;
         int right = b.length-1;
-       
-        while (left < right) 
+
+        while (left < right)
         {
-           double temp = b[left]; 
-           b[left]  = b[right]; 
-           b[right] = temp;          
+           double temp = b[left];
+           b[left]  = b[right];
+           b[right] = temp;
            left++;
            right--;
         }
      }
-    
-    private static void reverse(double[] b, int width) 
+
+    private static void reverse(double[] b, int width)
     {
-        int left  = 0;          
+        int left  = 0;
         int right = b.length/width-1;
-       
-        while (left < right) 
+
+        while (left < right)
         {
            for(int i=0;i<width;i++)
            {
-               double temp = b[left*width+i]; 
-               b[left*width+i]  = b[right*width+i]; 
+               double temp = b[left*width+i];
+               b[left*width+i]  = b[right*width+i];
                b[right*width+i] = temp;
            }
            left++;
            right--;
         }
      }
-    
+
     /**
      * Winters-filters the data, assumes the input is aligned in blocks of width doubles
      * @param Fin input data
@@ -79,13 +79,13 @@ public class Winters
     {
         double Ftemp[] = new double[Fin.length];
         Butterworth.butterworth(Fin,fc,fs,2,width,Ftemp);
-        
+
         //2nd reverse pass to fix phase lag
-        reverse(Ftemp,width);        
+        reverse(Ftemp,width);
         Butterworth.butterworth(Ftemp,fc,fs,2,width,Fout);
         reverse(Fout,width);
     }
-    
+
     /**
      * Winters-filters the data
      * @param Fin input data
@@ -97,9 +97,9 @@ public class Winters
     {
         double Ftemp[] = new double[Fin.length];
         Butterworth.butterworth(Fin,fc,fs,1,Fout);
-        
+
         //2nd reverse pass to fix phase lag
-        reverse(Ftemp);        
+        reverse(Ftemp);
         Butterworth.butterworth(Ftemp,fc,fs,2,Fout);
         reverse(Fout);
     }

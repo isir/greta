@@ -36,7 +36,7 @@ public class VertexData extends _Object_{
         _reorganiseBuffers(getNativePointer(), newdcl.getNativePointer());
     }
     private native void _reorganiseBuffers(long thisPointer, long vertexDeclarationPinter);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

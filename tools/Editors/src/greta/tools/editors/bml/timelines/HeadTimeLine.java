@@ -33,11 +33,11 @@ import java.awt.Frame;
  * @author Andre-Marie
  */
 public class HeadTimeLine extends TimeLine<HeadSignal>{
-    
+
     private static int headSignalCount = 0;
 
     public HeadTimeLine(MultiTimeLineEditors<? extends Temporizable> _bmlEditor) {
-        super(_bmlEditor);    
+        super(_bmlEditor);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class HeadTimeLine extends TimeLine<HeadSignal>{
         while (name.length() < NUM_DISPLAYIED_DIGITS_ID) name = "0" + name;
         Signal head = SignalProvider.create("head", "head_" + name);
         headSignalCount ++;
-        
+
         if(head instanceof HeadSignal){
             head.getStart().setValue(startTime);
             head.getEnd().setValue(endTime);
@@ -99,4 +99,3 @@ public class HeadTimeLine extends TimeLine<HeadSignal>{
     }
 
 }
-

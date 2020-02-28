@@ -97,4 +97,3 @@ public class LaughPhonemSequence implements Keyframe{
     }
 
 }
-

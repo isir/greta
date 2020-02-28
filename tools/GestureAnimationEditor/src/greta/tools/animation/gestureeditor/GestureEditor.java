@@ -71,8 +71,7 @@ public class GestureEditor extends javax.swing.JFrame implements SignalEmitter, 
     private boolean canSendKeyFrames = false;
     private int newDefaultGestureAdded = -1;
     private CharacterManager cm;
-    
-    
+
 
     public GestureEditor(CharacterManager cm) {
         this.cm = cm;
@@ -1253,7 +1252,7 @@ public class GestureEditor extends javax.swing.JFrame implements SignalEmitter, 
     public void setCharacterManager(CharacterManager cm) {
         this.cm = cm;
     }
-    
+
     @Override
     protected void finalize() throws Throwable {
         cm.remove(this);

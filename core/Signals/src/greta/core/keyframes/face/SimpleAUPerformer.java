@@ -61,7 +61,7 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements Cancelable
     public void setCharacterManager (CharacterManager characterManager) {
         this.characterManager = characterManager;
     }
-    
+
     public SimpleAUPerformer (CharacterManager cm){
         characterManager = cm;
         auLibrary = new AULibrary(cm);
@@ -148,10 +148,10 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements Cancelable
     public void onCharacterChanged() {
         System.out.println("SimpleAUPerformer.onCharacterChanged(): nothing done.");
     }
-    
+
     public void UpdateLexicon(){
         //remove the old lexicon to be sure to not have two lexicons
-        this.getCharacterManager().remove(auLibrary);        
-        auLibrary = new AULibrary(this.getCharacterManager());  
+        this.getCharacterManager().remove(auLibrary);
+        auLibrary = new AULibrary(this.getCharacterManager());
     }
 }

@@ -36,9 +36,9 @@ import java.awt.Frame;
  */
 public class FaceTimeLine extends TimeLine<FaceSignal>{
     private static int faceSignalCount = 0;
-    
+
     public FaceTimeLine(MultiTimeLineEditors<? extends Temporizable> _bmlEditor) {
-        super(_bmlEditor);    
+        super(_bmlEditor);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class FaceTimeLine extends TimeLine<FaceSignal>{
         while (name.length() < NUM_DISPLAYIED_DIGITS_ID) name = "0" + name;
         Signal face = SignalProvider.create("face", "face_" + name);
         faceSignalCount ++;
-        
+
         if(face instanceof FaceSignal){
             AUExpression auExp = FaceLibrary.global_facelibrary.getAll().get(0);
             ((FaceSignal)face).setReference(auExp.getType()+"="+auExp.getInstanceName());
@@ -68,10 +68,10 @@ public class FaceTimeLine extends TimeLine<FaceSignal>{
             id += ":" + faceLib.getInstanceNameOf(temporizableContainer.getTemporizable());
         }
         catch(Exception e){}
-        
+
         return isGoodSize(id, metrics, limitSize) ? id : null;
     }
-    
+
     @Override
     protected TemporizableContainer<FaceSignal> editTemporizable(TemporizableContainer<FaceSignal> temporizableContainer){
         Container parent = this.getParent();

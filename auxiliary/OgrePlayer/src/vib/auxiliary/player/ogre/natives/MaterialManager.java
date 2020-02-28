@@ -41,8 +41,8 @@ public class MaterialManager extends _Object_ {
         return _resourceExists(getNativePointer(), materialName);
     }
     private native boolean _resourceExists(long p, String materialName);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

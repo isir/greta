@@ -112,7 +112,6 @@ public class NameChanger {
     }
 
 
-
     private static List<NameChanger> findReferencesToStyle(String styleName){
         List<NameChanger> refs = new LinkedList<NameChanger>();
         //find in modules

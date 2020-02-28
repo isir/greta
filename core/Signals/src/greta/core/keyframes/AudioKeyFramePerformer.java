@@ -41,7 +41,7 @@ public class AudioKeyFramePerformer implements KeyframePerformer, AudioEmitter {
         this.charactermanager = cm;
         this.audioPerformers = new ArrayList<AudioPerformer>();
     }
-    
+
     @Override
     public void performKeyframes(List<Keyframe> keyframes, ID requestId) {
         performKeyframes(keyframes, requestId, new Mode(CompositionType.blend));

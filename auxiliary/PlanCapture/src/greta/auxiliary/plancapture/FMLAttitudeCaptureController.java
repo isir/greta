@@ -43,7 +43,7 @@ public class FMLAttitudeCaptureController extends greta.auxiliary.player.ogre.ca
         File dir = new File("D:\\mergeMultiCharactersGaze\\bin\\Examples");
         listFiles = dir.listFiles();
     }
-    
+
     @Override
     public void screenShot() {
         mustcapture = true;
@@ -52,7 +52,7 @@ public class FMLAttitudeCaptureController extends greta.auxiliary.player.ogre.ca
             //String videoNameN = constructVideoName(f,"N");
             //String videoNameF = constructVideoName(f,"F");
             File vf = new File(videoNameH + ".avi");
-            
+
             if (!vf.exists()) {
                 try {
                     Thread.sleep(3000);
@@ -125,9 +125,9 @@ public class FMLAttitudeCaptureController extends greta.auxiliary.player.ogre.ca
                 }
             }*/
         }
-        
+
     }
-    
+
     @Override
     public void performCallback(Callback clbck) {
         if (mustcapture) {
@@ -145,18 +145,18 @@ public class FMLAttitudeCaptureController extends greta.auxiliary.player.ogre.ca
         }
     }
 
-    
+
     private String constructVideoName(File f,String appendix) {
         return f.getName().substring(0,f.getName().length()-4) + "-"+appendix;
     }
-    
+
     public void setFMLFileReader(FMLFileReader ffr){
         this.filereader = ffr;
     }
 
     @Override
     public void performSocialParameter(List<SocialParameterFrame> frames, ID requestId) {
-        
+
         if (frames.size() > 0) {
             this.sap = (frames.get(frames.size() - 1));
         }

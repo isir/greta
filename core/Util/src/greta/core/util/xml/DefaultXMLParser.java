@@ -71,16 +71,16 @@ public class DefaultXMLParser implements XMLParser{
         parser.setErrorHandler(handler);
     }
 
-    private Schema getSchema(String filename){
-        Schema schem = schemas.get(filename);
+    private Schema getSchema(String fileName){
+        Schema schem = schemas.get(fileName);
         if(schem == null){
             try {
-                schem = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(new File(filename));
+                schem = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI).newSchema(new File(fileName));
             }
             catch (SAXException ex) {
-                Logs.error("DefaultXMLParser.getSchema("+filename+") :\n"+ex.toString());
+                Logs.error("DefaultXMLParser.getSchema("+fileName+") :\n"+ex.toString());
             }
-            schemas.put(filename, schem);
+            schemas.put(fileName, schem);
         }
         return schem;
     }
@@ -89,24 +89,24 @@ public class DefaultXMLParser implements XMLParser{
         val = validating;
     }
 
-    public XMLTree parseFile(String filename) {
+    public XMLTree parseFile(String fileName) {
         try {
             instanciateParser(null);
-            return new DefaultXMLTree(parser.parse(new File(filename)).getDocumentElement());
+            return new DefaultXMLTree(parser.parse(new File(fileName)).getDocumentElement());
         }
         catch (Exception ex) {
-            Logs.error("DefaultXMLParser.parseFile("+filename+") :\n"+ex.toString());
+            Logs.error("DefaultXMLParser.parseFile("+fileName+") :\n"+ex.toString());
         }
         return null;
     }
 
-    public XMLTree parseFileWithXSD(String filename, String filenameXSD) {
+    public XMLTree parseFileWithXSD(String fileName, String fileNameXSD) {
         try {
-            instanciateParser(getSchema(filenameXSD));
-            return new DefaultXMLTree(parser.parse(new File(filename)).getDocumentElement());
+            instanciateParser(getSchema(fileNameXSD));
+            return new DefaultXMLTree(parser.parse(new File(fileName)).getDocumentElement());
         }
         catch (Exception ex) {
-            Logs.error("DefaultXMLParser.parseFileWithXSD("+filename+", "+filenameXSD+") :\n"+ex.toString());
+            Logs.error("DefaultXMLParser.parseFileWithXSD("+fileName+", "+fileNameXSD+") :\n"+ex.toString());
         }
         return null;
     }
@@ -122,13 +122,13 @@ public class DefaultXMLParser implements XMLParser{
         return null;
     }
 
-    public XMLTree parseBufferWithXSD(String buffer, String filenameXSD) {
+    public XMLTree parseBufferWithXSD(String buffer, String fileNameXSD) {
         try {
-            instanciateParser(getSchema(filenameXSD));
+            instanciateParser(getSchema(fileNameXSD));
             return new DefaultXMLTree(parser.parse(new InputSource(new StringReader(buffer))).getDocumentElement());
         }
         catch (Exception ex) {
-            Logs.error("DefaultXMLParser.parseBufferWithXSD(\"...\", "+filenameXSD+") :\n"+ex.toString());
+            Logs.error("DefaultXMLParser.parseBufferWithXSD(\"...\", "+fileNameXSD+") :\n"+ex.toString());
         }
         return null;
     }

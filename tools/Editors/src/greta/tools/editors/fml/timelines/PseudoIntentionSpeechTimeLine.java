@@ -30,7 +30,7 @@ import java.awt.FontMetrics;
  */
 public class PseudoIntentionSpeechTimeLine extends TimeLine<PseudoIntentionSpeech> {
     private CharacterManager cm;
-    
+
     public PseudoIntentionSpeechTimeLine(CharacterManager cm){
         this.cm = cm;
     }

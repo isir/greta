@@ -24,13 +24,13 @@ package greta.core.SubjectPlanner;
 public class PolitenessStrategy {
 
     int PolitenessLevel = 0;
-    
+
     UserEngagement userEng = new UserEngagement();
 //    double userEngagementValue = userEng.GetUserEngagementValue();
-    
+
     AgentEngagement agentEng = new AgentEngagement();
 //    double agentEngagementValue = agentEng.GetAgentEngagementValue();
-    
+
     public double GetThreat(double agentPreference, double userPreference) {
         double threat;
         double distance = 0;

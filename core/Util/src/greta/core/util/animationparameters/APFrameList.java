@@ -90,7 +90,7 @@ public class APFrameList <APF extends AnimationParametersFrame> {
     public synchronized List<APF> getListCopy () {
         return new ArrayList<>(apFrameList);
     }
-    
+
     private void blend (APF firstAPFrame, APF newAPFrame) {
         for (int i = 0; i < newAPFrame.size(); ++i) {
             AnimationParameter ap = (AnimationParameter) newAPFrame.getAnimationParametersList().get(i);

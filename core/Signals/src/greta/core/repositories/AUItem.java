@@ -141,4 +141,3 @@ public class AUItem {
         return numero == other.numero && intensity == other.intensity && side == other.side;
     }
 }
-

@@ -94,7 +94,7 @@ public class MixerSource{
                     format,
                     buffer.length / format.getFrameSize()));
     }
-    
+
     private void updateCurrentAudioBufferPos(long read){
         int reallyRead = (int)(read * currentAudio.getFormat().getFrameRate() * currentAudio.getFormat().getFrameSize() / (Audio.GRETA_AUDIO_FORMAT.getFrameRate() * Audio.GRETA_AUDIO_FORMAT.getFrameSize()));
         currentAudio.addToPlayingBufferPos(reallyRead);
@@ -157,7 +157,7 @@ public class MixerSource{
 
 
     private synchronized void read() throws IOException{
-        
+
         if (Mixer.blocking) {
             int read = audioInputStream.read(frameBuffer, 0, Mixer.BUFFER_SIZE);
             if(read<Mixer.BUFFER_SIZE)
@@ -175,7 +175,7 @@ public class MixerSource{
             fill0(read, Mixer.BUFFER_SIZE - read);
         }
         else {
-        
+
             int pos = 0;
             long currentTime = Timer.getTimeMillis();
             if(currentTime<audioTime){

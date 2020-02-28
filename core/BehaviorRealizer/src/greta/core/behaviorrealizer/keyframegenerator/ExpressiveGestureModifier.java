@@ -103,7 +103,7 @@ public class ExpressiveGestureModifier implements GestureModifier {
         }
     }
 
-//    
+//
 //    @Override
 //    public void generateKeyframesForOneGesture(GestureSignal gesture, List<GestureKeyframe> outputKeyframes) {
 //
@@ -132,7 +132,7 @@ public class ExpressiveGestureModifier implements GestureModifier {
 //
 //        List<ExpressivePose> newposes = new ArrayList<ExpressivePose>();
 //        createPoseKeyFrame(newposes, startTime, gesture.getStartRestPose(), epprep);
-//        
+//
 //        if (!poses.isEmpty()) {
 //            double strokeTime = gesture.getTimeMarker("stroke-start").getValue();
 //
@@ -168,7 +168,7 @@ public class ExpressiveGestureModifier implements GestureModifier {
 //        if (lastTime < endTime) {
 //            createPoseKeyFrame(newposes, endTime, gesture.getEndRestPose(), epretr);
 //        }
-//        
+//
 //        //modifyGesturePose(newposes);
 //
 //        for (ExpressivePose pose : newposes) {
@@ -225,15 +225,15 @@ public class ExpressiveGestureModifier implements GestureModifier {
 //        Vec3d ls = new Vec3d(leftS.getPosition().getX(), leftS.getPosition().getY(), leftS.getPosition().getZ());
 //        Hand rightS = poseS.getRightHand();
 //        Vec3d rs = new Vec3d(rightS.getPosition().getX(), rightS.getPosition().getY(), rightS.getPosition().getZ());
-//        
-//        
+//
+//
 //        GesturePose poseE = poses.get(size - 1).pose;
 //        double tE = poses.get(size - 1).time;
 //        Hand leftE = poseE.getLeftHand();
 //        Vec3d le = new Vec3d(leftE.getPosition().getX(), leftE.getPosition().getY(), leftE.getPosition().getZ());
 //        Hand rightE = poseE.getRightHand();
 //        Vec3d re = new Vec3d(rightE.getPosition().getX(), rightE.getPosition().getY(), rightE.getPosition().getZ());
-//        
+//
 //        double dur = tE - tS;
 //        for (int i = 1; i < size - 1; ++i) {
 //            ExpressivePose expose = poses.get(i);

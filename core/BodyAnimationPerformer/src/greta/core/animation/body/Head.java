@@ -72,5 +72,5 @@ public class Head extends ExpressiveFrame {
         return new Head(this);
     }
 
-  
+
 }

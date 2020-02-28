@@ -25,5 +25,5 @@ public interface MovableObject {
 
     long getNativePointer();
     public void detatchFromParent();
-    
+
 }

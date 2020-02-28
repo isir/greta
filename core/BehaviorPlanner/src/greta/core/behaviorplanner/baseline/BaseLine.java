@@ -44,8 +44,8 @@ public class BaseLine extends EngineParameterSetOfSet implements CharacterDepend
         setCharacterManager(cm);
         set(cm.getDefaultValueString(CHARACTER_PARAMETER_BASELINE));
         //load additionnal baseLines :
-        for(String filename : cm.getAllValuesString(CHARACTER_PARAMETER_BASELINE)) {
-            add(filename);
+        for(String fileName : cm.getAllValuesString(CHARACTER_PARAMETER_BASELINE)) {
+            add(fileName);
         }
 
         //set the current baseLines to use :
@@ -56,7 +56,7 @@ public class BaseLine extends EngineParameterSetOfSet implements CharacterDepend
     public void onCharacterChanged() {
         set(getCharacterManager().getValueString(CHARACTER_PARAMETER_BASELINE));
     }
-    
+
     private CharacterManager characterManager;
 
     /**

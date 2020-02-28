@@ -84,8 +84,8 @@ public class Audio {
         return getAudio(new FileInputStream(file));
     }
 
-    public static Audio getAudio(String filename) throws IOException, UnsupportedAudioFileException{
-        return getAudio(new FileInputStream(filename));
+    public static Audio getAudio(String fileName) throws IOException, UnsupportedAudioFileException{
+        return getAudio(new FileInputStream(fileName));
     }
 
     public static Audio getEmptyAudio(){
@@ -101,7 +101,7 @@ public class Audio {
     private int playingBufferPos;
     public final static int PLAYING_BUFFER_POSITION_SCHEDULED = -1;
     public final static int PLAYING_BUFFER_POSITION_FINISHED = -2;
-    
+
     public Audio(AudioFormat format, byte[] audioBuffer) {
         this(format, audioBuffer, 1, 0);
     }
@@ -127,18 +127,18 @@ public class Audio {
         this.playingBufferPos = other.playingBufferPos;
     }
 
-    public synchronized void setPlayingBufferPos(int pos) {        
+    public synchronized void setPlayingBufferPos(int pos) {
         playingBufferPos = pos;
     }
-    
+
     public synchronized void addToPlayingBufferPos(int toAdd) {
         playingBufferPos+= toAdd;
     }
-    
+
     public synchronized int getPlayingBufferPos() {
         return playingBufferPos;
     }
-    
+
     public AudioFormat getFormat() {
         return format;
     }
@@ -164,7 +164,7 @@ public class Audio {
         return baseVolume;
     }
     /**
-     * 
+     *
      * @param baseVolume Multiplier: >1 increases volume, <1 decreases volume
      */
     public void setBaseVolume(double baseVolume) {
@@ -248,19 +248,19 @@ public class Audio {
     }
     /**
      * Saves this {@code Audio} in a specific file.
-     * @param filename the name of the target file.
+     * @param fileName the name of the target file.
      */
-    public void save(String filename){
-        save(filename, null);
+    public void save(String fileName){
+        save(fileName, null);
     }
 
     /**
      * Saves this {@code Audio} in a specific file.
-     * @param filename the name of the target file.
+     * @param fileName the name of the target file.
      * @param targetFormat the wanted audio format.
      */
-    public void save(String filename, AudioFormat targetFormat){
-        save(new File(filename), targetFormat);
+    public void save(String fileName, AudioFormat targetFormat){
+        save(new File(fileName), targetFormat);
     }
 
     private AudioInputStream weMustKnowTheLengthToSave(AudioInputStream weWantToKnow) throws IOException{

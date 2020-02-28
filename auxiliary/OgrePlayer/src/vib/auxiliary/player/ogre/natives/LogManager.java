@@ -23,10 +23,10 @@ package vib.auxiliary.player.ogre.natives;
  */
 public class LogManager {
 
-    
+
 //        greta.auxiliary.player.ogre.natives.LogManager.getSingleton().setLogDetail(greta.auxiliary.player.ogre.natives.LoggingLevel.LL_BOREME);
     public static native void set_LL_BOREME();
 
     public static native void set_LL_LOW();
-    
+
 }

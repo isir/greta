@@ -16,7 +16,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 
 /**
  * Same as {@link ShaderExample} but only using OpenGL 1.1 and the ARB shader extensions.
- * 
+ *
  * @author Kai Burjack
  */
 public class ShaderExample11 {
@@ -93,27 +93,27 @@ public class ShaderExample11 {
         glVertex3f( -0.5f, -0.5f, -0.5f );
         glVertex3f( -0.5f,  0.5f, -0.5f );
         glVertex3f(  0.5f,  0.5f, -0.5f );
-        
+
         glVertex3f(  0.5f, -0.5f,  0.5f );
         glVertex3f(  0.5f,  0.5f,  0.5f );
         glVertex3f( -0.5f,  0.5f,  0.5f );
         glVertex3f( -0.5f, -0.5f,  0.5f );
-        
+
         glVertex3f(  0.5f, -0.5f, -0.5f );
         glVertex3f(  0.5f,  0.5f, -0.5f );
         glVertex3f(  0.5f,  0.5f,  0.5f );
         glVertex3f(  0.5f, -0.5f,  0.5f );
-        
+
         glVertex3f( -0.5f, -0.5f,  0.5f );
         glVertex3f( -0.5f,  0.5f,  0.5f );
         glVertex3f( -0.5f,  0.5f, -0.5f );
         glVertex3f( -0.5f, -0.5f, -0.5f );
-        
+
         glVertex3f(  0.5f,  0.5f,  0.5f );
         glVertex3f(  0.5f,  0.5f, -0.5f );
         glVertex3f( -0.5f,  0.5f, -0.5f );
         glVertex3f( -0.5f,  0.5f,  0.5f );
-        
+
         glVertex3f(  0.5f, -0.5f, -0.5f );
         glVertex3f(  0.5f, -0.5f,  0.5f );
         glVertex3f( -0.5f, -0.5f,  0.5f );
@@ -151,18 +151,18 @@ public class ShaderExample11 {
         // Create a simple shader program
         int program = glCreateProgramObjectARB();
         int vs = glCreateShaderObjectARB(GL_VERTEX_SHADER_ARB);
-        glShaderSourceARB(vs, 
-                "uniform mat4 viewProjMatrix;" + 
-                "void main(void) {" + 
-                "  gl_Position = viewProjMatrix * gl_Vertex;" + 
+        glShaderSourceARB(vs,
+                "uniform mat4 viewProjMatrix;" +
+                "void main(void) {" +
+                "  gl_Position = viewProjMatrix * gl_Vertex;" +
                 "}");
         glCompileShaderARB(vs);
         glAttachObjectARB(program, vs);
         int fs = glCreateShaderObjectARB(GL_FRAGMENT_SHADER_ARB);
         glShaderSourceARB(fs,
                 "uniform vec3 color;" +
-                "void main(void) {" + 
-                "  gl_FragColor = vec4(color, 1.0);" + 
+                "void main(void) {" +
+                "  gl_FragColor = vec4(color, 1.0);" +
                 "}");
         glCompileShaderARB(fs);
         glAttachObjectARB(program, fs);

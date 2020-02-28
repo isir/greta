@@ -20,7 +20,7 @@ package greta.core.animation.rbdl;
 /**
  *
  * @author Jing Huang
- * 
+ *
  */
 public interface BaseController{
 

@@ -574,8 +574,8 @@ public class ModularWindow extends javax.swing.JFrame {
             jar.setMainClass(generatedSourceCode.getQualifiedName());
             for(Library lib : generatedSourceCode.getLibrariesNeeded()){
                 jar.addLib(lib.getFileName());
-                for(String neededfilename : lib.getAllNeededFilesAndLibs()) {
-                    zip.addFile(neededfilename);
+                for(String neededFileName : lib.getAllNeededFilesAndLibs()) {
+                    zip.addFile(neededFileName);
                 }
             }
 //            jar.setStandAlone(true);

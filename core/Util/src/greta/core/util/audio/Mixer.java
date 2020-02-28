@@ -53,7 +53,7 @@ public class Mixer extends TreeNode implements EnvironmentEventListener {
     private Environment env;
     private ArrayList<AudioOutput> outputs;
     private ArrayList<NormalizedAudioOutput> normalizedOutputs;
-    
+
     public static boolean blocking = true;
     public static int notBlockingRequests = 0;
 
@@ -107,7 +107,7 @@ public class Mixer extends TreeNode implements EnvironmentEventListener {
                     while(player==this){
                         long currentframe = Timer.getTimeMillis()/frameDuration;
                         Mixer.this.update();
-                        
+
                         if (!blocking) {
                             long wait = Math.max(0, (currentframe+1)*frameDuration - Timer.getTimeMillis());
                             Timer.sleep(wait);
@@ -284,17 +284,17 @@ public class Mixer extends TreeNode implements EnvironmentEventListener {
             sourceUpdater.updateSource(source);
         }
     }
-    
-    
+
+
     public static void checkBlocking(){
         Mixer.blocking = (notBlockingRequests==0);
     }
-    
+
     public static void requestNotBlocking(){
         notBlockingRequests++;
        checkBlocking();
     }
-    
+
     public static void releaseNotBlocking(){
         notBlockingRequests--;
         checkBlocking();

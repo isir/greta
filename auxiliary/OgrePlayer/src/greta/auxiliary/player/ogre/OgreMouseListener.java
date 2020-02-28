@@ -91,7 +91,7 @@ public class OgreMouseListener implements MouseListener, MouseWheelListener, Mou
                 Ray ray = camera.getOgreCamera().getCameraToViewportRay(
                         (float) x / (float) view.getWidth(),
                         (float) y / (float) view.getHeight());
-                
+
                 RaySceneQuery query = camera.getOgreCamera().getSceneManager().createRayQuery(ray);
                 query.setSortByDistance(true, 0);
 
@@ -101,7 +101,7 @@ public class OgreMouseListener implements MouseListener, MouseWheelListener, Mou
                 if(SHOW_MOUSE_BALL) {
                     marqueur.setVisible(false);
                 }
-                
+
                 for (int i = 0; i < result.size() && pivot == null; ++i) {
                     if (result.at(i).distance() > 0) {
                         pivot = Ogre.convert(ray.getPoint(result.at(i).distance()));

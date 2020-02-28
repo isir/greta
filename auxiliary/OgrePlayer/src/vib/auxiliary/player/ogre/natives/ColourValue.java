@@ -30,10 +30,10 @@ public class ColourValue extends _Object_ {
         super(_instanciate(r, g, b, alpha));
         this.gcMustDeleteThat(true);
     }
-    
+
     private static native long _instanciate(double r, double g, double b, double alpha);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

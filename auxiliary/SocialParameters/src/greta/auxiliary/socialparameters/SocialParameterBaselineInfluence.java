@@ -27,40 +27,40 @@ import java.util.List;
  * @author Angelo
  */
 public class SocialParameterBaselineInfluence extends CharacterDependentAdapter implements SocialParameterPerformer {
-    
+
     private double currentLikingValue = -2;
     @Override
     public void performSocialParameter(List<SocialParameterFrame> frames, ID requestId) {
-        
+
         // Check if the list is empty
         if (!frames.isEmpty())
         {
             // Get the first for the moment
             SocialParameterFrame spf = frames.get(0);
-            
+
             double newLikingValue = spf.getDoubleValue(SocialDimension.Liking);
             if (newLikingValue <= -0.5) {
                 newLikingValue = -1;
             }
-            else if (newLikingValue >= 0.5) 
+            else if (newLikingValue >= 0.5)
             {
                 newLikingValue = 1.0;
-            } 
+            }
             else {
                 newLikingValue = 0.0;
-            } 
-            
+            }
+
             if (newLikingValue != currentLikingValue) {
-                
+
                 Logs.info("New Liking Value received [" + newLikingValue + "] changing baseline");
-                
+
                 if (newLikingValue < -0.5) {
                     getCharacterManager().setValueString("BASELINE", "./BehaviorPlanner/Baseline/baseline_angry.xml");
                 }
-                else if (newLikingValue >= 0.5) 
+                else if (newLikingValue >= 0.5)
                 {
                     getCharacterManager().setValueString("BASELINE", "./BehaviorPlanner/Baseline/baseline_happy_medium.xml");
-                } 
+                }
                 else {
                     getCharacterManager().setValueString("BASELINE", "./BehaviorPlanner/Baseline/baseline_neutral.xml");
                 }
@@ -73,5 +73,5 @@ public class SocialParameterBaselineInfluence extends CharacterDependentAdapter 
     public void onCharacterChanged() {
         Logs.info("SocialParameterBaselineInfluence.onCharacterChanged(): nothing to do");
     }
-    
+
 }

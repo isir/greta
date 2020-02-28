@@ -192,12 +192,6 @@ public class PlanCapturecontroller extends greta.auxiliary.player.ogre.capture.C
     }
 
 
-
-
-
-
-
-
     @Override
     public void addSignalPerformer(SignalPerformer sp) {
         if (sp != null) {
@@ -220,8 +214,6 @@ public class PlanCapturecontroller extends greta.auxiliary.player.ogre.capture.C
         temporizer.temporize();
 
 
-
-
         combiList = new ArrayList<List<Signal>>();
         //for each intention :
         for (Intention intention : list) {
@@ -239,8 +231,6 @@ public class PlanCapturecontroller extends greta.auxiliary.player.ogre.capture.C
             SignalSelector selector = signalSelector;
 
 
-
-
             BehaviorSet set = lexicon.fromIntentionToBehaviorSet(intention, selector.getType());
             List<? extends List<SignalItem>> combis = set.getCombinations();
 
@@ -249,7 +239,6 @@ public class PlanCapturecontroller extends greta.auxiliary.player.ogre.capture.C
             for (List<SignalItem> combi : combis) {
                 combiList.addAll(recursiveCombinate(combi));
             }
-
 
 
             //reset character playing

@@ -78,7 +78,7 @@ public class BodySkeleton {
                 if( ! parent.isNull())
                 originalderivedOrientation[i][0] = Ogre.convert(parent._getDerivedOrientation());
                 else{
-                    
+
                 originalderivedOrientation[i][0] = new greta.core.util.math.Quaternion();
                 }
             } catch (Throwable t) {

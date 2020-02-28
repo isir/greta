@@ -68,7 +68,6 @@ public class MSESelector implements SignalSelector {
         }
 
 
-
         /*
          List<List<SignalItem>> candidates = new ArrayList<List<SignalItem>>();
 

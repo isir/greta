@@ -219,7 +219,6 @@ public class ConnectionPossibilities extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextPane jTextArea1;

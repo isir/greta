@@ -29,14 +29,14 @@ import java.util.ArrayList;
  * @author Mathieu
  */
 public class SkeletonToBVH {
-    
+
     private ArrayList<String> jointTypeOrder;
-    
+
     public SkeletonToBVH()
     {
         jointTypeOrder = new ArrayList<String>();
     }
-    
+
     public String frame2BVHFrameString(Frame fr)
     {
         String line ="\n";
@@ -52,16 +52,16 @@ public class SkeletonToBVH {
             Vec3d angle = r.getEulerAngleXYZByAngle();
             line += angle.z() + " ";
             line += angle.y() + " ";
-            line += angle.x() + " "; 
+            line += angle.x() + " ";
         }
-        
+
         /*for(int i=0;i<bapfr.getAnimationParametersList().size();i++)
         {
             line+=bapfr.getAnimationParameter(i).getDegreeValue()+" ";
         }*/
         return line;
     }
-    
+
     public String writeBVHHeaderFromSkeleton(Skeleton skeleton)
     {
         Joint root = skeleton.getJoint(0);
@@ -75,11 +75,11 @@ public class SkeletonToBVH {
         bvhfile+="}\nMOTION\n";
         return bvhfile;
     }
-    
+
     private String readJoint(Joint jnt, Skeleton skeleton, boolean rootJoint,int indentLevel)
     {
         jointTypeOrder.add(jnt.getName());
-        
+
         String jointLines="";
         jointLines+=indent("OFFSET "+
                 jnt.getLocalPosition().x()+" "+
@@ -94,7 +94,7 @@ public class SkeletonToBVH {
         {
             jointLines+="3 Zrotation Yrotation Xrotation\n";
         }
-        
+
         boolean removeFakeEndSites =false;
         for(int jid : jnt.getChildren())
         {
@@ -104,8 +104,8 @@ public class SkeletonToBVH {
                 removeFakeEndSites = true;
             }
         }
-        
-        
+
+
         for(int jid : jnt.getChildren())
         {
             Joint j = skeleton.getJoint(jid);
@@ -129,16 +129,16 @@ public class SkeletonToBVH {
         }
         return jointLines;
     }
-    
+
     private String readEndSite(Joint jnt, int indentLevel)
     {
         String jointLines=indent("OFFSET "+
                 jnt.getLocalPosition().x()+" "+
                 jnt.getLocalPosition().y()+" "+
                 jnt.getLocalPosition().z()+"\n",indentLevel);
-        return jointLines;        
+        return jointLines;
     }
-    
+
     private String indent(String s,int indentLevel)
     {
         String indented="";

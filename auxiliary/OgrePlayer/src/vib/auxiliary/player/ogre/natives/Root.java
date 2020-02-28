@@ -43,7 +43,7 @@ public class Root extends _Object_ {
     }
 //        root.setRenderSystem(root.getRenderSystemByName(name));
     private native void _setRenderSystem(long p, String name);
-    
+
 
     public void shutdown() {
         _shutdown(getNativePointer());
@@ -79,7 +79,7 @@ public class Root extends _Object_ {
         return new RenderWindow(_createRenderWindow(getNativePointer(), string, width, height, b, params.getNativePointer()));
     }
     private native long _createRenderWindow(long p, String string, int width, int height, boolean b, long params);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

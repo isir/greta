@@ -51,7 +51,7 @@ public class SkeletonInstance extends _Object_ {
         return new Bone(_getBone(getNativePointer(), i));
     }
     private native long _getBone(long p, int index);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

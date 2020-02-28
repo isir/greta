@@ -41,7 +41,7 @@ public class SequenceConverter {
             for (String name : frame.getValues().keySet()) {
                 BVHChannel channel = frame.getValues().get(name);
                 Quaternion q = channel.getRotation();
-                
+
                 if(rotate90y && name.equalsIgnoreCase("Hips")){
                     Quaternion qR = new Quaternion();
                     //System.out.println(name + q.getEulerAngleXYZByAngle());
@@ -50,13 +50,13 @@ public class SequenceConverter {
                     //System.out.println(q.getEulerAngleXYZByAngle());
                     //System.out.println();
                 }
-                
+
                 if(channel.has6DOF()){
                     Vec3d t = channel.getTranslation();
-                   
+
                     //Quaternion qy = new Quaternion();
                     //qy.fromEulerXYZ(0, -3.14f/2.0f, 0);
-                    
+
 //                    if (!t.equals(new Vec3d())) {
 //                        if (i == 0) {
 //                            f.setRootTranslation(baseT);

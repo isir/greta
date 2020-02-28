@@ -127,7 +127,7 @@ public class LwjglDemo {
         long firstTime = System.nanoTime();
 
         while ( !glfwWindowShouldClose(window) ) {
-            // Build time difference between this and first time. 
+            // Build time difference between this and first time.
             long thisTime = System.nanoTime();
             float diff = (thisTime - firstTime) / 1E9f;
             // Compute some rotation angle.
@@ -159,7 +159,7 @@ public class LwjglDemo {
             glMatrixMode(GL_MODELVIEW);
             glLoadMatrixf(fb);
 
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             // Render a simple cube
             renderCube();

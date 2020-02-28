@@ -54,7 +54,6 @@ public class HandShapeFrameGenerator extends Thread {
                     HashMap<String, JointFrame> r1 = info1.getJointFrames();
 
 
-
                     ArrayList<KeyFrame> currentFrames = new ArrayList<KeyFrame>();
                     for (int j = 0; j < frames; ++j) {
                         double currenttime = (double) (t0 + (double) j / (double) KeyFrame.getFramePerSecond());

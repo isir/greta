@@ -286,7 +286,7 @@ public class MatrixMN {
     }
     else {
       //R_plus= new MatrixMN(1, numCols);
-        R_plus= new MatrixMN(1, numRows);  //I modified make 
+        R_plus= new MatrixMN(1, numRows);  //I modified make
     }
 
     while(k< this.numCols) {
@@ -317,7 +317,7 @@ public class MatrixMN {
 	  R_plus.elements[r][c]= N.elements[r][c];
       for(c=0; c<N.numCols; c++)
 	R_plus.elements[R_plus.numRows-1][c]= bk.elements[0][c];
-      
+
       k++;
     }
     return R_plus;

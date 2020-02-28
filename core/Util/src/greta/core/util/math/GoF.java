@@ -47,7 +47,6 @@ public class GoF implements Function{
     }
 
 
-
     @Override
     public Function getDerivative() {
         Function fprim = f.getDerivative();

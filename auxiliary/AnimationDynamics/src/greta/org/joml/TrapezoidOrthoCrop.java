@@ -38,7 +38,7 @@ import java.util.Comparator;
  * IN NON-COMMERCIAL APPLICATIONS BUT YOU HAVE TO CONTACT THE PATENT HOLDER AND PAY THEM SOME FEE IF YOU WANT TO USE
  * THE ALGORITHM BEFORE JUL 30TH, 2024 IN COMMERCIAL APPLICATIONS. SEE THE SECOND PARAGRAPH OF <a href="http://www.comp.nus.edu.sg/~tants/tsm.html">THIS SITE</a>
  * UNDER SECTION "ABSTRACT" FOR MORE INFORMATION.
- * 
+ *
  * @author Kai Burjack
  */
 public class TrapezoidOrthoCrop {
@@ -58,12 +58,12 @@ public class TrapezoidOrthoCrop {
     }
 
     /**
-     *  
+     *
      */
     public static float START_PRECENTAGE = 0.95f;
 
     /**
-     *  
+     *
      */
     public static float FOCUS_LINE_FRACTION = 0.3f;
 
@@ -117,9 +117,9 @@ public class TrapezoidOrthoCrop {
      * Compute the trapezoidal transformation based on the given camera view-projection and light view transformation
      * and store the resulting matrix into <code>dest</code>.
      * <p>
-     * The transformation matrix computed by this method can be applied to coordinates in light's view-space to obtain the 
+     * The transformation matrix computed by this method can be applied to coordinates in light's view-space to obtain the
      * coordinates on trapezoidal texture space.
-     * 
+     *
      * @param camViewProj
      *          the view-projection transformation of a typical perspective camera
      * @param lightView
@@ -152,7 +152,7 @@ public class TrapezoidOrthoCrop {
 
     /**
      * Compute the trapezoid and the final transformation matrix.
-     * 
+     *
      * References:
      * <ul>
      * <li><a href="https://kenai.com/downloads/wpbdc/Documents/tsm.pdf">Notes On Implementation Of Trapezoidal Shadow Maps</a>
@@ -273,7 +273,7 @@ public class TrapezoidOrthoCrop {
 
     /**
      * Compute the convex hull of the view-projected camera frustum corners.
-     * 
+     *
      * Reference: <a href="http://www.algorithmist.com/index.php/Monotone_Chain_Convex_Hull.java">Monotone_Chain_Convex_Hull.java</a>
      */
     private void computeConvexHull() {

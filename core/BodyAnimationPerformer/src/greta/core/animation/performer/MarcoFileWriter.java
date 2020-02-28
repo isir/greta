@@ -28,21 +28,21 @@ import java.util.ArrayList;
  * @author Jing Huang
  */
 public class MarcoFileWriter {
-    static public void writeFile(String filename, ArrayList<Skeleton> sks){
+    static public void writeFile(String fileName, ArrayList<Skeleton> sks){
          try {
             java.io.FileWriter fos;
-            if (new File(filename).exists()) {
-                fos = new java.io.FileWriter(filename, true);
+            if (new File(fileName).exists()) {
+                fos = new java.io.FileWriter(fileName, true);
 
                 //TODO rewrite header
 
             } else {
-                fos = new java.io.FileWriter(filename);
-                //String first_line = "2.1 " + filename + " " + Constants.FRAME_PER_SECOND + " " + bapframes.size() + "\n"; // is it good?
+                fos = new java.io.FileWriter(fileName);
+                //String first_line = "2.1 " + fileName + " " + Constants.FRAME_PER_SECOND + " " + bapframes.size() + "\n"; // is it good?
                 //fos.write(first_line);
             }
-           
-           
+
+
             for (int i = 0; i < sks.size(); ++i) {
                 fos.write(i + "\n");
                 i++;
@@ -51,7 +51,7 @@ public class MarcoFileWriter {
                     fos.write(j.getName() + " "+ j.getPosition().x() +" "+ j.getPosition().y() +" "+ j.getPosition().z() +" " +j.getLocalRotation().x() + " "+ j.getLocalRotation().y() + " "+j.getLocalRotation().z() + " "+j.getLocalRotation().w() + "\n");
                 }
             }
-          
+
             fos.close();
         } catch (Exception ignored2) {
             Logs.warning("Error saving file: " + ignored2);

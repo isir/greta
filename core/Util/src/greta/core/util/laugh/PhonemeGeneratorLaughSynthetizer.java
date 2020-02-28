@@ -50,13 +50,13 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
        ArrayList <Integer> dataList = new ArrayList <Integer>();
        Scanner scannerSample;
                         try {
-                            scannerSample= new Scanner(new File(signalPath)); 
+                            scannerSample= new Scanner(new File(signalPath));
                             scannerSample.useLocale(Locale.ENGLISH);
                             int i = 0;
                             while(scannerSample.hasNextInt()){
-                                  dataList.add(scannerSample.nextInt()); 
+                                  dataList.add(scannerSample.nextInt());
                                   i++;
-                            }                    
+                            }
                         }
                         catch(FileNotFoundException e){
                             e.printStackTrace();
@@ -67,21 +67,21 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 data[i] = dataList.get(i);
             }
        return data;
-    }        
-    
+    }
+
     public double[] readDoubleStream(String signalPath)
     {
         ArrayList <Double> dataList = new ArrayList <Double>();
         Scanner scannerSamplePitch;
                         try {
-                            scannerSamplePitch= new Scanner(new File(signalPath)); 
+                            scannerSamplePitch= new Scanner(new File(signalPath));
                             scannerSamplePitch.useLocale(Locale.ENGLISH);
                             int i = 0;
                             while(scannerSamplePitch.hasNextDouble()){
-                                  dataList.add(scannerSamplePitch.nextDouble());  
+                                  dataList.add(scannerSamplePitch.nextDouble());
                                   i++;
-                            }       
-                            System.out.println("    ");  
+                            }
+                            System.out.println("    ");
                         }
                         catch(FileNotFoundException e){
                             e.printStackTrace();
@@ -90,10 +90,10 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
             for (int i=0; i < dataList.size(); i++)
             {
                 data[i] = dataList.get(i);
-            }       
+            }
        return data;
-    } 
-    
+    }
+
     public void delete0DurationPhoneme(ArrayList <Integer> phoSeqList, ArrayList <Integer> durSeqList, int[] phoSeqIndex0, int[] durSeq0)
     {
                 for (int i=0; i<durSeq0.length; i++){
@@ -105,7 +105,7 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
     }
     public void setPhonemeDurationSequence(int[] phoSeqIndex, int[] durSeq, ArrayList <Integer> phoSeqList, ArrayList <Integer> durSeqList)
     {
-                for (int i=0; i<phoSeqList.size(); i++){ 
+                for (int i=0; i<phoSeqList.size(); i++){
                     phoSeqIndex[i] = phoSeqList.get(i);
                     if ((phoSeqIndex[i]==11)||(phoSeqIndex[i]==13)||(phoSeqIndex[i]==14)){
                         phoSeqIndex[i]=4;
@@ -113,18 +113,18 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 }
                 for (int i=0; i<durSeqList.size(); i++){
                     durSeq[i] = durSeqList.get(i);
-                } 
+                }
     }
-    
+
     public int getLengthAllPhonemesLHMMFrequence(int[] durSeqLHMMFrequence)
     {
                 int lengthAllPhonemesLHMMFrequence = 0;
                 for (int nbDur = 0; nbDur<durSeqLHMMFrequence.length; nbDur++){
                     lengthAllPhonemesLHMMFrequence = lengthAllPhonemesLHMMFrequence + durSeqLHMMFrequence[nbDur];
-                }       
+                }
                 return lengthAllPhonemesLHMMFrequence;
     }
-        
+
     public double[] setPhoIntensityByFrame(double[] phoIntensityByFrame, double[] phonemeIntensity, int[] durSeqLHMMFrequence)
     {
     //=======================================//
@@ -138,7 +138,7 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
     //=======================================//
                 return phoIntensityByFrame;
     }
-    
+
     @Override
     @SuppressWarnings("empty-statement")
     public void compute(boolean doTemporize, boolean doAudio, boolean doPhonemes) {
@@ -147,7 +147,7 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
         int phoSeqIndex[] = null;
         int durSeq[] = null;
         int durSeqLHMMFrequence[] = null;
-        
+
         double frameRate = Constants.FRAME_PER_SECOND;
 
 
@@ -182,90 +182,90 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 System.out.println("selected audio =:  "+audioFileName);
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
-                }                
+                }
             }
             else if ((duration >= 25) && (duration <= 30) && (intensity > 0.7)){
                 String audioFileName = "CarolineSt3.wav";
                 System.out.println("selected audio =:  "+audioFileName);
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
-                }                 
+                }
             }
             else if ((duration >= 30) && (duration <= 32) && (intensity > 0.7)){
                 String audioFileName = "CarolineSt7.wav";
                 System.out.println("selected audio =:  "+audioFileName);
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
-                }                 
-            }            
+                }
+            }
             else if ((duration >= 5) && (duration <= 8.5) && intensity > 0.7){
                 String audioFileName = "CarolineSt41.wav";
                 System.out.println("selected audio =:  "+audioFileName);
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
-                }                
-            }          
+                }
+            }
             else if ((duration >= 15) && (duration <= 22) && intensity > 0.7){
-                String audioFileName = "CarolineSt24.wav"; 
+                String audioFileName = "CarolineSt24.wav";
                 System.out.println("selected audio =:  "+audioFileName);
                 // this wav lasts 21 seconds in fact.
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
-                }                
-            }  
+                }
+            }
             else if ((duration <= 5) && intensity > 0.7){
-                String audioFileName = "CarolineSt22.wav"; 
+                String audioFileName = "CarolineSt22.wav";
                 System.out.println("selected audio =:  "+audioFileName);
                 // this wav lasts 4 seconds in fact.
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
-                }                
-            }    
+                }
+            }
             else if ((duration >= 11.5) && (duration <= 15) && intensity > 0.7){
-                String audioFileName = "CarolineSt4.wav"; 
+                String audioFileName = "CarolineSt4.wav";
                 System.out.println("selected audio =:  "+audioFileName);
                 // this wav lasts 11 seconds in fact.
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
-                }                
-            }                
+                }
+            }
             else if ((duration >= 8.5) && (duration <= 11.5) && intensity > 0.7){
-                String audioFileName = "CarolineSt6.wav"; 
+                String audioFileName = "CarolineSt6.wav";
                 System.out.println("selected audio =:  "+audioFileName);
                 // this wav lasts 11 seconds in fact.
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
-                }                
-            }               
+                }
+            }
             else if ((duration < 13) && (duration > 11) && intensity > 0.7) {
                 String audioFileName = "1_170846_183622.wav";
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
                 }
@@ -274,7 +274,7 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 String audioFileName = "4_422890_427542.wav";
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
                 }
@@ -283,7 +283,7 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 String audioFileName = "1_79609_81496.wav";
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
                 }
@@ -292,7 +292,7 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 String audioFileName = "4_650876_662210.wav";
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
                 }
@@ -301,17 +301,17 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 String audioFileName = "4_668629_676815.wav";
                 try {
                     audio = Audio.getAudio(audioFileName);
-                    System.out.println(" getAudio: "+audioFileName);  
+                    System.out.println(" getAudio: "+audioFileName);
                 } catch (Exception ex) {
                     Audio.getEmptyAudio();
                 }
             }
-            
+
         }
         if(doPhonemes) {
             double[]speechEnergy = null;
             double[]speechPitch = null;
-            double[]phonemeIntensity = null;  
+            double[]phonemeIntensity = null;
             double[]phoIntensityByFrame = null;  // phoneme intensity is extended and copied as phoneme intensity by frame
             String signalPath = null;
             //================= new code =====================================//
@@ -319,14 +319,14 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
             int[] durSeq0 = null;
             String pathInputInformation = IniManager.getProgramPath()+"./Common/Data/laughMotionTorsoHeadLHMM/audioInformation/";
             if ((duration >= 22) && (duration <= 25) && (intensity > 0.7)){
-                System.out.println(" getAudioSignal: "+"new codes"); 
-                signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"phoSeqIndex0.txt";           
+                System.out.println(" getAudioSignal: "+"new codes");
+                signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"phoSeqIndex0.txt";
                 phoSeqIndex0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"durSeq0.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"durSeq0.txt";
                 durSeq0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"durSeqLHMMFrequence.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"durSeqLHMMFrequence.txt";
                 durSeqLHMMFrequence = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"phonemeIntensity.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"phonemeIntensity.txt";
                 phonemeIntensity = readDoubleStream(signalPath);
 
                 //========== delete durSeq0 equals to 0 ===========================//
@@ -342,22 +342,22 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 //================== load energy ======================//
                 signalPath = pathInputInformation+"\\"+"CarolineSt45"+"\\"+"energyFeature.txt";
                 speechEnergy = readDoubleStream(signalPath);
-                
+
                 //============ load phoneme frame intensity=============//
                 int lengthAllPhonemesLHMMFrequence = getLengthAllPhonemesLHMMFrequence(durSeqLHMMFrequence);
                 phoIntensityByFrame = new double[lengthAllPhonemesLHMMFrequence];
-                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);       
+                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);
             }
             else if ((duration >= 11.5) && (duration <= 15) && intensity > 0.7){
                 // "CarolineSt4.wav";
                 //System.out.println("CarolineSt4.wav is taken");
-                signalPath = pathInputInformation+"\\"+"CarolineSt4"+"\\"+"phoSeqIndex0.txt";           
+                signalPath = pathInputInformation+"\\"+"CarolineSt4"+"\\"+"phoSeqIndex0.txt";
                 phoSeqIndex0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt4"+"\\"+"durSeq0.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt4"+"\\"+"durSeq0.txt";
                 durSeq0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt4"+"\\"+"durSeqLHMMFrequence.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt4"+"\\"+"durSeqLHMMFrequence.txt";
                 durSeqLHMMFrequence = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt4"+"\\"+"phonemeIntensity.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt4"+"\\"+"phonemeIntensity.txt";
                 phonemeIntensity = readDoubleStream(signalPath);
 
                 //========== delete durSeq0 equals to 0 ===========================//
@@ -373,22 +373,22 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 //================== load energy ======================//
                 signalPath = pathInputInformation+"\\"+"CarolineSt4"+"\\"+"energyFeature.txt";
                 speechEnergy = readDoubleStream(signalPath);
-                
+
                 //============ load phoneme frame intensity=============//
                 int lengthAllPhonemesLHMMFrequence = getLengthAllPhonemesLHMMFrequence(durSeqLHMMFrequence);
                 phoIntensityByFrame = new double[lengthAllPhonemesLHMMFrequence];
-                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);                 
+                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);
             }
             else if ((duration >= 25) && (duration <= 30) && (intensity > 0.7)){
                 // "CarolineSt3.wav";
                 System.out.println("CarolineSt3.wav is taken");
-                signalPath = pathInputInformation+"\\"+"CarolineSt3"+"\\"+"phoSeqIndex0.txt";           
+                signalPath = pathInputInformation+"\\"+"CarolineSt3"+"\\"+"phoSeqIndex0.txt";
                 phoSeqIndex0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt3"+"\\"+"durSeq0.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt3"+"\\"+"durSeq0.txt";
                 durSeq0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt3"+"\\"+"durSeqLHMMFrequence.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt3"+"\\"+"durSeqLHMMFrequence.txt";
                 durSeqLHMMFrequence = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt3"+"\\"+"phonemeIntensity.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt3"+"\\"+"phonemeIntensity.txt";
                 phonemeIntensity = readDoubleStream(signalPath);
 
                 //========== delete durSeq0 equals to 0 ===========================//
@@ -404,22 +404,22 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 //================== load energy ======================//
                 signalPath = pathInputInformation+"\\"+"CarolineSt3"+"\\"+"energyFeature.txt";
                 speechEnergy = readDoubleStream(signalPath);
-                
+
                 //============ load phoneme frame intensity=============//
                 int lengthAllPhonemesLHMMFrequence = getLengthAllPhonemesLHMMFrequence(durSeqLHMMFrequence);
                 phoIntensityByFrame = new double[lengthAllPhonemesLHMMFrequence];
-                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);       
-            }            
+                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);
+            }
             else if ((duration >= 30) && (duration <= 32) && (intensity > 0.7)){
                 // "CarolineSt7.wav";
                 //System.out.println("CarolineSt7.wav is taken");
-                signalPath = pathInputInformation+"\\"+"CarolineSt7"+"\\"+"phoSeqIndex0.txt";           
+                signalPath = pathInputInformation+"\\"+"CarolineSt7"+"\\"+"phoSeqIndex0.txt";
                 phoSeqIndex0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt7"+"\\"+"durSeq0.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt7"+"\\"+"durSeq0.txt";
                 durSeq0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt7"+"\\"+"durSeqLHMMFrequence.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt7"+"\\"+"durSeqLHMMFrequence.txt";
                 durSeqLHMMFrequence = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt7"+"\\"+"phonemeIntensity.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt7"+"\\"+"phonemeIntensity.txt";
                 phonemeIntensity = readDoubleStream(signalPath);
 
                 //========== delete durSeq0 equals to 0 ===========================//
@@ -435,23 +435,23 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 //================== load energy ======================//
                 signalPath = pathInputInformation+"\\"+"CarolineSt7"+"\\"+"energyFeature.txt";
                 speechEnergy = readDoubleStream(signalPath);
-                
+
                 //============ load phoneme frame intensity=============//
                 int lengthAllPhonemesLHMMFrequence = getLengthAllPhonemesLHMMFrequence(durSeqLHMMFrequence);
                 phoIntensityByFrame = new double[lengthAllPhonemesLHMMFrequence];
-                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);                 
+                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);
             }
             else if ((duration >= 5) && (duration <= 8.5) && intensity > 0.7){
                 // "CarolineSt41.wav";
                 System.out.println("CarolineSt41.wav is taken");
-                signalPath = pathInputInformation+"\\"+"CarolineSt41"+"\\"+"phoSeqIndex0.txt";           
+                signalPath = pathInputInformation+"\\"+"CarolineSt41"+"\\"+"phoSeqIndex0.txt";
                 phoSeqIndex0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt41"+"\\"+"durSeq0.txt";         
-                durSeq0 = readIntStream(signalPath);   
-                signalPath = pathInputInformation+"\\"+"CarolineSt41"+"\\"+"durSeqLHMMFrequence.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt41"+"\\"+"durSeq0.txt";
+                durSeq0 = readIntStream(signalPath);
+                signalPath = pathInputInformation+"\\"+"CarolineSt41"+"\\"+"durSeqLHMMFrequence.txt";
                 durSeqLHMMFrequence = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt41"+"\\"+"phonemeIntensity.txt";         
-                phonemeIntensity = readDoubleStream(signalPath);                
+                signalPath = pathInputInformation+"\\"+"CarolineSt41"+"\\"+"phonemeIntensity.txt";
+                phonemeIntensity = readDoubleStream(signalPath);
                 //phoSeqIndex0 = new int[]{1,11,6,6,11,1,12,8,1,7,1,8,7,12,6,12,6,12,6,12,6,12,1,12,6,12,6,12,1,8,1,11,1,11,1,10,1,6,6,8,1,6,1};
                 //durSeq0 = new int[]{11,6,14,4,6,9,14,9,17,4,97,12,7,8,10,6,10,10,7,11,4,15,2,16,5,14,3,14,3,8,33,3,11,4,27,5,17,14,7,33,55,28,13};
                 //durSeqLHMMFrequence = new int[]{15,10,18,6,8,13,18,13,23,6,135,16,9,10,16,8,14,12,11,15,6,19,4,22,7,18,5,20,3,12,45,5,15,6,35,9,23,18,11,45,75,40,16};
@@ -469,23 +469,23 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 //================== load energy ======================//
                 signalPath = pathInputInformation+"\\"+"CarolineSt41"+"\\"+"energyFeature.txt";
                 speechEnergy = readDoubleStream(signalPath);
-                
+
                 //============ load phoneme frame intensity=============//
                 int lengthAllPhonemesLHMMFrequence = getLengthAllPhonemesLHMMFrequence(durSeqLHMMFrequence);
                 phoIntensityByFrame = new double[lengthAllPhonemesLHMMFrequence];
-                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);                   
+                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);
             }
             else if ((duration >= 15) && (duration <= 22) && intensity > 0.7){
-                // "CarolineSt24.wav"; 
+                // "CarolineSt24.wav";
                 System.out.println("CarolineSt24.wav is taken");
-                signalPath = pathInputInformation+"\\"+"CarolineSt24"+"\\"+"phoSeqIndex0.txt";           
+                signalPath = pathInputInformation+"\\"+"CarolineSt24"+"\\"+"phoSeqIndex0.txt";
                 phoSeqIndex0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt24"+"\\"+"durSeq0.txt";         
-                durSeq0 = readIntStream(signalPath);   
-                signalPath = pathInputInformation+"\\"+"CarolineSt24"+"\\"+"durSeqLHMMFrequence.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt24"+"\\"+"durSeq0.txt";
+                durSeq0 = readIntStream(signalPath);
+                signalPath = pathInputInformation+"\\"+"CarolineSt24"+"\\"+"durSeqLHMMFrequence.txt";
                 durSeqLHMMFrequence = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt24"+"\\"+"phonemeIntensity.txt";         
-                phonemeIntensity = readDoubleStream(signalPath);                
+                signalPath = pathInputInformation+"\\"+"CarolineSt24"+"\\"+"phonemeIntensity.txt";
+                phonemeIntensity = readDoubleStream(signalPath);
                 //phoSeqIndex0 = new int[]{1,6,1,7,12,6,12,6,12,6,12,6,12,6,12,6,12,1,11,1,10,1,12,6,11,1,11,1,12,1,12,1,11,1,11,1,11,1,11,1,8,1,12,1,7,11,1,12,1,12,1,11,1,11,1,11,1,11,1,11,1,6,12,1,11,1,7,1,6,1,11,6,12,6,12,1,12,6,1,4,1,11,1,11,1,8,6,12,6,12,6,12,6,12,1,12,1,6,6,8,1,11,1,4,1,12,6,1,12,1,11,1,6,12,11,1,8,1,10,1,8,1,8,1,8,1,7,6,1,11,1,6,8,1,11,1,12,1,11,11,1};
                 //durSeq0 = new int[]{36,18,2,5,3,2,4,1,10,2,4,2,4,2,4,2,4,3,0,2,14,17,2,5,0,1,2,2,3,1,5,19,1,5,1,4,2,4,2,7,4,1,1,4,3,3,2,6,2,5,4,2,3,1,5,2,5,2,3,2,3,3,2,1,1,8,1,56,11,6,1,2,4,2,4,1,4,2,3,2,6,2,4,2,1,3,2,3,1,4,2,3,1,4,1,15,1,2,2,1,2,2,10,2,16,6,5,1,4,1,2,1,2,4,2,3,6,4,4,4,5,4,4,6,4,6,1,2,14,2,4,3,3,1,2,2,4,0,3,5,6};
                 //durSeqLHMMFrequence = new int[]{153,75,7,21,13,9,14,6,40,10,17,6,19,7,17,7,18,11,3,7,57,71,9,19,2,5,6,10,12,4,19,80,6,18,7,16,6,20,4,30,17,4,5,16,11,16,7,25,7,21,19,5,14,5,21,6,23,6,14,8,13,13,6,4,7,32,5,232,46,23,5,9,14,11,14,5,18,8,14,6,26,6,19,7,5,13,7,12,6,14,9,13,7,15,4,61,6,9,5,8,4,11,40,7,67,25,21,6,18,2,8,6,6,19,6,13,24,18,18,14,24,13,20,21,18,24,4,10,57,10,15,11,14,3,12,7,15,3,9,22,21};
@@ -503,23 +503,23 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 //================== load energy ======================//
                 signalPath = pathInputInformation+"\\"+"CarolineSt24"+"\\"+"energyFeature.txt";
                 speechEnergy = readDoubleStream(signalPath);
-                
+
                 //============ load phoneme frame intensity=============//
                 int lengthAllPhonemesLHMMFrequence = getLengthAllPhonemesLHMMFrequence(durSeqLHMMFrequence);
                 phoIntensityByFrame = new double[lengthAllPhonemesLHMMFrequence];
-                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);               
+                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);
             }
             else if ((duration <= 5) && intensity > 0.7){
-                // "CarolineSt22.wav"; 
+                // "CarolineSt22.wav";
                 System.out.println("CarolineSt22.wav is taken");
-                signalPath = pathInputInformation+"\\"+"CarolineSt22"+"\\"+"phoSeqIndex0.txt";           
+                signalPath = pathInputInformation+"\\"+"CarolineSt22"+"\\"+"phoSeqIndex0.txt";
                 phoSeqIndex0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt22"+"\\"+"durSeq0.txt";         
-                durSeq0 = readIntStream(signalPath);   
-                signalPath = pathInputInformation+"\\"+"CarolineSt22"+"\\"+"durSeqLHMMFrequence.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt22"+"\\"+"durSeq0.txt";
+                durSeq0 = readIntStream(signalPath);
+                signalPath = pathInputInformation+"\\"+"CarolineSt22"+"\\"+"durSeqLHMMFrequence.txt";
                 durSeqLHMMFrequence = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt22"+"\\"+"phonemeIntensity.txt";         
-                phonemeIntensity = readDoubleStream(signalPath);                      
+                signalPath = pathInputInformation+"\\"+"CarolineSt22"+"\\"+"phonemeIntensity.txt";
+                phonemeIntensity = readDoubleStream(signalPath);
                 //phoSeqIndex0 = new int[]{1,2,4,2,4,1,2,10,1,2,7,1,2,1,2,1,10,1,11,1,10,2,6,1};
                 //durSeq0 = new int[]{8,17,13,28,15,11,14,10,11,10,8,11,8,54,8,29,26,41,2,91,10,14,45,122};
                 //durSeqLHMMFrequence = new int[]{7,13,12,23,12,9,12,9,9,7,7,9,7,45,7,24,22,33,3,75,9,11,37,101};
@@ -537,23 +537,23 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 //================== load energy ======================//
                 signalPath = pathInputInformation+"\\"+"CarolineSt22"+"\\"+"energyFeature.txt";
                 speechEnergy = readDoubleStream(signalPath);
-                
+
                 //============ load phoneme frame intensity=============//
                 int lengthAllPhonemesLHMMFrequence = getLengthAllPhonemesLHMMFrequence(durSeqLHMMFrequence);
                 phoIntensityByFrame = new double[lengthAllPhonemesLHMMFrequence];
-                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);                
+                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);
             }
             else if ((duration >= 8.5) && (duration <= 15) && intensity > 0.7){
                  // "CarolineSt6.wav";
                 System.out.println("CarolineSt6.wav is taken");
-                signalPath = pathInputInformation+"\\"+"CarolineSt6"+"\\"+"phoSeqIndex0.txt";           
+                signalPath = pathInputInformation+"\\"+"CarolineSt6"+"\\"+"phoSeqIndex0.txt";
                 phoSeqIndex0 = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt6"+"\\"+"durSeq0.txt";         
-                durSeq0 = readIntStream(signalPath);   
-                signalPath = pathInputInformation+"\\"+"CarolineSt6"+"\\"+"durSeqLHMMFrequence.txt";         
+                signalPath = pathInputInformation+"\\"+"CarolineSt6"+"\\"+"durSeq0.txt";
+                durSeq0 = readIntStream(signalPath);
+                signalPath = pathInputInformation+"\\"+"CarolineSt6"+"\\"+"durSeqLHMMFrequence.txt";
                 durSeqLHMMFrequence = readIntStream(signalPath);
-                signalPath = pathInputInformation+"\\"+"CarolineSt6"+"\\"+"phonemeIntensity.txt";         
-                phonemeIntensity = readDoubleStream(signalPath);                   
+                signalPath = pathInputInformation+"\\"+"CarolineSt6"+"\\"+"phonemeIntensity.txt";
+                phonemeIntensity = readDoubleStream(signalPath);
                 //phoSeqIndex0 = new int[]{1,12,6,7,6,12,6,12,6,12,6,12,6,12,1,4,1,7,8,6,11,1,6,1,10,9,6,1,12,1,11,1,11,1,11,1,11,1,11,1,11,1,11,1,6,1,12,6,2,6,1,11,1,8,1,6,1};
                 //durSeq0 = new int[]{0,7,13,6,5,7,5,8,3,8,4,8,4,7,6,2,30,3,3,16,3,3,24,9,3,13,28,12,5,3,4,15,4,32,2,8,2,22,3,28,2,4,4,11,14,20,4,14,11,6,21,4,33,10,38,15,27};
                 //durSeqLHMMFrequence = new int[]{1,14,30,13,9,15,11,17,6,17,9,18,8,15,13,5,63,7,6,34,7,6,51,19,7,28,60,25,10,7,9,31,10,68,4,18,4,46,6,60,5,9,8,24,29,44,8,30,24,13,45,7,72,21,82,32,55};
@@ -571,22 +571,22 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 //================== load energy ======================//
                 signalPath = pathInputInformation+"\\"+"CarolineSt6"+"\\"+"energyFeature.txt";
                 speechEnergy = readDoubleStream(signalPath);
-                
+
                 //============ load phoneme frame intensity=============//
                 int lengthAllPhonemesLHMMFrequence = getLengthAllPhonemesLHMMFrequence(durSeqLHMMFrequence);
                 phoIntensityByFrame = new double[lengthAllPhonemesLHMMFrequence];
-                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);                  
+                setPhoIntensityByFrame(phoIntensityByFrame, phonemeIntensity, durSeqLHMMFrequence);
             }
-            
+
             double totalTimeTemp = 0.0;
             for (int i = 0; i<durSeq0.length; i++)
             {
                 totalTimeTemp = totalTimeTemp + durSeq0[i]/frameRate;
             }
             System.out.println("totalTimeTemp = "+ totalTimeTemp);
-                
+
             if((duration > 20) && (duration < 25) && intensity > 0.7){
-      
+
             }
             else if ((duration < 13) && (duration > 11) && intensity > 0.7) {
                 //phoSeqIndex = new int[]{1, 7, 6, 7, 6, 7, 1, 7, 1, 6, 6, 7, 6, 7, 1, 7, 1, 1, 6, 6, 1, 6, 8, 6, 7, 6, 7, 1, 7, 1, 8, 1, 1, 6, 1, 8, 1, 6, 7, 1, 7, 1, 6, 1, 6, 1, 5, 7, 1, 3, 1, 5, 1};
@@ -631,7 +631,7 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 LaughPhoneme newLaughPhoneme = new LaughPhoneme(phonemeType, phonemeDur/frameRate);
 
                 //adding energy infos to this phoneme
-                
+
                 double[] speechEnergyOfOnePhoneme = new double [phonemeDur];
                 int integ = i+1;
                 //System.out.println(" index = " + "speechEnergyLength" + speechEnergy.length + "  "+integ +" startDur = "+totalDur+"        "+"phonemeDur = "+ phonemeDur);
@@ -642,18 +642,18 @@ public class PhonemeGeneratorLaughSynthetizer implements LaughSynthetizer{
                 double[] speechPitchOfOnePhoneme = new double [phonemeDur];
                 System.arraycopy(speechPitch, totalDur, speechPitchOfOnePhoneme, 0, phonemeDur);
                 newLaughPhoneme.setPitch(speechPitchOfOnePhoneme);
-                
+
                 //adding phoneme intensity
                 //newLaughPhoneme.setInensity(phonemeIntensity[i]);
-                
+
                 //adding phoIntensityByFrame to this phoneme.
                 newLaughPhoneme.setPhoIntensityByFrame(phoIntensityByFrame);
 
                 phonems.add(newLaughPhoneme);
                 totalDur += phonemeDur;
-                
+
             }
-            //System.out.println("total duration in phoneme generator = " + totalDur);     
+            //System.out.println("total duration in phoneme generator = " + totalDur);
         }
     }
 

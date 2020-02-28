@@ -36,7 +36,7 @@ public class FrameSequence {
         _start = start;
         _end = end;
     }
-    
+
      public FrameSequence(double start, double end, ArrayList<Frame> s) {
         _start = start;
         _end = end;
@@ -101,7 +101,7 @@ public class FrameSequence {
             return null;
         }
         int idx = (int) ((_sequence.size() - 1) * (time - _start) / (_end - _start));
-              
+
         Frame frame0 = _sequence.get(idx);
         Frame frame1 = _sequence.get(idx + 1);
         double t0 = idx * timestep + _start;

@@ -22,7 +22,7 @@ import org.apache.commons.math3.linear.RealMatrix;
 
 /**
  * QuasiNewtonSolver is using a new matrix to approximate the NewtonRaphson's Hessian Matrix
- * 
+ *
  * @author Huang
  */
 public abstract class QuasiNewtonSolver extends FunctionMinimizationSolver{
@@ -45,8 +45,8 @@ public abstract class QuasiNewtonSolver extends FunctionMinimizationSolver{
         }
         return _X;
     }
-    
+
     protected abstract RealMatrix computeApproximatedInverseHessian(RealMatrix current);
     protected abstract double computeLamda();
-    
+
 }

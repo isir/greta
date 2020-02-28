@@ -56,16 +56,16 @@ public class TimeMarker {
     public static String getTimeMarkersListDebug(List<TimeMarker> timeMarkersList, String temporizableDescription, String id){
         String toReturn = "\n----------------------------------------------------------------------------------------------\n"
                         + "Time markers of temporizable [" + temporizableDescription + "] with ID [" + id + "]\n";
-        
+
         for (TimeMarker tm : timeMarkersList) {
             toReturn+= tm.toString() + "\n";
         }
-        
+
         toReturn+= "----------------------------------------------------------------------------------------------";
-        
+
         return toReturn;
     }
-    
+
     /**
      * Converts a TimeMarker to a String of the corresponding SynchPoint.<br/>
      * The result will depend also of the boolean set with the function {@code useRelativeTime}.
@@ -166,7 +166,7 @@ public class TimeMarker {
         this.value = value;
         concretized = true;
     }
-    
+
     /**
      * Returns the time value.<br/>
      * Be carefull : if this is not concretized, the value is wrong !
@@ -260,7 +260,7 @@ public class TimeMarker {
     public void removeReferences(){
         references = new ArrayList<SynchPoint>();
     }
-    
+
     /**
      * Returns the list of all SynchPoint of this.
      * @return the list of all SynchPoint

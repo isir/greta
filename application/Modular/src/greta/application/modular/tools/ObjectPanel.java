@@ -367,9 +367,8 @@ public class ObjectPanel extends javax.swing.JPanel implements Updatable{
 
     @Override
     public void reload() {
-        
-    }
 
+    }
 
 
     /**

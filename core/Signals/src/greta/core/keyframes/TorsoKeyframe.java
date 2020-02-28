@@ -52,30 +52,30 @@ public class TorsoKeyframe  extends ParametersKeyframe{
         this.collapse = phase.collapse;
         this._rotations.putAll(phase._rotations);
     }
-    
+
     public TorsoKeyframe(TorsoKeyframe other) {
         id = other.id;
         modality = other.modality;
         category = other.category;
-        
+
         onset = other.onset;
-        offset = other.offset; 
-        
+        offset = other.offset;
+
         this.verticalTorsion = other.verticalTorsion;
         this.sagittalTilt = other.sagittalTilt;
         this.lateralRoll = other.lateralRoll;
         this.collapse = other.collapse;
         this._rotations.putAll(other._rotations);
     }
-    
+
     public TorsoKeyframe() {
         id = null;
         modality = null;
         category = null;
-        
+
         onset = 0.0;
-        offset = 0.0; 
-        
+        offset = 0.0;
+
         this.verticalTorsion = new SpineDirection();
         this.sagittalTilt = new SpineDirection();
         this.lateralRoll = new SpineDirection();
@@ -106,20 +106,20 @@ public class TorsoKeyframe  extends ParametersKeyframe{
     public String getCategory() {
         return this.category;
     }
-    
+
     public double getSignedVerticalTorsion() {
         return verticalTorsion.direction == SpineDirection.Direction.LEFTWARD ? verticalTorsion.value : -(verticalTorsion.value);
     }
-    
+
     public boolean getonlyshoulder(){
         return onlyshoulder;
     }
-            
-    
+
+
     public void setOnlytheShoulder () {
         this.onlyshoulder = true;
     }
-    
+
     @Override
     public TorsoKeyframe clone() throws CloneNotSupportedException {
         TorsoKeyframe cloneobj = (TorsoKeyframe) super.clone();

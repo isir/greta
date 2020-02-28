@@ -25,16 +25,16 @@ import java.awt.geom.Rectangle2D;
  * @author Ken Prepin
  */
 public interface IMovableDrawable extends IDrawable{
-    
+
     void setPosition(Point2D p);
-    
+
     void setCenter(Point2D p);
-    
+
     public Point2D getPosition();
-    
+
     public Point2D getCenter();
-    
+
     public Rectangle2D getBounds();
-      
+
     void setMousePressedPosition(Point2D pos);
 }

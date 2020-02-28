@@ -51,7 +51,7 @@ public class FaceSignal extends ParametricSignal {
 
     //some facial expressons wont be scheduled
     private boolean is_scheduled = false;
-    
+
     /**
      *
      * @return {@code true} if this {@code FaceSignal} is allready scheduled,

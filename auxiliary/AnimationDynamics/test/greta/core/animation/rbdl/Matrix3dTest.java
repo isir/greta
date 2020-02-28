@@ -31,22 +31,22 @@ import org.junit.Test;
  * @author Jing Huang
  */
 public class Matrix3dTest {
-    
+
     public Matrix3dTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -179,7 +179,7 @@ public class Matrix3dTest {
         double v9 = 9.0;
         Matrix3d instance = new Matrix3d();
         instance.set(v1, v2, v3, v4, v5, v6, v7, v8, v9);
-  
+
         Matrix3d result = instance.transpose();
 
         // TODO review the generated test code and remove the default call to fail.
@@ -204,9 +204,9 @@ public class Matrix3dTest {
         double v9 = 9.0;
         Matrix3d instance = new Matrix3d();
         instance.set(v1, v2, v3, v4, v5, v6, v7, v8, v9);
- 
+
         Vector3d result = instance.multiple(v);
-        
+
         // TODO review the generated test code and remove the default call to fail.
         System.out.println("multiple test: " + result);
     }
@@ -218,9 +218,9 @@ public class Matrix3dTest {
     public void testRotX() {
         System.out.println("rotX");
         double angle_rad = 10.0;
- 
+
         Matrix3d result = Matrix3d.rotX(angle_rad);
-        
+
         // TODO review the generated test code and remove the default call to fail.
        System.out.println("rotX test: "+ angle_rad + " "+ result);
     }
@@ -234,7 +234,7 @@ public class Matrix3dTest {
         double angle_rad = 8.0;
 
         Matrix3d result = Matrix3d.rotY(angle_rad);
- 
+
         // TODO review the generated test code and remove the default call to fail.
         System.out.println("rotY test: "+ angle_rad + " "+ result);
         //fail("The test case is a prototype.");
@@ -254,5 +254,5 @@ public class Matrix3dTest {
         //fail("The test case is a prototype.");
         System.out.println("rotZ test: "+ angle_rad + " "+ result);
     }
-    
+
 }

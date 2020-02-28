@@ -289,7 +289,7 @@ public class ListenerIntentPlanner extends CharacterDependentAdapter implements 
                             }
                         }
                         else
-                        {       
+                        {
                             if(end <= Timer.getTime()){
                                 pending.remove();
                             }
@@ -381,7 +381,7 @@ public class ListenerIntentPlanner extends CharacterDependentAdapter implements 
     public void setSpeakerPresence(boolean speakerIsPresent){
         speakerPresent = speakerIsPresent;
     }
-    
+
     public void setEmotionIntentionOfAgentAppreciation(String emotionIntentionOfAgentAppreciation){
         btr.setEmotionIntentionOfAgentAppreciation(emotionIntentionOfAgentAppreciation);
     }
@@ -446,9 +446,9 @@ public class ListenerIntentPlanner extends CharacterDependentAdapter implements 
             return embeded;
         }
     }
-    
+
     private boolean isInstantaneous(EmbededSignal aSignal){
-       
+
         if (aSignal.getReference().equalsIgnoreCase("rise")
                 || aSignal.getReference().equalsIgnoreCase("fall")
                 || aSignal.getReference().equalsIgnoreCase("rise-fall")

@@ -45,15 +45,15 @@ public class Lexicon extends ParameterSet<BehaviorSet> implements CharacterDepen
     public static final String CHARACTER_PARAMETER_INTENTION_LEXICON = "LEXICON";
     private static final String xsdFile = IniManager.getGlobals().getValueString("XSD_BEHAVIORSETS");
 
-    public Lexicon(CharacterManager cm){        
+    public Lexicon(CharacterManager cm){
         //get the default Lexicon :
         super();
         setCharacterManager(cm);
         setDefaultDefinition(cm.getDefaultValueString(CHARACTER_PARAMETER_INTENTION_LEXICON));
 
         //load additionnal Lexicon :
-        for(String filename : cm.getAllValuesString(CHARACTER_PARAMETER_INTENTION_LEXICON)) {
-            addDefinition(filename);
+        for(String fileName : cm.getAllValuesString(CHARACTER_PARAMETER_INTENTION_LEXICON)) {
+            addDefinition(fileName);
         }
 
         //set the current Lexicon to use :
@@ -235,8 +235,6 @@ public class Lexicon extends ParameterSet<BehaviorSet> implements CharacterDepen
     }
 
 
-
-
     @Override
     public void onCharacterChanged() {
         setDefinition(getCharacterManager().getValueString(CHARACTER_PARAMETER_INTENTION_LEXICON));
@@ -247,7 +245,7 @@ public class Lexicon extends ParameterSet<BehaviorSet> implements CharacterDepen
         //TODO but how ?
         Logs.warning("Impossible to save the Lexicon. \"core\" and \"implications\" are lost, they were only used during initialization.");
     }
-    
+
      private CharacterManager characterManager;
 
     /**

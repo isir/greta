@@ -31,7 +31,7 @@ public class Quaternion extends _Object_ {
     public Quaternion(long pointer){
         super(pointer);
     }
-    
+
     public Quaternion(double w, double x, double y, double z) {
         super(_instanciate(w, x, y, z));
         this.gcMustDeleteThat(true);
@@ -43,23 +43,23 @@ public class Quaternion extends _Object_ {
         this.gcMustDeleteThat(true);
     }
     private static native long _instanciate(double angle, long vector3Pointer);
-    
-    
+
+
     public double getw() {
         return _getw(getNativePointer());
     }
     private native double _getw(long p);
-    
+
     public double getx() {
         return _getx(getNativePointer());
     }
     private native double _getx(long p);
-    
+
     public double gety() {
         return _gety(getNativePointer());
     }
     private native double _gety(long p);
-    
+
     public double getz() {
         return _getz(getNativePointer());
     }
@@ -86,7 +86,7 @@ public class Quaternion extends _Object_ {
         return inverse;
     }
     private native long _Inverse(long p);
-    
+
     @Override
     protected native void delete(long nativePointer);
 

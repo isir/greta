@@ -26,7 +26,7 @@ public class SceneManager extends _Object_ {
     public SceneManager(long pointer) {
         super(pointer);
     }
-    
+
     public enum PrefabType {
         PT_SPHERE, PT_CUBE
     }
@@ -118,7 +118,7 @@ public class SceneManager extends _Object_ {
         return new Light(_getLight(getNativePointer(), id));
     }
     private native long _getLight(long p, String id);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

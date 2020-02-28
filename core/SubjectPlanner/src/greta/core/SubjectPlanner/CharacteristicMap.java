@@ -24,24 +24,23 @@ import greta.core.util.parameter.EngineParameterSetOfSet;
  * @author Nadine
  */
 public class CharacteristicMap extends EngineParameterSetOfSet{
-    
+
         public static final String CHAR_MAP = "SubjectPlanner/Data/CharacteristicMaps.xml";
-    
+
 
     public static CharacteristicMap global_characteristic;
-    
-    
-    public CharacteristicMap(String filename){
+
+
+    public CharacteristicMap(String fileName){
         //get the default Lexicon :
-        super(filename);
-  
+        super(fileName);
+
     }
-    
+
   //  public double GetCharacteristicDistance(String Characteristic){
   //      double CharacteristicDistance;
   //      CharacteristicDistance = CurrentCharacteristic - NewCharacteristic();
    //     return CharacteristicDistance;
-    
-   
-    
+
+
 }

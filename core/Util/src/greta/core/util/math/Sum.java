@@ -89,7 +89,6 @@ public class Sum implements Function{
     }
 
 
-
     private void findAssociative(List<Function> noAssociatives, Function toUnassociate){
         if(toUnassociate == null){
             return;

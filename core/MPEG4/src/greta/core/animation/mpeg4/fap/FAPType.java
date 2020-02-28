@@ -96,7 +96,6 @@ public enum FAPType {
     pull_r_ear(Side.RIGHT); //69
 
 
-
     public static final int NUMFAPS = 70; //counting the null_fap
 
     private final Side side;

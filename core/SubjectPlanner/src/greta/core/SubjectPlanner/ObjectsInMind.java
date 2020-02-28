@@ -34,10 +34,10 @@ public class ObjectsInMind extends ParameterSet<MuseumObject> {
     public static final String OBJECTS_IN_MIND = "SubjectPlanner/Data/ObjectsInMind.xml";
     public static ObjectsInMind global_objects_in_mind;
 
-    public ObjectsInMind(String filename) {
+    public ObjectsInMind(String fileName) {
         //get the default Lexicon :
-        super(filename);
-        Logs.debug("ObjectsInMind FileName " + filename);
+        super(fileName);
+        Logs.debug("ObjectsInMind FileName " + fileName);
 
     }
 
@@ -89,7 +89,6 @@ public class ObjectsInMind extends ParameterSet<MuseumObject> {
     protected void save(String string, List<MuseumObject> list) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
 
 
 }

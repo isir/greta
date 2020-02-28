@@ -47,12 +47,12 @@ public class BVHConverter {
 
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                String filepath = "C:\\Users\\Jing\\Documents\\bvhfiles";
+                String filePath = "C:\\Users\\Jing\\Documents\\bvhfiles";
                 if(args.length > 0){
-                    filepath = args[0];
+                    filePath = args[0];
                 }
-                
-                File dir = new File(filepath);
+
+                File dir = new File(filePath);
                 File[] files = dir.listFiles(new FilenameFilter() {
                     public boolean accept(File dir, String name) {
                         return name.toLowerCase().endsWith(".bvh");
@@ -63,9 +63,9 @@ public class BVHConverter {
                 for (File file : files) {
                     System.out.println(i);
                     String path = file.getParent();
-                    String filename = file.getName();
-                    BVHConverter.convert(path, filename);
-                    System.out.print("convert : " + filename);
+                    String fileName = file.getName();
+                    BVHConverter.convert(path, fileName);
+                    System.out.print("convert : " + fileName);
                     //return;
                 }
             }

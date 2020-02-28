@@ -102,7 +102,7 @@ public class Frame {
         _root_translation = Vec3d.addition(Vec3d.multiplication(f0.getRootTranslation(), 1 - t) ,
                 Vec3d.multiplication(f1.getRootTranslation(), t));
     }
-    
+
     public void interpolationAccumulation(Frame f0, Frame f1, double t) {
         TreeSet<String> names = new TreeSet<String>();
         names.addAll(f0.getRotations().keySet());
@@ -197,7 +197,7 @@ public class Frame {
     public void setIsStrokeEnd(boolean isStrokeEnd) {
         this.isStrokeEnd = isStrokeEnd;
     }
-    
+
     @Override
     public Frame clone() {
         Frame f = new Frame();

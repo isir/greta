@@ -135,7 +135,7 @@ public class ArmIKsolver {
         }
     }
 
-      
+
     void resetMassSystem(){
         Mass wrist = _massList.get(2);
         Mass elbow = _massList.get(1);
@@ -144,7 +144,7 @@ public class ArmIKsolver {
         elbow.setPosition(_elbow);
         wrist.setPosition(_wrist);
     }
-    
+
     public void compute(Vec3d target, Quaternion wristOrientation, double openness) {
         resetMassSystem();
         Mass wrist = _massList.get(2);
@@ -239,7 +239,7 @@ public class ArmIKsolver {
 //            }
 //            X.normalize();
 //            Z.normalize();
-//            
+//
     }
 
 }

@@ -34,7 +34,7 @@ import java.text.NumberFormat;
  * unit 3D vector.
  * <p>
  * This class uses double-precision components.
- * 
+ *
  * @author Kai Burjack
  */
 public class AxisAngle4d implements Externalizable {
@@ -67,7 +67,7 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Create a new {@link AxisAngle4d} with the same values of <code>a</code>.
-     * 
+     *
      * @param a
      *            the AngleAxis4d to copy the values from
      */
@@ -80,7 +80,7 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Create a new {@link AxisAngle4d} with the same values of <code>a</code>.
-     * 
+     *
      * @param a
      *            the AngleAxis4f to copy the values from
      */
@@ -97,7 +97,7 @@ public class AxisAngle4d implements Externalizable {
      * Reference: <a href=
      * "http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToAngle/"
      * >http://www.euclideanspace.com</a>
-     * 
+     *
      * @param q
      *            the quaternion from which to create the new AngleAxis4f
      */
@@ -116,7 +116,7 @@ public class AxisAngle4d implements Externalizable {
      * Reference: <a href=
      * "http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToAngle/"
      * >http://www.euclideanspace.com</a>
-     * 
+     *
      * @param q
      *            the quaternion from which to create the new AngleAxis4d
      */
@@ -170,7 +170,7 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Set this {@link AxisAngle4d} to the values of <code>a</code>.
-     * 
+     *
      * @param a
      *            the AngleAxis4f to copy the values from
      * @return this
@@ -185,7 +185,7 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Set this {@link AxisAngle4d} to the values of <code>a</code>.
-     * 
+     *
      * @param a
      *            the AngleAxis4f to copy the values from
      * @return this
@@ -200,7 +200,7 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Set this {@link AxisAngle4d} to the given values.
-     * 
+     *
      * @param angle
      *            the angle in radians
      * @param x
@@ -224,7 +224,7 @@ public class AxisAngle4d implements Externalizable {
      *
      * @param angle
      *            the angle in radians
-     * @param v    
+     * @param v
      *            the rotation axis as a {@link Vector3d}
      * @return this
      */
@@ -237,7 +237,7 @@ public class AxisAngle4d implements Externalizable {
      *
      * @param angle
      *            the angle in radians
-     * @param v    
+     * @param v
      *            the rotation axis as a {@link Vector3f}
      * @return this
      */
@@ -248,7 +248,7 @@ public class AxisAngle4d implements Externalizable {
     /**
      * Set this {@link AxisAngle4d} to be equivalent to the given
      * {@link Quaternionf}.
-     * 
+     *
      * @param q
      *            the quaternion to set this AngleAxis4d from
      * @return this
@@ -266,7 +266,7 @@ public class AxisAngle4d implements Externalizable {
     /**
      * Set this {@link AxisAngle4d} to be equivalent to the given
      * {@link Quaterniond}.
-     * 
+     *
      * @param q
      *            the quaternion to set this AngleAxis4d from
      * @return this
@@ -282,9 +282,9 @@ public class AxisAngle4d implements Externalizable {
     }
 
     /**
-     * Set this {@link AxisAngle4d} to be equivalent to the rotation 
+     * Set this {@link AxisAngle4d} to be equivalent to the rotation
      * of the given {@link Matrix3f}.
-     * 
+     *
      * @param m
      *            the Matrix3f to set this AngleAxis4d from
      * @return this
@@ -300,9 +300,9 @@ public class AxisAngle4d implements Externalizable {
     }
 
     /**
-     * Set this {@link AxisAngle4d} to be equivalent to the rotation 
+     * Set this {@link AxisAngle4d} to be equivalent to the rotation
      * of the given {@link Matrix3d}.
-     * 
+     *
      * @param m
      *            the Matrix3d to set this AngleAxis4d from
      * @return this
@@ -318,9 +318,9 @@ public class AxisAngle4d implements Externalizable {
     }
 
     /**
-     * Set this {@link AxisAngle4d} to be equivalent to the rotational component 
+     * Set this {@link AxisAngle4d} to be equivalent to the rotational component
      * of the given {@link Matrix4f}.
-     * 
+     *
      * @param m
      *            the Matrix4f to set this AngleAxis4d from
      * @return this
@@ -336,9 +336,9 @@ public class AxisAngle4d implements Externalizable {
     }
 
     /**
-     * Set this {@link AxisAngle4d} to be equivalent to the rotational component 
+     * Set this {@link AxisAngle4d} to be equivalent to the rotational component
      * of the given {@link Matrix4d}.
-     * 
+     *
      * @param m
      *            the Matrix4d to set this AngleAxis4d from
      * @return this
@@ -355,9 +355,9 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Set the given {@link Quaternionf} to be equivalent to this {@link AxisAngle4d} rotation.
-     * 
+     *
      * @see Quaternionf#set(AxisAngle4d)
-     * 
+     *
      * @param q
      *          the quaternion to set
      * @return q
@@ -368,9 +368,9 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Set the given {@link Quaterniond} to be equivalent to this {@link AxisAngle4d} rotation.
-     * 
+     *
      * @see Quaterniond#set(AxisAngle4d)
-     * 
+     *
      * @param q
      *          the quaternion to set
      * @return q
@@ -381,9 +381,9 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Set the given {@link Matrix4f} to a rotation transformation equivalent to this {@link AxisAngle4d}.
-     * 
+     *
      * @see Matrix4f#set(AxisAngle4d)
-     * 
+     *
      * @param m
      *          the matrix to set
      * @return m
@@ -394,9 +394,9 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Set the given {@link Matrix3f} to a rotation transformation equivalent to this {@link AxisAngle4d}.
-     * 
+     *
      * @see Matrix3f#set(AxisAngle4d)
-     * 
+     *
      * @param m
      *          the matrix to set
      * @return m
@@ -407,9 +407,9 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Set the given {@link Matrix4d} to a rotation transformation equivalent to this {@link AxisAngle4d}.
-     * 
+     *
      * @see Matrix4f#set(AxisAngle4d)
-     * 
+     *
      * @param m
      *          the matrix to set
      * @return m
@@ -420,9 +420,9 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Set the given {@link Matrix3d} to a rotation transformation equivalent to this {@link AxisAngle4d}.
-     * 
+     *
      * @see Matrix3f#set(AxisAngle4d)
-     * 
+     *
      * @param m
      *          the matrix to set
      * @return m
@@ -447,7 +447,7 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Normalize the axis vector.
-     * 
+     *
      * @return this
      */
     public AxisAngle4d normalize() {
@@ -462,7 +462,7 @@ public class AxisAngle4d implements Externalizable {
      * Increase the rotation angle by the given amount.
      * <p>
      * This method also takes care of wrapping around.
-     * 
+     *
      * @param ang
      *          the angle increase
      * @return this
@@ -475,7 +475,7 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Transform the given vector by the rotation transformation described by this {@link AxisAngle4d}.
-     * 
+     *
      * @param v
      *          the vector to transform
      * @return v
@@ -487,7 +487,7 @@ public class AxisAngle4d implements Externalizable {
     /**
      * Transform the given vector by the rotation transformation described by this {@link AxisAngle4d}
      * and store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to transform
      * @param dest
@@ -506,7 +506,7 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Transform the given vector by the rotation transformation described by this {@link AxisAngle4d}.
-     * 
+     *
      * @param v
      *          the vector to transform
      * @return v
@@ -518,7 +518,7 @@ public class AxisAngle4d implements Externalizable {
     /**
      * Transform the given vector by the rotation transformation described by this {@link AxisAngle4d}
      * and store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to transform
      * @param dest
@@ -540,7 +540,7 @@ public class AxisAngle4d implements Externalizable {
      * Return a string representation of this {@link AxisAngle4d}.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<tt> 0.000E0;-</tt>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -550,7 +550,7 @@ public class AxisAngle4d implements Externalizable {
 
     /**
      * Return a string representation of this {@link AxisAngle4d} by formatting the components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the vector components with
      * @return the string representation
@@ -582,7 +582,7 @@ public class AxisAngle4d implements Externalizable {
         if (getClass() != obj.getClass())
             return false;
         AxisAngle4d other = (AxisAngle4d) obj;
-        if (Double.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI)) != 
+        if (Double.doubleToLongBits((angle < 0.0 ? Math.PI + Math.PI + angle % (Math.PI + Math.PI) : angle) % (Math.PI + Math.PI)) !=
                 Double.doubleToLongBits((other.angle < 0.0 ? Math.PI + Math.PI + other.angle % (Math.PI + Math.PI) : other.angle) % (Math.PI + Math.PI)))
             return false;
         if (Double.doubleToLongBits(x) != Double.doubleToLongBits(other.x))

@@ -36,13 +36,13 @@ public class GpuProgramParameters extends _Object_ {
         _setNamedConstant_float_star(getNativePointer(), textureValue, textureValue0.getNativePointer(), index, i);
     }
     private native void _setNamedConstant_float_star(long pointer, String s, long intarray, int index, int i);
-    
+
     public void setNamedConstant(String textureValue, int i) {
         _setNamedConstant(getNativePointer(), textureValue, i);
     }
     private native void _setNamedConstant(long pointer, String s, int i);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

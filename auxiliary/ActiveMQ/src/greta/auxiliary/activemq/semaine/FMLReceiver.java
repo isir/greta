@@ -48,7 +48,7 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
         this(WhiteBoard.DEFAULT_ACTIVEMQ_HOST,
                 WhiteBoard.DEFAULT_ACTIVEMQ_PORT,
                 "greta.FML",cm);
-        
+
     }
 
     public FMLReceiver(String host, String port, String topic, CharacterManager cm) {
@@ -64,7 +64,7 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
         XMLTree fml = fmlParser.parseBuffer(content.toString());
 
         String fml_id = "";
-        
+
         if (fml == null) {
             return;
         }
@@ -89,7 +89,7 @@ public class FMLReceiver extends TextReceiver implements IntentionEmitter {
         }
         for (XMLTree fmlchild : fml.getChildrenElement()) {
             // store the bml id in the mode class
-            if (fmlchild.isNamed("bml")) {   
+            if (fmlchild.isNamed("bml")) {
                 //System.out.println(fmlchild.getName());
                 if(fmlchild.hasAttribute("id")){
                     mode.setBml_id(fmlchild.getAttribute("id"));

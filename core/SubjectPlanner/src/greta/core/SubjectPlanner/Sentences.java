@@ -26,12 +26,12 @@ import greta.core.util.parameter.EngineParameterSetOfSet;
 public class Sentences extends EngineParameterSetOfSet{
 
     public static final String SENTENCE_LIB = "SubjectPlanner/Data/Sentences.xml";
-    
+
     public static Sentences global_sentence_library;
-     
-    public Sentences(String filename){
-      super(filename);
+
+    public Sentences(String fileName){
+      super(fileName);
     }
 
-    
+
 }

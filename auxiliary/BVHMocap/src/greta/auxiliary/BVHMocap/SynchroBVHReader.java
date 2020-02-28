@@ -30,17 +30,17 @@ public class SynchroBVHReader extends BVHReader //implements EventPerformer
     }
 
     public SynchroBVHReader(String fname) {
-        filename = fname;
+        fileName = fname;
         dictionary = new Dictionary();
         dictionary.Initialize();
     }
 
 //   // @Override
-//    public void load(String bvhfilename) {
-//        filename = bvhfilename;
+//    public void load(String bvhFileName) {
+//        fileName = bvhFileName;
 //    }
 //
-//    public void performEvent(String message) {   //filename = message;
+//    public void performEvent(String message) {   //fileName = message;
 //        process();
 //    }
 }

@@ -48,7 +48,7 @@ public class WhiteBoard extends ActiveMQBase{
     WhiteBoard(String host, String port, String topic) {
         this(host, port, topic, false);
     }
-    
+
     WhiteBoard(String host, String port, String topic, boolean isQueue) {
         createFactory(host, port);
         destinationName = topic;

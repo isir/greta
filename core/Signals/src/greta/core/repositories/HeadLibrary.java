@@ -44,9 +44,9 @@ public class HeadLibrary extends SignalLibrary<HeadSignal> implements CharacterD
         library_file_key = "HEADGESTURES";
         xsd_file_key = "XSD_HEADGESTURES";
         CharacterManager cm = CharacterManager.getStaticInstance();
-        globalLibrary = new HeadLibrary(cm);        
+        globalLibrary = new HeadLibrary(cm);
     }
-    
+
     private CharacterManager characterManager;
 
     /**

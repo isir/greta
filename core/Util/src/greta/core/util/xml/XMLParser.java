@@ -39,19 +39,19 @@ public interface XMLParser {
     /**
      * Parses a specific XML file, builds the tree and returns the root of the tree.<br/>
      * If the parsing fails (the file does't exist, validation fails...), it returns null.
-     * @param filename the name of the file
+     * @param fileName the name of the file
      * @return the root of the XML tree
      */
-    public XMLTree parseFile(String filename);
+    public XMLTree parseFile(String fileName);
 
     /**
      * Parses a specific XML file using an XML schema file for validation, builds the tree and returns the root of the tree.<br/>
      * If the parsing fails (the file does't exist, validation fails...), it returns null.
-     * @param filename the name of the file
-     * @param filenameXSD the name of the XML schema file
+     * @param fileName the name of the file
+     * @param fileNameXSD the name of the XML schema file
      * @return the root of the XML tree
      */
-    public XMLTree parseFileWithXSD(String filename, String filenameXSD);
+    public XMLTree parseFileWithXSD(String fileName, String fileNameXSD);
 
     /**
      * Parses an XML content, builds the tree and returns the root of the tree.<br/>
@@ -65,9 +65,9 @@ public interface XMLParser {
      * Parses an XML content using an XML schema file for validation, builds the tree and returns the root of the tree.<br/>
      * If the parsing fails (the file does't exist, validation fails...), it returns null.
      * @param buffer the XML content
-     * @param filenameXSD the name of the XML schema file
+     * @param fileNameXSD the name of the XML schema file
      * @return the root of the XML tree
      */
-    public XMLTree parseBufferWithXSD(String buffer, String filenameXSD);
+    public XMLTree parseBufferWithXSD(String buffer, String fileNameXSD);
 
 }

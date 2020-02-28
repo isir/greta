@@ -26,7 +26,7 @@ public class Vector3 extends _Object_ {
     public Vector3(long pointer){
         super(pointer);
     }
-    
+
     public Vector3(double x, double y, double z) {
         super(_instanciate(x, y, z));
         this.gcMustDeleteThat(true);
@@ -41,12 +41,12 @@ public class Vector3 extends _Object_ {
         return _getx(getNativePointer());
     }
     private native double _getx(long p);
-    
+
     public double gety() {
         return _gety(getNativePointer());
     }
     private native double _gety(long p);
-    
+
     public double getz() {
         return _getz(getNativePointer());
     }
@@ -61,7 +61,7 @@ public class Vector3 extends _Object_ {
         return new Vector3(_operatorMultiplyAndAssign(getNativePointer(), resizecube));
     }
     private native long _operatorMultiplyAndAssign(long p,float p2);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

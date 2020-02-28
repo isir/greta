@@ -79,7 +79,7 @@ public class FakeTTS implements TTS{
     public Audio getAudio() {
         return Audio.getEmptyAudio();
     }
-    
+
     @Override
     public boolean isInterruptionReactionSupported() {
         return interreuptionReactionSupported;

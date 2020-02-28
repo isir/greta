@@ -22,10 +22,10 @@ package greta.auxiliary.conversationalGaze;
  * @author donat
  */
 public enum Role {
-    
+
     SPEAKER,
     ADDRESSE,
     SIDE_PARTICIPANT,
     OVERHEARER;
-    
+
 }

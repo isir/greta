@@ -115,7 +115,6 @@ public class OgreEnvironementListener implements EnvironmentEventListener{
     }
 
 
-
     @Override
     public void onTreeChange(final TreeEvent te) {
         Ogre.call(new OgreThread.Callback() {
@@ -178,7 +177,6 @@ public class OgreEnvironementListener implements EnvironmentEventListener{
             }
         });
     }
-
 
 
     @Override
@@ -290,7 +288,7 @@ public class OgreEnvironementListener implements EnvironmentEventListener{
                     sizeNode.setPosition(size.operatorMultiplyAndAssign(0.5f/resizecube));
                 }
             }
-            
+
             //background color
             //fog color
             Logs.debug("onLeafChange not fully supported yet.");
@@ -482,18 +480,16 @@ public class OgreEnvironementListener implements EnvironmentEventListener{
             debugSphere.setCastShadows(false);
 
 
-
-
             String materialName = "light_debug_marker";
             String newMaterialName = materialName+"-"+debugSphere.getName();
 
 //            greta.auxiliary.player.ogre.natives.ResourcePtr resourceMaterialPTR = new greta.auxiliary.player.ogre.natives.ResourcePtr();
 //            Ogre.dontDelete(resourceMaterialPTR);//added to prevent crash
             Material originalMaterialPtr = MaterialManager.getSingleton().getByName(materialName);
-            
-            
+
+
             Material matClonePtr = originalMaterialPtr.clone(newMaterialName, false, "");
-            
+
             matClonePtr.getTechnique(0).getPass(0).setAmbient(colour);
 //            ColourValue colourDif = new ColourValue(0, 0, 0, 0.9f);
 //            matClonePtr.getTechnique(0).getPass(0).setDiffuse(colour);

@@ -32,7 +32,7 @@ public class BAPLaughterSynthetizer implements LaughSynthetizer {
     private Audio audio;
     private String laughterFile = "../bin/laugh/dataset/Woman1/Sd10.bap";
     private int frameNumber;
-    
+
     @Override
     public void setLaugh(Laugh laugh) {
         this.laugh = laugh;
@@ -89,7 +89,7 @@ public class BAPLaughterSynthetizer implements LaughSynthetizer {
                 laughterFile = "../bin/laugh/dataset/Woman1/Sd3.bap";
             }
         }
-        
+
     }
 
     @Override

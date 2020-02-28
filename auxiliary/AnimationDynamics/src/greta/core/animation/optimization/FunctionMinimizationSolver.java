@@ -28,11 +28,11 @@ public abstract class FunctionMinimizationSolver implements AbstractSolver {
     public RealMatrix _X;
     public double _lamda = 1;
     public double _precision = 0.000001;
-    
+
     public FunctionMinimizationSolver(Function f) {
         _f = f;
     }
-    
+
      @Override
     public void setInitX(RealMatrix init) {
         _X = init;
@@ -41,7 +41,7 @@ public abstract class FunctionMinimizationSolver implements AbstractSolver {
     public RealMatrix getX() {
         return _X;
     }
-    
+
     public double getDirlength() {
         return _lamda;
     }

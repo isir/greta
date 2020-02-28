@@ -32,13 +32,13 @@ public class OpenAndLoad extends javax.swing.JFrame {
     public OpenAndLoad() {
         initComponents();
     }
-    
+
     public void setFileName(String fileName){
-        this.filenameTextField.setText(fileName);
+        this.fileNameTextField.setText(fileName);
     }
-    
+
     public String getFileName(){
-        return this.filenameTextField.getText();
+        return this.fileNameTextField.getText();
     }
     /** This method is called from within the constructor to
      * initialize the form.
@@ -52,13 +52,13 @@ public class OpenAndLoad extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         jFileChooser1.setCurrentDirectory(new File("./"));
         jPanel1 = new javax.swing.JPanel();
-        filenameTextField = new javax.swing.JTextField();
+        fileNameTextField = new javax.swing.JTextField();
         sendButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.send");
         openButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.open");
 
-        filenameTextField.addActionListener(new java.awt.event.ActionListener() {
+        fileNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filenameTextFieldActionPerformed(evt);
+                fileNameTextFieldActionPerformed(evt);
             }
         });
 
@@ -80,7 +80,7 @@ public class OpenAndLoad extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(filenameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(fileNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(openButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -92,7 +92,7 @@ public class OpenAndLoad extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fileNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sendButton)
                     .addComponent(openButton))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -119,7 +119,7 @@ public class OpenAndLoad extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
-        send(filenameTextField.getText());
+        send(fileNameTextField.getText());
     }//GEN-LAST:event_sendButtonActionPerformed
 
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
@@ -127,16 +127,16 @@ public class OpenAndLoad extends javax.swing.JFrame {
         jFileChooser1.updateUI();
         if(jFileChooser1.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION){
             File file = jFileChooser1.getSelectedFile();
-            this.filenameTextField.setText(file.getAbsolutePath());
+            this.fileNameTextField.setText(file.getAbsolutePath());
         }
     }//GEN-LAST:event_openButtonActionPerformed
 
-    private void filenameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filenameTextFieldActionPerformed
+    private void fileNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fileNameTextFieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_filenameTextFieldActionPerformed
+    }//GEN-LAST:event_fileNameTextFieldActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField filenameTextField;
+    private javax.swing.JTextField fileNameTextField;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton openButton;
@@ -144,15 +144,14 @@ public class OpenAndLoad extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-
     private Method loadMethod;
     private Object loader;
 
-    protected void send(String filename) {
-        if(filename==null || filename.isEmpty()) return ;
+    protected void send(String fileName) {
+        if(fileName==null || fileName.isEmpty()) return ;
         if(loadMethod!=null){
             try {
-                loadMethod.invoke(loader, filename);
+                loadMethod.invoke(loader, fileName);
             }
             catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();

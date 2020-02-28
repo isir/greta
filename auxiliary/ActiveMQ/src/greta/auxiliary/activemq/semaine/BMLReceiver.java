@@ -82,7 +82,7 @@ public class BMLReceiver extends TextReceiver implements SignalEmitter, Characte
         }
 
         List<Signal> signals = BMLTranslator.BMLToSignals(bml,cm);
-        
+
         Object contentId = null;
         if (bml.hasAttribute("id")) {
             contentId = bml.getAttribute("id");
@@ -90,7 +90,7 @@ public class BMLReceiver extends TextReceiver implements SignalEmitter, Characte
         else {
             contentId = properties.get("content-id");
         }
-        
+
         ID id = IDProvider.createID(contentId == null ? "BMLReceiver" : contentId.toString());
         for (SignalPerformer performer : performers) {
             performer.performSignals(signals, id, mode);

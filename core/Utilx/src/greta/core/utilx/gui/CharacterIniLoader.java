@@ -33,9 +33,9 @@ import java.util.Collections;
  * @author Andre-Marie Pez
  */
 public class CharacterIniLoader extends IniLoader implements CharacterDependent{
-    
+
     private CharacterManager characterManager;
-    
+
     /**
      * @return the characterManager
      */
@@ -74,7 +74,7 @@ public class CharacterIniLoader extends IniLoader implements CharacterDependent{
                 if(e.getStateChange() == ItemEvent.SELECTED){
                     String characterFileName = e.getItem().toString();
                     getCharacterManager().setCharacter(characterFileName);
-                   
+
                     //managerFrame.setDefinition(characterFileName);
                 }
             }
@@ -140,5 +140,5 @@ public class CharacterIniLoader extends IniLoader implements CharacterDependent{
 
     @Override
     public void fireIniDefinitionChanged(String name) {}
-    
+
 }

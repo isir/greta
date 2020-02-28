@@ -40,7 +40,7 @@ import java.text.NumberFormat;
  */
 public class Vector3d implements Externalizable {
 
-    private static final long serialVersionUID = 1L;   
+    private static final long serialVersionUID = 1L;
 
     /**
      * The x component of the vector.
@@ -73,7 +73,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Create a new {@link Vector3d} with the given component values.
-     * 
+     *
      * @param x
      *          the value of x
      * @param y
@@ -89,7 +89,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Create a new {@link Vector3d} whose values will be copied from the given vector.
-     * 
+     *
      * @param v
      *          provides the initial values for the new vector
      */
@@ -116,7 +116,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Create a new {@link Vector3d} whose values will be copied from the given vector.
-     * 
+     *
      * @param v
      *          provides the initial values for the new vector
      */
@@ -207,7 +207,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Set the x, y and z components to match the supplied vector.
-     * 
+     *
      * @param v
      *          the vector to set this vector's components from
      * @return this
@@ -238,7 +238,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Set the x, y and z components to match the supplied vector.
-     * 
+     *
      * @param v
      *          the vector to set this vector's components from
      * @return this
@@ -280,7 +280,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Set the x, y and z components to the supplied values.
-     * 
+     *
      * @param x
      *          the x component
      * @param y
@@ -344,7 +344,7 @@ public class Vector3d implements Externalizable {
      * the vector is read, use {@link #set(int, DoubleBuffer)}, taking
      * the absolute position as parameter.
      *
-     * @param buffer 
+     * @param buffer
      *          values will be read in <tt>x, y, z</tt> order
      * @return this
      * @see #set(int, DoubleBuffer)
@@ -450,7 +450,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Subtract the supplied vector from this one.
-     * 
+     *
      * @param v
      *          the vector to subtract from this
      * @return this
@@ -464,7 +464,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Subtract the supplied vector from this one and store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to subtract from <code>this</code>
      * @param dest
@@ -480,7 +480,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Subtract the supplied vector from this one.
-     * 
+     *
      * @param v
      *          the vector to subtract from this
      * @return this
@@ -494,7 +494,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Subtract the supplied vector from this one and store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to subtract from <code>this</code>
      * @param dest
@@ -510,7 +510,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Subtract <tt>(x, y, z)</tt> from this vector.
-     * 
+     *
      * @param x
      *          the x component to subtract
      * @param y
@@ -528,7 +528,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Subtract <tt>(x, y, z)</tt> from this vector and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x component to subtract
      * @param y
@@ -548,7 +548,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Add the supplied vector to this one.
-     * 
+     *
      * @param v
      *          the vector to add
      * @return this
@@ -562,7 +562,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Add the supplied vector to this one and store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to add
      * @param dest
@@ -578,7 +578,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Add the supplied vector to this one.
-     * 
+     *
      * @param v
      *          the vector to add
      * @return this
@@ -592,7 +592,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Add the supplied vector to this one and store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to add
      * @param dest
@@ -608,7 +608,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Increment the components of this vector by the given values.
-     * 
+     *
      * @param x
      *          the x component to add
      * @param y
@@ -626,7 +626,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Increment the components of this vector by the given values and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x component to add
      * @param y
@@ -646,7 +646,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Add the component-wise multiplication of <code>a * b</code> to this vector.
-     * 
+     *
      * @param a
      *          the first multiplicand
      * @param b
@@ -662,7 +662,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Add the component-wise multiplication of <code>a * b</code> to this vector.
-     * 
+     *
      * @param a
      *          the first multiplicand
      * @param b
@@ -678,7 +678,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Add the component-wise multiplication of <code>a * b</code> to this vector.
-     * 
+     *
      * @param a
      *          the first multiplicand
      * @param b
@@ -694,7 +694,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Add the component-wise multiplication of <code>a * b</code> to this vector.
-     * 
+     *
      * @param a
      *          the first multiplicand
      * @param b
@@ -711,7 +711,7 @@ public class Vector3d implements Externalizable {
     /**
      * Add the component-wise multiplication of <code>a * b</code> to this vector
      * and store the result in <code>dest</code>.
-     * 
+     *
      * @param a
      *          the first multiplicand
      * @param b
@@ -730,7 +730,7 @@ public class Vector3d implements Externalizable {
     /**
      * Add the component-wise multiplication of <code>a * b</code> to this vector
      * and store the result in <code>dest</code>.
-     * 
+     *
      * @param a
      *          the first multiplicand
      * @param b
@@ -749,7 +749,7 @@ public class Vector3d implements Externalizable {
     /**
      * Add the component-wise multiplication of <code>a * b</code> to this vector
      * and store the result in <code>dest</code>.
-     * 
+     *
      * @param a
      *          the first multiplicand
      * @param b
@@ -768,7 +768,7 @@ public class Vector3d implements Externalizable {
     /**
      * Add the component-wise multiplication of <code>a * b</code> to this vector
      * and store the result in <code>dest</code>.
-     * 
+     *
      * @param a
      *          the first multiplicand
      * @param b
@@ -786,7 +786,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply this Vector3d component-wise by another Vector3d.
-     * 
+     *
      * @param v
      *          the vector to multiply by
      * @return this
@@ -800,7 +800,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply this Vector3d component-wise by another Vector3f.
-     * 
+     *
      * @param v
      *          the vector to multiply by
      * @return this
@@ -814,7 +814,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply this Vector3d component-wise by another Vector3f and store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to multiply by
      * @param dest
@@ -830,7 +830,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply this by <code>v</code> component-wise and store the result into <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to multiply by
      * @param dest
@@ -846,7 +846,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Divide this Vector3d component-wise by another Vector3d.
-     * 
+     *
      * @param v
      *          the vector to divide by
      * @return this
@@ -860,7 +860,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Divide this Vector3d component-wise by another Vector3f.
-     * 
+     *
      * @param v
      *          the vector to divide by
      * @return this
@@ -874,7 +874,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Divide this Vector3d component-wise by another Vector3f and store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to divide by
      * @param dest
@@ -890,7 +890,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Divide this by <code>v</code> component-wise and store the result into <code>dest</code>.
-     * 
+     *
      * @param v
      *          the vector to divide by
      * @param dest
@@ -909,7 +909,7 @@ public class Vector3d implements Externalizable {
      * and store the result in <code>dest</code>.
      * <p>
      * This method uses <tt>w=1.0</tt> as the fourth vector component.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -928,7 +928,7 @@ public class Vector3d implements Externalizable {
      * Multiply this Vector3d by the given matrix <code>mat</code>, perform perspective division.
      * <p>
      * This method uses <tt>w=1.0</tt> as the fourth vector component.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return this
@@ -942,7 +942,7 @@ public class Vector3d implements Externalizable {
      * and store the result in <code>dest</code>.
      * <p>
      * This method uses <tt>w=1.0</tt> as the fourth vector component.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -961,7 +961,7 @@ public class Vector3d implements Externalizable {
      * Multiply this Vector3d by the given matrix <code>mat</code>, perform perspective division.
      * <p>
      * This method uses <tt>w=1.0</tt> as the fourth vector component.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return this
@@ -972,7 +972,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply this Vector3d by the given matrix <code>mat</code>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return this
@@ -983,7 +983,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply this Vector3d by the given matrix <code>mat</code>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return this
@@ -995,7 +995,7 @@ public class Vector3d implements Externalizable {
     /**
      * Multiply <code>this</code> by the given matrix <code>mat</code> and store the
      * result in <code>dest</code>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -1012,7 +1012,7 @@ public class Vector3d implements Externalizable {
     /**
      * Multiply <code>this</code> by the given matrix <code>mat</code> and store the
      * result in <code>dest</code>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -1030,7 +1030,7 @@ public class Vector3d implements Externalizable {
      * Multiply <code>this</code> by the given 4x4 matrix <code>mat</code>.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>1.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return this
@@ -1043,7 +1043,7 @@ public class Vector3d implements Externalizable {
      * Multiply <code>this</code> by the given 4x4 matrix <code>mat</code>.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>1.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return this
@@ -1057,7 +1057,7 @@ public class Vector3d implements Externalizable {
      * result in <code>dest</code>.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>1.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -1076,7 +1076,7 @@ public class Vector3d implements Externalizable {
      * result in <code>dest</code>.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>1.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -1095,7 +1095,7 @@ public class Vector3d implements Externalizable {
      * of the resulting 4D vector.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>1.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return the <i>w</i> component of the resulting 4D vector after multiplication
@@ -1109,7 +1109,7 @@ public class Vector3d implements Externalizable {
      * result in <code>dest</code> and return the <i>w</i> component of the resulting 4D vector.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>1.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -1129,7 +1129,7 @@ public class Vector3d implements Externalizable {
      * of the resulting 4D vector.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>1.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return the <i>w</i> component of the resulting 4D vector after multiplication
@@ -1143,7 +1143,7 @@ public class Vector3d implements Externalizable {
      * result in <code>dest</code> and return the <i>w</i> component of the resulting 4D vector.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>1.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -1162,7 +1162,7 @@ public class Vector3d implements Externalizable {
      * Multiply <code>this</code> by the given 4x4 matrix <code>mat</code>.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>0.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return this
@@ -1175,7 +1175,7 @@ public class Vector3d implements Externalizable {
      * Multiply <code>this</code> by the given 4x4 matrix <code>mat</code>.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>0.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @return this
@@ -1189,7 +1189,7 @@ public class Vector3d implements Externalizable {
      * result in <code>dest</code>.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>0.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -1208,7 +1208,7 @@ public class Vector3d implements Externalizable {
      * result in <code>dest</code>.
      * <p>
      * This method assumes the <tt>w</tt> component of <code>this</code> to be <tt>0.0</tt>.
-     * 
+     *
      * @param mat
      *          the matrix to multiply this vector by
      * @param dest
@@ -1224,7 +1224,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply this Vector3d by the given scalar value.
-     * 
+     *
      * @param scalar
      *          the scalar to multiply this vector by
      * @return this
@@ -1238,7 +1238,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply this Vector3d by the given scalar value and store the result in <code>dest</code>.
-     * 
+     *
      * @param scalar
      *          the scalar factor
      * @param dest
@@ -1254,7 +1254,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply the components of this Vector3f by the given scalar values and store the result in <code>this</code>.
-     * 
+     *
      * @param x
      *          the x component to multiply this vector by
      * @param y
@@ -1272,7 +1272,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Multiply the components of this Vector3f by the given scalar values and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x component to multiply this vector by
      * @param y
@@ -1292,9 +1292,9 @@ public class Vector3d implements Externalizable {
 
     /**
      * Rotate this vector by the given quaternion <code>quat</code> and store the result in <code>this</code>.
-     * 
+     *
      * @see Quaterniond#transform(Vector3d)
-     * 
+     *
      * @param quat
      *          the quaternion to rotate this vector
      * @return this
@@ -1306,9 +1306,9 @@ public class Vector3d implements Externalizable {
 
     /**
      * Rotate this vector by the given quaternion <code>quat</code> and store the result in <code>dest</code>.
-     * 
+     *
      * @see Quaterniond#transform(Vector3d)
-     * 
+     *
      * @param quat
      *          the quaternion to rotate this vector
      * @param dest
@@ -1325,9 +1325,9 @@ public class Vector3d implements Externalizable {
      * and store the result in <code>dest</code>.
      * <p>
      * Because there can be multiple possible rotations, this method chooses the one with the shortest arc.
-     * 
+     *
      * @see Quaterniond#rotationTo(Vector3d, Vector3d)
-     * 
+     *
      * @param toDir
      *          the destination direction
      * @param dest
@@ -1343,9 +1343,9 @@ public class Vector3d implements Externalizable {
      * and store the result in <code>dest</code>.
      * <p>
      * Because there can be multiple possible rotations, this method chooses the one with the shortest arc.
-     * 
+     *
      * @see Quaterniond#rotationTo(double, double, double, double, double, double)
-     * 
+     *
      * @param toDirX
      *          the x coordinate of the destination direction
      * @param toDirY
@@ -1362,7 +1362,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Divide this Vector3d by the given scalar value.
-     * 
+     *
      * @param scalar
      *          the scalar to divide this vector by
      * @return this
@@ -1376,7 +1376,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Divide this Vector3d by the given scalar value and store the result in <code>dest</code>.
-     * 
+     *
      * @param scalar
      *          the scalar to divide this vector by
      * @param dest
@@ -1392,7 +1392,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Divide the components of this Vector3f by the given scalar values and store the result in <code>this</code>.
-     * 
+     *
      * @param x
      *          the x component to divide this vector by
      * @param y
@@ -1410,7 +1410,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Divide the components of this Vector3f by the given scalar values and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x component to divide this vector by
      * @param y
@@ -1430,7 +1430,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return the length squared of this vector.
-     * 
+     *
      * @return the length squared
      */
     public double lengthSquared() {
@@ -1439,7 +1439,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return the length of this vector.
-     * 
+     *
      * @return the length
      */
     public double length() {
@@ -1448,7 +1448,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Normalize this vector.
-     * 
+     *
      * @return this
      */
     public Vector3d normalize() {
@@ -1461,7 +1461,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Normalize this vector and store the result in <code>dest</code>.
-     * 
+     *
      * @param dest
      *          will hold the result
      * @return dest
@@ -1476,7 +1476,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Set this vector to be the cross product of this and v2.
-     * 
+     *
      * @param v
      *          the other vector
      * @return this
@@ -1490,7 +1490,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Set this vector to be the cross product of itself and <tt>(x, y, z)</tt>.
-     * 
+     *
      * @param x
      *          the x component of the other vector
      * @param y
@@ -1507,7 +1507,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Calculate the cross product of this and v2 and store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the other vector
      * @param dest
@@ -1523,7 +1523,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Compute the cross product of this vector and <tt>(x, y, z)</tt> and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x component of the other vector
      * @param y
@@ -1542,7 +1542,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return the distance between this vector and <code>v</code>.
-     * 
+     *
      * @param v
      *          the other vector
      * @return the distance
@@ -1556,7 +1556,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return the distance between <code>this</code> vector and <tt>(x, y, z)</tt>.
-     * 
+     *
      * @param x
      *          the x component of the other vector
      * @param y
@@ -1574,7 +1574,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return the square of the distance between this vector and <code>v</code>.
-     * 
+     *
      * @param v
      *          the other vector
      * @return the squared of the distance
@@ -1588,7 +1588,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return the square of the distance between <code>this</code> vector and <tt>(x, y, z)</tt>.
-     * 
+     *
      * @param x
      *          the x component of the other vector
      * @param y
@@ -1606,7 +1606,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return the dot product of this vector and the supplied vector.
-     * 
+     *
      * @param v
      *          the other vector
      * @return the dot product
@@ -1617,7 +1617,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return the dot product of this vector and the vector <tt>(x, y, z)</tt>.
-     * 
+     *
      * @param x
      *          the x component of the other vector
      * @param y
@@ -1633,9 +1633,9 @@ public class Vector3d implements Externalizable {
     /**
      * Return the cosine of the angle between <code>this</code> vector and
      * the supplied vector. Use this instead of <tt>Math.cos(angle(v))</tt>.
-     * 
+     *
      * @see #angle(Vector3d)
-     * 
+     *
      * @param v
      *          the other vector
      * @return the cosine of the angle
@@ -1649,9 +1649,9 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return the angle between this vector and the supplied vector.
-     * 
+     *
      * @see #angleCos(Vector3d)
-     * 
+     *
      * @param v
      *          the other vector
      * @return the angle, in radians
@@ -1666,7 +1666,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Set all components to zero.
-     * 
+     *
      * @return this
      */
     public Vector3d zero() {
@@ -1680,7 +1680,7 @@ public class Vector3d implements Externalizable {
      * Return a string representation of this vector.
      * <p>
      * This method creates a new {@link DecimalFormat} on every invocation with the format string "<tt> 0.000E0;-</tt>".
-     * 
+     *
      * @return the string representation
      */
     public String toString() {
@@ -1690,7 +1690,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Return a string representation of this vector by formatting the vector components with the given {@link NumberFormat}.
-     * 
+     *
      * @param formatter
      *          the {@link NumberFormat} used to format the vector components with
      * @return the string representation
@@ -1714,7 +1714,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Negate this vector.
-     * 
+     *
      * @return this
      */
     public Vector3d negate() {
@@ -1726,7 +1726,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Negate this vector and store the result in <code>dest</code>.
-     * 
+     *
      * @param dest
      *          will hold the result
      * @return dest
@@ -1770,7 +1770,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Reflect this vector about the given normal vector.
-     * 
+     *
      * @param normal
      *          the vector to reflect about
      * @return this
@@ -1785,7 +1785,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Reflect this vector about the given normal vector.
-     * 
+     *
      * @param x
      *          the x component of the normal
      * @param y
@@ -1804,7 +1804,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Reflect this vector about the given normal vector and store the result in <code>dest</code>.
-     * 
+     *
      * @param normal
      *          the vector to reflect about
      * @param dest
@@ -1821,7 +1821,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Reflect this vector about the given normal vector and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x component of the normal
      * @param y
@@ -1842,7 +1842,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Compute the half vector between this and the other vector.
-     * 
+     *
      * @param other
      *          the other vector
      * @return this
@@ -1853,7 +1853,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Compute the half vector between this and the vector <tt>(x, y, z)</tt>.
-     * 
+     *
      * @param x
      *          the x component of the other vector
      * @param y
@@ -1868,7 +1868,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Compute the half vector between this and the other vector and store the result in <code>dest</code>.
-     * 
+     *
      * @param other
      *          the other vector
      * @param dest
@@ -1880,9 +1880,9 @@ public class Vector3d implements Externalizable {
     }
 
     /**
-     * Compute the half vector between this and the vector <tt>(x, y, z)</tt> 
+     * Compute the half vector between this and the vector <tt>(x, y, z)</tt>
      * and store the result in <code>dest</code>.
-     * 
+     *
      * @param x
      *          the x component of the other vector
      * @param y
@@ -1901,7 +1901,7 @@ public class Vector3d implements Externalizable {
      * Compute a smooth-step (i.e. hermite with zero tangents) interpolation
      * between <code>this</code> vector and the given vector <code>v</code> and
      * store the result in <code>dest</code>.
-     * 
+     *
      * @param v
      *          the other vector
      * @param t
@@ -1924,7 +1924,7 @@ public class Vector3d implements Externalizable {
      * associated tangent <code>t0</code> and the given vector <code>v</code>
      * with its tangent <code>t1</code> and store the result in
      * <code>dest</code>.
-     * 
+     *
      * @param t0
      *          the tangent of <code>this</code> vector
      * @param v1
@@ -1952,7 +1952,7 @@ public class Vector3d implements Externalizable {
      * <p>
      * If <code>t</code> is <tt>0.0</tt> then the result is <code>this</code>. If the interpolation factor is <code>1.0</code>
      * then the result is <code>other</code>.
-     * 
+     *
      * @param other
      *          the other vector
      * @param t
@@ -1969,7 +1969,7 @@ public class Vector3d implements Externalizable {
      * <p>
      * If <code>t</code> is <tt>0.0</tt> then the result is <code>this</code>. If the interpolation factor is <code>1.0</code>
      * then the result is <code>other</code>.
-     * 
+     *
      * @param other
      *          the other vector
      * @param t
@@ -1987,7 +1987,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Get the value of the specified component of this vector.
-     * 
+     *
      * @param component
      *          the component, within <tt>[0..2]</tt>
      * @return the value
@@ -2008,7 +2008,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Set the value of the specified component of this vector.
-     * 
+     *
      * @param component
      *          the component whose value to set, within <tt>[0..2]</tt>
      * @param value
@@ -2035,7 +2035,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Determine the component with the biggest absolute value.
-     * 
+     *
      * @return the component index, within <tt>[0..2]</tt>
      */
     public int maxComponent() {
@@ -2052,7 +2052,7 @@ public class Vector3d implements Externalizable {
 
     /**
      * Determine the component with the smallest (towards zero) absolute value.
-     * 
+     *
      * @return the component index, within <tt>[0..2]</tt>
      */
     public int minComponent() {

@@ -59,7 +59,7 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
         Rule<T> r = new Rule<T>();
         r.setColor(Color.white);
         addTimeLine(new TimeLineManager<T>(r));
-        
+
     }
 
     protected void setFileFilter(javax.swing.filechooser.FileFilter fileFilter){
@@ -239,7 +239,7 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
     private void newMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newMenuItemActionPerformed
         int dialogButton = JOptionPane.YES_NO_CANCEL_OPTION;
         int dialogResult = JOptionPane.showConfirmDialog (this, "Would you like to save your current file first?", "Warning", dialogButton);
-        
+
         switch (dialogResult) {
             case JOptionPane.YES_OPTION:
             {
@@ -255,8 +255,8 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
                 break;
             }
             case JOptionPane.CANCEL_OPTION: {}
-        }       
-        
+        }
+
     }//GEN-LAST:event_newMenuItemActionPerformed
 
     private void jPanel1MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jPanel1MouseWheelMoved
@@ -299,12 +299,12 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
     }
 
     protected void clearTimeLines(){
-        
+
         for(TimeLineManager<? extends T> tlm : timeLines) {
             tlm.timeline.clear();
         }
     }
-        
+
     public boolean isUpdatedFromEvent(){
         return updateCheckBox!=null && updateCheckBox.isSelected();
     }
@@ -321,8 +321,8 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
         }
         return list;
     }
-    
-    
+
+
     public List<? extends TemporizableContainer<? extends T>> getAllTemporizableContainers(){
         ArrayList<TemporizableContainer<? extends T>> list = new ArrayList<TemporizableContainer<? extends T>>();
         for(TimeLineManager<? extends T> tlm : timeLines){
@@ -332,7 +332,7 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
         }
         return list;
     }
-    
+
     private void zoom(int pixels){
         Dimension d = new Dimension(jPanel1.getWidth() + pixels, timelinesHeight);
         jPanel1.setPreferredSize(d);
@@ -364,14 +364,14 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
         verticalGroup.addComponent(tlm, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE);
         timeLines.add(tlm);
         timelinesHeight+=tlm.getPreferredSize().getHeight();
-        
+
     }
-    
+
     private boolean saveAsShowDialog() {
         if(currentFile!=null) {
             openFileChooser.setCurrentDirectory(currentFile.getParentFile());
         }
-       
+
         openFileChooser.setLocale(Locale.getDefault());
         openFileChooser.updateUI();
         if(openFileChooser.showSaveDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION){
@@ -379,7 +379,7 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
             currentFile = openFileChooser.getSelectedFile();
             if ((currentFile != null) && currentFile.exists()) {
                 int response = JOptionPane.showConfirmDialog(this,
-                    "The file " + currentFile.getName() + 
+                    "The file " + currentFile.getName() +
                     " already exists. Do you want to replace the existing file?",
                     "Confirm Save As", JOptionPane.YES_NO_OPTION,
                     JOptionPane.WARNING_MESSAGE);
@@ -400,15 +400,15 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
                 else {
                     return false;
                 }
-            } 
+            }
         }
         return false;
     }
-    
+
     public List<String> getNonEmptyTimeLineLables(){
-        
+
         ArrayList<String> output = new ArrayList<String>();
-        
+
         for(TimeLineManager<? extends T> tlm : timeLines){
             if (tlm.notEmpty()) {
                 output.add(tlm.getLabel());
@@ -416,7 +416,7 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
         }
         return output;
     }
-    
+
     public TimeLineManager<? extends T> getTimeLineManager(String type) {
         for(TimeLineManager<? extends T> tlm : timeLines){
             if (tlm.getLabel().equalsIgnoreCase(type)) {
@@ -425,10 +425,10 @@ public abstract class MultiTimeLineEditors<T extends Temporizable> extends javax
         }
         return null;
     }
-    
+
     protected abstract void loadFile(File f);
     protected abstract void performTestButton();
-    protected abstract void saveAs(String filename);
+    protected abstract void saveAs(String fileName);
     protected abstract void newFile();
 
 

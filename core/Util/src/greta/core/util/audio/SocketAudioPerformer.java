@@ -34,7 +34,7 @@ public class SocketAudioPerformer implements AudioPerformer{
 
     private String host = "localhost";
     private int port = 5555;
-    
+
     @Override
     public void performAudios(List<Audio> audios, ID requestId, Mode mode) {
         if(audios.size()==1){
@@ -47,7 +47,7 @@ public class SocketAudioPerformer implements AudioPerformer{
             } catch (IOException ex) {
                 Logger.getLogger(SocketAudioPerformer.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
         else{
             for(int i=0; i<audios.size();++i){
@@ -60,7 +60,7 @@ public class SocketAudioPerformer implements AudioPerformer{
             } catch (IOException ex) {
                 Logger.getLogger(SocketAudioPerformer.class.getName()).log(Level.SEVERE, null, ex);
             }
-                
+
             }
         }
     }
@@ -92,5 +92,5 @@ public class SocketAudioPerformer implements AudioPerformer{
     public void setPort(int port) {
         this.port = port;
     }
-    
+
 }

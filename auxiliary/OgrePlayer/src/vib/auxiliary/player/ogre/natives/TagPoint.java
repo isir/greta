@@ -36,8 +36,8 @@ public class TagPoint extends _Object_ {
         _setOrientation(getNativePointer(), convert.getNativePointer());
     }
     private native void _setOrientation(long p, long p2);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

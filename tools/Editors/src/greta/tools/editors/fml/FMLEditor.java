@@ -67,7 +67,7 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
 
     public FMLEditor(CharacterManager cm) {
         this.cm = cm;
-        
+
         performers = new ArrayList<IntentionPerformer>();
         //speech
         speech = new TimeLineManager<PseudoIntentionSpeech>(new PseudoIntentionSpeechTimeLine(cm));
@@ -231,15 +231,15 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
     }
 
     @Override
-    protected void saveAs(String filename) {
+    protected void saveAs(String fileName) {
 
         boolean doUniqueFilename = false;
 
-        if (filename == null) {
+        if (fileName == null) {
             doUniqueFilename = true;
         }
         else {
-            if (filename.trim().isEmpty() ) {
+            if (fileName.trim().isEmpty() ) {
                 doUniqueFilename = true;
             }
         }
@@ -248,16 +248,16 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
             SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss");
             Date now = new Date();
             String strDate = sdfDate.format(now);
-            filename = "FML-Editor-" + strDate + ".xml";
+            fileName = "FML-Editor-" + strDate + ".xml";
         }
         else {
-            if (! ((filename.endsWith(".xml")) || (filename.endsWith(".fml"))) ) {
-                filename = filename.concat(".xml");
+            if (! ((fileName.endsWith(".xml")) || (fileName.endsWith(".fml"))) ) {
+                fileName = fileName.concat(".xml");
             }
         }
 
-        this.changeTitle("FML Editor - " + filename);
-        FMLTranslator.IntentionsToFML(getAllTemporizable(), new Mode(CompositionType.blend)).save(filename);
+        this.changeTitle("FML Editor - " + fileName);
+        FMLTranslator.IntentionsToFML(getAllTemporizable(), new Mode(CompositionType.blend)).save(fileName);
     }
 
         @Override

@@ -32,12 +32,12 @@ public class SceneNode extends _Object_ implements Node {
         _yaw(getNativePointer(), radian);
     }
     private native void _yaw(long p, double a);
-    
+
     public void pitch(double radian) {
         _pitch(getNativePointer(), radian);
     }
     private native void _pitch(long p, double a);
-    
+
     public void roll(double radian) {
         _roll(getNativePointer(), radian);
     }
@@ -54,7 +54,7 @@ public class SceneNode extends _Object_ implements Node {
         return new Quaternion(__getDerivedOrientation(getNativePointer()));
     }
     private native long __getDerivedOrientation(long thisPointer);
-    
+
     public void setPosition(greta.core.util.math.Vec3d v) {
         _setPosition(getNativePointer(), v.x(), v.y(), v.z());
     }
@@ -136,7 +136,7 @@ public class SceneNode extends _Object_ implements Node {
     public void setScale(greta.core.util.math.Vec3d v) {
         _setScale(getNativePointer(), v.x(), v.y(), v.z());
     }
-    
+
     public void setScale(double d, double d0, double d1) {
         _setScale(getNativePointer(), d, d0, d1);
     }
@@ -176,7 +176,7 @@ public class SceneNode extends _Object_ implements Node {
         return _getName(getNativePointer());
     }
     private native String _getName(long nativePointer);
-    
+
     public void removeAndDestroyAllChildren() {
         _removeAndDestroyAllChildren(getNativePointer());
     }
@@ -191,7 +191,7 @@ public class SceneNode extends _Object_ implements Node {
         return _numAttachedObjects(getNativePointer());
     }
     private native int _numAttachedObjects(long p);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

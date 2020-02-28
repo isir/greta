@@ -31,7 +31,7 @@ public class Skeleton {
 
     private java.util.List<Entity> bones;
     private static boolean showSkeletonAxis = Ogre.DEBUG;
-    
+
     public Skeleton(final Entity body) {
         Ogre.callSync(new OgreThread.Callback() {
 

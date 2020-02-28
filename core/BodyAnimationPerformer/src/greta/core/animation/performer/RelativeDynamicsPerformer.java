@@ -35,8 +35,8 @@ public class RelativeDynamicsPerformer extends Thread {
             } catch (Exception ex) {
             }  //
             synchronized (mutex) {
-                
-                
+
+
             }
         }
     }

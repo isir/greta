@@ -57,12 +57,12 @@ public class SimpleHeadPerformer extends BAPFrameEmitterImpl implements AUPerfor
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
     }
-    
+
     public SimpleHeadPerformer(CharacterManager cm){
         setCharacterManager(cm);
         auLibrary = new AULibrary(cm);
     }
-    
+
     public void performAUItems(AUItem animation[][][], int frame_offset, int animation_duration_frames, ID requestId) {
 
         //int animation_duration_frames = animation.length;

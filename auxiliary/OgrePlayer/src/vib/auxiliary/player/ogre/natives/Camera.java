@@ -62,7 +62,7 @@ public class Camera extends _Object_ implements MovableObject{
     }
     private native void _setFOVy(long thisPointer, double toRadians);
 
-    
+
     public Quaternion getDerivedOrientation() {
         return new Quaternion(_getDerivedOrientation(getNativePointer()));
     }
@@ -128,8 +128,8 @@ public class Camera extends _Object_ implements MovableObject{
         return ray;
     }
     private native long _getCameraToViewportRay(long thisPointer, double f, double f0);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

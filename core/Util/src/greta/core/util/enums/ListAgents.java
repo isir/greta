@@ -29,31 +29,31 @@ import java.util.List;
  * @author donat
  */
 public class ListAgents {
-    
-    private String filename = "ListAgents.ini";
+
+    private String fileName = "ListAgents.ini";
     private List<String> Agents = new ArrayList<String>();
-    
+
     public ListAgents(){
 
-        if ((new File(filename)).exists()) {
+        if ((new File(fileName)).exists()) {
             try {
-                BufferedReader in = getBufferedReader(filename);
+                BufferedReader in = getBufferedReader(fileName);
                 String ligne;
                 while ((ligne = in.readLine()) != null) {
                     ligne = ligne.trim();
                     if (!ligne.startsWith("//") && !ligne.startsWith("#") && !ligne.startsWith(";") && !ligne.isEmpty()) {
-                        Agents.add(ligne.toUpperCase().trim());  
-                    }          
+                        Agents.add(ligne.toUpperCase().trim());
+                    }
                 }
                 in.close();
             } catch (Exception e) {
-                Logs.warning(this.getClass().getName() + " : Can not open " + filename + " : " + e.getMessage());
+                Logs.warning(this.getClass().getName() + " : Can not open " + fileName + " : " + e.getMessage());
             }
         } else {
-            Logs.warning(this.getClass().getName() + " : Can not find " + filename);
+            Logs.warning(this.getClass().getName() + " : Can not find " + fileName);
         }
     }
-    
+
     protected BufferedReader getBufferedReader(String fileName) throws Exception{
         return new BufferedReader(new FileReader(fileName));
     }
@@ -71,5 +71,5 @@ public class ListAgents {
     public void setAgents(List<String> Agents) {
         this.Agents = Agents;
     }
-    
+
 }

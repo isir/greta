@@ -32,11 +32,11 @@ public class SubjectPlanner implements CommandPerformer {
     public void setUserEngagementValue(double userEngagement){
         Candidates.candidates.UserEng.SetUserEngagementValue(userEngagement);
     }
-    
+
     public double getUserEngagementValue(){
         return Candidates.candidates.UserEng.GetUserEngagementValue();
     }
-    
+
     @Override
     public String performCommandReturnString(Command command) {
         String answer = "";

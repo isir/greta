@@ -29,7 +29,7 @@ import org.joml.Matrix4f;
  * <p>
  * It makes use of the {@link Vector3Mover} to follow the {@link #center(float, float, float) center} position and
  * uses the {@link ArcRotor} for the rotation angles.
- * 
+ *
  * @author Kai Burjack
  */
 public class ArcBallCamera {
@@ -52,7 +52,7 @@ public class ArcBallCamera {
 
     /**
      * Apply the camera's view transformation to the given matrix by post-multiplying it.
-     * 
+     *
      * @param mat
      *          the matrix which gets post-multiplied by the camera's view transformation matrix
      * @return the supplied matrix

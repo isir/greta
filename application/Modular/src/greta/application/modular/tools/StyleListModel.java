@@ -98,8 +98,6 @@ public class StyleListModel extends AbstractListModel<StyleElement>{
     }
 
 
-
-
     public class StyleElement implements Comparable<StyleElement>{
 
         XMLTree style;

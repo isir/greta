@@ -14,7 +14,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 /**
  * Simple demo showcasing the use of simple VBO rendering and setting
  * projection and view matrices using JOML.
- * 
+ *
  * @author Kai Burjack
  *
  */
@@ -174,7 +174,7 @@ public class VboDemo {
         buildCube();
 
         while ( !glfwWindowShouldClose(window) ) {
-            // Build time difference between this and first time. 
+            // Build time difference between this and first time.
             long thisTime = System.nanoTime();
             float diff = (thisTime - firstTime) / 1E9f;
             // Compute some rotation angle.
@@ -203,7 +203,7 @@ public class VboDemo {
             glMatrixMode(GL_MODELVIEW);
             glLoadMatrixf(viewMatrix.get(fb));
 
-            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); 
+            glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             // Render a simple cube
             glDrawElements(GL_TRIANGLES, 6 * 6, GL_UNSIGNED_INT, 0L);

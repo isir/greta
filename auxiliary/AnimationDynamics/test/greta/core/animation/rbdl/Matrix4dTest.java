@@ -30,22 +30,22 @@ import org.junit.Test;
  * @author Jing Huang
  */
 public class Matrix4dTest {
-    
+
     public Matrix4dTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -139,7 +139,7 @@ public class Matrix4dTest {
         double v16 = 0.0;
         Matrix4d instance = new Matrix4d();
         instance.set(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16);
- 
+
         Matrix4d result = instance.copyData(instance);
 
         // TODO review the generated test code and remove the default call to fail.
@@ -172,7 +172,7 @@ public class Matrix4dTest {
         Matrix4d instance = new Matrix4d();
         instance.set(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16);
         Vector4d result = instance.multiple(v);
-        
+
         // TODO review the generated test code and remove the default call to fail.
         System.out.println("multiple test: " +  result);
     }
@@ -183,7 +183,7 @@ public class Matrix4dTest {
     @Test
     public void testZero() {
         System.out.println("zero");
-  
+
         Matrix4d result = Matrix4d.zero();
         // TODO review the generated test code and remove the default call to fail.
         System.out.println("zero test: " +  result);
@@ -197,7 +197,7 @@ public class Matrix4dTest {
         System.out.println("identity");
 
         Matrix4d result = Matrix4d.identity();
-  
+
         // TODO review the generated test code and remove the default call to fail.
         System.out.println("identity test: " +  result);
     }
@@ -227,9 +227,9 @@ public class Matrix4dTest {
         Matrix4d instance = new Matrix4d();
         instance.set(v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13, v14, v15, v16);
         Matrix4d result = instance.transpose();
-   
+
         // TODO review the generated test code and remove the default call to fail.
         System.out.println("transpose test: " +  instance + " "+result);
     }
-    
+
 }

@@ -32,7 +32,7 @@ public class LinearRegression {
     //public RealMatrix _para;
     public LinearFunction _function = new LinearFunction();
     public double _dirlength = 0.1;
-    
+
     public double _precsion = 1;
     public int _maxStep = 100;
 
@@ -59,9 +59,9 @@ public class LinearRegression {
         _function._para.subtract(dj.scalarMultiply(-_dirlength));
         return errors.getNorm();
     }
-    
+
     /***
-     * 
+     *
      * @return parameters of the function by iteration
      */
     public RealMatrix solve(){
@@ -71,7 +71,7 @@ public class LinearRegression {
             error = converge();
         }
         return _function._para;
-    } 
+    }
 
     public double getDirlength() {
         return _dirlength;
@@ -96,7 +96,6 @@ public class LinearRegression {
     public void setMaxStep(int maxStep) {
         this._maxStep = maxStep;
     }
-    
-    
-    
+
+
 }

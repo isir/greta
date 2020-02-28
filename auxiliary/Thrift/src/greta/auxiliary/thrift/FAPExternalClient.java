@@ -116,5 +116,3 @@ public class FAPExternalClient extends APExternalClient implements FAPFrameEmitt
         }
     }
 }
-
-

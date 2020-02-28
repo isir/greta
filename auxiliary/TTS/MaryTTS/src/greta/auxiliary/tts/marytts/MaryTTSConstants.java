@@ -34,8 +34,7 @@ import greta.core.util.time.TimeMarker;
  * @author Andre-Marie Pez
  */
 public class MaryTTSConstants extends CharacterDependentAdapter{
-    
-    
+
 
     /** Mary's parameter : used when sending a simple text */
     public static final String IN_TYPE_TEXT = "TEXT";
@@ -110,7 +109,7 @@ public class MaryTTSConstants extends CharacterDependentAdapter{
         pho("0", PhonemeType.O1);
     }
 
-   
+
     public MaryTTSConstants(CharacterManager cm){
         setCharacterManager(cm);
     };

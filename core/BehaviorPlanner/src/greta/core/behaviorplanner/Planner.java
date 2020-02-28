@@ -91,9 +91,9 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
     public Planner(CharacterManager cm) {
         setCharacterManager(cm);
         lexicon = new Lexicon(cm);
-        baseline = new BaseLine(cm);        
+        baseline = new BaseLine(cm);
         bqc = new BehaviorQualityComputer(cm);
-        
+
         mseSelector = new MSESelector();
         defaultSelector = new MultimodalSignalSelector();
         otherSelector = new ArrayList<SignalSelector>();
@@ -228,9 +228,9 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             //find the correponding BehaviorSet
             BehaviorSet set = lexicon.fromIntentionToBehaviorSet(intention, selector.getType());
 
-            // in diectic if we have the target attribute the Agent have to use the gaze 
+            // in diectic if we have the target attribute the Agent have to use the gaze
             BehaviorSet deict_set = new BehaviorSet("deictic-gaze");
-            // if target attribute is != null a new behaviorset for the gaze is crated 
+            // if target attribute is != null a new behaviorset for the gaze is crated
             if (intention.getName().equals("deictic") && intention.getTarget()!= null && intention.getTarget()!= ""){
                 SignalItem gaz = new SignalItem("1", "gaze", null);
                 deict_set.add(gaz);
@@ -264,7 +264,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                 if (sign.size() > 0){
                     GazeSignal signa = (GazeSignal) sign.get(0);
                     signa.setInfluence(null);
-                                      
+
                     String tg = intention.getTarget();
                     int underscoreIndex = tg.indexOf(":");
                     if (underscoreIndex != -1){
@@ -276,7 +276,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                             // if equal to the character get as target, take the id
                             //System.out.println(key.get(1));
                             if(key.equals(agent)){ // check the name of the agent to gaze
-                                signa.setOrigin(key); // take the character id 
+                                signa.setOrigin(key); // take the character id
                             }
                         }*/
                     }else {
@@ -441,10 +441,10 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
     public void onCharacterChanged() {
         Logs.info("Planner received onCharacterChanged, but does nothing itself. Should it ?");
     }
-    
+
     public void UpdateLexicon(){
         //remove the old lexicon to be sure to not have two lexicons
-        this.getCharacterManager().remove(lexicon);        
-        lexicon = new Lexicon(this.getCharacterManager());    
+        this.getCharacterManager().remove(lexicon);
+        lexicon = new Lexicon(this.getCharacterManager());
     }
 }

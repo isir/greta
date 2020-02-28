@@ -58,12 +58,12 @@ public class EmotionMLFileReader implements IntentionEmitter {
     public java.io.FileFilter getFileFilter() {
         return new java.io.FileFilter() {
             @Override
-            public boolean accept(File pathname) {
-                String filename = pathname.getName().toLowerCase();
-                if (filename.endsWith(".xml") || filename.endsWith(".eml")) {
+            public boolean accept(File pathName) {
+                String fileName = pathName.getName().toLowerCase();
+                if (fileName.endsWith(".xml") || fileName.endsWith(".eml")) {
                     try {
                         emotionmlparser.setValidating(false);
-                        return emotionmlparser.parseFile(pathname.getAbsolutePath()).getName().equalsIgnoreCase(markup);
+                        return emotionmlparser.parseFile(pathName.getAbsolutePath()).getName().equalsIgnoreCase(markup);
                     } catch (Exception e) {
                     }
                 }
@@ -82,15 +82,15 @@ public class EmotionMLFileReader implements IntentionEmitter {
      * {@link greta.core.intentions.IntentionPerformer#performIntentions(java.util.List, greta.core.util.id.ID, greta.core.util.Mode) performIntentions}
      * function.
      *
-     * @param emotionMLfilename the name of the file to load
+     * @param emotionMLfileName the name of the file to load
      */
-    public void load(String emotionMLfilename) {
+    public void load(String emotionMLfileName) {
         //get the base file name to use it as requestId
-        String base = (new File(emotionMLfilename)).getName().replaceAll("\\.xml$", "");
+        String base = (new File(emotionMLfileName)).getName().replaceAll("\\.xml$", "");
 
         //get the signals of the BML file
         emotionmlparser.setValidating(true);
-        XMLTree emotionml = emotionmlparser.parseFile(emotionMLfilename);
+        XMLTree emotionml = emotionmlparser.parseFile(emotionMLfileName);
         List<Intention> intentions = EmotionMLTranslator.EmotionMLToIntentions(emotionml);
         //send to all SignalPerformer added
         ID id = IDProvider.createID(base);

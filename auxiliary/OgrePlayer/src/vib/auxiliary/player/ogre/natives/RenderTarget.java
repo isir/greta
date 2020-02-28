@@ -22,5 +22,5 @@ package vib.auxiliary.player.ogre.natives;
  * @author André-Marie
  */
 public interface RenderTarget {
-    
+
 }

@@ -74,20 +74,20 @@ public class BapAnimationConverter {
         return bapframe;
     }
 
-    public static BufferedWriter NewFile(String pathfile, String filename, String fileformat) throws IOException {
+    public static BufferedWriter NewFile(String pathfile, String fileName, String fileformat) throws IOException {
         Random rand = new Random();
         int r = rand.nextInt(100);
 
         BufferedWriter output = null;
-        String adrfile = pathfile + filename + r + fileformat;
+        String adrfile = pathfile + fileName + r + fileformat;
         FileWriter fw = new FileWriter(adrfile, true);
         output = new BufferedWriter(fw);
         output.flush();
         return output;
     }
 
-    public void BapOutput(ArrayList<BAPFrame> bapframes, String pathfile, String filename, String fileformat, String firstLine) throws IOException {
-        BufferedWriter output = NewFile(pathfile, filename, fileformat);
+    public void BapOutput(ArrayList<BAPFrame> bapframes, String pathfile, String fileName, String fileformat, String firstLine) throws IOException {
+        BufferedWriter output = NewFile(pathfile, fileName, fileformat);
         output.write(firstLine);
         output.flush();
 

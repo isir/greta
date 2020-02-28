@@ -39,7 +39,7 @@ import org.apache.commons.math3.linear.ArrayRealVector;
  */
 public class DModel {
     // Structural information
-    
+
     /// \brief The id of the parents body
     ArrayList<Integer> lambda = new ArrayList<Integer>();
     /// \brief Contains the ids of all the children of a given body
@@ -107,7 +107,7 @@ public class DModel {
     // Dynamics variables
     /// \brief The velocity dependent spatial acceleration
     ArrayList<SpatialVector6d> c = new ArrayList<SpatialVector6d>();
-    /// \brief The spatial inertia of the bodies 
+    /// \brief The spatial inertia of the bodies
     ArrayList<SpatialMatrix6d> IA = new ArrayList<SpatialMatrix6d>();
     /// \brief The spatial bias force
     ArrayList<SpatialVector6d> pA = new ArrayList<SpatialVector6d>();
@@ -362,13 +362,13 @@ public class DModel {
      * \returns id of the added body
      */
     /***
-     * 
+     *
      * @param parent_id
      * @param joint_frame  local transform of the joint in the parent frame
      * @param joint
      * @param body
      * @param body_name
-     * @return 
+     * @return
      */
     public int addBody(int parent_id, SpatialTransform joint_frame, DJoint joint, DBody body, String body_name) {
         assert (lambda.size() > 0);
@@ -759,10 +759,10 @@ public class DModel {
     }
 
    /***
-    * compute 
+    * compute
     * @param model
     * @param joint_id
-    * @param q 
+    * @param q
     * to set the inverse transform, from the parent body to the current body transform   (usually transform is current to base)
     */
     public static void jcalc_X_lambda_S(DModel model, int joint_id, ArrayRealVector q) {

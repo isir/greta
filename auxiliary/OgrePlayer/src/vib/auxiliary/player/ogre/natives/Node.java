@@ -26,6 +26,6 @@ public interface Node {
     public void _update(boolean updateChildren, boolean parentHasChanged);
 
     public Quaternion _getDerivedOrientation();
-    
+
     public boolean isNull();
 }

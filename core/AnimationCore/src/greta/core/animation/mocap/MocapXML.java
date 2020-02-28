@@ -31,10 +31,10 @@ import java.util.ArrayList;
  */
 public class MocapXML {
 
-    public static MotionSequence load(String filename) {
+    public static MotionSequence load(String fileName) {
         MotionSequence ms = null;
         XMLParser parser = XML.createParser();
-        XMLTree mocap = parser.parseFile(filename);
+        XMLTree mocap = parser.parseFile(fileName);
         if (mocap != null) {
             String id = mocap.getAttribute("id");
             ms = new MotionSequence(id);

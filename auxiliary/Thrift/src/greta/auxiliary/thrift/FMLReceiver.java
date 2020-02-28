@@ -40,7 +40,7 @@ import java.util.List;
  */
 public class FMLReceiver extends Receiver implements IntentionEmitter {
     private CharacterManager cm;
-    
+
     public FMLReceiver(CharacterManager cm) {
         super();
         this.cm = cm;

@@ -53,7 +53,7 @@ public class DynamicsTest {
         DBody body = new DBody(1, new Vector3d(1, 2, 0), new Vector3d(1, 1, 1));
         DJoint joint = new DJoint(DJoint.JointType.JointTypeRevolute, new Vector3d(0, 0, 1));
         model.addBody(0, SpatialTransform.translate(new Vector3d()), joint, body, "testbody1");
-        
+
         DBody body1 = new DBody(1, new Vector3d(1, 2, 0), new Vector3d(1, 1, 1));
         DJoint joint1 = new DJoint(DJoint.JointType.JointTypeRevolute, new Vector3d(0, 0, 1));
         model.addBody(1, SpatialTransform.translate(new Vector3d(2,4,0)), joint1, body1, "testbody2");
@@ -73,28 +73,28 @@ public class DynamicsTest {
         ArrayRealVector q = new ArrayRealVector(2);
         ArrayRealVector qDot = new ArrayRealVector(2);
         ArrayRealVector out_qDDot = new ArrayRealVector(2);
-        
+
         ArrayRealVector q2 = new ArrayRealVector(2);
         ArrayRealVector qDot2 = new ArrayRealVector(2);
         ArrayRealVector out_qDDot2 = new ArrayRealVector(2);
-        
+
         ArrayRealVector tau = new ArrayRealVector(2);
         ArrayList<SpatialVector6d> f_ext = new ArrayList<SpatialVector6d>();
         double dt = 0.03;
         for (int i = 0; i < 3000; ++i) {
-           
+
             out_qDDot.set(0);
             out_qDDot2.set(0);
             Dynamics.forwardDynamics(model, q, qDot, tau, out_qDDot, f_ext);
             Dynamics.forwardDynamicsLagrangian(model, q2, qDot2, tau, out_qDDot2, f_ext);
-            
+
             qDot = qDot.add(out_qDDot.mapMultiply(dt));
             q = q.add(qDot.mapMultiply(dt));
-            
+
             qDot2 = qDot2.add(out_qDDot2.mapMultiply(dt));
             q2 = q2.add(qDot2.mapMultiply(dt));
-            
-            if(i%10 == 0){ 
+
+            if(i%10 == 0){
                 System.out.println("<------------------");
                 System.out.println("acce: " + out_qDDot);
                 System.out.println("acce2: " + out_qDDot2);
@@ -123,17 +123,17 @@ public class DynamicsTest {
 //        for (int i = 0; i < 3000; ++i) {
 //            out_qDDot.set(0);
 //            Dynamics.forwardDynamicsLagrangian(model, q, qDot, tau, out_qDDot, f_ext);
-//            
+//
 //            qDot = qDot.add(out_qDDot.mapMultiply(dt));
 //            q = q.add(qDot.mapMultiply(dt));
-//            if(i%100 == 0){ 
+//            if(i%100 == 0){
 //                System.out.println("<------------------");
 //                System.out.println("acce: " + out_qDDot);System.out.println("vit: " + qDot);
 //                System.out.println("rotation: " + q);
 //                System.out.println("------------------>");
 //            }
 //        }
-//        
+//
  //       System.out.println("accelaration: " + out_qDDot);
         System.out.println("forwardDynamicsLagrangian end");
     }
@@ -155,7 +155,7 @@ public class DynamicsTest {
 //        qDDot.setEntry(1, 0.1);
 //        ArrayRealVector out_tau = new ArrayRealVector(2);
 //        ArrayList<SpatialVector6d> f_ext = new ArrayList<SpatialVector6d>();
-//        
+//
 //        Dynamics.inverseDynamics(model, q, qDot, qDDot, out_tau, f_ext);
 //        System.out.println("tau: "+out_tau);
         System.out.println("inverseDynamics end");

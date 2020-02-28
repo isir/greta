@@ -31,7 +31,7 @@ public class TimeLineManager<T extends Temporizable> extends javax.swing.JPanel 
 
 
     protected TimeLine<T> timeline;
-    
+
     /** Creates new form TimeLineManager */
     public TimeLineManager(TimeLine<T> t) {
         timeline = t;
@@ -39,15 +39,15 @@ public class TimeLineManager<T extends Temporizable> extends javax.swing.JPanel 
         init();
         setColor(t.getColor());
     }
-    
+
     public TimeLine getTimeLine(){
         return this.timeline;
     }
-    
+
     public boolean notEmpty(){
         return !this.getTimeLine().getItems().isEmpty();
     }
-    
+
     public void setColor(Color c){
         timeline.setColor(c);
         jTextPane1.setBackground(c);
@@ -56,7 +56,7 @@ public class TimeLineManager<T extends Temporizable> extends javax.swing.JPanel 
     public void setLabel(String label){
         jTextPane1.setText("\n" + label);
     }
-    
+
     public String getLabel(){
         if (jTextPane1.getText().isEmpty()) {
             return "";

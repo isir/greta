@@ -42,7 +42,7 @@ public class FMLFileReader implements IntentionEmitter {
     private XMLParser fmlparser = XML.createParser();
     private static String markup = "fml-apml";
     private CharacterManager cm;
-    
+
     public FMLFileReader(CharacterManager cm){
         this.cm = cm;
     }
@@ -61,22 +61,22 @@ public class FMLFileReader implements IntentionEmitter {
      * {@link greta.core.intentions.IntentionPerformer#performIntentions(java.util.List, greta.core.util.id.ID, greta.core.util.Mode) performIntentions}
      * function.
      *
-     * @param fmlfilename the name of the file to load
+     * @param fmlFileName the name of the file to load
      * @return The ID of the generated event
      */
-    public ID load(String fmlfilename) {
+    public ID load(String fmlFileName) {
         //get the base file name to use it as requestId
-        String base = (new File(fmlfilename)).getName().replaceAll("\\.xml$", "");
+        String base = (new File(fmlFileName)).getName().replaceAll("\\.xml$", "");
 
         String fml_id = "";
         //get the intentions of the FML file
         fmlparser.setValidating(true);
-        XMLTree fml = fmlparser.parseFile(fmlfilename);
+        XMLTree fml = fmlparser.parseFile(fmlFileName);
         List<Intention> intentions = FMLTranslator.FMLToIntentions(fml,cm);
         Mode mode = FMLTranslator.getDefaultFMLMode();
         for (XMLTree fmlchild : fml.getChildrenElement()) {
             // store the bml id in the mode class in order
-            if (fmlchild.isNamed("bml")) {   
+            if (fmlchild.isNamed("bml")) {
                 //System.out.println(fmlchild.getName());
                 if(fmlchild.hasAttribute("id")){
                     mode.setBml_id(fmlchild.getAttribute("id"));
@@ -100,7 +100,7 @@ public class FMLFileReader implements IntentionEmitter {
         if (fml.hasAttribute("social_attitude")) {
             mode.setSocialAttitude(fml.getAttribute("social_attitude"));
         }
-        
+
         ID id = IDProvider.createID(base);
         id.setFmlID(fml_id);
         //send to all SignalPerformer added
@@ -123,12 +123,12 @@ public class FMLFileReader implements IntentionEmitter {
     public java.io.FileFilter getFileFilter() {
         return new java.io.FileFilter() {
             @Override
-            public boolean accept(File pathname) {
-                String filename = pathname.getName().toLowerCase();
-                if (filename.endsWith(".xml") || filename.endsWith(".fml")) {
+            public boolean accept(File pathName) {
+                String fileName = pathName.getName().toLowerCase();
+                if (fileName.endsWith(".xml") || fileName.endsWith(".fml")) {
                     try {
                         fmlparser.setValidating(false);
-                        return fmlparser.parseFile(pathname.getAbsolutePath()).getName().equalsIgnoreCase(markup);
+                        return fmlparser.parseFile(pathName.getAbsolutePath()).getName().equalsIgnoreCase(markup);
                     } catch (Exception e) {
                     }
                 }

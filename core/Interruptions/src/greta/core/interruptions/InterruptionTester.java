@@ -145,12 +145,12 @@ public class InterruptionTester extends javax.swing.JFrame implements IntentionE
     public java.io.FileFilter getFileFilter() {
         return new java.io.FileFilter() {
             @Override
-            public boolean accept(File pathname) {
-                String fileName = pathname.getName().toLowerCase();
+            public boolean accept(File pathName) {
+                String fileName = pathName.getName().toLowerCase();
                 if (fileName.endsWith(".xml") || fileName.endsWith(".fml")) {
                     try {
                         fmlParser.setValidating(false);
-                        return fmlParser.parseFile(pathname.getAbsolutePath()).getName().equalsIgnoreCase(markup);
+                        return fmlParser.parseFile(pathName.getAbsolutePath()).getName().equalsIgnoreCase(markup);
                     } catch (Exception e) {
                     }
                 }

@@ -33,9 +33,9 @@ public class PointingSignal extends GestureSignal implements SignalTargetable, C
     private Side mode;
     private GazeDirection offsetDirection = null;
     private Double offsetAngle = null;
-    
+
     private CharacterManager characterManager;
-    
+
     /**
      * @return the characterManager
      */
@@ -53,7 +53,7 @@ public class PointingSignal extends GestureSignal implements SignalTargetable, C
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
     }
-    
+
     @Override
     public void onCharacterChanged() {
         //set the current library to use :
@@ -69,14 +69,14 @@ public class PointingSignal extends GestureSignal implements SignalTargetable, C
         offsetDirection=GazeDirection.FRONT;
         offsetAngle=0.0;
     }
-    
+
     // constructeur par recopie ?
 
     @Override
     public String getTarget() {
         return target;
     }
-    
+
     public String getOrigin() {
         return origin;
     }
@@ -85,7 +85,7 @@ public class PointingSignal extends GestureSignal implements SignalTargetable, C
     public void setTarget(String target) {
         this.target = target;
     }
-    
+
     public Side getMode() {
         return mode;
     }
@@ -93,5 +93,5 @@ public class PointingSignal extends GestureSignal implements SignalTargetable, C
     public void setMode(Side mode) {
         this.mode = mode;
     }
-    
+
 }

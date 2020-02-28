@@ -192,11 +192,11 @@ public class Laugh implements Temporizable{
     public TimeMarker getEnd() {
         return end;
     }
-    
+
     public ArrayList<String> getLinkedSignal(){
-        return linkedSignals;  
+        return linkedSignals;
     }
-    
+
     public void setLinkedSignal(String _signal){
         linkedSignals.add(_signal);
     }
@@ -204,21 +204,21 @@ public class Laugh implements Temporizable{
     public void deleteLinkedSignal(String _signal){
         linkedSignals.remove(_signal);
     }
-    
+
     public boolean isEmptyLinkedSignal(){
         return linkedSignals.isEmpty();
     }
-    
+
     public boolean isRefModified(){
         if(refModified==1) return true;
         return false;
     }
-    
+
     public boolean isRefDeleted(){
         if(refModified==2) return true;
         return false;
     }
-    
+
     public void setRefModified(int i){
         refModified = i;
     }

@@ -509,7 +509,7 @@ public class Vector2i implements Externalizable {
         int dy = this.y - y;
         return dx * dx + dy * dy;
     }
-    
+
     /**
      * Add <code>v</code> to this vector.
      *
@@ -575,7 +575,7 @@ public class Vector2i implements Externalizable {
     /**
      * Multiply all components of this {@link Vector2i} by the given scalar
      * value.
-     * 
+     *
      * @param scalar
      *          the scalar to multiply this vector by
      * @return this
@@ -589,7 +589,7 @@ public class Vector2i implements Externalizable {
     /**
      * Multiply all components of this {@link Vector2i} by the given scalar
      * value and store the result in <code>dest</code>.
-     * 
+     *
      * @param scalar
      *          the scalar to multiply this vector by
      * @param dest

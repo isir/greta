@@ -36,9 +36,9 @@ public interface XMLTree {
 
     /**
      * saves the XML content in file
-     * @param filename the name of the target file
+     * @param fileName the name of the target file
      */
-    public void save(String filename);
+    public void save(String fileName);
 
     /**
      * Returns the root of the tree that contains this node
@@ -245,8 +245,8 @@ public interface XMLTree {
     public XMLTree removeChild(XMLTree child);
 
     public XMLTree removeChild(int index);
-    
+
     public XMLTree removeChildElement(int index);
-    
+
     public String toString(boolean prettyPrint);
 }

@@ -58,7 +58,7 @@ import javax.swing.JTextArea;
 public class View extends JFrame implements IntentionEmitter {
 
     private CharacterManager charactermanager;
-    
+
     private Model real;
 
     private final int vertical = JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED;

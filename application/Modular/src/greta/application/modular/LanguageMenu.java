@@ -83,7 +83,6 @@ public class LanguageMenu extends ToolBox.LocalizedJMenu{
     }
 
 
-
     private void select(JMenuItem selected){
         if(this.selected!=null){
             this.selected.setSelected(false);

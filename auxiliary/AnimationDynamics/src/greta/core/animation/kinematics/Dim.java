@@ -26,4 +26,3 @@ public class Dim {
     public int m_lastIdx;
     public int m_idx;
 }
-

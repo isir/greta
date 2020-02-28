@@ -71,7 +71,7 @@ public class MaryTTSClient implements TTS{
         maryparser = XML.createParser();
         maryparser.setValidating(false);
     }
-    
+
     private boolean isSocketOpen(String host, int port, boolean throwIOException) throws UnknownHostException, IOException {
     	boolean output;
     	try (java.net.Socket test = new java.net.Socket(host, port)) {
@@ -84,11 +84,11 @@ public class MaryTTSClient implements TTS{
 			} else {
 				output = false;
 			}
-			
+
 		}
     	return output;
     }
-    
+
     private void startMaryTTS() throws IOException {
     	boolean isWindows = System.getProperty("os.name").toLowerCase().startsWith("windows");
     	if (!isWindows) {
@@ -102,7 +102,7 @@ public class MaryTTSClient implements TTS{
     	String maryServerFile = IniManager.getGlobals().getValueString("MARY_SERVER_FILE");
     	if (maryServerFile == null || maryServerFile.equals("<MARY TTS SERVER FILE>")) {
     		throw new IllegalArgumentException("MARY_SERVER_FILE is required to autostart MaryTTS");
-    	}    	
+    	}
     	pb.directory(new File(maryServerDirectory));
     	pb.command(new String[] {"cmd.exe", "/C", maryServerFile});
     	Process proc = pb.start();
@@ -134,7 +134,7 @@ public class MaryTTSClient implements TTS{
                         if (!isSocketOpen(host, port, false)) {
                         	startMaryTTS();
                         }
-                        
+
                         //we try to find a server using the target host and port
                         //if it don't exist it's useless to try to connect to mary 4 then mary 3
                         isSocketOpen(host, port, true);
@@ -162,7 +162,7 @@ public class MaryTTSClient implements TTS{
         voice = omc.toMaryTTSVoice(speech.getLanguage());
         System.out.println(String.format("%s: %s.%s",cm.toString(),lang,voice));
     }
-    
+
     @Override
     public boolean isInterruptionReactionSupported() {
         return interreuptionReactionSupported;

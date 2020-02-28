@@ -30,9 +30,9 @@ public class VertexAnimationTrack extends _Object_{
     public VertexPoseKeyFrame createVertexPoseKeyFrame(float timePos) {
         return new VertexPoseKeyFrame(_createVertexPoseKeyFrame(getNativePointer(), timePos));
     }
-    
+
     private native long _createVertexPoseKeyFrame(long thisPointer, float timePos);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

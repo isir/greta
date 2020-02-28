@@ -32,7 +32,7 @@ public class AnimationFrame {
     public AnimationFrame(int size){
         _values = new ArrayList<Double>(size);
     }
-    
+
     public void setValue(int index, double value){
         _values.set(index, value);
     }
@@ -48,7 +48,7 @@ public class AnimationFrame {
     public ArrayList<Double> getValues() {
         return _values;
     }
-    
+
     public double getValue(int index){
         return _values.get(index);
     }
@@ -60,5 +60,5 @@ public class AnimationFrame {
     public void setAnimationDataType(String animationType) {
         this._animationType = animationType;
     }
-   
+
 }

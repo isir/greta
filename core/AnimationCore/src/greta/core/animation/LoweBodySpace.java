@@ -90,15 +90,14 @@ public class LoweBodySpace {
         }
         if(pos4.z() > zMax){
             zMax = pos4.x();
-        } 
+        }
         Joint j_root = sk.getJoint("HumanoidRoot");
         yMax = j_root.getWorldPosition().y();
         Joint j_ankle = sk.getJoint("r_ankle");
         yMin = j_ankle.getWorldPosition().y();
     }
-    
-   
-    
+
+
     public Vec3d applyConstraint(Vec3d target){
         Vec3d re = new Vec3d();
         if(target.x() < xMin){
@@ -124,5 +123,5 @@ public class LoweBodySpace {
         }
          return re;
     }
-    
+
 }

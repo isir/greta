@@ -69,8 +69,8 @@ public class SequenceWarpper {
 
         return fs;
     }
-    
-    
+
+
     static public ArrayList<Frame> getDistanceWarppedSequence(ArrayList<Frame> input, ArrayList<Double> distance, int frameNb) {
         ArrayList<Frame> fs = new ArrayList<Frame>();
         double totalWeight = 0;

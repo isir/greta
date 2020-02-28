@@ -190,7 +190,7 @@ public class PitchAccent implements Temporizable{
      * @see #STRONG
      */
     public static int levelOf(String level){
-        
+
         if (level.equalsIgnoreCase("none")) {
             return NONE;
         }
@@ -254,5 +254,5 @@ public class PitchAccent implements Temporizable{
     public TimeMarker getEnd() {
         return end;
     }
-    
+
 }

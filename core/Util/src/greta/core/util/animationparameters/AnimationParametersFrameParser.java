@@ -35,11 +35,11 @@ public abstract class AnimationParametersFrameParser<APF extends AnimationParame
 
     protected abstract APF instanciateFrame();
 
-    public List<APF> readFromFile(String filename, boolean zeroIsNow) {
+    public List<APF> readFromFile(String fileName, boolean zeroIsNow) {
         ArrayList<APF> frames = new ArrayList<APF>();
-        if (new File(filename).exists()) {
+        if (new File(fileName).exists()) {
             try {
-                BufferedReader br = new BufferedReader(new FileReader(filename));
+                BufferedReader br = new BufferedReader(new FileReader(fileName));
                 String line = br.readLine(); //TODO: detect frame rate or bap version from this first line
                 int startTime = (int) (Timer.getTime()*Constants.FRAME_PER_SECOND);
                 while ((line = br.readLine()) != null) {

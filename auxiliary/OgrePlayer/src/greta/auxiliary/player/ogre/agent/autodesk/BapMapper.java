@@ -178,7 +178,7 @@ public abstract class BapMapper {
             return res;
         }
     }
-    
+
 
     static abstract class TwistMapper extends ThreeDOF{
 
@@ -284,7 +284,7 @@ public abstract class BapMapper {
             return q;
         }
     }
-    
+
     public static class ThreeDOFScaled extends ThreeDOF{
         private double scale = 1;
         public void setScale(double scale){
@@ -310,9 +310,8 @@ public abstract class BapMapper {
             return res;
         }
     }
-    
-    
-    
+
+
     static class SortedTwistMapper extends TwistMapper{
         public SortedTwistMapper(Bone bone, Bone twistBone, BAPType type1, Vec3d axis1, BAPType type2, Vec3d axis2, BAPType type3, Vec3d axis3, double twistFactor) {
             super(bone, twistBone, type1, axis1, type2, axis2, type3, axis3, twistFactor);
@@ -327,7 +326,7 @@ public abstract class BapMapper {
         Quaternion getTwistRotation(Quaternion originalRotation) {
             return null;
         }
-        
+
         @Override
         Quaternion getRotation(BAPFrame bf) {
             twist.twistRotation = new Quaternion(axis1, lastVal1*twistFactor);
@@ -353,7 +352,7 @@ public abstract class BapMapper {
         Quaternion getTwistRotation(Quaternion originalRotation) {
             return null;
         }
-        
+
         @Override
         Quaternion getRotation(BAPFrame bf) {
             twist.twistRotation = new Quaternion(axis1, lastVal1*twistFactor);
@@ -365,7 +364,7 @@ public abstract class BapMapper {
             return res;
         }
     }
-    
+
     static class ShoulderSortedTwistMapper extends SortedTwistMapper{
 
         BapMapper acromium;
@@ -374,7 +373,7 @@ public abstract class BapMapper {
             super(bone, twistBone, type1, axis1, type2, axis2, type3, axis3, twistFactor);
             this.acromium = acromium;
         }
-        
+
 
         @Override
         boolean needsUpdate(BAPFrame bf) {
@@ -389,7 +388,7 @@ public abstract class BapMapper {
             res.normalize();
             return res;
         }
-        
-        
+
+
     }
 }

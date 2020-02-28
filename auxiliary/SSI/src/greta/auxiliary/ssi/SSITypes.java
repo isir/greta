@@ -90,10 +90,10 @@ public class SSITypes {
         prosody_geneva_UnvoicedSegmentLength_stddev,                // Double
         prosody_msspeech_keyword, // 50                             // String, the keyword (i.e. uttr value) recognized as defined in the SSI grammar for the language set in the options of SSI
                                                                     // NOTE: use applyStringValue and getStringValue to store/retrive this feature
-        prosody_msspeech_keyword_confidence,                        // Double, [0..1] representing the recognition confidence of the keyword (the uttr value) (if "semantics_prolog" option is used in SSI), otherwise -1 (if option "keyword" is used in SSI). 
+        prosody_msspeech_keyword_confidence,                        // Double, [0..1] representing the recognition confidence of the keyword (the uttr value) (if "semantics_prolog" option is used in SSI), otherwise -1 (if option "keyword" is used in SSI).
         prosody_msspeech_function,                                  // String, the function (i.e. function value) recognized as defined in the SSI grammar for the language set in the options of SSI
                                                                     // NOTE: use applyStringValue and getStringValue to store/retrive this feature
-        prosody_msspeech_function_confidence,                       // Double, [0..1] representing the recognition confidence of the keyword (the function value) (if "semantics_prolog" option is used in SSI), otherwise -1 (if option "keyword" is used in SSI). 
+        prosody_msspeech_function_confidence,                       // Double, [0..1] representing the recognition confidence of the keyword (the function value) (if "semantics_prolog" option is used in SSI), otherwise -1 (if option "keyword" is used in SSI).
         head_position_x,                                            // Double, coordinates in relation to camera
         head_position_y, // 55                                      // Double, coordinates in relation to camera
         head_position_z,                                            // Double, coordinates in relation to camera *************************************************
@@ -150,7 +150,7 @@ public class SSITypes {
         public static SSIFeatureNames getFeatureName(int ordinal){
             return (ordinal < 0 || ordinal > NUM_SSI_FEATURES) ? null_ssi : values()[ordinal];
         }
-        
+
         public static boolean isStringFeature(int ordinal) {
             if (ordinal < 0 || ordinal > NUM_SSI_FEATURES) {
                 return false;

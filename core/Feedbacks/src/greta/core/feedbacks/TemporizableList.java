@@ -115,39 +115,39 @@ public class TemporizableList {
     public boolean isFinished(){
         return allTmpFinished;
     }
-    
+
     public TimeMarker updateTimeMarker(SpeechSignal speechSign){
          if (getStartTime()!=0){
-            Double currentTime = Timer.getTime() - getStartTime();               
+            Double currentTime = Timer.getTime() - getStartTime();
             speech_timeMrk = (ArrayList) speechSign.getTimeMarkers();
-            int j = 1; 
+            int j = 1;
             if (j+1 < speech_timeMrk.size()){
-                while( speech_timeMrk.get(j).getValue() < currentTime){ // check the time progressing and the timeMarker values                               
+                while( speech_timeMrk.get(j).getValue() < currentTime){ // check the time progressing and the timeMarker values
                     setCurrentTimeMarker_ended(speech_timeMrk.get(j));
-                    // remove the timemarker from the list so I don't have to update j 
+                    // remove the timemarker from the list so I don't have to update j
                     speech_timeMrk.remove(j);
                     if (j+1 >= speech_timeMrk.size()){
                         speechSign.setId("");
-                        break;  
+                        break;
                     }
                 }
             }
         }
         return getCurrentTimeMarker_ended();
     }
-    
+
     public TimeMarker update(){
-        
+
         if (getStartTime()!=0){
             Double currentTime = Timer.getTime() - getStartTime();
             for(int i=0; i<startedList.size();i++){
-                
+
                 if (startedList.get(i).getEnd().getValue() < currentTime){
-                    finishedList.add(startedList.get(i));                    
+                    finishedList.add(startedList.get(i));
                     startedList.remove(i);
                     i--;
                 }
-                
+
             }
             for(int i=0; i<getPendingList().size();i++){
                 if (getPendingList().get(i).getStart().getValue()<currentTime){

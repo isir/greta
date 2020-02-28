@@ -38,7 +38,7 @@ import java.util.List;
  * This class is thread-safe and can be used in a multithreaded environment when testing many points against the same polygon concurrently.
  * <p>
  * Reference: <a href="http://alienryderflex.com/polygon/">http://alienryderflex.com</a>
- * 
+ *
  * @author Kai Burjack
  */
 public class PolygonsIntersection {
@@ -140,7 +140,7 @@ public class PolygonsIntersection {
      * <p>
      * The <code>verticesXY</code> array contains the x and y coordinates of all vertices. This array will not be copied so its content must remain constant for
      * as long as the PolygonPointIntersection is used with it.
-     * 
+     *
      * @param verticesXY
      *            contains the x and y coordinates of all vertices
      * @param polygons
@@ -270,16 +270,16 @@ public class PolygonsIntersection {
         // build interval tree
         tree = buildNode(intervals, centerY);
     }
-    
+
     /**
      * Test whether the given point <tt>(x, y)</tt> lies inside any polygon stored in this {@link PolygonsIntersection} object.
      * <p>
      * This method is thread-safe and can be used to test many points concurrently.
      * <p>
      * In order to obtain the index of the polygon the point is inside of, use {@link #testPoint(float, float, BitSet)}
-     * 
+     *
      * @see #testPoint(float, float, BitSet)
-     * 
+     *
      * @param x
      *            the x coordinate of the point to test
      * @param y
@@ -294,7 +294,7 @@ public class PolygonsIntersection {
      * Test whether the given point <tt>(x, y)</tt> lies inside any polygon stored in this {@link PolygonsIntersection} object.
      * <p>
      * This method is thread-safe and can be used to test many points concurrently.
-     * 
+     *
      * @param x
      *            the x coordinate of the point to test
      * @param y

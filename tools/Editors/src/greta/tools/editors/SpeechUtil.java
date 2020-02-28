@@ -29,7 +29,7 @@ import javax.swing.JOptionPane;
  * @author Andre-Marie
  */
 public class SpeechUtil{
-    
+
     private static int speechSignalCount = 0;
     private static int displayIdDigits = 3;
 
@@ -42,10 +42,10 @@ public class SpeechUtil{
         //Get text input and parse it into words and TimeMarkers in between
         String text = JOptionPane.showInputDialog("Insert the speech here");
         s = SpeechUtil.addSpeechElementsFromText(s, text);
-        
+
         //Compute Speech
         s.schedule();
-        
+
         //Set ID for Speech element with appropriate number of digits
         String name = Integer.toString(speechSignalCount);
         while (name.length() < displayIdDigits) {
@@ -53,7 +53,7 @@ public class SpeechUtil{
         }
         s.setId("speech_" + name);
         speechSignalCount++;
-        
+
         return s;
     }
 
@@ -75,12 +75,12 @@ public class SpeechUtil{
         }
         return text.isEmpty() ? null: text;
     }
-    
+
     public static Speech addSpeechElementsFromText(Speech s, String text){
         String delims = " ";
         String[] tokens = text.split(delims);
         int i = 0;
-        
+
         String timeMarkerName = "";
         for (String word : tokens) {
             s.addSpeechElement(word);
@@ -93,7 +93,7 @@ public class SpeechUtil{
         return s;
     }
     public static Speech editTemporizable(Speech temporizable) {
-        
+
         // Return changeable text of the current Speech in popup.
         String old_text = "";
         String old_id = temporizable.getId();
@@ -108,14 +108,14 @@ public class SpeechUtil{
         }
         //Get Speech text input and parse it into words and TimeMarkers in between
         String text = JOptionPane.showInputDialog("Edit the speech here",old_text);
-        
+
         Speech newspeech = new Speech(temporizable.getCharacterManager());
-        // 
+        //
         newspeech = SpeechUtil.addSpeechElementsFromText(newspeech, text);
         newspeech.getStart().setValue(temporizable.getStart().getValue());
         temporizable = new Speech(newspeech);
         temporizable.setId(old_id);
-        temporizable.schedule();        
+        temporizable.schedule();
         return temporizable;
     }
 }

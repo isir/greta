@@ -36,7 +36,7 @@ public interface IDrawable {
     public abstract boolean intersects(Point2D p);
 
     public abstract void setColor(Color color);
-    
+
     public abstract Color getColor();
 
     public abstract void setStroke(BasicStroke stroke);

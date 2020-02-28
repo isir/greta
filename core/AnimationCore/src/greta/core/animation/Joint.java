@@ -62,7 +62,7 @@ public class Joint {
             _skeleton._children.get(parent._id).add(_id);
         }
     }
-    
+
     public void setParent(int parent) {
         if (parent != -1) {
             _skeleton._parentJ.set(_id, parent);
@@ -76,7 +76,7 @@ public class Joint {
     public int getId() {
         return _id;
     }
-    
+
     public Joint getParent() {
         return _skeleton.getJoint(_skeleton._parentJ.get(_id));
     }

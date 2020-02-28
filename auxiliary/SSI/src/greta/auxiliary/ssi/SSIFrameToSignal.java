@@ -47,32 +47,32 @@ public class SSIFrameToSignal implements SSIFramePerfomer, SignalEmitter {
     private Double previousSmile = 0.0;
     private Double smile= 0.0;
     private int pitchDirection = 0;
-    
+
     // head orientation
     private double head_yaw = 0; // shake
     private double head_pitch = 0; // nod
     private double head_roll = 0; // tilt
-    
+
     //previous value yaw and pitch
     private double previous_head_yaw = 0; // shake
     private double previous_head_pitch = 0; // nod
-    
+
     boolean isShake = false;
     boolean isNod = false;
-    
+
     // vettor of frame
-    public List<Double> frames_yaw; 
-    public List<Double> frames_pitch; 
-    
+    public List<Double> frames_yaw;
+    public List<Double> frames_pitch;
+
     private CharacterManager cm;
-    
+
     public SSIFrameToSignal(CharacterManager cm){
         this.cm = cm;
         this.frames_yaw = new ArrayList<Double>();
         this.frames_pitch = new ArrayList<Double>();
-        
+
     }
-            
+
 
     @Override
     public void performSSIFrames(List<SSIFrame> ssi_frames_list, ID requestId) {
@@ -97,7 +97,7 @@ public class SSIFrameToSignal implements SSIFramePerfomer, SignalEmitter {
             toSend.add(ss);
         }
         previousSpeaking = speaking;
- 
+
         // shake
         head_yaw = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_orientation_yaw);
         if(frames_yaw.size() <= 15){
@@ -106,13 +106,13 @@ public class SSIFrameToSignal implements SSIFramePerfomer, SignalEmitter {
             frames_yaw.remove(0);
             frames_yaw.add(frames_yaw.size() ,head_yaw);
         }
-        
+
         //check max and min of the vectors
         if (frames_yaw.size() == 16){
-            
+
             double max_yaw = Collections.max(frames_yaw);
             double min_yaw = Collections.min(frames_yaw);
-            
+
             // if the difference between max and min overcome a threeshold we trigger a nod or shake signal
             if ((max_yaw - min_yaw) > 5){
                 HeadSignal hs = new HeadSignal("nod");
@@ -123,16 +123,16 @@ public class SSIFrameToSignal implements SSIFramePerfomer, SignalEmitter {
 
                 hs.setReference("nod");
                 toSend.add(hs);
-                
+
                 // clear the vector frame to do not have the same signal until the vectori is update in each position
                 frames_yaw.clear();
             }
         }
-        
+
         // nod
         head_pitch = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_orientation_pitch);
-               
-        // update the frames' vectors 
+
+        // update the frames' vectors
         if(frames_pitch.size() <= 15){
             frames_pitch.add(frames_pitch.size(), head_pitch);
         }else{
@@ -144,25 +144,25 @@ public class SSIFrameToSignal implements SSIFramePerfomer, SignalEmitter {
         if (frames_pitch.size() == 16){
             double max_pitch = Collections.max(frames_pitch);
             double min_pitch = Collections.min(frames_pitch);
-            
+
             if ((max_pitch - min_pitch) > 10){
                 HeadSignal hs = new HeadSignal("shake");
-                
+
                 //dummy time values
                 hs.getTimeMarker("start").setValue(0.0);
                 hs.getTimeMarker("end").setValue(0.0);
 
                 hs.setReference("shake");
                 toSend.add(hs);
-                
+
                 frames_pitch.clear();
-            }  
+            }
         }
 
         //head_roll = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_orientation_roll);
         //previous_head_yaw = head_yaw;
         //previous_head_pitch = head_pitch;
-        
+
         // ******* To use with SSI **********
         /*headNod = ssi_frame.getIntValue(SSITypes.SSIFeatureNames.head_nod_cat);
         if (previousHeadNod == 1 && headNod == 0) {
@@ -191,8 +191,8 @@ public class SSIFrameToSignal implements SSIFramePerfomer, SignalEmitter {
         previousHeadShake = headShake;*/
 
         // nod and shake
-        
-        
+
+
         smile = ssi_frame.getDoubleValue(SSITypes.SSIFeatureNames.head_smile);
         if (previousSmile > 70 && smile < 70) {
             FaceSignal fs = new FaceSignal("smile");

@@ -216,9 +216,9 @@ public class Library {
                 addFile(neededFiles);
             }
         }
-        protected void addFile(String filename){
-            if( ! result.contains(filename)){
-                result.add(filename);
+        protected void addFile(String fileName){
+            if( ! result.contains(fileName)){
+                result.add(fileName);
             }
         }
     }
@@ -237,8 +237,6 @@ public class Library {
     public String toString() {
         return "Library id=\""+id+"\" path=\""+libFile+"\" dependencies:"+dependencies.size()+" files:"+neededFiles.size();
     }
-
-
 
 
     //STATIC FIELDS

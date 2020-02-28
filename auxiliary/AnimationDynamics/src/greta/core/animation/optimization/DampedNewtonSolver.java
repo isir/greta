@@ -28,7 +28,7 @@ public class DampedNewtonSolver extends NewtonRaphsonSolver {
     public DampedNewtonSolver(Function f) {
         super(f);
     }
-    
+
     @Override
     public RealMatrix solve() {
         double diff = 1000;
@@ -44,7 +44,7 @@ public class DampedNewtonSolver extends NewtonRaphsonSolver {
         }
         return _X;
     }
-    
+
     /***
      * todo: not know how to solve the lamda
      */

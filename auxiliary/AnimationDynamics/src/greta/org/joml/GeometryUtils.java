@@ -24,7 +24,7 @@ package org.joml;
 
 /**
  * Useful geometry methods.
- * 
+ *
  * @author Kai Burjack
  * @author Richard Greenlees
  */
@@ -36,7 +36,7 @@ public class GeometryUtils {
      * <p>
      * The computed vectors will themselves be perpendicular to each another and normalized. So the tree vectors <tt>(x, y, z)</tt>, <code>dest1</code> and
      * <code>dest2</code> form an orthonormal basis.
-     * 
+     *
      * @param x
      *            the x coordinate of the normalized input vector
      * @param y
@@ -84,7 +84,7 @@ public class GeometryUtils {
      * <p>
      * The computed vectors will themselves be perpendicular to each another and normalized. So the tree vectors <code>v</code>, <code>dest1</code> and
      * <code>dest2</code> form an orthonormal basis.
-     * 
+     *
      * @param v
      *            the {@link Vector3f#normalize() normalized} input vector
      * @param dest1
@@ -98,7 +98,7 @@ public class GeometryUtils {
 
     /**
      * Calculate the normal of a surface defined by points <code>v1</code>, <code>v2</code> and <code>v3</code> and store it in <code>dest</code>.
-     * 
+     *
      * @param v0
      *            the first position
      * @param v1
@@ -115,7 +115,7 @@ public class GeometryUtils {
     /**
      * Calculate the normal of a surface defined by points <tt>(v1X, v1Y, v1Z)</tt>, <tt>(v2X, v2Y, v2Z)</tt> and <tt>(v3X, v3Y, v3Z)</tt>
      * and store it in <code>dest</code>.
-     * 
+     *
      * @param v0X
      *            the x coordinate of the first position
      * @param v0Y

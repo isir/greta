@@ -59,9 +59,9 @@ public class CreateBone {
 
         sm.smoothNormals();
 
-        String filename = "./Player/Data/media/bone.mesh.xml";
-        OgreXML.writMesh(mesh).save(filename);
-        CorrectionMesh.convert1dot6(filename);
+        String fileName = "./Player/Data/media/bone.mesh.xml";
+        OgreXML.writMesh(mesh).save(fileName);
+        CorrectionMesh.convert1dot6(fileName);
     }
 
     private static void addTriangle(SubMesh sm, Vec3d p1, Vec3d p2, Vec3d p3){

@@ -66,7 +66,7 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
 
     public FaceLibraryEditor(CharacterManager cm) {
         setCharacterManager(cm);
-        
+
         auLibrary = new AULibrary(cm);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
@@ -92,7 +92,7 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
                 applySelectedExpression();
             }
         });
-        
+
         reset0Button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

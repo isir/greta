@@ -157,7 +157,7 @@ public class Vector4i implements Externalizable {
      * position as parameter.
      *
      * @see #Vector4i(int, ByteBuffer)
-     * 
+     *
      * @param buffer
      *          values will be read in <tt>x, y, z, w</tt> order
      */

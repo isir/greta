@@ -48,7 +48,7 @@ public class AxisAlignedBox extends _Object_ {
         _setInfinite(getNativePointer());
     }
     private native void _setInfinite(long thisPointer);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

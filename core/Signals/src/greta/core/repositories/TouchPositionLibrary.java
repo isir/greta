@@ -40,9 +40,9 @@ public class TouchPositionLibrary extends ParameterSet<TouchPosition> implements
     static{
         globalTouchPositionlibrary = new TouchPositionLibrary();
     }
-    
+
     private CharacterManager characterManager;
-    
+
     /**
      * @return the characterManager
      */
@@ -60,14 +60,14 @@ public class TouchPositionLibrary extends ParameterSet<TouchPosition> implements
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
     }
-    
+
     public TouchPositionLibrary() {
         //get the default library :
         super();
         setDefaultDefinition(getCharacterManager().getDefaultValueString(CHARACTER_PARAMETER_TOUCHPOINT));
         //load additionnal library :
-        for(String filename : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_TOUCHPOINT)) {
-            addDefinition(filename);
+        for(String fileName : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_TOUCHPOINT)) {
+            addDefinition(fileName);
         }
 
         //set the current library to use :

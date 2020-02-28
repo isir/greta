@@ -48,8 +48,8 @@ public class EmotionMLTranslator {
      * must be remove as soon as possible
      */
     private static final boolean endAsDuration = IniManager.getGlobals().getValueBoolean("FML_END_TAG_AS_DURATION");
-    
-    
+
+
     public static synchronized XMLTree SocialParametersToEmotionML(List<SocialParameterFrame> socialFrames) {
         XMLTree xmltree = XML.createTree("emotionML");
         for(SocialParameterFrame spf : socialFrames)
@@ -66,7 +66,7 @@ public class EmotionMLTranslator {
         }
         return xmltree;
     }
-    
+
     /**
      * Translates an XMLTree in EML format to a List of SocialParameterFrames (attitudes).
      * @param emotionml the XMLTree in EML
@@ -106,8 +106,7 @@ public class EmotionMLTranslator {
         }
         return socialFrames;
     }
-    
-    
+
 
     /**
      * Translates an XMLTree in EML format to a List of Intentions (emotions).

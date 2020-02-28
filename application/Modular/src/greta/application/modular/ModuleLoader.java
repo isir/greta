@@ -272,7 +272,6 @@ public class ModuleLoader {
     }
 
 
-
     private static void loadMenus(final ModularWindow modularWindow, ModuleGraph moduleGraph) {
         JMenuBar jMenuBar = modularWindow.getJMenuBar();
         XMLTree menus = ModularXMLFile.getMenus();
@@ -506,7 +505,6 @@ public class ModuleLoader {
         System.err.printf(formatedText,args);
        // error.printStackTrace(); //usefull to debug
     }
-
 
 
 }

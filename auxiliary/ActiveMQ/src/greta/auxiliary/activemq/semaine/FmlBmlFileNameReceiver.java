@@ -66,23 +66,23 @@ public class FmlBmlFileNameReceiver extends TextReceiver implements IntentionEmi
 
     @Override
     protected void onMessage(String content, Map<String, Object> properties) {
-        String filename = content.toString();
+        String fileName = content.toString();
 
         try {
-            XMLTree xml = parser.parseFile(filename);
+            XMLTree xml = parser.parseFile(fileName);
             if (xml.getName().equalsIgnoreCase("bml")) {
 
                 Mode mode = BMLTranslator.getDefaultBMLMode();
                 setModeParametersForAnimationSignal(xml, mode);
 
-                propagateSignals(BMLTranslator.BMLToSignals(xml,cm), IDProvider.createID(filename), mode);
+                propagateSignals(BMLTranslator.BMLToSignals(xml,cm), IDProvider.createID(fileName), mode);
             }
             if (xml.getName().equalsIgnoreCase("fml-apml")) {
 
                 Mode mode = FMLTranslator.getDefaultFMLMode();
                 setModeParametersForAnimationSignal(xml, mode);
 
-                propagateIntentions(FMLTranslator.FMLToIntentions(xml,cm), IDProvider.createID(filename), mode);
+                propagateIntentions(FMLTranslator.FMLToIntentions(xml,cm), IDProvider.createID(fileName), mode);
             }
         } catch (Exception e) {
         }

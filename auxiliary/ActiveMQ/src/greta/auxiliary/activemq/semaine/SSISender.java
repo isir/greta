@@ -27,7 +27,7 @@ import java.util.Map;
  * @author Angelo Cafaro
  */
 public class SSISender extends TextSender {
-    
+
     private HashMap<String, Object> semaineMap;
     public static String DEFAULT_ACTIVEMQ_TOPIC = "SSI";
 

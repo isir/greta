@@ -31,12 +31,12 @@ public class SubMesh extends _Object_ {
         return new VertexData(_getvertexData(getNativePointer()));
     }
     private native long _getvertexData(long p);
-    
+
     public boolean getuseSharedVertices() {
         return _getuseSharedVertices(getNativePointer());
     }
     private native boolean _getuseSharedVertices(long p);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

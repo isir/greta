@@ -34,9 +34,9 @@ public class OctreeCell {
     int m_level;
     int m_parent;
     ArrayList<Integer> m_id_depthorder;
-    
+
     public OctreeCell(){}
-    
+
     public OctreeCell(Vec3d origin, Vec3d halfDim, Octree octree, int parent, int localindx){
         if(parent >= 0)
 	{
@@ -53,14 +53,14 @@ public class OctreeCell {
 		m_id_depthorder.add(0);
 	}
     }
-    
-    
+
+
     public boolean isInside(Vec3d point){
 	return !(m_origin.get(0) + m_halfDimension.get(0) < point.get(0)  ||  m_origin.get(0) - m_halfDimension.get(0) > point.get(0)  ||
                 m_origin.get(1) + m_halfDimension.get(1) < point.get(1)  ||  m_origin.get(1) - m_halfDimension.get(1) > point.get(1)  ||
                 m_origin.get(2) + m_halfDimension.get(2) < point.get(2)  ||  m_origin.get(2) - m_halfDimension.get(2) > point.get(2));
     }
-    
+
     int getOctreeCellContainingPoint(Vec3d point) {
         int oct = 0;
 	if(point.get(0) >= m_origin.get(0)) oct |= 4;

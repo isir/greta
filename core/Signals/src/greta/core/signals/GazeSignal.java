@@ -52,9 +52,9 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     private GazeDirection offsetDirection;
     private Double offsetAngle;
     private boolean isScheduled = false;
-    
+
     private CharacterManager characterManager;
-    
+
     /**
      * @return the characterManager
      */
@@ -72,7 +72,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
     }
-    
+
     @Override
     public void onCharacterChanged() {
         //set the current library to use :
@@ -101,7 +101,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     public boolean isGazeShift() {
         return shift;
     }
-    
+
     @Override
     public void setReference(String reference) {
         if(reference.startsWith("look@")){
@@ -298,7 +298,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
             }else {
                setTarget(tree.getAttribute("target"));
             }*/
-            
+
             setTarget(tree.getAttribute("target"));
         }
         //origin
@@ -375,10 +375,10 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         }
         String stringofstart = TimeMarker.convertTimeMarkerToSynchPointString(start, "0", true);
         tree.setAttribute("start", stringofstart);
-        
-        
+
+
         String stringofend = TimeMarker.convertTimeMarkerToSynchPointString(end, "0", true);
-                
+
         //backward compatibility
         if (endAsDuration) {
             if (start.isConcretized() && end.isConcretized()) {
@@ -450,7 +450,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
      public ArrayList<AUItem> getActionUnits() {
         return actionUnits;
     }//end of method
-    
+
     /**
      * Adds a {@code AUItem} in the face library item.<br/>
      *
@@ -472,7 +472,7 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     public TimeMarker getEnd() {
         return end;
     }
-    
+
     public void setModality(String modality) {
     }
 }

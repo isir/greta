@@ -42,7 +42,7 @@ public class SpatialTransform {
         this.E = E;
         this.r = r;
     }
-    
+
     public void set(SpatialTransform t){
         this.E = new Matrix3d(t.E);
         this.r = new Vector3d(t.r);
@@ -250,6 +250,6 @@ public class SpatialTransform {
         m.toIdentity();
         return new SpatialTransform(m, r);
     }
-    
-    
+
+
 }

@@ -50,7 +50,7 @@ public class MultimodalSignalSelector implements SignalSelector{
 
     private static final String idSeparator = "_";
 
-    
+
     public List<List<SignalItem>> findCandidates(Intention intention, BehaviorSet behaviorSet, DynamicLine dynamicLine, List<Signal> existingSignals)
     {
         List<List<SignalItem>> candidates = new ArrayList<List<SignalItem>>();
@@ -117,7 +117,7 @@ public class MultimodalSignalSelector implements SignalSelector{
         }
         return candidates;
     }
-    
+
     @Override
     public List<Signal> selectFrom(Intention intention, BehaviorSet behaviorSet, DynamicLine dynamicLine, List<Signal> existingSignals, CharacterManager cm) {
         List<Signal> toReturn = new ArrayList<Signal>();
@@ -187,7 +187,7 @@ public class MultimodalSignalSelector implements SignalSelector{
                 candidates.add(combination);
             }
         }
-        
+
         //no combination kept, return an empty selection...
         if(candidates.isEmpty()) {
             return toReturn;

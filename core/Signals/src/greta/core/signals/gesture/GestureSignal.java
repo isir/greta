@@ -340,7 +340,6 @@ public class GestureSignal extends ParametricSignal implements MultiStrokeSignal
     }
 
 
-
     @Override
     public void schedule() {
 

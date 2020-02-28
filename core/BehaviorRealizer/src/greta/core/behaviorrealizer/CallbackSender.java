@@ -143,7 +143,7 @@ public class CallbackSender implements CallbackEmitter {
             }
         }
     }
-    
+
     public void stopAllAnims(){
         stopAllAnims(animPendingList);
         stopAllAnims(animStartedList);

@@ -29,7 +29,7 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 
 /**
- * 
+ *
  * @author Ken Prepin
  */
 public abstract class Sender extends Connector<Sender> {

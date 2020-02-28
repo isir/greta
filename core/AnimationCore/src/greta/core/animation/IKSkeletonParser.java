@@ -31,18 +31,18 @@ import java.util.List;
  */
 public class IKSkeletonParser {
 
-    String _filepath = "";
+    String _filePath = "";
     XMLTree _tree;
     HashMap<String, Integer> _xmljointNameMap = new HashMap<String, Integer>();
     ArrayList<String> _builtJointsNames = new ArrayList<String>();
 
-    public boolean loadFile(String filepath) {
+    public boolean loadFile(String filePath) {
 
-        _filepath = filepath;
+        _filePath = filePath;
 
         XMLParser xmlparser = XML.createParser();
         xmlparser.setValidating(false);
-        _tree = xmlparser.parseFile(filepath);
+        _tree = xmlparser.parseFile(filePath);
         return _tree != null;
     }
 
@@ -61,7 +61,6 @@ public class IKSkeletonParser {
                     }
                 }
             }
-
 
 
             if (node.getName().equals("bonehierarchy")) {
@@ -102,7 +101,7 @@ public class IKSkeletonParser {
             if (node.getName().equals("rotation")) {
             }
         }
-        
+
     }
 
     public void readJointHierarchy(XMLTree current, Skeleton skeleton) {

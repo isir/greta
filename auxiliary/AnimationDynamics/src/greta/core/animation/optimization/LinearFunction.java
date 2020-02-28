@@ -32,7 +32,7 @@ public class LinearFunction implements Function {
     public RealMatrix multiply(RealMatrix X){
         return _para.multiply(X.transpose());
     }
-    
+
     @Override
     public RealMatrix getFirstDerivative(RealMatrix X) {
         return _para;

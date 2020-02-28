@@ -40,61 +40,61 @@ public class CharacterManager {
 
     //private static final String DEFAULT_CHARACTER_NAME = "CAMILLE";
     private static final String DEFAULT_CHARACTER_KEY = "DEFAULT_CHARACTER";
-       
+
     private static CharacterManager staticInstance;
     private static int count=0;
-    
-    
-    private Map<String, String> characterMapFile;     
+
+
+    private Map<String, String> characterMapFile;
     private IniManager characterDefinitions;
     private List<CharacterDependent> dependents;
-    private String currentCaracterName;    
+    private String currentCaracterName;
 
     private String currentCharacterId; //TODO find a better way to give the id from the environment
     public String currentCameraId;
     private String id;
     private TTS tts;
-    
+
     private greta.core.util.environment.TreeNode currentCharacterHeadFromUnity;
-    
+
     static{
         getStaticInstance();
     }
     private final Environment env;
-    
+
     public String toString(){
         return id;
-    }    
-    
+    }
+
     public CharacterManager(Environment env, String id){
         this.id = id;
         this.env = env;
         dependents = new ArrayList<>();
         characterMapFile = new HashMap<String, String>();
-        currentCaracterName = "DEFAULT_CHARACTER";      
-        String filename = IniManager.getGlobals().getValueString(DEFAULT_CHARACTER_KEY);
-        /*if (!(new File(filename)).exists()) {
+        currentCaracterName = "DEFAULT_CHARACTER";
+        String fileName = IniManager.getGlobals().getValueString(DEFAULT_CHARACTER_KEY);
+        /*if (!(new File(fileName)).exists()) {
             currentCaracterName = DEFAULT_CHARACTER_NAME;
-            filename = characterMapFile.get(DEFAULT_CHARACTER_NAME);
+            fileName = characterMapFile.get(DEFAULT_CHARACTER_NAME);
         }*/
-        characterMapFile.put(currentCaracterName, (new File(filename)).getAbsolutePath());
-        characterDefinitions = new IniManager((new File(filename)).getAbsolutePath());
-        setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER")); 
+        characterMapFile.put(currentCaracterName, (new File(fileName)).getAbsolutePath());
+        characterDefinitions = new IniManager((new File(fileName)).getAbsolutePath());
+        setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER"));
         this.currentCharacterHeadFromUnity = null;
         count++;
         Logs.info(String.format("CharacterManager '%s' created",id));
     }
-    
+
     public CharacterManager(Environment env){
-        this(env,"CharacterManager-"+(count));               
+        this(env,"CharacterManager-"+(count));
     }
-    
+
     public static CharacterManager getStaticInstance(){
         if(staticInstance==null)
             staticInstance = new CharacterManager(null,"CharacterManager-static");
         return staticInstance;
     }
-    
+
     public Environment getEnvironment(){
         return env;
     }
@@ -146,11 +146,11 @@ public class CharacterManager {
      * @see #addCharacter(java.lang.String)
      */
     public void setCharacter(String name) {
-        String filename = fileNameOfCharacter(name);
+        String fileName = fileNameOfCharacter(name);
 
-        if (filename != null) {
+        if (fileName != null) {
             currentCaracterName = name;
-            characterDefinitions.setDefinition(filename);
+            characterDefinitions.setDefinition(fileName);
             notifyChanges();
         }
     }
@@ -163,11 +163,11 @@ public class CharacterManager {
      */
     public void addCharacter(String name) {
         if (characterMapFile.get(name) == null) { //else it is already added
-            String filename = IniManager.getGlobals().getValueString(name);
-            if (!filename.isEmpty()) {
-                filename = (new File(filename)).getAbsolutePath();
-                characterMapFile.put(name, filename);
-                characterDefinitions.addDefinition(filename);
+            String fileName = IniManager.getGlobals().getValueString(name);
+            if (!fileName.isEmpty()) {
+                fileName = (new File(fileName)).getAbsolutePath();
+                characterMapFile.put(name, fileName);
+                characterDefinitions.addDefinition(fileName);
             }
         }
     }
@@ -350,8 +350,8 @@ public class CharacterManager {
      * @return the name of the default character
      */
     public String getDefaultCharacterName() {
-        String def_agent_filename = IniManager.getGlobals().getValueString(DEFAULT_CHARACTER_KEY);
-        String default_agent = fileNameOfCharacter(def_agent_filename);
+        String def_agent_fileName = IniManager.getGlobals().getValueString(DEFAULT_CHARACTER_KEY);
+        String default_agent = fileNameOfCharacter(def_agent_fileName);
         return default_agent;
     }
 
@@ -380,14 +380,14 @@ public class CharacterManager {
     }
 
     private String fileNameOfCharacter(String characterName) {
-        String filename = characterMapFile.get(characterName);
+        String fileName = characterMapFile.get(characterName);
 
-        if (filename == null) {
+        if (fileName == null) {
             addCharacter(characterName);
             //retry to get the file name :
-            filename = characterMapFile.get(characterName);
+            fileName = characterMapFile.get(characterName);
         }
-        return filename;
+        return fileName;
     }
 
     /**
@@ -396,7 +396,7 @@ public class CharacterManager {
     public TTS getTTS() {
         return tts;
     }
-    
+
     public void setTTS(TTS tts){
         this.tts = tts;
     }
@@ -414,11 +414,11 @@ public class CharacterManager {
     public void setCurrentCharacterId(String currentCharacterId) {
         this.currentCharacterId = currentCharacterId;
     }
-    
+
     public greta.core.util.environment.TreeNode getCurrentCharacterHeadFromUnity() {
         return this.currentCharacterHeadFromUnity;
     }
-    
+
     public void setCurrentCharacterHeadFromUnity(greta.core.util.environment.TreeNode currentCharacterHeadFromUnity) {
         this.currentCharacterHeadFromUnity = currentCharacterHeadFromUnity;
     }

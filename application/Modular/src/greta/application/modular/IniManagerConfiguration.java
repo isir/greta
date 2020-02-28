@@ -43,11 +43,11 @@ public class IniManagerConfiguration extends JPanel {
     public static String inputName(Module m, ModuleFactory.ParameterInfo info){
         return  m.getId() + "." + info.getName();
     }
-    
+
     public static String inputNameForJFrame(Module m, String attribute){
         return  m.getId() + ".window." + attribute;
     }
-    
+
     public Map<String, String> getResult(){
         return renameing;
     }

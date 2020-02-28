@@ -36,7 +36,7 @@ public class FixedBody {
     /// \brief Id of the movable body that this fixed body is attached to.
     int mMovableParent;
     /// \brief Transforms spatial quantities expressed for the parent to the
-    // fixed body. 
+    // fixed body.
     SpatialTransform mParentTransform;
     SpatialTransform mBaseTransform;
 

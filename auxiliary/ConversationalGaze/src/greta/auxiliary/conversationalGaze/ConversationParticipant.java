@@ -41,41 +41,41 @@ public class ConversationParticipant implements CharacterDependent{
     private String mpeg4_id;
     private Role role;
     private boolean isTalking;
-    
+
     private double dominance;
     private double levelOfIntimacy;
-    
+
     private double time_MG; // fixed term --> how long the agent look at the user tring to make him/her look at it back
     private double time_LA; // how long the Agent gaze aversion should be
-    
+
     private int gazeStatus; // 0 if mutual gaze; 1 if look away
     private int oldGazeStatus;
-    
+
     private ArrayList<Signal> ListSignals;
     public String lastGazeTarget = "";
     public double timeGazingatTarget = 0.0;
-    
-    public double Timeplus_lookingAtSpeaker = 1000; // msec 
-    
+
+    public double Timeplus_lookingAtSpeaker = 1000; // msec
+
     public boolean isGazing = true;
-    
+
     private List<Node> idleGazeTargets = new ArrayList<>();
     private String idleGazeTargetsRootID;
-    
-    
+
+
     public ConversationParticipant(CharacterManager cm){
-        
+
         this.characterManager = cm;
         this.name = cm.getCurrentCharacterName();
         this.mpeg4_id = cm.getCurrentCharacterId();
         this.isTalking = false;
         this.ListSignals = new ArrayList <Signal>();
-        
+
         idleGazeTargetsRootID = IDProvider.createID("IdleGazeTargetsRoot").toString();
-        
+
     }
-    
-    public ConversationParticipant(String user){        
+
+    public ConversationParticipant(String user){
         //setCharacterManager(cm);
         this.name = user;
         this.isTalking = false;
@@ -97,7 +97,7 @@ public class ConversationParticipant implements CharacterDependent{
     public void setCharacterManager(CharacterManager cm) {
        this.characterManager = cm;
     }
-          
+
     /**
      * @return the role
      */
@@ -181,7 +181,7 @@ public class ConversationParticipant implements CharacterDependent{
     public void setTime_LA(double time_LA) {
         this.time_LA = time_LA;
     }
-    
+
     /**
      * @return the gazeStatus
      */
@@ -209,26 +209,26 @@ public class ConversationParticipant implements CharacterDependent{
     public void setOldGazeStatus(int oldGazeStatus) {
         this.oldGazeStatus = oldGazeStatus;
     }
-    
+
     public List<Signal> addSignal(GazeSignal gs){
         this.getSignal().add(gs);
         return getSignal();
     }
-    
+
     public List<Signal> addListGazeSignal(List<GazeSignal> lgs){
         for (GazeSignal gs : lgs){
             this.getSignal().add(gs);
         }
         return getSignal();
     }
-    
+
     public List<Signal> addListSignal(List<Signal> lgs){
         for (Signal gs : lgs){
             this.getSignal().add(gs);
         }
         return getSignal();
     }
-    
+
     /**
      * @return the ListSignals
      */
@@ -263,7 +263,7 @@ public class ConversationParticipant implements CharacterDependent{
     public void setMpeg4_id(String mpag4_id) {
         this.mpeg4_id = mpag4_id;
     }
-    
+
     public void generateRandomIdleGazeTargets(String getMpeg4_id) {
 
         Environment envi = this.getCharacterManager().getEnvironment();
@@ -282,11 +282,11 @@ public class ConversationParticipant implements CharacterDependent{
                             System.out.println(identifier);
                             if (nd.getIdentifier().equals(identifier)){
                                 agentNode = (TreeNode) nd;
-                            }      
+                            }
                         }
                     }
                 }
-                
+
                 if (agentNode != null){
                     TreeNode rootNodeIdleGazeTargets = (TreeNode) envi.getNode(idleGazeTargetsRootID);
 
@@ -305,29 +305,29 @@ public class ConversationParticipant implements CharacterDependent{
                     gs.setOffsetDirection(GazeDirection.LEFT);
                     //gs.set
                     idleGazeTargets.add(gs);
-                    
+
                     GazeSignal gs2 = new GazeSignal("gazeRight");
                     gs.setCharacterManager(characterManager);
                     gs.setGazeShift(true);
                     gs.setOffsetAngle(30);
                     gs.setOffsetDirection(GazeDirection.RIGHT);
-                    
+
                     idleGazeTargets.add(gs2);
-                    
+
                     GazeSignal gs3 = new GazeSignal("gazeRight");
                     gs.setCharacterManager(characterManager);
                     gs.setGazeShift(true);
                     gs.setOffsetAngle(30);
                     gs.setOffsetDirection(GazeDirection.DOWN);
-                    
+
                     idleGazeTargets.add(gs3);
-                    
+
                     GazeSignal gs4 = new GazeSignal("gazeRight");
                     gs.setCharacterManager(characterManager);
                     gs.setGazeShift(true);
                     gs.setOffsetAngle(30);
                     gs.setOffsetDirection(GazeDirection.UP);
-                    
+
                     idleGazeTargets.add(gs4);*/
                     root.setCoordinates(0.0, 1.5, 1.5);
 
@@ -386,7 +386,7 @@ public class ConversationParticipant implements CharacterDependent{
                     Leaf down = new Leaf();
                     down.setSize(0.1, 0.1, 0.1);
                     environment.addNode(down, nodeAgentDownTarget);
-                    
+
                     // End Debug
                     */
                     Logs.info(": random idle gaze target nodes generated.");
@@ -395,13 +395,13 @@ public class ConversationParticipant implements CharacterDependent{
                     //getIdleGazeTargets().addAll(rootNodeIdleGazeTargets.getChildren());
                 }
                 }
-                
-            
+
+
         }else {
             Logs.warning(": Environment not set, cannot generate random idle gaze target nodes.");
         }
     }
-    
+
         /**
      * @return the idleGazeTargets
      */

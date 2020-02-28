@@ -113,7 +113,7 @@ public class Vec3d {
         data[1] = d1;
         data[2] = d2;
     }
-    
+
     public void set(Vec3d v) {
         data[0] = v.x();
         data[1] = v.y();

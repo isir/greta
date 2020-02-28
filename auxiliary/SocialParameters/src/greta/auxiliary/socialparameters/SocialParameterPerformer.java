@@ -27,6 +27,6 @@ import java.util.List;
 public interface SocialParameterPerformer {
 
     public void performSocialParameter(List<SocialParameterFrame> frames, ID requestId);
-    
-    
+
+
 }

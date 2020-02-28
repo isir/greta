@@ -93,7 +93,7 @@ public class Modular {
 
         //TODO need to be removed (put it in ini file)
         Speech.setOriginal(true);
-        
+
     }
 
     public static boolean isProblematicLAF(javax.swing.UIManager.LookAndFeelInfo lafInfo){

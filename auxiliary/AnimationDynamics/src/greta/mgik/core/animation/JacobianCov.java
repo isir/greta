@@ -35,7 +35,7 @@ public class JacobianCov extends IKSolver {
     RealMatrix m_invcov;
     RealVector m_mu;
     RealVector last_state;
-    
+
     double m_dampling1 = 0.01;
     double m_dampling2 = 0.01;
     public JacobianCov(int maxTries, double targetThreshold, double dampling1, double dampling2) {
@@ -106,13 +106,13 @@ public class JacobianCov extends IKSolver {
         RealMatrix jacobianTranspose = jacobian.transpose();
         RealMatrix jtj = jacobian.multiply(jacobianTranspose);
         RealMatrix lamdaI = MatrixUtils.createRealIdentityMatrix(jtj.getRowDimension());
-        
+
         double dampling = m_dampling2 * Math.pow(distance.getNorm(), 2);
 	RealMatrix a =  MatrixUtils.inverse(jtj.scalarMultiply(2).add(lamdaI.scalarMultiply(m_dampling1)).add( m_invcov.scalarMultiply(dampling)));
 	RealVector b = jacobianTranspose.operate(distance).mapMultiply(2).add(m_invcov.operate(m_mu.subtract(last_state)).mapMultiply(dampling));
 	RealVector dR = a.operate(b);
-        
-        
+
+
         if (m_activeRoot) {
             for (int i = 0; i < 3; ++i) {
                 chain.m_dim_values.set(i, castPiRange(chain.m_dim_values.get(i) + dR.getEntry(i)));

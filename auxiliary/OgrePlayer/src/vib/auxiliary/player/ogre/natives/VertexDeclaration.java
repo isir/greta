@@ -30,9 +30,9 @@ public class VertexDeclaration extends _Object_{
     public VertexDeclaration getAutoOrganisedDeclaration(boolean b, boolean b0) {
         return new VertexDeclaration(_getAutoOrganisedDeclaration(getNativePointer(), b, b0));
     }
-    
+
     private native long _getAutoOrganisedDeclaration(long thisPointer, boolean b, boolean b0);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

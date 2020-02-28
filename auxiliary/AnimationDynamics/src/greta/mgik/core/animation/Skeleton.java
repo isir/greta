@@ -29,7 +29,7 @@ import org.apache.commons.math3.linear.RealMatrix;
  * <gabriel.jing.huang@gmail.com or jing.huang@telecom-paristech.fr>
  */
 public class Skeleton {
-    
+
     public Skeleton(){
         init();
     }
@@ -40,7 +40,7 @@ public class Skeleton {
         bl.load("Soccer_Toes_zyx.bvh");
         buildJacobian(this.m_endeffectors, 6);
     }
-    
+
     enum DimType {
 
         Zposition,

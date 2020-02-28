@@ -85,27 +85,27 @@ public class ShaderExampleLH {
         glVertex3f( -0.5f, -0.5f,  0.5f );
         glVertex3f( -0.5f,  0.5f,  0.5f );
         glVertex3f(  0.5f,  0.5f,  0.5f );
-        
+
         glVertex3f(  0.5f, -0.5f, -0.5f );
         glVertex3f(  0.5f,  0.5f, -0.5f );
         glVertex3f( -0.5f,  0.5f, -0.5f );
         glVertex3f( -0.5f, -0.5f, -0.5f );
-        
+
         glVertex3f(  0.5f, -0.5f,  0.5f );
         glVertex3f(  0.5f,  0.5f,  0.5f );
         glVertex3f(  0.5f,  0.5f, -0.5f );
         glVertex3f(  0.5f, -0.5f, -0.5f );
-        
+
         glVertex3f( -0.5f, -0.5f, -0.5f );
         glVertex3f( -0.5f,  0.5f, -0.5f );
         glVertex3f( -0.5f,  0.5f,  0.5f );
         glVertex3f( -0.5f, -0.5f,  0.5f );
-        
+
         glVertex3f(  0.5f,  0.5f, -0.5f );
         glVertex3f(  0.5f,  0.5f,  0.5f );
         glVertex3f( -0.5f,  0.5f,  0.5f );
         glVertex3f( -0.5f,  0.5f, -0.5f );
-        
+
         glVertex3f(  0.5f, -0.5f,  0.5f );
         glVertex3f(  0.5f, -0.5f, -0.5f );
         glVertex3f( -0.5f, -0.5f, -0.5f );
@@ -137,18 +137,18 @@ public class ShaderExampleLH {
         // Create a simple shader program
         int program = glCreateProgram();
         int vs = glCreateShader(GL_VERTEX_SHADER);
-        glShaderSource(vs, 
-                "uniform mat4 viewProjMatrix;" + 
-                "void main(void) {" + 
-                "  gl_Position = viewProjMatrix * gl_Vertex;" + 
+        glShaderSource(vs,
+                "uniform mat4 viewProjMatrix;" +
+                "void main(void) {" +
+                "  gl_Position = viewProjMatrix * gl_Vertex;" +
                 "}");
         glCompileShader(vs);
         glAttachShader(program, vs);
         int fs = glCreateShader(GL_FRAGMENT_SHADER);
         glShaderSource(fs,
                 "uniform vec3 color;" +
-                "void main(void) {" + 
-                "  gl_FragColor = vec4(color, 1.0);" + 
+                "void main(void) {" +
+                "  gl_FragColor = vec4(color, 1.0);" +
                 "}");
         glCompileShader(fs);
         glAttachShader(program, fs);

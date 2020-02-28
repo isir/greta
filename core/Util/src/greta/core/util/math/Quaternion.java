@@ -23,21 +23,21 @@ package greta.core.util.math;
  */
 public class Quaternion {
 
-        
+
     public static void main(final String[] args) {
         Quaternion q = new Quaternion();
         q.setAxisAngle(new Vec3d(1,0.5,-0.3), 1);
         q.normalize();
         Matrix3d m = q.getRotationMatrix();
-        
+
         Vec3d v = new Vec3d(3,9,-10);
-        
+
         Vec3d out1 = Matrix3d.multiplication(m, v);
         Vec3d out2 = Quaternion.multiplication(q, v);
-        
+
         System.out.println(out1 +" " + out2);
     }
-    
+
     private double q[] = new double[4];
 
     @Override
@@ -306,30 +306,30 @@ public class Quaternion {
         }
         normalize();
     }
-    
+
     public void setFromRotationMatrixNew(Matrix3d mat){
         double m[][] = mat.getData();
         double tr = m[0][0] + m[1][1] + m[2][2];
 
-        if (tr > 0) { 
-          double S = Math.sqrt(tr+1.0) * 2; // S=4*qw 
+        if (tr > 0) {
+          double S = Math.sqrt(tr+1.0) * 2; // S=4*qw
           q[3] = 0.25 * S;
           q[0] = (m[2][1] - m[1][2]) / S;
-          q[1] = (m[0][2] - m[2][0]) / S; 
-          q[2] = (m[1][0] - m[0][1]) / S; 
-        } else if ((m[0][0] > m[1][1])&(m[0][0] > m[2][2])) { 
-          double S = Math.sqrt(1.0 + m[0][0] - m[1][1] - m[2][2]) * 2; // S=4*qx 
+          q[1] = (m[0][2] - m[2][0]) / S;
+          q[2] = (m[1][0] - m[0][1]) / S;
+        } else if ((m[0][0] > m[1][1])&(m[0][0] > m[2][2])) {
+          double S = Math.sqrt(1.0 + m[0][0] - m[1][1] - m[2][2]) * 2; // S=4*qx
           q[3] = (m[2][1] - m[1][2]) / S;
           q[0] = 0.25 * S;
-          q[1] = (m[0][1] + m[1][0]) / S; 
-          q[2] = (m[0][2] + m[2][0]) / S; 
-        } else if (m[1][1] > m[2][2]) { 
+          q[1] = (m[0][1] + m[1][0]) / S;
+          q[2] = (m[0][2] + m[2][0]) / S;
+        } else if (m[1][1] > m[2][2]) {
           double S = Math.sqrt(1.0 + m[1][1] - m[0][0] - m[2][2]) * 2; // S=4*qy
           q[3] = (m[0][2] - m[2][0]) / S;
-          q[0] = (m[0][1] + m[1][0]) / S; 
+          q[0] = (m[0][1] + m[1][0]) / S;
           q[1] = 0.25 * S;
-          q[2] = (m[1][2] + m[2][1]) / S; 
-        } else { 
+          q[2] = (m[1][2] + m[2][1]) / S;
+        } else {
           double S = Math.sqrt(1.0 + m[2][2] - m[0][0] - m[1][1]) * 2; // S=4*qz
           q[3] = (m[1][0] - m[0][1]) / S;
           q[0] = (m[0][2] + m[2][0]) / S;
@@ -722,14 +722,14 @@ public class Quaternion {
         double c = -java.lang.Math.atan2((q[3] * q[1] - q[0] * q[2]), (q[0] * q[1] + q[3] * q[2]));
         return new Vec3d(a, b, c);
     }
-    
+
     private static Vec3d toDegrees(Vec3d rad){
         double x = Math.toDegrees(rad.x());
         double y = Math.toDegrees(rad.y());
         double z = Math.toDegrees(rad.z());
         return new Vec3d(x, y, z);
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="Euler XYZ convertions">
     //TODO check if it is the same as getEulerAngleXYZ
     public Vec3d toEulerXYZ() {

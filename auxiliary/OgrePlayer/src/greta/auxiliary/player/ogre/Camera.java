@@ -48,13 +48,13 @@ public class Camera {
 
     /**
      * Creates a new {@code Camera}
-     
+
      * @param sceneManager the {@code SceneManager} that will creates the OgreCamera
      * @param parentNode the {@code SceneNode} where this {@code Camera} is attached to
      * @param idCamera the identifier of this {@code Camera}, it must be unique in the sceneManager
      */
     public Camera(SceneManager sceneManager, SceneNode parentNode, String idCamera){
-        
+
         translationNode = parentNode.createChildSceneNode();
         yawNode         = translationNode.createChildSceneNode();
         pitchNode       = yawNode.createChildSceneNode();
@@ -75,7 +75,7 @@ public class Camera {
         mic.setGuest(true);
         rotationAdaptor = new greta.core.util.math.Quaternion(new Vec3d(0, 1, 0), (float)Math.PI);
         backgroundColor = new Vec3d(0.5f, 0.5f, 0.5f);
-        
+
         //cm.currentCameraId = mic.getIdentifier();
     }
 
@@ -85,7 +85,7 @@ public class Camera {
         }
         applyBackgroundColor();
     }
-    
+
     public void setBackgroundColorWithoutApply(Vec3d color){
         if(color!=null){
             backgroundColor = color;

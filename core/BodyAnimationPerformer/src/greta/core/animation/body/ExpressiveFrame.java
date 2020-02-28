@@ -34,7 +34,7 @@ public class ExpressiveFrame extends Frame{
     public void setTime(double time) {
         this._time = time;
     }
-    
+
       public ExpressivityParameters getExpressivityParameters() {
         return _exp;
     }

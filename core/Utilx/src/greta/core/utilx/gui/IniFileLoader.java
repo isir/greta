@@ -104,7 +104,6 @@ public class IniFileLoader extends IniLoader{
     }
 
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField iniFileInput;
     private javax.swing.JFileChooser jFileChooser1;

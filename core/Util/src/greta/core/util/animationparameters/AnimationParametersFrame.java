@@ -102,7 +102,7 @@ public abstract class AnimationParametersFrame<AP extends AnimationParameter> im
 
     @Override
     public String toString() {
-        return AnimationParametersFrame2String(); 
+        return AnimationParametersFrame2String();
     }
 
 

@@ -41,7 +41,7 @@ public class MessageLogger extends TextReceiver {
 
     @Override
     protected void onMessage(String content, Map<String, Object> properties) {
-        
+
         Logs.info("[ActiveMQ Message Logger] Incoming message\n");
         Logs.info("---------------------------------------- CONTENT BEGIN ----------------------------------------\n");
         Logs.info(content + "\n");

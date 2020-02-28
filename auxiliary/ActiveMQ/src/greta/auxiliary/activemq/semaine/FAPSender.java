@@ -69,8 +69,6 @@ public class FAPSender extends TextSender implements greta.core.animation.mpeg4.
     }
 
 
-
-
     @Override
    public void send(String text, Map<String, Object> properties) {
       String requestId=(String) properties.get("content-id");
@@ -98,7 +96,6 @@ public class FAPSender extends TextSender implements greta.core.animation.mpeg4.
         properties.putAll(semaineMap);
         // Must be overrided to complete the map
     }
-
 
 
 }

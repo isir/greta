@@ -73,8 +73,8 @@ public class ZipMaker {
                         progress.setMaximum(allfiles.size());
                     }
                     int step = 0;
-                    for(String filename : allfiles){
-                        String entryName = getRelativePathInTheCurrentDir(filename);
+                    for(String fileName : allfiles){
+                        String entryName = getRelativePathInTheCurrentDir(fileName);
                         if(showProgress){
                             if(progress.isCanceled()){
                                 zipOutputStream.close();
@@ -88,8 +88,8 @@ public class ZipMaker {
                             try{
                                 ZipEntry entry = new ZipEntry(entryName);
                                 zipOutputStream.putNextEntry(entry);
-                                if(new File(filename).isFile()){
-                                    InputStream is = new BufferedInputStream(new FileInputStream(filename));
+                                if(new File(fileName).isFile()){
+                                    InputStream is = new BufferedInputStream(new FileInputStream(fileName));
                                     copy(is, zipOutputStream);
                                     is.close();
                                 }

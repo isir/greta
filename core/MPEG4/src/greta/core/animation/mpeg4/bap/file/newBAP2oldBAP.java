@@ -87,23 +87,22 @@ public class newBAP2oldBAP {
         return (mask + "\n" + buffer + "\n");
     }
 
-    public void load(String bapfilename) {
+    public void load(String bapFileName) {
 
 
-
-        String base = (new File(bapfilename)).getName().replaceAll("\\.bap$", "");
+        String base = (new File(bapFileName)).getName().replaceAll("\\.bap$", "");
 
         InputStream bapfile = null;
         String readline;
 
         try {
 
-            String nameFile = (bapfilename +  "_old.bap");
+            String nameFile = (bapFileName +  "_old.bap");
             java.io.FileWriter fos = new java.io.FileWriter(nameFile);
             String first_line =  "2.1 "+ nameFile + " 25  170 " +"\n";
             fos.write(first_line);
 
-            bapfile = new FileInputStream(bapfilename);
+            bapfile = new FileInputStream(bapFileName);
             InputStreamReader bapfilesr = new InputStreamReader(bapfile);
             BufferedReader br = new BufferedReader(bapfilesr);
 
@@ -170,4 +169,3 @@ public class newBAP2oldBAP {
     }
 
 }
-

@@ -79,7 +79,7 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFrameEmitt
         jFileChooser1.setAcceptAllFileFilterUsed(false);
         jFileChooser1.addChoosableFileFilter(new XMLFileChooser());
         updateFrame(jComboBox1.getSelectedItem().toString());
-        
+
         onCharacterChanged();
     }
 
@@ -93,7 +93,6 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFrameEmitt
             jMenuItem1.setText(IniManager.getLocaleProperty("GUI.Save"));
         }
     }
-
 
 
     /**
@@ -567,15 +566,15 @@ public class HandShapeEditor extends javax.swing.JFrame implements BAPFrameEmitt
         if( ! cm.getDefaultCharacterFile().equals(
             cm.getCurrentCharacterFile())){
             if(lib.getCurrentDefinition()==lib.getDefaultDefinition()){
-                String filename = "./BehaviorRealizer/AnimationLexicon/HandShape_"+cm.getCurrentCharacterName()+".xml";
+                String fileName = "./BehaviorRealizer/AnimationLexicon/HandShape_"+cm.getCurrentCharacterName()+".xml";
                 int count = 1;
-                while((new File(filename)).exists()){
-                    filename = "./BehaviorRealizer/AnimationLexicon/HandShape_"+cm.getCurrentCharacterName()+count+".xml";
+                while((new File(fileName)).exists()){
+                    fileName = "./BehaviorRealizer/AnimationLexicon/HandShape_"+cm.getCurrentCharacterName()+count+".xml";
                     count++;
                 }
-                lib.createEmptyDefinition(filename);
-                lib.setDefinition(filename);
-                cm.addValueString(HandShapeLibrary.CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY, filename);
+                lib.createEmptyDefinition(fileName);
+                lib.setDefinition(fileName);
+                cm.addValueString(HandShapeLibrary.CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY, fileName);
             }
         }
         updateFrame(jComboBox1.getSelectedItem().toString());

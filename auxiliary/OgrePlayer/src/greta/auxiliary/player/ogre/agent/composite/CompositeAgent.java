@@ -60,7 +60,6 @@ public class CompositeAgent extends MPEG4Agent{
     private SceneManager sceneManager;
 
 
-
     public CompositeAgent(String id, SceneNode parent, SceneManager sceneManager, String bodyMeshFile, String faceMeshFile, String wrinklesMaterialName){
         super(id, parent);
         this.sceneManager = sceneManager;

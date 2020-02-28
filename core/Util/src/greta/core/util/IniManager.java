@@ -143,10 +143,10 @@ public class IniManager extends ParameterSet<IniParameter> {
 //constructors :
     /**
      * Construct an IniManger object with a target file name.
-     * @param filename the name of the ini file
+     * @param fileName the name of the ini file
      */
-    public IniManager(String filename) {
-        super(filename);
+    public IniManager(String fileName) {
+        super(fileName);
     }
 
     /**
@@ -167,10 +167,10 @@ public class IniManager extends ParameterSet<IniParameter> {
     protected List<IniParameter> load(String definition) {
 
         ArrayList<IniParameter> params = new ArrayList<IniParameter>();
-        String filename = getFileName(definition);
-        if ((new File(filename)).exists()) {
+        String fileName = getFileName(definition);
+        if ((new File(fileName)).exists()) {
             try {
-                BufferedReader in = getBufferedReader(filename);
+                BufferedReader in = getBufferedReader(fileName);
                 String ligne;
                 while ((ligne = in.readLine()) != null) {
                     ligne = ligne.trim();
@@ -188,10 +188,10 @@ public class IniManager extends ParameterSet<IniParameter> {
 
                 in.close();
             } catch (Exception e) {
-                Logs.warning(this.getClass().getName() + " : Can not open " + filename + " : " + e.getMessage());
+                Logs.warning(this.getClass().getName() + " : Can not open " + fileName + " : " + e.getMessage());
             }
         } else {
-            Logs.warning(this.getClass().getName() + " : Can not find " + filename);
+            Logs.warning(this.getClass().getName() + " : Can not find " + fileName);
         }
 
         return params;
@@ -445,5 +445,5 @@ public class IniManager extends ParameterSet<IniParameter> {
     public String getValueString(String name, String definition) {
         IniParameter param = get(name, definition);
         return param == null ? "" : param.getParamValue();
-    }           
+    }
 }

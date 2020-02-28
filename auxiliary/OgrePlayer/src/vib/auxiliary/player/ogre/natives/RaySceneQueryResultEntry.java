@@ -30,7 +30,7 @@ public class RaySceneQueryResultEntry extends _Object_{
         return _distance(getNativePointer());
     }
     private native double _distance(long p);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

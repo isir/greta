@@ -29,7 +29,7 @@ class MuseumObject implements Parameter {
     String period;
     String type;
     String artist;
-    
+
     public MuseumObject(MuseumObject object) {
         this(object.name, object.period, object.type, object.artist);
     }

@@ -139,10 +139,10 @@ public class JacobianIK {
                 ve.normalize();
                 Vec3d vg = Vec3d.substraction(target, currentPos);
                 vg.normalize();
- 
+
                 axis[i] = Vec3d.cross3(ve, vg);
                 axis[i].normalize();
-                 
+
                 Vec3d xyz = Vec3d.cross3(axis[i], ve);
                 xyz.normalize();
                 jacobian.elements[0][i] = xyz.x();
@@ -189,8 +189,8 @@ public class JacobianIK {
         long time = time1 - time0;
         System.out.println("time: " + time / 1000.0d);
     }
-    
-    
+
+
     public void computeJacobianJointSpecific(ArrayList<Joint> joints, Vec3d target){
         if (joints.size() < 1) {
             return;
@@ -217,7 +217,7 @@ public class JacobianIK {
                 ve.normalize();
                 Vec3d vg = Vec3d.substraction(target, currentPos);
                 vg.normalize();
- 
+
                 axis[i] = Vec3d.cross3(ve, vg);
                 axis[i].normalize();
                 if(current.getName().equalsIgnoreCase("l_elbow")||current.getName().equalsIgnoreCase("r_elbow")){

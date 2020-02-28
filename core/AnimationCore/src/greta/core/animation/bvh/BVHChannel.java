@@ -79,7 +79,7 @@ public class BVHChannel {
     public boolean has6DOF(){
         if(_order.size() == 6)
             return true;
-        return false;             
+        return false;
     }
     // euler x - y - z  =>  z * y * x * v
     //http://en.wikipedia.org/wiki/Tait%E2%80%93Bryan_angles  they talk about  x y z, that the last rotation is z which is the most local rotation
@@ -97,7 +97,7 @@ public class BVHChannel {
                 Quaternion q = new Quaternion();
                 q.setAxisAngle(new Vec3d(0, 1, 0), rotationValue);
                 rotation = Quaternion.multiplication(rotation, q);
-                //rotation = Quaternion.multiplication(q, rotation);   
+                //rotation = Quaternion.multiplication(q, rotation);
             } else if (order.equalsIgnoreCase(BVH_CHANNEL_Z_ROTATION)) {
                 Quaternion q = new Quaternion();
                 q.setAxisAngle(new Vec3d(0, 0, 1), rotationValue);

@@ -11,7 +11,7 @@ package greta.auxiliary.thrift.gen_java;
  * Structs are the basic complex data structures. They are comprised of fields
  * which each have an integer identifier, a type, a symbolic name, and an
  * optional default value.
- * 
+ *
  * Fields can be declared "optional", which ensures they will not be included
  * in the serialized output if they aren't set.  Note that this requires some
  * manual management in some languages.
@@ -99,9 +99,9 @@ public class ThriftAnimParam implements org.apache.thrift.TBase<ThriftAnimParam,
   public static final java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> metaDataMap;
   static {
     java.util.Map<_Fields, org.apache.thrift.meta_data.FieldMetaData> tmpMap = new java.util.EnumMap<_Fields, org.apache.thrift.meta_data.FieldMetaData>(_Fields.class);
-    tmpMap.put(_Fields.MASK, new org.apache.thrift.meta_data.FieldMetaData("mask", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.MASK, new org.apache.thrift.meta_data.FieldMetaData("mask", org.apache.thrift.TFieldRequirementType.DEFAULT,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.BOOL)));
-    tmpMap.put(_Fields.VALUE, new org.apache.thrift.meta_data.FieldMetaData("value", org.apache.thrift.TFieldRequirementType.DEFAULT, 
+    tmpMap.put(_Fields.VALUE, new org.apache.thrift.meta_data.FieldMetaData("value", org.apache.thrift.TFieldRequirementType.DEFAULT,
         new org.apache.thrift.meta_data.FieldValueMetaData(org.apache.thrift.protocol.TType.I32)));
     metaDataMap = java.util.Collections.unmodifiableMap(tmpMap);
     org.apache.thrift.meta_data.FieldMetaData.addStructMetaDataMap(ThriftAnimParam.class, metaDataMap);
@@ -381,7 +381,7 @@ public class ThriftAnimParam implements org.apache.thrift.TBase<ThriftAnimParam,
       while (true)
       {
         schemeField = iprot.readFieldBegin();
-        if (schemeField.type == org.apache.thrift.protocol.TType.STOP) { 
+        if (schemeField.type == org.apache.thrift.protocol.TType.STOP) {
           break;
         }
         switch (schemeField.id) {
@@ -389,7 +389,7 @@ public class ThriftAnimParam implements org.apache.thrift.TBase<ThriftAnimParam,
             if (schemeField.type == org.apache.thrift.protocol.TType.BOOL) {
               struct.mask = iprot.readBool();
               struct.setMaskIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -397,7 +397,7 @@ public class ThriftAnimParam implements org.apache.thrift.TBase<ThriftAnimParam,
             if (schemeField.type == org.apache.thrift.protocol.TType.I32) {
               struct.value = iprot.readI32();
               struct.setValueIsSet(true);
-            } else { 
+            } else {
               org.apache.thrift.protocol.TProtocolUtil.skip(iprot, schemeField.type);
             }
             break;
@@ -474,4 +474,3 @@ public class ThriftAnimParam implements org.apache.thrift.TBase<ThriftAnimParam,
     return (org.apache.thrift.scheme.StandardScheme.class.equals(proto.getScheme()) ? STANDARD_SCHEME_FACTORY : TUPLE_SCHEME_FACTORY).getScheme();
   }
 }
-

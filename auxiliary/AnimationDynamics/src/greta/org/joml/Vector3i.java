@@ -125,7 +125,7 @@ public class Vector3i implements Externalizable {
      * In order to specify the offset into the ByteBuffer at which the vector is
      * read, use {@link #Vector3i(int, ByteBuffer)}, taking the absolute
      * position as parameter.
-     * 
+     *
      * @see #Vector3i(int, ByteBuffer)
      *
      * @param buffer
@@ -568,7 +568,7 @@ public class Vector3i implements Externalizable {
     /**
      * Multiply all components of this {@link Vector3i} by the given scalar
      * value.
-     * 
+     *
      * @param scalar
      *          the scalar to multiply this vector by
      * @return this
@@ -582,7 +582,7 @@ public class Vector3i implements Externalizable {
 
     /**
      * Multiply the components of this vector by the given scalar and store the result in <code>dest</code>.
-     * 
+     *
      * @param scalar
      *        the value to multiply this vector's components by
      * @param dest

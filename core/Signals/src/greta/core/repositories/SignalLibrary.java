@@ -29,7 +29,7 @@ public abstract class SignalLibrary<S extends Signal> extends ParameterSet<Signa
     public SignalLibrary() {
         super();
     }
-    
+
     public SignalLibrary(String defaultDefinitionName) {
         super(defaultDefinitionName);
     }

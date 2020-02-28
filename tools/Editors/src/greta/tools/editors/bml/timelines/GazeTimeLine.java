@@ -32,9 +32,9 @@ import java.awt.FontMetrics;
  */
 public class GazeTimeLine extends TimeLine<GazeSignal>{
     private static int gazeSignalCount = 0;
-    
+
     public GazeTimeLine(MultiTimeLineEditors<? extends Temporizable> _bmlEditor) {
-        super(_bmlEditor);    
+        super(_bmlEditor);
     }
     @Override
     protected TemporizableContainer<GazeSignal> instanciateTemporizable(double startTime, double endTime) {

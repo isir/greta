@@ -28,10 +28,8 @@ public interface BMLSignalEmitter {
 
     /**
      *
-     * @param sp 
+     * @param sp
      * @deprecated useless interface
      */
     public void add(BMLSignalPerformer sp);
 }
-
-

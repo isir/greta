@@ -131,15 +131,15 @@ public class ArmsRelativeTorsoDynamicsMotion {
             posElbow = j_elbow.getWorldPosition();
             greta.core.animation.Joint j_wrist = sk.getJoint("l_wrist");
             posWrist = j_wrist.getWorldPosition();
-            
-            
+
+
             Vec3d centerMassBody0 = Vec3d.substraction(posShoulder, posElbow);
             double length0 = centerMassBody0.length();
             centerMassBody0.divide(2);
             Vec3d centerMassBody1 = Vec3d.substraction(posElbow, posWrist);
             double length1 = centerMassBody1.length();
             centerMassBody1.divide(2);
-            
+
             DBody body0 = new DBody(0, new Vector3d(0, 0, 0), new Vector3d(1, 1, 1));
             DJoint joint0 = new DJoint(DJoint.JointType.JointTypeRevolute, new Vector3d(0, 0, 1));
             _leftArmModel.addBody(0, SpatialTransform.translate(new Vector3d(posShoulder.x(), posShoulder.y(), posShoulder.z())), joint0, body0, "shoulderZ");
@@ -151,8 +151,8 @@ public class ArmsRelativeTorsoDynamicsMotion {
             DBody body02 = new DBody(10, new Vector3d(centerMassBody0.x(), centerMassBody0.y(), centerMassBody0.z()), new Vector3d(1, length0, 1));
             DJoint joint02 = new DJoint(DJoint.JointType.JointTypeRevolute, new Vector3d(1, 0, 0));
             _leftArmModel.addBody(2, SpatialTransform.translate(new Vector3d(0, 0, 0)), joint02, body02, "shoulderX");
-            
-      
+
+
             DBody body1 = new DBody(10, new Vector3d(centerMassBody1.x(), centerMassBody1.y(), centerMassBody1.z()), new Vector3d(1, length1, 1));
             DJoint joint1 = new DJoint(DJoint.JointType.JointTypeRevolute, new Vector3d(1, 0, 0));
             _leftArmModel.addBody(1, SpatialTransform.translate(new Vector3d(posElbow.x() - posShoulder.x(), posElbow.y() - posShoulder.y(), posElbow.z() - posShoulder.z())), joint1, body1, "elbowX");
@@ -170,15 +170,15 @@ public class ArmsRelativeTorsoDynamicsMotion {
             posElbow = j_elbow.getWorldPosition();
             greta.core.animation.Joint j_wrist = sk.getJoint("r_wrist");
             posWrist = j_wrist.getWorldPosition();
-            
-            
+
+
             Vec3d centerMassBody0 = Vec3d.substraction(posShoulder, posElbow);
             double length0 = centerMassBody0.length();
             centerMassBody0.divide(2);
             Vec3d centerMassBody1 = Vec3d.substraction(posElbow, posWrist);
             double length1 = centerMassBody1.length();
             centerMassBody1.divide(2);
-            
+
             DBody body0 = new DBody(0, new Vector3d(0, 0, 0), new Vector3d(1, 1, 1));
             DJoint joint0 = new DJoint(DJoint.JointType.JointTypeRevolute, new Vector3d(0, 0, 1));
             _rightArmModel.addBody(0, SpatialTransform.translate(new Vector3d(posShoulder.x(), posShoulder.y(), posShoulder.z())), joint0, body0, "shoulderZ");
@@ -190,8 +190,8 @@ public class ArmsRelativeTorsoDynamicsMotion {
             DBody body02 = new DBody(10, new Vector3d(centerMassBody0.x(), centerMassBody0.y(), centerMassBody0.z()), new Vector3d(1, length0, 1));
             DJoint joint02 = new DJoint(DJoint.JointType.JointTypeRevolute, new Vector3d(1, 0, 0));
             _rightArmModel.addBody(2, SpatialTransform.translate(new Vector3d(0, 0, 0)), joint02, body02, "shoulderX");
-            
-      
+
+
             DBody body1 = new DBody(10, new Vector3d(centerMassBody1.x(), centerMassBody1.y(), centerMassBody1.z()), new Vector3d(1, length1, 1));
             DJoint joint1 = new DJoint(DJoint.JointType.JointTypeRevolute, new Vector3d(1, 0, 0));
             _rightArmModel.addBody(1, SpatialTransform.translate(new Vector3d(posElbow.x() - posShoulder.x(), posElbow.y() - posShoulder.y(), posElbow.z() - posShoulder.z())), joint1, body1, "elbowX");

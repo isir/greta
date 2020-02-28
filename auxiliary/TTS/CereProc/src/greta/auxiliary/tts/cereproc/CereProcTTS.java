@@ -65,7 +65,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     private List<Phoneme> phonemes;//phoneme list computed by the native cereproc library
     private Speech speech; //speech object, input to the TTS engine
     private List<TimeMarker> tmOfSpeechList; //time markers list outputed by the native cereproc library
-   
+
     int tmnumber; //time marker number
 
     private String languageID; // Character's language specified using <LANGUAGE_CODE_ISO>-<COUNTRY_CODE_ISO> in character's .ini file (e.g. en-GB)
@@ -100,7 +100,6 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
 
             initialized = true;
 
-            
 
             // Get System Architecture and OS
             int jvmArchitecture = Integer.parseInt(System.getProperty("sun.arch.data.model"));
@@ -248,7 +247,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         // Init the Sampling Rate of the engine
         cereprocSampleRate = cerevoice_eng.CPRCEN_channel_get_voice_info(engineCereProc, channelHandle, "SAMPLE_RATE");
         cereprocSampleRateFloat = Float.parseFloat(cereprocSampleRate);
-        
+
         // Creates an AudioFomat used later to play the audio buffer (synthetized voice) produced by the engine
         audioFormatCereProc = new AudioFormat(
             AudioFormat.Encoding.PCM_SIGNED,
@@ -258,11 +257,11 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
             2, //bytes - frame size (sample size * channels)
             Float.parseFloat(cereprocSampleRate), //Hz - frame rate
             false); //endianness - true=big, false=little;
-        
+
         // Init the fallback buffer in case of an interruption call that results in a delay
         double minimumDuration = 0.002;
         emptyBufferInterruptionFallback = new byte[(int)(audioFormatCereProc.getFrameSize() * cereprocSampleRateFloat * minimumDuration)];
-        
+
         return true;
     }
 
@@ -299,7 +298,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         this.rate = rate;
         this.pitch = pitch;
     }
-    
+
     @Override
     public boolean isInterruptionReactionSupported() {
         return interreuptionReactionSupported;
@@ -328,13 +327,13 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         if (!doPhonems || !doTemporize || !doAudio) {
             Logs.warning("CereProcTTS: the engine only computes all at once.");
         }
-        
+
         tmOfSpeechList = speech.getTimeMarkers();
         Map tmOfSpeechMap = new HashMap<String, TimeMarker>();
         for (TimeMarker tm : tmOfSpeechList){
             tmOfSpeechMap.put(tm.getName(),tm);
         }
-        
+
         TimeMarker start = tmOfSpeechList.get(0);
         TimeMarker end = speech.getEnd();
         if (!start.isConcretized()) {
@@ -346,7 +345,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
             try {
 
                 XMLTree ssml = speech.toSSML(rate, pitch, true, "#!", "!#");
-                
+
                 // DEBUG
                 if (Logs.hasLevelDebug()) {
                     Logs.debug("----------------------------- CEREPROC DEBUG -----------------------------");
@@ -354,10 +353,10 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     Logs.debug(ssml.toString(true));
                     Logs.debug("----------------------------- CEREPROC DEBUG -----------------------------");
                 }
-                
+
                 String ssmlSpeech = ssml.toString(false);
                 ssmlSpeech = replaceSpecialCharactersIntoBrackets(ssmlSpeech, "#!", "!#");
-                
+
                 // Clear  the callback
                 cerevoice_eng.CPRCEN_engine_clear_callback(engineCereProc,channelHandle);
 
@@ -369,13 +368,13 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                 float interruptionTime_s = 0;
                 float earliestReactionTime_s = 0;
                 long timeBeforeCerengineCall = System.currentTimeMillis();
-                
+
                 int currentPlayingBufferPos = 0;
                 Speech currentPlayingSpeech;
                 boolean reactionToInterruptionCall = false;
-                
+
                 if (speech.getInterruptionReactionType() != ReactionType.NONE) {
-                    
+
                     // REACTION TTS CALL
                     reactionToInterruptionCall = true;
                     currentPlayingSpeech = Speech.getCurrentPlayingScheduledSpeech(true);
@@ -389,50 +388,50 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                         "<mark name=\"end\"/>" +
                         "</prosody> " +
                         "</speak>";
-                    
+
                     if (currentPlayingSpeech != null) {
                         currentPlayingBufferPos = currentPlayingSpeech.getAudio().getPlayingBufferPos();
                         currentPlayingBufferSSML = currentPlayingSpeech.getGeneratedSSML();
                         interruptionTime_s = CereProcConstants.fromGRETABufferPositionToCEREPROC(currentPlayingBufferPos);
                     }
-                    
+
                     // Add the offset for the earliest interruption time
                     earliestReactionTime_s = interruptionTime_s + earliestReactionTimeOffset;
-                                       
-                    speakResultBuffer = cerevoice_eng.CPRCEN_engine_channel_interrupt_legacy(engineCereProc, 
-                            channelHandle, 
-                            currentPlayingBufferSSML, 
+
+                    speakResultBuffer = cerevoice_eng.CPRCEN_engine_channel_interrupt_legacy(engineCereProc,
+                            channelHandle,
+                            currentPlayingBufferSSML,
                             currentPlayingBufferSSML.length(),
                             earliestReactionTime_s,
                             CereProcConstants.fromGRETAReactionDurationToCEREPROC(speech.getInterruptionReactionDuration()),
                             CereProcConstants.fromGRETAReactionTypeToCEREPROC(speech.getInterruptionReactionType()),
                             1
                     );
-                    
+
                     // Append to the speakResultBuffer (containing the transition) a new abuf that contains the synthetized speech replanned
                     if (speech.getInterruptionReactionType() == ReactionType.REPLAN) {
                         // The append to speakResultBuffer (containing the reaction to interruption) of the newly created buffer (containing the replanned speech)
                         // is automatically done internally by cereproc when calling CPRCEN_engine_channel_speak
                         speakResultBuffer = cerevoice_eng.CPRCEN_engine_channel_speak(engineCereProc, channelHandle, ssmlSpeech, speechBufferUTF8Bytes.length, 1);
-                    }                    
-                    
+                    }
+
                 }
                 else {
-                    
+
                     // REGULAR TTS CALL
                     currentPlayingSpeech = Speech.getCurrentPlayingScheduledSpeech(false);
                     speakResultBuffer = cerevoice_eng.CPRCEN_engine_channel_speak(engineCereProc, channelHandle, ssmlSpeech, speechBufferUTF8Bytes.length, 1);
                 }
-                
+
                 speech.setGeneratedSSML(ssmlSpeech);
-                         
+
                 ArrayList<String> unprocessedEventsBufferCereProc = fromABufToEvent(speakResultBuffer);
-                
+
                 // DEBUG
                 if (Logs.hasLevelDebug()) {
                     Logs.debug(this.debugPrintUnprocessedEvents(unprocessedEventsBufferCereProc));
                 }
-                
+
                 int newcurrentPlayingBufferPos = 0;
                 if (currentPlayingSpeech != null) {
                     newcurrentPlayingBufferPos = currentPlayingSpeech.getAudio().getPlayingBufferPos();
@@ -441,10 +440,10 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                 double interruptionReactionStartTime_s = 0;
                 double interruptionReactionEndTime_s = 0;
                 double interruptionBufferEndTime_s = 0;
-                
+
                 // Process the received phonems and markers
                 for (String eventCereProcBuffer : unprocessedEventsBufferCereProc) {
-                    
+
                     // The eventCereProcBuffer is a sting in the form "start time/end time/time marker name"
                     // The time marker name can start with:
                     // - tmarkercptk (special cereproc)
@@ -454,23 +453,23 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     double startT = Double.valueOf(parts[0]);
                     double endT = Double.valueOf(parts[1]);
                     double tmTime;
-                            
+
                     if (reactionToInterruptionCall) {
                         tmTime = startTime + startT - ((currentPlayingTime_s!=0)?currentPlayingTime_s:earliestReactionTime_s);
                     }
                     else {
                         tmTime = startTime + startT;
                     }
-                    
+
                     // Process time markers
                     if (parts[2].startsWith("tmarker")) {
-                        
+
                         // Process CereProc Time Markers
                         if (parts[2].startsWith("tmarkercptk") || parts[2].startsWith("tmarkercprc")) {
-                            
+
                             // Time markers for reactions to interruptions
                             if (parts[2].trim().startsWith("tmarkercprc_interrupt_")) {
-                                
+
                                 // Time marker idicating the end of an interruption reaction
                                 if (parts[2].trim().equals("tmarkercprc_interrupt_end")) {
                                     interruptionReactionEndTime_s = tmTime;
@@ -481,21 +480,21 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                                     interruptionReactionStartTime_s = tmTime;
                                 }
                             }
-                        }                        
+                        }
                         // Process Greta Time Markers
                         else {
                             // Process the Time Markers received in the buffer received by cereproc
-                            
+
                             // In case of a reaction to an interruption the given speech has:
                             // - Only START, END and SPECIAL time markers for HALT AND OVERLAP
                             // - START, END, OTHER(s) (e.g. tm1,tm2...) and SPECIAL time markers for REPLAN
                             if (reactionToInterruptionCall) {
-                                
+
                                 // Takes the end of speech time marker in any case
                                 if (parts[2].trim().equals("tmarkerend")) {
                                     interruptionBufferEndTime_s = tmTime;
                                 }
-                                
+
                                 // Discard if the absolute time refers to a time before the interruption occured (negative time)
                                 if (endT < currentPlayingTime_s) {
                                     continue;
@@ -525,12 +524,12 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                         } // End else Greta Time Marker only
                     }
                     // Else Process Phonemes
-                    else 
+                    else
                     {
                         String phonemeType = parts[2];
                         PhonemeType[] pho = CereProcConstants.convertPhoneme(languageID, phonemeType);
                         if (pho != null) {
-                            
+
                             // Discard it the absolute time refers to a time before the interruption occured (negative time)
                             if ((reactionToInterruptionCall) && (endT < currentPlayingTime_s)) {
                                 continue;
@@ -547,7 +546,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                         }
                     }
                 }
-                
+
                 // DEBUG
                 if (Logs.hasLevelDebug()) {
                     Logs.debug("----------------------------- CEREPROC DEBUG -----------------------------\n");
@@ -560,16 +559,16 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     );
                     Logs.debug("----------------------------- CEREPROC DEBUG -----------------------------\n");
                 }
-                
+
                 // Reposition the special time markers with concretized values
                 TimeMarker tmInterruptionDetected = speech.getTimeMarker(Constants._TIME_MARKER_INTERRUPTION_DETECTED_ID);
                 TimeMarker tmReactionStarted = speech.getTimeMarker(Constants._TIME_MARKER_INTERRUPTION_REACTION_STARTED_ID);
                 TimeMarker tmReactionEnd = speech.getTimeMarker(Constants.TIME_MARKER_INTERRUPTION_REACTION_END_ID);
-                
+
                 if (tmInterruptionDetected != null) {
                     tmInterruptionDetected.setValue(interruptionTime_s);
                 }
-                
+
                 if (tmReactionStarted != null) {
                     if (currentPlayingTime_s != 0) {
                         tmReactionStarted.setValue(currentPlayingTime_s);
@@ -578,7 +577,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                         tmReactionStarted.setValue(earliestReactionTime_s);
                     }
                 }
-                
+
                 if (tmReactionEnd != null) {
                     if (interruptionReactionEndTime_s != 0) {
                         tmReactionEnd.setValue(interruptionReactionEndTime_s);
@@ -587,17 +586,17 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                         tmReactionEnd.setValue(speech.getEnd().getValue());
                     }
                 }
-                
+
                  // Reposition the END time marker with a concretized value in case of reaction to interruptions
                 if ((reactionToInterruptionCall) && (interruptionBufferEndTime_s != 0)) {
                     end.setValue(interruptionBufferEndTime_s);
                 }
-                
+
                 // DEBUG
                 if (Logs.hasLevelDebug()) {
                     Logs.debug(TimeMarker.getTimeMarkersListDebug(speech.getTimeMarkers(), "SPEECH", speech.getId()));
                 }
-                
+
                 // PATCH: Adds dummy pause phonemes if the list of phonemes has less than 3 phonemes to avod bugs in the LipSync model
                 int phonemesListSize = phonemes.size();
                 int minSize = 3;
@@ -607,13 +606,13 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                         phonemes.add(new Phoneme(PhonemeType.pause, 0.1f));
                     }
                 }
-                
+
                 long timeAfterCerengineCall = System.currentTimeMillis();
                 earliestReactionTimeOffset = (timeAfterCerengineCall - timeBeforeCerengineCall) / 1000f;
-                
+
                 /* Play the buffered result (i.e. synthetized voice) */
                 if (doAudio)
-                {    
+                {
                     // samples16bitNum is the number of 16-bits samples
                     int samples16bitNum =  cerevoice_eng.CPRC_abuf_wav_sz(speakResultBuffer);
                     short sampleAudio;
@@ -622,10 +621,10 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     // This is not the most elegant way to do this conversion, but shows
                     // how e.g. audio effects could be applied.
                     int sampleBegin = 0;
-                                       
+
                     if ((interruptionTime_s != 0) && (newcurrentPlayingBufferPos != 0)) {
                         sampleBegin = (int) (newcurrentPlayingBufferPos / 2);
-                        
+
                         //Debug
                         /*Audio aa = currentPlayingSpeech.getAudio();
                         byte[] rawAudioBuffer = new byte[newcurrentPlayingBufferPos];
@@ -636,7 +635,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                         audio2.save("111-"+ greta.core.util.id.IDProvider.createID("CEREPROC_TEST").toString()+ ".wav");
                         */
                     }
-                    
+
                     byte[] rawAudioBuffer = new byte[Math.max(0, samples16bitNum-sampleBegin) * 2];
                     for(int i = sampleBegin; i < samples16bitNum; i++) {
                         // Sample at position i, it is a short
@@ -646,15 +645,15 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                         rawAudioBuffer[offset * 2 + 1] = (byte) ((sampleAudio & 0xff00) >> 8);
                         rawAudioBuffer[offset * 2] = (byte) (sampleAudio & 0x00ff);
                     }
-                    
+
                     if (rawAudioBuffer.length <= 0) {
                         rawAudioBuffer = emptyBufferInterruptionFallback;
                     }
 
                     // Create the Audio object that will be played
                     audio = new Audio(audioFormatCereProc, rawAudioBuffer);
-                    
-                    /*  DEBUG                 
+
+                    /*  DEBUG
                     rawAudioBuffer = new byte[(samples16bitNum) * 2];
                     for(int i = 0; i < samples16bitNum; i++) {
                         // Sample at position i, it is a short
@@ -667,7 +666,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     Audio audio2 = new Audio(audioFormatCereProc, rawAudioBuffer);
                     audio2.save("000-"+ greta.core.util.id.IDProvider.createID("CEREPROC_TEST").toString()+ ".wav");
                     */
- 
+
                     /*Logs.info("CereProcTTS: currentPlayingBufferPos[" + currentPlayingBufferPos + "] "
                             + "earliestReactionTime_s[" + earliestReactionTime_s + "] "
                             + "newcurrentPlayingBufferPos[" + newcurrentPlayingBufferPos + "] "
@@ -675,7 +674,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                             + "XML [" + speech.getGeneratedSSML()+ "]");
                     */
                 }
-                
+
 
             } catch (Exception e) {
                 Logs.error("CereProcTTS: " + this.getClass().getSimpleName() + " fail to load audio. " + e.getMessage());
@@ -859,23 +858,23 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
             return true;
         }
     }
-    
+
     private String debugPrintUnprocessedEvents(ArrayList<String> eventsList) {
-        
+
         String toReturn = "----------------------------- CEREPROC DEBUG -----------------------------\n"
                         + "Unprocessed Events list:\n";
         for (String s : eventsList) {
             String[] parts = s.split("/");
-            
+
             double startT = Double.valueOf(parts[0]);
             double endT = Double.valueOf(parts[1]);
             String item = parts[2];
-            
+
             toReturn+="Start [" + startT + "] End [" + endT + "] Item [" + item + "]\n";
         }
-        
+
         toReturn+="----------------------------- CEREPROC DEBUG -----------------------------";
-        
+
         return toReturn;
     }
 }

@@ -74,13 +74,13 @@ public class Speech implements Temporizable{
     private String language;
     private static final String boundaryRegex = "(.*)\\p{Punct}\\s*\\z"; //used to replace redondante bundaries
     private static final String spaceRegex = "\\s+"; //used to replace multy spaces
-    
+
     private ReactionType reactionType;
     private ReactionDuration reactionDuration;
     private String generatedSSML; // Specific to cereproc for the moment
     private TTS ttsToUse;
     private CharacterManager cm;
-    
+
     public Speech(CharacterManager cm){
         this.cm = cm;
         markers = new  ArrayList<TimeMarker>();
@@ -121,7 +121,7 @@ public class Speech implements Temporizable{
         reactionDuration = s.reactionDuration;
         generatedSSML = s.generatedSSML;
     }
-    
+
     public CharacterManager getCharacterManager(){
         return cm;
     }
@@ -162,7 +162,7 @@ public class Speech implements Temporizable{
                 if ((this.getInterruptionReactionType() != ReactionType.NONE) && (!ttsToUse.isInterruptionReactionSupported())) {
                     Logs.warning(this.getClass().getName() + ". Interruption reactions not supported by the TTS in use.");
                 }
-                
+
                 ttsToUse.setSpeech(this);
                 ttsToUse.compute(ttsDoTemporize, ttsDoAudio, ttsDoPhonemes);
 
@@ -195,7 +195,7 @@ public class Speech implements Temporizable{
     public void setReference(String reference){
         ref = reference;
     }
-    
+
     /**
      * Returns the type of reaction to a user's interruption expressed with this Speech
      * @return the reaction type
@@ -211,7 +211,7 @@ public class Speech implements Temporizable{
     public void setInterruptionReactionType(ReactionType aReactionType){
         reactionType = aReactionType;
     }
-    
+
     /**
      * Returns the duration of the reaction to a user's interruption expressed with this Speech
      * @return the reaction duration
@@ -269,11 +269,11 @@ public class Speech implements Temporizable{
     public List<Phoneme> getPhonems(){
         return phonems;
     }
-    
+
     public void addPhonem (Phoneme ph){
         phonems.add(ph);
     }
-    
+
     public void addPhonems ( List<Phoneme> ph){
         phonems.addAll(ph);
     }
@@ -308,7 +308,7 @@ public class Speech implements Temporizable{
      * @return the language of this {@code Speech}
      */
     public String getLanguage(){return language;}
-    
+
     public void setLanguage(String language){
         this.language = language;
     }
@@ -339,7 +339,7 @@ public class Speech implements Temporizable{
     public XMLTree toSSML() throws Exception {
         return toSSML(0.0,0.0, false, null, null);
     }
-    
+
     /**
      * Translates this {@code Speech} to a {@code String} in SSML format.
      * Instructs a prosody change conforming to the SSML standard with the Pitch and Rate attributes.
@@ -349,7 +349,7 @@ public class Speech implements Temporizable{
     public XMLTree toSSML(double rate, double pitch) throws Exception {
         return toSSML(rate, pitch, false, null, null);
     }
-    
+
     /**
      * Translates this {@code Speech} to a {@code String} in SSML format.
      * Instructs a prosody change conforming to the SSML standard with the Pitch and Rate attributes.
@@ -382,12 +382,12 @@ public class Speech implements Temporizable{
             if(o instanceof String)
             {
                 String textToAdd = (String) o;
-                    
+
                 if (replaceBrackets) {
                     textToAdd = textToAdd.replace("<", openBracketReplacement);
                     textToAdd = textToAdd.replace(">", closedBracketReplacement);
                 }
-                
+
                 if(tmpEndPitchAccentXMLNode==null)
                 {
                     toReturn.addText(textToAdd);
@@ -441,7 +441,7 @@ public class Speech implements Temporizable{
                                 if(targetName.startsWith(getId()+":")){
                                     tmpEndPitchAccent = targetName.substring(getId().length()+1);
                                 }
-                            }                            
+                            }
                             tmpEndPitchAccentXMLNode = p_node;
                         }
                     }
@@ -669,7 +669,7 @@ public class Speech implements Temporizable{
                                     // nothing
                                 }
                                 else {
-                                    
+
                                     if (child.getName().equalsIgnoreCase("voice")) { // from CereProc TTS
                                         String voiceStartTag = "<voice ";
                                         if (child.hasAttribute("emotion")) {
@@ -677,9 +677,9 @@ public class Speech implements Temporizable{
                                         }
                                         voiceStartTag+= ">";
                                         String voiceEndTag = "</voice>";
-                                        
+
                                         addSpeechElement(voiceStartTag);
-                                        
+
                                         for(XMLTree voiceChild : child.getChildren()) {
                                             if(voiceChild.isTextNode()) {
                                                 //Logs.debug(child.getTextValue());
@@ -699,10 +699,10 @@ public class Speech implements Temporizable{
                                                         t.setValue(voiceChild.getAttributeNumber("time"));
                                                     }
                                                 }
-                                                
+
                                             }
                                         }
-                                        
+
                                         addSpeechElement(voiceEndTag);
                                     }
                                     else {
@@ -725,7 +725,7 @@ public class Speech implements Temporizable{
         for(Boundary b : tempBoundaries) {
             addSpeechElement(b);
         }
-        
+
     }
 
     /**
@@ -936,8 +936,6 @@ public class Speech implements Temporizable{
     }
 
 
-
-
 //Static fields :
     //private static TTS ttsToUse;
     private static boolean ttsDoTemporize = true;
@@ -946,14 +944,14 @@ public class Speech implements Temporizable{
     private static boolean useOriginal = true;
     private static final Object lock = new Object(); // used to synchronize threads on ttsToUse
     private static ArrayList<Speech> scheduledSpeeches = new ArrayList<Speech>(); // Used to keep track of the speech objects that are scheduled to be played by the Mixer
-    
+
      /**
      * Adds the {@code Speech} object to the list of scheduled ones (i.e. to be played).
      * @param speechToAdd the {@code Speech} object to add
      */
     public static void addScheduledSpeech(Speech speechToAdd) {
         synchronized (lock){
-            
+
             // First clean up the finished audios associated to the speech objects in the list
             ListIterator<Speech> iter = scheduledSpeeches.listIterator();
             while (iter.hasNext()) {
@@ -962,32 +960,32 @@ public class Speech implements Temporizable{
                     iter.remove();
                 }
             }
-            
+
             // Add to the list
             scheduledSpeeches.add(speechToAdd);
-            
+
         } // End of synchronized block
     }
-    
+
     /**
      * Gets the {@code Speech} object that is currently being played, null if none is found, the one with latest start time if multiple ones are being played.
      * @param clearScheduled clears out {@code Speech} objects that are scheduled (i.e. PLAYING_BUFFER_POSITION_FINISHED) in addition to (default behavior) those that have been played already (i.e. PLAYING_BUFFER_POSITION_FINISHED)
-     * 
+     *
      * @return the {@code Speech} corresponding to the {@code Audio} currently being played
      */
     public static Speech getCurrentPlayingScheduledSpeech(boolean clearScheduled) {
         synchronized (lock){
-            
-            
+
+
             // Audio start->time and end->estimatedEnd
-            
+
             ArrayList<Speech> potentialSpeechToReturn = new ArrayList<Speech>();
-            
+
             ListIterator<Speech> iter = scheduledSpeeches.listIterator();
             while (iter.hasNext()) {
-                
+
                 Speech s = iter.next();
-                
+
                 // Clean up finished ones
                 if (s.getAudio().getPlayingBufferPos() == Audio.PLAYING_BUFFER_POSITION_FINISHED) {
                     iter.remove();
@@ -997,19 +995,19 @@ public class Speech implements Temporizable{
                     if (clearScheduled) {
                         iter.remove();
                     }
-                }                    
+                }
                 else if (s.getAudio().getPlayingBufferPos() >= 0) {
-                    // We consider currently playing ones 
+                    // We consider currently playing ones
                     potentialSpeechToReturn.add(s);
                 }
             }
-            
+
             if (potentialSpeechToReturn.isEmpty()) {
                 return null;
             }
             else {
                 // Potential multiple playing Speech objects found, we return the one with the latest start time
-                
+
                 Speech toReturn = potentialSpeechToReturn.get(0);
                 long latestStart = toReturn.getAudio().getTimeMillis();
                 for (int i = 1; i < potentialSpeechToReturn.size(); i++) {
@@ -1086,5 +1084,5 @@ public class Speech implements Temporizable{
     public void setGeneratedSSML(String SSML) {
         this.generatedSSML = SSML;
     }
-    
+
 }

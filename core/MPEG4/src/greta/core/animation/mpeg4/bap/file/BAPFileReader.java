@@ -33,11 +33,11 @@ public class BAPFileReader extends BAPFrameEmitterImpl{
 
     private BAPParser parser = new BAPParser();
 
-    public void load(String bapfilename) {
-        List<BAPFrame> bap_animation = parser.readFromFile(bapfilename, true);
+    public void load(String bapFileName) {
+        List<BAPFrame> bap_animation = parser.readFromFile(bapFileName, true);
 
         if (!bap_animation.isEmpty()) {
-            String base = (new File(bapfilename)).getName().replaceAll("\\.bap$", "");
+            String base = (new File(bapFileName)).getName().replaceAll("\\.bap$", "");
             ID id = IDProvider.createID(base);
 
             //send to all BAPPerformer added
@@ -48,8 +48,8 @@ public class BAPFileReader extends BAPFrameEmitterImpl{
     public java.io.FileFilter getFileFilter() {
         return new java.io.FileFilter() {
             @Override
-            public boolean accept(File pathname) {
-                return pathname.getName().toLowerCase().endsWith(".bap");
+            public boolean accept(File pathName) {
+                return pathName.getName().toLowerCase().endsWith(".bap");
             }
         };
     }

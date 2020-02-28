@@ -31,20 +31,20 @@ import java.awt.FontMetrics;
  * @author Andre-Marie
  */
 public class TorsoTimeLine extends TimeLine<TorsoSignal>{
-    
+
     private static int torsoSignalCount = 0;
 
     public TorsoTimeLine(MultiTimeLineEditors<? extends Temporizable> _bmlEditor) {
-        super(_bmlEditor);    
+        super(_bmlEditor);
     }
-    
+
     @Override
     protected TemporizableContainer<TorsoSignal> instanciateTemporizable(double startTime, double endTime) {
         String name = Integer.toString(torsoSignalCount);
         while (name.length() < NUM_DISPLAYIED_DIGITS_ID) name = "0" + name;
         Signal torso = SignalProvider.create("torso", "torso_" + name);
         torsoSignalCount ++;
-        
+
         if(torso instanceof TorsoSignal){
             torso.getStart().setValue(startTime);
             torso.getEnd().setValue(endTime);
@@ -54,7 +54,7 @@ public class TorsoTimeLine extends TimeLine<TorsoSignal>{
             return null;
     }
 
-    //Changed return value with ID (IGR students patch)    
+    //Changed return value with ID (IGR students patch)
     @Override
     protected String getDescription(TemporizableContainer<TorsoSignal> temporizableContainer, FontMetrics metrics, int limitSize) {
         String id = temporizableContainer.getId();

@@ -36,7 +36,7 @@ public abstract class FapMapper {
         faceBone.setManuallyControlled(true);
     }
     FapMapper(){
-        
+
     }
     public abstract void applyFap(FAPFrame ff);
 

@@ -229,49 +229,49 @@
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="EmotionML File Reader" style="Intentions">
             <object class="greta.auxiliary.emotionml.EmotionMLFileReader" lib_id="greta_emotionml"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="BML File Reader" style="Signals">
             <object class="greta.core.signals.BMLFileReader" lib_id="greta_signals"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="Keyframe File Reader" style="Animations">
             <object class="greta.core.keyframes.KeyframeFileReader" lib_id="greta_signals"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="FAP File Reader" style="Animations">
             <object class="greta.core.animation.mpeg4.fap.file.FAPFileReader" lib_id="greta_mpeg4"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="FAP Head File Reader" style="Animations">
             <object class="greta.core.animation.mpeg4.fap.file.FAPHeadFileReader" lib_id="greta_mpeg4"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="MPEG4 File Reader" style="Animations">
             <object class="greta.core.animation.mpeg4.MPEG4FileReader" lib_id="greta_mpeg4"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="BVH File Reader" style="Animations">
             <object class="greta.auxiliary.BVHMocap.BVHReaderGUI" lib_id="greta_bvh_mocap"/>
@@ -280,7 +280,7 @@
                 <link method="setLoader" on="frame"/>
             </frame>
             -->
-            <!--<parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/> -->
+            <!--<parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/> -->
         </module>
         <module name="Face Library Viewer" style="Animations">
             <object class="greta.tools.editors.facelibrary.FaceLibraryEditor" lib_id="greta_editors"/>
@@ -295,21 +295,21 @@
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="BAP File Reader" style="Animations">
             <object class="greta.core.animation.mpeg4.bap.file.BAPFileReader" lib_id="greta_mpeg4"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="Old BAP To New BAP" style="Animations">
             <object class="greta.core.animation.mpeg4.bap.file.oldBAP2newBAP" lib_id="greta_mpeg4"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="Listener Intent Planner" style="IntentPlanner">
             <object class="greta.core.intentplanner.listener.ListenerIntentPlanner" lib_id="greta_listener_intent_planner"/>
@@ -395,7 +395,7 @@
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
-            <parameter default="" get_method="getFileName" get_on="frame" name="saveFileName" set_method="setFileName" set_on="frame" type="string"/>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
         <module name="Laugh Synthetizer" restrict="1" style="DEFAULT">
             <object class="greta.core.utilx.gui.LaughSynthetizerController" lib_id="greta_utilx"/>

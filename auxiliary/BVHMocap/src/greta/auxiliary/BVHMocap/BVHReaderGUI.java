@@ -59,58 +59,58 @@ import javax.swing.JTextField;
  * @author Donatella Simonetti
  */
 public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
-    
-    
+
+
     //BVHreader variables
-    public String filename;//path + name+ ".bvh"
+    public String fileName;//path + name+ ".bvh"
     public Dictionary dictionary;
     private float[] coordOffset;//Today
     private boolean USE_COORDINATES_OFFSET = false;
     private boolean USE_DICTIONNARY = true;
-    
-    public HashMap<String, List<Object>> fileAndFrame = new HashMap<String, List<Object>>(); 
+
+    public HashMap<String, List<Object>> fileAndFrame = new HashMap<String, List<Object>>();
     List<Vec3d> rootPosition = new ArrayList<Vec3d>();
-    
-    // interface variables 
+
+    // interface variables
     private Method loadMethod;
-        
+
     private Object loader;
-    
+
     private JPanel panel_openandload;
-    private JTextField filenameTextField;
+    private JTextField fileNameTextField;
     private JFileChooser jFileChooser1;
-    
+
     private JButton openButton;
     private JButton sendButton;
-    
-    
+
+
     private JTextField angleYroot;
     private JLabel degreelabel;
-    
+
     private JCheckBox isPosRootFix;
     private JCheckBox isPosAbsolutelyFix;
     private JCheckBox isRootOreintFix;
-    
+
     private boolean isPosfix = true;
     private boolean isAbsolutelyfix_pos = false;
     private boolean isOrientationfix = false;
-    
+
     private GroupLayout layout;
-    
+
     public BVHReaderGUI(){
-        
+
         // BVHReader
         this("");
         USE_COORDINATES_OFFSET = false;
         USE_DICTIONNARY = true;
-        
-        
-        // Interface 
+
+
+        // Interface
         panel_openandload = new JPanel();
 
         angleYroot = new JTextField("");
         degreelabel = new JLabel("(degree)");
-        
+
         isPosAbsolutelyFix = new JCheckBox("No shift in Root Position");
         isPosAbsolutelyFix.setSelected(false);
         isPosAbsolutelyFix.addActionListener(new ActionListener() {
@@ -127,7 +127,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                 }
             }
         });
-                
+
         isPosRootFix = new JCheckBox("Delete initial offset of Root Position");
         isPosRootFix.setSelected(false);
         isPosRootFix.addActionListener(new ActionListener() {
@@ -144,7 +144,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                 }
             }
         });
-        
+
         isRootOreintFix = new JCheckBox("Delete initial offset of Root Orientation");
         isRootOreintFix.setSelected(false);
         isRootOreintFix.addActionListener(new ActionListener() {
@@ -157,17 +157,17 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                 }
             }
         });
-        
+
         jFileChooser1 = new javax.swing.JFileChooser();
         jFileChooser1.setCurrentDirectory(new File("./"));
-        
-        filenameTextField = new javax.swing.JTextField();
+
+        fileNameTextField = new javax.swing.JTextField();
         sendButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.send");
         openButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.open");
 
-        filenameTextField.addActionListener(new java.awt.event.ActionListener() {
+        fileNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                filenameTextFieldActionPerformed(evt);
+                fileNameTextFieldActionPerformed(evt);
             }
         });
 
@@ -189,7 +189,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(filenameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(fileNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(openButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -201,27 +201,27 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(filenameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(fileNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sendButton)
                     .addComponent(openButton)))
                 //.addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        
-        
+
+
         int size = 10; // the width of the gap
-        layout = new GroupLayout(this.getContentPane()); 
+        layout = new GroupLayout(this.getContentPane());
         layout.setHorizontalGroup(
-                layout.createParallelGroup((GroupLayout.Alignment.LEADING)) 
+                layout.createParallelGroup((GroupLayout.Alignment.LEADING))
                 .addGap(size)
                 .addComponent(panel_openandload)
-                .addGap(size)        
+                .addGap(size)
                 .addComponent(isPosRootFix, 450,450, 450)
-                .addGap(size)        
+                .addGap(size)
                 .addComponent(isRootOreintFix, 450,450, 450)
                 .addGap(size)
                 .addComponent(isPosAbsolutelyFix, 450,450, 450)
                 );
-        
+
         layout.setVerticalGroup(
                 layout.createSequentialGroup()
                 .addGap(size)
@@ -232,32 +232,32 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                 .addComponent(isRootOreintFix)
                 .addGap(size)
                 .addComponent(isPosAbsolutelyFix)
-                );  
-        
-        getContentPane().setLayout(layout);      
+                );
+
+        getContentPane().setLayout(layout);
         this.pack();
-        
+
         this.setVisible(true);
     }
 
     public BVHReaderGUI(String fname) {
-        filename = fname;
+        fileName = fname;
         dictionary = new Dictionary();
         dictionary.Initialize();
 
         USE_COORDINATES_OFFSET = false;
         USE_DICTIONNARY = true;
-        
+
     }
-    
+
     // INTERFACE ********************************************************************************************************
-    protected void send(String filename) {
-        
-        load(filename);
-        /*if(filename==null || filename.isEmpty()) return ;
+    protected void send(String fileName) {
+
+        load(fileName);
+        /*if(fileName==null || fileName.isEmpty()) return ;
         if(loadMethod!=null){
             try {
-                loadMethod.invoke(loader, filename);
+                loadMethod.invoke(loader, fileName);
             }
             catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();
@@ -298,26 +298,26 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
 
         } catch (Exception ex) {}
     }*/
-    
-    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
-        send(filenameTextField.getText());
-    }                                          
 
-    private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {                                           
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        send(fileNameTextField.getText());
+    }
+
+    private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {
         jFileChooser1.setLocale(Locale.getDefault());
         jFileChooser1.updateUI();
         if(jFileChooser1.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION){
             File file = jFileChooser1.getSelectedFile();
-            this.filenameTextField.setText(file.getAbsolutePath());
+            this.fileNameTextField.setText(file.getAbsolutePath());
         }
-    }  
+    }
 
-    private void filenameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+    private void fileNameTextFieldActionPerformed(java.awt.event.ActionEvent evt) {
             // TODO add your handling code here:
-    }                                                 
-    
+    }
+
     // BVHREADER ***************************************************************************************************************
-    
+
     public void setCoordinatesOffset(float[] offsets) {
         coordOffset = offsets;
     }
@@ -340,29 +340,29 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
         return USE_DICTIONNARY;
     }
 
-    public static BufferedReader ReadFile(String filename) {
+    public static BufferedReader ReadFile(String fileName) {
         BufferedReader lecteurAvecBuffer = null;
 
         try {
-            FileInputStream fileinput = new FileInputStream(filename);
+            FileInputStream fileinput = new FileInputStream(fileName);
             InputStreamReader streamreader = new InputStreamReader(fileinput);
             lecteurAvecBuffer = new BufferedReader(streamreader);
         } catch (FileNotFoundException exc) {
             //exc.printStackTrace();
-            System.out.println("Erreur d'ouverture du fichier " + filename);
+            System.out.println("Erreur d'ouverture du fichier " + fileName);
         }
         return lecteurAvecBuffer;
     }
 
-    public long load(String bvhfilename) {
-        filename = bvhfilename;
+    public long load(String bvhFileName) {
+        fileName = bvhFileName;
         return process();
     }
 
     public long process() {
         // empty the hashmap
         fileAndFrame.clear();
-        
+
         int bapframe_startTime = (int) Timer.getTimeMillis() / 40;
         //(int) (Timer.getTime()*Constants.FRAME_PER_SECOND);Today
 
@@ -377,17 +377,17 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
             // *** end for tardis project
 
 
-            BufferedReader br = ReadFile(filename);
+            BufferedReader br = ReadFile(fileName);
             Skeleton skeleton = BVHSkeleton(br);
             int nbframe = GetFrameNumber(br);
             float frameTime = GetFrameTime(br);
             List<Object> listint = new ArrayList<Object>();
             listint.add(nbframe);
             listint.add(frameTime);
-            fileAndFrame.put(filename, listint);
-            
+            fileAndFrame.put(fileName, listint);
+
             int EulerAngleOrder = EulerOrder();
-            System.out.println(filename);
+            System.out.println(fileName);
             bap_animation = BAPFramesCreator(AllPreRotation, br, skeleton, nbframe, EulerAngleOrder, frameTime, bapframe_startTime);
 
 
@@ -395,7 +395,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
         } catch (Exception e) {
         }
 
-        ID id = IDProvider.createID(filename);//today
+        ID id = IDProvider.createID(fileName);//today
         for (int i = 0; i < _bapFramePerformer.size(); ++i) {
             BAPFramePerformer performer = _bapFramePerformer.get(i);
             performer.performBAPFrames(bap_animation, id);
@@ -407,7 +407,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
     }
 
 //    public ArrayList<BAPFrame> BVHToBAPFrames() throws FileNotFoundException, IOException {
-//        BufferedReader br = ReadFile(filename);
+//        BufferedReader br = ReadFile(fileName);
 //        Skeleton skeleton = BVHSkeleton(br);
 //        int nbframe = GetFrameNumber(br);
 //
@@ -417,7 +417,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
 //        return bap_animation;
 //    }
     public BVH MotionBasedBVHCreator() throws FileNotFoundException, IOException {
-        BufferedReader br = ReadFile(filename);
+        BufferedReader br = ReadFile(fileName);
         Skeleton skeleton = BVHSkeleton(br);
         int nbframe = GetFrameNumber(br);
         float frameTime = GetFrameTime(br);
@@ -427,7 +427,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
     }
 
     public BVH JFTableBasedBVHCreator() throws FileNotFoundException, IOException {   //  BVH Creater is based on Joint Frame Table
-        BufferedReader br = ReadFile(filename);
+        BufferedReader br = ReadFile(fileName);
         Skeleton skeletonWithES = BVHSkeletonWithEndSite(br);
         int nbframe = GetFrameNumber(br);
         float frameTime = GetFrameTime(br);
@@ -699,7 +699,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
         return frame_time;
 
     }
-    
+
     public int GetFrameNumber(BufferedReader br) throws FileNotFoundException, IOException {
         int frame_nb;
         String ligne = br.readLine();
@@ -736,7 +736,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
     }
 
     public Skeleton BVHSkeletonWithEndSite(BufferedReader br) throws FileNotFoundException, IOException {
-        Skeleton skeleton = new Skeleton(filename.split("[.]")[0]);
+        Skeleton skeleton = new Skeleton(fileName.split("[.]")[0]);
         String line;
         String name;
         int id_joint;
@@ -855,7 +855,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
     }
 
     public Skeleton BVHSkeleton(BufferedReader br) throws FileNotFoundException, IOException {
-        Skeleton skeleton = new Skeleton(filename.split("[.]")[0]);
+        Skeleton skeleton = new Skeleton(fileName.split("[.]")[0]);
         String line;
         String name;
         int id_joint;
@@ -1168,7 +1168,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
         float rotationRootX = 0;
         float rotationRootY = 0;
         float rotationRootZ = 0;
-        
+
         float first_vy = 0.0f;
         float first_RootTranslationX = 0.0f;
         float first_RootTranslationY = 0.0f;
@@ -1263,7 +1263,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
 
                     // delete this row
                     rootPosition.add(new Vec3d(RootTranslationX,RootTranslationY,RootTranslationZ));
-                    
+
 //                    Joint Rootjoint=skeleton.getJoint(bvh_joint);
 //                    Rootjoint.setWorldPosition(new Vec3d(RootTranslationX,RootTranslationY,RootTranslationZ));
 
@@ -1278,15 +1278,15 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
 //                    }
 //                    else
 //                    {
-                    
-                    
+
+
                     if (f<1){
                         first_vy = vy; // orientation O°
                         first_RootTranslationX = RootTranslationX;
                         first_RootTranslationY = RootTranslationY;
                         first_RootTranslationZ = RootTranslationZ;
-                    }  
-                    
+                    }
+
                     Vec3d RootTranslation =  new Vec3d();
                     if(isPosfix){
                         RootTranslation = new Vec3d(RootTranslationX - first_RootTranslationX, RootTranslationY - first_RootTranslationY, RootTranslationZ - first_RootTranslationZ);
@@ -1295,16 +1295,15 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                     }else{
                         RootTranslation = new Vec3d(RootTranslationX , RootTranslationY , RootTranslationZ );
                     }
-                    
-                    
-                    
+
+
                     if (isOrientationfix){
                         q = JointQuaternion(vx, vy - first_vy, vz, EulerAngleOrder);
                     }else{
                         q = JointQuaternion(vx, vy, vz, EulerAngleOrder);
                     }
-                    
-                    
+
+
                     //q = JointQuaternion(vx, vy - first_vy, vz, 210);   // JointQuaternion90(dict_name,vx, vy, vz, EulerAngleOrder);  for tardis (In the case of T-Pose)
 
 
@@ -1319,15 +1318,13 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                     //*********** end for Tardis project
 
 
-
 //                    if (f==0)
 //                    {System.out.println("joint id="+jjoint+"   joint name: "+bvh_joint+ "   vx="+ vx+"  vy="+vy+"  vz="+vz);//now
 //                    }
 
-                    //Vec3d RootTranslation = new Vec3d(RootTranslationX, RootTranslationY, RootTranslationZ); 
-                    
-                    
-                    
+                    //Vec3d RootTranslation = new Vec3d(RootTranslationX, RootTranslationY, RootTranslationZ);
+
+
                     bapframe = bapconverter.setBAPframeRotation(bapframe, dict_name, q);
                     bapframe = bapconverter.setBAPframeTranslation(bapframe, dict_name, RootTranslation);
                     firstCharacter = firstCharacter + 6;
@@ -1376,7 +1373,6 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                     //*********** end for Tardis Project
 
 
-
                     bapframe = bapconverter.setBAPframeRotation(bapframe, dict_name, q);
                     if (dict_name.equals("vt1") || dict_name.equals("vt6") || dict_name.equals("vt12")) {
                         spine_interpo.spineKeys.put(dict_name, q);
@@ -1401,15 +1397,15 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
     public java.io.FileFilter getFileFilter() {
         return new java.io.FileFilter() {
             @Override
-            public boolean accept(File pathname) {
+            public boolean accept(File pathName) {
                 return true;//
-                //pathname.getName().toLowerCase().endsWith(".bvh");//Today
+                //pathName.getName().toLowerCase().endsWith(".bvh");//Today
             }
         };
     }
 
     public int EulerOrder() throws FileNotFoundException, IOException {
-        BufferedReader br = ReadFile(filename);
+        BufferedReader br = ReadFile(fileName);
         String line;
         line = br.readLine();
         Hashtable tablech = new Hashtable();
@@ -1441,7 +1437,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
     public String ChannelsStyle() throws FileNotFoundException, IOException {
         //6channels style means offset and rotation; For every joint in the bvh file we have; CHANNELS 6 Xposition Yposition Zposition Zrotation Xrotation Yrotation
         //3channels style means only rotation (except for the hips channels); For every joint in the bvh file we have; CHANNELS 3 Yrotation Xrotation Zrotation
-        BufferedReader br = ReadFile(filename);
+        BufferedReader br = ReadFile(fileName);
         String line = br.readLine();
         String style;
         Vector channels = new Vector();

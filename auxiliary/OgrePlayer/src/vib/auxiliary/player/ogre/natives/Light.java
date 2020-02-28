@@ -35,7 +35,7 @@ public class Light extends _Object_ implements MovableObject {
     public enum LightTypes{
         LT_SPOTLIGHT, LT_DIRECTIONAL
     }
-    
+
     public void setType(LightTypes lightTypes) {
         switch(lightTypes){
             case LT_DIRECTIONAL : _setType_LT_DIRECTIONAL(getNativePointer()); break;
@@ -49,7 +49,7 @@ public class Light extends _Object_ implements MovableObject {
         _setDirection(getNativePointer(), i, i0, i1);
     }
     private native void _setDirection(long p, double i, double i0, double i1);
-    
+
     public void setCastShadows(boolean b) {
         _setCastShadows(getNativePointer(), b);
     }
@@ -70,7 +70,7 @@ public class Light extends _Object_ implements MovableObject {
         _detatchFromParent(getNativePointer());
     }
     private native void _detatchFromParent(long thisPointer);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

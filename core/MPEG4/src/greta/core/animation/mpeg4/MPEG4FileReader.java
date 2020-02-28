@@ -80,9 +80,9 @@ public class MPEG4FileReader implements FAPFrameEmitter, BAPFrameEmitter, AudioE
         audioEmitters.removeAudioPerformer(ap);
     }
 
-    public void load(String filename) {
+    public void load(String fileName) {
 
-        String base = hasMPEG4Extention(filename) ? filename.substring(0, filename.length()-4) : filename;
+        String base = hasMPEG4Extention(fileName) ? fileName.substring(0, fileName.length()-4) : fileName;
 
         List<BAPFrame> bap_animation = BAPParser.readFromFile(base+".bap", true);
         List<FAPFrame> fap_animation = FAPParser.readFromFile(base+".fap", true);
@@ -105,16 +105,16 @@ public class MPEG4FileReader implements FAPFrameEmitter, BAPFrameEmitter, AudioE
         }
     }
 
-    private static boolean hasMPEG4Extention(String filename){
-        String filenameLower = filename.toLowerCase();
-        return filenameLower.endsWith(".fap") || filenameLower.endsWith(".bap") || filenameLower.endsWith(".wav");
+    private static boolean hasMPEG4Extention(String fileName){
+        String fileNameLower = fileName.toLowerCase();
+        return fileNameLower.endsWith(".fap") || fileNameLower.endsWith(".bap") || fileNameLower.endsWith(".wav");
     }
 
     public java.io.FileFilter getFileFilter() {
         return new java.io.FileFilter() {
             @Override
-            public boolean accept(File pathname) {
-                return hasMPEG4Extention(pathname.getName());
+            public boolean accept(File pathName) {
+                return hasMPEG4Extention(pathName.getName());
             }
         };
     }

@@ -37,7 +37,7 @@ public class Ray extends _Object_ {
     }
 
     private native long _getPoint(long nativePointer, double distanceAt);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

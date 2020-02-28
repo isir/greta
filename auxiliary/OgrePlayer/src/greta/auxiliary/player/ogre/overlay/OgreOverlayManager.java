@@ -24,15 +24,15 @@ import greta.auxiliary.player.ogre.Ogre;
  * @author Mathieu
  */
 public class OgreOverlayManager {
-    
+
     private Fader fader=null;
     private String sceneName="";
-    
+
     public OgreOverlayManager(String sceneName)
     {
         this.sceneName=sceneName;
     }
-    
+
     public void fadeOut(long duration)
     {
         if(fader==null)
@@ -41,7 +41,7 @@ public class OgreOverlayManager {
         }
         fader.fade(duration, true);
     }
-    
+
     public void fadeIn(long duration)
     {
         if(fader==null)

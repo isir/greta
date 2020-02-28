@@ -25,7 +25,7 @@ import greta.core.util.log.Logs;
  */
 public class UserEngagement //implements SpeechRecognizerResultPerformer {
 {
-    //EngagementValue between -5 and 5. 
+    //EngagementValue between -5 and 5.
 
     public double UserEngagementValue = 5;
     public boolean UserEngagementBoolean;
@@ -88,8 +88,8 @@ public class UserEngagement //implements SpeechRecognizerResultPerformer {
 //                double EngValue = Double.parseDouble(EngValueString);
 //                SetUserEngagementValue(EngValue);
             } else {
-                //any other input then "if" above, makes Strclient and SampleThriftZmq from A11 integration demo stop. 
-                //So far the else statement does not solve this. 
+                //any other input then "if" above, makes Strclient and SampleThriftZmq from A11 integration demo stop.
+                //So far the else statement does not solve this.
                 Logs.debug(string);
             }
         }

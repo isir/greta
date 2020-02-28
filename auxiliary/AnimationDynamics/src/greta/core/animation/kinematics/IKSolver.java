@@ -37,7 +37,7 @@ public abstract class IKSolver {
         m_targetThreshold = targetThreshold;
         m_stepweight = stepweight;
     }
-    
+
     public IKSolver(IKChain chain){
         m_chain = chain;
     }

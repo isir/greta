@@ -33,7 +33,7 @@ public final class Mode {
     private ReactionType reactionType;
     private ReactionDuration reactionDuration;
     private SocialAttitude socialAttitude;
-    
+
     // create a variable to store the bml id
     private String bml_id;
 
@@ -46,7 +46,7 @@ public final class Mode {
         setSocialAttitude(socialAttitude);
         setBml_id(id);
     }
-    
+
     public Mode(CompositionType compositionType, ReactionType reactionType, ReactionDuration reactionDuration) {
         this(compositionType, reactionType, reactionDuration, null, "");
     }
@@ -63,7 +63,7 @@ public final class Mode {
         setReactionDuration(reactionDuration);
         setSocialAttitude(socialAttitude);
     }
-    
+
     public Mode(String compositionType, String reactionType, String reactionDuration) {
         this(compositionType, reactionType, reactionDuration, null);
     }
@@ -80,7 +80,7 @@ public final class Mode {
         setReactionDuration(reactionDuration);
         setSocialAttitude(socialAttitude);
     }
-    
+
     public Mode(String compositionType, CompositionType defaultCompositionType, String reactionType, String reactionDuration) {
         this(compositionType, defaultCompositionType, reactionType, reactionDuration, null);
     }
@@ -102,7 +102,7 @@ public final class Mode {
     public ReactionDuration getReactionDuration() {
         return reactionDuration;
     }
-    
+
     public SocialAttitude getSocialAttitude() {
         return socialAttitude;
     }
@@ -120,7 +120,7 @@ public final class Mode {
     public void setReactionDuration(ReactionDuration reactionDuration) {
         this.reactionDuration = (reactionDuration == null) ? ReactionDuration.NONE : reactionDuration;
     }
-    
+
     public void setSocialAttitude(SocialAttitude socialAttitude) {
         this.socialAttitude = (socialAttitude == null) ? SocialAttitude.neutral : socialAttitude;
     }
@@ -142,7 +142,7 @@ public final class Mode {
     public void setReactionDuration(String reactionDuration) {
         this.reactionDuration = ReactionDuration.interpret(reactionDuration);
     }
-    
+
     public void setSocialAttitude(String socialAttitude) {
         this.socialAttitude = SocialAttitude.interpret(socialAttitude);
     }

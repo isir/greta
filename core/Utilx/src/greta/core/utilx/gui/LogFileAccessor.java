@@ -43,21 +43,21 @@ public class LogFileAccessor extends javax.swing.JFrame implements LogOutput{
         return currentFile.replaceAll("\\\\", "/"); //UNIX compatible
     }
 
-    public void setLogFile(String filename){
-        setLogFileWithoutGuiUpdate(filename);
+    public void setLogFile(String fileName){
+        setLogFileWithoutGuiUpdate(fileName);
         if(currentFile!=null){
             this.jTextField1.setText(currentFile);
             this.jFileChooser1.setCurrentDirectory(new File(currentFile));
         }
     }
 
-    private void setLogFileWithoutGuiUpdate(String filename){
-        if(filename==null || filename.isEmpty()){
+    private void setLogFileWithoutGuiUpdate(String fileName){
+        if(fileName==null || fileName.isEmpty()){
             logFile = null;
             currentFile = null;
         }
         else{
-            File newfile = new File(filename);
+            File newfile = new File(fileName);
             try {
                 String canonicalname = newfile.getCanonicalPath();
                 boolean changepath = false;
@@ -73,7 +73,7 @@ public class LogFileAccessor extends javax.swing.JFrame implements LogOutput{
                 else{
                     changepath = true; // current file is null
                 }
-                currentFile = filename;
+                currentFile = fileName;
                 if(changepath){
                     logFile = new LogFile(currentFile);
                 }

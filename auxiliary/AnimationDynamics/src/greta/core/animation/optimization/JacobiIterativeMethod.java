@@ -31,7 +31,7 @@ public class JacobiIterativeMethod {
     RealMatrix _R;
     RealMatrix _A;
     RealMatrix _b;
-    
+
     public JacobiIterativeMethod(RealMatrix A, RealMatrix b) throws Exception {
        _A = A;
        _b = b;
@@ -40,11 +40,11 @@ public class JacobiIterativeMethod {
       // _D = MatrixUtils.createRealDiagonalMatrix(diagonal);
        for(int i = 0; i < h; ++i){
            for(int j = 0; j < l; ++j){
-       
+
            }
        }
     }
-    
+
     public double converge() {
        RealMatrix X = _DInverse.multiply(_b.subtract(_R.multiply(_X)));
        double diff = X.subtract(_X).getNorm();

@@ -94,8 +94,6 @@ public class ModuleListModel extends AbstractListModel<ModuleElement>{
     }
 
 
-
-
     public class ModuleElement implements Comparable<ModuleElement>{
 
         XMLTree module;

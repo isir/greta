@@ -91,7 +91,7 @@ public class Style {
         }
         return edgeColor;
     }
-    
+
     public static void createNewStyle(String styleName, String fillColor, String edgeColor, String dashPattern, String startForm, String endForm, String vAlign) {
         edgeColor = ensureEdgeColor(fillColor, edgeColor);
         if(dashPattern==null){
@@ -247,11 +247,11 @@ public class Style {
         public void highLightModule(mxGraph graph, Module m){
             putStyle(graph, m.getCell(), getVertexHighLightStyle(m.getInfo().style), false);
         }
-        
+
         public void greyModule(mxGraph graph, Module m){
             putStyle(graph, m.getCell(), getVertexGreyStyle(m.getInfo().style), false);
         }
-        
+
         public void unGreyModule(mxGraph graph, Module m){
             setupModule(graph, m);
         }
@@ -485,7 +485,7 @@ public class Style {
             styleHighLightMap.put(mxConstants.STYLE_GRADIENTCOLOR, vertexColor);
             styleHighLightMap.put(mxConstants.STYLE_STROKECOLOR, scaleColor(vertexColor, 0.7));
             styleHighLightMap.put(mxConstants.STYLE_STROKEWIDTH, 2.5);
-            
+
             styleGreyedHighLightMap.put(mxConstants.STYLE_FONTCOLOR, scaleColor(vertexColor, 0.3));
             styleGreyedHighLightMap.put(mxConstants.STYLE_FILLCOLOR, "0xaaaaaa");
             styleGreyedHighLightMap.put(mxConstants.STYLE_STROKECOLOR, scaleColor(vertexColor, 0.3));
@@ -526,7 +526,7 @@ public class Style {
             if(mxConstants.ALIGN_TOP.equals(vAlign)){
                 styleMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);
                 styleHighLightMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);
-                styleGreyedHighLightMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);                
+                styleGreyedHighLightMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);
                 edgeMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);
                 brokenEdgeMap.put(mxConstants.STYLE_VERTICAL_ALIGN,mxConstants.ALIGN_TOP);
             }
@@ -554,7 +554,7 @@ public class Style {
         public String getVertexHighLightStyle(String styleName) {
             return "[Soft][HighLight]"+styleName;
         }
-        
+
         @Override
         public String getEdgeStyle(String styleName) {
             return "[Soft][edge]"+styleName;

@@ -62,7 +62,6 @@ public class Affin implements Function{
     }
 
 
-
    public int solution1(int X1, int Y1, int X2, int Y2, int X3, int Y3, int X4, int Y4) {
         // write your code in Java SE 6
        long totalArea = 0;

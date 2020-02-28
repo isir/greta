@@ -73,7 +73,7 @@ public class BAPFileWriter implements greta.core.animation.mpeg4.bap.BAPFramePer
         String fileName = (path + "/" + requestId + ".bap");
         writeFile(bapframes, (int) (requestId.getTime() / Constants.FRAME_DURATION_MILLIS), fileName, requestId.toString());
     }
-    
+
     public void writeSequencial(List<BAPFrame> bapframes, String name) {
         String fileName = (path + "/" + name + ".bap");
         writeFile(bapframes, 0, fileName, name);

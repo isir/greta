@@ -73,7 +73,7 @@ public class SpatialMatrix6d extends MatrixNd<SpatialMatrix6d> {
     public static SpatialMatrix6d zero(){
         return new SpatialMatrix6d();
     }
-    
+
     public static SpatialMatrix6d identity(){
         SpatialMatrix6d sm = new SpatialMatrix6d();
         sm.setEntry(0, 0, 1);
@@ -84,7 +84,7 @@ public class SpatialMatrix6d extends MatrixNd<SpatialMatrix6d> {
         sm.setEntry(5, 5, 1);
         return sm;
     }
-    
+
     @Override
     public SpatialMatrix6d copyData(RealMatrix arv) {
         return new SpatialMatrix6d(arv);
@@ -113,11 +113,11 @@ public class SpatialMatrix6d extends MatrixNd<SpatialMatrix6d> {
         result.setSubMatrix(this.getSubMatrix(3, 5, 3, 5).transpose().getData(), 3, 3);
         return result;
     }
-    
+
     public SpatialVector6d multiple(SpatialVector6d v){
         return new SpatialVector6d(super.operate(v));
     }
-    
+
     public Matrix63d multiple(Matrix63d v){
         return new Matrix63d(super.multiply(v));
     }

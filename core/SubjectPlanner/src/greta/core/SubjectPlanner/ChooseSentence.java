@@ -58,6 +58,6 @@ public class ChooseSentence {
             }
         }
         return noSentence;
-    }   
- 
+    }
+
 }

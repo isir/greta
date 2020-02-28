@@ -178,8 +178,6 @@ public class FramesController extends Thread implements BAPFrameEmitter, FramesR
         */
 
 
-
-
         for (int i = 0; i < _bapFramePerformer.size(); ++i) {
             BAPFramePerformer performer = _bapFramePerformer.get(i);
             performer.performBAPFrames(bapframes, requestId);

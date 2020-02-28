@@ -74,7 +74,7 @@ public class Matrix63d  extends MatrixNd<Matrix63d>{
         this.setRow(5, new double[]{v16, v17, v18});
     }
 
-    
+
     public void toZero(){
         this.setRow(0, new double[]{0, 0, 0});
         this.setRow(1, new double[]{0, 0, 0});
@@ -87,19 +87,19 @@ public class Matrix63d  extends MatrixNd<Matrix63d>{
     public Matrix63d copyData(RealMatrix arv) {
         return new Matrix63d(arv);
     }
-    
+
     public static Matrix63d zero(){
         return new Matrix63d();
     }
-    
+
     public Vector3d transposeMultiple(SpatialVector6d v){
         return new Vector3d(super.transpose().operate(v));
     }
-    
+
     public Matrix3d transposeMultiple(Matrix63d v){
         return new Matrix3d(super.transpose().multiply(v));
     }
-    
+
     public SpatialVector6d multiple(Vector3d v){
         return new SpatialVector6d(super.operate(v));
     }

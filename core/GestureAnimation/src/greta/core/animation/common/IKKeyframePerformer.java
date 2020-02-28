@@ -91,7 +91,6 @@ public class IKKeyframePerformer implements KeyframePerformer, BAPFrameEmitter {
         LinkedList<Head> _head = new LinkedList<Head>();
 
 
-
         LinkedList<Shoulder> _leftShoulder = new LinkedList<Shoulder>();
         LinkedList<Shoulder> _rightShoulder = new LinkedList<Shoulder>();
         for (Keyframe kf : keyframes) {
@@ -164,7 +163,6 @@ public class IKKeyframePerformer implements KeyframePerformer, BAPFrameEmitter {
     }
 
 
-
     @Override
     public void addBAPFramePerformer(BAPFramePerformer performer) {
         _framesController.addBAPFramePerformer(performer);
@@ -174,7 +172,6 @@ public class IKKeyframePerformer implements KeyframePerformer, BAPFrameEmitter {
     public void removeBAPFramePerformer(BAPFramePerformer performer) {
         _framesController.removeBAPFramePerformer(performer);
     }
-
 
 
     public void addFramesReceiver(FramesReceiver fr) {

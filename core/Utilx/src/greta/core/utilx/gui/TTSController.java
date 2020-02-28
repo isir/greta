@@ -30,7 +30,7 @@ public class TTSController extends javax.swing.JFrame {
     private CharacterManager cm;
 
     /** Creates new form TTSController */
-    public TTSController(CharacterManager cm) {       
+    public TTSController(CharacterManager cm) {
         this.cm = cm;
         initComponents();
         updateTTSOptions();
@@ -43,7 +43,7 @@ public class TTSController extends javax.swing.JFrame {
                 doPhonem.isSelected());
     }
 
-    public void setTTS(TTS tts){        
+    public void setTTS(TTS tts){
         cm.setTTS(tts);
     }
 

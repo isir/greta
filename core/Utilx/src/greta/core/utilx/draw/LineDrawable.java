@@ -82,7 +82,7 @@ public class LineDrawable extends PathFormDrawable<Line2D> {
         Graphics2D g2d = (Graphics2D) g.create();
   /*      if(drawName){
             Dimension nameSize = getTextSize(name,g);
-            Shape lineBeforeText = new Line2D.Double(startingPoint, new Point2D(shape.getBounds2D().getHeight()- nameSize.)) 
+            Shape lineBeforeText = new Line2D.Double(startingPoint, new Point2D(shape.getBounds2D().getHeight()- nameSize.))
         }*/
         g2d.setStroke(stroke);
         g2d.setColor(color);
@@ -110,7 +110,7 @@ public class LineDrawable extends PathFormDrawable<Line2D> {
             ps = null;
         }
     }
-    
+
     /**
      * Return the distance from a point to a segment
      *

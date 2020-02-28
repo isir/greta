@@ -57,7 +57,7 @@ public class Dictionary {
 
         //convert "Hips"/"root" to "HumanoidRoot" if you want to create a bap file in the new version of bap,
         //convert "Hips"/"root" to "sacroiliac" if you want to create a bap file in the old version pf bap
-        
+
         dict.put("sacroiliac", "sacroiliac");
         dict.put("Head", "skullbase");
         dict.put("Hips", "HumanoidRoot");

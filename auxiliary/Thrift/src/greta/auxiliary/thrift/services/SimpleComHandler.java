@@ -40,10 +40,10 @@ public class SimpleComHandler implements SimpleCom.Iface{
     @Override
     public void send(Message m) throws TException {
         message=m;
-        
+
         if(message.id!=null)
             System.out.println("message received by server:"+message.id+" "+message.type);
-         
+
         receiver.perform(message);
     }
 

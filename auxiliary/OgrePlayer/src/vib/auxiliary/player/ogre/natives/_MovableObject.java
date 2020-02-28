@@ -32,7 +32,7 @@ public class _MovableObject extends _Object_ implements MovableObject{
         _detatchFromParent(getNativePointer());
     }
     private native void _detatchFromParent(long thisPointer);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

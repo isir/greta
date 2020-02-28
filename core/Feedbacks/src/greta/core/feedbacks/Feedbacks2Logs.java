@@ -129,7 +129,7 @@ public class Feedbacks2Logs implements FeedbackPerformer {
     @Override
     public void performFeedback(ID AnimId, String type, SpeechSignal speechsignal, TimeMarker tm) {
         String content = "{\"type\": \"" +type + "\",\n";
-        
+
         content += "\"TimeMarker_id\": " + tm.getName() +", \"time\": " + tm.getValue() + "}\n";
         Logs.info(content);
     }

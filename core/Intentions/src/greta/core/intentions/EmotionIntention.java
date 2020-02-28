@@ -110,7 +110,7 @@ public class EmotionIntention extends BasicIntention implements IntensifiableInt
     public double getIntensity(){
         return intensity;
     }
-    
+
     public void setIntensity(double intensity) {
         this.intensity = intensity;
     }

@@ -41,7 +41,7 @@ import java.util.List;
  * @author Jing Huang
  */
 public class BodyAnimationBAPFrameEmitter implements BAPFrameEmitter{
-    
+
     BodyAnimationNoiseGenerator _bodyNoise = new BodyAnimationNoiseGenerator(CharacterManager.getStaticInstance());
     ArrayList<BAPFramePerformer> _bapFramePerformer = new ArrayList<BAPFramePerformer>();
 

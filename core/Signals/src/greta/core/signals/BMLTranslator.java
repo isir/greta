@@ -104,9 +104,9 @@ public class BMLTranslator {
 
             //<editor-fold defaultstate="collapsed" desc="laugh">
 
-            // <greta:laugh id="t1" greta:lexeme="filename" start="2">
+            // <greta:laugh id="t1" greta:lexeme="fileName" start="2">
             // <description priority="1" type="Greta">
-            //     <greta:lexeme reference=filename/>
+            //     <greta:lexeme reference=fileName/>
             // </description>
             // </greta:laugh>
 

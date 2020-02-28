@@ -66,14 +66,14 @@ public class IdleMovement {
         _sk.update();
         return boy.getFrame();
     }
-    
-    
+
+
     public Frame apply(Vec3d offset) {
 
         computeRootOffset();
         CharacterLowerBody boy = new CharacterLowerBody();
         _posRoot.divide(5);
-        offset.add(_posRoot);     
+        offset.add(_posRoot);
         boy.setRootOffset(offset);
         boy.setSkeleton(_sk);
         boy.compute();
@@ -104,20 +104,20 @@ public class IdleMovement {
         Vec3d offset = new Vec3d();
         return offset;
     }
-    
+
     void applyUpBody() {
         //upbody
         {
             Quaternion q = new Quaternion();
             q.fromEulerXYZByAngle(-_posRoot.x() * 1.5f, -_posRoot.y() * 1.5f, -_posRoot.z() * 1.5f);
             _sk.getJoint("vl4").setLocalRotation(q);
-            
+
         }
     }
 
     public Skeleton getSkeleton() {
         return _sk;
     }
-    
-    
+
+
 }

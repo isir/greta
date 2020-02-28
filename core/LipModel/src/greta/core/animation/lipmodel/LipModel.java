@@ -74,7 +74,7 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
     public LipModel(CharacterManager cm) {
         setCharacterManager(cm);
         onCharacterChanged();
-        
+
         this.start();
     }
 

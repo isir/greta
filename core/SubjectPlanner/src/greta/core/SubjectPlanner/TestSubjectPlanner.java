@@ -39,14 +39,14 @@ public class TestSubjectPlanner {
         ChooseSentence ChooseSen = new ChooseSentence();
         PolitenessStrategy PolitenessStrat = new PolitenessStrategy();
         PolitenessStrat.userEng = userEng;
-        
-        
+
+
         String currentObjectName = "Soldat bandant son arc";
         //Engagement between -5 and 5
     //    userEng.UserEngagementValue = -5;
         //userEng.SetUserEngagementValue(-5);
-        
-        
+
+
         for (int objNr = 1; objNr <= 6; objNr++) {
 
             MuseumObject currentObj = candidates.GetCurrentObject(currentObjectName);
@@ -70,7 +70,7 @@ public class TestSubjectPlanner {
        //     Object newObject = biz.entrySet().toArray()[0];
        //     String newObjectName = newObject.toString().replaceFirst("=.*", "");
       //      System.out.println(newObjectName);
-            
+
           //  System.out.println("NEW SUBJECT NAME = "+ candidates.GetNewSubjectName("Soldat bandant son arc"));
           //  System.out.println(candidates.GetNewSubjectString(currentObj));
 
@@ -80,7 +80,7 @@ public class TestSubjectPlanner {
 
      //       currentObjectName = newObjectName;
             userEng.UserEngagementValue = userEng.UserEngagementValue+2;
-            
+
             try {
                 Thread.sleep(2000);
             } catch (InterruptedException ex) {

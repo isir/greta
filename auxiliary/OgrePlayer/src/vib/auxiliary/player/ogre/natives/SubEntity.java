@@ -36,7 +36,7 @@ public class SubEntity extends _Object_ {
         _setMaterialName(getNativePointer(), materialName);
     }
     private native void _setMaterialName(long p, String s);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

@@ -66,8 +66,8 @@ public class HandShapeLibrary extends ParameterSet<HandShape> implements Charact
         setDefaultDefinition(getCharacterManager().getDefaultValueString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY));
 
         //load additionnal library :
-        for(String filename : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY)) {
-            addDefinition(filename);
+        for(String fileName : getCharacterManager().getAllValuesString(CHARACTER_PARAMETER_HAND_SHAPE_LIBRARY)) {
+            addDefinition(fileName);
         }
 
         //set the current library to use :

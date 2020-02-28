@@ -31,7 +31,7 @@ public class Viewport extends _Object_{
         _setBackgroundColour(getNativePointer(), convertToColor.getNativePointer());
     }
     private native void _setBackgroundColour(long thiPointer, long colourPointer);
-    
+
     @Override
     protected native void delete(long nativePointer);
 }

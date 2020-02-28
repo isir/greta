@@ -30,7 +30,7 @@ import org.joml.Vector3f;
  * A very simple but fully functional 6-DOF free/space camera.
  * <p>
  * It allows to set the linear acceleration or velocity in world-space and the angular acceleration or velocity in local camera/eye space.
- * 
+ *
  * @author Kai Burjack
  */
 public class FreeCamera {
@@ -46,7 +46,7 @@ public class FreeCamera {
 
     /**
      * Update this {@link FreeCamera} based on the given elapsed time.
-     * 
+     *
      * @param dt
      *            the elapsed time
      * @return this
@@ -65,7 +65,7 @@ public class FreeCamera {
 
     /**
      * Compute the world-space 'right' vector and store it into <code>dest</code>.
-     * 
+     *
      * @param dest
      *          will hold the result
      * @return dest
@@ -76,7 +76,7 @@ public class FreeCamera {
 
     /**
      * Compute the world-space 'up' vector and store it into <code>dest</code>.
-     * 
+     *
      * @param dest
      *          will hold the result
      * @return dest
@@ -87,7 +87,7 @@ public class FreeCamera {
 
     /**
      * Compute the world-space 'forward' vector and store it into <code>dest</code>.
-     * 
+     *
      * @param dest
      *          will hold the result
      * @return dest

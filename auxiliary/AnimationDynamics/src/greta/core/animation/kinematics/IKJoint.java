@@ -55,23 +55,23 @@ public class IKJoint {
             sk.m_values.add(0.0);
         }
     }
-    
+
     public void setAxis(int dim, Vector3d axis){
         p_owner.m_axis.get(m_dims.get(dim).m_idx).set(axis);
     }
-    
+
     public void setLimites(int dim, Vector2d limit){
         p_owner.m_anglelimites.get(m_dims.get(dim).m_idx).set(limit);
     }
-    
+
     public void setLocalTranslation(int dim, Vector3d tran){
         p_owner.m_localTranslations.get(m_dims.get(dim).m_idx).set(tran);
     }
-    
+
     public void setLocalRotation(int dim, Matrix3d r){
         p_owner.m_localRotations.get(m_dims.get(dim).m_idx).set(r);
     }
-    
+
     public Quaternion computeQuaternion(){
         Quaternion q = new Quaternion();
         for(int i = 0; i < m_dof; ++i){
@@ -81,7 +81,7 @@ public class IKJoint {
         }
         return q;
     }
-    
+
     public String m_name;
     public int m_index;
     public int m_index_parent;

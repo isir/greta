@@ -60,11 +60,10 @@ public class ACos implements Function{
     public Function getDerivative() {
         return null; //TODO
     }
-    
+
     @Override
     public Function simplified() {
         return ACos.of(f.simplified());
     }
 
 }
-

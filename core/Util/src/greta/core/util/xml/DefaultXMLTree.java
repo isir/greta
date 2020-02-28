@@ -108,16 +108,16 @@ public class DefaultXMLTree implements XMLTree{
     }
 
     @Override
-    public void save(String filename) {
+    public void save(String fileName) {
         FileWriter out;
         try {
-            out = new FileWriter(filename);
+            out = new FileWriter(fileName);
 
             out.write(new String(getRootNode().toString().getBytes("UTF-8")));
             out.close();
         }
         catch (IOException ex) {
-            Logs.error("DefaultXMLTree.Save("+filename+") :\n"+ex);
+            Logs.error("DefaultXMLTree.Save("+fileName+") :\n"+ex);
         }
     }
 
@@ -304,7 +304,7 @@ public class DefaultXMLTree implements XMLTree{
     public String toString(){
         return this.toString(true);
     }
-    
+
     @Override
     public String toString(boolean prettyPrint){
         if(isTextNode()){

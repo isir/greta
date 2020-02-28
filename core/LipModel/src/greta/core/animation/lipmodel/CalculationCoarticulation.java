@@ -207,7 +207,7 @@ public class CalculationCoarticulation {
 
                     fracteur = (curTime[index_labiaux][index_TargetPoint] - preTime[index_labiaux][0]) / (sucTime[index_labiaux][0] - preTime[index_labiaux][0]);
                     curTarget[index_labiaux][index_TargetPoint] = (float) ((1 - fracteur) * preTarget[index_labiaux][index_TargetPoint] + fracteur * sucTarget[index_labiaux][index_TargetPoint]);
-                          
+
                 }
             }
         }

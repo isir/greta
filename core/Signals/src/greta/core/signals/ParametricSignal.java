@@ -57,7 +57,7 @@ public abstract class ParametricSignal implements Signal{
     private double tension = 0;
 
     private boolean filled = false;
-    
+
     public void setOpenness(double openness) {
         this.openness = openness;
     }

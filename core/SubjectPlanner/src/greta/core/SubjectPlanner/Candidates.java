@@ -92,7 +92,7 @@ public class Candidates {
 //        HashMap<String, Double> CharacteristicScore = new HashMap();
 //        double distance = CharDist.GetDistanceFromCurrentInstance(Characteristic, CurrentInstance, NewInstance);
 //        boolean EngagementOrientationAndBoolean;
-//        //AgentOrientation decides if we select according to AgentEngagement or UserEngagement, 
+//        //AgentOrientation decides if we select according to AgentEngagement or UserEngagement,
 //        // which decides if we want something close to original instance of far.
 //        if (Characteristic.equalsIgnoreCase(AgentEng.GetAgentOrientation())) {
 //            EngagementOrientationAndBoolean = AgentEng.GetAgentEngagement();
@@ -101,7 +101,7 @@ public class Candidates {
 //        }
 //        return EngagementOrientationAndBoolean;
 //    }
-// 
+//
 //    public HashMap<String, Double> GetCharacteristicScoreCandidate(String Characteristic, String CurrentInstance, String NewInstance) {
 //        boolean EngagementValue = EngagementOrientationAndBoolean(Characteristic, CurrentInstance, NewInstance);
 //        HashMap<String, Double> CharacteristicScore = new HashMap();
@@ -123,7 +123,7 @@ public class Candidates {
         HashMap<String, Double> Distances = CharDist.GetListDistancesFromCurrentInstance(Characteristic, CurrentInstance);
 //        System.out.println("distances: " + Distances);
         boolean EngagementValue;
-        //AgentOrientation decides if we select according to AgentEngagement or UserEngagement, 
+        //AgentOrientation decides if we select according to AgentEngagement or UserEngagement,
         // which decides if we want something close to original instance of far.
         if (Characteristic.equalsIgnoreCase(AgentEng.GetAgentOrientation())) {
             EngagementValue = AgentEng.GetAgentEngagement();
@@ -302,7 +302,7 @@ public class Candidates {
     }
 
     public String GetTransition() {
-        //Temporal solution. In the future let transition be based on distance to current object. 
+        //Temporal solution. In the future let transition be based on distance to current object.
         if (UserEng.GetUserEngagementBoolean()) {
             Transition = "close";
         } else {
@@ -320,7 +320,7 @@ public class Candidates {
     //  public HashMap<String, Double> GetNewSubjectsWithPreference(MuseumObject CurrentObject) {
     //        HashMap<String, Double> CandidateScores = GetNewSubjectWithoutPreference(MuseumObject CurrentObject);
     //       for (Map.Entry<String, Double> entry : CandidateScores.entrySet()) {
-    //          if 
+    //          if
     //          obj_pref_agent
     //     }
     //  }

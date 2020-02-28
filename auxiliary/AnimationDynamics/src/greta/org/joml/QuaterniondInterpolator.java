@@ -28,7 +28,7 @@ package org.joml;
  * Instances of this class are <i>not</i> thread-safe.
  * <p>
  * Reference: <a href="http://www.alinenormoyle.com/weblog/?p=802">http://www.alinenormoyle.com/</a>
- * 
+ *
  * @author Kai Burjack
  */
 public class QuaterniondInterpolator {
@@ -37,7 +37,7 @@ public class QuaterniondInterpolator {
      * Performs singular value decomposition on {@link Matrix3d}.
      * <p>
      * This code was adapted from <a href="http://www.public.iastate.edu/~dicook/JSS/paper/code/svd.c">http://www.public.iastate.edu/</a>.
-     * 
+     *
      * @author Kai Burjack
      */
     private static class SvdDecomposition3d {
@@ -297,7 +297,7 @@ public class QuaterniondInterpolator {
      * Compute the weighted average of all of the quaternions given in <code>qs</code> using the specified interpolation factors <code>weights</code>, and store the result in <code>dest</code>.
      * <p>
      * Reference: <a href="http://www.alinenormoyle.com/weblog/?p=802">http://www.alinenormoyle.com/</a>
-     * 
+     *
      * @param qs
      *            the quaternions to interpolate over
      * @param weights

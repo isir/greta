@@ -49,12 +49,12 @@ public class ResourceGroupManager extends _Object_ {
     }
     private native void _initialiseAllResourceGroups(long p);
 
-    public boolean resourceExists(String resourceGroup, String filename) {
-        return _resourceExists(getNativePointer(), resourceGroup, filename);
+    public boolean resourceExists(String resourceGroup, String fileName) {
+        return _resourceExists(getNativePointer(), resourceGroup, fileName);
     }
     private native boolean _resourceExists(long p, String s, String s2);
-    
+
     @Override
     protected native void delete(long nativePointer);
-    
+
 }

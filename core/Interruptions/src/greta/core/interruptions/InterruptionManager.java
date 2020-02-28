@@ -62,7 +62,7 @@ public class InterruptionManager extends CharacterDependentAdapter implements In
     private final Map<ID, List<Intention>> intentionsHistory = new HashMap<>();
 
     private ReactionSignalsMapper reactionSignalsMapper;
-    
+
     public InterruptionManager(CharacterManager cm){
         setCharacterManager(cm);
         reactionSignalsMapper = new ReactionSignalsMapper(cm);
@@ -355,15 +355,15 @@ public class InterruptionManager extends CharacterDependentAdapter implements In
     public void performCallback(Callback clbck) {
 
         Logs.debug("Interruption Manager received callback ID [" + clbck.animId() + "] of Type [" + clbck.type() + "] at Time [" + String.format("%.2f", clbck.time()) + "].");
-                
+
         if (clbck.animId().getSource().startsWith("InterruptionReactionSignals")) {
             return;
-        }        
-        
+        }
+
         if (clbck.animId().getSource().startsWith("FML-Halt-IGA")) {
             return;
         }
-        
+
         // Remove from intention history according to ID
         if (!clbck.type().equalsIgnoreCase("start")) {
             synchronized (intentionsHistoryLock) {

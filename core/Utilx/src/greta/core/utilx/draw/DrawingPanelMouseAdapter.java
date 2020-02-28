@@ -114,8 +114,6 @@ public class DrawingPanelMouseAdapter extends MouseAdapter {
     }
 
 
-
-
     protected void doMouseWheelMoved(MouseWheelEvent e){
     }
 

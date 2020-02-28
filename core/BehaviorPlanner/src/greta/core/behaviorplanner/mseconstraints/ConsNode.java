@@ -1034,7 +1034,6 @@ public class ConsNode {
             //if (this.oper1 == not) return  !(this.left->evaluate());
 
 
-
         }// and of if
 
 
@@ -1330,4 +1329,4 @@ public class ConsNode {
 
         return temp;
     }
-};
+}

@@ -26,11 +26,11 @@ import greta.core.util.parameter.EngineParameterSetOfSet;
 public class PreferencesOfAgent extends EngineParameterSetOfSet{
 
     public static final String OBJECT_PREF_AGENT_LIB = "SubjectPlanner/Data/ObjectPreferenceAgent.xml";
-    
+
     public static Sentences global_obj_pref_library;
-     
-    public PreferencesOfAgent(String filename){
-      super(filename);
+
+    public PreferencesOfAgent(String fileName){
+      super(fileName);
     }
-    
+
 }

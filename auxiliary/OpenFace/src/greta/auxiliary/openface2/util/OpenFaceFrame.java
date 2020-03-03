@@ -40,30 +40,43 @@ public class OpenFaceFrame {
     private static class AU {
         public int index;   // integer representing the column index where it's read from
         public int num;     // number representing the AU (ex: 1, for key "AU01_r")
-        public AU(int index, int num)     {this.index = index; this.num = num;}
-        public AU(int index, String num)  {this.index = index; this.num = Integer.parseInt(num);}
+
+        public AU(int index, int num) {
+            this.index = index;
+            this.num = num;
+        }
+
+        public AU(int index, String num) {
+            this.index = index;
+            this.num = Integer.parseInt(num);
+        }
     }
 
     private final static int MAX_AUS = 100;
-    private final static List<String> expectedPreAUHeader =
-            Arrays.asList(("frame_id,face_id,timestamp,confidence,success,"
-            + "head_x,head_y,head_z,head_rx,head_ry,head_rz,"
-            + "gaze_0_x,gaze_0_y,gaze_0_z,gaze_1_x,gaze_1_y,"
-            + "gaze_1_z,gaze_angle_x,gaze_angle_y").split(","));
+    private final static List<String> expectedPreAUHeader
+            = Arrays.asList(("frame_id,face_id,timestamp,confidence,success,"
+                    + "head_x,head_y,head_z,head_rx,head_ry,head_rz,"
+                    + "gaze_0_x,gaze_0_y,gaze_0_z,gaze_1_x,gaze_1_y,"
+                    + "gaze_1_z,gaze_angle_x,gaze_angle_y").split(","));
 
-    private static List<String> selectedHeaders=null;
+    private static List<String> selectedHeaders = null;
     private static List<String> aurKeys = new ArrayList<>();
     private static List<String> aucKeys = new ArrayList<>();
 
     public final static String BLINK_AU = "AU45_r";
 
-    public static Map<String,Integer> keysOrder = new HashMap<>();
-    public static Map<String,AU> keysAUROrder = new HashMap<>();
-    public static Map<String,AU> keysAUCOrder = new HashMap<>();
+    public static Map<String, Integer> keysOrder = new HashMap<>();
+    public static Map<String, AU> keysAUROrder = new HashMap<>();
+    public static Map<String, AU> keysAUCOrder = new HashMap<>();
     public static String[] headers;
 
-    public static int getAURCount() { return keysAUROrder.size();}
-    public static int getAUCCount() { return keysAUCOrder.size();}
+    public static int getAURCount() {
+        return keysAUROrder.size();
+    }
+
+    public static int getAUCCount() {
+        return keysAUCOrder.size();
+    }
 
     public static int col_blink;
     public static String separator = ",";
@@ -88,7 +101,7 @@ public class OpenFaceFrame {
     public double[] au_r = new double[MAX_AUS];
     public double[] au_c = new double[MAX_AUS];
     public double[] intensity = new double[MAX_AUS];
-    public double blink=0;
+    public double blink = 0;
 
     public static boolean readHeader(String line) {
         String[] headPoseCols = line.split(separator);
@@ -104,7 +117,6 @@ public class OpenFaceFrame {
             if (expectedPreAUHeader.contains(headPoseCols[i])) {
                 keysOrder.put(headPoseCols[i], i);
             }
-
 
             Matcher m = p.matcher(headPoseCols[i]);
             if (m.matches()) {
@@ -136,22 +148,24 @@ public class OpenFaceFrame {
     }
 
     private boolean isHeaderSelected(String h) {
-        return selectedHeaders==null || selectedHeaders.contains(h);
+        return selectedHeaders == null || selectedHeaders.contains(h);
     }
 
-    private String readDataCol(String key, String[] cols, Map<String,Integer> set) {
+    private String readDataCol(String key, String[] cols, Map<String, Integer> set) {
         if (isHeaderSelected(key)) {
-            if (set.containsKey(key))
+            if (set.containsKey(key)) {
                 return cols[set.get(key)];
-            else
-                LOGGER.warning(String.format("Map doesn't contains key: %s",key));
+            } else {
+                LOGGER.warning(String.format("Map doesn't contains key: %s", key));
+            }
         }
         return "0";
     }
 
-    private double readAUDataCol(String key, String[] cols, Map<String,AU> set) {
-        if (isHeaderSelected(key))
-                return Double.parseDouble(cols[set.get(key).index]);
+    private double readAUDataCol(String key, String[] cols, Map<String, AU> set) {
+        if (isHeaderSelected(key)) {
+            return Double.parseDouble(cols[set.get(key).index]);
+        }
         return 0.;
     }
 
@@ -164,28 +178,29 @@ public class OpenFaceFrame {
         confidence  = Double.parseDouble(readDataCol("confidence", cols, keysOrder));
         success     = Integer.parseInt(readDataCol("success", cols, keysOrder)) == 1;
         headPos.set(Double.parseDouble(readDataCol("head_x", cols, keysOrder)),
-                    Double.parseDouble(readDataCol("head_y", cols, keysOrder)),
-                    Double.parseDouble(readDataCol("head_z", cols, keysOrder)));
+                Double.parseDouble(readDataCol("head_y", cols, keysOrder)),
+                Double.parseDouble(readDataCol("head_z", cols, keysOrder)));
         headRot.set(Double.parseDouble(readDataCol("head_rx", cols, keysOrder)),
-                    Double.parseDouble(readDataCol("head_ry", cols, keysOrder)),
-                    Double.parseDouble(readDataCol("head_rz", cols, keysOrder)));
+                Double.parseDouble(readDataCol("head_ry", cols, keysOrder)),
+                Double.parseDouble(readDataCol("head_rz", cols, keysOrder)));
         gaze0.set(Double.parseDouble(readDataCol("gaze_0_x", cols, keysOrder)),
-                    Double.parseDouble(readDataCol("gaze_0_y", cols, keysOrder)),
-                    Double.parseDouble(readDataCol("gaze_0_z", cols, keysOrder)));
+                Double.parseDouble(readDataCol("gaze_0_y", cols, keysOrder)),
+                Double.parseDouble(readDataCol("gaze_0_z", cols, keysOrder)));
         gaze1.set(Double.parseDouble(readDataCol("gaze_1_x", cols, keysOrder)),
-                    Double.parseDouble(readDataCol("gaze_1_y", cols, keysOrder)),
-                    Double.parseDouble(readDataCol("gaze_1_z", cols, keysOrder)));
+                Double.parseDouble(readDataCol("gaze_1_y", cols, keysOrder)),
+                Double.parseDouble(readDataCol("gaze_1_z", cols, keysOrder)));
         gazeAngleX  = Double.parseDouble(readDataCol("gaze_angle_x", cols, keysOrder));
         gazeAngleX  = Double.parseDouble(readDataCol("gaze_angle_y", cols, keysOrder));
 
         int j = 0;
         for (String key : keysAUROrder.keySet()) {
-            au_r[j] = readAUDataCol(key, cols, keysAUROrder)/5.; // AU**_r are between 0-5.
-            if (BLINK_AU.equals(key))
+            au_r[j] = readAUDataCol(key, cols, keysAUROrder) / 5.; // AU**_r are between 0-5.
+            if (BLINK_AU.equals(key)) {
                 blink = au_r[j];
+            }
             j++;
         }
-        j=0;
+        j = 0;
         for (String key : keysAUCOrder.keySet()) {
             au_c[j++] = readAUDataCol(key, cols, keysAUCOrder);
         }
@@ -200,21 +215,22 @@ public class OpenFaceFrame {
         f.copy(this);
         return f;
     }
+
     public void copy(OpenFaceFrame f) {
-        frameId 		=	f.frameId;
-        faceId 	=	f.faceId;
-        timestamp 	=	f.timestamp;
-        confidence 	=	f.confidence;
-        success 	=	f.success;
-        headPos 	=	f.headPos.clone();
-        headRot 	=	f.headRot.clone();
-        gaze0 		=	f.gaze0.clone();
-        gaze1 		=	f.gaze1.clone();
-        gazeAngleX	=	f.gazeAngleX	;
-        gazeAngleY	=	f.gazeAngleY	;
-        System.arraycopy( f.au_r, 0, au_r, 0, f.au_r.length );
-        System.arraycopy( f.au_c, 0, au_c, 0, f.au_c.length );
-        System.arraycopy( f.intensity, 0, intensity, 0, f.intensity.length );
+        frameId     = f.frameId;
+        faceId      = f.faceId;
+        timestamp   = f.timestamp;
+        confidence  = f.confidence;
+        success     = f.success;
+        headPos     = f.headPos.clone();
+        headRot     = f.headRot.clone();
+        gaze0       = f.gaze0.clone();
+        gaze1       = f.gaze1.clone();
+        gazeAngleX  = f.gazeAngleX;
+        gazeAngleY  = f.gazeAngleY;
+        System.arraycopy(f.au_r,        0, au_r,        0, f.au_r.length);
+        System.arraycopy(f.au_c,        0, au_c,        0, f.au_c.length);
+        System.arraycopy(f.intensity,   0, intensity,   0, f.intensity.length);
     }
 
     /**

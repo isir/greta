@@ -17,26 +17,14 @@
  */
 package greta.auxiliary.openface2;
 
+import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
 import greta.auxiliary.openface2.util.OpenFaceFrame;
-import greta.auxiliary.openface2.util.StringArrayListener;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
-import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
-import greta.core.animation.mpeg4.fap.FAPFrameEmitterImpl;
-import greta.core.keyframes.face.AUEmitter;
-import greta.core.keyframes.face.AUEmitterImpl;
-import greta.core.keyframes.face.AUPerformer;
 import greta.core.repositories.AUAPFrame;
 import greta.core.util.Constants;
 import greta.core.util.id.ID;
-import greta.core.util.id.IDProvider;
 import greta.core.util.time.Timer;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Logger;
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
@@ -49,20 +37,10 @@ import org.zeromq.ZMQException;
  * @author Philippe Gauthier <philippe.gauthier@sorbonne-universite.fr>
  * @author Brice Donval
  */
-public class OpenFaceOutputStreamZeroMQReader extends FAPFrameEmitterImpl implements AUEmitter, BAPFrameEmitter, Runnable {
-
-    private static final Logger LOGGER = Logger.getLogger(OpenFaceOutputStreamZeroMQReader.class.getName());
-
-    private List<StringArrayListener> headerListeners = new ArrayList<>();
-
-    private Thread thread;
-    private final String threadName = OpenFaceOutputStreamZeroMQReader.class.getSimpleName();
+public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstractReader {
 
     private int startInputFrame = 0;
     private final int offsetFrame = 0;
-
-    private AUEmitterImpl auEmitter = new AUEmitterImpl();
-    private BAPFrameEmitterImpl bapFrameEmitter = new BAPFrameEmitterImpl();
 
     private boolean isPerforming = false;
     private boolean isAlive = true;
@@ -73,10 +51,9 @@ public class OpenFaceOutputStreamZeroMQReader extends FAPFrameEmitterImpl implem
     boolean isConnected;
     final static String DEFAULTURL = "tcp://localhost:5000";
     final static String TOPIC = "";
-    String[] selectedHeaders = null;
     ZContext zContext;
     Socket zSubscriber;
-    String lastDataStr=null;
+    String lastDataStr = null;
     int col_blink = 412;
     double fps = 0.;
     double frameDuration = 0.;
@@ -98,94 +75,87 @@ public class OpenFaceOutputStreamZeroMQReader extends FAPFrameEmitterImpl implem
 
     double alpha = 0.75;//1.0;
 
+    /* ---------------------------------------------------------------------- */
+
+    public OpenFaceOutputStreamZeroMQReader(OpenFaceOutputStreamReader loader) {
+        super(loader);
+    }
+
+    /* ---------------------------------------------------------------------- */
+
     public String[] getHeaders() {
         return OpenFaceFrame.headers;
     }
 
-    public void listen(String url) {
-        if (zContext == null)
+    public void connect(String url) {
+        if (zContext == null) {
             zContext = new ZContext();
+        }
         try {
-            if (zSubscriber!=null) {
+            if (zSubscriber != null) {
                 LOGGER.info("Closing previous socket");
                 zSubscriber.close();
             }
             zSubscriber = zContext.createSocket(SocketType.SUB);
-            if (url.length() == 0)
+            if (url.length() == 0) {
                 url = DEFAULTURL;
+            }
 
             isConnected = zSubscriber.connect(url);
 
             if (isConnected) {
                 zSubscriber.subscribe(TOPIC.getBytes(ZMQ.CHARSET));
-                LOGGER.info(String.format("Connected to: %s",url));
+                LOGGER.info(String.format("Connected to: %s", url));
                 start();
-            }else
-                LOGGER.warning(String.format("Failed to open: %s",url));
+            } else {
+                LOGGER.warning(String.format("Failed to open: %s", url));
+            }
 
-        }
-        catch(ZMQException ex) {
+        } catch (ZMQException ex) {
             LOGGER.warning(String.format("Couldn't connect to: %s\n%s", url, ex.getMessage()));
             isConnected = false;
         }
     }
 
     @Override
-    public void finalize() throws Throwable{
+    public void finalize() throws Throwable {
         super.finalize();
-        if (zSubscriber!=null) {
+        if (zSubscriber != null) {
             zSubscriber.disconnect(url);
             zSubscriber.close();
         }
-        if (zContext!=null)
+        if (zContext != null) {
             zContext.close();
+        }
         isConnected = false;
         isPerforming = false;
         isAlive = false;
     }
 
-    /**
-     * Set selected headers
-     *
-     * @param selected headers to use
-     *
-     */
-    public void setSelected(String[] selected) {
-        if (selected!=null) {
-            if (selected!=null && !selected.equals(selectedHeaders)) {
-                selectedHeaders = selected;
-                OpenFaceFrame.setSelectedHeaders(selectedHeaders);
-            }
-            LOGGER.info(String.format("Setting selected headers to: %s",Arrays.toString(selected)));
+    public void start() {
+        LOGGER.fine(String.format("Starting %s..", threadName));
+        if (thread == null) {
+            thread = new Thread(this, threadName);
+            isAlive = true;
+            thread.start();
         }
-        else
-            LOGGER.warning("No header selected");
-    }
-
-    public void start () {
-      LOGGER.fine(String.format("Starting %s..", threadName ));
-      if (thread == null) {
-         thread = new Thread (this, threadName);
-         isAlive = true;
-         thread.start();
-      }
     }
 
     @Override
     public void run() {
-        LOGGER.info(String.format("Running %s", threadName ));
+        LOGGER.info(String.format("Running %s", threadName));
         try {
             LOGGER.fine(String.format("Thread: %s", threadName));
-            do{
-                do{
+            do {
+                do {
                     processLine();
                     Thread.sleep(30);
-                }while(isConnected);
+                } while (isConnected);
                 Thread.sleep(1000);
-            }while(isAlive);
+            } while (isAlive);
 
         } catch (InterruptedException e) {
-           LOGGER.warning(String.format("Thread: %s interrupted", threadName));
+            LOGGER.warning(String.format("Thread: %s interrupted", threadName));
         }
         LOGGER.info(String.format("Thread: %s exiting", threadName));
     }
@@ -193,42 +163,43 @@ public class OpenFaceOutputStreamZeroMQReader extends FAPFrameEmitterImpl implem
     private void processLine() {
         if (isConnected) {
             String line = zSubscriber.recvStr();
-            if (line!=null) {
+            if (line != null) {
                 if (line.startsWith("DATA:")) {
                     lastDataStr = line.substring(5);
                     processFrame(lastDataStr);
-                }
-                else if (line.startsWith("HEADER:")) {
+                } else if (line.startsWith("HEADER:")) {
                     boolean changed = OpenFaceFrame.readHeader(line.substring(7));
                     if (changed) {
                         LOGGER.info("Header headerChanged");
                         headerChanged(OpenFaceFrame.headers);
                     }
-                }
-                else
+                } else {
                     LOGGER.warning(String.format("Line not recognized: %s", line));
+                }
 
-            }else
+            } else {
                 LOGGER.warning(String.format("Line is empty"));
+            }
         }
     }
 
     private void processFrame(String line) {
-        if (line!=null && isPerforming) {
+        if (line != null && isPerforming) {
             int curGretaFrame = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
             prevFrame.copy(curFrame);
 
-            if (startInputFrame==0)
+            if (startInputFrame == 0) {
                 startInputFrame = curFrame.frameId;
+            }
 
             curFrame.readDataLine(line);
             //curFrame.frameId += offsetFrame-startInputFrame + curGretaFrame;
             curFrame.frameId = offsetFrame + curGretaFrame;
-            int frameDiff = curFrame.frameId-prevFrame.frameId;
-            if (frameDiff<10 && frameDiff>0) { // If less than 10 frame delay
+            int frameDiff = curFrame.frameId - prevFrame.frameId;
+            if (frameDiff < 10 && frameDiff > 0) { // If less than 10 frame delay
                 frameDuration = curFrame.timestamp - prevFrame.timestamp;
 
-                fps = 1./frameDuration;
+                fps = 1. / frameDuration;
                 //LOGGER.info(String.format("frameid: %d, fps:%f, f dur:%f",curFrame.frameId, fps, frameDuration));
                 processOpenFace();
             }
@@ -238,12 +209,12 @@ public class OpenFaceOutputStreamZeroMQReader extends FAPFrameEmitterImpl implem
     //Format based on https://github.com/TadasBaltrusaitis/OpenFace
     //timestamp, gaze_0_x, gaze_0_y, gaze_0_z, gaze_1_x, gaze_1_y, gaze_1_z, gaze_angle_x, gaze_angle_y, pose_Tx, pose_Ty, pose_Tz, pose_Rx, pose_Ry, pose_Rz, AU01_r, AU02_r, AU04_r, AU05_r, AU06_r, AU07_r, AU09_r, AU10_r, AU12_r, AU14_r, AU15_r, AU17_r, AU20_r, AU23_r, AU25_r, AU26_r, AU45_r, AU01_c, AU02_c, AU04_c, AU05_c, AU06_c, AU07_c, AU09_c, AU10_c, AU12_c, AU14_c, AU15_c, AU17_c, AU20_c, AU23_c, AU25_c, AU26_c, AU28_c, AU45_c
     private void processOpenFace() {
-        if (isConnected && isPerforming()) {
+        if (isConnected && isPerforming) {
             if (frameDuration != 0) {
-                if ( frameDuration > max_time) {
+                if (frameDuration > max_time) {
                     max_time = frameDuration;
                 }
-                if ( frameDuration < min_time) {
+                if (frameDuration < min_time) {
                     min_time = frameDuration;
                 }
                 sendAUFrame(makeAUFrame());
@@ -256,32 +227,29 @@ public class OpenFaceOutputStreamZeroMQReader extends FAPFrameEmitterImpl implem
         AUAPFrame au_frame = new AUAPFrame();
         au_frame.setFrameNumber(curFrame.frameId);
 
-        for (int i=0;i<OpenFaceFrame.getAUCCount();i++)
-        {
+        for (int i = 0; i < OpenFaceFrame.getAUCCount(); i++) {
             // we assume both tables have corresponding values. AU**_c acts as a mask
-            if (curFrame.au_c[i]>0.) {
+            if (curFrame.au_c[i] > 0.) {
                 double value = Math.pow(curFrame.au_r[i], .5); // non linear curve to get to 1.
                 double prevValue = prevFrame.intensity[i];
-                double intensity = alpha*value + (1-alpha)*prevValue;// filter
+                double intensity = alpha * value + (1 - alpha) * prevValue;// filter
                 au_frame.setAUAPboth(OpenFaceFrame.getAUCIndex(i), intensity);
             }
         }
 
         //gaze
-        double gaze_x = alpha*(0.5*(curFrame.gaze0.x()+curFrame.gaze1.x()))+(1-alpha)*prev_gaze_x;
-        double gaze_y = alpha*(0.5*(curFrame.gaze0.y()+curFrame.gaze1.y()))+(1-alpha)*prev_gaze_y;
+        double gaze_x = alpha * (0.5 * (curFrame.gaze0.x() + curFrame.gaze1.x())) + (1 - alpha) * prev_gaze_x;
+        double gaze_y = alpha * (0.5 * (curFrame.gaze0.y() + curFrame.gaze1.y())) + (1 - alpha) * prev_gaze_y;
 
-        if (gaze_x<0) {
+        if (gaze_x < 0) {
             au_frame.setAUAPboth(62, -gaze_x);
-        }
-        else {
+        } else {
             au_frame.setAUAPboth(61, gaze_x);
         }
 
-        if (gaze_y<0) {
+        if (gaze_y < 0) {
             au_frame.setAUAPboth(64, -gaze_y);
-        }
-        else {
+        } else {
             au_frame.setAUAPboth(63, gaze_y);
         }
         prev_gaze_x = gaze_x;
@@ -289,7 +257,7 @@ public class OpenFaceOutputStreamZeroMQReader extends FAPFrameEmitterImpl implem
 
         //blink
         // double blink = alpha*(Double.parseDouble(values[col_blink].replace(',', '.'))/5.0)+(1-alpha)*prev_blink;
-        double blink = curFrame.blink ;
+        double blink = curFrame.blink;
         au_frame.setAUAPboth(43, blink);
         prev_blink = blink;
         return au_frame;
@@ -299,15 +267,15 @@ public class OpenFaceOutputStreamZeroMQReader extends FAPFrameEmitterImpl implem
         BAPFrame hmFrame = new BAPFrame();
         hmFrame.setFrameNumber(curFrame.frameId);
 
-        double rot_X_deg =  curFrame.headRot.x();
-        double rot_Y_deg =  -1.0*curFrame.headRot.y();
-        double rot_Z_deg =  -1.0*curFrame.headRot.z();
+        double rot_X_deg = curFrame.headRot.x();
+        double rot_Y_deg = -1.0 * curFrame.headRot.y();
+        double rot_Z_deg = -1.0 * curFrame.headRot.z();
 
-        rot_X_deg = alpha*(rot_X_deg)+(1-alpha)*prev_rot_X;
-        rot_Y_deg = alpha*(rot_Y_deg)+(1-alpha)*prev_rot_Y;
-        rot_Z_deg = alpha*(rot_Z_deg)+(1-alpha)*prev_rot_Z;
+        rot_X_deg = alpha * (rot_X_deg) + (1 - alpha) * prev_rot_X;
+        rot_Y_deg = alpha * (rot_Y_deg) + (1 - alpha) * prev_rot_Y;
+        rot_Z_deg = alpha * (rot_Z_deg) + (1 - alpha) * prev_rot_Z;
 
-        hmFrame.setDegreeValue(BAPType.vc3_tilt , rot_X_deg);
+        hmFrame.setDegreeValue(BAPType.vc3_tilt, rot_X_deg);
         hmFrame.setDegreeValue(BAPType.vc3_torsion, rot_Y_deg);
         hmFrame.setDegreeValue(BAPType.vc3_roll, rot_Z_deg);
 
@@ -318,74 +286,17 @@ public class OpenFaceOutputStreamZeroMQReader extends FAPFrameEmitterImpl implem
         return hmFrame;
     }
 
-    private void sendAUFrame(AUAPFrame frame) {
-        ID id = IDProvider.createID(threadName + "_sendAUFrame");
-        auEmitter.performAUAPFrame(frame, id);
-    }
-
-    private void sendBAPFrame(BAPFrame frame) {
-        ID id = IDProvider.createID(threadName + "_sendBAPFrame");
-        bapFrameEmitter.sendBAPFrame(id, frame);
-    }
-
-    @Override
-    public void addBAPFramePerformer(BAPFramePerformer bapfp) {
-        if (bapfp != null) {
-            LOGGER.info("addBAPFramesPerformer");
-            bapFrameEmitter.addBAPFramePerformer(bapfp);
-        }
-    }
-
-    @Override
-    public void removeBAPFramePerformer(BAPFramePerformer bapfp) {
-        if (bapfp != null) {
-            LOGGER.info("removeBAPFramesPerformer");
-            bapFrameEmitter.removeBAPFramePerformer(bapfp);
-        }
-    }
-
-    @Override
-    public void addAUPerformer(AUPerformer aup) {
-        if (aup != null) {
-            LOGGER.info("addAUPerformer");
-            auEmitter.addAUPerformer(aup);
-        }
-    }
-
-    @Override
-    public void removeAUPerformer(AUPerformer aup) {
-        if (aup != null) {
-            LOGGER.info("addAUPerformer");
-            auEmitter.removeAUPerformer(aup);
-        }
-    }
-
-    public void addHeaderListener(StringArrayListener hl) {
-        if (hl!=null&&!headerListeners.contains(hl))
-            headerListeners.add(hl);
-    }
-
-    public void removeHeaderListene(StringArrayListener hl) {
-        if (hl!=null&&headerListeners.contains(hl))
-            headerListeners.remove(hl);
-    }
-
-    private void headerChanged(String[] headers) {
-        headerListeners.forEach((hl) -> {
-            hl.stringArrayChanged(headers);
-        });
-    }
+    /* ---------------------------------------------------------------------- */
 
     public boolean isPerforming() {
         return isPerforming;
     }
 
-    public void setIsPerforming(Boolean isPerforming) {
-        startInputFrame = 0;
+    public void setIsPerforming(boolean isPerforming) {
         this.isPerforming = isPerforming;
     }
 
-    public boolean isIsAlive() {
+    public boolean isAlive() {
         return isAlive;
     }
 

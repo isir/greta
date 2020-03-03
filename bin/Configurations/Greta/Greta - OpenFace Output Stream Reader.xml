@@ -123,7 +123,7 @@
             <parameter name="tabIndex" value="1"/>
             <parameter name="fileName" value=""/>
             <parameter name="zeroMQURL" value="tcp://localhost:5000"/>
-            <window h="500" visible="true" w="500" x="0" y="0"/>
+            <window h="400" visible="true" w="600" x="0" y="0"/>
         </element>
     </elements>
     <connections>

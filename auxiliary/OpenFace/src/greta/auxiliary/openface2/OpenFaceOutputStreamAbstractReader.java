@@ -20,6 +20,7 @@ package greta.auxiliary.openface2;
 import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
 import greta.auxiliary.openface2.util.OpenFaceFrame;
 import greta.auxiliary.openface2.util.StringArrayListener;
+import greta.auxiliary.zeromq.ConnectionListener;
 import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.repositories.AUAPFrame;
 import greta.core.util.id.ID;
@@ -39,19 +40,73 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
 
     /* ---------------------------------------------------------------------- */
 
-    protected static final Logger LOGGER = Logger.getLogger(OpenFaceOutputStreamAbstractReader.class.getName());
+    private Thread thread;
+    private final String threadName = OpenFaceOutputStreamAbstractReader.class.getSimpleName();
 
-    protected Thread thread;
-    protected final String threadName = OpenFaceOutputStreamAbstractReader.class.getSimpleName();
-
-    protected List<StringArrayListener> headerListeners = new ArrayList<>();
-    protected String[] selectedHeaders = null;
-
-    /* ---------------------------------------------------------------------- */
+    private List<ConnectionListener> connectionListeners = new ArrayList<>();
+    private List<StringArrayListener> headerListeners = new ArrayList<>();
+    private String[] selectedHeaders;
+ 
+   /* ---------------------------------------------------------------------- */
 
     protected OpenFaceOutputStreamAbstractReader(OpenFaceOutputStreamReader loader) {
         this.loader = loader;
+        addConnectionListener(loader);
         addHeaderListener(loader);
+    }
+
+    protected boolean loaderIsPerforming() {
+        return loader.isPerforming();
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    protected abstract Logger getLogger();
+
+    /* ---------------------------------------------------------------------- */
+
+    protected void startThread() {
+        if (thread == null) {
+            getLogger().fine(String.format("Starting %s..", threadName));
+            thread = new Thread(this, threadName);
+            thread.start();
+            fireConnection();
+        }
+    }
+
+    protected void stopThread() {
+        if (thread != null) {
+            getLogger().fine(String.format("Stopping %s..", threadName));
+            thread.interrupt();
+            thread = null;
+            fireDisconnection();
+        }
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    private void addConnectionListener(ConnectionListener connectionListener){
+        if(connectionListener != null && !connectionListeners.contains(connectionListener)) {
+            connectionListeners.add(connectionListener);
+        }
+    }
+
+    private void removeConnectionListener(ConnectionListener connectionListener){
+        if(connectionListener != null && connectionListeners.contains(connectionListener)) {
+            connectionListeners.remove(connectionListener);
+        }
+    }
+
+    private void fireConnection() {
+        for (ConnectionListener connectionListener : connectionListeners) {
+            connectionListener.onConnection();
+        }
+    }
+
+    private void fireDisconnection() {
+        for (ConnectionListener connectionListener : connectionListeners) {
+            connectionListener.onDisconnection();
+        }
     }
 
     /* ---------------------------------------------------------------------- */
@@ -62,7 +117,7 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
         }
     }
 
-    private void removeHeaderListene(StringArrayListener headerListener) {
+    private void removeHeaderListener(StringArrayListener headerListener) {
         if (headerListener != null && headerListeners.contains(headerListener)) {
             headerListeners.remove(headerListener);
         }
@@ -87,9 +142,9 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
                 selectedHeaders = selected;
                 OpenFaceFrame.setSelectedHeaders(selectedHeaders);
             }
-            LOGGER.info(String.format("Setting selected headers to: %s", Arrays.toString(selected)));
+            getLogger().info(String.format("Setting selected headers to: %s", Arrays.toString(selected)));
         } else {
-            LOGGER.warning("No header selected");
+            getLogger().warning("No header selected");
         }
     }
 
@@ -103,5 +158,15 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     protected void sendBAPFrame(BAPFrame bapFrame) {
         ID id = IDProvider.createID(threadName + "_sendBAPFrame");
         loader.sendBAPFrame(bapFrame, id);
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    @Override
+    public void finalize() throws Throwable {
+        stopThread();
+        removeConnectionListener(loader);
+        removeHeaderListener(loader);
+        super.finalize();
     }
 }

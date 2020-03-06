@@ -70,7 +70,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
         outputsPanel = new javax.swing.JPanel();
         outputsScrollPane = new javax.swing.JScrollPane();
         outputsTable = new javax.swing.JTable();
-        outputsButtonsPanel = new javax.swing.JPanel();
+        outputButtonsPanel = new javax.swing.JPanel();
         setButton = new javax.swing.JButton();
         buttonsPanelFiller1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         selectAllButton = new javax.swing.JButton();
@@ -153,7 +153,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
 
         outputsPanel.add(outputsScrollPane, java.awt.BorderLayout.CENTER);
 
-        outputsButtonsPanel.setLayout(new javax.swing.BoxLayout(outputsButtonsPanel, javax.swing.BoxLayout.PAGE_AXIS));
+        outputButtonsPanel.setLayout(new javax.swing.BoxLayout(outputButtonsPanel, javax.swing.BoxLayout.PAGE_AXIS));
 
         setButton.setText("Set");
         setButton.setMaximumSize(new java.awt.Dimension(89, 23));
@@ -163,8 +163,8 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 setButtonActionPerformed(evt);
             }
         });
-        outputsButtonsPanel.add(setButton);
-        outputsButtonsPanel.add(buttonsPanelFiller1);
+        outputButtonsPanel.add(setButton);
+        outputButtonsPanel.add(buttonsPanelFiller1);
 
         selectAllButton.setText("Select All");
         selectAllButton.setMaximumSize(new java.awt.Dimension(89, 23));
@@ -174,7 +174,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 selectAllButtonActionPerformed(evt);
             }
         });
-        outputsButtonsPanel.add(selectAllButton);
+        outputButtonsPanel.add(selectAllButton);
 
         selectNoneButton.setText("Select None");
         selectNoneButton.addActionListener(new java.awt.event.ActionListener() {
@@ -182,8 +182,8 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 selectNoneButtonActionPerformed(evt);
             }
         });
-        outputsButtonsPanel.add(selectNoneButton);
-        outputsButtonsPanel.add(buttonsPanelFiller2);
+        outputButtonsPanel.add(selectNoneButton);
+        outputButtonsPanel.add(buttonsPanelFiller2);
 
         upButton.setText("Up");
         upButton.setMaximumSize(new java.awt.Dimension(89, 23));
@@ -193,7 +193,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 upButtonActionPerformed(evt);
             }
         });
-        outputsButtonsPanel.add(upButton);
+        outputButtonsPanel.add(upButton);
 
         downButton.setText("Down");
         downButton.setMaximumSize(new java.awt.Dimension(89, 23));
@@ -202,9 +202,9 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 downButtonActionPerformed(evt);
             }
         });
-        outputsButtonsPanel.add(downButton);
+        outputButtonsPanel.add(downButton);
 
-        outputsPanel.add(outputsButtonsPanel, java.awt.BorderLayout.EAST);
+        outputsPanel.add(outputButtonsPanel, java.awt.BorderLayout.EAST);
 
         centerPanel.add(outputsPanel, java.awt.BorderLayout.CENTER);
 
@@ -286,7 +286,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     private javax.swing.Box.Filler northPanelFiller1;
     private javax.swing.Box.Filler northPanelFiller2;
     private javax.swing.JButton openButton;
-    private javax.swing.JPanel outputsButtonsPanel;
+    private javax.swing.JPanel outputButtonsPanel;
     private javax.swing.JPanel outputsPanel;
     private javax.swing.JScrollPane outputsScrollPane;
     private javax.swing.JTable outputsTable;

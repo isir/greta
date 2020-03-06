@@ -972,7 +972,8 @@
             <frame type="object"/>
             <parameter default="" get_method="getTabIndex" get_on="object" name="tabIndex" set_method="setTabIndex" set_on="object" type="integer"/>
             <parameter default="" get_method="getFileName" get_on="object" name="fileName" set_method="setFileName" set_on="object" type="string"/>
-            <parameter default="" get_method="getZeroMQURL" get_on="object" name="zeroMQURL" set_method="setZeroMQURL" set_on="object" type="string"/>
+            <parameter default="" get_method="getZeroMQHost" get_on="object" name="zeroMQHost" set_method="setZeroMQHost" set_on="object" type="string"/>
+            <parameter default="" get_method="getZeroMQPort" get_on="object" name="zeroMQPort" set_method="setZeroMQPort" set_on="object" type="string"/>
         </module>
         <module name="Group Behavior" style="DEFAULT">
             <object class="greta.auxiliary.groupbehavior.GroupBehaviorMain" lib_id="greta_group_behavior"/>

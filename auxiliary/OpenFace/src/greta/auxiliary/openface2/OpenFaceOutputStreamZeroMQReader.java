@@ -23,8 +23,8 @@ import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.repositories.AUAPFrame;
 import greta.core.util.Constants;
-import greta.core.util.id.ID;
 import greta.core.util.time.Timer;
+import java.util.logging.Logger;
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
 import org.zeromq.ZMQ;
@@ -39,41 +39,44 @@ import org.zeromq.ZMQException;
  */
 public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstractReader {
 
+    protected static final Logger LOGGER = Logger.getLogger(OpenFaceOutputStreamZeroMQReader.class.getName());
+
+    private static final String DEFAULT_ZEROMQ_PROTOCOL = "tcp";
+    private static final String DEFAULT_ZEROMQ_HOST = "localhost";
+    private static final String DEFAULT_ZEROMQ_PORT = "5000";
+
     private int startInputFrame = 0;
     private final int offsetFrame = 0;
 
-    private boolean isPerforming = false;
-    private boolean isAlive = true;
+    private ZContext zContext;
+    private Socket zSubscriber;
+    private String protocol = DEFAULT_ZEROMQ_PROTOCOL;
+    private String host = DEFAULT_ZEROMQ_HOST;
+    private String port = DEFAULT_ZEROMQ_PORT;
+    private boolean isConnected;
+    private final static String TOPIC = "";
 
-    //Phil
-    ID id;
-    String url;
-    boolean isConnected;
-    final static String DEFAULTURL = "tcp://localhost:5000";
-    final static String TOPIC = "";
-    ZContext zContext;
-    Socket zSubscriber;
-    String lastDataStr = null;
-    int col_blink = 412;
-    double fps = 0.;
-    double frameDuration = 0.;
-    OpenFaceFrame curFrame = new OpenFaceFrame();
-    OpenFaceFrame prevFrame = new OpenFaceFrame();
+    private String lastDataStr;
+    private int col_blink = 412;
+    private double fps = 0;
+    private double frameDuration = 0;
+    private OpenFaceFrame curFrame = new OpenFaceFrame();
+    private OpenFaceFrame prevFrame = new OpenFaceFrame();
 
     // loop variables
-    double prev_rot_X = 0.0;
-    double prev_rot_Y = 0.0;
-    double prev_rot_Z = 0.0;
+    private double prev_rot_X = 0.0;
+    private double prev_rot_Y = 0.0;
+    private double prev_rot_Z = 0.0;
 
-    double min_time = Double.MAX_VALUE;
-    double max_time = 0.0;
+    private double min_time = Double.MAX_VALUE;
+    private double max_time = 0.0;
 
-    double prev_gaze_x = 0.0;
-    double prev_gaze_y = 0.0;
+    private double prev_gaze_x = 0.0;
+    private double prev_gaze_y = 0.0;
 
-    double prev_blink = 0.0;
+    private double prev_blink = 0.0;
 
-    double alpha = 0.75;//1.0;
+    private double alpha = 0.75;//1.0;
 
     /* ---------------------------------------------------------------------- */
 
@@ -83,11 +86,53 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
 
     /* ---------------------------------------------------------------------- */
 
-    public String[] getHeaders() {
-        return OpenFaceFrame.headers;
+    @Override
+    protected Logger getLogger() {
+        return LOGGER;
     }
 
-    public void connect(String url) {
+    /* ---------------------------------------------------------------------- */
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        stopConnection();
+        this.protocol = protocol;
+    }
+
+    public String getHost() {
+        return host;
+    }
+
+    public void setHost(String host) {
+        stopConnection();
+        this.host = host;
+    }
+
+    public String getPort() {
+        return port;
+    }
+
+    public void setPort(String port) {
+        stopConnection();
+        this.port = port;
+    }
+
+    public String getURL() {
+        return protocol + "://" + host + ":" + port;
+    }
+
+    public void setURL(String host, String port) {
+        stopConnection();
+        this.host = host;
+        this.port = port;
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    public void startConnection() {
         if (zContext == null) {
             zContext = new ZContext();
         }
@@ -97,67 +142,56 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
                 zSubscriber.close();
             }
             zSubscriber = zContext.createSocket(SocketType.SUB);
-            if (url.length() == 0) {
-                url = DEFAULTURL;
-            }
 
-            isConnected = zSubscriber.connect(url);
-
+            isConnected = zSubscriber.connect(getURL());
             if (isConnected) {
                 zSubscriber.subscribe(TOPIC.getBytes(ZMQ.CHARSET));
-                LOGGER.info(String.format("Connected to: %s", url));
-                start();
+                LOGGER.info(String.format("Connected to: %s", getURL()));
+                startThread();
             } else {
-                LOGGER.warning(String.format("Failed to open: %s", url));
+                LOGGER.warning(String.format("Failed to open: %s", getURL()));
             }
 
         } catch (ZMQException ex) {
-            LOGGER.warning(String.format("Couldn't connect to: %s\n%s", url, ex.getMessage()));
+            LOGGER.warning(String.format("Couldn't connect to: %s\n%s", getURL(), ex.getMessage()));
             isConnected = false;
         }
     }
 
-    @Override
-    public void finalize() throws Throwable {
-        super.finalize();
+    public void stopConnection() {
+        stopThread();
         if (zSubscriber != null) {
-            zSubscriber.disconnect(url);
+            zSubscriber.disconnect(getURL());
             zSubscriber.close();
+            zSubscriber = null;
         }
         if (zContext != null) {
             zContext.close();
+            zContext = null;
         }
         isConnected = false;
-        isPerforming = false;
-        isAlive = false;
     }
 
-    public void start() {
-        LOGGER.fine(String.format("Starting %s..", threadName));
-        if (thread == null) {
-            thread = new Thread(this, threadName);
-            isAlive = true;
-            thread.start();
-        }
-    }
+    /* ---------------------------------------------------------------------- */
 
     @Override
     public void run() {
-        LOGGER.info(String.format("Running %s", threadName));
+        LOGGER.info(String.format("Thread: %s running", OpenFaceOutputStreamZeroMQReader.class.getName()));
         try {
-            LOGGER.fine(String.format("Thread: %s", threadName));
-            do {
-                do {
-                    processLine();
-                    Thread.sleep(30);
-                } while (isConnected);
-                Thread.sleep(1000);
-            } while (isAlive);
-
+            LOGGER.fine(String.format("Thread: %s", OpenFaceOutputStreamZeroMQReader.class.getName()));
+            while (true) {
+                while (loaderIsPerforming()) {
+                    while (isConnected) {
+                        processLine();
+                        Thread.sleep(30);
+                    }
+                    Thread.sleep(1000);
+                }
+            }
         } catch (InterruptedException e) {
-            LOGGER.warning(String.format("Thread: %s interrupted", threadName));
+            LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamZeroMQReader.class.getName()));
         }
-        LOGGER.info(String.format("Thread: %s exiting", threadName));
+        LOGGER.info(String.format("Thread: %s exiting", OpenFaceOutputStreamZeroMQReader.class.getName()));
     }
 
     private void processLine() {
@@ -176,7 +210,6 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
                 } else {
                     LOGGER.warning(String.format("Line not recognized: %s", line));
                 }
-
             } else {
                 LOGGER.warning(String.format("Line is empty"));
             }
@@ -184,7 +217,7 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
     }
 
     private void processFrame(String line) {
-        if (line != null && isPerforming) {
+        if (loaderIsPerforming() && line != null) {
             int curGretaFrame = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
             prevFrame.copy(curFrame);
 
@@ -209,7 +242,7 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
     //Format based on https://github.com/TadasBaltrusaitis/OpenFace
     //timestamp, gaze_0_x, gaze_0_y, gaze_0_z, gaze_1_x, gaze_1_y, gaze_1_z, gaze_angle_x, gaze_angle_y, pose_Tx, pose_Ty, pose_Tz, pose_Rx, pose_Ry, pose_Rz, AU01_r, AU02_r, AU04_r, AU05_r, AU06_r, AU07_r, AU09_r, AU10_r, AU12_r, AU14_r, AU15_r, AU17_r, AU20_r, AU23_r, AU25_r, AU26_r, AU45_r, AU01_c, AU02_c, AU04_c, AU05_c, AU06_c, AU07_c, AU09_c, AU10_c, AU12_c, AU14_c, AU15_c, AU17_c, AU20_c, AU23_c, AU25_c, AU26_c, AU28_c, AU45_c
     private void processOpenFace() {
-        if (isConnected && isPerforming) {
+        if (loaderIsPerforming() && isConnected) {
             if (frameDuration != 0) {
                 if (frameDuration > max_time) {
                     max_time = frameDuration;
@@ -288,19 +321,9 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
 
     /* ---------------------------------------------------------------------- */
 
-    public boolean isPerforming() {
-        return isPerforming;
-    }
-
-    public void setIsPerforming(boolean isPerforming) {
-        this.isPerforming = isPerforming;
-    }
-
-    public boolean isAlive() {
-        return isAlive;
-    }
-
-    public void setIsAlive(boolean isAlive) {
-        this.isAlive = isAlive;
+    @Override
+    public void finalize() throws Throwable {
+        stopConnection();
+        super.finalize();
     }
 }

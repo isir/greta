@@ -18,11 +18,12 @@
 package greta.auxiliary.openface2;
 
 import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
-import greta.core.util.id.ID;
-import greta.core.util.id.IDProvider;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +31,10 @@ import java.io.FileReader;
  */
 public class OpenFaceOutputStreamFileReader extends OpenFaceOutputStreamAbstractReader {
 
-    private String csvFileName;
+    protected static final Logger LOGGER = Logger.getLogger(OpenFaceOutputStreamFileReader.class.getName());
+
+    private String csvFileName = "";
+    private boolean isConnected;
 
     /* ---------------------------------------------------------------------- */
 
@@ -41,43 +45,70 @@ public class OpenFaceOutputStreamFileReader extends OpenFaceOutputStreamAbstract
     /* ---------------------------------------------------------------------- */
 
     @Override
-    public void run() {
-
-        try {
-            BufferedReader reader = new BufferedReader(new FileReader(csvFileName));
-            String line = "";
-
-            System.out.println("---------- Begining! ----------");
-            while (true) {
-                if ((line = reader.readLine()) != null) {
-                    System.out.println(line);
-                } else {
-                    System.out.println("---------- Waiting... ----------");
-                    //sleep(5000);
-                    System.out.println("---------- Begining! ----------");
-                }
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+    protected Logger getLogger() {
+        return LOGGER;
     }
 
     /* ---------------------------------------------------------------------- */
 
-    /**
-     * Loads an CSV file.
-     *
-     * @param csvFileName the name of the file to load
-     * @return The ID of the generated event
-     */
-    public ID load(String csvFileName) {
-        //get the base file name to use it as requestId
-        String base = (new File(csvFileName)).getName().replaceAll("\\.csv$", "");
-
-        ID id = IDProvider.createID(base);
-        return id;
+    public String getFileName() {
+        return csvFileName;
     }
+
+    public void setFileName(String fileName) {
+        stopConnection();
+        this.csvFileName = fileName;
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    public void startConnection() {
+        isConnected = true;
+        startThread();
+    }
+
+    public void stopConnection() {
+        stopThread();
+        isConnected = false;
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    @Override
+    public void run() {
+        LOGGER.info(String.format("Thread: %s running", OpenFaceOutputStreamFileReader.class.getName()));
+        try {
+            LOGGER.fine(String.format("Thread: %s", OpenFaceOutputStreamFileReader.class.getName()));
+            BufferedReader reader = new BufferedReader(new FileReader(csvFileName));
+            while (true) {
+                while (loaderIsPerforming()) {
+                    while (isConnected) {
+                        processLine(reader);
+                        Thread.sleep(30);
+                    }
+                    Thread.sleep(1000);
+                }
+            }
+        } catch (FileNotFoundException | InterruptedException ex) {
+            LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamFileReader.class.getName()));
+        }
+        LOGGER.info(String.format("Thread: %s exiting", OpenFaceOutputStreamFileReader.class.getName()));
+    }
+
+    public void processLine(BufferedReader reader) {
+        String line = null;
+        do {
+            try {
+                if ((line = reader.readLine()) != null) {
+                    System.out.println(line);
+                }
+            } catch (IOException ex) {
+                LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamFileReader.class.getName()));
+            }
+        } while (line != null);
+    }
+
+    /* ---------------------------------------------------------------------- */
 
     /**
      * Returns a {@code java.io.FileFilter} corresponding to CSV Files.
@@ -95,5 +126,13 @@ public class OpenFaceOutputStreamFileReader extends OpenFaceOutputStreamAbstract
                 return false;
             }
         };
+    }
+
+    /* ---------------------------------------------------------------------- */
+
+    @Override
+    public void finalize() throws Throwable {
+        stopConnection();
+        super.finalize();
     }
 }

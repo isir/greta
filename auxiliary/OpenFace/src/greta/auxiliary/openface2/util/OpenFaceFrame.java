@@ -166,7 +166,7 @@ public class OpenFaceFrame {
         if (isHeaderSelected(key)) {
             return Double.parseDouble(cols[set.get(key).index]);
         }
-        return 0.;
+        return 0;
     }
 
     public void readDataLine(String data) {

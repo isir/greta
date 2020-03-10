@@ -971,7 +971,7 @@
             <object class="greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader" lib_id="greta_openface"/>
             <frame type="object"/>
             <parameter default="" get_method="getTabIndex" get_on="object" name="tabIndex" set_method="setTabIndex" set_on="object" type="integer"/>
-            <parameter default="" get_method="getFileName" get_on="object" name="fileName" set_method="setFileName" set_on="object" type="string"/>
+            <parameter default="" get_method="getCSVFileName" get_on="object" name="csvFileName" set_method="setCSVFileName" set_on="object" type="string"/>
             <parameter default="" get_method="getZeroMQHost" get_on="object" name="zeroMQHost" set_method="setZeroMQHost" set_on="object" type="string"/>
             <parameter default="" get_method="getZeroMQPort" get_on="object" name="zeroMQPort" set_method="setZeroMQPort" set_on="object" type="string"/>
         </module>

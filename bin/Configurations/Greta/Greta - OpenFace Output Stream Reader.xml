@@ -120,7 +120,7 @@
             id="OpenFace2 Output Stream Reader - 1582734137031-940"
             module="OpenFace2 Output Stream Reader"
             name="OpenFace2 Output Stream Reader" w="120.0" x="300.0" y="170.0">
-            <parameter name="fileName" value=""/>
+            <parameter name="csvFileName" value=""/>
             <parameter name="zeroMQHost" value="localhost"/>
             <parameter name="zeroMQPort" value="5000"/>
             <parameter name="tabIndex" value="1"/>

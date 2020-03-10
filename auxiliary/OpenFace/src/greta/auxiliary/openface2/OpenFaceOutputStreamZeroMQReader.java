@@ -133,35 +133,25 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
     /* ---------------------------------------------------------------------- */
 
     public void startConnection() {
-        if (zContext == null) {
-            zContext = new ZContext();
-        }
-        try {
-            if (zSubscriber != null) {
-                LOGGER.info("Closing previous socket");
-                zSubscriber.close();
-            }
-            zSubscriber = zContext.createSocket(SocketType.SUB);
-
-            isConnected = zSubscriber.connect(getURL());
-            if (isConnected) {
-                zSubscriber.subscribe(TOPIC.getBytes(ZMQ.CHARSET));
-                LOGGER.info(String.format("Connected to: %s", getURL()));
-                startThread();
-            } else {
-                LOGGER.warning(String.format("Failed to open: %s", getURL()));
-            }
-
-        } catch (ZMQException ex) {
-            LOGGER.warning(String.format("Couldn't connect to: %s\n%s", getURL(), ex.getMessage()));
-            isConnected = false;
+        stopConnection();
+        zContext = new ZContext();
+        zSubscriber = zContext.createSocket(SocketType.SUB);
+        isConnected = zSubscriber.connect(getURL());
+        if (isConnected) {
+            zSubscriber.subscribe(TOPIC.getBytes(ZMQ.CHARSET));
+            LOGGER.info(String.format("Connected to: %s", getURL()));
+            startThread();
+        } else {
+            LOGGER.warning(String.format("Failed to open: %s", getURL()));
+            stopConnection();
         }
     }
 
     public void stopConnection() {
+        isConnected = false;
+        Timer.sleep(50);
         stopThread();
         if (zSubscriber != null) {
-            zSubscriber.disconnect(getURL());
             zSubscriber.close();
             zSubscriber = null;
         }
@@ -169,7 +159,6 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
             zContext.close();
             zContext = null;
         }
-        isConnected = false;
     }
 
     /* ---------------------------------------------------------------------- */
@@ -180,13 +169,11 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
         try {
             LOGGER.fine(String.format("Thread: %s", OpenFaceOutputStreamZeroMQReader.class.getName()));
             while (true) {
-                while (loaderIsPerforming()) {
-                    while (isConnected) {
-                        processLine();
-                        Thread.sleep(30);
-                    }
-                    Thread.sleep(1000);
+                while (isConnected) {
+                    processLine();
+                    Thread.sleep(30);
                 }
+                Thread.sleep(1000);
             }
         } catch (InterruptedException e) {
             LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamZeroMQReader.class.getName()));
@@ -242,7 +229,7 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
     //Format based on https://github.com/TadasBaltrusaitis/OpenFace
     //timestamp, gaze_0_x, gaze_0_y, gaze_0_z, gaze_1_x, gaze_1_y, gaze_1_z, gaze_angle_x, gaze_angle_y, pose_Tx, pose_Ty, pose_Tz, pose_Rx, pose_Ry, pose_Rz, AU01_r, AU02_r, AU04_r, AU05_r, AU06_r, AU07_r, AU09_r, AU10_r, AU12_r, AU14_r, AU15_r, AU17_r, AU20_r, AU23_r, AU25_r, AU26_r, AU45_r, AU01_c, AU02_c, AU04_c, AU05_c, AU06_c, AU07_c, AU09_c, AU10_c, AU12_c, AU14_c, AU15_c, AU17_c, AU20_c, AU23_c, AU25_c, AU26_c, AU28_c, AU45_c
     private void processOpenFace() {
-        if (loaderIsPerforming() && isConnected) {
+        if (isConnected && loaderIsPerforming()) {
             if (frameDuration != 0) {
                 if (frameDuration > max_time) {
                     max_time = frameDuration;

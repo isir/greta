@@ -51,7 +51,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JTabbedPane" name="inputsTabbedPane">
+            <Container class="javax.swing.JTabbedPane" name="inputTabbedPane">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -60,7 +60,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="inputsTabbedPaneStateChanged"/>
+                <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="inputTabbedPaneStateChanged"/>
               </Events>
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout"/>
@@ -435,7 +435,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Container class="javax.swing.JPanel" name="outputsPanel">
+            <Container class="javax.swing.JPanel" name="outputPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -453,7 +453,7 @@
                 <Property name="horizontalGap" type="int" value="10"/>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="outputsScrollPane">
+                <Container class="javax.swing.JScrollPane" name="outputScrollPane">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                       <BorderConstraints direction="Center"/>
@@ -462,7 +462,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="outputsTable">
+                    <Component class="javax.swing.JTable" name="outputTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="2" rowCount="0">
@@ -499,7 +499,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="outputButtonsPanel">
+                <Container class="javax.swing.JPanel" name="outputButtonPanel">
                   <Properties>
                     <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
@@ -527,7 +527,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setButtonActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.Box$Filler" name="buttonsPanelFiller1">
+                    <Component class="javax.swing.Box$Filler" name="buttonPanelFiller1">
                       <Properties>
                         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 32767]"/>
@@ -559,7 +559,7 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="selectNoneButtonActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.Box$Filler" name="buttonsPanelFiller2">
+                    <Component class="javax.swing.Box$Filler" name="buttonPanelFiller2">
                       <Properties>
                         <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[0, 32767]"/>

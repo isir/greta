@@ -18,13 +18,17 @@
 package greta.auxiliary.openface2;
 
 import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
+import greta.auxiliary.openface2.util.OpenFaceFrame;
+import greta.core.animation.mpeg4.bap.BAPFrame;
+import greta.core.animation.mpeg4.bap.BAPType;
+import greta.core.repositories.AUAPFrame;
+import greta.core.util.Constants;
 import greta.core.util.time.Timer;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -36,6 +40,7 @@ public class OpenFaceOutputStreamCSVReader extends OpenFaceOutputStreamAbstractR
     protected static final Logger LOGGER = Logger.getLogger(OpenFaceOutputStreamCSVReader.class.getName());
 
     private String fileName = "";
+
     private boolean isConnected;
 
     /* ---------------------------------------------------------------------- */
@@ -95,10 +100,10 @@ public class OpenFaceOutputStreamCSVReader extends OpenFaceOutputStreamAbstractR
         try {
             LOGGER.fine(String.format("Thread: %s", OpenFaceOutputStreamCSVReader.class.getName()));
             BufferedReader reader = new BufferedReader(new FileReader(fileName));
-            processLine(reader);
+            processHeader(reader);
             while (true) {
                 while (isConnected) {
-                    processLine(reader);
+                    processData(reader);
                     Thread.sleep(30);
                 }
                 Thread.sleep(1000);
@@ -109,12 +114,29 @@ public class OpenFaceOutputStreamCSVReader extends OpenFaceOutputStreamAbstractR
         LOGGER.info(String.format("Thread: %s exiting", OpenFaceOutputStreamCSVReader.class.getName()));
     }
 
-    public void processLine(BufferedReader reader) {
+    public void processHeader(BufferedReader reader) {
+        if (isConnected) {
+            try {
+                String line;
+                if ((line = reader.readLine()) != null) {
+                    boolean changed = OpenFaceFrame.readHeader(line);
+                    if (changed) {
+                        LOGGER.info("Header headerChanged");
+                        headerChanged(OpenFaceFrame.headers);
+                    }
+                }
+            } catch (IOException ex) {
+                LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamCSVReader.class.getName()));
+            }
+        }
+    }
+
+    public void processData(BufferedReader reader) {
         if (isConnected) {
             try {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    System.out.println(line);
+                    processFrame(line);
                 }
             } catch (IOException ex) {
                 LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamCSVReader.class.getName()));
@@ -125,19 +147,21 @@ public class OpenFaceOutputStreamCSVReader extends OpenFaceOutputStreamAbstractR
     /* ---------------------------------------------------------------------- */
 
     /**
-     * Returns a {@code java.io.FileFilter} corresponding to CSV Files.
+     * Returns a {@code javax.swing.filechooser.FileFilter} corresponding to CSV Files.
      *
-     * @return a {@code java.io.FileFilter} corresponding to CSV Files
+     * @return a {@code javax.swing.filechooser.FileFilter} corresponding to CSV Files
      */
-    public java.io.FileFilter getFileFilter() {
-        return new java.io.FileFilter() {
+    public javax.swing.filechooser.FileFilter getFileFilter() {
+        return new javax.swing.filechooser.FileFilter() {
             @Override
             public boolean accept(File pathName) {
                 String fileName = pathName.getName().toLowerCase();
-                if (fileName.endsWith(".csv")) {
-                    return true;
-                }
-                return false;
+                return (pathName.isDirectory() || fileName.endsWith(".csv"));
+            }
+
+            @Override
+            public String getDescription() {
+                return "OpenFace CSV File";
             }
         };
     }

@@ -33,7 +33,6 @@ import greta.core.util.IniManager;
 import greta.core.util.id.ID;
 import java.awt.Color;
 import java.io.File;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
@@ -75,22 +74,6 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     public OpenFaceOutputStreamReader() {
         initComponents();
         setConnected(false);
-
-        java.io.FileFilter ff = csvReader.getFileFilter();
-        fileChooser.removeChoosableFileFilter(fileChooser.getAcceptAllFileFilter());
-        fileChooser.setAcceptAllFileFilterUsed(false);
-        fileChooser.addChoosableFileFilter(new javax.swing.filechooser.FileFilter() {
-
-            @Override
-            public boolean accept(File f) {
-                return f.isDirectory() || ff.accept(f);
-            }
-
-            @Override
-            public String getDescription() {
-                return "OpenFace CSV File";
-            }
-        });
     }
 
     private void setConnected(boolean connected) {
@@ -157,7 +140,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        fileChooser = new javax.swing.JFileChooser();
+        csvFileChooser = new javax.swing.JFileChooser();
         mainPanel = new javax.swing.JPanel();
         northPanel = new javax.swing.JPanel();
         inputTabbedPane = new javax.swing.JTabbedPane();
@@ -204,6 +187,8 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         buttonPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         upButton = new javax.swing.JButton();
         downButton = new javax.swing.JButton();
+
+        csvFileChooser.setFileFilter(csvReader.getFileFilter());
 
         mainPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         mainPanel.setLayout(new java.awt.BorderLayout(0, 10));
@@ -496,10 +481,10 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     }//GEN-LAST:event_csvFileTextFieldFocusLost
 
     private void csvOpenButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvOpenButtonActionPerformed
-        fileChooser.setLocale(Locale.getDefault());
-        fileChooser.updateUI();
-        if (fileChooser.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
-            File file = fileChooser.getSelectedFile();
+        csvFileChooser.setLocale(Locale.getDefault());
+        csvFileChooser.updateUI();
+        if (csvFileChooser.showOpenDialog(this) == javax.swing.JFileChooser.APPROVE_OPTION) {
+            File file = csvFileChooser.getSelectedFile();
             this.csvFileTextField.setText(file.getAbsolutePath());
         }
         updateCSVReader();
@@ -591,6 +576,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.JButton csvConnectButton;
     private javax.swing.JLabel csvConnectedLabel;
     private javax.swing.JPanel csvConnectorPanel;
+    private javax.swing.JFileChooser csvFileChooser;
     private javax.swing.JLabel csvFileLabel;
     private javax.swing.JTextField csvFileTextField;
     private javax.swing.JButton csvOpenButton;
@@ -601,7 +587,6 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.Box.Filler csvTabFiller1;
     private javax.swing.Box.Filler csvTabFiller2;
     private javax.swing.JButton downButton;
-    private javax.swing.JFileChooser fileChooser;
     private javax.swing.JTabbedPane inputTabbedPane;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel northPanel;

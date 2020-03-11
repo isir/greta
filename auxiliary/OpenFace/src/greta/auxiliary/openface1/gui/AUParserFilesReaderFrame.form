@@ -54,7 +54,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="inputsPanel">
+            <Container class="javax.swing.JPanel" name="inputPanel">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout"/>
               <SubComponents>
@@ -64,7 +64,7 @@
                     <Property name="verticalTextPosition" type="int" value="1"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.Box$Filler" name="inputsPanelFiller">
+                <Component class="javax.swing.Box$Filler" name="inputPanelFiller">
                   <Properties>
                     <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[10, 32767]"/>
@@ -155,7 +155,7 @@
                 </Constraint>
               </Constraints>
             </Component>
-            <Container class="javax.swing.JPanel" name="outputsPanel">
+            <Container class="javax.swing.JPanel" name="outputPanel">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -173,7 +173,7 @@
                 <Property name="horizontalGap" type="int" value="10"/>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JScrollPane" name="outputsScrollPane">
+                <Container class="javax.swing.JScrollPane" name="outputScrollPane">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                       <BorderConstraints direction="Center"/>
@@ -182,7 +182,7 @@
 
                   <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
                   <SubComponents>
-                    <Component class="javax.swing.JTable" name="outputsTable">
+                    <Component class="javax.swing.JTable" name="outputTable">
                       <Properties>
                         <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                           <Table columnCount="2" rowCount="0">
@@ -219,7 +219,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="outputButtonsPanel">
+                <Container class="javax.swing.JPanel" name="outputButtonPanel">
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout" value="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout$BorderConstraintsDescription">
                       <BorderConstraints direction="East"/>

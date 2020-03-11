@@ -266,7 +266,7 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
                                 String value = values[au + indice_intensity];
                                 if (isNumeric(value)) {
                                     double intensity = alpha * (Double.parseDouble(value) / 3.5) + (1 - alpha) * prev_value_au[au];
-                                    //System.out.println("AU["+au_correspondance[au]+"] : "+intensity+ " cpt "+ cpt);
+                                    //System.out.println("AU["+au_correspondance[au]+"]: "+intensity+ " cpt "+ cpt);
                                     au_frame.setAUAPboth(au_correspondance[au], intensity);
                                     prev_value_au[au] = intensity;
                                 }
@@ -319,7 +319,7 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
                         hmFrame.setDegreeValue(BAPType.vc3_torsion, rot_Y_deg);
                         hmFrame.setDegreeValue(BAPType.vc3_roll, rot_Z_deg);
 
-                        //System.out.println("BAP["+time+"] : ["+rot_X_rad+"; "+rot_Y_rad+"; "+rot_Z_rad+"]");
+                        //System.out.println("BAP["+time+"]: ["+rot_X_rad+"; "+rot_Y_rad+"; "+rot_Z_rad+"]");
                         prev_rot_X = rot_X_deg;
                         prev_rot_Y = rot_Y_deg;
                         prev_rot_Z = rot_Z_deg;
@@ -330,16 +330,16 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
             }
             //System.out.println("Program fini finifffffffffffffffffffffffffffffff ");
 
-        } catch (IOException e) {
-            Logs.error(e.getLocalizedMessage());
-            LOGGER.log(Level.SEVERE, e.toString(), e);
+        } catch (IOException ex) {
+            Logs.error(ex.getLocalizedMessage());
+            LOGGER.log(Level.SEVERE, ex.toString(), ex);
         } finally {
             if (br != null) {
                 try {
                     br.close();
-                } catch (IOException e) {
-                    Logs.error(e.getLocalizedMessage());
-                    LOGGER.log(Level.SEVERE, e.toString(), e);
+                } catch (IOException ex) {
+                    Logs.error(ex.getLocalizedMessage());
+                    LOGGER.log(Level.SEVERE, ex.toString(), ex);
                 }
             }
         }
@@ -443,7 +443,7 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
                         String value = values[au_to_col[au]];
                         if (isNumeric(value)) {
                             double intensity = alpha * (Double.parseDouble(value) / 5.0) + (1 - alpha) * prev_value_au[au];
-                            //       System.out.println("AU["+au_correspondance[au]+"] : "+intensity);
+                            //       System.out.println("AU["+au_correspondance[au]+"]: "+intensity);
                             au_frame.setAUAPboth(au_correspondance[au - 1], intensity);
                             prev_value_au[au] = intensity;
                         }
@@ -492,16 +492,16 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
 
             }
 
-        } catch (IOException e) {
-            Logs.error(e.getMessage());
-            LOGGER.log(Level.SEVERE, e.toString(), e);
+        } catch (IOException ex) {
+            Logs.error(ex.getMessage());
+            LOGGER.log(Level.SEVERE, ex.toString(), ex);
         } finally {
             if (br != null) {
                 try {
                     br.close();
-                } catch (IOException e) {
-                    Logs.error(e.getMessage());
-                    LOGGER.log(Level.SEVERE, e.toString(), e);
+                } catch (IOException ex) {
+                    Logs.error(ex.getMessage());
+                    LOGGER.log(Level.SEVERE, ex.toString(), ex);
                 }
             }
         }
@@ -598,13 +598,13 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
                         au_frame.setFrameNumber((int) (time * Constants.FRAME_PER_SECOND) + 1);
 
                         for (int au = 1; au < au_to_col.length; au++) {
-                            //System.out.println("value_AU["+au_correspondance[au]+"] : "+str_value);
+                            //System.out.println("value_AU["+au_correspondance[au]+"]: "+str_value);
                             double value = Double.parseDouble(values[au_to_col[au]]);
-                            //System.out.println("value_AU["+au_correspondance[au]+"] : "+value);
+                            //System.out.println("value_AU["+au_correspondance[au]+"]: "+value);
 
                             Logs.debug("value_AU[" + au_correspondance[au] + "]: " + value);
                             double intensity = alpha * (value / 5.0) + (1 - alpha) * prev_value_au[au];
-                            //System.out.println("AU["+au_correspondance[au]+"] : "+intensity);
+                            //System.out.println("AU["+au_correspondance[au]+"]: "+intensity);
                             au_frame.setAUAPboth(au_correspondance[au - 1], intensity);
                             prev_value_au[au] = intensity;
                         }
@@ -643,7 +643,7 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
                         hmFrame.setDegreeValue(BAPType.vc3_torsion, rot_Y_deg);
                         hmFrame.setDegreeValue(BAPType.vc3_tilt, rot_Z_deg);
 
-                        //System.out.println("BAP["+time+"] : ["+rot_X_deg+"; "+rot_Y_deg+"; "+rot_Z_deg+"]");
+                        //System.out.println("BAP["+time+"]: ["+rot_X_deg+"; "+rot_Y_deg+"; "+rot_Z_deg+"]");
                         prev_rot_X = rot_X_deg;
                         prev_rot_Y = rot_Y_deg;
                         prev_rot_Z = rot_Z_deg;
@@ -688,16 +688,16 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
                     }
                 }
             }
-        } catch (IOException e) {
-            Logs.error(e.getLocalizedMessage());
-            LOGGER.log(Level.SEVERE, e.toString(), e);
+        } catch (IOException ex) {
+            Logs.error(ex.getLocalizedMessage());
+            LOGGER.log(Level.SEVERE, ex.toString(), ex);
         } finally {
             if (br != null) {
                 try {
                     br.close();
-                } catch (IOException e) {
-                    Logs.error(e.getLocalizedMessage());
-                    LOGGER.log(Level.SEVERE, e.toString(), e);
+                } catch (IOException ex) {
+                    Logs.error(ex.getLocalizedMessage());
+                    LOGGER.log(Level.SEVERE, ex.toString(), ex);
                 }
             }
         }
@@ -744,7 +744,7 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
 
         for (AUAPFrame frame : au_frames) {
             int time_frame = timer + frame.getFrameNumber();
-            //System.out.println("AUAPFrame : "+time_frame);
+            //System.out.println("AUAPFrame: "+time_frame);
             frame.setFrameNumber(time_frame);
             for (AUPerformer performer : au_perfomers) {
                 performer.performAUAPFrame(frame, id);

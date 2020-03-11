@@ -92,7 +92,6 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
 
     private void updateCSVReader() {
         if (!csvReader.getFileName().equals(csvFileTextField.getText())) {
-            csvReader.stopConnection();
             csvReader.setFileName(csvFileTextField.getText());
         }
     }
@@ -100,7 +99,6 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private void updateZeroMQReader() {
         if (!zeroMQReader.getHost().equals(zeroMQHostTextField.getText())
                 || !zeroMQReader.getPort().equals(zeroMQPortTextField.getText())) {
-            zeroMQReader.stopConnection();
             zeroMQReader.setURL(zeroMQHostTextField.getText(), zeroMQPortTextField.getText());
         }
     }
@@ -463,10 +461,14 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
      * ---------------------------------------------------------------------- */
 
     private void inputTabbedPaneStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_inputTabbedPaneStateChanged
+        stopConnections();
+    }//GEN-LAST:event_inputTabbedPaneStateChanged
+
+    private void stopConnections() {
         performCheckBox.setSelected(false);
         csvReader.stopConnection();
         zeroMQReader.stopConnection();
-    }//GEN-LAST:event_inputTabbedPaneStateChanged
+    }
 
     /* ---------------------------------------------------------------------- *
      *                                CSV Tab                                 *

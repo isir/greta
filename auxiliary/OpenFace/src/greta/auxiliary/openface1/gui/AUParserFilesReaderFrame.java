@@ -57,9 +57,9 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
         fileChooser = new javax.swing.JFileChooser();
         mainPanel = new javax.swing.JPanel();
         northPanel = new javax.swing.JPanel();
-        inputsPanel = new javax.swing.JPanel();
+        inputPanel = new javax.swing.JPanel();
         directoryLabel = new javax.swing.JLabel();
-        inputsPanelFiller = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
+        inputPanelFiller = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         directoryTextField = new javax.swing.JTextField();
         northPanelFiller1 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         openButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.open");
@@ -67,10 +67,10 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
         northPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         centerPanel = new javax.swing.JPanel();
         separator = new javax.swing.JSeparator();
-        outputsPanel = new javax.swing.JPanel();
-        outputsScrollPane = new javax.swing.JScrollPane();
-        outputsTable = new javax.swing.JTable();
-        outputButtonsPanel = new javax.swing.JPanel();
+        outputPanel = new javax.swing.JPanel();
+        outputScrollPane = new javax.swing.JScrollPane();
+        outputTable = new javax.swing.JTable();
+        outputButtonPanel = new javax.swing.JPanel();
         setButton = new javax.swing.JButton();
         buttonsPanelFiller1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         selectAllButton = new javax.swing.JButton();
@@ -86,15 +86,15 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
 
         northPanel.setLayout(new javax.swing.BoxLayout(northPanel, javax.swing.BoxLayout.LINE_AXIS));
 
-        inputsPanel.setLayout(new javax.swing.BoxLayout(inputsPanel, javax.swing.BoxLayout.LINE_AXIS));
+        inputPanel.setLayout(new javax.swing.BoxLayout(inputPanel, javax.swing.BoxLayout.LINE_AXIS));
 
         directoryLabel.setText("CSV directory:");
         directoryLabel.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
-        inputsPanel.add(directoryLabel);
-        inputsPanel.add(inputsPanelFiller);
-        inputsPanel.add(directoryTextField);
+        inputPanel.add(directoryLabel);
+        inputPanel.add(inputPanelFiller);
+        inputPanel.add(directoryTextField);
 
-        northPanel.add(inputsPanel);
+        northPanel.add(inputPanel);
         northPanel.add(northPanelFiller1);
 
         openButton.setName(""); // NOI18N
@@ -118,10 +118,10 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
         centerPanel.setLayout(new java.awt.BorderLayout(0, 10));
         centerPanel.add(separator, java.awt.BorderLayout.NORTH);
 
-        outputsPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Available outputs:"));
-        outputsPanel.setLayout(new java.awt.BorderLayout(10, 0));
+        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Available outputs:"));
+        outputPanel.setLayout(new java.awt.BorderLayout(10, 0));
 
-        outputsTable.setModel(new javax.swing.table.DefaultTableModel(
+        outputTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -144,16 +144,16 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        outputsTable.setDragEnabled(true);
-        outputsTable.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
-        outputsTable.setFillsViewportHeight(true);
-        outputsTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        outputsTable.getTableHeader().setReorderingAllowed(false);
-        outputsScrollPane.setViewportView(outputsTable);
+        outputTable.setDragEnabled(true);
+        outputTable.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
+        outputTable.setFillsViewportHeight(true);
+        outputTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        outputTable.getTableHeader().setReorderingAllowed(false);
+        outputScrollPane.setViewportView(outputTable);
 
-        outputsPanel.add(outputsScrollPane, java.awt.BorderLayout.CENTER);
+        outputPanel.add(outputScrollPane, java.awt.BorderLayout.CENTER);
 
-        outputButtonsPanel.setLayout(new javax.swing.BoxLayout(outputButtonsPanel, javax.swing.BoxLayout.PAGE_AXIS));
+        outputButtonPanel.setLayout(new javax.swing.BoxLayout(outputButtonPanel, javax.swing.BoxLayout.PAGE_AXIS));
 
         setButton.setText("Set");
         setButton.setMaximumSize(new java.awt.Dimension(89, 23));
@@ -163,8 +163,8 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 setButtonActionPerformed(evt);
             }
         });
-        outputButtonsPanel.add(setButton);
-        outputButtonsPanel.add(buttonsPanelFiller1);
+        outputButtonPanel.add(setButton);
+        outputButtonPanel.add(buttonsPanelFiller1);
 
         selectAllButton.setText("Select All");
         selectAllButton.setMaximumSize(new java.awt.Dimension(89, 23));
@@ -174,7 +174,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 selectAllButtonActionPerformed(evt);
             }
         });
-        outputButtonsPanel.add(selectAllButton);
+        outputButtonPanel.add(selectAllButton);
 
         selectNoneButton.setText("Select None");
         selectNoneButton.addActionListener(new java.awt.event.ActionListener() {
@@ -182,8 +182,8 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 selectNoneButtonActionPerformed(evt);
             }
         });
-        outputButtonsPanel.add(selectNoneButton);
-        outputButtonsPanel.add(buttonsPanelFiller2);
+        outputButtonPanel.add(selectNoneButton);
+        outputButtonPanel.add(buttonsPanelFiller2);
 
         upButton.setText("Up");
         upButton.setMaximumSize(new java.awt.Dimension(89, 23));
@@ -193,7 +193,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 upButtonActionPerformed(evt);
             }
         });
-        outputButtonsPanel.add(upButton);
+        outputButtonPanel.add(upButton);
 
         downButton.setText("Down");
         downButton.setMaximumSize(new java.awt.Dimension(89, 23));
@@ -202,11 +202,11 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 downButtonActionPerformed(evt);
             }
         });
-        outputButtonsPanel.add(downButton);
+        outputButtonPanel.add(downButton);
 
-        outputsPanel.add(outputButtonsPanel, java.awt.BorderLayout.EAST);
+        outputPanel.add(outputButtonPanel, java.awt.BorderLayout.EAST);
 
-        centerPanel.add(outputsPanel, java.awt.BorderLayout.CENTER);
+        centerPanel.add(outputPanel, java.awt.BorderLayout.CENTER);
 
         mainPanel.add(centerPanel, java.awt.BorderLayout.CENTER);
 
@@ -244,28 +244,28 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_setButtonActionPerformed
 
     private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) outputsTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
         for (int i = 0; i < model.getRowCount(); ++i) {
             model.setValueAt(true, i, 1);
         }
     }//GEN-LAST:event_selectAllButtonActionPerformed
 
     private void selectNoneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectNoneButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) outputsTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
         for (int i = 0; i < model.getRowCount(); ++i) {
             model.setValueAt(false, i, 1);
         }
     }//GEN-LAST:event_selectNoneButtonActionPerformed
 
     private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
-        int selectedIndex = outputsTable.getSelectedRow();
+        int selectedIndex = outputTable.getSelectedRow();
         if (selectedIndex > 0) {
             moveSelected(selectedIndex, selectedIndex - 1);
         }
     }//GEN-LAST:event_upButtonActionPerformed
 
     private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
-        int selectedIndex = outputsTable.getSelectedRow();
+        int selectedIndex = outputTable.getSelectedRow();
         if (selectedIndex > 0) {
             moveSelected(selectedIndex, selectedIndex + 1);
         }
@@ -279,17 +279,17 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     private javax.swing.JTextField directoryTextField;
     private javax.swing.JButton downButton;
     private javax.swing.JFileChooser fileChooser;
-    private javax.swing.JPanel inputsPanel;
-    private javax.swing.Box.Filler inputsPanelFiller;
+    private javax.swing.JPanel inputPanel;
+    private javax.swing.Box.Filler inputPanelFiller;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel northPanel;
     private javax.swing.Box.Filler northPanelFiller1;
     private javax.swing.Box.Filler northPanelFiller2;
     private javax.swing.JButton openButton;
-    private javax.swing.JPanel outputButtonsPanel;
-    private javax.swing.JPanel outputsPanel;
-    private javax.swing.JScrollPane outputsScrollPane;
-    private javax.swing.JTable outputsTable;
+    private javax.swing.JPanel outputButtonPanel;
+    private javax.swing.JPanel outputPanel;
+    private javax.swing.JScrollPane outputScrollPane;
+    private javax.swing.JTable outputTable;
     private javax.swing.JButton selectAllButton;
     private javax.swing.JButton selectNoneButton;
     private javax.swing.JButton sendButton;
@@ -299,9 +299,9 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void moveSelected(int old, int newIndex) {
-        DefaultTableModel model = (DefaultTableModel) outputsTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
         model.moveRow(old, old, newIndex);
-        outputsTable.setRowSelectionInterval(old, newIndex);
+        outputTable.setRowSelectionInterval(old, newIndex);
     }
 
     private Method loadMethod;
@@ -331,7 +331,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     }
 
     public String[] getSelected() {
-        DefaultTableModel model = (DefaultTableModel) outputsTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
         List<String> selected = new ArrayList<>();
         for (int i = 0; i < model.getRowCount(); ++i) {
             if ((Boolean) model.getValueAt(i, 1)) {
@@ -342,7 +342,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     }
 
     public void updateHeaders(String headers[]) {
-        DefaultTableModel model = (DefaultTableModel) outputsTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
         for (int i = 0; i < model.getRowCount(); ++i) {
             model.removeRow(0);
         }

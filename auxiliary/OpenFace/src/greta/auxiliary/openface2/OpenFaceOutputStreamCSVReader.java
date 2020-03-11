@@ -19,10 +19,6 @@ package greta.auxiliary.openface2;
 
 import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
 import greta.auxiliary.openface2.util.OpenFaceFrame;
-import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPType;
-import greta.core.repositories.AUAPFrame;
-import greta.core.util.Constants;
 import greta.core.util.time.Timer;
 import java.io.BufferedReader;
 import java.io.File;
@@ -108,39 +104,39 @@ public class OpenFaceOutputStreamCSVReader extends OpenFaceOutputStreamAbstractR
                 }
                 Thread.sleep(1000);
             }
-        } catch (FileNotFoundException | InterruptedException ex) {
+        } catch (FileNotFoundException | InterruptedException e) {
             LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamCSVReader.class.getName()));
         }
         LOGGER.info(String.format("Thread: %s exiting", OpenFaceOutputStreamCSVReader.class.getName()));
     }
 
     public void processHeader(BufferedReader reader) {
-        if (isConnected) {
-            try {
-                String line;
-                if ((line = reader.readLine()) != null) {
-                    boolean changed = OpenFaceFrame.readHeader(line);
-                    if (changed) {
-                        LOGGER.info("Header headerChanged");
-                        headerChanged(OpenFaceFrame.headers);
-                    }
+        try {
+            String line;
+            if ((line = reader.readLine()) != null) {
+                boolean changed = OpenFaceFrame.readHeader(line);
+                if (changed) {
+                    LOGGER.info("Header headerChanged");
+                    headerChanged(OpenFaceFrame.headers);
                 }
-            } catch (IOException ex) {
-                LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamCSVReader.class.getName()));
             }
+            while ((reader.readLine()) != null) {
+            }
+        } catch (IOException ex) {
+            LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamCSVReader.class.getName()));
         }
     }
 
     public void processData(BufferedReader reader) {
-        if (isConnected) {
-            try {
-                String line;
-                while ((line = reader.readLine()) != null) {
+        try {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.split(OpenFaceFrame.separator).length == 714) {
                     processFrame(line);
                 }
-            } catch (IOException ex) {
-                LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamCSVReader.class.getName()));
             }
+        } catch (IOException ex) {
+            LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamCSVReader.class.getName()));
         }
     }
 

@@ -19,10 +19,6 @@ package greta.auxiliary.openface2;
 
 import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
 import greta.auxiliary.openface2.util.OpenFaceFrame;
-import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPType;
-import greta.core.repositories.AUAPFrame;
-import greta.core.util.Constants;
 import greta.core.util.time.Timer;
 import java.util.logging.Logger;
 import org.zeromq.SocketType;
@@ -52,7 +48,7 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
     private Socket zSubscriber;
     private final static String TOPIC = "";
 
-    private boolean isConnected;
+    private boolean isConnected = false;
 
     /* ---------------------------------------------------------------------- */
 
@@ -151,43 +147,42 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
                 }
                 Thread.sleep(1000);
             }
-        } catch (InterruptedException e) {
+        } catch (InterruptedException ex) {
             LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamZeroMQReader.class.getName()));
         }
         LOGGER.info(String.format("Thread: %s exiting", OpenFaceOutputStreamZeroMQReader.class.getName()));
     }
 
     private void processLine() {
-        if (isConnected) {
-            String line = zSubscriber.recvStr();
-            if (line != null) {
-                if (line.startsWith("DATA:")) {
-                    processData(line);
-                } else if (line.startsWith("HEADER:")) {
-                    processHeader(line);
-                } else {
-                    LOGGER.warning(String.format("Line not recognized: %s", line));
-                }
+        String line = null;
+        try {
+            line = zSubscriber.recvStr();
+        } catch (org.zeromq.ZMQException ex) {
+            LOGGER.warning(String.format("Line is undefined"));
+        }
+        if (line != null) {
+            if (line.startsWith("DATA:")) {
+                processData(line);
+            } else if (line.startsWith("HEADER:")) {
+                processHeader(line);
             } else {
-                LOGGER.warning(String.format("Line is empty"));
+                LOGGER.warning(String.format("Line not recognized: %s", line));
             }
+        } else {
+            LOGGER.warning(String.format("Line is null"));
         }
     }
 
     private void processHeader(String line) {
-        if (isConnected) {
-            boolean changed = OpenFaceFrame.readHeader(line.substring(7));
-            if (changed) {
-                LOGGER.info("Header headerChanged");
-                headerChanged(OpenFaceFrame.headers);
-            }
+        boolean changed = OpenFaceFrame.readHeader(line.substring(7));
+        if (changed) {
+            LOGGER.info("Header headerChanged");
+            headerChanged(OpenFaceFrame.headers);
         }
     }
 
     private void processData(String line) {
-        if (isConnected) {
-            processFrame(line.substring(5));
-        }
+        processFrame(line.substring(5));
     }
 
     /* ---------------------------------------------------------------------- */

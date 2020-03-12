@@ -67,7 +67,7 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
 
     //Phil
     File dirPath;
-    String[] selectedHeaders = null;
+    String[] selectedFeatures = null;
 
     /**
      * Loads BML as csv files.<br/> The behavior signals in the specified file
@@ -99,42 +99,42 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
     }
 
     /**
-     * Loads headers from the first csv file in the selected directory.
+     * Loads features from the first csv file in the selected directory.
      *
-     * @return headers as a String array
+     * @return features as a String array
      */
     public String[] list() {
         if (dirPath != null) {
             File[] files = dirPath.listFiles((File file, String name1) -> name1.contains(".csv"));
             if (files.length > 0) {
-                return getHeaders(files[0]);
+                return getFeatures(files[0]);
             }
         }
         return null;
     }
 
     /**
-     * Set selected headers
+     * Set selected features
      *
-     * @param selected headers to use
+     * @param selected features to use
      *
      */
     public void setSelected(String[] selected) {
         if (selected != null) {
-            selectedHeaders = selected;
-            Logs.info("Setting selected headers to: " + Arrays.toString(selected));
+            selectedFeatures = selected;
+            Logs.info("Setting selected features to: " + Arrays.toString(selected));
         } else {
-            Logs.warning("No header selected");
+            Logs.warning("No feature selected");
         }
     }
 
-    private String[] getHeaders(File f) {
+    private String[] getFeatures(File f) {
         BufferedReader brTest = null;
-        String[] headers = null;
+        String[] features = null;
         try {
             brTest = new BufferedReader(new FileReader(f));
             String line1 = brTest.readLine();
-            headers = line1.split(",");
+            features = line1.split(",");
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, null, ex);
         } finally {
@@ -147,7 +147,7 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
             }
         }
 
-        return headers;
+        return features;
     }
 
     public int loadFile(String csvFile) {
@@ -535,8 +535,8 @@ public class AUParserFilesReader extends FAPFrameEmitterImpl implements AUEmitte
             //String[] header_string = { "timestamp", " AU01_r", " AU02_r", " AU04_r", " AU05_r", " AU06_r", " AU07_r", " AU09_r", " AU10_r", " AU12_r", " AU14_r", " AU15_r", " AU17_r", " AU20_r", " AU23_r", " AU25_r", " AU26_r", " AU45_r"};
             //String[] header_string = { "timestamp", "AU01_r", "AU02_r", "AU04_r", "AU05_r", "AU06_r", "AU07_r", "AU09_r", "AU10_r", "AU12_r", "AU14_r", "AU15_r", "AU17_r", "AU20_r", "AU23_r", "AU25_r", "AU26_r"};
             String[] header_string = {"time", "1", "2", "4", "5", "6", "9", "12", "15", "17", "20", "25", "26"};
-            if (selectedHeaders != null) {
-                header_string = selectedHeaders;
+            if (selectedFeatures != null) {
+                header_string = selectedFeatures;
             }
             List<String> header_list = Arrays.asList(header_string);
             int[] au_to_col = new int[header_string.length - 1];

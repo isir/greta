@@ -107,6 +107,8 @@ public class OpenFaceOutputStreamCSVReader extends OpenFaceOutputStreamAbstractR
         } catch (FileNotFoundException | InterruptedException e) {
             LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamCSVReader.class.getName()));
         }
+
+        cleanHeader();
         LOGGER.info(String.format("Thread: %s exiting", OpenFaceOutputStreamCSVReader.class.getName()));
     }
 
@@ -117,7 +119,7 @@ public class OpenFaceOutputStreamCSVReader extends OpenFaceOutputStreamAbstractR
                 boolean changed = OpenFaceFrame.readHeader(line);
                 if (changed) {
                     LOGGER.info("Header headerChanged");
-                    headerChanged(OpenFaceFrame.headers);
+                    headerChanged(OpenFaceFrame.availableFeatures);
                 }
             }
             while ((reader.readLine()) != null) {

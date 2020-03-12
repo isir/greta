@@ -150,6 +150,8 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
         } catch (InterruptedException ex) {
             LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamZeroMQReader.class.getName()));
         }
+
+        cleanHeader();
         LOGGER.info(String.format("Thread: %s exiting", OpenFaceOutputStreamZeroMQReader.class.getName()));
     }
 
@@ -177,7 +179,7 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
         boolean changed = OpenFaceFrame.readHeader(line.substring(7));
         if (changed) {
             LOGGER.info("Header headerChanged");
-            headerChanged(OpenFaceFrame.headers);
+            headerChanged(OpenFaceFrame.availableFeatures);
         }
     }
 

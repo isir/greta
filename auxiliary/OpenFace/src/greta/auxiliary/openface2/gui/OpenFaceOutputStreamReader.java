@@ -81,12 +81,17 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
             actualConnectedProperty = connectedProperty;
             csvConnectedLabel.setForeground(green);
             zeroMQConnectedLabel.setForeground(green);
+            csvConnectButton.setText("Disconnect");
+            zeroMQConnectButton.setText("Disconnect");
         } else {
             actualConnectedProperty = notConnectedProperty;
+            performCheckBox.setSelected(false);
             csvConnectedLabel.setForeground(red);
             zeroMQConnectedLabel.setForeground(red);
+            csvConnectButton.setText("Connect");
+            zeroMQConnectButton.setText("Connect");
         }
-        updateConnectedLabel();
+        updateConnectedLabels();
         updateIOPanelsEnabled(connected);
     }
 
@@ -106,7 +111,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     @Override
     public void setLocale(Locale l) {
         super.setLocale(l);
-        updateConnectedLabel();
+        updateConnectedLabels();
         updateLabelWithColon(csvStatusLabel, statusProperty);
         updateLabelWithColon(csvFileLabel, fileProperty);
         updateLabelWithColon(zeroMQStatusLabel, statusProperty);
@@ -114,7 +119,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         updateLabelWithColon(zeroMQPortLabel, portProperty);
     }
 
-    private void updateConnectedLabel() {
+    private void updateConnectedLabels() {
         if (csvConnectedLabel != null) {
             csvConnectedLabel.setText(IniManager.getLocaleProperty(actualConnectedProperty));
         }
@@ -153,6 +158,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         csvFileTextField = new javax.swing.JTextField();
         csvTabFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         csvOpenButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.open");
+        csvTabFiller3 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         csvConnectButton = new javax.swing.JButton();
         zeroMQTab = new javax.swing.JPanel();
         zeroMQStatusPanel = new javax.swing.JPanel();
@@ -176,7 +182,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         separator = new javax.swing.JSeparator();
         outputPanel = new javax.swing.JPanel();
         outputScrollPane = new javax.swing.JScrollPane();
-        outputTable = new javax.swing.JTable();
+        featuresTable = new javax.swing.JTable();
         outputButtonPanel = new javax.swing.JPanel();
         setButton = new javax.swing.JButton();
         buttonPanelFiller1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
@@ -241,8 +247,10 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
             }
         });
         csvConnectorPanel.add(csvOpenButton);
+        csvConnectorPanel.add(csvTabFiller3);
 
         csvConnectButton.setText("Connect");
+        csvConnectButton.setPreferredSize(new java.awt.Dimension(93, 23));
         csvConnectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 csvConnectButtonActionPerformed(evt);
@@ -314,6 +322,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         zeroMQConnectorPanel.add(zeroMQConnectorPanelFiller4);
 
         zeroMQConnectButton.setText("Connect");
+        zeroMQConnectButton.setPreferredSize(new java.awt.Dimension(93, 23));
         zeroMQConnectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 zeroMQConnectButtonActionPerformed(evt);
@@ -338,10 +347,10 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         centerPanel.setLayout(new java.awt.BorderLayout(0, 10));
         centerPanel.add(separator, java.awt.BorderLayout.NORTH);
 
-        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Available outputs:"));
+        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Available features:"));
         outputPanel.setLayout(new java.awt.BorderLayout(10, 0));
 
-        outputTable.setModel(new javax.swing.table.DefaultTableModel(
+        featuresTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -364,12 +373,12 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
                 return canEdit [columnIndex];
             }
         });
-        outputTable.setDragEnabled(true);
-        outputTable.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
-        outputTable.setFillsViewportHeight(true);
-        outputTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        outputTable.getTableHeader().setReorderingAllowed(false);
-        outputScrollPane.setViewportView(outputTable);
+        featuresTable.setDragEnabled(true);
+        featuresTable.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
+        featuresTable.setFillsViewportHeight(true);
+        featuresTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        featuresTable.getTableHeader().setReorderingAllowed(false);
+        outputScrollPane.setViewportView(featuresTable);
 
         outputPanel.add(outputScrollPane, java.awt.BorderLayout.CENTER);
 
@@ -465,7 +474,6 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     }//GEN-LAST:event_inputTabbedPaneStateChanged
 
     private void stopConnections() {
-        performCheckBox.setSelected(false);
         csvReader.stopConnection();
         zeroMQReader.stopConnection();
     }
@@ -493,7 +501,11 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     }//GEN-LAST:event_csvOpenButtonActionPerformed
 
     private void csvConnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_csvConnectButtonActionPerformed
-        csvReader.startConnection();
+        if (evt.getActionCommand().equals("Connect")) {
+            csvReader.startConnection();
+        } else if (evt.getActionCommand().equals("Disconnect")) {
+            csvReader.stopConnection();
+        }
     }//GEN-LAST:event_csvConnectButtonActionPerformed
 
     /* ---------------------------------------------------------------------- *
@@ -530,7 +542,11 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     }//GEN-LAST:event_zeroMQPortTextFieldFocusLost
 
     private void zeroMQConnectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_zeroMQConnectButtonActionPerformed
-        zeroMQReader.startConnection();
+        if (evt.getActionCommand().equals("Connect")) {
+            zeroMQReader.startConnection();
+        } else if (evt.getActionCommand().equals("Disconnect")) {
+            zeroMQReader.stopConnection();
+        }
     }//GEN-LAST:event_zeroMQConnectButtonActionPerformed
 
     /* ---------------------------------------------------------------------- *
@@ -538,34 +554,34 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
      * ---------------------------------------------------------------------- */
 
     private void setButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setButtonActionPerformed
-        zeroMQReader.setSelected(getSelected());
+        zeroMQReader.setSelected(getSelectedFeatures());
     }//GEN-LAST:event_setButtonActionPerformed
 
     private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
         for (int i = 0; i < model.getRowCount(); ++i) {
             model.setValueAt(true, i, 1);
         }
     }//GEN-LAST:event_selectAllButtonActionPerformed
 
     private void selectNoneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectNoneButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
         for (int i = 0; i < model.getRowCount(); ++i) {
             model.setValueAt(false, i, 1);
         }
     }//GEN-LAST:event_selectNoneButtonActionPerformed
 
     private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
-        int selectedIndex = outputTable.getSelectedRow();
+        int selectedIndex = featuresTable.getSelectedRow();
         if (selectedIndex > 0) {
-            moveSelected(selectedIndex, selectedIndex - 1);
+            moveSelectedFeature(selectedIndex, selectedIndex - 1);
         }
     }//GEN-LAST:event_upButtonActionPerformed
 
     private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
-        int selectedIndex = outputTable.getSelectedRow();
+        int selectedIndex = featuresTable.getSelectedRow();
         if (selectedIndex > 0) {
-            moveSelected(selectedIndex, selectedIndex + 1);
+            moveSelectedFeature(selectedIndex, selectedIndex + 1);
         }
     }//GEN-LAST:event_downButtonActionPerformed
 
@@ -588,7 +604,9 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.JPanel csvTab;
     private javax.swing.Box.Filler csvTabFiller1;
     private javax.swing.Box.Filler csvTabFiller2;
+    private javax.swing.Box.Filler csvTabFiller3;
     private javax.swing.JButton downButton;
+    private javax.swing.JTable featuresTable;
     private javax.swing.JTabbedPane inputTabbedPane;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel northPanel;
@@ -597,7 +615,6 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.JPanel outputButtonPanel;
     private javax.swing.JPanel outputPanel;
     private javax.swing.JScrollPane outputScrollPane;
-    private javax.swing.JTable outputTable;
     private javax.swing.JCheckBox performCheckBox;
     private javax.swing.JButton selectAllButton;
     private javax.swing.JButton selectNoneButton;
@@ -688,24 +705,18 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
 
     /* ---------------------------------------------------------------------- */
 
-    private void moveSelected(int old, int newIndex) {
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
-        model.moveRow(old, old, newIndex);
-        outputTable.setRowSelectionInterval(old, newIndex);
-    }
-
-    private void updateHeaders(String headers[]) {
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
-        for (int i = 0; i < model.getRowCount(); ++i) {
-            model.removeRow(0);
+    private void updateFeatures(String[] newFeatures) {
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
+        for (int i = model.getRowCount() - 1; i >= 0; --i) {
+            model.removeRow(i);
         }
-        for (String h : headers) {
-            model.addRow(new Object[]{h, false});
+        for (String feature : newFeatures) {
+            model.addRow(new Object[]{feature, false});
         }
     }
 
-    private String[] getSelected() {
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
+    private String[] getSelectedFeatures() {
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
         List<String> selected = new ArrayList<>();
         for (int i = 0; i < model.getRowCount(); ++i) {
             if ((Boolean) model.getValueAt(i, 1)) {
@@ -713,6 +724,12 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
             }
         }
         return selected.toArray(new String[selected.size()]);
+    }
+
+    private void moveSelectedFeature(int old, int newIndex) {
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
+        model.moveRow(old, old, newIndex);
+        featuresTable.setRowSelectionInterval(old, newIndex);
     }
 
     /* ---------------------------------------------------------------------- *
@@ -784,7 +801,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
      * ---------------------------------------------------------------------- */
 
     @Override
-    public void stringArrayChanged(String[] headers) {
-        updateHeaders(headers);
+    public void stringArrayChanged(String[] newFeatures) {
+        updateFeatures(newFeatures);
     }
 }

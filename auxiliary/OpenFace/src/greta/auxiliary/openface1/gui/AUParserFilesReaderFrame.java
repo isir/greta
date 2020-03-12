@@ -69,7 +69,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
         separator = new javax.swing.JSeparator();
         outputPanel = new javax.swing.JPanel();
         outputScrollPane = new javax.swing.JScrollPane();
-        outputTable = new javax.swing.JTable();
+        featuresTable = new javax.swing.JTable();
         outputButtonPanel = new javax.swing.JPanel();
         setButton = new javax.swing.JButton();
         buttonsPanelFiller1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
@@ -118,10 +118,10 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
         centerPanel.setLayout(new java.awt.BorderLayout(0, 10));
         centerPanel.add(separator, java.awt.BorderLayout.NORTH);
 
-        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Available outputs:"));
+        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Available features:"));
         outputPanel.setLayout(new java.awt.BorderLayout(10, 0));
 
-        outputTable.setModel(new javax.swing.table.DefaultTableModel(
+        featuresTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -144,12 +144,12 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        outputTable.setDragEnabled(true);
-        outputTable.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
-        outputTable.setFillsViewportHeight(true);
-        outputTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        outputTable.getTableHeader().setReorderingAllowed(false);
-        outputScrollPane.setViewportView(outputTable);
+        featuresTable.setDragEnabled(true);
+        featuresTable.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
+        featuresTable.setFillsViewportHeight(true);
+        featuresTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        featuresTable.getTableHeader().setReorderingAllowed(false);
+        outputScrollPane.setViewportView(featuresTable);
 
         outputPanel.add(outputScrollPane, java.awt.BorderLayout.CENTER);
 
@@ -235,7 +235,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
 
     private void setButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setButtonActionPerformed
         try {
-            String[] selected = getSelected();
+            String[] selected = getSelectedFeatures();
             setSelectedMethod.invoke(loader, new Object[]{selected});
         } catch (Exception ex) {
             Logs.error(ex.getLocalizedMessage());
@@ -244,30 +244,30 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_setButtonActionPerformed
 
     private void selectAllButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectAllButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
         for (int i = 0; i < model.getRowCount(); ++i) {
             model.setValueAt(true, i, 1);
         }
     }//GEN-LAST:event_selectAllButtonActionPerformed
 
     private void selectNoneButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectNoneButtonActionPerformed
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
         for (int i = 0; i < model.getRowCount(); ++i) {
             model.setValueAt(false, i, 1);
         }
     }//GEN-LAST:event_selectNoneButtonActionPerformed
 
     private void upButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_upButtonActionPerformed
-        int selectedIndex = outputTable.getSelectedRow();
+        int selectedIndex = featuresTable.getSelectedRow();
         if (selectedIndex > 0) {
-            moveSelected(selectedIndex, selectedIndex - 1);
+            moveSelectedFeature(selectedIndex, selectedIndex - 1);
         }
     }//GEN-LAST:event_upButtonActionPerformed
 
     private void downButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_downButtonActionPerformed
-        int selectedIndex = outputTable.getSelectedRow();
+        int selectedIndex = featuresTable.getSelectedRow();
         if (selectedIndex > 0) {
-            moveSelected(selectedIndex, selectedIndex + 1);
+            moveSelectedFeature(selectedIndex, selectedIndex + 1);
         }
     }//GEN-LAST:event_downButtonActionPerformed
 
@@ -278,6 +278,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     private javax.swing.JLabel directoryLabel;
     private javax.swing.JTextField directoryTextField;
     private javax.swing.JButton downButton;
+    private javax.swing.JTable featuresTable;
     private javax.swing.JFileChooser fileChooser;
     private javax.swing.JPanel inputPanel;
     private javax.swing.Box.Filler inputPanelFiller;
@@ -289,7 +290,6 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     private javax.swing.JPanel outputButtonPanel;
     private javax.swing.JPanel outputPanel;
     private javax.swing.JScrollPane outputScrollPane;
-    private javax.swing.JTable outputTable;
     private javax.swing.JButton selectAllButton;
     private javax.swing.JButton selectNoneButton;
     private javax.swing.JButton sendButton;
@@ -297,12 +297,6 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
     private javax.swing.JButton setButton;
     private javax.swing.JButton upButton;
     // End of variables declaration//GEN-END:variables
-
-    private void moveSelected(int old, int newIndex) {
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
-        model.moveRow(old, old, newIndex);
-        outputTable.setRowSelectionInterval(old, newIndex);
-    }
 
     private Method loadMethod;
     private Method listMethod;
@@ -318,7 +312,7 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
                 loadMethod.invoke(loader, fileName);
                 String[] strList = (String[]) listMethod.invoke(loader);
                 if (strList != null) {
-                    updateHeaders(strList);
+                    updateFeatures(strList);
                 }
             } catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();
@@ -330,8 +324,18 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
         }
     }
 
-    public String[] getSelected() {
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
+    public void updateFeatures(String features[]) {
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
+        for (int i = model.getRowCount() - 1; i >= 0; --i) {
+            model.removeRow(i);
+        }
+        for (String feature : features) {
+            model.addRow(new Object[]{feature, false});
+        }
+    }
+
+    public String[] getSelectedFeatures() {
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
         List<String> selected = new ArrayList<>();
         for (int i = 0; i < model.getRowCount(); ++i) {
             if ((Boolean) model.getValueAt(i, 1)) {
@@ -341,14 +345,10 @@ public class AUParserFilesReaderFrame extends javax.swing.JFrame {
         return selected.toArray(new String[selected.size()]);
     }
 
-    public void updateHeaders(String headers[]) {
-        DefaultTableModel model = (DefaultTableModel) outputTable.getModel();
-        for (int i = 0; i < model.getRowCount(); ++i) {
-            model.removeRow(0);
-        }
-        for (String h : headers) {
-            model.addRow(new Object[]{h, false});
-        }
+    private void moveSelectedFeature(int old, int newIndex) {
+        DefaultTableModel model = (DefaultTableModel) featuresTable.getModel();
+        model.moveRow(old, old, newIndex);
+        featuresTable.setRowSelectionInterval(old, newIndex);
     }
 
     public void setLoader(Object loader) {

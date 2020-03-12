@@ -49,7 +49,7 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     private List<ConnectionListener> connectionListeners = new ArrayList<>();
     private List<StringArrayListener> headerListeners = new ArrayList<>();
 
-    private String[] selectedHeaders;
+    private String[] selectedFeatures;
 
     /* ---------------------------------------------------------------------- */
 
@@ -112,6 +112,11 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
         }
     }
 
+    protected void cleanHeader() {
+        OpenFaceFrame.readHeader(null);
+        headerChanged(OpenFaceFrame.availableFeatures);
+    }
+
     /* ---------------------------------------------------------------------- */
 
     protected void processFrame(String line) {
@@ -166,13 +171,13 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
         AUAPFrame au_frame = new AUAPFrame();
         au_frame.setFrameNumber(curFrame.frameId);
 
-        for (int i = 0; i < OpenFaceFrame.getAUCCount(); ++i) {
+        for (int i = 0; i < OpenFaceFrame.getAUFeatureMasksCount(); ++i) {
             // we assume both tables have corresponding values. AU**_c acts as a mask
             if (curFrame.auMasks[i] > 0.0) {
                 double value = Math.pow(curFrame.aus[i], 0.5); // non linear curve to get to 1.
                 double prevValue = prevFrame.intensity[i];
                 double intensity = alpha * value + (1 - alpha) * prevValue; // filter
-                au_frame.setAUAPboth(OpenFaceFrame.getAUMaskNum(i), intensity);
+                au_frame.setAUAPboth(OpenFaceFrame.getAUFeatureMaskNumber(i), intensity);
             }
         }
 
@@ -264,26 +269,26 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
         }
     }
 
-    protected void headerChanged(String[] headers) {
+    protected void headerChanged(String[] newFeatures) {
         headerListeners.forEach((headerListener) -> {
-            headerListener.stringArrayChanged(headers);
+            headerListener.stringArrayChanged(newFeatures);
         });
     }
 
     /* ---------------------------------------------------------------------- */
 
     /**
-     * Set selected headers
+     * Set selected features
      *
-     * @param selected headers to use
+     * @param selected features to use
      */
     public void setSelected(String[] selected) {
         if (selected != null) {
-            if (!Arrays.equals(selected, selectedHeaders)) {
-                selectedHeaders = selected;
-                OpenFaceFrame.setSelectedHeaders(selectedHeaders);
+            if (!Arrays.equals(selected, selectedFeatures)) {
+                selectedFeatures = selected;
+                OpenFaceFrame.setSelectedFeatures(selectedFeatures);
             }
-            getLogger().info(String.format("Setting selected headers to: %s", Arrays.toString(selected)));
+            getLogger().info(String.format("Setting selected features to: %s", Arrays.toString(selected)));
         } else {
             getLogger().warning("No header selected");
         }

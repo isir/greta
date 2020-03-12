@@ -46,48 +46,48 @@ public class OpenFaceFrame {
 
     private static final Logger LOGGER = Logger.getLogger(OpenFaceFrame.class.getName());
 
-    private static class AU {
-
-        public int index;   // integer representing the column index where it's read from
-        public int num;     // number representing the AU (ex: 1, for key "AU01_r")
-
-        public AU(int index, int num) {
-            this.index = index;
-            this.num = num;
-        }
-
-        public AU(int index, String num) {
-            this.index = index;
-            this.num = Integer.parseInt(num);
-        }
-    }
-
     private final static int MAX_AUS = 18;
-    private final static List<String> expectedPreAUHeader
+    private final static List<String> expectedPreAUFeatures
             = Arrays.asList(("frame_id,face_id,timestamp,confidence,success,"
                     + "gaze_0_x,gaze_0_y,gaze_0_z,"
                     + "gaze_1_x,gaze_1_y,gaze_1_z,"
                     + "gaze_angle_x,gaze_angle_y,"
                     + "pose_Tx,pose_Ty,pose_Tz,pose_Rx,pose_Ry,pose_Rz").split(","));
 
-    private static List<String> auKeys = new ArrayList<>();
-    private static List<String> auMaskKeys = new ArrayList<>();
-    private static List<String> selectedHeaders = null;
+    private static List<String> auFeatureKeys = new ArrayList<>();
+    private static List<String> auFeatureMaskKeys = new ArrayList<>();
+    private static List<String> selectedFeatures = null;
 
-    public static String[] headers;
+    public static class AUFeature {
 
-    public static Map<String, Integer> featureKeysMap = new HashMap<>();
-    public static Map<String, AU> ausMap = new HashMap<>();
-    public static Map<String, AU> auMasksMap = new HashMap<>();
+        public int index;   // integer representing the column index where it's read from
+        public int num;     // number representing the AU (ex: 1, for key "AU01_r")
+
+        public AUFeature(int index, int num) {
+            this.index = index;
+            this.num = num;
+        }
+
+        public AUFeature(int index, String num) {
+            this.index = index;
+            this.num = Integer.parseInt(num);
+        }
+    }
+
+    public static String[] availableFeatures = new String[0];
+
+    public static Map<String, Integer> preAUFeatureKeysMap = new HashMap<>();
+    public static Map<String, AUFeature> auFeaturesMap = new HashMap<>();
+    public static Map<String, AUFeature> auFeatureMasksMap = new HashMap<>();
 
     public final static String BLINK_AU = "AU45_r";
 
-    public static int getAURCount() {
-        return ausMap.size();
+    public static int getAUFeaturesCount() {
+        return auFeaturesMap.size();
     }
 
-    public static int getAUCCount() {
-        return auMasksMap.size();
+    public static int getAUFeatureMasksCount() {
+        return auFeatureMasksMap.size();
     }
 
     public static String separator = ", *";
@@ -116,56 +116,59 @@ public class OpenFaceFrame {
 
     public static boolean readHeader(String line) {
 
-        String[] outputs = line.split(separator);
-        if (OpenFaceFrame.headers != null && Arrays.equals(OpenFaceFrame.headers, outputs)) {
+        String[] tokens = new String[0];
+
+        if (line != null) {
+            tokens = line.split(separator);
+        }
+
+        if (Arrays.equals(availableFeatures, tokens)) {
             return false;
         }
 
-        featureKeysMap.clear();
-        ausMap.clear();
-        auMasksMap.clear();
+        preAUFeatureKeysMap.clear();
+        auFeaturesMap.clear();
+        auFeatureMasksMap.clear();
 
         Pattern p = Pattern.compile("AU([0-9]+)_[rc]");
-        for (int i = 0; i < outputs.length; ++i) {
-            if (expectedPreAUHeader.contains(outputs[i])) {
-                featureKeysMap.put(outputs[i], i);
-            }
-            else {
-                Matcher m = p.matcher(outputs[i]);
+        for (int i = 0; i < tokens.length; ++i) {
+            if (expectedPreAUFeatures.contains(tokens[i])) {
+                preAUFeatureKeysMap.put(tokens[i], i);
+            } else {
+                Matcher m = p.matcher(tokens[i]);
                 if (m.matches()) {
-                    if (outputs[i].endsWith("r")) {
-                        auKeys.add(outputs[i]);
-                        ausMap.put(outputs[i], new AU(i, m.group(1)));
-                    }
-                    else if (outputs[i].endsWith("c")) {
-                        auMaskKeys.add(outputs[i]);
-                        auMasksMap.put(outputs[i], new AU(i, m.group(1)));
+                    if (tokens[i].endsWith("r")) {
+                        auFeatureKeys.add(tokens[i]);
+                        auFeaturesMap.put(tokens[i], new AUFeature(i, m.group(1)));
+                    } else if (tokens[i].endsWith("c")) {
+                        auFeatureMaskKeys.add(tokens[i]);
+                        auFeatureMasksMap.put(tokens[i], new AUFeature(i, m.group(1)));
                     }
                 }
             }
         }
 
-        OpenFaceFrame.headers = outputs;
+        availableFeatures = tokens;
 
         return true;
     }
 
-    public static int getAUNum(int index) {
-        String key = auKeys.get(index);
-        return ausMap.get(key).num;
+    public static int getAUFeatureNumber(int index) {
+        String key = auFeatureKeys.get(index);
+        return auFeaturesMap.get(key).num;
     }
 
-    public static int getAUMaskNum(int index) {
-        String key = auMaskKeys.get(index);
-        return auMasksMap.get(key).num;
+    public static int getAUFeatureMaskNumber(int index) {
+        String key = auFeatureMaskKeys.get(index);
+        return auFeatureMasksMap.get(key).num;
     }
 
-    private boolean isHeaderSelected(String header) {
-        return selectedHeaders == null || selectedHeaders.contains(header);
+    private boolean isFeatureSelected(String feature) {
+        return selectedFeatures == null || selectedFeatures.contains(feature);
     }
 
     private String readDataCol(String key, String[] cols, Map<String, Integer> set) {
-        if (isHeaderSelected(key)) {
+        if (isFeatureSelected(key)) {
             if (set.containsKey(key)) {
                 return cols[set.get(key)];
             } else {
@@ -175,8 +178,8 @@ public class OpenFaceFrame {
         return "0";
     }
 
-    private double readAUDataCol(String key, String[] cols, Map<String, AU> set) {
-        if (isHeaderSelected(key)) {
+    private double readAUDataCol(String key, String[] cols, Map<String, AUFeature> set) {
+        if (isFeatureSelected(key)) {
             return Double.parseDouble(cols[set.get(key).index]);
         }
         return 0.0;
@@ -186,40 +189,40 @@ public class OpenFaceFrame {
 
         String[] outputs = data.split(separator);
 
-        frameId     = Integer.parseInt(readDataCol("frame_id", outputs, featureKeysMap));
-        faceId      = Integer.parseInt(readDataCol("face_id", outputs, featureKeysMap));
-        timestamp   = Double.parseDouble(readDataCol("timestamp", outputs, featureKeysMap));
-        confidence  = Double.parseDouble(readDataCol("confidence", outputs, featureKeysMap));
-        success     = Integer.parseInt(readDataCol("success", outputs, featureKeysMap)) == 1;
+        frameId     = Integer.parseInt(readDataCol("frame_id", outputs, preAUFeatureKeysMap));
+        faceId      = Integer.parseInt(readDataCol("face_id", outputs, preAUFeatureKeysMap));
+        timestamp   = Double.parseDouble(readDataCol("timestamp", outputs, preAUFeatureKeysMap));
+        confidence  = Double.parseDouble(readDataCol("confidence", outputs, preAUFeatureKeysMap));
+        success     = Integer.parseInt(readDataCol("success", outputs, preAUFeatureKeysMap)) == 1;
 
-        gaze0.set(Double.parseDouble(readDataCol("gaze_0_x", outputs, featureKeysMap)),
-                Double.parseDouble(readDataCol("gaze_0_y", outputs, featureKeysMap)),
-                Double.parseDouble(readDataCol("gaze_0_z", outputs, featureKeysMap)));
-        gaze1.set(Double.parseDouble(readDataCol("gaze_1_x", outputs, featureKeysMap)),
-                Double.parseDouble(readDataCol("gaze_1_y", outputs, featureKeysMap)),
-                Double.parseDouble(readDataCol("gaze_1_z", outputs, featureKeysMap)));
+        gaze0.set(Double.parseDouble(readDataCol("gaze_0_x", outputs, preAUFeatureKeysMap)),
+                Double.parseDouble(readDataCol("gaze_0_y", outputs, preAUFeatureKeysMap)),
+                Double.parseDouble(readDataCol("gaze_0_z", outputs, preAUFeatureKeysMap)));
+        gaze1.set(Double.parseDouble(readDataCol("gaze_1_x", outputs, preAUFeatureKeysMap)),
+                Double.parseDouble(readDataCol("gaze_1_y", outputs, preAUFeatureKeysMap)),
+                Double.parseDouble(readDataCol("gaze_1_z", outputs, preAUFeatureKeysMap)));
 
-        gazeAngleX  = Double.parseDouble(readDataCol("gaze_angle_x", outputs, featureKeysMap));
-        gazeAngleX  = Double.parseDouble(readDataCol("gaze_angle_y", outputs, featureKeysMap));
+        gazeAngleX  = Double.parseDouble(readDataCol("gaze_angle_x", outputs, preAUFeatureKeysMap));
+        gazeAngleY  = Double.parseDouble(readDataCol("gaze_angle_y", outputs, preAUFeatureKeysMap));
 
-        headPoseT.set(Double.parseDouble(readDataCol("pose_Tx", outputs, featureKeysMap)),
-                Double.parseDouble(readDataCol("pose_Ty", outputs, featureKeysMap)),
-                Double.parseDouble(readDataCol("pose_Tz", outputs, featureKeysMap)));
-        headPoseR.set(Double.parseDouble(readDataCol("pose_Rx", outputs, featureKeysMap)),
-                Double.parseDouble(readDataCol("pose_Ry", outputs, featureKeysMap)),
-                Double.parseDouble(readDataCol("pose_Rz", outputs, featureKeysMap)));
+        headPoseT.set(Double.parseDouble(readDataCol("pose_Tx", outputs, preAUFeatureKeysMap)),
+                Double.parseDouble(readDataCol("pose_Ty", outputs, preAUFeatureKeysMap)),
+                Double.parseDouble(readDataCol("pose_Tz", outputs, preAUFeatureKeysMap)));
+        headPoseR.set(Double.parseDouble(readDataCol("pose_Rx", outputs, preAUFeatureKeysMap)),
+                Double.parseDouble(readDataCol("pose_Ry", outputs, preAUFeatureKeysMap)),
+                Double.parseDouble(readDataCol("pose_Rz", outputs, preAUFeatureKeysMap)));
 
         int i = 0;
-        for (String key : ausMap.keySet()) {
-            aus[i] = readAUDataCol(key, outputs, ausMap) / 5.0; // AU**_r are between 0-5.0
+        for (String key : auFeaturesMap.keySet()) {
+            aus[i] = readAUDataCol(key, outputs, auFeaturesMap) / 5.0; // AU**_r are between 0-5.0
             if (BLINK_AU.equals(key)) {
                 blink = aus[i];
             }
             ++i;
         }
         i = 0;
-        for (String key : auMasksMap.keySet()) {
-            auMasks[i++] = readAUDataCol(key, outputs, auMasksMap);
+        for (String key : auFeatureMasksMap.keySet()) {
+            auMasks[i++] = readAUDataCol(key, outputs, auFeatureMasksMap);
         }
     }
 
@@ -251,23 +254,23 @@ public class OpenFaceFrame {
     }
 
     /**
-     * @return the selectedHeaders
+     * @return the selected output features
      */
-    public static List<String> getSelectedHeaders() {
-        return selectedHeaders;
+    public static List<String> getSelectedFeatures() {
+        return selectedFeatures;
     }
 
     /**
-     * @param aSelectedHeaders the selectedHeaders to set
+     * @param features the selected output features to set
      */
-    public static void setSelectedHeaders(List<String> aSelectedHeaders) {
-        selectedHeaders = aSelectedHeaders;
+    public static void setSelectedFeatures(List<String> features) {
+        selectedFeatures = features;
     }
 
     /**
-     * @param headers the selectedHeaders to set
+     * @param features the selected output features to set
      */
-    public static void setSelectedHeaders(String[] headers) {
-        selectedHeaders = Arrays.asList(headers);
+    public static void setSelectedFeatures(String[] features) {
+        setSelectedFeatures(Arrays.asList(features));
     }
 }

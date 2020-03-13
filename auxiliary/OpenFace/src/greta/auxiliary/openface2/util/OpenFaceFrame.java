@@ -31,7 +31,7 @@ import java.util.regex.Pattern;
  * This file represents an OpenFace2 frame
  *
  * Format based on <https://github.com/TadasBaltrusaitis/OpenFace>:
- * frame_id,        face_id,        timestamp,      confidence,     success,
+ * frame,           face_id,        timestamp,      confidence,     success,
  * gaze_0_x,        gaze_0_y,       gaze_0_z,
  * gaze_1_x,        gaze_1_y,       gaze_1_z,
  * gaze_angle_x,    gaze_angle_y,
@@ -48,7 +48,7 @@ public class OpenFaceFrame {
 
     private final static int MAX_AUS = 18;
     private final static List<String> expectedPreAUFeatures
-            = Arrays.asList(("frame_id,face_id,timestamp,confidence,success,"
+            = Arrays.asList(("frame,face_id,timestamp,confidence,success,"
                     + "gaze_0_x,gaze_0_y,gaze_0_z,"
                     + "gaze_1_x,gaze_1_y,gaze_1_z,"
                     + "gaze_angle_x,gaze_angle_y,"
@@ -92,7 +92,7 @@ public class OpenFaceFrame {
 
     public static String separator = ", *";
 
-    public int frameId = 0;
+    public int frameNumber = 0;
     public int faceId = 0;
 
     public double timestamp = 0.0;
@@ -189,7 +189,7 @@ public class OpenFaceFrame {
 
         String[] outputs = data.split(separator);
 
-        frameId     = Integer.parseInt(readDataCol("frame_id", outputs, preAUFeatureKeysMap));
+        frameNumber = Integer.parseInt(readDataCol("frame", outputs, preAUFeatureKeysMap));
         faceId      = Integer.parseInt(readDataCol("face_id", outputs, preAUFeatureKeysMap));
         timestamp   = Double.parseDouble(readDataCol("timestamp", outputs, preAUFeatureKeysMap));
         confidence  = Double.parseDouble(readDataCol("confidence", outputs, preAUFeatureKeysMap));
@@ -237,17 +237,17 @@ public class OpenFaceFrame {
     }
 
     public void copy(OpenFaceFrame f) {
-        frameId     = f.frameId;
-        faceId      = f.faceId;
-        timestamp   = f.timestamp;
-        confidence  = f.confidence;
-        success     = f.success;
-        gaze0       = f.gaze0.clone();
-        gaze1       = f.gaze1.clone();
-        gazeAngleX  = f.gazeAngleX;
-        gazeAngleY  = f.gazeAngleY;
-        headPoseT   = f.headPoseT.clone();
-        headPoseR   = f.headPoseR.clone();
+        frameNumber    = f.frameNumber;
+        faceId         = f.faceId;
+        timestamp      = f.timestamp;
+        confidence     = f.confidence;
+        success        = f.success;
+        gaze0          = f.gaze0.clone();
+        gaze1          = f.gaze1.clone();
+        gazeAngleX     = f.gazeAngleX;
+        gazeAngleY     = f.gazeAngleY;
+        headPoseT      = f.headPoseT.clone();
+        headPoseR      = f.headPoseR.clone();
         System.arraycopy(f.aus,         0, aus,         0, f.aus.length);
         System.arraycopy(f.auMasks,     0, auMasks,     0, f.auMasks.length);
         System.arraycopy(f.intensity,   0, intensity,   0, f.intensity.length);

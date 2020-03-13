@@ -125,18 +125,17 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
             prevFrame.copy(curFrame);
 
             if (startInputFrame == 0) {
-                startInputFrame = curFrame.frameId;
+                startInputFrame = curFrame.frameNumber;
             }
 
             curFrame.readDataLine(line);
-            //curFrame.frameId += offsetFrame-startInputFrame + curGretaFrame;
-            curFrame.frameId = offsetFrame + curGretaFrame;
-            int frameDiff = curFrame.frameId - prevFrame.frameId;
+            //curFrame.frameNumber += offsetFrame-startInputFrame + curGretaFrame;
+            curFrame.frameNumber = offsetFrame + curGretaFrame;
+            int frameDiff = curFrame.frameNumber - prevFrame.frameNumber;
             if (frameDiff < 10 && frameDiff > 0) { // If less than 10 frame delay
                 frameDuration = curFrame.timestamp - prevFrame.timestamp;
-
                 fps = 1.0 / frameDuration;
-                //LOGGER.info(String.format("frameid: %d, fps:%f, f dur:%f",curFrame.frameId, fps, frameDuration));
+                //LOGGER.info(String.format("frameNumber: %d, fps:%f, f dur:%f",curFrame.frameNumber, fps, frameDuration));
                 processOpenFace();
             }
         }
@@ -145,7 +144,7 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     private void processOpenFace() {
 
         // Format based on <https://github.com/TadasBaltrusaitis/OpenFace>:
-        // frame_id,        face_id,        timestamp,      confidence,     success,
+        // frame,           face_id,        timestamp,      confidence,     success,
         // gaze_0_x,        gaze_0_y,       gaze_0_z,
         // gaze_1_x,        gaze_1_y,       gaze_1_z,
         // gaze_angle_x,    gaze_angle_y,
@@ -169,7 +168,7 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
 
     private AUAPFrame makeAUFrame() {
         AUAPFrame au_frame = new AUAPFrame();
-        au_frame.setFrameNumber(curFrame.frameId);
+        au_frame.setFrameNumber(curFrame.frameNumber);
 
         for (int i = 0; i < OpenFaceFrame.getAUFeatureMasksCount(); ++i) {
             // we assume both tables have corresponding values. AU**_c acts as a mask
@@ -208,11 +207,15 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
 
     private BAPFrame makeBAPFrame() {
         BAPFrame hmFrame = new BAPFrame();
-        hmFrame.setFrameNumber(curFrame.frameId);
+        hmFrame.setFrameNumber(curFrame.frameNumber);
 
-        double rot_X_deg = curFrame.headPoseR.x();
-        double rot_Y_deg = -1.0 * curFrame.headPoseR.y();
-        double rot_Z_deg = -1.0 * curFrame.headPoseR.z();
+        double rot_X_rad = curFrame.headPoseR.x();
+        double rot_Y_rad = -1.0 * curFrame.headPoseR.y();
+        double rot_Z_rad = -1.0 * curFrame.headPoseR.z();
+
+        double rot_X_deg = rot_X_rad * 180 / Math.PI;
+        double rot_Y_deg = rot_Y_rad * 180 / Math.PI;
+        double rot_Z_deg = rot_Z_rad * 180 / Math.PI;
 
         rot_X_deg = alpha * (rot_X_deg) + (1 - alpha) * prev_rot_X;
         rot_Y_deg = alpha * (rot_Y_deg) + (1 - alpha) * prev_rot_Y;

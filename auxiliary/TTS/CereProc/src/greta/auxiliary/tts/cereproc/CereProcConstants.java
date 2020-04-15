@@ -49,7 +49,7 @@ public class CereProcConstants {
     public static String VOICES_PATH;
 
     public static final String DEFAULT_LANGUAGE = "en-GB";
-    public static final String DEFAULT_VOICE = "sarah";
+    public static final String DEFAULT_VOICE = "Sarah";
 
     /** Correspondence map of phonemes between Greta and CereProc */
     public static final Map<String,Map<String,PhonemeType[]>> correspondingPhonemes = new HashMap<String,Map<String,PhonemeType[]>>();   // Map of correspondences for all available languages

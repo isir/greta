@@ -121,19 +121,17 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                 LOAD_ABSOLUTE_PATH = IniManager.getProgramPath() + CereProcConstants.DEPENDENCIES_PATH + ARCH_FOLDER;
                 // Check if dependencies folder exist
                 if (checkFolder(LOAD_ABSOLUTE_PATH)) {
-                    System.load(LOAD_ABSOLUTE_PATH + "libgcc_s_sjlj-1.dll");
-                    System.load(LOAD_ABSOLUTE_PATH + "libstdc++-6.dll");
                     System.load(LOAD_ABSOLUTE_PATH + "cerevoice_eng.dll");
                 }
                 else {
-                    Logs.error("CereProcTTS failed to find required dependencies (libgcc_s_sjlj-1.dll, libstdc++-6.dll and cerevoice_eng.dll) at [" + LOAD_ABSOLUTE_PATH + "], please check the CEREPROC_DEPENDENCIES_PATH option in {Greta}/bin/Greta.ini.");
+                    Logs.error("CereProcTTS failed to find required dependencies (cerevoice_eng.dll) at [" + LOAD_ABSOLUTE_PATH + "], please check the CEREPROC_DEPENDENCIES_PATH option in {Greta}/bin/Greta.ini.");
                     functional = false;
                 }
 
             } else if (osName.contains("mac")) {
 
-                // On Mac OS X a single lib handles both 32 and 64 bits
-                ARCH_FOLDER = "MacOSX/";
+                // On macOS a single lib handles both 32 and 64 bits
+                ARCH_FOLDER = "macOS/";
 
                 // Load dependencies
                 LOAD_ABSOLUTE_PATH = IniManager.getProgramPath() + CereProcConstants.DEPENDENCIES_PATH + ARCH_FOLDER;
@@ -216,7 +214,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         if (!loadDefault) {
             licensePath = toCereProcLicensePath(language, voice);
             voicePath = toCereProcVoicePath(language, voice);
-            cereprocVoiceLoadedFlag = cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, licensePath, "", voicePath, CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD);
+            cereprocVoiceLoadedFlag = cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, voicePath, "", CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD, licensePath, "", "", "");
         } else {
             loadDefaultVoiceLanguage();
         }
@@ -225,7 +223,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
 	    Logs.error("CereProcTTS is unable to load the voice file '" + voicePath + "', using default voice[" + CereProcConstants.DEFAULT_VOICE + "] and default language [" + CereProcConstants.DEFAULT_LANGUAGE + "]");
             if (!loadDefaultVoiceLanguage())
             {
-                Logs.error("CereProcTTS is unable to load the default voice file. Please check that the folder [" + VOICES_ABSOLUTE_PATH + "] exists and the subfolders (e.g. /en-gb-sarah) contain the specified voices and licenses.");
+                Logs.error("CereProcTTS is unable to load the default voice file. Please check that the folder [" + VOICES_ABSOLUTE_PATH + "] exists and the subfolders (e.g. /en-GB-Sarah) contain the specified voices and licenses.");
                 return false;
             }
             else {
@@ -751,17 +749,17 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     }
 
      /**
-     * Builds the path to the CereProc's voice for the current version of the TTS (3.2.0_48k).<br/>
+     * Builds the path to the CereProc's voice for the current version of the TTS (6.0.0_48k_standard).<br/>
      * @param characterLanguage the language parameter (e.g. en-GB) retrieved from the {@code CharacterManager}
      * @param characterVoice the voice name retrieved from the {@code CharacterManager}
      * @return the path to the CereProc's voice for the current character
      */
     public String toCereProcVoicePath(String characterLanguage, String characterVoice) {
-        return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_3.2.0_48k.voice";
+        return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_48k_standard.voice";
     }
 
          /**
-     * Builds the path to the CereProc's license for the current version of the TTS (3.2.0_48k).<br/>
+     * Builds the path to the CereProc's license for the current version of the TTS (6.0.0_48k_standard).<br/>
      * @param characterLanguage the language parameter (e.g. en-GB) retrieved from the {@code CharacterManager}
      * @param characterVoice the voice name retrieved from the {@code CharacterManager}
      * @return the path to the CereProc's license for the current character's voice
@@ -790,7 +788,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                 // Load defaults
                 if (!loadDefaultVoiceLanguage())
                 {
-                    Logs.error("CereProcTTS is unable to load the default voice file. Please check that the folder [" + VOICES_ABSOLUTE_PATH + "] exists and the subfolders (e.g. /en-gb-sarah) contain the specified voices and licenses.");
+                    Logs.error("CereProcTTS is unable to load the default voice file. Please check that the folder [" + VOICES_ABSOLUTE_PATH + "] exists and the subfolders (e.g. /en-GB-Sarah) contain the specified voices and licenses.");
                 }
                 else {
                     Logs.info("CereProcTTS: default voice [" + CereProcConstants.DEFAULT_VOICE + "] with language [" + CereProcConstants.DEFAULT_LANGUAGE + "] succesfeully loaded.");
@@ -811,7 +809,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                 Logs.info("CereProcTTS: loading voice [" + newVoiceName + "] with language [" + newLanguage + "]");
                 String licensePath = toCereProcLicensePath(newLanguage, newVoiceName);
                 String voicePath = toCereProcVoicePath(newLanguage, newVoiceName);
-                cereprocVoiceLoadedFlag = cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, licensePath, "", voicePath, CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD);
+                cereprocVoiceLoadedFlag = cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, voicePath, "", CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD, licensePath, "", "", "");
 
                 if (cereprocVoiceLoadedFlag != 0) {
                     // Re-open the default synthesis channel
@@ -826,7 +824,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     Logs.error("CereProcTTS is unable to load voice file '" + voicePath + "' reverting to previous voice [" + voiceName + "]");
                     licensePath = toCereProcLicensePath(languageID, voiceName);
                     voicePath = toCereProcVoicePath(languageID, voiceName);
-                    cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, licensePath, "", voicePath, CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD);
+                    cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, voicePath, "", CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD, licensePath, "", "", "");
 
                     channelHandle = cerevoice_eng.CPRCEN_engine_open_default_channel(engineCereProc);
                     if (channelHandle == 0) {
@@ -850,7 +848,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     private boolean loadDefaultVoiceLanguage() {
         String licensePath = toCereProcLicensePath(CereProcConstants.DEFAULT_LANGUAGE, CereProcConstants.DEFAULT_VOICE);
         String voicePath = toCereProcVoicePath(CereProcConstants.DEFAULT_LANGUAGE, CereProcConstants.DEFAULT_VOICE);
-        if (cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, licensePath, "", voicePath, CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD) == 0)
+        if (cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, voicePath, "", CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD, licensePath, "", "", "") == 0)
         {
             return false;
         }

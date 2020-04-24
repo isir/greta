@@ -4657,7 +4657,7 @@
             </hand>
         </phase>
     </gesture>
-    <gesture category="rest" id="along_big">
+    <gesture category="rest" id="Along_big">
         <phase>
             <hand openness="0.3700000000000001" side="LEFT">
                 <uniformPosition>
@@ -4915,7 +4915,7 @@
             </hand>
         </phase>
     </gesture>
-    <gesture category="rest" id="hold_Ges_B">
+    <gesture category="rest" id="Hold_Ges_B">
         <phase>
             <hand openness="0.5400000000000009" side="LEFT">
                 <uniformPosition>

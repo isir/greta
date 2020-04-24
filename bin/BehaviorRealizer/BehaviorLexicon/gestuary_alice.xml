@@ -6084,7 +6084,7 @@
             </hand>
         </phase>
     </gesture>
-    <gesture category="rest" id="hold_Ges_B">
+    <gesture category="rest" id="Hold_Ges_B">
         <phase>
             <hand openness="0.55" side="LEFT">
                 <uniformPosition>

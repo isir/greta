@@ -39,6 +39,7 @@
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/EmotionML"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/EnvironmentManager"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/FMLAnnotator"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/GroupBehavior"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/OgrePlayer"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/PlanCapture"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SocialParameters"/>

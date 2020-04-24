@@ -173,6 +173,7 @@
                     </menu>
                 </menu>
             </menu>
+            <item module="Group Behavior" name="Group Behavior"/>
         </menu>
     </menus>
     <!-- list of all modules that can be used -->
@@ -960,6 +961,16 @@
                 <link method="setCore" on="frame"/>
             </frame>
         </module>
+        <module name="Group Behavior" style="DEFAULT">
+            <object class="greta.auxiliary.groupbehavior.GroupBehaviorMain" lib_id="greta_group_behavior"/>
+            <frame class="greta.auxiliary.groupbehavior.GroupBehaviorFrame" lib_id="greta_group_behavior" type="frame">
+                <link method="setGroupBehaviorMain" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="COUCH/GBM/REQUEST" get_method="getRequestTopic" get_on="object" name="requestTopic" set_method="setRequestTopic" set_on="object" type="string"/>
+            <parameter default="COUCH/GBM/RESPONSE" get_method="getResponseTopic" get_on="object" name="responseTopic" set_method="setResponseTopic" set_on="object" type="string"/>
+        </module>
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1102,6 +1113,13 @@
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_utilx"/>
+        </lib>
+        <lib id="greta_group_behavior" path="./Common/Lib/Internal/GroupBehavior.jar">
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="ext_jackson-annotations"/>
+            <depends lib_id="ext_jackson-core"/>
+            <depends lib_id="ext_jackson-databind"/>
+            <depends lib_id="greta_activemq"/>
         </lib>
         <lib id="greta_intentions" path="./Common/Lib/Internal/Intentions.jar">
             <depends lib_id="greta_util"/>

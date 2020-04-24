@@ -95,9 +95,9 @@
                     module="Feedbacks" name="Feedbacks #1" w="80.0"
                     x="240.0" y="30.0"/>
                 <element h="70.0"
-                    id="ActiveMQ Meaning Miner FML Receiver - 1554132728732-441"
-                    module="ActiveMQ Meaning Miner FML Receiver"
-                    name="ActiveMQ Meaning Miner FML Receiver #1" w="80.0"
+                    id="ActiveMQ FML Receiver - 1554132728732-441"
+                    module="ActiveMQ FML Receiver"
+                    name="ActiveMQ FML Receiver #1" w="80.0"
                     x="0.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
@@ -167,9 +167,9 @@
                     <window h="100" visible="true" w="520" x="1270" y="400"/>
                 </element>
                 <element h="70.0"
-                    id="ActiveMQ Meaning Miner FML Receiver - 1571048164657-48"
-                    module="ActiveMQ Meaning Miner FML Receiver"
-                    name="ActiveMQ Meaning Miner FML Receiver #2" w="80.0"
+                    id="ActiveMQ FML Receiver - 1571048164657-48"
+                    module="ActiveMQ FML Receiver"
+                    name="ActiveMQ FML Receiver #2" w="80.0"
                     x="0.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
@@ -411,7 +411,7 @@
         <connection connector="SignalEmitterToSignalPerformer"
             source="Behavior Planner - 1545228689924-565" target="Feedbacks - 1554132717338-53"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
-            source="ActiveMQ Meaning Miner FML Receiver - 1571048164657-48" target="Behavior Planner - 1571048020905-618"/>
+            source="ActiveMQ FML Receiver - 1571048164657-48" target="Behavior Planner - 1571048020905-618"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1545228717780-228" target="MPEG4 Animatable - 1545228808979-301"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer"
@@ -425,7 +425,7 @@
         <connection connector="SignalEmitterToSignalPerformer"
             source="ActiveMQ BML Receiver - 1554117362832-889" target="Behavior Realizer - 1545228702171-304"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
-            source="ActiveMQ Meaning Miner FML Receiver - 1554132728732-441" target="Behavior Planner - 1545228689924-565"/>
+            source="ActiveMQ FML Receiver - 1554132728732-441" target="Behavior Planner - 1545228689924-565"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4 Animatable - 1571048631079-434" target="Environment - 1545228639037-145"/>
         <connection connector="SignalEmitterToSignalPerformer"

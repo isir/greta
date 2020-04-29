@@ -19,6 +19,7 @@ package greta.auxiliary.openface2;
 
 import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
 import greta.auxiliary.openface2.util.OpenFaceFrame;
+import greta.auxiliary.openface2.util.ArrayOfDoubleFilter;
 import greta.auxiliary.openface2.util.StringArrayListener;
 import greta.auxiliary.zeromq.ConnectionListener;
 import greta.core.animation.mpeg4.bap.BAPFrame;
@@ -60,6 +61,8 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     private double frameDuration = 0.0;
     private OpenFaceFrame curFrame = new OpenFaceFrame();
     private OpenFaceFrame prevFrame = new OpenFaceFrame();
+    private ArrayOfDoubleFilter filter = new ArrayOfDoubleFilter(64,5);
+    private boolean useFilter = true;
 
     // loop variables
     private double prev_rot_X = 0.0;
@@ -75,6 +78,15 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     private double prev_blink = 0.0;
 
     private double alpha = 0.75; //1.0;
+    
+    
+    public int getFilterMaxQueueSize(){
+        return filter.getMaxSizePerQueue();
+    }
+    
+    public void setFilterMaxQueueSize(int i){
+        filter.setMaxSizePerQueue(i);
+    }
 
     /* ---------------------------------------------------------------------- */
 
@@ -159,12 +171,14 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
                 }
                 if (frameDuration < min_time) {
                     min_time = frameDuration;
-                }
+                }              
                 sendAUFrame(makeAUFrame());
                 sendBAPFrame(makeBAPFrame());
             }
         }
     }
+    
+   
 
     private AUAPFrame makeAUFrame() {
         AUAPFrame au_frame = new AUAPFrame();
@@ -174,11 +188,20 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
             // we assume both tables have corresponding values. AU**_c acts as a mask
             if (curFrame.auMasks[i] > 0.0) {
                 double value = Math.pow(curFrame.aus[i], 0.5); // non linear curve to get to 1.
-                double prevValue = prevFrame.intensity[i];
-                double intensity = alpha * value + (1 - alpha) * prevValue; // filter
+                double intensity;
+                if(isUseFilter()){
+                    filter.push(i, value);                
+                    intensity = filter.getFiltered(i);//alpha * value + (1 - alpha) * prevValue; // filter
+                }
+                else{
+                    double prevValue = prevFrame.intensity[i];
+                    intensity = alpha * value + (1 - alpha) * prevValue; // filter
+                }
+                
                 au_frame.setAUAPboth(OpenFaceFrame.getAUFeatureMaskNumber(i), intensity);
             }
         }
+        
 
         // gaze
         double gaze_x = alpha * (0.5 * (curFrame.gaze0.x() + curFrame.gaze1.x())) + (1 - alpha) * prev_gaze_x;
@@ -317,5 +340,20 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
         removeConnectionListener(loader);
         removeHeaderListener(loader);
         super.finalize();
+    }
+
+    /**
+     * @return the useFilter
+     */
+    public boolean isUseFilter() {
+        return useFilter;
+    }
+
+    /**
+     * @param useFilter the useFilter to set
+     */
+    public void setUseFilter(boolean useFilter) {
+        getLogger().info("setUseFilter: "+useFilter);
+        this.useFilter = useFilter;
     }
 }

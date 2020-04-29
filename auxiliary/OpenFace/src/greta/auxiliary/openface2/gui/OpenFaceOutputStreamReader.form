@@ -418,14 +418,58 @@
                 <AuxValue name="classDetails" type="java.lang.String" value="Box.Filler.HorizontalStrut"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JCheckBox" name="performCheckBox">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Perform"/>
-                <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
-                  <Insets value="[10, 2, 2, 2]"/>
-                </Property>
-              </Properties>
-            </Component>
+            <Container class="javax.swing.JPanel" name="jPanel1">
+
+              <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBoxLayout">
+                <Property name="axis" type="int" value="1"/>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JCheckBox" name="performCheckBox">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="Perform"/>
+                    <Property name="margin" type="java.awt.Insets" editor="org.netbeans.beaninfo.editors.InsetsEditor">
+                      <Insets value="[10, 2, 2, 2]"/>
+                    </Property>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="performCheckBoxActionPerformed"/>
+                  </Events>
+                </Component>
+                <Container class="javax.swing.JPanel" name="jPanel2">
+                  <Properties>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                        <TitledBorder/>
+                      </Border>
+                    </Property>
+                    <Property name="toolTipText" type="java.lang.String" value="Fitler"/>
+                    <Property name="name" type="java.lang.String" value="Filter" noResource="true"/>
+                  </Properties>
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout"/>
+                  <SubComponents>
+                    <Component class="javax.swing.JCheckBox" name="filterCheckBox">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Filter"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterCheckBoxActionPerformed"/>
+                      </Events>
+                    </Component>
+                    <Component class="javax.swing.JSpinner" name="filterMaxQueueSizeSpinner">
+                      <Properties>
+                        <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection code="zeroMQReader.getFilterMaxQueueSize()" type="code"/>
+                        </Property>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="filterMaxQueueSizeSpinnerStateChanged"/>
+                      </Events>
+                    </Component>
+                  </SubComponents>
+                </Container>
+              </SubComponents>
+            </Container>
             <Component class="javax.swing.Box$Filler" name="northPanelFiller2">
               <Properties>
                 <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">

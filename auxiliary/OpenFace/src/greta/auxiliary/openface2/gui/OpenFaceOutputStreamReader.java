@@ -67,7 +67,15 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private OpenFaceOutputStreamZeroMQReader zeroMQReader = new OpenFaceOutputStreamZeroMQReader(this);
 
     /* ---------------------------------------------------------------------- */
-
+    public int getFilterMaxQueueSize(){
+        return zeroMQReader.getFilterMaxQueueSize();
+    }
+    
+    public void setFilterMaxQueueSize(int i){
+        zeroMQReader.setFilterMaxQueueSize(i);
+        csvReader.setFilterMaxQueueSize(i);
+    }    
+    
     /**
      * Creates new form OpenFaceOutputStreamReader
      */
@@ -93,6 +101,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         }
         updateConnectedLabels();
         updateIOPanelsEnabled(connected);
+        filterCheckBox.setSelected(zeroMQReader.isUseFilter());
     }
 
     private void updateCSVReader() {
@@ -176,7 +185,11 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         zeroMQConnectorPanelFiller4 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         zeroMQConnectButton = new javax.swing.JButton();
         northPanelFiller1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+        jPanel1 = new javax.swing.JPanel();
         performCheckBox = new javax.swing.JCheckBox();
+        jPanel2 = new javax.swing.JPanel();
+        filterCheckBox = new javax.swing.JCheckBox();
+        filterMaxQueueSizeSpinner = new javax.swing.JSpinner();
         northPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         centerPanel = new javax.swing.JPanel();
         separator = new javax.swing.JSeparator();
@@ -337,9 +350,40 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         northPanel.add(inputTabbedPane);
         northPanel.add(northPanelFiller1);
 
+        jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+
         performCheckBox.setText("Perform");
         performCheckBox.setMargin(new java.awt.Insets(10, 2, 2, 2));
-        northPanel.add(performCheckBox);
+        performCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                performCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel1.add(performCheckBox);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel2.setToolTipText("Fitler");
+        jPanel2.setName("Filter"); // NOI18N
+
+        filterCheckBox.setText("Filter");
+        filterCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                filterCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel2.add(filterCheckBox);
+
+        filterMaxQueueSizeSpinner.setValue(zeroMQReader.getFilterMaxQueueSize());
+        filterMaxQueueSizeSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                filterMaxQueueSizeSpinnerStateChanged(evt);
+            }
+        });
+        jPanel2.add(filterMaxQueueSizeSpinner);
+
+        jPanel1.add(jPanel2);
+
+        northPanel.add(jPanel1);
         northPanel.add(northPanelFiller2);
 
         mainPanel.add(northPanel, java.awt.BorderLayout.NORTH);
@@ -585,6 +629,29 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         }
     }//GEN-LAST:event_downButtonActionPerformed
 
+    private void filterCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterCheckBoxActionPerformed
+        zeroMQReader.setUseFilter(filterCheckBox.isSelected());
+        csvReader.setUseFilter(filterCheckBox.isSelected());
+    }//GEN-LAST:event_filterCheckBoxActionPerformed
+
+    private void performCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_performCheckBoxActionPerformed
+
+    private void filterMaxQueueSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_filterMaxQueueSizeSpinnerStateChanged
+        try {
+            filterMaxQueueSizeSpinner.commitEdit();
+        } catch ( java.text.ParseException e ) {  }
+        int value = (Integer) filterMaxQueueSizeSpinner.getValue();
+        if(value<1 || value > 1000){
+            value = 10;
+            filterMaxQueueSizeSpinner.setValue(value);
+        }
+            
+        zeroMQReader.setFilterMaxQueueSize(value);
+        csvReader.setFilterMaxQueueSize(value);
+    }//GEN-LAST:event_filterMaxQueueSizeSpinnerStateChanged
+
     /* ---------------------------------------------------------------------- */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -607,7 +674,11 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.Box.Filler csvTabFiller3;
     private javax.swing.JButton downButton;
     private javax.swing.JTable featuresTable;
+    private javax.swing.JCheckBox filterCheckBox;
+    private javax.swing.JSpinner filterMaxQueueSizeSpinner;
     private javax.swing.JTabbedPane inputTabbedPane;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel northPanel;
     private javax.swing.Box.Filler northPanelFiller1;
@@ -753,7 +824,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     }
 
     public void sendAUFrame(AUAPFrame auFrame, ID id) {
-        LOGGER.info("sendAUFrame");
+        //LOGGER.info("sendAUFrame");
         auEmitter.performAUAPFrame(auFrame, id);
     }
 
@@ -778,7 +849,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     }
 
     public void sendBAPFrame(BAPFrame bapFrame, ID id) {
-        LOGGER.info("sendBAPFrame");
+        //LOGGER.info("sendBAPFrame");
         bapFrameEmitter.sendBAPFrame(id, bapFrame);
     }
 

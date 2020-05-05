@@ -154,15 +154,15 @@
             source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Behavior Planner - 1544700734561-356" target="Feedbacks - 1571996970388-168"/>
-        <connection connector="BAPFramesEmitterToBAPFramesPerformer"
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="LipSourceForLipBlender"
             source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="FAPFramesEmitterToFAPFramesPerformer"
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="addFeedbackInput"
             source="Behavior Realizer - 1544712930520-534" target="Feedbacks - 1571996970388-168"/>

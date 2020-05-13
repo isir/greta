@@ -224,7 +224,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             currentGazes.put(gaze, Timer.getTimeMillis());
 
             //euler angles to target + offset, for head
-            HeadAngles headAngles = new HeadAngles(this.env, gaze);
+            HeadAndEyesAngles headAngles = new HeadAndEyesAngles(this.env, gaze);
 
             // head angles give by the additional rotation of each cervical vertebrae
             double agentHeadPitch = currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc1_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc2_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc3_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc4_tilt) +
@@ -602,7 +602,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             String gazeId = gaze.getId();
 
             //euler angles to target + offset, for head
-            HeadAngles headAngles = new HeadAngles(this.env, gaze);
+            HeadAndEyesAngles headAngles = new HeadAndEyesAngles(this.env, gaze);
 
             //euler angles to target + offset, for shoulder (same for torso)
             ShouldersAngles shouldersAngles = new ShouldersAngles(this.env, gaze, headAngles);
@@ -761,12 +761,12 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     timesWithEyesKeyframes.add(timeBackHeadAtZero);
 
                     // calculate the max speed of the head depending on the rotation angle
-                    Amin = Math.toDegrees(Math.abs(Math.min(shouldersAngles.headAngles.leftLimitedYaw * EYES_YAW_LIMIT, shouldersAngles.headAngles.rightLimitedYaw * EYES_YAW_LIMIT)));
+                    Amin = Math.toDegrees(Math.abs(Math.min(shouldersAngles.headAngles.leftEyeLimitedYaw * EYES_YAW_LIMIT, shouldersAngles.headAngles.rightEyeLimitedYaw * EYES_YAW_LIMIT)));
                     //AminPitch = Math.toDegrees(Math.abs(Math.min(shouldersAngles.headAngles.leftLimitedPitch*EYES_PITCH_LIMIT, shouldersAngles.headAngles.rightLimitedPitch*EYES_PITCH_LIMIT)));
                     eyesMaxSpeed = Math.toRadians((2*Amin/75 + 1f/6)*Math.toDegrees(EYES_ANGULAR_SPEED));
                     //eyesMaxSpeedPitch = Math.toRadians((2*AminPitch/75 + 1f/6)*Math.toDegrees(EYES_ANGULAR_SPEED));
-                    timeEyesAtTarget = Math.min(start +Math.abs(shouldersAngles.headAngles.leftLimitedYaw * EYES_YAW_LIMIT)/ eyesMaxSpeed, start + Math.abs(shouldersAngles.headAngles.rightLimitedYaw *EYES_YAW_LIMIT)/ eyesMaxSpeed);
-                    timeBackEyesAtZero = Math.min(relax + Math.abs(shouldersAngles.headAngles.leftLimitedYaw * EYES_YAW_LIMIT)/ eyesMaxSpeed, relax + Math.abs(shouldersAngles.headAngles.rightLimitedYaw *EYES_YAW_LIMIT)/ eyesMaxSpeed);
+                    timeEyesAtTarget = Math.min(start +Math.abs(shouldersAngles.headAngles.leftEyeLimitedYaw * EYES_YAW_LIMIT)/ eyesMaxSpeed, start + Math.abs(shouldersAngles.headAngles.rightEyeLimitedYaw *EYES_YAW_LIMIT)/ eyesMaxSpeed);
+                    timeBackEyesAtZero = Math.min(relax + Math.abs(shouldersAngles.headAngles.leftEyeLimitedYaw * EYES_YAW_LIMIT)/ eyesMaxSpeed, relax + Math.abs(shouldersAngles.headAngles.rightEyeLimitedYaw *EYES_YAW_LIMIT)/ eyesMaxSpeed);
                     //timeBackEyesAtZero = Math.min(relax + Math.max(Math.abs(shouldersAngles.headAngles.leftLimitedYaw), Math.abs(shouldersAngles.headAngles.leftLimitedPitch))/ eyesMaxSpeed, relax + Math.max(Math.abs(shouldersAngles.headAngles.rightLimitedYaw), Math.abs(shouldersAngles.headAngles.rightLimitedPitch)) / eyesMaxSpeed);
                     timesWithEyesKeyframes.add(timeEyesAtTarget);
                     timesWithEyesKeyframes.add(timeBackEyesAtZero);
@@ -799,12 +799,12 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     timesWithEyesKeyframes.add(timeBackHeadAtZero);
 
                     // calculate the max speed of the head depending on the rotation angle
-                    Amin = Math.toDegrees(Math.abs(Math.min(Math.abs(headAngles.leftLimitedYaw)*EYES_YAW_LIMIT, Math.abs(headAngles.rightLimitedYaw)*EYES_YAW_LIMIT)));
+                    Amin = Math.toDegrees(Math.abs(Math.min(Math.abs(headAngles.leftEyeLimitedYaw)*EYES_YAW_LIMIT, Math.abs(headAngles.rightEyeLimitedYaw)*EYES_YAW_LIMIT)));
                     //AminPitch = Math.toDegrees(Math.abs(Math.min(headAngles.leftLimitedPitch*EYES_PITCH_LIMIT, headAngles.rightLimitedPitch*EYES_PITCH_LIMIT)));
                     eyesMaxSpeed = Math.toRadians((2*Amin/75 + (1f/6))*Math.toDegrees(EYES_ANGULAR_SPEED));
                     //eyesMaxSpeedPitch = Math.toRadians((2*AminPitch/75 + 1f/6)*Math.toDegrees(EYES_ANGULAR_SPEED));
-                    double leftEyeTime = Math.abs(headAngles.leftLimitedYaw*EYES_YAW_LIMIT)/eyesMaxSpeed;
-                    double rightEyeTime = Math.abs(headAngles.rightLimitedYaw*EYES_YAW_LIMIT)/eyesMaxSpeed;
+                    double leftEyeTime = Math.abs(headAngles.leftEyeLimitedYaw*EYES_YAW_LIMIT)/eyesMaxSpeed;
+                    double rightEyeTime = Math.abs(headAngles.rightEyeLimitedYaw*EYES_YAW_LIMIT)/eyesMaxSpeed;
                     timeEyesAtTarget = Math.min(start + leftEyeTime, start + rightEyeTime);
                     timeBackEyesAtZero = Math.min(relax + leftEyeTime, relax + rightEyeTime);
                     //timeEyesAtTarget = Math.min(start + Math.max(Math.abs(headAngles.leftLimitedYaw*EYES_YAW_LIMIT), Math.abs(headAngles.leftLimitedPitch*EYES_PITCH_LIMIT))/ eyesMaxSpeed, start + Math.max(Math.abs(headAngles.rightLimitedYaw*EYES_YAW_LIMIT), Math.abs(headAngles.rightLimitedPitch*EYES_PITCH_LIMIT))/ eyesMaxSpeed);
@@ -813,12 +813,12 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     timesWithEyesKeyframes.add(timeBackEyesAtZero);
                 } else {
                     // calculate the max speed of the head depending on the rotation angle
-                    Amin = Math.toDegrees(Math.abs(Math.min(headAngles.leftLimitedYaw*EYES_YAW_LIMIT, headAngles.rightLimitedYaw*EYES_YAW_LIMIT)));
+                    Amin = Math.toDegrees(Math.abs(Math.min(headAngles.leftEyeLimitedYaw*EYES_YAW_LIMIT, headAngles.rightEyeLimitedYaw*EYES_YAW_LIMIT)));
                     //AminPitch = Math.toDegrees(Math.abs(Math.min(headAngles.leftLimitedPitch*EYES_PITCH_LIMIT, headAngles.rightLimitedPitch*EYES_PITCH_LIMIT)));
                     eyesMaxSpeed = Math.toRadians((2*Amin/75 + 1f/6)*Math.toDegrees(EYES_ANGULAR_SPEED));
                     //eyesMaxSpeedPitch = Math.toRadians((2*AminPitch/75 + 1f/6)*Math.toDegrees(EYES_ANGULAR_SPEED));
-                    double leftEyeTime = Math.abs(headAngles.leftLimitedYaw*EYES_YAW_LIMIT)/eyesMaxSpeed;
-                    double rightEyeTime = Math.abs(headAngles.rightLimitedYaw*EYES_YAW_LIMIT)/eyesMaxSpeed;
+                    double leftEyeTime = Math.abs(headAngles.leftEyeLimitedYaw*EYES_YAW_LIMIT)/eyesMaxSpeed;
+                    double rightEyeTime = Math.abs(headAngles.rightEyeLimitedYaw*EYES_YAW_LIMIT)/eyesMaxSpeed;
                     timeEyesAtTarget = Math.min(start + leftEyeTime, start + rightEyeTime);
                     timeBackEyesAtZero = Math.min(relax + leftEyeTime, relax + rightEyeTime);
                     timesWithEyesKeyframes.add(timeBackEyesAtZero);
@@ -838,8 +838,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
                 //add to outputKeyframe the eyes keyframe at START time
                 if (!gaze.isGazeShift()) {
-                    addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", "start", start, Side.LEFT, headAngles.leftGazeDirection, 0, 0);
-                    addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", "start", start, Side.RIGHT, headAngles.rightGazeDirection, 0, 0);
+                    addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", "start", start, Side.LEFT, headAngles.leftEyeGazeDirection, 0, 0);
+                    addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", "start", start, Side.RIGHT, headAngles.rightEyeGazeDirection, 0, 0);
                 }
 
                 // add Keyframes for the eyes at every moment there is a body keyframe between start and end
@@ -864,10 +864,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 if (gazeInfluence.ordinal() >= Influence.SHOULDER.ordinal()) {
                                     // if the eyes reach already the target position
                                     if (time >= timeEyesAtTarget) {
-                                        leftLimitYaw = shouldersAngles.headAngles.leftLimitedYaw;
-                                        rightLimitYaw = shouldersAngles.headAngles.rightLimitedYaw;
-                                        leftLimitPitch = shouldersAngles.headAngles.leftLimitedPitch;
-                                        rightLimitPitch = shouldersAngles.headAngles.rightLimitedPitch;
+                                        leftLimitYaw = shouldersAngles.headAngles.leftEyeLimitedYaw;
+                                        rightLimitYaw = shouldersAngles.headAngles.rightEyeLimitedYaw;
+                                        leftLimitPitch = shouldersAngles.headAngles.leftEyeLimitedPitch;
+                                        rightLimitPitch = shouldersAngles.headAngles.rightEyeLimitedPitch;
                                     }
                                 }
                                 /* -------------------------------------------------
@@ -876,10 +876,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 else if (gaze.getInfluence().ordinal() >= Influence.HEAD.ordinal()) {
                                     // if the eyes reach already the target position
                                     if (time >= timeEyesAtTarget) {
-                                        leftLimitYaw = headAngles.leftLimitedYaw;
-                                        rightLimitYaw = headAngles.rightLimitedYaw;
-                                        leftLimitPitch = headAngles.leftLimitedPitch;
-                                        rightLimitPitch = headAngles.rightLimitedPitch;
+                                        leftLimitYaw = headAngles.leftEyeLimitedYaw;
+                                        rightLimitYaw = headAngles.rightEyeLimitedYaw;
+                                        leftLimitPitch = headAngles.leftEyeLimitedPitch;
+                                        rightLimitPitch = headAngles.rightEyeLimitedPitch;
                                     }
                                 } else {
                                     /* -------------------------------------------------
@@ -887,10 +887,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                      * -------------------------------------------------- */
                                     // if the eyes reach already the target position
                                     if ( time >= timeEyesAtTarget){
-                                        leftLimitYaw = Math.min(Math.abs(headAngles.leftLimitedYaw), EYES_YAW_LIMIT);
-                                        rightLimitYaw = Math.min(Math.abs(headAngles.rightLimitedYaw), EYES_YAW_LIMIT);
-                                        leftLimitPitch = Math.min(Math.abs(headAngles.leftLimitedPitch), EYES_PITCH_LIMIT);
-                                        rightLimitPitch = Math.min(Math.abs(headAngles.rightLimitedPitch), EYES_PITCH_LIMIT);
+                                        leftLimitYaw = Math.min(Math.abs(headAngles.leftEyeLimitedYaw), EYES_YAW_LIMIT);
+                                        rightLimitYaw = Math.min(Math.abs(headAngles.rightEyeLimitedYaw), EYES_YAW_LIMIT);
+                                        leftLimitPitch = Math.min(Math.abs(headAngles.leftEyeLimitedPitch), EYES_PITCH_LIMIT);
+                                        rightLimitPitch = Math.min(Math.abs(headAngles.rightEyeLimitedPitch), EYES_PITCH_LIMIT);
                                     }
                                 }
                                 /*************************************************
@@ -918,9 +918,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                             // add eyeskeyframe
                             if (leftLimitYaw != -10 && rightLimitYaw != -10 && leftLimitPitch != -10 && rightLimitPitch != -10) {
                                 addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gazeId + "_to_kf" + time, time, Side.LEFT,
-                                        headAngles.leftGazeDirection, leftLimitYaw, leftLimitPitch);
+                                        headAngles.leftEyeGazeDirection, leftLimitYaw, leftLimitPitch);
                                 addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gazeId + "_to_kf" + time, time, Side.RIGHT,
-                                        headAngles.rightGazeDirection, rightLimitYaw, rightLimitPitch);
+                                        headAngles.rightEyeGazeDirection, rightLimitYaw, rightLimitPitch);
                             }
 
                             latestTime = time;
@@ -940,28 +940,28 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                             setGazeRestPosition(new AUKeyFrame(gazeId + "_back", end, auFrameLeft), new AUKeyFrame(gazeId + "_back", end, auFrameRight));
                         }
                     } else {
-                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", "end", timeBackEyesAtZero, Side.LEFT, headAngles.leftGazeDirection, leftLimitYaw, leftLimitPitch);
-                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", "end", timeBackEyesAtZero, Side.RIGHT, headAngles.rightGazeDirection, rightLimitYaw, rightLimitPitch);
+                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", "end", timeBackEyesAtZero, Side.LEFT, headAngles.leftEyeGazeDirection, leftLimitYaw, leftLimitPitch);
+                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", "end", timeBackEyesAtZero, Side.RIGHT, headAngles.rightEyeGazeDirection, rightLimitYaw, rightLimitPitch);
 
                         AUAPFrame auFrameLeft = new AUAPFrame();
                         AUAPFrame auFrameRight = new AUAPFrame();
                         //AU61: eyes turn left
-                        if (headAngles.leftGazeDirection == GazeDirection.DOWNLEFT || headAngles.leftGazeDirection == GazeDirection.LEFT || headAngles.leftGazeDirection == GazeDirection.UPLEFT) {
+                        if (headAngles.leftEyeGazeDirection == GazeDirection.DOWNLEFT || headAngles.leftEyeGazeDirection == GazeDirection.LEFT || headAngles.leftEyeGazeDirection == GazeDirection.UPLEFT) {
                             auFrameLeft.setAUAP(61, leftLimitYaw / EYES_YAW_LIMIT, Side.LEFT);
                             auFrameRight.setAUAP(61, rightLimitYaw / EYES_YAW_LIMIT, Side.RIGHT);
                         }
                         //AU62: eyes turn right
-                        if (headAngles.leftGazeDirection == GazeDirection.DOWNRIGHT || headAngles.leftGazeDirection == GazeDirection.RIGHT || headAngles.leftGazeDirection == GazeDirection.UPRIGHT) {
+                        if (headAngles.leftEyeGazeDirection == GazeDirection.DOWNRIGHT || headAngles.leftEyeGazeDirection == GazeDirection.RIGHT || headAngles.leftEyeGazeDirection == GazeDirection.UPRIGHT) {
                             auFrameLeft.setAUAP(62, leftLimitYaw / EYES_YAW_LIMIT, Side.LEFT);
                             auFrameRight.setAUAP(62, rightLimitYaw / EYES_YAW_LIMIT, Side.RIGHT);
                         }
                         //AU63: eyes up
-                        if (headAngles.leftGazeDirection == GazeDirection.UPRIGHT || headAngles.leftGazeDirection == GazeDirection.UP || headAngles.leftGazeDirection == GazeDirection.UPLEFT) {
+                        if (headAngles.leftEyeGazeDirection == GazeDirection.UPRIGHT || headAngles.leftEyeGazeDirection == GazeDirection.UP || headAngles.leftEyeGazeDirection == GazeDirection.UPLEFT) {
                             auFrameLeft.setAUAP(63, leftLimitPitch / EYES_PITCH_LIMIT, Side.LEFT);
                             auFrameRight.setAUAP(63, rightLimitYaw / EYES_YAW_LIMIT, Side.RIGHT);
                         }
                         //AU64: eyes down
-                        if (headAngles.leftGazeDirection == GazeDirection.DOWNRIGHT || headAngles.leftGazeDirection == GazeDirection.DOWN || headAngles.leftGazeDirection == GazeDirection.DOWNLEFT) {
+                        if (headAngles.leftEyeGazeDirection == GazeDirection.DOWNRIGHT || headAngles.leftEyeGazeDirection == GazeDirection.DOWN || headAngles.leftEyeGazeDirection == GazeDirection.DOWNLEFT) {
                             auFrameLeft.setAUAP(64, leftLimitPitch / EYES_PITCH_LIMIT, Side.LEFT);
                             auFrameRight.setAUAP(64, rightLimitYaw / EYES_YAW_LIMIT, Side.RIGHT);
                         }
@@ -1395,7 +1395,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
      * @param headAngles the gaze's rotation angle
      * @return the {@link Influence} of the given {@link GazeSignal}
      */
-    private Influence computeGazeInfluence(GazeSignal gaze, HeadAngles headAngles) {
+    private Influence computeGazeInfluence(GazeSignal gaze, HeadAndEyesAngles headAngles) {
         Influence gazeInfluence = gaze.getInfluence();
         if (gazeInfluence == null) {
             double headAngle = Math.max(Math.abs(headAngles.headPitchAngle), Math.abs(headAngles.headYawAngle));
@@ -1528,59 +1528,64 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
     /**
      * Utility class to compute angles from a character's head/eyes to a target.
      */
-    public class HeadAngles {
+    public class HeadAndEyesAngles {
+
         //directions to target for leftEye and rightEye
-        public GazeDirection leftGazeDirection;
-        public GazeDirection rightGazeDirection;
+        public GazeDirection leftEyeGazeDirection;
+        public GazeDirection rightEyeGazeDirection;
+
         //raw angles to target
-        public double leftYawAngle; //leftEye
-        public double leftPitchAngle; //leftEye
-        public double rightYawAngle; //rightEye
-        public double rightPitchAngle; //rightEye
-        public double headYawAngle; //head
-        public double headPitchAngle; //head
+        public double leftEyeYawAngle;
+        public double leftEyePitchAngle;
+        public double rightEyeYawAngle;
+        public double rightEyePitchAngle;
+        public double headYawAngle;
+        public double headPitchAngle;
+
         //ratio between no movement (0) and full movement (1)
         //full movement means the physical limit of the eyeball (resp. head): it can only move for 60 degrees (resp 90) or so
-        public double leftLimitedYaw;
-        public double leftLimitedPitch;
-        public double rightLimitedYaw;
-        public double rightLimitedPitch;
+        public double leftEyeLimitedYaw;
+        public double leftEyeLimitedPitch;
+        public double rightEyeLimitedYaw;
+        public double rightEyeLimitedPitch;
         public double headLimitedYaw;
         public double headLimitedPitch;
+
         //can the eye reach the target without moving other modalities (is target in a 60 degrees range)
         public boolean withinEyesLimit;
         //can the head reach the target without moving other modalities
-        public boolean withinHeadLimit;
+        public boolean withinHeadAndEyesLimit;
 
         // load the list of characters in the environment
         Vec3d posTarget = new Vec3d();
         Vec3d headPosition = new Vec3d();
         Quaternion orient = new Quaternion();
+
         /**
          * Copy constructor
          *
-         * @param headAngles HeadAngles to copy
+         * @param headAndEyesAngles headAndEyesAngles to copy
          */
-        public HeadAngles(HeadAngles headAngles) {
-            this.leftGazeDirection = headAngles.leftGazeDirection;
-            this.rightGazeDirection = headAngles.rightGazeDirection;
+        public HeadAndEyesAngles(HeadAndEyesAngles headAndEyesAngles) {
+            this.leftEyeGazeDirection = headAndEyesAngles.leftEyeGazeDirection;
+            this.rightEyeGazeDirection = headAndEyesAngles.rightEyeGazeDirection;
 
-            this.leftYawAngle = headAngles.leftYawAngle;
-            this.leftPitchAngle = headAngles.leftPitchAngle;
-            this.rightYawAngle = headAngles.rightYawAngle;
-            this.rightPitchAngle = headAngles.rightPitchAngle;
-            this.headYawAngle = headAngles.headYawAngle;
-            this.headPitchAngle = headAngles.headPitchAngle;
+            this.leftEyeYawAngle = headAndEyesAngles.leftEyeYawAngle;
+            this.leftEyePitchAngle = headAndEyesAngles.leftEyePitchAngle;
+            this.rightEyeYawAngle = headAndEyesAngles.rightEyeYawAngle;
+            this.rightEyePitchAngle = headAndEyesAngles.rightEyePitchAngle;
+            this.headYawAngle = headAndEyesAngles.headYawAngle;
+            this.headPitchAngle = headAndEyesAngles.headPitchAngle;
 
-            this.leftLimitedYaw = headAngles.leftLimitedYaw;
-            this.leftLimitedPitch = headAngles.leftLimitedPitch;
-            this.rightLimitedYaw = headAngles.rightLimitedYaw;
-            this.rightLimitedPitch = headAngles.rightLimitedPitch;
-            this.headLimitedYaw = headAngles.headLimitedYaw;
-            this.headLimitedPitch = headAngles.headLimitedPitch;
+            this.leftEyeLimitedYaw = headAndEyesAngles.leftEyeLimitedYaw;
+            this.leftEyeLimitedPitch = headAndEyesAngles.leftEyeLimitedPitch;
+            this.rightEyeLimitedYaw = headAndEyesAngles.rightEyeLimitedYaw;
+            this.rightEyeLimitedPitch = headAndEyesAngles.rightEyeLimitedPitch;
+            this.headLimitedYaw = headAndEyesAngles.headLimitedYaw;
+            this.headLimitedPitch = headAndEyesAngles.headLimitedPitch;
 
-            this.withinEyesLimit = headAngles.withinEyesLimit;
-            this.withinHeadLimit = headAngles.withinHeadLimit;
+            this.withinEyesLimit = headAndEyesAngles.withinEyesLimit;
+            this.withinHeadAndEyesLimit = headAndEyesAngles.withinHeadAndEyesLimit;
         }
 
         /**
@@ -1591,8 +1596,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
          * @param headKeyframe The HeadKeyframe giving us the head position
          * @return The new HeadAngles
          */
-        public HeadAngles adjustWithHeadKeyframe(HeadKeyframe headKeyframe) { // TODO FIXME Is this method called anywhere ? If not, to be deleted.
-            HeadAngles newHeadAngles = new HeadAngles(this);
+        public HeadAndEyesAngles adjustWithHeadKeyframe(HeadKeyframe headKeyframe) { // TODO FIXME Is this method called anywhere ? If not, to be deleted.
+            HeadAndEyesAngles newHeadAngles = new HeadAndEyesAngles(this);
             if (headKeyframe == null) {
                 return newHeadAngles;
             }
@@ -1601,21 +1606,21 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             }*/
             if (headKeyframe.sagittalTilt.flag && headKeyframe.sagittalTilt.direction != null) {
                 //influence on pitch
-                newHeadAngles.leftPitchAngle = (newHeadAngles.leftPitchAngle * EYES_PITCH_LIMIT + headKeyframe.getSignedSagittalTilt() * HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT;
-                newHeadAngles.rightPitchAngle = (newHeadAngles.rightPitchAngle * EYES_PITCH_LIMIT + headKeyframe.getSignedSagittalTilt() * HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT;
+                newHeadAngles.leftEyePitchAngle = (newHeadAngles.leftEyePitchAngle * EYES_PITCH_LIMIT + headKeyframe.getSignedSagittalTilt() * HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT;
+                newHeadAngles.rightEyePitchAngle = (newHeadAngles.rightEyePitchAngle * EYES_PITCH_LIMIT + headKeyframe.getSignedSagittalTilt() * HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT;
                 newHeadAngles.headPitchAngle = (newHeadAngles.headPitchAngle * EYES_PITCH_LIMIT + headKeyframe.getSignedSagittalTilt() * HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT;
             }
             if (headKeyframe.verticalTorsion.flag && headKeyframe.verticalTorsion.direction != null) {
                 //influence on yaw
                 //newHeadAngles.leftYawAngle = (newHeadAngles.leftYawAngle - headKeyframe.getSignedVerticalTorsion())
-                newHeadAngles.leftYawAngle = (newHeadAngles.leftYawAngle * EYES_YAW_LIMIT - headKeyframe.getSignedVerticalTorsion() * HEAD_YAW_LIMIT) / EYES_YAW_LIMIT;
-                newHeadAngles.rightYawAngle = (newHeadAngles.rightYawAngle * EYES_YAW_LIMIT - headKeyframe.getSignedVerticalTorsion() * HEAD_YAW_LIMIT) / EYES_YAW_LIMIT;
+                newHeadAngles.leftEyeYawAngle = (newHeadAngles.leftEyeYawAngle * EYES_YAW_LIMIT - headKeyframe.getSignedVerticalTorsion() * HEAD_YAW_LIMIT) / EYES_YAW_LIMIT;
+                newHeadAngles.rightEyeYawAngle = (newHeadAngles.rightEyeYawAngle * EYES_YAW_LIMIT - headKeyframe.getSignedVerticalTorsion() * HEAD_YAW_LIMIT) / EYES_YAW_LIMIT;
                 newHeadAngles.headYawAngle = (newHeadAngles.headYawAngle * EYES_YAW_LIMIT - headKeyframe.getSignedVerticalTorsion() * HEAD_YAW_LIMIT) / EYES_YAW_LIMIT;
             }
 
             //recompute gaze direction
-            newHeadAngles.leftGazeDirection = computeGazeDirection(newHeadAngles.leftYawAngle, newHeadAngles.leftPitchAngle);
-            newHeadAngles.rightGazeDirection = computeGazeDirection(newHeadAngles.rightYawAngle, newHeadAngles.rightPitchAngle);
+            newHeadAngles.leftEyeGazeDirection = computeGazeDirection(newHeadAngles.leftEyeYawAngle, newHeadAngles.leftEyePitchAngle);
+            newHeadAngles.rightEyeGazeDirection = computeGazeDirection(newHeadAngles.rightEyeYawAngle, newHeadAngles.rightEyePitchAngle);
 
             //limit eyes angles
             newHeadAngles.limitEyesAngles();
@@ -1628,8 +1633,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
          *
          * @return {@code "true"} if the target is within Head movement limits.
          */
-        public boolean limitHeadAngle() {
-            withinHeadLimit = false;
+        public boolean limitHeadAndEyesAngle() {
+
+            withinHeadAndEyesLimit = false;
+
             //head limit angle
             double headYawAngleAbs = Math.abs(headYawAngle);
             double headPitchAngleAbs = Math.abs(headPitchAngle);
@@ -1637,7 +1644,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             if (headYawAngleAbs < HEAD_YAW_LIMIT + EYES_YAW_LIMIT
                     && ((headPitchAngle >= 0 && headPitchAngleAbs < HEAD_PITCH_LIMIT_UP + EYES_PITCH_LIMIT)
                     || (headPitchAngle <= 0 && headPitchAngleAbs < HEAD_PITCH_LIMIT_DOWN + EYES_PITCH_LIMIT))) {
-                withinHeadLimit = true;
+                withinHeadAndEyesLimit = true;
             }
 
             headLimitedYaw = Math.signum(headYawAngle) * Math.min(headYawAngleAbs, HEAD_YAW_LIMIT) / HEAD_YAW_LIMIT; // Math.signum(headYawAngle) *
@@ -1650,31 +1657,34 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 headLimitedPitch = Math.signum(headPitchAngle) * Math.min(headPitchAngleAbs, HEAD_PITCH_LIMIT_DOWN) / HEAD_PITCH_LIMIT_DOWN; // Math.signum(headPitchAngle) *
             }
 
-            return withinHeadLimit;
+            return withinHeadAndEyesLimit;
         }
 
         /**
          * Compute the ratios of eye movement to target, constraining it within
-         * physical limits. This computes leftLimitedYaw, leftLimitedPitch,
-         * rightLimitedYaw, rightLimitedPitch.
+         * physical limits. This computes leftEyeLimitedYaw, leftEyeLimitedPitch,
+         * rightEyeLimitedYaw, rightEyeLimitedPitch.
          *
          * @return {@code "true"} if the target is within Eyes movement limits.
          */
         public boolean limitEyesAngles() {
-            double leftYawAngleAbs = Math.abs(leftYawAngle);
-            double rightYawAngleAbs = Math.abs(rightYawAngle);
-            double leftPitchAngleAbs = Math.abs(leftPitchAngle);
-            double rightPitchAngleAbs = Math.abs(rightPitchAngle);
+
+            double leftEyeYawAngleAbs = Math.abs(leftEyeYawAngle);
+            double rightEyeYawAngleAbs = Math.abs(rightEyeYawAngle);
+            double leftEyePitchAngleAbs = Math.abs(leftEyePitchAngle);
+            double rightEyePitchAngleAbs = Math.abs(rightEyePitchAngle);
+
             //eyes limit angle
-            withinEyesLimit = leftYawAngleAbs < EYES_YAW_LIMIT
-                    && rightYawAngleAbs < EYES_YAW_LIMIT
-                    && leftPitchAngleAbs < EYES_PITCH_LIMIT
-                    && rightPitchAngleAbs < EYES_PITCH_LIMIT;
+            withinEyesLimit = leftEyeYawAngleAbs < EYES_YAW_LIMIT
+                    && rightEyeYawAngleAbs < EYES_YAW_LIMIT
+                    && leftEyePitchAngleAbs < EYES_PITCH_LIMIT
+                    && rightEyePitchAngleAbs < EYES_PITCH_LIMIT;
+
             // N.B. --> limited angles for the eyes have to be positive for both rotation direction
-            leftLimitedYaw = Math.abs((Math.min(leftYawAngleAbs, EYES_YAW_LIMIT)- Math.abs(headLimitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT); // Math.signum(leftYawAngle) *
-            rightLimitedYaw = Math.abs((Math.min(rightYawAngleAbs, EYES_YAW_LIMIT)- Math.abs(headLimitedYaw)*HEAD_YAW_LIMIT) / EYES_YAW_LIMIT); // Math.signum(rightYawAngle) *
-            leftLimitedPitch = Math.abs((Math.min(leftPitchAngleAbs, EYES_PITCH_LIMIT)- Math.abs(headLimitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT); // ToDo: distinguish between up and down head pitch limit. now the two values are equal.
-            rightLimitedPitch = Math.abs((Math.min(rightPitchAngleAbs, EYES_PITCH_LIMIT)- Math.abs(headLimitedPitch)*HEAD_PITCH_LIMIT_UP) / EYES_PITCH_LIMIT);
+            leftEyeLimitedYaw = Math.abs((Math.min(leftEyeYawAngleAbs, EYES_YAW_LIMIT) - (Math.abs(headLimitedYaw) * HEAD_YAW_LIMIT)) / EYES_YAW_LIMIT); // Math.signum(leftEyeYawAngle) *
+            rightEyeLimitedYaw = Math.abs((Math.min(rightEyeYawAngleAbs, EYES_YAW_LIMIT) - (Math.abs(headLimitedYaw) * HEAD_YAW_LIMIT)) / EYES_YAW_LIMIT); // Math.signum(rightEyeYawAngle) *
+            leftEyeLimitedPitch = Math.abs((Math.min(leftEyePitchAngleAbs, EYES_PITCH_LIMIT) - (Math.abs(headLimitedPitch) * HEAD_PITCH_LIMIT_UP)) / EYES_PITCH_LIMIT); // ToDo: distinguish between up and down head pitch limit. now the two values are equal.
+            rightEyeLimitedPitch = Math.abs((Math.min(rightEyePitchAngleAbs, EYES_PITCH_LIMIT) - (Math.abs(headLimitedPitch) * HEAD_PITCH_LIMIT_UP)) / EYES_PITCH_LIMIT);
 
             return withinEyesLimit;
         }
@@ -1683,32 +1693,35 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
          * Constructor. Computes the head and eyes angles to a target with
          * offset positions.
          */
-        public HeadAngles(Environment env, GazeSignal gaze) {
-            Vec3d leftRelativeEulerAngles, rightRelativeEulerAngles, headRelativeEulerAngles;
+        public HeadAndEyesAngles(Environment env, GazeSignal gaze) {
+
+            Vec3d leftEyeRelativeEulerAngles, rightEyeRelativeEulerAngles, headRelativeEulerAngles;
+
             //euler angles to target + offset, for left eye, right eye, head
-            leftYawAngle = 0;
-            rightYawAngle = 0;
+            leftEyeYawAngle = 0;
+            rightEyeYawAngle = 0;
             headYawAngle = 0;
-            leftPitchAngle = 0;
-            rightPitchAngle = 0;
+            leftEyePitchAngle = 0;
+            rightEyePitchAngle = 0;
             headPitchAngle = 0;
+
             //ratio of eye/head movement
-            leftLimitedYaw = 0;//left eye
-            leftLimitedPitch = 0;
-            rightLimitedYaw = 0; //right eye
-            rightLimitedPitch = 0;
-            headLimitedYaw = 0; // head
+            leftEyeLimitedYaw = 0;
+            leftEyeLimitedPitch = 0;
+            rightEyeLimitedYaw = 0;
+            rightEyeLimitedPitch = 0;
+            headLimitedYaw = 0;
             headLimitedPitch = 0;
 
             withinEyesLimit = false;
-            withinHeadLimit = false;
+            withinHeadAndEyesLimit = false;
 
             // load the list of characters in the environment
             List<String> charactersInScene = new ArrayList<>();
             for (Node node : env.getTreeNode().getChildren()) {
                 if (node instanceof MPEG4Animatable) {
-                    MPEG4Animatable ag = (MPEG4Animatable) node;
-                    charactersInScene.add(ag.getCharacterManager().getCurrentCharacterName());
+                    MPEG4Animatable character = (MPEG4Animatable) node;
+                    charactersInScene.add(character.getCharacterManager().getCurrentCharacterName());
                 }
             }
 
@@ -1721,8 +1734,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 if (gazeTargetNotEmpty) {
                     for (Node node : env.getTreeNode().getChildren()) {
                         if (node instanceof MPEG4Animatable) {
-                            MPEG4Animatable ag = (MPEG4Animatable) node;
-                            String currentCharacterName = ag.getCharacterManager().getCurrentCharacterName();
+                            MPEG4Animatable character = (MPEG4Animatable) node;
+                            String currentCharacterName = character.getCharacterManager().getCurrentCharacterName();
                             if (currentCharacterName.equals(gaze.getTarget())) {
                                 targetAgent = (MPEG4Animatable) node;
                             }
@@ -1757,7 +1770,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                             vec2target = user.getCoordinates();
                         } else {
                             boolean targetIsAgent = false;
-                            //Check first if the target is the agent
+                            //Check first if the target is an agent
                             for (String agent : charactersInScene) {
                                 if (gazeTarget.equals(agent)) {
                                     targetIsAgent = true;
@@ -1786,7 +1799,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                     break;
                                 }
                             }
-                            // if the target is not the agent I look the target in the environment objects
+                            // if the target is not an agent I look the target in the environment objects
                             if (!targetIsAgent) {
                                 // search the object (leaf) between environment objects
                                 for (Leaf leafToCheck : environmentLeaves) {
@@ -1798,14 +1811,13 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                     }
                                 }
                                 // if it is not a leaf but a TreeNode children
-                                if (idTarget.equals("")){
-                                	Node n = env.getNode(gazeTarget);
-                                	if (n != null) {
+                                if (idTarget.equals("")) {
+                                    Node n = env.getNode(gazeTarget);
+                                    if (n != null) {
                                         TreeNode target = (TreeNode) n;
                                         idTarget = target.getIdentifier();
                                         sizeTarget = target.getScale();
-                                	}
-
+                                    }
                                 }
                                 targetNode = env.getNode(idTarget);
                             }
@@ -1876,14 +1888,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         Vec3d leftEye = Vec3d.addition(headPosition, orient.rotate(headAnglesLeftEyeOffset));
                         Vec3d rightEye = Vec3d.addition(headPosition, orient.rotate(headAnglesRightEyeOffset));
 
-                        leftRelativeEulerAngles = env.getTargetRelativeEulerAngles(this.posTarget, leftEye, orient);
-                        rightRelativeEulerAngles = env.getTargetRelativeEulerAngles(this.posTarget, rightEye, orient);
+                        leftEyeRelativeEulerAngles = env.getTargetRelativeEulerAngles(this.posTarget, leftEye, orient);
+                        rightEyeRelativeEulerAngles = env.getTargetRelativeEulerAngles(this.posTarget, rightEye, orient);
                         headRelativeEulerAngles = env.getTargetRelativeEulerAngles(this.posTarget, head, orient);
 
-                        leftYawAngle = leftRelativeEulerAngles.x();
-                        leftPitchAngle = leftRelativeEulerAngles.y();
-                        rightYawAngle = rightRelativeEulerAngles.x();
-                        rightPitchAngle = rightRelativeEulerAngles.y();
+                        leftEyeYawAngle = leftEyeRelativeEulerAngles.x();
+                        leftEyePitchAngle = leftEyeRelativeEulerAngles.y();
+                        rightEyeYawAngle = rightEyeRelativeEulerAngles.x();
+                        rightEyePitchAngle = rightEyeRelativeEulerAngles.y();
                         headYawAngle = headRelativeEulerAngles.x();
                         headPitchAngle = headRelativeEulerAngles.y();
                     }
@@ -1898,44 +1910,44 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             if (gaze.getOffsetDirection() == GazeDirection.RIGHT
                     || gaze.getOffsetDirection() == GazeDirection.UPRIGHT
                     || gaze.getOffsetDirection() == GazeDirection.DOWNRIGHT) {
-                leftYawAngle -= offsetAngle;
-                rightYawAngle -= offsetAngle;
+                leftEyeYawAngle -= offsetAngle;
+                rightEyeYawAngle -= offsetAngle;
                 headYawAngle -= offsetAngle;
             } //max PI/12 -> 15degrees
             else if (gaze.getOffsetDirection() == GazeDirection.LEFT
                     || gaze.getOffsetDirection() == GazeDirection.UPLEFT
                     || gaze.getOffsetDirection() == GazeDirection.DOWNLEFT) {
-                leftYawAngle += offsetAngle;
-                rightYawAngle += offsetAngle;
+                leftEyeYawAngle += offsetAngle;
+                rightEyeYawAngle += offsetAngle;
                 headYawAngle += offsetAngle;
             } //max PI/12 -> 15degrees
 
             if (gaze.getOffsetDirection() == GazeDirection.DOWN
                     || gaze.getOffsetDirection() == GazeDirection.DOWNLEFT
                     || gaze.getOffsetDirection() == GazeDirection.DOWNRIGHT) {
-                leftPitchAngle -= offsetAngle;
-                rightPitchAngle -= offsetAngle;
+                leftEyePitchAngle -= offsetAngle;
+                rightEyePitchAngle -= offsetAngle;
                 headPitchAngle -= offsetAngle;
             } //max PI/12 -> 15degrees
             else if (gaze.getOffsetDirection() == GazeDirection.UP
                     || gaze.getOffsetDirection() == GazeDirection.UPLEFT
                     || gaze.getOffsetDirection() == GazeDirection.UPRIGHT) {
-                leftPitchAngle += offsetAngle;
-                rightPitchAngle += offsetAngle;
+                leftEyePitchAngle += offsetAngle;
+                rightEyePitchAngle += offsetAngle;
                 headPitchAngle += offsetAngle;
             } //max PI/12 -> 15degrees
 
-            leftGazeDirection = computeGazeDirection(leftYawAngle, leftPitchAngle);
-            rightGazeDirection = computeGazeDirection(rightYawAngle, rightPitchAngle);
+            leftEyeGazeDirection = computeGazeDirection(leftEyeYawAngle, leftEyePitchAngle);
+            rightEyeGazeDirection = computeGazeDirection(rightEyeYawAngle, rightEyePitchAngle);
 
-            withinHeadLimit = limitHeadAngle();
+            withinHeadAndEyesLimit = limitHeadAndEyesAngle();
             withinEyesLimit = limitEyesAngles();
         }
     }
 
     public class ShouldersAngles {
         //raw angles to target
-        HeadAngles headAngles;
+        HeadAndEyesAngles headAngles;
         double shoulderYawAngle; //shoulder
         double shoulderPitchAngle; //shoulder
         double shoulderMinimumAlign = 0; // it is the minimum alignment of the shoulder if the designer decide to do not have a full alignment
@@ -1955,7 +1967,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
          *
          * @param shouldersAngles ShoulderAngles to copy
          */
-        public ShouldersAngles(ShouldersAngles shouldersAngles, HeadAngles headAngles) { // TODO FIXME Is this method called anywhere ? If not, to be deleted.
+        public ShouldersAngles(ShouldersAngles shouldersAngles, HeadAndEyesAngles headAngles) { // TODO FIXME Is this method called anywhere ? If not, to be deleted.
             this.headAngles = headAngles;
             this.shoulderYawAngle = shouldersAngles.shoulderYawAngle;
             this.shoulderPitchAngle = shouldersAngles.shoulderPitchAngle;
@@ -1991,8 +2003,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 }
             }
             double limitedYawAngle = Math.abs(shoulderMinimumAlign)*TORSO_YAW_LIMIT - Math.abs(headAngles.headLimitedYaw)*HEAD_YAW_LIMIT;
-            headAngles.rightLimitedYaw = (Math.abs(headAngles.rightYawAngle) - limitedYawAngle) / EYES_YAW_LIMIT;
-            headAngles.leftLimitedYaw = (Math.abs(headAngles.leftYawAngle) - limitedYawAngle) / EYES_YAW_LIMIT;
+            headAngles.rightEyeLimitedYaw = (Math.abs(headAngles.rightEyeYawAngle) - limitedYawAngle) / EYES_YAW_LIMIT;
+            headAngles.leftEyeLimitedYaw = (Math.abs(headAngles.leftEyeYawAngle) - limitedYawAngle) / EYES_YAW_LIMIT;
 
             // PITCH ANGLE
             if (Math.abs(headAngles.headPitchAngle) > HEAD_PITCH_LIMIT_UP || Math.abs(headAngles.headPitchAngle) > HEAD_PITCH_LIMIT_DOWN) {
@@ -2001,21 +2013,21 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 if (ang >HEAD_PITCH_LIMIT_UP || ang > HEAD_PITCH_LIMIT_DOWN) {
                     headAngles.headLimitedPitch = Math.signum(headAngles.headPitchAngle);
                     if (headAngles.headPitchAngle > 0) {
-                        headAngles.rightPitchAngle = pitchAngleFromDirection(true, true);
-                        headAngles.leftPitchAngle = pitchAngleFromDirection(false, true);
+                        headAngles.rightEyePitchAngle = pitchAngleFromDirection(true, true);
+                        headAngles.leftEyePitchAngle = pitchAngleFromDirection(false, true);
                     } else {
-                        headAngles.rightPitchAngle = pitchAngleFromDirection(true, false);
-                        headAngles.leftPitchAngle = pitchAngleFromDirection(false, false);
+                        headAngles.rightEyePitchAngle = pitchAngleFromDirection(true, false);
+                        headAngles.leftEyePitchAngle = pitchAngleFromDirection(false, false);
                     }
                 } else {
                     if (headAngles.headPitchAngle > 0) {
                         headAngles.headLimitedPitch = Math.signum(headAngles.headPitchAngle) * ang/HEAD_PITCH_LIMIT_UP;
-                        headAngles.rightPitchAngle = pitchAngleFromDirection(true, true);
-                        headAngles.leftPitchAngle = pitchAngleFromDirection(false, true);
+                        headAngles.rightEyePitchAngle = pitchAngleFromDirection(true, true);
+                        headAngles.leftEyePitchAngle = pitchAngleFromDirection(false, true);
                     } else {
                         headAngles.headLimitedPitch = Math.signum(headAngles.headPitchAngle) * ang/HEAD_PITCH_LIMIT_DOWN;
-                        headAngles.rightPitchAngle = pitchAngleFromDirection(true, false);
-                        headAngles.leftPitchAngle = pitchAngleFromDirection(false, false);
+                        headAngles.rightEyePitchAngle = pitchAngleFromDirection(true, false);
+                        headAngles.leftEyePitchAngle = pitchAngleFromDirection(false, false);
                     }
                 }
             } else {
@@ -2026,8 +2038,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         headAngles.headLimitedPitch = 0;
                     }
                     //headAngles.headLimitedPitch =  Math.signum(headAngles.headPitchAngle) * (Math.abs(headAngles.headPitchAngle) - 0.174533)/HEAD_PITCH_LIMIT_UP; //Math.signum(headAngles.headPitchAngle) *
-                    headAngles.rightPitchAngle = pitchAngleFromDirection(true, true);
-                    headAngles.leftPitchAngle = pitchAngleFromDirection(false, true);
+                    headAngles.rightEyePitchAngle = pitchAngleFromDirection(true, true);
+                    headAngles.leftEyePitchAngle = pitchAngleFromDirection(false, true);
                 } else {
                     if (headAngles.headPitchAngle < -0.174533) { // 10°
                         headAngles.headLimitedPitch = Math.signum(headAngles.headPitchAngle) * Math.abs(headAngles.headPitchAngle)/HEAD_PITCH_LIMIT_DOWN;
@@ -2035,8 +2047,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         headAngles.headLimitedPitch = 0;
                     }
                     //headAngles.headLimitedPitch =  Math.signum(headAngles.headPitchAngle) * (Math.abs(headAngles.headPitchAngle) - 0.174533)/HEAD_PITCH_LIMIT_DOWN;// Math.signum(headAngles.headPitchAngle) *
-                    headAngles.rightPitchAngle = pitchAngleFromDirection(true, false);
-                    headAngles.leftPitchAngle = pitchAngleFromDirection(false, false);
+                    headAngles.rightEyePitchAngle = pitchAngleFromDirection(true, false);
+                    headAngles.leftEyePitchAngle = pitchAngleFromDirection(false, false);
                 }
             }
             shoulderLimitedPitch = shoulderPitchAngle;
@@ -2051,7 +2063,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
          * @return the pitch angle value
          */
         private double pitchAngleFromDirection (boolean right, boolean up) {
-            return (Math.abs(right ? headAngles.rightPitchAngle : headAngles.leftPitchAngle)
+            return (Math.abs(right ? headAngles.rightEyePitchAngle : headAngles.leftEyePitchAngle)
                     - Math.abs(headAngles.headLimitedPitch) * (up ? HEAD_PITCH_LIMIT_UP : HEAD_PITCH_LIMIT_DOWN))
                     / EYES_PITCH_LIMIT;
         }
@@ -2060,8 +2072,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
          * Constructor. Computes the head and eyes angles to a target with
          * offset positions.
          */
-        public ShouldersAngles(Environment env, GazeSignal gaze, HeadAngles headAngles) {
-            this.headAngles = new HeadAngles (headAngles);
+        public ShouldersAngles(Environment env, GazeSignal gaze, HeadAndEyesAngles headAngles) {
+            this.headAngles = new HeadAndEyesAngles (headAngles);
             Vec3d shoulderRelativeEulerAngles;
             //euler angles to target + offset, for left eye, right eye, head
             shoulderYawAngle = 0;
@@ -2084,17 +2096,17 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
              * "Gaze and Attention Management for Embodied Conversational Agents"
              * Authors: Pejsa T Andrist S Gleicher M Mutlu B
              **/
-            double maxAngle = Math.abs(Math.max(this.headAngles.leftYawAngle, this.headAngles.rightYawAngle));
+            double maxAngle = Math.abs(Math.max(this.headAngles.leftEyeYawAngle, this.headAngles.rightEyeYawAngle));
             if (maxAngle < 0.349066) { // 20°
                 shoulderMinimumAlign = 0;
             } else if (maxAngle < 0.698132 && maxAngle >= 0.349066) { //  20° =< angle < 40°
-                shoulderMinimumAlign = Math.signum(this.headAngles.leftYawAngle) * Math.toRadians(0.8*Math.toDegrees(maxAngle*TORSO_YAW_LIMIT) - 1.45) / TORSO_YAW_LIMIT;
+                shoulderMinimumAlign = Math.signum(this.headAngles.leftEyeYawAngle) * Math.toRadians(0.8*Math.toDegrees(maxAngle*TORSO_YAW_LIMIT) - 1.45) / TORSO_YAW_LIMIT;
             } else if (maxAngle >= 0.698132) { //  angle => 40°
-                shoulderMinimumAlign = Math.signum(this.headAngles.leftYawAngle)
-                        * Math.toRadians(0.43*Math.exp(0.03*Math.abs(Math.toDegrees(Math.max(this.headAngles.leftYawAngle, this.headAngles.rightYawAngle)))) + 0.19)
+                shoulderMinimumAlign = Math.signum(this.headAngles.leftEyeYawAngle)
+                        * Math.toRadians(0.43*Math.exp(0.03*Math.abs(Math.toDegrees(Math.max(this.headAngles.leftEyeYawAngle, this.headAngles.rightEyeYawAngle)))) + 0.19)
                         / TORSO_YAW_LIMIT; // *TORSO_YAW_LIMIT
                 if (Math.abs(shoulderMinimumAlign*TORSO_YAW_LIMIT) > TORSO_YAW_LIMIT) {
-                    shoulderMinimumAlign =  Math.signum(this.headAngles.leftYawAngle);
+                    shoulderMinimumAlign =  Math.signum(this.headAngles.leftEyeYawAngle);
                 }
             }
 
@@ -2103,7 +2115,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             // shoulders latency
             // latency = 0.25*eyesrotation + 47.5  ---> value in ms
             // latency = latency/1000 ---> value in sec
-            shoulderLatency = (0.25*Math.toDegrees(Math.max(Math.max(this.headAngles.leftLimitedYaw *EYES_YAW_LIMIT, this.headAngles.rightLimitedYaw *EYES_YAW_LIMIT), Math.max(this.headAngles.leftLimitedPitch *EYES_PITCH_LIMIT, this.headAngles.rightLimitedPitch *EYES_PITCH_LIMIT))) + 47.5)/1000;
+            shoulderLatency = (0.25*Math.toDegrees(Math.max(Math.max(this.headAngles.leftEyeLimitedYaw *EYES_YAW_LIMIT, this.headAngles.rightEyeLimitedYaw *EYES_YAW_LIMIT), Math.max(this.headAngles.leftEyeLimitedPitch *EYES_PITCH_LIMIT, this.headAngles.rightEyeLimitedPitch *EYES_PITCH_LIMIT))) + 47.5)/1000;
         }
     }
 

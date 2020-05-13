@@ -190,6 +190,8 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         jPanel2 = new javax.swing.JPanel();
         filterCheckBox = new javax.swing.JCheckBox();
         filterMaxQueueSizeSpinner = new javax.swing.JSpinner();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jSpinner1 = new javax.swing.JSpinner();
         northPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         centerPanel = new javax.swing.JPanel();
         separator = new javax.swing.JSeparator();
@@ -361,11 +363,12 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         });
         jPanel1.add(performCheckBox);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Filter"));
         jPanel2.setToolTipText("Fitler");
         jPanel2.setName("Filter"); // NOI18N
+        jPanel2.setLayout(new java.awt.GridLayout(2, 2));
 
-        filterCheckBox.setText("Filter");
+        filterCheckBox.setText("On");
         filterCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 filterCheckBoxActionPerformed(evt);
@@ -380,6 +383,15 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
             }
         });
         jPanel2.add(filterMaxQueueSizeSpinner);
+
+        jCheckBox1.setSelected(zeroMQReader.getUseOSC());
+        jCheckBox1.setText("OSCOut");
+        jCheckBox1.setEnabled(false);
+        jPanel2.add(jCheckBox1);
+
+        jSpinner1.setEnabled(false);
+        jSpinner1.setValue(zeroMQReader.getOscOutPort());
+        jPanel2.add(jSpinner1);
 
         jPanel1.add(jPanel2);
 
@@ -677,8 +689,10 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.JCheckBox filterCheckBox;
     private javax.swing.JSpinner filterMaxQueueSizeSpinner;
     private javax.swing.JTabbedPane inputTabbedPane;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSpinner jSpinner1;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel northPanel;
     private javax.swing.Box.Filler northPanelFiller1;

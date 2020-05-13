@@ -33,6 +33,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Logger;
+import com.illposed.osc.*;
+import com.illposed.osc.transport.udp.OSCPort;
+import com.illposed.osc.transport.udp.OSCPortOut;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.logging.Level;
 
 /**
  *
@@ -63,6 +69,8 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     private OpenFaceFrame prevFrame = new OpenFaceFrame();
     private ArrayOfDoubleFilter filter = new ArrayOfDoubleFilter(64,5);
     private boolean useFilter = true;
+    private OSCPortOut oscPort;
+    private boolean useOSC = true;
 
     // loop variables
     private double prev_rot_X = 0.0;
@@ -79,6 +87,13 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
 
     private double alpha = 0.75; //1.0;
     
+    public int getOscOutPort(){
+        return OSCPort.defaultSCOSCPort();
+    }
+    
+    public boolean getUseOSC(){
+        return useOSC;
+    }
     
     public int getFilterMaxQueueSize(){
         return filter.getMaxSizePerQueue();
@@ -92,6 +107,13 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
 
     protected OpenFaceOutputStreamAbstractReader(OpenFaceOutputStreamReader loader) {
         this.loader = loader;
+        try {
+            oscPort = new OSCPortOut(InetAddress.getLocalHost(), OSCPort.defaultSCOSCPort());
+            useOSC = true;
+        } catch (IOException ex) {
+            useOSC = false;
+            Logger.getLogger(OpenFaceOutputStreamAbstractReader.class.getName()).log(Level.WARNING, null, ex);
+        }
         addConnectionListener(loader);
         addHeaderListener(loader);
     }
@@ -183,15 +205,18 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     private AUAPFrame makeAUFrame() {
         AUAPFrame au_frame = new AUAPFrame();
         au_frame.setFrameNumber(curFrame.frameNumber);
-
+        ArrayList<Double> values = new ArrayList<>(OpenFaceFrame.getAUFeatureMasksCount());
+        ArrayList<Double> valuesFiltered = new ArrayList<>(OpenFaceFrame.getAUFeatureMasksCount());
         for (int i = 0; i < OpenFaceFrame.getAUFeatureMasksCount(); ++i) {
             // we assume both tables have corresponding values. AU**_c acts as a mask
-            if (curFrame.auMasks[i] > 0.0) {
+            if (curFrame.auMasks[i] > 0.0 && !Double.isNaN(curFrame.aus[i]) && !Double.isInfinite(curFrame.aus[i])) {
                 double value = Math.pow(curFrame.aus[i], 0.5); // non linear curve to get to 1.
+                values.add(value);
                 double intensity;
                 if(isUseFilter()){
                     filter.push(i, value);                
                     intensity = filter.getFiltered(i);//alpha * value + (1 - alpha) * prevValue; // filter
+                    valuesFiltered.add(intensity);
                 }
                 else{
                     double prevValue = prevFrame.intensity[i];
@@ -199,9 +224,29 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
                 }
                 
                 au_frame.setAUAPboth(OpenFaceFrame.getAUFeatureMaskNumber(i), intensity);
+            }else{
+                if(isUseFilter()){
+                    values.add(0.);
+                    double d= filter.getFiltered(i);
+                    if(Double.isNaN(d) || Double.isInfinite(d))
+                        d = 0.;
+                    valuesFiltered.add(d);
+                }
             }
         }
+        if(useOSC){
+            OSCMessage msg = new OSCMessage("/au_raw/", values);
         
+            try {
+                oscPort.send(msg); 
+                if(isUseFilter()){
+                    OSCMessage msgFiltred = new OSCMessage("/au_filtered/", valuesFiltered);
+                    oscPort.send(msgFiltred);
+                }
+            } catch (OSCSerializeException | IOException ex) {
+                Logger.getLogger(OpenFaceOutputStreamAbstractReader.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }
 
         // gaze
         double gaze_x = alpha * (0.5 * (curFrame.gaze0.x() + curFrame.gaze1.x())) + (1 - alpha) * prev_gaze_x;
@@ -355,5 +400,7 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     public void setUseFilter(boolean useFilter) {
         getLogger().info("setUseFilter: "+useFilter);
         this.useFilter = useFilter;
+        if(useFilter)
+            this.filter.clear();
     }
 }

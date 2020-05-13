@@ -91,4 +91,10 @@ public class ArrayOfDoubleFilter {
         }
         return -1;
     }
+
+    public void clear() {
+        for (int idx = 0; idx<size;idx++) {
+            buffer[idx].clear();
+        }
+    }
 }

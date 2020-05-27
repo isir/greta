@@ -314,6 +314,7 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         gameCharacterHeadLeaf.setIdentifier(gameCharacterHeadId);
         gameCharacterHeadLeaf.setReference("head." + cm.getCurrentCharacterName().toLowerCase());
         gameCharacterHeadNode.addChildNode(gameCharacterHeadLeaf);
+        environment.addLeaf(gameCharacterHeadLeaf);
         return gameCharacterHeadNode;
     }
 
@@ -332,6 +333,7 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         gameObjectLeaf.setIdentifier(gameObjectId);
         gameObjectLeaf.setReference("object." + gameObjectId);
         gameObjectNode.addChildNode(gameObjectLeaf);
+        environment.addLeaf(gameObjectLeaf);
         return gameObjectNode;
     }
 

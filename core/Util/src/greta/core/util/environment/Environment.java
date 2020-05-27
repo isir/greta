@@ -240,13 +240,13 @@ public class Environment{
         // the head it is supposed to be the center of the coordinate axis
         // according to the quadrant in which is positioned the target the rotation anlge will be changed
 
-            if (onHorizontalPlane.x() >= 0.0 && onHorizontalPlane.z() > 0.0){
+            if (onHorizontalPlane.x() >= 0 && onHorizontalPlane.z() >= 0){
                 yawAngle = Math.toDegrees(Math.abs(Math.acos(onHorizontalPlane.z())));
             }else if (onHorizontalPlane.x() >= 0 && onHorizontalPlane.z() < 0){
                 yawAngle = 90.0 + Math.toDegrees(Math.abs(Math.asin(onHorizontalPlane.z())));
             }else if (onHorizontalPlane.x() <= 0 && onHorizontalPlane.z() < 0){
                 yawAngle = -90 -1*Math.toDegrees(Math.abs(Math.asin(onHorizontalPlane.z())));
-            }else if (onHorizontalPlane.x() <= 0 && onHorizontalPlane.z() > 0){
+            }else if (onHorizontalPlane.x() <= 0 && onHorizontalPlane.z() >= 0){
                 yawAngle =  -1*Math.toDegrees(Math.abs(Math.acos(onHorizontalPlane.z())));
             }else{
                 yawAngle = 0.0;

@@ -224,7 +224,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             currentGazes.put(gaze, Timer.getTimeMillis());
 
             //euler angles to target + offset, for head
-            HeadAndEyesAngles headAngles = new HeadAndEyesAngles(this.env, gaze);
+            HeadAndEyesAngles headAndEyesAngles = new HeadAndEyesAngles(this.env, gaze);
 
             // head angles give by the additional rotation of each cervical vertebrae
             double agentHeadPitch = currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc1_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc2_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc3_tilt) + currentAgent.getCurrentBAPFrame().getRadianValue(BAPType.vc4_tilt) +
@@ -256,18 +256,18 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
             Vec3d headActualAngle = actualHeadOrientation.toEulerXYZ(); // radians
 
-            if (headActualAngle.y() < headAngles.headYawAngle) {
+            if (headActualAngle.y() < headAndEyesAngles.headYawAngle) {
                 headLatency = 0;
             }
 
             //Compute the influence according the gaze amplitude
             Influence inf = gaze.getInfluence();
             if (inf == null) {
-                if (Math.max(Math.abs(headAngles.headPitchAngle), Math.abs(headAngles.headYawAngle)) > 0.523599){ // 30°
+                if (Math.max(Math.abs(headAndEyesAngles.headPitchAngle), Math.abs(headAndEyesAngles.headYawAngle)) > 0.523599){ // 30°
                     inf = Influence.TORSO;
-                } else if (Math.max(Math.abs(headAngles.headPitchAngle), Math.abs(headAngles.headYawAngle)) > 0.349066){ // 20°
+                } else if (Math.max(Math.abs(headAndEyesAngles.headPitchAngle), Math.abs(headAndEyesAngles.headYawAngle)) > 0.349066){ // 20°
                     inf = Influence.SHOULDER;
-                } else if (Math.max(Math.abs(headAngles.headPitchAngle), Math.abs(headAngles.headYawAngle)) > 0.261799){ // 15
+                } else if (Math.max(Math.abs(headAndEyesAngles.headPitchAngle), Math.abs(headAndEyesAngles.headYawAngle)) > 0.261799){ // 15
                     inf = Influence.HEAD;
                 }else{
                     inf = Influence.EYES;
@@ -289,13 +289,13 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             //end keyframe : all influences at original position
             double end = gaze.getEnd().getValue();
 
-            Influence gazeInfluence = computeGazeInfluence(gaze, headAngles);
+            Influence gazeInfluence = computeGazeInfluence(gaze, headAndEyesAngles);
 
             if (gazeInfluence.ordinal() >= Influence.SHOULDER.ordinal()) {
                 // if the influence involve the torso we create the keyframe just for the torso that already include the movement of
                 // vt12 vertebrae (the same we move just for the shoulder). So we don't need to create the keyframe also for the shoulder
                 //********************************************************************************//
-                ShouldersAngles shouldersAngles = new ShouldersAngles(this.env, gaze, headAngles);
+                ShouldersAngles shouldersAngles = new ShouldersAngles(this.env, gaze, headAndEyesAngles);
 
                 // calculate the shoulder max speed depending on the rotation angle
                 double shoulderMaxSpeed = Math.toRadians(Math.abs((4f/3 * Math.toDegrees(Math.abs(shouldersAngles.shoulderMinimumAlign*TORSO_YAW_LIMIT))/15 + 2)*Math.toDegrees(TORSO_ANGULAR_SPEED)));
@@ -412,17 +412,17 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 // Head Signals
                 double headMaxSpeed;
                 // calculate the head max speed depending on the rotation angle
-                if (Math.abs(headAngles.headLimitedYaw) > Math.abs(headAngles.headLimitedPitch)) {
-                    headMaxSpeed = Math.toRadians(Math.abs((4f/3 * Math.toDegrees(headAngles.headLimitedYaw *HEAD_YAW_LIMIT)/50 + 2f/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
+                if (Math.abs(headAndEyesAngles.headLimitedYaw) > Math.abs(headAndEyesAngles.headLimitedPitch)) {
+                    headMaxSpeed = Math.toRadians(Math.abs((4f/3 * Math.toDegrees(headAndEyesAngles.headLimitedYaw *HEAD_YAW_LIMIT)/50 + 2f/5)*Math.toDegrees(HEAD_ANGULAR_SPEED)));
                 } else {
-                    headMaxSpeed = Math.toRadians(Math.abs((4f/3 * Math.toDegrees(headAngles.headLimitedPitch
-                            * headAngles.headLimitedPitch < 0 ? HEAD_PITCH_LIMIT_DOWN : HEAD_PITCH_LIMIT_UP)
+                    headMaxSpeed = Math.toRadians(Math.abs((4f/3 * Math.toDegrees(headAndEyesAngles.headLimitedPitch
+                            * headAndEyesAngles.headLimitedPitch < 0 ? HEAD_PITCH_LIMIT_DOWN : HEAD_PITCH_LIMIT_UP)
                             / 50 + 2f/5) * Math.toDegrees(HEAD_ANGULAR_SPEED)));
                 }
 
 
                 // time head reach the target position and come back
-                double shoulderMoveTime = Math.max(Math.abs(headAngles.headLimitedYaw *HEAD_YAW_LIMIT), Math.abs(headAngles.headLimitedPitch *HEAD_YAW_LIMIT)) / headMaxSpeed;
+                double shoulderMoveTime = Math.max(Math.abs(headAndEyesAngles.headLimitedYaw *HEAD_YAW_LIMIT), Math.abs(headAndEyesAngles.headLimitedPitch *HEAD_YAW_LIMIT)) / headMaxSpeed;
                 double timeHeadAtTarget = start + headLatency + shoulderMoveTime; // 0.1 is the latency time
 
                 if (end == 0) {
@@ -446,7 +446,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 // headSignalToTarget head signal when look to the target
                 HeadSignal headSignalToTarget = createHeadSignalWithDirectionShift();
                 SpinePhase spinePhaseToTarget;
-                spinePhaseToTarget = createSpinePhase("end", timeHeadAtTarget, timeHeadAtTarget, headAngles.headLimitedYaw, headAngles.headLimitedPitch); // ready
+                spinePhaseToTarget = createSpinePhase("end", timeHeadAtTarget, timeHeadAtTarget, headAndEyesAngles.headLimitedYaw, headAndEyesAngles.headLimitedPitch); // ready
                 spinePhaseToTarget.setStartTime(timeHeadAtTarget);
                 // head latency equal to 50 ms
                 setupSignal(headSignalToTarget, spinePhaseToTarget, start + headLatency, timeHeadAtTarget);
@@ -1807,6 +1807,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                     if (leafToCheck.getIdentifier().equals(gaze.getTarget())) {
                                         idTarget = leafToCheck.getIdentifier();
                                         sizeTarget = leafToCheck.getSize();
+                                        targetNode = leafToCheck;
                                         break;
                                     }
                                 }
@@ -1817,14 +1818,17 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                         TreeNode target = (TreeNode) n;
                                         idTarget = target.getIdentifier();
                                         sizeTarget = target.getScale();
+                                        targetNode = target;
                                     }
                                 }
-                                targetNode = env.getNode(idTarget);
+                                if (targetNode == null) {
+                                    targetNode = env.getNode(idTarget);
+                                }
                             }
                         }
                     }
 
-                    if (targetNode != null || vec2target != null) {
+                    if (targetNode != null) {
 
                         TreeNode currentCharacterHeadFromUnity = GazeKeyframeGenerator.this.cm.getCurrentCharacterHeadFromUnity();
 
@@ -1832,15 +1836,26 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         if (targetNode instanceof Animatable) {
                             vec2target = ((TreeNode) env.getNode(gaze.getTarget() + "_AudioTreeNode")).getGlobalCoordinates();
                             vec2target = new Vec3d(vec2target.x(), vec2target.y() + 0.09f, vec2target.z() + 0.13f); // TODO: offsets are in local values, they must be in global values
-                        } else {
-                            if (vec2target == null) {
-                                if (targetNode instanceof Leaf) {
-                                    targetNode = targetNode.getParent();
-                                }
-                                vec2target = ((TreeNode) targetNode).getGlobalCoordinates();
-                                // the objects are placed on the floor. To take the height we need to take the size along y axis
-                                vec2target.setY(vec2target.y() + sizeTarget.y() / 2); // take the center of the Target long y axis (size.y / 2)
-                            }
+                        } else if (targetNode instanceof Leaf) {
+
+                            Leaf targetLeaf = (Leaf) targetNode;
+                            TreeNode targetLeafParent = targetLeaf.getParent();
+
+                            Leaf targetCenterLeaf = new Leaf();
+                            targetCenterLeaf.setIdentifier(targetLeaf.getIdentifier() + "_center");
+                            targetCenterLeaf.setReference("object.center");
+                            targetCenterLeaf.setSize(0, 0, 0);
+
+                            TreeNode targetCenterParent = new TreeNode();
+                            targetCenterParent.setCoordinates(targetLeaf.getSize().x() / 2, targetLeaf.getSize().y() / 2, targetLeaf.getSize().z() / 2);
+
+                            targetLeafParent.addChildNode(targetCenterParent);
+                            targetCenterParent.addChildNode(targetCenterLeaf);
+
+                            vec2target = ((TreeNode) targetCenterParent).getGlobalCoordinates();
+
+                            targetCenterParent.removeChild(targetCenterLeaf);
+                            targetLeafParent.removeChild(targetCenterParent);
                         }
 
                         // skeleton position

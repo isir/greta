@@ -1,0 +1,34 @@
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts" xmlns="">
+<description level="1" type="gretabml"><reference>tmp/from-fml-apml.pho</reference></description>
+<tm id="tm0"/>That 
+<tm id="tm1"/>right 
+<tm id="tm2"/>now 
+<tm id="tm3"/>is 
+<tm id="tm4"/>the 
+<tm id="tm5"/>open 
+<tm id="tm6"/>sewer 
+<tm id="tm7"/>for 
+<tm id="tm8"/>our 
+<tm id="tm9"/>industrial 
+<tm id="tm10"/>civilization 
+<tm id="tm11"/>as 
+<tm id="tm12"/>it's 
+<tm id="tm13"/>currently 
+<tm id="tm14"/>organized 
+<tm id="tm15"/>.<tm id="tm16"/>
+<pitchaccent id='xpa0' type='Hstar' start='s1:tm0' end='s1:tm1' level='strong' importance='1'/> 
+<pitchaccent id='xpa1' type='Hstar' start='s1:tm1' end='s1:tm2' level='strong' importance='1'/> 
+<pitchaccent id='xpa2' type='Lstar' start='s1:tm2' end='s1:tm3' level='strong' importance='1'/> 
+<pitchaccent id='xpa3' type='Lstar' start='s1:tm3' end='s1:tm4' level='strong' importance='1'/> 
+<pitchaccent id='xpa4' type='Lstar' start='s1:tm4' end='s1:tm5' level='strong' importance='1'/> 
+<pitchaccent id='xpa5' type='Lstar' start='s1:tm5' end='s1:tm6' level='strong' importance='1'/> 
+<pitchaccent id='xpa6' type='Hstar' start='s1:tm6' end='s1:tm7' level='strong' importance='1'/> 
+<pitchaccent id='xpa7' type='Lstar' start='s1:tm7' end='s1:tm8' level='strong' importance='1'/> 
+<pitchaccent id='xpa8' type='Hstar' start='s1:tm14' end='s1:tm15' level='strong' importance='1'/> 
+
+</speech>
+</bml>
+
+
+

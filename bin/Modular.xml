@@ -426,6 +426,10 @@
             <object class="greta.auxiliary.tts.cereproc.CereProcTTS" lib_id="greta_cereproc"/>
             <frame type="noFrame"/>
         </module>
+        <module name="Voxygen">
+            <object class="greta.auxiliary.tts.voxygen.VoxygenTTS" lib_id="greta_voxygen"/>
+            <frame type="noFrame"/>
+        </module>
         <module name="ActiveMQ Broker">
             <object class="greta.auxiliary.activemq.Broker" lib_id="greta_activemq"/>
             <frame class="greta.auxiliary.activemq.gui.BrokerFrame" lib_id="greta_activemq" type="frame">
@@ -992,6 +996,9 @@
         <lib id="ext_thrift.libthrift" path="./Common/Lib/External/thrift/libthrift-0.13.0.jar"/>
         <lib id="ext_thrift.servlet-api" path="./Common/Lib/External/thrift/servlet-api-2.5.jar"/>
         <lib id="ext_thrift.slf4j-api" path="./Common/Lib/External/thrift/slf4j-api-1.7.25.jar"/>
+        <lib id="ext_voxygen" path="./Common/Lib/External/voxygen/voxygen.jar">
+            <needs path="./Common/Data/Voxygen/**"/>
+        </lib>
         <lib id="greta_activemq" path="./Common/Lib/Internal/ActiveMQ.jar">
             <depends lib_id="ext_activemq-all"/>
             <depends lib_id="ext_jackson-annotations"/>
@@ -1226,6 +1233,12 @@
         </lib>
         <lib id="greta_utilx" path="./Common/Lib/Internal/Utilx.jar">
             <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_voxygen" path="./Common/Lib/Internal/Voxygen.jar">
+            <depends lib_id="ext_voxygen"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./Common/Data/Voxygen/*"/>
+            <needs path="./Common/Lib/External/voxygen/**"/>
         </lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->

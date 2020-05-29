@@ -47,6 +47,7 @@
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/Thrift"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/TTS/CereProc"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/TTS/MaryTTS"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/TTS/Voxygen"/>
         <ant target="${action}" useNativeBasedir="true" dir="core/AnimationCore"/>
         <ant target="${action}" useNativeBasedir="true" dir="core/BehaviorPlanner"/>
         <ant target="${action}" useNativeBasedir="true" dir="core/BehaviorRealizer"/>

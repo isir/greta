@@ -49,6 +49,8 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
     private final static String TOPIC = "";
 
     private boolean isConnected = false;
+    private int lineNullCount;
+    private static final int MAX_LINENULLCOUNT = 8;						  
 
     /* ---------------------------------------------------------------------- */
 
@@ -142,8 +144,8 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
             LOGGER.fine(String.format("Thread: %s", OpenFaceOutputStreamZeroMQReader.class.getName()));
             while (true) {
                 while (isConnected) {
-                    processLine();
-                    Thread.sleep(30);
+                    processLine();                                        
+                    Thread.sleep(10);
                 }
                 Thread.sleep(1000);
             }
@@ -158,21 +160,27 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
     private void processLine() {
         String line = null;
         try {
-            line = zSubscriber.recvStr();
+            line = zSubscriber.recvStr(ZMQ.DONTWAIT);
         } catch (org.zeromq.ZMQException ex) {
             LOGGER.warning(String.format("Line is undefined"));
         }
         if (line != null) {
-            if (line.startsWith("DATA:")) {
+            if (line.startsWith("DATA:")) {                
+                lineNullCount = 0;
                 processData(line);
             } else if (line.startsWith("HEADER:")) {
                 processHeader(line);
             } else {
                 LOGGER.warning(String.format("Line not recognized: %s", line));
             }
-        } else {
-            LOGGER.warning(String.format("Line is null"));
+				
+														  
         }
+        else
+            lineNullCount++;
+        // Send null data when missing too many frames
+        if(lineNullCount > MAX_LINENULLCOUNT)
+            processNullData();
     }
 
     private void processHeader(String line) {
@@ -185,6 +193,10 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
 
     private void processData(String line) {
         processFrame(line.substring(5));
+    }
+    
+    private void processNullData(){
+        processFrame(null);
     }
 
     /* ---------------------------------------------------------------------- */

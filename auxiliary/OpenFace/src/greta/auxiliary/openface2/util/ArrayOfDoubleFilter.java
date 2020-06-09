@@ -27,8 +27,8 @@ import java.util.logging.Logger;
 public class ArrayOfDoubleFilter {
     protected static final Logger LOGGER = Logger.getLogger(ArrayOfDoubleFilter.class.getName());
 
-    private LinkedList<Double>[] buffer; 
-    private int size, maxSizePerQueue;
+    protected LinkedList<Double>[] buffer; 
+    protected int size, maxSizePerQueue;
     
     public ArrayOfDoubleFilter(int size, int maxSizePerQueue){
         this.size = size;
@@ -61,6 +61,15 @@ public class ArrayOfDoubleFilter {
                 buffer[idx].poll();
              buffer[idx].add(value);
         }
+    }
+    
+    public double pushAndGetFiltered(int idx, double value){
+        if(idx>=0 && idx<size){
+            if(buffer[idx].size()>= maxSizePerQueue)
+                buffer[idx].poll();
+             buffer[idx].add(value);
+        }
+        return getFiltered(idx);
     }
     
     public double getValueAt(int idx, int col){

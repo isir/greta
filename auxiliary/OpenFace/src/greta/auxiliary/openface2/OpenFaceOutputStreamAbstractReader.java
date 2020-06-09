@@ -36,8 +36,12 @@ import java.util.logging.Logger;
 import com.illposed.osc.*;
 import com.illposed.osc.transport.udp.OSCPort;
 import com.illposed.osc.transport.udp.OSCPortOut;
+import greta.auxiliary.openface2.util.ArrayOfDoubleFilterPow;
 import java.io.IOException;
 import java.net.InetAddress;
+import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Level;
 
 /**
@@ -45,6 +49,7 @@ import java.util.logging.Level;
  * @author Brice Donval
  */
 public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
+    protected static final Logger LOGGER = Logger.getLogger(OpenFaceOutputStreamAbstractReader.class.getName());
 
     private final OpenFaceOutputStreamReader loader;
 
@@ -67,7 +72,8 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     private double frameDuration = 0.0;
     private OpenFaceFrame curFrame = new OpenFaceFrame();
     private OpenFaceFrame prevFrame = new OpenFaceFrame();
-    private ArrayOfDoubleFilter filter = new ArrayOfDoubleFilter(64,5);
+    private ArrayOfDoubleFilterPow filterAUs = new ArrayOfDoubleFilterPow(64,5,.5);
+    private ArrayOfDoubleFilterPow filterBAP = new ArrayOfDoubleFilterPow(3,5,.5);
     private boolean useFilter = true;
     private OSCPortOut oscPort;
     private boolean useOSC = true;
@@ -80,10 +86,10 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     private double min_time = Double.MAX_VALUE;
     private double max_time = 0.0;
 
-    private double prev_gaze_x = 0.0;
-    private double prev_gaze_y = 0.0;
+									 
+									 
 
-    private double prev_blink = 0.0;
+									
 
     private double alpha = 0.75; //1.0;
     
@@ -96,11 +102,23 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     }
     
     public int getFilterMaxQueueSize(){
-        return filter.getMaxSizePerQueue();
+        return filterAUs.getMaxSizePerQueue();
     }
     
     public void setFilterMaxQueueSize(int i){
-        filter.setMaxSizePerQueue(i);
+        LOGGER.info(String.format("setFilterMaxQueueSize: %d",i));
+        filterAUs.setMaxSizePerQueue(i);
+        filterBAP.setMaxSizePerQueue(i);
+    }
+    
+    public double getFilterPow(){
+        return filterAUs.getPow();
+    }
+    
+    public void setFilterPow(double d){
+        LOGGER.info(String.format("setFilterPow: %f",d));        
+        filterAUs.setPow(d);
+        filterBAP.setPow(d);
     }
 
     /* ---------------------------------------------------------------------- */
@@ -154,26 +172,31 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     /* ---------------------------------------------------------------------- */
 
     protected void processFrame(String line) {
-        if (loaderIsPerforming() && line != null) {
+        if (loaderIsPerforming() ) {
             int curGretaFrame = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
             prevFrame.copy(curFrame);
 
             if (startInputFrame == 0) {
                 startInputFrame = curFrame.frameNumber;
             }
-
-            curFrame.readDataLine(line);
+            
+            if( line != null)
+                curFrame.readDataLine(line);
+            else{
+                curFrame = new OpenFaceFrame();
+                curFrame.timestamp = Timer.getTime();
+            }
             //curFrame.frameNumber += offsetFrame-startInputFrame + curGretaFrame;
             curFrame.frameNumber = offsetFrame + curGretaFrame;
             int frameDiff = curFrame.frameNumber - prevFrame.frameNumber;
             if (frameDiff < 10 && frameDiff > 0) { // If less than 10 frame delay
                 frameDuration = curFrame.timestamp - prevFrame.timestamp;
                 fps = 1.0 / frameDuration;
-                //LOGGER.info(String.format("frameNumber: %d, fps:%f, f dur:%f",curFrame.frameNumber, fps, frameDuration));
+                //LOGGER.fine(String.format("frameNumber: %d, fps:%f, f dur:%f",curFrame.frameNumber, fps, frameDuration));
                 processOpenFace();
             }
         }
-    }
+    }    
 
     private void processOpenFace() {
 
@@ -205,53 +228,67 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     private AUAPFrame makeAUFrame() {
         AUAPFrame au_frame = new AUAPFrame();
         au_frame.setFrameNumber(curFrame.frameNumber);
-        ArrayList<Double> values = new ArrayList<>(OpenFaceFrame.getAUFeatureMasksCount());
-        ArrayList<Double> valuesFiltered = new ArrayList<>(OpenFaceFrame.getAUFeatureMasksCount());
+        Map<String, Double> values = new TreeMap<>();
+        Map<String, Double> masks = new TreeMap<>();
+        Map<String, Double> valuesFiltered = new TreeMap<>();
         for (int i = 0; i < OpenFaceFrame.getAUFeatureMasksCount(); ++i) {
             // we assume both tables have corresponding values. AU**_c acts as a mask
-            if (curFrame.auMasks[i] > 0.0 && !Double.isNaN(curFrame.aus[i]) && !Double.isInfinite(curFrame.aus[i])) {
-                double value = Math.pow(curFrame.aus[i], 0.5); // non linear curve to get to 1.
-                values.add(value);
-                double intensity;
-                if(isUseFilter()){
-                    filter.push(i, value);                
-                    intensity = filter.getFiltered(i);//alpha * value + (1 - alpha) * prevValue; // filter
-                    valuesFiltered.add(intensity);
-                }
-                else{
-                    double prevValue = prevFrame.intensity[i];
-                    intensity = alpha * value + (1 - alpha) * prevValue; // filter
-                }
-                
-                au_frame.setAUAPboth(OpenFaceFrame.getAUFeatureMaskNumber(i), intensity);
-            }else{
-                if(isUseFilter()){
-                    values.add(0.);
-                    double d= filter.getFiltered(i);
-                    if(Double.isNaN(d) || Double.isInfinite(d))
-                        d = 0.;
-                    valuesFiltered.add(d);
-                }
+            if (Double.isNaN(curFrame.aus[i]) || Double.isInfinite(curFrame.aus[i]))
+                curFrame.aus[i] = 0.;
+            //if (!Double.isNaN(curFrame.aus[i]) && !Double.isInfinite(curFrame.aus[i])) {
+            double value = curFrame.aus[i]*curFrame.auMasks[i]; // non linear curve to get to 1.
+            values.put(OpenFaceFrame.getAUFeatureKey(i), value);
+            masks.put(OpenFaceFrame.getAUFeatureKey(i), curFrame.auMasks[i]);
+								  
+														  
+																										  
+												  
+				 
+					 
+															  
+            double intensity;
+				 
+				
+																						 
+				  
+            if(isUseFilter()){
+                intensity = filterAUs.pushAndGetFiltered(i, value);                    
+                valuesFiltered.put(OpenFaceFrame.getAUFeatureKey(i),intensity);
+															   
+							   
+										  
+				 
             }
-        }
-        if(useOSC){
-            OSCMessage msg = new OSCMessage("/au_raw/", values);
-        
-            try {
-                oscPort.send(msg); 
-                if(isUseFilter()){
-                    OSCMessage msgFiltred = new OSCMessage("/au_filtered/", valuesFiltered);
-                    oscPort.send(msgFiltred);
-                }
-            } catch (OSCSerializeException | IOException ex) {
-                Logger.getLogger(OpenFaceOutputStreamAbstractReader.class.getName()).log(Level.SEVERE, null, ex);
-            } 
-        }
+            else{
+                double prevValue = prevFrame.intensity[i];
+                intensity = alpha * value + (1 - alpha) * prevValue; // filter
+		
+				 
+								   
+								  
+																							
+											 
+				 
+															  
+																												 
+            }
+		 
 
+            au_frame.setAUAPboth(OpenFaceFrame.getAUFeatureMaskNumber(i), intensity);
+        }  
+        //LOGGER.info(String.format("curFrame: %s",curFrame));
         // gaze
-        double gaze_x = alpha * (0.5 * (curFrame.gaze0.x() + curFrame.gaze1.x())) + (1 - alpha) * prev_gaze_x;
-        double gaze_y = alpha * (0.5 * (curFrame.gaze0.y() + curFrame.gaze1.y())) + (1 - alpha) * prev_gaze_y;
-
+        double gaze_x = 0.5 * (curFrame.gaze0.x() + curFrame.gaze1.x());
+        double gaze_y = 0.5 * (curFrame.gaze0.y() + curFrame.gaze1.y());
+        values.put("gaze_x",gaze_x);
+        values.put("gaze_y",gaze_y);
+        if(isUseFilter()){
+            gaze_x = filterAUs.pushAndGetFiltered(61, gaze_x);        
+            gaze_y = filterAUs.pushAndGetFiltered(63, gaze_y);
+            valuesFiltered.put("gaze_x",gaze_x);
+            valuesFiltered.put("gaze_y",gaze_y);
+        }
+        
         if (gaze_x < 0) {
             au_frame.setAUAPboth(62, -gaze_x);
         } else {
@@ -263,14 +300,34 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
         } else {
             au_frame.setAUAPboth(63, gaze_y);
         }
-        prev_gaze_x = gaze_x;
-        prev_gaze_y = gaze_y;
+        
+        // Send to OSC to debug signal
+        if(useOSC){
+            sendOSC("/au_raw/", values);
+            sendOSC("/au_mask/", masks);
+            if(isUseFilter()){
+                sendOSC("/au_filtered/", valuesFiltered);
+            }           
+        }
 
         // blink
-        //double blink = alpha*(Double.parseDouble(values[col_blink].replace(',', '.'))/5.0)+(1-alpha)*prev_blink;
-        double blink = curFrame.blink;
-        au_frame.setAUAPboth(43, blink);
+																												  
+									  
+        au_frame.setAUAPboth(43, curFrame.blink);
         return au_frame;
+    }
+    
+    private void sendOSC(String root, Map<String,Double> map){
+        try {
+            for (String key : map.keySet()) {
+                final List<Double> args = new ArrayList<>();
+                args.add(map.get(key));
+                OSCMessage msg = new OSCMessage(root+key, args);            
+                oscPort.send(msg);            
+            }
+        } catch (OSCSerializeException | IOException ex) {
+            LOGGER.warning(ex.getLocalizedMessage());
+        } 
     }
 
     private BAPFrame makeBAPFrame() {
@@ -285,17 +342,28 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
         double rot_Y_deg = rot_Y_rad * 180 / Math.PI;
         double rot_Z_deg = rot_Z_rad * 180 / Math.PI;
 
-        rot_X_deg = alpha * (rot_X_deg) + (1 - alpha) * prev_rot_X;
-        rot_Y_deg = alpha * (rot_Y_deg) + (1 - alpha) * prev_rot_Y;
-        rot_Z_deg = alpha * (rot_Z_deg) + (1 - alpha) * prev_rot_Z;
-
+        if(useFilter){
+            rot_X_deg = filterBAP.pushAndGetFiltered(0, rot_X_deg);
+            rot_Y_deg = filterBAP.pushAndGetFiltered(1, rot_Y_deg);
+            rot_Z_deg = filterBAP.pushAndGetFiltered(2, rot_Z_deg);
+        }
+        else{
+            rot_X_deg = alpha * (rot_X_deg) + (1 - alpha) * prev_rot_X;
+            rot_Y_deg = alpha * (rot_Y_deg) + (1 - alpha) * prev_rot_Y;
+            rot_Z_deg = alpha * (rot_Z_deg) + (1 - alpha) * prev_rot_Z;
+            
+            prev_rot_X = rot_X_deg;
+            prev_rot_Y = rot_Y_deg;
+            prev_rot_Z = rot_Z_deg;
+        }
+        
         hmFrame.setDegreeValue(BAPType.vc3_tilt, rot_X_deg);
         hmFrame.setDegreeValue(BAPType.vc3_torsion, rot_Y_deg);
         hmFrame.setDegreeValue(BAPType.vc3_roll, rot_Z_deg);
 
-        prev_rot_X = rot_X_deg;
-        prev_rot_Y = rot_Y_deg;
-        prev_rot_Z = rot_Z_deg;
+							   
+							   
+							   
 
         return hmFrame;
     }
@@ -400,7 +468,9 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     public void setUseFilter(boolean useFilter) {
         getLogger().info("setUseFilter: "+useFilter);
         this.useFilter = useFilter;
-        if(useFilter)
-            this.filter.clear();
+        if(useFilter){
+            filterAUs.clear();
+            filterBAP.clear();
+        }
     }
 }

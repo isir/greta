@@ -5,7 +5,6 @@
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
             <name>OpenFace</name>
             <source-roots>
-                <root id="src.src.dir"/>
                 <root id="src.dir"/>
             </source-roots>
             <test-roots>

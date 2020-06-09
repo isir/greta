@@ -18,15 +18,16 @@
 package greta.auxiliary.openface2.util;
 
 import greta.core.util.math.Vec3d;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 /**
  * This file represents an OpenFace2 frame
  *
@@ -56,7 +57,8 @@ public class OpenFaceFrame {
 
     private static List<String> auFeatureKeys = new ArrayList<>();
     private static List<String> auFeatureMaskKeys = new ArrayList<>();
-    private static List<String> selectedFeatures = null;
+    private static List<String> selectedFeatures = null;	
+    private DecimalFormat _decFormat = new DecimalFormat("#0.00");
 
     public static class AUFeature {
 
@@ -72,22 +74,25 @@ public class OpenFaceFrame {
             this.index = index;
             this.num = Integer.parseInt(num);
         }
+		public String getKey(){
+            return String.format("AU%02d", num);
+        }										
     }
 
     public static String[] availableFeatures = new String[0];
 
-    public static Map<String, Integer> preAUFeatureKeysMap = new HashMap<>();
-    public static Map<String, AUFeature> auFeaturesMap = new HashMap<>();
-    public static Map<String, AUFeature> auFeatureMasksMap = new HashMap<>();
+    public static Map<String, Integer> preAUFeatureKeysMap = new TreeMap<>();
+    public static Map<String, AUFeature> auFeaturesMap = new TreeMap<>();
+    public static Map<String, AUFeature> auFeatureMasksMap = new TreeMap<>();
 
     public final static String BLINK_AU = "AU45_r";
 
     public static int getAUFeaturesCount() {
-        return auFeaturesMap.size();
+        return auFeaturesMap.size()>MAX_AUS?MAX_AUS:auFeaturesMap.size();
     }
 
     public static int getAUFeatureMasksCount() {
-        return auFeatureMasksMap.size();
+        return auFeatureMasksMap.size()>MAX_AUS?MAX_AUS:auFeatureMasksMap.size();
     }
 
     public static String separator = ", *";
@@ -137,12 +142,14 @@ public class OpenFaceFrame {
             } else {
                 Matcher m = p.matcher(tokens[i]);
                 if (m.matches()) {
-                    if (tokens[i].endsWith("r")) {
-                        auFeatureKeys.add(tokens[i]);
-                        auFeaturesMap.put(tokens[i], new AUFeature(i, m.group(1)));
-                    } else if (tokens[i].endsWith("c")) {
-                        auFeatureMaskKeys.add(tokens[i]);
-                        auFeatureMasksMap.put(tokens[i], new AUFeature(i, m.group(1)));
+					String auKey = tokens[i];
+                    String auNum = m.group(1);
+                    if (auKey.endsWith("r")) {
+                        auFeatureKeys.add(auKey);
+                        auFeaturesMap.put(auKey, new AUFeature(i, auNum));
+                    } else if (auKey.endsWith("c")) {
+                        auFeatureMaskKeys.add(auKey);
+                        auFeatureMasksMap.put(auKey, new AUFeature(i, auNum));
                     }
                 }
             }
@@ -152,9 +159,16 @@ public class OpenFaceFrame {
 
         return true;
     }
+	public static String getAUFeatureKey(int index){
+        return auFeatureKeys.get(index);
+    }
+    
+    public static String getAUFeatureMaskKey(int index){
+        return auFeatureMaskKeys.get(index);
+    }
 
     public static int getAUFeatureNumber(int index) {
-        String key = auFeatureKeys.get(index);
+        String key = getAUFeatureKey(index);
         return auFeaturesMap.get(key).num;
     }
 
@@ -179,10 +193,11 @@ public class OpenFaceFrame {
     }
 
     private double readAUDataCol(String key, String[] cols, Map<String, AUFeature> set) {
+        double d = 0.;
         if (isFeatureSelected(key)) {
-            return Double.parseDouble(cols[set.get(key).index]);
+            d = Double.parseDouble(cols[set.get(key).index]);
         }
-        return 0.0;
+        return d;
     }
 
     public void readDataLine(String data) {
@@ -214,7 +229,12 @@ public class OpenFaceFrame {
 
         int i = 0;
         for (String key : auFeaturesMap.keySet()) {
+            if(i>= MAX_AUS){
+                //LOGGER.warning(String.format("AU[%d] %s is ignored, expected %d AUs maximum",i, key,MAX_AUS));                
+                break;
+            }
             aus[i] = readAUDataCol(key, outputs, auFeaturesMap) / 5.0; // AU**_r are between 0-5.0
+            
             if (BLINK_AU.equals(key)) {
                 blink = aus[i];
             }
@@ -222,8 +242,28 @@ public class OpenFaceFrame {
         }
         i = 0;
         for (String key : auFeatureMasksMap.keySet()) {
-            auMasks[i++] = readAUDataCol(key, outputs, auFeatureMasksMap);
+            if(i < MAX_AUS)
+                auMasks[i++] = readAUDataCol(key, outputs, auFeatureMasksMap);
         }
+    }
+    
+    @Override
+    public String toString(){
+        int i =0;
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format("%d\t%f\t%f:%b",frameNumber,timestamp,confidence,success));
+        for (String key : auFeaturesMap.keySet()) {
+            if(i < MAX_AUS){
+                sb.append(", ");
+                sb.append(key);
+                sb.append(":");
+                sb.append(auMasks[i]);
+                sb.append(":");
+                sb.append(_decFormat.format(aus[i]));
+            }
+            i++;
+        }
+        return sb.toString();
     }
 
     /*public boolean isNumeric(String s) {

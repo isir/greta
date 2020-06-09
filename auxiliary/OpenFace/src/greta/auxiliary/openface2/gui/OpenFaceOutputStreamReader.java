@@ -37,6 +37,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.logging.Logger;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -71,9 +73,13 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         return zeroMQReader.getFilterMaxQueueSize();
     }
     
-    public void setFilterMaxQueueSize(int i){
-        zeroMQReader.setFilterMaxQueueSize(i);
-        csvReader.setFilterMaxQueueSize(i);
+    public int getFilterPow(){
+        return zeroMQReader.getFilterMaxQueueSize();
+    }
+    
+    public void setFilterPow(double i){
+        zeroMQReader.setFilterPow(i);
+        csvReader.setFilterPow(i);
     }    
     
     /**
@@ -81,6 +87,8 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
      */
     public OpenFaceOutputStreamReader() {
         initComponents();
+        filterPowSpinner.setModel(new SpinnerNumberModel(0.0,0.0,10.0,0.1));
+        filterMaxQueueSizeSpinner.setValue(zeroMQReader.getFilterMaxQueueSize());
         setConnected(false);
     }
 
@@ -190,8 +198,9 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         jPanel2 = new javax.swing.JPanel();
         filterCheckBox = new javax.swing.JCheckBox();
         filterMaxQueueSizeSpinner = new javax.swing.JSpinner();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jSpinner1 = new javax.swing.JSpinner();
+        filterPowSpinner = new javax.swing.JSpinner();
+        jCheckBoxSendOSC = new javax.swing.JCheckBox();
+        jSpinnerSendOSCPort = new javax.swing.JSpinner();
         northPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         centerPanel = new javax.swing.JPanel();
         separator = new javax.swing.JSeparator();
@@ -376,7 +385,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         });
         jPanel2.add(filterCheckBox);
 
-        filterMaxQueueSizeSpinner.setValue(zeroMQReader.getFilterMaxQueueSize());
+        filterMaxQueueSizeSpinner.setModel(new javax.swing.SpinnerNumberModel(5, 1, 100, 1));
         filterMaxQueueSizeSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 filterMaxQueueSizeSpinnerStateChanged(evt);
@@ -384,14 +393,24 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         });
         jPanel2.add(filterMaxQueueSizeSpinner);
 
-        jCheckBox1.setSelected(zeroMQReader.getUseOSC());
-        jCheckBox1.setText("OSCOut");
-        jCheckBox1.setEnabled(false);
-        jPanel2.add(jCheckBox1);
+        filterPowSpinner.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        filterPowSpinner.setEditor(new javax.swing.JSpinner.NumberEditor(filterPowSpinner, "0.00"));
+        filterPowSpinner.setValue(zeroMQReader.getFilterPow());
+        filterPowSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                filterPowSpinnerStateChanged(evt);
+            }
+        });
+        jPanel2.add(filterPowSpinner);
 
-        jSpinner1.setEnabled(false);
-        jSpinner1.setValue(zeroMQReader.getOscOutPort());
-        jPanel2.add(jSpinner1);
+        jCheckBoxSendOSC.setSelected(zeroMQReader.getUseOSC());
+        jCheckBoxSendOSC.setText("OSCOut");
+        jCheckBoxSendOSC.setEnabled(false);
+        jPanel2.add(jCheckBoxSendOSC);
+
+        jSpinnerSendOSCPort.setEnabled(false);
+        jSpinnerSendOSCPort.setValue(zeroMQReader.getOscOutPort());
+        jPanel2.add(jSpinnerSendOSCPort);
 
         jPanel1.add(jPanel2);
 
@@ -650,16 +669,29 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         // TODO add your handling code here:
     }//GEN-LAST:event_performCheckBoxActionPerformed
 
+    private void filterPowSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_filterPowSpinnerStateChanged
+        try {
+            filterPowSpinner.commitEdit();
+        } catch ( java.text.ParseException e ) {  }
+        double value = (Double)filterPowSpinner.getValue();
+        if(value<0.){
+            value = 0.;
+            filterPowSpinner.setValue(value);
+        }
+        else if(value>10.){
+            value = 10.;
+            filterPowSpinner.setValue(value);
+        }
+            
+        zeroMQReader.setFilterPow(value);
+        csvReader.setFilterPow(value);
+    }//GEN-LAST:event_filterPowSpinnerStateChanged
+
     private void filterMaxQueueSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_filterMaxQueueSizeSpinnerStateChanged
         try {
             filterMaxQueueSizeSpinner.commitEdit();
         } catch ( java.text.ParseException e ) {  }
-        int value = (Integer) filterMaxQueueSizeSpinner.getValue();
-        if(value<1 || value > 1000){
-            value = 10;
-            filterMaxQueueSizeSpinner.setValue(value);
-        }
-            
+        int value = (Integer)filterMaxQueueSizeSpinner.getValue();
         zeroMQReader.setFilterMaxQueueSize(value);
         csvReader.setFilterMaxQueueSize(value);
     }//GEN-LAST:event_filterMaxQueueSizeSpinnerStateChanged
@@ -688,11 +720,12 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.JTable featuresTable;
     private javax.swing.JCheckBox filterCheckBox;
     private javax.swing.JSpinner filterMaxQueueSizeSpinner;
+    private javax.swing.JSpinner filterPowSpinner;
     private javax.swing.JTabbedPane inputTabbedPane;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBoxSendOSC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JSpinner jSpinner1;
+    private javax.swing.JSpinner jSpinnerSendOSCPort;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel northPanel;
     private javax.swing.Box.Filler northPanelFiller1;

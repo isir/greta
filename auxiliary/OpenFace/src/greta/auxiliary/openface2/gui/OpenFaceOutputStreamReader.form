@@ -459,17 +459,17 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="filterCheckBoxActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JSpinner" name="filterMaxQueueSizeSpinner">
+                    <Component class="javax.swing.JSpinner" name="jSpinnerfilterMaxQueueSize">
                       <Properties>
                         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                           <SpinnerModel initial="5" maximum="100" minimum="1" numberType="java.lang.Integer" stepSize="1" type="number"/>
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="filterMaxQueueSizeSpinnerStateChanged"/>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerfilterMaxQueueSizeStateChanged"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JSpinner" name="filterPowSpinner">
+                    <Component class="javax.swing.JSpinner" name="jSpinnerfilterPow">
                       <Properties>
                         <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
                           <SpinnerModel initial="0.0" minimum="0.0" numberType="java.lang.Double" stepSize="1.0" type="number"/>
@@ -482,25 +482,32 @@
                         </Property>
                       </Properties>
                       <Events>
-                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="filterPowSpinnerStateChanged"/>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerfilterPowStateChanged"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JCheckBox" name="jCheckBoxSendOSC">
                       <Properties>
                         <Property name="selected" type="boolean" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="zeroMQReader.getUseOSC()" type="code"/>
+                          <Connection code="useOSC" type="code"/>
                         </Property>
                         <Property name="text" type="java.lang.String" value="OSCOut"/>
-                        <Property name="enabled" type="boolean" value="false"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jCheckBoxSendOSCStateChanged"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JSpinner" name="jSpinnerSendOSCPort">
                       <Properties>
-                        <Property name="enabled" type="boolean" value="false"/>
+                        <Property name="model" type="javax.swing.SpinnerModel" editor="org.netbeans.modules.form.editors2.SpinnerModelEditor">
+                          <SpinnerModel initial="6000" maximum="99999" minimum="6000" numberType="java.lang.Integer" stepSize="1" type="number"/>
+                        </Property>
                         <Property name="value" type="java.lang.Object" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection code="zeroMQReader.getOscOutPort()" type="code"/>
+                          <Connection code="getOscOutPort()" type="code"/>
                         </Property>
                       </Properties>
+                      <Events>
+                        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSpinnerSendOSCPortStateChanged"/>
+                      </Events>
                     </Component>
                   </SubComponents>
                 </Container>

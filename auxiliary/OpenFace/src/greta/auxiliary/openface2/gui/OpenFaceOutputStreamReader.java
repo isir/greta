@@ -41,6 +41,13 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
+import com.illposed.osc.*;
+import com.illposed.osc.transport.udp.OSCPort;
+import com.illposed.osc.transport.udp.OSCPortOut;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.logging.Level;
+
 /**
  *
  * @author Philippe Gauthier <philippe.gauthier@sorbonne-universite.fr>
@@ -61,6 +68,10 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private static final String portProperty = "network.port";
 
     private String actualConnectedProperty;
+    // OSC is use to monitor AUs signal, mainly for debug
+    protected boolean useOSC = false;
+    protected OSCPortOut oscOut = null;
+    protected int oscPort = OSCPort.defaultSCOSCPort();    
 
     private AUEmitterImpl auEmitter = new AUEmitterImpl();
     private BAPFrameEmitterImpl bapFrameEmitter = new BAPFrameEmitterImpl();
@@ -68,28 +79,89 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private OpenFaceOutputStreamCSVReader csvReader = new OpenFaceOutputStreamCSVReader(this);
     private OpenFaceOutputStreamZeroMQReader zeroMQReader = new OpenFaceOutputStreamZeroMQReader(this);
 
-    /* ---------------------------------------------------------------------- */
-    public int getFilterMaxQueueSize(){
-        return zeroMQReader.getFilterMaxQueueSize();
-    }
-    
-    public int getFilterPow(){
-        return zeroMQReader.getFilterMaxQueueSize();
-    }
-    
-    public void setFilterPow(double i){
-        zeroMQReader.setFilterPow(i);
-        csvReader.setFilterPow(i);
-    }    
+     
     
     /**
      * Creates new form OpenFaceOutputStreamReader
      */
     public OpenFaceOutputStreamReader() {
         initComponents();
-        filterPowSpinner.setModel(new SpinnerNumberModel(0.0,0.0,10.0,0.1));
-        filterMaxQueueSizeSpinner.setValue(zeroMQReader.getFilterMaxQueueSize());
+        
+        jSpinnerfilterPow.setModel(new SpinnerNumberModel(0.0,0.0,10.0,0.1));
+        jSpinnerfilterMaxQueueSize.setValue(getFilterMaxQueueSize());
         setConnected(false);
+    }
+    /*
+    FILTERS
+    */
+    // We assume both reader use the same filter size
+    public int getFilterMaxQueueSize(){
+        return zeroMQReader.getFilterMaxQueueSize();
+    }
+    
+    // We assume both reader use the same filter size
+    public void setFilterMaxQueueSize(int value){
+        zeroMQReader.setFilterMaxQueueSize(value);
+        csvReader.setFilterMaxQueueSize(value);
+    }
+    
+    // We assume both reader use the same filter pow
+    public int getFilterPow(){
+        return zeroMQReader.getFilterMaxQueueSize();
+    }
+    
+    // We assume both reader use the same parameters
+    public void setFilterPow(double i){
+        zeroMQReader.setFilterPow(i);
+        csvReader.setFilterPow(i);
+    }
+    
+    /*
+    OSC
+    */
+    public void setUseOSC(boolean b){        
+        if(b){              
+            startOSCOut(oscPort);            
+        }
+        else{
+            stopOSCOut();
+        }
+    }
+    
+    protected void startOSCOut(int port){        
+        try {            
+            oscOut = new OSCPortOut(InetAddress.getLocalHost(), port);            
+            useOSC = true;
+            zeroMQReader.setOSCout(oscOut);
+            csvReader.setOSCout(oscOut);
+        } catch (IOException ex) {
+            useOSC = false;
+            LOGGER.log(Level.WARNING, null, ex);
+        }
+        LOGGER.log(Level.INFO, String.format("startOSCOut port %d : %b", port, useOSC));
+    }
+    
+    protected void stopOSCOut(){        
+        useOSC = false;
+        zeroMQReader.setOSCout(null);
+        csvReader.setOSCout(null);
+        if(oscOut!=null){
+            try {
+                oscOut.disconnect();
+            } catch (IOException ex) {           
+                LOGGER.log(Level.WARNING, null, ex);
+            }
+        }
+        LOGGER.log(Level.INFO, String.format("stopOSCOut : %b",  !useOSC));
+    }
+    
+    protected int getOscOutPort(){
+        return oscPort;
+    }
+    
+    protected void setOscOutPort(int port){
+        LOGGER.log(Level.INFO, String.format("setOscOutPort : %d",  port));
+        oscPort = port;      
     }
 
     private void setConnected(boolean connected) {
@@ -197,8 +269,8 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         performCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         filterCheckBox = new javax.swing.JCheckBox();
-        filterMaxQueueSizeSpinner = new javax.swing.JSpinner();
-        filterPowSpinner = new javax.swing.JSpinner();
+        jSpinnerfilterMaxQueueSize = new javax.swing.JSpinner();
+        jSpinnerfilterPow = new javax.swing.JSpinner();
         jCheckBoxSendOSC = new javax.swing.JCheckBox();
         jSpinnerSendOSCPort = new javax.swing.JSpinner();
         northPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
@@ -385,31 +457,40 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         });
         jPanel2.add(filterCheckBox);
 
-        filterMaxQueueSizeSpinner.setModel(new javax.swing.SpinnerNumberModel(5, 1, 100, 1));
-        filterMaxQueueSizeSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+        jSpinnerfilterMaxQueueSize.setModel(new javax.swing.SpinnerNumberModel(5, 1, 100, 1));
+        jSpinnerfilterMaxQueueSize.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                filterMaxQueueSizeSpinnerStateChanged(evt);
+                jSpinnerfilterMaxQueueSizeStateChanged(evt);
             }
         });
-        jPanel2.add(filterMaxQueueSizeSpinner);
+        jPanel2.add(jSpinnerfilterMaxQueueSize);
 
-        filterPowSpinner.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
-        filterPowSpinner.setEditor(new javax.swing.JSpinner.NumberEditor(filterPowSpinner, "0.00"));
-        filterPowSpinner.setValue(zeroMQReader.getFilterPow());
-        filterPowSpinner.addChangeListener(new javax.swing.event.ChangeListener() {
+        jSpinnerfilterPow.setModel(new javax.swing.SpinnerNumberModel(0.0d, 0.0d, null, 1.0d));
+        jSpinnerfilterPow.setEditor(new javax.swing.JSpinner.NumberEditor(jSpinnerfilterPow, "0.00"));
+        jSpinnerfilterPow.setValue(zeroMQReader.getFilterPow());
+        jSpinnerfilterPow.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                filterPowSpinnerStateChanged(evt);
+                jSpinnerfilterPowStateChanged(evt);
             }
         });
-        jPanel2.add(filterPowSpinner);
+        jPanel2.add(jSpinnerfilterPow);
 
-        jCheckBoxSendOSC.setSelected(zeroMQReader.getUseOSC());
+        jCheckBoxSendOSC.setSelected(useOSC);
         jCheckBoxSendOSC.setText("OSCOut");
-        jCheckBoxSendOSC.setEnabled(false);
+        jCheckBoxSendOSC.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxSendOSCStateChanged(evt);
+            }
+        });
         jPanel2.add(jCheckBoxSendOSC);
 
-        jSpinnerSendOSCPort.setEnabled(false);
-        jSpinnerSendOSCPort.setValue(zeroMQReader.getOscOutPort());
+        jSpinnerSendOSCPort.setModel(new javax.swing.SpinnerNumberModel(6000, 6000, 99999, 1));
+        jSpinnerSendOSCPort.setValue(getOscOutPort());
+        jSpinnerSendOSCPort.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jSpinnerSendOSCPortStateChanged(evt);
+            }
+        });
         jPanel2.add(jSpinnerSendOSCPort);
 
         jPanel1.add(jPanel2);
@@ -669,32 +750,34 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         // TODO add your handling code here:
     }//GEN-LAST:event_performCheckBoxActionPerformed
 
-    private void filterPowSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_filterPowSpinnerStateChanged
+    private void jSpinnerfilterPowStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerfilterPowStateChanged
         try {
-            filterPowSpinner.commitEdit();
+            jSpinnerfilterPow.commitEdit();
         } catch ( java.text.ParseException e ) {  }
-        double value = (Double)filterPowSpinner.getValue();
-        if(value<0.){
-            value = 0.;
-            filterPowSpinner.setValue(value);
-        }
-        else if(value>10.){
-            value = 10.;
-            filterPowSpinner.setValue(value);
-        }
-            
-        zeroMQReader.setFilterPow(value);
-        csvReader.setFilterPow(value);
-    }//GEN-LAST:event_filterPowSpinnerStateChanged
+        double value = (Double)jSpinnerfilterPow.getValue();
+        setFilterPow(value);
+    }//GEN-LAST:event_jSpinnerfilterPowStateChanged
 
-    private void filterMaxQueueSizeSpinnerStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_filterMaxQueueSizeSpinnerStateChanged
+    private void jSpinnerfilterMaxQueueSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerfilterMaxQueueSizeStateChanged
         try {
-            filterMaxQueueSizeSpinner.commitEdit();
+            jSpinnerfilterMaxQueueSize.commitEdit();
         } catch ( java.text.ParseException e ) {  }
-        int value = (Integer)filterMaxQueueSizeSpinner.getValue();
-        zeroMQReader.setFilterMaxQueueSize(value);
-        csvReader.setFilterMaxQueueSize(value);
-    }//GEN-LAST:event_filterMaxQueueSizeSpinnerStateChanged
+        int value = (Integer)jSpinnerfilterMaxQueueSize.getValue();
+        setFilterMaxQueueSize(value);
+    }//GEN-LAST:event_jSpinnerfilterMaxQueueSizeStateChanged
+
+    private void jCheckBoxSendOSCStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxSendOSCStateChanged
+        // TODO add your handling code here:
+        setUseOSC(jCheckBoxSendOSC.isSelected());
+    }//GEN-LAST:event_jCheckBoxSendOSCStateChanged
+
+    private void jSpinnerSendOSCPortStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSendOSCPortStateChanged
+        try {
+            jSpinnerSendOSCPort.commitEdit();
+        } catch ( java.text.ParseException e ) {  }
+        int value = (Integer)jSpinnerSendOSCPort.getValue();
+        setOscOutPort(value);
+    }//GEN-LAST:event_jSpinnerSendOSCPortStateChanged
 
     /* ---------------------------------------------------------------------- */
 
@@ -719,13 +802,13 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.JButton downButton;
     private javax.swing.JTable featuresTable;
     private javax.swing.JCheckBox filterCheckBox;
-    private javax.swing.JSpinner filterMaxQueueSizeSpinner;
-    private javax.swing.JSpinner filterPowSpinner;
     private javax.swing.JTabbedPane inputTabbedPane;
     private javax.swing.JCheckBox jCheckBoxSendOSC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSpinner jSpinnerSendOSCPort;
+    private javax.swing.JSpinner jSpinnerfilterMaxQueueSize;
+    private javax.swing.JSpinner jSpinnerfilterPow;
     private javax.swing.JPanel mainPanel;
     private javax.swing.JPanel northPanel;
     private javax.swing.Box.Filler northPanelFiller1;

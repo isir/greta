@@ -118,6 +118,11 @@ public class OpenFaceFrame {
     public double[] auMasks = new double[MAX_AUS];
     public double[] intensity = new double[MAX_AUS];
     public double blink = 0.0;
+    public boolean isNull = false;
+    
+    public OpenFaceFrame(){
+        isNull = true;
+    }
 
     public static boolean readHeader(String line) {
 
@@ -245,10 +250,13 @@ public class OpenFaceFrame {
             if(i < MAX_AUS)
                 auMasks[i++] = readAUDataCol(key, outputs, auFeatureMasksMap);
         }
+        isNull = false;
     }
     
     @Override
     public String toString(){
+        if(isNull)
+            return "null off";
         int i =0;
         StringBuilder sb = new StringBuilder();
         sb.append(String.format("%d\t%f\t%f:%b",frameNumber,timestamp,confidence,success));
@@ -288,6 +296,7 @@ public class OpenFaceFrame {
         gazeAngleY     = f.gazeAngleY;
         headPoseT      = f.headPoseT.clone();
         headPoseR      = f.headPoseR.clone();
+        isNull      = f.isNull;
         System.arraycopy(f.aus,         0, aus,         0, f.aus.length);
         System.arraycopy(f.auMasks,     0, auMasks,     0, f.auMasks.length);
         System.arraycopy(f.intensity,   0, intensity,   0, f.intensity.length);

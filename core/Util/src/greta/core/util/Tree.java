@@ -24,41 +24,41 @@ package greta.core.util;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TreeNode<T> {
+public class Tree<T> {
 
     private T data = null;
-    private List<TreeNode> children = new ArrayList<>();
-    private TreeNode parent = null;
+    private List<Tree> children = new ArrayList<>();
+    private Tree parent = null;
 
-    public TreeNode() {
+    public Tree() {
 
     }
-    public TreeNode(T data) {
+    public Tree(T data) {
         this.data = data;
     }
 
     public void clear() {
-        for(TreeNode child : children) {
+        for(Tree child : children) {
             child.clear();
         }
         children.clear();
     }
 
-    public void addChild(TreeNode child) {
+    public void addChild(Tree child) {
         child.setParent(this);
         this.children.add(child);
     }
 
-    public TreeNode<T> addChild(T data) {
-        TreeNode<T> newChild = new TreeNode<>(data);
+    public Tree<T> addChild(T data) {
+        Tree<T> newChild = new Tree<>(data);
         newChild.setParent(this);
         children.add(newChild);
         return newChild;
     }
 
     public void removeChild(T data) {
-        TreeNode nodeToDelete = null;
-        for(TreeNode c : children) {
+        Tree nodeToDelete = null;
+        for(Tree c : children) {
             if(c.data.equals(data)) {
                 nodeToDelete = c;
                 break;
@@ -70,14 +70,14 @@ public class TreeNode<T> {
             children.remove(nodeToDelete);
     }
 
-    public void addChildren(List<TreeNode> children) {
-        for(TreeNode t : children) {
+    public void addChildren(List<Tree> children) {
+        for(Tree t : children) {
             t.setParent(this);
         }
         this.children.addAll(children);
     }
 
-    public List<TreeNode> getChildren() {
+    public List<Tree> getChildren() {
         return children;
     }
 
@@ -93,11 +93,11 @@ public class TreeNode<T> {
         this.data = data;
     }
 
-    private void setParent(TreeNode parent) {
+    private void setParent(Tree parent) {
         this.parent = parent;
     }
 
-    public TreeNode getParent() {
+    public Tree getParent() {
         return parent;
     }
 }

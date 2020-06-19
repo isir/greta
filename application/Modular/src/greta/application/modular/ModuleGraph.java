@@ -38,7 +38,7 @@ import greta.application.modular.tools.PrimitiveTypes;
 import greta.core.util.CharacterDependent;
 import greta.core.util.CharacterManager;
 import greta.core.util.IniManager;
-import greta.core.util.TreeNode;
+import greta.core.util.Tree;
 import greta.core.util.log.LogPrinter;
 import greta.core.util.log.Logs;
 import greta.core.util.xml.XML;
@@ -76,7 +76,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
 
     private List<Connection> connections = new ArrayList<Connection>();
     private List<Module> modules = new ArrayList<Module>();
-    private TreeNode<Module> treeModules = new TreeNode<Module>();
+    private Tree<Module> moduleTree = new Tree<Module>();
     private JInternalFrame internalFrame = null;
     private Container internalFrameContent = null;
     private Container emptyPanel = new JPanel();
@@ -94,20 +94,20 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         this.getGraph().setDropEnabled(false);
     }
 
-    private TreeNode<Module> getTreeNode(TreeNode<Module> curNode, Module module){
+    private Tree<Module> getModuleNode(Tree<Module> curNode, Module module){
         if(module.equals(curNode.getData()))
             return curNode;
 
-        for(TreeNode<Module> child : curNode.getChildren()){
-            TreeNode<Module> node = getTreeNode(child,module);
+        for(Tree<Module> child : curNode.getChildren()){
+            Tree<Module> node = ModuleGraph.this.getModuleNode(child,module);
             if(node!=null)
                 return node;
         }
         return null;
     }
 
-    public TreeNode<Module> getTreeNode(Module module){
-        return getTreeNode(treeModules, module);
+    public Tree<Module> getModuleNode(Module module){
+        return ModuleGraph.this.getModuleNode(moduleTree, module);
     }
 
     /**
@@ -122,14 +122,14 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
             deleteModule(modules.get(i));
         }
         connections.clear();
-        treeModules.clear();
+        moduleTree.clear();
         updateInternalFrame(null);
 
         gc();
     }
 
 
-    private void createXMLTreeElement(TreeNode<Module> currentNode, XMLTree currentXmlNode){
+    private void createXMLTreeElement(Tree<Module> currentNode, XMLTree currentXmlNode){
         Module module = currentNode.getData();
         XMLTree element = currentXmlNode.createChild("element");
         element.setAttribute("id", module.getId());
@@ -158,9 +158,9 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         }
 
 
-        List<TreeNode> children = currentNode.getChildren();
+        List<Tree> children = currentNode.getChildren();
         if(children.size()>0){
-            for(TreeNode node:children){
+            for(Tree node:children){
                 createXMLTreeElement(node,element);
             }
         }
@@ -176,7 +176,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         XMLTree elements = modulated.createChild("elements");
         XMLTree connectionsXML = modulated.createChild("connections");
 
-        for(TreeNode<Module> moduleNode :treeModules.getChildren()){
+        for(Tree<Module> moduleNode :moduleTree.getChildren()){
             Module module = moduleNode.getData();
             if (module != null) {
                 createXMLTreeElement(moduleNode,elements);
@@ -196,8 +196,8 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
 
     }
 
-    private void loadGraph(TreeNode<Module> moduleNode, XMLTree elements){
-        TreeNode<Module> currentNode = moduleNode;
+    private void loadGraph(Tree<Module> moduleNode, XMLTree elements){
+        Tree<Module> currentNode = moduleNode;
         Module parent = currentNode.getData();
         CharacterManager cm=null ;
         if(parent!=null && parent.getObject() instanceof CharacterManager)
@@ -257,7 +257,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         XMLTree elements = modulated.findNodeCalled("elements");
         XMLTree connectionsXML = modulated.findNodeCalled("connections");
 
-        loadGraph(treeModules,elements);
+        loadGraph(moduleTree,elements);
 
         for (XMLTree connectionXML : connectionsXML.getChildrenElement()) {
             if (connectionXML.isNamed("connection")) {
@@ -298,8 +298,8 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         return connec;
     }
 
-    private void sortCellsAndModulesTree(TreeNode<Module> node){
-        for(TreeNode<Module> m :node.getChildren()){
+    private void sortCellsAndModulesTree(Tree<Module> node){
+        for(Tree<Module> m :node.getChildren()){
             for(Connection c : getConnectionsOfModule(m.getData())){
                 graph.orderCells(false, new Object[]{c.getCell()});
             }
@@ -315,7 +315,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
             modules.remove(selsected);
             modules.add(selsected);
         }
-        sortCellsAndModulesTree(treeModules);
+        sortCellsAndModulesTree(moduleTree);
     }
 
 
@@ -385,9 +385,9 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
         Module module = ModuleFactory.create(parentFrame, graph, moduleType, parent);
         if (module != null){
             if(parent!=null&&module.hasParent()){
-                getTreeNode(parent).addChild(module);
+                getModuleNode(parent).addChild(module);
             }else
-                treeModules.addChild(module);
+                moduleTree.addChild(module);
             modules.add(module);
         }
         checkConnectables();
@@ -413,7 +413,7 @@ public class ModuleGraph extends com.mxgraph.swing.mxGraphComponent {
             module.getCharacterManager().remove((CharacterDependent)(module.getFrame()));
         }
 
-        treeModules.removeChild(module);
+        moduleTree.removeChild(module);
         garbage.add(module);
     }
 

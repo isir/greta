@@ -20,11 +20,13 @@ package greta.core.util.environment;
 import greta.core.util.math.Vec3d;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLTree;
+import java.util.List;
 
 /**
  *
  * @author Pierre Philippe
  * @author Andre-Marie Pez
+ * @author Brice Donval
  */
 public class Leaf extends Node {
 
@@ -41,7 +43,7 @@ public class Leaf extends Node {
         if (intid != null) {
             this.identifier = intid;
         }
-        size = new Vec3d(s);
+        this.size = new Vec3d(s);
         this.reference = ref;
     }
 
@@ -67,6 +69,55 @@ public class Leaf extends Node {
 
     public String getReference() {
         return reference;
+    }
+
+    public Leaf createMetadataLeaf(String metadataShortName, String metadataValue) {
+
+        MetadataLeaf metadataLeaf = null;
+
+        if (!(this instanceof MetadataLeaf)) {
+            metadataLeaf = (MetadataLeaf) getMetadataLeaf(metadataShortName);
+            if (metadataLeaf != null) {
+                metadataLeaf.setMetadataValue(metadataValue);
+            } else {
+                metadataLeaf = new MetadataLeaf(this, metadataShortName, metadataValue);
+            }
+        }
+
+        return metadataLeaf;
+    }
+
+    public Leaf getMetadataLeaf(String metadataShortName) {
+
+        Leaf metadataLeaf = null;
+
+        List<Node> siblings = getParent().getChildren();
+        for (Node sibling : siblings) {
+            if (sibling instanceof MetadataLeaf) {
+                String siblingReference = ((Leaf) sibling).getReference();
+                if (siblingReference.equals(getReference() + ".metadata")) {
+                    String siblingIdentifier = sibling.getIdentifier();
+                    if (siblingIdentifier.startsWith(getIdentifier() + "." + metadataShortName + ":")) {
+                        metadataLeaf = (Leaf) sibling;
+                        break;
+                    }
+                }
+            }
+        }
+
+        return metadataLeaf;
+    }
+
+    public String getMetadataLeafValue(String metadataShortName) {
+
+        String metadataValue = null;
+
+        MetadataLeaf metadataLeaf = (MetadataLeaf) getMetadataLeaf(metadataShortName);
+        if (metadataLeaf != null) {
+            metadataValue = metadataLeaf.getMetadataValue();
+        }
+
+        return metadataValue;
     }
 
     protected void fireLeafEvent(int eventType) {
@@ -99,5 +150,41 @@ public class Leaf extends Node {
         size.setAttribute("z", "" + this.size.z());
 
         return leaf;
+    }
+
+    private class MetadataLeaf extends Leaf {
+
+        private MetadataLeaf(Leaf associatedLeaf, String metadataShortName, String metadataValue) {
+
+            String metadataLongName = associatedLeaf.getIdentifier() + "." + metadataShortName;
+
+            setIdentifier(metadataLongName + ":" + metadataValue);
+            setReference(associatedLeaf.getReference() + ".metadata");
+            setSize(0, 0, 0);
+
+            associatedLeaf.getParent().addChildNode(this);
+        }
+
+        private String getMetadataLongName() {
+            String metadataLongName = getIdentifier().substring(0, getIdentifier().lastIndexOf(":"));
+            return metadataLongName;
+        }
+
+        private String getMetadataShortName() {
+            String metadataLongName = getMetadataLongName();
+            String metadataShortName = metadataLongName.substring(metadataLongName.lastIndexOf(".") + 1);
+            return metadataShortName;
+        }
+
+        private String getMetadataValue() {
+            String metadataValue = getIdentifier().substring(getIdentifier().lastIndexOf(":") + 1);
+            return metadataValue;
+        }
+
+        private void setMetadataValue(String metadataValue) {
+            String metadataLongName = getMetadataLongName();
+            setIdentifier(metadataLongName + ":" + metadataValue);
+        }
+
     }
 }

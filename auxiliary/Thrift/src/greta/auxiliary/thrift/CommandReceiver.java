@@ -119,7 +119,28 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
                 handleCharacterMessage(message);
                 break;
             case "character_head":
-                handleCharacterHeadMessage(message);
+                handleCharacterMemberMessage(message);
+                break;
+            case "character_left_eye":
+                handleCharacterMemberMessage(message);
+                break;
+            case "character_right_eye":
+                handleCharacterMemberMessage(message);
+                break;
+            case "character_mouth":
+                handleCharacterMessage(message);
+                break;
+            case "character_left_hand":
+                handleCharacterMemberMessage(message);
+                break;
+            case "character_right_hand":
+                handleCharacterMemberMessage(message);
+                break;
+            case "character_left_foot":
+                handleCharacterMemberMessage(message);
+                break;
+            case "character_right_foot":
+                handleCharacterMemberMessage(message);
                 break;
             case "object":
                 handleObjectMessage(message);
@@ -249,32 +270,38 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         if (gameCharacterNode == null) {
             gameCharacterNode = createObjectNode(gameCharacterId);
         }
+
         // Update coordinates
         updateNodeProperties(gameCharacterNode, gameCharacterProperties);
+
         if (gameCharacterProperties.get("gaze") != null) {
             handleGazeMessage(gameCharacterId, gameCharacterProperties.get("influence"));
         }
     }
 
     /**
-     * Updates the character's head's position and updates the gaze if needed.
-     * @param message message with all data concerning the unity game character's head
+     * Updates the character's member's position and updates the gaze if needed.
+     * @param message message with all data concerning the unity game character's member
      */
-    private void handleCharacterHeadMessage (Message message) {
+    private void handleCharacterMemberMessage (Message message) {
 
-        Map<String, String> gameCharacterHeadProperties = message.getProperties();
-        String gameCharacterHeadId = gameCharacterHeadProperties.get("id");
+        Map<String, String> gameCharacterMemberProperties = message.getProperties();
+        String gameCharacterMemberId = gameCharacterMemberProperties.get("id");
 
-        // Get the character's head's node
-        TreeNode gameCharacterHeadNode = (TreeNode) this.environment.getNode(gameCharacterHeadId);
-        if (gameCharacterHeadNode == null) {
-            gameCharacterHeadNode = createCharacterHeadNode(gameCharacterHeadId);
-            this.cm.setCurrentCharacterHeadFromUnity(gameCharacterHeadNode);
+        // Get the character's member's node
+        TreeNode gameCharacterMemberNode = (TreeNode) this.environment.getNode(gameCharacterMemberId + "_TreeNode");
+        if (gameCharacterMemberNode == null) {
+            gameCharacterMemberNode = createCharacterMemberNode(gameCharacterMemberId);
+            if (message.getType().equals("character_head")) {
+                this.cm.setCurrentCharacterHeadFromUnity(gameCharacterMemberNode);
+            }
         }
+
         // Update coordinates
-        updateNodeProperties(gameCharacterHeadNode, gameCharacterHeadProperties);
-        if (gameCharacterHeadProperties.get("gaze") != null) {
-            handleGazeMessage(gameCharacterHeadId, gameCharacterHeadProperties.get("influence"));
+        updateNodeProperties(gameCharacterMemberNode, gameCharacterMemberProperties);
+
+        if (gameCharacterMemberProperties.get("gaze") != null) {
+            handleGazeMessage(gameCharacterMemberId, gameCharacterMemberProperties.get("influence"));
         }
     }
 
@@ -288,34 +315,40 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         String gameObjectId = gameObjectProperties.get("id");
 
         // Get the object's node
-        TreeNode gameObjectNode = (TreeNode) this.environment.getNode(gameObjectId);
+        TreeNode gameObjectNode = (TreeNode) this.environment.getNode(gameObjectId + "_TreeNode");
         if (gameObjectNode == null) {
             gameObjectNode = createObjectNode(gameObjectId);
         }
+
         // Update coordinates
         updateNodeProperties(gameObjectNode, gameObjectProperties);
+
+        if (gameObjectProperties.get("metadata.objectToGazeAt") != null) {
+            Leaf gameObjectLeaf = (Leaf) this.environment.getNode(gameObjectId);
+            gameObjectLeaf.createMetadataLeaf("objectToGazeAt", gameObjectProperties.get("metadata.objectToGazeAt"));
+        }
         if (gameObjectProperties.get("gaze") != null) {
             handleGazeMessage(gameObjectId, gameObjectProperties.get("influence"));
         }
     }
 
     /**
-     * Creates and returns the node corresponding to the game character's head with the given id.
-     * @param gameCharacterHeadId id of the game character's head who's node shall be created
+     * Creates and returns the node corresponding to the game character's member with the given id.
+     * @param gameCharacterMemberId id of the game character's member who's node shall be created
      * @return the node corresponding to the given id
      */
-    private TreeNode createCharacterHeadNode (String gameCharacterHeadId) {
+    private TreeNode createCharacterMemberNode (String gameCharacterMemberId) {
         TreeNode unityObjectsNode = getUnityObjectsNode();
-        // Create head with node as parent
-        TreeNode gameCharacterHeadNode = new TreeNode();
-        gameCharacterHeadNode.setIdentifier(gameCharacterHeadId);
-        unityObjectsNode.addChildNode(gameCharacterHeadNode);
-        Leaf gameCharacterHeadLeaf = new Leaf();
-        gameCharacterHeadLeaf.setIdentifier(gameCharacterHeadId);
-        gameCharacterHeadLeaf.setReference("head." + cm.getCurrentCharacterName().toLowerCase());
-        gameCharacterHeadNode.addChildNode(gameCharacterHeadLeaf);
-        environment.addLeaf(gameCharacterHeadLeaf);
-        return gameCharacterHeadNode;
+        // Create member with node as parent
+        TreeNode gameCharacterMemberNode = new TreeNode();
+        gameCharacterMemberNode.setIdentifier(gameCharacterMemberId + "_TreeNode");
+        unityObjectsNode.addChildNode(gameCharacterMemberNode);
+        Leaf gameCharacterMemberLeaf = new Leaf();
+        gameCharacterMemberLeaf.setIdentifier(gameCharacterMemberId);
+        gameCharacterMemberLeaf.setReference("greta_unity." + cm.getCurrentCharacterName().toLowerCase() + ".member");
+        gameCharacterMemberNode.addChildNode(gameCharacterMemberLeaf);
+        environment.addLeaf(gameCharacterMemberLeaf);
+        return gameCharacterMemberNode;
     }
 
     /**
@@ -327,11 +360,11 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         TreeNode unityObjectsNode = getUnityObjectsNode();
         // Create object with node as parent
         TreeNode gameObjectNode = new TreeNode();
-        gameObjectNode.setIdentifier(gameObjectId);
+        gameObjectNode.setIdentifier(gameObjectId + "_TreeNode");
         unityObjectsNode.addChildNode(gameObjectNode);
         Leaf gameObjectLeaf = new Leaf();
         gameObjectLeaf.setIdentifier(gameObjectId);
-        gameObjectLeaf.setReference("object." + gameObjectId);
+        gameObjectLeaf.setReference("greta_unity.object." + gameObjectId);
         gameObjectNode.addChildNode(gameObjectLeaf);
         environment.addLeaf(gameObjectLeaf);
         return gameObjectNode;
@@ -355,24 +388,28 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
 
     /**
      * Updates the given node's properties according to the given game object's properties.<br/>
-     * Properties queried are : "position.x", "position.y", "position.z", "quaternion.x",
-     * "quaternion.y", "quaternion.z", "quaternion.w", "scale.x", "scale.y", "scale.z"
+     * Properties queried are : "position.x", "position.y", "position.z", "orientation.x",
+     * "orientation.y", "orientation.z", "orientation.w", "scale.x", "scale.y", "scale.z"
      * @param node node to update
      * @param gameObjectProperties map with the needed properties and their values
      */
     private static void updateNodeProperties (TreeNode node, Map<String, String> gameObjectProperties) {
-        node.setCoordinates(Float.parseFloat(gameObjectProperties.get("position.x")),
+        node.setCoordinates(
+                Float.parseFloat(gameObjectProperties.get("position.x")),
                 Float.parseFloat(gameObjectProperties.get("position.y")),
-                Float.parseFloat(gameObjectProperties.get("position.z")));
-
-        node.setOrientation(Float.parseFloat(gameObjectProperties.get("quaternion.x")),
-                Float.parseFloat(gameObjectProperties.get("quaternion.y")),
-                Float.parseFloat(gameObjectProperties.get("quaternion.z")),
-                Float.parseFloat(gameObjectProperties.get("quaternion.w")));
-
-        node.setScale(Float.parseFloat(gameObjectProperties.get("scale.x")),
+                Float.parseFloat(gameObjectProperties.get("position.z"))
+        );
+        node.setOrientation(
+                Float.parseFloat(gameObjectProperties.get("orientation.x")),
+                Float.parseFloat(gameObjectProperties.get("orientation.y")),
+                Float.parseFloat(gameObjectProperties.get("orientation.z")),
+                Float.parseFloat(gameObjectProperties.get("orientation.w"))
+        );
+        node.setScale(
+                Float.parseFloat(gameObjectProperties.get("scale.x")),
                 Float.parseFloat(gameObjectProperties.get("scale.y")),
-                Float.parseFloat(gameObjectProperties.get("scale.z")));
+                Float.parseFloat(gameObjectProperties.get("scale.z"))
+        );
     }
 
     /**

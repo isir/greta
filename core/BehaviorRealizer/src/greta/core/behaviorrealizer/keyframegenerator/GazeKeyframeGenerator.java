@@ -1839,6 +1839,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         } else if (targetNode instanceof Leaf) {
 
                             Leaf targetLeaf = (Leaf) targetNode;
+
+                            Leaf metadataLeafObjectToGazeAt = targetLeaf.getMetadataLeaf("objectToGazeAt");
+                            while (metadataLeafObjectToGazeAt != null) {
+                                String objectToGazeAtIdentifier = targetLeaf.getMetadataLeafValue("objectToGazeAt");
+                                targetLeaf = (Leaf) env.getNode(objectToGazeAtIdentifier);
+                                metadataLeafObjectToGazeAt = targetLeaf.getMetadataLeaf("objectToGazeAt");
+                            }
+
                             TreeNode targetLeafParent = targetLeaf.getParent();
 
                             Leaf targetCenterLeaf = new Leaf();

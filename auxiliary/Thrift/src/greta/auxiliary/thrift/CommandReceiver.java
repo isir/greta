@@ -64,6 +64,7 @@ import java.util.Map;
  * @author Fajrian Yunus
  */
 public class CommandReceiver extends Receiver implements IntentionEmitter, SignalEmitter, SocialParameterEmitter {
+
     private Environment environment;
 
     private ArrayList<IntentionPerformer> intentionPerformers;
@@ -111,42 +112,44 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
         // int messageNumber = Integer.parseInt(message.getId());
         // if(messageNumber > cpt){ // We only consider messages that have been sent after the last one received TODO ?
         // cpt = messageNumber;
-        switch (message.getType()) {
-            case "animID" :
-                handleAnimIdMessage(message);
-                break;
-            case "character":
-                handleCharacterMessage(message);
-                break;
-            case "character_head":
-                handleCharacterMemberMessage(message);
-                break;
-            case "character_left_eye":
-                handleCharacterMemberMessage(message);
-                break;
-            case "character_right_eye":
-                handleCharacterMemberMessage(message);
-                break;
-            case "character_mouth":
-                handleCharacterMessage(message);
-                break;
-            case "character_left_hand":
-                handleCharacterMemberMessage(message);
-                break;
-            case "character_right_hand":
-                handleCharacterMemberMessage(message);
-                break;
-            case "character_left_foot":
-                handleCharacterMemberMessage(message);
-                break;
-            case "character_right_foot":
-                handleCharacterMemberMessage(message);
-                break;
-            case "object":
-                handleObjectMessage(message);
-                break;
-            default:
-                System.err.println("Error : message type not recognized in CommandReceiver. Message id : " + message.getId());
+        synchronized (environment) {
+            switch (message.getType()) {
+                case "animID":
+                    handleAnimIdMessage(message);
+                    break;
+                case "character":
+                    handleCharacterMessage(message);
+                    break;
+                case "character_head":
+                    handleCharacterMemberMessage(message);
+                    break;
+                case "character_left_eye":
+                    handleCharacterMemberMessage(message);
+                    break;
+                case "character_right_eye":
+                    handleCharacterMemberMessage(message);
+                    break;
+                case "character_mouth":
+                    handleCharacterMessage(message);
+                    break;
+                case "character_left_hand":
+                    handleCharacterMemberMessage(message);
+                    break;
+                case "character_right_hand":
+                    handleCharacterMemberMessage(message);
+                    break;
+                case "character_left_foot":
+                    handleCharacterMemberMessage(message);
+                    break;
+                case "character_right_foot":
+                    handleCharacterMemberMessage(message);
+                    break;
+                case "object":
+                    handleObjectMessage(message);
+                    break;
+                default:
+                    System.err.println("Error : message type not recognized in CommandReceiver. Message id : " + message.getId());
+            }
         }
         // }
     }

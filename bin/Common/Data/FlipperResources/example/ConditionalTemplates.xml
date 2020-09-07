@@ -1,0 +1,45 @@
+<behaviourtemplates>
+
+	<is name="ct">
+		{
+		"value" : 1,
+		"cascade" : "CX.*"
+		}
+	</is>
+	
+	<template id="MAIN" name="Base Template">
+	    
+		<preconditions>
+			<condition> is.ct.value &lt; 10</condition>
+		</preconditions>
+
+		<effects>
+			<assign is="is.ct.value"> is.ct.value + 1 </assign>
+			<checktemplates regexpr="C1"> </checktemplates>
+		</effects>
+
+	</template>
+	
+	<template id="C1" name="Conditional Template 1" conditional="true">
+		<preconditions>
+			<condition> is.ct.value &gt; 3</condition>
+		</preconditions>
+
+		<effects>
+			<assign is="is.ct.c1"> 99900 + is.ct.value </assign>
+			<checktemplates isregexpr="is.ct.cascade"> </checktemplates>
+		</effects>
+	</template>
+	
+	<template id="CX2" name="Conditional Template 2" conditional="true">
+		<preconditions>
+			<condition> true </condition>
+		</preconditions>
+
+		<effects>
+			<assign is="is.ct.c2"> 999000 + is.ct.value </assign>
+		</effects>
+	</template>
+	
+</behaviourtemplates>
+

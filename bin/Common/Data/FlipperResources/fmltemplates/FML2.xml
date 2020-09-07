@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml id="$fml_id$">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="openmary" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				And now, raise your hand 
+			<tm id="tm2"/>
+				if you're using Greta! 
+			<tm id="tm3"/>	
+				Ah, just me?
+			<tm id="tm4"/>	
+				Well, nice to meet you.				
+			<tm id="tm5"/>	
+				We have never been in the same scene before.
+			<tm id="tm6"/>	
+				Since Greta can now also have
+			<tm id="tm7"/>
+				multiple coaches, in one scene,
+			<tm id="tm8"/>
+				I can also ask my friends to join me.
+			<tm id="tm9"/>
+				However.
+			<tm id="tm10"/>	
+				I think that would make it bit crowded in here.
+			<tm id="tm11"/>		
+				For now, it'll be just me.
+			<tm id="tm12"/>
+			
+			<pitchaccent id="pa1" type="HStar" level="medium" start="s1:tm1+0.2" end="s1:tm2+0.2" importance="1"/>
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm2+0.5" end="s1:tm3+0.5" importance="1"/>
+			<pitchaccent id="pa3" type="HStar" level="medium" start="s1:tm4" end="s1:tm5" importance="1"/>
+			<pitchaccent id="pa4" type="HStar" level="medium" start="s1:tm7" end="s1:tm8" importance="1"/>
+			<pitchaccent id="pa5" type="HStar" level="medium" start="s1:tm10+0.5" end="s1:tm11" importance="1"/>
+			
+			<boundary type="LH" id="b11" start="s1:tm1+0.5" end="s1:tm2"/>
+			<boundary type="HH" id="b1" start="s1:tm3" end="s1:tm3+0.5"/>
+			<boundary type="HH" id="b2" start="s1:tm4" end="s1:tm4+0.5"/>
+			<boundary type="LH" id="b3" start="s1:tm4+0.5" end="s1:tm5"/>
+			<boundary type="LL" id="b4" start="s1:tm5" end="s1:tm5+0.5"/>
+			<boundary type="LL" id="b5" start="s1:tm6" end="s1:tm6+0.5"/>
+			<boundary type="LL" id="b12" start="s1:tm7+0.5" end="s1:tm8"/>
+			<boundary type="LH" id="b6" start="s1:tm8" end="s1:tm8+0.5"/>
+			<boundary type="LL" id="b7" start="s1:tm9" end="s1:tm9+0.5"/>
+			<boundary type="LL" id="b8" start="s1:tm10" end="s1:tm10+0.5"/>
+			<boundary type="LH" id="b9" start="s1:tm11" end="s1:tm11+0.5"/>
+			<boundary type="LL" id="b10" start="s1:tm12" end="s1:tm12+1"/>
+		</speech>
+	</bml>
+	<fml>
+	
+		<performative id="p1" type="raiseHand_R" start="s1:tm1+0.5" end="s1:tm4" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm4" end="s1:tm5" importance="1.0"/>
+		<performative id="p2" type="greet" start="s1:tm4" end="s1:tm5" importance="1.0"/>
+		<deictic id="d1" type="selftouch" start="s1:tm11" end="s1:tm12+0.5" importance="1.0"/>
+		<deictic id="d2" start="s1:tm1" end="s1:tm1+1" importance="1.0" target="head_COUCH_USER_OLD"/>
+				
+	</fml>
+</fml-apml>

@@ -19,3 +19,4 @@
 /bin/Player/Lib/External/Win64/*.cfg
 
 *.log
+/auxiliary/SpeechRecogniser

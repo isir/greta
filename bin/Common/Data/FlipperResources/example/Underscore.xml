@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<behaviourtemplates>
+  <is name="underscore">
+        {
+            "test" : []
+        }
+    </is>
+  <template id="1" name="Template A">
+    <preconditions mode="and">
+      <condition>is.underscore.test.length == 0</condition>
+    </preconditions>
+    <effects>
+      <assign is="is.underscore.test">_.filter([1, 2, 3, 4, 5, 6], function(num){ return num % 2 == 0; });</assign>
+    </effects>
+  </template>
+</behaviourtemplates>

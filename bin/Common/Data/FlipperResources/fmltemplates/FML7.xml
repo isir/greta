@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml id="$fml_id$">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="openmary" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				We're finished with the demonstration. 
+			<tm id="tm2"/>
+				Do you want to start again?
+			<tm id="tm3"/>	
+			
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm1+0.5" end="s1:tm2" importance="1"/>
+			<boundary type="LL" id="b1" start="s1:tm1" end="s1:tm1+0.5"/>
+			<boundary type="HH" id="b2" start="s1:tm3" end="s1:tm3+0.5"/>
+		</speech>
+	</bml>
+	<fml>
+		
+		<performative id="p1" type="propose" start="s1:tm2" end="s1:tm3" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm1" end="s1:tm3" importance="1.0"/>
+		
+	</fml>
+</fml-apml>

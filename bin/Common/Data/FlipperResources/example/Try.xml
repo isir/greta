@@ -1,0 +1,39 @@
+<behaviourtemplates>
+<is name="behaviour">
+{
+                "a" : [
+                {"b" : "1"},
+                {"b" : "2"}
+                ]
+}
+</is>
+ 
+<javascript>
+<![CDATA[
+function condition(c){
+                return c.b === "2";
+}
+function add(array, element){
+                array.unshift(element);
+                return array;
+}
+
+print(1);
+is.tmpdebug = [{"b":"2"}].find(condition);
+
+]]>
+</javascript>
+<!-- <template id="test1"> -->
+<!--                 <preconditions><![CDATA[is.behaviour.a.length < 3 ]]></precondition> -->
+<!--                 <effects> -->
+<!--                                <assign is="is.behaviour.a">add(is.behaviour.a,{"b" : "1"})</assign> -->
+<!--                 </effects> -->
+<!-- </template> -->
+<template id="test2">
+                <preconditions><condition><![CDATA[is.behaviour.a.length < 3 ]]></condition></preconditions>
+                <effects>
+                               <assign is="is.behaviour.b">[{"b":"2"}].find(condition)</assign>
+                </effects>
+</template>
+</behaviourtemplates>
+ 

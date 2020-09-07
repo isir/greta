@@ -1,0 +1,106 @@
+<behaviourtemplates>
+    
+    <is name="counter">
+        {
+            "value" : 1.0
+        }
+    </is>
+	
+	<javascript>
+			function addOne(i) {
+    			return i + 1;
+			}
+			
+	</javascript>
+	
+    <template id="1" name="Template A" conditional="false">
+    
+       <initeffects>
+ 			<assign id="autoinit-1" is="is.counter.autoinit"> "AUTOINIT" </assign>
+<!--  			<system command="debugger" arg="off"/> -->
+			<assign is="is.counter.mytemplate" raw="true"><![CDATA[
+<speech id="s1" >
+  <text>{{text}}</text>
+  {{> description}}
+</speech>
+]]></assign>
+
+ 	  </initeffects>
+		
+      <preconditions mode="and">
+      
+      	  	<javascript><![CDATA[
+				function chkBound(i, bound) {
+    				return i < bound;
+				}
+			]]></javascript>
+			
+          	<condition id="chkBound-1"> chkBound(is.counter.value, 5) </condition>
+          	
+			<function id="alwaysTrue-1" class="hmi.flipper2.example.Dynamic" name="alwaysTrue"> </function>
+          	
+      </preconditions>
+
+       <effects>
+      
+          <assign id="counter++" is="is.counter.value"> addOne( is.counter.value ) </assign> 
+          
+          <assign id="cdatatest" is="is.counter.cdata"> <![CDATA["I <can> put &gt anything here"]]> +" and more" </assign> 
+     
+     	  <function class="hmi.flipper2.example.Dynamic" name="f">
+              <arguments>
+                  <value class="Double" is="is.counter.value"/>
+              </arguments>
+          </function>
+
+		  <function class="hmi.flipper2.example.Dynamic" name="f">
+				<arguments>
+					<value system="template_id" />
+				</arguments>
+		  </function>
+          
+		<method is="is.counter.timestwo" name="fplus">
+			<object class="hmi.flipper2.example.Dynamic" persistent="is.counter.persistent-dynamic">
+				<constructors/>
+			</object>
+			<arguments>
+				<value class="Double" is="is.counter.value" />
+				<value class="Double" is="is.counter.value" />
+			</arguments>
+		</method>
+		
+		<method is="is.counter.timestwo" name="recur">
+			<object class="hmi.flipper2.example.Dynamic" persistent="is.counter.persistent-dynamic">
+			</object>
+			<arguments>
+				<value class="Double" is="is.counter.value" />
+				<value class="hmi.flipper2.example.Dynamic" persistent="is.counter.persistent-dynamic" />
+			</arguments>
+		</method>
+		
+		<method is="is.counter.timestwoplusbase" name="fplus">
+			<object class="hmi.flipper2.example.Dynamic">
+				<constructors>
+					<value class="Double" constant="1000" />
+				</constructors>
+			</object>
+			<arguments>
+				<value class="Double" is="is.counter.value" />
+				<value class="Double" is="is.counter.value" />
+			</arguments>
+		</method>
+          
+        <method is="is.counter.jsonex" is_type="JSONString" name="fjson">
+        	  <object class="hmi.flipper2.example.Dynamic">
+        	  		<constructors/>
+        	  </object>
+              <arguments>
+                  <value is="is" is_type="JSONString"/>
+              </arguments>
+        </method>  
+          
+       </effects>
+    
+    </template>
+    
+</behaviourtemplates>

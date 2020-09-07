@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<modular>
+<?xml version="1.0" encoding="UTF-8"?><modular>
     <!-- menu gives access to modules from the GUI -->
     <menus>
         <menu name="${GUI.add}">
@@ -180,6 +179,9 @@
                 </menu>
             </menu>
             <item module="Group Behavior" name="Group Behavior"/>
+			<item module="Speech Recognizer" name="Speech Recognizer"/>
+            <item module="FlipperLauncher" name="FlipperLauncher"/>
+            <item module="FlipperDemo" name="FlipperDemo"/>
         </menu>
     </menus>
     <!-- list of all modules that can be used -->
@@ -1007,6 +1009,26 @@
             <parameter default="COUCH/GBM/REQUEST" get_method="getRequestTopic" get_on="object" name="requestTopic" set_method="setRequestTopic" set_on="object" type="string"/>
             <parameter default="COUCH/GBM/RESPONSE" get_method="getResponseTopic" get_on="object" name="responseTopic" set_method="setResponseTopic" set_on="object" type="string"/>
         </module>
+		
+        <module name="Speech Recognizer" style="DEFAULT">
+            <object class="greta.auxiliary.asr.ASRMain" lib_id="greta_speech_recognizer"/>
+            <frame class="greta.auxiliary.asr.SpeechRecognizerFrame" lib_id="greta_speech_recognizer" type="frame">
+                <link method="setGroupBehaviorMain" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.asr.request" get_method="getRequestTopic" get_on="object" name="requestTopic" set_method="setRequestTopic" set_on="object" type="string"/>
+            <parameter default="greta.asr.response" get_method="getResponseTopic" get_on="object" name="responseTopic" set_method="setResponseTopic" set_on="object" type="string"/>
+        </module>		
+        <module name="FlipperLauncher" style="DEFAULT">
+            <object class="hmi.flipper2.launcher.FlipperLauncher" lib_id="greta_flipperLib"/>
+        </module>
+        <module name="FlipperDemo">
+            <object class="greta.FlipperDemo.main.Main" lib_id="greta_FlipperDemo"/>
+        </module>		
+		
+		
+		
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1303,11 +1325,74 @@
             <needs path="./Common/Data/Voxygen/*"/>
             <needs path="./Common/Lib/External/voxygen/**"/>
         </lib>
-        <lib id="greta_video_capture" path="./Player/Lib/Internal/VideoCapture.jar">
-            <depends lib_id="ext_xuggle-xuggler"/>
-            <depends lib_id="greta_ogre_player"/>
-            <depends lib_id="greta_util"/>
+        <lib id="greta_speech_recognizer" path="Common/Lib/Internal/SpeechRecognizer.jar">
+            <depends lib_id="ext_grizzly-http-all"/>
+            <depends lib_id="ext_gson-2.8.0"/>
+            <depends lib_id="ext_guava-21.0"/>
+            <depends lib_id="ext_httpclient-4.5.3"/>
+            <depends lib_id="ext_httpcore-4.4.6"/>
+            <depends lib_id="ext_selenium-remote-driver-3.4.0"/>
+            <depends lib_id="ext_jna-4.1.0"/>
+            <depends lib_id="ext_jna-platform-4.1.0"/>
+            <depends lib_id="ext_selenium-api-3.4.0"/>
+            <depends lib_id="ext_selenium-chrome-driver-3.4.0"/>
+            <depends lib_id="ext_selenium-api-3.4.0"/>
+            <depends lib_id="ext_cglib-nodep-3.2.4"/>
+            <depends lib_id="ext_commons-codec-1.10"/>
+            <depends lib_id="ext_commons-exec-1.3"/>
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="greta_activemq"/>
+            <depends lib_id="ext_jackson-annotations"/>
+            <depends lib_id="ext_jackson-core"/>
+            <depends lib_id="ext_jackson-databind"/>
         </lib>
+        <lib/>
+        <lib id="ext_grizzly-http-all" path="Common/Lib/External/seleniumWebDriver/grizzly-http-all-2.4.4.jar">
+            <depends lib_id="ext_selenium-api-3.4.0"/>
+        </lib>
+        <lib id="ext_selenium-api-3.4.0" path="Common/Lib/External/seleniumWebDriver/selenium-api-3.4.0.jar"/>
+        <lib id="ext_selenium-chrome-driver-3.4.0" path="Common/Lib/External/seleniumWebDriver/selenium-chrome-driver-3.4.0.jar"/>
+        <lib id="ext_selenium-remote-driver-3.4.0" path="Common/Lib/External/seleniumWebDriver/selenium-remote-driver-3.4.0.jar"/>
+        <lib id="ext_httpclient-4.5.3" path="Common/Lib/External/seleniumWebDriver/httpclient-4.5.3.jar"/>
+        <lib id="ext_httpcore-4.4.6" path="Common/Lib/External/seleniumWebDriver/httpcore-4.4.6.jar"/>
+        <lib id="ext_jna-4.1.0" path="Common/Lib/External/seleniumWebDriver/jna-4.1.0.jar"/>
+        <lib id="ext_jna-platform-4.1.0" path="Common/Lib/External/seleniumWebDriver/jna-platform-4.1.0.jar"/>
+        <lib id="ext_gson-2.8.0" path="Common/Lib/External/seleniumWebDriver/gson-2.8.0.jar"/>
+        <lib id="ext_guava-21.0" path="Common/Lib/External/seleniumWebDriver/guava-21.0.jar"/>
+        <lib id="ext_cglib-nodep-3.2.4" path="Common/Lib/External/seleniumWebDriver/cglib-nodep-3.2.4.jar"/>
+        <lib id="ext_commons-codec-1.10" path="Common/Lib/External/seleniumWebDriver/commons-codec-1.10.jar"/>
+        <lib/>
+        <lib id="ext_commons-exec-1.3" path="Common/Lib/External/seleniumWebDriver/commons-exec-1.3.jar"/>
+        <lib id="ext_commons-logging-1.2" path="Common/Lib/External/seleniumWebDriver/commons-logging-1.2.jar"/>
+        <lib id="greta_flipperLib" path="Common/Lib/Internal/FlipperLib.jar">
+            <depends lib_id="ext_lobbackcore1.0.13"/>
+            <depends lib_id="ext_javax_json1.1"/>
+            <depends lib_id="ext_javax.json-api-1.1"/>
+            <depends lib_id="ext_junit4.1.2"/>
+            <depends lib_id="ext_jackson-annotations"/>
+            <depends lib_id="ext_jackson-core"/>
+            <depends lib_id="ext_jackson-databind"/>
+            <depends lib_id="ext_slf4j1.7.25"/>
+        </lib>
+        <lib id="ext_junit4.1.2" path="Common/Lib/External/Flipper/junit-4.12.jar"/>
+        <lib id="ext_javax.json-api-1.1" path="Common/Lib/External/Flipper/javax.json-1.1.jar"/>
+        <lib id="ext_posttresql42.1.1" path="Common/Lib/External/Flipper/postgresql-42.1.1.jar"/>
+        <lib id="ext_slf4j1.7.25" path="Common/Lib/External/HMIFlipper/slf4j-api-1.7.25.jar"/>
+        <lib id="ext_lobbackcore1.0.13" path="Common/Lib/External/HMIFlipper/logback-core-0.9.21.jar"/>
+        <lib id="greta_FlipperDemo" path="Common/Lib/Internal//FlipperDemoExample.jar">
+            <depends lib_id="greta_flipperLib"/>
+            <depends lib_id="ext_posttresql42.1.1"/>
+            <depends lib_id="ext_slf4j1.7.25"/>
+            <depends lib_id="ext_junit4.1.2"/>
+            <depends lib_id="ext_Translator.0.1"/>
+        </lib>
+ 
+        <lib/>
+        <lib/>
+        <lib/>
+        <lib id="ext_Translator.0.1" path="Common/Lib/External/Flipper/Translator-0.1.jar"/>		
+		
+		
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>

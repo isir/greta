@@ -1,0 +1,366 @@
+[
+  {
+    "type": "tag",
+    "tag": "aria-var",
+    "replaceWith": "var",
+    "postReplace": {
+      "condition": {
+        "type": "not-contains",
+        "var": [
+          "DMImpBegin",
+          "DMImpEnd"
+        ]
+      },
+      "actions": [
+        {
+          "type": "remove-tag",
+          "condition": {
+            "type": "contains",
+            "var": [
+              "pitchaccent",
+              "DMImpBegin",
+              "DMImpEnd"
+            ]
+          }
+        },
+        {
+          "type": "replace",
+          "pairs": [
+            {
+              "from": "DMImpBegin",
+              "to": "DMBegin"
+            },
+            {
+              "from": "DMImpEnd",
+              "to": "DMEnd"
+            }
+          ],
+          "condition": {
+            "type": "contains",
+            "var": [
+              "performative",
+              "DMImpBegin",
+              "DMImpEnd"
+            ]
+          }
+        },
+        {
+          "type": "replace",
+          "pairs": [
+            {
+              "from": "DMImpBegin",
+              "to": "DMBegin"
+            },
+            {
+              "from": "DMImpEnd",
+              "to": "DMEnd"
+            }
+          ],
+          "condition": {
+            "type": "contains",
+            "var": [
+              "certainty",
+              "DMImpBegin",
+              "DMImpEnd"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "type": "tag",
+    "tag": "performative",
+    "checkForRules": true
+  },
+  {
+    "type": "tag",
+    "tag": "aria-alternative",
+    "nodeType": "static",
+    "replaceWith": "static"
+  },
+  {
+    "type": "tag",
+    "tag": "aria-alternative",
+    "nodeType": "dynamic",
+    "replaceWith": "dynamic",
+    "postReplace": {
+      "condition": {
+        "type": "not-contains",
+        "var": [
+          "DMImpBegin",
+          "DMImpEnd"
+        ]
+      },
+      "actions": [
+        {
+          "type": "remove-tag",
+          "condition": {
+            "type": "contains",
+            "var": [
+              "pitchaccent",
+              "DMImpBegin",
+              "DMImpEnd"
+            ]
+          }
+        },
+        {
+          "type": "replace",
+          "pairs": [
+            {
+              "from": "DMImpBegin",
+              "to": "DMBegin"
+            },
+            {
+              "from": "DMImpEnd",
+              "to": "DMEnd"
+            }
+          ],
+          "condition": {
+            "type": "contains",
+            "var": [
+              "performative",
+              "DMImpBegin",
+              "DMImpEnd"
+            ]
+          }
+        },
+        {
+          "type": "replace",
+          "pairs": [
+            {
+              "from": "DMImpBegin",
+              "to": "DMBegin"
+            },
+            {
+              "from": "DMImpEnd",
+              "to": "DMEnd"
+            }
+          ],
+          "condition": {
+            "type": "contains",
+            "var": [
+              "certainty",
+              "DMImpBegin",
+              "DMImpEnd"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  {
+    "type": "tag",
+    "tag": "aria-alternative",
+    "nodeType": "selectable",
+    "replaceWith": "selectable"
+  },
+  {
+    "type": "tag",
+    "tag": "voice",
+    "attributes": [
+      {
+        "name": "emotion",
+        "replaceWith": "option",
+        "options": [
+          "none",
+          "calm",
+          "cross",
+          "happy",
+          "sad"
+        ],
+        "removeIf": "none"
+      }
+    ]
+  },
+  {
+    "type": "tag",
+    "tag": "emotion",
+    "replaceAll": false,
+    "attributes": [
+      {
+        "name": "type",
+        "replaceWith": "option",
+        "options": [
+          "neutral",
+          "panic",
+          "fear",
+          "anxiety",
+          "sadness",
+          "envy",
+          "anger",
+          "joy",
+          "despair",
+          "disgust",
+          "hate",
+          "worried",
+          "disappointment",
+          "pride",
+          "tension",
+          "relief",
+          "embarrassment",
+          "surprise",
+          "bored",
+          "joybody"
+        ]
+      },
+      {
+        "name": "importance",
+        "replaceWith": "number",
+        "minVal": 0,
+        "maxVal": 1
+      },
+      {
+        "name": "intensity",
+        "replaceWith": "number",
+        "minVal": 0,
+        "maxVal": 1
+      }
+    ]
+  },
+  {
+    "type": "tag",
+    "tag": "backchannel",
+    "replaceAll": false,
+    "attributes": [
+      {
+        "name": "type",
+        "replaceWith": "option",
+        "options": [
+		  "jaigayatrimata",
+          "none",
+          "acceptance",
+          "agreement",
+          "belief",
+          "disagreement",
+          "disbelief",
+          "disliking",
+          "distraction",
+          "grasp_interest",
+          "interest",
+          "liking",
+          "no_interest",
+          "no_understanding",
+          "refusal",
+          "understanding"
+        ]
+      },
+      {
+        "name": "end",
+        "replaceWith": "number_or_string",
+        "minVal": 0,
+        "maxVal": 5
+      }
+    ]
+  },
+  {
+    "type": "tag",
+    "tag": "fml-apml",
+    "replaceAll": false,
+    "attributes": [
+      {
+        "name": "composition",
+        "replaceWith": "option",
+        "options": [
+          "replace",
+          "blend",
+          "append"
+        ]
+      },
+      {
+        "name": "reaction_type",
+        "replaceWith": "option",
+        "options": [
+          "none",
+          "halt",
+          "overlap",
+          "replan"
+        ]
+      },
+      {
+        "name": "reaction_duration",
+        "replaceWith": "option",
+        "options": [
+          "none",
+          "extra_short",
+          "short",
+          "medium",
+          "long"
+        ]
+      },
+      {
+        "name": "social_attitude",
+        "replaceWith": "option",
+        "options": [
+          "neutral",
+          "submissive",
+          "dominant",
+          "hostile",
+          "friendly"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "tag",
+    "tag": "aria-header",
+    "remove": true
+  },
+  {
+    "type": "tag",
+    "tag": "certainty",
+    "checkForRules": true,
+    "replaceAll": false,
+    "attributes": [
+      {
+        "name": "type",
+        "replaceWith": "option",
+        "options": [
+          "none",
+          "certain",
+          "uncertain"
+        ]
+      },
+      {
+        "name": "importance",
+        "replaceWith": "number",
+        "minVal": 0,
+        "maxVal": 1
+      },
+      {
+        "name": "intensity",
+        "replaceWith": "number",
+        "minVal": 0,
+        "maxVal": 1
+      }
+    ]
+  },
+  {
+    "type": "tag",
+    "tag": "pitchaccent",
+    "checkForRules": true,
+    "replaceAll": false,
+    "attributes": [
+      {
+        "name": "level",
+        "replaceWith": "option",
+        "options": [
+          "none",
+          "reduced",
+          "moderate",
+          "strong"
+        ]
+      },
+      {
+        "name": "importance",
+        "replaceWith": "number",
+        "minVal": 0,
+        "maxVal": 1
+      }
+    ]
+  },
+  {
+    "type": "dtd",
+    "file": ".\\Common\\Data\\ARIA-ValuspaFMLTranslator\\fml-apml.dtd"
+  }
+]

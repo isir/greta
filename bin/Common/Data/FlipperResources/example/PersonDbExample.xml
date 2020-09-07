@@ -1,0 +1,78 @@
+<behaviourtemplates>
+        
+    <is name="person">
+        {
+            "index" : 0
+        }
+    </is>
+
+	<database>
+	
+		<init>
+		
+			<sql> DROP TABLE IF EXISTS person; </sql>
+			<sql> DROP SEQUENCE IF EXISTS person_global_id; </sql>
+			<sql> CREATE SEQUENCE person_global_id; </sql>
+			<sql>
+			    CREATE TABLE person (
+					id INT PRIMARY KEY DEFAULT nextval('person_global_id'),
+					firstname TEXT,
+					lastname TEXT,
+					occupation TEXT,
+					age INTEGER
+			    );
+			</sql>
+			
+			<function is="is.person.person_ids" is_type="JSONString" class="hmi.flipper2.example.PersonDbExample" name="initPersonTable">
+				<arguments>
+                  <value db="default"/>
+                </arguments>
+			</function>
+			
+		</init>
+		
+		<cleanup>
+			<sql> 
+				DROP TABLE IF EXISTS person; 
+			</sql>
+		</cleanup>
+		
+	</database>
+	
+    <template id="1" name="PersonDb example template">
+    
+      <preconditions>
+          	<condition> is.person.index &lt; is.person.person_ids.length </condition>
+      </preconditions>
+
+       <effects>
+       
+          <assign is="is.person.curpid"> is.person.person_ids[ is.person.index ] </assign>
+          
+          <method is="is.person.curperson" is_type="JSONString" name="getPerson">
+				<object class="hmi.flipper2.example.PersonDbExample">
+					<constructors>
+                  		<value db="default"/>
+                	</constructors>
+                </object>
+				<arguments>
+                  <value class="Integer" is="is.person.curpid" />
+                </arguments>
+		  </method>
+		  
+		  <behaviour name="greetingsToMa">
+		  		<object class="hmi.flipper2.example.PersonDbExample">
+		  			<constructors/>
+		  		</object>
+				<arguments>
+                  <value class="Integer" is="is.person.curperson" is_type="JSONString" />
+                </arguments>
+		  </behaviour>
+			
+          <assign is="is.person.index"> is.person.index + 1 </assign> 
+          
+       </effects>
+    
+    </template>
+    
+</behaviourtemplates>

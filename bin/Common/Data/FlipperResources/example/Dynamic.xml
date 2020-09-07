@@ -1,0 +1,133 @@
+<!--
+Example Template file that describes how to work with Flipper Environments. In the information state there are several components you need
+- initialized: this is a check to see that the JavaScript Object for your environment has been created
+- requestQueue: Any request you have, i.e.: every message you want to send from Flipper to your Java code gets sent here
+- NOTE: Make sure your requestQueue does not become too large, it will slow down JavaScript evaluation.
+- response: Whenever the request from the requestQueue is executed, the response is in here.
+- messages: Whenever your Java code wants to send something to Flipper asynchronously, check these messages
+-->
+<behaviourtemplates>
+    <is name="components">
+        {
+            "dynamic":{
+                "initialized": false,
+                "requestQueue" : [],
+                "response" : {},
+                "messages" : {}
+            },
+            "counter" : 0
+        }
+    </is>
+
+    <!--
+        This JavaScript is globally available. In this specific one we define a JavaScript object for communicating
+        between Flipper and the Dynamic environment.
+    -->
+    <javascript>
+        <![CDATA[
+
+        function prnt(message){
+            print("Received message: " + JSON.stringify(message));
+        }
+
+        var DYN = (function() {
+
+            //Listen to requests from the environment
+            var handleDYNResponse = function(res) {
+                // Index for the matching request
+                var element;
+                if(is.components.dynamic.requestQueue.length > 0){
+                    //Compare the message received to messages in the requestQueue
+                    for(i = 0; i < is.components.dynamic.requestQueue.length; i++){
+                        if(is.components.dynamic.requestQueue[i].response.requestId === res.msgId){
+                            is.components.dynamic.messages = res.params;
+                            //is.components.counter = is.components.dynamic.messages.f;
+                            element = i;
+                        }
+                    }
+                }
+                // Remove the message from the queue, once it is processed.
+                is.components.dynamic.requestQueue.splice(element,1);
+            }
+
+            // Whenever we want to send something from Flipper to Java, we push it to the requestQueue.
+            var updateDYN = function(message){
+                is.components.dynamic.requestQueue.push({content : message});
+                return message;
+            }
+
+            // Once you have added the requests, you can use this method to send requests to the environment
+            var MakeRequests = function(type) {
+                for (var i=0; i < is.components.dynamic.requestQueue.length; i++) {
+                    if (is.components.dynamic.requestQueue[i].response != null) continue;
+                    var requestId = ENV.queueMessage("dynamic", type, is.components.dynamic.requestQueue[i]);
+                    is.components.dynamic.requestQueue[i].response = {
+                        requestId: requestId
+                    };
+                }
+            }
+
+            //Register your listeners and request handlers here.
+            function Init() {
+                ENV.register("f", handleDYNResponse);
+                return true;
+            }
+
+            return {
+                Init: Init,
+                MakeRequests: MakeRequests,
+                updateDYN: updateDYN
+            };
+
+        })();
+    ]]>
+    </javascript>
+
+    <!--
+        Template that gets called in the beginning to create the JavaScript object for the FlipperEnvironment
+    -->
+    <template id="dynamicinit">
+        <preconditions>
+            <condition><![CDATA[ ENV.isInitialized()]]></condition>
+            <condition><![CDATA[!is.components.dynamic.initialized]]></condition>
+        </preconditions>
+        <initeffects>
+            <assign is="is.components.dynamic.initialized">DYN.Init();</assign>
+        </initeffects>
+    </template>
+
+    <!--
+        Example template that utilizes the send interface of FlipperEnvironment
+        This particular function calls a method related to "Double" in the Dynamic class, which is a FlipperEnvironment
+
+        temp variables help us with the requirement that each assign requires a return from JavaScript,
+        but sometimes you don't care about this value an you can put it into a temporary IS variable
+    -->
+    <template id="dynamicSend">
+        <preconditions>
+            <condition><![CDATA[is.components.counter >= 0]]></condition>
+        </preconditions>
+        <effects>
+            <assign is="is.components.dynamic.response">DYN.updateDYN({one:3.0,two:is.components.counter})</assign>
+            <assign is="is.components.dynamic.temp">DYN.MakeRequests("Double")</assign>
+        </effects>
+    </template>
+
+    <!--
+        Example template that utlizes the receiving interface from a FlipperEnvironment
+        Whenever a message is received, we do an assignment in the information state.
+
+        A print statement is added for convenient debugging.
+    -->
+    <template id="dynamicReceive">
+        <preconditions>
+            <condition><![CDATA[Object.keys(is.components.dynamic.messages).length > 0 ]]></condition>
+        </preconditions>
+        <effects>
+            <assign is="is.components.dynamic.temp">prnt(is.components.dynamic.messages)</assign>
+            <assign is="is.components.counter">is.components.dynamic.messages.f</assign>
+            <assign is="is.components.dynamic.messages">{}</assign>
+        </effects>
+    </template>
+
+</behaviourtemplates>

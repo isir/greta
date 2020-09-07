@@ -1,0 +1,204 @@
+<behaviourtemplates>
+    <is name="example">
+        {
+            "init" : {},
+            "input" : {
+                "speech" : ""
+            },
+            "core" : {
+                "uIntent" : "",
+                "aIntent" : ""
+            },
+            "output" : {
+                "speech" : ""
+            },
+			"agent": {
+			    "fmlParameterSetting": "",
+				"log": "",
+				"fileName": "",
+				"fml": {
+					"template": "",
+					"parameters": {}
+				}
+			}
+        }
+    </is>
+
+    <javascript>
+        <![CDATA[
+
+        function helpPrint(text){
+            print(text);
+            return true;
+        }
+
+        function getUserIntent(text){
+            helpPrint("Userintent: " + text);
+            if(text == "BONJOUR"){
+                return "greeting";
+            }
+            else if(text == "SALUT"){
+                return "goodbye";
+            }
+            else{
+                return "unknown";
+            }
+        }
+
+        function setAgentIntent(intent){
+            helpPrint("AgentIntent: " + intent);
+            if(intent == "greeting"){
+                return "greeting";
+            }
+            else if(intent == "goodbye"){
+                return "goodbye";
+            }
+            else{
+                return "unknown";
+            }
+        }
+
+        function setAgentSpeech(intent){
+            helpPrint("Agentspeech: " + intent);
+            if(intent == "greeting"){
+                return "Hello";
+            }
+            else if(intent == "goodbye"){
+                return "Bye";
+            }
+            else{
+                return "I don't know";
+            }
+        }
+    ]]>
+    </javascript>
+
+    <!-- Initialize the modules -->
+    <template id="initializeModules" name="initializeModules">
+        <preconditions>
+            <condition>is.example.init === "{}"</condition>
+            <condition>helpPrint("initializing")</condition>
+        </preconditions>
+        <initeffects>
+            <method name="init" is="is.example.init.sphinx">
+                <object persistent="asr" class="greta.FlipperDemo.input.SpeechInputReceiver">
+                    <constructors/>
+                </object>
+            </method>
+           <method name="init" is="is.example.init.fmlSender">
+                <object persistent="fmlSender" class="greta.FlipperDemo.output.FMLTranslatorOutput">
+                    <constructors/>
+                </object>
+            </method>
+			<method name="init" is="is.example.init.agent">
+                <object persistent="fmlGenerator" class="greta.FlipperDemo.dm.managers.FMLGenerator">
+                    <constructors/>
+                </object>
+            </method>		
+
+        </initeffects>
+    </template>
+   <!-- Set user intent when speech -->
+    <template id="setFMLSendParameters" >
+        <preconditions>
+			<condition>is.example.agent.fmlParameterSetting == ""</condition>
+        </preconditions>
+        <effects>
+            <assign is="is.example.agent.fmlParameterSetting">"true"</assign>
+			<method name="initFmlSender">
+                <object persistent="fmlGenerator" class="greta.FlipperDemo.dm.managers.FMLGenerator"/>
+				    <arguments>
+                        <value class="String">localhost</value>
+						<value class="String">61616</value>
+						<value class="String">greta.input.FML</value>
+                    </arguments>
+            </method>
+        </effects>
+    </template>
+    <!-- Check for speech -->
+    <template id="getUserSpeech">
+        <preconditions>
+            <method name="hasMessage">
+                <object persistent="asr" class="greta.FlipperDemo.input.SpeechInputReceiver"/>
+            </method>
+        </preconditions>
+        <effects>
+            <method name="getMessage" is="is.example.input.speech">
+                <object persistent="asr" class="greta.FlipperDemo.input.SpeechInputReceiver"/>
+            </method>
+        </effects>
+    </template>
+
+ 
+    <!-- Set user intent when speech -->
+    <template id="setUserIntent">
+        <preconditions>
+            <condition>is.example.input.speech !== ""</condition>
+        </preconditions>
+        <effects>
+            <assign is="is.example.core.uIntent">getUserIntent(is.example.input.speech)</assign>
+            <assign is="is.example.input.speech">""</assign>
+        </effects>
+    </template>
+    <!-- Set agent intent based on user intent -->
+    <template id="setAgentIntent">
+        <preconditions>
+            <condition>is.example.core.uIntent !== ""</condition>
+        </preconditions>
+        <effects>
+            <assign is="is.example.core.aIntent">setAgentIntent(is.example.core.uIntent)</assign>
+            <assign is="is.example.core.uIntent">""</assign>
+			
+        </effects>
+    </template>
+
+    <!-- Set agent speech based on agent intent -->
+    <template id="setAgentSpeech">
+        <preconditions>
+            <condition>is.example.core.aIntent !== ""</condition>
+        </preconditions>
+        <effects>
+            <assign is="is.example.output.speech">setAgentSpeech(is.example.core.aIntent)</assign>
+            <assign is="is.example.core.aIntent">""</assign>
+        </effects>
+    </template>
+
+    <!-- Say agent speech -->
+    <template id="sayAgentSpeech">
+        <preconditions>
+            <condition>is.example.output.speech !== ""</condition>
+        </preconditions>
+        <effects>
+            <method name="speak">
+                <object persistent="fmlSender" class="greta.FlipperDemo.output.FMLTranslatorOutput"/>
+                <arguments>
+                    <value class="String" is="is.example.output.speech"/>
+                </arguments>
+            </method>
+            <assign is="is.example.output.speech">""</assign>
+			<assign is="is.example.agent.fml.template">"FML1"</assign>
+		    <!--assign is="is.example.agent.fml.parameters['emotion.em1.type']">"surprise"</assign-->
+        </effects>
+    </template>
+	
+	 <template id="executeMove" name="executeMove">
+        <preconditions>
+				<condition>is.example.agent.fml.template !== ""</condition>
+        </preconditions>
+        <effects>
+            <behaviour name="executeTemplate">
+                <object class="greta.FlipperDemo.dm.managers.FMLGenerator" persistent="fmlGenerator"></object>
+                <arguments>
+                    <value class="String" is="is.example.agent.fml" is_type="JSONString"/>
+                </arguments>
+            </behaviour>
+            <assign is="is.example.agent.fml.template">""</assign>
+ 
+        </effects>
+    </template>
+
+	
+	
+	
+
+</behaviourtemplates>

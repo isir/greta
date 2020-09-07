@@ -1,0 +1,257 @@
+<!--
+    Environment template
+    This template handles all general messages and loads the appropriate Java classes
+
+    Example environmentSpec:
+{
+	"environments": [
+		   {
+			"id":"bml", "loader":"eu.couch.hmi.environments.BMLEnvironment", "requiredloaders": [],
+			"params": {
+				"publishBmlFeedback": true,
+				"middleware": {
+					"loaderClass": "nl.utwente.hmi.middleware.activemq.ActiveMQMiddlewareLoader",
+					"properties": {
+						"iTopic": "COUCH/BML/FEEDBACK/ASAP",
+						"oTopic": "COUCH/BML/REQUEST/ASAP",
+						"amqBrokerURI": "tcp://localhost:61616"
+					}
+				}
+			}
+		}, {
+			"id":"dgep", "loader":"eu.couch.hmi.environments.DGEPEnvironment", "requiredloaders": [],
+			"params": {
+				"dgepCtrlMiddleware": {
+					"loaderClass": "nl.utwente.hmi.middleware.activemq.ActiveMQMiddlewareLoader",
+					"properties": {
+						"iTopic": "DGEP/response",
+						"oTopic": "DGEP/requests",
+						"amqBrokerURI": "tcp://localhost:61616"
+					}
+				},
+				"dgepMovesMiddleware": {
+					"loaderClass": "nl.utwente.hmi.middleware.activemq.ActiveMQMiddlewareLoader",
+					"properties": {
+						"iTopic": "DGEP/dialogue_moves",
+						"oTopic": "DGEP/requests",
+						"amqBrokerURI": "tcp://localhost:61616"
+					}
+				}
+			}
+		}, {
+			"id":"flipperintents", "loader":"eu.couch.hmi.environments.FlipperIntentPlannerEnvironment", "requiredloaders": [ "bml" ],
+			"params": {}
+		}, {
+			"id":"ui", "loader":"eu.couch.hmi.environments.UIEnvironment", "requiredloaders": [ "dgep" ],
+			"params": {
+				"middleware": {
+					"loaderClass": "nl.utwente.hmi.middleware.activemq.ActiveMQMiddlewareLoader",
+					"properties": {
+						"iTopic": "COUCH/UI/REQUESTS",
+						"oTopic": "COUCH/UI/STATE",
+						"amqBrokerURI": "tcp://localhost:61616"
+					}
+				}
+			}
+		}, {
+			"id":"dialogueloader", "loader":"eu.couch.hmi.environments.DialogueLoaderEnvironment", "requiredloaders": [ "dgep", "flipperintents", "ui", "bml" ],
+			"params": {}
+		}
+	]
+}
+
+-->
+
+<behaviourtemplates>
+    <is name="env">
+        {
+            "temp": { "newenvmsgs":[], "newenvresponses":[], "newenvoutmsgs": [] },
+            "initialized":false,
+            "initnoerror":false,
+            "environmentSpec": {
+                "environments": [
+                    {
+                        "id" : "dynamic", "loader":"hmi.flipper2.example.Dynamic", "requiredloaders":[]
+                    }
+                ]
+            }
+        }
+    </is>
+
+    <javascript><![CDATA[
+
+        function oLength(element){
+            return Object.keys(element).length;
+        }
+
+        function prnt(val) {
+	        print(JSON.stringify(val));
+	        return true;
+        }
+
+        //Checks if a JSON object is completely empty
+        var _cache = {}
+        function isEmpty(obj){
+            var json = JSON.stringify(obj);
+            if (undefined !== _cache[json]) {
+                return _cache[json];
+            }
+            var res = true;
+            for (var prop in obj) {
+                if (! obj.hasOwnProperty(prop)) { continue; }
+                var type = typeof obj[prop];
+                switch (type){
+                    case "object":
+                        res = isEmpty(obj[prop]);
+                        break;
+                    case "boolean":
+                    case "number":
+                        res = false; // boolean cannot be "empty", also 0 is not empty
+                        break;
+                    case "string":
+                        res = ! obj[prop].length;
+                        break;
+                    case "undefined":
+                        res = true;
+                        break;
+                    default:
+                        res = !! obj[prop];
+                        break;
+                }
+                if (!res) {break;}
+            }
+            _cache[json] = res; // Add the result to the cache.
+            return res;
+        }
+
+        var ENV = (function() {
+	        var messageQueue = [];
+        	var listeners = [];
+	        function register(msgtype, cb) {
+		    listeners.push({ msgtype: msgtype, cb: cb });
+	    }
+
+	    function publishMsg(msgtype, msg) {
+		    for (var i = 0; i < listeners.length; i++) {
+			    if (listeners[i].msgtype == msgtype) {
+				    listeners[i].cb(msg);
+			    }
+		    }
+	    }
+
+	    function handleEnvironmentMessages(msgs) {
+		    for (var i = 0; i < msgs.length; i++) {
+			    //print("msg > "+JSON.stringify(msgs[i]));
+			    publishMsg(msgs[i].cmd, msgs[i]);
+		    }
+		return [];
+	    }
+
+	    function handleEnvironmentResponses(msgs) {
+		    for (var i = 0; i < msgs.length; i++) {
+			//print("res > "+JSON.stringify(msgs[i]));
+			publishMsg(msgs[i].cmd, msgs[i]);
+		    }
+		return [];
+	    }
+
+	    function haveMessagesQueued() {
+		    return messageQueue.length > 0;
+	    }
+
+	    function queueMessage(environment, cmd, params) {
+		    var msgId = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+		    messageQueue.push({
+			    environment: environment,
+			    cmd: cmd,
+			    msgId: msgId,
+			    params: params
+		    });
+		    return msgId;
+	    }
+
+	function queueResponse(respondTo, params) {
+		messageQueue.push({
+			environment: respondTo.environment,
+			cmd: respondTo.cmd,
+			msgId: respondTo.msgId,
+			params: params
+		});
+		return respondTo.msgId;
+	}
+
+	function getEntireMessageQueue() {
+		var res = messageQueue;
+		messageQueue = [];
+		return res;
+	}
+
+    return {
+    	register: register,
+        handleEnvironmentMessages: handleEnvironmentMessages,
+        queueMessage: queueMessage,
+        handleEnvironmentResponses: handleEnvironmentResponses,
+        haveMessagesQueued: haveMessagesQueued,
+        getEntireMessageQueue: getEntireMessageQueue,
+        queueResponse: queueResponse,
+        isInitialized: function() {
+        	return is.env.initialized && is.env.initnoerror;
+        }
+    };
+})();
+]]></javascript>
+
+    <!-- Initialize environments -->
+    <template id="env000" name="InitENV">
+        <preconditions>
+            <condition><![CDATA[!is.env.initialized]]></condition>
+        </preconditions>
+        <initeffects>
+            <method name="init" is="is.env.initnoerror">
+                <object persistent="is.env.persistent.BUS" class="hmi.flipper2.environment.FlipperEnvironmentBus">
+                    <constructors/>
+                </object>
+                <arguments>
+                    <value class="String" is="is.env.environmentSpec" is_type="JSONString"/>
+                </arguments>
+            </method>
+            <assign is="is.env.initialized">true</assign>
+        </initeffects>
+    </template>
+
+    <!-- Get Messages -->
+    <template id="env100" name="ENVMessages IN">
+        <preconditions>
+            <condition><![CDATA[ ENV.isInitialized() ]]></condition>
+            <method name="hasMessages">
+                <object persistent="is.env.persistent.BUS" class="hmi.flipper2.environment.FlipperEnvironmentBus"/>
+            </method>
+        </preconditions>
+        <effects>
+            <method name="getMessages" is="is.env.temp.newenvmsgs" is_type="JSONString">
+                <object persistent="is.env.persistent.BUS" class="hmi.flipper2.environment.FlipperEnvironmentBus" />
+            </method>
+            <assign is="is.env.temp.newenvmsgs"><![CDATA[ ENV.handleEnvironmentMessages(is.env.temp.newenvmsgs); ]]></assign>
+        </effects>
+    </template>
+
+    <!-- Send Messages -->
+    <template id="env101" name="ENVMessages OUT">
+        <preconditions>
+            <condition><![CDATA[ is.env.initialized ]]></condition>
+            <condition><![CDATA[ !is.env.initerror ]]></condition>
+            <condition><![CDATA[ ENV.haveMessagesQueued() ]]></condition>
+        </preconditions>
+        <effects>
+            <assign is="is.env.temp.newenvoutmsgs"><![CDATA[ ENV.getEntireMessageQueue() ]]></assign>
+            <method name="sendMessages" is="is.env.temp.newenvresponses" is_type="JSONString">
+                <object persistent="is.env.persistent.BUS" class="hmi.flipper2.environment.FlipperEnvironmentBus" />
+                <arguments>
+                    <value class="String" is="is.env.temp.newenvoutmsgs" is_type="JSONString"/>
+                </arguments>
+            </method>
+            <assign is="is.env.temp.newenvresponses"><![CDATA[ ENV.handleEnvironmentResponses(is.env.temp.newenvresponses); ]]></assign>
+        </effects>
+    </template>
+
+</behaviourtemplates>

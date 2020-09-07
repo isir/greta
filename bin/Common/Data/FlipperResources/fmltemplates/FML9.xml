@@ -1,0 +1,37 @@
+<fml-apml id="$fml_id$">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="openmary" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				This is another aspect of Couch   
+			<tm id="tm2"/>
+				that we are actually very proud of.
+			<tm id="tm3"/>	
+				Our platform 
+			<tm id="tm4"/>
+				goes way beyond the state of the art.
+			<tm id="tm5"/>
+				We are able to seamlessly switch between
+			<tm id="tm6"/>
+				agents controlled by Greta, 
+			<tm id="tm7"/>
+				from Sorbonne University,
+			<tm id="tm8"/>
+			
+			<pitchaccent id="pa1" type="HStar" level="medium" start="s1:tm1+0.5" end="s1:tm2" importance="1"/>
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm3" end="s1:tm4" importance="1"/>
+			<pitchaccent id="pa3" type="HStar" level="medium" start="s1:tm7" end="s1:tm8" importance="1"/>
+			<boundary type="LL" id="b1" start="s1:tm3" end="s1:tm4"/>
+			<boundary type="LL" id="b2" start="s1:tm5" end="s1:tm5+0.5"/>
+			<boundary type="LH" id="b3" start="s1:tm7" end="s1:tm7+0.5"/>
+			<boundary type="LH" id="b4" start="s1:tm8" end="s1:tm8+1"/>
+		</speech>
+	</bml>
+	<fml>
+		<emotion id="p1" type="pride" start="s1:tm2" end="s1:tm3" importance="1.0"/>
+		<word id="d1" type="object-large" start="s1:tm4" end="s1:tm5" importance="1.0"/>				
+	</fml>
+</fml-apml>

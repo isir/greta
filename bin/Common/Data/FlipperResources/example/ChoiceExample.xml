@@ -1,0 +1,43 @@
+<behaviourtemplates>
+
+	<is name="counter">
+		{
+		"value" : 1
+		}
+	</is>
+
+	<template id="1" name="Template A">
+		<preconditions>
+			<condition> is.counter.value &lt; 10</condition>
+		</preconditions>
+
+		<effects>
+			<assign is="is.counter.value"> is.counter.value = is.counter.value + 1 </assign>
+		</effects>
+
+		<effects mode="weighted" dynamic="false">
+			<method name="f" weight="is.counter.value">
+			    <object class="hmi.flipper2.example.Dynamic"> <constructors/> </object> 
+				<arguments>
+					<value class="String" constant="Choice A" />
+				</arguments>
+			</method>
+			<method name="f" weight="0.5 + 0.5">
+			    <object class="hmi.flipper2.example.Dynamic"> <constructors/> </object> 
+				<arguments>
+					<value class="String" constant="Choice B" />
+				</arguments>
+			</method>
+			<method name="f" weight="1">
+			    <object class="hmi.flipper2.example.Dynamic"> <constructors/> </object> 
+				<arguments>
+					<value class="String" constant="Choice C" />
+				</arguments>
+			</method>
+		</effects>
+
+
+	</template>
+
+</behaviourtemplates>
+

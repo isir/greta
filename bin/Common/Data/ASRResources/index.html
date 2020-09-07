@@ -1,0 +1,201 @@
+ <!DOCTYPE html>
+  <meta charset="utf-8" />
+  <title>Speech Recogniser</title>
+  
+    <h2>Speech Recogniser</h2>
+          <div class="compact marquee" id="div_language">
+         <select id="select_language" onchange="updateCountry()">
+          <option value="0">English</option><option value="1">Français</option></select>&nbsp;&nbsp; 
+	<select id="select_dialect"  onchange="updateDialect()" style="visibility: visible;">
+            <option value="en-GB">United Kingdom</option><option value="en-US">United States</option></select>
+
+        </div>
+  <script language="javascript" type="text/javascript">
+
+  var wsUri = "wss://127.0.0.1:8686/";
+  var output;
+  var langOption;
+  var running = true;
+  function init()
+  {
+    output = document.getElementById("output");
+    select_language = document.getElementById("select_language");
+    select_dialect = document.getElementById("select_dialect");
+    initWebSocket();
+  }
+  
+
+
+  function initWebSocket()
+  {
+    websocket = new WebSocket(wsUri);
+    websocket.onopen = function(evt) { onOpen(evt) };
+    websocket.onclose = function(evt) { onClose(evt) };
+    websocket.onmessage = function(evt) { onMessage(evt) };
+    websocket.onerror = function(evt) { onError(evt) };
+  }
+
+  function onOpen(evt)
+  {
+    writeToScreen("CONNECTED");
+  }
+
+  function onClose(evt)
+  {
+    writeToScreen("DISCONNECTED");
+  }
+
+  function onMessage(evt)
+  {
+   
+
+    if(evt.data=="start"){
+           recognition.lang = evt.data;
+       }
+  }
+
+  function onError(evt)
+  {
+    writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+  }
+
+  function doSend(message)
+  {
+    //writeToScreen("SENT: " + message);
+    websocket.send(message);
+  }
+
+  function writeToScreen(message)
+  {
+    var pre = document.createElement("p");
+    pre.style.wordWrap = "break-word";
+    pre.innerHTML = message;
+    output.appendChild(pre);
+  }
+  function writeToScreenJson(message)
+  {
+    var pre = document.createElement("p");
+    pre.style.wordWrap = "break-word";
+    pre.innerHTML = message;
+    json.appendChild(pre);
+  }
+
+  window.addEventListener("load", init, true);
+  window.SpeechRecognition = window.webkitSpeechRecognition || window.SpeechRecognition;
+
+// If you modify this array, also update default language / dialect below.
+var langs =
+[ ['English',         ['en-GB', 'United Kingdom'],
+                     ['en-US', 'United States']],
+  ['Français',        ['fr-FR']]
+
+];
+for (var i = 0; i < langs.length; i++) {
+  select_language.options[i] = new Option(langs[i][0], i);
+}
+
+
+function updateCountry() {
+   for (var i = select_dialect.options.length - 1; i >= 0; i--) {
+        select_dialect.remove(i);
+      }
+      var list = langs[select_language.selectedIndex];
+      for (var i = 1; i < list.length; i++) {
+        select_dialect.options.add(new Option(list[i][1], list[i][0]));
+        console.log(list[i][1], list[i][0]);
+      }
+      select_dialect.style.visibility = list[1].length == 1 ? 'hidden' : 'visible';
+
+
+                    recognition.lang = select_dialect.value;
+                    recognition.stop();
+ }
+function updateDialect() {   
+               recognition.lang = select_dialect.value;
+                recognition.stop();
+ }
+
+  let activity = []
+
+// expected output: true
+ 
+    let finalTranscript = '';
+    let recognition = new window.SpeechRecognition();
+    updateCountry() ;
+    //recognition.lang = "fr-FR"
+    recognition.lang = select_dialect.options[select_dialect.selectedIndex].value;
+    console.log(recognition.lang);
+    recognition.interimResults = true;
+    recognition.maxAlternatives = 10;
+    recognition.continuous = true;
+    var startTime = null;
+    recognition.onresult = (event) => {
+	 
+      let interimTranscript = '';
+      for (let i = event.resultIndex, len = event.results.length; i < len; i++) {
+	  
+	  activity.push(Date.now());
+
+        let transcript = event.results[i][0].transcript;
+		
+        if (event.results[i].isFinal) {
+          finalTranscript += transcript;		  
+			
+	var input_dur = (Date.now()-activity[0])/1000;
+		  
+        var msgString = "RESULT:NUM="
+                + transcript.trim().split(/\s+/).length
+                + ",FORMAT=WSE,RECO-DUR=3.78344,INPUT-DUR="
+                + input_dur
+                + ", INPUT-TIME-START=0,INPUT-TIME-END="
+                + input_dur + "\n";
+            //INPUT-TIME-END=INPUT-TIME-START+INPUT-DUR
+           msgString += transcript.toUpperCase() + "\n";
+           
+		   msgString += "RESULT:DONE\n";
+	   let jsonString = {
+			  NumWords: transcript.trim().split(/\s+/).length,
+			  inputDuration: input_dur,
+			  inputStartTime: 0,
+			  inputEndTime: input_dur,
+				TRANSCRIPT: transcript.toUpperCase()
+			 };
+			writeToScreen(JSON.stringify(jsonString));
+		   //writeToScreen("started: "+ activity[0] + "  end      "+ Date.now()+"  input_dur "+ input_dur + "  Finished in " + event.elapsedTime + " seconds."+ " word count :"+ transcript.trim().split(/\s+/).length);
+	    
+		 // writeToScreen(msgString);		  
+		 //writeToScreen(select_dialect.value);
+		 doSend(JSON.stringify(jsonString));
+		  
+		  
+		  activity=[];
+
+                 
+   
+		} else {
+          interimTranscript += transcript;
+		}
+      }
+     
+    }
+    
+    recognition.start()
+
+     recognition.onend = (event)=> {
+                console.log(event);
+                if (running) {
+                    
+                    recognition.start();
+	            }
+            };
+
+  </script>
+
+
+    
+  
+  
+  <div id="json"></div>
+  <div id="output"></div>
+
+  </html>

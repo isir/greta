@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<configuration debug="true">
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>
+        [%thread] %-5level %logger{36} - %msg%n
+     </pattern>
+    </encoder>
+  </appender>
+  <root level="WARN">
+    <appender-ref ref="STDOUT"/>
+  </root>
+  <logger name="eu.couch.hmi" level="WARN"/>
+  <logger name="hmi.unityembodiments" level="INFO"/>
+  <logger name="asap.environment" level="INFO"/>
+  <logger name="nl.utwente" level="INFO"/>
+  <logger name="nl.utwente.hmi.middleware" level="WARN"/>
+  <logger name="nl.utwente.hmi.middleware.HTTPRequest" level="TRACE"/>
+  <logger name="asap.middlewareengine" level="WARN"/>
+  
+  <logger name="hmi.flipper" level="DEBUG"/>
+  <logger name="hmi.flipper.environment" level="INFO"/>
+  <logger name="eu.couch.hmi.moves" level="DEBUG"/>
+  <logger name="eu.couch.hmi.intent" level="WARN"/>
+  <logger name="eu.couch.hmi.intent.planner" level="WARN"/>
+  <logger name="eu.couch.hmi.bmlfeedback" level="DEBUG"/>
+  
+  <logger name="hmi.audioenvironment.middleware" level="INFO"/>
+  <logger name="eu.couch.hmi.floormanagement" level="DEBUG"/>
+  <logger name="eu.couch.hmi.environments" level="INFO"/>
+  <logger name="eu.couch.hmi.environments.DGEPEnvironment" level="DEBUG"/>
+  <logger name="eu.couch.hmi.environments.SKBEnvironment" level="DEBUG"/>
+  <logger name="eu.couch.hmi.actor" level="DEBUG"/>
+  <logger name="eu.couch.hmi.intent.planner" level="DEBUG"/>
+  
+</configuration>

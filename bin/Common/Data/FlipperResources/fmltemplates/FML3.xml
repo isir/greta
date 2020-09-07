@@ -1,0 +1,32 @@
+<fml-apml id="$fml_id$">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="openmary" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				We both have our own strengths. 
+			<tm id="tm2"/>
+				ASAP agents are very good at multiparty conversation,
+			<tm id="tm3"/>	
+				and synchronising their behaviour with each other.
+			<tm id="tm4"/>
+			
+			<pitchaccent id="pa1" type="HStar" level="medium" start="s1:tm1+0.3" end="s1:tm2" importance="1"/>
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm2" end="s1:tm2+0.5" importance="1"/>
+			<pitchaccent id="pa3" type="HStar" level="medium" start="s1:tm2+0.6" end="s1:tm3" importance="1"/>
+			<pitchaccent id="pa4" type="HStar" level="medium" start="s1:tm3+0.2" end="s1:tm4" importance="1"/>
+			<boundary type="LL" id="b1" start="s1:tm2" end="s1:tm2+0.5"/>
+			<boundary type="LH" id="b2" start="s1:tm3" end="s1:tm3+0.5"/>
+			<boundary type="LL" id="b3" start="s1:tm4" end="s1:tm4+1"/>
+		</speech>
+	</bml>
+	<fml>
+		<emotion id="e1" type="pride" start="s1:tm1" end="s1:tm2" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>		
+		<deictic id="d1" start="s1:tm1" end="s1:tm1+1" importance="1.0" target="head_COUCH_USER_OLD"/>
+		<deictic id="d2" start="s1:tm2" end="s1:tm2+1" importance="1.0" target="head_COUCH_M_1_OLD"/>
+		<deictic id="d3" start="s1:tm3" end="s1:tm3+1" importance="1.0" target="head_COUCH_USER_OLD"/>
+	</fml>
+</fml-apml>

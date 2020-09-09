@@ -80,16 +80,16 @@
             <condition>helpPrint("initializing")</condition>
         </preconditions>
         <initeffects>
-            <method name="init" is="is.example.init.sphinx">
-                <object persistent="asr" class="greta.FlipperDemo.input.SpeechInputReceiver">
+            <method name="init" is="is.example.init.ASR">
+                <object persistent="asr" class="greta.FlipperDemo.input.ASRInputManager">
                     <constructors/>
                 </object>
             </method>
-           <method name="init" is="is.example.init.fmlSender">
+           <!--method name="init" is="is.example.init.fmlSender">
                 <object persistent="fmlSender" class="greta.FlipperDemo.output.FMLTranslatorOutput">
                     <constructors/>
                 </object>
-            </method>
+            </method-->
 			<method name="init" is="is.example.init.agent">
                 <object persistent="fmlGenerator" class="greta.FlipperDemo.dm.managers.FMLGenerator">
                     <constructors/>
@@ -105,6 +105,15 @@
         </preconditions>
         <effects>
             <assign is="is.example.agent.fmlParameterSetting">"true"</assign>
+			<method name="initSpeechInputReceiver">
+                <object persistent="asr" class="greta.FlipperDemo.input.ASRInputManager"/>
+				    <arguments>
+                        <value class="String">localhost</value>
+						<value class="String">61616</value>
+						<value class="String">greta.asr.response</value>
+                    </arguments>
+            </method>			
+			
 			<method name="initFmlSender">
                 <object persistent="fmlGenerator" class="greta.FlipperDemo.dm.managers.FMLGenerator"/>
 				    <arguments>
@@ -119,12 +128,12 @@
     <template id="getUserSpeech">
         <preconditions>
             <method name="hasMessage">
-                <object persistent="asr" class="greta.FlipperDemo.input.SpeechInputReceiver"/>
+                <object persistent="asr" class="greta.FlipperDemo.input.ASRInputManager"/>
             </method>
         </preconditions>
         <effects>
             <method name="getMessage" is="is.example.input.speech">
-                <object persistent="asr" class="greta.FlipperDemo.input.SpeechInputReceiver"/>
+                <object persistent="asr" class="greta.FlipperDemo.input.ASRInputManager"/>
             </method>
         </effects>
     </template>
@@ -169,19 +178,19 @@
             <condition>is.example.output.speech !== ""</condition>
         </preconditions>
         <effects>
-            <method name="speak">
+            <!--method name="speak">
                 <object persistent="fmlSender" class="greta.FlipperDemo.output.FMLTranslatorOutput"/>
                 <arguments>
                     <value class="String" is="is.example.output.speech"/>
                 </arguments>
-            </method>
+            </method-->
             <assign is="is.example.output.speech">""</assign>
 			<assign is="is.example.agent.fml.template">"FML1"</assign>
-		    <assign is="is.example.agent.fml.parameters['emotion.e1.type']">"joy"</assign>
+		    <!--assign is="is.example.agent.fml.parameters['emotion.e1.type']">"joy"</assign-->
         </effects>
     </template>
 	
-	 <template id="executeMove" name="executeMove">
+	 <template id="executeFMLTemplate" >
         <preconditions>
 				<condition>is.example.agent.fml.template !== ""</condition>
         </preconditions>

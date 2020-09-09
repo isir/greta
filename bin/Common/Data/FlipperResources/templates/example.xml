@@ -177,7 +177,7 @@
             </method>
             <assign is="is.example.output.speech">""</assign>
 			<assign is="is.example.agent.fml.template">"FML1"</assign>
-		    <!--assign is="is.example.agent.fml.parameters['emotion.em1.type']">"surprise"</assign-->
+		    <assign is="is.example.agent.fml.parameters['emotion.e1.type']">"joy"</assign>
         </effects>
     </template>
 	
@@ -190,6 +190,7 @@
                 <object class="greta.FlipperDemo.dm.managers.FMLGenerator" persistent="fmlGenerator"></object>
                 <arguments>
                     <value class="String" is="is.example.agent.fml" is_type="JSONString"/>
+					
                 </arguments>
             </behaviour>
             <assign is="is.example.agent.fml.template">""</assign>

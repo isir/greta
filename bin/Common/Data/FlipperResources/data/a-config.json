@@ -1,157 +1,18 @@
 [
   {
     "type": "tag",
-    "tag": "aria-var",
-    "replaceWith": "var",
-    "postReplace": {
-      "condition": {
-        "type": "not-contains",
-        "var": [
-          "DMImpBegin",
-          "DMImpEnd"
-        ]
-      },
-      "actions": [
-        {
-          "type": "remove-tag",
-          "condition": {
-            "type": "contains",
-            "var": [
-              "pitchaccent",
-              "DMImpBegin",
-              "DMImpEnd"
-            ]
-          }
-        },
-        {
-          "type": "replace",
-          "pairs": [
-            {
-              "from": "DMImpBegin",
-              "to": "DMBegin"
-            },
-            {
-              "from": "DMImpEnd",
-              "to": "DMEnd"
-            }
-          ],
-          "condition": {
-            "type": "contains",
-            "var": [
-              "performative",
-              "DMImpBegin",
-              "DMImpEnd"
-            ]
-          }
-        },
-        {
-          "type": "replace",
-          "pairs": [
-            {
-              "from": "DMImpBegin",
-              "to": "DMBegin"
-            },
-            {
-              "from": "DMImpEnd",
-              "to": "DMEnd"
-            }
-          ],
-          "condition": {
-            "type": "contains",
-            "var": [
-              "certainty",
-              "DMImpBegin",
-              "DMImpEnd"
-            ]
-          }
-        }
-      ]
-    }
-  },
-  {
-    "type": "tag",
     "tag": "performative",
     "checkForRules": true
   },
   {
     "type": "tag",
-    "tag": "aria-alternative",
+    "tag": "alternative",
     "nodeType": "static",
     "replaceWith": "static"
   },
   {
     "type": "tag",
-    "tag": "aria-alternative",
-    "nodeType": "dynamic",
-    "replaceWith": "dynamic",
-    "postReplace": {
-      "condition": {
-        "type": "not-contains",
-        "var": [
-          "DMImpBegin",
-          "DMImpEnd"
-        ]
-      },
-      "actions": [
-        {
-          "type": "remove-tag",
-          "condition": {
-            "type": "contains",
-            "var": [
-              "pitchaccent",
-              "DMImpBegin",
-              "DMImpEnd"
-            ]
-          }
-        },
-        {
-          "type": "replace",
-          "pairs": [
-            {
-              "from": "DMImpBegin",
-              "to": "DMBegin"
-            },
-            {
-              "from": "DMImpEnd",
-              "to": "DMEnd"
-            }
-          ],
-          "condition": {
-            "type": "contains",
-            "var": [
-              "performative",
-              "DMImpBegin",
-              "DMImpEnd"
-            ]
-          }
-        },
-        {
-          "type": "replace",
-          "pairs": [
-            {
-              "from": "DMImpBegin",
-              "to": "DMBegin"
-            },
-            {
-              "from": "DMImpEnd",
-              "to": "DMEnd"
-            }
-          ],
-          "condition": {
-            "type": "contains",
-            "var": [
-              "certainty",
-              "DMImpBegin",
-              "DMImpEnd"
-            ]
-          }
-        }
-      ]
-    }
-  },
-  {
-    "type": "tag",
-    "tag": "aria-alternative",
+    "tag": "alternative",
     "nodeType": "selectable",
     "replaceWith": "selectable"
   },
@@ -303,7 +164,7 @@
   },
   {
     "type": "tag",
-    "tag": "aria-header",
+    "tag": "header",
     "remove": true
   },
   {
@@ -361,6 +222,6 @@
   },
   {
     "type": "dtd",
-    "file": ".\\Common\\Data\\ARIA-ValuspaFMLTranslator\\fml-apml.dtd"
+    "file": ".\\Common\\Data\\FlipperResources\\FMLTranslator\\fml-apml.dtd"
   }
 ]

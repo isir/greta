@@ -22,7 +22,7 @@ public class SpeechInputReceiver extends Receiver<String> {
     }
     public SpeechInputReceiver(){
         
-        super("localhost", "61616", "greta.asr.response");
+      //  super("localhost", "61616", "greta.asr.response");
         
     }
 

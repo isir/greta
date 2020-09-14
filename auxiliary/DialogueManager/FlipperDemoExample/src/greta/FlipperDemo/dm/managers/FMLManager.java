@@ -66,32 +66,35 @@ public class FMLManager extends SimpleManager{
         this.sendAgentData = new SimpleProducerWrapper(UrlBuilder.getUrlTcp(amqHostname,amqPort), amqDialog,true);
        this.sendAgentData.init();
     }
-    public FMLManager(String host, String port, String senderFmlTopic){
+    public FMLManager(String host, String port, String senderFmlTopic, String flipperTemplateFolder){
         super();
         setAmqHostname(host);
         setAmqPort(port);
         setAmqSendTopicName(senderFmlTopic);
+        templateFolderPath = flipperTemplateFolder;
         this.receivedBMLQueue = new LinkedBlockingQueue<>();
         this.receiverBML = new SimpleReceiverWrapper(UrlBuilder.getUrlTcp(amqHostname,amqPort),amqOutputBML,true);
         this.isPlanning = false;
         setup();
         
        System.out.println("FMLManager started");
-        this.sendDialogTurn = new SimpleProducerWrapper(UrlBuilder.getUrlTcp(amqHostname,amqPort),"DialogTurn",true);
+       /* this.sendDialogTurn = new SimpleProducerWrapper(UrlBuilder.getUrlTcp(amqHostname,amqPort),"DialogTurn",true);
         this.sendDialogTurn.init();
         this.sendAgentData = new SimpleProducerWrapper(UrlBuilder.getUrlTcp(amqHostname,amqPort), amqDialog,true);
        this.sendAgentData.init();
+    */
     }
+    
     private boolean agentTalking = false;
     private String outputBML = "";
-    private String amqSendTopicName = "greta.input.FML";
+    private String amqSendTopicName = null; // "greta.input.FML";
     private String amqFeedbackTopicName = "greta.output.feedback.BML";
     private String amqOutputBML = "greta.output.BML";
-    private String amqPort = "61616";
-    private String amqHostname = "localhost"; // 192.168.0.1
+    private String amqPort = null;
+    private String amqHostname = null; // 192.168.0.1
     private String amqDialog = "dialog";
     private String replacerConfigPath = "Common\\Data\\FlipperResources\\data\\a-config.json";
-    private String templateFolderPath = "Common/Data/FlipperResources/fmltemplates";
+    private String templateFolderPath = null; //"Common/Data/FlipperResources/fmltemplates";
     private boolean showFMLGUI = true;
     private boolean showFallbackGUI = true;
     private boolean disableAMQ = false;

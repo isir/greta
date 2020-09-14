@@ -2,6 +2,7 @@ package greta.FlipperDemo.input;
 
 
 import greta.auxiliary.activemq.Receiver;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.TextMessage;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import javax.json.JsonString;
+import javax.json.JsonValue;
 
 public class SpeechInputReceiver extends Receiver<String> {
 	
@@ -32,16 +38,11 @@ public class SpeechInputReceiver extends Receiver<String> {
      * @return true if successfully started
      */
     public boolean init(){
-       // messages.add("Jai gayatri mata");
+      
        return true;
 
     }
 
-    private void initSphinx(){
-       while(true){
-           
-       }
-    }
 
 
     /**
@@ -83,17 +84,18 @@ public class SpeechInputReceiver extends Receiver<String> {
         return "";
     }
 
-  /*  public static void main(String[] args) throws IOException {
-        SpeechInputReceiver sphinx = new SpeechInputReceiver();
-        sphinx.init();
-
-    }
-*/
 
     @Override
     protected void onMessage(String message, Map<String, Object> map) {
             System.out.println(" flipper received **: "+ message);
-            messages.add("BONJOUR");
+            
+            JsonReader jr = Json.createReader(new StringReader(message));
+            JsonObject jo = jr.readObject();
+            JsonString transcript = jo.getJsonString("TRANSCRIPT");
+            System.out.println(" flipper received **: "+ transcript.toString());
+            String cleanTranscript = transcript.toString().replaceAll("\"", "");
+           cleanTranscript = cleanTranscript.toLowerCase().trim();
+            messages.add(cleanTranscript);
     }
 
     @Override
@@ -107,6 +109,11 @@ public class SpeechInputReceiver extends Receiver<String> {
                System.out.println("cought exception in getContent : "+ ex.toString());
             }
 		return msg;        
+    }
+    
+    @Override
+    protected void onConnectionStarted() {
+    	super.onConnectionStarted();
     }
 
 }

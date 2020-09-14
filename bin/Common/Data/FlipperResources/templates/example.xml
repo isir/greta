@@ -34,10 +34,10 @@
 
         function getUserIntent(text){
             helpPrint("Userintent: " + text);
-            if(text == "BONJOUR"){
+            if(text == "bonjour"){
                 return "greeting";
             }
-            else if(text == "SALUT"){
+            else if(text == "salut"){
                 return "goodbye";
             }
             else{
@@ -46,7 +46,7 @@
         }
 
         function setAgentIntent(intent){
-            helpPrint("AgentIntent: " + intent);
+          //  helpPrint("AgentIntent: " + intent);
             if(intent == "greeting"){
                 return "greeting";
             }
@@ -61,13 +61,13 @@
         function setAgentSpeech(intent){
             helpPrint("Agentspeech: " + intent);
             if(intent == "greeting"){
-                return "Hello";
+                return "FML1";
             }
             else if(intent == "goodbye"){
-                return "Bye";
+                return "FML9";
             }
             else{
-                return "I don't know";
+                return "FML2";
             }
         }
     ]]>
@@ -98,8 +98,9 @@
 
         </initeffects>
     </template>
-   <!-- Set user intent when speech -->
-    <template id="setFMLSendParameters" >
+   <!-- template to set activemq connection parameters -->
+   <!-- this template is obsolete now as we can now set these parameters in greta flipper demo window -->
+    <!--template id="setFMLSendParameters" >
         <preconditions>
 			<condition>is.example.agent.fmlParameterSetting == ""</condition>
         </preconditions>
@@ -123,7 +124,7 @@
                     </arguments>
             </method>
         </effects>
-    </template>
+    </template-->
     <!-- Check for speech -->
     <template id="getUserSpeech">
         <preconditions>
@@ -168,27 +169,14 @@
         </preconditions>
         <effects>
             <assign is="is.example.output.speech">setAgentSpeech(is.example.core.aIntent)</assign>
+			<assign is="is.example.agent.fml.template">setAgentSpeech(is.example.core.aIntent)</assign>
+		    <!--assign is="is.example.agent.fml.parameters['emotion.e1.type']">"joy"</assign-->
             <assign is="is.example.core.aIntent">""</assign>
         </effects>
     </template>
 
     <!-- Say agent speech -->
-    <template id="sayAgentSpeech">
-        <preconditions>
-            <condition>is.example.output.speech !== ""</condition>
-        </preconditions>
-        <effects>
-            <!--method name="speak">
-                <object persistent="fmlSender" class="greta.FlipperDemo.output.FMLTranslatorOutput"/>
-                <arguments>
-                    <value class="String" is="is.example.output.speech"/>
-                </arguments>
-            </method-->
-            <assign is="is.example.output.speech">""</assign>
-			<assign is="is.example.agent.fml.template">"FML1"</assign>
-		    <!--assign is="is.example.agent.fml.parameters['emotion.e1.type']">"joy"</assign-->
-        </effects>
-    </template>
+
 	
 	 <template id="executeFMLTemplate" >
         <preconditions>
@@ -203,6 +191,7 @@
                 </arguments>
             </behaviour>
             <assign is="is.example.agent.fml.template">""</assign>
+			<assign is="is.example.output.speech">""</assign>
  
         </effects>
     </template>

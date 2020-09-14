@@ -11,6 +11,7 @@ import greta.FlipperDemo.dm.managers.FMLManager;
 
 import greta.FlipperDemo.dm.managers.SimpleManager;
 import greta.FlipperDemo.dm.managers.Say;
+import greta.FlipperDemo.main.Main;
 import org.slf4j.LoggerFactory;
 
 import javax.json.*;
@@ -24,9 +25,15 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class FMLGenerator {
 
+   private Main singletoneInstance = null;
     FMLManager manager;
     private String agentName = "Agent";
     private static org.slf4j.Logger logger = LoggerFactory.getLogger(FMLGenerator.class.getName());
+    
+   private String host = null;
+   private String port = null;
+   private String gretaInputTopic = null;
+   private String flipperTemplateFolder = null;
 
     public FMLGenerator(FMLManager fm) {
         System.out.println("FMLGenerator started");
@@ -34,9 +41,28 @@ public class FMLGenerator {
     }
 
     public FMLGenerator() {
-        System.out.println("FMLGenerator started");
+ 
         // this.manager = new FMLManager();
     }
+    
+    public boolean init(){
+       singletoneInstance = Main.getInstance();
+       host = singletoneInstance.getHost();
+       port = singletoneInstance.getPort();
+       gretaInputTopic = singletoneInstance.getGretaInputTopic();
+       flipperTemplateFolder = singletoneInstance.getflipperTemplateFolderPath();
+       this.manager = new FMLManager(host, port, gretaInputTopic, flipperTemplateFolder);
+        
+        System.out.println("initializing FMLGenerator");
+        return true;
+    }
+    public boolean init(String host, String port, String senderFmlTopic, String flipperTemplateFolder){
+        this.manager = new FMLManager(host, port, senderFmlTopic,flipperTemplateFolder);
+        System.out.println("initializing FMLGenerator");
+        return true;
+    }
+    
+    
     /**
      * Creates the strategy history
      * @return filename
@@ -191,13 +217,5 @@ public class FMLGenerator {
     public String getLastText() {
         return this.manager.getLastText();
     }
-    public boolean init(){
-        System.out.println("initializing FMLGenerator");
-        return true;
-    }
-    public boolean initFmlSender(String host, String port, String senderFmlTopic){
-        this.manager = new FMLManager(host, port, senderFmlTopic);
-        System.out.println("initializing FMLGenerator");
-        return true;
-    }
+
 }

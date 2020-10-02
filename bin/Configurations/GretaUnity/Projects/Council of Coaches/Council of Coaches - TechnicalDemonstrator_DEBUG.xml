@@ -2,7 +2,7 @@
 <modulated>
     <elements>
         <element h="510.0" id="Environment - 1545228639037-145"
-            module="Environment" name="Environment" w="1390.0" x="30.0" y="110.0">
+            module="Environment" name="Environment" w="1470.0" x="30.0" y="110.0">
             <element h="450.0"
                 id="Character Manager - 1545228650268-259"
                 module="Character Manager" name="Character Manager #1"
@@ -20,6 +20,7 @@
                     id="BML File Reader - 1545228678860-536"
                     module="BML File Reader" name="BML File Reader #1"
                     w="80.0" x="130.0" y="30.0">
+                    <parameter name="fileName" value=""/>
                     <window h="100" visible="true" w="520" x="740" y="400"/>
                 </element>
                 <element h="230.0"
@@ -82,9 +83,10 @@
                     <parameter name="host" value="localhost"/>
                     <window h="170" visible="true" w="260" x="740" y="500"/>
                 </element>
-                <element h="70.0" id="ActiveMQ BML Receiver - 1554117362832-889"
-                    module="ActiveMQ BML Receiver" name="ActiveMQ BML Receiver #1"
-                    w="80.0" x="160.0" y="350.0">
+                <element h="70.0"
+                    id="ActiveMQ BML Receiver - 1554117362832-889"
+                    module="ActiveMQ BML Receiver"
+                    name="ActiveMQ BML Receiver #1" w="80.0" x="160.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
                     <parameter name="host" value="localhost"/>
@@ -97,8 +99,7 @@
                 <element h="70.0"
                     id="ActiveMQ FML Receiver - 1554132728732-441"
                     module="ActiveMQ FML Receiver"
-                    name="ActiveMQ FML Receiver #1" w="80.0"
-                    x="0.0" y="350.0">
+                    name="ActiveMQ FML Receiver #1" w="80.0" x="0.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
                     <parameter name="host" value="localhost"/>
@@ -107,8 +108,9 @@
                 </element>
                 <element h="50.0"
                     id="ActiveMQ Feedbacks Sender - 1554132744307-154"
-                    module="ActiveMQ Feedbacks Sender" name="ActiveMQ Feedbacks Sender #1"
-                    w="80.0" x="340.0" y="30.0">
+                    module="ActiveMQ Feedbacks Sender"
+                    name="ActiveMQ Feedbacks Sender #1" w="80.0"
+                    x="340.0" y="30.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
                     <parameter name="host" value="localhost"/>
@@ -134,11 +136,22 @@
                     w="80.0" x="540.0" y="100.0">
                     <window h="215" visible="true" w="520" x="740" y="840"/>
                 </element>
+                <element h="50.0"
+                    id="ActiveMQ Meaning Miner FML Receiver - 1601676829101-378"
+                    module="ActiveMQ Meaning Miner FML Receiver"
+                    name="ActiveMQ Meaning Miner FML Receiver" w="80.0"
+                    x="0.0" y="340.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/MEANING_MINER_FML/REQUEST/COUCH_CAMILLE"/>
+                    <window h="254" visible="false" w="272" x="0" y="0"/>
+                </element>
             </element>
             <element h="450.0"
                 id="Character Manager - 1571047080299-260"
                 module="Character Manager" name="Character Manager #2"
-                w="650.0" x="710.0" y="30.0">
+                w="760.0" x="710.0" y="30.0">
                 <parameter name="character_name" value="LAURA"/>
                 <window h="532" visible="false" w="505" x="0" y="0"/>
                 <element h="230.0"
@@ -164,22 +177,23 @@
                     id="BML File Reader - 1571048124960-179"
                     module="BML File Reader" name="BML File Reader #2"
                     w="80.0" x="130.0" y="30.0">
+                    <parameter name="fileName" value=""/>
                     <window h="100" visible="true" w="520" x="1270" y="400"/>
                 </element>
                 <element h="70.0"
                     id="ActiveMQ FML Receiver - 1571048164657-48"
                     module="ActiveMQ FML Receiver"
-                    name="ActiveMQ FML Receiver #2" w="80.0"
-                    x="0.0" y="350.0">
+                    name="ActiveMQ FML Receiver #2" w="80.0" x="0.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
                     <parameter name="host" value="localhost"/>
                     <parameter name="topic" value="COUCH/FML/REQUEST/COUCH_LAURA"/>
                     <window h="221" visible="false" w="240" x="0" y="0"/>
                 </element>
-                <element h="70.0" id="ActiveMQ BML Receiver - 1571048178752-311"
-                    module="ActiveMQ BML Receiver" name="ActiveMQ BML Receiver #2"
-                    w="80.0" x="160.0" y="350.0">
+                <element h="70.0"
+                    id="ActiveMQ BML Receiver - 1571048178752-311"
+                    module="ActiveMQ BML Receiver"
+                    name="ActiveMQ BML Receiver #2" w="80.0" x="160.0" y="350.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
                     <parameter name="host" value="localhost"/>
@@ -191,8 +205,9 @@
                     x="240.0" y="30.0"/>
                 <element h="50.0"
                     id="ActiveMQ Feedbacks Sender - 1571048330040-648"
-                    module="ActiveMQ Feedbacks Sender" name="ActiveMQ Feedbacks Sender #2"
-                    w="80.0" x="340.0" y="30.0">
+                    module="ActiveMQ Feedbacks Sender"
+                    name="ActiveMQ Feedbacks Sender #2" w="80.0"
+                    x="340.0" y="30.0">
                     <parameter name="isQueue" value="false"/>
                     <parameter name="port" value="61616"/>
                     <parameter name="host" value="localhost"/>
@@ -265,6 +280,17 @@
                     module="Body Head Noise" name="Body Head Noise #2"
                     w="80.0" x="540.0" y="100.0">
                     <window h="215" visible="true" w="520" x="1270" y="840"/>
+                </element>
+                <element h="50.0"
+                    id="ActiveMQ Meaning Miner FML Receiver - 1601676856423-110"
+                    module="ActiveMQ Meaning Miner FML Receiver"
+                    name="ActiveMQ Meaning Miner FML Receiver" w="80.0"
+                    x="680.0" y="330.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/MEANING_MINER_FML/REQUEST/COUCH_LAURA"/>
+                    <window h="254" visible="false" w="272" x="0" y="0"/>
                 </element>
             </element>
         </element>
@@ -348,21 +374,15 @@
     </elements>
     <connections>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="Thrift Command Receiver - 1553697843141-325" target="Behavior Realizer - 1545228702171-304"/>
+            source="BML File Reader - 1545228678860-536" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1571853444753-284" target="Environment - 1545228639037-145"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Thrift Command Receiver - 1553697843141-325" target="Behavior Planner - 1545228689924-565"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1571048749984-846" target="MPEG4 Animatable - 1571048631079-434"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1571048749984-846" target="Thrift Audio Sender - 1551782070029-170"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554807302252-267" target="Simple AU Performer - 1545228776323-11"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1571048776230-901" target="MPEG4 Animatable - 1571048631079-434"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1571048776230-901" target="Thrift BAP Sender - 1571048800983-957"/>
-        <connection connector="addFeedbackInput"
-            source="Behavior Realizer - 1571048038311-347" target="Feedbacks - 1571048300087-491"/>
+            source="FML File Reader - 1571048114448-838" target="Behavior Planner - 1571048020905-618"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="ActiveMQ BML Receiver - 1554117362832-889" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="EnvToolToEnvironment"
+            source="Environment Editor - 1574255848859-867" target="Environment - 1545228639037-145"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1571048038311-347" target="Animation Keyframe Performer - 1571048776230-901"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -371,16 +391,20 @@
             source="Behavior Realizer - 1571048038311-347" target="Lip Model - 1571048970414-731"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1571048038311-347" target="Audio Keyframe Performer - 1571048749984-846"/>
-        <connection connector="EnvToolToEnvironment"
-            source="Environment Editor - 1574255848859-867" target="Environment - 1545228639037-145"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1571853444753-284" target="Environment - 1545228639037-145"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1545228808979-301" target="Environment - 1545228639037-145"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML File Reader - 1545228674948-209" target="Behavior Planner - 1545228689924-565"/>
         <connection connector="addFeedbackInput"
-            source="Behavior Realizer - 1545228702171-304" target="Feedbacks - 1554132717338-53"/>
+            source="Behavior Realizer - 1571048038311-347" target="Feedbacks - 1571048300087-491"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1545228689924-565" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1545228689924-565" target="Feedbacks - 1554132717338-53"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1545228738636-406" target="Lip Blender - 1554807347732-921"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="ActiveMQ FML Receiver - 1554132728732-441" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="ActiveMQ Meaning Miner FML Receiver - 1601676829101-378" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554807302252-267" target="Simple AU Performer - 1545228776323-11"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1545228702171-304" target="Animation Keyframe Performer - 1545228717780-228"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -389,71 +413,77 @@
             source="Behavior Realizer - 1545228702171-304" target="Lip Model - 1545228738636-406"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1545228702171-304" target="Audio Keyframe Performer - 1554807323260-420"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Body Head Noise - 1574959329659-302" target="MPEG4 Animatable - 1571048631079-434"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="ActiveMQ BML Receiver - 1571048178752-311" target="Behavior Realizer - 1571048038311-347"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Blender - 1554807347732-921" target="MPEG4 Animatable - 1545228808979-301"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Blender - 1554807347732-921" target="Thrift FAP Sender - 1551782056618-620"/>
+        <connection connector="addFeedbackInput"
+            source="Behavior Realizer - 1545228702171-304" target="Feedbacks - 1554132717338-53"/>
         <connection connector="setTTS" source="TTS - 1545228829579-75" target="MaryTTS Client - 1545228836179-501"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1545228847405-168" target="Log Frame - 1545228852107-958"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="ActiveMQ FML Receiver - 1571048164657-48" target="Behavior Planner - 1571048020905-618"/>
         <connection connector="addFeedbackOutput"
             source="Feedbacks - 1554132717338-53" target="ActiveMQ Feedbacks Sender - 1554132744307-154"/>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1571048020905-618" target="Behavior Realizer - 1571048038311-347"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1571048020905-618" target="Feedbacks - 1571048300087-491"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1545228689924-565" target="Behavior Realizer - 1545228702171-304"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1545228689924-565" target="Feedbacks - 1554132717338-53"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="ActiveMQ FML Receiver - 1571048164657-48" target="Behavior Planner - 1571048020905-618"/>
+            source="BML File Reader - 1571048124960-179" target="Behavior Realizer - 1571048038311-347"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1545228717780-228" target="MPEG4 Animatable - 1545228808979-301"/>
+            source="Animation Keyframe Performer - 1571048776230-901" target="MPEG4 Animatable - 1571048631079-434"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1545228717780-228" target="Thrift BAP Sender - 1553697836829-985"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1571048970414-731" target="Lip Blender - 1571049000695-539"/>
+            source="Animation Keyframe Performer - 1571048776230-901" target="Thrift BAP Sender - 1571048800983-957"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1545228847405-168" target="Log Frame - 1545228852107-958"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Body Head Noise - 1574959313203-398" target="MPEG4 Animatable - 1545228808979-301"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1571049043503-295" target="Lip Blender - 1571049000695-539"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="ActiveMQ BML Receiver - 1554117362832-889" target="Behavior Realizer - 1545228702171-304"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="ActiveMQ FML Receiver - 1554132728732-441" target="Behavior Planner - 1545228689924-565"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1571048631079-434" target="Environment - 1545228639037-145"/>
+            source="Body Head Noise - 1574959329659-302" target="MPEG4 Animatable - 1571048631079-434"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Thrift Command Receiver - 1571227173930-849" target="Behavior Realizer - 1571048038311-347"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="Thrift Command Receiver - 1571227173930-849" target="Behavior Planner - 1571048020905-618"/>
         <connection connector="addFeedbackOutput"
             source="Feedbacks - 1571048300087-491" target="ActiveMQ Feedbacks Sender - 1571048330040-648"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1545228776323-11" target="Lip Blender - 1554807347732-921"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="ActiveMQ BML Receiver - 1571048178752-311" target="Behavior Realizer - 1571048038311-347"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="ActiveMQ Meaning Miner FML Receiver - 1601676856423-110" target="Behavior Planner - 1571048020905-618"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1571048749984-846" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1571048749984-846" target="Thrift Audio Sender - 1551782070029-170"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554807323260-420" target="MPEG4 Animatable - 1545228808979-301"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554807323260-420" target="Thrift Audio Sender - 1571137893257-728"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1571049025511-665" target="Simple AU Performer - 1571049043503-295"/>
-        <connection connector="setTTS" source="TTS - 1571048583671-185" target="MaryTTS Client - 1571048597550-655"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1571048631079-434" target="Environment - 1545228639037-145"/>
         <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1545228738636-406" target="Lip Blender - 1554807347732-921"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML File Reader - 1571048114448-838" target="Behavior Planner - 1571048020905-618"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1545228776323-11" target="Lip Blender - 1554807347732-921"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1571048124960-179" target="Behavior Realizer - 1571048038311-347"/>
+            source="Lip Model - 1571048970414-731" target="Lip Blender - 1571049000695-539"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1571049000695-539" target="MPEG4 Animatable - 1571048631079-434"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1571049000695-539" target="Thrift FAP Sender - 1571048942447-446"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554807347732-921" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554807347732-921" target="Thrift FAP Sender - 1551782056618-620"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Body Head Noise - 1574959313203-398" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1545228808979-301" target="Environment - 1545228639037-145"/>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1545228678860-536" target="Behavior Realizer - 1545228702171-304"/>
+            source="Thrift Command Receiver - 1553697843141-325" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Thrift Command Receiver - 1553697843141-325" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1571048020905-618" target="Behavior Realizer - 1571048038311-347"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1571048020905-618" target="Feedbacks - 1571048300087-491"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1545228717780-228" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1545228717780-228" target="Thrift BAP Sender - 1553697836829-985"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1545228674948-209" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1571049043503-295" target="Lip Blender - 1571049000695-539"/>
+        <connection connector="setTTS" source="TTS - 1571048583671-185" target="MaryTTS Client - 1571048597550-655"/>
     </connections>
 </modulated>

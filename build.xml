@@ -46,6 +46,7 @@
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SocialParameters"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SSI"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/Thrift"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SpeechRecognizer"/>
 		<ant target="${action}" useNativeBasedir="true" dir="auxiliary/DialogueManager/FlipperDemoExample"/>		
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/DialogueManager/FlipperLib"/>				
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/TTS/CereProc"/>

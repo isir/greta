@@ -94,33 +94,7 @@
 
         </initeffects>
     </template>
-   <!-- template to set activemq connection parameters -->
-   <!-- this template is obsolete now as we can now set these parameters in greta flipper demo window -->
-    <!--template id="setFMLSendParameters" >
-        <preconditions>
-			<condition>is.example.agent.fmlParameterSetting == ""</condition>
-        </preconditions>
-        <effects>
-            <assign is="is.example.agent.fmlParameterSetting">"true"</assign>
-			<method name="initSpeechInputReceiver">
-                <object persistent="asr" class="greta.FlipperDemo.input.ASRInputManager"/>
-				    <arguments>
-                        <value class="String">localhost</value>
-						<value class="String">61616</value>
-						<value class="String">greta.asr.response</value>
-                    </arguments>
-            </method>			
-			
-			<method name="initFmlSender">
-                <object persistent="fmlGenerator" class="greta.FlipperDemo.dm.managers.FMLGenerator"/>
-				    <arguments>
-                        <value class="String">localhost</value>
-						<value class="String">61616</value>
-						<value class="String">greta.input.FML</value>
-                    </arguments>
-            </method>
-        </effects>
-    </template-->
+ 
     <!-- Check for speech -->
     <template id="getUserSpeech">
         <preconditions>
@@ -172,7 +146,6 @@
     </template>
 
     <!-- Say agent speech -->
-
 	
 	 <template id="executeFMLTemplate" >
         <preconditions>

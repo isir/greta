@@ -95,7 +95,7 @@ public class FMLManager extends SimpleManager{
     private String amqDialog = "dialog";
     private String replacerConfigPath = "Common\\Data\\FlipperResources\\data\\a-config.json";
     private String templateFolderPath = null; //"Common/Data/FlipperResources/fmltemplates";
-    private boolean showFMLGUI = true;
+    private boolean showFMLGUI = false;
     private boolean showFallbackGUI = true;
     private boolean disableAMQ = false;
     LinkedList<QueueableBehaviour> behaviourQueue = new LinkedList<>();

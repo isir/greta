@@ -10,14 +10,14 @@ package greta.FlipperDemo.input;
  * @author Barnge
  */
 
-import greta.FlipperDemo.main.Main;
+import greta.FlipperDemo.main.FlipperLauncherMain;
 
 public class ASRInputManager {
     
    
     
    private SpeechInputReceiver  inputReceiver;
-   private Main singletoneInstance = null;
+   private FlipperLauncherMain singletoneInstance = null;
    
    private String host = null;
    private String port = null;
@@ -27,7 +27,7 @@ public class ASRInputManager {
    
    public boolean init()
    {   System.out.println("ASR input manager initialized");
-       singletoneInstance = Main.getInstance();
+       singletoneInstance = FlipperLauncherMain.getInstance();
        if(singletoneInstance != null){
            System.out.println("jai gayatri mata: asrinput got main singleton instance : "
                    + singletoneInstance.getGretaASRTopic());

@@ -1024,7 +1024,16 @@
             <object class="hmi.flipper2.launcher.FlipperLauncher" lib_id="greta_flipperLib"/>
         </module>
         <module name="FlipperDemo">
-            <object class="greta.FlipperDemo.main.Main" lib_id="greta_FlipperDemo"/>
+            <object class="greta.FlipperDemo.main.FlipperLauncherMain" lib_id="greta_FlipperDemo"/>
+        <frame class="greta.FlipperDemo.main.FlipperDemoGUIFrame" lib_id="greta_FlipperDemo" type="frame">
+                <link method="setFlipperDemoMain" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.asr.response" get_method="getGretaASRTopic" get_on="object" name="gretaASRTopic" set_method="setGretaASRTopic" set_on="object" type="string"/>
+            <parameter default="greta.input.FML" get_method="getGretaInputTopic" get_on="object" name="gretaInputTopic" set_method="setGretaInputTopic" set_on="object" type="string"/>
+        <parameter default="D:\Greta_Research\greta_gpl_new\greta\bin\Common\Data\FlipperResources\flipperDemo.properties" get_method="getFlipperPropertyResource" get_on="object" name="flipperPropertyResource" set_method="setFlipperPropertyResource" set_on="object" type="string"/>
+            <parameter default="D:\Greta_Research\greta_gpl_new\greta\bin\Common\Data\FlipperResources\fmltemplates" get_method="getflipperTemplateFolderPath" get_on="object" name="FlipperTemplateFolder" set_method="setflipperTemplateFolderPath" set_on="object" type="string"/>
         </module>		
 		
 		

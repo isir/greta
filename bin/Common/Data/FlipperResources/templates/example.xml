@@ -85,11 +85,7 @@
                     <constructors/>
                 </object>
             </method>
-           <!--method name="init" is="is.example.init.fmlSender">
-                <object persistent="fmlSender" class="greta.FlipperDemo.output.FMLTranslatorOutput">
-                    <constructors/>
-                </object>
-            </method-->
+
 			<method name="init" is="is.example.init.agent">
                 <object persistent="fmlGenerator" class="greta.FlipperDemo.dm.managers.FMLGenerator">
                     <constructors/>
@@ -170,7 +166,7 @@
         <effects>
             <assign is="is.example.output.speech">setAgentSpeech(is.example.core.aIntent)</assign>
 			<assign is="is.example.agent.fml.template">setAgentSpeech(is.example.core.aIntent)</assign>
-		    <!--assign is="is.example.agent.fml.parameters['emotion.e1.type']">"joy"</assign-->
+		    <assign is="is.example.agent.fml.parameters['emotion.e1.type']">"joy"</assign>
             <assign is="is.example.core.aIntent">""</assign>
         </effects>
     </template>

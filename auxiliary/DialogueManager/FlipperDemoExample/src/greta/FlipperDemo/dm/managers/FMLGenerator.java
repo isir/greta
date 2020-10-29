@@ -11,7 +11,7 @@ import greta.FlipperDemo.dm.managers.FMLManager;
 
 import greta.FlipperDemo.dm.managers.SimpleManager;
 import greta.FlipperDemo.dm.managers.Say;
-import greta.FlipperDemo.main.Main;
+import greta.FlipperDemo.main.FlipperLauncherMain;
 import org.slf4j.LoggerFactory;
 
 import javax.json.*;
@@ -25,7 +25,7 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class FMLGenerator {
 
-   private Main singletoneInstance = null;
+   private FlipperLauncherMain singletoneInstance = null;
     FMLManager manager;
     private String agentName = "Agent";
     private static org.slf4j.Logger logger = LoggerFactory.getLogger(FMLGenerator.class.getName());
@@ -46,7 +46,7 @@ public class FMLGenerator {
     }
     
     public boolean init(){
-       singletoneInstance = Main.getInstance();
+       singletoneInstance = FlipperLauncherMain.getInstance();
        host = singletoneInstance.getHost();
        port = singletoneInstance.getPort();
        gretaInputTopic = singletoneInstance.getGretaInputTopic();

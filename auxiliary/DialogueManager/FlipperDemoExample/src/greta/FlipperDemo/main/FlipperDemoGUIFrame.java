@@ -46,7 +46,7 @@ public class FlipperDemoGUIFrame extends JFrame  {
         private JTextField flipperPropertyResTextField;
         private JTextField flipperTemplateFolderTextField;
 	private JButton resetConnectionButton;
-	private Main flipperDemoMain= null;
+	private FlipperLauncherMain flipperDemoMain= null;
  
       //private ActiveMQConnector groupBehaviorMain = null;
       //	 private SpeechRecognizer sr = null;
@@ -169,9 +169,9 @@ public class FlipperDemoGUIFrame extends JFrame  {
 		
 	}
 
-	public void setFlipperDemoMain(Main flipperDemoMain) {
+	public void setFlipperDemoMain(FlipperLauncherMain flipperDemoMain) {
                 //this.flipperDemoMain = flipperDemoMain;
-		this.flipperDemoMain = Main.getInstance();
+		this.flipperDemoMain = FlipperLauncherMain.getInstance();
 		
 		if (this.flipperDemoMain.getHost() != null) {
 			this.hostTextField.setText(this.flipperDemoMain.getHost());

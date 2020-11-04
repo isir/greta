@@ -1334,6 +1334,11 @@
             <needs path="./Common/Data/Voxygen/*"/>
             <needs path="./Common/Lib/External/voxygen/**"/>
         </lib>
+        <lib id="greta_video_capture" path="./Player/Lib/Internal/VideoCapture.jar">
+            <depends lib_id="ext_xuggle-xuggler"/>
+            <depends lib_id="greta_ogre_player"/>
+            <depends lib_id="greta_util"/>
+        </lib>
         <lib id="greta_speech_recognizer" path="Common/Lib/Internal/SpeechRecognizer.jar">
             <depends lib_id="ext_grizzly-http-all"/>
             <depends lib_id="ext_gson-2.8.0"/>

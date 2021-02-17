@@ -65,6 +65,12 @@
                 <item module="Face Library Viewer" name="Face Library Viewer"/>
                 <item module="AU Library Editor" name="AU Library Editor"/>
                 <item module="Environment Editor" name="Environment Editor"/>
+				<!-- Phil sample Module starts -->
+				<menu name="Sample">
+					<item module="Signal Forwarder" name="Signal Forwarder"/>
+					<item module="Intention Forwarder" name="Intention Forwarder"/>
+				</menu>
+				<!-- Phil sample Module ends -->
                 <!-- more tools comming soon -->
             </menu>
             <menu name="TTS">
@@ -975,6 +981,14 @@
             <parameter default="COUCH/GBM/REQUEST" get_method="getRequestTopic" get_on="object" name="requestTopic" set_method="setRequestTopic" set_on="object" type="string"/>
             <parameter default="COUCH/GBM/RESPONSE" get_method="getResponseTopic" get_on="object" name="responseTopic" set_method="setResponseTopic" set_on="object" type="string"/>
         </module>
+		<!-- Phil Sample Module starts -->
+		<module name="Signal Forwarder" style="Signals">
+            <object class="greta.auxiliary.sampleModule.SignalForwarder" lib_id="greta_sampleModule"/>            
+        </module>
+		<module name="Intention Forwarder" style="Intentions">
+            <object class="greta.auxiliary.sampleModule.IntentionForwarder" lib_id="greta_sampleModule"/>            
+        </module>
+		<!-- Phil Sample Module ends -->
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1240,6 +1254,13 @@
             <needs path="./Common/Data/Voxygen/*"/>
             <needs path="./Common/Lib/External/voxygen/**"/>
         </lib>
+		<!-- Phil Sample Module -->
+		<lib id="greta_sampleModule" path="./Common/Lib/Internal/SampleModule.jar">
+			<depends lib_id="greta_util"/>
+			<depends lib_id="greta_signals"/>
+			<depends lib_id="greta_intentions"/>			
+		</lib>
+		<!-- Phil Sample Module End -->
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>

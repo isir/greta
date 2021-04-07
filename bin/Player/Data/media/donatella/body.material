@@ -1,0 +1,11 @@
+import * from "autodesk.material"
+
+material Donatella_Autodesk_Body : base {
+	set_texture_alias diffuseMap donatella/color.jpg
+	set_texture_alias celShadingMap donatella/color.jpg
+}
+material Donatella_Autodesk_Hair : Autodesk_Hair {
+	set_texture_alias diffuseMap donatella/hair_color.jpg
+	set_texture_alias celShadingMap donatella/hair_color.jpg
+}
+

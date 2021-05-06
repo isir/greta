@@ -8,7 +8,6 @@ Realtime platform to control socio-emotional virtual characters
 https://user-images.githubusercontent.com/49474878/116714245-d7e26a00-a9d5-11eb-9f5a-f3c2cab623b9.mp4
 
 
-
 Welcome to the public repository of the Greta project.
 Greta is a virtual character engine that allows generating socio-emotional behaviors in order to build natural interactional scenario with human users.
 

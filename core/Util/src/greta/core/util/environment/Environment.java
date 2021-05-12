@@ -40,6 +40,7 @@ public class Environment{
     private Root root = null;
     private List<Leaf> listleaf = null;
     private final List<EnvironmentEventListener> listeners = new ArrayList<EnvironmentEventListener>();
+    private boolean NVBG_open=false;
 
     // initialize the environment
     public Environment() {
@@ -120,6 +121,13 @@ public class Environment{
         fireTreeEvent(event);
     }
 
+    public boolean getNVBG_Open(){
+        return NVBG_open;
+    }
+
+    public void setNVBG_Open(boolean nvb){
+        NVBG_open=nvb;
+    }
     /**
      *
      * @param n

@@ -680,7 +680,8 @@
         <action name="AU43"/>
     </expression>
     <expression class="gaze" instance="look_down">
-        <action intensity="0.8" name="AU64"/>
+        <action intensity="0.5" name="AU64"/>
+		<action intensity="0.2" name="AU43"/>
     </expression>
     <expression class="gaze" instance="look_down_left">
         <action name="AU64"/>

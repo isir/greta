@@ -66,6 +66,10 @@ public class CharacterManager {
         return id;
     }
 
+    public boolean use_NVBG=true;
+    public boolean use_MM=true;
+    public String rest_pose="";
+    
     public CharacterManager(Environment env, String id){
         this.id = id;
         this.env = env;
@@ -97,6 +101,31 @@ public class CharacterManager {
 
     public Environment getEnvironment(){
         return env;
+    }
+    
+    public boolean get_use_NVBG(){
+        return use_NVBG;
+    }
+    
+    // it is a getter
+    public boolean use_MM(){
+        return use_MM;
+    }
+    
+    public void set_use_NVBG(boolean bool){
+        this.use_NVBG=bool;
+    }
+    
+    public void set_use_MM(boolean bool){
+        this.use_MM=bool;
+    }
+    
+    public String get_restpose(){
+        return rest_pose;
+    }
+    
+    public void set_restpose(String rest){
+        this.rest_pose=rest;
     }
 
     /**

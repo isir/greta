@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>
+Hello,
+<tm id="tm2"/>
+My
+<tm id="tm3"/>
+name
+<tm id="tm4"/>
+is
+<tm id="tm5"/>
+Camille.
+<tm id="tm6"/>
+I
+<tm id="tm7"/>
+am
+<tm id="tm8"/>
+one
+<tm id="tm9"/>
+of
+<tm id="tm10"/>
+the
+<tm id="tm11"/>
+virtual
+<tm id="tm12"/>
+character
+<tm id="tm13"/>
+of
+<tm id="tm14"/>
+the
+<tm id="tm15"/>
+Greta
+<tm id="tm16"/>
+platform.
+</speech>
+</bml>
+<fml>
+<performative id="p1" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>
+<emotion id="e1" type="despair" start="s1:tm2" end="s1:tm7" importance="1.0"/>
+<certainty id="p2" type="certain" start="s1:tm3" end="s1:tm10" importance="1.0"/>
+<!--<deictic id="p2" type="indicateright" start="s1:tm5" end="s1:tm15" importance="1.0"/>-->
+<emotion id="e2" type="envy" start="s1:tm9" end="s1:tm10" importance="1.0"/>
+<rest id="rp1" type="restpose" start="0" end="s1:tm16" importance="1.0"/>
+</fml>
+</fml-apml>

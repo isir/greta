@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>Hello,
+<tm id="tm2"/>My
+<tm id="tm3"/>name
+<tm id="tm4"/>is
+<tm id="tm5"/>Camille.
+<tm id="tm6"/>I
+<tm id="tm7"/>am
+<tm id="tm8"/>one
+<tm id="tm9"/>of
+<tm id="tm10"/>the
+<tm id="tm11"/>virtual
+<tm id="tm12"/>character
+<tm id="tm13"/>of
+<tm id="tm14"/>the
+<tm id="tm15"/>Greta
+<tm id="tm16"/>platform.
+</speech>
+<gesture end="s1:tm13" id="s01" lexeme="me" start="s1:tm1">
+<description priority="1" type="gretabml">
+<reference>deictic=me</reference>
+<intensity>1.000</intensity>`
+<SPC.value>0.646</SPC.value>
+<TMP.value>-0.400</TMP.value>
+<FLD.value>0.000</FLD.value>
+<PWR.value>0.000</PWR.value>
+<REP.value>0.000</REP.value>
+<OPN.value>0.000</OPN.value>
+<TEN.value>0.000</TEN.value>
+</description>
+</gesture>
+</bml>

@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<database version="1.0">
+    <domains>
+        <domain name="Wizard npc" id="z00016">
+            <utterances>z00000 z00001 z00002 z00003 z00004 z00005 z00006 z00007 z00008 z00009 z00010 z00011 z00012 z00013 z00014 z00015</utterances>
+        </domain>
+        <domain name="Anyone" id="z00031">
+            <utterances>z00017 z00018 z00019 z00020 z00021 z00022 z00023 z00024 z00025 z00026 z00027 z00028 z00029 z00030</utterances>
+        </domain>
+    </domains>
+    <lattices>
+        <lattice name="default" id="z00032">
+            <links>z00033 z00034 z00035 z00036 z00037 z00038 z00039 z00040 z00041 z00042 z00043 z00044 z00045 z00046 z00047 z00048 z00049 z00050 z00051 z00052 z00053 z00054 z00055 z00056 z00057 z00058 z00059 z00060 z00061 z00062 z00063 z00064 z00065 z00066 z00067 z00068 z00069</links>
+        </lattice>
+    </lattices>
+    <links>
+        <link value="6" question="z00019" answer="z00000" id="z00033"/>
+        <link value="6" question="z00017" answer="z00000" id="z00034"/>
+        <link value="6" question="z00018" answer="z00000" id="z00035"/>
+        <link value="6" question="z00019" answer="z00001" id="z00036"/>
+        <link value="6" question="z00018" answer="z00001" id="z00037"/>
+        <link value="6" question="z00017" answer="z00001" id="z00038"/>
+        <link value="6" question="z00018" answer="z00002" id="z00039"/>
+        <link value="6" question="z00017" answer="z00002" id="z00040"/>
+        <link value="6" question="z00020" answer="z00003" id="z00041"/>
+        <link value="6" question="z00022" answer="z00003" id="z00042"/>
+        <link value="6" question="z00023" answer="z00003" id="z00043"/>
+        <link value="6" question="z00021" answer="z00003" id="z00044"/>
+        <link value="6" question="z00024" answer="z00003" id="z00045"/>
+        <link value="6" question="z00024" answer="z00004" id="z00046"/>
+        <link value="6" question="z00020" answer="z00004" id="z00047"/>
+        <link value="6" question="z00021" answer="z00004" id="z00048"/>
+        <link value="6" question="z00023" answer="z00004" id="z00049"/>
+        <link value="6" question="z00025" answer="z00005" id="z00050"/>
+        <link value="6" question="z00027" answer="z00005" id="z00051"/>
+        <link value="6" question="z00026" answer="z00005" id="z00052"/>
+        <link value="6" question="z00027" answer="z00006" id="z00053"/>
+        <link value="6" question="z00025" answer="z00006" id="z00054"/>
+        <link value="6" question="z00026" answer="z00006" id="z00055"/>
+        <link value="6" question="z00028" answer="z00010" id="z00056"/>
+        <link value="6" question="z00029" answer="z00010" id="z00057"/>
+        <link value="6" question="z00030" answer="z00011" id="z00058"/>
+        <link value="6" question="z00030" answer="z00012" id="z00059"/>
+        <link value="6" question="z00019" answer="z00013" id="z00060"/>
+        <link value="6" question="z00017" answer="z00013" id="z00061"/>
+        <link value="6" question="z00020" answer="z00014" id="z00062"/>
+        <link value="6" question="z00022" answer="z00014" id="z00063"/>
+        <link value="6" question="z00023" answer="z00014" id="z00064"/>
+        <link value="6" question="z00021" answer="z00014" id="z00065"/>
+        <link value="6" question="z00024" answer="z00014" id="z00066"/>
+        <link value="6" question="z00025" answer="z00015" id="z00067"/>
+        <link value="6" question="z00027" answer="z00015" id="z00068"/>
+        <link value="6" question="z00026" answer="z00015" id="z00069"/>
+    </links>
+    <nextID>71</nextID>
+    <states>
+        <state questions="z00031" links="z00032" answers="z00016" name="Anyone - Wizard npc" id="z00070">
+            <parameters>0.21116770815077565 0.1475392602549546 -3.4834470748901367</parameters>
+        </state>
+    </states>
+    <utterances>
+        <utterance id="z00000">
+            <field name="text">My full name is Brad Matthew Smith</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_fullname</field>
+            <field name="modified">Fri Sep 14 18:36:51 PDT 2012</field>
+        </utterance>
+        <utterance id="z00001">
+            <field name="text">My name's Brad Smith.</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_name</field>
+            <field name="modified">Fri Sep 14 18:37:08 PDT 2012</field>
+        </utterance>
+        <utterance id="z00002">
+            <field name="text">Hi, I am Brad, a virtual human.</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_hibrad</field>
+            <field name="modified">Fri Sep 14 18:40:03 PDT 2012</field>
+        </utterance>
+        <utterance id="z00003">
+            <field name="text">Quite well, thank you.</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_quitewell</field>
+            <field name="modified">Fri Sep 14 18:40:38 PDT 2012</field>
+        </utterance>
+        <utterance id="z00004">
+            <field name="text">I am good.</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_good</field>
+            <field name="modified">Fri Sep 14 18:40:55 PDT 2012</field>
+        </utterance>
+        <utterance id="z00005">
+            <field name="text">Good bye.</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_goodbye</field>
+            <field name="modified">Fri Sep 14 18:43:01 PDT 2012</field>
+        </utterance>
+        <utterance id="z00006">
+            <field name="text">Have a good day.</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_haveagoodday</field>
+            <field name="modified">Fri Sep 14 18:43:22 PDT 2012</field>
+        </utterance>
+        <utterance id="z00007">
+            <field name="text">Sorry, I didn't catch that.</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_sorrycatch</field>
+            <field name="type">opaque</field>
+            <field name="modified">Fri Sep 21 15:37:10 PDT 2012</field>
+        </utterance>
+        <utterance id="z00008">
+            <field name="text">Could you try saying that one more time?</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_onemoretime</field>
+            <field name="type">unknown</field>
+            <field name="modified">Fri Sep 21 17:04:34 PDT 2012</field>
+        </utterance>
+        <utterance id="z00009">
+            <field name="text">Can you say that again?</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_cansayagain</field>
+            <field name="type">conceal</field>
+            <field name="modified">Fri Sep 21 17:04:33 PDT 2012</field>
+        </utterance>
+        <utterance id="z00010">
+            <field name="text">_please_repeat_that_repeat_</field>
+            <field name="speaker">Brad</field>
+            <field name="externalID">brad_script_repeat</field>
+            <field name="type">repeat</field>
+            <field name="modified">Fri Sep 21 15:48:54 PDT 2012</field>
+        </utterance>
+        <utterance id="z00011">
+            <field name="text">i like travelling</field>
+            <field name="speaker">Rachel</field>
+            <field name="externalID">utterance_20130124163529_WHATI'MWHATHOWME</field>
+            <field name="modified">Thu Jan 24 16:35:16 PST 2013</field>
+        </utterance>
+        <utterance id="z00012">
+            <field name="text">i like to travel</field>
+            <field name="speaker">Rachel</field>
+            <field name="externalID">utterance_20130124163540_CANITHINKOFOF</field>
+            <field name="modified">Thu Jan 24 16:35:20 PST 2013</field>
+        </utterance>
+        <utterance id="z00013">
+            <field name="text">My name is Rachel</field>
+            <field name="speaker">Rachel</field>
+            <field name="externalID">utterance_20130206114053_AMYNAMEISITHAVEA</field>
+            <field name="modified">Wed Feb 06 11:39:31 PST 2013</field>
+        </utterance>
+        <utterance id="z00014">
+            <field name="text">I am having a great time</field>
+            <field name="speaker">Rachel</field>
+            <field name="externalID">utterance_20130206114108_IAMHAVINGAGREATTO</field>
+            <field name="modified">Wed Feb 06 11:39:55 PST 2013</field>
+        </utterance>
+        <utterance id="z00015">
+            <field name="text">Have a nice day</field>
+            <field name="speaker">Rachel</field>
+            <field name="externalID">utterance_20130206114117_HAVEANICETHE</field>
+            <field name="modified">Wed Feb 06 11:40:25 PST 2013</field>
+        </utterance>
+        <utterance id="z00017">
+            <field name="text">What is your name?</field>
+            <field name="externalID">Anybody-1</field>
+            <field name="modified">Wed Sep 12 17:02:32 PDT 2012</field>
+        </utterance>
+        <utterance id="z00018">
+            <field name="text">What is your name, sir?</field>
+            <field name="externalID">Anybody-2</field>
+            <field name="modified">Wed Sep 12 17:02:39 PDT 2012</field>
+        </utterance>
+        <utterance id="z00019">
+            <field name="text">What's your name?</field>
+            <field name="externalID">Anybody-13</field>
+            <field name="modified">Fri Sep 28 11:35:57 PDT 2012</field>
+        </utterance>
+        <utterance id="z00020">
+            <field name="text">How are you?</field>
+            <field name="externalID">Anybody-4</field>
+            <field name="modified">Wed Sep 12 17:02:56 PDT 2012</field>
+        </utterance>
+        <utterance id="z00021">
+            <field name="text">How are you doing?</field>
+            <field name="externalID">Anybody-7</field>
+            <field name="modified">Wed Sep 12 17:03:14 PDT 2012</field>
+        </utterance>
+        <utterance id="z00022">
+            <field name="text">How are you doing today?</field>
+            <field name="externalID">Anybody-3</field>
+            <field name="modified">Fri Sep 28 10:59:01 PDT 2012</field>
+        </utterance>
+        <utterance id="z00023">
+            <field name="text">What's up?</field>
+            <field name="externalID">Anybody-5</field>
+            <field name="modified">Wed Sep 12 17:03:03 PDT 2012</field>
+        </utterance>
+        <utterance id="z00024">
+            <field name="text">What's happening?</field>
+            <field name="externalID">Anybody-6</field>
+            <field name="modified">Wed Sep 12 17:03:08 PDT 2012</field>
+        </utterance>
+        <utterance id="z00025">
+            <field name="text">Good bye.</field>
+            <field name="externalID">Anybody-8</field>
+            <field name="modified">Wed Sep 12 17:04:25 PDT 2012</field>
+        </utterance>
+        <utterance id="z00026">
+            <field name="text">Goodbye.</field>
+            <field name="externalID">Anybody-9</field>
+            <field name="modified">Wed Sep 12 17:04:31 PDT 2012</field>
+        </utterance>
+        <utterance id="z00027">
+            <field name="text">Bye.</field>
+            <field name="externalID">Anybody-10</field>
+            <field name="modified">Wed Sep 12 17:04:37 PDT 2012</field>
+        </utterance>
+        <utterance id="z00028">
+            <field name="text">can you repeat that</field>
+            <field name="externalID">Anybody-11</field>
+            <field name="modified">Fri Sep 21 17:08:21 PDT 2012</field>
+        </utterance>
+        <utterance id="z00029">
+            <field name="text">say that again</field>
+            <field name="externalID">Anybody-12</field>
+            <field name="modified">Fri Sep 21 17:13:05 PDT 2012</field>
+        </utterance>
+        <utterance id="z00030">
+            <field name="text">do you like to travel</field>
+            <field name="externalID">279295001634946421115889822</field>
+            <field name="modified">Thu Jan 24 16:35:11 PST 2013</field>
+        </utterance>
+    </utterances>
+</database>

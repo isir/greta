@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<rule_input>
+  <project>VHTOOLKIT</project>
+  <nvb_rules>
+    <!-- *********************************** ANIMATIONS ********************************** -->
+    <!--   you animation  -->
+    <!--   you animation  -->
+	<rule keyword="you_animation" priority="5" >
+		<pattern>yours</pattern>
+		<pattern>you</pattern>
+		<animation>
+		    <posture name="ChrRio@IdleHandsAtSide01">		
+				<clip>ChrRio@IdleHandsAtSide01_BeatMidRt01</clip>
+				<clip>ChrRio@IdleHandsAtSide01_BeatLowRt01</clip>
+			</posture>		
+		</animation>
+	</rule>
+		
+	<!--   me animation  -->
+	<rule keyword="me_animation" priority="5" >
+		<pattern>i</pattern> 
+		<pattern>me</pattern>
+		<pattern>my</pattern>
+		<pattern>mine</pattern>		
+		<animation>
+			<posture name="ChrRio@IdleHandsAtSide01">
+				<clip>ChrRio@IdleHandsAtSide01_BeatMidRt01</clip>
+				<clip>ChrRio@IdleHandsAtSide01_BeatLowRt01</clip>
+			</posture>
+		</animation>
+	</rule>
+		
+	
+	<rule keyword="question_animation" priority="1">
+		<pattern>where</pattern>
+		<pattern>who</pattern>
+		<pattern>how</pattern>
+		<pattern>do</pattern>
+		<pattern>shut</pattern>
+		<animation>
+			<posture name="ChrRio@IdleHandsAtSide01">
+				<clip>ChrRio@IdleHandsAtSide01_BeatMidRt01</clip>
+			</posture>		
+		</animation>
+	</rule>
+    <!-- add new rule here -->
+  </nvb_rules>
+</rule_input>

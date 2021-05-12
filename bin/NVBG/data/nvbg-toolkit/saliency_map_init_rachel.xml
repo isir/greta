@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<storyPoints>
+	<storyPoint name = "toolkitsession">
+		<SaliencyMapInit>
+			
+		</SaliencyMapInit>
+		<keywordToObjectMap>
+			<keyword name = "I">
+				
+				</keyword>
+		</keywordToObjectMap>
+		<emotionInit name = "normal"/>
+	</storyPoint>
+</storyPoints>

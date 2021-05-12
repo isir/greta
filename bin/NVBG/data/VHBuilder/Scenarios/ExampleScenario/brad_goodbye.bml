@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<bml>
+    <speech id="sp1" start="0.0" ready="0.1" stroke="0.1" relax="0.2" end="0.2">
+        <text>
+            <sync id="T0" time="0" />Good bye
+            <sync id="T1" time="0.454375" />
+        </text>
+        <description level="1" type="audio/x-wav">
+            <file ref="brad_goodbye" />
+        </description>
+    </speech>
+    <lips viseme="Eh" articulation="1.0" start="0" ready="0" relax="0.454375" end="0.454375" />
+    <lips viseme="_" articulation="1.0" start="0.454375" ready="0.454375" relax="0.454437" end="0.454437" />
+    <curves>
+        <curve name="open" num_keys="3" owner="analysis">-0.422667 0 0 0 -0.02443 0.5 0 0 0.879333 0 0 0</curve>
+        <curve name="wide" num_keys="3" owner="analysis">-0.422667 0 0 0 -0.024429 0.6 0 0 0.879333 0 0 0</curve>
+        <curve name="tBack" num_keys="3" owner="analysis">-0.422667 0 0 0 -0.028956 0.4 0 0 0.429334 0 0 0</curve>
+    </curves>
+</bml>

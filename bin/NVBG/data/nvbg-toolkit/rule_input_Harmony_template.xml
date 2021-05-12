@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<rule_input>
+  <project>VHTOOLKIT</project>
+  <nvb_rules>
+    <!-- *********************************** ANIMATIONS ********************************** -->
+    <!--   you animation  -->
+	<rule keyword="you_animation" priority="5" >
+		<pattern>you</pattern>
+		<pattern>your</pattern>
+		<pattern>yours</pattern>
+		<animation>
+		    <posture name="ChrHarmony@IdleCrossedArms01">				
+				<clip>ChrHarmony@IdleCrossedArms01_BeatLowLf01</clip>
+				<clip>ChrHarmony@IdleCrossedArms01_BeatLowRt01</clip>
+				<clip>ChrHarmony@IdleCrossedArms01_BeatMidLf01</clip>
+			</posture>
+			<posture name="ChrHarmony@IdleHandOnHip01">
+				<clip>ChrHarmony@IdleHandOnHip01_YouLowLf01</clip>
+				<clip>ChrHarmony@IdleHandOnHip01_YouMidLf01</clip>
+				<clip>ChrHarmony@IdleHandOnHip01_YouLowRt01</clip>
+				<clip>ChrHarmony@IdleHandsOnHip01_YouMidRt01</clip>
+				<clip>ChrHarmony@IdleHandOnHip01_BeatLowRt01</clip>
+			</posture>
+			<posture name="ChrHarmony@IdleDefiant01">
+				<clip>ChrHarmony@IdleDefiant01_BeatLowLf01</clip>
+				<clip>ChrHarmony@IdleDefiant01_BeatMidLf01</clip>
+				<clip>ChrHarmony@IdleDefiant01_BeatMidRt01</clip>
+				<clip>ChrHarmony@IdleDefiant01_DismissRt01</clip>
+			</posture>
+		</animation>
+	</rule>
+		
+	<!--   me animation  -->
+	<rule keyword="me_animation" priority="5" >
+		<pattern>me</pattern>
+		<pattern>my</pattern>
+		<pattern>mine</pattern>		
+		<animation>
+			<posture name="ChrHarmony@IdleCrossedArms01">
+				<clip>ChrHarmony@IdleCrossedArms01_BeatLowRt01</clip>
+			</posture>
+			<posture name="ChrHarmony@IdleHandOnHip01">
+				<clip>ChrHarmony@IdleHandOnHip01_MeLf01</clip>
+				<clip>ChrHarmony@IdleHandOnHip01_MeRt01</clip>
+				<clip>ChrHarmony@IdleHandOnHip01_BeatLowRt01</clip>
+			</posture>
+			<posture name="ChrHarmony@IdleDefiant01">
+				<clip>ChrHarmony@IdleDefiant01_BeatLowLf01</clip>
+				<clip>ChrHarmony@IdleDefiant01_BeatMidLf01</clip>
+				<clip>ChrHarmony@IdleDefiant01_BeatLowRt01</clip>
+				<clip>ChrHarmony@IdleDefiant01_BeatMidRt01</clip>
+			</posture>
+		</animation>
+	</rule>
+			
+
+	<!--   question animation  -->
+	<rule keyword="question_animation" priority="1">
+		<pattern>where</pattern>
+		<pattern>who</pattern>
+		<pattern>how</pattern>
+		<pattern>when</pattern>
+		<pattern>do</pattern>
+		<animation>
+			<posture name="ChrHarmony@IdleCrossedArms01">
+				<clip>ChrHarmony@IdleCrossedArms01_BeatLowLf01</clip>
+				<clip>ChrHarmony@IdleCrossedArms01_BeatLowRt01</clip>
+				<clip>ChrHarmony@IdleCrossedArms01_BeatMidLf01</clip>
+			</posture>		
+			<posture name="ChrHarmony@IdleHandOnHip01">
+				<clip>ChrHarmony@IdleHandOnHip01_StopBt01</clip>
+				<clip>ChrHarmony@IdleHandOnHip01_ShrugHigh01</clip>
+				<clip>ChrHarmony@IdleHandOnHip01_BeatLowLf01</clip>
+				<clip>ChrHarmony@IdleHandOnHip01_BeatLowRt01</clip>
+				<clip>ChrHarmony@IdleHandOnHip01_BeatLowRt01</clip>
+			</posture>	
+			<posture name="ChrHarmony@IdleDefiant01">
+				<clip>ChrHarmony@IdleDefiant01_BeatLowLf01</clip>
+				<clip>ChrHarmony@IdleDefiant01_BeatMidLf01</clip>
+				<clip>ChrHarmony@IdleDefiant01_BeatLowRt01</clip>
+				<clip>ChrHarmony@IdleDefiant01_BeatMidRt01</clip>
+			</posture>
+		</animation>
+	</rule>
+    <!-- add new rule here -->
+  </nvb_rules>
+</rule_input>

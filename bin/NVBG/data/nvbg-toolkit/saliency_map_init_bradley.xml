@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<storyPoints>
+	<storyPoint name = "toolkitsession">
+		<SaliencyMapInit>
+			<pawn name = "user" recency = "0" primacy = "3"/>
+			<pawn name = "upright" recency = "0" primacy = "2"/>
+			<pawn name = "upleft" recency = "0" primacy = "1"/>
+		</SaliencyMapInit>
+		<keywordToObjectMap>
+			<keyword name = "I">
+				<pawn name = "upleft" primacy = "10"/>
+				<pawn name = "upright" primacy = "10"/>
+				<pawn name = "user" primacy = "3"/>
+				</keyword>
+		</keywordToObjectMap>
+		<emotionInit name = "normal"/>
+	</storyPoint>
+</storyPoints>

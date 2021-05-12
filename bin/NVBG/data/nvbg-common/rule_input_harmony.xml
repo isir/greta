@@ -1,0 +1,333 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<rule_input>
+<project>GENERAL</project>
+
+<nvb_rules>
+
+	<!-- rule_input_harmony.xml -->
+	<!-- This file lays out the communicative derivation from the surface text --> 
+	<!-- Gunslinger scenario, Harmony character -->
+
+	<!-- *********************************** NON-ANIMATIONS ********************************** -->
+	<rule keyword="first_NP" priority="5" >
+		<pattern>first_NP</pattern>
+	</rule>
+
+	<rule keyword="noun_phrase" priority="5" >
+		<pattern>NP</pattern>
+	</rule>
+
+	<rule keyword="interjection" priority="1" >
+		<pattern>INTJ</pattern>
+	</rule>
+	
+	<rule keyword="compound_sentence" priority="1" >
+		<pattern>CC</pattern>
+	</rule>
+
+	<!-- affirmation -->
+	<rule keyword="affirmation" priority="2" >
+		<pattern>yes</pattern>
+		<pattern>yeah</pattern>
+		<pattern>yes,</pattern>
+	</rule>
+	
+	<!-- inclusivity -->
+	<rule keyword="inclusivity" priority="4" >
+		<pattern>everything</pattern>
+		<pattern>all</pattern>
+		<pattern>whole</pattern>
+		<pattern>plenty</pattern>
+		<pattern>full</pattern>
+		<pattern>completely</pattern>
+	</rule>
+	
+	<!-- intensification -->
+	<rule keyword="intensification" priority="4" >
+		<pattern>really</pattern>
+		<pattern>very</pattern>
+		<pattern>quite</pattern>		
+		<pattern>wonderful</pattern>
+		<pattern>great</pattern>
+		<pattern>absolutely</pattern>
+		<pattern>huge</pattern>
+		<pattern>fantastic</pattern>
+		<pattern>so</pattern>
+		<pattern>amazing</pattern>
+		<pattern>important</pattern>
+	</rule>
+	
+	<!-- emo_positive -->
+	<rule keyword="emo_positive" priority="1" >
+		<pattern>good</pattern>
+		<pattern>nice</pattern>
+		<pattern>great</pattern>
+	</rule>
+
+	<!-- rio -->
+	<rule keyword="rio" priority="1" >
+		<pattern>rio</pattern>
+	</rule>
+
+	<!-- *********************************** ANIMATIONS ********************************** -->
+	
+	<!--   you animation  -->
+	<rule keyword="you_animation" priority="5" >
+		<pattern>you</pattern>
+		<pattern>your</pattern>
+		<pattern>yours</pattern>
+		<animation>
+		    <posture name="ChrHarmony_IdleCrossedArms001">				
+				<clip>ChrHarmony_IdleCrossedArms_BeatLeftMid001</clip>
+				<clip>ChrHarmony_IdleCrossedArms_ToIdleHandOnHip001</clip>
+			</posture>
+			<posture name="ChrHarmony_IdleHandOnHip001">				
+				<clip>ChrHarmony_IdleHandOnHip_YouLeftHigh001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_YouLeftLow001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_YouLeftMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_YouRightHigh001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_YouRightLow001</clip>
+				<clip>ChrHarmony_IdleHandsOnHip_YouRightMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_ToIdleCrossedArms001</clip>
+			</posture>
+			<posture name="ChrHarmony_IdleCasual001">
+				<clip>ChrHarmony_IdleCasual001_ToIdleNervousHandsDown001</clip>
+			</posture>
+		</animation>
+	</rule>
+		
+	<!--   me animation  -->
+	<rule keyword="me_animation" priority="5" >
+		<pattern>i</pattern> 
+		<pattern>me</pattern>
+		<pattern>my</pattern>
+		<pattern>mine</pattern>		
+		<animation>
+			<posture name="ChrHarmony_IdleCrossedArms001">
+			    <clip>ChrHarmony_IdleCrossedArms_BeatRightLow001</clip>	
+				<clip>ChrHarmony_IdleCrossedArms_ToIdleHandOnHip001</clip>
+			</posture>
+			<posture name="ChrHarmony_IdleHandOnHip001">				
+				<clip>ChrHarmony_IdleHandOnHip_MeLeft001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_MeRight001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_ToIdleCrossedArms001</clip>
+			</posture>	
+			<posture name="ChrHarmony_IdleLeanAgainstWall001"></posture>
+			<posture name="ChrHarmony_IdleSitAgainstWall001"></posture>
+			<posture name="ChrHarmony_IdlePrimp001"></posture>
+			<posture name="ChrHarmony_IdlePrimping001"></posture>
+			
+				
+		</animation>
+	</rule>
+		
+	<!--   negation animation  -->
+	<rule keyword="negation_animation" priority="2" >
+		<pattern>no</pattern>
+		<pattern>not</pattern>
+		<pattern>nothing</pattern>
+		<pattern>cannot</pattern>
+		<pattern>can't</pattern>
+		<pattern>cant</pattern>
+		<pattern>don't</pattern>
+		<pattern>dont</pattern>
+		<pattern>didn't</pattern>
+		<pattern>couldn't</pattern>
+		<pattern>couldnt</pattern>
+		<pattern>isn't</pattern>
+		<pattern>isnt</pattern>
+		<pattern>wasn't</pattern>
+		<pattern>wasnt</pattern>
+		<animation>
+			<posture name="ChrHarmony_IdleCrossedArms001">
+			    <clip>ChrHarmony_IdleCrossedArms_BeatLeftLow001</clip>
+			</posture>	
+			<posture name="ChrHarmony_IdleHandOnHip001">				
+				<clip>ChrHarmony_IdleHandOnHip_StopBoth001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_StopRight001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_StopLeft001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_ShrugHigh001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftLow001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightLow001</clip>
+			</posture>
+			<posture name="ChrHarmony_IdleDefiant001">
+				<clip>ChrHarmony_IdleDefiant_BeatLeftHigh001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatLeftLow001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatLeftMid001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatRightHigh001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatRightLow001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatRightMid001</clip>
+			</posture>
+			<posture name="ChrHarmony_IdleDefeated001"></posture>
+			<posture name="ChrHarmony_IdleDefeated002"></posture>
+			<posture name="ChrHarmony_IdleDefeated003"></posture>
+			<posture name="ChrHarmony_IdleNervousCrossedArms001">
+				<clip>ChrHarmony_IdleNervousCrossedArms001_ToIdleDefeated001</clip>
+				<clip>ChrHarmony_IdleNervousCrossedArms001_ToIdleDefeated003</clip>
+				<clip>ChrHarmony_IdleNervousCrossedArms001_ToIdleNervousHandsDown001</clip>
+			</posture>
+			<posture name="ChrHarmony_IdleNervousHandsDown001">
+				<clip>ChrHarmony_IdleNeverousHandsDown_ToIdleNervousCrossedArms001</clip>
+			</posture>
+		</animation>
+	</rule>
+	
+	<!--   contrast animation  -->
+	<rule keyword="contrast_animation" priority="4" >
+		<pattern>but</pattern>
+		<pattern>however</pattern>
+		<animation>				
+		    <posture name="ChrHarmony_IdleCrossedArms001">
+				<clip>ChrHarmony_IdleCrossedArms_BeatLeftHigh001</clip>
+			</posture>		
+			<posture name="ChrHarmony_IdleHandOnHip001">				
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftLow001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightLow001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointLeftMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointLeftMid002</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointRightMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointRightMid002</clip>
+			</posture>	
+			<posture name="ChrHarmony_IdleDefiant001">
+				<clip>ChrHarmony_IdleDefiant_BeatLeftHigh001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatLeftLow001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatLeftMid001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatRightHigh001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatRightLow001</clip>
+				<clip>ChrHarmony_IdleDefiant_BeatRightMid001</clip>
+			</posture>
+			<posture name="ChrHarmony_IdleDefeated001"></posture>
+			<posture name="ChrHarmony_IdleDefeated002"></posture>
+			<posture name="ChrHarmony_IdleDefeated003"></posture>
+			<posture name="ChrHarmony_IdleNervousCrossedArms001">
+				<clip>ChrHarmony_IdleNervousCrossedArms001_ToIdleDefeated001</clip>
+				<clip>ChrHarmony_IdleNervousCrossedArms001_ToIdleDefeated003</clip>
+				<clip>ChrHarmony_IdleNervousCrossedArms001_ToIdleNervousHandsDown001</clip>
+			</posture>
+			<posture name="ChrHarmony_IdleNervousHandsDown001">
+				<clip>ChrHarmony_IdleNeverousHandsDown_ToIdleNervousCrossedArms001</clip>
+			</posture>
+		</animation>
+	</rule>	
+	
+	<!--   assumption animation  -->
+	<rule keyword="assumption_animation" priority="3">
+		<pattern>maybe</pattern>
+		<pattern>perhaps</pattern>
+		<animation>			
+			<posture name="ChrHarmony_IdleCrossedArms001">
+				<clip>ChrHarmony_IdleCrossedArms_BeatRightLow001</clip>
+			</posture>		
+			<posture name="ChrHarmony_IdleHandOnHip001">				
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftLow001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightLow001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointLeftMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointLeftMid002</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointRightMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointRightMid002</clip>
+			</posture>	
+		</animation>
+	</rule>
+	
+	<!--   rhetorical animation  -->
+	<rule keyword="rhetorical_animation" priority="2" >
+		<pattern>why</pattern>
+		<animation>
+			<posture name="ChrHarmony_IdleCrossedArms001">
+				<clip>ChrHarmony_IdleCrossedArms_BeatRightLow001</clip>
+				<clip>ChrHarmony_IdleCrossedArms_IndicateGroup001</clip>
+			</posture>	
+			<posture name="ChrHarmony_IdleHandOnHip001">				
+				<clip>ChrHarmony_IdleHandOnHip_IndicateGroup001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_ShrugHigh001</clip>
+			</posture>
+			<posture name="ChrHarmony_IdleAfraid001"></posture>
+			<posture name="ChrHarmony_IdleAfraid002"></posture>
+			<posture name="ChrHarmony_IdleAnxious001"></posture>
+			<posture name="ChrHarmony_IdleScared001"></posture>
+		</animation>
+	</rule>
+
+	<!--   question animation  -->
+	<rule keyword="question_animation" priority="1">
+		<pattern>where</pattern>
+		<pattern>who</pattern>
+		<pattern>how</pattern>
+		<pattern>when</pattern>
+		<pattern>do</pattern>
+		<animation>
+			<posture name="ChrHarmony_IdleCrossedArms001">
+				<clip>ChrHarmony_IdleCrossedArms_BeatLeftLow001</clip>
+			</posture>		
+			<posture name="ChrHarmony_IdleHandOnHip001">				
+				<clip>ChrHarmony_IdleHandOnHip_StopBoth001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_ShrugHigh001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftLow001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightLow001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointLeftMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointLeftMid002</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftHigh001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightHigh001</clip>
+			</posture>	
+		</animation>
+	</rule>
+
+	<!--   deictic animation  
+	<rule keyword="deictic_animation" priority="5">
+		<pattern>there</pattern>
+		<animation>
+			<posture name="ChrHarmony_Idle001">
+				<clip>HandsAtSide_LArm_IndicateLeft</clip>
+			</posture>	
+		</animation>
+	</rule>-->
+
+	<!--   first_VP animation  
+	<rule keyword="first_VP" priority="5" >		
+		<pattern>first_VP</pattern>		
+		<animation>
+			<posture name="ChrHarmony_Idle001">
+				<clip>ChrHarmony_AccentHandRight001</clip>
+			</posture>	
+		</animation>
+	</rule>-->
+	
+	<!--   obligation animation  -->
+	<rule keyword="obligation_animation" priority="5" >
+		<pattern>must</pattern>		
+		<animation>
+			<posture name="ChrHarmony_IdleCrossedArms001">
+				<clip>ChrHarmony_IdleCrossedArms_BeatLeftHigh001</clip>
+			</posture>		
+			<posture name="ChrHarmony_IdleHandOnHip001">				
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointLeftMid001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_PointLeftMid002</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatLeftHigh001</clip>
+				<clip>ChrHarmony_IdleHandOnHip_BeatRightHigh001</clip>
+			</posture>	
+		</animation>
+	</rule>
+	<!--
+	<rule keyword="" priority="" >
+		<pattern></pattern>
+		<animation>
+			<posture name="">
+				<clip></clip>
+			</posture>
+		</animation>
+	</rule>
+	-->
+	
+	<!-- add new rule here -->
+
+</nvb_rules>
+</rule_input>

@@ -1,0 +1,806 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist>
+<dict>
+<key>question_format</key>
+<string>edu.usc.ict.npc.editor.model.processor.text.TextProcessorProvider</string>
+<key>recordingQuestions</key>
+<false/>
+<key>answer_format</key>
+<string>edu.usc.ict.npc.editor.model.processor.text.TextProcessorProvider</string>
+<key>answers</key>
+<array>
+<dict>
+<key>text</key>
+<string>I am doing well.</string>
+<key>speaker</key>
+<integer>0</integer>
+<key>ID</key>
+<string>DummySpeaker</string>
+<key>tokens</key>
+<array>
+<integer>16</integer>
+</array>
+<key>modified</key>
+<date>2013-01-29T18:20:43Z</date>
+</dict>
+</array>
+<key>questions</key>
+<array>
+<dict>
+<key>text</key>
+<string>How are you?</string>
+<key>ID</key>
+<string>Anybody-1</string>
+<key>modified</key>
+<date>2012-09-12T17:02:32Z</date>
+</dict>
+</array>
+<key>speakers</key>
+<array>
+<dict>
+<key>lastName</key>
+<string>npc</string>
+<key>class</key>
+<string>edu.usc.ict.npc.editor.model.Person</string>
+<key>firstName</key>
+<string>Wizard</string>
+</dict>
+</array>
+<key>searcherSessions</key>
+<array>
+<dict>
+<key>param</key>
+<string>0.8999999761581421 0.8999999761581421 0.0</string>
+<key>aid</key>
+<integer>0</integer>
+</dict>
+</array>
+<key>trainingOnTestQuestions</key>
+<false/>
+<key>version</key>
+<integer>4</integer>
+<key>keepingLinkEstimatesUpdated</key>
+<false/>
+<key>map</key>
+<array>
+</array>
+<key>categories</key>
+<array>
+<dict>
+<key>chatEditingAllowed</key>
+<false/>
+<key>answerCategory</key>
+<false/>
+<key>classifierCategory</key>
+<false/>
+<key>readOnly</key>
+<true/>
+<key>name</key>
+<string>Train/Test</string>
+<key>ID</key>
+<string>train_test</string>
+<key>tokens</key>
+<array>
+<dict>
+<key>name</key>
+<string>Training</string>
+<key>ID</key>
+<string>train</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>name</key>
+<string>Test</string>
+<key>ID</key>
+<string>test</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+</array>
+<key>answerEditingAllowed</key>
+<false/>
+<key>questionCategory</key>
+<true/>
+<key>questionEditingAllowed</key>
+<false/>
+<key>answerColumnVisible</key>
+<false/>
+<key>questionColumnVisible</key>
+<false/>
+</dict>
+<dict>
+<key>chatEditingAllowed</key>
+<false/>
+<key>answerCategory</key>
+<true/>
+<key>classifierCategory</key>
+<false/>
+<key>readOnly</key>
+<true/>
+<key>name</key>
+<string>Dialog State</string>
+<key>ID</key>
+<string>dialogState</string>
+<key>tokens</key>
+<array>
+<dict>
+<key>description</key>
+<string>Do not change dialog state</string>
+<key>name</key>
+<string>none</string>
+<key>ID</key>
+<string>none</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>description</key>
+<string>Add tokens for undefined categories to the state, do not change the existing categories</string>
+<key>name</key>
+<string>add</string>
+<key>ID</key>
+<string>add</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>description</key>
+<string>Add tokens replacing existing category values</string>
+<key>name</key>
+<string>set</string>
+<key>ID</key>
+<string>set</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>description</key>
+<string>Clear dialog state and then set it to given tokens</string>
+<key>name</key>
+<string>reset</string>
+<key>ID</key>
+<string>reset</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+</array>
+<key>answerEditingAllowed</key>
+<false/>
+<key>questionCategory</key>
+<false/>
+<key>questionEditingAllowed</key>
+<false/>
+<key>answerColumnVisible</key>
+<false/>
+<key>questionColumnVisible</key>
+<false/>
+</dict>
+<dict>
+<key>chatEditingAllowed</key>
+<false/>
+<key>answerCategory</key>
+<false/>
+<key>classifierCategory</key>
+<false/>
+<key>readOnly</key>
+<true/>
+<key>name</key>
+<string>Tone</string>
+<key>ID</key>
+<string>tone</string>
+<key>tokens</key>
+<array>
+<dict>
+<key>name</key>
+<string>Down</string>
+<key>ID</key>
+<string>down</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>name</key>
+<string>Flat</string>
+<key>ID</key>
+<string>flat</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>name</key>
+<string>Up</string>
+<key>ID</key>
+<string>up</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+</array>
+<key>answerEditingAllowed</key>
+<false/>
+<key>questionCategory</key>
+<true/>
+<key>questionEditingAllowed</key>
+<false/>
+<key>answerColumnVisible</key>
+<false/>
+<key>questionColumnVisible</key>
+<false/>
+</dict>
+<dict>
+<key>chatEditingAllowed</key>
+<false/>
+<key>answerCategory</key>
+<false/>
+<key>classifierCategory</key>
+<false/>
+<key>readOnly</key>
+<true/>
+<key>name</key>
+<string>Emotion</string>
+<key>ID</key>
+<string>emotion</string>
+<key>tokens</key>
+<array>
+<dict>
+<key>name</key>
+<string>Neutral</string>
+<key>ID</key>
+<string>neutral</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>name</key>
+<string>Negative</string>
+<key>ID</key>
+<string>negative</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+</array>
+<key>answerEditingAllowed</key>
+<false/>
+<key>questionCategory</key>
+<true/>
+<key>questionEditingAllowed</key>
+<false/>
+<key>answerColumnVisible</key>
+<false/>
+<key>questionColumnVisible</key>
+<false/>
+</dict>
+<dict>
+<key>chatEditingAllowed</key>
+<false/>
+<key>answerCategory</key>
+<true/>
+<key>classifierCategory</key>
+<false/>
+<key>readOnly</key>
+<true/>
+<key>name</key>
+<string>Toss</string>
+<key>ID</key>
+<string>toss</string>
+<key>tokens</key>
+<array>
+<dict>
+<key>description</key>
+<string></string>
+<key>name</key>
+<string>Wizard npc</string>
+<key>ID</key>
+<string>Wizard npc</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+</array>
+<key>answerEditingAllowed</key>
+<false/>
+<key>questionCategory</key>
+<false/>
+<key>questionEditingAllowed</key>
+<false/>
+<key>answerColumnVisible</key>
+<false/>
+<key>questionColumnVisible</key>
+<false/>
+</dict>
+<dict>
+<key>chatEditingAllowed</key>
+<false/>
+<key>answerCategory</key>
+<true/>
+<key>classifierCategory</key>
+<false/>
+<key>readOnly</key>
+<false/>
+<key>name</key>
+<string>Type</string>
+<key>ID</key>
+<string>type</string>
+<key>tokens</key>
+<array>
+<dict>
+<key>description</key>
+<string>opaque</string>
+<key>name</key>
+<string>opaque</string>
+<key>ID</key>
+<string>opaque</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>description</key>
+<string>repeat</string>
+<key>name</key>
+<string>repeat</string>
+<key>ID</key>
+<string>repeat</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>description</key>
+<string>conceal</string>
+<key>name</key>
+<string>conceal</string>
+<key>ID</key>
+<string>conceal</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+<dict>
+<key>description</key>
+<string>unknown</string>
+<key>name</key>
+<string>unknown</string>
+<key>ID</key>
+<string>unknown</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+</array>
+<key>answerEditingAllowed</key>
+<true/>
+<key>questionCategory</key>
+<false/>
+<key>questionEditingAllowed</key>
+<true/>
+<key>answerColumnVisible</key>
+<true/>
+<key>questionColumnVisible</key>
+<true/>
+</dict>
+<dict>
+<key>chatEditingAllowed</key>
+<false/>
+<key>answerCategory</key>
+<true/>
+<key>classifierCategory</key>
+<false/>
+<key>readOnly</key>
+<false/>
+<key>name</key>
+<string>speaker</string>
+<key>ID</key>
+<string>speaker</string>
+<key>tokens</key>
+<array>
+<dict>
+<key>name</key>
+<string>DummySpeaker</string>
+<key>ID</key>
+<string>DummySpeaker</string>
+<key>colorAsInt</key>
+<integer>0</integer>
+</dict>
+</array>
+<key>answerEditingAllowed</key>
+<true/>
+<key>questionCategory</key>
+<false/>
+<key>questionEditingAllowed</key>
+<true/>
+<key>answerColumnVisible</key>
+<true/>
+<key>questionColumnVisible</key>
+<true/>
+</dict>
+</array>
+<key>dialog_manager</key>
+<dict>
+<key>param</key>
+<dict>
+<key>useScriptFile</key>
+<false/>
+<key>storedScriptFileName</key>
+<string>0</string>
+<key>scriptText</key>
+<string>// ============================================================================
+// dm.java
+// ============================================================================
+//
+//  Created by leuski on Aug 22, 2009.
+//  Copyright (c) 2009 Anton Leuski. All rights reserved.
+//
+// ============================================================================
+
+
+package edu.usc.ict.npc.editor.dialog.script.dm;
+
+import edu.usc.ict.npc.editor.dialog.script.*
+import java.awt.event.ActionListener
+import java.awt.event.ActionEvent;
+import javax.swing.Timer;
+
+class Global implements ActionListener {
+
+	public final static String	kConceal		= "conceal";
+	public final static String	kUnknown		= "unknown";
+	public final static String	kOpaque			= "opaque";
+	public final static String	kAlternative	= "alternative";
+	public final static String	kRepeat			= "repeat";
+	public final static String	kPrompt			= "prompt";
+
+	final static String kCharacterIgnore		= 'ignore';
+	final static Event	kInitiativeTimerEvent	= new Event(Event.kDispatchHint, "dm_prompt");
+	public final static int		kHistoryWindow			= 10;
+	final static double	kWaitBeforePrompt		= 5; // seconds
+
+	Engine	engine;
+	String	domainName = "Wizard npc";	
+
+	Regular		regularState;
+	State		currentState;
+	Interrupted interrupted;
+
+	Map&lt;String,Object&gt;		lastUtterance;
+	Event 					lastSpeechEvent;
+	boolean					microphoneEnabled;
+	long					lastUserStartedSpeaking;
+	long					lastUserStoppedSpeaking;
+	long					lastCharacterStoppedSpeaking;
+	long					lastCharacterStartedSpeaking;
+
+	Global(Engine inEngine) {
+		engine = inEngine;
+	}
+
+	public Set getPresentCharacters() {
+		return (Set)engine.context.presentCharacters;
+	}
+
+	public void reset() {
+		engine.reset();
+
+		// initialize global variables here		
+		clear();
+		domainName = "Wizard npc";
+		regularState	= new Regular(this);
+		interrupted		= new Interrupted(this);
+
+		enterState(regularState);
+	}
+
+	public void actionPerformed(ActionEvent e) {
+		Timer	thisTimer	= (Timer)e.getSource();
+		if (engine.context.initiativeTimer != thisTimer) {
+			thisTimer.stop();
+			return;
+		}
+		engine?.postEvent(kInitiativeTimerEvent);
+	}
+
+	public void clear() {
+		engine.context.presentCharacters	= new HashSet();
+		lastUtterance	= null;
+		lastSpeechEvent	= null;
+
+		Timer	timer	= new Timer(1000, this);	// This timer will periodically trigger executor events 
+		timer.setRepeats(true);
+		timer.start();
+		engine.context.initiativeTimer = timer;
+	}
+
+	public void setMicrophoneEnabled(boolean inEnabled) {
+		if (microphoneEnabled == inEnabled) return;
+		microphoneEnabled	= inEnabled;
+		engine.send(inEnabled ? "TO_ASR &lt;start id=\"temp\"&gt;" : "TO_ASR &lt;stop id=\"temp\"&gt;");
+	}
+
+	public void exitState(State inTarget) {
+		inTarget?.onexit();
+		engine.removeTrigger(inTarget);
+	}
+
+	public void enterState(State inTarget) {
+		currentState	= inTarget;
+		engine.addTrigger(inTarget);
+		inTarget?.onentry();
+	}
+
+	public void transitionTo(State inTarget) {
+		exitState(currentState);
+		enterState(inTarget);
+	}
+}
+
+Global	global			= new Global(engine);
+
+public class State implements Trigger {
+
+	Global 		global;
+
+	Engine		getEngine() 				{ return global.engine; }	
+
+	State(Global inGlobal) {
+		global	= inGlobal;
+		global.setMicrophoneEnabled(true);
+		global.setMicrophoneEnabled(false);
+	}
+
+	public boolean handle(Event event) {
+
+//		System.out.println(event);
+
+		return false;
+	}
+
+	public boolean npcBehavior_done(Event event) {
+		global.lastCharacterStoppedSpeaking	= System.currentTimeMillis();
+		if (event?.utterance?.toss)
+			return handleToss(event);
+		return false;
+	}
+
+	public boolean handleToss(Event event) {
+		global.domainName 	= event.utterance.toss;
+		global.lastSpeechEvent	= null;
+//		System.out.println("Toss to " + global.domainName);
+		return false;
+	}
+
+	public boolean npcBehavior_begin(Event event) {
+		global.lastCharacterStartedSpeaking	= System.currentTimeMillis();
+		return false;
+	}
+	
+	public boolean vrSpeech_partial(Event inEvent) { return false; }
+
+	public boolean vrSpeech_start(Event event) {
+		global.lastUserStartedSpeaking	= System.currentTimeMillis();
+		return false;
+	}
+
+	public boolean vrSpeech_finished_speaking(Event event) {
+		global.lastUserStoppedSpeaking	= System.currentTimeMillis();
+		return false;
+	}
+
+	public boolean dm_prompt(Event event) {
+//		long currentTime	= System.currentTimeMillis();
+//
+//		if (global.lastCharacterStartedSpeaking &lt; global.lastCharacterStoppedSpeaking
+//			&amp;&amp; global.lastUserStartedSpeaking &lt; global.lastUserStoppedSpeaking
+//			&amp;&amp; (currentTime - global.lastCharacterStoppedSpeaking) &gt;= (Global.kWaitBeforePrompt * 1000)) {
+//
+//			List&lt;Map&lt;String,Object&gt;&gt; answers = engine.answersForCharacter(global.domainName).findAll( { Map&lt;String,Object&gt; utterance -&gt;
+//				utterance.type == Global.kPrompt }).toList();
+//			if (!answers.isEmpty()) {
+//				Collections.shuffle(answers);
+//				send(leastRecent(answers, Global.kHistoryWindow));
+//			}
+//		}
+
+		return false;
+	}
+
+	public Behavior send(Map&lt;String,Object&gt; inUtterance) {
+		if (inUtterance != null) {
+			if (inUtterance.script) {
+				global.lastUtterance	= null;
+				return engine.schedule(inUtterance);
+			} else {
+				global.lastUtterance	= inUtterance;
+				Behavior	b	= engine.schedule(inUtterance);
+				b.setLock(Behavior.kDefaultLock);
+				return b;
+			}
+		}
+
+		return engine.schedule(inUtterance);
+	}
+
+	protected Behavior sendRegular(Map&lt;String,Object&gt; inUtterance) {
+		return send(inUtterance);
+	}
+
+	public Map&lt;String,Object&gt; utteranceWithID(String inUtterance) {
+		return (Map&lt;String,Object&gt;)engine.answers().find({Map&lt;String,Object&gt; utterance -&gt; utterance.ID == inUtterance});
+	}
+
+	protected Map&lt;String,Object&gt; leastRecent(List&lt;Map&lt;String,Object&gt;&gt; inAnswers, int inDepth) {
+		def selectedUtterance	= null;
+		def	depth				= -1;
+		for(a in inAnswers) {
+			def d	= engine.seenRecently(a, inDepth);
+			if (d &gt; depth) {
+				depth				= d;
+				selectedUtterance	= a;
+				if (depth &gt;= inDepth) break;
+			}
+		}
+		return selectedUtterance;
+	}
+
+	protected void onexit() { }
+	protected void onentry() { }
+
+}
+
+public class Regular extends State {
+
+	int offTopicCount	= 0;
+
+	Regular(Global inGlobal) {
+		super(inGlobal);
+	}
+
+	public boolean handle(Event event) {
+		if (event.event == Event.kLockEventType &amp;&amp; event?.id == Behavior.kDefaultLock) {
+			global.setMicrophoneEnabled(engine.executor.canAcquireLock(Behavior.kDefaultLock));
+			return false;
+		} else if (event.text) {
+			return vrSpeech_asr_complete(event);
+		} else {
+			return super.handle(event);
+		}
+	}
+
+	protected Behavior sendOfftopic() {
+		++offTopicCount;
+		return send(randomOfftopic());
+	}
+
+	protected Behavior sendRegular(Map&lt;String, Object&gt; inUtterance) {
+		offTopicCount	= 0;
+		return super.sendRegular(inUtterance);
+	}
+
+	private Map&lt;String,Object&gt; randomOfftopic(String inOfftopicType) {
+		List&lt;Map&lt;String,Object&gt;&gt; answers = engine.answersForCharacter(global.domainName).findAll( { Map&lt;String,Object&gt; utterance -&gt;
+			utterance.type == inOfftopicType }).toList();
+		if (answers.isEmpty())
+		{
+			
+			answers = engine.answersForCharacter(global.domainName).findAll( { Map&lt;String,Object&gt; utterance -&gt;
+				utterance.type == Global.kOpaque || utterance.type == Global.kUnknown || utterance.type == Global.kConceal }).toList();							
+		}
+		Collections.shuffle(answers);
+		return leastRecent(answers, Global.kHistoryWindow);
+	}
+
+	private Map&lt;String,Object&gt; randomOfftopic() {
+		String							offTopicType	= Global.kConceal;
+		if (offTopicCount == 1) 		offTopicType	= Global.kOpaque;
+		else if (offTopicCount == 2) 	offTopicType	= Global.kUnknown;
+		return randomOfftopic(offTopicType);
+	}
+	
+	
+	public boolean vrSpeech_partial(Event inEvent){
+	
+		super.vrSpeech_partial(inEvent);	
+		
+		
+		if (!global.isMicrophoneEnabled()) 
+		{
+			engine.executor.pause();
+			global.transitionTo(global.interrupted);
+		}
+		
+	
+		return false;
+	
+	
+	}
+
+	public boolean vrSpeech_asr_complete(Event event) {
+
+		if (!event.text || ((String)event.text).trim().length() == 0) return false;
+
+		if (global.domainName == null)
+			global.domainName	= (String)event.speaker;
+
+//		if (!global.isMicrophoneEnabled()) return false;
+
+		try {
+			List&lt;Map&lt;String,Object&gt;&gt; 	answers				= engine.search(global.domainName, event);
+
+			if (answers.isEmpty()) {					
+				sendOfftopic();
+			} else {
+				Map&lt;String,Object&gt;			selectedUtterance = (Map)answers[0];
+
+				if (selectedUtterance.type == Global.kAlternative) {
+					if (!global.lastSpeechEvent) {
+						sendOfftopic();
+					} else {
+						offTopicCount	= 0;
+						return vrSpeech_asr_complete(global.lastSpeechEvent);
+					}
+					return false;
+				}
+
+				if (selectedUtterance.type == Global.kRepeat) {
+					if (!global.lastUtterance) {					
+						sendOfftopic();
+					} else {
+						engine.send("HOOGA BOOGA");			
+						sendRegular(global.lastUtterance);
+					}
+					return false;
+				}
+
+				global.lastSpeechEvent	= event;
+				sendRegular(leastRecent(answers,Global.kHistoryWindow));
+			}
+
+		} catch (Throwable t) {
+			t.printStackTrace();
+		}
+
+		return false;
+	}
+
+}
+
+
+class Interrupted extends State {
+	Interrupted(Global inGlobal) {
+		super(inGlobal);
+	}
+			
+
+	protected void onentry() {
+		
+		StopSpeakingAndRespondToNewQuestion();
+	}
+	
+
+
+	public boolean StopSpeakingAndRespondToNewQuestion() {
+
+		engine.executor.newExecutionState();	
+		global.transitionTo(global.regularState);
+		global.setMicrophoneEnabled(true);
+		
+		return false;
+	}
+	
+
+}
+
+
+
+global.reset();
+</string>
+<key>scriptEngineName</key>
+<string>groovy</string>
+</dict>
+<key>class</key>
+<string>edu.usc.ict.npc.editor.dialog.script.ScriptableDialogManager</string>
+</dict>
+<key>evaluationFrameworkProvider</key>
+<dict>
+<key>class</key>
+<string>edu.usc.ict.npc.editor.model.EvaluationFrameworkProvider$MeanFScoreEvaluationFramework</string>
+</dict>
+<key>loggingConversations</key>
+<false/>
+</dict>
+</plist>

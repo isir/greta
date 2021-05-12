@@ -1,0 +1,7 @@
+-fwdflat no
+-bestpath no
+-lm ../../data/pocketsphinx/TABGFY13/ASR/lmTAB2013.arpa
+-dict ../../data/pocketsphinx/cmudict.0.7a_SPHINX_40
+-hmm ../../data/pocketsphinx/wsj1
+-samprate 16000
+

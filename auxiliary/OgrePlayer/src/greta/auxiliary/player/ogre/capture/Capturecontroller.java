@@ -24,10 +24,17 @@ import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jms.JMSException;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -184,7 +191,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
         screenShotCapturer.startCapture(fileName);
     }
 
-    public void FMLVideoRecord() {
+    public void FMLVideoRecord() throws IOException{
 
         //take the files name from the directory selected
         if (!FolderName.getText().isEmpty()){
@@ -213,7 +220,17 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
 
                     iscapturing = true;
 
-                    filereader.load(f.getAbsolutePath());
+                    try {
+                        filereader.load(f.getAbsolutePath());
+                    } catch (TransformerException ex) {
+                        Logger.getLogger(Capturecontroller.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (SAXException ex) {
+                        Logger.getLogger(Capturecontroller.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParserConfigurationException ex) {
+                        Logger.getLogger(Capturecontroller.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (JMSException ex) {
+                        Logger.getLogger(Capturecontroller.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                     startVideoCapture();
 
                     while (iscapturing) {
@@ -356,7 +373,11 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     }//GEN-LAST:event_realTimeCheckBoxActionPerformed
 
     private void FMLVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FMLVideoActionPerformed
-        FMLVideoRecord();
+        try {
+            FMLVideoRecord();
+        } catch (IOException ex) {
+            Logger.getLogger(Capturecontroller.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_FMLVideoActionPerformed
 
     private void SelectFolderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectFolderActionPerformed

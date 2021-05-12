@@ -176,19 +176,19 @@ public class OpenAndLoad extends javax.swing.JFrame {
             Method getFileFilterMethod = loader.getClass().getMethod("getFileFilter");
             final java.io.FileFilter ff = (java.io.FileFilter) getFileFilterMethod.invoke(loader);
             jFileChooser1.removeChoosableFileFilter(jFileChooser1.getAcceptAllFileFilter());
-            jFileChooser1.setAcceptAllFileFilterUsed(false);
-            jFileChooser1.addChoosableFileFilter(new javax.swing.filechooser.FileFilter(){
+            jFileChooser1.setAcceptAllFileFilterUsed(true);
+            //jFileChooser1.addChoosableFileFilter(new javax.swing.filechooser.FileFilter(){
 
-                @Override
-                public boolean accept(File f) {
-                    return f.isDirectory() || ff.accept(f);
-                }
+              //  @Override
+                //public boolean accept(File f) {
+                  //  return f.isDirectory() || ff.accept(f);
+                //}
 
-                @Override
-                public String getDescription() {
-                    return OpenAndLoad.this.loader.getClass().getSimpleName()+" Files";
-                }
-            });
+                //@Override
+                //public String getDescription() {
+                  //  return OpenAndLoad.this.loader.getClass().getSimpleName()+" Files";
+                //}
+            //});
 
         } catch (Exception ex) {}
     }

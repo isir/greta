@@ -64,8 +64,11 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
          int current = (int) (time / 1000.0 * Constants.FRAME_PER_SECOND + 0.5);
          Frame f1 = new Frame();
          Quaternion q0 = new Quaternion();
-         q0.fromEulerXYZ((double)(vt2X.getValue()/100.0), (double)(vt2Y.getValue()/100.0), (double)(vt2Z.getValue()/100.0));
+         q0.fromEulerXYZ((double)(vt2X1.getValue()/100.0), (double)(vt2Y1.getValue()/100.0), (double)(vt2Z1.getValue()/100.0));
          f1.addRotation(vt2.getText(), q0);
+         Quaternion q0_1 = new Quaternion();
+         q0_1.fromEulerXYZ((double)(vc1X.getValue()/100.0), (double)(vc1Y.getValue()/100.0), (double)(vc1Z.getValue()/100.0));
+         f1.addRotation(vt1.getText(), q0_1);
          Quaternion q1 = new Quaternion();
          q1.fromEulerXYZ((double)(vt5X.getValue()/100.0), (double)(vt5Y.getValue()/100.0), (double)(vt5Z.getValue()/100.0));
          f1.addRotation(vt5.getText(), q1);
@@ -78,6 +81,7 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
          String v = "<KeyPoint type =\"\">\n";
          v+= "<Rotations>\n";
          v+= "<vt2 x= \""+ q0.x() +" \" y= \""+ q0.y()+"\" z= \""+q0.z() +"\" w=\""+ q0.w()+"\"/>\n";
+         v+= "<vc1 x= \""+ q0_1.x() +" \" y= \""+ q0_1.y()+"\" z= \""+q0_1.z() +"\" w=\""+ q0_1.w()+"\"/>\n";
          v+= "<vt5 x= \""+ q1.x() +" \" y= \""+ q1.y()+"\" z= \""+q1.z() +"\" w=\""+ q1.w()+"\"/>\n";
          v+= "<vt12 x= \""+ q2.x() +" \" y= \""+ q2.y()+"\" z= \""+q2.z() +"\" w=\""+ q2.w()+"\"/>\n";
          v+= "<vl5 x= \""+ q3.x() +" \" y= \""+ q3.y()+"\" z= \""+q3.z() +"\" w=\""+ q3.w()+"\"/>\n";
@@ -103,6 +107,11 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
         vt2X = new javax.swing.JSlider();
         vt2Y = new javax.swing.JSlider();
         vt2Z = new javax.swing.JSlider();
+        jPanel7 = new javax.swing.JPanel();
+        vt4 = new javax.swing.JLabel();
+        vt2X2 = new javax.swing.JSlider();
+        vt2Y2 = new javax.swing.JSlider();
+        vt2Z2 = new javax.swing.JSlider();
         jPanel8 = new javax.swing.JPanel();
         vt5 = new javax.swing.JLabel();
         vt5X = new javax.swing.JSlider();
@@ -128,9 +137,16 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
         jButton1 = new javax.swing.JButton();
         torsoComb = new javax.swing.JComboBox();
         jButton2 = new javax.swing.JButton();
-
-        setMaximumSize(new java.awt.Dimension(400, 1800));
-        setPreferredSize(new java.awt.Dimension(541, 947));
+        jPanel6 = new javax.swing.JPanel();
+        vt3 = new javax.swing.JLabel();
+        vt2X1 = new javax.swing.JSlider();
+        vt2Y1 = new javax.swing.JSlider();
+        vt2Z1 = new javax.swing.JSlider();
+        jPanel11 = new javax.swing.JPanel();
+        vt1 = new javax.swing.JLabel();
+        vc1X = new javax.swing.JSlider();
+        vc1Y = new javax.swing.JSlider();
+        vc1Z = new javax.swing.JSlider();
 
         vt2.setText("vt2");
 
@@ -200,6 +216,78 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
                 .addComponent(vt2Z, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        vt4.setText("vt2");
+
+        vt2X2.setMinimum(-100);
+        vt2X2.setValue(0);
+        vt2X2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vt2X2vl5XMouseReleased(evt);
+            }
+        });
+        vt2X2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                vt2X2vl5XMouseMoved(evt);
+            }
+        });
+
+        vt2Y2.setMinimum(-100);
+        vt2Y2.setValue(0);
+        vt2Y2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vt2Y2vl5XMouseReleased(evt);
+            }
+        });
+        vt2Y2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                vt2Y2vl5XMouseMoved(evt);
+            }
+        });
+
+        vt2Z2.setMinimum(-100);
+        vt2Z2.setValue(0);
+        vt2Z2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vt2Z2vl5XMouseReleased(evt);
+            }
+        });
+        vt2Z2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                vt2Z2vl5XMouseMoved(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(vt4)
+                .addGap(47, 47, 47)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(vt2Y2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                    .addComponent(vt2X2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vt2Z2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(vt2X2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(vt2Y2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vt4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(vt2Z2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        setMaximumSize(new java.awt.Dimension(400, 1800));
+        setPreferredSize(new java.awt.Dimension(541, 947));
 
         vt5.setText("vt5");
 
@@ -455,7 +543,7 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
                 .addComponent(result, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
+                .addGap(0, 8, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(id, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
@@ -509,44 +597,184 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
                 .addContainerGap(44, Short.MAX_VALUE))
         );
 
+        vt3.setText("vt2");
+
+        vt2X1.setMinimum(-100);
+        vt2X1.setValue(0);
+        vt2X1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vt2X1vl5XMouseReleased(evt);
+            }
+        });
+        vt2X1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                vt2X1vl5XMouseMoved(evt);
+            }
+        });
+
+        vt2Y1.setMinimum(-100);
+        vt2Y1.setValue(0);
+        vt2Y1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vt2Y1vl5XMouseReleased(evt);
+            }
+        });
+        vt2Y1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                vt2Y1vl5XMouseMoved(evt);
+            }
+        });
+
+        vt2Z1.setMinimum(-100);
+        vt2Z1.setValue(0);
+        vt2Z1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vt2Z1vl5XMouseReleased(evt);
+            }
+        });
+        vt2Z1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                vt2Z1vl5XMouseMoved(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(vt3)
+                .addGap(47, 47, 47)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(vt2Y1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                    .addComponent(vt2X1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vt2Z1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(vt2X1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(vt2Y1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vt3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(vt2Z1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        vt1.setText("vc1");
+
+        vc1X.setMinimum(-100);
+        vc1X.setValue(0);
+        vc1X.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vc1Xvl5XMouseReleased(evt);
+            }
+        });
+        vc1X.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                vc1Xvl5XMouseMoved(evt);
+            }
+        });
+
+        vc1Y.setMinimum(-100);
+        vc1Y.setValue(0);
+        vc1Y.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vc1Yvl5XMouseReleased(evt);
+            }
+        });
+        vc1Y.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                vc1Yvl5XMouseMoved(evt);
+            }
+        });
+
+        vc1Z.setMinimum(-100);
+        vc1Z.setValue(0);
+        vc1Z.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                vc1Zvl5XMouseReleased(evt);
+            }
+        });
+        vc1Z.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                vc1Zvl5XMouseMoved(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addComponent(vt1)
+                .addGap(47, 47, 47)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(vc1Y, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 348, Short.MAX_VALUE)
+                    .addComponent(vc1X, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vc1Z, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(vc1X, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(vc1Y, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vt1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(vc1Z, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE)
-                            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, 489, Short.MAX_VALUE))
-                        .addContainerGap())
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
+                .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 19, Short.MAX_VALUE))
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, 517, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(1, 1, 1)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addContainerGap(84, Short.MAX_VALUE)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(115, 115, 115)
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -597,6 +825,78 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
             perf.performSignals(Gsignals, id, new Mode(CompositionType.replace));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void vt2X2vl5XMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2X2vl5XMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2X2vl5XMouseReleased
+
+    private void vt2X2vl5XMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2X2vl5XMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2X2vl5XMouseMoved
+
+    private void vt2Y2vl5XMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2Y2vl5XMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2Y2vl5XMouseReleased
+
+    private void vt2Y2vl5XMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2Y2vl5XMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2Y2vl5XMouseMoved
+
+    private void vt2Z2vl5XMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2Z2vl5XMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2Z2vl5XMouseReleased
+
+    private void vt2Z2vl5XMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2Z2vl5XMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2Z2vl5XMouseMoved
+
+    private void vc1Xvl5XMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vc1Xvl5XMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vc1Xvl5XMouseReleased
+
+    private void vc1Xvl5XMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vc1Xvl5XMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vc1Xvl5XMouseMoved
+
+    private void vc1Yvl5XMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vc1Yvl5XMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vc1Yvl5XMouseReleased
+
+    private void vc1Yvl5XMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vc1Yvl5XMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vc1Yvl5XMouseMoved
+
+    private void vc1Zvl5XMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vc1Zvl5XMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vc1Zvl5XMouseReleased
+
+    private void vc1Zvl5XMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vc1Zvl5XMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vc1Zvl5XMouseMoved
+
+    private void vt2Z1vl5XMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2Z1vl5XMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2Z1vl5XMouseMoved
+
+    private void vt2Z1vl5XMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2Z1vl5XMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2Z1vl5XMouseReleased
+
+    private void vt2Y1vl5XMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2Y1vl5XMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2Y1vl5XMouseMoved
+
+    private void vt2Y1vl5XMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2Y1vl5XMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2Y1vl5XMouseReleased
+
+    private void vt2X1vl5XMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2X1vl5XMouseMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2X1vl5XMouseMoved
+
+    private void vt2X1vl5XMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vt2X1vl5XMouseReleased
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vt2X1vl5XMouseReleased
 
 
     void loadTorso(){
@@ -656,26 +956,41 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane result;
     private javax.swing.JButton send;
     private javax.swing.JTextArea textR;
     private javax.swing.JComboBox torsoComb;
+    private javax.swing.JSlider vc1X;
+    private javax.swing.JSlider vc1Y;
+    private javax.swing.JSlider vc1Z;
     private javax.swing.JLabel vl5;
     private javax.swing.JSlider vl5X;
     private javax.swing.JSlider vl5Y;
     private javax.swing.JSlider vl5Z;
+    private javax.swing.JLabel vt1;
     private javax.swing.JLabel vt12;
     private javax.swing.JSlider vt12X;
     private javax.swing.JSlider vt12Y;
     private javax.swing.JSlider vt12Z;
     private javax.swing.JLabel vt2;
     private javax.swing.JSlider vt2X;
+    private javax.swing.JSlider vt2X1;
+    private javax.swing.JSlider vt2X2;
     private javax.swing.JSlider vt2Y;
+    private javax.swing.JSlider vt2Y1;
+    private javax.swing.JSlider vt2Y2;
     private javax.swing.JSlider vt2Z;
+    private javax.swing.JSlider vt2Z1;
+    private javax.swing.JSlider vt2Z2;
+    private javax.swing.JLabel vt3;
+    private javax.swing.JLabel vt4;
     private javax.swing.JLabel vt5;
     private javax.swing.JSlider vt5X;
     private javax.swing.JSlider vt5Y;

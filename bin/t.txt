@@ -1,0 +1,48 @@
+ Le volume dans le lecteur C s'appelle OS
+ Le num‚ro de s‚rie du volume est A4B7-CFE6
+
+ R‚pertoire de C:\Users\Michele\Desktop\greta-gpl-2\greta-gpl\bin
+
+10/05/2021  10:31    <DIR>          .
+10/05/2021  10:31    <DIR>          ..
+07/05/2021  14:59    <DIR>          apache-activemq-5.15.14
+04/11/2020  21:37    <DIR>          BehaviorPlanner
+04/11/2020  21:37    <DIR>          BehaviorRealizer
+08/04/2021  10:56         1ÿ531ÿ048 Capture_1617872209657.avi
+08/04/2021  10:58         1ÿ558ÿ388 Capture_1617872322940.avi
+15/04/2021  10:34         4ÿ631ÿ786 Capture_1618475654415.avi
+15/04/2021  10:34         4ÿ099ÿ004 Capture_1618475682774.avi
+15/04/2021  10:36         5ÿ881ÿ622 Capture_1618475780718.avi
+15/04/2021  10:36         3ÿ953ÿ976 Capture_1618475797814.avi
+27/04/2021  12:30        10ÿ636ÿ628 Capture_1619519323773.avi
+27/04/2021  12:35         7ÿ301ÿ318 Capture_1619519674040.avi
+07/05/2021  13:57         4ÿ199ÿ970 Capture_1620388575825.avi
+01/04/2021  15:25    <DIR>          charniak
+04/11/2020  21:37    <DIR>          Common
+04/11/2020  21:37    <DIR>          Configurations
+04/11/2020  21:37    <DIR>          Environments
+04/11/2020  21:37    <DIR>          Examples
+15/04/2021  10:53             3ÿ746 Greta.ini
+04/11/2020  21:37    <DIR>          ListenerIntentPlanner
+04/11/2020  21:37    <DIR>          Locale
+31/03/2021  22:18    <DIR>          Log
+21/04/2021  17:53             5ÿ209 mapping_file.txt
+01/04/2021  22:58            78ÿ218 MeaningMiner.jar
+27/04/2021  12:39         2ÿ113ÿ406 MM.avi
+27/04/2021  12:42         2ÿ417ÿ648 MM_emo.avi
+10/05/2021  10:31           829ÿ124 Modular.jar
+08/04/2021  01:40           125ÿ065 Modular.xml
+04/11/2020  21:37            12ÿ190 Modular.xsd
+10/05/2021  10:31               409 ModularSave.xml
+01/04/2021  15:24    <DIR>          NVBG
+27/04/2021  12:39         1ÿ955ÿ808 NVBG_MM.avi
+27/04/2021  12:42         2ÿ064ÿ456 NVBG_MM_emo.avi
+04/11/2020  21:37    <DIR>          Player
+24/02/2021  00:53               106 run-toolkit-nvb-parser.bat
+24/02/2021  00:52               376 run-toolkit-NVBG-C#-all.bat
+10/05/2021  10:31                 0 t.txt
+06/05/2021  15:42             1ÿ172 test.xml
+07/05/2021  11:32             1ÿ429 test_fml.xml
+27/04/2021  12:20         1ÿ786ÿ092 Video_Two_Agents.avi
+              26 fichier(s)       55ÿ188ÿ194 octets
+              15 R‚p(s)   7ÿ853ÿ178ÿ880 octets libres

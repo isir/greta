@@ -87,7 +87,7 @@
             </rotation>
         </bone>
         <bone id="14" name="vt5">
-            <position x="0" y="2.36" z="0.55" />
+            <position x="0" y="4" z="0.55" />
             <rotation angle="0">
                 <axis x="1" y="0" z="0" />
             </rotation>
@@ -111,7 +111,7 @@
             </rotation>
         </bone>
         <bone id="18" name="vt1">
-            <position x="0" y="1.9" z="0.97" />
+            <position x="0" y="0" z="1.2" />
             <rotation angle="0">
                 <axis x="1" y="0" z="0" />
             </rotation>

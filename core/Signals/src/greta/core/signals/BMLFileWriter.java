@@ -72,6 +72,7 @@ public class BMLFileWriter implements SignalPerformer {
     @Override
     public void performSignals(List<Signal> signals, ID requestId, Mode mode) {
         BMLTranslator.SignalsToBML(signals, mode).save(bmlfolder + "BML-" + requestId + ".xml");
+
     }
 
 }

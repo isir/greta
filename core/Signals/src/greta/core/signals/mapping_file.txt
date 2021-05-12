@@ -1,0 +1,9 @@
+ChrBrad@Idle01_SafeLf01::deicticpointL=raiseHand::deictic
+ChrBrad@Idle01_NegativeBt02::performative=raiseHand_R::beat
+ChrBrad@Idle01_NegativeRt01::performative=raiseHand_R::beat
+ChrBrad@Idle01_NegativeBt01::performative=raiseHand_R::beat
+ChrBrad@Idle01_OfferBoth01::performative=raiseHand_R::beat
+ChrBrad@Idle01_MeLf01::performative=raiseHand_R::beat
+ChrBrad@Idle01_BeatLowLf01::performative=raiseHand_R::beat
+ChrBrad@Idle01_OfferBoth01::performative=raiseHand_R::beat
+ChrBrad@Idle01_YouLf01::performative=raiseHand_R::beat

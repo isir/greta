@@ -769,6 +769,51 @@
 		</modulation>
 	</qualifier>	
 	
+	
+	
+	<qualifier name="rest-*">
+		<modulation>
+			<destination>face</destination><parameter>preference.value</parameter><operator>ADD</operator>
+			<op1_name>face</op1_name><op1_attribute>preference.value</op1_attribute><op2_value>0.4</op2_value>
+		</modulation>
+		<modulation>
+			<destination>face</destination><parameter>preference.value</parameter><operator>LIM</operator>
+			<op1_name>face</op1_name><op1_attribute>preference.min</op1_attribute><op2_name>face</op2_name>
+			<op2_attribute>preference.max</op2_attribute>
+		</modulation>
+		<modulation>
+			<destination>head</destination><parameter>preference.value</parameter><operator>ADD</operator>
+			<op1_name>head</op1_name><op1_attribute>preference.value</op1_attribute><op2_value>0.3</op2_value>
+		</modulation>
+		<modulation>
+			<destination>head</destination><parameter>preference.value</parameter><operator>LIM</operator>
+			<op1_name>head</op1_name><op1_attribute>preference.min</op1_attribute><op2_name>head</op2_name>
+			<op2_attribute>preference.max</op2_attribute>
+		</modulation>
+		<modulation>
+			<destination>head</destination><parameter>REP.value</parameter><operator>VAL</operator>
+			<op1_name>head</op1_name><op1_attribute>REP.value</op1_attribute><op2_value>-1</op2_value>
+		</modulation>
+		<modulation>
+			<destination>gaze</destination><parameter>preference.value</parameter><operator>ADD</operator>
+			<op1_name>gaze</op1_name><op1_attribute>preference.value</op1_attribute><op2_value>0.2</op2_value>
+		</modulation>
+		<modulation>
+			<destination>gaze</destination><parameter>preference.value</parameter><operator>LIM</operator>
+			<op1_name>gaze</op1_name><op1_attribute>preference.min</op1_attribute><op2_name>gaze</op2_name>
+			<op2_attribute>preference.max</op2_attribute>
+		</modulation>
+		<modulation>
+			<destination>gesture</destination><parameter>preference.value</parameter><operator>ADD</operator>
+			<op1_name>gesture</op1_name><op1_attribute>preference.value</op1_attribute><op2_value>0.1</op2_value>
+		</modulation>
+		<modulation>
+			<destination>gesture</destination><parameter>preference.value</parameter><operator>LIM</operator>
+			<op1_name>gesture</op1_name><op1_attribute>preference.min</op1_attribute><op2_name>gesture</op2_name>
+			<op2_attribute>preference.max</op2_attribute>
+		</modulation>
+	</qualifier>	
+	
 	<qualifier name="boundary-*">
 		<modulation>
 			<destination>head</destination><parameter>preference.value</parameter><operator>ADD</operator>
@@ -1469,5 +1514,4 @@
 			<op2_attribute>OAC.max</op2_attribute>
 		</modulation>
 	</qualifier>
-
 </qualifiers>

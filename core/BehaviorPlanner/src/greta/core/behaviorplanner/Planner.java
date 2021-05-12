@@ -17,6 +17,7 @@
  */
 package greta.core.behaviorplanner;
 
+
 import greta.core.behaviorplanner.baseline.BaseLine;
 import greta.core.behaviorplanner.baseline.BehaviorQualityComputer;
 import greta.core.behaviorplanner.baseline.DynamicLine;
@@ -31,21 +32,49 @@ import greta.core.intentions.IdeationalUnitIntention;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionPerformer;
 import greta.core.intentions.IntentionTargetable;
+import greta.core.signals.BMLTranslator;
 import greta.core.signals.GazeSignal;
+import greta.core.signals.MessageSender;
 import greta.core.signals.Signal;
 import greta.core.signals.SignalEmitter;
 import greta.core.signals.SignalPerformer;
 import greta.core.signals.SignalTargetable;
+import greta.core.signals.TorsoSignal;
 import greta.core.signals.gesture.GestureSignal;
 import greta.core.util.CharacterDependentAdapter;
 import greta.core.util.CharacterManager;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import greta.core.util.log.Logs;
+import greta.core.util.speech.Speech;
 import greta.core.util.time.Temporizer;
 import greta.core.util.time.TimeMarker;
+import greta.core.util.xml.XML;
+import greta.core.util.xml.XMLParser;
+import greta.core.util.xml.XMLTree;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jms.JMSException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * This class is the Greta's behavior planner.<br/><br/> The
@@ -93,6 +122,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
         lexicon = new Lexicon(cm);
         baseline = new BaseLine(cm);
         bqc = new BehaviorQualityComputer(cm);
+        
 
         mseSelector = new MSESelector();
         defaultSelector = new MultimodalSignalSelector();
@@ -174,15 +204,26 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
      *
      * @param intentions the list of {@code Intention}
      * @param requestId the identifier of the request
+     * @param mode
+     * @throws java.io.FileNotFoundException
+     * @throws javax.xml.transform.TransformerException
+     * @throws javax.xml.parsers.ParserConfigurationException
+     * @throws org.xml.sax.SAXException
      */
     @Override
     public void performIntentions(List<Intention> intentions, ID requestId, Mode mode) {
+        
+        System.out.println("PERFORM INTENTIOS");
         selectedSignals = new ArrayList<Signal>();
 
         //temporize every intentions
         Temporizer temporizer = new Temporizer();
         temporizer.add(intentions);
         temporizer.temporize();
+        String fml_construction="";
+        int flag=0;
+        
+        boolean MeaningMiner_treatement=false;
 
         //sort intentions by importance, starting time, duration.
         sortIntentions(intentions);
@@ -237,6 +278,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             }
 
             //search existing signals durring the intention :
+            
             List<Signal> existingSignals = new ArrayList<Signal>();
             int firstSignal = selectedSignals.size();
             for (int i = 0; i < selectedSignals.size(); ++i) {
@@ -250,13 +292,143 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                     }
                 }
             }
+            for(Signal sig: existingSignals){
+                System.out.println("GRETA:"+sig.getClass());
+            }
 
             //let the selector choose the signals
             List<Signal> signalsReturned = selector.selectFrom(intention, set, dynamicline, existingSignals, getCharacterManager());
-            //if signalsReturned is empty, it means that no Signal can be added.
-            //  It's normal !
-            //but if signalsReturned is null, it means that the selector cannot performe this kind of intention
-            //  so there is a problem with the choice of the selector.
+            if(this.getCharacterManager().get_use_NVBG()){
+            String phrase="";
+            List<Signal> signals=new ArrayList<Signal>();
+            boolean NVBG_worked=false;
+            List<String> gestures=null;
+            String fml_gestures_tag="";
+            for(Signal sig: signalsReturned){
+                try {
+                    System.out.println("GRETA Returned:"+sig.getClass());
+                    if (sig.getModality()=="speech" && !NVBG_worked){
+                        NVBG_worked=true;
+                        Speech m = (Speech) sig;
+                        m.getOriginalText();
+                        List<Object> f=m.getSpeechElements();
+                        for(Object ob:f){
+                            if (ob.getClass()==String.class){
+                                phrase = phrase+ob;
+                                
+                            }
+                        }
+                        // System.out.println(m.getSpeechElements());
+
+                    XMLParser bmlparser = XML.createParser();
+                    MessageSender msg_send = new MessageSender();
+                    System.out.println("INFO: "+phrase);
+                    phrase=phrase.replaceAll("  ", " ");
+                    if(phrase.startsWith(" ")){
+                        phrase=phrase.substring(1);
+                    }
+                    if(flag==0)
+                    fml_construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n<fml-apml>\n";
+                    String construction="<bml>"+
+                            "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
+                            "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
+                    fml_construction=fml_construction+construction;
+                    System.out.println(phrase.replaceAll("  ", " ").substring(1));
+                    String[] sp=phrase.split(" ");
+                    int i=1;
+                    for(int j=0;j<sp.length;j++){
+                        if(flag==0)
+                        fml_construction=fml_construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
+                        construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
+                        i++;
+                    }
+                    //this.getCharacterManager().getEn
+                    if(flag==0)
+                    fml_construction=fml_construction+"\n</speech>\n</bml>\n<fml>";
+                    construction=construction+"\n</speech>\n</bml>";
+                    try {
+                            try {
+                                gestures = msg_send.traitement_NVBG(phrase,this.getCharacterManager().getEnvironment().getNVBG_Open());
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        this.getCharacterManager().getEnvironment().setNVBG_Open(true);
+                    } catch (FileNotFoundException ex) {
+                        Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (JMSException ex) {
+                        Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    System.out.println("Out " + gestures);
+                    if(gestures!=null){
+                    for(String y : gestures){
+                    //System.out.println("what happens"+bml);
+                    String[] k=y.split("importance");
+                    y=k[0];
+                    //System.out.println("what happens"+y);
+                    String bml_modif=construction.toString();
+                    String[] g=y.split("lexeme=");
+                    String b= g[1].substring(1,g[1].indexOf(" ")-1);
+                    String[] c=y.replace("<","").split(" ");
+                   // System.out.println("TYPE:"+c[0]);
+                    String addend="<description priority=\"1\" type=\"gretabml\">"+
+                            "\n<reference>"+c[0]+"="+b+"</reference>"+
+                            "\n<intensity>1.000</intensity>"+
+                            "`\n<SPC.value>0.646</SPC.value>"+
+                            "\n<TMP.value>-0.400</TMP.value>"+
+                            "\n<FLD.value>0.000</FLD.value>"+
+                            "\n<PWR.value>0.000</PWR.value>"+
+                            "\n<REP.value>0.000</REP.value>"+
+                            "\n<OPN.value>0.000</OPN.value>"+
+                            "\n<TEN.value>0.000</TEN.value>"+
+                            "\n</description>";
+                    bml_modif=construction.replaceAll("</bml>",y.replace(c[0],"gesture")+">"+"\n"+addend+"\n</gesture>\n</bml>");
+                    flag=1;
+                    if(flag==1)
+                    fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance=\"1.0\"/>";
+                    System.out.println("FML FILE\n:"+fml_construction);
+                    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                    Document document = docBuilder.parse(new InputSource(new StringReader(bml_modif)));
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    DOMSource source = new DOMSource(document);
+                    FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\test_fml.xml"));
+                    StreamResult result = new StreamResult(writer);
+                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                    transformer.transform(source, result);
+                    XMLTree bml_mod = bmlparser.parseFile(System.getProperty("user.dir")+"\\test_fml.xml");
+                    signals.addAll(BMLTranslator.BMLToSignals(bml_mod, this.getCharacterManager()));
+                    System.out.println("SIGNALS:"+signals);
+                    }
+                    }
+                
+                    // Fin traitment NVBG
+                }
+                }
+                //if signalsReturned is empty, it means that no Signal can be added.
+                //  It's normal !
+                //but if signalsReturned is null, it means that the selector cannot performe this kind of intention
+                //  so there is a problem with the choice of the selector.
+ catch (SAXException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (TransformerConfigurationException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParserConfigurationException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (TransformerException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+            
+            }
+            // If NVBG found animations we will add the animations translated in signals to the signals
+            if(gestures!=null){
+                signalsReturned.addAll(signals);
+            }
+            }
 
             // if the behaviorset for the gaze is != null it is created a GazeSignal with target like find in the fml, influence null and it is reported also the character_id
             if (deict_set.getBaseSignals().size() != 0){
@@ -321,17 +493,56 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                 bqc.setDefinition(getCharacterManager().getValueString(BehaviorQualityComputer.CHARACTER_PARAMETER_QUALIFIERS));
             }
         }
+        
+        
+        if(flag==1){
+                fml_construction=fml_construction+"\n</fml>\n</fml-apml>";
+                System.out.println("OUTPUT:\n"+ fml_construction);
+                try{
+                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                Document document = docBuilder.parse(new InputSource(new StringReader(fml_construction)));
+                TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                Transformer transformer = transformerFactory.newTransformer();
+                DOMSource source = new DOMSource(document);
+                FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\fml_output.xml"));
+                StreamResult result = new StreamResult(writer);
+                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                transformer.transform(source, result);
+                } catch (ParserConfigurationException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SAXException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (TransformerConfigurationException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (TransformerException ex) {
+                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                }
+        }
+        
 
         // Ideational Units Creation and Pre-Processing
+        System.out.println("greta.core.behaviorplanner.Planner.performIntentions()"+ selectedSignals);
+        for(Signal p : selectedSignals){
+            if(p.getModality()=="torso"){
+                TorsoSignal ts=(TorsoSignal)p;
+                System.out.println("INFO "+ts.getLexeme());
+            }
+        }
         IdeationalUnitFactory ideationalUnitFactory = new IdeationalUnitFactory();
         for (Intention intention : intentions) {
+            System.out.println("VIA "+intention.getClass());
             if (intention instanceof IdeationalUnitIntention) {
                 String ideationalUnitMainIntentionId = ((IdeationalUnitIntention) intention).getMainIntentionId();
                 IdeationalUnit ideationalUnit = ideationalUnitFactory.newIdeationalUnit(intention.getId(), ideationalUnitMainIntentionId);
                 for (Signal currentSignal : selectedSignals) {
                     if (currentSignal instanceof GestureSignal) {
+                        System.out.println(currentSignal + "  " + selectedSignals);
                         if (currentSignal.getTimeMarker("ready").getValue() >= intention.getStart().getValue() && currentSignal.getTimeMarker("relax").getValue() <= intention.getEnd().getValue()) {
                             ideationalUnit.addSignal(currentSignal);
+                            System.out.println(currentSignal);
                             ((GestureSignal) currentSignal).setIdeationalUnit(ideationalUnit);
                         }
                     }
@@ -339,7 +550,8 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             }
         }
         ideationalUnitFactory.preprocessIdeationalUnits();
-
+        
+        
         sendSignals(selectedSignals, requestId, mode);
     }
 
@@ -387,6 +599,10 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
      */
     protected void sendSignals(List<Signal> signals, ID id, Mode mode) {
         if (signals != null) {
+            System.out.println("greta.core.behaviorplanner.Planner.sendSignals()");
+            for(Signal s:signals){
+                System.out.println("Signals Class "+s.getClass());
+            }
             for (SignalPerformer performer : signalPerformers) {
                 performer.performSignals(signals, id, mode);
             }

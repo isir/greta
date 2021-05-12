@@ -40,6 +40,7 @@ import greta.core.signals.SpineDirection;
 import greta.core.signals.SpinePhase;
 import greta.core.signals.SpineSignal;
 import greta.core.signals.TorsoSignal;
+import greta.core.signals.gesture.TrajectoryDescription;
 import greta.core.util.CharacterManager;
 import greta.core.util.Constants;
 import greta.core.util.Mode;
@@ -106,7 +107,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
     private Map<GazeSignal, Long> currentGazes;
     /** The current position */
-    private AUKeyFrame defaultGazeLeft;
+    private AUKeyFrame defaultGazeLeft; //#voir var track
     private AUKeyFrame defaultGazeRight;
 
     private List<SignalPerformer> performers;
@@ -290,6 +291,71 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             double end = gaze.getEnd().getValue();
 
             Influence gazeInfluence = computeGazeInfluence(gaze, headAndEyesAngles);
+             boolean move_head=false;
+             boolean move_torso_high=false;
+             boolean move_torso_low=false;
+             double r= headAndEyesAngles.posTarget.get(0)*headAndEyesAngles.headPosition.get(0)+headAndEyesAngles.posTarget.get(1)*headAndEyesAngles.headPosition.get(1)+headAndEyesAngles.posTarget.get(2)*headAndEyesAngles.headPosition.get(2);
+                double a= Math.sqrt(Math.pow(headAndEyesAngles.posTarget.get(0),2)+Math.pow(headAndEyesAngles.posTarget.get(1),2)+Math.pow(headAndEyesAngles.posTarget.get(2),2));
+                double b= Math.sqrt(Math.pow(headAndEyesAngles.headPosition.get(0),2)+Math.pow(headAndEyesAngles.headPosition.get(1),2)+Math.pow(headAndEyesAngles.headPosition.get(2),2));
+                r=r/(a*b);
+                double dx= headAndEyesAngles.headPosition.get(0) - headAndEyesAngles.posTarget.get(0);
+                double dz= headAndEyesAngles.headPosition.get(2) - headAndEyesAngles.posTarget.get(2);
+                double dy= headAndEyesAngles.headPosition.get(1) - headAndEyesAngles.posTarget.get(1);
+                double pitch = Math.atan2(Math.sqrt(dz * dz + dx * dx), dy) + Math.PI;
+                double yaw = Math.atan2(dz, dx);
+                boolean sagittal=false;
+                if(pitch>3){
+                    sagittal=true;
+                }
+                System.out.println("Pitch Angle: "+pitch);
+                double theta=yaw;
+                theta=Math.toDegrees(theta);
+                double theta_r=Math.toRadians(theta);
+                double sinus=Math.sqrt(1-Math.pow(r, 2));
+                double theta_sin=Math.asin(sinus);
+                theta_sin=Math.toDegrees(theta_sin);
+                System.out.println("THETA:"+theta+"  "+a+"  "+b+"  "+r+" "+theta_r+"  "+theta_sin);
+                int sign=0;
+                if(theta>=0 && theta<=90 || theta>=270 && theta<=360){
+                    sign=-1;
+                    if(theta>=0 && theta <=20){
+                        System.out.println("Move just the eyes");
+                    }
+                    else if(theta>20 && theta<=90){
+                            move_head=true;
+                            move_torso_high=true;
+                            sign=1;
+                            System.out.println("Move also  the head cos");
+                        }
+                        else if(theta>270 && theta<315){
+                            move_head=true;
+                            System.out.println("Move also  the head");
+                            
+                        }
+                        else if(theta>=315 && theta<360){
+                            System.out.println("Move just the eyes");
+                    }
+                    
+                 }
+                else{
+                    sign=1;
+                        if(theta>180 && theta <=225){
+                                move_head=true;
+                                move_torso_high=true;
+                                move_torso_low=true;
+                                System.out.println("Move also  the head, torso_high, torso_low");
+                        }
+                        else if(theta>120 && theta <=180){
+                                sign=1;
+                                move_head=true;
+                                move_torso_high=true;
+                                move_torso_low=true;
+                                System.out.println("Move also  the head, torso_high, torso_low A");
+                    }
+                 
+                }
+                
+                
 
             if (gazeInfluence.ordinal() >= Influence.SHOULDER.ordinal()) {
                 // if the influence involve the torso we create the keyframe just for the torso that already include the movement of
@@ -324,10 +390,63 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 TorsoSignal torsoSignalTargetPosition = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
                 torsoSignalTargetPosition.setDirectionShift(true);
                 SpinePhase spinePhaseTargetPosition = createSpinePhase("end", timeShoulderAtTarget, timeShoulderAtTarget, shouldersAngles.shoulderMinimumAlign, shouldersAngles.shoulderLimitedPitch); // ready
-                spinePhaseTargetPosition.setStartTime(timeShoulderAtTarget); // ready
+                spinePhaseTargetPosition.setStartTime(timeShoulderAtTarget);
+                TorsoSignal torsoSignalTargetPosition3 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
+                torsoSignalTargetPosition3.setDirectionShift(true);
+                SpinePhase spinePhaseTargetPosition3 = createSpinePhase("end", timeShoulderAtTarget, timeShoulderAtTarget, shouldersAngles.shoulderMinimumAlign, shouldersAngles.shoulderLimitedPitch); // ready
+                spinePhaseTargetPosition3.setStartTime(timeShoulderAtTarget);
+                System.out.println("g"+spinePhaseTargetPosition.sagittalTilt.flag);
+                spinePhaseTargetPosition.verticalTorsion.flag=true;
+                if(sagittal==true){
+                    System.out.println("Ah");
+                    int sag_sign=-1;
+                    if(headAndEyesAngles.headPosition.get(1)<headAndEyesAngles.posTarget.get(1)){
+                        sag_sign=1;
+                    }
+                    spinePhaseTargetPosition3.sagittalTilt.flag=true;
+                    spinePhaseTargetPosition3.sagittalTilt.value=sag_sign*(pitch*25)/100;
+                }
+                if(move_torso_high==true){
+                    int sag_sign=-1;
+                    if(headAndEyesAngles.headPosition.get(1)<headAndEyesAngles.posTarget.get(1)){
+                        sag_sign=1;
+                    }
+                    if(theta>120 && theta<180){
+                        theta=60;
+                    }
+                    spinePhaseTargetPosition.verticalTorsion.flag=true;
+                    spinePhaseTargetPosition.verticalTorsion.value=sign*(2*theta)/100;
+                    spinePhaseTargetPosition.sagittalTilt.flag=true;
+                    spinePhaseTargetPosition.sagittalTilt.value=sag_sign*(pitch*25)/100;
+                }
+                //spinePhaseTargetPosition.collapse.value=sign*15;
                 setupTorsoSignalAtPosition(torsoSignalTargetPosition, spinePhaseTargetPosition, start,
                         timeShoulderAtTarget, shouldersAngles, gazeInfluence);
-
+                setupTorsoSignalAtPosition(torsoSignalTargetPosition3, spinePhaseTargetPosition3, start,
+                        timeShoulderAtTarget, shouldersAngles, gazeInfluence);
+                torsoSignalTargetPosition3.shoulder=false;
+                torsoSignalTargetPosition.shoulder=true;
+                TorsoSignal torsoSignalTargetPosition2 = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
+                torsoSignalTargetPosition2.setDirectionShift(true);
+                SpinePhase spinePhaseTargetPosition2 = createSpinePhase("end", timeShoulderAtTarget, timeShoulderAtTarget, shouldersAngles.shoulderMinimumAlign, shouldersAngles.shoulderLimitedPitch); // ready
+                spinePhaseTargetPosition.setStartTime(timeShoulderAtTarget); // ready
+                System.out.println("g"+spinePhaseTargetPosition2.sagittalTilt.flag+"   "+spinePhaseTargetPosition.sagittalTilt.valueMax);
+                //spinePhaseTargetPosition2.sagittalTilt.direction=spinePhaseTargetPosition2.sagittalTilt.direction.BACKWARD;
+                //spinePhaseTargetPosition2.sagittalTilt.value=sign*15;
+                //spinePhaseTargetPosition2.sagittalTilt.flag=true;
+                System.out.println("g"+spinePhaseTargetPosition2.sagittalTilt.flag);
+                spinePhaseTargetPosition2.verticalTorsion.flag=true;
+                if(move_torso_low==true){
+                    spinePhaseTargetPosition2.verticalTorsion.value=sign*((5*theta)/100);
+                }
+                //spinePhaseTargetPosition2.verticalTorsion.value=sign*30;
+                //spinePhaseTargetPosition2.collapse.value=sign*15;
+                setupTorsoSignalAtPosition(torsoSignalTargetPosition2, spinePhaseTargetPosition2, start,
+                        timeShoulderAtTarget, shouldersAngles, gazeInfluence);
+                System.out.println("Head Angles:"+headActualAngle+"  "+headAndEyesAngles.posTarget+"   "+headAndEyesAngles.headPosition+"  "+torsoAnglesHeadOffset);
+                System.out.println("H"+headAndEyesAngles.posTarget.get(0)+"   "+headAndEyesAngles.posTarget.get(1));
+                System.out.println("aaaaa"+headAndEyesAngles.headPosition.get(1));
+              
                 if (!gaze.isGazeShift()) {
                     // torsoSignalRestPosition torso signal at rest position
                     TorsoSignal torsoSignalRestPosition = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
@@ -340,12 +459,29 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
                     // add both torso signals to TorsoKeyFrameGenerator
                     addTwoSignalsToKeyframeGenerator(torsoSignalTargetPosition, torsoSignalRestPosition);
+                    addTwoSignalsToKeyframeGenerator(torsoSignalTargetPosition3, torsoSignalRestPosition);
+                    
+                    addTwoSignalsToKeyframeGenerator(torsoSignalTargetPosition2, torsoSignalRestPosition);
+                    
+                    
+                    
+                    
+                    
                 }
                 else {
                     lastShiftTorso = spinePhaseTargetPosition;
                     addSignalToKeyframeGenerator(torsoSignalTargetPosition);
+                                        TorsoSignal torsoSignalRestPosition = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
+                    SpinePhase spinePhaseRestPosition;
+                    spinePhaseRestPosition = new SpinePhase(lastShiftTorso);
+                    spinePhaseRestPosition.setStartTime(timeBackShoulderAtZero); // end
+                    spinePhaseRestPosition.setEndTime(timeBackShoulderAtZero);
+                    setupTorsoSignalAtPosition(torsoSignalRestPosition, spinePhaseRestPosition, relax,
+                            timeBackShoulderAtZero, shouldersAngles, gazeInfluence);
+                    addTwoSignalsToKeyframeGenerator(torsoSignalTargetPosition, torsoSignalRestPosition);
+                    addTwoSignalsToKeyframeGenerator(torsoSignalTargetPosition2, torsoSignalRestPosition);
                 }
-
+            
                 /*********************************************************************
                  * HEAD
                  **********************************************************************/
@@ -450,7 +586,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 spinePhaseToTarget.setStartTime(timeHeadAtTarget);
                 // head latency equal to 50 ms
                 setupSignal(headSignalToTarget, spinePhaseToTarget, start + headLatency, timeHeadAtTarget);
-
+                /*
                 if (!gaze.isGazeShift()) {
                     // headSignalRestPosition head signal at rest position
                     HeadSignal headSignalRestPosition = createHeadSignalWithDirectionShift();
@@ -471,7 +607,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 // in the case there was a gazeShift before and there was a rotation of the torso, this rotation has to be canceled  if  the next gaze
                 // involve just the head. So it is create a torsoSignel with rotation equal to 0
                 // torsoSignalTargetPosition torso signal at target position
-                TorsoSignal torsoSignalTargetPosition = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
+               /** TorsoSignal torsoSignalTargetPosition = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
                 torsoSignalTargetPosition.setDirectionShift(true);
                 SpinePhase spinePhaseTargetPosition = createSpinePhase("end", timeHeadAtTarget, timeHeadAtTarget, 0, 0); // ready
                 spinePhaseTargetPosition.setStartTime(timeHeadAtTarget); // ready
@@ -493,7 +629,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     lastShiftTorso = spinePhaseTargetPosition;
                     addSignalToKeyframeGenerator(torsoSignalTargetPosition);
                 }
-
+               **/
             } else {
                 /**********************************************************************************************
                  * ************************************JUST EYES**********************************************
@@ -518,16 +654,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     timeShoulderAtTarget = end;
                 }
 
-                // torso signal at target position
-                TorsoSignal torsoSignalTargetPosition = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
-                torsoSignalTargetPosition.setDirectionShift(true);
-                SpinePhase spinePhaseTargetPosition;
-                double spinePhaseTime = gaze.isGazeShift() ? timeShoulderAtTarget : end;
-                spinePhaseTargetPosition = createSpinePhase("end", spinePhaseTime, spinePhaseTime, 0, 0);
-                torsoSignalTargetPosition.getEnd().setValue(spinePhaseTime);
-                torsoSignalTargetPosition.getPhases().add(spinePhaseTargetPosition);
-                torsoSignalTargetPosition.getStart().setValue(start + headLatency);
-                addSignalToKeyframeGenerator(torsoSignalTargetPosition);
+
 
                 // compute the time to go back in the front position
                 HeadKeyframeGenerator headKeyframeGenerator = (HeadKeyframeGenerator) this.otherModalitiesKFGenerators.get(2);
@@ -549,11 +676,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 headSignalWithDirectionShift.getPhases().add(headPhase);
                 headSignalWithDirectionShift.getStart().setValue(start + headLatency);
                 addSignalToKeyframeGenerator(headSignalWithDirectionShift);
+            
             }
-        }
+                }
+        
         return outputKeyframe;
     }
-
+    
+    
     /**
      * This function takes into account the head and torso signals happening in the same time lapse and that are involved and not in the gaze behavior.
      * If we have a gaze signal and in the same moment an external head signal or torso signal, the keyframe for the haed or torso should be a new one
@@ -1158,6 +1288,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
      * interpolation.
      * @return The computed {@code HeadKeyframe}.
      */
+    /*
     private HeadKeyframe getHeadKeyframeAtTime(double time, List<Keyframe> keyframes, // TODO FIXME Is this method called anywhere ? If not, to be deleted.
                                                HeadKeyframeGenerator headKeyframeGenerator, double start, double end) {
         HeadKeyframe previousHeadKeyframe = findClosestHeadKeyframeAtTime(time, keyframes, true);
@@ -1183,7 +1314,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             return null;
         }
     }
-
+    */
+/*
     private TorsoKeyframe getTorsoKeyframeAtTime(double time, List<Keyframe> keyframes, TorsoKeyframeGenerator torsoKeyframeGenerator) {
         // TODO FIXME Is this method called anywhere ? If not, to be deleted.
         // TODO FIXME torsoKeyframeGenerator is never used, why keep it ?
@@ -1236,7 +1368,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
         }
         return null;
     }
-
+*/
     /**
      * Gets the {@code HeadKeyframe} in a list that precedes or follows a
      * certain time.

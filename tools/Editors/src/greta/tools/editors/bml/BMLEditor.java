@@ -46,10 +46,17 @@ import greta.tools.editors.bml.timelines.SpeechSignalTimeLine;
 import greta.tools.editors.bml.timelines.TorsoTimeLine;
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jms.JMSException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -267,7 +274,21 @@ public class BMLEditor extends MultiTimeLineEditors<Signal> implements SignalPer
 
     @Override
     protected void loadFile(File f) {
-        bmlFileReader.load(f.getAbsolutePath());
+        try {
+            bmlFileReader.load(f.getAbsolutePath());
+        } catch (JMSException ex) {
+            Logger.getLogger(BMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(BMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(BMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(BMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(BMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(BMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.changeTitle("BML Editor - " + f.getAbsolutePath());
     }
 

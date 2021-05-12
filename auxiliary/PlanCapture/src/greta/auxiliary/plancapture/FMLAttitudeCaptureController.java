@@ -24,9 +24,14 @@ import greta.core.feedbacks.CallbackPerformer;
 import greta.core.intentions.FMLFileReader;
 import greta.core.util.id.ID;
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.jms.JMSException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -44,6 +49,10 @@ public class FMLAttitudeCaptureController extends greta.auxiliary.player.ogre.ca
         listFiles = dir.listFiles();
     }
 
+    /**
+     *
+     * @throws IOException
+     */
     @Override
     public void screenShot() {
         mustcapture = true;
@@ -70,7 +79,19 @@ public class FMLAttitudeCaptureController extends greta.auxiliary.player.ogre.ca
                     Logger.getLogger(PlanCapturecontroller.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 iscapturing = true;
-                filereader.load(f.getAbsolutePath());
+                try {
+                    filereader.load(f.getAbsolutePath());
+                } catch (TransformerException ex) {
+                    Logger.getLogger(FMLAttitudeCaptureController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SAXException ex) {
+                    Logger.getLogger(FMLAttitudeCaptureController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParserConfigurationException ex) {
+                    Logger.getLogger(FMLAttitudeCaptureController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (JMSException ex) {
+                    Logger.getLogger(FMLAttitudeCaptureController.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(FMLAttitudeCaptureController.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 while (iscapturing) {
 
 

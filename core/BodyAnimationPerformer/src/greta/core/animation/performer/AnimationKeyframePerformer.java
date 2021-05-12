@@ -236,6 +236,7 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
         //build by IK
         LinkedList<ExpressiveFrame> leftArm = new LinkedList<>();
         LinkedList<ExpressiveFrame> rightArm = new LinkedList<>();
+        
         propagateArm(leftGestureKeyframe, leftArm);
         propagateArm(rightGestureKeyframe, rightArm);
 

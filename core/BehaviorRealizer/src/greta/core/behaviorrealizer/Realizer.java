@@ -142,6 +142,9 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         keyframes.sort(keyframeComparator);
 
         // Gaze keyframes for the eyes are generated last
+        for(Keyframe k:keyframes){
+            System.out.println(k.getModality());
+        }
         gazeGenerator.generateEyesKeyframes(keyframes);
 
         faceGenerator.findExistingAU(keyframes);

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<rule_input>
+  <project>VHTOOLKIT</project>
+  <nvb_rules>
+    <!-- *********************************** ANIMATIONS ********************************** -->
+    <!--   you animation  -->
+    <rule keyword="you_animation" priority="5">
+      <animation>
+        <posture name="ChrRachel_ChrBrad@Idle01">
+          <clip>ChrRachel_ChrBrad@Idle01_YouLf01</clip>
+          <clip>ChrRachel_ChrBrad@Idle01_PleaBt02</clip>
+          <clip>ChrRachel_ChrBrad@Idle01_OfferBoth01</clip>
+        </posture>
+        <posture name="ChrRachel_ChrBrad@Idle03">
+          <clip>ChrRachel_ChrBrad@Idle03_YouLf01</clip>
+        </posture>
+        <posture name="ChrRachel_ChrBrad@Idle02">
+          <clip>ChrRachel_ChrBrad@Idle02_YouLf01</clip>
+        </posture>
+      </animation>
+      <pattern>you</pattern>
+      <pattern>your</pattern>
+      <pattern>yours</pattern>
+    </rule>
+    <!--   me animation  -->
+    <rule keyword="me_animation" priority="5">
+      <animation>
+        <posture name="ChrRachel_ChrBrad@Idle01">
+          <clip>ChrRachel_ChrBrad@Idle01_MeLf01</clip>
+        </posture>
+        <posture name="ChrRachel_ChrBrad@Idle03">
+          <clip>ChrRachel_ChrBrad@Idle03_MeLf01</clip>
+        </posture>
+      </animation>
+      <pattern>i</pattern>
+      <pattern>me</pattern>
+      <pattern>my</pattern>
+      <pattern>mine</pattern>
+    </rule>
+    
+    
+   
+    <!--   question animation  -->
+    <rule keyword="question_animation" priority="1">
+      <pattern>where</pattern>
+      <pattern>who</pattern>
+      <pattern>how</pattern>
+      <pattern>when</pattern>      
+      <animation>
+        <posture name="ChrRachel_ChrBrad@Idle01">
+          <clip>ChrRachel_ChrBrad@Idle01_YouLf01</clip>
+          <clip>ChrRachel_ChrBrad@Idle01_PleaBt02</clip>
+          <clip>ChrRachel_ChrBrad@Idle01_OfferBoth01</clip>
+        </posture>
+        <posture name="ChrRachel_ChrBrad@Idle03">
+          <clip>ChrRachel_ChrBrad@Idle03_YouLf01</clip>
+        </posture>
+      </animation>
+    </rule>
+    <!-- add new rule here -->
+  </nvb_rules>
+</rule_input>

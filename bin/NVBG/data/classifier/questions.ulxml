@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<utterances>
+    <utterance stopTime="6" startTime="1313495817" speaker="user" id="user0001" endTime="6">
+        <emotion timeOffset="6">NEUTRAL</emotion>
+        <text timeOffset="6">Hi</text>
+        <tone timeOffset="6">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313501941" speaker="user" id="user0002" endTime="2">
+        <emotion timeOffset="2">NEUTRAL</emotion>
+        <text timeOffset="2">How are you?</text>
+        <tone timeOffset="2">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313507173" speaker="user" id="user0003" endTime="1">
+        <emotion timeOffset="1">NEUTRAL</emotion>
+        <text timeOffset="1">What's your name?</text>
+        <tone timeOffset="1">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313512212" speaker="user" id="user0004" endTime="2">
+        <emotion timeOffset="2">NEUTRAL</emotion>
+        <text timeOffset="2">What do you do?</text>
+        <tone timeOffset="2">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313516077" speaker="user" id="user0005" endTime="3">
+        <emotion timeOffset="3">NEUTRAL</emotion>
+        <text timeOffset="3">What's the toolkit?</text>
+        <tone timeOffset="3">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313520812" speaker="user" id="user0006" endTime="2">
+        <emotion timeOffset="2">NEUTRAL</emotion>
+        <text timeOffset="2">What modules are in the toolkit?</text>
+        <tone timeOffset="2">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313525523" speaker="user" id="user0007" endTime="2">
+        <emotion timeOffset="2">NEUTRAL</emotion>
+        <text timeOffset="2">Where can I find more information about the toolkit?</text>
+        <tone timeOffset="2">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313529941" speaker="user" id="user0008" endTime="2">
+        <emotion timeOffset="2">NEUTRAL</emotion>
+        <text timeOffset="2">Who made you?</text>
+        <tone timeOffset="2">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313533971" speaker="user" id="user0009" endTime="2">
+        <emotion timeOffset="2">NEUTRAL</emotion>
+        <text timeOffset="2">What is ICT?</text>
+        <tone timeOffset="2">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313537803" speaker="user" id="user0010" endTime="1">
+        <emotion timeOffset="1">NEUTRAL</emotion>
+        <text timeOffset="1">What else can you do?</text>
+        <tone timeOffset="1">DOWN</tone>
+    </utterance>
+    <utterance stopTime="0" startTime="1313543075" speaker="user" id="user0011" endTime="1">
+        <emotion timeOffset="1">NEUTRAL</emotion>
+        <text timeOffset="1">How old are you?</text>
+        <tone timeOffset="1">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313547651" speaker="user" id="user0012" endTime="1">
+        <emotion timeOffset="1">NEUTRAL</emotion>
+        <text timeOffset="1">Nice house.</text>
+        <tone timeOffset="1">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313552058" speaker="user" id="user0013" endTime="1">
+        <emotion timeOffset="1">NEUTRAL</emotion>
+        <text timeOffset="1">Is that the mona lisa?</text>
+        <tone timeOffset="1">DOWN</tone>
+    </utterance>
+    <utterance stopTime="1" startTime="1313556586" speaker="user" id="user0014" endTime="1">
+        <emotion timeOffset="1">NEUTRAL</emotion>
+        <text timeOffset="1">See you later.</text>
+        <tone timeOffset="1">DOWN</tone>
+    </utterance>
+</utterances>

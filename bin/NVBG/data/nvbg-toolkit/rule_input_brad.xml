@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<rule_input>
+<project>VHTOOLKIT</project>
+
+<nvb_rules>
+
+	<!-- rule_input_iraqi.xml -->
+	<!-- This file lays out the communicative derivation from the surface text --> 
+
+	<!-- *********************************** NON-ANIMATIONS ********************************** -->
+	<rule keyword="first_NP" priority="5" >
+		<pattern>first_NP</pattern>
+	</rule>
+
+	<rule keyword="noun_phrase" priority="5" >
+		<pattern>NP</pattern>
+	</rule>
+
+	<rule keyword="interjection" priority="1" >
+		<pattern>INTJ</pattern>
+	</rule>
+
+	<!-- affirmation -->
+	<rule keyword="affirmation" priority="2" >
+		<pattern>yes</pattern>
+		<pattern>yeah</pattern>
+		<pattern>yes,</pattern>
+	</rule>
+	
+	<!-- inclusivity -->
+	<rule keyword="inclusivity" priority="4" >
+		<pattern>everything</pattern>
+		<pattern>all</pattern>
+		<pattern>whole</pattern>
+		<pattern>plenty</pattern>
+		<pattern>full</pattern>
+		<pattern>completely</pattern>
+	</rule>
+	
+	<!-- intensification -->
+	<rule keyword="intensification" priority="4" >
+		<pattern>really</pattern>
+		<pattern>very</pattern>
+		<pattern>quite</pattern>		
+		<pattern>wonderful</pattern>
+		<pattern>great</pattern>
+		<pattern>absolutely</pattern>
+		<pattern>huge</pattern>
+		<pattern>fantastic</pattern>
+		<pattern>so</pattern>
+		<pattern>amazing</pattern>
+		<pattern>important</pattern>
+	</rule>
+	
+	<!-- emo_positive -->
+	<rule keyword="emo_positive" priority="1" >
+		<pattern>good</pattern>
+		<pattern>nice</pattern>
+		<pattern>great</pattern>
+	</rule>
+
+  <!--   idle gaze behavior  -->
+  <rule keyword="idle_gaze" priority="1" >
+    <pattern>DOWNLEFT</pattern>
+    <pattern>DOWNRIGHT</pattern>
+    <pattern>POLAR 0</pattern>
+  </rule>
+
+	<!-- *********************************** ANIMATIONS ********************************** -->
+	
+	<!--   you animation  -->
+	<rule keyword="you_animation" priority="5" >
+		<pattern>you</pattern>
+		<pattern>your</pattern>
+		<pattern>yours</pattern>
+		<animation>
+			<posture name="CrossedArms">				
+				<clip>CrossedArms_RArm_GestureYou02</clip>
+				<clip>CrossedArms_RArm_GestureYouPalmUp</clip>
+			</posture>		
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_RArm_GestureOffer</clip>
+				<clip>HandsAtSide_RArm_LowBeat</clip>
+				<clip>HandsAtSide_RArm_MidBeat</clip>
+				<clip>HandsAtSide_Arms_Beat</clip>
+				<clip>HandsAtSide_Arms_Chop</clip>
+				<clip>HandsAtSide_RArm_Chop</clip>
+				<clip>HandsAtSide_RArm_FistsChop</clip>
+				<clip>HandsAtSide_RArm_LowBeat</clip>
+				<clip>HandsAtSide_RArm_MidBeat</clip>
+			</posture>
+			<posture name="HandsOnHip">
+				<clip>HandsOnHip_RArm_MidBeat</clip>
+			</posture>
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_RArm_You</clip>
+				<clip>LHandOnHip_RArm_GestureOffer</clip>
+			</posture>
+			<posture name="Chair">
+				<clip>Chair_You_Small</clip>
+				<clip>Chair_You</clip>
+			</posture>
+		</animation>
+	</rule>
+	
+	<!--   me animation  -->
+	<rule keyword="me_animation" priority="5" >
+		<pattern>i</pattern> 
+		<pattern>me</pattern>
+		<pattern>my</pattern>
+		<pattern>mine</pattern>		
+		<animation>
+			<posture name="CrossedArms">
+				<clip>CrossedArms_RArm_GestureMe</clip>
+				<clip>CrossedArms_Arms_GestureMe</clip>
+			</posture>		
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_RArm_GestureMe</clip>
+			</posture>
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_RArm_GestureMe</clip>
+			</posture>
+			<posture name="Chair">
+				<clip>Chair_Me_Small</clip>
+				<clip>Chair_Me</clip>
+			</posture>
+		</animation>
+	</rule>
+	
+	<rule keyword="statement_animation" priority="2" >
+		<pattern>is</pattern>
+		<pattern>are</pattern>
+		<pattern>were</pattern>
+		<pattern>was</pattern>
+		<pattern>have been</pattern>
+		<pattern>has been</pattern>
+		<pattern>at</pattern>
+		<pattern>stands</pattern>
+		<pattern>come</pattern>
+		<pattern>like</pattern>
+		<animation>
+			<posture name="CrossedArms">				
+				<clip>CrossedArms_RArm_GestureYou02</clip>
+				<clip>CrossedArms_RArm_GestureYouPalmUp</clip>
+			</posture>		
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_RArm_GestureOffer</clip>
+				<clip>HandsAtSide_RArm_LowBeat</clip>
+				<clip>HandsAtSide_RArm_MidBeat</clip>
+				<clip>HandsAtSide_Arms_Beat</clip>
+				<clip>HandsAtSide_Arms_Chop</clip>
+				<clip>HandsAtSide_RArm_Chop</clip>
+				<clip>HandsAtSide_RArm_FistsChop</clip>
+				<clip>HandsAtSide_RArm_LowBeat</clip>
+				<clip>HandsAtSide_RArm_MidBeat</clip>
+			</posture>
+			<posture name="HandsOnHip">
+				<clip>HandsOnHip_RArm_MidBeat</clip>
+			</posture>
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_RArm_You</clip>
+				<clip>LHandOnHip_RArm_GestureOffer</clip>
+			</posture>
+			<posture name="Chair">
+				<clip>Chair_You_Small</clip>
+				<clip>Chair_You</clip>
+			</posture>
+		</animation>
+	</rule>
+		
+	<!--   negation animation  -->
+	<rule keyword="negation_animation" priority="2" >
+		<pattern>no</pattern>
+		<pattern>not</pattern>
+		<pattern>nothing</pattern>
+		<pattern>cannot</pattern>
+		<pattern>can't</pattern>
+		<pattern>cant</pattern>
+		<pattern>don't</pattern>
+		<pattern>dont</pattern>
+		<pattern>didn't</pattern>
+		<pattern>couldn't</pattern>
+		<pattern>couldnt</pattern>
+		<pattern>isn't</pattern>
+		<pattern>isnt</pattern>
+		<pattern>wasn't</pattern>
+		<pattern>wasnt</pattern>
+		<animation>
+			<posture name="CrossedArms">
+				<clip>CrossedArms_RArm_GestureDismiss</clip>
+				<clip>CrossedArms_RArm_NegativeStop</clip>
+				<clip>CrossedArms_Arms_GestureStop</clip>
+				<clip>CrossedArms_Arms_CalmDown</clip>
+			</posture>		
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_RArm_Dismiss</clip>
+				<clip>HandsAtSide_LArm_Dismiss</clip>
+				<clip>HandsAtSide_Arms_GestureStop</clip>				
+			</posture>
+			<posture name="HandsOnHip">
+				<clip>HandsOnHip_RArm_Dismiss</clip>
+				<clip>HandsOnHip_RArm_Stop</clip>
+				<clip>HandsOnHip_Arms_GestureStop</clip>
+				<clip>HandsOnHip_Arms_GestureDismiss</clip>
+			</posture>
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_RArm_Dismiss</clip>
+				<clip>LHandOnHip_RArm_Dismiss2</clip>
+				<clip>LHandOnHip_Arms_GestureDismiss</clip>
+			</posture>
+			<posture name="Chair">
+				<clip>Chair_Stop</clip>
+			</posture>		
+		</animation>
+	</rule>
+	
+	<!--   contrast animation  -->
+	<rule keyword="contrast_animation" priority="4" >
+		<pattern>but</pattern>
+		<pattern>however</pattern>
+		<animation>				
+			<posture name="CrossedArms">
+				<clip>CrossedArms_RArm_MidBeat</clip>
+				<clip>CrossedArms_RArm_GestureHowever</clip>
+			</posture>	
+			<posture name="HandsOnHip">
+				<clip>HandsOnHip_RArm_MidBeat</clip>
+			</posture>
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_RArm_Chop</clip>
+				<clip>HandsAtSide_RArm_LowBeat</clip>
+				<clip>HandsAtSide_RArm_IndicateRight</clip>
+				<clip>HandsAtSide_LArm_IndicateLeft</clip>
+			</posture>
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_RArm_Contemplate</clip>
+			</posture>			
+			<posture name="Chair">
+				<clip>Chair_Small_Beat</clip>
+			</posture>		
+		</animation>
+	</rule>	
+	
+	<!--   assumption animation  -->
+	<rule keyword="assumption_animation" priority="3">
+		<pattern>maybe</pattern>
+		<pattern>perhaps</pattern>
+		<animation>			
+			<posture name="CrossedArms">
+				<clip>CrossedArms_RArm_GestureHowever</clip>
+				<clip>CrossedArms_RArm_MidBeat</clip>
+			</posture>		
+			<posture name="HandsOnHip">
+				<clip>HandsOnHip_RArm_MidBeat</clip>
+			</posture>
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_RArm_Chop</clip>
+				<clip>HandsAtSide_RArm_LowBeat</clip>
+				<clip>HandsAtSide_RArm_IndicateRight</clip>
+				<clip>HandsAtSide_LArm_IndicateLeft</clip>
+			</posture>
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_RArm_Contemplate</clip>
+				<clip>LHandOnHip_RArm_LowBeat</clip>
+			</posture>		
+			<posture name="Chair">
+				<clip>Chair_Small_Beat</clip>
+			</posture>		
+		</animation>
+	</rule>
+	
+	<!--   rhetorical animation  -->
+	<rule keyword="rhetorical_animation" priority="2" >
+		<pattern>why</pattern>
+		<animation>
+			<posture name="CrossedArms">
+				<clip>CrossedArms_Arms_GestureHead</clip>
+				<clip>CrossedArms_Arms_GestureWhat</clip>
+				<clip>CrossedArms_Arms_GestureWhy</clip>			
+				<clip>CrossedArms_Arms_Why</clip>			
+				<clip>CrossedArms_RArm_GestureUp</clip>
+				<clip>CrossedArms_RArm_IndicateUp</clip>
+			</posture>		
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_Arms_GestureWhy</clip>
+				<clip>HandsAtSide_RArm_Chop</clip>
+			</posture>
+			<posture name="HandsOnHip">
+				<clip>HandsOnHip_Arms_GestureWhy</clip>
+				<clip>HandsOnHip_RArm_MidBeat</clip>
+				<clip>HandsOnHip_RArm_LowBeat</clip>
+			</posture>
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_Arms_GestureWhat</clip>
+				<clip>LHandOnHip_Arms_GestureWhy</clip>
+				<clip>LHandOnHip_RArm_LowBeat</clip>
+				<clip>LHandOnHip_RArm_MidBeat</clip>
+				<clip>LHandOnHip_RArm_Contemplate</clip>
+			</posture>	
+			<posture name="Chair">
+				<clip>Chair_Small_Beat</clip>
+				<clip>Chair_Medium_Beat</clip>
+				<clip>Chair_Large_Beat</clip>
+				<clip>Chair_Emphasis</clip>
+			</posture>		
+		</animation>
+	</rule>
+
+	<!--   question animation  -->
+	<rule keyword="question_animation" priority="1">
+		<pattern>where</pattern>
+		<pattern>who</pattern>
+		<pattern>how</pattern>
+		<pattern>when</pattern>
+		<pattern>do</pattern>
+		<animation>
+			<posture name="CrossedArms">
+				<clip>CrossedArms_Arms_Beat</clip>
+				<clip>CrossedArms_Arms_GestureWhat</clip>
+				<clip>CrossedArms_Arms_GestureWhy</clip>
+				<clip>CrossedArms_Arms_Why</clip>
+				<clip>CrossedArms_RArm_GestureUp</clip>
+				<clip>CrossedArms_RArm_IndicateUp</clip>
+				<clip>CrossedArms_RArm_LowBeat</clip>
+				<clip>CrossedArms_RArm_MidBeat</clip>
+			</posture>		
+			<posture name="HandsOnHip">
+				<clip>HandsOnHip_RArm_Beat</clip>
+			</posture>		
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_Arms_Chop</clip>
+				<clip>HandsAtSide_Arms_GestureWhy</clip>
+				<clip>HandsAtSide_RArm_Chop</clip>
+				<clip>HandsAtSide_RArm_GestureOffer</clip>
+			</posture>		
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_Arms_GestureWhat</clip>
+				<clip>LHandOnHip_RArm_Contemplate</clip>
+				<clip>LHandOnHip_RArm_LowBeat</clip>
+				<clip>LHandOnHip_RArm_MidBeat</clip>
+			</posture>		
+			<posture name="Chair">
+				<clip>Chair_Small_Beat</clip>
+				<clip>Chair_Medium_Beat</clip>
+			</posture>			
+		</animation>
+	</rule>
+
+	<!--   deictic animation  -->
+	<rule keyword="deictic_animation" priority="5">
+		<pattern>there</pattern>
+		<animation>
+			<posture name="CrossedArms">
+				<clip>CrossedArms_RArm_SweepRight</clip>
+			</posture>		
+			<posture name="HandsOnHip">
+				<clip>HandsOnHip_RArm_IndicateRight</clip>
+			</posture>		
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_LArm_IndicateLeft</clip>
+				<clip>HandsAtSide_RArm_IndicateRight</clip>
+			</posture>	
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_RArm_IndicateLeft</clip>				
+			</posture>		
+			<posture name="Chair">
+				<clip>Chair_Indicate_Left</clip>
+			</posture>	
+		</animation>
+	</rule>
+	
+	<!--   first_VP animation  -->
+	<rule keyword="first_VP" priority="5" >		
+		<pattern>first_VP</pattern>		
+		<animation>
+			<posture name="CrossedArms">				
+				<clip>CrossedArms_RArm_LowBeat</clip>
+				<clip>CrossedArms_RArm_MidBeat</clip>
+				<clip>CrossedArms_Arms_Beat</clip>
+				<clip>CrossedArms_RArm_SoftChop</clip>
+			</posture>		
+			<posture name="HandsOnHip">
+				<clip>HandsOnHip_RArm_MidBeat</clip>
+				<clip>HandsOnHip_RArm_MidBeat_Loop</clip>
+			</posture>		
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_RArm_LowBeat</clip>
+				<clip>HandsAtSide_RArm_MidBeat</clip>
+				<clip>HandsAtSide_Arms_Beat</clip>
+				<clip>HandsAtSide_Arms_GestureWhy</clip>
+			</posture>	
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_RArm_LowBeat</clip>
+				<clip>LHandOnHip_RArm_MidBeat</clip>
+				<clip>LHandOnHip_RArm_Contemplate</clip>
+			</posture>
+			<posture name="Chair">
+				<clip>Chair_Small_Beat</clip>
+				<clip>Chair_Medium_Beat</clip>
+			</posture>		
+		</animation>
+	</rule>
+	
+	<!--   obligation animation  -->
+	<rule keyword="obligation_animation" priority="5" >
+		<pattern>must</pattern>		
+		<animation>
+			<posture name="CrossedArms">
+				<clip>CrossedArms_Arms_Chop</clip>
+				<clip>CrossedArms_RArm_Chop</clip>
+				<clip>CrossedArms_RArm_SoftChop</clip>
+			</posture>		
+			<posture name="HandsOnHip">
+				<clip>HandsAtSide_Arms_Chop</clip>
+				<clip>HandsAtSide_RArm_Chop</clip>
+				<clip>HandsAtSide_RArm_FistsChop</clip>
+			</posture>		
+			<posture name="HandsAtSide">
+				<clip>HandsAtSide_Arms_Chop</clip>
+				<clip>HandsAtSide_RArm_Chop</clip>
+				<clip>HandsAtSide_RArm_FistsChop</clip>
+			</posture>	
+			<posture name="LHandOnHip">
+				<clip>LHandOnHip_Arms_Chop</clip>
+				<clip>LHandOnHip_RArm_Chop</clip>
+				<clip>LHandOnHip_RArm_ContainGesture</clip>
+				<clip>LHandOnHip_RArm_FistHand</clip>
+			</posture>
+			<posture name="Chair">
+				<clip>Chair_Small_Beat</clip>
+				<clip>Chair_Medium_Beat</clip>
+			</posture>		
+		</animation>
+	</rule>
+
+
+
+  <!-- add new rule here -->
+
+</nvb_rules>
+</rule_input>

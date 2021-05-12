@@ -1,0 +1,6 @@
+-fwdflat no
+-bestpath no
+-lm ..\..\data\VHBuilder\Scenarios\ExampleScenario\lm.arpa
+-dict ./cmudict.0.7a_SPHINX_40
+-hmm ./wsj1
+-samprate 16000

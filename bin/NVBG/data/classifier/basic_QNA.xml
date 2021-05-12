@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<database version="1.0">
+    <domains>
+        <domain name="Wizard npc" id="z00001">
+            <utterances>z00000</utterances>
+        </domain>
+        <domain name="Anyone" id="z00003">
+            <utterances>z00002</utterances>
+        </domain>
+    </domains>
+    <lattices>
+        <lattice name="default" id="z00004">
+            <links>
+				<link value="6" question="z00002" answer="z00000" id="z00000"/>
+			</links>
+        </lattice>
+    </lattices>
+    <links/>
+    <nextID>6</nextID>
+    <states>
+        <state questions="z00003" links="z00004" answers="z00001" name="Anyone - Wizard npc" id="z00005">
+            <parameters>0.8999999761581421 0.8999999761581421 0.0</parameters>
+        </state>
+    </states>
+    <utterances>
+        <utterance id="z00000">
+            <field name="text">I am doing well.</field>
+            <field name="externalID">DummySpeaker</field>
+            <field name="modified">Tue Jan 29 18:20:43 PST 2013</field>
+			<field name="speaker"></field>
+        </utterance>
+        <utterance id="z00002">
+            <field name="text">How are you?</field>
+            <field name="externalID">Anybody-1</field>
+            <field name="modified">Wed Sep 12 17:02:32 PDT 2012</field>
+        </utterance>
+    </utterances>
+</database>

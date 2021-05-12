@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<rule_input>
+  <project>VHTOOLKIT</project>
+  <nvb_rules>
+    <!-- *********************************** ANIMATIONS ********************************** -->
+    <!--   you animation  -->
+	<rule keyword="you_animation" priority="5" >
+		<pattern>you</pattern>
+		<pattern>your</pattern>
+		<pattern>yours</pattern>
+		<animation>
+			<posture name="ChrUtah@IdleHandsAtSide01">
+				<clip>ChrUtah@IdleHandsAtSide01_BeatMidRt01</clip>
+				<clip>ChrUtah@IdleHandsAtSide01_BeatMidLf01</clip>
+			</posture>
+		</animation>
+	</rule>
+		
+	<!--   me animation  -->
+	<rule keyword="me_animation" priority="5" >
+		<pattern>me</pattern>
+		<pattern>my</pattern>
+		<pattern>mine</pattern>		
+		<animation>
+			<posture name="ChrUtah@IdleHandsAtSide01">
+				<clip>ChrUtah@IdleHandsAtSide01_BeatLowLf01</clip>
+				<clip>ChrUtah@IdleHandsAtSide01_BeatLowRt01</clip>
+			</posture>		
+		</animation>
+	</rule>
+			
+
+	<!--   question animation  -->
+	<rule keyword="question_animation" priority="1">
+		<pattern>where</pattern>
+		<pattern>who</pattern>
+		<pattern>how</pattern>
+		<pattern>when</pattern>
+		<pattern>do</pattern>
+		<animation>
+			<posture name="ChrUtah@IdleHandsAtSide01">
+				<clip>ChrUtah@IdleHandsAtSide01_BeatLowLf01</clip>
+				<clip>ChrUtah@IdleHandsAtSide01_BeatLowRt01</clip>
+				<clip>ChrUtah@IdleHandsAtSide01_BeatLowBt01</clip>
+			</posture>
+		</animation>
+	</rule>
+    <!-- add new rule here -->
+  </nvb_rules>
+</rule_input>

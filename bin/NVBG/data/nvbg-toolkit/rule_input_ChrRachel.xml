@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+
+<rule_input>
+<project>VHTOOLKIT</project>
+
+<nvb_rules>
+
+	<!-- rule_input_iraqi.xml -->
+	<!-- This file lays out the communicative derivation from the surface text --> 
+
+	<!-- *********************************** NON-ANIMATIONS ********************************** -->
+	<rule keyword="first_NP" priority="5" >
+		<pattern>first_NP</pattern>
+	</rule>
+
+	<rule keyword="noun_phrase" priority="5" >
+		<pattern>NP</pattern>
+	</rule>
+
+	<rule keyword="interjection" priority="1" >
+		<pattern>INTJ</pattern>
+	</rule>
+
+	<!-- affirmation -->
+	<rule keyword="affirmation" priority="2" >
+		<pattern>yes</pattern>
+		<pattern>yeah</pattern>
+		<pattern>yes,</pattern>
+	</rule>
+	
+	<!-- inclusivity -->
+	<rule keyword="inclusivity" priority="4" >
+		<pattern>everything</pattern>
+		<pattern>all</pattern>
+		<pattern>whole</pattern>
+		<pattern>plenty</pattern>
+		<pattern>full</pattern>
+		<pattern>completely</pattern>
+	</rule>
+	
+	<!-- intensification -->
+	<rule keyword="intensification" priority="4" >
+		<pattern>really</pattern>
+		<pattern>very</pattern>
+		<pattern>quite</pattern>		
+		<pattern>wonderful</pattern>
+		<pattern>great</pattern>
+		<pattern>absolutely</pattern>
+		<pattern>huge</pattern>
+		<pattern>fantastic</pattern>
+		<pattern>so</pattern>
+		<pattern>amazing</pattern>
+		<pattern>important</pattern>
+	</rule>
+	
+	<!-- emo_positive -->
+	<rule keyword="emo_positive" priority="1" >
+		<pattern>good</pattern>
+		<pattern>nice</pattern>
+		<pattern>great</pattern>
+	</rule>
+
+  <!--   idle gaze behavior  -->
+  <rule keyword="idle_gaze" priority="1" >
+    <pattern>DOWNLEFT</pattern>
+    <pattern>DOWNRIGHT</pattern>
+    <pattern>POLAR 0</pattern>
+  </rule>
+
+	<!-- *********************************** ANIMATIONS ********************************** -->
+	
+	<!--   you animation  -->
+	<rule keyword="you_animation" priority="5" >
+		<pattern>you</pattern>
+		<pattern>your</pattern>
+		<pattern>yours</pattern>
+		<pattern>your's</pattern>
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_OfferRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_YouLf01</clip>
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_YouLf01</clip>
+			</posture>
+		</animation>
+	</rule>
+	
+	<!--   me animation  -->
+	<rule keyword="me_animation" priority="5" >
+		<pattern>i</pattern> 
+		<pattern>me</pattern>
+		<pattern>my</pattern>
+		<pattern>mine</pattern>		
+		<pattern>i'm</pattern>	
+		<pattern>we're</pattern>	
+		<pattern>our</pattern>	
+		<pattern>us</pattern>	
+		<pattern>ours</pattern>	
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_MeRt01</clip>
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_MeLf01</clip>
+			</posture>
+		</animation>
+	</rule>
+	
+	<rule keyword="statement_animation" priority="2" >
+		<pattern>are</pattern>
+		<pattern>were</pattern>
+		<pattern>was</pattern>
+		<pattern>have been</pattern>
+		<pattern>has been</pattern>
+		<pattern>at</pattern>
+		<pattern>stands</pattern>
+		<pattern>come</pattern>
+		<pattern>like</pattern>
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatMidLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_OfferRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_PleaBt02</clip>								
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_OfferLf01</clip>
+                <clip>ChrRachel_ChrBrad@Idle03_ExampleLf01</clip>
+			</posture>
+		</animation>
+	</rule>
+		
+	<!--   negation animation  -->
+	<rule keyword="negation_animation" priority="2" >
+		<pattern>no</pattern>
+		<pattern>not</pattern>
+		<pattern>nothing</pattern>
+		<pattern>cannot</pattern>
+		<pattern>can't</pattern>
+		<pattern>cant</pattern>
+		<pattern>don't</pattern>
+		<pattern>dont</pattern>
+		<pattern>didn't</pattern>
+		<pattern>couldn't</pattern>
+		<pattern>couldnt</pattern>
+		<pattern>isn't</pattern>
+		<pattern>isnt</pattern>
+		<pattern>wasn't</pattern>
+		<pattern>wasnt</pattern>
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_NegativeLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_NegativeLf03</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BesidesLf02</clip>				
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_NegativeLf01</clip>
+                <clip>ChrRachel_ChrBrad@Idle03_NegativeBt01</clip>
+			</posture>	
+		</animation>
+	</rule>
+	
+	<!--   contrast animation  -->
+	<rule keyword="contrast_animation" priority="4" >
+		<pattern>but</pattern>
+		<pattern>however</pattern>
+		<pattern>many</pattern>
+		<pattern>verbal</pattern>
+		<pattern>research</pattern>		
+		<animation>				
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_BeatMidLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_PleaBt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_OfferRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_PleaBt02</clip>				
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_Shrug01</clip>
+			</posture>	
+		</animation>
+	</rule>	
+	
+	<!--   assumption animation  -->
+	<rule keyword="assumption_animation" priority="3">
+		<pattern>maybe</pattern>
+		<pattern>perhaps</pattern>
+		<animation>			
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_Shrug01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_Shrug02</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_OfferBt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_PleaBt01</clip>
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_Shrug01</clip>
+			</posture>	
+		</animation>
+	</rule>
+	
+	<!--   rhetorical animation  -->
+	<rule keyword="rhetorical_animation" priority="2" >
+		<pattern>why</pattern>
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_PleaBt01</clip>			
+				<clip>ChrRachel@IdleHandsAtSide01_PleaBt02</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_OfferRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_OfferBt01</clip>				
+				<clip>ChrRachel@IdleHandsAtSide01_Shrug01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_Shrug02</clip>				
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_Shrug01</clip>
+			</posture>	
+		</animation>
+	</rule>
+
+	<!--   question animation  -->
+	<rule keyword="question_animation" priority="1">
+		<pattern>where</pattern>
+		<pattern>who</pattern>
+		<pattern>how</pattern>
+		<pattern>when</pattern>
+		<pattern>do</pattern>
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatHighRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatMidLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_OfferRt01</clip>				
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_YouLf01</clip>
+			</posture>
+		</animation>
+	</rule>
+
+	<!--   deictic animation  -->
+	<rule keyword="deictic_animation" priority="5">
+		<pattern>there</pattern>
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatLowRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatHighRt01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_BeatMidLf01</clip>
+				<clip>ChrRachel@IdleHandsAtSide01_OfferRt01</clip>
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_YouLf01</clip>
+			</posture>
+		</animation>
+	</rule>
+	
+	<!--   first_VP animation  -->
+	<rule keyword="first_VP" priority="5" >		
+		<pattern>first_VP</pattern>		
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				
+			</posture>	
+		</animation>
+	</rule>
+	
+	<!--   obligation animation  -->
+	<rule keyword="obligation_animation" priority="5" >
+		<pattern>must</pattern>		
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">
+				<clip>ChrRachel@IdleHandsAtSide01_ChopLf01</clip>
+			</posture>
+			<posture name="ChrRachel_ChrBrad@Idle03">
+				<clip>ChrRachel_ChrBrad@Idle03_OfferLf01</clip>
+			</posture>		
+		</animation>
+	</rule>
+	
+	
+	<!--idle_animation  
+	<rule keyword="idle_animation" priority="5" >
+		<pattern>must</pattern>		
+		<animation>
+			<posture name="ChrRachel@IdleHandsAtSide01">				
+		
+			</posture>			
+		</animation>
+	</rule> -->
+	
+
+
+
+
+  <!-- add new rule here -->
+
+</nvb_rules>
+</rule_input>

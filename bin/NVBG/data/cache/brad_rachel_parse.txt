@@ -1,0 +1,26 @@
+Hello and welcome to the VHTK I am Brad.
+(S1 (INTJ (INTJ (UH Hello)) (CC and) (INTJ (UH welcome) (PP (TO to) (NP (NP (DT the) (NN VHTK)) (SBAR (S (NP (PRP I)) (VP (AUX am) (NP (NNP Brad.))))))))))
+And I am Rachel.
+(S1 (S (CC And) (NP (PRP I)) (VP (AUX am) (NP (NNP Rachel.)))))
+We are virtual humans.
+(S1 (S (NP (PRP We)) (VP (AUX are) (NP (JJ virtual) (NN humans.)))))
+ranger utah cant be bartender if he becomes sheriff.
+(S1 (S (NP (NNP ranger) (NNP utah) (NN cant)) (VP (AUX be) (ADJP (ADJP (JJR bartender)) (SBAR (IN if) (S (NP (PRP he)) (VP (VBZ becomes) (ADJP (JJ sheriff.)))))))))
+what utah cant be bartender if he becomes sheriff ?
+(S1 (SBARQ (WHNP (WP what)) (SQ (NNP utah) (NP (NN cant)) (VP (AUX be) (ADJP (JJR bartender)) (SBAR (IN if) (S (NP (PRP he)) (VP (VBZ becomes) (ADJP (JJ sheriff))))))) (. ?)))
+Okay utah can be angry if he becomes sheriff.
+(S1 (FRAG (ADJP (JJ Okay)) (S (NP (NNP utah)) (VP (MD can) (VP (AUX be) (ADJP (JJ angry)) (SBAR (IN if) (S (NP (PRP he)) (VP (VBZ becomes) (ADJP (JJ sheriff.))))))))))
+Wonderful utah can be absolutely happy if he becomes sheriff.
+(S1 (S (NP (JJ Wonderful) (NNP utah)) (VP (MD can) (VP (AUX be) (ADJP (RB absolutely) (JJ happy)) (SBAR (IN if) (S (NP (PRP he)) (VP (VBZ becomes) (NP (NN sheriff.)))))))))
+ranger utah cant be bartender.
+(S1 (S (NP (NNP ranger) (NNP utah) (NN cant)) (VP (AUX be) (VP (VBN bartender.)))))
+That right now is the open sewer for our industrial civilization as it's currently organized.
+(S1 (SBAR (WHNP (WDT That)) (S (ADVP (RB right) (RB now)) (VP (AUX is) (NP (NP (DT the) (JJ open) (NN sewer)) (PP (IN for) (NP (PRP$ our) (JJ industrial) (NN civilization)))) (PP (IN as) (NP (NP (NN it's)) (VP (ADVP (RB currently)) (VBN organized.))))))))
+Hello, My name is Camille.
+(S1 (S (RB Hello,) (NP (PRP$ My) (NN name)) (VP (AUX is) (NP (NNP Camille.)))))
+I am one of the virtual character of the Greta platform.
+(S1 (S (NP (PRP I)) (VP (AUX am) (NP (NP (CD one)) (PP (IN of) (NP (NP (DT the) (JJ virtual) (NN character)) (PP (IN of) (NP (DT the) (NNP Greta) (NN platform.)))))))))
+I hope that this demo gave you an idea about what I can do.
+(S1 (S (NP (PRP I)) (VP (VBP hope) (SBAR (IN that) (S (NP (DT this) (NN demo)) (VP (VBD gave) (NP (PRP you)) (NP (NP (DT an) (NN idea)) (SBAR (WHNP (RB about) (WP what)) (S (NP (PRP I)) (VP (MD can) (VP (VB do.))))))))))))
+I hope that this demo gave you an idea about what I can do.
+(S1 (S (NP (PRP I)) (VP (VBP hope) (SBAR (IN that) (S (NP (DT this) (NN demo)) (VP (VBD gave) (NP (PRP you)) (NP (NP (DT an) (NN idea)) (SBAR (WHNP (RB about) (WP what)) (S (NP (PRP I)) (VP (MD can) (VP (VB do.))))))))))))

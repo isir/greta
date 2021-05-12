@@ -1,0 +1,341 @@
+What is your name
+What is your name miss
+What's your name madam
+Lady, what's your name
+What is your name, sir
+What can you tell me about the toolkit, Brad
+Rachel, who built all this
+What do you do around here Rachel
+Rachel, tell me about the toolkit.
+How do you know Brad
+Are you with him
+Is she with you
+What is the toolkit
+I'm not that great.
+I've been better.
+Hanging in there.
+I'm tired.
+I'm so so.
+How's it hangin
+How is it hanging
+How are you
+How is it going
+What's up
+What's happening
+How are you doing
+How's your day going
+Can you dance
+Go on, dance for me.
+Go Trojans!
+So you are part of USC
+Tell me about USC.
+What is USC like
+Do you have a girlfriend
+How have you been
+Are you having a good day
+What is a virtual human
+What do you think of sergeant Star
+Tell me about some of the projects at ICT.
+Tell me more about the institute.
+What else can you tell me about ICT
+Can you tell me more about the institute
+You look lonely.
+What modules are in the toolkit
+Good to see you.
+Great to see you again.
+I am well.
+I am doing great.
+I'm doing pretty well.
+I'm good.
+Good
+I am okay.
+I'm ok.
+It is nice to see you again.
+It is nice to meet you.
+Great to meet you.
+Happy to make your acquaintance.
+What can you tell me about the toolkit
+How can I use the virtual human toolkit
+What is the tool kit
+So what is this toolkit
+What's this Virtual Human Toolkit you keep talking about
+What can the tool kit do
+You look stupid.
+Your body looks weird.
+You are ugly.
+Why don't you look better
+Why don't you have better graphics
+Can you walk
+Why are you not walking
+Your voice is weird.
+You sound like a robot.
+You sound stupid.
+Who made you
+Who built you
+By whom were you created
+Why are you sad
+Are there more like you
+Why are you depressed
+Where are you from
+What can you tell me about the Institute for Creative Technologies
+Tell me about the institute.
+What does the Institute for Creative Technologies do
+What is the institute
+What does ICT mean
+What is the nvbg
+What does the non verbal behavior generator do
+How does the NPCEditor work
+What can you tell me about the npc editor
+What is SmartBody
+How does smart body work
+Tell me about SmartBody.
+What can you tell me about SmartBody
+What does nvbg stand for
+What is the nonverbal behavior generator
+How do you like the weather
+What's the weather like there
+How do you work
+How does this work
+What is your job
+So you have been around for thirty one years
+Are you really that old
+You don't look old.
+I like your shoes.
+I like your shirt.
+I like your jeans.
+I like your pants.
+I like your belt.
+I like your hair
+I like your face.
+I like your eyes.
+Your eyes are creepy.
+You pronounce speech wrong.
+You say speech wrong.
+Good morning.
+Good evening.
+Good night.
+Where can I find more information about the Virtual Human Toolkit
+Where can I find more info on the toolkit
+Can you tell me where to find more information on the toolkit
+Is there a website for the toolkit
+Does the Virtual Human Toolkit have a website
+Who are you
+Please state you full name
+What do you do
+In what way can you be useful to me
+What do I do now
+I'm confused.
+I don't know what to do.
+What can I do
+What is the toolkit website again
+What do you think of Ed Fast
+What do you think of Virtual Patient
+What do you think of Justin
+What do you think of Justina
+What do you think of Ada and Grace
+What do you think of Utah
+What do you think of Harmony
+What do you think of Rio
+What do you think of the doctor, captain and elder
+What do you think of doctor Perez
+What do you think of elder al-Hassan
+What do you think of captain Kirk
+What do you think of SASO
+What do you think of the graphics lab
+What do you think of mixed reality
+What do you think about the gaming initiatives at ICT
+What do you think about the learning sciences
+What do you think about storytelling at ICT
+What do you think of Randy Hill
+Do you have a website
+What is your web site
+So what do I do now
+Can you jump
+Tell me more about yourself.
+Are you useful
+What are you
+What are you all about
+What are you doing here
+What else can you tell me
+Can you talk about something else
+Tell me more.
+Are you sure
+Are you certain
+How old are you
+What is your age
+Can you say that again
+Sorry, what was that
+Pardon me
+What was that
+What did you say
+Can you repeat what you just said
+I didn't understand what you just said.
+Can you repeat that
+Do you have anything more to add
+Anything else
+Can you tell me more about it
+How is it to be a virtual character
+Is it fun to create a virtual character
+Can you really understand what I'm saying
+Do you ever sleep
+Do you need to sleep
+Can you tell me about the tool kit
+Why don't you have to sleep
+Do you ever eat
+Do you ever get thirsty
+How tall are you
+How do you talk
+What kind of text to speech engine do you use
+Are you using tts
+What game engine is that
+How are you rendered
+Is that Ogre
+What is the rendering engine
+What is Unity
+Tell me about Watson.
+How does Watson work
+What is Watson
+Tell me about Ogre
+How do you move your arms
+Can you blink
+Can you move your arms
+Why are you not always moving your arms in the same way
+Can you see me
+Hello.
+What is your first name
+What's your name again
+Do you like your name
+Smith sounds kinda boring.
+Hi.
+Yo.
+Hey there, Brad.
+That sounds awesome.
+You look awesome.
+You look great.
+That sounds pretty cool.
+I like you.
+I don't like you.
+You are cool.
+I'm gonna make you an offer you can't refuse.
+You are fun.
+You are my best friend.
+You are stupid.
+You are silly.
+I can't understand you.
+You are hard to understand.
+Can you nod your head
+Are there others like you
+Why are you hands going through your body
+You have some excellent moves.
+Where is your shadow
+Do you always wear the same clothes
+Can you smile
+Is the toolkit open source
+What does ICT stand for
+Tell me about ICT.
+Why is it called the NPCEditor
+Why is there no speech recognition
+Does the toolkit have a speechrecognizer
+Can I use a speech recognizer
+Does speech recognition work
+What are the major components of the toolkit
+What are you wearing
+What's up with your clothes
+You have a weird outfit.
+Why are your jeans up so high
+What clothes are you wearing
+Tell me about the toolkit.
+Your arms just went inside your belly.
+You seem to be popping a lot.
+Can you see what I am doing
+Tell me about the NPCEditor.
+What is the npc editor.
+You just gestured through your stomach.
+Do you like being a virtual human
+What are you up to
+Do you like your outfit
+Where did your voice come from
+You sound weird.
+Do you like the toolkit
+Is it sunny
+Is it warm
+Is it cold
+Is it raining
+Is it snowing
+Is the weather nice
+Do you have a brain
+Are you alive
+Why should I talk to you
+Shut up
+Who wrote your lines
+Are you funny
+Do you like pizza
+What food do you like
+What's your favorite food
+Sorry
+Do you like your job
+Did you go to USC
+Where did you go to school
+What's the meaning of life
+Pretty bad actually.
+You sound repetitive.
+You say the same things over and over again.
+Why do you say the same things all the time
+Why do I want to use this software
+What are things I can ask you
+How do I change your voice
+Why didn't you answer my question
+Do you know eliza
+What is Ogre
+Can you look at me
+What is ICT
+What is SAPI
+Thank you for talking to me
+Thanks.
+Thank you.
+Good bye.
+Goodbye.
+Bye.
+Bye bye.
+See you later.
+Have a good day.
+Have a good night.
+Why can't I talk to you using my voice
+How do I contact I C T
+Do you like me
+Why do you sound like a woman
+What is your phone number
+What is RDECOM
+Who funded this research
+Who paid for all this
+Can you do anything else besides answering questions
+Who can use you
+How much do you cost
+I see
+OK
+Allright
+What kind of statistics does the NPC Editor use
+What am I doing now
+sup
+Is that the Mona Lisa
+Nice painting.
+Is that you in the painting behind you
+What kind of books do you read
+What is the last book you have read
+Interesting pictures.
+What kind of pictures do you have on the wall
+What's that statue
+I see a statue on the table.
+You have a nice house.
+Is this your house
+Nice room.
+Nice lighting.
+I like the lighting and shadows.
+Great lighting effects.
+How do I turn shadows on
+Can I turn off the shadows
+How do I look around
+Can I look around
+Can you demonstrate text to speech
+Can you demo TTS
+Can you speak like a robot

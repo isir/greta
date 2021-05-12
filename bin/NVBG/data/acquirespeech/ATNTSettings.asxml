@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<acquireSpeech version="2" mouseLocked="false" extraSecondsBeforeUtterance="0.25" extraSecondsAfterUtterance="0.25" id="root">
+    <window y="0" x="0" width="720" selectedViewIndex="0" height="480"/>
+    <vhmsg id="vhmsg" scope="DEFAULT_SCOPE" address="localhost" connected="false"/>
+    <speakers>
+        <speaker>user</speaker>
+    </speakers>
+    <inputs>
+        <audioDevice source="Primary Sound Capture Driver" resultVisible="true" enabled="true" speaker="user" id="mic" name="Microphone">
+            <sonicTextDetector address="localhost:5555" connected="true" id="mic_text" name="Text"/>
+            <sessionFile file="Microphone_session.wav" enabled="false" id="mic_sessionFile" name="Record session"/>
+            <utteranceFile file="Microphone_utterance.wav" enabled="false" id="mic_utteranceFile" name="Record utterances"/>
+        </audioDevice>
+    </inputs>
+    <actions>
+        <action targetComponentID="mic" command="toggleUtteranceRecording" mode="pushToTalk">
+            <bindings>
+                <mouse shortcut="button1"/>
+                <key shortcut="pressed 1" condition="WHEN_FOCUSED"/>
+            </bindings>
+            <disabledSelectedState name="Don't interrupt. Disabled until I'm done" background="#ffff80ff"/>
+            <disabledState name="Push and hold the button to speak" background="#d8d8d8ff"/>
+            <geometry weightY="1.0" weightX="1.0" gridY="0" gridX="-1" gridWidth="0" gridHeight="1"/>
+            <regularState name="Push and hold the button to speak" background="#c2c2c2ff"/>
+            <selectedState name="SPEAK NOW. Release when done speaking" background="#ff00ff"/>
+        </action>
+    </actions>
+</acquireSpeech>

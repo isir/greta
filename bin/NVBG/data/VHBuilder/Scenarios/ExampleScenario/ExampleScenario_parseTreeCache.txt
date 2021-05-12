@@ -1,0 +1,12 @@
+Sorry, I didn't catch that.
+(S1 (S (ADVP (RB Sorry,)) (NP (PRP I)) (VP (VB didn't) (VP (VB catch) (NP (NN that.))))))
+i like travelling.
+(S1 (S (NP (PRP i)) (VP (VBP like) (ADVP (RB travelling.)))))
+i like to travel.
+(S1 (S (NP (PRP i)) (VP (VBP like) (S (VP (TO to) (VP (VB travel.)))))))
+I am having a great time.
+(S1 (S (NP (PRP I)) (VP (AUX am) (VP (AUXG having) (NP (DT a) (JJ great) (NN time.))))))
+I am good.
+(S1 (S (NP (PRP I)) (VP (AUX am) (VP (VBN good.)))))
+Hi, I am Brad, a virtual human.
+(S1 (S (RB Hi,) (NP (PRP I)) (VP (AUX am) (VP (VBG Brad,) (NP (DT a) (JJ virtual) (NN human.))))))

@@ -1,0 +1,14 @@
+Sorry, I didn't catch that.
+(S1 (S (ADVP (RB Sorry,)) (NP (PRP I)) (VP (VB didn't) (VP (VB catch) (NP (NN that.))))))
+Hi, I'm Brad, a virtual human.
+(S1 (NP (NP (NNP Hi,) (NNP I'm) (NNP Brad,)) (NP (DT a) (JJ virtual) (NN human.))))
+I'm good.
+(S1 (NP (NNP I'm) (NNP good.)))
+You.
+(S1 (NP (NNP You.)))
+No, I don't drink.
+(S1 (S (ADVP (RB No,)) (NP (PRP I)) (VP (VB don't) (ADJP (JJ drink.)))))
+SmartBody is a procedural animation system.
+(S1 (S (NP (NNP SmartBody)) (VP (AUX is) (NP (DT a) (JJ procedural) (NN animation) (NN system.)))))
+It enables us to pull off these beautiful moves.
+(S1 (S (NP (PRP It)) (VP (VBZ enables) (S (NP (PRP us)) (VP (TO to) (VP (VB pull) (PRT (RP off)) (NP (DT these) (JJ beautiful) (NNS moves.))))))))

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist>
+<dict>
+<key>accounts</key>
+<array>
+<dict>
+<key>scope</key>
+<string>DEFAULT_SCOPE</string>
+<key>agentName</key>
+<string>user</string>
+<key>description</key>
+<string>Smartbody</string>
+<key>moduleName</key>
+<string>npceditor</string>
+<key>class</key>
+<string>edu.usc.ict.npc.server.net.ipc.SmartbodyAccount</string>
+<key>server</key>
+<string>localhost</string>
+<key>connectOnStartup</key>
+<true/>
+</dict>
+</array>
+</dict>
+</plist>

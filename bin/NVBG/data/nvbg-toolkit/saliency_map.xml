@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+
+<pawns>
+	<pawn name = "user" recentness = "0" primacy = "3"></pawn>
+	<pawn name = "upleft" recentness = "0" primacy = "2"></pawn>
+	<pawn name = "upright" recentness = "0" primacy = "1"></pawn>
+</pawns>

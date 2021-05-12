@@ -43,10 +43,17 @@ import greta.tools.editors.fml.timelines.IntentionsAviable;
 import greta.tools.editors.fml.timelines.PseudoIntentionSpeechTimeLine;
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jms.JMSException;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
 
 /**
  *
@@ -132,7 +139,19 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
 
     @Override
     protected void loadFile(File f) {
-        fmlFileReader.load(f.getAbsolutePath());
+        try {
+            fmlFileReader.load(f.getAbsolutePath());
+        } catch (IOException ex) {
+            Logger.getLogger(FMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(FMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(FMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(FMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (JMSException ex) {
+            Logger.getLogger(FMLEditor.class.getName()).log(Level.SEVERE, null, ex);
+        }
         this.changeTitle("FML Editor - " + f.getAbsolutePath());
     }
 

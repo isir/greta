@@ -147,6 +147,10 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     public double getStartValue(){
         return this.start.getValue();
     }
+    
+    public void setStartValue(String x){
+       this.start= new TimeMarker(x);
+    }
 
     public double getEndVale(){
         return this.end.getValue();

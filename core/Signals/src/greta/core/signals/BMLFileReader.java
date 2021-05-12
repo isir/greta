@@ -21,12 +21,34 @@ import greta.core.util.CharacterManager;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
+import greta.core.util.speech.Speech;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLParser;
 import greta.core.util.xml.XMLTree;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.jms.JMSException;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+import org.w3c.dom.Document;
+import org.xml.sax.InputSource;
+import org.xml.sax.SAXException;
 
 /**
  * This class is an implementation of {@code SignalEmitter} interface.<br/> When
@@ -70,7 +92,7 @@ public class BMLFileReader implements SignalEmitter {
      * @param bmlFileName the name of the file to load
      * @return The ID of the generated event
      */
-    public ID load(String bmlFileName) {
+    public ID load(String bmlFileName) throws JMSException, FileNotFoundException, TransformerException, ParserConfigurationException, SAXException, IOException, InterruptedException {
         //get the base file name to use it as requestId
         String base = (new File(bmlFileName)).getName().replaceAll("\\.xml$", "");
 
@@ -78,6 +100,85 @@ public class BMLFileReader implements SignalEmitter {
         bmlparser.setValidating(true);
         XMLTree bml = bmlparser.parseFile(bmlFileName);
         Mode mode = BMLTranslator.getDefaultBMLMode();
+        //System.out.println(bml);
+        //Start traitement NVBG
+        String input1=bml.toString();
+	Scanner myReader = new Scanner(input1);
+        String phrase="";
+	while (myReader.hasNextLine()) {
+	String data = myReader.nextLine();
+	data=data.trim();
+	if (!data.endsWith(">")) {
+		phrase+=data.replaceAll("<.*?>","")+" ";
+                System.out.println(phrase);
+           }
+	}
+        List<String> gestures=null;
+        List<Signal> signals=new ArrayList<Signal>();
+	myReader.close();
+        phrase=phrase.substring(0, phrase.length()-1);
+                    XMLParser bmlparser = XML.createParser();
+                    MessageSender msg_send = new MessageSender();
+                    System.out.println("INFO: "+phrase);
+                    phrase=phrase.replaceAll("  ", " ");
+                    if(phrase.startsWith(" ")){
+                        phrase=phrase.substring(1);
+                    }
+                    String construction="<bml>"+
+                            "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
+                            "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
+                    System.out.println(phrase.replaceAll("  ", " ").substring(1));
+                    String[] sp=phrase.split(" ");
+                    int i=0;
+                    for(int j=0;j<sp.length;j++){
+                        construction=construction+"\n<tm id=\""+i+"\"/>"+sp[j];
+                        i++;
+                    }
+                    //this.getCharacterManager().getEn
+                    construction=construction+"\n</speech>\n</bml>";
+                    gestures = msg_send.traitement_NVBG(phrase,this.cm.getEnvironment().getNVBG_Open());
+                    this.cm.getEnvironment().setNVBG_Open(true);
+                    System.out.println("Out " + gestures);
+                    if(gestures!=null){
+                    for(String y : gestures){
+                    //System.out.println("what happens"+bml);
+                    String[] k=y.split("importance");
+                    y=k[0];
+                    System.out.println("what happens"+y);
+                    String bml_modif=construction.toString();
+                    String[] g=y.split("lexeme=");
+                    String b= g[1].substring(1,g[1].indexOf(" ")-1);
+                    String[] c=y.replace("<","").split(" ");
+                    System.out.println("TYPE:"+c[0]);
+                    String addend="<description priority=\"1\" type=\"gretabml\">"+
+                            "\n<reference>"+c[0]+"="+b+"</reference>"+
+                            "\n<intensity>1.000</intensity>"+
+                            "`\n<SPC.value>0.646</SPC.value>"+
+                            "\n<TMP.value>-0.400</TMP.value>"+
+                            "\n<FLD.value>0.000</FLD.value>"+
+                            "\n<PWR.value>0.000</PWR.value>"+
+                            "\n<REP.value>0.000</REP.value>"+
+                            "\n<OPN.value>0.000</OPN.value>"+
+                            "\n<TEN.value>0.000</TEN.value>"+
+                            "\n</description>";
+                    bml_modif=construction.replaceAll("</bml>",y.replace(c[0],"gesture")+"\n"+addend+"\n</gesture>\n</bml>");
+                    System.out.println(bml_modif);
+                    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                    Document document = docBuilder.parse(new InputSource(new StringReader(bml_modif)));
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    DOMSource source = new DOMSource(document);
+                    FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\test_fml.xml"));
+                    StreamResult result = new StreamResult(writer);
+                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                    transformer.transform(source, result);
+                    XMLTree bml_mod = bmlparser.parseFile(System.getProperty("user.dir")+"\\test_fml.xml");
+                    
+        
+        // Fin traitment NVBG
+        
+        
         if (bml.hasAttribute("composition")) {
             mode.setCompositionType(bml.getAttribute("composition"));
         }
@@ -90,15 +191,22 @@ public class BMLFileReader implements SignalEmitter {
         if (bml.hasAttribute("social_attitude")) {
             mode.setSocialAttitude(bml.getAttribute("social_attitude"));
         }
-        List<Signal> signals = BMLTranslator.BMLToSignals(bml, this.cm);
+        
+        
+         signals.addAll(BMLTranslator.BMLToSignals(bml_mod, this.cm));
+        
+        }
+                    }
 
         ID id = IDProvider.createID(base);
         //send to all SignalPerformer added
         for (SignalPerformer performer : signalPerformers) {
             performer.performSignals(signals, id, mode);
         }
+        
         return id;
     }
+    
 
     /**
      * Returns a {@code java.io.FileFilter} corresponding to BML Files.

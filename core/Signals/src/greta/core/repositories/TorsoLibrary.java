@@ -91,6 +91,7 @@ public class TorsoLibrary extends SignalLibrary<TorsoSignal> implements Characte
         setCharacterManager(cm);
         setDefaultDefinition(getCharacterManager().getDefaultValueString(TORSO_LIBRARY_PARAM_NAME));
         setDefinition(getCharacterManager().getValueString(TORSO_LIBRARY_PARAM_NAME));
+        System.out.println("GRETA TORSO LIBRARY OPENED"+TORSO_LIBRARY_PARAM_NAME );
     }
 
     @Override
@@ -98,6 +99,7 @@ public class TorsoLibrary extends SignalLibrary<TorsoSignal> implements Characte
 
         List<SignalEntry<TorsoSignal>> torsos = new LinkedList<SignalEntry<TorsoSignal>>();
         XMLParser parser = XML.createParser();
+        System.out.println("LOADING TORSO GESTURE: "+TORSO_LIBRARY_XSD+"  "+ definition);
         XMLTree torsotree = parser.parseFileWithXSD(definition, TORSO_LIBRARY_XSD);
         if (torsotree != null) {
             for (XMLTree torso : torsotree.getChildrenElement()) {

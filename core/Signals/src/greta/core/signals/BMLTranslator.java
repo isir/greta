@@ -27,6 +27,7 @@ import greta.core.util.Mode;
 import greta.core.util.enums.CompositionType;
 import greta.core.util.enums.Side;
 import greta.core.util.log.Logs;
+import static greta.core.util.speech.Phoneme.PhonemeType.m;
 import greta.core.util.speech.Speech;
 import greta.core.util.time.TimeMarker;
 import greta.core.util.xml.XML;
@@ -982,6 +983,9 @@ public class BMLTranslator {
             //TODO complete other signals
 
         }
+        for (Signal i : signals){
+            System.out.println(i.getClass());
+        }
         return signals;
     }
 
@@ -1265,6 +1269,7 @@ public class BMLTranslator {
 
             //</editor-fold>
         }
+        System.out.println("greta.core.signals.BMLTranslator.SignalsToBML(");
         return bml;
     }
 }

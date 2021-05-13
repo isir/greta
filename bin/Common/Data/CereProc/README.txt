@@ -1,1 +1,0 @@
-For new characters (for example "Sarah"), copy the license file (*.lic) into the character's folder (i.e. "en-GB-Sarah/"), and rename it with the character's name (i.e. "Sarah.lic") alongside the voice file (i.e. "cerevoice_Sarah_48k_standard.voice").

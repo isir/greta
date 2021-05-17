@@ -19,3 +19,6 @@
 /bin/Player/Lib/External/Win64/*.cfg
 
 *.log
+/core/Signals/build
+/core/Util/build
+/core/Intentions/build

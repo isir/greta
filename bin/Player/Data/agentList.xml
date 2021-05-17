@@ -458,6 +458,10 @@
 		<all mesh="lena/body.mesh" />
 	</agent>
 
+	<agent name="ingrid" type="autodesk" scale="1">
+		<all mesh="ingrid/body.mesh" />
+	</agent>
+
 	<agent name="tom" type="autodesk" scale="1">
 		<all mesh="tom/body.mesh" />
 	</agent>

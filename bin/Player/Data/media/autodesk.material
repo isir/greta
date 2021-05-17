@@ -97,7 +97,10 @@ material Tom_Autodesk_Body : base {
 	set_texture_alias celShadingMap tom/color.jpg
 }
 
-
+material Ingrid_Autodesk_Body : base {
+	set_texture_alias diffuseMap ingrid/color.jpg
+	set_texture_alias celShadingMap ingrid/color.jpg
+}
 
 material _Eye_trans : base/alpha/eye{
 	set $aa 0

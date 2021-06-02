@@ -28,8 +28,10 @@
                 <menu name="Meaning Miner">
                     <item module="Image Schema Extractor" name="Image Schema Extractor"/>
                 </menu>
-            <item module="module_NVBG_MM" name="NVBG_MM"/>
+            
             <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
+            <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
+            <item module="ObjectNodeController" name="ObjectNodeController"/>
             </menu>
             <menu name="Interruptions">
                 <item module="Interruption Manager" name="Interruption Manager"/>
@@ -433,6 +435,22 @@
 		<module name="NVBG_MM_Controller" style="DEFAULT">
             <!-- restrict="1"-->
             <object class="greta.core.utilx.gui.NVBG_MM_Controller" lib_id="greta_utilx"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
+        </module>
+		<module name="Rest_Pose_Setter" style="DEFAULT">
+            <!-- restrict="1"-->
+            <object class="greta.core.utilx.gui.Rest_Pose_Setter" lib_id="greta_utilx"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
+        </module>
+		<module name="ObjectNodeController" style="DEFAULT">
+            <!-- restrict="1"-->
+            <object class="greta.core.utilx.gui.ObjectNodeController" lib_id="greta_utilx"/>
             <frame type="object"/>
             <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
             <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
@@ -1051,18 +1069,14 @@
 		
 		
 		
-    <module>
-            <object class="" lib_id="greta_util"/>
-        </module>
-        <module>
-            <object class="" lib_id="greta_utilx"/>
-        </module>
-    <module>
-            <object class="greta.core.utilx.gui.NVBG_Meaning_Miner_Control" lib_id="greta_utilx"/>
-            <frame class="" lib_id="2" type="frame"/>
-        </module>
-    <module name="module_NVBG_MM">
-            <object class="greta.core.utilx.gui.NVBG_Meaning_Miner_Control" lib_id="2"/>
+    
+        
+    
+    
+    
+    <module name="Rest_Pose_Setter">
+            <object class="greta.core.utilx.draw.TestJFrame" lib_id="greta_utilx"/>
+            <frame class="" lib_id="greta_utilx" type="frame" windowed_only="true"/>
         </module>
     </modules>
     <!-- list of libraries and their dependencies -->

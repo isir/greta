@@ -48,6 +48,9 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -98,6 +101,8 @@ public class FMLFileReader implements IntentionEmitter {
         fmlparser.setValidating(true);
         BufferedReader reader;
         String text="";
+
+        
         boolean flag=false;
                         try {
                                 File myObj = new File(fmlFileName);
@@ -196,7 +201,7 @@ public class FMLFileReader implements IntentionEmitter {
         i=i-1;
         construction=construction+"\n</speech>\n</bml>\n<fml>\n";
         // Ajout du rest_pose dynamiquement
-        construction=construction+"<rest id=\"rp1\" type=\"restpose\" start=\"0\" end=\"s1:tm"+i+"\" importance=\"1.0\"/>\n";
+        construction=construction+"<rest id=\"rp1\" type=\""+this.cm.get_restpose()+"\" start=\"0\" end=\"s1:tm"+i+"\" importance=\"1.0\"/>\n";
         construction=construction+ "</fml>\n</fml-apml>";
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -237,4 +242,5 @@ public class FMLFileReader implements IntentionEmitter {
             }
         };
     }
+    
 }

@@ -88,7 +88,9 @@ public class Test_NVBG_output {
 	List<String>st4 = new ArrayList<String>();
         String item="";
         String tm="";
+        int id=1;
 	for(String s: st3) {
+                System.out.println("PRINT INFO:"+ s);
 		s=s.replace("priority", "importance");
 		//s=s.replace("stroke=", "start=");
                 String[] sm=s.split("stroke=");
@@ -104,12 +106,12 @@ public class Test_NVBG_output {
                         if(l==1){
                             System.out.println(kl3+"  "+h);
                             kl3=kl3.replace("\"","");
-                            System.out.println("greta");
+                            System.out.println("INFO: greta");
                             String[] kl4=kl3.split(" ");
                             for(String kl5: kl4){
                                 if(m==0){
                                 item=kl5;
-                                System.out.println("OOOOOOOOOOOOOOOOOO "+item);
+                                System.out.println("INFO"+item);
                                 tm=item;
                                 item=item.substring(1);
                                 }
@@ -123,9 +125,8 @@ public class Test_NVBG_output {
                     p++;
                 }
                 System.out.println("item:"+item);
-                item=item.substring(0,1);
                 int end =Integer.parseInt(item)+12;
-                System.out.println("\"stroke=\"sp1:"+tm+"\"");
+                System.out.println("PRINT INFORMAZIONE: "+s+"            "+"\"stroke=\"sp1:"+tm+"\""+"           "+end);
                 System.out.println(s.replace("stroke=\"sp1:"+tm+"\"", "start=\""+item+"\" end=\""+end+"\""));
                 s=s.replace("stroke=\"sp1:"+tm+"\"", "start=\"s1:tm"+item+"\" end=\"s1:tm"+end+"\"");
 		String[] start = s.split("name=");
@@ -143,14 +144,14 @@ public class Test_NVBG_output {
                     System.out.println("INDEX OF "+index);
                     //System.out.println("greta");
                     //System.out.println("GRETA "+stGRETA.get(index)+ s.replace(start[1].trim().replace("/>","").trim(), "\""+stGRETA.get(index)+ "\""));
-                    s=s.replace("animation", stTYPE.get(index)+" id=\"s01\" lexeme="+"\""+stGRETA.get(index)+"\"");
+                    s=s.replace("animation", stTYPE.get(index)+" id=\""+id+"\" lexeme="+"\""+stGRETA.get(index)+"\"");
+                    id++;
                     s=s.replaceFirst("    ","");
                     System.out.println("Substitution name="+start[1].replace("/> ",""));
                     s=s.replace("name="+start[1].replace("/> ",""),"");
                     s=s+"/>";
                     String[] mol=s.split("#");
                     s=mol[0];
-                    //System.out.println("AAAAAAAAAAAAAAAAAAAA"+mol[0]);
                     //System.out.println(mol[1]);
                     //s=mol[0]+" "+mol[1].substring(s.indexOf("i"));
                     s=mol[0]+" importance=\"1.0\">";

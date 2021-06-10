@@ -1272,4 +1272,97 @@ public class BMLTranslator {
         System.out.println("greta.core.signals.BMLTranslator.SignalsToBML(");
         return bml;
     }
+    
+    
+    
+     public static synchronized List<Signal> BML_GAZEToSignals(XMLTree bml, CharacterManager cm) {
+        List<Signal> signals = new ArrayList<Signal>();
+
+        XMLTree root = bml.getRootNode();
+
+        for (XMLTree bmlchild : root.getChildrenElement()) {
+
+            //<editor-fold defaultstate="collapsed" desc="laugh">
+
+            // <greta:laugh id="t1" greta:lexeme="fileName" start="2">
+            // <description priority="1" type="Greta">
+            //     <greta:lexeme reference=fileName/>
+            // </description>
+            // </greta:laugh>
+
+            if ((bmlchild.getName().equalsIgnoreCase("greta:laugh")) || (bmlchild.getName().equalsIgnoreCase("laugh"))) {
+
+                LaughSignal laugh = new LaughSignal();
+
+                laugh.setId(bmlchild.getAttribute("id"));
+
+                if(bmlchild.hasAttribute("intensity")){
+                    laugh.setIntensity(bmlchild.getAttributeNumber("intensity"));
+                }
+
+                if (bmlchild.hasAttribute("start")) {
+                    laugh.setTimeMarker(bmlchild.getAttribute("start"), "start");
+                }
+
+                if (bmlchild.hasAttribute("end")) {
+                    laugh.setTimeMarker(bmlchild.getAttribute("end"), "end");
+                }
+
+                for (XMLTree laughchild : bmlchild.getChildrenElement()) {
+                    //if defined by descrption level
+                    if (laughchild.getName().equalsIgnoreCase("description")) {
+
+                        if (laughchild.hasAttribute("type") && laughchild.getAttribute("type").equalsIgnoreCase("Greta")) {
+
+                            for (XMLTree laughgrandchild : laughchild.getChildrenElement()) {
+                                if ((laughgrandchild.getName().equalsIgnoreCase("lexeme")) || (laughgrandchild.getName().equalsIgnoreCase("greta:lexeme"))) {
+                                    if (laughgrandchild.hasAttribute("reference")) {
+                                        laugh.setFileName(laughgrandchild.getAttribute("reference"));
+                                    }
+                                }
+                            }//end of for
+                        }//end fordescription
+                    }//end of for
+                }
+                signals.add(laugh);
+            }//end of greta laugth
+
+            //</editor-fold>
+
+
+            //</editor-fold>
+
+            
+
+            //</editor-fold>
+
+            //<editor-fold defaultstate="collapsed" desc="gaze">
+            //Read gaze
+            if (bmlchild.getName().equalsIgnoreCase("greta:gaze") || bmlchild.getName().equalsIgnoreCase("gaze")) {
+                GazeSignal gazeSignal = new GazeSignal(bmlchild.getAttribute("id"));
+                gazeSignal.readFromXML(bmlchild, endAsDuration);
+                gazeSignal.setCharacterManager(cm);
+                signals.add(gazeSignal);
+            }
+
+            //</editor-fold>
+
+            //<editor-fold defaultstate="collapsed" desc="gazeShift">
+            if (bmlchild.getName().equalsIgnoreCase("gazeShift")) {
+                GazeSignal gazeSignal = new GazeSignal(bmlchild.getAttribute("id"));
+                gazeSignal.setGazeShift(true);
+                gazeSignal.readFromXML(bmlchild, endAsDuration);
+                gazeSignal.setCharacterManager(cm);
+                signals.add(gazeSignal);
+            }
+            //</editor-fold>
+
+        }
+        for (Signal i : signals){
+            System.out.println(i.getClass());
+        }
+        return signals;
+    }
+
+    
 }

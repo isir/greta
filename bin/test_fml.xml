@@ -41,7 +41,7 @@
 <tm id="tm35"/>the
 <tm id="tm36"/>surface.
 </speech>
-<gesture end="s1:tm44" id="2" lexeme="me" start="s1:tm32">
+<gesture end="s1:tm22" id="2" lexeme="me" start="s1:tm16">
 <description priority="1" type="gretabml">
 <reference>deictic=me</reference>
 <intensity>1.000</intensity>`

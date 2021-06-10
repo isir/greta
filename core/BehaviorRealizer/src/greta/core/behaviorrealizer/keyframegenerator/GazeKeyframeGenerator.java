@@ -447,7 +447,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 System.out.println("H"+headAndEyesAngles.posTarget.get(0)+"   "+headAndEyesAngles.posTarget.get(1));
                 System.out.println("aaaaa"+headAndEyesAngles.headPosition.get(1));
               
-                if (!gaze.isGazeShift()) {
+             // GAZESHIFT OR NOT set rest position torso --> do the same for the rest (head and eye)
+             if (!gaze.isGazeShift()) {
                     // torsoSignalRestPosition torso signal at rest position
                     TorsoSignal torsoSignalRestPosition = new TorsoSignal(IDProvider.createID("gazegenerator").toString());
                     SpinePhase spinePhaseRestPosition;

@@ -1454,6 +1454,13 @@
             <disconnect from="input" method="unsetCharacter" to="output"/>
         </connector> -->
         <!-- Phil end -->
+        
+        <connector id="ObjectNodeControllerGaze_SIgnalEmitterToSignalPerformer">
+         <input class="greta.core.utilx.gui.ObjectNodeController" lib_id="greta_utilx"/>
+            <output class="greta.core.signals.SignalPerformer" lib_id="greta_signals"/>
+         <connect from="input" method="addSignalPerformer" to="output"/>    <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
+         <disconnect from="input" method="removeSignalPerformer" to="output"/>    <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
+        </connector>
         <connector id="SSIFrameEmitterToSSIFramePerformer">
             <input class="greta.auxiliary.ssi.SSIFrameEmitter" lib_id="greta_ssi"/>
             <output class="greta.auxiliary.ssi.SSIFramePerfomer" lib_id="greta_ssi"/>

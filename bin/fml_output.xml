@@ -44,7 +44,26 @@
 </speech>
 </bml>
 <fml>
-<deictic end="s1:tm15" id="1" importance="1.0" start="s1:tm3" type="me"/>
-<deictic end="s1:tm44" id="2" importance="1.0" start="s1:tm32" type="me"/>
+<beat end="s1:tm7" id="1" importance="1.0" start="s1:tm1" type="LowLf1"/>
+<deictic end="s1:tm22" id="2" importance="1.0" start="s1:tm16" type="me"/>
+
+<rest end="s1:tm36" id="rp1" importance="1.0" start="0" type="restpose_bellyGesB"/>
+
+
+    
+        <ideationalunit end="s1:tm17-0.2" id="id_1" importance="1.0" main="im_5" start="s1:tm0-0.2"/>
+        <imageschema POSroot="verb" end="s1:tm12-0.2" id="im_5" importance="1.0" indexword="9" previous="true" start="s1:tm9-0.2" type="attraction"/>
+        <imageschema POSroot="noun" end="s1:tm14-0.2" id="im_6" importance="1.0" indexword="11" previous="true" start="s1:tm12-0.2" type="object"/>
+        <imageschema POSroot="noun" end="s1:tm15-0.2" id="im_7" importance="1.0" start="s1:tm14-0.2" type="object"/>
+        <imageschema POSroot="adverb" end="s1:tm19-0.2" id="im_8" importance="1.0" previous="true" start="s1:tm15-0.2" type="in"/>
+        <ideationalunit end="s1:tm20-0.2" id="id_2" importance="1.0" main="im_13" start="s1:tm0-0.2"/>
+        <imageschema POSroot="noun" end="s1:tm29-0.2" id="im_13" importance="1.0" indexword="8" previous="true" start="s1:tm26-0.2" type="object"/>
+        <imageschema POSroot="noun" end="s1:tm31-0.2" id="im_14" importance="1.0" previous="true" start="s1:tm29-0.2" type="object"/>
+        <imageschema POSroot="noun" end="s1:tm33-0.2" id="im_15" importance="1.0" previous="true" start="s1:tm31-0.2" type="object"/>
+        <imageschema POSroot="verb" end="s1:tm35-0.2" id="im_16" importance="1.0" previous="true" start="s1:tm33-0.2" type="enablement"/>
+        <imageschema POSroot="noun" end="s1:tm39-0.2" id="im_17" importance="1.0" indexword="16" previous="true" start="s1:tm35-0.2" type="object"/>
+        <imageschema POSroot="noun" end="s1:tm40-0.2" id="im_18" importance="1.0" indexword="20" start="s1:tm39-0.2" type="surface"/>
+    
+
 </fml>
 </fml-apml>

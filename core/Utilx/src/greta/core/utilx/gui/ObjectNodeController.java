@@ -17,11 +17,23 @@
  */
 package greta.core.utilx.gui;
 
+import greta.core.signals.GazeSignal;
+import greta.core.signals.Signal;
+import greta.core.signals.SignalEmitter;
+import greta.core.signals.SignalPerformer;
 import greta.core.util.IniManager;
 import greta.core.util.environment.TreeNode;
 import greta.core.util.math.Quaternion;
 import greta.core.util.math.Vec3d;
 import greta.core.util.CharacterManager;
+import greta.core.util.Mode;
+import greta.core.util.enums.CompositionType;
+import static greta.core.util.enums.CompositionType.blend;
+import greta.core.util.id.ID;
+import greta.core.util.id.IDProvider;
+import static greta.core.util.id.IDProvider.createID;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -31,11 +43,12 @@ import java.util.logging.Logger;
  *
  * @author Andre-Marie Pez
  */
-public class ObjectNodeController extends javax.swing.JFrame {
+public class ObjectNodeController extends javax.swing.JFrame implements SignalEmitter{
 
     TreeNode node;
     private CharacterManager cm;
-
+    private List<SignalPerformer> signalPerformers;
+    private List<Signal> selectedSignals;
     /** Creates new form TreeNodeController */
     public ObjectNodeController(CharacterManager cm) {
         initComponents();
@@ -51,6 +64,7 @@ public class ObjectNodeController extends javax.swing.JFrame {
         this.cm=cm;
         idField.setHorizontalAlignment(javax.swing.JTextField.TRAILING);
         setTreeNode((TreeNode) this.cm.getEnvironment().getNode("Andre_chair"));
+        signalPerformers = new ArrayList<SignalPerformer>();
     }
 
     public void setTreeNode(TreeNode node){
@@ -627,8 +641,34 @@ public class ObjectNodeController extends javax.swing.JFrame {
     private void sliding_objectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sliding_objectActionPerformed
         // TODO add your handling code here:
         MyThread t = new MyThread(this);
-        t.run();
+        t.start();
     }//GEN-LAST:event_sliding_objectActionPerformed
+
+    @Override
+    public void addSignalPerformer(SignalPerformer performer) {
+        if (performer != null) {
+            signalPerformers.add(performer);
+        }
+    }
+
+    @Override
+    public void removeSignalPerformer(SignalPerformer performer) {
+        if (performer != null) {
+            signalPerformers.remove(performer);
+        }
+    }
+    
+        protected void sendSignals(List<Signal> signals, ID id, Mode mode) {
+        if (signals != null) {
+            System.out.println("greta.core.behaviorplanner.Planner.sendSignals()");
+            for(Signal s:signals){
+                System.out.println("Signals Class "+s.getClass());
+            }
+            for (SignalPerformer performer : signalPerformers) {
+                performer.performSignals(signals, id, mode);
+            }
+        }
+    }
 /*
     public void slide_object(){
         if(sliding_object.isEnabled()){
@@ -659,11 +699,18 @@ public class ObjectNodeController extends javax.swing.JFrame {
         public ObjectNodeController obj;
         public MyThread(ObjectNodeController obj){
             this.obj=obj;
+            
         }
         public void run(){
+            selectedSignals = new ArrayList<Signal>();
             if(this.obj.sliding_object.isSelected()){
             double value= -10;
+            boolean flag_0=false;
+            boolean flag_m5=false;
+            boolean flag_5=false;
+            boolean flag_10=false;
             while(value<10){
+            selectedSignals.clear();
             if(this.obj.node!=null){
                 Vec3d pos = this.obj.node.getCoordinates();
                 this.obj.posXField.setText(Double.toString(value));
@@ -671,14 +718,40 @@ public class ObjectNodeController extends javax.swing.JFrame {
                         valueOf(this.obj.posXField, pos.x()),
                         valueOf(this.obj.posYField, pos.y()),
                         valueOf(this.obj.posZField, pos.z()));
+                        GazeSignal gaze = new GazeSignal("1");
+                        gaze.setStartValue("1");
+                        gaze.setTarget("Andre_chair0");
+                        gaze.setGazeShift(true);
+                        selectedSignals.add(gaze);
+                        CompositionType mode = blend;
+                        Mode mod= new Mode(mode);
+                        IDProvider idp= new IDProvider();
+                        ID id = createID(",lmsdvsdv,m");
+                        System.out.println("VALORE:"+(int) pos.x()+"   "+flag_0+"   "+flag_m5+"   "+flag_5+"   "+flag_10);
+                        if((int)pos.x()==0 && !flag_0){
+                        sendSignals(selectedSignals,id , mod);
+                        flag_0=true;
+                        }
+                        if((int)pos.x()==-5 && !flag_m5){
+                        sendSignals(selectedSignals,id , mod);
+                        flag_m5=true;
+                        }
+                        if((int)pos.x()==5 && !flag_5){
+                        sendSignals(selectedSignals,id , mod);
+                        flag_5=true;
+                        }
+                        if((int)pos.x()==10 && !flag_10){
+                        sendSignals(selectedSignals,id , mod);
+                        flag_10=true;
+                        }
             }
-                try {
+               /* try {
                     TimeUnit.MILLISECONDS.sleep(10);
                 } catch (InterruptedException ex) {
                     Logger.getLogger(ObjectNodeController.class.getName()).log(Level.SEVERE, null, ex);
                 }
-            value+=0.05;
-                System.out.println("VALORE:"+value);
+*/
+            value+=0.00005;
             }     
         }
        

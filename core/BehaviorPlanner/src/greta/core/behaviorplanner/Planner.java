@@ -215,6 +215,11 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
         
         System.out.println("PERFORM INTENTIOS");
         selectedSignals = new ArrayList<Signal>();
+        
+        GazeSignal gaze = new GazeSignal("1");
+        gaze.setStartValue("1");
+        gaze.setTarget("Andre_chair0");
+        selectedSignals.add(gaze);
 
         //temporize every intentions
         Temporizer temporizer = new Temporizer();
@@ -304,6 +309,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             boolean NVBG_worked=false;
             List<String> gestures=null;
             String fml_gestures_tag="";
+            int max_index=0;
             for(Signal sig: signalsReturned){
                 try {
                     System.out.println("GRETA Returned:"+sig.getClass());
@@ -341,6 +347,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                         fml_construction=fml_construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
                         construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
                         i++;
+                        max_index=i;
                     }
                     //this.getCharacterManager().getEn
                     if(flag==0)
@@ -383,8 +390,17 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                             "\n</description>";
                     bml_modif=construction.replaceAll("</bml>",y.replace(c[0],"gesture")+">"+"\n"+addend+"\n</gesture>\n</bml>");
                     flag=1;
-                    if(flag==1)
+                    if(flag==1){
+                    String ends[] = y.split("end=");
+                    String ends2[]=ends[1].split(":");
+                    String ends3[]=ends2[1].split(" ");
+                    System.out.println("INFO ENDS[]:"+ends2[0]+"    "+ends3[0]+"   "+max_index);
+                    if(Integer.parseInt(ends3[0].replace("\"","").replace("tm",""))>max_index){
+                        System.out.println("INFO ENDS[]:"+ends2[0].replace("\"","")+"    "+ends3[0].replace("\"","").replace("tm","")+"   "+max_index);
+                        y=y.replace("end="+ends2[0].replace("\"","")+":"+ends3[0].replace("\"","").replace("tm",""),"end="+ends2[0]+":"+Integer.toString(max_index));
+                    }
                     fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance=\"1.0\"/>";
+                    }
                     System.out.println("FML FILE\n:"+fml_construction);
                     DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
                     DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();

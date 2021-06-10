@@ -101,6 +101,9 @@ public class BMLFileReader implements SignalEmitter {
         XMLTree bml = bmlparser.parseFile(bmlFileName);
         Mode mode = BMLTranslator.getDefaultBMLMode();
         //System.out.println(bml);
+        List<Signal> signals=new ArrayList<Signal>();
+        XMLTree bml_mod = null;
+        if(this.cm.use_NVBG){
         //Start traitement NVBG
         String input1=bml.toString();
 	Scanner myReader = new Scanner(input1);
@@ -114,7 +117,7 @@ public class BMLFileReader implements SignalEmitter {
            }
 	}
         List<String> gestures=null;
-        List<Signal> signals=new ArrayList<Signal>();
+        signals=new ArrayList<Signal>();
 	myReader.close();
         phrase=phrase.substring(0, phrase.length()-1);
                     XMLParser bmlparser = XML.createParser();
@@ -135,7 +138,7 @@ public class BMLFileReader implements SignalEmitter {
                         i++;
                     }
                     //this.getCharacterManager().getEn
-                    construction=construction+"\n</speech>\n</bml>";
+                    construction=construction+"\n</speech>\n<gaze id=\"gaze1\" start=\"1\" end=\"10\" target=\"Andre_chair0\"/>\n</bml>";
                     gestures = msg_send.traitement_NVBG(phrase,this.cm.getEnvironment().getNVBG_Open());
                     this.cm.getEnvironment().setNVBG_Open(true);
                     System.out.println("Out " + gestures);
@@ -161,7 +164,7 @@ public class BMLFileReader implements SignalEmitter {
                             "\n<OPN.value>0.000</OPN.value>"+
                             "\n<TEN.value>0.000</TEN.value>"+
                             "\n</description>";
-                    bml_modif=construction.replaceAll("</bml>",y.replace(c[0],"gesture")+"\n"+addend+"\n</gesture>\n</bml>");
+                    bml_modif=construction.replaceAll("</bml>",y.replace(c[0],"gesture")+">\n"+addend+"\n</gesture>\n</bml>");
                     System.out.println(bml_modif);
                     DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
                     DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -173,9 +176,9 @@ public class BMLFileReader implements SignalEmitter {
                     StreamResult result = new StreamResult(writer);
                     transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                     transformer.transform(source, result);
-                    XMLTree bml_mod = bmlparser.parseFile(System.getProperty("user.dir")+"\\test_fml.xml");
+                    bml_mod = bmlparser.parseFile(System.getProperty("user.dir")+"\\test_fml.xml");
                     
-        
+                    }
         // Fin traitment NVBG
         
         
@@ -193,10 +196,13 @@ public class BMLFileReader implements SignalEmitter {
         }
         
         
-         signals.addAll(BMLTranslator.BMLToSignals(bml_mod, this.cm));
-        
+         
         }
-                    }
+            
+            signals.addAll(BMLTranslator.BMLToSignals(bml_mod, this.cm));
+       }
+        
+         signals.addAll(BMLTranslator.BMLToSignals(bml, this.cm));
 
         ID id = IDProvider.createID(base);
         //send to all SignalPerformer added

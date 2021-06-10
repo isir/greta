@@ -126,9 +126,11 @@ public class Test_NVBG_output {
                 }
                 System.out.println("item:"+item);
                 int end =Integer.parseInt(item)+12;
+                end=end/2;
+                int item_int=Integer.parseInt(item)/2;
                 System.out.println("PRINT INFORMAZIONE: "+s+"            "+"\"stroke=\"sp1:"+tm+"\""+"           "+end);
-                System.out.println(s.replace("stroke=\"sp1:"+tm+"\"", "start=\""+item+"\" end=\""+end+"\""));
-                s=s.replace("stroke=\"sp1:"+tm+"\"", "start=\"s1:tm"+item+"\" end=\"s1:tm"+end+"\"");
+                System.out.println(s.replace("stroke=\"sp1:"+tm+"\"", "start=\""+item_int+"\" end=\""+end+"\""));
+                s=s.replace("stroke=\"sp1:"+tm+"\"", "start=\"s1:tm"+item_int+"\" end=\"s1:tm"+end+"\"");
 		String[] start = s.split("name=");
 		System.out.println("DONE1:: "+s);
                 

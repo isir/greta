@@ -1045,7 +1045,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         
                 try{
                 String fmlApmlRoot_v1=fmlApmlRoot.toString().replace("<fml-apml>","").replace("<fml>","").replace("</fml>","").replace("</fml-apml>","");
-                fmlApmlRoot_v1= fmlApmlRoot_v1.replace("</bml>","</bml>\n<fml>").replace("?>", "?>\n<fml-apml>")+"\n</fml>\n</fml-apml>";
+                fmlApmlRoot_v1= fmlApmlRoot_v1.replace("</bml>","</bml>\n<fml>").replace("?>", "?>\n<fml-apml>").replace(":tm0",":tm1")+"\n</fml>\n</fml-apml>";
                 System.out.println(fmlApmlRoot_v1);
                 DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();

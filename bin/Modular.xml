@@ -32,6 +32,7 @@
             <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
             <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
             <item module="ObjectNodeController" name="ObjectNodeController"/>
+            <item module="OSC" name="OSC"/>
             </menu>
             <menu name="Interruptions">
                 <item module="Interruption Manager" name="Interruption Manager"/>
@@ -455,6 +456,10 @@
             <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
             <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
             <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
+        </module>
+        <module name="OSC" style="DEFAULT">
+            <object class="greta.auxiliary.osc.OSC_Sender" lib_id="greta_osc"/>
+            <frame type="object" />
         </module>
         <module name="MaryTTS Client">
             <object class="greta.auxiliary.tts.marytts.MaryTTSClient" lib_id="greta_marytts"/>
@@ -1440,9 +1445,13 @@
             <depends lib_id="ext_Translator.0.1"/>
         </lib>
         <lib id="ext_Translator.0.1" path="Common/Lib/External/Flipper/Translator-0.1.jar"/>		
-		
-		
-    <lib id="2" path="Common/Lib/Internal/Utilx.jar"/>
+    <lib id="greta_osc" path="./Common/Lib/Internal/OSC.jar">
+            <depends lib_id="ext_jeromq"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_utilx"/>
+        </lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>

@@ -35,6 +35,7 @@ import static greta.core.util.id.IDProvider.createID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Timer;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -709,6 +710,8 @@ public class ObjectNodeController extends javax.swing.JFrame implements SignalEm
             boolean flag_m5=false;
             boolean flag_5=false;
             boolean flag_10=false;
+            int time_start=0;
+            int time_end=0;
             while(value<10){
             selectedSignals.clear();
             if(this.obj.node!=null){
@@ -722,28 +725,40 @@ public class ObjectNodeController extends javax.swing.JFrame implements SignalEm
                         gaze.setStartValue("1");
                         gaze.setTarget("Andre_chair0");
                         gaze.setGazeShift(true);
+                        selectedSignals=new ArrayList<Signal>();
                         selectedSignals.add(gaze);
                         CompositionType mode = blend;
                         Mode mod= new Mode(mode);
                         IDProvider idp= new IDProvider();
                         ID id = createID(",lmsdvsdv,m");
-                        System.out.println("VALORE:"+(int) pos.x()+"   "+flag_0+"   "+flag_m5+"   "+flag_5+"   "+flag_10);
-                        if((int)pos.x()==0 && !flag_0){
-                        sendSignals(selectedSignals,id , mod);
-                        flag_0=true;
+                        //System.out.println("VALORE:"+(int) pos.x()+"   "+flag_0+"   "+flag_m5+"   "+flag_5+"   "+flag_10);
+                        //if((int)pos.x()==0 && !flag_0){
+                        //sendSignals(selectedSignals,id , mod);
+                        //flag_0=true;
+                        //}
+                        //if((int)pos.x()==-5 && !flag_m5){
+                        time_end++;
+                        int fin=time_end-time_start;
+                        System.out.println(time_end+"  "+time_start+"   "+fin);
+                        if(fin==2000){
+                            sendSignals(selectedSignals,id , mod);
+                            time_start=time_end;
+                        try {
+                    TimeUnit.MICROSECONDS.sleep(5);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(ObjectNodeController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                        
                         }
-                        if((int)pos.x()==-5 && !flag_m5){
-                        sendSignals(selectedSignals,id , mod);
-                        flag_m5=true;
-                        }
-                        if((int)pos.x()==5 && !flag_5){
-                        sendSignals(selectedSignals,id , mod);
-                        flag_5=true;
-                        }
-                        if((int)pos.x()==10 && !flag_10){
-                        sendSignals(selectedSignals,id , mod);
-                        flag_10=true;
-                        }
+                        //}
+                        //if((int)pos.x()==5 && !flag_5){
+                        //sendSignals(selectedSignals,id , mod);
+                        //flag_5=true;
+                        //}
+                        //if((int)pos.x()==10 && !flag_10){
+                        //sendSignals(selectedSignals,id , mod);
+                        //flag_10=true;
+                       // }
             }
                /* try {
                     TimeUnit.MILLISECONDS.sleep(10);

@@ -304,8 +304,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 double pitch = Math.atan2(Math.sqrt(dz * dz + dx * dx), dy) + Math.PI;
                 double yaw = Math.atan2(dz, dx);
                 boolean sagittal=false;
-                if(pitch>3){
+                if(pitch>10){
                     sagittal=true;
+                    System.out.println("PETER INFO");
                 }
                 System.out.println("Pitch Angle: "+pitch);
                 double theta=yaw;
@@ -416,8 +417,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     }
                     spinePhaseTargetPosition.verticalTorsion.flag=true;
                     spinePhaseTargetPosition.verticalTorsion.value=sign*(2*theta)/100;
+                    if(sagittal==true){
                     spinePhaseTargetPosition.sagittalTilt.flag=true;
                     spinePhaseTargetPosition.sagittalTilt.value=sag_sign*(pitch*25)/100;
+                    }
                 }
                 //spinePhaseTargetPosition.collapse.value=sign*15;
                 setupTorsoSignalAtPosition(torsoSignalTargetPosition, spinePhaseTargetPosition, start,

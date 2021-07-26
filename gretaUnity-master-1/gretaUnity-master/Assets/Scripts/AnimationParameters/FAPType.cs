@@ -1,0 +1,75 @@
+namespace animationparameters
+{
+    public enum FAPType
+    {
+        null_fap, //0
+        viseme,
+        expression,
+        open_jaw,
+        lower_t_midlip,
+        raise_b_midlip,
+        stretch_l_cornerlip,
+        stretch_r_cornerlip,
+        lower_t_lip_lm,
+        lower_t_lip_rm,
+        raise_b_lip_lm, //10
+        raise_b_lip_rm,
+        raise_l_cornerlip,
+        raise_r_cornerlip,
+        thrust_jaw,
+        shift_jaw,
+        push_b_lip,
+        push_t_lip,
+        depress_chin,
+        close_t_l_eyelid,
+        close_t_r_eyelid, //20
+        close_b_l_eyelid,
+        close_b_r_eyelid,
+        yaw_l_eyeball,
+        yaw_r_eyeball,
+        pitch_l_eyeball,
+        pitch_r_eyeball,
+        thrust_l_eyeball,
+        thrust_r_eyeball,
+        dilate_l_pupil,
+        dilate_r_pupil, //30
+        raise_l_i_eyebrow,
+        raise_r_i_eyebrow,
+        raise_l_m_eyebrow,
+        raise_r_m_eyebrow,
+        raise_l_o_eyebrow,
+        raise_r_o_eyebrow,
+        squeeze_l_eyebrow,
+        squeeze_r_eyebrow,
+        puff_l_cheek,
+        puff_r_cheek, //40
+        lift_l_cheek,
+        lift_r_cheek,
+        shift_tongue_tip,
+        raise_tongue_tip,
+        thrust_tongue_tip,
+        raise_tongue,
+        tongue_roll,
+        head_pitch,
+        head_yaw,
+        head_roll, //50
+        lower_t_midlip_o,
+        raise_b_midlip_o,
+        stretch_l_cornerlip_o,
+        stretch_r_cornerlip_o,
+        lower_t_lip_lm_o,
+        lower_t_lip_rm_o,
+        raise_b_lip_lm_o,
+        raise_b_lip_rm_o,
+        raise_l_cornerlip_o,
+        raise_r_cornerlip_o, //60
+        stretch_l_nose,
+        stretch_r_nose,
+        raise_nose,
+        bend_nose,
+        raise_l_ear,
+        raise_r_ear,
+        pull_l_ear,
+        pull_r_ear //69
+    }
+}

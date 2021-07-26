@@ -5,65 +5,26 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>We
-<tm id="tm2"/>have
-<tm id="tm3"/>got
-<tm id="tm4"/>to
-<tm id="tm5"/>get
-<tm id="tm6"/>back
-<tm id="tm7"/>to
-<tm id="tm8"/>harvesting
-<tm id="tm9"/>the
-<tm id="tm10"/>wisdom
-<tm id="tm11"/>of
-<tm id="tm12"/>crowd
-<tm id="tm13"/>in
+<tm id="tm1"/>Hello,
+<tm id="tm2"/>My
+<tm id="tm3"/>name
+<tm id="tm4"/>is
+<tm id="tm5"/>Camille.
+<tm id="tm6"/>I
+<tm id="tm7"/>am
+<tm id="tm8"/>one
+<tm id="tm9"/>of
+<tm id="tm10"/>the
+<tm id="tm11"/>virtual
+<tm id="tm12"/>character
+<tm id="tm13"/>of
 <tm id="tm14"/>the
-<tm id="tm15"/>united
-<tm id="tm16"/>states.
-<tm id="tm17"/>We
-<tm id="tm18"/>have
-<tm id="tm19"/>got
-<tm id="tm20"/>get
-<tm id="tm21"/>back
-<tm id="tm22"/>to
-<tm id="tm23"/>the
-<tm id="tm24"/>kind
-<tm id="tm25"/>of
-<tm id="tm26"/>conversation
-<tm id="tm27"/>of
-<tm id="tm28"/>democracy
-<tm id="tm29"/>that
-<tm id="tm30"/>allows
-<tm id="tm31"/>good
-<tm id="tm32"/>idea
-<tm id="tm33"/>to
-<tm id="tm34"/>rise
-<tm id="tm35"/>the
-<tm id="tm36"/>surface.
+<tm id="tm15"/>Greta
+<tm id="tm16"/>platform.
 </speech>
 </bml>
 <fml>
-<beat end="s1:tm7" id="1" importance="1.0" start="s1:tm1" type="LowLf1"/>
-<deictic end="s1:tm22" id="2" importance="1.0" start="s1:tm16" type="me"/>
-
-<rest end="s1:tm36" id="rp1" importance="1.0" start="0" type="restpose_bellyGesB"/>
-
-
-    
-        <ideationalunit end="s1:tm17-0.2" id="id_1" importance="1.0" main="im_5" start="s1:tm0-0.2"/>
-        <imageschema POSroot="verb" end="s1:tm12-0.2" id="im_5" importance="1.0" indexword="9" previous="true" start="s1:tm9-0.2" type="attraction"/>
-        <imageschema POSroot="noun" end="s1:tm14-0.2" id="im_6" importance="1.0" indexword="11" previous="true" start="s1:tm12-0.2" type="object"/>
-        <imageschema POSroot="noun" end="s1:tm15-0.2" id="im_7" importance="1.0" start="s1:tm14-0.2" type="object"/>
-        <imageschema POSroot="adverb" end="s1:tm19-0.2" id="im_8" importance="1.0" previous="true" start="s1:tm15-0.2" type="in"/>
-        <ideationalunit end="s1:tm20-0.2" id="id_2" importance="1.0" main="im_13" start="s1:tm0-0.2"/>
-        <imageschema POSroot="noun" end="s1:tm29-0.2" id="im_13" importance="1.0" indexword="8" previous="true" start="s1:tm26-0.2" type="object"/>
-        <imageschema POSroot="noun" end="s1:tm31-0.2" id="im_14" importance="1.0" previous="true" start="s1:tm29-0.2" type="object"/>
-        <imageschema POSroot="noun" end="s1:tm33-0.2" id="im_15" importance="1.0" previous="true" start="s1:tm31-0.2" type="object"/>
-        <imageschema POSroot="verb" end="s1:tm35-0.2" id="im_16" importance="1.0" previous="true" start="s1:tm33-0.2" type="enablement"/>
-        <imageschema POSroot="noun" end="s1:tm39-0.2" id="im_17" importance="1.0" indexword="16" previous="true" start="s1:tm35-0.2" type="object"/>
-        <imageschema POSroot="noun" end="s1:tm40-0.2" id="im_18" importance="1.0" indexword="20" start="s1:tm39-0.2" type="surface"/>
-    
-
+<deictic end="s1:tm7" id="1" importance="1.0" start="s1:tm1" type="me"/>
+<deictic end="s1:tm11" id="2" importance="1.0" start="s1:tm5" type="me"/>
 </fml>
 </fml-apml>

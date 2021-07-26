@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>You
+      <tm id="tm2"/>have
+      <tm id="tm3"/>chosen
+      <tm id="tm4"/>our
+      <tm id="tm5"/>French,
+      <tm id="tm6"/>organic
+      <tm id="tm7"/>melons
+      <tm id="tm8"/>at
+      <tm id="tm9"/>1
+      <tm id="tm10"/>euro
+      <tm id="tm11"/>80
+      <tm id="tm12"/>a piece.
+      <tm id="tm13"/>They
+      <tm id="tm14"/>are
+      <tm id="tm15"/>perfect
+      <tm id="tm16"/>for
+      <tm id="tm17"/>the
+      <tm id="tm18"/>desert.
+      <tm id="tm19"/>How
+      <tm id="tm20"/>much
+      <tm id="tm21"/>should
+      <tm id="tm22"/>I
+      <tm id="tm23"/>puy
+      <tm id="tm24"/>on
+      <tm id="tm25"/>them
+      <tm id="tm26"/>?
+ 
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm4" id="1" importance="1.0" start="s1:tm1" type="you"/>
+    <deictic end="s1:tm18" id="2" importance="1.0" start="s1:tm5" type="onmyright"/>
+    <performative end="s1:tm23" id ="3" importance="1.0" start="s1:tm19" type="suggest"/>
+    <performative end="s1:tm26+3" id="4"  start="s1:tm25" type="restpose_neutral"/>
+  </fml>
+</fml-apml>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>You
+      <tm id="tm2"/>have
+      <tm id="tm3"/>taken
+      <tm id="tm4"/>our
+      <tm id="tm5"/>fresh,
+      <tm id="tm6"/>orange
+      <tm id="tm7"/>peppers.
+      <tm id="tm8"/>They
+      <tm id="tm9"/>come
+      <tm id="tm10"/>from
+      <tm id="tm11"/>Spain.
+      <tm id="tm12"/>How
+      <tm id="tm13"/>much
+      <tm id="tm14"/>should
+      <tm id="tm15"/>I
+      <tm id="tm16"/>put
+      <tm id="tm17"/>on
+      <tm id="tm18"/>them
+      <tm id="tm19"/>?
+
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm3" id="1" importance="1.0" start="s1:tm1" type="You_Pos_L_1"/>
+    <performative end="s1:tm11" id="1" importance ="1.0" start="s1:tm4" type="onmy_down_left_bis"/>
+    <performative end="s1:tm19" id="3"  start="s1:tm15" type="restpose_neutral"/>
+  </fml>
+</fml-apml>

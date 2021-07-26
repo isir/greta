@@ -334,17 +334,99 @@
 			</core>
 		</constraints>
 	</behaviorset>
-	
-	<behaviorset name="deictic-suggestt">
-		<signals>
-			<signal id="1" name="deictic=indicateAt" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-			</core>
-		</constraints>
-	</behaviorset>
+
+  <behaviorset name="deictic-onmyleft_bis">
+    <signals>
+      <signal id="1" name="deictic=OnMyRight_Ges_L" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
+  
+  
+  
+  <behaviorset name="deictic-onmyright">
+    <signals>
+      <signal id="1" name="deictic=OnMyRight_Ges_R" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="deictic-onmyright_bis">
+    <signals>
+      <signal id="1" name="deictic=OnMyLeft_Ges_R" modality="gesture"/>
+      <signal id="2" name="RIGHT" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="deictic-onmy_down_right">
+    <signals>
+      <signal id="1" name="deictic=OnMyRight_Down_Ges_R" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="deictic-onmy_down_right_bis">
+    <signals>
+      <signal id="1" name="deictic=OnMyLeft_Down_Ges_R" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="deictic-onmy_down_left">
+    <signals>
+      <signal id="1" name="deictic=OnMyLeft_Down_Ges_L" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="deictic-onmy_down_left_bis">
+    <signals>
+      <signal id="1" name="deictic=OnMyRight_Down_Ges_L" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+
+  <behaviorset name="performative-suggest_bis">
+    <signals>
+      <signal id="1" name="performative=Suggest_Ges_B" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
 	
 	<behaviorset name="deictic-us1">
 		<signals>
@@ -403,15 +485,26 @@
 			</core>
 		</constraints>
 	</behaviorset>
+
+  <behaviorset name="beat-go_on">
+    <signals>
+      <signal id="1" name="beat=Beat_Ges_R_Hand" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
 	
 	<!-- PERFORMATIVES -->
 	
 	<behaviorset name="deictic-you">
 		<signals>
 			<signal id="1" name="deictic=You_Ges_B" modality="gesture">
-				<alternative name="deictic=You_Ges_R_Center" probability="0.2"/>
-				<alternative name="deictic=You_Ges_R_Drop" probability="0.2"/>
-				<alternative name="deictic=You_Ges_R_High" probability="0.3"/>
+				<alternative name="deictic=You_Ges_R_Center" probability="0.9"/>
+				<alternative name="deictic=You_Ges_R_Drop" probability="0.0"/>
+				<alternative name="deictic=You_Ges_R_High" probability="0.1"/>
 			</signal>
 		</signals>
 		<constraints>
@@ -444,8 +537,8 @@
 			</core>
 		</constraints>
 	</behaviorset>
-	
-	<behaviorset name="performative-rythm">
+  
+  <behaviorset name="performative-rythm">
 		<signals>
 			<signal id="1" name="beat=Beat_Ges_B_Social" modality="gesture">
 				<alternative name="beat=Beat_Ges_L" probability="0.2"/>
@@ -618,6 +711,213 @@
 			</core>
 		</constraints>
 	</behaviorset>
+
+
+  <behaviorset name="performative-ticket">
+    <signals>
+      <signal id="1" name="performative=ticket_Ges_B" modality="gesture">
+      <alternative name="performative=ticket_Ges_B" probability="1.0"/>
+      </signal>
+      <signal id="2" name="DOWN" modality="head" max="15.0"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="performative-ticket_b">
+    <signals>
+      <signal id="1" name="performative=ticket_Ges_B" modality="gesture"/>
+      <signal id="2" name="Neutral" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="iconic-thinking">
+    <signals>
+      <signal id="1" name="iconic=ScratchTempleLf01" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
+  
+
+  <behaviorset name="performative-onmyleft">
+    <signals>
+      <signal id="1" name="performative=OnMyLeft_Ges_L" modality="gesture"/>
+      <signal id="2" name="LEFT" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="performative-onmyleft_bis">
+    <signals>
+      <signal id="1" name="performative=OnMyRight_Ges_L" modality="gesture"/>
+      <signal id="2" name="LEFT" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+
+
+  <behaviorset name="performative-onmyright">
+    <signals>
+      <signal id="1" name="performative=OnMyRight_Ges_R" modality="gesture"/>
+      <signal id="2" name="RIGHT" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="performative-onmyright_bis">
+    <signals>
+      <signal id="1" name="performative=OnMyLeft_Ges_R" modality="gesture"/>
+      <signal id="2" name="RIGHT" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="performative-onmy_down_right">
+    <signals>
+      <signal id="1" name="performative=OnMyRight_Down_Ges_R" modality="gesture"/>
+      <signal id="2" name="RIGHT" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="performative-onmy_down_right_bis">
+    <signals>
+      <signal id="1" name="performative=OnMyLeft_Down_Ges_R" modality="gesture"/>
+      <signal id="2" name="RIGHT" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="performative-onmy_down_left">
+    <signals>
+      <signal id="1" name="performative=OnMyLeft_Down_Ges_L" modality="gesture"/>
+      <signal id="2" name="LEFT" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="performative-onmy_down_left_bis">
+    <signals>
+      <signal id="1" name="performative=OnMyRight_Down_Ges_L" modality="gesture"/>
+      <signal id="2" name="LEFT" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="emotion-all_right">
+    <signals>
+      <signal id="1" name="emotion=Anger_Signal_10" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="performative-go_on_bis">
+    <signals>
+      <signal id="1" name="performative=PleaBt2_Ges_B" modality="gesture"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+  <behaviorset name="performative-restpose_handsMiddleDown_Pos_B">
+    <signals>
+      <signal id="1" name="rest=HandsMiddleDown_Pos_B" modality="gesture"/>
+      <signal id="2" name="Neutral" modality="torso"/>
+      <signal id="3" name="Neutral" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+        <item id="3"/>
+      </core>
+    </constraints>
+  </behaviorset>
+
+
+  <behaviorset name="performative-sorry">
+    <signals>
+      <signal id="1" name="performative=Sorry_Ges_B" modality="gesture"/>
+      <signal id="2" name="faceexp=small_sadness" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+      </core>
+      <rules>
+        <implication>
+          <ifpresent id="1"/>
+          <thenpresent id="2"/>
+        </implication>
+      </rules>
+    </constraints>
+  </behaviorset>
+  
+  
+  
+  
 	
 	<!-- certainty -->
 	
@@ -1262,6 +1562,8 @@
 		</constraints>
 	</behaviorset>
 
+
+
 	<behaviorset name="backchannel-no_interest">
 		<signals>
 			<signal id="1" name="gaze=look_up" modality="gaze"/>
@@ -1326,7 +1628,7 @@
 		</signals>
 		<constraints/>
 	</behaviorset>
-	
+ 
 	
 	<!-- emphasis -->
 	<behaviorset name="emphasis-medium">
@@ -1470,6 +1772,21 @@
 		</signals>
 		<constraints/>
 	</behaviorset>
+
+  <behaviorset name="performative-restpose_neutral">
+    <signals>
+      <signal id="1" name="performative=neutral_Pos_B" modality="gesture"/>
+      <signal id="2" name="Neutral" modality="torso"/>
+      <signal id="3" name="Neutral" modality="head"/>
+    </signals>
+    <constraints>
+      <core>
+        <item id="1"/>
+        <item id="2"/>
+        <item id="3"/>
+      </core>
+    </constraints>
+  </behaviorset>
 	
 	
 	<!-- MSE DO NOT TOUCH -->

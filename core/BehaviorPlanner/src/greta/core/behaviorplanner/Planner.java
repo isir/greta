@@ -215,12 +215,12 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
         
         System.out.println("PERFORM INTENTIOS");
         selectedSignals = new ArrayList<Signal>();
-        
+        /**
         GazeSignal gaze = new GazeSignal("1");
         gaze.setStartValue("1");
         gaze.setTarget("Andre_chair0");
         selectedSignals.add(gaze);
-
+        **/
         //temporize every intentions
         Temporizer temporizer = new Temporizer();
         temporizer.add(intentions);

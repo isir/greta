@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>You
+      <tm id="tm2"/>wisely
+      <tm id="tm3"/>took
+      <tm id="tm4"/>our
+      <tm id="tm5"/>artichokes.
+      <tm id="tm6"/>They
+      <tm id="tm7"/>are
+      <tm id="tm8"/>French
+      <tm id="tm9"/>and
+      <tm id="tm10"/>at
+      <tm id="tm11"/>4
+      <tm id="tm12"/>euros
+      <tm id="tm13"/>83
+      <tm id="tm14"/>a
+      <tm id="tm15"/>piece.
+      <tm id="tm16"/>I
+      <tm id="tm17"/>put
+      <tm id="tm18"/>you
+      <tm id="tm19"/>two
+      <tm id="tm20"/>or
+      <tm id="tm21"/>one
+      <tm id="tm22"/>?
+      
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm3" id="1" importance="1.0" start="s1:tm1" type="You_Pos_L_1"/>
+    <performative end="s1:tm15" id="1" importance ="1.0" start="s1:tm4" type="onmyright"/>
+    <performative end="s1:tm22" id="3"  start="s1:tm17" type="restpose_neutral"/>
+  </fml>
+</fml-apml>

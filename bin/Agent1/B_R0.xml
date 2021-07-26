@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>I
+      <tm id="tm2"/>see
+      <tm id="tm3"/>that
+      <tm id="tm4"/>you
+      <tm id="tm5"/>have
+      <tm id="tm6"/>chosen
+      <tm id="tm7"/>the
+      <tm id="tm8"/>white
+      <tm id="tm9"/>mushrooms.
+      <tm id="tm10"/>They
+      <tm id="tm11"/>are
+      <tm id="tm12"/>local
+      <tm id="tm13"/>and
+      <tm id="tm14"/>at
+      <tm id="tm15"/>1.80
+      <tm id="tm16"/>euros
+      <tm id="tm17"/>per
+      <tm id="tm18"/>kilo.
+      <tm id="tm19"/>How
+      <tm id="tm20"/>many
+      <tm id="tm21"/>do
+      <tm id="tm22"/>you
+      <tm id="tm23"/>need
+      <tm id="tm24"/>?
+
+    </speech>
+    I see that you have chosen the white mushrooms. They are local and at 1.80 euros per kilo. How many do you need?
+  </bml>
+  <fml>
+    <deictic end="s1:tm9" id="1" importance ="1.0" start="s1:tm2" type="onmy_down_right_bis"/>
+    <performative end="s1:tm24" id="3"  start="s1:tm21" type="restpose_neutral"/>
+  </fml>
+</fml-apml>

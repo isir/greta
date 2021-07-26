@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>You
+      <tm id="tm2"/>are
+      <tm id="tm3"/>interested
+      <tm id="tm4"/>in
+      <tm id="tm5"/>our
+      <tm id="tm6"/>mangoes.
+      <tm id="tm7"/>They
+      <tm id="tm8"/>are
+      <tm id="tm9"/>of
+      <tm id="tm10"/>a
+      <tm id="tm11"/>very
+      <tm id="tm12"/>good
+      <tm id="tm13"/>quality.
+      <tm id="tm14"/>How
+      <tm id="tm15"/>much
+      <tm id="tm16"/>should
+      <tm id="tm17"/>I
+      <tm id="tm18"/>put
+      <tm id="tm19"/>in
+      <tm id="tm20"/>?
+      
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm13" id="1" importance ="1.0" start="s1:tm4" type="onmyleft"/>
+    <deictic end="s1:tm3" id="4" importance="1.0" start="s1:tm1" type="you"/>
+    <emotion end="s1:tm18" id="2 importance=1.0" start="s1:tm12" type="small_joy"/>
+    <performative end="s1:tm20" id="3"  start="s1:tm18" type="restpose_neutral"/>
+    <emotion end="s1:tm20+0.5" id="5" importance="1.0" start="s1:tm20" type="small_joy"/>
+  </fml>
+</fml-apml>

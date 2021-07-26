@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>
+      Hi,
+      <tm id="tm2"/>
+      I
+      <tm id="tm3"/>
+      am
+      <tm id="tm4"/>
+      Vanessa.
+      <tm id="tm5"/>
+      This
+      <tm id="tm6"/>
+      is
+      <tm id="tm7"/>
+      my
+      <tm id="tm8"/>
+      fruit
+      <tm id="tm9"/>
+      and
+      <tm id="tm10"/>
+      vegetable
+      <tm id="tm11"/>
+      stand.
+      <tm id="tm12"/>
+      I'll
+      <tm id="tm13"/>
+      let
+      <tm id="tm14"/>
+      you
+      <tm id="tm15"/>
+      choose
+      <tm id="tm16"/>
+      the
+      <tm id="tm17"/>
+      product
+      <tm id="tm18"/>
+      of
+      <tm id="tm19"/>
+      your
+      <tm id="tm20"/>
+      choice.
+      <tm id="tm21"/>
+      In
+      <tm id="tm22"/>
+      the
+      <tm id="tm23"/>
+      meantime,
+      <tm id="tm24"/>
+      I
+      <tm id="tm25"/>
+      will
+      <tm id="tm26"/>
+      sort
+      <tm id="tm27"/>
+      my
+      <tm id="tm28"/>
+      tickets.
+    </speech>
+  </bml>
+  <fml>
+    <performative start="s1:tm1" id="1" importance="1.0" end="s1:tm3" type="greet"/>
+    <deictic end="s1:tm7" id="2" importance="1.0" start="s1:tm4" type="me"/>
+    <performative start="s1:tm8" id="3" importance="1.0" end="s1:tm14" type="suggest"/>
+    <!--<performative start="s1:tm8" id="3" importance="1.0" end="s1:tm14" type="suggest_bis"/>-->
+    <deictic end="s1:tm21" id="4" importance="1.0" start="s1:tm15" type="you"/>
+    <deictic end="s1:tm27" id="5" importance="1.0" start="s1:tm22" type="me"/>
+    <performative end="s1:tm28+4" id="6" importance="1.0" start="s1:tm28" type="restpose_neutral"/>
+  </fml>
+</fml-apml>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>These
+      <tm id="tm2"/>melons
+      <tm id="tm3"/>are
+      <tm id="tm4"/>very
+      <tm id="tm5"/>ripe
+      <tm id="tm6"/>and
+      <tm id="tm7"/>in season.
+      <tm id="tm8"/>It
+      <tm id="tm9"/>is
+      <tm id="tm10"/>1
+      <tm id="tm11"/>euro
+      <tm id="tm12"/>30
+      <tm id="tm13"/>a
+      <tm id="tm14"/>peace.
+      <tm id="tm15"/>That's
+      <tm id="tm16"/>really
+      <tm id="tm17"/>cheap.
+      <tm id="tm18"/>do you
+      <tm id="tm19"/>need
+      <tm id="tm20"/>one,
+      <tm id="tm21"/>or two
+      <tm id="tm22"/>?
+      
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm12" id="1" importance ="1.0" start="s1:tm1" type="onmy_down_left"/>
+    <emotion end="s1:tm17" id="2" importance="1.0" start="s1:tm13" type="small_joy"/>
+    <performative end="s1:tm22+2" id="3"  start="s1:tm20" type="restpose_neutral"/>
+    <emotion end="s1:tm22+2" id="2" importance="1.0" start="s1:tm22" type="small_joy"/>
+  </fml>
+</fml-apml>

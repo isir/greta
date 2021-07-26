@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>I
+      <tm id="tm2"/>guess,
+      <tm id="tm3"/>You
+      <tm id="tm4"/>opted
+      <tm id="tm5"/>for
+      <tm id="tm6"/>these
+      <tm id="tm7"/>artichokes.
+      <tm id="tm8"/>they are
+      <tm id="tm9"/>very good
+      <tm id="tm10"/>when preared
+      <tm id="tm11"/>as a salad.
+      <tm id="tm12"/>How
+      <tm id="tm13"/>much
+      <tm id="tm14"/>do
+      <tm id="tm15"/>you
+      <tm id="tm16"/>want
+      <tm id="tm17"/>?
+
+    </speech>
+  </bml>
+  <fml>
+    <certainty end="s1:tm5" id="1" importance ="1.0" start="s1:tm1" type="uncertain"/>
+    <deictic end="s1:tm11" id="2" importance ="1.0" start="s1:tm6" type="onmyleft_bis"/>
+    <performative end="s1:tm17+4" id="3"  start="s1:tm12" type="restpose_neutral"/>
+  </fml>
+</fml-apml>

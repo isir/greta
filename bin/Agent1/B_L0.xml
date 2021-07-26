@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>I
+      <tm id="tm2"/>see
+      <tm id="tm3"/>that
+      <tm id="tm4"/>you
+      <tm id="tm5"/>have
+      <tm id="tm6"/>chosen
+      <tm id="tm7"/>the
+      <tm id="tm8"/>lemons.
+      <tm id="tm9"/>They
+      <tm id="tm10"/>are
+      <tm id="tm11"/>ripe
+      <tm id="tm12"/>and
+      <tm id="tm13"/>at
+      <tm id="tm14"/>90
+      <tm id="tm15"/>cents
+      <tm id="tm16"/>a piece.
+      <tm id="tm17"/>How
+      <tm id="tm18"/>many
+      <tm id="tm19"/>do
+      <tm id="tm20"/>you
+      <tm id="tm21"/>need
+      <tm id="tm22"/>?
+      
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm11" id="1" importance ="1.0" start="s1:tm2" type="onmyleft"/>
+    <performative end="s1:tm22" id="3"  start="s1:tm19" type="restpose_neutral"/>
+  </fml>
+</fml-apml>

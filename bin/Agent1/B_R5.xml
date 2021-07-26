@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>These
+      <tm id="tm2"/>apples
+      <tm id="tm3"/>are
+      <tm id="tm4"/>very
+      <tm id="tm5"/>sweet
+      <tm id="tm6"/>and
+      <tm id="tm7"/>cheap.
+      <tm id="tm8"/>They
+      <tm id="tm9"/>come
+      <tm id="tm10"/>from
+      <tm id="tm11"/>France
+      <tm id="tm12"/>and
+      <tm id="tm13"/>are
+      <tm id="tm14"/>at
+      <tm id="tm15"/>95
+      <tm id="tm16"/>cents
+      <tm id="tm17"/>a
+      <tm id="tm18"/>kilo.
+      <tm id="tm19"/>How
+      <tm id="tm20"/>much
+      <tm id="tm21"/>do
+      <tm id="tm22"/>you
+      <tm id="tm23"/>want
+      <tm id="tm24"/>?
+
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm11" id="1" importance ="1.0" start="s1:tm1" type="onmyright_bis"/>
+    <performative end="s1:tm24" id="3"  start="s1:tm21" type="restpose_neutral"/>
+    <emotion end="s1:tm18" id="2" importance="1.0" start="s1:tm13" type="joyStrong"/>
+  </fml>
+</fml-apml>

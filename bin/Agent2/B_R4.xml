@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>You
+      <tm id="tm2"/>wisely
+      <tm id="tm3"/>chose,
+      <tm id="tm4"/>our
+      <tm id="tm5"/>mangoes.
+      <tm id="tm6"/>it's
+      <tm id="tm7"/>6
+      <tm id="tm8"/>euros
+      <tm id="tm9"/>20
+      <tm id="tm10"/>for
+      <tm id="tm11"/>the
+      <tm id="tm12"/>kilo.
+      <tm id="tm13"/>they
+      <tm id="tm14"/>are
+      <tm id="tm15"/>ripe
+      <tm id="tm11"/>and
+      <tm id="tm12"/>perfect
+      <tm id="tm13"/>for 
+      <tm id="tm14"/>a fruit salad.
+      <tm id="tm15"/>How
+      <tm id="tm16"/>many
+      <tm id="tm17"/>do
+      <tm id="tm18"/>you
+      <tm id="tm19"/>want
+      <tm id="tm20"/>?
+
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm4" id="1" importance ="1.0" start="s1:tm1" type="you"/>
+    <deictic end="s1:tm15" id="2" importance ="1.0" start="s1:tm5" type="onmyright"/>
+    <performative end="s1:tm20+3" id="3"  start="s1:tm16" type="restpose_handsMiddleDown_Pos_B"/>
+  </fml>
+</fml-apml>

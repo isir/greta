@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>You
+      <tm id="tm2"/>have
+      <tm id="tm3"/>chosen
+      <tm id="tm4"/>well-ripened
+      <tm id="tm5"/>avocados.
+      <tm id="tm6"/>They
+      <tm id="tm7"/>are
+      <tm id="tm8"/>ready
+      <tm id="tm9"/>to
+      <tm id="tm10"/>be
+      <tm id="tm11"/>eaten.
+      <tm id="tm12"/>How
+      <tm id="tm13"/>many
+      <tm id="tm14"/>do
+      <tm id="tm15"/>you
+      <tm id="tm16"/>want
+      <tm id="tm17"/>?
+
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm11" id="1" importance ="1.0" start="s1:tm1" type="onmyleft_bis"/>
+    <performative end="s1:tm17" id="3"  start="s1:tm15" type="restpose_handsMiddleDown_Pos_B"/>
+  </fml>
+</fml-apml>

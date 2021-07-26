@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>So
+      <tm id="tm2"/>this
+      <tm id="tm3"/>time
+      <tm id="tm4"/>you
+      <tm id="tm5"/>have
+      <tm id="tm6"/>chosen
+      <tm id="tm7"/>the
+      <tm id="tm8"/>pomegranates
+      <tm id="tm9"/>they
+      <tm id="tm10"/>are
+      <tm id="tm11"/>sweet
+      <tm id="tm12"/>and
+      <tm id="tm13"/>perfect
+      <tm id="tm14"/>to
+      <tm id="tm15"/>use
+      <tm id="tm16"/>in
+      <tm id="tm17"/>a
+      <tm id="tm18"/>fruit
+      <tm id="tm19"/>coulis.
+      <tm id="tm20"/>How
+      <tm id="tm21"/>much
+      <tm id="tm22"/>should
+      <tm id="tm23"/>I
+      <tm id="tm24"/>put
+      <tm id="tm25"/>you
+      <tm id="tm26"/>in ?
+
+    </speech>
+  </bml>
+  <fml>
+    <emotion end="s1:tm4" id="1" importance ="1.0" start="s1:tm1" type="all_right"/>
+    <deictic end="s1:tm19" id="2" importance ="1.0" start="s1:tm5" type="onmy_down_left"/>
+    <emotion end="s1:tm26+4" id="3" importance="1.0" start="s1:tm22" type="small_joy"/>
+    <performative end="s1:tm26+4" id="4"  start="s1:tm22" type="restpose_handsMiddleDown_Pos_B"/>
+  </fml>
+</fml-apml>

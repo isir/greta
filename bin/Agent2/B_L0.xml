@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>I
+      <tm id="tm2"/>have a little
+      <tm id="tm3"/>doubt,
+      <tm id="tm4"/>did
+      <tm id="tm5"/>you
+      <tm id="tm6"/>chose
+      <tm id="tm7"/>these
+      <tm id="tm8"/>juicy
+      <tm id="tm9"/>pumpkins
+      <tm id="tm10"/>?
+      <tm id="tm11"/>.
+      <tm id="tm12"/>.
+      <tm id="tm13"/>.
+      <tm id="tm14"/>.
+      <tm id="tm15"/>.
+      <tm id="tm16"/>How
+      <tm id="tm17"/>much
+      <tm id="tm18"/>should I 
+      <tm id="tm19"/>put
+      <tm id="tm20"/>in ?
+      
+
+    </speech>
+  </bml>
+  <fml>
+    <certainty end="s1:tm6" id="1" importance ="1.0" start="s1:tm1" type="uncertain"/>
+    <deictic end="s1:tm10+5" id="2" importance ="1.0" start="s1:tm7" type="onmyleft"/>
+    <performative end="s1:tm15+3" id="3" importance="1.0" start="s1:tm11" type="restpose_neutral"/>
+  </fml>
+</fml-apml>

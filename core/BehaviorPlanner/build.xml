@@ -9,7 +9,6 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="BehaviorPlanner" default="default" basedir=".">
     <description>Builds, tests, and runs the project BehaviorPlanner.</description>
-    <import file="../../nbbuild.xml"/>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

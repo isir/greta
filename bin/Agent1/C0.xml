@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>
+      I'll
+      <tm id="tm2"/>
+      take
+      <tm id="tm3"/>
+      that.
+      <tm id="tm4"/>
+      I'll
+      <tm id="tm5"/>
+      let
+      <tm id="tm6"/>
+      you
+      <tm id="tm7"/>
+      choose
+      <tm id="tm8"/>
+      the
+      <tm id="tm9"/>
+      next
+      <tm id="tm10"/>
+      one.
+      
+    </speech>
+  </bml>
+  <fml>
+    <beat end="s1:tm10" id="1" importance="1.0" start="s1:tm4" type="go_on"/>
+    <emotion end="s1:tm3" id="1" importance="1.0" start="s1:tm1" type="all_right"/>
+  </fml>
+</fml-apml>

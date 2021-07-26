@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>
+      All
+      <tm id="tm2"/>
+      right.
+      <tm id="tm3"/>
+      After
+      <tm id="tm4"/>
+      that
+      <tm id="tm5"/>
+      ?
+
+    </speech>
+  </bml>
+  <fml>
+    <emotion end="s1:tm3" id="1" importance="1.0" start="s1:tm1" type="all_right"/>
+    <performative end="s1:tm5" id="1" importance="1.0" start="s1:tm3" type="go_on"/>
+  </fml>
+</fml-apml>

@@ -24,6 +24,7 @@
                 <item module="Old BAP To New BAP" name="Old BAP to New BAP"/>
                 <item module="Body Head Noise" name="Body Head Noise"/>
                 <item module="AU Parser File Reader" name="AU Parser File Reader"/>
+				        <item module="WoZ" name="WoZ"/>
                 <item module="FML Annotator" name="FML Annotator"/>
                 <menu name="Meaning Miner">
                     <item module="Image Schema Extractor" name="Image Schema Extractor"/>
@@ -246,6 +247,15 @@
             </frame>
             <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
+		<!-- nezih conf -->
+		 <module name="WoZ" style="Intentions">
+            <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad1" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+		<!-- end nezih conf -->
         <module name="EmotionML File Reader" style="Intentions">
             <object class="greta.auxiliary.emotionml.EmotionMLFileReader" lib_id="greta_emotionml"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
@@ -412,6 +422,7 @@
             </frame>
             <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
+
         <module name="Laugh Synthetizer" restrict="1" style="DEFAULT">
             <object class="greta.core.utilx.gui.LaughSynthetizerController" lib_id="greta_utilx"/>
             <frame type="object"/>
@@ -1504,6 +1515,14 @@
             <!-- TODO -->
         </connector>
         <connector id="SignalEmitterToFMLIntentionPerformer">
+            <input class="greta.core.signals.FMLIntentionEmitter" lib_id="greta_signals"/>
+            <output class="greta.core.signals.FMLIntentionPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="add" to="output"/>
+            <!-- it will call input.add(output) -->
+            <disconnect from="null" method="" to="null"/>
+            <!-- TODO -->
+        </connector>
+		        <connector id="SignalEmitterToFMLIntentionPerformer">
             <input class="greta.core.signals.FMLIntentionEmitter" lib_id="greta_signals"/>
             <output class="greta.core.signals.FMLIntentionPerformer" lib_id="greta_signals"/>
             <connect from="input" method="add" to="output"/>

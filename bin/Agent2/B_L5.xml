@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>It
+      <tm id="tm2"/>looks
+      <tm id="tm3"/>like
+      <tm id="tm4"/>you
+      <tm id="tm5"/>want
+      <tm id="tm6"/>The
+      <tm id="tm7"/>zucchini
+      <tm id="tm8"/>They
+      <tm id="tm9"/>are
+      <tm id="tm10"/>firm
+      <tm id="tm11"/>and
+      <tm id="tm12"/>local.
+      <tm id="tm13"/>It
+      <tm id="tm14"/>is
+      <tm id="tm15"/>1
+      <tm id="tm16"/>euro
+      <tm id="tm17"/>70
+      <tm id="tm18"/>a
+      <tm id="tm19"/>peace.
+      <tm id="tm20"/>That's
+      <tm id="tm21"/>really
+      <tm id="tm22"/>cheap.
+      <tm id="tm23"/>You
+      <tm id="tm24"/>want
+      <tm id="tm25"/>one,
+      <tm id="tm26"/>two
+      <tm id="tm27"/>?
+
+    </speech>
+  </bml>
+  <fml>
+    <certainty end="s1:tm4" id="1" importance ="1.0" start="s1:tm1" type="uncertain"/>
+    <deictic end="s1:tm19" id="2" importance ="1.0" start="s1:tm6" type="onmy_down_leftt"/>
+    <emotion end="s1:tm27+3" id="3" importance="1.0" start="s1:tm27" type="small_joy"/>
+    <performative end="s1:tm27+3" id="4"  start="s1:tm24" type="restpose_neutral"/>
+  </fml>
+</fml-apml>

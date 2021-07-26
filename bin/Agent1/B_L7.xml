@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>I
+      <tm id="tm2"/>see
+      <tm id="tm3"/>that
+      <tm id="tm4"/>you
+      <tm id="tm5"/>have
+      <tm id="tm6"/>chosen
+      <tm id="tm7"/>this
+      <tm id="tm8"/>French
+      <tm id="tm9"/>celery.
+      <tm id="tm10"/>It is
+      <tm id="tm11"/>not
+      <tm id="tm12"/>expensive
+      <tm id="tm13"/>at
+      <tm id="tm14"/>all.
+      <tm id="tm15"/>It
+      <tm id="tm16"/>is
+      <tm id="tm17"/>very
+      <tm id="tm18"/>good
+      <tm id="tm19"/>steamed
+      <tm id="tm20"/>and
+      <tm id="tm21"/>seasoned.
+      <tm id="tm22"/>How
+      <tm id="tm23"/>much
+      <tm id="tm24"/>do
+      <tm id="tm25"/>you
+      <tm id="tm26"/>want
+      <tm id="tm27"/>?
+      
+    </speech>
+  </bml>
+  <fml>
+    <deictic end="s1:tm14" id="1" importance ="1.0" start="s1:tm7" type="onmy_down_left"/>
+    <emotion end="s1:tm23" id="2 importance=1.0" start="s1:tm15" type="joyStrong"/>
+    <performative end="s1:tm27" id="3"  start="s1:tm24" type="restpose_handsMiddleDown_Pos_B"/>
+  </fml>
+</fml-apml>

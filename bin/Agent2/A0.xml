@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>
+
+      <tm id="tm2"/>
+
+
+    </speech>
+  </bml>
+  <fml>
+    <performative end="s1:tm1+2" id="1"  importance="1.0" start="s1:tm1" type="ticket"/>
+    <iconic end="s1:tm1+4" id="2"  importance="1.0" start="s1:tm1+2" type="thinking"/>
+    <performative end="s1:tm1+6" id="3"  importance="1.0" start="s1:tm1+4" type="ticket"/>
+    <emotion id="4" type="small_joy" start="s1:tm1+6" end="s1:tm1+6.5" importance="1.0"/>
+    <performative end="s1:tm1+9" id="1"  importance="1.0" start="s1:tm1+6.5" type="ticket_b"/>
+    <iconic end="s1:tm1+11" id="2"  importance="1.0" start="s1:tm1+9" type="thinking"/>
+    <performative end="s1:tm1+14" id="3"  importance="1.0" start="s1:tm1+11" type="ticket_b"/>
+    <emotion id="4" type="small_joy" start="s1:tm2" end="s1:tm2+0.5" importance="1.0"/>
+    <!--//ajouer le regard gauche droite pour verifier que tou se passe bien sur le stand-->
+  </fml>
+</fml-apml>

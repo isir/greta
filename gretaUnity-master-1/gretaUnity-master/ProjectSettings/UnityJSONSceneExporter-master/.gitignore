@@ -1,0 +1,50 @@
+# System files
+Thumbs.db
+Thumbs.db.meta
+*.DS_Store
+*.directory
+.vs
+.vscode
+
+# Build files
+*.apk
+*.obb
+
+# Visual Studio files
+*.cachefile
+*.csproj
+*.pidb
+*.sln
+*.suo
+*.unityproj
+*.user
+*.userprefs
+*.v11
+*.v12
+*.log
+*.logs
+
+# Folder to exclude
+[Bb]in
+[Dd]ebug*/
+[Rr]elease*/
+Builds/
+ipch/
+Library*/
+obj/
+Temp/
+UWP/
+Screenshots/
+WindowsStore/
+WS/
+UnityVS/
+UnityVS.meta
+Assets/_Testing
+Recordings
+Logs
+
+# Folders to keep
+!Assets/Scripts/UWP/
+Build/
+Assets/Plugins/AmplifyShaderEditor
+Assets/Plugins/AmplifyShaderEditor.meta

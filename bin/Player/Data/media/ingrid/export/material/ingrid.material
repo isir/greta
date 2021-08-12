@@ -1,0 +1,139 @@
+material "_Body"
+{
+	technique _Body_technique
+	{
+		pass _Body_standard
+		{
+			shading phong
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+			specular 1 1 1 1 110.209
+			emissive 0 0 0 1
+			vertex_program_ref vsLightGENNORM0
+			{
+			}
+			fragment_program_ref fpLightGENDIFF0SPEC0NORM0
+			{
+				param_named normalMul float 0.05
+			}
+
+			texture_unit _Body_Diffuse#0
+			{
+				texture Ingrid_color.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+
+			texture_unit _Body_Specular#1
+			{
+				texture Ingrid_spec.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+
+			texture_unit _Body_Normal#2
+			{
+				texture Ingrid_high_nm.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+		}
+	}
+	technique _Body_basic_technique
+	{
+	scheme basic_mat
+		pass _Body_standard
+		{
+			shading phong
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+			specular 1 1 1 1 110.209
+			emissive 0 0 0 1
+
+			texture_unit _Body_Diffuse#3
+			{
+				texture Ingrid_color.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+		}
+	}
+}
+material "_Eye_trans"
+{
+	technique _Eye_trans_technique
+	{
+		pass _Eye_trans_standard
+		{
+			shading phong
+			ambient 0 0 0 0.1405
+			diffuse 0.09092 0.09092 0.09092 0.1405
+			specular 0.95868 0.95868 0.95868 1 110.209
+			emissive 0 0 0 0.1405
+
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+material "Hair"
+{
+	technique Hair_technique
+	{
+		pass Hair_standard
+		{
+			shading phong
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+			specular 1 1 1 1 8.08331
+			emissive 0 0 0 1
+			vertex_program_ref vsLightGENNORM0
+			{
+			}
+			fragment_program_ref fpLightGENDIFF0SPEC0NORM0
+			{
+				param_named normalMul float 1
+			}
+
+			texture_unit Hair_Diffuse#0
+			{
+				texture Ingrid_wig_color.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+
+			texture_unit Hair_Specular#1
+			{
+				texture Ingrid_wig_spec.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+
+			texture_unit Hair_Normal#2
+			{
+				texture Ingrid_wig_nm.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+		}
+	}
+	technique Hair_basic_technique
+	{
+	scheme basic_mat
+		pass Hair_standard
+		{
+			shading phong
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+			specular 1 1 1 1 8.08331
+			emissive 0 0 0 1
+
+			texture_unit Hair_Diffuse#3
+			{
+				texture Ingrid_wig_color.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+		}
+	}
+}

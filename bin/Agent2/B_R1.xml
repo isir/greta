@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>have
-      <tm id="tm3"/>chosen
-      <tm id="tm4"/>our
-      <tm id="tm5"/>French,
-      <tm id="tm6"/>organic
-      <tm id="tm7"/>melons
-      <tm id="tm8"/>at
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>avez
+      <tm id="tm3"/>choisi
+      <tm id="tm4"/>nos
+      <tm id="tm5"/>melons,
+      <tm id="tm6"/>bio et locaux.
+      <tm id="tm7"/>Ils sont
+      <tm id="tm8"/>à
       <tm id="tm9"/>1
       <tm id="tm10"/>euro
       <tm id="tm11"/>80
-      <tm id="tm12"/>a piece.
-      <tm id="tm13"/>They
-      <tm id="tm14"/>are
-      <tm id="tm15"/>perfect
-      <tm id="tm16"/>for
-      <tm id="tm17"/>the
-      <tm id="tm18"/>desert.
-      <tm id="tm19"/>How
-      <tm id="tm20"/>much
-      <tm id="tm21"/>should
-      <tm id="tm22"/>I
-      <tm id="tm23"/>puy
-      <tm id="tm24"/>on
-      <tm id="tm25"/>them
+      <tm id="tm12"/>la pièce.
+      <tm id="tm13"/>Ils
+      <tm id="tm14"/>sont
+      <tm id="tm15"/>parfait
+      <tm id="tm16"/>pour
+      <tm id="tm17"/>un
+      <tm id="tm18"/>dessert.
+      <tm id="tm19"/>Combien
+      <tm id="tm20"/>voudriez
+      <tm id="tm21"/>vous
+      <tm id="tm22"/>que
+      <tm id="tm23"/>je
+      <tm id="tm24"/>vous
+      <tm id="tm25"/>en mette
       <tm id="tm26"/>?
  
     </speech>

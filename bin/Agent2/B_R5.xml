@@ -1,38 +1,38 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<?xml version="1.0" encoding="iso-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>It
-      <tm id="tm2"/>looks
-      <tm id="tm3"/>like
-      <tm id="tm4"/>you
-      <tm id="tm5"/>want
-      <tm id="tm6"/>some
-      <tm id="tm7"/>apples.
-      <tm id="tm8"/>they are
-      <tm id="tm9"/>very
-      <tm id="tm10"/>sweet
-      <tm id="tm11"/>and
-      <tm id="tm12"/>cheap.
-      <tm id="tm13"/>They
-      <tm id="tm14"/>come
-      <tm id="tm15"/>from
+      <tm id="tm1"/>Il
+      <tm id="tm2"/>me semble,
+      <tm id="tm3"/>que
+      <tm id="tm4"/>vous
+      <tm id="tm5"/>avez besoin
+      <tm id="tm6"/>de quelques
+      <tm id="tm7"/>pommes.
+      <tm id="tm8"/>elle sont
+      <tm id="tm9"/>très
+      <tm id="tm10"/>sucrés
+      <tm id="tm11"/>et
+      <tm id="tm12"/>pas très cher.
+      <tm id="tm13"/>Elles
+      <tm id="tm14"/>viennent
+      <tm id="tm15"/>de
       <tm id="tm16"/>France
-      <tm id="tm17"/>and
-      <tm id="tm18"/>are
-      <tm id="tm19"/>at
+      <tm id="tm17"/>et
+      <tm id="tm18"/>sont
+      <tm id="tm19"/>à
       <tm id="tm20"/>95
-      <tm id="tm21"/>cents
-      <tm id="tm22"/>a
+      <tm id="tm21"/>centimes
+      <tm id="tm22"/>le
       <tm id="tm23"/>kilo.
-      <tm id="tm24"/>How
-      <tm id="tm25"/>many
-      <tm id="tm26"/>do
-      <tm id="tm27"/>you
-      <tm id="tm28"/>need
+      <tm id="tm24"/>Combien
+      <tm id="tm25"/>je
+      <tm id="tm26"/>vous
+      <tm id="tm27"/>en
+      <tm id="tm28"/>mets
       <tm id="tm29"/>?
 
     </speech>

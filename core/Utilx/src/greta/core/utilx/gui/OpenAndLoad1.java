@@ -22,6 +22,7 @@ import greta.core.intentions.IntentionPerformer;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
@@ -71,7 +72,7 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
         jButtonBR = new javax.swing.JButton();
         jButtonBL = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
-        jButtonRest = new javax.swing.JButton();
+        jButtonBack = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         fileNameTextFields = new javax.swing.JTextField();
         jButtonOpen = new javax.swing.JButton();
@@ -168,10 +169,10 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
                 .addGap(32, 32, 32))
         );
 
-        jButtonRest.setText("Rest");
-        jButtonRest.addActionListener(new java.awt.event.ActionListener() {
+        jButtonBack.setText("Back");
+        jButtonBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonRestActionPerformed(evt);
+                jButtonBackActionPerformed(evt);
             }
         });
 
@@ -181,14 +182,14 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(54, Short.MAX_VALUE)
-                .addComponent(jButtonRest)
+                .addComponent(jButtonBack)
                 .addGap(50, 50, 50))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButtonRest)
+                .addComponent(jButtonBack)
                 .addGap(141, 141, 141))
         );
 
@@ -220,14 +221,14 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
             }
         });
 
-        jButtonOpen.setText("Select Dir");
+        jButtonOpen.setText("Select Dir...");
         jButtonOpen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOpenActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("Numéro Participant : ");
+        jLabel1.setText("Prénom du participant : ");
 
         subjectnameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -352,6 +353,7 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
      int cliqueC=0;
      int cliqueR=0;
      long starttime = 0;
+     CsvWriter Csvfile = new CsvWriter();
      
     private void jButtonINActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonINActionPerformed
         // TODO add your handling code here:
@@ -370,9 +372,13 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
         jButtonIN.setBackground(Color.red);
         
        //stockae du temps 
-        long tps = System.currentTimeMillis()-starttime;
+        double tps = (double) System.currentTimeMillis()-starttime;
         //stock le string dans le tableau csv en mode
-        //send_to_csv(String intro + Long.toString(tps)) 
+        try {
+            Csvfile.sendToCSV(jButtonIN.getText(),Double.toString(tps/1000.0));
+        } catch (IOException ex) {
+            Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonINActionPerformed
 
     private void jButtonAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAActionPerformed
@@ -381,7 +387,7 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
           cliqueA = 0;
       }
       String Scene = null;
-      String Slash = "\\" ; 
+      String Slash = "\\" ;
       File directoryPath = new File(fileNameTextFields.getText());
       //List of all files and directories
       String contents[] = directoryPath.list();
@@ -454,9 +460,14 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
         cliqueA++;  
         
          //stockae du temps 
-        long tps = System.currentTimeMillis()-starttime;
-        //stock le string dans le tableau csv en mode
-        //send_to_csv(Integer.toString(cliqueA)+ Long.toString(tps)) 
+        double tps = (double) System.currentTimeMillis()-starttime;
+        
+        try {
+            //stock le string dans le tableau csv en mode
+            Csvfile.sendToCSV(jButtonA.getText(),Double.toString(tps/1000.0));
+        } catch (IOException ex) {
+            Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonAActionPerformed
 
     private void jButtonOpenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpenActionPerformed
@@ -484,7 +495,7 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
 
     private void jButtonCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCActionPerformed
         // TODO add your handling code here:
-      if (cliqueC > 7) {
+      if (cliqueC > 8) {
           cliqueC = 0;
       }
       String Scene = null;
@@ -557,14 +568,29 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
             
          }
         }
+                  if (cliqueC == 8) { 
+          jButtonC.setText("C8");
+          for (String content : contents) {
+            if (content.contains("C8")) {
+                Scene = content;
+            }
+            
+         }
+        }
       
         send(fileNameTextFields.getText()+Slash+ Scene );
         cliqueC++;
         
         //stockae du temps 
-        long tps = System.currentTimeMillis()-starttime;
-        //stock le string dans le tableau csv en mode
-        //send_to_csv(Integer.toString(cliqueC)+ Long.toString(tps)) 
+        double tps = (double) System.currentTimeMillis()-starttime;
+        
+        try {
+            //stock le string dans le tableau csv en mode
+            Csvfile.sendToCSV(jButtonC.getText(),Double.toString(tps/1000.0));
+        } catch (IOException ex) {
+            Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jButtonCActionPerformed
 
     private void jButtonBRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBRActionPerformed
@@ -659,9 +685,13 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
         cliqueB++;
         
         //stockae du temps 
-        long tps = System.currentTimeMillis()-starttime;
-        //stock le string dans le tableau csv en mode
-        //send_to_csv(Integer.toString(cliqueB)+ Long.toString(tps)) 
+        double tps = (double) System.currentTimeMillis()-starttime;
+        try {
+            //stock le string dans le tableau csv en mode
+            Csvfile.sendToCSV(jButtonBR.getText(),Double.toString(tps/1000.0));
+        } catch (IOException ex) {
+            Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButtonBRActionPerformed
 
@@ -683,9 +713,13 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
         
         //stockae du temps
         //stock le string dans le tableau csv en mode
-        long tps = System.currentTimeMillis()-starttime;
+        double tps = (double) System.currentTimeMillis()-starttime;
         
-        //send_to_csv(string conclusion + Long.toString(tps)) 
+        try {
+            Csvfile.sendToCSV(jButtonFN.getText(),Double.toString(tps/1000.0));
+        } catch (IOException ex) {
+            Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_jButtonFNActionPerformed
 
@@ -694,8 +728,7 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
     }//GEN-LAST:event_fileNameTextFieldsActionPerformed
 
     private void jButtonRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRActionPerformed
-        // TODO add your handling code here:
-        
+        // TODO add your handling code here:    
     cliqueA=0;
     cliqueB=0;
     cliqueC=0;
@@ -712,20 +745,10 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
    
     }//GEN-LAST:event_jButtonRActionPerformed
 
-    private void jButtonRestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRestActionPerformed
+    private void jButtonBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBackActionPerformed
         // TODO add your handling code here:
-         String Scene = null;
-    String Slash= "//" ;
-      File directoryPath = new File(fileNameTextFields.getText());
-      //List of all files and directories
-      String contents[] = directoryPath.list();
-        for (String content : contents) {
-            if (content.contains("rest")){
-                Scene = content;
-            }
-         send(fileNameTextFields.getText()+Slash+ Scene);
-        }
-    }//GEN-LAST:event_jButtonRestActionPerformed
+        cliqueB= cliqueB - 1;
+    }//GEN-LAST:event_jButtonBackActionPerformed
 
     private void jTimeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTimeActionPerformed
         // TODO add your handling code here:
@@ -733,14 +756,27 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
 
     private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
         // TODO add your handling code here:
-    // trouver un moyen de threader ça 
-    // sinon créer une methode imer qui se dépénd du booleen x, et l activer en true via actionperformed start
+    
+    String agent = fileNameTextFields.getText();
+    if (agent.contains("Agent1")){
+        agent="Agent1";
+    }
+    
+    if (agent.contains("Agent2")){ 
+        agent="Agent2"; 
+    }
     starttime = System.currentTimeMillis();
-    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd 'at' HH:mm:ss ");
+    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd'at'HH-mm-ss");
     Date date = new Date(System.currentTimeMillis());
     this.jTime.setText(formatter.format(date));
-    
-    
+    CsvWriter newCsvfile = new CsvWriter("D:\\Csvfiles",subjectnameTextField.getText()+"-",agent+"-"+jTime.getText());
+    Csvfile = newCsvfile;
+        try {
+            Csvfile.sendToCSV(jButtonStart.getText(),"0");
+        } catch (IOException ex) {
+            Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
         
     }//GEN-LAST:event_jButtonStartActionPerformed
 
@@ -835,9 +871,13 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
         cliqueB++;
         
         //stockae du temps 
-        long tps = System.currentTimeMillis()-starttime;
-        //stock le string dans le tableau csv en mode
-        //send_to_csv(Integer.toString(cliqueB)+ Long.toString(tps)) 
+        double tps = (double) System.currentTimeMillis()-starttime;
+        try {
+            //stock le string dans le tableau csv en mode
+            Csvfile.sendToCSV(jButtonBL.getText(),Double.toString(tps/1000.0));
+        } catch (IOException ex) {
+            Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
                                
     }//GEN-LAST:event_jButtonBLActionPerformed
 
@@ -872,6 +912,13 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
          send(fileNameTextFields.getText()+Slash+ Scene);
         }
     cliqueR++;
+    
+    double tps = (double) System.currentTimeMillis()-starttime;
+        try {
+            Csvfile.sendToCSV(jButtonEX.getText(),Double.toString(tps/1000.0));
+        } catch (IOException ex) {
+            Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonEXActionPerformed
 
     private void jButtonEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEActionPerformed
@@ -911,6 +958,12 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
          } 
         }
       send(fileNameTextFields.getText()+Slash+ Scene);
+      double tps = (double) System.currentTimeMillis()-starttime;
+        try {
+            Csvfile.sendToCSV(jButtonE.getText(),Double.toString(tps/1000.0));
+        } catch (IOException ex) {
+            Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButtonEActionPerformed
         
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -919,6 +972,7 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
     private javax.swing.JButton jButtonA;
     private javax.swing.JButton jButtonBL;
     private javax.swing.JButton jButtonBR;
+    private javax.swing.JButton jButtonBack;
     private javax.swing.JButton jButtonC;
     private javax.swing.JButton jButtonE;
     private javax.swing.JButton jButtonEX;
@@ -926,7 +980,6 @@ public class OpenAndLoad1 extends javax.swing.JFrame implements IntentionEmitter
     private javax.swing.JButton jButtonIN;
     private javax.swing.JButton jButtonOpen;
     private javax.swing.JButton jButtonR;
-    private javax.swing.JButton jButtonRest;
     private javax.swing.JButton jButtonStart;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;

@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>Sorry,   
-      <tm id="tm2"/> I
-      <tm id="tm3"/>am
-      <tm id="tm4"/>not
-      <tm id="tm5"/>sure
-      <tm id="tm6"/>about
-      <tm id="tm7"/>your
-      <tm id="tm8"/>choice.
-      <tm id="tm9"/>have
-      <tm id="tm10"/>you
-      <tm id="tm11"/>chosen
-      <tm id="tm12"/>these,
-      <tm id="tm13"/>green peppers
+      <tm id="tm1"/>Veuillez   
+      <tm id="tm2"/> m'excuser,
+      <tm id="tm3"/>je ne
+      <tm id="tm4"/>suis pas vraiment
+      <tm id="tm5"/>sûre,
+      <tm id="tm6"/>de
+      <tm id="tm7"/>votre
+      <tm id="tm8"/>choix.
+      <tm id="tm9"/>avez
+      <tm id="tm10"/>vous
+      <tm id="tm11"/>choisis
+      <tm id="tm12"/>nos
+      <tm id="tm13"/>figues
       <tm id="tm14"/>?
       
     </speech>

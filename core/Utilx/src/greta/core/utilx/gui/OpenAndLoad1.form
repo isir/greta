@@ -207,7 +207,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace pref="54" max="32767" attributes="0"/>
-                      <Component id="jButtonRest" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonBack" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -216,19 +216,19 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButtonRest" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonBack" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="141" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JButton" name="jButtonRest">
+            <Component class="javax.swing.JButton" name="jButtonBack">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Rest"/>
+                <Property name="text" type="java.lang.String" value="Back"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonRestActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBackActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
@@ -292,7 +292,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="jButtonOpen">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Select Dir"/>
+            <Property name="text" type="java.lang.String" value="Select Dir..."/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOpenActionPerformed"/>
@@ -300,7 +300,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Num&#xe9;ro Participant : "/>
+            <Property name="text" type="java.lang.String" value="Pr&#xe9;nom du participant : "/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="subjectnameTextField">

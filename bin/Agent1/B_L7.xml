@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>I
-      <tm id="tm2"/>see
-      <tm id="tm3"/>that
-      <tm id="tm4"/>you
-      <tm id="tm5"/>have
-      <tm id="tm6"/>chosen
-      <tm id="tm7"/>this
-      <tm id="tm8"/>French
-      <tm id="tm9"/>celery.
-      <tm id="tm10"/>It is
-      <tm id="tm11"/>not
-      <tm id="tm12"/>expensive
-      <tm id="tm13"/>at
-      <tm id="tm14"/>all.
-      <tm id="tm15"/>It
-      <tm id="tm16"/>is
-      <tm id="tm17"/>very
-      <tm id="tm18"/>good
-      <tm id="tm19"/>steamed
-      <tm id="tm20"/>and
-      <tm id="tm21"/>seasoned.
-      <tm id="tm22"/>How
-      <tm id="tm23"/>much
-      <tm id="tm24"/>do
-      <tm id="tm25"/>you
-      <tm id="tm26"/>want
+      <tm id="tm1"/>Je
+      <tm id="tm2"/>vois
+      <tm id="tm3"/>que
+      <tm id="tm4"/>vous
+      <tm id="tm5"/>avez
+      <tm id="tm6"/>choisi
+      <tm id="tm7"/>ces
+      <tm id="tm8"/>céléris
+      <tm id="tm9"/>français.
+      <tm id="tm10"/>Ils ne
+      <tm id="tm11"/>sont pas
+      <tm id="tm12"/>cher
+      <tm id="tm13"/>du
+      <tm id="tm14"/>tout.
+      <tm id="tm15"/>C'est
+      <tm id="tm16"/>très
+      <tm id="tm17"/>bon
+      <tm id="tm18"/>cuit à
+      <tm id="tm19"/>la vapeur
+      <tm id="tm20"/>et
+      <tm id="tm21"/>assaisonné.
+      <tm id="tm22"/>Combien
+      <tm id="tm23"/>en
+      <tm id="tm24"/>voulez
+      <tm id="tm25"/>vous
+      <tm id="tm26"/>dans votre panier
       <tm id="tm27"/>?
       
     </speech>

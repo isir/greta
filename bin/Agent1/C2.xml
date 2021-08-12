@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>I'll
-      <tm id="tm2"/>take
-      <tm id="tm3"/>that.
-      <tm id="tm4"/>Do
-      <tm id="tm5"/>you
-      <tm id="tm6"/>need
-      <tm id="tm7"/>anything
-      <tm id="tm8"/>else
+      <tm id="tm1"/>je vous
+      <tm id="tm2"/>prends
+      <tm id="tm3"/>cela.
+      <tm id="tm4"/>Avez
+      <tm id="tm5"/>vous
+      <tm id="tm6"/>besoin
+      <tm id="tm7"/>d'autre
+      <tm id="tm8"/>chose
       <tm id="tm9"/>?
 
     </speech>

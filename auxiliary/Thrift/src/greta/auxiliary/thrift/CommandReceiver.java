@@ -50,12 +50,17 @@ import greta.core.util.xml.XMLParser;
 import greta.core.util.xml.XMLTree;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.NumberFormat;
+import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Class that receives and handles Thrift messages.
@@ -75,6 +80,7 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
     private int cpt;
     private CharacterManager cm;
     private HashMap<String, HashMap<LocalDateTime, ID>> gameObjectLastGazes = new HashMap<>();
+    private static NumberFormat nf = NumberFormat.getInstance(Locale.getDefault());
 
     /**
      * Creates a CommandReceiver.
@@ -397,6 +403,7 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
      * @param gameObjectProperties map with the needed properties and their values
      */
     private static void updateNodeProperties (TreeNode node, Map<String, String> gameObjectProperties) {
+        /*
         node.setCoordinates(
                 Float.parseFloat(gameObjectProperties.get("position.x")),
                 Float.parseFloat(gameObjectProperties.get("position.y")),
@@ -412,7 +419,33 @@ public class CommandReceiver extends Receiver implements IntentionEmitter, Signa
                 Float.parseFloat(gameObjectProperties.get("scale.x")),
                 Float.parseFloat(gameObjectProperties.get("scale.y")),
                 Float.parseFloat(gameObjectProperties.get("scale.z"))
+        );*/
+        node.setCoordinates(
+                parseFloat(gameObjectProperties.get("position.x")),
+                parseFloat(gameObjectProperties.get("position.y")),
+                parseFloat(gameObjectProperties.get("position.z"))
         );
+        node.setOrientation(
+                parseFloat(gameObjectProperties.get("orientation.x")),
+                parseFloat(gameObjectProperties.get("orientation.y")),
+                parseFloat(gameObjectProperties.get("orientation.z")),
+                parseFloat(gameObjectProperties.get("orientation.w"))
+        );
+        node.setScale(
+                parseFloat(gameObjectProperties.get("scale.x")),
+                parseFloat(gameObjectProperties.get("scale.y")),
+                parseFloat(gameObjectProperties.get("scale.z"))
+        );
+    }
+    
+    private static float parseFloat(String s){
+        float f = Float.NaN;
+        try {
+            f = nf.parse(s).floatValue();
+        } catch (ParseException ex) {
+            Logger.getLogger(CommandReceiver.class.getName()).log(Level.WARNING, null, ex);
+        }
+        return f;
     }
 
     /**

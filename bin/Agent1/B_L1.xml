@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>have
-      <tm id="tm3"/>chosen
-      <tm id="tm4"/>these
-      <tm id="tm5"/>carrots.
-      <tm id="tm6"/>They
-      <tm id="tm7"/>are
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>avez
+      <tm id="tm3"/>choisi
+      <tm id="tm4"/>les
+      <tm id="tm5"/>carottes.
+      <tm id="tm6"/>Elles
+      <tm id="tm7"/>sont à
       <tm id="tm8"/>85
-      <tm id="tm9"/>cents
-      <tm id="tm10"/>a
-      <tm id="tm11"/>kilogram,
-      <tm id="tm12"/>do
-      <tm id="tm13"/>you
-      <tm id="tm14"/>want
-      <tm id="tm15"/>a
-      <tm id="tm16"/>bunch?
+      <tm id="tm9"/>centime
+      <tm id="tm10"/>le
+      <tm id="tm11"/>kilogramme.
+      <tm id="tm12"/>vous
+      <tm id="tm13"/>en
+      <tm id="tm14"/>voulez
+      <tm id="tm15"/>combien
+      <tm id="tm16"/>?
       
     </speech>
   </bml>

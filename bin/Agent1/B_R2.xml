@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>opt
-      <tm id="tm3"/>for
-      <tm id="tm4"/>these
-      <tm id="tm5"/>pretty
-      <tm id="tm6"/>French
-      <tm id="tm7"/>and
-      <tm id="tm8"/>organic
-      <tm id="tm9"/>squashes.
-      <tm id="tm10"/>How
-      <tm id="tm11"/>much
-      <tm id="tm12"/>do
-      <tm id="tm13"/>you
-      <tm id="tm14"/>want
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>optez
+      <tm id="tm3"/>pour
+      <tm id="tm4"/>ces
+      <tm id="tm5"/>jolies
+      <tm id="tm6"/>courges
+      <tm id="tm7"/>française.
+      <tm id="tm8"/>un de nos produits
+      <tm id="tm9"/>bio.
+      <tm id="tm10"/>Combien
+      <tm id="tm11"/>en
+      <tm id="tm12"/>.
+      <tm id="tm13"/>voulez
+      <tm id="tm14"/>vous
       <tm id="tm15"/>?
     
     </speech>

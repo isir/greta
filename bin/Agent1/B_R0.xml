@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>I
-      <tm id="tm2"/>see
-      <tm id="tm3"/>that
-      <tm id="tm4"/>you
-      <tm id="tm5"/>have
-      <tm id="tm6"/>chosen
-      <tm id="tm7"/>the
-      <tm id="tm8"/>white
-      <tm id="tm9"/>mushrooms.
-      <tm id="tm10"/>They
-      <tm id="tm11"/>are
-      <tm id="tm12"/>local
-      <tm id="tm13"/>and
-      <tm id="tm14"/>at
-      <tm id="tm15"/>1.80
-      <tm id="tm16"/>euros
-      <tm id="tm17"/>per
+      <tm id="tm1"/>Je
+      <tm id="tm2"/>vois
+      <tm id="tm3"/>que
+      <tm id="tm4"/>vous
+      <tm id="tm5"/>avez
+      <tm id="tm6"/>choisi,
+      <tm id="tm7"/>les
+      <tm id="tm8"/>champignons
+      <tm id="tm9"/>blancs.
+      <tm id="tm10"/>Ils
+      <tm id="tm11"/>sont
+      <tm id="tm12"/>locaux,
+      <tm id="tm13"/>et
+      <tm id="tm14"/>à
+      <tm id="tm15"/>1 euros
+      <tm id="tm16"/>80
+      <tm id="tm17"/>le
       <tm id="tm18"/>kilo.
-      <tm id="tm19"/>How
-      <tm id="tm20"/>many
-      <tm id="tm21"/>do
-      <tm id="tm22"/>you
-      <tm id="tm23"/>need
+      <tm id="tm19"/>De combien
+      <tm id="tm20"/>en
+      <tm id="tm21"/>avez
+      <tm id="tm22"/>vous
+      <tm id="tm23"/>besoin
       <tm id="tm24"/>?
 
     </speech>

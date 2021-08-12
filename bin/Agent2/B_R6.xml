@@ -1,34 +1,34 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>Okay,
-      <tm id="tm2"/>as
-      <tm id="tm3"/>I
-      <tm id="tm4"/>see
-      <tm id="tm5"/>you
-      <tm id="tm6"/>are
-      <tm id="tm7"/>pobably
-      <tm id="tm8"/>interested
-      <tm id="tm9"/>in our
-      <tm id="tm10"/>French
-      <tm id="tm11"/>poratoes !
-      <tm id="tm12"/>They
-      <tm id="tm13"/>are
-      <tm id="tm14"/>organic
-      <tm id="tm15"/>and of
-      <tm id="tm16"/>a very
-      <tm id="tm17"/>good
-      <tm id="tm18"/>quality.
-      <tm id="tm19"/>How
-      <tm id="tm20"/>much
-      <tm id="tm21"/>should
-      <tm id="tm22"/>I
-      <tm id="tm23"/>put
-      <tm id="tm24"/>in
+      <tm id="tm1"/>D'accord,
+      <tm id="tm2"/>de
+      <tm id="tm3"/>ce
+      <tm id="tm4"/>que
+      <tm id="tm5"/>je
+      <tm id="tm6"/>vois,
+      <tm id="tm7"/>vous êtes
+      <tm id="tm8"/>probablement intéressé,
+      <tm id="tm9"/>par nos
+      <tm id="tm10"/>Pomme de terres provenant
+      <tm id="tm11"/>du sud de la france.
+      <tm id="tm12"/>Elles
+      <tm id="tm13"/>sont
+      <tm id="tm14"/>bio
+      <tm id="tm15"/>et de
+      <tm id="tm16"/>très
+      <tm id="tm17"/>bonne
+      <tm id="tm18"/>qualité.
+      <tm id="tm19"/>Combien
+      <tm id="tm20"/>de
+      <tm id="tm21"/>grammes
+      <tm id="tm22"/>je
+      <tm id="tm23"/>vous
+      <tm id="tm24"/>mets
       <tm id="tm25"/>?
 
     </speech>

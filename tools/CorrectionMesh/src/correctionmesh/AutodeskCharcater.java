@@ -42,7 +42,7 @@ public class AutodeskCharcater {
     static private String playerMediaPath = "./Player/Data/media/";
 
 
-    static private String characterName = "Camille";
+    static private String characterName = "Ingrid";
     static private String baseName = "body";
 
     static private String exportPath = playerMediaPath + characterName.toLowerCase()+"/export/";

@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/> I
-      <tm id="tm2"/>am
-      <tm id="tm3"/>not
-      <tm id="tm4"/>sure
-      <tm id="tm5"/>but,
-      <tm id="tm6"/>you
-      <tm id="tm7"/>need
-      <tm id="tm8"/>some
-      <tm id="tm9"/>lemons
+      <tm id="tm1"/> Je
+      <tm id="tm2"/>ne
+      <tm id="tm3"/>suis
+      <tm id="tm4"/>pas sûre,
+      <tm id="tm5"/>mais
+      <tm id="tm6"/>il me semble,
+      <tm id="tm7"/>que vous
+      <tm id="tm8"/>voulez 
+      <tm id="tm9"/>des citrons
       <tm id="tm10"/>?
 
     </speech>

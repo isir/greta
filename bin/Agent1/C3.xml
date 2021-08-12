@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>Great,
-      <tm id="tm2"/>what
-      <tm id="tm3"/>do
-      <tm id="tm4"/>I
-      <tm id="tm5"/>put
-      <tm id="tm6"/>next
+      <tm id="tm1"/>Ok,
+      <tm id="tm2"/>qu'est-ce
+      <tm id="tm3"/>que
+      <tm id="tm4"/>je
+      <tm id="tm5"/>vous
+      <tm id="tm6"/>mets ensuite
       <tm id="tm7"/>?
       
     </speech>

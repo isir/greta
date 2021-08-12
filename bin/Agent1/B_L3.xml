@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>have
-      <tm id="tm3"/>taken
-      <tm id="tm4"/>our
-      <tm id="tm5"/>fresh,
-      <tm id="tm6"/>orange
-      <tm id="tm7"/>peppers.
-      <tm id="tm8"/>They
-      <tm id="tm9"/>come
-      <tm id="tm10"/>from
-      <tm id="tm11"/>Spain.
-      <tm id="tm12"/>How
-      <tm id="tm13"/>much
-      <tm id="tm14"/>should
-      <tm id="tm15"/>I
-      <tm id="tm16"/>put
-      <tm id="tm17"/>on
-      <tm id="tm18"/>them
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>avez
+      <tm id="tm3"/>choisi
+      <tm id="tm4"/>nos
+      <tm id="tm5"/>beaux
+      <tm id="tm6"/>artichauds,
+      <tm id="tm7"/>tout frais.
+      <tm id="tm8"/>Ils
+      <tm id="tm9"/>proviennent
+      <tm id="tm10"/>d'
+      <tm id="tm11"/>Espagne.
+      <tm id="tm12"/>Combien
+      <tm id="tm13"/>dois
+      <tm id="tm14"/>je
+      <tm id="tm15"/>vous
+      <tm id="tm16"/>en 
+      <tm id="tm17"/>mettre
+      <tm id="tm18"/>dans votre panier
       <tm id="tm19"/>?
 
     </speech>

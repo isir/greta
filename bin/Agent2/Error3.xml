@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/> I
-      <tm id="tm2"/>am
-      <tm id="tm3"/>not
-      <tm id="tm4"/>sure
-      <tm id="tm5"/>but,
-      <tm id="tm6"/>are
-      <tm id="tm7"/>you
-      <tm id="tm8"/>looking
-      <tm id="tm9"/>at
-      <tm id="tm10"/>the
-      <tm id="tm11"/>Bananas
+      <tm id="tm1"/> Je
+      <tm id="tm2"/>ne suis 
+      <tm id="tm3"/>pas
+      <tm id="tm4"/>sûre,
+      <tm id="tm5"/>mais,
+      <tm id="tm6"/>êtes-vous
+      <tm id="tm7"/>entrain
+      <tm id="tm8"/>de
+      <tm id="tm9"/>regarder,
+      <tm id="tm10"/>les
+      <tm id="tm11"/>oignions
       <tm id="tm12"/>?
 
     </speech>

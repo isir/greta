@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>
+      .
+      <tm id="tm2"/>
+      .
+      <tm id="tm3"/>
+      Excusez-moi, J'ai
+      <tm id="tm4"/>
+      dû faire
+      <tm id="tm5"/>
+      une
+      <tm id="tm6"/>
+      erreur.
+      <tm id="tm7"/>
+      Je
+      <tm id="tm8"/>
+      suis 
+      <tm id="tm9"/>
+      sincèrement
+      <tm id="tm10"/>
+      désolé,
+      <tm id="tm11"/>
+      pour ce
+      <tm id="tm12"/>
+      désargrément.
+      <tm id="tm13"/>
+      Réessayons
+      <tm id="tm14"/>
+      à
+      <tm id="tm15"/>
+      nouveau.
+      <tm id="tm16"/>
+    </speech>
+  </bml>
+  <fml>
+    <emotion end="s1:tm6" id="2" importance="1.0" start="s1:tm1" type="small_sadness"/>
+    <emotion end="s1:tm15" id="2" importance="1.0" start="s1:tm13" type="all_right"/>
+  </fml>
+</fml-apml>

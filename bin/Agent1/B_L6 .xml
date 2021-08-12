@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>are
-      <tm id="tm3"/>interested
-      <tm id="tm4"/>in
-      <tm id="tm5"/>our
-      <tm id="tm6"/>mangoes.
-      <tm id="tm7"/>They
-      <tm id="tm8"/>are
-      <tm id="tm9"/>of
-      <tm id="tm10"/>a
-      <tm id="tm11"/>very
-      <tm id="tm12"/>good
-      <tm id="tm13"/>quality.
-      <tm id="tm14"/>How
-      <tm id="tm15"/>much
-      <tm id="tm16"/>should
-      <tm id="tm17"/>I
-      <tm id="tm18"/>put
-      <tm id="tm19"/>in
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>êtes
+      <tm id="tm3"/>interessé
+      <tm id="tm4"/>par
+      <tm id="tm5"/>nos
+      <tm id="tm6"/>mangues.
+      <tm id="tm7"/>Ils
+      <tm id="tm8"/>sont
+      <tm id="tm9"/>de
+      <tm id="tm10"/>très
+      <tm id="tm11"/>bonne
+      <tm id="tm12"/>qualité
+      <tm id="tm13"/>.
+      <tm id="tm14"/>Combien
+      <tm id="tm15"/>je
+      <tm id="tm16"/>vous
+      <tm id="tm17"/>en
+      <tm id="tm18"/>mets
+      <tm id="tm19"/>.
       <tm id="tm20"/>?
       
     </speech>

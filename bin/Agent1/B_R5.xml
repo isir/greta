@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>These
-      <tm id="tm2"/>apples
-      <tm id="tm3"/>are
-      <tm id="tm4"/>very
-      <tm id="tm5"/>sweet
-      <tm id="tm6"/>and
-      <tm id="tm7"/>cheap.
-      <tm id="tm8"/>They
-      <tm id="tm9"/>come
-      <tm id="tm10"/>from
+      <tm id="tm1"/>Ces
+      <tm id="tm2"/>pommes
+      <tm id="tm3"/>sont
+      <tm id="tm4"/>croquante,
+      <tm id="tm5"/>sucrée,
+      <tm id="tm6"/>et pas chère
+      <tm id="tm7"/>du tout.
+      <tm id="tm8"/>Elles
+      <tm id="tm9"/>viennent
+      <tm id="tm10"/>de
       <tm id="tm11"/>France
-      <tm id="tm12"/>and
-      <tm id="tm13"/>are
-      <tm id="tm14"/>at
+      <tm id="tm12"/>et
+      <tm id="tm13"/>sont
+      <tm id="tm14"/>à
       <tm id="tm15"/>95
-      <tm id="tm16"/>cents
-      <tm id="tm17"/>a
+      <tm id="tm16"/>centime
+      <tm id="tm17"/>le
       <tm id="tm18"/>kilo.
-      <tm id="tm19"/>How
-      <tm id="tm20"/>much
-      <tm id="tm21"/>do
-      <tm id="tm22"/>you
-      <tm id="tm23"/>want
+      <tm id="tm19"/>Combien
+      <tm id="tm20"/>en
+      <tm id="tm21"/>voulez
+      <tm id="tm22"/>vous
+      <tm id="tm23"/>dans votre panier
       <tm id="tm24"/>?
 
     </speech>

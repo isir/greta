@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>wisely
-      <tm id="tm3"/>chose,
-      <tm id="tm4"/>our
-      <tm id="tm5"/>pineapple.
-      <tm id="tm6"/>it's
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>avez
+      <tm id="tm3"/>fait un très bon choix,
+      <tm id="tm4"/>en optant 
+      <tm id="tm5"/>pour nos ananas.
+      <tm id="tm6"/>ils sont à
       <tm id="tm7"/>2
       <tm id="tm8"/>euros
       <tm id="tm9"/>77
-      <tm id="tm10"/>for
-      <tm id="tm11"/>the
+      <tm id="tm10"/>centimes
+      <tm id="tm11"/>le
       <tm id="tm12"/>kilo.
-      <tm id="tm13"/>they
-      <tm id="tm14"/>are
-      <tm id="tm15"/>ripe
-      <tm id="tm11"/>and
-      <tm id="tm12"/>perfect
-      <tm id="tm13"/>for
-      <tm id="tm14"/>a fruit salad.
-      <tm id="tm15"/>How
-      <tm id="tm16"/>many
-      <tm id="tm17"/>do
-      <tm id="tm18"/>you
-      <tm id="tm19"/>want
+      <tm id="tm13"/>ils
+      <tm id="tm14"/>sont
+      <tm id="tm15"/>juteux
+      <tm id="tm11"/>et
+      <tm id="tm12"/>parfait
+      <tm id="tm13"/>pour
+      <tm id="tm14"/>une salade de fruit.
+      <tm id="tm15"/>Combien
+      <tm id="tm16"/>en
+      <tm id="tm17"/>voudriez-vous
+      <tm id="tm18"/>dans votre
+      <tm id="tm19"/>panier
       <tm id="tm20"/>?
       
     </speech>

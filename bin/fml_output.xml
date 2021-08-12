@@ -5,26 +5,36 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>Hello,
-<tm id="tm2"/>My
-<tm id="tm3"/>name
-<tm id="tm4"/>is
-<tm id="tm5"/>Camille.
-<tm id="tm6"/>I
-<tm id="tm7"/>am
-<tm id="tm8"/>one
-<tm id="tm9"/>of
-<tm id="tm10"/>the
-<tm id="tm11"/>virtual
-<tm id="tm12"/>character
-<tm id="tm13"/>of
-<tm id="tm14"/>the
-<tm id="tm15"/>Greta
-<tm id="tm16"/>platform.
+<tm id="tm1"/>I
+<tm id="tm2"/>hope
+<tm id="tm3"/>that
+<tm id="tm4"/>this
+<tm id="tm5"/>demo
+<tm id="tm6"/>gave
+<tm id="tm7"/>you
+<tm id="tm8"/>an
+<tm id="tm9"/>idea
+<tm id="tm10"/>about
+<tm id="tm11"/>what
+<tm id="tm12"/>I
+<tm id="tm13"/>can
+<tm id="tm14"/>do.
+<tm id="tm15"/>Bye
+<tm id="tm16"/>bye,
+<tm id="tm17"/>Don't
+<tm id="tm18"/>forget
+<tm id="tm19"/>to
+<tm id="tm20"/>greet
+<tm id="tm21"/>Catherine
+<tm id="tm22"/>for
+<tm id="tm23"/>me.
 </speech>
 </bml>
 <fml>
-<deictic end="s1:tm7" id="1" importance="1.0" start="s1:tm1" type="me"/>
-<deictic end="s1:tm11" id="2" importance="1.0" start="s1:tm5" type="me"/>
+<beat end="s1:tm7" id="1" importance="1.0" start="s1:tm1" type="LowLf1"/>
+<beat end="s1:tm12" id="2" importance="1.0" start="s1:tm6" type="LowRt1"/>
+<beat end="s1:tm17" id="3" importance="1.0" start="s1:tm11" type="LowLf1"/>
+<performative end="s1:tm22" id="4" importance="1.0" start="s1:tm16" type="negativebottom"/>
+<deictic end="s1:tm28" id="5" importance="1.0" start="s1:tm22" type="me"/>
 </fml>
 </fml-apml>

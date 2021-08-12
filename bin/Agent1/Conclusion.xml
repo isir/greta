@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>That
-      <tm id="tm2"/>will
-      <tm id="tm3"/>make
-      <tm id="tm4"/>you
+      <tm id="tm1"/>Cela
+      <tm id="tm2"/>vous
+      <tm id="tm3"/>ferra
+      <tm id="tm4"/>en tout
       <tm id="tm5"/>13
       <tm id="tm6"/>euros
       <tm id="tm7"/>90
-      <tm id="tm8"/>cents.
-      <tm id="tm9"/>Thank
-      <tm id="tm10"/>you
-      <tm id="tm11"/>for
-      <tm id="tm12"/>your
-      <tm id="tm13"/>purchase,
-      <tm id="tm14"/>see
-      <tm id="tm15"/>you
-      <tm id="tm16"/>soon!
+      <tm id="tm8"/>centimes.
+      <tm id="tm9"/>Merci
+      <tm id="tm10"/>beaucoup
+      <tm id="tm11"/>pour
+      <tm id="tm12"/>vos
+      <tm id="tm13"/>achats,
+      <tm id="tm14"/>et
+      <tm id="tm15"/>à
+      <tm id="tm16"/>bientôt!
     </speech>
   </bml>
   <fml>

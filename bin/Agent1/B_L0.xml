@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>I
-      <tm id="tm2"/>see
-      <tm id="tm3"/>that
-      <tm id="tm4"/>you
-      <tm id="tm5"/>have
-      <tm id="tm6"/>chosen
-      <tm id="tm7"/>the
-      <tm id="tm8"/>lemons.
-      <tm id="tm9"/>They
-      <tm id="tm10"/>are
-      <tm id="tm11"/>ripe
-      <tm id="tm12"/>and
-      <tm id="tm13"/>at
+      <tm id="tm1"/>Je
+      <tm id="tm2"/>vois
+      <tm id="tm3"/>que
+      <tm id="tm4"/>vous
+      <tm id="tm5"/>avez
+      <tm id="tm6"/>choisi
+      <tm id="tm7"/>les
+      <tm id="tm8"/>citrons.
+      <tm id="tm9"/>Ils
+      <tm id="tm10"/>sont
+      <tm id="tm11"/>mûrs,
+      <tm id="tm12"/>et
+      <tm id="tm13"/>à
       <tm id="tm14"/>90
-      <tm id="tm15"/>cents
-      <tm id="tm16"/>a piece.
-      <tm id="tm17"/>How
-      <tm id="tm18"/>many
-      <tm id="tm19"/>do
-      <tm id="tm20"/>you
-      <tm id="tm21"/>need
+      <tm id="tm15"/>centimes
+      <tm id="tm16"/>la pièce.
+      <tm id="tm17"/>Combien
+      <tm id="tm18"/>je
+      <tm id="tm19"/>vous
+      <tm id="tm20"/>en
+      <tm id="tm21"/>mets
       <tm id="tm22"/>?
       
     </speech>

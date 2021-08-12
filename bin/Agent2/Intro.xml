@@ -1,64 +1,64 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
       <tm id="tm1"/>
-      Hi,
+      Bonjour,
       <tm id="tm2"/>
-      I
+      Je
       <tm id="tm3"/>
-      am
+      suis
       <tm id="tm4"/>
       Vanessa.
       <tm id="tm5"/>
-      This
+      Voici
       <tm id="tm6"/>
-      is
+      mon
       <tm id="tm7"/>
-      my
+      stand
       <tm id="tm8"/>
-      fruit
+      de
       <tm id="tm9"/>
-      and
+      fruits 
       <tm id="tm10"/>
-      vegetable
+      et
       <tm id="tm11"/>
-      stand.
+      légumes.
       <tm id="tm12"/>
-      I'll
+      Je
       <tm id="tm13"/>
-      let
+      vous
       <tm id="tm14"/>
-      you
+      laisse
       <tm id="tm15"/>
-      choose
+      choisir,
       <tm id="tm16"/>
-      the
+      le
       <tm id="tm17"/>
-      product
+      produit
       <tm id="tm18"/>
-      of
+      de
       <tm id="tm19"/>
-      your
+      votre
       <tm id="tm20"/>
-      choice.
+      choix.
       <tm id="tm21"/>
-      In
+      Pendant
       <tm id="tm22"/>
-      the
+      ce
       <tm id="tm23"/>
-      meantime,
+      temps la,
       <tm id="tm24"/>
-      I
+      Je
       <tm id="tm25"/>
-      will
+      vais
       <tm id="tm26"/>
-      sort
+      trier
       <tm id="tm27"/>
-      my
+      mes
       <tm id="tm28"/>
       tickets.
     </speech>
@@ -67,7 +67,6 @@
     <performative start="s1:tm1" id="1" importance="1.0" end="s1:tm3" type="greet"/>
     <deictic end="s1:tm7" id="2" importance="1.0" start="s1:tm4" type="me"/>
     <performative start="s1:tm8" id="3" importance="1.0" end="s1:tm14" type="suggest"/>
-    <!--<performative start="s1:tm8" id="3" importance="1.0" end="s1:tm14" type="suggest_bis"/>-->
     <deictic end="s1:tm21" id="4" importance="1.0" start="s1:tm15" type="you"/>
     <deictic end="s1:tm27" id="5" importance="1.0" start="s1:tm22" type="me"/>
     <performative end="s1:tm28+4" id="6" importance="1.0" start="s1:tm28" type="restpose_neutral"/>

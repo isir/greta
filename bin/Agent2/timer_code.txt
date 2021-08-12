@@ -1,0 +1,37 @@
+boolean x=true;
+    long displayMinutes=0;
+    long starttime=System.currentTimeMillis();
+    while(x)
+    {
+              try {
+                  TimeUnit.SECONDS.sleep(1);
+              } catch (InterruptedException ex) {
+                  Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+              }
+        long timepassed=System.currentTimeMillis()-starttime;
+        long secondspassed=timepassed/1000;
+        long miliseconds = timepassed ;
+        if(miliseconds == 1000)
+        {
+            miliseconds= 0;
+        }
+        if(secondspassed==60)
+        {
+            secondspassed=0;
+            starttime=System.currentTimeMillis();
+        }
+        if((secondspassed%60)==0)
+        displayMinutes++;
+   
+    //System.out.println(displayMinutes+"::"+secondspassed);
+    String minutes =Long.toString(displayMinutes);
+    String seconds =Long.toString(secondspassed);
+    String milise =Long.toString(miliseconds);
+    
+    this.jTime.setText(minutes+"::"+seconds+"::"+milise);
+    }
+
+
+lien csv : 
+
+https://www.geeksforgeeks.org/writing-a-csv-file-in-java-using-opencsv/

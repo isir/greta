@@ -5,22 +5,22 @@
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>have
-      <tm id="tm3"/>chosen
-      <tm id="tm4"/>well-ripened
-      <tm id="tm5"/>avocados.
-      <tm id="tm6"/>They
-      <tm id="tm7"/>are
-      <tm id="tm8"/>ready
-      <tm id="tm9"/>to
-      <tm id="tm10"/>be
-      <tm id="tm11"/>eaten.
-      <tm id="tm12"/>How
-      <tm id="tm13"/>many
-      <tm id="tm14"/>do
-      <tm id="tm15"/>you
-      <tm id="tm16"/>want
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>avez
+      <tm id="tm3"/>choisi
+      <tm id="tm4"/>ces avocats
+      <tm id="tm5"/>bien mûrs.
+      <tm id="tm6"/>Ils
+      <tm id="tm7"/>sont
+      <tm id="tm8"/>prêts
+      <tm id="tm9"/>à
+      <tm id="tm10"/>être
+      <tm id="tm11"/>dégusté.
+      <tm id="tm12"/>Combien
+      <tm id="tm13"/>en
+      <tm id="tm14"/>voulez
+      <tm id="tm15"/>vous
+      <tm id="tm16"/>dans votre panier
       <tm id="tm17"/>?
 
     </speech>

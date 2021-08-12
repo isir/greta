@@ -1,33 +1,33 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>opt
-      <tm id="tm3"/>for
-      <tm id="tm4"/>garlic.
-      <tm id="tm5"/>They
-      <tm id="tm6"/>are
-      <tm id="tm7"/>at
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>optez
+      <tm id="tm3"/>pour de
+      <tm id="tm4"/>l'ail.
+      <tm id="tm5"/>Il
+      <tm id="tm6"/>est
+      <tm id="tm7"/>à
       <tm id="tm8"/>2
-      <tm id="tm9"/>euro
+      <tm id="tm9"/>euros
       <tm id="tm10"/>93
-      <tm id="tm11"/>cents
-      <tm id="tm12"/>per
-      <tm id="tm13"/>kilogram.
-      <tm id="tm14"/>The
-      <tm id="tm15"/>are
-      <tm id="tm16"/>organic
-      <tm id="tm17"/>products.
-      <tm id="tm18"/>How
-      <tm id="tm19"/>much
-      <tm id="tm20"/>do
-      <tm id="tm21"/>you 
-      <tm id="tm22"/>need
-      <tm id="tm23"/>? 
+      <tm id="tm11"/>centime
+      <tm id="tm12"/>le
+      <tm id="tm13"/>kilogramme.
+      <tm id="tm14"/>C'est
+      <tm id="tm15"/>un de nos
+      <tm id="tm16"/>produits
+      <tm id="tm17"/>bio.
+      <tm id="tm18"/>Combien
+      <tm id="tm19"/>en
+      <tm id="tm20"/>voulez
+      <tm id="tm21"/>vous
+      <tm id="tm22"/>?
+      <tm id="tm23"/>. 
 
     </speech>
   </bml>

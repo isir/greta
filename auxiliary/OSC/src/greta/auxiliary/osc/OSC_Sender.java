@@ -37,19 +37,25 @@ import greta.core.keyframes.face.AUPerformer;
 import greta.core.util.CharacterManager;
 import greta.core.util.speech.Speech;
 import greta.core.util.speech.TTS;
+import greta.core.utilx.gui.CsvWriter;
+import greta.core.utilx.gui.OpenAndLoad1;
 import java.awt.Color;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
-
+import java.util.Date;
+import java.io.IOException;
+import java.io.*;
 /**
  *
  * @author Andre-Marie Pez
@@ -73,7 +79,10 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
     // OSC is use to monitor AUs signal, mainly for debug
     protected boolean useOSC = false;
     protected OSCPortOut oscOut = null;
-    protected int oscPort = 9000;    
+    protected int oscPort = 9000;
+    CsvWriter Csvfile1 = new CsvWriter();
+    long starttime=0;
+    boolean send1 =true;
 
     /**
      * Creates new customizer OSC
@@ -384,9 +393,36 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
                     Logger.getLogger(OpenFaceOutputStreamReader.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jTextArea1.setText("Received message");
-        
+                 
+                if(send1==true){
+                    starttime = System.currentTimeMillis();
+                    SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd'at'HH-mm-ss");
+                    Date dates = new Date(System.currentTimeMillis());
+                    String heure = formatter.format(dates);
+                    String gaze = "gaze" ;
+                    CsvWriter newCsvfile1 = new CsvWriter("D:\\Csvfiles",gaze,heure);
+                    Csvfile1 = newCsvfile1;
+                    System.err.println("CREATION DU FICHIER CSV n'A pas ECHOUE");
+                            try {
+                                Csvfile1.sendToCSV("start","0");
+                            } catch (IOException ex) {
+                                Logger.getLogger(OSC_Sender.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                    send1=false;
+                }
+                if(send1==false){
+                    double tps = (double) System.currentTimeMillis()-starttime;
+                    String item = choice1.getSelectedItem();
+                    String[] parts = item.split("1");
+                    String target = parts[1];
+                    try {
+                        Csvfile1.sendToCSV(target,Double.toString(tps/1000.0));
+                    } catch (IOException ex) {
+                        Logger.getLogger(OpenAndLoad1.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
                 
-            
+                
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed

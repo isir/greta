@@ -1,32 +1,32 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
       <tm id="tm1"/>
-      . . I
+      . . Je
       <tm id="tm2"/>
-      sincerly
+      m'excuse
       <tm id="tm3"/>
-      appologize
+      sincérement,
       <tm id="tm4"/>
-      for
+      pour
       <tm id="tm5"/>
-      this
+      cette
       <tm id="tm6"/>
       inconvenience.
       <tm id="tm7"/>
-      Let's
+      Permettez moi
       <tm id="tm8"/>
-      give
+      de
       <tm id="tm9"/>
-      it
+      recommencer,
       <tm id="tm10"/>
-      another
+      encore une
       <tm id="tm11"/>
-      shot.
+      fois.
       <tm id="tm12"/>
     </speech>
   </bml>

@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>So
-      <tm id="tm2"/>this
-      <tm id="tm3"/>time
-      <tm id="tm4"/>you
-      <tm id="tm5"/>have
-      <tm id="tm6"/>chosen
-      <tm id="tm7"/>the
-      <tm id="tm8"/>pomegranates
-      <tm id="tm9"/>they
-      <tm id="tm10"/>are
-      <tm id="tm11"/>sweet
-      <tm id="tm12"/>and
-      <tm id="tm13"/>perfect
-      <tm id="tm14"/>to
-      <tm id="tm15"/>use
-      <tm id="tm16"/>in
-      <tm id="tm17"/>a
-      <tm id="tm18"/>fruit
-      <tm id="tm19"/>coulis.
-      <tm id="tm20"/>How
-      <tm id="tm21"/>much
-      <tm id="tm22"/>should
-      <tm id="tm23"/>I
-      <tm id="tm24"/>put
-      <tm id="tm25"/>you
-      <tm id="tm26"/>in ?
+      <tm id="tm1"/>Alors,
+      <tm id="tm2"/>cette
+      <tm id="tm3"/>fois-ci,
+      <tm id="tm4"/>vous
+      <tm id="tm5"/>avez
+      <tm id="tm6"/>choisi,
+      <tm id="tm7"/>les
+      <tm id="tm8"/>grenades.
+      <tm id="tm9"/>Elles
+      <tm id="tm10"/>sont
+      <tm id="tm11"/>bien sucrées,
+      <tm id="tm12"/>et
+      <tm id="tm13"/>parfaite
+      <tm id="tm14"/>pour
+      <tm id="tm15"/>faire, un délicieu
+      <tm id="tm16"/>coulis,
+      <tm id="tm17"/>ou bien,
+      <tm id="tm18"/>une bonne salade
+      <tm id="tm19"/>de
+      <tm id="tm20"/>fruits.
+      <tm id="tm21"/>de combien
+      <tm id="tm22"/>en
+      <tm id="tm23"/>avez
+      <tm id="tm24"/>vous
+      <tm id="tm25"/>besoin
+      <tm id="tm26"/>?
 
     </speech>
   </bml>

@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>take
-      <tm id="tm3"/>tomatoes.
-      <tm id="tm4"/>They
-      <tm id="tm5"/>are
-      <tm id="tm6"/>beef
-      <tm id="tm7"/>hearts
-      <tm id="tm8"/>that
-      <tm id="tm9"/>are
-      <tm id="tm10"/>produced
-      <tm id="tm11"/>near
-      <tm id="tm12"/>here.
-      <tm id="tm13"/>How
-      <tm id="tm14"/>much
-      <tm id="tm15"/>do
-      <tm id="tm16"/>you
-      <tm id="tm17"/>want
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>voulez prendre
+      <tm id="tm3"/>nos
+      <tm id="tm4"/>tomates.
+      <tm id="tm5"/>ce
+      <tm id="tm6"/>sont
+      <tm id="tm7"/>des coeurs 
+      <tm id="tm8"/>de boeuf.
+      <tm id="tm9"/>un
+      <tm id="tm10"/>de
+      <tm id="tm11"/>nos produits
+      <tm id="tm12"/>locaux.
+      <tm id="tm13"/>Combien
+      <tm id="tm14"/>en
+      <tm id="tm15"/>voulez
+      <tm id="tm16"/>vous
+      <tm id="tm17"/>dans votre panier
       <tm id="tm18"/>?
     
     </speech>

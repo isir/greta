@@ -418,6 +418,10 @@
 	<agent name="alice" type="autodesk" scale="1">
 		<all mesh="alice/body.mesh" />
 	</agent>
+	
+	<agent name="donatella" type="autodesk" scale="1">
+		<all mesh="donatella/body.mesh" />
+	</agent>
 
 	<agent name="eddy" type="autodesk" scale="1">
 		<all mesh="eddy/body.mesh" />
@@ -452,6 +456,10 @@
 
 	<agent name="lena" type="autodesk" scale="1">
 		<all mesh="lena/body.mesh" />
+	</agent>
+
+	<agent name="ingrid" type="autodesk" scale="1">
+		<all mesh="ingrid/body.mesh" />
 	</agent>
 
 	<agent name="tom" type="autodesk" scale="1">

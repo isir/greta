@@ -1,42 +1,85 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <fml-apml>
-    
-	<bml>
-		<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
-			<description level="1" type="gretabml">
-				<reference>tmp/from-fml-apml.pho</reference>
-			</description>
-				
-			<tm id="tm1"/>
-				Hello,
-			<tm id="tm2"/>
-				My name is Camille.
-			<tm id="tm3"/>	
-				I am one of the virtual character
-			<tm id="tm4"/>
-				 of the Greta platform.
-			<tm id="tm5"/>	
-				
-			
-			<pitchaccent end="s1:tm4" id="pa2" importance="1" level="medium" start="s1:tm3" type="HStar"/>
-			<boundary end="s1:tm5+0.5" id="b1" start="s1:tm5" type="LL"/>
-		</speech>
-	</bml>
-<fml>
-	
-		<deictic end="s1:tm4" id="d1" importance="1.0" start="s1:tm2" target="Andre_chair0" type="you"/>
-		<performative end="s1:tm2" id="p1" importance="1.0" start="s1:tm1" type="greet"/>
-		<emotion end="s1:tm3" id="e1" importance="1.0" start="s1:tm2" type="joyStrong"/>
-		<performative end="s1:tm5" id="p2" importance="1.0" start="s1:tm3" type="propose"/>
-		<!--<rest id="rp1" type="restpose" start="0" end="s1:tm5" importance="1.0"/>-->
-	
 
     
-        <ideationalunit end="s1:tm7-0.2" id="id_1" importance="1.0" main="im_5" start="s1:tm1-0.2"/>
-        <imageschema POSroot="noun" end="s1:tm9-0.2" id="im_5" importance="1.0" indexword="5" previous="true" start="s1:tm5-0.2" type="link"/>
-        <ideationalunit end="s1:tm11-0.2" id="id_2" importance="1.0" main="im_10" start="s1:tm1-0.2"/>
-        <imageschema POSroot="noun" end="s1:tm20-0.2" id="im_10" importance="1.0" indexword="7" previous="true" start="s1:tm14-0.2" type="object"/>
-        <imageschema POSroot="noun" end="s1:tm21-0.2" id="im_11" importance="1.0" indexword="11" start="s1:tm20-0.2" type="surface"/>
+        <bml>
+            <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
+                <description level="1" type="gretabml">
+                    <reference>tmp/from-fml-apml.pho</reference>
+                </description>
+                <tm id="tm1"/>
+      Bonjour,
+      <tm id="tm2"/>
+      Je
+      <tm id="tm3"/>
+      suis
+      <tm id="tm4"/>
+      Vanessa.
+      <tm id="tm5"/>
+      Voici
+      <tm id="tm6"/>
+      mon
+      <tm id="tm7"/>
+      stand
+      <tm id="tm8"/>
+      de
+      <tm id="tm9"/>
+      fruits 
+      <tm id="tm10"/>
+      et
+      <tm id="tm11"/>
+      légumes.
+      <tm id="tm12"/>
+      Je
+      <tm id="tm13"/>
+      vous
+      <tm id="tm14"/>
+      laisse
+      <tm id="tm15"/>
+      choisir,
+      <tm id="tm16"/>
+      le
+      <tm id="tm17"/>
+      produit
+      <tm id="tm18"/>
+      de
+      <tm id="tm19"/>
+      votre
+      <tm id="tm20"/>
+      choix.
+      <tm id="tm21"/>
+      Pendant
+      <tm id="tm22"/>
+      ce
+      <tm id="tm23"/>
+      temps la,
+      <tm id="tm24"/>
+      Je
+      <tm id="tm25"/>
+      vais
+      <tm id="tm26"/>
+      trier
+      <tm id="tm27"/>
+      mes
+      <tm id="tm28"/>
+      tickets.
+    </speech>
+        </bml>
+<fml>
+        
+            <performative end="s1:tm3" id="1" importance="1.0" start="s1:tm1" type="greet"/>
+            <deictic end="s1:tm7" id="2" importance="1.0" start="s1:tm4" type="me"/>
+            <performative end="s1:tm14" id="3" importance="1.0" start="s1:tm8" type="suggest"/>
+            <deictic end="s1:tm21" id="4" importance="1.0" start="s1:tm15" type="you"/>
+            <deictic end="s1:tm27" id="5" importance="1.0" start="s1:tm22" type="me"/>
+            <performative end="s1:tm28+4" id="6" importance="1.0" start="s1:tm28" type="restpose_neutral"/>
+        
+    
+    
+        <ideationalunit end="s1:tm10-0.2" id="id_4" importance="1.0" main="im_17" start="s1:tm1-0.2"/>
+        <imageschema POSroot="noun" end="s1:tm32-0.2" id="im_17" importance="1.0" indexword="2" start="s1:tm28-0.2" type="object"/>
+        <imageschema POSroot="noun" end="s1:tm37-0.2" id="im_20" importance="1.0" indexword="10" start="s1:tm35-0.2" type="object"/>
+        <imageschema POSroot="noun" end="s1:tm38-0.2" id="im_21" importance="1.0" indexword="10" start="s1:tm37-0.2" type="object"/>
     
 
 

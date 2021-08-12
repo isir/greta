@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>
+      . . Excusez   
+      <tm id="tm2"/>
+      moi,
+      <tm id="tm3"/>
+      J'ai dû,
+      <tm id="tm4"/>
+      mal interprété
+      <tm id="tm5"/>
+      votre
+      <tm id="tm6"/>
+      choix.
+      <tm id="tm7"/>
+      Réessayons
+      <tm id="tm8"/>
+      à
+      <tm id="tm9"/>
+      nouveau,
+      <tm id="tm10"/>
+      la pochaine sera
+      <tm id="tm11"/>
+      la bonne.
+      <tm id="tm12"/> 
+    </speech>
+  </bml>
+  <fml>
+    <emotion end="s1:tm5" id="1" importance="1.0" start="s1:tm1+0.5" type="small_sadness"/>
+    <emotion end="s1:tm10" id="2" importance="1.0" start="s1:tm8" type="all_right"/>
+    <beat end="s1:tm11" id="3" importance="1.0" start="s1:tm9" type="go_on"/>
+  </fml>
+</fml-apml>

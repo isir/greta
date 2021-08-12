@@ -73,6 +73,12 @@
                 <item module="Face Library Viewer" name="Face Library Viewer"/>
                 <item module="AU Library Editor" name="AU Library Editor"/>
                 <item module="Environment Editor" name="Environment Editor"/>
+				<!-- Phil sample Module starts -->
+				<menu name="Sample">
+					<item module="Signal Forwarder" name="Signal Forwarder"/>
+					<item module="Intention Forwarder" name="Intention Forwarder"/>
+				</menu>
+				<!-- Phil sample Module ends -->
                 <!-- more tools comming soon -->
             </menu>
             <menu name="TTS">

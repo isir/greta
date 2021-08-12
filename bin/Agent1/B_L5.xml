@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>These
+      <tm id="tm1"/>Ces
       <tm id="tm2"/>melons
-      <tm id="tm3"/>are
-      <tm id="tm4"/>very
-      <tm id="tm5"/>ripe
-      <tm id="tm6"/>and
-      <tm id="tm7"/>in season.
-      <tm id="tm8"/>It
-      <tm id="tm9"/>is
-      <tm id="tm10"/>1
+      <tm id="tm3"/>sont
+      <tm id="tm4"/>très
+      <tm id="tm5"/>mûrs
+      <tm id="tm6"/>et
+      <tm id="tm7"/>de saison.
+      <tm id="tm8"/>Ils sont à
+      <tm id="tm9"/>à
+      <tm id="tm10"/>3
       <tm id="tm11"/>euro
-      <tm id="tm12"/>30
-      <tm id="tm13"/>a
-      <tm id="tm14"/>peace.
-      <tm id="tm15"/>That's
-      <tm id="tm16"/>really
-      <tm id="tm17"/>cheap.
-      <tm id="tm18"/>do you
-      <tm id="tm19"/>need
-      <tm id="tm20"/>one,
-      <tm id="tm21"/>or two
+      <tm id="tm12"/>60
+      <tm id="tm13"/>la
+      <tm id="tm14"/>pièce.
+      <tm id="tm15"/>C'est
+      <tm id="tm16"/>un très bon
+      <tm id="tm17"/>prix.
+      <tm id="tm18"/>En voulez
+      <tm id="tm19"/>vous
+      <tm id="tm20"/>une,
+      <tm id="tm21"/>ou deux pièces
       <tm id="tm22"/>?
       
     </speech>

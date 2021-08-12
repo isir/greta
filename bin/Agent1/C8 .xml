@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+  <bml>
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
+      <description level="1" type="gretabml">
+        <reference>tmp/from-fml-apml.pho</reference>
+      </description>
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>n'avez plus rien d'autre
+      <tm id="tm3"/>sur votre liste 
+      <tm id="tm4"/>?
+      
+    </speech>
+  </bml>
+  <fml>
+    <performative end="s1:tm4" id="1" importance="1.0" start="s1:tm3" type="go_on_bis"/>
+  </fml>
+</fml-apml>

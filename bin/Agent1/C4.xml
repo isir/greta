@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
       <tm id="tm1"/>
-      All right,
+      Très bien,
       <tm id="tm2"/>
-      I'll
+      je vous
       <tm id="tm3"/>
-      take
+      prends
       <tm id="tm4"/>
-      that.
+      cela.
       <tm id="tm5"/>
-      I'll
+      Je
       <tm id="tm6"/>
-      let
+      vous
       <tm id="tm7"/>
-      you
+      laisse
       <tm id="tm8"/>
-      choose
+      choisir
       <tm id="tm9"/>
-      the
+      le
       <tm id="tm10"/>
-      next
+      prochain
       <tm id="tm11"/>
-      one.
+      produit.
 
     </speech>
     

@@ -1,35 +1,35 @@
 <?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
 <fml-apml>
   <bml>
-    <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+    <speech id="s1" language="french" start="0.0" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
       </description>
-      <tm id="tm1"/>You
-      <tm id="tm2"/>have
-      <tm id="tm3"/>chosen
-      <tm id="tm4"/>our
-      <tm id="tm5"/>avocados
-      <tm id="tm6"/>from
-      <tm id="tm7"/>spain
-      <tm id="tm8"/>at
+      <tm id="tm1"/>Vous
+      <tm id="tm2"/>avez
+      <tm id="tm3"/>choisi
+      <tm id="tm4"/>nos
+      <tm id="tm5"/>avocats.
+      <tm id="tm6"/>directement
+      <tm id="tm7"/>importé d'Espagne.
+      <tm id="tm8"/>à
       <tm id="tm9"/>1.87
       <tm id="tm10"/>euros
-      <tm id="tm11"/>per
+      <tm id="tm11"/>le
       <tm id="tm12"/>kilo.
-      <tm id="tm13"/>They
-      <tm id="tm14"/>are
-      <tm id="tm15"/>ready
-      <tm id="tm16"/>to
-      <tm id="tm17"/>be
-      <tm id="tm18"/>eaten.
-      <tm id="tm19"/>How
-      <tm id="tm20"/>much
-      <tm id="tm21"/>should
-      <tm id="tm22"/>I
-      <tm id="tm23"/>puy
-      <tm id="tm24"/>on
-      <tm id="tm25"/>them
+      <tm id="tm13"/>Ils
+      <tm id="tm14"/>sont
+      <tm id="tm15"/>prêts
+      <tm id="tm16"/>à
+      <tm id="tm17"/>être
+      <tm id="tm18"/>consommés.
+      <tm id="tm19"/>Je 
+      <tm id="tm20"/>vous
+      <tm id="tm21"/>en
+      <tm id="tm22"/>met
+      <tm id="tm23"/>une,
+      <tm id="tm24"/>ou
+      <tm id="tm25"/>deux pièces
       <tm id="tm26"/>?
       
     </speech>

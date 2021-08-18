@@ -41,6 +41,7 @@
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/FMLAnnotator"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/GroupBehavior"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/OgrePlayer"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/OpenFace"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/PlanCapture"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SocialParameters"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SSI"/>

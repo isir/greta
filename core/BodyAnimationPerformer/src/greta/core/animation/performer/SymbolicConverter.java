@@ -116,6 +116,18 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
         _headIntervals.reloadData();
         loadData();
     }
+    
+    private Joint getJoinInNames(Skeleton s,String[] names){
+        Joint j=null;
+        for(String name:names){
+            j = s.getJoint(name);
+            if(j != null)
+                break;
+        }
+        if(j == null)
+            System.err.println("Can't find bone in names: "+names.toString());
+        return j;
+    }
 
     private void setSkeleton(String fileName) {
         IKSkeletonParser p = new IKSkeletonParser();
@@ -123,25 +135,34 @@ public class SymbolicConverter extends CharacterDependentAdapter implements Char
         if (re) {
             p.readSkeletonInfo(_skeleton_original);
             _skeleton = _skeleton_original.clone();
-
+            
+            Joint root = getJoinInNames(_skeleton_original, new String[]{"HumanoidRoot", "master"});
+            Joint l_shoulder = getJoinInNames(_skeleton_original, new String[]{"l_shoulder", "LeftArm"});
+            Joint l_elbow = getJoinInNames(_skeleton_original, new String[]{"l_elbow", "LeftForeArm"});
+            Joint l_wrist = getJoinInNames(_skeleton_original, new String[]{"l_wrist", "LeftHand"});
+            
+            
+            Joint r_shoulder = getJoinInNames(_skeleton_original, new String[]{"r_shoulder", "RightArm"});
+            Joint r_elbow = getJoinInNames(_skeleton_original, new String[]{"r_elbow", "RightForeArm"});
+            Joint r_wrist = getJoinInNames(_skeleton_original, new String[]{"r_wrist", "RightHand"});
             gestureSpace_LeftOffset = new Vec3d(
-                    _skeleton_original.getJoint("HumanoidRoot").getWorldPosition().x(),
-                    _skeleton_original.getJoint("l_elbow").getWorldPosition().y(),
-                    _skeleton_original.getJoint("l_shoulder").getWorldPosition().z());
+                    root.getWorldPosition().x(),
+                    l_elbow.getWorldPosition().y(),
+                    l_shoulder.getWorldPosition().z());
             gestureSpace_RightOffset = new Vec3d(
-                    _skeleton_original.getJoint("HumanoidRoot").getWorldPosition().x(),
-                    _skeleton_original.getJoint("r_elbow").getWorldPosition().y(),
-                    _skeleton_original.getJoint("r_shoulder").getWorldPosition().z());
+                    root.getWorldPosition().x(),
+                    r_elbow.getWorldPosition().y(),
+                    r_shoulder.getWorldPosition().z());
 
-            double leftArmLength = Vec3d.substraction(_skeleton_original.getJoint("l_shoulder").getWorldPosition(), _skeleton_original.getJoint("l_wrist").getWorldPosition()).length();
-            double rightArmLength = Vec3d.substraction(_skeleton_original.getJoint("r_shoulder").getWorldPosition(), _skeleton_original.getJoint("r_wrist").getWorldPosition()).length();
+            double leftArmLength = Vec3d.substraction(l_shoulder.getWorldPosition(), l_wrist.getWorldPosition()).length();
+            double rightArmLength = Vec3d.substraction(r_shoulder.getWorldPosition(), r_wrist.getWorldPosition()).length();
 
             gestureSpace_LeftScale = new Vec3d(leftArmLength, leftArmLength, leftArmLength);
             gestureSpace_RightScale = new Vec3d(-rightArmLength, rightArmLength, rightArmLength);
 
             meanArmLength = (leftArmLength + rightArmLength) / 2;
-            _leftIK.setOriginal(_skeleton.getJoint("l_shoulder").getPosition(), _skeleton.getJoint("l_elbow").getPosition(), _skeleton.getJoint("l_wrist").getPosition(), "left");
-            _rightIK.setOriginal(_skeleton.getJoint("r_shoulder").getPosition(), _skeleton.getJoint("r_elbow").getPosition(), _skeleton.getJoint("r_wrist").getPosition(), "right");
+            _leftIK.setOriginal(l_shoulder.getPosition(), l_elbow.getPosition(), l_wrist.getPosition(), "left");
+            _rightIK.setOriginal(r_shoulder.getPosition(), r_elbow.getPosition(), r_wrist.getPosition(), "right");
         } else {
             System.out.println("HumanAgent class  : skeleton file not loaded");
 

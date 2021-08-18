@@ -1,0 +1,11 @@
+import * from "autodesk.material"
+
+material Ingrid_Autodesk_Body : base {
+	set_texture_alias diffuseMap ingrid/color.jpg
+	set_texture_alias celShadingMap ingrid/color.jpg
+}
+material Ingrid_Autodesk_Hair : Autodesk_Hair {
+	set_texture_alias diffuseMap ingrid/hair_color.jpg
+	set_texture_alias celShadingMap ingrid/hair_color.jpg
+}
+

@@ -1,0 +1,121 @@
+#version 100
+precision mediump int;
+precision highp float;
+
+uniform vec3 fogColor;
+uniform vec3 ambient;
+uniform vec3 lightDif0;
+uniform vec4 lightPos0;
+uniform vec4 lightAtt0;
+uniform vec3 lightSpec0;
+uniform vec3 lightDif1;
+uniform vec4 lightPos1;
+uniform vec4 lightAtt1;
+uniform vec3 lightSpec1;
+uniform vec3 lightDif2;
+uniform vec4 lightPos2;
+uniform vec4 lightAtt2;
+uniform vec3 lightSpec2;
+uniform vec3 camPos;
+uniform vec4 matAmb;
+uniform vec4 matEmissive;
+uniform vec4 matDif;
+uniform vec4 matSpec;
+uniform float matShininess;
+uniform vec4 invSMSize;
+uniform vec4 spotlightParams0;
+uniform vec4 spotlightParams1;
+uniform vec4 spotlightParams2;
+uniform mat4 iTWMat;
+uniform float normalMul;
+
+uniform sampler2D diffuseMap;
+uniform sampler2D specMap;
+uniform sampler2D normalMap;
+
+varying float fog;
+varying vec3 oNorm;
+varying vec3 oTang;
+varying vec3 oBinormal;
+varying vec3 oSpDir0;
+varying vec3 oSpDir1;
+varying vec3 oSpDir2;
+varying vec4 oWp;
+
+varying vec4 oUv0;
+highp mat3 transposeMat3(in highp mat3 inMatrix) {
+highp vec3 i0 = inMatrix[0];
+highp vec3 i1 = inMatrix[1];
+highp vec3 i2 = inMatrix[2];
+highp mat3 outMatrix = mat3(
+vec3(i0.x, i1.x, i2.x),
+vec3(i0.y, i1.y, i2.y),
+vec3(i0.z, i1.z, i2.z)
+);
+return outMatrix;}
+void main()
+{
+	vec3 normalTex = texture2D(normalMap, oUv0.xy).xyz;
+	mat3 tbn = mat3(oTang.x * normalMul, oBinormal.x * normalMul, oNorm.x, oTang.y * normalMul, oBinormal.y * normalMul, oNorm.y, oTang.z * normalMul, oBinormal.z * normalMul, oNorm.z);
+	vec3 normal = transposeMat3(tbn) * ((normalTex.xyz - vec3(0.5)) * vec3(2.0)); // to object space
+	normal = normalize(mat3(iTWMat) * normal);
+	vec3 ld0 = normalize(lightPos0.xyz - (vec3(lightPos0.w) * oWp.xyz));
+	vec3 ld1 = normalize(lightPos1.xyz - (vec3(lightPos1.w) * oWp.xyz));
+	vec3 ld2 = normalize(lightPos2.xyz - (vec3(lightPos2.w) * oWp.xyz));
+	// attenuation
+	float lightDist = length(lightPos0.xyz - oWp.xyz) / (lightAtt0.x / lightAtt0.x);
+	float la0 = 1.0;
+	float ila = 0.0;
+	if(lightAtt0.a > 0.0)
+	{
+		ila = lightDist * lightDist; // quadratic falloff
+		la0 = 1.0 / (lightAtt0.g + lightAtt0.b * lightDist + lightAtt0.a * ila);
+	}
+	// attenuation
+	lightDist = length(lightPos1.xyz - oWp.xyz) / (lightAtt1.x / lightAtt1.x);
+	float la1 = 1.0;
+	if(lightAtt1.a > 0.0)
+	{
+		ila = lightDist * lightDist; // quadratic falloff
+		la1 = 1.0 / (lightAtt1.g + lightAtt1.b * lightDist + lightAtt1.a * ila);
+	}
+	// attenuation
+	lightDist = length(lightPos2.xyz - oWp.xyz) / (lightAtt2.x / lightAtt2.x);
+	float la2 = 1.0;
+	if(lightAtt2.a > 0.0)
+	{
+		ila = lightDist * lightDist; // quadratic falloff
+		la2 = 1.0 / (lightAtt2.g + lightAtt2.b * lightDist + lightAtt2.a * ila);
+	}
+	vec3 diffuse0 = vec3(max(dot(normal, ld0), 0.0)) * lightDif0;
+	vec3 diffuse1 = vec3(max(dot(normal, ld1), 0.0)) * lightDif1;
+	vec3 diffuse2 = vec3(max(dot(normal, ld2), 0.0)) * lightDif2;
+	// calculate the spotlight effect
+	float spot0 = ((spotlightParams0.w == 0.0) ? 1.0 : // if so, then it's not a spot light
+	   clamp(((dot(normalize(-oSpDir0), ld0) - spotlightParams0.y) / (spotlightParams0.x - spotlightParams0.y)), 0.0, 1.0));
+	float spot1 = ((spotlightParams1.w == 0.0) ? 1.0 : // if so, then it's not a spot light
+	   clamp(((dot(normalize(-oSpDir1), ld1) - spotlightParams1.y) / (spotlightParams1.x - spotlightParams1.y)), 0.0, 1.0));
+	float spot2 = ((spotlightParams2.w == 0.0) ? 1.0 : // if so, then it's not a spot light
+	   clamp(((dot(normalize(-oSpDir2), ld2) - spotlightParams2.y) / (spotlightParams2.x - spotlightParams2.y)), 0.0, 1.0));
+	vec3 camDir = normalize(camPos - oWp.xyz);
+	vec3 halfVec = normalize(ld0 + camDir);
+	vec3 specularLight = pow(vec3(max(dot(normal, halfVec), 0.0)), vec3(matShininess)) * vec3(la0) * lightSpec0;
+	halfVec = normalize(ld1 + camDir);
+	specularLight += pow(vec3(max(dot(normal, halfVec), 0.0)), vec3(matShininess)) * vec3(la1) * lightSpec1;
+	halfVec = normalize(ld2 + camDir);
+	specularLight += pow(vec3(max(dot(normal, halfVec), 0.0)), vec3(matShininess)) * vec3(la2) * lightSpec2;
+	vec3 diffuseLight = (diffuse0 * vec3(spot0 * la0)) + (diffuse1 * vec3(spot1 * la1)) + (diffuse2 * vec3(spot2 * la2));
+	vec3 ambientColor = max(matEmissive.xyz, ambient * matAmb.xyz);
+	vec3 diffuseContrib = matDif.xyz;
+	vec4 diffuseTex = texture2D(diffuseMap, oUv0.xy);
+	ambientColor *= diffuseTex.xyz;
+	diffuseContrib *= diffuseTex.xyz;
+	vec3 specularContrib = specularLight * matSpec.xyz;
+	vec4 specTex = texture2D(specMap, oUv0.xy);
+	specularContrib *= specTex.xyz;
+	vec3 light0C = clamp(ambientColor + (diffuseLight * diffuseContrib) + specularContrib, vec3(0.0), vec3(1.0));
+	float alpha = matDif.a;
+	alpha *= diffuseTex.a;
+	if (alpha < 0.01) discard;
+	gl_FragColor = vec4((vec3(fog) * light0C) + (fogColor * vec3(1.0 - fog)), alpha);
+}

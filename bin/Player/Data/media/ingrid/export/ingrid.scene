@@ -1,0 +1,149 @@
+<scene upAxis="y" unitsPerMeter="1" unitType="meters" formatVersion="1.0" minOgreVersion="1.7" author="EasyOgreExporter">
+    <environment>
+        <colourAmbient r="0" g="0" b="0" />
+        <colourBackground r="0" g="0" b="0" />
+    </environment>
+    <nodes>
+        <node name="Lights" id="0" isTarget="false">
+            <position x="0" y="0.30480000376701355" z="0.19690079987049103" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <node name="spotLight1" id="1" isTarget="false">
+                <position x="0.84890371561050415" y="1.8096104860305786" z="-4.0922656059265137" />
+                <rotation qx="-0.50009560585021973" qy="0.066727019846439362" qz="0.11418958753347397" qw="-0.85581111907958984" />
+                <scale x="9.1926088333129883" y="9.1926078796386719" z="9.1926088333129883" />
+                <light name="spotLight1" id="2" type="spot" castShadows="true">
+                    <colourDiffuse r="1" g="1" b="1" />
+                    <colourSpecular r="1" g="1" b="1" />
+                    <lightAttenuation range="2.5399999618530273" constant="1" linear="0" quadratic="0" />
+                    <lightRange inner="1.6876589059829712" outer="1.7366956472396851" falloff="1" />
+                </light>
+            </node>
+            <node name="spotLight2" id="3" isTarget="false">
+                <position x="-2.3190417289733887" y="1.8882158994674683" z="-2.6782081127166748" />
+                <rotation qx="0.029123544692993164" qy="0.011766675859689713" qz="-0.37442174553871155" qw="-0.92672634124755859" />
+                <scale x="9.1926078796386719" y="9.1926097869873047" z="9.1926078796386719" />
+            </node>
+            <node name="spotLight3" id="4" isTarget="false">
+                <position x="2.156461238861084" y="-2.2464427947998047" z="-2.6163105964660645" />
+                <rotation qx="-0.0068182270042598248" qy="0.019801467657089233" qz="-0.94531118869781494" qw="0.32549679279327393" />
+                <scale x="9.1926078796386719" y="9.1926088333129883" z="9.1926107406616211" />
+            </node>
+            <node name="spotLight4" id="5" isTarget="false">
+                <position x="-1.1640374660491943" y="-1.9782147407531738" z="-2.7797989845275879" />
+                <rotation qx="0.015615321695804596" qy="0.060817815363407135" qz="-0.96667188405990601" qw="-0.24819913506507874" />
+                <scale x="9.1926088333129883" y="9.1926088333129883" z="9.1926097869873047" />
+            </node>
+        </node>
+        <node name="h_TeethUp" id="6" isTarget="false">
+            <position x="-7.9826117143966258e-05" y="1.5658955574035645" z="0.10026965290307999" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="h_TeethUp" id="7" meshFile="h_TeethUp.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_Body" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="h_L_gland" id="8" isTarget="false">
+            <position x="0.017916148528456688" y="1.6358113288879395" z="0.13290390372276306" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="h_L_gland" id="9" meshFile="h_L_gland.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_Body" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="h_L_eye" id="10" isTarget="false">
+            <position x="-0.031836658716201782" y="1.6384350061416626" z="0.12464820593595505" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="h_L_eye" id="11" meshFile="h_L_eye.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_Body" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="h_L_trans" id="12" isTarget="false">
+            <position x="-0.031836658716201782" y="1.6384350061416626" z="0.12464820593595505" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="h_L_trans" id="13" meshFile="h_L_trans.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_Eye_trans" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="h_R_gland" id="14" isTarget="false">
+            <position x="-0.017789015546441078" y="1.6361167430877686" z="0.13293084502220154" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="h_R_gland" id="15" meshFile="h_R_gland.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_Body" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="h_R_eye" id="16" isTarget="false">
+            <position x="-0.031836658716201782" y="1.6384350061416626" z="0.12464820593595505" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="h_R_eye" id="17" meshFile="h_R_eye.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_Body" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="h_R_trans" id="18" isTarget="false">
+            <position x="-0.031836658716201782" y="1.6384350061416626" z="0.12464820593595505" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="h_R_trans" id="19" meshFile="h_R_trans.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_Eye_trans" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="h_wig" id="20" isTarget="false">
+            <position x="0" y="0" z="0" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="h_wig" id="21" meshFile="h_wig.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="Hair" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="master" id="22" isTarget="false">
+            <position x="0" y="0" z="0" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <node name="Reference" id="23" isTarget="false">
+                <position x="0" y="0" z="0" />
+                <rotation qx="-0" qy="-0" qz="-0" qw="-1" />
+                <scale x="1" y="1" z="1" />
+            </node>
+        </node>
+        <node name="H_DDS_HighRes" id="24" isTarget="false">
+            <position x="0" y="0" z="0.028555925935506821" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="H_DDS_HighRes" id="25" meshFile="H_DDS_HighRes.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_Body" />
+                </subentities>
+            </entity>
+        </node>
+        <node name="h_TeethDown" id="26" isTarget="false">
+            <position x="-0.00018225194071419537" y="1.5619676113128662" z="0.11376534402370453" />
+            <rotation qx="-0.7071068286895752" qy="-0" qz="-0" qw="-0.70710676908493042" />
+            <scale x="0.39370077848434448" y="0.39370077848434448" z="0.39370077848434448" />
+            <entity name="h_TeethDown" id="27" meshFile="h_TeethDown.mesh" castShadows="true">
+                <subentities>
+                    <subentity index="0" materialName="_Body" />
+                </subentities>
+            </entity>
+        </node>
+    </nodes>
+</scene>

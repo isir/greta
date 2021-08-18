@@ -1206,6 +1206,7 @@
         </lib>
         <lib id="greta_openface" path="./Common/Lib/Internal/OpenFace.jar">
             <depends lib_id="ext_jeromq"/>
+			<depends lib_id="greta_osc"/>
             <depends lib_id="greta_mpeg4"/>
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_util"/>
@@ -1256,6 +1257,8 @@
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_social_parameters"/>
             <depends lib_id="greta_util"/>
+        </lib>
+		<lib id="greta_osc" path="./Common/Lib/Internal/OSC.jar">           
         </lib>
         <lib id="greta_util" path="./Common/Lib/Internal/Util.jar">
             <needs path="./Common/Data/characters/*"/>

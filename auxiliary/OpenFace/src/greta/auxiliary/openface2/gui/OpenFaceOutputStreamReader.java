@@ -940,7 +940,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     @Override
     public void addAUPerformer(AUPerformer auPerformer) {
         if (auPerformer != null) {
-            LOGGER.info("addAUPerformer");
+            LOGGER.fine("addAUPerformer");
             auEmitter.addAUPerformer(auPerformer);
         }
     }
@@ -948,7 +948,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     @Override
     public void removeAUPerformer(AUPerformer auPerformer) {
         if (auPerformer != null) {
-            LOGGER.info("removeAUPerformer");
+            LOGGER.fine("removeAUPerformer");
             auEmitter.removeAUPerformer(auPerformer);
         }
     }
@@ -965,7 +965,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     @Override
     public void addBAPFramePerformer(BAPFramePerformer bapFramePerformer) {
         if (bapFramePerformer != null) {
-            LOGGER.info("addBAPFramePerformer");
+            LOGGER.fine("addBAPFramePerformer");
             bapFrameEmitter.addBAPFramePerformer(bapFramePerformer);
         }
     }
@@ -973,7 +973,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     @Override
     public void removeBAPFramePerformer(BAPFramePerformer bapFramePerformer) {
         if (bapFramePerformer != null) {
-            LOGGER.info("removeBAPFramePerformer");
+            LOGGER.fine("removeBAPFramePerformer");
             bapFrameEmitter.removeBAPFramePerformer(bapFramePerformer);
         }
     }

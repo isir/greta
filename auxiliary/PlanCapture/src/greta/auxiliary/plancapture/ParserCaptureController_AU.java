@@ -17,9 +17,9 @@
  */
 package greta.auxiliary.plancapture;
 
+import greta.auxiliary.openface1.AUParserFilesReader;
 import greta.core.feedbacks.Callback;
 import greta.core.feedbacks.CallbackPerformer;
-import greta.core.signals.AUParserFileReader;
 import greta.core.util.log.Logs;
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -31,13 +31,13 @@ import java.util.logging.Logger;
  * @author Thomas Janssoone
  */
 public class ParserCaptureController_AU extends greta.auxiliary.player.ogre.capture.AUCapturecontroller implements CallbackPerformer {
-    private static final Logger LOGGER = Logger.getLogger(ParserCaptureController_AU.class.getName() );
+
+    private static final Logger LOGGER = Logger.getLogger(ParserCaptureController_AU.class.getName());
 
     private volatile boolean isCapturing = false;
-    private boolean mustcapture = false;
-    private File[] listFiles;
-    private AUParserFileReader filereader;
-
+    private boolean mustCapture = false;
+    private File[] files;
+    private AUParserFilesReader filesReader;
 
     public ParserCaptureController_AU(){
         videoButton.setEnabled(false);
@@ -45,19 +45,18 @@ public class ParserCaptureController_AU extends greta.auxiliary.player.ogre.capt
 
     }
 
-
     @Override
     public void screenShot() {
-        mustcapture = true;
+        mustCapture = true;
 
-        if(filereader==null || filereader.getDirPath()==null){
+        if(filesReader==null || filesReader.getDirPath()==null){
             Logs.error("Please set a directory in linked AUParserFileReader component first.");
         }
         else{
-            File dir = filereader.getDirPath();
-            listFiles = dir.listFiles((File file, String name1) -> name1.contains(".csv"));
-            Logs.debug("Nb Files to process: "+listFiles.length);
-            for(File aufile : listFiles){
+            File dir = filesReader.getDirPath();
+            files = dir.listFiles((File file, String name1) -> name1.contains(".csv"));
+            Logs.debug("Nb Files to process: "+files.length);
+            for(File aufile : files){
                 if(aufile.isFile()){
                     Logs.debug("Process: "+aufile.getAbsolutePath());
 
@@ -71,7 +70,7 @@ public class ParserCaptureController_AU extends greta.auxiliary.player.ogre.capt
     public void performCallback(Callback clbck) {
         Logs.debug("performCallback:");
 
-        if (mustcapture) {
+        if (mustCapture) {
             Logs.debug("-- mustcapture");
 
             if ((clbck.type().equalsIgnoreCase("dead") || clbck.type().equalsIgnoreCase("end"))) {
@@ -91,9 +90,8 @@ public class ParserCaptureController_AU extends greta.auxiliary.player.ogre.capt
         }
     }
 
-
-    public void setAUParserFileReader(AUParserFileReader bfr){
-        this.filereader = bfr;
+    public void setAUParserFilesReader(AUParserFilesReader fr){
+        this.filesReader = fr;
     }
 
     private void recordAU(File aufile) {
@@ -109,12 +107,11 @@ public class ParserCaptureController_AU extends greta.auxiliary.player.ogre.capt
             }
             setBaseFileName(videoName);
 
-
             isCapturing = false;
-            int length = filereader.loadFile(aufile.getAbsolutePath());
+            int length = filesReader.loadFile(aufile.getAbsolutePath());
             while (!isCapturing) {
                 Logs.debug("---- isCapturing : false");
-                isCapturing =  filereader.isPerforming();
+                isCapturing =  filesReader.isPerforming();
             }
             Logs.debug("---- isCapturing : TRUE");
 

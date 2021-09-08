@@ -6,6 +6,7 @@ Realtime platform to control socio-emotional virtual characters
 ![Greta logo](https://user-images.githubusercontent.com/54807091/88184824-7c5ba280-cc33-11ea-875e-0a785d95075f.png)
 
 https://user-images.githubusercontent.com/49474878/116714245-d7e26a00-a9d5-11eb-9f5a-f3c2cab623b9.mp4
+
 https://github.com/Michele1996/images/blob/main/Video_AAMAS_updated_fin.mp4
 
 Welcome to the public repository of the Greta project.

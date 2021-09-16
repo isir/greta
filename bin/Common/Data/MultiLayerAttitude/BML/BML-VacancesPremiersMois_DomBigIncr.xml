@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bml xmlns="http://www.mindmakers.org/projects/BML" character="Greta"
+    composition="append" id="bml1">
+    <speech xmlns="" id="s1" language="french" start="0.0" voice="openmary">
+        <tm id="tm0"/>
+			You 
+			<tm id="tm1"/>
+			need to know 
+			<tm
+            id="tm2"/>
+			that,
+			<tm id="tm3"/>
+			in general,
+			<tm
+            id="tm4"/>
+			during the 
+			<tm
+            id="tm5"/>
+			first months,
+			<tm
+            id="tm6"/>
+			it will 
+			<tm
+            id="tm7"/>
+			not be possible 
+			<tm
+            id="tm8"/>
+			for you to 
+			<tm
+            id="tm9"/>
+			claim any holidays.
+			<tm
+            id="tm10"/>
+			does this 
+			<tm id="tm11"/>
+			suit 
+			<tm
+            id="tm12"/>
+			you ?
+			<tm id="tm13"/>
+        <pitchaccent end="s1:tm2" id="pa1" start="s1:tm1" type="Hstar"/>
+        <pitchaccent end="s1:tm4" id="pa2" start="s1:tm3" type="Lstar"/>
+        <pitchaccent end="s1:tm6" id="pa3" start="s1:tm5" type="Hstar"/>
+        <pitchaccent end="s1:tm8" id="pa4" start="s1:tm7" type="Hstar"/>
+        <pitchaccent end="s1:tm10" id="pa5" start="s1:tm9" type="Hstar"/>
+        <pitchaccent end="s1:tm12" id="pa6" start="s1:tm11" type="Hstar"/>
+        <boundary end="s1:tm3+0.5" id="b1" start="s1:tm3" type="HL"/>
+        <boundary end="s1:tm4+0.5" id="b2" start="s1:tm4" type="HL"/>
+        <boundary end="s1:tm6+0.5" id="b3" start="s1:tm6" type="HL"/>
+        <boundary end="s1:tm10+0.5" id="b4" start="s1:tm10" type="LL"/>
+        <boundary end="s1:tm13+0.5" id="b5" start="s1:tm13" type="HH"/>
+    </speech>
+    <head end="0.738" id="pa1_0" lexeme="NOD" start="0.171">
+        <description priority="1" type="gretabml">
+            <reference>nod_middle</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <gesture id="p1_0" lexeme="inform_Ges_B_Spread" ready="0.000" relax="1.187">
+        <description priority="1" type="gretabml">
+            <reference>performative=inform_Ges_B_Spread</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <head end="1.187" id="b1_0" lexeme="Down_Left" start="0.738">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_LEFT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <head end="2.429" id="pa2_0" lexeme="NOD" start="1.187">
+        <description priority="1" type="gretabml">
+            <reference>NOD_Middle</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <face amount="1.000" end="2.429" id="pa2_1" start="1.187">
+        <lexeme lexeme="Eyebrows_Frown"/>
+    </face>
+    <head end="4.418" id="pa3_0" lexeme="Down_Aside_Left" start="3.328">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_ASIDE_LEFT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <gesture id="p2_0" lexeme="tiny_Ges_R" ready="3.328" relax="4.418">
+        <description priority="1" type="gretabml">
+            <reference>iconic=tiny_Ges_R</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <head end="6.243" id="pa4_0" lexeme="NOD" start="5.255">
+        <description priority="1" type="gretabml">
+            <reference>nod_middle</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <gesture id="p3_0" lexeme="refuse_Ges_B" ready="5.255" relax="6.243">
+        <description priority="1" type="gretabml">
+            <reference>performative=refuse_Ges_B</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <head end="8.070" id="pa5_0" lexeme="NOD" start="6.761">
+        <description priority="1" type="gretabml">
+            <reference>nod_middle</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <head end="9.287" id="pa6_0" lexeme="Down_Aside_Right" start="8.961">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_ASIDE_RIGHT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <gesture id="p5_0" lexeme="ask_Ges_B" ready="8.070" relax="9.697">
+        <description priority="1" type="gretabml">
+            <reference>performative=ask_Ges_B</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <head end="9.697" id="b5_0" lexeme="Up_Aside_Left" start="9.287">
+        <description priority="1" type="gretabml">
+            <reference>UP_ASIDE_LEFT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <greta:torso xmlns:greta="VIBNameSpace" end="13.687"
+        id="MLAttSeqPlan_225" lexeme="BodyLean" start="0.171">
+        <greta:description priority="1" type="gretabml">
+            <greta:reference>BodyLean</greta:reference>
+            <greta:intensity>1.000</greta:intensity>
+            <greta:SPC.value>-1.000</greta:SPC.value>
+            <greta:TMP.value>-1.000</greta:TMP.value>
+            <greta:FLD.value>1.000</greta:FLD.value>
+            <greta:PWR.value>-1.000</greta:PWR.value>
+            <greta:REP.value>0.000</greta:REP.value>
+            <greta:OPN.value>0.000</greta:OPN.value>
+            <greta:TEN.value>0.000</greta:TEN.value>
+        </greta:description>
+    </greta:torso>
+	<gaze influence="HEAD" offsetAngle="0.2" offsetDirection="UP" start="0.17" end="13" ready="0.67" relax="12.5">
+	</gaze>
+</bml>

@@ -50,7 +50,7 @@ public class CharacterManager {
     private List<CharacterDependent> dependents;
     private String currentCaracterName;
 
-    private String currentCharacterId; //TODO find a better way to give the id from the environment
+    public String currentCharacterId; //TODO find a better way to give the id from the environment
     public String currentCameraId;
     private String id;
     private TTS tts;

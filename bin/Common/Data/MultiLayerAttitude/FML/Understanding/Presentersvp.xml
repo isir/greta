@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0"
+                voice="openmary">
+			<tm id="tm0"/>
+			Pour
+			commencer,
+			<tm id="tm1"/>
+			pourriez
+			vous
+			vous
+			présenter
+			s'il
+			vous
+			plait ?
+			<tm id="tm2"/>
+            <boundary end="s1:tm2+0.5" id="b1" start="s1:tm2" type="HH"/>
+        </speech>
+    </bml>
+    <fml>
+	<performative end="s1:tm2" id="p1" importance="1.0" start="s1:tm1" type="ask"/>
+    </fml>
+</fml-apml>

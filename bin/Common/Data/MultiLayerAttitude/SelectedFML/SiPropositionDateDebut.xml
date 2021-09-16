@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+				If we decided to 
+			<tm id="tm1"/>
+				offer you 
+			<tm id="tm2"/>
+				this job,
+			<tm id="tm3"/>
+				when 
+			<tm id="tm4"/>
+				would you be 
+			<tm id="tm5"/>
+				ready to start
+			<tm id="tm6"/>
+			
+			<pitchaccent id="pa1" start="s1:tm1" end="s1:tm2" type="Hstar"/>
+			<pitchaccent id="pa2" start="s1:tm3" end="s1:tm4" type="Hstar"/>
+			<pitchaccent id="pa3" start="s1:tm5" end="s1:tm6" type="Hstar"/>
+			
+            <boundary id="b1" start="s1:tm3" end="s1:tm3+0.5" type="LH"/>
+            <boundary id="b2" start="s1:tm6" end="s1:tm6+0.5" type="HH"/>
+
+		</speech>
+    </bml>
+    <fml>
+		<performative id="p1" importance="1.0" start="s1:tm0" end="s1:tm2" type="suggest"/>
+		<world-place id="p2" importance="1.0" start="s1:tm2" end="s1:tm3" type="here"/>
+		<iconic id="p3" importance="1.0" start="s1:tm3" end="s1:tm4" type="future"/>
+		<performative id="p4" importance="1.0" start="s1:tm3" end="s1:tm6" type="ask"/>
+    </fml>
+</fml-apml>

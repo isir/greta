@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm1"/>
+				Durant
+				votre
+				formation
+				dans
+				notre
+				entreprise
+			<tm id="tm1"/>
+				vous
+				percevrez
+				une
+				indemnité
+				de
+				stage
+			<tm id="tm1"/>
+				est
+				ce
+				que
+				cela
+				vous
+				convient
+			<tm id="tm1"/>
+            <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="LL"/>
+
+		</speech>
+    </bml>
+    <fml/>
+</fml-apml>

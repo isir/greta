@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+				In your 
+			<tm id="tm1"/>
+				previous 
+			<tm id="tm2"/>
+				professional experiences,
+			<tm id="tm3"/>
+				what made you the 
+			<tm id="tm4"/>
+				most proud
+			<tm id="tm5"/>
+			
+			<pitchaccent id="pa1" start="s1:tm2" end="s1:tm3" type="Hstar"/>
+			<pitchaccent id="pa2" start="s1:tm4" end="s1:tm5" type="Hstar"/>
+			
+			
+            <boundary id="b1" start="s1:tm3" end="s3:tm1+0.5" type="HL"/>
+            <boundary id="b2" start="s1:tm5" end="s1:tm5+0.5" type="HH"/>
+		</speech>
+    </bml>
+    <fml>
+		<iconic id="p1" importance="1.0" start="s1:tm1" end="s1:tm3" type="past"/>
+		<performative id="p2" importance="1.0" start="s1:tm3" end="s1:tm5" type="ask"/>
+		<iconic id="p3" importance="1.0" start="s1:tm4" end="s1:tm5" type="big"/>
+    </fml>
+</fml-apml>

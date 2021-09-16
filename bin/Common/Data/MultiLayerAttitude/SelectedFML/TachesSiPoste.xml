@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+			Do you know 
+			<tm id="tm1"/>
+			exactly ,
+			<tm id="tm2"/>
+			what tasks 
+			<tm id="tm3"/>
+			you would have to do,
+			<tm id="tm4"/>
+			if you were
+			<tm id="tm5"/>
+			offered 
+			<tm id="tm6"/>
+			this position?
+			<tm id="tm7"/>
+			
+			<pitchaccent id="pa1" start="s1:tm1" end="s1:tm2" type="Hstar"/>
+			<pitchaccent id="pa2" start="s1:tm2" end="s1:tm3" type="Lstar"/>
+			<pitchaccent id="pa3" start="s1:tm5" end="s1:tm6" type="Hstar"/>
+			
+            <boundary id="b1" start="s1:tm2" end="s1:tm2+0.5" type="HL"/>
+            <boundary id="b2" start="s1:tm4" end="s1:tm4+0.5" type="HL"/>
+            <boundary id="b3" start="s1:tm7" end="s1:tm7+0.5" type="HH"/>
+        </speech>
+    </bml>
+    <fml>
+		<performative end="s1:tm2" id="p1" importance="1.0" start="s1:tm0" type="ask"/>
+		<world-place end="s1:tm7" id="p1" importance="1.0" start="s1:tm6" type="here"/>
+    </fml>
+</fml-apml>

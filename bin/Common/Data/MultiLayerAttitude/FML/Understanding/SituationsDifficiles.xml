@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+				Dans
+				vos
+				expériences
+				professionnelles
+				précédentes,
+			<tm id="tm1"/>
+				avez
+				vous
+				eu
+				à
+				gérer
+				des
+				situations
+				difficiles,
+			<tm id="tm2"/>
+				et
+				comment
+				les
+				avez
+				vous
+				géré?
+			<tm id="tm3"/>
+            <boundary end="s3:tm1+0.5" id="b1" start="s3:tm1" type="LH"/>
+            <boundary end="s3:tm2+0.5" id="b2" start="s3:tm2" type="LH"/>
+            <boundary end="s3:tm3+0.5" id="b3" start="s3:tm3" type="LL"/>
+
+		</speech>
+    </bml>
+    <fml>
+	<world-person end="s1:tm1" id="p1" importance="1.0" start="s1:tm0" type="self"/>
+	<performative end="s1:tm3" id="p2" importance="1.0" start="s1:tm2" type="ask"/>
+    </fml>
+</fml-apml>

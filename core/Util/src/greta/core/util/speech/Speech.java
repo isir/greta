@@ -1031,6 +1031,7 @@ public class Speech implements Temporizable{
             scheduledSpeeches.clear();
         } // End of synchronized block
     }
+    
 
     /**
      * Returns the {@code TTS} that all {@code Speech} will use to be scheduled.

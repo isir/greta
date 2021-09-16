@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm1"/>
+				Nous
+				vous
+				contacterons
+				d'ici
+				une
+				semaine
+				pour
+				vous
+				annoncer
+				notre
+				décision
+			<tm id="tm1"/>
+				merci
+				d'avoir
+				participé
+				à
+				cet
+				entretien
+				d'embauche
+			<tm id="tm1"/>
+				notre
+				entretien
+				est
+				fini
+			<tm id="tm1"/>
+				Au
+				revoir
+			<tm id="tm1"/>
+            <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="LL"/>
+            <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="LL"/>
+
+		</speech>
+    </bml>
+    <fml/>
+</fml-apml>

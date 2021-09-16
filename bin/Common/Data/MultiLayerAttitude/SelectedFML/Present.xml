@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+		<tm id="tm0"/>
+		Alors,
+		<tm id="tm1"/>
+		je
+		suis
+		directeur
+		des
+		ressources
+		humaines
+		et,
+		<tm id="tm2"/>
+		aujourd'hui,
+		<tm id="tm3"/>
+		nous
+		allons
+		voir
+		ensemble
+		comment
+		nous
+		pouvons
+		vous
+		aider
+		à
+		décrocher
+		votre
+		prochain
+		contrat
+		<tm id="tm4"/>
+		<boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="LL"/>
+		<boundary end="s1:tm2+0.5" id="b2" start="s1:tm2" type="LH"/>
+		<boundary end="s1:tm3+0.5" id="b3" start="s1:tm3" type="LH"/>
+		<boundary end="s1:tm4+0.5" id="b4" start="s1:tm4" type="LL"/>
+	</speech>
+    </bml>
+    <fml>
+	<world-person end="s1:tm2" id="p1" importance="1.0" start="s1:tm1" type="self"/>
+	<performative end="s1:tm4" id="p2" importance="1.0" start="s1:tm3" type="inform"/>
+    </fml>
+</fml-apml>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0"
+                voice="openmary">
+			<tm id="tm1"/>
+				Est
+				ce
+				que
+				cela
+				vous
+				dérange
+				de
+				travailler
+				durant
+				les
+				week
+				ends
+				ou
+				les
+				vacances
+				scolaires
+			<tm id="tm1"/>
+            <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="HH"/>
+        </speech>
+    </bml>
+    <fml>
+	<performative end="s1:tm1" id="p1" importance="1.0" start="s1:tm0" type="ask"/>
+    </fml>
+</fml-apml>

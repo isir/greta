@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bml xmlns="http://www.mindmakers.org/projects/BML" character="Greta"
+    composition="append" id="bml1">
+    <speech xmlns="" id="s1" language="french" start="0.0" voice="openmary">
+        <tm id="tm0"/>
+			Do you know 
+			<tm
+            id="tm1"/>
+			exactly ,
+			<tm
+            id="tm2"/>
+			what tasks 
+			<tm
+            id="tm3"/>
+			you would have to do,
+			<tm
+            id="tm4"/>
+			if you were
+			<tm
+            id="tm5"/>
+			offered 
+			<tm
+            id="tm6"/>
+			this position?
+			<tm id="tm7"/>
+        <pitchaccent end="s1:tm2" id="pa1" start="s1:tm1" type="Hstar"/>
+        <pitchaccent end="s1:tm3" id="pa2" start="s1:tm2" type="Lstar"/>
+        <pitchaccent end="s1:tm6" id="pa3" start="s1:tm5" type="Hstar"/>
+        <boundary end="s1:tm2+0.5" id="b1" start="s1:tm2" type="HL"/>
+        <boundary end="s1:tm4+0.5" id="b2" start="s1:tm4" type="HL"/>
+        <boundary end="s1:tm7+0.5" id="b3" start="s1:tm7" type="HH"/>
+    </speech>
+    <head end="1.229" id="pa1_0" lexeme="Down_Aside_Right" start="0.584">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_ASIDE_RIGHT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <gesture id="p1_0" lexeme="ask_Ges_B" ready="0.000" relax="1.229">
+        <description priority="1" type="gretabml">
+            <reference>performative=ask_Ges_B</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <head end="2.509" id="pa2_0" lexeme="NOD" start="1.229">
+        <description priority="1" type="gretabml">
+            <reference>NOD_Middle</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <face amount="1.000" end="2.509" id="pa2_1" start="1.229">
+        <lexeme lexeme="Eyebrows_Frown"/>
+    </face>
+    <head end="5.047" id="pa3_0" lexeme="Down_Aside_Right" start="4.690">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_ASIDE_RIGHT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <head end="5.937" id="p1_0" lexeme="NOD" start="5.047">
+        <description priority="1" type="gretabml">
+            <reference>NOD</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <gesture id="p1_1" lexeme="here_Ges_L" ready="5.047" relax="5.937">
+        <description priority="1" type="gretabml">
+            <reference>deictic=here_Ges_L</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <head end="3.716" id="b2_0" lexeme="Down_Left" start="3.216">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_LEFT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <face amount="1.000" end="5.937" id="b3_0" start="5.437">
+        <lexeme lexeme="Eyebrows_Raise"/>
+    </face>
+    <gesture end="0.729" id="MLAttSeqPlan_179" lexeme="UnderTable" start="0.584">
+        <description priority="1" type="gretabml">
+            <reference>rest=UnderTable</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.000</TMP.value>
+            <FLD.value>0.000</FLD.value>
+            <PWR.value>0.000</PWR.value>
+            <REP.value>0.000</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <head end="1.729" id="MLAttSeqPlan_180" lexeme="Down" start="0.584">
+        <description priority="1" type="gretabml">
+            <reference>Down</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.500</SPC.value>
+            <TMP.value>0.000</TMP.value>
+            <FLD.value>0.000</FLD.value>
+            <PWR.value>0.500</PWR.value>
+            <REP.value>0.000</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <face amount="1.000" end="1.229" id="MLAttSeqPlan_181" start="0.729">
+        <lexeme lexeme="Eyebrows_Raise"/>
+    </face>
+</bml>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml composition="replace" social_attitude="dominant">
+	<bml>
+		<speech id="s1" start="0.0" language="english" text="" voice="cereproc">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				Hello,
+			<tm id="tm2"/>
+				my name is Alice
+			<tm id="tm3"/>
+				the virtual agent
+			<tm id="tm4"/>
+				of ARIA-VALUSPA projet.
+			<tm id="tm5"/>
+
+            <pitchaccent id="pa1" start="s1:tm2" end="s1:tm3" type="Hstar"/>
+			<pitchaccent id="pa2" start="s1:tm4" end="s1:tm5" type="Hstar"/>
+			
+            <boundary id="b1" start="s1:tm2" end="s1:tm2+0.5" type="HL"/>
+            <boundary id="b2" start="s1:tm5" end="s1:tm5+0.5" type="HL"/>			
+		</speech>
+	</bml>
+	<fml>
+		<performative id="p1" type="inform" start="s1:tm2" end="s1:tm3" importance="1.0"/>
+	</fml>
+</fml-apml>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bml xmlns="http://www.mindmakers.org/projects/BML" character="Greta"
+    composition="append" id="bml1">
+    <!--<head end="0.872" id="pa1_0" lexeme="Down_Aside_Right" start="0.000">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_ASIDE_RIGHT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>-->
+    <gesture id="p1_0" lexeme="greet_Ges_R" ready="0.000" relax="0.872">
+        <description priority="1" type="gretabml">
+            <reference>adaptor=greet_Ges_R</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <speech xmlns="" id="s1" language="french" start="0.0" voice="openmary">
+        <tm id="tm0"/>
+			Hello there,
+			<tm
+            id="tm1"/>
+			I hope 
+			<tm id="tm2"/>
+			you
+			<tm
+            id="tm3"/> 
+			didn't have 
+			<tm
+            id="tm4"/>
+			too much trouble
+			<tm
+            id="tm5"/> 
+			finding us ?
+			<tm id="tm6"/>
+        <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="HL"/>
+        <boundary end="s1:tm6+0.5" id="b2" start="s1:tm6" type="HH"/>
+        <pitchaccent end="s1:tm1" id="pa1" start="s1:tm0" type="Hstar"/>
+        <pitchaccent end="s1:tm3" id="pa2" start="s1:tm2" type="Hstar"/>
+        <pitchaccent end="s1:tm5" id="pa3" start="s1:tm4" type="Hstar"/>
+    </speech>
+    <head end="1.981" id="pa2_0" lexeme="Down_Aside_Left" start="1.822">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_ASIDE_LEFT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <head end="3.395" id="pa3_0" lexeme="Down_Aside_Right" start="2.520">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_ASIDE_RIGHT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <gesture id="p2_0" lexeme="allright_Pos_B" ready="2.520" relax="3.395">
+        <description priority="1" type="gretabml">
+            <reference>performative=allright_Pos_B</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.050</TMP.value>
+            <FLD.value>-0.050</FLD.value>
+            <PWR.value>0.100</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <face amount="1.000" end="4.362" id="b2_0" start="3.862">
+        <lexeme lexeme="Eyebrows_Raise"/>
+    </face>
+    <head end="1.872" id="MLAttSeqPlan_255" lexeme="SHAKE" start="0.372">
+        <description priority="1" type="gretabml">
+            <reference>Shake_Middle</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>1.000</SPC.value>
+            <TMP.value>0.000</TMP.value>
+            <FLD.value>0.000</FLD.value>
+            <PWR.value>0.000</PWR.value>
+            <REP.value>0.000</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <greta:torso xmlns:greta="VIBNameSpace" end="0.872"
+        id="MLAttSeqPlan_256" lexeme="NeutralPosition" start="0.372">
+        <greta:description priority="1" type="gretabml">
+            <greta:reference>NeutralPosition</greta:reference>
+            <greta:intensity>1.000</greta:intensity>
+            <greta:SPC.value>-1.000</greta:SPC.value>
+            <greta:TMP.value>-1.000</greta:TMP.value>
+            <greta:FLD.value>1.000</greta:FLD.value>
+            <greta:PWR.value>1.000</greta:PWR.value>
+            <greta:REP.value>0.000</greta:REP.value>
+            <greta:OPN.value>0.000</greta:OPN.value>
+            <greta:TEN.value>0.000</greta:TEN.value>
+        </greta:description>
+    </greta:torso>
+    <face amount="1.000" end="1.822" id="MLAttSeqPlan_258" start="0.872">
+        <lexeme lexeme="Eyebrows_Raise"/>
+    </face>
+</bml>

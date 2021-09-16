@@ -44,6 +44,6 @@
 </speech>
 </bml>
 <fml>
-<rest end="s1:tm36" id="rp1" importance="1.0" start="0" type="restpose_bellyGesB"/>
+<rest end="s1:tm36" id="rp1" importance="1.0" start="0" type="restpose_akimbo"/>
 </fml>
 </fml-apml>

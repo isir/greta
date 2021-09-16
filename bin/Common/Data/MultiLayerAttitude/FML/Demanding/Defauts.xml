@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm1"/>
+				Et
+				si
+				je
+				vous
+				demande
+				de
+				me
+				citer
+				rapidement
+				vos
+				défauts
+			<tm id="tm1"/>
+				et
+				ne
+				me
+				dites
+				pas
+				que
+				vous
+				n'en
+				avez
+				pas
+			<tm id="tm1"/>
+            <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="LL"/>
+
+		</speech>
+    </bml>
+    <fml/>
+</fml-apml>

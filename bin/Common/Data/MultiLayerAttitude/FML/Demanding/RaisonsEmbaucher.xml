@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+				Je
+				pense
+				que
+				vous
+				ne
+				correspondez
+				pas
+				à
+				cet
+				emploi
+			<tm id="tm1"/>
+				donnez
+				moi
+				des
+				raisons
+				de
+				vous
+				embaucher
+			<tm id="tm2"/>
+            <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="LL"/>
+
+		</speech>
+    </bml>
+    <fml>
+		<performative end="s1:tm2" id="p1" importance="1.0" start="s1:tm1" type="suggest"/>
+    </fml>
+</fml-apml>

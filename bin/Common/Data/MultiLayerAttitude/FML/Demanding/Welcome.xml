@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0"
+                voice="openmary">
+			<tm id="tm0"/>
+				Bonjour
+			<tm id="tm1"/>
+				vous
+				êtes
+				un
+				peu
+				en
+				retard
+			<tm id="tm2"/>
+				j'espère
+				que
+				ce
+				n'est
+				pas
+				une
+				habitude
+				chez
+				vous
+			<tm id="tm3"/>
+            <boundary end="s1:tm3+0.5" id="b1" start="s1:tm1" type="LL"/>
+
+		</speech>
+    </bml>
+    <fml>
+		<performative end="s1:tm3" id="p1" importance="1.0" start="s1:tm2" type="warn"/>
+    </fml>
+</fml-apml>

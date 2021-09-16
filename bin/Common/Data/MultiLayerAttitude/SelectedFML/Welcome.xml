@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+	<bml>
+		<speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+			Hello there,
+			<tm id="tm1"/>
+			I hope 
+			<tm id="tm2"/>
+			you
+			<tm id="tm3"/> 
+			didn't have 
+			<tm id="tm4"/>
+			too much trouble
+			<tm id="tm5"/> 
+			finding us ?
+			<tm id="tm6"/>
+			<boundary id="b1" start="s1:tm1" end="s1:tm1+0.5" type="HL"/>
+			<boundary id="b2" start="s1:tm6" end="s1:tm6+0.5" type="HH"/>
+			
+			<pitchaccent id="pa1" start="s1:tm0" end="s1:tm1" type="Hstar"/>
+			<pitchaccent id="pa2" start="s1:tm2" end="s1:tm3" type="Hstar"/>
+			<pitchaccent id="pa3" start="s1:tm4" end="s1:tm5" type="Hstar"/>
+		</speech>
+	</bml>
+	<fml>
+		<performative id="p1" importance="1.0" start="s1:tm0" end="s1:tm1" type="greet"/>
+		<performative id="p2" importance="1.0" start="s1:tm4" end="s1:tm5" type="allright"/>
+	</fml>
+</fml-apml>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+				Si
+				on
+				vous
+				propose
+				ce
+				travail
+			<tm id="tm1"/>
+				quand
+				seriez
+				vous
+				prêt
+				à
+				commencer
+			<tm id="tm2"/>
+            <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="LH"/>
+            <boundary end="s1:tm2+0.5" id="b2" start="s1:tm2" type="HH"/>
+
+		</speech>
+    </bml>
+    <fml>
+	<world-person end="s1:tm1" id="p1" importance="1.0" start="s1:tm0" type="self"/>
+	<performative end="s1:tm2" id="p2" importance="1.0" start="s1:tm1" type="inform"/>
+    </fml>
+</fml-apml>

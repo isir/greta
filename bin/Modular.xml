@@ -42,6 +42,10 @@
                 <item module="Behavior Planner" name="Behavior Planner"/>
                 <item module="Intention Queue" name="Intention Queue"/>
                 <item module="Subject Planner" name="Subject Planner"/>
+				<menu name="MultiLayer Attitude Planner">
+                <item module="MultiLayerSequencePlanner" name="MultiLayer Attitude Planner"/>
+                <item module="AttitudeSetter" name=" Attitude Setter"/>
+                </menu>
             </menu>
             <item module="Behavior Realizer" name="Behavior Realizer"/>
             <menu name="Keyframe Performers">
@@ -187,7 +191,19 @@
 			<item module="Speech Recognizer" name="Speech Recognizer"/>
             <item module="FlipperLauncher" name="FlipperLauncher"/>
             <item module="FlipperDemo" name="FlipperDemo"/>
+			<menu name="ARIA-Valuspa">
+                <menu name="Core">
+                    <item module="ARIAInformationStatesManager" name="ARIA Information States Manager"/>
+                    <item module="ARIASocialAttitudesPlanner" name="ARIA Social Attitudes Planner"/>
+                </menu>
+                <menu name="Tools">
+                    <item module="AriaValuspaFMLTranslator" name="ARIA-FML Translator"/>
+                    <item module="ARIAInformationStatesFilter" name="ARIA Information States Filter"/>
+					<item module="ARIAVideoRequestsManager" name="ARIA Video Requests Manager"/>
+					<item module="ARIAStompBroker" name="ARIA Stomp Broker"/>
+                </menu>
         </menu>
+		</menu>
     
     
     </menus>
@@ -437,29 +453,20 @@
             <!-- restrict="1"-->
             <object class="greta.core.utilx.gui.NVBG_MM_Controller" lib_id="greta_utilx"/>
             <frame type="object"/>
-            <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
-            <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
-            <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
         </module>
 		<module name="Rest_Pose_Setter" style="DEFAULT">
             <!-- restrict="1"-->
             <object class="greta.core.utilx.gui.Rest_Pose_Setter" lib_id="greta_utilx"/>
             <frame type="object"/>
-            <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
-            <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
-            <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
         </module>
 		<module name="ObjectNodeController" style="DEFAULT">
             <!-- restrict="1"-->
             <object class="greta.core.utilx.gui.ObjectNodeController" lib_id="greta_utilx"/>
             <frame type="object"/>
-            <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
-            <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
-            <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
         </module>
         <module name="OSC" style="DEFAULT">
             <object class="greta.auxiliary.osc.OSC_Sender" lib_id="greta_osc"/>
-            <frame type="object" />
+            <frame type="object"/>
         </module>
         <module name="MaryTTS Client">
             <object class="greta.auxiliary.tts.marytts.MaryTTSClient" lib_id="greta_marytts"/>
@@ -817,6 +824,13 @@
             <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
             <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
         </module>
+		<module name="MultiLayerSequencePlanner" style="BehaviorPlanner">
+            <object class="greta.auxiliary.multilayerattitudeplanner.SequencePlanner" lib_id="multilayer_attitude_planner"/>
+        </module>
+        <module name="AttitudeSetter" style="DEFAULT">
+            <object class="greta.auxiliary.multilayerattitudeplanner.AttitudeFrame" lib_id="multilayer_attitude_planner"/>
+            <frame type="object"/>
+        </module>
         <module name="Thrift BAP Server To External">
             <object class="greta.auxiliary.thrift.BAPServerToExternal" lib_id="greta_thrift"/>
             <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
@@ -988,6 +1002,10 @@
             <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
+		        <module name="AriaValuspaFMLTranslator" style="Intentions">
+            <object class="greta.application.ariavaluspa.tools.AriaValuspaFMLTranslator" lib_id="ariavaluspa"/>
+            <frame type="object"/>
+        </module>
         <module name="Body Arm Noise" style="Animations">
             <object class="greta.core.animation.performer.BodyAnimationArmNoise" lib_id="greta_body_animation_performer"/>
         </module>
@@ -1070,7 +1088,35 @@
             <parameter default="greta.input.FML" get_method="getGretaInputTopic" get_on="object" name="gretaInputTopic" set_method="setGretaInputTopic" set_on="object" type="string"/>
         <parameter default="D:\Greta_Research\greta_gpl_new\greta\bin\Common\Data\FlipperResources\flipperDemo.properties" get_method="getFlipperPropertyResource" get_on="object" name="flipperPropertyResource" set_method="setFlipperPropertyResource" set_on="object" type="string"/>
             <parameter default="D:\Greta_Research\greta_gpl_new\greta\bin\Common\Data\FlipperResources\fmltemplates" get_method="getflipperTemplateFolderPath" get_on="object" name="FlipperTemplateFolder" set_method="setflipperTemplateFolderPath" set_on="object" type="string"/>
-        </module>		
+        </module>	
+		<module name="ARIAVideoRequestsManager">
+            <object class="greta.application.ariavaluspa.tools.ARIAVideoRequestsManager" lib_id="ariavaluspa"/>
+        </module>
+		<module name="ARIAStompBroker">
+            <object class="greta.application.ariavaluspa.tools.ARIAStompBroker" lib_id="ariavaluspa"/>
+        </module>
+		        <module name="ARIAInformationStateReceiver">
+            <object class="greta.auxiliary.activemq.aria.ARIAInformationStateReceiver" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="aria.informationstate.receiver" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ARIAInformationStatesManager" style="IntentPlanner">
+            <object class="greta.application.ariavaluspa.core.ARIAInformationStatesManager" lib_id="ariavaluspa"/>
+        </module>
+        <module name="ARIAInformationStatesFilter" style="DEFAULT">
+            <object class="greta.application.ariavaluspa.tools.ARIAInformationStatesSelectorForm" lib_id="ariavaluspa"/>
+            <frame type="object"/>
+        </module>
+        <module name="ARIASocialAttitudesPlanner" style="BehaviorPlanner">
+            <object class="greta.application.ariavaluspa.attitudes.ARIASocialAttitudesPlanner" lib_id="ariavaluspa"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="isComputingSocialAttitudeExpression" get_on="object" name="computeAttitudes" set_method="setComputeSocialAttitudeExpression" set_on="object" type="boolean"/>
+        </module>
 		
 		
 		
@@ -1079,10 +1125,7 @@
     
     
     
-    <module name="Rest_Pose_Setter">
-            <object class="greta.core.utilx.draw.TestJFrame" lib_id="greta_utilx"/>
-            <frame class="" lib_id="greta_utilx" type="frame" windowed_only="true"/>
-        </module>
+    
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1295,6 +1338,15 @@
         <lib id="greta_mpeg4" path="./Common/Lib/Internal/MPEG4.jar">
             <depends lib_id="greta_util"/>
         </lib>
+		<lib id="ext_ariavaluspa_fml_translator" path="./Common/Lib/External/aria-fml-translator.jar"/>
+		<lib id="ariavaluspa" path="./Common/Lib/Internal/AriaValuspa.jar">
+            <depends lib_id="intentions"/>
+            <depends lib_id="signals"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="ext_activemq"/>
+            <depends lib_id="ext_ariavaluspa_fml_translator"/>
+			<depends lib_id="ext_ftp4"/>
+        </lib>
         <lib id="greta_ogre_player" path="./Player/Lib/Internal/OgrePlayer.jar">
             <depends lib_id="greta_bvh_mocap"/>
             <depends lib_id="greta_feedbacks"/>
@@ -1363,6 +1415,11 @@
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_social_parameters"/>
             <depends lib_id="greta_util"/>
+        </lib>
+		<lib id="videoCapture" path="./Player/Lib/Internal/VideoCapture.jar">
+            <depends lib_id="greta_ogre_player"/>
+            <depends lib_id="ext_xuggle"/>
+            <depends lib_id="ext_slf4j_api"/>
         </lib>
         <lib id="greta_util" path="./Common/Lib/Internal/Util.jar">
             <needs path="./Common/Data/characters/*"/>
@@ -1452,6 +1509,30 @@
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_utilx"/>
         </lib>
+	    <lib id="multilayer_attitude_planner" path="./Common/Lib/Internal/MultiLayerAttitudePlanner.jar">
+            <depends lib_id="behavior_planner"/>
+            <depends lib_id="intentions"/>
+            <depends lib_id="sequence_mining"/>
+            <depends lib_id="signals"/>
+            <depends lib_id="socialparameters"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="ext_opencsv_2.3"/>
+            <depends lib_id="ext_weka"/>
+            <depends lib_id="ext_weka_src"/>
+            <needs path="./Common/Data/MultiLayerAttitude"/>
+        </lib>
+		<lib id="sequence_mining" path="./Common/Lib/Internal/SequenceMining.jar">
+            <depends lib_id="ext_bfograph"/>
+            <depends lib_id="ext_clodhopper_core"/>
+            <depends lib_id="ext_opencsv_2.3"/>
+            <depends lib_id="ext_spmf"/>
+        </lib>
+		<lib id="ext_opencsv_2.3" path="./Common/Lib/External/opencsv-2.3.jar"/>
+        <lib id="ext_weka" path="./Common/Lib/External/weka/weka.jar"/>
+        <lib id="ext_weka_src" path="./Common/Lib/External/weka/weka-src.jar"/>
+		<lib id="ext_bfograph" path="./Common/Lib/External/sequencemining/bfograph.jar"/>
+        <lib id="ext_clodhopper_core" path="./Common/Lib/External/sequencemining/clodhopper-core-1.0.0.jar"/>
+        <lib id="ext_spmf" path="./Common/Lib/External/sequencemining/spmf.jar"/>
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>
@@ -1769,6 +1850,42 @@
             <output class="greta.core.util.environment.Environment" lib_id="greta_util"/>
             <connect from="input" method="setLocalEnvironment" to="output"/>
             <disconnect from="input" method="setLocalEnvironment" to="null"/>
+        </connector>
+		<connector id="addAttitudePerformerToAttitudeEmitter">
+            <input class="greta.auxiliary.multilayerattitudeplanner.AttitudeEmitter" lib_id="multilayer_attitude_planner"/>
+            <output class="greta.auxiliary.multilayerattitudeplanner.AttitudePerformer" lib_id="multilayer_attitude_planner"/>
+            <connect from="input" method="addAttitudePerformer" to="output"/>
+            <disconnect from="input" method="removeAttitudePerformer" to="output"/>
+        </connector>
+		<connector id="connectARIAVideoRequestsManagerToVideoCaptureController" unique="true">
+            <input class="greta.application.ariavaluspa.tools.ARIAVideoRequestsManager" lib_id="ariavaluspa"/>
+            <output class="greta.auxiliary.player.ogre.capture.Capturecontroller" lib_id="greta_ogre_player"/>
+            <connect from="input" method="setVideoCaptureController" to="output"/>
+            <disconnect from="null" method="setVideoCaptureController" to="null"/>
+        </connector>
+		<connector id="connectARIAVideoRequestsManagerToXuggleVideoCapture" unique="true">
+            <input class="greta.application.ariavaluspa.tools.ARIAVideoRequestsManager" lib_id="ariavaluspa"/>
+            <output class="greta.tools.ogre.capture.video.XuggleVideoCapture" lib_id="videoCapture"/>
+            <connect from="input" method="setXuggleVideoCapture" to="output"/>
+            <disconnect from="null" method="setXuggleVideoCapture" to="null"/>
+        </connector>
+		        <connector id="connectARIAInformationStateEmitterToPerformer">
+            <input class="greta.auxiliary.activemq.aria.ARIAInformationStateEmitter" lib_id="greta_activemq"/>
+            <output class="greta.auxiliary.activemq.aria.ARIAInformationStatePerformer" lib_id="greta_activemq"/>
+            <connect from="input" method="addARIAInformationStatePerformer" to="output"/>
+            <disconnect from="input" method="removeARIAInformationStatePerformer" to="output"/>
+        </connector>
+        <connector id="connectEnvironmentToARIAInformationState" unique="true">
+            <input class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+            <output class="greta.application.ariavaluspa.core.ARIAInformationStatesManager" lib_id="ariavaluspa"/>
+            <connect from="output" method="setEnvironment" to="input"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="connectARIAInformationStatesFilterToARIAInfoStatesManager" unique="true">
+            <input class="greta.application.ariavaluspa.tools.ARIAInformationStatesSelectorForm" lib_id="ariavaluspa"/>
+            <output class="greta.application.ariavaluspa.core.ARIAInformationStatesManager" lib_id="ariavaluspa"/>
+            <connect from="input" method="setARIAInformationStateManager" to="output"/>
+            <disconnect from="null" method="" to="null"/>
         </connector>
     </connectors>
     <!-- list of styles -->

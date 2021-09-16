@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+				Au
+				vu
+				de
+				votre
+				adresse
+			<tm id="tm1"/>
+				vous
+				aurez
+				deux
+				heures
+				et
+				demi
+				de
+				trajet
+				pour
+				aller
+				travailler
+			<tm id="tm2"/>
+				est
+				ce
+				que
+				ça
+				vous
+				dérange
+			<tm id="tm3"/>
+            <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="LH"/>
+            <boundary end="s1:tm2+0.5" id="b2" start="s1:tm2" type="LL"/>
+            <boundary end="s1:tm3+0.5" id="b3" start="s1:tm3" type="HH"/>
+		</speech>
+    </bml>
+    <fml>
+		<performative end="s1:tm3" id="p1" importance="1.0" start="s1:tm2" type="ask"/>
+    </fml>
+</fml-apml>

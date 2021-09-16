@@ -51,7 +51,8 @@ public class Rest_Pose_Setter extends javax.swing.JFrame {
         Document doc = null;
     try 
     {
-        doc = parseXML("C:\\Users\\Michele\\Desktop\\greta-gpl-2\\greta-gpl\\bin\\BehaviorPlanner\\IntentionLexicon\\lexicon_Camille.xml");
+        System.out.println(System.getProperty("user.dir"));
+        doc = parseXML(System.getProperty("user.dir")+"\\BehaviorPlanner\\IntentionLexicon\\lexicon_Camille.xml");
     } 
     catch (ParserConfigurationException e) 
     {

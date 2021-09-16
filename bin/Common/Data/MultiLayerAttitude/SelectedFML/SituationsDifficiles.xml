@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+				In your 
+			<tm id="tm1"/>
+				previous professional experiences,
+			<tm id="tm2"/>
+				did you 
+			<tm id="tm3"/>
+				ever had 
+			<tm id="tm4"/>
+				to deal with 
+			<tm id="tm5"/>
+				difficult situations,
+			<tm id="tm6"/>
+				and how 
+			<tm id="tm7"/>
+				did you manage 
+			<tm id="tm8"/>
+				to resolve them?
+			<tm id="tm9"/>
+			
+			<pitchaccent id="pa1" start="s1:tm1" end="s1:tm2" type="Hstar"/>
+			<pitchaccent id="pa2" start="s1:tm3" end="s1:tm4" type="Hstar"/>
+			<pitchaccent id="pa3" start="s1:tm5" end="s1:tm6" type="Hstar"/>
+			<pitchaccent id="pa4" start="s1:tm7" end="s1:tm8" type="Hstar"/>
+			<pitchaccent id="pa5" start="s1:tm8" end="s1:tm9" type="LplusHstar"/>
+			
+            <boundary id="b1" start="s1:tm2" end="s1:tm2+0.5" type="HL"/>
+            <boundary id="b2" start="s1:tm6" end="s1:tm6+0.5" type="HL"/>
+            <boundary id="b3" start="s1:tm9" end="s1:tm9+0.5" type="HH"/>
+
+		</speech>
+    </bml>
+    <fml>
+		<iconic id="p1" importance="1.0" start="s1:tm1" end="s1:tm2" type="past"/>
+		<performative id="p2" importance="1.0" start="s1:tm2" end="s1:tm6" type="ask"/>
+		<iconic id="p3" importance="1.0" start="s1:tm5" end="s1:tm6" type="difficult"/>
+		<performative id="p4" importance="1.0" start="s1:tm6" end="s1:tm9" type="ask"/>
+    </fml>
+</fml-apml>

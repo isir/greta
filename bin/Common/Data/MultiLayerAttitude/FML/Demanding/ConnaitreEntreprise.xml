@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm1"/>
+				Bien
+				sur
+			<tm id="tm1"/>
+				vous
+				devez
+				connaître
+				notre
+				entreprise
+			<tm id="tm1"/>
+				Savez
+				vous
+				précisément
+				le
+				rôle
+				de
+				notre
+				entreprise
+				et
+				les
+				services
+				qu'elle
+				propose
+			<tm id="tm1"/>
+            <boundary end="s1:tm1+0.5" id="b1" start="s1:tm1" type="LL"/>
+		</speech>
+    </bml>
+    <fml/>
+</fml-apml>

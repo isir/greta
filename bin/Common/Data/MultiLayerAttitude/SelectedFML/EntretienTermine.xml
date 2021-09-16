@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/> 
+			We will contact 
+			<tm id="tm1"/>
+			you
+			<tm id="tm2"/> 
+			within one week
+			<tm id="tm3"/>  
+			to let you know what we have decided.
+			<tm id="tm4"/>
+			thank you
+			<tm id="tm5"/> 
+			for coming to this interview.
+			<tm id="tm6"/>
+			Have a good day !
+			<tm id="tm7"/>
+            <boundary id="b1" start="s1:tm4" end="s1:tm4+0.5" type="LL"/>
+            <boundary id="b2" start="s1:tm6" end="s1:tm6+0.5" type="LL"/>
+
+            <pitchaccent id="a1" start="s1:tm1" end="s1:tm2" type="Hstar"/>
+            <pitchaccent id="a2" start="s1:tm4" end="s1:tm5" type="Hstar"/>
+            <pitchaccent id="a3" start="s1:tm6" end="s1:tm7" type="Hstar"/>
+		</speech>
+    </bml>
+    <fml>
+		<iconic id="p1" importance="1.0" start="s1:tm6" end="s1:tm7" type="one"/> <!--TODO-->
+		<performative id="p2" importance="1.0" start="s1:tm3" end="s1:tm4" type="inform"/>
+		<performative id="p3" importance="1.0" start="s1:tm6" end="s1:tm7" type="greet"/>
+    </fml>
+</fml-apml>

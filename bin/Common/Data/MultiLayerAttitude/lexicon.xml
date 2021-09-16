@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<behaviorsets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Common/Data/xml/behaviorsets.xsd">
+
+	<!-- PERFORMATIVES -->
+	
+	<behaviorset name="performative-greet">
+		<signals>
+			<signal id="1" name="faceexp=greet" modality="face"/>
+			<signal id="2" name="iconic=greet_Ges_R" modality="gesture"/>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+			<signal id="4" name="NOD" modality="head"/>
+		</signals>
+		<constraints>
+			<rules>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="performative-ask">
+		<signals>
+			<signal id="1" name="performative=ask_Ges_L" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="performative-inform">
+		<signals>
+			<signal id="1" name="performative=inform_Ges_B_Spread" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="performative-suggest">
+		<signals>
+			<signal id="1" name="faceexp=suggest" modality="face">
+				<alternative name="faceexp=suggest1" probability="0.5"/>
+			</signal>
+			<signal id="2" name="Aside_Right" modality="head">
+        <alternative name="Aside_Left" probability="0.5"/>
+      </signal>
+			<signal id="3" name="performative=suggest_Ges_L" modality="gesture" min="1.0" max="10.0">	
+			</signal>
+			
+		</signals>
+		<constraints>
+			<core>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+	
+	<!-- world -->
+	
+	<behaviorset name="world-person-self">
+		<signals>
+			<!--signal id="1" name="NOD" modality="head"/-->
+			<signal id="2" name="deictic=self_Pos_L" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="world-place-away">
+		<signals>
+			<signal id="1" name="LEFT" modality="head"/>
+			<signal id="2" name="gaze=look_left" modality="gaze"/>
+			<signal id="3" name="deictic=there" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="world-place-here">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="adjectival=DEICTIC_RHAND" modality="gesture"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	
+	
+	<!-- pitchaccent -->
+	<behaviorset name="pitchaccent-Hstar">
+		<signals>
+			<signal id="1" name="DOWN_ASIDE_RIGHT" modality="head">
+				<alternative name="nod_middle" probability="0.2"/>
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.4"/>
+			</signal>
+			<signal id="2" name="faceexp=Hstar" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="pitchaccent-LplusHstar">
+		<signals>
+			<signal id="1" name="DOWN_ASIDE_RIGHT" modality="head">
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.2"/>
+				<alternative name="NOD" probability="0.5"/>
+			</signal>
+			<signal id="3" name="faceexp=Hstar" modality="face"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="pitchaccent-Lstar">
+		<signals>
+			<signal id="1" name="NOD" modality="head"/>
+			<signal id="2" name="faceexp=Eyebrows_Frown" modality="face"/>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="1"/>
+					<thenpresent id="3"/>
+				</implication>
+				<implication>
+					<ifpresent id="3"/>
+					<thenpresent id="1"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	
+	<!-- boundary -->
+	<behaviorset name="boundary-L">
+		<signals>
+			<signal id="1" name="DOWN_LEFT" modality="head">
+				<alternative name="DOWN_RIGHT" probability="0.3"/>
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.1"/>
+				<alternative name="DOWN_ASIDE_RIGHT" probability="0.2"/>
+				<alternative name="NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-HL">
+		<signals>
+			<signal id="1" name="DOWN_LEFT" modality="head">
+				<alternative name="DOWN_RIGHT" probability="0.2"/>
+				<alternative name="DOWN" probability="0.3"/>
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.1"/>
+				<alternative name="DOWN_ASIDE_RIGHT" probability="0.1"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-H">
+		<signals>
+			<signal id="1" name="UP_RIGHT" modality="head">
+				<alternative name="UP_LEFT" probability="0.3"/>
+				<alternative name="UP_ASIDE_LEFT" probability="0.1"/>
+				<alternative name="UP_ASIDE_RIGHT" probability="0.2"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-HH">
+		<signals>
+			<signal id="1" name="UP_RIGHT" modality="head">
+				<alternative name="UP_LEFT" probability="0.3"/>
+				<alternative name="UP_ASIDE_LEFT" probability="0.2"/>
+				<alternative name="UP_ASIDE_RIGHT" probability="0.1"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="faceexp=Eyebrows_Raise" modality="face">
+				<alternative name="faceexp=neutral" probability="0.2"/>
+			</signal>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-LL">
+		<signals>
+			<signal id="1" name="DOWN_LEFT" modality="head">
+				<alternative name="DOWN_RIGHT" probability="0.2"/>
+				<alternative name="DOWN_ASIDE_LEFT" probability="0.2"/>
+				<alternative name="DOWN_ASIDE_RIGHT" probability="0.1"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>
+			<signal id="2" name="faceexp=Eyebrows_Frown" modality="face">
+				<alternative name="faceexp=neutral" probability="0.3"/>
+			</signal>
+			<signal id="3" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="boundary-LH">
+		<signals>
+			<signal id="1" name="UP_RIGHT" modality="head">
+				<alternative name="UP_LEFT" probability="0.3"/>
+				<alternative name="UP_ASIDE_LEFT" probability="0.2"/>
+				<alternative name="UP_ASIDE_RIGHT" probability="0.1"/>
+				<alternative name="head=NeutralPosition" probability="0.1"/><!-- head_none -->
+			</signal>  
+			<signal id="2" name="gaze=look_at" modality="gaze"/>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	
+</behaviorsets>

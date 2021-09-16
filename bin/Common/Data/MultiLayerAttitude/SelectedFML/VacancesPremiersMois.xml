@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fml-apml composition="append">
+    <bml>
+        <speech id="s1" language="french" start="0.0" voice="openmary">
+			<tm id="tm0"/>
+			You 
+			<tm id="tm1"/>
+			need to know 
+			<tm id="tm2"/>
+			that,
+			<tm id="tm3"/>
+			in general,
+			<tm id="tm4"/>
+			during the 
+			<tm id="tm5"/>
+			first months,
+			<tm id="tm6"/>
+			it will 
+			<tm id="tm7"/>
+			not be possible 
+			<tm id="tm8"/>
+			for you to 
+			<tm id="tm9"/>
+			claim any holidays.
+			<tm id="tm10"/>
+			does this 
+			<tm id="tm11"/>
+			suit 
+			<tm id="tm12"/>
+			you ?
+			<tm id="tm13"/>
+			
+			<pitchaccent id="pa1" start="s1:tm1" end="s1:tm2" type="Hstar"/>
+			<pitchaccent id="pa2" start="s1:tm3" end="s1:tm4" type="Lstar"/>
+			<pitchaccent id="pa3" start="s1:tm5" end="s1:tm6" type="Hstar"/>
+			<pitchaccent id="pa4" start="s1:tm7" end="s1:tm8" type="Hstar"/>
+			<pitchaccent id="pa5" start="s1:tm9" end="s1:tm10" type="Hstar"/>
+			<pitchaccent id="pa6" start="s1:tm11" end="s1:tm12" type="Hstar"/>
+			
+            <boundary id="b1" start="s1:tm3" end="s1:tm3+0.5" type="HL"/>
+            <boundary id="b2" start="s1:tm4" end="s1:tm4+0.5" type="HL"/>
+            <boundary id="b3" start="s1:tm6" end="s1:tm6+0.5" type="HL"/>
+            <boundary id="b4" start="s1:tm10" end="s1:tm10+0.5" type="LL"/>
+            <boundary id="b5" start="s1:tm13" end="s1:tm13+0.5" type="HH"/>
+		</speech>
+    </bml>
+    <fml>
+		<performative id="p1" importance="1.0" start="s1:tm0" end="s1:tm3" type="inform"/>
+		<iconic id="p2" importance="1.0" start="s1:tm5" end="s1:tm6" type="difficult"/>
+		<performative id="p3" importance="1.0" start="s1:tm7" end="s1:tm8" type="negation"/>
+		<!--<performative id="p4" importance="1.0" start="s1:tm9" end="s1:tm10" type="emptyhand"/>-->
+		<performative id="p5" importance="1.0" start="s1:tm10" end="s1:tm13" type="ask"/>
+    </fml>
+</fml-apml>

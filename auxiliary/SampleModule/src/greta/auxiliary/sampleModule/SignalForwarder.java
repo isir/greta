@@ -36,6 +36,7 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
     //private Signal stockedGesture = null;
 
     protected List<SignalPerformer> performerList = new ArrayList<>();
+    
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
         
@@ -45,9 +46,9 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         temporizer.temporize();*/
         
         //DEBUG OUTPUT LISTS OF SIGNALS
-        list.forEach((currentSignal) -> {
+        /*list.forEach((currentSignal) -> {
             System.out.println(currentSignal + " --- " + currentSignal.getStart().isConcretized() + " --- " + currentSignal.getStart().getValue() + " --- " + currentSignal.getEnd().getValue());
-        });
+        });*/
         
         /*              PARSER              */
         /* Parse the list of signals into a */
@@ -86,13 +87,16 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
             
         });
         
+        Thread thread = new Thread(new BurstRunnable(0.0, list, id, mode, performerList.get(0)));
+        thread.start();
+        
         /*              SENDER               */
         /*Goes through the TreeMap and sends */
         /*the signals by burst of start times*/
         /*      TIMING METHOD NOT FINAL      */
         System.out.println("\n\u001b[30m*********** Start of " + id + " **********");
         
-        for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
+        /*for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
             try{
                 Thread.sleep((long)(entry.getKey() * 1000) - lastStart);
                 System.out.println("WAITED : " + ((entry.getKey() * 1000) - lastStart));
@@ -112,7 +116,7 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         currentStart = 0.0;
         currentSignalListed = new ArrayList<>();
         treeList = new TreeMap<Double, List<Signal>>();
-        lastStart = 0;
+        lastStart = 0;*/
     }
 
     @Override

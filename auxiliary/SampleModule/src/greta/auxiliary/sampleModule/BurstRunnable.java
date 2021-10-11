@@ -7,6 +7,7 @@ import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CyclicBarrier;
 
 /**
  *
@@ -20,20 +21,32 @@ public class BurstRunnable implements Runnable, SignalPerformer, SignalEmitter{
     private ID id;
     private Mode mode;
     private SignalPerformer performer;
+    private CyclicBarrier gate;
     
-    public BurstRunnable(double parBurstStart, List<Signal> parSignalList, ID parID, Mode parMode, SignalPerformer parPerformer){
+    public BurstRunnable(double parBurstStart, List<Signal> parSignalList, ID parID, Mode parMode, SignalPerformer parPerformer, CyclicBarrier parGate){
         this.burstStart = parBurstStart;
         this.signalList = parSignalList;
         this.id = parID;
         this.mode = parMode;
         this.performer = parPerformer;
+        this.gate = parGate;
     }
     
     @Override
     public void run(){
-        System.out.println("Thread with start = " + this.burstStart + " --- list = " + this.signalList);
-        //performSignals(signalList, id, mode);
-        performer.performSignals(signalList, id, mode);
+        double waitTime = burstStart;
+        try{
+            gate.await();
+            if(burstStart > 2.0){
+                waitTime = waitTime - 1.0;
+            }
+            Thread.sleep((long)(this.burstStart * 1000));
+            System.out.println("Thread with start = " + this.burstStart + " --- list = " + this.signalList);
+            performSignals(signalList, id, mode);
+        }
+        catch(Exception e){
+            System.out.println("Exception caught : " + e);
+        }
     }
 
     @Override

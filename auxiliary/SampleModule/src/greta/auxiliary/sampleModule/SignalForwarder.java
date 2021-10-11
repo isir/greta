@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.TreeMap;
 import java.util.Map;
+import java.util.concurrent.CyclicBarrier;
 
 //greta\core\BehaviorRealizer\src\greta\core\behaviorrealizer\keyframegenerator
 
@@ -33,9 +34,11 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
     private TreeMap<Double, List<Signal>> treeList = new TreeMap<Double, List<Signal>>();
     private long lastStart = 0; 
     
-    //private Signal stockedGesture = null;
+    private Signal stockedGesture = null;
 
     protected List<SignalPerformer> performerList = new ArrayList<>();
+    
+    private CyclicBarrier gate = new CyclicBarrier(1);
     
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
@@ -46,17 +49,19 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         temporizer.temporize();*/
         
         //DEBUG OUTPUT LISTS OF SIGNALS
-        /*list.forEach((currentSignal) -> {
+        list.forEach((currentSignal) -> {
             System.out.println(currentSignal + " --- " + currentSignal.getStart().isConcretized() + " --- " + currentSignal.getStart().getValue() + " --- " + currentSignal.getEnd().getValue());
-        });*/
+        });
         
         /*              PARSER              */
         /* Parse the list of signals into a */
         /* TreeMap with keys = start time   */
         list.forEach((currentSignal) -> {
-            
+
+            //System.out.println(currentSignal + " --- " + currentSignal.getStart().getValue());
+
             //PARSER V1 --- Gave best results so far (04/10/21)
-            if(currentSignal.getStart().getValue() == currentStart || currentSignal.toString().contains("gesture")){
+            /*if(currentSignal.getStart().getValue() == currentStart || currentSignal.toString().contains("gesture")){
                 currentSignalListed.add(currentSignal);
             }
             else{
@@ -64,7 +69,7 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
                 currentSignalListed = new ArrayList<>();
                 currentSignalListed.add(currentSignal);
                 currentStart = currentSignal.getStart().getValue();
-            }
+            }*/
             
             //PARSER V2
             /*if(treeList.containsKey(currentSignal.getStart().getValue())){
@@ -85,18 +90,51 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
             }
             currentSignalListed = new ArrayList<>();*/
             
+            if(treeList.containsKey(currentSignal.getStart().getValue())){
+                currentSignalListed = treeList.get(currentSignal.getStart().getValue());
+            }
+            
+            if(currentSignal.toString().contains("gesture")){
+                currentSignalListed = treeList.get(currentStart);
+            }
+            else{
+                currentStart = currentSignal.getStart().getValue();
+            }
+            
+            currentSignalListed.add(currentSignal);
+            treeList.put(currentStart, currentSignalListed);
+            
+            currentSignalListed = new ArrayList<>();
+                    
         });
         
-        Thread thread = new Thread(new BurstRunnable(0.0, list, id, mode, performerList.get(0)));
-        thread.start();
+        gate = new CyclicBarrier(treeList.size() + 1);
+        
+        //Thread thread = new Thread(new BurstRunnable(0.0, list, id, mode, performerList.get(0)));
+        //thread.start();
+        
+        for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
+            Thread thread = new Thread(new BurstRunnable(entry.getKey(), entry.getValue(), id, mode, performerList.get(0), gate));
+            thread.start();
+        }
+        
+        System.out.println("---------- Threads all created ! -----------");
+        System.out.println("OPENING GATE ... \n");
+        
+        try{
+            gate.await();
+        }
+        catch(Exception e){
+            
+        }
         
         /*              SENDER               */
         /*Goes through the TreeMap and sends */
         /*the signals by burst of start times*/
         /*      TIMING METHOD NOT FINAL      */
-        System.out.println("\n\u001b[30m*********** Start of " + id + " **********");
+        /*System.out.println("\n\u001b[30m*********** Start of " + id + " **********");
         
-        /*for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
+        for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
             try{
                 Thread.sleep((long)(entry.getKey() * 1000) - lastStart);
                 System.out.println("WAITED : " + ((entry.getKey() * 1000) - lastStart));
@@ -110,13 +148,13 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
             performerList.get(0).performSignals(entry.getValue(), id, mode);
         }
         
-        System.out.println("\u001b[30m*********** End of " + id + " **********\n");
-        
+        System.out.println("\u001b[30m*********** End of " + id + " **********\n");*/
+
         currentColorNumber = 1;
         currentStart = 0.0;
         currentSignalListed = new ArrayList<>();
         treeList = new TreeMap<Double, List<Signal>>();
-        lastStart = 0;*/
+        lastStart = 0;
     }
 
     @Override

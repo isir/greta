@@ -10,8 +10,11 @@ import java.util.List;
 import java.util.concurrent.CyclicBarrier;
 
 /**
- *
  * @author Sean
+ * 
+ * DEPRECIATED
+ * The use of threads was only done in a testing setting
+ * It should not be used in further dev
  */
 
 public class BurstRunnable implements Runnable, SignalPerformer, SignalEmitter{

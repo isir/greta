@@ -34,11 +34,11 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
     private TreeMap<Double, List<Signal>> treeList = new TreeMap<Double, List<Signal>>();
     private long lastStart = 0; 
     
-    private Signal stockedGesture = null;
+    //private Signal stockedGesture = null;
 
     protected List<SignalPerformer> performerList = new ArrayList<>();
     
-    private CyclicBarrier gate = new CyclicBarrier(1);
+    //private CyclicBarrier gate = new CyclicBarrier(1);
     
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
@@ -58,37 +58,8 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         /* TreeMap with keys = start time   */
         list.forEach((currentSignal) -> {
 
+            //DEBUG
             //System.out.println(currentSignal + " --- " + currentSignal.getStart().getValue());
-
-            //PARSER V1 --- Gave best results so far (04/10/21)
-            /*if(currentSignal.getStart().getValue() == currentStart || currentSignal.toString().contains("gesture")){
-                currentSignalListed.add(currentSignal);
-            }
-            else{
-                treeList.put(currentStart, currentSignalListed);
-                currentSignalListed = new ArrayList<>();
-                currentSignalListed.add(currentSignal);
-                currentStart = currentSignal.getStart().getValue();
-            }*/
-            
-            //PARSER V2
-            /*if(treeList.containsKey(currentSignal.getStart().getValue())){
-                currentSignalListed = treeList.get(currentSignal.getStart().getValue());
-            }
-            if(currentSignal.toString().contains("gesture")){
-                stockedGesture = currentSignal;
-            }
-            else{
-            //System.out.println(currentSignal.getStart().getValue());
-                if(stockedGesture != null){
-                    currentSignalListed.add(stockedGesture);
-                    stockedGesture = null;
-                }
-                currentSignalListed.add(currentSignal);
-                treeList.put(currentSignal.getStart().getValue(), currentSignalListed);
-                
-            }
-            currentSignalListed = new ArrayList<>();*/
             
             if(treeList.containsKey(currentSignal.getStart().getValue())){
                 currentSignalListed = treeList.get(currentSignal.getStart().getValue());
@@ -107,11 +78,9 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
             currentSignalListed = new ArrayList<>();
                     
         });
-        
-        gate = new CyclicBarrier(treeList.size() + 1);
-        
-        //Thread thread = new Thread(new BurstRunnable(0.0, list, id, mode, performerList.get(0)));
-        //thread.start();
+        /* THREAD TESTING */
+        /* NOT USED */
+        /*gate = new CyclicBarrier(treeList.size() + 1);
         
         for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
             Thread thread = new Thread(new BurstRunnable(entry.getKey(), entry.getValue(), id, mode, performerList.get(0), gate));
@@ -126,13 +95,13 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         }
         catch(Exception e){
             
-        }
+        }*/
         
         /*              SENDER               */
         /*Goes through the TreeMap and sends */
         /*the signals by burst of start times*/
         /*      TIMING METHOD NOT FINAL      */
-        /*System.out.println("\n\u001b[30m*********** Start of " + id + " **********");
+        System.out.println("\n\u001b[30m*********** Start of " + id + " **********");
         
         for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
             try{
@@ -148,7 +117,7 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
             performerList.get(0).performSignals(entry.getValue(), id, mode);
         }
         
-        System.out.println("\u001b[30m*********** End of " + id + " **********\n");*/
+        System.out.println("\u001b[30m*********** End of " + id + " **********\n");
 
         currentColorNumber = 1;
         currentStart = 0.0;

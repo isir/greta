@@ -1279,7 +1279,8 @@
 		<lib id="greta_sampleModule" path="./Common/Lib/Internal/SampleModule.jar">
 			<depends lib_id="greta_util"/>
 			<depends lib_id="greta_signals"/>
-			<depends lib_id="greta_intentions"/>			
+			<depends lib_id="greta_intentions"/>	
+			<depends lib_id="greta_behavior_realizer"/>
 		</lib>
 		<!-- Phil Sample Module End -->
     </libs>
@@ -1597,7 +1598,7 @@
     <!-- list of styles -->
     <styles>
         <style color="0x88FFDD" name="Animations"/>
-        <style color="0xFFFF88" name="BehaviorPlanner"/>
+        <style color="0xFFFF88" name="Behavior"/>
         <style color="0x88FF88" name="BehaviorRealizer"/>
         <style color="0xFFBBAA" name="CharacterManager" v-align="top"/>
         <style color="0x80AAFF" name="Environment" v-align="top"/>

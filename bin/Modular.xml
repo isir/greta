@@ -36,6 +36,7 @@
             </menu>
             <menu name="Interruptions">
                 <item module="Interruption Manager" name="Interruption Manager"/>
+				<item module="InterruptionTester" name="Interruption Tester"/>
             </menu>
             <menu name="Planners">
                 <item module="Listener Intent Planner" name="Listener Intent Planner"/>
@@ -991,6 +992,12 @@
         </module>
         <module name="Interruption Manager" style="Intentions">
             <object class="greta.core.interruptions.InterruptionManager" lib_id="greta_interruptions"/>
+        </module>
+		<module name="InterruptionTester" style="Intentions">
+            <object class="greta.core.interruptions.InterruptionTester" lib_id="greta_interruptions"/>
+            <frame type="object"/>
+            <parameter default="" get_method="getMainFileName" get_on="object" name="saveMainFileName" set_method="setMainFileName" set_on="object" type="string"/>
+            <parameter default="" get_method="getReactionReplanFileName" get_on="object" name="saveReactionReplanFileName" set_method="setReactionReplanFileName" set_on="object" type="string"/>
         </module>
         <module name="ActiveMQ BML Callbacks Receiver">
             <object class="greta.auxiliary.activemq.semaine.BMLCallbacksReceiver" lib_id="greta_activemq"/>

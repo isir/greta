@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml composition="replace" reaction_type="overlap" reaction_duration="medium">
+	<bml>
+		<speech id="s1" start="0.0" language="english" text="" voice="cereproc">
+		</speech>
+	</bml>
+	<fml>
+	</fml>
+</fml-apml>

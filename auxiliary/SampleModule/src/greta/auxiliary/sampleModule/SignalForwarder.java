@@ -34,7 +34,7 @@ import java.util.Map;
 public class SignalForwarder implements SignalPerformer, SignalEmitter{
     
     private double currentStart = 0.0;
-    private int currentColorNumber = 1;
+    private int currentBurstNumber = 1;
     
     List<Signal> currentSignalListed = new ArrayList<>();
     private TreeMap<Double, List<Signal>> treeList = new TreeMap<Double, List<Signal>>();
@@ -54,6 +54,7 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
         
+        /*      REALIZER STEP ONE      */
         for (Signal signal : list) {
             if(signal instanceof PointingSignal)
                 gestureGenerator.fillPointing((PointingSignal)signal);
@@ -81,13 +82,6 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
             if(treeList.containsKey(currentSignal.getStart().getValue())){
                 currentSignalListed = treeList.get(currentSignal.getStart().getValue());
             }
-            
-            /*if(currentSignal.toString().contains("gesture")){
-                currentSignalListed = treeList.get(currentStart);
-            }
-            else{
-                currentStart = currentSignal.getStart().getValue();
-            }*/
             
             currentSignalListed.add(currentSignal);
             treeList.put(currentSignal.getStart().getValue(), currentSignalListed);
@@ -117,7 +111,7 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         /*Goes through the TreeMap and sends */
         /*the signals by burst of start times*/
         /*      TIMING METHOD NOT FINAL      */
-        System.out.println("\n\u001b[30m*********** Start of " + id + " **********");
+        System.out.println("\n*********** Start of " + id + " **********");
         
         //Get the first entry to later adjust times
         double firstEntryKey = treeList.firstEntry().getKey();
@@ -133,14 +127,14 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
             catch(Exception e){
                 System.out.println("ERROR --- " + e);
             }
-            System.out.println("\u001b[3" + currentColorNumber + "m  [" + currentColorNumber + "]        " + currentKeyAdjusted + "         " + entry.getValue());
-            currentColorNumber++;
+            System.out.println("[" + currentBurstNumber + "]        " + currentKeyAdjusted + "         " + entry.getValue());
+            currentBurstNumber++;
             performerList.get(0).performSignals(entry.getValue(), id, mode);
         }
         
-        System.out.println("\u001b[30m*********** End of " + id + " **********\n");
+        System.out.println("*********** End of " + id + " **********\n");
 
-        currentColorNumber = 1;
+        currentBurstNumber = 1;
         currentStart = 0.0;
         currentSignalListed = new ArrayList<>();
         treeList = new TreeMap<Double, List<Signal>>();

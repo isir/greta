@@ -5,6 +5,8 @@
  */
 package greta.auxiliary.sampleModule;
 
+import greta.core.behaviorrealizer.keyframegenerator.FaceKeyframeGenerator;
+import greta.core.behaviorrealizer.keyframegenerator.GazeKeyframeGenerator;
 import greta.core.signals.Signal;
 import greta.core.signals.SignalEmitter;
 import greta.core.signals.SignalPerformer;
@@ -14,12 +16,16 @@ import greta.core.util.time.Temporizer;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.util.concurrent.TimeUnit;
+import greta.core.behaviorrealizer.keyframegenerator.GestureKeyframeGenerator;
+import greta.core.behaviorrealizer.keyframegenerator.KeyframeGenerator;
+import greta.core.repositories.SignalFiller;
+import greta.core.signals.gesture.PointingSignal;
+
 import java.util.TreeMap;
 import java.util.Map;
-import java.util.concurrent.CyclicBarrier;
 
-//greta\core\BehaviorRealizer\src\greta\core\behaviorrealizer\keyframegenerator
+//import java.util.concurrent.TimeUnit;
+//import java.util.concurrent.CyclicBarrier;
 
 /**
  *
@@ -33,20 +39,31 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
     List<Signal> currentSignalListed = new ArrayList<>();
     private TreeMap<Double, List<Signal>> treeList = new TreeMap<Double, List<Signal>>();
     private long lastStart = 0; 
-    
-    //private Signal stockedGesture = null;
 
     protected List<SignalPerformer> performerList = new ArrayList<>();
+    
+    private List<KeyframeGenerator> generators;
+    private GazeKeyframeGenerator gazeGenerator;
+    private FaceKeyframeGenerator faceGenerator;
+    private GestureKeyframeGenerator gestureGenerator;
+    
+    private Mode blendMode = new Mode("blend");
     
     //private CyclicBarrier gate = new CyclicBarrier(1);
     
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
         
-        //TESTED WITH TEMPORIZE, RESULTS VARY, RECOMMENDED WITHOUT SO FAR
-        /*Temporizer temporizer = new Temporizer();
+        for (Signal signal : list) {
+            if(signal instanceof PointingSignal)
+                gestureGenerator.fillPointing((PointingSignal)signal);
+            else {
+                SignalFiller.fillSignal(signal);
+            }
+        }
+        Temporizer temporizer = new Temporizer();
         temporizer.add(list);
-        temporizer.temporize();*/
+        temporizer.temporize();
         
         //DEBUG OUTPUT LISTS OF SIGNALS
         list.forEach((currentSignal) -> {
@@ -65,16 +82,15 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
                 currentSignalListed = treeList.get(currentSignal.getStart().getValue());
             }
             
-            if(currentSignal.toString().contains("gesture")){
+            /*if(currentSignal.toString().contains("gesture")){
                 currentSignalListed = treeList.get(currentStart);
             }
             else{
                 currentStart = currentSignal.getStart().getValue();
-            }
+            }*/
             
             currentSignalListed.add(currentSignal);
-            treeList.put(currentStart, currentSignalListed);
-            
+            treeList.put(currentSignal.getStart().getValue(), currentSignalListed);
             currentSignalListed = new ArrayList<>();
                     
         });
@@ -103,16 +119,21 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         /*      TIMING METHOD NOT FINAL      */
         System.out.println("\n\u001b[30m*********** Start of " + id + " **********");
         
+        //Get the first entry to later adjust times
+        double firstEntryKey = treeList.firstEntry().getKey();
+        
         for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
+            //Adjust the current key to account for negative starting times
+            double currentKeyAdjusted = entry.getKey() + Math.abs(firstEntryKey);
             try{
-                Thread.sleep((long)(entry.getKey() * 1000) - lastStart);
-                System.out.println("WAITED : " + ((entry.getKey() * 1000) - lastStart));
-                lastStart = (long)(entry.getKey() * 1000);
+                Thread.sleep((long)(currentKeyAdjusted * 1000) - lastStart);
+                System.out.println("WAITED : " + ((currentKeyAdjusted * 1000) - lastStart));
+                lastStart = (long)(currentKeyAdjusted * 1000);
             }
             catch(Exception e){
                 System.out.println("ERROR --- " + e);
             }
-            System.out.println("\u001b[3" + currentColorNumber + "m  [" + currentColorNumber + "]        " + entry.getKey() + "         " + entry.getValue());
+            System.out.println("\u001b[3" + currentColorNumber + "m  [" + currentColorNumber + "]        " + currentKeyAdjusted + "         " + entry.getValue());
             currentColorNumber++;
             performerList.get(0).performSignals(entry.getValue(), id, mode);
         }

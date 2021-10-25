@@ -107,7 +107,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
         // The value of Start and End should be calculated in this step. So that we can sort
-        for (Signal signal : list) {
+        /*for (Signal signal : list) {
             if(signal instanceof PointingSignal)
                 gestureGenerator.fillPointing((PointingSignal)signal);
             else {
@@ -116,7 +116,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         }
         Temporizer temporizer = new Temporizer();
         temporizer.add(list);
-        temporizer.temporize();
+        temporizer.temporize();*/
 
         for (Signal signal : list) {
             for (KeyframeGenerator generator : generators) {

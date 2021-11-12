@@ -21,6 +21,7 @@ package greta.core.signals;
 
 
 import greta.core.signals.MessageEvent;
+import greta.core.util.log.Logs;
 import java.util.*;
 import java.util.Map.*;
 import java.util.AbstractMap.*;
@@ -192,7 +193,7 @@ public class VHMSG implements javax.jms.MessageListener
             int ackMode = Session.AUTO_ACKNOWLEDGE;
 
 
-            System.out.println( "getConnection(): " + url + " " + m_scope );
+            Logs.debug("getConnection(): " + url + " " + m_scope );
 
 
             ActiveMQConnectionFactory connectionFactory = new ActiveMQConnectionFactory( user, password, url );
@@ -364,7 +365,7 @@ public class VHMSG implements javax.jms.MessageListener
             c.setMessageListener( this );
             m_consumers.add( new SimpleEntry<String, MessageConsumer>( req, c ) );
 
-            System.out.println( "subscribeMessage(): " + messageSelector );
+            Logs.debug("[NVBG INFO]:subscribeMessage(): " + messageSelector );
         }
         catch ( Exception e )
         {

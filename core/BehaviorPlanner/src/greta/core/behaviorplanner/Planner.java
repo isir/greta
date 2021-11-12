@@ -26,6 +26,8 @@ import greta.core.behaviorplanner.lexicon.Lexicon;
 import greta.core.behaviorplanner.lexicon.SignalItem;
 import greta.core.behaviorplanner.strokefillers.EmptyStrokeFiller;
 import greta.core.behaviorplanner.strokefillers.StrokeFiller;
+import greta.core.feedbacks.FeedbackEmitter;
+import greta.core.feedbacks.FeedbackPerformer;
 import greta.core.ideationalunits.IdeationalUnit;
 import greta.core.ideationalunits.IdeationalUnitFactory;
 import greta.core.intentions.IdeationalUnitIntention;
@@ -99,7 +101,7 @@ import org.xml.sax.SAXException;
  * @navassoc - - * greta.core.signals.Signal
  * @inavassoc - - * greta.core.intentions.Intention
  */
-public class Planner extends CharacterDependentAdapter implements IntentionPerformer, SignalEmitter {
+public class Planner extends CharacterDependentAdapter implements IntentionPerformer, SignalEmitter{
 
     //contains Behaviors relating to intentions
     private Lexicon lexicon;
@@ -335,7 +337,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                             "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
                             "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
                     fml_construction=fml_construction+construction;
-                    System.out.println(phrase.replaceAll("  ", " ").substring(1));
+                    //System.out.println(phrase.replaceAll("  ", " ").substring(1));
                     String[] sp=phrase.split(" ");
                     int i=1;
                     for(int j=0;j<sp.length;j++){
@@ -532,26 +534,28 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
         }
         
 
-        // Ideational Units Creation and Pre-Processing
-        System.out.println("greta.core.behaviorplanner.Planner.performIntentions()"+ selectedSignals);
+        
+        /*System.out.println("greta.core.behaviorplanner.Planner.performIntentions()"+ selectedSignals);
         for(Signal p : selectedSignals){
             if(p.getModality()=="torso"){
                 TorsoSignal ts=(TorsoSignal)p;
                 System.out.println("INFO "+ts.getLexeme());
             }
         }
+        */
+        // Ideational Units Creation and Pre-Processing
         IdeationalUnitFactory ideationalUnitFactory = new IdeationalUnitFactory();
         for (Intention intention : intentions) {
-            System.out.println("VIA "+intention.getClass());
+            Logs.debug("[INFO IDEATIONAL_UNIT]:"+intention.getClass());
             if (intention instanceof IdeationalUnitIntention) {
                 String ideationalUnitMainIntentionId = ((IdeationalUnitIntention) intention).getMainIntentionId();
                 IdeationalUnit ideationalUnit = ideationalUnitFactory.newIdeationalUnit(intention.getId(), ideationalUnitMainIntentionId);
                 for (Signal currentSignal : selectedSignals) {
                     if (currentSignal instanceof GestureSignal) {
-                        System.out.println(currentSignal + "  " + selectedSignals);
+                        Logs.debug("[INFO IDEATIONAL_UNIT]:"+currentSignal + "  " + selectedSignals);
                         if (currentSignal.getTimeMarker("ready").getValue() >= intention.getStart().getValue() && currentSignal.getTimeMarker("relax").getValue() <= intention.getEnd().getValue()) {
                             ideationalUnit.addSignal(currentSignal);
-                            System.out.println(currentSignal);
+                            Logs.debug("[INFO IDEATIONAL_UNIT]:"+currentSignal);
                             ((GestureSignal) currentSignal).setIdeationalUnit(ideationalUnit);
                         }
                     }
@@ -672,4 +676,5 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
         this.getCharacterManager().remove(lexicon);
         lexicon = new Lexicon(this.getCharacterManager());
     }
+
 }

@@ -109,9 +109,11 @@
 	<behaviorset name="emotion-joyStrong">
 		<signals>
 			<signal id="1" name="faceexp=smile_big_open" modality="face"/>
+			<signal id="2" name="faceexp=joy" modality="face"/>
 		</signals>
 		<constraints>
 			<core>
+				<item id="1"/>
 			</core>
 			<rules>
 			</rules>
@@ -404,6 +406,45 @@
 		</constraints>
 	</behaviorset>
 	
+		<behaviorset name="beat-pos">
+		<signals>
+			<signal id="1" name="beat=Beat_Pos_B_Social" modality="gesture"/>
+			<signal id="2" name="faceexp=joy" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+				<item id="2"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+			<behaviorset name="adjectival-adj">
+		<signals>
+			<signal id="1" name="adjectival=Continue_Ges_R" modality="gesture"/>
+			<signal id="2" name="faceexp=joy" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+				<item id="2"/>
+			</core>
+		</constraints>
+	</behaviorset>
+	
+		
+	<behaviorset name="deictic-ind">
+		<signals>
+			<signal id="1" name="deictic=indicateAt" modality="gesture"/>
+			<signal id="2" name="faceexp=joy" modality="face"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+				<item id="2" />
+			</core>
+		</constraints>
+	</behaviorset>
 	<!-- PERFORMATIVES -->
 	
 	<behaviorset name="deictic-you">

@@ -25,6 +25,7 @@
 		<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0"/>-->
 		<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0" target="Andre_chair0" />-->
 		<!--<performative id="p1" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>-->
+		<beat id="b1" type="pos" start="0" end="s1:tm3" importance="1.0"/>
 		<!--<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>-->
 		<!--<performative id="p2" type="propose" start="s1:tm3" end="s1:tm5" importance="1.0"/>-->
 		<!--<rest id="rp1" type="restpose" start="0" end="s1:tm5" importance="1.0"/>-->

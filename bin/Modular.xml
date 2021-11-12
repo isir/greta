@@ -28,6 +28,7 @@
                 <menu name="Meaning Miner">
                     <item module="Image Schema Extractor" name="Image Schema Extractor"/>
                 </menu>
+				<item module="Watson" name="IBM Watson"/>
             
             <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
             <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
@@ -264,6 +265,12 @@
             </frame>
             <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
+		<module name="Watson" style="Intentions">
+            <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
+            <frame class="greta.core.utilx.gui.Watson" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
         <module name="EmotionML File Reader" style="Intentions">
             <object class="greta.auxiliary.emotionml.EmotionMLFileReader" lib_id="greta_emotionml"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
@@ -453,12 +460,11 @@
 		<module name="NVBG_MM_Controller" style="DEFAULT">
             <!-- restrict="1"-->
             <object class="greta.core.utilx.gui.NVBG_MM_Controller" lib_id="greta_utilx"/>
-            <frame type="object"/>
+        <frame type="object"/>
         </module>
-		<module name="Rest_Pose_Setter" style="DEFAULT">
-            <!-- restrict="1"-->
-            <object class="greta.core.utilx.gui.Rest_Pose_Setter" lib_id="greta_utilx"/>
-            <frame type="object"/>
+		<module name="Rest_Pose_Setter" style="Signals">
+            <object class="greta.core.signals.Rest_Pose_Setter" lib_id="greta_signals"/>
+        <frame type="object"/>
         </module>
 		<module name="ObjectNodeController" style="DEFAULT">
             <!-- restrict="1"-->

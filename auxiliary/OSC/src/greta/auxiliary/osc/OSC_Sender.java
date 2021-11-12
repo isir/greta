@@ -403,7 +403,8 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
     }//GEN-LAST:event_textField4ActionPerformed
 
     private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-Thread thread = new Thread() {
+        if(jCheckBox1.isSelected()){
+        Thread thread = new Thread() {
 		@Override
 		public void run() {
 			try {
@@ -492,6 +493,10 @@ Thread thread = new Thread() {
 	};
 
 	thread.start();
+        }
+        else{
+            System.out.println("Watson receiver disabled");
+        }
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -17,9 +17,21 @@
  */
 package greta.core.utilx.gui;
 
+import com.illposed.osc.MessageSelector;
+import com.illposed.osc.OSCBadDataEvent;
+import com.illposed.osc.OSCMessageEvent;
+import com.illposed.osc.OSCMessageListener;
+import com.illposed.osc.OSCPacketEvent;
+import com.illposed.osc.OSCPacketListener;
+import com.illposed.osc.messageselector.OSCPatternAddressMessageSelector;
+import com.illposed.osc.transport.udp.OSCPortIn;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.Locale;
 
 /**
@@ -78,7 +90,7 @@ public class OpenAndLoad extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(fileNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -95,7 +107,7 @@ public class OpenAndLoad extends javax.swing.JFrame {
                     .addComponent(fileNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sendButton)
                     .addComponent(openButton))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -112,7 +124,7 @@ public class OpenAndLoad extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -166,6 +178,7 @@ public class OpenAndLoad extends javax.swing.JFrame {
     }
 
     public void setLoader(Object loader){
+        System.out.println("greta.core.utilx.gui.OpenAndLoad.setLoader()");
         this.loader = loader;
         try {
             loadMethod = loader.getClass().getMethod("load", String.class);
@@ -192,5 +205,4 @@ public class OpenAndLoad extends javax.swing.JFrame {
 
         } catch (Exception ex) {}
     }
-
 }

@@ -17,16 +17,32 @@
  */
 package greta.core.utilx.gui;
 
+import com.illposed.osc.MessageSelector;
 import greta.core.util.IniManager;
 import java.io.File;
+import java.net.InetSocketAddress;
+import java.net.SocketAddress;
 import java.util.Locale;
+import com.illposed.osc.OSCBadDataEvent;
+import com.illposed.osc.OSCMessage;
+import com.illposed.osc.OSCMessageEvent;
+import com.illposed.osc.OSCMessageListener;
+import com.illposed.osc.OSCPacketEvent;
+import com.illposed.osc.OSCPacketListener;
+import com.illposed.osc.OSCSerializeException;
+import com.illposed.osc.argument.OSCTimeTag64;
+import com.illposed.osc.messageselector.OSCPatternAddressMessageSelector;
+import com.illposed.osc.transport.udp.OSCPortIn;
+import com.illposed.osc.transport.udp.OSCPortOut;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  * @author Andre-Marie Pez
  */
 public class IniFileLoader extends IniLoader{
-
+    public List<String> list_object= new ArrayList<String>();
     /** Creates new form IniFileLoader */
     public IniFileLoader() {
         initComponents();
@@ -59,6 +75,10 @@ public class IniFileLoader extends IniLoader{
         jFileChooser1.setCurrentDirectory(new File("./"));
         iniFileInput = new javax.swing.JTextField();
         openButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.open");
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jPanel1 = new javax.swing.JPanel();
+        jTextField1 = new javax.swing.JTextField();
+        label1 = new java.awt.Label();
 
         openButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,15 +86,60 @@ public class IniFileLoader extends IniLoader{
             }
         });
 
+        jCheckBox1.setText("Watson");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Watson", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        label1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        label1.setText("Text received");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(49, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(iniFileInput, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(openButton)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jCheckBox1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(iniFileInput, javax.swing.GroupLayout.DEFAULT_SIZE, 461, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(openButton)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -84,8 +149,14 @@ public class IniFileLoader extends IniLoader{
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(iniFileInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(openButton))
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addGap(32, 32, 32)
+                .addComponent(jCheckBox1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel1.getAccessibleContext().setAccessibleName("Watson");
     }// </editor-fold>//GEN-END:initComponents
 
     private void openButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openButtonActionPerformed
@@ -98,6 +169,82 @@ public class IniFileLoader extends IniLoader{
         }
     }//GEN-LAST:event_openButtonActionPerformed
 
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+      Thread thread = new Thread() {
+		@Override
+		public void run() {
+			try {
+				SocketAddress socketAddress = new InetSocketAddress("127.0.0.1",9100) ;
+                            OSCPortIn receiver = new OSCPortIn(socketAddress);
+				//SocketAddress socketAddress1 = receiver.getRemoteAddress();
+				MessageSelector messageSelector = new OSCPatternAddressMessageSelector("/unity");
+				OSCMessageListener messageListener = new OSCMessageListener() {
+					
+					@Override
+					public void acceptMessage(OSCMessageEvent arg0) {
+						// TODO Auto-generated method stub
+						//System.out.println("message recieved");
+                                                //System.out.println("[INFO]:"+arg0.getMessage().getArguments());
+                                                System.out.println("RECEIVED MESSAGE");
+                                                String obj =arg0.getMessage().getArguments().toString();
+                                                String [] list = obj.replace("[","").replace("]","").split(",");
+                                                    for(String object: list){
+                                                         System.out.println("[INFO_2]:   "+object.trim());
+                                                    boolean flag = false;
+                                                    for(String o:list_object){
+                                                            System.out.println("[INFO_3]:"+o+"   "+object);
+                                                            if(object.equals(o))
+                                                                System.out.println("[INFO_4]"+o+"  "+object);
+                                                                flag=true;
+                                                        }
+                                                    
+                                                    
+                                                        
+                                                        
+                                                       }
+                                                    }
+					
+                                                    
+                                        
+				};
+				OSCPacketListener listener = new OSCPacketListener() {
+					
+					@Override
+					public void handlePacket(OSCPacketEvent arg0) {
+						// TODO Auto-generated method stub
+						//System.out.println("[INFO_4]:recieved");
+						//System.out.println(arg0.getSource().toString());
+						//System.out.println(arg0.getPacket().toString());
+					}
+					
+					@Override
+					public void handleBadData(OSCBadDataEvent arg0) {
+						// TODO Auto-generated method stub
+						
+					}
+				};
+
+				receiver.getDispatcher().addListener(messageSelector, messageListener);
+				receiver.addPacketListener(listener);
+				receiver.startListening();
+				if (receiver.isListening())
+					System.out.println("Server is listening");
+				receiver.run();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				System.out.println("error " + e);
+			}
+		}
+	};
+
+	thread.start();
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     @Override
     public void fireIniDefinitionChanged(String name) {
         this.iniFileInput.setText(name);
@@ -106,7 +253,11 @@ public class IniFileLoader extends IniLoader{
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField iniFileInput;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JFileChooser jFileChooser1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
+    private java.awt.Label label1;
     private javax.swing.JButton openButton;
     // End of variables declaration//GEN-END:variables
 

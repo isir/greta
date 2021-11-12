@@ -1,4 +1,5 @@
 package greta.core.signals;
+import greta.core.util.log.Logs;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
@@ -43,7 +44,7 @@ public class MessageReceiver{
         // so we must cast to it to get access to its .getText() method.
         if (message instanceof TextMessage) {
             TextMessage textMessage = (TextMessage) message;
-            System.out.println("Received message " + textMessage.getText() + "");
+            Logs.debug("[NVBG INFO]:Received message " + textMessage.getText() + "");
         }
         }
         

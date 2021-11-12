@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+</speech>
+</bml>
+<fml>
+<rest id="e1" importance="1.0" start="0" type="restpose_akimbo"/>
+</fml>
+</fml-apml>

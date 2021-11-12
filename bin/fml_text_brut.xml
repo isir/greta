@@ -5,45 +5,19 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>We
-<tm id="tm2"/>have
-<tm id="tm3"/>got
+<tm id="tm1"/>[Do
+<tm id="tm2"/>you
+<tm id="tm3"/>want
 <tm id="tm4"/>to
-<tm id="tm5"/>get
-<tm id="tm6"/>back
-<tm id="tm7"/>to
-<tm id="tm8"/>harvesting
-<tm id="tm9"/>the
-<tm id="tm10"/>wisdom
-<tm id="tm11"/>of
-<tm id="tm12"/>crowd
-<tm id="tm13"/>in
-<tm id="tm14"/>the
-<tm id="tm15"/>united
-<tm id="tm16"/>states.
-<tm id="tm17"/>We
-<tm id="tm18"/>have
-<tm id="tm19"/>got
-<tm id="tm20"/>get
-<tm id="tm21"/>back
-<tm id="tm22"/>to
-<tm id="tm23"/>the
-<tm id="tm24"/>kind
-<tm id="tm25"/>of
-<tm id="tm26"/>conversation
-<tm id="tm27"/>of
-<tm id="tm28"/>democracy
-<tm id="tm29"/>that
-<tm id="tm30"/>allows
-<tm id="tm31"/>good
-<tm id="tm32"/>idea
-<tm id="tm33"/>to
-<tm id="tm34"/>rise
-<tm id="tm35"/>the
-<tm id="tm36"/>surface.
+<tm id="tm5"/>see
+<tm id="tm6"/>a
+<tm id="tm7"/>video
+<tm id="tm8"/>showing
+<tm id="tm9"/>my
+<tm id="tm10"/>capacities?]
 </speech>
 </bml>
 <fml>
-<rest end="s1:tm36" id="rp1" importance="1.0" start="0" type="restpose_akimbo"/>
+<rest end="s1:tm10" id="rp1" importance="1.0" start="0" type="restpose_bellyGesB"/>
 </fml>
 </fml-apml>

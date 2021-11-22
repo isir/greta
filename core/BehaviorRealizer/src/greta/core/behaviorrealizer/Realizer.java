@@ -74,6 +74,10 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     private Environment environment;  //new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
     private CharacterManager characterManager;
+    
+    private ID currentID;
+    private List<Keyframe> keyframeList;
+    private List<Signal> signalMasterList;
 
     public Realizer(CharacterManager cm) {
         setCharacterManager(cm);
@@ -103,10 +107,27 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
+        
+        if(currentID == null){
+            currentID = requestId;
+            signalMasterList = new ArrayList<>();
+        }
+        else if(currentID != requestId){
+            currentID = requestId;
+            signalMasterList = new ArrayList();
+            System.out.println("NEW REQUEST ID FOUND");
+        }
+        
+        signalMasterList.addAll(list);
+        
+        /*else{
+            System.out.println("SAME ID"); // DEBUG
+        }*/
 
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
         // The value of Start and End should be calculated in this step. So that we can sort
+        
         /*for (Signal signal : list) {
             if(signal instanceof PointingSignal)
                 gestureGenerator.fillPointing((PointingSignal)signal);
@@ -121,13 +142,14 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         for (Signal signal : list) {
             for (KeyframeGenerator generator : generators) {
                 if (generator.accept(signal)) {
+                    //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
                     break;
                 }
             }
             gazeGenerator.accept(signal);
             faceGenerator.accept(signal);
         }
-
+        
         // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
         // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
         // Step 3: create all key frames
@@ -139,8 +161,9 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         for (KeyframeGenerator generator : generators) {
             keyframes.addAll(generator.generateKeyframes());
         }
+        
         keyframes.sort(keyframeComparator);
-
+           
         // Gaze keyframes for the eyes are generated last
         gazeGenerator.generateEyesKeyframes(keyframes);
 
@@ -149,7 +172,30 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
 
         // Step 4: adjust the timing of all key frame
 
-        keyframes.sort(keyframeComparator);
+        keyframes.sort(keyframeComparator);//BASE EXEC
+        keyframes.get(0);
+        System.out.println("Keyframes : " + keyframes);
+        /*keyframeList.addAll(keyframes);
+        System.out.println("KeyframeList : " + keyframeList);
+        
+        keyframeList.sort(keyframeComparator);
+        //System.out.println("KeyframeList post sort : " + keyframeList);
+        
+        int keyframeOutNumber = keyframes.size();
+        int keyframeListSize = keyframeList.size();
+        List<Keyframe> tempList = new ArrayList<>();
+        
+        for(int i = 0; i < keyframeOutNumber; i++){
+            tempList.add(keyframeList.get(i));
+        }*/
+        
+        /*while(keyframeOutNumber > 0){
+            tempList.add(keyframeList.get(keyframeListSize - keyframeOutNumber));
+            System.out.println("keyframeList size = " + keyframeListSize + " --- keyframeOutNumber = " + keyframeOutNumber);
+            keyframeOutNumber-- ;
+        }*/
+        
+        //System.out.println("Templist : " + tempList);
 
         //  here:
         //      - we must manage the time for the three addition modes:

@@ -17,7 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import greta.core.behaviorrealizer.keyframegenerator.GestureKeyframeGenerator;
+import greta.core.behaviorrealizer.keyframegenerator.HeadKeyframeGenerator;
 import greta.core.behaviorrealizer.keyframegenerator.KeyframeGenerator;
+import greta.core.behaviorrealizer.keyframegenerator.LaughKeyframeGenerator;
+import greta.core.behaviorrealizer.keyframegenerator.SpeechKeyframeGenerator;
 import greta.core.repositories.SignalFiller;
 import greta.core.signals.gesture.PointingSignal;
 
@@ -47,13 +50,11 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
     private FaceKeyframeGenerator faceGenerator;
     private GestureKeyframeGenerator gestureGenerator;
     
-    private Mode blendMode = new Mode("blend");
-    
     //private CyclicBarrier gate = new CyclicBarrier(1);
     
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
-        
+                
         /*      REALIZER STEP ONE      */
         for (Signal signal : list) {
             if(signal instanceof PointingSignal)
@@ -115,13 +116,15 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         
         //Get the first entry to later adjust times
         double firstEntryKey = treeList.firstEntry().getKey();
+        long startTime = System.currentTimeMillis();
         
         for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
             //Adjust the current key to account for negative starting times
             double currentKeyAdjusted = entry.getKey() + Math.abs(firstEntryKey);
             try{
-                Thread.sleep((long)(currentKeyAdjusted * 1000) - lastStart);
-                System.out.println("WAITED : " + ((currentKeyAdjusted * 1000) - lastStart));
+                long sleepTime = (long)(currentKeyAdjusted * 1000) - lastStart;
+                Thread.sleep(sleepTime);
+                System.out.println("WAITED : " + sleepTime);
                 lastStart = (long)(currentKeyAdjusted * 1000);
             }
             catch(Exception e){
@@ -131,9 +134,12 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
             currentBurstNumber++;
             performerList.get(0).performSignals(entry.getValue(), id, mode);
         }
+        long endTime = System.currentTimeMillis();
+        
+        System.out.println("elapsed time = " + (endTime - startTime));
         
         System.out.println("*********** End of " + id + " **********\n");
-
+        
         currentBurstNumber = 1;
         currentStart = 0.0;
         currentSignalListed = new ArrayList<>();

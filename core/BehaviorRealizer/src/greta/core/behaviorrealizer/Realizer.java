@@ -76,8 +76,6 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     private CharacterManager characterManager;
     
     private ID currentID;
-    private List<Keyframe> keyframeList;
-    private List<Signal> signalMasterList;
 
     public Realizer(CharacterManager cm) {
         setCharacterManager(cm);
@@ -110,19 +108,11 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         
         if(currentID == null){
             currentID = requestId;
-            signalMasterList = new ArrayList<>();
         }
         else if(currentID != requestId){
             currentID = requestId;
-            signalMasterList = new ArrayList();
             System.out.println("NEW REQUEST ID FOUND");
         }
-        
-        signalMasterList.addAll(list);
-        
-        /*else{
-            System.out.println("SAME ID"); // DEBUG
-        }*/
 
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
@@ -173,30 +163,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         // Step 4: adjust the timing of all key frame
 
         keyframes.sort(keyframeComparator);//BASE EXEC
-        keyframes.get(0);
-        System.out.println("Keyframes : " + keyframes);
-        /*keyframeList.addAll(keyframes);
-        System.out.println("KeyframeList : " + keyframeList);
-        
-        keyframeList.sort(keyframeComparator);
-        //System.out.println("KeyframeList post sort : " + keyframeList);
-        
-        int keyframeOutNumber = keyframes.size();
-        int keyframeListSize = keyframeList.size();
-        List<Keyframe> tempList = new ArrayList<>();
-        
-        for(int i = 0; i < keyframeOutNumber; i++){
-            tempList.add(keyframeList.get(i));
-        }*/
-        
-        /*while(keyframeOutNumber > 0){
-            tempList.add(keyframeList.get(keyframeListSize - keyframeOutNumber));
-            System.out.println("keyframeList size = " + keyframeListSize + " --- keyframeOutNumber = " + keyframeOutNumber);
-            keyframeOutNumber-- ;
-        }*/
-        
-        //System.out.println("Templist : " + tempList);
-
+    
         //  here:
         //      - we must manage the time for the three addition modes:
         //          - blend:    offset + now

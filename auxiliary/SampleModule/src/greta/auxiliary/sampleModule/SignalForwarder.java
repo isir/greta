@@ -39,7 +39,7 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
     private double currentStart = 0.0;
     private int currentBurstNumber = 1;
     
-    List<Signal> currentSignalListed = new ArrayList<>();
+    List<Signal> currentSignalList = new ArrayList<>();
     private TreeMap<Double, List<Signal>> treeList = new TreeMap<Double, List<Signal>>();
     private long lastStart = 0; 
 
@@ -75,22 +75,26 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         /*              PARSER              */
         /* Parse the list of signals into a */
         /* TreeMap with keys = start time   */
+        /* and values = list of signals     */
         list.forEach((currentSignal) -> {
 
             //DEBUG
             //System.out.println(currentSignal + " --- " + currentSignal.getStart().getValue());
             
+            //if current startTime (key) already in the treemap, get corresponding signalList (value)
             if(treeList.containsKey(currentSignal.getStart().getValue())){
-                currentSignalListed = treeList.get(currentSignal.getStart().getValue());
+                currentSignalList = treeList.get(currentSignal.getStart().getValue());
             }
             
-            currentSignalListed.add(currentSignal);
-            treeList.put(currentSignal.getStart().getValue(), currentSignalListed);
-            currentSignalListed = new ArrayList<>();
+            //append current signal to signalList (either empty list or found list - see above) and put into treeMap
+            currentSignalList.add(currentSignal);
+            treeList.put(currentSignal.getStart().getValue(), currentSignalList);
+            currentSignalList = new ArrayList<>();
                     
         });
+        
         /* THREAD TESTING */
-        /* NOT USED */
+        /*    NOT USED    */
         /*gate = new CyclicBarrier(treeList.size() + 1);
         
         for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
@@ -121,6 +125,8 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
         for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
             //Adjust the current key to account for negative starting times
             double currentKeyAdjusted = entry.getKey() + Math.abs(firstEntryKey);
+            //wait the amount of time between current start and last start
+            //NOTE: That timing method might introduce delay and therefor isn't final
             try{
                 long sleepTime = (long)(currentKeyAdjusted * 1000) - lastStart;
                 Thread.sleep(sleepTime);
@@ -130,19 +136,24 @@ public class SignalForwarder implements SignalPerformer, SignalEmitter{
             catch(Exception e){
                 System.out.println("ERROR --- " + e);
             }
+            
+            //DEBUG: output burst number, start time and list of signals sent
             System.out.println("[" + currentBurstNumber + "]        " + currentKeyAdjusted + "         " + entry.getValue());
             currentBurstNumber++;
+            
+            //send list of signals
             performerList.get(0).performSignals(entry.getValue(), id, mode);
         }
-        long endTime = System.currentTimeMillis();
         
+        //DEBUG: calculate elapsed time to monitor any big delay
+        long endTime = System.currentTimeMillis();
         System.out.println("elapsed time = " + (endTime - startTime));
         
         System.out.println("*********** End of " + id + " **********\n");
         
         currentBurstNumber = 1;
         currentStart = 0.0;
-        currentSignalListed = new ArrayList<>();
+        currentSignalList = new ArrayList<>();
         treeList = new TreeMap<Double, List<Signal>>();
         lastStart = 0;
     }

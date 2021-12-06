@@ -3,6 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
+/*--------------------------------------------------------------------*/
+/*---     SCHEDULER USED FOR INCREMENTALITY IMPLEMENTATION         ---*/
+/*---       USAGE: Planner -> This -> INCREMENTALREALIZER          ---*/
+/*--------------------------------------------------------------------*/
+
 package greta.auxiliary.incrementality;
 
 import greta.core.behaviorrealizer.keyframegenerator.FaceKeyframeGenerator;
@@ -32,7 +38,7 @@ import java.util.Map;
 
 /**
  *
- * @author Philippe Gauthier <philippe.gauthier@sorbonne-universite.fr>
+ * @author Sean Graux
  */
 public class SignalScheduler implements SignalPerformer, SignalEmitter{
     

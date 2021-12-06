@@ -1292,7 +1292,6 @@
 			<depends lib_id="greta_util"/>
 			<depends lib_id="greta_signals"/>
 			<depends lib_id="greta_intentions"/>	
-			<depends lib_id="greta_behavior_realizer"/> <!-- to be removed -->
 		</lib>
 		<!-- Phil Sample Module End -->
 		<lib id="greta_incrementality" path="./Common/Lib/Internal/Incrementality.jar">

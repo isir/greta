@@ -15,6 +15,12 @@
  * along with Greta.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
+
+/*--------------------------------------------------------------------*/
+/*---     MODIFIED REALIZER FOR INCREMENTALITY IMPLEMENTATION      ---*/
+/*---        USAGE: Planner -> SignalScheduler -> This             ---*/
+/*--------------------------------------------------------------------*/
+
 package greta.core.behaviorrealizer;
 
 import greta.core.behaviorrealizer.keyframegenerator.FaceKeyframeGenerator;

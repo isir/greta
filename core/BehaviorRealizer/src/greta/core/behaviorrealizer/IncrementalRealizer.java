@@ -63,7 +63,7 @@ import java.util.List;
  * @navassoc - - * greta.core.keyframes.Keyframe
  * @inavassoc - - * greta.core.signals.Signal
  */
-public class Realizer extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent {
+public class IncrementalRealizer extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent {
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
@@ -77,7 +77,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     
     private ID currentID;
 
-    public Realizer(CharacterManager cm) {
+    public IncrementalRealizer(CharacterManager cm) {
         setCharacterManager(cm);
         keyframePerformers = new ArrayList<>();
         generators = new ArrayList<>();

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greta.auxiliary.sampleModule;
+package greta.auxiliary.incrementality;
 
 import greta.core.behaviorrealizer.keyframegenerator.FaceKeyframeGenerator;
 import greta.core.behaviorrealizer.keyframegenerator.GazeKeyframeGenerator;
@@ -34,7 +34,7 @@ import java.util.Map;
  *
  * @author Philippe Gauthier <philippe.gauthier@sorbonne-universite.fr>
  */
-public class SignalForwarder implements SignalPerformer, SignalEmitter{
+public class SignalScheduler implements SignalPerformer, SignalEmitter{
     
     private double currentStart = 0.0;
     private int currentBurstNumber = 1;

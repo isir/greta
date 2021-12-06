@@ -40,6 +40,10 @@
                 <item module="Subject Planner" name="Subject Planner"/>
             </menu>
             <item module="Behavior Realizer" name="Behavior Realizer"/>
+			<menu name="Incrementality">
+				<item module="Signal Scheduler" name="Signal Scheduler"/>
+				<item module="Incremental Realizer" name="Incremental Realizer"/>
+			</menu>
             <menu name="Keyframe Performers">
                 <item module="IK Keyframe Performer" name="IK"/>
                 <item module="Face Keyframe Performer" name="Face"/>
@@ -388,6 +392,11 @@
                 <link method="UpdateLibraries" on="frame"/>
             </frame>
         </module>
+		
+		<module name="Incremental Realizer" style="BehaviorRealizer">
+            <object class="greta.core.behaviorrealizer.IncrementalRealizer" lib_id="greta_behavior_realizer"/>
+        </module>
+		
         <module name="FML File Writer" style="Intentions">
             <object class="greta.core.intentions.FMLFileWriter" lib_id="greta_intentions"/>
         </module>
@@ -999,6 +1008,9 @@
             <object class="greta.auxiliary.sampleModule.IntentionForwarder" lib_id="greta_sampleModule"/>            
         </module>
 		<!-- Phil Sample Module ends -->
+		<module name="Signal Scheduler" style="Signals">
+			<object class="greta.auxiliary.incrementality.SignalScheduler" lib_id="greta_incrementality"/>
+		</module>
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1280,9 +1292,15 @@
 			<depends lib_id="greta_util"/>
 			<depends lib_id="greta_signals"/>
 			<depends lib_id="greta_intentions"/>	
-			<depends lib_id="greta_behavior_realizer"/>
+			<depends lib_id="greta_behavior_realizer"/> <!-- to be removed -->
 		</lib>
 		<!-- Phil Sample Module End -->
+		<lib id="greta_incrementality" path="./Common/Lib/Internal/Incrementality.jar">
+			<depends lib_id="greta_util"/>
+			<depends lib_id="greta_signals"/>
+			<depends lib_id="greta_intentions"/>	
+			<depends lib_id="greta_behavior_realizer"/>
+		</lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>

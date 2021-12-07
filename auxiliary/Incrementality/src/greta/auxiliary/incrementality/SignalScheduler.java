@@ -6,7 +6,7 @@
 
 /*--------------------------------------------------------------------*/
 /*---     SCHEDULER USED FOR INCREMENTALITY IMPLEMENTATION         ---*/
-/*---       USAGE: Planner -> This -> INCREMENTALREALIZER          ---*/
+/*---       USAGE: Planner -> This -> IncrementalRealizer          ---*/
 /*--------------------------------------------------------------------*/
 
 package greta.auxiliary.incrementality;
@@ -102,6 +102,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter{
         
         /* THREAD TESTING */
         /*    NOT USED    */
+        /*  TO BE REMOVED */
         /*gate = new CyclicBarrier(treeList.size() + 1);
         
         for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
@@ -115,8 +116,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter{
         try{
             gate.await();
         }
-        catch(Exception e){
-            
+        catch(Exception e){   
         }*/
         
         /*              SENDER               */

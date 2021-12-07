@@ -1615,7 +1615,7 @@
     <!-- list of styles -->
     <styles>
         <style color="0x88FFDD" name="Animations"/>
-        <style color="0xFFFF88" name="Behavior"/>
+        <style color="0xFFFF88" name="BehaviorPlanner"/>
         <style color="0x88FF88" name="BehaviorRealizer"/>
         <style color="0xFFBBAA" name="CharacterManager" v-align="top"/>
         <style color="0x80AAFF" name="Environment" v-align="top"/>

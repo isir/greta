@@ -4,16 +4,9 @@
     <speech id="s1" language="english" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
-      </description>
-      <boundary end="s1:tm1" id="b1" start="s1:tm0" type="LH"/>Hello, <tm id="tm1" value="2"/>
-      <pause duration_sym="short" id="p1" ref="2"/>How are <boundary end="s1:tm2" id="b2" start="s1:tm1" type="HH"/>you<tm id="tm2" value="0"/>
+      </description>Can I ask you <boundary end="s1:tm1" id="b1" start="s1:tm0" type="HH"/>something? <tm id="tm1" value="4"/>
+      <pause duration_sym="long" id="p1" ref="2"/>It is <tm id="tm2" value="1"/>for a <boundary end="s1:tm3" id="b2" start="s1:tm2" type="HH"/>test<tm id="tm3" value="0"/>
     </speech>
   </bml>
-  <fml>
-    <social end="s1:tm1" id="s1" start="s1:tm0" type="hello"/>
-    <turntaking end="s1:tm1" id="tt1" start="s1:tm0" type="salutation"/>
-    <backchannel end="s1:tm1" id="bk1" start="s1:tm0" type="takethefloor"/>
-    <performative end="s1:tm1" id="p1" start="s1:tm0" type="joy"/>
-    <functional-relation end="s1:tm1" id="fr1" start="s1:tm0" type="high"/>
-  </fml>
+  <fml/>
 </fml-apml>

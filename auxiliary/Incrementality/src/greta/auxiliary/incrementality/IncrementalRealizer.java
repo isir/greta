@@ -15,8 +15,15 @@
  * along with Greta.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-package greta.core.behaviorrealizer;
 
+/*--------------------------------------------------------------------*/
+/*---     MODIFIED REALIZER FOR INCREMENTALITY IMPLEMENTATION      ---*/
+/*---        USAGE: Planner -> SignalScheduler -> This             ---*/
+/*--------------------------------------------------------------------*/
+
+package greta.auxiliary.incrementality;
+
+import greta.core.behaviorrealizer.CallbackSender;
 import greta.core.behaviorrealizer.keyframegenerator.FaceKeyframeGenerator;
 import greta.core.behaviorrealizer.keyframegenerator.GazeKeyframeGenerator;
 import greta.core.behaviorrealizer.keyframegenerator.GestureKeyframeGenerator;
@@ -63,7 +70,7 @@ import java.util.List;
  * @navassoc - - * greta.core.keyframes.Keyframe
  * @inavassoc - - * greta.core.signals.Signal
  */
-public class Realizer extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent {
+public class IncrementalRealizer extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent {
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
@@ -74,8 +81,10 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     private Environment environment;  //new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
     private CharacterManager characterManager;
+    
+    private ID currentID;
 
-    public Realizer(CharacterManager cm) {
+    public IncrementalRealizer(CharacterManager cm) {
         setCharacterManager(cm);
         keyframePerformers = new ArrayList<>();
         generators = new ArrayList<>();
@@ -103,11 +112,22 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
+        
+        if(currentID == null){
+            currentID = requestId;
+        }
+        else if(currentID != requestId){
+            currentID = requestId;
+            System.out.println("NEW REQUEST ID FOUND");
+        }
 
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
         // The value of Start and End should be calculated in this step. So that we can sort
-        for (Signal signal : list) {
+        
+        
+        /*Following part has been moved to the scheduler*/
+        /*for (Signal signal : list) {
             if(signal instanceof PointingSignal)
                 gestureGenerator.fillPointing((PointingSignal)signal);
             else {
@@ -116,18 +136,19 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         }
         Temporizer temporizer = new Temporizer();
         temporizer.add(list);
-        temporizer.temporize();
+        temporizer.temporize();*/
 
         for (Signal signal : list) {
             for (KeyframeGenerator generator : generators) {
                 if (generator.accept(signal)) {
+                    //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
                     break;
                 }
             }
             gazeGenerator.accept(signal);
             faceGenerator.accept(signal);
         }
-
+        
         // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
         // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
         // Step 3: create all key frames
@@ -139,8 +160,9 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         for (KeyframeGenerator generator : generators) {
             keyframes.addAll(generator.generateKeyframes());
         }
+        
         keyframes.sort(keyframeComparator);
-
+           
         // Gaze keyframes for the eyes are generated last
         gazeGenerator.generateEyesKeyframes(keyframes);
 
@@ -149,8 +171,8 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
 
         // Step 4: adjust the timing of all key frame
 
-        keyframes.sort(keyframeComparator);
-
+        keyframes.sort(keyframeComparator);//BASE EXEC
+    
         //  here:
         //      - we must manage the time for the three addition modes:
         //          - blend:    offset + now

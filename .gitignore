@@ -22,3 +22,6 @@
 /core/Signals/build
 /core/Util/build
 /core/Intentions/build
+
+.vscode
+*.xml~

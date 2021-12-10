@@ -1004,8 +1004,8 @@
         </module>
 		<!-- Phil Sample Module ends -->
 		<module name="Incremental Realizer" style="BehaviorRealizer">
-            <object class="greta.auxiliary.incrementality.IncrementalRealizer" lib_id="greta_incrementality"/>
-        </module>
+			<object class="greta.auxiliary.incrementality.IncrementalRealizer" lib_id="greta_incrementality"/>
+		</module>
 		<module name="Signal Scheduler" style="Signals">
 			<object class="greta.auxiliary.incrementality.SignalScheduler" lib_id="greta_incrementality"/>
 		</module>
@@ -1298,6 +1298,7 @@
 			<depends lib_id="greta_intentions"/>	
 			<depends lib_id="greta_behavior_realizer"/>
 			<depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_mpeg4"/>
 		</lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->

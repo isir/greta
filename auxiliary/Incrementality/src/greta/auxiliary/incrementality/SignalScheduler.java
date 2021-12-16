@@ -57,6 +57,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter{
     private GestureKeyframeGenerator gestureGenerator;
     
     //private CyclicBarrier gate = new CyclicBarrier(1);
+    private List<Signal>[] neighboorSignalList = new ArrayList[2];
     
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
@@ -68,6 +69,9 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter{
         //treeList = new TreeMap<Double, List<Signal>>();        
         treeList.clear();
         lastStart = 0;
+        
+        neighboorSignalList[0] = new ArrayList<>();
+        neighboorSignalList[1] = new ArrayList<>();
         
         /*      REALIZER STEP ONE      */
         for (Signal signal : list) {
@@ -156,10 +160,14 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter{
             System.out.println("[" + currentBurstNumber + "]        " + currentKeyAdjusted + "         " + entry.getValue());
             currentBurstNumber++;
             
+            neighboorSignalList[1] = entry.getValue();
+            
             //send list of signals
             for(SignalPerformer sp : performerList){
                 sp.performSignals(entry.getValue(), id, mode);
             }
+            
+            neighboorSignalList[0] = neighboorSignalList[1];
         }
         
         //DEBUG: calculate elapsed time to monitor any big delay

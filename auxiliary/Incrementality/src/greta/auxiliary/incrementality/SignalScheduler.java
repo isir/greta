@@ -40,7 +40,7 @@ import java.util.Map;
  *
  * @author Sean Graux
  */
-public class SignalScheduler implements SignalPerformer, SignalEmitter{
+public class SignalScheduler implements SignalPerformer, SignalEmitter, IncrementalityFeedbackPerformer{
     
     private double currentStart = 0.0;
     private int currentBurstNumber = 1;
@@ -58,6 +58,8 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter{
     
     //private CyclicBarrier gate = new CyclicBarrier(1);
     private List<Signal>[] neighboorSignalList = new ArrayList[2];
+
+    private boolean realizerIsOpen = false;
     
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
@@ -185,6 +187,11 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter{
     @Override
     public void removeSignalPerformer(SignalPerformer sp) {
         performerList.remove(sp);
+    }
+
+    @Override
+    public void performIncFeedback(boolean sent){
+        realizerIsOpen = sent;
     }
 
 }

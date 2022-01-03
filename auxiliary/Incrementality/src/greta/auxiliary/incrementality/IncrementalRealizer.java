@@ -70,7 +70,7 @@ import java.util.List;
  * @navassoc - - * greta.core.keyframes.Keyframe
  * @inavassoc - - * greta.core.signals.Signal
  */
-public class IncrementalRealizer extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent {
+public class IncrementalRealizer extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent, IncrementalityFeedbackEmitter {
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
@@ -83,6 +83,8 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
     private CharacterManager characterManager;
     
     private ID currentID;
+
+    private List<IncrementalityFeedbackPerformer> incFeedbackPerformers;
 
     public IncrementalRealizer(CharacterManager cm) {
         setCharacterManager(cm);
@@ -242,6 +244,16 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
     @Override
     public void removeKeyframePerformer(KeyframePerformer kp) {
         keyframePerformers.remove(kp);
+    }
+
+    @Override
+    public void addIncFeedbackPerformer(IncrementalityFeedbackPerformer performer){
+        incFeedbackPerformers.add(performer);
+    }
+    
+    @Override
+    public void removeIncFeedbackPerformer(IncrementalityFeedbackPerformer performer){
+        incFeedbackPerformers.remove(performer);
     }
 
     public void setEnvironment(Environment env) {

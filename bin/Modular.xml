@@ -1611,6 +1611,12 @@
             <connect from="input" method="setLocalEnvironment" to="output"/>
             <disconnect from="input" method="setLocalEnvironment" to="null"/>
         </connector>
+        <connector id="connectIncrementalFeedbackEmiterToPerformer" unique="true">
+            <input class="greta.auxiliary.incrementality.IncrementalityFeedbackEmitter" lib_id="greta_incrementality"/>
+            <output class="greta.auxiliary.incrementality.IncrementalityFeedbackPerformer" lib_id="greta_incrementality"/>
+            <connect from="input" method="addIncFeedbackPerformer" to="output"/>
+            <disconnect from="input" method="removeIncFeedbackPerformer" to="output"/>
+        </connector>
     </connectors>
     <!-- list of styles -->
     <styles>

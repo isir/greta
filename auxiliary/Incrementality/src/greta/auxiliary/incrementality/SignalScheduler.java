@@ -178,11 +178,13 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
                 realizerIsOpen = false;
                 System.out.println("[" + currentBurstNumber + "]         " + treeList.firstEntry().getValue());
                 currentBurstNumber++;
+                //System.out.println(realizerIsOpen);
                 for(SignalPerformer sp : performerList){
                     sp.performSignals(treeList.firstEntry().getValue(), id, mode);
                 }
                 
                 treeList.remove(treeList.firstKey());
+                
             }
         }
         

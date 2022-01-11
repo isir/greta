@@ -108,6 +108,8 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
 
         // environment
         environment = characterManager.getEnvironment();
+        
+        incFeedbackPerformers = new ArrayList<>();
     }
 
     @Override //TODO add the use of modes: blend, replace, append
@@ -217,6 +219,8 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
             }
         }
 
+        incFeedbackPerformers.get(0).performIncFeedback(true);
+        
         this.sendKeyframes(keyframes, requestId, mode);
         // Add animation to callbacks
         if (mode.getCompositionType() == CompositionType.replace) {

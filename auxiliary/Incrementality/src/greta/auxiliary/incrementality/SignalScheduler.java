@@ -59,7 +59,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
     //private CyclicBarrier gate = new CyclicBarrier(1);
     private List<Signal>[] neighboorSignalList = new ArrayList[2];
 
-    private boolean realizerIsOpen = false;
+    private boolean realizerIsOpen = true;
     
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
@@ -143,7 +143,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         double firstEntryKey = treeList.firstEntry().getKey();
         long startTime = System.currentTimeMillis();
         
-        for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
+        /*for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
             //Adjust the current key to account for negative starting times
             double currentKeyAdjusted = entry.getKey() + Math.abs(firstEntryKey);
             //wait the amount of time between current start and last start
@@ -170,6 +170,20 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
             }
             
             neighboorSignalList[0] = neighboorSignalList[1];
+        }*/
+        
+        while(treeList.size() > 0){
+            System.out.println(realizerIsOpen);
+            if(realizerIsOpen){
+                realizerIsOpen = false;
+                System.out.println("[" + currentBurstNumber + "]         " + treeList.firstEntry().getValue());
+                currentBurstNumber++;
+                for(SignalPerformer sp : performerList){
+                    sp.performSignals(treeList.firstEntry().getValue(), id, mode);
+                }
+                
+                treeList.remove(treeList.firstKey());
+            }
         }
         
         //DEBUG: calculate elapsed time to monitor any big delay
@@ -191,7 +205,12 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
 
     @Override
     public void performIncFeedback(boolean sent){
-        realizerIsOpen = sent;
+        System.out.println("RECEIVED FEEDBACK : " + sent);
+        setOpenRealizer(sent);
+    }
+    
+    public void setOpenRealizer(boolean parBool){
+        realizerIsOpen = parBool;
     }
 
 }

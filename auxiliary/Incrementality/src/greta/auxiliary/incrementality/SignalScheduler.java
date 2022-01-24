@@ -57,7 +57,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
     private GestureKeyframeGenerator gestureGenerator;
     
     //private CyclicBarrier gate = new CyclicBarrier(1);
-    private List<Signal>[] neighboorSignalList = new ArrayList[2];
+    private List<List<Signal>> neighboorSignalList;
 
     private boolean realizerIsOpen = true;
     
@@ -72,8 +72,9 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         treeList.clear();
         lastStart = 0;
         
-        neighboorSignalList[0] = new ArrayList<>();
-        neighboorSignalList[1] = new ArrayList<>();
+        neighboorSignalList = new ArrayList();
+        neighboorSignalList.add(new ArrayList());
+        neighboorSignalList.add(new ArrayList());
         
         /*      REALIZER STEP ONE      */
         for (Signal signal : list) {
@@ -178,10 +179,16 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
                 realizerIsOpen = false;
                 System.out.println("[" + currentBurstNumber + "]         " + treeList.firstEntry().getValue());
                 currentBurstNumber++;
+                
+                neighboorSignalList.set(1, treeList.firstEntry().getValue());
+                
                 //System.out.println(realizerIsOpen);
                 for(SignalPerformer sp : performerList){
                     sp.performSignals(treeList.firstEntry().getValue(), id, mode);
+                    //sp.performSignals(neighboorSignalList, id, mode);
                 }
+                
+                neighboorSignalList.set(0, neighboorSignalList.get(1));
                 
                 treeList.remove(treeList.firstKey());
                 

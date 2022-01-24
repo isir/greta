@@ -85,6 +85,9 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
     private ID currentID;
 
     private List<IncrementalityFeedbackPerformer> incFeedbackPerformers;
+    
+    private List<Signal> previousSignalBurst;
+    private List<Keyframe> previousKeyframesList;
 
     public IncrementalRealizer(CharacterManager cm) {
         setCharacterManager(cm);
@@ -110,6 +113,9 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         environment = characterManager.getEnvironment();
         
         incFeedbackPerformers = new ArrayList<>();
+        
+        previousSignalBurst = new ArrayList<>();
+        previousKeyframesList = new ArrayList<>();
     }
 
     @Override //TODO add the use of modes: blend, replace, append
@@ -142,6 +148,7 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         temporizer.add(list);
         temporizer.temporize();*/
 
+        if(previousSignalBurst.isEmpty()){
         for (Signal signal : list) {
             for (KeyframeGenerator generator : generators) {
                 if (generator.accept(signal)) {
@@ -152,7 +159,23 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
             gazeGenerator.accept(signal);
             faceGenerator.accept(signal);
         }
-        
+        }
+        else{
+            List<Signal> currentAndPreviousBurst = new ArrayList();
+            currentAndPreviousBurst.addAll(previousSignalBurst);
+            currentAndPreviousBurst.addAll(list);
+            
+            for (Signal signal : currentAndPreviousBurst) {
+            for (KeyframeGenerator generator : generators) {
+                if (generator.accept(signal)) {
+                    //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
+                    break;
+                }
+            }
+            gazeGenerator.accept(signal);
+            faceGenerator.accept(signal);
+        }
+        }
         // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
         // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
         // Step 3: create all key frames
@@ -175,7 +198,11 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
 
         // Step 4: adjust the timing of all key frame
 
-        keyframes.sort(keyframeComparator);//BASE EXEC
+        keyframes.sort(keyframeComparator);
+        
+        if(previousSignalBurst.isEmpty()){
+            keyframes.subList(0, previousKeyframesList.size()).clear();
+        }
     
         //  here:
         //      - we must manage the time for the three addition modes:
@@ -219,9 +246,13 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
             }
         }
 
-        incFeedbackPerformers.get(0).performIncFeedback(true);
+        this.sendFeedback(true);
         
         this.sendKeyframes(keyframes, requestId, mode);
+        
+        previousSignalBurst = list;
+        previousKeyframesList = keyframes;
+        
         // Add animation to callbacks
         if (mode.getCompositionType() == CompositionType.replace) {
             this.stopAllAnims();
@@ -258,6 +289,12 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
     @Override
     public void removeIncFeedbackPerformer(IncrementalityFeedbackPerformer performer){
         incFeedbackPerformers.remove(performer);
+    }
+    
+    public void sendFeedback(boolean parFeedback){
+        for (IncrementalityFeedbackPerformer performer : incFeedbackPerformers) {
+            performer.performIncFeedback(parFeedback);
+        }
     }
 
     public void setEnvironment(Environment env) {

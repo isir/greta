@@ -57,7 +57,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
     private GestureKeyframeGenerator gestureGenerator;
     
     //private CyclicBarrier gate = new CyclicBarrier(1);
-    private List<List<Signal>> neighboorSignalList;
+    private List<Signal> neighboorSignalList;
 
     private boolean realizerIsOpen = true;
     
@@ -73,8 +73,6 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         lastStart = 0;
         
         neighboorSignalList = new ArrayList();
-        neighboorSignalList.add(new ArrayList());
-        neighboorSignalList.add(new ArrayList());
         
         /*      REALIZER STEP ONE      */
         for (Signal signal : list) {
@@ -174,23 +172,30 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         }*/
         
         while(treeList.size() > 0){
-            System.out.println(realizerIsOpen);
+            //System.out.println(realizerIsOpen); //DEBUG
             if(realizerIsOpen){
                 realizerIsOpen = false;
                 System.out.println("[" + currentBurstNumber + "]         " + treeList.firstEntry().getValue());
                 currentBurstNumber++;
                 
-                neighboorSignalList.set(1, treeList.firstEntry().getValue());
+                //neighboorSignalList.set(1, treeList.firstEntry().getValue());
+                neighboorSignalList.addAll(treeList.firstEntry().getValue());
+                if(treeList.size() > 1){ 
+                    neighboorSignalList.addAll(treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get());
+                }
+                
+                System.out.println(neighboorSignalList);
                 
                 //System.out.println(realizerIsOpen);
                 for(SignalPerformer sp : performerList){
-                    sp.performSignals(treeList.firstEntry().getValue(), id, mode);
-                    //sp.performSignals(neighboorSignalList, id, mode);
+                    //sp.performSignals(treeList.firstEntry().getValue(), id, mode);
+                    sp.performSignals(neighboorSignalList, id, mode);
                 }
                 
-                neighboorSignalList.set(0, neighboorSignalList.get(1));
+                //neighboorSignalList.set(0, neighboorSignalList.get(1));
                 
                 treeList.remove(treeList.firstKey());
+                neighboorSignalList = new ArrayList<>();
                 
             }
         }

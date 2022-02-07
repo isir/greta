@@ -16,11 +16,10 @@
  *
  */
 
-/*--------------------------------------------------------------------*/
-/*---     MODIFIED REALIZER FOR INCREMENTALITY IMPLEMENTATION      ---*/
-/*---        USAGE: Planner -> SignalScheduler -> This             ---*/
-/*--------------------------------------------------------------------*/
-
+ /*--------------------------------------------------------------------*/
+ /*---     MODIFIED REALIZER FOR INCREMENTALITY IMPLEMENTATION      ---*/
+ /*---        USAGE: Planner -> SignalScheduler -> This             ---*/
+ /*--------------------------------------------------------------------*/
 package greta.auxiliary.incrementality;
 
 import greta.core.behaviorrealizer.CallbackSender;
@@ -66,11 +65,13 @@ import java.util.List;
  *
  * the following tags generate a warning in Javadoc generation because they are
  * UmlGraph tags, not javadoc tags.
- * @composed - - + greta.core.behaviorrealizer.keyframegenerator.KeyframeGenerator
+ * @composed - - +
+ * greta.core.behaviorrealizer.keyframegenerator.KeyframeGenerator
  * @navassoc - - * greta.core.keyframes.Keyframe
  * @inavassoc - - * greta.core.signals.Signal
  */
 public class IncrementalRealizer extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent, IncrementalityFeedbackEmitter {
+
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
@@ -81,13 +82,17 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
     private Environment environment;  //new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
     private CharacterManager characterManager;
-    
+
     private ID currentID;
 
     private List<IncrementalityFeedbackPerformer> incFeedbackPerformers;
-    
+
     private List<Signal> previousSignalBurst;
     private List<Keyframe> previousKeyframesList;
+    
+    private List<Signal> currentSignalBurst;
+    
+    private List<Signal> nextSignalBurst;
 
     public IncrementalRealizer(CharacterManager cm) {
         setCharacterManager(cm);
@@ -104,77 +109,70 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         //experimental
         generators.add(new ShoulderKeyframeGenerator());
         generators.add(new TorsoKeyframeGenerator());
-        gazeGenerator = new GazeKeyframeGenerator(cm,generators);
+        gazeGenerator = new GazeKeyframeGenerator(cm, generators);
         faceGenerator = new FaceKeyframeGenerator();
 
         keyframeComparator = (o1, o2) -> (int) Math.signum(o1.getOffset() - o2.getOffset());
 
         // environment
         environment = characterManager.getEnvironment();
-        
+
         incFeedbackPerformers = new ArrayList<>();
-        
+
         previousSignalBurst = new ArrayList<>();
         previousKeyframesList = new ArrayList<>();
+        
+        currentSignalBurst = new ArrayList<>();
+        
+        nextSignalBurst = new ArrayList<>();
     }
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
-        
-        if(currentID == null){
+
+        if (currentID == null) {
             currentID = requestId;
-        }
-        else if(currentID != requestId){
+        } else if (currentID != requestId) {
             currentID = requestId;
             System.out.println("NEW REQUEST ID FOUND");
         }
 
-        // Step 1: Schedule each signal independently from one to another.
-        // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
-        // The value of Start and End should be calculated in this step. So that we can sort
-        
-        
-        /*Following part has been moved to the scheduler*/
-        /*for (Signal signal : list) {
-            if(signal instanceof PointingSignal)
-                gestureGenerator.fillPointing((PointingSignal)signal);
-            else {
-                SignalFiller.fillSignal(signal);
+        double pivotStartTime = list.get(0).getStart().getValue();
+        for(Signal sig: list){
+            if(sig.getStart().getValue() == pivotStartTime){
+                currentSignalBurst.add(sig);
             }
+            else nextSignalBurst.add(sig);
         }
-        Temporizer temporizer = new Temporizer();
-        temporizer.add(list);
-        temporizer.temporize();*/
-
-        if(previousSignalBurst.isEmpty()){
-        for (Signal signal : list) {
-            for (KeyframeGenerator generator : generators) {
-                if (generator.accept(signal)) {
-                    //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
-                    break;
+        
+        if (previousSignalBurst.isEmpty()) { //FIRST BURST
+            for (Signal signal : list) {
+                for (KeyframeGenerator generator : generators) {
+                    if (generator.accept(signal)) {
+                        //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
+                        break;
+                    }
                 }
+                gazeGenerator.accept(signal);
+                faceGenerator.accept(signal);
             }
-            gazeGenerator.accept(signal);
-            faceGenerator.accept(signal);
-        }
-        }
-        else{
+        } else {
             List<Signal> currentAndPreviousBurst = new ArrayList();
             currentAndPreviousBurst.addAll(previousSignalBurst);
-            currentAndPreviousBurst.addAll(list);
-            
+            currentAndPreviousBurst.addAll(currentSignalBurst);
+
             for (Signal signal : currentAndPreviousBurst) {
-            for (KeyframeGenerator generator : generators) {
-                if (generator.accept(signal)) {
-                    //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
-                    break;
+                for (KeyframeGenerator generator : generators) {
+                    if (generator.accept(signal)) {
+                        //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
+                        break;
+                    }
                 }
+                gazeGenerator.accept(signal);
+                faceGenerator.accept(signal);
             }
-            gazeGenerator.accept(signal);
-            faceGenerator.accept(signal);
-        }
         }
         // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
         // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
@@ -187,9 +185,9 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         for (KeyframeGenerator generator : generators) {
             keyframes.addAll(generator.generateKeyframes());
         }
-        
+
         keyframes.sort(keyframeComparator);
-           
+
         // Gaze keyframes for the eyes are generated last
         gazeGenerator.generateEyesKeyframes(keyframes);
 
@@ -197,13 +195,12 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         keyframes.addAll(faceGenerator.generateKeyframes());
 
         // Step 4: adjust the timing of all key frame
-
         keyframes.sort(keyframeComparator);
-        
-        if(previousSignalBurst.isEmpty()){
+
+        if (previousSignalBurst.isEmpty()) {
             keyframes.subList(0, previousKeyframesList.size()).clear();
         }
-    
+
         //  here:
         //      - we must manage the time for the three addition modes:
         //          - blend:    offset + now
@@ -214,11 +211,10 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         //          - blend:   previousLastTime = max(previousLastTime, the last time of the new keyframes)
         //          - replace: previousLastTime = the last time of the new keyframes
         //          - append:  previousLastTime = the last time of the new keyframes
-
         double startTime = keyframes.isEmpty() ? 0 : keyframes.get(0).getOffset();
         // if the start time to start signals is less than 0, all signals' time have to be increased so that they start from 0
         double absoluteStartTime = greta.core.util.time.Timer.getTime();
-        if (mode.getCompositionType() == CompositionType.append){
+        if (mode.getCompositionType() == CompositionType.append) {
             absoluteStartTime = Math.max(lastKeyFrameTime, absoluteStartTime);
         }
         absoluteStartTime -= (startTime < 0 ? startTime : 0);
@@ -247,12 +243,16 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         }
 
         this.sendFeedback(true);
-        
+
         this.sendKeyframes(keyframes, requestId, mode);
-        
-        previousSignalBurst = list;
+
+        //previousSignalBurst = list;
+        previousSignalBurst = currentSignalBurst;
         previousKeyframesList = keyframes;
         
+        currentSignalBurst = new ArrayList<>();
+        nextSignalBurst = new ArrayList<>();
+
         // Add animation to callbacks
         if (mode.getCompositionType() == CompositionType.replace) {
             this.stopAllAnims();
@@ -282,16 +282,16 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
     }
 
     @Override
-    public void addIncFeedbackPerformer(IncrementalityFeedbackPerformer performer){
+    public void addIncFeedbackPerformer(IncrementalityFeedbackPerformer performer) {
         incFeedbackPerformers.add(performer);
     }
-    
+
     @Override
-    public void removeIncFeedbackPerformer(IncrementalityFeedbackPerformer performer){
+    public void removeIncFeedbackPerformer(IncrementalityFeedbackPerformer performer) {
         incFeedbackPerformers.remove(performer);
     }
-    
-    public void sendFeedback(boolean parFeedback){
+
+    public void sendFeedback(boolean parFeedback) {
         for (IncrementalityFeedbackPerformer performer : incFeedbackPerformers) {
             performer.performIncFeedback(parFeedback);
         }
@@ -332,7 +332,7 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         this.characterManager = characterManager;
     }
 
-    public void UpdateFaceLibrary(){
+    public void UpdateFaceLibrary() {
         this.getCharacterManager().remove(FaceLibrary.global_facelibrary);
         FaceLibrary.global_facelibrary = new FaceLibrary(this.getCharacterManager());
         //get the default Lexicon :
@@ -345,7 +345,7 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         FaceLibrary.global_facelibrary.setDefinition(this.getCharacterManager().getValueString("FACELIBRARY"));
     }
 
-    public void UpdateGestureLibrary(){
+    public void UpdateGestureLibrary() {
         this.getCharacterManager().remove(Gestuary.global_gestuary);
         Gestuary.global_gestuary = new Gestuary(this.getCharacterManager());
         Gestuary.global_gestuary.setCharacterManager(this.getCharacterManager());
@@ -375,6 +375,6 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
     public void UpdateShoulderLibrary() {
     }
 
-    public void UpdateHandLibrary(){
+    public void UpdateHandLibrary() {
     }
 }

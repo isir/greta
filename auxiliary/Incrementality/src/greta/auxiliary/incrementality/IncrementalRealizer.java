@@ -89,10 +89,12 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
 
     private List<Signal> previousSignalBurst;
     private List<Keyframe> previousKeyframesList;
-    
+
     private List<Signal> currentSignalBurst;
-    
+
     private List<Signal> nextSignalBurst;
+
+    private List<Signal> currentAndNeighbors;
 
     public IncrementalRealizer(CharacterManager cm) {
         setCharacterManager(cm);
@@ -121,17 +123,24 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
 
         previousSignalBurst = new ArrayList<>();
         previousKeyframesList = new ArrayList<>();
-        
+
         currentSignalBurst = new ArrayList<>();
-        
+
         nextSignalBurst = new ArrayList<>();
+
+        currentAndNeighbors = new ArrayList();
     }
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
+
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
 
+        List<Keyframe> currentKeyframes = new ArrayList<>();
+
+        System.out.println("PERFORM SIGNALS : " + list);
+        
         if (currentID == null) {
             currentID = requestId;
         } else if (currentID != requestId) {
@@ -140,44 +149,37 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         }
 
         double pivotStartTime = list.get(0).getStart().getValue();
-        for(Signal sig: list){
-            if(sig.getStart().getValue() == pivotStartTime){
+        for (Signal sig : list) {
+            System.out.println(sig + " : " + sig.getStart().getValue());
+            if (sig.getStart().getValue() == pivotStartTime) {
                 currentSignalBurst.add(sig);
+            } else {
+                nextSignalBurst.add(sig);
             }
-            else nextSignalBurst.add(sig);
         }
-        
-        if (previousSignalBurst.isEmpty()) { //FIRST BURST
-            for (Signal signal : list) {
-                for (KeyframeGenerator generator : generators) {
-                    if (generator.accept(signal)) {
-                        //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
-                        break;
-                    }
-                }
-                gazeGenerator.accept(signal);
-                faceGenerator.accept(signal);
-            }
-        } else {
-            List<Signal> currentAndPreviousBurst = new ArrayList();
-            currentAndPreviousBurst.addAll(previousSignalBurst);
-            currentAndPreviousBurst.addAll(currentSignalBurst);
+        System.out.println("\033[31;1m current = " + currentSignalBurst + " --- \033[34;1m next = " + nextSignalBurst + "\n");
 
-            for (Signal signal : currentAndPreviousBurst) {
-                for (KeyframeGenerator generator : generators) {
-                    if (generator.accept(signal)) {
-                        //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
-                        break;
-                    }
-                }
-                gazeGenerator.accept(signal);
-                faceGenerator.accept(signal);
-            }
+        if (previousSignalBurst.isEmpty()) {
+            currentAndNeighbors.addAll(list);
+        } else {
+            currentAndNeighbors.addAll(previousSignalBurst);
+            currentAndNeighbors.addAll(list);
         }
+
+        for (Signal signal : currentAndNeighbors) { //KEYFRAME FOR CURRENT AND NEIGHBORS
+            for (KeyframeGenerator generator : generators) {
+                if (generator.accept(signal)) {
+                    //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
+                    break;
+                }
+            }
+            gazeGenerator.accept(signal);
+            faceGenerator.accept(signal);
+        }
+
         // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
         // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
         // Step 3: create all key frames
-
         // Gaze keyframes for other modalities than eyes are generated before the others
         // and act as "shifts"
         gazeGenerator.generateBodyKeyframes(keyframes);
@@ -192,13 +194,64 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         gazeGenerator.generateEyesKeyframes(keyframes);
 
         faceGenerator.findExistingAU(keyframes);
+
         keyframes.addAll(faceGenerator.generateKeyframes());
 
         // Step 4: adjust the timing of all key frame
         keyframes.sort(keyframeComparator);
+        
+        generators = new ArrayList<>();
 
-        if (previousSignalBurst.isEmpty()) {
-            keyframes.subList(0, previousKeyframesList.size()).clear();
+        lastKeyFrameTime = greta.core.util.time.Timer.getTime();
+        gestureGenerator = new GestureKeyframeGenerator();
+        generators.add(gestureGenerator);
+        generators.add(new SpeechKeyframeGenerator());
+        generators.add(new HeadKeyframeGenerator());
+        generators.add(new LaughKeyframeGenerator());
+
+        //experimental
+        generators.add(new ShoulderKeyframeGenerator());
+        generators.add(new TorsoKeyframeGenerator());
+        gazeGenerator = new GazeKeyframeGenerator(characterManager, generators);
+        faceGenerator = new FaceKeyframeGenerator();
+
+        for (Signal signal : currentSignalBurst) { //KEYFRAME FOR CURRENT ONLY
+            for (KeyframeGenerator generator : generators) {
+                if (generator.accept(signal)) {
+                    //System.out.println("accepted : " + signal + " --- into : " + generator); //DEBUG
+                    break;
+                }
+            }
+            gazeGenerator.accept(signal);
+            faceGenerator.accept(signal);
+        }
+        gazeGenerator.generateBodyKeyframes(currentKeyframes);
+
+        for (KeyframeGenerator generator : generators) {
+            currentKeyframes.addAll(generator.generateKeyframes());
+        }
+
+        currentKeyframes.sort(keyframeComparator);
+
+        // Gaze keyframes for the eyes are generated last
+        gazeGenerator.generateEyesKeyframes(currentKeyframes);
+
+        faceGenerator.findExistingAU(currentKeyframes);
+
+        currentKeyframes.addAll(faceGenerator.generateKeyframes());
+
+        if (!previousSignalBurst.isEmpty()) {
+            /*System.out.println("BEFORE --- " + keyframes);
+            keyframes.subList(0, previousKeyframesList.size() - 1).clear();
+            System.out.println("PREVIOUS REMOVED --- " + keyframes);
+            keyframes = keyframes.subList(0, currentKeyframes.size() - 1);
+            System.out.println("AFTER --- " + keyframes);*/
+            //System.out.println("Signal size previous = " + previousSignalBurst.size() + " --- Signal size current = " + currentSignalBurst.size() + " --- Signal size next = " + nextSignalBurst.size());
+            //System.out.println("Keyframe.size = " + keyframes.size() + " ---- Previous Size = " + previousKeyframesList.size() + " --- current size = " + currentKeyframes.size());
+            keyframes = keyframes.subList(previousKeyframesList.size(), previousKeyframesList.size() + currentKeyframes.size()-1);
+        }
+        else{
+            keyframes = keyframes.subList(0, currentKeyframes.size() - 1);
         }
 
         //  here:
@@ -214,11 +267,15 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         double startTime = keyframes.isEmpty() ? 0 : keyframes.get(0).getOffset();
         // if the start time to start signals is less than 0, all signals' time have to be increased so that they start from 0
         double absoluteStartTime = greta.core.util.time.Timer.getTime();
-        if (mode.getCompositionType() == CompositionType.append) {
+
+        if (mode.getCompositionType()
+                == CompositionType.append) {
             absoluteStartTime = Math.max(lastKeyFrameTime, absoluteStartTime);
         }
         absoluteStartTime -= (startTime < 0 ? startTime : 0);
-        if (mode.getCompositionType() != CompositionType.blend && !keyframes.isEmpty()) {
+
+        if (mode.getCompositionType()
+                != CompositionType.blend && !keyframes.isEmpty()) {
             lastKeyFrameTime = 0;
         }
         //add this info to the keyframe - save this info in some special variable
@@ -242,21 +299,25 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
             }
         }
 
-        this.sendFeedback(true);
+        this.sendFeedback(
+                true);
 
         this.sendKeyframes(keyframes, requestId, mode);
 
         //previousSignalBurst = list;
         previousSignalBurst = currentSignalBurst;
-        previousKeyframesList = keyframes;
-        
+        previousKeyframesList = currentKeyframes;
+
         currentSignalBurst = new ArrayList<>();
         nextSignalBurst = new ArrayList<>();
+        currentAndNeighbors = new ArrayList();
 
         // Add animation to callbacks
-        if (mode.getCompositionType() == CompositionType.replace) {
+        if (mode.getCompositionType()
+                == CompositionType.replace) {
             this.stopAllAnims();
         }
+
         this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
     }
 

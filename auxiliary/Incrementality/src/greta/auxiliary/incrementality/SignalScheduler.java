@@ -98,7 +98,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         list.forEach((currentSignal) -> {
 
             //DEBUG
-            //System.out.println(currentSignal + " --- " + currentSignal.getStart().getValue());
+            System.out.println(currentSignal + " --- " + currentSignal.getStart().getValue());
             
             //if current startTime (key) already in the treemap, get corresponding signalList (value)
             if(treeList.containsKey(currentSignal.getStart().getValue())){
@@ -175,20 +175,24 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
             //System.out.println(realizerIsOpen); //DEBUG
             if(realizerIsOpen){
                 realizerIsOpen = false;
-                System.out.println("[" + currentBurstNumber + "]         " + treeList.firstEntry().getValue());
+                System.out.println("\033[32;1m [" + currentBurstNumber + "]   "  + treeList.firstEntry().getKey() +  "  " + treeList.firstEntry().getValue());
                 currentBurstNumber++;
                 
                 //neighboorSignalList.set(1, treeList.firstEntry().getValue());
                 neighboorSignalList.addAll(treeList.firstEntry().getValue());
-                if(treeList.size() > 1){ 
+                System.out.println("\033[31;1m current = " + treeList.firstEntry().getValue());
+                
+                if(treeList.size() > 1){
+                    System.out.println("\033[34;1m next = " + treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get());
                     neighboorSignalList.addAll(treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get());
                 }
                 
-                System.out.println(neighboorSignalList);
+                //System.out.println(neighboorSignalList);
                 
                 //System.out.println(realizerIsOpen);
                 for(SignalPerformer sp : performerList){
                     //sp.performSignals(treeList.firstEntry().getValue(), id, mode);
+                    //System.out.println(neighboorSignalList);
                     sp.performSignals(neighboorSignalList, id, mode);
                 }
                 
@@ -202,7 +206,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         
         //DEBUG: calculate elapsed time to monitor any big delay
         long endTime = System.currentTimeMillis();
-        System.out.println("elapsed time = " + (endTime - startTime));
+        //System.out.println("elapsed time = " + (endTime - startTime));
         
         System.out.println("*********** End of " + id + " **********\n");
     }
@@ -219,7 +223,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
 
     @Override
     public void performIncFeedback(boolean sent){
-        System.out.println("RECEIVED FEEDBACK : " + sent);
+        //System.out.println("RECEIVED FEEDBACK : " + sent);
         setOpenRealizer(sent);
     }
     

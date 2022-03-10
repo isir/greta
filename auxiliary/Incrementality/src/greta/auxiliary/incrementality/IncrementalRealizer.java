@@ -145,18 +145,32 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
             currentID = requestId;
         } else if (currentID != requestId) {
             currentID = requestId;
+            currentSignalBurst = new ArrayList<>();
             System.out.println("NEW REQUEST ID FOUND");
         }
 
-        double pivotStartTime = list.get(0).getStart().getValue();
-        for (Signal sig : list) {
-            System.out.println(sig + " : " + sig.getStart().getValue());
-            if (sig.getStart().getValue() == pivotStartTime) {
-                currentSignalBurst.add(sig);
-            } else {
-                nextSignalBurst.add(sig);
+        if(currentSignalBurst.isEmpty()){
+            double pivotStartTime = list.get(0).getStart().getValue();
+            for (Signal sig : list) {
+                System.out.println(sig + " : " + sig.getStart().getValue());
+                if (sig.getStart().getValue() == pivotStartTime) {
+                    currentSignalBurst.add(sig);
+                } else {
+                    nextSignalBurst.add(sig);
+                }
             }
         }
+        else{
+            for (Signal sig : list) {
+                if(!currentSignalBurst.contains(sig)){
+                    nextSignalBurst.add(sig);
+                }
+            }
+        }
+        
+        
+        
+        
         System.out.println("\033[31;1m current = " + currentSignalBurst + " --- \033[34;1m next = " + nextSignalBurst + "\n");
 
         if (previousSignalBurst.isEmpty()) {
@@ -308,7 +322,9 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         previousSignalBurst = currentSignalBurst;
         previousKeyframesList = currentKeyframes;
 
-        currentSignalBurst = new ArrayList<>();
+        //currentSignalBurst = new ArrayList<>();
+        currentSignalBurst = nextSignalBurst;
+        
         nextSignalBurst = new ArrayList<>();
         currentAndNeighbors = new ArrayList();
 

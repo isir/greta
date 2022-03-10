@@ -61,6 +61,8 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
 
     private boolean realizerIsOpen = true;
     
+    private double offset;
+    
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
         
@@ -73,6 +75,8 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         lastStart = 0;
         
         neighboorSignalList = new ArrayList();
+        
+        offset = 0.0;
         
         /*      REALIZER STEP ONE      */
         for (Signal signal : list) {
@@ -96,18 +100,35 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         /* TreeMap with keys = start time   */
         /* and values = list of signals     */
         list.forEach((currentSignal) -> {
+            
+            if(currentSignal.getStart().getValue() < 0){ 
+                System.out.println("negativ start \n");
+                offset = currentSignal.getStart().getValue();
+            }
 
             //DEBUG
             System.out.println(currentSignal + " --- " + currentSignal.getStart().getValue());
             
-            //if current startTime (key) already in the treemap, get corresponding signalList (value)
-            if(treeList.containsKey(currentSignal.getStart().getValue())){
-                currentSignalList = treeList.get(currentSignal.getStart().getValue());
-            }
+            /*if(currentSignal.toString().contains("performative")){ 
+                //if current startTime (key) already in the treemap, get corresponding signalList (value)
+                if(treeList.containsKey(currentSignal.getStart().getValue() + Math.abs(offset))){
+                    currentSignalList = treeList.get(currentSignal.getStart().getValue() + Math.abs(offset));
+                }
+                
+                currentSignalList.add(currentSignal);
+                treeList.put(currentSignal.getStart().getValue() + Math.abs(offset), currentSignalList);
+            }*/
             
-            //append current signal to signalList (either empty list or found list - see above) and put into treeMap
-            currentSignalList.add(currentSignal);
-            treeList.put(currentSignal.getStart().getValue(), currentSignalList);
+            //else{
+                if(treeList.containsKey(currentSignal.getStart().getValue())){
+                    currentSignalList = treeList.get(currentSignal.getStart().getValue());
+                }
+            
+                //append current signal to signalList (either empty list or found list - see above) and put into treeMap
+                currentSignalList.add(currentSignal);
+                treeList.put(currentSignal.getStart().getValue(), currentSignalList);
+            //}
+            
             currentSignalList = new ArrayList<>();
             
                     
@@ -201,6 +222,13 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
                 treeList.remove(treeList.firstKey());
                 neighboorSignalList = new ArrayList<>();
                 
+                try{
+                    long sleepTime = (long)(5);
+                    Thread.sleep(sleepTime);
+                }
+                catch(Exception e){
+                    System.out.println("ERROR --- " + e);
+                }
             }
         }
         

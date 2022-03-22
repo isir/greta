@@ -109,17 +109,18 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
             //DEBUG
             System.out.println(currentSignal + " --- " + currentSignal.getStart().getValue());
             
-            /*if(currentSignal.toString().contains("performative")){ 
+            if(currentSignal.toString().contains("performative")){ 
                 //if current startTime (key) already in the treemap, get corresponding signalList (value)
-                if(treeList.containsKey(currentSignal.getStart().getValue() + Math.abs(offset))){
-                    currentSignalList = treeList.get(currentSignal.getStart().getValue() + Math.abs(offset));
+                if(treeList.containsKey(currentSignal.getStart().getValue() + offset)){
+                    currentSignalList = treeList.get(currentSignal.getStart().getValue() + offset);
                 }
                 
                 currentSignalList.add(currentSignal);
-                treeList.put(currentSignal.getStart().getValue() + Math.abs(offset), currentSignalList);
-            }*/
+                treeList.put(currentSignal.getStart().getValue() + offset, currentSignalList);
+            }
             
-            //else{
+                
+            else{
                 if(treeList.containsKey(currentSignal.getStart().getValue())){
                     currentSignalList = treeList.get(currentSignal.getStart().getValue());
                 }
@@ -127,7 +128,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
                 //append current signal to signalList (either empty list or found list - see above) and put into treeMap
                 currentSignalList.add(currentSignal);
                 treeList.put(currentSignal.getStart().getValue(), currentSignalList);
-            //}
+            }
             
             currentSignalList = new ArrayList<>();
             
@@ -222,13 +223,13 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
                 treeList.remove(treeList.firstKey());
                 neighboorSignalList = new ArrayList<>();
                 
-                try{
+                /*try{
                     long sleepTime = (long)(5);
                     Thread.sleep(sleepTime);
                 }
                 catch(Exception e){
                     System.out.println("ERROR --- " + e);
-                }
+                }*/
             }
         }
         

@@ -95,6 +95,8 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
     private List<Signal> nextSignalBurst;
 
     private List<Signal> currentAndNeighbors;
+    
+    private boolean isRestGesture;
 
     public IncrementalRealizer(CharacterManager cm) {
         setCharacterManager(cm);
@@ -129,6 +131,8 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         nextSignalBurst = new ArrayList<>();
 
         currentAndNeighbors = new ArrayList();
+        
+        isRestGesture = false;
     }
 
     @Override //TODO add the use of modes: blend, replace, append
@@ -139,21 +143,25 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
 
         List<Keyframe> currentKeyframes = new ArrayList<>();
 
-        System.out.println("PERFORM SIGNALS : " + list);
+        //("PERFORM SIGNALS : " + list);
         
         if (currentID == null) {
             currentID = requestId;
         } else if (currentID != requestId) {
             currentID = requestId;
             currentSignalBurst = new ArrayList<>();
+            nextSignalBurst = new ArrayList<>();
             System.out.println("NEW REQUEST ID FOUND");
         }
 
         if(currentSignalBurst.isEmpty()){
             double pivotStartTime = list.get(0).getStart().getValue();
             for (Signal sig : list) {
-                System.out.println(sig + " : " + sig.getStart().getValue());
+                //(sig + " : " + sig.getStart().getValue());
                 if (sig.getStart().getValue() == pivotStartTime) {
+                    if(sig.toString().contains("rest")){
+                        isRestGesture = true;
+                    }
                     currentSignalBurst.add(sig);
                 } else {
                     nextSignalBurst.add(sig);
@@ -171,7 +179,7 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         
         
         
-        System.out.println("\033[31;1m current = " + currentSignalBurst + " --- \033[34;1m next = " + nextSignalBurst + "\n");
+        //System.out.println("\033[31;1m current = " + currentSignalBurst + " --- \033[34;1m next = " + nextSignalBurst + "\n");
 
         if (previousSignalBurst.isEmpty()) {
             currentAndNeighbors.addAll(list);
@@ -262,7 +270,16 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
             System.out.println("AFTER --- " + keyframes);*/
             //System.out.println("Signal size previous = " + previousSignalBurst.size() + " --- Signal size current = " + currentSignalBurst.size() + " --- Signal size next = " + nextSignalBurst.size());
             //System.out.println("Keyframe.size = " + keyframes.size() + " ---- Previous Size = " + previousKeyframesList.size() + " --- current size = " + currentKeyframes.size());
-            keyframes = keyframes.subList(previousKeyframesList.size(), previousKeyframesList.size() + currentKeyframes.size()-1);
+            
+            System.out.println("PreviousKeyframes : " + previousKeyframesList.size() + " -- " + previousKeyframesList + "\n"
+                    + "CurrentKeyframes : " + currentKeyframes.size() + " -- " + currentKeyframes + "\n"
+                    + "Keyframes : " + keyframes.size() + " -- " + keyframes);
+            if(previousKeyframesList.size() + currentKeyframes.size()-1 <= keyframes.size()){
+                keyframes = keyframes.subList(previousKeyframesList.size(), previousKeyframesList.size() + currentKeyframes.size()-1);
+            }
+            else{
+                keyframes = keyframes.subList(previousKeyframesList.size(), keyframes.size());
+            }
         }
         else{
             keyframes = keyframes.subList(0, currentKeyframes.size() - 1);
@@ -319,9 +336,17 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         this.sendKeyframes(keyframes, requestId, mode);
 
         //previousSignalBurst = list;
-        previousSignalBurst = currentSignalBurst;
-        previousKeyframesList = currentKeyframes;
-
+        if(isRestGesture){
+            System.out.println("FOUND REST");
+            previousSignalBurst = new ArrayList<>();
+            previousKeyframesList = new ArrayList<>();
+            isRestGesture = false;
+        }
+        else{
+            previousSignalBurst = currentSignalBurst;
+            previousKeyframesList = currentKeyframes;
+        }
+        
         //currentSignalBurst = new ArrayList<>();
         currentSignalBurst = nextSignalBurst;
         

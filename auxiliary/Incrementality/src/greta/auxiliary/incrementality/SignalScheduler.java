@@ -91,9 +91,9 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         temporizer.temporize();
         
         //DEBUG OUTPUT LISTS OF SIGNALS
-        list.forEach((currentSignal) -> {
+        /*list.forEach((currentSignal) -> {
             System.out.println(currentSignal + " --- " + currentSignal.getStart().isConcretized() + " --- " + currentSignal.getStart().getValue() + " --- " + currentSignal.getEnd().getValue());
-        });
+        });*/
         
         /*              PARSER              */
         /* Parse the list of signals into a */
@@ -111,12 +111,12 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
             
             if(currentSignal.toString().contains("performative")){ 
                 //if current startTime (key) already in the treemap, get corresponding signalList (value)
-                if(treeList.containsKey(currentSignal.getStart().getValue() + offset)){
-                    currentSignalList = treeList.get(currentSignal.getStart().getValue() + offset);
+                if(treeList.containsKey(currentSignal.getStart().getValue()/* + offset*/)){
+                    currentSignalList = treeList.get(currentSignal.getStart().getValue()/* + offset*/);
                 }
                 
                 currentSignalList.add(currentSignal);
-                treeList.put(currentSignal.getStart().getValue() + offset, currentSignalList);
+                treeList.put(currentSignal.getStart().getValue()/* + offset*/, currentSignalList);
             }
             
                 
@@ -193,43 +193,48 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
             neighboorSignalList[0] = neighboorSignalList[1];
         }*/
         
+        double nextKeyAdjusted = 0.0;
         while(treeList.size() > 0){
             //System.out.println(realizerIsOpen); //DEBUG
             if(realizerIsOpen){
+                
                 realizerIsOpen = false;
-                System.out.println("\033[32;1m [" + currentBurstNumber + "]   "  + treeList.firstEntry().getKey() +  "  " + treeList.firstEntry().getValue());
+                System.out.println("[" + currentBurstNumber + "]   "  + treeList.firstEntry().getKey() +  "  " + treeList.firstEntry().getValue());
                 currentBurstNumber++;
                 
                 //neighboorSignalList.set(1, treeList.firstEntry().getValue());
                 neighboorSignalList.addAll(treeList.firstEntry().getValue());
-                System.out.println("\033[31;1m current = " + treeList.firstEntry().getValue());
+                //System.out.println("\033[31;1m current = " + treeList.firstEntry().getValue());
+                
+                double currentKeyAdjusted = treeList.firstEntry().getKey() + Math.abs(firstEntryKey);
                 
                 if(treeList.size() > 1){
-                    System.out.println("\033[34;1m next = " + treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get());
+                    //System.out.println("\033[34;1m next = " + treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get());
                     neighboorSignalList.addAll(treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get());
+                    
+                    nextKeyAdjusted = treeList.entrySet().stream().skip(1).map(map -> map.getKey()).findFirst().get() + Math.abs(firstEntryKey);
                 }
                 
-                //System.out.println(neighboorSignalList);
-                
-                //System.out.println(realizerIsOpen);
                 for(SignalPerformer sp : performerList){
-                    //sp.performSignals(treeList.firstEntry().getValue(), id, mode);
                     //System.out.println(neighboorSignalList);
                     sp.performSignals(neighboorSignalList, id, mode);
                 }
                 
-                //neighboorSignalList.set(0, neighboorSignalList.get(1));
-                
                 treeList.remove(treeList.firstKey());
                 neighboorSignalList = new ArrayList<>();
                 
+                
                 /*try{
-                    long sleepTime = (long)(5);
+                    long sleepTime = (long)(nextKeyAdjusted * 100) - (long)(currentKeyAdjusted * 100);
                     Thread.sleep(sleepTime);
+                    System.out.println("WAITED : " + sleepTime);
+                    nextKeyAdjusted = 0.0;
+                    //lastStart = (long)(currentKeyAdjusted * 1000);
                 }
                 catch(Exception e){
                     System.out.println("ERROR --- " + e);
                 }*/
+                
             }
         }
         

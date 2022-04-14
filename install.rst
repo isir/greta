@@ -1,5 +1,5 @@
 =====
-GRETA
+Welcome
 =====
 
 Welcome to the public repository of the Greta project.

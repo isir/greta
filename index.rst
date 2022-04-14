@@ -1,5 +1,6 @@
 GRETA
 =====
+
 Welcome to the public repository of the Greta project.
 Greta is a virtual character engine that allows generating socio-emotional behaviors in order to build natural interactional scenario with human users.
 

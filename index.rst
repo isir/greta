@@ -29,7 +29,8 @@ If you plan on using MaryTTS, you need to:
 Greta is the result of different research projects conducted by Catherine Pelachaud in her research group.
 
 
-## Functionality
+Functionality
+-------
 
 The Greta project is divided into a public repository (this one) and a private one where future functionnalities are being developed by Catherine Pelachaud's research group.
 If you use any of the resources provided on this page in any of your publications we ask you to cite the corresponding paper(s).
@@ -40,7 +41,8 @@ If you use any of the resources provided on this page in any of your publication
 
 The functionnalities available with the public version are the following:
 
-### SAIBA architecture
+SAIBA architecture
+-------
 
 Greta is a SAIBA compliant agent architecture, meaning that it is compatible with and can take as inputs Behavior Markup Language and Function Markup Language files in order to produce the behaviors of the agent.
 
@@ -48,7 +50,8 @@ Mancini, M., Niewiadomski, R., Bevacqua, E., & Pelachaud, C. (2008, November).
 Greta: a SAIBA compliant ECA system.
 In Troisième Workshop sur les Agents Conversationnels Animés.
  
-### MPEG4 animation
+MPEG4 animation
+-------
 
 Greta animation engine produces MPEG4 compatible animation. The system outputs frame of Body Animation Parameters and Facial Animation Parameters.
 The Greta platform is also capable of taking as inputs these animation parameters to render the animation on a virtual character using Ogre3D or Unity3D.
@@ -58,7 +61,8 @@ Greta: an interactive expressive ECA system.
 In Proceedings of The 8th International Conference on Autonomous Agents and Multiagent Systems-Volume 2 (pp. 1399-1400).
 International Foundation for Autonomous Agents and Multiagent Systems.
 
-### Listener Backchannels
+Listener Backchannels
+-------
 
 An important part of human communication is performed by the subtle behaviors one produces when listening. These behaviors, called backchannels, include head nods and other small sounds like "hmm hmm".
 Greta provides a system to configure and use these behaviors in an automatic fashion in order to design more life-like interaction.

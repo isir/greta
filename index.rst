@@ -5,6 +5,6 @@ GRETA
    :maxdepth: 2
 
    install
-   support
+   quickstart
 
 

@@ -1,5 +1,5 @@
 
-## GRETA
+##GRETA
 
 .. toctree::
    :maxdepth: 2

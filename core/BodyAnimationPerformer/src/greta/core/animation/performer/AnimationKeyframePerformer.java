@@ -37,6 +37,8 @@ import greta.core.keyframes.HeadKeyframe;
 import greta.core.keyframes.Keyframe;
 import greta.core.keyframes.ShoulderKeyframe;
 import greta.core.keyframes.TorsoKeyframe;
+import greta.core.keyframes.KeyframesFeedbackEmitter;
+import greta.core.keyframes.KeyframesFeedbackPerformer;
 import greta.core.signals.gesture.Hand;
 import greta.core.signals.gesture.Position;
 import greta.core.signals.gesture.TrajectoryDescription;
@@ -71,7 +73,7 @@ import java.util.List;
  * @author Jing Huang
  * @author Nawhal Sayarh
  */
-public class AnimationKeyframePerformer extends CharacterDependentAdapter implements CancelableKeyframePerformer, BAPFrameEmitter, CharacterDependent, AnimationFrameEmitter {
+public class AnimationKeyframePerformer extends CharacterDependentAdapter implements CancelableKeyframePerformer, BAPFrameEmitter, CharacterDependent, AnimationFrameEmitter, KeyframesFeedbackEmitter {
     private SymbolicConverter symbolicConverter;
     private CharacterBody cb;
     private ExpressiveTorso exTorso = new ExpressiveTorso();
@@ -92,6 +94,8 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
     private CharacterManager cm;
 
     private ArrayList<AnimationFramePerformer> afperformers = new ArrayList<>();
+    
+    private ArrayList<KeyframesFeedbackPerformer> kfpList = new ArrayList<>();
 
     public AnimationKeyframePerformer(CharacterManager cm) {
         symbolicConverter = new SymbolicConverter(cm);
@@ -145,10 +149,14 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
     public void performKeyframes(List<Keyframe> keyframes, ID requestId) {
         // TODO : Mode management in progress
         performKeyframes(keyframes, requestId, new Mode(CompositionType.replace));
+        /*for(Keyframe key : keyframes){
+            sendKeyframeFeedback(key.getId());
+        }*/
     }
 
     @Override
     public void performKeyframes(List<Keyframe> keyframes, ID requestId, Mode mode) {
+        //System.out.println("IN BODY : " + keyframes);
         int size = keyframes.size();
         if (size < 2) {
             return;
@@ -244,6 +252,12 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
 //            System.out.println(((Arm)arm).getTime() + " "+((Arm)arm).getTarget());
 //        }
         sendByFrame(start, end, leftArm, rightArm, torso, head, leftShoulder, rightShoulder, requestId, mode);
+        
+        sendKeyframeFeedback(true);
+        
+        /*for(Keyframe key : keyframesCopy){
+            sendKeyframeFeedback(key.getId());
+        }*/
     }
 
     private void propagateArm (List<GestureKeyframe> gestureKeyframes, LinkedList<ExpressiveFrame> side) {
@@ -751,4 +765,20 @@ public class AnimationKeyframePerformer extends CharacterDependentAdapter implem
 //        //double _torqueOutput = Math.signum(desireAngle - currentAngle) * _kP ;
 //        return _torqueOutput;
 //    }
+
+    @Override
+    public void addKeyframesFeedbackPerformer(KeyframesFeedbackPerformer kfp) {
+        kfpList.add(kfp);
+    }
+
+    @Override
+    public void removeKeyframesFeedbackPerformer(KeyframesFeedbackPerformer kfp) {
+        kfpList.add(kfp);
+    }
+    
+    public void sendKeyframeFeedback(boolean isProcessingOver){
+        for(KeyframesFeedbackPerformer kfp : kfpList){
+            kfp.performKeyframesFeedback(isProcessingOver);
+        }
+    }
 }

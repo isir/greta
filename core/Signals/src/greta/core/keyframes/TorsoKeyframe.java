@@ -35,6 +35,8 @@ public class TorsoKeyframe  extends ParametersKeyframe{
     public SpineDirection collapse;
     public HashMap<String, Quaternion> _rotations = new HashMap<String, Quaternion>();
     boolean onlyshoulder = false;
+    
+    private String parentId;
 
     public TorsoKeyframe(String id, SpinePhase phase, String category)
     {
@@ -124,6 +126,16 @@ public class TorsoKeyframe  extends ParametersKeyframe{
     public TorsoKeyframe clone() throws CloneNotSupportedException {
         TorsoKeyframe cloneobj = (TorsoKeyframe) super.clone();
         return cloneobj;
+    }
+
+    @Override
+    public String getParentId() {
+        return parentId;
+    }
+
+    @Override
+    public void setParentId(String parParentId) {
+        this.parentId = parParentId;
     }
 
 }

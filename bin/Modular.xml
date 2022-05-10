@@ -1617,6 +1617,13 @@
             <connect from="input" method="addIncFeedbackPerformer" to="output"/>
             <disconnect from="input" method="removeIncFeedbackPerformer" to="output"/>
         </connector>
+        <connector id="connectKeyframesFeedbackEmitterToPerformer">
+            <input class="greta.core.keyframes.KeyframesFeedbackEmitter" lib_id="greta_signals"/>
+            <output class="greta.core.keyframes.KeyframesFeedbackPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="addKeyframesFeedbackPerformer" to="output"/>
+            <disconnect from="input" method="removeKeyframesFeedbackPerformer" to="output"/>
+        </connector>
+
     </connectors>
     <!-- list of styles -->
     <styles>

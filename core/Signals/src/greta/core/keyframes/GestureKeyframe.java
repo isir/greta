@@ -32,6 +32,8 @@ public class GestureKeyframe extends ParametersKeyframe{
     Hand hand;
     boolean isScript;
     String scriptName;
+    
+    String parentId;
 //    Hand leftHand;
 //    Hand rightHand;
 
@@ -147,5 +149,13 @@ public class GestureKeyframe extends ParametersKeyframe{
         return handSide+":  t="+offset+" "+hand;
     }
 
+    @Override
+    public String getParentId() {
+        return parentId;
+    }
 
+    @Override
+    public void setParentId(String parParentId) {
+        this.parentId = parParentId;
+    }
 }

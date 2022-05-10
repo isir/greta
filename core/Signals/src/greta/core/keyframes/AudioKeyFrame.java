@@ -32,6 +32,8 @@ public class AudioKeyFrame implements Keyframe {
     private double onset;
     private double offset;
     private final Audio audio;
+    
+    private String parentId;
 
     public AudioKeyFrame(Speech speech) {
         this(
@@ -115,5 +117,15 @@ public class AudioKeyFrame implements Keyframe {
             return 0;
         }
         return audio.getDuration();
+    }
+
+    @Override
+    public String getParentId() {
+        return parentId;
+    }
+
+    @Override
+    public void setParentId(String parParentId) {
+        this.parentId = parParentId;
     }
 }

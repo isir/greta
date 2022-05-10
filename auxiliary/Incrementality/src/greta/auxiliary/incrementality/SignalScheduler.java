@@ -217,23 +217,25 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
                 
                 for(SignalPerformer sp : performerList){
                     //System.out.println(neighboorSignalList);
-                    sp.performSignals(neighboorSignalList, id, mode);
+                    sp.performSignals(neighboorSignalList, id, new Mode("blend"));
                 }
                 
                 treeList.remove(treeList.firstKey());
                 neighboorSignalList = new ArrayList<>();
                 
                 
-                /*try{
-                    long sleepTime = (long)(nextKeyAdjusted * 100) - (long)(currentKeyAdjusted * 100);
-                    Thread.sleep(sleepTime);
-                    System.out.println("WAITED : " + sleepTime);
-                    nextKeyAdjusted = 0.0;
+                try{
+                    long sleepTime = (long)(nextKeyAdjusted * 800) - (long)(currentKeyAdjusted * 800);
+                    if(sleepTime > 0){
+                        Thread.sleep(sleepTime);
+                        System.out.println("WAITED : " + sleepTime);
+                        nextKeyAdjusted = 0.0;
+                    }
                     //lastStart = (long)(currentKeyAdjusted * 1000);
                 }
                 catch(Exception e){
                     System.out.println("ERROR --- " + e);
-                }*/
+                }
                 
             }
         }

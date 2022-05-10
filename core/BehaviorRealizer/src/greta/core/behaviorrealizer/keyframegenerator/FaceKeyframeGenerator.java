@@ -67,19 +67,23 @@ public class FaceKeyframeGenerator extends KeyframeGenerator {
             if (face.isScheduled()) {
                 boolean attackEqualsDecay = face.getTimeMarker("attack").getValue() == face.getTimeMarker("decay").getValue();
 
-                AUAPFrame start = generateAUAPFrameFromAUItems(face, "start", 0.0);
-                AUAPFrame attack = generateAUAPFrameFromAUItems(face, "attack",   attackEqualsDecay ? 0.95 : 1.0);
-                AUAPFrame decay = generateAUAPFrameFromAUItems(face, "decay",     attackEqualsDecay ? 0.95 : 0.9);
-                AUAPFrame sustain = generateAUAPFrameFromAUItems(face, "sustain", attackEqualsDecay ? 0.95 : 0.9);
-                AUAPFrame end = generateAUAPFrameFromAUItems(face, "end", 0.0);
+                AUAPFrame start = generateAUAPFrameFromAUItems(face, "start", 0.0, signal.getId());
+                AUAPFrame attack = generateAUAPFrameFromAUItems(face, "attack",   attackEqualsDecay ? 0.95 : 1.0, signal.getId());
+                AUAPFrame decay = generateAUAPFrameFromAUItems(face, "decay",     attackEqualsDecay ? 0.95 : 0.9, signal.getId());
+                AUAPFrame sustain = generateAUAPFrameFromAUItems(face, "sustain", attackEqualsDecay ? 0.95 : 0.9, signal.getId());
+                AUAPFrame end = generateAUAPFrameFromAUItems(face, "end", 0.0, signal.getId());
 
+                //System.out.println("test " + start.getParentId());
+                
                 interpolator.blendSegment(start, attack, decay, sustain, end);
             }
         }
         if( ! interpolator.isEmpty()){
             for(AUAPFrame frame : interpolator.getAUAPFrameList()){
                 double time = frame.getFrameNumber() * Constants.FRAME_DURATION_SECONDS;
-                AUKeyFrame auKeyFrame = new AUKeyFrame("AUs_at_"+time, time, frame);
+                //AUKeyFrame auKeyFrame = new AUKeyFrame("AUs_at_"+time, time, frame);
+                AUKeyFrame auKeyFrame = new AUKeyFrame("AUs_at_"+time, time, frame, frame.getParentId());
+                //System.out.println("FACE FRAME " + frame.getParentId());
                 outputKeyframes.add(auKeyFrame);
             }
         }
@@ -87,13 +91,13 @@ public class FaceKeyframeGenerator extends KeyframeGenerator {
     }
 
 
-    private AUAPFrame generateAUAPFrameFromAUItems(FaceSignal face, String tmName, double scale) {
-        return generateAUAPFrameFromAUItems(face.getActionUnits(), face.getTimeMarker(tmName).getValue(), scale * face.getIntensity());
+    private AUAPFrame generateAUAPFrameFromAUItems(FaceSignal face, String tmName, double scale, String parParentId) {
+        return generateAUAPFrameFromAUItems(face.getActionUnits(), face.getTimeMarker(tmName).getValue(), scale * face.getIntensity(), parParentId);
     }
 
-    private AUAPFrame generateAUAPFrameFromAUItems(List<AUItem> aus, double time, double scale){
+    private AUAPFrame generateAUAPFrameFromAUItems(List<AUItem> aus, double time, double scale, String parParentId){
         int timeIndex = (int)(time*Constants.FRAME_PER_SECOND);
-        AUAPFrame auapFrame = new AUAPFrame(timeIndex);
+        AUAPFrame auapFrame = new AUAPFrame(timeIndex, parParentId);
         for(AUItem au : aus){
             if (au.getSide() == Side.LEFT || au.getSide() == Side.BOTH) {
                 auapFrame.setAUAPleft(au.getAUnum(), au.getIntensity() * scale);

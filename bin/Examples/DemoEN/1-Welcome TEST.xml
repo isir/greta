@@ -5,9 +5,7 @@
 			<description level="1" type="gretabml">
 				<reference>tmp/from-fml-apml.pho</reference>
 			</description>
-			
-			<tm id="tm0"/>
-				Hello, Hello, Hello, Hello,
+				
 			<tm id="tm1"/>
 				Hello,
 			<tm id="tm2"/>
@@ -19,12 +17,9 @@
 			<tm id="tm5"/>	
 				
 			
-			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm3" end="s1:tm4" importance="1"/>
-			<boundary type="LL" id="b1" start="s1:tm5" end="s1:tm5+0.5"/>
 		</speech>
 	</bml>
-	<fml><!-- target="Andre_chair0" -->
-		<performative id="p1" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>
-		<performative id="p2" type="propose" start="s1:tm3-1" end="s1:tm5" importance="1.0"/>
+	<fml>
+		<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>
 	</fml>
 </fml-apml>

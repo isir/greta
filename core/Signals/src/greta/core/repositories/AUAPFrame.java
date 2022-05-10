@@ -30,6 +30,8 @@ public class AUAPFrame extends AnimationParametersFrame<AUAP> {
 
     public static final int NUM_OF_AUS = 64;
 
+    private String parentId;
+    
     /**
      * AUAP for left and right
      */
@@ -40,7 +42,12 @@ public class AUAPFrame extends AnimationParametersFrame<AUAP> {
     public AUAPFrame(int frameNum) {
         super(NUM_OF_AUS * 2, frameNum);
     }
-
+    
+    public AUAPFrame(int frameNum, String parParentId) {
+        super(NUM_OF_AUS * 2, frameNum);
+        parentId = parParentId;
+    }
+    
     public AUAPFrame(AUAPFrame auapFrame) {
         super(auapFrame);
     }
@@ -215,5 +222,13 @@ public class AUAPFrame extends AnimationParametersFrame<AUAP> {
     @Override
     protected AUAP copyAnimationParameter(AUAP ap) {
         return new AUAP(ap);
+    }
+    
+    public String getParentId(){
+        return parentId;
+    }
+    
+    public void setParentId(String parParentId){
+        parentId = parParentId;
     }
 }

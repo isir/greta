@@ -132,7 +132,9 @@ public class AUAPFrameInterpolator {
 
         ArrayList<AUAPFrame> toadd = new ArrayList<>(auSegment.size());
         for(AUAPFrame frame : auSegment){
+            //System.out.println("INSIDE INTERPOLATOR FRAME : " + frame.getParentId());
             AUAPFrame interpolated = getAUAPFrameAt(frame.getFrameNumber(), false, true);
+            interpolated.setParentId(frame.getParentId());
             blendMax(interpolated, frame);
             toadd.add(interpolated);
         }

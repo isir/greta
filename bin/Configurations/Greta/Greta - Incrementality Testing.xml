@@ -105,7 +105,7 @@
                     id="Gesture Animation Editor - 1647271176926-497"
                     module="Gesture Animation Editor"
                     name="Gesture Animation Editor" w="80.0" x="130.0" y="280.0">
-                    <window h="660" visible="true" w="616" x="0" y="0"/>
+                    <window h="660" visible="true" w="616" x="1935" y="0"/>
                 </element>
             </element>
         </element>
@@ -124,36 +124,10 @@
             x="190.0" y="330.0"/>
     </elements>
     <connections>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Signal Scheduler - 1638791562331-532"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1544700914641-19" target="Incremental Realizer - 1638802918908-761"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Signal Scheduler - 1638791562331-532" target="Incremental Realizer - 1638802918908-761"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Gesture Animation Editor - 1647271176926-497" target="Signal Scheduler - 1638791562331-532"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection
-            connector="connectIncrementalFeedbackEmitterToPerformer"
-            source="Incremental Realizer - 1638802918908-761" target="Signal Scheduler - 1638791562331-532"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Gesture Animation Editor - 1647271176926-497" target="Signal Scheduler - 1638791562331-532"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Incremental Realizer - 1638802918908-761" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -162,7 +136,33 @@
             source="Incremental Realizer - 1638802918908-761" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Incremental Realizer - 1638802918908-761" target="Audio Keyframe Performer - 1554477294171-845"/>
+        <connection
+            connector="connectIncrementalFeedbackEmitterToPerformer"
+            source="Incremental Realizer - 1638802918908-761" target="Signal Scheduler - 1638791562331-532"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Signal Scheduler - 1638791562331-532" target="Incremental Realizer - 1638802918908-761"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Incremental Realizer - 1638802918908-761"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Signal Scheduler - 1638791562331-532"/>
     </connections>
 </modulated>

@@ -149,10 +149,11 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
 
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
-
-        List<Keyframe> currentKeyframes = new ArrayList<>();
+        
+        List<Keyframe> keyframesSubstitution = new ArrayList<>();
+        List<Keyframe> keyframesCurrentAlone = new ArrayList<>();
         List<Keyframe> endKeyframes = new ArrayList<>();
-        List<Keyframe> tempKeyframes = new ArrayList<>();
+        List<Keyframe> keyframesIdMethod = new ArrayList<>();
         
         List<String> currentSignalIds = new ArrayList<>();
 
@@ -270,6 +271,8 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         // Step 4: adjust the timing of all key frame
         keyframes.sort(keyframeComparator);
         
+        /* ------------------------------------------------------------------ */
+        
         generators = new ArrayList<>();
 
         lastKeyFrameTime = greta.core.util.time.Timer.getTime();
@@ -295,20 +298,20 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
             gazeGenerator.accept(signal);
             faceGenerator.accept(signal);
         }
-        gazeGenerator.generateBodyKeyframes(currentKeyframes);
+        gazeGenerator.generateBodyKeyframes(keyframesCurrentAlone);
 
         for (KeyframeGenerator generator : generators) {
-            currentKeyframes.addAll(generator.generateKeyframes());
+            keyframesCurrentAlone.addAll(generator.generateKeyframes());
         }
 
-        currentKeyframes.sort(keyframeComparator);
+        keyframesCurrentAlone.sort(keyframeComparator);
 
         // Gaze keyframes for the eyes are generated last
-        gazeGenerator.generateEyesKeyframes(currentKeyframes);
+        gazeGenerator.generateEyesKeyframes(keyframesCurrentAlone);
 
-        faceGenerator.findExistingAU(currentKeyframes);
+        faceGenerator.findExistingAU(keyframesCurrentAlone);
 
-        currentKeyframes.addAll(faceGenerator.generateKeyframes());
+        keyframesCurrentAlone.addAll(faceGenerator.generateKeyframes());
         
         for(Signal sig : currentSignalBurst){
             System.out.println(sig + " : " + sig.getId() + " --- " + sig.getStart().getValue() + " --- " + sig.getEnd().getValue());
@@ -322,76 +325,61 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
             System.out.println("IDs : " + stringId);
         }
         
-        System.out.println("\n");
-        /*for(Keyframe kf : currentKeyframes){
-            if(kf.getModality().equals("face")){
-                //System.out.println(kf + " : " + kf.getId());
-                AUKeyFrame AUkf = (AUKeyFrame) kf;
-                System.out.println(AUkf + " : " + AUkf.getParentId());
-            }
-            else{
-                System.out.println(kf + " : " + kf.getId());
-            }
-        }*/
+        //System.out.println("\n");
 
-        endKeyframes = keyframes;
-        
+        keyframesSubstitution = keyframes;        
         if (!previousSignalBurst.isEmpty()) {
             
-            /*System.out.println("\n PreviousKeyframes : " + previousKeyframesList.size() + " -- " + previousKeyframesList + "\n"
-                    + "CurrentKeyframes : " + currentKeyframes.size() + " -- " + currentKeyframes + "\n"
-                    + "Keyframes : " + keyframes.size() + " -- " + keyframes + "\n");*/
+            //System.out.println("\n PreviousKeyframes : " + previousKeyframesList.size() + " -- " + previousKeyframesList + "\n"
+            //        + "CurrentKeyframes : " + currentKeyframes.size() + " -- " + currentKeyframes + "\n"
+            //        + "Keyframes : " + keyframes.size() + " -- " + keyframes + "\n");
             
-            if(previousKeyframesList.size() + currentKeyframes.size()-1 <= keyframes.size()){
-                keyframes = keyframes.subList(previousKeyframesList.size(), previousKeyframesList.size() + currentKeyframes.size()-1);
+            if(previousKeyframesList.size() + keyframesCurrentAlone.size()-1 <= keyframesSubstitution.size()){
+                keyframesSubstitution = keyframesSubstitution.subList(previousKeyframesList.size(), previousKeyframesList.size() + keyframesCurrentAlone.size()-1);
             }
             else{
-                keyframes = keyframes.subList(previousKeyframesList.size(), keyframes.size());
+                keyframesSubstitution = keyframesSubstitution.subList(previousKeyframesList.size(), keyframesSubstitution.size());
             }
             //keyframes = keyframes.subList(0, currentKeyframes.size()-1);
         }
         else{
             //keyframes = keyframes.subList(0, currentKeyframes.size()-1);
-            keyframes = keyframes.subList(0, currentKeyframes.size() - 1);
+            keyframesSubstitution = keyframesSubstitution.subList(0, keyframesCurrentAlone.size() - 1);
         }
 
-        for(Keyframe kf : endKeyframes){
-            if(kf.getModality().equals("face")){
-                //System.out.println(kf + " : " + kf.getId());
-                AUKeyFrame AUkf = (AUKeyFrame) kf;
-                //System.out.println(AUkf + " : " + AUkf.getParentId());
-                if(currentSignalIds.contains(AUkf.getParentId())) tempKeyframes.add((Keyframe)AUkf);
-            }
-            else{
-                for(String sigId : currentSignalIds){
-                    //System.out.println(kf.getId());
-                    if(kf.getId() != null && kf.getId().contains(sigId)){
-                        tempKeyframes.add(kf);
-                    } 
+        /* -------------------------------------------------------------------------- */
+        
+        for(Keyframe kf : keyframes){
+            for(String sigId : currentSignalIds){
+                if(kf.getParentId() != null && kf.getParentId().equals(sigId)){
+                    keyframesIdMethod.add(kf);
                 }
-                //System.out.println(kf + " : " + kf.getId() + " ---- " );
             }
         }
-         
-         //keyframes = endKeyframes; //TO CLEAN
-         
+                
         System.out.println("CURRENT : ");
-        for(Keyframe kf : currentKeyframes){
-            System.out.println(kf.getId());
+        for(Keyframe kf : keyframesCurrentAlone){
+            System.out.println(kf.getParentId());
         }
         
-        tempKeyframes.sort(keyframeComparator);
+        keyframesIdMethod.sort(keyframeComparator);
         System.out.println("\nID METHOD : ");
-        for(Keyframe kf : tempKeyframes){
-            System.out.println(kf.getId());
+        for(Keyframe kf : keyframesIdMethod){
+            System.out.println(kf.getParentId());
         }
+        
          
         System.out.println("\nSUBSTITUTION METHOD : ");
-        for(Keyframe kf : keyframes){
-            System.out.println(kf.getId());
+        for(Keyframe kf : keyframesSubstitution){
+            System.out.println(kf.getParentId());
         }
         
-        keyframes = tempKeyframes;
+        //keyframes = tempKeyframes;
+        
+        keyframes = new ArrayList<>();
+        keyframes = keyframesIdMethod;
+        keyframes.sort(keyframeComparator);
+        
         //  here:
         //      - we must manage the time for the three addition modes:
         //          - blend:    offset + now
@@ -460,7 +448,7 @@ public class IncrementalRealizer extends CallbackSender implements CancelableSig
         }*/
         
         previousSignalBurst = currentSignalBurst;
-        previousKeyframesList = currentKeyframes;
+        previousKeyframesList = keyframes;
         
         //currentSignalBurst = new ArrayList<>();
         currentSignalBurst = nextSignalBurst;

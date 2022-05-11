@@ -164,7 +164,7 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
 
     @Override
     protected void generateKeyframes(List<Signal> inputSignals, List<Keyframe> outputKeyframes) {
-
+        
         //I) update list of rest poses and set the stroke boolean to the last phase
         clearRestPoses();
         GestureSignal lastRest = restPoses.get(0);
@@ -308,6 +308,9 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
             }
             LinkedList<GestureKeyframe> keyframes = new LinkedList<GestureKeyframe>();
             modifier.generateKeyframesForOneGesture(gesture, keyframes);
+            for(Keyframe kf : keyframes){
+                kf.setParentId(gesture.getId());
+            }
             outputKeyframes.addAll(keyframes);
             lqst = keyframes.getLast();
         }
@@ -359,6 +362,7 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
         }
     };
 
+    //TODO: move interface and class out of generator
     public static interface GestureModifier {
 
         public void generateKeyframesForOneGesture(GestureSignal gesture, List<GestureKeyframe> outputKeyframes);
@@ -368,7 +372,7 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
 
         @Override
         public void generateKeyframesForOneGesture(GestureSignal gesture, List<GestureKeyframe> outputKeyframes) {
-
+            
             ExpressivityParameters ep = new ExpressivityParameters();
             ep.spc = gesture.getSPC();
             ep.tension = gesture.getTension();
@@ -390,7 +394,7 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
 
             double startTime = gesture.getStart().getValue();
             double lastTime = startTime;
-            createKeyframe(outputKeyframes, gesture.getId() + "-start", startTime, gesture.getStartRestPose(), epprep);
+            createKeyframe(outputKeyframes, gesture.getId() + "-start", startTime, gesture.getStartRestPose(), epprep, gesture.getId());
             List<GesturePose> poses = gesture.getPhases();
             if (!poses.isEmpty()) {
                 double strokeTime = gesture.getTimeMarker("stroke-start").getValue();
@@ -402,12 +406,12 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
                 }
 
                 if (readyTime < strokeTime) {
-                    createKeyframe(outputKeyframes, gesture.getId() + "-ready", readyTime, poses.get(0), epprep);
+                    createKeyframe(outputKeyframes, gesture.getId() + "-ready", readyTime, poses.get(0), epprep, gesture.getId());
                 }
 
                 ExpressivityParameters epstroke = epprep;
                 for (GesturePose pose : poses) {
-                    createKeyframe(outputKeyframes, gesture.getId() + "-stroke", strokeTime + pose.getRelativeTime(), pose, epstroke);
+                    createKeyframe(outputKeyframes, gesture.getId() + "-stroke", strokeTime + pose.getRelativeTime(), pose, epstroke, gesture.getId());
                     epstroke = ep;
                 }
 
@@ -415,22 +419,22 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
 
                 double relaxTime = gesture.getTimeMarker("relax").getValue();
                 if (relaxTime > lastTime) {
-                    createKeyframe(outputKeyframes, gesture.getId() + "-relax", relaxTime, poses.get(poses.size() - 1), epretr);
+                    createKeyframe(outputKeyframes, gesture.getId() + "-relax", relaxTime, poses.get(poses.size() - 1), epretr, gesture.getId());
                     lastTime = relaxTime;
                 }
             }
 
             double endTime = gesture.getEnd().getValue();
             if (lastTime < endTime) {
-                createKeyframe(outputKeyframes, gesture.getId() + "-end", endTime, gesture.getEndRestPose(), epretr);
+                createKeyframe(outputKeyframes, gesture.getId() + "-end", endTime, gesture.getEndRestPose(), epretr, gesture.getId());
             }
         }
 
-        protected void createKeyframe(List<GestureKeyframe> outputKeyframes, String id, double time, GesturePose pose, ExpressivityParameters params) {
-            GestureKeyframe left = new GestureKeyframe(id + "-left", "useless", pose.getLeftHand().getTrajectory(), time, time, pose.getLeftHand(), null, false);
+        protected void createKeyframe(List<GestureKeyframe> outputKeyframes, String id, double time, GesturePose pose, ExpressivityParameters params, String parParentId) {
+            GestureKeyframe left = new GestureKeyframe(id + "-left", "useless", pose.getLeftHand().getTrajectory(), time, time, pose.getLeftHand(), null, false, parParentId);
             left.setParameters(new ExpressivityParameters(params));
             outputKeyframes.add(left);
-            GestureKeyframe right = new GestureKeyframe(id + "-right", "useless", pose.getRightHand().getTrajectory(), time, time, pose.getRightHand(), null, false);
+            GestureKeyframe right = new GestureKeyframe(id + "-right", "useless", pose.getRightHand().getTrajectory(), time, time, pose.getRightHand(), null, false, parParentId);
             right.setParameters(new ExpressivityParameters(params));
             outputKeyframes.add(right);
 

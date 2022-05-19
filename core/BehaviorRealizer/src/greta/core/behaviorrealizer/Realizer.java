@@ -103,7 +103,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
-
+        
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
         // The value of Start and End should be calculated in this step. So that we can sort

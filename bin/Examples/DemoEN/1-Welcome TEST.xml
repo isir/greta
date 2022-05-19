@@ -9,17 +9,17 @@
 			<tm id="tm1"/>
 				Hello,
 			<tm id="tm2"/>
-				My name is Camille.
 			<tm id="tm3"/>	
-				I am one of the virtual character
 			<tm id="tm4"/>
 				 of the Greta platform.
 			<tm id="tm5"/>	
 				
 			
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm3" end="s1:tm4" importance="1"/>
+			<boundary type="LL" id="b1" start="s1:tm5" end="s1:tm5+0.5"/>
 		</speech>
 	</bml>
-	<fml>
-		<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>
+	<fml> <!-- target="Andre_chair0" -->
+		<performative id="p1" type="greet" start="s1:tm1" end="s1:tm3" importance="1.0"/>
 	</fml>
 </fml-apml>

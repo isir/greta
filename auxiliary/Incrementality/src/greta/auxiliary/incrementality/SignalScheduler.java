@@ -4,11 +4,10 @@
  * and open the template in the editor.
  */
 
-/*--------------------------------------------------------------------*/
-/*---     SCHEDULER USED FOR INCREMENTALITY IMPLEMENTATION         ---*/
-/*---       USAGE: Planner -> This -> IncrementalRealizer          ---*/
-/*--------------------------------------------------------------------*/
-
+ /*--------------------------------------------------------------------*/
+ /*---     SCHEDULER USED FOR INCREMENTALITY IMPLEMENTATION         ---*/
+ /*---       USAGE: Planner -> This -> IncrementalRealizer          ---*/
+ /*--------------------------------------------------------------------*/
 package greta.auxiliary.incrementality;
 
 import greta.core.behaviorrealizer.keyframegenerator.FaceKeyframeGenerator;
@@ -35,37 +34,40 @@ import java.util.Map;
 
 //import java.util.concurrent.TimeUnit;
 //import java.util.concurrent.CyclicBarrier;
-
 /**
  *
  * @author Sean Graux
  */
-public class SignalScheduler implements SignalPerformer, SignalEmitter, IncrementalityFeedbackPerformer{
-    
+public class SignalScheduler implements SignalPerformer, SignalEmitter, IncrementalityFeedbackPerformer {
+
     private double currentStart = 0.0;
     private int currentBurstNumber = 1;
-    
+
     List<Signal> currentSignalList = new ArrayList<>();
     private TreeMap<Double, List<Signal>> treeList = new TreeMap<Double, List<Signal>>();
-    private long lastStart = 0; 
+    private long lastStart = 0;
 
     protected List<SignalPerformer> performerList = new ArrayList<>();
-    
+
     private List<KeyframeGenerator> generators;
     private GazeKeyframeGenerator gazeGenerator;
     private FaceKeyframeGenerator faceGenerator;
     private GestureKeyframeGenerator gestureGenerator;
-    
+
     //private CyclicBarrier gate = new CyclicBarrier(1);
     private List<Signal> neighboorSignalList;
 
     private boolean realizerIsOpen = true;
-    
+
     private double offset;
-    
+
     @Override
     public void performSignals(List<Signal> list, ID id, Mode mode) {
-        
+
+        for (Signal sig : list) {
+            System.out.println(sig.toString() + " --- " + sig.getStart().getName() + " : " + sig.getStart().getValue());
+        }
+
         currentBurstNumber = 1;
         currentStart = 0.0;
         //currentSignalList = new ArrayList<>();
@@ -73,72 +75,70 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         //treeList = new TreeMap<Double, List<Signal>>();        
         treeList.clear();
         lastStart = 0;
-        
+
         neighboorSignalList = new ArrayList();
-        
+
         offset = 0.0;
-        
+
         /*      REALIZER STEP ONE      */
         for (Signal signal : list) {
-            if(signal instanceof PointingSignal)
-                gestureGenerator.fillPointing((PointingSignal)signal);
-            else {
+            if (signal instanceof PointingSignal) {
+                gestureGenerator.fillPointing((PointingSignal) signal);
+            } else {
                 SignalFiller.fillSignal(signal);
             }
         }
         Temporizer temporizer = new Temporizer();
         temporizer.add(list);
         temporizer.temporize();
-        
+
         //DEBUG OUTPUT LISTS OF SIGNALS
         /*list.forEach((currentSignal) -> {
             System.out.println(currentSignal + " --- " + currentSignal.getStart().isConcretized() + " --- " + currentSignal.getStart().getValue() + " --- " + currentSignal.getEnd().getValue());
         });*/
-        
         /*              PARSER              */
         /* Parse the list of signals into a */
         /* TreeMap with keys = start time   */
         /* and values = list of signals     */
         list.forEach((currentSignal) -> {
-            
-            if(currentSignal.getStart().getValue() < 0){ 
+
+            if (currentSignal.getStart().getValue() < 0) {
                 System.out.println("negativ start \n");
                 offset = currentSignal.getStart().getValue();
             }
 
             //DEBUG
-            System.out.println(currentSignal + " --- " + currentSignal.getStart().getValue());
-            
-            if(currentSignal.toString().contains("performative")){ 
+            //System.out.println(currentSignal + " --- " + currentSignal.getStart().getValue());
+            if (currentSignal.toString().contains("performative")) {
                 //if current startTime (key) already in the treemap, get corresponding signalList (value)
-                if(treeList.containsKey(currentSignal.getStart().getValue()/* + offset*/)){
-                    currentSignalList = treeList.get(currentSignal.getStart().getValue()/* + offset*/);
+                if (treeList.containsKey(currentSignal.getStart().getValue()/* - offset*/)) {
+                    currentSignalList = treeList.get(currentSignal.getStart().getValue()/* - offset*/);
                 }
-                
+
                 currentSignalList.add(currentSignal);
-                treeList.put(currentSignal.getStart().getValue()/* + offset*/, currentSignalList);
-            }
-            
-                
-            else{
-                if(treeList.containsKey(currentSignal.getStart().getValue())){
+                treeList.put(currentSignal.getStart().getValue()/* - offset*/, currentSignalList);
+            } else {
+                if (treeList.containsKey(currentSignal.getStart().getValue())) {
                     currentSignalList = treeList.get(currentSignal.getStart().getValue());
                 }
-            
+
                 //append current signal to signalList (either empty list or found list - see above) and put into treeMap
                 currentSignalList.add(currentSignal);
                 treeList.put(currentSignal.getStart().getValue(), currentSignalList);
             }
-            
+
             currentSignalList = new ArrayList<>();
-            
-                    
+
         });
-        
+
+        for (Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
+            System.out.println(entry.getKey() + " ---" + entry.getValue());
+        }
+
         /* THREAD TESTING */
-        /*    NOT USED    */
-        /*  TO BE REMOVED */
-        /*gate = new CyclicBarrier(treeList.size() + 1);
+ /*    NOT USED    */
+ /*  TO BE REMOVED */
+ /*gate = new CyclicBarrier(treeList.size() + 1);
         
         for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
             Thread thread = new Thread(new BurstRunnable(entry.getKey(), entry.getValue(), id, mode, performerList.get(0), gate));
@@ -153,17 +153,16 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
         }
         catch(Exception e){   
         }*/
-        
-        /*              SENDER               */
-        /*Goes through the TreeMap and sends */
-        /*the signals by burst of start times*/
-        /*      TIMING METHOD NOT FINAL      */
+ /*              SENDER               */
+ /*Goes through the TreeMap and sends */
+ /*the signals by burst of start times*/
+ /*      TIMING METHOD NOT FINAL      */
         System.out.println("\n*********** Start of " + id + " **********");
-        
+
         //Get the first entry to later adjust times
         double firstEntryKey = treeList.firstEntry().getKey();
         long startTime = System.currentTimeMillis();
-        
+
         /*for(Map.Entry<Double, List<Signal>> entry : treeList.entrySet()) {
             //Adjust the current key to account for negative starting times
             double currentKeyAdjusted = entry.getKey() + Math.abs(firstEntryKey);
@@ -192,64 +191,61 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
             
             neighboorSignalList[0] = neighboorSignalList[1];
         }*/
-        
         double nextKeyAdjusted = 0.0;
-        while(treeList.size() > 0){
+        while (treeList.size() > 0) {
             //System.out.println(realizerIsOpen); //DEBUG
-            if(realizerIsOpen){
-                
+            if (realizerIsOpen) {
+
                 realizerIsOpen = false;
-                System.out.println("[" + currentBurstNumber + "]   "  + treeList.firstEntry().getKey() +  "  " + treeList.firstEntry().getValue());
+                System.out.println("[" + currentBurstNumber + "]   " + treeList.firstEntry().getKey() + "  " + treeList.firstEntry().getValue());
                 currentBurstNumber++;
-                
+
                 //neighboorSignalList.set(1, treeList.firstEntry().getValue());
                 neighboorSignalList.addAll(treeList.firstEntry().getValue());
                 //System.out.println("\033[31;1m current = " + treeList.firstEntry().getValue());
-                
+
                 double currentKeyAdjusted = treeList.firstEntry().getKey() + Math.abs(firstEntryKey);
-                
-                if(treeList.size() > 1){
+
+                if (treeList.size() > 1) {
                     //System.out.println("\033[34;1m next = " + treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get());
                     neighboorSignalList.addAll(treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get());
-                    
+
                     nextKeyAdjusted = treeList.entrySet().stream().skip(1).map(map -> map.getKey()).findFirst().get() + Math.abs(firstEntryKey);
                 }
-                
-                for(SignalPerformer sp : performerList){
+
+                for (SignalPerformer sp : performerList) {
                     //System.out.println(neighboorSignalList);
                     sp.performSignals(neighboorSignalList, id, mode);
                 }
-                
+
                 treeList.remove(treeList.firstKey());
                 neighboorSignalList = new ArrayList<>();
-                
-                
-                try{
-                    long sleepTime = (long)(nextKeyAdjusted * 900) - (long)(currentKeyAdjusted * 900);
-                    if(sleepTime > 0){
+
+                /*try {
+                    long sleepTime = (long) (nextKeyAdjusted * 500) - (long) (currentKeyAdjusted * 500);
+                    if (sleepTime > 0) {
                         Thread.sleep(sleepTime);
                         System.out.println("WAITED : " + sleepTime);
                         nextKeyAdjusted = 0.0;
                     }
                     //lastStart = (long)(currentKeyAdjusted * 1000);
-                }
-                catch(Exception e){
+                } catch (Exception e) {
                     System.out.println("ERROR --- " + e);
-                }
-                
+                }*/
+
             }
         }
-        
+
         //DEBUG: calculate elapsed time to monitor any big delay
         long endTime = System.currentTimeMillis();
         //System.out.println("elapsed time = " + (endTime - startTime));
-        
+
         System.out.println("*********** End of " + id + " **********\n");
     }
 
     @Override
     public void addSignalPerformer(SignalPerformer sp) {
-        performerList.add(sp);        
+        performerList.add(sp);
     }
 
     @Override
@@ -258,12 +254,12 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
     }
 
     @Override
-    public void performIncFeedback(boolean sent){
+    public void performIncFeedback(boolean sent) {
         //System.out.println("RECEIVED FEEDBACK : " + sent);
         setOpenRealizer(sent);
     }
-    
-    public void setOpenRealizer(boolean parBool){
+
+    public void setOpenRealizer(boolean parBool) {
         realizerIsOpen = parBool;
     }
 

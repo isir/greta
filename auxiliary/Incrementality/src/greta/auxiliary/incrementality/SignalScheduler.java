@@ -65,7 +65,7 @@ public class SignalScheduler implements SignalPerformer, SignalEmitter, Incremen
     public void performSignals(List<Signal> list, ID id, Mode mode) {
 
         for (Signal sig : list) {
-            System.out.println(sig.toString() + " --- " + sig.getStart().getName() + " : " + sig.getStart().getValue());
+            System.out.println(sig.toString() + " --- " + sig.getStart().getName() + " : " + sig.getStart().getValue() + " --- " + sig.getId());
         }
 
         currentBurstNumber = 1;

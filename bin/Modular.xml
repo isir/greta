@@ -43,6 +43,7 @@
 			<menu name="Incrementality">
 				<item module="Signal Scheduler" name="Signal Scheduler"/>
 				<item module="Incremental Realizer" name="Incremental Realizer"/>
+				<item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
 			</menu>
             <menu name="Keyframe Performers">
                 <item module="IK Keyframe Performer" name="IK"/>
@@ -1008,6 +1009,9 @@
 		</module>
 		<module name="Signal Scheduler" style="Signals">
 			<object class="greta.auxiliary.incrementality.SignalScheduler" lib_id="greta_incrementality"/>
+		</module>
+		<module name="Incremental Realizer V2" style="BehaviorRealizer">
+			<object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
 		</module>
     </modules>
     <!-- list of libraries and their dependencies -->

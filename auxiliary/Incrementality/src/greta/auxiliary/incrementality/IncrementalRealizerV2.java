@@ -153,19 +153,19 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
-        
+
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
-        
+
         TreeMap<Integer, List<Keyframe>> treeList = new TreeMap<Integer, List<Keyframe>>();
-        
+
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
         // The value of Start and End should be calculated in this step. So that we can sort
         for (Signal signal : list) {
-            if(signal instanceof PointingSignal)
-                gestureGenerator.fillPointing((PointingSignal)signal);
-            else {
+            if (signal instanceof PointingSignal) {
+                gestureGenerator.fillPointing((PointingSignal) signal);
+            } else {
                 SignalFiller.fillSignal(signal);
             }
         }
@@ -186,7 +186,6 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
         // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
         // Step 3: create all key frames
-
         // Gaze keyframes for other modalities than eyes are generated before the others
         // and act as "shifts"
         gazeGenerator.generateBodyKeyframes(keyframes);
@@ -203,7 +202,6 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         keyframes.addAll(faceGenerator.generateKeyframes());
 
         // Step 4: adjust the timing of all key frame
-
         keyframes.sort(keyframeComparator);
 
         //  here:
@@ -216,11 +214,10 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         //          - blend:   previousLastTime = max(previousLastTime, the last time of the new keyframes)
         //          - replace: previousLastTime = the last time of the new keyframes
         //          - append:  previousLastTime = the last time of the new keyframes
-
         double startTime = keyframes.isEmpty() ? 0 : keyframes.get(0).getOffset();
         // if the start time to start signals is less than 0, all signals' time have to be increased so that they start from 0
         double absoluteStartTime = greta.core.util.time.Timer.getTime();
-        if (mode.getCompositionType() == CompositionType.append){
+        if (mode.getCompositionType() == CompositionType.append) {
             absoluteStartTime = Math.max(lastKeyFrameTime, absoluteStartTime);
         }
         absoluteStartTime -= (startTime < 0 ? startTime : 0);
@@ -250,75 +247,128 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
         System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
         System.out.println(" ------------------------------------    GENERATED KEYFRAMES     ------------------------------------");
-        for(Keyframe kf : keyframes){
-            System.out.println(kf.getParentId() + " --- " + kf.getOffset());
+        for (Keyframe kf : keyframes) {
+            System.out.println(kf.getParentId() + " --- " + kf.getOffset() + " --- " + kf.getId());
         }
-        
-        
+
         //CHUNKING KEYFRAMES
         List<Keyframe> processKeyframesList = new ArrayList<>();
-        for(Keyframe kf : keyframes){
-            int offsetInt = (int)kf.getOffset();
-            if(treeList.containsKey(offsetInt)){
+        for (Keyframe kf : keyframes) {
+            int offsetInt = (int) kf.getOffset();
+            if (treeList.containsKey(offsetInt)) {
                 processKeyframesList = treeList.get(offsetInt);
-            }
-            else{
+            } else {
                 processKeyframesList = new ArrayList<>();
             }
             processKeyframesList.add(kf);
             treeList.put(offsetInt, processKeyframesList);
         }
-        
+
         System.out.println("\n ------------------------------------     CHUNK KEYFRAMES    ------------------------------------");
         for (Map.Entry<Integer, List<Keyframe>> entry : treeList.entrySet()) {
             System.out.println(entry.getKey() + " ---" + entry.getValue());
         }
-        
-        System.out.println(" ------------------------------------ END OF " + requestId + " ------------------------------------\n");
-        this.sendKeyframes(keyframes, requestId, mode);
-        // Add animation to callbacks
-        if (mode.getCompositionType() == CompositionType.replace) {
-            this.stopAllAnims();
-        }
-        this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
-    }
 
-    @Override
-    public void cancelSignalsById(ID requestId) {
+        System.out.println("\n ------------------------------------      SENDING CHUNKS    ------------------------------------");
+        while (treeList.size() > 0) {
+            System.out.println(treeList.firstEntry().getKey() + " --- " + treeList.firstEntry().getValue());
+            this.sendKeyframes(treeList.firstEntry().getValue(), requestId, mode);
+
+            if (treeList.size() > 1) {
+                try {
+                    List<Keyframe> currentBurstList = treeList.firstEntry().getValue();
+                    List<Keyframe> nextBurstList = treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get();
+                    
+                    double lastCurrent = currentBurstList.get(currentBurstList.size() - 1).getOffset();
+                    double firstNext = nextBurstList.get(0).getOffset();
+                    //System.out.println("TEST WAIT = " + lastCurrent + " --- " + lastNext);
+                    
+                    long sleepTime = (long) (firstNext* 1000) - (long) (lastCurrent * 1000);
+                    if (sleepTime > 0) {
+                        Thread.sleep(sleepTime);
+                        System.out.println("WAITED : " + firstNext + " - " + lastCurrent + " = " + sleepTime);
+                    }
+                } catch (Exception e) {
+                    System.out.println("ERROR --- " + e);
+                }
+            }
+            treeList.remove(treeList.firstKey());
+        }
+
+            System.out.println(" ------------------------------------ END OF " + requestId + " ------------------------------------\n");
+
+            //this.sendKeyframes(keyframes, requestId, mode);
+            // Add animation to callbacks
+            if (mode.getCompositionType() == CompositionType.replace) {
+                this.stopAllAnims();
+            }
+            this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
+        }
+
+        @Override
+        public void cancelSignalsById
+        (ID requestId
+        
+        
+            ) {
         for (KeyframePerformer performer : keyframePerformers) {
-            if (performer instanceof CancelableKeyframePerformer) {
-                ((CancelableKeyframePerformer) performer).cancelKeyframesById(requestId);
+                if (performer instanceof CancelableKeyframePerformer) {
+                    ((CancelableKeyframePerformer) performer).cancelKeyframesById(requestId);
+                }
             }
         }
-    }
 
-    @Override
-    public void addKeyframePerformer(KeyframePerformer kp) {
+        @Override
+        public void addKeyframePerformer
+        (KeyframePerformer kp
+        
+        
+            ) {
         if (kp != null) {
-            keyframePerformers.add(kp);
+                keyframePerformers.add(kp);
+            }
         }
-    }
 
-    @Override
-    public void removeKeyframePerformer(KeyframePerformer kp) {
+        @Override
+        public void removeKeyframePerformer
+        (KeyframePerformer kp
+        
+        
+            ) {
         keyframePerformers.remove(kp);
-    }
+        }
 
-    @Override
-    public void addIncFeedbackPerformer(IncrementalityFeedbackPerformer performer) {
+        @Override
+        public void addIncFeedbackPerformer
+        (IncrementalityFeedbackPerformer performer
+        
+        
+            ) {
         incFeedbackPerformers.add(performer);
-    }
+        }
 
-    @Override
-    public void removeIncFeedbackPerformer(IncrementalityFeedbackPerformer performer) {
+        @Override
+        public void removeIncFeedbackPerformer
+        (IncrementalityFeedbackPerformer performer
+        
+        
+            ) {
         incFeedbackPerformers.remove(performer);
-    }
+        }
 
-    @Override
-    public void performKeyframesFeedback(boolean isOver) {
+        @Override
+        public void performKeyframesFeedback
+        (boolean isOver
+        
+        
+            ) {
         System.out.println("RECEIVED KEYFRAME FEEDBACK : " + isOver);
-        //this.sendFeedback(true);
-    }
+            //this.sendFeedback(true);
+        }
+
+    
+
+    
 
     public void sendFeedback(boolean parFeedback) {
         for (IncrementalityFeedbackPerformer performer : incFeedbackPerformers) {

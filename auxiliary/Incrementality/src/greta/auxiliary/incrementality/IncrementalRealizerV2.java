@@ -280,19 +280,25 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
                     List<Keyframe> nextBurstList = treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get();
                     
                     double lastCurrent = currentBurstList.get(currentBurstList.size() - 1).getOffset();
-                    double firstNext = nextBurstList.get(0).getOffset();
+                    double nextFirst = nextBurstList.get(0).getOffset();
                     //System.out.println("TEST WAIT = " + lastCurrent + " --- " + lastNext);
                     
-                    long sleepTime = (long) (firstNext* 1000) - (long) (lastCurrent * 1000);
+                    long sleepTime = (long) (nextFirst * 1000) - (long) (lastCurrent * 1000);
                     if (sleepTime > 0) {
                         Thread.sleep(sleepTime);
-                        System.out.println("WAITED : " + firstNext + " - " + lastCurrent + " = " + sleepTime);
+                        System.out.println("WAITED : " + nextFirst + " - " + lastCurrent + " = " + sleepTime);
                     }
                 } catch (Exception e) {
                     System.out.println("ERROR --- " + e);
                 }
             }
             treeList.remove(treeList.firstKey());
+        }
+        
+        try{
+            Thread.sleep(1000); //Wait to make sure agent goes back to rest pose
+        }catch(Exception e){
+            System.out.println("ERROR --- " + e);
         }
 
             System.out.println(" ------------------------------------ END OF " + requestId + " ------------------------------------\n");

@@ -157,7 +157,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
 
-        TreeMap<Integer, List<Keyframe>> treeList = new TreeMap<Integer, List<Keyframe>>();
+        TreeMap<Double, List<Keyframe>> treeList = new TreeMap<Double, List<Keyframe>>();
 
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
@@ -255,17 +255,29 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         List<Keyframe> processKeyframesList = new ArrayList<>();
         for (Keyframe kf : keyframes) {
             int offsetInt = (int) kf.getOffset();
-            if (treeList.containsKey(offsetInt)) {
-                processKeyframesList = treeList.get(offsetInt);
+            int offsetIntDecApprox;
+
+            
+            if(offsetInt <= kf.getOffset() && kf.getOffset() < Double.parseDouble(offsetInt + "." + 5)){
+                offsetIntDecApprox = 0;
+            }
+            else{
+                offsetIntDecApprox = 5;
+            }
+            
+            double index = Double.parseDouble(offsetInt + "." + offsetIntDecApprox);
+            
+            if (treeList.containsKey(index)) {
+                processKeyframesList = treeList.get(index);
             } else {
                 processKeyframesList = new ArrayList<>();
             }
             processKeyframesList.add(kf);
-            treeList.put(offsetInt, processKeyframesList);
+            treeList.put(index, processKeyframesList);
         }
 
         System.out.println("\n ------------------------------------     CHUNK KEYFRAMES    ------------------------------------");
-        for (Map.Entry<Integer, List<Keyframe>> entry : treeList.entrySet()) {
+        for (Map.Entry<Double, List<Keyframe>> entry : treeList.entrySet()) {
             System.out.println(entry.getKey() + " ---" + entry.getValue());
         }
 

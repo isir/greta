@@ -108,6 +108,8 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     private int gestureStorageCounter;
 
     private List<Keyframe> storeKeyframe;
+    
+    private int currentIndex;
 
     public IncrementalRealizerV2(CharacterManager cm) {
         setCharacterManager(cm);
@@ -149,6 +151,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         gestureStorageCounter = 0;
 
         storeKeyframe = new ArrayList<>();
+        
     }
 
     @Override //TODO add the use of modes: blend, replace, append
@@ -157,7 +160,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
 
-        TreeMap<Double, List<Keyframe>> treeList = new TreeMap<Double, List<Keyframe>>();
+        TreeMap<Integer, List<Keyframe>> treeList = new TreeMap<Integer, List<Keyframe>>();
 
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
@@ -253,19 +256,26 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
         //CHUNKING KEYFRAMES
         List<Keyframe> processKeyframesList = new ArrayList<>();
+        currentIndex = (int)keyframes.get(0).getOffset();
         for (Keyframe kf : keyframes) {
             int offsetInt = (int) kf.getOffset();
-            int offsetIntDecApprox;
-
             
-            if(offsetInt <= kf.getOffset() && kf.getOffset() < Double.parseDouble(offsetInt + "." + 5)){
+            if(offsetInt%2 == 0 && offsetInt > currentIndex){
+                currentIndex = offsetInt;
+            }
+            
+            
+            int index = currentIndex;
+            
+            //int offsetIntDecApprox;            
+            /*if(offsetInt <= kf.getOffset() && kf.getOffset() < Double.parseDouble(offsetInt + "." + 5)){
                 offsetIntDecApprox = 0;
             }
             else{
                 offsetIntDecApprox = 5;
             }
             
-            double index = Double.parseDouble(offsetInt + "." + offsetIntDecApprox);
+            double index = Double.parseDouble(offsetInt + "." + offsetIntDecApprox);*/
             
             if (treeList.containsKey(index)) {
                 processKeyframesList = treeList.get(index);
@@ -277,7 +287,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         }
 
         System.out.println("\n ------------------------------------     CHUNK KEYFRAMES    ------------------------------------");
-        for (Map.Entry<Double, List<Keyframe>> entry : treeList.entrySet()) {
+        for (Map.Entry<Integer, List<Keyframe>> entry : treeList.entrySet()) {
             System.out.println(entry.getKey() + " ---" + entry.getValue());
         }
 

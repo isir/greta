@@ -44,6 +44,7 @@
 				<item module="Signal Scheduler" name="Signal Scheduler"/>
 				<item module="Incremental Realizer" name="Incremental Realizer"/>
 				<item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
+				<item module="IncRealizerInteraction" name="IncRealizerInteraction"/>
 			</menu>
             <menu name="Keyframe Performers">
                 <item module="IK Keyframe Performer" name="IK"/>
@@ -1013,6 +1014,12 @@
 		<module name="Incremental Realizer V2" style="BehaviorRealizer">
 			<object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
 		</module>
+		<module name="IncRealizerInteraction" style="BehaviorRealizer">
+			<object class="greta.auxiliary.incrementality.IncRealizerInteraction" lib_id="greta_incrementality"/>
+			<frame class="greta.core.utilx.gui.IncRealizerInteractionGUI" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+		</module>
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1626,6 +1633,12 @@
             <output class="greta.core.keyframes.KeyframesFeedbackPerformer" lib_id="greta_signals"/>
             <connect from="input" method="addKeyframesFeedbackPerformer" to="output"/>
             <disconnect from="input" method="removeKeyframesFeedbackPerformer" to="output"/>
+        </connector>
+		<connector id="connectIncInteractionToRealizer">
+            <input class="greta.auxiliary.incrementality.IncrementalityInteractionEmitter" lib_id="greta_incrementality"/>
+            <output class="greta.auxiliary.incrementality.IncrementalityInteractionPerformer" lib_id="greta_incrementality"/>
+            <connect from="input" method="addIncInteractionPerformer" to="output"/>
+            <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
         </connector>
 
     </connectors>

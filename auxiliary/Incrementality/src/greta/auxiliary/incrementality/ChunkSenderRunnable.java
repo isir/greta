@@ -12,24 +12,29 @@ import java.util.TreeMap;
  *
  * @author Sean
  */
-public class ChunkSenderRunnable implements Runnable, KeyframeEmitter {
+public class ChunkSenderRunnable implements Runnable {
 
     private List<KeyframePerformer> keyframePerformers;
     private TreeMap<Integer, List<Keyframe>> treeList;
     private ID requestId;
     private Mode mode;
+    private boolean exit;
+    
+    public ChunkSenderRunnable(){}
 
     public ChunkSenderRunnable(List<KeyframePerformer> parKeyframePerformers, TreeMap<Integer, List<Keyframe>> parTreeList, ID parRequestId, Mode parMode) {
         this.keyframePerformers = parKeyframePerformers;
         this.treeList = parTreeList;
         this.requestId = parRequestId;
         this.mode = parMode;
+        this.exit = false;
     }
 
     @Override
     public void run() {
-        while (treeList.size() > 0) {
-            System.out.println(treeList.firstEntry().getKey() + " --- " + treeList.firstEntry().getValue() + " --- IN THREAD " + Thread.currentThread().getId());
+        System.out.println("\u001B[34m---------------------------------   THREAD SCHEDULING CHUNKS   -----------------------------");
+        while (exit == false && treeList.size() > 0) {
+            System.out.println("\u001B[34m" + treeList.firstEntry().getKey() + " --- " + treeList.firstEntry().getValue() + " --- IN THREAD " + Thread.currentThread().getId());
             this.sendKeyframes(treeList.firstEntry().getValue(), requestId, mode);
 
             if (treeList.size() > 1) {
@@ -37,17 +42,17 @@ public class ChunkSenderRunnable implements Runnable, KeyframeEmitter {
                     List<Keyframe> currentBurstList = treeList.firstEntry().getValue();
                     List<Keyframe> nextBurstList = treeList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get();
 
-                    double lastCurrent = currentBurstList.get(currentBurstList.size() - 1).getOffset();
+                    double currentFirst = currentBurstList.get(0).getOffset();
                     double nextFirst = nextBurstList.get(0).getOffset();
                     //System.out.println("TEST WAIT = " + lastCurrent + " --- " + lastNext);
 
-                    long sleepTime = (long) (nextFirst * 1000) - (long) (lastCurrent * 1000);
+                    long sleepTime = (long) (nextFirst * 1000) - (long) (currentFirst * 1000);
                     if (sleepTime > 0) {
                         Thread.sleep(sleepTime);
-                        System.out.println("WAITED : " + nextFirst + " - " + lastCurrent + " = " + sleepTime);
+                        System.out.println("\u001B[34m WAITED : " + nextFirst + " - " + currentFirst + " = " + sleepTime);
                     }
                 } catch (Exception e) {
-                    System.out.println("ERROR --- " + e);
+                    System.out.println("\u001B[34m ERROR --- " + e);
                 }
             }
             treeList.remove(treeList.firstKey());
@@ -68,14 +73,8 @@ public class ChunkSenderRunnable implements Runnable, KeyframeEmitter {
             }
         }
     }
-
-    @Override
-    public void addKeyframePerformer(KeyframePerformer kp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeKeyframePerformer(KeyframePerformer kp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public void shutdown(){
+        this.exit = true;
     }
 }

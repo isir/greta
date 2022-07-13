@@ -35,6 +35,7 @@ public class ChunkSenderThread extends Thread {
         while (true) {
             try {
                 if (!open || treeList.size() == 0) {
+                    //System.out.println("\u001B[34m SLEEPING");
                     sleep(100);
                 } else {
                     //System.out.println("\u001B[34m" + treeList);

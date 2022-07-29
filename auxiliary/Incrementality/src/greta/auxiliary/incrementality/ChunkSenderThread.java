@@ -5,6 +5,7 @@ import greta.core.keyframes.KeyframePerformer;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -18,7 +19,8 @@ public class ChunkSenderThread extends Thread {
     private ID requestId;
     private Mode mode;
 
-    private boolean open;
+    private boolean isRunning;
+    private boolean isQueued;
 
     public ChunkSenderThread() {
         super();
@@ -27,20 +29,22 @@ public class ChunkSenderThread extends Thread {
     public ChunkSenderThread(List<KeyframePerformer> parKeyframePerformers) {
         this.keyframePerformers = parKeyframePerformers;
         treeList = new TreeMap<Integer, List<Keyframe>>();
-        this.open = false;
+        this.isRunning = true;
+        this.isQueued = false;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (isRunning) {
             try {
-                if (!open || treeList.size() == 0) {
+                if (!isQueued || treeList.size() == 0) {
                     //System.out.println("\u001B[34m SLEEPING");
                     sleep(100);
                 } else {
                     //System.out.println("\u001B[34m" + treeList);
+
                     System.out.println("\u001B[34m---------------------------------   THREAD SCHEDULING CHUNKS   -----------------------------");
-                    while (open && treeList.size() > 0) {
+                    while (isQueued && treeList.size() > 0) {
                         System.out.println("\u001B[34m" + treeList.firstEntry().getKey() + " --- " + treeList.firstEntry().getValue() + " --- IN THREAD " + Thread.currentThread().getId());
                         this.sendKeyframes(treeList.firstEntry().getValue(), requestId, mode);
 
@@ -57,11 +61,11 @@ public class ChunkSenderThread extends Thread {
                                 System.out.println("\u001B[34m WAITED : " + nextFirst + " - " + currentFirst + " = " + sleepTime);
                             }
                         }
-                        treeList.remove(treeList.firstKey());
+                        this.removeFromList();
                     }
 
                     Thread.sleep(500); //Wait to make sure agent goes back to rest pose*/
-                    this.close();
+                    this.closeQueue();
                 }
             } catch (Exception e) {
             }
@@ -77,14 +81,18 @@ public class ChunkSenderThread extends Thread {
         }
     }
 
-    public synchronized void open() {
-        System.out.println("\u001B[31m RECEIVED OPEN COMMAND");
-        this.open = true;
+    public synchronized void putInQueue() {
+        System.out.println("\u001B[31m RECEIVED PUT IN QUEUE COMMAND");
+        this.isQueued = true;
     }
 
-    public synchronized void close() {
+    public synchronized void closeQueue() {
         System.out.println("\u001B[31m RECEIVED CLOSE COMMAND");
-        this.open = false;
+        this.isQueued = false;
+    }
+
+    public synchronized void stopRunning() {
+        this.isRunning = false;
     }
 
     public synchronized void setChunkList(TreeMap<Integer, List<Keyframe>> parTreeList) {
@@ -100,10 +108,50 @@ public class ChunkSenderThread extends Thread {
     }
 
     public synchronized void send(TreeMap<Integer, List<Keyframe>> parTreeList, ID id, Mode mode) {
-        this.open();
-        this.setChunkList(parTreeList);
+        if (mode.getCompositionType().toString().equals("blend")) {
+            System.out.println("BLEND FOUND");
+        } else if (mode.getCompositionType().toString().equals("append")) {
+            System.out.println("APPEND FOUND");
+            //this.setChunkList(this.treeList.append(parTreeList));
+            TreeMap<Integer, List<Keyframe>> tempList = this.treeList;
+
+            for (Map.Entry<Integer, List<Keyframe>> entry : parTreeList.entrySet()) {
+                tempList.put(entry.getKey(), entry.getValue());
+            }
+
+            /*System.out.println(" --- BASE LIST --- ");
+            for (Map.Entry<Integer, List<Keyframe>> entry : treeList.entrySet()) {
+                System.out.println(entry.getKey());
+                for (Keyframe kf : entry.getValue()) {
+                    System.out.println(kf.getParentId() + " --- " + kf.toString() + " --- " + kf.getOffset());
+                }
+            }
+            
+            System.out.println(" --- INCOMMING --- ");
+            for (Map.Entry<Integer, List<Keyframe>> entry : parTreeList.entrySet()) {
+                System.out.println(entry.getKey());
+                for (Keyframe kf : entry.getValue()) {
+                    System.out.println(kf.getParentId() + " --- " + kf.toString() + " --- " + kf.getOffset());
+                }
+            }
+            
+            System.out.println(" --- FUSED LIST --- ");
+            for (Map.Entry<Integer, List<Keyframe>> entry : tempList.entrySet()) {
+                System.out.println(entry.getKey());
+                for (Keyframe kf : entry.getValue()) {
+                    System.out.println(kf.getParentId() + " --- " + kf.toString() + " --- " + kf.getOffset());
+                }
+            }*/
+            this.setChunkList(tempList);
+        } else {
+            System.out.println("REPLACE FOUND");
+            this.closeQueue();
+
+            this.setChunkList(parTreeList);
+        }
         this.setRequestId(id);
         this.setMode(mode);
+        this.putInQueue();
     }
 
     public void addKeyframePerformer(KeyframePerformer parKeyframePerformer) {
@@ -118,5 +166,9 @@ public class ChunkSenderThread extends Thread {
             }
             i++;
         }
+    }
+
+    private synchronized void removeFromList() {
+        this.treeList.remove(treeList.firstKey());
     }
 }

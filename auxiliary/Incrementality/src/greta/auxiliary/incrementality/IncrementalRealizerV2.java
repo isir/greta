@@ -268,27 +268,23 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         }
 
         System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
-        System.out.println(" ------------------------------------    GENERATED KEYFRAMES     ------------------------------------");
+        /*System.out.println(" ------------------------------------    GENERATED KEYFRAMES     ------------------------------------");
         for (Keyframe kf : keyframes) {
             System.out.println(kf.getParentId() + " --- " + kf.getOffset() + " --- " + kf.getId());
-        }
+        }*/
 
         //CHUNKING KEYFRAMES
         TreeMap<Integer, List<Keyframe>> treeList = this.createChunk(keyframes);
 
-        System.out.println("\n ------------------------------------     CHUNK KEYFRAMES    ------------------------------------");
+        /*System.out.println("\n ------------------------------------     CHUNK KEYFRAMES    ------------------------------------");
         for (Map.Entry<Integer, List<Keyframe>> entry : treeList.entrySet()) {
-            System.out.println(entry.getKey()/* + " ---" + entry.getValue()*/);
-            for (Keyframe kf : entry.getValue()) {
+            System.out.println(entry.getKey());
+        /*    for (Keyframe kf : entry.getValue()) {
                 System.out.println(kf.getParentId() + " --- " + kf.toString() + " --- " + kf.getOffset());
             }
-        }
+        }*/
 
         System.out.println("\n -----------------------------      SENDING CHUNKS TO THREAD      -------------------------------");
-
-        chunkSenderThread.send(treeList, requestId, mode);
-
-        System.out.println(" ------------------------------------ END OF " + requestId + " ------------------------------------\n");
 
         //this.sendKeyframes(keyframes, requestId, mode);
         // Add animation to callbacks
@@ -296,6 +292,10 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
             this.stopAllAnims();
         }
         this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
+        
+        chunkSenderThread.send(treeList, requestId, mode);
+
+        System.out.println(" ------------------------------------ END OF " + requestId + " ------------------------------------\n");
 
         //DEBUG: Verifying that created thread doesn't linger once its done with its work
         /*Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
@@ -500,7 +500,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     @Override
     public void performIncInteraction(String parParam) {
         if (parParam.equals("interupt")) {
-            chunkSenderThread.close();
+            chunkSenderThread.closeQueue();
             this.stopAllAnims();
         }
         System.out.println("RECEIVED " + parParam);

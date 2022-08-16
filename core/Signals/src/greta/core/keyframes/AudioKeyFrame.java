@@ -32,26 +32,40 @@ public class AudioKeyFrame implements Keyframe {
     private double onset;
     private double offset;
     private final Audio audio;
+    
+    private String parentId;
 
     public AudioKeyFrame(Speech speech) {
         this(
                 speech.getId() + "_audio",
                 speech.getAudio(),
-                speech.getStart().getValue());
+                speech.getStart().getValue(),
+                speech.getId() //equals parent signal ID
+            );
     }
 
     public AudioKeyFrame(Laugh laugh) {
         this(
                 laugh.getId() + "_audio",
                 laugh.getAudio(),
-                laugh.getStart().getValue());
+                laugh.getStart().getValue(),
+                laugh.getId() //equals parent signal ID
+            );
     }
 
     public AudioKeyFrame(String identifier, Audio audio, double startTime) {
-        id = identifier;
+        id = identifier; //format ex: s1_Audio
         this.audio = audio;
         offset = startTime;
         onset = 0;
+    }
+    
+    public AudioKeyFrame(String identifier, Audio audio, double startTime, String parParentId) {
+        id = identifier; //format ex: s1_Audio
+        this.audio = audio;
+        offset = startTime;
+        onset = 0;
+        this.parentId = parParentId;
     }
 
     public byte[] getBuffer() {
@@ -115,5 +129,15 @@ public class AudioKeyFrame implements Keyframe {
             return 0;
         }
         return audio.getDuration();
+    }
+
+    @Override
+    public String getParentId() {
+        return parentId;
+    }
+
+    @Override
+    public void setParentId(String parParentId) {
+        this.parentId = parParentId;
     }
 }

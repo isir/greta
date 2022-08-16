@@ -86,7 +86,7 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
 
             HeadKeyframe kf = null;
             kf = createKeyFrame(head, head.getPhases().get(head.getPhases().size()-1));
-
+            
             keyframes.add(kf);
         }
 
@@ -118,6 +118,7 @@ public class HeadKeyframeGenerator extends KeyframeGenerator {
 
         //IV) limit the head amplitude of the keyframes to a reasonable value
         for(HeadKeyframe keyframe : keyframes){
+            keyframe.setParentId(keyframe.getId());
             limit(keyframe);
         }
 

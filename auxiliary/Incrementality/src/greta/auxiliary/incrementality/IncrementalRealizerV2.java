@@ -15,8 +15,14 @@
  * along with Greta.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-package greta.core.behaviorrealizer;
 
+ /*--------------------------------------------------------------------*/
+ /*---     MODIFIED REALIZER FOR INCREMENTALITY IMPLEMENTATION      ---*/
+ /*---                   USAGE: Planner -> This                     ---*/
+ /*--------------------------------------------------------------------*/
+package greta.auxiliary.incrementality;
+
+import greta.core.behaviorrealizer.CallbackSender;
 import greta.core.behaviorrealizer.keyframegenerator.FaceKeyframeGenerator;
 import greta.core.behaviorrealizer.keyframegenerator.GazeKeyframeGenerator;
 import greta.core.behaviorrealizer.keyframegenerator.GestureKeyframeGenerator;
@@ -32,6 +38,7 @@ import greta.core.keyframes.Keyframe;
 import greta.core.keyframes.KeyframeEmitter;
 import greta.core.keyframes.KeyframePerformer;
 import greta.core.keyframes.PhonemSequence;
+import greta.core.keyframes.KeyframesFeedbackPerformer;
 import greta.core.repositories.FaceLibrary;
 import greta.core.repositories.Gestuary;
 import greta.core.repositories.HeadLibrary;
@@ -51,19 +58,30 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import greta.core.keyframes.face.AUKeyFrame;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.concurrent.TimeUnit;
+
 /**
  *
+ * MODIFIED VERSION OF BEHAVIOR REALIZER 
+ * @author Sean Graux
+ * 
  * @author Quoc Anh Le
  * @author Andre-Marie Pez
  *
  *
  * the following tags generate a warning in Javadoc generation because they are
  * UmlGraph tags, not javadoc tags.
- * @composed - - + greta.core.behaviorrealizer.keyframegenerator.KeyframeGenerator
+ * @composed - - +
+ * greta.core.behaviorrealizer.keyframegenerator.KeyframeGenerator
  * @navassoc - - * greta.core.keyframes.Keyframe
  * @inavassoc - - * greta.core.signals.Signal
  */
-public class Realizer extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent {
+public class IncrementalRealizerV2 extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent, IncrementalityInteractionPerformer {
+
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
@@ -75,7 +93,18 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     private double lastKeyFrameTime;
     private CharacterManager characterManager;
 
-    public Realizer(CharacterManager cm) {
+    private ID currentID;
+
+    private List<IncrementalityFeedbackPerformer> incFeedbackPerformers;
+
+    private List<Keyframe> storeKeyframe;
+
+    private int currentIndex;
+
+    private ChunkSenderThread chunkSenderThread;
+    private ChunkSenderRunnable runnable;
+
+    public IncrementalRealizerV2(CharacterManager cm) {
         setCharacterManager(cm);
         keyframePerformers = new ArrayList<>();
         generators = new ArrayList<>();
@@ -90,27 +119,38 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         //experimental
         generators.add(new ShoulderKeyframeGenerator());
         generators.add(new TorsoKeyframeGenerator());
-        gazeGenerator = new GazeKeyframeGenerator(cm,generators);
+        gazeGenerator = new GazeKeyframeGenerator(cm, generators);
         faceGenerator = new FaceKeyframeGenerator();
 
         keyframeComparator = (o1, o2) -> (int) Math.signum(o1.getOffset() - o2.getOffset());
 
         // environment
         environment = characterManager.getEnvironment();
+
+        incFeedbackPerformers = new ArrayList<>();
+
+        storeKeyframe = new ArrayList<>();
+
+        runnable = new ChunkSenderRunnable();
+        chunkSenderThread = new ChunkSenderThread(keyframePerformers);
+        chunkSenderThread.start();
+
     }
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
+
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
-        
+
+        //TreeMap<Integer, List<Keyframe>> treeList = new TreeMap<Integer, List<Keyframe>>();
         // Step 1: Schedule each signal independently from one to another.
         // The result of this step is to attribute abs value to possible sync points (compute absolute values from relative values).
         // The value of Start and End should be calculated in this step. So that we can sort
         for (Signal signal : list) {
-            if(signal instanceof PointingSignal)
-                gestureGenerator.fillPointing((PointingSignal)signal);
-            else {
+            if (signal instanceof PointingSignal) {
+                gestureGenerator.fillPointing((PointingSignal) signal);
+            } else {
                 SignalFiller.fillSignal(signal);
             }
         }
@@ -131,7 +171,6 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
         // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
         // Step 3: create all key frames
-
         // Gaze keyframes for other modalities than eyes are generated before the others
         // and act as "shifts"
         gazeGenerator.generateBodyKeyframes(keyframes);
@@ -148,9 +187,20 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         keyframes.addAll(faceGenerator.generateKeyframes());
 
         // Step 4: adjust the timing of all key frame
-
         keyframes.sort(keyframeComparator);
 
+        /*double offsetToAdjust = 0;
+        for (Keyframe kf : keyframes) {
+            if(kf.getOffset() < offsetToAdjust){
+                offsetToAdjust = kf.getOffset();
+            }
+        }
+        
+        for (Keyframe kf : keyframes) {
+            kf.setOffset(1 + kf.getOffset() - offsetToAdjust);
+        }
+        
+        offsetToAdjust = 0;*/
         //  here:
         //      - we must manage the time for the three addition modes:
         //          - blend:    offset + now
@@ -161,11 +211,10 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         //          - blend:   previousLastTime = max(previousLastTime, the last time of the new keyframes)
         //          - replace: previousLastTime = the last time of the new keyframes
         //          - append:  previousLastTime = the last time of the new keyframes
-
         double startTime = keyframes.isEmpty() ? 0 : keyframes.get(0).getOffset();
         // if the start time to start signals is less than 0, all signals' time have to be increased so that they start from 0
         double absoluteStartTime = greta.core.util.time.Timer.getTime();
-        if (mode.getCompositionType() == CompositionType.append){
+        if (mode.getCompositionType() == CompositionType.append) {
             absoluteStartTime = Math.max(lastKeyFrameTime, absoluteStartTime);
         }
         absoluteStartTime -= (startTime < 0 ? startTime : 0);
@@ -193,16 +242,26 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
             }
         }
 
-        this.sendKeyframes(keyframes, requestId, mode);
+        System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
+
+        //CHUNKING KEYFRAMES
+        TreeMap<Integer, List<Keyframe>> treeList = this.createChunk(keyframes);
+
+        System.out.println("\n -----------------------------      SENDING CHUNKS TO THREAD      -------------------------------");
+
         // Add animation to callbacks
         if (mode.getCompositionType() == CompositionType.replace) {
             this.stopAllAnims();
+            chunkSenderThread.closeQueue();
         }
         this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
+        
+        chunkSenderThread.send(treeList, requestId, mode);
     }
 
     @Override
-    public void cancelSignalsById(ID requestId) {
+    public void cancelSignalsById(ID requestId
+    ) {
         for (KeyframePerformer performer : keyframePerformers) {
             if (performer instanceof CancelableKeyframePerformer) {
                 ((CancelableKeyframePerformer) performer).cancelKeyframesById(requestId);
@@ -211,15 +270,46 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     }
 
     @Override
-    public void addKeyframePerformer(KeyframePerformer kp) {
+    public void addKeyframePerformer(KeyframePerformer kp
+    ) {
         if (kp != null) {
             keyframePerformers.add(kp);
+            chunkSenderThread.addKeyframePerformer(kp);
         }
     }
 
     @Override
-    public void removeKeyframePerformer(KeyframePerformer kp) {
+    public void removeKeyframePerformer(KeyframePerformer kp
+    ) {
         keyframePerformers.remove(kp);
+        chunkSenderThread.removeKeyframePerformer(kp);
+    }
+
+    //create chunk of keyframes based on their offset
+    //Chunk size = 3s max
+    public TreeMap<Integer, List<Keyframe>> createChunk(List<Keyframe> listKeyframe) {
+        TreeMap<Integer, List<Keyframe>> treeList = new TreeMap<Integer, List<Keyframe>>();
+        List<Keyframe> processKeyframesList = new ArrayList<>();
+        currentIndex = (int) listKeyframe.get(0).getOffset();
+        for (Keyframe kf : listKeyframe) { //goes through keyframes
+            int offsetInt = (int) kf.getOffset();
+
+            if (offsetInt % 3 == 0 && offsetInt > currentIndex) { //create chunk based on indicated size
+                currentIndex = offsetInt;
+            }
+
+            //currentIndex = offsetInt;
+            int index = currentIndex;
+
+            if (treeList.containsKey(index)) {
+                processKeyframesList = treeList.get(index);
+            } else {
+                processKeyframesList = new ArrayList<>();
+            }
+            processKeyframesList.add(kf);
+            treeList.put(index, processKeyframesList);
+        }
+        return treeList;
     }
 
     public void setEnvironment(Environment env) {
@@ -257,7 +347,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         this.characterManager = characterManager;
     }
 
-    public void UpdateFaceLibrary(){
+    public void UpdateFaceLibrary() {
         this.getCharacterManager().remove(FaceLibrary.global_facelibrary);
         FaceLibrary.global_facelibrary = new FaceLibrary(this.getCharacterManager());
         //get the default Lexicon :
@@ -270,7 +360,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         FaceLibrary.global_facelibrary.setDefinition(this.getCharacterManager().getValueString("FACELIBRARY"));
     }
 
-    public void UpdateGestureLibrary(){
+    public void UpdateGestureLibrary() {
         this.getCharacterManager().remove(Gestuary.global_gestuary);
         Gestuary.global_gestuary = new Gestuary(this.getCharacterManager());
         Gestuary.global_gestuary.setCharacterManager(this.getCharacterManager());
@@ -300,6 +390,16 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     public void UpdateShoulderLibrary() {
     }
 
-    public void UpdateHandLibrary(){
+    public void UpdateHandLibrary() {
+    }
+
+    //Interaction with the realizer from the outside, ex interuption
+    @Override
+    public void performIncInteraction(String parParam) {
+        if (parParam.equals("interupt")) {
+            chunkSenderThread.closeQueue();
+            this.stopAllAnims();
+        }
+        System.out.println("RECEIVED " + parParam);
     }
 }

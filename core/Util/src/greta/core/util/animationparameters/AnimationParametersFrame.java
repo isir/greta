@@ -30,7 +30,7 @@ public abstract class AnimationParametersFrame<AP extends AnimationParameter> im
 
     public ArrayList<AP> APVector;
     private int frameNumber;
-
+    
     public AnimationParametersFrame(int numAPs) {
         this(numAPs, 0);
     }
@@ -46,7 +46,7 @@ public abstract class AnimationParametersFrame<AP extends AnimationParameter> im
         this.frameNumber = frameNum;
         init(numAPs);
     }
-
+    
     public int getFrameNumber() {
         return frameNumber;
     }

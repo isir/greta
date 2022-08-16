@@ -7,13 +7,10 @@
 			</description>
 				
 			<tm id="tm1"/>
-				Hello,
+				hello
 			<tm id="tm2"/>
-				My name is Camille.
 			<tm id="tm3"/>	
-				I am one of the virtual character
 			<tm id="tm4"/>
-				 of the Greta platform.
 			<tm id="tm5"/>	
 				
 			
@@ -21,10 +18,7 @@
 			<boundary type="LL" id="b1" start="s1:tm5" end="s1:tm5+0.5"/>
 		</speech>
 	</bml>
-	<fml>
-		<deictic id="d1" type="selftouch" start="s1:tm2" end="s1:tm3" importance="1.0"/> <!-- target="Andre_chair0" -->
-		<performative id="p1" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>
-		<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>
-		<performative id="p2" type="propose" start="s1:tm3" end="s1:tm5" importance="1.0"/>
+	<fml> <!-- target="Andre_chair0" -->
+		<performative id="p1" type="greet" start="s1:tm1" end="s1:tm3" importance="1.0"/>
 	</fml>
 </fml-apml>

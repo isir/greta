@@ -43,6 +43,8 @@
 			<menu name="Incrementality">
 				<item module="Signal Scheduler" name="Signal Scheduler"/>
 				<item module="Incremental Realizer" name="Incremental Realizer"/>
+				<item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
+				<item module="IncRealizerInteraction" name="IncRealizerInteraction"/>
 			</menu>
             <menu name="Keyframe Performers">
                 <item module="IK Keyframe Performer" name="IK"/>
@@ -1004,10 +1006,19 @@
         </module>
 		<!-- Phil Sample Module ends -->
 		<module name="Incremental Realizer" style="BehaviorRealizer">
-            <object class="greta.auxiliary.incrementality.IncrementalRealizer" lib_id="greta_incrementality"/>
-        </module>
+			<object class="greta.auxiliary.incrementality.IncrementalRealizer" lib_id="greta_incrementality"/>
+		</module>
 		<module name="Signal Scheduler" style="Signals">
 			<object class="greta.auxiliary.incrementality.SignalScheduler" lib_id="greta_incrementality"/>
+		</module>
+		<module name="Incremental Realizer V2" style="BehaviorRealizer">
+			<object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
+		</module>
+		<module name="IncRealizerInteraction" style="BehaviorRealizer">
+			<object class="greta.auxiliary.incrementality.IncRealizerInteraction" lib_id="greta_incrementality"/>
+			<frame class="greta.core.utilx.gui.IncRealizerInteractionGUI" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
 		</module>
     </modules>
     <!-- list of libraries and their dependencies -->
@@ -1298,6 +1309,7 @@
 			<depends lib_id="greta_intentions"/>	
 			<depends lib_id="greta_behavior_realizer"/>
 			<depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_mpeg4"/>
 		</lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->
@@ -1610,6 +1622,25 @@
             <connect from="input" method="setLocalEnvironment" to="output"/>
             <disconnect from="input" method="setLocalEnvironment" to="null"/>
         </connector>
+        <connector id="connectIncrementalFeedbackEmitterToPerformer">
+            <input class="greta.auxiliary.incrementality.IncrementalityFeedbackEmitter" lib_id="greta_incrementality"/>
+            <output class="greta.auxiliary.incrementality.IncrementalityFeedbackPerformer" lib_id="greta_incrementality"/>
+            <connect from="input" method="addIncFeedbackPerformer" to="output"/>
+            <disconnect from="input" method="removeIncFeedbackPerformer" to="output"/>
+        </connector>
+        <connector id="connectKeyframesFeedbackEmitterToPerformer">
+            <input class="greta.core.keyframes.KeyframesFeedbackEmitter" lib_id="greta_signals"/>
+            <output class="greta.core.keyframes.KeyframesFeedbackPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="addKeyframesFeedbackPerformer" to="output"/>
+            <disconnect from="input" method="removeKeyframesFeedbackPerformer" to="output"/>
+        </connector>
+		<connector id="connectIncInteractionToRealizer">
+            <input class="greta.auxiliary.incrementality.IncrementalityInteractionEmitter" lib_id="greta_incrementality"/>
+            <output class="greta.auxiliary.incrementality.IncrementalityInteractionPerformer" lib_id="greta_incrementality"/>
+            <connect from="input" method="addIncInteractionPerformer" to="output"/>
+            <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
+        </connector>
+
     </connectors>
     <!-- list of styles -->
     <styles>

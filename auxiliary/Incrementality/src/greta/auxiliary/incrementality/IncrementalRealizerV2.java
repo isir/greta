@@ -18,7 +18,7 @@
 
  /*--------------------------------------------------------------------*/
  /*---     MODIFIED REALIZER FOR INCREMENTALITY IMPLEMENTATION      ---*/
- /*---        USAGE: Planner -> SignalScheduler -> This             ---*/
+ /*---                   USAGE: Planner -> This                     ---*/
  /*--------------------------------------------------------------------*/
 package greta.auxiliary.incrementality;
 
@@ -66,6 +66,9 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
+ * MODIFIED VERSION OF BEHAVIOR REALIZER 
+ * @author Sean Graux
+ * 
  * @author Quoc Anh Le
  * @author Andre-Marie Pez
  *
@@ -77,7 +80,7 @@ import java.util.concurrent.TimeUnit;
  * @navassoc - - * greta.core.keyframes.Keyframe
  * @inavassoc - - * greta.core.signals.Signal
  */
-public class IncrementalRealizerV2 extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent, IncrementalityFeedbackEmitter, KeyframesFeedbackPerformer, IncrementalityInteractionPerformer {
+public class IncrementalRealizerV2 extends CallbackSender implements CancelableSignalPerformer, KeyframeEmitter, CharacterDependent, IncrementalityInteractionPerformer {
 
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
@@ -93,20 +96,6 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     private ID currentID;
 
     private List<IncrementalityFeedbackPerformer> incFeedbackPerformers;
-
-    private List<Signal> previousSignalBurst;
-    private List<Keyframe> previousKeyframesList;
-
-    private List<Signal> currentSignalBurst;
-
-    private List<Signal> nextSignalBurst;
-
-    private List<Signal> currentAndNeighbors;
-
-    private boolean isRestGesture;
-
-    private Signal storedGesture;
-    private int gestureStorageCounter;
 
     private List<Keyframe> storeKeyframe;
 
@@ -139,20 +128,6 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         environment = characterManager.getEnvironment();
 
         incFeedbackPerformers = new ArrayList<>();
-
-        previousSignalBurst = new ArrayList<>();
-        previousKeyframesList = new ArrayList<>();
-
-        currentSignalBurst = new ArrayList<>();
-
-        nextSignalBurst = new ArrayList<>();
-
-        currentAndNeighbors = new ArrayList();
-
-        isRestGesture = false;
-
-        storedGesture = null;
-        gestureStorageCounter = 0;
 
         storeKeyframe = new ArrayList<>();
 
@@ -268,40 +243,20 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         }
 
         System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
-        /*System.out.println(" ------------------------------------    GENERATED KEYFRAMES     ------------------------------------");
-        for (Keyframe kf : keyframes) {
-            System.out.println(kf.getParentId() + " --- " + kf.getOffset() + " --- " + kf.getId());
-        }*/
 
         //CHUNKING KEYFRAMES
         TreeMap<Integer, List<Keyframe>> treeList = this.createChunk(keyframes);
 
-        /*System.out.println("\n ------------------------------------     CHUNK KEYFRAMES    ------------------------------------");
-        for (Map.Entry<Integer, List<Keyframe>> entry : treeList.entrySet()) {
-            System.out.println(entry.getKey());
-        /*    for (Keyframe kf : entry.getValue()) {
-                System.out.println(kf.getParentId() + " --- " + kf.toString() + " --- " + kf.getOffset());
-            }
-        }*/
-
         System.out.println("\n -----------------------------      SENDING CHUNKS TO THREAD      -------------------------------");
 
-        //this.sendKeyframes(keyframes, requestId, mode);
         // Add animation to callbacks
         if (mode.getCompositionType() == CompositionType.replace) {
             this.stopAllAnims();
+            chunkSenderThread.closeQueue();
         }
         this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
         
         chunkSenderThread.send(treeList, requestId, mode);
-
-        System.out.println(" ------------------------------------ END OF " + requestId + " ------------------------------------\n");
-
-        //DEBUG: Verifying that created thread doesn't linger once its done with its work
-        /*Set<Thread> threadSet = Thread.getAllStackTraces().keySet();
-        for(Thread th : threadSet){
-            System.out.println(th.getId() + " --- " + th.getName());
-        }*/
     }
 
     @Override
@@ -330,35 +285,16 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         chunkSenderThread.removeKeyframePerformer(kp);
     }
 
-    @Override
-    public void addIncFeedbackPerformer(IncrementalityFeedbackPerformer performer
-    ) {
-        incFeedbackPerformers.add(performer);
-    }
-
-    @Override
-    public void removeIncFeedbackPerformer(IncrementalityFeedbackPerformer performer
-    ) {
-        incFeedbackPerformers.remove(performer);
-    }
-
-    @Override
-    public void performKeyframesFeedback(boolean isOver
-    ) {
-        System.out.println("RECEIVED KEYFRAME FEEDBACK : " + isOver);
-        //this.sendFeedback(true);
-    }
-
     //create chunk of keyframes based on their offset
-    //Chunk size = 2s max
+    //Chunk size = 3s max
     public TreeMap<Integer, List<Keyframe>> createChunk(List<Keyframe> listKeyframe) {
         TreeMap<Integer, List<Keyframe>> treeList = new TreeMap<Integer, List<Keyframe>>();
         List<Keyframe> processKeyframesList = new ArrayList<>();
         currentIndex = (int) listKeyframe.get(0).getOffset();
-        for (Keyframe kf : listKeyframe) {
+        for (Keyframe kf : listKeyframe) { //goes through keyframes
             int offsetInt = (int) kf.getOffset();
 
-            if (offsetInt % 3 == 0 && offsetInt > currentIndex) {
+            if (offsetInt % 3 == 0 && offsetInt > currentIndex) { //create chunk based on indicated size
                 currentIndex = offsetInt;
             }
 
@@ -374,46 +310,6 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
             treeList.put(index, processKeyframesList);
         }
         return treeList;
-    }
-
-    //Based on a list of chunked keyframe, send them based on their times
-    public void sendChunk(TreeMap<Integer, List<Keyframe>> keyframeChunkList, ID requestId, Mode mode) {
-        while (keyframeChunkList.size() > 0) {
-            System.out.println(keyframeChunkList.firstEntry().getKey() + " --- " + keyframeChunkList.firstEntry().getValue());
-            this.sendKeyframes(keyframeChunkList.firstEntry().getValue(), requestId, mode);
-
-            if (keyframeChunkList.size() > 1) {
-                try {
-                    List<Keyframe> currentBurstList = keyframeChunkList.firstEntry().getValue();
-                    List<Keyframe> nextBurstList = keyframeChunkList.entrySet().stream().skip(1).map(map -> map.getValue()).findFirst().get();
-
-                    double lastCurrent = currentBurstList.get(currentBurstList.size() - 1).getOffset();
-                    double nextFirst = nextBurstList.get(0).getOffset();
-                    //System.out.println("TEST WAIT = " + lastCurrent + " --- " + lastNext);
-
-                    long sleepTime = (long) (nextFirst * 1000) - (long) (lastCurrent * 1000);
-                    if (sleepTime > 0) {
-                        Thread.sleep(sleepTime);
-                        System.out.println("WAITED : " + nextFirst + " - " + lastCurrent + " = " + sleepTime);
-                    }
-                } catch (Exception e) {
-                    System.out.println("ERROR --- " + e);
-                }
-            }
-            keyframeChunkList.remove(keyframeChunkList.firstKey());
-        }
-
-        try {
-            Thread.sleep(1000); //Wait to make sure agent goes back to rest pose
-        } catch (Exception e) {
-            System.out.println("ERROR --- " + e);
-        }
-    }
-
-    public void sendFeedback(boolean parFeedback) {
-        for (IncrementalityFeedbackPerformer performer : incFeedbackPerformers) {
-            performer.performIncFeedback(parFeedback);
-        }
     }
 
     public void setEnvironment(Environment env) {
@@ -497,6 +393,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     public void UpdateHandLibrary() {
     }
 
+    //Interaction with the realizer from the outside, ex interuption
     @Override
     public void performIncInteraction(String parParam) {
         if (parParam.equals("interupt")) {

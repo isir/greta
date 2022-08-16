@@ -1,0 +1,13 @@
+<face end="2" id="p1_0" lexeme="nod" start="0">
+	<description priority="1" type="gretabml">
+		<reference>Nod_Big</reference>
+		<intensity>1.000</intensity>
+		<SPC.value>1.000</SPC.value>
+		<TMP.value>0.400</TMP.value>
+		<FLD.value>0.000</FLD.value>
+		<PWR.value>0.000</PWR.value>
+		<REP.value>0.000</REP.value>
+		<OPN.value>0.000</OPN.value>
+		<TEN.value>0.000</TEN.value>
+	</description>
+</face>

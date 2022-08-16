@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
-<fml-apml>
+<fml-apml composition="append">
 	<bml>
 		<speech id="s1" start="0.0" language="english" voice="marytts" type="SAPI4" text="">
 			<description level="1" type="gretabml">
@@ -7,11 +7,10 @@
 			</description>
 				
 			<tm id="tm1"/>
-				Hello,
+				hello
 			<tm id="tm2"/>
 			<tm id="tm3"/>	
 			<tm id="tm4"/>
-				 of the Greta platform.
 			<tm id="tm5"/>	
 				
 			

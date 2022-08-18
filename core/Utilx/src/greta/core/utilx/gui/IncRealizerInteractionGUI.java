@@ -103,6 +103,7 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
 
 
     private Method interuptionLoadMethod;
+    private Method resumeLoadMethod;
     private Object loader;
 
     protected void sendInteruption() {
@@ -123,9 +124,6 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
         }
     }
     
-    private Method resumeLoadMethod;
-    //private Object resumeLoader;
-
     protected void sendResume() {
         //if(fileName==null || fileName.isEmpty()) return ;
         if(resumeLoadMethod!=null){

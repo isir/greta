@@ -27,4 +27,9 @@ public class IncRealizerInteraction implements IncrementalityInteractionEmitter 
         }
     }
 
+    public void sendResume(){
+        for (IncrementalityInteractionPerformer pf : performerList) {
+            pf.performIncInteraction("resume");
+        }
+    }
 }

@@ -400,6 +400,9 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
             chunkSenderThread.closeQueue();
             this.stopAllAnims();
         }
+        else if(parParam.equals("resume")){
+            chunkSenderThread.putInQueue();
+        }
         System.out.println("RECEIVED " + parParam);
     }
 }

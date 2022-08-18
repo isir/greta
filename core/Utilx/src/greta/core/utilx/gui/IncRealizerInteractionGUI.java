@@ -43,11 +43,19 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
         jFileChooser1 = new javax.swing.JFileChooser();
         jFileChooser1.setCurrentDirectory(new File("./"));
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         jButton1.setText("Interrupt");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Resume");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -58,13 +66,17 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jButton1)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(jButton2)
+                .addContainerGap(108, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(jButton1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
@@ -76,23 +88,49 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_fileNameTextFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        send();
+        sendInteruption();
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        sendResume();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JFileChooser jFileChooser1;
     // End of variables declaration//GEN-END:variables
 
 
-    private Method loadMethod;
+    private Method interuptionLoadMethod;
     private Object loader;
 
-    protected void send() {
+    protected void sendInteruption() {
         //if(fileName==null || fileName.isEmpty()) return ;
-        if(loadMethod!=null){
+        if(interuptionLoadMethod!=null){
             try {
-                loadMethod.invoke(loader);
+                interuptionLoadMethod.invoke(loader);
+            }
+            catch (InvocationTargetException ex) {
+                ex.getCause().printStackTrace();
+            }
+            catch (Exception ex) {
+                System.err.println(ex);
+            }
+        }
+        else{
+            System.out.println("load is null");
+        }
+    }
+    
+    private Method resumeLoadMethod;
+    //private Object resumeLoader;
+
+    protected void sendResume() {
+        //if(fileName==null || fileName.isEmpty()) return ;
+        if(resumeLoadMethod!=null){
+            try {
+                resumeLoadMethod.invoke(loader);
             }
             catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();
@@ -109,29 +147,11 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
     public void setLoader(Object loader){
         this.loader = loader;
         try {
-            loadMethod = loader.getClass().getMethod("sendInteruption");
+            interuptionLoadMethod = loader.getClass().getMethod("sendInteruption");
+            resumeLoadMethod = loader.getClass().getMethod("sendResume");
         } catch (Exception ex) {
             System.err.println(ex);
         }
-        try {
-            /*Method getFileFilterMethod = loader.getClass().getMethod("getFileFilter");
-            final java.io.FileFilter ff = (java.io.FileFilter) getFileFilterMethod.invoke(loader);
-            jFileChooser1.removeChoosableFileFilter(jFileChooser1.getAcceptAllFileFilter());
-            jFileChooser1.setAcceptAllFileFilterUsed(false);
-            jFileChooser1.addChoosableFileFilter(new javax.swing.filechooser.FileFilter(){
-
-                @Override
-                public boolean accept(File f) {
-                    return f.isDirectory() || ff.accept(f);
-                }
-
-                @Override
-                public String getDescription() {
-                    return IncRealizerInteractionGUI.this.loader.getClass().getSimpleName()+" Files";
-                }
-            });*/
-
-        } catch (Exception ex) {}
     }
 
 }

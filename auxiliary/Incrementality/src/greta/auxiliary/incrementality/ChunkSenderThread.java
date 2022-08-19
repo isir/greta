@@ -113,6 +113,11 @@ public class ChunkSenderThread extends Thread {
     public synchronized void setChunkList(TreeMap<Integer, List<Keyframe>> parTreeList) {
         this.treeList = parTreeList;
     }
+    
+    public synchronized void emptyChunkList(){
+        System.out.println("Emptying list");
+        this.treeList = new TreeMap<Integer, List<Keyframe>>();
+    }
 
     public synchronized void setRequestId(ID parId) {
         this.requestId = parId;
@@ -161,12 +166,6 @@ public class ChunkSenderThread extends Thread {
             this.setChunkList(tempList);
         } else {
             System.out.println("REPLACE FOUND");
-            try{
-                sleep(500);
-            }
-            catch(Exception e){
-                System.out.println(e);
-            }
             this.setChunkList(parTreeList);
         }
         this.setRequestId(id);

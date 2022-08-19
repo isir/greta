@@ -66,9 +66,10 @@ import java.util.concurrent.TimeUnit;
 
 /**
  *
- * MODIFIED VERSION OF BEHAVIOR REALIZER 
+ * MODIFIED VERSION OF BEHAVIOR REALIZER
+ *
  * @author Sean Graux
- * 
+ *
  * @author Quoc Anh Le
  * @author Andre-Marie Pez
  *
@@ -142,6 +143,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
+        currentID = requestId;
 
         //TreeMap<Integer, List<Keyframe>> treeList = new TreeMap<Integer, List<Keyframe>>();
         // Step 1: Schedule each signal independently from one to another.
@@ -244,19 +246,29 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
         System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
 
-        //CHUNKING KEYFRAMES
-        TreeMap<Integer, List<Keyframe>> treeList = this.createChunk(keyframes);
-
-        System.out.println("\n -----------------------------      SENDING CHUNKS TO THREAD      -------------------------------");
-
-        // Add animation to callbacks
-        if (mode.getCompositionType() == CompositionType.replace) {
+        if (requestId.toString().contains("stop")) {
+            System.out.println("stop");
             this.stopAllAnims();
+            chunkSenderThread.emptyChunkList();
             chunkSenderThread.closeQueue();
+            for (KeyframePerformer performer : keyframePerformers) {
+                performer.performKeyframes(keyframes, requestId, mode);
+            }
+        } else {
+            //CHUNKING KEYFRAMES
+            TreeMap<Integer, List<Keyframe>> treeList = this.createChunk(keyframes);
+
+            System.out.println("\n -----------------------------      SENDING CHUNKS TO THREAD      -------------------------------");
+
+            // Add animation to callbacks
+            if (mode.getCompositionType() == CompositionType.replace) {
+                this.stopAllAnims();
+                chunkSenderThread.closeQueue();
+            }
+            this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
+
+            chunkSenderThread.send(treeList, requestId, mode);
         }
-        this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
-        
-        chunkSenderThread.send(treeList, requestId, mode);
     }
 
     @Override
@@ -399,9 +411,11 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         if (parParam.equals("interupt")) {
             chunkSenderThread.closeQueue();
             this.stopAllAnims();
-        }
-        else if(parParam.equals("resume")){
+        } else if (parParam.equals("resume")) {
             chunkSenderThread.putInQueue();
+        } else if (parParam.equals("clearQueue")) {
+            chunkSenderThread.emptyChunkList();
+            chunkSenderThread.closeQueue();
         }
         System.out.println("RECEIVED " + parParam);
     }

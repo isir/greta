@@ -44,6 +44,8 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
         jFileChooser1.setCurrentDirectory(new File("./"));
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
 
         jButton1.setText("Interrupt");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +61,20 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("stop");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton4.setText("clear Thread Queue");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -68,7 +84,11 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
                 .addComponent(jButton1)
                 .addGap(47, 47, 47)
                 .addComponent(jButton2)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addGap(47, 47, 47)
+                .addComponent(jButton3)
+                .addGap(47, 47, 47)
+                .addComponent(jButton4)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,8 +96,10 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(25, Short.MAX_VALUE))
+                    .addComponent(jButton2)
+                    .addComponent(jButton3)
+                    .addComponent(jButton4))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         pack();
@@ -95,19 +117,30 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
         sendResume();
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        sendStop();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        sendClearQueue();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JFileChooser jFileChooser1;
     // End of variables declaration//GEN-END:variables
 
 
     private Method interuptionLoadMethod;
     private Method resumeLoadMethod;
+    private Method stopLoadMethod;
+    private Method clearQueueLoadMethod;
     private Object loader;
 
     protected void sendInteruption() {
-        //if(fileName==null || fileName.isEmpty()) return ;
         if(interuptionLoadMethod!=null){
             try {
                 interuptionLoadMethod.invoke(loader);
@@ -125,10 +158,43 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
     }
     
     protected void sendResume() {
-        //if(fileName==null || fileName.isEmpty()) return ;
         if(resumeLoadMethod!=null){
             try {
                 resumeLoadMethod.invoke(loader);
+            }
+            catch (InvocationTargetException ex) {
+                ex.getCause().printStackTrace();
+            }
+            catch (Exception ex) {
+                System.err.println(ex);
+            }
+        }
+        else{
+            System.out.println("load is null");
+        }
+    }
+    
+        protected void sendStop() {
+        if(stopLoadMethod!=null){
+            try {
+                stopLoadMethod.invoke(loader);
+            }
+            catch (InvocationTargetException ex) {
+                ex.getCause().printStackTrace();
+            }
+            catch (Exception ex) {
+                System.err.println(ex);
+            }
+        }
+        else{
+            System.out.println("load is null");
+        }
+    }
+        
+        protected void sendClearQueue() {
+        if(clearQueueLoadMethod!=null){
+            try {
+                clearQueueLoadMethod.invoke(loader);
             }
             catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();
@@ -147,6 +213,8 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
         try {
             interuptionLoadMethod = loader.getClass().getMethod("sendInteruption");
             resumeLoadMethod = loader.getClass().getMethod("sendResume");
+            stopLoadMethod = loader.getClass().getMethod("sendStop");
+            clearQueueLoadMethod = loader.getClass().getMethod("sendClearQueue");
         } catch (Exception ex) {
             System.err.println(ex);
         }

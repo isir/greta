@@ -113,6 +113,11 @@ public class ChunkSenderThread extends Thread {
     public synchronized void setChunkList(TreeMap<Integer, List<Keyframe>> parTreeList) {
         this.treeList = parTreeList;
     }
+    
+    public synchronized void emptyChunkList(){
+        System.out.println("Emptying list");
+        this.treeList = new TreeMap<Integer, List<Keyframe>>();
+    }
 
     public synchronized void setRequestId(ID parId) {
         this.requestId = parId;

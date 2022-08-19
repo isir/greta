@@ -74,7 +74,6 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(

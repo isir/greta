@@ -4,33 +4,26 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>I
-<tm id="tm2"/>hope
-<tm id="tm3"/>that
-<tm id="tm4"/>this
-<tm id="tm5"/>demo
-<tm id="tm6"/>gave
-<tm id="tm7"/>you
-<tm id="tm8"/>an
-<tm id="tm9"/>idea
-<tm id="tm10"/>about
-<tm id="tm11"/>what
-<tm id="tm12"/>I
-<tm id="tm13"/>can
-<tm id="tm14"/>do.
-<tm id="tm15"/>Bye
-<tm id="tm16"/>bye,
-<tm id="tm17"/>Don't
-<tm id="tm18"/>forget
-<tm id="tm19"/>to
-<tm id="tm20"/>greet
-<tm id="tm21"/>Catherine
-<tm id="tm22"/>for
-<tm id="tm23"/>me.
+<tm id="0"/>That
+<tm id="1"/>right
+<tm id="2"/>now
+<tm id="3"/>is
+<tm id="4"/>the
+<tm id="5"/>open
+<tm id="6"/>sewer
+<tm id="7"/>for
+<tm id="8"/>our
+<tm id="9"/>industrial
+<tm id="10"/>civilization
+<tm id="11"/>as
+<tm id="12"/>it's
+<tm id="13"/>currently
+<tm id="14"/>organized
 </speech>
-<gesture end="s1:tm28" id="5" lexeme="me" start="s1:tm22">
+<gazeShift end="10.0" id="gaze1" modality="TORSO" offsetAngle="30" offsetDirection="DOWN" start="1.0" target="gaze_target" type="GAZE"/>
+<gesture end="s1:tm14" id="1" lexeme="LowLf1" start="s1:tm8">
 <description priority="1" type="gretabml">
-<reference>deictic=me</reference>
+<reference>beat=LowLf1</reference>
 <intensity>1.000</intensity>`
 <SPC.value>0.646</SPC.value>
 <TMP.value>-0.400</TMP.value>

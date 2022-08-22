@@ -26,7 +26,9 @@
 <pitchaccent id='xpa6' type='Hstar' start='s1:tm6' end='s1:tm7' level='strong' importance='1'/> 
 <pitchaccent id='xpa7' type='Lstar' start='s1:tm7' end='s1:tm8' level='strong' importance='1'/> 
 <pitchaccent id='xpa8' type='Hstar' start='s1:tm14' end='s1:tm15' level='strong' importance='1'/> 
+
 </speech>
-<gaze id="gaze1" start="1.0" end="10.0" offsetDirection="DOWN" offsetAngle="90" type="GAZE" modality="DEFAULT"/>
 </bml>
+
+
 

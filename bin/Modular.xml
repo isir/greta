@@ -4,7 +4,6 @@
         <menu name="${GUI.add}">
             <item module="Ini Manager" name="Ini Manager"/>
             <item module="Character Manager" name="Character Manager"/>
-            <item module="IrcamAlign" name="IrcamAlign"/>
             <menu name="Logs">
                 <item module="Logs" name="Controller"/>
                 <item module="Log Printer" name="Log Printer"/>
@@ -29,14 +28,9 @@
                 <menu name="Meaning Miner">
                     <item module="Image Schema Extractor" name="Image Schema Extractor"/>
                 </menu>
-                <item module="Watson" name="IBM Watson"/>
-                <menu name="OpenFace">
-                    <item module="OpenFace1 AU Parser Files Reader" name="(OpenFace v1) AU Parser Files Reader"/>
-                    <item module="OpenFace2 Output Stream Reader" name="(OpenFace v2) Output Stream Reader"/>
-                </menu>
+				<item module="Watson" name="IBM Watson"/>
             
             <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
-            <item module="ASAP" name="ASAP"/>
             <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
             <item module="ObjectNodeController" name="ObjectNodeController"/>
             <item module="OSC" name="OSC"/>
@@ -501,10 +495,6 @@
             </frame>
             <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
         </module>
-        <module name="ASAP">
-            <object class="greta.auxiliary.asap.ASAPFrame" lib_id="greta_asap"/>
-            <frame type="object"/>
-        </module>
         <module name="ActiveMQ FML Sender">
             <object class="greta.auxiliary.activemq.semaine.FMLSender" lib_id="greta_activemq"/>
             <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
@@ -718,8 +708,7 @@
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
         <module name="Feedbacks" style="DEFAULT">
-            <object class="greta.core.feedbacks.gui.FeedbackFrame" lib_id="greta_feedbacks"/>
-                    <frame type="object"/>
+            <object class="greta.core.feedbacks.Feedbacks" lib_id="greta_feedbacks"/>
         </module>
         <module name="Feedbacks To Logs" style="DEFAULT">
             <object class="greta.core.feedbacks.Feedbacks2Logs" lib_id="greta_feedbacks"/>
@@ -955,20 +944,6 @@
             <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
             <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
         </module>
-        <module name="OpenFace1 AU Parser Files Reader" style="Signals">
-            <object class="greta.auxiliary.openface1.AUParserFilesReader" lib_id="greta_openface"/>
-            <frame class="greta.auxiliary.openface1.gui.AUParserFilesReaderFrame" lib_id="greta_openface" type="frame">
-                <link method="setLoader" on="frame"/>
-            </frame>
-        </module>
-        <module name="OpenFace2 Output Stream Reader" style="Signals">
-            <object class="greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader" lib_id="greta_openface"/>
-            <frame type="object"/>
-            <parameter default="" get_method="getTabIndex" get_on="object" name="tabIndex" set_method="setTabIndex" set_on="object" type="integer"/>
-            <parameter default="" get_method="getCSVFileName" get_on="object" name="csvFileName" set_method="setCSVFileName" set_on="object" type="string"/>
-            <parameter default="" get_method="getZeroMQHost" get_on="object" name="zeroMQHost" set_method="setZeroMQHost" set_on="object" type="string"/>
-            <parameter default="" get_method="getZeroMQPort" get_on="object" name="zeroMQPort" set_method="setZeroMQPort" set_on="object" type="string"/>
-        </module>
         <module name="Thrift BML Receiver">
             <object class="greta.auxiliary.thrift.BMLReceiver" lib_id="greta_thrift"/>
             <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
@@ -1071,10 +1046,6 @@
                 <link method="setModule" on="frame"/>
             </frame>
         </module>
-         <module name="IrcamAlign" style="DEFAULT">
-            <object class="greta.auxiliary.ircamalign.IrcamAlignFrame" lib_id="greta_ircamalign"/>
-             <frame type="object"/>
-        </module>
         <module name="FML Annotator" style="Intentions">
             <object class="greta.auxiliary.fmlannotator.View" lib_id="greta_fml_annotator"/>
             <frame type="object"/>
@@ -1128,6 +1099,8 @@
             <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
             <parameter default="greta.asr.response" get_method="getGretaASRTopic" get_on="object" name="gretaASRTopic" set_method="setGretaASRTopic" set_on="object" type="string"/>
             <parameter default="greta.input.FML" get_method="getGretaInputTopic" get_on="object" name="gretaInputTopic" set_method="setGretaInputTopic" set_on="object" type="string"/>
+        <parameter default="D:\Greta_Research\greta_gpl_new\greta\bin\Common\Data\FlipperResources\flipperDemo.properties" get_method="getFlipperPropertyResource" get_on="object" name="flipperPropertyResource" set_method="setFlipperPropertyResource" set_on="object" type="string"/>
+            <parameter default="D:\Greta_Research\greta_gpl_new\greta\bin\Common\Data\FlipperResources\fmltemplates" get_method="getflipperTemplateFolderPath" get_on="object" name="FlipperTemplateFolder" set_method="setflipperTemplateFolderPath" set_on="object" type="string"/>
         </module>	
 		<module name="ARIAVideoRequestsManager">
             <object class="greta.application.ariavaluspa.tools.ARIAVideoRequestsManager" lib_id="ariavaluspa"/>
@@ -1220,9 +1193,6 @@
             <depends lib_id="greta_util"/>
         </lib>
         <lib id="greta_animation_core" path="./Common/Lib/Internal/AnimationCore.jar">
-            <depends lib_id="greta_util"/>
-        </lib>
-        <lib id="greta_ircamalign" path="./Common/Lib/Internal/IrcamAlign.jar">
             <depends lib_id="greta_util"/>
         </lib>
         <lib id="greta_animation_dynamics" path="./Common/Lib/Internal/AnimationDynamics.jar">
@@ -1413,14 +1383,6 @@
             <needs path="./Player/Lib/External/Win64/**"/>
             <needs path="./Player/Lib/External/xuggle-xuggler-5.4.jar"/>
         </lib>
-        <lib id="greta_openface" path="./Common/Lib/Internal/OpenFaceFix.jar">
-            <depends lib_id="ext_jeromq"/>
-			<depends lib_id="greta_osc"/>
-            <depends lib_id="greta_mpeg4"/>
-            <depends lib_id="greta_signals"/>
-            <depends lib_id="greta_util"/>
-            <depends lib_id="greta_utilx"/>
-        </lib>
         <lib id="greta_plan_capture" path="./Common/Lib/Internal/PlanCapture.jar">
             <depends lib_id="greta_behavior_planner"/>
             <depends lib_id="greta_feedbacks"/>
@@ -1571,11 +1533,6 @@
             <depends lib_id="ext_weka"/>
             <depends lib_id="ext_weka_src"/>
             <needs path="./Common/Data/MultiLayerAttitude"/>
-        </lib>
-	    <lib id="greta_asap" path="./Common/Lib/Internal/ASAP.jar">
-            <depends lib_id="greta_util"/>
-            <depends lib_id="greta_signals"/>
-            <depends lib_id="greta_mpeg4"/>
         </lib>
 		<lib id="sequence_mining" path="./Common/Lib/Internal/SequenceMining.jar">
             <depends lib_id="ext_bfograph"/>

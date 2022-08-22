@@ -19,10 +19,6 @@ package greta.core.intentions;
 
 
 import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
-import greta.core.signals.BMLTranslator;
-import greta.core.signals.Signal;
-import greta.core.signals.SignalEmitter;
-import greta.core.signals.SignalPerformer;
 import greta.core.util.CharacterManager;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
@@ -36,12 +32,9 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.io.StringReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 import javax.jms.JMSException;
 import javax.xml.parsers.DocumentBuilder;
@@ -70,21 +63,15 @@ import org.xml.sax.SAXException;
  *
  * @author Andre-Marie Pez
  */
-public class FMLFileReader implements IntentionEmitter, SignalEmitter {
+public class FMLFileReader implements IntentionEmitter {
 
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
-    private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
     private XMLParser fmlparser = XML.createParser();
-    private XMLParser bmlparser = XML.createParser();
     private static String markup = "fml-apml";
     private CharacterManager cm;
-   
-    
 
     public FMLFileReader(CharacterManager cm){
         this.cm = cm;
-        this.cm.setTouch_computed(false);
-        
     }
 
     @Override
@@ -107,18 +94,14 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
     public ID load(String fmlFileName) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
         //get the base file name to use it as requestId
         String base = (new File(fmlFileName)).getName().replaceAll("\\.xml$", "");
-        String bml_file=FMLToBML(fmlFileName);
-        String base_bml= (new File(bml_file)).getName().replaceAll("\\.xml$", "");
 
         String fml_id = "";
         boolean text_brut=false;
         //get the intentions of the FML file
         fmlparser.setValidating(true);
-        bmlparser.setValidating(true);
         BufferedReader reader;
         String text="";
-        
-        
+
         
         boolean flag=false;
                         try {
@@ -150,24 +133,12 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
 	if(text_brut){
             System.out.println(text);
             fmlFileName=TextToFML(text);
-            bml_file=FMLToBML(fmlFileName);
             System.out.println("Nome nuovo file "+fmlFileName);
        }
         
         XMLTree fml = fmlparser.parseFile(fmlFileName);
-        if(!text_brut){
-             bml_file=FMLToBML(fmlFileName);
-             System.out.println("Nome nuovo file "+bml_file);
-        }
-        XMLTree bml = bmlparser.parseFile(bml_file);
         List<Intention> intentions = FMLTranslator.FMLToIntentions(fml,cm);
-        List<Signal> signals = BMLTranslator.BMLToSignals(bml,cm);
-        System.out.println("greta.core.intentions.FMLFileReader.load()");
-        for (int i =0;i>signals.size();i++){
-                   System.out.println("greta.core.intentions.FMLFileReader.load()"+signals.get(i).toString());
-        }
         Mode mode = FMLTranslator.getDefaultFMLMode();
-        Mode mode_bml = BMLTranslator.getDefaultBMLMode();
         for (XMLTree fmlchild : fml.getChildrenElement()) {
             // store the bml id in the mode class in order
             if (fmlchild.isNamed("bml")) {
@@ -206,30 +177,15 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         intentions.addAll(intention_list);
         //MEANING MINER TREATMENT END
         }
-        
-        for(int i=0; i<intentions.size();i++){
-            System.out.println("[INFO]: Intention_type:"+intentions.get(i).getType()+"   "+intentions.get(i).getName());
-            if(this.cm.getGesture_map().containsKey(intentions.get(i).getType())){
-                this.cm.setTouch_computed(true);
-                this.cm.setTouch_gesture_computed(this.cm.getGesture_map().get(intentions.get(i).getType()));
-                //REMOVE TOUCH GESTURE AND DO IT AFTER (IF NEAR OTHER CHARACTER/HUMAN
-                intentions.remove(i);
-            }
-        }
-        
-       
         //send to all SignalPerformer added
         for (IntentionPerformer performer : performers) {
             performer.performIntentions(intentions, id, mode);
-        }
-        for (SignalPerformer performer : signal_performers) {
-            performer.performSignals(signals, id, mode);
         }
         return id;
     }
     
     
-     public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
+    public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
         String construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n" +
                             "<fml-apml>\n<bml>"+
                             "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
@@ -244,6 +200,8 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         }
         i=i-1;
         construction=construction+"\n</speech>\n</bml>\n<fml>\n";
+        // Ajout du rest_pose dynamiquement
+        construction=construction+"<rest id=\"rp1\" type=\""+this.cm.get_restpose()+"\" start=\"0\" end=\"s1:tm"+i+"\" importance=\"1.0\"/>\n";
         construction=construction+ "</fml>\n</fml-apml>";
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -256,35 +214,6 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.transform(source, result);
         return System.getProperty("user.dir")+"\\fml_text_brut.xml";
-    }
-    
-    
-     public String FMLToBML(String filename) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
-        
-         System.out.println("greta.core.intentions.FMLFileReader.FMLToBML()");
-          BufferedReader br = null;
-          PrintWriter pw = null; 
-    try {
-         br = new BufferedReader(new FileReader(filename));
-         pw =  new PrintWriter(new FileWriter(System.getProperty("user.dir")+"\\fml_to_bml.xml"));
-         String line;
-         while ((line = br.readLine()) != null) {
-                
-                if(!line.contains("fml") && !line.contains("<?xml") && !line.contains("<rest") && !line.contains("<certainty") && !line.contains("<emotion")&& !line.contains("<performative") && !line.contains("<iconic") && !line.contains("<deictic") && !line.contains("<beat")){
-                    if(line.contains("<speech")){
-                         pw.println(line);
-                        pw.println("<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>");
-                    }else{
-                    pw.println(line);
-                    }
-                }
-         }
-         br.close();
-         pw.close();
-    }catch (Exception e) {
-         e.printStackTrace();
-    }
-        return System.getProperty("user.dir")+"\\fml_to_bml.xml";
     }
 
     @Override
@@ -312,16 +241,6 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
                 return false;
             }
         };
-    }
-
-    @Override
-    public void addSignalPerformer(SignalPerformer sp) {
-        signal_performers.add(sp); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void removeSignalPerformer(SignalPerformer sp) {
-        signal_performers.remove(sp); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

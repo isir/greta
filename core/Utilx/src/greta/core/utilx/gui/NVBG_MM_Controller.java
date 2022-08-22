@@ -33,13 +33,12 @@ public class NVBG_MM_Controller extends javax.swing.JFrame {
     public NVBG_MM_Controller(CharacterManager cm) {
         this.cm = cm;
         initComponents();
-        doMM.setSelected(false);
-        doNVBG.setSelected(false);
+        updateNVBG_MM_Options();
     }
 
     private void updateNVBG_MM_Options(){
             if(doNVBG.isSelected()){
-                this.cm.set_use_NVBG(true); 
+                this.cm.set_use_NVBG(true);            
             }
             else{
                 this.cm.set_use_NVBG(false); 

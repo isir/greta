@@ -134,8 +134,6 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
 
         // Gaze keyframes for other modalities than eyes are generated before the others
         // and act as "shifts"
-        
-        
         gazeGenerator.generateBodyKeyframes(keyframes);
 
         for (KeyframeGenerator generator : generators) {
@@ -148,11 +146,6 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
             System.out.println(k.getModality());
         }
         gazeGenerator.generateEyesKeyframes(keyframes);
-        
-        
-        //this.characterManager.getGaze_t().setPosX(0.0);
-        //this.characterManager.getGaze_t().setPosY(1.5);
-        //this.characterManager.getGaze_t().setPosZ(1);
 
         faceGenerator.findExistingAU(keyframes);
         keyframes.addAll(faceGenerator.generateKeyframes());
@@ -171,9 +164,8 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         //          - blend:   previousLastTime = max(previousLastTime, the last time of the new keyframes)
         //          - replace: previousLastTime = the last time of the new keyframes
         //          - append:  previousLastTime = the last time of the new keyframes
-       
+
         double startTime = keyframes.isEmpty() ? 0 : keyframes.get(0).getOffset();
-        //System.out.println("G0:"+startTime);
         // if the start time to start signals is less than 0, all signals' time have to be increased so that they start from 0
         double absoluteStartTime = greta.core.util.time.Timer.getTime();
         if (mode.getCompositionType() == CompositionType.append){
@@ -185,12 +177,9 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         }
         //add this info to the keyframe - save this info in some special variable
         for (Keyframe keyframe : keyframes) {
-            //System.out.println("G1:"+keyframe.getOnset() + absoluteStartTime);
-            //System.out.println("G2:"+keyframe.getOffset() + absoluteStartTime);
             keyframe.setOnset(keyframe.getOnset() + absoluteStartTime);
             keyframe.setOffset(keyframe.getOffset() + absoluteStartTime);
             if (lastKeyFrameTime < keyframe.getOffset()) {
-                 //System.out.println("G10: "+keyframe.getOffset());
                 lastKeyFrameTime = keyframe.getOffset();
             }
             if (keyframe instanceof AudioKeyFrame) {
@@ -209,11 +198,9 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
 
         this.sendKeyframes(keyframes, requestId, mode);
         // Add animation to callbacks
-        //System.out.println("GGGGGGGGGG:"+mode.getCompositionType());
         if (mode.getCompositionType() == CompositionType.replace) {
             this.stopAllAnims();
         }
-        //System.out.println("GGGGGGGGGG:"+requestId+"  "+absoluteStartTime+"   "+lastKeyFrameTime);
         this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
     }
 

@@ -29,10 +29,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
  
 public class MessageSender{
      
@@ -66,6 +63,9 @@ public class MessageSender{
         //executeCommand("exit");
 
         // write stdout of shell (=output of all commands)
+
+
+
     
         }
         // Getting JMS connection from the server and starting it
@@ -77,7 +77,7 @@ public class MessageSender{
         //Destination represents here our queue 'DEFAULT_SCOPE' on the JMS server. 
         //The queue will be created automatically on the server.
         Destination destination = session.createTopic(subject);
-        Logs.debug(session.createTopic(subject).getTopicName() +" "+ destination);
+        System.out.println(session.createTopic(subject).getTopicName() +" "+ destination);
          
         // MessageProducer is used for sending messages to the queue.
         MessageProducer producer = session.createProducer(destination);
@@ -103,11 +103,16 @@ public class MessageSender{
         
         //Open NVBG and wait three second before send the message -> avoid lost of data if message is not sent entirely
         Logs.debug("[NVBG INFO]:greta.core.signals.MessageSender.traitement_NVBG()"+"  "+nvbg);
-        if (nvbg==false) {
-            MyThreadNVBG thread_nvbg = new MyThreadNVBG();
-            thread_nvbg.run();
-            TimeUnit.SECONDS.sleep(1);
-        } // TODO Auto-generated catch block
+        try {
+                        if(nvbg==false){
+			run_NVBG();
+                        TimeUnit.SECONDS.sleep(3);
+                        }
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         message.setObjectProperty("ELVISH SCOPE", subject);
         message.setObjectProperty("MESSAGE_PREFIX", "vrExpress");
@@ -127,14 +132,8 @@ public class MessageSender{
         Message message_vrSpeak = null;
         TextMessage textMessage=null;
         boolean received_vrSpeak=false;
-        long start = System.currentTimeMillis();
-        long end;
-        long elapsedTime;
         // Here we receive the message.
         while(true) {
-        
-             end = System.currentTimeMillis();
-             elapsedTime = end - start;
         Message message1 = consumer.receive();
         if (message1 instanceof TextMessage) {
             textMessage = (TextMessage) message1;
@@ -146,18 +145,14 @@ public class MessageSender{
             	received_vrSpeak=true;
             }
         }
-        if (received_vrSpeak || elapsedTime>30000) {
+        if (received_vrSpeak) {
         	break;
         }
         }
-        List<String> gesture=new ArrayList<String>();
-        if(message_vrSpeak!=null){
-            String animation=vsg.VHMSGonMessage(message_vrSpeak);
-            //System.out.println("Animtion:" +animation);
-            Test_NVBG_output test=new  Test_NVBG_output();
-            gesture=test.traitement(animation);
-        }
-        
+        String animation=vsg.VHMSGonMessage(message_vrSpeak);
+        //System.out.println("Animtion:" +animation);
+        Test_NVBG_output test=new  Test_NVBG_output();
+        List<String> gesture=test.traitement(animation);
         //System.out.println("GESTURE:"+gesture);
         return gesture;
         
@@ -168,7 +163,14 @@ public class MessageSender{
         // so we must cast to it to get access to its .getText() method.
 
     
-
+    public static void run_NVBG() throws IOException {
+        Logs.debug("[NVBG INFO]:NVBG.MessageSender.run_NVBG()");
+        String path=System.getProperty("user.dir");
+    	path+="\\run-toolkit-NVBG-C#-all.bat";
+    	Runtime rn=Runtime.getRuntime();
+    	Process pr=rn.exec(path);
+        
+    }
     
     private void executeCommand(String command) {
         try {
@@ -181,31 +183,5 @@ public class MessageSender{
         }
     }
 
-    public class MyThreadNVBG extends Thread{
-         
-         public MyThreadNVBG(){
-             
-         }
-         
-         public  void run(){
-            
-            Logs.debug("[NVBG INFO]:NVBG.MessageSender.run_NVBG()");
-            String path=System.getProperty("user.dir");
-            path+="\\run-toolkit-NVBG-C#-all.bat";
-            Runtime rn=Runtime.getRuntime();
-             try {
-                final Process pr=rn.exec(path);
-             } catch (IOException ex) {
-                 Logger.getLogger(MessageSender.class.getName()).log(Level.SEVERE, null, ex);
-             }
-
-             
-             
-            
-            
-            }
-             }
-         
-         }
-         
-     
+    
+}

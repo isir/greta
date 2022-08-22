@@ -70,6 +70,15 @@
                 <element h="50.0" id="CereProc - 1571148425368-281" module="CereProc" name="CereProc" w="80.0" x="540.0" y="30.0"/>
             </element>
         </element>
+        <element h="490.0" id="Ogre Player - 1544700973529-249" module="Ogre Player" name="Ogre Player" w="80.0" x="770.0" y="110.0">
+            <parameter name="posX" value="0.0"/>
+            <parameter name="posY" value="1.5"/>
+            <parameter name="posZ" value="1.2999999523162842"/>
+            <parameter name="roll" value="0.0"/>
+            <parameter name="pitch" value="0.0"/>
+            <parameter name="yaw" value="0.0"/>
+            <window h="614" visible="true" w="736" x="1003" y="157"/>
+        </element>
         <element h="50.0" id="Thrift FAP Sender - 1571144928392-464" module="Thrift FAP Sender" name="Thrift FAP Sender" w="80.0" x="290.0" y="490.0">
             <parameter name="port" value="9700"/>
             <parameter name="host" value="localhost"/>
@@ -88,26 +97,27 @@
         </element>
     </elements>
     <connections>
-        <connection connector="setTTS" source="TTS - 1544704550664-449" target="CereProc - 1571148425368-281"/>
-        <connection connector="AudioEmitter To AudioPerformer" source="Audio Keyframe Performer - 1554477564140-572" target="MPEG4 Animatable - 1544701103065-914"/>
-        <connection connector="AudioEmitter To AudioPerformer" source="Audio Keyframe Performer - 1554477564140-572" target="Thrift Audio Sender - 1571145171439-71"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Simple AU Performer - 1544701096226-322" target="Lip Blender - 1554477549928-147"/>
-        <connection connector="IntentionEmitterToIntentionPerformer" source="FML File Reader - 1544701069074-506" target="Behavior Planner - 1544701075130-575"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer" source="Animation Keyframe Performer - 1544701084817-460" target="MPEG4 Animatable - 1544701103065-914"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer" source="Animation Keyframe Performer - 1544701084817-460" target="Thrift BAP Sender - 1571145020192-201"/>
-        <connection connector="connectAnimatableToEnvironment" source="MPEG4 Animatable - 1544701103065-914" target="Environment - 1544700713383-564"/>
-        <connection connector="SignalEmitterToSignalPerformer" source="Behavior Planner - 1544701075130-575" target="Behavior Realizer - 1544713018144-582"/>
-        <connection connector="IntentionEmitterToIntentionPerformer" source="Thrift Command Receiver - 1571145261856-809" target="Behavior Planner - 1544701075130-575"/>
+        <connection connector="addLogOutput" source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="setTTS" source="TTS - 1544704550664-449" target="CereProc - 1571148425368-281"/>
         <connection connector="SignalEmitterToSignalPerformer" source="Thrift Command Receiver - 1571145261856-809" target="Behavior Realizer - 1544713018144-582"/>
+        <connection connector="IntentionEmitterToIntentionPerformer" source="Thrift Command Receiver - 1571145261856-809" target="Behavior Planner - 1544701075130-575"/>
+        <connection connector="LipSourceForLipBlender" source="Lip Model - 1544701091338-924" target="Lip Blender - 1554477549928-147"/>
+        <connection connector="SignalEmitterToSignalPerformer" source="BML File Reader - 1544701071961-590" target="Behavior Realizer - 1544713018144-582"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Simple AU Performer - 1544701096226-322" target="Lip Blender - 1554477549928-147"/>
+        <connection connector="SignalEmitterToSignalPerformer" source="Behavior Planner - 1544701075130-575" target="Behavior Realizer - 1544713018144-582"/>
+        <connection connector="connectPlayerToEnvironment" source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Lip Blender - 1554477549928-147" target="MPEG4 Animatable - 1544701103065-914"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Lip Blender - 1554477549928-147" target="Thrift FAP Sender - 1571144928392-464"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544713018144-582" target="Animation Keyframe Performer - 1544701084817-460"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544713018144-582" target="Face Keyframe Performer - 1554477530493-927"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544713018144-582" target="Lip Model - 1544701091338-924"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544713018144-582" target="Audio Keyframe Performer - 1554477564140-572"/>
-        <connection connector="addLogOutput" source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="SignalEmitterToSignalPerformer" source="BML File Reader - 1544701071961-590" target="Behavior Realizer - 1544713018144-582"/>
         <connection connector="AUEmitterToAUPerformer" source="Face Keyframe Performer - 1554477530493-927" target="Simple AU Performer - 1544701096226-322"/>
-        <connection connector="LipSourceForLipBlender" source="Lip Model - 1544701091338-924" target="Lip Blender - 1554477549928-147"/>
+        <connection connector="connectAnimatableToEnvironment" source="MPEG4 Animatable - 1544701103065-914" target="Environment - 1544700713383-564"/>
+        <connection connector="AudioEmitter To AudioPerformer" source="Audio Keyframe Performer - 1554477564140-572" target="MPEG4 Animatable - 1544701103065-914"/>
+        <connection connector="AudioEmitter To AudioPerformer" source="Audio Keyframe Performer - 1554477564140-572" target="Thrift Audio Sender - 1571145171439-71"/>
+        <connection connector="IntentionEmitterToIntentionPerformer" source="FML File Reader - 1544701069074-506" target="Behavior Planner - 1544701075130-575"/>
     </connections>
 </modulated>

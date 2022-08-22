@@ -676,8 +676,6 @@ public class TorsoEditor extends javax.swing.JFrame implements BAPFrameEmitter, 
 
         Gsignals.add(torso);
         ID id = IDProvider.createID("Torsoditor");
-        System.out.println("TORSO SIGNAL:"+torso.shoulder+"  "+torso.getFLD()+"  "+torso.getModality()+" "+torso.getSPC()+"  "+torso.getOpenness()+" "+torso.getPWR()
-                +" "+torso.getFLD());
         for (SignalPerformer perf : signalPerformers) {
             perf.performSignals(Gsignals, id, new Mode(CompositionType.replace));
         }

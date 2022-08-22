@@ -40,12 +40,15 @@
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/EnvironmentManager"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/FMLAnnotator"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/GroupBehavior"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/MeaningMiner"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/OgrePlayer"/>
-        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/OpenFace"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/PlanCapture"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SocialParameters"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SSI"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/Thrift"/>
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/SpeechRecognizer"/>
+		<ant target="${action}" useNativeBasedir="true" dir="auxiliary/DialogueManager/FlipperDemoExample"/>		
+        <ant target="${action}" useNativeBasedir="true" dir="auxiliary/DialogueManager/FlipperLib"/>				
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/TTS/CereProc"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/TTS/MaryTTS"/>
         <ant target="${action}" useNativeBasedir="true" dir="auxiliary/TTS/Voxygen"/>
@@ -66,5 +69,7 @@
         <ant target="${action}" useNativeBasedir="true" dir="core/Utilx"/>
         <ant target="${action}" useNativeBasedir="true" dir="tools/Editors"/>
         <ant target="${action}" useNativeBasedir="true" dir="tools/GestureAnimationEditor"/>
+        <ant target="${action}" useNativeBasedir="true" dir="tools/VideoCapture"/>
     </target>
+    
 </project>

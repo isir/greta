@@ -166,12 +166,12 @@ public class ChunkSenderThread extends Thread {
             this.setChunkList(tempList);
         } else {
             System.out.println("REPLACE FOUND");
-            try{
+            /*try{
                 sleep(500);
             }
             catch(Exception e){
                 System.out.println(e);
-            }
+            }*/
             this.setChunkList(parTreeList);
         }
         this.setRequestId(id);

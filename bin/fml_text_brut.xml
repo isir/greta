@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>but
+<tm id="tm2"/>films
+<tm id="tm3"/>break
+<tm id="tm4"/>films
+<tm id="tm5"/>transported
+<tm id="tm6"/>me
+</speech>
+</bml>
+<fml>
+</fml>
+</fml-apml>

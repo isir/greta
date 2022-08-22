@@ -55,9 +55,16 @@
 			</node>
 			<node id="Andre_chair">
                 <position x="-6.0" y="0.0" z="-3.5"/>
-                <orientation x="0.0" y="59.999996" z="0.0"/>
+                <orientation x="0.0" y="60" z="0.0"/>
                 <leaf id="Andre_chair0" reference="object.chair.wheel">
                     <size x="0.549" y="1.054" z="0.613"/>
+                </leaf>
+           </node>
+			<node id="Gaze_target">
+                <position x="0.0" y="1.5" z="1.0"/>
+                <orientation x="0.0" y="0" z="0.0"/>
+                <leaf id="gaze_target" reference="light.point">
+                    <size x="0.1" y="0.1" z="0.1"/>
                 </leaf>
            </node>
 		</node>

@@ -55,10 +55,12 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
                 startKeyframe = new TorsoKeyframe(getDefaultPosition());
             }
             else if(keyframes.peekLast().getOffset()<=torso.getPhases().get(0).getStartTime()){
+                    System.out.println("PEEK LAST:"+keyframes.peekLast().getOffset()+"  "+torso.getPhases().get(0).getStartTime());
                     startKeyframe = new TorsoKeyframe(keyframes.peekLast());
             }
 
             if(startKeyframe != null){
+                System.out.println("SET START TIME:"+torso.getStartValue()+"   "+torso.getStart());
                 setTimeOn(startKeyframe, torso.getStartValue());
                 ExpressivityParameters e = new ExpressivityParameters();
                 e.fld = torso.getFLD();
@@ -67,11 +69,13 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
                 e.tmp = torso.getTMP();
                 e.tension = torso.getTension();
                 startKeyframe.setParameters(e);
+                //for(int j=0;j<torso.getPhases().size();j++){
+                //    System.out.println("[TORSO PHASES]:"+torso.getPhases().get(j).sagittalTilt.value);
+                //}
 
                 if (torso.shoulder){
                     startKeyframe.setOnlytheShoulder();
                 }
-
                 keyframes.add(startKeyframe);
             }
 
@@ -84,6 +88,10 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
             outputKeyframes.addAll(keyframes);
 
             //VI) save the last position
+            System.out.println("TORSO KEYFRAMES:"+keyframes.size());
+            for(int i=0; i<outputKeyframes.size();i++){
+                System.out.println(outputKeyframes.get(i).getCategory()+"   "+outputKeyframes.get(i).getModality()+"  "+outputKeyframes.get(i).getOffset());
+            }
             setRestPosition(keyframes.peekLast());
         }
     }
@@ -94,12 +102,14 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
     }
 
     private void setTimeOn(TorsoKeyframe kf, double time){
+        System.out.println("OFFSET e ONSET:"+time);
         kf.setOffset(time);
         kf.setOnset(time);
     }
 
     private void setRestPosition(TorsoKeyframe phase){
         defaultPosition.verticalTorsion = new SpineDirection(phase.verticalTorsion); //phase.verticalTorsion;
+        defaultPosition.sagittalTilt = new SpineDirection(phase.sagittalTilt); //phase.verticalTorsion;
     }
 
     private TorsoKeyframe createKeyFrame(TorsoSignal sh, SpinePhase phase) {
@@ -118,17 +128,21 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
         return keyframe;
     }
 
-    protected TorsoKeyframe interpolate(TorsoKeyframe first, TorsoKeyframe second, double time){
+    /*protected TorsoKeyframe interpolate(TorsoKeyframe first, TorsoKeyframe second, double time){
         double t = (time - first.getOffset()) / (second.getOffset()-first.getOffset());
 
         TorsoKeyframe result = new TorsoKeyframe(); // first
         //result = first
 
         SpineDirection vert = new SpineDirection(first.verticalTorsion);
+        SpineDirection sagi = new SpineDirection(first.sagittalTilt);
         vert.inverse();
+        sagi.inverse();
 
         result.verticalTorsion= vert;
         result.verticalTorsion.add(second.verticalTorsion);
+        result.sagittalTilt= sagi;
+        result.sagittalTilt.add(second.sagittalTilt);
 
         //result.lateralRoll.inverse();
         //result.sagittalTilt.inverse();
@@ -141,10 +155,11 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
 
         //result.lateralRoll.multiply(t);
         //result.sagittalTilt.multiply(t);
-        result.verticalTorsion.multiply(t);
+        //result.verticalTorsion.multiply(t);
         //result = t*(second-first)
 
         result.verticalTorsion.add(first.verticalTorsion);
+        result.sagittalTilt.add(first.sagittalTilt);
         //blend(result, first);
         //result = t*(second-first) + first
 
@@ -154,7 +169,7 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
 
     protected void blend(TorsoKeyframe first, TorsoKeyframe second) {
         //first.lateralRoll.add(second.lateralRoll);
-        //first.sagittalTilt.add(second.sagittalTilt);
+        first.sagittalTilt.add(second.sagittalTilt);
         first.verticalTorsion.add(second.verticalTorsion);
     }
 

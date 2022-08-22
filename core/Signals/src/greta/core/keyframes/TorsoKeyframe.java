@@ -42,7 +42,7 @@ public class TorsoKeyframe  extends ParametersKeyframe{
         this.modality = "torso";
 //        this.category = phase.verticalTorsion.direction.toString() + phase.sagittalTilt.direction + phase.lateralRoll.direction;
 //        if (this.category.isEmpty()) {
-            this.category = "Neutral";
+        this.category = "Neutral";
 //        }
         this.onset = phase.getStartTime();
         this.offset = phase.getEndTime();
@@ -51,6 +51,7 @@ public class TorsoKeyframe  extends ParametersKeyframe{
         this.lateralRoll = phase.lateralRoll;
         this.collapse = phase.collapse;
         this._rotations.putAll(phase._rotations);
+        System.out.println("TORSO INIT:"+this.sagittalTilt+" "+this.onset+"  "+this.offset);
     }
 
     public TorsoKeyframe(TorsoKeyframe other) {
@@ -81,6 +82,7 @@ public class TorsoKeyframe  extends ParametersKeyframe{
         this.lateralRoll = new SpineDirection();
         this.collapse = new SpineDirection();
         this._rotations.putAll(new HashMap<String, Quaternion>());
+        
     }
 
     public double getOffset() {

@@ -29,8 +29,6 @@ import com.illposed.osc.argument.OSCTimeTag64;
 import com.illposed.osc.messageselector.OSCPatternAddressMessageSelector;
 import com.illposed.osc.transport.udp.OSCPortIn;
 import com.illposed.osc.transport.udp.OSCPortOut;
-import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
-import greta.auxiliary.openface2.util.StringArrayListener;
 import greta.auxiliary.zeromq.ConnectionListener;
 import greta.core.keyframes.face.AUEmitter;
 import greta.core.keyframes.face.AUPerformer;
@@ -46,6 +44,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTextField;
@@ -54,9 +53,8 @@ import javax.swing.JTextField;
  *
  * @author Andre-Marie Pez
  */
-public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, ConnectionListener, StringArrayListener, OSCPacketListener{
+public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, ConnectionListener, OSCPacketListener{
     
-    private static final Logger LOGGER = Logger.getLogger(OpenFaceOutputStreamReader.class.getName());
 
     private static final Color green = new Color(0, 150, 0);
     private static final Color red = Color.RED;
@@ -74,12 +72,20 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
     protected boolean useOSC = false;
     protected OSCPortOut oscOut = null;
     protected int oscPort = 9000;    
+    
+    public ArrayList<String> list_intet_types=new ArrayList<String>();
 
     /**
      * Creates new customizer OSC
      */
     public OSC_Sender() {
         initComponents();
+        list_intet_types.add("OO");
+        list_intet_types.add("IN");
+        list_intet_types.add("SP");
+        list_intet_types.add("SPO");
+        list_intet_types.add("MP");
+        list_intet_types.add("MPO");
     }
     
     
@@ -95,15 +101,67 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
         }
     }
     
+    public void switch_gaze(Map<String,String> map,float time_dialog, String interaction_type ){
+
+        //If I'm the speaker so :
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+               if(entry.getKey()=="S"){
+                   if(interaction_type=="OO" || interaction_type=="MPO" || interaction_type=="SPO"){
+                        if(time_dialog<2.00){
+                         System.out.println("WATCH S");
+                         //TODO send watch S
+                        }
+                        else{
+
+                        }
+                       
+                   }
+                   
+               System.out.println(entry.getKey() + ":" + entry.getValue());
+            
+           }//If I'm the listener so :
+               else if(entry.getKey()=="L"){
+               if(interaction_type=="OO" || interaction_type=="MPO" || interaction_type=="SPO"){
+                        if(time_dialog<2.00){
+                         System.out.println("WATCH S");
+                         //TODO send watch S
+                        }
+                        else{
+
+                        }
+               
+           }
+           
+    
+        
+        
+    }//If I'm the attending so :
+               else if(entry.getKey()=="A"){
+               if(interaction_type=="OO" || interaction_type=="MPO" || interaction_type=="SPO"){
+                        if(time_dialog<2.00){
+                         System.out.println("WATCH S");
+                         //TODO send watch S
+                        }
+                        else{
+
+                        }
+               
+           }
+           
+    
+        
+        
+    }
+        }
+    }
+    
     protected void startOSCOut(int port){        
         try {            
             oscOut = new OSCPortOut(InetAddress.getLocalHost(), port);            
             useOSC = true;
         } catch (IOException ex) {
             useOSC = false;
-            LOGGER.log(Level.WARNING, null, ex);
         }
-        LOGGER.log(Level.INFO, String.format("startOSCOut port %d : %b", port, useOSC));
     }
     
     protected void stopOSCOut(){        
@@ -112,10 +170,8 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
             try {
                 oscOut.disconnect();
             } catch (IOException ex) {           
-                LOGGER.log(Level.WARNING, null, ex);
             }
         }
-        LOGGER.log(Level.INFO, String.format("stopOSCOut : %b",  !useOSC));
     }
     
     protected int getOscOutPort(){
@@ -123,7 +179,6 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
     }
     
     protected void setOscOutPort(int port){
-        LOGGER.log(Level.INFO, String.format("setOscOutPort : %d",  port));
         oscPort = port;      
     }
 
@@ -148,7 +203,6 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
                     oscOut.send(msg);            
             }
         } catch (OSCSerializeException | IOException ex) {
-            LOGGER.warning(ex.getLocalizedMessage());
         } 
     }   
 
@@ -181,6 +235,14 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jCheckBox2 = new javax.swing.JCheckBox();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        jTextField3 = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        jTextField4 = new javax.swing.JTextField();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jLabel8 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "OSC Parameters"));
 
@@ -228,7 +290,7 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox1))))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jButton1.setText("Send");
@@ -240,7 +302,7 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "Gaze Object/Coordinates"));
 
-        jLabel3.setText("Object");
+        jLabel3.setText("Agent/Object - List");
 
         jLabel4.setText("Coordinates");
 
@@ -302,7 +364,7 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
                     .addComponent(textField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(textField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 15)); // NOI18N
@@ -319,6 +381,65 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
             }
         });
 
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)), "GroupBehavior"));
+
+        jLabel10.setText("State");
+
+        jTextField3.setText("S/P/A");
+
+        jLabel11.setText("Actual-Speaker");
+
+        jCheckBox3.setText("Enable Group-Object Interaction");
+        jCheckBox3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox3ActionPerformed(evt);
+            }
+        });
+
+        jLabel8.setText("InteractionType");
+
+        jTextField1.setText("JA/OO/SPO/SO/SO...");
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel10)
+                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8))
+                        .addGap(98, 98, 98)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11)))
+                    .addComponent(jCheckBox3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap(33, Short.MAX_VALUE)
+                .addComponent(jCheckBox3)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(67, 67, 67))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -330,11 +451,12 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
                         .addComponent(jButton1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel1)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 194, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox2))
@@ -345,18 +467,19 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addComponent(jLabel1)
+                .addGap(16, 16, 16)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jCheckBox2)
-                        .addGap(47, 47, 47)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(47, 47, 47)
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addGap(18, 18, 18))
@@ -379,9 +502,7 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
                     System.out.println(oscOut+"  "+msg.toString());
                     oscOut.send(msg);
                 } catch (IOException ex) {
-                    Logger.getLogger(OpenFaceOutputStreamReader.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (OSCSerializeException ex) {
-                    Logger.getLogger(OpenFaceOutputStreamReader.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 jTextArea1.setText("Received message");
         
@@ -494,28 +615,37 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
 
 	thread.start();
         }
-        else{
-            System.out.println("Watson receiver disabled");
-        }
     }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox3ActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Choice choice1;
     private javax.swing.JButton jButton1;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
     private java.awt.TextField textField1;
     private java.awt.TextField textField2;
     private java.awt.TextField textField3;
@@ -539,11 +669,6 @@ public class OSC_Sender extends javax.swing.JFrame implements AUEmitter, Connect
 
     @Override
     public void onDisconnection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void stringArrayChanged(String[] stringArray) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

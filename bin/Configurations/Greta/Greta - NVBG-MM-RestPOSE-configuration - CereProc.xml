@@ -31,7 +31,7 @@
                     <window h="108" visible="true" w="517" x="10" y="10"/>
                 </element>
                 <element h="50.0" id="BML File Reader - 1544700914641-19" module="BML File Reader" name="BML File Reader" w="80.0" x="130.0" y="30.0">
-                    <parameter name="fileName" value=""/>
+                    <parameter name="fileName" value="C:\Users\Michele\Desktop\greta-gpl-2\greta-gpl\bin\Examples\DemoEN\MeaningMiner_BML_Example.xml"/>
                     <window h="108" visible="true" w="517" x="10" y="120"/>
                 </element>
                 <element h="230.0" id="Behavior Planner - 1544700734561-356" module="Behavior Planner" name="Behavior Planner" w="80.0" x="30.0" y="100.0">
@@ -69,40 +69,35 @@
                 <element h="50.0" id="Rest_Pose_Setter - 1621595871295-438" module="Rest_Pose_Setter" name="Rest_Pose_Setter" w="80.0" x="420.0" y="30.0">
                     <window h="148" visible="false" w="342" x="0" y="0"/>
                 </element>
-                <element h="50.0" id="ObjectNodeController - 1623053174475-321" module="ObjectNodeController" name="ObjectNodeController" w="80.0" x="290.0" y="170.0">
-                    <window h="258" visible="false" w="477" x="0" y="0"/>
-                </element>
             </element>
         </element>
         <element h="420.0" id="Ogre Player - 1544700973529-249" module="Ogre Player" name="Ogre Player" w="80.0" x="940.0" y="110.0">
-            <parameter name="posX" value="-0.20826545357704163"/>
-            <parameter name="posY" value="2.1872034072875977"/>
-            <parameter name="posZ" value="2.7177047729492188"/>
+            <parameter name="posX" value="0.007610022090375423"/>
+            <parameter name="posY" value="1.8200383186340332"/>
+            <parameter name="posZ" value="1.7420132160186768"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="-0.2592799663543701"/>
-            <parameter name="yaw" value="-0.029251636937260628"/>
+            <parameter name="pitch" value="-0.25928327441215515"/>
+            <parameter name="yaw" value="-0.0250861719250679"/>
             <window h="614" visible="true" w="736" x="10" y="230"/>
         </element>
     </elements>
     <connections>
-        <connection connector="SignalEmitterToSignalPerformer" source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="SignalEmitterToSignalPerformer" source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="IntentionEmitterToIntentionPerformer" source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="AUEmitterToAUPerformer" source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="AudioEmitter To AudioPerformer" source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="connectPlayerToEnvironment" source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
-        <connection connector="SignalEmitterToSignalPerformer" source="ObjectNodeController - 1623053174475-321" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="ObjectNodeControllerGaze_SIgnalEmitterToSignalPerformer" source="ObjectNodeController - 1623053174475-321" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="ObjectNodeControllerGaze_SIgnalEmitterToSignalPerformer" source="ObjectNodeController - 1623053174475-321" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer" source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="addLogOutput" source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="SignalEmitterToSignalPerformer" source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544712930520-534" target="Face Keyframe Performer - 1554477289165-429"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
-        <connection connector="AudioEmitter To AudioPerformer" source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="SignalEmitterToSignalPerformer" source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="LipSourceForLipBlender" source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer" source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="addLogOutput" source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="IntentionEmitterToIntentionPerformer" source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="AUEmitterToAUPerformer" source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="connectAnimatableToEnvironment" source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
         <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
     </connections>
 </modulated>

@@ -45,6 +45,8 @@ import java.util.Map;
 public class FaceKeyframePerformer implements CancelableKeyframePerformer, AUEmitter {
     private CharacterManager characterManager;
     private boolean interpolate;
+    
+    private boolean stopped=false;
 
     private int frameDelay = 5;
     private int framesPerLaps = 1;//Constants.FRAME_PER_SECOND;
@@ -68,6 +70,12 @@ public class FaceKeyframePerformer implements CancelableKeyframePerformer, AUEmi
         interpolate = true;
         Thread t = new Thread(() -> {
             while(interpolate){
+                //System.out.println(stopped+ "  "+ characterManager.blink);
+                if(stopped && characterManager.blink==true){
+                    //System.out.println("Start Blink");
+                    startBlinking();
+                    stopped=false;
+                }
                 long begin = Timer.getTimeMillis();
                 int timeFrame = (int)(begin/Constants.FRAME_DURATION_MILLIS) + frameDelay;
                 if(!interpolator.isEmptyAt(timeFrame)){
@@ -108,13 +116,26 @@ public class FaceKeyframePerformer implements CancelableKeyframePerformer, AUEmi
             @Override
             public void run() {
                 while (interpolate && this.equals(blinker)) {
+                    if(characterManager.blink==false){
+                        stopBlinking();
+                         break;
+                    }
                     Timer.sleep((long)Functions.changeInterval(Math.random(), 0, 1, 2500, 5000));
                     blink();
+                    
                 }
             }
         };
         blinker.setDaemon(true);
         blinker.start();
+    }
+    
+    public void stopBlinking(){
+        
+        stopped=true;
+        //System.out.println("stopBlinking() "+ stopped);
+        blinker.stop();
+            
     }
 
     private void blink () {

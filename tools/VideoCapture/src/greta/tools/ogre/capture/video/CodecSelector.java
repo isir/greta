@@ -19,6 +19,7 @@ package greta.tools.ogre.capture.video;
 
 import com.xuggle.xuggler.ICodec;
 import com.xuggle.xuggler.IContainerFormat;
+import java.io.File;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
@@ -40,6 +41,10 @@ public class CodecSelector extends javax.swing.JFrame {
      */
     public CodecSelector() {
         initComponents();
+        jFileChooser1 = new javax.swing.JFileChooser();
+        jFileChooser1.setCurrentDirectory(new File("./"));
+        jFileChooser1.removeChoosableFileFilter(jFileChooser1.getAcceptAllFileFilter());
+        jFileChooser1.setAcceptAllFileFilterUsed(false);
         buildContainerComboBox();
         buildVideoCodecComboBox(((ContainerAdapt)(containerComboBox.getSelectedItem())).containerFormat);
         buildAudioCodecComboBox(((ContainerAdapt)(containerComboBox.getSelectedItem())).containerFormat);
@@ -177,12 +182,15 @@ public class CodecSelector extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jFileChooser1 = new javax.swing.JFileChooser();
         jLabel1 = new javax.swing.JLabel();
         videoCodecComboBox = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         audioCodecComboBox = new javax.swing.JComboBox();
         containerComboBox = new javax.swing.JComboBox();
+        jLabel4 = new javax.swing.JLabel();
+        textField1 = new java.awt.TextField();
 
         jLabel1.setText("Container");
 
@@ -208,6 +216,15 @@ public class CodecSelector extends javax.swing.JFrame {
             }
         });
 
+        jLabel4.setText("Audio_backgr");
+
+        textField1.setText("textField1");
+        textField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -215,14 +232,21 @@ public class CodecSelector extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(videoCodecComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(containerComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(audioCodecComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(videoCodecComboBox, 0, 308, Short.MAX_VALUE)
+                            .addComponent(containerComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(audioCodecComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -240,7 +264,11 @@ public class CodecSelector extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(audioCodecComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(59, Short.MAX_VALUE))
         );
 
         pack();
@@ -260,12 +288,20 @@ public class CodecSelector extends javax.swing.JFrame {
         fireFormatChanged();
     }//GEN-LAST:event_audioCodecComboBoxActionPerformed
 
+    private void textField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textField1ActionPerformed
+
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox audioCodecComboBox;
     private javax.swing.JComboBox containerComboBox;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private java.awt.TextField textField1;
     private javax.swing.JComboBox videoCodecComboBox;
     // End of variables declaration//GEN-END:variables
 }

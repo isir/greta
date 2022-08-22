@@ -744,7 +744,7 @@ public class VHMSG implements javax.jms.MessageListener
                     message += temp;
                 }
                 
-                System.out.println(message);
+                Logs.debug(message);
 
                 //System.out.println( "onMessage() (parsed): " + message );
 
@@ -886,7 +886,7 @@ public class VHMSG implements javax.jms.MessageListener
                     message += temp;
                 }
                 
-                System.out.println(message);
+                Logs.debug(message);
 
                 //System.out.println( "onMessage() (parsed): " + message );
 

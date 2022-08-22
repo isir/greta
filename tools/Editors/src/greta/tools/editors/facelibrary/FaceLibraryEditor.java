@@ -42,6 +42,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -80,8 +81,10 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
             aus[i].setEnabled(auLibrary.get("AU" + (i+1)) != null); //disable au when not implemented in AU lib
         }
 
-        JButton resetButton = new JButton("reset");//TODO use localizedJButton
+        JButton resetButton = new JButton("apply");//TODO use localizedJButton
         JButton reset0Button = new JButton("reset to zero");//TODO use localizedJButton
+        JCheckBox blink0Button = new JCheckBox("blink");//TODO use localizedJButton
+        blink0Button.setSelected(true);
         JLabel faceexpLabel = new JLabel("Facial expression");//TODO use localizedJLabel
         JTabbedPane tabbedPane = new JTabbedPane();
         instancesComboBox = new JComboBox();
@@ -99,6 +102,21 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
                 setToZero();
             }
         });
+        
+        blink0Button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(blink0Button.isSelected()){
+                    cm.setBlink(true);
+                     //System.out.println("Set blink true");
+                }
+                else{
+                    cm.setBlink(false);
+                    //System.out.println("Set blink false");
+                }
+            }
+        });
+        
 
         tabbedPane.setBorder(javax.swing.BorderFactory.createTitledBorder("FACS"));
         addTab(tabbedPane, "UpperFace AUs", 1, 2, 4, 5, 6, 7, 43);
@@ -133,6 +151,8 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
                 .addComponent(resetButton)
                 .addGap(18, 18, 18)
                 .addComponent(reset0Button)
+                .addGap(18, 18, 18)
+                .addComponent(blink0Button)
                 .addGap(0, 195, Short.MAX_VALUE)))
                 .addContainerGap()));
         layout.setVerticalGroup(
@@ -143,7 +163,8 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
                 .addComponent(faceexpLabel)
                 .addComponent(instancesComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(resetButton)
-                .addComponent(reset0Button))
+                .addComponent(reset0Button)
+                .addComponent(blink0Button))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tabbedPane, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addContainerGap()));
@@ -193,6 +214,7 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
         scrollPane.setPreferredSize(preferred);
         return scrollPane;
     }
+    
 
     private void newExpression() {
         String name = JOptionPane.showInputDialog(this, "Facial expression name:", "New Facial Expression", JOptionPane.PLAIN_MESSAGE);
@@ -295,7 +317,7 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
         Collections.sort(faceexpNames, String.CASE_INSENSITIVE_ORDER);
 
         instancesComboBox.removeAllItems();
-
+        instancesComboBox.addItem("neutral");
         for (String faceexp : faceexpNames) {
             instancesComboBox.addItem(faceexp);
         }
@@ -310,7 +332,12 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
 
 
     private void applySelectedExpression() {
+        if(instancesComboBox.getSelectedItem().toString()=="neutral"){
+            setFaceExpression(getFaceexp("agree"));
+        }
+        else{
         setFaceExpression(getFaceexp(instancesComboBox.getSelectedItem().toString()));
+        }
     }
 
     private void setToZero() {

@@ -21,6 +21,8 @@ import greta.core.repositories.AUItem;
 import greta.core.util.CharacterDependent;
 import greta.core.util.CharacterManager;
 import greta.core.util.enums.GazeDirection;
+import greta.core.util.enums.GazeMode;
+import greta.core.util.enums.GazeType;
 import greta.core.util.enums.Influence;
 import greta.core.util.enums.Side;
 import greta.core.util.time.TimeMarker;
@@ -43,6 +45,34 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
     private TimeMarker end;
     private List<TimeMarker> timeMarkers;
     private ArrayList<AUItem> actionUnits;
+    private GazeType type;
+    private Double speed;
+    private GazeMode mode;
+    
+
+    public GazeType getType() {
+        return type;
+    }
+
+    public void setType(GazeType type) {
+        this.type = type;
+    }
+    
+    public GazeMode getMode() {
+        return mode;
+    }
+
+    public void setMode(GazeMode mode) {
+        this.mode = mode;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public void setSpeed(double speed) {
+        this.speed = speed;
+    }
 
     private boolean shift = false;
 
@@ -96,6 +126,9 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         target = "";
         offsetDirection = GazeDirection.FRONT;
         offsetAngle = 0.0;
+        speed=0.0;
+        type=GazeType.GAZE;
+        mode=GazeMode.DEFAULT;
     }
 
     public boolean isGazeShift() {
@@ -308,6 +341,8 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
             }*/
 
             setTarget(tree.getAttribute("target"));
+        }else{
+            setTarget("Gaze_target");
         }
         //origin
         if(tree.hasAttribute("origin")) {
@@ -347,6 +382,15 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         }
         if(tree.hasAttribute("offsetAngle") && offsetDirection != null) {
             setOffsetAngle(Double.parseDouble(tree.getAttribute("offsetAngle")));
+        }
+        if(tree.hasAttribute("type") && type!=null) {
+            setType(GazeType.valueOf(tree.getAttribute("type")));
+        }
+        if(tree.hasAttribute("modality") && mode!=null) {
+            setMode(GazeMode.valueOf(tree.getAttribute("modality")));
+        }
+        if(tree.hasAttribute("speed") && speed!=null) {
+            setSpeed(Double.parseDouble(tree.getAttribute("speed")));
         }
         //sync attributes
         if (tree.hasAttribute("start")) {

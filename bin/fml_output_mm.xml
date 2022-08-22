@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fml-apml>
+    
+	<bml>
+		<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				Hello,
+			<tm id="tm2"/>
+				My name is Camille.
+			<tm id="tm3"/>	
+				I am one of the virtual character
+			<tm id="tm4"/>
+				 of the Greta platform.
+			<tm id="tm5"/>	
+				
+			
+			<pitchaccent end="s1:tm4" id="pa2" importance="1" level="medium" start="s1:tm3" type="HStar"/>
+			<boundary end="s1:tm5+0.5" id="b1" start="s1:tm5" type="LL"/>
+		</speech>
+	</bml>
+<fml>
+	
+		<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0"/>-->
+		<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0" target="Andre_chair0" />-->
+		<!--<performative id="p1" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>-->
+		<beat end="s1:tm3" id="b1" importance="1.0" start="0" type="pos"/>
+		<!--<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>-->
+		<!--<performative id="p2" type="propose" start="s1:tm3" end="s1:tm5" importance="1.0"/>-->
+		<!--<rest id="rp1" type="restpose" start="0" end="s1:tm5" importance="1.0"/>-->
+	
+
+    
+        <ideationalunit end="s1:tm7-0.2" id="id_1" importance="1.0" main="im_5" start="s1:tm1-0.2"/>
+        <imageschema POSroot="noun" end="s1:tm9-0.2" id="im_5" importance="1.0" indexword="5" previous="true" start="s1:tm5-0.2" type="link"/>
+        <ideationalunit end="s1:tm11-0.2" id="id_2" importance="1.0" main="im_10" start="s1:tm1-0.2"/>
+        <imageschema POSroot="noun" end="s1:tm20-0.2" id="im_10" importance="1.0" indexword="7" previous="true" start="s1:tm14-0.2" type="object"/>
+        <imageschema POSroot="noun" end="s1:tm21-0.2" id="im_11" importance="1.0" indexword="11" start="s1:tm20-0.2" type="surface"/>
+    
+
+
+</fml>
+</fml-apml>

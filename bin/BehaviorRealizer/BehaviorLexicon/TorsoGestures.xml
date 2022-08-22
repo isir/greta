@@ -291,14 +291,15 @@
 	</torso>
 	
 	<torso id="Neutral" lexeme="Neutral" repetition="2" amount="0.5">
-		<KeyPoint type ="stroke">
-			<Rotations>
-				<vt2 x= "-0.00 " y= "0.0" z= "0.0" w="0.0"/>
-				<vt5 x= "-0.0 " y= "0.0" z= "0.0" w="0.9999875000260416"/>
-				<vt12 x= "0.0 " y= "0.0" z= "0.0" w="0.9915494992169386"/>
-				<vl5 x= "0.0 " y= "0.0" z= "0.0" w="1.0"/>
-			</Rotations>
-		</KeyPoint>
+		<KeyPoint type ="strokeEnd">
+		<Rotations>
+		<vt2 x= "0.0 " y= "0.0" z= "0.0" w="1.0"/>
+		<vc1 x= "0.0 " y= "0.0" z= "0.0" w="1.0"/>
+		<vt5 x= "0.0 " y= "0.0" z= "0.0" w="1.0"/>
+		<vt12 x= "0.0 " y= "0.0" z= "0.0" w="1.0"/>
+		<vl5 x= "0.0 " y= "0.0" z= "0.0" w="1.0"/>
+		</Rotations>
+</KeyPoint>
 	</torso>
 
 	<torso id="TurnLeftAndBack" lexeme="LeanLeftAndBack" repetition="2" amount="0.5">

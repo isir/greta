@@ -17,14 +17,18 @@
  */
 package greta.core.util;
 
+import greta.core.util.enums.DistanceType;
 import greta.core.util.environment.Environment;
 import greta.core.util.log.Logs;
 import greta.core.util.speech.TTS;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class contains informations about characters that can be used by the system.<br/>
@@ -41,9 +45,11 @@ public class CharacterManager {
     //private static final String DEFAULT_CHARACTER_NAME = "CAMILLE";
     private static final String DEFAULT_CHARACTER_KEY = "DEFAULT_CHARACTER";
 
+    
     private static CharacterManager staticInstance;
     private static int count=0;
 
+    private Gaze_Target gaze_t;
 
     private Map<String, String> characterMapFile;
     private IniManager characterDefinitions;
@@ -54,7 +60,38 @@ public class CharacterManager {
     public String currentCameraId;
     private String id;
     private TTS tts;
+    private boolean asap_enabled=false;
+    private DistanceType distance=DistanceType.SOCIAL;
+    private boolean isrunning=false;
 
+    public boolean isIsrunning() {
+        return isrunning;
+    }
+
+    public void setIsrunning(boolean isrunning) {
+        this.isrunning = isrunning;
+    }
+    
+
+    public DistanceType getDistance() {
+        return distance;
+    }
+
+    public void setDistance(DistanceType distance) {
+        this.distance = distance;
+    }
+    
+    
+
+    public boolean isAsap_enabled() {
+        return asap_enabled;
+    }
+
+    public void setAsap_enabled(boolean asap_enabled) {
+        this.asap_enabled = asap_enabled;
+    }
+
+    
     private greta.core.util.environment.TreeNode currentCharacterHeadFromUnity;
 
     static{
@@ -62,15 +99,53 @@ public class CharacterManager {
     }
     private final Environment env;
 
+    public boolean isBlink() {
+        return blink;
+    }
+
+    public void setBlink(boolean blink) {
+        this.blink = blink;
+    }
+
     public String toString(){
         return id;
     }
 
-    public boolean use_NVBG=true;
-    public boolean use_MM=true;
+    public boolean use_NVBG=false;
+    public boolean use_MM=false;
     public String rest_pose="";
+    public boolean touch_computed=false;
+    public String touch_gesture_computed=null;
+
+    public boolean isTouch_computed() {
+        return touch_computed;
+    }
+
+    public void setTouch_computed(boolean touch_computed) {
+        this.touch_computed = touch_computed;
+    }
+
+    public String getTouch_gesture_computed() {
+        return touch_gesture_computed;
+    }
+
+    public void setTouch_gesture_computed(String touch_gesture_computed) {
+        this.touch_gesture_computed = touch_gesture_computed;
+    }
+
+    public Map<String, String> getGesture_map() {
+        return gesture_map;
+    }
+
+    public void setGesture_map(Map<String, String> gesture_map) {
+        this.gesture_map = gesture_map;
+    }
     
+    public boolean blink=true;
+    public Map<String,String> gesture_map=new HashMap<String,String>();
     public CharacterManager(Environment env, String id){
+        this.gaze_t=new Gaze_Target();
+        
         this.id = id;
         this.env = env;
         dependents = new ArrayList<>();
@@ -86,7 +161,23 @@ public class CharacterManager {
         setCharacter(IniManager.getGlobals().getValueString("CURRENT_CHARACTER"));
         this.currentCharacterHeadFromUnity = null;
         count++;
+        gesture_map.put("emotion-StrokeR","performative=TouchArm_Stroke_Ges_R");
+        gesture_map.put("emotion-StrokeL","performative=TouchArm_Stroke_Ges_L");
+        gesture_map.put("emotion-TapR","performative=TouchArm_Tap_Ges_R");
+        gesture_map.put("emotion-TapL","performative=TouchArm_Tap_Ges_L");
+        gesture_map.put("emotion-HitR","performative=TouchArm_Hit_Ges_R");
+        gesture_map.put("emotion-HitL","performative=TouchArm_Hit_Ges_L");
+        gesture_map.put("emotion-TouchR","performative=TouchArm_Ges_R");
+        gesture_map.put("emotion-TouchL","performative=TouchArm_Ges_L");
         Logs.info(String.format("CharacterManager '%s' created",id));
+    }
+
+    public Gaze_Target getGaze_t() {
+        return gaze_t;
+    }
+
+    public void setGaze_t(Gaze_Target gaze_t) {
+        this.gaze_t = gaze_t;
     }
 
     public CharacterManager(Environment env){
@@ -176,7 +267,7 @@ public class CharacterManager {
      */
     public void setCharacter(String name) {
         String fileName = fileNameOfCharacter(name);
-
+        System.out.println("greta.core.util.CharacterManager.setCharacter()");
         if (fileName != null) {
             currentCaracterName = name;
             characterDefinitions.setDefinition(fileName);
@@ -451,4 +542,5 @@ public class CharacterManager {
     public void setCurrentCharacterHeadFromUnity(greta.core.util.environment.TreeNode currentCharacterHeadFromUnity) {
         this.currentCharacterHeadFromUnity = currentCharacterHeadFromUnity;
     }
+    
 }

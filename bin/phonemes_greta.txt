@@ -1,0 +1,38 @@
+a == aa
+e == ee
+i == 
+o
+u
+y
+a1
+e1
+i1
+o1
+u1
+E1
+O1
+b
+m
+p
+
+f
+v
+pause
+c
+d
+f
+g
+h
+k
+l
+n
+q
+r
+s
+t
+w
+z
+SS
+tS
+th
+

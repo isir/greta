@@ -1,0 +1,83 @@
+material "_Eye_trans"
+{
+	technique _Eye_trans_technique
+	{
+		pass _Eye_trans_standard
+		{
+			shading phong
+			ambient 0 0 0 0.1405
+			diffuse 0.09092 0.09092 0.09092 0.1405
+			specular 0.95868 0.95868 0.95868 1 110.209
+			emissive 0 0 0 0.1405
+
+			scene_blend alpha_blend
+			depth_write off
+		}
+	}
+}
+material "_Body"
+{
+	technique _Body_technique
+	{
+		pass _Body_standard
+		{
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+			vertex_program_ref vsLightGENNORM0
+			{
+			}
+			fragment_program_ref fpLightGENDIFF0NORM0
+			{
+				param_named normalMul float 0.3
+			}
+
+			texture_unit _Body_Diffuse#0
+			{
+				texture Garcon_Diff.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+
+			texture_unit _Body_Unknown#1
+			{
+				texture Garcon_Alpha.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+
+			texture_unit _Body_Normal#2
+			{
+				texture Garcon_Nmap.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+		}
+	}
+	technique _Body_basic_technique
+	{
+	scheme basic_mat
+		pass _Body_standard
+		{
+			ambient 1 1 1 1
+			diffuse 1 1 1 1
+			specular 0 0 0 0 25.5
+			emissive 0 0 0 1
+
+			texture_unit _Body_Diffuse#3
+			{
+				texture Garcon_Diff.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+
+			texture_unit _Body_Unknown#4
+			{
+				texture Garcon_Alpha.jpg
+				tex_coord_set 0
+				colour_op modulate
+			}
+		}
+	}
+}

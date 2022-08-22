@@ -1,0 +1,13 @@
+Type,totalDuration,initialImpactVelocity,meanForce,meanVelocity,frame,timestep,velocity,force,tactileCell,handPart,positionHeadX,positionHeadY,positionTorsoX,positionTorsoY,positionMemberX,positionMemberY
+tapotement,0,007546663,3,222806,NaN,0,,,,,,,,,,,,
+,,,,180,3,720332,3,222806,0,3018035,Spine3,L_pinky_end,,,0,0837937,0,,
+,,,,180,3,727078,3,153017,0,2996179,Spine3,L_pinky_c,,,0,0772462,0,,
+,,,,180,3,727175,2,567189,0,3123881,Spine1,L_thumb_b,,,0,524024,0,,
+,,,,180,3,727307,2,567189,0,3123881,HeadCollider,L_thumb_b,0,5834169,0,08763867,,,,
+,,,,180,3,727407,2,567189,0,3123881,Spine3,L_thumb_b,,,0,02770603,0,,
+,,,,180,3,727491,2,567189,0,3123881,RightArm,L_thumb_b,,,,,0,1406484,0,8766095
+,,,,180,3,727567,3,219012,0,4637829,Spine1,L_thumb_end,,,0,517049,0,,
+,,,,180,3,727651,3,219012,0,4637829,HeadCollider,L_thumb_end,0,5616283,0,07333811,,,,
+,,,,180,3,727727,3,219012,0,4637829,Spine3,L_thumb_end,,,0,03415667,0,,
+,,,,180,3,727804,3,219012,0,4637829,Spine4,L_thumb_end,,,,,0,0,550327
+,,,,180,3,727879,3,219012,0,4637829,RightArm,L_thumb_end,,,,,0,1530062,0,8502724

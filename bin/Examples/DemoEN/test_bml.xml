@@ -1,0 +1,7 @@
+<bml xmlns="http://www.bml-initiative.org/bml/bml-1.0" id="gazeBMLTest1">
+	<gaze id="gaze1" start="1.0" end="3.0" influence="EYES"
+		origin="A" target="Andre_chair0"/>
+</bml>
+
+
+

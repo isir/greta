@@ -1,0 +1,14 @@
+#! /usr/bin/env python
+
+import os
+import subprocess
+import sys
+
+cur_dir = os.path.dirname(os.path.realpath(__file__))
+
+ia = os.path.join(cur_dir, "liaphon_build", "script", "lia_text2phon")
+command = [ia] + sys.argv[1:]
+os.environ["LIA_PHON_REP"] = os.path.join(cur_dir, "liaphon_build") + os.sep
+
+sys.exit(subprocess.call(command, env=os.environ, shell=False))
+

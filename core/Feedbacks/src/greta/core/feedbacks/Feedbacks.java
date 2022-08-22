@@ -17,20 +17,31 @@
  */
 package greta.core.feedbacks;
 
+import com.illposed.osc.OSCMessage;
+import com.illposed.osc.OSCSerializeException;
+import com.illposed.osc.transport.udp.OSCPortOut;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionPerformer;
 import greta.core.signals.Signal;
+import greta.core.signals.SignalEmitter;
 import greta.core.signals.SignalPerformer;
 import greta.core.signals.SpeechSignal;
+import greta.core.signals.gesture.GestureSignal;
 import greta.core.util.CharacterManager;
 import greta.core.util.Mode;
+import greta.core.util.enums.DistanceType;
 import greta.core.util.id.ID;
+import greta.core.util.id.IDProvider;
 import greta.core.util.log.Logs;
 import greta.core.util.time.Temporizable;
 import greta.core.util.time.TimeMarker;
 import greta.core.util.time.Timer;
+import java.io.IOException;
+import java.net.InetAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * This class is the Greta's Feedbacks manager<br/><br/> It manages feedbacks
@@ -46,23 +57,35 @@ import java.util.List;
  *
  * @author Ken Prepin
  */
-public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerformer, IntentionPerformer {
+public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerformer, IntentionPerformer, SignalEmitter {
+
+     private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
+     List<Signal> signals = new ArrayList<Signal>();
+     
 
     private class FeedbackThread extends Thread {
 
         private boolean threadStarted;
+        private boolean still_running=false;
+        private Map map=new HashMap();  
+        public CharacterManager charactermanager;
+        private List<Boolean> li= new ArrayList<Boolean>();
 
-        public FeedbackThread() {
+        public FeedbackThread(CharacterManager cm) {
             this.setDaemon(true);
             threadStarted = true;
+            charactermanager=cm;
         }
 
         public void stopTh() {
             threadStarted = false;
         }
+        
+        TimeMarker start_timemarker;
 
         @Override
         public void run() {
+           
             while (threadStarted) {
                 synchronized (Feedbacks.this) {
                     //System.out.println("listStartedAnimations.isEmpty()"+listStartedAnimations.isEmpty());
@@ -83,6 +106,7 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
                             tmpList.update();
 
                             TimeMarker last_timemarker = tmpList.updateTimeMarker(speech_sgnl);
+                            start_timemarker=last_timemarker;
 
                             if(last_timemarker.getName() != "" && last_timemarker.getName() != oldTimeMarker_ID){
                                 oldTimeMarker_ID = last_timemarker.getName();
@@ -113,9 +137,66 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
                         }
                     }
                 }
+               // System.out.println("IS STILL RUNNING:"+listStartedAnimations.size()+"   "+oscOut);
+                if(listStartedAnimations.size()>0){
+                    still_running=true;
+                    charactermanager.setIsrunning(still_running);
+                }else{
+                    still_running=false;
+                    charactermanager.setIsrunning(still_running);
+                }
+                
+                
+                li.add(still_running);
+                OSCMessage msg = new OSCMessage("/unity/animation_running",li); 
+                if(oscOut!=null){
+                    sendOSC("/", map);
+                    map.put("unity/animation_running", still_running);
+                    try {
+                        //System.out.println(oscOut+"  "+msg.toString());
+                        oscOut.send(msg);
+                    } catch (IOException ex) {
+                    } catch (OSCSerializeException ex) {
+                    }
+                }
+                
+                if(still_running && this.charactermanager.isTouch_computed() && this.charactermanager.getDistance()==DistanceType.INTIMATE){
+                    
+                    GestureSignal gs = new GestureSignal("1");
+                    String[] gesture = this.charactermanager.getTouch_gesture_computed().split("=");
+                    gs.setCategory(gesture[0]);
+                    gs.setReference(gesture[1]);
+                    gs.setStart(start_timemarker);
+                    TimeMarker end_timeMarker=start_timemarker;
+                    end_timeMarker.setValue(start_timemarker.getValue()+2);
+                    gs.setEnd(end_timeMarker);
+                    ID id = IDProvider.createID("1");
+                    Mode mode = new Mode("blend");
+                    for (SignalPerformer performer : signal_performers) {
+                         performer.performSignals(signals, id, mode);
+                    }
+                    
+                }
+                   
+                
             }
+            
         }
     }
+    
+            
+    private void sendOSC(String root, Map<String,Boolean> map){
+        try {
+            for (String key : map.keySet()) {
+                final List<Boolean> args = new ArrayList<>();
+                args.add(map.get(key));
+                OSCMessage msg = new OSCMessage(root+key, args);  
+                if(oscOut!=null)
+                    oscOut.send(msg);            
+            }
+        } catch (OSCSerializeException | IOException ex) {
+        } 
+    }   
 
     private CharacterManager charactermanager;
     /**
@@ -143,6 +224,25 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
     private FeedbackThread feedbackThread;
     private SpeechSignal speech_sgnl;
     public String oldTimeMarker_ID = "";
+    private OSCPortOut oscOut = null;
+
+    public OSCPortOut getOscOut() {
+        return oscOut;
+    }
+
+    public void setOscOut(OSCPortOut oscOut) {
+        this.oscOut = oscOut;
+    }
+
+    public int getOscPort() {
+        return oscPort;
+    }
+
+    public void setOscPort(int oscPort) {
+        this.oscPort = oscPort;
+    }
+    private int oscPort = 9000;   
+    
 
     public Feedbacks(CharacterManager cm) {
         this.charactermanager = cm;
@@ -155,9 +255,51 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
         startThread();
     }
 
+    public List<TemporizableList> getListPendingAnimations() {
+        return listPendingAnimations;
+    }
+
+
+    public void setListPendingAnimations(List<TemporizableList> listPendingAnimations) {
+        this.listPendingAnimations = listPendingAnimations;
+    }
+
+    public List<TemporizableList> getListDeadAnimations() {
+        return listDeadAnimations;
+    }
+
+    public void setListDeadAnimations(List<TemporizableList> listDeadAnimations) {
+        this.listDeadAnimations = listDeadAnimations;
+    }
+
+    public List<TemporizableList> getListStoppedAnimations() {
+        return listStoppedAnimations;
+    }
+
+    public void setListStoppedAnimations(List<TemporizableList> listStoppedAnimations) {
+        this.listStoppedAnimations = listStoppedAnimations;
+    }
+
+    public List<TemporizableList> getListStartedAnimations() {
+        return listStartedAnimations;
+    }
+
+    public void setListStartedAnimations(List<TemporizableList> listStartedAnimations) {
+        this.listStartedAnimations = listStartedAnimations;
+    }
+
+    public SpeechSignal getSpeech_sgnl() {
+        return speech_sgnl;
+    }
+
+    public void setSpeech_sgnl(SpeechSignal speech_sgnl) {
+        this.speech_sgnl = speech_sgnl;
+    }
+
     public final void startThread() {
+        System.out.println("START FEEDBACK THREAD");
         if (feedbackThread == null || !feedbackThread.isAlive()) {
-            feedbackThread = new FeedbackThread();
+            feedbackThread = new FeedbackThread(charactermanager);
             feedbackThread.start();
         }
     }
@@ -276,5 +418,15 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
     @Override
     public void performIntentions(List<Intention> list, ID requestId, Mode mode) {
         performAnimation(list, requestId);
+    }
+    
+        @Override
+    public void addSignalPerformer(SignalPerformer sp) {
+        signal_performers.add(sp);
+    }
+
+    @Override
+    public void removeSignalPerformer(SignalPerformer sp) {
+        signal_performers.remove(sp);
     }
 }

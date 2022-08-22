@@ -1,0 +1,35 @@
+VERSION=1.0
+N=17   L=16   
+I=0    W=!NULL               
+I=1    W=!NULL               
+I=2    W=##                  
+I=3    W=ii                  
+I=4    W=ww                  
+I=5    W=aa                  
+I=6    W=##                  
+I=7    W=ai                  
+I=8    W=ss                  
+I=9    W=sp                  
+I=10   W=yy                  
+I=11   W=ou                  
+I=12   W=rr                  
+I=13   W=nn                  
+I=14   W=aa                  
+I=15   W=mm                  
+I=16   W=##                  
+J=0     S=16   E=1    
+J=1     S=0    E=2    
+J=2     S=2    E=3    
+J=3     S=3    E=4    
+J=4     S=4    E=5    
+J=5     S=5    E=6    
+J=6     S=6    E=7    
+J=7     S=7    E=8    
+J=8     S=8    E=9    
+J=9     S=9    E=10   
+J=10    S=10   E=11   
+J=11    S=11   E=12   
+J=12    S=12   E=13   
+J=13    S=13   E=14   
+J=14    S=14   E=15   
+J=15    S=15   E=16   

@@ -833,6 +833,15 @@ public class GestureSignal extends ParametricSignal implements MultiStrokeSignal
         return end;
     }
 
+
+    public void setStart(TimeMarker tm_start) {
+        start=tm_start;
+    }
+
+
+    public void setEnd(TimeMarker tm_end) {
+        end=tm_end;
+    }
     public GestureSignal generateMirrorGesture(String mirrorGestureId) {
 
         GestureSignal mirrorGesture = new GestureSignal(mirrorGestureId);

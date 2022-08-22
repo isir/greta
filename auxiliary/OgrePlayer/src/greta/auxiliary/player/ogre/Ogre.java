@@ -86,8 +86,11 @@ public class Ogre {
                 externalLibPath += "Linux32/";
             }
         }
-        try {
-            Field field = ClassLoader.class.getDeclaredField("usr_paths");
+        try { 
+
+            
+            final Field field = ClassLoader.class.getDeclaredField("usr_paths");
+            System.out.println(ClassLoader.class.getDeclaredField("usr_paths"));
             field.setAccessible(true);
             String[] paths = (String[]) field.get(null);
             String[] tmp = new String[paths.length + 1];

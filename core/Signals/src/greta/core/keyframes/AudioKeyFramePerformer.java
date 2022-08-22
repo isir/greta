@@ -24,9 +24,12 @@ import greta.core.util.audio.AudioEmitter;
 import greta.core.util.audio.AudioPerformer;
 import greta.core.util.enums.CompositionType;
 import greta.core.util.id.ID;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -53,10 +56,17 @@ public class AudioKeyFramePerformer implements KeyframePerformer, AudioEmitter {
         ArrayList<Audio> audios = new ArrayList<Audio>();
         for (Keyframe kf : keyframes) {
             if (kf instanceof AudioKeyFrame) {
-                Audio audio = ((AudioKeyFrame) kf).getAudio();
-                if (audio != null) {
-                    audio.setTime(kf.getOffset());
-                    audios.add(audio);
+                try {
+                    // Here you can chnage the Audio source for the speech (or before if you want GRETA to not compute the audio from the fml/bml
+                    Audio audio = ((AudioKeyFrame) kf).getAudio();
+                    System.out.println("greta.core.keyframes.AudioKeyFramePerformer.performKeyframes() "+audio.toString());
+                    audio.save("output.wav",true);
+                    if (audio != null) {
+                        audio.setTime(kf.getOffset());
+                        audios.add(audio);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(AudioKeyFramePerformer.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

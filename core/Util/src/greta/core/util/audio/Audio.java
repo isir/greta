@@ -15,11 +15,11 @@
  * along with Greta.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-package greta.core.util.audio;
-
+package greta.core.util.audio;  
 import greta.core.util.log.Logs;
 import greta.core.util.math.Functions;
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.DataInputStream;
 import java.io.File;
@@ -28,13 +28,19 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.StringWriter;
 import java.util.Comparator;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.UnsupportedAudioFileException;
+import org.python.util.PythonInterpreter;
 
 /**
  *
@@ -208,6 +214,7 @@ public class Audio {
             Logs.error(this.getClass().getName()+" : can not write the audio : the audio buffer or audio format is null.");
             return ;
         }
+        
 
         ByteArrayInputStream bais = new ByteArrayInputStream(audioBuffer);
         AudioInputStream ais = new AudioInputStream(bais, format, audioBuffer.length / format.getFrameSize());
@@ -250,8 +257,8 @@ public class Audio {
      * Saves this {@code Audio} in a specific file.
      * @param fileName the name of the target file.
      */
-    public void save(String fileName){
-        save(fileName, null);
+    public void save(String fileName,boolean asap) throws IOException{
+        save(fileName, null,asap);
     }
 
     /**
@@ -259,9 +266,68 @@ public class Audio {
      * @param fileName the name of the target file.
      * @param targetFormat the wanted audio format.
      */
-    public void save(String fileName, AudioFormat targetFormat){
+    public void save(String fileName, AudioFormat targetFormat, boolean asap) throws IOException{
         save(new File(fileName), targetFormat);
-    }
+        save(new File(fileName.replace("output","output1")), targetFormat);
+        System.out.println("greta.core.util.audio.Audio.save() "+fileName+"  "+asap+ "  "+ System.getProperty("user.dir")+"\\"+fileName);
+        
+        if(asap){
+        //put opensmile code there 
+        Thread thread = new Thread(){
+            public void run(){
+                try {
+                    String[] cmd = {
+                        "python",
+                        System.getProperty("user.dir")+"\\Scripts\\opensmile_greta.py",
+                    };
+                    Runtime rt = Runtime.getRuntime();
+                    Process proc = rt.exec(cmd);
+                    
+                    BufferedReader stdInput = new BufferedReader(new
+                InputStreamReader(proc.getInputStream()));
+                    BufferedReader stdError = new BufferedReader(new
+                InputStreamReader(proc.getErrorStream()));
+                    
+                    // Read the output from the command
+                    System.out.println("Here is the standard output of the command:\n");
+                    String s = null;
+                    while ((s = stdInput.readLine()) != null) {
+                        System.out.println(s);
+                    }
+                    
+                    // Read any errors from the attempted command
+                    System.out.println("Here is the standard error of the command (if any):\n");
+                    while ((s = stdError.readLine()) != null) {
+                        System.out.println(s);
+                    }       } catch (IOException ex) {
+                    Logger.getLogger(Audio.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+  };
+
+  thread.start();
+ 
+
+        // Test with Jython
+        //Jython works with Python2 not compatible with opensmile
+        //Properties props = new Properties();
+        //props.put("python.home",System.getProperty("user.dir")+"\\Common\\Lib\\External\\Jython\\Lib");
+        //props.put("python.console.encoding", "UTF-8");
+        //props.put("python.security.respectJavaAccessibility", "false");
+        //props.put("python.import.site", "false");
+        //Properties preprops = System.getProperties();
+        //PythonInterpreter.initialize(preprops, props, new String[0]);
+        //String[] arguments = {System.getProperty("user.dir")+"\\Scripts\\opensmile_greta.py", System.getProperty("user.dir")+"\\"+fileName,"-S"};
+        //PythonInterpreter python = new PythonInterpreter();
+        //StringWriter out = new StringWriter();
+        //python.setOut(out);
+        //python.execfile(System.getProperty("user.dir")+"\\Scripts\\opensmile_greta.py");
+        //String outputStr = out.toString();
+        //System.out.println(outputStr);
+        }
+}
+        
+      
 
     private AudioInputStream weMustKnowTheLengthToSave(AudioInputStream weWantToKnow) throws IOException{
         long skiped = 0;

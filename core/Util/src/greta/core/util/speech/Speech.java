@@ -27,6 +27,7 @@ import greta.core.util.time.Temporizable;
 import greta.core.util.time.TimeMarker;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLTree;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
@@ -251,13 +252,13 @@ public class Speech implements Temporizable{
      * @param fileName the name of the file.
      * @see greta.core.util.audio.Audio#save(java.lang.String) Audio.save(String)
      */
-    public void saveAudio(String fileName){
+    public void saveAudio(String fileName) throws IOException{
         if(audio==null){
             //try to call TTS ?
             Logs.error(this.getClass().getName()+" : can not write in file "+fileName+" : the audio is null.");
             return ;
         }
-        audio.save(fileName);
+        audio.save(fileName,this.cm.isAsap_enabled());
     }
 
     /**

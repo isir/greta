@@ -3,8 +3,6 @@ package greta.auxiliary.osc;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCSerializeException;
 import com.illposed.osc.transport.udp.OSCPortOut;
-import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
-import greta.auxiliary.openface2.util.StringArrayListener;
 import greta.auxiliary.zeromq.ConnectionListener;
 import greta.core.keyframes.face.AUEmitter;
 import greta.core.keyframes.face.AUPerformer;
@@ -25,9 +23,8 @@ import java.util.logging.Logger;
  */
 
 
-public class OSC_1 extends javax.swing.JFrame implements AUEmitter, ConnectionListener, StringArrayListener{
+public class OSC_1 extends javax.swing.JFrame implements AUEmitter, ConnectionListener{
     
-    private static final Logger LOGGER = Logger.getLogger(OpenFaceOutputStreamReader.class.getName());
 
     private static final Color green = new Color(0, 150, 0);
     private static final Color red = Color.RED;
@@ -71,9 +68,7 @@ public class OSC_1 extends javax.swing.JFrame implements AUEmitter, ConnectionLi
             useOSC = true;
         } catch (IOException ex) {
             useOSC = false;
-            LOGGER.log(Level.WARNING, null, ex);
         }
-        LOGGER.log(Level.INFO, String.format("startOSCOut port %d : %b", port, useOSC));
     }
     
     protected void stopOSCOut(){        
@@ -82,10 +77,8 @@ public class OSC_1 extends javax.swing.JFrame implements AUEmitter, ConnectionLi
             try {
                 oscOut.disconnect();
             } catch (IOException ex) {           
-                LOGGER.log(Level.WARNING, null, ex);
             }
         }
-        LOGGER.log(Level.INFO, String.format("stopOSCOut : %b",  !useOSC));
     }
     
     protected int getOscOutPort(){
@@ -93,7 +86,6 @@ public class OSC_1 extends javax.swing.JFrame implements AUEmitter, ConnectionLi
     }
     
     protected void setOscOutPort(int port){
-        LOGGER.log(Level.INFO, String.format("setOscOutPort : %d",  port));
         oscPort = port;      
     }
 
@@ -118,7 +110,6 @@ public class OSC_1 extends javax.swing.JFrame implements AUEmitter, ConnectionLi
                     oscOut.send(msg);            
             }
         } catch (OSCSerializeException | IOException ex) {
-            LOGGER.warning(ex.getLocalizedMessage());
         } 
     }
 
@@ -555,9 +546,7 @@ public class OSC_1 extends javax.swing.JFrame implements AUEmitter, ConnectionLi
                     System.out.println(oscOut+"  "+msg.toString());
                     oscOut.send(msg);
                 } catch (IOException ex) {
-                    Logger.getLogger(OpenFaceOutputStreamReader.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (OSCSerializeException ex) {
-                    Logger.getLogger(OpenFaceOutputStreamReader.class.getName()).log(Level.SEVERE, null, ex);
                 }
             
     }                                        
@@ -645,11 +634,6 @@ public class OSC_1 extends javax.swing.JFrame implements AUEmitter, ConnectionLi
 
     @Override
     public void onDisconnection() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void stringArrayChanged(String[] stringArray) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

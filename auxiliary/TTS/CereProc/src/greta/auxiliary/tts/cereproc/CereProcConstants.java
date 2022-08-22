@@ -257,6 +257,8 @@ public class CereProcConstants {
      * @return a sequence of Greta's {@code phonemes}
      */
     public static PhonemeType[] convertPhoneme(String language, String cerePhoneme){
+        
+        System.out.println(cerePhoneme);
 
         if (language.equalsIgnoreCase("en-us")) {
             Logs.warning("CereProcTTS: phoneme conversion not supported yet for language [" +  language + "] using conversion for language [en-GB] instead.");
@@ -268,6 +270,8 @@ public class CereProcConstants {
             Logs.error("CereProcTTS: phoneme conversion failed, language [" +  language + "] is not supported.");
             return null;
         }
+        
+        
         else {
             PhonemeType[] toReturn = correspondingPhonemesLangauge.get(cerePhoneme);
             if (toReturn == null) {

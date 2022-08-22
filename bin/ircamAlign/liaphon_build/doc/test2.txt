@@ -1,0 +1,6 @@
+Ceci est un test d'utilisation du système de phonétisation LIA_PHON
+qui a été développé au LIA par Frédéric Béchet. Ce système permet
+de nettoyer, étiqueter, accentuer et phonétiser un texte libre.
+Un module de génération d'une prosodie minimale est également fournie
+afin de générer des fichiers compatibles avec le synthétiseur de
+parole MBROLA. Bonne utilisation !

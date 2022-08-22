@@ -103,7 +103,7 @@ public class Vec3d {
     public double length() {
         double l = new Double(java.lang.Math.sqrt(data[0] * data[0]
                 + data[1] * data[1]
-                + data[2] * data[2])).doubleValue();
+                + data[2] * data[2]));
         return l;
     }
 

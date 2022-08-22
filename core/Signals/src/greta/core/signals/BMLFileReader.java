@@ -21,6 +21,7 @@ import greta.core.util.CharacterManager;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
+import greta.core.util.log.Logs;
 import greta.core.util.speech.Speech;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLParser;
@@ -95,7 +96,7 @@ public class BMLFileReader implements SignalEmitter {
     public ID load(String bmlFileName) throws JMSException, FileNotFoundException, TransformerException, ParserConfigurationException, SAXException, IOException, InterruptedException {
         //get the base file name to use it as requestId
         String base = (new File(bmlFileName)).getName().replaceAll("\\.xml$", "");
-
+        Logs.debug(base);
         //get the signals of the BML file
         bmlparser.setValidating(true);
         XMLTree bml = bmlparser.parseFile(bmlFileName);
@@ -106,23 +107,33 @@ public class BMLFileReader implements SignalEmitter {
         if(this.cm.use_NVBG){
         //Start traitement NVBG
         String input1=bml.toString();
+        
 	Scanner myReader = new Scanner(input1);
         String phrase="";
+        String bml_gaze="";
+        boolean target=true;
 	while (myReader.hasNextLine()) {
 	String data = myReader.nextLine();
 	data=data.trim();
+        if(data.contains("<gaze ") || data.contains("<gazeShift ")){
+             bml_gaze+=data;
+             if(!data.contains("gaze_target")&&!data.contains("target")){
+                 target=false;
+             }
+        }
 	if (!data.endsWith(">")) {
 		phrase+=data.replaceAll("<.*?>","")+" ";
-                System.out.println(phrase);
+                Logs.debug(phrase);
            }
 	}
+
         List<String> gestures=null;
         signals=new ArrayList<Signal>();
 	myReader.close();
         phrase=phrase.substring(0, phrase.length()-1);
                     XMLParser bmlparser = XML.createParser();
                     MessageSender msg_send = new MessageSender();
-                    System.out.println("INFO: "+phrase);
+                    Logs.debug("INFO: "+phrase);
                     phrase=phrase.replaceAll("  ", " ");
                     if(phrase.startsWith(" ")){
                         phrase=phrase.substring(1);
@@ -130,7 +141,7 @@ public class BMLFileReader implements SignalEmitter {
                     String construction="<bml>"+
                             "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
                             "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
-                    System.out.println(phrase.replaceAll("  ", " ").substring(1));
+                    Logs.debug(phrase.replaceAll("  ", " ").substring(1));
                     String[] sp=phrase.split(" ");
                     int i=0;
                     for(int j=0;j<sp.length;j++){
@@ -138,21 +149,28 @@ public class BMLFileReader implements SignalEmitter {
                         i++;
                     }
                     //this.getCharacterManager().getEn
-                    construction=construction+"\n</speech>\n<gaze id=\"gaze1\" start=\"1\" end=\"10\" target=\"Andre_chair0\"/>\n</bml>";
+                    Logs.debug("[BML GAZE] "+bml_gaze);
+                    if(target==false){
+                        bml_gaze=bml_gaze.replace("/>", " target=\"gaze_target\"/>");
+                    }
+                    construction=construction+"\n</speech>\n"+bml_gaze+"\n</bml>";
+                    Logs.debug("[BML GAZE] "+bml_gaze);
+                    System.out.println("USE NVBG:"+this.cm.use_NVBG);
+                    if(this.cm.use_NVBG){
                     gestures = msg_send.traitement_NVBG(phrase,this.cm.getEnvironment().getNVBG_Open());
                     this.cm.getEnvironment().setNVBG_Open(true);
-                    System.out.println("Out " + gestures);
+                    Logs.debug("Out " + gestures);
                     if(gestures!=null){
                     for(String y : gestures){
                     //System.out.println("what happens"+bml);
                     String[] k=y.split("importance");
                     y=k[0];
-                    System.out.println("what happens"+y);
+                    Logs.debug("what happens"+y);
                     String bml_modif=construction.toString();
                     String[] g=y.split("lexeme=");
                     String b= g[1].substring(1,g[1].indexOf(" ")-1);
                     String[] c=y.replace("<","").split(" ");
-                    System.out.println("TYPE:"+c[0]);
+                    Logs.debug("TYPE:"+c[0]);
                     String addend="<description priority=\"1\" type=\"gretabml\">"+
                             "\n<reference>"+c[0]+"="+b+"</reference>"+
                             "\n<intensity>1.000</intensity>"+
@@ -165,7 +183,7 @@ public class BMLFileReader implements SignalEmitter {
                             "\n<TEN.value>0.000</TEN.value>"+
                             "\n</description>";
                     bml_modif=construction.replaceAll("</bml>",y.replace(c[0],"gesture")+">\n"+addend+"\n</gesture>\n</bml>");
-                    System.out.println(bml_modif);
+                    Logs.debug(bml_modif);
                     DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
                     DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
                     Document document = docBuilder.parse(new InputSource(new StringReader(bml_modif)));
@@ -179,6 +197,7 @@ public class BMLFileReader implements SignalEmitter {
                     bml_mod = bmlparser.parseFile(System.getProperty("user.dir")+"\\test_fml.xml");
                     
                     }
+             }
         // Fin traitment NVBG
         
         
@@ -202,7 +221,8 @@ public class BMLFileReader implements SignalEmitter {
             signals.addAll(BMLTranslator.BMLToSignals(bml_mod, this.cm));
        }
         
-         signals.addAll(BMLTranslator.BMLToSignals(bml, this.cm));
+        signals.addAll(BMLTranslator.BMLToSignals(bml, this.cm));
+        
 
         ID id = IDProvider.createID(base);
         //send to all SignalPerformer added

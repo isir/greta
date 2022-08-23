@@ -96,14 +96,11 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
     private ID currentID;
 
-    private List<IncrementalityFeedbackPerformer> incFeedbackPerformers;
-
     private List<Keyframe> storeKeyframe;
 
     private int currentIndex;
 
     private ChunkSenderThread chunkSenderThread;
-    private ChunkSenderRunnable runnable;
 
     public IncrementalRealizerV2(CharacterManager cm) {
         setCharacterManager(cm);
@@ -128,11 +125,8 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         // environment
         environment = characterManager.getEnvironment();
 
-        incFeedbackPerformers = new ArrayList<>();
-
         storeKeyframe = new ArrayList<>();
-
-        runnable = new ChunkSenderRunnable();
+        
         chunkSenderThread = new ChunkSenderThread(keyframePerformers);
         chunkSenderThread.start();
 

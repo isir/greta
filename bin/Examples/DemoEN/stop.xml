@@ -15,5 +15,6 @@
 		</speech>
 	</bml>
 	<fml> <!-- target="Andre_chair0" -->
+		<rest id="r1" type="Along_big" start="s1:tm1" />
 	</fml>
 </fml-apml>

@@ -101,6 +101,9 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     private int currentIndex;
 
     private ChunkSenderThread chunkSenderThread;
+    
+    private double firstKeyframeOffset;
+    private double lastKeyframeOffset;
 
     public IncrementalRealizerV2(CharacterManager cm) {
         setCharacterManager(cm);
@@ -185,18 +188,12 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         // Step 4: adjust the timing of all key frame
         keyframes.sort(keyframeComparator);
 
-        /*double offsetToAdjust = 0;
-        for (Keyframe kf : keyframes) {
-            if(kf.getOffset() < offsetToAdjust){
-                offsetToAdjust = kf.getOffset();
-            }
-        }
+        /*for(Keyframe kf : keyframes){
+            System.out.println(kf.toString() + " --- " + kf.getOffset());
+        }*/
         
-        for (Keyframe kf : keyframes) {
-            kf.setOffset(1 + kf.getOffset() - offsetToAdjust);
-        }
+        //System.out.println(keyframes.get(keyframes.size() - 1).getOffset());
         
-        offsetToAdjust = 0;*/
         //  here:
         //      - we must manage the time for the three addition modes:
         //          - blend:    offset + now
@@ -241,7 +238,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
 
         if (requestId.toString().contains("stop")) {
-            System.out.println("stop");
+            System.out.println("----- Stop -----" + greta.core.util.time.Timer.getTime() + " --- " + (greta.core.util.time.Timer.getTime() - firstKeyframeOffset));
             this.stopAllAnims();
             chunkSenderThread.emptyChunkList();
             chunkSenderThread.closeQueue();
@@ -249,6 +246,9 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
                 performer.performKeyframes(keyframes, requestId, mode);
             }
         } else {
+            firstKeyframeOffset = keyframes.get(0).getOffset();
+            lastKeyframeOffset = keyframes.get(keyframes.size() - 1).getOffset();
+            System.out.println(firstKeyframeOffset + " --- " + lastKeyframeOffset + " --- " + (lastKeyframeOffset - firstKeyframeOffset));
             //CHUNKING KEYFRAMES
             TreeMap<Integer, List<Keyframe>> treeList = this.createChunk(keyframes);
 

@@ -41,8 +41,6 @@
             </menu>
             <item module="Behavior Realizer" name="Behavior Realizer"/>
 			<menu name="Incrementality">
-				<item module="Signal Scheduler" name="Signal Scheduler"/>
-				<item module="Incremental Realizer" name="Incremental Realizer"/>
 				<item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
 				<item module="IncRealizerInteraction" name="IncRealizerInteraction"/>
 			</menu>
@@ -1005,12 +1003,7 @@
             <object class="greta.auxiliary.sampleModule.IntentionForwarder" lib_id="greta_sampleModule"/>            
         </module>
 		<!-- Phil Sample Module ends -->
-		<module name="Incremental Realizer" style="BehaviorRealizer">
-			<object class="greta.auxiliary.incrementality.IncrementalRealizer" lib_id="greta_incrementality"/>
-		</module>
-		<module name="Signal Scheduler" style="Signals">
-			<object class="greta.auxiliary.incrementality.SignalScheduler" lib_id="greta_incrementality"/>
-		</module>
+		<!-- Incrementality modules -->
 		<module name="Incremental Realizer V2" style="BehaviorRealizer">
 			<object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
 		</module>
@@ -1020,6 +1013,7 @@
                 <link method="setLoader" on="frame"/>
             </frame>
 		</module>
+		<!-- Incrementality modules -->
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1621,12 +1615,6 @@
             <output class="greta.core.util.environment.Environment" lib_id="greta_util"/>
             <connect from="input" method="setLocalEnvironment" to="output"/>
             <disconnect from="input" method="setLocalEnvironment" to="null"/>
-        </connector>
-        <connector id="connectIncrementalFeedbackEmitterToPerformer">
-            <input class="greta.auxiliary.incrementality.IncrementalityFeedbackEmitter" lib_id="greta_incrementality"/>
-            <output class="greta.auxiliary.incrementality.IncrementalityFeedbackPerformer" lib_id="greta_incrementality"/>
-            <connect from="input" method="addIncFeedbackPerformer" to="output"/>
-            <disconnect from="input" method="removeIncFeedbackPerformer" to="output"/>
         </connector>
         <connector id="connectKeyframesFeedbackEmitterToPerformer">
             <input class="greta.core.keyframes.KeyframesFeedbackEmitter" lib_id="greta_signals"/>

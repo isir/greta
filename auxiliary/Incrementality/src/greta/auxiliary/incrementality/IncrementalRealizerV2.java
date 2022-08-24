@@ -238,7 +238,12 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
 
         if (requestId.toString().contains("stop")) {
-            System.out.println("----- Stop -----" + greta.core.util.time.Timer.getTime() + " --- " + (greta.core.util.time.Timer.getTime() - firstKeyframeOffset));
+            double absoluteTime = greta.core.util.time.Timer.getTime();
+            double duration = lastKeyframeOffset - firstKeyframeOffset;
+            double stopTime = absoluteTime - firstKeyframeOffset;
+            
+            System.out.println("----- Stop -----");
+            System.out.println("ABSOLUTE TIME = " + absoluteTime + " --- DURATION = " + duration + " --- STOPTIME = " + stopTime);
             this.stopAllAnims();
             chunkSenderThread.emptyChunkList();
             chunkSenderThread.closeQueue();
@@ -248,7 +253,6 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         } else {
             firstKeyframeOffset = keyframes.get(0).getOffset();
             lastKeyframeOffset = keyframes.get(keyframes.size() - 1).getOffset();
-            System.out.println(firstKeyframeOffset + " --- " + lastKeyframeOffset + " --- " + (lastKeyframeOffset - firstKeyframeOffset));
             //CHUNKING KEYFRAMES
             TreeMap<Integer, List<Keyframe>> treeList = this.createChunk(keyframes);
 

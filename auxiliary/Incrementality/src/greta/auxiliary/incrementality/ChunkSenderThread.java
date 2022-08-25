@@ -22,7 +22,7 @@ public class ChunkSenderThread extends Thread {
 
     private boolean isRunning;
     private boolean isQueued;
-    
+
     private boolean isReplaced;
 
     public ChunkSenderThread() {
@@ -75,10 +75,9 @@ public class ChunkSenderThread extends Thread {
                                 System.out.println("\u001B[34m WAITED : " + nextFirst + " - " + currentFirst + " = " + sleepTime);
                             }
                         }
-                        if(this.isReplaced == false){
+                        if (this.isReplaced == false) {
                             this.removeFromList();
-                        }
-                        else{
+                        } else {
                             this.isReplaced = false;
                         }
                     }
@@ -149,7 +148,7 @@ public class ChunkSenderThread extends Thread {
                 tempList.put(entry.getKey(), entry.getValue());
             }
 
- /*System.out.println(" --- BASE LIST --- ");
+            /*System.out.println(" --- BASE LIST --- ");
             for (Map.Entry<Integer, List<Keyframe>> entry : treeList.entrySet()) {
                 System.out.println(entry.getKey());
                 for (Keyframe kf : entry.getValue()) {
@@ -184,16 +183,11 @@ public class ChunkSenderThread extends Thread {
                 }
             }
 
-            if(!this.treeList.isEmpty()){
+            if (!this.treeList.isEmpty()) {
                 this.isReplaced = true;
             }
             this.emptyChunkList();
             this.setChunkList(parTreeList);
-        }
-        try {
-            sleep(100);
-        } catch (Exception e) {
-            System.out.println(e);
         }
         this.setRequestId(id);
         this.setMode(mode);
@@ -212,6 +206,10 @@ public class ChunkSenderThread extends Thread {
             }
             i++;
         }
+    }
+    
+    public void wakeUp(){
+        this.interrupt();
     }
 
     private synchronized void removeFromList() {

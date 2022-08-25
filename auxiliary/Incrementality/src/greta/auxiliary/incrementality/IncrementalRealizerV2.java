@@ -245,6 +245,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
             System.out.println("----- Stop -----");
             System.out.println("ABSOLUTE TIME = " + absoluteTime + " --- DURATION = " + duration + " --- STOPTIME = " + stopTime);
             this.stopAllAnims();
+            chunkSenderThread.wakeUp();
             chunkSenderThread.emptyChunkList();
             chunkSenderThread.closeQueue();
             for (KeyframePerformer performer : keyframePerformers) {

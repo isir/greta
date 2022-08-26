@@ -15,7 +15,7 @@
  * along with Greta.  If not, see <https://www.gnu.org/licenses/>.
  *
  */
-package greta.core.utilx.gui;
+package greta.auxiliary.incrementality;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
@@ -47,7 +47,7 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
 
-        jButton1.setText("Interrupt");
+        jButton1.setText("PauseGesture");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -74,6 +74,7 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
                 jButton4ActionPerformed(evt);
             }
         });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -109,7 +110,7 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_fileNameTextFieldActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        sendInteruption();
+        sendPauseGesture();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -133,16 +134,16 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
 
-    private Method interuptionLoadMethod;
+    private Method pauseGestureLoadMethod;
     private Method resumeLoadMethod;
     private Method stopLoadMethod;
     private Method clearQueueLoadMethod;
     private Object loader;
 
-    protected void sendInteruption() {
-        if(interuptionLoadMethod!=null){
+    protected void sendPauseGesture() {
+        if(pauseGestureLoadMethod!=null){
             try {
-                interuptionLoadMethod.invoke(loader);
+                pauseGestureLoadMethod.invoke(loader);
             }
             catch (InvocationTargetException ex) {
                 ex.getCause().printStackTrace();
@@ -210,7 +211,7 @@ public class IncRealizerInteractionGUI extends javax.swing.JFrame {
     public void setLoader(Object loader){
         this.loader = loader;
         try {
-            interuptionLoadMethod = loader.getClass().getMethod("sendInteruption");
+            pauseGestureLoadMethod = loader.getClass().getMethod("sendPauseGesture");
             resumeLoadMethod = loader.getClass().getMethod("sendResume");
             stopLoadMethod = loader.getClass().getMethod("sendStop");
             clearQueueLoadMethod = loader.getClass().getMethod("sendClearQueue");

@@ -33,7 +33,7 @@ public class IncRealizerInteraction implements IncrementalityInteractionEmitter,
     public IncRealizerInteraction(CharacterManager cm){
         this.cm = cm;
         //Should work with every installation but verify path in case of issues
-        this.stopFileLocation = "./Examples/DemoEn/stop.xml";
+        this.stopFileLocation = "./Examples/DemoIncrementality/stop.xml";
     }
     
 
@@ -47,18 +47,22 @@ public class IncRealizerInteraction implements IncrementalityInteractionEmitter,
         performerList.remove(performer);
     }
 
-    public void sendInteruption() {
+    //send signal to stop sending new chunks
+    //NOTE: doesn't stop voice
+    public void sendPauseGesture() {
         for (IncrementalityInteractionPerformer pf : performerList) {
-            pf.performIncInteraction("interupt");
+            pf.performIncInteraction("pauseGesture");
         }
     }
     
+    //send signal to resume sending chunks after an interrupt
     public void sendResume(){
         for (IncrementalityInteractionPerformer pf : performerList) {
             pf.performIncInteraction("resume");
         }
     }
     
+    //Send signal to fully stop execution
     public void sendStop(){
         String base = (new File(stopFileLocation)).getName().replaceAll("\\.xml$", "");
 
@@ -103,6 +107,7 @@ public class IncRealizerInteraction implements IncrementalityInteractionEmitter,
         }
     }
     
+    //send signal to clear chunk list and close queue
     public void sendClearQueue(){
         for (IncrementalityInteractionPerformer pf : performerList) {
             pf.performIncInteraction("clearQueue");

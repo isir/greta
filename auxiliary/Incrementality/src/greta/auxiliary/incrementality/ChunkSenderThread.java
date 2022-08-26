@@ -79,12 +79,13 @@ public class ChunkSenderThread extends Thread {
                             this.removeFromList();
                         } else {
                             this.isReplaced = false;
+                            break;
                         }
                     }
 
                     Thread.sleep(500); //Wait to make sure agent goes back to rest pose*/
                     System.out.println(" ------------------------------------ END OF " + requestId + " ------------------------------------\n");
-                    this.closeQueue();
+                    //this.closeQueue();
                 }
             } catch (Exception e) {
             }
@@ -148,40 +149,17 @@ public class ChunkSenderThread extends Thread {
                 tempList.put(entry.getKey(), entry.getValue());
             }
 
-            /*System.out.println(" --- BASE LIST --- ");
-            for (Map.Entry<Integer, List<Keyframe>> entry : treeList.entrySet()) {
-                System.out.println(entry.getKey());
-                for (Keyframe kf : entry.getValue()) {
-                    System.out.println(kf.getParentId() + " --- " + kf.toString() + " --- " + kf.getOffset());
-                }
-            }
-            
-            System.out.println(" --- INCOMMING --- ");
+            this.setChunkList(tempList);
+        } else {
+            System.out.println("REPLACE FOUND");
+
+            /*System.out.println(" --- INCOMMING --- ");
             for (Map.Entry<Integer, List<Keyframe>> entry : parTreeList.entrySet()) {
-                System.out.println(entry.getKey());
-                for (Keyframe kf : entry.getValue()) {
-                    System.out.println(kf.getParentId() + " --- " + kf.toString() + " --- " + kf.getOffset());
-                }
-            }
-            
-            System.out.println(" --- FUSED LIST --- ");
-            for (Map.Entry<Integer, List<Keyframe>> entry : tempList.entrySet()) {
                 System.out.println(entry.getKey());
                 for (Keyframe kf : entry.getValue()) {
                     System.out.println(kf.getParentId() + " --- " + kf.toString() + " --- " + kf.getOffset());
                 }
             }*/
-            this.setChunkList(tempList);
-        } else {
-            System.out.println("REPLACE FOUND");
-
-            System.out.println(" --- INCOMMING --- ");
-            for (Map.Entry<Integer, List<Keyframe>> entry : parTreeList.entrySet()) {
-                System.out.println(entry.getKey());
-                for (Keyframe kf : entry.getValue()) {
-                    System.out.println(kf.getParentId() + " --- " + kf.toString() + " --- " + kf.getOffset());
-                }
-            }
 
             if (!this.treeList.isEmpty()) {
                 this.isReplaced = true;
@@ -207,8 +185,8 @@ public class ChunkSenderThread extends Thread {
             i++;
         }
     }
-    
-    public void wakeUp(){
+
+    public void wakeUp() {
         this.interrupt();
     }
 

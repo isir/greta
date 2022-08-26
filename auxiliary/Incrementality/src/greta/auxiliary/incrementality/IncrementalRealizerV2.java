@@ -237,10 +237,11 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
         System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
 
+        //In case of stop interaction, thread stop sending chunk, stop keyframe will bypass thread to ensure correrct stop
         if (requestId.toString().contains("stop")) {
-            double absoluteTime = greta.core.util.time.Timer.getTime();
-            double duration = lastKeyframeOffset - firstKeyframeOffset;
-            double stopTime = absoluteTime - firstKeyframeOffset;
+            double absoluteTime = greta.core.util.time.Timer.getTime(); //ABSOLUTE TIME = time when clicking the stop button where 0 is the start of modular
+            double duration = lastKeyframeOffset - firstKeyframeOffset; //DURATION = Duration of the stopped execution
+            double stopTime = absoluteTime - firstKeyframeOffset; //STOPTIME = time when clicking the stop button where 0 is the start of the execution
             
             System.out.println("----- Stop -----");
             System.out.println("ABSOLUTE TIME = " + absoluteTime + " --- DURATION = " + duration + " --- STOPTIME = " + stopTime);
@@ -251,9 +252,12 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
             for (KeyframePerformer performer : keyframePerformers) {
                 performer.performKeyframes(keyframes, requestId, mode);
             }
+            //Otherwise, normal execution: chunking keyframes and sending chunks to thread
         } else {
+            //gather offset of first keyframe and last keyframe to calculate duration and stopTime in case of stop
             firstKeyframeOffset = keyframes.get(0).getOffset();
             lastKeyframeOffset = keyframes.get(keyframes.size() - 1).getOffset();
+            
             //CHUNKING KEYFRAMES
             TreeMap<Integer, List<Keyframe>> treeList = this.createChunk(keyframes);
 
@@ -308,8 +312,6 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
             if (offsetInt % 3 == 0 && offsetInt > currentIndex) { //create chunk based on indicated size
                 currentIndex = offsetInt;
             }
-
-            //currentIndex = offsetInt;
             int index = currentIndex;
 
             if (treeList.containsKey(index)) {
@@ -407,7 +409,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     //Interaction with the realizer from the outside, ex interuption
     @Override
     public void performIncInteraction(String parParam) {
-        if (parParam.equals("interupt")) {
+        if (parParam.equals("pauseGesture")) {
             chunkSenderThread.closeQueue();
             this.stopAllAnims();
         } else if (parParam.equals("resume")) {

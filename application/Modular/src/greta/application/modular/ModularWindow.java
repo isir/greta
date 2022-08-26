@@ -37,9 +37,12 @@ import java.awt.event.ComponentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JOptionPane;
@@ -78,6 +81,12 @@ public class ModularWindow extends javax.swing.JFrame {
             @Override
             public void windowClosing(WindowEvent e) {
                 ModularWindow.this.savePositions();
+                try {
+                    Runtime.getRuntime().exec("taskkill /F /IM NVBG.exe");
+                    Runtime.getRuntime().exec("taskkill /F /IM parseIt.exe");
+                } catch (IOException ex) {
+                    Logger.getLogger(ModularWindow.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 

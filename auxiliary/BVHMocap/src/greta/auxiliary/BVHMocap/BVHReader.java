@@ -97,6 +97,7 @@ public class BVHReader implements BAPFrameEmitter {
             FileInputStream fileinput = new FileInputStream(fileName);
             InputStreamReader streamreader = new InputStreamReader(fileinput);
             lecteurAvecBuffer = new BufferedReader(streamreader);
+            System.out.println("Reading BVH");
         } catch (FileNotFoundException exc) {
             //exc.printStackTrace();
             System.out.println("Erreur d'ouverture du fichier " + fileName);
@@ -105,11 +106,13 @@ public class BVHReader implements BAPFrameEmitter {
     }
 
     public long load(String bvhFileName) {
+        System.out.println("Loading BVH");
         fileName = bvhFileName;
         return process();
     }
 
     public long process() {
+        System.out.println("Processing");
         int bapframe_startTime = (int) Timer.getTimeMillis() / 40;
         //(int) (Timer.getTime()*Constants.FRAME_PER_SECOND);Today
 
@@ -129,6 +132,7 @@ public class BVHReader implements BAPFrameEmitter {
             int nbframe = GetFrameNumber(br);
             float frameTime = GetFrameTime(br);
             int EulerAngleOrder = EulerOrder();
+            System.out.println("{INFO}");
             System.out.println(fileName);
             bap_animation = BAPFramesCreator(AllPreRotation, br, skeleton, nbframe, EulerAngleOrder, frameTime, bapframe_startTime);
 

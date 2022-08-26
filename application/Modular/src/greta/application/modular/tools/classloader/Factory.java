@@ -81,11 +81,8 @@ public class Factory {
     }
 
     public static ClassLoader newClassLoader(URL[] url, ClassLoader parent){
-        if(useCustom){
-            return new CustomURLClassLoader(url, parent);
-        }
-        else {
+
             return new URLClassLoader(url, parent);
-        }
+        
     }
 }

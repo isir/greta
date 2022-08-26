@@ -380,6 +380,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
             BufferedReader br = ReadFile(fileName);
             Skeleton skeleton = BVHSkeleton(br);
             int nbframe = GetFrameNumber(br);
+            System.out.println("FRAME Number: " + nbframe);
             float frameTime = GetFrameTime(br);
             List<Object> listint = new ArrayList<Object>();
             listint.add(nbframe);
@@ -387,11 +388,12 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
             fileAndFrame.put(fileName, listint);
 
             int EulerAngleOrder = EulerOrder();
+            System.out.println("greta.auxiliary.BVHMocap.BVHReaderGUI.process()");
             System.out.println(fileName);
             bap_animation = BAPFramesCreator(AllPreRotation, br, skeleton, nbframe, EulerAngleOrder, frameTime, bapframe_startTime);
+          
 
-
-           //  bap_animation=OneBAPFrame(bapframe_startTime); // To test a posture or a small gesture (created in the function OneBAPFrame)
+            //bap_animation=OneBAPFrame(bapframe_startTime); // To test a posture or a small gesture (created in the function OneBAPFrame)
         } catch (Exception e) {
         }
 

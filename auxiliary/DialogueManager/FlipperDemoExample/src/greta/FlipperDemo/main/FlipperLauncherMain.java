@@ -26,8 +26,8 @@ public class FlipperLauncherMain {
 	private String port = null;
 	private String gretaASRTopic = null;
 	private String gretaInputTopic = null;
-	private String flipperPropertyRes = null;
-  	private String flipperTemplateFolderPath = null;      
+	private String flipperPropertyRes = System.getProperty("user.dir")+"\\Common\\Data\\FlipperResources\\flipperDemo.properties";
+  	private String flipperTemplateFolderPath = System.getProperty("user.dir")+"\\Common\\Data\\FlipperResources\\fmltemplates";      
 	public String getHost() {
 		return this.host;
 	}
@@ -59,15 +59,10 @@ public class FlipperLauncherMain {
 	public void setGretaInputTopic(String responseTopic) {
 		this.gretaInputTopic = responseTopic;
 	}
-        public void setFlipperPropertyResource(String flipperPropertyRes) {
-		this.flipperPropertyRes = flipperPropertyRes;
-	}
+
 
 	public String getFlipperPropertyResource() {
 		return this.flipperPropertyRes;
-	}
-        public void setflipperTemplateFolderPath(String flipperTemplateFolderPath) {
-		this.flipperTemplateFolderPath = flipperTemplateFolderPath;
 	}
 
 	public String getflipperTemplateFolderPath() {
@@ -100,7 +95,7 @@ public class FlipperLauncherMain {
 
         Properties ps = new Properties();
          InputStream inputstream = null;
- 
+         System.out.println("greta.FlipperDemo.main.FlipperLauncherMain.init()"+"   "+ System.getProperty("user.dir")+"\\Common\\Data\\FlipperResources\\flipperDemo.properties");
         try {
             inputstream = new FileInputStream(flipperPropertyRes);
         } catch (FileNotFoundException ex) {

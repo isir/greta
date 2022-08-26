@@ -130,7 +130,6 @@ public class FlipperDemoGUIFrame extends JFrame  {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				FlipperDemoGUIFrame.this.setActiveMqParameters();
-                                FlipperDemoGUIFrame.this.setFlipperResources();
 			}
 			
 		});
@@ -158,16 +157,7 @@ public class FlipperDemoGUIFrame extends JFrame  {
 		//this.setConnectionLabel(false);
 		
 	}
-	private void setFlipperResources() {
-		
-		String flipperPropertyRes = this.flipperPropertyResTextField.getText().trim();
-                flipperDemoMain.setFlipperPropertyResource(flipperPropertyRes);
-                
-                
-                String flipperTemplateFolder = this.flipperTemplateFolderTextField.getText().trim();
-                flipperDemoMain.setflipperTemplateFolderPath(flipperTemplateFolder);
-		
-	}
+
 
 	public void setFlipperDemoMain(FlipperLauncherMain flipperDemoMain) {
                 //this.flipperDemoMain = flipperDemoMain;

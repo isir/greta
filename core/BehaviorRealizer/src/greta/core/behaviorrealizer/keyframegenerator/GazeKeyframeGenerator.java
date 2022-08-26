@@ -413,12 +413,13 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 System.out.println("D_Theta:"+d_theta);
                 System.out.println("GAZE OFFSET:"+gaze.getOffsetAngle());
                 if(gaze.getOffsetAngle()>theta){
-                    theta=theta-d_theta;
+                    theta=d_theta-theta;
                     System.out.println("1) THETA:"+theta);
                 }
                 else{
                     if(gaze.getOffsetAngle()!=0 && gaze.getOffsetAngle()<theta){
-                    theta=theta-d_theta;
+                    theta=d_theta-theta;
+                    theta=Math.abs(theta);
                     System.out.println("2) THETA:"+theta);
                     /*double d_theta2=theta-gaze.getOffsetAngle()/2;
                     theta=theta-d_theta2;
@@ -429,7 +430,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 if(gaze.getOffsetDirection()==GazeDirection.UP || gaze.getOffsetDirection()==GazeDirection.DOWN ){
                     theta=0;
                 }
-                theta=theta*direction;
                 System.out.println("THETA:"+theta+"  "+a+"  "+b+"  "+r+" "+theta_r+"  "+theta_sin);
                 int sign=0;
                 if(theta>=0 && theta<=100){
@@ -766,16 +766,47 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 theta=theta/2;
                 
                 int sag=-1;
-                if(gaze.getOffsetDirection()==GazeDirection.UP || gaze.getOffsetDirection()==GazeDirection.UPRIGHT || gaze.getOffsetDirection()==GazeDirection.UPLEFT)
-                    sag=1;
-                else{
-                    sag=-1;
-                }
+
+                
                 if(pitch_head>=60){
                     pitch_head=pitch_head/2;
                 }
                 if(gaze.getOffsetDirection()==GazeDirection.LEFT){
+                    sag=-1;
+                    if(theta>0 &&theta <=22.5)
+                        theta=-theta;
+                }
+                
+                if(gaze.getOffsetDirection()==GazeDirection.UPLEFT){
                     sag=1;
+                    System.out.println("THETA X:"+theta);
+                    if(theta<0)
+                        theta=-theta;
+                    
+                }
+                
+                if(gaze.getOffsetDirection()==GazeDirection.DOWNLEFT){
+                    System.out.println("THETA X:"+theta);
+                    if(theta<0)
+                        theta=-theta;
+                    
+                }
+                if(gaze.getOffsetDirection()==GazeDirection.RIGHT){
+                    sag=-1;
+                }
+                if(gaze.getOffsetDirection()==GazeDirection.UPRIGHT){
+                    sag=1;
+                    if(theta>0)
+                        theta=-theta;
+                        
+                    System.out.println("THETA X:"+theta);
+                }
+                
+                if(gaze.getOffsetDirection()==GazeDirection.DOWNRIGHT){
+                    if(theta>0)
+                        theta=-theta;
+                        
+                    System.out.println("THETA X:"+theta);
                 }
                 if(gaze.getOffsetDirection()!=GazeDirection.LEFT && gaze.getOffsetDirection()!=GazeDirection.RIGHT){
                     if(gaze.getType()==GazeType.GLANCE){
@@ -1506,6 +1537,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 }
                     }
                 }
+                 if(gaze.getType()==GazeType.GLANCE )
+                     time=start-1;
                 System.out.println("TIME v2:"+ time);
                 AUKeyFrame auKeyFrame = new AUKeyFrame(gazeId, time, auFrame);
                 outputKeyframe.add(auKeyFrame);

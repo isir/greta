@@ -22,8 +22,11 @@ import greta.core.util.IniManager;
 import greta.core.util.speech.Speech;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.text.Normalizer;
 import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.regex.Pattern;
 
 /**
@@ -44,11 +47,15 @@ public class Modular {
     public static void main(final String[] args){
         Locale.setDefault(ModularSateIO.getSelectedLanguage());
         Style.setMapper(ModularSateIO.getStyleMapper());
+        
+        
+        
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
 
                 //try to load choosen look and feel
+                
                 boolean lafSet = false;
                 try {
                     String choosenLAF = ModularSateIO.getLookAndFeel();
@@ -93,6 +100,7 @@ public class Modular {
 
         //TODO need to be removed (put it in ini file)
         Speech.setOriginal(true);
+        
 
     }
 
@@ -135,4 +143,8 @@ public class Modular {
         Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
         return pattern.matcher(strTemp).replaceAll("").replaceAll("\\W", "_").replaceFirst("^(\\d)", "_$1");
     }
+    
+
+
+
 }

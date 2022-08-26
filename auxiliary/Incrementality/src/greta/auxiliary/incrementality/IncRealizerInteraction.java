@@ -19,7 +19,7 @@ import java.util.List;
  *
  * @author Sean
  */
-public class IncRealizerInteraction implements IncrementalityInteractionEmitter, IntentionEmitter {
+public class IncRealizerInteraction implements IncrementalityInteractionEmitter, IntentionEmitter, IncrementalityInteractionPerformer {
 
     private List<IncrementalityInteractionPerformer> performerList = new ArrayList<>();
     private ArrayList<IntentionPerformer> intentionPerformers = new ArrayList<IntentionPerformer>();
@@ -122,5 +122,12 @@ public class IncRealizerInteraction implements IncrementalityInteractionEmitter,
     @Override
     public void removeIntentionPerformer(IntentionPerformer ip) {
         intentionPerformers.remove(ip);
+    }
+
+    @Override
+    public void performIncInteraction(String parParam) {
+        if (parParam.equals("stop")) {
+            this.sendStop();
+        }
     }
 }

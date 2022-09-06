@@ -1,8 +1,8 @@
-package org.joml.lwjgl;
+package greta.org.joml.lwjgl;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import org.joml.Matrix4f;
+import greta.org.joml.Matrix4f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import static org.lwjgl.glfw.GLFW.*;

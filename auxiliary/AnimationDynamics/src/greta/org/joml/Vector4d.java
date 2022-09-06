@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package org.joml;
+package greta.org.joml;
 
 import java.io.Externalizable;
 import java.io.IOException;

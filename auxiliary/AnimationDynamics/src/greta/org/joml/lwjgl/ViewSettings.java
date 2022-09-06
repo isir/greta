@@ -1,4 +1,4 @@
-package org.joml.lwjgl;
+package greta.org.joml.lwjgl;
 
 public interface ViewSettings {
 

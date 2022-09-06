@@ -20,9 +20,9 @@
  THE SOFTWARE.
 
  */
-package org.joml.camera;
+package greta.org.joml.camera;
 
-import org.joml.Vector3f;
+import greta.org.joml.Vector3f;
 
 /**
  * This is an integrator providing smooth convergence of a <code>current</code>

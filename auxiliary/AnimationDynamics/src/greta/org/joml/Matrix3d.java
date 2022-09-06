@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package org.joml;
+package greta.org.joml;
 
 import java.io.Externalizable;
 import java.io.IOException;
@@ -31,6 +31,14 @@ import java.nio.DoubleBuffer;
 import java.nio.FloatBuffer;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import greta.org.joml.Matrix3f;
+import greta.org.joml.Matrix4d;
+import greta.org.joml.Matrix4f;
+import greta.org.joml.MemUtil;
+import greta.org.joml.Quaterniond;
+import greta.org.joml.Quaternionf;
+import greta.org.joml.Vector3d;
+import greta.org.joml.Vector3f;
 
 /**
  * Contains the definition of a 3x3 Matrix of doubles, and associated functions to transform

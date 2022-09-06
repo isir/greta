@@ -5,7 +5,6 @@
 **/nbproject/genfiles.properties
 **/nbproject/private/
 
-/bin/*.jar
 /bin/Common/Lib/Internal/*.jar
 /bin/Player/Lib/Internal/*.jar
 

@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package org.joml;
+package greta.org.joml;
 
 import java.io.IOException;
 import java.io.ObjectInput;

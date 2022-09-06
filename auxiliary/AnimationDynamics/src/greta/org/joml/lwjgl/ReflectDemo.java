@@ -1,11 +1,11 @@
-package org.joml.lwjgl;
+package greta.org.joml.lwjgl;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
-import org.joml.Matrix4f;
-import org.joml.Quaternionf;
-import org.joml.Vector3f;
-import org.joml.camera.ArcBallCamera;
+import greta.org.joml.Matrix4f;
+import greta.org.joml.Quaternionf;
+import greta.org.joml.Vector3f;
+import greta.org.joml.camera.ArcBallCamera;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import static org.lwjgl.glfw.GLFW.*;

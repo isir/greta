@@ -20,8 +20,9 @@
  THE SOFTWARE.
 
  */
-package org.joml;
+package greta.org.joml;
 
+import greta.org.joml.Matrix3d;
 import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;

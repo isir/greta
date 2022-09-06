@@ -20,7 +20,9 @@
  THE SOFTWARE.
 
  */
-package org.joml;
+package greta.org.joml;
+
+import greta.org.joml.Matrix3d;
 
 /**
  * Computes the weighted average of multiple rotations represented as {@link Quaterniond} instances.

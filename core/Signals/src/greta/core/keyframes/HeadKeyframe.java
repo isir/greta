@@ -122,4 +122,14 @@ public class HeadKeyframe extends ParametersKeyframe {
         return lateralRoll.direction == SpineDirection.Direction.RIGHTWARD ? lateralRoll.value : -(lateralRoll.value);
     }
 
+    @Override
+    public String getParentId() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setParentId(String parParentId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }

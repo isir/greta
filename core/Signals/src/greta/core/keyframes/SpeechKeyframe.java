@@ -23,6 +23,8 @@ package greta.core.keyframes;
  */
 public class SpeechKeyframe   extends ParametersKeyframe{
     String wavFilePath;
+    
+    private String parentId;
 
     public SpeechKeyframe(double time, String wavFilePath){
         modality = "speech";
@@ -76,6 +78,16 @@ public class SpeechKeyframe   extends ParametersKeyframe{
 
     public float getSTF() {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public String getParentId() {
+        return parentId;
+    }
+
+    @Override
+    public void setParentId(String parParentId) {
+        this.parentId = parParentId;
     }
 
 }

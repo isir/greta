@@ -55,6 +55,10 @@
                 <item module="AttitudeSetter" name=" Attitude Setter"/>
                 </menu>
             </menu>
+			<menu name="Incrementality">
+				<item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
+				<item module="IncRealizerInteraction" name="IncRealizerInteraction"/>
+			</menu>
             <item module="Behavior Realizer" name="Behavior Realizer"/>
             <menu name="Keyframe Performers">
                 <item module="IK Keyframe Performer" name="IK"/>
@@ -478,7 +482,7 @@
             <frame type="object"/>
         </module>
         <module name="OSC" style="DEFAULT">
-            <object class="greta.auxiliary.osc.OSC_Sender" lib_id="greta_osc"/>
+            <object class="greta.auxiliary.osc.OSC_Sender" lib_id="greta_osc_module"/>
             <frame type="object"/>
         </module>
         <module name="MaryTTS Client">
@@ -1157,15 +1161,17 @@
             <frame type="object"/>
             <parameter default="true" get_method="isComputingSocialAttitudeExpression" get_on="object" name="computeAttitudes" set_method="setComputeSocialAttitudeExpression" set_on="object" type="boolean"/>
         </module>
-		
-		
-		
-    
-        
-    
-    
-    
-    
+		<!-- Incrementality modules -->
+		<module name="Incremental Realizer V2" style="BehaviorRealizer">
+			<object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
+		</module>
+		<module name="IncRealizerInteraction" style="BehaviorRealizer">
+			<object class="greta.auxiliary.incrementality.IncRealizerInteraction" lib_id="greta_incrementality"/>
+			<frame class="greta.auxiliary.incrementality.IncRealizerInteractionGUI" lib_id="greta_incrementality" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+		</module>
+		<!-- Incrementality modules -->
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1553,12 +1559,20 @@
             <depends lib_id="ext_Translator.0.1"/>
         </lib>
         <lib id="ext_Translator.0.1" path="Common/Lib/External/Flipper/Translator-0.1.jar"/>		
-    <lib id="greta_osc" path="./Common/Lib/Internal/OSC.jar">
+    <lib id="greta_osc" path="./Common/Lib/Internal/OSC_CORE_LIB.jar">
             <depends lib_id="ext_jeromq"/>
             <depends lib_id="greta_mpeg4"/>
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_utilx"/>
+        </lib>
+    <lib id="greta_osc_module" path="./Common/Lib/Internal/OSC.jar">
+            <depends lib_id="ext_jeromq"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_utilx"/>
+            <depends lib_id="greta_osc"/>
         </lib>
 	    <lib id="multilayer_attitude_planner" path="./Common/Lib/Internal/MultiLayerAttitudePlanner.jar">
             <depends lib_id="behavior_planner"/>
@@ -1572,6 +1586,14 @@
             <depends lib_id="ext_weka_src"/>
             <needs path="./Common/Data/MultiLayerAttitude"/>
         </lib>
+		<lib id="greta_incrementality" path="./Common/Lib/Internal/Incrementality.jar">
+			<depends lib_id="greta_util"/>
+			<depends lib_id="greta_signals"/>
+			<depends lib_id="greta_intentions"/>	
+			<depends lib_id="greta_behavior_realizer"/>
+			<depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_mpeg4"/>
+		</lib>
 	    <lib id="greta_asap" path="./Common/Lib/Internal/ASAP.jar">
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_signals"/>
@@ -1919,12 +1941,14 @@
             <connect from="input" method="setVideoCaptureController" to="output"/>
             <disconnect from="null" method="setVideoCaptureController" to="null"/>
         </connector>
+		<!-->
 		<connector id="connectARIAVideoRequestsManagerToXuggleVideoCapture" unique="true">
             <input class="greta.application.ariavaluspa.tools.ARIAVideoRequestsManager" lib_id="ariavaluspa"/>
             <output class="greta.tools.ogre.capture.video.XuggleVideoCapture" lib_id="videoCapture"/>
             <connect from="input" method="setXuggleVideoCapture" to="output"/>
             <disconnect from="null" method="setXuggleVideoCapture" to="null"/>
         </connector>
+     <!-->
 		        <connector id="connectARIAInformationStateEmitterToPerformer">
             <input class="greta.auxiliary.activemq.aria.ARIAInformationStateEmitter" lib_id="greta_activemq"/>
             <output class="greta.auxiliary.activemq.aria.ARIAInformationStatePerformer" lib_id="greta_activemq"/>
@@ -1942,6 +1966,12 @@
             <output class="greta.application.ariavaluspa.core.ARIAInformationStatesManager" lib_id="ariavaluspa"/>
             <connect from="input" method="setARIAInformationStateManager" to="output"/>
             <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="connectIncInteractionToRealizer">
+            <input class="greta.auxiliary.incrementality.IncrementalityInteractionEmitter" lib_id="greta_incrementality"/>
+            <output class="greta.auxiliary.incrementality.IncrementalityInteractionPerformer" lib_id="greta_incrementality"/>
+            <connect from="input" method="addIncInteractionPerformer" to="output"/>
+            <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
         </connector>
     </connectors>
     <!-- list of styles -->

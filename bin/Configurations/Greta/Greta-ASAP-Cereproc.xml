@@ -80,26 +80,36 @@
         <element h="50.0" id="ASAP - 1657282665039-51" module="ASAP" name="ASAP" w="80.0" x="400.0" y="170.0">
             <window h="425" visible="true" w="944" x="704" y="45"/>
         </element>
+        <element h="50.0" id="Capture Controller - 1662995711476-588" module="Capture Controller" name="Capture Controller" w="80.0" x="580.0" y="560.0">
+            <parameter name="UseTexture" value="false"/>
+            <parameter name="RealTime" value="true"/>
+            <window h="206" visible="false" w="639" x="0" y="0"/>
+        </element>
+        <element h="50.0" id="Xuggle Video Capture - 1662995720283-359" module="Xuggle Video Capture" name="Xuggle Video Capture" w="80.0" x="460.0" y="560.0">
+            <window h="239" visible="false" w="438" x="0" y="0"/>
+        </element>
     </elements>
     <connections>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="IntentionEmitterToIntentionPerformer" source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="AUEmitterToAUPerformer" source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="connectPlayerToEnvironment" source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
-        <connection connector="connectAnimatableToEnvironment" source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer" source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="SignalEmitterToSignalPerformer" source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="addLogOutput" source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="LipSourceForLipBlender" source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer" source="ASAP - 1657282665039-51" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="AUEmitterToAUPerformer" source="ASAP - 1657282665039-51" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="SignalEmitterToSignalPerformer" source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="AudioEmitter To AudioPerformer" source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544712930520-534" target="Face Keyframe Performer - 1554477289165-429"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer" source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
+        <connection connector="LipSourceForLipBlender" source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="connectCaptureControllerToCapturable" source="Capture Controller - 1662995711476-588" target="Ogre Player - 1544700973529-249"/>
+        <connection connector="connectCaptureControllerToCaptureOutput" source="Capture Controller - 1662995711476-588" target="Xuggle Video Capture - 1662995720283-359"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="AUEmitterToAUPerformer" source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="connectPlayerToEnvironment" source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="connectAnimatableToEnvironment" source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="SignalEmitterToSignalPerformer" source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer" source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="AUEmitterToAUPerformer" source="ASAP - 1657282665039-51" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer" source="ASAP - 1657282665039-51" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
+        <connection connector="IntentionEmitterToIntentionPerformer" source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer" source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="addLogOutput" source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
     </connections>
 </modulated>

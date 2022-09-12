@@ -16,7 +16,6 @@
  *
  */
 package greta.tools.ogre.capture.video;
-
 import com.xuggle.xuggler.ICodec;
 import com.xuggle.xuggler.IContainerFormat;
 import java.io.File;
@@ -24,6 +23,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Vector;
 import javax.swing.ComboBoxModel;
+import javax.swing.JFileChooser;
 
 /**
  *
@@ -55,6 +55,14 @@ public class CodecSelector extends javax.swing.JFrame {
         this.xvc = xvc;
         if(xvc!=null){
             xvc.setWantedFormat(selectedContainer, selectedVideoCodec, selectedAudioCodec);
+            if(textField1.getText()!=null){
+                System.out.println("[INFO]1: "+textField1.getText());
+                System.out.println(textField1.getText().contains("mp3"));
+                if(textField1.getText().contains("mp3") || textField1.getText().contains(("wav"))){
+                    System.out.println("[INFO]2");
+                    xvc.setAudioName(textField1.getText());
+                }
+            }
         }
     }
     private void fireFormatChanged(){
@@ -191,6 +199,7 @@ public class CodecSelector extends javax.swing.JFrame {
         containerComboBox = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
         textField1 = new java.awt.TextField();
+        jButton1 = new javax.swing.JButton();
 
         jLabel1.setText("Container");
 
@@ -218,10 +227,16 @@ public class CodecSelector extends javax.swing.JFrame {
 
         jLabel4.setText("Audio_backgr");
 
-        textField1.setText("textField1");
         textField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 textField1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Ouvrir");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -239,14 +254,16 @@ public class CodecSelector extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(videoCodecComboBox, 0, 308, Short.MAX_VALUE)
+                            .addComponent(videoCodecComboBox, 0, 421, Short.MAX_VALUE)
                             .addComponent(containerComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(audioCodecComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -267,8 +284,9 @@ public class CodecSelector extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel4)
-                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(59, Short.MAX_VALUE))
+                    .addComponent(textField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         pack();
@@ -292,10 +310,33 @@ public class CodecSelector extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_textField1ActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+       jFileChooser1 = new JFileChooser(); 
+       jFileChooser1.setCurrentDirectory(new File(System.getProperty("user.home")));
+       int result = jFileChooser1.showOpenDialog(videoCodecComboBox);
+       if (result == JFileChooser.APPROVE_OPTION) {
+           File selectedFile = jFileChooser1.getSelectedFile();
+           textField1.setText(selectedFile.getAbsolutePath());
+       }
+        if(xvc!=null){
+            xvc.setWantedFormat(selectedContainer, selectedVideoCodec, selectedAudioCodec);
+            if(textField1.getText()!=null){
+                System.out.println("[INFO]1: "+textField1.getText());
+                System.out.println(textField1.getText().contains("mp3"));
+                if(textField1.getText().contains("mp3") || textField1.getText().contains(("wav"))){
+                    System.out.println("[INFO]2");
+                    xvc.setAudioName(textField1.getText());
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox audioCodecComboBox;
     private javax.swing.JComboBox containerComboBox;
+    private javax.swing.JButton jButton1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

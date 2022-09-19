@@ -13,6 +13,7 @@
             </menu>
             <menu name="Inputs">
                 <item module="FML File Reader" name="FML File Reader"/>
+				<item module="FML_Jieyeon" name="FML_Jieyeon"/>
                 <item module="BML File Reader" name="BML File Reader"/>
                 <item module="Keyframe File Reader" name="Keyframe File Reader"/>
                 <item module="FAP File Reader" name="FAP File Reader"/>
@@ -270,6 +271,13 @@
         </module>
         <module name="FML File Reader" style="Intentions">
             <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="FML_Jieyeon" style="Intentions">
+            <object class="greta.core.intentions.FML_Jieyeon" lib_id="greta_intentions"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>

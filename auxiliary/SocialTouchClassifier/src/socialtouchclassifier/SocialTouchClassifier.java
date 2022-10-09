@@ -29,12 +29,15 @@ import java.net.SocketAddress;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.Set;
 import weka.classifiers.Classifier;
+import weka.classifiers.Evaluation;
 import weka.classifiers.meta.FilteredClassifier;
 import weka.classifiers.trees.RandomForest;
 import weka.core.Instances;
+import static weka.core.Instances.test;
 import weka.core.SerializationHelper;
 import weka.core.converters.ArffLoader;
 import weka.core.converters.ConverterUtils.DataSource;
@@ -50,7 +53,7 @@ public class SocialTouchClassifier {
     public static void main(String[] args) throws IOException, Exception {
         // TODO code application logic here
         SocialTouchClassifier p= new SocialTouchClassifier(new CharacterManager(new Environment()));
-        p.cleanARFF(true);
+        //p.cleanARFF(true);
         p.demo();
     }
     
@@ -65,15 +68,18 @@ public class SocialTouchClassifier {
     
     
     public void demo() throws IOException, Exception{
-        Classifier rdforest = new RandomForest();  
-        DataSource source = new DataSource(System.getProperty("user.dir")+"//..//..//bin//train.arff");//Training corpus file    
+        RandomForest rdforest = new RandomForest();  
+        DataSource source = new DataSource(System.getProperty("user.dir")+"//..//..//bin//train1.arff");//Training corpus file    
         Instances instancesTrain = source.getDataSet(); // Read in training documents      
         //inputFile = new File("F:/java/weka/testData.arff");//Test corpus file  
-        //atf.setFile(inputFile);            
-        //Instances instancesTest = atf.getDataSet(); // Read in the test file  
+        //atf.setFile(inputFile);
+        //DataSource test_source = new DataSource(System.getProperty("user.dir")+"//..//..//bin//train_car.arff"); // Read in the test file  
+        //Instances instancesTest= test_source.getDataSet();
+        //instancesTrain.setClassIndex(instancesTest.numAttributes()-1);
         //instancesTest.setClassIndex(0); //Setting the line number of the categorized attribute (No. 0 of the first action), instancesTest.numAttributes() can get the total number of attributes.  
         //double sum = instancesTest.numInstances(),//Examples of test corpus  
         //right = 0.0f; 
+        rdforest.setNumTrees(50);
         instancesTrain.setClassIndex(instancesTrain.numAttributes()-1);
         StringToWordVector filter = new StringToWordVector();
         filter.setInputFormat(instancesTrain);
@@ -89,10 +95,23 @@ public class SocialTouchClassifier {
         ////specify base classifier
         fc.setClassifier(rdforest);
         fc.buildClassifier(instancesTrain); //train
-       
         
+        //rdforest.buildClassifier(instancesTrain);
+        Evaluation eval = new Evaluation(instancesTrain);
+        eval.crossValidateModel(fc, instancesTrain, 4, new Random(1));
+        
+        System.out.println(eval.toSummaryString("\nResults\n======\n", true));
+        System.out.println(eval.toClassDetailsString());
+                System.out.println("Results For Class -1- ");
+        System.out.println("Precision=  " + eval.precision(0));
+        System.out.println("Recall=  " + eval.recall(0));
+        System.out.println("F-measure=  " + eval.fMeasure(0));
+        System.out.println("Results For Class -2- ");
+        System.out.println("Precision=  " + eval.precision(1));
+        System.out.println("Recall=  " + eval.recall(1));
+        System.out.println("F-measure=  " + eval.fMeasure(1));
         // Preservation model
-        SerializationHelper.write("RandomForest.model", fc);//Parameter 1 saves the file for the model, and classifier 4 saves the model.
+        //SerializationHelper.write("RandomForest.model", fc);//Parameter 1 saves the file for the model, and classifier 4 saves the model.
         
         //for(int  i = 0;i<sum;i++)//Test classification result 1
         //{  
@@ -125,15 +144,16 @@ public class SocialTouchClassifier {
      
          boolean flag=false;
          try {
-      File myObj = new File(System.getProperty("user.dir")+"//..//..//bin//TouchSequences.arff");
+      File myObj = new File(System.getProperty("user.dir")+"//..//..//bin//TrainTouchSequences.arff");
       Scanner myReader = new Scanner(myObj);
       String header="";
       String data="";
       System.out.println("socialtouchclassifier.SocialTouchClassifier.cleanARFF()");
-      String filename=System.getProperty("user.dir")+"//..//..//bin//train.arff";
+      String filename=System.getProperty("user.dir")+"//..//..//bin//train1.arff";
       if(!train){
         filename=System.getProperty("user.dir")+"//..//..//bin//test.arff";
       }
+      int l=0;
       FileWriter myWriter = new FileWriter(filename);
       while (myReader.hasNextLine()) {
         if(!flag){
@@ -146,9 +166,12 @@ public class SocialTouchClassifier {
         }
         }
         else{
+            System.out.println("I:"+l);
+        l++;
         //System.out.println("FLAG TRUE");
         data=myReader.nextLine();
-        data=data.replace("NaN","0");
+        if(data.contains("NaN"))
+           continue;
         String[] rows=data.split(";");
         rows[0]=rows[0].replace(",", ".");
         rows[1]=rows[1].replace(",", ".");
@@ -159,7 +182,7 @@ public class SocialTouchClassifier {
         String [] tactical_cell_1=rows[4].split("#");
         Set<String> tactset = new HashSet<String> ();
         for(int i=0;i<tactical_cell_1.length;i++){
-            tactset.add(tactical_cell_1[i]);
+              tactset.add(tactical_cell_1[i]);
         }
         
         rows[5]=rows[5].replace("'","");

@@ -525,6 +525,5 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         return end;
     }
 
-    public void setModality(String modality) {
-    }
+
 }

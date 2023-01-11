@@ -65,7 +65,9 @@ public class ChatGPTFrame extends javax.swing.JFrame{
     private Server server;
     public Socket soc;
     public String answ;
-
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
     public String getAnswer() {
         return answ;
     }
@@ -264,24 +266,57 @@ public class ChatGPTFrame extends javax.swing.JFrame{
             System.out.println("ChatGPT port:"+server.getPort());
             server.setAddress(address.getText());
             server.setPort(port.getText());
+            boolean python=true;
+            String result="";
             try{ 
                 String[] cmd = {
-                        "python",
-                        System.getProperty("user.dir")+"\\chat_gpt.py "+server.getPort()+" "+server.getAddress(),
+                        "python -c \"import openai\"",
                     };
                     Runtime rt = Runtime.getRuntime();
                 try {
                     Process proc = rt.exec(cmd);
+                    result = new String(proc.getInputStream().toString());
+                    if(result.contains("not available") || result.contains("introuvable") || result.contains("no module"))
+                        python=false;
+                    
                 } catch (IOException ex) {
-                    Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    //Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    python=false;
                 }
-                
-                System.out.println("greta.auxiliary.chatgpt.ChatGPT:" + server.port + "   " + server.address);
-                server.startConnection();
                 }
                 catch(Exception e)
                 {
                 e.printStackTrace(); 
+            }
+            
+            
+            if(python==false){
+                System.out.println(ANSI_RED+"Python or openai not installed, please install them in order to use chatGPT!!!"+ANSI_RESET);
+                enable.setSelected(false);
+                enable.setEnabled(false);
+                
+            }
+            
+            if(python){
+                try{ 
+                    String[] cmd = {
+                            "python",
+                            System.getProperty("user.dir")+"\\chat_gpt.py "+server.getPort()+" "+server.getAddress(),
+                        };
+                        Runtime rt = Runtime.getRuntime();
+                    try {
+                        Process proc = rt.exec(cmd);
+                    } catch (IOException ex) {
+                        Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    System.out.println("greta.auxiliary.chatgpt.ChatGPT:" + server.port + "   " + server.address);
+                    server.startConnection();
+                    }
+                    catch(Exception e)
+                    {
+                    e.printStackTrace(); 
+                }
             }
         }
     }//GEN-LAST:event_enableActionPerformed

@@ -55,6 +55,7 @@ public class Audio {
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
     public static final AudioFormat GRETA_AUDIO_FORMAT = new AudioFormat(
             AudioFormat.Encoding.PCM_SIGNED,
             16000, //Hz - sample rate
@@ -304,7 +305,8 @@ public class Audio {
             }
             
             if(python==false){
-                System.out.println(ANSI_RED+"Python or opensmile not installed, please install them in order to use chatGPT!!!"+ANSI_RESET);
+                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the ASAP module which is optional. "
+                        + "Python and/or opensmile seem to be not installed. You need to install them as well as have the Python ASAP network running in order to use the ASAP module!"+ANSI_RESET);
                 
             }
             

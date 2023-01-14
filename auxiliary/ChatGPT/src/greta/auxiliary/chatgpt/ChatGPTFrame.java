@@ -16,6 +16,8 @@ import greta.core.signals.SignalEmitter;
 import greta.core.signals.SignalPerformer;
 import greta.core.util.CharacterManager;
 import greta.core.util.Mode;
+import static greta.core.util.audio.Audio.ANSI_RESET;
+import static greta.core.util.audio.Audio.ANSI_YELLOW;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
 import greta.core.util.xml.XML;
@@ -291,7 +293,10 @@ public class ChatGPTFrame extends javax.swing.JFrame{
             
             
             if(python==false){
-                System.out.println(ANSI_RED+"Python or openai not installed, please install them in order to use chatGPT!!!"+ANSI_RESET);
+                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the ChatGPT module which is optional. "
+                        + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
+                
+  
                 enable.setSelected(false);
                 enable.setEnabled(false);
                 

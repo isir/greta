@@ -521,6 +521,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                      }
             }
             }
+            
+            if(gaze.getOffsetDirection()==GazeDirection.FRONT){
+                move_head=true;
+                move_torso_high=true;
+                move_torso_low=true;
+                theta=0;
+                pitch=0;
+            }
 
             
             if (move_torso_high) {
@@ -576,6 +584,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     System.out.println("[INFO SAGITTAL]");
                     int sag_sign=-1;
                     if(headAndEyesAngles.headPosition.get(1)<headAndEyesAngles.posTarget.get(1)){
+                        System.out.print("Sagittal check");
                         sag_sign=1;
                     }
                 }
@@ -583,8 +592,11 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     int sag_sign=-1;
                     if(headAndEyesAngles.headPosition.get(1)<headAndEyesAngles.posTarget.get(1)){
                         sag_sign=1;
+                        System.out.print("Sagittal check");
                     }
                     spinePhaseTargetPosition.verticalTorsion.flag=true;
+                    if(gaze.getOffsetDirection()==GazeDirection.UP || gaze.getOffsetDirection()==GazeDirection.UPRIGHT || gaze.getOffsetDirection()==GazeDirection.UPLEFT)
+                        sag_sign=-1;
                     spinePhaseTargetPosition.verticalTorsion.value=sign*Math.toRadians(theta)/4;
 
                     System.out.println("[SPINE]:"+spinePhaseTargetPosition.verticalTorsion.value);
@@ -984,8 +996,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
             // check if the gaze expression is in the facelibrary
             // if we look at a target there is no information in the library
-            if ((gaze.getTarget() == null || gaze.getTarget().isEmpty())
-                    && gaze.getOffsetDirection() == GazeDirection.FRONT && gaze.getOffsetAngle() == 0) {
+            if (gaze.getTarget() == null || gaze.getTarget().isEmpty()
+                || gaze.getOffsetDirection() == GazeDirection.FRONT || gaze.getOffsetAngle() == 0) {
                 
                 System.out.println("[INFO] GAZE Expression: yes");
                 AUExpression faceLibraryExpression = FaceLibrary.global_facelibrary.get(gaze.getReference());
@@ -1333,7 +1345,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     
 
                     // Add gazekeyframe for the END of the gaze
-                    if (!gaze.isGazeShift()) {
+                    if (!gaze.isGazeShift() || gaze.getOffsetDirection()==GazeDirection.FRONT) {
                         if (gazeStillInProgress()) {
                             handleGazeStillInProgress(end, outputKeyframe);
                             System.out.println("STILL IN PROGRESS");

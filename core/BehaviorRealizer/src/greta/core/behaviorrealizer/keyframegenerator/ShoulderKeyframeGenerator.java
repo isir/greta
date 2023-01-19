@@ -478,7 +478,6 @@ public class ShoulderKeyframeGenerator extends KeyframeGenerator {
                         double norm_valuet = torso_value / max_t;
 
                         if (torsoin == 1) {
-                            System.out.println("START LEANING:"+start + (i - offset1));
                             addTorsoLeaning(start + (i - offset1), norm_valuet, outputKeyframes);
                         }
 
@@ -687,7 +686,7 @@ public class ShoulderKeyframeGenerator extends KeyframeGenerator {
 
     //add neutral torso frame
     protected void addMINTorso(double time, double intensity, List<Keyframe> outputKeyframes) {
-        System.out.println("START LEANING:"+time);
+
         SpinePhase strokePhase = new SpinePhase("start", time, time + 0.03);
 
         strokePhase.collapse.flag = false;

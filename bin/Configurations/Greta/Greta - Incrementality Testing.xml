@@ -105,7 +105,7 @@
                     id="IncRealizerInteraction - 1660842362400-881"
                     module="IncRealizerInteraction"
                     name="IncRealizerInteraction" w="160.0" x="80.0" y="400.0">
-                    <window h="112" visible="false" w="338" x="0" y="0"/>
+                    <window h="112" visible="true" w="473" x="375" y="423"/>
                 </element>
             </element>
         </element>
@@ -117,15 +117,31 @@
             <parameter name="roll" value="0.0"/>
             <parameter name="pitch" value="0.0"/>
             <parameter name="yaw" value="0.0"/>
-            <window h="614" visible="true" w="736" x="10" y="230"/>
+            <window h="614" visible="true" w="736" x="1018" y="74"/>
         </element>
     </elements>
     <connections>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Incremental Realizer V2 - 1654077787072-623"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="IncRealizerInteraction - 1660842362400-881" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="connectIncInteractionToRealizer"
-            source="Incremental Realizer V2 - 1654077787072-623" target="IncRealizerInteraction - 1660842362400-881"/>
+            source="IncRealizerInteraction - 1660842362400-881" target="Incremental Realizer V2 - 1654077787072-623"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Incremental Realizer V2 - 1654077787072-623"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Incremental Realizer V2 - 1654077787072-623" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -135,30 +151,14 @@
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Incremental Realizer V2 - 1654077787072-623" target="Audio Keyframe Performer - 1554477294171-845"/>
         <connection connector="connectIncInteractionToRealizer"
-            source="IncRealizerInteraction - 1660842362400-881" target="Incremental Realizer V2 - 1654077787072-623"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="IncRealizerInteraction - 1660842362400-881" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+            source="Incremental Realizer V2 - 1654077787072-623" target="IncRealizerInteraction - 1660842362400-881"/>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1544700914641-19" target="Incremental Realizer V2 - 1654077787072-623"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+            source="Behavior Planner - 1544700734561-356" target="Incremental Realizer V2 - 1654077787072-623"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="addLogOutput"
             source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
     </connections>
 </modulated>

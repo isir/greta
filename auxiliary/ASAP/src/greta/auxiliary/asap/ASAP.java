@@ -85,6 +85,7 @@ public class ASAP implements Runnable{
     public ASAP(CharacterManager cm, ASAPFrame loader){
         this.cm=cm;
         this.loader=loader;
+        this.cm.setAsap_enabled(true);
     }
     
     

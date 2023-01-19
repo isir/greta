@@ -1179,7 +1179,7 @@
 		</module>
 		<module name="IncRealizerInteraction" style="BehaviorRealizer">
 			<object class="greta.auxiliary.incrementality.IncRealizerInteraction" lib_id="greta_incrementality"/>
-			<frame class="greta.auxiliary.incrementality.IncRealizerInteractionGUI" lib_id="greta_incrementality" type="frame">
+			<frame class="greta.auxiliary.incrementality.IncrRealizerInteractionGUI_" lib_id="greta_incrementality" type="frame">
                 <link method="setLoader" on="frame"/>
             </frame>
 		</module>
@@ -1187,6 +1187,9 @@
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
+		<lib id="ext_slf4j_api" path="./Common/Lib/External/slf4j-api-1.7.9.jar"/>
+		<lib id="ext_jeromq" path="./Common/Lib/External/jeromq-0.5.1.jar"/>
+		<lib id="ext_ftp4" path="./Common/Lib/External/ftp4j-1.7.2.jar"/>
         <lib id="ext_activemq-all" path="./Common/Lib/External/activemq-all-5.15.10.jar"/>
         <lib id="ext_cereproc" path="./Common/Lib/External/cereproc/cerevoice_eng.jar">
             <needs path="./Common/Data/CereProc/**"/>
@@ -1401,10 +1404,10 @@
         </lib>
 		<lib id="ext_ariavaluspa_fml_translator" path="./Common/Lib/External/aria-fml-translator.jar"/>
 		<lib id="ariavaluspa" path="./Common/Lib/Internal/AriaValuspa.jar">
-            <depends lib_id="intentions"/>
-            <depends lib_id="signals"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
             <depends lib_id="greta_util"/>
-            <depends lib_id="ext_activemq"/>
+            <depends lib_id="ext_activemq-all"/>
             <depends lib_id="ext_ariavaluspa_fml_translator"/>
 			<depends lib_id="ext_ftp4"/>
         </lib>
@@ -1487,7 +1490,7 @@
         </lib>
 		<lib id="videoCapture" path="./Player/Lib/Internal/VideoCapture.jar">
             <depends lib_id="greta_ogre_player"/>
-            <depends lib_id="ext_xuggle"/>
+            <depends lib_id="ext_xuggle-xuggler"/>
             <depends lib_id="ext_slf4j_api"/>
         </lib>
         <lib id="greta_util" path="./Common/Lib/Internal/Util.jar">
@@ -1587,11 +1590,11 @@
             <depends lib_id="greta_osc"/>
         </lib>
 	    <lib id="multilayer_attitude_planner" path="./Common/Lib/Internal/MultiLayerAttitudePlanner.jar">
-            <depends lib_id="behavior_planner"/>
-            <depends lib_id="intentions"/>
+            <depends lib_id="greta_behavior_planner"/>
+            <depends lib_id="greta_intentions"/>
             <depends lib_id="sequence_mining"/>
-            <depends lib_id="signals"/>
-            <depends lib_id="socialparameters"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_social_parameters"/>
             <depends lib_id="greta_util"/>
             <depends lib_id="ext_opencsv_2.3"/>
             <depends lib_id="ext_weka"/>

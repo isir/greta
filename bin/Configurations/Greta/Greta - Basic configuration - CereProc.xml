@@ -27,7 +27,7 @@
                 </element>
                 <element h="50.0" id="CereProc - 1544700946314-81" module="CereProc" name="CereProc" w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0" id="FML File Reader - 1544700908962-428" module="FML File Reader" name="FML File Reader" w="80.0" x="30.0" y="30.0">
-                    <parameter name="fileName" value="C:\Users\Michele\Desktop\greta-gpl-2\greta-gpl\bin\Examples\DemoEN\MeaningMiner_FML_Example.xml"/>
+                    <parameter name="fileName" value=".\Examples\DemoEN\MeaningMiner_FML_Example.xml"/>
                     <window h="108" visible="true" w="517" x="10" y="10"/>
                 </element>
                 <element h="50.0" id="BML File Reader - 1544700914641-19" module="BML File Reader" name="BML File Reader" w="80.0" x="130.0" y="30.0">

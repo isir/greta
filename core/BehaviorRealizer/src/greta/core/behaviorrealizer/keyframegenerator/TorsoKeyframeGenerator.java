@@ -55,12 +55,12 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
                 startKeyframe = new TorsoKeyframe(getDefaultPosition());
             }
             else if(keyframes.peekLast().getOffset()<=torso.getPhases().get(0).getStartTime()){
-                    System.out.println("PEEK LAST:"+keyframes.peekLast().getOffset()+"  "+torso.getPhases().get(0).getStartTime());
+                    //System.out.println("PEEK LAST:"+keyframes.peekLast().getOffset()+"  "+torso.getPhases().get(0).getStartTime());
                     startKeyframe = new TorsoKeyframe(keyframes.peekLast());
             }
 
             if(startKeyframe != null){
-                System.out.println("SET START TIME:"+torso.getStartValue()+"   "+torso.getStart());
+                //System.out.println("SET START TIME:"+torso.getStartValue()+"   "+torso.getStart());
                 setTimeOn(startKeyframe, torso.getStartValue());
                 ExpressivityParameters e = new ExpressivityParameters();
                 e.fld = torso.getFLD();
@@ -88,10 +88,10 @@ public class TorsoKeyframeGenerator extends KeyframeGenerator {
             outputKeyframes.addAll(keyframes);
 
             //VI) save the last position
-            System.out.println("TORSO KEYFRAMES:"+keyframes.size());
-            for(int i=0; i<outputKeyframes.size();i++){
-                System.out.println(outputKeyframes.get(i).getCategory()+"   "+outputKeyframes.get(i).getModality()+"  "+outputKeyframes.get(i).getOffset());
-            }
+            //System.out.println("TORSO KEYFRAMES:"+keyframes.size());
+            //for(int i=0; i<outputKeyframes.size();i++){
+            //    System.out.println(outputKeyframes.get(i).getCategory()+"   "+outputKeyframes.get(i).getModality()+"  "+outputKeyframes.get(i).getOffset());
+            //}
             setRestPosition(keyframes.peekLast());
         }
     }

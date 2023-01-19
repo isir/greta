@@ -60,7 +60,7 @@ public class AudioTreeNode extends TreeNode implements AudioPerformer{
                 while (iter.hasNext()) {
                     Audio presentAudio = iter.next();
                     presentAudio.setPlayingBufferPos(Audio.PLAYING_BUFFER_POSITION_FINISHED);
-                    System.out.println("greta.core.util.audio.AudioTreeNode.addAudio() "+presentAudio.toString()+"  "+presentAudio.getDuration());
+                   // System.out.println("greta.core.util.audio.AudioTreeNode.addAudio() "+presentAudio.toString()+"  "+presentAudio.getDuration());
                 }
 
                 audios.clear();

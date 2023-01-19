@@ -35,6 +35,7 @@ public class HeadKeyframe extends ParametersKeyframe {
     /** Rotation around the z(forward) axis */
     public SpineDirection lateralRoll;
 
+    private String parentId;
     /**
      * Constructs a new {@code HeadKeyframe}
      * @param id the identifier of this {@code HeadKeyframe}.
@@ -124,12 +125,12 @@ public class HeadKeyframe extends ParametersKeyframe {
 
     @Override
     public String getParentId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return parentId;
     }
 
     @Override
     public void setParentId(String parParentId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.parentId = parParentId;
     }
 
 }

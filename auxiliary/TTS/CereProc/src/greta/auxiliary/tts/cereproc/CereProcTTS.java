@@ -525,7 +525,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     else
                     {
                         String phonemeType = parts[2];
-                        System.out.println("CHECK:"+languageID+"   "+phonemeType);
+                        //System.out.println("CHECK:"+languageID+"   "+phonemeType);
                         PhonemeType[] pho = CereProcConstants.convertPhoneme(languageID, phonemeType);
                         if (pho != null) {
 
@@ -868,7 +868,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
             double startT = Double.valueOf(parts[0]);
             double endT = Double.valueOf(parts[1]);
             String item = parts[2];
-            System.out.println("GRETA CHECK CERE VAL:"+startT+"  "+endT);
+            //System.out.println("GRETA CHECK CERE VAL:"+startT+"  "+endT);
             toReturn+="Start [" + startT + "] End [" + endT + "] Item [" + item + "]\n";
         }
 

@@ -185,6 +185,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         // Gaze keyframes for the eyes are generated last
         gazeGenerator.generateEyesKeyframes(keyframes);
 
+        
         faceGenerator.findExistingAU(keyframes);
         keyframes.addAll(faceGenerator.generateKeyframes());
 
@@ -257,7 +258,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         } else {
             //gather offset of first keyframe and last keyframe to calculate duration and stopTime in case of stop
             firstKeyframeOffset = keyframes.get(0).getOffset();
-            lastKeyframeOffset = keyframes.get(keyframes.size() - 1).getOffset();
+            lastKeyframeOffset = keyframes.get(keyframes.size()-1).getOffset();
 
             //CHUNKING KEYFRAMES
             TreeMap<Integer, List<Keyframe>> treeList = this.createChunk(keyframes);

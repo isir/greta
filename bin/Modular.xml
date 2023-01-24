@@ -14,7 +14,7 @@
             <menu name="Inputs">
                 <item module="FML File Reader" name="FML File Reader"/>
 				<item module="FML_Jieyeon" name="FML_Jieyeon"/>
-				<item module="ChatGPT" name="ChatGPt"/>
+				<item module="GPT3" name="GPT3"/>
                 <item module="BML File Reader" name="BML File Reader"/>
                 <item module="Keyframe File Reader" name="Keyframe File Reader"/>
                 <item module="FAP File Reader" name="FAP File Reader"/>
@@ -284,8 +284,9 @@
             </frame>
             <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
-        <module name="ChatGPT" style="Intentions">
-            <object class="greta.auxiliary.chatgpt.ChatGPT" lib_id="greta_chatgpt"/>
+        <module name="GPT3" style="Intentions">
+            <object class="greta.auxiliary.gpt3.GPT3Frame" lib_id="greta_gpt3"/>
+			<frame type="object"/>
         </module>
 		<module name="Watson" style="Intentions">
             <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
@@ -1614,7 +1615,7 @@
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_mpeg4"/>
         </lib>
-	    <lib id="greta_chatgpt" path="./Common/Lib/Internal/ChatGPT.jar">
+	    <lib id="greta_gpt3" path="./Common/Lib/Internal/GPT3.jar">
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_intentions"/>
             <depends lib_id="greta_meaning_miner"/>

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greta.auxiliary.chatgpt;
+package greta.auxiliary.gpt3;
 
 import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
 import greta.core.intentions.FMLTranslator;
@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -58,10 +59,10 @@ import org.xml.sax.SAXException;
  *
  * @author miche
  */
-public class ChatGPTFrame extends javax.swing.JFrame{
+public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
 
     /**
-     * Creates new form ChatGPTFrame
+     * Creates new form GPT3Frame
      */
     
     private Server server;
@@ -70,6 +71,12 @@ public class ChatGPTFrame extends javax.swing.JFrame{
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
+    
+    private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
+    private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
+    private XMLParser fmlparser = XML.createParser();
+    private XMLParser bmlparser = XML.createParser();
+    private static String markup = "fml-apml";
     public String getAnswer() {
         return answ;
     }
@@ -83,10 +90,122 @@ public class ChatGPTFrame extends javax.swing.JFrame{
     
     public CharacterManager cm;
     
-    public ChatGPTFrame(CharacterManager cm) {
+    public GPT3Frame(CharacterManager cm) {
         initComponents();
         server = new Server();
         this.cm=cm;
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setWrapStyleWord(true);
+        request.setLineWrap(true);
+        request.setWrapStyleWord(true);
+    }
+    
+     public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
+        
+         System.out.println("TEXT TO TRANSFORM:"+text); 
+        if(text.length()>1){
+        String construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n" +
+                            "<fml-apml>\n<bml>"+
+                            "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
+                            "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
+        System.out.println("greta.core.intentions.FMLFileReader.TextToFML()");
+        String[] sp=text.split(" ");
+        int i=1;
+         System.out.println("greta.auxiliary.gpt3.GPT3Frame.TextToFML() "+sp.length);
+        for(int j=0;j<sp.length;j++){
+            construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
+                        i++;
+        }
+        i=i-1;
+        construction=construction+"\n</speech>\n</bml>\n<fml>\n";
+        construction=construction+ "</fml>\n</fml-apml>";
+        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+        Document document = docBuilder.parse(new InputSource(new StringReader(construction)));
+        TransformerFactory transformerFactory = TransformerFactory.newInstance();
+        Transformer transformer = transformerFactory.newTransformer();
+        DOMSource source = new DOMSource(document);
+        FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\fml_gpt3.xml"));
+        StreamResult result = new StreamResult(writer);
+        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+        transformer.transform(source, result);
+        }
+        return System.getProperty("user.dir")+"\\fml_gpt3.xml";
+    }
+    
+    
+    public ID load(String fmlFileName) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
+
+        //get the intentions of the FML file
+        fmlparser.setValidating(true);
+        bmlparser.setValidating(true);
+        String fml_id = "";
+        BufferedReader reader;
+        String text="";
+        fmlFileName=TextToFML(text);
+        System.out.println("Name new fml file "+fmlFileName);
+       
+        
+        XMLTree fml = fmlparser.parseFile(fmlFileName);
+        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml,cm);
+        System.out.println("greta.core.intentions.FMLFileReader.load()");
+        Mode mode = FMLTranslator.getDefaultFMLMode();
+        for (XMLTree fmlchild : fml.getChildrenElement()) {
+            // store the bml id in the mode class in order
+            if (fmlchild.isNamed("bml")) {
+                //System.out.println(fmlchild.getName());
+                if(fmlchild.hasAttribute("id")){
+                    mode.setBml_id(fmlchild.getAttribute("id"));
+                }
+            }
+        }
+        if(fml.hasAttribute("id")){
+            fml_id = fml.getAttribute("id");
+        }else{
+            fml_id = "fml_1";
+        }
+        if (fml.hasAttribute("composition")) {
+            mode.setCompositionType(fml.getAttribute("composition"));
+        }
+        if (fml.hasAttribute("reaction_type")) {
+            mode.setReactionType(fml.getAttribute("reaction_type"));
+        }
+        if (fml.hasAttribute("reaction_duration")) {
+            mode.setReactionDuration(fml.getAttribute("reaction_duration"));
+        }
+        if (fml.hasAttribute("social_attitude")) {
+            mode.setSocialAttitude(fml.getAttribute("social_attitude"));
+        }
+
+        ID id = IDProvider.createID(fmlFileName);
+        id.setFmlID(fml_id);
+        if(this.cm.use_MM()){
+        ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
+         //MEANING MINER TREATMENT START
+        List<Intention> intention_list;
+        //System.out.println("File Name "+fml.toString());
+        intention_list = im.processText_2(fml.toString());
+        intentions.addAll(intention_list);
+        //MEANING MINER TREATMENT END
+        }
+        
+        
+       
+        //send to all SignalPerformer added
+        for (IntentionPerformer performer : performers) {
+            performer.performIntentions(intentions, id, mode);
+        }
+        return id;
+    }
+    
+         @Override
+    public void addIntentionPerformer(IntentionPerformer performer) {
+        performers.add(performer);
+    }
+    
+        @Override
+    public void removeIntentionPerformer(IntentionPerformer performer) {
+        performers.remove(performer);
     }
 
     
@@ -265,24 +384,29 @@ public class ChatGPTFrame extends javax.swing.JFrame{
         
         if(enable.isSelected()){
             
-            System.out.println("ChatGPT port:"+server.getPort());
+            System.out.println("GPT3 port:"+server.getPort());
             server.setAddress(address.getText());
             server.setPort(port.getText());
             boolean python=true;
             String result="";
             try{ 
                 String[] cmd = {
-                        "python -c \"import openai\"",
+                        "python ", "-c", "import openai"
                     };
                     Runtime rt = Runtime.getRuntime();
                 try {
                     Process proc = rt.exec(cmd);
-                    result = new String(proc.getInputStream().toString());
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+                        String line = "";
+                        while ((line = reader.readLine()) != null) {
+                            System.out.println(line + "\n");
+                        }
                     if(result.contains("not available") || result.contains("introuvable") || result.contains("no module"))
                         python=false;
                     
                 } catch (IOException ex) {
-                    //Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("greta.auxiliary.gpt3.GPT3Frame.enableActionPerformed()");
+                    Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
                     python=false;
                 }
                 }
@@ -293,7 +417,7 @@ public class ChatGPTFrame extends javax.swing.JFrame{
             
             
             if(python==false){
-                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the ChatGPT module which is optional. "
+                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the GPT3 module which is optional. "
                         + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
                 
   
@@ -304,19 +428,90 @@ public class ChatGPTFrame extends javax.swing.JFrame{
             
             if(python){
                 try{ 
-                    String[] cmd = {
-                            "python",
-                            System.getProperty("user.dir")+"\\chat_gpt.py "+server.getPort()+" "+server.getAddress(),
-                        };
-                        Runtime rt = Runtime.getRuntime();
-                    try {
-                        Process proc = rt.exec(cmd);
-                    } catch (IOException ex) {
-                        Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-
-                    System.out.println("greta.auxiliary.chatgpt.ChatGPT:" + server.port + "   " + server.address);
+                    System.out.println("Opening python gpt3 script");
+                    
                     server.startConnection();
+                    Thread r1 = new Thread() {
+                    @Override
+                    public void run() {
+                        
+                            try {
+                                System.out.println("Checking new connections");
+                                server.accept_new_connection();
+                            } catch (IOException ex) {
+                                Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                            }
+                        
+                    };
+                    
+                    Thread r2 = new Thread() {
+                    @Override
+                    public void run() {
+                        
+                        try {
+                            String[] cmd = {
+                                "python","-u",
+                                System.getProperty("user.dir")+"\\gpt3.py ",server.getPort(),
+                            };
+                            Runtime rt = Runtime.getRuntime();
+                            System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);
+                            
+                            Process proc = rt.exec(cmd);
+                            
+                            BufferedReader stdInput = new BufferedReader(new
+                        InputStreamReader(proc.getInputStream()));
+                            BufferedReader stdError = new BufferedReader(new
+                        InputStreamReader(proc.getErrorStream()));
+                            
+                            // Read the output from the command
+                            System.out.println("Here is the standard output of the command:\n");
+                            String s = null;
+                           
+                            while ((s = stdInput.readLine()) != null) {
+                                System.out.println("READ INPUT PYTHON:"+s);
+                                answ=s;
+                                if(answ!=null && answ.length()>1){
+                                    System.out.println("CLIENT:"+answ);
+                                    jTextArea1.setText(answ.replace("AI Assistant:", "").replace("AI:", "").replace("AI assistant:","").replace("User:", ""));
+                                }
+                                if(jTextArea1.getText().length()>1){
+                                    answ=null;
+                                    System.out.println("TEXTE:"+jTextArea1.getText());
+                                    String file=TextToFML(jTextArea1.getText());
+                                    load(file);
+                                    
+                                    
+                        }
+                            }
+                            
+                            // Read any errors from the attempted command
+                            System.out.println("Here is the standard error of the command (if any):\n");
+                            while ((s = stdError.readLine()) != null) {
+                                System.out.println(s);
+                            }   } catch (IOException ex) {
+                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (ParserConfigurationException ex) {
+                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (SAXException ex) {
+                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (TransformerException ex) {
+                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (JMSException ex) {
+                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+ } 
+                        
+                    };
+                
+                
+
+                     
+                        
+                    r1.start();
+                    r2.start();
+                    System.out.println("greta.auxiliary.gpt3.GPT3:" + server.port + "   " + server.address);
+                    
                     }
                     catch(Exception e)
                     {
@@ -334,23 +529,13 @@ public class ChatGPTFrame extends javax.swing.JFrame{
                 String text=request.getText();
                 if(text.length()>0)
                     try {
+                       
                         server.sendMessage(text);
+                        System.out.println("Sent message:"+text);
                 } catch (IOException ex) {
-                    Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                while(true)
-                {
-                    String ans=null;
-                    try {
-                        ans = server.receiveMessage();
-                    } catch (IOException ex) {
-                        Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    if(ans!=null && ans.length()>0)
-                        System.out.println("CLIENT:"+ans);
-                        answer.setText(ans);
-                        answ=ans;
-                }
+
             }
         };
         

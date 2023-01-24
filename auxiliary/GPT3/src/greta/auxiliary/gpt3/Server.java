@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greta.auxiliary.chatgpt;
+package greta.auxiliary.gpt3;
 
 /**
  *
@@ -92,14 +92,15 @@ public class Server {
         
         InetAddress addr= InetAddress.getByName(address);
         System.out.println("Trying to open port " + port + "... at address:"+address);
-        serverSocket = new ServerSocket(Integer.valueOf(port),MAX_PRIORITY,addr);
-        System.out.println("Trying to open port " + port + "... at address:"+address);
-        clientSocket = serverSocket.accept();
+        serverSocket = new ServerSocket(Integer.valueOf(port),MAX_PRIORITY);
         System.out.println("Instantiating input and output streams...");
-        out = new PrintWriter(clientSocket.getOutputStream(), true);
+        System.out.println("greta.auxiliary.gpt3.Server.startConnection()");
+    }
+    
+    public void accept_new_connection() throws IOException{
+        clientSocket = serverSocket.accept();
         in =  new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        System.out.println("greta.auxiliary.chatgpt.Server.startConnection()");
-        System.out.println("greta.auxiliary.chatgpt.Server.startConnection()");
+        out = new PrintWriter(clientSocket.getOutputStream(), true);
     }
 
     public void sendMessage(String msg) throws IOException {

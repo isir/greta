@@ -2,7 +2,7 @@
 GRETA
 ======
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: GRETA Platform
 
    install

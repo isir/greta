@@ -1,6 +1,51 @@
-Openface integration
+OpenFace integration
 =====
 
+
+OpenFace 1
+----------
+AUParserFileReader
+_______________
+
+To reproduce the facial expressions and head movements extracted via OpenFace 1, it is possible use the **AUParserFileReader** module. It takes as input a csv file containing the timestamp, the values of all AUs, gaze, head pose and head rotation. The output is a video that reproduce frame by frame the values contained in the csv file (example csv: https://github.com/isir/greta/blob/master/bin/Examples/AUParser/AUParser_example.csv).
+
+Modules Connections
+______________
+
+The module has to be connected to the **SimpleAUPerformer** to send the AUs to the agent and **MPEG4Animatable** to send the BAP values for the Head rotation. One more connection that has to be create is from the **ParserCaptureControllerAU** to the AUParserFileReader. (see figure below)
+
+.. image:: https://user-images.githubusercontent.com/16133942/114034751-c1d20580-987e-11eb-86a8-72a13f98aa03.png
+
+How it works
+_________
+
+1. Pushing the button **Open** it is possible to select the directory where are stored the csv files.
+
+.. image:: https://user-images.githubusercontent.com/39828750/56213895-2a55c580-605d-11e9-90ff-d108add28054.png
+
+
+2. Then pushing the button **Send**, the list of all variables in the csv files will appear in the window below (Headers).
+
+.. image:: https://user-images.githubusercontent.com/39828750/56214597-79e8c100-605e-11e9-95d0-d69fc2d763f3.png
+
+
+3. **Select** the variables you want to reproduce, chekcing the related **checkbox** (or just push the button Select All).
+
+4. Push the button **Set**. After that you are ready to record.
+
+5. To start the recording go to the **ParserCaptureControllerAU** interface and push the button **Record all files**
+
+.. image:: https://user-images.githubusercontent.com/39828750/56215189-83bef400-605f-11e9-984d-0f66fb9d3cc9.png
+
+Some info
+_________
+* the frame rate for the video is computed taking the difference between the timestamp value of the first two rows
+* keep the "Real Time" checkbox selected if you want the duration of the video be as long as the real time duration of the file
+
+
+
+OpenFace 2
+---------
 OpenFace 2, developed at the CMU MultiComp Lab, is a facial behavior analysis toolkit capable of real-time performance.
 The system is capable of performing a number of facial analysis tasks:
  

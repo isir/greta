@@ -20,7 +20,7 @@ The Speech is extracted from the SpeechSignal and then is modified to be underst
 vrExpress Message
 -----
 
-.. image:: https://github.com/isir/greta/blob/gpl-grimaldi/pictures/vrExpress.PNG
+.. image:: https://github.com/isir/greta/blob/gpl-grimaldi/pictures/vrExpress.jpg
 
 A vrExpress Message is the way that NVBG uses to communicate between its components. One doesn't need to specify the intentions (intention tags omitted), they will be computed automatically, instead it's mandatory to define a character that will take in charge the message process (harmony in the photo).
 
@@ -39,7 +39,26 @@ In the run-toolkit-all.bat is specified to launch NVBG with some arguments:
 * NVBG-Transform.xls: used by NVBG-Rules , define the structure of the response
 * NVBG-BahviorDescription.xls: used by NVBG-Rules, define the structure of the response
 
-.. image:: https://github.com/isir/greta/blob/gpl-grimaldi/pictures/NVBG_cap.PNG
+.. image:: https://github.com/isir/greta/blob/gpl-grimaldi/pictures/NVBG_cap.jpg
 
 The parser is launched just after the launch of NVBG, it will parse the speech and send it ,once parsed, back to NVBG.
+
+Find NVBG Gesture and Conversion to GRETA Gesture
+-----
+
+From the Planner or the BML File Reader , GRETA will launch NVBG and the Charniak Parser and send to it the speech as vrExpress Message, then NVBG will send back the encrypted response  of the treatement that will contain some <animation> tags that will be decrypted.Those elements contain the gesture that NVBG found for SmartBody. 
+
+We now need to convert the tags "animation" to the tag <gesture> which is understandable by GRETA , to add the type of the gesture (i.e beat etc..), to change the gesture name using the mapping file (i.e NVBGBeatLow->GRETABeatLow) 
+
+The mapping file contains a the NVBG gestures, GRETA gestures and the type of the latter. Each line contains a NVBG Gesture and its version made in GRETA 
+The type is stocked in another mapping file which will map the type of NVBG Gestures and GRETA Gesture.
+
+The mapping file will contain the elements separated by "::" to make the file easy to parse. (i.e. NVBGBeatLow::GRETABeatLow), The same is done for the type.
+
+At the last we need to delete from the line on the gesture some informations which are not useful (importance) and to add the start and end of the gesture.
+
+At the end of the traitement we will have the line containing the gesture. We now need to add the "context" around the gesture, for that we recreate locally a BML using the speech and it will contain the gestures found by NVBG.
+
+The last step is to use the convert the BML to Signals (GesturesSignals essentially) and to add these signals to the existing signals, then GRETA's BehaviorRealizer will process them.
+
 

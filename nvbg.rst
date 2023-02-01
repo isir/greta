@@ -20,7 +20,7 @@ The Speech is extracted from the SpeechSignal and then is modified to be underst
 vrExpress Message
 -----
 
-.. image:: https://github.com/Michele1996/images/blob/main/vrExpress.PNG
+.. image:: https://github.com/isir/greta/blob/gpl-grimaldi/pictures/vrExpress.PNG
 
 A vrExpress Message is the way that NVBG uses to communicate between its components. One doesn't need to specify the intentions (intention tags omitted), they will be computed automatically, instead it's mandatory to define a character that will take in charge the message process (harmony in the photo).
 
@@ -39,7 +39,7 @@ In the run-toolkit-allC#.bat is specified to launch NVBG with some arguments:
 * NVBG-Transform.xls: used by NVBG-Rules , define the structure of the response
 * NVBG-BahviorDescription.xls: used by NVBG-Rules, define the structure of the response
 
-.. image:: https://github.com/Michele1996/images/blob/main/NVBG_cap.PNG
+.. image:: https://github.com/isir/greta/blob/gpl-grimaldi/pictures/NVBG_cap.PNG
 
 The parser is launched just after the launch of NVBG, it will parse the speech and send it ,once parsed, back to NVBG.
 

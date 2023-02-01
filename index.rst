@@ -11,5 +11,6 @@ GRETA
    quickstart
    new_modules
    openface
+   nvbg
    projects
 

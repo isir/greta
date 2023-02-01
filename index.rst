@@ -6,5 +6,7 @@ GRETA
    :caption: GRETA Platform
 
    install
+   build
    quickstart
    new_modules
+ 

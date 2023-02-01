@@ -13,12 +13,18 @@ Some parts of Greta are licensed under the GNU GPL v3 (the gpl branch of the Git
 
 Greta depends on external software for Speech Synthesis ([MaryTTS](http://mary.dfki.de/) or CereProc), and 3D Rendering (Ogre or Unity).
 
-# Quick start
+Start
+--------
+
 1) Clone the repository to retrieve all files from the Greta Projects.
+
 2) Greta is composed of several Java projects, you need to open them in NetBeans 8.2 IDE and to build them.
-3) 2 Speech Synthesizers are compatible with Greta so far, MaryTTS and CereProc.
+
+3) Speech Synthesizers are compatible with Greta so far, MaryTTS and CereProc.
+
 If you plan on using CereProc, you need to acquire a license and place the voices and their respective license files in the `<GRETA_DIR>/bin/Common/Data/CereProc/` folder. 
 If you plan on using MaryTTS, you need to:
+
   * First download  [MaryTTS](http://mary.dfki.de/);
   * run `<MARYTTS_DIR>/marytts-5.2/bin/marytts-component-installer` and download the voices after checking in the character .ini files (go to the folder `<GRETA_DIR>/bin/Common/Data/characters`) which voices are used;
   * MaryTTS server running (`<MARYTTS_DIR>/marytts-5.2/bin/marytts-server`);

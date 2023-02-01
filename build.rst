@@ -38,6 +38,7 @@ ANT Installation and Setup (in Windows)
 ________
 
 You can download ANT from [https://ant.apache.org/](https://ant.apache.org/). Download the binary distribution, unzip it, and move it to a directory of your choice. After that, set these environment variables (if don't know how to do it, you can try to see this example video: https://www.youtube.com/watch?v=83SccoBYSfA ) all in the user variables section:
+
 1. ANT_HOME: \<the-unzipped-ANT-directory\>
 2. Path: add the \<the-unzipped-ANT-directory\\bin\>
 3. JAVA_HOME: \<your-default-JDK-directory\> (you might already have this set)

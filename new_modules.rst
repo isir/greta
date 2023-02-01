@@ -46,13 +46,16 @@ You'll need to tell Modular how to load the new Module in the [Modular.xml](http
 
 You'll need a menu in the "menus" node : 
 .. code-block:: xml
+
 <menu name="Sample">
 	<item module="Signal Forwarder" name="Signal Forwarder"/>
 	<item module="Intention Forwarder" name="Intention Forwarder"/>
 </menu>
 
 Corresponding Modules in the "modules" node :
+
 .. code-block:: xml
+
 <module name="Signal Forwarder" style="Signals">
 	<object class="greta.auxiliary.sampleModule.SignalForwarder" lib_id="greta_sampleModule"/>            
 </module>
@@ -61,7 +64,9 @@ Corresponding Modules in the "modules" node :
 </module>
 
 And tell where to find the library : 
+
 .. code-block:: xml
+
 <lib id="greta_sampleModule" path="./Common/Lib/Internal/SampleModule.jar">
 	<depends lib_id="greta_util"/>
 	<depends lib_id="greta_signals"/>

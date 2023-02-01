@@ -11,56 +11,80 @@
 
 .. _faq_convert_ino_to_cpp:
 
-Convert Arduino file to C++ manually
-------------------------------------
+The easiest way is to copy the folder "auxiliary/SampleModule" into a new folder (for exemple "auxiliary/**MyModule**").
 
-Some :ref:`ide` don't support Arduino files (``*.ino`` and ``.pde``) because
-they are not valid C/C++ based source files:
 
-1. Missing includes such as ``#include <Arduino.h>``
-2. Function declarations are omitted.
+It contains two dummy modules that take input data from other module to forward it to the connected ones. They could for instance dynamically add data before forwarding it, or log it somwhere.
 
-In this case, code completion and code linting do not work properly or
-are disabled. To avoid this issue you can manually convert your INO files to CPP.
+.. image:: https://user-images.githubusercontent.com/16133942/108232538-2b694980-7143-11eb-8cee-1967229b56d0.png
 
-For example, we have the next ``Demo.ino`` file:
+To interact with other pre-existing modules, you have to think at what kind of data they give you or what kind of data you want to send.
+A lot of pre-existing data format exist, and it's better to re-use them. The last option can be to create you own interfaces and replicate this approach.
+For each of data, you usually have an "Emitter" module that send the data to all connected "Performer" modules.
 
-.. code-block:: cpp
 
-    void setup () {
-        someFunction(13);
-    }
+For exemple the Intention interface (https://github.com/isir/greta/blob/master/core/Intentions/src/greta/core/intentions/Intention.java) is defined in the Intentions.jar library and this two interfaces define the communication : 
 
-    void loop() {
-        delay(1000);
-    }
+* IntentionPerformer: (https://github.com/isir/greta/blob/master/core/Intentions/src/greta/core/intentions/IntentionPerformer.java)
+* IntentionEmitter: (https://github.com/isir/greta/blob/master/core/Intentions/src/greta/core/intentions/IntentionEmitter.java)
 
-    void someFunction(int num) {
-    }
+In this exemple the IntentionForwarder (https://github.com/isir/greta/blob/master/auxiliary/SampleModule/src/greta/auxiliary/sampleModule/IntentionForwarder.java) module will forwarder data, so it implements both interfaces.
 
-Let's convert it to  ``Demo.cpp``:
+Add Dependecies
+-------
 
-1. Add ``#include <Arduino.h>`` at the top of the source file
-2. Declare each custom function (excluding built-in, such as ``setup`` and ``loop``)
-   before it will be called.
+You may need to have acces to other modules classes. For that you should add the project dependecies in NetBeans: 
 
-The final ``Demo.cpp``:
+* Right click on your project
+* Go on Properties
+* Add Dependecies : here you can add Project dependencies (suggested) or .jar dependecies
 
-.. code-block:: cpp
+Jar files are should be located in bin/Common/Lib/ , in Internal (Greta modules) or External (external jars)
 
-    #include <Arduino.h>
+Update Modular
+-------
+The connections are also defined in the Modular.xml, (https://github.com/isir/greta/wiki/Modular.xml) file in the "connectors" section to allow the UI to make the arrow connection.
 
-    void someFunction(int num);
 
-    void setup () {
-        someFunction(13);
-    }
+.. code-block:: xml
 
-    void loop() {
-        delay(1000);
-    }
+    <connector id="IntentionEmitterToIntentionPerformer">
+        <input class="greta.core.intentions.IntentionEmitter" lib_id="greta_intentions"/>
+        <output class="greta.core.intentions.IntentionPerformer" lib_id="greta_intentions"/>
+        <connect from="input" method="addIntentionPerformer" to="output"/>    <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
+        <disconnect from="input" method="removeIntentionPerformer" to="output"/>    <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
+    </connector>
 
-    void someFunction(int num) {
-    }
 
-Finish.
+You'll need to tell Modular how to load the new Module in the [Modular.xml](https://github.com/isir/greta/wiki/Modular.xml) file.
+
+You'll need a menu in the "menus" node : 
+.. code-block:: xml
+
+    <menu name="Sample">
+	    <item module="Signal Forwarder" name="Signal Forwarder"/>
+	    <item module="Intention Forwarder" name="Intention Forwarder"/>
+    </menu>
+
+Corresponding Modules in the "modules" node :
+
+.. code-block:: xml
+
+    <module name="Signal Forwarder" style="Signals">
+	    <object class="greta.auxiliary.sampleModule.SignalForwarder" lib_id="greta_sampleModule"/>            
+    </module>
+    <module name="Intention Forwarder" style="Intentions">
+	    <object class="greta.auxiliary.sampleModule.IntentionForwarder" lib_id="greta_sampleModule"/>                 
+    </module>
+
+And tell where to find the library : 
+
+.. code-block:: xml
+
+    <lib id="greta_sampleModule" path="./Common/Lib/Internal/SampleModule.jar">
+	    <depends lib_id="greta_util"/>
+	    <depends lib_id="greta_signals"/>
+	    <depends lib_id="greta_intentions"/>			
+    </lib>
+
+

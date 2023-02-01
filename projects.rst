@@ -6,6 +6,6 @@ Projects
    :caption: Projects   
    
    mypresentingavatar
-   ariavlauspa
+   ariavaluspa
    smartphone
    incrementality

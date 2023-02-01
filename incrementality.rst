@@ -8,8 +8,8 @@ Content
 
 The Incrementality package is composed of the following new modules:
 
-* Incremental Realizer V2 : Modified version of the basic realizer that takes in a list of signals, generate keyframes and separate them into chunks (groups based on keyframe starting time). It then uses a dedicated thread to send keyframes chunks one by one according to their temporality.
-* Incremental Realizer Interaction : Module that allows to interact with the realizer by sending interuption command.
+* **Incremental Realizer V2** : Modified version of the basic realizer that takes in a list of signals, generate keyframes and separate them into chunks (groups based on keyframe starting time). It then uses a dedicated thread to send keyframes chunks one by one according to their temporality.
+* **Incremental Realizer Interaction** : Module that allows to interact with the realizer by sending interuption command.
 
 How to use
 -----

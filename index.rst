@@ -7,4 +7,4 @@ GRETA
 
    install
    quickstart
-   newmodules
+   new_modules

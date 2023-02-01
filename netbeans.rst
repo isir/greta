@@ -15,7 +15,7 @@ ________
 Configuration files modification
 ____________
 
-* Open <code><GRETA_DIR>/bin/Player/Lib/External/Win64/Plugins_DX9.cfg</code> and <code><GRETA_DIR>/bin/Player/Lib/External/Win64/Plugins_OpenGL.cfg</code>
+* Open <GRETA_DIR>/bin/Player/Lib/External/Win64/Plugins_DX9.cfg and <GRETA_DIR>/bin/Player/Lib/External/Win64/Plugins_OpenGL.cfg
 * Change "PluginFolder" value to absolute path
 
 NetBeans configuration
@@ -32,25 +32,38 @@ _________
 Make this step only once.
 
 * In the NetBeans menu, choose "Tools" -> "Templates" to open the template manager
-* Clic on "Settings" button. It opens the <code>User.properties</code> file.
-* Add the line with you name using the correct case<br><code>user=Firstname Lastname</code>
+* Click on "Settings" button. It opens the User.properties file.
+* Add the line with you name using the correct case user=Firstname Lastname
 
 Template to include the license in the code
 __________
 Make this step only once.
 * In the NetBeans menu, choose "Tools" -> "Templates" to open the template manager
 * select the "Licenses" folder and clic on "Add..." button
-* choose the file <code><GRETA_DIR>/license-greta.txt</code>
+* choose the file  <GRETA_DIR>/license-greta.txt
 * select the "Licenses" folder and clic on "Add..." button
-* choose the file <code><GRETA_DIR>/license-greta-auxiliary.txt</code>
+* choose the file <GRETA_DIR>/license-greta-auxiliary.txt
 If you don't do it, you will have some (benign) error when creating a new class.
 
 Create a library
 _______
 
 * create a new project with NetBeans, and choose "Java Class Library" then choose a good name and path
-* edit the file <code><myProject>/build.xml</code> :<br>insert (and check relative path !) :<br><code><import file="../../nbbuild.xml"/></code><br>/!\ it must be added before the line : <br><code><import file="nbproject/build-impl.xml"/></code>
-* edit the file <code><myProject>/nbproject/project.properties</code> :<br>add lines :
+* edit the file <myProject>/build.xml 
+* insert (and check relative path !) :
+
+.. code-block:: xml
+
+  import file="../../nbbuild.xml"
+  
+it must be added before the line
+
+.. code-block:: xml
+
+  import file="nbproject/build-impl.xml"
+  
+* edit the file <myProject>/nbproject/project.properties and add lines :
+
 .. code-block:: ini
 
   compile.on.save=true
@@ -65,7 +78,9 @@ _______
   javac.source=1.8
   javac.target=1.8
 
-first: because it's Catherine's. second : set the final destination of the jar<br>if your version of NetBeans is lower than 7.x, you must add the line : <code>mkdist.disabled=true</code>
+first: because it's Catherine's. second : set the final destination of the jar .
+If your version of NetBeans is lower than 7.x, you must add the line : mkdist.disabled=true
+
 * save the two files
 * shut down NetBeans and restart it
 
@@ -74,8 +89,20 @@ _______
 It's almost the same:
 
 * create a new project with NetBeans, and choose "Java Application" then choose a good name and path
-* edit the file <code><myProject>/build.xml</code>:<br>insert (and check relative path !) :<br><code><import file="../../nbbuild.xml"/></code><br>/!\ it must be added before the line :<br><code><import file="nbproject/build-impl.xml"/></code>
-* edit the file <code><myProject>/nbproject/project.properties</code>:<br>add lines :
+* edit the file <myProject>/build.xml
+* insert (and check relative path !)
+
+.. code-block:: xml
+
+  import file="../../nbbuild.xml"
+  
+it must be added before the line:
+
+.. code-block:: xml
+
+  import file="nbproject/build-impl.xml"
+  
+* edit the file <myProject>/nbproject/project.properties and add lines :
 
 .. code-block:: ini
 
@@ -86,10 +113,11 @@ It's almost the same:
 change the values (and check relative path !):
 
 .. code-block:: ini
-application.vendor=Catherine Pelachaud
-dist.dir=../../bin
-javac.source=1.8
-javac.target=1.8
+
+  application.vendor=Catherine Pelachaud
+  dist.dir=../../bin
+  javac.source=1.8
+  javac.target=1.8
 
 first: because it's Catherine's. second : set the final destination of the jar
 * save the two files
@@ -107,7 +135,7 @@ _________
 
 To add an external jar :
 
-* make sure that this one is in <code><GRETA_DIR>/bin/Common/Lib/External/</code> folder
+* make sure that this one is in <GRETA_DIR>/bin/Common/Lib/External/ folder
 * click on "Add JAR/Folder" button
 * choose the good one (in the good folder)
 * before validating you choice, select "Relative Path"

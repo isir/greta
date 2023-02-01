@@ -25,7 +25,7 @@ Now you are ready to run the Modular application.
 Troubleshooting
 ________
 
-If you have the correct version of JDK but can't build the project, you might have to specify to NetBeans wich version of JDK you want to use. To do so, go to `C:\Program Files\NetBeans-12.6\netbeans\etc\netbeans.conf`, and verify the version of JAVA.
+If you have the correct version of JDK but can't build the project, you might have to specify to NetBeans wich version of JDK you want to use. To do so, go to `C:/Program Files/NetBeans-12.6/netbeans/etc/netbeans.conf`, and verify the version of JAVA.
 
 JDK Default version in NetBeans.conf: 
 

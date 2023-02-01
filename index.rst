@@ -11,9 +11,8 @@ GRETA
    quickstart
    new_modules
    openface
-   Projects/
-   mypresentingavatar
-   ariavlauspa
-   smartphone
-   incrementality
+   Projects/mypresentingavatar
+   Projects/ariavlauspa
+   Projects/smartphone
+   Projects/incrementality
 

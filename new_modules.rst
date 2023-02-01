@@ -49,6 +49,7 @@ The connections are also defined in the Modular.xml, (https://github.com/isir/gr
 You'll need to tell Modular how to load the new Module in the [Modular.xml](https://github.com/isir/greta/wiki/Modular.xml) file.
 
 You'll need a menu in the "menus" node : 
+
 .. code-block:: xml
 
     <menu name="Sample">

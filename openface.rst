@@ -13,7 +13,8 @@ The system is capable of performing a number of facial analysis tasks:
 It can forward all facial expressions, head pose, and gaze to any other software
 
 .. image:: https://user-images.githubusercontent.com/16133942/88185323-191e4000-cc34-11ea-8973-4d1600574de7.png
-.. image:: https://user-images.githubusercontent.com/16133942/98125771-1e3a8e80-1eb5-11eb-9500-218b6d23b617.png)
+
+.. image:: https://user-images.githubusercontent.com/16133942/98125771-1e3a8e80-1eb5-11eb-9500-218b6d23b617.png
 
 It can either :
 

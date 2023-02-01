@@ -9,4 +9,5 @@ GRETA
    build
    quickstart
    new_modules
+   openface
  

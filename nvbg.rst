@@ -53,7 +53,7 @@ We now need to convert the tags "animation" to the tag <gesture> which is unders
 The mapping file contains a the NVBG gestures, GRETA gestures and the type of the latter. Each line contains a NVBG Gesture and its version made in GRETA 
 The type is stocked in another mapping file which will map the type of NVBG Gestures and GRETA Gesture.
 
-The mapping file will contain the elements separated by "::" to make the file easy to parse. (i.e. NVBGBeatLow::GRETABeatLow), The same is done for the type.
+The mapping file will contain the elements separated by **::** to make the file easy to parse. (i.e. **NVBGBeatLow::GRETABeatLow**), The same is done for the type.
 
 At the last we need to delete from the line on the gesture some informations which are not useful (importance) and to add the start and end of the gesture.
 

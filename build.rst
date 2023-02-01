@@ -27,7 +27,9 @@ ________
 
 If you have the correct version of JDK but can't build the project, you might have to specify to NetBeans wich version of JDK you want to use. To do so, go to `C:\Program Files\NetBeans-12.6\netbeans\etc\netbeans.conf`, and verify the version of JAVA.
 
-JDK Default version in NetBeans.conf: (https://user-images.githubusercontent.com/19309307/147920187-dc4f8028-ba79-46b5-9e8e-c97a0a46c772.png)
+JDK Default version in NetBeans.conf: 
+
+.. image:: https://user-images.githubusercontent.com/19309307/147920187-dc4f8028-ba79-46b5-9e8e-c97a0a46c772.png
 
 Build via script
 -------

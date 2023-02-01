@@ -77,3 +77,18 @@ Greta provides a system to configure and use these behaviors in an automatic fas
 Bevacqua, E., Pammi, S., Hyniewska, S. J., Schröder, M., & Pelachaud, C. (2010, September).
 Multimodal backchannels for embodied conversational agents.
 In International Conference on Intelligent Virtual Agents (pp. 194-200). Springer, Berlin, Heidelberg.
+
+.. note:: 
+
+   Greta is free software: you can redistribute it and/or modify
+   it under the terms of the GNU Lesser General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
+ 
+   Greta is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU Lesser General Public License for more details.
+ 
+   You should have received a copy of the GNU Lesser General Public License
+   along with Greta.  If not, see <https://www.gnu.org/licenses/>.

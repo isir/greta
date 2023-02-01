@@ -34,6 +34,8 @@ Update Modular
 -------
 The connections are also defined in the [Modular.xml](https://github.com/isir/greta/wiki/Modular.xml) file in the "connectors" section to allow the UI to make the arrow connection.
 .. code-block:: xml
+
+<!-- Configuration in XML -->
 <connector id="IntentionEmitterToIntentionPerformer">
     <input class="greta.core.intentions.IntentionEmitter" lib_id="greta_intentions"/>
     <output class="greta.core.intentions.IntentionPerformer" lib_id="greta_intentions"/>
@@ -47,6 +49,7 @@ You'll need to tell Modular how to load the new Module in the [Modular.xml](http
 You'll need a menu in the "menus" node : 
 .. code-block:: xml
 
+<!-- Configuration in XML -->
 <menu name="Sample">
 	<item module="Signal Forwarder" name="Signal Forwarder"/>
 	<item module="Intention Forwarder" name="Intention Forwarder"/>
@@ -56,6 +59,7 @@ Corresponding Modules in the "modules" node :
 
 .. code-block:: xml
 
+<!-- Configuration in XML -->
 <module name="Signal Forwarder" style="Signals">
 	<object class="greta.auxiliary.sampleModule.SignalForwarder" lib_id="greta_sampleModule"/>            
 </module>
@@ -67,9 +71,12 @@ And tell where to find the library :
 
 .. code-block:: xml
 
+<!-- Configuration in XML -->
 <lib id="greta_sampleModule" path="./Common/Lib/Internal/SampleModule.jar">
 	<depends lib_id="greta_util"/>
 	<depends lib_id="greta_signals"/>
 	<depends lib_id="greta_intentions"/>			
 </lib>
+
+
 

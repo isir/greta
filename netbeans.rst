@@ -38,6 +38,7 @@ Make this step only once.
 Template to include the license in the code
 __________
 Make this step only once.
+
 * In the NetBeans menu, choose "Tools" -> "Templates" to open the template manager
 * select the "Licenses" folder and clic on "Add..." button
 * choose the file  <GRETA_DIR>/license-greta.txt

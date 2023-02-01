@@ -11,6 +11,10 @@ GRETA
    quickstart
    new_modules
    openface
+   
+   :titlesonly:
+   Projects
+   
    Projects/mypresentingavatar
    Projects/ariavlauspa
    Projects/smartphone

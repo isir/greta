@@ -8,7 +8,7 @@ How to install Greta and compile it with NetBeans
 Installation
 ________
 
-* Install Greta using git clone https://github.com/isir/greta/new/gpl-grimaldi or download zip
+* Install Greta using git clone git@github.com:isir/greta.git or download zip
 * Install Java 64 bits http://java.com/fr/download/manual.jsp
 * Install NetBeans https://netbeans.org/downloads/ version all
 

@@ -6,8 +6,6 @@ GRETA
    :caption: GRETA Platform
 
    install
-   build
-   nvbg
    projects
 
 

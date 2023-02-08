@@ -37,20 +37,20 @@ Build via script
 ANT Installation and Setup (in Windows)
 ________
 
-You can download ANT from [https://ant.apache.org/](https://ant.apache.org/). Download the binary distribution, unzip it, and move it to a directory of your choice. After that, set these environment variables (if don't know how to do it, you can try to see this example video: https://www.youtube.com/watch?v=83SccoBYSfA ) all in the user variables section:
+You can download ANT from https://ant.apache.org/ . Download the binary distribution, unzip it, and move it to a directory of your choice. After that, set these environment variables (if don't know how to do it, you can try to see this example video: https://www.youtube.com/watch?v=83SccoBYSfA ) all in the user variables section:
 
-1. ANT_HOME: \<the-unzipped-ANT-directory\>
-2. Path: add the \<the-unzipped-ANT-directory\\bin\>
-3. JAVA_HOME: \<your-default-JDK-directory\> (you might already have this set)
+1. ANT_HOME: the-unzipped-ANT-directory
+2. Path: add the the-unzipped-ANT-directory\bin\
+3. JAVA_HOME: \your-default-JDK-directory\ (you might already have this set)
 
 You are ready to use ANT! (don't forget to close the existing command line windows, though)
 
 Running the ANT Build Scripts
 __________
 
-To build from a clean state, open the command prompt, go to the `<GRETA_DIR>/` directory on your pc and run this command: `ant build`
+To build from a clean state, open the command prompt, go to the GRETA_DIR/ directory on your pc and run this command: ant build
 
 Running the ANT Clean Scripts
 _________
 
-To clean from a compiled state, open the command prompt, go to the `<GRETA_DIR>/` directory on your pc and run this command: `ant clean`
+To clean from a compiled state, open the command prompt, go to the GRETA_DIR/ directory on your pc and run this command: ant clean

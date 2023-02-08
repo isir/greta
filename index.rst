@@ -7,9 +7,9 @@ GRETA
 
    install
    build
-   netbeans
    quickstart
    new_modules
    openface
    nvbg
+   projects
 

@@ -6,6 +6,7 @@ GRETA
    :caption: GRETA Platform
 
    install
+   build
    netbeans
    quickstart
    openface

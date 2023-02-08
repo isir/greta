@@ -12,5 +12,4 @@ GRETA
    new_modules
    openface
    nvbg
-   projects
 

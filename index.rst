@@ -6,6 +6,9 @@ GRETA
    :caption: GRETA Platform
 
    install
+   netbeans
+   quickstart
+   openface
    projects
 
 

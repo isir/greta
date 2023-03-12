@@ -17,8 +17,12 @@
  */
 package greta.auxiliary.openface2.gui;
 
+import com.illposed.osc.transport.udp.OSCPort;
+import com.illposed.osc.transport.udp.OSCPortOut;
 import greta.auxiliary.openface2.OpenFaceOutputStreamCSVReader;
 import greta.auxiliary.openface2.OpenFaceOutputStreamZeroMQReader;
+import greta.auxiliary.openface2.util.Server;
+
 import greta.auxiliary.openface2.util.StringArrayListener;
 import greta.auxiliary.zeromq.ConnectionListener;
 import greta.core.animation.mpeg4.bap.BAPFrame;
@@ -40,13 +44,15 @@ import java.util.logging.Logger;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
-
+import greta.core.util.CharacterManager;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
 import com.illposed.osc.*;
 import com.illposed.osc.transport.udp.OSCPort;
 import com.illposed.osc.transport.udp.OSCPortOut;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.util.logging.Level;
 
 /**
  *
@@ -78,14 +84,23 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
 
     private OpenFaceOutputStreamCSVReader csvReader = new OpenFaceOutputStreamCSVReader(this);
     private OpenFaceOutputStreamZeroMQReader zeroMQReader = new OpenFaceOutputStreamZeroMQReader(this);
+    public CharacterManager cm;
+    public static boolean flag;
+    public static boolean flagS = false;
+    
+    public static boolean IsConnected = false;
+    private final Lock lock = new ReentrantLock();
 
+    public static Server server ;
      
     
     /**
      * Creates new form OpenFaceOutputStreamReader
      */
-    public OpenFaceOutputStreamReader() {
+    public OpenFaceOutputStreamReader(CharacterManager cm) {
         initComponents();
+        this.cm=cm;
+        this.cm.setPositive_manager(false);
         
         jSpinnerfilterPow.setModel(new SpinnerNumberModel(0.0,0.0,10.0,0.1));
         jSpinnerfilterMaxQueueSize.setValue(getFilterMaxQueueSize());
@@ -222,6 +237,30 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
             label.setText(IniManager.getLocaleProperty(property) + ":");
         }
     }
+    
+     public void startServer( String port,String adress) {
+           // if (lock.tryLock()) {
+                new Thread(() -> {
+                    try {
+                        System.out.println("ICI OK");
+                        server = new Server(port, adress);
+                        System.out.println("server connected variable is "+ server.connected);
+                        System.out.println("SERVER CONNECTE AU PORT :" +port);
+                        System.out.println("SERVER CONNECTE A ladress :" +adress);
+                        server.startConnection();
+                        System.out.println("CONNEXION ETABLIE");
+                        IsConnected = true;
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                    //} finally {
+                   // lock.unlock();
+                //}
+                    
+                }).start();
+           // }   
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -273,6 +312,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         jSpinnerfilterPow = new javax.swing.JSpinner();
         jCheckBoxSendOSC = new javax.swing.JCheckBox();
         jSpinnerSendOSCPort = new javax.swing.JSpinner();
+        jCheckBox2 = new javax.swing.JCheckBox();
         northPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         centerPanel = new javax.swing.JPanel();
         separator = new javax.swing.JSeparator();
@@ -492,6 +532,14 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
             }
         });
         jPanel2.add(jSpinnerSendOSCPort);
+
+        jCheckBox2.setText("Flipper");
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
+        jPanel2.add(jCheckBox2);
 
         jPanel1.add(jPanel2);
 
@@ -779,6 +827,27 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         setOscOutPort(value);
     }//GEN-LAST:event_jSpinnerSendOSCPortStateChanged
 
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        // TODO add your handling code here:
+         if (this.cm.isPositive_manager()== false){
+            this.cm.setPositive_manager(true);
+            System.out.println(" ON ENTRE DANS LE START SERVER");
+            startServer("50150","localhost");
+            this.flag = true;
+        }
+        else {
+            this.cm.setPositive_manager(false);
+            this.flag = false;
+            if (IsConnected == true){
+                try {
+                    server.stopConnection();
+                } catch (IOException ex) {
+                    Logger.getLogger(OpenFaceOutputStreamReader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+         }
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
     /* ---------------------------------------------------------------------- */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -803,6 +872,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.JTable featuresTable;
     private javax.swing.JCheckBox filterCheckBox;
     private javax.swing.JTabbedPane inputTabbedPane;
+    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBoxSendOSC;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -902,6 +972,15 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
      */
     public boolean isPerforming() {
         return performCheckBox.isSelected();
+    }
+    
+    public static boolean getFlag() {
+        return flag;
+    }
+    
+    public static Server getServer(){
+        
+        return server;
     }
 
     /* ---------------------------------------------------------------------- */

@@ -2,12 +2,17 @@ package greta.FlipperDemo.input;
 
 
 import greta.auxiliary.activemq.Receiver;
+import java.io.DataInputStream;
+import java.io.IOException;
 import java.io.StringReader;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.jms.JMSException;
 import javax.jms.Message;
 import javax.jms.TextMessage;
@@ -20,6 +25,8 @@ import javax.json.JsonValue;
 public class SpeechInputReceiver extends Receiver<String> {
 	
 	private BlockingQueue<String> messages = new LinkedBlockingQueue();
+        //public static double positivity =0.0;
+        //public Client client = ASRInputManager.getClient();
 
 	
     public SpeechInputReceiver(String host, String port, String topic){
@@ -83,6 +90,25 @@ public class SpeechInputReceiver extends Receiver<String> {
         }
         return "";
     }
+    
+     /*public boolean hasSmile(){
+        // if chunk or np frame = chunk size
+        //return true 
+        System.out.println("VERIFICATION DE SOURIR DETECTION");
+        return positivity != 0.0;
+    }
+     
+    public String getPositivity(){
+        
+        System.out.println("LA VALEUR DE SOURIR DETECTEE EST : "+ String.valueOf(this.positivity));
+        return String.valueOf(this.positivity);
+    }*/
+    
+
+                    //System.out.println("Received AU06: " + au6 + "; AU12: " + au12);
+                    //SpeechInputReceiver.positivity = (au6 + au12 )/2;
+                
+
 
 
     @Override
@@ -92,6 +118,14 @@ public class SpeechInputReceiver extends Receiver<String> {
             JsonReader jr = Json.createReader(new StringReader(message));
             JsonObject jo = jr.readObject();
             JsonString transcript = jo.getJsonString("TRANSCRIPT");
+          
+            /*try {
+                SpeechInputReceiver.positivity =client.receivePositivity();
+            } catch (IOException ex) {
+                Logger.getLogger(SpeechInputReceiver.class.getName()).log(Level.SEVERE, null, ex);
+            }*/
+          
+            //System.out.println(" flipper received OPENFACE **: "+ String.valueOf(positivity));
             System.out.println(" flipper received **: "+ transcript.toString());
             String cleanTranscript = transcript.toString().replaceAll("\"", "");
            cleanTranscript = cleanTranscript.toLowerCase().trim();
@@ -115,5 +149,6 @@ public class SpeechInputReceiver extends Receiver<String> {
     protected void onConnectionStarted() {
     	super.onConnectionStarted();
     }
+
 
 }

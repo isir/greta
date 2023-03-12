@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<fml-apml id="$fml_id$">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="openmary" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				Votre semaine est bien equilibrer. Salade pour commencer leger. Puis, feculan et proteine, avec le riz au poisson.
+			<tm id="tm2"/>
+				Vous cloturer en optant pour un bon plat de legume sauter.
+			<tm id="tm3"/>
+				N'hesitez pas enrichir vos apports calorique pour la fin de la semaine. Notamment, par du gras vegetal.
+			<tm id="tm4"/>
+			Je vous remercie d'avoir participer a mon evaluation.
+			<tm id="tm5"/>
+				Je pense qu'il est temps de se dire au revoir.
+				
+				
+			
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm1+0.5" end="s1:tm2" importance="1"/>
+			<boundary type="LL" id="b1" start="s1:tm1" end="s1:tm1+0.5"/>
+			<boundary type="HH" id="b2" start="s1:tm3" end="s1:tm3+0.5"/>
+		</speech>
+	</bml>
+	<fml>
+		
+		<performative id="p1" type="propose" start="s1:tm3" end="s1:tm4" importance="1.0"/>
+		<emotion id="e1" type="small_sadness" start="s1:tm5" end="s1:tm5+0.5" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm4" end="s1:tm5" importance="1.0"/>
+		
+	</fml>
+</fml-apml>

@@ -7,10 +7,10 @@
 			</description>
 				
 			<tm id="tm1"/>
-				We're finished with the demonstration. 
+				Je peux aussi vous aider, a changer d'habitudes alimentaires
 			<tm id="tm2"/>
-				Do you want to start again?
-			<tm id="tm3"/>	
+				Seriez vous d'accord pour participer a mon experience ?
+			<tm id="tm3"/>
 			
 			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm1+0.5" end="s1:tm2" importance="1"/>
 			<boundary type="LL" id="b1" start="s1:tm1" end="s1:tm1+0.5"/>
@@ -20,7 +20,8 @@
 	<fml>
 		
 		<performative id="p1" type="propose" start="s1:tm2" end="s1:tm3" importance="1.0"/>
-		<emotion id="e1" type="joyStrong" start="s1:tm1" end="s1:tm3" importance="1.0"/>
+		<emotion id="e1" type="small_sadness" start="s1:tm1" end="s1:tm2" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>
 		
 	</fml>
 </fml-apml>

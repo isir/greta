@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<fml-apml id="$fml_id$">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="openmary" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+
+		
+			<tm id="tm1"/>
+				Bonjour, Mon nom est Alice,
+			<tm id="tm2"/>
+				Je suis un agent conversationnel de la plateforme Gretta
+			<tm id="tm3"/>
+				Comment allez vous ?
+		
+
+			
+			<pitchaccent id="pa1" type="HStar" level="medium" start="s1:tm1+0.5" end="s1:tm2" importance="1"/>
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm2+0.2" end="s1:tm3" importance="1"/>
+			<boundary type="LH" id="b1" start="s1:tm2" end="s1:tm2+0.5"/>
+			<boundary type="LL" id="b2" start="s1:tm3" end="s1:tm3+0.5"/>
+		</speech>
+	</bml>
+	<fml>
+		<performative id="p2" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm1" end="s1:tm2" importance="1.0"/>	
+		<emotion id="e1" type="joyStrong" start="s1:tm2+0.5" end="s1:tm3" importance="1.0"/>
+			
+	</fml>
+</fml-apml>

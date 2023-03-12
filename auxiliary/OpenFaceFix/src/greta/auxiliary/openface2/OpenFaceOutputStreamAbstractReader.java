@@ -39,6 +39,7 @@ import greta.auxiliary.openface2.util.ArrayOfDoubleFilterPow;
 import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Level;
 
 /**
  *
@@ -147,20 +148,26 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
     }
 
     /* ---------------------------------------------------------------------- */
-    protected void processFrame(String line) {
+    protected void processFrame(String line) throws IOException{
         if (loaderIsPerforming() ) {
+            //System.out.println("LOADER IS PERFORMING");
             int curGretaFrame = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
             prevFrame.copy(curFrame);
 
             if (startInputFrame == 0) {
+                
                 startInputFrame = curFrame.frameNumber;
+                //System.out.println("LOADER IS STARTING Frame : " + startInputFrame);
             }
             
-            if( line != null)
+            if( line != null){
+                //System.out.println("READTATALINE "+ curFrame.frameNumber);
                 curFrame.readDataLine(line);
+            }
             else{
                 curFrame = new OpenFaceFrame();
                 curFrame.timestamp = Timer.getTime();
+                //System.out.println("NEW OPENFACE FRAME CREATED");
             }
             //curFrame.frameNumber += offsetFrame-startInputFrame + curGretaFrame;
             curFrame.frameNumber = offsetFrame + curGretaFrame;
@@ -267,9 +274,13 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
                 args.add(map.get(key));
                 OSCMessage msg = new OSCMessage(root+key, args);  
                 if(oscOut!=null)
-                    oscOut.send(msg);            
+                    try {
+                        oscOut.send(msg);
+                } catch (IOException ex) {
+                    Logger.getLogger(OpenFaceOutputStreamAbstractReader.class.getName()).log(Level.SEVERE, null, ex);
+                }            
             }
-        } catch (OSCSerializeException | IOException ex) {
+        } catch (OSCSerializeException ex) {
             LOGGER.warning(ex.getLocalizedMessage());
         } 
     }
@@ -413,5 +424,9 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
             filterAUs.clear();
             filterBAP.clear();
         }
+    }
+
+    private String StringValueof(int frameNumber) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

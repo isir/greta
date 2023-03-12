@@ -9,10 +9,8 @@ import eu.aria.util.activemq.SimpleProducerWrapper;
 import eu.aria.util.activemq.SimpleReceiverWrapper;
 import eu.aria.util.activemq.util.UrlBuilder;
 import eu.aria.util.translator.Translator;
-import eu.aria.util.translator.api.ActiveMQConnector;
 import eu.aria.util.translator.api.AgentFeedback;
 import eu.aria.util.translator.api.FileCache;
-import eu.aria.util.translator.api.ReplacerGroup;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
@@ -99,7 +97,7 @@ public class FMLManager extends SimpleManager{
     private boolean showFallbackGUI = true;
     private boolean disableAMQ = false;
     LinkedList<QueueableBehaviour> behaviourQueue = new LinkedList<>();
-    ActiveMQConnector activeMQConnector;
+   TestACMQConnector activeMQConnector;
     private boolean isConnected;
     private SimpleReceiverWrapper receiverBML;
     private BlockingQueue<String> receivedBMLQueue = null;
@@ -164,7 +162,7 @@ public class FMLManager extends SimpleManager{
         setup();
     }
 
-    ReplacerGroup replacerGroup;
+    TestReplGroup replacerGroup;
     static long lastTimeStamp = System.currentTimeMillis();
     static int fmlId = 0;
 
@@ -182,9 +180,9 @@ public class FMLManager extends SimpleManager{
      */
     public void setup(){
         if(!disableAMQ){
-            replacerGroup = new ReplacerGroup(replacerConfigPath);
+            replacerGroup = new TestReplGroup(replacerConfigPath);
 
-            activeMQConnector = new ActiveMQConnector();
+            activeMQConnector = new TestACMQConnector();
             activeMQConnector.setReplacerGroup(replacerGroup);
 
             activeMQConnector.initialiseSender(amqHostname, amqPort, amqSendTopicName);
@@ -399,13 +397,15 @@ public class FMLManager extends SimpleManager{
         replacerGroup.readString(content);
 
         // generate internal decision
-        replacerGroup.generateComponents();
-
+        //replacerGroup.generateComponents();
+        
         //Replace attributes and variables
+        System.out.println("greta.FlipperDemo.dm.managers.FMLManager.processNext()");
         for(String argName :  argNames){
             String value = argValues.get(argNames.indexOf(argName));
             if(argName.startsWith("var.")){
                 argName = argName.substring(4);
+                System.out.println("[INFO]:"+argName+"  "+value);
                 replacerGroup.replaceVar(argName, value);
             }
             else if(argName.startsWith("alt.")){

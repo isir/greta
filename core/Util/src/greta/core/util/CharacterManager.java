@@ -63,6 +63,15 @@ public class CharacterManager {
     private boolean asap_enabled=false;
     private DistanceType distance=DistanceType.SOCIAL;
     private boolean isrunning=false;
+    private boolean positive_manager=false;
+
+    public boolean isPositive_manager() {
+        return positive_manager;
+    }
+
+    public void setPositive_manager(boolean positive_manager) {
+        this.positive_manager = positive_manager;
+    }
 
     public boolean isIsrunning() {
         return isrunning;

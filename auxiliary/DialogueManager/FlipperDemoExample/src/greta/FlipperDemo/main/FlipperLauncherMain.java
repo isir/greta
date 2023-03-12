@@ -92,7 +92,7 @@ public class FlipperLauncherMain {
     }
    public void init(){
         String help = "Expecting commandline arguments in the form of \"-<argname> <arg>\".\nAccepting the following argnames: config";
-
+        
         Properties ps = new Properties();
          InputStream inputstream = null;
          System.out.println("greta.FlipperDemo.main.FlipperLauncherMain.init()"+"   "+ System.getProperty("user.dir")+"\\Common\\Data\\FlipperResources\\flipperDemo.properties");

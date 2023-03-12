@@ -19,7 +19,10 @@ package greta.auxiliary.openface2;
 
 import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
 import greta.auxiliary.openface2.util.OpenFaceFrame;
+import greta.core.util.CharacterManager;
 import greta.core.util.time.Timer;
+import java.io.IOException;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.zeromq.SocketType;
 import org.zeromq.ZContext;
@@ -50,12 +53,18 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
 
     private boolean isConnected = false;
     private int lineNullCount;
-    private static final int MAX_LINENULLCOUNT = 8;						  
+    private static final int MAX_LINENULLCOUNT = 8;
+    private CharacterManager cm;
 
     /* ---------------------------------------------------------------------- */
 
     public OpenFaceOutputStreamZeroMQReader(OpenFaceOutputStreamReader loader) {
         super(loader);
+    }
+    
+    public OpenFaceOutputStreamZeroMQReader(OpenFaceOutputStreamReader loader, CharacterManager cm) {
+        super(loader);
+        this.cm=cm;
     }
 
     /* ---------------------------------------------------------------------- */
@@ -151,13 +160,15 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
             }
         } catch (InterruptedException ex) {
             LOGGER.warning(String.format("Thread: %s interrupted", OpenFaceOutputStreamZeroMQReader.class.getName()));
+        } catch (IOException ex) {
+            Logger.getLogger(OpenFaceOutputStreamZeroMQReader.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         cleanHeader();
         LOGGER.info(String.format("Thread: %s exiting", OpenFaceOutputStreamZeroMQReader.class.getName()));
     }
 
-    private void processLine() {
+    private void processLine() throws IOException {
         String line = null;
         try {
             line = zSubscriber.recvStr(ZMQ.DONTWAIT);
@@ -165,10 +176,11 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
             LOGGER.warning(String.format("Line is undefined"));
         }
         if (line != null) {
-            if (line.startsWith("DATA:")) {                
+            if (line.startsWith("DATA:")) {  
                 lineNullCount = 0;
                 processData(line);
             } else if (line.startsWith("HEADER:")) {
+                System.out.println("HEADERS HAS BEEN CHANGED");
                 processHeader(line);
             } else {
                 LOGGER.warning(String.format("Line not recognized: %s", line));
@@ -191,11 +203,12 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
         }
     }
 
-    private void processData(String line) {
+    private void processData(String line) throws IOException {
+        //System.out.println("PROCESSDATA has STARTED");
         processFrame(line.substring(5));
     }
     
-    private void processNullData(){
+    private void processNullData() throws IOException{
         processFrame(null);
     }
 

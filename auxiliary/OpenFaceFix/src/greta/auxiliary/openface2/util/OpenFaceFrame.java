@@ -17,17 +17,26 @@
  */
 package greta.auxiliary.openface2.util;
 
+import greta.core.util.CharacterManager;
 import greta.core.util.math.Vec3d;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Map;
+import greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader;
+import java.net.InetAddress;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 /**
  * This file represents an OpenFace2 frame
  *
@@ -60,6 +69,7 @@ public class OpenFaceFrame {
     private static List<String> selectedFeatures = null;	
     private DecimalFormat _decFormat = new DecimalFormat("#0.00");
 
+
     public static class AUFeature {
 
         public int index;   // integer representing the column index where it's read from
@@ -87,6 +97,12 @@ public class OpenFaceFrame {
     public static Map<String, AUFeature> auFeatureMasksMap = new TreeMap<>();
 
     public final static String BLINK_AU = "AU45_r";
+    public final static String AU01 ="AU01_r";
+    public final static String AU12 ="AU12_r";
+    public final static String AU02 ="AU02_r";
+    
+    
+    
 
     public static int getAUFeaturesCount() {
         return auFeaturesMap.size()>MAX_AUS?MAX_AUS:auFeaturesMap.size();
@@ -119,12 +135,26 @@ public class OpenFaceFrame {
     public double[] auMasks = new double[MAX_AUS];
     public double[] intensity = new double[MAX_AUS];
     public double blink = 0.0;
+    public double au_1=0.0;
+    public double au_12=0.0;
+    public double au_2 = 0.0;
     public boolean isNull = false;
+    public CharacterManager cm;
+    public boolean flagS = false;
+    public boolean IsConnected = false;
+    private final Lock lock = new ReentrantLock();
+
+    private Server server ;
+    
+    public OpenFaceFrame(CharacterManager cm){
+        this.cm=cm;
+        isNull = true;
+    }
     
     public OpenFaceFrame(){
         isNull = true;
     }
-
+    // ici on crée les treemap de verification d'odrdre
     public static boolean readHeader(String line) {
 
         String[] tokens = new String[0];
@@ -186,8 +216,52 @@ public class OpenFaceFrame {
     private boolean isFeatureSelected(String feature) {
         return selectedFeatures == null || selectedFeatures.contains(feature);
     }
+    
+    /*public void startServer(boolean flag3, String port,String adress) {
+        if (!flag3) {
+            if (lock.tryLock()) {
+                flag3 = true;
+                new Thread(() -> {
+                    try {
+                        server = new Server(port, adress);
+                        System.out.println("SERVER CONNECTE AU PORT :" +port);
+                        System.out.println("SERVER CONNECTE A ladress :" +adress);
+                        server.startConnection();
+                        System.out.println("Flags est devenu true");
+                        System.out.println("CONNEXION ETABLIE");
+                        IsConnected = true;
 
-    private String readDataCol(String key, String[] cols, Map<String, Integer> set) {
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    } finally {
+                    lock.unlock();
+                }
+                }).start();
+            }   
+        }
+    }*/
+    
+    //Envoi les valeurs d'au vers flipper via un thread.
+    public void sendPositivityAus(Server server, double au_1, double au_12, double au_2){
+       //if (lock.tryLock()) {
+       if (server.connected == true){
+            new Thread(() -> {
+                try {       
+                    server.sendPositivity(au_1, au_12, au_2);
+                    System.out.println("LA VALEURS AU_1 :"+ String.valueOf(au_1)+ " A ETE ENVOYEE");
+                    System.out.println("LA VALEURS AU_12 :"+ String.valueOf(au_12)+ " A ETE ENVOYEE");
+                    System.out.println("LA VALEURS AU_2 :"+ String.valueOf(au_2)+ " A ETE ENVOYEE");
+                    
+                    
+                    } catch (IOException e) {
+                //}finally {
+                //lock.unlock();
+            }
+                }).start();  
+       }
+       }
+         
+   private String readDataCol(String key, String[] cols, Map<String, Integer> set) {
         if (isFeatureSelected(key)) {
             if (set.containsKey(key)) {
                 return cols[set.get(key)];
@@ -206,7 +280,8 @@ public class OpenFaceFrame {
         return d;
     }
 
-    public void readDataLine(String data) {
+    public void readDataLine(String data) throws IOException {
+        
 
         String[] outputs = data.split(separator);
 
@@ -234,23 +309,52 @@ public class OpenFaceFrame {
                 Double.parseDouble(readDataCol("pose_Rz", outputs, preAUFeatureKeysMap)));
 
         int i = 0;
+        
         for (String key : auFeaturesMap.keySet()) {
             if(i>= MAX_AUS){
                 //LOGGER.warning(String.format("AU[%d] %s is ignored, expected %d AUs maximum",i, key,MAX_AUS));                
                 break;
             }
-            aus[i] = readAUDataCol(key, outputs, auFeaturesMap) / 5.0; // AU**_r are between 0-5.0
+            aus[i] = readAUDataCol(key, outputs, auFeaturesMap); // AU**_r are between 0-5.0 if want from 0-1 divie by 5 here 
+            
+            //Recuperation des features à envoyer sur toutes les données Openface.
+            if (AU01.equals(key)){
+                au_1 = aus[i];
+            }
+            
+            if (AU02.equals(key)){
+                au_2 = aus[i];
+            }
+            
+            if (AU12.equals(key)){
+                au_12= aus[i];
+            }
             
             if (BLINK_AU.equals(key)) {
                 blink = aus[i];
             }
             ++i;
         }
+        
         i = 0;
         for (String key : auFeatureMasksMap.keySet()) {
             if(i < MAX_AUS)
                 auMasks[i++] = readAUDataCol(key, outputs, auFeatureMasksMap);
         }
+
+        //check si le server tourne via un flag sur l'interface graphique qui lance le server (OpenfaceOutputStreamReader
+        if( OpenFaceOutputStreamReader.getFlag() == true){
+            
+            System.out.println("Flag Onn preparation d'envoi des données");
+    // instantiation du server en static créer dans le code de l'interface Gui.
+            server = OpenFaceOutputStreamReader.getServer();
+    // Envoi des données
+            sendPositivityAus(server, au_1, au_12, au_2); //ligne bug
+        }
+        else {
+            System.out.println("Flag off aucun envoi de donnée");
+        }
+        
         isNull = false;
     }
     

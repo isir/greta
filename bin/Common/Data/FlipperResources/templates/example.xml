@@ -3,12 +3,21 @@
         {
             "init" : {},
             "input" : {
-                "speech" : ""
+                "speech" : "",
+				"positivity" : ""
             },
             "core" : {
                 "uIntent" : "",
                 "aIntent" : ""
             },
+			"memory" : {
+			    "intent" : "",
+				"doublon" : "",
+				"choice" : ""
+			},
+			"user" : {
+			    "Uname" : ""
+			},
             "output" : {
                 "speech" : ""
             },
@@ -26,50 +35,310 @@
 
     <javascript>
         <![CDATA[
-
+		
+		
+		var repeats = new Array();
+	    repeats[0] = "repeat";
+		repeats[1] = "repeat2";
+		repeats[2] = "repeat3";
+			
+		var salutations = new Array();
+		salutations[0] = "Salutation";
+		salutations[1] = "Salutation2";
+		salutations[2] = "Salutation3";
+			
+		var plaisirs = new Array();
+		plaisirs[0] = "Plaisir";
+		plaisirs[1] = "Plaisir2";
+	    plaisirs[2] = "Plaisir3";
+			
+	    var mercis = new Array();
+		mercis[0] = "Merci";
+		mercis[1] = "Merci2";
+		mercis[2] = "Merci3";
+			
+		var byes = new Array();
+		byes[0] = "Bye";
+		byes[1] = "Bye2";
+		byes[2] = "Bye3";
+		
+		
         function helpPrint(text){
             print(text);
             return true;
         }
-
-        function getUserIntent(text){
-            helpPrint("Userintent: " + text);
-            if(text == "bonjour"){
-                return "greeting";
-            }
-            else if(text == "salut"){
-                return "goodbye";
-            }
-            else{
-                return "unknown";
-            }
+		
+		function setText(text){
+		return text;
+		}
+		
+	
+		
+		function addIntent(memory, intent){
+        return memory + ";" + intent ; 
         }
+		
+		function checkDoublon(text){
+		var list = text.split(";");
+        var last = list[list.length-1];
+	    list.splice((list.length)-1,1);
+
+        for(word in list){
+            if(list[word] === last){
+                return "true";
+             }
+        }
+        return "false";
+		}
+		
+		function arrayRandom(a){
+        return a[Math.floor(Math.random() * a.length)];
+        }
+
+		
+	    function containsKeyword(text, keywords) {
+        var word;
+        list = text.split(" ");
+		keywords = keywords.split(",");
+
+        for (word in list) {
+		var key;
+		for (key in keywords) {
+            if (keywords[key] === list[word]) {
+                return true;
+                }
+             } 
+		  }
+            return false;
+        }
+	  
+		
+	    function getUserName(text) {
+		var names = "catherine laurence mathilde alice fabien sam";
+		list = text.split(" ");
+		names = names.split(" ");
+		   for (word in list) {
+		       for (nom in names){
+				   if (names[nom] === list[word]){
+			return names[nom];
+				}
+			}
+		}	return "";
+        }	
+		
+		function reset(text) {
+		var reset = "redémarrer";
+			if(containsKeyword(text,reset) == true){
+				return "true";
+				}
+		return "false";
+		}
+				
+		
+		
+        function getUserIntent(text) {
+        helpPrint("Userintent: " + text);
+		
+	    var keywords = "bonjour,salut,coucou,bonsoir,hello";
+		var keyword1 = "bien,toi,super,vas,aller,bien,mal,va,sentez,sens";
+		var keyword2 = "gentil,merci,flatté,sympa";
+		var keyword3 = "revoir,byebye,ciao,bientôt";
+		var keyword4 = "d'accord,ok,okay,oui,sûr,j'accepte";
+		var keyword5 = "non,refuse"
+		var burger = "burger,hamburger";
+		var salade = "salade,variée,composée";
+		var legume = "légumes,vapeur,poêlée";
+		var soupe = "soupe,potage,bouillon";
+		var riz = "poisson,riz,bol,thaï";
+		var pate = "pâtes,pâte,bolognaise,sauce,tomate,spaghetti";
+		var sandwich = "sandwich,club,boulangerie,maison";
+		var steak = "frite,frites,steak,mayonaise,ketchup,mayonnaise";
+		
+		
+        if (containsKeyword(text, keywords) == true) {
+        return "greeting";
+        }
+		else if(containsKeyword(text, keyword1) == true && containsKeyword(text, keyword4) == true){
+		return "accord"
+		}
+		else if(containsKeyword(text, keyword5) == true && containsKeyword(text, keyword3) == true){
+		return "goodbye"
+		}
+		else if(containsKeyword(text, keyword2) == true && containsKeyword(text, keyword3) == true){
+		return "goodbye"
+		}
+		else if(containsKeyword(text, soupe) == true && containsKeyword(text, legume) == true){
+		return "soupe"
+		}
+		else if(containsKeyword(text, keyword1) == true){
+		return "feeling";
+		}
+		else if(containsKeyword(text, keyword4) == true){
+		return "accord";
+		}
+		else if(containsKeyword(text, keyword5) == true){
+		return "refus";
+		}
+		if (containsKeyword(text, burger) == true) {
+        return "burger";
+        }
+		if (containsKeyword(text, salade) == true) {
+        return "salade";
+        }
+		if (containsKeyword(text, soupe) == true) {
+        return "soupe";
+        }
+		if (containsKeyword(text, riz) == true) {
+        return "riz";
+        }
+		if (containsKeyword(text, steak) == true) {
+        return "steak";
+        }
+		if (containsKeyword(text, sandwich) == true) {
+        return "sandwich";
+        }
+		if (containsKeyword(text, legume) == true) {
+        return "legume";
+        }
+		if (containsKeyword(text, pate) == true) {
+        return "pate";
+        }
+		else if(containsKeyword(text, keyword2) == true){
+		return "thank";
+		}
+		else if(containsKeyword(text, keyword3) == true){
+		return "goodbye";
+		}
+		else if(containsKeyword(text, burger) == true){
+		return "goodbye";
+		}
+        return "unknown";
+		}
 
         function setAgentIntent(intent){
-          //  helpPrint("AgentIntent: " + intent);
-            if(intent == "greeting"){
-                return "greeting";
-            }
-            else if(intent == "goodbye"){
-                return "goodbye";
-            }
-            else{
-                return "unknown";
-            }
+            return intent; // autant le simplifier ainsi car dans ce cas on simplifie intent user == intent agent
         }
-
-        function setAgentSpeech(intent){
-            helpPrint("Agentspeech: " + intent);
-            if(intent == "greeting"){
-                return "FML1";
+		
+		function setMemoryChoice(array, intent){
+		
+		var droite = "burger,sandwich,steak,pate";
+		var gauche = "salade,riz,soupe,legume";
+		if(array !== ""){
+			arr = array.split(",");
+				if (containsKeyword(intent, droite)){
+		        arr.push(1);
+		        return arr.toString();
             }
-            else if(intent == "goodbye"){
-                return "FML9";
+	
+		    else if (containsKeyword(intent, gauche)){
+		        arr.push(2);
+		        return arr.toString();
+		    }
+			return array;
+		}
+		else if(array === ""){
+				if (containsKeyword(intent, droite)){
+						return "1";
+					}
+				
+				else if (containsKeyword(intent, gauche)){
+						return "2";
+					}
+		
+			return array;
+		}
+		}
+        
+        function setAgentSpeech(intent,array){
+		
+			array = array.split(",");
+			var phase = array.length;
+		
+			if(intent == "greeting"){
+					return arrayRandom(salutations);
+				}
+			else if(intent == "feeling"){
+                return arrayRandom(plaisirs);
             }
-            else{
-                return "FML2";
+			else if(intent == "thank"){
+                return arrayRandom(mercis);
             }
-        }
+			else if(intent == "refus"){
+				return "Refus";
+			}
+			else if(intent == "accord"){
+                return "Proposition";
+            }
+			else if(phase == 1 && intent == "burger"){
+				return "Burger";
+			}
+			else if(phase == 1 && intent == "salade"){
+				return "Salade";
+			}
+		
+			else if(intent == "sandwich" &&  array == "1,1" ) {
+				return "Sandwich";
+				}
+			else if (intent == "sandwich" && array == "2,1"){
+				return "Sandwich2";
+				}
+			
+			else if (intent == "riz" && phase == 2){
+					return "Riz";
+			}
+			
+			else if(intent == "soupe" && phase == 2){
+				return "Soupe";
+			}
+			else if(intent == "soupe" && phase == 3){
+				return "Conclusion3";
+				}
+			else if (intent == "riz" && phase == 3){
+					return "Conclusion7";
+			}
+		
+			else if(intent == "steak" && array == "1,1,1"){
+				return "Conclusion8";
+				}
+			else if(intent == "steak" && array == "2,1,1"){
+				return "Conclusion4";
+				}
+			else if(intent == "legume" && array == "2,2,2"){
+				return "Conclusion1";
+				}
+			else if(intent == "legume" && array == "1,2,2"){
+				return "Conclusion5";
+				}
+			else if(intent == "pate" && array == "2,2,1"){
+				return "Conclusion2";
+				}
+			else if(intent == "pate" && array == "1,2,1"){
+				return "Conclusion6";
+				}
+		    else if(intent == "goodbye"){
+			
+                return arrayRandom(byes);
+            }
+            else if(intent == "unknown"){
+                return arrayRandom(repeats);
+			    }
+			
+			}
+			
+			
+			function setAgentSpeechR(intent){
+			 
+			helpPrint("Agentspeech:" + intent);
+			
+			if(intent == "greeting"){
+                return "Salutation_b";
+            }
+   
+            else if(intent == "unknown"){
+                return arrayRandom(repeats);
+			}
+			return "Doublon"; 
+	      }
     ]]>
     </javascript>
 
@@ -85,6 +354,7 @@
                     <constructors/>
                 </object>
             </method>
+
 
 			<method name="init" is="is.example.init.agent">
                 <object persistent="fmlGenerator" class="greta.FlipperDemo.dm.managers.FMLGenerator">
@@ -109,6 +379,85 @@
         </effects>
     </template>
 
+
+	<!-- Check for smile -->
+	<template id="getUserSmile">
+		<preconditions>
+			<method name="hasSmile">
+				<object persistent="asr" class="greta.FlipperDemo.input.ASRInputManager"/>
+			</method>
+		</preconditions>
+		<effects>
+			<method name="getPositivity" is="is.example.input.positivity">
+				<object persistent="asr" class="greta.FlipperDemo.input.ASRInputManager"/>
+			</method>
+		</effects>
+	</template>
+
+	
+		<!-- Set user name -->
+    <template id="setUserName">
+        <preconditions>
+			<condition>is.example.input.speech !== ""</condition>
+            <condition>is.example.user.Uname === ""</condition>
+        </preconditions>
+        <effects>
+			<assign is="is.example.user.Uname">getUserName(is.example.input.speech)</assign>
+        </effects>
+    </template>
+	
+		<!-- Reset -->
+    <template id="ReSet">
+        <preconditions>
+			<condition>is.example.input.speech !== ""</condition>
+            <condition>reset(is.example.input.speech) === "true"</condition>
+        </preconditions>
+        <effects>
+			<assign is="is.example.user.Uname">""</assign>
+			<assign is="is.example.memory.choice">""</assign>
+			<assign is="is.example.memory.intent">""</assign>
+			<assign is="is.example.memory.doublon">setText("false")</assign>
+			
+        </effects>
+    </template>
+	
+	 <!-- Check for interruption --><!--
+    <template id="getUserSpeech">
+        <preconditions>
+            <method name="hasMessage">
+                <object persistent="asr" class="greta.FlipperDemo.input.ASRInputManager"/>
+            </method>
+			and Agent is speaking 
+        </preconditions>
+        <effects>
+             call fml that days sorry for the interruption keep going and stop speaking
+        </effects>
+    </template>-->
+	
+	 <!-- Check for silence --><!--
+    <template id="getUserSpeech">
+        <preconditions>
+            <method name="hasSilence">
+                <object persistent="asr" class="greta.FlipperDemo.input.ASRInputManager"/>
+				the methode will check if has no message for instance 2 seconde at least.
+            </method>
+        </preconditions>
+        <effects>
+             Agent can speak
+        </effects>
+    </template>-->
+	
+	
+		<!-- Keep user name -->
+    <template id="keepUserName">
+        <preconditions>
+			<condition>is.example.input.speech !== ""</condition>
+            <condition>is.example.user.Uname !== ""</condition>
+        </preconditions>
+        <effects>
+			<assign is="is.example.user.Uname">setText(is.example.user.Uname)</assign>
+        </effects>
+    </template>
  
     <!-- Set user intent when speech -->
     <template id="setUserIntent">
@@ -120,6 +469,9 @@
             <assign is="is.example.input.speech">""</assign>
         </effects>
     </template>
+
+	
+	
     <!-- Set agent intent based on user intent -->
     <template id="setAgentIntent">
         <preconditions>
@@ -127,20 +479,40 @@
         </preconditions>
         <effects>
             <assign is="is.example.core.aIntent">setAgentIntent(is.example.core.uIntent)</assign>
+			<assign is="is.example.memory.choice">setMemoryChoice(is.example.memory.choice,is.example.core.aIntent)</assign>
+			<assign is="is.example.memory.intent">addIntent(is.example.memory.intent,is.example.core.aIntent)</assign>
+			<assign is="is.example.memory.doublon">checkDoublon(is.example.memory.intent)</assign>
             <assign is="is.example.core.uIntent">""</assign>
 			
         </effects>
     </template>
-
+	
+	
     <!-- Set agent speech based on agent intent -->
     <template id="setAgentSpeech">
         <preconditions>
             <condition>is.example.core.aIntent !== ""</condition>
+			<condition>is.example.memory.doublon === "false"</condition>
         </preconditions>
         <effects>
-            <assign is="is.example.output.speech">setAgentSpeech(is.example.core.aIntent)</assign>
-			<assign is="is.example.agent.fml.template">setAgentSpeech(is.example.core.aIntent)</assign>
+            <assign is="is.example.output.speech">setAgentSpeech(is.example.core.aIntent,is.example.memory.choice)</assign>
+			<assign is="is.example.agent.fml.template">setAgentSpeech(is.example.core.aIntent,is.example.memory.choice)</assign>
 		    <assign is="is.example.agent.fml.parameters['emotion.e1.type']">"joy"</assign>
+			<assign is="is.example.agent.fml.parameters['var.name']">setText(is.example.user.Uname)</assign>
+            <assign is="is.example.core.aIntent">""</assign>
+        </effects>
+    </template>
+	
+	 <!-- Set agent speech based on agent repeated intent -->
+    <template id="setAgentSpeechR">
+        <preconditions>
+            <condition>is.example.core.aIntent !== ""</condition>
+			<condition>is.example.memory.doublon === "true"</condition>
+        </preconditions>
+        <effects>
+            <assign is="is.example.output.speech">setAgentSpeechR(is.example.core.aIntent)</assign>
+			<assign is="is.example.agent.fml.template">setAgentSpeechR(is.example.core.aIntent)</assign>
+		    <assign is="is.example.agent.fml.parameters['emotion.e1.type']">"joy"</assign>	
             <assign is="is.example.core.aIntent">""</assign>
         </effects>
     </template>
@@ -164,9 +536,5 @@
  
         </effects>
     </template>
-
-	
-	
-	
 
 </behaviourtemplates>

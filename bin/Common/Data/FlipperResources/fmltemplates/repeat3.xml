@@ -1,0 +1,22 @@
+<fml-apml id="$fml_id$">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="openmary" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				Pardon ? j'ai mal entendu,
+			<tm id="tm2"/>
+				Pouvez vous reformulez s'il vous plait ?
+			<tm id="tm3"/>
+			
+			<pitchaccent id="pa1" type="HStar" level="medium" start="s1:tm1+0.5" end="s1:tm2" importance="1"/>
+		
+			<boundary type="LL" id="b1" start="s1:tm3" end="s1:tm3+0.5"/>
+		</speech>
+	</bml>
+	<fml>
+		<emotion id="p1" type="pride" start="s1:tm2" end="s1:tm3" importance="1.0"/>			
+	</fml>
+</fml-apml>

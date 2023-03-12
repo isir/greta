@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml id="$fml_id$">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="openmary" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+			Super ! Pour ma part,
+			<tm id="tm2"/>
+			Je passe la plus part de mon temps dans le meme decors,
+			<tm id="tm3"/>
+			alors cela me fait toujours plaisir de discuter avec un humain.
+			<tm id="tm4"/>
+			
+			<tm id="tm5"/>
+			surtout quand il est aussi gentil que vous
+				
+			
+			<pitchaccent id="pa1" type="HStar" level="medium" start="s1:tm1+0.2" end="s1:tm2+0.2" importance="1"/>
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm2+0.5" end="s1:tm3+0.5" importance="1"/>
+			
+			<boundary type="LH" id="b11" start="s1:tm1+0.5" end="s1:tm2"/>
+			<boundary type="HH" id="b1" start="s1:tm3" end="s1:tm3+0.5"/>
+			<boundary type="HH" id="b2" start="s1:tm4" end="s1:tm4+0.5"/>
+		</speech>
+	</bml>
+	<fml>
+
+		<!--<performative id="p1" type="raiseHand_R" start="s1:tm1+0.5" end="s1:tm4" importance="1.0"/>-->
+		<emotion id="e1" type="joyStrong" start="s1:tm1" end="s1:tm2" importance="1.0"/>
+		<emotion id="e2" type="small_sadness" start="s1:tm2+0.5" end="s1:tm3" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm4" end="s1:tm5+0.5" importance="1.0"/>
+		<performative id="p1" type="GoodThumbup" start="s1:tm1" end="s1:tm2" importance="1.0"/>
+		
+		
+				
+	</fml>
+</fml-apml>

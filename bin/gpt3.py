@@ -5,7 +5,7 @@ import socket
 import pickle 
 import argparse
 
-openai.api_key ="insert you key there"
+openai.api_key ="insert your OpenAI key there"
 start_chat_log = '''Human: Hello, who are you?
 AI: I am doing great. How can I help you today?
 '''
@@ -36,15 +36,18 @@ args=parser.parse_args()
 port = args.port
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((socket.gethostname(),port))
+message_reciv=False
 while(True):
     msg=s.recv(1024)
     msg=msg.decode()
-    if(len(msg)>0):
+    message_reciv=True
+    if(len(msg)>0 and message_reciv):
         if(msg=="exit"):
             break
         answ=ask(msg,chat_log)
         chat_log = append_interaction_to_chat_log(msg ,answ, chat_log)
         print(answ)
         s.send(answ.encode())
+        message_reciv=False
   
   

@@ -5,26 +5,37 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>Hello,
-<tm id="tm2"/>My
-<tm id="tm3"/>name
-<tm id="tm4"/>is
-<tm id="tm5"/>Camille.
-<tm id="tm6"/>I
-<tm id="tm7"/>am
-<tm id="tm8"/>one
-<tm id="tm9"/>of
-<tm id="tm10"/>the
-<tm id="tm11"/>virtual
-<tm id="tm12"/>character
-<tm id="tm13"/>of
-<tm id="tm14"/>the
-<tm id="tm15"/>Greta
-<tm id="tm16"/>platform.
+<tm id="tm1"/>Tombola
+<tm id="tm2"/>is
+<tm id="tm3"/>a
+<tm id="tm4"/>game
+<tm id="tm5"/>played
+<tm id="tm6"/>with
+<tm id="tm7"/>a
+<tm id="tm8"/>lottery
+<tm id="tm9"/>system
+<tm id="tm10"/>where
+<tm id="tm11"/>you
+<tm id="tm12"/>have
+<tm id="tm13"/>the
+<tm id="tm14"/>chance
+<tm id="tm15"/>to
+<tm id="tm16"/>win
+<tm id="tm17"/>a
+<tm id="tm18"/>prize.
+<tm id="tm19"/>To
+<tm id="tm20"/>win
+<tm id="tm21"/>a
+<tm id="tm22"/>prize,
+<tm id="tm23"/>you
+<tm id="tm24"/>need
+<tm id="tm25"/>the
+<tm id="tm26"/>winning
+<tm id="tm27"/>numbers.
 </speech>
 </bml>
 <fml>
-<deictic end="s1:tm7" id="1" importance="1.0" start="s1:tm1" type="me"/>
-<deictic end="s1:tm11" id="2" importance="1.0" start="s1:tm5" type="me"/>
+<beat end="s1:tm16" id="1" importance="1.0" start="s1:tm10" type="LowRt1"/>
+<deictic end="s1:tm28" id="2" importance="1.0" start="s1:tm22" type="me"/>
 </fml>
 </fml-apml>

@@ -4,26 +4,37 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="0"/>That
-<tm id="1"/>right
-<tm id="2"/>now
-<tm id="3"/>is
-<tm id="4"/>the
-<tm id="5"/>open
-<tm id="6"/>sewer
-<tm id="7"/>for
-<tm id="8"/>our
-<tm id="9"/>industrial
-<tm id="10"/>civilization
-<tm id="11"/>as
-<tm id="12"/>it's
-<tm id="13"/>currently
-<tm id="14"/>organized
+<tm id="tm1"/>Tombola
+<tm id="tm2"/>is
+<tm id="tm3"/>a
+<tm id="tm4"/>game
+<tm id="tm5"/>played
+<tm id="tm6"/>with
+<tm id="tm7"/>a
+<tm id="tm8"/>lottery
+<tm id="tm9"/>system
+<tm id="tm10"/>where
+<tm id="tm11"/>you
+<tm id="tm12"/>have
+<tm id="tm13"/>the
+<tm id="tm14"/>chance
+<tm id="tm15"/>to
+<tm id="tm16"/>win
+<tm id="tm17"/>a
+<tm id="tm18"/>prize.
+<tm id="tm19"/>To
+<tm id="tm20"/>win
+<tm id="tm21"/>a
+<tm id="tm22"/>prize,
+<tm id="tm23"/>you
+<tm id="tm24"/>need
+<tm id="tm25"/>the
+<tm id="tm26"/>winning
+<tm id="tm27"/>numbers.
 </speech>
-<gazeShift end="10.0" id="gaze1" modality="TORSO" offsetAngle="30" offsetDirection="DOWN" start="1.0" target="gaze_target" type="GAZE"/>
-<gesture end="s1:tm14" id="1" lexeme="LowLf1" start="s1:tm8">
+<gesture end="s1:tm28" id="2" lexeme="me" start="s1:tm22">
 <description priority="1" type="gretabml">
-<reference>beat=LowLf1</reference>
+<reference>deictic=me</reference>
 <intensity>1.000</intensity>`
 <SPC.value>0.646</SPC.value>
 <TMP.value>-0.400</TMP.value>

@@ -19,9 +19,9 @@
             <parameter name="blackBackground" value="true"/>
             <window h="435" visible="false" w="618" x="10" y="10"/>
         </element>
-        <element h="420.0" id="Environment - 1544700713383-564"
+        <element h="440.0" id="Environment - 1544700713383-564"
             module="Environment" name="Environment" w="710.0" x="30.0" y="110.0">
-            <element h="360.0"
+            <element h="400.0"
                 id="Character Manager - 1544700726358-960"
                 module="Character Manager" name="Character Manager"
                 w="650.0" x="30.0" y="30.0">
@@ -40,8 +40,8 @@
                     id="FML File Reader - 1544700908962-428"
                     module="FML File Reader" name="FML File Reader"
                     w="80.0" x="30.0" y="30.0">
-                    <parameter name="fileName" value=".\Examples\DemoEN\MeaningMiner_FML_Example.xml"/>
-                    <window h="108" visible="true" w="517" x="10" y="10"/>
+                    <parameter name="fileName" value="H:\greta\bin\Examples\DemoEN\1-Welcome.xml"/>
+                    <window h="108" visible="true" w="517" x="1210" y="332"/>
                 </element>
                 <element h="50.0"
                     id="BML File Reader - 1544700914641-19"
@@ -49,12 +49,6 @@
                     w="80.0" x="130.0" y="30.0">
                     <parameter name="fileName" value=""/>
                     <window h="108" visible="true" w="517" x="10" y="120"/>
-                </element>
-                <element h="230.0"
-                    id="Behavior Planner - 1544700734561-356"
-                    module="Behavior Planner" name="Behavior Planner"
-                    w="80.0" x="30.0" y="100.0">
-                    <window h="120" visible="false" w="172" x="10" y="10"/>
                 </element>
                 <element h="230.0"
                     id="Behavior Realizer - 1544712930520-534"
@@ -115,6 +109,10 @@
                     w="80.0" x="400.0" y="170.0">
                     <window h="148" visible="false" w="342" x="0" y="0"/>
                 </element>
+                <element h="230.0"
+                    id="MultiLayerSequencePlanner - 1680872530716-810"
+                    module="MultiLayerSequencePlanner"
+                    name="MultiLayerSequencePlanner" w="80.0" x="90.0" y="240.0"/>
             </element>
         </element>
         <element h="420.0" id="Ogre Player - 1544700973529-249"
@@ -125,15 +123,38 @@
             <parameter name="roll" value="0.0"/>
             <parameter name="pitch" value="-0.2592799663543701"/>
             <parameter name="yaw" value="-0.029251636937260628"/>
-            <window h="614" visible="true" w="736" x="436" y="116"/>
+            <window h="614" visible="true" w="736" x="102" y="65"/>
+        </element>
+        <element h="50.0" id="AttitudeSetter - 1680872547918-463"
+            module="AttitudeSetter" name="AttitudeSetter" w="80.0"
+            x="140.0" y="480.0">
+            <window h="200" visible="false" w="323" x="0" y="0"/>
         </element>
     </elements>
     <connections>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Rest_Pose_Setter - 1621595871295-438" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1544700908962-428" target="MultiLayerSequencePlanner - 1680872530716-810"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="MultiLayerSequencePlanner - 1680872530716-810" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -142,27 +163,9 @@
             source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Rest_Pose_Setter - 1621595871295-438" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
     </connections>
 </modulated>

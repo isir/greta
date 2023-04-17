@@ -193,7 +193,8 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
        
         //send to all SignalPerformer added
         for (IntentionPerformer performer : performers) {
-            performer.performIntentions(intentions, id, mode);
+            if(intentions.size()>0)
+                performer.performIntentions(intentions, id, mode);
         }
         return id;
     }

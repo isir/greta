@@ -5,7 +5,7 @@ import socket
 import pickle 
 import argparse
 
-openai.api_key ="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"
+openai.api_key ="Your API Key"
 start_chat_log = '''Human: Hello, who are you?
 AI: I am doing great. How can I help you today?
 '''

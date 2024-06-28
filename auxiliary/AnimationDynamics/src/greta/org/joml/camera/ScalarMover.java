@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package greta.org.joml.camera;
+package org.joml.camera;
 
 public class ScalarMover {
 

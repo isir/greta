@@ -75,6 +75,7 @@ public class FindPrePhonemeAndSucPhoneme {
         if (curPhoneme.isVowel()) {
             while ((jpre >= 0) && phonemes.get(jpre).isVowel() && (!(phonemes.get(jpre).isPause()))) {
                 jpre = jpre - 1;
+                
             }
             if (jpre >= 0) {
                 prePhoneme = phonemes.get(jpre);

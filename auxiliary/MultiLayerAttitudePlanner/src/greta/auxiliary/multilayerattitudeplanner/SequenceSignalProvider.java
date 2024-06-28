@@ -15,8 +15,6 @@ import greta.core.signals.Signal;
 import greta.core.signals.TorsoSignal;
 import greta.core.signals.gesture.GestureSignal;
 import greta.core.util.enums.GazeDirection;
-import greta.core.util.enums.GazeMode;
-import greta.core.util.enums.GazeType;
 import greta.core.util.enums.Influence;
 import greta.core.util.enums.Side;
 import greta.core.util.id.IDProvider;
@@ -477,10 +475,9 @@ public class SequenceSignalProvider {
             gas.getTimeMarker("stroke-start").setValue(start+2*(end-start)/5);
             gas.getTimeMarker("stroke-end").setValue(start+3*(end-start)/5);
             gas.getTimeMarker("relax").setValue(start+4*(end-start)/5);
-            gas.setOffsetAngle(20);
-            gas.setType(GazeType.GAZE);
-            gas.setMode(GazeMode.HEAD);
+            gas.setOffsetAngle(0.3);
             gas.setOffsetDirection(GazeDirection.DOWNRIGHT);
+            gas.setInfluence(Influence.HEAD);
 
             lst.add(gas);
         } else {

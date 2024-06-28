@@ -32,8 +32,6 @@ public class LaughPhonemSequence implements Keyframe{
     private double onset;
     private double offset;
     private final List<LaughPhoneme> phonems;
-    
-    private String parentId;
 
     public LaughPhonemSequence(Laugh laugh){
         this(
@@ -96,16 +94,6 @@ public class LaughPhonemSequence implements Keyframe{
             duration += pho.getDuration();
         }
         return duration;
-    }
-
-    @Override
-    public String getParentId() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setParentId(String parParentId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

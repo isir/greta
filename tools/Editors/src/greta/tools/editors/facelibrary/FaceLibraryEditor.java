@@ -277,6 +277,7 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
                     }
                 }
             }
+            
         }
         if(isInLocalDefinition){
             FaceLibrary.global_facelibrary.saveCurrentDefinition();
@@ -369,6 +370,8 @@ public class FaceLibraryEditor extends JFrame implements CharacterDependent, AUE
         for (AUPerformer performer : perfomers) {
             performer.performAUAPFrame(frame, id);
         }
+        System.out.println("#################################################");
+        System.out.println("Hey from send in FAceLibraryEditor.java in Editors");
     }
 
     @Override

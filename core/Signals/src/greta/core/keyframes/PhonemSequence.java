@@ -31,15 +31,12 @@ public class PhonemSequence implements Keyframe{
     private double onset;
     private double offset;
     private final List<Phoneme> phonems;
-    
-    private String parentId;
 
     public PhonemSequence(Speech speech){
         this(
                 speech.getId()+"_phonems",
                 speech.getPhonems(),
-                speech.getStart().getValue(),
-                speech.getId()
+                speech.getStart().getValue()
              );
     }
 
@@ -48,14 +45,6 @@ public class PhonemSequence implements Keyframe{
         this.phonems = phonems;
         this.offset = startTime;
         this.onset = 0;
-    }
-    
-    public PhonemSequence(String id, List<Phoneme> phonems, double startTime, String parParentId){
-        this.id = id;
-        this.phonems = phonems;
-        this.offset = startTime;
-        this.onset = 0;
-        this.parentId = parParentId;
     }
 
     public List<Phoneme> getPhonems(){
@@ -104,16 +93,6 @@ public class PhonemSequence implements Keyframe{
             duration += pho.getDuration();
         }
         return duration;
-    }
-
-    @Override
-    public String getParentId() {
-        return parentId;
-    }
-
-    @Override
-    public void setParentId(String parParentId) {
-        this.parentId = parParentId;
     }
 
 }

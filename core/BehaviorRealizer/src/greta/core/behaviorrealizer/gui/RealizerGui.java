@@ -17,10 +17,28 @@
  */
 package greta.core.behaviorrealizer.gui;
 
+import greta.core.util.CharacterManager;
+import greta.core.behaviorrealizer.ClientPhoneme;
 import greta.core.behaviorrealizer.Realizer;
+import greta.core.keyframes.Keyframe;
+import greta.core.keyframes.KeyframeEmitter;
+import greta.core.keyframes.KeyframePerformer;
+import greta.core.keyframes.PhonemSequence;
+import greta.core.util.id.ID;
+import greta.core.util.id.IDProvider;
+import greta.core.util.Mode;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import java.util.ArrayList;
+import greta.core.keyframes.Keyframe;
+import javax.swing.SwingUtilities;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  *
@@ -28,6 +46,7 @@ import javax.swing.JLabel;
  */
 public class RealizerGui extends JFrame{
 
+    private CharacterManager cm;
     private Realizer parent;
     // Variables declaration
     private JLabel AULibrary;
@@ -37,6 +56,8 @@ public class RealizerGui extends JFrame{
     private JLabel Libraries;
     private JLabel ShoulderLibrary;
     private JLabel TorsoLibrary;
+    private JLabel SendPhoneme;
+    
     private JButton UpdateAU;
     private JButton UpdateAll;
     private JButton UpdateFace;
@@ -45,6 +66,9 @@ public class RealizerGui extends JFrame{
     private JButton UpdateHead;
     private JButton UpdateSh;
     private JButton UpdateTorso;
+    private javax.swing.JToggleButton togglePhonemeServer;
+    private boolean Phoneme_send = false ;
+    
     private JLabel jLabel1;
     // End of variables declaration
 
@@ -66,6 +90,7 @@ public class RealizerGui extends JFrame{
         jLabel1 = new javax.swing.JLabel();
         UpdateHand = new javax.swing.JButton();
         UpdateAll = new javax.swing.JButton();
+        togglePhonemeServer = new javax.swing.JToggleButton();
 
         setMaximumSize(new java.awt.Dimension(213, 392));
 
@@ -77,6 +102,16 @@ public class RealizerGui extends JFrame{
                 //UpdateAUActionPerformed(evt);
             }
         });
+        
+        
+        //SendPhoneme.setText("Send Phoneme");
+        
+        togglePhonemeServer.setText("Enable Phoneme Server");
+            togglePhonemeServer.addActionListener(new java.awt.event.ActionListener() {
+                    public void actionPerformed(java.awt.event.ActionEvent evt) {
+                    togglePhonemeServerActionPerformed(evt);
+    }
+});
 
         FaceLibrary.setText("Face Library");
 
@@ -154,6 +189,8 @@ public class RealizerGui extends JFrame{
                     .addComponent(HeadLibrary)
                     //.addComponent(ShoulderLibrary)
                     .addComponent(TorsoLibrary))
+                    .addComponent(togglePhonemeServer)
+                    //.addComponent(SendPhoneme)
                     //.addComponent(jLabel1))
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,6 +198,7 @@ public class RealizerGui extends JFrame{
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             //.addComponent(UpdateHand)
                             .addComponent(UpdateTorso))
+                            //.addComponent(togglePhonemeServer)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,6 +217,7 @@ public class RealizerGui extends JFrame{
                 .addComponent(UpdateAll, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(28, 28, 28))
         );
+        
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
@@ -211,7 +250,8 @@ public class RealizerGui extends JFrame{
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(TorsoLibrary)
-                    .addComponent(UpdateTorso))
+                    .addComponent(UpdateTorso)
+                    .addComponent(togglePhonemeServer))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING))
                     //.addComponent(jLabel1)
@@ -265,5 +305,107 @@ public class RealizerGui extends JFrame{
         this.parent.UpdateTorsoLibrary();
         this.parent.UpdateHandLibrary();
     }
+    
+    private void togglePhonemeServerActionPerformed(java.awt.event.ActionEvent evt) {   
+        
+    if (togglePhonemeServer.isSelected()) {        
+       
 
+            new Thread(() -> {
+            // Initial delay to avoid checking immediately.
+            try { Thread.sleep(500); } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
+            //this.parent.characterManager.Phoneme_manager(); is the cm boolean for phoneme sending
+           /* while (!this.Phoneme_send) {
+                System.out.println("Waiting for launch");
+                try { Thread.sleep(1000); } catch (InterruptedException e) { Thread.currentThread().interrupt(); break; }
+            }
+            
+            if (this.Phoneme_send) {
+                // Runs on the Swing event dispatch thread to ensure thread-safety for UI updates.
+                SwingUtilities.invokeLater(this::startPhonemeServer);
+            }*/
+           startClient();
+           SwingUtilities.invokeLater(this::startPhonemeServer);
+        }).start();
+    } else {
+        // Stop the phoneme server
+        System.out.println("Phoneme server stopped.");
+        // Call stop method on your phoneme client instance
+    }
+}
+
+    private void startPhonemeServer() {
+        
+        System.out.println("Phoneme server started.");
+        List<Keyframe> keyframes = new ArrayList<Keyframe>();
+        ID id = IDProvider.createID("UniqueId");
+        Mode mode = new Mode("Mode@1835238");
+        double lastKeyFrameTime = 0.0;
+        double absoluteStartTime = greta.core.util.time.Timer.getTime();
+        // Start the phoneme server
+        // Set the shared state based on the toggle button
+        ClientPhoneme client = new ClientPhoneme();
+        client.clearLastReceivedSequence(); // Ensure no previous data is present
+        Thread clientThread = new Thread(client::startClient);
+        clientThread.start();
+        //System.out.println("curPhoneme is : " +visemes.get(i).curPho.getPhonemeType() );
+
+        try {
+            clientThread.join(); // Wait for the client thread to finish
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            return;
+        }
+
+        PhonemSequence receivedSequence = client.getLastReceivedSequence();
+        if (receivedSequence != null) {
+            // If a PhonemeSequence was received, add it to the list of keyframes to be processed.
+            keyframes.add(receivedSequence);
+            //code ajouté pour syncrhoniser les animation avec greta absolute time
+            for (Keyframe keyframe : keyframes) {
+            keyframe.setOnset(keyframe.getOnset() + absoluteStartTime);
+            keyframe.setOffset(keyframe.getOffset() + absoluteStartTime);
+            
+            if (keyframe instanceof PhonemSequence) {
+                PhonemSequence phonems = (PhonemSequence) keyframe;
+                if (lastKeyFrameTime < phonems.getOffset() + phonems.getDuration()) {
+                    lastKeyFrameTime = phonems.getOffset() + phonems.getDuration();
+                }
+            }
+            }
+            
+            this.parent.sendKeyframes(keyframes, id, mode);
+            //code ajouté pour syncrhoniser les animation avec greta absolute time
+            this.parent.addAnimation(id, absoluteStartTime, lastKeyFrameTime);
+    
+        } }
+    
+    public void startClient() {
+    int attempts = 0;
+    boolean connected = false;
+    while (attempts < 10 && !connected) {
+        try (Socket socket = new Socket("localhost", 12345);
+             DataInputStream in = new DataInputStream(socket.getInputStream())) {
+
+            boolean received = in.readBoolean();
+            if (received) {
+                System.out.println("Boolean received, proceeding...");
+                this.Phoneme_send = received;
+                startPhonemeServer();
+                connected = true; // Exit loop on successful connection
+            }
+        } catch (IOException e) {
+            attempts++;
+            System.out.println("Connection attempt " + attempts + " failed, retrying...");
+            try {
+                Thread.sleep(2000); // Wait for 1 second before retrying
+            } catch (InterruptedException ie) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+    if (!connected) {
+        System.out.println("Failed to connect to server after " + attempts + " attempts.");
+    }
+}
 }

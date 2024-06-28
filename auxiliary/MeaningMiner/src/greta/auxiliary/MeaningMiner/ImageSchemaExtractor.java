@@ -49,7 +49,6 @@ import greta.core.util.id.IDProvider;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLParser;
 import greta.core.util.xml.XMLTree;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -716,24 +715,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         int countImageSchema = 0;
 
         //prepare the reader for our value
-        
-        
-        System.out.println("STRING INPUT:"+tagFreeInput);
-        
-        String fix= new String();
-                    System.out.println("CHECK TEXT");
-                    BufferedReader rea = new BufferedReader(new StringReader(tagFreeInput));
-
-                    String line1;
-
-                    while ((line1 = rea.readLine()) != null) {
-                        if(!line1.contains("tmp") && line1.trim().length()>0)
-                            fix=fix+" "+line1.trim()+"\n";
-                        
-                    }
-        fix=fix.substring(0, fix.length()-1);
-        System.out.println("[FIX]:"+fix);
-        StringReader sr = new StringReader(fix);
+        StringReader sr = new StringReader(tagFreeInput);
 
         //*********   FIRST WE START BY AUGMENTING THE TEXT ***************
         //prepare the XML structure to store the speech in a FML-APML way
@@ -743,7 +725,6 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
         //split by sentences, for each sentences:
         for (List<HasWord> sentence : new DocumentPreprocessor(sr)) {
-            System.out.println("HAS WORD:"+sentence.toString());
             imageSchemasGenerated.clear();
             boolean hasVerb = false;
             boolean afterVerb = false;
@@ -768,7 +749,6 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             ideationalUnit.setAttribute("id", "id_" + countIdeationalUnit++);
             ideationalUnit.setAttribute("importance", "1.0");
             ideationalUnit.setAttribute("start", "s1:tm" + countTimeMarkers + "-0.2");
-            System.out.println("[COUNT TIME MARKERS]:"+countTimeMarkers+"   "+sentence.size());
             ideationalUnit.setAttribute("end", "s1:tm" + (countTimeMarkers + sentence.size() - 1) + "-0.2");
             String[] listToken = new String[sentence.size()];
             String[] listPos = new String[sentence.size()];
@@ -1064,39 +1044,8 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
         
                 try{
-                    String file= new String();
-                    System.out.println("CHECK TEXT");
-                    BufferedReader reader = new BufferedReader(new StringReader(fmlApmlRoot.toString()));
-
-                    String line;
-
-                    int counter=0;
-                    int counter1=1;
-                    while ((line = reader.readLine()) != null) {
-                        line=line.trim();
-                        if(line.length()==3 || line.contains("importance") || line.contains("imageschema") || line.contains("speech")){
-                            file=file+(line+" "+reader.readLine().trim())+"\n";
-                            //System.out.println("LINE:"+line+" "+reader.readLine().trim());
-                        }else{
-                            if(line.trim().contains("<fml-apml>")){
-                                if(counter==0){
-                                    file=file+line+"\n";
-                                    counter=counter+1;
-                                }
-                            }
-                            else{
-                             if(!line.trim().contains("</fml-apml>") && !line.contains("<fml/>"))
-                                file=file+line+"\n";
-                             
-                    }
-                    }
-                    }
-                    
-                    System.out.println("STRING:\n"+file );
-                    
-                String fmlApmlRoot_v1=file+"</fml-apml>".replace("s1:tm0","s1:tm1");
-                //fmlApmlRoot_v1= fmlApmlRoot_v1.replace("</bml>","\n</bml>\n<fml>").replace("?>", "?>\n<fml-apml>").replace(":tm0",":tm1")+"\n</fml-apml>";
-                System.out.println("CHECK STRING 2");
+                String fmlApmlRoot_v1=fmlApmlRoot.toString().replace("<fml-apml>","").replace("<fml>","").replace("</fml>","").replace("</fml-apml>","");
+                fmlApmlRoot_v1= fmlApmlRoot_v1.replace("</bml>","</bml>\n<fml>").replace("?>", "?>\n<fml-apml>").replace(":tm0",":tm1")+"\n</fml>\n</fml-apml>";
                 System.out.println(fmlApmlRoot_v1);
                 DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();

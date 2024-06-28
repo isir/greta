@@ -5,85 +5,26 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>While
-<tm id="tm2"/>the
-<tm id="tm3"/>AIML
-<tm id="tm4"/>was
-<tm id="tm5"/>keeping
-<tm id="tm6"/>them
-<tm id="tm7"/>entertained,
-<tm id="tm8"/>we
-<tm id="tm9"/>were
-<tm id="tm10"/>playing
-<tm id="tm11"/>a
-<tm id="tm12"/>game
-<tm id="tm13"/>in
-<tm id="tm14"/>parallel.
-<tm id="tm15"/>We
-<tm id="tm16"/>called
-<tm id="tm17"/>it
-<tm id="tm18"/>"The
-<tm id="tm19"/>Game
-<tm id="tm20"/>of
-<tm id="tm21"/>Banh
-<tm id="tm22"/>Qui",
-<tm id="tm23"/>and
-<tm id="tm24"/>it
-<tm id="tm25"/>consisted
-<tm id="tm26"/>of
-<tm id="tm27"/>a
-<tm id="tm28"/>chessboard-like
-<tm id="tm29"/>map,
-<tm id="tm30"/>the
-<tm id="tm31"/>board
-<tm id="tm32"/>showed
-<tm id="tm33"/>many
-<tm id="tm34"/>locations
-<tm id="tm35"/>where
-<tm id="tm36"/>each
-<tm id="tm37"/>item
-<tm id="tm38"/>could
-<tm id="tm39"/>be
-<tm id="tm40"/>found.
-<tm id="tm41"/>If
-<tm id="tm42"/>someone
-<tm id="tm43"/>found
-<tm id="tm44"/>a
-<tm id="tm45"/>sheep
-<tm id="tm46"/>and
-<tm id="tm47"/>touched
-<tm id="tm48"/>it
-<tm id="tm49"/>at
-<tm id="tm50"/>the
-<tm id="tm51"/>board,
-<tm id="tm52"/>it
-<tm id="tm53"/>would
-<tm id="tm54"/>cause
-<tm id="tm55"/>the
-<tm id="tm56"/>player
-<tm id="tm57"/>to
-<tm id="tm58"/>lose
-<tm id="tm59"/>the
-<tm id="tm60"/>round.
-<tm id="tm61"/>The
-<tm id="tm62"/>AI
-<tm id="tm63"/>controlled
-<tm id="tm64"/>a
-<tm id="tm65"/>Tiger
-<tm id="tm66"/>with
-<tm id="tm67"/>a
-<tm id="tm68"/>fishbowl
-<tm id="tm69"/>in
-<tm id="tm70"/>his
-<tm id="tm71"/>hand.
-<tm id="tm72"/>Left
-<tm id="tm73"/>click
-<tm id="tm74"/>(on
-<tm id="tm75"/>Macs
+<tm id="tm1"/>Hello,
+<tm id="tm2"/>My
+<tm id="tm3"/>name
+<tm id="tm4"/>is
+<tm id="tm5"/>Camille.
+<tm id="tm6"/>I
+<tm id="tm7"/>am
+<tm id="tm8"/>one
+<tm id="tm9"/>of
+<tm id="tm10"/>the
+<tm id="tm11"/>virtual
+<tm id="tm12"/>character
+<tm id="tm13"/>of
+<tm id="tm14"/>the
+<tm id="tm15"/>Greta
+<tm id="tm16"/>platform.
 </speech>
 </bml>
 <fml>
-<deictic end="s1:tm13" id="1" importance="1.0" start="s1:tm7" type="me"/>
-<beat end="s1:tm20" id="2" importance="1.0" start="s1:tm14" type="LowLf1"/>
+<deictic end="s1:tm7" id="1" importance="1.0" start="s1:tm1" type="me"/>
+<deictic end="s1:tm11" id="2" importance="1.0" start="s1:tm5" type="me"/>
 </fml>
 </fml-apml>

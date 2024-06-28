@@ -35,7 +35,7 @@ public class SaveAudioPerformer implements AudioPerformer{
         if(audios.size()==1){
             try {
                 audios.get(0).save(requestId+".wav",false);
-                //System.out.println(requestId+".wav"+ "aaaaaaaaaaaaaaaa");
+                System.out.println(requestId+".wav"+ "aaaaaaaaaaaaaaaa");
             } catch (IOException ex) {
                 Logger.getLogger(SaveAudioPerformer.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -45,7 +45,7 @@ public class SaveAudioPerformer implements AudioPerformer{
             for(int i=0; i<audios.size();++i){
                 try {
                     audios.get(i).save(requestId+"_"+i+".wav",false);
-                    //System.out.println(requestId+"_"+i+".wav");
+                    System.out.println(requestId+"_"+i+".wav");
                 } catch (IOException ex) {
                     Logger.getLogger(SaveAudioPerformer.class.getName()).log(Level.SEVERE, null, ex);
                 }

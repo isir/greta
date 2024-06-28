@@ -7,18 +7,26 @@
 			</description>
 				
 			<tm id="tm1"/>
-				Hello,
+				That dot
 			<tm id="tm2"/>
-				My name is Camille.
+				that's here
 			<tm id="tm3"/>	
-				I am one of the virtual character
+				that's home
 			<tm id="tm4"/>
-				 of the Greta platform.
+				 that's us
 			<tm id="tm5"/>	
-				
-			
-			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm3" end="s1:tm4" importance="1"/>
-			<boundary type="LL" id="b1" start="s1:tm5" end="s1:tm5+0.5"/>
+			on it
+						<tm id="tm6"/>
+			everyone you love
+						<tm id="tm7"/>
+			everyone you know
+						<tm id="tm8"/>
+			everyone you ever heard of
+						<tm id="tm9"/>
+			every human being who ever was
+						<tm id="tm10"/>
+			lived out their lives
+						<tm id="tm11"/>
 		</speech>
 	</bml>
 	<fml>

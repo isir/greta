@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package greta.org.joml;
+package org.joml;
 
 /**
  * Computes the weighted average of multiple rotations represented as {@link Quaternionf} instances.

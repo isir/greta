@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package greta.org.joml;
+package org.joml;
 
 /**
  * Efficiently performs frustum intersection tests by caching the frustum planes of an arbitrary transformation {@link Matrix4f matrix}.

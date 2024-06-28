@@ -73,10 +73,11 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     private Comparator<Keyframe> keyframeComparator;
     private Environment environment;  //new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
-    private CharacterManager characterManager;
+    public CharacterManager characterManager;
 
     public Realizer(CharacterManager cm) {
         setCharacterManager(cm);
+        
         keyframePerformers = new ArrayList<>();
         generators = new ArrayList<>();
 
@@ -97,6 +98,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
 
         // environment
         environment = characterManager.getEnvironment();
+        
     }
 
     @Override //TODO add the use of modes: blend, replace, append
@@ -157,7 +159,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         faceGenerator.findExistingAU(keyframes);
         keyframes.addAll(faceGenerator.generateKeyframes());
 
-        // Step 4: adjust the timing of all key frame
+        // Step 4: ADJUST THE TIMING OF THE KEYFRAMES
 
         keyframes.sort(keyframeComparator);
 
@@ -215,6 +217,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         }
         //System.out.println("GGGGGGGGGG:"+requestId+"  "+absoluteStartTime+"   "+lastKeyFrameTime);
         this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
+         
     }
 
     @Override
@@ -246,6 +249,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     }
 
     public void sendKeyframes(List<Keyframe> keyframes, ID id, Mode mode) {
+
         if (keyframes != null) {
             for (KeyframePerformer performer : keyframePerformers) {
                 // TODO : Mode management in progress

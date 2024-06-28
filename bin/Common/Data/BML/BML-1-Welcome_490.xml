@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bml xmlns="http://www.mindmakers.org/projects/BML" character="Greta"
+    composition="blend" reaction_duration="NONE" reaction_type="NONE" social_attitude="neutral">
+    <speech xmlns="" id="s1" language="english" start="0.0" text=""
+        type="SAPI4" voice="marytts">
+        <description level="1" type="gretabml">
+            <reference>tmp/from-fml-apml.pho</reference>
+        </description>
+        <tm id="tm1"/>
+				Hello,
+			<tm
+            id="tm2"/>
+				My name is Camille.
+			<tm
+            id="tm3"/>	
+				I am one of the virtual character
+			<tm
+            id="tm4"/>
+				 of the Greta platform.
+			<tm id="tm5"/>
+        <pitchaccent end="s1:tm4" id="pa2" importance="1" level="medium"
+            start="s1:tm3" type="HStar"/>
+        <boundary end="s1:tm5+0.5" id="b1" start="s1:tm5" type="LL"/>
+    </speech>
+    <head end="1.6828124" id="pa2_0" lexeme="Down_Aside_Right" start="-0.5639423932387102">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_ASIDE_RIGHT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.400</SPC.value>
+            <TMP.value>-0.700</TMP.value>
+            <FLD.value>0.000</FLD.value>
+            <PWR.value>-0.500</PWR.value>
+            <REP.value>0.000</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+    <face amount="1.000" end="1.6828124" id="pa2_1" start="-0.6000000000000001">
+        <lexeme lexeme="Hstar"/>
+    </face>
+    <gesture end="2.7244149411512204" id="b1_0"
+        lexeme="Beat_Pos_B_Social" start="-0.45834335610083254">
+        <description priority="1" type="gretabml">
+            <reference>beat=Beat_Pos_B_Social</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.000</SPC.value>
+            <TMP.value>0.020</TMP.value>
+            <FLD.value>1.000</FLD.value>
+            <PWR.value>0.600</PWR.value>
+            <REP.value>-0.100</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </gesture>
+    <face amount="1.000" end="2.125146" id="b1_1" start="-0.6000000000000001">
+        <lexeme lexeme="joy"/>
+    </face>
+    <head end="0.5" id="b1_0" lexeme="Down_Aside_Right" start="-0.25">
+        <description priority="1" type="gretabml">
+            <reference>DOWN_ASIDE_RIGHT</reference>
+            <intensity>1.000</intensity>
+            <SPC.value>0.400</SPC.value>
+            <TMP.value>-0.700</TMP.value>
+            <FLD.value>0.000</FLD.value>
+            <PWR.value>-0.500</PWR.value>
+            <REP.value>0.000</REP.value>
+            <OPN.value>0.000</OPN.value>
+            <TEN.value>0.000</TEN.value>
+        </description>
+    </head>
+</bml>

@@ -50,7 +50,7 @@ public class AutodeskSkeletonToAnimationSkeleton {
                 new Quaternion(new Vec3d(0, 0, 1), Math.toRadians(-33)),
                 new Quaternion(new Vec3d(0, 1, 0), Math.toRadians(20))),
                 new Quaternion(new Vec3d(1, 0, 0), Math.toRadians(15)));
-
+        
         correct(skel, "RightShoulder", rclavC);
         correct(skel, "LeftShoulder", lclavC);
         correct(skel, "RightArm", shoulderC);
@@ -216,6 +216,7 @@ public class AutodeskSkeletonToAnimationSkeleton {
         if(found != null){
             found.setIdentifier(newName);
         }
+        System.out.println("Hello from AutodeskSkeletonToAnimationSkeleton.java");
     }
 
     private static void renameAll(Bone bone, String oldName, String newName){
@@ -227,6 +228,7 @@ public class AutodeskSkeletonToAnimationSkeleton {
                 renameAll(((Bone)child), oldName, newName);
             }
         }
+        System.out.println("Hello from AutodeskSkeletonToAnimationSkeleton.java");
     }
 
     private static Bone findBone(Bone skel, String name){
@@ -241,6 +243,7 @@ public class AutodeskSkeletonToAnimationSkeleton {
                 }
             }
         }
+        System.out.println("Hello from AutodeskSkeletonToAnimationSkeleton.java");
         return null;
     }
 
@@ -248,6 +251,7 @@ public class AutodeskSkeletonToAnimationSkeleton {
         if(bone !=null){
             bone.getChildren().clear();
         }
+        System.out.println("Hello from AutodeskSkeletonToAnimationSkeleton.java");
     }
 
     private static void removeBoneButKeepChildren(Bone bone) {
@@ -265,12 +269,14 @@ public class AutodeskSkeletonToAnimationSkeleton {
                 parent.addChildNode(bone.getChildren().get(0));
             }
         }
+        System.out.println("Hello from AutodeskSkeletonToAnimationSkeleton.java");
     }
 
     private static void remove(Bone bone) {
         if(bone !=null){
             bone.remove();
         }
+        System.out.println("Hello from AutodeskSkeletonToAnimationSkeleton.java");
     }
 
     private static void correct(Bone skel, String rightShoulder, Quaternion rclavC) {
@@ -278,6 +284,7 @@ public class AutodeskSkeletonToAnimationSkeleton {
         if(bone !=null){
             bone.setOrientation(Quaternion.multiplication(rclavC, bone.getOrientation()));
         }
+        System.out.println("Hello from AutodeskSkeletonToAnimationSkeleton.java");
     }
 
     private static void addBefore(Bone bone, String newBoneName){

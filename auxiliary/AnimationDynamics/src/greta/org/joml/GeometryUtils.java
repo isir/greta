@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package greta.org.joml;
+package org.joml;
 
 /**
  * Useful geometry methods.

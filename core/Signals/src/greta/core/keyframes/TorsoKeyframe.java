@@ -35,8 +35,6 @@ public class TorsoKeyframe  extends ParametersKeyframe{
     public SpineDirection collapse;
     public HashMap<String, Quaternion> _rotations = new HashMap<String, Quaternion>();
     boolean onlyshoulder = false;
-    
-    private String parentId;
 
     public TorsoKeyframe(String id, SpinePhase phase, String category)
     {
@@ -44,7 +42,7 @@ public class TorsoKeyframe  extends ParametersKeyframe{
         this.modality = "torso";
 //        this.category = phase.verticalTorsion.direction.toString() + phase.sagittalTilt.direction + phase.lateralRoll.direction;
 //        if (this.category.isEmpty()) {
-            this.category = "Neutral";
+        this.category = "Neutral";
 //        }
         this.onset = phase.getStartTime();
         this.offset = phase.getEndTime();
@@ -53,6 +51,7 @@ public class TorsoKeyframe  extends ParametersKeyframe{
         this.lateralRoll = phase.lateralRoll;
         this.collapse = phase.collapse;
         this._rotations.putAll(phase._rotations);
+        System.out.println("TORSO INIT:"+this.sagittalTilt+" "+this.onset+"  "+this.offset);
     }
 
     public TorsoKeyframe(TorsoKeyframe other) {
@@ -83,6 +82,7 @@ public class TorsoKeyframe  extends ParametersKeyframe{
         this.lateralRoll = new SpineDirection();
         this.collapse = new SpineDirection();
         this._rotations.putAll(new HashMap<String, Quaternion>());
+        
     }
 
     public double getOffset() {
@@ -126,16 +126,6 @@ public class TorsoKeyframe  extends ParametersKeyframe{
     public TorsoKeyframe clone() throws CloneNotSupportedException {
         TorsoKeyframe cloneobj = (TorsoKeyframe) super.clone();
         return cloneobj;
-    }
-
-    @Override
-    public String getParentId() {
-        return parentId;
-    }
-
-    @Override
-    public void setParentId(String parParentId) {
-        this.parentId = parParentId;
     }
 
 }

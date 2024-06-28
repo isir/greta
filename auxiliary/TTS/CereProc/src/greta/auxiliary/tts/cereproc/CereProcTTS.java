@@ -44,6 +44,8 @@ import java.util.List;
 import java.util.Map;
 import javax.sound.sampled.AudioFormat;
 
+import furhat.greta.audiosender.cereproc.GretaFurhatAudioSender;
+
 /**
  * This class manages the CereProc implementation of TTS for Greta<br/>
  * CereProc has a native library, this class uses a Java wrapper provided by CereProc (com.cereproc.cerevoice_eng) to access the native interface. <br/>
@@ -80,6 +82,8 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     static byte[] speechBufferUTF8Bytes;
     float earliestReactionTimeOffset = 0.1f;
     static byte[] emptyBufferInterruptionFallback;
+    
+    private GretaFurhatAudioSender audioserver;
 
     static{
         // Init constants and make phonemes mappings
@@ -275,6 +279,8 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         setupCharacterLanguageVoiceParameters();
         clean();
         tmnumber = 0;
+        
+        audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.SpeechData");
     }
 
     /**
@@ -525,7 +531,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     else
                     {
                         String phonemeType = parts[2];
-                        //System.out.println("CHECK:"+languageID+"   "+phonemeType);
+                        System.out.println("CHECK:    "+languageID+"   "+phonemeType);
                         PhonemeType[] pho = CereProcConstants.convertPhoneme(languageID, phonemeType);
                         if (pho != null) {
 
@@ -651,6 +657,15 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
 
                     // Create the Audio object that will be played
                     audio = new Audio(audioFormatCereProc, rawAudioBuffer);
+                    
+                    try{
+                        System.out.println("Sending audio buffer over the topic");
+                        audioserver.send(rawAudioBuffer, phonemes, speech.getSpeechElements(), audio);
+                    }
+                    catch(Exception e){
+                        System.err.println("Error when sending audiobuffer: "+e.getMessage());
+                    }
+                    
 
                     /*  DEBUG
                     rawAudioBuffer = new byte[(samples16bitNum) * 2];
@@ -868,7 +883,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
             double startT = Double.valueOf(parts[0]);
             double endT = Double.valueOf(parts[1]);
             String item = parts[2];
-            //System.out.println("GRETA CHECK CERE VAL:"+startT+"  "+endT);
+            System.out.println("GRETA CHECK CERE VAL:"+startT+"  "+endT);
             toReturn+="Start [" + startT + "] End [" + endT + "] Item [" + item + "]\n";
         }
 

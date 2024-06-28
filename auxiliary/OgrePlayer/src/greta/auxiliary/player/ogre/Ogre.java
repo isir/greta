@@ -309,6 +309,7 @@ public class Ogre {
     }
 
     private static void initialiseResources() {
+        System.out.println("Hello from initialiseResources  from Ogre.java");
         if (!ResourceGroupManager.getSingleton().isResourceGroupInitialised(resourceGroup)) {
             String shadersPath = "./Player/Data/Shaders/";
             String baseMaterialPath = shadersPath+IniManager.getGlobals().getValueString("OGRE_BASE_SHADER");
@@ -412,6 +413,7 @@ public class Ogre {
     }
 
     public static void setMaterial(final Entity entity, final String materialName) {
+        System.out.println("Hello from setMaterial 1 from Ogre.java");
         callSync(new OgreThread.Callback() {
             @Override
             public void run() {
@@ -419,9 +421,11 @@ public class Ogre {
                 entity.setMaterialName(materialName);
             }
         });
+        
     }
 
     public static void setMaterial(final Entity entity, final String materialName, final int target) {
+        System.out.println("Hello from setMaterial 1 from Ogre.java");
         if (target == 0) {
             setMaterial(entity, materialName);
         } else {
@@ -436,6 +440,7 @@ public class Ogre {
                 }
             });
         }
+        
     }
 
     public static void dontDelete(Object o) {

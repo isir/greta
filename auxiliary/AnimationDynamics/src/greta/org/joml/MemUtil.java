@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package greta.org.joml;
+package org.joml;
 
 import java.nio.Buffer;
 import java.nio.ByteBuffer;

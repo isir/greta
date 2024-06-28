@@ -1,12 +1,12 @@
-package greta.org.joml.lwjgl;
+package org.joml.lwjgl;
 
 import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 import java.util.Arrays;
-import greta.org.joml.Intersectionf;
-import greta.org.joml.Matrix4f;
-import greta.org.joml.Vector2f;
-import greta.org.joml.Vector3f;
+import org.joml.Intersectionf;
+import org.joml.Matrix4f;
+import org.joml.Vector2f;
+import org.joml.Vector3f;
 import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.*;
 import static org.lwjgl.glfw.GLFW.*;

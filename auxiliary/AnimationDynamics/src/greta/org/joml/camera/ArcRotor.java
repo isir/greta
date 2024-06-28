@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package greta.org.joml.camera;
+package org.joml.camera;
 
 /**
  * Rotates a point on a circle/arc to reach a target angle using the rotation

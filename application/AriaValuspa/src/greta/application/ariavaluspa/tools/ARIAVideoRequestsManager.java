@@ -33,7 +33,7 @@ import greta.core.util.log.Logs;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLParser;
 import greta.core.util.xml.XMLTree;
-//import greta.tools.ogre.capture.video.XuggleVideoCapture;
+import greta.tools.ogre.capture.video.XuggleVideoCapture;
 import greta.core.feedbacks.Callback;
 import greta.core.feedbacks.CallbackPerformer;
 import greta.core.interruptions.reactions.BehaviorType;
@@ -76,7 +76,7 @@ public class ARIAVideoRequestsManager implements Listener, IntentionEmitter, Int
     
     // Video
     private Capturecontroller videoCaptureController;
-//    private XuggleVideoCapture xuggleVideoCapture;
+    private XuggleVideoCapture xuggleVideoCapture;
     private IContainerFormat containerCodec;
     private ICodec videoCodec;
     private ICodec audioCodec;
@@ -248,11 +248,11 @@ public class ARIAVideoRequestsManager implements Listener, IntentionEmitter, Int
         }
        
     }
-   /*     
+        
     private void initVideoCaptureController() {
         xuggleVideoCapture.setWantedFormat(containerCodec, videoCodec, audioCodec);
     }
-    */
+    
     /**
      * Delete a file or a directory and its children.
      *
@@ -708,14 +708,13 @@ public class ARIAVideoRequestsManager implements Listener, IntentionEmitter, Int
         this.videoCaptureController = vcc;
     }
     
-    /*
     public void setXuggleVideoCapture(XuggleVideoCapture  xvc){
         this.xuggleVideoCapture = xvc;
         if (xuggleVideoCapture != null) {
             this.initVideoCaptureController();
         }
     }
-    */
+    
     @Override
     protected void finalize() throws Throwable {
         scheduler.shutdown();

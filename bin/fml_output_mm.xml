@@ -1,73 +1,46 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <fml-apml>
-<bml>
-<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
-<description level="1" type="gretabml">
-<reference>tmp/from-fml-apml.pho</reference>
-</description>
-<tm id="tm1"/>Social
-<tm id="tm2"/>robotics
-<tm id="tm3"/>is
-<tm id="tm4"/>the
-<tm id="tm5"/>use
-<tm id="tm6"/>of
-<tm id="tm7"/>robots
-<tm id="tm8"/>to
-<tm id="tm9"/>interact
-<tm id="tm10"/>with
-<tm id="tm11"/>humans
-<tm id="tm12"/>in
-<tm id="tm13"/>a
-<tm id="tm14"/>social
-<tm id="tm15"/>setting.
-<tm id="tm16"/>It
-<tm id="tm17"/>involves
-<tm id="tm18"/>using
-<tm id="tm19"/>robots
-<tm id="tm20"/>to
-<tm id="tm21"/>understand
-<tm id="tm22"/>and
-<tm id="tm23"/>respond
-<tm id="tm24"/>to
-<tm id="tm25"/>human
-<tm id="tm26"/>behavior,
-<tm id="tm27"/>emotions,
-<tm id="tm28"/>and
-<tm id="tm29"/>communication.
-<tm id="tm30"/>This
-<tm id="tm31"/>technology
-<tm id="tm32"/>has
-<tm id="tm33"/>been
-<tm id="tm34"/>used
-<tm id="tm35"/>in
-<tm id="tm36"/>various
-<tm id="tm37"/>fields
-<tm id="tm38"/>such
-<tm id="tm39"/>as
-<tm id="tm40"/>healthcare,
-<tm id="tm41"/>education,
-<tm id="tm42"/>entertainment,
-<tm id="tm43"/>and
-<tm id="tm44"/>more.
-</speech> </bml>
+    
+	<bml>
+		<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				Hello,
+			<tm id="tm2"/>
+				My name is Camille.
+			<tm id="tm3"/>	
+				I am one of the virtual character
+			<tm id="tm4"/>
+				 of the Greta platform.
+			<tm id="tm5"/>	
+				
+			
+			<pitchaccent end="s1:tm4" id="pa2" importance="1" level="medium" start="s1:tm3" type="HStar"/>
+			<boundary end="s1:tm5+0.5" id="b1" start="s1:tm5" type="LL"/>
+		</speech>
+	</bml>
 <fml>
-<ideationalunit end="s1:tm15-0.2" id="id_0" importance="1.0" main="im_2" start="s1:tm0-0.2"/>
-<imageschema POSroot="noun" end="s1:tm6-0.2" id="im_2" importance="1.0" indexword="5" previous="true" start="s1:tm3-0.2" type="object"/>
-<imageschema POSroot="noun" end="s1:tm10-0.2" id="im_3" importance="1.0" previous="true" start="s1:tm6-0.2" type="whole"/>
-<imageschema POSroot="noun" end="s1:tm11-0.2" id="im_4" importance="1.0" start="s1:tm10-0.2" type="whole"/>
-<imageschema POSroot="adverb" end="s1:tm14-0.2" id="im_5" importance="1.0" previous="true" start="s1:tm11-0.2" type="in"/>
-<imageschema POSroot="noun" end="s1:tm15-0.2" id="im_6" importance="1.0" indexword="15" start="s1:tm14-0.2" type="object"/>
-<ideationalunit end="s1:tm16-0.2" id="id_1" importance="1.0" main="im_9" start="s1:tm0-0.2"/>
-<imageschema POSroot="noun" end="s1:tm26-0.2" id="im_9" importance="1.0" previous="true" start="s1:tm19-0.2" type="whole"/>
-<imageschema POSroot="noun" end="s1:tm27-0.2" id="im_10" importance="1.0" indexword="11" start="s1:tm26-0.2" type="object"/>
-<imageschema POSroot="noun" end="s1:tm29-0.2" id="im_11" importance="1.0" start="s1:tm28-0.2" type="object"/>
-<imageschema POSroot="noun" end="s1:tm32-0.2" id="im_12" importance="1.0" start="s1:tm31-0.2" type="link"/>
-<ideationalunit end="s1:tm18-0.2" id="id_2" importance="1.0" main="im_15" start="s1:tm0-0.2"/>
-<imageschema POSroot="adverb" end="s1:tm40-0.2" id="im_15" importance="1.0" previous="true" start="s1:tm38-0.2" type="in"/>
-<imageschema POSroot="noun" end="s1:tm43-0.2" id="im_16" importance="1.0" indexword="8" previous="true" start="s1:tm40-0.2" type="object"/>
-<imageschema POSroot="noun" end="s1:tm45-0.2" id="im_17" importance="1.0" indexword="13" start="s1:tm43-0.2" type="object"/>
-<imageschema POSroot="noun" end="s1:tm47-0.2" id="im_18" importance="1.0" indexword="15" start="s1:tm45-0.2" type="object"/>
-<imageschema POSroot="noun" end="s1:tm48-0.2" id="im_19" importance="1.0" indexword="15" start="s1:tm47-0.2" type="object"/>
-<imageschema POSroot="adjective" end="s1:tm51-0.2" id="im_20" importance="1.0" start="s1:tm50-0.2" type="big"/>
+	
+		<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0"/>-->
+		<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0" target="Andre_chair0" />-->
+		<!--<performative id="p1" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>-->
+		<beat end="s1:tm3" id="b1" importance="1.0" start="0" type="pos"/>
+		<!--<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>-->
+		<!--<performative id="p2" type="propose" start="s1:tm3" end="s1:tm5" importance="1.0"/>-->
+		<!--<rest id="rp1" type="restpose" start="0" end="s1:tm5" importance="1.0"/>-->
+	
+
+    
+        <ideationalunit end="s1:tm7-0.2" id="id_1" importance="1.0" main="im_5" start="s1:tm1-0.2"/>
+        <imageschema POSroot="noun" end="s1:tm9-0.2" id="im_5" importance="1.0" indexword="5" previous="true" start="s1:tm5-0.2" type="link"/>
+        <ideationalunit end="s1:tm11-0.2" id="id_2" importance="1.0" main="im_10" start="s1:tm1-0.2"/>
+        <imageschema POSroot="noun" end="s1:tm20-0.2" id="im_10" importance="1.0" indexword="7" previous="true" start="s1:tm14-0.2" type="object"/>
+        <imageschema POSroot="noun" end="s1:tm21-0.2" id="im_11" importance="1.0" indexword="11" start="s1:tm20-0.2" type="surface"/>
+    
+
+
 </fml>
 </fml-apml>

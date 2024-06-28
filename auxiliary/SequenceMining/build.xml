@@ -9,6 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="SequenceMining" default="default" basedir=".">
     <description>Builds, tests, and runs the project SequenceMining.</description>
+    <import file="../../build.xml"/>
     <import file="nbproject/build-impl.xml"/>
     <!--
 
@@ -51,7 +52,8 @@
       -init-macrodef-junit:     defines macro for junit execution
       -init-macrodef-debug:     defines macro for class debugging
       -init-macrodef-java:      defines macro for class execution
-      -do-jar:                  JAR building
+      -do-jar-with-manifest:    JAR building (if you are using a manifest)
+      -do-jar-without-manifest: JAR building (if you are not using a manifest)
       run:                      execution of project 
       -javadoc-build:           Javadoc generation
       test-report:              JUnit report generation

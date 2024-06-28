@@ -5,14 +5,12 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>I
-<tm id="tm2"/>don't
-<tm id="tm3"/>like
-<tm id="tm4"/>to
-<tm id="tm5"/>tell
-<tm id="tm6"/>stories
-<tm id="tm7"/>on
-<tm id="tm8"/>command
+<tm id="tm1"/>but
+<tm id="tm2"/>films
+<tm id="tm3"/>break
+<tm id="tm4"/>films
+<tm id="tm5"/>transported
+<tm id="tm6"/>me
 </speech>
 </bml>
 <fml>

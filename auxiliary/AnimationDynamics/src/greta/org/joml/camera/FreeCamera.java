@@ -20,11 +20,11 @@
  THE SOFTWARE.
 
  */
-package greta.org.joml.camera;
+package org.joml.camera;
 
-import greta.org.joml.Matrix4f;
-import greta.org.joml.Quaternionf;
-import greta.org.joml.Vector3f;
+import org.joml.Matrix4f;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 
 /**
  * A very simple but fully functional 6-DOF free/space camera.

@@ -17,6 +17,7 @@
  */
 package greta.auxiliary.player.ogre.agent;
 
+import greta.furhat.activemq.GretaFurhatTextSender;
 import greta.auxiliary.player.ogre.Ogre;
 import greta.auxiliary.player.ogre.OgreThread;
 import greta.core.animation.mpeg4.MPEG4Animatable;
@@ -30,6 +31,7 @@ import vib.auxiliary.player.ogre.natives.Quaternion;
 import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Vector3;
 
+import greta.furhat.activemq.Broker;
 /**
  *
  * @author Andre-Marie Pez
@@ -51,6 +53,13 @@ public abstract class MPEG4Agent extends Thread {
     private boolean showBody = !showSkeleton;
     private Skeleton skeleton;
     boolean visible;
+    
+    // Create an instance of SocketServer
+    private GretaFurhatTextSender server; // = new ActivemqGretaFurhatSender(61617);
+    private Broker broker;
+    private int frameNumber;
+    // Start the server
+    
 
     public MPEG4Agent(String id, SceneNode parent) {
         super("MPEG4Agent-" + id);
@@ -59,6 +68,14 @@ public abstract class MPEG4Agent extends Thread {
         this.id = id;
         this.killed = false;
         this.setDaemon(true);
+        
+        broker = new Broker("61616");
+        boolean use_default_host = false; // default broker host = 10.75.0.1
+        String server_url = (use_default_host)? broker.getHost(): "192.168.1.1"; // 192.168.1.1 new IP used to connect to my laptop
+        server = new GretaFurhatTextSender(server_url, broker.getPort(), "greta.furhat.Rotation");
+        server.startConnection();
+           
+        // 
     }
 
     public void setMPEG4Animatable(MPEG4Animatable animatable) {
@@ -88,8 +105,8 @@ public abstract class MPEG4Agent extends Thread {
             Timer.sleep(5);
         }
     }
-
     public void update() {
+      
         //here we use double synchronisation in this order to prevent mutual blocking between this thread and the OgreThread.
         //in general, all synchronizations on this object must be call by the OgreThread.
         Ogre.callSync(new greta.auxiliary.player.ogre.OgreThread.Callback() {public void run() {
@@ -97,6 +114,27 @@ public abstract class MPEG4Agent extends Thread {
                 if (mpeg4 != null) {
                     FAPFrame ff = mpeg4.getCurrentFAPFrame();
                     BAPFrame bf = mpeg4.getCurrentBAPFrame();
+                    System.out.println("############### OgrePlayer ###################");
+                    System.out.println("current fap frame: "+ff);
+                    System.out.println("current bap frame: "+bf);
+                    System.out.println("active bap value: " + bf.getValue(57)+ " " + bf.getValue(58) + " " + bf.getValue(59));
+                    System.out.println("active bap Degree value: " + bf.getDegreeValue(57)+ " " + bf.getDegreeValue(58) + " " + bf.getDegreeValue(59));
+                    
+                    // Send and receive messages
+                    String rotation = bf.getDegreeValue(59) + " " + bf.getDegreeValue(57)+ " " + bf.getDegreeValue(58);
+                    frameNumber = bf.getFrameNumber();
+                    System.out.println("Rotation angle angle from Bap: "+ rotation);
+                    
+                    System.out.println("broker Connection: "+broker.isConnected() + " url: " + broker.getURL());
+                    System.out.println("Connection: "+server.isConnected() + " url: " + server.getURL());
+                    
+                    
+                    
+                    
+                    //String receivedMessage = server.receiveMessage();
+                    
+                    //server.stop();
+                    
                     applyFapFrame(ff);
                     if(bf.getMask(BAPType.HumanoidRoot_tr_lateral) ||
                        bf.getMask(BAPType.HumanoidRoot_tr_vertical) ||
@@ -177,6 +215,7 @@ public abstract class MPEG4Agent extends Thread {
 
     protected void updateHeadPosition(Vector3 position){
         updateHeadPosition(Ogre.convert(position));
+        
     }
     protected void updateHeadPosition(greta.core.util.math.Vec3d position){
         mpeg4.getHeadNode().setCoordinates(position);
@@ -187,6 +226,10 @@ public abstract class MPEG4Agent extends Thread {
     }
     protected void updateHeadOrientation(greta.core.util.math.Quaternion orientation){
         mpeg4.getHeadNode().setOrientation(orientation);
+        String rotation = orientation.getEulerAngleXYZByAngle().x() + " " + orientation.getEulerAngleXYZByAngle().y()+ " " + orientation.getEulerAngleXYZByAngle().z() + " " + frameNumber;
+        server.send(rotation);
+        System.out.println("orientation Euler angle: "+rotation+ " at frame: "+ frameNumber);
+        
     }
 
     public void scale(Vector3 vect){

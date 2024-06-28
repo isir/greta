@@ -29,14 +29,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.util.Pair;
-import javax.swing.JCheckBox;
 
 /**
  *
@@ -84,9 +81,6 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
     public ASAP asap_il;
     boolean isPerforming = false;
     double timeConstantFrame = 0.04;
-    
-    public List<Pair<java.awt.Checkbox,String>> check_box_pairs = new ArrayList<Pair<java.awt.Checkbox,String>>();
-    public List<Pair<Integer,Pair<java.awt.Checkbox,String>>> check_box_use_map = new ArrayList<Pair<Integer,Pair<java.awt.Checkbox,String>>>();
     
         private final static int MAX_AUS = 18;
     private final static List<String> expectedPreAUFeatures
@@ -188,55 +182,6 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
     public ASAPFrame() {
         initComponents();
         server = new Server();
-        check_box_pairs.add(new Pair<>(au1,"AU01"));
-        check_box_pairs.add(new Pair<>(au12,"AU12"));
-        check_box_pairs.add(new Pair<>(au2,"AU02"));
-        check_box_pairs.add(new Pair<>(au4,"AU04"));
-        check_box_pairs.add(new Pair<>(au45,"AU45"));
-        check_box_pairs.add(new Pair<>(au5,"AU05"));
-        check_box_pairs.add(new Pair<>(au6,"AU06"));
-        check_box_pairs.add(new Pair<>(au7,"AU07"));
-        check_box_pairs.add(new Pair<>(bouche,"AU12"));
-        check_box_pairs.add(new Pair<>(gaze,"gaze"));
-        check_box_pairs.add(new Pair<>(head_x,"head_x"));
-        check_box_pairs.add(new Pair<>(head_y,"head_y"));
-        check_box_pairs.add(new Pair<>(head_z,"head_z"));
-        au1.setState(true);
-        au12.setState(true);
-        au2.setState(true);
-        au4.setState(true);
-        au5.setState(true);
-        au45.setState(true);
-        au6.setState(true);
-        au7.setState(true);
-        bouche.setState(true);
-        gaze.setState(true);
-        head_x.setState(true);
-        head_y.setState(true);
-        head_z.setState(true);
-        String header_au="timestamp, gaze_0_x, gaze_0_y, gaze_0_z, gaze_1_x, gaze_1_y, gaze_1_z, gaze_angle_x, gaze_angle_y, pose_Tx, pose_Ty, pose_Tz, pose_Rx, pose_Ry, pose_Rz, AU01_r, AU02_r, AU04_r, AU05_r, AU06_r, AU07_r, AU09_r, AU10_r, AU12_r, AU14_r, AU15_r, AU17_r, AU20_r, AU23_r, AU25_r, AU26_r, AU45_r";
-       /*
-        check_box_use_map.add(new Pair<> (15,check_box_pairs.get(0)));
-        check_box_use_map.add(new Pair<> (23,check_box_pairs.get(1)));
-        check_box_use_map.add(new Pair<> (16,check_box_pairs.get(2)));
-        check_box_use_map.add(new Pair<> (17,check_box_pairs.get(3)));
-        check_box_use_map.add(new Pair<> (31,check_box_pairs.get(4)));
-        check_box_use_map.add(new Pair<> (18,check_box_pairs.get(5)));
-        check_box_use_map.add(new Pair<> (19,check_box_pairs.get(6)));
-        check_box_use_map.add(new Pair<> (20,check_box_pairs.get(7)));
-        check_box_use_map.add(new Pair<> (1,check_box_pairs.get(9)));
-        check_box_use_map.add(new Pair<> (2,check_box_pairs.get(9)));
-        check_box_use_map.add(new Pair<> (3,check_box_pairs.get(9)));
-        check_box_use_map.add(new Pair<> (4,check_box_pairs.get(9)));
-        check_box_use_map.add(new Pair<> (5,check_box_pairs.get(9)));
-        check_box_use_map.add(new Pair<> (6,check_box_pairs.get(9)));
-        check_box_use_map.add(new Pair<> (7,check_box_pairs.get(9)));
-        check_box_use_map.add(new Pair<> (8,check_box_pairs.get(9)));
-        check_box_use_map.add(new Pair<> (12,check_box_pairs.get(10)));
-        check_box_use_map.add(new Pair<> (13,check_box_pairs.get(10)));
-        check_box_use_map.add(new Pair<> (14,check_box_pairs.get(10)));
-        */
-        
 
     }
 
@@ -607,7 +552,6 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
         });
     }
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextField address;
     private java.awt.Checkbox au1;
@@ -634,7 +578,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
     private java.awt.TextField port;
     // End of variables declaration//GEN-END:variables
 
-    
+
 
     
       private String readDataCol(String key, String[] cols, Map<String, Integer> set) {
@@ -738,8 +682,6 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
         isPerforming = true;
         au_frames.clear();
         bap_frames.clear();
-        
-        
 
         double prev_rot_X = 0.0;
         double prev_rot_Y = 0.0;
@@ -768,7 +710,6 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
             List<Double> list_val = new ArrayList<>();
             //lecture header
                 String[] header = header_au.split(cvsSplitBy);
-
 
                 for (int h = 0; h < header.length; h++) {
                     String value = header[h];
@@ -807,12 +748,8 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                         int indice_intensity = 15;
 
                         for (int au = 0; au < au_correspondance.length; au++) {
-                            if ((au_correspondance[au] == 1 && check_box_pairs.get(0).getKey().getState())|| (au_correspondance[au] == 2 && check_box_pairs.get(2).getKey().getState()) 
-                                    || (au_correspondance[au] == 4 && check_box_pairs.get(3).getKey().getState())|| (au_correspondance[au] == 5 && check_box_pairs.get(5).getKey().getState()) 
-                                    || (au_correspondance[au] == 6  && check_box_pairs.get(6).getKey().getState())|| (au_correspondance[au] == 7 && check_box_pairs.get(7).getKey().getState()) 
-                                    || (au_correspondance[au] == 12 && check_box_pairs.get(8).getKey().getState()) || au_correspondance[au] == 10
-                                    || au_correspondance[au] == 14 || (au_correspondance[au] == 15 && check_box_pairs.get(8).getKey().getState()) || au_correspondance[au] == 17 || au_correspondance[au] == 20 || au_correspondance[au] == 23 || (au_correspondance[au] == 25 && check_box_pairs.get(8).getKey().getState()) 
-                                    || (au_correspondance[au] == 26 && check_box_pairs.get(8).getKey().getState())) {
+                            if (au_correspondance[au] == 1 || au_correspondance[au] == 2 || au_correspondance[au] == 4 || au_correspondance[au] == 5 || au_correspondance[au] == 6 || au_correspondance[au] == 7 || au_correspondance[au] == 12 || au_correspondance[au] == 10
+                                    || au_correspondance[au] == 14 || au_correspondance[au] == 15 || au_correspondance[au] == 17 || au_correspondance[au] == 20 || au_correspondance[au] == 23 || au_correspondance[au] == 25 || au_correspondance[au] == 26) {
                                 String value = values[au + indice_intensity];
                                 if (isNumeric(value)) {
                                     double intensity = alpha * (Double.parseDouble(value) / 3.5) + (1 - alpha) * prev_value_au[au];
@@ -825,7 +762,6 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                         cpt++;
 
                         //gaze
-                        if(check_box_pairs.get(9).getKey().getState()){
                         double gaze_x = alpha * (0.5 * (Double.parseDouble(values[4]) + Double.parseDouble(values[7]))) + (1 - alpha) * prev_gaze_x;
                         double gaze_y = alpha * (0.5 * (Double.parseDouble(values[5]) + Double.parseDouble(values[8]))) + (1 - alpha) * prev_gaze_y;
                         if (gaze_x < 0) {
@@ -841,7 +777,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                         }
                         prev_gaze_x = gaze_x;
                         prev_gaze_y = gaze_y;
-                        }
+
                         //blink
                         // double blink = alpha*(Double.parseDouble(values[col_blink].replace(',', '.'))/5.0)+(1-alpha)*prev_blink;
                         double blink = Double.parseDouble(values[col_blink].replace(',', '.')) / 3.0;
@@ -866,22 +802,20 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                         rot_Y_deg = alpha * (rot_Y_deg) + (1 - alpha) * prev_rot_Y;
                         rot_Z_deg = alpha * (rot_Z_deg) + (1 - alpha) * prev_rot_Z;
 
-                        if(check_box_pairs.get(10).getKey().getState())
-                            hmFrame.setDegreeValue(BAPType.vc3_tilt, rot_X_deg);
-                            prev_rot_X = rot_X_deg;
-                        if(check_box_pairs.get(11).getKey().getState())
-                            hmFrame.setDegreeValue(BAPType.vc3_torsion, rot_Y_deg);
-                            prev_rot_Y = rot_Y_deg;
-                        if(check_box_pairs.get(12).getKey().getState())
-                            hmFrame.setDegreeValue(BAPType.vc3_roll, rot_Z_deg);
-                            prev_rot_Z = rot_Z_deg;
+                        hmFrame.setDegreeValue(BAPType.vc3_tilt, rot_X_deg);
+                        hmFrame.setDegreeValue(BAPType.vc3_torsion, rot_Y_deg);
+                        hmFrame.setDegreeValue(BAPType.vc3_roll, rot_Z_deg);
 
                         System.out.println("BAP["+time+"]: ["+rot_X_rad+"; "+rot_Y_rad+"; "+rot_Z_rad+"]");
-                        if(check_box_pairs.get(10).getKey().getState() || check_box_pairs.get(11).getKey().getState() || check_box_pairs.get(10).getKey().getState())
-                            bap_frames.add(hmFrame);
+                        prev_rot_X = rot_X_deg;
+                        prev_rot_Y = rot_Y_deg;
+                        prev_rot_Z = rot_Z_deg;
+
+                        bap_frames.add(hmFrame);
                     }
                 
-           
+            
+            //System.out.println("Program fini finifffffffffffffffffffffffffffffff ");
 
             
         

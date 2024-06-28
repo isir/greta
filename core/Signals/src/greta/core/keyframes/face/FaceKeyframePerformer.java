@@ -219,9 +219,6 @@ public class FaceKeyframePerformer implements CancelableKeyframePerformer, AUEmi
                 System.err.println("[FaceKeyframePerformer] updateAUs() : mode is wrong");
                 break;
         }
-        System.out.println("#################################################");
-        System.out.println("Hey from UpdateAUs in FaceKeyframPerformer.java in Signals");
-        System.out.println("LinkedList<AUAPFrame> auAnimationgetLast().APVector: "+auAnimation.getLast().APVector);
     }
 
     @Override

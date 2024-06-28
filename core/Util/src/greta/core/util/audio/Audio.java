@@ -50,7 +50,12 @@ public class Audio {
 
     /**
      * Format used by the Greta's system
+     * 
      */
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
     public static final AudioFormat GRETA_AUDIO_FORMAT = new AudioFormat(
             AudioFormat.Encoding.PCM_SIGNED,
             16000, //Hz - sample rate
@@ -275,6 +280,37 @@ public class Audio {
         //put opensmile code there 
         Thread thread = new Thread(){
             public void run(){
+                
+            boolean python=true;
+            String result="";
+            try{ 
+                String[] cmd = {
+                        "python -c \"import opensmile\"",
+                    };
+                    Runtime rt = Runtime.getRuntime();
+                try {
+                    Process proc = rt.exec(cmd);
+                    result = new String(proc.getInputStream().toString());
+                    if(result.contains("not available") || result.contains("introuvable") || result.contains("no module"))
+                        python=false;
+                    
+                } catch (IOException ex) {
+                    //Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    python=false;
+                }
+                }
+                catch(Exception e)
+                {
+                e.printStackTrace(); 
+            }
+            
+            if(python==false){
+                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the ASAP module which is optional. "
+                        + "Python and/or opensmile seem to be not installed. You need to install them as well as have the Python ASAP network running in order to use the ASAP module!"+ANSI_RESET);
+                
+            }
+            
+            if(python){
                 try {
                     String[] cmd = {
                         "python",
@@ -303,6 +339,7 @@ public class Audio {
                     Logger.getLogger(Audio.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        }
   };
 
   thread.start();

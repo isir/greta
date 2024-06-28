@@ -32,9 +32,6 @@ import greta.core.util.id.ID;
 import java.util.ArrayList;
 import java.util.List;
 
-import furhat.greta.ausender.GretaFurhatTextSender;
-import furhat.greta.ausender.Broker;
-
 /**
  *
  * @author Radoslaw Niewiadomski
@@ -45,10 +42,6 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements Cancelable
     private static Side[] wantedSides = {Side.RIGHT, Side.LEFT};
     private CharacterManager characterManager;
     private AULibrary auLibrary;
-    
-    // Create an instance of SocketServer
-    private GretaFurhatTextSender server; // = new ActivemqGretaFurhatRotationSender(61617);
-    private Broker broker;
 
     /**
      * @return the characterManager
@@ -72,9 +65,6 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements Cancelable
     public SimpleAUPerformer (CharacterManager cm){
         characterManager = cm;
         auLibrary = new AULibrary(cm);
-        broker = new Broker("61616");
-        server = new GretaFurhatTextSender("192.168.1.1", "61616", "greta.furhat.AUs");
-        server.startConnection(); 
     }
 
     @Override
@@ -104,12 +94,6 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements Cancelable
      */
     public FAPFrame toFAPFrame(AUAPFrame auFrame) {
         FAPFrame min = new FAPFrame(auFrame.getFrameNumber());
-        
-        System.out.println("SimpleAUPerformer AuFrame: "+auFrame.APVector);
-        System.out.println("broker Connection: "+broker.isConnected() + " url: " + broker.getURL());
-        System.out.println("server Connection: "+server.isConnected() + " url: " + server.getURL());
-        server.send(auFrame.APVector.toString());
-        
         FAPFrame max = new FAPFrame(auFrame.getFrameNumber());
         for (int auNb = 1; auNb <= AUAPFrame.NUM_OF_AUS; auNb++) {
             if (auFrame.useActionUnit(auNb)) {

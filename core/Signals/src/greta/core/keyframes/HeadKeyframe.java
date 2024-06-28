@@ -35,6 +35,7 @@ public class HeadKeyframe extends ParametersKeyframe {
     /** Rotation around the z(forward) axis */
     public SpineDirection lateralRoll;
 
+    private String parentId;
     /**
      * Constructs a new {@code HeadKeyframe}
      * @param id the identifier of this {@code HeadKeyframe}.
@@ -120,6 +121,16 @@ public class HeadKeyframe extends ParametersKeyframe {
 
     public double getSignedLateralRoll() {
         return lateralRoll.direction == SpineDirection.Direction.RIGHTWARD ? lateralRoll.value : -(lateralRoll.value);
+    }
+
+    @Override
+    public String getParentId() {
+        return parentId;
+    }
+
+    @Override
+    public void setParentId(String parParentId) {
+        this.parentId = parParentId;
     }
 
 }

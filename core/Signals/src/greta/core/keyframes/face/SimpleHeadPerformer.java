@@ -213,9 +213,6 @@ public class SimpleHeadPerformer extends BAPFrameEmitterImpl implements AUPerfor
             bapframes.add(bapframe);
 
         }
-        System.out.println("CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC");
-        System.out.println("Hey from SimpleHeadPerformer.java in Signals");
-        System.out.println("Bapframe: "+bapframes);
         sendBAPFrames(requestId, bapframes);
     }
 

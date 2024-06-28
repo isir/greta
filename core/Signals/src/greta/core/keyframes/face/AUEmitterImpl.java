@@ -22,9 +22,6 @@ import greta.core.util.id.ID;
 import java.util.ArrayList;
 import java.util.List;
 
-import furhat.greta.ausender.GretaFurhatTextSender;
-import furhat.greta.ausender.Broker;
-
 /**
  *
  * @author Philippe Gauthier <philippe.gauthier@sorbonne-universite.fr>
@@ -32,8 +29,6 @@ import furhat.greta.ausender.Broker;
 public class AUEmitterImpl implements AUEmitter, AUPerformer {
 
     protected List<AUPerformer> auPerformers = new ArrayList<>();
-    //private ActivemqGretaFurhatSender server = new ActivemqGretaFurhatSender("192.168.1.1", "61616", "greta.furhat.AUs");
-     
 
     @Override
     public void addAUPerformer(AUPerformer auPerformer) {
@@ -52,14 +47,6 @@ public class AUEmitterImpl implements AUEmitter, AUPerformer {
         auPerformers.forEach((performer) -> {
             performer.performAUAPFrame(auapAnimation, requestId);
         });
-        /*if (server.isConnected()==false){
-        server.startConnection();
-        }*/
-        System.out.println("BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB");
-        System.out.println("Hey from performAUAPFrame in AUEmitterImpl.java in Signals");
-        System.out.println("AuapFrameBBB: "+auapAnimation.APVector);
-        /*System.out.println("server Connection: "+server.isConnected() + " url: " + server.getURL());
-        server.send(auapAnimation.APVector.toString());*/
     }
 
     @Override
@@ -67,8 +54,5 @@ public class AUEmitterImpl implements AUEmitter, AUPerformer {
         auPerformers.forEach((performer) -> {
             performer.performAUAPFrames(auapAnimation, requestId);
         });
-        System.out.println("DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD");
-        System.out.println("Hey from performAUAPFrame in AUEmitterImpl.java in Signals");
     }
-    
 }

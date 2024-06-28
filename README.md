@@ -4,10 +4,10 @@
 
 Welcome to the public repository of the Greta project!
 
-## Features:
-1) Greta is a virtual character engine generating socio-emotional behaviors for natural interactional scenario with human users.
-2) Greta is a Java modular software designed to run on Java 8 and working on Windows, Linux and OSX.
-3) Greta depends on external software for Speech Synthesis ([MaryTTS](http://mary.dfki.de/) or CereProc), and 3D Rendering (Ogre or Unity).
+## Features
+1) A virtual character engine generating socio-emotional behaviors for natural interactions with human users.
+2) A Java modular software designed to run on Java 8 and working on Windows, Linux and OSX.
+3) Greta depends on external software for Speech Synthesis ([MaryTTS](http://mary.dfki.de/) or CereProc), 3D Rendering (Ogre or Unity), and more.
 
 For more details, please visit [WIKI](https://github.com/gretaproject/greta/wiki).
 

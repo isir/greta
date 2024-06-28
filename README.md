@@ -1,26 +1,21 @@
-## **For instructions of how to install/compile/use the project please see [WIKI](https://github.com/gretaproject/greta/wiki)**
-
 # Greta
-Realtime platform to control socio-emotional virtual characters 
+
+**Realtime platform to control socio-emotional virtual characters**
+
+Welcome to the public repository of the Greta project!
+
+## Features:
+1) Greta is a virtual character engine generating socio-emotional behaviors for natural interactional scenario with human users.
+2) Greta is a Java modular software designed to run on Java 8 and working on Windows, Linux and OSX.
+3) Greta depends on external software for Speech Synthesis ([MaryTTS](http://mary.dfki.de/) or CereProc), and 3D Rendering (Ogre or Unity).
+
+For more details, please visit [WIKI](https://github.com/gretaproject/greta/wiki).
 
 ![Greta logo](https://user-images.githubusercontent.com/54807091/88184824-7c5ba280-cc33-11ea-875e-0a785d95075f.png)
 
 https://user-images.githubusercontent.com/49474878/132516042-2bdfc9a5-8414-4589-88fd-bf3186221f43.mp4
 
-
-
-Welcome to the public repository of the Greta project.
-Greta is a virtual character engine that allows generating socio-emotional behaviors in order to build natural interactional scenario with human users.
-
-Greta is a Java modular software designed to run on Java 8 and working on Windows, Linux and OSX.
-
-Most parts of Greta are licensed under the GNU LGPL v3 (the master branch of the GitHub repository).
-
-Some parts of Greta are licensed under the GNU GPL v3 (the gpl branch of the GitHub repository); so if you use this branch, be aware that Greta will become GNU GPL v3 at the same time.
-
-Greta depends on external software for Speech Synthesis ([MaryTTS](http://mary.dfki.de/) or CereProc), and 3D Rendering (Ogre or Unity).
-
-# Quick start
+## Quick start
 1) Clone the repository to retrieve all files from the Greta Projects.
 2) Greta is composed of several Java projects, you need to open them in NetBeans 8.2 IDE and to build them.
 3) 2 Speech Synthesizers are compatible with Greta so far, MaryTTS and CereProc.
@@ -74,3 +69,8 @@ Greta provides a system to configure and use these behaviors in an automatic fas
 Bevacqua, E., Pammi, S., Hyniewska, S. J., Schröder, M., & Pelachaud, C. (2010, September).
 Multimodal backchannels for embodied conversational agents.
 In International Conference on Intelligent Virtual Agents (pp. 194-200). Springer, Berlin, Heidelberg.
+
+## License
+
+Most parts of Greta are licensed under the GNU LGPL v3 (the master branch of the GitHub repository).
+Some parts of Greta are licensed under the GNU GPL v3 (the gpl branch of the GitHub repository); so if you use this branch, be aware that Greta will become GNU GPL v3 at the same time.

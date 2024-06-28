@@ -39,7 +39,6 @@ import greta.auxiliary.openface2.util.ArrayOfDoubleFilterPow;
 import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.logging.Level;
 
 /**
  *
@@ -216,7 +215,8 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
             if (Double.isNaN(curFrame.aus[i]) || Double.isInfinite(curFrame.aus[i]))
                 curFrame.aus[i] = 0.;
             //if (!Double.isNaN(curFrame.aus[i]) && !Double.isInfinite(curFrame.aus[i])) {
-            double value = curFrame.aus[i]*curFrame.auMasks[i]; // non linear curve to get to 1.
+            double value = 0.4 * (curFrame.aus[i]*curFrame.auMasks[i]);
+            // non linear curve to get to 1.
             values.put(OpenFaceFrame.getAUFeatureKey(i), value);
             masks.put(OpenFaceFrame.getAUFeatureKey(i), curFrame.auMasks[i]);					  
             double intensity;  
@@ -232,8 +232,8 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
         }  
         //LOGGER.info(String.format("curFrame: %s",curFrame));
         // gaze
-        double gaze_x = 0.5 * (curFrame.gaze0.x() + curFrame.gaze1.x());
-        double gaze_y = 0.5 * (curFrame.gaze0.y() + curFrame.gaze1.y());
+        double gaze_x = 0.2 * (curFrame.gaze0.x() + curFrame.gaze1.x());
+        double gaze_y = 0.2 * (curFrame.gaze0.y() + curFrame.gaze1.y());
         values.put("gaze_x",gaze_x);
         values.put("gaze_y",gaze_y);
         if(isUseFilter()){
@@ -274,13 +274,9 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
                 args.add(map.get(key));
                 OSCMessage msg = new OSCMessage(root+key, args);  
                 if(oscOut!=null)
-                    try {
-                        oscOut.send(msg);
-                } catch (IOException ex) {
-                    Logger.getLogger(OpenFaceOutputStreamAbstractReader.class.getName()).log(Level.SEVERE, null, ex);
-                }            
+                    oscOut.send(msg);            
             }
-        } catch (OSCSerializeException ex) {
+        } catch (OSCSerializeException | IOException ex) {
             LOGGER.warning(ex.getLocalizedMessage());
         } 
     }

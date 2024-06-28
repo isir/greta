@@ -33,8 +33,5 @@ public interface Keyframe{
 
     public String getPhaseType();
     public String getCategory();
-    
-    public String getParentId();
-    public void setParentId(String parParentId);
-    
+
 }

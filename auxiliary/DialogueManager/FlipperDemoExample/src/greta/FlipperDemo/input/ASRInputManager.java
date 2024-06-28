@@ -52,7 +52,7 @@ public class ASRInputManager {
    {   System.out.println("ASR input manager initialized");
        singletoneInstance = FlipperLauncherMain.getInstance();
        if(singletoneInstance != null){
-           System.out.println("jai gayatri mata: asrinput got main singleton instance TEST AVEC CLIENT FINAL : "
+           System.out.println("asrinput got main singleton instance TEST AVEC CLIENT FINAL : "
                    + singletoneInstance.getGretaASRTopic());
        }
        

@@ -48,6 +48,24 @@ public class CharacterManager {
     
     private static CharacterManager staticInstance;
     private static int count=0;
+    private boolean positive_manager=false;
+    private boolean phoneme_manager = false;
+
+    public boolean isPositive_manager() {
+        return positive_manager;
+    }
+
+    public void setPositive_manager(boolean positive_manager) {
+        this.positive_manager = positive_manager;
+    }
+    
+    public boolean Phoneme_manager() {
+        return phoneme_manager;
+    }
+
+    public void setPhoneme_manager(boolean phoneme_manager) {
+        this.phoneme_manager = phoneme_manager;
+    }
 
     private Gaze_Target gaze_t;
 
@@ -63,15 +81,6 @@ public class CharacterManager {
     private boolean asap_enabled=false;
     private DistanceType distance=DistanceType.SOCIAL;
     private boolean isrunning=false;
-    private boolean positive_manager=false;
-
-    public boolean isPositive_manager() {
-        return positive_manager;
-    }
-
-    public void setPositive_manager(boolean positive_manager) {
-        this.positive_manager = positive_manager;
-    }
 
     public boolean isIsrunning() {
         return isrunning;
@@ -276,7 +285,7 @@ public class CharacterManager {
      */
     public void setCharacter(String name) {
         String fileName = fileNameOfCharacter(name);
-        System.out.println("greta.core.util.CharacterManager.setCharacter()");
+
         if (fileName != null) {
             currentCaracterName = name;
             characterDefinitions.setDefinition(fileName);

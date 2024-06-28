@@ -9,6 +9,7 @@
 <!-- in the project's Project Properties dialog box.-->
 <project name="AriaValuspa" default="default" basedir=".">
     <description>Builds, tests, and runs the project AriaValuspa.</description>
+	<import file="../../build.xml"/>
     <import file="nbproject/build-impl.xml"/>
     <!--
 

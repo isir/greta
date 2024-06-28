@@ -1,23 +1,23 @@
 <environment>
 	<node>
 		<leaf id="backgroundColor" reference="color.background" >
-			<size x="0.5" y="0.6" z="0.8"/>
+			<size x="1.0" y="1.0" z="1.0"/>
 		</leaf>
 	</node>
-	<!-- exemple de fog
-	<node>
+
+	<!--<node>
 		<leaf id="fogColor" reference="color.fog" >
 			<size x="0.5" y="0.6" z="0.8"/>
 		</leaf>
-	</node>
-	-->
+	</node>-->
+	
 	<node>
 		<position x="0" y="0" z="0" />
 		
 		<node>
 			<position x="-50" y="0" z="-50" />
 			<leaf id="flour" reference="object.flour" >
-				<size x="100" y="0" z="100"/>
+				<size x="0" y="0" z="0"/>
 			</leaf>
 		</node>
 		<node> <!-- light -->

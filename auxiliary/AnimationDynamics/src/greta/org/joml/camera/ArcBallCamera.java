@@ -20,9 +20,9 @@
  THE SOFTWARE.
 
  */
-package greta.org.joml.camera;
+package org.joml.camera;
 
-import greta.org.joml.Matrix4f;
+import org.joml.Matrix4f;
 
 /**
  * A simple arcball camera, which provides smooth acceleration/velocity/elapsed-time based movement/zoom and rotation.

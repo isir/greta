@@ -32,8 +32,6 @@ public class GestureKeyframe extends ParametersKeyframe{
     Hand hand;
     boolean isScript;
     String scriptName;
-    
-    String parentId;
 //    Hand leftHand;
 //    Hand rightHand;
 
@@ -60,25 +58,6 @@ public class GestureKeyframe extends ParametersKeyframe{
         this.onset = onset;
         this.offset = offset;
         this.isScript = isScript;
-    }
-    
-    public GestureKeyframe(String id, String phaseType, TrajectoryDescription trajectory, double onset, double offset, Hand hand, String scriptName, boolean isScript, String parParentId){
-        this.id = id; // gesture id, not keyframe id
-        this.phaseType = phaseType;
-        this.trajectoryType = trajectory;
-
-        if(this.phaseType.equalsIgnoreCase("pre-stroke-hold")||this.phaseType.equalsIgnoreCase("post-stroke-hold")){
-            this.trajectoryType.setName("LINEAR");
-        }
-
-        this.hand = hand;
-        this.handSide = hand.getSide();
-        modality = "gesture";
-        this.onset = onset;
-        this.offset = offset;
-        this.isScript = isScript;
-        
-        this.parentId = parParentId;
     }
 
     public boolean isIsScript() {
@@ -168,13 +147,5 @@ public class GestureKeyframe extends ParametersKeyframe{
         return handSide+":  t="+offset+" "+hand;
     }
 
-    @Override
-    public String getParentId() {
-        return parentId;
-    }
 
-    @Override
-    public void setParentId(String parParentId) {
-        this.parentId = parParentId;
-    }
 }

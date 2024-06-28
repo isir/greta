@@ -1,15 +1,23 @@
-<bml>
-<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="marytts" type="SAPI4" text="">
 <description level="1" type="gretabml"><reference>tmp/from-fml-apml.pho</reference></description>
-<description level="1" type="gretabml">
-</description>
-<tm id="tm1"/>I
-<tm id="tm2"/>don't
-<tm id="tm3"/>like
-<tm id="tm4"/>to
-<tm id="tm5"/>tell
-<tm id="tm6"/>stories
-<tm id="tm7"/>on
-<tm id="tm8"/>command
-</speech>
-</bml>
+			<description level="1" type="gretabml">
+			</description>
+				
+			<tm id="tm1"/>
+				Hello,
+			<tm id="tm2"/>
+				My name is Camille.
+			<tm id="tm3"/>	
+				I am one of the virtual character
+			<tm id="tm4"/>
+				 of the Greta platform.
+			<tm id="tm5"/>	
+				
+			
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm3" end="s1:tm4" importance="1"/>
+			<boundary type="LL" id="b1" start="s1:tm5" end="s1:tm5+0.5"/>
+		</speech>
+	</bml>
+
+

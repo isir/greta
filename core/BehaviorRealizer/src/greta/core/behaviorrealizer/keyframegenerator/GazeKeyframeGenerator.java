@@ -371,7 +371,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
              boolean move_torso_low=false;
              headAndEyesAngles.posTarget=new Vec3d(this.cm.getGaze_t().posX,this.cm.getGaze_t().posY,this.cm.getGaze_t().posZ);
              System.out.println("[POSITION DU TARGET]:"+headAndEyesAngles.posTarget.get(0)+"  "+headAndEyesAngles.posTarget.get(1));
-             System.out.println("[POSITION DE L'AGENT]:"+headAndEyesAngles.headPosition.get(0)+"   "+headAndEyesAngles.headPosition.get(2)+"   "+headAndEyesAngles.headPosition.get(1));
              double r= headAndEyesAngles.posTarget.get(0)*headAndEyesAngles.headPosition.get(0)+headAndEyesAngles.posTarget.get(1)*headAndEyesAngles.headPosition.get(1)+headAndEyesAngles.posTarget.get(2)*headAndEyesAngles.headPosition.get(2);
              double a= Math.sqrt(Math.pow(headAndEyesAngles.posTarget.get(0),2)+Math.pow(headAndEyesAngles.posTarget.get(1),2)+Math.pow(headAndEyesAngles.posTarget.get(2),2));
              double b= Math.sqrt(Math.pow(headAndEyesAngles.headPosition.get(0),2)+Math.pow(headAndEyesAngles.headPosition.get(1),2)+Math.pow(headAndEyesAngles.headPosition.get(2),2));
@@ -413,23 +412,22 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 System.out.println("D_Theta:"+d_theta);
                 System.out.println("GAZE OFFSET:"+gaze.getOffsetAngle());
                 if(gaze.getOffsetAngle()>theta){
-                    theta=d_theta-theta;
+                    theta=theta+d_theta;
                     System.out.println("1) THETA:"+theta);
                 }
                 else{
                     if(gaze.getOffsetAngle()!=0 && gaze.getOffsetAngle()<theta){
-                    theta=d_theta-theta;
-                    theta=Math.abs(theta);
+                    theta=theta-d_theta;
                     System.out.println("2) THETA:"+theta);
-                    /*double d_theta2=theta-gaze.getOffsetAngle()/2;
+                    double d_theta2=theta-gaze.getOffsetAngle()/2;
                     theta=theta-d_theta2;
                     System.out.println("D_theta2:"+d_theta2);
-                    */
                     }
                 }
                 if(gaze.getOffsetDirection()==GazeDirection.UP || gaze.getOffsetDirection()==GazeDirection.DOWN ){
                     theta=0;
                 }
+                theta=theta*direction;
                 System.out.println("THETA:"+theta+"  "+a+"  "+b+"  "+r+" "+theta_r+"  "+theta_sin);
                 int sign=0;
                 if(theta>=0 && theta<=100){
@@ -521,14 +519,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                      }
             }
             }
-            
-            if(gaze.getOffsetDirection()==GazeDirection.FRONT){
-                move_head=true;
-                move_torso_high=true;
-                move_torso_low=true;
-                theta=0;
-                pitch=0;
-            }
 
             
             if (move_torso_high) {
@@ -584,7 +574,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     System.out.println("[INFO SAGITTAL]");
                     int sag_sign=-1;
                     if(headAndEyesAngles.headPosition.get(1)<headAndEyesAngles.posTarget.get(1)){
-                        System.out.print("Sagittal check");
                         sag_sign=1;
                     }
                 }
@@ -592,11 +581,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     int sag_sign=-1;
                     if(headAndEyesAngles.headPosition.get(1)<headAndEyesAngles.posTarget.get(1)){
                         sag_sign=1;
-                        System.out.print("Sagittal check");
                     }
                     spinePhaseTargetPosition.verticalTorsion.flag=true;
-                    if(gaze.getOffsetDirection()==GazeDirection.UP || gaze.getOffsetDirection()==GazeDirection.UPRIGHT || gaze.getOffsetDirection()==GazeDirection.UPLEFT)
-                        sag_sign=-1;
                     spinePhaseTargetPosition.verticalTorsion.value=sign*Math.toRadians(theta)/4;
 
                     System.out.println("[SPINE]:"+spinePhaseTargetPosition.verticalTorsion.value);
@@ -606,11 +592,11 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         }
                         spinePhaseTargetPosition.sagittalTilt.flag=true;
                         if(gaze.getOffsetDirection()==GazeDirection.DOWN || gaze.getOffsetDirection()==GazeDirection.DOWNLEFT || gaze.getOffsetDirection()==GazeDirection.DOWNRIGHT){
-                            spinePhaseTargetPosition.sagittalTilt.value=sag_sign*Math.toRadians(pitch_torso);
+                            spinePhaseTargetPosition.sagittalTilt.value=-sag_sign*Math.toRadians(pitch_torso);
                             //spinePhaseTargetPosition.sagittalTilt.direction=SpineDirection.Direction.FORWARD;
                         }
                         else{
-                            spinePhaseTargetPosition.sagittalTilt.value=-sag_sign*Math.toRadians(pitch_torso);
+                            spinePhaseTargetPosition.sagittalTilt.value=sag_sign*Math.toRadians(pitch_torso);
                             
                         }
                         if(shoulder){
@@ -635,7 +621,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     System.out.println("TIME SHOULDER BACK TO ZERO:"+timeBackShoulderAtZero);
                     if(gaze.getOffsetDirection()==GazeDirection.DOWN || gaze.getOffsetDirection()==GazeDirection.UP ){
                         
-                        setupTorsoSignalAtPosition(torsoSignalTargetPosition, spinePhaseTargetPosition, start-0.1,start+0.5, shouldersAngles, gazeInfluence.EYES);
+                        setupTorsoSignalAtPosition(torsoSignalTargetPosition, spinePhaseTargetPosition, start+0.1,start+0.5, shouldersAngles, gazeInfluence.EYES);
                     }
                     else{
                         
@@ -778,47 +764,13 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 theta=theta/2;
                 
                 int sag=-1;
-
-                
+                if(gaze.getOffsetDirection()==GazeDirection.UP || gaze.getOffsetDirection()==GazeDirection.UPRIGHT || gaze.getOffsetDirection()==GazeDirection.UPLEFT)
+                    sag=1;
+                else{
+                    sag=-1;
+                }
                 if(pitch_head>=60){
                     pitch_head=pitch_head/2;
-                }
-                if(gaze.getOffsetDirection()==GazeDirection.LEFT){
-                    sag=-1;
-                    if(theta>0 &&theta <=22.5)
-                        theta=-theta;
-                }
-                
-                if(gaze.getOffsetDirection()==GazeDirection.UPLEFT){
-                    sag=1;
-                    System.out.println("THETA X:"+theta);
-                    if(theta<0)
-                        theta=-theta;
-                    
-                }
-                
-                if(gaze.getOffsetDirection()==GazeDirection.DOWNLEFT){
-                    System.out.println("THETA X:"+theta);
-                    if(theta<0)
-                        theta=-theta;
-                    
-                }
-                if(gaze.getOffsetDirection()==GazeDirection.RIGHT){
-                    sag=-1;
-                }
-                if(gaze.getOffsetDirection()==GazeDirection.UPRIGHT){
-                    sag=1;
-                    if(theta>0)
-                        theta=-theta;
-                        
-                    System.out.println("THETA X:"+theta);
-                }
-                
-                if(gaze.getOffsetDirection()==GazeDirection.DOWNRIGHT){
-                    if(theta>0)
-                        theta=-theta;
-                        
-                    System.out.println("THETA X:"+theta);
                 }
                 if(gaze.getOffsetDirection()!=GazeDirection.LEFT && gaze.getOffsetDirection()!=GazeDirection.RIGHT){
                     if(gaze.getType()==GazeType.GLANCE){
@@ -831,7 +783,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     }
                 }
                 else{
-                    spinePhaseToTarget = createSpinePhase("end", timeHeadAtTarget, timeHeadAtTarget, sag*Math.toRadians(theta), 0);
+                    spinePhaseToTarget = createSpinePhase("end", timeHeadAtTarget, timeHeadAtTarget, Math.toRadians(theta), 0);
                 }
                 
                 if(gaze.getType()==GazeType.GLANCE){
@@ -840,11 +792,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 System.out.println("HEAD START TIME:"+timeHeadAtTarget);
                 spinePhaseToTarget.setStartTime(timeHeadAtTarget);
                 // head latency equal to 50 ms
-                // HERE YOU CAN CHANGE THE TIME FOR THE HEAD
                 if(gaze.getType()==GazeType.GLANCE){
                     setupSignal(headSignalToTarget, spinePhaseToTarget, start-1, timeHeadAtTarget-0.7);
                 }else{
-                    setupSignal(headSignalToTarget, spinePhaseToTarget, start-0.1 + headLatency, timeHeadAtTarget);
+                    setupSignal(headSignalToTarget, spinePhaseToTarget, start + headLatency, timeHeadAtTarget);
                 }
                 
                 if (!gaze.isGazeShift()) {
@@ -996,8 +947,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
 
             // check if the gaze expression is in the facelibrary
             // if we look at a target there is no information in the library
-            if (gaze.getTarget() == null || gaze.getTarget().isEmpty()
-                || gaze.getOffsetDirection() == GazeDirection.FRONT || gaze.getOffsetAngle() == 0) {
+            if ((gaze.getTarget() == null || gaze.getTarget().isEmpty())
+                    && gaze.getOffsetDirection() == GazeDirection.FRONT && gaze.getOffsetAngle() == 0) {
                 
                 System.out.println("[INFO] GAZE Expression: yes");
                 AUExpression faceLibraryExpression = FaceLibrary.global_facelibrary.get(gaze.getReference());
@@ -1328,12 +1279,12 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 }
                                 else{
                                     if(!gaze.isGazeShift()){
-                                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gaze,gaze.getStartValue(),gaze.getStartValue(), Side.LEFT,headAngles.leftEyeGazeDirection, leftLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
-                                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gaze,gaze.getStartValue(),gaze.getStartValue(), Side.RIGHT,headAngles.rightEyeGazeDirection, rightLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
+                                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gaze,gaze.getStartValue()+1.8,gaze.getStartValue(), Side.LEFT,headAngles.leftEyeGazeDirection, leftLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
+                                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gaze,gaze.getStartValue()+1.8,gaze.getStartValue(), Side.RIGHT,headAngles.rightEyeGazeDirection, rightLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
                                     }else{
                                         System.out.println("SHIFT");
-                                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gaze,gaze.getStartValue()+2,gaze.getStartValue(), Side.LEFT,headAngles.leftEyeGazeDirection, leftLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
-                                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gaze,gaze.getStartValue()+2,gaze.getStartValue(), Side.RIGHT,headAngles.rightEyeGazeDirection, rightLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
+                                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gaze,gaze.getStartValue()+1.8,gaze.getStartValue(), Side.LEFT,headAngles.leftEyeGazeDirection, leftLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
+                                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_to", gaze,gaze.getStartValue()+1.8,gaze.getStartValue(), Side.RIGHT,headAngles.rightEyeGazeDirection, rightLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
                                         
                                     }
                                 }
@@ -1345,7 +1296,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     
 
                     // Add gazekeyframe for the END of the gaze
-                    if (!gaze.isGazeShift() || gaze.getOffsetDirection()==GazeDirection.FRONT) {
+                    if (!gaze.isGazeShift()) {
                         if (gazeStillInProgress()) {
                             handleGazeStillInProgress(end, outputKeyframe);
                             System.out.println("STILL IN PROGRESS");
@@ -1359,7 +1310,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                     AUAPFrame auFrameRight = createAUAPFrameForEyeSide(Side.RIGHT);
                                     setGazeRestPosition(new AUKeyFrame(gazeId + "_back", start+0.2, auFrameLeft), new AUKeyFrame(gazeId + "_back", start+0.2, auFrameRight));
                                     System.out.println("SET REST EYES");
-                                    
                                 }else{
                                     addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", gaze, start+1.3,gaze.getStartValue(), Side.LEFT, GazeDirection.FRONT, 0, 0);
                                     addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", gaze, start+1.3,gaze.getStartValue(), Side.RIGHT, GazeDirection.FRONT, 0, 0);
@@ -1367,7 +1317,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                     AUAPFrame auFrameRight = createAUAPFrameForEyeSide(Side.RIGHT);
                                     setGazeRestPosition(new AUKeyFrame(gazeId + "_back", start+1.3, auFrameLeft), new AUKeyFrame(gazeId + "_back", start+1.3, auFrameRight));
                                     System.out.println("SET REST EYES GAZE");
-                                    
                                 }
                             }
                             else{
@@ -1390,11 +1339,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         
                         
                     } else {
-                       
 
                         System.out.println("GAZE_SHIFT");
-                        //addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", gaze,start, start, Side.LEFT, headAngles.leftEyeGazeDirection, leftLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
-                        //addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", gaze,start, start, Side.RIGHT, headAngles.rightEyeGazeDirection, rightLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
+                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", gaze,start-0.1, start, Side.LEFT, headAngles.leftEyeGazeDirection, leftLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
+                        addEyesAUKeyFrame(outputKeyframe, gazeId + "_back", gaze,start-0.1, start, Side.RIGHT, headAngles.rightEyeGazeDirection, rightLimitYaw, Math.toRadians(gaze.getOffsetAngle()));
 
                         AUAPFrame auFrameLeft = new AUAPFrame();
                         AUAPFrame auFrameRight = new AUAPFrame();
@@ -1412,36 +1360,21 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                             System.out.println("GAZE DIRECTION: "+gaze.getOffsetDirection());
                         if (headAngles.leftEyeGazeDirection == GazeDirection.UPRIGHT || headAngles.leftEyeGazeDirection == GazeDirection.UP || headAngles.leftEyeGazeDirection == GazeDirection.UPLEFT) {
                             System.out.println("EYES UP,"+Math.toDegrees(leftLimitPitch));
-                            if(gaze.getOffsetAngle()>45){
-                            auFrameLeft.setAUAP(63, leftLimitPitch / (EYES_PITCH_LIMIT), Side.LEFT);
-                            auFrameRight.setAUAP(63, rightLimitYaw / (EYES_YAW_LIMIT), Side.RIGHT);
-                            }else{
-                                auFrameLeft.setAUAP(63, leftLimitPitch / EYES_PITCH_LIMIT, Side.LEFT);
-                                auFrameRight.setAUAP(63, rightLimitYaw / EYES_YAW_LIMIT, Side.RIGHT);
-                            }
+                            auFrameLeft.setAUAP(63, leftLimitPitch / EYES_PITCH_LIMIT, Side.LEFT);
+                            auFrameRight.setAUAP(63, rightLimitYaw / EYES_YAW_LIMIT, Side.RIGHT);
                         }
                         //AU64: eyes down
                         if (headAngles.leftEyeGazeDirection == GazeDirection.DOWNRIGHT || headAngles.leftEyeGazeDirection == GazeDirection.DOWN || headAngles.leftEyeGazeDirection == GazeDirection.DOWNLEFT) {
-                            if(gaze.getOffsetAngle()>45){
-                                System.out.println("GAZE VALUES: "+leftLimitPitch +"  "+ rightLimitYaw);
-                                auFrameLeft.setAUAP(64, leftLimitPitch/(EYES_PITCH_LIMIT), Side.LEFT);
-                                auFrameRight.setAUAP(64, rightLimitYaw/(EYES_YAW_LIMIT), Side.RIGHT);
-                            }
-                            else{
                             auFrameLeft.setAUAP(64, leftLimitPitch / EYES_PITCH_LIMIT, Side.LEFT);
                             auFrameRight.setAUAP(64, rightLimitYaw / EYES_YAW_LIMIT, Side.RIGHT);
-                            }
                         }
 
                         setGazeRestPosition(new AUKeyFrame(gazeId + "_back", end, auFrameLeft), new AUKeyFrame(gazeId + "_back",end, auFrameRight));
                         
                     }
-                        
-                    }
                 }
             }
-                
-        
+        }
 
         signals.clear();
         return outputKeyframe;
@@ -1503,6 +1436,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             System.out.println("AUKEYFRAME:"+gazeId+"  "+time+"  "+auFrame);
             outputKeyframe.add(auKeyFrame);
         } else {
+            if(gaze.isGazeShift() && gaze.getOffsetAngle()>45){
+                pitch=Math.toRadians(45);
+            }
             //AU61: eyes turn left
             if (gazeDirection == GazeDirection.DOWNLEFT || gazeDirection == GazeDirection.LEFT || gazeDirection == GazeDirection.UPLEFT) {
                 auFrame.setAUAP(61, yaw / EYES_YAW_LIMIT, side);
@@ -1515,13 +1451,14 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
             }
             //AU63: eyes up
             if (gazeDirection == GazeDirection.UPRIGHT || gazeDirection == GazeDirection.UP || gazeDirection == GazeDirection.UPLEFT) {
-                auFrame.setAUAP(63, pitch / (EYES_PITCH_LIMIT*2), side);
+
+                auFrame.setAUAP(63, pitch / EYES_PITCH_LIMIT, side);
                 changed = true;
                 System.out.println("AUFRAME: UP ,"+pitch+"   "+EYES_PITCH_LIMIT+"  "+ Math.toDegrees(pitch)+ "  "+Math.toDegrees(EYES_PITCH_LIMIT));
             }
             //AU64: eyes down
             if (gazeDirection == GazeDirection.DOWNRIGHT || gazeDirection == GazeDirection.DOWN || gazeDirection == GazeDirection.DOWNLEFT) {
-                auFrame.setAUAP(64, pitch / (EYES_PITCH_LIMIT*2), side);                
+                auFrame.setAUAP(64, pitch / (EYES_PITCH_LIMIT/2), side);                
                 changed = true;
                 System.out.println("AUFRAME: DOWN ,"+pitch+"   "+EYES_PITCH_LIMIT+"  "+ Math.toDegrees(pitch)+ "  "+Math.toDegrees(EYES_PITCH_LIMIT));
             }
@@ -1532,10 +1469,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     System.out.println("TIME CHANGED");
                     time=start+0.01;
                 }
-                System.out.println("NEW TIME = "+ time + " START : "+ start);
-                
-
-                 if(time>start+0.1 && (gaze.getOffsetDirection()!=GazeDirection.RIGHT && gaze.getOffsetDirection()!=GazeDirection.LEFT)){
+                if(time>start+0.1 && (gaze.getOffsetDirection()!=GazeDirection.RIGHT && gaze.getOffsetDirection()!=GazeDirection.LEFT)){
                     if(((gaze.getMode()==GazeMode.HEAD || gaze.getMode()==GazeMode.DEFAULT)  && gaze.getOffsetAngle()<=45) || (gaze.getMode()==GazeMode.TORSO && gaze.getOffsetAngle()<=90) ){
                         time=start+0.1;
                     }
@@ -1549,9 +1483,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                                 }
                     }
                 }
-                 if(gaze.getType()==GazeType.GLANCE )
-                     time=start-1;
-                System.out.println("TIME v2:"+ time);
+                else{
+                    
+                }
                 AUKeyFrame auKeyFrame = new AUKeyFrame(gazeId, time, auFrame);
                 outputKeyframe.add(auKeyFrame);
             }
@@ -2150,9 +2084,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 }
 
                 //can compute angles to target only if we have an environment
-                System.out.println("[INFO GAZE TARGET START]:"+gaze.getTarget());
                 if (!gaze.getTarget().equals(cm.getCurrentCharacterName())) {
-                    System.out.println("[ENTRY CONDITION]:"+gaze.getTarget());
                     Node targetNode = null;
                     Vec3d sizeTarget = null;
                     String idTarget = "";
@@ -2232,10 +2164,9 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                             }
                         }
                     }
-                    
+
                     if (targetNode != null) {
 
-                        System.out.println("[TARGET NODE]:");
                         TreeNode currentCharacterHeadFromUnity = GazeKeyframeGenerator.this.cm.getCurrentCharacterHeadFromUnity();
 
                         //if target is animatable, look at head (for now ! ideally it should be specified in the target attribute)
@@ -2285,8 +2216,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                         this.headPosition = new Vec3d(currentAgent.getHeadNode().getCoordinateX(),
                                 currentAgent.getHeadNode().getCoordinateY(),
                                 currentAgent.getHeadNode().getCoordinateZ());
-                        
-                        System.out.println("[INFO HEAD POSITION]:"+this.headPosition.get(0)+"   "+this.headPosition.get(1)+"   "+this.headPosition.get(2));
 
                         // headPosition don't have the right x and z position
                         headPosition.setX(currentPosition.x());

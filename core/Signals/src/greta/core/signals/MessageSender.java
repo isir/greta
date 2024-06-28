@@ -101,7 +101,7 @@ public class MessageSender{
         
         TextMessage message = session.createTextMessage(op+" "+g);
         
-        //Open NVBG and wait one second before send the message -> avoid lost of data if message is not sent entirely
+        //Open NVBG and wait three second before send the message -> avoid lost of data if message is not sent entirely
         Logs.debug("[NVBG INFO]:greta.core.signals.MessageSender.traitement_NVBG()"+"  "+nvbg);
         if (nvbg==false) {
             MyThreadNVBG thread_nvbg = new MyThreadNVBG();
@@ -146,11 +146,7 @@ public class MessageSender{
             	received_vrSpeak=true;
             }
         }
-        if (received_vrSpeak || elapsedTime>5000) {
-             
-                if(elapsedTime>5000){
-                    System.out.println("5s elapsed , message not received from NVBG");
-                }
+        if (received_vrSpeak || elapsedTime>30000) {
         	break;
         }
         }

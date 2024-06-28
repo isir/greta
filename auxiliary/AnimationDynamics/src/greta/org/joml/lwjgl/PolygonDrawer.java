@@ -1,4 +1,4 @@
-package greta.org.joml.lwjgl;
+package org.joml.lwjgl;
 
 import java.nio.IntBuffer;
 import java.util.BitSet;

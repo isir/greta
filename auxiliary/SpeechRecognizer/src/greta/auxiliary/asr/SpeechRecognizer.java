@@ -56,7 +56,7 @@ public class SpeechRecognizer {
     }
 
      public void start() {
-         NetworkListener listener = new NetworkListener("speech_listener", "localhost", 8686);
+         NetworkListener listener = new NetworkListener("speech_listener", "localhost", 8088);
         listener.registerAddOn(new WebSocketAddOn());
         WebSocketEngine.getEngine().register("", "/", new WebSocketApplication() {
             @Override
@@ -123,7 +123,7 @@ public class SpeechRecognizer {
             
         }
             System.setProperty("webdriver.chrome.driver", ".//Common//Data//ASRResources//chromedriver.exe");
-             new org.openqa.selenium.chrome.ChromeDriver().get("https://localhost:8686/");
+             new org.openqa.selenium.chrome.ChromeDriver().get("https://localhost:8088/");
        
         }
         catch (IOException e) {

@@ -60,7 +60,7 @@ public class AudioKeyFramePerformer implements KeyframePerformer, AudioEmitter {
                     // Here you can chnage the Audio source for the speech (or before if you want GRETA to not compute the audio from the fml/bml
                     Audio audio = ((AudioKeyFrame) kf).getAudio();
                     System.out.println("greta.core.keyframes.AudioKeyFramePerformer.performKeyframes() "+audio.toString());
-                    audio.save("output.wav",this.charactermanager.isAsap_enabled());
+                    audio.save("output.wav",true);
                     if (audio != null) {
                         audio.setTime(kf.getOffset());
                         audios.add(audio);

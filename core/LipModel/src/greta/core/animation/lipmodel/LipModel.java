@@ -86,6 +86,7 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
 
     @Override
     public void performKeyframes(List<Keyframe> keyframes, ID requestId, Mode mode) {
+        System.out.println("Hey from PerformKeyframes in LipModel.java");
         for (Keyframe keyFrame : keyframes) {
             if (keyFrame instanceof PhonemSequence) {
                 List<Phoneme> phonemes = ((PhonemSequence) keyFrame).getPhonems();
@@ -100,6 +101,10 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
                 if (!phonemes.get(phonemes.size() - 2).isPause()) {
                     phonemes.add(new Phoneme(PhonemeType.pause,  Constants.FRAME_DURATION_SECONDS));
                 }
+                
+                System.out.println("gggggggggggggggggggggggggggggggggggggggggggggggggggg");
+                System.out.println("Hey from PerformKeyframes in LipModel.java");
+                System.out.println("List Phonemes: "+phonemes.toString());
 
                 int FirstFrameNumber = (int) (keyFrame.getOffset() * Constants.FRAME_PER_SECOND);
 
@@ -115,14 +120,21 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
                 //====  set double timePositionBegin[] = begining time of each phoneme;
                 double timePositionBegin[] = findPrePhonemeAndSucPhoneme.gettimePositionBegin();
                 //==== return timePositionBegin;
+                
                 double sequencenDuration = timePositionBegin[length - 1] + phonemes.get(length - 1).getDuration();
+                
+                System.out.println("Sequence duration is this : " + sequencenDuration );
+                System.out.println("Hey from PerformKeyframes in LipModel.java");
                 //==== get the time of sequence
 
                 //------charge curPhoneme, prePhoneme, sucPhoneme, timePositionBegin
                 for (int i = 0; i < length; i++) {
 
                     Phoneme curPhoneme = phonemes.get(i);
+                    
                     double visemeDuration = phonemes.get(i).getDuration();
+                   
+
                     Phoneme prePhoneme = findPrePhonemeAndSucPhoneme.getPrePhoneme(i);
                     //==== prePhoneme is the preceding vowel or pause or null (i=0)
                     Phoneme sucPhoneme = findPrePhonemeAndSucPhoneme.getSucPhoneme(i);
@@ -139,11 +151,19 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
 
                 //------charge preTarget, sucTarget, curTime
                 for (int i = 0; i < length; i++) {
+                    //System.out.println("curPhoneme is : " +visemes.get(i).curPho.getPhonemeType() );
+                    //System.out.println("prePhoneme is : " +visemes.get(i).prePho.getPhonemeType() );
+                    //System.out.println("sucPhoneme is : " +visemes.get(i).sucPho.getPhonemeType() );
+                    //System.out.println("curPhoneme is : " +visemes.get(i).curPho.getPhonemeType());
+                    //System.out.println("prePHOneme is : " +visemes.get(i).prePho.getPhonemeType());
+                    //System.out.println("sucPhoneme is : " +visemes.get(i).sucPho.getPhonemeType());
                     CoartParameter coartpre = findCoartParameter(visemes.get(i).curPho, visemes.get(i).prePho);
+                    //System.out.println("Coartpre is  : " + coartpre );
                     //==== prePho is the preceding vowel or pause or null (i=0)
                     //==== 3 cases for prePho. It can be null, vowel or consonant
                     CoartParameter coartsuc = findCoartParameter(visemes.get(i).curPho, visemes.get(i).sucPho);
                     //====
+                    //System.out.println("Coartsuc is : " + coartsuc );
                     visemes.get(i).setTimeAndTargetPreAndTargetSuc(visemes.get(i).curPho, i, length, coartpre, coartsuc);
                 }
 
@@ -176,13 +196,18 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
 
                     visemes.get(i).coarticulation(i, length, preVisemeSucTarget, sucVisemePreTarget);
                     FAPPhoneme fapPhoneme = visemes.get(i).lipToFap();
+                    
                     fapPhonemes.add(i, fapPhoneme);
+                    
+                    
                 }
 
                 // pay attention: totalDuration without considering the last pause
                 // Interpolation
-                // double totalDuration = visemes.get(length-1).gettimePositionBegin() +  phonemes.get(length-1).getDuration();
-                double totalDuration = visemes.get(length - 1).gettimePositionBegin();
+                double totalDuration = visemes.get(length-1).gettimePositionBegin() +  phonemes.get(length-1).getDuration();
+                //double totalDuration = visemes.get(length - 1).gettimePositionBegin();
+             
+                
 
                 InterpolationLip interpolationLip = new InterpolationLip(fapPhonemes, totalDuration);
 
@@ -250,6 +275,8 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
 
                     fapFrames.add(f);
                 }
+                
+                
 
                 // adding three empty FAP frames to enforce the closure of the mouth
                 FAPFrame emptyFAPFrame = new FAPFrame(fapFrames.get(fapFrames.size() - 1).getFrameNumber() + 1);
@@ -312,7 +339,6 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
     }
 
     private void sendFrame(FAPFrame fapFrame, ID requestId) {
-        //System.out.println("faps will be sent ");
         //int[] fapIndex = {1,4,5,6,7,8,9,10,11,12,13,51,52,53,54,55,56,57,58,59,60,16,17,3};
         for (FAPFramePerformer performer : fapFramePerformers) {
             performer.performFAPFrame(fapFrame, requestId);
@@ -331,8 +357,10 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
     }
 
     public void updateFrames(List<FAPFrame> fapFrames, ID requestId, Mode mode) {
+        
 
         switch (mode.getCompositionType()) {
+            
 
             case append: {
                 appendFrames(fapFrames, requestId, mode);
@@ -432,6 +460,31 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
         }
         return lipdata.datas.get(refPhonem.getPhonemeType()).get(targetPhonem.getPhonemeType());
     }
+    /*private CoartParameter findCoartParameter(Phoneme refPhonem, Phoneme targetPhonem) {
+        if (refPhonem == null) {
+            System.err.println("refPhonem is null.");
+            return null;
+        }
+        if (targetPhonem == null) {
+            System.err.println("targetPhonem is null.");
+            return null;
+        }
+       
+        Map<PhonemeType, CoartParameter> refData = lipdata.datas.get(refPhonem.getPhonemeType());
+        if (refData == null) {
+            System.err.println("No data for refPhonem type: " + refPhonem.getPhonemeType());
+            return null;
+        }
+
+        PhonemeType baseVowel = targetPhonem.isVowel() ? getBaseVowel(targetPhonem.getPhonemeType()) : targetPhonem.getPhonemeType();
+        CoartParameter coartParam = refData.get(baseVowel);
+
+        if (coartParam == null) {
+            System.err.println("No CoartParameter for phoneme type: " + baseVowel);
+        }
+
+        return coartParam;
+}*/
 
     private PhonemeType getBaseVowel(PhonemeType vowel) {
         if (vowel == PhonemeType.a1 || vowel == PhonemeType.a) {

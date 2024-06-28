@@ -61,7 +61,6 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.jms.JMSException;
@@ -677,7 +676,5 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
         this.getCharacterManager().remove(lexicon);
         lexicon = new Lexicon(this.getCharacterManager());
     }
-    
-       
 
 }

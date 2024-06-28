@@ -227,6 +227,7 @@ public class AULibraryEditor extends JFrame implements FAPFrameEmitter, Characte
     }
 
     private void setAU(FLExpression au) {
+        System.out.println("Hey from setAU in AULibraryEditor.java in Signals");
         setToZero();
         if (au != null) {
             for (FLExpression.FAPItem fap : au.getFAPs()) {

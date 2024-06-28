@@ -16,11 +16,18 @@
  *
  */
 package greta.auxiliary.player.ogre.capture;
+        
 
 import greta.core.util.Constants;
 import greta.core.util.audio.AudioOutput;
 import greta.core.util.time.Timer;
 import java.util.LinkedList;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.io.DataOutputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 /**
  *
@@ -92,6 +99,9 @@ public class RealTimeVideoCapturer implements Runnable, Capturer {
             alreadyStarted = true;
             stop = false;
             currentId = id;
+            new Thread(() -> {
+            startServer(); // This will start the server and wait for a client connection to send the boolean
+                }).start();
             Thread t = new Thread(this);
             t.start();
         }
@@ -162,4 +172,17 @@ public class RealTimeVideoCapturer implements Runnable, Capturer {
             }
         }
     }
+    
+    public void startServer() {
+    try (ServerSocket serverSocket = new ServerSocket(12345)) {
+        System.out.println("Server started, waiting for connections...");
+        try (Socket clientSocket = serverSocket.accept();
+             DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream())) {
+            System.out.println("Client connected, sending boolean...");
+            out.writeBoolean(true); // Assuming you're sending true; adjust as needed
+        }
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+}
 }

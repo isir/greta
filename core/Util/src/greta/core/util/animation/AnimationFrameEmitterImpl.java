@@ -33,6 +33,7 @@ public class AnimationFrameEmitterImpl implements AnimationFrameEmitter{
     @Override
     public void addAnimationFramePerformer(AnimationFramePerformer performer) {
         if (performer != null) {
+            System.out.println(" ANIMATION ENVOYEEEEE ????");
             performers.add(performer);
         }
     }
@@ -51,6 +52,7 @@ public class AnimationFrameEmitterImpl implements AnimationFrameEmitter{
 
     public void sendAnimationFrames(ID requestId, List<AnimationFrame> frames){
         for(AnimationFramePerformer performer : performers){
+            
             performer.performAnimationFrames(frames, requestId);
         }
     }

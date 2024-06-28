@@ -258,7 +258,7 @@ public class CereProcConstants {
      */
     public static PhonemeType[] convertPhoneme(String language, String cerePhoneme){
         
-        //System.out.println(cerePhoneme);
+        System.out.println(cerePhoneme);
 
         if (language.equalsIgnoreCase("en-us")) {
             Logs.warning("CereProcTTS: phoneme conversion not supported yet for language [" +  language + "] using conversion for language [en-GB] instead.");

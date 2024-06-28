@@ -177,6 +177,7 @@ public class MPEG4Animatable extends Animatable implements CancelableFAPFramePer
     }
 
     public FAPFrame getCurrentFAPFrame() {
+
         return fapFrames.getCurrentFrame();
     }
 

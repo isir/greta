@@ -7,11 +7,19 @@ set_texture_alias diffuseMap alice/color.jpg
 set_texture_alias celShadingMap alice/color.jpg
 }
 
+material Franck_Autodesk_Body : base {
+set_texture_alias diffuseMap franck/Garcon_Diff.jpg
+set_texture_alias celShadingMap franck/Garcon_Nmap.jpg
+}
+material Franck_Autodesk_Hair: base {
+set_texture_alias diffuseMap franck/Garcon_Alpha.jpg
+set_texture_alias celShadingMap franck/Garcon_Alpha.jpg
+}
+
 material Alice_Autodesk_Hair : base {
 set_texture_alias diffuseMap alice/hair_color.jpg
 set_texture_alias celShadingMap alice/hair_color.jpg
 }
-
 
 
 material Camille_Autodesk_Body : base {

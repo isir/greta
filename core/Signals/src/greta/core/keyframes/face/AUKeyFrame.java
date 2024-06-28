@@ -31,8 +31,6 @@ public class AUKeyFrame implements Keyframe{
     private double offset;
     private AUAPFrame frame;
     private String id;
-    
-    private String parentId;
 
     public AUKeyFrame(String id, double time, AUAPFrame frame) {
         this.id = id;
@@ -40,15 +38,6 @@ public class AUKeyFrame implements Keyframe{
         this.onset=0;
         this.offset=time;
         this.frame = frame;
-    }
-    
-    public AUKeyFrame(String id, double time, AUAPFrame frame, String parParentId) {
-        this.id = id;
-        //this.time = time;
-        this.onset=0;
-        this.offset=time;
-        this.frame = frame;
-        this.parentId = parParentId;
     }
 
     @Override
@@ -93,15 +82,5 @@ public class AUKeyFrame implements Keyframe{
 
     public AUAPFrame getAus(){
         return frame;
-    }
-    
-    @Override
-    public String getParentId(){
-        return parentId;
-    }
-    
-    @Override
-    public void setParentId(String parParentId){
-        this.parentId = parParentId;
     }
 }

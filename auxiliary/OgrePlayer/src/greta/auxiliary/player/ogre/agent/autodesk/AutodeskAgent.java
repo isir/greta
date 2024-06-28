@@ -65,7 +65,8 @@ public class AutodeskAgent extends MPEG4Agent{
 
         sceneManager.getRootSceneNode().removeChild(bodyNode);
         agentNode.addChild(bodyNode);
-
+        
+        System.out.println("Hey in from AutodeskAgent.Java");
 
         // <editor-fold defaultstate="collapsed" desc="setup face">
         double ens = 0;
@@ -278,7 +279,7 @@ public class AutodeskAgent extends MPEG4Agent{
         map(typesUsed, skel, "RightHandPinky2",  JointType.r_pinky2);
         map(typesUsed, skel, "RightHandPinky3",  JointType.r_pinky3);
         // </editor-fold>
-
+        
         // <editor-fold defaultstate="collapsed" desc="left arm">
         map(typesUsed, skel, "LeftShoulder",    JointType.l_sternoclavicular);
 //        map(typesUsed, skel, "LeftArm", "LeftArmRoll", JointType.l_shoulder, 0.5, false);

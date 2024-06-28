@@ -41,8 +41,6 @@ public class ShoulderKeyframe extends ParametersKeyframe {
      * Symmetric, Assymetric, Left, Right
      */
     public String side;
-    
-    private String parentId;
 
     public ShoulderKeyframe(String id, String category, String phase, double time, String side, double front, double up) {
 
@@ -112,15 +110,5 @@ public class ShoulderKeyframe extends ParametersKeyframe {
 
     public String getSide() {
         return side;
-    }
-
-    @Override
-    public String getParentId() {
-        return parentId;
-    }
-
-    @Override
-    public void setParentId(String parParentId) {
-        this.parentId = parParentId;
     }
 }//end of class

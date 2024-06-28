@@ -20,7 +20,7 @@
  THE SOFTWARE.
 
  */
-package greta.org.joml;
+package org.joml;
 
 /**
  * Contains intersection and distance tests for some 2D and 3D geometric primitives.

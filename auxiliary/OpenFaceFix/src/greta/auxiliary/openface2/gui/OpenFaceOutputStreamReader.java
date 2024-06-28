@@ -17,8 +17,6 @@
  */
 package greta.auxiliary.openface2.gui;
 
-import com.illposed.osc.transport.udp.OSCPort;
-import com.illposed.osc.transport.udp.OSCPortOut;
 import greta.auxiliary.openface2.OpenFaceOutputStreamCSVReader;
 import greta.auxiliary.openface2.OpenFaceOutputStreamZeroMQReader;
 import greta.auxiliary.openface2.util.Server;
@@ -44,15 +42,16 @@ import java.util.logging.Logger;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
+
+import com.illposed.osc.*;
+import com.illposed.osc.transport.udp.OSCPort;
+import com.illposed.osc.transport.udp.OSCPortOut;
 import greta.core.util.CharacterManager;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.logging.Level;
-import com.illposed.osc.*;
-import com.illposed.osc.transport.udp.OSCPort;
-import com.illposed.osc.transport.udp.OSCPortOut;
 
 /**
  *
@@ -1035,6 +1034,10 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     public void sendAUFrame(AUAPFrame auFrame, ID id) {
         LOGGER.info("sendAUFrame");
         auEmitter.performAUAPFrame(auFrame, id);
+        
+        System.out.println("########################################");
+        System.out.println("Hey from OpenFaceOutputStreamReader.java");
+        System.out.println("AUFrame####: "+auFrame.APVector);
     }
 
     /* ---------------------------------------------------------------------- *

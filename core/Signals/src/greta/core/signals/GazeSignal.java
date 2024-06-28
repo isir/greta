@@ -341,8 +341,6 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
             }*/
 
             setTarget(tree.getAttribute("target"));
-        }else{
-            setTarget("Gaze_target");
         }
         //origin
         if(tree.hasAttribute("origin")) {
@@ -525,5 +523,6 @@ public class GazeSignal extends ParametricSignal implements SignalTargetable, Ch
         return end;
     }
 
-
+    public void setModality(String modality) {
+    }
 }

@@ -49,21 +49,25 @@ import greta.core.util.id.IDProvider;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLParser;
 import greta.core.util.xml.XMLTree;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -79,6 +83,9 @@ import opennlp.tools.chunker.ChunkerModel;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+
+import edu.mit.jwi.item.Synset;
+import edu.mit.jwi.item.SynsetID;
 
 /**
  *
@@ -104,7 +111,14 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
     private TreebankLanguagePack tlp;
     private GrammaticalStructureFactory gsf;
     private IDictionary dict;
-
+    
+    private Process server_process = null;
+    private Process client_process = null;
+    private String python_init_env_path = "./Common/Data/MeaningMiner/python/init_env.bat";
+    private String python_server_path = "./Common/Data/MeaningMiner/python/activate_server.bat";
+    private String python_client_path = "./Common/Data/MeaningMiner/python/meaning_miner_adapter_client.py";
+    private String lang = "fr";
+    
     public ImageSchemaExtractor(CharacterManager cm) {
 
         setCharacterManager(cm);
@@ -118,7 +132,6 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         if (url == null) {
             return;
         }
-
         // construct the dictionary object and open it
         dict = new Dictionary(url);
         try {
@@ -128,16 +141,13 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         }
         //Prepare the stemmer
         wns = new WordnetStemmer(dict);
-
         //Load the parser chunkerModel from the stanford parser
         lp = LexicalizedParser.loadModel(STANFORDPARSER);
-
         //Load the Tree Bank for english
         tlp = lp.treebankLanguagePack(); // a PennTreebankLanguagePack for English
         if (tlp.supportsGrammaticalStructures()) {
             gsf = tlp.grammaticalStructureFactory();
         }
-
         //Load the OpenNLP Chunker
         InputStream modelIn = null;
         ChunkerModel chunkerModel = null;
@@ -151,6 +161,22 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         }
         chunker = new ChunkerME(chunkerModel);
 
+//            try {
+//                server_process = new ProcessBuilder(python_init_env_path).redirectErrorStream(true).start();
+//                //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
+//            } catch (IOException ex) {
+//                Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//            int exitStatus = server_process.waitFor();
+//            System.out.println("Env init status:" + exitStatus);
+//            
+//            try {
+//                server_process = new ProcessBuilder(python_server_path).redirectErrorStream(true).start();
+//                //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
+//            } catch (IOException ex) {
+//                Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+
     }
 
     /**
@@ -162,10 +188,15 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
      * document containing Ideational Units and Image Schema type of gestures
      * where invariant are defined.
      *
+     * Call from ImageSchemaExtractor in modular.jar (implemented in this file: greta.auxiliary.MeaningMiner.ImageSchemaExtractor)
+     * 
      * @param input the input string to be processed
      */
     @Override
     public void processText(String input) {
+        
+        System.out.println("ImageSchema: processText: start");
+        
         //System.out.println(input);
         XMLParser xmlParser = XML.createParser();
         XMLTree inputXML = xmlParser.parseBuffer(input);
@@ -210,7 +241,25 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             boolean hasVerb = false;
             boolean afterVerb = false;
             boolean negation = false;
-
+            
+            /*
+            try {
+                //client_process = new ProcessBuilder("python", python_path, SentenceUtils.listToOriginalTextString(sentence)).redirectErrorStream(true).start();
+                client_process = new ProcessBuilder("python", "-m", "print('hello')").redirectErrorStream(true).start();
+            } catch (IOException ex) {
+                Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            InputStream inputStream = client_process.getInputStream();
+            String result = new BufferedReader(
+                    new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                    .lines()
+                    .collect(Collectors.joining("\n")
+                    );
+            
+            System.out.println("CLIENT OUTPUT");
+            System.out.println(result);
+            */
+            
             Set<String> imageSchemas = new HashSet<>();
             Tree parse = lp.apply(sentence);
             parse.pennPrint();
@@ -684,7 +733,22 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         //characterManager.add(this);
     }
     
+    /**
+     * Call from greta.core.intentions.FMLFileReader
+     * 
+     * @param input
+     * @return
+     * @throws TransformerConfigurationException
+     * @throws TransformerException
+     * @throws ParserConfigurationException
+     * @throws SAXException
+     * @throws IOException 
+     */
     public List<Intention> processText_2(String input) throws TransformerConfigurationException, TransformerException, ParserConfigurationException, SAXException, IOException {
+        
+        System.out.println("ImageSchema: processText2: start");
+
+        
         //System.out.println(input);
         XMLParser xmlParser = XML.createParser();
         XMLTree inputXML = xmlParser.parseBuffer(input);
@@ -710,12 +774,29 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         List<XMLTree> imageSchemasGenerated = new ArrayList<>();
 
         int countTimeMarkers = 0;
-        int countSentenceMarkers = 0;
+        int countSentenceMarkers = 1;
         int countIdeationalUnit = 0;
         int countImageSchema = 0;
 
         //prepare the reader for our value
-        StringReader sr = new StringReader(tagFreeInput);
+        
+        
+        System.out.println("STRING INPUT:"+tagFreeInput);
+        
+        String fix= new String();
+                    System.out.println("CHECK TEXT");
+                    BufferedReader rea = new BufferedReader(new StringReader(tagFreeInput));
+
+                    String line1;
+
+                    while ((line1 = rea.readLine()) != null) {
+                        if(!line1.contains("tmp") && line1.trim().length()>0)
+                            fix=fix+" "+line1.trim()+"\n";
+                        
+                    }
+        fix=fix.substring(0, fix.length()-1);
+        System.out.println("[FIX]:"+fix);
+        StringReader sr = new StringReader(fix);
 
         //*********   FIRST WE START BY AUGMENTING THE TEXT ***************
         //prepare the XML structure to store the speech in a FML-APML way
@@ -725,6 +806,43 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
         //split by sentences, for each sentences:
         for (List<HasWord> sentence : new DocumentPreprocessor(sr)) {
+            
+            String[] token_array = new String[sentence.size()];
+            String[] lemma_array = new String[sentence.size()];
+            String[] pos_array = new String[sentence.size()];
+            String[] chunk_tag_array = new String[sentence.size()];
+            String[] gesture_ID_array = new String[sentence.size()];
+            String[] gesture_lemma_array = new String[sentence.size()];
+
+            if(lang == "fr"){
+                String sentenceString = SentenceUtils.listToOriginalTextString(sentence);
+                System.out.println("InputSentence: " + sentenceString);
+                try {
+                    client_process = new ProcessBuilder("python", python_client_path, sentenceString).redirectErrorStream(true).start();
+                    //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
+                } catch (IOException ex) {
+                    Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                InputStream inputStream = client_process.getInputStream();
+                String result = new BufferedReader(
+                        new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                        .lines()
+                        .collect(Collectors.joining("\n")
+                        );
+                System.out.println("CLIENT OUTPUT");
+                System.out.println(result);
+
+                String[] split_result = result.split("@");
+                token_array = split_result[0].split(" ");
+                lemma_array = split_result[1].split(" ");
+                pos_array = split_result[2].split(" ");
+                chunk_tag_array = split_result[3].split(" ");
+                gesture_ID_array = split_result[4].split(" ");
+                gesture_lemma_array = split_result[5].split(" ");
+            }
+
+
+            System.out.println("HAS WORD:"+sentence.toString());
             imageSchemasGenerated.clear();
             boolean hasVerb = false;
             boolean afterVerb = false;
@@ -749,159 +867,290 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             ideationalUnit.setAttribute("id", "id_" + countIdeationalUnit++);
             ideationalUnit.setAttribute("importance", "1.0");
             ideationalUnit.setAttribute("start", "s1:tm" + countTimeMarkers + "-0.2");
+            System.out.println("[COUNT TIME MARKERS]:"+countTimeMarkers+"   "+sentence.size());
             ideationalUnit.setAttribute("end", "s1:tm" + (countTimeMarkers + sentence.size() - 1) + "-0.2");
             String[] listToken = new String[sentence.size()];
             String[] listPos = new String[sentence.size()];
+            
             //A first loop that checks if there is a verb in the sentence and prepare the sentence for chunking
             for (int i = 0; i < sentence.size(); i++) {
-                //retrieve the word and its grammar posTag
-                CoreLabel cl = (CoreLabel) sentence.get(i);
-                String type = cl.tag();
-
-                listToken[i] = cl.originalText();
-                listPos[i] = cl.tag();
-                if (type != null && (type.equals("VB") || type.equals("VBD") || type.equals("VBG") || type.equals("VBN") || type.equals("VBZ") || type.equals("VBP"))) {
-                    hasVerb = true;
+                
+                String type;
+                if(lang == "fr"){
+                    
+                    type = pos_array[i];
+                    
+                    listToken[i] = token_array[i];
+                    listPos[i] = pos_array[i];
+                    
+                    if(type != null && (type.equals("VERB"))){
+                        hasVerb = true;
+                    }
+                    
                 }
+                else{
+
+                    //retrieve the word and its grammar posTag
+                    CoreLabel cl = (CoreLabel) sentence.get(i);
+                    type = cl.tag();
+
+                    listToken[i] = cl.originalText();
+                    listPos[i] = cl.tag();
+
+                    if (type != null && (type.equals("VB") || type.equals("VBD") || type.equals("VBG") || type.equals("VBN") || type.equals("VBZ") || type.equals("VBP"))) {
+                        hasVerb = true;
+                    }                    
+                    
+                }
+                
 
             }
+            System.out.println("hasVerb: " + true);
+            
             //retrieve the BIO (begin inside out) tags for the chunks
             String chunktag[] = chunker.chunk(listToken, listPos);
             XMLTree previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers);
 
+            System.out.println("countSentenceMarkers: " + countSentenceMarkers);
+            System.out.println("Sentence:" + sentence.toString());
+                        
             //XMLTree imageSchema = fmlRoot.createChild("imageschema");
             //imageSchema.setAttribute("id", "id_" + countImageSchema++);
             //The second loop
             for (int i = 0; i < sentence.size(); i++) {
+                
                 CoreLabel cl = (CoreLabel) sentence.get(i);
                 imageSchemas.clear();
-
-                String posTag = cl.tag();
-                String value = cl.originalText();
-
-                //mapping PENN from stanford to wordnet POS
-                //this part can act as a filter
+                
+                String posTag = new String();
+                String value = new String();
                 POS pos = null;
-                switch (posTag) {
-                    //noun singular or mass
-                    case "NN":
-                        pos = POS.NOUN;
-                        break;
-                    //noun plural
-                    case "NNS":
-                        pos = POS.NOUN;
-                        break;
-                    //Verb
-                    case "VB":
-                        pos = POS.VERB;
-                        break;
-                    //Verb past tense
-                    case "VBD":
-                        pos = POS.VERB;
-                        break;
-                    //Verb gerondif
-                    case "VBG":
-                        pos = POS.VERB;
-                        break;
-                    //Verb past participle
-                    case "VBN":
-                        pos = POS.VERB;
-                        break;
-                    //Verb 3rd person singular present (s in english)
-                    case "VBZ":
-                        pos = POS.VERB;
-                        break;
-                    //Verb singular present other person (without the s)
-                    case "VBP":
-                        pos = POS.VERB;
-                        break;
-                    //Adjective
-                    case "JJ":
-                        pos = POS.ADJECTIVE;
-                        break;
-                    //Adjective Comparative
-                    case "JJR":
-                        pos = POS.ADJECTIVE;
-                        break;
-                    //Adjective Superlative
-                    case "JJS":
-                        pos = POS.ADJECTIVE;
-                        break;
-                    //adverb
-                    case "RB":
-                        pos = POS.ADVERB;
-                        break;
-                    //adverb comparative
-                    case "RBR":
-                        pos = POS.ADVERB;
-                        break;
-                    //adverb superlative
-                    case "RBS":
-                        pos = POS.ADVERB;
-                        break;
-                    //particle
-                    case "RP":
-                        pos = POS.ADVERB;
-                        break;
-                    //DEBUG : this is unsafe, just to keep some particular words in check
-                    case "IN":
-                        pos = POS.ADVERB;
-                        break;
-                    default:
-                        pos = null;
-                        break;
+                                    
+                if(lang == "fr"){
+                    
+                    posTag = pos_array[i];
+                    value = token_array[i];
+
+                    //mapping PENN from stanford to wordnet POS
+                    //this part can act as a filter 
+                    switch (posTag) {
+                        //noun singular or mass
+                        case "NOUN":
+                            pos = POS.NOUN;
+                            break;
+                        //Verb
+                        case "VERB":
+                            pos = POS.VERB;
+                            break;
+                        //Adjective
+                        case "ADJ":
+                            pos = POS.ADJECTIVE;
+                            break;
+                        //adverb
+                        case "ADV":
+                            pos = POS.ADVERB;
+                            break;
+                        //particle
+                        case "PART":
+                            pos = POS.ADVERB;
+                            break;
+                        default:
+                            pos = null;
+                            break;
+                    }
+                    
                 }
+                else{
+                    
+                    posTag = cl.tag();
+                    value = cl.originalText();
+
+                    //mapping PENN from stanford to wordnet POS
+                    //this part can act as a filter 
+                    switch (posTag) {
+                        //noun singular or mass
+                        case "NN":
+                            pos = POS.NOUN;
+                            break;
+                        //noun plural
+                        case "NNS":
+                            pos = POS.NOUN;
+                            break;
+                        //Verb
+                        case "VB":
+                            pos = POS.VERB;
+                            break;
+                        //Verb past tense
+                        case "VBD":
+                            pos = POS.VERB;
+                            break;
+                        //Verb gerondif
+                        case "VBG":
+                            pos = POS.VERB;
+                            break;
+                        //Verb past participle
+                        case "VBN":
+                            pos = POS.VERB;
+                            break;
+                        //Verb 3rd person singular present (s in english)
+                        case "VBZ":
+                            pos = POS.VERB;
+                            break;
+                        //Verb singular present other person (without the s)
+                        case "VBP":
+                            pos = POS.VERB;
+                            break;
+                        //Adjective
+                        case "JJ":
+                            pos = POS.ADJECTIVE;
+                            break;
+                        //Adjective Comparative
+                        case "JJR":
+                            pos = POS.ADJECTIVE;
+                            break;
+                        //Adjective Superlative
+                        case "JJS":
+                            pos = POS.ADJECTIVE;
+                            break;
+                        //adverb
+                        case "RB":
+                            pos = POS.ADVERB;
+                            break;
+                        //adverb comparative
+                        case "RBR":
+                            pos = POS.ADVERB;
+                            break;
+                        //adverb superlative
+                        case "RBS":
+                            pos = POS.ADVERB;
+                            break;
+                        //particle
+                        case "RP":
+                            pos = POS.ADVERB;
+                            break;
+                        //DEBUG : this is unsafe, just to keep some particular words in check
+                        case "IN":
+                            pos = POS.ADVERB;
+                            break;
+                        default:
+                            pos = null;
+                            break;
+                    }
+
+                }
+
+
 
                 //begin wordnet code
                 List<String> stems = new ArrayList<>();
+                    
+                if(lang == "fr"){
 
-                //We retrieve the stems for the word.
-                if (pos == POS.NOUN || pos == POS.ADJECTIVE || pos == POS.VERB || pos == POS.ADVERB) {
-                    stems = wns.findStems(value, pos);
-                }
+                    //We retrieve the stems for the word.
+                    if (pos == POS.NOUN || pos == POS.ADJECTIVE || pos == POS.VERB || pos == POS.ADVERB) {
+                        stems.add(lemma_array[i]);
+                    }
 
-                //check if we are at the verb
-                if (pos == POS.VERB || chunktag[i].equals("B-VP")) {
-                    afterVerb = true;
+                    //check if we are at the verb
+                    if (pos == POS.VERB || chunk_tag_array[i].equals("B-VP")) {
+                        afterVerb = true;
+                    }
+
                 }
+                else{
+
+                    //We retrieve the stems for the word.
+                    if (pos == POS.NOUN || pos == POS.ADJECTIVE || pos == POS.VERB || pos == POS.ADVERB) {
+                        stems = wns.findStems(value, pos);
+                    }
+
+                    //check if we are at the verb
+                    if (pos == POS.VERB || chunktag[i].equals("B-VP")) {
+                        afterVerb = true;
+                    }
+
+                }
+                System.out.println("afterVerb: " + afterVerb);
 
                 if (!hasVerb || (hasVerb && afterVerb)) {
                     //for each stem
                     for (String stem : stems) {
-                        //we retrieve the word from wordnet
-                        IIndexWord idxWord = dict.getIndexWord(stem, pos);
-                        if (idxWord != null) {
+                        
+                        if(lang == "fr"){
+                            System.out.println(0);
+                            if(!gesture_ID_array[i].equals("_")){
+                                
+                                //System.out.println(1);
+                                ISynset synset = dict.getSynset(new SynsetID(Integer.parseInt(gesture_ID_array[i]), pos));
+                                //System.out.println(2);
+                                //System.out.println(3);
+                                //IIndexWord indexWord = dict.getIndexWord(gesture_ID_array[i], pos);
+                                //IWordID wordID = indexWord.getWordIDs().get(0);
+                                //ISynset synset = dict.getWord(wordID).getSynset();
 
-                            //we retrieve the synset
-                            ISynset synset = this.simplifiedLesk(idxWord, SentenceUtils.listToOriginalTextString(sentence));
-                            /*System.out.println("Stem : " + stem + " POS:" + pos);
-                            for (IWordID idw : idxWord.getWordIDs()) {
-                                System.out.println("ID : " + idw.getSynsetID().getOffset());
+                                //THE IMPORTANT PART : we retrieve the image schemas for this synset
+                                Set<String> imscSet = getImageSchemas(synset, 10);
+                                //System.out.println(4);
+                                imageSchemas.addAll(imscSet);
+
+                                System.out.println("Synset: " + synset.toString() + " " + imscSet.toString());
+                                System.out.println("countSentenceMarkers: " + countSentenceMarkers);
+                                
                             }
-                            System.out.println(stem + " id:" + synset.getOffset());*/
-                            //THE IMPORTANT PART : we retrieve the image schemas for this synset
-                            Set<String> imscSet = getImageSchemas(synset, 10);
-
-                            imageSchemas.addAll(imscSet);
-
+                            
                         }
-                    }
+                        else{
+                            
+                            //we retrieve the word from wordnet
+                            IIndexWord idxWord = dict.getIndexWord(stem, pos);
+                            if (idxWord != null) {
 
+                                //we retrieve the synset
+                                ISynset synset = this.simplifiedLesk(idxWord, SentenceUtils.listToOriginalTextString(sentence));
+                                /*System.out.println("Stem : " + stem + " POS:" + pos);
+                                for (IWordID idw : idxWord.getWordIDs()) {
+                                    System.out.println("ID : " + idw.getSynsetID().getOffset());
+                                }
+                                System.out.println(stem + " id:" + synset.getOffset());*/
+                                //THE IMPORTANT PART : we retrieve the image schemas for this synset
+                                Set<String> imscSet = getImageSchemas(synset, 10);
+                                imageSchemas.addAll(imscSet);
+                            }
+                        }
+
+                    }
+                    
                     //Depending on the chunk, I will construct the image schema differently
                     //If we begin a new chunk (the B tag), I either delete an empty previous Image Schema (created as a placeholder) or
                     //if the previous is not empty, I close it with an end tag and I open a new one (with createXMLImageSchema).
-                    if (chunktag[i].startsWith("B")) {
+                    
+                    String chunk_tag_i;
+                    Integer cl_index;
+                    if(lang == "fr"){
+                        
+                        chunk_tag_i = chunk_tag_array[i];
+                        cl_index = 0;
+                        
+                    }
+                    else{
+                        
+                        chunk_tag_i = chunktag[i];
+                        cl_index = cl.index();
+
+                    }
+                    
+                    if (chunk_tag_i.startsWith("B")) {
 
                         if (previousImageSchema != null) {
                             if (previousImageSchema.getAttribute("type") == "") {
                                 fmlRoot.removeChild(previousImageSchema);
-                                previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl.index() - 1);
+                                previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
 
                             } else {
                                 if (!imageSchemas.isEmpty()) {
-                                    previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl.index() - 1) + "-0.2");
+                                    previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                     imageSchemasGenerated.add(previousImageSchema);
-                                    previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl.index() - 1);
+                                    previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
 
                                 } else {
                                     //This is used so the Image Schema coming from a previous chunk can span unto the next chunk until there is a new Image Schema.
@@ -909,7 +1158,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                 }
                             }
                         } else {
-                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl.index() - 1);
+                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
 
                         }
                         //If an Image Schema is identified for this word, I insert it
@@ -922,36 +1171,36 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                     }
                     //If I am within a chunk, I should just update the existing previous Image Schema that
                     //has been created for the whole chunk during the B case, OR create a new one in case of multiple instance of a noun in a NP or verb in a VP
-                    if (chunktag[i].startsWith("I")) {
+                    if (chunk_tag_i.startsWith("I")) {
                         if (previousImageSchema == null) {
-                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl.index() - 1);
+                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
                             //Check if the Image Schema was coming from a previous chunk
                         } else if (previousImageSchema.getAttribute("previous") == "true" && !imageSchemas.isEmpty()) {
 
-                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl.index() - 1) + "-0.2");
+                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                             imageSchemasGenerated.add(previousImageSchema);
-                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl.index() - 1);
+                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers +cl_index - 1);
 
                         }
                         if (!imageSchemas.isEmpty()) {
                             switch (chunktag[i]) {
                                 case "I-NP": {
                                     if (previousImageSchema.getAttribute("POSroot") == "") {
-                                        setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl.index());
+                                        setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
                                     } else {
                                         if (previousImageSchema.getAttribute("POSroot").equals(POS.NOUN.toString())) {
-                                            setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl.index());
+                                            setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
 
                                         }
-                                        if (pos.equals(POS.ADJECTIVE) || isWithinPitchAccent(listPitchAccent, cl.index()) || pos.equals(POS.NOUN) && !previousImageSchema.getAttribute("POSroot").equals(POS.ADJECTIVE.toString())) {
+                                        if (pos.equals(POS.ADJECTIVE) || isWithinPitchAccent(listPitchAccent, cl_index) || pos.equals(POS.NOUN) && !previousImageSchema.getAttribute("POSroot").equals(POS.ADJECTIVE.toString())) {
                                             if (previousImageSchema.getAttribute("type") == "") {
                                                 fmlRoot.removeChild(previousImageSchema);
                                             } else {
-                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl.index() - 1) + "-0.2");
+                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                                 imageSchemasGenerated.add(previousImageSchema);
                                             }
-                                            XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl.index() - 1);
-                                            setImageSchemaType(imageschema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl.index());
+                                            XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                                            setImageSchemaType(imageschema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
                                             previousImageSchema = imageschema;
                                         }
                                     }
@@ -960,20 +1209,20 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
                                 case "I-VP": {
                                     if (previousImageSchema.getAttribute("POSroot") == "") {
-                                        setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl.index());
+                                        setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
                                     } else {
                                         if (previousImageSchema.getAttribute("POSroot").equals(POS.VERB.toString())) {
-                                            setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl.index());
+                                            setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
                                         }
-                                        if (pos.equals(POS.ADVERB) || isWithinPitchAccent(listPitchAccent, cl.index()) || pos.equals(POS.VERB) && !previousImageSchema.getAttribute("POSroot").equals(POS.ADVERB.toString())) {
+                                        if (pos.equals(POS.ADVERB) || isWithinPitchAccent(listPitchAccent, cl_index) || pos.equals(POS.VERB) && !previousImageSchema.getAttribute("POSroot").equals(POS.ADVERB.toString())) {
                                             if (previousImageSchema.getAttribute("type") == "") {
                                                 fmlRoot.removeChild(previousImageSchema);
                                             } else {
-                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl.index() - 1) + "-0.2");
+                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                                 imageSchemasGenerated.add(previousImageSchema);
                                             }
-                                            XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl.index() - 1);
-                                            setImageSchemaType(imageschema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl.index());
+                                            XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                                            setImageSchemaType(imageschema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
                                             previousImageSchema = imageschema;
                                         }
                                     }
@@ -982,17 +1231,17 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
                                 default: { //I-PRT, I-INTJ, I-SBAR, I-ADJP, I-ADVP, I-PP
                                     if (previousImageSchema.getAttribute("POSroot") == "") {
-                                        setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl.index());
+                                        setImageSchemaType(previousImageSchema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
 
                                     } else {
                                         if (previousImageSchema.getAttribute("type") == "") {
                                             fmlRoot.removeChild(previousImageSchema);
                                         } else {
-                                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl.index() - 1) + "-0.2");
+                                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                             imageSchemasGenerated.add(previousImageSchema);
                                         }
-                                        XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl.index() - 1);
-                                        setImageSchemaType(imageschema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl.index());
+                                        XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                                        setImageSchemaType(imageschema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
                                         previousImageSchema = imageschema;
                                     }
                                     break;
@@ -1000,12 +1249,12 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                             }
                         }
                     }
-                    if (chunktag[i].startsWith("O")) {
+                    if (chunk_tag_i.startsWith("O")) {
                         if (previousImageSchema != null) {
                             if (previousImageSchema.getAttribute("type") == "") {
                                 fmlRoot.removeChild(previousImageSchema);
                             } else {
-                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl.index() - 1) + "-0.2");
+                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                 imageSchemasGenerated.add(previousImageSchema);
                             }
 
@@ -1019,12 +1268,15 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                 //System.out.println(negation);
 
             }
-            countSentenceMarkers += sentence.size();
+
+            //countSentenceMarkers += sentence.size();
+            countSentenceMarkers++;
+
             if (previousImageSchema != null) {
                 if (previousImageSchema.getAttribute("type").equals("")) {
                     fmlRoot.removeChild(previousImageSchema);
                 } else {
-                    previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers - 1) + "-0.2");
+                    previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + 1) + "-0.2");
                     imageSchemasGenerated.add(previousImageSchema);
                 }
 
@@ -1044,8 +1296,39 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
         
                 try{
-                String fmlApmlRoot_v1=fmlApmlRoot.toString().replace("<fml-apml>","").replace("<fml>","").replace("</fml>","").replace("</fml-apml>","");
-                fmlApmlRoot_v1= fmlApmlRoot_v1.replace("</bml>","</bml>\n<fml>").replace("?>", "?>\n<fml-apml>").replace(":tm0",":tm1")+"\n</fml>\n</fml-apml>";
+                    String file= new String();
+                    System.out.println("CHECK TEXT");
+                    BufferedReader reader = new BufferedReader(new StringReader(fmlApmlRoot.toString()));
+
+                    String line;
+
+                    int counter=0;
+                    int counter1=1;
+                    while ((line = reader.readLine()) != null) {
+                        line=line.trim();
+                        if(line.length()==3 || line.contains("importance") || line.contains("imageschema") || line.contains("speech")){
+                            file=file+(line+" "+reader.readLine().trim())+"\n";
+                            //System.out.println("LINE:"+line+" "+reader.readLine().trim());
+                        }else{
+                            if(line.trim().contains("<fml-apml>")){
+                                if(counter==0){
+                                    file=file+line+"\n";
+                                    counter=counter+1;
+                                }
+                            }
+                            else{
+                             if(!line.trim().contains("</fml-apml>") && !line.contains("<fml/>"))
+                                file=file+line+"\n";
+                             
+                    }
+                    }
+                    }
+                    
+                    System.out.println("STRING:\n"+file );
+                    
+                String fmlApmlRoot_v1=file+"</fml-apml>".replace("s1:tm0","s1:tm1");
+                //fmlApmlRoot_v1= fmlApmlRoot_v1.replace("</bml>","\n</bml>\n<fml>").replace("?>", "?>\n<fml-apml>").replace(":tm0",":tm1")+"\n</fml-apml>";
+                System.out.println("CHECK STRING 2");
                 System.out.println(fmlApmlRoot_v1);
                 DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();

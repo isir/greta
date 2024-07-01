@@ -47,6 +47,10 @@ The functionnalities available with the public version are the following:
 
 Greta is a SAIBA compliant agent architecture, meaning that it is compatible with and can take as inputs Behavior Markup Language and Function Markup Language files in order to produce the behaviors of the agent.
 
+Kopp, S., Krenn, B., Marsella, S., Marshall, A. N., Pelachaud, C., Pirker, H., Thórisson, K. R., & Vilhjálmsson, H. (2006, August).
+Towards a Common Framework for Multimodal Generation: The Behavior Markup Language.
+In International Conference on Intelligent Virtual Agents (pp. 205-217). Springer, Berlin, Heidelberg.
+
 Mancini, M., Niewiadomski, R., Bevacqua, E., & Pelachaud, C. (2008, November).
 Greta: a SAIBA compliant ECA system.
 In Troisième Workshop sur les Agents Conversationnels Animés.

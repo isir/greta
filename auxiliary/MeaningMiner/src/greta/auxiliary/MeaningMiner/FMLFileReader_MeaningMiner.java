@@ -1,24 +1,15 @@
-/*
- * This file is part of Greta.
+
+package greta.auxiliary.MeaningMiner;
+
+/**
  *
- * Greta is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * Greta is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Greta.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * @author takes
  */
-package greta.core.intentions;
 
-
-//import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
+import greta.core.intentions.FMLTranslator;
+import greta.core.intentions.Intention;
+import greta.core.intentions.IntentionEmitter;
+import greta.core.intentions.IntentionPerformer;
 import greta.core.signals.BMLTranslator;
 import greta.core.signals.Signal;
 import greta.core.signals.SignalEmitter;
@@ -36,20 +27,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
 import javax.jms.JMSException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -62,22 +45,12 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
-
-/**
- * This class is an implementation of {@code IntentionEmitter} interface.<br>
- * When calling the {@code load} function, It sends the {@code Intentions}
- * contained in a specified FML file to all {@code IntentionPerformers} added
- * with the {@code add} function.
- *
- * @author Andre-Marie Pez
- */
-public class FMLFileReader implements IntentionEmitter, SignalEmitter {
+public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitter {
 
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
@@ -89,9 +62,11 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
     private boolean MM_parse_server_activated = false;
     private String MM_python_env_installer_path = "Common\\Data\\MeaningMiner\\python\\init_env.bat";
     private String MM_parse_server_path         = "Common\\Data\\MeaningMiner\\python\\activate_server.bat";
+    private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
     private Process server_process;
-
-    public FMLFileReader(CharacterManager cm) throws InterruptedException{
+    private Thread server_shutdownHook;
+    
+    public FMLFileReader_MeaningMiner(CharacterManager cm) throws InterruptedException{
         
         this.cm = cm;
         this.cm.setTouch_computed(false);
@@ -106,14 +81,16 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         server_process.waitFor();
         **/
 
-//        System.out.println("greta.core.intentions.FMLFileReader: initializing MeaningMiner python env");
-//        try {
-//            server_process = new ProcessBuilder(MM_parse_server_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
-//            //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
-//        } catch (IOException ex) {
-//            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner python env initialization signal sent");
+        System.out.println("greta.core.intentions.FMLFileReader: initializing MeaningMiner python env");
+        try {
+            server_process = new ProcessBuilder(MM_parse_server_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+            //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
+            server_shutdownHook = new shutdownHook(server_process, MM_parse_server_killer_path);
+            Runtime.getRuntime().addShutdownHook(server_shutdownHook);
+        } catch (IOException ex) {
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner python env initialization signal sent");
         
         /**
         InputStream inputStream = server_process.getInputStream();
@@ -251,15 +228,15 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         ID id = IDProvider.createID(base);
         id.setFmlID(fml_id);
         
-//        if(this.cm.use_MM()){
-//            ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
-//             //MEANING MINER TREATMENT START
-//            List<Intention> intention_list;
-//            System.out.println("File Name "+fml.toString());
-//            intention_list = im.processText_2(fml.toString());
-//            intentions.addAll(intention_list);
-//            //MEANING MINER TREATMENT END
-//        }
+        if(this.cm.use_MM()){
+            ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
+             //MEANING MINER TREATMENT START
+            List<Intention> intention_list;
+            System.out.println("File Name "+fml.toString());
+            intention_list = im.processText_2(fml.toString());
+            intentions.addAll(intention_list);
+            //MEANING MINER TREATMENT END
+        }
         
         for(int i=0; i<intentions.size();i++){
             System.out.println("[INFO]: Intention_type:"+intentions.get(i).getType()+"   "+intentions.get(i).getName());

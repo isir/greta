@@ -19,9 +19,9 @@
             <parameter name="blackBackground" value="true"/>
             <window h="435" visible="false" w="618" x="10" y="10"/>
         </element>
-        <element h="420.0" id="Environment - 1544700713383-564"
+        <element h="490.0" id="Environment - 1544700713383-564"
             module="Environment" name="Environment" w="710.0" x="30.0" y="110.0">
-            <element h="360.0"
+            <element h="430.0"
                 id="Character Manager - 1544700726358-960"
                 module="Character Manager" name="Character Manager"
                 w="650.0" x="30.0" y="30.0">
@@ -35,18 +35,11 @@
                     <window h="127" visible="false" w="437" x="10" y="10"/>
                 </element>
                 <element h="50.0"
-                    id="FML File Reader - 1544700908962-428"
-                    module="FML File Reader" name="FML File Reader"
-                    w="80.0" x="30.0" y="30.0">
-                    <parameter name="fileName" value="C:\Users\takes\Documents\NetBeansProjects\greta_github\bin\Examples\DemoEN\1-Welcome_FR.xml"/>
-                    <window h="108" visible="true" w="517" x="10" y="10"/>
-                </element>
-                <element h="50.0"
                     id="BML File Reader - 1544700914641-19"
                     module="BML File Reader" name="BML File Reader"
                     w="80.0" x="130.0" y="30.0">
                     <parameter name="fileName" value=""/>
-                    <window h="108" visible="true" w="517" x="10" y="120"/>
+                    <window h="108" visible="true" w="517" x="22" y="190"/>
                 </element>
                 <element h="230.0"
                     id="Behavior Planner - 1544700734561-356"
@@ -104,7 +97,7 @@
                 <element h="50.0"
                     id="Image Schema Extractor - 1617355153047-666"
                     module="Image Schema Extractor"
-                    name="Image Schema Extractor" w="80.0" x="15.0" y="15.0">
+                    name="Image Schema Extractor" w="80.0" x="30.0" y="350.0">
                     <window h="400" visible="true" w="600" x="835" y="545"/>
                 </element>
                 <element h="50.0"
@@ -115,28 +108,51 @@
                 </element>
                 <element h="50.0" id="CereProc - 1719937237038-705"
                     module="CereProc" name="CereProc" w="80.0" x="540.0" y="30.0"/>
+                <element h="50.0"
+                    id="FML File Reader Meaning Miner - 1720017390098-769"
+                    module="FML File Reader Meaning Miner"
+                    name="FML File Reader Meaning Miner" w="80.0"
+                    x="30.0" y="30.0">
+                    <parameter name="fileName" value="C:\Users\takes\Documents\NetBeansProjects\greta_github\bin\Examples\DemoEN\1-Welcome_FR_word.xml"/>
+                    <window h="120" visible="true" w="518" x="14" y="65"/>
+                </element>
             </element>
         </element>
         <element h="420.0" id="Ogre Player - 1544700973529-249"
             module="Ogre Player" name="Ogre Player" w="80.0" x="770.0" y="110.0">
-            <parameter name="posX" value="0.0"/>
-            <parameter name="posY" value="1.5"/>
-            <parameter name="posZ" value="1.2999999523162842"/>
+            <parameter name="posX" value="-1.026139736175537"/>
+            <parameter name="posY" value="1.8153799772262573"/>
+            <parameter name="posZ" value="2.7491981983184814"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="0.0"/>
-            <parameter name="yaw" value="0.0"/>
-            <window h="614" visible="true" w="736" x="930" y="102"/>
+            <parameter name="pitch" value="-0.22222323715686798"/>
+            <parameter name="yaw" value="-0.38440296053886414"/>
+            <window h="614" visible="true" w="507" x="27" y="335"/>
         </element>
     </elements>
     <connections>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1719937237038-705"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader Meaning Miner - 1720017390098-769" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -145,24 +161,9 @@
             source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML File Reader - 1544700908962-428" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1719937237038-705"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Image Schema Extractor - 1617355153047-666" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Image Schema Extractor - 1617355153047-666" target="Behavior Planner - 1544700734561-356"/>
     </connections>
 </modulated>

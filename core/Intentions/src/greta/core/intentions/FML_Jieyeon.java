@@ -18,7 +18,7 @@
 package greta.core.intentions;
 
 
-import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
+//import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
 import greta.core.signals.BMLTranslator;
 import greta.core.signals.Signal;
 import greta.core.signals.SignalEmitter;
@@ -198,15 +198,16 @@ public class FML_Jieyeon implements IntentionEmitter, SignalEmitter {
 
         ID id = IDProvider.createID(base);
         id.setFmlID(fml_id);
-        if(this.cm.use_MM()){
-        ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
-         //MEANING MINER TREATMENT START
-        List<Intention> intention_list;
-        System.out.println("File Name "+fml.toString());
-        intention_list = im.processText_2(fml.toString());
-        intentions.addAll(intention_list);
-        //MEANING MINER TREATMENT END
-        }
+
+//        if(this.cm.use_MM()){
+//            ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
+//             //MEANING MINER TREATMENT START
+//            List<Intention> intention_list;
+//            System.out.println("File Name "+fml.toString());
+//            intention_list = im.processText_2(fml.toString());
+//            intentions.addAll(intention_list);
+//            //MEANING MINER TREATMENT END
+//        }
         
         for(int i=0; i<intentions.size();i++){
             System.out.println("[INFO]: Intention_type:"+intentions.get(i).getType()+"   "+intentions.get(i).getName());

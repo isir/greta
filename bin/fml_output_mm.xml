@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>
+Bonjour,
+<tm id="tm2"/>
+Je
+<tm id="tm3"/>
+m'
+<tm id="tm4"/>
+appelle
+<tm id="tm5"/>
+Camille.
+<tm id="tm6"/>
+Je
+<tm id="tm7"/>
+suis
+<tm id="tm8"/>
+l'
+<tm id="tm9"/>
+un
+<tm id="tm10"/>
+des <tm id="tm11"/>
+personnages
+<tm id="tm12"/>
+virtuels
+<tm id="tm13"/>
+de
+<tm id="tm14"/>
+la
+<tm id="tm15"/>
+plateforme
+<tm id="tm16"/>
+Greta.
+<tm id="tm17"/>
+Récemment,
+<tm id="tm18"/>
+la
+<tm id="tm19"/>
+température
+<tm id="tm20"/>
+a
+<tm id="tm21"/>
+beaucoup
+<tm id="tm22"/>
+augmenté.
+<tm id="tm23"/>
+La
+<tm id="tm24"/>
+durée
+<tm id="tm25"/>
+de
+<tm id="tm26"/>
+l'
+<tm id="tm27"/>
+été <tm id="tm28"/>
+est <tm id="tm29"/>
+très
+<tm id="tm30"/>
+courte
+<tm id="tm31"/>
+mais
+<tm id="tm32"/>
+très
+<tm id="tm33"/>
+intense.
+<tm id="tm34"/>
+<pitchaccent end="s1:tm4" id="pa2" importance="1" level="medium" start="s1:tm3" type="HStar"/>
+<boundary end="s1:tm5+0.5" id="b1" start="s1:tm5" type="LL"/>
+</speech> </bml>
+<fml>
+<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0"/>--> <!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0" target="Andre_chair0" />-->
+<!--<performative id="p1" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>--> <beat end="s1:tm3" id="b1" importance="1.0" start="0" type="pos"/>
+<!--<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>--> <!--<performative id="p2" type="propose" start="s1:tm3" end="s1:tm5" importance="1.0"/>-->
+<!--<rest id="rp1" type="restpose" start="0" end="s1:tm5" importance="1.0"/>--> </fml>
+<fml>
+<ideationalunit end="s1:tm7-0.2" id="id_2" importance="1.0" main="im_8" start="s1:tm0-0.2"/>
+<imageschema POSroot="verb" end="s1:tm11-0.2" id="im_8" importance="1.0" indexword="6" start="s1:tm5-0.2" type="big"/>
+<ideationalunit end="s1:tm11-0.2" id="id_3" importance="1.0" main="im_10" start="s1:tm0-0.2"/>
+<imageschema POSroot="adjective" end="s1:tm6-0.2" id="im_10" importance="1.0" indexword="8" start="s1:tm0-0.2" type="down"/>
+</fml>
+</fml-apml>

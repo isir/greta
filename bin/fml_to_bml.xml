@@ -1,0 +1,80 @@
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="marytts" type="SAPI4" text="">
+<description level="1" type="gretabml"><reference>tmp/from-fml-apml.pho</reference></description>
+			<description level="1" type="gretabml">
+			</description>
+				
+			<tm id="tm1"/>
+				Bonjour, 
+			<tm id="tm2"/>
+				Je
+			<tm id="tm3"/>
+                                m'
+			<tm id="tm4"/>
+                                appelle 
+			<tm id="tm5"/>
+                                Camille.
+			<tm id="tm6"/>	
+				Je 
+			<tm id="tm7"/>
+                        suis 
+			<tm id="tm8"/>
+                        l'
+			<tm id="tm9"/>
+                        un 
+			<tm id="tm10"/>
+                        des 
+			<tm id="tm11"/>
+                        personnages 
+			<tm id="tm12"/>
+                        virtuels 
+			<tm id="tm13"/>
+                        de 
+			<tm id="tm14"/>
+                        la 
+			<tm id="tm15"/>
+                        plateforme 
+			<tm id="tm16"/>
+                        Greta.
+			<tm id="tm17"/>
+                                R�cemment, 
+			<tm id="tm18"/>
+                        la 
+			<tm id="tm19"/>
+                        temp�rature 
+			<tm id="tm20"/>
+                        a 
+			<tm id="tm21"/>
+                        beaucoup 
+			<tm id="tm22"/>
+                        augment�.
+			<tm id="tm23"/>
+                                La 
+			<tm id="tm24"/>
+                        dur�e 
+			<tm id="tm25"/>
+                        de 
+			<tm id="tm26"/>
+                        l'
+			<tm id="tm27"/>
+                        �t� 
+			<tm id="tm28"/>
+                        est 
+			<tm id="tm29"/>
+                        tr�s
+			<tm id="tm30"/>
+                        courte 
+			<tm id="tm31"/>
+                        mais 
+			<tm id="tm32"/>                        
+                        tr�s 
+                        <tm id="tm33"/>        
+                        intense.
+                        <tm id="tm34"/>
+			
+			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm3" end="s1:tm4" importance="1"/>
+			<boundary type="LL" id="b1" start="s1:tm5" end="s1:tm5+0.5"/>
+		</speech>
+	</bml>
+
+

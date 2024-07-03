@@ -125,6 +125,9 @@ def main():
         src_data = src_data.decode('UTF-8')
         print(src_data)
         
+        if src_data == 'kill':
+            break
+        
         src_sentence = src_data
     
         print(src_sentence)
@@ -143,6 +146,10 @@ def main():
         result = result.encode('UTF-8')
         
         client.send(result)
+        client.close()
+    
+    server.close()
+    print('Meaning Miner server killed.')
 
 def translate_lemma_to_french(src_lemma_list, src_pos_list):
     

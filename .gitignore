@@ -17,8 +17,7 @@
 /bin/Player/Lib/External/Win32/*.cfg
 /bin/Player/Lib/External/Win64/*.cfg
 
-/bin/output.wav
-/bin/output1.wav
-
 *.log
 /auxiliary/SpeechRecogniser
+bin/output.wav
+bin/output1.wav

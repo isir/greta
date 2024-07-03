@@ -34,7 +34,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import greta.core.intentions.Intention;
+//import greta.core.intentions.Intention;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -175,8 +175,8 @@ public class MeaningMinerFrame extends JFrame{
     }
 
     private void process() throws TransformerException, TransformerConfigurationException, ParserConfigurationException, SAXException, IOException{
-        //this.module.processText(area.getText());
-        List<Intention> intentions = this.module.processText_2(area.getText());
+        this.module.processText(area.getText());
+        //List<Intention> intentions = this.module.processText_2(area.getText());
     }
 
 }

@@ -28,6 +28,7 @@
                 <item module="FML Annotator" name="FML Annotator"/>
                 <menu name="Meaning Miner">
                     <item module="Image Schema Extractor" name="Image Schema Extractor"/>
+                    <item module="FML File Reader Meaning Miner" name="MM FML File Reader"/>
                 </menu>
                 <item module="Watson" name="IBM Watson"/>
                 <menu name="OpenFace">
@@ -50,7 +51,7 @@
                 <item module="Behavior Planner" name="Behavior Planner"/>
                 <item module="Intention Queue" name="Intention Queue"/>
                 <item module="Subject Planner" name="Subject Planner"/>
-				<menu name="MultiLayer Attitude Planner">
+            <menu name="MultiLayer Attitude Planner">
                 <item module="MultiLayerSequencePlanner" name="MultiLayer Attitude Planner"/>
                 <item module="AttitudeSetter" name=" Attitude Setter"/>
                 </menu>
@@ -271,7 +272,14 @@
             </frame>
             <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
         </module>
-		<module name="Watson" style="Intentions">
+        <module name="FML File Reader Meaning Miner" style="Intentions">
+            <object class="greta.auxiliary.MeaningMiner.FMLFileReader_MeaningMiner" lib_id="greta_meaning_miner"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="Watson" style="Intentions">
             <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
             <frame class="greta.core.utilx.gui.Watson" lib_id="greta_utilx" type="frame">
                 <link method="setLoader" on="frame"/>
@@ -366,12 +374,6 @@
                 <link method="UpdateLexicon" on="frame"/>
             </frame>
         </module>
-        <!--<module name="MultiLayerSequencePlanner" style="BehaviorPlanner">
-            <object class="greta.auxiliary.multilayerattitudeplanner.SequencePlanner" lib_id="greta_multilayer_attitude_planner"/>
-            <frame type="frame" class="greta.auxiliary.multilayerattitudeplanner.SequenceSenderFrame" lib_id="greta_multilayer_attitude_planner">
-                <link method="setPlanner" on="frame"/>
-            </frame>
-        </module>-->
         <module name="ActiveMQ SSI Translator" style="DEFAULT">
             <object class="greta.auxiliary.ssi.SSIXMLToFrameTranslator" lib_id="greta_ssi"/>
             <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
@@ -842,7 +844,7 @@
             <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
             <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
         </module>
-		<module name="MultiLayerSequencePlanner" style="BehaviorPlanner">
+	<module name="MultiLayerSequencePlanner" style="BehaviorPlanner">
             <object class="greta.auxiliary.multilayerattitudeplanner.SequencePlanner" lib_id="multilayer_attitude_planner"/>
         </module>
         <module name="AttitudeSetter" style="DEFAULT">

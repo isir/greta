@@ -5,8 +5,10 @@
  */
 package greta.auxiliary.player.ogre.agent;
 
-import greta.furhat.activemq.TextSender;
-import greta.furhat.activemq.WhiteBoard;
+//import greta.furhat.activemq.TextSender;
+//import greta.furhat.activemq.WhiteBoard;
+import greta.auxiliary.activemq.TextSender;
+import greta.auxiliary.activemq.WhiteBoard;
 
 import java.util.ArrayList;
 import java.util.HashMap;

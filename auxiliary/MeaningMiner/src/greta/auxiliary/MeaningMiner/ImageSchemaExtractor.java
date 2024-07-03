@@ -582,156 +582,6 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         }
 
     }
-
-    //Insert a new xml imageschema in the XML tree. This object will be completed later or even deleted if no Image Schema could be put there.
-    private XMLTree createXMLImageSchema(XMLTree fmlRoot, int countImageSchema, int countTimeMarker) {
-        XMLTree imageschema = fmlRoot.createChild("imageschema");
-        imageschema.setAttribute("importance", "1.0");
-        imageschema.setAttribute("id", "im_" + countImageSchema);
-        imageschema.setAttribute("start", "s1:tm" + (countTimeMarker) + "-0.2");
-
-        return imageschema;
-    }
-
-    //Set the Image Schema to this xml imageschema. It checks if this was the root of the sentence to decide if it should be the main of the current ideational unit.
-    private void setImageSchemaType(XMLTree imageschema, String imageRef, String pos, XMLTree ideationalUnit, List<TypedDependency> tdl, Integer indexWord) {
-
-        imageschema.setAttribute("type", imageRef);
-        imageschema.setAttribute("indexword", indexWord.toString());
-        imageschema.setAttribute("POSroot", pos);
-
-        for (TypedDependency td : tdl) {
-            if (td.dep().index() == indexWord) {
-                if (td.reln().toString().equals("root")) {
-                    ideationalUnit.setAttribute("main", imageschema.getAttribute("id"));
-                }
-                break;
-            }
-        }
-    }
-
-    //Return the Image Schemas that can be found for this Synset (meaning).
-    //This is a recursive function that starts at the synset of the word,
-    //looks for Image Schemas and then continue up the tree by following the hypernyms (more global meaning) of the current set
-    private Set<String> getImageSchemas(ISynset synset, int depth) {
-
-        Set<String> toReturn = new HashSet<>();
-        switch (synset.getPOS()) {
-            case NOUN:
-                if (dictSynsetToImageSchema.getImageSchemasForNoun(synset.getID().toString()) != null) {
-                    toReturn.addAll(dictSynsetToImageSchema.getImageSchemasForNoun(synset.getID().toString()));
-                }
-                break;
-            case VERB:
-                if (dictSynsetToImageSchema.getImageSchemasForVerb(synset.getID().toString()) != null) {
-                    toReturn.addAll(dictSynsetToImageSchema.getImageSchemasForVerb(synset.getID().toString()));
-                }
-                break;
-            case ADJECTIVE:
-                if (dictSynsetToImageSchema.getImageSchemasForAdjective(synset.getID().toString()) != null) {
-                    toReturn.addAll(dictSynsetToImageSchema.getImageSchemasForAdjective(synset.getID().toString()));
-                }
-                break;
-            case ADVERB:
-                if (dictSynsetToImageSchema.getImageSchemasForAdverb(synset.getID().toString()) != null) {
-                    toReturn.addAll(dictSynsetToImageSchema.getImageSchemasForAdverb(synset.getID().toString()));
-                }
-                break;
-            default:
-                break;
-        }
-        List<ISynsetID> relatedSynset = synset.getRelatedSynsets(Pointer.HYPERNYM);
-        //FOR NOW WE STOP AS SOON AS WE FIND ONE IMAGE SCHEMA. If I remove the toReturn.size()>0,
-        //we will continue as long as there is an hypernym to this synset
-        if (relatedSynset.isEmpty() || depth <= 0 || toReturn.size() > 0) {
-            return toReturn;
-        } else {
-            ISynset next = dict.getSynset(relatedSynset.get(0));
-            toReturn.addAll(getImageSchemas(next, depth - 1));
-            return toReturn;
-        }
-    }
-
-    //Perform the simplified Lesk algorithm for Word disambiguation.
-    //It looks up in the WordNet dictionnary the glossary of each meaning for the word.
-    //The meaning that has more word in common with the current context is the selected meaning
-    public ISynset simplifiedLesk(IIndexWord idxWord, String context) {
-        if (idxWord != null && idxWord.getWordIDs().size() > 0 && context != null) {
-            ISynset bestSense = dict.getWord(idxWord.getWordIDs().get(0)).getSynset();
-            int maxOverlap = 0;
-            String[] contextArray = context.split(" ");
-            for (IWordID otherSense : idxWord.getWordIDs()) {
-                IWord word = dict.getWord(otherSense);
-                String[] glossArray = word.getSynset().getGloss().split(" ");
-                int overlap = 0;
-                for (String cont : contextArray) {
-                    if (cont.length() < 4) {
-                        continue;
-                    }
-                    for (String glos : glossArray) {
-                        if (glos.length() < 4) {
-                            continue;
-                        }
-                        if (cont.toLowerCase().equals(glos.toLowerCase())) {
-                            overlap++;
-                        }
-                    }
-                }
-                if (overlap > maxOverlap) {
-                    maxOverlap = overlap;
-                    bestSense = word.getSynset();
-                }
-            }
-            return bestSense;
-        }
-        return null;
-    }
-
-    private boolean isWithinPitchAccent(List<int[]> listPitchAccent, int indexWord) {
-
-        for (int[] pa : listPitchAccent) {
-            if (indexWord >= pa[0] && indexWord <= pa[1]) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public void addIntentionPerformer(IntentionPerformer ip) {
-        intentionsPerformers.add(ip);
-    }
-
-    @Override
-    public void removeIntentionPerformer(IntentionPerformer ip) {
-        intentionsPerformers.remove(ip);
-    }
-
-    @Override
-    public void onCharacterChanged() {
-
-    }
-
-    /**
-     * @return the characterManager
-     */
-    @Override
-    public CharacterManager getCharacterManager() {
-        if(charactermanager==null)
-            charactermanager = CharacterManager.getStaticInstance();
-        return charactermanager;
-    }
-
-    /**
-     * @param characterManager the characterManager to set
-     */
-    @Override
-    public void setCharacterManager(CharacterManager characterManager) {
-        if(this.charactermanager!=null)
-            this.charactermanager.remove(this);
-        this.charactermanager = characterManager;
-        //characterManager.add(this);
-    }
     
     /**
      * Call from greta.core.intentions.FMLFileReader
@@ -744,10 +594,10 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
      * @throws SAXException
      * @throws IOException 
      */
+    @Override
     public List<Intention> processText_2(String input) throws TransformerConfigurationException, TransformerException, ParserConfigurationException, SAXException, IOException {
         
         System.out.println("ImageSchema: processText2: start");
-
         
         //System.out.println(input);
         XMLParser xmlParser = XML.createParser();
@@ -777,25 +627,19 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         int countSentenceMarkers = 1;
         int countIdeationalUnit = 0;
         int countImageSchema = 0;
-
-        //prepare the reader for our value
         
-        
-        System.out.println("STRING INPUT:"+tagFreeInput);
-        
+        //System.out.println("CHECK TEXT");
         String fix= new String();
-                    System.out.println("CHECK TEXT");
-                    BufferedReader rea = new BufferedReader(new StringReader(tagFreeInput));
-
-                    String line1;
-
-                    while ((line1 = rea.readLine()) != null) {
-                        if(!line1.contains("tmp") && line1.trim().length()>0)
-                            fix=fix+" "+line1.trim()+"\n";
-                        
-                    }
+        BufferedReader rea = new BufferedReader(new StringReader(tagFreeInput));
+        String line1;
+        while ((line1 = rea.readLine()) != null) {
+            if(!line1.contains("tmp") && line1.trim().length()>0)
+                fix = fix + " " + line1.trim() + "\n";
+        }
         fix=fix.substring(0, fix.length()-1);
-        System.out.println("[FIX]:"+fix);
+        System.out.println("[TAG FREE TEXT]:");
+        System.out.println(fix);
+        
         StringReader sr = new StringReader(fix);
 
         //*********   FIRST WE START BY AUGMENTING THE TEXT ***************
@@ -909,7 +753,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             
             //retrieve the BIO (begin inside out) tags for the chunks
             String chunktag[] = chunker.chunk(listToken, listPos);
-            XMLTree previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers);
+            XMLTree previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers);
 
             System.out.println("countSentenceMarkers: " + countSentenceMarkers);
             System.out.println("Sentence:" + sentence.toString());
@@ -1129,7 +973,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                     if(lang == "fr"){
                         
                         chunk_tag_i = chunk_tag_array[i];
-                        cl_index = 0;
+                        cl_index = i;
                         
                     }
                     else{
@@ -1144,13 +988,13 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                         if (previousImageSchema != null) {
                             if (previousImageSchema.getAttribute("type") == "") {
                                 fmlRoot.removeChild(previousImageSchema);
-                                previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                                previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
 
                             } else {
                                 if (!imageSchemas.isEmpty()) {
-                                    previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
+                                    previousImageSchema.setAttribute("end", "s1:tm" + (countTimeMarkers + cl_index) + "-0.2");
                                     imageSchemasGenerated.add(previousImageSchema);
-                                    previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                                    previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
 
                                 } else {
                                     //This is used so the Image Schema coming from a previous chunk can span unto the next chunk until there is a new Image Schema.
@@ -1158,7 +1002,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                 }
                             }
                         } else {
-                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
 
                         }
                         //If an Image Schema is identified for this word, I insert it
@@ -1173,13 +1017,13 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                     //has been created for the whole chunk during the B case, OR create a new one in case of multiple instance of a noun in a NP or verb in a VP
                     if (chunk_tag_i.startsWith("I")) {
                         if (previousImageSchema == null) {
-                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
                             //Check if the Image Schema was coming from a previous chunk
                         } else if (previousImageSchema.getAttribute("previous") == "true" && !imageSchemas.isEmpty()) {
 
-                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
+                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index) + "-0.2");
                             imageSchemasGenerated.add(previousImageSchema);
-                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers +cl_index - 1);
+                            previousImageSchema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
 
                         }
                         if (!imageSchemas.isEmpty()) {
@@ -1199,7 +1043,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                                 previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                                 imageSchemasGenerated.add(previousImageSchema);
                                             }
-                                            XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                                            XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
                                             setImageSchemaType(imageschema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
                                             previousImageSchema = imageschema;
                                         }
@@ -1221,7 +1065,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                                 previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                                 imageSchemasGenerated.add(previousImageSchema);
                                             }
-                                            XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                                            XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
                                             setImageSchemaType(imageschema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
                                             previousImageSchema = imageschema;
                                         }
@@ -1240,7 +1084,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                             previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                             imageSchemasGenerated.add(previousImageSchema);
                                         }
-                                        XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countSentenceMarkers + cl_index);
+                                        XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
                                         setImageSchemaType(imageschema, imageSchemas.iterator().next().toLowerCase(), pos.toString(), ideationalUnit, tdl, cl_index);
                                         previousImageSchema = imageschema;
                                     }
@@ -1294,64 +1138,8 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
 
         }
 
-        
-                try{
-                    String file= new String();
-                    System.out.println("CHECK TEXT");
-                    BufferedReader reader = new BufferedReader(new StringReader(fmlApmlRoot.toString()));
-
-                    String line;
-
-                    int counter=0;
-                    int counter1=1;
-                    while ((line = reader.readLine()) != null) {
-                        line=line.trim();
-                        if(line.length()==3 || line.contains("importance") || line.contains("imageschema") || line.contains("speech")){
-                            file=file+(line+" "+reader.readLine().trim())+"\n";
-                            //System.out.println("LINE:"+line+" "+reader.readLine().trim());
-                        }else{
-                            if(line.trim().contains("<fml-apml>")){
-                                if(counter==0){
-                                    file=file+line+"\n";
-                                    counter=counter+1;
-                                }
-                            }
-                            else{
-                             if(!line.trim().contains("</fml-apml>") && !line.contains("<fml/>"))
-                                file=file+line+"\n";
-                             
-                    }
-                    }
-                    }
-                    
-                    System.out.println("STRING:\n"+file );
-                    
-                String fmlApmlRoot_v1=file+"</fml-apml>".replace("s1:tm0","s1:tm1");
-                //fmlApmlRoot_v1= fmlApmlRoot_v1.replace("</bml>","\n</bml>\n<fml>").replace("?>", "?>\n<fml-apml>").replace(":tm0",":tm1")+"\n</fml-apml>";
-                System.out.println("CHECK STRING 2");
-                System.out.println(fmlApmlRoot_v1);
-                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-                Document document = docBuilder.parse(new InputSource(new StringReader(fmlApmlRoot_v1)));
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(document);
-                FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\fml_output_mm.xml"));
-                StreamResult result = new StreamResult(writer);
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                transformer.transform(source, result);
-                } catch (ParserConfigurationException ex) {
-                    Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (SAXException ex) {
-                    Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (TransformerConfigurationException ex) {
-                    Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (TransformerException ex) {
-                    Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-                }
-        
+        System.out.println("CHECK TEXT");
+        printXML(fmlApmlRoot.toString());
 
         //TO INTENTIONS
         List<Intention> intentions = FMLTranslator.FMLToIntentions(fmlApmlRoot, charactermanager);
@@ -1360,5 +1148,216 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             ip.performIntentions(intentions, IDProvider.createID("MeaningMiner"), new Mode(CompositionType.blend));
         }
         return intentions;
+    }
+
+    //Insert a new xml imageschema in the XML tree. This object will be completed later or even deleted if no Image Schema could be put there.
+    private XMLTree createXMLImageSchema(XMLTree fmlRoot, int countImageSchema, int countTimeMarker) {
+        XMLTree imageschema = fmlRoot.createChild("imageschema");
+        imageschema.setAttribute("importance", "1.0");
+        imageschema.setAttribute("id", "im_" + countImageSchema);
+        imageschema.setAttribute("start", "s1:tm" + (countTimeMarker) + "-0.2");
+
+        return imageschema;
+    }
+
+    //Set the Image Schema to this xml imageschema. It checks if this was the root of the sentence to decide if it should be the main of the current ideational unit.
+    private void setImageSchemaType(XMLTree imageschema, String imageRef, String pos, XMLTree ideationalUnit, List<TypedDependency> tdl, Integer indexWord) {
+
+        imageschema.setAttribute("type", imageRef);
+        imageschema.setAttribute("indexword", indexWord.toString());
+        imageschema.setAttribute("POSroot", pos);
+
+        for (TypedDependency td : tdl) {
+            if (td.dep().index() == indexWord) {
+                if (td.reln().toString().equals("root")) {
+                    ideationalUnit.setAttribute("main", imageschema.getAttribute("id"));
+                }
+                break;
+            }
+        }
+    }
+
+    //Return the Image Schemas that can be found for this Synset (meaning).
+    //This is a recursive function that starts at the synset of the word,
+    //looks for Image Schemas and then continue up the tree by following the hypernyms (more global meaning) of the current set
+    private Set<String> getImageSchemas(ISynset synset, int depth) {
+
+        Set<String> toReturn = new HashSet<>();
+        switch (synset.getPOS()) {
+            case NOUN:
+                if (dictSynsetToImageSchema.getImageSchemasForNoun(synset.getID().toString()) != null) {
+                    toReturn.addAll(dictSynsetToImageSchema.getImageSchemasForNoun(synset.getID().toString()));
+                }
+                break;
+            case VERB:
+                if (dictSynsetToImageSchema.getImageSchemasForVerb(synset.getID().toString()) != null) {
+                    toReturn.addAll(dictSynsetToImageSchema.getImageSchemasForVerb(synset.getID().toString()));
+                }
+                break;
+            case ADJECTIVE:
+                if (dictSynsetToImageSchema.getImageSchemasForAdjective(synset.getID().toString()) != null) {
+                    toReturn.addAll(dictSynsetToImageSchema.getImageSchemasForAdjective(synset.getID().toString()));
+                }
+                break;
+            case ADVERB:
+                if (dictSynsetToImageSchema.getImageSchemasForAdverb(synset.getID().toString()) != null) {
+                    toReturn.addAll(dictSynsetToImageSchema.getImageSchemasForAdverb(synset.getID().toString()));
+                }
+                break;
+            default:
+                break;
+        }
+        List<ISynsetID> relatedSynset = synset.getRelatedSynsets(Pointer.HYPERNYM);
+        //FOR NOW WE STOP AS SOON AS WE FIND ONE IMAGE SCHEMA. If I remove the toReturn.size()>0,
+        //we will continue as long as there is an hypernym to this synset
+        if (relatedSynset.isEmpty() || depth <= 0 || toReturn.size() > 0) {
+            return toReturn;
+        } else {
+            ISynset next = dict.getSynset(relatedSynset.get(0));
+            toReturn.addAll(getImageSchemas(next, depth - 1));
+            return toReturn;
+        }
+    }
+
+    //Perform the simplified Lesk algorithm for Word disambiguation.
+    //It looks up in the WordNet dictionnary the glossary of each meaning for the word.
+    //The meaning that has more word in common with the current context is the selected meaning
+    public ISynset simplifiedLesk(IIndexWord idxWord, String context) {
+        if (idxWord != null && idxWord.getWordIDs().size() > 0 && context != null) {
+            ISynset bestSense = dict.getWord(idxWord.getWordIDs().get(0)).getSynset();
+            int maxOverlap = 0;
+            String[] contextArray = context.split(" ");
+            for (IWordID otherSense : idxWord.getWordIDs()) {
+                IWord word = dict.getWord(otherSense);
+                String[] glossArray = word.getSynset().getGloss().split(" ");
+                int overlap = 0;
+                for (String cont : contextArray) {
+                    if (cont.length() < 4) {
+                        continue;
+                    }
+                    for (String glos : glossArray) {
+                        if (glos.length() < 4) {
+                            continue;
+                        }
+                        if (cont.toLowerCase().equals(glos.toLowerCase())) {
+                            overlap++;
+                        }
+                    }
+                }
+                if (overlap > maxOverlap) {
+                    maxOverlap = overlap;
+                    bestSense = word.getSynset();
+                }
+            }
+            return bestSense;
+        }
+        return null;
+    }
+
+    private boolean isWithinPitchAccent(List<int[]> listPitchAccent, int indexWord) {
+
+        for (int[] pa : listPitchAccent) {
+            if (indexWord >= pa[0] && indexWord <= pa[1]) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void addIntentionPerformer(IntentionPerformer ip) {
+        intentionsPerformers.add(ip);
+    }
+
+    @Override
+    public void removeIntentionPerformer(IntentionPerformer ip) {
+        intentionsPerformers.remove(ip);
+    }
+
+    @Override
+    public void onCharacterChanged() {
+
+    }
+
+    /**
+     * @return the characterManager
+     */
+    @Override
+    public CharacterManager getCharacterManager() {
+        if(charactermanager==null)
+            charactermanager = CharacterManager.getStaticInstance();
+        return charactermanager;
+    }
+
+    /**
+     * @param characterManager the characterManager to set
+     */
+    @Override
+    public void setCharacterManager(CharacterManager characterManager) {
+        if(this.charactermanager!=null)
+            this.charactermanager.remove(this);
+        this.charactermanager = characterManager;
+        //characterManager.add(this);
+    }
+    
+    public void printXML(String fmlApmlRoot){
+        
+        try{
+            String file= new String();
+            BufferedReader reader = new BufferedReader(new StringReader(fmlApmlRoot.toString()));
+
+            String line;
+
+            int counter=0;
+            int counter1=1;
+            while ((line = reader.readLine()) != null) {
+                line=line.trim();
+                if(line.length()==3 || line.contains("importance") || line.contains("imageschema") || line.contains("speech")){
+                    file=file+(line+" "+reader.readLine().trim())+"\n";
+                    //System.out.println("LINE:"+line+" "+reader.readLine().trim());
+                }else{
+                    if(line.trim().contains("<fml-apml>")){
+                        if(counter==0){
+                            file=file+line+"\n";
+                            counter=counter+1;
+                        }
+                    }
+                    else{
+                     if(!line.trim().contains("</fml-apml>") && !line.contains("<fml/>"))
+                        file=file+line+"\n";
+
+                    }
+                }
+            }
+
+            System.out.println("STRING:\n"+file );
+
+            String fmlApmlRoot_v1=file+"</fml-apml>".replace("s1:tm0","s1:tm1");
+            //fmlApmlRoot_v1= fmlApmlRoot_v1.replace("</bml>","\n</bml>\n<fml>").replace("?>", "?>\n<fml-apml>").replace(":tm0",":tm1")+"\n</fml-apml>";
+            //System.out.println("CHECK STRING 2");
+            //System.out.println(fmlApmlRoot_v1);
+            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+            Document document = docBuilder.parse(new InputSource(new StringReader(fmlApmlRoot_v1)));
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+            FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\fml_output_mm.xml"));
+            StreamResult result = new StreamResult(writer);
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(source, result);
+
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SAXException ex) {
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerConfigurationException ex) {
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (TransformerException ex) {
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
 }

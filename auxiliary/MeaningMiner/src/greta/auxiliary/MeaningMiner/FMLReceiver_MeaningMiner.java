@@ -247,7 +247,6 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
 
         HashMap<String, String> wordandTimeMarker = new HashMap<String, String>();
 
-
         int numWords = 0;
         if (speech != null){
             for (Object word : speech.getSpeechElements()){

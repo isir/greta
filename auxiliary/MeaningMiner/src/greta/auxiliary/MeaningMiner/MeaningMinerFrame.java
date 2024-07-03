@@ -34,6 +34,15 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
+import greta.core.intentions.Intention;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.TransformerConfigurationException;
+import javax.xml.transform.TransformerException;
+import org.xml.sax.SAXException;
+
 /**
  *
  * @author Brian
@@ -92,7 +101,17 @@ public class MeaningMinerFrame extends JFrame{
         sendButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                process();
+                try {
+                    process();
+                } catch (TransformerException ex) {
+                    Logger.getLogger(MeaningMinerFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParserConfigurationException ex) {
+                    Logger.getLogger(MeaningMinerFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SAXException ex) {
+                    Logger.getLogger(MeaningMinerFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (IOException ex) {
+                    Logger.getLogger(MeaningMinerFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
 
@@ -155,8 +174,9 @@ public class MeaningMinerFrame extends JFrame{
         this.module = mmm;
     }
 
-    private void process(){
-        this.module.processText(area.getText());
+    private void process() throws TransformerException, TransformerConfigurationException, ParserConfigurationException, SAXException, IOException{
+        //this.module.processText(area.getText());
+        List<Intention> intentions = this.module.processText_2(area.getText());
     }
 
 }

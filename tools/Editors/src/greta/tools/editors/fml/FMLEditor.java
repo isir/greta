@@ -72,7 +72,7 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
     private FMLFileReader fmlFileReader;
     private CharacterManager cm;
 
-    public FMLEditor(CharacterManager cm) {
+    public FMLEditor(CharacterManager cm) throws InterruptedException {
         this.cm = cm;
 
         performers = new ArrayList<IntentionPerformer>();
@@ -207,7 +207,7 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

@@ -930,8 +930,88 @@ is divided into following sections:
         </propertyfile>
         <antcall target="-maybe-call-dep">
             <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.ASAP}" name="call.subproject"/>
+            <param location="${project.ASAP}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.EnvironmentManager}" name="call.subproject"/>
+            <param location="${project.EnvironmentManager}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.FMLAnnotator}" name="call.subproject"/>
+            <param location="${project.FMLAnnotator}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.GroupBehavior}" name="call.subproject"/>
+            <param location="${project.GroupBehavior}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.LipModel}" name="call.subproject"/>
+            <param location="${project.LipModel}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.ListenerIntentPlanner}" name="call.subproject"/>
+            <param location="${project.ListenerIntentPlanner}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.MaryTTS}" name="call.subproject"/>
+            <param location="${project.MaryTTS}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
             <param location="${project.OSC}" name="call.subproject"/>
             <param location="${project.OSC}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.OpenFaceFix}" name="call.subproject"/>
+            <param location="${project.OpenFaceFix}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.SpeechRecognizer}" name="call.subproject"/>
+            <param location="${project.SpeechRecognizer}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.Thrift}" name="call.subproject"/>
+            <param location="${project.Thrift}/build.xml" name="call.script"/>
             <param name="call.target" value="jar"/>
             <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>
@@ -948,6 +1028,22 @@ is divided into following sections:
             <param name="call.built.properties" value="${built-jar.properties}"/>
             <param location="${project.Utilx}" name="call.subproject"/>
             <param location="${project.Utilx}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.Voxygen}" name="call.subproject"/>
+            <param location="${project.Voxygen}/build.xml" name="call.script"/>
+            <param name="call.target" value="jar"/>
+            <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-jar.properties}"/>
+            <param location="${project.ircamAlign}" name="call.subproject"/>
+            <param location="${project.ircamAlign}/build.xml" name="call.script"/>
             <param name="call.target" value="jar"/>
             <param name="transfer.built-jar.properties" value="${built-jar.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>
@@ -1439,8 +1535,88 @@ is divided into following sections:
         </propertyfile>
         <antcall target="-maybe-call-dep">
             <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.ASAP}" name="call.subproject"/>
+            <param location="${project.ASAP}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.EnvironmentManager}" name="call.subproject"/>
+            <param location="${project.EnvironmentManager}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.FMLAnnotator}" name="call.subproject"/>
+            <param location="${project.FMLAnnotator}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.GroupBehavior}" name="call.subproject"/>
+            <param location="${project.GroupBehavior}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.LipModel}" name="call.subproject"/>
+            <param location="${project.LipModel}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.ListenerIntentPlanner}" name="call.subproject"/>
+            <param location="${project.ListenerIntentPlanner}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.MaryTTS}" name="call.subproject"/>
+            <param location="${project.MaryTTS}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
             <param location="${project.OSC}" name="call.subproject"/>
             <param location="${project.OSC}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.OpenFaceFix}" name="call.subproject"/>
+            <param location="${project.OpenFaceFix}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.SpeechRecognizer}" name="call.subproject"/>
+            <param location="${project.SpeechRecognizer}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.Thrift}" name="call.subproject"/>
+            <param location="${project.Thrift}/build.xml" name="call.script"/>
             <param name="call.target" value="clean"/>
             <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>
@@ -1457,6 +1633,22 @@ is divided into following sections:
             <param name="call.built.properties" value="${built-clean.properties}"/>
             <param location="${project.Utilx}" name="call.subproject"/>
             <param location="${project.Utilx}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.Voxygen}" name="call.subproject"/>
+            <param location="${project.Voxygen}/build.xml" name="call.script"/>
+            <param name="call.target" value="clean"/>
+            <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
+            <param name="transfer.not.archive.disabled" value="true"/>
+        </antcall>
+        <antcall target="-maybe-call-dep">
+            <param name="call.built.properties" value="${built-clean.properties}"/>
+            <param location="${project.ircamAlign}" name="call.subproject"/>
+            <param location="${project.ircamAlign}/build.xml" name="call.script"/>
             <param name="call.target" value="clean"/>
             <param name="transfer.built-clean.properties" value="${built-clean.properties}"/>
             <param name="transfer.not.archive.disabled" value="true"/>

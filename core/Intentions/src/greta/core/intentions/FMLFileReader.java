@@ -96,6 +96,7 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         this.cm = cm;
         this.cm.setTouch_computed(false);
         
+        /**
         System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner, installing python environment...");
         try{
             server_process = new ProcessBuilder(MM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
@@ -103,14 +104,18 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
             Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
         }
         server_process.waitFor();
+        **/
 
         System.out.println("greta.core.intentions.FMLFileReader: initializing MeaningMiner python env");
         try {
-            server_process = new ProcessBuilder(MM_parse_server_path).redirectErrorStream(true).start();
+            server_process = new ProcessBuilder(MM_parse_server_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
             //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
         } catch (IOException ex) {
             Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner python env initialization signal sent");
+        
+        /**
         InputStream inputStream = server_process.getInputStream();
         String result = new BufferedReader(
                 new InputStreamReader(inputStream, StandardCharsets.UTF_8))
@@ -131,6 +136,7 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         else{
             System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner server is now ready.");
         }
+        * **/
         
     }
 

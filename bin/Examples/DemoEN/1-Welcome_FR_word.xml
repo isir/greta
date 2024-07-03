@@ -1,7 +1,9 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml>
 	<bml>
 		<speech id="s1" start="0.0" language="english" voice="marytts" type="SAPI4" text="">
-<description level="1" type="gretabml"><reference>tmp/from-fml-apml.pho</reference></description>
 			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
 			</description>
 				
 			<tm id="tm1"/>
@@ -37,37 +39,37 @@
 			<tm id="tm16"/>
                         Greta.
 			<tm id="tm17"/>
-                                Rï¿½cemment, 
+                                Récemment, 
 			<tm id="tm18"/>
                         la 
 			<tm id="tm19"/>
-                        tempï¿½rature 
+                        température 
 			<tm id="tm20"/>
                         a 
 			<tm id="tm21"/>
                         beaucoup 
 			<tm id="tm22"/>
-                        augmentï¿½.
+                        augmenté.
 			<tm id="tm23"/>
                                 La 
 			<tm id="tm24"/>
-                        durï¿½e 
+                        durée 
 			<tm id="tm25"/>
                         de 
 			<tm id="tm26"/>
                         l'
 			<tm id="tm27"/>
-                        ï¿½tï¿½ 
+                        été 
 			<tm id="tm28"/>
                         est 
 			<tm id="tm29"/>
-                        trï¿½s
+                        très
 			<tm id="tm30"/>
                         courte 
 			<tm id="tm31"/>
                         mais 
 			<tm id="tm32"/>                        
-                        trï¿½s 
+                        très 
                         <tm id="tm33"/>        
                         intense.
                         <tm id="tm34"/>
@@ -76,5 +78,15 @@
 			<boundary type="LL" id="b1" start="s1:tm5" end="s1:tm5+0.5"/>
 		</speech>
 	</bml>
+	<fml>
+		<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0"/>-->
+		<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0" target="Andre_chair0" />-->
+		<!--<performative id="p1" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>-->
+		<beat id="b1" type="pos" start="0" end="s1:tm3" importance="1.0"/>
+		<!--<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>-->
+		<!--<performative id="p2" type="propose" start="s1:tm3" end="s1:tm5" importance="1.0"/>-->
+		<!--<rest id="rp1" type="restpose" start="0" end="s1:tm5" importance="1.0"/>-->
+	</fml>
+</fml-apml>
 
 

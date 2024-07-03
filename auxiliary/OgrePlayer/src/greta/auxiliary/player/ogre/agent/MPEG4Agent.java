@@ -17,7 +17,7 @@
  */
 package greta.auxiliary.player.ogre.agent;
 
-import greta.furhat.activemq.GretaFurhatTextSender;
+//import greta.furhat.activemq.GretaFurhatTextSender;
 import greta.auxiliary.player.ogre.Ogre;
 import greta.auxiliary.player.ogre.OgreThread;
 import greta.core.animation.mpeg4.MPEG4Animatable;
@@ -31,7 +31,7 @@ import vib.auxiliary.player.ogre.natives.Quaternion;
 import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Vector3;
 
-import greta.furhat.activemq.Broker;
+//import greta.furhat.activemq.Broker;
 /**
  *
  * @author Andre-Marie Pez
@@ -56,7 +56,7 @@ public abstract class MPEG4Agent extends Thread {
     
     // Create an instance of SocketServer
     private GretaFurhatTextSender server; // = new ActivemqGretaFurhatSender(61617);
-    private Broker broker;
+    //private Broker broker;
     private int frameNumber;
     // Start the server
     
@@ -69,10 +69,10 @@ public abstract class MPEG4Agent extends Thread {
         this.killed = false;
         this.setDaemon(true);
         
-        broker = new Broker("61616");
+        //broker = new Broker("61616");
         boolean use_default_host = false; // default broker host = 10.75.0.1
-        String server_url = (use_default_host)? broker.getHost(): "192.168.1.1"; // 192.168.1.1 new IP used to connect to my laptop
-        server = new GretaFurhatTextSender(server_url, broker.getPort(), "greta.furhat.Rotation");
+        //String server_url = (use_default_host)? broker.getHost(): "192.168.1.1"; // 192.168.1.1 new IP used to connect to my laptop
+        server = new GretaFurhatTextSender("localhost", "61616", "greta.furhat.Rotation");
         server.startConnection();
            
         // 
@@ -114,19 +114,15 @@ public abstract class MPEG4Agent extends Thread {
                 if (mpeg4 != null) {
                     FAPFrame ff = mpeg4.getCurrentFAPFrame();
                     BAPFrame bf = mpeg4.getCurrentBAPFrame();
-                    System.out.println("############### OgrePlayer ###################");
-                    System.out.println("current fap frame: "+ff);
-                    System.out.println("current bap frame: "+bf);
-                    System.out.println("active bap value: " + bf.getValue(57)+ " " + bf.getValue(58) + " " + bf.getValue(59));
-                    System.out.println("active bap Degree value: " + bf.getDegreeValue(57)+ " " + bf.getDegreeValue(58) + " " + bf.getDegreeValue(59));
+                    //System.out.println("### OgrePlayer ###: fap frame: " + ff + ", bap frame: " + bf + ", bap value: " + bf.getValue(57)+ " " + bf.getValue(58) + " " + bf.getValue(59) + ", bap Degree value: " + bf.getDegreeValue(57)+ " " + bf.getDegreeValue(58) + " " + bf.getDegreeValue(59));
                     
                     // Send and receive messages
                     String rotation = bf.getDegreeValue(59) + " " + bf.getDegreeValue(57)+ " " + bf.getDegreeValue(58);
                     frameNumber = bf.getFrameNumber();
-                    System.out.println("Rotation angle angle from Bap: "+ rotation);
+                    //System.out.println("### OgrePlayer ###: Rotation angle angle from Bap: "+ rotation);
                     
-                    System.out.println("broker Connection: "+broker.isConnected() + " url: " + broker.getURL());
-                    System.out.println("Connection: "+server.isConnected() + " url: " + server.getURL());
+                    //System.out.println("broker Connection: "+broker.isConnected() + " url: " + broker.getURL());
+                    //System.out.println("Connection: "+server.isConnected() + " url: " + server.getURL());
                     
                     
                     

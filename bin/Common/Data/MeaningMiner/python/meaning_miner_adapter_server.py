@@ -147,12 +147,19 @@ def main():
 def translate_lemma_to_french(src_lemma_list, src_pos_list):
     
     encoding = 'utf-8'
-    lemma_trans_dict_path = r'C:\Users\takes\Documents\Python_script\shared\lemma_trans_dict_fr2en.json'
+    lemma_trans_dict_path = r'lemma_trans_dict_en2fr.csv'    
+    lemma_trans_csv = load_csv(lemma_trans_dict_path)[1:]
     
-    lemma_trans_dict = {
-                        ('VERB', 'increase'): 'augmenter', 
-                        ('NOUN', 'left'): 'gauche'
-                        }
+    lemma_trans_dict = {}
+    for i in range(len(lemma_trans_csv)):
+        lemma_trans_dict[(lemma_trans_csv[i][1], lemma_trans_csv[i][2])] = lemma_trans_csv[i][3]
+    # pp.pprint(lemma_trans_dict)
+    # sys.exit()
+    
+    # lemma_trans_dict = {
+    #                     ('VERB', 'increase'): 'augmenter', 
+    #                     ('NOUN', 'left'): 'gauche'
+    #                     }
     
     for i in range(len(src_lemma_list)):
         if (src_pos_list[i], src_lemma_list[i]) in lemma_trans_dict.keys():
@@ -219,12 +226,13 @@ def xml2csv():
         writer = csv.writer(f)
         writer.writerows(out_list)
 
-def load_csv():
-    csv_path = r"C:\Users\takes\Documents\Python_script\shared\lemma_trans_dict_fr2en - lemma_trans_dict_fr2en.csv"
+def load_csv(path):
+    csv_path = path
     with open(csv_path, encoding = 'utf-8') as f:
         reader = csv.reader(f)
         data = [x for x in reader if x != ['', '', '']]
-    pp.pprint(data)
+    # pp.pprint(data)
+    return data
 
 def prepare_french_imageschema_dict():
     

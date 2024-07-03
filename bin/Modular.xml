@@ -1599,7 +1599,7 @@
         <lib id="ext_jackson-databind-2.15" path="./Common/Lib/External/jackson/jackson-databind-2.15.2.jar"/>
 	
 	<!-- Greta Furhat Interface library adding -->
-	<lib id="libGretaFurhatInterface" path="./../../dist/GretaFurhatInterface.jar">
+	<lib id="libGretaFurhatInterface" path="./Common/Lib/internal/GretaFurhatInterface.jar">
 		<depends lib_id="ext_jackson-annotations-2.15"/>
 		<depends lib_id="ext_jackson-core-2.15"/>
 		<depends lib_id="ext_jackson-databind-2.15"/>

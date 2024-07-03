@@ -21,3 +21,5 @@
 /auxiliary/SpeechRecogniser
 bin/output.wav
 bin/output1.wav
+/bin/Common/Lib/Internal
+bin/Modular.jar

@@ -453,7 +453,7 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
                         try {
                             String[] cmd = {
                                 "python","-u",
-                                System.getProperty("user.dir")+"\\gpt3.py ",server.getPort(),
+                                System.getProperty("user.dir")+"\\Common\\Data\\GPT3\\gpt3.py ",server.getPort(),
                             };
                             Runtime rt = Runtime.getRuntime();
                             System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);

@@ -224,7 +224,7 @@ public abstract class MPEG4Agent extends Thread {
         mpeg4.getHeadNode().setOrientation(orientation);
         String rotation = orientation.getEulerAngleXYZByAngle().x() + " " + orientation.getEulerAngleXYZByAngle().y()+ " " + orientation.getEulerAngleXYZByAngle().z() + " " + frameNumber;
         server.send(rotation);
-        System.out.println("orientation Euler angle: "+rotation+ " at frame: "+ frameNumber);
+        //System.out.println("orientation Euler angle: "+rotation+ " at frame: "+ frameNumber);
         
     }
 

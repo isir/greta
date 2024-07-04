@@ -23,3 +23,11 @@ bin/output.wav
 bin/output1.wav
 /bin/Common/Lib/Internal
 bin/Modular.jar
+bin/apache-activemq-5.15.14/data/kahadb/db.data
+bin/apache-activemq-5.15.14/data/kahadb/db.redo
+bin/apache-activemq-5.15.14/data/kahadb/lock
+bin/Common/Data/FMLAnnotator/Output/output.xml
+bin/fml_output.xml
+bin/test_fml.xml
+bin/Common/Data/FMLAnnotator/Output/output.xml
+bin/apache-activemq-5.15.14/data/kahadb/db.data

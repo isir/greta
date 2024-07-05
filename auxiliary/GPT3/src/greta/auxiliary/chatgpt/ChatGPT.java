@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greta.auxiliary.gpt3;
+package greta.auxiliary.chatgpt;
 
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCSerializeException;
 import com.illposed.osc.transport.udp.OSCPortOut;
 import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
-import greta.auxiliary.gpt3.GPT3Frame;
+import greta.auxiliary.chatgpt.ChatGPTFrame;
 import greta.core.intentions.FMLTranslator;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionEmitter;
@@ -55,20 +55,20 @@ import org.xml.sax.SAXException;
  *
  * @author Michele
  */
-public class GPT3 implements Runnable{
+public class ChatGPT implements Runnable{
     
-    protected GPT3Frame loader;
+    protected ChatGPTFrame loader;
 
     
     public CharacterManager cm;
     
    
     
-        public GPT3(CharacterManager cm) throws JMSException{
+        public ChatGPT(CharacterManager cm) throws JMSException{
             this.cm=cm;
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GPT3Frame(cm).setVisible(true);
+                new ChatGPTFrame(cm).setVisible(true);
  
     }
             });

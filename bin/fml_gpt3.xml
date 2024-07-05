@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>I'm
+<tm id="tm2"/>glad
+<tm id="tm3"/>I
+<tm id="tm4"/>could
+<tm id="tm5"/>help.
+<tm id="tm6"/>Let
+<tm id="tm7"/>me
+<tm id="tm8"/>know
+<tm id="tm9"/>if
+<tm id="tm10"/>you
+<tm id="tm11"/>have
+<tm id="tm12"/>any
+<tm id="tm13"/>more
+<tm id="tm14"/>questions.
+</speech>
+</bml>
+<fml>
+</fml>
+</fml-apml>

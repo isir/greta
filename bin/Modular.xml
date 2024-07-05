@@ -198,8 +198,13 @@
             </menu>
             <item module="Group Behavior" name="Group Behavior"/>
 			<item module="Speech Recognizer" name="Speech Recognizer"/>
-            <item module="FlipperLauncher" name="FlipperLauncher"/>
-            <item module="FlipperDemo" name="FlipperDemo"/>
+            <menu name="Dialogue">
+                <menu name="Flipper">
+                    <item module="FlipperLauncher" name="FlipperLauncher"/>
+                    <item module="FlipperDemo" name="FlipperDemo"/>
+                </menu>
+                <item module="ChatGPT" name="ChatGPT"/>
+            </menu>
         </menu>
     
     
@@ -453,7 +458,7 @@
             <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
         </module>
 		
-		<module name="NVBG_MM_Controller" style="DEFAULT">
+	<module name="NVBG_MM_Controller" style="DEFAULT">
             <!-- restrict="1"-->
             <object class="greta.core.utilx.gui.NVBG_MM_Controller" lib_id="greta_utilx"/>
         <frame type="object"/>
@@ -1107,14 +1112,19 @@
         </module>
         <module name="FlipperDemo">
             <object class="greta.FlipperDemo.main.FlipperLauncherMain" lib_id="greta_FlipperDemo"/>
-        <frame class="greta.FlipperDemo.main.FlipperDemoGUIFrame" lib_id="greta_FlipperDemo" type="frame">
+            <frame class="greta.FlipperDemo.main.FlipperDemoGUIFrame" lib_id="greta_FlipperDemo" type="frame">
                 <link method="setFlipperDemoMain" on="frame"/>
             </frame>
             <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
             <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
             <parameter default="greta.asr.response" get_method="getGretaASRTopic" get_on="object" name="gretaASRTopic" set_method="setGretaASRTopic" set_on="object" type="string"/>
             <parameter default="greta.input.FML" get_method="getGretaInputTopic" get_on="object" name="gretaInputTopic" set_method="setGretaInputTopic" set_on="object" type="string"/>
-        </module>	
+        </module>
+        <module name="ChatGPT">
+            <object class="greta.auxiliary.chatgpt.ChatGPT" lib_id="greta_ChatGPT"/>
+            <frame class="greta.auxiliary.chatgpt.ChatGPTFrame" lib_id="greta_ChatGPT" type="frame"/>
+        </module>
+            
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1483,6 +1493,7 @@
         <lib id="ext_junit4.1.2" path="Common/Lib/External/Flipper/junit-4.12.jar"/>
         <lib id="ext_javax_json1.1" path="Common/Lib/External/Flipper/javax.json-1.1.jar"/>
         <lib id="ext_javax.json-api-1.1" path="Common/Lib/External/Flipper/javax.json-api-1.1.jar"/>
+        <lib id="ext_javax.jms" path="Common/Lib/External/javax.jms.jar"/>
         <lib id="ext_posttresql42.1.1" path="Common/Lib/External/Flipper/postgresql-42.1.1.jar"/>
         <lib id="ext_slf4j1.7.25" path="Common/Lib/External/HMIFlipper/slf4j-api-1.7.25.jar"/>
         <lib id="ext_lobbackcore1.0.13" path="Common/Lib/External/HMIFlipper/logback-core-0.9.21.jar"/>
@@ -1540,13 +1551,23 @@
         <lib id="ext_jeromq" path="./Common/Lib/External/jeromq-0.5.1.jar"/>
 	
 	<!-- Greta Furhat Interface library adding -->
-	<lib id="libGretaFurhatInterface" path="./Common/Lib/internal/GretaFurhatInterface.jar">
+	<lib id="libGretaFurhatInterface" path="./Common/Lib/Internal/GretaFurhatInterface.jar">
 		<depends lib_id="ext_jackson-annotations-2.15"/>
 		<depends lib_id="ext_jackson-core-2.15"/>
 		<depends lib_id="ext_jackson-databind-2.15"/>
 		<depends lib_id="greta_util"/>
 		<depends lib_id="greta_activemq"/>
 	</lib>
+        
+        <lib id="greta_ChatGPT" path="./Common/Lib/Internal/ChatGPT.jar">
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_intentions"/>
+            <depnds lib_id="greta_signals"/>
+            <depnds lib_id="greta_meaningminer"/>
+            <depnds lib_id="ext_javax.jms"/>
+        </lib>
+        
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>

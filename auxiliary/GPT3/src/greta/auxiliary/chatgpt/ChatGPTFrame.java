@@ -406,7 +406,7 @@ public class ChatGPTFrame extends javax.swing.JFrame implements IntentionEmitter
                         python=false;
                     
                 } catch (IOException ex) {
-                    System.out.println("greta.auxiliary.gpt3.ChatGPTFrame.enableActionPerformed()");
+                    System.out.println("greta.auxiliary.chatgpt.ChatGPTFrame.enableActionPerformed()");
                     Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
                     python=false;
                 }
@@ -429,7 +429,7 @@ public class ChatGPTFrame extends javax.swing.JFrame implements IntentionEmitter
             
             if(python){
                 try{ 
-                    System.out.println("Opening python gpt3 script");
+                    System.out.println("Opening python ChatGPT script");
                     
                     server.startConnection();
                     Thread r1 = new Thread() {
@@ -511,7 +511,7 @@ public class ChatGPTFrame extends javax.swing.JFrame implements IntentionEmitter
                         
                     r1.start();
                     r2.start();
-                    System.out.println("greta.auxiliary.gpt3.ChatGPT:" + server.port + "   " + server.address);
+                    System.out.println("greta.auxiliary.chatgpt.ChatGPT:" + server.port + "   " + server.address);
                     
                     }
                     catch(Exception e)

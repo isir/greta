@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greta.auxiliary.gpt3;
+package greta.auxiliary.chatgpt;
 
 import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
 import greta.core.intentions.FMLTranslator;
@@ -59,10 +59,10 @@ import org.xml.sax.SAXException;
  *
  * @author miche
  */
-public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
+public class ChatGPTFrame extends javax.swing.JFrame implements IntentionEmitter{
 
     /**
-     * Creates new form GPT3Frame
+     * Creates new form ChatGPTFrame
      */
     
     private Server server;
@@ -90,7 +90,7 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
     
     public CharacterManager cm;
     
-    public GPT3Frame(CharacterManager cm) {
+    public ChatGPTFrame(CharacterManager cm) {
         initComponents();
         server = new Server();
         this.cm=cm;
@@ -111,7 +111,7 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
         System.out.println("greta.core.intentions.FMLFileReader.TextToFML()");
         String[] sp=text.split(" ");
         int i=1;
-         System.out.println("greta.auxiliary.gpt3.GPT3Frame.TextToFML() "+sp.length);
+         System.out.println("greta.auxiliary.gpt3.ChatGPTFrame.TextToFML() "+sp.length);
         for(int j=0;j<sp.length;j++){
             construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
                         i++;
@@ -385,7 +385,7 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
         
         if(enable.isSelected()){
             
-            System.out.println("GPT3 port:"+server.getPort());
+            System.out.println("ChatGPT port:"+server.getPort());
             server.setAddress(address.getText());
             server.setPort(port.getText());
             boolean python=true;
@@ -406,8 +406,8 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
                         python=false;
                     
                 } catch (IOException ex) {
-                    System.out.println("greta.auxiliary.gpt3.GPT3Frame.enableActionPerformed()");
-                    Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("greta.auxiliary.gpt3.ChatGPTFrame.enableActionPerformed()");
+                    Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
                     python=false;
                 }
                 }
@@ -418,7 +418,7 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
             
             
             if(python==false){
-                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the GPT3 module which is optional. "
+                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the ChatGPT module which is optional. "
                         + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
                 
   
@@ -440,7 +440,7 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
                                 System.out.println("Checking new connections");
                                 server.accept_new_connection();
                             } catch (IOException ex) {
-                                Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         
@@ -453,7 +453,7 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
                         try {
                             String[] cmd = {
                                 "python","-u",
-                                System.getProperty("user.dir")+"\\Common\\Data\\GPT3\\gpt3.py ",server.getPort(),
+                                System.getProperty("user.dir")+"\\Common\\Data\\ChatGPT\\ChatGPT.py ",server.getPort(),
                             };
                             Runtime rt = Runtime.getRuntime();
                             System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);
@@ -491,15 +491,15 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
                             while ((s = stdError.readLine()) != null) {
                                 System.out.println(s);
                             }   } catch (IOException ex) {
-                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (ParserConfigurationException ex) {
-                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (SAXException ex) {
-                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (TransformerException ex) {
-                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
                         } catch (JMSException ex) {
-                            Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
                         }
  } 
                         
@@ -511,7 +511,7 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
                         
                     r1.start();
                     r2.start();
-                    System.out.println("greta.auxiliary.gpt3.GPT3:" + server.port + "   " + server.address);
+                    System.out.println("greta.auxiliary.gpt3.ChatGPT:" + server.port + "   " + server.address);
                     
                     }
                     catch(Exception e)
@@ -534,7 +534,7 @@ public class GPT3Frame extends javax.swing.JFrame implements IntentionEmitter{
                         server.sendMessage(text);
                         System.out.println("Sent message:"+text);
                 } catch (IOException ex) {
-                    Logger.getLogger(GPT3Frame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(ChatGPTFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }

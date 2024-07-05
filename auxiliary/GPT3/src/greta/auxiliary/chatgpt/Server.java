@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greta.auxiliary.gpt3;
+package greta.auxiliary.chatgpt;
 
 /**
  *
@@ -110,6 +110,7 @@ public class Server {
     public String receiveMessage() throws IOException{
         
         String resp = in.readLine();
+        System.out.println(resp);
         return resp;
     }
 

@@ -1563,9 +1563,9 @@
             <depends lib_id="greta_osc"/>
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_intentions"/>
-            <depnds lib_id="greta_signals"/>
-            <depnds lib_id="greta_meaningminer"/>
-            <depnds lib_id="ext_javax.jms"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_meaning_miner"/>
+            <depends lib_id="ext_javax.jms"/>
         </lib>
         
     </libs>

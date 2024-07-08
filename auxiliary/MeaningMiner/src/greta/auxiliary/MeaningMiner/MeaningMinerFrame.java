@@ -165,7 +165,6 @@ public class MeaningMinerFrame extends JFrame{
         try {
             read();
         } catch (Exception e) {
-            // TODO
             e.printStackTrace();
         }
     }

@@ -71,6 +71,8 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
         this.cm = cm;
         this.cm.setTouch_computed(false);
         
+        // TODO: add environment check script to run env installer at the very first time
+        
         /**
         System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner, installing python environment...");
         try{

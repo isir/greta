@@ -328,10 +328,12 @@ public class FMLReceiver_MeaningMiner extends TextReceiver implements IntentionE
                 double offset_synchpnt = m.getReferences().get(0).getOffset();
 
                 String targetname = list_sypoint.get(0).getTargetName();
+                
                 // index of number in the string
                 int column = targetname.indexOf(":");// example s1:tm2
                 String nametm = targetname.substring(column + 1, targetname.length());
-                // TODO intentions have correct timemarkers
+                
+                // TODO: check intentions have correct timemarkers
                 String new_nametm = wordandTimeMarker.get(nametm);
                 m.removeReferences();
                 String newtm = targetname.substring(0,targetname.indexOf(":") + 1) + new_nametm;

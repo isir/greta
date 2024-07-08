@@ -280,6 +280,8 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
     
     public List<Intention> _processTextCore(String input, XMLParser xmlParser, XMLTree inputXML, List<int[]> listPitchAccent) throws IOException{
         
+        // TODO: add function to make sure time markers are in word-level, not sentence level.
+        
         //Get rid of the xml tags for text processing
         String tagFreeInput = inputXML.toString().replaceAll("<[^>]+>", "");
         List<XMLTree> imageSchemasGenerated = new ArrayList<>();

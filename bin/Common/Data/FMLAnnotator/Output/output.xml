@@ -4,16 +4,33 @@
     <speech id="s1" language="english" text="" type="SAPI4" voice="marytts">
       <description level="1" type="gretabml">
         <reference>tmp/from-fml-apml.pho</reference>
-      </description>
-      <boundary end="s1:tm1" id="b1" start="s1:tm0" type="LH"/>Hello, <tm id="tm1" value="2"/>
-      <pause duration_sym="short" id="p1" ref="2"/>How are <boundary end="s1:tm2" id="b2" start="s1:tm1" type="HH"/>you<tm id="tm2" value="0"/>
+      </description>The 'Manx Missile' took stage victory 25 <tm id="tm1" value="1"/>
+      <pause duration_sym="long" id="p1" ref="2"/>on a similarly flat route <tm id="tm2" value="1"/>
+      <pause duration_sym="long" id="p2" ref="3"/>but <tm id="tm3" value="1"/>on a day <tm id="tm4" value="1"/>when crosswinds lead <tm id="tm5" value="1"/>
+      <pause duration_sym="long" id="p3" ref="6"/>to the formation <tm id="tm6" value="1"/>
+      <pause duration_sym="long" id="p4" ref="7"/>of echelons <tm id="tm7" value="1"/>and he managed <tm id="tm8" value="1"/>
+      <pause duration_sym="long" id="p5" ref="9"/>to escape up the road <tm id="tm9" value="1"/>
+      <pause duration_sym="long" id="p6" ref="10"/>with the likes <tm id="tm10" value="1"/>of Alberto Contador <tm id="tm11" value="1"/>
+      <pause duration_sym="long" id="p7" ref="12"/>and Peter <boundary end="s1:tm12" id="b1" start="s1:tm11" type="LH"/>Sagan, <tm id="tm12" value="2"/>
+      <pause duration_sym="short" id="p8" ref="13"/>while <tm id="tm13" value="1"/>that year's overall <boundary end="s1:tm14" id="b2" start="s1:tm13" type="LH"/>champion, <tm id="tm14" value="2"/>
+      <pause duration_sym="short" id="p9" ref="15"/>Chris Froome tried <tm id="tm15" value="1"/>
+      <pause duration_sym="long" id="p10" ref="16"/>and <boundary end="s1:tm16" id="b3" start="s1:tm15" type="LL"/>failed<tm id="tm16" value="0"/>
     </speech>
   </bml>
   <fml>
-    <social end="s1:tm1" id="s1" start="s1:tm0" type="hello"/>
-    <turntaking end="s1:tm1" id="tt1" start="s1:tm0" type="salutation"/>
-    <backchannel end="s1:tm1" id="bk1" start="s1:tm0" type="takethefloor"/>
-    <performative end="s1:tm1" id="p1" start="s1:tm0" type="joy"/>
-    <functional-relation end="s1:tm1" id="fr1" start="s1:tm0" type="high"/>
+    <social end="s1:tm3" id="s1" start="s1:tm2" type="but"/>
+    <turntaking end="s1:tm3" id="tt1" start="s1:tm2" type="inform"/>
+    <backchannel end="s1:tm3" id="bk1" start="s1:tm2" type="contrast"/>
+    <performative end="s1:tm3" id="p1" start="s1:tm2" type="high"/>
+    <social end="s1:tm3" id="s2" start="s1:tm2" type="but"/>
+    <turntaking end="s1:tm3" id="tt2" start="s1:tm2" type="inform"/>
+    <backchannel end="s1:tm3" id="bk2" start="s1:tm2" type="contrast"/>
+    <performative end="s1:tm3" id="p2" start="s1:tm2" type="high"/>
+    <social end="s1:tm8" id="s3" start="s1:tm7" type="and"/>
+    <turntaking end="s1:tm8" id="tt3" start="s1:tm7" type="enumerate"/>
+    <social end="s1:tm12" id="s4" start="s1:tm11" type="and"/>
+    <turntaking end="s1:tm12" id="tt4" start="s1:tm11" type="enumerate"/>
+    <social end="s1:tm16" id="s5" start="s1:tm15" type="and"/>
+    <turntaking end="s1:tm16" id="tt5" start="s1:tm15" type="enumerate"/>
   </fml>
 </fml-apml>

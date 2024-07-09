@@ -27,8 +27,11 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -49,6 +52,7 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitter {
 
@@ -60,6 +64,7 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
     private CharacterManager cm;
     
     private boolean MM_parse_server_activated = false;
+    private String MM_python_env_checker_path = "Common\\Data\\MeaningMiner\\python\\check_env.py";
     private String MM_python_env_installer_path = "Common\\Data\\MeaningMiner\\python\\init_env.bat";
     private String MM_parse_server_path         = "Common\\Data\\MeaningMiner\\python\\activate_server.bat";
     private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
@@ -73,15 +78,31 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
         
         // TODO: add environment check script to run env installer at the very first time
         
-        /**
-        System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner, installing python environment...");
+        System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner, checking python environment...");
         try{
-            server_process = new ProcessBuilder(MM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+            server_process = new ProcessBuilder("python", MM_python_env_checker_path).redirectErrorStream(true).start();
         } catch (IOException ex2){
             Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
         }
         server_process.waitFor();
-        **/
+
+        InputStream inputStream = server_process.getInputStream();
+        String result = new BufferedReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n")
+                );
+        System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner, python env exist: " + result);
+        
+        if(result.equals("0")){
+            System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner, installing python environment...");
+            try{
+                server_process = new ProcessBuilder(MM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+            } catch (IOException ex2){
+                Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
+            }
+            server_process.waitFor();
+        }        
 
         System.out.println("greta.core.intentions.FMLFileReader: initializing MeaningMiner python env");
         try {

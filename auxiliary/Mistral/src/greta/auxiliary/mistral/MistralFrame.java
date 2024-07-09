@@ -28,10 +28,14 @@ import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.OutputStreamWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.io.StringReader;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -128,7 +132,8 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
         TransformerFactory transformerFactory = TransformerFactory.newInstance();
         Transformer transformer = transformerFactory.newTransformer();
         DOMSource source = new DOMSource(document);
-        FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\fml_mistral.xml"));
+        
+        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(new File(System.getProperty("user.dir")+"\\fml_mistral.xml")),"ISO-8859-1");
         StreamResult result = new StreamResult(writer);
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.transform(source, result);
@@ -136,23 +141,97 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
         return System.getProperty("user.dir")+"\\fml_mistral.xml";
     }
     
-    
+     public String FMLToBML(String filename) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
+        
+         System.out.println("greta.core.intentions.FMLFileReader.FMLToBML()");
+          BufferedReader br = null;
+          PrintWriter pw = null; 
+    try {
+         br = new BufferedReader(new FileReader(filename));
+         pw =  new PrintWriter(new FileWriter(System.getProperty("user.dir")+"\\fml_to_bml.xml"));
+         String line;
+         while ((line = br.readLine()) != null) {
+                
+                if(!line.contains("fml") && !line.contains("<?xml") && !line.contains("<rest") && !line.contains("<certainty") && !line.contains("<emotion")&& !line.contains("<performative") && !line.contains("<iconic") && !line.contains("<deictic") && !line.contains("<beat")){
+                    if(line.contains("<speech")){
+                         pw.println(line);
+                        pw.println("<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>");
+                    }else{
+                    pw.println(line);
+                    }
+                }
+         }
+         br.close();
+         pw.close();
+    }catch (Exception e) {
+         e.printStackTrace();
+    }
+        return System.getProperty("user.dir")+"\\fml_to_bml.xml";
+    }
     public ID load(String fmlFileName) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
+   
+        String base = (new File(fmlFileName)).getName().replaceAll("\\.xml$", "");
+        String bml_file=FMLToBML(fmlFileName);
+        String base_bml= (new File(bml_file)).getName().replaceAll("\\.xml$", "");
 
+        String fml_id = "";
+        boolean text_brut=false;
         //get the intentions of the FML file
         fmlparser.setValidating(true);
         bmlparser.setValidating(true);
-        String fml_id = "";
         BufferedReader reader;
         String text="";
-        fmlFileName=TextToFML(text);
-        System.out.println("Name new fml file "+fmlFileName);
-       
+        
+        
+        
+        boolean flag=false;
+                        try {
+                                File myObj = new File(fmlFileName);
+                                Scanner myReader = new Scanner(myObj);
+                                while (myReader.hasNextLine()) {
+                                  String data = myReader.nextLine();
+                                  //System.out.println(data);
+                                  if(!data.contains("<?xml")){
+                                    System.out.println(data);
+                                    if(!flag)
+                                        text_brut=true;
+                                    text+=data;
+                                    
+                                }
+                                else{
+                                    flag=true;
+                                    text+=data;
+                                }
+                                }
+                                myReader.close();
+                              } catch (FileNotFoundException e) {
+                                System.out.println("An error occurred.");
+                                e.printStackTrace();
+                }
+                        
+			
+                
+	if(text_brut){
+            System.out.println(text);
+            fmlFileName=TextToFML(text);
+            bml_file=FMLToBML(fmlFileName);
+            System.out.println("Nome nuovo file "+fmlFileName);
+       }
         
         XMLTree fml = fmlparser.parseFile(fmlFileName);
+        if(!text_brut){
+             bml_file=FMLToBML(fmlFileName);
+             System.out.println("Nome nuovo file "+bml_file);
+        }
+        XMLTree bml = bmlparser.parseFile(bml_file);
         List<Intention> intentions = FMLTranslator.FMLToIntentions(fml,cm);
+        List<Signal> signals = BMLTranslator.BMLToSignals(bml,cm);
         System.out.println("greta.core.intentions.FMLFileReader.load()");
+        for (int i =0;i>signals.size();i++){
+                   System.out.println("greta.core.intentions.FMLFileReader.load()"+signals.get(i).toString());
+        }
         Mode mode = FMLTranslator.getDefaultFMLMode();
+        Mode mode_bml = BMLTranslator.getDefaultBMLMode();
         for (XMLTree fmlchild : fml.getChildrenElement()) {
             // store the bml id in the mode class in order
             if (fmlchild.isNamed("bml")) {
@@ -180,24 +259,36 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
             mode.setSocialAttitude(fml.getAttribute("social_attitude"));
         }
 
-        ID id = IDProvider.createID(fmlFileName);
+        ID id = IDProvider.createID(base);
         id.setFmlID(fml_id);
-        if(this.cm.use_MM()){
-        ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
-         //MEANING MINER TREATMENT START
-        List<Intention> intention_list;
-        //System.out.println("File Name "+fml.toString());
-        intention_list = im.processText_2(fml.toString());
-        intentions.addAll(intention_list);
-        //MEANING MINER TREATMENT END
-        }
         
+//        if(this.cm.use_MM()){
+//            ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
+//             //MEANING MINER TREATMENT START
+//            List<Intention> intention_list;
+//            System.out.println("File Name "+fml.toString());
+//            intention_list = im.processText_2(fml.toString());
+//            intentions.addAll(intention_list);
+//            //MEANING MINER TREATMENT END
+//        }
+        
+        for(int i=0; i<intentions.size();i++){
+            System.out.println("[INFO]: Intention_type:"+intentions.get(i).getType()+"   "+intentions.get(i).getName());
+            if(this.cm.getGesture_map().containsKey(intentions.get(i).getType())){
+                this.cm.setTouch_computed(true);
+                this.cm.setTouch_gesture_computed(this.cm.getGesture_map().get(intentions.get(i).getType()));
+                //REMOVE TOUCH GESTURE AND DO IT AFTER (IF NEAR OTHER CHARACTER/HUMAN
+                intentions.remove(i);
+            }
+        }
         
        
         //send to all SignalPerformer added
         for (IntentionPerformer performer : performers) {
-            if(intentions.size()>0)
-                performer.performIntentions(intentions, id, mode);
+            performer.performIntentions(intentions, id, mode);
+        }
+        for (SignalPerformer performer : signal_performers) {
+            performer.performSignals(signals, id, mode);
         }
         return id;
     }
@@ -447,7 +538,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
                     Runtime rt = Runtime.getRuntime();
                 try {
                     Process proc = rt.exec(cmd);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream(),StandardCharsets.UTF_8));
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream(),"ISO-8859-1"));
                         String line = "";
                         while ((line = reader.readLine()) != null) {
                             System.out.println(line + "\n");
@@ -511,7 +602,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
                             Process proc = rt.exec(cmd);
                             
                             BufferedReader stdInput = new BufferedReader(new
-                        InputStreamReader(proc.getInputStream(), StandardCharsets.UTF_8));
+                        InputStreamReader(proc.getInputStream(), "ISO-8859-1"));
                             BufferedReader stdError = new BufferedReader(new
                         InputStreamReader(proc.getErrorStream()));
                             

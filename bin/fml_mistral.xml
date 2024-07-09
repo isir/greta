@@ -5,42 +5,32 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>
-<tm id="tm2"/>Hello
-<tm id="tm3"/>there!
-<tm id="tm4"/>How
-<tm id="tm5"/>may
-<tm id="tm6"/>I
-<tm id="tm7"/>assist
-<tm id="tm8"/>you
-<tm id="tm9"/>today?
-<tm id="tm10"/>I'm
-<tm id="tm11"/>here
-<tm id="tm12"/>to
-<tm id="tm13"/>help
-<tm id="tm14"/>answer
-<tm id="tm15"/>any
-<tm id="tm16"/>questions
-<tm id="tm17"/>you
-<tm id="tm18"/>might
-<tm id="tm19"/>have
-<tm id="tm20"/>or
-<tm id="tm21"/>perform
-<tm id="tm22"/>tasks
-<tm id="tm23"/>for
-<tm id="tm24"/>you
-<tm id="tm25"/>to
-<tm id="tm26"/>make
-<tm id="tm27"/>your
-<tm id="tm28"/>day
-<tm id="tm29"/>easier.
-<tm id="tm30"/>Just
-<tm id="tm31"/>let
-<tm id="tm32"/>me
-<tm id="tm33"/>know
-<tm id="tm34"/>what
-<tm id="tm35"/>you
-<tm id="tm36"/>need.
+<tm id="tm1"/>Désolé,
+<tm id="tm2"/>je
+<tm id="tm3"/>ne
+<tm id="tm4"/>peux
+<tm id="tm5"/>pas
+<tm id="tm6"/>donner
+<tm id="tm7"/>les
+<tm id="tm8"/>prévisions
+<tm id="tm9"/>météo
+<tm id="tm10"/>en
+<tm id="tm11"/>temps
+<tm id="tm12"/>réel.
+<tm id="tm13"/>Veuillez
+<tm id="tm14"/>consulter
+<tm id="tm15"/>un
+<tm id="tm16"/>site
+<tm id="tm17"/>ou
+<tm id="tm18"/>une
+<tm id="tm19"/>application
+<tm id="tm20"/>météo
+<tm id="tm21"/>pour
+<tm id="tm22"/>les
+<tm id="tm23"/>informations
+<tm id="tm24"/>les
+<tm id="tm25"/>plus
+<tm id="tm26"/>récentes.
 </speech>
 </bml>
 <fml>

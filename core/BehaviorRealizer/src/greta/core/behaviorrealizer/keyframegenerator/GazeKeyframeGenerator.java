@@ -634,8 +634,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     }
 
               
-             // GAZESHIFT OR NOT set rest position torso --> do the same for the rest (head and eye)
-             if (!gaze.isGazeShift()) {
+                // GAZESHIFT OR NOT set rest position torso --> do the same for the rest (head and eye)
+                if (!gaze.isGazeShift()) {
                     // torsoSignalRestPosition torso signal at rest position
                     TorsoSignal torsoSignalRestPosition = new TorsoSignal(IDProvider.createID("restgenerator").toString());
                     SpinePhase spinePhaseRestPosition;
@@ -713,10 +713,10 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                     System.out.println("TEMPO:"+end);
                 }
             
-                /*********************************************************************
-                 * HEAD
-                 **********************************************************************/
-                // if the influence involves the shoulder we create the keyframe just for the shoulder
+            /*********************************************************************
+             * HEAD
+             **********************************************************************/
+            // if the influence involves the shoulder we create the keyframe just for the shoulder
             }  if (move_head) {
                 
                 System.out.println("[GAZE INFO]: MOVE ONLY EYES AND HEAD");
@@ -827,7 +827,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 }
 
             } 
-                }
+                
+        }
         
         return outputKeyframe;
     }

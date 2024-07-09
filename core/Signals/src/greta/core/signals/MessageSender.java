@@ -61,7 +61,7 @@ public class MessageSender{
         p_stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
 
         // execute commands
-        executeCommand("cd apache-activemq-5.15.14\\bin");
+        executeCommand("cd Common\\Lib\\External\\apache-activemq-5.15.14\\bin");
         executeCommand("activemq start");
         //executeCommand("exit");
 
@@ -162,7 +162,7 @@ public class MessageSender{
             gesture=test.traitement(animation);
         }
         
-        //System.out.println("GESTURE:"+gesture);
+        System.out.println("GESTURE:"+gesture);
         return gesture;
         
         

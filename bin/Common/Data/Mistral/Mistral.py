@@ -111,7 +111,7 @@ s.connect(("localhost",port))
 message_reciv=False
 while(True):
     msg=s.recv(1024)
-    msg=msg.decode('utf8')
+    msg=msg.decode('iso-8859-1')
     message_reciv=True
     if(len(msg)>0 and message_reciv):
         if(msg=="exit"):
@@ -119,7 +119,7 @@ while(True):
         question,answ=ask(msg, messages,messages_online)
         messages,messages_online = append_interaction_to_chat_log(question ,answ, messages,messages_online)
         print(answ)
-        s.send(answ.encode('utf8'))
+        s.send(answ.encode('iso-8859-1'))
         message_reciv=False
   
   

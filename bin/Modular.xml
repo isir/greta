@@ -204,6 +204,7 @@
                     <item module="FlipperDemo" name="FlipperDemo"/>
                 </menu>
                 <item module="ChatGPT" name="ChatGPT"/>
+            <item module="Mistral" name="Mistral"/>
             </menu>
         </menu>
     
@@ -1124,6 +1125,10 @@
             <object class="greta.auxiliary.chatgpt.ChatGPT" lib_id="greta_ChatGPT"/>
             <frame class="greta.auxiliary.chatgpt.ChatGPTFrame" lib_id="greta_ChatGPT" type="frame"/>
         </module>
+       <module name="Mistral" style="Intentions">
+            <object class="greta.auxiliary.mistral.MistralFrame" lib_id="greta_mistral"/>
+			<frame type="object"/>
+        </module>
             
     </modules>
     <!-- list of libraries and their dependencies -->
@@ -1567,7 +1572,14 @@
             <depends lib_id="greta_meaning_miner"/>
             <depends lib_id="ext_javax.jms"/>
         </lib>
-        
+        <lib id="greta_mistral" path="./Common/Lib/Internal/Mistral.jar">
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_meaning_miner"/>
+            <depends lib_id="ext_javax.jms"/>
+        </lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>

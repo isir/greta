@@ -14,6 +14,7 @@ import static java.lang.Thread.MAX_PRIORITY;
 import java.net.*;  
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.nio.charset.StandardCharsets;
 public class Server {  
 
     public PrintWriter getOut() {
@@ -99,8 +100,8 @@ public class Server {
     
     public void accept_new_connection() throws IOException{
         clientSocket = serverSocket.accept();
-        in =  new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),"UTF-8"));
-        out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "UTF-8"), true);
+        in =  new BufferedReader(new InputStreamReader(clientSocket.getInputStream(),"ISO-8859-1"));
+        out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "ISO-8859-1"), true);
     }
 
     public void sendMessage(String msg) throws IOException {

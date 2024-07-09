@@ -302,6 +302,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
 
             //let the selector choose the signals
             List<Signal> signalsReturned = selector.selectFrom(intention, set, dynamicline, existingSignals, getCharacterManager());
+            
             //Start NVBG TREATMENT
             if(this.getCharacterManager().get_use_NVBG()){
             String phrase="";

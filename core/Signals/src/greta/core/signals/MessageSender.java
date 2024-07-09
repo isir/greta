@@ -46,8 +46,8 @@ public class MessageSender{
     private BufferedWriter p_stdin;
 
     public List<String> traitement_NVBG(String input,boolean nvbg) throws JMSException, FileNotFoundException, InterruptedException, IOException{ 
-        Logs.debug("[NVBG INFO]:MessageSender.main()");
-        Logs.debug(url);
+        System.out.println("[NVBG INFO]:MessageSender.main()");
+        System.out.println(url);
         if(nvbg==false){
         // init shell
         ProcessBuilder builder = new ProcessBuilder("C:/Windows/System32/cmd.exe");
@@ -77,7 +77,7 @@ public class MessageSender{
         //Destination represents here our queue 'DEFAULT_SCOPE' on the JMS server. 
         //The queue will be created automatically on the server.
         Destination destination = session.createTopic(subject);
-        Logs.debug(session.createTopic(subject).getTopicName() +" "+ destination);
+        System.out.println(session.createTopic(subject).getTopicName() +" "+ destination);
          
         // MessageProducer is used for sending messages to the queue.
         MessageProducer producer = session.createProducer(destination);
@@ -85,7 +85,7 @@ public class MessageSender{
         String op= "vrExpress";
         String gstring ="Brad ranger harmony221 <?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?><act><participant id=\"harmony\" role=\"actor\"/><fml></fml><bml><speech id=\"sp1\" type=\"application/ssml+xml\">"+input+"</speech></bml></act>";
         
-        Logs.debug("[NVBG INFO]:Ding: "+input);
+        System.out.println("[NVBG INFO]:Ding: "+input);
         String g="Brad ranger harmony221 <?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\r\n" +
                "   <act>\r\n" +
                "       <participant id=\"harmony\" role=\"actor\"/>\r\n" +
@@ -102,7 +102,7 @@ public class MessageSender{
         TextMessage message = session.createTextMessage(op+" "+g);
         
         //Open NVBG and wait one second before send the message -> avoid lost of data if message is not sent entirely
-        Logs.debug("[NVBG INFO]:greta.core.signals.MessageSender.traitement_NVBG()"+"  "+nvbg);
+        System.out.println("[NVBG INFO]:greta.core.signals.MessageSender.traitement_NVBG()"+"  "+nvbg);
         if (nvbg==false) {
             MyThreadNVBG thread_nvbg = new MyThreadNVBG();
             thread_nvbg.run();
@@ -121,7 +121,7 @@ public class MessageSender{
         vsg.openConnection();
         vsg.sendMessage(op, g);
       
-        Logs.debug("[NVBG INFO]:JCG printing@@ " + message.getText() + "");
+        System.out.println("[NVBG INFO]:JCG printing@@ " + message.getText() + "");
         
         MessageConsumer consumer = session.createConsumer(destination);
         Message message_vrSpeak = null;
@@ -141,7 +141,7 @@ public class MessageSender{
             //System.out.println(textMessage.getText().split(" ")[0]);
             
             if(textMessage.getText().split(" ")[0].contentEquals("vrSpeak")) {
-            	Logs.debug("[NVBG INFO]:FOUND");
+            	System.out.println("[NVBG INFO]:FOUND");
             	message_vrSpeak=message1;
             	received_vrSpeak=true;
             }
@@ -181,7 +181,7 @@ public class MessageSender{
             p_stdin.newLine();
             p_stdin.flush();
         } catch (IOException e) {
-            Logs.debug("[NVBG INFO]:"+e);
+            System.out.println("[NVBG INFO]:"+e);
         }
     }
 
@@ -193,7 +193,7 @@ public class MessageSender{
          
          public  void run(){
             
-            Logs.debug("[NVBG INFO]:NVBG.MessageSender.run_NVBG()");
+            System.out.println("[NVBG INFO]:NVBG.MessageSender.run_NVBG()");
             String path=System.getProperty("user.dir");
             path+="\\run-toolkit-NVBG-C#-all.bat";
             Runtime rn=Runtime.getRuntime();

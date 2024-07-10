@@ -21,6 +21,8 @@ import greta.auxiliary.activemq.Broker;
 import greta.auxiliary.activemq.ConnectionListener;
 import greta.core.util.IniManager;
 import java.awt.Color;
+import java.io.BufferedWriter;
+import java.io.IOException;
 import java.util.Locale;
 
 /**
@@ -41,11 +43,15 @@ public class BrokerFrame extends javax.swing.JFrame implements ConnectionListene
     private String hostProperty = "network.host";
     private String portProperty = "network.port";
     private String actualConnectedProperty;
-
+    
     /** Creates new form BrokerFrame */
-    public BrokerFrame() {
+    public BrokerFrame() throws Exception {
         initComponents();
         notConnected();
+        
+        broker = new Broker();
+        setBroker(broker);
+        
     }
 
     public void setConnected(boolean connected){
@@ -75,7 +81,7 @@ public class BrokerFrame extends javax.swing.JFrame implements ConnectionListene
         setHostValue(this.broker.getHost());
         setPortValue(this.broker.getPort());
         setConnected(this.broker.isConnected());
-        this.broker.addConnectionListener(this);
+        this.broker.addConnectionListener(this);   
     }
 
     protected void setHostValue(String value){
@@ -272,5 +278,5 @@ public class BrokerFrame extends javax.swing.JFrame implements ConnectionListene
     private javax.swing.JLabel portLabel;
     private javax.swing.JLabel statusLabel;
     // End of variables declaration//GEN-END:variables
-
+ 
 }

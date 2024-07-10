@@ -551,9 +551,9 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
                     Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
                     python=false;
                 }
-                }
-                catch(Exception e)
-                {
+            }
+            catch(Exception e)
+            {
                 e.printStackTrace(); 
             }
             
@@ -573,91 +573,84 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
                     System.out.println("Opening python Mistral script");
                     
                     server.startConnection();
+                    
                     Thread r1 = new Thread() {
-                    @Override
-                    public void run() {
-                        
-                            try {
-                                System.out.println("Checking new connections");
-                                server.accept_new_connection();
-                            } catch (IOException ex) {
-                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        @Override
+                        public void run() {
+                                try {
+                                    System.out.println("greta.auxiliary.mistral.MistralFrame.enableActionPerformed(): waiting for client connection (Mistral.py -> Mistral module)");
+                                    server.accept_new_connection();
+                                } catch (IOException ex) {
+                                    Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
-                            }
-                        
+                            }                        
                     };
                     
                     Thread r2 = new Thread() {
-                    @Override
-                    public void run() {
-                        
-                        try {
-                            String[] cmd = {
-                                "python","-u",
-                                System.getProperty("user.dir")+"\\Common\\Data\\Mistral\\Mistral.py ",server.getPort(),
-                            };
-                            Runtime rt = Runtime.getRuntime();
-                            System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);
-                            
-                            Process proc = rt.exec(cmd);
-                            
-                            BufferedReader stdInput = new BufferedReader(new
-                        InputStreamReader(proc.getInputStream(), "ISO-8859-1"));
-                            BufferedReader stdError = new BufferedReader(new
-                        InputStreamReader(proc.getErrorStream()));
-                            
-                            // Read the output from the command
-                            System.out.println("Here is the standard output of the command:\n");
-                            String s = null;
-                           
-                            while ((s = stdInput.readLine()) != null) {
-                                System.out.println("READ INPUT PYTHON :"+s);
-                                answ=s;
-                                if(answ!=null && answ.length()>1){
-                                    System.out.println("CLIENT:"+answ);
-                                    AnswerText.setText(answ.replace("AI Assistant:", "").replace("AI:", "").replace("AI assistant:","").replace("User:", ""));
+                        @Override
+                        public void run() {
+
+                            try {
+                                String[] cmd = {
+                                    "python","-u",
+                                    System.getProperty("user.dir")+"\\Common\\Data\\Mistral\\Mistral.py ",server.getPort(),
+                                };
+                                Runtime rt = Runtime.getRuntime();
+                                System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);
+
+                                Process proc = rt.exec(cmd);
+
+                                BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream(), "ISO-8859-1"));
+                                BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+
+                                // Read the output from the command
+                                System.out.println("Here is the standard output of the command:\n");
+                                String s = null;
+
+                                while ((s = stdInput.readLine()) != null) {
+                                    System.out.println("READ INPUT PYTHON :"+s);
+                                    answ=s;
+                                    if(answ!=null && answ.length()>1){
+                                        System.out.println("CLIENT:"+answ);
+                                        AnswerText.setText(answ.replace("AI Assistant:", "").replace("AI:", "").replace("AI assistant:","").replace("User:", ""));
+                                    }
+                                    if(AnswerText.getText().length()>1){
+                                        answ=null;
+                                        System.out.println("TEXTE:"+AnswerText.getText());
+                                        String file=TextToFML(AnswerText.getText());
+                                        load(file);
+                                    }
                                 }
-                                if(AnswerText.getText().length()>1){
-                                    answ=null;
-                                    System.out.println("TEXTE:"+AnswerText.getText());
-                                    String file=TextToFML(AnswerText.getText());
-                                    load(file);
-                                    
-                                    
-                        }
+
+                                // Read any errors from the attempted command
+                                System.out.println("Here is the standard error of the command (if any):\n");
+                                while ((s = stdError.readLine()) != null) {
+                                    System.out.println(s);
+                                }
+
+                            } catch (IOException ex) {
+                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (ParserConfigurationException ex) {
+                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (SAXException ex) {
+                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (TransformerException ex) {
+                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (JMSException ex) {
+                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                            
-                            // Read any errors from the attempted command
-                            System.out.println("Here is the standard error of the command (if any):\n");
-                            while ((s = stdError.readLine()) != null) {
-                                System.out.println(s);
-                            }   } catch (IOException ex) {
-                            Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (ParserConfigurationException ex) {
-                            Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (SAXException ex) {
-                            Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (TransformerException ex) {
-                            Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        } catch (JMSException ex) {
-                            Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
- } 
+                        } 
                         
                     };
-                
-                
 
-                     
-                        
                     r1.start();
                     r2.start();
                     System.out.println("greta.auxiliary.mistral.Mistral:" + server.port + "   " + server.address);
                     
-                    }
-                    catch(Exception e)
-                    {
-                    e.printStackTrace(); 
+                }
+                catch(Exception e)
+                {
+                e.printStackTrace(); 
                 }
             }
         }else{

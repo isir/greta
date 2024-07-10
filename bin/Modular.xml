@@ -1074,6 +1074,11 @@
         <module name="Generic Environment Manager" style="DEFAULT">
             <object class="greta.auxiliary.environmentmanager.core.mvc.EnvironmentManagerController" lib_id="greta_environment_manager_generic"/>
             <frame type="object"/>
+            <!--
+            <frame class="greta.auxiliary.environmentmanager.core.mvc.EnvironmentManagerFrame" lib_id="greta_environment_manager_generic" type="frame">
+                <link method="setCore" on="frame"/>
+            </frame>
+            -->
         </module>
         <module name="ActiveMQ Primary Environment Server" style="DEFAULT">
             <object class="greta.auxiliary.environmentmanager.impl.activemq.PrimaryEnvironmentServer" lib_id="greta_environment_manager_activemq"/>

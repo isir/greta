@@ -49,23 +49,24 @@ public class MessageSender{
         System.out.println("[NVBG INFO]:MessageSender.main()");
         System.out.println(url);
         if(nvbg==false){
-        // init shell
-        ProcessBuilder builder = new ProcessBuilder("C:/Windows/System32/cmd.exe");
-        Process p = null;
-        try {
-            p = builder.start();
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-        // get stdin of shell
-        p_stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
 
-        // execute commands
-        executeCommand("cd Common\\Lib\\External\\apache-activemq-5.15.14\\bin");
-        executeCommand("activemq start");
-        //executeCommand("exit");
+            // init shell
+            ProcessBuilder builder = new ProcessBuilder("C:/Windows/System32/cmd.exe");
+            Process p = null;
+            try {
+                p = builder.start();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+            // get stdin of shell
+            p_stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
 
-        // write stdout of shell (=output of all commands)
+            // execute commands
+            executeCommand("cd Common\\Lib\\External\\apache-activemq-5.15.14\\bin");
+            executeCommand("activemq start");
+            //executeCommand("exit");
+
+            // write stdout of shell (=output of all commands)
     
         }
         // Getting JMS connection from the server and starting it

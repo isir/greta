@@ -18,6 +18,9 @@
 package greta.auxiliary.activemq;
 
 import greta.core.util.log.Logs;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 
 /**
@@ -31,6 +34,7 @@ public abstract class ActiveMQBase {
     public static final String DEFAULT_ACTIVEMQ_PORT = "61616";
     public static final int SLEEP_TIME = 700;
 
+    private BufferedWriter p_stdin;
 
     private ArrayList<ConnectionListener> connectionListeners;
     private ConnectionStarter starter;
@@ -72,8 +76,28 @@ public abstract class ActiveMQBase {
         return DEFAULT_ACTIVEMQ_PROTOCOL + "://" + host + (port==null || port.isEmpty() ? "" : ":" + port);
     }
     public void startConnection(){
+
         starter = new ConnectionStarter(this);
         starter.start();
+
+//        System.out.println("greta.auxiliary.activemq.ActiveMQBase.startConnection(): trying to launch ActiveMQ server");
+//        
+//        // init shell
+//        ProcessBuilder builder = new ProcessBuilder("C:/Windows/System32/cmd.exe");
+//        Process p = null;
+//        try {
+//            p = builder.start();
+//        } catch (IOException e) {
+//            System.out.println(e);
+//        }
+//        
+//        // get stdin of shell
+//        p_stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+//        executeCommand("cd Common\\Lib\\External\\apache-activemq-5.15.14\\bin");
+//        executeCommand("activemq start");
+//        
+//        System.out.println("greta.auxiliary.activemq.ActiveMQBase.startConnection(): ActiveMQ srver should be launched now... I hope...");
+
     }
 
     public void stopConnection(){
@@ -101,6 +125,7 @@ public abstract class ActiveMQBase {
         }
         @Override
         public void run() {
+            System.out.println("greta.auxiliary.activemq.ActiveMQBase.ConnectionStarter()");
             Logs.debug(amq.getClass().getSimpleName()+" trys to connect to " + amq.getURL());
             while ( ! amq.isConnected() && amq.starter == this) {
                 try {
@@ -111,10 +136,25 @@ public abstract class ActiveMQBase {
                         }
                     }
                 } catch (Throwable ex) {
-//                    ex.printStackTrace();
-                    try {sleep(SLEEP_TIME);} catch (Exception ex1) {}
+                    // ex.printStackTrace();
+                    try {
+                        sleep(SLEEP_TIME);
+                    } 
+                    catch(Exception ex1) {
+                        
+                    }
                 }
             }
         }
     }
+    private void executeCommand(String command) {
+        try {
+            // single execution
+            p_stdin.write(command);
+            p_stdin.newLine();
+            p_stdin.flush();
+        } catch (IOException e) {
+            System.out.println("greta.auxiliary.activemq.BrokerFrame.executeCommand(): "+e);
+        }
+    }   
 }

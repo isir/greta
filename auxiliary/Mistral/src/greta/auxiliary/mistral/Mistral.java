@@ -67,10 +67,9 @@ public class Mistral implements Runnable{
         public Mistral(CharacterManager cm) throws JMSException{
             this.cm=cm;
             java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new MistralFrame(cm).setVisible(true);
- 
-    }
+                public void run() {
+                    new MistralFrame(cm).setVisible(true);
+                }
             });
            
 }

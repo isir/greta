@@ -18,44 +18,84 @@
 package greta.auxiliary.activemq;
 
 import greta.core.util.log.Logs;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import org.apache.activemq.broker.BrokerService;
 import org.apache.activemq.broker.TransportConnector;
+import org.apache.activemq.broker.BrokerFactory;
 
 /**
  *
  * @author Andre-Marie Pez
  */
 public class Broker extends ActiveMQBase{
-    private static BrokerService brokerService;
-
-    private synchronized static BrokerService getBrokerService() throws Exception{
-        if(brokerService==null){
-            BrokerService tmpbrokerService = new BrokerService();
-            tmpbrokerService.setUseShutdownHook(true);
-            tmpbrokerService.setPersistent(false);
-            tmpbrokerService.setSchedulerSupport(false);
-            tmpbrokerService.setUseLocalHostBrokerName(true);
-            tmpbrokerService.setUseVirtualTopics(true);
-            tmpbrokerService.start();
-            brokerService = tmpbrokerService;
-        }
-        return brokerService;
-    }
-
+    private static BrokerService broker;
     private String port;
     private TransportConnector currentTransportConnector;
 
-    public Broker(){
+    private BufferedWriter p_stdin;
+    
+    public Broker() throws Exception{
         this(DEFAULT_ACTIVEMQ_PORT);
     }
 
-    public Broker(String port){
-        this.port = port;
-        startConnection();
+    public Broker(String port) throws Exception{
+//        String connector_config = "tcp://localhost:"+DEFAULT_ACTIVEMQ_PORT;
+//        try{
+//            System.out.println("greta.auxiliary.activemq.Broker()");
+//            this.port = port;
+//            
+//            BrokerService tmpbroker = new BrokerService();
+//            tmpbroker.setUseShutdownHook(true);
+//            tmpbroker.setPersistent(false);
+//            tmpbroker.setSchedulerSupport(false);
+//            tmpbroker.setUseLocalHostBrokerName(true);
+//            tmpbroker.setUseVirtualTopics(true);
+//            tmpbroker.start();
+//            broker = tmpbroker;
+//            System.out.println("ActiveMQ Broker started at " + connector_config);
+//            // startConnection();
+//        }
+//        catch(IOException ex){
+//            System.out.println("Failed to launch ActiveMQ Broker at " + connector_config);
+//            System.out.println("Broker is already running?");
+//        }
+        
+
+            // init shell
+            ProcessBuilder builder = new ProcessBuilder("C:/Windows/System32/cmd.exe");
+            Process p = null;
+            try {
+                p = builder.start();
+            } catch (IOException e) {
+                System.out.println(e);
+            }
+            // get stdin of shell
+            p_stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+
+            // execute commands
+            executeCommand("cd Common\\Lib\\External\\apache-activemq-5.15.14\\bin");
+            executeCommand("activemq start");
+            System.out.println("ActiveMQ Broker started");
     }
 
+    private synchronized static BrokerService getBrokerService() throws Exception{
+        if(broker==null){
+            BrokerService tmpbroker = new BrokerService();
+            tmpbroker.setUseShutdownHook(true);
+            tmpbroker.setPersistent(false);
+            tmpbroker.setSchedulerSupport(false);
+            tmpbroker.setUseLocalHostBrokerName(true);
+            tmpbroker.setUseVirtualTopics(true);
+            tmpbroker.start(true);
+            broker = tmpbroker;
+        }
+        return broker;
+    }    
+    
     @Override
     public String getHost(){
         try {
@@ -116,4 +156,14 @@ public class Broker extends ActiveMQBase{
             Logs.error(this.getClass().getName()+": can not stop connection. "+ex.getMessage());
         }
     }
+    private void executeCommand(String command) {
+        try {
+            // single execution
+            p_stdin.write(command);
+            p_stdin.newLine();
+            p_stdin.flush();
+        } catch (IOException e) {
+            System.out.println("greta.auxiliary.activemq.BrokerFrame.executeCommand(): "+e);
+        }
+    }   
 }

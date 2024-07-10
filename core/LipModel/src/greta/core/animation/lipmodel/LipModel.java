@@ -86,7 +86,7 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
 
     @Override
     public void performKeyframes(List<Keyframe> keyframes, ID requestId, Mode mode) {
-        System.out.println("Hey from PerformKeyframes in LipModel.java");
+        // System.out.println("Hey from PerformKeyframes in LipModel.java");
         for (Keyframe keyFrame : keyframes) {
             if (keyFrame instanceof PhonemSequence) {
                 List<Phoneme> phonemes = ((PhonemSequence) keyFrame).getPhonems();
@@ -102,9 +102,9 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
                     phonemes.add(new Phoneme(PhonemeType.pause,  Constants.FRAME_DURATION_SECONDS));
                 }
                 
-                System.out.println("gggggggggggggggggggggggggggggggggggggggggggggggggggg");
-                System.out.println("Hey from PerformKeyframes in LipModel.java");
-                System.out.println("List Phonemes: "+phonemes.toString());
+                // System.out.println("gggggggggggggggggggggggggggggggggggggggggggggggggggg");
+                // System.out.println("Hey from PerformKeyframes in LipModel.java");
+                // System.out.println("List Phonemes: "+phonemes.toString());
 
                 int FirstFrameNumber = (int) (keyFrame.getOffset() * Constants.FRAME_PER_SECOND);
 
@@ -123,8 +123,8 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
                 
                 double sequencenDuration = timePositionBegin[length - 1] + phonemes.get(length - 1).getDuration();
                 
-                System.out.println("Sequence duration is this : " + sequencenDuration );
-                System.out.println("Hey from PerformKeyframes in LipModel.java");
+                // System.out.println("Sequence duration is this : " + sequencenDuration );
+                // System.out.println("Hey from PerformKeyframes in LipModel.java");
                 //==== get the time of sequence
 
                 //------charge curPhoneme, prePhoneme, sucPhoneme, timePositionBegin

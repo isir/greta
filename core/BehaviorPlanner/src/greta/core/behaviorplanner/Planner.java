@@ -396,6 +396,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                                 y=y.replace("end="+ends2[0].replace("\"","")+":"+ends3[0].replace("\"","").replace("tm",""),"end="+ends2[0]+":"+Integer.toString(max_index));
                             }
                             fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance=\"1.0\"/>";
+                            // fml_construction=fml_construction+"\n"+y.replace("lexeme","type");
                             }
                             //System.out.println("FML FILE\n:"+fml_construction);
                             DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -421,7 +422,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                 //  It's normal !
                 //but if signalsReturned is null, it means that the selector cannot performe this kind of intention
                 //  so there is a problem with the choice of the selector.
- catch (SAXException ex) {
+                catch (SAXException ex) {
                     Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (IOException ex) {
                     Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
@@ -509,7 +510,9 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
         
         if(flag==1){
                 fml_construction=fml_construction+"\n</fml>\n</fml-apml>";
-                System.out.println("OUTPUT:\n"+ fml_construction);
+                System.out.println("greta.core.behaviorplanner.Planner.performIntentions(): fml start");
+                System.out.println(fml_construction);
+                System.out.println("greta.core.behaviorplanner.Planner.performIntentions(): fml end");                
                 try{
                 DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -613,9 +616,9 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
      */
     protected void sendSignals(List<Signal> signals, ID id, Mode mode) {
         if (signals != null) {
-            System.out.println("greta.core.behaviorplanner.Planner.sendSignals()");
+            // System.out.println("greta.core.behaviorplanner.Planner.sendSignals()");
             for(Signal s:signals){
-                System.out.println("Signals Class "+s.getClass());
+                System.out.println("greta.core.behaviorplanner.Planner.sendSignals(): "+s.getClass());
             }
             for (SignalPerformer performer : signalPerformers) {
                 performer.performSignals(signals, id, mode);

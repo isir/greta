@@ -30,3 +30,7 @@ bin/apache-activemq-5.15.14/data/kahadb/db.data
 bin/apache-activemq-5.15.14/data/kahadb/db.redo
 bin/apache-activemq-5.15.14/data/kahadb/lock
 bin/fml_to_bml.xml
+
+**/db.data
+**/db.redo
+**/db.lock

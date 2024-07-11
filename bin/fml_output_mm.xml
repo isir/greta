@@ -6,81 +6,110 @@
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
 <tm id="tm1"/>
-Bonjour,
-<tm id="tm2"/>
-Je
-<tm id="tm3"/>
-m'
-<tm id="tm4"/>
-appelle
-<tm id="tm5"/>
-Camille.
-<tm id="tm6"/>
-Je
-<tm id="tm7"/>
-suis
-<tm id="tm8"/>
-l'
-<tm id="tm9"/>
-un
-<tm id="tm10"/>
-des <tm id="tm11"/>
-personnages
-<tm id="tm12"/>
-virtuels
-<tm id="tm13"/>
-de
-<tm id="tm14"/>
-la
-<tm id="tm15"/>
-plateforme
-<tm id="tm16"/>
-Greta.
-<tm id="tm17"/>
-Récemment,
-<tm id="tm18"/>
-la
-<tm id="tm19"/>
-température
-<tm id="tm20"/>
-a
-<tm id="tm21"/>
-beaucoup
-<tm id="tm22"/>
-augmenté.
-<tm id="tm23"/>
-La
-<tm id="tm24"/>
-durée
-<tm id="tm25"/>
-de
-<tm id="tm26"/>
-l'
-<tm id="tm27"/>
-été <tm id="tm28"/>
-est <tm id="tm29"/>
-très
-<tm id="tm30"/>
-courte
-<tm id="tm31"/>
-mais
-<tm id="tm32"/>
-très
-<tm id="tm33"/>
-intense.
-<tm id="tm34"/>
-<pitchaccent end="s1:tm4" id="pa2" importance="1" level="medium" start="s1:tm3" type="HStar"/>
-<boundary end="s1:tm5+0.5" id="b1" start="s1:tm5" type="LL"/>
+<tm id="tm2"/>Le
+<tm id="tm3"/>changement
+<tm id="tm4"/>climatique,
+<tm id="tm5"/>également
+<tm id="tm6"/>connu
+<tm id="tm7"/>sous
+<tm id="tm8"/>le
+<tm id="tm9"/>nom
+<tm id="tm10"/>de
+<tm id="tm11"/>dérèglement
+<tm id="tm12"/>climatique,
+<tm id="tm13"/>est
+<tm id="tm14"/>une
+<tm id="tm15"/>augmentation
+<tm id="tm16"/>des
+<tm id="tm17"/>niveaux
+<tm id="tm18"/>de
+<tm id="tm19"/>gaz
+<tm id="tm20"/>à
+<tm id="tm21"/>effet
+<tm id="tm22"/>de
+<tm id="tm23"/>serre
+<tm id="tm24"/>dans
+<tm id="tm25"/>l'atmosphère
+<tm id="tm26"/>terrestre.
+<tm id="tm27"/>Cela
+<tm id="tm28"/>entraîne
+<tm id="tm29"/>des
+<tm id="tm30"/>modifications
+<tm id="tm31"/>climatiques
+<tm id="tm32"/>observables
+<tm id="tm33"/>et
+<tm id="tm34"/>prévues
+<tm id="tm35"/>pour
+<tm id="tm36"/>avoir
+<tm id="tm37"/>des
+<tm id="tm38"/>conséquences
+<tm id="tm39"/>naturelles
+<tm id="tm40"/>et
+<tm id="tm41"/>humaines
+<tm id="tm42"/>importantes.
+<tm id="tm43"/>Cela
+<tm id="tm44"/>comprend
+<tm id="tm45"/>des
+<tm id="tm46"/>températures
+<tm id="tm47"/>plus
+<tm id="tm48"/>élevées,
+<tm id="tm49"/>des
+<tm id="tm50"/>précipitations
+<tm id="tm51"/>plus
+<tm id="tm52"/>intenses
+<tm id="tm53"/>ou
+<tm id="tm54"/>irrégulières,
+<tm id="tm55"/>des
+<tm id="tm56"/>orages
+<tm id="tm57"/>plus
+<tm id="tm58"/>violents,
+<tm id="tm59"/>des
+<tm id="tm60"/>glaciers
+<tm id="tm61"/>et
+<tm id="tm62"/>neige
+<tm id="tm63"/>qui
+<tm id="tm64"/>fondent
+<tm id="tm65"/>plus
+<tm id="tm66"/>vite,
+<tm id="tm67"/>les
+<tm id="tm68"/>niveaux
+<tm id="tm69"/>de
+<tm id="tm70"/>la
+<tm id="tm71"/>mer
+<tm id="tm72"/>qui
+<tm id="tm73"/>montent,
+<tm id="tm74"/>des
+<tm id="tm75"/>océans
+<tm id="tm76"/>plus
+<tm id="tm77"/>acides
+<tm id="tm78"/>et
+<tm id="tm79"/>d'autres
+<tm id="tm80"/>changements.
+<tm id="tm81"/>L'activité
+<tm id="tm82"/>humaine,
+<tm id="tm83"/>notamment
+<tm id="tm84"/>l'émission
+<tm id="tm85"/>de
+<tm id="tm86"/>gaz
+<tm id="tm87"/>liés
+<tm id="tm88"/>aux
+<tm id="tm89"/>combustions
+<tm id="tm90"/>fossiles,
+<tm id="tm91"/>est
+<tm id="tm92"/>considérée
+<tm id="tm93"/>comme
+<tm id="tm94"/>une
+<tm id="tm95"/>cause
+<tm id="tm96"/>principale
+<tm id="tm97"/>du
+<tm id="tm98"/>changement
+<tm id="tm99"/>climatique
+<tm id="tm100"/>actuel.
 </speech> </bml>
 <fml>
-<!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0"/>--> <!--<deictic id="d1" type="you" start="s1:tm2" end="s1:tm4" importance="1.0" target="Andre_chair0" />-->
-<!--<performative id="p1" type="greet" start="s1:tm1" end="s1:tm2" importance="1.0"/>--> <!--<beat id="b1" type="pos" start="0" end="s1:tm3" importance="1.0"/>-->
-<!--<emotion id="e1" type="joyStrong" start="s1:tm2" end="s1:tm3" importance="1.0"/>--> <!--<performative id="p2" type="propose" start="s1:tm3" end="s1:tm5" importance="1.0"/>-->
-<!--<rest id="rp1" type="restpose" start="0" end="s1:tm5" importance="1.0"/>--> </fml>
-<fml>
-<ideationalunit end="s1:tm7-0.2" id="id_2" importance="1.0" main="im_8" start="s1:tm0-0.2"/>
-<imageschema POSroot="verb" end="s1:tm11-0.2" id="im_8" importance="1.0" indexword="6" start="s1:tm5-0.2" type="big"/>
-<ideationalunit end="s1:tm11-0.2" id="id_3" importance="1.0" main="im_10" start="s1:tm0-0.2"/>
-<imageschema POSroot="adjective" end="s1:tm6-0.2" id="im_10" importance="1.0" indexword="8" start="s1:tm0-0.2" type="down"/>
+<ideationalunit end="s1:tm43-0.2" id="id_2" importance="1.0" main="im_19" start="s1:tm0-0.2"/>
+<imageschema POSroot="verb" end="s1:tm29-0.2" id="im_19" importance="1.0" start="s1:tm24-0.2" type="merging"/>
+<ideationalunit end="s1:tm22-0.2" id="id_3" importance="1.0" main="im_25" start="s1:tm0-0.2"/>
+<imageschema POSroot="verb" end="s1:tm15-0.2" id="im_25" importance="1.0" start="s1:tm9-0.2" type="link"/>
 </fml>
 </fml-apml>

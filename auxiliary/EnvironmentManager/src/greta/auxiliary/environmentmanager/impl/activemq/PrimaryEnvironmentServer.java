@@ -37,7 +37,7 @@ public class PrimaryEnvironmentServer extends AbstractPrimaryEnvironmentServer i
 
     private Broker broker;
 
-    public PrimaryEnvironmentServer() {
+    public PrimaryEnvironmentServer() throws Exception {
 
         super(
                 "ActiveMQ",

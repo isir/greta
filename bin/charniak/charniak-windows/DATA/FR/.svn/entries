@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="285"
+   name=""
+   committed-date="2009-02-14T20:02:28.596475Z"
+   url="svn+ssh://seddah@scm.gforge.inria.fr/svn/statgram/dbparser/reranking-parser/first-stage/DATA/FR"
+   last-author="seddah"
+   kind="dir"
+   revision="285"/>
+<entry
+   committed-rev="285"
+   name="l.g"
+   text-time="2009-02-09T15:54:36.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="83c6d1c36490a8a59e0cb9c4b36a8dca"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.ru"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="f55584bb62ac7cb72e66511c4562ccf7"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="m.g"
+   text-time="2009-02-09T15:54:21.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="8993799756e7a1b2911c3ca1e389300e"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.h"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="023e63c99d3f3dc8e808940488d01b5e"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.tt"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="e1d98f43c29f0b58a8f9118df3dd76c3"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.l"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="b61dcecf70d14c8f6c1cae36f5f69bb9"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="r.g"
+   text-time="2009-02-09T15:54:07.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="2f9062c54a3642418282a142ed30c1bb"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.m"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="c5b2d03b64050649c426b138842f5a89"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="u.g"
+   text-time="2009-02-09T15:54:50.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="c3d77d614d98343db020397237329f0d"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="head.ch"
+   text-time="2009-02-09T00:53:07.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="2f6e656697ce96a1b695e26a35d05d2e"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.r"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="1136443432aaf3f5561a4ca321cb7e59"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.s"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="238f361556a4dff025f12f8a776133fe"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.t"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="f0d4aeb2932a548f2def20dd6cc56631"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.u"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="ac8a1a4284283285d001fed51dadce70"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="headInfo.bad"
+   text-time="2009-02-09T01:35:35.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="3c320b0b87f1443f9f38ee86ec2b6f55"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="unitRules.txt"
+   text-time="2009-02-09T15:53:37.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="e4aa987382cac55bdaf912691c4885f0"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="lm.lambdas"
+   text-time="2009-02-09T15:55:24.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="c02438575b45e49a68eb9fab7dea5024"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="nttCounts.txt"
+   text-time="2009-02-09T15:53:43.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="a4132435ebd116a6f13f552d474a317f"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="rm.lambdas"
+   text-time="2009-02-09T15:55:43.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="a6b030266d8a8d3666efed6be4e5d6ab"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="ru.lambdas"
+   text-time="2009-02-09T15:55:33.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="262c9b042f2359e644fa196b026123d5"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="tt.lambdas"
+   text-time="2009-02-09T15:55:52.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="5431cc5a4ec47963ca5a6a348a279f33"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="h.lambdas"
+   text-time="2009-02-09T15:55:14.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="ed3bfa3832069d95aa458c6726c5cd08"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   name="CVS"
+   kind="dir"/>
+<entry
+   committed-rev="285"
+   name="headInfo.txt"
+   text-time="2009-02-09T02:23:55.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="0dbcdc573892ce2d022090f4209b98e8"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="pSgT.txt"
+   text-time="2009-02-09T15:53:37.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="d7ce5e356189611028013ab87ba64a0f"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="terms.txt.bad"
+   text-time="2009-02-06T02:17:33.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="8058e3941a1e12b33e8bf41cb2b1534a"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="l.lambdas"
+   text-time="2009-02-09T15:54:39.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="be88ac090628aa39c11157a3c7f66263"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="lm.g"
+   text-time="2009-02-09T15:55:22.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="f6567f4ac598b7b4e49208f164a12f16"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="pUgT.txt"
+   text-time="2009-02-09T15:53:43.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="ef87b9261b2ebc656b01807342901a26"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="m.lambdas"
+   text-time="2009-02-09T15:54:23.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="d72eba86c8ee4d0b9c2a76a57facc200"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="bugFix.txt"
+   text-time="2009-02-06T01:59:08.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="d41d8cd98f00b204e9800998ecf8427e"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.lm"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="b578ce936a8c25d55901dc5038968053"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="rm.g"
+   text-time="2009-02-09T15:55:41.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="5c7ab8fe9cc65d0f441820b65bbdd55b"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="r.lambdas"
+   text-time="2009-02-09T15:54:11.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="cf7cd4b7701378c2d276ffd005fc9c74"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="endings.txt"
+   text-time="2009-02-09T15:53:49.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="371a76d730426fb4a5cb8900a681a7bb"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="u.lambdas"
+   text-time="2009-02-09T15:54:52.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="b5a5ab49e03063ed022ba1f5b9786930"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="featInfo.rm"
+   text-time="2005-08-16T18:49:57.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="b2b3ec7f60fec72fb31b83bef07e5609"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="terms.txt"
+   text-time="2009-02-06T02:44:21.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="6f2f5123196a1f744332ad40ff1154d7"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="ru.g"
+   text-time="2009-02-09T15:55:31.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="7b2d52fc483994a0751b476b0422245f"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="h.g"
+   text-time="2009-02-09T15:55:11.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="3d6b063371ac3b7c92c27594b51ac1ab"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="tt.g"
+   text-time="2009-02-09T15:55:51.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="cd737190740fe5732feeb03a7b66a53f"
+   last-author="seddah"
+   kind="file"/>
+</wc-entries>

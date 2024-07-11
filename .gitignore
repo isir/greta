@@ -34,3 +34,5 @@ bin/fml_to_bml.xml
 **/db.data
 **/db.redo
 **/db.lock
+/core/MPEG4/build
+/auxiliary/OSC/build

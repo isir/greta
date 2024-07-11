@@ -68,7 +68,11 @@ public class Mistral implements Runnable{
             this.cm=cm;
             java.awt.EventQueue.invokeLater(new Runnable() {
                 public void run() {
+                    try{
                     new MistralFrame(cm).setVisible(true);
+                    }catch(Exception e){
+                         e.printStackTrace();
+                    }
                 }
             });
            

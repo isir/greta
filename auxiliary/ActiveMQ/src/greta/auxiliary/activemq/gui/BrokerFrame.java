@@ -81,11 +81,15 @@ public class BrokerFrame extends javax.swing.JFrame implements ConnectionListene
     }
 
     public void setBroker(Broker broker){
-        this.broker = broker;
-        setHostValue(this.broker.getHost());
-        setPortValue(this.broker.getPort());
-        setConnected(this.broker.isConnected());
-        this.broker.addConnectionListener(this);   
+        
+//        this.broker = broker;
+//        setHostValue(this.broker.getHost());
+//        setPortValue(this.broker.getPort());
+//        setConnected(this.broker.isConnected());
+//        this.broker.addConnectionListener(this);
+        
+        System.out.println("[CAUTION] greta.auxiliary.activemq.gui.BrokerFrame: you need to kill this broker manually by yourself.");
+        System.out.println("[CAUTION] Since it is launched from commandline command, it is out of control from Java");
 
         // init shell
         ProcessBuilder builder = new ProcessBuilder("C:/Windows/System32/cmd.exe");

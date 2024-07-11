@@ -6,6 +6,7 @@
 package greta.auxiliary.mistral;
 
 import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
+import greta.auxiliary.MeaningMiner.shutdownHook;
 import greta.core.intentions.FMLTranslator;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionEmitter;
@@ -34,6 +35,7 @@ import java.io.FileReader;
 import java.io.OutputStreamWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringReader;
@@ -44,6 +46,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.jms.JMSException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -82,6 +85,15 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
     private XMLParser fmlparser = XML.createParser();
     private XMLParser bmlparser = XML.createParser();
     private static String markup = "fml-apml";
+
+    private boolean MM_parse_server_activated = false;
+    private String MM_python_env_checker_path = "Common\\Data\\MeaningMiner\\python\\check_env.py";
+    private String MM_python_env_installer_path = "Common\\Data\\MeaningMiner\\python\\init_env.bat";
+    private String MM_parse_server_path         = "Common\\Data\\MeaningMiner\\python\\activate_server.bat";
+    private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
+    private Process server_process;
+    private Thread server_shutdownHook;
+
     public String getAnswer() {
         return answ;
     }
@@ -95,7 +107,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
     
     public CharacterManager cm;
     
-    public MistralFrame(CharacterManager cm) {
+    public MistralFrame(CharacterManager cm) throws InterruptedException {
         initComponents();
         server = new Server();
         this.cm=cm;
@@ -105,6 +117,9 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
         request.setWrapStyleWord(true);
         AnswerText.setLineWrap(true);
         AnswerText.setWrapStyleWord(true);
+        
+        init_MeaningMiner_server("greta.auxiliary.mistral.MistralFrame");
+        
     }
     
      public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
@@ -262,15 +277,15 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
         ID id = IDProvider.createID(base);
         id.setFmlID(fml_id);
         
-//        if(this.cm.use_MM()){
-//            ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
-//             //MEANING MINER TREATMENT START
-//            List<Intention> intention_list;
-//            System.out.println("File Name "+fml.toString());
-//            intention_list = im.processText_2(fml.toString());
-//            intentions.addAll(intention_list);
-//            //MEANING MINER TREATMENT END
-//        }
+        if(this.cm.use_MM()){
+            ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
+             //MEANING MINER TREATMENT START
+            List<Intention> intention_list;
+            System.out.println("File Name "+fml.toString());
+            intention_list = im.processText_2(fml.toString());
+            intentions.addAll(intention_list);
+            //MEANING MINER TREATMENT END
+        }
         
         for(int i=0; i<intentions.size();i++){
             System.out.println("[INFO]: Intention_type:"+intentions.get(i).getType()+"   "+intentions.get(i).getName());
@@ -723,4 +738,44 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
     private javax.swing.JTextArea systemPrompt;
     // End of variables declaration//GEN-END:variables
 
+    public void init_MeaningMiner_server(String this_file_path) throws InterruptedException
+    {
+        System.out.println(this_file_path + ".init_MeaningMiner_server(): MeaningMiner, checking python environment...");
+        try{
+            server_process = new ProcessBuilder("python", MM_python_env_checker_path).redirectErrorStream(true).start();
+        } catch (IOException ex2){
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
+        }
+        server_process.waitFor();
+
+        InputStream inputStream = server_process.getInputStream();
+        String result = new BufferedReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n")
+                );
+        System.out.println(this_file_path + ".init_MeaningMiner_server(): MeaningMiner, python env exist: " + result);
+        
+        if(result.equals("0")){
+            System.out.println(this_file_path + ".init_MeaningMiner_server(): MeaningMiner, installing python environment...");
+            try{
+                server_process = new ProcessBuilder(MM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+            } catch (IOException ex2){
+                Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
+            }
+            server_process.waitFor();
+        }        
+
+        System.out.println(this_file_path + ".init_MeaningMiner_server(): initializing MeaningMiner python env");
+        try {
+            server_process = new ProcessBuilder(MM_parse_server_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+            //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
+            server_shutdownHook = new shutdownHook(server_process, MM_parse_server_killer_path);
+            Runtime.getRuntime().addShutdownHook(server_shutdownHook);
+        } catch (IOException ex) {
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(this_file_path + ".init_MeaningMiner_server(): MeaningMiner python env initialization signal sent");
+        
+    }
 }

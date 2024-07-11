@@ -125,7 +125,7 @@ public abstract class ActiveMQBase {
         }
         @Override
         public void run() {
-            System.out.println("greta.auxiliary.activemq.ActiveMQBase.ConnectionStarter()");
+            // System.out.println("greta.auxiliary.activemq.ActiveMQBase.ConnectionStarter()");
             Logs.debug(amq.getClass().getSimpleName()+" trys to connect to " + amq.getURL());
             while ( ! amq.isConnected() && amq.starter == this) {
                 try {
@@ -147,14 +147,5 @@ public abstract class ActiveMQBase {
             }
         }
     }
-    private void executeCommand(String command) {
-        try {
-            // single execution
-            p_stdin.write(command);
-            p_stdin.newLine();
-            p_stdin.flush();
-        } catch (IOException e) {
-            System.out.println("greta.auxiliary.activemq.BrokerFrame.executeCommand(): "+e);
-        }
-    }   
+  
 }

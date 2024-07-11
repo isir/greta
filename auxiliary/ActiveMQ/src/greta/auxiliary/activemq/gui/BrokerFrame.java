@@ -23,6 +23,7 @@ import greta.core.util.IniManager;
 import java.awt.Color;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.util.Locale;
 
 /**
@@ -43,14 +44,17 @@ public class BrokerFrame extends javax.swing.JFrame implements ConnectionListene
     private String hostProperty = "network.host";
     private String portProperty = "network.port";
     private String actualConnectedProperty;
+
+    private BufferedWriter p_stdin;
     
     /** Creates new form BrokerFrame */
     public BrokerFrame() throws Exception {
         initComponents();
-        notConnected();
+        setConnected(false);
         
         broker = new Broker();
         setBroker(broker);
+        setConnected(true);
         
     }
 
@@ -82,6 +86,23 @@ public class BrokerFrame extends javax.swing.JFrame implements ConnectionListene
         setPortValue(this.broker.getPort());
         setConnected(this.broker.isConnected());
         this.broker.addConnectionListener(this);   
+
+        // init shell
+        ProcessBuilder builder = new ProcessBuilder("C:/Windows/System32/cmd.exe");
+        Process p = null;
+        try {
+            p = builder.start();
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+        // get stdin of shell
+        p_stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
+
+        // execute commands
+        executeCommand("cd Common\\Lib\\External\\apache-activemq-5.15.14\\bin");
+        executeCommand("activemq start");
+        System.out.println("ActiveMQ Broker started");        
+
     }
 
     protected void setHostValue(String value){
@@ -279,4 +300,14 @@ public class BrokerFrame extends javax.swing.JFrame implements ConnectionListene
     private javax.swing.JLabel statusLabel;
     // End of variables declaration//GEN-END:variables
  
+    private void executeCommand(String command) {
+        try {
+            // single execution
+            p_stdin.write(command);
+            p_stdin.newLine();
+            p_stdin.flush();
+        } catch (IOException e) {
+            System.out.println("greta.auxiliary.activemq.BrokerFrame.executeCommand(): "+e);
+        }
+    } 
 }

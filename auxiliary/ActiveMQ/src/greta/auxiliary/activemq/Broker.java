@@ -65,21 +65,7 @@ public class Broker extends ActiveMQBase{
 //        }
         
 
-            // init shell
-            ProcessBuilder builder = new ProcessBuilder("C:/Windows/System32/cmd.exe");
-            Process p = null;
-            try {
-                p = builder.start();
-            } catch (IOException e) {
-                System.out.println(e);
-            }
-            // get stdin of shell
-            p_stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
 
-            // execute commands
-            executeCommand("cd Common\\Lib\\External\\apache-activemq-5.15.14\\bin");
-            executeCommand("activemq start");
-            System.out.println("ActiveMQ Broker started");
     }
 
     private synchronized static BrokerService getBrokerService() throws Exception{

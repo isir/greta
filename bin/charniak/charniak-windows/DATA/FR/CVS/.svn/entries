@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wc-entries
+   xmlns="svn:">
+<entry
+   committed-rev="285"
+   name=""
+   committed-date="2009-02-14T20:02:28.596475Z"
+   url="svn+ssh://seddah@scm.gforge.inria.fr/svn/statgram/dbparser/reranking-parser/first-stage/DATA/FR/CVS"
+   last-author="seddah"
+   kind="dir"
+   revision="285"/>
+<entry
+   committed-rev="285"
+   name="Repository"
+   text-time="2006-05-12T20:49:32.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="73a66ef67cd5097ecd43f3e0e5cb0d03"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="Root"
+   text-time="2006-05-12T20:49:32.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="a59d12092791e1b8f96f4505721000c8"
+   last-author="seddah"
+   kind="file"/>
+<entry
+   committed-rev="285"
+   name="Entries"
+   text-time="2006-05-12T20:49:32.000000Z"
+   committed-date="2009-02-14T20:02:28.596475Z"
+   checksum="9f932e19a3fcefcf6fd89bc9c3c15b3e"
+   last-author="seddah"
+   kind="file"/>
+</wc-entries>

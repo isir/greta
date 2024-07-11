@@ -76,43 +76,8 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
         this.cm = cm;
         this.cm.setTouch_computed(false);
         
-        System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner, checking python environment...");
-        try{
-            server_process = new ProcessBuilder("python", MM_python_env_checker_path).redirectErrorStream(true).start();
-        } catch (IOException ex2){
-            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
-        }
-        server_process.waitFor();
-
-        InputStream inputStream = server_process.getInputStream();
-        String result = new BufferedReader(
-                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                .lines()
-                .collect(Collectors.joining("\n")
-                );
-        System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner, python env exist: " + result);
-        
-        if(result.equals("0")){
-            System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner, installing python environment...");
-            try{
-                server_process = new ProcessBuilder(MM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
-            } catch (IOException ex2){
-                Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
-            }
-            server_process.waitFor();
-        }        
-
-        System.out.println("greta.core.intentions.FMLFileReader: initializing MeaningMiner python env");
-        try {
-            server_process = new ProcessBuilder(MM_parse_server_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
-            //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
-            server_shutdownHook = new shutdownHook(server_process, MM_parse_server_killer_path);
-            Runtime.getRuntime().addShutdownHook(server_shutdownHook);
-        } catch (IOException ex) {
-            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner python env initialization signal sent");
-        
+        init_MeaningMiner_server("greta.auxiliary.MeaningMiner.FMLFileReader_MeaningMiner.init_MeaningMiner_server()");
+                
         /**
         InputStream inputStream = server_process.getInputStream();
         String result = new BufferedReader(
@@ -378,6 +343,47 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
     public static boolean checkKeywords(String[] words, String str)
     {
         return (Arrays.asList(words).contains(str));
+    }
+    
+    public void init_MeaningMiner_server(String this_file_path) throws InterruptedException
+    {
+        System.out.println(this_file_path + ".init_MeaningMiner_server(): MeaningMiner, checking python environment...");
+        try{
+            server_process = new ProcessBuilder("python", MM_python_env_checker_path).redirectErrorStream(true).start();
+        } catch (IOException ex2){
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
+        }
+        server_process.waitFor();
+
+        InputStream inputStream = server_process.getInputStream();
+        String result = new BufferedReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n")
+                );
+        System.out.println(this_file_path + ".init_MeaningMiner_server(): MeaningMiner, python env exist: " + result);
+        
+        if(result.equals("0")){
+            System.out.println(this_file_path + ".init_MeaningMiner_server(): MeaningMiner, installing python environment...");
+            try{
+                server_process = new ProcessBuilder(MM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+            } catch (IOException ex2){
+                Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
+            }
+            server_process.waitFor();
+        }        
+
+        System.out.println(this_file_path + ".init_MeaningMiner_server(): initializing MeaningMiner python env");
+        try {
+            server_process = new ProcessBuilder(MM_parse_server_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+            //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
+            server_shutdownHook = new shutdownHook(server_process, MM_parse_server_killer_path);
+            Runtime.getRuntime().addShutdownHook(server_shutdownHook);
+        } catch (IOException ex) {
+            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println(this_file_path + ".init_MeaningMiner_server(): MeaningMiner python env initialization signal sent");
+        
     }
     
 }

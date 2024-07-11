@@ -305,142 +305,143 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             
             //Start NVBG TREATMENT
             if(this.getCharacterManager().get_use_NVBG()){
-            String phrase="";
-            List<Signal> signals=new ArrayList<Signal>();
-            boolean NVBG_worked=false;
-            List<String> gestures=null;
-            String fml_gestures_tag="";
-            int max_index=0;
-            for(Signal sig: signalsReturned){
-                try {
-                    System.out.println("GRETA Returned:"+sig.getClass());
-                    if (sig.getModality()=="speech" && !NVBG_worked){
-                        NVBG_worked=true;
-                        Speech m = (Speech) sig;
-                        m.getOriginalText();
-                        List<Object> f=m.getSpeechElements();
-                        for(Object ob:f){
-                            if (ob.getClass()==String.class){
-                                phrase = phrase+ob;
-                                
-                            }
-                        }
-                    XMLParser bmlparser = XML.createParser();
-                    MessageSender msg_send = new MessageSender();
-                    System.out.println("INFO: "+phrase);
-                    phrase=phrase.replaceAll("  ", " ");
-                    if(phrase.startsWith(" ")){
-                        phrase=phrase.substring(1);
-                    }
-                    if(flag==0)
-                    fml_construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n<fml-apml>\n";
-                    String construction="<bml>"+
-                            "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
-                            "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
-                    fml_construction=fml_construction+construction;
-                    //System.out.println(phrase.replaceAll("  ", " ").substring(1));
-                    String[] sp=phrase.split(" ");
-                    int i=1;
-                    for(int j=0;j<sp.length;j++){
-                        if(flag==0)
-                            fml_construction=fml_construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
-                        construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
-                        i++;
-                        max_index=i;
-                    }
-                    if(flag==0)
-                        fml_construction=fml_construction+"\n</speech>\n</bml>\n<fml>";
-                    construction=construction+"\n</speech>\n</bml>";
+                
+                String phrase="";
+                List<Signal> signals=new ArrayList<Signal>();
+                boolean NVBG_worked=false;
+                List<String> gestures=null;
+                String fml_gestures_tag="";
+                int max_index=0;
+                for(Signal sig: signalsReturned){
                     try {
+                        System.out.println("GRETA Returned:"+sig.getClass());
+                        if (sig.getModality()=="speech" && !NVBG_worked){
+                            NVBG_worked=true;
+                            Speech m = (Speech) sig;
+                            m.getOriginalText();
+                            List<Object> f=m.getSpeechElements();
+                            for(Object ob:f){
+                                if (ob.getClass()==String.class){
+                                    phrase = phrase+ob;
+
+                                }
+                            }
+                            XMLParser bmlparser = XML.createParser();
+                            MessageSender msg_send = new MessageSender();
+                            System.out.println("INFO: "+phrase);
+                            phrase=phrase.replaceAll("  ", " ");
+                            if(phrase.startsWith(" ")){
+                                phrase=phrase.substring(1);
+                            }
+                            if(flag==0)
+                            fml_construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n<fml-apml>\n";
+                            String construction="<bml>"+
+                                    "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
+                                    "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
+                            fml_construction=fml_construction+construction;
+                            //System.out.println(phrase.replaceAll("  ", " ").substring(1));
+                            String[] sp=phrase.split(" ");
+                            int i=1;
+                            for(int j=0;j<sp.length;j++){
+                                if(flag==0)
+                                    fml_construction=fml_construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
+                                construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
+                                i++;
+                                max_index=i;
+                            }
+                            if(flag==0)
+                                fml_construction=fml_construction+"\n</speech>\n</bml>\n<fml>";
+                            construction=construction+"\n</speech>\n</bml>";
                             try {
-                                gestures = msg_send.traitement_NVBG(phrase,this.getCharacterManager().getEnvironment().getNVBG_Open());
-                            } catch (InterruptedException ex) {
+                                    try {
+                                        gestures = msg_send.traitement_NVBG(phrase,this.getCharacterManager().getEnvironment().getNVBG_Open());
+                                    } catch (InterruptedException ex) {
+                                        Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                this.getCharacterManager().getEnvironment().setNVBG_Open(true);
+                            } catch (FileNotFoundException ex) {
+                                Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                            } catch (JMSException ex) {
                                 Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        this.getCharacterManager().getEnvironment().setNVBG_Open(true);
-                    } catch (FileNotFoundException ex) {
+                            //System.out.println("Out " + gestures);
+                            if(gestures!=null){
+                                for(String y : gestures){
+                                    String[] k=y.split("importance");
+                                    y=k[0];
+                                    String bml_modif=construction.toString();
+                                    String[] g=y.split("lexeme=");
+                                    String b= g[1].substring(1,g[1].indexOf(" ")-1);
+                                    String[] c=y.replace("<","").split(" ");
+
+                                    String addend="<description priority=\"1\" type=\"gretabml\">"+
+                                            "\n<reference>"+c[0]+"="+b+"</reference>"+
+                                            "\n<intensity>1.000</intensity>"+
+                                            "`\n<SPC.value>0.646</SPC.value>"+
+                                            "\n<TMP.value>-0.400</TMP.value>"+
+                                            "\n<FLD.value>0.000</FLD.value>"+
+                                            "\n<PWR.value>0.000</PWR.value>"+
+                                            "\n<REP.value>0.000</REP.value>"+
+                                            "\n<OPN.value>0.000</OPN.value>"+
+                                            "\n<TEN.value>0.000</TEN.value>"+
+                                            "\n</description>";
+                                    bml_modif=construction.replaceAll("</bml>",y.replace(c[0],"gesture")+">"+"\n"+addend+"\n</gesture>\n</bml>");
+                                    flag=1;
+                                    if(flag==1){
+                                    String ends[] = y.split("end=");
+                                    String ends2[]=ends[1].split(":");
+                                    String ends3[]=ends2[1].split(" ");
+                                    //System.out.println("INFO ENDS[]:"+ends2[0]+"    "+ends3[0]+"   "+max_index);
+                                    if(Integer.parseInt(ends3[0].replace("\"","").replace("tm",""))>max_index){
+                                        System.out.println("INFO ENDS[]:"+ends2[0].replace("\"","")+"    "+ends3[0].replace("\"","").replace("tm","")+"   "+max_index);
+                                        y=y.replace("end="+ends2[0].replace("\"","")+":"+ends3[0].replace("\"","").replace("tm",""),"end="+ends2[0]+":"+Integer.toString(max_index));
+                                    }
+                                    fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance=\"1.0\"/>";
+                                    // fml_construction=fml_construction+"\n"+y.replace("lexeme","type");
+                                    }
+                                    //System.out.println("FML FILE\n:"+fml_construction);
+                                    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                                    DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                                    Document document = docBuilder.parse(new InputSource(new StringReader(bml_modif)));
+                                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                                    Transformer transformer = transformerFactory.newTransformer();
+                                    DOMSource source = new DOMSource(document);
+                                    FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\test_fml.xml"));
+                                    StreamResult result = new StreamResult(writer);
+                                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                                    transformer.transform(source, result);
+                                    XMLTree bml_mod = bmlparser.parseFile(System.getProperty("user.dir")+"\\test_fml.xml");
+                                    signals.addAll(BMLTranslator.BMLToSignals(bml_mod, this.getCharacterManager()));
+                                    //System.out.println("SIGNALS:"+signals);
+                                }
+                            }
+
+                            // Fin traitment NVBG
+                        }
+                    }
+                    //if signalsReturned is empty, it means that no Signal can be added.
+                    //  It's normal !
+                    //but if signalsReturned is null, it means that the selector cannot performe this kind of intention
+                    //  so there is a problem with the choice of the selector.
+                    catch (SAXException ex) {
                         Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (JMSException ex) {
+                    } catch (IOException ex) {
+                        Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (TransformerConfigurationException ex) {
+                        Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (ParserConfigurationException ex) {
+                        Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (TransformerException ex) {
                         Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    //System.out.println("Out " + gestures);
-                    if(gestures!=null){
-                        for(String y : gestures){
-                            String[] k=y.split("importance");
-                            y=k[0];
-                            String bml_modif=construction.toString();
-                            String[] g=y.split("lexeme=");
-                            String b= g[1].substring(1,g[1].indexOf(" ")-1);
-                            String[] c=y.replace("<","").split(" ");
 
-                            String addend="<description priority=\"1\" type=\"gretabml\">"+
-                                    "\n<reference>"+c[0]+"="+b+"</reference>"+
-                                    "\n<intensity>1.000</intensity>"+
-                                    "`\n<SPC.value>0.646</SPC.value>"+
-                                    "\n<TMP.value>-0.400</TMP.value>"+
-                                    "\n<FLD.value>0.000</FLD.value>"+
-                                    "\n<PWR.value>0.000</PWR.value>"+
-                                    "\n<REP.value>0.000</REP.value>"+
-                                    "\n<OPN.value>0.000</OPN.value>"+
-                                    "\n<TEN.value>0.000</TEN.value>"+
-                                    "\n</description>";
-                            bml_modif=construction.replaceAll("</bml>",y.replace(c[0],"gesture")+">"+"\n"+addend+"\n</gesture>\n</bml>");
-                            flag=1;
-                            if(flag==1){
-                            String ends[] = y.split("end=");
-                            String ends2[]=ends[1].split(":");
-                            String ends3[]=ends2[1].split(" ");
-                            //System.out.println("INFO ENDS[]:"+ends2[0]+"    "+ends3[0]+"   "+max_index);
-                            if(Integer.parseInt(ends3[0].replace("\"","").replace("tm",""))>max_index){
-                                System.out.println("INFO ENDS[]:"+ends2[0].replace("\"","")+"    "+ends3[0].replace("\"","").replace("tm","")+"   "+max_index);
-                                y=y.replace("end="+ends2[0].replace("\"","")+":"+ends3[0].replace("\"","").replace("tm",""),"end="+ends2[0]+":"+Integer.toString(max_index));
-                            }
-                            fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance=\"1.0\"/>";
-                            // fml_construction=fml_construction+"\n"+y.replace("lexeme","type");
-                            }
-                            //System.out.println("FML FILE\n:"+fml_construction);
-                            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-                            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-                            Document document = docBuilder.parse(new InputSource(new StringReader(bml_modif)));
-                            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                            Transformer transformer = transformerFactory.newTransformer();
-                            DOMSource source = new DOMSource(document);
-                            FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\test_fml.xml"));
-                            StreamResult result = new StreamResult(writer);
-                            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                            transformer.transform(source, result);
-                            XMLTree bml_mod = bmlparser.parseFile(System.getProperty("user.dir")+"\\test_fml.xml");
-                            signals.addAll(BMLTranslator.BMLToSignals(bml_mod, this.getCharacterManager()));
-                            //System.out.println("SIGNALS:"+signals);
-                        }
-                        }
 
-                        // Fin traitment NVBG
-                    }
+
                 }
-                //if signalsReturned is empty, it means that no Signal can be added.
-                //  It's normal !
-                //but if signalsReturned is null, it means that the selector cannot performe this kind of intention
-                //  so there is a problem with the choice of the selector.
-                catch (SAXException ex) {
-                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (IOException ex) {
-                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (TransformerConfigurationException ex) {
-                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (ParserConfigurationException ex) {
-                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
-                } catch (TransformerException ex) {
-                    Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
+                // If NVBG found animations we will add the animations translated in signals to the signals
+                if(gestures!=null){
+                    signalsReturned.addAll(signals);
                 }
-                
-                
-            
-            }
-            // If NVBG found animations we will add the animations translated in signals to the signals
-            if(gestures!=null){
-                signalsReturned.addAll(signals);
-            }
             }
 
             // if the behaviorset for the gaze is != null it is created a GazeSignal with target like find in the fml, influence null and it is reported also the character_id

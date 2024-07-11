@@ -77,29 +77,6 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
         this.cm.setTouch_computed(false);
         
         init_MeaningMiner_server("greta.auxiliary.MeaningMiner.FMLFileReader_MeaningMiner.init_MeaningMiner_server()");
-                
-        /**
-        InputStream inputStream = server_process.getInputStream();
-        String result = new BufferedReader(
-                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                .lines()
-                .collect(Collectors.joining("\n")
-                );
-        System.out.println("MM SERVER OUTPUT");
-        System.out.println(result);
-        boolean errorFound = checkKeywords(new String[] {"Error", "ERROR", "ERR"}, result);
-        if(errorFound){
-            if(checkKeywords(new String[] {"Only one usage of each socket address"}, result)){
-                System.out.println("greta.core.intentions.FMLFileReader: server is already running.");
-            }
-            else{
-                System.out.println("greta.core.intentions.FMLFileReader: failed to launch MeaningMiner server.");
-            }
-        }
-        else{
-            System.out.println("greta.core.intentions.FMLFileReader: MeaningMiner server is now ready.");
-        }
-        * **/
         
     }
 

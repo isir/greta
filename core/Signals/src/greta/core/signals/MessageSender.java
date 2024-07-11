@@ -48,27 +48,7 @@ public class MessageSender{
     public List<String> traitement_NVBG(String input,boolean nvbg) throws JMSException, FileNotFoundException, InterruptedException, IOException{ 
         System.out.println("[NVBG INFO]:MessageSender.main()");
         System.out.println(url);
-        if(nvbg==false){
-
-//            // init shell
-//            ProcessBuilder builder = new ProcessBuilder("C:/Windows/System32/cmd.exe");
-//            Process p = null;
-//            try {
-//                p = builder.start();
-//            } catch (IOException e) {
-//                System.out.println(e);
-//            }
-//            // get stdin of shell
-//            p_stdin = new BufferedWriter(new OutputStreamWriter(p.getOutputStream()));
-//
-//            // execute commands
-//            executeCommand("cd Common\\Lib\\External\\apache-activemq-5.15.14\\bin");
-//            executeCommand("activemq start");
-//            //executeCommand("exit");
-//
-//            // write stdout of shell (=output of all commands)
-    
-        }
+        
         // Getting JMS connection from the server and starting it
         ConnectionFactory connectionFactory = new ActiveMQConnectionFactory(url);
         Connection connection = connectionFactory.createConnection();
@@ -169,23 +149,9 @@ public class MessageSender{
         
     }
  
-        // We will be using TestMessage in our example. MessageProducer sent us a TextMessage
-        // so we must cast to it to get access to its .getText() method.
-
+    // We will be using TestMessage in our example. MessageProducer sent us a TextMessage
+    // so we must cast to it to get access to its .getText() method.
     
-
-    
-    private void executeCommand(String command) {
-        try {
-            // single execution
-            p_stdin.write(command);
-            p_stdin.newLine();
-            p_stdin.flush();
-        } catch (IOException e) {
-            System.out.println("[NVBG INFO]:"+e);
-        }
-    }
-
     public class MyThreadNVBG extends Thread{
          
          public MyThreadNVBG(){

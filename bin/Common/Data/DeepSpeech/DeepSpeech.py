@@ -21,7 +21,7 @@ load_dotenv()
 
 # We will collect the is_final=true messages here so we can use them when the person finishes speaking
 is_finals = []
-deepgram: DeepgramClient = DeepgramClient("bc6ae543f5bab905beb09121e8ac3d8c57c9f870")
+deepgram: DeepgramClient = DeepgramClient("my_api_key")
 
 dg_connection = deepgram.listen.live.v("1")
 STOP = False

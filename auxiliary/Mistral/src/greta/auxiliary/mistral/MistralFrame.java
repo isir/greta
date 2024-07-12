@@ -536,7 +536,35 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    public void setRequestText(String content){
+        request.setText(content);
+    }
+    public void setRequestTextandSend(String content){
+        request.setText(content);
+        
+        // TODO add your handling code here:
+        Thread r1 = new Thread() {
+            @Override
+            public void run() {
+                String text=request.getText();
+                String language= (String) languageBox.getSelectedItem();
+                String model= (String) modelBox.getSelectedItem();
+                String systemPromptText = systemPrompt.getText();
+                System.out.println("Language selected : "+language);
+                if(text.length()>0)
+                try {
 
+                    server.sendMessage(model+"#SEP#"+language+"#SEP#"+text+"#SEP#"+systemPromptText);
+                    System.out.println("Sent message:"+text);
+                } catch (IOException ex) {
+                    Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        };
+
+        r1.start();
+    }
     private void enableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableActionPerformed
         
         if(enable.isSelected()){

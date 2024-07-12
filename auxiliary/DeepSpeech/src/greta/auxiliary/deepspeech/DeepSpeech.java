@@ -60,15 +60,13 @@ public class DeepSpeech implements Runnable{
     protected DeepSpeechFrame loader;
 
     
-    public CharacterManager cm;
+  
     
-   
-    
-        public DeepSpeech(CharacterManager cm) throws JMSException{
-            this.cm=cm;
+        public DeepSpeech() throws JMSException{
+            
             java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new DeepSpeechFrame(cm).setVisible(true);
+                new DeepSpeechFrame().setVisible(true);
  
     }
             });

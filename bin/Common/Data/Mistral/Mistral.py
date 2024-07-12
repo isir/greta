@@ -12,7 +12,7 @@ from mistralai.models.chat_completion import ChatMessage
 
 messages = None
 messages_online = None
-MISTRAL_API_KEY = "my_api_key"
+MISTRAL_API_KEY = "Jg5LiL8bYyB4wlb5Rhj30pc2IXKBYXQ0"
 
 model = "mistral-large-latest"
 client_online = MistralClient(api_key=MISTRAL_API_KEY)

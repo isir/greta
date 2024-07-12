@@ -5,10 +5,7 @@
  */
 package greta.auxiliary.deepspeech;
 
-import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
-import greta.core.intentions.FMLTranslator;
-import greta.core.intentions.Intention;
-import greta.core.intentions.IntentionEmitter;
+
 import greta.core.intentions.IntentionPerformer;
 import greta.core.signals.BMLTranslator;
 import greta.core.signals.Signal;
@@ -44,21 +41,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.jms.JMSException;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
-
+import greta.auxiliary.mistral.MistralFrame;
 
 /**
  *
@@ -71,17 +54,12 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
      */
     
     private Server server;
-    private Server server_mistral;
     public Socket soc;
     public String answ;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
-    
-    private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
-    private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
-    private XMLParser fmlparser = XML.createParser();
-    private XMLParser bmlparser = XML.createParser();
+    private ArrayList<MistralFrame> mistrals = new ArrayList<MistralFrame>();
     private static String markup = "fml-apml";
     public String getAnswer() {
         return answ;
@@ -94,13 +72,13 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
     
     
     
-    public CharacterManager cm;
-    
-    public DeepSpeechFrame(CharacterManager cm) {
+  
+    public DeepSpeechFrame() {
         initComponents();
         server = new Server();
-        server_mistral= new Server();
-        this.cm=cm;
+       
+       
+        
        
         TranscriptText.setLineWrap(true);
         TranscriptText.setWrapStyleWord(true);
@@ -297,8 +275,6 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
             System.out.println("DeepSpeech port:"+server.getPort());
             server.setAddress(address.getText());
             server.setPort(port.getText());
-            server_mistral.setAddress(address.getText());
-            server_mistral.setPort(port_mistral.getText());
             boolean python=true;
             String result="";
             try{ 
@@ -343,7 +319,6 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
                     System.out.println("Opening python DeepSpeech script");
                     
                     server.startConnection();
-                    server_mistral.startConnection();
                     Thread r1 = new Thread() {
                     @Override
                     public void run() {
@@ -351,7 +326,6 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
                             try {
                                 System.out.println("Checking new connections");
                                 server.accept_new_connection();
-                                server_mistral.accept_new_connection();
                             } catch (IOException ex) {
                                 Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -389,7 +363,23 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
                                     System.out.println("CLIENT:"+answ);
                                     if (answ.contains("Speech Final:")|answ.contains("Is Final:")){
                                     TranscriptText.setText(answ.replace("Speech Final:","").replace("Is Final:",""));
-                                    server_mistral.sendMessage(answ.replace("Speech Final:","").replace("Is Final:",""));
+                                    if (IsListenning){
+                                        for (MistralFrame mistral : mistrals){
+                                        
+                                        mistral.setRequestTextandSend(answ.replace("Speech Final:","").replace("Is Final:",""));
+                                    }
+                    try{
+                        server.sendMessage("STOP");
+                        System.out.println("Stopping");
+                        IsListenning = Boolean.FALSE;
+                        listen.setText("Listen");
+                    }catch (IOException ex) {
+                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                    
+                }
+                                    
+                                    
                                 }
                                     
                                 }
@@ -445,7 +435,6 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
         r3.start();
              }
             server.stopConnection();
-            server_mistral.stopConnection();
             }
             catch(Exception e)
                  {
@@ -496,6 +485,14 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
     
     }//GEN-LAST:event_listenActionPerformed
 
+    public void addMistralFrame(MistralFrame mistral) {
+        mistrals.add(mistral);
+    }
+    
+ 
+    public void removeMistralFrame(MistralFrame mistral) {
+        mistrals.remove(mistral);
+    }
     private void portActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_portActionPerformed

@@ -110,7 +110,7 @@
                 </element>
                 <element h="50.0" id="Mistral - 1720516226740-395"
                     module="Mistral" name="Mistral" w="80.0" x="30.0" y="30.0">
-                    <window h="575" visible="true" w="935" x="276" y="-1112"/>
+                    <window h="575" visible="false" w="935" x="276" y="-1112"/>
                 </element>
                 <element h="50.0"
                     id="ActiveMQ Meaning Miner FML Receiver - 1720618197397-985"
@@ -128,11 +128,11 @@
             module="Ogre Player" name="Ogre Player" w="80.0" x="760.0" y="140.0">
             <parameter name="posX" value="0.0"/>
             <parameter name="posY" value="1.5"/>
-            <parameter name="posZ" value="1.2999999523162842"/>
+            <parameter name="posZ" value="4.299999713897705"/>
             <parameter name="roll" value="0.0"/>
             <parameter name="pitch" value="0.0"/>
             <parameter name="yaw" value="0.0"/>
-            <window h="615" visible="true" w="736" x="1158" y="50"/>
+            <window h="2016" visible="true" w="1168" x="2552" y="-8"/>
         </element>
         <element h="50.0" id="DeepSpeech - 1720780061810-274"
             module="DeepSpeech" name="DeepSpeech" w="80.0" x="440.0" y="30.0">
@@ -140,14 +140,27 @@
         </element>
     </elements>
     <connections>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="Mistral - 1720516226740-395" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
+            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1720626419025-143" target="Environment - 1544700713383-564"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -156,28 +169,15 @@
             source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Rest_Pose_Setter - 1621595871295-438" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="ASRToMistral"
-            source="DeepSpeech - 1720780061810-274" target="Mistral - 1720516226740-395"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="ActiveMQ Meaning Miner FML Receiver - 1720618197397-985" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1720626419025-143" target="Environment - 1544700713383-564"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="ASRToMistral"
+            source="DeepSpeech - 1720780061810-274" target="Mistral - 1720516226740-395"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="ActiveMQ Meaning Miner FML Receiver - 1720618197397-985" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+            source="Rest_Pose_Setter - 1621595871295-438" target="Behavior Realizer - 1544712930520-534"/>
     </connections>
 </modulated>

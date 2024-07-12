@@ -243,7 +243,7 @@ def load_csv(path):
 
 def prepare_french_imageschema_dict():
     
-    dict_path = r"C:\Users\takes\Documents\NetBeansProjects\greta-gpl-grimaldi\greta-gpl-grimaldi\bin\Common\Data\MeaningMiner\imageschemaSynset.xml"
+    dict_path = r"..\imageschemaSynset.xml"
     
     tree = ET.parse(dict_path)
     imageschema_dict = tree.getroot()

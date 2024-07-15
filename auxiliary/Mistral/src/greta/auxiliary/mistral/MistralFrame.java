@@ -95,6 +95,8 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
     private String Mistral_python_env_installer_path = "Common\\Data\\Mistral\\init_env.bat";
     private Process server_process;
     private Thread server_shutdownHook;
+    private Process server_process_mistral;
+    private Thread server_shutdownHook_mistral;
 
     public String getAnswer() {
         return answ;
@@ -577,14 +579,14 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
             boolean python=true;
             
             try{
-            server_process = new ProcessBuilder("python", Mistral_python_env_checker_path).redirectErrorStream(true).start();
-            server_process.waitFor();
+            server_process_mistral = new ProcessBuilder("python", Mistral_python_env_checker_path).redirectErrorStream(true).start();
+            server_process_mistral.waitFor();
         } catch (Exception e){
            e.printStackTrace();
         }
         
 
-        InputStream inputStream = server_process.getInputStream();
+        InputStream inputStream = server_process_mistral.getInputStream();
         String result = new BufferedReader(
                 new InputStreamReader(inputStream, StandardCharsets.UTF_8))
                 .lines()
@@ -595,8 +597,8 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
         if(result.equals("0")){
             System.out.println(".init_Mistral_server(): Mistral, installing python environment...");
             try{
-                server_process = new ProcessBuilder(Mistral_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
-                server_process.waitFor();
+                server_process_mistral = new ProcessBuilder(Mistral_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                server_process_mistral.waitFor();
             } catch (Exception e){
                 e.printStackTrace();
             }

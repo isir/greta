@@ -42,6 +42,8 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import greta.auxiliary.mistral.MistralFrame;
+import java.io.InputStream;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -61,6 +63,13 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
     public static final String ANSI_RED = "\u001B[31m";
     private ArrayList<MistralFrame> mistrals = new ArrayList<MistralFrame>();
     private static String markup = "fml-apml";
+    
+    private String DeepSpeech_python_env_checker_path = "Common\\Data\\DeepSpeech\\check_env.py";
+    private String DeepSpeech_python_env_installer_path = "Common\\Data\\DeepSpeech\\init_env.bat";
+    private Process server_process;
+    private Thread server_shutdownHook;
+    
+    
     public String getAnswer() {
         return answ;
     }
@@ -276,32 +285,33 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
             server.setAddress(address.getText());
             server.setPort(port.getText());
             boolean python=true;
-            String result="";
-            try{ 
-                String[] cmd = {
-                        "python ", "-c", "import openai"
-                    };
-                    Runtime rt = Runtime.getRuntime();
-                try {
-                    Process proc = rt.exec(cmd);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream(),"ISO-8859-1"));
-                        String line = "";
-                        while ((line = reader.readLine()) != null) {
-                            System.out.println(line + "\n");
-                        }
-                    if(result.contains("not available") || result.contains("introuvable") || result.contains("no module"))
-                        python=false;
-                    
-                } catch (IOException ex) {
-                    System.out.println("greta.auxiliary.deepspeech.DeepSpeechFrame.enableActionPerformed()");
-                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    python=false;
-                }
-                }
-                catch(Exception e)
-                {
-                e.printStackTrace(); 
+             try{
+            server_process = new ProcessBuilder("python", DeepSpeech_python_env_checker_path).redirectErrorStream(true).start();
+            server_process.waitFor();
+        } catch (Exception e){
+           e.printStackTrace();
+        }
+        
+
+        InputStream inputStream = server_process.getInputStream();
+        String result = new BufferedReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n")
+                );
+        System.out.println(".init_DeepSpeech_server(): Mistral, python env exist: " + result);
+        
+        if(result.equals("0")){
+            System.out.println(".init_DeepSpeech_server(): Mistral, installing python environment...");
+            try{
+                server_process = new ProcessBuilder(DeepSpeech_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                server_process.waitFor();
+            } catch (Exception e){
+                e.printStackTrace();
             }
+            
+        }        
+          
             
             
             if(python==false){
@@ -339,7 +349,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
                         
                         try {
                             String[] cmd = {
-                                "python","-u",
+                                    "cmd.exe","/C","conda","activate","greta_deepgram","&&","python","-u",
                                 System.getProperty("user.dir")+"\\Common\\Data\\DeepSpeech\\DeepSpeech.py ",server.getPort(),
                             };
                             Runtime rt = Runtime.getRuntime();

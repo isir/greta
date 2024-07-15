@@ -4,22 +4,22 @@
 <description level="1" type="gretabml">
 </description>
 <tm id="tm1"/>Sure
-<tm id="tm2"/>thing,
+<tm id="tm2"/>thing!
 <tm id="tm3"/>I'll
 <tm id="tm4"/>do
 <tm id="tm5"/>my
 <tm id="tm6"/>best
 <tm id="tm7"/>to
 <tm id="tm8"/>provide
-<tm id="tm9"/>brief,
-<tm id="tm10"/>conversational
-<tm id="tm11"/>responses!
-<tm id="tm12"/>Please
-<tm id="tm13"/>go
-<tm id="tm14"/>ahead
-<tm id="tm15"/>and
-<tm id="tm16"/>ask
-<tm id="tm17"/>your
-<tm id="tm18"/>questions.
+<tm id="tm9"/>short,
+<tm id="tm10"/>spoken-style
+<tm id="tm11"/>answers.
+<tm id="tm12"/>What
+<tm id="tm13"/>can
+<tm id="tm14"/>I
+<tm id="tm15"/>help
+<tm id="tm16"/>you
+<tm id="tm17"/>with
+<tm id="tm18"/>today?
 </speech>
 </bml>

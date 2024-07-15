@@ -1,0 +1,4 @@
+deepgram-sdk==3.3.2
+waiting==1.4.1
+python-dotenv==1.0.1
+pyaudio==0.2.14

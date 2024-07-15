@@ -42,14 +42,19 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import greta.auxiliary.mistral.MistralFrame;
+import greta.core.feedbacks.Callback;
 import java.io.InputStream;
 import java.util.stream.Collectors;
+import greta.core.feedbacks.FeedbackPerformer;
+import greta.core.signals.SpeechSignal;
+import greta.core.util.time.Temporizable;
+import greta.core.util.time.TimeMarker;
 
 /**
  *
  * @author miche
  */
-public class DeepSpeechFrame extends javax.swing.JFrame {
+public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerformer {
 
     /**
      * Creates new form DeepSpeechFrame
@@ -68,7 +73,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
     private String DeepSpeech_python_env_installer_path = "Common\\Data\\DeepSpeech\\init_env.bat";
     private Process server_process;
     private Thread server_shutdownHook;
-    
+    private boolean automaticListenBool = false;
     
     public String getAnswer() {
         return answ;
@@ -77,6 +82,87 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
     public void setAnswer(String answer) {
         this.answ = answer;
     }
+    
+   public void performFeedback(String type){
+       if (type == "end"){
+       if (!IsListenning & automaticListenBool){
+           Thread r3 = new Thread() {
+            @Override
+            public void run() {
+       
+                try {
+                    String language= (String) languageBox.getSelectedItem();
+                    System.out.println("Language selected : "+language);
+                    
+                    server.sendMessage(language);
+                    System.out.println("Listenning");
+                    listen.setText("Stop");
+                    IsListenning = Boolean.TRUE;
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+           };
+           r3.start();
+                
+                
+                }
+   }
+   if (type == "start"){
+       if (IsListenning){
+           Thread r3 = new Thread() {
+            @Override
+            public void run() {
+       
+                    try{
+                        server.sendMessage("STOP");
+                        System.out.println("Stopping");
+                        IsListenning = Boolean.FALSE;
+                        listen.setText("Listen");
+                    }catch (IOException ex) {
+                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+           };
+                    r3.start();
+   }
+   }
+   }
+   public void performFeedback(ID AnimId, String type, SpeechSignal speechSignal, TimeMarker tm){
+    performFeedback(type);
+   };
+
+   public void performFeedback(ID AnimId, String type, List<Temporizable> listTmp){
+       performFeedback(type);
+   };
+
+   public void performFeedback(Callback callback){
+   performFeedback(callback.type());
+};
+   public void setDetailsOption(boolean detailed){
+       
+   };
+
+   public boolean areDetailedFeedbacks(){
+     return true  ;
+   };
+
+   public void setDetailsOnFace(boolean detailsOnFace){
+     
+   };
+
+   public boolean areDetailsOnFace(){
+       return false;  
+   };
+
+   public void setDetailsOnGestures(boolean detailsOnGestures){
+       
+   };
+
+   public boolean areDetailsOnGestures(){
+       return false;  
+   };
     
     
     
@@ -123,6 +209,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
         portLabel1 = new javax.swing.JLabel();
         port_mistral = new javax.swing.JTextField();
         enable = new javax.swing.JCheckBox();
+        automaticListen = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -191,15 +278,14 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
                                     .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                                 .addComponent(answer))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addComponent(portLabel1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(port_mistral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addComponent(addressLabel1)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(languageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(portLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(port_mistral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(addressLabel1)
+                                .addGap(18, 18, 18)
+                                .addComponent(languageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 26, Short.MAX_VALUE))
@@ -240,6 +326,13 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
             }
         });
 
+        automaticListen.setText("Automatic Listenning");
+        automaticListen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                automaticListenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -247,6 +340,8 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(enable)
+                .addGap(28, 28, 28)
+                .addComponent(automaticListen)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -254,7 +349,9 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addComponent(enable)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enable)
+                    .addComponent(automaticListen))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -511,6 +608,49 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_port_mistralActionPerformed
 
+    private void automaticListenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticListenActionPerformed
+        // TODO add your handling code here:
+        automaticListenBool = !automaticListenBool;
+        if(automaticListenBool){
+         Thread r3 = new Thread() {
+            @Override
+            public void run() {
+        
+                String language= (String) languageBox.getSelectedItem();
+               
+                
+                if (IsListenning){
+                    try{
+                        server.sendMessage("STOP");
+                        System.out.println("Stopping");
+                        IsListenning = Boolean.FALSE;
+                        listen.setText("Listen");
+                    }catch (IOException ex) {
+                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                }else{
+                try {
+                    
+                    System.out.println("Language selected : "+language);
+                    
+                    server.sendMessage(language);
+                    System.out.println("Listenning");
+                    listen.setText("Stop");
+                    IsListenning = Boolean.TRUE;
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                
+                
+                }
+            }
+        };
+
+        r3.start();
+        }
+    }//GEN-LAST:event_automaticListenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -522,6 +662,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame {
     private javax.swing.JLabel addressLabel;
     private javax.swing.JLabel addressLabel1;
     private javax.swing.JLabel answer;
+    private javax.swing.JCheckBox automaticListen;
     private javax.swing.JCheckBox enable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

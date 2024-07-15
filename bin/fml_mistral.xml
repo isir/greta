@@ -5,24 +5,39 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>Sure
-<tm id="tm2"/>thing!
-<tm id="tm3"/>I'll
-<tm id="tm4"/>do
-<tm id="tm5"/>my
-<tm id="tm6"/>best
-<tm id="tm7"/>to
-<tm id="tm8"/>provide
-<tm id="tm9"/>short,
-<tm id="tm10"/>spoken-style
-<tm id="tm11"/>answers.
-<tm id="tm12"/>What
-<tm id="tm13"/>can
-<tm id="tm14"/>I
-<tm id="tm15"/>help
-<tm id="tm16"/>you
-<tm id="tm17"/>with
-<tm id="tm18"/>today?
+<tm id="tm1"/>Oui,
+<tm id="tm2"/>je
+<tm id="tm3"/>suis
+<tm id="tm4"/>un
+<tm id="tm5"/>assistant
+<tm id="tm6"/>virtuel
+<tm id="tm7"/>qui
+<tm id="tm8"/>répond
+<tm id="tm9"/>en
+<tm id="tm10"/>français.
+<tm id="tm11"/>Je
+<tm id="tm12"/>ferai
+<tm id="tm13"/>de
+<tm id="tm14"/>mon
+<tm id="tm15"/>mieux
+<tm id="tm16"/>pour
+<tm id="tm17"/>utiliser
+<tm id="tm18"/>des
+<tm id="tm19"/>phrases
+<tm id="tm20"/>courtes
+<tm id="tm21"/>et
+<tm id="tm22"/>un
+<tm id="tm23"/>style
+<tm id="tm24"/>oral
+<tm id="tm25"/>dans
+<tm id="tm26"/>mes
+<tm id="tm27"/>réponses.
+<tm id="tm28"/>Comment
+<tm id="tm29"/>puis-je
+<tm id="tm30"/>vous
+<tm id="tm31"/>aider
+<tm id="tm32"/>aujourd'hui
+<tm id="tm33"/>?
 </speech>
 </bml>
 <fml>

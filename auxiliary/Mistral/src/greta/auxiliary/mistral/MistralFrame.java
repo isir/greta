@@ -91,6 +91,8 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
     private String MM_python_env_installer_path = "Common\\Data\\MeaningMiner\\python\\init_env.bat";
     private String MM_parse_server_path         = "Common\\Data\\MeaningMiner\\python\\activate_server.bat";
     private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
+    private String Mistral_python_env_checker_path = "Common\\Data\\Mistral\\check_env.py";
+    private String Mistral_python_env_installer_path = "Common\\Data\\Mistral\\init_env.bat";
     private Process server_process;
     private Thread server_shutdownHook;
 
@@ -573,32 +575,34 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
             server.setAddress(address.getText());
             server.setPort(port.getText());
             boolean python=true;
-            String result="";
-            try{ 
-                String[] cmd = {
-                        "python ", "-c", "import openai"
-                    };
-                    Runtime rt = Runtime.getRuntime();
-                try {
-                    Process proc = rt.exec(cmd);
-                    BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream(),"ISO-8859-1"));
-                        String line = "";
-                        while ((line = reader.readLine()) != null) {
-                            System.out.println(line + "\n");
-                        }
-                    if(result.contains("not available") || result.contains("introuvable") || result.contains("no module"))
-                        python=false;
-                    
-                } catch (IOException ex) {
-                    System.out.println("greta.auxiliary.mistral.MistralFrame.enableActionPerformed()");
-                    Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    python=false;
-                }
+            
+            try{
+            server_process = new ProcessBuilder("python", Mistral_python_env_checker_path).redirectErrorStream(true).start();
+            server_process.waitFor();
+        } catch (Exception e){
+           e.printStackTrace();
+        }
+        
+
+        InputStream inputStream = server_process.getInputStream();
+        String result = new BufferedReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n")
+                );
+        System.out.println(".init_Mistral_server(): Mistral, python env exist: " + result);
+        
+        if(result.equals("0")){
+            System.out.println(".init_Mistral_server(): Mistral, installing python environment...");
+            try{
+                server_process = new ProcessBuilder(Mistral_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                server_process.waitFor();
+            } catch (Exception e){
+                e.printStackTrace();
             }
-            catch(Exception e)
-            {
-                e.printStackTrace(); 
-            }
+            
+        }        
+          
             
             
             if(python==false){
@@ -635,7 +639,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
 
                             try {
                                 String[] cmd = {
-                                    "python","-u",
+                                    "cmd.exe","/C","conda","activate","greta_mistral","&&","python","-u",
                                     System.getProperty("user.dir")+"\\Common\\Data\\Mistral\\Mistral.py ",server.getPort(),
                                 };
                                 Runtime rt = Runtime.getRuntime();

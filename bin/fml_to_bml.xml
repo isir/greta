@@ -3,38 +3,27 @@
 <description level="1" type="gretabml"><reference>tmp/from-fml-apml.pho</reference></description>
 <description level="1" type="gretabml">
 </description>
-<tm id="tm1"/>Oui,
+<tm id="tm1"/>D�sol�,
 <tm id="tm2"/>je
-<tm id="tm3"/>suis
-<tm id="tm4"/>un
-<tm id="tm5"/>assistant
-<tm id="tm6"/>virtuel
-<tm id="tm7"/>qui
-<tm id="tm8"/>r�pond
+<tm id="tm3"/>vais
+<tm id="tm4"/>essayer
+<tm id="tm5"/>de
+<tm id="tm6"/>r�pondre
+<tm id="tm7"/>plus
+<tm id="tm8"/>bri�vement
 <tm id="tm9"/>en
 <tm id="tm10"/>fran�ais.
-<tm id="tm11"/>Je
-<tm id="tm12"/>ferai
-<tm id="tm13"/>de
-<tm id="tm14"/>mon
-<tm id="tm15"/>mieux
-<tm id="tm16"/>pour
-<tm id="tm17"/>utiliser
-<tm id="tm18"/>des
-<tm id="tm19"/>phrases
-<tm id="tm20"/>courtes
-<tm id="tm21"/>et
-<tm id="tm22"/>un
-<tm id="tm23"/>style
-<tm id="tm24"/>oral
-<tm id="tm25"/>dans
-<tm id="tm26"/>mes
-<tm id="tm27"/>r�ponses.
-<tm id="tm28"/>Comment
-<tm id="tm29"/>puis-je
-<tm id="tm30"/>vous
-<tm id="tm31"/>aider
-<tm id="tm32"/>aujourd'hui
-<tm id="tm33"/>?
+<tm id="tm11"/>"Formidable"
+<tm id="tm12"/>est
+<tm id="tm13"/>une
+<tm id="tm14"/>excellente
+<tm id="tm15"/>chanson
+<tm id="tm16"/>de
+<tm id="tm17"/>Stromae,
+<tm id="tm18"/>n'h�site
+<tm id="tm19"/>pas
+<tm id="tm20"/>�
+<tm id="tm21"/>l'�couter
+<tm id="tm22"/>!
 </speech>
 </bml>

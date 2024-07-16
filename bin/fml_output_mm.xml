@@ -5,54 +5,57 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>Le
-<tm id="tm2"/>fleuve
-<tm id="tm3"/>Amazon
-<tm id="tm4"/>est
-<tm id="tm5"/>le
-<tm id="tm6"/>plus
-<tm id="tm7"/>grand
-<tm id="tm8"/>et
-<tm id="tm9"/>le
-<tm id="tm10"/>plus
-<tm id="tm11"/>long
-<tm id="tm12"/>fleuve
-<tm id="tm13"/>du
-<tm id="tm14"/>monde,
-<tm id="tm15"/>mesurant
-<tm id="tm16"/>plus
-<tm id="tm17"/>de
-<tm id="tm18"/>6
-<tm id="tm19"/>400
-<tm id="tm20"/>kilomètres
+<tm id="tm1"/>Écoute,
+<tm id="tm2"/>je
+<tm id="tm3"/>te
+<tm id="tm4"/>recommande
+<tm id="tm5"/>d'écouter
+<tm id="tm6"/>"Bohemian
+<tm id="tm7"/>Rhapsody"
+<tm id="tm8"/>de
+<tm id="tm9"/>Queen,
+<tm id="tm10"/>c'est
+<tm id="tm11"/>un
+<tm id="tm12"/>classique
+<tm id="tm13"/>intemporel.
+<tm id="tm14"/>Sinon,
+<tm id="tm15"/>tu
+<tm id="tm16"/>peux
+<tm id="tm17"/>aussi
+<tm id="tm18"/>essayer
+<tm id="tm19"/>"Bad
+<tm id="tm20"/>Guy"
 <tm id="tm21"/>de
-<tm id="tm22"/>longueur.
-<tm id="tm23"/>Il
-<tm id="tm24"/>traverse
-<tm id="tm25"/>l'Amérique
-<tm id="tm26"/>du
-<tm id="tm27"/>Sud
-<tm id="tm28"/>et
-<tm id="tm29"/>se
-<tm id="tm30"/>jette
-<tm id="tm31"/>dans
-<tm id="tm32"/>l'océan
-<tm id="tm33"/>Atlantique.
-<tm id="tm34"/>C'est
-<tm id="tm35"/>un
-<tm id="tm36"/>endroit
-<tm id="tm37"/>magnifique,
-<tm id="tm38"/>rempli
-<tm id="tm39"/>de
-<tm id="tm40"/>vie
-<tm id="tm41"/>sauvage
-<tm id="tm42"/>et
-<tm id="tm43"/>de
-<tm id="tm44"/>paysages
-<tm id="tm45"/>spectaculaires.
+<tm id="tm22"/>Billie
+<tm id="tm23"/>Eilish
+<tm id="tm24"/>pour
+<tm id="tm25"/>quelque
+<tm id="tm26"/>chose
+<tm id="tm27"/>de
+<tm id="tm28"/>plus
+<tm id="tm29"/>récent.
+<tm id="tm30"/>Et
+<tm id="tm31"/>si
+<tm id="tm32"/>tu
+<tm id="tm33"/>aimes
+<tm id="tm34"/>la
+<tm id="tm35"/>musique
+<tm id="tm36"/>française,
+<tm id="tm37"/>je
+<tm id="tm38"/>te
+<tm id="tm39"/>suggère
+<tm id="tm40"/>"Formidable"
+<tm id="tm41"/>de
+<tm id="tm42"/>Stromae.
+<tm id="tm43"/>J'espère
+<tm id="tm44"/>que
+<tm id="tm45"/>ça
+<tm id="tm46"/>te
+<tm id="tm47"/>plaira
+<tm id="tm48"/>!
 </speech> </bml>
 <fml>
-<ideationalunit end="s1:tm13-0.2" id="id_2" importance="1.0" main="im_11" start="s1:tm0-0.2"/>
-<imageschema POSroot="verb" end="s1:tm11-0.2" id="im_11" importance="1.0" start="s1:tm6-0.2" type="full"/>
+<ideationalunit end="s1:tm19-0.2" id="id_1" importance="1.0" main="im_8" start="s1:tm0-0.2"/>
+<imageschema POSroot="adverb" end="s1:tm11-0.2" id="im_8" importance="1.0" indexword="4" previous="true" start="s1:tm3-0.2" type="iteration"/>
 </fml>
 </fml-apml>

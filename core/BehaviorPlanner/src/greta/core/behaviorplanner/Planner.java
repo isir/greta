@@ -515,16 +515,16 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                 System.out.println(fml_construction);
                 System.out.println("greta.core.behaviorplanner.Planner.performIntentions(): fml end");                
                 try{
-                DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-                DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-                Document document = docBuilder.parse(new InputSource(new StringReader(fml_construction)));
-                TransformerFactory transformerFactory = TransformerFactory.newInstance();
-                Transformer transformer = transformerFactory.newTransformer();
-                DOMSource source = new DOMSource(document);
-                FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\fml_output.xml"));
-                StreamResult result = new StreamResult(writer);
-                transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-                transformer.transform(source, result);
+                    DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+                    DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+                    Document document = docBuilder.parse(new InputSource(new StringReader(fml_construction)));
+                    TransformerFactory transformerFactory = TransformerFactory.newInstance();
+                    Transformer transformer = transformerFactory.newTransformer();
+                    DOMSource source = new DOMSource(document);
+                    FileWriter writer = new FileWriter(new File(System.getProperty("user.dir")+"\\fml_output.xml"));
+                    StreamResult result = new StreamResult(writer);
+                    transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+                    transformer.transform(source, result);
                 } catch (ParserConfigurationException ex) {
                     Logger.getLogger(Planner.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (SAXException ex) {

@@ -46,6 +46,9 @@ public class MessageSender{
     private BufferedWriter p_stdin;
 
     public List<String> traitement_NVBG(String input,boolean nvbg) throws JMSException, FileNotFoundException, InterruptedException, IOException{ 
+        
+        List<String> gesture=new ArrayList<String>();
+        
         System.out.println("[NVBG INFO]:MessageSender.main()");
         System.out.println(url);
         
@@ -58,7 +61,7 @@ public class MessageSender{
         //Destination represents here our queue 'DEFAULT_SCOPE' on the JMS server. 
         //The queue will be created automatically on the server.
         Destination destination = session.createTopic(subject);
-        System.out.println(session.createTopic(subject).getTopicName() +" "+ destination);
+        System.out.println("[NVBG INFO]: " + session.createTopic(subject).getTopicName() +" "+ destination);
          
         // MessageProducer is used for sending messages to the queue.
         MessageProducer producer = session.createProducer(destination);
@@ -100,9 +103,14 @@ public class MessageSender{
         
         VHMSG vsg= new VHMSG("localhost", "61616", "DEFAULT_SCOPE" );
         vsg.openConnection();
+        if(!vsg.isConnected()){
+            System.out.println("Couldn't connect to NVBG server at localhost:61616");
+            return gesture;
+        }
         vsg.sendMessage(op, g);
       
-        System.out.println("[NVBG INFO]:JCG printing@@ " + message.getText() + "");
+        System.out.println("[NVBG INFO]:JCG printing");
+        System.out.println(message.getText());
         
         MessageConsumer consumer = session.createConsumer(destination);
         Message message_vrSpeak = null;
@@ -111,31 +119,38 @@ public class MessageSender{
         long start = System.currentTimeMillis();
         long end;
         long elapsedTime;
+        
+        long loop_timeout = 100;
+        long session_timeout = 5000;
+        
         // Here we receive the message.
         while(true) {
         
-             end = System.currentTimeMillis();
-             elapsedTime = end - start;
-        Message message1 = consumer.receive();
-        if (message1 instanceof TextMessage) {
-            textMessage = (TextMessage) message1;
-            //System.out.println(textMessage.getText().split(" ")[0]);
-            
-            if(textMessage.getText().split(" ")[0].contentEquals("vrSpeak")) {
-            	System.out.println("[NVBG INFO]:FOUND");
-            	message_vrSpeak=message1;
-            	received_vrSpeak=true;
+            end = System.currentTimeMillis();
+            elapsedTime = end - start;
+            // System.out.println("Elapsed: " + Long.toString(elapsedTime));
+            Message message1 = consumer.receive(loop_timeout);
+            if (message1 instanceof TextMessage) {
+                textMessage = (TextMessage) message1;
+                System.out.println("Message received");
+                System.out.println(textMessage.getText());
+                //System.out.println(textMessage.getText().split(" ")[0]);
+
+                if(textMessage.getText().split(" ")[0].contentEquals("vrSpeak")) {
+                    System.out.println("[NVBG INFO]:FOUND");
+                    message_vrSpeak=message1;
+                    received_vrSpeak=true;
+                }
+            }
+            if (received_vrSpeak || elapsedTime>session_timeout) {
+
+                    if(elapsedTime>5000){
+                        System.out.println("5s elapsed , message not received from NVBG");
+                    }
+                    break;
             }
         }
-        if (received_vrSpeak || elapsedTime>5000) {
-             
-                if(elapsedTime>5000){
-                    System.out.println("5s elapsed , message not received from NVBG");
-                }
-        	break;
-        }
-        }
-        List<String> gesture=new ArrayList<String>();
+        
         if(message_vrSpeak!=null){
             String animation=vsg.VHMSGonMessage(message_vrSpeak);
             //System.out.println("Animtion:" +animation);

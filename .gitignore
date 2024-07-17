@@ -36,3 +36,8 @@ bin/fml_to_bml.xml
 **/db.lock
 /core/MPEG4/build
 /auxiliary/OSC/build
+bin/fml_output_mm.xml
+bin/fml_output_mm.xml
+bin/fml_mistral.xml
+bin/fml_to_bml.xml
+bin/NVBG/data/cache/brad_rachel_parse.txt

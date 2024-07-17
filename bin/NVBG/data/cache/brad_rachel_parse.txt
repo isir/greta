@@ -1,2 +1,0 @@
-That right now is the open sewer for our industrial civilization as it's currently organized.
-(S1 (SBAR (WHNP (WDT That)) (S (ADVP (RB right) (RB now)) (VP (AUX is) (NP (NP (DT the) (JJ open) (NN sewer)) (PP (IN for) (NP (PRP$ our) (JJ industrial) (NN civilization)))) (PP (IN as) (NP (NP (NN it's)) (VP (ADVP (RB currently)) (VBN organized.))))))))

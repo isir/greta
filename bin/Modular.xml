@@ -467,9 +467,9 @@
             <object class="greta.core.utilx.gui.NVBG_MM_Controller" lib_id="greta_utilx"/>
         <frame type="object"/>
         </module>
-		<module name="Rest_Pose_Setter" style="Signals">
+        <module name="Rest_Pose_Setter" style="Signals">
             <object class="greta.core.signals.Rest_Pose_Setter" lib_id="greta_signals"/>
-        <frame type="object"/>
+            <frame type="object"/>
         </module>
 		<module name="ObjectNodeController" style="DEFAULT">
             <!-- restrict="1"-->

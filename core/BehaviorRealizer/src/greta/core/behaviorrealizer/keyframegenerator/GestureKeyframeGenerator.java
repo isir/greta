@@ -166,6 +166,7 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
     protected void generateKeyframes(List<Signal> inputSignals, List<Keyframe> outputKeyframes) {
 
         //I) update list of rest poses and set the stroke boolean to the last phase
+//        GestureSignal originalRest = restPoses.get(0);
         clearRestPoses();
         GestureSignal lastRest = restPoses.get(0);
         List<GestureSignal> onlyGestures = new ArrayList<GestureSignal>(inputSignals.size());
@@ -183,7 +184,14 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
                 onlyGestures.add(gesture);
             }
         }
-
+//        originalRest.getStart().setValue(lastRest.getEnd().getValue());
+//        originalRest.setFLD(50 / 100.0);
+//        originalRest.setPWR(50 / 100.0);
+//        originalRest.setTMP(50 / 100.0);
+//        originalRest.setSPC((50 / 100.0) * 2 - 1);
+//        originalRest.setTension(50 / 100.0);
+//        restPoses.add(originalRest);
+        
         Collections.sort(restPoses, KeyframeGenerator.startComparator);
         Collections.sort(onlyGestures, KeyframeGenerator.startComparator);
 
@@ -315,6 +323,11 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
 //            lqst = new GestureKeyframe("", "", lqst.getTrajectoryType(), lqst.getOffset() + 1, lqst.getOffset() + 1 , lqst.getHand(), lqst.getScriptName(), lqst.isIsScript());
 //            outputKeyframes.add(lqst);
 //        }
+        
+        for(Keyframe k:outputKeyframes){
+            System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): " + k.getModality());
+        }        
+
     }
 
     private GestureSignal createFirstestPose(String ref) {

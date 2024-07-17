@@ -11,14 +11,15 @@
     <tm id="tm5"/>open 
     <tm id="tm6"/>sewer 
     <tm id="tm7"/>for 
-    <tm id="tm8"/>our 
+    <tm id="tm8"/>my 
     <tm id="tm9"/>industrial 
     <tm id="tm10"/>civilization 
     <tm id="tm11"/>as 
     <tm id="tm12"/>it's 
     <tm id="tm13"/>currently 
     <tm id="tm14"/>organized 
-    <tm id="tm15"/>.<tm id="tm16"/>
+    <tm id="tm15"/>.
+    <tm id="tm16"/>
     <pitchaccent id='xpa0' type='Hstar' start='s1:tm0' end='s1:tm1' level='strong' importance='1'/> 
     <pitchaccent id='xpa1' type='Hstar' start='s1:tm1' end='s1:tm2' level='strong' importance='1'/> 
     <pitchaccent id='xpa2' type='Lstar' start='s1:tm2' end='s1:tm3' level='strong' importance='1'/> 

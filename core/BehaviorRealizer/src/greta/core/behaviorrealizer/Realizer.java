@@ -67,42 +67,52 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
+    private GestureKeyframeGenerator gestureGenerator;
+    private SpeechKeyframeGenerator speechGenerator;
+    private HeadKeyframeGenerator headGenerator;
+    private LaughKeyframeGenerator laughGenerator;
+    private ShoulderKeyframeGenerator shoulderGenerator;
+    private TorsoKeyframeGenerator torsoGenerator;
     private GazeKeyframeGenerator gazeGenerator;
     private FaceKeyframeGenerator faceGenerator;
-    private GestureKeyframeGenerator gestureGenerator;
     private Comparator<Keyframe> keyframeComparator;
     private Environment environment;  //new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
     public CharacterManager characterManager;
 
     public Realizer(CharacterManager cm) {
+        
         setCharacterManager(cm);
         
         keyframePerformers = new ArrayList<>();
-        generators = new ArrayList<>();
-
         lastKeyFrameTime = greta.core.util.time.Timer.getTime();
+        keyframeComparator = (o1, o2) -> (int) Math.signum(o1.getOffset() - o2.getOffset());
+        environment = characterManager.getEnvironment();
+        
         gestureGenerator = new GestureKeyframeGenerator();
-        generators.add(gestureGenerator);
-        generators.add(new SpeechKeyframeGenerator());
-        generators.add(new HeadKeyframeGenerator());
-        generators.add(new LaughKeyframeGenerator());
-
-        //experimental
-        generators.add(new ShoulderKeyframeGenerator());
-        generators.add(new TorsoKeyframeGenerator());
+        speechGenerator = new SpeechKeyframeGenerator();
+        headGenerator = new HeadKeyframeGenerator();
+        laughGenerator = new LaughKeyframeGenerator();
+        shoulderGenerator = new ShoulderKeyframeGenerator();
+        torsoGenerator = new TorsoKeyframeGenerator();
         gazeGenerator = new GazeKeyframeGenerator(cm,generators);
         faceGenerator = new FaceKeyframeGenerator();
 
-        keyframeComparator = (o1, o2) -> (int) Math.signum(o1.getOffset() - o2.getOffset());
+        generators = new ArrayList<>();
+        generators.add(gazeGenerator);
+        generators.add(gestureGenerator);
+        generators.add(speechGenerator);
+        generators.add(headGenerator);
+        generators.add(laughGenerator);
+        generators.add(shoulderGenerator);
+        generators.add(torsoGenerator);
+        generators.add(faceGenerator);
 
-        // environment
-        environment = characterManager.getEnvironment();
-        
     }
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
+        
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
 
@@ -116,53 +126,44 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
                 SignalFiller.fillSignal(signal);
             }
         }
+        
         Temporizer temporizer = new Temporizer();
         temporizer.add(list);
         temporizer.temporize();
 
         for (Signal signal : list) {
             for (KeyframeGenerator generator : generators) {
-                if (generator.accept(signal)) {
-                    break;
-                }
+                generator.accept(signal);
             }
-            gazeGenerator.accept(signal);
-            faceGenerator.accept(signal);
         }
-
-        // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
-        // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
-        // Step 3: create all key frames
-
+        
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // Step 2: create all key frames
         // Gaze keyframes for other modalities than eyes are generated before the others
         // and act as "shifts"
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
         
-        
-        gazeGenerator.generateBodyKeyframes(keyframes);
-
         for (KeyframeGenerator generator : generators) {
+            System.out.println("greta.core.behaviorrealizer.Realizer.performSignals(): add all keyframes: " + generator.toString());
             keyframes.addAll(generator.generateKeyframes());
         }
-        keyframes.sort(keyframeComparator);
 
-        // Gaze keyframes for the eyes are generated last
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // Step 3: Schedule signals that the computed signal is relative to the previous and the next signals
+        // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)        
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+        keyframes.sort(keyframeComparator);
+        
+        System.out.println("keyframe's modality after Generator.generateKeyframes()");
         for(Keyframe k:keyframes){
-            System.out.println(k.getModality());
-        }
-        gazeGenerator.generateEyesKeyframes(keyframes);
+            System.out.println("greta.core.behaviorrealizer.Realizer.performSignals(): " + k.getModality());
+        }       
         
-        
-        //this.characterManager.getGaze_t().setPosX(0.0);
-        //this.characterManager.getGaze_t().setPosY(1.5);
-        //this.characterManager.getGaze_t().setPosZ(1);
-
-        faceGenerator.findExistingAU(keyframes);
-        keyframes.addAll(faceGenerator.generateKeyframes());
-
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
         // Step 4: ADJUST THE TIMING OF THE KEYFRAMES
-
-        keyframes.sort(keyframeComparator);
-
+        ///////////////////////////////////////////////////////////////////////////////////////////////////        
+        
         //  here:
         //      - we must manage the time for the three addition modes:
         //          - blend:    offset + now
@@ -209,7 +210,12 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
             }
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // Step 5: SEND KEYFRAMES AND MAKE IT REAL!
+        ///////////////////////////////////////////////////////////////////////////////////////////////////        
+        
         this.sendKeyframes(keyframes, requestId, mode);
+        
         // Add animation to callbacks
         //System.out.println("GGGGGGGGGG:"+mode.getCompositionType());
         if (mode.getCompositionType() == CompositionType.replace) {

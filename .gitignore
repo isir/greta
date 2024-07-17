@@ -2,9 +2,7 @@
 **/dist/
 **/test/
 
-**/db.data
-**/db.redo
-**/db.lock
+**/kahadb/
 
 **/nbproject/genfiles.properties
 **/nbproject/private/

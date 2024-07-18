@@ -96,7 +96,7 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="listen" min="-2" max="-2" attributes="0"/>
                           <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="addressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -107,13 +107,8 @@
                                           <Component id="port" min="-2" max="-2" attributes="0"/>
                                           <Component id="address" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="44" max="32767" attributes="0"/>
+                                      <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                                       <Component id="answer" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="portLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="port_mistral" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="addressLabel1" min="-2" max="-2" attributes="0"/>
@@ -150,14 +145,9 @@
                                   <Component id="addressLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="languageBox" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="portLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="port_mistral" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jScrollPane3" max="32767" attributes="0"/>
+                          <Component id="jScrollPane3" pref="158" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="listen" min="-2" max="-2" attributes="0"/>
@@ -242,19 +232,6 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JLabel" name="portLabel1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Port Dialogue"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="port_mistral">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="4044"/>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="port_mistralActionPerformed"/>
-              </Events>
-            </Component>
           </SubComponents>
         </Container>
         <Component class="javax.swing.JCheckBox" name="enable">

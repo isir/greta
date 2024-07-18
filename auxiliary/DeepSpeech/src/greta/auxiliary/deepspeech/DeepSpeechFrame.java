@@ -206,8 +206,6 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
         languageBox = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         TranscriptText = new javax.swing.JTextArea();
-        portLabel1 = new javax.swing.JLabel();
-        port_mistral = new javax.swing.JTextField();
         enable = new javax.swing.JCheckBox();
         automaticListen = new javax.swing.JCheckBox();
 
@@ -249,15 +247,6 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
         TranscriptText.setRows(5);
         jScrollPane3.setViewportView(TranscriptText);
 
-        portLabel1.setText("Port Dialogue");
-
-        port_mistral.setText("4044");
-        port_mistral.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                port_mistralActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -267,7 +256,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(listen)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(addressLabel)
@@ -276,12 +265,8 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                .addGap(44, 44, 44)
                                 .addComponent(answer))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(portLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(port_mistral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(addressLabel1)
                                 .addGap(18, 18, 18)
@@ -308,12 +293,8 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressLabel1)
                             .addComponent(languageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(portLabel1)
-                            .addComponent(port_mistral, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(listen)
                 .addContainerGap())
@@ -604,10 +585,6 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
         // TODO add your handling code here:
     }//GEN-LAST:event_portActionPerformed
 
-    private void port_mistralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_port_mistralActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_port_mistralActionPerformed
-
     private void automaticListenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticListenActionPerformed
         // TODO add your handling code here:
         automaticListenBool = !automaticListenBool;
@@ -671,8 +648,6 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
     private javax.swing.JButton listen;
     private javax.swing.JTextField port;
     private javax.swing.JLabel portLabel;
-    private javax.swing.JLabel portLabel1;
-    private javax.swing.JTextField port_mistral;
     // End of variables declaration//GEN-END:variables
 
 }

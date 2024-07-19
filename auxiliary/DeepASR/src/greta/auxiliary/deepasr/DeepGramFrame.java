@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greta.auxiliary.deepspeech;
+package greta.auxiliary.deepasr;
 
 
 import greta.core.intentions.IntentionPerformer;
@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import greta.auxiliary.mistral.MistralFrame;
+import greta.auxiliary.llm.MistralFrame;
 import greta.core.feedbacks.Callback;
 import java.io.InputStream;
 import java.util.stream.Collectors;
@@ -54,10 +54,10 @@ import greta.core.util.time.TimeMarker;
  *
  * @author miche
  */
-public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerformer {
+public class DeepGramFrame extends javax.swing.JFrame implements FeedbackPerformer {
 
     /**
-     * Creates new form DeepSpeechFrame
+     * Creates new form DeepGramFrame
      */
     
     private Server server;
@@ -69,8 +69,9 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
     private ArrayList<MistralFrame> mistrals = new ArrayList<MistralFrame>();
     private static String markup = "fml-apml";
     
-    private String DeepSpeech_python_env_checker_path = "Common\\Data\\DeepSpeech\\check_env.py";
-    private String DeepSpeech_python_env_installer_path = "Common\\Data\\DeepSpeech\\init_env.bat";
+    private String DeepASR_python_env_checker_path = "Common\\Data\\DeepASR\\DeepGram\\check_env.py";
+    private String DeepASR_python_env_installer_path = "Common\\Data\\DeepASR\\DeepGram\\init_env.bat";
+    private String python_asr_path = "\\Common\\Data\\DeepASR\\DeepGram\\DeepGram.py ";
     private Process server_process;
     private Thread server_shutdownHook;
     private boolean automaticListenBool = false;
@@ -100,7 +101,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                     IsListenning = Boolean.TRUE;
                     
                 } catch (IOException ex) {
-                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
            };
@@ -121,7 +122,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
            };
@@ -168,7 +169,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
     
     
   
-    public DeepSpeechFrame() {
+    public DeepGramFrame() {
         initComponents();
         server = new Server();
        
@@ -211,7 +212,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DeepSpeech", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DeepGram", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Socket Parametes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
@@ -352,6 +353,8 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
+        jPanel1.getAccessibleContext().setAccessibleName("DeepGram");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -359,12 +362,12 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
         
         if(enable.isSelected()){
             
-            System.out.println("DeepSpeech port:"+server.getPort());
+            System.out.println("DeepGram port:"+server.getPort());
             server.setAddress(address.getText());
             server.setPort(port.getText());
             boolean python=true;
              try{
-            server_process = new ProcessBuilder("python", DeepSpeech_python_env_checker_path).redirectErrorStream(true).start();
+            server_process = new ProcessBuilder("python", DeepASR_python_env_checker_path).redirectErrorStream(true).start();
             server_process.waitFor();
         } catch (Exception e){
            e.printStackTrace();
@@ -377,12 +380,12 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                 .lines()
                 .collect(Collectors.joining("\n")
                 );
-        System.out.println(".init_DeepSpeech_server(): Mistral, python env exist: " + result);
+        System.out.println(".init_DeepGram_server(): Mistral, python env exist: " + result);
         
         if(result.equals("0")){
-            System.out.println(".init_DeepSpeech_server(): Mistral, installing python environment...");
+            System.out.println(".init_DeepGram_server(): Mistral, installing python environment...");
             try{
-                server_process = new ProcessBuilder(DeepSpeech_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                server_process = new ProcessBuilder(DeepASR_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
                 server_process.waitFor();
             } catch (Exception e){
                 e.printStackTrace();
@@ -393,7 +396,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
             
             
             if(python==false){
-                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the DeepSpeech module which is optional. "
+                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the DeepGram module which is optional. "
                         + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
                 
   
@@ -404,7 +407,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
             
             if(python){
                 try{ 
-                    System.out.println("Opening python DeepSpeech script");
+                    System.out.println("Opening python DeepGram script");
                     
                     server.startConnection();
                     Thread r1 = new Thread() {
@@ -415,7 +418,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                                 System.out.println("Checking new connections");
                                 server.accept_new_connection();
                             } catch (IOException ex) {
-                                Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         
@@ -428,7 +431,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                         try {
                             String[] cmd = {
                                     "cmd.exe","/C","conda","activate","greta_deepgram","&&","python","-u",
-                                System.getProperty("user.dir")+"\\Common\\Data\\DeepSpeech\\DeepSpeech.py ",server.getPort(),
+                                System.getProperty("user.dir")+python_asr_path,server.getPort(),
                             };
                             Runtime rt = Runtime.getRuntime();
                             System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);
@@ -462,7 +465,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                     
                 }
@@ -482,7 +485,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                             while ((s = stdError.readLine()) != null) {
                                 System.out.println(s);
                             }   } catch (IOException ex) {
-                            Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                         } 
  } 
                         
@@ -494,7 +497,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                         
                     r1.start();
                     r2.start();
-                    System.out.println("greta.auxiliary.deepspeech.DeepSpeech:" + server.port + "   " + server.address);
+                    System.out.println("greta.auxiliary.deepasr.DeepGram" + server.port + "   " + server.address);
                     
                     }
                     catch(Exception e)
@@ -514,7 +517,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
             }
@@ -548,7 +551,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 }else{
                 try {
@@ -561,7 +564,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                     IsListenning = Boolean.TRUE;
                     
                 } catch (IOException ex) {
-                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 
@@ -603,7 +606,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 }else{
                 try {
@@ -616,7 +619,7 @@ public class DeepSpeechFrame extends javax.swing.JFrame implements FeedbackPerfo
                     IsListenning = Boolean.TRUE;
                     
                 } catch (IOException ex) {
-                    Logger.getLogger(DeepSpeechFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 

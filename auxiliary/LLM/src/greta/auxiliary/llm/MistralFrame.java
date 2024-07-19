@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greta.auxiliary.mistral;
+package greta.auxiliary.llm;
 
 import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
 import greta.auxiliary.MeaningMiner.shutdownHook;
@@ -91,8 +91,9 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
     private String MM_python_env_installer_path = "Common\\Data\\MeaningMiner\\python\\init_env.bat";
     private String MM_parse_server_path         = "Common\\Data\\MeaningMiner\\python\\activate_server.bat";
     private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
-    private String Mistral_python_env_checker_path = "Common\\Data\\Mistral\\check_env.py";
-    private String Mistral_python_env_installer_path = "Common\\Data\\Mistral\\init_env.bat";
+    private String LLM_python_env_checker_path = "Common\\Data\\LLM\\Mistral\\check_env.py";
+    private String LLM_python_env_installer_path = "Common\\Data\\LLM\\Mistral\\init_env.bat";
+    private String python_path_llm="\\Common\\Data\\LLM\\Mistral\\Mistral.py ";
     private Process server_process;
     private Thread server_shutdownHook;
     private Process server_process_mistral;
@@ -137,7 +138,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
         System.out.println("greta.core.intentions.FMLFileReader.TextToFML()");
         String[] sp=text.split(" ");
         int i=1;
-         System.out.println("greta.auxiliary.mistral.MistralFrame.TextToFML() "+sp.length);
+         System.out.println("greta.auxiliary.llm.MistralFrame.TextToFML() "+sp.length);
         for(int j=0;j<sp.length;j++){
             construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
                         i++;
@@ -493,7 +494,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
                         .addComponent(send)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3)
                         .addGap(20, 20, 20))))
         );
 
@@ -579,7 +580,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
             boolean python=true;
             
             try{
-            server_process_mistral = new ProcessBuilder("python", Mistral_python_env_checker_path).redirectErrorStream(true).start();
+            server_process_mistral = new ProcessBuilder("python", LLM_python_env_checker_path).redirectErrorStream(true).start();
             server_process_mistral.waitFor();
         } catch (Exception e){
            e.printStackTrace();
@@ -597,7 +598,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
         if(result.equals("0")){
             System.out.println(".init_Mistral_server(): Mistral, installing python environment...");
             try{
-                server_process_mistral = new ProcessBuilder(Mistral_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                server_process_mistral = new ProcessBuilder(LLM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
                 server_process_mistral.waitFor();
             } catch (Exception e){
                 e.printStackTrace();
@@ -627,7 +628,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
                         @Override
                         public void run() {
                                 try {
-                                    System.out.println("greta.auxiliary.mistral.MistralFrame.enableActionPerformed(): waiting for client connection (Mistral.py -> Mistral module)");
+                                    System.out.println("greta.auxiliary.llm.MistralFrame.enableActionPerformed(): waiting for client connection (Mistral.py -> Mistral module)");
                                     server.accept_new_connection();
                                 } catch (IOException ex) {
                                     Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -642,7 +643,7 @@ public class MistralFrame extends javax.swing.JFrame implements IntentionEmitter
                             try {
                                 String[] cmd = {
                                     "cmd.exe","/C","conda","activate","greta_mistral","&&","python","-u",
-                                    System.getProperty("user.dir")+"\\Common\\Data\\Mistral\\Mistral.py ",server.getPort(),
+                                    System.getProperty("user.dir")+python_path_llm,server.getPort(),
                                 };
                                 Runtime rt = Runtime.getRuntime();
                                 System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);

@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import greta.auxiliary.llm.MistralFrame;
+import greta.auxiliary.llm.LLMFrame;
 import greta.core.feedbacks.Callback;
 import java.io.InputStream;
 import java.util.stream.Collectors;
@@ -54,12 +54,20 @@ import greta.core.util.time.TimeMarker;
  *
  * @author miche
  */
-public class DeepGramFrame extends DeepASRFrame {
+public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerformer {
 
     /**
      * Creates new form DeepGramFrame
      */
     
+    private Server server;
+    public Socket soc;
+    public String answ;
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    private ArrayList<LLMFrame> llms = new ArrayList<LLMFrame>();
+    private static String markup = "fml-apml";
     
     private String DeepASR_python_env_checker_path = "Common\\Data\\DeepASR\\DeepGram\\check_env.py";
     private String DeepASR_python_env_installer_path = "Common\\Data\\DeepASR\\DeepGram\\init_env.bat";
@@ -67,12 +75,116 @@ public class DeepGramFrame extends DeepASRFrame {
     private Process server_process;
     private Thread server_shutdownHook;
     private boolean automaticListenBool = false;
-    private ArrayList<MistralFrame> mistrals = new ArrayList<MistralFrame>();
-    private static String markup = "fml-apml";
-    private Server server;
+    
+    public String getAnswer() {
+        return answ;
+    }
+
+    public void setAnswer(String answer) {
+        this.answ = answer;
+    }
+    
+   public void performFeedback(String type){
+       if (type == "end"){
+       if (!IsListenning & automaticListenBool){
+           Thread r3 = new Thread() {
+            @Override
+            public void run() {
+       
+                try {
+                    String language= (String) languageBox.getSelectedItem();
+                    System.out.println("Language selected : "+language);
+                    
+                    server.sendMessage(language);
+                    System.out.println("Listenning");
+                    listen.setText("Stop");
+                    IsListenning = Boolean.TRUE;
+                    
+                } catch (IOException ex) {
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+           };
+           r3.start();
+                
+                
+                }
+   }
+   if (type == "start"){
+       if (IsListenning){
+           Thread r3 = new Thread() {
+            @Override
+            public void run() {
+       
+                    try{
+                        server.sendMessage("STOP");
+                        System.out.println("Stopping");
+                        IsListenning = Boolean.FALSE;
+                        listen.setText("Listen");
+                    }catch (IOException ex) {
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+           };
+                    r3.start();
+   }
+   }
+   }
+   public void performFeedback(ID AnimId, String type, SpeechSignal speechSignal, TimeMarker tm){
+    performFeedback(type);
+   };
+
+   public void performFeedback(ID AnimId, String type, List<Temporizable> listTmp){
+       performFeedback(type);
+   };
+
+   public void performFeedback(Callback callback){
+   performFeedback(callback.type());
+};
+   public void setDetailsOption(boolean detailed){
+       
+   };
+
+   public boolean areDetailedFeedbacks(){
+     return true  ;
+   };
+
+   public void setDetailsOnFace(boolean detailsOnFace){
+     
+   };
+
+   public boolean areDetailsOnFace(){
+       return false;  
+   };
+
+   public void setDetailsOnGestures(boolean detailsOnGestures){
+       
+   };
+
+   public boolean areDetailsOnGestures(){
+       return false;  
+   };
+    
+    
     
     
   
+    public DeepASRFrame() {
+        initComponents();
+        server = new Server();
+       
+       
+        
+       
+        TranscriptText.setLineWrap(true);
+        TranscriptText.setWrapStyleWord(true);
+    }
+    
+     
+    
+    
+    
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -241,8 +353,6 @@ public class DeepGramFrame extends DeepASRFrame {
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
-        jPanel1.getAccessibleContext().setAccessibleName("DeepGram");
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -268,10 +378,10 @@ public class DeepGramFrame extends DeepASRFrame {
                 .lines()
                 .collect(Collectors.joining("\n")
                 );
-        System.out.println(".init_DeepGram_server(): DeepGram, python env exist: " + result);
+        System.out.println(".init_DeepGram_server(): DeepASR, python env exist: " + result);
         
         if(result.equals("0")){
-            System.out.println(".init_DeepGram_server(): DeepGram, installing python environment...");
+            System.out.println(".init_DeepGram_server(): DeepASR, installing python environment...");
             try{
                 server_process = new ProcessBuilder(DeepASR_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
                 server_process.waitFor();
@@ -306,7 +416,7 @@ public class DeepGramFrame extends DeepASRFrame {
                                 System.out.println("Checking new connections");
                                 server.accept_new_connection();
                             } catch (IOException ex) {
-                                Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         
@@ -343,9 +453,9 @@ public class DeepGramFrame extends DeepASRFrame {
                                     if (answ.contains("Speech Final:")|answ.contains("Is Final:")){
                                     TranscriptText.setText(answ.replace("Speech Final:","").replace("Is Final:",""));
                                     if (IsListenning){
-                                        for (MistralFrame mistral : mistrals){
+                                        for (LLMFrame llm : llms){
                                         
-                                        mistral.setRequestTextandSend(answ.replace("Speech Final:","").replace("Is Final:",""));
+                                        llm.setRequestTextandSend(answ.replace("Speech Final:","").replace("Is Final:",""));
                                     }
                     try{
                         server.sendMessage("STOP");
@@ -353,7 +463,7 @@ public class DeepGramFrame extends DeepASRFrame {
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                     
                 }
@@ -373,7 +483,7 @@ public class DeepGramFrame extends DeepASRFrame {
                             while ((s = stdError.readLine()) != null) {
                                 System.out.println(s);
                             }   } catch (IOException ex) {
-                            Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                         } 
  } 
                         
@@ -405,7 +515,7 @@ public class DeepGramFrame extends DeepASRFrame {
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
             }
@@ -439,7 +549,7 @@ public class DeepGramFrame extends DeepASRFrame {
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 }else{
                 try {
@@ -452,7 +562,7 @@ public class DeepGramFrame extends DeepASRFrame {
                     IsListenning = Boolean.TRUE;
                     
                 } catch (IOException ex) {
-                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 
@@ -464,13 +574,13 @@ public class DeepGramFrame extends DeepASRFrame {
     
     }//GEN-LAST:event_listenActionPerformed
 
-    public void addMistralFrame(MistralFrame mistral) {
-        mistrals.add(mistral);
+    public void addLLMFrame(LLMFrame llm) {
+        llms.add(llm);
     }
     
  
-    public void removeMistralFrame(MistralFrame mistral) {
-        mistrals.remove(mistral);
+    public void removeLLMFrame(LLMFrame llm) {
+        llms.remove(llm);
     }
     private void portActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portActionPerformed
         // TODO add your handling code here:
@@ -494,7 +604,7 @@ public class DeepGramFrame extends DeepASRFrame {
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 }else{
                 try {
@@ -507,7 +617,7 @@ public class DeepGramFrame extends DeepASRFrame {
                     IsListenning = Boolean.TRUE;
                     
                 } catch (IOException ex) {
-                    Logger.getLogger(DeepGramFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
                 
                 

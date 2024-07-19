@@ -1624,11 +1624,11 @@
         <!-- Phil end -->
 
       <connector id="ASRToLLM">
-        <input class="greta.auxiliary.deepasr.DeepGramFrame"  lib_id="greta_deepasr"/>
-        <output class="greta.auxiliary.llm.MistralFrame" lib_id="greta_llm"/>
-        <connect from="input" method="addMistralFrame" to="output"/>
+        <input class="greta.auxiliary.deepasr.DeepASRFrame"  lib_id="greta_deepasr"/>
+        <output class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
+        <connect from="input" method="addLLMFrame" to="output"/>
         <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
-        <disconnect from="input" method="removeMistralFrame" to="output"/>
+        <disconnect from="input" method="removeLLMFrame" to="output"/>
         <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
       </connector>
         

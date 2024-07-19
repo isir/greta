@@ -207,7 +207,7 @@
                 </menu>
                 <item module="ChatGPT" name="ChatGPT"/>
             <item module="Mistral" name="Mistral"/>
-              <item module="DeepSpeech" name="DeepSpeech"/>
+              <item module="DeepGram" name="DeepGram"/>
             </menu>
         </menu>
     
@@ -1144,11 +1144,11 @@
             <frame class="greta.auxiliary.chatgpt.ChatGPTFrame" lib_id="greta_ChatGPT" type="frame"/>
         </module>
        <module name="Mistral" style="Intentions">
-            <object class="greta.auxiliary.mistral.MistralFrame" lib_id="greta_mistral"/>
+            <object class="greta.auxiliary.llm.MistralFrame" lib_id="greta_llm"/>
 			<frame type="object"/>
        </module>
-         <module name="DeepSpeech" >
-           <object class="greta.auxiliary.deepspeech.DeepSpeechFrame" lib_id="greta_deepspeech"/>
+         <module name="DeepGram" >
+           <object class="greta.auxiliary.deepasr.DeepGramFrame" lib_id="greta_deepasr"/>
            <frame type="object"/>
         </module>
             
@@ -1594,7 +1594,7 @@
             <depends lib_id="greta_meaning_miner"/>
             <depends lib_id="ext_javax.jms"/>
         </lib>
-        <lib id="greta_mistral" path="./Common/Lib/Internal/Mistral.jar">
+        <lib id="greta_llm" path="./Common/Lib/Internal/LLM.jar">
             <depends lib_id="greta_osc"/>
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_intentions"/>
@@ -1602,7 +1602,7 @@
             <depends lib_id="greta_meaning_miner"/>
             <depends lib_id="ext_javax.jms"/>
         </lib>
-      <lib id="greta_deepspeech" path="./Common/Lib/Internal/DeepSpeech.jar">
+      <lib id="greta_deepasr" path="./Common/Lib/Internal/DeepASR.jar">
         <depends lib_id="greta_osc"/>
         <depends lib_id="greta_util"/>
         <depends lib_id="greta_intentions"/>
@@ -1623,9 +1623,9 @@
         </connector> -->
         <!-- Phil end -->
 
-      <connector id="ASRToMistral">
-        <input class="greta.auxiliary.deepspeech.DeepSpeechFrame"  lib_id="greta_deepspeech"/>
-        <output class="greta.auxiliary.mistral.MistralFrame" lib_id="greta_mistral"/>
+      <connector id="ASRToLLM">
+        <input class="greta.auxiliary.deepasr.DeepGramFrame"  lib_id="greta_deepasr"/>
+        <output class="greta.auxiliary.llm.MistralFrame" lib_id="greta_llm"/>
         <connect from="input" method="addMistralFrame" to="output"/>
         <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
         <disconnect from="input" method="removeMistralFrame" to="output"/>

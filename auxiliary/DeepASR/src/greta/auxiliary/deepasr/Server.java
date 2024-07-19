@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package greta.auxiliary.mistral;
+package greta.auxiliary.deepasr;
 
 /**
  *
@@ -61,7 +61,7 @@ public class Server {
     
 
     public Server(){
-        port="4000";
+        port="4040";
         address="10.51.18.246";
     }
     
@@ -95,7 +95,7 @@ public class Server {
         System.out.println("Trying to open port " + port + "... at address:"+address);
         serverSocket = new ServerSocket(Integer.valueOf(port),MAX_PRIORITY);
         System.out.println("Instantiating input and output streams...");
-        System.out.println("greta.auxiliary.mistral.Server.startConnection()");
+        System.out.println("greta.auxiliary.deepspeech.Server.startConnection()");
     }
     
     public void accept_new_connection() throws IOException{
@@ -109,10 +109,12 @@ public class Server {
     }
     
     public String receiveMessage() throws IOException{
-        
+        if (in.ready())
+    {
         String resp = in.readLine();
         System.out.println(resp);
         return resp;
+        }else return "";
     }
 
     public void stopConnection() throws IOException {

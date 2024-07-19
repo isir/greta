@@ -216,6 +216,14 @@
                 <id>jar</id>
             </reference>
             <reference>
+                <foreign-project>LLM</foreign-project>
+                <artifact-type>jar</artifact-type>
+                <script>build.xml</script>
+                <target>jar</target>
+                <clean-target>clean</clean-target>
+                <id>jar</id>
+            </reference>
+            <reference>
                 <foreign-project>LipModel</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
@@ -249,14 +257,6 @@
             </reference>
             <reference>
                 <foreign-project>MeaningMiner</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
-                <foreign-project>Mistral</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>
                 <target>jar</target>

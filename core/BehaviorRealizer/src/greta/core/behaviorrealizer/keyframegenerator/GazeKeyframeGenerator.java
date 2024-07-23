@@ -833,6 +833,13 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
         return outputKeyframe;
     }
     
+    public List<Keyframe> generateBodyKeyframes(List<Keyframe> outputKeyframe) {
+        
+        outputKeyframe = generateHeadTorsoEyeKeyframes(outputKeyframe);
+        
+        return outputKeyframe;
+    }
+    
     
     private AUAPFrame generateAUAPFrameFromAUItems(GazeSignal face, String tmName, double scale) {
         return generateAUAPFrameFromAUItems(face.getActionUnits(), face.getTimeMarker(tmName).getValue(), scale * face.getIntensity());

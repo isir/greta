@@ -1,4 +1,5 @@
 package greta.core.signals;
+import edu.stanford.nlp.io.EncodingPrintWriter;
 import greta.core.util.log.LogOutput;
 import greta.core.util.log.LogPrinter;
 import greta.core.util.log.Logs;
@@ -131,15 +132,38 @@ public class Test_NVBG_output {
                 }
                 p++;
             }
-            //System.out.println("item:"+item);
-            int end =Integer.parseInt(item)+12;
-            end=end/2;
-            int item_int=Integer.parseInt(item)/2;
+            
+            //
+            // Time marker adjustment (modified by takeshi-s)
+            //
+            // Description
+            // - Need to adjust time markers since NVBG's time markers are two for each word, whereas Greta's time markers are one for each word
+            //
+            // Example
+            // - NVBG: <mark name="T0"/>sorry<mark name="T1"/> <mark name="T2"/>but<mark name="T3"/> <mark name="T4"/>you<mark name="T5"/>
+            // - Greta: <tm id="tm1"/>sorry<tm id="tm2"/>but<tm id="tm3"/>you<tm id="tm4"/>
+            //
+            // Parameters:
+            // - anim_duration: duration parameter for each animation
+            //
+            int anim_duration = 2;
+            int item_int = Integer.parseInt(item)/2;
+            int end = (Integer.parseInt(item)/2)+anim_duration;
+
+            //int end =Integer.parseInt(item)+12;
+            //end=end/2;
+            //int item_int=Integer.parseInt(item)/2;
+            
             System.out.println("[NVBG DEBUG]: "+s+"            "+"\"stroke=\"sp1:"+tm+"\""+"           "+end);
             System.out.println("[NVBG DEBUG]: "+s.replace("stroke=\"sp1:"+tm+"\"", "start=\""+item_int+"\" end=\""+end+"\""));
             s=s.replace("stroke=\"sp1:"+tm+"\"", "start=\"s1:tm"+item_int+"\" end=\"s1:tm"+end+"\"");
             String[] start = s.split("name=");
             System.out.println("[NVBG DEBUG]:"+s);
+            
+            System.out.println("greta.core.signals.Test_NVBG_output.treatment()");
+            System.out.println("item: " + item);
+            System.out.println("item_int: " + item_int);
+            System.out.println("end: " + end);
 
             //for(String g: start) {
             //	System.out.println("Composants:"+g);

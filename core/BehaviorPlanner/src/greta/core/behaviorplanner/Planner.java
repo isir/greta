@@ -215,7 +215,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
     @Override
     public void performIntentions(List<Intention> intentions, ID requestId, Mode mode) {
         
-        System.out.println("PERFORM INTENTIOS");
+        System.out.println("greta.core.behaviorplanner.Planner.performIntentions()");
         selectedSignals = new ArrayList<Signal>();
         /**
         GazeSignal gaze = new GazeSignal("1");
@@ -302,6 +302,9 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
 
             //let the selector choose the signals
             List<Signal> signalsReturned = selector.selectFrom(intention, set, dynamicline, existingSignals, getCharacterManager());
+            for(Signal sig: signalsReturned){
+                System.out.println("GRETA Returned:"+sig.getClass());
+            }
             
             //Start NVBG TREATMENT
             if(this.getCharacterManager().get_use_NVBG()){
@@ -314,7 +317,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                 int max_index=0;
                 for(Signal sig: signalsReturned){
                     try {
-                        System.out.println("GRETA Returned:"+sig.getClass());
+                        // System.out.println("GRETA Returned:"+sig.getClass());
                         if (sig.getModality()=="speech" && !NVBG_worked){
                             NVBG_worked=true;
                             Speech m = (Speech) sig;
@@ -349,6 +352,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                                 i++;
                                 max_index=i;
                             }
+                            max_index = max_index - 1;
                             if(flag==0)
                                 fml_construction=fml_construction+"\n</speech>\n</bml>\n<fml>";
                             construction=construction+"\n</speech>\n</bml>";
@@ -368,6 +372,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                             if(gestures!=null){
                                 for(String y : gestures){
                                     String[] k=y.split("importance");
+                                    String importance = k[1];
                                     y=k[0];
                                     String bml_modif=construction.toString();
                                     String[] g=y.split("lexeme=");
@@ -393,11 +398,12 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                                     String ends3[]=ends2[1].split(" ");
                                     //System.out.println("INFO ENDS[]:"+ends2[0]+"    "+ends3[0]+"   "+max_index);
                                     if(Integer.parseInt(ends3[0].replace("\"","").replace("tm",""))>max_index){
-                                        System.out.println("INFO ENDS[]:"+ends2[0].replace("\"","")+"    "+ends3[0].replace("\"","").replace("tm","")+"   "+max_index);
+                                        System.out.println("[INFO MIDIFY TM]: modified a time marker :"+ends2[0].replace("\"","")+": from tm"+ends3[0].replace("\"","").replace("tm","")+" to tm"+max_index);
                                         y=y.replace("end="+ends2[0].replace("\"","")+":"+ends3[0].replace("\"","").replace("tm",""),"end="+ends2[0]+":"+Integer.toString(max_index));
                                     }
-                                    fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance=\"1.0\"/>";
                                     // fml_construction=fml_construction+"\n"+y.replace("lexeme","type");
+                                    // fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance=\"1.0\"/>";
+                                    fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance" + importance;
                                     }
                                     //System.out.println("FML FILE\n:"+fml_construction);
                                     DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();

@@ -117,7 +117,8 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
     private String python_init_env_path = "./Common/Data/MeaningMiner/python/init_env.bat";
     private String python_server_path = "./Common/Data/MeaningMiner/python/activate_server.bat";
     private String python_client_path = "./Common/Data/MeaningMiner/python/meaning_miner_adapter_client.py";
-    private String lang = "fr";
+    // private String lang = "fr";
+    // private String lang = "en";
     
     public ImageSchemaExtractor(CharacterManager cm) {
 
@@ -321,7 +322,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             String[] gesture_ID_array = new String[sentence.size()];
             String[] gesture_lemma_array = new String[sentence.size()];
 
-            if(lang == "fr"){
+            if(charactermanager.getLanguage() == "FR"){
                 String sentenceString = SentenceUtils.listToOriginalTextString(sentence);
                 System.out.println("InputSentence: " + sentenceString);
                 try {
@@ -383,7 +384,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             for (int i = 0; i < sentence.size(); i++) {
                 
                 String type;
-                if(lang == "fr"){
+                if(charactermanager.getLanguage() == "FR"){
                     
                     type = pos_array[i];
                     
@@ -433,7 +434,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                 String value = new String();
                 POS pos = null;
                                     
-                if(lang == "fr"){
+                if(charactermanager.getLanguage() == "FR"){
                     
                     posTag = pos_array[i];
                     value = token_array[i];
@@ -551,7 +552,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                 //begin wordnet code
                 List<String> stems = new ArrayList<>();
                     
-                if(lang == "fr"){
+                if(charactermanager.getLanguage() == "FR"){
 
                     //We retrieve the stems for the word.
                     if (pos == POS.NOUN || pos == POS.ADJECTIVE || pos == POS.VERB || pos == POS.ADVERB) {
@@ -583,7 +584,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                     //for each stem
                     for (String stem : stems) {
                         
-                        if(lang == "fr"){
+                        if(charactermanager.getLanguage() == "FR"){
                             System.out.println(0);
                             if(!gesture_ID_array[i].equals("_")){
                                 
@@ -633,7 +634,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                     
                     String chunk_tag_i;
                     Integer cl_index;
-                    if(lang == "fr"){
+                    if(charactermanager.getLanguage() == "FR"){
                         
                         chunk_tag_i = chunk_tag_array[i];
                         cl_index = i;

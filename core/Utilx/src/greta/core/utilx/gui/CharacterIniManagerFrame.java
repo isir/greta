@@ -36,7 +36,8 @@ public class CharacterIniManagerFrame extends IniManagerFrame{
     public void setCharacterManager(CharacterManager cm){
         this.cm = cm;
         setIniManager(cm.getIniManager());
-        connect(new CharacterIniLoader(cm));
+        connect(new CharacterIniLoader(cm), new LanguageIniLoader(cm));
+//        connect(new CharacterIniLoader(cm));
     }
 
     public CharacterManager getCharacterManager(){

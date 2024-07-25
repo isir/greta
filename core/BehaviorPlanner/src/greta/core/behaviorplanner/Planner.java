@@ -118,6 +118,8 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
     //where send the resulted signals
     private List<SignalPerformer> signalPerformers;
     private StrokeFiller strokeFiller;
+    
+    private CharacterManager charactermanager;
 
     public Planner(CharacterManager cm) {
         setCharacterManager(cm);
@@ -330,7 +332,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                                 }
                             }
                             XMLParser bmlparser = XML.createParser();
-                            MessageSender msg_send = new MessageSender();
+                            MessageSender msg_send = new MessageSender(this.getCharacterManager());
                             System.out.println("INFO: "+phrase);
                             phrase=phrase.replaceAll("  ", " ");
                             if(phrase.startsWith(" ")){

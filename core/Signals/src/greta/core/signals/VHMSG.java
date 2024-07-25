@@ -98,6 +98,8 @@ public class VHMSG implements javax.jms.MessageListener
     public static final String VHMSG_PORT = "VHMSG_PORT";
     public static final String MESSAGE_PREFIX = "MESSAGE_PREFIX";
     public static final String STRING_ENCODING = "UTF8";
+    // public static final String STRING_ENCODING = "Unicode";
+    // public static final String STRING_ENCODING = "UTF16";
     public static final String MULTIKEY = "multikey";
 
 

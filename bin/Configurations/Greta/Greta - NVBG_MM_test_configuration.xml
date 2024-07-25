@@ -2,12 +2,12 @@
 <modulated>
     <elements>
         <element h="50.0" id="Ini Manager - 1544700691170-189"
-            module="Ini Manager" name="Ini Manager" w="80.0" x="880.0" y="180.0">
+            module="Ini Manager" name="Ini Manager" w="80.0" x="780.0" y="370.0">
             <parameter name="file" value="Greta.ini"/>
             <window h="531" visible="false" w="505" x="10" y="10"/>
         </element>
         <element h="50.0" id="Logs - 1544700696093-682" module="Logs"
-            name="Logs" w="80.0" x="880.0" y="240.0">
+            name="Logs" w="80.0" x="780.0" y="430.0">
             <parameter name="debug" value="true"/>
             <parameter name="warning" value="true"/>
             <parameter name="error" value="true"/>
@@ -15,7 +15,7 @@
             <window h="173" visible="false" w="212" x="10" y="10"/>
         </element>
         <element h="50.0" id="Log Frame - 1544700702468-724"
-            module="Log Frame" name="Log Frame" w="80.0" x="880.0" y="300.0">
+            module="Log Frame" name="Log Frame" w="80.0" x="780.0" y="490.0">
             <parameter name="blackBackground" value="true"/>
             <window h="435" visible="false" w="618" x="10" y="10"/>
         </element>
@@ -26,7 +26,7 @@
                 module="Character Manager" name="Character Manager"
                 w="650.0" x="30.0" y="40.0">
                 <parameter name="character_name" value="CAMILLE"/>
-                <window h="531" visible="false" w="505" x="10" y="10"/>
+                <window h="899" visible="true" w="505" x="1415" y="11"/>
                 <element h="50.0" id="TTS - 1544700939858-569"
                     module="TTS" name="TTS" w="80.0" x="440.0" y="40.0">
                     <parameter name="doPhonemes" value="true"/>
@@ -39,7 +39,7 @@
                     module="BML File Reader" name="BML File Reader"
                     w="80.0" x="130.0" y="40.0">
                     <parameter name="fileName" value=""/>
-                    <window h="108" visible="true" w="517" x="-2" y="136"/>
+                    <window h="108" visible="true" w="517" x="-5" y="133"/>
                 </element>
                 <element h="230.0"
                     id="Behavior Planner - 1544700734561-356"
@@ -115,28 +115,17 @@
                     x="130.0" y="340.0">
                     <window h="400" visible="false" w="600" x="0" y="0"/>
                 </element>
-                <element h="50.0"
-                    id="ActiveMQ Meaning Miner FML Receiver - 1720701107659-914"
-                    module="ActiveMQ Meaning Miner FML Receiver"
-                    name="ActiveMQ Meaning Miner FML Receiver" w="80.0"
-                    x="30.0" y="340.0">
-                    <parameter name="isQueue" value="false"/>
-                    <parameter name="port" value="61616"/>
-                    <parameter name="host" value="localhost"/>
-                    <parameter name="topic" value="greta.input.FML"/>
-                    <window h="221" visible="false" w="240" x="0" y="0"/>
-                </element>
             </element>
         </element>
-        <element h="420.0" id="Ogre Player - 1544700973529-249"
+        <element h="210.0" id="Ogre Player - 1544700973529-249"
             module="Ogre Player" name="Ogre Player" w="80.0" x="780.0" y="150.0">
-            <parameter name="posX" value="-0.15570692718029022"/>
-            <parameter name="posY" value="2.1947388648986816"/>
-            <parameter name="posZ" value="2.8353095054626465"/>
+            <parameter name="posX" value="-0.09261557459831238"/>
+            <parameter name="posY" value="2.113051176071167"/>
+            <parameter name="posZ" value="2.2270326614379883"/>
             <parameter name="roll" value="0.0"/>
             <parameter name="pitch" value="-0.36309319734573364"/>
             <parameter name="yaw" value="-0.05446411296725273"/>
-            <window h="614" visible="true" w="507" x="4" y="422"/>
+            <window h="614" visible="true" w="514" x="-3" y="248"/>
         </element>
         <element h="50.0" id="Rest_Pose_Setter - 1720694302624-650"
             module="Rest_Pose_Setter" name="Rest_Pose_Setter" w="80.0"
@@ -151,12 +140,25 @@
         </element>
     </elements>
     <connections>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML Annotator - 1720097354494-190" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Rest_Pose_Setter - 1720694302624-650" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1719937237038-705"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -165,30 +167,15 @@
             source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="FML Annotator - 1720097354494-190" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="ActiveMQ Meaning Miner FML Receiver - 1720701107659-914" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Rest_Pose_Setter - 1720694302624-650" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1719937237038-705"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="FML File Reader Meaning Miner - 1720017390098-769" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
     </connections>
 </modulated>

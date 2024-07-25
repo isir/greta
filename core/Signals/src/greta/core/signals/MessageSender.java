@@ -3,6 +3,9 @@ package greta.core.signals;
 import greta.core.signals.Test_NVBG_output;
 import greta.core.signals.VHMSG;
 import greta.core.util.log.Logs;
+import greta.core.util.CharacterDependentAdapter;
+import greta.core.util.CharacterManager;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -10,6 +13,7 @@ import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+
 
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
@@ -34,7 +38,7 @@ import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
  
-public class MessageSender{
+public class MessageSender {
      
     //URL of the JMS server. DEFAULT_BROKER_URL will just mean that JMS server is on localhost
     private static String url = ActiveMQConnection.DEFAULT_BROKER_URL;
@@ -44,8 +48,16 @@ public class MessageSender{
     private static String subject = "DEFAULT_SCOPE"; // Queue Name.You can create any/many queue names as per your requirement. 
     
     private BufferedWriter p_stdin;
+    
+    private CharacterManager charactermanager;
+    
+    public MessageSender(CharacterManager cm){
+        charactermanager = cm;
+    }
 
     public List<String> traitement_NVBG(String input,boolean nvbg) throws JMSException, FileNotFoundException, InterruptedException, IOException{ 
+        
+        System.out.println("Encoding " + System.getProperty("file.encoding"));
         
         List<String> gesture=new ArrayList<String>();
         
@@ -83,8 +95,6 @@ public class MessageSender{
         
         String string4 ="Brad ranger harmony221 <?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>     <act>         <participant id=\"harmony\" role=\"actor\"/>         <fml>         <object name=\"A316\">             <attribute name=\"addressee\">ranger</attribute>             <attribute name=\"speech-act\">             <object name=\"A317\">             <attribute name=\"content\">             <object name=\"V28\">             <attribute name=\"modality\">             <object name=\"V29\">             <attribute name=\"conditional\">should</attribute>             </object>             </attribute>             <attribute name=\"polarity\">negative</attribute>             <attribute name=\"attribute\">jobAttribute</attribute>             <attribute name=\"value\">bartender-job</attribute>             <attribute name=\"object-id\">utah</attribute>             <attribute name=\"type\">state</attribute>             <attribute name=\"time\">present</attribute>             </object>             </attribute>             <attribute name=\"motivation\">             <object name=\"V27\">             <attribute name=\"reason\">become-sheriff-harmony</attribute>             <attribute name=\"goal\">address-problem</attribute>             </object>             </attribute>             <attribute name=\"addressee\">ranger</attribute>             <attribute name=\"action\">assert</attribute>             <attribute name=\"actor\">harmony</attribute>             </object>             </attribute>             </object>             </intention>         </fml>         <bml>             <speech id=\"sp1\" type=\"application/ssml+xml\">These micropiles are anchored in the limestone that one finds under the museum; in order to prevent the boat from rising with the rise of flood</speech>         </bml>     </act>";
         
-        TextMessage message = session.createTextMessage(op+" "+g);
-        
         //Open NVBG and wait one second before send the message -> avoid lost of data if message is not sent entirely
         System.out.println("[NVBG INFO]:greta.core.signals.MessageSender.traitement_NVBG()"+"  "+nvbg);
         if (nvbg==false) {
@@ -93,13 +103,14 @@ public class MessageSender{
             TimeUnit.SECONDS.sleep(1);
         } // TODO Auto-generated catch block
         
-        message.setObjectProperty("ELVISH SCOPE", subject);
-        message.setObjectProperty("MESSAGE_PREFIX", "vrExpress");
-        message.setObjectProperty("VHMSG_VERSION","1.0.0.0" );
-        message.setObjectProperty("VHMSG", "VHMSG");
-        message.setObjectProperty("MESSAGE_TYPE_VHMSG", "VHMSG");
-        // Here we are sending our message!
-        producer.send(message);
+//        TextMessage message = session.createTextMessage(op+" "+g);
+//        message.setObjectProperty("ELVISH SCOPE", subject);
+//        message.setObjectProperty("MESSAGE_PREFIX", "vrExpress");
+//        message.setObjectProperty("VHMSG_VERSION","1.0.0.0" );
+//        message.setObjectProperty("VHMSG", "VHMSG");
+//        message.setObjectProperty("MESSAGE_TYPE_VHMSG", "VHMSG");
+//        // Here we are sending our message!
+//        producer.send(message);
         
         VHMSG vsg= new VHMSG("localhost", "61616", "DEFAULT_SCOPE" );
         vsg.openConnection();
@@ -110,7 +121,8 @@ public class MessageSender{
         vsg.sendMessage(op, g);
       
         System.out.println("[NVBG INFO]:JCG printing");
-        System.out.println(message.getText());
+        //System.out.println(message.getText());
+        System.out.println(g);
         
         MessageConsumer consumer = session.createConsumer(destination);
         Message message_vrSpeak = null;
@@ -177,7 +189,7 @@ public class MessageSender{
             
             System.out.println("[NVBG INFO]:NVBG.MessageSender.run_NVBG()");
             String path=System.getProperty("user.dir");
-            path+="\\run-toolkit-NVBG-C#-all.bat";
+            path+="\\run-toolkit-NVBG-C#-all.bat " + charactermanager.getLanguage();
             Runtime rn=Runtime.getRuntime();
              try {
                 final Process pr=rn.exec(path);

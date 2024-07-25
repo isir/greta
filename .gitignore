@@ -31,8 +31,10 @@ bin/test_fml.xml
 
 bin/Modular.jar
 bin/ModularSave.xml
-bin/Common/Data/FMLAnnotator/Output/output.xml
-bin/NVBG/data/cache/brad_rachel_parse.txt
-bin/Common/Lib/Internal/README.TXT
 
+bin/Common/Lib/Internal/*.TXT
+bin/Common/Data/FMLAnnotator/Output/output.xml
+bin/Common/Lib/External/apache-activemq-5.15.14/data
+
+bin/NVBG/data/cache/brad_rachel_parse.txt
 bin/charniak/charniak-windows/DATA/FR_orig

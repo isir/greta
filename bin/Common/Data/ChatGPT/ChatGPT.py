@@ -7,7 +7,10 @@ import argparse
 
 import sys
 
-API_KEY ="PUT_YOUR_OPENAI_API_KEY_HERE"
+# API_KEY ="PUT_YOUR_OPENAI_API_KEY_HERE"
+api_key_file = 'api_key.txt'
+with open(api_key_file, 'r') as f:
+    API_KEY = f.read()
 
 start_message = [{"role":"system", "content":"You are a good friend."},
                   {"role":"user", "content":"Hello, how are you?"},

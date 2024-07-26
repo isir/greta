@@ -38,3 +38,5 @@ bin/Common/Lib/External/apache-activemq-5.15.14/data
 
 bin/NVBG/data/cache/brad_rachel_parse.txt
 bin/charniak/charniak-windows/DATA/FR_orig
+bin/Common/Data/LLM/Mistral/api_key.txt
+bin/Common/Data/ChatGPT/api_key.txt

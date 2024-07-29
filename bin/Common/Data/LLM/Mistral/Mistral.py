@@ -13,7 +13,6 @@ from mistralai.models.chat_completion import ChatMessage
 messages = None
 messages_online = None
 
-# MISTRAL_API_KEY = "Jg5LiL8bYyB4wlb5Rhj30pc2IXKBYXQ0"
 api_key_file = os.path.join(os.path.dirname(__file__), 'api_key.txt')
 with open(api_key_file, 'r') as f:
     MISTRAL_API_KEY = f.read()

@@ -70,7 +70,7 @@ import org.xml.sax.SAXException;
 public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
 
     /**
-     * Creates new form MistralFrame
+     * Creates new form LLMFrame
      */
     
     private Server server;
@@ -123,7 +123,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         AnswerText.setLineWrap(true);
         AnswerText.setWrapStyleWord(true);
         
-        init_MeaningMiner_server("greta.auxiliary.mistral.MistralFrame");
+        init_MeaningMiner_server("greta.auxiliary.mistral.LLMFrame");
         
     }
     
@@ -138,7 +138,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         System.out.println("greta.core.intentions.FMLFileReader.TextToFML()");
         String[] sp=text.split(" ");
         int i=1;
-         System.out.println("greta.auxiliary.llm.MistralFrame.TextToFML() "+sp.length);
+         System.out.println("greta.auxiliary.llm.LLMFrame.TextToFML() "+sp.length);
         for(int j=0;j<sp.length;j++){
             construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
                         i++;
@@ -360,7 +360,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Mistral", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LLM", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18)));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Socket Parametes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 13))); // NOI18N
 
@@ -454,7 +454,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 138, Short.MAX_VALUE))
+                .addGap(0, 150, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -539,6 +539,9 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        jPanel1.getAccessibleContext().setAccessibleName("");
+        jPanel1.getAccessibleContext().setAccessibleDescription("");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
     public void setRequestText(String content){
@@ -574,7 +577,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         
         if(enable.isSelected()){
             
-            System.out.println("Mistral port:"+server.getPort());
+            System.out.println("LLM port:"+server.getPort());
             server.setAddress(address.getText());
             server.setPort(port.getText());
             boolean python=true;
@@ -593,10 +596,10 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
                 .lines()
                 .collect(Collectors.joining("\n")
                 );
-        System.out.println(".init_Mistral_server(): Mistral, python env exist: " + result);
+        System.out.println(".init_LLM_server(): LLM, python env exist: " + result);
         
         if(result.equals("0")){
-            System.out.println(".init_Mistral_server(): Mistral, installing python environment...");
+            System.out.println(".init_LLM_server(): LLM, installing python environment...");
             try{
                 server_process_mistral = new ProcessBuilder(LLM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
                 server_process_mistral.waitFor();
@@ -609,7 +612,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
             
             
             if(python==false){
-                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the Mistral module which is optional. "
+                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the LLM module which is optional. "
                         + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
                 
   
@@ -620,7 +623,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
             
             if(python){
                 try{ 
-                    System.out.println("Opening python Mistral script");
+                    System.out.println("Opening python LLM script");
                     
                     server.startConnection();
                     
@@ -628,7 +631,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
                         @Override
                         public void run() {
                                 try {
-                                    System.out.println("greta.auxiliary.llm.MistralFrame.enableActionPerformed(): waiting for client connection (Mistral.py -> Mistral module)");
+                                    System.out.println("greta.auxiliary.llm.LLMFrame.enableActionPerformed(): waiting for client connection (Mistral.py -> LLM module)");
                                     server.accept_new_connection();
                                 } catch (IOException ex) {
                                     Logger.getLogger(LLMFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -695,7 +698,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
 
                     r1.start();
                     r2.start();
-                    System.out.println("greta.auxiliary.mistral.Mistral:" + server.port + "   " + server.address);
+                    System.out.println("greta.auxiliary.mistral.LLMFrame:" + server.port + "   " + server.address);
                     
                 }
                 catch(Exception e)

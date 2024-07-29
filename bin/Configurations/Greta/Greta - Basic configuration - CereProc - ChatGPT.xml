@@ -108,8 +108,8 @@
                     w="80.0" x="400.0" y="170.0">
                     <window h="148" visible="false" w="342" x="0" y="0"/>
                 </element>
-                <element h="50.0" id="GPT3 - 1680009395875-868"
-                    module="GPT3" name="GPT3" w="80.0" x="30.0" y="30.0">
+                <element h="50.0" id="ChatGPT - 1680009395875-868"
+                    module="ChatGPT" name="ChatGPT" w="80.0" x="30.0" y="30.0">
                     <window h="554" visible="false" w="935" x="0" y="0"/>
                 </element>
             </element>
@@ -127,7 +127,7 @@
     </elements>
     <connections>
         <connection connector="IntentionEmitterToIntentionPerformer"
-            source="GPT3 - 1680009395875-868" target="Behavior Planner - 1544700734561-356"/>
+            source="ChatGPT - 1680009395875-868" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="AUEmitterToAUPerformer"

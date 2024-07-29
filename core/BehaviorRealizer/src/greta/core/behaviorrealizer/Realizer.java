@@ -155,10 +155,10 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
 
         keyframes.sort(keyframeComparator);
         
-        System.out.println("keyframe's modality after Generator.generateKeyframes()");
-        for(Keyframe k:keyframes){
-            System.out.println("greta.core.behaviorrealizer.Realizer.performSignals(): " + k.getModality());
-        }       
+//        System.out.println("keyframe's modality after Generator.generateKeyframes()");
+//        for(Keyframe k:keyframes){
+//            System.out.println("greta.core.behaviorrealizer.Realizer.performSignals(): " + k.getModality());
+//        }
         
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         // Step 4: ADJUST THE TIMING OF THE KEYFRAMES

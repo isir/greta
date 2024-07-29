@@ -37,7 +37,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
- 
+
+//import org.apache.tika.detect.EncodingDetector;
+//import org.apache.tika.detect.AutoDetectReader;
+//import org.apache.tika.parser.txt.UniversalEncodingDetector;
+//import org.apache.tika.metadata.Metadata;
+//import java.io.ByteArrayInputStream;
+//import java.nio.charset.Charset;
+
+//import com.ibm.icu.text.CharsetDetector;
+//import com.ibm.icu.text.CharsetMatch;
+
 public class MessageSender {
      
     //URL of the JMS server. DEFAULT_BROKER_URL will just mean that JMS server is on localhost
@@ -142,17 +152,50 @@ public class MessageSender {
             elapsedTime = end - start;
             // System.out.println("Elapsed: " + Long.toString(elapsedTime));
             Message message1 = consumer.receive(loop_timeout);
+
             if (message1 instanceof TextMessage) {
+
                 textMessage = (TextMessage) message1;
+                String stringMessage = textMessage.getText();
+                
+                // byte[] byteMessage = textMessage.getText().getBytes("ISO-8859-1");
+                // String stringMessage = new String(byteMessage,"UTF-8");
+                
                 System.out.println("Message received");
-                System.out.println(textMessage.getText());
+                System.out.println(stringMessage);
                 //System.out.println(textMessage.getText().split(" ")[0]);
 
-                if(textMessage.getText().split(" ")[0].contentEquals("vrSpeak")) {
+                if(stringMessage.split(" ")[0].contentEquals("vrSpeak")) {
                     System.out.println("[NVBG INFO]:FOUND");
                     message_vrSpeak=message1;
                     received_vrSpeak=true;
                 }
+                
+                if(charactermanager.language.equals("FR") && stringMessage.split(" ")[0].contentEquals("parser_result")) {
+                                        
+//                    String src_encoding = "Unicode";
+//                    String src_encoding = "UTF-16";
+//                    String src_encoding = "ISO-8859-1";
+                    String tgt_encoding = "UTF-8";
+                    
+                    String[] encodingArray = {"US-ASCII", "Unicode", "UTF-16", "UTF-8", "ISO-8859-1", "UTF-32"};
+                    
+                    for (String src_encoding:encodingArray) {
+                                        
+    //                    byte[] byteMessage = textMessage.getText().getBytes("ISO-8859-1");
+                        byte[] byteMessage = textMessage.getText().getBytes(src_encoding);
+                        stringMessage = new String(byteMessage, tgt_encoding);
+
+//                        System.out.println("src encoding: " + src_encoding);
+//                        System.out.println("tgt encoding: " + tgt_encoding);
+//                        System.out.println("Received message: " + stringMessage);
+                        
+                        System.out.println("Test encoding: " + src_encoding + " : " + stringMessage);
+                
+                    }
+
+                }
+                
             }
             if (received_vrSpeak || elapsedTime>session_timeout) {
 

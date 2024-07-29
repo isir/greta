@@ -176,20 +176,34 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             Intention toMove = intentions.get(i);
             for (int j = 0; j < i; ++j) {
                 Intention toCompare = intentions.get(j);
+                
+                // whether toMove has bigger importance
                 boolean before = toMove.getImportance() > toCompare.getImportance();
-                if (!before && toMove.getImportance() == toCompare.getImportance()) {
+                
+                // if (!before && toMove.getImportance() == toCompare.getImportance()) {
+                if (toMove.getImportance() == toCompare.getImportance()) {
+                    
                     double start = toMove.getStart().getValue();
                     double end = toMove.getEnd().getValue();
                     double c_start = toCompare.getStart().getValue();
                     double c_end = toCompare.getEnd().getValue();
+                    
+                    // whether toMove end is earlier than toCompare start
                     before = end < c_start;
+                    
                     if (!before && start < c_end) {
                         before = end - start < c_end - c_start;
                         //in the case of an infinite end,
                         //it sets also priority to the last sarting (else, it may be skiped)
                     }
+                
                 }
-
+                
+                // Comparison policy1: higher importance intention should appear in top
+                // Comparison policy2: if importance is equal, early intention should appear in top
+                // COmparison policy3: if inteions are overlaped, shorter intention should appear in top
+                
+                // If before is true, move intentions[i] to intentions[j]
                 if (before) {
                     intentions.add(j, intentions.remove(i));
                     break;
@@ -395,18 +409,24 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                                     bml_modif=construction.replaceAll("</bml>",y.replace(c[0],"gesture")+">"+"\n"+addend+"\n</gesture>\n</bml>");
                                     flag=1;
                                     if(flag==1){
-                                    String ends[] = y.split("end=");
-                                    String ends2[]=ends[1].split(":");
-                                    String ends3[]=ends2[1].split(" ");
-                                    //System.out.println("INFO ENDS[]:"+ends2[0]+"    "+ends3[0]+"   "+max_index);
-                                    if(Integer.parseInt(ends3[0].replace("\"","").replace("tm",""))>max_index){
-                                        System.out.println("[INFO MIDIFY TM]: modified a time marker :"+ends2[0].replace("\"","")+": from tm"+ends3[0].replace("\"","").replace("tm","")+" to tm"+max_index);
-                                        y=y.replace("end="+ends2[0].replace("\"","")+":"+ends3[0].replace("\"","").replace("tm",""),"end="+ends2[0]+":"+Integer.toString(max_index));
+                                        
+                                        String ends[] = y.split("end=");
+                                        String ends2[]=ends[1].split(":");
+                                        String ends3[]=ends2[1].split(" ");
+                                        //System.out.println("INFO ENDS[]:"+ends2[0]+"    "+ends3[0]+"   "+max_index);
+
+                                        // Check whether end time marker is over the length of time markers
+                                        if(Integer.parseInt(ends3[0].replace("\"","").replace("tm",""))>max_index){
+                                            System.out.println("[INFO MIDIFY TM]: modified a time marker :"+ends2[0].replace("\"","")+": from tm"+ends3[0].replace("\"","").replace("tm","")+" to tm"+max_index);
+                                            y=y.replace("end="+ends2[0].replace("\"","")+":"+ends3[0].replace("\"","").replace("tm",""),"end="+ends2[0]+":"+Integer.toString(max_index));
+                                        }
+
+                                        // fml_construction=fml_construction+"\n"+y.replace("lexeme","type");
+                                        // fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance=\"1.0\"/>";
+                                        fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance" + importance;
+                                        
                                     }
-                                    // fml_construction=fml_construction+"\n"+y.replace("lexeme","type");
-                                    // fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance=\"1.0\"/>";
-                                    fml_construction=fml_construction+"\n"+y.replace("lexeme","type")+"importance" + importance;
-                                    }
+                                    
                                     //System.out.println("FML FILE\n:"+fml_construction);
                                     DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
                                     DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
@@ -419,6 +439,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
                                     transformer.setOutputProperty(OutputKeys.INDENT, "yes");
                                     transformer.transform(source, result);
                                     XMLTree bml_mod = bmlparser.parseFile(System.getProperty("user.dir")+"\\test_fml.xml");
+                                    
                                     signals.addAll(BMLTranslator.BMLToSignals(bml_mod, this.getCharacterManager()));
                                     //System.out.println("SIGNALS:"+signals);
                                 }
@@ -548,27 +569,28 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
         
 
         
-        /*System.out.println("greta.core.behaviorplanner.Planner.performIntentions()"+ selectedSignals);
-        for(Signal p : selectedSignals){
-            if(p.getModality()=="torso"){
-                TorsoSignal ts=(TorsoSignal)p;
-                System.out.println("INFO "+ts.getLexeme());
-            }
-        }
-        */
+//        System.out.println("greta.core.behaviorplanner.Planner.performIntentions(): "+ selectedSignals);
+//        for(Signal p : selectedSignals){
+//            if(p.getModality()=="torso"){
+//                TorsoSignal ts=(TorsoSignal)p;
+//                System.out.println("Torso lexeme: "+ts.getLexeme());
+//            }
+//        }
+        
+        
         // Ideational Units Creation and Pre-Processing
         IdeationalUnitFactory ideationalUnitFactory = new IdeationalUnitFactory();
         for (Intention intention : intentions) {
-            Logs.debug("[INFO IDEATIONAL_UNIT]:"+intention.getClass());
+            System.out.println("[INFO IDEATIONAL_UNIT]:"+intention.getClass());
             if (intention instanceof IdeationalUnitIntention) {
                 String ideationalUnitMainIntentionId = ((IdeationalUnitIntention) intention).getMainIntentionId();
                 IdeationalUnit ideationalUnit = ideationalUnitFactory.newIdeationalUnit(intention.getId(), ideationalUnitMainIntentionId);
                 for (Signal currentSignal : selectedSignals) {
                     if (currentSignal instanceof GestureSignal) {
-                        Logs.debug("[INFO IDEATIONAL_UNIT]:"+currentSignal + "  " + selectedSignals);
+                        System.out.println("[INFO IDEATIONAL_UNIT]:"+currentSignal + "  " + selectedSignals);
                         if (currentSignal.getTimeMarker("ready").getValue() >= intention.getStart().getValue() && currentSignal.getTimeMarker("relax").getValue() <= intention.getEnd().getValue()) {
                             ideationalUnit.addSignal(currentSignal);
-                            Logs.debug("[INFO IDEATIONAL_UNIT]:"+currentSignal);
+                            System.out.println("[INFO IDEATIONAL_UNIT]:"+currentSignal);
                             ((GestureSignal) currentSignal).setIdeationalUnit(ideationalUnit);
                         }
                     }

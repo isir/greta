@@ -28,6 +28,7 @@ import java.util.AbstractMap.*;
 import java.util.concurrent.locks.*;
 
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
@@ -97,9 +98,19 @@ public class VHMSG implements javax.jms.MessageListener
     public static final String VHMSG_SERVER = "VHMSG_SERVER";
     public static final String VHMSG_PORT = "VHMSG_PORT";
     public static final String MESSAGE_PREFIX = "MESSAGE_PREFIX";
-    public static final String STRING_ENCODING = "UTF8";
+//    public static final String STRING_ENCODING = "UTF8";
     // public static final String STRING_ENCODING = "Unicode";
+//    public static final String STRING_ENCODING = "US-ASCII";
     // public static final String STRING_ENCODING = "UTF16";
+    
+//    public static final String STRING_ENCODING = StandardCharsets.UTF_8.toString();
+//    public static final String STRING_ENCODING = StandardCharsets.UTF_16.toString();
+//    public static final String STRING_ENCODING = StandardCharsets.US_ASCII.toString();
+//    public static final String STRING_ENCODING = StandardCharsets.UTF_16BE.toString();
+//    public static final String STRING_ENCODING = StandardCharsets.UTF_16LE.toString();
+    public static final String STRING_ENCODING = StandardCharsets.ISO_8859_1.toString();
+
+    
     public static final String MULTIKEY = "multikey";
 
 

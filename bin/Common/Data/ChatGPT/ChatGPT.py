@@ -8,7 +8,7 @@ import argparse
 import sys
 
 # API_KEY ="PUT_YOUR_OPENAI_API_KEY_HERE"
-api_key_file = 'api_key.txt'
+api_key_file = os.path.join(os.path.dirname(__file__), 'api_key.txt')
 with open(api_key_file, 'r') as f:
     API_KEY = f.read()
 

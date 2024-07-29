@@ -106,8 +106,8 @@
                     w="80.0" x="400.0" y="170.0">
                     <window h="148" visible="false" w="342" x="0" y="0"/>
                 </element>
-                <element h="50.0" id="GPT3 - 1680009395875-868"
-                    module="GPT3" name="GPT3" w="80.0" x="30.0" y="30.0">
+                <element h="50.0" id="ChatGPT - 1680009395875-868"
+                    module="ChatGPT" name="ChatGPT" w="80.0" x="30.0" y="30.0">
                     <window h="554" visible="false" w="935" x="0" y="0"/>
                 </element>
                 <element h="50.0"
@@ -151,7 +151,7 @@
         <connection connector="LipSourceForLipBlender"
             source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
-            source="GPT3 - 1680009395875-868" target="Behavior Planner - 1544700734561-356"/>
+            source="ChatGPT - 1680009395875-868" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="setTTS" source="TTS - 1544700939858-569" target="MaryTTS Client - 1680012572369-895"/>
         <connection connector="connectAnimatableToEnvironment"
             source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>

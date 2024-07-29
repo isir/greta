@@ -206,8 +206,8 @@
                     <item module="FlipperDemo" name="FlipperDemo"/>
                 </menu>
                 <item module="ChatGPT" name="ChatGPT"/>
-            <item module="Mistral" name="Mistral"/>
-              <item module="DeepGram" name="DeepGram"/>
+                <item module="LLM" name="LLM"/>
+                <item module="DeepGram" name="DeepGram"/>
             </menu>
         </menu>
     
@@ -1143,8 +1143,8 @@
             <object class="greta.auxiliary.chatgpt.ChatGPT" lib_id="greta_ChatGPT"/>
             <frame class="greta.auxiliary.chatgpt.ChatGPTFrame" lib_id="greta_ChatGPT" type="frame"/>
         </module>
-       <module name="Mistral" style="Intentions">
-            <object class="greta.auxiliary.llm.MistralFrame" lib_id="greta_llm"/>
+       <module name="LLM" style="Intentions">
+            <object class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
 			<frame type="object"/>
        </module>
          <module name="DeepGram" >

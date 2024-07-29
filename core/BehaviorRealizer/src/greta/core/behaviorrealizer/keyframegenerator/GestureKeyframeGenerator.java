@@ -164,7 +164,7 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
 
     @Override
     protected void generateKeyframes(List<Signal> inputSignals, List<Keyframe> outputKeyframes) {
-
+        
         //I) update list of rest poses and set the stroke boolean to the last phase
 //        GestureSignal originalRest = restPoses.get(0);
         clearRestPoses();
@@ -194,6 +194,10 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
         
         Collections.sort(restPoses, KeyframeGenerator.startComparator);
         Collections.sort(onlyGestures, KeyframeGenerator.startComparator);
+        
+        for (GestureSignal gesture : onlyGestures) {
+            System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): received gestures: " + gesture.getReference());
+        }
 
         //II) set rest poses into gestures
         for (GestureSignal gesture : onlyGestures) {
@@ -246,23 +250,40 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
         //IV) testing gestures overlapping and coarticulation
         Collections.sort(onlyGestures, strokeComparator);
         for (int i = 0; i < onlyGestures.size(); ++i) {
+            
             GestureSignal g1 = onlyGestures.get(i);
-
+            
             g1.propagatePoses();
             TimeMarker st_end1 = g1.getTimeMarker("stroke-end");
             TimeMarker relax1 = g1.getTimeMarker("relax");
             TimeMarker end1 = g1.getEnd();
+            
             for (int j = i + 1; j < onlyGestures.size();) {
+            
                 GestureSignal g2 = onlyGestures.get(j);
+                
                 TimeMarker start2 = g2.getStart();
                 TimeMarker ready2 = g2.getTimeMarker("ready");
                 TimeMarker st_start2 = g2.getTimeMarker("stroke-start");
-                if (start2.getValue() < end1.getValue() + timeDistanceThreshold) {
-                    if (st_start2.getValue() < st_end1.getValue()) {
-                        //TODO check side? can we make two gestures (strokes) at the same time?
-                        onlyGestures.remove(j);
-                        continue;
-                    }
+
+                // if gesture1 and gesture2 are overlapped, delete gesture2
+                if (st_start2.getValue() < st_end1.getValue()) {
+                    System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): overlap condition: overlapped: " + g2.getReference());
+                    //TODO check side? can we make two gestures (strokes) at the same time?
+                    System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): removed " + g2.getModality() + " " + g2.getReference() 
+                            + " (" + g2.getTimeMarker("start") + " " + g2.getTimeMarker("end") + ")"
+                            );
+                    System.out.println("- removed reason: overlapped with " + g1.getModality() + " " + g1.getReference() 
+                            + " (" + g2.getTimeMarker("start") + " " + g2.getTimeMarker("end") + ")"
+                    );
+                    onlyGestures.remove(j);
+                    continue;
+                }
+                
+                // if gesture1 and gesture2 are close, but not overlapped
+                else if (start2.getValue() < end1.getValue() + timeDistanceThreshold) {
+                    System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): overlap condition: not overlapped but close: " + g2.getReference());
+                    
                     ++j;
 
                     //adapt positions
@@ -303,6 +324,7 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
 
                     }
                 } else {
+                    System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): overlap condition: not overlapped: " + g2.getReference());
                     break;
                 }
             }
@@ -312,21 +334,25 @@ public class GestureKeyframeGenerator extends KeyframeGenerator {
         GestureKeyframe lqst = null;
         for (GestureSignal gesture : onlyGestures) {
             if (!gesture.isFilled()) {
+                System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): not generated: not filled: " + gesture.getReference());
                 continue;
             }
             LinkedList<GestureKeyframe> keyframes = new LinkedList<GestureKeyframe>();
             modifier.generateKeyframesForOneGesture(gesture, keyframes);
             outputKeyframes.addAll(keyframes);
             lqst = keyframes.getLast();
+            
+            System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): generated gesture: " + gesture.getReference());
+            
         }
 //        if(lqst != null){
 //            lqst = new GestureKeyframe("", "", lqst.getTrajectoryType(), lqst.getOffset() + 1, lqst.getOffset() + 1 , lqst.getHand(), lqst.getScriptName(), lqst.isIsScript());
 //            outputKeyframes.add(lqst);
 //        }
         
-        for(Keyframe k:outputKeyframes){
-            System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): " + k.getModality());
-        }        
+//        for(Keyframe k:outputKeyframes){
+//            System.out.println("greta.core.behaviorrealizer.GestureKeyframeGenerator.generateKeyframes(): " + k.getModality());
+//        }        
 
     }
 

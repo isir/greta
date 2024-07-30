@@ -125,8 +125,6 @@ public class MistralFrame extends LLMFrame{
         jScrollPane2 = new javax.swing.JScrollPane();
         systemPrompt = new javax.swing.JTextArea();
         answer = new javax.swing.JLabel();
-        addressLabel1 = new javax.swing.JLabel();
-        languageBox = new javax.swing.JComboBox<>();
         answer1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         AnswerText = new javax.swing.JTextArea();
@@ -175,10 +173,6 @@ public class MistralFrame extends LLMFrame{
         answer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         answer.setText("Answer");
 
-        addressLabel1.setText("Language");
-
-        languageBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "English", "French" }));
-
         answer1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         answer1.setText("System Prompt");
 
@@ -189,6 +183,11 @@ public class MistralFrame extends LLMFrame{
         addressLabel2.setText("Model");
 
         modelBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Local", "Online" }));
+        modelBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modelBoxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -204,23 +203,17 @@ public class MistralFrame extends LLMFrame{
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(addressLabel)
-                                    .addComponent(portLabel))
+                                    .addComponent(portLabel)
+                                    .addComponent(addressLabel2))
                                 .addGap(32, 32, 32)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(modelBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(addressLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(languageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(addressLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(modelBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(57, 57, 57)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(answer1)
@@ -247,13 +240,9 @@ public class MistralFrame extends LLMFrame{
                             .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addressLabel1)
-                            .addComponent(languageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressLabel2)
                             .addComponent(modelBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
+                        .addGap(103, 103, 103)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(answer)))
@@ -317,33 +306,7 @@ public class MistralFrame extends LLMFrame{
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-  
-    public void setRequestTextandSend(String content){
-        request.setText(content);
-        
-        // TODO add your handling code here:
-        Thread r1 = new Thread() {
-            @Override
-            public void run() {
-                String text=request.getText();
-                String language= (String) languageBox.getSelectedItem();
-                String model= (String) modelBox.getSelectedItem();
-                String systemPromptText = systemPrompt.getText();
-                System.out.println("Language selected : "+language);
-                if(text.length()>0)
-                try {
-
-                    server.sendMessage(model+"#SEP#"+language+"#SEP#"+text+"#SEP#"+systemPromptText);
-                    System.out.println("Sent message:"+text);
-                } catch (IOException ex) {
-                    Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-        };
-
-        r1.start();
-    }
+    
     private void enableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableActionPerformed
         
         if(enable.isSelected()){
@@ -494,7 +457,7 @@ public class MistralFrame extends LLMFrame{
             @Override
             public void run() {
                 String text=request.getText();
-                String language= (String) languageBox.getSelectedItem();
+                String language= cm.getLanguage();
                 String model= (String) modelBox.getSelectedItem();
                 String systemPromptText = systemPrompt.getText();
                 System.out.println("Language selected : "+language);
@@ -518,6 +481,10 @@ public class MistralFrame extends LLMFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_portActionPerformed
 
+    private void modelBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_modelBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -527,7 +494,6 @@ public class MistralFrame extends LLMFrame{
     private javax.swing.JTextArea AnswerText;
     private javax.swing.JTextField address;
     private javax.swing.JLabel addressLabel;
-    private javax.swing.JLabel addressLabel1;
     private javax.swing.JLabel addressLabel2;
     private javax.swing.JLabel answer;
     private javax.swing.JLabel answer1;
@@ -538,7 +504,6 @@ public class MistralFrame extends LLMFrame{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JComboBox<String> languageBox;
     private javax.swing.JComboBox<String> modelBox;
     private javax.swing.JTextField port;
     private javax.swing.JLabel portLabel;

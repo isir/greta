@@ -97,27 +97,19 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane1" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="addressLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="portLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="addressLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="modelBox" min="-2" max="-2" attributes="0"/>
                                           <Component id="port" min="-2" max="-2" attributes="0"/>
                                           <Component id="address" min="-2" max="-2" attributes="0"/>
                                       </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="addressLabel1" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="languageBox" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="jScrollPane1" alignment="0" min="-2" pref="329" max="-2" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="addressLabel2" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="modelBox" min="-2" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -153,17 +145,12 @@
                                   <Component id="addressLabel" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="address" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="addressLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="languageBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="addressLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="modelBox" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="addressLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="answer" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -273,24 +260,6 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Answer"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="addressLabel1">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="Language"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="languageBox">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="2">
-                    <StringItem index="0" value="English"/>
-                    <StringItem index="1" value="French"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="answer1">
               <Properties>

@@ -71,8 +71,11 @@ public class DeepGramFrame extends DeepASRFrame {
     private static String markup = "fml-apml";
     private Server server;
     
-    
-  
+
+    public DeepGramFrame(CharacterManager cm)throws InterruptedException {
+        super(cm);
+       
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,8 +94,6 @@ public class DeepGramFrame extends DeepASRFrame {
         address = new javax.swing.JTextField();
         listen = new javax.swing.JButton();
         answer = new javax.swing.JLabel();
-        addressLabel1 = new javax.swing.JLabel();
-        languageBox = new javax.swing.JComboBox<>();
         jScrollPane3 = new javax.swing.JScrollPane();
         TranscriptText = new javax.swing.JTextArea();
         enable = new javax.swing.JCheckBox();
@@ -128,10 +129,6 @@ public class DeepGramFrame extends DeepASRFrame {
         answer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         answer.setText("Transcript");
 
-        addressLabel1.setText("Language");
-
-        languageBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "English", "French" }));
-
         TranscriptText.setColumns(20);
         TranscriptText.setRows(5);
         jScrollPane3.setViewportView(TranscriptText);
@@ -146,20 +143,14 @@ public class DeepGramFrame extends DeepASRFrame {
                     .addComponent(listen)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(addressLabel)
-                                    .addComponent(portLabel))
-                                .addGap(32, 32, 32)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(44, 44, 44)
-                                .addComponent(answer))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(addressLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(languageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(addressLabel)
+                            .addComponent(portLabel))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addComponent(answer)
                         .addGap(18, 18, 18)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(24, 26, Short.MAX_VALUE))
@@ -178,10 +169,6 @@ public class DeepGramFrame extends DeepASRFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressLabel)
                             .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addressLabel1)
-                            .addComponent(languageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -240,8 +227,6 @@ public class DeepGramFrame extends DeepASRFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
-
-        jPanel1.getAccessibleContext().setAccessibleName("DeepGram");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -429,7 +414,7 @@ public class DeepGramFrame extends DeepASRFrame {
             @Override
             public void run() {
         
-                String language= (String) languageBox.getSelectedItem();
+                String language= cm.getLanguage();
                
                 
                 if (IsListenning){
@@ -484,7 +469,7 @@ public class DeepGramFrame extends DeepASRFrame {
             @Override
             public void run() {
         
-                String language= (String) languageBox.getSelectedItem();
+                String language= cm.getLanguage();
                
                 
                 if (IsListenning){
@@ -528,14 +513,12 @@ public class DeepGramFrame extends DeepASRFrame {
     private javax.swing.JTextArea TranscriptText;
     private javax.swing.JTextField address;
     private javax.swing.JLabel addressLabel;
-    private javax.swing.JLabel addressLabel1;
     private javax.swing.JLabel answer;
     private javax.swing.JCheckBox automaticListen;
     private javax.swing.JCheckBox enable;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JComboBox<String> languageBox;
     private javax.swing.JButton listen;
     private javax.swing.JTextField port;
     private javax.swing.JLabel portLabel;

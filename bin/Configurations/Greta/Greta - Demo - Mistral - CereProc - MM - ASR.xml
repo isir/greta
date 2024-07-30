@@ -19,12 +19,12 @@
             <parameter name="blackBackground" value="true"/>
             <window h="435" visible="false" w="618" x="10" y="10"/>
         </element>
-        <element h="480.0" id="Environment - 1544700713383-564"
-            module="Environment" name="Environment" w="710.0" x="30.0" y="110.0">
-            <element h="420.0"
+        <element h="560.0" id="Environment - 1544700713383-564"
+            module="Environment" name="Environment" w="700.0" x="30.0" y="110.0">
+            <element h="510.0"
                 id="Character Manager - 1544700726358-960"
                 module="Character Manager" name="Character Manager"
-                w="660.0" x="20.0" y="30.0">
+                w="650.0" x="20.0" y="30.0">
                 <parameter name="character_name" value="CAMILLE"/>
                 <window h="531" visible="false" w="505" x="10" y="10"/>
                 <element h="50.0" id="TTS - 1544700939858-569"
@@ -106,63 +106,59 @@
                     w="80.0" x="290.0" y="490.0">
                     <window h="148" visible="false" w="342" x="0" y="0"/>
                 </element>
+                <element h="50.0" id="Mistral - 1720516226740-395"
+                    module="Mistral" name="Mistral" w="80.0" x="20.0" y="360.0">
+                    <window h="575" visible="true" w="935" x="92" y="466"/>
+                </element>
                 <element h="50.0" id="Feedbacks - 1721057588907-99"
                     module="Feedbacks" name="Feedbacks" w="80.0"
-                    x="130.0" y="350.0">
+                    x="120.0" y="360.0">
                     <window h="345" visible="false" w="405" x="0" y="0"/>
                 </element>
-                <element h="50.0" id="Lip Model - 1722344096468-227"
-                    module="Lip Model" name="Lip Model" w="180.0"
-                    x="240.0" y="220.0"/>
-                <element h="50.0" id="DeepGram - 1722344124200-101"
-                    module="DeepGram" name="DeepGram" w="80.0" x="30.0" y="350.0">
-                    <window h="376" visible="false" w="673" x="0" y="0"/>
-                </element>
-                <element h="50.0" id="Mistral - 1722344133118-912"
-                    module="Mistral" name="Mistral" w="80.0" x="30.0" y="30.0">
-                    <window h="581" visible="false" w="947" x="0" y="0"/>
+                <element h="50.0" id="Lip Model - 1721381426095-674"
+                    module="Lip Model" name="Lip Model" w="170.0"
+                    x="250.0" y="220.0"/>
+                <element h="50.0" id="DeepGram - 1722345283838-187"
+                    module="DeepGram" name="DeepGram" w="80.0" x="70.0" y="440.0">
+                    <window h="376" visible="true" w="673" x="0" y="0"/>
                 </element>
             </element>
         </element>
-        <element h="420.0" id="Ogre Player - 1720626419025-143"
-            module="Ogre Player" name="Ogre Player" w="80.0" x="760.0" y="140.0">
-            <parameter name="posX" value="-0.05913688987493515"/>
-            <parameter name="posY" value="1.5084959268569946"/>
-            <parameter name="posZ" value="2.488847255706787"/>
+        <element h="540.0" id="Ogre Player - 1720626419025-143"
+            module="Ogre Player" name="Ogre Player" w="80.0" x="800.0" y="120.0">
+            <parameter name="posX" value="-0.04862252622842789"/>
+            <parameter name="posY" value="1.5615357160568237"/>
+            <parameter name="posZ" value="2.4800033569335938"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="-0.0990450531244278"/>
-            <parameter name="yaw" value="-0.06232789531350136"/>
-            <window h="501" visible="true" w="943" x="917" y="635"/>
+            <parameter name="pitch" value="-0.1228073388338089"/>
+            <parameter name="yaw" value="-0.05786361172795296"/>
+            <window h="552" visible="true" w="690" x="1100" y="454"/>
         </element>
     </elements>
     <connections>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Model - 1722344096468-227" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="addFeedbackOutput"
-            source="Feedbacks - 1721057588907-99" target="DeepGram - 1722344124200-101"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="ASRToLLM"
+            source="DeepGram - 1722345283838-187" target="Mistral - 1720516226740-395"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1720626419025-143" target="Environment - 1544700713383-564"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Mistral - 1720516226740-395" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Model - 1721381426095-674" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Rest_Pose_Setter - 1621595871295-438" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="ASRToLLM"
-            source="DeepGram - 1722344124200-101" target="Mistral - 1722344133118-912"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1720626419025-143" target="Environment - 1544700713383-564"/>
         <connection connector="addFeedbackInput"
             source="Behavior Realizer - 1544712930520-534" target="Feedbacks - 1721057588907-99"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -172,10 +168,14 @@
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
-            source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1722344096468-227"/>
+            source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1721381426095-674"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1721057588907-99" target="DeepGram - 1722345283838-187"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Mistral - 1722344133118-912" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
     </connections>
 </modulated>

@@ -349,8 +349,6 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         jScrollPane2 = new javax.swing.JScrollPane();
         systemPrompt = new javax.swing.JTextArea();
         answer = new javax.swing.JLabel();
-        addressLabel1 = new javax.swing.JLabel();
-        languageBox = new javax.swing.JComboBox<>();
         answer1 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         AnswerText = new javax.swing.JTextArea();
@@ -399,10 +397,6 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         answer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         answer.setText("Answer");
 
-        addressLabel1.setText("Language");
-
-        languageBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "English", "French" }));
-
         answer1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         answer1.setText("System Prompt");
 
@@ -428,23 +422,17 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(addressLabel)
-                                    .addComponent(portLabel))
+                                    .addComponent(portLabel)
+                                    .addComponent(addressLabel2))
                                 .addGap(32, 32, 32)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(modelBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(addressLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(languageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(addressLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(modelBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addGap(57, 57, 57)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(answer1)
@@ -469,15 +457,11 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressLabel)
                             .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(14, 14, 14)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addressLabel1)
-                            .addComponent(languageBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addressLabel2)
-                            .addComponent(modelBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(63, 63, 63)
+                            .addComponent(modelBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addressLabel2))
+                        .addGap(97, 97, 97)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
                             .addComponent(answer)))
@@ -555,7 +539,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
             @Override
             public void run() {
                 String text=request.getText();
-                String language= (String) languageBox.getSelectedItem();
+                String language= cm.getLanguage();
                 String model= (String) modelBox.getSelectedItem();
                 String systemPromptText = systemPrompt.getText();
                 System.out.println("Language selected : "+language);
@@ -723,7 +707,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
             @Override
             public void run() {
                 String text=request.getText();
-                String language= (String) languageBox.getSelectedItem();
+                String language= cm.getLanguage();
                 String model= (String) modelBox.getSelectedItem();
                 String systemPromptText = systemPrompt.getText();
                 System.out.println("Language selected : "+language);
@@ -756,7 +740,6 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     private javax.swing.JTextArea AnswerText;
     private javax.swing.JTextField address;
     private javax.swing.JLabel addressLabel;
-    private javax.swing.JLabel addressLabel1;
     private javax.swing.JLabel addressLabel2;
     private javax.swing.JLabel answer;
     private javax.swing.JLabel answer1;
@@ -767,7 +750,6 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JComboBox<String> languageBox;
     private javax.swing.JComboBox<String> modelBox;
     private javax.swing.JTextField port;
     private javax.swing.JLabel portLabel;

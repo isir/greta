@@ -34,7 +34,7 @@ def ask(question,messages=None,messages_online=None):
         return ask_online(question,language,system_prompt, messages_online)
 def ask_local(question,language, system_prompt, messages=None):
     
-    if language == 'French':
+    if language == 'FR':
         prompt=[
         {"role": "system", "content": "Tu es un assistant virtuel qui réponds en français avec des phrases courtes de style oral. Réponds uniquement en français. "+system_prompt}
          ]

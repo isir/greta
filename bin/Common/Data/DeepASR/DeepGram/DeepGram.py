@@ -29,7 +29,7 @@ def main(language):
 
 
     print("language : "+language)
-    if language == "English":
+    if language == "EN":
         language = "en-US"
         
     else:

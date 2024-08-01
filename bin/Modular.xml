@@ -56,6 +56,10 @@
                 <item module="AttitudeSetter" name=" Attitude Setter"/>
                 </menu>
             </menu>
+          <menu name="Incrementality">
+            <item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
+            <item module="IncRealizerInteraction" name="IncRealizerInteraction"/>
+          </menu>
             <item module="Behavior Realizer" name="Behavior Realizer"/>
             <menu name="Keyframe Performers">
                 <item module="IK Keyframe Performer" name="IK"/>
@@ -208,6 +212,7 @@
               <menu name="LLM">
                 <item module="ChatGPT" name="ChatGPT"/>
                 <item module="Mistral" name="Mistral"/>
+                <item module="MistralIncremental" name="Mistral Incremental"/>
                 </menu>
               <menu name="DeepASR">
                 <item module="DeepGram" name="DeepGram"/>
@@ -266,6 +271,17 @@
             </frame>
             <parameter default="false" get_method="isBlack" get_on="frame" name="blackBackground" set_method="setBlack" set_on="frame" type="boolean"/>
         </module>
+      <!-- Incrementality modules -->
+      <module name="Incremental Realizer V2" style="BehaviorRealizer">
+        <object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
+      </module>
+      <module name="IncRealizerInteraction" style="BehaviorRealizer">
+        <object class="greta.auxiliary.incrementality.IncRealizerInteraction" lib_id="greta_incrementality"/>
+        <frame class="greta.auxiliary.incrementality.IncrRealizerInteractionGUI_" lib_id="greta_incrementality" type="frame">
+          <link method="setLoader" on="frame"/>
+        </frame>
+      </module>
+      <!-- Incrementality modules -->
         <module name="FML File Reader" style="Intentions">
             <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
@@ -1153,6 +1169,10 @@
             <object class="greta.auxiliary.llm.MistralFrame" lib_id="greta_llm"/>
 			<frame type="object"/>
        </module>
+      <module name="MistralIncremental" style="Intentions">
+        <object class="greta.auxiliary.llm.MistralFrameIncremental" lib_id="greta_llm"/>
+        <frame type="object"/>
+      </module>
          <module name="DeepGram" >
            <object class="greta.auxiliary.deepasr.DeepGramFrame" lib_id="greta_deepasr"/>
            <frame type="object"/>
@@ -1574,7 +1594,14 @@
 		<lib id="ext_bfograph" path="./Common/Lib/External/sequencemining/bfograph.jar"/>
         <lib id="ext_clodhopper_core" path="./Common/Lib/External/sequencemining/clodhopper-core-1.0.0.jar"/>
         <lib id="ext_spmf" path="./Common/Lib/External/sequencemining/spmf.jar"/>
-
+      <lib id="greta_incrementality" path="./Common/Lib/Internal/Incrementality.jar">
+        <depends lib_id="greta_util"/>
+        <depends lib_id="greta_signals"/>
+        <depends lib_id="greta_intentions"/>
+        <depends lib_id="greta_behavior_realizer"/>
+        <depends lib_id="greta_feedbacks"/>
+        <depends lib_id="greta_mpeg4"/>
+      </lib>
 	<!-- jackson library version 2.15 -->
 
 	<lib id="ext_jackson-annotations-2.15" path="./Common/Lib/External/jackson/jackson-annotations-2.15.2.jar"/>
@@ -1950,6 +1977,12 @@
             <connect from="input" method="addAttitudePerformer" to="output"/>
             <disconnect from="input" method="removeAttitudePerformer" to="output"/>
         </connector>
+      <connector id="connectIncInteractionToRealizer">
+        <input class="greta.auxiliary.incrementality.IncrementalityInteractionEmitter" lib_id="greta_incrementality"/>
+        <output class="greta.auxiliary.incrementality.IncrementalityInteractionPerformer" lib_id="greta_incrementality"/>
+        <connect from="input" method="addIncInteractionPerformer" to="output"/>
+        <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
+      </connector>
     </connectors>
     <!-- list of styles -->
     <styles>

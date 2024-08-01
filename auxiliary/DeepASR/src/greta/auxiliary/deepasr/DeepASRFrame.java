@@ -86,13 +86,19 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
     }
     
    public void performFeedback(String type){
-       if (type == "end"){
+       Boolean IsStreaming = Boolean.FALSE;
+       for (LLMFrame llm : llms){
+                      IsStreaming = llm.IsStreaming | IsStreaming;                  
+                                  }
+       System.out.println("****************************Feedback received "+ type + "Streaming is " + IsStreaming);
+       if (type == "end" & !IsStreaming){
        if (!IsListenning & automaticListenBool){
            Thread r3 = new Thread() {
             @Override
             public void run() {
        
                 try {
+                    
                     String language= cm.getLanguage();
                     System.out.println("Language selected : "+language);
                     
@@ -101,7 +107,7 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
                     listen.setText("Stop");
                     IsListenning = Boolean.TRUE;
                     
-                } catch (IOException ex) {
+                } catch (Exception ex) {
                     Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
@@ -112,23 +118,30 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
                 }
    }
    if (type == "start"){
-       if (IsListenning){
+      
            Thread r3 = new Thread() {
             @Override
             public void run() {
-       
+                     try{
+       Thread.sleep(100);
+       }catch (Exception ex) {
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                      if (IsListenning){
                     try{
+                        
                         server.sendMessage("STOP");
                         System.out.println("Stopping");
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
-                    }catch (IOException ex) {
+                    }catch (Exception ex) {
                     Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                      }
             }
            };
                     r3.start();
-   }
+   
    }
    }
    public void performFeedback(ID AnimId, String type, SpeechSignal speechSignal, TimeMarker tm){

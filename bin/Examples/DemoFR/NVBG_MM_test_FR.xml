@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>
+<tm id="tm2"/>Quels
+<tm id="tm3"/>sont
+<tm id="tm4"/>les
+<tm id="tm5"/>actions
+<tm id="tm6"/>que
+<tm id="tm7"/>vous
+<tm id="tm8"/>prenez
+<tm id="tm9"/>pour
+<tm id="tm10"/>réduire
+<tm id="tm11"/>vos
+<tm id="tm12"/>émissions
+<tm id="tm13"/>de
+<tm id="tm14"/>gaz
+<tm id="tm15"/>à
+<tm id="tm16"/>effet
+<tm id="tm17"/>de
+<tm id="tm18"/>serre
+<tm id="tm19"/>
+<tm id="tm20"/>Note:
+<tm id="tm21"/>Je
+<tm id="tm22"/>suis
+<tm id="tm23"/>un
+<tm id="tm24"/>assistant
+<tm id="tm25"/>virtuel,
+<tm id="tm26"/>je
+<tm id="tm27"/>ne
+<tm id="tm28"/>peux
+<tm id="tm29"/>pas
+<tm id="tm30"/>effectuer
+<tm id="tm31"/>des
+<tm id="tm32"/>actions
+<tm id="tm33"/>réelles
+<boundary end="s1:tm33" id="b1" start="s1:tm1" type="LL"/>
+</speech>
+</bml>
+<fml>
+</fml>
+</fml-apml>

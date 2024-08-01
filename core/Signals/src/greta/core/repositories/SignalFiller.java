@@ -67,7 +67,7 @@ public class SignalFiller {
             face.setFilled(true);
         } else {
             face.setFilled(false);
-            System.out.println("greta.core.repositories.SignalFiller.fill(): Their is no entry in the FaceLibrary for " + face.getReference());
+            System.out.println("greta.core.repositories.SignalFiller.fill(): There is no entry in the FaceLibrary for " + face.getReference());
         }
     }
 
@@ -90,7 +90,7 @@ public class SignalFiller {
         }
         else{
             gesture.setFilled(false);
-            System.out.println("greta.core.repositories.SignalFiller.fill(): Their is no entry in the Gestuary for " + gesture.getReference());
+            System.out.println("greta.core.repositories.SignalFiller.fill(): There is no entry in the Gestuary for " + gesture.getReference());
         }
     }
 
@@ -119,7 +119,7 @@ public class SignalFiller {
             head.setFilled(true);
         } else {
             head.setFilled(false);
-            System.out.println("greta.core.repositories.SignalFiller.fill(): Their is no entry in the HeadLibrary for " + headID);
+            System.out.println("greta.core.repositories.SignalFiller.fill(): There is no entry in the HeadLibrary for " + headID);
         }
     }
 
@@ -162,7 +162,7 @@ public class SignalFiller {
             torso.setFilled(true);
         } else {
             torso.setFilled(false);
-            System.out.println("greta.core.repositories.SignalFiller.fill(): Their is no entry in the TorsoLibrary for " + torsoID);
+            System.out.println("greta.core.repositories.SignalFiller.fill(): There is no entry in the TorsoLibrary for " + torsoID);
         }
     }
 

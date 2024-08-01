@@ -33,6 +33,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.Level;
@@ -60,6 +62,13 @@ public class MessageSender {
     private BufferedWriter p_stdin;
     
     private CharacterManager charactermanager;
+
+    public static final String STRING_ENCODING = StandardCharsets.UTF_8.toString();
+//    public static final String STRING_ENCODING = StandardCharsets.UTF_16.toString();
+//    public static final String STRING_ENCODING = StandardCharsets.US_ASCII.toString();
+//    public static final String STRING_ENCODING = StandardCharsets.UTF_16BE.toString();
+//    public static final String STRING_ENCODING = StandardCharsets.UTF_16LE.toString();
+//    public static final String STRING_ENCODING = StandardCharsets.ISO_8859_1.toString();
     
     public MessageSender(CharacterManager cm){
         charactermanager = cm;
@@ -122,7 +131,7 @@ public class MessageSender {
 //        // Here we are sending our message!
 //        producer.send(message);
         
-        VHMSG vsg= new VHMSG("localhost", "61616", "DEFAULT_SCOPE" );
+        VHMSG vsg= new VHMSG("localhost", "61616", "DEFAULT_SCOPE", STRING_ENCODING);
         vsg.openConnection();
         if(!vsg.isConnected()){
             System.out.println("Couldn't connect to NVBG server at localhost:61616");
@@ -158,6 +167,9 @@ public class MessageSender {
                 textMessage = (TextMessage) message1;
                 String stringMessage = textMessage.getText();
                 
+                stringMessage = URLDecoder.decode(stringMessage, STRING_ENCODING );
+                stringMessage = stringMessage.trim();
+                
                 // byte[] byteMessage = textMessage.getText().getBytes("ISO-8859-1");
                 // String stringMessage = new String(byteMessage,"UTF-8");
                 
@@ -171,30 +183,30 @@ public class MessageSender {
                     received_vrSpeak=true;
                 }
                 
-                if(charactermanager.language.equals("FR") && stringMessage.split(" ")[0].contentEquals("parser_result")) {
-                                        
-//                    String src_encoding = "Unicode";
-//                    String src_encoding = "UTF-16";
-//                    String src_encoding = "ISO-8859-1";
-                    String tgt_encoding = "UTF-8";
-                    
-                    String[] encodingArray = {"US-ASCII", "Unicode", "UTF-16", "UTF-8", "ISO-8859-1", "UTF-32"};
-                    
-                    for (String src_encoding:encodingArray) {
-                                        
-    //                    byte[] byteMessage = textMessage.getText().getBytes("ISO-8859-1");
-                        byte[] byteMessage = textMessage.getText().getBytes(src_encoding);
-                        stringMessage = new String(byteMessage, tgt_encoding);
-
-//                        System.out.println("src encoding: " + src_encoding);
-//                        System.out.println("tgt encoding: " + tgt_encoding);
-//                        System.out.println("Received message: " + stringMessage);
-                        
-                        System.out.println("Test encoding: " + src_encoding + " : " + stringMessage);
-                
-                    }
-
-                }
+//                if(charactermanager.language.equals("FR") && stringMessage.split(" ")[0].contentEquals("parser_result")) {
+//                                        
+////                    String src_encoding = "Unicode";
+////                    String src_encoding = "UTF-16";
+////                    String src_encoding = "ISO-8859-1";
+//                    String tgt_encoding = "UTF-8";
+//                    
+//                    String[] encodingArray = {"US-ASCII", "Unicode", "UTF-16", "UTF-8", "ISO-8859-1", "UTF-32"};
+//                    
+//                    for (String src_encoding:encodingArray) {
+//                                        
+//    //                    byte[] byteMessage = textMessage.getText().getBytes("ISO-8859-1");
+//                        byte[] byteMessage = textMessage.getText().getBytes(src_encoding);
+//                        stringMessage = new String(byteMessage, tgt_encoding);
+//
+////                        System.out.println("src encoding: " + src_encoding);
+////                        System.out.println("tgt encoding: " + tgt_encoding);
+////                        System.out.println("Received message: " + stringMessage);
+//                        
+//                        System.out.println("Test encoding: " + src_encoding + " : " + stringMessage);
+//                
+//                    }
+//
+//                }
                 
             }
             if (received_vrSpeak || elapsedTime>session_timeout) {

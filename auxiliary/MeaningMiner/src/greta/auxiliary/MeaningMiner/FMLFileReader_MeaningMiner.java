@@ -98,6 +98,7 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
      * @return The ID of the generated event
      */
     public ID load(String fmlFileName) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
+
         //get the base file name to use it as requestId
         String base = (new File(fmlFileName)).getName().replaceAll("\\.xml$", "");
         String bml_file=FMLToBML(fmlFileName);
@@ -110,42 +111,41 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
         bmlparser.setValidating(true);
         BufferedReader reader;
         String text="";
-        
-        
-        
+
         boolean flag=false;
-                        try {
-                                File myObj = new File(fmlFileName);
-                                Scanner myReader = new Scanner(myObj);
-                                while (myReader.hasNextLine()) {
-                                  String data = myReader.nextLine();
-                                  //System.out.println(data);
-                                  if(!data.contains("<?xml")){
-                                    System.out.println(data);
-                                    if(!flag)
-                                        text_brut=true;
-                                    text+=data;
-                                    
-                                }
-                                else{
-                                    flag=true;
-                                    text+=data;
-                                }
-                                }
-                                myReader.close();
-                              } catch (FileNotFoundException e) {
-                                System.out.println("An error occurred.");
-                                e.printStackTrace();
+        try {
+            File myObj = new File(fmlFileName);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                //System.out.println(data);
+                if(!data.contains("<?xml")){
+                    System.out.println(data);
+                    if(!flag){
+                        text_brut=true;                        
+                    }
+                    text+=data;
                 }
-                        
-			
+                else{
+                    flag=true;
+                    text+=data;
+                }
+            }
+            
+            myReader.close();
+            
+        }
+        catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
                 
 	if(text_brut){
             System.out.println(text);
             fmlFileName=TextToFML(text);
             bml_file=FMLToBML(fmlFileName);
             System.out.println("Nome nuovo file "+fmlFileName);
-       }
+        }
         
         XMLTree fml = fmlparser.parseFile(fmlFileName);
         if(!text_brut){
@@ -155,9 +155,8 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
         XMLTree bml = bmlparser.parseFile(bml_file);
         List<Intention> intentions = FMLTranslator.FMLToIntentions(fml,cm);
         List<Signal> signals = BMLTranslator.BMLToSignals(bml,cm);
-        System.out.println("greta.core.intentions.FMLFileReader.load()");
         for (int i =0;i>signals.size();i++){
-                   System.out.println("greta.core.intentions.FMLFileReader.load()"+signals.get(i).toString());
+            System.out.println("greta.auxiliary.MeaningMiner.FMLFileReader.load(): "+signals.get(i).toString());
         }
         Mode mode = FMLTranslator.getDefaultFMLMode();
         Mode mode_bml = BMLTranslator.getDefaultBMLMode();
@@ -254,7 +253,7 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
     
      public String FMLToBML(String filename) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
         
-         System.out.println("greta.core.intentions.FMLFileReader.FMLToBML()");
+         System.out.println("greta.auxiliary.MeaningMiner.FMLFileReader.FMLToBML()");
           BufferedReader br = null;
           PrintWriter pw = null; 
     try {

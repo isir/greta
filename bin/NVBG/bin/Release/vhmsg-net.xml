@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>vhmsg-net</name>
+    </assembly>
+    <members>
+        <member name="T:VHMsg.Message">
+            <remarks>
+            This is the class that contains the message when received via the MessageEvent handler
+            It is received as an argument from MessageEvent
+            </remarks>
+        </member>
+        <member name="F:VHMsg.Message.s">
+            <summary>
+            String containing the message
+            </summary>
+        </member>
+        <member name="F:VHMsg.Message.properties">
+            <summary>
+            properties containing the multikey portion
+            </summary>
+        </member>
+        <member name="M:VHMsg.Message.#ctor(System.String,System.Collections.Generic.Dictionary{System.String,System.String})">
+            <summary>
+            Constructor
+            </summary>
+            <param name="s"></param>
+            <param name="properties"></param>
+        </member>
+        <member name="T:VHMsg.Client">
+            <remarks>
+            This is the main class for using this library
+            </remarks>
+        </member>
+        <member name="T:VHMsg.Client.MessageEventHandler">
+            <summary>
+            Delegate for the MessageEvent handler
+            </summary>
+        </member>
+        <member name="E:VHMsg.Client.MessageEvent">
+            <summary>
+            Message Handler.  Clients need to add their callback function to this handler to receive messages.
+            </summary>
+        </member>
+        <member name="P:VHMsg.Client.Server">
+            <summary>
+            Gets the server being used for the connection
+            </summary>
+        </member>
+        <member name="P:VHMsg.Client.Port">
+            <summary>
+            Gets the server being used for the connection
+            </summary>
+        </member>
+        <member name="P:VHMsg.Client.Scope">
+            <summary>
+            Gets/Sets the scope being used for the connection
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.#ctor(System.Text.Encoding)">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.Finalize">
+            <summary>
+            Destructor, follows the IDisposable pattern to force the release of ActiveMQ resources
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.Dispose">
+            <summary>
+            Dispose method.  Manually releases ActiveMQ resources.  Follows the IDisposable pattern
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.Dispose(System.Boolean)">
+            <summary>
+            Dispose method.  Manually releases ActiveMQ resources.  Follows the IDisposable pattern
+            </summary>
+            <param name="disposeManagedResources"></param>
+        </member>
+        <member name="M:VHMsg.Client.SetScopeFromEnvironment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.SetServerFromEnvironment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.SetPortFromEnvironment">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.OpenConnection">
+            <summary>
+            Opens a connection to the server.
+            <para />
+            By default, it uses 3 system environment variables as parameters
+            <para />
+            VHMSG_SERVER - This specifies the server to connect to.  It can either be an ip address or domain name
+            <para />
+            VHMSG_PORT - This specifies the port to connect to.  
+            <para />
+            VHMSG_SCOPE - A unique id used to distinguish messages sent by different modules using the same server.  For example, if two users
+            are using the same server, they would set different scopes so that they wouldn't receives each other's messages.
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.OpenConnection(System.String)">
+            <summary>
+            Opens a connection to the server using a specified host.  See <see cref="M:VHMsg.Client.OpenConnection"/>.
+            </summary>
+            <param name="server">the host to connect to.  It can either be an ip address or domain name</param>
+            <seealso cref="M:VHMsg.Client.OpenConnection"/>
+        </member>
+        <member name="M:VHMsg.Client.OpenConnection(System.String,System.String)">
+            <summary>
+            Opens a connection to the server using a specified host.  See <see cref="M:VHMsg.Client.OpenConnection"/>.
+            </summary>
+            <param name="server">the host to connect to.  It can either be an ip address or domain name</param>
+            <param name="port">the port to connect to.</param>
+            <seealso cref="M:VHMsg.Client.OpenConnection"/>
+        </member>
+        <member name="M:VHMsg.Client.CloseConnection">
+            <summary>
+            Closes the connection to the server that was previously opened via <see cref="M:VHMsg.Client.OpenConnection"/>.
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.SendMessage(System.String,System.String)">
+            <summary>
+            Sends a message to the server using 2 arguments.  The first argument is the first word in the message, the second argument is the rest of the message.
+            </summary>
+            <param name="op">The first word in the message</param>
+            <param name="arg">The rest of the message</param>
+        </member>
+        <member name="M:VHMsg.Client.SendMessage(System.String)">
+            <summary>
+            Sends a message to the server.  The argument contains the full message
+            </summary>
+            <param name="opandarg">The full message to send</param>
+        </member>
+        <member name="M:VHMsg.Client.SendMessage(System.String,System.String[])">
+            <summary>
+            Sends a message to the server where each item in the array is a separate word in the message.
+            </summary>
+            <param name="op">The first word in the message</param>
+            <param name="args">An array containing the rest of the message.  Each item in the array is a separate word</param>
+        </member>
+        <member name="M:VHMsg.Client.EnablePollingMethod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.EnableImmediateMethod">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.SubscribeMessage(System.String)">
+            <summary>
+            Subscribes to a message.  This notifies the server that we are interested in messages that contain the given argument as the first word in the message.
+            See <see cref="M:VHMsg.Client.SendMessage(System.String,System.String)"/>
+            <para />
+            For each message that is received, the MessageEvent handler will be called for all listeners.  See <see cref="M:VHMsg.Client.OnMessage(Apache.NMS.IMessage)"/>
+            <para />
+            More than one subscription can be made.  Alternatively, an asterisk (*) may be sent as a special-case argument that indicates we're interested in *all* messages.
+            This should be used very sparingly because it can cause quite a bit of network traffic.
+            </summary>
+            <param name="req">Indicates what types of messages we are interested in receiving.  This tells the server to send messages where the first word matches req</param>
+        </member>
+        <member name="M:VHMsg.Client.UnsubscribeMessage(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.Poll">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:VHMsg.Client.WaitAndPoll(System.Double)">
+            <summary>
+            
+            </summary>
+            <param name="waitTimeSeconds"></param>
+        </member>
+        <member name="M:VHMsg.Client.OnMessage(Apache.NMS.IMessage)">
+            <summary>
+            This function is a callback function received whenever an ActiveMQ message is received from the server.  It processes the message and passes it on to the client via
+            the MessageEvent handler.
+            </summary>
+            <param name="msg">ActiveMQ message received from the server</param>
+        </member>
+        <member name="M:VHMsg.Client.OnMessageIgnore(Apache.NMS.IMessage)">
+            <summary>
+            This function is a callback function received whenever an ActiveMQ message is received from the server.  It ignores the message and returns immediately.
+            </summary>
+            <param name="msg">ActiveMQ message received from the server</param>
+        </member>
+    </members>
+</doc>

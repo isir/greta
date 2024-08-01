@@ -102,6 +102,8 @@ public class BMLTranslator {
         XMLTree root = bml.getRootNode();
 
         for (XMLTree bmlchild : root.getChildrenElement()) {
+            
+            System.out.println("greta.core.signals.BMLTranslator.BMLToSignals(): " + bmlchild.getName() + " " + bmlchild.getAttribute("id") + " " +bmlchild.getTextValue());
 
             //<editor-fold defaultstate="collapsed" desc="laugh">
 
@@ -154,6 +156,20 @@ public class BMLTranslator {
             if (bmlchild.getName().equalsIgnoreCase("speech")) {
                 SpeechSignal speech = new SpeechSignal(cm);
                 speech.readFromXML(bmlchild, endAsDuration);
+//                
+//                System.out.println("greta.core.signals.BMLTranslator.BMLToSignals(): TimeMarkers: " + speech.getMarkers().toString());
+//                List<Object> speechElements = speech.getSpeechElements();
+//                for(Object speechElement:speechElements){
+//                    if (speechElement instanceof String){
+//                        System.out.println("greta.core.signals.BMLTranslator.BMLToSignals(): speechElement(String): " + speechElement);
+//                    }
+//                    else{
+//                        System.out.println("greta.core.signals.BMLTranslator.BMLToSignals(): speechElement(String): " + speechElement.toString());
+//                    }
+//                }
+
+                System.out.println("greta.core.signals.BMLTranslator.BMLToSignals(): originalText: " + speech.getOriginalText());
+
                 signals.add(speech);
             }
 

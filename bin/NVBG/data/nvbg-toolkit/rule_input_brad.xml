@@ -60,12 +60,12 @@
 		<pattern>great</pattern>
 	</rule>
 
-  <!--   idle gaze behavior  -->
-  <rule keyword="idle_gaze" priority="1" >
-    <pattern>DOWNLEFT</pattern>
-    <pattern>DOWNRIGHT</pattern>
-    <pattern>POLAR 0</pattern>
-  </rule>
+        <!--   idle gaze behavior  -->
+        <rule keyword="idle_gaze" priority="1" >
+          <pattern>DOWNLEFT</pattern>
+          <pattern>DOWNRIGHT</pattern>
+          <pattern>POLAR 0</pattern>
+        </rule>
 
 	<!-- *********************************** ANIMATIONS ********************************** -->
 	

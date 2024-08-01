@@ -67,7 +67,7 @@ import org.xml.sax.SAXException;
  *
  * @author miche
  */
-public class MistralFrame extends LLMFrame{
+public class MistralFrameIncremental extends LLMFrame{
 
     /**
      * Creates new form MistralFrame
@@ -88,7 +88,7 @@ public class MistralFrame extends LLMFrame{
     private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
     private String LLM_python_env_checker_path = "Common\\Data\\LLM\\Mistral\\check_env.py";
     private String LLM_python_env_installer_path = "Common\\Data\\LLM\\Mistral\\init_env.bat";
-    private String python_path_llm="\\Common\\Data\\LLM\\Mistral\\Mistral.py ";
+    private String python_path_llm="\\Common\\Data\\LLM\\Mistral\\MistralIncremental.py ";
     private Process server_process;
     private Thread server_shutdownHook;
     private Process server_process_mistral;
@@ -96,7 +96,7 @@ public class MistralFrame extends LLMFrame{
 
 
     public CharacterManager cm;
-    public MistralFrame(CharacterManager cm) throws InterruptedException {
+    public MistralFrameIncremental(CharacterManager cm) throws InterruptedException {
         super(cm);
         initComponents();
         server = new Server();
@@ -377,7 +377,7 @@ public class MistralFrame extends LLMFrame{
                                     System.out.println("greta.auxiliary.llm.MistralFrame.enableActionPerformed(): waiting for client connection (Mistral.py -> Mistral module)");
                                     server.accept_new_connection();
                                 } catch (IOException ex) {
-                                    Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(MistralFrameIncremental.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }                        
                     };
@@ -406,8 +406,9 @@ public class MistralFrame extends LLMFrame{
                                 while ((s = stdInput.readLine()) != null) {
                                     System.out.println("READ INPUT PYTHON :"+s);
                                     answ=s;
-                                   
-                                    
+                                    if(answ.contains("STOP")){
+                                        IsStreaming = Boolean.FALSE;
+                                    }else{
                                     if(answ!=null && answ.length()>1){
                                         System.out.println("Already on answer:"+AnswerText.getText());
                                         System.out.println("answer:"+answ);
@@ -420,7 +421,7 @@ public class MistralFrame extends LLMFrame{
                                         answ=null;
                                         load(file);
                                     }
-                                    
+                                    }
                                 }
 
                                 // Read any errors from the attempted command
@@ -430,15 +431,15 @@ public class MistralFrame extends LLMFrame{
                                 }
 
                             } catch (IOException ex) {
-                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MistralFrameIncremental.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (ParserConfigurationException ex) {
-                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MistralFrameIncremental.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (SAXException ex) {
-                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MistralFrameIncremental.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (TransformerException ex) {
-                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MistralFrameIncremental.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (JMSException ex) {
-                                Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MistralFrameIncremental.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         } 
                         
@@ -476,14 +477,14 @@ public class MistralFrame extends LLMFrame{
                 String model= (String) modelBox.getSelectedItem();
                 String systemPromptText = systemPrompt.getText();
                 System.out.println("Language selected : "+language);
-
+                IsStreaming = Boolean.TRUE;
                 if(text.length()>0)
                 try {
 
                     server.sendMessage(model+"#SEP#"+language+"#SEP#"+text+"#SEP#"+systemPromptText);
                     System.out.println("Sent message:"+text);
                 } catch (IOException ex) {
-                    Logger.getLogger(MistralFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MistralFrameIncremental.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }
@@ -511,7 +512,7 @@ public class MistralFrame extends LLMFrame{
  public void setRequestTextandSend(String content){
         request.setText(content);
         AnswerText.setText("");
-  
+        IsStreaming = Boolean.TRUE;
         // TODO add your handling code here:
         Thread r1 = new Thread() {
             @Override

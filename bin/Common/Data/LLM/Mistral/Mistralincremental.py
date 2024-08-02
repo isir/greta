@@ -31,34 +31,7 @@ def ask(question,messages=None,messages_online=None):
     if model == 'Local':
         return ask_local_chunk(question,language,system_prompt, messages)
     else:
-        return ask_online(question,language,system_prompt, messages_online)
-def ask_local(question,language, system_prompt, messages=None):
-    
-    if language == 'FR':
-        prompt=[
-        {"role": "system", "content": "Tu es un assistant virtuel qui réponds en français avec des phrases courtes de style oral. Réponds uniquement en français. "+system_prompt}
-         ]
-    else:
-          prompt=[
-        {"role": "system", "content": "You are a virtual assistant, answer with short answer. Use an oral style. "+system_prompt}
-         ] 
-    if messages is not None:
-        for msg in messages:
-            prompt.append(msg)
-    prompt.append({"role":"user", "content":question})
-    response = client.chat.completions.create(
-        model="TheBloke/Mistral-7B-Instruct-v0.2-GGUF",
-        messages=prompt,
-        temperature=0.7,
-    )
-    
-   
-    answer = response.choices[0].message.content
-    answer = answer.replace('\n', ' ')
-    answer = answer.replace('[', ' ')
-    answer = answer.replace(']', ' ')
-    print(answer)
-    return question,answer
+        return ask_online_chunk(question,language,system_prompt, messages_online)
 
 
 def ask_local_chunk(question,language, system_prompt, messages=None):
@@ -91,8 +64,7 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
         elif chunk.choices[0].delta.content in [".","?","!",";"]:
             curr_sent+=chunk.choices[0].delta.content
             answer += curr_sent
-            if curr_sent != "":
-                print(curr_sent)
+            print(curr_sent)
             curr_sent = ""
         else:
             curr_sent+=chunk.choices[0].delta.content
@@ -102,7 +74,7 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
     answer = answer.replace(']', ' ')
     return question,answer
  
-def ask_online(question,language,system_prompt,messages=None):
+def ask_online_chunk(question,language,system_prompt,messages=None):
 
 
     if language == 'French':
@@ -118,17 +90,35 @@ def ask_online(question,language,system_prompt,messages=None):
             prompt.append(msg)
     prompt.append(ChatMessage(role="user", content=question))
 
-    response = client_online.chat(
+    response = client_online.chat_stream(
          model=model,
-           messages=prompt,
+           messages=prompt
     )
-    
-  
-    answer = response.choices[0].message.content
+    answer = ""
+    curr_sent= ""
+    min_response_time = 1
+    start = time.perf_counter() 
+    for chunk in response:
+        
+        if chunk.choices[0].delta.content is None:
+            pass
+        elif chunk.choices[0].delta.content in [".","?","!",";"]:
+            curr_sent+=chunk.choices[0].delta.content
+            if answer != "":
+                response_time = time.perf_counter() -start
+                if response_time < min_response_time  :
+                    time.sleep(min_response_time  - response_time)
+            start = time.perf_counter()
+            answer += curr_sent
+            print(curr_sent)
+            curr_sent = ""
+        else:
+            curr_sent+=chunk.choices[0].delta.content
+    time.sleep(min_response_time )
+    print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
     answer = answer.replace(']', ' ')
-    print(answer)
     return question,answer   
 def append_interaction_to_chat_log(question, answer, messages=None,messages_online=None):
     if messages is None:

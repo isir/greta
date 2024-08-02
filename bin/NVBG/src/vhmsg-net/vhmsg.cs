@@ -80,7 +80,8 @@ namespace VHMsg
       /// </summary>
       public event MessageEventHandler MessageEvent;
 
-      System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+      public System.Text.Encoding m_encoding;
+
 
       /// <summary>
       /// Gets the server being used for the connection
@@ -113,12 +114,15 @@ namespace VHMsg
       /// <summary>
       /// Constructor
       /// </summary>
-      public Client()
+      public Client(System.Text.Encoding encoding)
       {
          m_consumers = new List<KeyValuePair<string, Apache.NMS.IMessageConsumer>>();
          SetServerFromEnvironment();
          SetPortFromEnvironment();
          SetScopeFromEnvironment();
+
+         m_encoding = encoding;
+
       }
 
 
@@ -174,7 +178,8 @@ namespace VHMsg
          }
          else
          {
-            m_scope = "NV";
+            // m_scope = "NV";
+            m_scope = "DEFAULT_SCOPE";
          }
       }
 
@@ -238,7 +243,7 @@ namespace VHMsg
          url = "tcp://" + m_host + ":" + m_port;
 
 
-            //System.out.println("getConnection(): " + url + " " + m_scope );
+         //System.out.println("getConnection(): " + url + " " + m_scope );
 
 
          Apache.NMS.ActiveMQ.ConnectionFactory connectionFactory = new Apache.NMS.ActiveMQ.ConnectionFactory(new Uri(url));
@@ -250,14 +255,16 @@ namespace VHMsg
          m_session = connection.CreateSession(ackMode);
          if (topic)
          {
-            m_destination = m_session.GetTopic("NVBG");
+            // m_destination = m_session.GetTopic("NVBG");
+            m_destination = m_session.GetTopic(m_scope);
          }
          else
          {
-            m_destination = m_session.GetQueue("NVBG");
+            // m_destination = m_session.GetQueue("NVBG");
+            m_destination = m_session.GetQueue(m_scope);
          }
 
-         m_Producer = m_session.CreateProducer(m_destination);
+            m_Producer = m_session.CreateProducer(m_destination);
          m_Producer.DeliveryMode = Apache.NMS.MsgDeliveryMode.NonPersistent;  // Persistent = false;  // m_Producer.setDeliveryMode( DeliveryMode.NON_PERSISTENT );
       }
 
@@ -316,7 +323,8 @@ namespace VHMsg
             return;
 
 
-         string arg_encoded = HttpUtility.UrlEncode(arg, Encoding.UTF8);
+         string arg_encoded = HttpUtility.UrlEncode(arg, m_encoding);
+         // string arg_encoded = HttpUtility.UrlEncode(arg);
 
          string mess = op + " " + arg_encoded;
 
@@ -580,7 +588,8 @@ namespace VHMsg
             Apache.NMS.ActiveMQ.Commands.ActiveMQTextMessage txtMsg = (Apache.NMS.ActiveMQ.Commands.ActiveMQTextMessage)msg;
             temp = txtMsg.Text;
             
-            temp = HttpUtility.UrlDecode(temp, encoding);
+            temp = HttpUtility.UrlDecode(temp, m_encoding);
+            // temp = HttpUtility.UrlDecode(temp);
 
             temp = temp.Trim();
 
@@ -606,6 +615,8 @@ namespace VHMsg
             */
             message = temp;
 
+
+
             Dictionary<string, string> properties = new Dictionary<string, string>();
             foreach (string key in txtMsg.Properties.Keys)
             {
@@ -613,7 +624,8 @@ namespace VHMsg
                 string sData = data as string;
                 if (sData != null)
                 {
-                    properties[key] = HttpUtility.UrlDecode(sData, encoding).Trim();
+                    properties[key] = HttpUtility.UrlDecode(sData, m_encoding).Trim();
+                    // properties[key] = HttpUtility.UrlDecode(sData).Trim();
                 }
             }
 
@@ -648,4 +660,5 @@ namespace VHMsg
           return;
       }
    }
+   
 }

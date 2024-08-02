@@ -118,7 +118,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         this.cm=cm;
         
         
-        init_MeaningMiner_server("greta.auxiliary.mistral.LLMFrame");
+   
         
     }
     

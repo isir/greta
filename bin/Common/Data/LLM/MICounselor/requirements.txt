@@ -1,0 +1,2 @@
+openai==1.35.13
+mistralai==0.4.2

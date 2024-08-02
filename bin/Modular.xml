@@ -213,6 +213,7 @@
                 <item module="ChatGPT" name="ChatGPT"/>
                 <item module="Mistral" name="Mistral"/>
                 <item module="MistralIncremental" name="Mistral Incremental"/>
+                <item module="MI Counselor" name="MI Counselor"/>
                 </menu>
               <menu name="DeepASR">
                 <item module="DeepGram" name="DeepGram"/>
@@ -1171,6 +1172,10 @@
        </module>
       <module name="MistralIncremental" style="Intentions">
         <object class="greta.auxiliary.llm.MistralFrameIncremental" lib_id="greta_llm"/>
+        <frame type="object"/>
+      </module>
+      <module name="MI Counselor" style="Intentions">
+        <object class="greta.auxiliary.llm.MICounselor" lib_id="greta_llm"/>
         <frame type="object"/>
       </module>
          <module name="DeepGram" >

@@ -30,6 +30,8 @@ namespace NVBG
             XmlNode thisRule;
             XmlNodeList postures;
 
+            NVBGLogger.Log("xslGetAnimation: " + _keyWord + " " + _posture + " " + _participant);
+
             for (int i = 0; i < rules.Count; ++i)
             {
                 thisRule = rules[i];
@@ -41,6 +43,9 @@ namespace NVBG
 
                     if (keyWord.Equals(_keyWord))
                     {
+
+                        NVBGLogger.Log("Animation acquisition start for " + keyWord);
+
                         if (keyWord.Equals("idle_gaze"))
                         {
                             XmlNodeList patterns = thisRule.ChildNodes;
@@ -61,6 +66,9 @@ namespace NVBG
                         {
 
                             string posture = postures[j].Attributes["name"].Value;
+
+                            NVBGLogger.Log("posture: " + posture + " _posture: " + _posture);
+
                             if (posture.Equals(_posture))
                             {
                                 XmlNodeList clips = postures[j].ChildNodes;
@@ -75,6 +83,9 @@ namespace NVBG
                                     int temp = randomizer.Next(0,clips.Count);                                    
 
                                     string animationName = clips[temp].InnerText;
+
+                                    NVBGLogger.Log("Randomly selected animation: " + animationName);
+
                                     return animationName;
                                 }
                             }

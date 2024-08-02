@@ -123,6 +123,16 @@ namespace NVBG
 
         System.Timers.Timer m_messageTimer;
 
+        private string m_language = "FR";
+
+        // Encoding for communication between NVBG and Greta
+        public System.Text.Encoding m_encoding = System.Text.Encoding.UTF8;
+        // public System.Text.Encoding encoding = System.Text.Encoding.Unicode;
+        // public System.Text.Encoding encoding = System.Text.Encoding.GetEncoding("ISO-8859-1");
+        // public System.Text.Encoding encoding = System.Text.Encoding.GetEncoding("1252");
+
+        // Encoding for communication between NVBG and charniak perser (since charniak perser is built in UTF16)
+        // public System.Text.Encoding encoding_parser = System.Text.Encoding.Unicode; //UTF16
 
         /// <summary>
         /// Constructor that takes in parameters passed in from the command line
@@ -149,7 +159,7 @@ namespace NVBG
 
             // initialize member variables        
             m_saliencyMap = new SaliencyMap();
-            m_vrExpressHandler = new VrExpressHandler();                       
+            m_vrExpressHandler = new VrExpressHandler(m_language, m_encoding);                       
             
             
 
@@ -346,7 +356,9 @@ namespace NVBG
                         {
                             if ((m_finalDocument.GetElementsByTagName("bml")[0].ChildNodes.Count > 0) && (m_characters.ContainsKey(currentMessage.AgentId)))
                             {
-                            
+
+                                outputMessage = m_vrExpressHandler.m_speakerBehavior.ReplaceSpecialChracters(outputMessage, true);
+
                                 NVBGManager.m_vhmsg.SendMessage(outputMessage);
                                                             
                                 NVBGLogger.Log(outputMessage);
@@ -518,6 +530,9 @@ namespace NVBG
         /// <param name="_currentMessage"></param>
         public void ProcessMessage(VHMessage _currentMessage)
         {            
+
+            NVBGLogger.Log("ProcessMessage: " + _currentMessage.MessageString);
+
             if (!_currentMessage.InputXml.Equals(""))
             {
                 try
@@ -616,19 +631,36 @@ namespace NVBG
         {
 
             
-                NVBGLogger.Log("Attaching vrAgentPartial messages");
+            NVBGLogger.Log("Attaching vrAgentPartial messages");
 
-                XmlNode speechTag = m_finalDocument.GetElementsByTagName("speech")[0];
-                XmlNode bmlTag = m_finalDocument.GetElementsByTagName("bml")[0];
+            XmlNode speechTag = m_finalDocument.GetElementsByTagName("speech")[0];
+            XmlNode bmlTag = m_finalDocument.GetElementsByTagName("bml")[0];
 
-                XmlNodeList eventTagList = m_finalDocument.GetElementsByTagName("sbm:event", "http://ict.usc.edu");
-                XmlNode lastEvent;
-                try
-                {
+            XmlNodeList eventTagList = m_finalDocument.GetElementsByTagName("sbm:event", "http://ict.usc.edu");
+            XmlNode lastEvent;
+
+            NVBGLogger.Log("AttachVRAgentPartialMessage: eventTagList.Count: " + eventTagList.Count);
+            NVBGLogger.Log("AttachVRAgentPartialMessage: eventTagList: " + eventTagList.ToString());
+
+            try
+            {
+
                 if (eventTagList.Count != 0)
+                {
                     lastEvent = eventTagList.Item(eventTagList.Count - 1);
+                }
                 else
-                    lastEvent = speechTag.NextSibling;
+                {
+                    try
+                    {
+                        lastEvent = speechTag.NextSibling;
+                    }
+                    catch
+                    {
+                        lastEvent =speechTag;
+                    }
+                }
+                NVBGLogger.Log("AttachVRAgentPartialMessage: lastEvent: " + lastEvent.Name + lastEvent.InnerText + " " + " " + lastEvent.Value);
 
 
                 XmlNodeList timeMarkers = m_finalDocument.GetElementsByTagName("mark");
@@ -671,6 +703,7 @@ namespace NVBG
                         XMLHelperMethods.AttachAttributeToNode(m_finalDocument, eventTag, "stroke", spId + endingTimeMarker);
 
                         bmlTag.InsertBefore(eventTag, lastEvent);
+
 
                     }
                 }
@@ -1506,7 +1539,7 @@ namespace NVBG
 
             try
             {
-                m_vhmsg = new VHMsg.Client();
+                m_vhmsg = new VHMsg.Client(m_encoding);
                 m_vhmsg.OpenConnection();
                 NVBGLogger.Log("Subscribing to input messages");
                 m_vhmsg.SubscribeMessage("elvinSim_to_nvbGen");
@@ -1532,6 +1565,12 @@ namespace NVBG
                 m_vhmsg.SubscribeMessage("vrSpeak");
                 m_vhmsg.MessageEvent += new VHMsg.Client.MessageEventHandler(MessageCallback);
                 NotifyPeers();
+
+                String server = m_vhmsg.Server;
+                String port = m_vhmsg.Port;
+                String scope = m_vhmsg.Scope;
+                NVBGLogger.Log("Connected to " + server + " " + port + " " + scope);
+
             }
             catch (Exception e)
             {
@@ -1741,14 +1780,22 @@ namespace NVBG
                         storyPoint = args[i];
                     }
                 }
+                if (currentParameter.Equals("-language", System.StringComparison.OrdinalIgnoreCase))
+                {
+                    if (++i < args.Count)
+                    {
+                        m_language = args[i];
+                    }
+                }
                 if (currentParameter.Equals("-help", System.StringComparison.OrdinalIgnoreCase))
                 {
                     NVBGLogger.Log("NVBG CommandLine Parameters explained:");
-                    NVBGLogger.Log("[-write_to_file]  values:[true/false] specifies if the output bml should be written to a file. You can specify the path for this output file using the flag [-write_to_file_path].");                    
+                    NVBGLogger.Log("[-write_to_file]  values:[true/false] specifies if the output bml should be written to a file. You can specify the path for this output file using the flag [-write_to_file_path].");
                     NVBGLogger.Log("[-write_to_file_path]  The path where NVBG writes the output bml to file");
                     NVBGLogger.Log("[-data_folder_path]   The path to the xml and xsl folder.");
                     NVBGLogger.Log("[-parsetree_cachefile_path]  The path (including folder path) to the parse file for this agent.");
                     NVBGLogger.Log("[-create_character]  Specify the character name followed by the name of it's corresponding config file. Only the file name is expected. It is assumed to reside at the specified data_folder_path");
+                    NVBGLogger.Log("[-language]  Specify the processing language tag (2 letters in captal) in ISO 639 format (e.g. EN for English, FR for French)");
                     return true;
                 }
             }

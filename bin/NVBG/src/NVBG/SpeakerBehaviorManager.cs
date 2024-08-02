@@ -8,7 +8,6 @@ using System.IO;
 using System.Text.RegularExpressions;
 
 
-
 namespace NVBG
 {
     public class SpeakerBehaviorManager
@@ -30,7 +29,7 @@ namespace NVBG
         List<string> m_parseTreeBuffer;
         private NVBGCharacter m_data;
         public static string parserResultString;
-        public const int parseWaitTime = 3;
+        public const int parseWaitTime = 1;
         private int m_totalTimeMarkers = 0;
         List<string> m_processedSentences;
         private string m_parseCachePath = @"../data/cache/";
@@ -41,6 +40,12 @@ namespace NVBG
         //private VHMessage m_currentMessage;
         private XmlNode m_bmlNode;
         private bool m_useExpressionsDatabase = false;
+
+        private string m_language;
+        private string m_charMapFile;
+        private Dictionary<string, string> m_specialCharMap;
+        private Dictionary<string, string> m_specialCharMapInverse;
+        private System.Text.Encoding m_encoding;
 
         // current available face express type
         enum faceExpressType { 
@@ -67,7 +72,7 @@ namespace NVBG
         /// <summary>
         /// constructor
         /// </summary>
-        public SpeakerBehaviorManager()
+        public SpeakerBehaviorManager(string language, System.Text.Encoding encoding)
         {
             //m_data = _data;
             m_fmlBml = false;
@@ -79,6 +84,13 @@ namespace NVBG
             m_fmlBmlTagCount = 0;
             m_processedSentences = new List<string>();
             m_completeUtterance = "";
+
+            m_language = language;
+            m_charMapFile = "../../data/specialCharMap/" + language + "-char-map.txt";
+            m_encoding = encoding;
+
+            m_specialCharMap = CreateSpecialCharMap(false);
+            m_specialCharMapInverse = CreateSpecialCharMap(true);
 
             XmlDocument face_express_xml = new XmlDocument();
             m_faceExpressDatabase = new Dictionary<string, List<KeyValuePair<int, float>>>();
@@ -250,6 +262,8 @@ namespace NVBG
             {
                 XmlNode speechTag = m_inputDoc.GetElementsByTagName("speech")[i];
                 string sentence = speechTag.InnerText;
+
+                NVBGLogger.Log("ProcessDialogMessage: sentence: " + sentence);
 
                 //This is to check if the innerxml and innertext are same, if they are not, that means this speech tag contains ssml tags
                 //They are processed, added to the hashtable and then later on used when the results return from the parser.
@@ -449,7 +463,8 @@ namespace NVBG
                 }
 
                 sentence = sentence.Replace("\"", "");
-                char[] delimiters = new char[] { '.', '!'};//, '?' };
+                // char[] delimiters = new char[] { '.', '!'} //, '?'};
+                char[] delimiters = new char[] { '.', '!', '?'};
                 string[] sentences = sentence.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
 
                 // process multiple sentences one at a time
@@ -462,15 +477,23 @@ namespace NVBG
                         continue;
 
                     if (!currentSentence.EndsWith("?"))
-                        currentSentence += ".";
+                        // currentSentence  += ".";
+                        currentSentence = currentSentence.Replace("?", ".");
                     currentSentence = currentSentence.Replace("\n", "");
                     currentSentence = currentSentence.Replace("\t", "");
                     currentSentence = currentSentence.Replace("\0", "");
-                    GetParseTree(currentSentence);
+
+                    if (m_data.Switch.POSRules)
+                    {
+                        GetParseTree(currentSentence);
+                    }
                 }
 
                 m_totalTimeMarkers = CreatePositionTags(i);
-                CacheParseTree();
+                if (m_data.Switch.POSRules)
+                {
+                    CacheParseTree();
+                }
                 m_processedSentences.Clear();
                 m_parseTreeBuffer.Clear();
             }
@@ -519,6 +542,10 @@ namespace NVBG
         /// <param name="_currentSentence"></param>
         private void GetParseTree(string _currentSentence)
         {
+
+            // replace special characters with character tags (e.g. French characters with accents)
+            _currentSentence = ReplaceSpecialChracters(_currentSentence, false);
+
             // check if sentence already exists in the cacahe table
             if (m_parseTreeHashTable.ContainsKey(_currentSentence.Trim()))
             {
@@ -560,6 +587,9 @@ namespace NVBG
                     NVBGLogger.Log("No value returned from parser. Please check if elvin parser is running.");
                     parserResultString = "(NONE " + _currentSentence + " )";
                 }
+
+                // Inverse replaced special characters with character tags (e.g. French characters with accents)
+                parserResultString = ReplaceSpecialChracters(parserResultString, true);
 
                 m_parseTreeBuffer.Add(parserResultString);
             }
@@ -793,6 +823,9 @@ namespace NVBG
                     XmlNode parentNode = currentMark.ParentNode;
 
                     text = wordNode.InnerText;
+
+                    text = ReplaceSpecialChracters(text, true);
+
                     if ((text[text.Length - 1].Equals('.')) ||
                         (text[text.Length - 1].Equals('!')) ||
                         (text[text.Length - 1].Equals('?')) ||
@@ -814,7 +847,7 @@ namespace NVBG
                         {
                             string currentPattern = patterns[j].InnerText;
 
-                            if (currentPattern.Equals(text,StringComparison.OrdinalIgnoreCase))
+                            if (currentPattern.Equals(text, StringComparison.OrdinalIgnoreCase))
                             {
                                 if ((text.Equals("why") ||
                                     text.Equals("what") ||
@@ -830,6 +863,8 @@ namespace NVBG
 
                                 string typeName = patterns[j].ParentNode.Attributes["keyword"].Value;
                                 string priorityValue = patterns[j].ParentNode.Attributes["priority"].Value;
+
+                                NVBGLogger.Log("Pattern matched: " + text + ": " + currentPattern + ": " + typeName);
 
                                 XmlNode docRuleNode = m_inputDoc.CreateElement("rule");
                                 XMLHelperMethods.AttachAttributeToNode(m_inputDoc, docRuleNode, "participant", m_data.AgentInfo.Name);
@@ -957,6 +992,8 @@ namespace NVBG
                         XmlNode parentNode = currentMark.ParentNode;
                         text = wordNode.InnerText;
 
+                        text = ReplaceSpecialChracters(text, true);
+
                         if ((text[text.Length - 1].Equals('.')) ||
                         (text[text.Length - 1].Equals('!')) ||
                         (text[text.Length - 1].Equals('?')) ||
@@ -981,10 +1018,13 @@ namespace NVBG
                         if (text.Trim().Equals(wordsInPattern[0].Trim(), StringComparison.OrdinalIgnoreCase))
                         {
                             match = true;
+                            string nextText = "";
                             for (int counter = i + 2, wordCounter = 1; wordCounter < wordsInPattern.Length; counter += 2, ++wordCounter)
                             {
                                 XmlNode nextWord = markList[counter].NextSibling;
-                                string nextText = nextWord.InnerText;
+                                nextText = nextWord.InnerText;
+
+                                nextText = ReplaceSpecialChracters(nextText, true);
 
                                 if ((nextText[nextText.Length - 1].Equals('.')) ||
                                 (nextText[nextText.Length - 1].Equals('!')) ||
@@ -1009,8 +1049,11 @@ namespace NVBG
 
                             if (match)
                             {
+
                                 string typeName = patterns[j].ParentNode.Attributes["keyword"].Value;
                                 string priorityValue = patterns[j].ParentNode.Attributes["priority"].Value;
+
+                                NVBGLogger.Log("Phrase pattern matched: [" + text + "] [" + nextText + "]: " + currentPattern + ": " + typeName);
 
                                 XmlNode docRuleNode = m_inputDoc.CreateElement("rule");
                                 XMLHelperMethods.AttachAttributeToNode(m_inputDoc, docRuleNode, "participant", m_data.AgentInfo.Name);
@@ -1056,6 +1099,10 @@ namespace NVBG
 
             try
             {
+                for (int j = 0; j < m_parseTreeBuffer.Count; ++j)
+                {
+                    NVBGLogger.Log("Before position tag: " + m_parseTreeBuffer[j]);
+                }
 
                 for (int j = 0; j < m_parseTreeBuffer.Count; ++j)
                 {
@@ -1187,6 +1234,10 @@ namespace NVBG
                         }
                         else
                         {
+
+                            //NVBGLogger.Log("DEBUG: " + i + " " + sentence.IndexOf(")", i) + " " + (sentence.IndexOf(")", i) - i));
+                            //NVBGLogger.Log("Remain: " + (sentence.Length - i) + " Text: " + sentence.Substring(i, (sentence.Length - i)));
+
                             string text = "";
                             text = sentence.Substring(i, sentence.IndexOf(")", i) - i);
 
@@ -1331,6 +1382,141 @@ namespace NVBG
             //clearing the ssml hashtable after its done processing.
             m_ssmlWords.Clear();
             return markCounter;
+        }
+
+        private Dictionary<string, string> CreateSpecialCharMap(bool inverse)
+        {
+            //string jsonString = File.ReadAllText(
+            //    m_charMapJsonFile,
+            //    //System.Text.Encoding.GetEncoding("UTF-8")
+            //    m_encoding
+            //    );
+            //Dictionary<string, string> specialCharMap = JsonSerializer.Deserialize(jsonString);
+
+            string key;
+            string value;
+            Dictionary<string, string> specialCharMap = new Dictionary<string, string>();
+            string[] mapString = File.ReadAllLines(m_charMapFile, m_encoding);
+            foreach (string line in mapString)
+            {
+                key = line.Split(' ')[0];
+                value = line.Split(' ')[1];
+                specialCharMap[key] = value;
+            }
+
+            if (inverse)
+            {
+                Dictionary<string, string> specialCharMapInverse = new Dictionary<string, string>();
+                foreach (KeyValuePair<string, string> element in specialCharMap)
+                {
+                    specialCharMapInverse[element.Value] = element.Key;
+                }
+
+                //foreach (string dictKey in specialCharMapInverse.Keys)
+                //{
+                //    NVBGLogger.Log("SpecialCharMapInverse key: " + dictKey + " value:" + specialCharMapInverse[dictKey]);
+                //}
+
+                return specialCharMapInverse;
+            }
+            else
+            {
+                //foreach (string dictKey in specialCharMap.Keys)
+                //{
+                //    NVBGLogger.Log("SpecialCharMap key: " + dictKey + " value:" + specialCharMap[dictKey]);
+                //}
+
+                return specialCharMap;
+            }
+        }
+
+        public string ReplaceSpecialChracters(string _currentSentence, bool inverse)
+        {
+            //NVBGLogger.Log("Before repalcement: " + _currentSentence);
+
+            string outputSentence = "";
+
+            try
+            {
+                if (inverse)
+                {
+
+                    int inverseKeyLength = 4;
+
+                    //NVBGLogger.Log("Invert replacing special characters (language = " + m_language + ") " + (_currentSentence.Length - inverseKeyLength));
+
+                    //if _currentSentence size is shorter than inverseKeyLength, it is not special characters. Just skip it.
+                    if (_currentSentence.Length < inverseKeyLength)
+                    {
+                        outputSentence = _currentSentence;
+                    }
+                    else
+                    {
+                        for (int i = 0; i < (_currentSentence.Length - inverseKeyLength + 1); i++)
+                        {
+                            //NVBGLogger.Log("tgt " + i + " " + inverseKeyLength + " : " + _currentSentence.Substring(i, inverseKeyLength).ToString() + " " + m_specialCharMapInverse.ContainsKey(_currentSentence.Substring(i, inverseKeyLength).ToString()));
+
+                            if (m_specialCharMapInverse.ContainsKey(_currentSentence.Substring(i, inverseKeyLength).ToString()))
+                            {
+
+                                //NVBGLogger.Log("Invert replace: " + _currentSentence.Substring(i, inverseKeyLength).ToString() + m_specialCharMapInverse[_currentSentence.Substring(i, inverseKeyLength).ToString()]);
+
+                                outputSentence += m_specialCharMapInverse[_currentSentence.Substring(i, inverseKeyLength).ToString()];
+                                i += (inverseKeyLength - 1);
+
+                            }
+                            else
+                            {
+                                outputSentence += _currentSentence[i].ToString();
+                            }
+
+                            //if (i > 10000)
+                            //{
+                            //    break;
+                            //}
+
+                        }
+                        outputSentence += _currentSentence.Substring(_currentSentence.Length - inverseKeyLength, inverseKeyLength);
+                    }
+
+
+                }
+                else
+                {
+
+                    //NVBGLogger.Log("Replacing special characters (language = " + m_language + ")");
+
+                    for (int i = 0; i < _currentSentence.Length; i++)
+                    {
+                        //NVBGLogger.Log("DEBUG: " + _currentSentence[i].ToString());
+                        //NVBGLogger.Log("DEBUG: " + m_specialCharMap.ContainsKey(_currentSentence[i].ToString()));
+
+                        if (m_specialCharMap.ContainsKey(_currentSentence[i].ToString()))
+                        {
+                            //NVBGLogger.Log("DEBUG in: " + m_specialCharMap.Keys);
+                            //NVBGLogger.Log("DEBUG in: " + _currentSentence[i].ToString());
+                            //NVBGLogger.Log("DEBUG in: " + m_specialCharMap.ContainsKey(_currentSentence[i].ToString()));
+
+                            outputSentence += m_specialCharMap[_currentSentence[i].ToString()];
+                            //NVBGLogger.Log(_currentSentence[i] + " " + m_specialCharMap[_currentSentence[i].ToString()]);
+                            //NVBGLogger.Log(outputSentence);
+                        }
+                        else
+                        {
+                            outputSentence += _currentSentence[i].ToString();
+                        }
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                NVBGLogger.Log("Error: " + e.ToString());
+            }
+
+            //NVBGLogger.Log("After repalcement: " + outputSentence);
+
+            return outputSentence;
         }
 
     }

@@ -13,19 +13,23 @@ namespace NVBG
         private VHMessage m_currentMessage;
         private NVBGCharacter m_data;
         private string m_spId;
-        private SpeakerBehaviorManager m_speakerBehavior;
+        public SpeakerBehaviorManager m_speakerBehavior;
         private ListenerBehaviorManager m_listenerBehavior;
         private XmlNode m_bmlNode;
         private GazeBehaviorManager m_gazeBehavior;
+        private string m_language;
+        private System.Text.Encoding m_encoding;
 
         /// <summary>
         /// constructor
         /// </summary>
-        public VrExpressHandler()
+        public VrExpressHandler(string language, System.Text.Encoding encoding)
         {
-            m_speakerBehavior = new SpeakerBehaviorManager();
+            m_speakerBehavior = new SpeakerBehaviorManager(language, encoding);
             m_listenerBehavior = new ListenerBehaviorManager();
             m_gazeBehavior = new GazeBehaviorManager();
+            m_language = language;
+            m_encoding = encoding;
         }
 
         public void InitializeParseTreeCaching()
@@ -240,26 +244,26 @@ namespace NVBG
                 NVBGLogger.Log("Error while processing speech data :ERROR: " + e.ToString());
             }
 
-                // If message type is not listen, then it is speaker type so the SpeakerBehavior object will process the message
-                if (!m_currentMessage.Type.Equals("listen"))
-                {
-                    NVBGLogger.Log("Processing dialog messge");
-                    m_currentMessage.Type = "dialogue";
-                    m_speakerBehavior.ProcessDialogMessage(m_inputDoc, m_data, m_currentMessage, m_bmlNode);
-                    m_data.AgentInfo.HasSpoken = true;
-                    XMLHelperMethods.AttachAttributeToNode(m_inputDoc, eventTag, "stroke", m_spId + ":relax");
+            // If message type is not listen, then it is speaker type so the SpeakerBehavior object will process the message
+            if (!m_currentMessage.Type.Equals("listen"))
+            {
+                NVBGLogger.Log("Processing dialog messge");
+                m_currentMessage.Type = "dialogue";
+                m_speakerBehavior.ProcessDialogMessage(m_inputDoc, m_data, m_currentMessage, m_bmlNode);
+                m_data.AgentInfo.HasSpoken = true;
+                XMLHelperMethods.AttachAttributeToNode(m_inputDoc, eventTag, "stroke", m_spId + ":relax");
 
-                    m_bmlNode.AppendChild(eventTag);
-                }
-                // If message type is not speak, then it is listen type so the ListenerBehavior object will process the message
-                else if ((m_currentMessage.Type.Equals("listen")) && (m_data.Switch.allBehaviour) && (m_data.Switch.listenerGaze))
-                {
-                    NVBGLogger.Log("Generating listener behavior");
-                    m_listenerBehavior.ProcessListenMessage(m_inputDoc, m_currentMessage, m_data);
-                    m_currentMessage.AgentId = m_data.AgentInfo.Name;
-                    m_currentMessage.Target = m_data.CurrentDialogue.Speaker;
-                    XMLHelperMethods.AttachAttributeToNode(m_inputDoc, eventTag, "stroke", m_spId + ":relax");
-                }           
+                m_bmlNode.AppendChild(eventTag);
+            }
+            // If message type is not speak, then it is listen type so the ListenerBehavior object will process the message
+            else if ((m_currentMessage.Type.Equals("listen")) && (m_data.Switch.allBehaviour) && (m_data.Switch.listenerGaze))
+            {
+                NVBGLogger.Log("Generating listener behavior");
+                m_listenerBehavior.ProcessListenMessage(m_inputDoc, m_currentMessage, m_data);
+                m_currentMessage.AgentId = m_data.AgentInfo.Name;
+                m_currentMessage.Target = m_data.CurrentDialogue.Speaker;
+                XMLHelperMethods.AttachAttributeToNode(m_inputDoc, eventTag, "stroke", m_spId + ":relax");
+            }           
 
         }
 

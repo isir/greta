@@ -85,7 +85,8 @@ public class MICounselor extends LLMFrame{
     private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
     private String LLM_python_env_checker_path = "Common\\Data\\LLM\\MICounselor\\check_env.py";
     private String LLM_python_env_installer_path = "Common\\Data\\LLM\\MICounselor\\init_env.bat";
-    private String python_path_llm="\\Common\\Data\\LLM\\MICounselor\\MICounselor.py ";
+    private String python_path_llm_drinking="\\Common\\Data\\LLM\\MICounselor\\MICounselor - Drinking.py ";
+    private String python_path_llm_smoking="\\Common\\Data\\LLM\\MICounselor\\MICounselor - Smoking.py ";
     private Process server_process;
     private Thread server_shutdownHook;
     private Process server_process_mistral;
@@ -138,6 +139,8 @@ public class MICounselor extends LLMFrame{
         addressLabel2 = new javax.swing.JLabel();
         modelBox = new javax.swing.JComboBox<>();
         enable = new javax.swing.JCheckBox();
+        addressLabel3 = new javax.swing.JLabel();
+        ThemeBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -277,6 +280,15 @@ public class MICounselor extends LLMFrame{
             }
         });
 
+        addressLabel3.setText("Thème");
+
+        ThemeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drinking", "Smoking" }));
+        ThemeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ThemeBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -284,18 +296,27 @@ public class MICounselor extends LLMFrame{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(enable)
+                .addGap(55, 55, 55)
+                .addComponent(addressLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ThemeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(enable)
+                .addGap(17, 17, 17)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enable)
+                    .addComponent(addressLabel3)
+                    .addComponent(ThemeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        ThemeBox.getAccessibleContext().setAccessibleName("");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -384,6 +405,13 @@ public class MICounselor extends LLMFrame{
                         public void run() {
 
                             try {
+                                String theme = (String) ThemeBox.getSelectedItem();
+                                String python_path_llm = "";
+                                if (theme.contains("Drinking")){
+                                    python_path_llm = python_path_llm_drinking;
+                                }else{
+                                    python_path_llm = python_path_llm_smoking;
+                                }
                                 String[] cmd = {
                                     "cmd.exe","/C","conda","activate","greta_mistral","&&","python","-u",
                                     System.getProperty("user.dir")+python_path_llm,server.getPort(),
@@ -403,9 +431,14 @@ public class MICounselor extends LLMFrame{
                                 while ((s = stdInput.readLine()) != null) {
                                     System.out.println("READ INPUT PYTHON :"+s);
                                     answ=s;
-                                    if(answ.contains("STOP")){
-                                        IsStreaming = Boolean.FALSE;
+                                    if(answ.contains("ENDCONVO")){
+                                        System.out.println("End of the conversation");
                                     }else{
+                                        if(answ.contains("STOP")){
+                                        IsStreaming = Boolean.FALSE;
+                                    }
+                                    }
+                                    if( !answ.contains("STOP")){
                                     if(answ!=null && answ.length()>1){
                                         System.out.println("Already on answer:"+AnswerText.getText());
                                         System.out.println("answer:"+answ);
@@ -418,7 +451,8 @@ public class MICounselor extends LLMFrame{
                                         answ=null;
                                         load(file);
                                     }
-                                    }
+                                    
+                                }
                                 }
 
                                 // Read any errors from the attempted command
@@ -499,6 +533,10 @@ public class MICounselor extends LLMFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_modelBoxActionPerformed
 
+    private void ThemeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThemeBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ThemeBoxActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -535,9 +573,11 @@ public class MICounselor extends LLMFrame{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea AnswerText;
+    private javax.swing.JComboBox<String> ThemeBox;
     private javax.swing.JTextField address;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JLabel addressLabel2;
+    private javax.swing.JLabel addressLabel3;
     private javax.swing.JLabel answer;
     private javax.swing.JLabel answer1;
     private javax.swing.JCheckBox enable;

@@ -69,7 +69,6 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
         else:
             curr_sent+=chunk.choices[0].delta.content
     print("STOP")
-
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
     answer = answer.replace(']', ' ')

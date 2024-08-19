@@ -108,8 +108,8 @@
                     w="80.0" x="400.0" y="170.0">
                     <window h="148" visible="false" w="342" x="0" y="0"/>
                 </element>
-                <element h="50.0" id="LLM - 1720516226740-395"
-                    module="LLM" name="LLM" w="80.0" x="30.0" y="30.0">
+                <element h="50.0" id="Mistral - 1720516226740-395"
+                    module="Mistral" name="Mistral" w="80.0" x="30.0" y="30.0">
                     <window h="575" visible="true" w="935" x="892" y="217"/>
                 </element>
             </element>
@@ -147,7 +147,7 @@
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
-            source="LLM - 1720516226740-395" target="Behavior Planner - 1544700734561-356"/>
+            source="Mistral - 1720516226740-395" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer"

@@ -222,21 +222,27 @@ public class FMLFileReader_MeaningMiner implements IntentionEmitter, SignalEmitt
     }
     
     public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
+        
         String construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n" +
                             "<fml-apml>\n<bml>"+
                             "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
                             "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
+
         System.out.println(text.replaceAll("  ", " "));
         System.out.println("greta.core.intentions.FMLFileReader.TextToFML()");
         String[] sp=text.split(" ");
+
         int i=1;
         for(int j=0;j<sp.length;j++){
             construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
                         i++;
         }
-        i=i-1;
+        construction=construction+"\n<tm id=\"tm"+i+"\"/>";
+        construction=construction+"\n<boundary id=\"b1\" type=\"LL\" start=\"s1:tm1\" end=\"s1:tm"+i+"\"/>";
+
         construction=construction+"\n</speech>\n</bml>\n<fml>\n";
         construction=construction+ "</fml>\n</fml-apml>";
+
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
         DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
         Document document = docBuilder.parse(new InputSource(new StringReader(construction)));

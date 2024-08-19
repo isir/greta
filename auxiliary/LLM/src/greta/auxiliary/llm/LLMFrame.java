@@ -122,7 +122,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         
     }
     
-     public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
+    public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
         
          System.out.println("TEXT TO TRANSFORM:"+text); 
         if(text.length()>1){
@@ -133,12 +133,15 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         System.out.println("greta.core.intentions.FMLFileReader.TextToFML()");
         String[] sp=text.split(" ");
         int i=1;
-         System.out.println("greta.auxiliary.llm.LLMFrame.TextToFML() "+sp.length);
+        System.out.println("greta.auxiliary.llm.LLMFrame.TextToFML() "+sp.length);
         for(int j=0;j<sp.length;j++){
             construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
-                        i++;
+            i++;
         }
-        i=i-1;
+        construction=construction+"\n<tm id=\"tm"+i+"\"/>";
+        
+        construction=construction+"\n<boundary id=\"b1\" type=\"LL\" start=\"s1:tm1\" end=\"s1:tm"+i+"\"/>";
+        
         construction=construction+"\n</speech>\n</bml>\n<fml>\n";
         construction=construction+ "</fml>\n</fml-apml>";
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -156,12 +159,12 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         return System.getProperty("user.dir")+"\\fml_mistral.xml";
     }
     
-     public String FMLToBML(String filename) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
+    public String FMLToBML(String filename) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
         
          System.out.println("greta.core.intentions.FMLFileReader.FMLToBML()");
           BufferedReader br = null;
           PrintWriter pw = null; 
-    try {
+        try {
          br = new BufferedReader(new FileReader(filename));
          pw =  new PrintWriter(new FileWriter(System.getProperty("user.dir")+"\\fml_to_bml.xml"));
          String line;

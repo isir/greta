@@ -99,6 +99,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     private Thread server_shutdownHook;
     private Process server_process_mistral;
     private Thread server_shutdownHook_mistral;
+    public CharacterManager cm;
 
     public String getAnswer() {
         return answ;
@@ -107,11 +108,6 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     public void setAnswer(String answer) {
         this.answ = answer;
     }
-    
-    
-    
-    
-    public CharacterManager cm;
     
     public LLMFrame(CharacterManager cm) throws InterruptedException {
        

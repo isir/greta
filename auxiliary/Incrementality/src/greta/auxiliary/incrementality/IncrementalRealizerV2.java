@@ -242,7 +242,8 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
 
         //In case of stop interaction, thread stop sending chunk, stop keyframe will bypass thread to ensure correrct stop
-        if (requestId.toString().contains("stop")) {
+//        if (requestId.toString().contains("stop")) {
+        if (requestId.toString().contains("stop") || requestId.toString().contains("renew")) {
             double absoluteTime = greta.core.util.time.Timer.getTime(); //ABSOLUTE TIME = time when clicking the stop button where 0 is the start of modular
             double duration = lastKeyframeOffset - firstKeyframeOffset; //DURATION = Duration of the stopped execution
             double stopTime = absoluteTime - firstKeyframeOffset; //STOPTIME = time when clicking the stop button where 0 is the start of the execution
@@ -421,6 +422,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     public void UpdateHandLibrary() {
     }
 
+    //[CAUTHION: not used usually]
     //Interaction with the realizer from the outside, ex interuption
     @Override
     public void performIncInteraction(String parParam) {
@@ -429,7 +431,8 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
             this.stopAllAnims();
         } else if (parParam.equals("resume")) {
             chunkSenderThread.putInQueue();
-        } else if (parParam.equals("clearQueue")) {
+//        } else if (parParam.equals("clearQueue")) {
+        } else if (parParam.equals("stop")) {
             chunkSenderThread.emptyChunkList();
             chunkSenderThread.closeQueue();
         }

@@ -117,10 +117,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
        
         server = new Server();
         this.cm=cm;
-        
-        
-   
-        
+
     }
     public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
         String fml_name = TextToFML(text, true);

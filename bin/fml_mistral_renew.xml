@@ -6,10 +6,27 @@
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
 <tm id="tm1"/>
-<tm id="tm2"/>Hello
-<tm id="tm3"/>there!
-<tm id="tm4"/>
-<boundary end="s1:tm4" id="b1" start="s1:tm1" type="LL"/>
+<tm id="tm2"/>De
+<tm id="tm3"/>rien,
+<tm id="tm4"/>merci
+<tm id="tm5"/>!
+<tm id="tm6"/>Au
+<tm id="tm7"/>revoir
+<tm id="tm8"/>!
+<tm id="tm9"/>Si
+<tm id="tm10"/>vous
+<tm id="tm11"/>avez
+<tm id="tm12"/>besoin
+<tm id="tm13"/>de
+<tm id="tm14"/>moi,
+<tm id="tm15"/>ne
+<tm id="tm16"/>hésitez
+<tm id="tm17"/>pas
+<tm id="tm18"/>à
+<tm id="tm19"/>me
+<tm id="tm20"/>rejoindre.
+<tm id="tm21"/>
+<boundary end="s1:tm21" id="b1" start="s1:tm1" type="LL"/>
 </speech>
 </bml>
 <fml>

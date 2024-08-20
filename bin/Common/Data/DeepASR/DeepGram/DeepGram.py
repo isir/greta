@@ -16,12 +16,16 @@ from deepgram import (
     LiveOptions,
     Microphone,
 )
+import os
 
 load_dotenv()
 
 # We will collect the is_final=true messages here so we can use them when the person finishes speaking
 is_finals = []
-deepgram: DeepgramClient = DeepgramClient("bc6ae543f5bab905beb09121e8ac3d8c57c9f870")
+api_key_file = os.path.join(os.path.dirname(__file__), 'api_key.txt')
+with open(api_key_file, 'r') as f:
+    DEEPGRAM_API_KEY = f.read()
+deepgram: DeepgramClient = DeepgramClient(DEEPGRAM_API_KEY)
 
 dg_connection = deepgram.listen.live.v("1")
 STOP = False

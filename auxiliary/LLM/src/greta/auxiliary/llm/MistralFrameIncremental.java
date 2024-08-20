@@ -423,16 +423,16 @@ public class MistralFrameIncremental extends LLMFrame{
                                             if(answ.contains("START:")){
                                                 System.out.println("TEXTE:"+answ);
                                                 answ = answ.replace("START:", "");
-                                                String file=TextToFML(answ);
+                                                String file=TextToFML(answ, true);
                                                 answ=null;
                                                 
-//                                                load(file, CompositionType.replace);
-                                                load(file, CompositionType.append);
+                                                load(file, CompositionType.replace);
+//                                                load(file, CompositionType.append);
 
                                             }
                                             else{
                                                 System.out.println("TEXTE:"+answ);
-                                                String file=TextToFML(answ);
+                                                String file=TextToFML(answ, false);
                                                 answ=null;                                            
                                                 load(file, CompositionType.append);                                                
                                             }

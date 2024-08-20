@@ -125,8 +125,9 @@ public class ChunkSenderThread extends Thread {
     }
 
     public synchronized void emptyChunkList() {
-        System.out.println("Emptying list");
+        System.out.println("\u001B[31m RECEIVED EMPTY LIST COMMAND");
         this.treeList = new TreeMap<Integer, List<Keyframe>>();
+        System.out.println("RECEIVED treeList" + this.treeList);
     }
 
     public synchronized void setRequestId(ID parId) {

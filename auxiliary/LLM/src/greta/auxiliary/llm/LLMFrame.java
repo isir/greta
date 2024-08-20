@@ -122,42 +122,55 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
    
         
     }
-    
     public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
+        String fml_name = TextToFML(text, true);
+        return fml_name;
+    }
+    
+    public String TextToFML(String text, boolean renew) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
         
-         System.out.println("TEXT TO TRANSFORM:"+text); 
+        String file_path = "";        
+        
+        System.out.println("TEXT TO TRANSFORM:"+text); 
         if(text.length()>1){
-        String construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n" +
-                            "<fml-apml>\n<bml>"+
-                            "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
-                            "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
-        System.out.println("greta.core.intentions.FMLFileReader.TextToFML()");
-        String[] sp=text.split(" ");
-        int i=1;
-        System.out.println("greta.auxiliary.llm.LLMFrame.TextToFML() "+sp.length);
-        for(int j=0;j<sp.length;j++){
-            construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
-            i++;
+            String construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n" +
+                                "<fml-apml>\n<bml>"+
+                                "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
+                                "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
+            System.out.println("greta.core.intentions.FMLFileReader.TextToFML()");
+            String[] sp=text.split(" ");
+            int i=1;
+            System.out.println("greta.auxiliary.llm.LLMFrame.TextToFML() "+sp.length);
+            for(int j=0;j<sp.length;j++){
+                construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
+                i++;
+            }
+            construction=construction+"\n<tm id=\"tm"+i+"\"/>";
+
+            construction=construction+"\n<boundary id=\"b1\" type=\"LL\" start=\"s1:tm1\" end=\"s1:tm"+i+"\"/>";
+
+            construction=construction+"\n</speech>\n</bml>\n<fml>\n";
+            construction=construction+ "</fml>\n</fml-apml>";
+            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+            Document document = docBuilder.parse(new InputSource(new StringReader(construction)));
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+
+            if(renew){
+                file_path = System.getProperty("user.dir")+"\\fml_mistral_renew.xml";
+            }else{
+                file_path = System.getProperty("user.dir")+"\\fml_mistral.xml";
+            }
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(new File(file_path)),"ISO-8859-1");                        
+            StreamResult result = new StreamResult(writer);
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(source, result);
         }
-        construction=construction+"\n<tm id=\"tm"+i+"\"/>";
         
-        construction=construction+"\n<boundary id=\"b1\" type=\"LL\" start=\"s1:tm1\" end=\"s1:tm"+i+"\"/>";
+        return file_path;
         
-        construction=construction+"\n</speech>\n</bml>\n<fml>\n";
-        construction=construction+ "</fml>\n</fml-apml>";
-        DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-        Document document = docBuilder.parse(new InputSource(new StringReader(construction)));
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformerFactory.newTransformer();
-        DOMSource source = new DOMSource(document);
-        
-        OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(new File(System.getProperty("user.dir")+"\\fml_mistral.xml")),"ISO-8859-1");
-        StreamResult result = new StreamResult(writer);
-        transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-        transformer.transform(source, result);
-        }
-        return System.getProperty("user.dir")+"\\fml_mistral.xml";
     }
     
     public String FMLToBML(String filename) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{

@@ -62,6 +62,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import greta.core.util.enums.CompositionType;
 
 /**
  *
@@ -404,23 +405,40 @@ public class MistralFrameIncremental extends LLMFrame{
                                 String s = null;
 
                                 while ((s = stdInput.readLine()) != null) {
+
                                     System.out.println("READ INPUT PYTHON :"+s);
                                     answ=s;
+
                                     if(answ.contains("STOP")){
                                         IsStreaming = Boolean.FALSE;
                                     }else{
-                                    if(answ!=null && answ.length()>1){
-                                        System.out.println("Already on answer:"+AnswerText.getText());
-                                        System.out.println("answer:"+answ);
-                                        AnswerText.setText(AnswerText.getText()+ answ);
-                                    }
-                                    if(answ.length()>1){
                                         
-                                        System.out.println("TEXTE:"+answ);
-                                        String file=TextToFML(answ);
-                                        answ=null;
-                                        load(file);
-                                    }
+                                        if(answ!=null && answ.length()>1){
+                                            System.out.println("Already on answer:"+AnswerText.getText());
+                                            System.out.println("answer:"+answ);
+                                            AnswerText.setText(AnswerText.getText()+ answ);
+                                        }
+                                        if(answ.length()>1){
+                                            
+                                            if(answ.contains("START:")){
+                                                System.out.println("TEXTE:"+answ);
+                                                answ = answ.replace("START:", "");
+                                                String file=TextToFML(answ);
+                                                answ=null;
+                                                
+//                                                load(file, CompositionType.replace);
+                                                load(file, CompositionType.append);
+
+                                            }
+                                            else{
+                                                System.out.println("TEXTE:"+answ);
+                                                String file=TextToFML(answ);
+                                                answ=null;                                            
+                                                load(file, CompositionType.append);                                                
+                                            }
+
+                                        }
+                                        
                                     }
                                 }
 

@@ -140,7 +140,9 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
     @Override //TODO add the use of modes: blend, replace, append
     public void performSignals(List<Signal> list, ID requestId, Mode mode) {
-        mode.setCompositionType(CompositionType.append);
+        
+        //mode.setCompositionType(CompositionType.append);
+        
         // list of created keyframes
         List<Keyframe> keyframes = new ArrayList<>();
         currentID = requestId;

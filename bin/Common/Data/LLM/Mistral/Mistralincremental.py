@@ -22,6 +22,8 @@ client_online = MistralClient(api_key=MISTRAL_API_KEY)
 client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
 
 def ask(question,messages=None,messages_online=None):
+    
+    # print(question)
 
     lquestion = question.split('#SEP#')
     model = lquestion[0]
@@ -42,7 +44,7 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
          ]
     else:
           prompt=[
-        {"role": "system", "content": "You are a virtual assistant, answer with short answer. Use an oral style. "+system_prompt}
+        {"role": "system", "content": "You are a virtual assistant, answering the provided question with the shortest answer. Use an oral style. "+system_prompt}
          ] 
     if messages is not None:
         for msg in messages:
@@ -57,6 +59,7 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
     
     answer = ""
     curr_sent= ""
+    FIRST_SENTENCE = True
     for chunk in response:
         
         if chunk.choices[0].delta.content is None:
@@ -64,8 +67,15 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
         elif chunk.choices[0].delta.content in [".","?","!",";"]:
             curr_sent+=chunk.choices[0].delta.content
             answer += curr_sent
-            print(curr_sent)
+
+            if FIRST_SENTENCE:
+                print("START:" + curr_sent)
+                FIRST_SENTENCE = False
+            else:
+                print(curr_sent)
+
             curr_sent = ""
+
         else:
             curr_sent+=chunk.choices[0].delta.content
     print("STOP")
@@ -97,7 +107,8 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
     answer = ""
     curr_sent= ""
     min_response_time = 1
-    start = time.perf_counter() 
+    start = time.perf_counter()
+    FIRST_SENTENCE = True
     for chunk in response:
         
         if chunk.choices[0].delta.content is None:
@@ -110,7 +121,13 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
                     time.sleep(min_response_time  - response_time)
             start = time.perf_counter()
             answer += curr_sent
-            print(curr_sent)
+            
+            if FIRST_SENTENCE:
+                print("START:" + curr_sent)
+                FIRST_SENTENCE = False
+            else:
+                print(curr_sent)
+            
             curr_sent = ""
         else:
             curr_sent+=chunk.choices[0].delta.content

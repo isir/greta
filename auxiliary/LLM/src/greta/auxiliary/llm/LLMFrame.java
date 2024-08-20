@@ -62,6 +62,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
+import greta.core.util.enums.CompositionType;
 
 /**
  *
@@ -161,33 +162,42 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     
     public String FMLToBML(String filename) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
         
-         System.out.println("greta.core.intentions.FMLFileReader.FMLToBML()");
-          BufferedReader br = null;
-          PrintWriter pw = null; 
+        System.out.println("greta.core.intentions.FMLFileReader.FMLToBML()");
+        BufferedReader br = null;
+        PrintWriter pw = null; 
         try {
-         br = new BufferedReader(new FileReader(filename));
-         pw =  new PrintWriter(new FileWriter(System.getProperty("user.dir")+"\\fml_to_bml.xml"));
-         String line;
-         while ((line = br.readLine()) != null) {
-                
-                if(!line.contains("fml") && !line.contains("<?xml") && !line.contains("<rest") && !line.contains("<certainty") && !line.contains("<emotion")&& !line.contains("<performative") && !line.contains("<iconic") && !line.contains("<deictic") && !line.contains("<beat")){
-                    if(line.contains("<speech")){
-                         pw.println(line);
-                        pw.println("<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>");
-                    }else{
-                    pw.println(line);
-                    }
-                }
-         }
-         br.close();
-         pw.close();
-    }catch (Exception e) {
-         e.printStackTrace();
-    }
+            br = new BufferedReader(new FileReader(filename));
+            pw =  new PrintWriter(new FileWriter(System.getProperty("user.dir")+"\\fml_to_bml.xml"));
+            String line;
+            while ((line = br.readLine()) != null) {
+
+                   if(!line.contains("fml") && !line.contains("<?xml") && !line.contains("<rest") && !line.contains("<certainty") && !line.contains("<emotion")&& !line.contains("<performative") && !line.contains("<iconic") && !line.contains("<deictic") && !line.contains("<beat")){
+                       if(line.contains("<speech")){
+                            pw.println(line);
+                           pw.println("<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>");
+                       }else{
+                       pw.println(line);
+                       }
+                   }
+            }
+            br.close();
+            pw.close();
+        }catch (Exception e) {
+             e.printStackTrace();
+        }
         return System.getProperty("user.dir")+"\\fml_to_bml.xml";
     }
+
     public ID load(String fmlFileName) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
+        
+        ID id = load(fmlFileName, CompositionType.replace);
+        return id;
+    }
+    
+    public ID load(String fmlFileName, CompositionType compositionType) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
    
+        System.out.println("CompositionType: " + compositionType);
+        
         String base = (new File(fmlFileName)).getName().replaceAll("\\.xml$", "");
         String bml_file=FMLToBML(fmlFileName);
         String base_bml= (new File(bml_file)).getName().replaceAll("\\.xml$", "");
@@ -203,29 +213,29 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         
         
         boolean flag=false;
-                        try {
-                                File myObj = new File(fmlFileName);
-                                Scanner myReader = new Scanner(myObj);
-                                while (myReader.hasNextLine()) {
-                                  String data = myReader.nextLine();
-                                  //System.out.println(data);
-                                  if(!data.contains("<?xml")){
-                                    System.out.println(data);
-                                    if(!flag)
-                                        text_brut=true;
-                                    text+=data;
-                                    
-                                }
-                                else{
-                                    flag=true;
-                                    text+=data;
-                                }
-                                }
-                                myReader.close();
-                              } catch (FileNotFoundException e) {
-                                System.out.println("An error occurred.");
-                                e.printStackTrace();
+        try {
+            File myObj = new File(fmlFileName);
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                //System.out.println(data);
+                if(!data.contains("<?xml")){
+                    System.out.println(data);
+                    if(!flag)
+                        text_brut=true;
+                    text+=data;
+
                 }
+                else{
+                    flag=true;
+                    text+=data;
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
                         
 			
                 
@@ -264,9 +274,12 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         }else{
             fml_id = "fml_1";
         }
-        if (fml.hasAttribute("composition")) {
-            mode.setCompositionType(fml.getAttribute("composition"));
-        }
+        
+//        if (fml.hasAttribute("composition")) {
+//            mode.setCompositionType(fml.getAttribute("composition"));
+//        }
+        mode.setCompositionType(compositionType);
+        
         if (fml.hasAttribute("reaction_type")) {
             mode.setReactionType(fml.getAttribute("reaction_type"));
         }

@@ -1,0 +1,39 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            i'm
+            <tm id="tm2"/>
+            not
+            <tm id="tm3"/>
+            spending
+            <tm id="tm4"/>
+            one
+            <tm id="tm5"/>
+            more
+            <tm id="tm6"/>
+            second
+            <tm id="tm7"/>
+            of
+            <tm id="tm8"/>
+            this
+            <tm id="tm9"/>
+            life
+            <tm id="tm10"/>
+            with
+            <tm id="tm11"/>
+            some
+            <tm id="tm12"/>
+            inconsiderate
+            <tm id="tm13"/>
+            prick.
+            <tm id="tm14"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm14"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

@@ -1,0 +1,53 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            our
+            <tm id="tm2"/>
+            nation's
+            <tm id="tm3"/>
+            best
+            <tm id="tm4"/>
+            and
+            <tm id="tm5"/>
+            brightest
+            <tm id="tm6"/>
+            gathering
+            <tm id="tm7"/>
+            in
+            <tm id="tm8"/>
+            washington
+            <tm id="tm9"/>
+            to
+            <tm id="tm10"/>
+            serve
+            <tm id="tm11"/>
+            their
+            <tm id="tm12"/>
+            country
+            <tm id="tm13"/>
+            and
+            <tm id="tm14"/>
+            uphold
+            <tm id="tm15"/>
+            the
+            <tm id="tm16"/>
+            good
+            <tm id="tm17"/>
+            parts
+            <tm id="tm18"/>
+            of
+            <tm id="tm19"/>
+            the
+            <tm id="tm20"/>
+            constitution.
+            <tm id="tm21"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm21"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

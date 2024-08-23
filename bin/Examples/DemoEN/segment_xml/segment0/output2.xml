@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            i
+            <tm id="tm2"/>
+            get
+            <tm id="tm3"/>
+            nothing
+            <tm id="tm4"/>
+            but
+            <tm id="tm5"/>
+            phone
+            <tm id="tm6"/>
+            calls
+            <tm id="tm7"/>
+            about
+            <tm id="tm8"/>
+            it,
+            <tm id="tm9"/>
+            all
+            <tm id="tm10"/>
+            right?
+            <tm id="tm11"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm11"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

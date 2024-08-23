@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            and
+            <tm id="tm2"/>
+            when
+            <tm id="tm3"/>
+            it
+            <tm id="tm4"/>
+            went
+            <tm id="tm5"/>
+            bad,
+            <tm id="tm6"/>
+            you
+            <tm id="tm7"/>
+            cut
+            <tm id="tm8"/>
+            these
+            <tm id="tm9"/>
+            guys
+            <tm id="tm10"/>
+            loose.
+            <tm id="tm11"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm11"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

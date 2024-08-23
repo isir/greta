@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            and
+            <tm id="tm2"/>
+            then
+            <tm id="tm3"/>
+            you're
+            <tm id="tm4"/>
+            gonna
+            <tm id="tm5"/>
+            go
+            <tm id="tm6"/>
+            to
+            <tm id="tm7"/>
+            the
+            <tm id="tm8"/>
+            bathroom.
+            <tm id="tm9"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm9"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

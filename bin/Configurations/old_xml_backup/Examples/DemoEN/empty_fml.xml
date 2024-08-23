@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml>
+<bml xmlns="http://www.bml-initiative.org/bml/bml-1.0" character="Camille" id="bml1">
+	<gaze id="gaze1" start="1" end="10" influence="HEAD" target="Andre_chair0"/>
+</bml>
+</fml-apml>

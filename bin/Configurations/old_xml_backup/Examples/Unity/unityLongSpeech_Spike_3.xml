@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml>
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="marytts" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				Mieux vaut tenir 
+			<tm id="tm2"/>	
+				que courir
+			<tm id="tm3"/>
+				L'espoir fait vivre.
+			<tm id="tm4"/>
+				On n'est jamais 
+			<tm id="tm5"/>	
+				si bien servi 
+			<tm id="tm6"/>	
+				que par soi-même.
+			<tm id="tm7"/>	
+				
+				
+			<pitchaccent id='xpa1' type='Hstar' start='s1:tm2' end='s1:tm4' level='strong' importance='0.8'/>
+			<pitchaccent id='xpa2' type='Hstar' start='s1:tm5' end='s1:tm6' level='strong' importance='0.8'/>
+
+			<boundary id="bd1" type="LL" start="s1:tm7" end='s1:tm7+0.5'/>
+			
+		</speech>
+	</bml>
+	<fml>
+		<performative id="p1" type="beatsocial" start="s1:tm1" end="s1:tm3" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm1" end="s1:tm5+1" importance="1.0"/>
+		<performative id="p1" type="suggest" start="s1:tm4" end="s1:tm7" importance="1.0"/>
+	</fml>
+</fml-apml>

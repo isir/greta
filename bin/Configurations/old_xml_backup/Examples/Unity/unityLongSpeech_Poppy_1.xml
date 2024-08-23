@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml>
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="marytts" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				Je vais vous 
+			<tm id="tm2"/>	
+				emmener à l'hôpital
+			<tm id="tm3"/>
+				C'est un aliment toxique
+			<tm id="tm4"/>
+				Je ne l'ai pas fait 
+			<tm id="tm5"/>	
+				intentionnellement.
+			<tm id="tm6"/>	
+				
+			<pitchaccent id='xpa1' type='Hstar' start='s1:tm2' end='s1:tm3' level='strong' importance='0.8'/>
+			<pitchaccent id='xpa2' type='Hstar' start='s1:tm5' end='s1:tm6' level='strong' importance='0.8'/>
+			<boundary id="bd1" type="LL" start="s1:tm6" end='s1:tm6+0.5'/>
+			
+		</speech>
+	</bml>
+	<fml>
+		<performative id="p1" type="beatsocial" start="s1:tm1" end="s1:tm4" importance="1.0"/>
+		<performative id="p2" type="beatsocial" start="s1:tm4" end="s1:tm6" importance="1.0"/>
+		<emotion id="e1" type="joyStrong" start="s1:tm4" end="s1:tm6+1" importance="1.0"/>
+	</fml>
+</fml-apml>

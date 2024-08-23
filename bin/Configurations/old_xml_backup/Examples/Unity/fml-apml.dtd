@@ -1,0 +1,78 @@
+<!ELEMENT fml-apml (bml?,fml)>
+
+<!ELEMENT bml (speech)>
+
+<!ELEMENT speech (#PCDATA|tm|pause|pitchaccent|boundary|description)*>
+
+<!ELEMENT tm EMPTY>
+
+<!ELEMENT pause EMPTY>
+
+<!ELEMENT pitchaccent EMPTY>
+
+<!ELEMENT boundary EMPTY>
+
+<!ELEMENT description (reference?,spc?,tmp?,fld?,pwr?)>
+
+<!ELEMENT reference (#PCDATA)>
+
+<!ELEMENT spc (#PCDATA)>
+<!ELEMENT tmp (#PCDATA)>
+<!ELEMENT fld (#PCDATA)>
+<!ELEMENT pwr (#PCDATA)>
+<!ELEMENT oac (#PCDATA)>
+<!ELEMENT rep (#PCDATA)>
+
+<!ELEMENT fml (certainty|turntaking|theme|rheme|performative|emotion|world|belief-relation|emphasis|backchannel|other)*>
+
+<!ELEMENT certainty EMPTY>
+<!ELEMENT turntaking EMPTY>
+<!ELEMENT theme EMPTY>
+<!ELEMENT rheme EMPTY>
+<!ELEMENT performative EMPTY>
+<!ELEMENT emotion EMPTY>
+<!ELEMENT world EMPTY>
+<!ELEMENT belief-relation EMPTY>
+<!ELEMENT emphasis EMPTY>
+<!ELEMENT backchannel EMPTY>
+<!ELEMENT other EMPTY>
+
+<!ATTLIST speech id ID #REQUIRED start CDATA "0" type CDATA #IMPLIED text CDATA #IMPLIED speed_num CDATA #IMPLIED speed_sym (fast|medium|slow) "medium" language CDATA #REQUIRED voice (marytts|realspeech) #REQUIRED>
+
+<!ATTLIST tm id ID #REQUIRED>
+
+<!ATTLIST tm time CDATA #IMPLIED>
+
+<!ATTLIST pause id ID #REQUIRED duration_num CDATA #IMPLIED duration_sym (short|medium|long) "medium">
+
+<!ATTLIST pitchaccent id ID #REQUIRED type (Hstar|Lstar|LplusHstar|LstarplusH|HstarplusL|HplusLstar) "Hstar" level (strong|medium|weak) "medium" start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+                   
+<!ATTLIST boundary id ID #REQUIRED type (L|H|LL|HH|LH|HL) "LL" start CDATA #REQUIRED end CDATA "1.0">
+
+<!ATTLIST description level (1|2|3|4|5|6|7|8|9) #REQUIRED>
+<!ATTLIST description type CDATA #REQUIRED>
+
+<!ATTLIST apml2 language CDATA "en">
+
+<!ATTLIST certainty id ID #REQUIRED type 
+(certain|uncertain) #IMPLIED start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+
+<!ATTLIST turntaking id ID #REQUIRED type (hasthefloor|takethefloor|givethefloor|maintainthefloor) #IMPLIED start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+
+<!ATTLIST theme id ID #REQUIRED start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+
+<!ATTLIST rheme id ID #REQUIRED start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+
+<!ATTLIST performative id ID #REQUIRED type (implore|order|suggest|propose|warn|approve|praise|recognize|disagree|agree|criticize|accept|advice|confirm|incite|refuse|question|ask|inform|request| announce|beg|greet|paraphrase|none) #REQUIRED start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+
+<!ATTLIST backchannel id ID #REQUIRED type (agreement|disagreement|acceptance|refusal|liking|disliking|belief|disbelief|understanding|no_understanding|interest|no_interest|distraction|grasp_interest) #REQUIRED start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+
+<!ATTLIST emotion id ID #REQUIRED type CDATA #REQUIRED regulation (fake|felt|inhibited) "felt" start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5" intensity CDATA "1">
+
+<!ATTLIST other id ID #REQUIRED type CDATA #REQUIRED start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+
+<!ATTLIST world id ID #REQUIRED ref_type (place|object|event|person) #REQUIRED ref_id CDATA #REQUIRED prop_type (shape|duration|location|quantity) #IMPLIED prop_value CDATA #IMPLIED start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+
+<!ATTLIST belief-relation id ID #REQUIRED type (gen-spec|cause-effect|solutionhood|suggestion|modifier|justification|contrast|enumerate|enumerate1|enumerate2|enumerate3|metaphoric) #REQUIRED start CDATA #REQUIRED end CDATA #IMPLIED importance CDATA "0.5">
+
+<!ATTLIST emphasis id ID #REQUIRED type (low|medium|high) #REQUIRED start CDATA #REQUIRED end CDATA #REQUIRED>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml composition="replace">
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="marytts" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+			<tm id="tm2"/>
+			<tm id="tm3"/>	
+			<tm id="tm4"/>
+			<tm id="tm5"/>	
+				
+		</speech>
+	</bml>
+	<fml> <!-- target="Andre_chair0" -->
+		<rest id="r1" type="Along_big" start="s1:tm1" />
+	</fml>
+</fml-apml>

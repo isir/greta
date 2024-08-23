@@ -24,7 +24,7 @@
             <element h="360.0"
                 id="Character Manager - 1544700726358-960"
                 module="Character Manager" name="Character Manager"
-                w="650.0" x="30.0" y="30.0">
+                w="660.0" x="20.0" y="30.0">
                 <parameter name="character_name" value="CAMILLE"/>
                 <window h="531" visible="false" w="505" x="10" y="10"/>
                 <element h="50.0" id="TTS - 1544700939858-569"
@@ -34,12 +34,14 @@
                     <parameter name="doAudio" value="true"/>
                     <window h="127" visible="false" w="437" x="10" y="10"/>
                 </element>
+                <element h="50.0" id="CereProc - 1544700946314-81"
+                    module="CereProc" name="CereProc" w="80.0" x="540.0" y="30.0"/>
                 <element h="50.0"
                     id="BML File Reader - 1544700914641-19"
                     module="BML File Reader" name="BML File Reader"
                     w="80.0" x="130.0" y="30.0">
                     <parameter name="fileName" value=""/>
-                    <window h="108" visible="true" w="517" x="10" y="120"/>
+                    <window h="108" visible="false" w="517" x="-98" y="420"/>
                 </element>
                 <element h="230.0"
                     id="Behavior Planner - 1544700734561-356"
@@ -106,30 +108,49 @@
                     w="80.0" x="400.0" y="170.0">
                     <window h="148" visible="false" w="342" x="0" y="0"/>
                 </element>
-                <element h="50.0" id="ChatGPT - 1680009395875-868"
-                    module="ChatGPT" name="ChatGPT" w="80.0" x="30.0" y="30.0">
-                    <window h="554" visible="false" w="935" x="0" y="0"/>
+                <element h="50.0" id="Mistral - 1720516226740-395"
+                    module="Mistral" name="Mistral" w="80.0" x="30.0" y="30.0">
+                    <window h="575" visible="false" w="935" x="0" y="0"/>
                 </element>
-                <element h="50.0"
-                    id="MaryTTS Client - 1680012572369-895"
-                    module="MaryTTS Client" name="MaryTTS Client"
-                    w="80.0" x="540.0" y="30.0"/>
             </element>
         </element>
         <element h="420.0" id="Ogre Player - 1544700973529-249"
             module="Ogre Player" name="Ogre Player" w="80.0" x="770.0" y="110.0">
-            <parameter name="posX" value="-0.20826545357704163"/>
-            <parameter name="posY" value="2.1872034072875977"/>
-            <parameter name="posZ" value="2.7177047729492188"/>
+            <parameter name="posX" value="-0.14563247561454773"/>
+            <parameter name="posY" value="1.8307750225067139"/>
+            <parameter name="posZ" value="5.98796272277832"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="-0.2592799663543701"/>
-            <parameter name="yaw" value="-0.029251636937260628"/>
-            <window h="614" visible="true" w="736" x="436" y="116"/>
+            <parameter name="pitch" value="-0.052931178361177444"/>
+            <parameter name="yaw" value="-0.029251696541905403"/>
+            <window h="2016" visible="true" w="1168" x="2552" y="-8"/>
         </element>
     </elements>
     <connections>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="connectPlayerToEnvironment"
             source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Mistral - 1720516226740-395" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Rest_Pose_Setter - 1621595871295-438" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -140,28 +161,5 @@
             source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Rest_Pose_Setter - 1621595871295-438" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="ChatGPT - 1680009395875-868" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="MaryTTS Client - 1680012572369-895"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
     </connections>
 </modulated>

@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modulated>
+    <elements>
+        <element h="510.0" id="Environment - 1545228639037-145"
+            module="Environment" name="Environment" w="1390.0" x="30.0" y="110.0">
+            <element h="450.0"
+                id="Character Manager - 1545228650268-259"
+                module="Character Manager" name="Character Manager #1"
+                w="650.0" x="30.0" y="30.0">
+                <parameter name="character_name" value="CAMILLE"/>
+                <window h="532" visible="false" w="505" x="0" y="0"/>
+                <element h="50.0"
+                    id="FML File Reader - 1545228674948-209"
+                    module="FML File Reader" name="FML File Reader #1"
+                    w="80.0" x="30.0" y="30.0">
+                    <parameter name="fileName" value="./Examples/Restposes/Restpose.xml"/>
+                    <window h="100" visible="true" w="520" x="0" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="BML File Reader - 1545228678860-536"
+                    module="BML File Reader" name="BML File Reader #1"
+                    w="80.0" x="130.0" y="30.0">
+                    <parameter name="fileName" value=""/>
+                    <window h="100" visible="true" w="520" x="0" y="100"/>
+                </element>
+                <element h="230.0"
+                    id="Behavior Planner - 1545228689924-565"
+                    module="Behavior Planner" name="Behavior Planner #1"
+                    w="80.0" x="30.0" y="100.0">
+                    <window h="121" visible="false" w="172" x="0" y="0"/>
+                </element>
+                <element h="230.0"
+                    id="Behavior Realizer - 1545228702171-304"
+                    module="Behavior Realizer"
+                    name="Behavior Realizer #1" w="80.0" x="130.0" y="100.0">
+                    <window h="310" visible="false" w="209" x="0" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="Animation Keyframe Performer - 1545228717780-228"
+                    module="Animation Keyframe Performer" name="Body #1"
+                    w="280.0" x="240.0" y="100.0"/>
+                <element h="50.0" id="Lip Model - 1545228738636-406"
+                    module="Lip Model" name="Lips #1" w="180.0"
+                    x="240.0" y="220.0"/>
+                <element h="50.0"
+                    id="Simple AU Performer - 1545228776323-11"
+                    module="Simple AU Performer" name="AU to FAP #1"
+                    w="80.0" x="340.0" y="160.0">
+                    <window h="339" visible="false" w="416" x="0" y="0"/>
+                </element>
+                <element h="170.0"
+                    id="MPEG4 Animatable - 1545228808979-301"
+                    module="MPEG4 Animatable" name="MPEG4 Animatable #1"
+                    w="80.0" x="540.0" y="160.0">
+                    <parameter name="posX" value="0.7590000033378601"/>
+                    <parameter name="scaleX" value="1.0"/>
+                    <parameter name="posY" value="-0.3499999940395355"/>
+                    <parameter name="scaleY" value="1.0"/>
+                    <parameter name="posZ" value="-0.6000000238418579"/>
+                    <parameter name="rotX" value="0.0"/>
+                    <parameter name="rotW" value="0.9762961268424988"/>
+                    <parameter name="rotZ" value="0.0"/>
+                    <parameter name="rotY" value="-0.2164396047592163"/>
+                    <parameter name="scaleZ" value="1.0"/>
+                    <window h="179" visible="false" w="463" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="TTS - 1545228829579-75"
+                    module="TTS" name="TTS #1" w="80.0" x="440.0" y="30.0">
+                    <parameter name="doPhonemes" value="true"/>
+                    <parameter name="doTemporize" value="true"/>
+                    <parameter name="doAudio" value="true"/>
+                    <window h="128" visible="false" w="369" x="0" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="MaryTTS Client - 1545228836179-501"
+                    module="MaryTTS Client" name="MaryTTS Client #1"
+                    w="80.0" x="540.0" y="30.0"/>
+                <element h="70.0"
+                    id="Thrift Command Receiver - 1553697843141-325"
+                    module="Thrift Command Receiver"
+                    name="Thrift Command Receiver #1" w="80.0" x="80.0" y="350.0">
+                    <parameter name="port" value="9911"/>
+                    <parameter name="host" value="localhost"/>
+                    <window h="170" visible="true" w="260" x="0" y="200"/>
+                </element>
+                <element h="70.0"
+                    id="ActiveMQ BML Receiver - 1554117362832-889"
+                    module="ActiveMQ BML Receiver"
+                    name="ActiveMQ BML Receiver #1" w="80.0" x="160.0" y="350.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/BML/REQUEST/COUCH_CAMILLE"/>
+                    <window h="221" visible="false" w="240" x="62" y="0"/>
+                </element>
+                <element h="50.0" id="Feedbacks - 1554132717338-53"
+                    module="Feedbacks" name="Feedbacks #1" w="80.0"
+                    x="240.0" y="30.0"/>
+                <element h="70.0"
+                    id="ActiveMQ FML Receiver - 1554132728732-441"
+                    module="ActiveMQ FML Receiver"
+                    name="ActiveMQ FML Receiver #1" w="80.0" x="0.0" y="350.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/FML/REQUEST/COUCH_CAMILLE"/>
+                    <window h="221" visible="false" w="240" x="0" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="ActiveMQ Feedbacks Sender - 1554132744307-154"
+                    module="ActiveMQ Feedbacks Sender"
+                    name="ActiveMQ Feedbacks Sender #1" w="80.0"
+                    x="340.0" y="30.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/FEEDBACK/COUCH_CAMILLE"/>
+                    <window h="221" visible="false" w="240" x="0" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="Face Keyframe Performer - 1554807302252-267"
+                    module="Face Keyframe Performer" name="Face #1"
+                    w="80.0" x="240.0" y="160.0">
+                    <parameter name="blinking" value="true"/>
+                </element>
+                <element h="50.0"
+                    id="Audio Keyframe Performer - 1554807323260-420"
+                    module="Audio Keyframe Performer" name="Audio #1"
+                    w="280.0" x="240.0" y="280.0"/>
+                <element h="110.0" id="Lip Blender - 1554807347732-921"
+                    module="Lip Blender" name="Lip Blender #1" w="80.0"
+                    x="440.0" y="160.0"/>
+                <element h="50.0"
+                    id="Body Head Noise - 1574959313203-398"
+                    module="Body Head Noise" name="Body Head Noise #1"
+                    w="80.0" x="540.0" y="100.0">
+                    <window h="215" visible="true" w="520" x="0" y="540"/>
+                </element>
+                <element h="50.0"
+                    id="ActiveMQ Meaning Miner FML Receiver - 1601675029272-266"
+                    module="ActiveMQ Meaning Miner FML Receiver"
+                    name="ActiveMQ Meaning Miner FML Receiver" w="80.0"
+                    x="0.0" y="310.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/MEANING_MINER_FML/REQUEST/COUCH_CAMILLE"/>
+                    <window h="254" visible="false" w="272" x="0" y="0"/>
+                </element>
+            </element>
+            <element h="450.0"
+                id="Character Manager - 1571047080299-260"
+                module="Character Manager" name="Character Manager #2"
+                w="650.0" x="710.0" y="30.0">
+                <parameter name="character_name" value="LAURA"/>
+                <window h="532" visible="false" w="505" x="0" y="0"/>
+                <element h="230.0"
+                    id="Behavior Planner - 1571048020905-618"
+                    module="Behavior Planner" name="Behavior Planner #2"
+                    w="80.0" x="30.0" y="100.0">
+                    <window h="121" visible="false" w="172" x="0" y="0"/>
+                </element>
+                <element h="230.0"
+                    id="Behavior Realizer - 1571048038311-347"
+                    module="Behavior Realizer"
+                    name="Behavior Realizer #2" w="80.0" x="130.0" y="100.0">
+                    <window h="310" visible="false" w="209" x="0" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="FML File Reader - 1571048114448-838"
+                    module="FML File Reader" name="FML File Reader #2"
+                    w="80.0" x="30.0" y="30.0">
+                    <parameter name="fileName" value="./Examples/Restposes/Restpose.xml"/>
+                    <window h="100" visible="true" w="520" x="530" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="BML File Reader - 1571048124960-179"
+                    module="BML File Reader" name="BML File Reader #2"
+                    w="80.0" x="130.0" y="30.0">
+                    <parameter name="fileName" value=""/>
+                    <window h="100" visible="true" w="520" x="530" y="100"/>
+                </element>
+                <element h="70.0"
+                    id="ActiveMQ FML Receiver - 1571048164657-48"
+                    module="ActiveMQ FML Receiver"
+                    name="ActiveMQ FML Receiver #2" w="80.0" x="0.0" y="350.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/FML/REQUEST/COUCH_LAURA"/>
+                    <window h="221" visible="false" w="240" x="0" y="0"/>
+                </element>
+                <element h="70.0"
+                    id="ActiveMQ BML Receiver - 1571048178752-311"
+                    module="ActiveMQ BML Receiver"
+                    name="ActiveMQ BML Receiver #2" w="80.0" x="160.0" y="350.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/BML/REQUEST/COUCH_LAURA"/>
+                    <window h="221" visible="false" w="240" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="Feedbacks - 1571048300087-491"
+                    module="Feedbacks" name="Feedbacks #2" w="80.0"
+                    x="240.0" y="30.0"/>
+                <element h="50.0"
+                    id="ActiveMQ Feedbacks Sender - 1571048330040-648"
+                    module="ActiveMQ Feedbacks Sender"
+                    name="ActiveMQ Feedbacks Sender #2" w="80.0"
+                    x="340.0" y="30.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/FEEDBACK/COUCH_LAURA"/>
+                    <window h="221" visible="false" w="240" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="TTS - 1571048583671-185"
+                    module="TTS" name="TTS #2" w="80.0" x="440.0" y="30.0">
+                    <parameter name="doPhonemes" value="true"/>
+                    <parameter name="doTemporize" value="true"/>
+                    <parameter name="doAudio" value="true"/>
+                    <window h="128" visible="false" w="369" x="0" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="MaryTTS Client - 1571048597550-655"
+                    module="MaryTTS Client" name="MaryTTS Client #2"
+                    w="80.0" x="540.0" y="30.0"/>
+                <element h="170.0"
+                    id="MPEG4 Animatable - 1571048631079-434"
+                    module="MPEG4 Animatable" name="MPEG4 Animatable #2"
+                    w="80.0" x="540.0" y="160.0">
+                    <parameter name="posX" value="-0.8420000076293945"/>
+                    <parameter name="scaleX" value="1.0"/>
+                    <parameter name="posY" value="-0.3499999940395355"/>
+                    <parameter name="scaleY" value="1.0"/>
+                    <parameter name="posZ" value="-0.8619999885559082"/>
+                    <parameter name="rotX" value="0.0"/>
+                    <parameter name="rotW" value="0.9914448857307434"/>
+                    <parameter name="rotZ" value="0.0"/>
+                    <parameter name="rotY" value="0.13052619993686676"/>
+                    <parameter name="scaleZ" value="1.0"/>
+                    <window h="179" visible="false" w="463" x="0" y="0"/>
+                </element>
+                <element h="50.0"
+                    id="Audio Keyframe Performer - 1571048749984-846"
+                    module="Audio Keyframe Performer" name="Audio #2"
+                    w="280.0" x="240.0" y="280.0"/>
+                <element h="50.0"
+                    id="Animation Keyframe Performer - 1571048776230-901"
+                    module="Animation Keyframe Performer" name="Body #2"
+                    w="280.0" x="240.0" y="100.0"/>
+                <element h="50.0" id="Lip Model - 1571048970414-731"
+                    module="Lip Model" name="Lips #2" w="180.0"
+                    x="240.0" y="220.0"/>
+                <element h="110.0" id="Lip Blender - 1571049000695-539"
+                    module="Lip Blender" name="Lip Blender #2" w="80.0"
+                    x="440.0" y="160.0"/>
+                <element h="50.0"
+                    id="Face Keyframe Performer - 1571049025511-665"
+                    module="Face Keyframe Performer" name="Face #2"
+                    w="80.0" x="240.0" y="160.0">
+                    <parameter name="blinking" value="true"/>
+                </element>
+                <element h="50.0"
+                    id="Simple AU Performer - 1571049043503-295"
+                    module="Simple AU Performer" name="AU to FAP #2"
+                    w="80.0" x="340.0" y="160.0">
+                    <window h="339" visible="false" w="416" x="0" y="0"/>
+                </element>
+                <element h="70.0"
+                    id="Thrift Command Receiver - 1571227173930-849"
+                    module="Thrift Command Receiver"
+                    name="Thrift Command Receiver #2" w="80.0" x="80.0" y="350.0">
+                    <parameter name="port" value="8911"/>
+                    <parameter name="host" value="localhost"/>
+                    <window h="170" visible="true" w="260" x="530" y="200"/>
+                </element>
+                <element h="50.0"
+                    id="Body Head Noise - 1574959329659-302"
+                    module="Body Head Noise" name="Body Head Noise #2"
+                    w="80.0" x="540.0" y="100.0">
+                    <window h="215" visible="true" w="520" x="530" y="540"/>
+                </element>
+                <element h="50.0"
+                    id="ActiveMQ Meaning Miner FML Receiver - 1601675080397-460"
+                    module="ActiveMQ Meaning Miner FML Receiver"
+                    name="ActiveMQ Meaning Miner FML Receiver" w="80.0"
+                    x="680.0" y="300.0">
+                    <parameter name="isQueue" value="false"/>
+                    <parameter name="port" value="61616"/>
+                    <parameter name="host" value="localhost"/>
+                    <parameter name="topic" value="COUCH/MEANING_MINER_FML/REQUEST/COUCH_LAURA"/>
+                    <window h="254" visible="false" w="272" x="0" y="0"/>
+                </element>
+            </element>
+        </element>
+        <element h="50.0" id="Ini Manager - 1545228843011-310"
+            module="Ini Manager" name="Ini Manager" w="80.0" x="80.0" y="30.0">
+            <parameter name="file" value="Greta.ini"/>
+            <window h="532" visible="false" w="505" x="0" y="0"/>
+        </element>
+        <element h="50.0" id="Logs - 1545228847405-168" module="Logs"
+            name="Logs" w="80.0" x="180.0" y="30.0">
+            <parameter name="debug" value="true"/>
+            <parameter name="warning" value="true"/>
+            <parameter name="error" value="true"/>
+            <parameter name="info" value="true"/>
+            <window h="174" visible="false" w="212" x="0" y="0"/>
+        </element>
+        <element h="50.0" id="Log Frame - 1545228852107-958"
+            module="Log Frame" name="Log Frame" w="80.0" x="290.0" y="30.0">
+            <parameter name="blackBackground" value="false"/>
+            <window h="436" visible="false" w="618" x="0" y="0"/>
+        </element>
+        <element h="70.0" id="Thrift FAP Sender - 1551782056618-620"
+            module="Thrift FAP Sender" name="Thrift FAP Sender #1"
+            w="80.0" x="290.0" y="490.0">
+            <parameter name="port" value="9090"/>
+            <parameter name="host" value="localhost"/>
+            <window h="170" visible="true" w="260" x="0" y="370"/>
+        </element>
+        <element h="70.0" id="Thrift Audio Sender - 1551782070029-170"
+            module="Thrift Audio Sender" name="Thrift Audio Sender #2"
+            w="80.0" x="1260.0" y="490.0">
+            <parameter name="sendAudioBuffer" value="true"/>
+            <parameter name="port" value="8080"/>
+            <parameter name="host" value="localhost"/>
+            <window h="170" visible="true" w="260" x="790" y="200"/>
+        </element>
+        <element h="70.0" id="Thrift BAP Sender - 1553697836829-985"
+            module="Thrift BAP Sender" name="Thrift BAP Sender #1"
+            w="80.0" x="440.0" y="490.0">
+            <parameter name="port" value="9070"/>
+            <parameter name="host" value="localhost"/>
+            <window h="170" visible="true" w="260" x="260" y="370"/>
+        </element>
+        <element h="70.0" id="Thrift BAP Sender - 1571048800983-957"
+            module="Thrift BAP Sender" name="Thrift BAP Sender #2"
+            w="80.0" x="1120.0" y="490.0">
+            <parameter name="port" value="8070"/>
+            <parameter name="host" value="localhost"/>
+            <window h="170" visible="true" w="260" x="790" y="370"/>
+        </element>
+        <element h="70.0" id="Thrift FAP Sender - 1571048942447-446"
+            module="Thrift FAP Sender" name="Thrift FAP Sender #2"
+            w="80.0" x="970.0" y="490.0">
+            <parameter name="port" value="8090"/>
+            <parameter name="host" value="localhost"/>
+            <window h="170" visible="true" w="260" x="530" y="370"/>
+        </element>
+        <element h="70.0" id="Thrift Audio Sender - 1571137893257-728"
+            module="Thrift Audio Sender" name="Thrift Audio Sender #1"
+            w="80.0" x="590.0" y="490.0">
+            <parameter name="sendAudioBuffer" value="true"/>
+            <parameter name="port" value="9080"/>
+            <parameter name="host" value="localhost"/>
+            <window h="170" visible="true" w="260" x="260" y="200"/>
+        </element>
+        <element h="510.0" id="Ogre Player - 1571853444753-284"
+            module="Ogre Player" name="Ogre Player" w="80.0" x="1450.0" y="110.0">
+            <parameter name="posX" value="-0.30000001192092896"/>
+            <parameter name="posY" value="0.699999988079071"/>
+            <parameter name="posZ" value="5.0"/>
+            <parameter name="roll" value="0.0"/>
+            <parameter name="pitch" value="0.0"/>
+            <parameter name="yaw" value="0.0"/>
+            <window h="623" visible="false" w="740" x="0" y="0"/>
+        </element>
+    </elements>
+    <connections>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1571048749984-846" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1571048749984-846" target="Thrift Audio Sender - 1551782070029-170"/>
+        <connection connector="setTTS" source="TTS - 1545228829579-75" target="MaryTTS Client - 1545228836179-501"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1554132717338-53" target="ActiveMQ Feedbacks Sender - 1554132744307-154"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1545228847405-168" target="Log Frame - 1545228852107-958"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554807323260-420" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554807323260-420" target="Thrift Audio Sender - 1571137893257-728"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1545228678860-536" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="addFeedbackInput"
+            source="Behavior Realizer - 1545228702171-304" target="Feedbacks - 1554132717338-53"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1545228702171-304" target="Animation Keyframe Performer - 1545228717780-228"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1545228702171-304" target="Face Keyframe Performer - 1554807302252-267"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1545228702171-304" target="Lip Model - 1545228738636-406"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1545228702171-304" target="Audio Keyframe Performer - 1554807323260-420"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Thrift Command Receiver - 1571227173930-849" target="Behavior Realizer - 1571048038311-347"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Thrift Command Receiver - 1571227173930-849" target="Behavior Planner - 1571048020905-618"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Body Head Noise - 1574959313203-398" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="addFeedbackInput"
+            source="Behavior Realizer - 1571048038311-347" target="Feedbacks - 1571048300087-491"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1571048038311-347" target="Animation Keyframe Performer - 1571048776230-901"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1571048038311-347" target="Face Keyframe Performer - 1571049025511-665"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1571048038311-347" target="Lip Model - 1571048970414-731"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Behavior Realizer - 1571048038311-347" target="Audio Keyframe Performer - 1571048749984-846"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Thrift Command Receiver - 1553697843141-325" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Thrift Command Receiver - 1553697843141-325" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1545228674948-209" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Body Head Noise - 1574959329659-302" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1545228808979-301" target="Environment - 1545228639037-145"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1545228738636-406" target="Lip Blender - 1554807347732-921"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1571048020905-618" target="Behavior Realizer - 1571048038311-347"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1571048020905-618" target="Feedbacks - 1571048300087-491"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1571048631079-434" target="Environment - 1545228639037-145"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="ActiveMQ Meaning Miner FML Receiver - 1601675029272-266" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1571048776230-901" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1571048776230-901" target="Thrift BAP Sender - 1571048800983-957"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="ActiveMQ FML Receiver - 1554132728732-441" target="Behavior Planner - 1545228689924-565"/>
+        <connection connector="setTTS" source="TTS - 1571048583671-185" target="MaryTTS Client - 1571048597550-655"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1571048300087-491" target="ActiveMQ Feedbacks Sender - 1571048330040-648"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="ActiveMQ BML Receiver - 1554117362832-889" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1545228717780-228" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1545228717780-228" target="Thrift BAP Sender - 1553697836829-985"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="ActiveMQ BML Receiver - 1571048178752-311" target="Behavior Realizer - 1571048038311-347"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader - 1571048114448-838" target="Behavior Planner - 1571048020905-618"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1571048124960-179" target="Behavior Realizer - 1571048038311-347"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1571049000695-539" target="MPEG4 Animatable - 1571048631079-434"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1571049000695-539" target="Thrift FAP Sender - 1571048942447-446"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1571048970414-731" target="Lip Blender - 1571049000695-539"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1545228776323-11" target="Lip Blender - 1554807347732-921"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1545228689924-565" target="Behavior Realizer - 1545228702171-304"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1545228689924-565" target="Feedbacks - 1554132717338-53"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554807302252-267" target="Simple AU Performer - 1545228776323-11"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1571049025511-665" target="Simple AU Performer - 1571049043503-295"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554807347732-921" target="MPEG4 Animatable - 1545228808979-301"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554807347732-921" target="Thrift FAP Sender - 1551782056618-620"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1571049043503-295" target="Lip Blender - 1571049000695-539"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="ActiveMQ FML Receiver - 1571048164657-48" target="Behavior Planner - 1571048020905-618"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1571853444753-284" target="Environment - 1545228639037-145"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="ActiveMQ Meaning Miner FML Receiver - 1601675080397-460" target="Behavior Planner - 1571048020905-618"/>
+    </connections>
+</modulated>

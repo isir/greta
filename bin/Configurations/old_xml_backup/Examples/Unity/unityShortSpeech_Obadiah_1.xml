@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml>
+	<bml>
+		<speech id="s1" start="0.0" language="english" voice="marytts" type="SAPI4" text="">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				On a que ce que
+			<tm id="tm2"/>	
+				l'on mérite.
+			<tm id="tm3"/>
+				
+				
+			<pitchaccent id='xpa1' type='Hstar' start='s1:tm1' end='s1:tm2' level='strong' importance='0.8'/>
+			<boundary id="bd1" type="LL" start="s1:tm3" end='s1:tm3+0.5'/>
+			
+		</speech>
+	</bml>
+	<fml>
+		<performative id="p1" type="beatsocial" start="s1:tm1" end="s1:tm2" importance="1.0"/>
+		<emotion id="e1" type="envy" start="s1:tm1" end="s1:tm3" importance="1.0"/>
+
+	</fml>
+</fml-apml>

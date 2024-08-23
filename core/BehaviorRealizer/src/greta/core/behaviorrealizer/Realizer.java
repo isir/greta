@@ -67,6 +67,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
+    
     private GestureKeyframeGenerator gestureGenerator;
     private SpeechKeyframeGenerator speechGenerator;
     private HeadKeyframeGenerator headGenerator;
@@ -75,6 +76,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     private TorsoKeyframeGenerator torsoGenerator;
     private GazeKeyframeGenerator gazeGenerator;
     private FaceKeyframeGenerator faceGenerator;
+
     private Comparator<Keyframe> keyframeComparator;
     private Environment environment;  //new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
@@ -99,13 +101,13 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         faceGenerator = new FaceKeyframeGenerator();
 
         generators = new ArrayList<>();
-        generators.add(gazeGenerator);
         generators.add(gestureGenerator);
         generators.add(speechGenerator);
         generators.add(headGenerator);
         generators.add(laughGenerator);
         generators.add(shoulderGenerator);
         generators.add(torsoGenerator);
+        generators.add(gazeGenerator);
         generators.add(faceGenerator);
 
     }
@@ -260,6 +262,9 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
             for (KeyframePerformer performer : keyframePerformers) {
                 // TODO : Mode management in progress
                 performer.performKeyframes(keyframes, id, mode);
+            }
+            for (Keyframe kf : keyframes) {
+                System.out.println("greta.auxiliary.incrementality.ChunkSenderThread.sendKeyframes(): modality - category (onset - offset): " + kf.getModality() + " - " + kf.getCategory() + "(" + kf.getOnset() + " - " + kf.getOffset() + ")");
             }
         }
     }

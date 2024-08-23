@@ -87,9 +87,16 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     // where send the resulted keyframes
     private List<KeyframePerformer> keyframePerformers;
     private List<KeyframeGenerator> generators;
+    
+    private GestureKeyframeGenerator gestureGenerator;
+    private SpeechKeyframeGenerator speechGenerator;
+    private HeadKeyframeGenerator headGenerator;
+    private LaughKeyframeGenerator laughGenerator;
+    private ShoulderKeyframeGenerator shoulderGenerator;
+    private TorsoKeyframeGenerator torsoGenerator;
     private GazeKeyframeGenerator gazeGenerator;
     private FaceKeyframeGenerator faceGenerator;
-    private GestureKeyframeGenerator gestureGenerator;
+    
     private Comparator<Keyframe> keyframeComparator;
     private Environment environment;  //new Environment(IniManager.getGlobals().getValueString("ENVIRONMENT"));
     private double lastKeyFrameTime;
@@ -109,31 +116,37 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     private List<IncrementalityInteractionPerformer> performerList = new ArrayList<>();
 
     public IncrementalRealizerV2(CharacterManager cm) {
+        
         setCharacterManager(cm);
+
         keyframePerformers = new ArrayList<>();
-        generators = new ArrayList<>();
-
         lastKeyFrameTime = greta.core.util.time.Timer.getTime();
+        keyframeComparator = (o1, o2) -> (int) Math.signum(o1.getOffset() - o2.getOffset());
+        environment = characterManager.getEnvironment();
+        
         gestureGenerator = new GestureKeyframeGenerator();
-        generators.add(gestureGenerator);
-        generators.add(new SpeechKeyframeGenerator());
-        generators.add(new HeadKeyframeGenerator());
-        generators.add(new LaughKeyframeGenerator());
-
-        //experimental
-        generators.add(new ShoulderKeyframeGenerator());
-        generators.add(new TorsoKeyframeGenerator());
-        gazeGenerator = new GazeKeyframeGenerator(cm, generators);
+        speechGenerator = new SpeechKeyframeGenerator();
+        headGenerator = new HeadKeyframeGenerator();
+        laughGenerator = new LaughKeyframeGenerator();
+        shoulderGenerator = new ShoulderKeyframeGenerator();
+        torsoGenerator = new TorsoKeyframeGenerator();
+        gazeGenerator = new GazeKeyframeGenerator(cm,generators);
         faceGenerator = new FaceKeyframeGenerator();
 
-        keyframeComparator = (o1, o2) -> (int) Math.signum(o1.getOffset() - o2.getOffset());
-
-        // environment
-        environment = characterManager.getEnvironment();
-
+        generators = new ArrayList<>();
+        generators.add(gestureGenerator);
+        generators.add(speechGenerator);
+        generators.add(headGenerator);
+        generators.add(laughGenerator);
+        generators.add(shoulderGenerator);
+        generators.add(torsoGenerator);
+        generators.add(gazeGenerator);
+        generators.add(faceGenerator);
+        
         storeKeyframe = new ArrayList<>();
 
         chunkSenderThread = new ChunkSenderThread(keyframePerformers);
+        chunkSenderThread.setDaemon(true);
         chunkSenderThread.start();
 
     }
@@ -164,40 +177,50 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
         for (Signal signal : list) {
             for (KeyframeGenerator generator : generators) {
-                if (generator.accept(signal)) {
-                    break;
-                }
+                generator.accept(signal);
             }
-            gazeGenerator.accept(signal);
-            faceGenerator.accept(signal);
         }
 
-        // Step 2: Schedule signals that the computed signal is relative to the previous and the next signals
-        // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)
-        // Step 3: create all key frames
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // Step 2: create all key frames
         // Gaze keyframes for other modalities than eyes are generated before the others
         // and act as "shifts"
-        gazeGenerator.generateBodyKeyframes(keyframes);
-
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        
         for (KeyframeGenerator generator : generators) {
+            System.out.println("greta.core.behaviorrealizer.Realizer.performSignals(): add all keyframes: " + generator.toString());
             keyframes.addAll(generator.generateKeyframes());
         }
+
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // Step 3: Schedule signals that the computed signal is relative to the previous and the next signals
+        // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)        
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+        for (Keyframe kf : keyframes) {
+            System.out.format("Keyframes before sort : %s - %s - %.3f - %.3f%n", kf.getModality(), kf.getId(), kf.getOnset(), kf.getOffset());
+        }
+
         keyframes.sort(keyframeComparator);
-
-        // Gaze keyframes for the eyes are generated last
-        gazeGenerator.generateEyesKeyframes(keyframes);
-
         
-        faceGenerator.findExistingAU(keyframes);
-        keyframes.addAll(faceGenerator.generateKeyframes());
+        for (Keyframe kf : keyframes) {
+            System.out.format("Keyframes after sort : %s - %.3f - %.3f%n", kf.getModality(), kf.getOnset(), kf.getOffset());
+        }
+        
+//        System.out.println("keyframe's modality after Generator.generateKeyframes()");
+//        for(Keyframe k:keyframes){
+//            System.out.println("greta.core.behaviorrealizer.Realizer.performSignals(): " + k.getModality());
+//        }
 
-        // Step 4: adjust the timing of all key frame
-        keyframes.sort(keyframeComparator);
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // Step 4: ADJUST THE TIMING OF THE KEYFRAMES
+        ///////////////////////////////////////////////////////////////////////////////////////////////////    
 
         /*for(Keyframe kf : keyframes){
             System.out.println(kf.toString() + " --- " + kf.getOffset());
         }*/
         //System.out.println(keyframes.get(keyframes.size() - 1).getOffset());
+        
         //  here:
         //      - we must manage the time for the three addition modes:
         //          - blend:    offset + now
@@ -208,7 +231,9 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         //          - blend:   previousLastTime = max(previousLastTime, the last time of the new keyframes)
         //          - replace: previousLastTime = the last time of the new keyframes
         //          - append:  previousLastTime = the last time of the new keyframes
+        
         double startTime = keyframes.isEmpty() ? 0 : keyframes.get(0).getOffset();
+        
         // if the start time to start signals is less than 0, all signals' time have to be increased so that they start from 0
         double absoluteStartTime = greta.core.util.time.Timer.getTime();
         if (mode.getCompositionType() == CompositionType.append) {
@@ -220,9 +245,12 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         }
         //add this info to the keyframe - save this info in some special variable
         for (Keyframe keyframe : keyframes) {
+            
+            
             keyframe.setOnset(keyframe.getOnset() + absoluteStartTime);
             keyframe.setOffset(keyframe.getOffset() + absoluteStartTime);
             if (lastKeyFrameTime < keyframe.getOffset()) {
+                
                 lastKeyFrameTime = keyframe.getOffset();
             }
             if (keyframe instanceof AudioKeyFrame) {
@@ -239,6 +267,10 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
             }
         }
 
+        ///////////////////////////////////////////////////////////////////////////////////////////////////
+        // Step 5: SEND KEYFRAMES AND MAKE IT REAL!
+        ///////////////////////////////////////////////////////////////////////////////////////////////////           
+        
         System.out.println(" ------------------------------------ START OF " + requestId + " ------------------------------------");
 
         //In case of stop interaction, thread stop sending chunk, stop keyframe will bypass thread to ensure correrct stop
@@ -338,6 +370,14 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
             processKeyframesList.add(kf);
             treeList.put(index, processKeyframesList);
         }
+
+        for (Map.Entry<Integer, List<Keyframe>> entry : treeList.entrySet()) {
+//            System.out.println("Keyframes in chunk " + entry.getKey());
+            for (Keyframe kf : entry.getValue()) {
+                System.out.format("Keyframes in chunk %s : %s - %.3f - %.3f%n", entry.getKey(), kf.getModality(), kf.getOnset(), kf.getOffset());
+            }
+        }
+        
         return treeList;
     }
 

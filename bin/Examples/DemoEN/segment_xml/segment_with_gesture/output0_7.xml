@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            i
+            <tm id="tm2"/>
+            know
+            <tm id="tm3"/>
+            that
+            <tm id="tm4"/>
+            selling
+            <tm id="tm5"/>
+            is
+            <tm id="tm6"/>
+            not
+            <tm id="tm7"/>
+            the
+            <tm id="tm8"/>
+            easiest
+            <tm id="tm9"/>
+            thing,
+            <tm id="tm10"/>
+            but
+            <tm id="tm11"/>
+            i
+            <tm id="tm12"/>
+            do
+            <tm id="tm13"/>
+            think
+            <tm id="tm14"/>
+            that
+            <tm id="tm15"/>
+            it's
+            <tm id="tm16"/>
+            the
+            <tm id="tm17"/>
+            best.
+            <tm id="tm18"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm18"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

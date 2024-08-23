@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            so,
+            <tm id="tm2"/>
+            as
+            <tm id="tm3"/>
+            your
+            <tm id="tm4"/>
+            realtor,
+            <tm id="tm5"/>
+            the
+            <tm id="tm6"/>
+            last
+            <tm id="tm7"/>
+            thing
+            <tm id="tm8"/>
+            i
+            <tm id="tm9"/>
+            would
+            <tm id="tm10"/>
+            suggest
+            <tm id="tm11"/>
+            is
+            <tm id="tm12"/>
+            selling.
+            <tm id="tm13"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm13"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

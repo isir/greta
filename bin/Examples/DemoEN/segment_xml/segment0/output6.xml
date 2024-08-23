@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            you
+            <tm id="tm2"/>
+            take
+            <tm id="tm3"/>
+            your
+            <tm id="tm4"/>
+            halves,
+            <tm id="tm5"/>
+            you
+            <tm id="tm6"/>
+            go
+            <tm id="tm7"/>
+            your
+            <tm id="tm8"/>
+            separate
+            <tm id="tm9"/>
+            ways,
+            <tm id="tm10"/>
+            and
+            <tm id="tm11"/>
+            you
+            <tm id="tm12"/>
+            get
+            <tm id="tm13"/>
+            on
+            <tm id="tm14"/>
+            with
+            <tm id="tm15"/>
+            your
+            <tm id="tm16"/>
+            lives.
+            <tm id="tm17"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm17"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

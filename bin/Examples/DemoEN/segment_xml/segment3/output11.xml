@@ -1,0 +1,27 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            your
+            <tm id="tm2"/>
+            honor,
+            <tm id="tm3"/>
+            you
+            <tm id="tm4"/>
+            doctored
+            <tm id="tm5"/>
+            the
+            <tm id="tm6"/>
+            log
+            <tm id="tm7"/>
+            book.
+            <tm id="tm8"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm8"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

@@ -1,0 +1,37 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            you
+            <tm id="tm2"/>
+            leave
+            <tm id="tm3"/>
+            your
+            <tm id="tm4"/>
+            socks
+            <tm id="tm5"/>
+            all
+            <tm id="tm6"/>
+            over
+            <tm id="tm7"/>
+            this
+            <tm id="tm8"/>
+            house,
+            <tm id="tm9"/>
+            dress
+            <tm id="tm10"/>
+            like
+            <tm id="tm11"/>
+            a
+            <tm id="tm12"/>
+            pig,
+            <tm id="tm13"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm13"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

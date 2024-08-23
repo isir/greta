@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            and
+            <tm id="tm2"/>
+            to
+            <tm id="tm3"/>
+            be
+            <tm id="tm4"/>
+            honest,
+            <tm id="tm5"/>
+            this
+            <tm id="tm6"/>
+            is
+            <tm id="tm7"/>
+            a
+            <tm id="tm8"/>
+            situation
+            <tm id="tm9"/>
+            where
+            <tm id="tm10"/>
+            i
+            <tm id="tm11"/>
+            would
+            <tm id="tm12"/>
+            just
+            <tm id="tm13"/>
+            as
+            <tm id="tm14"/>
+            soon
+            <tm id="tm15"/>
+            not
+            <tm id="tm16"/>
+            take
+            <tm id="tm17"/>
+            a
+            <tm id="tm18"/>
+            commission.
+            <tm id="tm19"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm19"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

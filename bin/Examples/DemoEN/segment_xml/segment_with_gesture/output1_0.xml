@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            this
+            <tm id="tm2"/>
+            is
+            <tm id="tm3"/>
+            not
+            <tm id="tm4"/>
+            about,
+            <tm id="tm5"/>
+            you're
+            <tm id="tm6"/>
+            not,
+            <tm id="tm7"/>
+            you're
+            <tm id="tm8"/>
+            not,
+            <tm id="tm9"/>
+            you're,
+            <tm id="tm10"/>
+            you're,
+            <tm id="tm11"/>
+            you're
+            <tm id="tm12"/>
+            not
+            <tm id="tm13"/>
+            getting
+            <tm id="tm14"/>
+            it.
+            <tm id="tm15"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm15"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

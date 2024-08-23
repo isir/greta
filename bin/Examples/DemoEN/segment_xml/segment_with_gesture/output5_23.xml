@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            i
+            <tm id="tm2"/>
+            am
+            <tm id="tm3"/>
+            done.
+            <tm id="tm4"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm4"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

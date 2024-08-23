@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<fml-apml>
+    <bml>
+        <speech id="s1" start="0.0" language="english" voice="cereproc" type="SAPI4" text="">
+            <description level="1" type="gretabml">
+                <reference>tmp/from-fml-apml.pho</reference>
+            </description>
+            <tm id="tm1"/>
+            realistically
+            <tm id="tm2"/>
+            speaking,
+            <tm id="tm3"/>
+            neither
+            <tm id="tm4"/>
+            one
+            <tm id="tm5"/>
+            of
+            <tm id="tm6"/>
+            you
+            <tm id="tm7"/>
+            can
+            <tm id="tm8"/>
+            afford
+            <tm id="tm9"/>
+            this
+            <tm id="tm10"/>
+            mortgage
+            <tm id="tm11"/>
+            on
+            <tm id="tm12"/>
+            your
+            <tm id="tm13"/>
+            own,
+            <tm id="tm14"/>
+            okay?
+            <tm id="tm15"/>
+            <boundary type="LL" id="b1" start="s1:tm1" end="s1:tm15"/>
+        </speech>
+    </bml>
+    <fml/>
+</fml-apml>

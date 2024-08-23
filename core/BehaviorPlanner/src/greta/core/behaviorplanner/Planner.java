@@ -319,7 +319,7 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
             //let the selector choose the signals
             List<Signal> signalsReturned = selector.selectFrom(intention, set, dynamicline, existingSignals, getCharacterManager());
             for(Signal sig: signalsReturned){
-                System.out.println("GRETA Returned:"+sig.getClass());
+                System.out.format("GRETA Returned: Class %s, ID - %s%n", sig.getClass(), sig.getId());
             }
             
             //Start NVBG TREATMENT
@@ -599,6 +599,9 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
         }
         ideationalUnitFactory.preprocessIdeationalUnits();
         
+        for (Signal sig: selectedSignals){            
+            System.out.format("greta.core.behaviorplanner.Planner.performIntentions(): selected_signal: %s, %s%n", sig, sig.getId());
+        }
         
         sendSignals(selectedSignals, requestId, mode);
     }

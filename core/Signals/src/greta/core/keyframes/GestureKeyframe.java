@@ -56,7 +56,8 @@ public class GestureKeyframe extends ParametersKeyframe{
 
         this.hand = hand;
         this.handSide = hand.getSide();
-        modality = "gesture";
+        this.modality = "gesture";
+        this.category = "gesture";
         this.onset = onset;
         this.offset = offset;
         this.isScript = isScript;

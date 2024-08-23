@@ -27,7 +27,8 @@ public class SpeechKeyframe   extends ParametersKeyframe{
     private String parentId;
 
     public SpeechKeyframe(double time, String wavFilePath){
-        modality = "speech";
+        this.modality = "speech";
+        this.category = "speech";
         this.onset = time;
         this.wavFilePath = wavFilePath;
     }
@@ -57,7 +58,8 @@ public class SpeechKeyframe   extends ParametersKeyframe{
     }
 
     public String getCategory() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        // throw new UnsupportedOperationException("Not supported yet.");
+        return this.category;
     }
 
     public float getSPC() {

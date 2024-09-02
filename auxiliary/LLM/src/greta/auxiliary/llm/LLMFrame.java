@@ -100,7 +100,9 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     private Process server_process_mistral;
     private Thread server_shutdownHook_mistral;
     public CharacterManager cm;
-
+    
+    private ImageSchemaExtractor im;
+    
     public String getAnswer() {
         return answ;
     }
@@ -113,8 +115,17 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
        
         server = new Server();
         this.cm=cm;
+        im = new ImageSchemaExtractor(cm);
 
     }
+
+    public LLMFrame(CharacterManager cm, boolean without_server) throws InterruptedException {
+       
+//        server = new Server();
+        this.cm=cm;
+
+    }
+    
     public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
         String fml_name = TextToFML(text, true);
         return fml_name;
@@ -202,6 +213,9 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     
     public ID load(String fmlFileName, CompositionType compositionType) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
    
+        double load_start = greta.core.util.time.Timer.getTime();
+        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): START: %.3f ##############################%n", load_start);
+
         System.out.println("CompositionType: " + compositionType);
         
         String base = (new File(fmlFileName)).getName().replaceAll("\\.xml$", "");
@@ -299,8 +313,10 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         ID id = IDProvider.createID(base);
         id.setFmlID(fml_id);
         
+        double preprocess_end = greta.core.util.time.Timer.getTime();
+        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): preprocess - %.3f%n", preprocess_end - load_start);        
+        
         if(this.cm.use_MM()){
-            ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
              //MEANING MINER TREATMENT START
             List<Intention> intention_list;
             System.out.println("File Name "+fml.toString());
@@ -308,6 +324,9 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
             intentions.addAll(intention_list);
             //MEANING MINER TREATMENT END
         }
+
+        double MM_end = greta.core.util.time.Timer.getTime();
+        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): MeaningMiner - %.3f%n", MM_end - preprocess_end);        
         
         for(int i=0; i<intentions.size();i++){
             System.out.println("[INFO]: Intention_type:"+intentions.get(i).getType()+"   "+intentions.get(i).getName());
@@ -327,7 +346,13 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         for (SignalPerformer performer : signal_performers) {
             performer.performSignals(signals, id, mode);
         }
+
+        double load_end = greta.core.util.time.Timer.getTime();
+        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): total - %.3f%n", load_end - load_start);          
+        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): END: %.3f ##############################%n", load_end);                
+        
         return id;
+        
     }
     
          @Override

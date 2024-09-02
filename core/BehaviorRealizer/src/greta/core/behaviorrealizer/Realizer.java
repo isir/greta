@@ -97,7 +97,6 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         laughGenerator = new LaughKeyframeGenerator();
         shoulderGenerator = new ShoulderKeyframeGenerator();
         torsoGenerator = new TorsoKeyframeGenerator();
-        gazeGenerator = new GazeKeyframeGenerator(cm,generators);
         faceGenerator = new FaceKeyframeGenerator();
 
         generators = new ArrayList<>();
@@ -107,9 +106,11 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         generators.add(laughGenerator);
         generators.add(shoulderGenerator);
         generators.add(torsoGenerator);
-        generators.add(gazeGenerator);
         generators.add(faceGenerator);
 
+        gazeGenerator = new GazeKeyframeGenerator(cm,generators);
+        generators.add(gazeGenerator);
+        
     }
 
     @Override //TODO add the use of modes: blend, replace, append

@@ -9,6 +9,7 @@ import sys
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 
+TIMEOUT = 5
 
 messages = None
 messages_online = None
@@ -60,10 +61,15 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
     answer = ""
     curr_sent= ""
     FIRST_SENTENCE = True
+    s_time = time.time()
     for chunk in response:
+
+        if chunk.choices is None:
+            continue
         
-        if chunk.choices[0].delta.content is None:
-            pass
+        elif chunk.choices[0].delta.content is None:
+            continue
+            
         elif chunk.choices[0].delta.content in [".","?","!",";"]:
             curr_sent+=chunk.choices[0].delta.content
             answer += curr_sent
@@ -78,6 +84,11 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
 
         else:
             curr_sent+=chunk.choices[0].delta.content
+
+        if (time.time() - s_time) > TIMEOUT:
+            answer = "Response time over. Sorry, some errors happened."
+            break
+            
     print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')

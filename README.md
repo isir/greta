@@ -3,8 +3,6 @@
 # Greta
 Realtime platform to control socio-emotional virtual characters 
 
-![Greta logo](https://user-images.githubusercontent.com/54807091/88184824-7c5ba280-cc33-11ea-875e-0a785d95075f.png)
-
 Welcome to the public repository of the Greta project.
 Greta is a virtual character engine that allows generating socio-emotional behaviors in order to build natural interactional scenario with human users.
 
@@ -15,6 +13,20 @@ Most parts of Greta are licensed under the GNU LGPL v3 (the master branch of the
 Some parts of Greta are licensed under the GNU GPL v3 (the gpl branch of the GitHub repository); so if you use this branch, be aware that Greta will become GNU GPL v3 at the same time.
 
 Greta depends on external software for Speech Synthesis ([MaryTTS](http://mary.dfki.de/) or CereProc), and 3D Rendering (Ogre or Unity).
+
+# Update
+
+## Sep 03, 2024: changed license from GPL to LGPL, added many functionalities(EN,FR)!
+- Greta (master branch) became GPL license from LGPL license.
+- Previous LGPL version Greta (master branch) is now in "master-lgpl" branch
+- Added incremental behavior realizer module
+- Added LLM module with Mistral, Mistral module for incremental processing
+- Added DeepASR module, a deep learning based incremental ASR
+- Added MeaningMiner module,
+- Added NVBG module, a nonverbal behavior generator
+- At this moment, we only support English and French languages
+
+![Greta logo](https://user-images.githubusercontent.com/54807091/88184824-7c5ba280-cc33-11ea-875e-0a785d95075f.png)
 
 # Quick start
 1) Clone the repository to retrieve all files from the Greta Projects.

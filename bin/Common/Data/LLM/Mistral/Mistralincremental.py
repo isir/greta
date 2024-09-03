@@ -70,7 +70,7 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
         elif chunk.choices[0].delta.content is None:
             continue
             
-        elif chunk.choices[0].delta.content in [".","?","!",";"]:
+        elif chunk.choices[0].delta.content in [".","?","!",";"," ?"]:
             curr_sent+=chunk.choices[0].delta.content
             answer += curr_sent
 
@@ -88,7 +88,9 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
         if (time.time() - s_time) > TIMEOUT:
             answer = "Response time over. Sorry, some errors happened."
             break
-            
+    if curr_sent !="":
+        print(curr_sent)
+        answer += curr_sent
     print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')

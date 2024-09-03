@@ -38,7 +38,7 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
     
     if language == 'FR':
         prompt=[
-        {"role": "system", "content": "Tu es un assistant virtuel qui réponds en français avec des phrases courtes de style oral. Réponds uniquement en français. "+system_prompt}
+        {"role": "system", "content": "Tu es un assistant virtuel qui réponds en français avec un style oral. Réponds uniquement en français. "+system_prompt}
          ]
     else:
           prompt=[
@@ -108,7 +108,8 @@ Knowledge Base – Alcohol Use: Drinking in Moderation: According to the Dietary
 
     response = client_online.chat_stream(
          model=model,
-           messages=prompt
+           messages=prompt,
+           temperature=0.8,
     )
     answer = ""
     curr_sent= ""
@@ -118,7 +119,7 @@ Knowledge Base – Alcohol Use: Drinking in Moderation: According to the Dietary
         
         if chunk.choices[0].delta.content is None:
             pass
-        elif chunk.choices[0].delta.content in [".","?","!",";"]:
+        elif chunk.choices[0].delta.content in [".","?","!",";"," ?"]:
             curr_sent+=chunk.choices[0].delta.content
             if answer != "":
                 response_time = time.perf_counter() -start
@@ -131,6 +132,9 @@ Knowledge Base – Alcohol Use: Drinking in Moderation: According to the Dietary
         else:
             curr_sent+=chunk.choices[0].delta.content
     time.sleep(min_response_time )
+    if curr_sent != "":
+        print(curr_sent)
+        answer += curr_sent
     print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')

@@ -61,13 +61,16 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
         
         if chunk.choices[0].delta.content is None:
             pass
-        elif chunk.choices[0].delta.content in [".","?","!",";"]:
+        elif chunk.choices[0].delta.content in [".","?","!",";"," ?"]:
             curr_sent+=chunk.choices[0].delta.content
             answer += curr_sent
             print(curr_sent)
             curr_sent = ""
         else:
             curr_sent+=chunk.choices[0].delta.content
+    if curr_sent != "":
+        answer+= curr_sent
+        print(curr_sent)
     print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')

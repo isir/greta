@@ -16,7 +16,7 @@ Greta depends on external software for Speech Synthesis ([MaryTTS](http://mary.d
 
 # Update
 
-## Sep 03, 2024: changed license from GPL to LGPL, added many functionalities(EN,FR)!
+## Sep 03, 2024: changed license from LGPL to GPL, added many functionalities(EN,FR)!
 - Greta (master branch) became GPL license from LGPL license.
 - Previous LGPL version Greta (master branch) is now in "master-lgpl" branch
 - Added incremental behavior realizer module

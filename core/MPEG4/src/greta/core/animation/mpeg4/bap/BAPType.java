@@ -59,7 +59,7 @@ public enum BAPType {
     l_shoulder_flexion,
     r_shoulder_flexion,
     l_shoulder_abduct,
-    r_shoulder_abduct,
+    r_shoulder_abduct,  
     l_shoulder_twisting,
     r_shoulder_twisting,
     l_elbow_flexion,

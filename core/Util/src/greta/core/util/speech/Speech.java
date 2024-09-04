@@ -234,22 +234,7 @@ public class Speech implements Temporizable{
      * @return the {@code String} of the original text corresponding to this {@code Speech}
      */
     public String getOriginalText(){
-        if ((originalText == null) || (originalText == "")){
-            
-            System.out.println("greta.core.util.speech.Speech.getOriginalText(): originalText == null or \"\"");
-            for(Object speechElement:speechElements){
-                if (speechElement instanceof String){
-    //                    System.out.println("greta.core.signals.BMLTranslator.BMLToSignals(): speechElement(String): " + speechElement);
-                    originalText += speechElement;
-                }
-            }
-            
-            return originalText;        
-
-        }
-        else{
-            return originalText;        
-        }
+        return originalText;
     }
 
     /**
@@ -741,10 +726,6 @@ public class Speech implements Temporizable{
         for(Boundary b : tempBoundaries) {
             addSpeechElement(b);
         }
-        
-        //make sure originalText is not null.
-        //concatinate String speechElement and put it into originalText if it is null.
-        String _ = getOriginalText();
 
     }
 

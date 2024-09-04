@@ -171,16 +171,6 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
 
     private FAPFrame blend(FAPFrame face, FAPFrame lip){
         FAPFrame blended = new FAPFrame(face);
-        
-//        int fapIndex = 0;
-//        fapIndex = 4;
-//        System.out.println("index: " + fapIndex + ", face: " + face.getValue(fapIndex) + ", lip: " + lip.getValue(fapIndex));
-//        fapIndex = 17;
-//        System.out.println("index: " + fapIndex + ", face: " + face.getValue(fapIndex) + ", lip: " + lip.getValue(fapIndex));
-//        fapIndex = 5;
-//        System.out.println("index: " + fapIndex + ", face: " + face.getValue(fapIndex) + ", lip: " + lip.getValue(fapIndex));
-
-        
         //UPPER LIP OPENING - 6Faps 4, 8, 9, 51, 55, 56
         blendValueFrom(4, blended, lip);
         blendValueFrom(8, blended, lip);
@@ -232,14 +222,9 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
         @Override
         public void run() {
             while(!end){
-                
-                synchronized (this) {
-
-                    popLatestFrame();
-                    computeAndSend();
-                    try { sleep(10); } catch (Throwable t) {}
-                    
-                }
+                popLatestFrame();
+                computeAndSend();
+                try { sleep(10); } catch (Throwable t) {}
             }
         }
     }

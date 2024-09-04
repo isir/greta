@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>You
+<tm id="tm2"/>have
+<tm id="tm3"/>chosen
+<tm id="tm4"/>these
+<tm id="tm5"/>carrots.
+<tm id="tm6"/>They
+<tm id="tm7"/>are
+<tm id="tm8"/>85
+<tm id="tm9"/>cents
+<tm id="tm10"/>a
+<tm id="tm11"/>kilogram,
+<tm id="tm12"/>do
+<tm id="tm13"/>you
+<tm id="tm14"/>want
+<tm id="tm15"/>a
+<tm id="tm16"/>bunch?
+</speech>
+</bml>
+<fml>
+<beat end="s1:tm7" id="1" importance="1.0" start="s1:tm1" type="LowLf1"/>
+<beat end="s1:tm18" id="2" importance="1.0" start="s1:tm12" type="LowRt1"/>
+</fml>
+</fml-apml>

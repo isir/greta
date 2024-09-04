@@ -134,7 +134,7 @@ public class BMLFileReader implements SignalEmitter {
             myReader.close();
             phrase=phrase.substring(0, phrase.length()-1);
             XMLParser bmlparser = XML.createParser();
-            MessageSender msg_send = new MessageSender(this.cm);
+            MessageSender msg_send = new MessageSender();
             Logs.debug("INFO: "+phrase);
             phrase=phrase.replaceAll("  ", " ");
             if(phrase.startsWith(" ")){

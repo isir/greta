@@ -43,7 +43,6 @@ public class Broker extends ActiveMQBase{
     }
 
     public Broker(String port) throws Exception{
-        
 //        String connector_config = "tcp://localhost:"+DEFAULT_ACTIVEMQ_PORT;
 //        try{
 //            System.out.println("greta.auxiliary.activemq.Broker()");
@@ -141,6 +140,16 @@ public class Broker extends ActiveMQBase{
             fireDisconnection();
         } catch (Exception ex) {
             Logs.error(this.getClass().getName()+": can not stop connection. "+ex.getMessage());
+        }
+    }
+    private void executeCommand(String command) {
+        try {
+            // single execution
+            p_stdin.write(command);
+            p_stdin.newLine();
+            p_stdin.flush();
+        } catch (IOException e) {
+            System.out.println("greta.auxiliary.activemq.BrokerFrame.executeCommand(): "+e);
         }
     }   
 }

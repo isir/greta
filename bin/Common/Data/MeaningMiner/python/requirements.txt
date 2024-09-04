@@ -1,4 +1,4 @@
 langdetect == 1.0.9
 spacy == 3.7.5
 numba == 0.60.0
-nltk == 3.9
+nltk == 3.8.1

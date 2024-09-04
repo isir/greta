@@ -1,4 +1,4 @@
-/*
+ /*
  * This file is part of the auxiliaries of Greta.
  *
  * Greta is free software: you can redistribute it and/or modify
@@ -44,7 +44,8 @@ import java.util.List;
 import java.util.Map;
 import javax.sound.sampled.AudioFormat;
 
-import furhat.greta.audiosender.cereproc.GretaFurhatAudioSender;
+import greta.furhat.activemq.GretaFurhatSpeechTextSender;
+import greta.furhat.activemq.GretaFurhatAudioSender;
 
 /**
  * This class manages the CereProc implementation of TTS for Greta<br/>
@@ -83,8 +84,10 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     float earliestReactionTimeOffset = 0.1f;
     static byte[] emptyBufferInterruptionFallback;
     
+    
+    private GretaFurhatSpeechTextSender speechtextserver;
     private GretaFurhatAudioSender audioserver;
-
+    
     static{
         // Init constants and make phonemes mappings
         CereProcConstants.init();
@@ -280,7 +283,8 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         clean();
         tmnumber = 0;
         
-        audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.SpeechData");
+        speechtextserver = new GretaFurhatSpeechTextSender("localhost", "61616", "greta.furhat.SpeechText");
+        audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.Audio");
     }
 
     /**
@@ -292,6 +296,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     public void setSpeech(Speech speech) {
         clean();
         this.speech = speech;
+        
     }
 
     // Relative changes in pitch and rate (used in Mathieu'sampleAudio experiment)
@@ -659,8 +664,14 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     audio = new Audio(audioFormatCereProc, rawAudioBuffer);
                     
                     try{
-                        System.out.println("Sending audio buffer over the topic");
+                        System.out.println("Sending speech text over the topic");
                         audioserver.send(rawAudioBuffer, phonemes, speech.getSpeechElements(), audio);
+                        speechtextserver.send(speech.getOriginalXML().toString());
+                        System.out.println("Speech elements: ");
+                        phonemes.forEach(element->System.out.print("("+element.getPhonemeType()+" ; "+element.getDuration()+" ) ;"));
+                        
+                        //speech.getSpeechElements().forEach(element->System.out.print(element.toString()+" ; "));
+                        System.out.println();
                     }
                     catch(Exception e){
                         System.err.println("Error when sending audiobuffer: "+e.getMessage());

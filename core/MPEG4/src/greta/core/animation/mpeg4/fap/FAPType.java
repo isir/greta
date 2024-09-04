@@ -75,7 +75,7 @@ public enum FAPType {
     tongue_roll(Side.BOTH),
     head_pitch(Side.BOTH),
     head_yaw(Side.BOTH),
-    head_roll(Side.BOTH), //50
+    head_roll(Side.BOTH), //50 
     lower_t_midlip_o(Side.BOTH),
     raise_b_midlip_o(Side.BOTH),
     stretch_l_cornerlip_o(Side.LEFT),

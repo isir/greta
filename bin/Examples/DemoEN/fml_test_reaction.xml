@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?> 
+<fml-apml composition="replace" reaction_type="replan" reaction_duration="extra_short"> 
+  <bml> 
+    <speech id="s1" start="0.0" language="english" text="" voice="cereproc"> 
+      <description level="1" type="gretabml"> 
+        <reference>tmp/from-fml-apml.pho</reference> 
+      </description> 
+	  
+      <tm id="tm1"/> 
+        Stop interrupting me! 
+      <tm id="tm2"/>  
+	  
+	</speech> 
+  </bml> 
+  <fml> 
+    <performative id="p1" type="inform" start="s1:tm1" end="s1:tm2" importance="1.0"/> 
+    <emotion id="e1" type="anger" start="s1:tm1" end="s1:tm2+1" intensity="0.5" importance="1.0"/> 
+  </fml> 
+</fml-apml> 

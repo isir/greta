@@ -56,10 +56,6 @@
                 <item module="AttitudeSetter" name=" Attitude Setter"/>
                 </menu>
             </menu>
-          <menu name="Incrementality">
-            <item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
-            <item module="IncRealizerInteraction" name="IncRealizerInteraction"/>
-          </menu>
             <item module="Behavior Realizer" name="Behavior Realizer"/>
             <menu name="Keyframe Performers">
                 <item module="IK Keyframe Performer" name="IK"/>
@@ -157,7 +153,6 @@
                         <item module="ActiveMQ FAP Sender" name="FAP Sender"/>
                         <item module="ActiveMQ Audio Sender" name="Audio Sender"/>
                         <item module="ActiveMQ SSI Sender" name="SSI Sender"/>
-                      
                     </menu>
                     <menu name="Receivers">
                         <item module="ActiveMQ FML Receiver" name="FML Receiver"/>
@@ -173,11 +168,18 @@
                         <item module="ActiveMQ SSI Frame To Signal" name="SSI Frame-to-Signal Translator"/>
                         <item module="ActiveMQ Message Logger" name="Message Logger"/>
                         <item module="ActiveMQ BML Callbacks Receiver" name="BML Callbacks Receiver"/>
-                        <!--<item module="ActiveMQ ASR Receiver" name="ASR Receiver"/>-->
                     </menu>
                     <item module="ActiveMQ Text Editor" name="Text Editor"/>
                     <item module="ActiveMQ Intention Queuing" name="Intention Queuing"/>
                 </menu>
+
+                <menu name="Greta Furhat Interface">
+                	<item module="Greta Furhat Rotation Sender" name="GretaFurhatRotationSender"/>
+                	<item module="Greta Furhat AUs Sender" name="GretaFurhatAUSender"/>
+                    <item module="Greta Furhat AUs Sender GUI" name="GretaFurhatAUSenderGUI"/>
+                    <item module="Greta Furhat Audio Sender" name="GretaFurhatAudioSender"/>
+        	    </menu>
+
                 <menu name="Thrift">
                     <menu name="Senders">
                         <item module="Thrift FAP Sender" name="FAP Sender"/>
@@ -209,15 +211,8 @@
                     <item module="FlipperLauncher" name="FlipperLauncher"/>
                     <item module="FlipperDemo" name="FlipperDemo"/>
                 </menu>
-              <menu name="LLM">
                 <item module="ChatGPT" name="ChatGPT"/>
-                <item module="Mistral" name="Mistral"/>
-                <item module="MistralIncremental" name="Mistral Incremental"/>
-                <item module="MI Counselor" name="MI Counselor"/>
-                </menu>
-              <menu name="DeepASR">
-                <item module="DeepGram" name="DeepGram"/>
-            </menu>
+            <item module="Mistral" name="Mistral"/>
             </menu>
         </menu>
     
@@ -272,17 +267,6 @@
             </frame>
             <parameter default="false" get_method="isBlack" get_on="frame" name="blackBackground" set_method="setBlack" set_on="frame" type="boolean"/>
         </module>
-      <!-- Incrementality modules -->
-      <module name="Incremental Realizer V2" style="BehaviorRealizer">
-        <object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
-      </module>
-      <module name="IncRealizerInteraction" style="BehaviorRealizer">
-        <object class="greta.auxiliary.incrementality.IncRealizerInteraction" lib_id="greta_incrementality"/>
-        <frame class="greta.auxiliary.incrementality.IncrRealizerInteractionGUI_" lib_id="greta_incrementality" type="frame">
-          <link method="setLoader" on="frame"/>
-        </frame>
-      </module>
-      <!-- Incrementality modules -->
         <module name="FML File Reader" style="Intentions">
             <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
@@ -488,9 +472,9 @@
             <object class="greta.core.utilx.gui.NVBG_MM_Controller" lib_id="greta_utilx"/>
         <frame type="object"/>
         </module>
-        <module name="Rest_Pose_Setter" style="Signals">
+		<module name="Rest_Pose_Setter" style="Signals">
             <object class="greta.core.signals.Rest_Pose_Setter" lib_id="greta_signals"/>
-            <frame type="object"/>
+        <frame type="object"/>
         </module>
 		<module name="ObjectNodeController" style="DEFAULT">
             <!-- restrict="1"-->
@@ -545,18 +529,6 @@
             <parameter default="greta.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
         </module>
-        <!--
-        <module name="ActiveMQ ASR Receiver">
-            <object class="greta.auxiliary.asr.ASRMain" lib_id="greta_activemq"/>
-            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
-                <link method="setWhitboard" on="frame"/>
-            </frame>
-            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
-            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
-            <parameter default="greta.ASR" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
-            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
-        </module>
-        -->
         <module name="ActiveMQ Meaning Miner FML Receiver">
             <object class="greta.auxiliary.MeaningMiner.FMLReceiver_MeaningMiner" lib_id="greta_meaning_miner"/>
             <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
@@ -1110,11 +1082,6 @@
         <module name="Generic Environment Manager" style="DEFAULT">
             <object class="greta.auxiliary.environmentmanager.core.mvc.EnvironmentManagerController" lib_id="greta_environment_manager_generic"/>
             <frame type="object"/>
-            <!--
-            <frame class="greta.auxiliary.environmentmanager.core.mvc.EnvironmentManagerFrame" lib_id="greta_environment_manager_generic" type="frame">
-                <link method="setCore" on="frame"/>
-            </frame>
-            -->
         </module>
         <module name="ActiveMQ Primary Environment Server" style="DEFAULT">
             <object class="greta.auxiliary.environmentmanager.impl.activemq.PrimaryEnvironmentServer" lib_id="greta_environment_manager_activemq"/>
@@ -1167,21 +1134,38 @@
             <frame class="greta.auxiliary.chatgpt.ChatGPTFrame" lib_id="greta_ChatGPT" type="frame"/>
         </module>
        <module name="Mistral" style="Intentions">
-            <object class="greta.auxiliary.llm.MistralFrame" lib_id="greta_llm"/>
+            <object class="greta.auxiliary.mistral.MistralFrame" lib_id="greta_mistral"/>
 			<frame type="object"/>
-       </module>
-      <module name="MistralIncremental" style="Intentions">
-        <object class="greta.auxiliary.llm.MistralFrameIncremental" lib_id="greta_llm"/>
-        <frame type="object"/>
-      </module>
-      <module name="MI Counselor" style="Intentions">
-        <object class="greta.auxiliary.llm.MICounselor" lib_id="greta_llm"/>
-        <frame type="object"/>
-      </module>
-         <module name="DeepGram" >
-           <object class="greta.auxiliary.deepasr.DeepGramFrame" lib_id="greta_deepasr"/>
-           <frame type="object"/>
         </module>
+
+        <module name="Greta Furhat AUs Sender" style="DEFAULT">
+		    <object class="greta.furhat.activemq.GretaFurhatAUSender" lib_id="libGretaFurhatInterface"/>
+		    <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Furhat AUs Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+	    </module>
+
+        <module name="Greta Furhat AUs Sender GUI" style="DEFAULT">
+		    <object class="greta.furhat.activemq.GretaFurhatAUSenderGUI" lib_id="libGretaFurhatInterface"/>
+            <frame type="object"/>
+        </module>
+
+        <module name="Greta Furhat Rotation Sender" style="DEFAULT">
+		    <object class="greta.furhat.activemq.GretaFurhatRotationSender" lib_id="libGretaFurhatInterface"/>
+		    <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Furhat Rotation Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+	    </module>
+
+	    <module name="Greta Furhat Audio Sender" style="DEFAULT">
+            <object class="greta.furhat.activemq.GretaFurhatAudioSender" lib_id="libGretaFurhatInterface"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Furhat Audio Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+	    </module>
             
     </modules>
     <!-- list of libraries and their dependencies -->
@@ -1599,14 +1583,7 @@
 		<lib id="ext_bfograph" path="./Common/Lib/External/sequencemining/bfograph.jar"/>
         <lib id="ext_clodhopper_core" path="./Common/Lib/External/sequencemining/clodhopper-core-1.0.0.jar"/>
         <lib id="ext_spmf" path="./Common/Lib/External/sequencemining/spmf.jar"/>
-      <lib id="greta_incrementality" path="./Common/Lib/Internal/Incrementality.jar">
-        <depends lib_id="greta_util"/>
-        <depends lib_id="greta_signals"/>
-        <depends lib_id="greta_intentions"/>
-        <depends lib_id="greta_behavior_realizer"/>
-        <depends lib_id="greta_feedbacks"/>
-        <depends lib_id="greta_mpeg4"/>
-      </lib>
+
 	<!-- jackson library version 2.15 -->
 
 	<lib id="ext_jackson-annotations-2.15" path="./Common/Lib/External/jackson/jackson-annotations-2.15.2.jar"/>
@@ -1632,7 +1609,7 @@
             <depends lib_id="greta_meaning_miner"/>
             <depends lib_id="ext_javax.jms"/>
         </lib>
-        <lib id="greta_llm" path="./Common/Lib/Internal/LLM.jar">
+        <lib id="greta_mistral" path="./Common/Lib/Internal/Mistral.jar">
             <depends lib_id="greta_osc"/>
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_intentions"/>
@@ -1640,15 +1617,6 @@
             <depends lib_id="greta_meaning_miner"/>
             <depends lib_id="ext_javax.jms"/>
         </lib>
-      <lib id="greta_deepasr" path="./Common/Lib/Internal/DeepASR.jar">
-        <depends lib_id="greta_osc"/>
-        <depends lib_id="greta_util"/>
-        <depends lib_id="greta_intentions"/>
-        <depends lib_id="greta_signals"/>
-        <depends lib_id="greta_meaning_miner"/>
-        <depends lib_id="greta_activemq"/>
-        <depends lib_id="ext_javax.jms"/>
-      </lib>
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>
@@ -1660,15 +1628,6 @@
             <disconnect from="input" method="unsetCharacter" to="output"/>
         </connector> -->
         <!-- Phil end -->
-
-      <connector id="ASRToLLM">
-        <input class="greta.auxiliary.deepasr.DeepASRFrame"  lib_id="greta_deepasr"/>
-        <output class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
-        <connect from="input" method="addLLMFrame" to="output"/>
-        <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
-        <disconnect from="input" method="removeLLMFrame" to="output"/>
-        <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
-      </connector>
         
         <connector id="ObjectNodeControllerGaze_SIgnalEmitterToSignalPerformer">
          <input class="greta.core.utilx.gui.ObjectNodeController" lib_id="greta_utilx"/>
@@ -1782,12 +1741,20 @@
             <connect from="input" method="addLogOutput" to="output"/>
             <disconnect from="input" method="removeLogOutput" to="output"/>
         </connector>
-        <connector id="setTTS" unique="true">
+        <connector id="setTTS" unique="false">
             <input class="greta.core.utilx.gui.TTSController" lib_id="greta_utilx"/>
             <output class="greta.core.util.speech.TTS" lib_id="greta_util"/>
             <connect from="input" method="setTTS" to="output"/>
             <disconnect from="input" method="setTTS" to="null"/>
         </connector>
+
+        <!--<connector id="setTTSSpeech" unique="true">
+            <output class="greta.core.util.speech.TTS" lib_id="greta_util"/>
+            <input class="greta.furhat.activemq.GretaFurhatAUSender" lib_id="libGretaFurhatInterface"/>
+            <connect from="input" method="setSpeech" to="output"/>
+            <disconnect from="input" method="setTTS" to="null"/>
+        </connector> -->
+
         <connector id="setLaughSynthetizer" unique="true">
             <input class="greta.core.utilx.gui.LaughSynthetizerController" lib_id="greta_utilx"/>
             <output class="greta.core.util.laugh.LaughSynthetizer" lib_id="greta_util"/>
@@ -1982,12 +1949,6 @@
             <connect from="input" method="addAttitudePerformer" to="output"/>
             <disconnect from="input" method="removeAttitudePerformer" to="output"/>
         </connector>
-      <connector id="connectIncInteractionToRealizer">
-        <input class="greta.auxiliary.incrementality.IncrementalityInteractionEmitter" lib_id="greta_incrementality"/>
-        <output class="greta.auxiliary.incrementality.IncrementalityInteractionPerformer" lib_id="greta_incrementality"/>
-        <connect from="input" method="addIncInteractionPerformer" to="output"/>
-        <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
-      </connector>
     </connectors>
     <!-- list of styles -->
     <styles>

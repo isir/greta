@@ -1,4 +1,4 @@
-/*
+ /*
  * This file is part of the auxiliaries of Greta.
  *
  * Greta is free software: you can redistribute it and/or modify

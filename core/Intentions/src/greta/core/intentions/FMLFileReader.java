@@ -273,27 +273,16 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         
        
         //send to all SignalPerformer added
-        
-        //Option1: send intentions and signals separately
-        //You need to add connector from FMLFileReader to BehaviorRealizer
-//        for (IntentionPerformer performer : performers) {
-//            performer.performIntentions(intentions, id, mode);
-//        }
-//        for (SignalPerformer performer : signal_performers) {
-//            performer.performSignals(signals, id, mode);
-//        }
-
-        //Option2: send intentions and signals together
-        //You don't need to add connector from FMLFileReader to BehaviorRealizer
         for (IntentionPerformer performer : performers) {
-            performer.performIntentions(intentions, id, mode, signals);
+            performer.performIntentions(intentions, id, mode);
         }
-
+        for (SignalPerformer performer : signal_performers) {
+            performer.performSignals(signals, id, mode);
+        }
         return id;
     }
     
     public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
-        
         String construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n" +
                             "<fml-apml>\n<bml>"+
                             "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
@@ -306,10 +295,7 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
             construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
                         i++;
         }
-
-        construction=construction+"\n<tm id=\"tm"+i+"\"/>";
-        construction=construction+"\n<boundary id=\"b1\" type=\"LL\" start=\"s1:tm1\" end=\"s1:tm"+i+"\"/>";
-            
+        i=i-1;
         construction=construction+"\n</speech>\n</bml>\n<fml>\n";
         construction=construction+ "</fml>\n</fml-apml>";
         DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
@@ -322,9 +308,7 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         StreamResult result = new StreamResult(writer);
         transformer.setOutputProperty(OutputKeys.INDENT, "yes");
         transformer.transform(source, result);
-        
         return System.getProperty("user.dir")+"\\fml_text_brut.xml";
-        
     }
     
     

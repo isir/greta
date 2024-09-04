@@ -1,0 +1,3 @@
+anxiety, sadness, envy, anger, joyStrong, despair, hate, 
+disgust, worried, disappointement, neutral, pride, tension, 
+relief, embarrasment, surprise, bored, 

@@ -18,7 +18,6 @@
 package greta.core.intentions;
 
 import greta.core.util.IniManager;
-import greta.core.signals.Signal;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import java.util.List;
@@ -73,8 +72,4 @@ public class FMLFileWriter implements IntentionPerformer {
     public void performIntentions(List<Intention> intentions, ID requestId, Mode mode) {
         FMLTranslator.IntentionsToFML(intentions, mode).save(fmlfolder + "FML-" + requestId + ".xml");
     }
-    
-    @Override
-    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals) {
-    }    
 }

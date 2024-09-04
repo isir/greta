@@ -285,10 +285,11 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         
         //Get rid of the xml tags for text processing
         String tagFreeInput = inputXML.toString().replaceAll("<[^>]+>", "");
+        tagFreeInput = tagFreeInput.replaceAll("(<!--)*(-->)", "");
         List<XMLTree> imageSchemasGenerated = new ArrayList<>();
 
         int countTimeMarkers = 0;
-        int countSentenceMarkers = 1;
+        int countSentenceMarkers = 0;
         int countIdeationalUnit = 0;
         int countImageSchema = 0;
         
@@ -704,7 +705,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                             if (previousImageSchema.getAttribute("type") == "") {
                                                 fmlRoot.removeChild(previousImageSchema);
                                             } else {
-                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
+                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index) + "-0.2");
                                                 imageSchemasGenerated.add(previousImageSchema);
                                             }
                                             XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
@@ -726,7 +727,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                             if (previousImageSchema.getAttribute("type") == "") {
                                                 fmlRoot.removeChild(previousImageSchema);
                                             } else {
-                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
+                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index) + "-0.2");
                                                 imageSchemasGenerated.add(previousImageSchema);
                                             }
                                             XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
@@ -745,7 +746,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                         if (previousImageSchema.getAttribute("type") == "") {
                                             fmlRoot.removeChild(previousImageSchema);
                                         } else {
-                                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
+                                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index) + "-0.2");
                                             imageSchemasGenerated.add(previousImageSchema);
                                         }
                                         XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
@@ -762,7 +763,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                             if (previousImageSchema.getAttribute("type") == "") {
                                 fmlRoot.removeChild(previousImageSchema);
                             } else {
-                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
+                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index) + "-0.2");
                                 imageSchemasGenerated.add(previousImageSchema);
                             }
 

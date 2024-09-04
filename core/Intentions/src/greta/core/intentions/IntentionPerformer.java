@@ -17,6 +17,7 @@
  */
 package greta.core.intentions;
 
+import greta.core.signals.Signal;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import java.util.List;
@@ -43,4 +44,5 @@ public interface IntentionPerformer {
      * append
      */
     public void performIntentions(List<Intention> intentions, ID requestId, Mode mode);//TODO use of mode in intention performers
+    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals);//TODO use of mode in intention performers
 }

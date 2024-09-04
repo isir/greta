@@ -591,41 +591,47 @@ public class IdeationalUnit extends Unit {
 
         // Small retraction : the position of the first pose of the stroke of the repeated gesture will be equal to the mean of the positions of the previous gesture
         if (currentGesture.getReference().equals(previousGesture.getReference())) {
+            
+            try{
 
-            GesturePose currentGestureFirstPose = currentGesture.getPhases().get(0);
-            GesturePose currentGestureSecondPose = currentGesture.getPhases().get(1);
+                GesturePose currentGestureFirstPose = currentGesture.getPhases().get(0);
+                GesturePose currentGestureSecondPose = currentGesture.getPhases().get(1);
 
-            if ((currentGestureFirstPose != null) && (currentGestureSecondPose != null)) {
+                if ((currentGestureFirstPose != null) && (currentGestureSecondPose != null)) {
 
-                Hand currentGestureFirstPoseLeftHand = currentGestureFirstPose.getLeftHand();
-                Hand currentGestureSecondPoseLeftHand = currentGestureSecondPose.getLeftHand();
+                    Hand currentGestureFirstPoseLeftHand = currentGestureFirstPose.getLeftHand();
+                    Hand currentGestureSecondPoseLeftHand = currentGestureSecondPose.getLeftHand();
 
-                if ((currentGestureFirstPoseLeftHand != null) && (currentGestureSecondPoseLeftHand != null)) {
+                    if ((currentGestureFirstPoseLeftHand != null) && (currentGestureSecondPoseLeftHand != null)) {
 
-                    Position currentGestureFirstPoseLeftHandPosition = currentGestureFirstPoseLeftHand.getPosition();
-                    Position currentGestureSecondPoseLeftHandPosition = currentGestureSecondPoseLeftHand.getPosition();
+                        Position currentGestureFirstPoseLeftHandPosition = currentGestureFirstPoseLeftHand.getPosition();
+                        Position currentGestureSecondPoseLeftHandPosition = currentGestureSecondPoseLeftHand.getPosition();
 
-                    if ((currentGestureFirstPoseLeftHandPosition != null) && (currentGestureSecondPoseLeftHandPosition != null)) {
-                        currentGestureFirstPoseLeftHandPosition.setX((currentGestureFirstPoseLeftHandPosition.getX() + currentGestureSecondPoseLeftHandPosition.getX()) / 2);
-                        currentGestureFirstPoseLeftHandPosition.setY((currentGestureFirstPoseLeftHandPosition.getY() + currentGestureSecondPoseLeftHandPosition.getY()) / 2);
-                        currentGestureFirstPoseLeftHandPosition.setZ((currentGestureFirstPoseLeftHandPosition.getZ() + currentGestureSecondPoseLeftHandPosition.getZ()) / 2);
+                        if ((currentGestureFirstPoseLeftHandPosition != null) && (currentGestureSecondPoseLeftHandPosition != null)) {
+                            currentGestureFirstPoseLeftHandPosition.setX((currentGestureFirstPoseLeftHandPosition.getX() + currentGestureSecondPoseLeftHandPosition.getX()) / 2);
+                            currentGestureFirstPoseLeftHandPosition.setY((currentGestureFirstPoseLeftHandPosition.getY() + currentGestureSecondPoseLeftHandPosition.getY()) / 2);
+                            currentGestureFirstPoseLeftHandPosition.setZ((currentGestureFirstPoseLeftHandPosition.getZ() + currentGestureSecondPoseLeftHandPosition.getZ()) / 2);
+                        }
                     }
-                }
 
-                Hand currentGestureFirstPoseRightHand = currentGestureFirstPose.getRightHand();
-                Hand currentGestureSecondPoseRightHand = currentGestureSecondPose.getRightHand();
+                    Hand currentGestureFirstPoseRightHand = currentGestureFirstPose.getRightHand();
+                    Hand currentGestureSecondPoseRightHand = currentGestureSecondPose.getRightHand();
 
-                if ((currentGestureFirstPoseRightHand != null) && (currentGestureSecondPoseRightHand != null)) {
+                    if ((currentGestureFirstPoseRightHand != null) && (currentGestureSecondPoseRightHand != null)) {
 
-                    Position currentGestureFirstPoseRightHandPosition = currentGestureFirstPoseRightHand.getPosition();
-                    Position currentGestureSecondPoseRightHandPosition = currentGestureSecondPoseRightHand.getPosition();
+                        Position currentGestureFirstPoseRightHandPosition = currentGestureFirstPoseRightHand.getPosition();
+                        Position currentGestureSecondPoseRightHandPosition = currentGestureSecondPoseRightHand.getPosition();
 
-                    if ((currentGestureFirstPoseRightHandPosition != null) && (currentGestureSecondPoseRightHandPosition != null)) {
-                        currentGestureFirstPoseRightHandPosition.setX((currentGestureFirstPoseRightHandPosition.getX() + currentGestureSecondPoseRightHandPosition.getX()) / 2);
-                        currentGestureFirstPoseRightHandPosition.setY((currentGestureFirstPoseRightHandPosition.getY() + currentGestureSecondPoseRightHandPosition.getY()) / 2);
-                        currentGestureFirstPoseRightHandPosition.setZ((currentGestureFirstPoseRightHandPosition.getZ() + currentGestureSecondPoseRightHandPosition.getZ()) / 2);
+                        if ((currentGestureFirstPoseRightHandPosition != null) && (currentGestureSecondPoseRightHandPosition != null)) {
+                            currentGestureFirstPoseRightHandPosition.setX((currentGestureFirstPoseRightHandPosition.getX() + currentGestureSecondPoseRightHandPosition.getX()) / 2);
+                            currentGestureFirstPoseRightHandPosition.setY((currentGestureFirstPoseRightHandPosition.getY() + currentGestureSecondPoseRightHandPosition.getY()) / 2);
+                            currentGestureFirstPoseRightHandPosition.setZ((currentGestureFirstPoseRightHandPosition.getZ() + currentGestureSecondPoseRightHandPosition.getZ()) / 2);
+                        }
                     }
-                }
+                }                
+                
+            }catch(Exception e){
+                System.out.println("Error (greta.core.ideationalunits.IdeationalUnit.retractALittleIfRepeatedGestures())" + e);
             }
         }
     }

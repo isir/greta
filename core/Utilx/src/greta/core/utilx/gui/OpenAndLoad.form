@@ -7,12 +7,6 @@
         <AuxValue name="JavaCodeGenerator_CreateCodePost" type="java.lang.String" value="jFileChooser1.setCurrentDirectory(new File(&quot;./&quot;));"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
-    </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
-    </Component>
-    <Component class="javax.swing.ButtonGroup" name="buttonGroup3">
-    </Component>
   </NonVisualComponents>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -33,73 +27,9 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jPanel1" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="77" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" attributes="0">
-                                  <Component id="step0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="step7" min="-2" max="-2" attributes="0"/>
-                                  <Component id="repeat" alignment="1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="step4_2" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="step1" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="step8" alignment="1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="step5_1" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="step2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="step5_2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="reset" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace max="32767" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Component id="step3" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Component id="step4_1" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="step6_1" min="-2" max="-2" attributes="0"/>
-                                          <Component id="bien" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="step6_2" min="-2" max="-2" attributes="0"/>
-                                          <Component id="name" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                  </Group>
-                              </Group>
-                              <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" attributes="0">
-                              <Component id="daccord" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                  </Group>
-              </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="jPanel1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -109,36 +39,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="step1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="step2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="step3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="step4_1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="step0" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="49" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="step4_2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="step5_1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="step5_2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="step6_1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="step6_2" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="step7" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="step8" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="reset" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="bien" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="name" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="repeat" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="daccord" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace pref="46" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -151,17 +52,12 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="fileNameTextField" max="32767" attributes="0"/>
+                  <Component id="fileNameTextField" pref="309" max="32767" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="openButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="sendButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-              </Group>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="comboxLabel" min="-2" pref="142" max="-2" attributes="0"/>
-                  <EmptySpace min="127" pref="431" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -174,9 +70,7 @@
                       <Component id="sendButton" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="openButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
-                  <Component id="comboxLabel" pref="24" max="32767" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace pref="40" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -203,148 +97,7 @@
             <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new greta.core.utilx.gui.ToolBox.LocalizedJButton(&quot;GUI.open&quot;)"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JLabel" name="comboxLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ExperimentFML"/>
-          </Properties>
-        </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="step1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step2"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step2ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step3">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step3"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step3ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step4_1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step4_1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step4_1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step4_2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step4_2"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step4_2ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step5_1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step5_1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step5_1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step5_2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step5_2"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step5_2ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step6_1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step6_1"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step6_1ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step6_2">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step6_2"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step6_2ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step0">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step0"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step0ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step8">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step8"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step8ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="step7">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="step7"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="step7ActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="reset">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="reset"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="bien">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="bien"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bienActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="name">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="name"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="nameActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="repeat">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="repeat"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="repeatActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="daccord">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="daccord"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="daccordActionPerformed"/>
-      </Events>
-    </Component>
   </SubComponents>
 </Form>

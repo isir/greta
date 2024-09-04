@@ -86,9 +86,10 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
 
     @Override
     public void performKeyframes(List<Keyframe> keyframes, ID requestId, Mode mode) {
-        // System.out.println("Hey from PerformKeyframes in LipModel.java");
+        
         for (Keyframe keyFrame : keyframes) {
             if (keyFrame instanceof PhonemSequence) {
+
                 List<Phoneme> phonemes = ((PhonemSequence) keyFrame).getPhonems();
 
                 if (!phonemes.get(0).isPause()) {
@@ -133,7 +134,8 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
                     Phoneme curPhoneme = phonemes.get(i);
                     
                     double visemeDuration = phonemes.get(i).getDuration();
-                   
+
+                    // System.out.println("greta.core.animation.lipmodel.LipModel.peformKeyframes(): phoneme - " + curPhoneme + " duration - " + visemeDuration);
 
                     Phoneme prePhoneme = findPrePhonemeAndSucPhoneme.getPrePhoneme(i);
                     //==== prePhoneme is the preceding vowel or pause or null (i=0)
@@ -363,16 +365,19 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
             
 
             case append: {
+                System.out.println("[LipModel] updateFrames() : mode append");
                 appendFrames(fapFrames, requestId, mode);
                 break;
             }
 
             case blend: {
+                System.out.println("[LipModel] updateFrames() : mode blend");
                 blendFrames(fapFrames, requestId, mode);
                 break;
             }
 
             case replace: {
+                System.out.println("[LipModel] updateFrames() : mode replace");
                 replaceFrames(fapFrames, requestId, mode);
                 break;
             }

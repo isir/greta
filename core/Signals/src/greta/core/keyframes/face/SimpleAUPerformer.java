@@ -65,8 +65,6 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements Cancelable
     public SimpleAUPerformer (CharacterManager cm){
         characterManager = cm;
         auLibrary = new AULibrary(cm);
-        
-        
     }
 
     @Override
@@ -78,7 +76,6 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements Cancelable
     public void performAUAPFrames (List<AUAPFrame> auapsAnimation, ID requestId) {
         ArrayList<FAPFrame> fapFrames = new ArrayList<>(auapsAnimation.size());
         for (AUAPFrame auFrame : auapsAnimation) {
-            //System.out.println("SimpleAUPerformer: "+auFrame.APVector.toString());
             fapFrames.add(toFAPFrame(auFrame));
         }
         sendFAPFrames(requestId, fapFrames);
@@ -98,9 +95,6 @@ public class SimpleAUPerformer extends FAPFrameEmitterImpl implements Cancelable
     public FAPFrame toFAPFrame(AUAPFrame auFrame) {
         FAPFrame min = new FAPFrame(auFrame.getFrameNumber());
         FAPFrame max = new FAPFrame(auFrame.getFrameNumber());
-        
-        
-        
         for (int auNb = 1; auNb <= AUAPFrame.NUM_OF_AUS; auNb++) {
             if (auFrame.useActionUnit(auNb)) {
                 FLExpression expression = auLibrary.findExpression("AU" + auNb);

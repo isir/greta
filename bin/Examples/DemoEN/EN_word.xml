@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1" ?>
 <fml-apml>
+
 	<bml>
+
 		<speech id="s1" start="0.0" language="english" voice="marytts" type="SAPI4" text="">
+
 			<description level="1" type="gretabml">
 				<reference>tmp/from-fml-apml.pho</reference>
 			</description>
+			
 			<tm id="tm1"/>
 				I
 			<tm id="tm2"/>
@@ -20,16 +24,23 @@
 			<tm id="tm7"/>
         		complete
 			<tm id="tm8"/>
-        		your task
+        		your
 			<tm id="tm9"/>
-        		now
+        		task
 			<tm id="tm10"/>
+        		now
+			<tm id="tm11"/>
+			
 			<pitchaccent id="pa2" type="HStar" level="medium" start="s1:tm3" end="s1:tm4" importance="1"/>
-			<boundary type="LL" id="b1" start="s1:tm5" end="s1:tm5+0.5"/>
+			<boundary type="LL" id="b1" start="s1:tm1" end="s1:tm11"/>
+			
 		</speech>
+		
 	</bml>
+
 	<fml>
 	</fml>
+
 </fml-apml>
 
 

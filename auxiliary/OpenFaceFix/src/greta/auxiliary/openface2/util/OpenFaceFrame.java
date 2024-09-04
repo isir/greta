@@ -315,7 +315,7 @@ public class OpenFaceFrame {
                 //LOGGER.warning(String.format("AU[%d] %s is ignored, expected %d AUs maximum",i, key,MAX_AUS));                
                 break;
             }
-            aus[i] = readAUDataCol(key, outputs, auFeaturesMap); // AU**_r are between 0-5.0 if want from 0-1 divie by 5 here 
+            aus[i] = readAUDataCol(key, outputs, auFeaturesMap)/5; // AU**_r are between 0-5.0 if want from 0-1 divie by 5 here 
             
             //Recuperation des features à envoyer sur toutes les données Openface.
             if (AU01.equals(key)){

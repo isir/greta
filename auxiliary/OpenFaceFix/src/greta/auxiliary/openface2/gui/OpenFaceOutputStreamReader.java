@@ -1034,6 +1034,10 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     public void sendAUFrame(AUAPFrame auFrame, ID id) {
         LOGGER.info("sendAUFrame");
         auEmitter.performAUAPFrame(auFrame, id);
+        
+        System.out.println("########################################");
+        System.out.println("Hey from OpenFaceOutputStreamReader.java");
+        System.out.println("AUFrame####: "+auFrame.APVector);
     }
 
     /* ---------------------------------------------------------------------- *

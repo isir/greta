@@ -265,9 +265,9 @@
         <action intensity="0.39" name="AU2"/>
     </expression>
     <expression class="faceexp" instance="embarrassment">
-        <action name="AU18"/>
+		<action name="AU18"/>
         <action intensity="0.6" name="AU39"/>
-    </expression>
+	</expression>
     <expression class="faceexp" instance="embarrassment_signal_6">
         <action intensity="0.8" name="AU12"/>
         <action intensity="0.8" name="AU6"/>
@@ -397,19 +397,7 @@
     <expression class="faceexp" instance="lower_right_mouth_corner">
         <action name="AU15" side="RIGHT"/>
     </expression>
-    <expression class="faceexp" instance="negative_pout">
-        <action name="AU20"/>
-        <action name="AU24"/>
-    </expression>
-    <expression class="faceexp" instance="neutral">
-        <action intensity="0.27" name="AU1"/>
-        <action intensity="0.6" name="AU5"/>
-    </expression>
-    <expression class="faceexp" instance="new_face_express">
-        <action intensity="0.39" name="AU1"/>
-        <action intensity="0.47" name="AU4"/>
-        <action intensity="0.35" name="AU5"/>
-    </expression>
+    <expression class="faceexp" instance="neutral"/>
     <expression class="faceexp" instance="oblique_brows">
         <action name="AU1"/>
         <action name="AU4"/>
@@ -693,7 +681,7 @@
     </expression>
     <expression class="gaze" instance="look_down">
         <action intensity="0.5" name="AU64"/>
-        <action intensity="0.2" name="AU43"/>
+		<action intensity="0.2" name="AU43"/>
     </expression>
     <expression class="gaze" instance="look_down_left">
         <action name="AU64"/>
@@ -723,5 +711,9 @@
     <expression class="performative" instance="warn">
         <action intensity="0.5" name="AU4"/>
         <action intensity="0.5" name="AU55"/>
+    </expression>
+	<expression class="faceexp" instance="negative_pout">
+        <action name="AU20"/>
+		<action name="AU24"/>
     </expression>
 </facelibrary>

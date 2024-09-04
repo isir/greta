@@ -102,8 +102,6 @@ public class GretaFurhatAudioSender extends WhiteBoard{
     public void send(byte[] audioBuffer, List<Phoneme> phonemeList, List<Object> speechElements, Audio audio){
         
         try {
-           
-         System.out.println("Sending audio over topic");
             
         // Parse phonemes and sentence
         Transcription transcription = parsePhonemesAndSentence(phonemeList, speechElements);
@@ -148,7 +146,7 @@ public class GretaFurhatAudioSender extends WhiteBoard{
             
         } catch (Exception ex) {
             //Logs.error("could not send message");
-            System.out.println("greta.furhat.activemq.GretaFurhatAudioSender: could not send message: "+ex.toString());
+            System.out.println("could not send message: "+ex.toString());
         }
     }
     
@@ -268,8 +266,6 @@ public class GretaFurhatAudioSender extends WhiteBoard{
 
     private void startConnectionAttempt() {
         executorService.scheduleWithFixedDelay(this::attemptConnection, 0, 1, TimeUnit.SECONDS);
-        attemptConnection();
-        
     }
 
     private void attemptConnection() {
@@ -278,14 +274,14 @@ public class GretaFurhatAudioSender extends WhiteBoard{
         if (!this.isConnected()){
             
             try{
-                //System.out.println("Attempting to connect audioserver to broker at: "+this.getURL());
+                System.out.println("Attempting to connect audioserver to broker at: "+this.getURL());
                 startConnection();
             } catch(Exception e){
-            System.err.println("greta.furhat.activemq.GretaFurhatAUSender: audio server connection attempt failed: " + e.getMessage());
+            System.err.println("audio server connection attempt failed: " + e.getMessage());
             }
         }
         else{
-            System.out.println("greta.furhat.activemq.GretaFurhatAUSender: audio connected to broker at: "+this.getURL() );
+            System.out.println("audio connected to broker at: "+this.getURL() );
             executorService.shutdown(); // Stop retrying after a successful connection
          }   
     }

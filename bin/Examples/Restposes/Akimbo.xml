@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
-<fml-apml>
-	<fml>
-		<rest id="rp1" type="akimbo" start="0" end="1" importance="1.0"/>
-	</fml>
-</fml-apml>

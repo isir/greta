@@ -64,6 +64,10 @@ public class ExpressiveGestureModifier implements GestureModifier {
         epretr.fld = gesture.getFLD() / 2;
         epretr.pwr = gesture.getPWR() / 2;
         epretr.tmp = gesture.getTMP() / 2;
+        
+        System.out.format("greta.core.behaviorrealizer.keyframegenerator.ExpressiveGestureModifier.generateKeyframesForOneGesture(): %s, start - %.3f, end - %.3f%n", 
+                gesture.getCategory(), gesture.getStart().getValue(), gesture.getEnd().getValue()
+        );
 
         double startTime = gesture.getStart().getValue();
         double lastTime = startTime;

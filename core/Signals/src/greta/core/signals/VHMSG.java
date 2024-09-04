@@ -28,6 +28,7 @@ import java.util.AbstractMap.*;
 import java.util.concurrent.locks.*;
 
 import java.net.*;
+import java.nio.charset.StandardCharsets;
 
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
@@ -97,8 +98,14 @@ public class VHMSG implements javax.jms.MessageListener
     public static final String VHMSG_SERVER = "VHMSG_SERVER";
     public static final String VHMSG_PORT = "VHMSG_PORT";
     public static final String MESSAGE_PREFIX = "MESSAGE_PREFIX";
-    public static final String STRING_ENCODING = "UTF8";
+//    public static final String STRING_ENCODING = "UTF8";
+    // public static final String STRING_ENCODING = "Unicode";
+//    public static final String STRING_ENCODING = "US-ASCII";
+    // public static final String STRING_ENCODING = "UTF16";
+    
     public static final String MULTIKEY = "multikey";
+    
+    public String STRING_ENCODING;
 
 
     /**
@@ -111,10 +118,11 @@ public class VHMSG implements javax.jms.MessageListener
      * <p>
      * VHMSG_SCOPE - A unique id used to distinguish messages sent by different modules using the same server.  For example, if two users
      * are using the same server, they would set different scopes so that they wouldn't receives each other's messages.
+     * @param encoding
      */
-    public VHMSG()
+    public VHMSG(String encoding)
     {
-        this( GetScopeFromEnvironment() );
+        this( GetScopeFromEnvironment(), encoding);
     }
 
 
@@ -123,9 +131,9 @@ public class VHMSG implements javax.jms.MessageListener
      *
      * @param scope  The scope to use
      */
-    public VHMSG( String scope )
+    public VHMSG( String scope, String encoding)
     {
-        this( GetServerFromEnvironment(), GetPortFromEnvironment(), scope );
+        this( GetServerFromEnvironment(), GetPortFromEnvironment(), scope, encoding);
     }
 
 
@@ -135,9 +143,9 @@ public class VHMSG implements javax.jms.MessageListener
      * @param server The server to use.  This can be an ip address or domain name
      * @param scope The scope to use.  See {@link VHMsg}
      */
-    public VHMSG( String server, String scope )
+    public VHMSG( String server, String scope, String encoding)
     {
-        this( server, GetPortFromEnvironment(), scope );
+        this( server, GetPortFromEnvironment(), scope, encoding);
     }
 
 
@@ -148,11 +156,12 @@ public class VHMSG implements javax.jms.MessageListener
      * @param port The numeric port to use.
      * @param scope The scope to use.  See {@link VHMsg}
      */
-    public VHMSG( String server, String port, String scope )
+    public VHMSG( String server, String port, String scope, String encoding)
     {
         m_hostname = server;
         m_port = port;
         m_scope = scope;
+        STRING_ENCODING = encoding;
     }
 
 

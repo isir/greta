@@ -7,23 +7,23 @@
     
             <description level="1" type="gretabml"><reference>tmp/from-fml-apml.pho</reference></description>
         
-            <tm id="tm0"/>That 
-            <tm id="tm1"/>right 
-            <tm id="tm2"/>now 
-            <tm id="tm3"/>is 
-            <tm id="tm4"/>the 
-            <tm id="tm5"/>open 
-            <tm id="tm6"/>sewer 
-            <tm id="tm7"/>for 
-            <tm id="tm8"/>my 
-            <tm id="tm9"/>industrial 
-            <tm id="tm10"/>civilization 
-            <tm id="tm11"/>as 
-            <tm id="tm12"/>it's 
-            <tm id="tm13"/>currently 
-            <tm id="tm14"/>organized 
-            <tm id="tm15"/>.
-            <tm id="tm16"/>
+            <tm id="tm1"/>Hello
+            <tm id="tm2"/>you 
+            <tm id="tm3"/>right 
+            <tm id="tm4"/>it
+            <tm id="tm5"/>is 
+            <tm id="tm6"/>open 
+            <tm id="tm7"/>sewer 
+            <tm id="tm8"/>for 
+            <tm id="tm9"/>my 
+            <tm id="tm10"/>industrial 
+            <tm id="tm11"/>civilization 
+            <tm id="tm12"/>as 
+            <tm id="tm13"/>it's 
+            <tm id="tm14"/>currently 
+            <tm id="tm15"/>organized 
+            <tm id="tm16"/>.
+            <tm id="tm17"/>
         
             <pitchaccent id='xpa0' type='Hstar' start='s1:tm0' end='s1:tm1' level='strong' importance='1'/> 
             <pitchaccent id='xpa1' type='Hstar' start='s1:tm1' end='s1:tm2' level='strong' importance='1'/> 
@@ -37,7 +37,9 @@
     
         </speech>
     
-        <gazeShift id="gaze1" start="1.0" end="10.0" offsetDirection="DOWN" offsetAngle="30" type="GAZE" modality="TORSO"/>
+        <!--<gaze id="gaze1" start="s1:tm1" end="s1:tm3" influence="EYES" offsetAngle="30" offsetDirection="DOWN" />-->
+        <gaze id="gaze1" start="s1:tm1" end="s1:tm3" influence="EYES" offsetAngle="5" offsetDirection="UP" />
+
     
     </bml>
     

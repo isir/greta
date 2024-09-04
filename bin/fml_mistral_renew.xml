@@ -5,21 +5,21 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>
-<tm id="tm2"/>Pouvez-vous
-<tm id="tm3"/>me
-<tm id="tm4"/>dire
-<tm id="tm5"/>ce
-<tm id="tm6"/>qui
-<tm id="tm7"/>vous
-<tm id="tm8"/>pousse
-<tm id="tm9"/>à
-<tm id="tm10"/>vouloir
-<tm id="tm11"/>boire
-<tm id="tm12"/>en
-<tm id="tm13"/>ce
-<tm id="tm14"/>moment
-<tm id="tm15"/>?
+<tm id="tm1"/>Alright,
+<tm id="tm2"/>here's
+<tm id="tm3"/>one:
+<tm id="tm4"/>What
+<tm id="tm5"/>do
+<tm id="tm6"/>you
+<tm id="tm7"/>get
+<tm id="tm8"/>when
+<tm id="tm9"/>you
+<tm id="tm10"/>cross
+<tm id="tm11"/>a
+<tm id="tm12"/>snowman
+<tm id="tm13"/>and
+<tm id="tm14"/>a
+<tm id="tm15"/>vampire?
 <tm id="tm16"/>
 <boundary end="s1:tm16" id="b1" start="s1:tm1" type="LL"/>
 </speech>

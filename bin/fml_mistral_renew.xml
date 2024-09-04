@@ -6,22 +6,21 @@
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
 <tm id="tm1"/>
-<tm id="tm2"/>Pouvez-vous
-<tm id="tm3"/>me
-<tm id="tm4"/>dire
-<tm id="tm5"/>ce
-<tm id="tm6"/>qui
-<tm id="tm7"/>vous
-<tm id="tm8"/>pousse
-<tm id="tm9"/>à
-<tm id="tm10"/>vouloir
-<tm id="tm11"/>boire
-<tm id="tm12"/>en
-<tm id="tm13"/>ce
-<tm id="tm14"/>moment
-<tm id="tm15"/>?
-<tm id="tm16"/>
-<boundary end="s1:tm16" id="b1" start="s1:tm1" type="LL"/>
+<tm id="tm2"/>Do
+<tm id="tm3"/>you
+<tm id="tm4"/>ever
+<tm id="tm5"/>feel
+<tm id="tm6"/>like
+<tm id="tm7"/>you'd
+<tm id="tm8"/>like
+<tm id="tm9"/>to
+<tm id="tm10"/>move
+<tm id="tm11"/>more
+<tm id="tm12"/>throughout
+<tm id="tm13"/>the
+<tm id="tm14"/>day?
+<tm id="tm15"/>
+<boundary end="s1:tm15" id="b1" start="s1:tm1" type="LL"/>
 </speech>
 </bml>
 <fml>

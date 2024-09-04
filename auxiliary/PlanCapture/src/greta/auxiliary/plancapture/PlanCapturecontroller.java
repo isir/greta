@@ -251,6 +251,11 @@ public class PlanCapturecontroller extends greta.auxiliary.player.ogre.capture.C
     }
 
     @Override
+    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals){
+        
+    };    
+    
+    @Override
     public void performCallback(Callback clbck) {
         if (mustcapture) {
             if ((clbck.type().equalsIgnoreCase("dead") || clbck.type().equalsIgnoreCase("end"))) {

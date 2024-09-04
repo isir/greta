@@ -320,6 +320,11 @@ public class InterruptionManager extends CharacterDependentAdapter implements In
         }
     }
 
+    @Override
+    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals){
+        
+    };    
+
     /* ---------------------------------------------------------------------- */
     /*                    Interruption Reaction Performer                     */
     /* ---------------------------------------------------------------------- */

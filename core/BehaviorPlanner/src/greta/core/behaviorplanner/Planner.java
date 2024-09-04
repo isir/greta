@@ -230,9 +230,19 @@ public class Planner extends CharacterDependentAdapter implements IntentionPerfo
      */
     @Override
     public void performIntentions(List<Intention> intentions, ID requestId, Mode mode) {
-        
+
+        List<Signal> inputSignals = new ArrayList<Signal>();
+        performIntentions(intentions, requestId, mode, inputSignals);
+
+    }
+
+    @Override
+    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals) {
+
         System.out.println("greta.core.behaviorplanner.Planner.performIntentions()");
-        selectedSignals = new ArrayList<Signal>();
+        
+        selectedSignals = inputSignals;
+        
         /**
         GazeSignal gaze = new GazeSignal("1");
         gaze.setStartValue("1");

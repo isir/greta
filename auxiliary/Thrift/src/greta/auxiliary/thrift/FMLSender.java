@@ -22,6 +22,7 @@ import greta.auxiliary.thrift.services.Sender;
 import greta.core.intentions.FMLTranslator;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionPerformer;
+import greta.core.signals.Signal;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import greta.core.util.time.Timer;
@@ -55,4 +56,9 @@ public class FMLSender extends Sender implements IntentionPerformer {
         sendFML(FMLTranslator.IntentionsToFML(intentions, mode).toString(), requestId.toString());
     }
 
+    @Override
+    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals){
+        
+    };    
+    
 }

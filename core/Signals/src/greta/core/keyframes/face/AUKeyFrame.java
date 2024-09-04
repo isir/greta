@@ -33,13 +33,15 @@ public class AUKeyFrame implements Keyframe{
     private String id;
     
     private String parentId;
+    
+    private String modality;
+    private String category;
+    private String phase;
 
     public AUKeyFrame(String id, double time, AUAPFrame frame) {
-        this.id = id;
-        //this.time = time;
-        this.onset=0;
-        this.offset=time;
-        this.frame = frame;
+
+        this(id, time, frame, null);
+        
     }
     
     public AUKeyFrame(String id, double time, AUAPFrame frame, String parParentId) {
@@ -49,6 +51,10 @@ public class AUKeyFrame implements Keyframe{
         this.offset=time;
         this.frame = frame;
         this.parentId = parParentId;
+        
+        this.modality = "face";
+        this.category = "face";
+        
     }
 
     @Override
@@ -73,7 +79,7 @@ public class AUKeyFrame implements Keyframe{
 
     @Override
     public String getModality() {
-        return "face";
+        return this.modality;
     }
 
     @Override
@@ -83,12 +89,12 @@ public class AUKeyFrame implements Keyframe{
 
     @Override
     public String getPhaseType() {
-        return "";
+        return this.phase;
     }
 
     @Override
     public String getCategory() {
-        return "";
+        return this.category;
     }
 
     public AUAPFrame getAus(){

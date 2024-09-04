@@ -59,8 +59,8 @@ import java.util.Map;
  */
 public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerformer, IntentionPerformer, SignalEmitter {
 
-     private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
-     List<Signal> signals = new ArrayList<Signal>();
+    private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
+    List<Signal> signals = new ArrayList<Signal>();
      
 
     private class FeedbackThread extends Thread {
@@ -419,6 +419,11 @@ public class Feedbacks implements CallbackPerformer, FeedbackEmitter, SignalPerf
     public void performIntentions(List<Intention> list, ID requestId, Mode mode) {
         performAnimation(list, requestId);
     }
+
+    @Override
+    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals){
+        
+    };
     
         @Override
     public void addSignalPerformer(SignalPerformer sp) {

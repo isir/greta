@@ -52,7 +52,7 @@ public interface TTS {
      * Returns the list of {@code Phonemes} computed by {@code compute()}.
      * @return the list of {@code Phonemes}
      */
-    public List<Phoneme> getPhonemes();
+    public List<Phoneme> getPhonemes(); 
 
     /**
      * Returns the audio computed by {@code compute()}.

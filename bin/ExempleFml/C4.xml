@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>Okay.
+<tm id="tm2"/>I'll
+<tm id="tm3"/>let
+<tm id="tm4"/>you
+<tm id="tm5"/>choose
+<tm id="tm6"/>your
+<tm id="tm7"/>next
+<tm id="tm8"/>vegetable
+<tm id="tm9"/>or
+<tm id="tm10"/>fruit.
+</speech>
+</bml>
+<fml>
+<deictic end="s1:tm9" id="1" importance="1.0" start="s1:tm3" type="me"/>
+<deictic end="s1:tm11" id="2" importance="1.0" start="s1:tm5" type="me"/>
+</fml>
+</fml-apml>

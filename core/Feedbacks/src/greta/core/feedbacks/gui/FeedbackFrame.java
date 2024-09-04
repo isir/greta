@@ -181,8 +181,8 @@ public class FeedbackFrame extends javax.swing.JFrame implements CallbackPerform
     private javax.swing.JCheckBox use_osc;
     // End of variables declaration//GEN-END:variables
 
-    private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
-    List<Signal> signals = new ArrayList<Signal>();
+private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
+List<Signal> signals = new ArrayList<Signal>();
      
 
     private class FeedbackThread extends Thread {
@@ -543,13 +543,8 @@ public class FeedbackFrame extends javax.swing.JFrame implements CallbackPerform
     public void performIntentions(List<Intention> list, ID requestId, Mode mode) {
         performAnimation(list, requestId);
     }
-
-    @Override
-    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals){
-        
-    };
     
-    @Override
+        @Override
     public void addSignalPerformer(SignalPerformer sp) {
         signal_performers.add(sp);
     }

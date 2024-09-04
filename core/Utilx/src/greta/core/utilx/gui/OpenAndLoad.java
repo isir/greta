@@ -39,7 +39,7 @@ import java.util.Locale;
  * @author Andre-Marie Pez
  */
 public class OpenAndLoad extends javax.swing.JFrame {
-
+    
     /** Creates new form OpenAndLoad */
     public OpenAndLoad() {
         initComponents();
@@ -63,10 +63,31 @@ public class OpenAndLoad extends javax.swing.JFrame {
 
         jFileChooser1 = new javax.swing.JFileChooser();
         jFileChooser1.setCurrentDirectory(new File("./"));
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
+        buttonGroup3 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         fileNameTextField = new javax.swing.JTextField();
         sendButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.send");
         openButton = new greta.core.utilx.gui.ToolBox.LocalizedJButton("GUI.open");
+        comboxLabel = new javax.swing.JLabel();
+        step1 = new javax.swing.JButton();
+        step2 = new javax.swing.JButton();
+        step3 = new javax.swing.JButton();
+        step4_1 = new javax.swing.JButton();
+        step4_2 = new javax.swing.JButton();
+        step5_1 = new javax.swing.JButton();
+        step5_2 = new javax.swing.JButton();
+        step6_1 = new javax.swing.JButton();
+        step6_2 = new javax.swing.JButton();
+        step0 = new javax.swing.JButton();
+        step8 = new javax.swing.JButton();
+        step7 = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
+        bien = new javax.swing.JButton();
+        name = new javax.swing.JButton();
+        repeat = new javax.swing.JButton();
+        daccord = new javax.swing.JButton();
 
         fileNameTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -86,18 +107,24 @@ public class OpenAndLoad extends javax.swing.JFrame {
             }
         });
 
+        comboxLabel.setText("ExperimentFML");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(fileNameTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
+                .addComponent(fileNameTextField)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(openButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sendButton)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(comboxLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(127, 431, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -107,16 +134,183 @@ public class OpenAndLoad extends javax.swing.JFrame {
                     .addComponent(fileNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sendButton)
                     .addComponent(openButton))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(36, 36, 36)
+                .addComponent(comboxLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                .addContainerGap())
         );
+
+        step1.setText("step1");
+        step1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step1ActionPerformed(evt);
+            }
+        });
+
+        step2.setText("step2");
+        step2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step2ActionPerformed(evt);
+            }
+        });
+
+        step3.setText("step3");
+        step3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step3ActionPerformed(evt);
+            }
+        });
+
+        step4_1.setText("step4_1");
+        step4_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step4_1ActionPerformed(evt);
+            }
+        });
+
+        step4_2.setText("step4_2");
+        step4_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step4_2ActionPerformed(evt);
+            }
+        });
+
+        step5_1.setText("step5_1");
+        step5_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step5_1ActionPerformed(evt);
+            }
+        });
+
+        step5_2.setText("step5_2");
+        step5_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step5_2ActionPerformed(evt);
+            }
+        });
+
+        step6_1.setText("step6_1");
+        step6_1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step6_1ActionPerformed(evt);
+            }
+        });
+
+        step6_2.setText("step6_2");
+        step6_2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step6_2ActionPerformed(evt);
+            }
+        });
+
+        step0.setText("step0");
+        step0.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step0ActionPerformed(evt);
+            }
+        });
+
+        step8.setText("step8");
+        step8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step8ActionPerformed(evt);
+            }
+        });
+
+        step7.setText("step7");
+        step7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                step7ActionPerformed(evt);
+            }
+        });
+
+        reset.setText("reset");
+        reset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                resetActionPerformed(evt);
+            }
+        });
+
+        bien.setText("bien");
+        bien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bienActionPerformed(evt);
+            }
+        });
+
+        name.setText("name");
+        name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nameActionPerformed(evt);
+            }
+        });
+
+        repeat.setText("repeat");
+        repeat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                repeatActionPerformed(evt);
+            }
+        });
+
+        daccord.setText("daccord");
+        daccord.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                daccordActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(step0)
+                                    .addComponent(step7)
+                                    .addComponent(repeat))
+                                .addGap(32, 32, 32))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(step4_2)
+                                .addGap(18, 18, 18)))
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(step1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(step8, javax.swing.GroupLayout.Alignment.TRAILING))
+                                    .addComponent(step5_1))
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(step2)
+                                    .addComponent(step5_2)
+                                    .addComponent(reset))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(step3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(step4_1))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(step6_1)
+                                            .addComponent(bien))
+                                        .addGap(18, 18, 18)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(step6_2)
+                                            .addComponent(name))))
+                                .addGap(29, 29, 29))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(daccord)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,7 +318,32 @@ public class OpenAndLoad extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(step1)
+                    .addComponent(step2)
+                    .addComponent(step3)
+                    .addComponent(step4_1)
+                    .addComponent(step0))
+                .addGap(49, 49, 49)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(step4_2)
+                    .addComponent(step5_1)
+                    .addComponent(step5_2)
+                    .addComponent(step6_1)
+                    .addComponent(step6_2))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(step7)
+                    .addComponent(step8)
+                    .addComponent(reset)
+                    .addComponent(bien)
+                    .addComponent(name))
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(repeat)
+                    .addComponent(daccord))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         pack();
@@ -147,17 +366,124 @@ public class OpenAndLoad extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_fileNameTextFieldActionPerformed
 
+    private void step3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step3ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step3.xml");
+    }//GEN-LAST:event_step3ActionPerformed
+
+    private void step4_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step4_1ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step4_1.xml");
+    }//GEN-LAST:event_step4_1ActionPerformed
+
+    private void step4_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step4_2ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step4_2.xml");
+    }//GEN-LAST:event_step4_2ActionPerformed
+
+    private void step5_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step5_1ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step5_1.xml");
+    }//GEN-LAST:event_step5_1ActionPerformed
+
+    private void step5_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step5_2ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step5_2.xml");
+    }//GEN-LAST:event_step5_2ActionPerformed
+
+    private void step6_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step6_1ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step6_1.xml");
+    }//GEN-LAST:event_step6_1ActionPerformed
+
+    private void step6_2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step6_2ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step6_2.xml");
+    }//GEN-LAST:event_step6_2ActionPerformed
+
+    private void step0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step0ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step0.xml");
+    }//GEN-LAST:event_step0ActionPerformed
+
+    private void step8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step8ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step8.xml");
+    }//GEN-LAST:event_step8ActionPerformed
+
+    private void step7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step7ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step7.xml");
+    }//GEN-LAST:event_step7ActionPerformed
+
+    private void resetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"reset.xml");
+    }//GEN-LAST:event_resetActionPerformed
+
+    private void bienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bienActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"bien.xml");
+    }//GEN-LAST:event_bienActionPerformed
+
+    private void nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nameActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"name.xml");
+    }//GEN-LAST:event_nameActionPerformed
+
+    private void repeatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_repeatActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"repeat.xml");
+    }//GEN-LAST:event_repeatActionPerformed
+
+    private void step1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step1ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step1.xml");
+    }//GEN-LAST:event_step1ActionPerformed
+
+    private void step2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_step2ActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"step2.xml");
+    }//GEN-LAST:event_step2ActionPerformed
+
+    private void daccordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_daccordActionPerformed
+        // TODO add your handling code here:
+        send(pathToStepFML+"dacc.xml");
+    }//GEN-LAST:event_daccordActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bien;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
+    private javax.swing.ButtonGroup buttonGroup3;
+    private javax.swing.JLabel comboxLabel;
+    private javax.swing.JButton daccord;
     private javax.swing.JTextField fileNameTextField;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton name;
     private javax.swing.JButton openButton;
+    private javax.swing.JButton repeat;
+    private javax.swing.JButton reset;
     private javax.swing.JButton sendButton;
+    private javax.swing.JButton step0;
+    private javax.swing.JButton step1;
+    private javax.swing.JButton step2;
+    private javax.swing.JButton step3;
+    private javax.swing.JButton step4_1;
+    private javax.swing.JButton step4_2;
+    private javax.swing.JButton step5_1;
+    private javax.swing.JButton step5_2;
+    private javax.swing.JButton step6_1;
+    private javax.swing.JButton step6_2;
+    private javax.swing.JButton step7;
+    private javax.swing.JButton step8;
     // End of variables declaration//GEN-END:variables
 
 
     private Method loadMethod;
     private Object loader;
+    String pathToStepFML = "./ExperimentFML/";
 
     protected void send(String fileName) {
         if(fileName==null || fileName.isEmpty()) return ;

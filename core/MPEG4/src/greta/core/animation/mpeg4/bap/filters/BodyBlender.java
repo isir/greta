@@ -432,18 +432,12 @@ public class BodyBlender extends BAPFrameEmitterImpl implements BAPFramePerforme
         @Override
         public void run() {
             while (!end) {
-                
-                synchronized (this) {
-
-                    expulseLatedFrame();
-                    computeAndSend();
-                    try {
-                        sleep(10);
-                    } catch (Throwable t) {
-                    }
-                    
+                expulseLatedFrame();
+                computeAndSend();
+                try {
+                    sleep(10);
+                } catch (Throwable t) {
                 }
-                
             }
         }
     }

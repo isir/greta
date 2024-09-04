@@ -26,7 +26,6 @@ import greta.core.intentions.IntentionEmitter;
 import greta.core.intentions.IntentionPerformer;
 import greta.core.intentions.PseudoIntentionSpeech;
 import greta.core.intentions.WorldIntention;
-import greta.core.signals.Signal;
 import greta.core.util.CharacterManager;
 import greta.core.util.Mode;
 import greta.core.util.enums.CompositionType;
@@ -122,12 +121,6 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
             public void performIntentions(List<Intention> list, ID requestId, Mode mode) {
                 diplayIntentions(list);
             }
-
-            @Override
-            public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals){
-
-            };
-
         });
 
         setFileFilter(new javax.swing.filechooser.FileFilter() {
@@ -169,11 +162,6 @@ public class FMLEditor extends MultiTimeLineEditors<Intention> implements Intent
         }
     }
 
-    @Override
-    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals){
-        
-    };    
-    
     private void diplayIntentions(List<Intention> intentions) {
         synchronized (fakeTTS) {
             if (cm.getTTS() == null) {

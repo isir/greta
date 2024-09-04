@@ -22,7 +22,6 @@ import greta.core.feedbacks.CallbackPerformer;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionEmitter;
 import greta.core.intentions.IntentionPerformer;
-import greta.core.signals.Signal;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import java.util.ArrayList;
@@ -45,12 +44,7 @@ public class IntentionQueue implements IntentionPerformer, IntentionEmitter, Cal
             sendFirst();
         }
     }
-    
-    @Override
-    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals){
-        
-    };
-    
+
     @Override
     public void addIntentionPerformer(IntentionPerformer ip) {
         if(ip != null && ip != this){

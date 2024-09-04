@@ -117,8 +117,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
     private String python_init_env_path = "./Common/Data/MeaningMiner/python/init_env.bat";
     private String python_server_path = "./Common/Data/MeaningMiner/python/activate_server.bat";
     private String python_client_path = "./Common/Data/MeaningMiner/python/meaning_miner_adapter_client.py";
-    // private String lang = "fr";
-    // private String lang = "en";
+    private String lang = "fr";
     
     public ImageSchemaExtractor(CharacterManager cm) {
 
@@ -285,11 +284,10 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
         
         //Get rid of the xml tags for text processing
         String tagFreeInput = inputXML.toString().replaceAll("<[^>]+>", "");
-        tagFreeInput = tagFreeInput.replaceAll("(<!--)*(-->)", "");
         List<XMLTree> imageSchemasGenerated = new ArrayList<>();
 
         int countTimeMarkers = 0;
-        int countSentenceMarkers = 0;
+        int countSentenceMarkers = 1;
         int countIdeationalUnit = 0;
         int countImageSchema = 0;
         
@@ -323,7 +321,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             String[] gesture_ID_array = new String[sentence.size()];
             String[] gesture_lemma_array = new String[sentence.size()];
 
-            if(charactermanager.getLanguage() == "FR"){
+            if(lang == "fr"){
                 String sentenceString = SentenceUtils.listToOriginalTextString(sentence);
                 System.out.println("InputSentence: " + sentenceString);
                 try {
@@ -385,7 +383,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
             for (int i = 0; i < sentence.size(); i++) {
                 
                 String type;
-                if(charactermanager.getLanguage() == "FR"){
+                if(lang == "fr"){
                     
                     type = pos_array[i];
                     
@@ -435,7 +433,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                 String value = new String();
                 POS pos = null;
                                     
-                if(charactermanager.getLanguage() == "FR"){
+                if(lang == "fr"){
                     
                     posTag = pos_array[i];
                     value = token_array[i];
@@ -553,7 +551,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                 //begin wordnet code
                 List<String> stems = new ArrayList<>();
                     
-                if(charactermanager.getLanguage() == "FR"){
+                if(lang == "fr"){
 
                     //We retrieve the stems for the word.
                     if (pos == POS.NOUN || pos == POS.ADJECTIVE || pos == POS.VERB || pos == POS.ADVERB) {
@@ -585,7 +583,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                     //for each stem
                     for (String stem : stems) {
                         
-                        if(charactermanager.getLanguage() == "FR"){
+                        if(lang == "fr"){
                             System.out.println(0);
                             if(!gesture_ID_array[i].equals("_")){
                                 
@@ -635,7 +633,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                     
                     String chunk_tag_i;
                     Integer cl_index;
-                    if(charactermanager.getLanguage() == "FR"){
+                    if(lang == "fr"){
                         
                         chunk_tag_i = chunk_tag_array[i];
                         cl_index = i;
@@ -705,7 +703,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                             if (previousImageSchema.getAttribute("type") == "") {
                                                 fmlRoot.removeChild(previousImageSchema);
                                             } else {
-                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index) + "-0.2");
+                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                                 imageSchemasGenerated.add(previousImageSchema);
                                             }
                                             XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
@@ -727,7 +725,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                             if (previousImageSchema.getAttribute("type") == "") {
                                                 fmlRoot.removeChild(previousImageSchema);
                                             } else {
-                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index) + "-0.2");
+                                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                                 imageSchemasGenerated.add(previousImageSchema);
                                             }
                                             XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
@@ -746,7 +744,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                                         if (previousImageSchema.getAttribute("type") == "") {
                                             fmlRoot.removeChild(previousImageSchema);
                                         } else {
-                                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index) + "-0.2");
+                                            previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                             imageSchemasGenerated.add(previousImageSchema);
                                         }
                                         XMLTree imageschema = createXMLImageSchema(fmlRoot, countImageSchema++, countTimeMarkers + cl_index);
@@ -763,7 +761,7 @@ public class ImageSchemaExtractor implements MeaningMinerModule, IntentionEmitte
                             if (previousImageSchema.getAttribute("type") == "") {
                                 fmlRoot.removeChild(previousImageSchema);
                             } else {
-                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index) + "-0.2");
+                                previousImageSchema.setAttribute("end", "s1:tm" + (countSentenceMarkers + cl_index + 1) + "-0.2");
                                 imageSchemasGenerated.add(previousImageSchema);
                             }
 

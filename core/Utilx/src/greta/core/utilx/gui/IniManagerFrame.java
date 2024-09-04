@@ -33,8 +33,7 @@ import javax.swing.event.TableModelListener;
 public class IniManagerFrame extends javax.swing.JFrame {
 
 
-    IniLoader characterIniLoader;
-    IniLoader languageIniLoader;
+    IniLoader iniLoader;
     private IniManager iniManager = null;
 
     /** Creates new form IniManagerFrame */
@@ -43,21 +42,12 @@ public class IniManagerFrame extends javax.swing.JFrame {
         setLocale(Locale.getDefault());
     }
 
-    public void connect(IniLoader CharacterIniLoader, IniLoader LanguageIniLoader){
-        this.characterIniLoader = CharacterIniLoader;
-        this.languageIniLoader = LanguageIniLoader;
-        loaderContainer1.setViewportView(this.characterIniLoader);
-        loaderContainer2.setViewportView(this.languageIniLoader);
-        this.characterIniLoader.setManagerFrame(this);
-        this.languageIniLoader.setManagerFrame(this);
+    public void connect(IniLoader iniLoader){
+        this.iniLoader = iniLoader;
+        loaderContainer.setViewportView(this.iniLoader);
+        this.iniLoader.setManagerFrame(this);
     }
 
-    public void connect(IniLoader CharacterIniLoader){
-        this.characterIniLoader = CharacterIniLoader;
-        loaderContainer1.setViewportView(this.characterIniLoader);
-        this.characterIniLoader.setManagerFrame(this);
-    }    
-    
     public void setIniManager(IniManager iniManager){
         this.iniManager=iniManager;
         jTable1.getModel().addTableModelListener(new TableModelListener(){
@@ -70,8 +60,7 @@ public class IniManagerFrame extends javax.swing.JFrame {
                     String name = jTable1.getValueAt(tme.getFirstRow(), 0).toString();
                     String value = jTable1.getValueAt(tme.getFirstRow(), 1).toString();
                     IniManagerFrame.this.iniManager.setValueString(name, value);
-                    IniManagerFrame.this.characterIniLoader.fireIniChanged();
-                    IniManagerFrame.this.languageIniLoader.fireIniChanged();
+                    IniManagerFrame.this.iniLoader.fireIniChanged();
                 }
             }
         });
@@ -96,7 +85,7 @@ public class IniManagerFrame extends javax.swing.JFrame {
         }
         iniManager.setDefinition(name);
         updateIniParameters();
-        characterIniLoader.fireIniDefinitionChanged(name);
+        iniLoader.fireIniDefinitionChanged(name);
     }
 
     public String getDefinition(){
@@ -134,11 +123,7 @@ public class IniManagerFrame extends javax.swing.JFrame {
 
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        loaderContainer1 = new javax.swing.JScrollPane();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        loaderContainer2 = new javax.swing.JScrollPane();
-        jSeparator1 = new javax.swing.JSeparator();
+        loaderContainer = new javax.swing.JScrollPane();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -166,50 +151,26 @@ public class IniManagerFrame extends javax.swing.JFrame {
         jTable1.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(jTable1);
 
-        loaderContainer1.setBorder(null);
-
-        jLabel1.setText("Character");
-
-        jLabel2.setText("Language");
-
-        loaderContainer2.setBorder(null);
+        loaderContainer.setBorder(null);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(loaderContainer1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(loaderContainer2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jSeparator1))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                    .addComponent(loaderContainer, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(loaderContainer1)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 26, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 3, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(loaderContainer, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(loaderContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -217,13 +178,9 @@ public class IniManagerFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JScrollPane loaderContainer1;
-    private javax.swing.JScrollPane loaderContainer2;
+    private javax.swing.JScrollPane loaderContainer;
     // End of variables declaration//GEN-END:variables
 
 }

@@ -1,18 +1,18 @@
 //start Fajrian
-ChrBrad@Idle01_BesidesLf01::deictic=Besides_Ges_L
-ChrBrad@Idle01_BesidesLf012x::deictic=Besides_Ges_L
-ChrBrad@Idle01_ChopBoth01::iconic=Chop_Ges_B
-ChrBrad@Idle01_ChopBoth012x::iconic=Chop_Ges_B
-ChrBrad@Idle01_ChopLf01::iconic=Chop_Ges_L
-ChrBrad@Idle01_ChopLf012x::iconic=Chop_Ges_L
-ChrBrad@Idle01_ChopLf02::iconic=Chop2_Ges_L
-ChrBrad@Idle01_ChopLf022x::iconic=Chop2_Ges_L
-ChrBrad@Idle01_ChopRt02::iconic=Chop2_Ges_R
-ChrBrad@Idle01_ChopRt022x::iconic=Chop2_Ges_R
-ChrBrad@Idle01_Contemplate01::iconic=Contemplate_Pos_B
-ChrBrad@Idle01_Contemplate012x::iconic=Contemplate_Pos_B
-ChrBrad@Idle01_ExampleLf01::performative=Example_Pos_L
-ChrBrad@Idle01_ExampleLf012x::performative=Example_Pos_L
+ChrBrad@Idle01_BesidesLf01::deictic=Besides_left_torso_do_nothing
+ChrBrad@Idle01_BesidesLf012x::deictic=Besides_left_torso_do_nothing
+ChrBrad@Idle01_ChopBoth01::iconic=Chop_both_torso_head_down
+ChrBrad@Idle01_ChopBoth012x::iconic=Chop_both_torso_head_down
+ChrBrad@Idle01_ChopLf01::iconic=Chop_left_torso_head_down
+ChrBrad@Idle01_ChopLf012x::iconic=Chop_left_torso_head_down
+ChrBrad@Idle01_ChopLf02::iconic=Chop2_left_torso_head_down
+ChrBrad@Idle01_ChopLf022x::iconic=Chop2_left_torso_head_down
+ChrBrad@Idle01_ChopRt02::iconic=Chop2_right_torso_head_down
+ChrBrad@Idle01_ChopRt022x::iconic=Chop2_right_torso_head_down
+ChrBrad@Idle01_Contemplate01::iconic=Contemplate_both_torso_head_up_left
+ChrBrad@Idle01_Contemplate012x::iconic=Contemplate_both_torso_head_up_left
+ChrBrad@Idle01_ExampleLf01::performative=Contemplate_both_torso_head_up_left
+ChrBrad@Idle01_ExampleLf012x::performative=Contemplate_both_torso_head_up_left
 //Fajrian end gest
 
 //start Liu
@@ -32,72 +32,75 @@ ChrBrad@Idle01_InclusivityPosBt02::iconic=InclusivityPosBt01
 ChrBrad@Idle01_InclusivityPosBt022x::iconic=InclusivityPosBt01
 //end Liu
 
+
+
+
 //start Jieyeon
-ChrBrad@Idle01_IndicateLeftBt01::deictic=IndicateLeft_B
-ChrBrad@Idle01_IndicateLeftBt012x::deictic=IndicateLeft_B
-ChrBrad@Idle01_IndicateLeftLf01::deictic=IndicateLeft_L
-ChrBrad@Idle01_IndicateLeftLf012x::deictic=IndicateLeft_L
-ChrBrad@Idle01_IndicateRightBt01::deictic=IndicateRight_B
-ChrBrad@Idle01_IndicateRightBt012x::deictic=IndicateRight_B
-ChrBrad@Idle01_IndicateRightRt01::deictic=IndicateRight_R
-ChrBrad@Idle01_IndicateRightRt012x::deictic=IndicateRight_R
-ChrBrad@Idle01_MeLf01::deictic=Me_Pos_L
-ChrBrad@Idle01_MeLf012x::deictic=Me_Pos_L
-ChrBrad@Idle01_MeLf02::deictic=Me_Pos_L
-ChrBrad@Idle01_MeLf022x::deictic=Me_Pos_L
-ChrBrad@Idle01_NegativeBt01::performative=NegativeBottom1_Ges_B
-ChrBrad@Idle01_NegativeBt012x::performative=NegativeBottom1_Ges_B
-ChrBrad@Idle01_NegativeBt02::performative=NegativeBottom1_Ges_B
-ChrBrad@Idle01_NegativeBt022x::performative=NegativeBottom1_Ges_B
+ChrBrad@Idle01_IndicateLeftBt01::deictic=indicateleft
+ChrBrad@Idle01_IndicateLeftBt012x::deictic=indicateleft
+ChrBrad@Idle01_IndicateLeftLf01::deictic=indicateleft
+ChrBrad@Idle01_IndicateLeftLf012x::deictic=indicateleft
+ChrBrad@Idle01_IndicateRightBt01::deictic=indicateright
+ChrBrad@Idle01_IndicateRightBt012x::deictic=indicateright
+ChrBrad@Idle01_IndicateRightRt01::deictic=indicateright
+ChrBrad@Idle01_IndicateRightRt012x::deictic=indicateright
+ChrBrad@Idle01_MeLf01::deictic=me
+ChrBrad@Idle01_MeLf012x::deictic=me
+ChrBrad@Idle01_MeLf02::deictic=me
+ChrBrad@Idle01_MeLf022x::deictic=me
+ChrBrad@Idle01_NegativeBt01::performative=negativebottom
+ChrBrad@Idle01_NegativeBt012x::performative=negativebottom
+ChrBrad@Idle01_NegativeBt02::performative=negativebottom
+ChrBrad@Idle01_NegativeBt022x::performative=negativebottom
 // end Jieyeon
 
 //start Fabien
-ChrBrad@Idle01_NegativeBt03::performative=NegativeBt3_Ges_B
-ChrBrad@Idle01_NegativeBt032x::performative=NegativeBt3_Ges_B
-ChrBrad@Idle01_NegativeRt01::performative=NegativeRT1_Ges_R
-ChrBrad@Idle01_NegativeRt012x::performative=NegativeRT1_Ges_R
-ChrBrad@Idle01_OfferBoth01::iconic=OfferBoth_Ges_B
-ChrBrad@Idle01_OfferBoth012x::iconic=OfferBoth_Ges_B
-ChrBrad@Idle01_OfferLf01::iconic=Offer_Ges_L
-ChrBrad@Idle01_OfferLf012x::iconic=Offer_Ges_L
-ChrBrad@Idle01_PleaBt02::performative=PleaBt2_Ges_B
-ChrBrad@Idle01_PleaBt022x::performative=PleaBt2_Ges_B
-ChrBrad@Idle01_PointLf01::deictic=PointLeft1
-ChrBrad@Idle01_PointLf012x::deictic=PointLeft1
-ChrBrad@Idle01_PointLf02::deictic=PointHandLeft
-ChrBrad@Idle01_PointLf022x::deictic=PointHandLeft
+ChrBrad@Idle01_NegativeBt03::performative=negation     
+ChrBrad@Idle01_NegativeBt032x::performative=negation    
+ChrBrad@Idle01_NegativeRt01::performative=negation
+ChrBrad@Idle01_NegativeRt012x::performative=negation
+ChrBrad@Idle01_OfferBoth01::deictic=me
+ChrBrad@Idle01_OfferBoth012x::deictic=me
+ChrBrad@Idle01_OfferLf01::deictic=me
+ChrBrad@Idle01_OfferLf012x::deictic=me
+ChrBrad@Idle01_PleaBt02::performative=indicateAt
+ChrBrad@Idle01_PleaBt022x::performative=indicateAt
+ChrBrad@Idle01_PointLf01::deictic=pointLeft
+ChrBrad@Idle01_PointLf012x::deictic=pointLeft
+ChrBrad@Idle01_PointLf02::deictic=pointLeft
+ChrBrad@Idle01_PointLf022x::deictic=pointLeft
 // end Fabien
 
 //start Mireille Motion-1
-ChrBrad@Idle01_BeatLowBt01::beat=BeatLowBt1
-ChrBrad@Idle01_BeatLowBt012x::beat=BeatLowBt1
-ChrBrad@Idle01_BeatLowBt02::beat=BeatLowBt2
-ChrBrad@Idle01_BeatLowBt022x::beat=BeatLowBt2
-ChrBrad@Idle01_BeatLowLf01::beat=BeatLowLf1
-ChrBrad@Idle01_BeatLowLf012x::beat=BeatLowLf1
-ChrBrad@Idle01_BeatLowLf02::beat=BeatLowLf2
-ChrBrad@Idle01_BeatLowLf022x::beat=BeatLowLf2
-ChrBrad@Idle01_BeatLowRt01::beat=BeatLowRt1
-ChrBrad@Idle01_BeatLowRt012x::beat=BeatLowRt1
-ChrBrad@Idle01_BeatMidBt01::beat=BeatMidBt1
-ChrBrad@Idle01_BeatMidBt012x::beat=BeatMidBt1
-ChrBrad@Idle01_BeatMidLf01::beat=BeatMidLf1
-ChrBrad@Idle01_BeatMidLf012x::beat=BeatMidLf1
-ChrBrad@Idle01_BeatPointMidLf01::beat=BeatPointMidLf1
-ChrBrad@Idle01_BeatPointMidLf02x::beat=BeatPointMidLf1
+ChrBrad@Idle01_BeatLowBt01::beat=LowBt1
+ChrBrad@Idle01_BeatLowBt012x::beat=LowBt1
+ChrBrad@Idle01_BeatLowBt02::beat=LowBt2
+ChrBrad@Idle01_BeatLowBt022x::beat=LowBt2
+ChrBrad@Idle01_BeatLowLf01::beat=LowLf1
+ChrBrad@Idle01_BeatLowLf012x::beat=LowLf1
+ChrBrad@Idle01_BeatLowLf02::beat=LowLf2
+ChrBrad@Idle01_BeatLowLf022x::beat=LowLf2
+ChrBrad@Idle01_BeatLowRt01::beat=LowRt1
+ChrBrad@Idle01_BeatLowRt012x::beat=LowRt1
+ChrBrad@Idle01_BeatMidBt01::beat=MidBt1
+ChrBrad@Idle01_BeatMidBt012x::beat=MidBt1
+ChrBrad@Idle01_BeatMidLf01::beat=MidLf1
+ChrBrad@Idle01_BeatMidLf012x::beat=MidLf1
+ChrBrad@Idle01_BeatPointMidLf01::beat=PointMidLf1
+ChrBrad@Idle01_BeatPointMidLf02x::beat=PointMidLf1
 // end Mireille
 
 //start Mireille Mireille -Motion 6
-ChrBrad@Idle01_ReceiveRt01::performative=ReceiveRt01
-ChrBrad@Idle01_ReceiveRt012x::performative=ReceiveRt01
-ChrBrad@Idle01_SafeLf01::iconic=SafeLf01
-ChrBrad@Idle01_SafeLf012x::iconic=SafeLf01
-ChrBrad@Idle01_ScratchChest01::performative=ScratchChest01
-ChrBrad@Idle01_ScratchChest012x::performative=ScratchChest01
-ChrBrad@Idle01_ScratchHeadLf01::performative=ScratchHeadLf01
-ChrBrad@Idle01_ScratchHeadLf012x::performative=ScratchHeadLf01
-ChrBrad@Idle01_ScratchTempleLf01::performative=ScratchTempleLf01
-ChrBrad@Idle01_ScratchTempleLf012x::performative=ScratchTempleLf01
+/ChrBrad@Idle01_ReceiveRt01
+/ChrBrad@Idle01_ReceiveRt012x
+/ChrBrad@Idle01_SafeLf01
+/ChrBrad@Idle01_SafeLf012x
+/ChrBrad@Idle01_ScratchChest01
+/ChrBrad@Idle01_ScratchChest012x
+/ChrBrad@Idle01_ScratchHeadLf01
+/ChrBrad@Idle01_ScratchHeadLf012x
+/ChrBrad@Idle01_ScratchTempleLf01
+/ChrBrad@Idle01_ScratchTempleLf012x
 
 
 ChrBrad@Idle01_TouchHands01::iconic=TouchHands

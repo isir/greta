@@ -202,7 +202,7 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
      * @return The list of {@code Keyframes} with the computed body
      * {@code Keyframes} added to it.
      */
-    public List<Keyframe> generateHeadTorsoEyeKeyframes(List<Keyframe> outputKeyframe) {
+    public List<Keyframe> generateBodyKeyframes(List<Keyframe> outputKeyframe) {
         
 
         
@@ -833,13 +833,6 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
         return outputKeyframe;
     }
     
-    public List<Keyframe> generateBodyKeyframes(List<Keyframe> outputKeyframe) {
-        
-        outputKeyframe = generateHeadTorsoEyeKeyframes(outputKeyframe);
-        
-        return outputKeyframe;
-    }
-    
     
     private AUAPFrame generateAUAPFrameFromAUItems(GazeSignal face, String tmName, double scale) {
         return generateAUAPFrameFromAUItems(face.getActionUnits(), face.getTimeMarker(tmName).getValue(), scale * face.getIntensity());
@@ -1393,9 +1386,8 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
     //therefore, now we compute body keyframes for GazeSignals first, then we compute other body keyframes
     //then we finish with eyes keyframes
     @Override
-    protected void generateKeyframes(List<Signal> inputSignals, List<Keyframe> outputKeyframes) {
-        generateHeadTorsoEyeKeyframes(outputKeyframes);
-        generateEyesKeyframes(outputKeyframes);
+    protected void generateKeyframes(List<Signal> inputSignals, List<Keyframe> outputKeyframe) {
+        //
     }
 
     private static Comparator<Signal> gazeComp = new Comparator<Signal>() {

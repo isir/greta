@@ -58,8 +58,6 @@ public class Temporizer{
             boolean toQueue = false;
             boolean toTemporize = false;
             boolean resetLoopControl = false;
-            
-            System.out.format("greta.core.util.time.Temporizer.temporize(): before: %s, %s, %s%n", t.getId(), t.getStart(), t.getEnd());
 
             for(TimeMarker tm :t.getTimeMarkers()){
                 if(!tm.isConcretized()){
@@ -111,7 +109,6 @@ public class Temporizer{
                         }
                     }
                 }
-                
             }
 
             // Following the states :
@@ -138,17 +135,7 @@ public class Temporizer{
             }
 
             recursive = recursiveCount > temporizables.size()-i;
-            
-            // Treatment for rest GestureSignal (necessary to avoid error in sorting keyframes in greta.core.behaviorrealizer.Realizer.performSignals())
-            if (Double.isNaN(t.getStart().getValue()) || Double.isInfinite(t.getStart().getValue()) || t.getStart().getValue() <= 0){
-                t.getStart().setValue(0);
-            }
-            if (Double.isNaN(t.getEnd().getValue()) || Double.isInfinite(t.getEnd().getValue()) || t.getEnd().getValue() <= 0){
-                t.getEnd().setValue(t.getStart().getValue());
-            }
 
-            System.out.format("greta.core.util.time.Temporizer.temporize(): after: %s, %s, %s%n", t.getId(), t.getStart(), t.getEnd());
-            
         }
 
         if(recursive){

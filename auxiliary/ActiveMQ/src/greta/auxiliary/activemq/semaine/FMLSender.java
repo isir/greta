@@ -22,7 +22,6 @@ import greta.auxiliary.activemq.WhiteBoard;
 import greta.core.intentions.FMLTranslator;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionPerformer;
-import greta.core.signals.Signal;
 import greta.core.util.Mode;
 import greta.core.util.id.ID;
 import greta.core.util.xml.XMLTree;
@@ -61,11 +60,6 @@ public class FMLSender extends TextSender implements IntentionPerformer {
         this.send(fml.toString());
     }
 
-    @Override
-    public void performIntentions(List<Intention> intentions, ID requestId, Mode mode, List<Signal> inputSignals){
-        
-    };
-    
     @Override
     protected void onSend(Map<String, Object> properties) {
         properties.put("usertime", System.currentTimeMillis());

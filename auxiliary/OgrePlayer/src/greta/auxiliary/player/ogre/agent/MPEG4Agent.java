@@ -24,6 +24,7 @@ import greta.core.animation.mpeg4.MPEG4Animatable;
 import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.fap.FAPFrame;
+import greta.core.animation.mpeg4.fap.FAPType;
 import greta.core.util.IniManager;
 import greta.core.util.time.Timer;
 import vib.auxiliary.player.ogre.natives.Entity;
@@ -31,7 +32,7 @@ import vib.auxiliary.player.ogre.natives.Quaternion;
 import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Vector3;
 
-//import greta.furhat.activemq.Broker;
+import greta.furhat.activemq.GretaFurhatRotationSender;
 /**
  *
  * @author Andre-Marie Pez
@@ -54,8 +55,9 @@ public abstract class MPEG4Agent extends Thread {
     private Skeleton skeleton;
     boolean visible;
     
+    String rotation; // This attribute is used for sending the greta rotation to furhat
     // Create an instance of SocketServer
-    private GretaFurhatTextSender server; // = new ActivemqGretaFurhatSender(61617);
+    private GretaFurhatRotationSender server; // = new ActivemqGretaFurhatSender(61617);
     //private Broker broker;
     private int frameNumber;
     // Start the server
@@ -72,9 +74,8 @@ public abstract class MPEG4Agent extends Thread {
         //broker = new Broker("61616");
         boolean use_default_host = false; // default broker host = 10.75.0.1
         //String server_url = (use_default_host)? broker.getHost(): "192.168.1.1"; // 192.168.1.1 new IP used to connect to my laptop
-        server = new GretaFurhatTextSender("localhost", "61616", "greta.furhat.Rotation");
-        server.startConnection();
-           
+        server = new GretaFurhatRotationSender("localhost", "61616", "greta.furhat.Rotation");
+          
         // 
     }
 
@@ -117,14 +118,16 @@ public abstract class MPEG4Agent extends Thread {
                     //System.out.println("### OgrePlayer ###: fap frame: " + ff + ", bap frame: " + bf + ", bap value: " + bf.getValue(57)+ " " + bf.getValue(58) + " " + bf.getValue(59) + ", bap Degree value: " + bf.getDegreeValue(57)+ " " + bf.getDegreeValue(58) + " " + bf.getDegreeValue(59));
                     
                     // Send and receive messages
-                    String rotation = bf.getDegreeValue(59) + " " + bf.getDegreeValue(57)+ " " + bf.getDegreeValue(58);
+                    String rotation = bf.getDegreeValue(BAPType.vc3_roll) + " " + bf.getDegreeValue(BAPType.vc3_tilt)+ " " + bf.getDegreeValue(BAPType.vc3_torsion);
                     frameNumber = bf.getFrameNumber();
-                    //System.out.println("### OgrePlayer ###: Rotation angle angle from Bap: "+ rotation);
+                    //System.out.println("### OgrePlayer ###: Rotation angle from Bap: "+ rotation);
                     
                     //System.out.println("broker Connection: "+broker.isConnected() + " url: " + broker.getURL());
                     //System.out.println("Connection: "+server.isConnected() + " url: " + server.getURL());
                     
-                    
+                    String rotation1 = ff.getValue(FAPType.head_pitch) + " " + ff.getValue(FAPType.head_roll)+ " " + ff.getValue(FAPType.head_yaw);
+                    frameNumber = bf.getFrameNumber();
+                    //System.out.println("### OgrePlayer ###: Rotation1 angle from fap: "+ rotation1);
                     
                     
                     //String receivedMessage = server.receiveMessage();

@@ -48,7 +48,7 @@
 		<signals>
 			<signal id="1" name="DOWN" modality="head"/>
 			<signal id="2" name="adjectival=dispersed" modality="gesture" min="0.2" max="10"/>
-			<signal id="3" name="gaze=look_down" modality="gaze"/>
+			<signal id="3" name="gaze=look_down" modality="head"/>
 			<signal id="4" name="faceexp=sadness" modality="face"/>
 		</signals>
 		<constraints>
@@ -147,6 +147,23 @@
 			</core>
 		</constraints>
 	</behaviorset>
+
+	<!--Fousseyni Sangaré: This is for experimentFML for the teaching task-->
+	<behaviorset name="emotion-thinking">
+		<signals>
+			<signal id="1" name="gaze=look_up" modality="gaze"/>
+			<signal id="2" name="faceexp=worry" modality="face" max="6.0"/>
+			<signal id="3" name="UP" modality="head" max="6.0"/>
+		</signals>
+		<constraints>
+			<core>
+				<item id="1"/>
+				<item id="2"/>
+				<item id="3"/>
+			</core>
+		</constraints>
+	</behaviorset>
+
 	
 	<behaviorset name="emotion-disgust">
 		<signals>
@@ -212,7 +229,7 @@
 		<constraints>
 			<core>
 				<item id="1"/>
-				<item id="3"/>
+				<!--<item id="3"/>-->
 			</core>
 		</constraints>
 	</behaviorset>
@@ -231,10 +248,10 @@
 	
 	<behaviorset name="emotion-relief">
 		<signals>
-			<signal id="1" name="emotion=Relief_Signal_13" modality="gesture"/>
+			<!--<signal id="1" name="emotion=Relief_Signal_13" modality="gesture"/>-->
 			<signal id="2" name="faceexp=Relief_Signal_2" modality="face"/>
 			<signal id="3" name="UP" modality="head"/>
-			<signal id="4" name="Relief_Signal_4" modality="torso"/>
+			<!--<signal id="4" name="Relief_Signal_4" modality="torso"/>-->
 		</signals>
 		<constraints>
 			<core>
@@ -244,13 +261,14 @@
 		</constraints>
 	</behaviorset>
 	
-	<behaviorset name="emotion-embarrassment">
+	<behaviorset name="emotion-embarrassed">
 		<signals>
 			<signal id="1" name="DOWN" modality="head"/>
 			<signal id="2" name="gaze=look_left" modality="gaze"/>
 			<signal id="3" name="faceexp=embarrassment_signal_8" modality="face"/>
-			<signal id="4" name="emotion=embarrassment_signal_10" modality="gesture"/>
-			<signal id="5" name="embarrassment_signal_11" modality="torso"/>
+			<signal id="4" name="gaze=look_at" modality="gaze"/>
+			<!--<signal id="4" name="emotion=embarrassment_signal_10" modality="gesture"/>-->
+			<!--<signal id="5" name="embarrassment_signal_11" modality="torso"/>-->
 		</signals>
 		<constraints>
 			<core>
@@ -445,7 +463,6 @@
 			</core>
 		</constraints>
 	</behaviorset>
-	
 	<!-- PERFORMATIVES -->
 	
 	<behaviorset name="deictic-you">
@@ -544,22 +561,51 @@
 		<constraints>
 			<rules>
 				<implication>
-					<ifpresent id="5"/>
+					<!--<ifpresent id="5"/>-->
+					<thenpresent id="4"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+
+	<behaviorset name="performative-alright">
+		<signals>
+			<!--<signal id="1" name="gaze=look_at" modality="head"/>-->
+			<signal id="4" name="NOD" modality="head"/>
+			<!--<signal id="5" name="LinearNeutralFrontalSwing" modality="torso"/>-->
+			<!-- Doesn't work anymore in the GRETA platform. -->
+			<!-- <signal id="5" name="bow" modality="torso"/> -->
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<!--<ifpresent id="5"/>-->
 					<thenpresent id="4"/>
 				</implication>
 			</rules>
 		</constraints>
 	</behaviorset>
 	
-	<behaviorset name="performative-disagree">
+	 <behaviorset name="performative-disagree">
+    <signals>
+      <signal id="1" name="faceexp=disagree" modality="face"/>
+    </signals>
+    <constraints>
+      <core>
+      </core>
+      <rules>
+      </rules>
+    </constraints>
+  </behaviorset>
+	
+	<behaviorset name="performative-informIGA0">
 		<signals>
-			<signal id="1" name="faceexp=disagree" modality="face"/>
+			<signal id="1" name="gaze=look_at" modality="gaze"/>
 		</signals>
 		<constraints>
 			<core>
+				<item id="1"/>
 			</core>
-			<rules>
-			</rules>
 		</constraints>
 	</behaviorset>
 	
@@ -1150,49 +1196,6 @@
 		</constraints>
 	</behaviorset>
 	
-	<behaviorset name="backchannel-no_interest">
-		<signals>
-			<signal id="1" name="gaze=look_up" modality="gaze"/>
-			<signal id="2" name="Aside_Left" modality="head">
-				<alternative name="Aside_Right" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints/>
-	</behaviorset>
-	
-	<behaviorset name="backchannel-belief">
-		<signals>
-			<signal id="1" name="faceexp=raise_brows" modality="face">
-				<alternative name="faceexp=Smile_Small_Closed" probability="0.5"/>
-			</signal>
-			<signal id="2" name="Aside_Left" modality="head">
-				<alternative name="Aside_Right" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints>
-			<rules>
-				<implication>
-					<ifpresent id="2"/>
-					<thenpresent id="1"/>
-				</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="backchannel-disbelief">
-		<signals>
-			<signal id="1" name="faceexp=Eyebrows_Frown" modality="face">
-				<alternative name="faceexp=raise_left_brow" probability="0.5"/>
-			</signal>
-			<signal id="2" name="Aside_Left" modality="head">
-				<alternative name="Aside_Right" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints/>
-	</behaviorset>
-	
-	<!-- Rest Poses -->
-	
 	<behaviorset name="rest-restpose_akimbo">
 		<signals>
 			<signal id="1" name="rest=Akimbo" modality="gesture"/>
@@ -1407,6 +1410,48 @@
 			</core>
 		</constraints>
 	</behaviorset>
+
+	<behaviorset name="backchannel-no_interest">
+		<signals>
+			<signal id="1" name="gaze=look_up" modality="gaze"/>
+			<signal id="2" name="Aside_Left" modality="head">
+				<alternative name="Aside_Right" probability="0.5"/>
+			</signal>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-belief">
+		<signals>
+			<signal id="1" name="faceexp=raise_brows" modality="face">
+				<alternative name="faceexp=Smile_Small_Closed" probability="0.5"/>
+			</signal>
+			<signal id="2" name="Aside_Left" modality="head">
+				<alternative name="Aside_Right" probability="0.5"/>
+			</signal>
+		</signals>
+		<constraints>
+			<rules>
+				<implication>
+					<ifpresent id="2"/>
+					<thenpresent id="1"/>
+				</implication>
+			</rules>
+		</constraints>
+	</behaviorset>
+	
+	<behaviorset name="backchannel-disbelief">
+		<signals>
+			<signal id="1" name="faceexp=Eyebrows_Frown" modality="face">
+				<alternative name="faceexp=raise_left_brow" probability="0.5"/>
+			</signal>
+			<signal id="2" name="Aside_Left" modality="head">
+				<alternative name="Aside_Right" probability="0.5"/>
+			</signal>
+		</signals>
+		<constraints/>
+	</behaviorset>
+	
 	
 	<!-- TRASH -->
 	<behaviorset name="emotion-small_sadness">
@@ -1645,12 +1690,11 @@
 	
 	<behaviorset name="emotion-relief" type="mse">
 		<signals>
-			<signal id="1" name="emotion=Relief_Signal_1" modality="gesture" excludelist="Relief_Signal_13" repetitivity="0" min="2" max="4"  probability_start="0.3" probability_end="0.0"/>
-			<signal id="2" name="faceexp=Relief_Signal_2" modality="face" repetitivity="0" min="1" max="4"  probability_start="0.9" probability_end="0.0"/>
-			<signal id="3" name="UP" modality="head" repetitivity="0" min="1" max="3"  probability_start="0.7" probability_end="0.0"/>
-			<signal id="4" name="Relief_Signal_4" modality="torso" repetitivity="0" min="5" max="8"  probability_start="0" probability_end="0"/>
-			<signal id="5" name="head=Relief_Signal_5" modality="head" repetitivity="0" min="2" max="5"  probability_start="0" probability_end="0"/>
-			<!-- it is similar to signal number 2 so we use only the 2 at the moment -see bugs in lexicon -->
+			
+			<signal id="1" name="faceexp=Relief_Signal_2" modality="face" />
+			<!-- <signal id="2" name="UP" modality="head" />
+			<signal id="3" name="head=Relief_Signal_5" modality="head" />
+			it is similar to signal number 2 so we use only the 2 at the moment -see bugs in lexicon 
 			<signal id="6" name="faceexp=Relief_Signal_6" modality="face" repetitivity="0" min="1" max="5"  probability_start="0" probability_end="0"/>
 			<signal id="7" name="gaze=Relief_Signal_7" modality="gaze" repetitivity="0" min="0.7" max="2"  probability_start="0.5" probability_end="0.5"/>
 			<signal id="8" name="faceexp=Relief_Signal_8" modality="face" repetitivity="0" min="1" max="2"  probability_start="0.0" probability_end="0.1"/>
@@ -1659,7 +1703,7 @@
 			<signal id="11" name="Relief_Signal_11" modality="torso" excludelist="Relief_Signal_10" repetitivity="0" min="4" max="8" probability_start="0.6" probability_end="0.1"/>
 			<signal id="12" name="faceexp=Relief_Signal_12" modality="face" repetitivity="0" min="2" max="4"  probability_start="0" probability_end="0.8"/>
 			<signal id="13" name="emotion=Relief_Signal_13" modality="gesture" excludelist="Relief_Signal_1" repetitivity="0" min="2" max="4"  probability_start="0.3" probability_end="0.6"/>
-			<signal id="14" name="Relief_Signal_14" modality="head" repetitivity="0" min="1" max="3"  probability_start="0.3" probability_end="0.1"/>
+			<signal id="14" name="Relief_Signal_14" modality="head" repetitivity="0" min="1" max="3"  probability_start="0.3" probability_end="0.1"/>-->
 		</signals>
 		<constraints/>
 	</behaviorset>
@@ -1685,16 +1729,15 @@
 		<signals>
 			<signal id="1" name="embarrassment_signal_1" modality="head" repetitivity="0" min="2" max="4"  probability_start="0.8" probability_end="0.3"/>
 			<signal id="2" name="embarrassment_signal_2" modality="head" repetitivity="0" min="3" max="5"  probability_start="0.1" probability_end="0.9"/>
-			<signal id="3" name="gaze=embarrassment_signal_3" modality="gaze" repetitivity="0" min="1.5" max="2.5"  probability_start="0.9" probability_end="0.9"/>
+			<signal id="3" name="gaze=embarrassment_signal_3" modality="gaze" repetitivity="0" min="1.5" max="2"  probability_start="0.9" probability_end="0.9"/>
 			<signal id="4" name="gaze=embarrassment_signal_4" modality="gaze" repetitivity="1" min="1" max="2"  probability_start="0.1" probability_end="0.2"/>
 			<signal id="5" name="gaze=embarrassment_signal_5" modality="gaze" repetitivity="1" min="1" max="2"  probability_start="0.1" probability_end="0.2"/>
 			<signal id="6" name="faceexp=embarrassment_signal_6" modality="face" repetitivity="0" min="2" max="3"  probability_start="0.6" probability_end="0.7"/>
 			<signal id="7" name="faceexp=embarrassment_signal_7" modality="face" repetitivity="0" min="2" max="4"  probability_start="0.6" probability_end="0.7"/>
 			<signal id="8" name="faceexp=embarrassment_signal_8" modality="face" repetitivity="0" min="2" max="4"  probability_start="0.6" probability_end="0.6"/>
 			<signal id="9" name="faceexp=embarrassment_signal_9" modality="face" repetitivity="0" min="1" max="2"  probability_start="0" probability_end="0"/>
-			<signal id="10" name="emotion=embarrassment_signal_10" modality="gesture" repetitivity="0" min="2" max="3"  probability_start="0.5" probability_end="0.5"/>
-			<signal id="11" name="embarrassment_signal_11" modality="torso" repetitivity="0" min="3" max="4"  probability_start="0.1" probability_end="0.1"/>
-			<signal id="12" name="emotion=embarrassment_signal_12" modality="gesture" repetitivity="0" min="2" max="4"  probability_start="0.2" probability_end="0.35"/>
+			
+			
 		</signals>
 		<constraints/>
 	</behaviorset>
@@ -2166,744 +2209,496 @@
 		</constraints>
 	</behaviorset>
 <!-- NVBG Behaviorsets -->
-<!-- Fajrian Gestures Behaviorsets -->
-	<behaviorset name="deictic-Besides_left_torso_do_nothing">
-		<signals>
-			<signal id="1" name="deictic=Besides_Ges_L" modality="gesture"/>
-			<signal id="2" name="TorsoDoNothing" modality="torso"/> 
-		</signals>
-		<constraints/>
-	</behaviorset>
-	<behaviorset name="iconic-Chop_both_torso_head_down">
-		<signals>
-			<signal id="1" name="iconic=Chop_Ges_B" modality="gesture"/>
-			<signal id="2" name="TorsoHeadDown" modality="torso"/>
-		</signals>
-		<constraints/>
-	</behaviorset>
-	<behaviorset name="iconic-Chop_left_torso_head_down">
-		<signals>
-			<signal id="1" name="iconic=Chop_Ges_L" modality="gesture"/>
-			<signal id="2" name="TorsoHeadDown" modality="torso"/>
-		</signals>
-		<constraints/>
-	</behaviorset>
-	<behaviorset name="iconic-Chop2_left_torso_head_down">
-		<signals>
-			<signal id="1" name="iconic=Chop2_Ges_L" modality="gesture"/>
-			<signal id="2" name="TorsoHeadDown" modality="torso"/>
-		</signals>
-		<constraints/>
-	</behaviorset>
-	<behaviorset name="iconic-Chop2_right_torso_head_down">
-		<signals>
-			<signal id="1" name="iconic=Chop2_Ges_R" modality="gesture"/>
-			<signal id="2" name="TorsoHeadDown" modality="torso"/>
-		</signals>
-		<constraints/>
-	</behaviorset>
-	<behaviorset name="iconic-Contemplate_both_torso_head_up_left">
-		<signals>
-			<signal id="1" name="iconic=Contemplate_Pos_B" modality="gesture"/>
+	<!-- Fajrian Gestures Behaviorsets -->
+	        <behaviorset name="deictic-Besides_left_torso_do_nothing">
+                <signals>
+                        <signal id="1" name="deictic=Besides_Ges_L" modality="gesture"/>
+            <signal id="2" name="TorsoDoNothing" modality="torso"/> 
+                </signals>
+                <constraints/>
+        </behaviorset>
+	        <behaviorset name="iconic-Chop_both_torso_head_down">
+                <signals>
+                        <signal id="1" name="iconic=Chop_Ges_B" modality="gesture"/>
+            <signal id="2" name="TorsoHeadDown" modality="torso"/>
+                </signals>
+                <constraints/>
+        </behaviorset>
+	        <behaviorset name="iconic-Chop_left_torso_head_down">
+                <signals>
+                        <signal id="1" name="iconic=Chop_Ges_L" modality="gesture"/>
+            <signal id="2" name="TorsoHeadDown" modality="torso"/>
+                </signals>
+                <constraints/>
+        </behaviorset>
+		        <behaviorset name="iconic-Chop2_left_torso_head_down">
+                <signals>
+                        <signal id="1" name="iconic=Chop2_Ges_L" modality="gesture"/>
+            <signal id="2" name="TorsoHeadDown" modality="torso"/>
+                </signals>
+                <constraints/>
+        </behaviorset>
+		        <behaviorset name="iconic-Chop2_right_torso_head_down">
+                <signals>
+                        <signal id="1" name="iconic=Chop2_Ges_R" modality="gesture"/>
+            <signal id="2" name="TorsoHeadDown" modality="torso"/>
+                </signals>
+                <constraints/>
+        </behaviorset>
+		        <behaviorset name="iconic-Contemplate_both_torso_head_up_left">
+                <signals>
+                        <signal id="1" name="iconic=Contemplate_Pos_B" modality="gesture"/>
             <signal id="2" name="TorsoLookUpLeft" modality="torso"/>
-		</signals>
-		<constraints/>
-	</behaviorset>
-	<behaviorset name="performative-Example_left_torso_head_down_left">
-		<signals>
-			<signal id="1" name="performative=Example_Pos_L" modality="gesture"/>
+                </signals>
+                <constraints/>
+        </behaviorset>
+		        <behaviorset name="performative-Example_left_torso_head_down_left">
+                <signals>
+                        <signal id="1" name="performative=Example_Pos_L" modality="gesture"/>
             <signal id="2" name="TorsoLookDownLeft" modality="torso"/>
-		</signals>
-		<constraints/>
-	</behaviorset>
-	<!-- end Fajrian Gestures Behaviorsets-->
-	<!-- end Liu Gestures Behaviorsets-->
-	<behaviorset name="iconic-HereBt01">
-		<signals>
-			<signal id="1" name="LeftSide" modality="torso">
-			</signal>
-			<signal id="2" name="iconic=HereBt01" modality="gesture">
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<behaviorset name="iconic-HereBt02">
-		<signals>
-			<signal id="1" name="LeftSide" modality="torso">
-			</signal>
-			<signal id="2" name="iconic=HereBt02" modality="gesture">
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<behaviorset name="iconic-HoweverLf01">
-		<signals>
-			<signal id="1" name="LeftBack" modality="torso">
-			</signal>
-			<signal id="2" name="iconic=HereBt01" modality="gesture">
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-		</constraints>
-	</behaviorset>
-	<behaviorset name="iconic-inclusivityNegBt01">
-		<signals>
-			<signal id="1" name="LeftSide" modality="torso">
-			</signal>
-			<signal id="2" name="iconic=inclusivityNegPosBt01" modality="gesture">
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<behaviorset name="iconic-InclusivityNegBt02">
-		<signals>
-			<signal id="1" name="LeftSide" modality="torso">
-			</signal>
-			<signal id="2" name="iconic=InclusivityNegBt02" modality="gesture">
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<behaviorset name="iconic-InclusivityPosBt01">
-		<signals>
-			<signal id="1" name="LeftSide" modality="torso">
-			</signal>
-			<signal id="2" name="iconic=InclusivityPosBt01" modality="gesture">
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<!-- end Liu Gestures Behaviorsets-->
-	<!-- start Jieyeon Gestures Behaviorsets-->
-	<behaviorset name="deictic-indicateleft">
-		<signals>
-			<signal id="1" name="deictic=IndicateLeft_L" modality="gesture">
-				<alternative name="deictic=IndicateLeft_B" probability="0.5"/>
-			</signal>
-			<signal id="2" name="IndicateLeft" modality="torso"/>
-			<signal id="3" name="faceexp=neutral" modality="face"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-				<item id="3"/>
-			</core>
-			<rules>
-				<implication>
-					<ifpresent id="2"/>
-					<thenpresent id="1"/>
-				</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
+                </signals>
+                <constraints/>
+        </behaviorset>
+		<!-- end Fajrian Gestures Behaviorsets-->
+		<!-- end Liu Gestures Behaviorsets-->
+		<behaviorset name="iconic-HereBt01">
+                <signals>
+                        <signal id="1" name="LeftSide" modality="torso">
+                        </signal>
+                        <signal id="2" name="iconic=HereBt01" modality="gesture">
+                        </signal>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                        <rules>
+                        <implication>
+                                <ifpresent id="1"/>
+                                <thenpresent id="2"/>
+                        </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		        <behaviorset name="iconic-HereBt02">
+                <signals>
+                        <signal id="1" name="LeftSide" modality="torso">
+                        </signal>
+                        <signal id="2" name="iconic=HereBt02" modality="gesture">
+                        </signal>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                        <rules>
+                        <implication>
+                                <ifpresent id="1"/>
+                                <thenpresent id="2"/>
+                        </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		        <behaviorset name="iconic-HoweverLf01">
+                <signals>
+                        <signal id="1" name="LeftBack" modality="torso">
+                        </signal>
+                        <signal id="2" name="iconic=HereBt01" modality="gesture">
+                        </signal>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                </constraints>
+        </behaviorset>
+		        <behaviorset name="iconic-inclusivityNegBt01">
+                <signals>
+                        <signal id="1" name="LeftSide" modality="torso">
+                        </signal>
+                        <signal id="2" name="iconic=inclusivityNegPosBt01" modality="gesture">
+                        </signal>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                        <rules>
+                        <implication>
+                                <ifpresent id="1"/>
+                                <thenpresent id="2"/>
+                        </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		        <behaviorset name="iconic-InclusivityNegBt02">
+                <signals>
+                        <signal id="1" name="LeftSide" modality="torso">
+                        </signal>
+                        <signal id="2" name="iconic=InclusivityNegBt02" modality="gesture">
+                        </signal>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                        <rules>
+                        <implication>
+                                <ifpresent id="1"/>
+                                <thenpresent id="2"/>
+                        </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		        <behaviorset name="iconic-InclusivityPosBt01">
+                <signals>
+                        <signal id="1" name="LeftSide" modality="torso">
+                        </signal>
+                        <signal id="2" name="iconic=InclusivityPosBt01" modality="gesture">
+                        </signal>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                        <rules>
+                        <implication>
+                                <ifpresent id="1"/>
+                                <thenpresent id="2"/>
+                        </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		<!-- end Liu Gestures Behaviorsets-->
+		<!-- start Jieyeon Gestures Behaviorsets-->
+		<behaviorset name="deictic-indicateleft">
+                <signals>
+                        <signal id="1" name="deictic=IndicateLeft_L" modality="gesture">
+                                <alternative name="deictic=IndicateLeft_B" probability="0.5"/>
+                        </signal>
+                        <signal id="2" name="IndicateLeft" modality="torso"/>
+                        <signal id="3" name="faceexp=neutral" modality="face"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                                <item id="3"/>
+                        </core>
+                        <rules>
+                                <implication>
+                                        <ifpresent id="2"/>
+                                        <thenpresent id="1"/>
+                                </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
 		
-	<behaviorset name="deictic-indicateright">
-		<signals>
-			<signal id="1" name="deictic=IndicateRight_R" modality="gesture">
-				<alternative name="deictic=IndicateRight_B" probability="0.5"/>
-			</signal>
-			<signal id="2" name="IndicateRight" modality="torso"/>
-			<signal id="3" name="faceexp=neutral" modality="face"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-				<item id="3"/>
-			</core>
-			<rules>
-				<implication>
-					<ifpresent id="2"/>
-					<thenpresent id="1"/>
-				</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<behaviorset name="deictic-me">
-		<signals>
-			<signal id="1" name="deictic=Me_Pos_L" modality="gesture"/>
-			<signal id="2" name="Down" modality="head">
-				<alternative name="Nod_Big" probability="0.5"/>
-			</signal>
-			<signal id="3" name="Me" modality="torso"/>
-			<signal id="4" name="faceexp=neutral" modality="face"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-				<item id="3"/>
-				<item id="4"/>
-			</core>
-			<rules>
-				<implication>
-					<ifpresent id="3"/>
-					<thenpresent id="1"/>
-				</implication>
-				<implication>
-					<ifpresent id="3"/>
-					<thenpresent id="2"/>
-				</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<behaviorset name="performative-negativebottom">
-		<signals>
-			<signal id="1" name="performative=NegativeBottom1_Ges_B" modality="gesture">
-				<alternative name="performative=NegativeBottom2_Ges_B" probability="0.5"/>
-			</signal>
-			<signal id="2" name="Shake_Big" modality="head"/>
-			<signal id="3" name="Negative" modality="torso"/>
-			<signal id="4" name="faceexp=neutral" modality="face"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-				<item id="3"/>
-				<item id="4"/>
-			</core>
-			<rules>
-				<implication>
-					<ifpresent id="3"/>
-					<thenpresent id="1"/>
-				</implication>
-				<implication>
-					<ifpresent id="3"/>
-					<thenpresent id="2"/>
-				</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
+		<behaviorset name="deictic-indicateright">
+                <signals>
+                        <signal id="1" name="deictic=IndicateRight_R" modality="gesture">
+                                <alternative name="deictic=IndicateRight_B" probability="0.5"/>
+                        </signal>
+                        <signal id="2" name="IndicateRight" modality="torso"/>
+                        <signal id="3" name="faceexp=neutral" modality="face"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                                <item id="3"/>
+                        </core>
+                        <rules>
+                                <implication>
+                                        <ifpresent id="2"/>
+                                        <thenpresent id="1"/>
+                                </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		<behaviorset name="deictic-me">
+                <signals>
+                        <signal id="1" name="deictic=Me_Pos_L" modality="gesture"/>
+                        <signal id="2" name="Down" modality="head">
+                                <alternative name="Nod_Big" probability="0.5"/>
+                        </signal>
+                        <signal id="3" name="Me" modality="torso"/>
+                        <signal id="4" name="faceexp=neutral" modality="face"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                                <item id="3"/>
+                                <item id="4"/>
+                        </core>
+                        <rules>
+                                <implication>
+                                        <ifpresent id="3"/>
+                                        <thenpresent id="1"/>
+                                </implication>
+                                <implication>
+                                        <ifpresent id="3"/>
+                                        <thenpresent id="2"/>
+                                </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		<behaviorset name="performative-negativebottom">
+                <signals>
+                        <signal id="1" name="performative=NegativeBottom1_Ges_B" modality="gesture">
+                                <alternative name="performative=NegativeBottom2_Ges_B" probability="0.5"/>
+                        </signal>
+                        <signal id="2" name="Shake_Big" modality="head"/>
+                        <signal id="3" name="Negative" modality="torso"/>
+                        <signal id="4" name="faceexp=neutral" modality="face"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                                <item id="3"/>
+                                <item id="4"/>
+                        </core>
+                        <rules>
+                                <implication>
+                                        <ifpresent id="3"/>
+                                        <thenpresent id="1"/>
+                                </implication>
+                                <implication>
+                                        <ifpresent id="3"/>
+                                        <thenpresent id="2"/>
+                                </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
 	<!-- end Jieyeon Gestures Behaviorsets-->
-	
-	<!-- Start Fabien Gestures Behaviorsets-->
-	<behaviorset name="performative-NegativeBt03">
-		<signals>
-			<signal id="1" name="BodyLean" modality="torso"/>
-			<signal id="2" name="performative=NegativeBt3_Ges_B" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="performative-NegativeRt01">
-		<signals>
-			<signal id="1" name="shakeHead" modality="torso"/>
-			<signal id="2" name="performative=NegativeRT1_Ges_R" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="performative-OfferBoth01">
-		<signals>
-			<signal id="1" name="smallSlideRightHead" modality="torso"/>
-			<signal id="2" name="iconic=OfferBoth_Ges_B" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="performative-OfferLf01">
-		<signals>
-			<signal id="1" name="smallInclinationTorsoLeft" modality="torso"/>
-			<signal id="2" name="iconic=Offer_Ges_L" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="performative-PleaBt02">
-		<signals>
-			<signal id="1" name="rightNod" modality="torso"/>
-			<signal id="2" name="performative=PleaBt2_Ges_B" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="deictic-PointLf01">
-		<signals>
-			<signal id="1" name="strongLookLeft" modality="torso"/>
-			<signal id="2" name="deictic=PointLeft1" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="deictic-PointLf02">
-		<signals>
-			<signal id="1" name="subtleBodyLean" modality="torso"/>
-			<signal id="2" name="deictic=PointHandLeft" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<!-- end Fabien Gestures Behaviorsets-->
-	
 	<!-- Motion-8 Gestures Behaviorsets -->
 	
 	<behaviorset name="iconic-TouchHands">
-		<signals>
-			<signal id="1" name="LeftSide" modality="torso"/>
-			<signal id="2" name="iconic=TouchHands" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
+                <signals>
+                        <signal id="1" name="LeftSide" modality="torso"/>
+                        <signal id="2" name="iconic=TouchHands" modality="gesture"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                        <rules>
+                        <implication>
+                                <ifpresent id="1"/>
+                                <thenpresent id="2"/>
+                        </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
 		
-	<behaviorset name="iconic-WeRt">
-		<signals>
-			<signal id="1" name="LeftSide" modality="torso"/>
-			<signal id="2" name="iconic=WeRt01" modality="gesture">
-				<alternative name="iconic=WeRt02" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
+		<behaviorset name="iconic-WeRt">
+                <signals>
+                        <signal id="1" name="LeftSide" modality="torso"/>
+                        <signal id="2" name="iconic=WeRt01" modality="gesture">
+                                <alternative name="iconic=WeRt02" probability="0.5"/>
+                        </signal>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                        <rules>
+                        <implication>
+                                <ifpresent id="1"/>
+                                <thenpresent id="2"/>
+                        </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
 		
-	<behaviorset name="iconic-WhenBt">
-		<signals>
-			<signal id="1" name="LeftSide" modality="torso"/>
-			<signal id="2" name="iconic=WhenBt01" modality="gesture">
-				<alternative name="iconic=WhenBt02" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="deictic-you1">
-		<signals>
-			<signal id="1" name="deictic=YouPos_L_1" modality="gesture">
-				<alternative name="deictic=You_Pos_L_2" probability="0.25"/>
-				<alternative name="deictic=You_Pos_L_3" probability="0.25"/>
-				<alternative name="deictic=You_Pos_R_1" probability="0.25"/>
-			</signal>
-			<signal id="2" name="Down" modality="head">
-				<alternative name="Nod_Big" probability="0.25"/>
-				<alternative name="Nod_Middle" probability="0.25"/>
-				<alternative name="Nod_Small" probability="0.25"/>
-			</signal>
-			<signal id="3" name="You" modality="torso"/>
-			<signal id="4" name="faceexp=neutral" modality="face"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-				<item id="3"/>
-				<item id="4"/>
-			</core>
-			<rules>
-				<implication>
-					<ifpresent id="3"/>
-					<thenpresent id="1"/>
-				</implication>
-				<implication>
-					<ifpresent id="3"/>
-					<thenpresent id="2"/>
-				</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<behaviorset name="deictic-youpoint">
-		<signals>
-			<signal id="1" name="deictic=YouPoint_Ges_L" modality="gesture"/>
-			<signal id="2" name="Nod_Big" modality="head"/>
-			<signal id="3" name="You" modality="torso"/>
-			<signal id="4" name="faceexp=neutral" modality="face"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-				<item id="3"/>
-				<item id="4"/>
-			</core>
-			<rules>
-				<implication>
-					<ifpresent id="3"/>
-					<thenpresent id="1"/>
-				</implication>
-				<implication>
-					<ifpresent id="3"/>
-					<thenpresent id="2"/>
-				</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	<!-- end Motion 8 Behaviorsets -->
-	
-	<!-- Mireille/Sooraj Behaviorsets Motion 6 -->
-	
-	<behaviorset name="performative-ReceiveRt01">
-		<signals>
-			<signal id="1" name="ReceiveRt01Torso" modality="torso"/>
-			<signal id="2" name="performative=ReceiveRt01" modality="gesture">
-				<alternative name="performative=ReceiveRt012x" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="iconic-SafeLf01">
-		<signals>
-			<signal id="1" name="SafeLf01Torso" modality="torso"/>
-			<signal id="2" name="performative=SafeLf01" modality="gesture">
-				<alternative name="performative=SafeLf012x" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="performative-ScratchChest01">
-		<signals>
-			<signal id="1" name="ScratchChest01" modality="torso"/>
-			<signal id="2" name="iconic=ScratchChest01" modality="gesture">
-				<alternative name="iconic=ScratchChest012x" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="performative-ScratchHeadLf01">
-		<signals>
-			<signal id="1" name="ScratchHead01" modality="torso"/>
-			<signal id="2" name="iconic=ScratchHeadLf01" modality="gesture">
-				<alternative name="iconic=ScratchHeadLf012x" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	<behaviorset name="performative-ScratchTempleLf01">
-		<signals>
-			<signal id="1" name="ScratchTempleLf01" modality="torso"/>
-			<signal id="2" name="iconic=ScratchTempleLf01" modality="gesture">
-				<alternative name="iconic=ScratchTempleLf012x" probability="0.5"/>
-			</signal>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-			<rules>
-			<implication>
-				<ifpresent id="1"/>
-				<thenpresent id="2"/>
-			</implication>
-			</rules>
-		</constraints>
-	</behaviorset>
-	
-	
-	<!-- end Mireille/Sooraj Behaviorsets Motion 6 -->
-	
-	<!-- Mirellie Gestures Behaviorsets Motion-1 -->
+		<behaviorset name="iconic-WhenBt">
+                <signals>
+                        <signal id="1" name="LeftSide" modality="torso"/>
+                        <signal id="2" name="iconic=WhenBt01" modality="gesture">
+                                <alternative name="iconic=WhenBt02" probability="0.5"/>
+                        </signal>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                        <rules>
+                        <implication>
+                                <ifpresent id="1"/>
+                                <thenpresent id="2"/>
+                        </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		
+		<behaviorset name="deictic-you1">
+                <signals>
+                        <signal id="1" name="deictic=YouPos_L_1" modality="gesture">
+                                <alternative name="deictic=You_Pos_L_2" probability="0.25"/>
+                                <alternative name="deictic=You_Pos_L_3" probability="0.25"/>
+                                <alternative name="deictic=You_Pos_R_1" probability="0.25"/>
+                        </signal>
+                        <signal id="2" name="Down" modality="head">
+                                <alternative name="Nod_Big" probability="0.25"/>
+                                <alternative name="Nod_Middle" probability="0.25"/>
+                                <alternative name="Nod_Small" probability="0.25"/>
+                        </signal>
+                        <signal id="3" name="You" modality="torso"/>
+                        <signal id="4" name="faceexp=neutral" modality="face"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                                <item id="3"/>
+                                <item id="4"/>
+                        </core>
+                        <rules>
+                                <implication>
+                                        <ifpresent id="3"/>
+                                        <thenpresent id="1"/>
+                                </implication>
+                                <implication>
+                                        <ifpresent id="3"/>
+                                        <thenpresent id="2"/>
+                                </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		<behaviorset name="deictic-youpoint">
+                <signals>
+                        <signal id="1" name="deictic=YouPoint_Ges_L" modality="gesture"/>
+                        <signal id="2" name="Nod_Big" modality="head"/>
+                        <signal id="3" name="You" modality="torso"/>
+                        <signal id="4" name="faceexp=neutral" modality="face"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                                <item id="3"/>
+                                <item id="4"/>
+                        </core>
+                        <rules>
+                                <implication>
+                                        <ifpresent id="3"/>
+                                        <thenpresent id="1"/>
+                                </implication>
+                                <implication>
+                                        <ifpresent id="3"/>
+                                        <thenpresent id="2"/>
+                                </implication>
+                        </rules>
+                </constraints>
+        </behaviorset>
+		<!-- end Motion 8 Behaviorsets -->
+		<!-- Mirellie Gestures Behaviorsets Motion-1 -->
 	<behaviorset name="beat-LowBt1">
-		<signals>
-			<signal id="1" name="HeadLean" modality="torso"/>
-			<signal id="2" name="beat=BeatLowBt1" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-		</constraints>
-	</behaviorset>
+                <signals>
+                        <signal id="1" name="HeadLean" modality="torso"/>
+                        <signal id="2" name="beat=BeatLowBt1" modality="gesture"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                </constraints>
+        </behaviorset>
 	<behaviorset name="beat-LowBt2">
-		<signals>
-			<signal id="1" name="ShouldersUP" modality="torso"/>
-			<signal id="2" name="beat=BeatLowBt2" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-		</constraints>
-	</behaviorset>
+                <signals>
+                        <signal id="1" name="ShouldersUP" modality="torso"/>
+                        <signal id="2" name="beat=BeatLowBt2" modality="gesture"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                </constraints>
+        </behaviorset>
 	 <behaviorset name="beat-LowLf1">
-		<signals>
-			<signal id="1" name="ShouldersUP" modality="torso"/>
-			<signal id="2" name="beat=BeatLowLf1" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-		</constraints>
-	</behaviorset>
+                <signals>
+                        <signal id="1" name="ShouldersUP" modality="torso"/>
+                        <signal id="2" name="beat=BeatLowLf1" modality="gesture"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                </constraints>
+        </behaviorset>
 	 <behaviorset name="beat-LowLf2">
-		<signals>
-			<signal id="1" name="HeadLean" modality="torso"/>
-			<signal id="2" name="beat=BeatLowLf2" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-		</constraints>
-	</behaviorset>
+                <signals>
+                        <signal id="1" name="HeadLean" modality="torso"/>
+                        <signal id="2" name="beat=BeatLowLf2" modality="gesture"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                </constraints>
+        </behaviorset>
 	 <behaviorset name="beat-LowRt1">
-		<signals>
-			<signal id="1" name="HeadLeanLeft" modality="torso"/>
-			<signal id="2" name="beat=BeatLowRt1" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-		</constraints>
-	</behaviorset>
+                <signals>
+                        <signal id="1" name="HeadLeanLeft" modality="torso"/>
+                        <signal id="2" name="beat=BeatLowRt1" modality="gesture"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                </constraints>
+        </behaviorset>
 	<behaviorset name="beat-MidBt1">
-		<signals>
-			<signal id="1" name="HeadLeanRight" modality="torso"/>
-			<signal id="2" name="beat=BeatMidBt1" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-		</constraints>
-	</behaviorset>
+                <signals>
+                        <signal id="1" name="HeadLeanRight" modality="torso"/>
+                        <signal id="2" name="beat=BeatMidBt1" modality="gesture"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                </constraints>
+        </behaviorset>
 	<behaviorset name="beat-MidLf1">
-		<signals>
-			<signal id="1" name="HeadLeanRight" modality="torso"/>
-			<signal id="2" name="beat=BeatMidLf1" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-		</constraints>
-	</behaviorset>
+                <signals>
+                        <signal id="1" name="HeadLeanRight" modality="torso"/>
+                        <signal id="2" name="beat=BeatMidLf1" modality="gesture"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                </constraints>
+        </behaviorset>
 	<behaviorset name="beat-PointMidLf1">
-        <signals>
-			<signal id="1" name="HeadPointLeft" modality="torso"/>
-			<signal id="2" name="beat=BeatPointMidLf1" modality="gesture"/>
-		</signals>
-		<constraints>
-			<core>
-				<item id="1"/>
-				<item id="2"/>
-			</core>
-		</constraints>
-    </behaviorset> 
+                <signals>
+                        <signal id="1" name="HeadPointLeft" modality="torso"/>
+                        <signal id="2" name="beat=BeatPointMidLf1" modality="gesture"/>
+                </signals>
+                <constraints>
+                        <core>
+                                <item id="1"/>
+                                <item id="2"/>
+                        </core>
+                </constraints>
+        </behaviorset> 
 	<!-- end Mirellie Gestures Behaviorsets -->
-
 </behaviorsets>

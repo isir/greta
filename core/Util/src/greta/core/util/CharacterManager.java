@@ -134,8 +134,6 @@ public class CharacterManager {
     public String rest_pose="";
     public boolean touch_computed=false;
     public String touch_gesture_computed=null;
-    
-    public String language="EN";
 
     public boolean isTouch_computed() {
         return touch_computed;
@@ -151,14 +149,6 @@ public class CharacterManager {
 
     public void setTouch_gesture_computed(String touch_gesture_computed) {
         this.touch_gesture_computed = touch_gesture_computed;
-    }
-    
-    public String getLanguage(){
-        return language;
-    }
-    
-    public void setLanguage(String language){
-        this.language = language;
     }
 
     public Map<String, String> getGesture_map() {

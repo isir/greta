@@ -340,11 +340,20 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         
        
         //send to all SignalPerformer added
+        
+        //Option1: send intentions and signals separately
+        //You need to add connector from FMLFileReader to BehaviorRealizer
+//        for (IntentionPerformer performer : performers) {
+//            performer.performIntentions(intentions, id, mode);
+//        }
+//        for (SignalPerformer performer : signal_performers) {
+//            performer.performSignals(signals, id, mode);
+//        }
+
+        //Option2: send intentions and signals together
+        //You don't need to add connector from FMLFileReader to BehaviorRealizer
         for (IntentionPerformer performer : performers) {
-            performer.performIntentions(intentions, id, mode);
-        }
-        for (SignalPerformer performer : signal_performers) {
-            performer.performSignals(signals, id, mode);
+            performer.performIntentions(intentions, id, mode, signals);
         }
 
         double load_end = greta.core.util.time.Timer.getTime();

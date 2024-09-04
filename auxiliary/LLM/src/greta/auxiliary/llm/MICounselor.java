@@ -86,6 +86,7 @@ public class MICounselor extends LLMFrame{
     private String LLM_python_env_checker_path = "Common\\Data\\LLM\\MICounselor\\check_env.py";
     private String LLM_python_env_installer_path = "Common\\Data\\LLM\\MICounselor\\init_env.bat";
     private String python_path_llm_drinking="\\Common\\Data\\LLM\\MICounselor\\MICounselor - Drinking.py ";
+    private String python_path_llm_sport="\\Common\\Data\\LLM\\MICounselor\\MICounselor - Sport.py ";
     private String python_path_llm_smoking="\\Common\\Data\\LLM\\MICounselor\\MICounselor - Smoking.py ";
     private Process server_process;
     private Thread server_shutdownHook;
@@ -282,7 +283,7 @@ public class MICounselor extends LLMFrame{
 
         addressLabel3.setText("Thème");
 
-        ThemeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drinking", "Smoking" }));
+        ThemeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drinking", "Smoking", "Sport" }));
         ThemeBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThemeBoxActionPerformed(evt);
@@ -410,7 +411,11 @@ public class MICounselor extends LLMFrame{
                                 if (theme.contains("Drinking")){
                                     python_path_llm = python_path_llm_drinking;
                                 }else{
+                                    if (theme.contains("Sport")){
+                                    python_path_llm = python_path_llm_sport;
+                                }else{
                                     python_path_llm = python_path_llm_smoking;
+                                }
                                 }
                                 String[] cmd = {
                                     "cmd.exe","/C","conda","activate","greta_mistral","&&","python","-u",

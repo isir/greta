@@ -1,0 +1,168 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{EB943C69-2C9B-45E7-B95B-FB916E7057ED}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Apache.NMS.ActiveMQ.Test</RootNamespace>
+    <AssemblyName>Apache.NMS.ActiveMQ.Test</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <StartupObject>
+    </StartupObject>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>keyfile\NMSKey.snk</AssemblyOriginatorKeyFile>
+    <SccProjectName>Svn</SccProjectName>
+    <SccLocalPath>Svn</SccLocalPath>
+    <SccAuxPath>Svn</SccAuxPath>
+    <SccProvider>SubversionScc</SccProvider>
+    <RunPostBuildEvent>OnOutputUpdated</RunPostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>build\net-2.0\debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET,NET_2_0</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <NoWarn>3016</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>build\net-2.0\release\</OutputPath>
+    <DefineConstants>TRACE;NET,NET_2_0</DefineConstants>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DebugType>full</DebugType>
+    <NoWarn>3016</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Apache.NMS, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Apache.NMS\net-2.0\Apache.NMS.dll</HintPath>
+    </Reference>
+    <Reference Include="Apache.NMS.Test, Version=1.1.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\Apache.NMS\net-2.0\Apache.NMS.Test.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework, Version=2.4.8.0, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>lib\NUnit\net-2.0\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="src\test\csharp\AMQNET366Test.cs" />
+    <Compile Include="src\test\csharp\AMQNET375Test.cs" />
+    <Compile Include="src\test\csharp\AMQQueueTransactionTest.cs" />
+    <Compile Include="src\test\csharp\AMQRedeliveryPolicyTest.cs" />
+    <Compile Include="src\test\csharp\AMQTopicTransactionTest.cs" />
+    <Compile Include="src\test\csharp\AMQTransactionTestSupport.cs" />
+    <Compile Include="src\test\csharp\BrokerToNMSExceptionsTest.cs" />
+    <Compile Include="src\test\csharp\Commands\ActiveMQBytesMessageTest.cs" />
+    <Compile Include="src\test\csharp\Commands\ActiveMQMapMessageTest.cs" />
+    <Compile Include="src\test\csharp\Commands\ActiveMQMessageTest.cs" />
+    <Compile Include="src\test\csharp\Commands\ActiveMQStreamMessageTest.cs" />
+    <Compile Include="src\test\csharp\Commands\ActiveMQTextMessageTest.cs" />
+    <Compile Include="src\test\csharp\Commands\CommandTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\test\csharp\Commands\MessageCompressionTest.cs" />
+    <Compile Include="src\test\csharp\CommonAssemblyInfo.cs" />
+    <Compile Include="src\test\csharp\ConnectionFactoryTest.cs" />
+    <Compile Include="src\test\csharp\ConnectionMetaDataTest.cs" />
+    <Compile Include="src\test\csharp\InvalidCredentialsTest.cs" />
+    <Compile Include="src\test\csharp\DtcBasicTransactionsTest.cs" />
+    <Compile Include="src\test\csharp\DtcConsumerTransactionsTest.cs" />
+    <Compile Include="src\test\csharp\DtcProducerTransactionsTest.cs" />
+    <Compile Include="src\test\csharp\DtcTransactionsTestSupport.cs" />
+    <Compile Include="src\test\csharp\MessageConsumerTest.cs" />
+    <Compile Include="src\test\csharp\ExclusiveConsumerTest.cs" />
+    <Compile Include="src\test\csharp\IndividualAckTest.cs" />
+    <Compile Include="src\test\csharp\MessageListenerRedeliveryTest.cs" />
+    <Compile Include="src\test\csharp\MessageProducerTest.cs" />
+    <Compile Include="src\test\csharp\NetTxConnectionFactoryTest.cs" />
+    <Compile Include="src\test\csharp\NetTxTransactionTest.cs" />
+    <Compile Include="src\test\csharp\NMSConnectionFactoryTest.cs" />
+    <Compile Include="src\test\csharp\NmsConsoleTracer.cs" />
+    <Compile Include="src\test\csharp\NMSSessionRecoverTest.cs" />
+    <Compile Include="src\test\csharp\NonBlockingConsumerRedeliveryTest.cs" />
+    <Compile Include="src\test\csharp\OpenWire\BooleanStreamTest.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="src\test\csharp\OpenWire\MaxInactivityDurationTest.cs" />
+    <Compile Include="src\test\csharp\OpenWire\PrefetchSizeZeroTest.cs" />
+    <Compile Include="src\test\csharp\OptimizedAckTest.cs" />
+    <Compile Include="src\test\csharp\QueueBrowserTests.cs" />
+    <Compile Include="src\test\csharp\QueueConsumerPriorityTest.cs" />
+    <Compile Include="src\test\csharp\RollbackRedeliveryTest.cs" />
+    <Compile Include="src\test\csharp\State\ConnectionStateTest.cs" />
+    <Compile Include="src\test\csharp\State\ConnectionStateTrackerTest.cs" />
+    <Compile Include="src\test\csharp\State\ConsumerStateTest.cs" />
+    <Compile Include="src\test\csharp\State\ProducerStateTest.cs" />
+    <Compile Include="src\test\csharp\State\SessionStateTest.cs" />
+    <Compile Include="src\test\csharp\State\TransactionStateTest.cs" />
+    <Compile Include="src\test\csharp\TempDestinationTest.cs" />
+    <Compile Include="src\test\csharp\TestMain.cs" />
+    <Compile Include="src\test\csharp\TestMainAsync.cs" />
+    <Compile Include="src\test\csharp\Threads\CompositeTaskRunnerTest.cs" />
+    <Compile Include="src\test\csharp\Threads\DedicatedTaskRunnerTest.cs" />
+    <Compile Include="src\test\csharp\Threads\SchedulerTest.cs" />
+    <Compile Include="src\test\csharp\Threads\ThreadPoolExecutorTest.cs" />
+    <Compile Include="src\test\csharp\Threads\TimerExTest.cs" />
+    <Compile Include="src\test\csharp\Transactions\RecoveryFileLoggerTest.cs" />
+    <Compile Include="src\test\csharp\Transactions\RecoveryLoggerHarness.cs" />
+    <Compile Include="src\test\csharp\Transactions\RecoveryLoggerHarnessFactory.cs" />
+    <Compile Include="src\test\csharp\Transport\failover\FailoverTransactionTest.cs" />
+    <Compile Include="src\test\csharp\Transport\failover\FailoverTransportTest.cs" />
+    <Compile Include="src\test\csharp\Transport\Inactivity\InactivityMonitorTest.cs" />
+    <Compile Include="src\test\csharp\Transport\Mock\MockTransportFactoryTest.cs" />
+    <Compile Include="src\test\csharp\Transport\Mock\MockTransportTest.cs" />
+    <Compile Include="src\test\csharp\Transport\Tcp\TcpFaultyTransport.cs" />
+    <Compile Include="src\test\csharp\Transport\Tcp\TcpFaultyTransportFactory.cs" />
+    <Compile Include="src\test\csharp\Transport\Tcp\TcpFaultyTransportTest.cs" />
+    <Compile Include="src\test\csharp\Util\ActiveMQMessageAuditTest.cs" />
+    <Compile Include="src\test\csharp\Util\ActiveMQMessageTransformationTest.cs" />
+    <Compile Include="src\test\csharp\Util\BitArrayBinTest.cs" />
+    <Compile Include="src\test\csharp\Util\ConnectionAuditTest.cs" />
+    <Compile Include="src\test\csharp\Util\FifoMessageDispatchChannelTest.cs" />
+    <Compile Include="src\test\csharp\Util\LRUCacheTest.cs" />
+    <Compile Include="src\test\csharp\Util\MemoryUsageTest.cs" />
+    <Compile Include="src\test\csharp\Util\SimplePriorityMessageDispatchChannelTest.cs" />
+    <Compile Include="src\test\csharp\VirtualTopicTest.cs" />
+    <Compile Include="src\test\csharp\ZeroPrefetchConsumerTest.cs" />
+    <Compile Include="src\test\csharp\OpenWire\BaseDataStreamMarshallerTest.cs" />
+    <Compile Include="src\test\csharp\BatchedMessagePriorityConsumerTest.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="nmsprovider-test.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="vs2008-activemq.csproj">
+      <Project>{08321F42-4B3D-4815-B592-95962BAC3B9F}</Project>
+      <Name>vs2008-activemq</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Apache.NMS.ActiveMQ.Test.nunit">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="keyfile\NMSKey.snk" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSHARP.Targets" />
+  <PropertyGroup>
+    <PostBuildEvent>cd $(ProjectDir)
+nant -nologo -q install-all -D:compile.skip=true</PostBuildEvent>
+  </PropertyGroup>
+</Project>

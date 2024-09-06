@@ -109,11 +109,11 @@
                     x="250.0" y="220.0"/>
                 <element h="50.0" id="DeepGram - 1722345283838-187"
                     module="DeepGram" name="DeepGram" w="180.0" x="30.0" y="410.0">
-                    <window h="376" visible="true" w="673" x="0" y="0"/>
+                    <window h="376" visible="true" w="673" x="1581" y="-591"/>
                 </element>
                 <element h="50.0" id="Mistral - 1722526972791-635"
                     module="Mistral" name="Mistral" w="80.0" x="30.0" y="350.0">
-                    <window h="611" visible="true" w="941" x="31" y="467"/>
+                    <window h="611" visible="true" w="941" x="1376" y="-1239"/>
                 </element>
             </element>
         </element>
@@ -123,37 +123,23 @@
             <parameter name="posY" value="1.5615357160568237"/>
             <parameter name="posZ" value="2.4800033569335938"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="-0.12280731648206711"/>
+            <parameter name="pitch" value="-0.12280730903148651"/>
             <parameter name="yaw" value="-0.05786361172795296"/>
-            <window h="552" visible="true" w="690" x="1100" y="454"/>
+            <window h="552" visible="true" w="690" x="655" y="-1225"/>
+        </element>
+        <element h="50.0" id="Microphone - 1725636945037-440"
+            module="Microphone" name="Microphone" w="80.0" x="290.0" y="550.0">
+            <window h="347" visible="false" w="418" x="0" y="0"/>
         </element>
     </elements>
     <connections>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="ASRToLLM"
-            source="DeepGram - 1722345283838-187" target="Mistral - 1722526972791-635"/>
-        <connection connector="addFeedbackOutput"
-            source="Feedbacks - 1721057588907-99" target="DeepGram - 1722345283838-187"/>
         <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Model - 1721381426095-674" target="Lip Blender - 1554477283159-751"/>
         <connection connector="AudioEmitter To AudioPerformer"
             source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="Mistral - 1722526972791-635" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1720626419025-143" target="Environment - 1544700713383-564"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="ASRToLLM"
+            source="DeepGram - 1722345283838-187" target="Mistral - 1722526972791-635"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -164,9 +150,27 @@
             source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1721381426095-674"/>
         <connection connector="addFeedbackInput"
             source="Behavior Realizer - 1544712930520-534" target="Feedbacks - 1721057588907-99"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Rest_Pose_Setter - 1621595871295-438" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1721057588907-99" target="DeepGram - 1722345283838-187"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1720626419025-143" target="Environment - 1544700713383-564"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Model - 1721381426095-674" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="Mistral - 1722526972791-635" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
     </connections>
 </modulated>

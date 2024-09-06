@@ -18,9 +18,6 @@ from deepgram import (
 )
 import os
 
-import numpy as np
-from threading import Thread, Lock
-
 load_dotenv()
 
 # We will collect the is_final=true messages here so we can use them when the person finishes speaking
@@ -33,12 +30,7 @@ deepgram: DeepgramClient = DeepgramClient(DEEPGRAM_API_KEY)
 dg_connection = deepgram.listen.live.v("1")
 STOP = False
 def main(language):
-    
-    RATE = 16000
 
-    mic_host = socket.gethostname()  # as both code is running on same pc
-    mic_port = 9000  # socket server port number
-    BUFFER_SIZE = 4096
 
     print("language : "+language)
     if language == "EN":
@@ -123,7 +115,7 @@ def main(language):
             # Raw audio format details
             encoding="linear16",
             channels=1,
-            sample_rate=RATE,
+            sample_rate=16000,
             # To get UtteranceEnd, the following must be set:
             interim_results=True,
             utterance_end_ms="1000",
@@ -143,8 +135,7 @@ def main(language):
             return
 
         # Open a microphone stream on the default input device
-        # microphone = Microphone(dg_connection.send)
-        microphone = Microphone_client(dg_connection.send, mic_host, mic_port, BUFFER_SIZE)
+        microphone = Microphone(dg_connection.send)
 
         # start microphone
         microphone.start()
@@ -166,49 +157,10 @@ def main(language):
         print(f"Could not open socket: {e}")
         return
 
-class Microphone_client(object):
-    
-    def __init__(self, send_func, mic_host, mic_port, BUFFER_SIZE):
-        
-        self.mic_socket = socket.socket()  # instantiate
-        self.mic_socket.connect((mic_host, mic_port))  # connect to the server
-        
-        self.runnning = False
-        self.BUFFER_SIZE = BUFFER_SIZE
-        self.send_func = send_func
-    
-    def start(self):
-        
-        self.running = True
-        
-        def mic_thread():
-
-            while self.running:
-                
-                message = 'ok'
-                self.mic_socket.send(message.encode())
-                data = self.mic_socket.recv(self.BUFFER_SIZE)  # receive response
-                self.send_func(data)
-        
-        self.thread = Thread(target = mic_thread)
-        self.thread.start()
-        
-        print('Mic thead started')
-            
-    def finish(self):
-        
-        self.running = False
-        try:
-            self.thread.close()
-        except Exception as e:
-            print(e)
-        print('Mic thead ended')
 
 def received_STOP():
-    
     language=s.recv(1024)
     language=language.decode('iso-8859-1').strip()
-    
     message_reciv=True
     print("NOT SOPPING"+language)
     if(len(language)>0 and message_reciv):
@@ -221,9 +173,9 @@ def received_STOP():
 
 
 if __name__ == "__main__":
-    
     parser=argparse.ArgumentParser()
     parser.add_argument("port", help="server port", type=int, default="4040")
+
 
     args=parser.parse_args()
 
@@ -248,3 +200,4 @@ if __name__ == "__main__":
                 main(language)
            
             message_reciv=False
+  

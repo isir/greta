@@ -23,11 +23,13 @@ def main():
     
     # get the hostname
     host = socket.gethostname()
-    port = 9000  # initiate port no above 1024
+    port = 9000
 
     server_socket = socket.socket()  # get instance
     # look closely. The bind() function takes tuple as argument
     server_socket.bind((host, port))  # bind host address and port together
+    
+    print("Microphone server is launched at {}, port {}".format(host, port))
     
     #######################################
 
@@ -43,8 +45,10 @@ def main():
     BUFFER_SIZE = 4096
     
     CHUNK = int(RATE * INTERVAL)
+    
+    KILL_SIGNAL = False
 
-    mic = Microphone(FORMAT, CHANNELS, RATE, CHUNK, BUFFER_SIZE)
+    mic = Microphone(FORMAT, CHANNELS, RATE, CHUNK, BUFFER_SIZE, KILL_SIGNAL)
     mic.start()
 
     #######################################
@@ -79,9 +83,13 @@ def main():
             for thread in thread_list:
                 print(' ({}),'.format(thread.name), end = '')
             print()
+
+            if mic.KILL_SIGNAL:
+                break
         
         except KeyboardInterrupt:
             break
+        
         
     # connection.close()  # close the connection
     server_socket.close()
@@ -90,7 +98,7 @@ def main():
 
 class Microphone(Thread):
     
-    def __init__(self, FORMAT, CHANNELS, RATE, CHUNK, BUFFER_SIZE):
+    def __init__(self, FORMAT, CHANNELS, RATE, CHUNK, BUFFER_SIZE, KILL_SIGNAL):
         
         if (RATE == 16000) and (CHUNK < 512):
             print('CHUNK should be more than 512 for RATE 16000 (Current: {})'.format(CHUNK))
@@ -107,6 +115,7 @@ class Microphone(Thread):
         self.RATE = RATE
         self.CHUNK = CHUNK
         self.BUFFER_SIZE = BUFFER_SIZE
+        self.KILL_SIGNAL = KILL_SIGNAL
         
         self.data = None
         
@@ -177,6 +186,12 @@ class Microphone(Thread):
             sound *= 1/32768
         sound = sound.squeeze()  # depends on the use case
         return sound
+    
+    def setKILL_SIGNAL(self):
+        
+        self.lock.acquire()
+        self.KILL_SIGNAL = True
+        self.lock.release()
 
 def on_new_client(clientsocket,address, mic):
     
@@ -187,7 +202,8 @@ def on_new_client(clientsocket,address, mic):
         try:
             
             data = clientsocket.recv(mic.BUFFER_SIZE).decode()
-            if data == '':
+            if data == 'kill':
+                mic.setKILL_SIGNAL()
                 break
             # print("from connected user: " + data)
             # data = input('SERVER >> ').encode()

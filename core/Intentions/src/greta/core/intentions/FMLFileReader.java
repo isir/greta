@@ -276,18 +276,18 @@ public class FMLFileReader implements IntentionEmitter, SignalEmitter {
         
         //Option1: send intentions and signals separately
         //You need to add connector from FMLFileReader to BehaviorRealizer
-        for (IntentionPerformer performer : performers) {
-            performer.performIntentions(intentions, id, mode);
-        }
-        for (SignalPerformer performer : signal_performers) {
-            performer.performSignals(signals, id, mode);
-        }
+//        for (IntentionPerformer performer : performers) {
+//            performer.performIntentions(intentions, id, mode);
+//        }
+//        for (SignalPerformer performer : signal_performers) {
+//            performer.performSignals(signals, id, mode);
+//        }
 
         //Option2: send intentions and signals together
         //You don't need to add connector from FMLFileReader to BehaviorRealizer
-//        for (IntentionPerformer performer : performers) {
-//            performer.performIntentions(intentions, id, mode, signals);
-//        }
+        for (IntentionPerformer performer : performers) {
+            performer.performIntentions(intentions, id, mode, signals);
+        }
 
         return id;
     }

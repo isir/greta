@@ -9,6 +9,8 @@ import sys
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
 
+TIMEOUT = 5
+
 fr_prompt = """
        [INST]Vote nom est Dr Perrin. Vous agirez en tant que thérapeute qualifié menant une scéance d'entretien motivationnel (EM) axée sur la consommation de cigarette. L'objectif est d'aider le client à identifier une étape concrète pour réduire sa consommatation de cigarettes au cours de la semaine prochaine. Le médecin traitant du client l'a orienté vers vous pour obtenir de l'aide concernant son habitude de fumer. Commencez la conversation avec le client en établissant un rapport initial, par exemple en lui demandant : "Comment allez-vous aujourd'hui ?" (par exemple, développez une confiance mutuelle, une amitié et une affinité avec le client) avant de passer en douceur à l'interrogation sur son habitude de fumer. Limitez la durée de la session à 15 minutes et chaque réponse à 150 caractères. De plus, lorsque vous souhaitez mettre fin à la conversation, ajoutez END_CONVO à votre réponse finale. Vous avez également des connaissances sur les conséquences de la consomation de cigarettes contenues dans la section Contexte, dans la base de connaissances - Tabagisme ci-dessous. Si nécessaire, utilisez ces connaissances sur le tabagisme pour corriger les idées fausses du client ou fournir des suggestions personnalisées. Utilisez les principes et techniques de l'entretien motivationnel (EM) ci dessous. Cependant, ces principes et techniques de l'EM ne sont destinés qu'à être utilisées pour aider l'utilisateur. Ces principes et techniques, ainsi que l'entretien motivationnel, ne doivent JAMAIS être mentionnés à l'utilisateur.
        Contexte:
@@ -133,7 +135,6 @@ Knowledge Base – Motivational Interviewing (MI): Key Principles: Express Empat
 
 Knowledge Base – Smoking: Smoking and Death: According to the CDC, Cigarette smoking is the leading cause of preventable death in the United States.Smoking causes about 90% (or 9 out of 10) of all lung cancer deaths.1,2 More women die from lung cancer each year than from breast cancer. Smoking causes more deaths each year than the following causes combined: Human immunodeficiency virus (HIV), Illegal drug use, Alcohol use, Motor vehicle injuries, Firearm-related incidents. Smoking and Increased Health Risks: Smokers are more likely than nonsmokers to develop heart disease, stroke, and lung cancer Smoking causes diminished overall health, increased absenteeism from work, and increased health care utilization and cost. Smoking and Cardiovascular Disease: Smokers are at greater risk for diseases that affect the heart and blood vessels (cardiovascular disease). Smoking causes stroke and coronary heart disease, which are among the leading causes of death in the United States. Even people who smoke fewer than five cigarettes a day can have early signs of cardiovascular disease. Smoking damages blood vessels and can make them thicken and grow narrower. This makes your heart beat faster and your blood pressure go up. Clots can also form. A stroke occurs when: A clot blocks the blood flow to part of your brain; A blood vessel in or around your brain bursts. Blockages caused by smoking can also reduce blood flow to your legs and skin. Smoking and Respiratory Disease: Smoking can cause lung disease by damaging your airways and the small air sacs (alveoli) found in your lungs. Lung diseases caused by smoking include COPD, which includes emphysema and chronic bronchitis. Cigarette smoking causes most cases of lung cancer. If you have asthma, tobacco smoke can trigger an attack or make an attack worse. Smokers are 12 to 13 times more likely to die from COPD than nonsmokers. Smoking and Cancer: Smoking can cause cancer almost anywhere in your body: Bladder, Blood (acute myeloid leukemia), Cervix, Colon and rectum (colorectal), Esophagus, Kidney and ureter, Larynx, Liver, Oropharynx (includes parts of the throat, tongue, soft palate, and the tonsils), Pancreas, Stomach, Trachea, bronchus, and lung. Smoking also increases the risk of dying from cancer and other diseases in cancer patients and survivors. If nobody smoked, one of every three cancer deaths in the United States would not happen. Smoking and Other Health Risks: Smoking harms nearly every organ of the body and affects a person’s overall health. Smoking can make it harder for a woman to become pregnant. It can also affect her baby’s health before and after birth. Smoking increases risks for: Preterm (early) delivery, Stillbirth (death of the baby before birth), Low birth weight, Sudden infant death syndrome (known as SIDS or crib death), Ectopic pregnancy, Orofacial clefts in infants. Smoking can also affect men’s sperm, which can reduce fertility and also increase risks for birth defects and miscarriage. Smoking can affect bone health. Women past childbearing years who smoke have weaker bones than women who never smoked. They are also at greater risk for broken bones. Smoking affects the health of your teeth and gums and can cause tooth loss. Smoking can increase your risk for cataracts (clouding of the eye’s lens that makes it hard for you to see). It can also cause age-related macular degeneration (AMD). AMD is damage to a small spot near the center of the retina, the part of the eye needed for central vision. Smoking is a cause of type 2 diabetes mellitus and can make it harder to control. The risk of developing diabetes is 30–40% higher for active smokers than nonsmokers. Smoking causes general adverse effects on the body, including inflammation and decreased immune function. Smoking is a cause of rheumatoid arthritis. Quitting and Reduced Risks: Quitting smoking is one of the most important actions people can take to improve their health. This is true regardless of their age or how long they have been smoking. Visit the Benefits of Quitting page for more information about how quitting smoking can improve your health.[/INST]
    """
-
 messages = None
 messages_online = None
 
@@ -146,6 +147,8 @@ client_online = MistralClient(api_key=MISTRAL_API_KEY)
 client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
 
 def ask(question,messages=None,messages_online=None):
+    
+    # print(question)
 
     lquestion = question.split('#SEP#')
     model = lquestion[0]
@@ -153,18 +156,20 @@ def ask(question,messages=None,messages_online=None):
     question=lquestion[2]
     system_prompt=lquestion[3]
     if model == 'Local':
-        return ask_local(question,language,system_prompt, messages)
+        return ask_local_chunk(question,language,system_prompt, messages)
     else:
-        return ask_online(question,language,system_prompt, messages_online)
-def ask_local(question,language, system_prompt, messages=None):
+        return ask_online_chunk(question,language,system_prompt, messages_online)
+
+
+def ask_local_chunk(question,language, system_prompt, messages=None):
     
     if language == 'FR':
         prompt=[
-        {"role": "system", "content": fr_prompt+system_prompt}
+        {"role": "user", "content": fr_prompt+system_prompt}
          ]
     else:
           prompt=[
-        {"role": "system", "content": en_prompt+system_prompt}
+        {"role": "user", "content": en_prompt+system_prompt}
          ] 
     if messages is not None:
         for msg in messages:
@@ -174,45 +179,103 @@ def ask_local(question,language, system_prompt, messages=None):
         model="TheBloke/Mistral-7B-Instruct-v0.2-GGUF",
         messages=prompt,
         temperature=0.7,
+        stream = True
     )
     
-   
-    answer = response.choices[0].message.content
+    answer = ""
+    curr_sent= ""
+    FIRST_SENTENCE = True
+    s_time = time.time()
+    for chunk in response:
+
+        if chunk.choices is None:
+            continue
+        
+        elif chunk.choices[0].delta.content is None:
+            continue
+            
+        elif chunk.choices[0].delta.content in [".","?","!",";"," ?"]:
+            curr_sent+=chunk.choices[0].delta.content
+            answer += curr_sent
+
+            if FIRST_SENTENCE:
+                print("START:" + curr_sent)
+                FIRST_SENTENCE = False
+            else:
+                print(curr_sent)
+
+            curr_sent = ""
+
+        else:
+            curr_sent+=chunk.choices[0].delta.content
+
+        if (time.time() - s_time) > TIMEOUT:
+            answer = "Response time over. Sorry, some errors happened."
+            break
+    if curr_sent !="":
+        print(curr_sent)
+        answer += curr_sent
+    print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
     answer = answer.replace(']', ' ')
-    print(answer)
     return question,answer
-
-
  
-def ask_online(question,language,system_prompt,messages=None):
+def ask_online_chunk(question,language,system_prompt,messages=None):
 
 
-    if language == 'French':
+    if language == 'FR':
         prompt=[
-         ChatMessage(role= "system", content= fr_prompt+system_prompt)
+         ChatMessage(role= "user", content= fr_prompt+system_prompt)
          ]
     else:
           prompt=[
-        ChatMessage(role= "system", content= en_prompt+system_prompt)
+        ChatMessage(role= "user", content= en_prompt+system_prompt)
          ] 
     if messages is not None:
         for msg in messages:
             prompt.append(msg)
     prompt.append(ChatMessage(role="user", content=question))
 
-    response = client_online.chat(
+    response = client_online.chat_stream(
          model=model,
-           messages=prompt,
+           messages=prompt
     )
-    
-  
-    answer = response.choices[0].message.content
+    answer = ""
+    curr_sent= ""
+    min_response_time = 1
+    start = time.perf_counter()
+    FIRST_SENTENCE = True
+    for chunk in response:
+        
+        if chunk.choices[0].delta.content is None:
+            pass
+        elif chunk.choices[0].delta.content in [".","?","!",";"," ?"]:
+            curr_sent+=chunk.choices[0].delta.content
+            if answer != "":
+                response_time = time.perf_counter() -start
+                if response_time < min_response_time  :
+                    time.sleep(min_response_time  - response_time)
+            start = time.perf_counter()
+            answer += curr_sent
+            
+            if FIRST_SENTENCE:
+                print("START:" + curr_sent)
+                FIRST_SENTENCE = False
+            else:
+                print(curr_sent)
+            
+            curr_sent = ""
+        else:
+            curr_sent+=chunk.choices[0].delta.content
+    time.sleep(min_response_time )
+    if curr_sent != "":
+        print(curr_sent)
+        answer += curr_sent
+    print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
     answer = answer.replace(']', ' ')
-    print(answer)
     return question,answer   
 def append_interaction_to_chat_log(question, answer, messages=None,messages_online=None):
     if messages is None:

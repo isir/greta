@@ -8,6 +8,9 @@ from openai import OpenAI
 import sys
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
+
+TIMEOUT = 5
+
 fr_prompt = """
        [INST]Vote nom est Dr Perrin. Vous agirez en tant que thérapeute qualifié menant une scéance d'entretien motivationnel (EM) axée sur l'abus d'alcool. L'objectif est d'aider le client à identifier une étape concrètepour réduire sa consommation d'alcool au cours de la semaine prochaine. Le médecin traitant du client l'a orienté vers vous pour obtenir de l'aide concernant son abus d'alcool. Commencez la conversation avec le client en établissant un rapport initial, par exemple en lui demandant : "Comment allez-vous aujourd'hui ?" (par exemple, développez une confiance mutuelle, une amitié et une affinité avec le client) avant de passer en douceur à l'interrogation sur sa consommation d'alcool. Limitez la durée de la session à 15 minutes et chaque réponse à 150 caractères. De plus, lorsque vous souhaitez mettre fin à la conversation, ajoutez END_CONVO à votre réponse finale. Vous avez également des connaissances sur la consommation d'alcool contenues dans la section Contexte, dans la base de connaissances - Consommation d'alcool ci-dessous. Si nécessaire, utilisez ces connaissances sur la consommation d'alccol pour corriger les idées fausses du client ou fournir des suggestions personnalisées. Utilisez les principes et techniques de l'entretien motivationnel (EM) ci dessous. Cependant, ces principes et techniques de l'EM ne sont destinés qu'à être utilisées pour aider l'utilisateur. Ces principes et techniques, ainsi que l'entretien motivationnel, ne doivent JAMAIS être mentionnés à l'utilisateur.
        Contexte:
@@ -47,7 +50,6 @@ Knowledge Base – Motivational Interviewing (MI): Key Principles: Express Empat
 
 Knowledge Base – Alcohol Use: Drinking in Moderation: According to the Dietary Guidelines for Americans 2020-2025, U.S. Department of Health and Human Services and U.S. Department of Agriculture, adults of legal drinking age can choose not to drink or to drink in moderation by limiting intake to 2 drinks or less in a day for men and 1 drink or less in a day for women, when alcohol is consumed. Drinking less is better for health than drinking more. Binge Drinking: NIAAA defines binge drinking as a pattern of drinking alcohol that brings blood alcohol concentration (BAC) to 0.08 percent - or 0.08 grams of alcohol per deciliter - or higher. For a typical adult, this pattern corresponds to consuming 5 or more drinks (male), or 4 or more drinks (female), in about 2 hours. The Substance Abuse and Mental Health Services Administration (SAMHSA), which conducts the annual National Survey on Drug Use and Health (NSDUH), defines binge drinking as 5 or more alcoholic drinks for males or 4 or more alcoholic drinks for females on the same occasion (i.e., at the same time or within a couple of hours of each other) on at least 1 day in the past month. Heavy Alcohol Use: NIAAA defines heavy drinking as follows: For men, consuming five or more drinks on any day or 15 or more per week For women, consuming four or more on any day or 8 or more drinks per week SAMHSA defines heavy alcohol use as binge drinking on 5 or more days in the past month. Patterns of Drinking Associated with Alcohol Use Disorder: Binge drinking and heavy alcohol use can increase an individual's risk of alcohol use disorder. Certain people should avoid alcohol completely, including those who: Plan to drive or operate machinery, or participate in activities that require skill, coordination, and alertness Take certain over-the-counter or prescription medications Have certain medical conditions Are recovering from alcohol use disorder or are unable to control the amount that they drink Are younger than age 21 Are pregnant or may become pregnant[/INST]
         """
-
 messages = None
 messages_online = None
 
@@ -60,6 +62,8 @@ client_online = MistralClient(api_key=MISTRAL_API_KEY)
 client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
 
 def ask(question,messages=None,messages_online=None):
+    
+    # print(question)
 
     lquestion = question.split('#SEP#')
     model = lquestion[0]
@@ -67,18 +71,20 @@ def ask(question,messages=None,messages_online=None):
     question=lquestion[2]
     system_prompt=lquestion[3]
     if model == 'Local':
-        return ask_local(question,language,system_prompt, messages)
+        return ask_local_chunk(question,language,system_prompt, messages)
     else:
-        return ask_online(question,language,system_prompt, messages_online)
-def ask_local(question,language, system_prompt, messages=None):
+        return ask_online_chunk(question,language,system_prompt, messages_online)
+
+
+def ask_local_chunk(question,language, system_prompt, messages=None):
     
     if language == 'FR':
         prompt=[
-        {"role": "system", "content": fr_prompt+system_prompt}
+        {"role": "system", "user": fr_prompt+system_prompt}
          ]
     else:
           prompt=[
-        {"role": "system", "content": en_prompt+system_prompt}
+        {"role": "system", "user": en_prompt+system_prompt}
          ] 
     if messages is not None:
         for msg in messages:
@@ -88,45 +94,103 @@ def ask_local(question,language, system_prompt, messages=None):
         model="TheBloke/Mistral-7B-Instruct-v0.2-GGUF",
         messages=prompt,
         temperature=0.7,
+        stream = True
     )
     
-   
-    answer = response.choices[0].message.content
+    answer = ""
+    curr_sent= ""
+    FIRST_SENTENCE = True
+    s_time = time.time()
+    for chunk in response:
+
+        if chunk.choices is None:
+            continue
+        
+        elif chunk.choices[0].delta.content is None:
+            continue
+            
+        elif chunk.choices[0].delta.content in [".","?","!",";"," ?"]:
+            curr_sent+=chunk.choices[0].delta.content
+            answer += curr_sent
+
+            if FIRST_SENTENCE:
+                print("START:" + curr_sent)
+                FIRST_SENTENCE = False
+            else:
+                print(curr_sent)
+
+            curr_sent = ""
+
+        else:
+            curr_sent+=chunk.choices[0].delta.content
+
+        if (time.time() - s_time) > TIMEOUT:
+            answer = "Response time over. Sorry, some errors happened."
+            break
+    if curr_sent !="":
+        print(curr_sent)
+        answer += curr_sent
+    print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
     answer = answer.replace(']', ' ')
-    print(answer)
     return question,answer
-
-
  
-def ask_online(question,language,system_prompt,messages=None):
+def ask_online_chunk(question,language,system_prompt,messages=None):
 
 
-    if language == 'French':
+    if language == 'FR':
         prompt=[
-         ChatMessage(role= "system", content= fr_prompt+system_prompt)
+         ChatMessage(role= "user", content= fr_prompt+system_prompt)
          ]
     else:
           prompt=[
-        ChatMessage(role= "system", content= en_prompt+system_prompt)
+        ChatMessage(role= "user", content= en_prompt+system_prompt)
          ] 
     if messages is not None:
         for msg in messages:
             prompt.append(msg)
     prompt.append(ChatMessage(role="user", content=question))
 
-    response = client_online.chat(
+    response = client_online.chat_stream(
          model=model,
-           messages=prompt,
+           messages=prompt
     )
-    
-  
-    answer = response.choices[0].message.content
+    answer = ""
+    curr_sent= ""
+    min_response_time = 1
+    start = time.perf_counter()
+    FIRST_SENTENCE = True
+    for chunk in response:
+        
+        if chunk.choices[0].delta.content is None:
+            pass
+        elif chunk.choices[0].delta.content in [".","?","!",";"," ?"]:
+            curr_sent+=chunk.choices[0].delta.content
+            if answer != "":
+                response_time = time.perf_counter() -start
+                if response_time < min_response_time  :
+                    time.sleep(min_response_time  - response_time)
+            start = time.perf_counter()
+            answer += curr_sent
+            
+            if FIRST_SENTENCE:
+                print("START:" + curr_sent)
+                FIRST_SENTENCE = False
+            else:
+                print(curr_sent)
+            
+            curr_sent = ""
+        else:
+            curr_sent+=chunk.choices[0].delta.content
+    time.sleep(min_response_time )
+    if curr_sent != "":
+        print(curr_sent)
+        answer += curr_sent
+    print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
     answer = answer.replace(']', ' ')
-    print(answer)
     return question,answer   
 def append_interaction_to_chat_log(question, answer, messages=None,messages_online=None):
     if messages is None:

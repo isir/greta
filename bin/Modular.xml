@@ -218,6 +218,7 @@
                 <item module="MistralIncremental" name="Mistral Incremental"/>
                 <item module="MI Counselor" name="MI Counselor"/>
                 <item module="MICounselorIncremental" name="MI Counselor Incremental"/>
+                <item module="MICounselorIncrementalDA" name="MI Counselor Incremental DA"/>
                 </menu>
               <menu name="DeepASR">
                 <item module="DeepGram" name="DeepGram"/>
@@ -1184,6 +1185,10 @@
       </module>
       <module name="MICounselorIncremental" style="Intentions">
         <object class="greta.auxiliary.llm.MICounselorIncremental" lib_id="greta_llm"/>
+        <frame type="object"/>
+      </module>
+      <module name="MICounselorIncrementalDA" style="Intentions">
+        <object class="greta.auxiliary.llm.MICounselorIncrementalDA" lib_id="greta_llm"/>
         <frame type="object"/>
       </module>
          <module name="DeepGram" >

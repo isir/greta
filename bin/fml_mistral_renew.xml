@@ -5,13 +5,9 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>Je
-<tm id="tm2"/>suis
-<tm id="tm3"/>ravi
-<tm id="tm4"/>de
-<tm id="tm5"/>l'entendre.
-<tm id="tm6"/>
-<boundary end="s1:tm6" id="b1" start="s1:tm1" type="LL"/>
+<tm id="tm1"/>Hello!
+<tm id="tm2"/>
+<boundary end="s1:tm2" id="b1" start="s1:tm1" type="LL"/>
 </speech>
 </bml>
 <fml>

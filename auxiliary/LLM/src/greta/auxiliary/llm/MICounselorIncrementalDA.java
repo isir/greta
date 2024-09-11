@@ -68,7 +68,7 @@ import greta.core.util.enums.CompositionType;
  *
  * @author miche
  */
-public class MICounselorIncremental extends LLMFrame{
+public class MICounselorIncrementalDA extends LLMFrame{
 
     /**
      * Creates new form MistralFrame
@@ -89,9 +89,9 @@ public class MICounselorIncremental extends LLMFrame{
     private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
     private String LLM_python_env_checker_path = "Common\\Data\\LLM\\Mistral\\check_env.py";
     private String LLM_python_env_installer_path = "Common\\Data\\LLM\\Mistral\\init_env.bat";
-        private String python_path_llm_drinking="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncremental - Drinking.py ";
-    private String python_path_llm_sport="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncremental - Sport.py ";
-    private String python_path_llm_smoking="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncremental - Smoking.py ";
+        private String python_path_llm_drinking="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncrementalDA - Drinking.py ";
+    private String python_path_llm_sport="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncrementalDA - Sport.py ";
+    private String python_path_llm_smoking="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncrementalDA - Smoking.py ";
     private Process server_process;
     private Thread server_shutdownHook;
     private Process server_process_mistral;
@@ -99,7 +99,7 @@ public class MICounselorIncremental extends LLMFrame{
 
 
     public CharacterManager cm;
-    public MICounselorIncremental(CharacterManager cm) throws InterruptedException {
+    public MICounselorIncrementalDA(CharacterManager cm) throws InterruptedException {
         super(cm);
         initComponents();
         server = new Server();
@@ -401,7 +401,7 @@ public class MICounselorIncremental extends LLMFrame{
                                     System.out.println("greta.auxiliary.llm.MistralFrame.enableActionPerformed(): waiting for client connection (Mistral.py -> Mistral module)");
                                     server.accept_new_connection();
                                 } catch (IOException ex) {
-                                    Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                                    Logger.getLogger(MICounselorIncrementalDA.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }                        
                     };
@@ -483,15 +483,15 @@ public class MICounselorIncremental extends LLMFrame{
                                 }
 
                             } catch (IOException ex) {
-                                Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MICounselorIncrementalDA.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (ParserConfigurationException ex) {
-                                Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MICounselorIncrementalDA.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (SAXException ex) {
-                                Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MICounselorIncrementalDA.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (TransformerException ex) {
-                                Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MICounselorIncrementalDA.class.getName()).log(Level.SEVERE, null, ex);
                             } catch (JMSException ex) {
-                                Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                                Logger.getLogger(MICounselorIncrementalDA.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         } 
                         
@@ -536,7 +536,7 @@ public class MICounselorIncremental extends LLMFrame{
                     server.sendMessage(model+"#SEP#"+language+"#SEP#"+text+"#SEP#"+systemPromptText);
                     System.out.println("Sent message:"+text);
                 } catch (IOException ex) {
-                    Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(MICounselorIncrementalDA.class.getName()).log(Level.SEVERE, null, ex);
                 }
 
             }

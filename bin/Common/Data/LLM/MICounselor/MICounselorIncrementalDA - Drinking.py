@@ -8,7 +8,8 @@ from openai import OpenAI
 import sys
 from mistralai.client import MistralClient
 from mistralai.models.chat_completion import ChatMessage
-
+from therapist_behavior_inference import get_therapist_intent
+from client_behavior_inference import get_client_intent
 TIMEOUT = 5
 
 fr_prompt = """
@@ -52,6 +53,17 @@ Knowledge Base – Alcohol Use: Drinking in Moderation: According to the Dietary
         """
 
 
+def create_server(da, host='localhost', port=50200):
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
+        server_socket.bind((host, port))
+        server_socket.listen(1)
+        
+ 
+        conn, addr = server_socket.accept()
+        with conn:
+           
+            conn.sendall(da.encode('utf-8'))
+            
 
 messages = None
 messages_online = None
@@ -151,15 +163,22 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
           prompt=[
         ChatMessage(role= "user", content= en_prompt+system_prompt)
          ] 
-
+    context=""
     if messages is not None:
         l=len(messages)
         for i,msg in ennumerate(messages):
             prompt.append(msg)
-            
+            if l-i<2:
+                if (message.role) =='user':
+                    context += "Patient: "
+                else:
+                    context += "Therapist:"
+                context+= message.content
 
     prompt.append(ChatMessage(role="user", content=question))
-
+    da = get_client_intent(question,context)
+    create_server(da,port =50201)
+    context += "Patient: "+question
     response = client_online.chat_stream(
          model=model,
            messages=prompt
@@ -184,20 +203,25 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
             answer += curr_sent
             
             if FIRST_SENTENCE:
-
+                da = get_therapist_intent(curr_sent,context)
+                
                 print("START:" + curr_sent)
+                create_server(da,port =50200)
                 FIRST_SENTENCE = False
             else:
-
+                da = get_therapist_intent(curr_sent,context+"Therapist: "+answer)
+                
                 print(curr_sent)
+                create_server(da,port =50200)
             
             curr_sent = ""
         else:
             curr_sent+=chunk.choices[0].delta.content
     time.sleep(min_response_time )
     if curr_sent != "":
-
+        da = get_therapist_intent(curr_sent,context)
         print(curr_sent)
+        create_server(da,port =50200)
         answer += curr_sent
     print("STOP")
     answer = answer.replace('\n', ' ')

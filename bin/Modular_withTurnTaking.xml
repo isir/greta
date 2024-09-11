@@ -217,15 +217,17 @@
                     <item module="Mistral" name="Mistral"/>
                     <item module="MistralIncremental" name="Mistral Incremental"/>
                     <item module="MI Counselor" name="MI Counselor"/>
-                    <item module="MICounselorIncremental" name="MI Counselor Incremental"/>
-                    <item module="MICounselorIncrementalDA" name="MI Counselor Incremental DA"/>
                 </menu>
                 <menu name="DeepASR">
                     <item module="DeepGram" name="DeepGram"/>
-                    <item module="DeepGramWithBackchannel" name="DeepGramWithBackchannel"/>
+                </menu>
+                <menu name="TurnManagement">
+                    <item module="TurnManagement" name="TurnManagement"/>
                 </menu>
             </menu>
         </menu>
+    
+    
     </menus>
     <!-- list of all modules that can be used -->
     <modules>
@@ -1182,14 +1184,6 @@
         <object class="greta.auxiliary.llm.MICounselor" lib_id="greta_llm"/>
         <frame type="object"/>
       </module>
-      <module name="MICounselorIncremental" style="Intentions">
-        <object class="greta.auxiliary.llm.MICounselorIncremental" lib_id="greta_llm"/>
-        <frame type="object"/>
-      </module>
-      <module name="MICounselorIncrementalDA" style="Intentions">
-        <object class="greta.auxiliary.llm.MICounselorIncrementalDA" lib_id="greta_llm"/>
-        <frame type="object"/>
-      </module>
          <module name="DeepGram" >
            <object class="greta.auxiliary.deepasr.DeepGramFrame" lib_id="greta_deepasr"/>
            <frame type="object"/>
@@ -1199,12 +1193,11 @@
            <object class="greta.auxiliary.Microphone.MicrophoneFrame" lib_id="greta_microphone"/>
            <frame type="object"/>
         </module>
-
-        <module name="DeepGramWithBackchannel" >
-            <object class="greta.auxiliary.deepasr.DeepGramWithBackchannelFrame" lib_id="greta_deepasr"/>
-            <frame type="object"/>
-        </module>                                    
-                                                                                                            
+        
+        <module name="TurnManagement">
+            <object class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
+        </module>
+                                    
     </modules>
     <!-- list of libraries and their dependencies -->
     <libs>
@@ -1675,6 +1668,9 @@
       <lib id="greta_microphone" path="./Common/Lib/Internal/Microphone.jar">
       </lib>
       
+      <lib id="greta_turnmanagement" path="./Common/Lib/Internal/TurnManagement.jar">
+      </lib>
+      
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>
@@ -2014,6 +2010,16 @@
         <connect from="input" method="addIncInteractionPerformer" to="output"/>
         <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
       </connector>
+      
+      <!--
+      <connector id="turnManagementToPlanner">
+        <input class="greta.auxiliary.TurnManagement.TurnManagementFrame"  lib_id="greta_turnmanagement"/>
+        <output class="greta.core.behaviorplanner" lib_id="greta_behaviorplanner"/>
+        <connect from="input" method="addTurnManagementFrame" to="output"/>
+        <disconnect from="input" method="removeTurnManagementFrame" to="output"/>
+      </connector>
+      -->
+      
     </connectors>
     <!-- list of styles -->
     <styles>

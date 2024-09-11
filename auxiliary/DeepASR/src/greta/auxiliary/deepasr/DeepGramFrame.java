@@ -82,7 +82,6 @@ public class DeepGramFrame extends DeepASRFrame {
     @Override
     public void performFeedback(String type){
        Boolean IsStreaming = Boolean.FALSE;
-       System.out.println(type+"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&");
        for (LLMFrame llm : llms){
                       IsStreaming = llm.IsStreaming | IsStreaming;                  
                                   }

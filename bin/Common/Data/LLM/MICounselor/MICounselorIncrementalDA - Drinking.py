@@ -166,7 +166,7 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
     context=""
     if messages is not None:
         l=len(messages)
-        for i,msg in ennumerate(messages):
+        for i,msg in enumerate(messages):
             prompt.append(msg)
             if l-i<2:
                 if (message.role) =='user':

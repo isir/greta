@@ -1,3 +1,4 @@
+@echo off
 goto charniak
 
 :charniak

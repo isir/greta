@@ -115,6 +115,12 @@
                     module="Mistral" name="Mistral" w="80.0" x="30.0" y="350.0">
                     <window h="1326" visible="true" w="2428" x="9586" y="1288"/>
                 </element>
+                <element h="50.0"
+                    id="TurnManagement - 1726328039482-429"
+                    module="TurnManagement" name="TurnManagement"
+                    w="80.0" x="240.0" y="410.0">
+                    <window h="388" visible="false" w="432" x="0" y="0"/>
+                </element>
             </element>
         </element>
         <element h="560.0" id="Ogre Player - 1720626419025-143"
@@ -141,6 +147,8 @@
     <connections>
         <connection connector="addLogOutput"
             source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="TurnManagerToIntentionPerformer"
+            source="TurnManagement - 1726328039482-429" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="Mistral - 1722526972791-635" target="Behavior Planner - 1544700734561-356"/>
@@ -168,6 +176,8 @@
             source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1721381426095-674"/>
         <connection connector="addFeedbackOutput"
             source="Feedbacks - 1721057588907-99" target="DeepGram - 1722345283838-187"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1721057588907-99" target="TurnManagement - 1726328039482-429"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
         <connection connector="LipSourceForLipBlender"

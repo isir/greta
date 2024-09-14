@@ -205,8 +205,8 @@
                     </menu>
                 </menu>
             </menu>
-            <item module="Group Behavior" name="Group Behavior"/>
-			<item module="Speech Recognizer" name="Speech Recognizer"/>
+                <item module="Group Behavior" name="Group Behavior"/>
+        			<item module="Speech Recognizer" name="Speech Recognizer"/>
             <menu name="Dialogue">
                 <menu name="Flipper">
                     <item module="FlipperLauncher" name="FlipperLauncher"/>
@@ -223,6 +223,9 @@
                 <menu name="DeepASR">
                     <item module="DeepGram" name="DeepGram"/>
                     <item module="DeepGramWithBackchannel" name="DeepGramWithBackchannel"/>
+                </menu>
+                <menu name="TurnManagement">
+                    <item module="TurnManagement" name="turnManagement"/>
                 </menu>
             </menu>
         </menu>
@@ -1204,6 +1207,11 @@
             <object class="greta.auxiliary.deepasr.DeepGramWithBackchannelFrame" lib_id="greta_deepasr"/>
             <frame type="object"/>
         </module>                                    
+
+        <module name="TurnManagement" >
+            <object class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
+            <frame type="object"/>
+        </module> 
                                                                                                             
     </modules>
     <!-- list of libraries and their dependencies -->
@@ -1674,6 +1682,12 @@
       
       <lib id="greta_microphone" path="./Common/Lib/Internal/Microphone.jar">
       </lib>
+
+      <lib id="greta_turnmanagement" path="./Common/Lib/Internal/TurnManagement.jar">
+        <depends lib_id="greta_intentions"/>
+        <depends lib_id="greta_signals"/>
+        <depends lib_id="greta_util"/>
+      </lib>      
       
     </libs>
     <!-- list of how to connect and disconnect modules -->
@@ -2014,6 +2028,25 @@
         <connect from="input" method="addIncInteractionPerformer" to="output"/>
         <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
       </connector>
+
+        <connector id="TurnManagerToIntentionPerformer">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+        </connector>
+
+        <!--
+        <connector id="SignalEmitterToFMLIntentionPerformer">
+            <input class="greta.core.signals.FMLIntentionEmitter" lib_id="greta_signals"/>
+            <output class="greta.core.signals.FMLIntentionPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="add" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        -->
+
     </connectors>
     <!-- list of styles -->
     <styles>

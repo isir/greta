@@ -96,6 +96,7 @@ public class BrokerFrame extends javax.swing.JFrame implements ConnectionListene
         Process p = null;
         try {
             p = builder.start();
+            Runtime.getRuntime().addShutdownHook(new ShutdownHook(p));
         } catch (IOException e) {
             System.out.println(e);
         }
@@ -105,8 +106,10 @@ public class BrokerFrame extends javax.swing.JFrame implements ConnectionListene
         // execute commands
         executeCommand("cd Common\\Lib\\External\\apache-activemq-5.15.14\\bin");
         executeCommand("activemq start");
-        System.out.println("ActiveMQ Broker started");        
-
+        System.out.println("ActiveMQ Broker started");
+        
+        
+        
     }
 
     protected void setHostValue(String value){

@@ -28,12 +28,14 @@ public class shutdownHook extends Thread{
                 killer_process = new ProcessBuilder(killer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
             } catch (IOException ex) {
                 Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("greta.auxiliary.MeaningMiner.shutdownHook: destroyed.");
+                System.out.println("greta.auxiliary.MeaningMiner.shutdownHook: destroyed.");
             }
-            try {
-                Thread.sleep(3000);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(shutdownHook.class.getName()).log(Level.SEVERE, null, ex);
+            if (this.process.isAlive()) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(shutdownHook.class.getName()).log(Level.SEVERE, null, ex);
+                }                
             }
         }
     }

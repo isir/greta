@@ -39,6 +39,7 @@
                 <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
                 <item module="ASAP" name="ASAP"/>
                 <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
+                <item module="RestPoseSetterWithFeedback" name="RestPoseSetterWithFeedback"/>
                 <item module="ObjectNodeController" name="ObjectNodeController"/>
                 <item module="OSC" name="OSC"/>
                 
@@ -1212,6 +1213,11 @@
             <object class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
             <frame type="object"/>
         </module> 
+
+        <module name="RestPoseSetterWithFeedback">
+            <object class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
+            <frame type="object"/>
+        </module>
                                                                                                             
     </modules>
     <!-- list of libraries and their dependencies -->
@@ -2037,15 +2043,24 @@
             <disconnect from="input" method="removeIntentionPerformer" to="output"/>
             <!-- it will call input.addIntentionPerformer(output) -->
         </connector>
-
+        
         <!--
-        <connector id="SignalEmitterToFMLIntentionPerformer">
-            <input class="greta.core.signals.FMLIntentionEmitter" lib_id="greta_signals"/>
-            <output class="greta.core.signals.FMLIntentionPerformer" lib_id="greta_signals"/>
-            <connect from="input" method="add" to="output"/>
-            <disconnect from="null" method="" to="null"/>
+        <connector id="RestPoseSetterWithFeedbackToSignalPerformer">
+            <input class="greta.core.feedbacks.FeedbackEmitter" lib_id="greta_feedbacks"/>
+            <input class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
+            <connect from="input" method="addFeedbackPerformer" to="output"/>
+            <disconnect from="input" method="removeFeedbackPerformer" to="output"/>
         </connector>
         -->
+
+        <connector id="RestPoseSetterWithFeedbackToSignalPerformer">
+            <input class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.signals.SignalPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="addSignalPerformer" to="output"/>
+            <!-- it will call input.addSignalPerformer(output) -->
+            <disconnect from="input" method="removeSignalPerformer" to="output"/>
+            <!-- it will call input.removeSignalPerformer(output) -->
+        </connector>
 
     </connectors>
     <!-- list of styles -->

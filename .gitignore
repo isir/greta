@@ -47,3 +47,5 @@ bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
 bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
 /bin/Examples/NotNecessary
 .DS_Store
+bin/Common/Lib/Internal/README.TXT
+bin/fml_mistral_renew.xml

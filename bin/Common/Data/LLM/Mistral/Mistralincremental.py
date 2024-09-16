@@ -89,7 +89,11 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
             answer = "Response time over. Sorry, some errors happened."
             break
     if curr_sent !="":
-        print(curr_sent)
+        if FIRST_SENTENCE:
+                print("START:" + curr_sent)
+                FIRST_SENTENCE = False
+        else:
+            print(curr_sent)
         answer += curr_sent
     print("STOP")
     answer = answer.replace('\n', ' ')

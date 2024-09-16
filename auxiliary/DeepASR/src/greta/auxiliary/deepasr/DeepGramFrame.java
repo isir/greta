@@ -85,7 +85,12 @@ public class DeepGramFrame extends DeepASRFrame {
        for (LLMFrame llm : llms){
                       IsStreaming = llm.IsStreaming | IsStreaming;                  
                                   }
-      
+       if (IsStreaming){
+           System.out.println("The LLM Is still straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
+       }else{
+           System.out.println("The LLM Is NOT straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
+       }
+       
        if (type == "end" & !IsStreaming){
        if (!IsListenning & automaticListenBool){
            Thread r3 = new Thread() {
@@ -113,7 +118,7 @@ public class DeepGramFrame extends DeepASRFrame {
                 }
    }
    if (type == "start"){
-      
+       if (IsListenning){
            Thread r3 = new Thread() {
             @Override
             public void run() {
@@ -122,7 +127,7 @@ public class DeepGramFrame extends DeepASRFrame {
        }catch (Exception ex) {
                     Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                      if (IsListenning){
+                     
                     try{
                         
                         server.sendMessage("STOP");
@@ -132,10 +137,12 @@ public class DeepGramFrame extends DeepASRFrame {
                     }catch (Exception ex) {
                     Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                      }
+                     
             }
            };
                     r3.start();
+   
+   } 
    
    }
    }

@@ -520,7 +520,7 @@ public class DeepGramFrame extends DeepASRFrame {
     private void automaticListenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticListenActionPerformed
         // TODO add your handling code here:
         // TODO add your handling code here:
-        automaticListenBool = !automaticListenBool;
+        automaticListenBool = automaticListen.isEnabled();
         if(automaticListenBool){
          Thread r3 = new Thread() {
             @Override

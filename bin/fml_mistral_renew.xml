@@ -5,23 +5,11 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>Sure
-<tm id="tm2"/>thing!
-<tm id="tm3"/>I'm
-<tm id="tm4"/>an
-<tm id="tm5"/>AI
-<tm id="tm6"/>assistant.
-<tm id="tm7"/>I
-<tm id="tm8"/>help
-<tm id="tm9"/>out,
-<tm id="tm10"/>answer
-<tm id="tm11"/>questions,
-<tm id="tm12"/>stuff
-<tm id="tm13"/>like
-<tm id="tm14"/>that.
-<tm id="tm15"/>You?
-<tm id="tm16"/>
-<boundary end="s1:tm16" id="b1" start="s1:tm1" type="LL"/>
+<tm id="tm1"/>I'm
+<tm id="tm2"/>good,
+<tm id="tm3"/>thanks!
+<tm id="tm4"/>
+<boundary end="s1:tm4" id="b1" start="s1:tm1" type="LL"/>
 </speech>
 </bml>
 <fml>

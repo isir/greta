@@ -126,7 +126,7 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
         
         if chunk.choices[0].delta.content is None:
             pass
-        elif chunk.choices[0].delta.content in [".","?","!",";"]:
+        elif chunk.choices[0].delta.content in [".","?","!",";"," ?"]:
             curr_sent+=chunk.choices[0].delta.content
             if answer != "":
                 response_time = time.perf_counter() -start
@@ -145,10 +145,15 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
         else:
             curr_sent+=chunk.choices[0].delta.content
     time.sleep(min_response_time )
+    if curr_sent != "":
+        answer += curr_sent
+        print(curr_sent)
     print("STOP")
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
     answer = answer.replace(']', ' ')
+    if answer == "":
+        answer = "NOTHING"
     return question,answer   
 def append_interaction_to_chat_log(question, answer, messages=None,messages_online=None):
     if messages is None:

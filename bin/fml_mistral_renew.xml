@@ -5,11 +5,10 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>I'm
-<tm id="tm2"/>good,
-<tm id="tm3"/>thanks!
-<tm id="tm4"/>
-<boundary end="s1:tm4" id="b1" start="s1:tm1" type="LL"/>
+<tm id="tm1"/>You're
+<tm id="tm2"/>welcome!
+<tm id="tm3"/>
+<boundary end="s1:tm3" id="b1" start="s1:tm1" type="LL"/>
 </speech>
 </bml>
 <fml>

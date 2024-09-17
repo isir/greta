@@ -26,26 +26,26 @@ bin/output1.wav
 bin/fml_output.xml
 bin/fml_output_mm.xml
 bin/fml_mistral.xml
+bin/fml_mistral_renew.xml
 bin/fml_to_bml.xml
+bin/fml_gpt3.xml
 bin/test_fml.xml
+**/.DS_Store
 
 bin/Modular.jar
 bin/ModularSave.xml
 
-bin/Common/Lib/Internal/*.TXT
 bin/Common/Data/FMLAnnotator/Output/output.xml
 bin/Common/Lib/External/apache-activemq-5.15.14/data
+bin/Common/Lib/Internal/README.TXT
 
+bin/NVBG/bin/orig_Release
 bin/NVBG/data/cache/brad_rachel_parse.txt
 bin/charniak/charniak-windows/DATA/FR_orig
-bin/Common/Data/LLM/Mistral/api_key.txt
+
 bin/Common/Data/ChatGPT/api_key.txt
-bin/fml_gpt3.xml
+bin/Common/Data/LLM/Mistral/api_key.txt
 bin/Common/Data/DeepASR/DeepGram/api_key.txt
-/bin/NVBG/bin/orig_Release
 bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
-bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
-/bin/Examples/NotNecessary
-.DS_Store
-bin/Common/Lib/Internal/README.TXT
-bin/fml_mistral_renew.xml
+
+bin/Examples/NotNecessary

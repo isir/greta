@@ -460,8 +460,8 @@ public class MICounselorIncrementalDA extends LLMFrame{
                                                 String file=TextToFML(answ, false);
                                                 answ=null;
                                                 
-                                                load(file, CompositionType.append);
-//                                                load(file, CompositionType.append);
+                                                // load(file, CompositionType.append);
+                                                load(file, CompositionType.replace);
 
                                             }
                                             else{

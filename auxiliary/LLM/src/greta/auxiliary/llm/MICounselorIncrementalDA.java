@@ -467,6 +467,7 @@ public class MICounselorIncrementalDA extends LLMFrame{
                                             else{
                                                 System.out.println("TEXTE:"+answ);
                                                 String file=TextToFML(answ, false);
+                                                answ = answ.replace("END_CONVO", "");
                                                 answ=null;                                            
                                                 load(file, CompositionType.append);                                                
                                             }

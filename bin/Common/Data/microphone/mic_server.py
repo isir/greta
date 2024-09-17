@@ -16,6 +16,7 @@ import socket
 import pyaudio
 from threading import Thread, Lock
 
+
 def main():
     "Main function"
 
@@ -125,6 +126,29 @@ class Microphone(Thread):
 
         self.p = pyaudio.PyAudio()
         
+        info = self.p.get_host_api_info_by_index(0)
+        numdevices = info.get('deviceCount')
+        
+        for i in range(0, numdevices):
+            if (self.p.get_device_info_by_host_api_device_index(0, i).get('maxInputChannels')) > 0:
+                device_info = "Input Device id {} - {}".format(i, self.p.get_device_info_by_host_api_device_index(0, i).get('name'))
+                
+                #In case device name includes non-unicode character, just replace it with unicode character
+                device_info = device_info.encode("ascii", 'ignore').decode()
+                # device_info = unidecode(unicode(device_info, 'utf-8'))
+                
+                print(device_info)
+        
+        mic_index = 0
+        mic_name = self.p.get_device_info_by_host_api_device_index(0, i).get('name').encode('ascii', 'ignore')
+        print("### Selected mic is {} with index {}".format(mic_name, mic_index))
+        
+        print("##############################################################################")
+        print("[INFO] If you want to specify microphone to use,")
+        print("       please specify device index by changing \"input_device_index\"")
+        print("       in bin\Common\Data\microphone\mic_server.py")
+        print("##############################################################################")
+        
         def callback(in_data, frame_count, time_info, status):
             return (in_data, pyaudio.paContinue)
          
@@ -133,7 +157,8 @@ class Microphone(Thread):
                         rate=self.RATE,
                         input=True,
                         output=True,
-                        # stream_callback=callback
+                        # stream_callback=callback,
+                        input_device_index = mic_index
                         )
          
         self.stream.start_stream()

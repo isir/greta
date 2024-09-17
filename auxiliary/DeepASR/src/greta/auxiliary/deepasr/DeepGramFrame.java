@@ -61,7 +61,6 @@ public class DeepGramFrame extends DeepASRFrame {
      * Creates new form DeepGramFrame
      */
     
-    
     private String DeepASR_python_env_checker_path = "Common\\Data\\DeepASR\\DeepGram\\check_env.py";
     private String DeepASR_python_env_installer_path = "Common\\Data\\DeepASR\\DeepGram\\init_env.bat";
     private String python_asr_path = "\\Common\\Data\\DeepASR\\DeepGram\\DeepGram.py ";
@@ -71,82 +70,79 @@ public class DeepGramFrame extends DeepASRFrame {
     private ArrayList<MistralFrame> mistrals = new ArrayList<MistralFrame>();
     private static String markup = "fml-apml";
     private Server server;
-    
+
+//    private volatile Boolean IsListenning = Boolean.FALSE;
 
     public DeepGramFrame(CharacterManager cm)throws InterruptedException {
         super(cm);
-       initComponents();
-       server = new greta.auxiliary.deepasr.Server();
+        initComponents();
+        server = new greta.auxiliary.deepasr.Server();
         this.cm=cm;
     }
+    
     @Override
     public void performFeedback(String type){
-       Boolean IsStreaming = Boolean.FALSE;
-       for (LLMFrame llm : llms){
-                      IsStreaming = llm.IsStreaming | IsStreaming;                  
-                                  }
-       if (IsStreaming){
-           System.out.println("The LLM Is still straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
-       }else{
-           System.out.println("The LLM Is NOT straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
-       }
+        Boolean IsStreaming = Boolean.FALSE;
+        for (LLMFrame llm : llms){
+            IsStreaming = llm.IsStreaming | IsStreaming;                  
+        }
+        if (IsStreaming){
+            System.out.println("The LLM Is still straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
+        }else{
+            System.out.println("The LLM Is NOT straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
+        }
        
-       if (type == "end" & !IsStreaming){
-       if (!IsListenning & automaticListenBool){
-           Thread r3 = new Thread() {
-            @Override
-            public void run() {
-       
-                try {
-                    
-                    String language= cm.getLanguage();
-                    System.out.println("Language selected : "+language);
-                    
-                    server.sendMessage(language);
-                    System.out.println("Listenning");
-                    listen.setText("Stop");
-                    IsListenning = Boolean.TRUE;
-                    
-                } catch (Exception ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-           };
-           r3.start();
-                
-                
-                }
-   }
-   if (type == "start"){
-       
-           Thread r3 = new Thread() {
-            @Override
-            public void run() {
-                     try{
-       Thread.sleep(100);
-       }catch (Exception ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                    if (IsListenning){
-                    try{
-                        
-                        server.sendMessage("STOP");
-                        System.out.println("Stopping");
-                        IsListenning = Boolean.FALSE;
-                        listen.setText("Listen");
-                    }catch (Exception ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        if (type == "end" & !IsStreaming){
+            if (!IsListenning & automaticListenBool){
+                 Thread r3 = new Thread() {
+                     @Override
+                     public void run() {
+
+                        try {
+
+                            String language= cm.getLanguage();
+                            System.out.println("Language selected : "+language);
+
+                            server.sendMessage(language);
+                            System.out.println("Listenning");
+                            listen.setText("Stop");
+                            IsListenning = Boolean.TRUE;
+
+                        } catch (Exception ex) {
+                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
-                     
+                };
+                r3.start();
             }
-           };
-                    r3.start();
-   
-   } 
-   
-   
-   }
+        }
+        if (type == "start"){
+
+            Thread r3 = new Thread() {
+                 @Override
+                 public void run() {
+                     try{
+                         Thread.sleep(100);
+                     }catch (Exception ex) {
+                         Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                     }
+                     if (IsListenning){
+                         try{
+
+                             server.sendMessage("STOP");
+                             System.out.println("Stopping");
+                             IsListenning = Boolean.FALSE;
+                             listen.setText("Listen");
+                         }catch (Exception ex) {
+                             Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                         }
+                     }
+                 }
+             };
+             r3.start();
+
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -304,45 +300,39 @@ public class DeepGramFrame extends DeepASRFrame {
 
     private void enableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableActionPerformed
         
-       if(enable.isSelected()){
+        if(enable.isSelected()){
             
             System.out.println("DeepGram port:"+server.getPort());
             server.setAddress(address.getText());
             server.setPort(port.getText());
             boolean python=true;
-             try{
-            server_process = new ProcessBuilder("python", DeepASR_python_env_checker_path).redirectErrorStream(true).start();
-            server_process.waitFor();
-        } catch (Exception e){
-           e.printStackTrace();
-        }
-        
-
-        InputStream inputStream = server_process.getInputStream();
-        String result = new BufferedReader(
-                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                .lines()
-                .collect(Collectors.joining("\n")
-                );
-        System.out.println(".init_DeepGram_server(): DeepASR, python env exist: " + result);
-        
-        if(result.equals("0")){
-            System.out.println(".init_DeepGram_server(): DeepASR, installing python environment...");
             try{
-                server_process = new ProcessBuilder(DeepASR_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                server_process = new ProcessBuilder("python", DeepASR_python_env_checker_path).redirectErrorStream(true).start();
                 server_process.waitFor();
             } catch (Exception e){
                 e.printStackTrace();
             }
-            
-        }        
-          
-            
+
+            InputStream inputStream = server_process.getInputStream();
+            String result = new BufferedReader(
+                    new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                    .lines()
+                    .collect(Collectors.joining("\n"));
+            System.out.println(".init_DeepGram_server(): DeepASR, python env exist: " + result);
+
+            if(result.equals("0")){
+                System.out.println(".init_DeepGram_server(): DeepASR, installing python environment...");
+                try{
+                    server_process = new ProcessBuilder(DeepASR_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                    server_process.waitFor();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+            }        
             
             if(python==false){
                 System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the DeepGram module which is optional. "
                         + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
-                
   
                 enable.setSelected(false);
                 enable.setEnabled(false);
@@ -355,133 +345,121 @@ public class DeepGramFrame extends DeepASRFrame {
                     
                     server.startConnection();
                     Thread r1 = new Thread() {
-                    @Override
-                    public void run() {
+                        @Override
+                        public void run() {
                         
                             try {
                                 System.out.println("Checking new connections");
                                 server.accept_new_connection();
                             } catch (IOException ex) {
                                 Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                                }
                             }
+                        }
                         
                     };
                     
                     Thread r2 = new Thread() {
-                    @Override
-                    public void run() {
-                        
-                        try {
-                            String[] cmd = {
-                                    "cmd.exe","/C","conda","activate","greta_deepgram","&&","python","-u",
-                                System.getProperty("user.dir")+python_asr_path,server.getPort(),
-                            };
-                            Runtime rt = Runtime.getRuntime();
-                            System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);
-                            
-                            Process proc = rt.exec(cmd);
-                            
-                            BufferedReader stdInput = new BufferedReader(new
-                        InputStreamReader(proc.getInputStream(), "ISO-8859-1"));
-                            BufferedReader stdError = new BufferedReader(new
-                        InputStreamReader(proc.getErrorStream()));
-                            
-                            // Read the output from the command
-                            System.out.println("Here is the standard output of the command:\n");
-                            String s = null;
-                           
-                            while ((s = stdInput.readLine()) != null) {
-                                System.out.println("READ INPUT PYTHON :"+s);
-                                answ=s;
-                                if(answ!=null && answ.length()>1){
-                                    System.out.println("CLIENT:"+answ);
-                                    if (answ.contains("Speech Final:")|answ.contains("Is Final:")){
-                                    TranscriptText.setText(answ.replace("Speech Final:","").replace("Is Final:",""));
-                                    if (IsListenning){
-                                        for (LLMFrame llm : llms){
-                                        
-                                        llm.setRequestTextandSend(answ.replace("Speech Final:","").replace("Is Final:",""));
-                                    }
-                    try{
-                        server.sendMessage("STOP");
-                        System.out.println("Stopping");
-                        IsListenning = Boolean.FALSE;
-                        listen.setText("Listen");
-                    }catch (IOException ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                    
-                }
-                                    
-                                    
-                                }
-                                    
-                                }
-                                if(TranscriptText.getText().length()>1){
-                                    answ=null;
-                                    System.out.println("TEXTE:"+TranscriptText.getText());        
-                        }
-                            }
-                            
-                            // Read any errors from the attempted command
-                            System.out.println("Here is the standard error of the command (if any):\n");
-                            while ((s = stdError.readLine()) != null) {
-                                System.out.println(s);
-                            }   } catch (IOException ex) {
-                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        } 
- } 
-                        
-                    };
-                
-                
+                        @Override
+                        public void run() {
 
-                     
+                            try {
+                                String[] cmd = {
+                                        "cmd.exe","/C","conda","activate","greta_deepgram","&&","python","-u",
+                                    System.getProperty("user.dir")+python_asr_path,server.getPort(),
+                                };
+                                Runtime rt = Runtime.getRuntime();
+                                System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);
+
+                                Process proc = rt.exec(cmd);
+
+                                BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream(), "ISO-8859-1"));
+                                BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
+
+                                // Read the output from the command
+                                System.out.println("Here is the standard output of the command:\n");
+                                String s = null;
+
+                                while ((s = stdInput.readLine()) != null) {
+                                    System.out.println("READ INPUT PYTHON :"+s);
+                                    answ=s;
+                                    if(answ!=null && answ.length()>1){
+                                        System.out.println("CLIENT:"+answ);
+                                        if (answ.contains("Speech Final:")|answ.contains("Is Final:")){
+                                            TranscriptText.setText(answ.replace("Speech Final:","").replace("Is Final:",""));
+                                            if (IsListenning){
+                                                for (LLMFrame llm : llms){
+                                                    llm.setRequestTextandSend(answ.replace("Speech Final:","").replace("Is Final:",""));
+                                                }
+                                                try{
+                                                    server.sendMessage("STOP");
+                                                    System.out.println("Stopping");
+                                                    IsListenning = Boolean.FALSE;
+                                                    listen.setText("Listen");
+                                                }catch (IOException ex) {
+                                                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                                }
+                                            }
+                                        }
+
+                                    }
+                                    if(TranscriptText.getText().length()>1){
+                                        answ=null;
+                                        System.out.println("TEXTE:"+TranscriptText.getText());        
+                                    }
+                                }
+
+                                // Read any errors from the attempted command
+                                System.out.println("Here is the standard error of the command (if any):\n");
+                                while ((s = stdError.readLine()) != null) {
+                                    System.out.println(s);
+                                }   
+                            } catch (IOException ex) {
+                                Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            } 
+                        }
+                    };
                         
                     r1.start();
                     r2.start();
                     System.out.println("greta.auxiliary.deepasr.DeepGram" + server.port + "   " + server.address);
                     
-                    }
-                    catch(Exception e)
-                    {
+                }
+                catch(Exception e)
+                {
                     e.printStackTrace(); 
                 }
             }
+        
         }else{
             try{
-             if(IsListenning){
-                 Thread r3 = new Thread() {
-            @Override
-            public void run() {
-                    try{
-                        server.sendMessage("STOP");
-                        System.out.println("Stopping");
-                        IsListenning = Boolean.FALSE;
-                        listen.setText("Listen");
-                    }catch (IOException ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                if(IsListenning){
+                    Thread r3 = new Thread() {
+                        @Override
+                        public void run() {
+                            try{
+                                server.sendMessage("STOP");
+                                System.out.println("Stopping");
+                                IsListenning = Boolean.FALSE;
+                                listen.setText("Listen");
+                            }catch (IOException ex) {
+                                Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    };
+                    r3.start();
                 }
-                
-            }
-        };
-
-        r3.start();
-             }
-            server.stopConnection();
+                server.stopConnection();
             }
             catch(Exception e)
-                 {
-                   e.printStackTrace(); 
-                }
+            {
+                e.printStackTrace(); 
+            }
         }
     }//GEN-LAST:event_enableActionPerformed
-   
-    private Boolean IsListenning = Boolean.FALSE;
+
     private void listenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listenActionPerformed
-      // TODO add your handling code here:
-         Thread r3 = new Thread() {
+    // TODO add your handling code here:
+        Thread r3 = new Thread() {
             @Override
             public void run() {
         
@@ -495,23 +473,21 @@ public class DeepGramFrame extends DeepASRFrame {
                         IsListenning = Boolean.FALSE;
                         listen.setText("Listen");
                     }catch (IOException ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }else{
-                try {
-                    
-                    System.out.println("Language selected : "+language);
-                    
-                    server.sendMessage(language);
-                    System.out.println("Listenning");
-                    listen.setText("Stop");
-                    IsListenning = Boolean.TRUE;
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                
+                    try {
+
+                        System.out.println("Language selected : "+language);
+
+                        server.sendMessage(language);
+                        System.out.println("Listenning");
+                        listen.setText("Stop");
+                        IsListenning = Boolean.TRUE;
+
+                    } catch (IOException ex) {
+                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         };
@@ -530,40 +506,37 @@ public class DeepGramFrame extends DeepASRFrame {
         // TODO add your handling code here:
         automaticListenBool = automaticListen.isEnabled();
         if(automaticListenBool){
-         Thread r3 = new Thread() {
-            @Override
-            public void run() {
-        
-                String language= cm.getLanguage();
-               
-                
-                if (IsListenning){
-                    try{
-                        server.sendMessage("STOP");
-                        System.out.println("Stopping");
-                        IsListenning = Boolean.FALSE;
-                        listen.setText("Listen");
-                    }catch (IOException ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Thread r3 = new Thread() {
+                @Override
+                public void run() {
+
+                    String language= cm.getLanguage();
+
+                    if (IsListenning){
+                        try{
+                            server.sendMessage("STOP");
+                            System.out.println("Stopping");
+                            IsListenning = Boolean.FALSE;
+                            listen.setText("Listen");
+                        }catch (IOException ex) {
+                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }else{
+                        try {
+
+                            System.out.println("Language selected : "+language);
+
+                            server.sendMessage(language);
+                            System.out.println("Listenning");
+                            listen.setText("Stop");
+                            IsListenning = Boolean.TRUE;
+
+                        } catch (IOException ex) {
+                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
                 }
-                }else{
-                try {
-                    
-                    System.out.println("Language selected : "+language);
-                    
-                    server.sendMessage(language);
-                    System.out.println("Listenning");
-                    listen.setText("Stop");
-                    IsListenning = Boolean.TRUE;
-                    
-                } catch (IOException ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                
-                
-                }
-            }
-        };
+            };
 
         r3.start();
         }

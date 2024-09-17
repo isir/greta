@@ -118,7 +118,7 @@ public class DeepGramFrame extends DeepASRFrame {
                 }
    }
    if (type == "start"){
-       if (IsListenning){
+       
            Thread r3 = new Thread() {
             @Override
             public void run() {
@@ -127,7 +127,7 @@ public class DeepGramFrame extends DeepASRFrame {
        }catch (Exception ex) {
                     Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                     
+                    if (IsListenning){
                     try{
                         
                         server.sendMessage("STOP");
@@ -137,6 +137,7 @@ public class DeepGramFrame extends DeepASRFrame {
                     }catch (Exception ex) {
                     Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                    }
                      
             }
            };
@@ -144,7 +145,7 @@ public class DeepGramFrame extends DeepASRFrame {
    
    } 
    
-   }
+   
    }
 
     /**

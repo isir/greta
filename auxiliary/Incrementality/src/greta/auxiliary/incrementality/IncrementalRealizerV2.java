@@ -300,16 +300,21 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
             System.out.println("\n -----------------------------      SENDING CHUNKS TO THREAD      -------------------------------");
 
+            if (mode.getCompositionType() == CompositionType.replace || mode.getCompositionType() == CompositionType.blend) {
+                this.stopAllAnims();
+//                for (IncrementalityInteractionPerformer pf : performerList) {
+//                    pf.performIncInteraction("stop");
+//                }
+                chunkSenderThread.wakeUp();
+                chunkSenderThread.emptyChunkList();
+                chunkSenderThread.closeQueue();
+            }
+
             // Add animation to callbacks
             this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
 
-            if (mode.getCompositionType() == CompositionType.replace || mode.getCompositionType() == CompositionType.blend) {
-                this.stopAllAnims();
-                for (IncrementalityInteractionPerformer pf : performerList) {
-                    pf.performIncInteraction("stop");
-                }
-            }
             chunkSenderThread.send(treeList, requestId, mode);
+
         }
     }
 

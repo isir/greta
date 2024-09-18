@@ -419,6 +419,7 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
     @Override
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
+        characterManager.add(this);
     }
 
     public void UpdateFaceLibrary() {

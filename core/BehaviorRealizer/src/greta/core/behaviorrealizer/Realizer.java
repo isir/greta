@@ -287,6 +287,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
     @Override
     public void setCharacterManager(CharacterManager characterManager) {
         this.characterManager = characterManager;
+        characterManager.add(this);
     }
 
     public void UpdateFaceLibrary(){

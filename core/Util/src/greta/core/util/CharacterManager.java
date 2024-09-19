@@ -571,4 +571,27 @@ public class CharacterManager {
         this.currentCharacterHeadFromUnity = currentCharacterHeadFromUnity;
     }
     
+    public List<CharacterDependent> getCharacterDependents() {        
+        return this.dependents;
+    }
+
+    public CharacterDependent getCharacterDependentObject(CharacterDependent dependentToReturn) {
+        for (CharacterDependent dependentToCompare: this.dependents) {
+            if (dependentToReturn.getClass() == dependentToCompare.getClass()) {
+                dependentToReturn = dependentToCompare;
+            }
+        }
+        return dependentToReturn;
+    }
+
+    public CharacterDependent getCharacterDependentObject(Class classToReturn) {
+        CharacterDependent dependentToReturn = null;
+        for (CharacterDependent dependentToCompare: this.dependents) {
+            if (classToReturn == dependentToCompare.getClass()) {
+                dependentToReturn = dependentToCompare;
+            }
+        }
+        return dependentToReturn;
+    }
+    
 }

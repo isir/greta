@@ -53,10 +53,20 @@ def main():
     #######################################
 
     vad_threshold = 0.8
-    
+
+    # CAUTION: not used yet for this version
+    # silence threshold in seconds to determine turn shift
     turn_shift_threshold = 1.0
     vad_history_size = int(turn_shift_threshold/vad_interval)
-    
+
+    # silence threshold in seconds to determine Inter-Pausal Unit (IPU) boundary
+    # IPU_threshold = 0.2
+    IPU_threshold = 0.5
+
+    # non-silence threshold in seconds to determine user has started to speak
+    # utterance_start_threshold = 03
+    utterance_start_threshold = 0.5
+
     vad_history = []
     vad_result_binary = 0
     
@@ -148,7 +158,7 @@ def main():
                 
             action, behavior_cnt, utterance_start_detected, check_turn_shift = generate_behavior(
                 vad_result_binary, vad_history, agent_speaking_state, agent_speaking_state_history, vad_interval,
-                utterance_start_detected, cnt, check_turn_shift)
+                utterance_start_detected, cnt, check_turn_shift, IPU_threshold, utterance_start_threshold)
             
             
             if (action != "nothing") and (action != "waiting"):
@@ -271,7 +281,7 @@ def get_agent_speaking_state(test_data = None):
     return speaking_state
 
 def generate_behavior(vad_result_binary, vad_history, agent_speaking_state, agent_speaking_state_history, vad_interval, 
-                      utterance_start_detected, global_cnt, check_turn_shift):
+                      utterance_start_detected, global_cnt, check_turn_shift, IPU_threshold, utterance_start_threshold):
     
     """
     Rule 1:
@@ -284,16 +294,12 @@ def generate_behavior(vad_result_binary, vad_history, agent_speaking_state, agen
     
     s_time = time.perf_counter()
     
-    # silence threshold in seconds to determine Inter-Pausal Unit (IPU) boundary
-    IPU_threshold = 0.2
     IPU_threshold_size = int(IPU_threshold/vad_interval)
     
     # # silence threshold in seconds to determine turn shift
     # agent_turn_threshold = 1.0
     # agent_turn_threshold_size = int(agent_turn_threshold/vad_interval)
     
-    # non-silence threshold in seconds to determine user has started to speak
-    utterance_start_threshold = 0.3
     utterance_start_threshold_size = int(utterance_start_threshold/vad_interval)
     
     behaviors = Behaviors()
@@ -464,9 +470,17 @@ class VAD(object):
         self.buffer_size = buffer_size
         
         self.model = load_silero_vad()
-        
-        self.client_socket = socket.socket()
-        self.client_socket.connect((host, port))
+
+        while True:
+            try:
+
+                self.client_socket = socket.socket()
+                self.client_socket.connect((host, port))
+                break
+
+            except Exception as e:
+                print("Trying to connect to mic server ({})".format(e))
+                time.sleep(1)
         
         self.vad_result = 0
         

@@ -49,3 +49,4 @@ bin/Common/Data/DeepASR/DeepGram/api_key.txt
 bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
 
 bin/Examples/NotNecessary
+/.idea

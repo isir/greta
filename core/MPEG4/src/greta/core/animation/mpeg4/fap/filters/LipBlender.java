@@ -161,12 +161,17 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
     }
 
     private void addValueFrom(int fapIndex, FAPFrame target, FAPFrame source){
-        target.applyValue(fapIndex, target.getValue(fapIndex) + source.getValue(fapIndex));
+//        target.applyValue(fapIndex, target.getValue(fapIndex) + source.getValue(fapIndex));  
+        
+        target.applyValue(fapIndex, ( 7/6 * target.getValue(fapIndex) + source.getValue(fapIndex))/2);
+        System.out.println(" IT WORKED aaaaaaaa!!dfsfsfd!!!!!!!!!");
     }
 
     private void blendValueFrom(int fapIndex, FAPFrame target, FAPFrame source) {
-        double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000;
+        double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000; //BLEND COEF VALUE IS 0.5
         target.applyValue(fapIndex, (int) (target.getValue(fapIndex)*(1-blendCoef) + source.getValue(fapIndex)*(blendCoef)));
+        //target.applyValue(fapIndex, (int) ( ( 7/6 * target.getValue(fapIndex)+ source.getValue(fapIndex))/2));
+        
     }
 
     private FAPFrame blend(FAPFrame face, FAPFrame lip){

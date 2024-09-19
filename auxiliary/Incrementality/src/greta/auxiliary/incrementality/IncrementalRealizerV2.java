@@ -190,13 +190,21 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
         for (KeyframeGenerator generator : generators) {
             System.out.println("greta.core.behaviorrealizer.Realizer.performSignals(): add all keyframes: " + generator.toString());
             keyframes.addAll(generator.generateKeyframes());
+            
         }
+        
+         //faceGenerator.findExistingAU(keyframes);
+        //keyframes.addAll(faceGenerator.generateKeyframes());
 
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         // Step 3: Schedule signals that the computed signal is relative to the previous and the next signals
         // The result of this step is: (i) which phases are realized in each signal; (ii) when these phases are realized (abs time for each keyframe)        
         ///////////////////////////////////////////////////////////////////////////////////////////////////
 
+        //faceGenerator.findExistingAU(keyframes);
+        
+        //keyframes.addAll(faceGenerator.generateKeyframes());
+        
         for (Keyframe kf : keyframes) {
             System.out.format("Keyframes before sort : %s - %s - %.3f - %.3f%n", kf.getModality(), kf.getId(), kf.getOnset(), kf.getOffset());
         }
@@ -418,7 +426,9 @@ public class IncrementalRealizerV2 extends CallbackSender implements CancelableS
 
     @Override
     public void setCharacterManager(CharacterManager characterManager) {
+        
         this.characterManager = characterManager;
+        characterManager.add(this);
     }
 
     public void UpdateFaceLibrary() {

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>Ah
+<tm id="tm2"/>,
+<tm id="tm4"/>okay
+<tm id="tm5"/>.
+<tm id="tm6"/>.
+<tm id="tm7"/>je
+<tm id="tm8"/>vois
+</speech>
+</bml>
+<fml>
+<emotion end="s1:tm8" id="1" importance="1.0" start="s1:tm1" type="smile"/>
+</fml>
+</fml-apml>

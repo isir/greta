@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>You
+<tm id="tm2"/>have
+<tm id="tm3"/>chosen
+<tm id="tm4"/>our
+<tm id="tm5"/>organic
+<tm id="tm6"/>potatoes
+<tm id="tm7"/>at
+<tm id="tm8"/>only
+<tm id="tm9"/>1
+<tm id="tm10"/>euro
+<tm id="tm11"/>81
+<tm id="tm12"/>per
+<tm id="tm13"/>kilogram.
+<tm id="tm14"/>How
+<tm id="tm15"/>many
+<tm id="tm16"/>do
+<tm id="tm17"/>you
+<tm id="tm18"/>want?
+</speech>
+</bml>
+<fml>
+<deictic end="s1:tm7" id="1" importance="1.0" start="s1:tm1" type="me"/>
+<beat end="s1:tm9" id="2" importance="1.0" start="s1:tm3" type="LowLf1"/>
+<beat end="s1:tm22" id="3" importance="1.0" start="s1:tm16" type="LowLf1"/>
+</fml>
+</fml-apml>

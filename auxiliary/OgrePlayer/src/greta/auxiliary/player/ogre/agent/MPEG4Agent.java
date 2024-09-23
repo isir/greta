@@ -31,7 +31,8 @@ import vib.auxiliary.player.ogre.natives.Quaternion;
 import vib.auxiliary.player.ogre.natives.SceneNode;
 import vib.auxiliary.player.ogre.natives.Vector3;
 
-//import greta.furhat.activemq.Broker;
+import greta.furhat.activemq.GretaFurhatRotationSender;
+
 /**
  *
  * @author Andre-Marie Pez
@@ -54,11 +55,11 @@ public abstract class MPEG4Agent extends Thread {
     private Skeleton skeleton;
     boolean visible;
     
+    String rotation; // This attribute is used for sending the greta rotation to furhat
     // Create an instance of SocketServer
-    private GretaFurhatTextSender server; // = new ActivemqGretaFurhatSender(61617);
+    private GretaFurhatRotationSender server; // = new ActivemqGretaFurhatSender(61617);
     //private Broker broker;
     private int frameNumber;
-    // Start the server
     
 
     public MPEG4Agent(String id, SceneNode parent) {
@@ -72,8 +73,7 @@ public abstract class MPEG4Agent extends Thread {
         //broker = new Broker("61616");
         boolean use_default_host = false; // default broker host = 10.75.0.1
         //String server_url = (use_default_host)? broker.getHost(): "192.168.1.1"; // 192.168.1.1 new IP used to connect to my laptop
-        server = new GretaFurhatTextSender("localhost", "61616", "greta.furhat.Rotation");
-        server.startConnection();
+        server = new GretaFurhatRotationSender("localhost", "61616", "greta.furhat.Rotation");
            
         // 
     }
@@ -222,10 +222,14 @@ public abstract class MPEG4Agent extends Thread {
     }
     protected void updateHeadOrientation(greta.core.util.math.Quaternion orientation){
         mpeg4.getHeadNode().setOrientation(orientation);
+        /*==================================================================================================================================================*/
+        // Author: Fousseyni Sangaré 
+        // These lines send the rotation angle to the activemq for the Furhat application
+    
         String rotation = orientation.getEulerAngleXYZByAngle().x() + " " + orientation.getEulerAngleXYZByAngle().y()+ " " + orientation.getEulerAngleXYZByAngle().z() + " " + frameNumber;
         server.send(rotation);
         //System.out.println("orientation Euler angle: "+rotation+ " at frame: "+ frameNumber);
-        
+        /*==================================================================================================================================================*/
     }
 
     public void scale(Vector3 vect){

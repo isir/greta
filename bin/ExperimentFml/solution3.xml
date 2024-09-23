@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>x
+<tm id="tm2"/>carrer
+<tm id="tm3"/>egal 
+<tm id="tm4"/>16
+<tm id="tm5"/>.
+<tm id="tm6"/>.
+<tm id="tm7"/>et 
+<tm id="tm8"/>donc
+<tm id="tm9"/>je
+<tm id="tm10"/>crois
+<tm id="tm11"/>que
+<tm id="tm12"/>x
+<tm id="tm13"/>est
+<tm id="tm14"/>egal
+<tm id="tm15"/>4
+<tm id="tm16"/>ou
+<tm id="tm17"/>-4
+</speech>
+</bml>
+<fml>
+<emotion end="s1:tm17" id="1" importance="1.0" start="s1:tm9" type="smile"/>
+</fml>
+</fml-apml>

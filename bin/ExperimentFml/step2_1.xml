@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<fml-apml>
+<bml>
+<speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
+<description level="1" type="gretabml">
+<reference>tmp/from-fml-apml.pho</reference>
+</description>
+<tm id="tm1"/>Hum
+<tm id="tm2"/>.
+<tm id="tm3"/>.
+<tm id="tm4"/>.
+<tm id="tm5"/>je
+<tm id="tm6"/>ne
+<tm id="tm7"/>suis
+<tm id="tm8"/>pas
+<tm id="tm9"/>sur
+<tm id="tm10"/>.
+<tm id="tm11"/>.
+<tm id="tm12"/>.
+<tm id="tm13"/>.
+<tm id="tm14"/>j'ai
+<tm id="tm15"/>un
+<tm id="tm16"/>peu
+<tm id="tm17"/>de
+<tm id="tm18"/>mal
+<tm id="tm19"/>avec
+<tm id="tm20"/>les
+<tm id="tm21"/>parenthaises
+</speech>
+<gaze id="gaze1" start="0.5" end="3" offsetDirection="UP" offsetAngle="30" type="GAZE" modality="HEAD"/>
+<gaze id="gaze2" start="4" end="6" offsetDirection="DOWNLEFT" offsetAngle="20" type="GAZE" modality="HEAD"/>
+</bml>
+<fml>
+<emotion end="s1:tm21" id="1" importance="1.0" start="s1:tm14" type="disappointment"/>
+</fml>
+</fml-apml>

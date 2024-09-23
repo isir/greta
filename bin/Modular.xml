@@ -182,6 +182,14 @@
                     <item module="ActiveMQ Text Editor" name="Text Editor"/>
                     <item module="ActiveMQ Intention Queuing" name="Intention Queuing"/>
                 </menu>
+
+		<menu name="Greta Furhat Interface">
+                	<item module="Greta Furhat Rotation Sender" name="GretaFurhatRotationSender"/>
+                	<item module="Greta Furhat AUs Sender" name="GretaFurhatAUSender"/>
+                    <item module="Greta Furhat AUs Sender GUI" name="GretaFurhatAUSenderGUI"/>
+                    <item module="Greta Furhat Audio Sender" name="GretaFurhatAudioSender"/>
+        	</menu>
+
                 <menu name="Thrift">
                     <menu name="Senders">
                         <item module="Thrift FAP Sender" name="FAP Sender"/>
@@ -1178,6 +1186,37 @@
             <object class="greta.auxiliary.llm.MistralFrame" lib_id="greta_llm"/>
 			<frame type="object"/>
        </module>
+	
+	<module name="Greta Furhat AUs Sender" style="DEFAULT">
+		    <object class="greta.furhat.activemq.GretaFurhatAUSender" lib_id="libGretaFurhatInterface"/>
+		    <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Furhat AUs Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+	    </module>
+
+        <module name="Greta Furhat AUs Sender GUI" style="DEFAULT">
+		    <object class="greta.furhat.activemq.GretaFurhatAUSenderGUI" lib_id="libGretaFurhatInterface"/>
+            <frame type="object"/>
+        </module>
+
+        <module name="Greta Furhat Rotation Sender" style="DEFAULT">
+		    <object class="greta.furhat.activemq.GretaFurhatRotationSender" lib_id="libGretaFurhatInterface"/>
+		    <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Furhat Rotation Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+	</module>
+
+	<module name="Greta Furhat Audio Sender" style="DEFAULT">
+            <object class="greta.furhat.activemq.GretaFurhatAudioSender" lib_id="libGretaFurhatInterface"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Furhat Audio Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+	</module>
+
+
       <module name="MistralIncremental" style="Intentions">
         <object class="greta.auxiliary.llm.MistralFrameIncremental" lib_id="greta_llm"/>
         <frame type="object"/>

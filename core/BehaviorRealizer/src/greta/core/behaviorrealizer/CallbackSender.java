@@ -89,10 +89,14 @@ public class CallbackSender implements CallbackEmitter {
                 }
             } else {
                 animStartedList.add(new AnimationTiming(id, absoluteStartTime, absoluteEndTime));
-                callback.setType("start");
-                for (CallbackPerformer perf : callbackPerfList) {
-                   perf.performCallback(callback);
+                
+                if (!id.toString().contains("backchannel")) {
+                    callback.setType("start");
+                    for (CallbackPerformer perf : callbackPerfList) {
+                       perf.performCallback(callback);
+                    }
                 }
+
                  //System.out.println("Anim added to started list");
             }
         } else {
@@ -190,24 +194,35 @@ public class CallbackSender implements CallbackEmitter {
                         AnimationTiming anim = (AnimationTiming) iter.next();
                         callback.setAnimId(anim.Id);
                         if (currentTime > anim.absoluteStartTime) {
+                            
                             //System.out.println("Anim added to start list");
                             cbSender.animStartedList.add(anim);
-                            callback.setType("start");
-                            for (CallbackPerformer perf : callbackPerfList) {
-                                perf.performCallback(callback);
+                            
+                            if (!anim.Id.toString().contains("backchannel")) {
+                                callback.setType("start");
+                                for (CallbackPerformer perf : callbackPerfList) {
+                                    perf.performCallback(callback);
+                                }                                
                             }
+
                             iter.remove();
                         }
                     }
                     for (Iterator iter = cbSender.animStartedList.iterator(); iter.hasNext();) {
                         AnimationTiming anim = (AnimationTiming) iter.next();
                         callback.setAnimId(anim.Id);
+                        
                         if (currentTime > anim.absoluteEndTime) {
+                            
                             //System.out.println("Anim ended");
-                            callback.setType("end");
-                            for (CallbackPerformer perf : callbackPerfList) {
-                                perf.performCallback(callback);
+                            
+                            if (!anim.Id.toString().contains("backchannel")) {
+                                callback.setType("end");
+                                for (CallbackPerformer perf : callbackPerfList) {
+                                    perf.performCallback(callback);
+                                }                                
                             }
+
                             iter.remove();
                         }
                     }

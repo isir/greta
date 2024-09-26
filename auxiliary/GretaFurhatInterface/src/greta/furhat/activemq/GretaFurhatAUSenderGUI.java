@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  *
- * @author sanga
+ * @author Fousseyni Sangaré 04/2024-09/2024
  */
 public class GretaFurhatAUSenderGUI extends javax.swing.JFrame implements ConnectionListener, AUPerformer {
     

@@ -281,9 +281,15 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         setupCharacterLanguageVoiceParameters();
         clean();
         tmnumber = 0;
-        
+    /*====================================================================================================*/
+    /*                     This block is part of the Greta Furhat Interface       
+                               Author: Fousseyni Sangaré 04/2024-09/2024                                  */
+    /*====================================================================================================*/
         speechtextserver = new GretaFurhatSpeechTextSender("localhost", "61616", "greta.furhat.SpeechText");
         audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.Audio");
+        
+    /*====================================================================================================*/
+    /*====================================================================================================*/
     }
 
     /**
@@ -662,10 +668,13 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     audio = new Audio(audioFormatCereProc, rawAudioBuffer);
                     
                     
-                    /* ==============================================================================================================
-                    author: Fousseyni Sangaré 
-                    the following lines send the speech text and the audio over the activemq topic for furhat
-                    */
+                    /*=================================================================================================================*/
+                    /*                     This block is part of the Greta Furhat Interface       
+                                              Author: Fousseyni Sangaré 04/2024-09/2024 
+                            the following lines send the speech text and the audio over the activemq topic for furhat                  */
+                    /*=================================================================================================================*/
+                    
+             
                     try{
                         System.out.println("Sending speech text over the topic");
                         audioserver.send(rawAudioBuffer, phonemes, speech.getSpeechElements(), audio);
@@ -679,8 +688,8 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     catch(Exception e){
                         System.err.println("Error when sending audiobuffer: "+e.getMessage());
                     }
-                    /* ============================================================================================================== */
-                    
+                    /*================================================================================================================= */
+                    /*=================================================================================================================*/
 
                     /*  DEBUG
                     rawAudioBuffer = new byte[(samples16bitNum) * 2];

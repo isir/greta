@@ -22,7 +22,7 @@ import greta.core.animation.mpeg4.MPEG4Animatable;
 
 /**
  *
- * @author Admin
+ * @author Fousseyni Sangaré 04/2024-09/2024
  */
 public class GretaFurhatRotationSender extends TextSender {
     

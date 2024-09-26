@@ -33,7 +33,7 @@ import javax.sound.sampled.AudioFormat;
 
 /**
  *
- * @author sanga
+ * @author Fousseyni Sangaré 04/2024-09/2024
  */
 
 
@@ -44,11 +44,6 @@ import javax.sound.sampled.AudioFormat;
  */
 
 
-
-/**
- *
- * @author Admin
- */
 public class GretaFurhatAUSender extends TextSender {
     
     private HashMap<String,Object> metaDataMap;

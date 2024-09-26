@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 /**
  *
- * @author Admin
+ * @author Fousseyni Sangaré 04/2024-09/2024
  */
 public class GretaFurhatTextSender extends TextSender {
     

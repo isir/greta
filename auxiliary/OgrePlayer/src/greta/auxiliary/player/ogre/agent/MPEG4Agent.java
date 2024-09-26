@@ -55,13 +55,19 @@ public abstract class MPEG4Agent extends Thread {
     private Skeleton skeleton;
     boolean visible;
     
+    /*===========================================================================================*/
+    /*                     This block is part of the Greta Furhat Interface       
+                               Author: Fousseyni Sangaré 04/2024-09/2024                         */
+    /*===========================================================================================*/
     String rotation; // This attribute is used for sending the greta rotation to furhat
     // Create an instance of SocketServer
     private GretaFurhatRotationSender server; // = new ActivemqGretaFurhatSender(61617);
     //private Broker broker;
     private int frameNumber;
+    /*===========================================================================================*/
+    /*===========================================================================================*/
     
-
+    
     public MPEG4Agent(String id, SceneNode parent) {
         super("MPEG4Agent-" + id);
         this.agentNode = createChildSceneNode(parent, id + "_agentNode");
@@ -114,22 +120,6 @@ public abstract class MPEG4Agent extends Thread {
                 if (mpeg4 != null) {
                     FAPFrame ff = mpeg4.getCurrentFAPFrame();
                     BAPFrame bf = mpeg4.getCurrentBAPFrame();
-                    //System.out.println("### OgrePlayer ###: fap frame: " + ff + ", bap frame: " + bf + ", bap value: " + bf.getValue(57)+ " " + bf.getValue(58) + " " + bf.getValue(59) + ", bap Degree value: " + bf.getDegreeValue(57)+ " " + bf.getDegreeValue(58) + " " + bf.getDegreeValue(59));
-                    
-                    // Send and receive messages
-                    String rotation = bf.getDegreeValue(59) + " " + bf.getDegreeValue(57)+ " " + bf.getDegreeValue(58);
-                    frameNumber = bf.getFrameNumber();
-                    //System.out.println("### OgrePlayer ###: Rotation angle angle from Bap: "+ rotation);
-                    
-                    //System.out.println("broker Connection: "+broker.isConnected() + " url: " + broker.getURL());
-                    //System.out.println("Connection: "+server.isConnected() + " url: " + server.getURL());
-                    
-                    
-                    
-                    
-                    //String receivedMessage = server.receiveMessage();
-                    
-                    //server.stop();
                     
                     applyFapFrame(ff);
                     if(bf.getMask(BAPType.HumanoidRoot_tr_lateral) ||
@@ -222,13 +212,17 @@ public abstract class MPEG4Agent extends Thread {
     }
     protected void updateHeadOrientation(greta.core.util.math.Quaternion orientation){
         mpeg4.getHeadNode().setOrientation(orientation);
+        
         /*==================================================================================================================================================*/
-        // Author: Fousseyni Sangaré 
-        // These lines send the rotation angle to the activemq for the Furhat application
+                                // This block is part of the Greta Furhat Interface
+                                // Author: Fousseyni Sangaré 04/2024-09/2024   
+                                // These lines send the rotation angle to the activemq for the Furhat application
+        /*==================================================================================================================================================*/
     
         String rotation = orientation.getEulerAngleXYZByAngle().x() + " " + orientation.getEulerAngleXYZByAngle().y()+ " " + orientation.getEulerAngleXYZByAngle().z() + " " + frameNumber;
         server.send(rotation);
-        //System.out.println("orientation Euler angle: "+rotation+ " at frame: "+ frameNumber);
+        
+        /*==================================================================================================================================================*/
         /*==================================================================================================================================================*/
     }
 

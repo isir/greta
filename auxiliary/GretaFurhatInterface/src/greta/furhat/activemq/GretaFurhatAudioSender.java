@@ -33,7 +33,7 @@ import java.util.concurrent.ExecutionException;
 
 /**
  *
- * @author sanga
+ * @author Fousseyni Sangaré 04/2024-09/2024
  */
 
 import java.util.HashMap;

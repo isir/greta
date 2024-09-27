@@ -12,7 +12,7 @@
 
 bin/Common/Lib/Internal/*.jar
 bin/Common/Lib/Internal/**/*.jar
-bin/Common/Lib/Internal/README.TXT
+bin/Common/Lib/Internal/*.TXT
 
 bin/Common/Data/CereProc/*
 bin/Log/*

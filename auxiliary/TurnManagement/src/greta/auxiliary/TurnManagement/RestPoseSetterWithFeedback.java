@@ -113,7 +113,7 @@ public class RestPoseSetterWithFeedback extends javax.swing.JFrame implements Fe
                 }
 
                 List<Signal> Gsignals = new ArrayList<Signal>();
-                GestureSignal gesture = new GestureSignal("newElementInGestureEditor");
+                GestureSignal gesture = new GestureSignal("rest");
                 gesture.setReference(gest.getCategory() + "=" + gest.getId());
 
                 gesture.getStart().setValue(0);                
@@ -131,7 +131,7 @@ public class RestPoseSetterWithFeedback extends javax.swing.JFrame implements Fe
                 gesture.setTension(50 / 100.0);
                 Gsignals.add(gesture);
                 Gestuary g = Gestuary.global_gestuary;
-                ID id = IDProvider.createID("GestureEditor");
+                ID id = IDProvider.createID("rest");
 
         //        try {
         //            Thread.sleep(1000);        
@@ -297,13 +297,17 @@ public class RestPoseSetterWithFeedback extends javax.swing.JFrame implements Fe
     public void performFeedback(String str) {
         System.out.println("greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback.performFeedback(): str: " + str);
         if (str == "end") {
-            if (waiting) {
-                setRestPose();
-                waiting = Boolean.FALSE;
-            }
-            else {
-                waiting = Boolean.TRUE;
-            }
+            
+//            if (waiting) {
+//                setRestPose();
+//                waiting = Boolean.FALSE;
+//            }
+//            else {
+//                waiting = Boolean.TRUE;
+//            }
+            
+            setRestPose();
+
         }
     }    
 

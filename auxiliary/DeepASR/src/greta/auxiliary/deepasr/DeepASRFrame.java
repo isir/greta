@@ -66,8 +66,9 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
     
     protected Server server;
     protected Socket soc;
-    protected String answ;
+//    protected String answ;
     protected ArrayList<LLMFrame> llms = new ArrayList<LLMFrame>();
+    
     protected volatile Boolean IsListenning = Boolean.FALSE;
     
     private String DeepASR_python_env_checker_path = "Common\\Data\\DeepASR\\DeepGram\\check_env.py";
@@ -79,14 +80,14 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
     
     protected CharacterManager cm;
     private static String markup = "fml-apml";
-    
-    public String getAnswer() {
-        return answ;
-    }
-
-    public void setAnswer(String answer) {
-        this.answ = answer;
-    }
+        
+//    public String getAnswer() {
+//        return answ;
+//    }
+//
+//    public void setAnswer(String answer) {
+//        this.answ = answer;
+//    }
     
    public void performFeedback(String type){
        //TO IMPLEMENT on subclass
@@ -132,7 +133,7 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
   
     public DeepASRFrame(CharacterManager cm) {
         
-        server = new Server();       
+        // server = new Server();       
         this.cm=cm;
        
     }

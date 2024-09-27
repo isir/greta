@@ -5,11 +5,7 @@ Created on Fri Sep  6 11:10:55 2024
 
 @author: takeshi-s
 """
-# from matplotlib import pyplot as plt
-# from pathlib import Path
-# from tqdm import tqdm
 import pprint as pp
-# import pandas as pd
 import numpy as np
 import traceback
 import shutil
@@ -25,9 +21,15 @@ from silero_vad import load_silero_vad, read_audio, get_speech_timestamps
 
 from threading import Thread, Lock
 
+import multiprocessing
+process = multiprocessing.current_process()
+print('[TurnManagement Greta] PID = {}'.format(process.pid))
+
 agent_speaking_state = False
 
 def main():
+    
+    print("[TurnMangement Greta] Python start")
     
     "Main function"
 
@@ -100,17 +102,12 @@ def main():
     
     greta_socket = socket.socket()
     greta_socket.connect((greta_host, greta_port))
-    # greta_socket.settimeout(vad_interval)
-
-    # wait_seconds = 3
-    # print('Greta: {} seconds'.format(wait_seconds))
-    # time.sleep(wait_seconds)
     
     while True:
 
         try:
             message = greta_socket.recv(text_buffer_size)
-            # print('[Python backchannel] connection established:', message.decode())
+            print('[TurnManagement Greta] connection established:', message.decode())
             break
         except socket.timeout:
             pass
@@ -118,15 +115,10 @@ def main():
             print(e)
             sys.exit()
     
-    # greta_socket.settimeout(None)
-    
-    # print()
     cnt = 0
     while True:
                 
         try:
-            
-            # print('[DEBUG PYTHON] 1')
             
             s_time = time.perf_counter()
             
@@ -144,22 +136,20 @@ def main():
                 vad_history = vad_history[-vad_history_size:]
                 agent_speaking_state_history = agent_speaking_state_history[-vad_history_size:]
             else:
-                # print('[Python backchannel] Warming up')
                 continue
             
             if system_ready == False:
                 system_ready = True
-                # print('Generator started')
-                greta_socket.send('Generator started\r\n'.encode())
-
-            # print('[DEBUG PYTHON] 2')
-            
-            # print(vad_history[-20:])
+                greta_socket.send('[TurnManagement Greta] Generator started\r\n'.encode())
                 
             action, behavior_cnt, utterance_start_detected, check_turn_shift = generate_behavior(
                 vad_result_binary, vad_history, agent_speaking_state, agent_speaking_state_history, vad_interval,
                 utterance_start_detected, cnt, check_turn_shift, IPU_threshold, utterance_start_threshold)
             
+            ###################################################################################################
+            ### TODO!: Currently, there is not behavior difference between "nothing/waiting" and others.
+            ### But you might need to modify here or conditional branching in generate_behavior() function.
+            ###################################################################################################
             
             if (action != "nothing") and (action != "waiting"):
 
@@ -181,71 +171,83 @@ def main():
                 #         cnt, vad_result_binary, agent_speaking_state, action, behavior_cnt
                 #     ).encode()
                 # )
-            
-            # print('[DEBUG PYTHON] 3')
 
 
             message = greta_socket.recv(text_buffer_size).decode()
-            # print('[Python backchannel] Greta:', message)
-            if message == 'kill':
-                print("Greta: kill signal received")
+
+            if 'kill' in message:
+                print("[TurnManagement Greta] kill signal received")
                 break
+            if "updateMicPort" in message:
+                new_port = int(message.split(" ")[1])
+                vad_client.updateMicPort(new_port)
             
             cnt += 1
             
-            # if action == 'turnShift':
-            #     break
-            
-            while (time.perf_counter() - s_time) < vad_interval:
-                
-                time.sleep(0.01)
+            #
+            # To make sure the VAD interval is constant
+            #
+            e_time = time.perf_counter()
+            while (e_time - s_time) < vad_interval:                
+                time.sleep(vad_interval - (e_time - s_time))
         
-            # time.sleep(vad_interval)
-
         
         except KeyboardInterrupt:
 
             break
         
         except Exception as e:
-            # import traceback
-            # print(traceback.print_exc())
+
+            traceback.print_exc()
             break
         
     vad_client.stop()
     feedback_socket.close()
+    greta_socket.close()
     
-def feedback_loop(clientsocket, vad_client, lock, text_buffer_size):
+    print("[TurnManagement Greta] Python end")
 
-    # global agent_speaking_state
     
-    print('[Python backchannel] Feedback loop started')
+def feedback_loop(feedback_socket, vad_client, lock, text_buffer_size):
+    
+    print('[TurnManagement feedback] loop started')
     
     while True:
         
         try:
             
-            data = clientsocket.recv(text_buffer_size).decode()
+            data = feedback_socket.recv(text_buffer_size).decode()
 
             lock.acquire()
             agent_speaking_state = data
             lock.release()
 
             data = 'ok'
-            clientsocket.send('{}\r\n'.format(data).encode())
+            feedback_socket.send('{}\r\n'.format(data).encode())
         
         except socket.timeout:
             
             continue
         
-        except Exception as e:
-            # import traceback
-            # print('Error in feedback loop:', traceback.print_exc())
+        except ConnectionResetError:
+
+            print('[TurnManagement feedback] ConnectionReset')
+            break
+            
+        except WindowsError as e:
+
+            if e.winerror == 10057:
+                print("[TurnManagement feedback] NotConnected")
+                break
+                
+        except Exception:
+
+            traceback.print_exc()
             break
     
-    clientsocket.close()
+    feedback_socket.close()
 
-    print('[Python backchannel] Feedback loop ended')
+    print('[TurnManagement feedback] loop ended')
 
 def test_data_generator():
 
@@ -266,6 +268,9 @@ def test_data_generator():
         if index == len(test_data):
             index = 0
 
+#
+# Only used for test purpose, not anymore
+#
 def get_agent_speaking_state(test_data = None):
     
     speaking_state = 0
@@ -276,7 +281,7 @@ def get_agent_speaking_state(test_data = None):
         
     else:
         
-        assert True, "get_agent_speaking_state is not implemented yet"
+        assert True, "[TurnManagement] get_agent_speaking_state is not implemented yet"
     
     return speaking_state
 
@@ -296,19 +301,12 @@ def generate_behavior(vad_result_binary, vad_history, agent_speaking_state, agen
     
     IPU_threshold_size = int(IPU_threshold/vad_interval)
     
-    # # silence threshold in seconds to determine turn shift
-    # agent_turn_threshold = 1.0
-    # agent_turn_threshold_size = int(agent_turn_threshold/vad_interval)
-    
     utterance_start_threshold_size = int(utterance_start_threshold/vad_interval)
     
     behaviors = Behaviors()
     IPU_detected = False
     turn_shift_detected = False
-    # utterance_start_detected = False
-    
-    # print(vad_history)
-    
+        
     if agent_speaking_state:
         
         check_turn_shift = True
@@ -331,8 +329,6 @@ def generate_behavior(vad_result_binary, vad_history, agent_speaking_state, agen
         cnt = 0
         for i in range(1, len(vad_history)+1):
             i = -i
-            # print(i)
-            # input()
             
             # IPU detection
             if vad_result_binary == 0:
@@ -453,10 +449,6 @@ class Behaviors():
         self.responsive = 'responsiveBackchannel'
         self.shift = 'turnShift'
 
-        # self.reactive = 'Nod'
-        # self.responsive = 'Node_yes'
-        # self.shift = 'turnShift'
-
         self.waiting = 'waiting'
         
                 
@@ -475,11 +467,12 @@ class VAD(object):
             try:
 
                 self.client_socket = socket.socket()
+                self.client_socket.settimeout(1.0)
                 self.client_socket.connect((host, port))
                 break
 
             except Exception as e:
-                print("Trying to connect to mic server ({})".format(e))
+                print("[TurnManagement VAD] Trying to connect to mic server ({})".format(e))
                 time.sleep(1)
         
         self.vad_result = 0
@@ -494,7 +487,7 @@ class VAD(object):
         self.main_thread = Thread(target = self.main_loop)
         self.main_thread.daemon = True
         self.main_thread.start()
-        # print('VAD loop started')
+        print('[TurnManagement VAD] loop started')
     
     def main_loop(self):
         
@@ -508,6 +501,7 @@ class VAD(object):
                 data = self.client_socket.recv(self.buffer_size)  # receive response
                 
                 np_int16 = np.frombuffer(data, dtype=np.int16)
+                                
                 np_float32 = int2float(np_int16)
 
                 if self.rate == 16000:
@@ -521,20 +515,39 @@ class VAD(object):
                 
                 # print('in loop', vad_result)
                 
-                # self.lock.acquire()
+                self.lock.acquire()
                 self.vad_result = vad_result
-                # self.lock.release()
+                self.lock.release()
+            
+            except socket.timeout:
+                
+                print('[TurnManagement VAD] waiting for microphone connection [timeout]')
+                time.sleep(1)
+
+            except ConnectionResetError:
+
+                print('[TurnManagement VAD] waiting for microphone connection [ConnectionReset]')
+                time.sleep(1)
+                
+            except WindowsError as e:
+                if e.winerror == 10057:
+                    print("[TurnManagement VAD] waiting for microphone connection [NotConnected]")
+                    time.sleep(1)
 
             except Exception:
                 
-                self.lock.acquire()
-                self.is_active = False
-                self.lock.release()
+                # self.lock.acquire()
+                # self.is_active = False
+                # self.lock.release()
+                
+                traceback.print_exc()
+                time.sleep(1)
                 
                 # just in case
-                break
+                # break
             
                 # pass
+        print('[TurnManagement VAD] loop stopped')
 
     def get_vad_result(self):
         
@@ -542,12 +555,36 @@ class VAD(object):
     
     def stop(self):
         
+        self.lock.acquire()
         self.is_active = False
+        self.lock.release()
+        
+        time.sleep(1)
+        
         # self.client_socket.send('kill'.encode())
         self.client_socket.close()  # close the connection
         # print()
         # print('Client has been closed')
         
+    def updateMicPort(self, new_port):
+        
+        # self.stop()
+        
+        while True:
+        
+            try:
+
+                self.client_socket = socket.socket()
+                self.client_socket.connect((self.host, new_port))
+                break
+
+            except Exception as e:
+                print("[TurnManagement VAD] Trying to connect to mic server ({})".format(e))
+                time.sleep(1)
+        
+        # self.start()
+        
+        print("[TurnManagement VAD] Mic server updated")
 
 def int2float(sound):
     

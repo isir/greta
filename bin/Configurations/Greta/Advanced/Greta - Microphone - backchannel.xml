@@ -19,9 +19,9 @@
             <parameter name="blackBackground" value="true"/>
             <window h="435" visible="false" w="618" x="10" y="10"/>
         </element>
-        <element h="420.0" id="Environment - 1544700713383-564"
+        <element h="470.0" id="Environment - 1544700713383-564"
             module="Environment" name="Environment" w="720.0" x="30.0" y="110.0">
-            <element h="360.0"
+            <element h="420.0"
                 id="Character Manager - 1544700726358-960"
                 module="Character Manager" name="Character Manager"
                 w="660.0" x="20.0" y="20.0">
@@ -41,7 +41,7 @@
                     module="BML File Reader" name="BML File Reader"
                     w="80.0" x="130.0" y="30.0">
                     <parameter name="fileName" value=""/>
-                    <window h="143" visible="true" w="792" x="158" y="-1137"/>
+                    <window h="139" visible="true" w="650" x="942" y="-889"/>
                 </element>
                 <element h="230.0"
                     id="Behavior Planner - 1544700734561-356"
@@ -100,7 +100,7 @@
                     id="NVBG_MM_Controller - 1619462027713-169"
                     module="NVBG_MM_Controller"
                     name="NVBG_MM_Controller" w="80.0" x="240.0" y="30.0">
-                    <window h="140" visible="true" w="324" x="164" y="-988"/>
+                    <window h="140" visible="true" w="324" x="944" y="-746"/>
                 </element>
                 <element h="50.0"
                     id="Rest_Pose_Setter - 1621595871295-438"
@@ -108,47 +108,50 @@
                     w="80.0" x="390.0" y="160.0">
                     <window h="148" visible="false" w="342" x="0" y="0"/>
                 </element>
-                <element h="50.0"
+                <element h="70.0"
                     id="FML File Reader Meaning Miner - 1725454081579-111"
                     module="FML File Reader Meaning Miner"
                     name="FML File Reader Meaning Miner" w="80.0"
-                    x="30.0" y="30.0">
+                    x="30.0" y="10.0">
                     <parameter name="fileName" value="D:\takeshi\NetBeansProjects\greta-master\greta\bin\Examples\DemoEN\MeaningMiner_FML_Example.xml"/>
-                    <window h="138" visible="true" w="792" x="158" y="-1281"/>
+                    <window h="138" visible="true" w="651" x="939" y="-1031"/>
+                </element>
+                <element h="50.0" id="Feedbacks - 1727278943993-8"
+                    module="Feedbacks" name="Feedbacks" w="80.0"
+                    x="130.0" y="350.0">
+                    <window h="361" visible="false" w="418" x="0" y="0"/>
                 </element>
             </element>
         </element>
         <element h="420.0" id="Ogre Player - 1544700973529-249"
             module="Ogre Player" name="Ogre Player" w="80.0" x="770.0" y="110.0">
-            <parameter name="posX" value="0.003159262239933014"/>
-            <parameter name="posY" value="1.3899743556976318"/>
-            <parameter name="posZ" value="1.8079895973205566"/>
+            <parameter name="posX" value="-0.006135392468422651"/>
+            <parameter name="posY" value="1.3684051036834717"/>
+            <parameter name="posZ" value="2.0119526386260986"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="-0.052931178361177444"/>
-            <parameter name="yaw" value="-0.029251696541905403"/>
-            <window h="1148" visible="true" w="976" x="1385" y="-1245"/>
+            <parameter name="pitch" value="-0.014783832244575024"/>
+            <parameter name="yaw" value="-0.013594131916761398"/>
+            <window h="548" visible="true" w="383" x="1585" y="-1030"/>
+        </element>
+        <element h="50.0" id="Microphone - 1727278934623-295"
+            module="Microphone" name="Microphone" w="80.0" x="390.0" y="30.0">
+            <window h="140" visible="true" w="323" x="1265" y="-745"/>
+        </element>
+        <element h="50.0" id="TurnManagement - 1727278956591-805"
+            module="TurnManagement" name="TurnManagement" w="80.0"
+            x="80.0" y="480.0">
+            <window h="113" visible="true" w="644" x="943" y="-595"/>
         </element>
     </elements>
     <connections>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
         <connection connector="AUEmitterToAUPerformer"
             source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="FAPFrameEmitterToFAPFramePerformer"
             source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
-        <connection connector="connectPlayerToEnvironment"
-            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="addFeedbackInput"
+            source="Behavior Realizer - 1544712930520-534" target="Feedbacks - 1727278943993-8"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -157,13 +160,30 @@
             source="Behavior Realizer - 1544712930520-534" target="Lip Model - 1544700770889-684"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1544712930520-534" target="Audio Keyframe Performer - 1554477294171-845"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
         <connection connector="IntentionEmitterToIntentionPerformer"
             source="FML File Reader Meaning Miner - 1725454081579-111" target="Behavior Planner - 1544700734561-356"/>
         <connection connector="SignalEmitterToSignalPerformer"
             source="Rest_Pose_Setter - 1621595871295-438" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="BML File Reader - 1544700914641-19" target="Behavior Realizer - 1544712930520-534"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
         <connection connector="BAPFrameEmitterToBAPFramePerformer"
             source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1544700770889-684" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1544700973529-249" target="Environment - 1544700713383-564"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="TurnManagerToIntentionPerformer"
+            source="TurnManagement - 1727278956591-805" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1727278943993-8" target="TurnManagement - 1727278956591-805"/>
     </connections>
 </modulated>

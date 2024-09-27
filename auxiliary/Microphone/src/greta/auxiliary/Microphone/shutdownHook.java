@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author takes
+ * @author Takeshi Saga
  */
 
 public class shutdownHook extends Thread{
@@ -20,9 +20,9 @@ public class shutdownHook extends Thread{
     Process killer_process;
     String killer_path;
     
-    public shutdownHook(Process process, String MM_parse_server_killer_path){
+    public shutdownHook(Process process, String server_killer_path){
         this.process = process;
-        this.killer_path = MM_parse_server_killer_path;
+        this.killer_path = server_killer_path;
     }
     
     public void run(){

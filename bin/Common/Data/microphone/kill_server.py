@@ -14,32 +14,49 @@ import socket
 import pickle
 import base64
 
-def main():
+def main(PORT = 9000):
     
     HOST = socket.gethostname()
-    PORT = 9000
+    
+    # PORT = 9000
+    PORT = int(PORT)
+    
     BUFSIZE = 4096
     
     client = socket.socket()
-    client.connect((HOST, PORT))
-    # data = client.recv(BUFSIZE)
-    # print(data.decode('UTF-8'))
     
-    # while True:
-    #     data = input()
-    #     client.sendall(data.encode('UTF-8'))
-    #     if data == 'end':
-    #         break
+    try:
     
-    s_time = time.time()
+        client.connect((HOST, PORT))
+        # data = client.recv(BUFSIZE)
+        # print(data.decode('UTF-8'))
+        
+        # while True:
+        #     data = input()
+        #     client.sendall(data.encode('UTF-8'))
+        #     if data == 'end':
+        #         break
+        
+        s_time = time.time()
+        
+        data = 'kill'
+        client.sendall(data.encode('UTF-8'))
+        returned = client.recv(BUFSIZE).decode().strip("\r\n")
+        
+        e_time = time.time()
+        # print('Process time: {}'.format(e_time - s_time))
     
-    data = 'kill'
-    client.sendall(data.encode('UTF-8'))
-    
-    e_time = time.time()
-    # print('Process time: {}'.format(e_time - s_time))
-
-    client.close()
+        client.close()
+        
+        print('[Microphone] Microphone server (port {}) has received kill signal (code:{})'.format(PORT, returned))
+        
+    except:
+        
+        print('[Microphone] Failed to close microphone server (port {}), but this is normal if there is other microphone server.'.format(PORT))
 
 if __name__ == '__main__':
-    main()
+    args = sys.argv
+    if len(args) >= 2:
+        main(args[1])
+    else:
+        main()

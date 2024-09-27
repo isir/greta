@@ -14,17 +14,25 @@ import socket
 import pickle
 import base64
 
-def main():
+import multiprocessing
+process = multiprocessing.current_process()
+print('[TurnManagement kill server] PID = {}'.format(process.pid))
+
+def main(PORT = 5961):
     
-    HOST = 'localhost'
-    PORT = 3150
+    HOST = socket.gethostname()
+    
+    # PORT = 9000
+    PORT = int(PORT)
+    
     BUFSIZE = 4096
     
+    client = socket.socket()
+    
     try:
-        
-        client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    
         client.connect((HOST, PORT))
-        data = client.recv(BUFSIZE)
+        # data = client.recv(BUFSIZE)
         # print(data.decode('UTF-8'))
         
         # while True:
@@ -42,10 +50,16 @@ def main():
         # print('Process time: {}'.format(e_time - s_time))
     
         client.close()
-    
+        
+        print('TurnManagement server (port {}) has been killed'.format(PORT))
+        
     except:
-        import traceback
-        traceback.print_exc()
+        
+        print('Failed to close TurnManagement server (port {}), but this is normal if there is other TurnManagement server.'.format(PORT))
 
 if __name__ == '__main__':
-    main()
+    args = sys.argv
+    if len(args) >= 2:
+        main(args[1])
+    else:
+        main()

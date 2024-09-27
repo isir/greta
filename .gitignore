@@ -8,9 +8,11 @@
 
 *.log
 
+**/.DS_Store
+
 bin/Common/Lib/Internal/*.jar
-bin/Player/Lib/Internal/*.jar
 bin/Common/Lib/Internal/**/*.jar
+bin/Common/Lib/Internal/README.TXT
 
 bin/Common/Data/CereProc/*
 bin/Log/*
@@ -19,6 +21,7 @@ bin/Player/Lib/External/Linux32/*.cfg
 bin/Player/Lib/External/Linux64/*.cfg
 bin/Player/Lib/External/Win32/*.cfg
 bin/Player/Lib/External/Win64/*.cfg
+bin/Player/Lib/Internal/*.jar
 
 bin/output.wav
 bin/output1.wav
@@ -29,14 +32,12 @@ bin/fml_mistral_renew.xml
 bin/fml_to_bml.xml
 bin/fml_gpt3.xml
 bin/test_fml.xml
-**/.DS_Store
 
 bin/Modular.jar
 bin/ModularSave.xml
 
 bin/Common/Data/FMLAnnotator/Output/output.xml
 bin/Common/Lib/External/apache-activemq-5.15.14/data
-bin/Common/Lib/Internal/README.TXT
 
 bin/NVBG/bin/orig_Release
 bin/NVBG/data/cache/brad_rachel_parse.txt
@@ -49,4 +50,3 @@ bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
 
 bin/Examples/NotNecessary
 /.idea
-/auxiliary/TurnManagement/build

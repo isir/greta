@@ -66,11 +66,15 @@ public class DeepGramFrame extends DeepASRFrame {
     private String python_asr_path = "\\Common\\Data\\DeepASR\\DeepGram\\DeepGram.py ";
     private Process server_process;
     private Thread server_shutdownHook;
-    private boolean automaticListenBool = false;
+    
+    private volatile boolean automaticListenBool = false;
+    
     private ArrayList<MistralFrame> mistrals = new ArrayList<MistralFrame>();
     private static String markup = "fml-apml";
     private Server server;
 
+    private final Object lock = new Object();    
+    
 //    private volatile Boolean IsListenning = Boolean.FALSE;
 
     public DeepGramFrame(CharacterManager cm)throws InterruptedException {
@@ -82,6 +86,7 @@ public class DeepGramFrame extends DeepASRFrame {
     
     @Override
     public void performFeedback(String type){
+        
         Boolean IsStreaming = Boolean.FALSE;
         for (LLMFrame llm : llms){
             IsStreaming = llm.IsStreaming | IsStreaming;                  
@@ -92,11 +97,11 @@ public class DeepGramFrame extends DeepASRFrame {
             System.out.println("The LLM Is NOT straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
         }
        
-        if (type == "end" & !IsStreaming){
+        if (type.equals("end") & !IsStreaming){
             if (!IsListenning & automaticListenBool){
-                 Thread r3 = new Thread() {
-                     @Override
-                     public void run() {
+                Thread r3 = new Thread() {
+                    @Override
+                    public void run() {
 
                         try {
 
@@ -105,41 +110,53 @@ public class DeepGramFrame extends DeepASRFrame {
 
                             server.sendMessage(language);
                             System.out.println("Listenning");
-                            listen.setText("Stop");
-                            IsListenning = Boolean.TRUE;
+                            
+                            synchronized (lock) {
+                                listen.setText("Stop");
+                                IsListenning = Boolean.TRUE;                                
+                            }
 
                         } catch (Exception ex) {
                             Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
                         }
+                        
                     }
                 };
                 r3.start();
             }
         }
-        if (type == "start"){
+        if (type.equals("start")){
 
             Thread r3 = new Thread() {
-                 @Override
-                 public void run() {
-                     try{
-                         Thread.sleep(100);
-                     }catch (Exception ex) {
-                         Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                     }
-                     if (IsListenning){
-                         try{
+                @Override
+                public void run() {
+                    
+                    try{
+                        Thread.sleep(100);
+                    }catch (Exception ex) {
+                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    if (IsListenning){
+                        
+                        try{
+                            
+                            server.sendMessage("STOP");
+                            System.out.println("Stopping");
+                            
+                            synchronized (lock) {
+                                IsListenning = Boolean.FALSE;
+                                listen.setText("Listen");                                
+                            }
+                            
+                        }catch (Exception ex) {
+                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                        }
 
-                             server.sendMessage("STOP");
-                             System.out.println("Stopping");
-                             IsListenning = Boolean.FALSE;
-                             listen.setText("Listen");
-                         }catch (Exception ex) {
-                             Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                         }
-                     }
-                 }
-             };
-             r3.start();
+                    }
+                }
+            };
+            r3.start();
 
         }
     }
@@ -299,7 +316,7 @@ public class DeepGramFrame extends DeepASRFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void enableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enableActionPerformed
-        
+            
         if(enable.isSelected()){
             
             System.out.println("DeepGram port:"+server.getPort());
@@ -328,15 +345,6 @@ public class DeepGramFrame extends DeepASRFrame {
                 } catch (Exception e){
                     e.printStackTrace();
                 }
-            }        
-            
-            if(python==false){
-                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the DeepGram module which is optional. "
-                        + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
-  
-                enable.setSelected(false);
-                enable.setEnabled(false);
-                
             }
             
             if(python){
@@ -344,24 +352,26 @@ public class DeepGramFrame extends DeepASRFrame {
                     System.out.println("Opening python DeepGram script");
                     
                     server.startConnection();
-                    Thread r1 = new Thread() {
+                    Thread server_launcher_thread = new Thread() {
                         @Override
                         public void run() {
-                        
                             try {
                                 System.out.println("Checking new connections");
                                 server.accept_new_connection();
                             } catch (IOException ex) {
                                 Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+                            } catch (Exception ex) {
+                                Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                            }                            
                         }
-                        
                     };
-                    
-                    Thread r2 = new Thread() {
+                    server_launcher_thread.start();
+
+
+                    Thread main_thread = new Thread() {
                         @Override
                         public void run() {
-
+                            
                             try {
                                 String[] cmd = {
                                         "cmd.exe","/C","conda","activate","greta_deepgram","&&","python","-u",
@@ -380,32 +390,36 @@ public class DeepGramFrame extends DeepASRFrame {
                                 String s = null;
 
                                 while ((s = stdInput.readLine()) != null) {
+                                    
                                     System.out.println("READ INPUT PYTHON :"+s);
-                                    answ=s;
-                                    if(answ!=null && answ.length()>1){
-                                        System.out.println("CLIENT:"+answ);
-                                        if (answ.contains("Speech Final:")|answ.contains("Is Final:")){
-                                            TranscriptText.setText(answ.replace("Speech Final:","").replace("Is Final:",""));
-                                            if (IsListenning){
-                                                for (LLMFrame llm : llms){
-                                                    llm.setRequestTextandSend(answ.replace("Speech Final:","").replace("Is Final:",""));
-                                                }
-                                                try{
-                                                    server.sendMessage("STOP");
-                                                    System.out.println("Stopping");
-                                                    IsListenning = Boolean.FALSE;
-                                                    listen.setText("Listen");
-                                                }catch (IOException ex) {
-                                                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                                                }
-                                            }
-                                        }
+                                    
+                                    synchronized (lock) {
 
+                                        if(s.length()>1){
+                                            System.out.println("CLIENT:"+s);
+                                            if (s.contains("Speech Final:") | s.contains("Is Final:")){
+
+                                                TranscriptText.setText(s.replace("Speech Final:","").replace("Is Final:",""));
+                                                if (IsListenning){
+                                                    for (LLMFrame llm : llms){
+                                                        llm.setRequestTextandSend(s.replace("Speech Final:","").replace("Is Final:",""));
+                                                    }
+                                                    try{
+                                                        server.sendMessage("STOP");
+                                                        System.out.println("Stopping");
+                                                        IsListenning = Boolean.FALSE;
+                                                        listen.setText("Listen");
+                                                    }catch (IOException ex) {
+                                                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                                                    }
+                                                }
+
+                                            }
+
+                                        }
+                                        
                                     }
-                                    if(TranscriptText.getText().length()>1){
-                                        answ=null;
-                                        System.out.println("TEXTE:"+TranscriptText.getText());        
-                                    }
+
                                 }
 
                                 // Read any errors from the attempted command
@@ -418,10 +432,10 @@ public class DeepGramFrame extends DeepASRFrame {
                             } 
                         }
                     };
-                        
-                    r1.start();
-                    r2.start();
-                    System.out.println("greta.auxiliary.deepasr.DeepGram" + server.port + "   " + server.address);
+                    
+                    main_thread.start();
+                    
+                    System.out.println("greta.auxiliary.deepasr.DeepGram: " + server.port + "   " + server.address);
                     
                 }
                 catch(Exception e)
@@ -429,24 +443,32 @@ public class DeepGramFrame extends DeepASRFrame {
                     e.printStackTrace(); 
                 }
             }
+            else{
+                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the DeepGram module which is optional. "
+                        + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
+  
+                enable.setSelected(false);
+                enable.setEnabled(false);
+                
+            }
         
         }else{
             try{
                 if(IsListenning){
-                    Thread r3 = new Thread() {
-                        @Override
-                        public void run() {
-                            try{
-                                server.sendMessage("STOP");
-                                System.out.println("Stopping");
-                                IsListenning = Boolean.FALSE;
-                                listen.setText("Listen");
-                            }catch (IOException ex) {
-                                Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                            }
+
+                    try{
+                        server.sendMessage("STOP");
+                        System.out.println("Stopping");
+                        
+                        synchronized (lock) {
+                            IsListenning = Boolean.FALSE;
+                            listen.setText("Listen");                            
                         }
-                    };
-                    r3.start();
+                        
+                    }catch (IOException ex) {
+                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
                 }
                 server.stopConnection();
             }
@@ -458,41 +480,46 @@ public class DeepGramFrame extends DeepASRFrame {
     }//GEN-LAST:event_enableActionPerformed
 
     private void listenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listenActionPerformed
-    // TODO add your handling code here:
-        Thread r3 = new Thread() {
-            @Override
-            public void run() {
+
         
-                String language= cm.getLanguage();
-               
+        String language= cm.getLanguage();
+
+
+        if (IsListenning){
+            
+            try{
+
+                server.sendMessage("STOP");
+                System.out.println("Stopping");
                 
-                if (IsListenning){
-                    try{
-                        server.sendMessage("STOP");
-                        System.out.println("Stopping");
-                        IsListenning = Boolean.FALSE;
-                        listen.setText("Listen");
-                    }catch (IOException ex) {
-                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else{
-                    try {
-
-                        System.out.println("Language selected : "+language);
-
-                        server.sendMessage(language);
-                        System.out.println("Listenning");
-                        listen.setText("Stop");
-                        IsListenning = Boolean.TRUE;
-
-                    } catch (IOException ex) {
-                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                synchronized (lock) {
+                    IsListenning = Boolean.FALSE;
+                    listen.setText("Listen");                    
                 }
+                
+            }catch (IOException ex) {
+                Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-        };
 
-        r3.start();
+        }else{
+
+            try {
+
+                System.out.println("Language selected : "+language);
+
+                server.sendMessage(language);
+                System.out.println("Listenning");
+                
+                synchronized (lock) {
+                    listen.setText("Stop");
+                    IsListenning = Boolean.TRUE;                    
+                }
+
+            } catch (IOException ex) {
+                Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
     
     }//GEN-LAST:event_listenActionPerformed
 
@@ -506,39 +533,45 @@ public class DeepGramFrame extends DeepASRFrame {
         // TODO add your handling code here:
         automaticListenBool = automaticListen.isEnabled();
         if(automaticListenBool){
-            Thread r3 = new Thread() {
-                @Override
-                public void run() {
 
-                    String language= cm.getLanguage();
+            String language= cm.getLanguage();
 
-                    if (IsListenning){
-                        try{
-                            server.sendMessage("STOP");
-                            System.out.println("Stopping");
-                            IsListenning = Boolean.FALSE;
-                            listen.setText("Listen");
-                        }catch (IOException ex) {
-                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                    }else{
-                        try {
+            if (IsListenning){
 
-                            System.out.println("Language selected : "+language);
+                try{
 
-                            server.sendMessage(language);
-                            System.out.println("Listenning");
-                            listen.setText("Stop");
-                            IsListenning = Boolean.TRUE;
+                    server.sendMessage("STOP");
+                    System.out.println("Stopping");
 
-                        } catch (IOException ex) {
-                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                    synchronized (lock) {
+                        IsListenning = Boolean.FALSE;
+                        listen.setText("Listen");                                
                     }
-                }
-            };
 
-        r3.start();
+                }catch (IOException ex) {
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }else{
+
+                try {
+
+                    System.out.println("Language selected : "+language);
+
+                    server.sendMessage(language);
+                    System.out.println("Listenning");
+
+                    synchronized (lock) {
+                        listen.setText("Stop");
+                        IsListenning = Boolean.TRUE;                                
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+
         }
     }//GEN-LAST:event_automaticListenActionPerformed
 

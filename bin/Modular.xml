@@ -231,7 +231,6 @@
                 </menu>
                 <menu name="DeepASR">
                     <item module="DeepGram" name="DeepGram"/>
-                    <item module="DeepGramWithBackchannel" name="DeepGramWithBackchannel"/>
                 </menu>
                 <menu name="TurnManagement">
                     <item module="TurnManagement" name="turnManagement"/>
@@ -1242,11 +1241,6 @@
            <object class="greta.auxiliary.Microphone.MicrophoneFrame" lib_id="greta_microphone"/>
            <frame type="object"/>
         </module>
-
-        <module name="DeepGramWithBackchannel" >
-            <object class="greta.auxiliary.deepasr.DeepGramWithBackchannelFrame" lib_id="greta_deepasr"/>
-            <frame type="object"/>
-        </module>                                    
 
         <module name="TurnManagement" >
             <object class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>

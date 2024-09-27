@@ -22,6 +22,7 @@ import greta.core.feedbacks.CallbackEmitter;
 import greta.core.feedbacks.CallbackPerformer;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
+import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -53,9 +54,6 @@ public class CallbackSender implements CallbackEmitter {
     }
 
     public CallbackSender() {
-//        callbackPerfList = new ArrayList<CallbackPerformer>();
-//        animPendingList = new ArrayList<AnimationTiming>();
-//        animStartedList = new ArrayList<AnimationTiming>();
         callbackPerfList = Collections.synchronizedList(new ArrayList<CallbackPerformer>());
         animPendingList = Collections.synchronizedList(new ArrayList<AnimationTiming>());
         animStartedList = Collections.synchronizedList(new ArrayList<AnimationTiming>());
@@ -90,7 +88,7 @@ public class CallbackSender implements CallbackEmitter {
             } else {
                 animStartedList.add(new AnimationTiming(id, absoluteStartTime, absoluteEndTime));
                 
-                if (!id.toString().contains("backchannel")) {
+                if (!id.toString().contains("backchannel") && !id.toString().contains("rest") && !id.toString().contains("midSentence")) {
                     callback.setType("start");
                     for (CallbackPerformer perf : callbackPerfList) {
                        perf.performCallback(callback);
@@ -180,16 +178,18 @@ public class CallbackSender implements CallbackEmitter {
 
         @Override
         public void run() {
+            
             running = true;
             //System.out.println("Callback thread started");
             ID tempId = IDProvider.createID("temp");
+            
             while (running) {
+            
                 synchronized (cbSender) {
+                    
                     double currentTime = greta.core.util.time.Timer.getTime();
                     Callback callback = new Callback("", currentTime, tempId);
-                    
-//                    ArrayList<AnimationTiming> listToRemove = new ArrayList<AnimationTiming>();
-                    
+                                        
                     for (Iterator iter = cbSender.animPendingList.iterator(); iter.hasNext();) {
                         AnimationTiming anim = (AnimationTiming) iter.next();
                         callback.setAnimId(anim.Id);
@@ -198,7 +198,7 @@ public class CallbackSender implements CallbackEmitter {
                             //System.out.println("Anim added to start list");
                             cbSender.animStartedList.add(anim);
                             
-                            if (!anim.Id.toString().contains("backchannel")) {
+                            if (!anim.Id.toString().contains("backchannel") && !anim.Id.toString().contains("rest") && !anim.Id.toString().contains("midSentence")) {
                                 callback.setType("start");
                                 for (CallbackPerformer perf : callbackPerfList) {
                                     perf.performCallback(callback);
@@ -216,7 +216,7 @@ public class CallbackSender implements CallbackEmitter {
                             
                             //System.out.println("Anim ended");
                             
-                            if (!anim.Id.toString().contains("backchannel")) {
+                            if (!anim.Id.toString().contains("backchannel") && !anim.Id.toString().contains("rest") && !anim.Id.toString().contains("midSentence")) {
                                 callback.setType("end");
                                 for (CallbackPerformer perf : callbackPerfList) {
                                     perf.performCallback(callback);
@@ -226,39 +226,13 @@ public class CallbackSender implements CallbackEmitter {
                             iter.remove();
                         }
                     }
-                        
-//                    for (AnimationTiming anim:cbSender.animPendingList) {
-////                        AnimationTiming anim = (AnimationTiming) iter.next();
-//                        callback.setAnimId(anim.Id);
-//                        if (currentTime > anim.absoluteStartTime) {
-//                            //System.out.println("Anim added to start list");
-//                            cbSender.animStartedList.add(anim);
-//                            callback.setType("start");
-//                            for (CallbackPerformer perf : callbackPerfList) {
-//                                perf.performCallback(callback);
-//                            }
-////                            iter.remove();
-//                            listToRemove.add(anim);
-//                        }
-////                        cbSender.animPendingList.removeAll(listToRemove);
-//                    }
-//                    for (AnimationTiming anim:cbSender.animPendingList) {
-////                        AnimationTiming anim = (AnimationTiming) iter.next();
-//                        callback.setAnimId(anim.Id);
-//                        if (currentTime > anim.absoluteEndTime) {
-//                            //System.out.println("Anim ended");
-//                            callback.setType("end");
-//                            for (CallbackPerformer perf : callbackPerfList) {
-//                                perf.performCallback(callback);
-//                            }
-////                            iter.remove();
-//                            listToRemove.add(anim);
-//                        }
-//                        cbSender.animPendingList.removeAll(listToRemove);
-//                    }                    
-
                 }
-                try {sleep(1);} catch (Exception ex) {}
+                try {
+                    sleep(1);
+                } 
+                catch (Exception ex) {
+                
+                }
             }
         }
     }

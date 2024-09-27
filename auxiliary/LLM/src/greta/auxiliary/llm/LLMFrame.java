@@ -69,20 +69,21 @@ import greta.core.util.enums.CompositionType;
  * @author miche
  */
 public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
-
-    /**
-     * Creates new form LLMFrame
-     */
     
-    private Server server;
-    public Socket soc;
-    public String answ;
     public static final String ANSI_RESET = "\u001B[0m";
     public static final String ANSI_BLACK = "\u001B[30m";
     public static final String ANSI_RED = "\u001B[31m";
-    public Boolean IsStreaming = Boolean.FALSE;
+    
+    public Socket soc;
+    
+    // TODO: should be removed in the future
+    public String answ;
+
+    public volatile Boolean IsStreaming = Boolean.FALSE;
+
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
+
     private XMLParser fmlparser = XML.createParser();
     private XMLParser bmlparser = XML.createParser();
     private static String markup = "fml-apml";
@@ -95,27 +96,22 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     private String LLM_python_env_checker_path = "Common\\Data\\LLM\\Mistral\\check_env.py";
     private String LLM_python_env_installer_path = "Common\\Data\\LLM\\Mistral\\init_env.bat";
     private String python_path_llm="\\Common\\Data\\LLM\\Mistral\\Mistral.py ";
+    
     private Process server_process;
     private Thread server_shutdownHook;
     private Process server_process_mistral;
     private Thread server_shutdownHook_mistral;
-    public CharacterManager cm;
     
     private ImageSchemaExtractor im;
-    
-    public String getAnswer() {
-        return answ;
-    }
 
-    public void setAnswer(String answer) {
-        this.answ = answer;
-    }
-    
+    protected CharacterManager cm;
+    protected Server server;
+
     public LLMFrame(CharacterManager cm) throws InterruptedException {
        
-        server = new Server();
+        this.server = new Server();
         this.cm=cm;
-        im = new ImageSchemaExtractor(cm);
+        this.im = new ImageSchemaExtractor(cm);
 
     }
 
@@ -125,6 +121,14 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         this.cm=cm;
 
     }
+
+//    public String getAnswer() {
+//        return answ;
+//    }
+//
+//    public void setAnswer(String answer) {
+//        this.answ = answer;
+//    }
     
     public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
         String fml_name = TextToFML(text, true);
@@ -212,7 +216,12 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     }
     
     public ID load(String fmlFileName, CompositionType compositionType) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
-   
+        ID id = load(fmlFileName, compositionType, false, false);
+        return id;
+    }
+
+    public ID load(String fmlFileName, CompositionType compositionType, boolean midSentence, boolean endSentence) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
+        
         double load_start = greta.core.util.time.Timer.getTime();
         System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): START: %.3f ##############################%n", load_start);
 
@@ -221,6 +230,10 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         String base = (new File(fmlFileName)).getName().replaceAll("\\.xml$", "");
         String bml_file=FMLToBML(fmlFileName);
         String base_bml= (new File(bml_file)).getName().replaceAll("\\.xml$", "");
+        
+        if (midSentence) {
+            base = base + "_midSentence";
+        }
 
         String fml_id = "";
         boolean text_brut=false;
@@ -316,7 +329,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         double preprocess_end = greta.core.util.time.Timer.getTime();
         System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): preprocess - %.3f%n", preprocess_end - load_start);        
         
-        if(this.cm.use_MM()){
+        if(this.cm.use_MM() && !endSentence){
              //MEANING MINER TREATMENT START
             List<Intention> intention_list;
             System.out.println("File Name "+fml.toString());
@@ -364,12 +377,12 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         
     }
     
-         @Override
+    @Override
     public void addIntentionPerformer(IntentionPerformer performer) {
         performers.add(performer);
     }
     
-        @Override
+    @Override
     public void removeIntentionPerformer(IntentionPerformer performer) {
         performers.remove(performer);
     }

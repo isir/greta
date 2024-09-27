@@ -74,13 +74,12 @@ public class MICounselorIncremental extends LLMFrame{
      * Creates new form MistralFrame
      */
     
-    private Server server;
-    
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
     private XMLParser fmlparser = XML.createParser();
     private XMLParser bmlparser = XML.createParser();
     private static String markup = "fml-apml";
+    private static String endSentenceFile = System.getProperty("user.dir") + "\\fml_endSentence.xml";
 
     private boolean MM_parse_server_activated = false;
     private String MM_python_env_checker_path = "Common\\Data\\MeaningMiner\\python\\check_env.py";
@@ -89,21 +88,25 @@ public class MICounselorIncremental extends LLMFrame{
     private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
     private String LLM_python_env_checker_path = "Common\\Data\\LLM\\Mistral\\check_env.py";
     private String LLM_python_env_installer_path = "Common\\Data\\LLM\\Mistral\\init_env.bat";
-        private String python_path_llm_drinking="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncremental - Drinking.py ";
+    private String python_path_llm_drinking="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncremental - Drinking.py ";
     private String python_path_llm_sport="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncremental - Sport.py ";
     private String python_path_llm_smoking="\\Common\\Data\\LLM\\MICounselor\\MICounselorIncremental - Smoking.py ";
+    
     private Process server_process;
     private Thread server_shutdownHook;
     private Process server_process_mistral;
     private Thread server_shutdownHook_mistral;
+    
+    private final Object lock = new Object();
 
-
-    public CharacterManager cm;
     public MICounselorIncremental(CharacterManager cm) throws InterruptedException {
+        
         super(cm);
         initComponents();
+        
         server = new Server();
         this.cm=cm;
+        
         systemPrompt.setLineWrap(true);
         systemPrompt.setWrapStyleWord(true);
         request.setLineWrap(true);
@@ -350,78 +353,72 @@ public class MICounselorIncremental extends LLMFrame{
             boolean python=true;
             
             try{
-            server_process_mistral = new ProcessBuilder("python", LLM_python_env_checker_path).redirectErrorStream(true).start();
-            server_process_mistral.waitFor();
-        } catch (Exception e){
-           e.printStackTrace();
-        }
-        
-
-        InputStream inputStream = server_process_mistral.getInputStream();
-        String result = new BufferedReader(
-                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                .lines()
-                .collect(Collectors.joining("\n")
-                );
-        System.out.println(".init_Mistral_server(): Mistral, python env exist: " + result);
-        
-        if(result.equals("0")){
-            System.out.println(".init_Mistral_server(): Mistral, installing python environment...");
-            try{
-                server_process_mistral = new ProcessBuilder(LLM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                server_process_mistral = new ProcessBuilder("python", LLM_python_env_checker_path).redirectErrorStream(true).start();
                 server_process_mistral.waitFor();
             } catch (Exception e){
-                e.printStackTrace();
+               e.printStackTrace();
             }
-            
-        }        
-          
-            
-            
-            if(python==false){
-                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the Mistral module which is optional. "
-                        + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
+        
+
+            InputStream inputStream = server_process_mistral.getInputStream();
+            String result = new BufferedReader(
+                    new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                    .lines()
+                    .collect(Collectors.joining("\n")
+                    );
+            System.out.println(".init_Mistral_server(): Mistral, python env exist: " + result);
+
+            if(result.equals("0")){
                 
-  
-                enable.setSelected(false);
-                enable.setEnabled(false);
-                
+                System.out.println(".init_Mistral_server(): Mistral, installing python environment...");
+                try{
+                    server_process_mistral = new ProcessBuilder(LLM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                    server_process_mistral.waitFor();
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
+
             }
             
             if(python){
-                try{ 
+                
+                try{
+                    
                     System.out.println("Opening python Mistral script");
                     
                     server.startConnection();
                     
-                    Thread r1 = new Thread() {
+                    Thread server_launcher_thread = new Thread() {
                         @Override
                         public void run() {
-                                try {
-                                    System.out.println("greta.auxiliary.llm.MistralFrame.enableActionPerformed(): waiting for client connection (Mistral.py -> Mistral module)");
-                                    server.accept_new_connection();
-                                } catch (IOException ex) {
-                                    Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
-                                }
-                            }                        
+                            
+                            try {
+                                System.out.println("greta.auxiliary.llm.MistralFrame.enableActionPerformed(): waiting for client connection (Mistral.py -> Mistral module)");
+                                server.accept_new_connection();
+                            } catch (IOException ex) {
+                                Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        
+                        }
                     };
-                    
-                    Thread r2 = new Thread() {
+                    server_launcher_thread.start();
+
+                    Thread main_thread = new Thread() {
                         @Override
                         public void run() {
 
                             try {
+                                
                                 String theme = (String) ThemeBox.getSelectedItem();
                                 String python_path_llm = "";
                                 if (theme.contains("Drinking")){
                                     python_path_llm = python_path_llm_drinking;
-                                }else{
-                                    if (theme.contains("Sport")){
+                                }else if (theme.contains("Sport")){
                                     python_path_llm = python_path_llm_sport;
                                 }else{
                                     python_path_llm = python_path_llm_smoking;
                                 }
-                                }
+                                
                                 String[] cmd = {
                                     "cmd.exe","/C","conda","activate","greta_mistral","&&","python","-u",
                                     System.getProperty("user.dir")+python_path_llm,server.getPort(),
@@ -439,41 +436,59 @@ public class MICounselorIncremental extends LLMFrame{
                                 String s = null;
 
                                 while ((s = stdInput.readLine()) != null) {
-
+                                    
                                     System.out.println("READ INPUT PYTHON :"+s);
-                                    answ=s;
 
-                                    if(answ.contains("STOP")){
-                                        IsStreaming = Boolean.FALSE;
+                                    if(s.contains("STOP")){
+
+                                        load(endSentenceFile, CompositionType.append, false, true);
+
+                                        synchronized (lock) {
+                                            IsStreaming = Boolean.FALSE;                                            
+                                        }                                        
+
                                     }else{
-                                        
-                                        if(answ!=null && answ.length()>1){
-                                            System.out.println("Already on answer:"+AnswerText.getText());
-                                            System.out.println("answer:"+answ);
-                                            AnswerText.setText(AnswerText.getText()+ answ);
-                                        }
-                                        if(answ.length()>1){
-                                            
-                                            if(answ.contains("START:")){
-                                                System.out.println("TEXTE:"+answ);
-                                                answ = answ.replace("START:", "");
-                                                String file=TextToFML(answ, false);
-                                                answ=null;
-                                                
+
+                                        if(s.length()>1){
+
+                                            synchronized (lock) {
+                                                System.out.println("Already on answer:"+AnswerText.getText());
+                                                System.out.println("answer:"+s);
+                                                AnswerText.setText(AnswerText.getText()+ s);                                                    
+                                            }
+
+                                            if(s.contains("START:")){
+
+                                                System.out.println("TEXTE:"+s);
+                                                s = s.replace("START:", "");
+                                                String file=TextToFML(s, false);
+                                                s=null;                                                        
+
                                                 //load(file, CompositionType.append);
-                                                load(file, CompositionType.replace);
+                                                load(file, CompositionType.replace, true, false);
 
                                             }
                                             else{
-                                                System.out.println("TEXTE:"+answ);
-                                                String file=TextToFML(answ, false);
-                                                answ = answ.replace("END_CONVO", "");
-                                                answ=null;                                            
-                                                load(file, CompositionType.append);                                                
-                                            }
 
+                                                System.out.println("TEXTE:"+s);
+                                                String file=TextToFML(s, false);
+                                                
+                                                if (s.contains("END_CONVO")) {
+                                                    
+                                                    s = s.replace("END_CONVO", "");
+                                                    s=null;                                            
+                                                    load(file, CompositionType.append, true, false);
+
+                                                    String finalSentence = "This is the end of the session, see you later.";
+                                                    file=TextToFML(finalSentence, false);
+                                                    load(file, CompositionType.append, true, false);
+
+                                                } else {
+                                                    load(file, CompositionType.append, true, false);
+                                                }
+                                                
+                                            }
                                         }
-                                        
                                     }
                                 }
 
@@ -497,47 +512,64 @@ public class MICounselorIncremental extends LLMFrame{
                         } 
                         
                     };
+                    main_thread.start();
 
-                    r1.start();
-                    r2.start();
                     System.out.println("greta.auxiliary.mistral.Mistral:" + server.port + "   " + server.address);
                     
                 }
                 catch(Exception e)
                 {
-                e.printStackTrace(); 
+                    e.printStackTrace(); 
                 }
             }
+
+            else {
+                
+                System.out.println(ANSI_YELLOW+"[INFO]This warning appears because it seems that you enabled the Mistral module which is optional. "
+                        + "Python and/or openai seem to be not installed. You need to install them in order to use this module!"+ANSI_RESET);
+  
+                enable.setSelected(false);
+                enable.setEnabled(false);
+                
+            }            
+            
         }else{
             try{
-            server.stopConnection();
+                server.stopConnection();
             }
             catch(Exception e)
-                 {
-                   e.printStackTrace(); 
-                }
+            {
+                e.printStackTrace(); 
+            }
         }
     }//GEN-LAST:event_enableActionPerformed
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
-        // TODO add your handling code here:
+        
         AnswerText.setText("");
         Thread r1 = new Thread() {
             @Override
             public void run() {
+                
                 String text=request.getText();
                 String language= cm.getLanguage();
                 String model= (String) modelBox.getSelectedItem();
                 String systemPromptText = systemPrompt.getText();
                 System.out.println("Language selected : "+language);
-                IsStreaming = Boolean.TRUE;
-                if(text.length()>0)
-                try {
+                
+                synchronized (lock) {
+                    IsStreaming = Boolean.TRUE;                    
+                }
+                
+                if(text.length()>0) {
 
-                    server.sendMessage(model+"#SEP#"+language+"#SEP#"+text+"#SEP#"+systemPromptText);
-                    System.out.println("Sent message:"+text);
-                } catch (IOException ex) {
-                    Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        server.sendMessage(model+"#SEP#"+language+"#SEP#"+text+"#SEP#"+systemPromptText);
+                        System.out.println("Sent message:"+text);
+                    } catch (IOException ex) {
+                        Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                 }
 
             }
@@ -565,12 +597,17 @@ public class MICounselorIncremental extends LLMFrame{
      public void setRequestText(String content){
         request.setText(content);
     }
-@Override
- public void setRequestTextandSend(String content){
+
+    @Override
+    public void setRequestTextandSend(String content){
+     
         request.setText(content);
         AnswerText.setText("");
-        IsStreaming = Boolean.TRUE;
-        // TODO add your handling code here:
+        
+        synchronized (lock) {
+            IsStreaming = Boolean.TRUE;        
+        }
+
         Thread r1 = new Thread() {
             @Override
             public void run() {
@@ -579,13 +616,16 @@ public class MICounselorIncremental extends LLMFrame{
                 String model= (String) modelBox.getSelectedItem();
                 String systemPromptText = systemPrompt.getText();
                 System.out.println("Language selected : "+language);
-                if(text.length()>0)
-                try {
 
-                    server.sendMessage(model+"#SEP#"+language+"#SEP#"+text+"#SEP#"+systemPromptText);
-                    System.out.println("Sent message:"+text);
-                } catch (IOException ex) {
-                    Logger.getLogger(LLMFrame.class.getName()).log(Level.SEVERE, null, ex);
+                if(text.length()>0) {
+
+                    try {
+                        server.sendMessage(model+"#SEP#"+language+"#SEP#"+text+"#SEP#"+systemPromptText);
+                        System.out.println("Sent message:"+text);
+                    } catch (IOException ex) {
+                        Logger.getLogger(LLMFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
                 }
 
             }

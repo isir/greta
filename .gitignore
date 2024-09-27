@@ -45,6 +45,7 @@ bin/charniak/charniak-windows/DATA/FR_orig
 
 bin/Common/Data/ChatGPT/api_key.txt
 bin/Common/Data/LLM/Mistral/api_key.txt
+bin/Common/Data/LLM/MICounselor/api_key.txt
 bin/Common/Data/DeepASR/DeepGram/api_key.txt
 bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
 

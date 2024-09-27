@@ -81,7 +81,7 @@ def main():
     BUFSIZE = 4096
     
     server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    server.bind(("", PORT))
+    server.bind((HOST, PORT))
     server.listen()
 
     lang = None

@@ -16,21 +16,32 @@ import socket
 import pyaudio
 from threading import Thread, Lock
 
+import multiprocessing
+process = multiprocessing.current_process()
+print('[Microphone] PID = {}'.format(process.pid))
 
-def main():
+
+def main(port = 9000):
+    
+    start_mic_server(port)
+    
+def  start_mic_server(port = 9000):
+    
     "Main function"
 
     #######################################
     
     # get the hostname
     host = socket.gethostname()
-    port = 9000
+    
+    # port = 9000
+    port = int(port)
 
     server_socket = socket.socket()  # get instance
     # look closely. The bind() function takes tuple as argument
     server_socket.bind((host, port))  # bind host address and port together
     
-    print("Microphone server is launched at {}, port {}".format(host, port))
+    print("[Microphone] Microphone server has been launched at {}, port {}".format(host, port))
     
     #######################################
 
@@ -56,6 +67,7 @@ def main():
 
     # configure how many client the server can listen simultaneously
     server_socket.listen(10)
+    server_socket.settimeout(0.5)
     
     thread_list = []
     
@@ -80,32 +92,39 @@ def main():
             for index in dead_flag_list:
                 thread_list.pop(index)
                 
-            print('Arriving connections:', end = '')
+            print('[Microphone] Arriving connections:', end = '')
             for thread in thread_list:
                 print(' ({}),'.format(thread.name), end = '')
             print()
 
+            print('[Microphone] mic.KILL_SIGNAL = ', mic.KILL_SIGNAL)
             if mic.KILL_SIGNAL:
                 break
+
+        except socket.timeout:
+            # print('[Microphone] server socket timeout')
+            continue
         
         except KeyboardInterrupt:
             break
         
         
+        
     # connection.close()  # close the connection
+    mic.stop()
     server_socket.close()
-    print()
-    print('Server has been closed')  
+    # print()
+    print('[Microphone] Microphone server has been closed')  
 
 class Microphone(Thread):
     
     def __init__(self, FORMAT, CHANNELS, RATE, CHUNK, BUFFER_SIZE, KILL_SIGNAL):
         
         if (RATE == 16000) and (CHUNK < 512):
-            print('CHUNK should be more than 512 for RATE 16000 (Current: {})'.format(CHUNK))
+            print('[Microphone] CHUNK should be more than 512 for RATE 16000 (Current: {})'.format(CHUNK))
             sys.exit()
         elif (RATE == 8000) and (CHUNK < 256):
-            print('CHUNK should be more than 256 for RATE 8000 (Current: {})'.format(CHUNK))
+            print('[Microphone] CHUNK should be more than 256 for RATE 8000 (Current: {})'.format(CHUNK))
             sys.exit()
 
         # Thread.__init__(self)
@@ -163,7 +182,7 @@ class Microphone(Thread):
          
         self.stream.start_stream()
 
-        print("Mic stream started")
+        print("[Microphone] Mic stream started")
     
     def get_array(self):
         
@@ -201,8 +220,8 @@ class Microphone(Thread):
         self.stream.close()
         self.p.terminate()
         
-        print()
-        print("Mic stream stopped")
+        # print()
+        print("[Microphone] Mic stream stopped")
 
     def int2float(self, sound):
         abs_max = np.abs(sound).max()
@@ -220,7 +239,7 @@ class Microphone(Thread):
 
 def on_new_client(clientsocket,address, mic):
     
-    print("Connection from: " + str(address))
+    print("[Microphone] Connection from: " + str(address))
     
     while True:
         
@@ -228,7 +247,9 @@ def on_new_client(clientsocket,address, mic):
             
             data = clientsocket.recv(mic.BUFFER_SIZE).decode()
             if data == 'kill':
+                clientsocket.send("kill signal received\r\n".encode())
                 mic.setKILL_SIGNAL()
+                mic.stop()
                 break
             # print("from connected user: " + data)
             # data = input('SERVER >> ').encode()
@@ -240,7 +261,13 @@ def on_new_client(clientsocket,address, mic):
             break
         
     clientsocket.close()
-    print('Connection from: ' + str(address) + " closed")
+    print('[Microphone] Connection from: ' + str(address) + " closed")
     
 if __name__ == '__main__':
-    main()
+    
+    args = sys.argv
+    
+    if len(args) >= 2:
+        main(args[1])
+    else:
+        main()

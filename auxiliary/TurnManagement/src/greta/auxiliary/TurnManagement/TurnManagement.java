@@ -5,23 +5,12 @@
  */
 package greta.auxiliary.TurnManagement;
 
-import greta.core.intentions.FMLTranslator;
 import greta.core.intentions.Intention;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.StringBufferInputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.stream.Collectors;
-
-import greta.core.intentions.IntentionEmitter;
 import greta.core.intentions.IntentionPerformer;
-import greta.core.signals.BMLTranslator;
+import greta.core.intentions.FMLTranslator;
 import greta.core.signals.Signal;
 import greta.core.signals.SignalPerformer;
+import greta.core.signals.BMLTranslator;
 import greta.core.util.CharacterManager;
 import greta.core.util.Mode;
 import greta.core.util.enums.CompositionType;
@@ -30,6 +19,10 @@ import greta.core.util.id.IDProvider;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLParser;
 import greta.core.util.xml.XMLTree;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -40,6 +33,10 @@ import java.io.PrintWriter;
 import java.io.StringReader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.charset.StandardCharsets;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -62,17 +59,16 @@ import javax.jms.JMSException;
 
 /**
  *
- * @author saga
+ * @author Takeshi Saga
  */
-//public class TurnManagement implements IntentionEmitter {
+
 public class TurnManagement {
 
     private final String python_env_checker_path = "Common\\Data\\TurnManagement\\check_env.py";
     private final String batch_env_installer_path = "Common\\Data\\TurnManagement\\init_env.bat";
     private final String batch_main_path = "Common\\Data\\TurnManagement\\run_turnManager.bat";
-//    private final String batch_kill_path = "Common\\Data\\TurnManagement\\kill_server.bat";
+    private final String batch_kill_path = "Common\\Data\\TurnManagement\\kill_server.bat";
     private Process server_process;
-//    private Thread server_shutdownHook;      
 
     private Server feedback_server;
     private String response;
@@ -82,9 +78,6 @@ public class TurnManagement {
     private String result;
     
     private CharacterManager cm;
-//    public String[] backChannelFMLFileList;
-//    public String backChannelFMLFileDir_path = ".\\Examples\\DemoEN\\backchannel";    
-//    public ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private String[] backChannelFMLFileList;
     private String backChannelFMLFileDir_path = ".\\Examples\\DemoEN\\backchannel";    
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
@@ -116,9 +109,10 @@ public class TurnManagement {
         turnManagement_server.setAddress("localhost");
         turnManagement_server.setPort("5961");
         
-        //
+        ///////////////////////
         // Check environment
-        //
+        ///////////////////////
+
         try{
             server_process = new ProcessBuilder("python", python_env_checker_path).redirectErrorStream(true).start();
             // server_process.waitFor();
@@ -133,9 +127,10 @@ public class TurnManagement {
                 );
         System.out.println(".init_TurnManagement_server(): TurnManagement, python env exist: " + result);        
         
-        //
+        ///////////////////////
         // Create environment if not exit
-        //
+        ///////////////////////
+
         if(result.equals("0")){
             System.out.println(".init_TurnManagement_server(): TurnManagement, installing python environment...");
             try{
@@ -146,9 +141,10 @@ public class TurnManagement {
             }            
         }
         
-        //
-        // Prepare feedback receiver
-        //
+        ///////////////////////
+        // Prepare feedback receiver server
+        ///////////////////////
+
         feedback_server.startConnection();
         Thread r1 = new Thread() {
             @Override
@@ -165,9 +161,10 @@ public class TurnManagement {
         };
         r1.start();
 
-        //
-        // Prepare feedback receiver
-        //
+        ///////////////////////
+        // Prepare turn management server
+        ///////////////////////
+
         turnManagement_server.startConnection();
         Thread r2 = new Thread() {
         @Override
@@ -177,6 +174,21 @@ public class TurnManagement {
                 System.out.println("greta.auxiliary.TurnManagement.TurnManagement(): checking new connections for turnManagement server");
                 turnManagement_server.accept_new_connection("turnManagment");
                 turnManagement_server.sendMessage("ok");
+                Thread server_shutdownHook = new Thread() {
+                    public void run() {
+                        Process process;
+                        try {
+                            process = new ProcessBuilder(batch_kill_path, "5961").redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                            process.waitFor();
+                        } catch (IOException ex) {
+                            Logger.getLogger(TurnManagement.class.getName()).log(Level.SEVERE, null, ex);
+                        } catch (InterruptedException ex) {
+                            Logger.getLogger(TurnManagement.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+
+                };
+                Runtime.getRuntime().addShutdownHook(server_shutdownHook);
             } catch (IOException ex) {
                 Logger.getLogger(TurnManagementFrame.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -184,21 +196,7 @@ public class TurnManagement {
 
         };
         r2.start();
-        
-//        Thread r2 = new Thread() {
-//            @Override
-//            public void run() {
-//
-//                try{
-//                    String feedbackMessage = server.receiveMessage();
-//
-//                }catch (IOException ex) {
-//                    Logger.getLogger(TurnManagementFrame.class.getName()).log(Level.SEVERE, null, ex);
-//                }
-//            }
-//        };
-//        r2.start();
-        
+                
         Thread r3 = new Thread() {
             @Override
             synchronized public void run() {
@@ -215,8 +213,7 @@ public class TurnManagement {
                 while (true) {
 
                     try {
-//                            turnManagement_server.sendMessage("ok");
-//                            result = readLine(inputStream);
+
                         result = turnManagement_server.receiveMessage();
 
                         System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [preparation]: " + result);
@@ -227,7 +224,8 @@ public class TurnManagement {
                         else {
                             System.out.println("Waiting for turn management system start");
                             Thread.sleep(100);
-                        }                                
+                        }
+
                     }
                     catch (Exception e) {
 
@@ -241,9 +239,6 @@ public class TurnManagement {
 
                         double s_time = greta.core.util.time.Timer.getTime();
 
-//                            turnManagement_server.sendMessage("ok");
-
-//                            result = readLine(inputStream);
                         result = turnManagement_server.receiveMessage();
 
                         turnManagement_server.sendMessage("ok");
@@ -280,7 +275,7 @@ public class TurnManagement {
 
                         double e_time = greta.core.util.time.Timer.getTime();
 
-//                            System.out.format("greta.auxiliary.TurnManagement.TurnManagement(): loop time: %.2f%n", e_time - s_time);                                
+//                        System.out.format("greta.auxiliary.TurnManagement.TurnManagement(): loop time: %.2f%n", e_time - s_time);
                     }
                     catch (Exception e) {
 
@@ -293,8 +288,6 @@ public class TurnManagement {
         };
         r3.start();
         
-//        server_shutdownHook = new shutdownHook(server_process, batch_kill_path);
-//        Runtime.getRuntime().addShutdownHook(server_shutdownHook);
     }
     
     public String readLine(InputStream inputStream) throws IOException {
@@ -302,32 +295,16 @@ public class TurnManagement {
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, "UTF-8"), 20);
         
         result = reader.readLine();
-        
-////        int maxBytes = 20;
-//        char c;
-//        result = "";
-////        byte[] buffer = " ".getBytes();
-//        int index = 0;
-//        do {
-////            c = (char) inputStream.read(buffer, index, index + maxBytes);
-//            c = (char) inputStream.read();
-//            if (c == '\n') {
-//                break;
-//            }
-//            result += c + "";
-//            index += 1;
-//            System.out.println(result);
-//        } while (c != -1);
-        
+                
         return result;
     }
 
     public void performFeedback(String type){
-        //TO IMPLEMENT on subclass
         
         Thread r3 = new Thread() {
             @Override
             public void run() {
+                
                 while (true) {
 
                     try {
@@ -452,6 +429,7 @@ public class TurnManagement {
 
         String fml_id = "";
         boolean text_brut=false;
+        
         //get the intentions of the FML file
         fmlparser.setValidating(true);
         bmlparser.setValidating(true);
@@ -557,8 +535,6 @@ public class TurnManagement {
             }
         }
 
-        //Option2: send intentions and signals together
-        //You don't need to add connector from FMLFileReader to BehaviorRealizer
         for (IntentionPerformer performer : performers) {
             performer.performIntentions(intentions, id, mode, signals);
         }
@@ -574,15 +550,17 @@ public class TurnManagement {
     public ArrayList<IntentionPerformer> getPerformers() {
         return performers;
     }
-
-//    public void addIntentionPerformer(IntentionPerformer performer) {
-//        performers.add(performer);
-//    }
-//    
-//    public void removeIntentionPerformer(IntentionPerformer performer) {
-//        performers.remove(performer);
-//    }
     
+    public void resetMicServer(String port) {
+
+        try {
+            turnManagement_server.sendMessage("updateMicPort " + port);
+            System.out.println("greta.auxiliary.TurnManagement.TurnManagement.resetMicServer(): mic server update signal sent: " + port);
+        }
+        catch (IOException ex) {
+            Logger.getLogger(TurnManagement.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     
 }

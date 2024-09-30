@@ -97,7 +97,11 @@ public class DeepGramFrame extends DeepASRFrame {
             System.out.println("The LLM Is NOT straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
         }
        
-        if (type.equals("end") & !IsStreaming){
+//        if (type.equals("end") & !IsStreaming){
+        if (type.equals("end") | type.equals("stopped")){
+            
+            System.out.println("greta.auxiliary.deepasr.DeepGramFrame.performFeedback(): received feedback end: " + type);
+            
             if (!IsListenning & automaticListenBool){
                 Thread r3 = new Thread() {
                     @Override
@@ -126,6 +130,8 @@ public class DeepGramFrame extends DeepASRFrame {
             }
         }
         if (type.equals("start")){
+
+            System.out.println("greta.auxiliary.deepasr.DeepGramFrame.performFeedback(): received feedback start: " + type);
 
             Thread r3 = new Thread() {
                 @Override

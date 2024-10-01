@@ -63,7 +63,7 @@ public class DeepGramFrame extends DeepASRFrame {
     
     private String DeepASR_python_env_checker_path = "Common\\Data\\DeepASR\\DeepGram\\check_env.py";
     private String DeepASR_python_env_installer_path = "Common\\Data\\DeepASR\\DeepGram\\init_env.bat";
-    private String python_asr_path = "\\Common\\Data\\DeepASR\\DeepGram\\DeepGram.py ";
+    private String python_asr_path = "\\Common\\Data\\DeepASR\\DeepGram\\DeepGram.py";
     private Process server_process;
     private Thread server_shutdownHook;
     

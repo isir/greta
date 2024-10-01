@@ -89,25 +89,21 @@ public class GretaFurhatSpeechTextSender extends WhiteBoard{
     }
  
 
-    public void send(String xmlContent){
+    public void send(String speechText){
         
         try {
-            
-        String speechText = extractSpeechText(xmlContent);
-        
-        // Phoneme data and speech text
-        //phonemeJson = "{ \"class\": \"furhatos.records.Transcription\", \"phones\": [ { \"name\": \"_s\", \"prominent\": false, \"start\": 0.0, \"end\": 0.2 }, { \"name\": \"AI\", \"prominent\": true, \"start\": 0.2, \"word\": \"kids\", \"end\": 1.2 }, { \"name\": \"_s\", \"prominent\": false, \"start\": 1.2, \"end\": 1.7 }, { \"name\": \"AE\", \"prominent\": true, \"start\": 1.7, \"word\": \"are\", \"end\": 2.2 }, { \"name\": \"M\", \"prominent\": false, \"start\": 2.22, \"end\": 2.33 }, { \"name\": \"AH\", \"prominent\": false, \"start\": 2.33, \"word\": \"talking\", \"end\": 2.67 }, { \"name\": \"_s\", \"prominent\": false, \"start\": 2.67, \"end\": 2.7 }, { \"name\": \"R\", \"prominent\": false, \"start\": 2.7, \"word\": \"by\", \"end\": 2.81 }, { \"name\": \"OWX\", \"prominent\": false, \"start\": 2.81, \"end\": 2.86 }, { \"name\": \"B\", \"prominent\": false, \"start\": 2.86, \"end\": 2.92 }, { \"name\": \"AH\", \"prominent\": false, \"start\": 2.92, \"word\": \"the\", \"end\": 3.02 }, { \"name\": \"T\", \"prominent\": false, \"start\": 3.02, \"end\": 3.2 }, { \"name\": \"_s\", \"prominent\": false, \"start\": 3.2, \"word\": \"door\", \"end\": 3.8 }, { \"name\": \"\", \"prominent\": false, \"start\": 3.8, \"end\": 4.0 } ] }";
+                    
+            // Phoneme data and speech text
+            //phonemeJson = "{ \"class\": \"furhatos.records.Transcription\", \"phones\": [ { \"name\": \"_s\", \"prominent\": false, \"start\": 0.0, \"end\": 0.2 }, { \"name\": \"AI\", \"prominent\": true, \"start\": 0.2, \"word\": \"kids\", \"end\": 1.2 }, { \"name\": \"_s\", \"prominent\": false, \"start\": 1.2, \"end\": 1.7 }, { \"name\": \"AE\", \"prominent\": true, \"start\": 1.7, \"word\": \"are\", \"end\": 2.2 }, { \"name\": \"M\", \"prominent\": false, \"start\": 2.22, \"end\": 2.33 }, { \"name\": \"AH\", \"prominent\": false, \"start\": 2.33, \"word\": \"talking\", \"end\": 2.67 }, { \"name\": \"_s\", \"prominent\": false, \"start\": 2.67, \"end\": 2.7 }, { \"name\": \"R\", \"prominent\": false, \"start\": 2.7, \"word\": \"by\", \"end\": 2.81 }, { \"name\": \"OWX\", \"prominent\": false, \"start\": 2.81, \"end\": 2.86 }, { \"name\": \"B\", \"prominent\": false, \"start\": 2.86, \"end\": 2.92 }, { \"name\": \"AH\", \"prominent\": false, \"start\": 2.92, \"word\": \"the\", \"end\": 3.02 }, { \"name\": \"T\", \"prominent\": false, \"start\": 3.02, \"end\": 3.2 }, { \"name\": \"_s\", \"prominent\": false, \"start\": 3.2, \"word\": \"door\", \"end\": 3.8 }, { \"name\": \"\", \"prominent\": false, \"start\": 3.8, \"end\": 4.0 } ] }";
 
-        // Create a TextMessage for the speech text
-        TextMessage speechMessage = session.createTextMessage(speechText);
+            // Create a TextMessage for the speech text
+            TextMessage speechMessage = session.createTextMessage(speechText);
 
-        // Set properties for the speech message
-        speechMessage.setStringProperty("Type", "SpeechText");
-        
-        // Send the speech message
-        producer.send(speechMessage);
-        
-        
+            // Set properties for the speech message
+            speechMessage.setStringProperty("Type", "SpeechText");
+
+            // Send the speech message
+            producer.send(speechMessage);
             
         } catch (Exception ex) {
             //Logs.error("could not send message");

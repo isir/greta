@@ -479,9 +479,9 @@ public class MICounselorIncremental extends LLMFrame{
                                                     s=null;                                            
                                                     load(file, CompositionType.append, true, false);
 
-                                                    String finalSentence = "This is the end of the session, see you later.";
-                                                    file=TextToFML(finalSentence, false);
-                                                    load(file, CompositionType.append, true, false);
+                                                    // String finalSentence = "This is the end of the session, see you later.";
+                                                    // file=TextToFML(finalSentence, false);
+                                                    // load(file, CompositionType.append, true, false);
 
                                                 } else {
                                                     load(file, CompositionType.append, true, false);

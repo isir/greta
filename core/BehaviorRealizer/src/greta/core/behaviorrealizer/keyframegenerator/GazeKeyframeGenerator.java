@@ -251,50 +251,51 @@ public class GazeKeyframeGenerator extends KeyframeGenerator implements Environm
                 
             }
             else{
-            // Gaze computing (using radius, and invisible object (using the offsetangle and offsetdirection we compute where the invisible object has to be
-            double radius = this.cm.getGaze_t().getPosZ();
-            if(gaze.getOffsetAngle()>45){
-             gaze.setOffsetAngle(gaze.getOffsetAngle()*2);
-            }
-            double angle =gaze.getOffsetAngle() ;
-            double radians_angle = Math.toRadians(angle);
-            
-            System.out.println("[GAZE INFO] :" + this.cm.getGaze_t().getPosX()+"  "+this.cm.getGaze_t().getPosY());
-            
-            
-            if(gaze.getOffsetDirection()==GazeDirection.RIGHT){
-                System.out.println("RIGHT");
-                this.cm.getGaze_t().setPosX((radius*Math.cos(radians_angle)));
-                direction=-1;
-                //this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+(radius*Math.sin(radians_angle)));
-            }
-            if(gaze.getOffsetDirection()==GazeDirection.LEFT){
-                 System.out.println("LEFT");
-                this.cm.getGaze_t().setPosX(-radius*Math.cos(radians_angle));
-                //this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+radius*Math.sin(radians_angle));
-            }
-            if(gaze.getOffsetDirection()==GazeDirection.UP){
-                this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+radius*Math.sin(radians_angle));
-            }
-            if(gaze.getOffsetDirection()==GazeDirection.DOWN){
-                this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()-(radius*Math.sin(radians_angle)));
-            }
-            if(gaze.getOffsetDirection()==GazeDirection.UPLEFT){
-                this.cm.getGaze_t().setPosX(-(radius*Math.cos(radians_angle)));
-                this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+radius*Math.sin(radians_angle));
-            }
-            if(gaze.getOffsetDirection()==GazeDirection.DOWNLEFT){
-                this.cm.getGaze_t().setPosX(-radius*Math.cos(radians_angle));
-                this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()-(radius*Math.sin(radians_angle)));
-            }
-            if(gaze.getOffsetDirection()==GazeDirection.UPRIGHT){
-                this.cm.getGaze_t().setPosX((radius*Math.cos(radians_angle)));
-                this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+radius*Math.sin(radians_angle));
-            }
-            if(gaze.getOffsetDirection()==GazeDirection.DOWNRIGHT){
-                this.cm.getGaze_t().setPosX((radius*Math.cos(radians_angle)));
-                this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()-(radius*Math.sin(radians_angle)));
-            }
+                
+                // Gaze computing (using radius, and invisible object (using the offsetangle and offsetdirection we compute where the invisible object has to be
+                double radius = this.cm.getGaze_t().getPosZ();
+                if(gaze.getOffsetAngle()>45){
+                 gaze.setOffsetAngle(gaze.getOffsetAngle()*2);
+                }
+                double angle =gaze.getOffsetAngle() ;
+                double radians_angle = Math.toRadians(angle);
+
+                System.out.println("[GAZE INFO] :" + this.cm.getGaze_t().getPosX()+"  "+this.cm.getGaze_t().getPosY());
+
+
+                if(gaze.getOffsetDirection()==GazeDirection.RIGHT){
+                    System.out.println("RIGHT");
+                    this.cm.getGaze_t().setPosX((radius*Math.cos(radians_angle)));
+                    direction=-1;
+                    //this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+(radius*Math.sin(radians_angle)));
+                }
+                if(gaze.getOffsetDirection()==GazeDirection.LEFT){
+                     System.out.println("LEFT");
+                    this.cm.getGaze_t().setPosX(-radius*Math.cos(radians_angle));
+                    //this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+radius*Math.sin(radians_angle));
+                }
+                if(gaze.getOffsetDirection()==GazeDirection.UP){
+                    this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+radius*Math.sin(radians_angle));
+                }
+                if(gaze.getOffsetDirection()==GazeDirection.DOWN){
+                    this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()-(radius*Math.sin(radians_angle)));
+                }
+                if(gaze.getOffsetDirection()==GazeDirection.UPLEFT){
+                    this.cm.getGaze_t().setPosX(-(radius*Math.cos(radians_angle)));
+                    this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+radius*Math.sin(radians_angle));
+                }
+                if(gaze.getOffsetDirection()==GazeDirection.DOWNLEFT){
+                    this.cm.getGaze_t().setPosX(-radius*Math.cos(radians_angle));
+                    this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()-(radius*Math.sin(radians_angle)));
+                }
+                if(gaze.getOffsetDirection()==GazeDirection.UPRIGHT){
+                    this.cm.getGaze_t().setPosX((radius*Math.cos(radians_angle)));
+                    this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()+radius*Math.sin(radians_angle));
+                }
+                if(gaze.getOffsetDirection()==GazeDirection.DOWNRIGHT){
+                    this.cm.getGaze_t().setPosX((radius*Math.cos(radians_angle)));
+                    this.cm.getGaze_t().setPosY(this.cm.getGaze_t().getPosY()-(radius*Math.sin(radians_angle)));
+                }
             
             }
             // put offsetAngle and Direction to default values

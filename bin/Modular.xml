@@ -45,6 +45,8 @@
                 
                 <item module="Microphone" name="Microphone"/>
                 
+                <item module="Microsaccade" name="Microsaccade"/>
+                
             </menu>
             <menu name="Interruptions">
                 <item module="Interruption Manager" name="Interruption Manager"/>
@@ -1247,8 +1249,13 @@
             <frame type="object"/>
         </module> 
 
-        <module name="RestPoseSetterWithFeedback">
+        <module name="RestPoseSetterWithFeedback" style="Signals">
             <object class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
+            <frame type="object"/>
+        </module>
+        
+        <module name="Microsaccade" style="Signals">
+            <object class="greta.auxiliary.Microsaccade.MicrosaccadeFrame" lib_id="greta_microsaccade"/>
             <frame type="object"/>
         </module>
                                                                                                             
@@ -1727,7 +1734,13 @@
         <depends lib_id="greta_signals"/>
         <depends lib_id="greta_util"/>
       </lib>      
-      
+
+      <lib id="greta_microsaccade" path="./Common/Lib/Internal/Microsaccade.jar">
+        <depends lib_id="greta_intentions"/>
+        <depends lib_id="greta_signals"/>
+        <depends lib_id="greta_util"/>
+      </lib>
+                  
     </libs>
     <!-- list of how to connect and disconnect modules -->
     <connectors>

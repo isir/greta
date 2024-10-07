@@ -88,7 +88,10 @@ public class CallbackSender implements CallbackEmitter {
             } else {
                 animStartedList.add(new AnimationTiming(id, absoluteStartTime, absoluteEndTime));
                 
-                if (!id.toString().contains("backchannel") && !id.toString().contains("rest") && !id.toString().contains("midSentence")) {
+                if (!id.toString().contains("backchannel") 
+                        && !id.toString().contains("rest") 
+                        && !id.toString().contains("idle") 
+                        && !id.toString().contains("midSentence")) {
                     callback.setType("start");
                     for (CallbackPerformer perf : callbackPerfList) {
                        perf.performCallback(callback);
@@ -198,7 +201,10 @@ public class CallbackSender implements CallbackEmitter {
                             //System.out.println("Anim added to start list");
                             cbSender.animStartedList.add(anim);
                             
-                            if (!anim.Id.toString().contains("backchannel") && !anim.Id.toString().contains("rest") && !anim.Id.toString().contains("midSentence")) {
+                            if (!anim.Id.toString().contains("backchannel") 
+                                    && !anim.Id.toString().contains("rest") 
+                                    && !anim.Id.toString().contains("idle") 
+                                    && !anim.Id.toString().contains("midSentence")) {
                                 callback.setType("start");
                                 for (CallbackPerformer perf : callbackPerfList) {
                                     perf.performCallback(callback);
@@ -216,7 +222,10 @@ public class CallbackSender implements CallbackEmitter {
                             
                             //System.out.println("Anim ended");
                             
-                            if (!anim.Id.toString().contains("backchannel") && !anim.Id.toString().contains("rest") && !anim.Id.toString().contains("midSentence")) {
+                            if (!anim.Id.toString().contains("backchannel") 
+                                    && !anim.Id.toString().contains("rest") 
+                                    && !anim.Id.toString().contains("idle") 
+                                    && !anim.Id.toString().contains("midSentence")) {
                                 callback.setType("end");
                                 for (CallbackPerformer perf : callbackPerfList) {
                                     perf.performCallback(callback);

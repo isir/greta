@@ -71,6 +71,7 @@ public class MicrosaccadeFrame extends javax.swing.JFrame implements SignalEmitt
             @Override
             public void run() {
                 
+                String base = "idle-microsaccade";
                 double angle = 0.0;
                 boolean increment = true;
                 
@@ -92,7 +93,7 @@ public class MicrosaccadeFrame extends javax.swing.JFrame implements SignalEmitt
                             continue;
                         }
 
-                        GazeSignal gaze = new GazeSignal("Microsaccard");
+                        GazeSignal gaze = new GazeSignal(base);
                         
                         //gaze.setOffsetDirection(GazeDirection.RIGHT);
                         gaze.setOffsetDirection(getRandomDirection());
@@ -103,10 +104,11 @@ public class MicrosaccadeFrame extends javax.swing.JFrame implements SignalEmitt
                         List<Signal> signals = new ArrayList<Signal> ();
                         signals.add((Signal) gaze);
                         
-                        ID id = IDProvider.createID("Microsaccard");
+                        ID id = IDProvider.createID(base);
                         
                         Mode mode = FMLTranslator.getDefaultFMLMode();
-                        mode.setCompositionType(CompositionType.blend);
+//                        mode.setCompositionType(CompositionType.blend);
+                        mode.setCompositionType(CompositionType.append);
 
                         System.out.format("greta.auxiliary.Microsaccade.MicrosaccadeFrame.startMicrosaccardThread(): direction - %s, angle - %.2f %n",
                                 gaze.getOffsetDirection().toString(), gaze.getOffsetAngle());

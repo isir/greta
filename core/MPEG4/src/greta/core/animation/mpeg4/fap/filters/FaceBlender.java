@@ -180,57 +180,97 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
         
 
         // TODO: should implement other facial parameters as well
+        // need to add the following indexes (starting from 0): 14-15, 18-22, 39-40, 43-50, 64-68
+        
+        int tmpStartIndex;
+        int tmpEndIndex;
+        int tmpIndex;
 
-        // eyeball index: 23-38
-        int eyeballIndex = 23;
-        while (eyeballIndex<=38) {
+        // jaw
+        tmpStartIndex = 14;
+        tmpEndIndex = 15;
+        tmpIndex = tmpStartIndex;
+        while (tmpIndex<=tmpEndIndex) {
             // blendValueFrom(3, blended, face2);
-            addValueFrom(eyeballIndex, blended, face2);
-            eyeballIndex++;
+            blendValueFrom(tmpIndex, blended, face2);
+            tmpIndex++;
         }
 
-//        //UPPER LIP OPENING - 6Faps 4, 8, 9, 51, 55, 56
-//        blendValueFrom(4, blended, face2);
-//        blendValueFrom(8, blended, face2);
-//        blendValueFrom(9, blended, face2);
-//        blendValueFrom(51, blended, face2);
-//        blendValueFrom(55, blended, face2);
-//        blendValueFrom(56, blended, face2);
-//
-//        //UPPER LIP PROTRUSION - 2Faps 17, 63
-//        blendValueFrom(17, blended, face2);
-//        blendValueFrom(63, blended, face2);
-//
-//        //LOWER LIP OPENING - 6Faps 5, 10, 11, 52, 57, 58
-//        blendValueFrom(5, blended, face2);
-//        blendValueFrom(10, blended, face2);
-//        blendValueFrom(11, blended, face2);
-//        blendValueFrom(52, blended, face2);
-//        blendValueFrom(57, blended, face2);
-//        blendValueFrom(58, blended, face2);
-//
-//        //LOWER LIP PROTRUSION - 1Faps 16
-//        blendValueFrom(16, blended, face2);
-//
-//        //JAW - 3Faps 3, 41, 42
-//        blendValueFrom(3, blended, face2);
-//        addValueFrom(41, blended, face2);
-//        addValueFrom(42, blended, face2);
-//
-//        //LIP WIDTH - 6Faps 6, 7, 53, 54, 61, 62
-//        addValueFrom(6, blended, face2);
-//        addValueFrom(7, blended, face2);
-//        addValueFrom(53, blended, face2);
-//        addValueFrom(54, blended, face2);
-//        addValueFrom(61, blended, face2);
-//        addValueFrom(62, blended, face2);
-//
-//        //CORNER LIP - 4Faps 12, 13, 59, 60
-//        addValueFrom(12, blended, face2);
-//        addValueFrom(13, blended, face2);
-//        addValueFrom(59, blended, face2);
-//        addValueFrom(60, blended, face2);
+//    depress_chin(Side.BOTH),//18
+//    close_t_l_eyelid(Side.LEFT),
+//    close_t_r_eyelid(Side.RIGHT), //20
+//    close_b_l_eyelid(Side.LEFT),
+//    close_b_r_eyelid(Side.RIGHT),//22
+        tmpStartIndex = 18;
+        tmpEndIndex = 22;
+        tmpIndex = tmpStartIndex;
+        while (tmpIndex<=tmpEndIndex) {
+            // blendValueFrom(3, blended, face2);
+            blendValueFrom(tmpIndex, blended, face2);
+            tmpIndex++;
+        }
+        
+        // eyeball: 23-38
+        tmpStartIndex = 23;
+        tmpEndIndex = 38;
+        tmpIndex = tmpStartIndex;
+        while (tmpIndex<=tmpEndIndex) {
+            // blendValueFrom(3, blended, face2);
+            blendValueFrom(tmpIndex, blended, face2);
+            tmpIndex++;
+        }
 
+//    puff_l_cheek(Side.LEFT),//39
+//    puff_r_cheek(Side.RIGHT), //40
+        tmpStartIndex = 39;
+        tmpEndIndex = 40;
+        tmpIndex = tmpStartIndex;
+        while (tmpIndex<=tmpEndIndex) {
+            // blendValueFrom(3, blended, face2);
+            blendValueFrom(tmpIndex, blended, face2);
+            tmpIndex++;
+        }
+
+//    shift_tongue_tip(Side.BOTH),//43
+//    raise_tongue_tip(Side.BOTH),
+//    thrust_tongue_tip(Side.BOTH),
+//    raise_tongue(Side.BOTH),
+//    tongue_roll(Side.BOTH),
+        tmpStartIndex = 43;
+        tmpEndIndex = 47;
+        tmpIndex = tmpStartIndex;
+        while (tmpIndex<=tmpEndIndex) {
+            // blendValueFrom(3, blended, face2);
+            blendValueFrom(tmpIndex, blended, face2);
+            tmpIndex++;
+        }
+
+//    head_pitch(Side.BOTH),//48
+//    head_yaw(Side.BOTH),
+//    head_roll(Side.BOTH), //50
+        tmpStartIndex = 48;
+        tmpEndIndex = 50;
+        tmpIndex = tmpStartIndex;
+        while (tmpIndex<=tmpEndIndex) {
+            // blendValueFrom(3, blended, face2);
+            blendValueFrom(tmpIndex, blended, face2);
+            tmpIndex++;
+        }
+
+//    bend_nose(Side.BOTH),//64
+//    raise_l_ear(Side.LEFT),//65
+//    raise_r_ear(Side.RIGHT),
+//    pull_l_ear(Side.LEFT),
+//    pull_r_ear(Side.RIGHT); //68        
+        tmpStartIndex = 64;
+        tmpEndIndex = 68;
+        tmpIndex = tmpStartIndex;
+        while (tmpIndex<=tmpEndIndex) {
+            // blendValueFrom(3, blended, face2);
+            blendValueFrom(tmpIndex, blended, face2);
+            tmpIndex++;
+        }
+        
         return blended;
     }
 

@@ -93,7 +93,7 @@ public enum FAPType {
     raise_l_ear(Side.LEFT),
     raise_r_ear(Side.RIGHT),
     pull_l_ear(Side.LEFT),
-    pull_r_ear(Side.RIGHT); //69
+    pull_r_ear(Side.RIGHT); //68
 
 
     public static final int NUMFAPS = 70; //counting the null_fap

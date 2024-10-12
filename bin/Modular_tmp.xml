@@ -1859,6 +1859,14 @@
             <connect from="output" method="setLipSource" to="input"/>
             <disconnect from="output" method="dettachLipSource" to="input"/>
         </connector>
+
+        <connector id="FaceSourceForFaceBlender">
+            <input class="greta.core.animation.mpeg4.fap.FAPFrameEmitter" lib_id="greta_mpeg4"/>
+            <output class="greta.core.animation.mpeg4.fap.filters.FaceBlender" lib_id="greta_mpeg4"/>
+            <connect from="output" method="setFace2Source" to="input"/>
+            <disconnect from="output" method="dettachFace2Source" to="input"/>
+        </connector>
+
         <connector id="LaughterSourceForBodyBlender">
             <input class="greta.core.animation.mpeg4.bap.BAPFrameEmitter" lib_id="greta_mpeg4"/>
             <output class="greta.core.animation.mpeg4.bap.filters.BodyBlender" lib_id="greta_mpeg4"/>

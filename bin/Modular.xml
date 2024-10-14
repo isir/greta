@@ -112,6 +112,7 @@
                     <item module="Idle Movement Filter" name="Idle Movement Filter"/>
                     <item module="Idle Movement Emitter" name="Idle Movement Emitter"/>
                     <item module="Lip Blender" name="Lip Blender"/>
+                    <item module="Face Blender" name="Face Blender"/>
                 </menu>
                 <menu name="Body">
                     <item module="Head Noise" name="Head Noise"/>
@@ -865,6 +866,10 @@
             <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
             <parameter default="audio" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="Face Blender" style="Animations">
+            <object class="greta.core.animation.mpeg4.fap.filters.FaceBlender" lib_id="greta_mpeg4"/>
+            <frame type="noFrame"/>
         </module>
         <module name="Lip Blender" style="Animations">
             <object class="greta.core.animation.mpeg4.fap.filters.LipBlender" lib_id="greta_mpeg4"/>
@@ -1847,6 +1852,12 @@
             <!-- it will call input.addFAPFramePerformer(output) -->
             <disconnect from="input" method="removeFAPFramePerformer" to="output"/>
             <!-- it will call input.removeFAPFramePerformer(output) -->
+        </connector>
+        <connector id="FaceSourceForFaceBlender">
+            <input class="greta.core.animation.mpeg4.fap.FAPFrameEmitter" lib_id="greta_mpeg4"/>
+            <output class="greta.core.animation.mpeg4.fap.filters.FaceBlender" lib_id="greta_mpeg4"/>
+            <connect from="output" method="setFace2Source" to="input"/>
+            <disconnect from="output" method="dettachFace2Source" to="input"/>
         </connector>
         <connector id="LipSourceForLipBlender">
             <input class="greta.core.animation.mpeg4.fap.FAPFrameEmitter" lib_id="greta_mpeg4"/>

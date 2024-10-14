@@ -35,7 +35,7 @@ public class shutdownHook extends Thread{
             System.out.println("greta.auxiliary.Microphone.shutdownHook: destroyed.");
             }
             try {
-                Thread.sleep(3000);
+                Thread.sleep(10);
             } catch (InterruptedException ex) {
                 Logger.getLogger(shutdownHook.class.getName()).log(Level.SEVERE, null, ex);
             }

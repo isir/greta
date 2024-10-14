@@ -677,14 +677,18 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
              
                     try{
                         String speechText = speech.getOriginalText();
-                        System.out.println("Sending speech text over the topic: " + speechText);
-                        audioserver.send(rawAudioBuffer, phonemes, speech.getSpeechElements(), audio);
-                        speechtextserver.send(speechText);
-                        System.out.println("Speech elements: ");
-                        phonemes.forEach(element->System.out.print("("+element.getPhonemeType()+" ; "+element.getDuration()+" ) ;"));
-                        
-                        //speech.getSpeechElements().forEach(element->System.out.print(element.toString()+" ; "));
-                        System.out.println();
+                        String speechTextNoSpace = speechText.replace(" ", "");
+                        if (!speechTextNoSpace.isEmpty()) {
+                            System.out.println("Sending speech text over the topic: " + speechText);
+                            audioserver.send(rawAudioBuffer, phonemes, speech.getSpeechElements(), audio);
+                            speechtextserver.send(speechText);
+                            System.out.println("Speech elements: ");
+                            phonemes.forEach(element->System.out.print("("+element.getPhonemeType()+" ; "+element.getDuration()+" ) ;"));
+
+                            //speech.getSpeechElements().forEach(element->System.out.print(element.toString()+" ; "));
+                            System.out.println();
+                            
+                        }
                     }
                     catch(Exception e){
                         System.err.println("Error when sending audiobuffer: "+e.getMessage());

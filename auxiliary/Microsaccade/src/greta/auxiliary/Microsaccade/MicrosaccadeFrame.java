@@ -71,7 +71,6 @@ public class MicrosaccadeFrame extends javax.swing.JFrame implements SignalEmitt
             @Override
             public void run() {
                 
-                String base = "idle-microsaccade";
                 double angle = 0.0;
                 boolean increment = true;
                 
@@ -84,7 +83,7 @@ public class MicrosaccadeFrame extends javax.swing.JFrame implements SignalEmitt
                             angle -= 1.0;
                         }
 
-                        if (angle >= 3.0) {
+                        if (angle >= 5.0) {
                             increment = false;
                             continue;
                         }
@@ -93,7 +92,7 @@ public class MicrosaccadeFrame extends javax.swing.JFrame implements SignalEmitt
                             continue;
                         }
 
-                        GazeSignal gaze = new GazeSignal(base);
+                        GazeSignal gaze = new GazeSignal("Microsaccard");
                         
                         //gaze.setOffsetDirection(GazeDirection.RIGHT);
                         gaze.setOffsetDirection(getRandomDirection());
@@ -104,11 +103,10 @@ public class MicrosaccadeFrame extends javax.swing.JFrame implements SignalEmitt
                         List<Signal> signals = new ArrayList<Signal> ();
                         signals.add((Signal) gaze);
                         
-                        ID id = IDProvider.createID(base);
+                        ID id = IDProvider.createID("Microsaccard");
                         
                         Mode mode = FMLTranslator.getDefaultFMLMode();
-//                        mode.setCompositionType(CompositionType.blend);
-                        mode.setCompositionType(CompositionType.append);
+                        mode.setCompositionType(CompositionType.blend);
 
                         System.out.format("greta.auxiliary.Microsaccade.MicrosaccadeFrame.startMicrosaccardThread(): direction - %s, angle - %.2f %n",
                                 gaze.getOffsetDirection().toString(), gaze.getOffsetAngle());

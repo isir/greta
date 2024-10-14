@@ -80,10 +80,18 @@ public class CallbackSender implements CallbackEmitter {
         Callback callback = new Callback("", currentTime, id);
         if (currentTime > absoluteStartTime) {
             if (currentTime > absoluteEndTime) {
-                callback.setType("dead");
-                for (CallbackPerformer perf : callbackPerfList) {
-                    perf.performCallback(callback);
-                 //System.out.println("Anim dead");
+                
+                if (!id.toString().contains("backchannel") 
+                    && !id.toString().contains("rest") 
+                    && !id.toString().contains("idle") 
+                    && !id.toString().contains("midSentence")) {
+
+                    callback.setType("dead");
+                    for (CallbackPerformer perf : callbackPerfList) {
+                        perf.performCallback(callback);
+                     //System.out.println("Anim dead");
+                    }
+                                
                 }
             } else {
                 animStartedList.add(new AnimationTiming(id, absoluteStartTime, absoluteEndTime));
@@ -92,10 +100,12 @@ public class CallbackSender implements CallbackEmitter {
                         && !id.toString().contains("rest") 
                         && !id.toString().contains("idle") 
                         && !id.toString().contains("midSentence")) {
+                    
                     callback.setType("start");
                     for (CallbackPerformer perf : callbackPerfList) {
                        perf.performCallback(callback);
                     }
+                    
                 }
 
                  //System.out.println("Anim added to started list");
@@ -133,25 +143,43 @@ public class CallbackSender implements CallbackEmitter {
     }
 
     public synchronized void animStopped(ID id) {
+        
         double currentTime = greta.core.util.time.Timer.getTime();
         int indexAnim = indexOf(id, animPendingList);
         Callback callback = new Callback("", currentTime, id);
+
         if (indexAnim != -1) {
-            callback.setType("dead");
-            for (CallbackPerformer perf : callbackPerfList) {
-                perf.performCallback(callback);
+            if (!id.toString().contains("backchannel") 
+                && !id.toString().contains("rest") 
+                && !id.toString().contains("idle") 
+                && !id.toString().contains("midSentence")) {
+                
+                callback.setType("dead");
+                for (CallbackPerformer perf : callbackPerfList) {
+                    perf.performCallback(callback);
+                }
+                
             }
             animPendingList.remove(indexAnim);
         } else {
             indexAnim = indexOf(id, animStartedList);
             if (indexAnim != -1) {
-            callback.setType("stopped");
-                for (CallbackPerformer perf : callbackPerfList) {
-                    perf.performCallback(callback);
+                if (!id.toString().contains("backchannel") 
+                    && !id.toString().contains("rest") 
+                    && !id.toString().contains("idle") 
+                    && !id.toString().contains("midSentence")) {
+                    
+                    callback.setType("stopped");
+                    for (CallbackPerformer perf : callbackPerfList) {
+                        perf.performCallback(callback);
+                    }
+                    
                 }
                 animStartedList.remove(indexAnim);
             }
         }
+            
+
     }
 
     public void stopAllAnims(){
@@ -226,10 +254,12 @@ public class CallbackSender implements CallbackEmitter {
                                     && !anim.Id.toString().contains("rest") 
                                     && !anim.Id.toString().contains("idle") 
                                     && !anim.Id.toString().contains("midSentence")) {
+                                
                                 callback.setType("end");
                                 for (CallbackPerformer perf : callbackPerfList) {
                                     perf.performCallback(callback);
-                                }                                
+                                }
+                                
                             }
 
                             iter.remove();

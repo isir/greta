@@ -52,8 +52,11 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitt
     //Skeleton _sk_original = null;
     //Skeleton _sk = null;
     CharacterLowerBody _lowerbody = new CharacterLowerBody();
-    double _intensityTorso = 1;
-    double _intensityHead = 1;
+
+    double _intensityHead = 0.1;
+    double _intensityTorso = 0.3;
+    double _intensityLowerbody = 1.0;
+
     private boolean requestStop = false;
     boolean _useHead = false;
     boolean _useTorso = false;
@@ -160,6 +163,10 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitt
     void computeUpperBody(Frame frame, int idx) {
         int level = (int) (80.0);
         int level2 = (int) (123.0);
+//        int level = (int) (40.0);
+//        int level2 = (int) (60.0);
+//        int level = (int) (20.0);
+//        int level2 = (int) (30.0);
         //torso
         {
             Quaternion noisevl5 = new Quaternion();
@@ -182,6 +189,15 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitt
             d2 = Noise.noise((idx + Math.random()) / level2, (idx + Math.random()) / level2, (idx + Math.random()) / level2);
             noisevt1.fromEulerXYZ((double) d / 30.0f * _intensityTorso, 0, (double) d2 / 60.0f * _intensityTorso);
             frame.accumulateRotation("vt3", noisevt1);
+            
+//            System.out.format("d = %.2f, d2 = %.2f%n", d, d2);
+//            System.out.format("d = %4.2f, d2 = %4.2f, v13 = (%4.2f, %4.2f), v9 = (%4.2f, %4.2f), v3 = (%4.2f, %4.2f)%n", 
+//                    d, d2, 
+//                    (double) d / 45.0f * _intensityTorso, (double) d2 / 60.0f * _intensityTorso, 
+//                    (double) d / 45.0f * _intensityTorso, (double) d2 / 60.0f * _intensityTorso,
+//                    (double) d / 30.0f * _intensityTorso, (double) d2 / 60.0f * _intensityTorso
+//            );
+            
         }
 
         //root
@@ -371,6 +387,14 @@ public class BodyAnimationNoiseGenerator extends Thread implements BAPFrameEmitt
         return _intensityTorso;
     }
 
+//    public void setIntensityLowerbody(double v) {
+//        _intensityLowerbody = v;
+//    }
+//
+//    public double getIntensityLowerbody() {
+//        return _intensityLowerbody;
+//    }    
+    
     public void setStep(double step){
         this.step = step;
         int lstep = this.step > 1 ? (int)(this.step) : 1;

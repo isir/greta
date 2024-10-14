@@ -159,6 +159,7 @@ public class BodyNoiseGui extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void headCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_headCheckBox1ActionPerformed
+        updateHeadvalue();
         if(bodyheadnoise != null){
             if (this.headCheckBox1.isSelected()){// if checked
                 bodyheadnoise.setUseHead(true);
@@ -169,7 +170,8 @@ public class BodyNoiseGui extends javax.swing.JFrame {
     }//GEN-LAST:event_headCheckBox1ActionPerformed
 
     private void torsoCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_torsoCheckBox2ActionPerformed
-       if(bodyheadnoise != null){
+        updateTorsovalue();
+        if(bodyheadnoise != null){
             if (this.torsoCheckBox2.isSelected()){// if checked
                 bodyheadnoise.setUseTorso(true);
             }else{
@@ -179,6 +181,7 @@ public class BodyNoiseGui extends javax.swing.JFrame {
     }//GEN-LAST:event_torsoCheckBox2ActionPerformed
 
     private void lowerbodyCheckBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lowerbodyCheckBox3ActionPerformed
+        updateLowerBodyvalue();
         if(bodyheadnoise != null){
             if (this.lowerbodyCheckBox3.isSelected()){// if checked
                 bodyheadnoise.setUseLowerBody(true);

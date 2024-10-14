@@ -76,7 +76,7 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
     private String python_asr_path = "\\Common\\Data\\DeepASR\\DeepGram\\DeepGram.py ";
     private Process server_process;
     private Thread server_shutdownHook;
-    private boolean automaticListenBool = false;
+    //private boolean automaticListenBool = false;
     
     protected CharacterManager cm;
     private static String markup = "fml-apml";

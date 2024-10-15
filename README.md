@@ -17,7 +17,7 @@ It is the result of different research projects conducted by Catherine Pelachaud
 ### Sep 03, 2024: changed license from LGPL to GPL, added many functionalities(EN,FR)!
 - Greta (master branch) became GPL license from LGPL license.
 - Previous LGPL version Greta (master branch) is now in "master-lgpl" branch
-- Added incremental behavior realizer module
+- Added incremental behavior realizer module (but unstable yet)
 - Added LLM module with Mistral, Mistral module for incremental processing
 - Added DeepASR module, a deep learning based incremental ASR
 - Added MeaningMiner module,

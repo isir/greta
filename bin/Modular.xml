@@ -101,6 +101,7 @@
                 <item module="TTS" name="Controller"/>
                 <item module="MaryTTS Client" name="MaryTTS Client"/>
                 <item module="CereProc" name="CereProc"/>
+                <item module="AzureTTS" name="AzureTTS"/>
             </menu>
             <menu name="Laugh Synthetizer">
                 <item module="Laugh Synthetizer" name="Controller"/>
@@ -531,6 +532,15 @@
         <module name="Voxygen">
             <object class="greta.auxiliary.tts.voxygen.VoxygenTTS" lib_id="greta_voxygen"/>
             <frame type="noFrame"/>
+        </module>
+        <module name="AzureTTS">
+            <!--
+            <object class="greta.auxiliary.tts.azuretts.AzureTTS" lib_id="greta_azuretts"/>
+            <frame type="noFrame"/>
+            -->
+            <object class="greta.auxiliary.tts.azuretts.AzureTTSFrame" lib_id="greta_azuretts"/>
+            <frame type="object"/>
+            
         </module>
         <module name="ActiveMQ Broker">
             <object class="greta.auxiliary.activemq.Broker" lib_id="greta_activemq"/>
@@ -1365,8 +1375,14 @@
         <lib id="greta_cereproc" path="./Common/Lib/Internal/CereProc.jar">
             <depends lib_id="ext_cereproc"/>
             <depends lib_id="greta_util"/>
+            <depends lib_id="libGretaFurhatInterface"/>
             <needs path="./Common/Data/CereProc/*"/>
             <needs path="./Common/Lib/External/cereproc/**"/>
+        </lib>
+        <lib id="greta_azuretts" path="./Common/Lib/Internal/AzureTTS.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="libGretaFurhatInterface"/>
+            <depends lib_id="greta_behavior_realizer"/>
         </lib>
         <lib id="greta_conversational_gaze" path="./Common/Lib/Internal/ConversationalGaze.jar">
             <depends lib_id="greta_activemq"/>

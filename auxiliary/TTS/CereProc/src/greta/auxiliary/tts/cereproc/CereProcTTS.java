@@ -86,7 +86,7 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     
     private GretaFurhatSpeechTextSender speechtextserver;
     private GretaFurhatAudioSender audioserver;
-
+    
     static{
         // Init constants and make phonemes mappings
         CereProcConstants.init();
@@ -327,6 +327,8 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     @Override
     public void compute(boolean doTemporize, boolean doAudio, boolean doPhonems) {
 
+        System.out.println("greta.auxiliary.tts.cereproc.CereProcTTS.compute(): start");
+        
         if (!functional) {
             Logs.error("CereProcTTS: the module is not fully functional due to initialization errors. The speech that has been sent to be computed is ignored.");
             return;
@@ -552,6 +554,9 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                             if ((reactionToInterruptionCall) && (startT < currentPlayingTime_s)) {
                                 duration = endT - currentPlayingTime_s;
                             }
+                            
+                            System.out.println("TTS: duration " + duration);
+                            
                             for (int i = 0; i < pho.length; i++) {
                                 PhonemeType pt = pho[i];
                                 Phoneme p = new Phoneme(pt, duration / (pho.length));

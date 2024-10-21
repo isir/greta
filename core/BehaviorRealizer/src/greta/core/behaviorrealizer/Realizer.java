@@ -122,6 +122,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
             else {
                 SignalFiller.fillSignal(signal);
             }
+            System.out.println("greta.core.behaviorrealizer.performSignals: target signal - " + signal.toString());
         }
         Temporizer temporizer = new Temporizer();
         temporizer.add(list);

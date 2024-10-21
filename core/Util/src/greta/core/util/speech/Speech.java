@@ -154,6 +154,9 @@ public class Speech implements Temporizable{
     @Override
     public void schedule(){
         synchronized (lock){
+            
+            System.out.println("greta.core.util.speech.Speech.schedule(): " + id.toString() + ": originalText: " + originalText);
+            
             ttsToUse = cm.getTTS();
             if(ttsToUse==null){
                 Logs.error(this.getClass().getName() + " : no TTS found.");

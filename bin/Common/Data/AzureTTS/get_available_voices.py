@@ -54,7 +54,8 @@ def main():
     
     result = TTS_obj.speech_synthesizer.get_voices_async("").get()
     for voice in result.voices:
-        print(voice.name)
+        if ("Neural" in voice.short_name) and not (":" in voice.short_name):
+            print("{},{}".format(voice.short_name, voice.gender))
     
     # print(len(result.voices))
 

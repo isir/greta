@@ -94,7 +94,10 @@ public class AzureTTSFrame extends javax.swing.JFrame implements TTS {
         // TODO add your handling code here:
         
         selectedVoice = jComboBox1.getSelectedItem().toString();
-        selectedVoice = selectedVoice.split(":")[1];
+        selectedVoice = selectedVoice.split(",")[1];
+        if (selectedVoice.contains(" ")) {
+            selectedVoice = selectedVoice.split(" ")[0];        
+        }
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
     
@@ -189,28 +192,39 @@ public class AzureTTSFrame extends javax.swing.JFrame implements TTS {
         
         try {
             main_process = new ProcessBuilder(getAvailableVoices_bat_path).redirectErrorStream(true).start();                    
-//            main_process.waitFor();
+            //main_process.waitFor();
             BufferedReader reader = 
                 new BufferedReader(new InputStreamReader(main_process.getInputStream()));
             String line = null;
             int index = 0;
             while ( (line = reader.readLine()) != null) {
-                System.out.println("greta.auxiliary.tts.azuretts.AzureTTSFrame.AzureTTSFrame(): output from python: " + line);
+                // System.out.println("greta.auxiliary.tts.azuretts.AzureTTSFrame.AzureTTSFrame(): output from python: " + line);
                 if (!line.contains("INFO")) {
-                    jComboBox1.addItem(index + ":" + line);
+                    String[] data = line.split(",");
+                    String gender = "";
+                    if (data[1].contains("Male")) {
+                        gender = "Male";
+                    }
+                    else {
+                        gender = "Female";
+                    }
+                    String name = Integer.toString(index) + "," + data[0] + " (" + gender + ")";
+                    jComboBox1.addItem(name);
                     index += 1;
                 }
             }
             
+        } catch (IOException ex) {
+            Logger.getLogger(AzureTTSFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (Exception e) {
-            
-            System.out.println("greta.auxiliary.tts.azuretts.AzureTTSFrame.AzureTTSFrame(): exception - " + e);
-            
-            for (String voiceName: voiceNames) {
-                jComboBox1.addItem(voiceName);
-            }
-        }
+//        catch (Exception e) {
+//            
+//            System.out.println("greta.auxiliary.tts.azuretts.AzureTTSFrame.AzureTTSFrame(): exception - " + e);
+//            
+//            for (String voiceName: voiceNames) {
+//                jComboBox1.addItem(voiceName);
+//            }
+//        }
         
 //        for (String voiceName: voiceNames) {
 //            jComboBox1.addItem(voiceName);

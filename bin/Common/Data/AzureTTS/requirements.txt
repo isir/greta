@@ -1,0 +1,1 @@
+azure-cognitiveservices-speech==1.41.1

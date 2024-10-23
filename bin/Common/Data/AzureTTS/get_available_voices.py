@@ -43,10 +43,14 @@ viseme_list = []
 
 def main():
 
-    subscription_key = '7f657c07298745409d981d5fac90ea12'
-    service_region = 'westeurope'
+    speech_key_file = 'SPEECH_KEY.txt'
+    speech_region_file = 'SPEECH_REGION.txt'
+    with open(speech_key_file, 'r') as f:
+        SPEECH_KEY = f.read()
+    with open(speech_region_file, 'r') as f:
+        SPEECH_REGION = f.read()
 
-    TTS_obj = AzureTTS(subscription_key, service_region)
+    TTS_obj = AzureTTS(SPEECH_KEY, SPEECH_REGION)
     
     result = TTS_obj.speech_synthesizer.get_voices_async("").get()
     for voice in result.voices:

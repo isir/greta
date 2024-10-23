@@ -22,7 +22,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -31,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 import javax.sound.sampled.AudioFormat;
 import javax.swing.JComboBox;
 
@@ -41,40 +44,6 @@ import javax.swing.JComboBox;
 
 
 public class AzureTTSFrame extends javax.swing.JFrame implements TTS {
-
-    /**
-     * Creates new form AzureTTSFrame
-     */
-    public AzureTTSFrame(CharacterManager cm) {
-        initComponents();
-
-        interreuptionReactionSupported = true;
-        setupCharacterLanguageVoiceParameters();
-
-        azureTTS = new AzureTTS(cm);
-        init();
-        cm.setTTS(this);
-        setCharacterManager(cm);
-
-        clean();
-        tmnumber = 0;     
-   
-//        jComboBox1 = new JComboBox(voiceNames);
-        
-        for (String voiceName: voiceNames) {
-            jComboBox1.addItem(voiceName);
-        }
-        
-                
-    /*====================================================================================================*/
-    /*                     This block is part of the Greta Furhat Interface       
-                               Author: Fousseyni Sangaré 04/2024-09/2024                                  */
-    /*====================================================================================================*/
-        speechtextserver = new GretaFurhatSpeechTextSender("localhost", "61616", "greta.furhat.SpeechText");
-        audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.Audio");
-        
-    /*====================================================================================================*/
-    /*====================================================================================================*/    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -125,9 +94,11 @@ public class AzureTTSFrame extends javax.swing.JFrame implements TTS {
         // TODO add your handling code here:
         
         selectedVoice = jComboBox1.getSelectedItem().toString();
+        selectedVoice = selectedVoice.split(":")[1];
         
     }//GEN-LAST:event_jComboBox1ActionPerformed
-
+    
+    
     private CharacterManager characterManager;
 
     private boolean initialized = false;
@@ -151,9 +122,10 @@ public class AzureTTSFrame extends javax.swing.JFrame implements TTS {
     private GretaFurhatSpeechTextSender speechtextserver;
     private GretaFurhatAudioSender audioserver;
     
-    private String ssml_path = "Common\\Data\\AzureTTS\\ssml.txt";
-    private String audio_path = "Common\\Data\\AzureTTS\\output.wav";
-    private String AzureTTS_bat_path = "Common\\Data\\AzureTTS\\run_azuretts.bat";
+    private String AzureTTS_env_checker_path = "Common\\Data\\AzureTTS\\check_env.py";
+    private String AzureTTS_env_installer_path = "Common\\Data\\AzureTTS\\init_env.bat";
+
+    private String getAvailableVoices_bat_path = "Common\\Data\\AzureTTS\\get_available_voices.bat";
     
     private String[] voiceNames = {
         // Check here to add others: https://learn.microsoft.com/en-us/azure/ai-services/speech-service/language-support?tabs=tts
@@ -167,21 +139,96 @@ public class AzureTTSFrame extends javax.swing.JFrame implements TTS {
     private String selectedVoice = "en-GB-AdaMultilingualNeural";
     
     private Process main_process;
-    
-    private ClientPhoneme clientPhoneme = new ClientPhoneme();
-    
-    private int numGeneration = 0;
-    
-    private boolean isRunning = false;
-    
-    private final double generationLatency = 1.0;
-    
-    private double s_time = 0;
-    private double e_time = 0;
-    private double excution_time = 0;
-    
+        
     private AzureTTS azureTTS;
+    
 
+    /**
+     * Creates new form AzureTTSFrame
+     */
+    public AzureTTSFrame(CharacterManager cm) {
+        initComponents();
+
+        interreuptionReactionSupported = true;
+        setupCharacterLanguageVoiceParameters();
+
+        azureTTS = new AzureTTS(cm);
+        init();
+        cm.setTTS(this);
+        setCharacterManager(cm);
+
+        clean();
+        tmnumber = 0;
+
+        try{
+            main_process = new ProcessBuilder("python", AzureTTS_env_checker_path).redirectErrorStream(true).start();
+            main_process.waitFor();
+        } catch (Exception e){
+           e.printStackTrace();
+        }        
+
+        InputStream inputStream = main_process.getInputStream();
+        String result = new BufferedReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
+                .lines()
+                .collect(Collectors.joining("\n")
+                );
+        System.out.println("greta.auxiliary.tts.azuretts.AzureTTSFrame.AzureTTSFrame(): python env exist: " + result);
+        
+        if(result.equals("0")){
+            
+            System.out.println("greta.auxiliary.tts.azuretts.AzureTTSFrame.AzureTTSFrame(): installing python environment...");
+            try{
+                main_process = new ProcessBuilder(AzureTTS_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                main_process.waitFor();
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+            
+        }        
+        
+        try {
+            main_process = new ProcessBuilder(getAvailableVoices_bat_path).redirectErrorStream(true).start();                    
+//            main_process.waitFor();
+            BufferedReader reader = 
+                new BufferedReader(new InputStreamReader(main_process.getInputStream()));
+            String line = null;
+            int index = 0;
+            while ( (line = reader.readLine()) != null) {
+                System.out.println("greta.auxiliary.tts.azuretts.AzureTTSFrame.AzureTTSFrame(): output from python: " + line);
+                if (!line.contains("INFO")) {
+                    jComboBox1.addItem(index + ":" + line);
+                    index += 1;
+                }
+            }
+            
+        }
+        catch (Exception e) {
+            
+            System.out.println("greta.auxiliary.tts.azuretts.AzureTTSFrame.AzureTTSFrame(): exception - " + e);
+            
+            for (String voiceName: voiceNames) {
+                jComboBox1.addItem(voiceName);
+            }
+        }
+        
+//        for (String voiceName: voiceNames) {
+//            jComboBox1.addItem(voiceName);
+//        }
+        
+                
+        /*====================================================================================================*/
+        /*                     This block is part of the Greta Furhat Interface       
+                                   Author: Fousseyni Sangaré 04/2024-09/2024                                  */
+        /*====================================================================================================*/
+        
+        speechtextserver = new GretaFurhatSpeechTextSender("localhost", "61616", "greta.furhat.SpeechText");
+        audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.Audio");
+        
+        /*====================================================================================================*/
+        /*====================================================================================================*/    
+    
+    }
     
     static{
         // Init constants and make phonemes mappings

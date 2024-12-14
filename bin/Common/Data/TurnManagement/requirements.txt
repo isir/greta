@@ -1,4 +1,3 @@
 pyaudio==0.2.14
-torch==2.4.1
 silero-vad==5.1
 numpy==2.1.1

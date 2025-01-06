@@ -14,6 +14,9 @@ It is the result of different research projects conducted by Catherine Pelachaud
 
 ## Update
 
+### Jan 06, 2024: separate main GPL repository and LGPL repository
+- The previous LGPL version goes to [HERE](https://github.com/isir/greta-lgpl)
+
 ### Sep 03, 2024: changed license from LGPL to GPL, added many functionalities(EN,FR)!
 - Greta (master branch) became GPL license from LGPL license.
 - Previous LGPL version Greta (master branch) is now in "master-lgpl" branch

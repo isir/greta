@@ -15,7 +15,7 @@ It is the result of different research projects conducted by Catherine Pelachaud
 ## Update
 
 ### Jan 25, 2025: added functionality list with videos on Wiki
-- Please visit [HERE](https://github.com/isir/greta/wiki#demonstration)
+- Added latest functionality list (e.g. Mistral LLM, DeepGram ASR, Nodding, Microsaccade, etc.) [HERE](https://github.com/isir/greta/wiki#demonstration)
 
 ### Jan 06, 2025: separate main GPL repository and LGPL repository
 - The previous LGPL version goes to [HERE](https://github.com/isir/greta-lgpl)

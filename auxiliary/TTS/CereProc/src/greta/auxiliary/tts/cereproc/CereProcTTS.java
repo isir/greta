@@ -46,6 +46,7 @@ import javax.sound.sampled.AudioFormat;
 
 import greta.furhat.activemq.GretaFurhatSpeechTextSender;
 import greta.furhat.activemq.GretaFurhatAudioSender;
+import java.io.File;
 
 /**
  * This class manages the CereProc implementation of TTS for Greta<br/>
@@ -805,7 +806,15 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
      * @return the path to the CereProc's voice for the current character
      */
     public String toCereProcVoicePath(String characterLanguage, String characterVoice) {
+
+        // return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_48k_standard.voice";
+
+        String toReturn = VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_24k_cerewave.voice";
+        File f = new File(toReturn);
+        if (f.exists())
+            return toReturn;
         return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_48k_standard.voice";
+
     }
 
          /**

@@ -21,7 +21,8 @@ import com.cereproc.cerevoice_eng.CPRC_ABUF_TRANS_TYPE;
 import com.cereproc.cerevoice_eng.CPRC_VOICE_LOAD_TYPE;
 import com.cereproc.cerevoice_eng.SWIGTYPE_p_CPRCEN_engine;
 import com.cereproc.cerevoice_eng.SWIGTYPE_p_CPRC_abuf;
-import com.cereproc.cerevoice_eng.SWIGTYPE_p_CPRC_abuf_trans;
+//import com.cereproc.cerevoice_eng.SWIGTYPE_p_CPRC_abuf_trans;
+import com.cereproc.cerevoice_eng.CPRC_abuf_trans;
 import com.cereproc.cerevoice_eng.cerevoice_eng;
 import greta.core.util.CharacterDependentAdapter;
 import greta.core.util.CharacterManager;
@@ -252,16 +253,27 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         // Init the Sampling Rate of the engine
         cereprocSampleRate = cerevoice_eng.CPRCEN_channel_get_voice_info(engineCereProc, channelHandle, "SAMPLE_RATE");
         cereprocSampleRateFloat = Float.parseFloat(cereprocSampleRate);
+        
+        System.out.println("greta.auxiliary.tts.cereproc.CereProcTTS: cereprocSampleRateFloat: " + cereprocSampleRateFloat);
 
         // Creates an AudioFomat used later to play the audio buffer (synthetized voice) produced by the engine
         audioFormatCereProc = new AudioFormat(
+
             AudioFormat.Encoding.PCM_SIGNED,
+
             cereprocSampleRateFloat, //sample rate
+            // 48000.0f, //sample rate
+            
             16, //bits - sample size
             1, //mono - channels
             2, //bytes - frame size (sample size * channels)
-            Float.parseFloat(cereprocSampleRate), //Hz - frame rate
+            
+            // Float.parseFloat(cereprocSampleRate), //Hz - frame rate
+            cereprocSampleRateFloat, //Hz - frame rate
+            // 48000.0f, //Hz - frame rate
+
             false); //endianness - true=big, false=little;
+            // true); //endianness - true=big, false=little;
 
         // Init the fallback buffer in case of an interruption call that results in a delay
         double minimumDuration = 0.002;
@@ -673,6 +685,11 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     // Create the Audio object that will be played
                     audio = new Audio(audioFormatCereProc, rawAudioBuffer);
                     
+                    ///////////////////
+                    /// For DEBUG
+                    ///////////////////
+                    // File file = new File("000-"+ greta.core.util.id.IDProvider.createID("CEREPROC_TEST").toString()+ ".wav");
+                    // audio.save(file);
                     
                     /*=================================================================================================================*/
                     /*                     This block is part of the Greta Furhat Interface       
@@ -733,7 +750,8 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
     }
 
     private static ArrayList<String> fromABufToEvent(SWIGTYPE_p_CPRC_abuf abuf){
-        SWIGTYPE_p_CPRC_abuf_trans trans;
+        // SWIGTYPE_p_CPRC_abuf_trans trans;
+        CPRC_abuf_trans trans;
 	CPRC_ABUF_TRANS_TYPE transtype;
 	float start, end;
 	String name;
@@ -789,6 +807,10 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
         String countryCode = cerevoice_eng.CPRCEN_channel_get_voice_info(engineCereProc, channelHandle, "COUNTRY_CODE_ISO");
         languageID = languageCode + "-" + countryCode;
         voiceName = cerevoice_eng.CPRCEN_engine_get_voice_info(engineCereProc, 0, "VOICE_NAME");
+
+        // ADD voicePath as global value
+//        voicePath = 
+
     }
 
     private String replaceSpecialCharactersIntoBrackets(String ssmlSpeech, String openBracketReplacement, String closedBracketReplacement)
@@ -806,17 +828,32 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
      * @return the path to the CereProc's voice for the current character
      */
     public String toCereProcVoicePath(String characterLanguage, String characterVoice) {
+        
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
+        /// You should change this line to use CereWave DNN as default (caution its response delay)
+        ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-        // return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_48k_standard.voice";
-
-        String toReturn = VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_24k_cerewave.voice";
-        File f = new File(toReturn);
-        if (f.exists())
-            return toReturn;
-        return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_48k_standard.voice";
-
+        return toCereProcVoicePath(characterLanguage, characterVoice, false);
+        // return toCereProcVoicePath(characterLanguage, characterVoice, true);
+        
     }
 
+    public String toCereProcVoicePath(String characterLanguage, String characterVoice, boolean useNeural) {
+
+        if (useNeural) {
+            // String toReturn = VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_24k_cerewave.voice";
+            return VOICES_ABSOLUTE_PATH + characterLanguage + "-" + characterVoice + "/cerevoice_" + characterVoice + "_24k_cerewave.voice";            
+        }
+        
+        else {
+            // return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/cerevoice_" + characterVoice.toLowerCase() + "_48k_standard.voice";
+            return VOICES_ABSOLUTE_PATH + characterLanguage + "-" + characterVoice + "/cerevoice_" + characterVoice + "_48k_standard.voice";
+            
+        }
+        
+    }
+    
+    
          /**
      * Builds the path to the CereProc's license for the current version of the TTS (6.0.0_48k_standard).<br/>
      * @param characterLanguage the language parameter (e.g. en-GB) retrieved from the {@code CharacterManager}
@@ -824,13 +861,17 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
      * @return the path to the CereProc's license for the current character's voice
      */
     public String toCereProcLicensePath(String characterLanguage, String characterVoice) {
-        return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/" + characterVoice.toLowerCase() + ".lic";
+        // return VOICES_ABSOLUTE_PATH + characterLanguage.toLowerCase() + "-" + characterVoice.toLowerCase() + "/" + characterVoice.toLowerCase() + ".lic";
+        return VOICES_ABSOLUTE_PATH + characterLanguage + "-" + characterVoice + "/" + characterVoice + ".lic";
     }
 
     @Override
     public void onCharacterChanged() {
+
         String newLanguage = getCharacterManager().getValueString("CEREPROC_LANG");
-        String newVoiceName = getCharacterManager().getValueString("CEREPROC_VOICE").toLowerCase().trim();
+
+        // String newVoiceName = getCharacterManager().getValueString("CEREPROC_VOICE").toLowerCase().trim();
+        String newVoiceName = getCharacterManager().getValueString("CEREPROC_VOICE").trim();
 
         if (newVoiceName.trim().isEmpty() || newLanguage.trim().isEmpty()) {
             // No voice or language definition found in character configuration, loads the default voice
@@ -879,21 +920,36 @@ public class CereProcTTS extends CharacterDependentAdapter implements TTS {
                     }
                 }
 
-                if ((cereprocVoiceLoadedFlag == 0) || (channelHandle == 0)) {
+//                if ((cereprocVoiceLoadedFlag == 0) || (channelHandle == 0)) {
+                if (cereprocVoiceLoadedFlag == 0) {
+                    
                     Logs.error("CereProcTTS is unable to load voice file '" + voicePath + "' reverting to previous voice [" + voiceName + "]");
                     licensePath = toCereProcLicensePath(languageID, voiceName);
                     voicePath = toCereProcVoicePath(languageID, voiceName);
-                    cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, voicePath, "", CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD, licensePath, "", "", "");
-
+                    // cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, voicePath, "", CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD, licensePath, "", "", "");
+                    
+                    // Try default (non-neural) voice
+                    voicePath = toCereProcVoicePath(newLanguage, newVoiceName, false);
+                    cereprocVoiceLoadedFlag = cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, voicePath, "", CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD, licensePath, "", "", "");
+                    
+                    if (cereprocVoiceLoadedFlag == 0) {
+                        // Load previous voice
+                        Logs.error("CereProcTTS is unable to load voice file '" + voicePath + "' reverting to previous voice [" + voiceName + "]");
+                        licensePath = toCereProcLicensePath(languageID, voiceName);
+                        voicePath = toCereProcVoicePath(languageID, voiceName, false);
+                        cerevoice_eng.CPRCEN_engine_load_voice(engineCereProc, voicePath, "", CPRC_VOICE_LOAD_TYPE.CPRC_VOICE_LOAD, licensePath, "", "", "");                        
+                    }
+                    
                     channelHandle = cerevoice_eng.CPRCEN_engine_open_default_channel(engineCereProc);
                     if (channelHandle == 0) {
                         Logs.error("CereProcTTS: unable to re-open default channel");
                     }
+
                 }
-                else {
-                    Logs.info("CereProcTTS: voice [" + newVoiceName + "] succesfully loaded");
-                    this.setupCharacterLanguageVoiceParameters();
-                }
+                
+                Logs.info("CereProcTTS: voice [" + voicePath + "]  loaded");
+                this.setupCharacterLanguageVoiceParameters();
+
             }
         }
     }

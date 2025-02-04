@@ -45,8 +45,8 @@ bin/Scripts/OpenSmile/**/* linguist-vendored
 bin/NVBG/**/* linguist-vendored
 bin/charniak/**/* linguist-vendored
 
-# ActiveMQ example
-bin/Common/Data/GretaFurhatInterface/GretaMimic/libs/**/* linguist-vendored
 
 # external lib
-bin/Common/Lib/External/**/* linguist-vendored
+bin/Common/Data/GretaFurhatInterface/GretaMimic/libs/**/*.html linguist-vendored
+# bin/Common/Lib/External/**/* linguist-vendored
+bin/Common/Lib/External/**/*.html linguist-vendored

@@ -46,7 +46,7 @@ bin/NVBG/** linguist-vendored
 bin/charniak/** linguist-vendored
 
 # ActiveMQ example
-bin/Common/Data/GretaFurhatInterface/GretaMimic/libs/apache-activemq-5.15.14/examples/** linguist-vendored
+bin/Common/Data/GretaFurhatInterface/GretaMimic/libs/** linguist-vendored
 
 # external lib
 bin/Common/Lib/External/** linguist-vendored

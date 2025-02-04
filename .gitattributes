@@ -39,11 +39,11 @@
 .tmac linguist-vendored
 
 # OpenSmile
-bin/Scripts/OpenSmile/* linguist-vendored
+bin/Scripts/OpenSmile/** linguist-vendored
 
 # NVBG and charniak
-bin/NVBG/* linguist-vendored
-bin/charniak/* linguist-vendored
+bin/NVBG/** linguist-vendored
+bin/charniak/** linguist-vendored
 
 # ActiveMQ example
-bin/Common/Data/GretaFurhatInterface/GretaMimic/libs/apache-activemq-5.15.14/examples/* linguist-vendored
+bin/Common/Data/GretaFurhatInterface/GretaMimic/libs/apache-activemq-5.15.14/examples/** linguist-vendored

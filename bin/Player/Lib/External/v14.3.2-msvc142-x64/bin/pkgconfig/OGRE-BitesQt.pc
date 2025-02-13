@@ -1,0 +1,11 @@
+prefix=
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include
+
+Name: OGRE-BitesQt
+Description: BitesQt component for OGRE
+Version: 14.3.2
+Requires: OGRE = 14.3.2 , Qt6Gui
+Libs: -L${libdir} -lOgreBitesQt
+Cflags: -I${includedir}/OGRE/Bites 

@@ -1,0 +1,13 @@
+material SSAO/GBuffer
+{
+    technique
+    {
+        pass
+        {	 
+            rtshader_system GBuffer
+            {
+                lighting_stage gbuffer normal_viewdepth viewpos
+            }
+        }
+    }
+}

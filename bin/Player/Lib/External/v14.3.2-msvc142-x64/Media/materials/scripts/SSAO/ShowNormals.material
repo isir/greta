@@ -1,0 +1,43 @@
+fragment_program SSAO/ShowNormals_fp_hlsl hlsl
+{
+    source ShowNormals.cg
+    entry_point ShowNormals_fp
+    target ps_2_0
+}
+
+fragment_program SSAO/ShowNormals_fp_glsl glsl
+{
+	source ShowNormalsFP.glsl
+	
+	default_params
+	{
+		param_named mrt1 int 0
+	}
+}
+
+fragment_program SSAO/ShowNormals_fp unified
+{
+	delegate SSAO/ShowNormals_fp_glsl 
+	delegate SSAO/ShowNormals_fp_hlsl
+}
+
+material SSAO/ShowNormals
+{
+    technique
+    {
+        pass
+        {
+            depth_check off
+
+			vertex_program_ref Ogre/Compositor/StdQuad_vp {}
+            fragment_program_ref SSAO/ShowNormals_fp {}
+
+            texture_unit
+            {
+                content_type compositor SSAO/GBuffer mrt 0
+                tex_address_mode clamp
+                filtering none
+            }
+        }
+    }
+}

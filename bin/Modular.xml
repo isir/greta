@@ -38,6 +38,7 @@
             
                 <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
                 <item module="ASAP" name="ASAP"/>
+                <item module="MODIFF" name="MODIFF"/>
                 <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
                 <item module="RestPoseSetterWithFeedback" name="RestPoseSetterWithFeedback"/>
                 <item module="ObjectNodeController" name="ObjectNodeController"/>
@@ -551,6 +552,10 @@
         </module>
         <module name="ASAP">
             <object class="greta.auxiliary.asap.ASAPFrame" lib_id="greta_asap"/>
+            <frame type="object"/>
+        </module>
+        <module name="MODIFF">
+            <object class="greta.auxiliary.modiff.MODIFFFrame" lib_id="greta_modiff"/>
             <frame type="object"/>
         </module>
         <module name="ActiveMQ FML Sender">
@@ -1683,6 +1688,15 @@
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_mpeg4"/>
+        </lib>
+	<lib id="greta_modiff" path="./Common/Lib/Internal/MODIFF.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_behavior_realizer"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_incrementality"/>
         </lib>
         <lib id="sequence_mining" path="./Common/Lib/Internal/SequenceMining.jar">
             <depends lib_id="ext_bfograph"/>

@@ -1,0 +1,14 @@
+void ShowDepth_fp
+(
+    in float4 position : POSITION,
+    in float2 iTexCoord: TEXCOORD0, 
+    
+    out float4 oColor0 : COLOR0,
+
+    uniform sampler mrt1: register(s0)
+)
+{
+    float depth = tex2D(mrt1, iTexCoord).w;
+    depth = pow(depth, 0.3);
+    oColor0 = float4(depth, depth, depth, 1);
+}

@@ -10,6 +10,9 @@
 
 **/.DS_Store
 
+**/*.pth
+**/*.pt
+
 bin/Common/Lib/Internal/*.jar
 bin/Common/Lib/Internal/**/*.jar
 bin/Common/Lib/Internal/*.TXT
@@ -50,7 +53,6 @@ bin/Common/Data/DeepASR/DeepGram/api_key.txt
 bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
 
 bin/Examples/NotNecessary
-/.idea
 bin/Common/Data/AzureTTS/SPEECH_KEY.txt
 bin/Common/Data/AzureTTS/SPEECH_REGION.txt
 bin/Common/Data/AzureTTS/output0.wav
@@ -58,3 +60,4 @@ bin/Common/Data/AzureTTS/python_log.txt
 bin/Common/Data/AzureTTS/ssml0.txt
 bin/Common/Data/AzureTTS/python_log.txt
 bin/Common/Data/LLM/MICounselor/bkup/api_key.txt
+bin/Common/Data/MODIFF/api_key.txt

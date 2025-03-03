@@ -61,3 +61,9 @@ bin/Common/Data/AzureTTS/ssml0.txt
 bin/Common/Data/AzureTTS/python_log.txt
 bin/Common/Data/LLM/MICounselor/bkup/api_key.txt
 bin/Common/Data/MODIFF/api_key.txt
+bin/Common/Data/LLM/MICounselor/bkup/api_key.txt
+bin/Common/Data/LLM/MICounselor/bkup/api_key.txt
+bin/Common/Data/MODIFF/api_key.txt
+bin/Common/Data/MODIFF/saved_model_NewmodelChunkd1000.pth
+bin/Common/Data/MODIFF/saved_model_NewmodelChunkd1000delayed32.pth
+bin/Common/Data/MODIFF/saved_model_NewmodelChunkd1000delayed17.pth

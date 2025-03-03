@@ -260,7 +260,7 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
             answer += curr_sent
             
             if FIRST_SENTENCE:
-                print("START:" + curr_sent)
+                print("fSTART:" + curr_sent)
                 FIRST_SENTENCE = False
             else:
                 print(curr_sent)

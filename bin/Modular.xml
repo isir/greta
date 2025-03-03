@@ -230,11 +230,13 @@
                     <item module="Mistral" name="Mistral"/>
                     <item module="MistralIncremental" name="Mistral Incremental"/>
                     <item module="MI Counselor" name="MI Counselor"/>
+                    <item module="MI Counselor RL" name="MI Counselor RL"/>
                     <item module="MICounselorIncremental" name="MI Counselor Incremental"/>
                     <item module="MICounselorIncrementalDA" name="MI Counselor Incremental DA"/>
                 </menu>
                 <menu name="DeepASR">
                     <item module="DeepGram" name="DeepGram"/>
+                  <item module="DeepGramContinuous" name="DeepGramContinuous"/>
                 </menu>
                 <menu name="TurnManagement">
                     <item module="TurnManagement" name="turnManagement"/>
@@ -1241,6 +1243,10 @@
         <object class="greta.auxiliary.llm.MICounselor" lib_id="greta_llm"/>
         <frame type="object"/>
       </module>
+      <module name="MI Counselor RL" style="Intentions">
+        <object class="greta.auxiliary.llm.MICounselorRL" lib_id="greta_llm"/>
+        <frame type="object"/>
+      </module>
       <module name="MICounselorIncremental" style="Intentions">
         <object class="greta.auxiliary.llm.MICounselorIncremental" lib_id="greta_llm"/>
         <frame type="object"/>
@@ -1253,6 +1259,10 @@
            <object class="greta.auxiliary.deepasr.DeepGramFrame" lib_id="greta_deepasr"/>
            <frame type="object"/>
         </module>
+      <module name="DeepGramContinuous" >
+        <object class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
+        <frame type="object"/>
+      </module>
 
          <module name="Microphone" >
            <object class="greta.auxiliary.Microphone.MicrophoneFrame" lib_id="greta_microphone"/>

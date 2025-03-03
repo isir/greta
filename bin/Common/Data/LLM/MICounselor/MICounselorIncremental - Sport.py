@@ -347,7 +347,8 @@ args=parser.parse_args()
 
 port = args.port
 
-csv_file = "C:\\Users\\isir\\Desktop\\RealTimeExperiment_Nezih\\interaction_log.csv"
+# csv_file = "C:\\Users\\isir\\Desktop\\RealTimeExperiment_Nezih\\interaction_log.csv"
+csv_file = "../../../../interaction_log.csv"
 
 if os.path.exists(csv_file):
     os.remove(csv_file)

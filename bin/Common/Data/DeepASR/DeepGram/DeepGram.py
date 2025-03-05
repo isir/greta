@@ -116,7 +116,7 @@ def main(language):
         dg_connection.on(LiveTranscriptionEvents.Unhandled, on_unhandled)
 
         options: LiveOptions = LiveOptions(
-            model="nova-2",
+            model="nova-3",
             language=language,
             # Apply smart formatting to the output
             smart_format=True,
@@ -129,7 +129,7 @@ def main(language):
             utterance_end_ms="1000",
             vad_events=True,
             # Time in milliseconds of silence to wait for before finalizing speech
-            endpointing=150,
+            endpointing=300,
         )
 
         addons = {

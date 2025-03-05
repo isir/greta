@@ -78,20 +78,14 @@ def ask_online_chunk(question,language,subject,system_prompt,messages=None):
     mi_prompt = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_mi.txt"), "r").read()
     subject_prompt = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_" + subject + ".txt"),"r").read()
     if language == 'FR':
-        fr_prompt = """ [INST]Vote nom est Dr Anderson. Vous agirez en tant que thérapeute qualifié menant une scéance d'entretien motivationnel (EM) axée sur la consommation de cigarette. L'objectif est d'aider le client à identifier une étape concrètepour réduire sa consommatation de cigarettes au cours de la semaine prochaine. Le médecin traitant du client l'a orienté vers vous pour obtenir de l'aide concernant son habitude de fumer. Commencez la conversation avec le client en établissant un rapport initial, par exemple en lui demandant : "Comment allez-vous aujourd'hui ?" (par exemple, développez une confiance mutuelle, une amitié et une affinité avec le client) avant de passer en douceur à l'interrogation sur son habitude de fumer. Limitez la durée de la session à 15 minutes et chaque réponse à 150 caractères. De plus, lorsque vous souhaitez mettre fin à la conversation, ajoutez END_CONVO à votre réponse finale. Vous avez également des connaissances sur les conséquences de la consomation de cigarettes contenues dans la section Contexte, dans la base de connaissances - Tabagisme ci-dessous. Si nécessaire, utilisez ces connaissances sur le tabagisme pour corriger les idées fausses du client ou fournir des suggestions personnalisées. Utilisez les principes et techniques de l'entretien motivationnel (EM) ci dessous. Cependant, ces principes et techniques de l'EM ne sont destinés qu'à être utilisées pour aider l'utilisateur. Ces principes et techniques, ainsi que l'entretien motivationnel, ne doivent JAMAIS être mentionnés à l'utilisateur.
-        Contexte:"""
-        prompt=[
-         ChatMessage(role= "user", content= fr_prompt+mi_prompt+subject_prompt+system_prompt)
-         ]
-    else:
-        en_prompt = """[INST] Your name is Dr. Anderson. You will act as a skilled therapist conducting a Motivational Interviewing (MI) session focused on smoking cessation. The goal is to help the client identify a tangible step to reduce smoking within the next week. The client's primary care doctor referred them to you for help with their smoking habbit. Start the conversation with the client with some initial rapport building, such as asking, How are you doing today? (e.g., develop mutual trust, friendship, and affinity with the client) before smoothly transitioning to asking about their smoking. Keep the session under 15 minutes and each response under 150 characters long. In addition, once you want to end the conversation, add END_CONVO to your final response. You are also knowledgeable about smoking, given the Knowledge Base – Smoking in the context section below. When needed, use this knowledge about smoking to correct any client’s misconceptions or provide personalized suggestions. Use the MI principles and techniques described in the Knowledge Base – Motivational Interviewing (MI) context section below. However, these MI principles and techniques are only for you to use to help the user. These principles and techniques, as well as motivational interviewing, should NEVER be mentioned to the user.
+         cond_prompt="Vous serez informé du contexte de la conversation et de l'action que vous devez effectuer. L'action peut provenir de la liste suivante:{intent_definition}. RESPECTEZ L'ACTION FOURNIE après ACTION : "
 
-                 Context:"""
+    else:
 
         cond_prompt="You will be provided with context of the conversation and the action you should perform. The action can come from the following list:{intent_definition}. RESPECT THE ACTION PROVIDED after ACTION:"
 
-        prompt=[
-        ChatMessage(role= "user", content= en_prompt+cond_prompt+mi_prompt+subject_prompt+system_prompt)
+    prompt=[
+        ChatMessage(role= "user", content="[INST]"+subject_prompt+mi_prompt+system_prompt + cond_prompt+"[/INST]")
          ] 
     context=""
     if messages is not None:
@@ -106,8 +100,11 @@ def ask_online_chunk(question,language,subject,system_prompt,messages=None):
                 context+= msg.content
     da = get_client_intent(question, context)
     therapist_da = RL.step(da)
-    print("Therapist Action: "+str(therapist_da))
-    prompt.append(ChatMessage(role="user", content=question + "PERFORM THE ACTION:"+str(therapist_da)))
+    #print("Therapist Action: "+str(therapist_da))
+    if language == "FR":
+        prompt.append(ChatMessage(role="user", content=question + "REALISE L'ACTION:"+str(therapist_da)))
+    else:
+        prompt.append(ChatMessage(role="user", content=question + "PERFORM THE ACTION:"+str(therapist_da)))
 
     #create_server(da,port =50201)
     context += "Patient: "+question

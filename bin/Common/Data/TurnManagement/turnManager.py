@@ -66,7 +66,7 @@ def main():
     IPU_threshold = 0.5
 
     # non-silence threshold in seconds to determine user has started to speak
-    # utterance_start_threshold = 03
+    # utterance_start_threshold = 0.3
     utterance_start_threshold = 0.5
 
     vad_history = []

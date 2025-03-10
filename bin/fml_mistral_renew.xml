@@ -5,19 +5,13 @@
 <description level="1" type="gretabml">
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
-<tm id="tm1"/>I
-<tm id="tm2"/>can
-<tm id="tm3"/>answer
-<tm id="tm4"/>questions,
-<tm id="tm5"/>help
-<tm id="tm6"/>with
-<tm id="tm7"/>tasks,
-<tm id="tm8"/>and
-<tm id="tm9"/>chat
-<tm id="tm10"/>with
-<tm id="tm11"/>you!
-<tm id="tm12"/>
-<boundary end="s1:tm12" id="b1" start="s1:tm1" type="LL"/>
+<tm id="tm1"/>fSTART:How
+<tm id="tm2"/>are
+<tm id="tm3"/>you
+<tm id="tm4"/>doing
+<tm id="tm5"/>today?
+<tm id="tm6"/>
+<boundary end="s1:tm6" id="b1" start="s1:tm1" type="LL"/>
 </speech>
 </bml>
 <fml>

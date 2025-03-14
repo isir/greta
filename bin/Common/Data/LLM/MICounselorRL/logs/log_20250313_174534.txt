@@ -1,0 +1,5 @@
+Agent: Hello, I'm Camille. What's your name?
+User: I am [NAME]
+Agent: Pleased to meet you, [NAME]How are you doing today?
+User: I am fine
+Agent: It's great to hear that you're fine. As you might know, our bodies can handle a certain amount of alcohol, but it's important to keep it in moderation. For women, that's up to 1 drink a day. Have you thought about how your drinking compares to this?

@@ -129,7 +129,7 @@ def main(language):
             utterance_end_ms="1000",
             vad_events=True,
             # Time in milliseconds of silence to wait for before finalizing speech
-            endpointing=500,
+            endpointing=300,
         )
 
         addons = {

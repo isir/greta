@@ -151,8 +151,8 @@ public class MICounselorIncrementalDA extends LLMFrame{
         addressLabel2 = new javax.swing.JLabel();
         modelBox = new javax.swing.JComboBox<>();
         enable = new javax.swing.JCheckBox();
-        addressLabel3 = new javax.swing.JLabel();
         ThemeBox = new javax.swing.JComboBox<>();
+        addressLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -292,14 +292,14 @@ public class MICounselorIncrementalDA extends LLMFrame{
             }
         });
 
-        addressLabel3.setText("Thème");
-
         ThemeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drinking", "Smoking", "Sport" }));
         ThemeBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThemeBoxActionPerformed(evt);
             }
         });
+
+        addressLabel4.setText("Thème");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -308,8 +308,8 @@ public class MICounselorIncrementalDA extends LLMFrame{
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(enable)
-                .addGap(18, 18, 18)
-                .addComponent(addressLabel3)
+                .addGap(30, 30, 30)
+                .addComponent(addressLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(ThemeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -321,8 +321,8 @@ public class MICounselorIncrementalDA extends LLMFrame{
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addressLabel3)
-                        .addComponent(ThemeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ThemeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addressLabel4))
                     .addComponent(enable))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -647,7 +647,7 @@ public class MICounselorIncrementalDA extends LLMFrame{
     private javax.swing.JTextField address;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JLabel addressLabel2;
-    private javax.swing.JLabel addressLabel3;
+    private javax.swing.JLabel addressLabel4;
     private javax.swing.JLabel answer;
     private javax.swing.JLabel answer1;
     private javax.swing.JCheckBox enable;

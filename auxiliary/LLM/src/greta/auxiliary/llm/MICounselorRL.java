@@ -86,8 +86,8 @@ public class MICounselorRL extends LLMFrame{
     private String MM_python_env_installer_path = "Common\\Data\\MeaningMiner\\python\\init_env.bat";
     private String MM_parse_server_path         = "Common\\Data\\MeaningMiner\\python\\activate_server.bat";
     private String MM_parse_server_killer_path  = "Common\\Data\\MeaningMiner\\python\\kill_server.bat";
-    private String LLM_python_env_checker_path = "Common\\Data\\LLM\\Mistral\\check_env.py";
-    private String LLM_python_env_installer_path = "Common\\Data\\LLM\\Mistral\\init_env.bat";
+    private String LLM_python_env_checker_path = "Common\\Data\\LLM\\MICounselorRL\\check_env.py";
+    private String LLM_python_env_installer_path = "Common\\Data\\LLM\\MICounselorRL\\init_env.bat";
     private String python_path_llm="\\Common\\Data\\LLM\\MICounselorRL\\MICounselorIncrementalDA.py";
     
     private Process server_process;
@@ -144,9 +144,15 @@ public class MICounselorRL extends LLMFrame{
         AnswerText = new javax.swing.JTextArea();
         addressLabel2 = new javax.swing.JLabel();
         modelBox = new javax.swing.JComboBox<>();
+        start = new javax.swing.JButton();
+        stop = new javax.swing.JButton();
         enable = new javax.swing.JCheckBox();
         addressLabel3 = new javax.swing.JLabel();
         ThemeBox = new javax.swing.JComboBox<>();
+        addressLabel4 = new javax.swing.JLabel();
+        TypeBox = new javax.swing.JComboBox<>();
+        addressLabel5 = new javax.swing.JLabel();
+        CondBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -198,10 +204,26 @@ public class MICounselorRL extends LLMFrame{
 
         addressLabel2.setText("Model");
 
-        modelBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Local", "Online" }));
+        modelBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Online", "Local" }));
         modelBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modelBoxActionPerformed(evt);
+            }
+        });
+
+        start.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        start.setText("Start");
+        start.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                startActionPerformed(evt);
+            }
+        });
+
+        stop.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        stop.setText("Stop");
+        stop.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stopActionPerformed(evt);
             }
         });
 
@@ -210,10 +232,6 @@ public class MICounselorRL extends LLMFrame{
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(send)
-                .addGap(25, 25, 25))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -239,7 +257,12 @@ public class MICounselorRL extends LLMFrame{
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 138, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(start)
+                    .addComponent(send)
+                    .addComponent(stop))
+                .addGap(25, 25, 25))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -270,8 +293,15 @@ public class MICounselorRL extends LLMFrame{
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(9, 9, 9)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(9, 9, 9))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(start)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(stop)
+                                .addGap(11, 11, 11)))
                         .addComponent(send)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -286,12 +316,30 @@ public class MICounselorRL extends LLMFrame{
             }
         });
 
-        addressLabel3.setText("Thème");
+        addressLabel3.setText("Type");
 
         ThemeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Drinking", "Smoking", "Sport" }));
         ThemeBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ThemeBoxActionPerformed(evt);
+            }
+        });
+
+        addressLabel4.setText("Thème");
+
+        TypeBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Resistant", "Hesitant", "Open" }));
+        TypeBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TypeBoxActionPerformed(evt);
+            }
+        });
+
+        addressLabel5.setText("Condition");
+
+        CondBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Baseline", "RL" }));
+        CondBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CondBoxActionPerformed(evt);
             }
         });
 
@@ -303,9 +351,17 @@ public class MICounselorRL extends LLMFrame{
                 .addContainerGap()
                 .addComponent(enable)
                 .addGap(18, 18, 18)
-                .addComponent(addressLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(addressLabel4)
+                .addGap(12, 12, 12)
                 .addComponent(ThemeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addressLabel3)
+                .addGap(12, 12, 12)
+                .addComponent(TypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(addressLabel5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CondBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
@@ -316,8 +372,13 @@ public class MICounselorRL extends LLMFrame{
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(addressLabel3)
-                        .addComponent(ThemeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(enable))
+                        .addComponent(ThemeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(TypeBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(addressLabel5)
+                        .addComponent(CondBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(enable)
+                        .addComponent(addressLabel4)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -547,6 +608,8 @@ public class MICounselorRL extends LLMFrame{
                 String model= (String) modelBox.getSelectedItem();
                 String systemPromptText = systemPrompt.getText();
                 String theme = (String) ThemeBox.getSelectedItem();
+                String type = (String) TypeBox.getSelectedItem();
+                String condition = (String) CondBox.getSelectedItem();
                 System.out.println("Language selected : "+language);
                 
                 synchronized (lock) {
@@ -556,7 +619,7 @@ public class MICounselorRL extends LLMFrame{
                 if(text.length()>0) {
 
                     try {
-                        server.sendMessage(model+"#SEP#"+language+"#SEP#"+theme+"#SEP#"+text+"#SEP#"+systemPromptText);
+                        server.sendMessage(model+"#SEP#"+language+"#SEP#"+condition+"#SEP#"+type+"#SEP#"+theme+"#SEP#"+text+"#SEP#"+systemPromptText);
                         System.out.println("Sent message:"+text);
                     } catch (IOException ex) {
                         Logger.getLogger(MICounselorRL.class.getName()).log(Level.SEVERE, null, ex);
@@ -583,6 +646,86 @@ public class MICounselorRL extends LLMFrame{
         // TODO add your handling code here:
     }//GEN-LAST:event_ThemeBoxActionPerformed
 
+    private void TypeBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TypeBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_TypeBoxActionPerformed
+
+    private void CondBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CondBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CondBoxActionPerformed
+
+    private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
+        AnswerText.setText("");
+        Thread r1 = new Thread() {
+            @Override
+            public void run() {
+                
+                String text="LAUNCHCONV";
+                String language= cm.getLanguage();
+                String model= (String) modelBox.getSelectedItem();
+                String systemPromptText = systemPrompt.getText();
+                String theme = (String) ThemeBox.getSelectedItem();
+                String type = (String) TypeBox.getSelectedItem();
+                String condition = (String) CondBox.getSelectedItem();
+                System.out.println("Language selected : "+language);
+                
+                synchronized (lock) {
+                    IsStreaming = Boolean.TRUE;                    
+                }
+                
+                if(text.length()>0) {
+
+                    try {
+                        server.sendMessage(model+"#SEP#"+language+"#SEP#"+condition+"#SEP#"+type+"#SEP#"+theme+"#SEP#"+text+"#SEP#"+systemPromptText);
+                        System.out.println("Sent message:"+text);
+                    } catch (IOException ex) {
+                        Logger.getLogger(MICounselorRL.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+
+            }
+        };
+
+        r1.start();
+    }//GEN-LAST:event_startActionPerformed
+
+    private void stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stopActionPerformed
+        AnswerText.setText("");
+        Thread r1 = new Thread() {
+            @Override
+            public void run() {
+                
+                String text="STOPCONV";
+                String language= cm.getLanguage();
+                String model= (String) modelBox.getSelectedItem();
+                String systemPromptText = systemPrompt.getText();
+                String theme = (String) ThemeBox.getSelectedItem();
+                String type = (String) TypeBox.getSelectedItem();
+                String condition = (String) CondBox.getSelectedItem();
+                System.out.println("Language selected : "+language);
+                
+                synchronized (lock) {
+                    IsStreaming = Boolean.TRUE;                    
+                }
+                
+                if(text.length()>0) {
+
+                    try {
+                        server.sendMessage(model+"#SEP#"+language+"#SEP#"+condition+"#SEP#"+type+"#SEP#"+theme+"#SEP#"+text+"#SEP#"+systemPromptText);
+                        System.out.println("Sent message:"+text);
+                    } catch (IOException ex) {
+                        Logger.getLogger(MICounselorRL.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+
+            }
+        };
+
+        r1.start();
+    }//GEN-LAST:event_stopActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -608,12 +751,14 @@ public class MICounselorRL extends LLMFrame{
                 String model= (String) modelBox.getSelectedItem();
                 String systemPromptText = systemPrompt.getText();
                 String theme = (String) ThemeBox.getSelectedItem();
+                String condition = (String) CondBox.getSelectedItem();
+                String type = (String) TypeBox.getSelectedItem();
                 System.out.println("Language selected : "+language);
 
                 if(text.length()>0) {
 
                     try {
-                        server.sendMessage(model+"#SEP#"+language+"#SEP#"+theme+"#SEP#"+text+"#SEP#"+systemPromptText);
+                        server.sendMessage(model+"#SEP#"+language+"#SEP#"+condition+"#SEP#"+type+"#SEP#"+theme+"#SEP#"+text+"#SEP#"+systemPromptText);
                         System.out.println("Sent message:"+text);
                     } catch (IOException ex) {
                         Logger.getLogger(LLMFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -628,11 +773,15 @@ public class MICounselorRL extends LLMFrame{
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea AnswerText;
+    private javax.swing.JComboBox<String> CondBox;
     private javax.swing.JComboBox<String> ThemeBox;
+    private javax.swing.JComboBox<String> TypeBox;
     private javax.swing.JTextField address;
     private javax.swing.JLabel addressLabel;
     private javax.swing.JLabel addressLabel2;
     private javax.swing.JLabel addressLabel3;
+    private javax.swing.JLabel addressLabel4;
+    private javax.swing.JLabel addressLabel5;
     private javax.swing.JLabel answer;
     private javax.swing.JLabel answer1;
     private javax.swing.JCheckBox enable;
@@ -647,6 +796,8 @@ public class MICounselorRL extends LLMFrame{
     private javax.swing.JLabel portLabel;
     private javax.swing.JTextArea request;
     private javax.swing.JButton send;
+    private javax.swing.JButton start;
+    private javax.swing.JButton stop;
     private javax.swing.JTextArea systemPrompt;
     // End of variables declaration//GEN-END:variables
 

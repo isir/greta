@@ -9,6 +9,7 @@
 *.log
 
 **/.DS_Store
+**/__pycache__/
 
 bin/Common/Lib/Internal/*.jar
 bin/Common/Lib/Internal/**/*.jar

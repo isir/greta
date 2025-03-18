@@ -38,6 +38,7 @@ public class TurnManagementContineousFrame extends javax.swing.JFrame implements
     private String port;
     
     private ArrayList<LLMFrame> llmsLocal = new ArrayList<LLMFrame>();
+    private ArrayList<IntentionPerformer> performersLocal = new ArrayList<IntentionPerformer>();
     
     /**
      * Creates new form TurnManagementFrame
@@ -127,6 +128,10 @@ public class TurnManagementContineousFrame extends javax.swing.JFrame implements
             for(LLMFrame llmLocal: llmsLocal){
                 turnManager.llms.add(llmLocal);
             }
+            performers = turnManager.getPerformers();
+            for(IntentionPerformer performerLocal:performersLocal){
+                performers.add(performerLocal);
+            }
             turnManagerActivated = true;
             System.out.println("greta.auxiliary.TurnManagement.TurnManagementFrame(): activated");
         } catch (IOException ex) {
@@ -200,8 +205,11 @@ public class TurnManagementContineousFrame extends javax.swing.JFrame implements
     // End of variables declaration//GEN-END:variables
 
     public void addIntentionPerformer(IntentionPerformer performer) {
-        performers = turnManager.getPerformers();
-        performers.add(performer);
+        performersLocal.add(performer);
+        if(turnManagerActivated){
+            performers = turnManager.getPerformers();
+            performers.add(performer);            
+        }
     }
     
     public void removeIntentionPerformer(IntentionPerformer performer) {

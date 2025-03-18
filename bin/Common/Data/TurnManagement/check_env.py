@@ -3,7 +3,7 @@ import sys
 import subprocess
 import pprint as pp
 
-tgt_env_name = 'py311_vad'
+tgt_env_name = 'py311_vap'
 
 basedir = os.path.dirname(__file__)
 os.chdir(basedir)

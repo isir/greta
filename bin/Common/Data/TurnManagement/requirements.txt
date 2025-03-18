@@ -1,3 +1,0 @@
-pyaudio==0.2.14
-silero-vad==5.1
-numpy==2.1.1

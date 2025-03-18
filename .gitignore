@@ -10,6 +10,8 @@
 
 **/.DS_Store
 **/__pycache__/
+**/*.pt
+**/*.ckpt
 
 bin/Common/Lib/Internal/*.jar
 bin/Common/Lib/Internal/**/*.jar

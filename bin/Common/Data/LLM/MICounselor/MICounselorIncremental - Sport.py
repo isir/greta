@@ -126,8 +126,10 @@ with open(api_key_file, 'r') as f:
     MISTRAL_API_KEY = f.read()
 
 model = "mistral-large-latest"
-client_online = MistralClient(api_key=MISTRAL_API_KEY)
-client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+# client_online = MistralClient(api_key=MISTRAL_API_KEY)
+# client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+client_online = None
+client = None
 
 def ask(question,messages=None,messages_online=None):
     
@@ -145,6 +147,12 @@ def ask(question,messages=None,messages_online=None):
 
 
 def ask_local_chunk(question,language, system_prompt, messages=None):
+
+    global client
+    
+    if client == None:
+        
+        client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
     
     if language == 'FR':
         prompt=[
@@ -206,7 +214,12 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
  
 def ask_online_chunk(question,language,system_prompt,messages=None):
 
-
+    global client_online
+    
+    if client_online == None:
+        
+        client_online = MistralClient(api_key=MISTRAL_API_KEY)
+        
     if language == 'FR':
         prompt=[
          ChatMessage(role= "user", content= fr_prompt+system_prompt)

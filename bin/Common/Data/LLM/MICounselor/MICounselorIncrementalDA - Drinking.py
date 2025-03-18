@@ -73,8 +73,10 @@ with open(api_key_file, 'r') as f:
     MISTRAL_API_KEY = f.read()
 
 model = "mistral-large-latest"
-client_online = MistralClient(api_key=MISTRAL_API_KEY)
-client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+# client_online = MistralClient(api_key=MISTRAL_API_KEY)
+# client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+client_online = None
+client = None
 
 def ask(question,messages=None,messages_online=None):
     
@@ -93,6 +95,12 @@ def ask(question,messages=None,messages_online=None):
 
 
 def ask_local_chunk(question,language, system_prompt, messages=None):
+
+    global client
+    
+    if client == None:
+        
+        client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
     
     if language == 'FR':
         prompt=[
@@ -154,6 +162,11 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
  
 def ask_online_chunk(question,language,system_prompt,messages=None):
 
+    global client_online
+    
+    if client_online == None:
+        
+        client_online = MistralClient(api_key=MISTRAL_API_KEY)
 
     if language == 'FR':
         prompt=[
@@ -163,17 +176,18 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
           prompt=[
         ChatMessage(role= "user", content= en_prompt+system_prompt)
          ] 
-    context=""
+
+    context = ""
     if messages is not None:
-        l=len(messages)
-        for i,msg in enumerate(messages):
+        l = len(messages)
+        for i, msg in enumerate(messages):
             prompt.append(msg)
-            if l-i<2:
-                if (message.role) =='user':
+            if l - i < 2:
+                if (msg.role) == 'user':
                     context += "Patient: "
                 else:
                     context += "Therapist:"
-                context+= message.content
+                context += msg.content
 
     prompt.append(ChatMessage(role="user", content=question))
     da = get_client_intent(question,context)

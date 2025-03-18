@@ -236,10 +236,11 @@
                 </menu>
                 <menu name="DeepASR">
                     <item module="DeepGram" name="DeepGram"/>
-                  <item module="DeepGramContinuous" name="DeepGramContinuous"/>
+                    <item module="DeepGramContinuous" name="DeepGramContinuous"/>
                 </menu>
                 <menu name="TurnManagement">
-                    <item module="TurnManagement" name="turnManagement"/>
+                    <item module="TurnManagement" name="TurnManagement"/>
+                    <item module="TurnManagementContineous" name="TurnManagementContineous"/>
                 </menu>
             </menu>
         </menu>
@@ -1273,6 +1274,11 @@
             <object class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
             <frame type="object"/>
         </module> 
+        
+        <module name="TurnManagementContineous" >
+            <object class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
+            <frame type="object"/>
+        </module> 
 
         <module name="RestPoseSetterWithFeedback" style="Signals">
             <object class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
@@ -2117,15 +2123,6 @@
         <connect from="input" method="addIncInteractionPerformer" to="output"/>
         <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
       </connector>
-
-        <connector id="TurnManagerToIntentionPerformer">
-            <input class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
-            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
-            <connect from="input" method="addIntentionPerformer" to="output"/>
-            <!-- it will call input.addIntentionPerformer(output) -->
-            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
-            <!-- it will call input.addIntentionPerformer(output) -->
-        </connector>
         
         <!--
         <connector id="RestPoseSetterWithFeedbackToSignalPerformer">
@@ -2145,6 +2142,40 @@
             <!-- it will call input.removeSignalPerformer(output) -->
         </connector>
 
+        <connector id="ASRContineousToReceiver">
+            <input class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
+            <output class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
+            <connect from="input" method="addASRReceiver" to="output"/>
+            <disconnect from="input" method="removeASRReceiver" to="output"/>
+        </connector>
+
+        <connector id="TurnManagementToIntentionPerformer">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+        </connector>
+        
+        <connector id="TurnManagementContineousToIntentionPerformer">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+        </connector>
+
+      <connector id="TurnManagementContineousToLLM">
+        <input class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
+        <output class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
+        <connect from="input" method="addLLMFrame" to="output"/>
+        <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
+        <disconnect from="input" method="removeLLMFrame" to="output"/>
+        <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
+      </connector>        
+                        
     </connectors>
     <!-- list of styles -->
     <styles>

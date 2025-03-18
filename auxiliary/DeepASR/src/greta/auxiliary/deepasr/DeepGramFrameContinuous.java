@@ -72,8 +72,8 @@ public class DeepGramFrameContinuous extends DeepASRFrame {
     private static String markup = "fml-apml";
     private Server server;
 
-    private final Object lock = new Object();    
-    
+    private final Object lock = new Object();
+        
 //    private volatile Boolean IsListenning = Boolean.FALSE;
 
     public DeepGramFrameContinuous(CharacterManager cm)throws InterruptedException {
@@ -313,8 +313,13 @@ public class DeepGramFrameContinuous extends DeepASRFrame {
 
                                                 TranscriptText.setText(s.replace("Speech Final:","").replace("Is Final:",""));
                                                 if (IsListenning){
+                                                    
                                                     for (LLMFrame llm : llms){
                                                         llm.setRequestTextandSend(s.replace("Speech Final:","").replace("Is Final:",""));
+                                                    }
+                                                    
+                                                    for (ASRReceiver receiver : receivers) {
+                                                        receiver.receiveText(s.replace("Speech Final:","").replace("Is Final:",""));
                                                     }
                                                     
                                                 }

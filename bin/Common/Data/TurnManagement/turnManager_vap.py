@@ -27,7 +27,7 @@ print('[TurnManagement Greta] PID = {}'.format(process.pid))
 
 import pickle
 import librosa
-from VAP_main import VAPModel, DataConfig, OptConfig, get_run_name
+from finetune_vapNotFreeze import VAPModel, DataConfig, OptConfig, get_run_name
 from utils import everything_deterministic, write_json
 from model import VapGPT, VapConfig
 from events import TurnTakingEvents, EventConfig
@@ -201,6 +201,10 @@ def main():
                 action = vap_action
             else:
                 action = vad_action
+            
+            # action = vad_action
+            
+            # print('[python turnManager action]: {:20s}, {:20s}'.format(vad_action, vap_action))
             
             greta_socket.send('{}\r\n'.format(action).encode())
 

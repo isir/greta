@@ -19,9 +19,9 @@
             <parameter name="blackBackground" value="true"/>
             <window h="435" visible="false" w="618" x="10" y="10"/>
         </element>
-        <element h="620.0" id="Environment - 1544700713383-564"
+        <element h="660.0" id="Environment - 1544700713383-564"
             module="Environment" name="Environment" w="700.0" x="30.0" y="110.0">
-            <element h="570.0"
+            <element h="610.0"
                 id="Character Manager - 1544700726358-960"
                 module="Character Manager" name="Character Manager"
                 w="650.0" x="20.0" y="30.0">
@@ -126,7 +126,7 @@
             <parameter name="posY" value="1.652191162109375"/>
             <parameter name="posZ" value="0.8969947099685669"/>
             <parameter name="roll" value="0.0"/>
-            <parameter name="pitch" value="-0.12280730158090591"/>
+            <parameter name="pitch" value="-0.12280730903148651"/>
             <parameter name="yaw" value="-0.05786361172795296"/>
             <window h="1148" visible="true" w="976" x="952" y="0"/>
         </element>
@@ -142,9 +142,26 @@
         </element>
     </elements>
     <connections>
-        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Microsaccade - 1741100669700-560" target="Behavior Realizer - 1741099550957-786"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1721057588907-99" target="DeepGramContinuous - 1741099619193-940"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1721057588907-99" target="TurnManagementContineous - 1741099583881-248"/>
+        <connection connector="ASRContineousToReceiver"
+            source="DeepGramContinuous - 1741099619193-940" target="TurnManagementContineous - 1741099583881-248"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="MistralIncremental - 1722507734920-589" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="addFeedbackInput"
+            source="Behavior Realizer - 1741099550957-786" target="Feedbacks - 1721057588907-99"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1741099550957-786" target="Animation Keyframe Performer - 1544700747777-220"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
@@ -153,40 +170,23 @@
             source="Behavior Realizer - 1741099550957-786" target="Lip Model - 1721381426095-674"/>
         <connection connector="SignalEmitterToKeyFramePerformer"
             source="Behavior Realizer - 1741099550957-786" target="Audio Keyframe Performer - 1554477294171-845"/>
-        <connection connector="addFeedbackInput"
-            source="Behavior Realizer - 1741099550957-786" target="Feedbacks - 1721057588907-99"/>
-        <connection connector="addLogOutput"
-            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
-        <connection connector="AUEmitterToAUPerformer"
-            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Lip Blender - 1554477283159-751" target="MPEG4 Animatable - 1544700808257-513"/>
-        <connection connector="IntentionEmitterToIntentionPerformer"
-            source="MistralIncremental - 1722507734920-589" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="LipSourceForLipBlender"
-            source="Lip Model - 1721381426095-674" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="addFeedbackOutput"
-            source="Feedbacks - 1721057588907-99" target="DeepGramContinuous - 1741099619193-940"/>
-        <connection connector="addFeedbackOutput"
-            source="Feedbacks - 1721057588907-99" target="TurnManagementContineous - 1741099583881-248"/>
-        <connection connector="FAPFrameEmitterToFAPFramePerformer"
-            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
-        <connection connector="connectAnimatableToEnvironment"
-            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="CereProc - 1544700946314-81"/>
         <connection connector="connectPlayerToEnvironment"
             source="Ogre Player - 1720626419025-143" target="Environment - 1544700713383-564"/>
-        <connection connector="AudioEmitter To AudioPerformer"
-            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1741099550957-786"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Microsaccade - 1741100669700-560" target="Behavior Realizer - 1741099550957-786"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1721381426095-674" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
         <connection connector="TurnManagementContineousToLLM"
             source="TurnManagementContineous - 1741099583881-248" target="MistralIncremental - 1722507734920-589"/>
         <connection
             connector="TurnManagementContineousToIntentionPerformer"
             source="TurnManagementContineous - 1741099583881-248" target="Behavior Planner - 1544700734561-356"/>
-        <connection connector="SignalEmitterToSignalPerformer"
-            source="Behavior Planner - 1544700734561-356" target="Behavior Realizer - 1741099550957-786"/>
-        <connection connector="ASRContineousToReceiver"
-            source="DeepGramContinuous - 1741099619193-940" target="TurnManagementContineous - 1741099583881-248"/>
-        <connection connector="BAPFrameEmitterToBAPFramePerformer"
-            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
     </connections>
 </modulated>

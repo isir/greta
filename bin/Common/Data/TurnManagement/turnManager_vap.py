@@ -73,7 +73,8 @@ def main():
     curr_turn = 1
     
     # speech turn onset sensitivity
-    user_onset = 1
+    # vap_history_length = 20
+    user_onset = 10
     agent_onset = 10
     
     #######################################
@@ -830,7 +831,9 @@ class VAP:
     
     def get_turn(self, vap_user, vap_agent):
         
-        if vap_user > 0.52:
+        # turn: 0 - user, 1 - agent
+        
+        if vap_user > 0.53:
             
             tmp_turn = 0
         
@@ -852,7 +855,7 @@ class VAP:
         # else:
         #     assert False, "something wrong happened"
         
-        turn_decision = np.average(self.turn_history)
+        turn_decision = round(np.average(self.turn_history))
         
         return turn_decision
     

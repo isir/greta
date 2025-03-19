@@ -8,6 +8,7 @@ Created on Fri Sep  6 11:10:43 2024
 import pprint as pp
 import numpy as np
 import traceback
+import time
 import sys
 import os
 
@@ -78,7 +79,7 @@ def  start_mic_server(port = 9000):
             connection, address = server_socket.accept()  # accept new connection
             connection.settimeout(5)
             
-            thread = Thread(target = on_new_client, args = (connection, address, mic))
+            thread = Thread(target = on_new_client, args = (connection, address, mic, INTERVAL))
             thread.name = str(address)
             thread.daemon = True
             thread.start()
@@ -138,7 +139,7 @@ class Microphone(Thread):
         self.BUFFER_SIZE = BUFFER_SIZE
         self.KILL_SIGNAL = KILL_SIGNAL
         
-        self.data = None
+        self.data_chunk = np.zeros((self.CHUNK,), dtype=np.int16)
         
         self.lock = Lock()
     
@@ -170,6 +171,10 @@ class Microphone(Thread):
         print("##############################################################################")
         
         def callback(in_data, frame_count, time_info, status):
+            data = np.frombuffer(in_data, dtype=np.int16)
+            self.data_chunk = np.concatenate((self.data_chunk, data))[-self.CHUNK:]
+            # print(frame_count, len(data), len(self.data_chunk))
+            # return (in_data, pyaudio.paContinue)
             return (in_data, pyaudio.paContinue)
          
         self.stream = self.p.open(format=self.FORMAT,
@@ -177,32 +182,37 @@ class Microphone(Thread):
                         rate=self.RATE,
                         input=True,
                         output=True,
-                        # stream_callback=callback,
+                        stream_callback=callback,
                         input_device_index = mic_index
                         )
          
         self.stream.start_stream()
+        
+        # self.data_chunk = self.stream.read(self.CHUNK, False)
 
         print("[Microphone] Mic stream started")
+        
+        # while self.stream.is_active():
+
+        #     self.data_chunk = self.stream.read(self.CHUNK, False)
     
     def get_array(self):
         
-        if self.stream.is_active():
-                        
-            buffer = self.get_buffer()
+        buffer = self.get_buffer()
 
-            audio_int16 = np.frombuffer(buffer, dtype=np.int16)
-            audio_float32 = self.int2float(audio_int16)
-            
-            data = self.trim(audio_float32)
+        audio_int16 = np.frombuffer(buffer, dtype=np.int16)
+        audio_float32 = self.int2float(audio_int16)
+        
+        data = self.trim(audio_float32)
                     
         return data
 
     def get_buffer(self):
         
-        if self.stream.is_active():
-                        
-            data = self.stream.read(self.CHUNK, False)
+        # data = self.stream.read(self.CHUNK, False)
+        # data = self.data_chunk
+        
+        data = self.data_chunk
         
         return data
     
@@ -238,13 +248,15 @@ class Microphone(Thread):
         self.KILL_SIGNAL = True
         self.lock.release()
 
-def on_new_client(clientsocket,address, mic):
+def on_new_client(clientsocket,address, mic, INTERVAL):
     
     print("[Microphone] Connection from: " + str(address))
     
     while True:
         
         try:
+            
+            s_time = time.time()
             
             data = clientsocket.recv(mic.BUFFER_SIZE).decode()
             if data == 'kill':
@@ -256,6 +268,12 @@ def on_new_client(clientsocket,address, mic):
             # data = input('SERVER >> ').encode()
             data = mic.get_buffer()
             clientsocket.send(data)
+            
+            e_time = time.time()
+            
+            wait_time = INTERVAL - (e_time - s_time)
+            if wait_time > 0:
+                time.sleep(wait_time)
         
         except Exception as e:
             print(e)

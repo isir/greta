@@ -159,7 +159,7 @@ class Microphone(Thread):
                 print(device_info)
         
         mic_index = 0
-        mic_name = self.p.get_device_info_by_host_api_device_index(0, i).get('name').encode('ascii', 'ignore')
+        mic_name = self.p.get_device_info_by_host_api_device_index(0, mic_index).get('name').encode('ascii', 'ignore')
         print("### Selected mic is {} with index {}".format(mic_name, mic_index))
         
         print("##############################################################################")

@@ -273,17 +273,17 @@ public class TurnManagement {
                             if (result.contains("turnShiftUserToAgent")) {
                                 System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: behavior - " + result);
 
-//                                int prevLength = transcriptList.size();
-//                                while(true) {
-//                                    //System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: " + prevLength + " " + transcriptList.size());
-//                                    if (prevLength != transcriptList.size()){
-//                                        break;
-//                                    }
-//                                    Thread.sleep(50);
-//                                }
+                                int prevLength = transcriptList.size();
+                                while(true) {
+                                    //System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: " + prevLength + " " + transcriptList.size());
+                                    if (prevLength != transcriptList.size()){
+                                        break;
+                                    }
+                                    Thread.sleep(50);
+                                }
 
                                 ///// Wait for ASR response (this wait duration might be changed depending on ASR parameter)
-                                Thread.sleep(500);
+                                //Thread.sleep(500);
                                 
                                 System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: sent to LLM - " + transcriptList.get(transcriptList.size() - 1));                                
                                 for (LLMFrame llm : llms) {

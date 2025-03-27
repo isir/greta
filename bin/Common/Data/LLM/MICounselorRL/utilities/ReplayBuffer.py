@@ -48,7 +48,7 @@ class ReplayBuffer:
         self.head_idx = (self.head_idx + 1) % self.capacity
         self.count = min(self.count + 1, self.capacity)
 
-    def sample_minibatch(self, size):
+    def sample_minibatch(self, size=100):
         set_weights = self.weights[:self.count] + self.delta
         probabilities = set_weights / sum(set_weights)
         self.indices = np.random.choice(range(self.count), size, p=probabilities, replace=False)

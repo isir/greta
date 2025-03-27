@@ -11,7 +11,7 @@ from mistralai.models.chat_completion import ChatMessage
 from therapist_behavior_inference import get_therapist_intent
 from client_behavior_inference import get_client_intent
 from RL_client import RL_client
-
+import threading
 from utils_mistral_online import *
 TIMEOUT = 5
 intent_detail_list = read_prompt_csv('therapist')
@@ -44,17 +44,113 @@ for intent_detail in intent_detail_list_fr:
             pass
     intent_definition_list_fr.append(f' {intent_text}: {definition_text} ')
 intent_definition_fr = ";\n".join(intent_definition_list_fr)
-def create_server(da, host='localhost', port=50200):
-    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_socket:
-        server_socket.bind((host, port))
-        server_socket.listen(1)
-        
- 
-        conn, addr = server_socket.accept()
-        with conn:
-           
-            conn.sendall(da.encode('utf-8'))
-            
+
+class DA_Server:
+    def __init__(self, port, address='localhost'):
+        self.port = port
+        self.address = address
+        self.server_socket = None
+        self.client_socket = None
+        self.lock = threading.Lock()
+        self.stop_event = threading.Event()
+        self.server_thread = threading.Thread(target=self.run_server, daemon=True)
+        self.server_thread.start()
+
+    def run_server(self):
+        # Set up the server socket
+        self.server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.server_socket.bind((self.address, self.port))
+        self.server_socket.listen(1)
+        #print(f"DA_Server listening on {self.address}:{self.port}")
+        self.server_socket.settimeout(1.0)  # Timeout to periodically check for stop_event
+
+        while not self.stop_event.is_set():
+            try:
+                try:
+                    client_socket, client_address = self.server_socket.accept()
+                except socket.timeout:
+                    continue  # Retry accept if timeout occurs
+                with self.lock:
+                    self.client_socket = client_socket
+                #print(f"DA_Server accepted connection from {client_address}")
+                # Start a thread to handle the client
+                client_thread = threading.Thread(target=self.handle_client, args=(client_socket,), daemon=True)
+                client_thread.start()
+            except Exception as e:
+                print(f"DA_Server encountered an error: {e}")
+                break
+
+        self.close_server()
+
+    def handle_client(self, client_socket):
+        while not self.stop_event.is_set():
+            try:
+                # Optionally handle incoming data from the client
+                time.sleep(1)
+            except Exception as e:
+                print(f"Error in client connection: {e}")
+                break
+
+        with self.lock:
+            if self.client_socket == client_socket:
+                self.client_socket.close()
+                self.client_socket = None
+
+    # def send_message(self, data):
+    #     with self.lock:
+    #         if self.client_socket:
+    #             try:
+    #                 # Ensure the data is 8 bytes long, padded or truncated
+    #                 data_bytes = data.encode('utf-8')
+    #                 data_bytes = data_bytes.ljust(8, b'\0')[:8]
+    #                 self.client_socket.sendall(data_bytes)
+    #                 #print(f"DA_Server sent data: {data}")
+    #             except Exception as e:
+    #                 print(f"DA_Server failed to send data: {e}")
+    #                 self.client_socket.close()
+    #                 self.client_socket = None
+    #         else:
+    #             pass
+    #             #print("DA_Server: No client connected to send data")
+
+    def send_message(self, strings_list):
+        """Send a list of strings to the client."""
+        with self.lock:
+            if self.client_socket:
+                try:
+                    # Serialize the list to a JSON-formatted string
+                    data = json.dumps(strings_list)
+                    data_bytes = data.encode('utf-8')
+
+                    # Send the length of the data first (4 bytes, network byte order)
+                    data_length = len(data_bytes)
+                    length_prefix = struct.pack('!I', data_length)
+
+                    # Send the length prefix followed by the data
+                    self.client_socket.sendall(length_prefix + data_bytes)
+                except Exception as e:
+                    #print(f"DA_Server failed to send data: {e}")
+                    self.client_socket.close()
+                    self.client_socket = None
+            else:
+                #print("DA_Server: No client connected to send data")
+                # print("Oh")
+                print("")
+
+    def close_server(self):
+        self.stop_event.set()
+        with self.lock:
+            if self.client_socket:
+                self.client_socket.close()
+                self.client_socket = None
+        if self.server_socket:
+            self.server_socket.close()
+            self.server_socket = None
+        print("DA_Server closed")
+
+    def __del__(self):
+        self.close_server()
+
 
 messages = None
 messages_online = None
@@ -154,6 +250,7 @@ def ask_online_chunk(question,language,condition,type,subject,system_prompt,mess
                 context+= msg.content
 
     da = get_client_intent(question, context, language)
+    serv2.send_message([question,context])
     time.sleep(2)
     if "Chang" in da or "Modif" in da:
         change =True
@@ -164,11 +261,13 @@ def ask_online_chunk(question,language,condition,type,subject,system_prompt,mess
         name_user = get_name(question,language)
         if name_user == "[NON]" or name_user == "[NO]":
             welcome = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_no_name.txt"), "r").read()
+            serv.send_message([welcome,""])
             print(welcome)
             name_user=""
 
         else :
             welcome = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_name.txt"), "r").read() + name_user
+            serv.send_message([welcome,""])
             print(welcome)
             
         time.sleep(2)
@@ -221,13 +320,13 @@ def ask_online_chunk(question,language,condition,type,subject,system_prompt,mess
             
             if FIRST_SENTENCE:
                # da = get_therapist_intent(curr_sent,context)
-                
+                serv.send_message([curr_sent, context])
                 print("START:" + curr_sent)
                # create_server(da,port =50200)
                 FIRST_SENTENCE = False
             else:
               #  da = get_therapist_intent(curr_sent,context+"Therapist: "+answer)
-                
+                serv.send_message([curr_sent, context])
                 print(curr_sent)
             #    create_server(da,port =50200)
             
@@ -237,6 +336,7 @@ def ask_online_chunk(question,language,condition,type,subject,system_prompt,mess
     time.sleep(min_response_time )
     if curr_sent != "":
         #da = get_therapist_intent(curr_sent,context)
+        serv.send_message([curr_sent, context])
         print(curr_sent)
      #  create_server(da,port =50200)
         answer += curr_sent
@@ -249,6 +349,7 @@ def ask_online_chunk(question,language,condition,type,subject,system_prompt,mess
             stop_phrase = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_stop_good.txt"), "r").read()
         else:
             stop_phrase = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_stop_bad.txt"), "r").read()
+        serv.send_message([stop_phrase, context])
         print(stop_phrase)
     else:
         stop_phrase=""
@@ -291,10 +392,12 @@ parser.add_argument("port", help="server port", type=int, default="4000")
 
 args=parser.parse_args()
 
+serv = DA_Server(port=5555)
+serv2 = DA_Server(port=5556)
 port = args.port
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect(("localhost",port))
-message_reciv=False
+s.connect(("localhost", port))
+message_reciv = False
 while(True):
     msg=s.recv(1024)
     msg=msg.decode('iso-8859-1')

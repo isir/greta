@@ -1,0 +1,11 @@
+Agent: Hello, I'm Camille. What's your name?
+User: I am [NAME]
+Agent: Pleased to meet you, [NAME]It's normal to feel a bit nervous when first talking about alcohol use. Many people feel the same way. Let's start, how are you doing today?
+User: I am fine
+Agent: You mentioned you're fine, but I'm here if you'd like to talk about anything that might be bothering you.
+User: thank you
+Agent: Sure. Let's talk about your alcohol use. Can you tell me more about your drinking habits lately? How often and how much have you been drinking?
+User: five times a week
+Agent: I see. And how many drinks do you typically have each time?
+User: about four
+Agent: Thank you for sharing that with me, [NAME].Would you be open to exploring how this amount of alcohol might be affecting your life?Thank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.

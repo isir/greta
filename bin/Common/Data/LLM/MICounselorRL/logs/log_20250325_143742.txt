@@ -1,0 +1,9 @@
+Agent: Hello, I'm Camille. What's your name?
+User: my name is [NAME]
+Agent: Pleased to meet you, [NAME]It's great to have you here. How are you doing today?
+User: really great
+Agent: That's good to hear. What have you been up to lately?
+User: nothing much
+Agent: I see. Tell me, what brought you in today?
+User: i don't know
+Agent: I understand. Your doctor mentioned alcohol might be a topic worth discussing. How does that sound to you?

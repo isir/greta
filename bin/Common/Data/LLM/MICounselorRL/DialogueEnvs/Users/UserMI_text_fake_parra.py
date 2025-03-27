@@ -34,7 +34,7 @@ class UserMI:
              "Backchannel",
              "Ask for Consent or Validation",
              "Progress Acknowledgment and Encouragement",
-             "Empathic Reaction", "Unknown"]
+             "Empathic Reaction"]
         self.termination_da = 8
         self.action_to_id = {}
         for i, a in enumerate(self.action_space):

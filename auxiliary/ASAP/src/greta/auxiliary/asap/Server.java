@@ -106,11 +106,25 @@ public class Server {
         out.println(msg);
     }
     
-    public String receiveMessage() throws IOException{
+    /*public String receiveMessage() throws IOException{
+        
+        System.out.println("NOUS ESSAYONS DE LIRE LE MESSAGE");
         
         String resp = in.readLine();
+        System.out.println("Le message est "+ resp);
+        
         return resp;
+    }*/
+    public String receiveMessage() throws IOException {
+    //System.out.println("Waiting to receive message...");
+    String resp = in.readLine();
+    if (resp == null) {
+        System.out.println("End of stream reached or connection closed.");
+        throw new IOException("End of stream reached or connection closed.");
     }
+    //System.out.println("Received message: " + resp);
+    return resp;
+}
 
     public void stopConnection() throws IOException {
         in.close();

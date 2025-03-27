@@ -1,0 +1,9 @@
+Agent: Hello, I'm Camille. What's your name?
+User: Je suis [NAME]
+Agent: Enchantée, [NAME]Comment allez-vous aujourd'hui ?
+User: pas bien
+Agent: Je suis désolé d'apprendre cela. Qu'est-ce qui vous préoccupe en ce moment ?
+User: tout
+Agent: Cela semble vraiment difficile. Pouvez-vous me donner un exemple spécifique qui vous préoccupe en ce moment ?
+User: non
+Agent: D'accord, pas de souci. Comment puis-je vous aider aujourd'hui ? Votre médecin m'a parlé de votre consommation d'alcool. Pourriez-vous m'en dire plus à ce sujet ?

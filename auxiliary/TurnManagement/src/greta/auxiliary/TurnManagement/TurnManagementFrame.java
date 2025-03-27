@@ -21,8 +21,6 @@ import java.util.List;
 public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackPerformer {
     private String feedback_bat_path = "";
     private Process server_process;
-    
-    private final String batch_main_path = "Common\\Data\\TurnManagement\\run_turnManager.bat";
         
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private TurnManagement turnManager;
@@ -37,7 +35,7 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
     public TurnManagementFrame() throws IOException {
         initComponents();
         System.out.println("greta.auxiliary.TurnManagement.TurnManagementFrame()");
-        turnManager = new TurnManagement(cm, batch_main_path);
+        turnManager = new TurnManagement(cm);
     }
 
     /**
@@ -102,23 +100,19 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
     @Override
     public void performFeedback(greta.core.util.id.ID id, String string, greta.core.signals.SpeechSignal ss, greta.core.util.time.TimeMarker tm) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        performFeedback(string);
     }
 
     @Override
     public void performFeedback(greta.core.util.id.ID id, String string, List<greta.core.util.time.Temporizable> list) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        performFeedback(string);
     }
 
     @Override
     public void performFeedback(Callback clbck) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        performFeedback(clbck.type());
     }
 
     public void performFeedback(String str) {
-        System.out.println("greta.auxiliary.TurnManagement.TurnManagementFrame.performFeedback - " + str);
         turnManager.performFeedback(str);
     }    
     

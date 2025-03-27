@@ -80,9 +80,7 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
     
     protected CharacterManager cm;
     private static String markup = "fml-apml";
-
-    protected ArrayList<ASRReceiver> receivers = new ArrayList<ASRReceiver>();
-    
+        
 //    public String getAnswer() {
 //        return answ;
 //    }
@@ -158,14 +156,6 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
 
     public void removeLLMFrame(LLMFrame llm) {
         llms.remove(llm);
-    }
-    
-    public void addASRReceiver(ASRReceiver receiver) {
-        receivers.add(receiver);
-    }
-
-    public void removeASRReceiver(ASRReceiver receiver) {
-        receivers.remove(receiver);
     }
     
     private void portActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portActionPerformed

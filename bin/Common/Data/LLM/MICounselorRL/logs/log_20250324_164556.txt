@@ -1,0 +1,17 @@
+Agent: Hello, I'm Camille. What's your name?
+User: hi
+Agent: Don't worry, we can continue without it.How are you doing today?
+User: hi
+Agent: Nice to meet you. How's your day been so far?
+User: hi
+Agent: I'm here to chat about whatever you'd like. How have you been feeling lately?
+User: hi
+Agent: I notice you're saying "hi" a lot. Is something on your mind? Maybe we can talk about it? What brought you here today?
+User: hi
+Agent: Alright, let's talk about your drinking. Can you tell me more about your alcohol use?
+User: hi
+Agent: It seems like you might not be ready to talk yet. That's okay. Who referred you to me?
+User: hi
+Agent: I see. Is there something specific you'd like to discuss or ask about regarding your alcohol use?
+User: hi
+Agent: How many drinks do you have in a week?

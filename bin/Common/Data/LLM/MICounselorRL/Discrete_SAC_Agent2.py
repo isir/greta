@@ -72,6 +72,20 @@ class SACAgent:
         torch.save(self.critic_target.state_dict(), path + "/critic_target")
         torch.save(self.critic_target2.state_dict(), path + "/critic_target2")
         torch.save(self.log_alpha, path + "/log_alpha")
+    def load(self, path):
+        self.actor_local.load_state_dict(torch.load( path + "/actor_local", weights_only=True))
+        self.critic_local.load_state_dict(torch.load( path + "/critic_local", weights_only=True))
+        self.critic_local2.load_state_dict(torch.load( path + "/critic_local2", weights_only=True))
+        self.critic_target.load_state_dict(torch.load( path + "/critic_target", weights_only=True))
+        self.critic_target2.load_state_dict(torch.load( path + "/critic_target2", weights_only=True))
+        self.log_alpha=torch.load( path + "/log_alpha", weights_only=True)
+    def eval(self):
+         self.actor_local.eval()
+         self.critic_local.eval()
+         self.critic_local2.eval()
+         self.critic_target.eval()
+
+         self.critic_target2.eval()
     def reset(self):
         self.actor_local= Network(
             input_dimension=self.state_dim,
@@ -92,7 +106,7 @@ class SACAgent:
             discrete_action = self.get_action_deterministically(state)
         else:
             discrete_action = self.get_action_nondeterministically(state)
-        print(discrete_action)
+
         return discrete_action
 
     def get_action_nondeterministically(self, state):
@@ -107,7 +121,7 @@ class SACAgent:
                 discrete_action = [np.random.choice(range(self.action_dim)) for a in action_probabilities]
             else:
                 discrete_action = np.random.choice(range(self.action_dim))
-        print(discrete_action)
+
         return discrete_action
 
     def get_action_deterministically(self, state):
@@ -117,7 +131,7 @@ class SACAgent:
             discrete_action = [np.argmax(a) for a in action_probabilities]
         else:
             discrete_action = np.argmax(action_probabilities)
-        print(discrete_action)
+
         return discrete_action
 
 

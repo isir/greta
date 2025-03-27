@@ -471,11 +471,12 @@ public class MICounselorIncremental extends LLMFrame{
                                             else{
 
                                                 System.out.println("TEXTE:"+s);
-                                                String file=TextToFML(s, false);
+                                                
                                                 
                                                 if (s.contains("END_CONVO")) {
                                                     
                                                     s = s.replace("END_CONVO", "");
+                                                    String file=TextToFML(s, false);
                                                     s=null;                                            
                                                     load(file, CompositionType.append, true, false);
 
@@ -484,6 +485,7 @@ public class MICounselorIncremental extends LLMFrame{
                                                     // load(file, CompositionType.append, true, false);
 
                                                 } else {
+                                                    String file=TextToFML(s, false);
                                                     load(file, CompositionType.append, true, false);
                                                 }
                                                 
@@ -546,20 +548,28 @@ public class MICounselorIncremental extends LLMFrame{
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
         
-        AnswerText.setText("");
+        synchronized (lock) {
+            AnswerText.setText("");        
+        }
+        
         Thread r1 = new Thread() {
             @Override
             public void run() {
                 
-                String text=request.getText();
-                String language= cm.getLanguage();
-                String model= (String) modelBox.getSelectedItem();
-                String systemPromptText = systemPrompt.getText();
-                System.out.println("Language selected : "+language);
+                String text;
+                String language;
+                String model;
+                String systemPromptText;
                 
                 synchronized (lock) {
+                    text=request.getText();
+                    language= cm.getLanguage();
+                    model= (String) modelBox.getSelectedItem();
+                    systemPromptText = systemPrompt.getText();
                     IsStreaming = Boolean.TRUE;                    
                 }
+                
+                System.out.println("Language selected : "+language);
                 
                 if(text.length()>0) {
 
@@ -600,21 +610,29 @@ public class MICounselorIncremental extends LLMFrame{
 
     @Override
     public void setRequestTextandSend(String content){
-     
-        request.setText(content);
-        AnswerText.setText("");
         
         synchronized (lock) {
+            request.setText(content);
+            AnswerText.setText("");
             IsStreaming = Boolean.TRUE;        
         }
 
         Thread r1 = new Thread() {
             @Override
             public void run() {
-                String text=request.getText();
-                String language= cm.getLanguage();
-                String model= (String) modelBox.getSelectedItem();
-                String systemPromptText = systemPrompt.getText();
+                
+                String text;
+                String language;
+                String model;
+                String systemPromptText;
+                
+                synchronized (lock) {
+                    text=request.getText();
+                    language= cm.getLanguage();
+                    model= (String) modelBox.getSelectedItem();
+                    systemPromptText = systemPrompt.getText();
+                }
+
                 System.out.println("Language selected : "+language);
 
                 if(text.length()>0) {

@@ -1,0 +1,5 @@
+Agent: Hello, I'm Camille. What's your name?
+User: takeshi
+Agent: Pleased to meet you, [NAME]How are you doing today?
+User: takeshi
+Agent: Not great, doc. Just here because my doctor said I should be.  I don't really think I have a problem.  I just like to drink, it helps me unwind after work.

@@ -1,0 +1,5 @@
+Agent: Hello, I'm Camille. What's your name?
+User: i am [NAME]
+Agent: Pleased to meet you, [NAME]Nice to meet you, [NAME]. How are you doing today?
+User: i am [NAME] I am fine
+Agent: Nice to meet you, [NAME].

@@ -1,0 +1,8 @@
+User: hello
+Agent: Bonjour, je suis le Dr Perrin. Comment allez-vous aujourd'hui ?
+User: hello
+Agent: Bonjour, je suis le Dr Perrin. Comment allez-vous aujourd'hui ?
+User: je vais bien
+Agent: C'est bon à entendre. Puis-je vous demander ce qui vous amène ici aujourd'hui ?
+User: je vais bien
+Agent: Je suis ravi de l'entendre. Pouvez-vous me parler un peu de vous ? Comment se passe votre quotidien ?

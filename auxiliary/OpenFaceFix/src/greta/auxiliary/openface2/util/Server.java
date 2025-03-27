@@ -77,7 +77,7 @@ public class Server {
         address="localhost";
     }
     
-    public Server(String p, String a){
+    public Server(String a, String p){
         port=p;
         address=a;
     }
@@ -104,7 +104,7 @@ public class Server {
 
         
                 InetAddress addr= InetAddress.getByName(address);
-                System.out.println("Trying to open port " + port + "... at address:"+address);
+                System.out.println("Trying to open port " + port + "... at address:"+address + " (" + addr.toString() + ")");
                 serverSocket = new ServerSocket(Integer.valueOf(port),MAX_PRIORITY,addr);
                 System.out.println("Trying to open port " + port + "... at address:"+address);
                 System.out.println("Waiting for client to connect...");

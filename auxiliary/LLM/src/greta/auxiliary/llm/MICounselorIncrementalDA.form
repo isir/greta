@@ -57,8 +57,8 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="enable" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                  <Component id="addressLabel4" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <Component id="addressLabel3" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="ThemeBox" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
@@ -72,8 +72,8 @@
                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                          <Component id="addressLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="ThemeBox" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="addressLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Component id="enable" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -328,6 +328,11 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="enableActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JLabel" name="addressLabel3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Th&#xe8;me"/>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JComboBox" name="ThemeBox">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -344,11 +349,6 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="addressLabel4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Th&#xe8;me"/>
-          </Properties>
         </Component>
       </SubComponents>
     </Container>

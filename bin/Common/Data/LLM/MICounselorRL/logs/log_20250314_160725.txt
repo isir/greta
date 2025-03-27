@@ -1,0 +1,9 @@
+Agent: Hello, I'm Camille. What's your name?
+User: I am [NAME]
+Agent: Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How are you doing today?
+User: I am [NAME]
+Agent: It's common to feel a mix of emotions when talking about alcohol use. Many people go through this, you're not alone.
+User: I am [NAME]
+Agent: Tell me more about your drinking habits lately.
+User: I am [NAME]
+Agent: Let's discuss how alcohol fits into your life. What does a typical drinking day look like for you?

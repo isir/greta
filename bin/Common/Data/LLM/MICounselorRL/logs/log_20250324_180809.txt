@@ -1,0 +1,6 @@
+User: hey
+Agent: Hello! How are you doing today?
+User: hey
+Agent: Nice to meet you! What brings you in today?
+User: hey
+Agent: You mentioned your doctor referred you. How have you been feeling lately?

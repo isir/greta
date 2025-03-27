@@ -1,0 +1,8 @@
+User: hi
+Agent: Hello! I'm Dr. Anderson. How are you doing today?
+User: hi
+Agent: Is this your first time seeing a therapist for alcohol use?
+User: hi
+Agent: Alright. What brought you in today?
+User: hi
+Agent: You mentioned your doctor referred you. What did you both discuss?

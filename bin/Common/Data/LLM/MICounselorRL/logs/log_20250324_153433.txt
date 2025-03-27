@@ -1,0 +1,25 @@
+Agent: Hello, I'm Camille. What's your name?
+User: takeshi
+Agent: Pleased to meet you, [NAME]How are you doing today?
+User: takeshi
+Agent: That's great to hear, [NAME]. To start, can you tell me a bit about your week? What was it like?
+User: takeshi
+Agent: I see. How many drinks did you have this week?
+User: takeshi
+Agent: And what's your usual pattern? How many days a week do you drink, and how much?
+User: takeshi
+Agent: How do you feel alcohol affects your life, both positively and negatively?
+User: I don't know
+Agent: It's okay not to know. What do you like about drinking?
+User: I don't know
+Agent: It's alright. What makes you come here today? What does your primary care doctor say?
+User: I don't know
+Agent: It's common to feel unsure. What have you noticed about your health and life lately? Any changes?
+User: I don't know
+Agent: Let me ask you this, [NAME]: What might be some benefits of cutting back on alcohol? What could change for the better?
+User: I don't know
+Agent: That's okay. Change can be tough to think about. What do you value most in your life? What's important to you?
+User: I don't know
+Agent: It's alright not to know. Let me ask, on a scale of 1-10, how important is it for you to at least explore the idea of cutting back? 1 being not at all, 10 being very.
+User: I don't know
+Agent: No problem. If you did decide to make a change, what would be the first small step you'd take? Just curious.

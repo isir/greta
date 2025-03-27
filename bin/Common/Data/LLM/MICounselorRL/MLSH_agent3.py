@@ -15,7 +15,13 @@ class MLSH_agent:
 
     def save_agent(self, path):
         self.master_policy.save(path+'/master')
-        self.subpolicies.save(path+'/subpolicies')    
+        self.subpolicies.save(path+'/subpolicies') 
+    def load_agent(self,path):
+        self.master_policy.load(path+'/master')
+        self.subpolicies.load(path+'/subpolicies') 
+    def eval(self):
+        self.master_policy.eval()
+        self.subpolicies.eval()
     def reset_master_policy(self):
         self.master_policy.reset()
     def get_next_master_action(self, master_state, evaluation_episode=False):

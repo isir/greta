@@ -1,6 +1,7 @@
 import numpy as np
 from MLSH_agent3 import MLSH_agent
 import gym
+import os
 
 gym.register(
     id='DialogueEnv-v0',
@@ -56,19 +57,23 @@ class RL_client:
         self.perspective = 0
         self.context = 0
         self.user_da = np.zeros((1,len(self.user_da_list)-1))
-        self.agent_da = np.zeros((1,len(self.agent_da_en)-1))
+        self.agent_da = np.zeros((1,len(self.agent_da_en)))
         self.user_da[0,-1] = 6
         self.agent_da[0,12] = 8
         self.env =  gym.make('DialogueEnv-v0',n_parra=1)
-
-        self.agents = [MLSH_agent(self.env,4,master_len_replay_buffer=500,sub_len_replay_buffer=500,master_replay_mini_batch_size=10,sub_replay_mini_batch_size=10,master_learning_rate=10**-7,sub_learning_rate=10**-6,master_mbpo=False,use_maml=True),
-                       MLSH_agent(self.env,4,master_len_replay_buffer=500,sub_len_replay_buffer=500,master_replay_mini_batch_size=10,sub_replay_mini_batch_size=10,master_learning_rate=10**-7,sub_learning_rate=10**-6,master_mbpo=False,use_maml=True),
-                       MLSH_agent(self.env,4,master_len_replay_buffer=500,sub_len_replay_buffer=500,master_replay_mini_batch_size=10,sub_replay_mini_batch_size=10,master_learning_rate=10**-7,sub_learning_rate=10**-6,master_mbpo=False,use_maml=True)]
+        path = os.path.join(os.path.dirname(__file__), "models/" )
+        self.agents = [MLSH_agent(self.env,6,master_len_replay_buffer=500,sub_len_replay_buffer=2000,master_replay_mini_batch_size=64,sub_replay_mini_batch_size=100,master_learning_rate=10**-4,sub_learning_rate=10**-5,master_mbpo=False,use_maml=True),
+                       MLSH_agent(self.env,6,master_len_replay_buffer=500,sub_len_replay_buffer=2000,master_replay_mini_batch_size=64,sub_replay_mini_batch_size=100,master_learning_rate=10**-4,sub_learning_rate=10**-5,master_mbpo=False,use_maml=True),
+                       MLSH_agent(self.env,6,master_len_replay_buffer=500,sub_len_replay_buffer=2000,master_replay_mini_batch_size=64,sub_replay_mini_batch_size=100,master_learning_rate=10**-4,sub_learning_rate=10**-5,master_mbpo=False,use_maml=True)]
+        self.agents[0].load_agent(path+"hesitant/")
+        self.agents[1].load_agent(path+"resistant/")
+        self.agents[2].load_agent(path+"open/")
         self.agent = self.agents[0]
+        self.agent.eval()
         self.subpolicy = [0]
-        self.master_ob = np.array([[self.context/3,self.rapport/3,self.perspective/3,self.turn_id/40] ])
-        self.ob = np.concatenate([self.master_ob,self.user_da,self.agent_da],axis=1)
-        self.type_to_id = {'Resistant':0,"Open":1,"Hesitant":2}
+        self.master_ob = np.array([[self.context/3,self.rapport/3,self.perspective/3] ])
+        self.ob = np.concatenate([self.user_da,self.agent_da],axis=1)
+        self.type_to_id = {'Hesitant':0,"Resistant":1,"Open":2}
         self.type = 0
 
     def reset(self):
@@ -77,20 +82,20 @@ class RL_client:
         self.perspective = 0
         self.context = 0
         self.user_da = np.zeros((1,len(self.user_da_list)-1))
-        self.agent_da = np.zeros((1,len(self.agent_da_en)-1))
+        self.agent_da = np.zeros((1,len(self.agent_da_en)))
         self.user_da[0,-1] = 6
         self.agent_da[0,12] = 8
         self.subpolicy = [0]
-        self.master_ob = np.array([[self.context/3,self.rapport/3,self.perspective/3,self.turn_id/40] ])
-        self.ob = np.concatenate([self.master_ob,self.user_da,self.agent_da],axis=1)
+        self.master_ob = np.array([[self.context/3,self.rapport/3,self.perspective/3] ])
+        self.ob = np.concatenate([self.user_da,self.agent_da],axis=1)
     def set_type(self,type):
 
         self.type = self.type_to_id[type]
         self.agent= self.agents[self.type]
-
+        self.agent.eval()
     def update_obs(self):
-        self.master_ob = np.array([[self.context/3,self.rapport/3,self.perspective/3,self.turn_id/40] ])
-        self.ob = np.concatenate([self.master_ob,self.user_da,self.agent_da],axis=1)
+        self.master_ob = np.array([[self.context/3,self.rapport/3,self.perspective/3] ])
+        self.ob = np.concatenate([self.user_da,self.agent_da],axis=1)
 
     def step(self,da,lang='EN'):
         self.turn_id += 1 

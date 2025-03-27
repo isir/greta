@@ -65,11 +65,28 @@ class Subpolicies:
 
     def save(self, path):
 
-        for i in range(self.n_subpolicies):
+      for i in range(self.n_subpolicies):
             torch.save(self.actor_local[i].state_dict(), path + "/actor_local"+str(i)+".pth")
             torch.save(self.critic_local[i].state_dict(), path + "/critic_local.pth")
             torch.save(self.critic_local2[i].state_dict(), path + "/critic_local2.pth")
-        torch.save(self.log_alpha, path + "/log_alpha.pth")
+      torch.save(self.log_alpha, path + "/log_alpha.pth")
+    def load(self, path):
+
+        for i in range(self.n_subpolicies):
+            self.actor_local[i].load_state_dict(torch.load( path + "/actor_local"+str(i)+".pth", weights_only=True))
+            self.critic_local[i].load_state_dict(torch.load( path + "/critic_local.pth", weights_only=True))
+            self.critic_local2[i].load_state_dict(torch.load( path + "/critic_local2.pth", weights_only=True))
+
+        self.log_alpha = torch.load( path + "/log_alpha.pth", weights_only=True)
+
+        
+    def eval(self):
+
+        for i in range(self.n_subpolicies):
+            self.actor_local[i].eval()
+            self.critic_local[i].eval()
+            self.critic_local2[i].eval()
+
     def get_next_action(self, subpolicy,state, evaluation_episode=False):
         if evaluation_episode:
             discrete_action = self.get_action_deterministically(subpolicy,state)

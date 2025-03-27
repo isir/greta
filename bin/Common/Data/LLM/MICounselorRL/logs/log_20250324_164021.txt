@@ -1,0 +1,6 @@
+User: hi
+Agent: Hello! How are you doing today?
+User: hi
+Agent: Nice to meet you. What brings you in today?
+User: hi
+Agent: I'm Dr. Anderson. Your doctor thought it might be helpful to chat about your alcohol use. Is that okay?

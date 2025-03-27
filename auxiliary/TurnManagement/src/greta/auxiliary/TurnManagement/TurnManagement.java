@@ -5,7 +5,6 @@
  */
 package greta.auxiliary.TurnManagement;
 
-import greta.auxiliary.llm.LLMFrame;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionPerformer;
 import greta.core.intentions.FMLTranslator;
@@ -65,10 +64,10 @@ import javax.jms.JMSException;
 
 public class TurnManagement {
 
-    private String python_env_checker_path = "Common\\Data\\TurnManagement\\check_env.py";
-    private String batch_env_installer_path = "Common\\Data\\TurnManagement\\init_env.bat";
-    private String batch_main_path;
-    private String batch_kill_path = "Common\\Data\\TurnManagement\\kill_server.bat";
+    private final String python_env_checker_path = "Common\\Data\\TurnManagement\\check_env.py";
+    private final String batch_env_installer_path = "Common\\Data\\TurnManagement\\init_env.bat";
+    private final String batch_main_path = "Common\\Data\\TurnManagement\\run_turnManager.bat";
+    private final String batch_kill_path = "Common\\Data\\TurnManagement\\kill_server.bat";
     private Process server_process;
 
     private Server feedback_server;
@@ -89,19 +88,13 @@ public class TurnManagement {
 
     private String prevTurnState = "";
 
-    protected ArrayList<LLMFrame> llms = new ArrayList<LLMFrame>();    
-    
-    private ArrayList<String> transcriptList = new ArrayList<String>();    
-    
     /**
      *
      * @throws IOException
      */
-    public TurnManagement (CharacterManager cm, String main_path) throws IOException {
+    public TurnManagement (CharacterManager cm) throws IOException {
 
         System.out.println("greta.auxiliary.TurnManagement.TurnManagement()");
-        
-        batch_main_path = main_path;
 
         ArrayList<String> arrayList = new ArrayList<String>();
         Files.list(Paths.get(backChannelFMLFileDir_path)).forEach(s -> arrayList.add(s.toString()));        
@@ -254,7 +247,7 @@ public class TurnManagement {
 
                         if (!prevTurnState.equals(result)) {
 
-                            System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: check - " + result);
+//                            System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: check - " + result);
 
                             prevTurnState = result;
 
@@ -270,29 +263,14 @@ public class TurnManagement {
                                 System.out.format("Backchannel %s is emitted%n", backChannelFML);
                                 load(backChannelFML);
                             }
-                            if (result.contains("turnShiftUserToAgent")) {
-                                System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: behavior - " + result);
+//                            if (result.contains("turnShift")) {
+//                                System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: behavior - " + result);
+//                                // send FML signal
+//                            }
 
-                                int prevLength = transcriptList.size();
-                                while(true) {
-                                    //System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: " + prevLength + " " + transcriptList.size());
-                                    if (prevLength != transcriptList.size()){
-                                        break;
-                                    }
-                                    Thread.sleep(50);
-                                }
-
-                                ///// Wait for ASR response (this wait duration might be changed depending on ASR parameter)
-                                //Thread.sleep(500);
-                                
-                                System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: sent to LLM - " + transcriptList.get(transcriptList.size() - 1));                                
-                                for (LLMFrame llm : llms) {
-                                    llm.setRequestTextandSend(transcriptList.get(transcriptList.size() - 1));
-                                }
-                            }
                         }
                         else {
-                            // System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: behavior - " + result);                            
+                            
                         }
 
                         double e_time = greta.core.util.time.Timer.getTime();
@@ -331,9 +309,9 @@ public class TurnManagement {
 
                     try {
                         feedback_server.sendMessage(type);
-                        // System.out.println("greta.auxiliary.TurnManagement.performFeedback(): Feedback - " + type);
+                        System.out.println("greta.auxiliary.TurnManagement.performFeedback(): Feedback - " + type);
                         response = feedback_server.receiveMessage();
-                        // System.out.println("greta.auxiliary.TurnManagement.performFeedback(): response - " + response);
+                        System.out.println("greta.auxiliary.TurnManagement.performFeedback(): response - " + response);
 
                     } catch (Exception ex) {
                         Logger.getLogger(TurnManagementFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -584,8 +562,5 @@ public class TurnManagement {
         }
     }
 
-    public void addTranscript(String transcript) {
-        transcriptList.add(transcript);
-    }
     
 }

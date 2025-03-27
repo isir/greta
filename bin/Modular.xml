@@ -38,6 +38,7 @@
             
                 <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
                 <item module="ASAP" name="ASAP"/>
+		<item module="MODIFF" name="MODIFF"/>
                 <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
                 <item module="RestPoseSetterWithFeedback" name="RestPoseSetterWithFeedback"/>
                 <item module="ObjectNodeController" name="ObjectNodeController"/>
@@ -236,11 +237,11 @@
                 </menu>
                 <menu name="DeepASR">
                     <item module="DeepGram" name="DeepGram"/>
-                    <item module="DeepGramContinuous" name="DeepGramContinuous"/>
+		<item module="DeepGramContinuous" name="DeepGramContinuous"/>
+
                 </menu>
                 <menu name="TurnManagement">
-                    <item module="TurnManagement" name="TurnManagement"/>
-                    <item module="TurnManagementContineous" name="TurnManagementContineous"/>
+                    <item module="TurnManagement" name="turnManagement"/>
                 </menu>
             </menu>
         </menu>
@@ -554,6 +555,10 @@
         </module>
         <module name="ASAP">
             <object class="greta.auxiliary.asap.ASAPFrame" lib_id="greta_asap"/>
+            <frame type="object"/>
+        </module>
+ 	<module name="MODIFF">
+            <object class="greta.auxiliary.modiff.MODIFFFrame" lib_id="greta_modiff"/>
             <frame type="object"/>
         </module>
         <module name="ActiveMQ FML Sender">
@@ -1244,10 +1249,12 @@
         <object class="greta.auxiliary.llm.MICounselor" lib_id="greta_llm"/>
         <frame type="object"/>
       </module>
+
       <module name="MI Counselor RL" style="Intentions">
         <object class="greta.auxiliary.llm.MICounselorRL" lib_id="greta_llm"/>
         <frame type="object"/>
       </module>
+
       <module name="MICounselorIncremental" style="Intentions">
         <object class="greta.auxiliary.llm.MICounselorIncremental" lib_id="greta_llm"/>
         <frame type="object"/>
@@ -1260,10 +1267,16 @@
            <object class="greta.auxiliary.deepasr.DeepGramFrame" lib_id="greta_deepasr"/>
            <frame type="object"/>
         </module>
-      <module name="DeepGramContinuous" >
-        <object class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
-        <frame type="object"/>
-      </module>
+ <module name="DeepGramContinuous" >
+           <object class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
+           <frame type="object"/>
+        </module>
+
+         <module name="DeepGramContinuous" >
+           <object class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
+           <frame type="object"/>
+        </module>
+
 
          <module name="Microphone" >
            <object class="greta.auxiliary.Microphone.MicrophoneFrame" lib_id="greta_microphone"/>
@@ -1272,11 +1285,6 @@
 
         <module name="TurnManagement" >
             <object class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
-            <frame type="object"/>
-        </module> 
-        
-        <module name="TurnManagementContineous" >
-            <object class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
             <frame type="object"/>
         </module> 
 
@@ -1391,7 +1399,6 @@
         <lib id="greta_cereproc" path="./Common/Lib/Internal/CereProc.jar">
             <depends lib_id="ext_cereproc"/>
             <depends lib_id="greta_util"/>
-            <depends lib_id="libGretaFurhatInterface"/>
             <needs path="./Common/Data/CereProc/*"/>
             <needs path="./Common/Lib/External/cereproc/**"/>
         </lib>
@@ -1699,6 +1706,15 @@
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_mpeg4"/>
+        </lib>
+	<lib id="greta_modiff" path="./Common/Lib/Internal/MODIFF.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_behavior_realizer"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_incrementality"/>
         </lib>
         <lib id="sequence_mining" path="./Common/Lib/Internal/SequenceMining.jar">
             <depends lib_id="ext_bfograph"/>
@@ -2123,6 +2139,15 @@
         <connect from="input" method="addIncInteractionPerformer" to="output"/>
         <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
       </connector>
+
+        <connector id="TurnManagerToIntentionPerformer">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+        </connector>
         
         <!--
         <connector id="RestPoseSetterWithFeedbackToSignalPerformer">
@@ -2142,40 +2167,6 @@
             <!-- it will call input.removeSignalPerformer(output) -->
         </connector>
 
-        <connector id="ASRContineousToReceiver">
-            <input class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
-            <output class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
-            <connect from="input" method="addASRReceiver" to="output"/>
-            <disconnect from="input" method="removeASRReceiver" to="output"/>
-        </connector>
-
-        <connector id="TurnManagementToIntentionPerformer">
-            <input class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
-            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
-            <connect from="input" method="addIntentionPerformer" to="output"/>
-            <!-- it will call input.addIntentionPerformer(output) -->
-            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
-            <!-- it will call input.addIntentionPerformer(output) -->
-        </connector>
-        
-        <connector id="TurnManagementContineousToIntentionPerformer">
-            <input class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
-            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
-            <connect from="input" method="addIntentionPerformer" to="output"/>
-            <!-- it will call input.addIntentionPerformer(output) -->
-            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
-            <!-- it will call input.addIntentionPerformer(output) -->
-        </connector>
-
-      <connector id="TurnManagementContineousToLLM">
-        <input class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
-        <output class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
-        <connect from="input" method="addLLMFrame" to="output"/>
-        <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
-        <disconnect from="input" method="removeLLMFrame" to="output"/>
-        <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
-      </connector>        
-                        
     </connectors>
     <!-- list of styles -->
     <styles>

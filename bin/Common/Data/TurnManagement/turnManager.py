@@ -478,11 +478,6 @@ class VAD(object):
         self.buffer_size = buffer_size
         
         self.model = load_silero_vad()
-        
-        self.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-        # self.device = torch.device("cpu")
-
-        self.model = self.model.to(self.device)
 
         while True:
             try:
@@ -529,11 +524,8 @@ class VAD(object):
                     np_float32 = np_float32[:512]
                 if self.rate == 8000:
                     np_float32 = np_float32[:256]
-                    
-                torch_float32 = torch.from_numpy(np_float32)
-                torch_float32 = torch_float32.to(self.device)
 
-                vad_result = self.model(torch_float32, self.rate).item()
+                vad_result = self.model(torch.from_numpy(np_float32), self.rate).item()
                 
                 # print('\r' + '#' * int(vad_result*20) + ' ' * (20 - int(vad_result*20)), end='')
                 

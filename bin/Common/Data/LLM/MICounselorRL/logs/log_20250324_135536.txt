@@ -1,0 +1,9 @@
+Agent: Hello, I'm Camille. What's your name?
+User: My name is [NAME]
+Agent: Pleased to meet you, [NAME]How are you doing today?
+User: I am fine thank you
+Agent: That's good to hear. What brings you in to see me today?
+User: I do not know
+Agent: I understand. Your doctor mentioned alcohol might be a topic worth exploring. Can you tell me more about your drinking habits?
+User: I don't drink much
+Agent: I see. Can you give me an example of what you might drink on a typical day or week? What does "not much" look like for you?

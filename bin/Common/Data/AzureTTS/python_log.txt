@@ -1,5 +1,5 @@
 ##### SSML received #####
 
-<speak version="1.0" xml:lang="en-US" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/10/synthesis http://www.w3.org/TR/speech-synthesis/synthesis.xsd"><voice name="en-GB-AdaMultilingualNeural"> <bookmark mark="tm1"/> Hello, <bookmark mark="tm2"/> My name is Camille. <bookmark mark="tm3"/><emphasis level="moderate"> I am one of the virtual character </emphasis><bookmark mark="tm4"/> of the Greta platform. <bookmark mark="tm5"/><break time="500ms"/> <bookmark mark="end"/></voice></speak>
+<speak version="1.0" xml:lang="en-US" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/10/synthesis http://www.w3.org/TR/speech-synthesis/synthesis.xsd"><voice name="en-GB-AbbiNeural"> <break time="500ms"/><bookmark mark="end"/></voice></speak>
 #########################
-data ssml_UTF8_EN.txt output0.wav en-GB-AdaMultilingualNeural UTF-8
+data ssml0.txt output0.wav en-GB-AbbiNeural UTF-8

@@ -1,0 +1,7 @@
+Agent: Hello, I'm Camille. What's your name?
+User: takeshi
+Agent: Pleased to meet you, [NAME]How are you doing today?
+User: takeshi
+Agent: I'm okay, just been a long week. You?
+User: takeshi
+Agent: I'm good, thanks for asking. What made your week long? Work, family, or something else?

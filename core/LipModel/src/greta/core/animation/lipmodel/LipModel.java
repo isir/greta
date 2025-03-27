@@ -460,12 +460,15 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
         }
 
         if (targetPhonem.isVowel()) {
-            return lipdata.datas.get(refPhonem.getPhonemeType()).get(getBaseVowel(targetPhonem.getPhonemeType()));
+            return lipdata.datas.get(
+                    refPhonem.getPhonemeType()
+            ).get(
+                    getBaseVowel(
+                            targetPhonem.getPhonemeType()
+                    )
+            );
             //==== getBaseVowel seen in lines below
         }
-        
-        System.out.format("greta.core.animation.lipmodel.findCoartParameter(): from %s to %s%n", refPhonem.getPhonemeType(), targetPhonem.getPhonemeType());
-        
         return lipdata.datas.get(refPhonem.getPhonemeType()).get(targetPhonem.getPhonemeType());
     }
     /*private CoartParameter findCoartParameter(Phoneme refPhonem, Phoneme targetPhonem) {

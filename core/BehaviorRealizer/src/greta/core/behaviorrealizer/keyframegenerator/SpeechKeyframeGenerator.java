@@ -63,15 +63,7 @@ public class SpeechKeyframeGenerator extends KeyframeGenerator {
             //get the audio from sppech
             if (speech.getAudio() != null && // the audio is not null
                 speech.getAudio().getDurationMillis() > 0) { // the audio is not empty
-                AudioKeyFrame kf = new AudioKeyFrame(speech);
-                
-//                double speechDuration = (double) speech.getAudio().getDurationMillis();
-//                speechDuration /= 1000;
-//                double offset = speechStartTime + speechDuration;
-//                System.out.println("greta.core.behaviorrealizer.keyframegenerator.SpeechKeyframeGenerator.generateKeyframes(): offset = " + offset);
-                //kf.setOffset(offset);
-                
-                outputKeyframes.add(kf);
+                outputKeyframes.add(new AudioKeyFrame(speech));
             }
             else {
                 Logs.warning(this.getClass().getName() + ": the speech " + speech.getId() + " has no audio.");

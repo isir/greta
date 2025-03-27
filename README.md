@@ -14,16 +14,10 @@ It is the result of different research projects conducted by Catherine Pelachaud
 
 ## Update
 
-### Jan 25, 2025: added functionality list with videos on Wiki
-- Added latest functionality list (e.g. Mistral LLM, DeepGram ASR, Nodding, Microsaccade, etc.) [HERE](https://github.com/isir/greta/wiki#demonstration)
-
-### Jan 06, 2025: separate main GPL repository and LGPL repository
-- The previous LGPL version goes to [HERE](https://github.com/isir/greta-lgpl)
-
 ### Sep 03, 2024: changed license from LGPL to GPL, added many functionalities(EN,FR)!
 - Greta (master branch) became GPL license from LGPL license.
 - Previous LGPL version Greta (master branch) is now in "master-lgpl" branch
-- Added incremental behavior realizer module (but unstable yet)
+- Added incremental behavior realizer module
 - Added LLM module with Mistral, Mistral module for incremental processing
 - Added DeepASR module, a deep learning based incremental ASR
 - Added MeaningMiner module,

@@ -15,7 +15,7 @@ class DialogueEnvMI(gym.Env):
         self.agent_das =self.user.agent_action_space
         self.user_das = self.user.action_space
         self.n_user_da = len(self.user_das)
-        self.n_agent_da = len(self.agent_das)
+        self.n_agent_da = len(self.agent_das)-1
         self.turn_id =[0 for i in range(self.n_parra)]
         self.agent_last_da = [0 for i in range(self.n_parra)]
         self.last_user_da = [0 for i in range(self.n_parra)]
@@ -23,25 +23,25 @@ class DialogueEnvMI(gym.Env):
         high = np.array(
             [
                 1,
-            ]*( self.n_agent_da+ self.n_user_da+4),
+            ]*( self.n_agent_da+ self.n_user_da+2),
             dtype=np.int32,
         )
         low = np.array(
             [
                 0,
-            ] * (self.n_agent_da + self.n_user_da+4),
+            ] * (self.n_agent_da + self.n_user_da+2),
             dtype=np.int32,
         )
         master_high = np.array(
             [
                 1,
-            ] * (4),
+            ] * (3),
             dtype=np.int32,
         )
         master_low = np.array(
             [
                 0,
-            ] * (4),
+            ] * (3),
             dtype=np.int32,
         )
         # Observations are dictionaries with the agent's and the user's last actions.

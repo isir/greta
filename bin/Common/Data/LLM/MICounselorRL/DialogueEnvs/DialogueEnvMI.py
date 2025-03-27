@@ -35,13 +35,13 @@ class DialogueEnvMI(gym.Env):
         master_high = np.array(
             [
                 1,
-            ] * (4),
+            ] * (3),
             dtype=np.int32,
         )
         master_low = np.array(
             [
                 0,
-            ] * (4),
+            ] * (3),
             dtype=np.int32,
         )
         # Observations are dictionaries with the agent's and the user's last actions.
@@ -69,7 +69,7 @@ class DialogueEnvMI(gym.Env):
         agent_da = np.zeros(self.n_agent_da)
         agent_da[int(self.agent_last_da)] = 1
         master_ob = np.array(
-            [self.user.context / 40, self.user.rapport / 40, self.user.perspective / 40, self.turn_id / 80])
+            [self.user.context / 40, self.user.rapport / 40, self.user.perspective / 40])
         ob = np.concatenate([user_da,agent_da,last_last_user_da])
 
 

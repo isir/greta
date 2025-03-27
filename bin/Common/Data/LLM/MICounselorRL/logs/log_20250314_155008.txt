@@ -1,0 +1,11 @@
+Agent: Hello, I'm Camille. What's your name?
+User: I am [NAME]
+Agent: Pleased to meet you, [NAME]How are you doing today?
+User: I am fine
+Agent: That's good to hear. Have you done anything enjoyable lately?
+User: I am fine
+Agent: I'm glad to hear that. Can you tell me more about what brings you here today?
+User: I am fine
+Agent: I understand. Your doctor mentioned alcohol might be a topic worth discussing. How does alcohol fit into your life right now?
+User: I am fine
+Agent: I see. How often do you find yourself having a drink?

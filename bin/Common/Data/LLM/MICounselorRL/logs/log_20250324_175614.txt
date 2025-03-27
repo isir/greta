@@ -1,0 +1,3 @@
+Agent: Hello, I'm Camille. What's your name?
+User: hey
+Agent: Don't worry, we can continue without it.Understood. How are you doing today?

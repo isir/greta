@@ -237,12 +237,12 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         }
     }
     
-     public void startServer( String port,String adress) {
+     public void startServer(String adress, String port) {
            // if (lock.tryLock()) {
                 new Thread(() -> {
                     try {
                         System.out.println("ICI OK");
-                        server = new Server(port, adress);
+                        server = new Server(adress, port);
                         System.out.println("server connected variable is "+ server.connected);
                         System.out.println("SERVER CONNECTE AU PORT :" +port);
                         System.out.println("SERVER CONNECTE A ladress :" +adress);
@@ -271,6 +271,11 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private void initComponents() {
 
         csvFileChooser = new javax.swing.JFileChooser();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        jFrame1 = new javax.swing.JFrame();
         mainPanel = new javax.swing.JPanel();
         northPanel = new javax.swing.JPanel();
         inputTabbedPane = new javax.swing.JTabbedPane();
@@ -302,17 +307,24 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         zeroMQPortTextField = new javax.swing.JTextField();
         zeroMQConnectorPanelFiller4 = new javax.swing.Box.Filler(new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 0), new java.awt.Dimension(10, 32767));
         zeroMQConnectButton = new javax.swing.JButton();
+        MODIFF = new javax.swing.JPanel();
+        northPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+        jCheckBox1 = new javax.swing.JCheckBox();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
+        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
+        jLayeredPane1 = new javax.swing.JLayeredPane();
+        jPanel6 = new javax.swing.JPanel();
+        connectMODIFF = new javax.swing.JCheckBox();
         northPanelFiller1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         jPanel1 = new javax.swing.JPanel();
-        performCheckBox = new javax.swing.JCheckBox();
         jPanel2 = new javax.swing.JPanel();
         filterCheckBox = new javax.swing.JCheckBox();
         jSpinnerfilterMaxQueueSize = new javax.swing.JSpinner();
         jSpinnerfilterPow = new javax.swing.JSpinner();
-        jCheckBoxSendOSC = new javax.swing.JCheckBox();
         jSpinnerSendOSCPort = new javax.swing.JSpinner();
+        jCheckBoxSendOSC = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
-        northPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
+        performCheckBox = new javax.swing.JCheckBox();
         centerPanel = new javax.swing.JPanel();
         separator = new javax.swing.JSeparator();
         outputPanel = new javax.swing.JPanel();
@@ -328,6 +340,12 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         downButton = new javax.swing.JButton();
 
         csvFileChooser.setFileFilter(csvReader.getFileFilter());
+
+        jMenu1.setText("jMenu1");
+
+        jMenu2.setText("jMenu2");
+
+        jMenuItem1.setText("jMenuItem1");
 
         mainPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 10, 10));
         mainPanel.setLayout(new java.awt.BorderLayout(0, 10));
@@ -418,6 +436,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         zeroMQConnectorPanel.add(zeroMQHostLabel);
         zeroMQConnectorPanel.add(zeroMQConnectorPanelFiller1);
 
+        zeroMQHostTextField.setText("localhost");
         zeroMQHostTextField.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 zeroMQHostTextFieldFocusLost(evt);
@@ -436,6 +455,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         zeroMQConnectorPanel.add(zeroMQPortLabel);
         zeroMQConnectorPanel.add(zeroMQConnectorPanelFiller3);
 
+        zeroMQPortTextField.setText("50150");
         zeroMQPortTextField.setMaximumSize(new java.awt.Dimension(50, 2147483647));
         zeroMQPortTextField.setPreferredSize(new java.awt.Dimension(50, 20));
         zeroMQPortTextField.addFocusListener(new java.awt.event.FocusAdapter() {
@@ -470,18 +490,35 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         inputTabbedPane.addTab("ZeroMQ", zeroMQTab);
 
         northPanel.add(inputTabbedPane);
+
+        MODIFF.setBorder(javax.swing.BorderFactory.createTitledBorder("MODIFF"));
+        MODIFF.setToolTipText("MODIFF");
+        MODIFF.add(northPanelFiller2);
+
+        jCheckBox1.setText("Launch");
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
+        MODIFF.add(jCheckBox1);
+        MODIFF.add(filler1);
+        MODIFF.add(filler2);
+        MODIFF.add(jLayeredPane1);
+        MODIFF.add(jPanel6);
+
+        connectMODIFF.setText("Connect");
+        connectMODIFF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                connectMODIFFActionPerformed(evt);
+            }
+        });
+        MODIFF.add(connectMODIFF);
+
+        northPanel.add(MODIFF);
         northPanel.add(northPanelFiller1);
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
-
-        performCheckBox.setText("Perform");
-        performCheckBox.setMargin(new java.awt.Insets(10, 2, 2, 2));
-        performCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                performCheckBoxActionPerformed(evt);
-            }
-        });
-        jPanel1.add(performCheckBox);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Filter"));
         jPanel2.setToolTipText("Fitler");
@@ -514,15 +551,6 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         });
         jPanel2.add(jSpinnerfilterPow);
 
-        jCheckBoxSendOSC.setSelected(useOSC);
-        jCheckBoxSendOSC.setText("OSCOut");
-        jCheckBoxSendOSC.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jCheckBoxSendOSCStateChanged(evt);
-            }
-        });
-        jPanel2.add(jCheckBoxSendOSC);
-
         jSpinnerSendOSCPort.setModel(new javax.swing.SpinnerNumberModel(6000, 6000, 99999, 1));
         jSpinnerSendOSCPort.setValue(getOscOutPort());
         jSpinnerSendOSCPort.addChangeListener(new javax.swing.event.ChangeListener() {
@@ -532,6 +560,15 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         });
         jPanel2.add(jSpinnerSendOSCPort);
 
+        jCheckBoxSendOSC.setSelected(useOSC);
+        jCheckBoxSendOSC.setText("OSCOut");
+        jCheckBoxSendOSC.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBoxSendOSCStateChanged(evt);
+            }
+        });
+        jPanel2.add(jCheckBoxSendOSC);
+
         jCheckBox2.setText("Flipper");
         jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -540,10 +577,18 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         });
         jPanel2.add(jCheckBox2);
 
+        performCheckBox.setText("Perform");
+        performCheckBox.setMargin(new java.awt.Insets(10, 2, 2, 2));
+        performCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                performCheckBoxActionPerformed(evt);
+            }
+        });
+        jPanel2.add(performCheckBox);
+
         jPanel1.add(jPanel2);
 
         northPanel.add(jPanel1);
-        northPanel.add(northPanelFiller2);
 
         mainPanel.add(northPanel, java.awt.BorderLayout.NORTH);
 
@@ -793,10 +838,6 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         csvReader.setUseFilter(filterCheckBox.isSelected());
     }//GEN-LAST:event_filterCheckBoxActionPerformed
 
-    private void performCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performCheckBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_performCheckBoxActionPerformed
-
     private void jSpinnerfilterPowStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerfilterPowStateChanged
         try {
             jSpinnerfilterPow.commitEdit();
@@ -831,7 +872,8 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
          if (this.cm.isPositive_manager()== false){
             this.cm.setPositive_manager(true);
             System.out.println(" ON ENTRE DANS LE START SERVER");
-            startServer("50150","localhost");
+            // startServer("50150","localhost");
+            startServer("localhost", "50150");
             this.flag = true;
         }
         else {
@@ -847,12 +889,65 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
          }
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
+    private void performCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_performCheckBoxActionPerformed
+
+    private void connectMODIFFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectMODIFFActionPerformed
+        // TODO add your handling code here:
+         if (this.cm.isPositive_manager()== false){
+            this.cm.setPositive_manager(true);
+            //System.out.println(" ON ENTRE DANS LE START SERVER");
+            //startServer("50150","134.157.19.61");
+            // String host = zeroMQHostTextField.getText();
+            // String port = zeroMQPortTextField.getText();
+            // startServer("50150","localhost");
+
+            String host = "localhost";
+            String port = "5560";
+
+            startServer(host,port);
+            this.flag = true;
+        }
+        else {
+            this.cm.setPositive_manager(false);
+            this.flag = false;
+            if (IsConnected == true){
+                try {
+                    server.stopConnection();
+                } catch (IOException ex) {
+                    Logger.getLogger(OpenFaceOutputStreamReader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+         }    }//GEN-LAST:event_connectMODIFFActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+    if (jCheckBox1.isSelected()) {
+        
+        try {
+      
+        String basePath = System.getProperty("user.dir"); // gets the current working directory
+        System.out.println(basePath);
+        String batRelativePath = "Common\\Data\\MODIFF\\bat_run_modiff.bat";
+        String fullBatPath = basePath + "\\" + batRelativePath;
+        System.out.println(fullBatPath);
+        String command = "cmd /c start \"\" \"" + fullBatPath + "\"";
+        Process p = Runtime.getRuntime().exec(command);
+    } catch (IOException ex) {
+        ex.printStackTrace();
+    }  
+    }
+    else{}
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
     /* ---------------------------------------------------------------------- */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel MODIFF;
     private javax.swing.Box.Filler buttonPanelFiller1;
     private javax.swing.Box.Filler buttonPanelFiller2;
     private javax.swing.JPanel centerPanel;
+    private javax.swing.JCheckBox connectMODIFF;
     private javax.swing.JButton csvConnectButton;
     private javax.swing.JLabel csvConnectedLabel;
     private javax.swing.JPanel csvConnectorPanel;
@@ -869,12 +964,22 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     private javax.swing.Box.Filler csvTabFiller3;
     private javax.swing.JButton downButton;
     private javax.swing.JTable featuresTable;
+    private javax.swing.Box.Filler filler1;
+    private javax.swing.Box.Filler filler2;
     private javax.swing.JCheckBox filterCheckBox;
     private javax.swing.JTabbedPane inputTabbedPane;
+    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JCheckBox jCheckBoxSendOSC;
+    private javax.swing.JFrame jFrame1;
+    private javax.swing.JLayeredPane jLayeredPane1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel6;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JSpinner jSpinnerSendOSCPort;
     private javax.swing.JSpinner jSpinnerfilterMaxQueueSize;
     private javax.swing.JSpinner jSpinnerfilterPow;

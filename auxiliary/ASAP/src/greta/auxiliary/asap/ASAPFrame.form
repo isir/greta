@@ -26,7 +26,7 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace pref="49" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -360,7 +360,7 @@
             </Component>
             <Component class="java.awt.TextField" name="port">
               <Properties>
-                <Property name="text" type="java.lang.String" value="4444"/>
+                <Property name="text" type="java.lang.String" value="50151"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="portActionPerformed"/>
@@ -373,7 +373,7 @@
             </Component>
             <Component class="java.awt.TextField" name="address">
               <Properties>
-                <Property name="text" type="java.lang.String" value="134.157.19.56"/>
+                <Property name="text" type="java.lang.String" value="localhost"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="addressActionPerformed"/>
@@ -393,6 +393,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Perform"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="performActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

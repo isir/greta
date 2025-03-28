@@ -131,17 +131,15 @@ client = None
 def ask(question,messages=None,messages_online=None):
 
     lquestion = question.split('#SEP#')
-    
     model = lquestion[0]
     language=lquestion[1]
     question=lquestion[2]
     system_prompt=lquestion[3]
-    
     if model == 'Local':
         return ask_local(question,language,system_prompt, messages)
     else:
         return ask_online(question,language,system_prompt, messages_online)
-    
+
 def ask_local(question,language, system_prompt, messages=None):
     
     global client
@@ -149,7 +147,7 @@ def ask_local(question,language, system_prompt, messages=None):
     if client == None:
         
         client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
-    
+        
     if language == 'FR':
         prompt=[
         {"role": "system", "content": fr_prompt+system_prompt}
@@ -179,7 +177,7 @@ def ask_local(question,language, system_prompt, messages=None):
 
  
 def ask_online(question,language,system_prompt,messages=None):
-    
+
     global client_online
     
     if client_online == None:
@@ -240,9 +238,6 @@ message_reciv=False
 while(True):
     msg=s.recv(1024)
     msg=msg.decode('iso-8859-1')
-    
-    
-    
     message_reciv=True
     if(len(msg)>0 and message_reciv):
         if(msg=="exit"):

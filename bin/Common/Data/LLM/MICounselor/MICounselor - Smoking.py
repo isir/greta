@@ -147,7 +147,7 @@ model = "mistral-large-latest"
 client_online = None
 client = None
 
-def ask(question,messages=None,messages_online=None):    
+def ask(question,messages=None,messages_online=None):
 
     lquestion = question.split('#SEP#')
     model = lquestion[0]
@@ -160,13 +160,13 @@ def ask(question,messages=None,messages_online=None):
         return ask_online(question,language,system_prompt, messages_online)
 
 def ask_local(question,language, system_prompt, messages=None):
-    
+
     global client
     
     if client == None:
         
-        client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
-        
+        client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")    
+
     if language == 'FR':
         prompt=[
         {"role": "system", "content": fr_prompt+system_prompt}

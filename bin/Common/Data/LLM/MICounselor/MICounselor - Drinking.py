@@ -116,7 +116,7 @@ def ask_online(question,language,system_prompt,messages=None):
     if client_online == None:
         
         client_online = MistralClient(api_key=MISTRAL_API_KEY)
-
+        
     if language == 'French':
         prompt=[
          ChatMessage(role= "system", content= fr_prompt+system_prompt)

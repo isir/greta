@@ -1,16 +1,101 @@
-<?xml version="1.0" encoding="UTF-8"?><modular>
+<?xml version="1.0" encoding="UTF-8"?>
+<modular>
+
+    <!--
+    ############
+    ### Menu ###
+    ############
+    -->
+
     <!-- menu gives access to modules from the GUI -->
     <menus>
+    
         <menu name="${GUI.add}">
+        
+            <!-- Core: start -->
+        
             <item module="Ini Manager" name="Ini Manager"/>
             <item module="Character Manager" name="Character Manager"/>
-            <item module="IrcamAlign" name="IrcamAlign"/>
+            <menu name="Environment">
+                <item module="Environment" name="Environment"/>
+                <item module="MPEG4 Animatable" name="MPEG-4 Animatable"/>
+                <menu name="Environment Manager">
+                    <menu name="Generic">
+                        <item module="Generic Environment Manager" name="Environment Manager"/>
+                    </menu>
+                    <menu name="ActiveMQ">
+                        <item module="ActiveMQ Primary Environment Server" name="Primary Environment Server"/>
+                        <item module="ActiveMQ Replica Environment Server" name="Replica Environment Server"/>
+                    </menu>
+                </menu>
+            </menu>
+            <menu name="Animation Filters">
+                <menu name="Face">
+                    <item module="Nul Filter" name="Nul Filter"/>
+                    <item module="Idle Movement Filter" name="Idle Movement Filter"/>
+                    <item module="Idle Movement Emitter" name="Idle Movement Emitter"/>
+                    <item module="Lip Blender" name="Lip Blender"/>
+                    <item module="Face Blender" name="Face Blender"/>
+                </menu>
+                <menu name="Body">
+                    <item module="Head Noise" name="Head Noise"/>
+                    <item module="Concatenate Joints" name="Concatenate Joints"/>
+                    <item module="Body Blender" name="Body Blender"/>
+                </menu>
+            </menu>
+            <menu name="Feedbacks">
+                <item module="Feedbacks" name="Feedbacks"/>
+                <item module="Feedbacks To Logs" name="Feedbacks to Logs"/>
+            </menu>
+            <menu name="Player">
+                <item module="Ogre Player" name="Ogre Player"/>
+                <item module="Capture Controller" name="Capture Controller"/>
+                <item module="Xuggle Video Capture" name="Video Capture Output"/>
+                <item module="Parser Capture Controller AU" name="Parser Capture Controller AU"/>
+                <item module="Meaning Miner Capture Controller" name="Meaning Miner Capture Controller"/>
+                <item module="BVH Capture Controller" name="BVH Capture Controller"/>
+            </menu>
+                        
+            <menu name="Planners">
+                <item module="Behavior Planner" name="Behavior Planner"/>
+                <item module="Listener Intent Planner" name="Listener Intent Planner"/>
+                <item module="Intention Queue" name="Intention Queue"/>
+                <item module="Subject Planner" name="Subject Planner"/>
+                <menu name="MultiLayer Attitude Planner">
+                    <item module="MultiLayerSequencePlanner" name="MultiLayer Attitude Planner"/>
+                    <item module="AttitudeSetter" name=" Attitude Setter"/>
+                </menu>
+            </menu>
+            
+            <menu name="Realizers">
+                <item module="Behavior Realizer" name="Behavior Realizer"/>
+                <menu name="Incrementality">
+                    <item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
+                    <item module="IncRealizerInteraction" name="IncRealizerInteraction"/>
+                </menu>
+            </menu>
+
+            <menu name="Keyframe Performers">
+                <item module="IK Keyframe Performer" name="IK"/>
+                <item module="Face Keyframe Performer" name="Face"/>
+                <item module="Lip Model" name="Lips"/>
+                <item module="Audio Keyframe Performer" name="Audio"/>
+                <item module="Body Arm Noise" name="Body Arm Noise"/>
+                <item module="Animation Keyframe Performer" name="Body"/>
+            </menu>
+            
+            <menu name="AU Performers">
+                <item module="Simple AU Performer" name="Simple AU Performer"/>
+                <item module="Simple Head Performer" name="Simple Head Performer"/>
+            </menu>
+
             <menu name="Logs">
                 <item module="Logs" name="Controller"/>
                 <item module="Log Printer" name="Log Printer"/>
                 <item module="Log File" name="Log File"/>
                 <item module="Log Frame" name="Log Frame"/>
             </menu>
+
             <menu name="Inputs">
                 <item module="FML File Reader" name="FML File Reader"/>
                 <item module="BML File Reader" name="BML File Reader"/>
@@ -35,50 +120,17 @@
                     <item module="OpenFace1 AU Parser Files Reader" name="(OpenFace v1) AU Parser Files Reader"/>
                     <item module="OpenFace2 Output Stream Reader" name="(OpenFace v2) Output Stream Reader"/>
                 </menu>
-            
+        
                 <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
                 <item module="ASAP" name="ASAP"/>
-		<item module="MODIFF" name="MODIFF"/>
+                <item module="MODIFF" name="MODIFF"/>
                 <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
                 <item module="RestPoseSetterWithFeedback" name="RestPoseSetterWithFeedback"/>
                 <item module="ObjectNodeController" name="ObjectNodeController"/>
                 <item module="OSC" name="OSC"/>
-                
                 <item module="Microphone" name="Microphone"/>
-                
                 <item module="Microsaccade" name="Microsaccade"/>
-                
-            </menu>
-            <menu name="Interruptions">
-                <item module="Interruption Manager" name="Interruption Manager"/>
-				<item module="InterruptionTester" name="Interruption Tester"/>
-            </menu>
-            <menu name="Planners">
-                <item module="Listener Intent Planner" name="Listener Intent Planner"/>
-                <item module="Behavior Planner" name="Behavior Planner"/>
-                <item module="Intention Queue" name="Intention Queue"/>
-                <item module="Subject Planner" name="Subject Planner"/>
-            <menu name="MultiLayer Attitude Planner">
-                <item module="MultiLayerSequencePlanner" name="MultiLayer Attitude Planner"/>
-                <item module="AttitudeSetter" name=" Attitude Setter"/>
-                </menu>
-            </menu>
-          <menu name="Incrementality">
-            <item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
-            <item module="IncRealizerInteraction" name="IncRealizerInteraction"/>
-          </menu>
-            <item module="Behavior Realizer" name="Behavior Realizer"/>
-            <menu name="Keyframe Performers">
-                <item module="IK Keyframe Performer" name="IK"/>
-                <item module="Face Keyframe Performer" name="Face"/>
-                <item module="Lip Model" name="Lips"/>
-                <item module="Audio Keyframe Performer" name="Audio"/>
-                <item module="Body Arm Noise" name="Body Arm Noise"/>
-                <item module="Animation Keyframe Performer" name="Body"/>
-            </menu>
-            <menu name="AU Performers">
-                <item module="Simple AU Performer" name="Simple AU Performer"/>
-                <item module="Simple Head Performer" name="Simple Head Performer"/>
+            
             </menu>
             <menu name="Outputs">
                 <item module="FML File Writer" name="FML File Writer"/>
@@ -87,6 +139,7 @@
                 <item module="BAP File Writer" name="BAP File Writer"/>
                 <item module="Audio File Writer" name="Audio File Writer"/>
             </menu>
+
             <menu name="Tools">
                 <item module="FML Editor" name="FML Editor"/>
                 <item module="BML Editor" name="BML Editor"/>
@@ -104,54 +157,7 @@
                 <item module="CereProc" name="CereProc"/>
                 <item module="AzureTTS" name="AzureTTS"/>
             </menu>
-            <menu name="Laugh Synthetizer">
-                <item module="Laugh Synthetizer" name="Controller"/>
-                <item module="Phoneme Generator Laugh Synthetizer" name="Phoneme Generator Laugh Synthetizer"/>
-            </menu>
-            <menu name="Animation Filters">
-                <menu name="Face">
-                    <item module="Nul Filter" name="Nul Filter"/>
-                    <item module="Idle Movement Filter" name="Idle Movement Filter"/>
-                    <item module="Idle Movement Emitter" name="Idle Movement Emitter"/>
-                    <item module="Lip Blender" name="Lip Blender"/>
-                    <item module="Face Blender" name="Face Blender"/>
-                </menu>
-                <menu name="Body">
-                    <item module="Head Noise" name="Head Noise"/>
-                    <item module="Concatenate Joints" name="Concatenate Joints"/>
-                    <item module="Body Blender" name="Body Blender"/>
-                </menu>
-            </menu>
-            <menu name="Feedbacks">
-                <item module="Feedbacks" name="Feedbacks"/>
-                <item module="Feedbacks To Logs" name="Feedbacks to Logs"/>
-            </menu>
-            <menu name="Face-to-Face Conversation">
-                <item module="Agent Gaze User" name="Agent Gaze User"/>
-                <item module="User" name="User"/>
-                <item module="Conversational Group" name="Conversational Group"/>
-            </menu>
-            <menu name="Environment">
-                <item module="Environment" name="Environment"/>
-                <item module="MPEG4 Animatable" name="MPEG-4 Animatable"/>
-                <menu name="Environment Manager">
-                    <menu name="Generic">
-                        <item module="Generic Environment Manager" name="Environment Manager"/>
-                    </menu>
-                    <menu name="ActiveMQ">
-                        <item module="ActiveMQ Primary Environment Server" name="Primary Environment Server"/>
-                        <item module="ActiveMQ Replica Environment Server" name="Replica Environment Server"/>
-                    </menu>
-                </menu>
-            </menu>
-            <menu name="Player">
-                <item module="Ogre Player" name="Ogre Player"/>
-                <item module="Capture Controller" name="Capture Controller"/>
-                <item module="Xuggle Video Capture" name="Video Capture Output"/>
-                <item module="Parser Capture Controller AU" name="Parser Capture Controller AU"/>
-                <item module="Meaning Miner Capture Controller" name="Meaning Miner Capture Controller"/>
-                <item module="BVH Capture Controller" name="BVH Capture Controller"/>
-            </menu>
+
             <menu name="Network Connections">
                 <menu name="ActiveMQ">
                     <item module="ActiveMQ Broker" name="Broker"/>
@@ -187,14 +193,14 @@
                     <item module="ActiveMQ Text Editor" name="Text Editor"/>
                     <item module="ActiveMQ Intention Queuing" name="Intention Queuing"/>
                 </menu>
-
-		<menu name="Greta Furhat Interface">
-                	<item module="Greta Furhat Rotation Sender" name="GretaFurhatRotationSender"/>
-                	<item module="Greta Furhat AUs Sender" name="GretaFurhatAUSender"/>
+            
+                <menu name="Greta Furhat Interface">
+                    <item module="Greta Furhat Rotation Sender" name="GretaFurhatRotationSender"/>
+                    <item module="Greta Furhat AUs Sender" name="GretaFurhatAUSender"/>
                     <item module="Greta Furhat AUs Sender GUI" name="GretaFurhatAUSenderGUI"/>
                     <item module="Greta Furhat Audio Sender" name="GretaFurhatAudioSender"/>
-        	</menu>
-
+                </menu>
+            
                 <menu name="Thrift">
                     <menu name="Senders">
                         <item module="Thrift FAP Sender" name="FAP Sender"/>
@@ -219,8 +225,7 @@
                     </menu>
                 </menu>
             </menu>
-                <item module="Group Behavior" name="Group Behavior"/>
-        			<item module="Speech Recognizer" name="Speech Recognizer"/>
+
             <menu name="Dialogue">
                 <menu name="Flipper">
                     <item module="FlipperLauncher" name="FlipperLauncher"/>
@@ -237,17 +242,52 @@
                 </menu>
                 <menu name="DeepASR">
                     <item module="DeepGram" name="DeepGram"/>
-		<item module="DeepGramContinuous" name="DeepGramContinuous"/>
-
+                    <item module="DeepGramContinuous" name="DeepGramContinuous"/>
                 </menu>
                 <menu name="TurnManagement">
                     <item module="TurnManagement" name="turnManagement"/>
                 </menu>
             </menu>
+
+            <!-- Core: end -->
+
+
+            <!-- others: start -->
+
+            <item module="Group Behavior" name="Group Behavior"/>
+            <item module="Speech Recognizer" name="Speech Recognizer"/>
+
+            <menu name="Interruptions">
+                <item module="Interruption Manager" name="Interruption Manager"/>
+                <item module="InterruptionTester" name="Interruption Tester"/>
+            </menu>
+            <item module="IrcamAlign" name="IrcamAlign"/>
+
+            <menu name="Laugh Synthetizer">
+                <item module="Laugh Synthetizer" name="Controller"/>
+                <item module="Phoneme Generator Laugh Synthetizer" name="Phoneme Generator Laugh Synthetizer"/>
+            </menu>
+
+            <menu name="Face-to-Face Conversation">
+                <item module="Agent Gaze User" name="Agent Gaze User"/>
+                <item module="User" name="User"/>
+                <item module="Conversational Group" name="Conversational Group"/>
+            </menu>
+
+            <!-- others: end -->
+
         </menu>
     </menus>
+
+    <!--
+    ##############
+    ### Module ###
+    ##############
+    -->
+
     <!-- list of all modules that can be used -->
     <modules>
+
         <module name="Ini Manager" restrict="1" style="DEFAULT">
             <object class="greta.core.utilx.gui.GlobalIniManagerFrame" lib_id="greta_utilx"/>
             <frame type="object"/>
@@ -265,13 +305,6 @@
             </frame>
             <parameter default="" get_method="getCharacterName" get_on="frame" name="character_name" set_method="setCharacterName" set_on="frame" type="string"/>
         </module>
-        <!--
-        <module name="CharacterInstance" style="DEFAULT">
-            <object class="greta.core.utilx.gui.CharacterInstanceFrame" lib_id="greta_utilx"/>
-            <frame type="object"/>
-            <parameter default="" get_method="getCurrentCaracter" get_on="object" name="character_name" set_method="setCurrentCaracter" set_on="object" type="string"/>
-        </module>
-        -->
         <module name="Logs" restrict="1" style="DEFAULT">
             <object class="greta.core.utilx.gui.LogsController" lib_id="greta_utilx"/>
             <frame type="object"/>
@@ -295,17 +328,19 @@
             </frame>
             <parameter default="false" get_method="isBlack" get_on="frame" name="blackBackground" set_method="setBlack" set_on="frame" type="boolean"/>
         </module>
-      <!-- Incrementality modules -->
-      <module name="Incremental Realizer V2" style="BehaviorRealizer">
-        <object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
-      </module>
-      <module name="IncRealizerInteraction" style="BehaviorRealizer">
-        <object class="greta.auxiliary.incrementality.IncRealizerInteraction" lib_id="greta_incrementality"/>
-        <frame class="greta.auxiliary.incrementality.IncrRealizerInteractionGUI_" lib_id="greta_incrementality" type="frame">
-          <link method="setLoader" on="frame"/>
-        </frame>
-      </module>
-      <!-- Incrementality modules -->
+
+        <!-- Incrementality modules -->
+        <module name="Incremental Realizer V2" style="BehaviorRealizer">
+            <object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
+        </module>
+        <module name="IncRealizerInteraction" style="BehaviorRealizer">
+            <object class="greta.auxiliary.incrementality.IncRealizerInteraction" lib_id="greta_incrementality"/>
+            <frame class="greta.auxiliary.incrementality.IncrRealizerInteractionGUI_" lib_id="greta_incrementality" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <!-- Incrementality modules -->
+
         <module name="FML File Reader" style="Intentions">
             <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
             <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
@@ -371,11 +406,6 @@
         <module name="BVH File Reader" style="Animations">
             <object class="greta.auxiliary.BVHMocap.BVHReaderGUI" lib_id="greta_bvh_mocap"/>
             <frame type="object"/>
-            <!-- <frame class="greta.auxiliary.BVHMocap.gui.BVHReaderGUI" lib_id="greta_bvh_mocap" type="frame">
-                <link method="setLoader" on="frame"/>
-            </frame>
-            -->
-            <!--<parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/> -->
         </module>
         <module name="Face Library Viewer" style="Animations">
             <object class="greta.tools.editors.facelibrary.FaceLibraryEditor" lib_id="greta_editors"/>
@@ -506,7 +536,7 @@
             <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
         </module>
 		
-	<module name="NVBG_MM_Controller" style="DEFAULT">
+        <module name="NVBG_MM_Controller" style="DEFAULT">
             <!-- restrict="1"-->
             <object class="greta.core.utilx.gui.NVBG_MM_Controller" lib_id="greta_utilx"/>
         <frame type="object"/>
@@ -515,7 +545,7 @@
             <object class="greta.core.signals.Rest_Pose_Setter" lib_id="greta_signals"/>
             <frame type="object"/>
         </module>
-		<module name="ObjectNodeController" style="DEFAULT">
+        <module name="ObjectNodeController" style="DEFAULT">
             <!-- restrict="1"-->
             <object class="greta.core.utilx.gui.ObjectNodeController" lib_id="greta_utilx"/>
             <frame type="object"/>
@@ -538,13 +568,8 @@
             <frame type="noFrame"/>
         </module>
         <module name="AzureTTS">
-            <!--
-            <object class="greta.auxiliary.tts.azuretts.AzureTTS" lib_id="greta_azuretts"/>
-            <frame type="noFrame"/>
-            -->
             <object class="greta.auxiliary.tts.azuretts.AzureTTSFrame" lib_id="greta_azuretts"/>
-            <frame type="object"/>
-            
+            <frame type="object"/>            
         </module>
         <module name="ActiveMQ Broker">
             <object class="greta.auxiliary.activemq.Broker" lib_id="greta_activemq"/>
@@ -557,7 +582,7 @@
             <object class="greta.auxiliary.asap.ASAPFrame" lib_id="greta_asap"/>
             <frame type="object"/>
         </module>
- 	<module name="MODIFF">
+        <module name="MODIFF">
             <object class="greta.auxiliary.modiff.MODIFFFrame" lib_id="greta_modiff"/>
             <frame type="object"/>
         </module>
@@ -914,7 +939,7 @@
             <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
             <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
         </module>
-	<module name="MultiLayerSequencePlanner" style="BehaviorPlanner">
+        <module name="MultiLayerSequencePlanner" style="BehaviorPlanner">
             <object class="greta.auxiliary.multilayerattitudeplanner.SequencePlanner" lib_id="multilayer_attitude_planner"/>
         </module>
         <module name="AttitudeSetter" style="DEFAULT">
@@ -1096,7 +1121,7 @@
         <module name="Interruption Manager" style="Intentions">
             <object class="greta.core.interruptions.InterruptionManager" lib_id="greta_interruptions"/>
         </module>
-		<module name="InterruptionTester" style="Intentions">
+        <module name="InterruptionTester" style="Intentions">
             <object class="greta.core.interruptions.InterruptionTester" lib_id="greta_interruptions"/>
             <frame type="object"/>
             <parameter default="" get_method="getMainFileName" get_on="object" name="saveMainFileName" set_method="setMainFileName" set_on="object" type="string"/>
@@ -1206,88 +1231,82 @@
             <object class="greta.auxiliary.chatgpt.ChatGPT" lib_id="greta_ChatGPT"/>
             <frame class="greta.auxiliary.chatgpt.ChatGPTFrame" lib_id="greta_ChatGPT" type="frame"/>
         </module>
-       <module name="Mistral" style="Intentions">
+        <module name="Mistral" style="Intentions">
             <object class="greta.auxiliary.llm.MistralFrame" lib_id="greta_llm"/>
-			<frame type="object"/>
-       </module>
+            <frame type="object"/>
+        </module>
 	
-	<module name="Greta Furhat AUs Sender" style="DEFAULT">
-		    <object class="greta.furhat.activemq.GretaFurhatAUSender" lib_id="libGretaFurhatInterface"/>
-		    <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+        <module name="Greta Furhat AUs Sender" style="DEFAULT">
+            <object class="greta.furhat.activemq.GretaFurhatAUSender" lib_id="libGretaFurhatInterface"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
             <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
             <parameter default="Furhat AUs Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
-	    </module>
+        </module>
 
         <module name="Greta Furhat AUs Sender GUI" style="DEFAULT">
-		    <object class="greta.furhat.activemq.GretaFurhatAUSenderGUI" lib_id="libGretaFurhatInterface"/>
+            <object class="greta.furhat.activemq.GretaFurhatAUSenderGUI" lib_id="libGretaFurhatInterface"/>
             <frame type="object"/>
         </module>
 
         <module name="Greta Furhat Rotation Sender" style="DEFAULT">
-		    <object class="greta.furhat.activemq.GretaFurhatRotationSender" lib_id="libGretaFurhatInterface"/>
-		    <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <object class="greta.furhat.activemq.GretaFurhatRotationSender" lib_id="libGretaFurhatInterface"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
             <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
             <parameter default="Furhat Rotation Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
-	</module>
+        </module>
 
-	<module name="Greta Furhat Audio Sender" style="DEFAULT">
+        <module name="Greta Furhat Audio Sender" style="DEFAULT">
             <object class="greta.furhat.activemq.GretaFurhatAudioSender" lib_id="libGretaFurhatInterface"/>
             <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
             <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
             <parameter default="Furhat Audio Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
             <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
-	</module>
-
-
-      <module name="MistralIncremental" style="Intentions">
-        <object class="greta.auxiliary.llm.MistralFrameIncremental" lib_id="greta_llm"/>
-        <frame type="object"/>
-      </module>
-      <module name="MI Counselor" style="Intentions">
-        <object class="greta.auxiliary.llm.MICounselor" lib_id="greta_llm"/>
-        <frame type="object"/>
-      </module>
-
-      <module name="MI Counselor RL" style="Intentions">
-        <object class="greta.auxiliary.llm.MICounselorRL" lib_id="greta_llm"/>
-        <frame type="object"/>
-      </module>
-
-      <module name="MICounselorIncremental" style="Intentions">
-        <object class="greta.auxiliary.llm.MICounselorIncremental" lib_id="greta_llm"/>
-        <frame type="object"/>
-      </module>
-      <module name="MICounselorIncrementalDA" style="Intentions">
-        <object class="greta.auxiliary.llm.MICounselorIncrementalDA" lib_id="greta_llm"/>
-        <frame type="object"/>
-      </module>
-         <module name="DeepGram" >
-           <object class="greta.auxiliary.deepasr.DeepGramFrame" lib_id="greta_deepasr"/>
-           <frame type="object"/>
-        </module>
- <module name="DeepGramContinuous" >
-           <object class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
-           <frame type="object"/>
         </module>
 
-         <module name="DeepGramContinuous" >
-           <object class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
-           <frame type="object"/>
+        <module name="MistralIncremental" style="Intentions">
+            <object class="greta.auxiliary.llm.MistralFrameIncremental" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
+        <module name="MI Counselor" style="Intentions">
+            <object class="greta.auxiliary.llm.MICounselor" lib_id="greta_llm"/>
+            <frame type="object"/>
         </module>
 
+        <module name="MI Counselor RL" style="Intentions">
+            <object class="greta.auxiliary.llm.MICounselorRL" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
 
-         <module name="Microphone" >
-           <object class="greta.auxiliary.Microphone.MicrophoneFrame" lib_id="greta_microphone"/>
-           <frame type="object"/>
+        <module name="MICounselorIncremental" style="Intentions">
+            <object class="greta.auxiliary.llm.MICounselorIncremental" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
+            <module name="MICounselorIncrementalDA" style="Intentions">
+            <object class="greta.auxiliary.llm.MICounselorIncrementalDA" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
+        <module name="DeepGram">
+            <object class="greta.auxiliary.deepasr.DeepGramFrame" lib_id="greta_deepasr"/>
+            <frame type="object"/>
+        </module>
+        
+        <module name="DeepGramContinuous">
+            <object class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
+            <frame type="object"/>
+        </module>
+        
+        <module name="Microphone" >
+            <object class="greta.auxiliary.Microphone.MicrophoneFrame" lib_id="greta_microphone"/>
+            <frame type="object"/>
         </module>
 
         <module name="TurnManagement" >
             <object class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
             <frame type="object"/>
         </module> 
-
+      
         <module name="RestPoseSetterWithFeedback" style="Signals">
             <object class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
             <frame type="object"/>
@@ -1299,6 +1318,13 @@
         </module>
                                                                                                             
     </modules>
+
+    <!--
+    ###########
+    ### Lib ###
+    ###########
+    -->
+
     <!-- list of libraries and their dependencies -->
     <libs>
         <lib id="ext_activemq-all" path="./Common/Lib/External/activemq-all-5.15.10.jar"/>
@@ -1595,7 +1621,7 @@
             <depends lib_id="greta_social_parameters"/>
             <depends lib_id="greta_util"/>
         </lib>
-		<lib id="videoCapture" path="./Player/Lib/Internal/VideoCapture.jar">
+        <lib id="videoCapture" path="./Player/Lib/Internal/VideoCapture.jar">
             <depends lib_id="greta_ogre_player"/>
             <depends lib_id="ext_xuggle-xuggler"/>
             <depends lib_id="ext_slf4j1.7.25"/>
@@ -1702,12 +1728,12 @@
             <depends lib_id="ext_weka_src"/>
             <needs path="./Common/Data/MultiLayerAttitude"/>
         </lib>
-	<lib id="greta_asap" path="./Common/Lib/Internal/ASAP.jar">
+        <lib id="greta_asap" path="./Common/Lib/Internal/ASAP.jar">
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_mpeg4"/>
         </lib>
-	<lib id="greta_modiff" path="./Common/Lib/Internal/MODIFF.jar">
+        <lib id="greta_modiff" path="./Common/Lib/Internal/MODIFF.jar">
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_mpeg4"/>
@@ -1722,36 +1748,36 @@
             <depends lib_id="ext_opencsv_2.3"/>
             <depends lib_id="ext_spmf"/>
         </lib>
-		<lib id="ext_opencsv_2.3" path="./Common/Lib/External/opencsv-2.3.jar"/>
+        
+        <lib id="ext_opencsv_2.3" path="./Common/Lib/External/opencsv-2.3.jar"/>
         <lib id="ext_weka" path="./Common/Lib/External/weka/weka.jar"/>
         <lib id="ext_weka_src" path="./Common/Lib/External/weka/weka-src.jar"/>
-		<lib id="ext_bfograph" path="./Common/Lib/External/sequencemining/bfograph.jar"/>
+        <lib id="ext_bfograph" path="./Common/Lib/External/sequencemining/bfograph.jar"/>
         <lib id="ext_clodhopper_core" path="./Common/Lib/External/sequencemining/clodhopper-core-1.0.0.jar"/>
         <lib id="ext_spmf" path="./Common/Lib/External/sequencemining/spmf.jar"/>
-      <lib id="greta_incrementality" path="./Common/Lib/Internal/Incrementality.jar">
-        <depends lib_id="greta_util"/>
-        <depends lib_id="greta_signals"/>
-        <depends lib_id="greta_intentions"/>
-        <depends lib_id="greta_behavior_realizer"/>
-        <depends lib_id="greta_feedbacks"/>
-        <depends lib_id="greta_mpeg4"/>
-      </lib>
-	<!-- jackson library version 2.15 -->
-
-	<lib id="ext_jackson-annotations-2.15" path="./Common/Lib/External/jackson/jackson-annotations-2.15.2.jar"/>
-        <lib id="ext_jackson-core-2.15" path="./Common/Lib/External/jackson/jackson-core-2.15.2.jar"/>
-        <lib id="ext_jackson-databind-2.15" path="./Common/Lib/External/jackson/jackson-databind-2.15.2.jar"/>
         
-        <lib id="ext_jeromq" path="./Common/Lib/External/jeromq-0.5.1.jar"/>
+        <lib id="greta_incrementality" path="./Common/Lib/Internal/Incrementality.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_behavior_realizer"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_mpeg4"/>
+        </lib>
 	
-	<!-- Greta Furhat Interface library adding -->
-	<lib id="libGretaFurhatInterface" path="./Common/Lib/Internal/GretaFurhatInterface.jar">
-		<depends lib_id="ext_jackson-annotations-2.15"/>
-		<depends lib_id="ext_jackson-core-2.15"/>
-		<depends lib_id="ext_jackson-databind-2.15"/>
-		<depends lib_id="greta_util"/>
-		<depends lib_id="greta_activemq"/>
-	</lib>
+        <lib id="ext_jackson-annotations-2.15" path="./Common/Lib/External/jackson/jackson-annotations-2.15.2.jar"/>
+        <lib id="ext_jackson-core-2.15" path="./Common/Lib/External/jackson/jackson-core-2.15.2.jar"/>
+        <lib id="ext_jackson-databind-2.15" path="./Common/Lib/External/jackson/jackson-databind-2.15.2.jar"/>        
+        <lib id="ext_jeromq" path="./Common/Lib/External/jeromq-0.5.1.jar"/>
+        
+        <!-- Greta Furhat Interface library adding -->
+        <lib id="libGretaFurhatInterface" path="./Common/Lib/Internal/GretaFurhatInterface.jar">
+            <depends lib_id="ext_jackson-annotations-2.15"/>
+            <depends lib_id="ext_jackson-core-2.15"/>
+            <depends lib_id="ext_jackson-databind-2.15"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_activemq"/>
+        </lib>
         
         <lib id="greta_ChatGPT" path="./Common/Lib/Internal/ChatGPT.jar">
             <depends lib_id="greta_osc"/>
@@ -1769,34 +1795,41 @@
             <depends lib_id="greta_meaning_miner"/>
             <depends lib_id="ext_javax.jms"/>
         </lib>
-      <lib id="greta_deepasr" path="./Common/Lib/Internal/DeepASR.jar">
-        <depends lib_id="greta_osc"/>
-        <depends lib_id="greta_util"/>
-        <depends lib_id="greta_intentions"/>
-        <depends lib_id="greta_signals"/>
-        <depends lib_id="greta_meaning_miner"/>
-        <depends lib_id="greta_activemq"/>
-        <depends lib_id="ext_javax.jms"/>
-      </lib>
-      
-      <lib id="greta_microphone" path="./Common/Lib/Internal/Microphone.jar">
-      </lib>
-
-      <lib id="greta_turnmanagement" path="./Common/Lib/Internal/TurnManagement.jar">
-        <depends lib_id="greta_intentions"/>
-        <depends lib_id="greta_signals"/>
-        <depends lib_id="greta_util"/>
-      </lib>      
-
-      <lib id="greta_microsaccade" path="./Common/Lib/Internal/Microsaccade.jar">
-        <depends lib_id="greta_intentions"/>
-        <depends lib_id="greta_signals"/>
-        <depends lib_id="greta_util"/>
-      </lib>
+        <lib id="greta_deepasr" path="./Common/Lib/Internal/DeepASR.jar">
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_meaning_miner"/>
+            <depends lib_id="greta_activemq"/>
+            <depends lib_id="ext_javax.jms"/>
+        </lib>
+        
+        <lib id="greta_microphone" path="./Common/Lib/Internal/Microphone.jar"/>
+        
+        <lib id="greta_turnmanagement" path="./Common/Lib/Internal/TurnManagement.jar">
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+        </lib>      
+        
+        <lib id="greta_microsaccade" path="./Common/Lib/Internal/Microsaccade.jar">
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+        </lib>
                   
     </libs>
+
+    <!--
+    #################
+    ### Connector ###
+    #################
+    -->
+
     <!-- list of how to connect and disconnect modules -->
     <connectors>
+    
         <!-- Phil start -->
         <!-- <connector id="connectCharacterInstanceFrameToRealizer" unique="true">
             <input class="greta.core.utilx.gui.CharacterInstanceFrame" lib_id="greta_utilx"/>
@@ -1806,20 +1839,20 @@
         </connector> -->
         <!-- Phil end -->
 
-      <connector id="ASRToLLM">
-        <input class="greta.auxiliary.deepasr.DeepASRFrame"  lib_id="greta_deepasr"/>
-        <output class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
-        <connect from="input" method="addLLMFrame" to="output"/>
-        <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
-        <disconnect from="input" method="removeLLMFrame" to="output"/>
-        <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
-      </connector>
+        <connector id="ASRToLLM">
+            <input class="greta.auxiliary.deepasr.DeepASRFrame"  lib_id="greta_deepasr"/>
+            <output class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
+            <connect from="input" method="addLLMFrame" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
+            <disconnect from="input" method="removeLLMFrame" to="output"/>
+            <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
+        </connector>
         
         <connector id="ObjectNodeControllerGaze_SIgnalEmitterToSignalPerformer">
-         <input class="greta.core.utilx.gui.ObjectNodeController" lib_id="greta_utilx"/>
+            <input class="greta.core.utilx.gui.ObjectNodeController" lib_id="greta_utilx"/>
             <output class="greta.core.signals.SignalPerformer" lib_id="greta_signals"/>
-         <connect from="input" method="addSignalPerformer" to="output"/>    <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
-         <disconnect from="input" method="removeSignalPerformer" to="output"/>    <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
+            <connect from="input" method="addSignalPerformer" to="output"/>    <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
+            <disconnect from="input" method="removeSignalPerformer" to="output"/>    <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
         </connector>
         <connector id="SSIFrameEmitterToSSIFramePerformer">
             <input class="greta.auxiliary.ssi.SSIFrameEmitter" lib_id="greta_ssi"/>
@@ -2127,18 +2160,18 @@
             <connect from="input" method="setLocalEnvironment" to="output"/>
             <disconnect from="input" method="setLocalEnvironment" to="null"/>
         </connector>
-		<connector id="addAttitudePerformerToAttitudeEmitter">
+        <connector id="addAttitudePerformerToAttitudeEmitter">
             <input class="greta.auxiliary.multilayerattitudeplanner.AttitudeEmitter" lib_id="multilayer_attitude_planner"/>
             <output class="greta.auxiliary.multilayerattitudeplanner.AttitudePerformer" lib_id="multilayer_attitude_planner"/>
             <connect from="input" method="addAttitudePerformer" to="output"/>
             <disconnect from="input" method="removeAttitudePerformer" to="output"/>
         </connector>
-      <connector id="connectIncInteractionToRealizer">
-        <input class="greta.auxiliary.incrementality.IncrementalityInteractionEmitter" lib_id="greta_incrementality"/>
-        <output class="greta.auxiliary.incrementality.IncrementalityInteractionPerformer" lib_id="greta_incrementality"/>
-        <connect from="input" method="addIncInteractionPerformer" to="output"/>
-        <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
-      </connector>
+        <connector id="connectIncInteractionToRealizer">
+            <input class="greta.auxiliary.incrementality.IncrementalityInteractionEmitter" lib_id="greta_incrementality"/>
+            <output class="greta.auxiliary.incrementality.IncrementalityInteractionPerformer" lib_id="greta_incrementality"/>
+            <connect from="input" method="addIncInteractionPerformer" to="output"/>
+            <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
+        </connector>
 
         <connector id="TurnManagerToIntentionPerformer">
             <input class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
@@ -2168,6 +2201,13 @@
         </connector>
 
     </connectors>
+
+    <!--
+    ##############
+    ### Styles ###
+    ##############
+    -->
+
     <!-- list of styles -->
     <styles>
         <style color="0x88FFDD" name="Animations"/>
@@ -2182,4 +2222,5 @@
         <style color="0xCCCCFF" name="DEFAULT"/>
         <default/>
     </styles>
+
 </modular>

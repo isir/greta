@@ -1,9 +1,0 @@
-Agent: Bonjour, je suis Camille. Et vous ?
-User: Je suis [NAME]
-Agent: Enchanté(e), [NAME]Comment allez-vous aujourd'hui ?
-User: Je vqis bien
-Agent: C'est bon à entendre. Pouvez-vous me parler un peu de votre consommation d'alcool ?
-User: Non
-Agent: D'accord, pas de problème. Parlez-moi de ce qui vous amène ici aujourd'hui.
-User: Non
-Agent: Je comprends. Comment vous sentez-vous en ce moment ?

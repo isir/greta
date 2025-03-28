@@ -1,7 +1,0 @@
-Agent: Hello, I'm Camille. What's your name?
-User: I am [NAME]
-Agent: Pleased to meet you, [NAME]How are you feeling today, [NAME]?
-User: I am fine
-Agent: That's good to hear. I understand that you've been referred here to discuss your alcohol use. Would that be okay to talk about?
-User: yes
-Agent: Thank you for being open to this. How would you describe your current drinking habits?

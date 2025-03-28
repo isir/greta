@@ -1,7 +1,0 @@
-Agent: Hello, I'm Camille. What's your name?
-User: I am [NAME]
-Agent: Pleased to meet you, [NAME]How are you doing today?
-User: I am fine
-Agent: I'm glad to hear that.
-User: who are you ?
-Agent: I'm Dr. Anderson, the therapist. I'm here to chat with you today.

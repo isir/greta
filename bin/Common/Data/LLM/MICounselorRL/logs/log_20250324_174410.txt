@@ -1,6 +1,0 @@
-User: hey
-Agent: Hello! How are you doing today?
-User: hey
-Agent: It's nice to meet you. How has your day been so far?
-User: hey
-Agent: I'm Dr. Anderson. I'm here to chat with you about whatever's on your mind. How have you been feeling lately?

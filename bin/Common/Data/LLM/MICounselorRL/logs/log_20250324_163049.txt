@@ -1,2 +1,0 @@
-User: hi
-Agent: Bonjour, je suis le Dr Perrin. Comment allez-vous aujourd'hui ?

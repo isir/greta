@@ -1,5 +1,0 @@
-Agent: Hello, I'm Camille. What's your name?
-User: I am [NAME]
-Agent: Pleased to meet you, [NAME]How are you doing today?
-User:  Help.
-Agent: I'm here for you, [NAME]. Can you tell me more about what's been going on?

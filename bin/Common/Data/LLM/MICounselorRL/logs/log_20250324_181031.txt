@@ -1,2 +1,0 @@
-User: hey
-Agent: Hello! How are you doing today?

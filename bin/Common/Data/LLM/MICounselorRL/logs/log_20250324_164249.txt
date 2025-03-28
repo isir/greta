@@ -1,9 +1,0 @@
-Agent: Hello, I'm Camille. What's your name?
-User: hi
-Agent: Don't worry, we can continue without it.How are you doing today?
-User: hi
-Agent: It's okay, take your time to open up. How was your day?
-User: hi
-Agent: I understand. Let's start whenever you're ready. Can you tell me a bit about what brought you here?
-User: hi
-Agent: It seems like you might be feeling a bit hesitant. That's okay. Let's take our time. How have you been feeling lately?

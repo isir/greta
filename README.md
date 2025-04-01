@@ -42,6 +42,8 @@ Greta is a SAIBA compliant agent architecture, meaning that it is compatible wit
 Mancini, M., Niewiadomski, R., Bevacqua, E., & Pelachaud, C. (2008, November).
 Greta: a SAIBA compliant ECA system.
 In Troisième Workshop sur les Agents Conversationnels Animés.
+
+Kopp, Stefan, Brigitte Krenn, Stacy Marsella, Andrew N. Marshall, Catherine Pelachaud, Hannes Pirker, Kristinn R. Thórisson, and Hannes Vilhjálmsson. (2006) Towards a Common Framework for Multimodal Generation: The Behavior Markup Language. In Lecture Notes of Computer Science. Berlin, Heidelberg: Springer Berlin Heidelberg.
  
 ### MPEG4 animation
 

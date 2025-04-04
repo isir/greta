@@ -5,6 +5,8 @@
  */
 package greta.auxiliary.TurnManagement;
 
+import greta.auxiliary.llm.LLMFrame;
+import greta.auxiliary.deepasr.ASRReceiver;
 import greta.core.intentions.IntentionPerformer;
 import greta.core.feedbacks.Callback;
 import greta.core.feedbacks.FeedbackPerformer;
@@ -12,14 +14,16 @@ import greta.core.util.CharacterManager;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author Takeshi Saga
  */
 
-public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackPerformer {
-
+public class TurnManagementContineousFrame extends javax.swing.JFrame implements FeedbackPerformer, ASRReceiver {
+    
     private String feedback_bat_path = "";
     private Process server_process;
 
@@ -27,18 +31,28 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
     
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private TurnManagement turnManager;
+    private Boolean turnManagerActivated = false;
     
     private CharacterManager cm;
     
     private String port;
     
+    private ArrayList<LLMFrame> llmsLocal = new ArrayList<LLMFrame>();
+    private ArrayList<IntentionPerformer> performersLocal = new ArrayList<IntentionPerformer>();
+    
+    private ArrayList<String> batch_main_path_list = new ArrayList<String>();
+    
     /**
      * Creates new form TurnManagementFrame
      */
-    public TurnManagementFrame() throws IOException {
+    public TurnManagementContineousFrame() throws IOException {
+
         initComponents();
         System.out.println("greta.auxiliary.TurnManagement.TurnManagementFrame()");
-        turnManager = new TurnManagement(cm, batch_main_path);
+
+        batch_main_path_list.add("Common\\Data\\TurnManagement\\run_turnManager_vap_audio.bat");
+        batch_main_path_list.add("Common\\Data\\TurnManagement\\run_turnManager_vap_audio_faceEmbed.bat");
+        
     }
 
     /**
@@ -53,6 +67,8 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        activateCheckBox = new javax.swing.JCheckBox();
+        modelNameComboBox = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,18 +83,37 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
             }
         });
 
+        activateCheckBox.setText("activate");
+        activateCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activateCheckBoxActionPerformed(evt);
+            }
+        });
+
+        modelNameComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "0: audio VAP", "1: audio/face embed VAP" }));
+        modelNameComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modelNameComboBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(activateCheckBox)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1))
+                    .addComponent(modelNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -87,8 +122,11 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(activateCheckBox)
                     .addComponent(jButton1))
-                .addContainerGap(262, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(modelNameComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(222, Short.MAX_VALUE))
         );
 
         pack();
@@ -97,26 +135,58 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
         // TODO add your handling code here:
         port = jTextField1.getText();
-        turnManager.resetMicServer(port);
+        if(turnManagerActivated){
+            turnManager.resetMicServer(port);            
+        }
     }//GEN-LAST:event_jButton1MouseClicked
+
+    private void activateCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activateCheckBoxActionPerformed
+        int modelIndex = modelNameComboBox.getSelectedIndex();
+        batch_main_path = batch_main_path_list.get(modelIndex);
+        try {
+            // TODO add your handling code here:
+            turnManager = new TurnManagement(cm, batch_main_path);
+            for(LLMFrame llmLocal: llmsLocal){
+                turnManager.llms.add(llmLocal);
+            }
+            performers = turnManager.getPerformers();
+            for(IntentionPerformer performerLocal:performersLocal){
+                performers.add(performerLocal);
+            }
+            turnManagerActivated = true;
+            System.out.println("greta.auxiliary.TurnManagement.TurnManagementFrame(): activated");
+        } catch (IOException ex) {
+            Logger.getLogger(TurnManagementContineousFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_activateCheckBoxActionPerformed
+
+    private void modelNameComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelNameComboBoxActionPerformed
+
+    }//GEN-LAST:event_modelNameComboBoxActionPerformed
     
     @Override
     public void performFeedback(greta.core.util.id.ID id, String string, greta.core.signals.SpeechSignal ss, greta.core.util.time.TimeMarker tm) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        performFeedback(string);
     }
 
     @Override
     public void performFeedback(greta.core.util.id.ID id, String string, List<greta.core.util.time.Temporizable> list) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        performFeedback(string);
     }
 
     @Override
     public void performFeedback(Callback clbck) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        performFeedback(clbck.type());
     }
 
     public void performFeedback(String str) {
-        turnManager.performFeedback(str);
+        System.out.println("greta.auxiliary.TurnManagement.TurnManagementContineousFrame.performFeedback - " + str);
+        if(turnManagerActivated){
+            turnManager.performFeedback(str);        
+        }
     }    
     
     @Override
@@ -153,18 +223,45 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox activateCheckBox;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JComboBox<String> modelNameComboBox;
     // End of variables declaration//GEN-END:variables
 
     public void addIntentionPerformer(IntentionPerformer performer) {
-        performers = turnManager.getPerformers();
-        performers.add(performer);
+        performersLocal.add(performer);
+        if(turnManagerActivated){
+            performers = turnManager.getPerformers();
+            performers.add(performer);            
+        }
     }
     
     public void removeIntentionPerformer(IntentionPerformer performer) {
         performers.remove(performer);
+    }
+
+    @Override
+    public void receiveText(String text) {
+        if(turnManagerActivated){
+            turnManager.addTranscript(text);        
+        }
+        System.out.println("greta.auxiliary.TurnManagement.TurnManagement.receiveText: " + text);
+    }
+
+    public void addLLMFrame(LLMFrame llm) {
+        llmsLocal.add(llm);
+        if(turnManagerActivated){
+            turnManager.llms.add(llm);
+        }
+    }
+
+    public void removeLLMFrame(LLMFrame llm) {
+        llmsLocal.remove(llm);
+        if(turnManagerActivated){
+            turnManager.llms.remove(llm);
+        }
     }
     
 }

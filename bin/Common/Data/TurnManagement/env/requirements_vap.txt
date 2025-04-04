@@ -11,3 +11,4 @@ numpy==1.26.0
 pandas==2.2.3
 einops==0.7.0
 torch-adopt==0.1.0
+keyboard

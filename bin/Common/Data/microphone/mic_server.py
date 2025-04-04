@@ -76,6 +76,7 @@ def  start_mic_server(port = 9000):
         try:
 
             connection, address = server_socket.accept()  # accept new connection
+            # connection.settimeout(5)
             
             thread = Thread(target = on_new_client, args = (connection, address, mic))
             thread.name = str(address)
@@ -257,7 +258,7 @@ def on_new_client(clientsocket,address, mic):
             clientsocket.send(data)
         
         except Exception as e:
-            print(e)
+            print("[Microphone on_new_client] ", e)
             break
         
     clientsocket.close()

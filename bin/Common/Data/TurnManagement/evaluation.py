@@ -17,7 +17,8 @@ from datamodule import VapDataModule
 from callbacks import SymmetricSpeakersCallback
 
 # from train import VAPModel, DataConfig, OptConfig, get_run_name
-from finetune import VAPModel, DataConfig, OptConfig, get_run_name
+# from finetune import VAPModel, DataConfig, OptConfig, get_run_name
+from finetune_vapNotFreeze import VAPModel, DataConfig, OptConfig, get_run_name
 
 # from vap.phrases.dataset import PhrasesCallback
 from utils import everything_deterministic, write_json

@@ -17,6 +17,8 @@ from utils import (
 
 import math
 
+import gc
+
 BIN_TIMES: list = [0.2, 0.4, 0.6, 0.8]
 
 everything_deterministic()
@@ -820,6 +822,9 @@ class VapGPT(nn.Module):
         
         if self.conf.lang_cond == 1:
             self.lang_condition = nn.Linear(conf.lid_classify_num_class, conf.dim)
+        
+        # self.stream1 = torch.cuda.Stream()
+        # self.stream2 = torch.cuda.Stream()
 
     def load_encoder_CPC(self, cpc_model):
         
@@ -876,6 +881,15 @@ class VapGPT(nn.Module):
         
         # print('encode_audio', audio.shape)
         
+        # torch.cuda.synchronize()
+
+        # with torch.cuda.stream(self.stream1):
+        #     x1 = self.encoder(audio[:, :1], only_feature_extractor=self.conf.only_feature_extraction)  # speaker 1
+        # with torch.cuda.stream(self.stream2):
+        #     x2 = self.encoder(audio[:, 1:], only_feature_extractor=self.conf.only_feature_extraction)  # speaker 2
+        
+        # torch.cuda.synchronize()
+
         x1 = self.encoder(audio[:, :1], only_feature_extractor=self.conf.only_feature_extraction)  # speaker 1
         x2 = self.encoder(audio[:, 1:], only_feature_extractor=self.conf.only_feature_extraction)  # speaker 2
         
@@ -909,8 +923,11 @@ class VapGPT(nn.Module):
         # src1: (batch, seq_len, channel, height, width)
         
         pad_size = chunk_size * math.ceil(src1.size(1) / chunk_size) - src1.size(1)
+        
+        # print(src1.shape)
+        # print(src1.size(0), pad_size, src1.size(2), src1.size(3), src1.size(4))
 
-        padding = torch.zeros(src1.size(0), pad_size, src1.size(2), src1.size(3), src1.size(4)).to(self.device)
+        padding = torch.zeros(src1.size(0), pad_size, src1.size(2), src1.size(3), src1.size(4)).to(dtype=src1.dtype).to(self.device)
         
         # print(padding.shape, flush=True)
         
@@ -926,8 +943,16 @@ class VapGPT(nn.Module):
         
         # x1: (batch+, 16, dim_face_encoder)
         # x1 = self.face_encoder1(concat_src)
+        
+        prev_type = concat_src.type()
+        # concat_src = concat_src.float()
+        
+        # print(concat_src.type())
+        
         x1 = self.face_encoder(concat_src)
         # print('face encoder:', x1.shape, flush=True)
+        
+        x1 = x1.type(prev_type)
         
         # x1: (batch, seq_len+, dim_face_encoder)
         x1 = x1.view(src1.size(0), -1, self.conf.dim_face_encoder)
@@ -1087,6 +1112,16 @@ class VapGPT(nn.Module):
 
         if waveform != None:
             waveform = waveform
+            gaze1 = None
+            head1 = None
+            face1 = None
+            body1 = None
+            face_im1 = None
+            gaze2 = None
+            head2 = None
+            face2 = None
+            body2 = None
+            face_im2 = None
         else:
             waveform = src['waveform']
             gaze1 = src['gaze1']
@@ -1101,102 +1136,54 @@ class VapGPT(nn.Module):
             if self.conf.use_face_encoder:
                 face_im1 = src['face_im1']
                 face_im2 = src['face_im2']
+            else:
+                face_im1 = None
+                face_im2 = None
+
+        # print(waveform.shape)
         
         # if self.multimodal:
-        #     print(waveform.shape)
         #     print(gaze1.shape)
         #     print(head1.shape)
         #     print(face1.shape)
         #     print(body1.shape)
 
         # Measure time
-        import time
-        start = time.time()
+        # import time
+        # start = time.time()
         
+        s_time = torch.cuda.Event(enable_timing=True)
+        s_time.record()
+        
+        # if not (self.conf.use_face_encoder and self.conf.mode == 1):
+        #     x1, x2 = self.encode_audio(waveform)
+
         x1, x2 = self.encode_audio(waveform)
+        
+        # e_time = torch.cuda.Event(enable_timing=True)
+        # e_time.record()
+        # torch.cuda.synchronize()
+        # print("encode_audio {:.2f} ms".format(s_time.elapsed_time(e_time)))
+        # s_time = torch.cuda.Event(enable_timing=True)
+        # s_time.record()
 
         # print(x1.shape)
         # print(x2.shape)
-
-
-        ## match dimensions
-        if self.conf.encoder_type == 'wav2vec2':
-            x1 = self.decrease_dimension(x1)
-            x1 = torch.relu(x1)
-            x2 = self.decrease_dimension(x2)
-            x2 = torch.relu(x2)
-
-        elif self.conf.encoder_type == 'hubert':
-            
-            x1 = self.decrease_dimension(x1)
-            x1 = torch.relu(x1)
-            x2 = self.decrease_dimension(x2)
-            x2 = torch.relu(x2)
-        
-        # 処理時間計測用
-        TEST_INPUT_LENGTH = False
-        if TEST_INPUT_LENGTH:
-            # 入力を短くする
-
-            # Measure time
-            import time
-            start = time.time()
-        
-            x1, x2 = self.encode_audio(waveform)
-
-            time1 = time.time()
-            time1_elapsed = time1 - start
-            time1_elapsed = time1_elapsed / 1000.
-            #print ("time1:{0}".format(time1_elapsed) + "[sec]")
-
-            #print(x1.shape)
-            x1_ = x1[:, :, :]
-            x2_ = x2[:, :, :]
-            #print(x1_.shape)
-
-            # Autoregressive
-            o1 = self.ar_channel(x1_, attention=attention)  # ["x"]
-            o2 = self.ar_channel(x2_, attention=attention)  # ["x"]
-            out = self.ar(o1["x"], o2["x"], attention=attention)
-
-            time2 = time.time()
-            time2_elapsed = time2 - time1
-            #print ("time2:{0}".format(time2_elapsed) + "[sec]")
-
-            # Outputs
-            v1 = self.va_classifier(out["x1"])
-            v2 = self.va_classifier(out["x2"])
-            vad = torch.cat((v1, v2), dim=-1)
-            logits = self.vap_head(out["x"])
-
-            # Measure time (end)
-            time3 = time.time()
-            time3_elapsed = time3 - time2
-            #print ("time3:{0}".format(time3_elapsed) + "[sec]")
-
-            time_total = time1_elapsed + time2_elapsed + time3_elapsed
-            print ("time_total:{0}".format(time_total*1000) + "[msec]")
-            self.temp_elapse_time.append(time_total*1000)
-            if len(self.temp_elapse_time) == 30:
-                # 最初の5件は削除
-                self.temp_elapse_time = self.temp_elapse_time[5:]
-                import numpy as np
-                print ("average time_total:{0}".format(np.mean(self.temp_elapse_time)) + "[msec]")
-                a = input("Press y to continue:")
-                while a != "y":
-                    a = input("Press y to continue:")
-
-        # Language condition
-        if self.conf.lang_cond == 1:
-            lang_info_data = torch.zeros(x1.shape[0], x1.shape[1], self.conf.lid_classify_num_class).to(x1.device)
-            for b, lang in enumerate(lang_info):
-                lang_info_data[b, :, lang] = 1
-            x1 += self.lang_condition(lang_info_data)
-            x2 += self.lang_condition(lang_info_data)
         
         # Autoregressive
+        # if not (self.conf.use_face_encoder and self.conf.mode == 1):
+        #     o1 = self.ar_channel(x1, attention=attention)  # ["x"]
+        #     o2 = self.ar_channel(x2, attention=attention)  # ["x"]
+
         o1 = self.ar_channel(x1, attention=attention)  # ["x"]
         o2 = self.ar_channel(x2, attention=attention)  # ["x"]
+
+        # e_time = torch.cuda.Event(enable_timing=True)
+        # e_time.record()
+        # torch.cuda.synchronize()
+        # print("audio ar {:.2f} ms".format(s_time.elapsed_time(e_time)))
+        # s_time = torch.cuda.Event(enable_timing=True)
+        # s_time.record()
         
         if not self.conf.use_face_encoder:
             out = self.ar(o1["x"], o2["x"], attention=attention)
@@ -1265,25 +1252,33 @@ class VapGPT(nn.Module):
             
             if self.conf.mode == 0:
             
-                o1_gaze = self.ar_channel_gaze(gaze1)
-                o1_head = self.ar_channel_head(head1)
-                o1_body = self.ar_channel_body(body1)
+                torch.cuda.synchronize()
+
+                with torch.cuda.stream(self.stream1):
+
+                    o1_gaze = self.ar_channel_gaze(gaze1)
+                    o1_head = self.ar_channel_head(head1)
+                    o1_body = self.ar_channel_body(body1)
     
-                x1_face = self.encode_face(face_im1)
-                # x1_face = self.compress_face(x1_face)
+                    x1_face = self.encode_face(face_im1)
+                    # x1_face = self.compress_face(x1_face)
+                    
+                    # print(type(x1_face))
+                    # print(x1.keys())
+                    
+                    o1_face = self.ar_channel_face_encoder(x1_face, attention=attention)
+    
+                with torch.cuda.stream(self.stream2):
+
+                    o2_gaze = self.ar_channel_gaze(gaze2)
+                    o2_head = self.ar_channel_head(head2)
+                    o2_body = self.ar_channel_body(body2)
+        
+                    x2_face = self.encode_face(face_im2)
+                    # x2_face = self.compress_face(x2_face)
+                    o2_face = self.ar_channel_face_encoder(x2_face, attention=attention)
                 
-                # print(type(x1_face))
-                # print(x1.keys())
-                
-                o1_face = self.ar_channel_face_encoder(x1_face, attention=attention)
-    
-                o2_gaze = self.ar_channel_gaze(gaze2)
-                o2_head = self.ar_channel_head(head2)
-                o2_body = self.ar_channel_body(body2)
-    
-                x2_face = self.encode_face(face_im2)
-                # x2_face = self.compress_face(x2_face)
-                o2_face = self.ar_channel_face_encoder(x2_face, attention=attention)
+                torch.cuda.synchronize()
                 
                 out1_intermodal, _, _ = self.intermodal_transformer([o1["x"], o1_gaze["x"], o1_head["x"], o1_face["x"], o1_body["x"]])
                 out2_intermodal, _, _ = self.intermodal_transformer([o2["x"], o2_gaze["x"], o2_head["x"], o2_face["x"], o2_body["x"]])
@@ -1305,23 +1300,79 @@ class VapGPT(nn.Module):
                 ret = {"logits": logits, "vad": vad}
             
             elif self.conf.mode == 1:
+                
+                """
+                encode_audio 128.57 ms
+                audio ar 74.88 ms
+                intra/inter modality 2271.07 ms
+                classification 10.58 ms
+                ALL: 2.88, PREP: 0.25 (0.09%), CALC1: 2.54 (0.88%), CALC2: 0.08 (0.03%), POST: 0.01 (0.00%)
+                """
+
+                # torch.cuda.synchronize()
+
+                # with torch.cuda.stream(self.stream1):
                     
+                #     x1_face = self.encode_face(face_im1)
+                #     x1_face = self.compress_face(x1_face)
+                #     o1_face = self.ar_channel_face_encoder(x1_face["x"], attention=attention)
+                #     out1_intermodal = self.intermodal_GPT(o1["x"], o1_face["x"], attention=attention)    
+
+                # with torch.cuda.stream(self.stream2):
+    
+                #     x2_face = self.encode_face(face_im2)
+                #     x2_face = self.compress_face(x2_face)
+                #     o2_face = self.ar_channel_face_encoder(x2_face["x"], attention=attention)
+                #     out2_intermodal = self.intermodal_GPT(o2["x"], o2_face["x"], attention=attention)                
+
+                # torch.cuda.synchronize()
+
+                # x1 = self.encoder(waveform[:, :1], only_feature_extractor=self.conf.only_feature_extraction)  # speaker 1
+                # o1 = self.ar_channel(x1, attention=attention)  # ["x"]
                 x1_face = self.encode_face(face_im1)
                 x1_face = self.compress_face(x1_face)
                 o1_face = self.ar_channel_face_encoder(x1_face["x"], attention=attention)
-    
+                out1_intermodal = self.intermodal_GPT(o1["x"], o1_face["x"], attention=attention) 
+            
+
+                # x2 = self.encoder(waveform[:, 1:], only_feature_extractor=self.conf.only_feature_extraction)  # speaker 2
+                # o2 = self.ar_channel(x2, attention=attention)  # ["x"]
                 x2_face = self.encode_face(face_im2)
                 x2_face = self.compress_face(x2_face)
                 o2_face = self.ar_channel_face_encoder(x2_face["x"], attention=attention)
+                out2_intermodal = self.intermodal_GPT(o2["x"], o2_face["x"], attention=attention)
                 
-                out1_intermodal = self.intermodal_GPT(o1["x"], o1_face["x"], attention=attention)    
-                out2_intermodal = self.intermodal_GPT(o2["x"], o2_face["x"], attention=attention)                
                 out_interperson = self.interperson_GPTStereo(out1_intermodal["x"], out2_intermodal["x"], attention=attention)
+
+                # e_time = torch.cuda.Event(enable_timing=True)
+                # e_time.record()
+                # torch.cuda.synchronize()
+                # print("face processes {:.2f} ms".format(s_time.elapsed_time(e_time)))
+                # s_time = torch.cuda.Event(enable_timing=True)
+                # s_time.record()
+
+                # e_time = torch.cuda.Event(enable_timing=True)
+                # e_time.record()
+                # torch.cuda.synchronize()
+                # print("intra/inter modality {:.2f} ms".format(s_time.elapsed_time(e_time)))
+                # s_time = torch.cuda.Event(enable_timing=True)
+                # s_time.record()
+
     
                 vad = self.va_classifier(out_interperson["x"])
                 v1 = vad[:, 0]
                 v2 = vad[:, 1]
                 logits = self.vap_head(out_interperson["x"])
+
+                # e_time = torch.cuda.Event(enable_timing=True)
+                # e_time.record()
+                # torch.cuda.synchronize()
+                # print("classification {:.2f} ms".format(s_time.elapsed_time(e_time)))
+                # s_time = torch.cuda.Event(enable_timing=True)
+                # s_time.record()
+                
+                # input()
+
                 
                 ret = {"logits": logits, "vad": vad}
             
@@ -1420,6 +1471,12 @@ class VapGPT(nn.Module):
                 ret["self_attn"] = torch.stack([o1["attn"], o2["attn"]], dim=1)
                 ret["cross_attn"] = out["cross_attn"]
                 ret["cross_self_attn"] = out["self_attn"]
+        
+        # del waveform
+        # del gaze1, head1, face1, body1, face_im1
+        # del gaze2, head2, face2, body2, face_im2
+        # torch.cuda.empty_cache()
+        # gc.collect()
         
         return ret
 

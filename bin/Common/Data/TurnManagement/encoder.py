@@ -132,134 +132,134 @@ class EncoderCPC(nn.Module):
             # print('after  downsample', z.shape)
     
 
-        # 入力の長さを制限（処理時間がかかる）
-        if self.lim_context_sec > 0:
+        # # 入力の長さを制限（処理時間がかかる）
+        # if self.lim_context_sec > 0:
             
-            FRAME_PER_FEATURE = 320
-            DIM_FEATURE = 256
-            num_feature = int(waveform.shape[2] / FRAME_PER_FEATURE) # 20sec -> 1000
-            lim_context_n = int(self.lim_context_sec * self.sample_rate)
-            z = np.zeros((waveform.shape[0], num_feature, DIM_FEATURE))
+        #     FRAME_PER_FEATURE = 320
+        #     DIM_FEATURE = 256
+        #     num_feature = int(waveform.shape[2] / FRAME_PER_FEATURE) # 20sec -> 1000
+        #     lim_context_n = int(self.lim_context_sec * self.sample_rate)
+        #     z = np.zeros((waveform.shape[0], num_feature, DIM_FEATURE))
 
-            # キャッシュにデータがあるか確認
-            cached_idx = []
-            for b in range(waveform.shape[0]):
+        #     # キャッシュにデータがあるか確認
+        #     cached_idx = []
+        #     for b in range(waveform.shape[0]):
                 
-                z_hash = self.hash_tensor(waveform[b,:,:])
-                tensor_path = f"/n/work1/inoue/temp/%dsec/z%s.pt" % (self.lim_context_sec, z_hash)
+        #         z_hash = self.hash_tensor(waveform[b,:,:])
+        #         tensor_path = f"/n/work1/inoue/temp/%dsec/z%s.pt" % (self.lim_context_sec, z_hash)
 
-                if os.path.exists(tensor_path):
-                    try:
-                        z_ = torch.load(tensor_path)
-                    except:
-                        continue
+        #         if os.path.exists(tensor_path):
+        #             try:
+        #                 z_ = torch.load(tensor_path)
+        #             except:
+        #                 continue
 
-                    z[b,:,:] = z_.cpu().clone().detach()
-                    del z_
-                    cached_idx.append(b)
+        #             z[b,:,:] = z_.cpu().clone().detach()
+        #             del z_
+        #             cached_idx.append(b)
 
-            # z_hash = self.hash_tensor(waveform)
-            # tensor_path = f"/n/work1/inoue/temp/z_{z_hash}-{self.lim_context_sec}.pt"
+        #     # z_hash = self.hash_tensor(waveform)
+        #     # tensor_path = f"/n/work1/inoue/temp/z_{z_hash}-{self.lim_context_sec}.pt"
 
-            # if os.path.exists(tensor_path):
-            #     print("load z")
-            #     z = torch.load(tensor_path, torch.device("cuda:0"))
-            #     print('z.shape', z.shape)
+        #     # if os.path.exists(tensor_path):
+        #     #     print("load z")
+        #     #     z = torch.load(tensor_path, torch.device("cuda:0"))
+        #     #     print('z.shape', z.shape)
 
-            batch_size = waveform.shape[0]
+        #     batch_size = waveform.shape[0]
             
-            if len(cached_idx) < batch_size:
-                print("z is not cached\t(num_cached={}/{})".format(len(cached_idx), waveform.shape[0]))
-            else:
-                print("z is cached\t(num_cached={}/{})".format(len(cached_idx), waveform.shape[0]))
+        #     if len(cached_idx) < batch_size:
+        #         print("z is not cached\t(num_cached={}/{})".format(len(cached_idx), waveform.shape[0]))
+        #     else:
+        #         print("z is cached\t(num_cached={}/{})".format(len(cached_idx), waveform.shape[0]))
             
             
-            if len(cached_idx) < batch_size:
+        #     if len(cached_idx) < batch_size:
 
-                step_size = self.STEP_SIZE_BY_CONTEXT_LIM[self.lim_context_sec]
-                for i in range(0, num_feature, step_size):
+        #         step_size = self.STEP_SIZE_BY_CONTEXT_LIM[self.lim_context_sec]
+        #         for i in range(0, num_feature, step_size):
                     
-                    # measure processing time
-                    time_start = time.time()
+        #             # measure processing time
+        #             time_start = time.time()
                     
-                    waveform_ = None
+        #             waveform_ = None
 
-                    for j in range(step_size):
+        #             for j in range(step_size):
                         
-                        start_idx = max((i+j+1)*FRAME_PER_FEATURE-lim_context_n, 0)
-                        end_idx = min((i+j+1)*FRAME_PER_FEATURE, waveform.shape[2])
+        #                 start_idx = max((i+j+1)*FRAME_PER_FEATURE-lim_context_n, 0)
+        #                 end_idx = min((i+j+1)*FRAME_PER_FEATURE, waveform.shape[2])
                         
-                        for b in range(batch_size):
+        #                 for b in range(batch_size):
 
-                            w_ = waveform[b, :, start_idx:end_idx].clone().detach()
+        #                     w_ = waveform[b, :, start_idx:end_idx].clone().detach()
 
-                            # padding
-                            if w_.shape[1] < lim_context_n:
-                                w_ = torch.cat((torch.zeros((w_.shape[0], lim_context_n-w_.shape[1]), device=w_.device), w_), dim=1)
+        #                     # padding
+        #                     if w_.shape[1] < lim_context_n:
+        #                         w_ = torch.cat((torch.zeros((w_.shape[0], lim_context_n-w_.shape[1]), device=w_.device), w_), dim=1)
 
-                            if waveform_ == None:
-                                waveform_ = w_
-                            else:
-                                waveform_ = torch.cat((waveform_, w_), dim=0)
+        #                     if waveform_ == None:
+        #                         waveform_ = w_
+        #                     else:
+        #                         waveform_ = torch.cat((waveform_, w_), dim=0)
                     
-                    waveform_ = waveform_.unsqueeze(1)  # channel dim
-                    # print(waveform_.shape)
-                    # input()
+        #             waveform_ = waveform_.unsqueeze(1)  # channel dim
+        #             # print(waveform_.shape)
+        #             # input()
                         
-                    # time_end = time.time()
-                    # print('waveform_ time', time_end - time_start)    
+        #             # time_end = time.time()
+        #             # print('waveform_ time', time_end - time_start)    
                     
-                    # print(waveform_.shape)
-                    # input()
+        #             # print(waveform_.shape)
+        #             # input()
 
-                    #time_start = time.time()
+        #             #time_start = time.time()
 
-                    with torch.no_grad():
-                        z_ = self.encoder.gEncoder(waveform_)
-                        z_ = einops.rearrange(z_, "b c n -> b n c")
-                        z_ = self.encoder.gAR(z_)
-                        z_ = self.downsample(z_)
+        #             with torch.no_grad():
+        #                 z_ = self.encoder.gEncoder(waveform_)
+        #                 z_ = einops.rearrange(z_, "b c n -> b n c")
+        #                 z_ = self.encoder.gAR(z_)
+        #                 z_ = self.downsample(z_)
                     
-                    # time_end = time.time()
-                    # print('z_ time', time_end - time_start)
-                    # #print(z_.shape)
-                    # input()
+        #             # time_end = time.time()
+        #             # print('z_ time', time_end - time_start)
+        #             # #print(z_.shape)
+        #             # input()
 
-                    # print('z_ shape', z_.shape)
-                    # input()
+        #             # print('z_ shape', z_.shape)
+        #             # input()
 
-                    time_start = time.time()
+        #             time_start = time.time()
 
-                    #input()
+        #             #input()
 
-                    batch_size = waveform.shape[0]
-                    idx_copied = 0
-                    for j in range(step_size):
-                        for b in range(batch_size):
+        #             batch_size = waveform.shape[0]
+        #             idx_copied = 0
+        #             for j in range(step_size):
+        #                 for b in range(batch_size):
                             
-                            if b in cached_idx:
-                                continue
+        #                     if b in cached_idx:
+        #                         continue
                             
-                            z[b,i+j,:] = z_[idx_copied,-1,:].to('cpu').detach().numpy().copy()
-                            #print(idx_copied)
-                            idx_copied += 1
+        #                     z[b,i+j,:] = z_[idx_copied,-1,:].to('cpu').detach().numpy().copy()
+        #                     #print(idx_copied)
+        #                     idx_copied += 1
 
-                    del z_, waveform_, w_
+        #             del z_, waveform_, w_
 
-            z = torch.from_numpy(z.astype(np.float32))
-            z = z.cuda()
+        #     z = torch.from_numpy(z.astype(np.float32))
+        #     z = z.cuda()
             
-            # batchごとにzを保存
-            for b in range(waveform.shape[0]):
+        #     # batchごとにzを保存
+        #     for b in range(waveform.shape[0]):
                 
-                z_hash = self.hash_tensor(waveform[b,:,:])
-                tensor_path = f"/n/work1/inoue/temp/%dsec/z%s.pt" % (self.lim_context_sec, z_hash)
+        #         z_hash = self.hash_tensor(waveform[b,:,:])
+        #         tensor_path = f"/n/work1/inoue/temp/%dsec/z%s.pt" % (self.lim_context_sec, z_hash)
 
-                # Hash値をファイル名としてzのデータを保存
-                #print(z[b,:,:].shape)
-                if os.path.exists(tensor_path) == False:
-                    torch.save(z[b,:,:], tensor_path)
-                #print("save z as ", tensor_path)
+        #         # Hash値をファイル名としてzのデータを保存
+        #         #print(z[b,:,:].shape)
+        #         if os.path.exists(tensor_path) == False:
+        #             torch.save(z[b,:,:], tensor_path)
+        #         #print("save z as ", tensor_path)
         
         return z
 

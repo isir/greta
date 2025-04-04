@@ -23,7 +23,7 @@ package greta.auxiliary.player.ogre.capture;
  */
 public interface Capturer{
 
-    public void startCapture(String id);
+    public void startCapture(String id, boolean useFixedIndex);
 
     public void stopCapture();
 

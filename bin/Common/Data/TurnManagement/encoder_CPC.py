@@ -142,10 +142,14 @@ class CPCAR(nn.Module):
 
         if self.reverse:
             x = torch.flip(x, [1])
-        try:
-            self.baseNet.flatten_parameters()
-        except RuntimeError:
-            pass
+
+        # try:
+        #     self.baseNet.flatten_parameters()
+        # except RuntimeError:
+        #     pass
+
+        self.baseNet.flatten_parameters()
+
         x, h = self.baseNet(x, self.hidden)
         if self.keepHidden:
             if isinstance(h, tuple):

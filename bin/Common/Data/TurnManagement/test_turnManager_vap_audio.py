@@ -32,8 +32,8 @@ from utils import everything_deterministic, write_json
 from model import VapGPT, VapConfig
 from events import TurnTakingEvents, EventConfig
 
-
 agent_speaking_state = False
+s_mainloop = time.time()
 
 def main():
     
@@ -145,6 +145,14 @@ def main():
     vap_client.start()
     
     time.sleep(1)
+
+    global s_mainloop
+
+    main_timeout_thread = Thread(target = main_timeout_loop)
+    main_timeout_thread.daemon = True
+    main_timeout_thread.start()
+    
+    s_mainloop = time.time()
     
     cnt = 0
     while True:
@@ -249,6 +257,8 @@ def main():
 
             traceback.print_exc()
             break
+
+        s_mainloop = time.time()
     
     try:
         vad_client.stop()
@@ -1100,6 +1110,19 @@ def int2float(sound):
     sound = sound.squeeze()  # depends on the use case
     
     return sound
+
+def main_timeout_loop():
     
+    limit = 5
+    
+    while True:
+        
+        e_mainloop = time.time()
+        if e_mainloop - s_mainloop > limit:
+            print('[TurnManagement] mainloop timeout')
+            # sys.exit()
+            # os._exit(0)
+            time.sleep(2)
+            os._exit(0)    
 if __name__ == '__main__':
     main()

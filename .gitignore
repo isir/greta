@@ -15,6 +15,7 @@
 
 
 bin/Log/*
+bin/Capture_*
 
 bin/Player/Lib/External/Linux32/*.cfg
 bin/Player/Lib/External/Linux64/*.cfg

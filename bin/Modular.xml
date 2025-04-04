@@ -246,6 +246,7 @@
                 </menu>
                 <menu name="TurnManagement">
                     <item module="TurnManagement" name="turnManagement"/>
+                    <item module="TurnManagementContineous" name="turnManagementContineous"/>
                 </menu>
             </menu>
 
@@ -1306,6 +1307,11 @@
             <object class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
             <frame type="object"/>
         </module> 
+
+        <module name="TurnManagementContineous" >
+            <object class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
+            <frame type="object"/>
+        </module> 
       
         <module name="RestPoseSetterWithFeedback" style="Signals">
             <object class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
@@ -2180,6 +2186,20 @@
             <!-- it will call input.addIntentionPerformer(output) -->
             <disconnect from="input" method="removeIntentionPerformer" to="output"/>
             <!-- it will call input.addIntentionPerformer(output) -->
+        </connector>
+
+        <connector id="DeepASRToReceiver">
+            <input class="greta.auxiliary.deepasr.DeepASRFrame"  lib_id="greta_deepasr"/>
+            <output class="greta.auxiliary.deepasr.ASRReceiver" lib_id="greta_deepasr"/>
+            <connect from="input" method="addASRReceiver" to="output"/>
+            <disconnect from="input" method="removeASRReceiver" to="output"/>
+        </connector>
+
+        <connector id="TurnManagerContineousToIntentionLLM">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementContineousFrame" lib_id="greta_turnmanagement"/>
+            <output class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
+            <connect from="input" method="addLLMFrame" to="output"/>
+            <disconnect from="input" method="removeLLMFrame" to="output"/>
         </connector>
         
         <!--

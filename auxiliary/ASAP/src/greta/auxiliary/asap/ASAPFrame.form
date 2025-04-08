@@ -360,7 +360,7 @@
             </Component>
             <Component class="java.awt.TextField" name="port">
               <Properties>
-                <Property name="text" type="java.lang.String" value="50151"/>
+                <Property name="text" type="java.lang.String" value="4000"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="portActionPerformed"/>

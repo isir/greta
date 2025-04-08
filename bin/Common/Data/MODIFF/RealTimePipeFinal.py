@@ -353,8 +353,8 @@ def main():
     client.start_receiving()
 
     #Initialize the external tensor client
-    # tensor_client = ExternalTensorClient(conversion_table, server1_address="localhost", server1_port= 50200, server2_address="localhost", server2_port=50201)
-    tensor_client = ExternalTensorClient(conversion_table, server1_address="localhost", server1_port= 5555, server2_address="localhost", server2_port=5556)
+    tensor_client = ExternalTensorClient(conversion_table, server1_address="localhost", server1_port= 50200, server2_address="localhost", server2_port=50201)
+    # tensor_client = ExternalTensorClient(conversion_table, server1_address="localhost", server1_port= 5555, server2_address="localhost", server2_port=5556)
     tensor_client.connect()
 
     # sender = Sender(50151, "localhost")

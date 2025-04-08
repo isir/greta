@@ -374,7 +374,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
 
         jLabel1.setText("Port");
 
-        port.setText("50151");
+        port.setText("4000");
         port.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 portActionPerformed(evt);

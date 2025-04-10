@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * @author Takeshi Saga
  */
 
-public class TurnManagementContineousFrame extends javax.swing.JFrame implements FeedbackPerformer, ASRReceiver {
+public class TurnManagementContinuousFrame extends javax.swing.JFrame implements FeedbackPerformer, ASRReceiver {
     
     private String feedback_bat_path = "";
     private Process server_process;
@@ -45,7 +45,7 @@ public class TurnManagementContineousFrame extends javax.swing.JFrame implements
     /**
      * Creates new form TurnManagementFrame
      */
-    public TurnManagementContineousFrame() throws IOException {
+    public TurnManagementContinuousFrame() throws IOException {
 
         initComponents();
         System.out.println("greta.auxiliary.TurnManagement.TurnManagementFrame()");
@@ -156,7 +156,7 @@ public class TurnManagementContineousFrame extends javax.swing.JFrame implements
             turnManagerActivated = true;
             System.out.println("greta.auxiliary.TurnManagement.TurnManagementFrame(): activated");
         } catch (IOException ex) {
-            Logger.getLogger(TurnManagementContineousFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TurnManagementContinuousFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_activateCheckBoxActionPerformed
 

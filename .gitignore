@@ -50,6 +50,8 @@ bin/Common/Lib/External/apache-activemq-5.15.14/data
 bin/Common/Data/CereProc/*
 
 bin/Common/Data/**/api_key.txt
+bin/Common/Data/**/SPEECH_KEY.txt
+bin/Common/Data/**/SPEECH_REGION.txt
 
 bin/Common/Data/FMLAnnotator/Output/output.xml
 bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv

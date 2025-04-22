@@ -12,6 +12,21 @@ It is the result of different research projects conducted by Catherine Pelachaud
 - The "master-lgpl" of Greta is licensed under the GNU LGPL v3.
 - Depends on external software for Speech Synthesis ([MaryTTS](http://mary.dfki.de/) or CereProc), and 3D Rendering (Ogre or Unity).
 
+## Directory structure
+
+> ATTENTION:
+> - before checking each component here, ***STRONGLY RECOMMEND TO CHECK [Quick start](https://github.com/isir/greta/wiki/Quick-start) and try to run Greta first.***
+> - then, check "For developpers" section in the sidebar of this wiki
+> - after that, you can check each detailed functionalities from the "Functionalities" section in the sidebar of this wiki
+
+- `application`: directory for Modular application, which connects all the modules in Greta platform
+- `auxiliary`: auxiliary modules
+- `bin`: compiled JAR files and non-Java programs should be in this directory. 
+- `core`: core modules (if you are new, recommend to start from [BehaviorPlanner](core/BehaviorPlanner/src/greta/core/behaviorplanner/Planner.java) and [BehaviorRealizer](core/BehaviorRealizer/src/greta/core/behaviorrealizer/Realizer.java) using Netbeans IDE)
+- `doc`: previously used but not maintained any more
+- `pictures`: pictures which used in wiki pages. You cannot find all of the pictures used in the wiki from here because some are directory embedded into the wiki page.
+- `tools`: some tool modules. Please refer [here](https://github.com/isir/greta/wiki/Technical-Specifications#name-correspondence-between-greta-modules-and-java-projects) for the included modules
+
 ## Update
 
 ### Sep 03, 2024: changed license from LGPL to GPL, added many functionalities(EN,FR)!

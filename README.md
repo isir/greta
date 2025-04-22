@@ -24,8 +24,9 @@ It is the result of different research projects conducted by Catherine Pelachaud
 - Added NVBG module, a nonverbal behavior generator
 - At this moment, we only support English and French languages
 
-![Greta logo](https://user-images.githubusercontent.com/54807091/88184824-7c5ba280-cc33-11ea-875e-0a785d95075f.png)
-
 ## Installation and usage
 
 For instructions of how to install/compile/use the project please see [WIKI](https://github.com/gretaproject/greta/wiki)
+
+![Greta logo](https://user-images.githubusercontent.com/54807091/88184824-7c5ba280-cc33-11ea-875e-0a785d95075f.png)
+

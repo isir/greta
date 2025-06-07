@@ -53,4 +53,3 @@ It is the result of different research projects conducted by Catherine Pelachaud
 For instructions on how to install/compile/use the project, please see [WIKI](https://github.com/gretaproject/greta/wiki)
 
 ![Greta logo](https://user-images.githubusercontent.com/54807091/88184824-7c5ba280-cc33-11ea-875e-0a785d95075f.png)
-

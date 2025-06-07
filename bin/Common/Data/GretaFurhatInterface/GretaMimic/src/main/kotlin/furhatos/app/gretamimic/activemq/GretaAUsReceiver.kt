@@ -37,14 +37,16 @@ class GretaAUsReceiver(private val brokerUrl: String, private val topicName: Str
                             receivedMessage = message.text
 
                             val auArray = treatMessage(receivedMessage)
-                            println("previous values == curr val ---> ${arraysAreEqual(auArray, previousValues)}")
+
+                            //println("previous values == curr val ---> ${arraysAreEqual(auArray, previousValues)}")
+
                             // Check if array has changed compared to previous values
                             if (!arraysAreEqual(auArray, previousValues)) {
                                 // Only update values if something has changed
                                 val auArrayNonNullValues = updateValues(auArray)
                                 frameNumber = frameNumber?.plus(1)
                                 //println("previous values == curr val ---> ${arraysAreEqual(auArray, previousValues)}")
-                                println("prev val: ${previousValues.contentToString()}")
+                                //println("prev val: ${previousValues.contentToString()}")
                                 // Invoke callback with updated values
                                 callback(auArrayNonNullValues, frameNumber)
                             }

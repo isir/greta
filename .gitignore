@@ -10,12 +10,12 @@
 
 **/.DS_Store
 
-bin/Common/Lib/Internal/*.jar
-bin/Common/Lib/Internal/**/*.jar
-bin/Common/Lib/Internal/*.TXT
+**/__pycache__/
+**/.idea
 
-bin/Common/Data/CereProc/*
+
 bin/Log/*
+bin/Capture_*
 
 bin/Player/Lib/External/Linux32/*.cfg
 bin/Player/Lib/External/Linux64/*.cfg
@@ -32,27 +32,38 @@ bin/fml_mistral_renew.xml
 bin/fml_to_bml.xml
 bin/fml_gpt3.xml
 bin/test_fml.xml
-
+bin/Common/Data/MODIFF/saved_model_NewmodelChunkd1000.pth
+bin/Common/Data/RealTimeMod/MODIFF/saved_model_NewmodelChunkd1000.pth
 bin/Modular.jar
 bin/ModularSave.xml
-
-bin/Common/Data/FMLAnnotator/Output/output.xml
-bin/Common/Lib/External/apache-activemq-5.15.14/data
 
 bin/NVBG/bin/orig_Release
 bin/NVBG/data/cache/brad_rachel_parse.txt
 bin/charniak/charniak-windows/DATA/FR_orig
 
-bin/Common/Data/ChatGPT/api_key.txt
-bin/Common/Data/LLM/Mistral/api_key.txt
-bin/Common/Data/LLM/MICounselor/api_key.txt
-bin/Common/Data/DeepASR/DeepGram/api_key.txt
+bin/Common/Lib/Internal/*.jar
+bin/Common/Lib/Internal/**/*.jar
+bin/Common/Lib/Internal/*.TXT
+
+bin/Common/Lib/External/apache-activemq-5.15.14/data
+
+bin/Common/Data/CereProc/*
+
+bin/Common/Data/**/api_key.txt
+bin/Common/Data/**/SPEECH_KEY.txt
+bin/Common/Data/**/SPEECH_REGION.txt
+
+bin/Common/Data/FMLAnnotator/Output/output.xml
 bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
 
-bin/Examples/NotNecessary
-/.idea
 bin/Common/Data/AzureTTS/SPEECH_KEY.txt
 bin/Common/Data/AzureTTS/SPEECH_REGION.txt
 bin/Common/Data/AzureTTS/output0.wav
 bin/Common/Data/AzureTTS/python_log.txt
 bin/Common/Data/AzureTTS/ssml0.txt
+bin/Common/Data/AzureTTS/python_log.txt
+
+bin/Common/Data/MICounselorRL/logs/log_*
+
+bin/Examples/NotNecessary
+backup

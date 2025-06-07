@@ -26,10 +26,10 @@ val Idle: State = state {
     val auReceiver = GretaAUsReceiver(brokerurl, auTopicName)
     val speechTextreceiver = GretaSpeechTextReceiver(brokerurl, speechTextTopicName)
 
-    val audioreceiver = AudioReceiver(brokerurl, "greta.furhat.Audio")
+    /*val audioreceiver = AudioReceiver(brokerurl, "greta.furhat.Audio")
     audioreceiver.filepath = "C:\\Users\\sanga\\Documents\\GitHub\\FurhatSkills\\GretaMimic\\src\\main\\resources\\"
     audioreceiver.audioFileName = "ingred_audio.wav"
-    audioreceiver.phonemeFileName = "greta_phone.pho"
+    audioreceiver.phonemeFileName = "greta_phone.pho"*/
 
     var gretaTextToSay = ""
 
@@ -50,7 +50,7 @@ val Idle: State = state {
 
         // Selects a female English voice, with a high pitch and 10% increase in speech rate.
         furhat.voice = PollyNeuralVoice.Camila()
-        furhat.voice = Voice(language = Language.FRENCH, pitch = "medium", rate = 1.1)
+        furhat.voice = Voice(language = Language.ENGLISH_GB, pitch = "medium", rate = 1.1)
 
 
         val rotationCallback: (Double?, Double?, Double?, Double?, String) -> Unit = { x, y, z, frameNum, event ->
@@ -64,7 +64,9 @@ val Idle: State = state {
         }
 
         val speechTextCallback: (String, String) -> Unit = { event, gretaText ->
-            //println("hello, $gretaText")
+
+            println("Received text, $gretaText")
+
             gretaTextToSay = gretaText
             myEventRaisingMethode(event)
 
@@ -84,7 +86,7 @@ val Idle: State = state {
         speechTextreceiver.start(speechTextCallback)
         rotationReceiver.start(rotationCallback)
         auReceiver.start(auCallback)
-        audioreceiver.start()
+        //audioreceiver.start()
     }
 
 

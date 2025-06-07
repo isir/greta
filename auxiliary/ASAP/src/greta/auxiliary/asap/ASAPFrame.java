@@ -10,6 +10,7 @@ import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
 import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
 import greta.core.animation.mpeg4.bap.BAPFramePerformer;
+import greta.core.keyframes.KeyframePerformer;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.keyframes.face.AUEmitter;
 import greta.core.keyframes.face.AUEmitterImpl;
@@ -34,16 +35,29 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import greta.core.feedbacks.Callback;
+import greta.core.feedbacks.CallbackEmitter;
+import greta.core.feedbacks.CallbackPerformer;
+import greta.core.behaviorrealizer.Realizer;
+import greta.auxiliary.incrementality.IncrementalRealizerV2;
+import greta.core.feedbacks.FeedbackPerformer;
+import greta.core.signals.SpeechSignal;
+import greta.core.util.CharacterDependent;
+import greta.core.util.CharacterManager;
+import greta.core.util.time.Temporizable;
+import greta.core.util.time.TimeMarker;
+
 
 /**
  *
  * @author Michele
  */
-public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrameEmitter{
+public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrameEmitter, CharacterDependent, FeedbackPerformer {
 
     /**
      * Creates new form ASAPFrame
      */
+    public CharacterManager cm;
     private Server server;
     private ArrayList<BAPFramePerformer> bap_perfomers = new ArrayList<>();
     private ArrayList<AUPerformer> au_perfomers = new ArrayList<>();
@@ -81,6 +95,9 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
     public ASAP asap_il;
     boolean isPerforming = false;
     double timeConstantFrame = 0.04;
+    //private IncrementalRealizerV2 parent;
+    private Realizer parent;
+    private Boolean IsRunning = Boolean.FALSE;
     
         private final static int MAX_AUS = 18;
     private final static List<String> expectedPreAUFeatures
@@ -120,6 +137,21 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
             bap_perfomers.remove(bapfp);
             bapFrameEmitterImpl.removeBAPFramePerformer(bapfp);
         }
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public CharacterManager getCharacterManager() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager cm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     
@@ -179,10 +211,11 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
         return auFeatureMasksMap.size()>MAX_AUS?MAX_AUS:auFeatureMasksMap.size();
     }
 
-    public ASAPFrame() {
+    public ASAPFrame(CharacterManager cm) {
         initComponents();
         server = new Server();
-
+        this.cm = cm;
+        cm.add(this);
     }
 
     /**
@@ -341,7 +374,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
 
         jLabel1.setText("Port");
 
-        port.setText("4444");
+        port.setText("4000");
         port.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 portActionPerformed(evt);
@@ -350,7 +383,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
 
         jLabel2.setText("Address");
 
-        address.setText("134.157.19.56");
+        address.setText("localhost");
         address.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addressActionPerformed(evt);
@@ -405,6 +438,11 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
         );
 
         perform.setText("Perform");
+        perform.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                performActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -441,7 +479,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -466,6 +504,9 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
         // TODO add your handling code here:
 
         if (connexion.isSelected()) {
+            
+            //parent = (IncrementalRealizerV2) cm.getCharacterDependentObject(IncrementalRealizerV2.class);
+            parent = (Realizer) cm.getCharacterDependentObject(Realizer.class);
 
             try {
                 server.setAddress(address.getText());
@@ -481,7 +522,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                             {
                                 String line2=server.receiveMessage();
                                 if(line2!=null && line2.length()>0)
-                                System.out.println("CLIENT:"+line2);
+                                //System.out.println("CLIENT:"+line2);
                                 loadASAP(line2);
                                 }
                                
@@ -517,40 +558,13 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
 
     }//GEN-LAST:event_connexionActionPerformed
 
+    private void performActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_performActionPerformed
+
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ASAPFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ASAPFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ASAPFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ASAPFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ASAPFrame().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.TextField address;
@@ -642,6 +656,8 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
             
             if (BLINK_AU.equals(key)) {
                 blink = aus[i];
+                //System.out.println(" DONNNEES RECU " + blink);
+                
             }
             ++i;
         }
@@ -675,6 +691,9 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
     }
       
       public int loadASAP(String line_data) {
+          
+        //System.out.println("ENTERED HERE !!!!!");
+         
         Logs.info(String.format(this.getClass().getSimpleName() + ".loadOpenFace(%s)",line_data));
        // System.out.println("line");
        
@@ -692,6 +711,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
         String line = "";
         String cvsSplitBy = ",";
 
+        
         double min_time = Double.MAX_VALUE;
         double max_time = 0.0;
         int cpt = 1;
@@ -719,7 +739,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                         col_blink = h;
                     }
 
-                    System.out.println("header[" + h + "] = " + value);
+                    //System.out.println("header[" + h + "] = " + value);
                 }
 
                     //check if read all the frames
@@ -728,7 +748,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                     String[] values = line_data.split(cvsSplitBy);
                     double time;
                     String val = values[0];
-                    System.out.println("time: " + val);
+                    //System.out.println("time: " + val);
                     time = Double.parseDouble(val);
 
                     list_val.add(time);
@@ -753,7 +773,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                                 String value = values[au + indice_intensity];
                                 if (isNumeric(value)) {
                                     double intensity = alpha * (Double.parseDouble(value) / 3.5) + (1 - alpha) * prev_value_au[au];
-                                    System.out.println("AU["+au_correspondance[au]+"]: "+intensity+ " cpt "+ cpt);
+                                    //System.out.println("AU["+au_correspondance[au]+"]: "+intensity+ " cpt "+ cpt);
                                     au_frame.setAUAPboth(au_correspondance[au], intensity);
                                     prev_value_au[au] = intensity;
                                 }
@@ -806,7 +826,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                         hmFrame.setDegreeValue(BAPType.vc3_torsion, rot_Y_deg);
                         hmFrame.setDegreeValue(BAPType.vc3_roll, rot_Z_deg);
 
-                        System.out.println("BAP["+time+"]: ["+rot_X_rad+"; "+rot_Y_rad+"; "+rot_Z_rad+"]");
+                        //System.out.println("BAP["+time+"]: ["+rot_X_rad+"; "+rot_Y_rad+"; "+rot_Z_rad+"]");
                         prev_rot_X = rot_X_deg;
                         prev_rot_Y = rot_Y_deg;
                         prev_rot_Z = rot_Z_deg;
@@ -985,6 +1005,8 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
         int length = (int) ((int) max_time - min_time);
         send(length);
 
+        
+        
         return length;
     }
     
@@ -993,13 +1015,25 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
 
         int timer = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
         Logs.debug("Send");
+        double absoluteStartTime = greta.core.util.time.Timer.getTime();
 
         for (AUAPFrame frame : au_frames) {
             int time_frame = timer + frame.getFrameNumber();
             //System.out.println("AUAPFrame: "+time_frame);
             frame.setFrameNumber(time_frame);
             for (AUPerformer performer : au_perfomers) {
+                // CHANGES OF NAZEH HERE ADD.ANIMATION into absolute time AFTER ADDING THE REALIZER VARIABLE THAT IS INITIALISED WHEN CALLING THE FML FILE READER to allow both AUperform and Fml Reading and synchronize them through absolute time
+                if (this.parent != null && this.IsRunning == Boolean.TRUE){
+                    performer.performAUAPFrame(frame, id);
+                    this.parent.addAnimation(id, absoluteStartTime, time_frame);
+                    //System.out.println(" LE ADD ANIMATION EST PASSEee 2");
+                }
+                else{
                 performer.performAUAPFrame(frame, id);
+                }
+                
+                // Parent 
+                
             }
         }
         //performBAPFrames(bap_frames, id);
@@ -1013,18 +1047,65 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
 
         int p = 0;
         for (BAPFramePerformer performer : bap_perfomers) {
-            System.out.println("[INFO]:greta.auxiliary.asap.AUParserFilesReader.send()");
+            //System.out.println("[INFO]:greta.auxiliary.asap.AUParserFilesReader.send()");
             performer.performBAPFrames(curr_bap_frames, id);
         }
         bapFrameEmitterImpl.sendBAPFrames(id, curr_bap_frames);
 
-        System.out.println("--Post BAP");
+        //System.out.println("--Post BAP");
 
         isPerforming = true;
     }
     
         public boolean isNumeric(String s) {
         return s.matches("[-+ ]?\\d*\\.?\\d+");
+    }
+        
+           public void performFeedback(ID AnimId, String type, SpeechSignal speechSignal, TimeMarker tm){
+    performFeedback(type);
+   };
+
+   public void performFeedback(ID AnimId, String type, List<Temporizable> listTmp){
+       performFeedback(type);
+   };
+
+   public void performFeedback(Callback callback){
+   performFeedback(callback.type());
+};
+   public void setDetailsOption(boolean detailed){
+       
+   };
+
+   public boolean areDetailedFeedbacks(){
+     return true  ;
+   };
+
+   public void setDetailsOnFace(boolean detailsOnFace){
+     
+   };
+
+   public boolean areDetailsOnFace(){
+       return false;  
+   };
+
+   public void setDetailsOnGestures(boolean detailsOnGestures){
+       
+   };
+
+   public boolean areDetailsOnGestures(){
+       return false;  
+   };
+   
+   public void performFeedback(String type){
+       
+        if (type == "end"){
+            this.IsRunning = Boolean.FALSE;
+            
+            }
+        if (type == "start"){
+            this.IsRunning = Boolean.TRUE;
+                 }
+
     }
 
 }

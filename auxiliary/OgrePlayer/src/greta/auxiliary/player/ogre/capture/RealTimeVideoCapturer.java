@@ -41,6 +41,8 @@ public class RealTimeVideoCapturer implements Runnable, Capturer {
     private boolean alreadyStarted;
     private CaptureListenerListManager captureListeners;
     private String currentId;
+    
+    private boolean useFixedIndex;
 
     public RealTimeVideoCapturer() {
         this(null, null);
@@ -67,15 +69,15 @@ public class RealTimeVideoCapturer implements Runnable, Capturer {
             captureListeners.notifyCaptureStarted(this, startTime);
             capturable.prepareCapture();
             captureOutput.begin(capturable.getCaptureWidth(), capturable.getCaptureHeight(), startTime, currentId);
-            greta.core.util.audio.Mixer.requestNotBlocking();
-            capturable.getCamera().getMic().addAudioOutput(audioOutput);
+            //greta.core.util.audio.Mixer.requestNotBlocking();
+            //capturable.getCamera().getMic().addAudioOutput(audioOutput);
         }
         while (!stop && !capturable.isSizeChanged()) {
             synchronized (capturable) {
                 long currentTime = Timer.getTimeMillis();
                 byte[] image = capturable.getCaptureData();
                 flushAudiTo(currentTime);
-                captureOutput.newFrame(image, currentTime);
+                captureOutput.newFrame(image, currentTime, useFixedIndex);
                 flushAudio();
                 captureListeners.notifyCaptureNewFrame(this, currentTime);
                 try {
@@ -84,21 +86,24 @@ public class RealTimeVideoCapturer implements Runnable, Capturer {
                 }
             }
         }
-        capturable.getCamera().getMic().removeAudioOutput(audioOutput);
+        //capturable.getCamera().getMic().removeAudioOutput(audioOutput);
         greta.core.util.audio.Mixer.releaseNotBlocking();
         flushAudio();
         captureOutput.end();
+        capturable.getCamera().getMic().startPlaying();
         captureListeners.notifyCaptureEnded(this, Timer.getTimeMillis());
         alreadyStarted = false;
         System.gc();
     }
 
     @Override
-    public void startCapture(String id) {
+    public void startCapture(String id, boolean useFixedIndexLocal) {
+        useFixedIndex = useFixedIndexLocal;
         if (!alreadyStarted && capturable != null && captureOutput != null) {
             alreadyStarted = true;
             stop = false;
             currentId = id;
+//            captureOutput.setBaseFileName(currentId);
             new Thread(() -> {
             startServer(); // This will start the server and wait for a client connection to send the boolean
                 }).start();
@@ -174,15 +179,16 @@ public class RealTimeVideoCapturer implements Runnable, Capturer {
     }
     
     public void startServer() {
-    try (ServerSocket serverSocket = new ServerSocket(12345)) {
-        System.out.println("Server started, waiting for connections...");
-        try (Socket clientSocket = serverSocket.accept();
-             DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream())) {
-            System.out.println("Client connected, sending boolean...");
-            out.writeBoolean(true); // Assuming you're sending true; adjust as needed
+        
+        try (ServerSocket serverSocket = new ServerSocket(12345)) {
+            System.out.println("Server started, waiting for connections...");
+            try (Socket clientSocket = serverSocket.accept();
+                 DataOutputStream out = new DataOutputStream(clientSocket.getOutputStream())) {
+                System.out.println("Client connected, sending boolean...");
+                out.writeBoolean(true); // Assuming you're sending true; adjust as needed
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-    } catch (IOException e) {
-        e.printStackTrace();
     }
-}
 }

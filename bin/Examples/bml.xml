@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml>
+
+	<bml>
+            
+            <shoulder id="sh1" start="1.0" end="3.0" lexeme="up" side="both" amount="1"/>
+
+	</bml>
+
+	<fml>
+
+	</fml>
+
+</fml-apml>
+
+

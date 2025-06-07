@@ -19,9 +19,12 @@ import java.util.List;
  */
 
 public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackPerformer {
+
     private String feedback_bat_path = "";
     private Process server_process;
-        
+
+    private String batch_main_path = "Common\\Data\\TurnManagement\\run_turnManager_vap_audio.bat";
+    
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private TurnManagement turnManager;
     
@@ -35,7 +38,7 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
     public TurnManagementFrame() throws IOException {
         initComponents();
         System.out.println("greta.auxiliary.TurnManagement.TurnManagementFrame()");
-        turnManager = new TurnManagement(cm);
+        turnManager = new TurnManagement(cm, batch_main_path);
     }
 
     /**

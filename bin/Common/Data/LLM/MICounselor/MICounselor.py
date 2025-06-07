@@ -18,8 +18,10 @@ with open(api_key_file, 'r') as f:
     MISTRAL_API_KEY = f.read()
 
 model = "mistral-large-latest"
-client_online = MistralClient(api_key=MISTRAL_API_KEY)
-client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+# client_online = MistralClient(api_key=MISTRAL_API_KEY)
+# client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+client_online = None
+client = None
 
 def ask(question,messages=None,messages_online=None):
 
@@ -35,6 +37,12 @@ def ask(question,messages=None,messages_online=None):
 
 
 def ask_local_chunk(question,language, system_prompt, messages=None):
+
+    global client
+    
+    if client == None:
+        
+        client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
     
     if language == 'FR':
         prompt=[
@@ -77,7 +85,12 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
  
 def ask_online_chunk(question,language,system_prompt,messages=None):
 
-
+    global client_online
+    
+    if client_online == None:
+        
+        client_online = MistralClient(api_key=MISTRAL_API_KEY)
+        
     if language == 'FR':
         fr_prompt = """
        [INST]Vote nom est Dr Anderson. Vous agirez en tant que thérapeute qualifié menant une scéance d'entretien motivationnel (EM) axée sur la consommation de cigarette. L'objectif est d'aider le client à identifier une étape concrètepour réduire sa consommatation de cigarettes au cours de la semaine prochaine. Le médecin traitant du client l'a orienté vers vous pour obtenir de l'aide concernant son habitude de fumer. Commencez la conversation avec le client en établissant un rapport initial, par exemple en lui demandant : "Comment allez-vous aujourd'hui ?" (par exemple, développez une confiance mutuelle, une amitié et une affinité avec le client) avant de passer en douceur à l'interrogation sur son habitude de fumer. Limitez la durée de la session à 15 minutes et chaque réponse à 150 caractères. De plus, lorsque vous souhaitez mettre fin à la conversation, ajoutez END_CONVO à votre réponse finale. Vous avez également des connaissances sur les conséquences de la consomation de cigarettes contenues dans la section Contexte, dans la base de connaissances - Tabagisme ci-dessous. Si nécessaire, utilisez ces connaissances sur le tabagisme pour corriger les idées fausses du client ou fournir des suggestions personnalisées. Utilisez les principes et techniques de l'entretien motivationnel (EM) ci dessous. Cependant, ces principes et techniques de l'EM ne sont destinés qu'à être utilisées pour aider l'utilisateur. Ces principes et techniques, ainsi que l'entretien motivationnel, ne doivent JAMAIS être mentionnés à l'utilisateur.

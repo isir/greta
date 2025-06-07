@@ -27,6 +27,7 @@ import greta.core.util.CharacterManager;
 import greta.core.util.Constants;
 import greta.core.util.id.ID;
 import greta.core.util.time.Timer;
+import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -36,6 +37,7 @@ import java.util.Map;
 /**
  *
  * @author Andre-Marie Pez
+ * @author Takeshi Saga (bug fix, frame flickering problem)
  */
 public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFramePerformer {
 
@@ -57,6 +59,8 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
      */
     private FAPFramePerformer lipReceiver;
     private Blender blender;
+    
+    private int frameNumberProbe = 0;
 
     public LipBlender (CharacterManager cm) {
         this.characterManager = cm;
@@ -82,21 +86,50 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
         blender.setDaemon(true);
         startBlending();
     }
+    
+    private class Blender extends Thread {
+        boolean end = false;
 
+        @Override
+        public void run() {
+            while(!end){
+
+                    //
+                    //synchronized (this) {
+                    //    computeAndSend();
+                    //    popLatestFrame();
+                    //}
+                    //
+                    // CHECK Blender() in FaceBlender for tech note for this modification
+                    //
+
+
+                    frameByFrame();
+
+                    try { sleep(10); } catch (Throwable t) {}
+                    
+            }
+        }
+    }
+    
     private void startBlending(){
         blender.start();
     }
 
     @Override
-    public synchronized void performFAPFrames(List<FAPFrame> fap_animation, ID requestId) {
-        for(FAPFrame frame : fap_animation) {
-            faceAnimation.add(new FAPIDPair(requestId,frame));
+    public void performFAPFrames(List<FAPFrame> fap_animation, ID requestId) {
+        synchronized (LipBlender.this) {
+            for(FAPFrame frame : fap_animation) {
+                faceAnimation.add(new FAPIDPair(requestId,frame));
+            }
         }
     }
 
     @Override
-    public synchronized void performFAPFrame(FAPFrame fap_anim, ID requestId) {
-        faceAnimation.add(new FAPIDPair(requestId,fap_anim));
+    public void performFAPFrame(FAPFrame fap_anim, ID requestId) {
+        synchronized (LipBlender.this) {
+            faceAnimation.add(new FAPIDPair(requestId,fap_anim));        
+        }
     }
 
     @Override
@@ -105,6 +138,12 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
         cancelFramesWithIDInLinkedPerformers(requestId);
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        blender.end = false;
+        super.finalize();
+    }
+    
     private void computeAndSend(){
         Map<ID, List<FAPFrame>> blendedFapFramesWithId = new HashMap<>();
         int faceAnimationIndex = 0;
@@ -152,27 +191,110 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
         }
     }
 
-    public void setLipSource(FAPFrameEmitter lipSource){
-        lipSource.addFAPFramePerformer(lipReceiver);
-    }
+    private void frameByFrame(){
+        FAPIDPair faceAnimationPair;
+        FAPIDPair lipAnimationPair;
 
-    public void dettachLipSource(FAPFrameEmitter lipSource){
-        lipSource.removeFAPFramePerformer(lipReceiver);
-    }
+        // Not work
+        // int faceFrameNb;
+        //int lipFrameNb;
 
-    private void addValueFrom(int fapIndex, FAPFrame target, FAPFrame source){
-//        target.applyValue(fapIndex, target.getValue(fapIndex) + source.getValue(fapIndex));  
-        
-        target.applyValue(fapIndex, ( 7/6 * target.getValue(fapIndex) + source.getValue(fapIndex))/2);
-    }
+        // Work
+        int faceFrameNb = 0;
+        int lipFrameNb = 0;
 
-    private void blendValueFrom(int fapIndex, FAPFrame target, FAPFrame source) {
-        double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000; //BLEND COEF VALUE IS 0.5
-        //target.applyValue(fapIndex, (int) (target.getValue(fapIndex)*(1-blendCoef) + source.getValue(fapIndex)*(blendCoef)));
-        target.applyValue(fapIndex, (int) ( ( 7/6 * target.getValue(fapIndex)+ source.getValue(fapIndex))/2));
-        
-    }
+        long duration;
+        while (!faceAnimation.isEmpty() || !lipAnimation.isEmpty()) {
+            synchronized (LipBlender.this) {
 
+                duration = Timer.getTimeMillis();
+ 
+                if (!faceAnimation.isEmpty() && !lipAnimation.isEmpty()) {
+                    
+                    faceAnimationPair = faceAnimation.get(0);
+                    lipAnimationPair = lipAnimation.get(0);
+                    faceFrameNb = faceAnimationPair.frame.getFrameNumber();
+                    lipFrameNb = lipAnimationPair.frame.getFrameNumber();
+
+                    if (faceFrameNb < lipFrameNb) {
+                        
+//                        if (faceFrameNb < Timer.getTime()*Constants.FRAME_PER_SECOND) {
+                            sendFAPFrame(faceAnimationPair.animId, faceAnimationPair.frame);                        
+//                        }
+                        faceAnimation.remove(0);
+
+                    } else if (faceFrameNb == lipFrameNb) {
+                        
+//                        if (faceFrameNb < Timer.getTime()*Constants.FRAME_PER_SECOND) {
+                            sendFAPFrame(faceAnimationPair.animId, blend(faceAnimationPair.frame, lipAnimationPair.frame));                        
+//                        }
+                        faceAnimation.remove(0);
+                        lipAnimation.remove(0);
+
+                    } else if (faceFrameNb > lipFrameNb) {
+                        
+//                        if (lipFrameNb < Timer.getTime()*Constants.FRAME_PER_SECOND) {
+                            sendFAPFrame(lipAnimationPair.animId, lipAnimationPair.frame);
+//                        }
+                        lipAnimation.remove(0);
+
+                    } else {
+
+                        System.out.println("[LipBlender] blend frame index match: something wrong...");
+
+                    }
+ 
+                } else if (!faceAnimation.isEmpty()) {
+                    
+                    faceAnimationPair = faceAnimation.get(0);
+//                    if (faceAnimationPair.frame.getFrameNumber() < Timer.getTime()*Constants.FRAME_PER_SECOND) {
+                        sendFAPFrame(faceAnimationPair.animId, faceAnimationPair.frame);
+//                    }
+                    faceAnimation.remove(0);                        
+ 
+                } else if (!lipAnimation.isEmpty()) {
+ 
+                    lipAnimationPair = lipAnimation.get(0);
+//                    if (lipAnimationPair.frame.getFrameNumber() < Timer.getTime()*Constants.FRAME_PER_SECOND) {
+                        sendFAPFrame(lipAnimationPair.animId, lipAnimationPair.frame);
+//                    }
+                    lipAnimation.remove(0);
+ 
+                }
+                
+                duration = Timer.getTimeMillis() - duration;
+                //System.out.println("[LipBlender] duration - " + duration + "/ faceFrameNb - " + faceFrameNb + " / lipFrameNb - " + lipFrameNb);
+                
+//                try { sleep((int) 1 / Constants.FRAME_PER_SECOND * 1000);} catch (Throwable t) {}
+                
+                
+                
+//                FAPIDPair faceAnimationPair = faceAnimation.get(faceAnimationIndex);
+//                int faceFrameNb = faceAnimationPair.frame.getFrameNumber();
+//                FAPIDPair lipAnimationPair = lipAnimation.get(lipAnimationIndex);
+//                int lipFrameNb = lipAnimationPair.frame.getFrameNumber();
+//                if (faceFrameNb < lipFrameNb){
+//                    ++faceAnimationIndex;
+//                } else if (faceFrameNb > lipFrameNb){
+//                    ++lipAnimationIndex;
+//                } else {
+//                    // We choose to consider face movement more important than lip movement.
+//                    // If IDs are equal, the common id is used, otherwise the face id is used : the face id is always used.
+//                    if (!blendedFapFramesWithId.containsKey(faceAnimationPair.animId)) {
+//                        blendedFapFramesWithId.put(faceAnimationPair.animId, new ArrayList<>());
+//                    }
+//                    blendedFapFramesWithId.get(faceAnimationPair.animId).add(blend(faceAnimationPair.frame, lipAnimationPair.frame));
+//                    faceAnimation.remove(faceAnimationIndex);
+//                    lipAnimation.remove(lipAnimationIndex);
+//                }
+ 
+            }
+        }
+//        for (Map.Entry<ID, List<FAPFrame>> idWithCorrespondingFrames : blendedFapFramesWithId.entrySet()) {
+//            sendFAPFrames(idWithCorrespondingFrames.getKey(), idWithCorrespondingFrames.getValue());
+//        }
+    }
+    
     private FAPFrame blend(FAPFrame face, FAPFrame lip){
         FAPFrame blended = new FAPFrame(face);
         
@@ -230,30 +352,27 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
         return blended;
     }
 
-    private class Blender extends Thread {
-        boolean end = false;
-
-        @Override
-        public void run() {
-            while(!end){
-                
-                synchronized (this) {
-
-                    popLatestFrame();
-                    computeAndSend();
-                    try { sleep(10); } catch (Throwable t) {}
-                    
-                }
-            }
-        }
+    private void addValueFrom(int fapIndex, FAPFrame target, FAPFrame source){
+//        target.applyValue(fapIndex, target.getValue(fapIndex) + source.getValue(fapIndex));  
+        
+        target.applyValue(fapIndex, ( 7/6 * target.getValue(fapIndex) + source.getValue(fapIndex))/2);
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        blender.end = false;
-        super.finalize();
+    private void blendValueFrom(int fapIndex, FAPFrame target, FAPFrame source) {
+        double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000; //BLEND COEF VALUE IS 0.5
+        //target.applyValue(fapIndex, (int) (target.getValue(fapIndex)*(1-blendCoef) + source.getValue(fapIndex)*(blendCoef)));
+        target.applyValue(fapIndex, (int) ( ( 7/6 * target.getValue(fapIndex)+ source.getValue(fapIndex))/2));
+        
     }
 
+    public void setLipSource(FAPFrameEmitter lipSource){
+        lipSource.addFAPFramePerformer(lipReceiver);
+    }
+
+    public void dettachLipSource(FAPFrameEmitter lipSource){
+        lipSource.removeFAPFramePerformer(lipReceiver);
+    }
+    
     private class FAPIDPair {
         ID animId;
         FAPFrame frame;

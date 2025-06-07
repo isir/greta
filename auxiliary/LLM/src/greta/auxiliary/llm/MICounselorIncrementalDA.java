@@ -473,12 +473,15 @@ public class MICounselorIncrementalDA extends LLMFrame{
                                             else{
 
                                                 System.out.println("TEXTE:"+s);
+                                                String file=TextToFML(s, false);
+                                                load(file, CompositionType.append, true, false);
+                                            }
                                                 
-                                                if (s.contains("END_CONVO")) {
+                                                /*if (s.contains("END_CONVO")) {
                                                     
                                                     s = s.replace("END_CONVO", "");
                                                     String file=TextToFML(s, false);
-                                                    s=null;                                            
+                                                    //s=null;                                            
                                                     load(file, CompositionType.append, true, false);
 
                                                     // String finalSentence = "This is the end of the session, see you later.";
@@ -488,10 +491,41 @@ public class MICounselorIncrementalDA extends LLMFrame{
                                                 } else {
                                                     String file=TextToFML(s, false);
                                                     load(file, CompositionType.append, true, false);
-                                                }
+                                                }*/
                                                 
-                                            }
+                                    
+                                        }else{
+                                             System.out.println("LE MESSAGE EST EMPTY*******************************************");
+                                             AnswerText.setText("");
+        Thread r1 = new Thread() {
+            @Override
+            public void run() {
+                
+                String text=request.getText();
+                String language= cm.getLanguage();
+                String model= (String) modelBox.getSelectedItem();
+                String systemPromptText = systemPrompt.getText();
+                System.out.println("Language selected : "+language);
+                
+                synchronized (lock) {
+                    IsStreaming = Boolean.TRUE;                    
+                }
+                
+                if(text.length()>0) {
 
+                    try {
+                        server.sendMessage(model+"#SEP#"+language+"#SEP#"+text+"#SEP#"+systemPromptText);
+                        System.out.println("Sent message:"+text);
+                    } catch (IOException ex) {
+                        Logger.getLogger(MICounselorIncremental.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                }
+
+            }
+        };
+
+        r1.start();    
                                         }
 
                                     }                                        

@@ -68,6 +68,7 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
     protected Socket soc;
 //    protected String answ;
     protected ArrayList<LLMFrame> llms = new ArrayList<LLMFrame>();
+    protected ArrayList<ASRReceiver> receivers = new ArrayList<ASRReceiver>();
     
     protected volatile Boolean IsListenning = Boolean.FALSE;
     
@@ -156,6 +157,14 @@ public class DeepASRFrame extends javax.swing.JFrame implements FeedbackPerforme
 
     public void removeLLMFrame(LLMFrame llm) {
         llms.remove(llm);
+    }
+
+    public void addASRReceiver(ASRReceiver receiver) {
+        receivers.add(receiver);
+    }
+
+    public void removeASRReceiver(ASRReceiver receiver) {
+        receivers.remove(receiver);
     }
     
     private void portActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_portActionPerformed

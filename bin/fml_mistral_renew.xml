@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
 <fml-apml>
 <bml>
 <speech id="s1" language="english" start="0.0" text="" type="SAPI4" voice="marytts">
@@ -6,18 +6,52 @@
 <reference>tmp/from-fml-apml.pho</reference>
 </description>
 <tm id="tm1"/>I
-<tm id="tm2"/>can
-<tm id="tm3"/>answer
-<tm id="tm4"/>questions,
-<tm id="tm5"/>help
-<tm id="tm6"/>with
-<tm id="tm7"/>tasks,
-<tm id="tm8"/>and
-<tm id="tm9"/>chat
-<tm id="tm10"/>with
-<tm id="tm11"/>you!
-<tm id="tm12"/>
-<boundary end="s1:tm12" id="b1" start="s1:tm1" type="LL"/>
+<tm id="tm2"/>see.
+<tm id="tm3"/>What
+<tm id="tm4"/>kind
+<tm id="tm5"/>of
+<tm id="tm6"/>bad
+<tm id="tm7"/>things?
+<tm id="tm8"/>How
+<tm id="tm9"/>does
+<tm id="tm10"/>alcohol
+<tm id="tm11"/>help
+<tm id="tm12"/>you
+<tm id="tm13"/>cope
+<tm id="tm14"/>with
+<tm id="tm15"/>them?
+<tm id="tm16"/>Do
+<tm id="tm17"/>you
+<tm id="tm18"/>find
+<tm id="tm19"/>that
+<tm id="tm20"/>alcohol
+<tm id="tm21"/>helps
+<tm id="tm22"/>with
+<tm id="tm23"/>these
+<tm id="tm24"/>emotions,
+<tm id="tm25"/>or
+<tm id="tm26"/>perhaps
+<tm id="tm27"/>makes
+<tm id="tm28"/>them
+<tm id="tm29"/>more
+<tm id="tm30"/>intense
+<tm id="tm31"/>in
+<tm id="tm32"/>the
+<tm id="tm33"/>end?
+<tm id="tm34"/>If
+<tm id="tm35"/>so,
+<tm id="tm36"/>what
+<tm id="tm37"/>kinds
+<tm id="tm38"/>of
+<tm id="tm39"/>things
+<tm id="tm40"/>does
+<tm id="tm41"/>it
+<tm id="tm42"/>bring
+<tm id="tm43"/>to
+<tm id="tm44"/>the
+<tm id="tm45"/>forefront?
+<tm id="tm46"/>
+<boundary end="s1:tm46" id="b1" start="s1:tm1" type="LL"/>
 </speech>
 </bml>
 <fml>

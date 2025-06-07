@@ -79,6 +79,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.OutputStreamWriter;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.sound.sampled.AudioFormat;
 
@@ -370,7 +373,7 @@ public class AzureTTS extends CharacterDependentAdapter implements TTS {
 //                    StringBuilder builder = new StringBuilder();
                     String line = null;
                     while ( (line = reader.readLine()) != null) {
-                            System.out.println("greta.auxiliary.tts.azuretts.AzureTTS.compute: output from python: " + line);
+                            System.out.println("greta.auxiliary.tts.azuretts.AzureTTS.compute(): output from python: " + line);
                             unprocessedEventsBuffer.add(line);
                     }
 //                    String result = builder.toString();                    
@@ -399,7 +402,7 @@ public class AzureTTS extends CharacterDependentAdapter implements TTS {
                 
                 for (String eventBuffer : unprocessedEventsBuffer) {
                     
-//                    System.out.println("greta.auxiliary.tts.azuretts.AzureTTS.compute: eventBuffer: " + eventBuffer);
+                    System.out.println("greta.auxiliary.tts.azuretts.AzureTTS.compute: eventBuffer: " + eventBuffer);
 
                     // The eventCereProcBuffer is a sting in the form "start time/end time/time marker name"
                     // The time marker name can start with:
@@ -524,49 +527,91 @@ public class AzureTTS extends CharacterDependentAdapter implements TTS {
         ArrayList<String> tmpVisemes = new ArrayList<>();
         ArrayList<String> tmpBookmarks = new ArrayList<>();
         
-        String line;
+        // V1: START /////////////////////////////////////////////////////////////////////////////////////////////////////
+
+//        String line;
+//        for (int index = 0; index < unprocessedEventsBuffer.size(); index++) {
+//            line = unprocessedEventsBuffer.get(index);
+//            if (line.contains("viseme")) {
+//                tmpVisemes.add(line);
+//            }
+//            else if (line.contains("bookmark")) {
+//                tmpBookmarks.add(line);
+//            }
+//        }
+//
+//        for (int index = 0; index < tmpVisemes.size(); index++) {
+//            line = tmpVisemes.get(index);
+//            String[] tmp = line.split(" ");
+//            double offset = Double.parseDouble(tmp[1]) / 1000.0;
+//            if (tmpVisemes.size() == (index+1)) {
+////                System.out.println("greta.auxiliary.tts.azuretts.AzureTTS.compute: offset: " + offset);
+////                System.out.println("greta.auxiliary.tts.azuretts.AzureTTS.compute: audio duration: " + audio.getDurationMillis());
+//                output.add(offset + " " + audio.getDuration() + " viseme" + tmp[2]);
+//            }
+//            else {
+//                String[] tmp2 = tmpVisemes.get(index+1).split(" ");
+//                double nextOffset = Double.parseDouble(tmp2[1]) / 1000.0;
+//                output.add(offset + " " + nextOffset + " viseme" + tmp[2]);
+//            }
+//        }
+//        
+//        for (int index = 0; index < tmpBookmarks.size(); index++) {
+//            line = tmpBookmarks.get(index);
+//            String[] tmp = line.split(" ");
+//            double offset = Double.parseDouble(tmp[2]) / 1000.0;
+//            output.add(offset + " " + 0.0 + " bookmark");
+//        }
+        // V1: END /////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        // V2: START /////////////////////////////////////////////////////////////////////////////////////////////////////
+        
+        String srcLine;
+        double offset = 9.9;
+        
         for (int index = 0; index < unprocessedEventsBuffer.size(); index++) {
-            line = unprocessedEventsBuffer.get(index);
-            if (line.contains("viseme")) {
-                tmpVisemes.add(line);
-//                String[] tmp = line.split(" ");
-//                double offset = Double.parseDouble(tmp[1]);
-//                if (unprocessedEventsBuffer.size() == (index+1)) {
-//                    output.add("viseme " + offset + " " + audio.getDurationMillis());
-//                }
-//                else {
-//                    String[] tmp2 = unprocessedEventsBuffer.get(index+1).split(" ");
-//                    double nextOffset = Double.parseDouble(tmp2[1])
-//                    output.add("viseme " + offset + " " + );
-//                }
+            srcLine = unprocessedEventsBuffer.get(index);
+            if (srcLine.contains("viseme")) {
+                String[] tmp = srcLine.split(" ");
+                offset = Double.parseDouble(tmp[1]) / 1000.0;
+                output.add(offset + " " + 0.0 + " viseme" + tmp[2]);
             }
-            else if (line.contains("bookmark")) {
-                tmpBookmarks.add(line);
+            else if (srcLine.contains("bookmark")) {
+                String[] tmp = srcLine.split(" ");
+                offset = Double.parseDouble(tmp[2]) / 1000.0;
+                output.add(offset + " " + 0.0 + " bookmark");
             }
         }
 
-        for (int index = 0; index < tmpVisemes.size(); index++) {
-            line = tmpVisemes.get(index);
-            String[] tmp = line.split(" ");
-            double offset = Double.parseDouble(tmp[1]) / 1000.0;
-            if (tmpVisemes.size() == (index+1)) {
-//                System.out.println("greta.auxiliary.tts.azuretts.AzureTTS.compute: offset: " + offset);
-//                System.out.println("greta.auxiliary.tts.azuretts.AzureTTS.compute: audio duration: " + audio.getDurationMillis());
-                output.add(offset + " " + audio.getDuration() + " viseme" + tmp[2]);
-            }
-            else {
-                String[] tmp2 = tmpVisemes.get(index+1).split(" ");
-                double nextOffset = Double.parseDouble(tmp2[1]) / 1000.0;
-                output.add(offset + " " + nextOffset + " viseme" + tmp[2]);
+        output.sort((s1, s2) -> Double.compare(Double.parseDouble(s1.split(" ")[0]), Double.parseDouble(s2.split(" ")[0])));
+        
+        for (int srcIndex = 0; srcIndex < output.size(); srcIndex++) {
+            srcLine = output.get(srcIndex);
+            if (srcLine.contains("viseme")) {
+                String[] srcTmp = srcLine.split(" ");
+                boolean found = false;
+                for (int tgtIndex = srcIndex+1; tgtIndex < output.size(); tgtIndex++) {
+                    String nextLine = output.get(tgtIndex);
+                    if (nextLine.contains("viseme")) {
+                        String[] tgtTmp = nextLine.split(" ");
+                        output.set(srcIndex, srcTmp[0] + " " + tgtTmp[0] + " " + srcTmp[2]);
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    output.set(srcIndex, srcTmp[0] + " " + audio.getDuration() + " " + srcTmp[2]);
+                }
             }
         }
         
-        for (int index = 0; index < tmpBookmarks.size(); index++) {
-            line = tmpBookmarks.get(index);
-            String[] tmp = line.split(" ");
-            double offset = Double.parseDouble(tmp[2]) / 1000.0;
-            output.add(offset + " " + 0.0 + " bookmark");
-        }
+        // add final bookmark
+        output.add(audio.getDuration() + " " + 0.0 + " bookmark");
+        
+        // Collections.sort(output);
+        output.sort((s1, s2) -> Double.compare(Double.parseDouble(s1.split(" ")[0]), Double.parseDouble(s2.split(" ")[0])));
+
+        // V2: END /////////////////////////////////////////////////////////////////////////////////////////////////////
         
         return output;
     }
@@ -583,7 +628,7 @@ public class AzureTTS extends CharacterDependentAdapter implements TTS {
         
         PhonemeType[] output = new PhonemeType[]{phonemeType};
         
-        System.out.format("greta.auxiliary.tts.azuretts.AzureTTS.convertViseme2phoneme(): from %s to %s(%s)%n",input,IPAPhoneme,phonemeType);
+        // System.out.format("greta.auxiliary.tts.azuretts.AzureTTS.convertViseme2phoneme(): from %s to %s(%s)%n",input,IPAPhoneme,phonemeType);
         
         return output;
         

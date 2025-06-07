@@ -27,6 +27,7 @@ import greta.core.util.CharacterManager;
 import greta.core.util.Constants;
 import greta.core.util.id.ID;
 import greta.core.util.time.Timer;
+import static java.lang.Thread.sleep;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -36,6 +37,7 @@ import java.util.Map;
 /**
  *
  * @author Andre-Marie Pez
+ * @author Takeshi Saga (bug fix, frame flickering problem)
  */
 public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFramePerformer {
 
@@ -83,20 +85,55 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
         startBlending();
     }
 
+    private class Blender extends Thread {
+        boolean end = false;
+
+        @Override
+        public void run() {
+            while(!end){
+                
+                    //
+                    //synchronized (this) {
+                    //    computeAndSend();
+                    //    popLatestFrame();
+                    //    try { sleep(10); } catch (Throwable t) {}                    
+                    //}
+                    //
+                    ////////////////
+                    // Why this (computeAndSend, popLatestFrame) caused lip/face flickering?
+                    ////////////////
+                    // Because this loop alows registration of new frames to face1Animation only at the transition between computeAndSend() and popLatestFrameInList(),
+                    // those functions block the registration while running.
+                    // In fact, this caused hugely delayed frame execution.
+                    //
+                    
+                    frameByFrame();
+
+                    try { sleep(10); } catch (Throwable t) {}
+                    
+//                }
+            }
+        }
+    }    
+    
     private void startBlending(){
         blender.start();
     }
 
     @Override
-    public synchronized void performFAPFrames(List<FAPFrame> fap_animation, ID requestId) {
-        for(FAPFrame frame : fap_animation) {
-            face1Animation.add(new FAPIDPair(requestId,frame));
+    public void performFAPFrames(List<FAPFrame> fap_animation, ID requestId) {
+        synchronized (FaceBlender.this) {
+            for(FAPFrame frame : fap_animation) {
+                face1Animation.add(new FAPIDPair(requestId,frame));
+            }            
         }
     }
 
     @Override
-    public synchronized void performFAPFrame(FAPFrame fap_anim, ID requestId) {
-        face1Animation.add(new FAPIDPair(requestId,fap_anim));
+    public void performFAPFrame(FAPFrame fap_anim, ID requestId) {
+        synchronized (FaceBlender.this) {
+            face1Animation.add(new FAPIDPair(requestId,fap_anim));
+        }
     }
 
     @Override
@@ -105,6 +142,12 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
         cancelFramesWithIDInLinkedPerformers(requestId);
     }
 
+    @Override
+    protected void finalize() throws Throwable {
+        blender.end = false;
+        super.finalize();
+    }
+    
     private void computeAndSend(){
         Map<ID, List<FAPFrame>> blendedFapFramesWithId = new HashMap<>();
         int face1AnimationIndex = 0;
@@ -152,27 +195,90 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
         }
     }
 
-    public void setFace2Source(FAPFrameEmitter face2Source){
-        face2Source.addFAPFramePerformer(face2Receiver);
-    }
-
-    public void dettachFace2Source(FAPFrameEmitter face2Source){
-        face2Source.removeFAPFramePerformer(face2Receiver);
-    }
-
-    private void addValueFrom(int fapIndex, FAPFrame target, FAPFrame source){
-//        target.applyValue(fapIndex, target.getValue(fapIndex) + source.getValue(fapIndex));  
+    private void frameByFrame(){
         
-        target.applyValue(fapIndex, ( 7/6 * target.getValue(fapIndex) + source.getValue(fapIndex))/2);
-        System.out.println(" IT WORKED aaaaaaaa!!dfsfsfd!!!!!!!!!");
-    }
+        FAPIDPair face1AnimationPair;
+        FAPIDPair face2AnimationPair;
 
-    private void blendValueFrom(int fapIndex, FAPFrame target, FAPFrame source) {
-        // double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000; //BLEND COEF VALUE IS 0.5
-        double blendCoef = 0.5; //BLEND COEF VALUE IS 0.5
-        target.applyValue(fapIndex, (int) (target.getValue(fapIndex)*(1-blendCoef) + source.getValue(fapIndex)*(blendCoef)));
-        //target.applyValue(fapIndex, (int) ( ( 7/6 * target.getValue(fapIndex)+ source.getValue(fapIndex))/2));
+        // Not work
+//        int face1FrameNb;
+//        int face2FrameNb;
+
+        // Work
+        int face1FrameNb = 0;
+        int face2FrameNb = 0;
+
         
+        while (!face1Animation.isEmpty() || !face2Animation.isEmpty()) {
+            synchronized (this) {
+ 
+                if (!face1Animation.isEmpty() && !face2Animation.isEmpty()) {
+                    
+                    face1AnimationPair = face1Animation.get(0);
+                    face2AnimationPair = face2Animation.get(0);
+                    face1FrameNb = face1AnimationPair.frame.getFrameNumber();
+                    face2FrameNb = face2AnimationPair.frame.getFrameNumber();
+                    
+                    if (face1FrameNb < face2FrameNb) {
+
+                        sendFAPFrame(face1AnimationPair.animId, face1AnimationPair.frame);
+                        face1Animation.remove(0);
+
+                    } else if (face1FrameNb == face2FrameNb) {
+
+                        sendFAPFrame(face1AnimationPair.animId, blend(face1AnimationPair.frame, face2AnimationPair.frame));
+                        face1Animation.remove(0);
+                        face2Animation.remove(0);
+
+                    } else if (face1FrameNb > face2FrameNb) {
+
+                        sendFAPFrame(face2AnimationPair.animId, face2AnimationPair.frame);
+                        face2Animation.remove(0);
+
+                    } else {
+
+                        System.out.println("[LipBlender] blend frame index match: something wrong...");
+
+                    }
+ 
+                } else if (!face1Animation.isEmpty()) {
+                    
+                    face1AnimationPair = face1Animation.get(0);
+                    sendFAPFrame(face1AnimationPair.animId, face1AnimationPair.frame);
+                    face1Animation.remove(0);
+ 
+                } else if (!face2Animation.isEmpty()) {
+ 
+                    face2AnimationPair = face2Animation.get(0);
+                    sendFAPFrame(face2AnimationPair.animId, face2AnimationPair.frame);
+                    face2Animation.remove(0);                    
+ 
+                }
+                
+//                FAPIDPair faceAnimationPair = faceAnimation.get(faceAnimationIndex);
+//                int face1FrameNb = faceAnimationPair.frame.getFrameNumber();
+//                FAPIDPair lipAnimationPair = lipAnimation.get(lipAnimationIndex);
+//                int face2FrameNb = lipAnimationPair.frame.getFrameNumber();
+//                if (face1FrameNb < face2FrameNb){
+//                    ++faceAnimationIndex;
+//                } else if (face1FrameNb > face2FrameNb){
+//                    ++lipAnimationIndex;
+//                } else {
+//                    // We choose to consider face movement more important than lip movement.
+//                    // If IDs are equal, the common id is used, otherwise the face id is used : the face id is always used.
+//                    if (!blendedFapFramesWithId.containsKey(faceAnimationPair.animId)) {
+//                        blendedFapFramesWithId.put(faceAnimationPair.animId, new ArrayList<>());
+//                    }
+//                    blendedFapFramesWithId.get(faceAnimationPair.animId).add(blend(faceAnimationPair.frame, lipAnimationPair.frame));
+//                    faceAnimation.remove(faceAnimationIndex);
+//                    lipAnimation.remove(lipAnimationIndex);
+//                }
+ 
+            }
+        }
+//        for (Map.Entry<ID, List<FAPFrame>> idWithCorrespondingFrames : blendedFapFramesWithId.entrySet()) {
+//            sendFAPFrames(idWithCorrespondingFrames.getKey(), idWithCorrespondingFrames.getValue());
+//        }
     }
 
     private FAPFrame blend(FAPFrame face1, FAPFrame face2){
@@ -273,29 +379,28 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
         
         return blended;
     }
-
-    private class Blender extends Thread {
-        boolean end = false;
-
-        @Override
-        public void run() {
-            while(!end){
-                
-                synchronized (this) {
-
-                    popLatestFrame();
-                    computeAndSend();
-                    try { sleep(10); } catch (Throwable t) {}
-                    
-                }
-            }
-        }
+    
+    private void addValueFrom(int fapIndex, FAPFrame target, FAPFrame source){
+//        target.applyValue(fapIndex, target.getValue(fapIndex) + source.getValue(fapIndex));  
+        
+        target.applyValue(fapIndex, ( 7/6 * target.getValue(fapIndex) + source.getValue(fapIndex))/2);
+        System.out.println(" IT WORKED aaaaaaaa!!dfsfsfd!!!!!!!!!");
     }
 
-    @Override
-    protected void finalize() throws Throwable {
-        blender.end = false;
-        super.finalize();
+    private void blendValueFrom(int fapIndex, FAPFrame target, FAPFrame source) {
+        // double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000; //BLEND COEF VALUE IS 0.5
+        double blendCoef = 0.5; //BLEND COEF VALUE IS 0.5
+        target.applyValue(fapIndex, (int) (target.getValue(fapIndex)*(1-blendCoef) + source.getValue(fapIndex)*(blendCoef)));
+        //target.applyValue(fapIndex, (int) ( ( 7/6 * target.getValue(fapIndex)+ source.getValue(fapIndex))/2));
+        
+    }
+
+    public void setFace2Source(FAPFrameEmitter face2Source){
+        face2Source.addFAPFramePerformer(face2Receiver);
+    }
+
+    public void dettachFace2Source(FAPFrameEmitter face2Source){
+        face2Source.removeFAPFramePerformer(face2Receiver);
     }
 
     private class FAPIDPair {

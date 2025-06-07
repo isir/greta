@@ -122,7 +122,6 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
             else {
                 SignalFiller.fillSignal(signal);
             }
-            System.out.println("greta.core.behaviorrealizer.performSignals: target signal - " + signal.toString());
         }
         Temporizer temporizer = new Temporizer();
         temporizer.add(list);
@@ -193,6 +192,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         if (mode.getCompositionType() != CompositionType.blend && !keyframes.isEmpty()) {
             lastKeyFrameTime = 0;
         }
+        
         //add this info to the keyframe - save this info in some special variable
         for (Keyframe keyframe : keyframes) {
             //System.out.println("G1:"+keyframe.getOnset() + absoluteStartTime);
@@ -216,15 +216,35 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
                 }
             }
         }
-
-        this.sendKeyframes(keyframes, requestId, mode);
-        // Add animation to callbacks
-        //System.out.println("GGGGGGGGGG:"+mode.getCompositionType());
-        if (mode.getCompositionType() == CompositionType.replace) {
+        
+        if (requestId.toString().contains("stop") || requestId.toString().contains("renew")) {
+            
             this.stopAllAnims();
+            for (KeyframePerformer performer : keyframePerformers) {
+                performer.performKeyframes(keyframes, requestId, mode);
+            }
+
         }
-        //System.out.println("GGGGGGGGGG:"+requestId+"  "+absoluteStartTime+"   "+lastKeyFrameTime);
-        this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
+        else {
+
+            this.sendKeyframes(keyframes, requestId, mode);
+            // Add animation to callbacks
+
+            //System.out.println("GGGGGGGGGG:"+mode.getCompositionType());
+            if (mode.getCompositionType() == CompositionType.replace) {
+                this.stopAllAnims();
+            }
+
+            System.out.format(
+                    "greta.core.behaviorrealizer.Realizer.performSignals(): requestId - %s, absoluteStartTime - %.2f, lastKeyFrameTime - %.2f%n", 
+                    requestId, absoluteStartTime, lastKeyFrameTime
+            );
+
+            this.addAnimation(requestId, absoluteStartTime, lastKeyFrameTime);
+            
+        }
+
+
         
         IsRunning = Boolean.FALSE;
          

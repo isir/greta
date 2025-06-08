@@ -309,22 +309,14 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         zeroMQConnectButton = new javax.swing.JButton();
         MODIFF = new javax.swing.JPanel();
         northPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
-        jCheckBox1 = new javax.swing.JCheckBox();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
+        jCheckBox1 = new javax.swing.JCheckBox();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jPanel6 = new javax.swing.JPanel();
         connectMODIFF = new javax.swing.JCheckBox();
         northPanelFiller1 = new javax.swing.Box.Filler(new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 0), new java.awt.Dimension(20, 32767));
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        filterCheckBox = new javax.swing.JCheckBox();
-        jSpinnerfilterMaxQueueSize = new javax.swing.JSpinner();
-        jSpinnerfilterPow = new javax.swing.JSpinner();
-        jSpinnerSendOSCPort = new javax.swing.JSpinner();
-        jCheckBoxSendOSC = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        performCheckBox = new javax.swing.JCheckBox();
         centerPanel = new javax.swing.JPanel();
         separator = new javax.swing.JSeparator();
         outputPanel = new javax.swing.JPanel();
@@ -338,6 +330,14 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         buttonPanelFiller2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 32767));
         upButton = new javax.swing.JButton();
         downButton = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        filterCheckBox = new javax.swing.JCheckBox();
+        jSpinnerfilterMaxQueueSize = new javax.swing.JSpinner();
+        jSpinnerfilterPow = new javax.swing.JSpinner();
+        jSpinnerSendOSCPort = new javax.swing.JSpinner();
+        jCheckBoxSendOSC = new javax.swing.JCheckBox();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        performCheckBox = new javax.swing.JCheckBox();
 
         csvFileChooser.setFileFilter(csvReader.getFileFilter());
 
@@ -477,7 +477,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         zeroMQConnectorPanel.add(zeroMQConnectorPanelFiller4);
 
         zeroMQConnectButton.setText("Connect");
-        zeroMQConnectButton.setPreferredSize(new java.awt.Dimension(93, 23));
+        zeroMQConnectButton.setPreferredSize(new java.awt.Dimension(100, 23));
         zeroMQConnectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 zeroMQConnectButtonActionPerformed(evt);
@@ -493,7 +493,10 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
 
         MODIFF.setBorder(javax.swing.BorderFactory.createTitledBorder("MODIFF"));
         MODIFF.setToolTipText("MODIFF");
+        MODIFF.setOpaque(false);
         MODIFF.add(northPanelFiller2);
+        MODIFF.add(filler1);
+        MODIFF.add(filler2);
 
         jCheckBox1.setText("Launch");
         jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
@@ -502,12 +505,11 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
             }
         });
         MODIFF.add(jCheckBox1);
-        MODIFF.add(filler1);
-        MODIFF.add(filler2);
         MODIFF.add(jLayeredPane1);
         MODIFF.add(jPanel6);
 
         connectMODIFF.setText("Connect");
+        connectMODIFF.setContentAreaFilled(false);
         connectMODIFF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 connectMODIFFActionPerformed(evt);
@@ -519,6 +521,103 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         northPanel.add(northPanelFiller1);
 
         jPanel1.setLayout(new javax.swing.BoxLayout(jPanel1, javax.swing.BoxLayout.Y_AXIS));
+        northPanel.add(jPanel1);
+
+        mainPanel.add(northPanel, java.awt.BorderLayout.NORTH);
+
+        centerPanel.setLayout(new java.awt.BorderLayout(0, 10));
+        centerPanel.add(separator, java.awt.BorderLayout.NORTH);
+
+        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Available features:"));
+        outputPanel.setLayout(new java.awt.BorderLayout(10, 0));
+
+        featuresTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Name", "Selected"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Boolean.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        featuresTable.setDragEnabled(true);
+        featuresTable.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
+        featuresTable.setFillsViewportHeight(true);
+        featuresTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        featuresTable.getTableHeader().setReorderingAllowed(false);
+        outputScrollPane.setViewportView(featuresTable);
+
+        outputPanel.add(outputScrollPane, java.awt.BorderLayout.CENTER);
+
+        outputButtonPanel.setEnabled(false);
+        outputButtonPanel.setLayout(new javax.swing.BoxLayout(outputButtonPanel, javax.swing.BoxLayout.PAGE_AXIS));
+
+        setButton.setText("Set");
+        setButton.setMaximumSize(new java.awt.Dimension(125, 23));
+        setButton.setMinimumSize(new java.awt.Dimension(89, 23));
+        setButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setButtonActionPerformed(evt);
+            }
+        });
+        outputButtonPanel.add(setButton);
+        outputButtonPanel.add(buttonPanelFiller1);
+
+        selectAllButton.setText("Select All");
+        selectAllButton.setMaximumSize(new java.awt.Dimension(125, 23));
+        selectAllButton.setMinimumSize(new java.awt.Dimension(125, 23));
+        selectAllButton.setPreferredSize(new java.awt.Dimension(125, 27));
+        selectAllButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectAllButtonActionPerformed(evt);
+            }
+        });
+        outputButtonPanel.add(selectAllButton);
+
+        selectNoneButton.setText("Select None");
+        selectNoneButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectNoneButtonActionPerformed(evt);
+            }
+        });
+        outputButtonPanel.add(selectNoneButton);
+        outputButtonPanel.add(buttonPanelFiller2);
+
+        upButton.setText("Up");
+        upButton.setMaximumSize(new java.awt.Dimension(125, 23));
+        upButton.setMinimumSize(new java.awt.Dimension(125, 23));
+        upButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                upButtonActionPerformed(evt);
+            }
+        });
+        outputButtonPanel.add(upButton);
+
+        downButton.setText("Down");
+        downButton.setMaximumSize(new java.awt.Dimension(125, 23));
+        downButton.setMinimumSize(new java.awt.Dimension(125, 27));
+        downButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                downButtonActionPerformed(evt);
+            }
+        });
+        outputButtonPanel.add(downButton);
+
+        outputPanel.add(outputButtonPanel, java.awt.BorderLayout.EAST);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Filter"));
         jPanel2.setToolTipText("Fitler");
@@ -586,103 +685,7 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         });
         jPanel2.add(performCheckBox);
 
-        jPanel1.add(jPanel2);
-
-        northPanel.add(jPanel1);
-
-        mainPanel.add(northPanel, java.awt.BorderLayout.NORTH);
-
-        centerPanel.setLayout(new java.awt.BorderLayout(0, 10));
-        centerPanel.add(separator, java.awt.BorderLayout.NORTH);
-
-        outputPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Available features:"));
-        outputPanel.setLayout(new java.awt.BorderLayout(10, 0));
-
-        featuresTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Name", "Selected"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Boolean.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, true
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        featuresTable.setDragEnabled(true);
-        featuresTable.setDropMode(javax.swing.DropMode.ON_OR_INSERT);
-        featuresTable.setFillsViewportHeight(true);
-        featuresTable.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        featuresTable.getTableHeader().setReorderingAllowed(false);
-        outputScrollPane.setViewportView(featuresTable);
-
-        outputPanel.add(outputScrollPane, java.awt.BorderLayout.CENTER);
-
-        outputButtonPanel.setEnabled(false);
-        outputButtonPanel.setLayout(new javax.swing.BoxLayout(outputButtonPanel, javax.swing.BoxLayout.PAGE_AXIS));
-
-        setButton.setText("Set");
-        setButton.setMaximumSize(new java.awt.Dimension(89, 23));
-        setButton.setMinimumSize(new java.awt.Dimension(89, 23));
-        setButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setButtonActionPerformed(evt);
-            }
-        });
-        outputButtonPanel.add(setButton);
-        outputButtonPanel.add(buttonPanelFiller1);
-
-        selectAllButton.setText("Select All");
-        selectAllButton.setMaximumSize(new java.awt.Dimension(89, 23));
-        selectAllButton.setMinimumSize(new java.awt.Dimension(89, 23));
-        selectAllButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectAllButtonActionPerformed(evt);
-            }
-        });
-        outputButtonPanel.add(selectAllButton);
-
-        selectNoneButton.setText("Select None");
-        selectNoneButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                selectNoneButtonActionPerformed(evt);
-            }
-        });
-        outputButtonPanel.add(selectNoneButton);
-        outputButtonPanel.add(buttonPanelFiller2);
-
-        upButton.setText("Up");
-        upButton.setMaximumSize(new java.awt.Dimension(89, 23));
-        upButton.setMinimumSize(new java.awt.Dimension(89, 23));
-        upButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                upButtonActionPerformed(evt);
-            }
-        });
-        outputButtonPanel.add(upButton);
-
-        downButton.setText("Down");
-        downButton.setMaximumSize(new java.awt.Dimension(89, 23));
-        downButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                downButtonActionPerformed(evt);
-            }
-        });
-        outputButtonPanel.add(downButton);
-
-        outputPanel.add(outputButtonPanel, java.awt.BorderLayout.EAST);
+        outputPanel.add(jPanel2, java.awt.BorderLayout.PAGE_END);
 
         centerPanel.add(outputPanel, java.awt.BorderLayout.CENTER);
 
@@ -833,66 +836,6 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
         }
     }//GEN-LAST:event_downButtonActionPerformed
 
-    private void filterCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterCheckBoxActionPerformed
-        zeroMQReader.setUseFilter(filterCheckBox.isSelected());
-        csvReader.setUseFilter(filterCheckBox.isSelected());
-    }//GEN-LAST:event_filterCheckBoxActionPerformed
-
-    private void jSpinnerfilterPowStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerfilterPowStateChanged
-        try {
-            jSpinnerfilterPow.commitEdit();
-        } catch ( java.text.ParseException e ) {  }
-        double value = (Double)jSpinnerfilterPow.getValue();
-        setFilterPow(value);
-    }//GEN-LAST:event_jSpinnerfilterPowStateChanged
-
-    private void jSpinnerfilterMaxQueueSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerfilterMaxQueueSizeStateChanged
-        try {
-            jSpinnerfilterMaxQueueSize.commitEdit();
-        } catch ( java.text.ParseException e ) {  }
-        int value = (Integer)jSpinnerfilterMaxQueueSize.getValue();
-        setFilterMaxQueueSize(value);
-    }//GEN-LAST:event_jSpinnerfilterMaxQueueSizeStateChanged
-
-    private void jCheckBoxSendOSCStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxSendOSCStateChanged
-        // TODO add your handling code here:
-        setUseOSC(jCheckBoxSendOSC.isSelected());
-    }//GEN-LAST:event_jCheckBoxSendOSCStateChanged
-
-    private void jSpinnerSendOSCPortStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSendOSCPortStateChanged
-        try {
-            jSpinnerSendOSCPort.commitEdit();
-        } catch ( java.text.ParseException e ) {  }
-        int value = (Integer)jSpinnerSendOSCPort.getValue();
-        setOscOutPort(value);
-    }//GEN-LAST:event_jSpinnerSendOSCPortStateChanged
-
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-         if (this.cm.isPositive_manager()== false){
-            this.cm.setPositive_manager(true);
-            System.out.println(" ON ENTRE DANS LE START SERVER");
-            // startServer("50150","localhost");
-            startServer("localhost", "50150");
-            this.flag = true;
-        }
-        else {
-            this.cm.setPositive_manager(false);
-            this.flag = false;
-            if (IsConnected == true){
-                try {
-                    server.stopConnection();
-                } catch (IOException ex) {
-                    Logger.getLogger(OpenFaceOutputStreamReader.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-         }
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
-
-    private void performCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performCheckBoxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_performCheckBoxActionPerformed
-
     private void connectMODIFFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_connectMODIFFActionPerformed
         // TODO add your handling code here:
          if (this.cm.isPositive_manager()== false){
@@ -939,6 +882,66 @@ public class OpenFaceOutputStreamReader extends javax.swing.JFrame implements AU
     }
     else{}
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void performCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_performCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_performCheckBoxActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        // TODO add your handling code here:
+        if (this.cm.isPositive_manager()== false){
+            this.cm.setPositive_manager(true);
+            System.out.println(" ON ENTRE DANS LE START SERVER");
+            // startServer("50150","localhost");
+            startServer("localhost", "50150");
+            this.flag = true;
+        }
+        else {
+            this.cm.setPositive_manager(false);
+            this.flag = false;
+            if (IsConnected == true){
+                try {
+                    server.stopConnection();
+                } catch (IOException ex) {
+                    Logger.getLogger(OpenFaceOutputStreamReader.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
+    private void jCheckBoxSendOSCStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBoxSendOSCStateChanged
+        // TODO add your handling code here:
+        setUseOSC(jCheckBoxSendOSC.isSelected());
+    }//GEN-LAST:event_jCheckBoxSendOSCStateChanged
+
+    private void jSpinnerSendOSCPortStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerSendOSCPortStateChanged
+        try {
+            jSpinnerSendOSCPort.commitEdit();
+        } catch ( java.text.ParseException e ) {  }
+        int value = (Integer)jSpinnerSendOSCPort.getValue();
+        setOscOutPort(value);
+    }//GEN-LAST:event_jSpinnerSendOSCPortStateChanged
+
+    private void jSpinnerfilterPowStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerfilterPowStateChanged
+        try {
+            jSpinnerfilterPow.commitEdit();
+        } catch ( java.text.ParseException e ) {  }
+        double value = (Double)jSpinnerfilterPow.getValue();
+        setFilterPow(value);
+    }//GEN-LAST:event_jSpinnerfilterPowStateChanged
+
+    private void jSpinnerfilterMaxQueueSizeStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpinnerfilterMaxQueueSizeStateChanged
+        try {
+            jSpinnerfilterMaxQueueSize.commitEdit();
+        } catch ( java.text.ParseException e ) {  }
+        int value = (Integer)jSpinnerfilterMaxQueueSize.getValue();
+        setFilterMaxQueueSize(value);
+    }//GEN-LAST:event_jSpinnerfilterMaxQueueSizeStateChanged
+
+    private void filterCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_filterCheckBoxActionPerformed
+        zeroMQReader.setUseFilter(filterCheckBox.isSelected());
+        csvReader.setUseFilter(filterCheckBox.isSelected());
+    }//GEN-LAST:event_filterCheckBoxActionPerformed
 
     /* ---------------------------------------------------------------------- */
 

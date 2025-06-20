@@ -7,11 +7,9 @@ updates:
       interval: "weekly"
       day: "monday"
       time: "09:00"
-    open-pull-requests-limit: 10
-    reviewers:
-      - "modernization-team"
-    assignees:
-      - "modernization-team"
+    # Disable automatic PR creation - manual review required
+    open-pull-requests-limit: 0
+    # Remove auto-assignment since no PRs will be created
     commit-message:
       prefix: "deps"
       prefix-development: "deps-dev"
@@ -41,6 +39,8 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+    # Disable automatic PR creation for GitHub Actions too
+    open-pull-requests-limit: 0
     commit-message:
       prefix: "ci"
       include: "scope"

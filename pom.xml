@@ -57,6 +57,7 @@
         <module>core/Signals</module>
         <module>core/Intentions</module>
         <module>core/Feedbacks</module>
+        <!-- TODO: Add remaining core modules once POMs are created
         <module>core/BehaviorPlanner</module>
         <module>core/BehaviorRealizer</module>
         <module>core/GestureAnimation</module>
@@ -65,15 +66,13 @@
         <module>core/Interruptions</module>
         <module>core/ListenerIntentPlanner</module>
         <module>core/SubjectPlanner</module>
+        -->
         
-        <!-- Auxiliary Modules -->
+        <!-- Auxiliary Modules (only those with POMs) -->
         <module>auxiliary/ActiveMQ</module>
         <module>auxiliary/AnimationDynamics</module>
         <module>auxiliary/ASAP</module>
-        <module>auxiliary/BVHMocap</module>
         <module>auxiliary/EmotionML</module>
-        <module>auxiliary/EnvironmentManager</module>
-        <module>auxiliary/SocialParameters</module>
         <module>auxiliary/Thrift</module>
         
         <!-- Application -->

@@ -1,0 +1,64 @@
+# Git and version control
+.git
+.gitignore
+*.md
+
+# Build outputs
+target/
+*/target/
+*.jar
+*.war
+
+# IDE files
+.idea/
+*.iml
+.vscode/
+.project
+.classpath
+.settings/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Test outputs
+test-output/
+test-results/
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Cache directories
+.m2/
+.sonar/
+
+# Documentation and examples
+docs/
+examples/
+backup/
+
+# Large data files that shouldn't be in container
+bin/Common/Data/*/cache/
+bin/Common/Data/*/logs/
+*.pth
+*.model
+*.h5
+
+# NetBeans artifacts
+nbproject/
+build/
+dist/
+
+# External tools and binaries (we removed these anyway)
+bin/charniak/
+bin/NVBG/
+bin/Scripts/
+
+# CI/CD files
+.github/

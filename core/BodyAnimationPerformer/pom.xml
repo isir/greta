@@ -13,9 +13,9 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
     
-    <artifactId>greta-feedbacks</artifactId>
-    <name>Greta Feedbacks</name>
-    <description>Feedback processing and management</description>
+    <artifactId>greta-body-animation-performer</artifactId>
+    <name>Greta Body Animation Performer</name>
+    <description>Body animation execution and performance system</description>
     
     <dependencies>
         <!-- Internal Dependencies -->
@@ -26,12 +26,22 @@
         </dependency>
         <dependency>
             <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-mpeg4</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-animation-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
             <artifactId>greta-signals</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>fr.isir.greta</groupId>
-            <artifactId>greta-intentions</artifactId>
+            <artifactId>greta-gesture-animation</artifactId>
             <version>${project.version}</version>
         </dependency>
         
@@ -41,17 +51,27 @@
             <artifactId>log4j-api</artifactId>
         </dependency>
         
-        <!-- OSC (Open Sound Control) -->
+        <!-- Graphics for animation performance -->
         <dependency>
-            <groupId>com.illposed</groupId>
-            <artifactId>javaosc-core</artifactId>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all-main</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jogamp.gluegen</groupId>
+            <artifactId>gluegen-rt-main</artifactId>
         </dependency>
         
-        <!-- Utilities -->
+        <!-- Math utilities -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-math3</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
         </dependency>
+        
+        <!-- Utilities -->
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>

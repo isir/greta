@@ -13,9 +13,9 @@
         <relativePath>../../pom.xml</relativePath>
     </parent>
     
-    <artifactId>greta-feedbacks</artifactId>
-    <name>Greta Feedbacks</name>
-    <description>Feedback processing and management</description>
+    <artifactId>greta-interruptions</artifactId>
+    <name>Greta Interruptions</name>
+    <description>Interruption handling and management system</description>
     
     <dependencies>
         <!-- Internal Dependencies -->
@@ -34,17 +34,16 @@
             <artifactId>greta-intentions</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-behavior-planner</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         
         <!-- Logging -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
-        </dependency>
-        
-        <!-- OSC (Open Sound Control) -->
-        <dependency>
-            <groupId>com.illposed</groupId>
-            <artifactId>javaosc-core</artifactId>
         </dependency>
         
         <!-- Utilities -->

@@ -46,6 +46,12 @@
             <artifactId>jackson-annotations</artifactId>
         </dependency>
         
+        <!-- JMS API -->
+        <dependency>
+            <groupId>javax.jms</groupId>
+            <artifactId>javax.jms-api</artifactId>
+        </dependency>
+        
         <!-- Utilities -->
         <dependency>
             <groupId>org.apache.commons</groupId>

@@ -1,0 +1,46 @@
+version: 2
+updates:
+  # Maven dependencies
+  - package-ecosystem: "maven"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "modernization-team"
+    assignees:
+      - "modernization-team"
+    commit-message:
+      prefix: "deps"
+      prefix-development: "deps-dev"
+      include: "scope"
+    groups:
+      logging:
+        patterns:
+          - "org.apache.logging.log4j:*"
+          - "org.slf4j:*"
+      jackson:
+        patterns:
+          - "com.fasterxml.jackson.*:*"
+      apache-commons:
+        patterns:
+          - "org.apache.commons:*"
+          - "commons-*:*"
+      testing:
+        patterns:
+          - "org.junit.*:*"
+          - "org.mockito:*"
+      spring:
+        patterns:
+          - "org.springframework:*"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    commit-message:
+      prefix: "ci"
+      include: "scope"

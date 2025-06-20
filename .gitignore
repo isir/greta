@@ -58,10 +58,11 @@ Thumbs.db
 *.py[cod]
 *$py.class
 
-# Test output
-**/test/
+# Test output (but not test source directories)
 **/test-output/
 **/test-results/
+**/target/test-classes/
+**/target/surefire-reports/
 
 # Application specific
 bin/Log/*

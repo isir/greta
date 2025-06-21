@@ -259,7 +259,7 @@ public class BarkProvider implements Speech2SpeechProvider {
     }
     
     private AudioSegment generateSpeechWithBark(
-            SemanticFeatures semantics, Speech2SpeechRequest.Parameters params) {
+            SemanticFeatures semantics, Speech2SpeechRequest.Speech2SpeechParameters params) {
         
         // This would call the actual Bark model inference
         // For now, we simulate the process
@@ -276,7 +276,7 @@ public class BarkProvider implements Speech2SpeechProvider {
     
     private AudioSegment generateWithSpeakerCode(
             SemanticFeatures semantics, String speakerCode, 
-            Speech2SpeechRequest.Parameters params) {
+            Speech2SpeechRequest.Speech2SpeechParameters params) {
         
         // Generate with specific speaker characteristics
         logger.info("Generating speech with speaker code: {}", speakerCode);

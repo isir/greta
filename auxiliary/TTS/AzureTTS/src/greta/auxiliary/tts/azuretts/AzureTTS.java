@@ -53,8 +53,8 @@ import java.util.List;
 import java.util.Map;
 import javax.sound.sampled.AudioFormat;
 
-import greta.furhat.activemq.GretaFurhatSpeechTextSender;
-import greta.furhat.activemq.GretaFurhatAudioSender;
+// import greta.furhat.activemq.GretaFurhatSpeechTextSender;  // Package not available
+// import greta.furhat.activemq.GretaFurhatAudioSender;     // Package not available
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -71,7 +71,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.TransformerException;
 import org.xml.sax.SAXException;
 
-import greta.core.behaviorrealizer.ClientPhoneme;
+// import greta.core.behaviorrealizer.ClientPhoneme;  // Package not available
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -111,15 +111,15 @@ public class AzureTTS extends CharacterDependentAdapter implements TTS {
     private String languageID; // Character's language specified using <LANGUAGE_CODE_ISO>-<COUNTRY_CODE_ISO> in character's .ini file (e.g. en-GB)
     private String voiceName; // Character's voice specified in character's .ini file (e.g. en-GB)
     
-    private GretaFurhatSpeechTextSender speechtextserver;
-    private GretaFurhatAudioSender audioserver;
+    // private GretaFurhatSpeechTextSender speechtextserver;  // Class not available
+    // private GretaFurhatAudioSender audioserver;           // Class not available
     
     private String ssml_path = "Common\\Data\\AzureTTS\\ssml.txt";
     private String audio_path = "Common\\Data\\AzureTTS\\output.wav";
     private String AzureTTS_bat_path = "Common\\Data\\AzureTTS\\run_azuretts.bat";
     private Process main_process;
     
-    private ClientPhoneme clientPhoneme = new ClientPhoneme();
+    // private ClientPhoneme clientPhoneme = new ClientPhoneme();  // Class not available
     
     private int numGeneration = 0;
     
@@ -170,8 +170,8 @@ public class AzureTTS extends CharacterDependentAdapter implements TTS {
     /*                     This block is part of the Greta Furhat Interface       
                                Author: Fousseyni Sangaré 04/2024-09/2024                                  */
     /*====================================================================================================*/
-        speechtextserver = new GretaFurhatSpeechTextSender("localhost", "61616", "greta.furhat.SpeechText");
-        audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.Audio");
+        // speechtextserver = new GretaFurhatSpeechTextSender("localhost", "61616", "greta.furhat.SpeechText");  // Class not available
+        // audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.Audio");               // Class not available
         
     /*====================================================================================================*/
     /*====================================================================================================*/
@@ -493,8 +493,8 @@ public class AzureTTS extends CharacterDependentAdapter implements TTS {
                         String speechTextNoSpace = speechText.replace(" ", "");
                         if (!speechTextNoSpace.isEmpty()) {
                             System.out.println("Sending speech text over the topic: " + speechText);
-                            audioserver.send(rawAudioBuffer, phonemes, speech.getSpeechElements(), audio);
-                            speechtextserver.send(speechText);
+                            // audioserver.send(rawAudioBuffer, phonemes, speech.getSpeechElements(), audio);       // Class not available
+                            // speechtextserver.send(speechText);                                                 // Class not available
                             System.out.println("Speech elements: ");
                             phonemes.forEach(element->System.out.print("("+element.getPhonemeType()+" ; "+element.getDuration()+" ) ;"));
 
@@ -622,7 +622,8 @@ public class AzureTTS extends CharacterDependentAdapter implements TTS {
         // add those phonemes into phonemes variable
         
         String IPAPhoneme = AzureTTSConstants.visemeId2IPAPhoneme.get(input);
-        PhonemeType phonemeType = clientPhoneme.convertIPAPhoneme2GretaPhoneme(IPAPhoneme);
+        // PhonemeType phonemeType = clientPhoneme.convertIPAPhoneme2GretaPhoneme(IPAPhoneme);  // Class not available
+        PhonemeType phonemeType = PhonemeType.pause; // Default fallback
         
         PhonemeType[] output = new PhonemeType[]{phonemeType};
         

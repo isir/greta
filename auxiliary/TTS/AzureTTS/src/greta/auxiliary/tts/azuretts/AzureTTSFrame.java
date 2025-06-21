@@ -1,6 +1,6 @@
 package greta.auxiliary.tts.azuretts;
 
-import greta.core.behaviorrealizer.ClientPhoneme;
+// import greta.core.behaviorrealizer.ClientPhoneme;  // Package not available
 import greta.core.util.CharacterDependent;
 import greta.core.util.CharacterDependentAdapter;
 import greta.core.util.CharacterManager;
@@ -11,8 +11,8 @@ import greta.core.util.speech.Speech;
 import greta.core.util.speech.TTS;
 import greta.core.util.time.TimeMarker;
 import greta.core.util.xml.XMLTree;
-import greta.furhat.activemq.GretaFurhatAudioSender;
-import greta.furhat.activemq.GretaFurhatSpeechTextSender;
+// import greta.furhat.activemq.GretaFurhatAudioSender;      // Package not available
+// import greta.furhat.activemq.GretaFurhatSpeechTextSender; // Package not available
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -122,8 +122,8 @@ public class AzureTTSFrame extends javax.swing.JFrame implements TTS {
     private String languageID; // Character's language specified using <LANGUAGE_CODE_ISO>-<COUNTRY_CODE_ISO> in character's .ini file (e.g. en-GB)
     private String voiceName; // Character's voice specified in character's .ini file (e.g. en-GB)
     
-    private GretaFurhatSpeechTextSender speechtextserver;
-    private GretaFurhatAudioSender audioserver;
+    // private GretaFurhatSpeechTextSender speechtextserver;  // Class not available
+    // private GretaFurhatAudioSender audioserver;           // Class not available
     
     private String AzureTTS_env_checker_path = "Common\\Data\\AzureTTS\\check_env.py";
     private String AzureTTS_env_installer_path = "Common\\Data\\AzureTTS\\init_env.bat";
@@ -236,8 +236,8 @@ public class AzureTTSFrame extends javax.swing.JFrame implements TTS {
                                    Author: Fousseyni Sangaré 04/2024-09/2024                                  */
         /*====================================================================================================*/
         
-        speechtextserver = new GretaFurhatSpeechTextSender("localhost", "61616", "greta.furhat.SpeechText");
-        audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.Audio");
+        // speechtextserver = new GretaFurhatSpeechTextSender("localhost", "61616", "greta.furhat.SpeechText");  // Class not available
+        // audioserver = new GretaFurhatAudioSender("localhost", "61616", "greta.furhat.Audio");               // Class not available
         
         /*====================================================================================================*/
         /*====================================================================================================*/    

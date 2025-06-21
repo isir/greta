@@ -54,14 +54,17 @@ COPY auxiliary/ auxiliary/
 COPY application/ application/
 COPY src/ src/
 COPY bin/ bin/
+COPY HeadlessServer.java ./
 
 # Build with optimized Maven settings
 ENV JAVA_OPTS="-Xmx1g"
 RUN ./mvnw clean package -DskipTests -B -T 1C \
     -Dmaven.compile.fork=true \
     -Dmaven.compiler.maxmem=1024m && \
-    # Clean up build artifacts to reduce layer size
-    find . -name "*.class" -type f -delete 2>/dev/null || true && \
+    # Compile HeadlessServer \
+    javac HeadlessServer.java && \
+    # Clean up build artifacts to reduce layer size (keep HeadlessServer.class)
+    find . -name "*.class" -not -name "HeadlessServer.class" -type f -delete 2>/dev/null || true && \
     find . -name "surefire-reports" -type d -exec rm -rf {} + 2>/dev/null || true
 
 # =============================================================================
@@ -95,6 +98,7 @@ WORKDIR /app
 COPY --from=builder --chown=greta:greta /app/application/*/target/*.jar ./
 COPY --from=builder --chown=greta:greta /app/core/*/target/*.jar ./lib/
 COPY --from=builder --chown=greta:greta /app/auxiliary/*/target/*.jar ./lib/
+COPY --from=builder --chown=greta:greta /app/HeadlessServer.class ./
 
 # Copy essential data and configuration files
 COPY --from=builder --chown=greta:greta /app/bin/Common/Data/ ./data/
@@ -141,8 +145,16 @@ RUN echo '#!/bin/bash' > /app/start-greta.sh && \
     echo 'echo "Main JAR: $MAIN_JAR"' >> /app/start-greta.sh && \
     echo 'echo "Available Memory: $HEAP_SIZE MB"' >> /app/start-greta.sh && \
     echo '' >> /app/start-greta.sh && \
-    echo '# Start the application' >> /app/start-greta.sh && \
-    echo 'exec java $JAVA_OPTS -jar "$MAIN_JAR" "$@"' >> /app/start-greta.sh
+    echo '# Try to start the GUI application first' >> /app/start-greta.sh && \
+    echo 'echo "Attempting to start GUI application..."' >> /app/start-greta.sh && \
+    echo 'timeout 10 java $JAVA_OPTS -jar "$MAIN_JAR" "$@" 2>/dev/null' >> /app/start-greta.sh && \
+    echo 'GUI_EXIT_CODE=$?' >> /app/start-greta.sh && \
+    echo '' >> /app/start-greta.sh && \
+    echo '# If GUI fails, start headless web server' >> /app/start-greta.sh && \
+    echo 'if [ $GUI_EXIT_CODE -ne 0 ]; then' >> /app/start-greta.sh && \
+    echo '    echo "GUI failed, starting headless web server on port 8080..."' >> /app/start-greta.sh && \
+    echo '    exec java HeadlessServer' >> /app/start-greta.sh && \
+    echo 'fi' >> /app/start-greta.sh
 RUN chmod +x /app/start-greta.sh
 
 # Switch to application user

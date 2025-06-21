@@ -47,7 +47,8 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- OpenCV for computer vision -->
+        <!-- OpenCV for computer vision - Temporarily disabled (dependencies not available) -->
+        <!--
         <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>opencv-platform</artifactId>
@@ -58,20 +59,25 @@
             <artifactId>javacv-platform</artifactId>
             <version>1.5.9</version>
         </dependency>
+        -->
 
-        <!-- Audio processing -->
+        <!-- Audio processing - Temporarily disabled (dependency not available) -->
+        <!--
         <dependency>
             <groupId>be.tarsos.dsp</groupId>
             <artifactId>core</artifactId>
             <version>2.5</version>
         </dependency>
+        -->
 
-        <!-- TensorFlow Lite for mobile inference -->
+        <!-- TensorFlow Lite for mobile inference - Temporarily disabled (dependency not available) -->
+        <!--
         <dependency>
             <groupId>org.tensorflow</groupId>
             <artifactId>tensorflow-lite</artifactId>
             <version>2.14.0</version>
         </dependency>
+        -->
 
         <!-- ONNX Runtime for model inference -->
         <dependency>

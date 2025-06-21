@@ -27,29 +27,13 @@ COPY pom.xml ./
 # Create directory structure for POMs
 RUN mkdir -p core auxiliary application
 
-# Copy all module POM files (ignore failures for missing directories)
+# Copy all module POM files (including nested directories like TTS)
 COPY --chown=root:root . /tmp/source/
-RUN for dir in /tmp/source/core/*/; do \
-      if [ -d "$dir" ] && [ -f "$dir/pom.xml" ]; then \
-        module=$(basename "$dir"); \
-        mkdir -p "core/$module"; \
-        cp "$dir/pom.xml" "core/$module/"; \
-      fi; \
-    done 2>/dev/null || true && \
-    for dir in /tmp/source/auxiliary/*/; do \
-      if [ -d "$dir" ] && [ -f "$dir/pom.xml" ]; then \
-        module=$(basename "$dir"); \
-        mkdir -p "auxiliary/$module"; \
-        cp "$dir/pom.xml" "auxiliary/$module/"; \
-      fi; \
-    done 2>/dev/null || true && \
-    for dir in /tmp/source/application/*/; do \
-      if [ -d "$dir" ] && [ -f "$dir/pom.xml" ]; then \
-        module=$(basename "$dir"); \
-        mkdir -p "application/$module"; \
-        cp "$dir/pom.xml" "application/$module/"; \
-      fi; \
-    done 2>/dev/null || true && \
+RUN find /tmp/source -name "pom.xml" -not -path "/tmp/source/pom.xml" | while read pom; do \
+      rel_path=$(echo "$pom" | sed 's|/tmp/source/||' | sed 's|/pom.xml||'); \
+      mkdir -p "$rel_path"; \
+      cp "$pom" "$rel_path/"; \
+    done && \
     rm -rf /tmp/source
 
 # Download dependencies with optimized settings

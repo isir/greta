@@ -34,6 +34,11 @@
         <!-- Testing -->
         <junit.version>5.10.2</junit.version>
         <mockito.version>5.12.0</mockito.version>
+        <testcontainers.version>1.19.8</testcontainers.version>
+        
+        <!-- Spring Framework -->
+        <spring.version>6.1.8</spring.version>
+        <spring-boot.version>3.3.0</spring-boot.version>
         
         <!-- Utilities -->
         <commons-lang3.version>3.14.0</commons-lang3.version>
@@ -215,6 +220,34 @@
                 <artifactId>mockito-core</artifactId>
                 <version>${mockito.version}</version>
                 <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>junit-jupiter</artifactId>
+                <version>${testcontainers.version}</version>
+                <scope>test</scope>
+            </dependency>
+            
+            <!-- Spring Framework -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-context</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-websocket</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-messaging</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
             
             <!-- Utilities -->

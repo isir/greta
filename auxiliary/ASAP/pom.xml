@@ -34,6 +34,22 @@
             <artifactId>greta-intentions</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-feedbacks</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-behavior-realizer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- OSC (Open Sound Control) -->
+        <dependency>
+            <groupId>com.illposed.osc</groupId>
+            <artifactId>javaosc-core</artifactId>
+        </dependency>
         
         <!-- Logging -->
         <dependency>
@@ -68,6 +84,19 @@
     <build>
         <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>test</testSourceDirectory>
+        
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <!-- Exclude files that depend on Incrementality module (not part of Maven build) -->
+                        <exclude>**/ASAPFrame.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
         
         <resources>
             <resource>

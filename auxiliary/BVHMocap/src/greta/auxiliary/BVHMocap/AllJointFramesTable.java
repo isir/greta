@@ -38,7 +38,6 @@ public class AllJointFramesTable {
         int nbjoint = skeleton.getJoints().size();
 
         Joint joint = skeleton.getJoint(0);
-        joint.reset();
         joint.update();
 
         for (int j = 0; j < nbjoint; j++) {

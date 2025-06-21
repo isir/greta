@@ -494,7 +494,7 @@ public class BVHReader implements BAPFrameEmitter {
         line = SpaceRegularization(line);
         word_index = FirstWordIndex(line, "ROOT");
         name = line.split(" ")[word_index + 1];
-        id_joint = skeleton.createJoint(name, -1);
+        id_joint = skeleton.createJoint(name, -1).getId();
         joint1 = skeleton.getJoint(id_joint);
         sublist.addElement(0);
 
@@ -535,14 +535,14 @@ public class BVHReader implements BAPFrameEmitter {
                 vect.setZ(Float.parseFloat(line.split(" ")[word_index + 3]));
 
                 int parent = id_joint;
-                id_joint = skeleton.createJoint(name, parent);//previous id_joint
+                id_joint = skeleton.createJoint(name, parent).getId();//previous id_joint
                 Joint joint = skeleton.getJoint(id_joint);
                 joint.setLocalPosition(vect);
 
-                joint.setParentById(parent);
+                joint.setParent(parent);
                 Joint p = skeleton.getJoint(parent);
 
-                p.updateLocally();
+                p.update();
                 joint.update();
 
                 sublist.addElement(id_joint);
@@ -563,14 +563,14 @@ public class BVHReader implements BAPFrameEmitter {
                     vect.setZ(Float.parseFloat(line.split(" ")[word_index + 3]));
 
                     int parent = id_joint;
-                    id_joint = skeleton.createJoint(name, id_joint);
+                    id_joint = skeleton.createJoint(name, id_joint).getId();
                     Joint joint = skeleton.getJoint(id_joint);
                     joint.setLocalPosition(vect);
 
-                    joint.setParentById(parent);
+                    joint.setParent(parent);
                     Joint p = skeleton.getJoint(parent);
 
-                    p.updateLocally();
+                    p.update();
                     joint.update();
                 } else if (line.contains("}")) // Update parent
                 {
@@ -613,7 +613,7 @@ public class BVHReader implements BAPFrameEmitter {
         line = SpaceRegularization(line);
         word_index = FirstWordIndex(line, "ROOT");
         name = line.split(" ")[word_index + 1];
-        id_joint = skeleton.createJoint(name, -1);
+        id_joint = skeleton.createJoint(name, -1).getId();
         joint1 = skeleton.getJoint(id_joint);
         sublist.addElement(0);
 
@@ -654,14 +654,14 @@ public class BVHReader implements BAPFrameEmitter {
                 vect.setZ(Float.parseFloat(line.split(" ")[word_index + 3]));
 
                 int parent = id_joint;
-                id_joint = skeleton.createJoint(name, id_joint);
+                id_joint = skeleton.createJoint(name, id_joint).getId();
                 Joint joint = skeleton.getJoint(id_joint);
                 joint.setLocalPosition(vect);
 
-                joint.setParentById(parent);
+                joint.setParent(parent);
                 Joint p = skeleton.getJoint(parent);
 
-                p.updateLocally();
+                p.update();
                 joint.update();
 
                 sublist.addElement(id_joint);

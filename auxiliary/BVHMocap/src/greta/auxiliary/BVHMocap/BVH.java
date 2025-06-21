@@ -360,7 +360,6 @@ public class BVH {
                 framecpt = framecpt + 3;
 
                 Joint joint = skeleton.getJoint(0);
-                joint.reset();
                 joint.update();
 
             }

@@ -33,18 +33,18 @@ This is a **completely modernized** version of the original Greta platform, tran
 
 ## 📋 Table of Contents
 
-- [Quick Start](#quick-start)
-- [What is Greta?](#what-is-greta)
-- [🧠 AI Capabilities](#ai-capabilities)
-- [🐍 Python Control](#python-control)
-- [Architecture](#architecture)
-- [Installation](#installation)
-- [Usage Guide](#usage-guide)
-- [Development](#development)
-- [Deployment](#deployment)
-- [Testing](#testing)
-- [API Reference](#api-reference)
-- [Contributing](#contributing)
+- [Quick Start](#-quick-start)
+- [What is Greta?](#-what-is-greta)
+- [AI Capabilities](#-ai-capabilities)
+- [Python Control](#-python-control)
+- [Architecture](#️-architecture)
+- [Installation](#-installation)
+- [Usage Guide](#-usage-guide)
+- [Development](#-development)
+- [Deployment](#-deployment)
+- [Testing](#-testing)
+- [API Reference](#-api-reference)
+- [Contributing](#-contributing)
 
 ---
 

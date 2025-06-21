@@ -13,8 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-
+package greta.core.signals;
 
 /**
  * This is the interface that must be implemented by all subscribers that wish to receive messages

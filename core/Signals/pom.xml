@@ -46,6 +46,12 @@
             <artifactId>jackson-annotations</artifactId>
         </dependency>
         
+        <!-- ActiveMQ for messaging -->
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-client</artifactId>
+        </dependency>
+        
         <!-- JMS API -->
         <dependency>
             <groupId>javax.jms</groupId>

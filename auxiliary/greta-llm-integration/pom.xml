@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>fr.cnrs.greta</groupId>
+        <artifactId>greta-parent</artifactId>
+        <version>3.1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>greta-llm-integration</artifactId>
+    <name>Greta LLM Integration</name>
+    <description>Advanced Large Language Model integration for natural conversation generation</description>
+
+    <dependencies>
+        <!-- Greta Core Dependencies -->
+        <dependency>
+            <groupId>fr.cnrs.greta</groupId>
+            <artifactId>greta-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.cnrs.greta</groupId>
+            <artifactId>greta-intentions</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.cnrs.greta</groupId>
+            <artifactId>greta-behavior-realizer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- OpenAI API -->
+        <dependency>
+            <groupId>com.theokanning.openai-gpt3-java</groupId>
+            <artifactId>service</artifactId>
+            <version>0.18.2</version>
+        </dependency>
+
+        <!-- Anthropic Claude API -->
+        <dependency>
+            <groupId>com.anthropic</groupId>
+            <artifactId>claude-java</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+
+        <!-- Hugging Face Transformers -->
+        <dependency>
+            <groupId>ai.djl.huggingface</groupId>
+            <artifactId>tokenizers</artifactId>
+            <version>0.25.0</version>
+        </dependency>
+
+        <!-- Local LLM Support (Ollama) -->
+        <dependency>
+            <groupId>io.github.ollama4j</groupId>
+            <artifactId>ollama4j</artifactId>
+            <version>1.0.79</version>
+        </dependency>
+
+        <!-- HTTP Client -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.12.0</version>
+        </dependency>
+
+        <!-- JSON Processing -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- Async Processing -->
+        <dependency>
+            <groupId>io.reactivex.rxjava3</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>3.1.8</version>
+        </dependency>
+
+        <!-- Configuration -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

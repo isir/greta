@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>fr.cnrs.greta</groupId>
+        <artifactId>greta-parent</artifactId>
+        <version>3.1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>greta-multimodal-ai</artifactId>
+    <name>Greta Multimodal AI Integration</name>
+    <description>Advanced multimodal AI combining vision, speech, gesture, and language understanding</description>
+
+    <dependencies>
+        <!-- Greta Core Dependencies -->
+        <dependency>
+            <groupId>fr.cnrs.greta</groupId>
+            <artifactId>greta-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.cnrs.greta</groupId>
+            <artifactId>greta-llm-integration</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.cnrs.greta</groupId>
+            <artifactId>greta-emotion-recognition</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.cnrs.greta</groupId>
+            <artifactId>greta-speech2speech</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- Vision and Multimodal AI -->
+        <dependency>
+            <groupId>ai.djl</groupId>
+            <artifactId>api</artifactId>
+            <version>0.25.0</version>
+        </dependency>
+        <dependency>
+            <groupId>ai.djl.pytorch</groupId>
+            <artifactId>pytorch-engine</artifactId>
+            <version>0.25.0</version>
+        </dependency>
+
+        <!-- OpenAI CLIP for vision-language understanding -->
+        <dependency>
+            <groupId>ai.djl.huggingface</groupId>
+            <artifactId>tokenizers</artifactId>
+            <version>0.25.0</version>
+        </dependency>
+
+        <!-- Computer Vision -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>opencv-platform</artifactId>
+            <version>4.8.1-1.5.9</version>
+        </dependency>
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>javacv-platform</artifactId>
+            <version>1.5.9</version>
+        </dependency>
+
+        <!-- Gesture Recognition -->
+        <dependency>
+            <groupId>org.bytedeco</groupId>
+            <artifactId>mediapipe-platform</artifactId>
+            <version>0.9.1.0-1.5.9</version>
+        </dependency>
+
+        <!-- GPT-4 Vision API -->
+        <dependency>
+            <groupId>com.theokanning.openai-gpt3-java</groupId>
+            <artifactId>service</artifactId>
+            <version>0.18.2</version>
+        </dependency>
+
+        <!-- Azure Cognitive Services -->
+        <dependency>
+            <groupId>com.azure</groupId>
+            <artifactId>azure-cognitiveservices-vision-computervision</artifactId>
+            <version>1.0.0-beta.1</version>
+        </dependency>
+
+        <!-- Google Cloud Vision -->
+        <dependency>
+            <groupId>com.google.cloud</groupId>
+            <artifactId>google-cloud-vision</artifactId>
+            <version>3.21.0</version>
+        </dependency>
+
+        <!-- Audio processing for multimodal scenarios -->
+        <dependency>
+            <groupId>be.tarsos.dsp</groupId>
+            <artifactId>core</artifactId>
+            <version>2.5</version>
+        </dependency>
+
+        <!-- WebRTC for real-time communication -->
+        <dependency>
+            <groupId>org.kurento</groupId>
+            <artifactId>kurento-client</artifactId>
+            <version>6.18.0</version>
+        </dependency>
+
+        <!-- WebSocket for real-time streaming -->
+        <dependency>
+            <groupId>org.java-websocket</groupId>
+            <artifactId>Java-WebSocket</artifactId>
+            <version>1.5.4</version>
+        </dependency>
+
+        <!-- Reactive streams -->
+        <dependency>
+            <groupId>io.reactivex.rxjava3</groupId>
+            <artifactId>rxjava</artifactId>
+            <version>3.1.8</version>
+        </dependency>
+
+        <!-- HTTP Client -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.12.0</version>
+        </dependency>
+
+        <!-- JSON Processing -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- Configuration -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

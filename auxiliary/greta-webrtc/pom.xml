@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>fr.cnrs.greta</groupId>
+        <artifactId>greta-parent</artifactId>
+        <version>3.1.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>greta-webrtc</artifactId>
+    <name>Greta WebRTC Integration</name>
+    <description>WebRTC support for browser-based real-time interaction with Greta platform</description>
+
+    <dependencies>
+        <!-- Greta Core Dependencies -->
+        <dependency>
+            <groupId>fr.cnrs.greta</groupId>
+            <artifactId>greta-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.cnrs.greta</groupId>
+            <artifactId>greta-multimodal-ai</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <!-- WebRTC -->
+        <dependency>
+            <groupId>org.kurento</groupId>
+            <artifactId>kurento-client</artifactId>
+            <version>6.18.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.kurento</groupId>
+            <artifactId>kurento-utils-js</artifactId>
+            <version>6.18.0</version>
+        </dependency>
+
+        <!-- WebSocket -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-messaging</artifactId>
+        </dependency>
+
+        <!-- Web framework -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- JSON Processing -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+</project>

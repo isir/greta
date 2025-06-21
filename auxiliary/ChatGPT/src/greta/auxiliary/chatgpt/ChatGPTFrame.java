@@ -5,7 +5,7 @@
  */
 package greta.auxiliary.chatgpt;
 
-import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
+// import greta.auxiliary.MeaningMiner.ImageSchemaExtractor; // MeaningMiner not in Maven build
 import greta.core.intentions.FMLTranslator;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionEmitter;
@@ -179,15 +179,16 @@ public class ChatGPTFrame extends javax.swing.JFrame implements IntentionEmitter
 
         ID id = IDProvider.createID(fmlFileName);
         id.setFmlID(fml_id);
-        if(this.cm.use_MM()){
-        ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
-         //MEANING MINER TREATMENT START
-        List<Intention> intention_list;
-        //System.out.println("File Name "+fml.toString());
-        intention_list = im.processText_2(fml.toString());
-        intentions.addAll(intention_list);
-        //MEANING MINER TREATMENT END
-        }
+        // Meaning Miner functionality disabled - MeaningMiner not in Maven build
+        // if(this.cm.use_MM()){
+        //     ImageSchemaExtractor im = new ImageSchemaExtractor(this.cm);
+        //     //MEANING MINER TREATMENT START
+        //     List<Intention> intention_list;
+        //     //System.out.println("File Name "+fml.toString());
+        //     intention_list = im.processText_2(fml.toString());
+        //     intentions.addAll(intention_list);
+        //     //MEANING MINER TREATMENT END
+        // }
         
         
        

@@ -8,7 +8,7 @@ package greta.auxiliary.chatgpt;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCSerializeException;
 import com.illposed.osc.transport.udp.OSCPortOut;
-import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
+// import greta.auxiliary.MeaningMiner.ImageSchemaExtractor; // MeaningMiner not in Maven build
 import greta.auxiliary.chatgpt.ChatGPTFrame;
 import greta.core.intentions.FMLTranslator;
 import greta.core.intentions.Intention;

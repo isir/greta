@@ -39,6 +39,12 @@
             <version>${project.version}</version>
         </dependency>
         
+        <!-- OSC (Open Sound Control) -->
+        <dependency>
+            <groupId>com.illposed.osc</groupId>
+            <artifactId>javaosc-core</artifactId>
+        </dependency>
+        
         <!-- OpenAI API Client -->
         <dependency>
             <groupId>com.theokanning.openai-gpt3-java</groupId>

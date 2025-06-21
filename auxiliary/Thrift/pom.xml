@@ -41,6 +41,13 @@
             <artifactId>libthrift</artifactId>
         </dependency>
         
+        <!-- Java Annotations (required for Java 11+) -->
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+        
         <!-- Logging -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>

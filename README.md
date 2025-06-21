@@ -242,8 +242,8 @@ speech = await controller.convert_speech_with_emotion(
 - **Therapeutic agent**: Empathetic conversation partner
 - **Research platform**: Cross-cultural interaction analysis
 
-📚 **Full Documentation**: [PYTHON-CONTROL-GUIDE.md](PYTHON-CONTROL-GUIDE.md)  
-🧠 **AI Technical Details**: [AI-ENHANCEMENTS.md](AI-ENHANCEMENTS.md)
+📚 **Full Documentation**: [PYTHON-CONTROL-GUIDE.md](docs/PYTHON-CONTROL-GUIDE.md)  
+🧠 **AI Technical Details**: [AI-ENHANCEMENTS.md](docs/AI-ENHANCEMENTS.md)
 
 ---
 
@@ -703,7 +703,7 @@ This modernized Greta platform is licensed under the **Apache License 2.0**.
 - ✅ **Dependencies**: All compatible with Apache 2.0
 - ✅ **Incompatible components**: Excluded (MaryTTS LGPL)
 
-See [LICENSING.md](LICENSING.md) for details on the license transition.
+See [LICENSING.md](docs/LICENSING.md) for details on the license transition.
 
 ---
 
@@ -734,7 +734,7 @@ See [LICENSING.md](LICENSING.md) for details on the license transition.
 ## 📞 Support
 
 ### Documentation
-- **[Testing Guide](TESTING-GUIDE.md)** - Comprehensive testing procedures
+- **[Testing Guide](docs/TESTING-GUIDE.md)** - Comprehensive testing procedures
 - **[Deployment Guide](DEPLOYMENT.md)** - Production deployment guide
 - **[Docker Optimization](DOCKER-OPTIMIZATION.md)** - Container optimization guide
 

@@ -29,6 +29,16 @@
             <artifactId>greta-signals</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-feedbacks</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-intentions</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         
         <!-- ActiveMQ -->
         <dependency>

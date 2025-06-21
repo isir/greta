@@ -1,5 +1,17 @@
 # Greta Platform - Modernized
 
+> **⚠️ EXPERIMENTAL BRANCH - UNDER CONSTRUCTION**
+> 
+> **🚧 This branch (`modernization_with_claude`) contains experimental modernization and AI enhancements that are NOT yet approved for the official Greta platform.**
+> 
+> **📋 Status**: Research and development branch for modernization exploration  
+> **🔗 Official Platform**: Please refer to the `master` branch for the current approved version  
+> **🎯 Purpose**: Demonstrate modernization possibilities and next-generation AI capabilities  
+> 
+> **⚡ Use at your own discretion for research and evaluation purposes.**
+
+---
+
 A modernized, cloud-native embodied conversational agent platform for research, education, and interactive applications.
 
 ## 🌟 What's New

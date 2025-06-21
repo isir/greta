@@ -39,6 +39,11 @@
             <artifactId>greta-mpeg4</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-feedbacks</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         
         <!-- Logging -->
         <dependency>

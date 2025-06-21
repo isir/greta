@@ -45,7 +45,8 @@
             <version>${project.version}</version>
         </dependency>
         
-        <!-- MaryTTS Core -->
+        <!-- MaryTTS Core - Temporarily disabled (dependencies not available) -->
+        <!--
         <dependency>
             <groupId>de.dfki.mary</groupId>
             <artifactId>marytts-runtime</artifactId>
@@ -56,6 +57,7 @@
             <artifactId>marytts-client</artifactId>
             <version>${marytts.version}</version>
         </dependency>
+        -->
         
         <!-- Logging -->
         <dependency>

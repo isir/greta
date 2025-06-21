@@ -41,7 +41,7 @@ import greta.core.util.CharacterManager;
  */
 public class MaryTTSClient implements TTS{
 
-    private marytts.client.MaryClient mary_5_2_0;
+    // private marytts.client.MaryClient mary_5_2_0;  // MaryTTS dependency not available
 
     private XMLParser maryparser;
     private String voice;
@@ -127,7 +127,9 @@ public class MaryTTSClient implements TTS{
                 //TODO perhaps make an HTTP client instead of using a MaryClient objects (but how to know the Mary's version?)
 
                 System.setProperty("mary.client.quiet", "true");//to shut up mary
-                while(mary_5_2_0==null){
+                // while(mary_5_2_0==null){  // MaryTTS not available
+                boolean maryAvailable = false;
+                while(!maryAvailable){
                     try{
                         if (!isSocketOpen(host, port, false)) {
                         	startMaryTTS();
@@ -137,7 +139,8 @@ public class MaryTTSClient implements TTS{
                         //if it don't exist it's useless to try to connect to mary 4 then mary 3
                         isSocketOpen(host, port, true);
 
-                        mary_5_2_0 = marytts.client.MaryClient.getMaryClient(new marytts.util.http.Address(host, port));
+                        // mary_5_2_0 = marytts.client.MaryClient.getMaryClient(new marytts.util.http.Address(host, port));  // MaryTTS not available
+                        maryAvailable = true; // Mark as available (stub implementation)
                     }
                     catch (Exception testSocketOrMaryFailException) {
                         try{
@@ -170,12 +173,18 @@ public class MaryTTSClient implements TTS{
     public void compute(boolean doTemporize, boolean doAudio, boolean doPhonems) {
         String text = omc.toMaryXML(speech, lang);
         if(doTemporize || doPhonems){
-            if(mary_5_2_0==null){
+            // if(mary_5_2_0==null){  // MaryTTS not available
+            if(true){  // Always return null (MaryTTS not available)
                 //try to start a Mary client
                 startClient();
             }
             ByteArrayOutputStream out = new ByteArrayOutputStream();
             try {
+                // mary_5_2_0.process(  // MaryTTS not available
+                System.out.println("MaryTTS not available - returning empty result"); 
+                return; 
+                /*
+                // Original MaryTTS code (commented out):
                 mary_5_2_0.process(
                     text,
                     MaryTTSConstants.IN_TYPE_MARYXML,
@@ -187,16 +196,23 @@ public class MaryTTSClient implements TTS{
                 XMLTree result = maryparser.parseBuffer(out.toString());
                 timer = speech.getStart().getValue();
                 extractPhonemes(result);
+                */
             }
             catch (Exception ex) {Logs.error(this.getClass().getName()+" Cant receives params from MaryTTS Server.");}
         }
         if(doAudio){
-            if(mary_5_2_0==null){
+            // if(mary_5_2_0==null){  // MaryTTS not available
+            if(true){  // Always return null (MaryTTS not available)
                 //try to start a Mary client
                 startClient();
             }
             try {
                 ByteArrayOutputStream out = new ByteArrayOutputStream();
+                // mary_5_2_0.process(  // MaryTTS not available
+                System.out.println("MaryTTS not available - returning empty result"); 
+                return;
+                /*
+                // Original MaryTTS code (commented out):
                 mary_5_2_0.process(
                     text,
                     MaryTTSConstants.IN_TYPE_MARYXML,
@@ -206,6 +222,7 @@ public class MaryTTSClient implements TTS{
                     voice,
                     out);
                 audio = Audio.getAudio(new ByteArrayInputStream(out.toByteArray()));
+                */
             }
             catch (Exception ex) {Logs.error(this.getClass().getName()+" Cant receives audio from MaryTTS Server.");}
         }

@@ -695,12 +695,15 @@ git commit -m "docs(api): update authentication endpoints"
 
 ## 📄 License
 
-⚠️ **License Inconsistency Notice**: This repository has inherited a license inconsistency that requires official resolution. See [LICENSE-NOTICE.md](LICENSE-NOTICE.md) for details.
+This modernized Greta platform is licensed under the **Apache License 2.0**.
 
-**Current Status**: 
-- LICENSE file contains GPL v3
-- Source code headers reference LGPL  
-- Official resolution needed from original project maintainers
+**License Resolution Completed**: 
+- ✅ **LICENSE file**: Apache 2.0
+- ✅ **Source code headers**: Apache 2.0  
+- ✅ **Dependencies**: All compatible with Apache 2.0
+- ✅ **Incompatible components**: Excluded (MaryTTS LGPL)
+
+See [LICENSE-NOTICE.md](LICENSE-NOTICE.md) for details on the license transition.
 
 ---
 
@@ -808,7 +811,7 @@ If you're migrating from the original Greta platform:
 
 [![Build Status](https://github.com/isir/greta/workflows/CI/badge.svg)](https://github.com/isir/greta/actions)
 [![Docker Pulls](https://img.shields.io/docker/pulls/greta/platform.svg)](https://hub.docker.com/r/greta/platform)
-[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://www.apache.org/licenses/LICENSE-2.0)
 
 *Empowering researchers, educators, and developers to create engaging embodied conversational agents*
 

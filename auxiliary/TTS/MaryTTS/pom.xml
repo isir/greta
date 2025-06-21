@@ -1,4 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+  EXCLUDED FROM BUILD: License Incompatibility
+  
+  This module contains MaryTTS integration which is licensed under LGPL v3.
+  It has been excluded from the Apache 2.0 licensed build for compliance reasons.
+  
+  To use MaryTTS functionality:
+  1. Accept LGPL v3 licensing requirements
+  2. Build separately outside of main project
+  3. Or replace with Apache 2.0 compatible TTS solution
+-->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
@@ -14,8 +25,8 @@
     </parent>
     
     <artifactId>greta-auxiliary-tts-marytts</artifactId>
-    <name>Greta MaryTTS</name>
-    <description>MaryTTS text-to-speech integration</description>
+    <name>Greta MaryTTS (EXCLUDED - License Incompatible)</name>
+    <description>MaryTTS text-to-speech integration - EXCLUDED due to LGPL v3 license incompatibility with Apache 2.0</description>
     
     <properties>
         <marytts.version>5.2</marytts.version>

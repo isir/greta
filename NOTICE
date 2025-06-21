@@ -1,0 +1,65 @@
+Apache Greta Platform
+Copyright 2025 Greta Modernization Project
+
+This product includes software developed by the Greta Modernization Project.
+
+Original Greta Platform developed by:
+- ISIR (Institut des Systèmes Intelligents et de Robotique)
+- CNRS (Centre National de la Recherche Scientifique)  
+- Sorbonne Université
+- Catherine Pelachaud and her research group
+
+This modernized version includes software from:
+
+Apache Software Foundation
+  Used under the Apache License 2.0
+  - Apache Log4j (http://logging.apache.org/log4j/)
+  - Apache Commons (http://commons.apache.org/)
+  - Apache ActiveMQ (http://activemq.apache.org/)
+  - Apache Thrift (http://thrift.apache.org/)
+  - Apache HttpClient (http://hc.apache.org/)
+  - Spring Framework (https://spring.io/)
+  - Jackson JSON Processor (https://github.com/FasterXML/jackson)
+
+MIT License
+  - SLF4J (http://www.slf4j.org/)
+  - OpenAI Java API (https://github.com/TheoKanning/openai-java)
+  - ONNX Runtime (https://github.com/microsoft/onnxruntime)
+  - OkHttp (https://github.com/square/okhttp)
+
+BSD License
+  - LWJGL (https://www.lwjgl.org/)
+  - JOGL (https://jogamp.org/)
+
+Google Inc.
+  - Guava (https://github.com/google/guava)
+  Used under the Apache License 2.0
+
+Deep Java Library (DJL)
+  - Amazon DJL (https://djl.ai/)
+  Used under the Apache License 2.0
+
+OpenCV
+  - Bytedeco OpenCV (https://github.com/bytedeco/javacv)
+  Used under the Apache License 2.0
+
+Microsoft Corporation
+  - Azure Speech SDK (https://github.com/Microsoft/cognitive-services-speech-sdk-java)
+  Used under the MIT License
+
+AI/ML Libraries
+  - Various neural network and machine learning components
+  Used under compatible open source licenses
+
+EXCLUDED COMPONENTS (Not distributed with Apache 2.0 build):
+  - MaryTTS (LGPL v3) - Text-to-speech system
+    Available separately under LGPL licensing terms
+    See auxiliary/TTS/MaryTTS/ for details
+
+This project contains AI enhancements and modernization efforts performed
+with assistance from Claude AI (Anthropic).
+
+For the complete list of dependencies and their licenses, see:
+- pom.xml files in each module
+- LICENSE file in the root directory
+- LICENSE-NOTICE.md for detailed license transition information

@@ -98,7 +98,11 @@ COPY --from=builder --chown=greta:greta /app/auxiliary/*/target/*.jar ./lib/
 
 # Copy essential data and configuration files
 COPY --from=builder --chown=greta:greta /app/bin/Common/Data/ ./data/
-COPY --from=builder --chown=greta:greta /app/auxiliary/*/Data/ ./data/auxiliary/ 2>/dev/null || true
+RUN --mount=from=builder,source=/app,target=/tmp/builder \
+    mkdir -p ./data/auxiliary/ && \
+    if [ -d "/tmp/builder/auxiliary" ]; then \
+      find /tmp/builder/auxiliary -name "Data" -type d -exec cp -r {} ./data/auxiliary/ \; 2>/dev/null || true; \
+    fi
 COPY --from=builder --chown=greta:greta /app/src/main/resources/ ./config/
 
 # Create startup script with better error handling

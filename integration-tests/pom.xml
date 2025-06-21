@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>fr.isir.greta</groupId>
+        <artifactId>greta-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    
+    <artifactId>greta-integration-tests</artifactId>
+    <packaging>jar</packaging>
+    <name>Greta Integration Tests</name>
+    <description>Comprehensive integration tests for the Greta platform</description>
+    
+    <properties>
+        <testcontainers.version>1.19.8</testcontainers.version>
+        <rest-assured.version>5.4.0</rest-assured.version>
+        <awaitility.version>4.2.1</awaitility.version>
+    </properties>
+    
+    <dependencies>
+        <!-- Core modules for testing -->
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-animation-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-signals</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-intentions</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-behavior-realizer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- Application module -->
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-application</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.assertj</groupId>
+            <artifactId>assertj-core</artifactId>
+            <version>3.25.3</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
+            <version>5.11.0</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Integration test specific -->
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>testcontainers</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.testcontainers</groupId>
+            <artifactId>activemq</artifactId>
+            <version>${testcontainers.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- REST API testing -->
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>${rest-assured.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Async testing -->
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <version>${awaitility.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Performance testing -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>1.37</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>1.37</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <!-- Integration test plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>3.2.5</version>
+                <configuration>
+                    <includes>
+                        <include>**/*IT.java</include>
+                        <include>**/*IntegrationTest.java</include>
+                    </includes>
+                    <systemPropertyVariables>
+                        <test.environment>integration</test.environment>
+                    </systemPropertyVariables>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>integration-test</goal>
+                            <goal>verify</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- JMH benchmark plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>run-benchmarks</id>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <skip>${skipBenchmarks}</skip>
+                            <executable>java</executable>
+                            <arguments>
+                                <argument>-classpath</argument>
+                                <classpath/>
+                                <argument>org.openjdk.jmh.Main</argument>
+                                <argument>-rf</argument>
+                                <argument>json</argument>
+                                <argument>-rff</argument>
+                                <argument>target/jmh-results.json</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

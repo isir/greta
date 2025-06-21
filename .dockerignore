@@ -1,64 +1,165 @@
-# Git and version control
+# Docker ignore file for Greta Platform
+# Optimized for build performance and security
+
+# =============================================================================
+# Version control and development files
+# =============================================================================
 .git
 .gitignore
+.gitattributes
+.github/
 *.md
 
-# Build outputs
+# =============================================================================
+# Build outputs and artifacts
+# =============================================================================
 target/
 */target/
+**/target/
 *.jar
 *.war
+*.ear
+*.class
+*.log
+*.tmp
+*.temp
 
-# IDE files
+# Maven wrapper JAR (will be copied separately)
+.mvn/wrapper/maven-wrapper.jar
+
+# =============================================================================
+# IDE and editor files
+# =============================================================================
 .idea/
 *.iml
+*.ipr
+*.iws
 .vscode/
 .project
 .classpath
 .settings/
+nbproject/
+*.sublime-*
+*.code-workspace
 
-# OS files
+# =============================================================================
+# Operating system files
+# =============================================================================
 .DS_Store
 Thumbs.db
+*.swp
+*.swo
+*~
+.directory
 
-# Logs
-*.log
+# =============================================================================
+# Logs and temporary files
+# =============================================================================
 logs/
-
-# Test outputs
+*.log
+*.log.*
 test-output/
 test-results/
-
-# Temporary files
-*.tmp
-*.temp
-*~
+surefire-reports/
+failsafe-reports/
 
 # Cache directories
 .m2/
 .sonar/
+cache/
+tmp/
+temp/
 
+# =============================================================================
 # Documentation and examples
+# =============================================================================
 docs/
+documentation/
 examples/
 backup/
+*.pdf
+*.docx
 
-# Large data files that shouldn't be in container
+# =============================================================================
+# Large data files and models
+# =============================================================================
 bin/Common/Data/*/cache/
 bin/Common/Data/*/logs/
 *.pth
 *.model
 *.h5
+*.pkl
+*.zip
+*.tar.gz
+*.tgz
 
-# NetBeans artifacts
+# =============================================================================
+# Configuration and secrets
+# =============================================================================
+config/local/
+config/development/
+config/*.local.*
+secrets/
+*.key
+*.pem
+*.p12
+*.jks
+keystore*
+truststore*
+.env
+.env.local
+.env.*.local
+
+# =============================================================================
+# Legacy NetBeans and external tools (removed during modernization)
+# =============================================================================
 nbproject/
 build/
 dist/
-
-# External tools and binaries (we removed these anyway)
 bin/charniak/
 bin/NVBG/
 bin/Scripts/
 
-# CI/CD files
-.github/
+# =============================================================================
+# Docker and deployment files
+# =============================================================================
+Dockerfile*
+docker-compose*.yml
+.dockerignore
+monitoring/
+k8s/
+helm/
+
+# =============================================================================
+# NodeJS/NPM (if any frontend components)
+# =============================================================================
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# =============================================================================
+# Python (if any scripts)
+# =============================================================================
+__pycache__/
+*.pyc
+*.pyo
+.Python
+*.egg-info/
+
+# =============================================================================
+# Coverage and analysis reports
+# =============================================================================
+coverage/
+*.coverage
+.nyc_output
+sonar-project.properties
+
+# =============================================================================
+# Application-specific excludes
+# =============================================================================
+data/models/
+data/cache/
+data/logs/
+performance-results/

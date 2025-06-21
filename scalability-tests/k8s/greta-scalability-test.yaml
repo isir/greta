@@ -1,0 +1,344 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: greta-scalability
+  labels:
+    purpose: scalability-testing
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: greta-app
+  namespace: greta-scalability
+  labels:
+    app: greta
+    tier: application
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 50%
+      maxUnavailable: 25%
+  selector:
+    matchLabels:
+      app: greta
+      tier: application
+  template:
+    metadata:
+      labels:
+        app: greta
+        tier: application
+    spec:
+      containers:
+      - name: greta-app
+        image: greta:latest
+        ports:
+        - containerPort: 8080
+          name: http
+        - containerPort: 8081
+          name: management
+        env:
+        - name: GRETA_ENV
+          value: "scalability-test"
+        - name: JAVA_OPTS
+          value: "-Xmx1g -Xms512m -XX:+UseG1GC"
+        - name: DATABASE_URL
+          value: "jdbc:postgresql://postgres:5432/greta"
+        - name: REDIS_HOST
+          value: "redis"
+        - name: ACTIVEMQ_URL
+          value: "tcp://activemq:61616"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8080
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /health/ready
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: greta-service
+  namespace: greta-scalability
+  labels:
+    app: greta
+    tier: application
+spec:
+  selector:
+    app: greta
+    tier: application
+  ports:
+  - name: http
+    port: 80
+    targetPort: 8080
+    protocol: TCP
+  - name: management
+    port: 8081
+    targetPort: 8081
+    protocol: TCP
+  type: ClusterIP
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: greta-hpa
+  namespace: greta-scalability
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: greta-app
+  minReplicas: 3
+  maxReplicas: 20
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 15
+      - type: Pods
+        value: 4
+        periodSeconds: 15
+      selectPolicy: Max
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 10
+        periodSeconds: 60
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  namespace: greta-scalability
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        env:
+        - name: POSTGRES_DB
+          value: greta
+        - name: POSTGRES_USER
+          value: greta
+        - name: POSTGRES_PASSWORD
+          value: test123
+        - name: POSTGRES_INITDB_ARGS
+          value: "--encoding=UTF-8"
+        ports:
+        - containerPort: 5432
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+      volumes:
+      - name: postgres-data
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: postgres
+  namespace: greta-scalability
+spec:
+  selector:
+    app: postgres
+  ports:
+  - port: 5432
+    targetPort: 5432
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis
+  namespace: greta-scalability
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: redis
+  template:
+    metadata:
+      labels:
+        app: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7.2-alpine
+        ports:
+        - containerPort: 6379
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "100m"
+          limits:
+            memory: "512Mi"
+            cpu: "250m"
+        command: ["redis-server"]
+        args: ["--maxmemory", "400mb", "--maxmemory-policy", "allkeys-lru"]
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis
+  namespace: greta-scalability
+spec:
+  selector:
+    app: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: activemq
+  namespace: greta-scalability
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: activemq
+  template:
+    metadata:
+      labels:
+        app: activemq
+    spec:
+      containers:
+      - name: activemq
+        image: rmohr/activemq:5.18.0-alpine
+        ports:
+        - containerPort: 61616
+        - containerPort: 8161
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: activemq
+  namespace: greta-scalability
+spec:
+  selector:
+    app: activemq
+  ports:
+  - name: openwire
+    port: 61616
+    targetPort: 61616
+  - name: web
+    port: 8161
+    targetPort: 8161
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: greta-ingress
+  namespace: greta-scalability
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - host: greta-scalability.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: greta-service
+            port:
+              number: 80
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: scalability-test-config
+  namespace: greta-scalability
+data:
+  load-test.yaml: |
+    scenarios:
+      - name: baseline
+        users: 50
+        duration: 300
+        ramp_up: 60
+      - name: moderate_load
+        users: 200
+        duration: 600
+        ramp_up: 120
+      - name: high_load
+        users: 500
+        duration: 900
+        ramp_up: 180
+      - name: stress_test
+        users: 1000
+        duration: 600
+        ramp_up: 300
+      - name: spike_test
+        users: 100
+        duration: 60
+        spike_to: 800
+        spike_duration: 120

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>fr.isir.greta</groupId>
+        <artifactId>greta-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../../pom.xml</relativePath>
+    </parent>
+    
+    <artifactId>greta-auxiliary-chatgpt</artifactId>
+    <name>Greta ChatGPT</name>
+    <description>ChatGPT and OpenAI API integration</description>
+    
+    <properties>
+        <openai.client.version>0.18.2</openai.client.version>
+    </properties>
+    
+    <dependencies>
+        <!-- Internal Dependencies -->
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-signals</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-intentions</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- OpenAI API Client -->
+        <dependency>
+            <groupId>com.theokanning.openai-gpt3-java</groupId>
+            <artifactId>service</artifactId>
+            <version>${openai.client.version}</version>
+        </dependency>
+        
+        <!-- HTTP client -->
+        <dependency>
+            <groupId>org.apache.httpcomponents.client5</groupId>
+            <artifactId>httpclient5</artifactId>
+            <version>5.3.1</version>
+        </dependency>
+        
+        <!-- JSON processing -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+        </dependency>
+        
+        <!-- Logging -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+        </dependency>
+        
+        <!-- Utilities -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+        </dependency>
+        
+        <!-- GUI components -->
+        <dependency>
+            <groupId>org.jogamp.jogl</groupId>
+            <artifactId>jogl-all-main</artifactId>
+        </dependency>
+        
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>test</testSourceDirectory>
+        
+        <resources>
+            <resource>
+                <directory>src</directory>
+                <excludes>
+                    <exclude>**/*.java</exclude>
+                </excludes>
+            </resource>
+        </resources>
+    </build>
+</project>

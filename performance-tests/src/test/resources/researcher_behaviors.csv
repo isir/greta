@@ -1,0 +1,11 @@
+userId,studyName,participantId,experimentalCondition,intention,emotion,formality,responseTime,accuracy,engagement
+researcher_001,social_interaction_study,P001,control,greeting,neutral,formal,1200,0.85,0.7
+researcher_002,emotion_recognition,P002,happy,explanation,positive,informal,980,0.92,0.8
+researcher_003,gesture_comprehension,P003,gesture_enhanced,instruction,neutral,formal,1500,0.78,0.6
+researcher_004,cultural_adaptation,P004,japanese_context,apologizing,apologetic,formal,1100,0.88,0.75
+researcher_005,autism_interaction,P005,simplified,encouragement,positive,informal,2200,0.65,0.9
+researcher_006,elderly_communication,P006,slow_speech,question,curious,formal,1800,0.82,0.7
+researcher_007,child_engagement,P007,playful,storytelling,excited,informal,800,0.95,0.95
+researcher_008,anxiety_therapy,P008,calming,reassurance,calm,informal,1400,0.77,0.8
+researcher_009,language_learning,P009,spanish_accent,correction,patient,formal,1300,0.84,0.75
+researcher_010,attention_deficit,P010,focused,instruction,neutral,informal,1600,0.73,0.65

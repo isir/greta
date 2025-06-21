@@ -1,0 +1,280 @@
+version: '3.8'
+
+# Production Docker Compose Configuration for Greta Platform
+# Optimized for performance, security, and reliability
+
+services:
+  greta-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MAVEN_OPTS: "-Dmaven.repo.local=/root/.m2/repository -Xmx2048m"
+        JAVA_BUILD_OPTS: "-XX:+UseG1GC -XX:+UseStringDeduplication -XX:+OptimizeStringConcat"
+        GRETA_VERSION: "${GRETA_VERSION:-1.0.0-SNAPSHOT}"
+      cache_from:
+        - greta:latest
+        - greta:cache
+    container_name: greta-application-prod
+    restart: unless-stopped
+    
+    # Resource limits for production
+    deploy:
+      resources:
+        limits:
+          cpus: '4.0'
+          memory: 4G
+        reservations:
+          cpus: '1.0'
+          memory: 1G
+    
+    # Production environment configuration
+    environment:
+      - GRETA_ENV=production
+      - JAVA_OPTS=-Xmx3g -Xms1g -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -Dfile.encoding=UTF-8
+      - GRETA_CONFIG=/app/config/production.properties
+      - GRETA_LOG_LEVEL=INFO
+      - TZ=UTC
+    
+    ports:
+      - "80:8080"        # Main application port
+      - "8081:8081"      # Management/metrics port
+      - "61616:61616"    # ActiveMQ port
+      - "1883:1883"      # MQTT port
+    
+    volumes:
+      # Production configuration
+      - ./config/production.properties:/app/config/production.properties:ro
+      - ./config/log4j2-prod.xml:/app/config/log4j2.xml:ro
+      
+      # Persistent data
+      - greta-data:/app/data
+      - greta-logs:/app/logs
+      - greta-cache:/app/cache
+    
+    networks:
+      - greta-prod
+      - greta-monitoring
+    
+    # Security configuration
+    security_opt:
+      - no-new-privileges:true
+    read_only: false  # Application needs to write logs and cache
+    tmpfs:
+      - /tmp:noexec,nosuid,size=100m
+    
+    # Health checks
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 120s
+    
+    depends_on:
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+        compress: "true"
+
+  # Redis for caching and session storage
+  redis:
+    image: redis:7.2-alpine
+    container_name: greta-redis-prod
+    restart: unless-stopped
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 512M
+        reservations:
+          cpus: '0.1'
+          memory: 128M
+    
+    ports:
+      - "127.0.0.1:6379:6379"
+    
+    volumes:
+      - redis-data:/data
+      - ./config/redis.conf:/usr/local/etc/redis/redis.conf:ro
+    
+    command: redis-server /usr/local/etc/redis/redis.conf
+    
+    networks:
+      - greta-prod
+    
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp:noexec,nosuid,size=50m
+    
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+  # PostgreSQL for persistent data
+  postgres:
+    image: postgres:15-alpine
+    container_name: greta-postgres-prod
+    restart: unless-stopped
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '2.0'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 256M
+    
+    environment:
+      - POSTGRES_DB=greta
+      - POSTGRES_USER=greta
+      - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
+      - POSTGRES_INITDB_ARGS=--encoding=UTF-8 --lc-collate=C --lc-ctype=C
+    
+    ports:
+      - "127.0.0.1:5432:5432"
+    
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./sql/init:/docker-entrypoint-initdb.d:ro
+    
+    networks:
+      - greta-prod
+    
+    secrets:
+      - postgres_password
+    
+    security_opt:
+      - no-new-privileges:true
+    
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U greta -d greta"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "3"
+
+  # Nginx reverse proxy and load balancer
+  nginx:
+    image: nginx:1.25-alpine
+    container_name: greta-nginx-prod
+    restart: unless-stopped
+    
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 256M
+        reservations:
+          cpus: '0.1'
+          memory: 64M
+    
+    ports:
+      - "443:443"
+      - "80:80"
+    
+    volumes:
+      - ./config/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./config/nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./ssl:/etc/nginx/ssl:ro
+      - nginx-cache:/var/cache/nginx
+      - nginx-logs:/var/log/nginx
+    
+    networks:
+      - greta-prod
+      - greta-monitoring
+    
+    depends_on:
+      - greta-app
+    
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /var/run:noexec,nosuid,size=50m
+      - /tmp:noexec,nosuid,size=50m
+    
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "5"
+
+networks:
+  greta-prod:
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-greta-prod
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+  
+  greta-monitoring:
+    external: true
+
+volumes:
+  greta-data:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/greta/data
+  
+  greta-logs:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /opt/greta/logs
+  
+  greta-cache:
+    driver: local
+  
+  redis-data:
+    driver: local
+  
+  postgres-data:
+    driver: local
+  
+  nginx-cache:
+    driver: local
+  
+  nginx-logs:
+    driver: local
+
+secrets:
+  postgres_password:
+    file: ./secrets/postgres_password.txt

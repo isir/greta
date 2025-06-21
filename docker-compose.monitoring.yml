@@ -1,0 +1,128 @@
+version: '3.8'
+
+# Greta Performance Monitoring Stack
+# Provides Prometheus, Grafana, and related monitoring tools
+
+services:
+  greta-app:
+    build: .
+    container_name: greta-application
+    ports:
+      - "8080:8080"
+      - "8081:8081"  # Management port
+    environment:
+      - GRETA_ENV=production
+      - JAVA_OPTS=-Xmx2g -XX:+UseG1GC -javaagent:/app/agents/jmx-exporter.jar=8081:/app/config/jmx-exporter.yml
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs
+    networks:
+      - greta-monitoring
+    depends_on:
+      - prometheus
+      - grafana
+
+  prometheus:
+    image: prom/prometheus:v2.47.0
+    container_name: greta-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/prometheus/rules:/etc/prometheus/rules
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+      - '--web.enable-admin-api'
+    networks:
+      - greta-monitoring
+
+  grafana:
+    image: grafana/grafana:10.1.0
+    container_name: greta-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=greta123
+      - GF_USERS_ALLOW_SIGN_UP=false
+      - GF_INSTALL_PLUGINS=grafana-piechart-panel,grafana-worldmap-panel
+    volumes:
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+      - grafana-data:/var/lib/grafana
+    networks:
+      - greta-monitoring
+    depends_on:
+      - prometheus
+
+  node-exporter:
+    image: prom/node-exporter:v1.6.1
+    container_name: greta-node-exporter
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.rootfs=/rootfs'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      - greta-monitoring
+
+  cadvisor:
+    image: gcr.io/cadvisor/cadvisor:v0.47.2
+    container_name: greta-cadvisor
+    ports:
+      - "8082:8080"
+    volumes:
+      - /:/rootfs:ro
+      - /var/run:/var/run:rw
+      - /sys:/sys:ro
+      - /var/lib/docker/:/var/lib/docker:ro
+      - /dev/disk/:/dev/disk:ro
+    privileged: true
+    networks:
+      - greta-monitoring
+
+  alertmanager:
+    image: prom/alertmanager:v0.26.0
+    container_name: greta-alertmanager
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./monitoring/alertmanager/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - alertmanager-data:/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/alertmanager'
+      - '--web.external-url=http://localhost:9093'
+    networks:
+      - greta-monitoring
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.49
+    container_name: greta-jaeger
+    ports:
+      - "16686:16686"  # Jaeger UI
+      - "14268:14268"  # Jaeger collector
+    environment:
+      - COLLECTOR_OTLP_ENABLED=true
+    networks:
+      - greta-monitoring
+
+networks:
+  greta-monitoring:
+    driver: bridge
+
+volumes:
+  prometheus-data:
+  grafana-data:
+  alertmanager-data:

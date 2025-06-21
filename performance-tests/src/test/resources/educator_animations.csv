@@ -1,0 +1,11 @@
+username,animationType,animationName,duration,subject,ageGroup,adjustedIntensity,adjustedSpeed,lessonTitle,totalDuration
+educator_001,gesture,introduction_wave,2.5,mathematics,elementary,0.8,1.0,Basic Addition,300
+educator_002,facial,encouraging_smile,1.5,science,middle,0.9,1.2,Chemical Reactions,450
+educator_003,posture,confident_stance,3.0,history,high,0.7,0.9,World War II,600
+educator_004,multimodal,explain_concept,4.5,literature,elementary,0.8,1.1,Poetry Analysis,420
+educator_005,gesture,pointing_diagram,2.0,geography,middle,0.9,1.0,Climate Zones,380
+educator_006,facial,thinking_expression,2.2,mathematics,high,0.6,0.8,Calculus Basics,720
+educator_007,gesture,measurement_demo,3.5,science,elementary,0.8,1.0,Measurement Units,360
+educator_008,posture,authoritative_pose,2.8,social_studies,middle,0.7,0.9,Government Structure,480
+educator_009,multimodal,storytelling_gesture,5.0,literature,elementary,0.9,1.2,Fairy Tales,300
+educator_010,facial,surprised_reaction,1.8,science,middle,0.8,1.1,Chemical Explosions,420

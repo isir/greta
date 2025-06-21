@@ -1,0 +1,97 @@
+version: '3.8'
+
+# Test environment Docker Compose configuration
+# Optimized for automated testing with minimal resource usage
+
+services:
+  postgres-test:
+    image: postgres:15-alpine
+    container_name: greta-postgres-test
+    environment:
+      POSTGRES_DB: greta_test
+      POSTGRES_USER: greta
+      POSTGRES_PASSWORD: test123
+      POSTGRES_INITDB_ARGS: "--encoding=UTF-8 --lc-collate=C --lc-ctype=C"
+    ports:
+      - "5433:5432"  # Different port to avoid conflicts
+    volumes:
+      - postgres-test-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U greta -d greta_test"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - greta-test
+
+  redis-test:
+    image: redis:7.2-alpine
+    container_name: greta-redis-test
+    ports:
+      - "6380:6379"  # Different port to avoid conflicts
+    command: redis-server --maxmemory 256mb --maxmemory-policy allkeys-lru
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+    networks:
+      - greta-test
+
+  activemq-test:
+    image: rmohr/activemq:5.18.0-alpine
+    container_name: greta-activemq-test
+    ports:
+      - "61617:61616"  # Different port to avoid conflicts
+      - "8162:8161"    # Different port to avoid conflicts
+    environment:
+      ACTIVEMQ_OPTS_MEMORY: "-Xms256m -Xmx512m"
+    healthcheck:
+      test: ["CMD-SHELL", "netstat -an | grep 61616 | grep LISTEN"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - greta-test
+
+  # Test database for integration tests
+  postgres-integration:
+    image: postgres:15-alpine
+    container_name: greta-postgres-integration
+    environment:
+      POSTGRES_DB: greta_integration
+      POSTGRES_USER: greta
+      POSTGRES_PASSWORD: test123
+    ports:
+      - "5434:5432"
+    tmpfs:
+      - /var/lib/postgresql/data:rw,noexec,nosuid,size=200m
+    networks:
+      - greta-test
+
+  # Monitoring for test metrics
+  prometheus-test:
+    image: prom/prometheus:latest
+    container_name: greta-prometheus-test
+    ports:
+      - "9091:9090"  # Different port to avoid conflicts
+    volumes:
+      - ./monitoring/prometheus-test.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=1h'  # Short retention for tests
+      - '--web.enable-lifecycle'
+    networks:
+      - greta-test
+
+networks:
+  greta-test:
+    driver: bridge
+    name: greta-test-network
+
+volumes:
+  postgres-test-data:
+    driver: local

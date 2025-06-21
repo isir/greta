@@ -1,0 +1,104 @@
+# Micrometer Performance Monitoring Configuration for Greta
+# Provides comprehensive application performance monitoring
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+    jmx:
+      exposure:
+        include: "*"
+  
+  endpoint:
+    health:
+      show-details: always
+    metrics:
+      enabled: true
+    prometheus:
+      enabled: true
+    info:
+      enabled: true
+
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+        greta.animation.frame.time: true
+        greta.signal.processing.time: true
+      percentiles:
+        http.server.requests: 0.5, 0.95, 0.99
+        greta.animation.frame.time: 0.5, 0.95, 0.99
+        greta.signal.processing.time: 0.5, 0.95, 0.99
+    
+    tags:
+      application: greta
+      environment: ${GRETA_ENV:production}
+      version: ${greta.version:1.0.0-SNAPSHOT}
+    
+    export:
+      prometheus:
+        enabled: true
+        step: 10s
+        descriptions: true
+      
+      jmx:
+        enabled: true
+        domain: greta.metrics
+      
+      simple:
+        enabled: true
+        step: 10s
+
+# Custom Greta metrics configuration
+greta:
+  metrics:
+    animation:
+      enabled: true
+      frame-rate-tracking: true
+      performance-thresholds:
+        warning: 50ms
+        critical: 100ms
+    
+    signals:
+      enabled: true
+      processing-time-tracking: true
+      queue-size-monitoring: true
+    
+    memory:
+      enabled: true
+      gc-monitoring: true
+      heap-monitoring: true
+    
+    ai:
+      enabled: true
+      response-time-tracking: true
+      token-usage-tracking: true
+    
+    tts:
+      enabled: true
+      synthesis-time-tracking: true
+      voice-quality-metrics: true
+
+# Application-specific monitoring
+application:
+  monitoring:
+    health-checks:
+      - name: "animation-pipeline"
+        enabled: true
+        interval: 30s
+      - name: "signal-processing"
+        enabled: true
+        interval: 10s
+      - name: "memory-usage"
+        enabled: true
+        interval: 60s
+      - name: "external-services"
+        enabled: true
+        interval: 30s
+    
+    alerts:
+      memory-usage-threshold: 80%
+      response-time-threshold: 1000ms
+      error-rate-threshold: 5%
+      frame-rate-threshold: 25fps

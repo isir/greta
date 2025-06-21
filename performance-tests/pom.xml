@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>fr.isir.greta</groupId>
+        <artifactId>greta-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    
+    <artifactId>greta-performance-tests</artifactId>
+    <packaging>jar</packaging>
+    <name>Greta Performance Tests</name>
+    <description>Performance and load testing suite for the Greta platform</description>
+    
+    <properties>
+        <jmh.version>1.37</jmh.version>
+        <gatling.version>3.11.3</gatling.version>
+    </properties>
+    
+    <dependencies>
+        <!-- Core modules -->
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-util</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-animation-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-behavior-realizer</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        
+        <!-- JMH for microbenchmarks -->
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+        
+        <!-- Gatling for load testing -->
+        <dependency>
+            <groupId>io.gatling.highcharts</groupId>
+            <artifactId>gatling-charts-highcharts</artifactId>
+            <version>${gatling.version}</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Memory profiling -->
+        <dependency>
+            <groupId>org.openjdk.jol</groupId>
+            <artifactId>jol-core</artifactId>
+            <version>0.17</version>
+        </dependency>
+        
+        <!-- Async profiler integration -->
+        <dependency>
+            <groupId>com.github.chrishantha.allocation.sampler</groupId>
+            <artifactId>allocation-instrumenter</artifactId>
+            <version>0.2.4</version>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <!-- JMH benchmark plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.5.2</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <finalName>greta-benchmarks</finalName>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>org.openjdk.jmh.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- Gatling plugin -->
+            <plugin>
+                <groupId>io.gatling</groupId>
+                <artifactId>gatling-maven-plugin</artifactId>
+                <version>4.9.2</version>
+                <configuration>
+                    <simulationClass>greta.performance.GretaLoadSimulation</simulationClass>
+                    <resultsFolder>target/gatling</resultsFolder>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

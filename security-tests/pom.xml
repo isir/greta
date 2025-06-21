@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 
+         http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>fr.isir.greta</groupId>
+        <artifactId>greta-parent</artifactId>
+        <version>1.0.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    
+    <artifactId>greta-security-tests</artifactId>
+    <packaging>jar</packaging>
+    <name>Greta Security Tests</name>
+    <description>Security testing framework for the Greta platform</description>
+    
+    <properties>
+        <owasp.dependency.check.version>9.0.10</owasp.dependency.check.version>
+        <zap.version>2.14.0</zap.version>
+    </properties>
+    
+    <dependencies>
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <version>5.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Security testing libraries -->
+        <dependency>
+            <groupId>org.zaproxy</groupId>
+            <artifactId>zap-clientapi</artifactId>
+            <version>1.14.0</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- JWT testing -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.4.0</version>
+            <scope>test</scope>
+        </dependency>
+        
+        <!-- Cryptography testing -->
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk18on</artifactId>
+            <version>1.77</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    
+    <build>
+        <plugins>
+            <!-- OWASP Dependency Check -->
+            <plugin>
+                <groupId>org.owasp</groupId>
+                <artifactId>dependency-check-maven</artifactId>
+                <version>${owasp.dependency.check.version}</version>
+                <configuration>
+                    <format>ALL</format>
+                    <failBuildOnCVSS>7</failBuildOnCVSS>
+                    <suppressionFile>owasp-suppressions.xml</suppressionFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            
+            <!-- SpotBugs Security -->
+            <plugin>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-maven-plugin</artifactId>
+                <version>4.8.3.1</version>
+                <configuration>
+                    <includeFilterFile>spotbugs-security.xml</includeFilterFile>
+                    <plugins>
+                        <plugin>
+                            <groupId>com.h3xstream.findsecbugs</groupId>
+                            <artifactId>findsecbugs-plugin</artifactId>
+                            <version>1.13.0</version>
+                        </plugin>
+                    </plugins>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

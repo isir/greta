@@ -1,0 +1,16 @@
+gradeLevel,preferredSubject,skillLevel,studentResponse,confidenceLevel
+grade_3,mathematics,beginner,7,0.6
+grade_5,science,intermediate,photosynthesis,0.8
+grade_8,history,advanced,industrial_revolution,0.9
+grade_2,literature,beginner,happy,0.4
+grade_6,geography,intermediate,pacific_ocean,0.7
+grade_10,mathematics,advanced,quadratic,0.8
+grade_4,science,intermediate,gravity,0.7
+grade_7,social_studies,intermediate,democracy,0.6
+grade_1,literature,beginner,cat,0.5
+grade_9,history,advanced,renaissance,0.9
+grade_6,mathematics,intermediate,fraction,0.6
+grade_4,science,beginner,water_cycle,0.5
+grade_11,literature,advanced,metaphor,0.8
+grade_3,geography,beginner,continent,0.4
+grade_8,mathematics,advanced,algebra,0.8

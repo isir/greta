@@ -73,20 +73,6 @@
         <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>test</testSourceDirectory>
         
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <!-- Exclude files that depend on SocialParameters module (not part of Maven build) -->
-                        <exclude>**/EmotionMLTranslator.java</exclude>
-                        <exclude>greta/auxiliary/emotionml/EmotionMLTranslator.java</exclude>
-                    </excludes>
-                </configuration>
-            </plugin>
-        </plugins>
-        
         <resources>
             <resource>
                 <directory>src</directory>

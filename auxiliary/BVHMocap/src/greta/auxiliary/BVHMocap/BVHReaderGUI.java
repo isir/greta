@@ -15,8 +15,8 @@
  */
 package greta.auxiliary.BVHMocap;
 
-import greta.core.animation.common.Joint;
-import greta.core.animation.common.Skeleton;
+import greta.core.animation.Joint;
+import greta.core.animation.Skeleton;
 import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
 import greta.core.animation.mpeg4.bap.BAPFramePerformer;

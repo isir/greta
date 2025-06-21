@@ -357,5 +357,9 @@
             <id>jogamp</id>
             <url>https://jogamp.org/deployment/maven</url>
         </repository>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
     </repositories>
 </project>

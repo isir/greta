@@ -30,6 +30,8 @@
         </dependency>
 
         <!-- WebRTC -->
+        <!-- Kurento dependencies temporarily disabled (not available in repository) -->
+        <!--
         <dependency>
             <groupId>org.kurento</groupId>
             <artifactId>kurento-client</artifactId>
@@ -40,6 +42,7 @@
             <artifactId>kurento-utils-js</artifactId>
             <version>6.18.0</version>
         </dependency>
+        -->
 
         <!-- WebSocket -->
         <dependency>

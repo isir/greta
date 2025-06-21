@@ -6,30 +6,30 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>fr.cnrs.greta</groupId>
+        <groupId>fr.isir.greta</groupId>
         <artifactId>greta-parent</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>greta-llm-integration</artifactId>
+    <artifactId>greta-auxiliary-llm-integration</artifactId>
     <name>Greta LLM Integration</name>
     <description>Advanced Large Language Model integration for natural conversation generation</description>
 
     <dependencies>
         <!-- Greta Core Dependencies -->
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
+            <groupId>fr.isir.greta</groupId>
             <artifactId>greta-util</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
+            <groupId>fr.isir.greta</groupId>
             <artifactId>greta-intentions</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
+            <groupId>fr.isir.greta</groupId>
             <artifactId>greta-behavior-realizer</artifactId>
             <version>${project.version}</version>
         </dependency>

@@ -6,26 +6,26 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>fr.cnrs.greta</groupId>
+        <groupId>fr.isir.greta</groupId>
         <artifactId>greta-parent</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>greta-webrtc</artifactId>
+    <artifactId>greta-auxiliary-webrtc</artifactId>
     <name>Greta WebRTC Integration</name>
     <description>WebRTC support for browser-based real-time interaction with Greta platform</description>
 
     <dependencies>
         <!-- Greta Core Dependencies -->
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
+            <groupId>fr.isir.greta</groupId>
             <artifactId>greta-util</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
-            <artifactId>greta-multimodal-ai</artifactId>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-auxiliary-multimodal-ai</artifactId>
             <version>${project.version}</version>
         </dependency>
 

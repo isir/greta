@@ -78,6 +78,19 @@
         <module>auxiliary/ChatGPT</module>
         <module>auxiliary/BVHMocap</module>
         
+        <!-- Advanced AI Modules -->
+        <module>auxiliary/greta-adaptive-personality</module>
+        <module>auxiliary/greta-emotion-recognition</module>
+        <module>auxiliary/greta-llm-integration</module>
+        <module>auxiliary/greta-multimodal-ai</module>
+        <module>auxiliary/greta-neural-gestures</module>
+        <module>auxiliary/greta-speech2speech</module>
+        <module>auxiliary/greta-webrtc</module>
+        
+        <!-- TTS Modules -->
+        <module>auxiliary/TTS/AzureTTS</module>
+        <module>auxiliary/TTS/MaryTTS</module>
+        
         <!-- Application -->
         <module>application/Modular</module>
     </modules>

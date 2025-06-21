@@ -6,36 +6,36 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>fr.cnrs.greta</groupId>
+        <groupId>fr.isir.greta</groupId>
         <artifactId>greta-parent</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>greta-multimodal-ai</artifactId>
+    <artifactId>greta-auxiliary-multimodal-ai</artifactId>
     <name>Greta Multimodal AI Integration</name>
     <description>Advanced multimodal AI combining vision, speech, gesture, and language understanding</description>
 
     <dependencies>
         <!-- Greta Core Dependencies -->
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
+            <groupId>fr.isir.greta</groupId>
             <artifactId>greta-util</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
-            <artifactId>greta-llm-integration</artifactId>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-auxiliary-llm-integration</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
-            <artifactId>greta-emotion-recognition</artifactId>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-auxiliary-emotion-recognition</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
-            <artifactId>greta-speech2speech</artifactId>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-auxiliary-speech2speech</artifactId>
             <version>${project.version}</version>
         </dependency>
 

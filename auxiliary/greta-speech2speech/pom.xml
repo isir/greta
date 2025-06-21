@@ -6,25 +6,25 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>fr.cnrs.greta</groupId>
+        <groupId>fr.isir.greta</groupId>
         <artifactId>greta-parent</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>1.0.0-SNAPSHOT</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
-    <artifactId>greta-speech2speech</artifactId>
+    <artifactId>greta-auxiliary-speech2speech</artifactId>
     <name>Greta Speech-to-Speech Foundation Models</name>
     <description>Advanced speech-to-speech synthesis using foundation models like SpeechT5, Bark, and others</description>
 
     <dependencies>
         <!-- Greta Core Dependencies -->
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
+            <groupId>fr.isir.greta</groupId>
             <artifactId>greta-util</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>fr.cnrs.greta</groupId>
+            <groupId>fr.isir.greta</groupId>
             <artifactId>greta-signals</artifactId>
             <version>${project.version}</version>
         </dependency>

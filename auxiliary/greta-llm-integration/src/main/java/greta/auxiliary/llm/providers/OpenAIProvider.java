@@ -87,13 +87,13 @@ public class OpenAIProvider implements LLMProvider {
                 // Set usage information
                 if (result.getUsage() != null) {
                     LLMResponse.UsageInfo usage = new LLMResponse.UsageInfo();
-                    usage.setPromptTokens(result.getUsage().getPromptTokens());
-                    usage.setCompletionTokens(result.getUsage().getCompletionTokens());
-                    usage.setTotalTokens(result.getUsage().getTotalTokens());
-                    usage.setCost(calculateCost(result.getModel(), result.getUsage().getTotalTokens()));
+                    usage.setPromptTokens((int) result.getUsage().getPromptTokens());
+                    usage.setCompletionTokens((int) result.getUsage().getCompletionTokens());
+                    usage.setTotalTokens((int) result.getUsage().getTotalTokens());
+                    usage.setCost(calculateCost(result.getModel(), (int) result.getUsage().getTotalTokens()));
                     response.setUsage(usage);
                     
-                    usageStats.addTokens(result.getUsage().getTotalTokens());
+                    usageStats.addTokens((int) result.getUsage().getTotalTokens());
                     usageStats.addCost(usage.getCost());
                 }
                 
@@ -161,7 +161,7 @@ public class OpenAIProvider implements LLMProvider {
                 service.streamChatCompletion(completionRequest)
                     .doOnNext(chunk -> {
                         if (chunk.getChoices() != null && !chunk.getChoices().isEmpty()) {
-                            String token = chunk.getChoices().get(0).getDelta().getContent();
+                            String token = chunk.getChoices().get(0).getMessage().getContent();
                             if (token != null) {
                                 fullResponse.append(token);
                                 callback.onToken(token);
@@ -248,12 +248,12 @@ public class OpenAIProvider implements LLMProvider {
                     case "system": role = ChatMessageRole.SYSTEM; break;
                     default: role = ChatMessageRole.USER; break;
                 }
-                messages.add(new ChatMessage(role, turn.getContent()));
+                messages.add(new ChatMessage(role.value(), turn.getContent()));
             }
         }
         
         // Add current prompt
-        messages.add(new ChatMessage(ChatMessageRole.USER, request.getPrompt()));
+        messages.add(new ChatMessage(ChatMessageRole.USER.value(), request.getPrompt()));
         
         return messages;
     }

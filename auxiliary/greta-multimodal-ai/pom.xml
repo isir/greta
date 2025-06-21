@@ -62,7 +62,7 @@
         <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>opencv-platform</artifactId>
-            <version>4.8.1-1.5.9</version>
+            <version>4.7.0-1.5.9</version>
         </dependency>
         <dependency>
             <groupId>org.bytedeco</groupId>
@@ -71,11 +71,14 @@
         </dependency>
 
         <!-- Gesture Recognition -->
+        <!-- MediaPipe temporarily disabled (version not available) -->
+        <!--
         <dependency>
             <groupId>org.bytedeco</groupId>
             <artifactId>mediapipe-platform</artifactId>
             <version>0.9.1.0-1.5.9</version>
         </dependency>
+        -->
 
         <!-- GPT-4 Vision API -->
         <dependency>
@@ -85,11 +88,14 @@
         </dependency>
 
         <!-- Azure Cognitive Services -->
+        <!-- Temporarily disabled (version not available) -->
+        <!--
         <dependency>
             <groupId>com.azure</groupId>
             <artifactId>azure-cognitiveservices-vision-computervision</artifactId>
             <version>1.0.0-beta.1</version>
         </dependency>
+        -->
 
         <!-- Google Cloud Vision -->
         <dependency>
@@ -99,11 +105,14 @@
         </dependency>
 
         <!-- Audio processing for multimodal scenarios -->
+        <!-- Temporarily disabled (artifact not found) -->
+        <!--
         <dependency>
             <groupId>be.tarsos.dsp</groupId>
             <artifactId>core</artifactId>
             <version>2.5</version>
         </dependency>
+        -->
 
         <!-- WebRTC for real-time communication -->
         <dependency>

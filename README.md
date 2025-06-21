@@ -8,12 +8,14 @@ This is a **completely modernized** version of the original Greta platform, tran
 
 ### 🚀 Key Improvements
 
-- **Modern Architecture**: Maven multi-module project with 25+ modules
+- **Modern Architecture**: Maven multi-module project with 32+ modules
 - **Cloud-Ready**: Docker containerization with Kubernetes support
 - **Security First**: Eliminated critical vulnerabilities (Log4Shell, etc.)
 - **Performance Optimized**: 50-60% smaller containers, 60-80% faster builds
 - **Developer Experience**: Automated setup, comprehensive testing, CI/CD ready
 - **Production Ready**: Monitoring, scaling, deployment automation
+- **🧠 Next-Gen AI**: Advanced LLM, multimodal AI, emotion recognition, neural gestures
+- **🐍 Python Control**: Complete Python interface for researchers and developers
 
 ---
 
@@ -21,6 +23,8 @@ This is a **completely modernized** version of the original Greta platform, tran
 
 - [Quick Start](#quick-start)
 - [What is Greta?](#what-is-greta)
+- [🧠 AI Capabilities](#ai-capabilities)
+- [🐍 Python Control](#python-control)
 - [Architecture](#architecture)
 - [Installation](#installation)
 - [Usage Guide](#usage-guide)
@@ -105,6 +109,132 @@ Greta (Generation of REaltime Talking Agents) is a platform for creating **embod
 
 ---
 
+## 🧠 AI Capabilities
+
+Greta now includes cutting-edge AI capabilities that transform it from a traditional animation platform into a next-generation conversational AI system.
+
+### 🎯 Core AI Features
+
+#### 🗣️ **Advanced Language Models**
+- **Multi-provider support**: OpenAI GPT-4, Anthropic Claude, local Ollama models
+- **Personality-aware responses**: Configurable personality profiles with Big Five traits
+- **Streaming conversations**: Real-time token streaming for responsive interactions
+- **Context management**: Long-term conversation memory and contextual understanding
+
+#### 🎤 **Speech-to-Speech Synthesis**
+- **Foundation models**: Bark (Suno AI), SpeechT5, and custom models
+- **Voice cloning**: Create custom voices from reference audio samples
+- **Expressive speech**: Emotion and style control (happy, sad, whisper, shouting)
+- **Real-time processing**: Low-latency streaming for interactive applications
+
+#### 😊 **Multimodal Emotion Recognition**
+- **Real-time analysis**: Voice, facial, and physiological signal fusion
+- **3D emotion space**: Arousal, valence, and dominance dimensions
+- **Cultural sensitivity**: Adaptive recognition for different cultural contexts
+- **User calibration**: Personalized emotion models for improved accuracy
+
+#### 👁️ **Vision-Language Understanding**
+- **Scene analysis**: Comprehensive visual understanding with natural language queries
+- **Object detection**: Real-time identification of objects, people, and activities
+- **Gesture recognition**: Hand and body tracking with contextual interpretation
+- **Spatial reasoning**: 3D scene understanding and object relationships
+
+#### 🤲 **Neural Gesture Synthesis**
+- **Text-to-gesture**: Generate natural gestures from text descriptions
+- **Co-speech gestures**: Speech-synchronized gesture generation
+- **Motion diffusion**: State-of-the-art generative models for natural motion
+- **Style adaptation**: Cultural and personal gesture style customization
+
+#### 🧬 **Adaptive Personality**
+- **Reinforcement learning**: Dynamic personality adaptation based on user feedback
+- **Multi-user support**: Different personality configurations for different users
+- **Cultural adaptation**: Sensitive to cultural communication preferences
+- **Real-time adjustment**: Personality traits evolve during conversations
+
+### 🎮 Usage Examples
+
+#### Educational Virtual Tutor
+```python
+# Create an AI-powered educational assistant
+response = await greta.chat_with_llm(
+    "Explain quantum entanglement in simple terms",
+    personality="teacher"
+)
+gesture = await greta.generate_gesture_from_text(
+    response['text'], emotion="enthusiastic"
+)
+```
+
+#### Therapeutic Agent
+```python
+# Empathetic therapeutic conversation
+emotion = await greta.analyze_emotion_multimodal(video_frame=frame)
+response = await greta.generate_personality_response(
+    user_input, personality_traits={"empathy": 0.95, "patience": 0.9}
+)
+```
+
+#### Cross-Cultural Research
+```python
+# Analyze cultural communication patterns
+scene = await greta.analyze_scene_multimodal(
+    video_frame=frame, query="What cultural gestures do you observe?"
+)
+gesture_meaning = await greta.understand_gesture_in_context(
+    frame, cultural_context="japanese"
+)
+```
+
+---
+
+## 🐍 Python Control
+
+Complete Python interface for controlling all AI capabilities. Perfect for researchers, educators, and developers.
+
+### Quick Start with Python
+
+```python
+from examples.python.greta_ai_controller import GretaAIController, GretaConfig
+
+# Configure and connect
+config = GretaConfig(host="localhost", port=8080)
+controller = GretaAIController(config)
+
+await controller.initialize()
+
+# Chat with advanced AI
+response = await controller.chat_with_llm(
+    "Hello! Tell me about yourself.", 
+    personality="teacher"
+)
+
+# Analyze emotions in real-time
+emotion = await controller.analyze_emotion_multimodal(video_frame=frame)
+
+# Generate natural gestures
+gesture = await controller.generate_gesture_from_text(
+    "Welcome to our presentation!", emotion="enthusiastic"
+)
+
+# Convert speech with emotion
+speech = await controller.convert_speech_with_emotion(
+    audio_data, target_emotion="happy"
+)
+```
+
+### Available Python Examples
+
+- **`voice_conversation.py`**: Real-time voice interaction with Greta
+- **`greta_ai_controller.py`**: Complete AI capabilities controller
+- **Educational tutor**: Adaptive virtual teaching assistant
+- **Therapeutic agent**: Empathetic conversation partner
+- **Research platform**: Cross-cultural interaction analysis
+
+📚 **Full Documentation**: [PYTHON-CONTROL-GUIDE.md](PYTHON-CONTROL-GUIDE.md)  
+🧠 **AI Technical Details**: [AI-ENHANCEMENTS.md](AI-ENHANCEMENTS.md)
+
+---
+
 ## 🏗️ Architecture
 
 ### High-Level Architecture
@@ -144,7 +274,7 @@ Greta (Generation of REaltime Talking Agents) is a platform for creating **embod
 
 ### Module Structure
 
-The platform is organized into **25 Maven modules**:
+The platform is organized into **32 Maven modules** including next-generation AI enhancements:
 
 #### 🔧 **Core Modules** (15 modules)
 - **greta-util**: Common utilities and base classes
@@ -154,7 +284,14 @@ The platform is organized into **25 Maven modules**:
 - **greta-behavior-realizer**: Behavior execution engine
 - **greta-gesture-animation**: Gesture animation system
 - **greta-facial-animation**: Facial expression system
-- *...and 8 more specialized modules*
+- **greta-speech-core**: Speech processing foundation
+- **greta-tts-core**: Text-to-speech core functionality
+- **greta-asr-core**: Automatic speech recognition
+- **greta-animation-loader**: Animation loading and management
+- **greta-math**: Mathematical utilities for 3D operations
+- **greta-social-parameters**: Social and cultural parameter handling
+- **greta-interrupt-manager**: Interruption and turn-taking management
+- **greta-realtime-core**: Real-time processing foundation
 
 #### 🔌 **Auxiliary Modules** (9 modules)
 - **greta-activemq**: Message queue integration
@@ -162,7 +299,19 @@ The platform is organized into **25 Maven modules**:
 - **greta-azure-tts**: Azure TTS integration
 - **greta-chatgpt**: OpenAI ChatGPT integration
 - **greta-bvh-mocap**: Motion capture support
-- *...and 4 more integration modules*
+- **greta-mpeg4-fap**: MPEG-4 facial animation parameters
+- **greta-vib-platform**: VIB platform integration
+- **greta-opensim**: OpenSim physics integration
+- **greta-environment**: Environmental context management
+
+#### 🧠 **AI Enhancement Modules** (7 modules)
+- **greta-llm-integration**: Advanced LLM integration (GPT-4, Claude, Ollama)
+- **greta-speech2speech**: Speech-to-speech foundation models (Bark, SpeechT5)
+- **greta-emotion-recognition**: Real-time multimodal emotion recognition
+- **greta-multimodal-ai**: Vision + speech + gesture understanding
+- **greta-neural-gestures**: Neural gesture synthesis with motion diffusion
+- **greta-adaptive-personality**: Reinforcement learning personality adaptation
+- **greta-webrtc**: Browser-based real-time communication
 
 #### 🎯 **Application Module**
 - **greta-application**: Main application and web interface
@@ -578,18 +727,32 @@ This project is licensed under the **LGPL-3.0 License** - see the [LICENSE](LICE
 
 ## 🗺️ Roadmap
 
-### Phase 7: Production Migration *(In Progress)*
+### ✅ Completed Phases (1-6 + AI Enhancements)
+- [x] **Phase 1-5**: Complete modernization (Maven, Docker, CI/CD, Testing)
+- [x] **Phase 6**: Comprehensive testing framework and validation
+- [x] **🧠 AI Enhancement**: Next-generation AI capabilities implementation
+  - [x] Advanced LLM integration (GPT-4, Claude, Ollama)
+  - [x] Speech-to-speech foundation models (Bark, SpeechT5)
+  - [x] Real-time multimodal emotion recognition
+  - [x] Vision-language understanding and scene analysis
+  - [x] Neural gesture synthesis with motion diffusion
+  - [x] Adaptive personality system with reinforcement learning
+  - [x] WebRTC real-time communication support
+  - [x] Complete Python control interface
+
+### Phase 7: Production Migration *(Requires Production Environment)*
 - [ ] Production environment setup
 - [ ] SSL certificates and domain configuration  
 - [ ] Database migration procedures
 - [ ] Live traffic migration strategy
 
-### Future Enhancements *(Planned)*
-- [ ] **AI Integration**: Enhanced LLM integration for natural conversations
+### Future Enhancements *(Next Generation)*
 - [ ] **Mobile Support**: React Native mobile applications
 - [ ] **VR/AR Support**: Virtual and augmented reality integration
 - [ ] **Real-time Collaboration**: Multi-user collaborative editing
 - [ ] **Advanced Analytics**: Machine learning-powered behavior analytics
+- [ ] **Edge Computing**: Optimized models for mobile and edge deployment
+- [ ] **Quantum Integration**: Exploration of quantum computing applications
 
 ---
 
@@ -603,6 +766,10 @@ If you're migrating from the original Greta platform:
 - **REST API** instead of direct Java interfaces
 - **Docker deployment** instead of Windows-specific setup
 - **Modern security** with JWT authentication
+- **🧠 AI-powered**: LLM integration, emotion recognition, neural gestures
+- **🐍 Python control**: Complete Python API for easy integration
+- **🎤 Advanced speech**: Foundation models with voice cloning and emotion control
+- **👁️ Multimodal understanding**: Vision, speech, and gesture integration
 
 ### Migration Guide
 1. **Export existing animations** using legacy export tools

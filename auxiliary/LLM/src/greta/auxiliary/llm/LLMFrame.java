@@ -329,14 +329,15 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         double preprocess_end = greta.core.util.time.Timer.getTime();
         System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): preprocess - %.3f%n", preprocess_end - load_start);        
         
-        if(this.cm.use_MM() && !endSentence){
-             //MEANING MINER TREATMENT START
-            List<Intention> intention_list;
-            System.out.println("File Name "+fml.toString());
-            intention_list = im.processText_2(fml.toString());
-            intentions.addAll(intention_list);
-            //MEANING MINER TREATMENT END
-        }
+        // Meaning Miner functionality disabled - MeaningMiner not in Maven build
+        // if(this.cm.use_MM() && !endSentence){
+        //      //MEANING MINER TREATMENT START
+        //     List<Intention> intention_list;
+        //     System.out.println("File Name "+fml.toString());
+        //     intention_list = im.processText_2(fml.toString());
+        //     intentions.addAll(intention_list);
+        //     //MEANING MINER TREATMENT END
+        // }
 
         double MM_end = greta.core.util.time.Timer.getTime();
         System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): MeaningMiner - %.3f%n", MM_end - preprocess_end);        
@@ -445,8 +446,8 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         try {
             server_process = new ProcessBuilder(MM_parse_server_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
             //client_process = new ProcessBuilder("python", "-c", "print('hello')").redirectErrorStream(true).start();
-            server_shutdownHook = new shutdownHook(server_process, MM_parse_server_killer_path);
-            Runtime.getRuntime().addShutdownHook(server_shutdownHook);
+            // server_shutdownHook = new shutdownHook(server_process, MM_parse_server_killer_path); // MeaningMiner shutdownHook not available
+            // Runtime.getRuntime().addShutdownHook(server_shutdownHook);
         } catch (IOException ex) {
             Logger.getLogger(LLMFrame.class.getName()).log(Level.SEVERE, null, ex);
         }

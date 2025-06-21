@@ -114,7 +114,7 @@ RUN echo '#!/bin/bash' > /app/start-greta.sh && \
     echo 'export GRETA_DATA="/app/data"' >> /app/start-greta.sh && \
     echo 'export GRETA_LOGS="/app/logs"' >> /app/start-greta.sh && \
     echo 'export GRETA_CONFIG="/app/config"' >> /app/start-greta.sh && \
-    echo 'export JAVA_TOOL_OPTIONS="-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"' >> /app/start-greta.sh && \
+    echo 'export JAVA_TOOL_OPTIONS="-Djava.security.egd=file:/dev/./urandom"' >> /app/start-greta.sh && \
     echo '' >> /app/start-greta.sh && \
     echo '# JVM optimization based on container resources' >> /app/start-greta.sh && \
     echo 'MEMORY_LIMIT=$(cat /sys/fs/cgroup/memory/memory.limit_in_bytes 2>/dev/null || echo "2147483648")' >> /app/start-greta.sh && \
@@ -126,7 +126,7 @@ RUN echo '#!/bin/bash' > /app/start-greta.sh && \
     echo '' >> /app/start-greta.sh && \
     echo '# Default JVM options if not provided' >> /app/start-greta.sh && \
     echo 'if [ -z "$JAVA_OPTS" ]; then' >> /app/start-greta.sh && \
-    echo '    export JAVA_OPTS="-Xmx${HEAP_SIZE}m -Xms$((HEAP_SIZE / 2))m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -XX:+OptimizeStringConcat -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.timezone=UTC"' >> /app/start-greta.sh && \
+    echo '    export JAVA_OPTS="-Xmx${HEAP_SIZE}m -Xms$((HEAP_SIZE / 2))m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -XX:+OptimizeStringConcat -Dfile.encoding=UTF-8 -Duser.timezone=UTC"' >> /app/start-greta.sh && \
     echo 'fi' >> /app/start-greta.sh && \
     echo '' >> /app/start-greta.sh && \
     echo '# Find the main JAR file' >> /app/start-greta.sh && \
@@ -154,7 +154,7 @@ ENV GRETA_HOME="/app" \
     GRETA_LOGS="/app/logs" \
     GRETA_CONFIG="/app/config" \
     GRETA_VERSION="${GRETA_VERSION}" \
-    JAVA_TOOL_OPTIONS="-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom" \
+    JAVA_TOOL_OPTIONS="-Djava.security.egd=file:/dev/./urandom" \
     TZ="UTC"
 
 # Expose ports with documentation

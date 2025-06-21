@@ -22,17 +22,21 @@ services:
       - JAVA_OPTS=-Xmx2g -Xms512m -XX:+UseG1GC -Dfile.encoding=UTF-8
       - GRETA_LOG_LEVEL=DEBUG
       - TZ=UTC
+      - DISPLAY=:0
     
-    ports:
-      - "8080:8080"      # Main application port
-      - "8081:8081"      # Management/metrics port (if available)
-      - "61616:61616"    # ActiveMQ port (if needed)
-    
+    # Enable GUI applications (requires X11 forwarding)
     volumes:
       # Development data persistence
       - greta-dev-data:/app/data
       - greta-dev-logs:/app/logs
       - greta-dev-cache:/app/cache
+      # X11 socket for GUI (Linux/macOS with XQuartz)
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw
+    
+    ports:
+      - "8080:8080"      # Main application port
+      - "8081:8081"      # Management/metrics port (if available)
+      - "61616:61616"    # ActiveMQ port (if needed)
     
     networks:
       - greta-dev

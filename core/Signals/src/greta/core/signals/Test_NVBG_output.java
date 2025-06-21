@@ -1,5 +1,4 @@
 package greta.core.signals;
-import edu.stanford.nlp.io.EncodingPrintWriter;
 import greta.core.util.log.LogOutput;
 import greta.core.util.log.LogPrinter;
 import greta.core.util.log.Logs;

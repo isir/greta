@@ -28,7 +28,6 @@ import javax.jms.TextMessage;
  
 import org.apache.activemq.ActiveMQConnection;
 import org.apache.activemq.ActiveMQConnectionFactory;
-import org.apache.camel.util.Time;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;

@@ -80,7 +80,8 @@
                 <configuration>
                     <excludes>
                         <!-- Exclude files that depend on SocialParameters module (not part of Maven build) -->
-                        <exclude>**/emotionml/EmotionMLTranslator.java</exclude>
+                        <exclude>**/EmotionMLTranslator.java</exclude>
+                        <exclude>greta/auxiliary/emotionml/EmotionMLTranslator.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

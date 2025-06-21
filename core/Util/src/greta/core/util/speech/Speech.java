@@ -742,7 +742,7 @@ public class Speech implements Temporizable{
         
         //make sure originalText is not null.
         //concatinate String speechElement and put it into originalText if it is null.
-        String _ = getOriginalText();
+        String originalText = getOriginalText();
 
     }
 

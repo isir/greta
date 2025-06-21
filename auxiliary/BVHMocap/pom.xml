@@ -39,6 +39,11 @@
             <artifactId>greta-signals</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-utilx</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         
         <!-- Logging -->
         <dependency>

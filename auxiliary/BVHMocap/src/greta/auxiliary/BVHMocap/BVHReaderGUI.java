@@ -679,7 +679,6 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
             //prepare for the next frame
 
             Joint joint = skeleton.getJoint(0);
-            joint.reset();
             joint.update();
             jjoint = 0;
             line = br.readLine();
@@ -767,7 +766,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
         vect1.setY(Float.parseFloat(line.split(" ")[word_index + 2]));
         vect1.setZ(Float.parseFloat(line.split(" ")[word_index + 3]));
 
-        joint1.setOrigine(vect1);
+        joint1.setLocalPosition(vect1);
         joint1.setLocalPosition(vect1);
 
         //System.out.println(Float.parseFloat(line.split(" ")[word_index + 1])+" "+Float.parseFloat(line.split(" ")[word_index + 2])+" "+Float.parseFloat(line.split(" ")[word_index + 3]));
@@ -796,10 +795,10 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                 Joint joint = skeleton.getJoint(id_joint);
                 joint.setLocalPosition(vect);
 
-                joint.setParentById(parent);
+                joint.setParent(parent);
                 Joint p = skeleton.getJoint(parent);
 
-                p.updateLocally();
+                p.update();
                 joint.update();
 
                 sublist.addElement(id_joint);
@@ -824,10 +823,10 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                     Joint joint = skeleton.getJoint(id_joint);
                     joint.setLocalPosition(vect);
 
-                    joint.setParentById(parent);
+                    joint.setParent(parent);
                     Joint p = skeleton.getJoint(parent);
 
-                    p.updateLocally();
+                    p.update();
                     joint.update();
                 } else if (line.contains("}")) // Update parent
                 {
@@ -886,7 +885,7 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
         vect1.setY(Float.parseFloat(line.split(" ")[word_index + 2]));
         vect1.setZ(Float.parseFloat(line.split(" ")[word_index + 3]));
 
-        joint1.setOrigine(vect1);
+        joint1.setLocalPosition(vect1);
         joint1.setLocalPosition(vect1);
 
         //System.out.println(Float.parseFloat(line.split(" ")[word_index + 1])+" "+Float.parseFloat(line.split(" ")[word_index + 2])+" "+Float.parseFloat(line.split(" ")[word_index + 3]));
@@ -915,10 +914,10 @@ public class BVHReaderGUI extends JFrame implements BAPFrameEmitter{
                 Joint joint = skeleton.getJoint(id_joint);
                 joint.setLocalPosition(vect);
 
-                joint.setParentById(parent);
+                joint.setParent(parent);
                 Joint p = skeleton.getJoint(parent);
 
-                p.updateLocally();
+                p.update();
                 joint.update();
 
                 sublist.addElement(id_joint);

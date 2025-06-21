@@ -423,7 +423,6 @@ public class BVHReader implements BAPFrameEmitter {
             //prepare for the next frame
 
             Joint joint = skeleton.getJoint(0);
-            joint.reset();
             joint.update();
             jjoint = 0;
             line = br.readLine();
@@ -511,7 +510,7 @@ public class BVHReader implements BAPFrameEmitter {
         vect1.setY(Float.parseFloat(line.split(" ")[word_index + 2]));
         vect1.setZ(Float.parseFloat(line.split(" ")[word_index + 3]));
 
-        joint1.setOrigine(vect1);
+        joint1.setLocalPosition(vect1);
         joint1.setLocalPosition(vect1);
 
         //System.out.println(Float.parseFloat(line.split(" ")[word_index + 1])+" "+Float.parseFloat(line.split(" ")[word_index + 2])+" "+Float.parseFloat(line.split(" ")[word_index + 3]));
@@ -630,7 +629,7 @@ public class BVHReader implements BAPFrameEmitter {
         vect1.setY(Float.parseFloat(line.split(" ")[word_index + 2]));
         vect1.setZ(Float.parseFloat(line.split(" ")[word_index + 3]));
 
-        joint1.setOrigine(vect1);
+        joint1.setLocalPosition(vect1);
         joint1.setLocalPosition(vect1);
 
         //System.out.println(Float.parseFloat(line.split(" ")[word_index + 1])+" "+Float.parseFloat(line.split(" ")[word_index + 2])+" "+Float.parseFloat(line.split(" ")[word_index + 3]));

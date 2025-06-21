@@ -38,7 +38,7 @@
         <dependency>
             <groupId>com.theokanning.openai-gpt3-java</groupId>
             <artifactId>service</artifactId>
-            <version>0.18.2</version>
+            <version>0.20.0</version>
         </dependency>
 
         <!-- Anthropic Claude API - Temporarily disabled (SDK not publicly available) -->

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suppressions xmlns="https://jeremylong.github.io/DependencyCheck/dependency-suppression.1.3.xsd">
+    <!-- 
+    OWASP Dependency Check Suppressions
+    
+    This file contains vulnerability suppressions for known false positives
+    or accepted security risks in the Greta project dependencies.
+    
+    Add suppressions in the format:
+    <suppress>
+        <notes><![CDATA[
+        Explanation of why this vulnerability is suppressed
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/group\.id/artifact\-id@.*$</packageUrl>
+        <cve>CVE-YYYY-NNNN</cve>
+    </suppress>
+    -->
+    
+    <!-- Example suppression - remove this when adding real suppressions
+    <suppress>
+        <notes><![CDATA[
+        Example suppression for demonstration purposes
+        ]]></notes>
+        <packageUrl regex="true">^pkg:maven/org\.example/example\-artifact@.*$</packageUrl>
+        <cve>CVE-0000-0000</cve>
+    </suppress>
+    -->
+    
+</suppressions>

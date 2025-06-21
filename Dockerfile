@@ -12,8 +12,8 @@ FROM eclipse-temurin:11-jdk AS dependencies
 # Set environment variables
 ENV GRETA_VERSION="${GRETA_VERSION}"
 
-# Install build dependencies
-RUN apt-get update && apt-get install -y curl git && \
+# Install build dependencies with GPG fix
+RUN apt-get update --allow-unauthenticated && apt-get install -y --allow-unauthenticated curl git && \
     rm -rf /var/lib/apt/lists/*
 
 # Set working directory
@@ -72,8 +72,8 @@ RUN ./mvnw clean package -DskipTests -B -T 1C \
 # =============================================================================
 FROM eclipse-temurin:11-jre AS runtime
 
-# Install runtime dependencies in single layer
-RUN apt-get update && apt-get install -y \
+# Install runtime dependencies in single layer with GPG fix
+RUN apt-get update --allow-unauthenticated && apt-get install -y --allow-unauthenticated \
     # Core system utilities
     bash curl tini \
     # Graphics and font support

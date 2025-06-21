@@ -117,7 +117,11 @@ jobs:
         ./mvnw clean verify sonar:sonar \
           -Dsonar.projectKey=isir_greta \
           -Dsonar.organization=isir \
-          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.projectName="Greta" \
+          -Dsonar.projectVersion=${{ github.ref_name }} \
+          -Dsonar.branch.name=${{ github.ref_name }} \
+          -Dsonar.scm.provider=git
 
   build:
     runs-on: ubuntu-latest

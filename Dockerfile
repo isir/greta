@@ -27,41 +27,30 @@ COPY pom.xml ./
 # Create directory structure for POMs
 RUN mkdir -p core auxiliary application
 
-# Copy POM files with better structure
-COPY core/*/pom.xml ./pom-temp/
-RUN for dir in core/*/; do \
-      if [ -d "$dir" ]; then \
+# Copy all module POM files (ignore failures for missing directories)
+COPY --chown=root:root . /tmp/source/
+RUN for dir in /tmp/source/core/*/; do \
+      if [ -d "$dir" ] && [ -f "$dir/pom.xml" ]; then \
         module=$(basename "$dir"); \
         mkdir -p "core/$module"; \
-        if [ -f "pom-temp/pom.xml" ]; then \
-          cp pom-temp/pom.xml "core/$module/"; \
-        fi; \
+        cp "$dir/pom.xml" "core/$module/"; \
       fi; \
-    done 2>/dev/null || true
-
-COPY auxiliary/*/pom.xml ./pom-temp/ 2>/dev/null || true
-RUN for dir in auxiliary/*/; do \
-      if [ -d "$dir" ]; then \
+    done 2>/dev/null || true && \
+    for dir in /tmp/source/auxiliary/*/; do \
+      if [ -d "$dir" ] && [ -f "$dir/pom.xml" ]; then \
         module=$(basename "$dir"); \
         mkdir -p "auxiliary/$module"; \
-        if [ -f "pom-temp/pom.xml" ]; then \
-          cp pom-temp/pom.xml "auxiliary/$module/"; \
-        fi; \
+        cp "$dir/pom.xml" "auxiliary/$module/"; \
       fi; \
-    done 2>/dev/null || true
-
-COPY application/*/pom.xml ./pom-temp/ 2>/dev/null || true
-RUN for dir in application/*/; do \
-      if [ -d "$dir" ]; then \
+    done 2>/dev/null || true && \
+    for dir in /tmp/source/application/*/; do \
+      if [ -d "$dir" ] && [ -f "$dir/pom.xml" ]; then \
         module=$(basename "$dir"); \
         mkdir -p "application/$module"; \
-        if [ -f "pom-temp/pom.xml" ]; then \
-          cp pom-temp/pom.xml "application/$module/"; \
-        fi; \
+        cp "$dir/pom.xml" "application/$module/"; \
       fi; \
-    done 2>/dev/null || true
-
-RUN rm -rf pom-temp
+    done 2>/dev/null || true && \
+    rm -rf /tmp/source
 
 # Download dependencies with optimized settings
 ENV MAVEN_OPTS="${MAVEN_OPTS}"

@@ -79,6 +79,10 @@
                     <excludes>
                         <!-- Exclude LWJGL demo files that require LWJGL dependency -->
                         <exclude>**/org/joml/lwjgl/**</exclude>
+                        <!-- Exclude MGIK files that require LWJGL dependency -->
+                        <exclude>**/greta/mgik/core/animation/Camera.java</exclude>
+                        <exclude>**/greta/mgik/core/animation/RenderEnv.java</exclude>
+                        <exclude>**/greta/mgik/core/animation/SkeletonViewer.java</exclude>
                     </excludes>
                 </configuration>
             </plugin>

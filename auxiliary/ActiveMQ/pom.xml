@@ -39,6 +39,11 @@
             <artifactId>greta-intentions</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>fr.isir.greta</groupId>
+            <artifactId>greta-auxiliary-emotionml</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         
         <!-- ActiveMQ -->
         <dependency>
@@ -69,6 +74,20 @@
     <build>
         <sourceDirectory>src</sourceDirectory>
         <testSourceDirectory>test</testSourceDirectory>
+        
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <!-- Exclude files that depend on SocialParameters module (not part of Maven build) -->
+                        <exclude>**/semaine/EmotionMLReceiver.java</exclude>
+                        <exclude>**/semaine/EmotionMLSender.java</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
         
         <resources>
             <resource>

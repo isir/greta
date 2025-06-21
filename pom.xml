@@ -73,6 +73,11 @@
         <module>auxiliary/EmotionML</module>
         <module>auxiliary/Thrift</module>
         
+        <!-- Additional Auxiliary Modules -->
+        <module>auxiliary/LLM</module>
+        <module>auxiliary/ChatGPT</module>
+        <module>auxiliary/BVHMocap</module>
+        
         <!-- Application -->
         <module>application/Modular</module>
     </modules>

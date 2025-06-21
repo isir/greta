@@ -171,7 +171,7 @@ echo "Available Memory: $HEAP_SIZE MB"
 # Start the application
 exec java $JAVA_OPTS -jar "$MAIN_JAR" "$@"
 EOF
-    chmod +x /app/start-greta.sh
+RUN chmod +x /app/start-greta.sh
 
 # Switch to application user
 USER greta

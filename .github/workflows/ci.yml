@@ -88,11 +88,12 @@ jobs:
       with:
         fetch-depth: 0  # Shallow clones should be disabled for SonarCloud
         
-    - name: Set up JDK ${{ env.JAVA_VERSION }}
+    - name: Set up JDK 17 for SonarQube
       uses: actions/setup-java@v4
       with:
-        java-version: ${{ env.JAVA_VERSION }}
+        java-version: '17'
         distribution: 'temurin'
+        java-package: jdk
         
     - name: Cache Maven dependencies
       uses: actions/cache@v3

@@ -7,14 +7,14 @@ ARG GRETA_VERSION="1.0.0-SNAPSHOT"
 # =============================================================================
 # Dependencies stage - for better layer caching
 # =============================================================================
-FROM eclipse-temurin:11-jdk AS dependencies
+FROM amazoncorretto:11 AS dependencies
 
 # Set environment variables
 ENV GRETA_VERSION="${GRETA_VERSION}"
 
-# Install build dependencies with GPG fix
-RUN apt-get update --allow-unauthenticated && apt-get install -y --allow-unauthenticated curl git && \
-    rm -rf /var/lib/apt/lists/*
+# Install build dependencies
+RUN yum update -y && yum install -y curl git && \
+    yum clean all
 
 # Set working directory
 WORKDIR /app
@@ -70,23 +70,23 @@ RUN ./mvnw clean package -DskipTests -B -T 1C \
 # =============================================================================
 # Production runtime stage - optimized for size and security
 # =============================================================================
-FROM eclipse-temurin:11-jre AS runtime
+FROM amazoncorretto:11 AS runtime
 
-# Install runtime dependencies in single layer with GPG fix
-RUN apt-get update --allow-unauthenticated && apt-get install -y --allow-unauthenticated \
+# Install runtime dependencies in single layer
+RUN yum update -y && yum install -y \
     # Core system utilities
     bash curl tini \
     # Graphics and font support
-    fontconfig fonts-dejavu mesa-utils \
+    fontconfig dejavu-fonts mesa-dri-drivers \
     # Audio support
-    alsa-utils \
+    alsa-lib \
     # Network utilities
-    net-tools procps \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    net-tools procps-ng \
+    && yum clean all
 
 # Create application user and directories
 RUN groupadd -g 1001 greta && \
-    useradd -r -u 1001 -g greta greta && \
+    useradd -r -u 1001 -g greta -s /bin/bash greta && \
     mkdir -p /app/{lib,data,logs,config,cache} && \
     mkdir -p /tmp/greta && \
     chown -R greta:greta /app /tmp/greta

@@ -5,8 +5,8 @@
  */
 package greta.auxiliary.llm;
 
-import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
-import greta.auxiliary.MeaningMiner.shutdownHook;
+// import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
+// import greta.auxiliary.MeaningMiner.shutdownHook;
 import greta.core.intentions.FMLTranslator;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionEmitter;

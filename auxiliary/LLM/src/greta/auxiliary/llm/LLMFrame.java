@@ -5,8 +5,8 @@
  */
 package greta.auxiliary.llm;
 
-import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
-import greta.auxiliary.MeaningMiner.shutdownHook;
+// import greta.auxiliary.MeaningMiner.ImageSchemaExtractor;
+// import greta.auxiliary.MeaningMiner.shutdownHook;
 import greta.core.intentions.FMLTranslator;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionEmitter;
@@ -102,7 +102,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
     private Process server_process_mistral;
     private Thread server_shutdownHook_mistral;
     
-    private ImageSchemaExtractor im;
+    // private ImageSchemaExtractor im; // MeaningMiner not in Maven build
 
     protected CharacterManager cm;
     protected Server server;
@@ -111,7 +111,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
        
         this.server = new Server();
         this.cm=cm;
-        this.im = new ImageSchemaExtractor(cm);
+        // this.im = new ImageSchemaExtractor(cm); // MeaningMiner not in Maven build
 
     }
 
@@ -419,7 +419,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         try{
             server_process = new ProcessBuilder("python", MM_python_env_checker_path).redirectErrorStream(true).start();
         } catch (IOException ex2){
-            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
+            Logger.getLogger(LLMFrame.class.getName()).log(Level.SEVERE, null, ex2);
         }
         server_process.waitFor();
 
@@ -436,7 +436,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
             try{
                 server_process = new ProcessBuilder(MM_python_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
             } catch (IOException ex2){
-                Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex2);
+                Logger.getLogger(LLMFrame.class.getName()).log(Level.SEVERE, null, ex2);
             }
             server_process.waitFor();
         }        
@@ -448,7 +448,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
             server_shutdownHook = new shutdownHook(server_process, MM_parse_server_killer_path);
             Runtime.getRuntime().addShutdownHook(server_shutdownHook);
         } catch (IOException ex) {
-            Logger.getLogger(ImageSchemaExtractor.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LLMFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println(this_file_path + ".init_MeaningMiner_server(): MeaningMiner python env initialization signal sent");
         

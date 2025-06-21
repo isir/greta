@@ -161,9 +161,9 @@
             
             <!-- OSC (Open Sound Control) -->
             <dependency>
-                <groupId>com.illposed</groupId>
+                <groupId>com.illposed.osc</groupId>
                 <artifactId>javaosc-core</artifactId>
-                <version>0.8</version>
+                <version>0.4</version>
             </dependency>
             
             <!-- JMS API -->

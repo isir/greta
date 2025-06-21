@@ -58,7 +58,7 @@
         
         <!-- OSC (Open Sound Control) -->
         <dependency>
-            <groupId>com.illposed</groupId>
+            <groupId>com.illposed.osc</groupId>
             <artifactId>javaosc-core</artifactId>
         </dependency>
         

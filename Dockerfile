@@ -17,7 +17,7 @@ RUN apk add --no-cache curl git && \
 WORKDIR /app
 
 # Copy Maven wrapper and configuration
-COPY mvnw mvnw.cmd ./
+COPY mvnw ./
 COPY .mvn .mvn/
 RUN chmod +x mvnw
 

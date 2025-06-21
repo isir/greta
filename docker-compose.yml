@@ -1,0 +1,65 @@
+version: '3.8'
+
+# Development Docker Compose Configuration for Greta Platform
+# Simplified setup for local development and testing
+
+services:
+  greta-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        MAVEN_OPTS: "-Dmaven.repo.local=/root/.m2/repository -Xmx2048m"
+        JAVA_BUILD_OPTS: "-XX:+UseG1GC -XX:+UseStringDeduplication"
+        GRETA_VERSION: "${GRETA_VERSION:-1.0.0-SNAPSHOT}"
+    
+    container_name: greta-dev
+    restart: unless-stopped
+    
+    # Development environment configuration
+    environment:
+      - GRETA_ENV=development
+      - JAVA_OPTS=-Xmx2g -Xms512m -XX:+UseG1GC -Dfile.encoding=UTF-8
+      - GRETA_LOG_LEVEL=DEBUG
+      - TZ=UTC
+    
+    ports:
+      - "8080:8080"      # Main application port
+      - "8081:8081"      # Management/metrics port (if available)
+      - "61616:61616"    # ActiveMQ port (if needed)
+    
+    volumes:
+      # Development data persistence
+      - greta-dev-data:/app/data
+      - greta-dev-logs:/app/logs
+      - greta-dev-cache:/app/cache
+    
+    networks:
+      - greta-dev
+    
+    # Health check
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health", "||", "exit", "1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    
+    # Logging configuration
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "50m"
+        max-file: "3"
+
+networks:
+  greta-dev:
+    driver: bridge
+
+volumes:
+  greta-dev-data:
+    driver: local
+  greta-dev-logs:
+    driver: local
+  greta-dev-cache:
+    driver: local

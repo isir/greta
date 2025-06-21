@@ -695,7 +695,12 @@ git commit -m "docs(api): update authentication endpoints"
 
 ## 📄 License
 
-This project is licensed under the **LGPL-3.0 License** - see the [LICENSE](LICENSE) file for details.
+⚠️ **License Inconsistency Notice**: This repository has inherited a license inconsistency that requires official resolution. See [LICENSE-NOTICE.md](LICENSE-NOTICE.md) for details.
+
+**Current Status**: 
+- LICENSE file contains GPL v3
+- Source code headers reference LGPL  
+- Official resolution needed from original project maintainers
 
 ---
 

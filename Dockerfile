@@ -3,12 +3,14 @@
 ARG MAVEN_OPTS="-Dmaven.repo.local=/root/.m2/repository -Xmx1024m"
 ARG JAVA_BUILD_OPTS="-XX:+UseG1GC -XX:+UseStringDeduplication"
 ARG GRETA_VERSION="1.0.0-SNAPSHOT"
-ENV GRETA_VERSION="${GRETA_VERSION}"
 
 # =============================================================================
 # Dependencies stage - for better layer caching
 # =============================================================================
 FROM eclipse-temurin:11-jdk AS dependencies
+
+# Set environment variables
+ENV GRETA_VERSION="${GRETA_VERSION}"
 
 # Install build dependencies
 RUN apt-get update && apt-get install -y curl git && \

@@ -7,7 +7,7 @@ ARG GRETA_VERSION="1.0.0-SNAPSHOT"
 # =============================================================================
 # Dependencies stage - for better layer caching
 # =============================================================================
-FROM eclipse-temurin:11-jdk AS dependencies
+FROM amazoncorretto:11 AS dependencies
 
 # Set environment variables
 ENV GRETA_VERSION="${GRETA_VERSION}"
@@ -67,7 +67,7 @@ RUN ./mvnw clean package -DskipTests -B -T 1C \
 # =============================================================================
 # Production runtime stage - optimized for size and security
 # =============================================================================
-FROM eclipse-temurin:11-jre AS runtime
+FROM amazoncorretto:11 AS runtime
 
 # Install runtime dependencies in single layer
 RUN apt-get update && apt-get install -y \

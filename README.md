@@ -703,7 +703,7 @@ This modernized Greta platform is licensed under the **Apache License 2.0**.
 - ✅ **Dependencies**: All compatible with Apache 2.0
 - ✅ **Incompatible components**: Excluded (MaryTTS LGPL)
 
-See [LICENSE-NOTICE.md](LICENSE-NOTICE.md) for details on the license transition.
+See [LICENSING.md](LICENSING.md) for details on the license transition.
 
 ---
 

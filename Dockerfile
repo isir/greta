@@ -3,15 +3,16 @@
 ARG MAVEN_OPTS="-Dmaven.repo.local=/root/.m2/repository -Xmx1024m"
 ARG JAVA_BUILD_OPTS="-XX:+UseG1GC -XX:+UseStringDeduplication"
 ARG GRETA_VERSION="1.0.0-SNAPSHOT"
+ENV GRETA_VERSION="${GRETA_VERSION}"
 
 # =============================================================================
 # Dependencies stage - for better layer caching
 # =============================================================================
-FROM eclipse-temurin:11-jdk-alpine AS dependencies
+FROM eclipse-temurin:11-jdk AS dependencies
 
 # Install build dependencies
-RUN apk add --no-cache curl git && \
-    rm -rf /var/cache/apk/*
+RUN apt-get update && apt-get install -y curl git && \
+    rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
@@ -37,8 +38,8 @@ RUN find /tmp/source -name "pom.xml" -not -path "/tmp/source/pom.xml" | while re
     rm -rf /tmp/source
 
 # Download dependencies with optimized settings
-ENV MAVEN_OPTS="${MAVEN_OPTS}"
-RUN ./mvnw dependency:go-offline dependency:resolve-sources -B -T 1C
+ENV MAVEN_OPTS="-Xmx2g -Dmaven.repo.local=/root/.m2/repository"
+RUN ./mvnw dependency:go-offline -B -T 1C
 
 # =============================================================================
 # Builder stage - compile and package
@@ -53,7 +54,7 @@ COPY src/ src/
 COPY bin/ bin/
 
 # Build with optimized Maven settings
-ENV JAVA_OPTS="${JAVA_BUILD_OPTS}"
+ENV JAVA_OPTS="-Xmx1g"
 RUN ./mvnw clean package -DskipTests -B -T 1C \
     -Dmaven.compile.fork=true \
     -Dmaven.compiler.maxmem=1024m && \
@@ -64,23 +65,23 @@ RUN ./mvnw clean package -DskipTests -B -T 1C \
 # =============================================================================
 # Production runtime stage - optimized for size and security
 # =============================================================================
-FROM eclipse-temurin:11-jre-alpine AS runtime
+FROM eclipse-temurin:11-jre AS runtime
 
 # Install runtime dependencies in single layer
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y \
     # Core system utilities
     bash curl tini \
     # Graphics and font support
-    fontconfig ttf-dejavu mesa-gl \
+    fontconfig fonts-dejavu mesa-utils \
     # Audio support
-    alsa-lib \
+    alsa-utils \
     # Network utilities
     net-tools procps \
-    && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # Create application user and directories
-RUN addgroup -g 1001 -S greta && \
-    adduser -D -u 1001 -G greta -S greta && \
+RUN groupadd -g 1001 greta && \
+    useradd -r -u 1001 -g greta greta && \
     mkdir -p /app/{lib,data,logs,config,cache} && \
     mkdir -p /tmp/greta && \
     chown -R greta:greta /app /tmp/greta
@@ -99,51 +100,43 @@ COPY --from=builder --chown=greta:greta /app/auxiliary/*/Data/ ./data/auxiliary/
 COPY --from=builder --chown=greta:greta /app/src/main/resources/ ./config/
 
 # Create startup script with better error handling
-RUN cat > /app/start-greta.sh << 'EOF' && \
-#!/bin/bash
-set -e
-
-# Environment setup
-export GRETA_HOME="/app"
-export GRETA_DATA="/app/data"
-export GRETA_LOGS="/app/logs"
-export GRETA_CONFIG="/app/config"
-export JAVA_TOOL_OPTIONS="-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"
-
-# JVM optimization based on container resources
-MEMORY_LIMIT=$(cat /sys/fs/cgroup/memory/memory.limit_in_bytes 2>/dev/null || echo "2147483648")
-CPU_LIMIT=$(nproc)
-HEAP_SIZE=$((MEMORY_LIMIT / 1024 / 1024 * 75 / 100))
-
-if [ $HEAP_SIZE -lt 512 ]; then HEAP_SIZE=512; fi
-if [ $HEAP_SIZE -gt 4096 ]; then HEAP_SIZE=4096; fi
-
-# Default JVM options if not provided
-if [ -z "$JAVA_OPTS" ]; then
-    export JAVA_OPTS="-Xmx${HEAP_SIZE}m -Xms$((HEAP_SIZE / 2))m \
-        -XX:+UseG1GC -XX:MaxGCPauseMillis=200 \
-        -XX:+UseStringDeduplication \
-        -XX:+OptimizeStringConcat \
-        -Djava.awt.headless=true \
-        -Dfile.encoding=UTF-8 \
-        -Duser.timezone=UTC"
-fi
-
-# Find the main JAR file
-MAIN_JAR=$(find /app -maxdepth 1 -name "greta-application-*.jar" | head -1)
-if [ -z "$MAIN_JAR" ]; then
-    echo "ERROR: No main application JAR found"
-    exit 1
-fi
-
-echo "Starting Greta Platform..."
-echo "Java Options: $JAVA_OPTS"
-echo "Main JAR: $MAIN_JAR"
-echo "Available Memory: $HEAP_SIZE MB"
-
-# Start the application
-exec java $JAVA_OPTS -jar "$MAIN_JAR" "$@"
-EOF
+RUN echo '#!/bin/bash' > /app/start-greta.sh && \
+    echo 'set -e' >> /app/start-greta.sh && \
+    echo '' >> /app/start-greta.sh && \
+    echo '# Environment setup' >> /app/start-greta.sh && \
+    echo 'export GRETA_HOME="/app"' >> /app/start-greta.sh && \
+    echo 'export GRETA_DATA="/app/data"' >> /app/start-greta.sh && \
+    echo 'export GRETA_LOGS="/app/logs"' >> /app/start-greta.sh && \
+    echo 'export GRETA_CONFIG="/app/config"' >> /app/start-greta.sh && \
+    echo 'export JAVA_TOOL_OPTIONS="-Djava.awt.headless=true -Djava.security.egd=file:/dev/./urandom"' >> /app/start-greta.sh && \
+    echo '' >> /app/start-greta.sh && \
+    echo '# JVM optimization based on container resources' >> /app/start-greta.sh && \
+    echo 'MEMORY_LIMIT=$(cat /sys/fs/cgroup/memory/memory.limit_in_bytes 2>/dev/null || echo "2147483648")' >> /app/start-greta.sh && \
+    echo 'CPU_LIMIT=$(nproc)' >> /app/start-greta.sh && \
+    echo 'HEAP_SIZE=$((MEMORY_LIMIT / 1024 / 1024 * 75 / 100))' >> /app/start-greta.sh && \
+    echo '' >> /app/start-greta.sh && \
+    echo 'if [ $HEAP_SIZE -lt 512 ]; then HEAP_SIZE=512; fi' >> /app/start-greta.sh && \
+    echo 'if [ $HEAP_SIZE -gt 4096 ]; then HEAP_SIZE=4096; fi' >> /app/start-greta.sh && \
+    echo '' >> /app/start-greta.sh && \
+    echo '# Default JVM options if not provided' >> /app/start-greta.sh && \
+    echo 'if [ -z "$JAVA_OPTS" ]; then' >> /app/start-greta.sh && \
+    echo '    export JAVA_OPTS="-Xmx${HEAP_SIZE}m -Xms$((HEAP_SIZE / 2))m -XX:+UseG1GC -XX:MaxGCPauseMillis=200 -XX:+UseStringDeduplication -XX:+OptimizeStringConcat -Djava.awt.headless=true -Dfile.encoding=UTF-8 -Duser.timezone=UTC"' >> /app/start-greta.sh && \
+    echo 'fi' >> /app/start-greta.sh && \
+    echo '' >> /app/start-greta.sh && \
+    echo '# Find the main JAR file' >> /app/start-greta.sh && \
+    echo 'MAIN_JAR=$(find /app -maxdepth 1 -name "greta-application-*.jar" | head -1)' >> /app/start-greta.sh && \
+    echo 'if [ -z "$MAIN_JAR" ]; then' >> /app/start-greta.sh && \
+    echo '    echo "ERROR: No main application JAR found"' >> /app/start-greta.sh && \
+    echo '    exit 1' >> /app/start-greta.sh && \
+    echo 'fi' >> /app/start-greta.sh && \
+    echo '' >> /app/start-greta.sh && \
+    echo 'echo "Starting Greta Platform..."' >> /app/start-greta.sh && \
+    echo 'echo "Java Options: $JAVA_OPTS"' >> /app/start-greta.sh && \
+    echo 'echo "Main JAR: $MAIN_JAR"' >> /app/start-greta.sh && \
+    echo 'echo "Available Memory: $HEAP_SIZE MB"' >> /app/start-greta.sh && \
+    echo '' >> /app/start-greta.sh && \
+    echo '# Start the application' >> /app/start-greta.sh && \
+    echo 'exec java $JAVA_OPTS -jar "$MAIN_JAR" "$@"' >> /app/start-greta.sh
 RUN chmod +x /app/start-greta.sh
 
 # Switch to application user

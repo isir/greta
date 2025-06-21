@@ -170,7 +170,7 @@ HEALTHCHECK --interval=30s --timeout=15s --start-period=90s --retries=3 \
         pgrep -f "java.*greta" > /dev/null || exit 1
 
 # Use tini as init system for proper signal handling
-ENTRYPOINT ["/sbin/tini", "--"]
+ENTRYPOINT ["/usr/bin/tini", "--"]
 
 # Default command with fallback
 CMD ["/app/start-greta.sh"]

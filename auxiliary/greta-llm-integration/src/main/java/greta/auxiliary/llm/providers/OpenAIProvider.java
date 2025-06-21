@@ -87,13 +87,13 @@ public class OpenAIProvider implements LLMProvider {
                 // Set usage information
                 if (result.getUsage() != null) {
                     LLMResponse.UsageInfo usage = new LLMResponse.UsageInfo();
-                    usage.setPromptTokens((int) result.getUsage().getPromptTokens());
-                    usage.setCompletionTokens((int) result.getUsage().getCompletionTokens());
-                    usage.setTotalTokens((int) result.getUsage().getTotalTokens());
-                    usage.setCost(calculateCost(result.getModel(), (int) result.getUsage().getTotalTokens()));
+                    usage.setPromptTokens(result.getUsage().getPromptTokens());
+                    usage.setCompletionTokens(result.getUsage().getCompletionTokens());
+                    usage.setTotalTokens(result.getUsage().getTotalTokens());
+                    usage.setCost(calculateCost(result.getModel(), result.getUsage().getTotalTokens()));
                     response.setUsage(usage);
                     
-                    usageStats.addTokens((int) result.getUsage().getTotalTokens());
+                    usageStats.addTokens(result.getUsage().getTotalTokens());
                     usageStats.addCost(usage.getCost());
                 }
                 
@@ -161,7 +161,7 @@ public class OpenAIProvider implements LLMProvider {
                 service.streamChatCompletion(completionRequest)
                     .doOnNext(chunk -> {
                         if (chunk.getChoices() != null && !chunk.getChoices().isEmpty()) {
-                            String token = chunk.getChoices().get(0).getMessage().getContent();
+                            String token = chunk.getChoices().get(0).getDelta().getContent();
                             if (token != null) {
                                 fullResponse.append(token);
                                 callback.onToken(token);
@@ -221,7 +221,7 @@ public class OpenAIProvider implements LLMProvider {
         // Rough token estimation
         int estimatedTokens = estimateTokenCount(request.getPrompt()) + 
                               request.getParameters().getMaxTokens();
-        return calculateCost(request.getParameters().getModel(), (long) estimatedTokens);
+        return calculateCost(request.getParameters().getModel(), estimatedTokens);
     }
     
     @Override
@@ -248,17 +248,17 @@ public class OpenAIProvider implements LLMProvider {
                     case "system": role = ChatMessageRole.SYSTEM; break;
                     default: role = ChatMessageRole.USER; break;
                 }
-                messages.add(new ChatMessage(role.value(), turn.getContent()));
+                messages.add(new ChatMessage(role, turn.getContent()));
             }
         }
         
         // Add current prompt
-        messages.add(new ChatMessage(ChatMessageRole.USER.value(), request.getPrompt()));
+        messages.add(new ChatMessage(ChatMessageRole.USER, request.getPrompt()));
         
         return messages;
     }
     
-    private double calculateCost(String model, long tokens) {
+    private double calculateCost(String model, int tokens) {
         // Simplified cost calculation - update with current OpenAI pricing
         double costPerThousandTokens;
         switch (model != null ? model.toLowerCase() : defaultModel.toLowerCase()) {
@@ -272,7 +272,7 @@ public class OpenAIProvider implements LLMProvider {
                 costPerThousandTokens = 0.02;
                 break;
         }
-        return ((double) tokens / 1000.0) * costPerThousandTokens;
+        return (tokens / 1000.0) * costPerThousandTokens;
     }
     
     private double calculateConfidence(ChatCompletionResult result) {

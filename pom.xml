@@ -105,6 +105,7 @@
         
         <!-- 3D Player -->
         <module>auxiliary/Player/Ogre</module>
+        <module>auxiliary/Player/WebAvatar</module>
         
         <!-- Application -->
         <module>application/Modular</module>

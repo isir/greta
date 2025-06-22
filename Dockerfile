@@ -202,6 +202,9 @@ EXPOSE 61616/tcp
 EXPOSE 1883/tcp
 EXPOSE 8081/tcp
 
+# Copy web avatar assets
+COPY --from=builder --chown=greta:greta /app/auxiliary/Player/WebAvatar/web/ ./web/
+
 # Enhanced health check (without curl dependency)
 HEALTHCHECK --interval=30s --timeout=15s --start-period=90s --retries=3 \
     CMD pgrep -f "java.*greta" > /dev/null || exit 1

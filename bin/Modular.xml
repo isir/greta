@@ -49,6 +49,7 @@
             </menu>
             <menu name="Player">
                 <item module="Ogre Player" name="Ogre Player"/>
+                <item module="WebGL Avatar Player" name="WebGL Avatar Player"/>
                 <item module="Capture Controller" name="Capture Controller"/>
                 <item module="Xuggle Video Capture" name="Video Capture Output"/>
                 <item module="Parser Capture Controller AU" name="Parser Capture Controller AU"/>
@@ -852,6 +853,12 @@
             <parameter default="0" get_method="getCameraPitch" get_on="object" name="pitch" set_method="setCameraPitch" set_on="object" type="double"/>
             <parameter default="0" get_method="getCameraYaw" get_on="object" name="yaw" set_method="setCameraYaw" set_on="object" type="double"/>
             <parameter default="0" get_method="getCameraRoll" get_on="object" name="roll" set_method="setCameraRoll" set_on="object" type="double"/>
+        </module>
+        <module name="WebGL Avatar Player" style="Player">
+            <object class="greta.auxiliary.player.webavatar.WebAvatarPlayer" lib_id="greta_web_avatar"/>
+            <frame type="object" windowed_only="true"/>
+            <parameter default="8081" get_method="getWebSocketPort" get_on="object" name="websocket_port" set_method="setWebSocketPort" set_on="object" type="int"/>
+            <parameter default="alice" get_method="getCurrentCharacter" get_on="object" name="character" set_method="setCurrentCharacter" set_on="object" type="string"/>
         </module>
         <module name="Capture Controller" style="Player">
             <object class="greta.auxiliary.player.ogre.capture.Capturecontroller" lib_id="greta_ogre_player"/>

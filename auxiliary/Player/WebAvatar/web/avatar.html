@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greta ECA - 3D Avatar</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+        }
+        
+        #avatar-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+        
+        #avatar-canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #status-overlay {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            max-width: 300px;
+            z-index: 100;
+        }
+        
+        #controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 10px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+        }
+        
+        .control-btn {
+            background: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: background-color 0.3s;
+        }
+        
+        .control-btn:hover {
+            background: #45a049;
+        }
+        
+        .control-btn:disabled {
+            background: #666;
+            cursor: not-allowed;
+        }
+        
+        #connection-indicator {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ff4444;
+            margin-right: 5px;
+        }
+        
+        .connected {
+            background: #44ff44 !important;
+        }
+        
+        #speech-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            z-index: 100;
+        }
+        
+        .speaking {
+            animation: pulse 1s ease-in-out infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.05); }
+        }
+        
+        #loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 18px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div id="avatar-container">
+        <div id="loading">🤖 Loading 3D Avatar...</div>
+        
+        <canvas id="avatar-canvas"></canvas>
+        
+        <div id="status-overlay">
+            <div><span id="connection-indicator"></span><strong>Greta ECA Avatar</strong></div>
+            <div>Status: <span id="connection-status">Connecting...</span></div>
+            <div>Character: <span id="current-character">alice</span></div>
+            <div>Animation: <span id="animation-status">Idle</span></div>
+        </div>
+        
+        <div id="controls">
+            <button class="control-btn" onclick="testExpression()">😊 Smile</button>
+            <button class="control-btn" onclick="testGesture()">👋 Wave</button>
+            <button class="control-btn" onclick="resetPose()">🔄 Reset</button>
+            <button class="control-btn" onclick="toggleCamera()">📷 Camera</button>
+        </div>
+        
+        <div id="speech-indicator">
+            <div>🗣️ Speaking...</div>
+            <div id="speech-text"></div>
+        </div>
+    </div>
+
+    <!-- Three.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+
+    <script>
+        // Global variables
+        let scene, camera, renderer, controls;
+        let avatar, avatarMixer;
+        let websocket;
+        let isConnected = false;
+        let currentAnimation = null;
+        
+        // Animation state
+        let facialExpressions = {
+            neutral: 0,
+            smile: 0,
+            frown: 0,
+            surprise: 0,
+            anger: 0
+        };
+        
+        // Initialize the 3D scene
+        function initScene() {
+            // Scene setup
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0x2a5298);
+            
+            // Camera setup
+            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            camera.position.set(0, 1.6, 3);
+            camera.lookAt(0, 1.6, 0);
+            
+            // Renderer setup
+            const canvas = document.getElementById('avatar-canvas');
+            renderer = new THREE.WebGLRenderer({ canvas: canvas, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            
+            // Controls
+            controls = new THREE.OrbitControls(camera, renderer.domElement);
+            controls.target.set(0, 1.6, 0);
+            controls.enableDamping = true;
+            controls.dampingFactor = 0.1;
+            controls.minDistance = 1;
+            controls.maxDistance = 10;
+            
+            // Lighting
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 2, 1);
+            directionalLight.castShadow = true;
+            directionalLight.shadow.mapSize.width = 2048;
+            directionalLight.shadow.mapSize.height = 2048;
+            scene.add(directionalLight);
+            
+            // Environment
+            createEnvironment();
+            
+            // Load avatar
+            loadAvatar('alice');
+            
+            document.getElementById('loading').style.display = 'none';
+        }
+        
+        function createEnvironment() {
+            // Floor
+            const floorGeometry = new THREE.PlaneGeometry(20, 20);
+            const floorMaterial = new THREE.MeshLambertMaterial({ color: 0x333333 });
+            const floor = new THREE.Mesh(floorGeometry, floorMaterial);
+            floor.rotation.x = -Math.PI / 2;
+            floor.receiveShadow = true;
+            scene.add(floor);
+            
+            // Background elements
+            const sphereGeometry = new THREE.SphereGeometry(0.1, 8, 8);
+            const sphereMaterial = new THREE.MeshBasicMaterial({ color: 0x44aa88 });
+            
+            for (let i = 0; i < 20; i++) {
+                const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial);
+                sphere.position.set(
+                    (Math.random() - 0.5) * 10,
+                    Math.random() * 3 + 2,
+                    (Math.random() - 0.5) * 10
+                );
+                scene.add(sphere);
+            }
+        }
+        
+        function loadAvatar(characterName) {
+            // Remove existing avatar
+            if (avatar) {
+                scene.remove(avatar);
+            }
+            
+            // Create a simple avatar representation
+            // In a real implementation, this would load a GLTF/GLB model
+            const avatarGroup = new THREE.Group();
+            
+            // Head
+            const headGeometry = new THREE.SphereGeometry(0.15, 32, 32);
+            const headMaterial = new THREE.MeshLambertMaterial({ color: 0xffdbac });
+            const head = new THREE.Mesh(headGeometry, headMaterial);
+            head.position.y = 1.7;
+            head.castShadow = true;
+            avatarGroup.add(head);
+            
+            // Eyes
+            const eyeGeometry = new THREE.SphereGeometry(0.02, 16, 16);
+            const eyeMaterial = new THREE.MeshBasicMaterial({ color: 0x333333 });
+            
+            const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+            leftEye.position.set(-0.05, 1.72, 0.12);
+            avatarGroup.add(leftEye);
+            
+            const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
+            rightEye.position.set(0.05, 1.72, 0.12);
+            avatarGroup.add(rightEye);
+            
+            // Mouth
+            const mouthGeometry = new THREE.SphereGeometry(0.015, 16, 16);
+            const mouthMaterial = new THREE.MeshBasicMaterial({ color: 0x8B4513 });
+            const mouth = new THREE.Mesh(mouthGeometry, mouthMaterial);
+            mouth.position.set(0, 1.65, 0.13);
+            avatarGroup.add(mouth);
+            
+            // Body
+            const bodyGeometry = new THREE.CylinderGeometry(0.2, 0.15, 0.6);
+            const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0x4169E1 });
+            const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
+            body.position.y = 1.2;
+            body.castShadow = true;
+            avatarGroup.add(body);
+            
+            // Arms
+            const armGeometry = new THREE.CylinderGeometry(0.03, 0.03, 0.4);
+            const armMaterial = new THREE.MeshLambertMaterial({ color: 0xffdbac });
+            
+            const leftArm = new THREE.Mesh(armGeometry, armMaterial);
+            leftArm.position.set(-0.25, 1.3, 0);
+            leftArm.rotation.z = 0.3;
+            leftArm.castShadow = true;
+            avatarGroup.add(leftArm);
+            
+            const rightArm = new THREE.Mesh(armGeometry, armMaterial);
+            rightArm.position.set(0.25, 1.3, 0);
+            rightArm.rotation.z = -0.3;
+            rightArm.castShadow = true;
+            avatarGroup.add(rightArm);
+            
+            // Store references for animation
+            avatarGroup.userData = {
+                head: head,
+                leftEye: leftEye,
+                rightEye: rightEye,
+                mouth: mouth,
+                body: body,
+                leftArm: leftArm,
+                rightArm: rightArm
+            };
+            
+            avatar = avatarGroup;
+            scene.add(avatar);
+            
+            console.log('Avatar loaded:', characterName);
+            updateStatus('animation-status', 'Avatar Loaded');
+        }
+        
+        // WebSocket connection
+        function connectWebSocket() {
+            try {
+                websocket = new WebSocket('ws://localhost:8081');
+                
+                websocket.onopen = function(event) {
+                    isConnected = true;
+                    updateConnectionStatus(true);
+                    console.log('Connected to Greta backend');
+                };
+                
+                websocket.onmessage = function(event) {
+                    try {
+                        const message = JSON.parse(event.data);
+                        handleMessage(message);
+                    } catch (e) {
+                        console.error('Error parsing message:', e);
+                    }
+                };
+                
+                websocket.onclose = function(event) {
+                    isConnected = false;
+                    updateConnectionStatus(false);
+                    console.log('Disconnected from Greta backend');
+                    
+                    // Try to reconnect after 3 seconds
+                    setTimeout(connectWebSocket, 3000);
+                };
+                
+                websocket.onerror = function(error) {
+                    console.error('WebSocket error:', error);
+                };
+                
+            } catch (e) {
+                console.error('Failed to connect to WebSocket:', e);
+                setTimeout(connectWebSocket, 3000);
+            }
+        }
+        
+        function handleMessage(message) {
+            switch (message.type) {
+                case 'character':
+                    loadAvatar(message.data.name);
+                    updateStatus('current-character', message.data.name);
+                    break;
+                    
+                case 'animation':
+                    playAnimation(message.data);
+                    break;
+                    
+                case 'speech':
+                    playSpeech(message.data);
+                    break;
+                    
+                case 'fap':
+                    applyFacialAnimation(message.data);
+                    break;
+                    
+                case 'bap':
+                    applyBodyAnimation(message.data);
+                    break;
+                    
+                case 'audio':
+                    // Handle audio playback
+                    console.log('Audio received:', message.data);
+                    break;
+                    
+                default:
+                    console.log('Unknown message type:', message.type);
+            }
+        }
+        
+        function playAnimation(data) {
+            if (!avatar) return;
+            
+            updateStatus('animation-status', data.name || 'Custom Animation');
+            
+            switch (data.type) {
+                case 'expression':
+                    playFacialExpression(data);
+                    break;
+                case 'gesture':
+                    playGesture(data);
+                    break;
+            }
+        }
+        
+        function playFacialExpression(data) {
+            if (!avatar || !avatar.userData.mouth) return;
+            
+            const mouth = avatar.userData.mouth;
+            const originalScale = mouth.scale.clone();
+            
+            // Animate mouth based on expression
+            switch (data.name) {
+                case 'smile':
+                    // Animate smile
+                    animateScale(mouth, { x: 1.5, y: 0.8, z: 1 }, data.duration || 1000);
+                    break;
+                case 'frown':
+                    animateScale(mouth, { x: 0.8, y: 1.2, z: 1 }, data.duration || 1000);
+                    break;
+            }
+            
+            // Reset after animation
+            setTimeout(() => {
+                animateScale(mouth, originalScale, 500);
+            }, data.duration || 1000);
+        }
+        
+        function playGesture(data) {
+            if (!avatar || !avatar.userData.rightArm) return;
+            
+            const arm = avatar.userData.rightArm;
+            
+            switch (data.name) {
+                case 'wave':
+                    // Wave animation
+                    const waveAnimation = () => {
+                        arm.rotation.z = -0.3 + Math.sin(Date.now() * 0.01) * 0.5;
+                    };
+                    
+                    const waveInterval = setInterval(waveAnimation, 16);
+                    setTimeout(() => {
+                        clearInterval(waveInterval);
+                        arm.rotation.z = -0.3; // Reset
+                    }, data.duration || 2000);
+                    break;
+            }
+        }
+        
+        function playSpeech(data) {
+            const speechIndicator = document.getElementById('speech-indicator');
+            const speechText = document.getElementById('speech-text');
+            
+            speechText.textContent = data.text;
+            speechIndicator.style.display = 'block';
+            
+            // Add speaking animation
+            if (avatar) {
+                avatar.classList.add('speaking');
+            }
+            
+            // Simulate lip sync with visemes
+            if (data.visemes) {
+                animateVisemes(data.visemes);
+            }
+            
+            // Hide after duration
+            setTimeout(() => {
+                speechIndicator.style.display = 'none';
+                if (avatar) {
+                    avatar.classList.remove('speaking');
+                }
+                updateStatus('animation-status', 'Idle');
+            }, data.duration || 3000);
+            
+            updateStatus('animation-status', 'Speaking');
+        }
+        
+        function animateVisemes(visemes) {
+            if (!avatar || !avatar.userData.mouth) return;
+            
+            const mouth = avatar.userData.mouth;
+            
+            visemes.forEach((viseme, index) => {
+                setTimeout(() => {
+                    // Simple mouth animation based on phoneme
+                    const intensity = Math.random() * 0.3 + 0.7;
+                    mouth.scale.set(intensity, intensity, 1);
+                }, viseme.time || index * 100);
+            });
+        }
+        
+        function applyFacialAnimation(fapData) {
+            // Apply FAP (Facial Animation Parameters)
+            console.log('Applying facial animation:', fapData);
+            // Implementation would map FAP values to facial features
+        }
+        
+        function applyBodyAnimation(bapData) {
+            // Apply BAP (Body Animation Parameters)
+            console.log('Applying body animation:', bapData);
+            // Implementation would map BAP values to body joints
+        }
+        
+        // Utility functions
+        function animateScale(object, targetScale, duration) {
+            const startScale = object.scale.clone();
+            const startTime = Date.now();
+            
+            function animate() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                object.scale.lerpVectors(startScale, new THREE.Vector3(targetScale.x, targetScale.y, targetScale.z), progress);
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+            
+            animate();
+        }
+        
+        function updateConnectionStatus(connected) {
+            const indicator = document.getElementById('connection-indicator');
+            const status = document.getElementById('connection-status');
+            
+            if (connected) {
+                indicator.classList.add('connected');
+                status.textContent = 'Connected';
+            } else {
+                indicator.classList.remove('connected');
+                status.textContent = 'Disconnected';
+            }
+        }
+        
+        function updateStatus(elementId, text) {
+            document.getElementById(elementId).textContent = text;
+        }
+        
+        // Control functions
+        function testExpression() {
+            if (isConnected && websocket) {
+                websocket.send(JSON.stringify({
+                    type: 'test',
+                    data: { action: 'expression', name: 'smile' }
+                }));
+            } else {
+                playAnimation({ type: 'expression', name: 'smile', duration: 2000 });
+            }
+        }
+        
+        function testGesture() {
+            if (isConnected && websocket) {
+                websocket.send(JSON.stringify({
+                    type: 'test',
+                    data: { action: 'gesture', name: 'wave' }
+                }));
+            } else {
+                playAnimation({ type: 'gesture', name: 'wave', duration: 2000 });
+            }
+        }
+        
+        function resetPose() {
+            if (avatar) {
+                // Reset all transformations
+                Object.values(avatar.userData).forEach(part => {
+                    if (part && part.scale) {
+                        part.scale.set(1, 1, 1);
+                        part.rotation.set(0, 0, 0);
+                    }
+                });
+                
+                // Reset arm positions
+                if (avatar.userData.leftArm) avatar.userData.leftArm.rotation.z = 0.3;
+                if (avatar.userData.rightArm) avatar.userData.rightArm.rotation.z = -0.3;
+            }
+            updateStatus('animation-status', 'Reset');
+        }
+        
+        function toggleCamera() {
+            if (controls.autoRotate) {
+                controls.autoRotate = false;
+            } else {
+                controls.autoRotate = true;
+                controls.autoRotateSpeed = 1;
+            }
+        }
+        
+        // Animation loop
+        function animate() {
+            requestAnimationFrame(animate);
+            
+            if (controls) {
+                controls.update();
+            }
+            
+            // Simple idle animation
+            if (avatar && avatar.userData.head) {
+                const time = Date.now() * 0.001;
+                avatar.userData.head.rotation.y = Math.sin(time * 0.5) * 0.1;
+                avatar.userData.head.position.y = 1.7 + Math.sin(time * 2) * 0.01;
+            }
+            
+            renderer.render(scene, camera);
+        }
+        
+        // Event listeners
+        window.addEventListener('resize', function() {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+        
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', function() {
+            initScene();
+            connectWebSocket();
+            animate();
+        });
+    </script>
+</body>
+</html>

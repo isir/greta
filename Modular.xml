@@ -130,6 +130,7 @@
                 <item module="ObjectNodeController" name="ObjectNodeController"/>
                 <item module="OSC" name="OSC"/>
                 <item module="Microphone" name="Microphone"/>
+                <item module="Text Input" name="Text Input"/>
                 <item module="Microsaccade" name="Microsaccade"/>
             
             </menu>
@@ -857,7 +858,7 @@
         <module name="WebGL Avatar Player" style="Player">
             <object class="greta.auxiliary.player.webavatar.WebAvatarPlayer" lib_id="greta_web_avatar"/>
             <frame type="object" windowed_only="true"/>
-            <parameter default="8081" get_method="getWebSocketPort" get_on="object" name="websocket_port" set_method="setWebSocketPort" set_on="object" type="int"/>
+            <parameter default="8081" get_method="getWebSocketPort" get_on="object" name="websocket_port" set_method="setWebSocketPort" set_on="object" type="integer"/>
             <parameter default="alice" get_method="getCurrentCharacter" get_on="object" name="character" set_method="setCurrentCharacter" set_on="object" type="string"/>
         </module>
         <module name="Capture Controller" style="Player">
@@ -1307,6 +1308,11 @@
         
         <module name="Microphone" >
             <object class="greta.auxiliary.Microphone.MicrophoneFrame" lib_id="greta_microphone"/>
+            <frame type="object"/>
+        </module>
+
+        <module name="Text Input" style="DEFAULT">
+            <object class="greta.auxiliary.textinput.TextInputFrame" lib_id="greta_text_input"/>
             <frame type="object"/>
         </module>
 
@@ -1830,6 +1836,18 @@
             <depends lib_id="greta_intentions"/>
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_util"/>
+        </lib>
+        
+        <lib id="greta_web_avatar" path="./auxiliary/Player/WebAvatar/target/greta-auxiliary-web-avatar-1.0.0-SNAPSHOT.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_utilx"/>
+            <depends lib_id="greta_animation_core"/>
+            <depends lib_id="ext_jackson-databind"/>
+        </lib>
+        
+        <lib id="greta_text_input" path="./auxiliary/TextInput/target/greta-auxiliary-text-input-1.0.0-SNAPSHOT.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_utilx"/>
         </lib>
                   
     </libs>

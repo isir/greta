@@ -239,70 +239,154 @@
                 scene.remove(avatar);
             }
             
-            // Create a simple avatar representation
-            // In a real implementation, this would load a GLTF/GLB model
+            // Create realistic human-like avatar based on Greta characters
             const avatarGroup = new THREE.Group();
             
-            // Head
-            const headGeometry = new THREE.SphereGeometry(0.15, 32, 32);
-            const headMaterial = new THREE.MeshLambertMaterial({ color: 0xffdbac });
+            // Character-specific properties
+            const characters = {
+                alice: { skinColor: 0xffdbac, hairColor: 0x8B4513, eyeColor: 0x4169E1 },
+                camille: { skinColor: 0xffdbac, hairColor: 0x654321, eyeColor: 0x228B22 },
+                emma: { skinColor: 0xf5deb3, hairColor: 0x2F1B14, eyeColor: 0x800080 },
+                franck: { skinColor: 0xfdbcb4, hairColor: 0x8B4513, eyeColor: 0x8B4513 }
+            };
+            
+            const char = characters[characterName] || characters.alice;
+            
+            // Head (more realistic proportions)
+            const headGeometry = new THREE.BoxGeometry(0.18, 0.22, 0.16);
+            headGeometry.translate(0, 0, 0.02); // Move forward slightly
+            const headMaterial = new THREE.MeshLambertMaterial({ 
+                color: char.skinColor,
+                transparent: true,
+                opacity: 0.95
+            });
             const head = new THREE.Mesh(headGeometry, headMaterial);
             head.position.y = 1.7;
             head.castShadow = true;
             avatarGroup.add(head);
             
-            // Eyes
-            const eyeGeometry = new THREE.SphereGeometry(0.02, 16, 16);
-            const eyeMaterial = new THREE.MeshBasicMaterial({ color: 0x333333 });
+            // Hair
+            const hairGeometry = new THREE.SphereGeometry(0.16, 16, 16);
+            const hairMaterial = new THREE.MeshLambertMaterial({ color: char.hairColor });
+            const hair = new THREE.Mesh(hairGeometry, hairMaterial);
+            hair.position.set(0, 1.78, 0);
+            hair.scale.set(1, 0.8, 1);
+            hair.castShadow = true;
+            avatarGroup.add(hair);
             
-            const leftEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-            leftEye.position.set(-0.05, 1.72, 0.12);
-            avatarGroup.add(leftEye);
+            // Eyes with proper colors
+            const eyeWhiteGeometry = new THREE.SphereGeometry(0.025, 16, 16);
+            const eyeWhiteMaterial = new THREE.MeshLambertMaterial({ color: 0xffffff });
+            const eyeIrisGeometry = new THREE.SphereGeometry(0.015, 16, 16);
+            const eyeIrisMaterial = new THREE.MeshLambertMaterial({ color: char.eyeColor });
+            const eyePupilGeometry = new THREE.SphereGeometry(0.008, 16, 16);
+            const eyePupilMaterial = new THREE.MeshBasicMaterial({ color: 0x000000 });
             
-            const rightEye = new THREE.Mesh(eyeGeometry, eyeMaterial);
-            rightEye.position.set(0.05, 1.72, 0.12);
-            avatarGroup.add(rightEye);
+            // Left eye
+            const leftEyeWhite = new THREE.Mesh(eyeWhiteGeometry, eyeWhiteMaterial);
+            leftEyeWhite.position.set(-0.05, 1.72, 0.12);
+            const leftEyeIris = new THREE.Mesh(eyeIrisGeometry, eyeIrisMaterial);
+            leftEyeIris.position.set(-0.05, 1.72, 0.135);
+            const leftEyePupil = new THREE.Mesh(eyePupilGeometry, eyePupilMaterial);
+            leftEyePupil.position.set(-0.05, 1.72, 0.145);
+            avatarGroup.add(leftEyeWhite);
+            avatarGroup.add(leftEyeIris);
+            avatarGroup.add(leftEyePupil);
             
-            // Mouth
-            const mouthGeometry = new THREE.SphereGeometry(0.015, 16, 16);
-            const mouthMaterial = new THREE.MeshBasicMaterial({ color: 0x8B4513 });
+            // Right eye
+            const rightEyeWhite = new THREE.Mesh(eyeWhiteGeometry, eyeWhiteMaterial);
+            rightEyeWhite.position.set(0.05, 1.72, 0.12);
+            const rightEyeIris = new THREE.Mesh(eyeIrisGeometry, eyeIrisMaterial);
+            rightEyeIris.position.set(0.05, 1.72, 0.135);
+            const rightEyePupil = new THREE.Mesh(eyePupilGeometry, eyePupilMaterial);
+            rightEyePupil.position.set(0.05, 1.72, 0.145);
+            avatarGroup.add(rightEyeWhite);
+            avatarGroup.add(rightEyeIris);
+            avatarGroup.add(rightEyePupil);
+            
+            // Nose
+            const noseGeometry = new THREE.ConeGeometry(0.012, 0.04, 8);
+            const noseMaterial = new THREE.MeshLambertMaterial({ color: char.skinColor });
+            const nose = new THREE.Mesh(noseGeometry, noseMaterial);
+            nose.position.set(0, 1.68, 0.13);
+            nose.rotation.x = Math.PI;
+            avatarGroup.add(nose);
+            
+            // Mouth (more realistic)
+            const mouthGeometry = new THREE.CylinderGeometry(0.02, 0.015, 0.06);
+            const mouthMaterial = new THREE.MeshLambertMaterial({ color: 0xff6b6b });
             const mouth = new THREE.Mesh(mouthGeometry, mouthMaterial);
-            mouth.position.set(0, 1.65, 0.13);
+            mouth.position.set(0, 1.64, 0.13);
+            mouth.rotation.z = Math.PI / 2;
             avatarGroup.add(mouth);
             
-            // Body
-            const bodyGeometry = new THREE.CylinderGeometry(0.2, 0.15, 0.6);
-            const bodyMaterial = new THREE.MeshLambertMaterial({ color: 0x4169E1 });
+            // Neck
+            const neckGeometry = new THREE.CylinderGeometry(0.06, 0.08, 0.12);
+            const neckMaterial = new THREE.MeshLambertMaterial({ color: char.skinColor });
+            const neck = new THREE.Mesh(neckGeometry, neckMaterial);
+            neck.position.y = 1.52;
+            neck.castShadow = true;
+            avatarGroup.add(neck);
+            
+            // Body/Torso (more realistic proportions)
+            const bodyGeometry = new THREE.CylinderGeometry(0.18, 0.22, 0.7);
+            const shirtColor = characterName === 'franck' ? 0x2E4B6B : 0x8B0000;
+            const bodyMaterial = new THREE.MeshLambertMaterial({ color: shirtColor });
             const body = new THREE.Mesh(bodyGeometry, bodyMaterial);
-            body.position.y = 1.2;
+            body.position.y = 1.0;
             body.castShadow = true;
             avatarGroup.add(body);
             
-            // Arms
-            const armGeometry = new THREE.CylinderGeometry(0.03, 0.03, 0.4);
-            const armMaterial = new THREE.MeshLambertMaterial({ color: 0xffdbac });
+            // Arms (upper and lower)
+            const upperArmGeometry = new THREE.CylinderGeometry(0.04, 0.035, 0.25);
+            const lowerArmGeometry = new THREE.CylinderGeometry(0.035, 0.03, 0.22);
+            const armMaterial = new THREE.MeshLambertMaterial({ color: char.skinColor });
             
-            const leftArm = new THREE.Mesh(armGeometry, armMaterial);
-            leftArm.position.set(-0.25, 1.3, 0);
-            leftArm.rotation.z = 0.3;
-            leftArm.castShadow = true;
-            avatarGroup.add(leftArm);
+            // Left arm
+            const leftUpperArm = new THREE.Mesh(upperArmGeometry, armMaterial);
+            leftUpperArm.position.set(-0.22, 1.15, 0);
+            leftUpperArm.rotation.z = 0.2;
+            leftUpperArm.castShadow = true;
+            avatarGroup.add(leftUpperArm);
             
-            const rightArm = new THREE.Mesh(armGeometry, armMaterial);
-            rightArm.position.set(0.25, 1.3, 0);
-            rightArm.rotation.z = -0.3;
-            rightArm.castShadow = true;
-            avatarGroup.add(rightArm);
+            const leftLowerArm = new THREE.Mesh(lowerArmGeometry, armMaterial);
+            leftLowerArm.position.set(-0.35, 0.9, 0.1);
+            leftLowerArm.rotation.z = 0.6;
+            leftLowerArm.castShadow = true;
+            avatarGroup.add(leftLowerArm);
+            
+            // Right arm
+            const rightUpperArm = new THREE.Mesh(upperArmGeometry, armMaterial);
+            rightUpperArm.position.set(0.22, 1.15, 0);
+            rightUpperArm.rotation.z = -0.2;
+            rightUpperArm.castShadow = true;
+            avatarGroup.add(rightUpperArm);
+            
+            const rightLowerArm = new THREE.Mesh(lowerArmGeometry, armMaterial);
+            rightLowerArm.position.set(0.35, 0.9, 0.1);
+            rightLowerArm.rotation.z = -0.6;
+            rightLowerArm.castShadow = true;
+            avatarGroup.add(rightLowerArm);
             
             // Store references for animation
             avatarGroup.userData = {
                 head: head,
-                leftEye: leftEye,
-                rightEye: rightEye,
+                hair: hair,
+                leftEyeWhite: leftEyeWhite,
+                leftEyeIris: leftEyeIris,
+                leftEyePupil: leftEyePupil,
+                rightEyeWhite: rightEyeWhite,
+                rightEyeIris: rightEyeIris,
+                rightEyePupil: rightEyePupil,
+                nose: nose,
                 mouth: mouth,
+                neck: neck,
                 body: body,
-                leftArm: leftArm,
-                rightArm: rightArm
+                leftUpperArm: leftUpperArm,
+                leftLowerArm: leftLowerArm,
+                rightUpperArm: rightUpperArm,
+                rightLowerArm: rightLowerArm,
+                character: characterName
             };
             
             avatar = avatarGroup;
@@ -402,17 +486,50 @@
         function playFacialExpression(data) {
             if (!avatar || !avatar.userData.mouth) return;
             
-            const mouth = avatar.userData.mouth;
-            const originalScale = mouth.scale.clone();
+            const { mouth, head, leftEyeIris, rightEyeIris } = avatar.userData;
+            const intensity = data.intensity || 0.8;
+            const duration = data.duration || 1000;
             
-            // Animate mouth based on expression
+            // Animate facial features based on expression
             switch (data.name) {
                 case 'smile':
-                    // Animate smile
-                    animateScale(mouth, { x: 1.5, y: 0.8, z: 1 }, data.duration || 1000);
+                    // Animate smile - wider mouth, slight head tilt
+                    animateScale(mouth, { x: 1.3 * intensity, y: 0.9, z: 1 }, duration);
+                    animateRotation(head, { x: 0, y: 0, z: 0.05 * intensity }, duration);
+                    // Eye animation for smile (slight squint)
+                    animateScale(leftEyeIris, { x: 1, y: 0.8 + 0.2 * (1 - intensity), z: 1 }, duration);
+                    animateScale(rightEyeIris, { x: 1, y: 0.8 + 0.2 * (1 - intensity), z: 1 }, duration);
                     break;
+                    
                 case 'frown':
-                    animateScale(mouth, { x: 0.8, y: 1.2, z: 1 }, data.duration || 1000);
+                    // Animate frown - narrower mouth, slight head down
+                    animateScale(mouth, { x: 0.8 - 0.2 * intensity, y: 1.1, z: 1 }, duration);
+                    animateRotation(head, { x: -0.1 * intensity, y: 0, z: 0 }, duration);
+                    break;
+                    
+                case 'surprise':
+                    // Animate surprise - open mouth, raised head, wide eyes
+                    animateScale(mouth, { x: 1.5 * intensity, y: 2 * intensity, z: 1 }, duration);
+                    animateRotation(head, { x: 0.2 * intensity, y: 0, z: 0 }, duration);
+                    animateScale(leftEyeIris, { x: 1.3 * intensity, y: 1.3 * intensity, z: 1 }, duration);
+                    animateScale(rightEyeIris, { x: 1.3 * intensity, y: 1.3 * intensity, z: 1 }, duration);
+                    break;
+                    
+                case 'anger':
+                    // Animate anger - tight mouth, forward head, narrowed eyes
+                    animateScale(mouth, { x: 0.6, y: 0.8, z: 1 }, duration);
+                    animateRotation(head, { x: -0.1 * intensity, y: 0, z: 0 }, duration);
+                    animateScale(leftEyeIris, { x: 0.8, y: 0.7, z: 1 }, duration);
+                    animateScale(rightEyeIris, { x: 0.8, y: 0.7, z: 1 }, duration);
+                    break;
+                    
+                case 'neutral':
+                default:
+                    // Return to neutral
+                    animateScale(mouth, { x: 1, y: 1, z: 1 }, duration);
+                    animateRotation(head, { x: 0, y: 0, z: 0 }, duration);
+                    animateScale(leftEyeIris, { x: 1, y: 1, z: 1 }, duration);
+                    animateScale(rightEyeIris, { x: 1, y: 1, z: 1 }, duration);
                     break;
             }
             
@@ -423,22 +540,107 @@
         }
         
         function playGesture(data) {
-            if (!avatar || !avatar.userData.rightArm) return;
+            if (!avatar) return;
             
-            const arm = avatar.userData.rightArm;
+            const { 
+                rightUpperArm, rightLowerArm, leftUpperArm, leftLowerArm, 
+                head, body 
+            } = avatar.userData;
+            
+            const duration = data.duration || 2000;
+            const intensity = data.intensity || 1.0;
             
             switch (data.name) {
                 case 'wave':
-                    // Wave animation
-                    const waveAnimation = () => {
-                        arm.rotation.z = -0.3 + Math.sin(Date.now() * 0.01) * 0.5;
-                    };
+                    // Right hand wave
+                    if (rightUpperArm && rightLowerArm) {
+                        const waveAnimation = () => {
+                            const time = Date.now() * 0.008;
+                            rightUpperArm.rotation.z = -0.8 + Math.sin(time) * 0.4 * intensity;
+                            rightLowerArm.rotation.z = -1.2 + Math.sin(time * 1.5) * 0.6 * intensity;
+                        };
+                        
+                        const waveInterval = setInterval(waveAnimation, 16);
+                        setTimeout(() => {
+                            clearInterval(waveInterval);
+                            // Return to neutral
+                            animateRotation(rightUpperArm, { x: 0, y: 0, z: -0.2 }, 500);
+                            animateRotation(rightLowerArm, { x: 0, y: 0, z: -0.6 }, 500);
+                        }, duration);
+                    }
+                    break;
                     
-                    const waveInterval = setInterval(waveAnimation, 16);
-                    setTimeout(() => {
-                        clearInterval(waveInterval);
-                        arm.rotation.z = -0.3; // Reset
-                    }, data.duration || 2000);
+                case 'point':
+                    // Point gesture with right arm
+                    if (rightUpperArm && rightLowerArm) {
+                        animateRotation(rightUpperArm, { x: 0, y: 0.3, z: -1.5 }, 500);
+                        animateRotation(rightLowerArm, { x: 0, y: 0, z: -0.2 }, 500);
+                        // Return to neutral after pointing
+                        setTimeout(() => {
+                            animateRotation(rightUpperArm, { x: 0, y: 0, z: -0.2 }, 500);
+                            animateRotation(rightLowerArm, { x: 0, y: 0, z: -0.6 }, 500);
+                        }, duration);
+                    }
+                    break;
+                    
+                case 'nod':
+                    // Head nod
+                    if (head) {
+                        const nodAnimation = () => {
+                            const time = Date.now() * 0.01;
+                            head.rotation.x = Math.sin(time) * 0.2 * intensity;
+                        };
+                        
+                        const nodInterval = setInterval(nodAnimation, 16);
+                        setTimeout(() => {
+                            clearInterval(nodInterval);
+                            animateRotation(head, { x: 0, y: 0, z: 0 }, 300);
+                        }, duration);
+                    }
+                    break;
+                    
+                case 'shake':
+                    // Head shake
+                    if (head) {
+                        const shakeAnimation = () => {
+                            const time = Date.now() * 0.012;
+                            head.rotation.y = Math.sin(time) * 0.3 * intensity;
+                        };
+                        
+                        const shakeInterval = setInterval(shakeAnimation, 16);
+                        setTimeout(() => {
+                            clearInterval(shakeInterval);
+                            animateRotation(head, { x: 0, y: 0, z: 0 }, 300);
+                        }, duration);
+                    }
+                    break;
+                    
+                case 'shrug':
+                    // Shoulder shrug with both arms
+                    if (leftUpperArm && rightUpperArm) {
+                        animateRotation(leftUpperArm, { x: 0.3, y: 0, z: 0.4 }, 300);
+                        animateRotation(rightUpperArm, { x: 0.3, y: 0, z: -0.4 }, 300);
+                        // Lower back down
+                        setTimeout(() => {
+                            animateRotation(leftUpperArm, { x: 0, y: 0, z: 0.2 }, 400);
+                            animateRotation(rightUpperArm, { x: 0, y: 0, z: -0.2 }, 400);
+                        }, duration / 2);
+                    }
+                    break;
+                    
+                case 'thinking':
+                    // Thinking pose - hand to chin
+                    if (rightUpperArm && rightLowerArm && head) {
+                        animateRotation(rightUpperArm, { x: 0.8, y: 0.3, z: -0.5 }, 800);
+                        animateRotation(rightLowerArm, { x: 1.2, y: 0, z: -0.8 }, 800);
+                        animateRotation(head, { x: -0.2, y: 0.1, z: 0 }, 600);
+                        // Return to neutral
+                        setTimeout(() => {
+                            animateRotation(rightUpperArm, { x: 0, y: 0, z: -0.2 }, 600);
+                            animateRotation(rightLowerArm, { x: 0, y: 0, z: -0.6 }, 600);
+                            animateRotation(head, { x: 0, y: 0, z: 0 }, 500);
+                        }, duration);
+                    }
                     break;
             }
         }

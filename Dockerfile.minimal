@@ -1,0 +1,35 @@
+# Minimal test image for GUI fix
+FROM greta-greta-app
+
+USER root
+
+# Copy locale files that are missing
+COPY bin/Locale/ /app/bin/Locale/
+
+# Copy the fixed LanguageMenu class
+COPY application/Modular/src/greta/application/modular/LanguageMenu.java /tmp/LanguageMenu.java
+
+# Extract the JAR, replace the class, and repackage
+RUN cd /app && \
+    # Create temp directory for JAR extraction
+    mkdir -p /tmp/jar-extract && \
+    cd /tmp/jar-extract && \
+    # Extract the JAR
+    jar -xf /app/greta-application-modular-1.0.0-SNAPSHOT.jar && \
+    # Compile the fixed LanguageMenu with dependencies
+    find /app/lib -name "*.jar" -exec echo -n "{}:" \; > /tmp/classpath.txt && \
+    echo "/app/greta-application-modular-1.0.0-SNAPSHOT.jar" >> /tmp/classpath.txt && \
+    CLASSPATH=$(cat /tmp/classpath.txt | tr -d '\n') && \
+    javac -cp "$CLASSPATH" -d . /tmp/LanguageMenu.java && \
+    # Replace the original class in the extracted JAR
+    cp greta/application/modular/LanguageMenu.class ./greta/application/modular/ && \
+    # Repackage the JAR
+    jar -cf /app/greta-application-modular-1.0.0-SNAPSHOT-fixed.jar . && \
+    # Replace the original
+    mv /app/greta-application-modular-1.0.0-SNAPSHOT.jar /app/greta-application-modular-1.0.0-SNAPSHOT-original.jar && \
+    mv /app/greta-application-modular-1.0.0-SNAPSHOT-fixed.jar /app/greta-application-modular-1.0.0-SNAPSHOT.jar && \
+    # Cleanup
+    rm -rf /tmp/jar-extract /tmp/LanguageMenu.java /tmp/classpath.txt && \
+    chown greta:greta /app/*.jar
+
+USER greta

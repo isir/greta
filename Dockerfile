@@ -117,6 +117,9 @@ RUN --mount=from=builder,source=/app,target=/tmp/builder \
 COPY --from=builder --chown=greta:greta /app/bin/Common/Data/ ./data/
 # Copy locale files for LanguageMenu
 COPY --from=builder --chown=greta:greta /app/bin/Locale/ ./bin/Locale/
+# Copy essential XML configuration files to working directory
+COPY --from=builder --chown=greta:greta /app/bin/Modular.xml ./Modular.xml
+COPY --from=builder --chown=greta:greta /app/bin/Modular.xsd ./Modular.xsd
 RUN --mount=from=builder,source=/app,target=/tmp/builder \
     mkdir -p ./data/auxiliary/ && \
     if [ -d "/tmp/builder/auxiliary" ]; then \

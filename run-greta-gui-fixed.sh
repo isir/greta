@@ -23,6 +23,7 @@ docker run --rm \
     --name greta-gui-fixed \
     -e DISPLAY=host.docker.internal:0 \
     -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+    --network host \
     -v "$PWD/bin:/app/bin:ro" \
     -p 8080:8080 \
     greta-greta-app \
@@ -32,6 +33,16 @@ cd /app
 export GRETA_HOME=/app
 export GRETA_DATA=/app/data
 export JAVA_TOOL_OPTIONS="-Djava.security.egd=file:/dev/./urandom"
+
+# Copy essential XML configuration files to working directory
+if [ -f "/app/bin/Modular.xml" ] && [ ! -f "/app/Modular.xml" ]; then
+    echo "Copying Modular.xml to working directory..."
+    cp /app/bin/Modular.xml /app/Modular.xml
+fi
+if [ -f "/app/bin/Modular.xsd" ] && [ ! -f "/app/Modular.xsd" ]; then
+    echo "Copying Modular.xsd to working directory..."
+    cp /app/bin/Modular.xsd /app/Modular.xsd
+fi
 
 # Ensure locale directory exists
 if [ ! -d "/app/bin/Locale" ]; then

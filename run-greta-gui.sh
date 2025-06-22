@@ -22,16 +22,33 @@ docker-compose down 2>/dev/null || true
 
 # Build and run with GUI support
 echo "Building GUI-enabled container..."
-docker build -f Dockerfile.gui -t greta-gui .
+if docker build -f Dockerfile.gui -t greta-gui .; then
+    echo "Build successful!"
+else
+    echo "Build failed. Trying with regular image..."
+    # Fallback to regular image with GUI attempt
+    docker-compose build
+fi
 
-echo "Starting Greta GUI..."
-docker run -it --rm \
-    --name greta-gui \
-    -e DISPLAY=host.docker.internal:0 \
-    -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
-    -v "$PWD/data:/app/data" \
-    --network host \
-    greta-gui
+# Check if image exists
+if docker image inspect greta-gui >/dev/null 2>&1; then
+    echo "Starting Greta GUI..."
+    docker run -it --rm \
+        --name greta-gui \
+        -e DISPLAY=host.docker.internal:0 \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+        -v "$PWD/data:/app/data" \
+        --network host \
+        greta-gui
+else
+    echo "GUI image not available. Using regular image..."
+    docker run -it --rm \
+        --name greta-gui \
+        -e DISPLAY=host.docker.internal:0 \
+        -v /tmp/.X11-unix:/tmp/.X11-unix:rw \
+        -v "$PWD/data:/app/data" \
+        greta-greta-app
+fi
 
 # Cleanup
 xhost -localhost 2>/dev/null || true

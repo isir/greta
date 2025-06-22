@@ -72,9 +72,17 @@ RUN ./mvnw clean package -DskipTests -B \
 # =============================================================================
 FROM eclipse-temurin:11-jdk AS runtime
 
-# Install runtime dependencies (minimal set to avoid GPG issues)
-RUN apt-get update || true && \
-    echo "Package installation may fail due to GPG issues, using minimal dependencies"
+# Install runtime dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # Basic X11 support for GUI compatibility
+    libx11-6 libxext6 libxrender1 libxtst6 \
+    # Font support
+    fontconfig \
+    # Audio support
+    libasound2t64 \
+    || echo "Some packages failed to install, continuing..." \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 # Create application user and directories
 RUN groupadd -g 1001 greta && \

@@ -31,7 +31,7 @@ import javax.swing.UIManager;
  * @author Andre-Marie Pez
  */
 public class LanguageMenu extends ToolBox.LocalizedJMenu{
-    private String localePath = "./Locale";
+    private String localePath = "./bin/Locale";
     private String localExtention = ".ini";
     private String iconExtention = ".png";
 
@@ -42,7 +42,23 @@ public class LanguageMenu extends ToolBox.LocalizedJMenu{
         super("GUI.language");
         this.parent = parent;
         File localeDir = new File(localePath);
-        for(File f : localeDir.listFiles()){
+        File[] localeFiles = localeDir.listFiles();
+        if (localeFiles == null) {
+            System.err.println("Warning: Locale directory not found or not readable: " + localeDir.getAbsolutePath());
+            // Try alternative paths
+            localeDir = new File("./Locale");
+            localeFiles = localeDir.listFiles();
+            if (localeFiles == null) {
+                localeDir = new File("bin/Locale");
+                localeFiles = localeDir.listFiles();
+                if (localeFiles == null) {
+                    System.err.println("Error: Could not find Locale directory in any expected location");
+                    return; // Exit constructor gracefully
+                }
+            }
+            localePath = localeDir.getPath(); // Update path for icon loading
+        }
+        for(File f : localeFiles){
             if(f.getName().toLowerCase().endsWith(localExtention)){
                 String languageCode = f.getName().substring(0, f.getName().length()-localExtention.length());
                 final Locale l = Modular.getLocaleForLanguage(languageCode);

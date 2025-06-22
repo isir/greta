@@ -70,7 +70,7 @@ RUN ./mvnw clean package -DskipTests -B \
 # =============================================================================
 # Production runtime stage - optimized for size and security
 # =============================================================================
-FROM eclipse-temurin:11-jre AS runtime
+FROM eclipse-temurin:11-jdk AS runtime
 
 # Install runtime dependencies (minimal set to avoid GPG issues)
 RUN apt-get update || true && \
@@ -90,17 +90,17 @@ WORKDIR /app
 COPY --from=builder --chown=greta:greta /app/application/*/target/*.jar ./
 COPY --from=builder --chown=greta:greta /app/core/*/target/*.jar ./lib/
 COPY --from=builder --chown=greta:greta /app/auxiliary/*/target/*.jar ./lib/
-# Copy HeadlessServer.class if it exists
+# Copy HeadlessServer.class from builder stage
+COPY --from=builder --chown=greta:greta /app/HeadlessServer.java ./
 RUN --mount=from=builder,source=/app,target=/tmp/builder \
     if [ -f "/tmp/builder/HeadlessServer.class" ]; then \
+        echo "Copying HeadlessServer.class from builder"; \
         cp /tmp/builder/HeadlessServer.class ./; \
-        chown greta:greta ./HeadlessServer.class; \
     else \
-        echo "HeadlessServer.class not found, creating minimal fallback"; \
-        echo 'public class HeadlessServer { public static void main(String[] args) { System.out.println("Fallback server"); } }' > HeadlessServer.java; \
+        echo "HeadlessServer.class not found, compiling with JDK"; \
         javac HeadlessServer.java; \
-        chown greta:greta ./HeadlessServer.class; \
-    fi
+    fi && \
+    chown greta:greta ./* 2>/dev/null || true
 
 # Copy essential data and configuration files
 COPY --from=builder --chown=greta:greta /app/bin/Common/Data/ ./data/

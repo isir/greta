@@ -9,6 +9,8 @@
 > **🎯 Purpose**: Demonstrate modernization possibilities and next-generation AI capabilities  
 > 
 > **⚡ Use at your own discretion for research and evaluation purposes.**
+>
+> NOTE: Passed CI, but many many errors when you launch...
 
 ---
 

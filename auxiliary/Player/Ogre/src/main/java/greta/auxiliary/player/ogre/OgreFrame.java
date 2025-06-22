@@ -17,15 +17,16 @@
  */
 package greta.auxiliary.player.ogre;
 
-import greta.core.utilx.gui.ToolBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.SwingConstants;
 
 /**
  * Placeholder Ogre Player implementation.
  * This is a stub to prevent module loading errors.
  * The actual 3D rendering functionality needs to be implemented.
  */
-public class OgreFrame extends ToolBox.LocalizedJFrame {
+public class OgreFrame extends JFrame {
     
     public OgreFrame() {
         super("Ogre Player - Not Implemented");
@@ -33,13 +34,8 @@ public class OgreFrame extends ToolBox.LocalizedJFrame {
         setSize(400, 300);
         
         // Add a simple message
-        add(new javax.swing.JLabel("Ogre 3D Player - Implementation Required", javax.swing.SwingConstants.CENTER));
+        add(new JLabel("Ogre 3D Player - Implementation Required", SwingConstants.CENTER));
         
         System.out.println("WARNING: Ogre Player is not fully implemented. This is a placeholder module.");
-    }
-    
-    @Override
-    protected void onToolBoxDispose() {
-        // Cleanup if needed
     }
 }

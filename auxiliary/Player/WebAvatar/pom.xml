@@ -28,7 +28,7 @@
         </dependency>
         <dependency>
             <groupId>fr.isir.greta</groupId>
-            <artifactId>greta-animationcore</artifactId>
+            <artifactId>greta-animation-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         

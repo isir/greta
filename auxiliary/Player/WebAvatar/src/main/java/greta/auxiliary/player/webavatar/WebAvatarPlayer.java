@@ -1,36 +1,15 @@
 /*
  * This file is part of Greta.
- *
- * Greta is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
+ * Licensed under the GNU Lesser General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
- * Greta is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with Greta.  If not, see <https://www.gnu.org/licenses/>.
- *
  */
 package greta.auxiliary.player.webavatar;
 
-import greta.core.animation.common.Frame;
-import greta.core.animation.mpeg4.MPEG4Animatable;
-import greta.core.animation.mpeg4.fap.FAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.util.audio.Audio;
-import greta.core.util.id.ID;
-import greta.core.util.id.IDProvider;
-import greta.core.util.time.Timer;
-import greta.core.utilx.gui.ToolBox;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.java_websocket.WebSocket;
 import org.java_websocket.handshake.ClientHandshake;
 import org.java_websocket.server.WebSocketServer;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,9 +24,9 @@ import java.util.Map;
 
 /**
  * WebGL-based 3D Avatar Player for Greta ECA System
- * Provides full avatar rendering through web browser with WebSocket communication
+ * Provides avatar rendering through web browser with WebSocket communication
  */
-public class WebAvatarPlayer extends ToolBox.LocalizedJFrame implements MPEG4Animatable {
+public class WebAvatarPlayer extends JFrame {
     
     private WebSocketServer webSocketServer;
     private List<WebSocket> connectedClients;
@@ -221,34 +200,6 @@ public class WebAvatarPlayer extends ToolBox.LocalizedJFrame implements MPEG4Ani
         );
         
         broadcastToClients("animation", expression);
-        
-        // Test speech animation
-        Timer.getTimer().scheduleIn(1000, () -> {
-            Map<String, Object> speech = Map.of(
-                "type", "speech",
-                "text", "Hello! I am your virtual assistant.",
-                "duration", 3000,
-                "visemes", generateTestVisemes()
-            );
-            broadcastToClients("speech", speech);
-        });
-    }
-    
-    private List<Map<String, Object>> generateTestVisemes() {
-        List<Map<String, Object>> visemes = new ArrayList<>();
-        String[] phonemes = {"H", "eh", "l", "ow"};
-        long time = 0;
-        
-        for (String phoneme : phonemes) {
-            visemes.add(Map.of(
-                "phoneme", phoneme,
-                "time", time,
-                "duration", 200
-            ));
-            time += 250;
-        }
-        
-        return visemes;
     }
     
     private void changeCharacter() {
@@ -300,76 +251,22 @@ public class WebAvatarPlayer extends ToolBox.LocalizedJFrame implements MPEG4Ani
         }
     }
     
-    // MPEG4Animatable implementation
-    @Override
-    public void addFAPFrame(FAPFrame fapframe) {
-        if (fapframe != null) {
-            Map<String, Object> fapData = new HashMap<>();
-            fapData.put("frameNum", fapframe.getFrameNumber());
-            fapData.put("time", fapframe.getTimeMillis());
-            
-            // Convert FAP values to facial animation
-            Map<String, Double> facialParams = new HashMap<>();
-            for (int i = 0; i < fapframe.getAnimationParametersList().size(); i++) {
-                facialParams.put("fap" + i, (double) fapframe.getAnimationParametersList().get(i).getValue());
-            }
-            fapData.put("parameters", facialParams);
-            
-            broadcastToClients("fap", fapData);
-        }
+    // Getters and setters for Modular system integration
+    public String getCurrentCharacter() {
+        return currentCharacter;
     }
     
-    @Override
-    public void addBAPFrame(BAPFrame bapframe) {
-        if (bapframe != null) {
-            Map<String, Object> bapData = new HashMap<>();
-            bapData.put("frameNum", bapframe.getFrameNumber());
-            bapData.put("time", bapframe.getTimeMillis());
-            
-            // Convert BAP values to body animation
-            Map<String, Double> bodyParams = new HashMap<>();
-            for (int i = 0; i < bapframe.getAnimationParametersList().size(); i++) {
-                bodyParams.put("bap" + i, (double) bapframe.getAnimationParametersList().get(i).getValue());
-            }
-            bapData.put("parameters", bodyParams);
-            
-            broadcastToClients("bap", bapData);
-        }
+    public void setCurrentCharacter(String character) {
+        this.currentCharacter = character;
+        broadcastToClients("character", Map.of("name", character));
     }
     
-    @Override
-    public void addAudio(Audio audio) {
-        if (audio != null) {
-            // Convert audio to format that can be played in browser
-            Map<String, Object> audioData = Map.of(
-                "duration", audio.getDuration(),
-                "sampleRate", audio.getSampleRate(),
-                "channels", audio.getNumberOfChannels()
-                // Note: Actual audio data would need to be base64 encoded or served separately
-            );
-            
-            broadcastToClients("audio", audioData);
-        }
+    public int getWebSocketPort() {
+        return 8081;
     }
     
-    @Override
-    public ID getID() {
-        return IDProvider.createID("WebAvatarPlayer");
-    }
-    
-    @Override
-    public void onCharacterChanged() {
-        // Character change handled through GUI
-    }
-    
-    @Override
-    protected void onToolBoxDispose() {
-        if (webSocketServer != null) {
-            try {
-                webSocketServer.stop();
-            } catch (Exception e) {
-                System.err.println("Error stopping WebSocket server: " + e.getMessage());
-            }
-        }
+    public void setWebSocketPort(int port) {
+        // Port setting would require server restart
+        System.out.println("WebSocket port change requires restart: " + port);
     }
 }

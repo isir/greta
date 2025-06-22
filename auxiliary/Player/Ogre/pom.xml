@@ -18,17 +18,17 @@
     <dependencies>
         <dependency>
             <groupId>fr.isir.greta</groupId>
-            <artifactId>greta-core-util</artifactId>
+            <artifactId>greta-util</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>fr.isir.greta</groupId>
-            <artifactId>greta-core-utilx</artifactId>
+            <artifactId>greta-utilx</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>fr.isir.greta</groupId>
-            <artifactId>greta-core-animationcore</artifactId>
+            <artifactId>greta-animation-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <!-- JOGL for 3D rendering -->

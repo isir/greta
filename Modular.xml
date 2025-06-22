@@ -1,0 +1,2262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modular>
+
+    <!--
+    ############
+    ### Menu ###
+    ############
+    -->
+
+    <!-- menu gives access to modules from the GUI -->
+    <menus>
+    
+        <menu name="${GUI.add}">
+        
+            <!-- Core: start -->
+        
+            <item module="Ini Manager" name="Ini Manager"/>
+            <item module="Character Manager" name="Character Manager"/>
+            <menu name="Environment">
+                <item module="Environment" name="Environment"/>
+                <item module="MPEG4 Animatable" name="MPEG-4 Animatable"/>
+                <menu name="Environment Manager">
+                    <menu name="Generic">
+                        <item module="Generic Environment Manager" name="Environment Manager"/>
+                    </menu>
+                    <menu name="ActiveMQ">
+                        <item module="ActiveMQ Primary Environment Server" name="Primary Environment Server"/>
+                        <item module="ActiveMQ Replica Environment Server" name="Replica Environment Server"/>
+                    </menu>
+                </menu>
+            </menu>
+            <menu name="Animation Filters">
+                <menu name="Face">
+                    <item module="Nul Filter" name="Nul Filter"/>
+                    <item module="Idle Movement Filter" name="Idle Movement Filter"/>
+                    <item module="Idle Movement Emitter" name="Idle Movement Emitter"/>
+                    <item module="Lip Blender" name="Lip Blender"/>
+                    <item module="Face Blender" name="Face Blender"/>
+                </menu>
+                <menu name="Body">
+                    <item module="Head Noise" name="Head Noise"/>
+                    <item module="Concatenate Joints" name="Concatenate Joints"/>
+                    <item module="Body Blender" name="Body Blender"/>
+                </menu>
+            </menu>
+            <menu name="Feedbacks">
+                <item module="Feedbacks" name="Feedbacks"/>
+                <item module="Feedbacks To Logs" name="Feedbacks to Logs"/>
+            </menu>
+            <menu name="Player">
+                <item module="Ogre Player" name="Ogre Player"/>
+                <item module="WebGL Avatar Player" name="WebGL Avatar Player"/>
+                <item module="Capture Controller" name="Capture Controller"/>
+                <item module="Xuggle Video Capture" name="Video Capture Output"/>
+                <item module="Parser Capture Controller AU" name="Parser Capture Controller AU"/>
+                <item module="Meaning Miner Capture Controller" name="Meaning Miner Capture Controller"/>
+                <item module="BVH Capture Controller" name="BVH Capture Controller"/>
+            </menu>
+                        
+            <menu name="Planners">
+                <item module="Behavior Planner" name="Behavior Planner"/>
+                <item module="Listener Intent Planner" name="Listener Intent Planner"/>
+                <item module="Intention Queue" name="Intention Queue"/>
+                <item module="Subject Planner" name="Subject Planner"/>
+                <menu name="MultiLayer Attitude Planner">
+                    <item module="MultiLayerSequencePlanner" name="MultiLayer Attitude Planner"/>
+                    <item module="AttitudeSetter" name=" Attitude Setter"/>
+                </menu>
+            </menu>
+            
+            <menu name="Realizers">
+                <item module="Behavior Realizer" name="Behavior Realizer"/>
+                <menu name="Incrementality">
+                    <item module="Incremental Realizer V2" name="Incremental Realizer V2"/>
+                    <item module="IncRealizerInteraction" name="IncRealizerInteraction"/>
+                </menu>
+            </menu>
+
+            <menu name="Keyframe Performers">
+                <item module="IK Keyframe Performer" name="IK"/>
+                <item module="Face Keyframe Performer" name="Face"/>
+                <item module="Lip Model" name="Lips"/>
+                <item module="Audio Keyframe Performer" name="Audio"/>
+                <item module="Body Arm Noise" name="Body Arm Noise"/>
+                <item module="Animation Keyframe Performer" name="Body"/>
+            </menu>
+            
+            <menu name="AU Performers">
+                <item module="Simple AU Performer" name="Simple AU Performer"/>
+                <item module="Simple Head Performer" name="Simple Head Performer"/>
+            </menu>
+
+            <menu name="Logs">
+                <item module="Logs" name="Controller"/>
+                <item module="Log Printer" name="Log Printer"/>
+                <item module="Log File" name="Log File"/>
+                <item module="Log Frame" name="Log Frame"/>
+            </menu>
+
+            <menu name="Inputs">
+                <item module="FML File Reader" name="FML File Reader"/>
+                <item module="BML File Reader" name="BML File Reader"/>
+                <item module="Keyframe File Reader" name="Keyframe File Reader"/>
+                <item module="FAP File Reader" name="FAP File Reader"/>
+                <item module="FAP Head File Reader" name="FAP Head File Reader"/>
+                <item module="MPEG4 File Reader" name="MPEG4 File Reader"/>
+                <item module="BVH File Reader" name="BVH File Reader"/>
+                <item module="EmotionML File Reader" name="EmotionML File Reader"/>
+                <item module="Synchro BVH File Reader" name="Synchro BVH File Reader"/>
+                <item module="BAP File Reader" name="BAP File Reader"/>
+                <item module="Old BAP To New BAP" name="Old BAP to New BAP"/>
+                <item module="Body Head Noise" name="Body Head Noise"/>
+                <item module="AU Parser File Reader" name="AU Parser File Reader"/>
+                <item module="FML Annotator" name="FML Annotator"/>
+                <menu name="Meaning Miner">
+                    <item module="Image Schema Extractor" name="Image Schema Extractor"/>
+                    <item module="FML File Reader Meaning Miner" name="MM FML File Reader"/>
+                </menu>
+                <item module="Watson" name="IBM Watson"/>
+                <menu name="OpenFace">
+                    <item module="OpenFace1 AU Parser Files Reader" name="(OpenFace v1) AU Parser Files Reader"/>
+                    <item module="OpenFace2 Output Stream Reader" name="(OpenFace v2) Output Stream Reader"/>
+                </menu>
+        
+                <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
+                <item module="ASAP" name="ASAP"/>
+                <item module="MODIFF" name="MODIFF"/>
+                <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
+                <item module="RestPoseSetterWithFeedback" name="RestPoseSetterWithFeedback"/>
+                <item module="ObjectNodeController" name="ObjectNodeController"/>
+                <item module="OSC" name="OSC"/>
+                <item module="Microphone" name="Microphone"/>
+                <item module="Microsaccade" name="Microsaccade"/>
+            
+            </menu>
+            <menu name="Outputs">
+                <item module="FML File Writer" name="FML File Writer"/>
+                <item module="BML File Writer" name="BML File Writer"/>
+                <item module="FAP File Writer" name="FAP File Writer"/>
+                <item module="BAP File Writer" name="BAP File Writer"/>
+                <item module="Audio File Writer" name="Audio File Writer"/>
+            </menu>
+
+            <menu name="Tools">
+                <item module="FML Editor" name="FML Editor"/>
+                <item module="BML Editor" name="BML Editor"/>
+                <item module="Gesture Animation Editor" name="Gesture Editor"/>
+                <item module="Torso Editor" name="Torso Editor"/>
+                <item module="Hand Shape Editor" name="Hand Shape Editor"/>
+                <item module="Face Library Viewer" name="Face Library Viewer"/>
+                <item module="AU Library Editor" name="AU Library Editor"/>
+                <item module="Environment Editor" name="Environment Editor"/>
+                <!-- more tools comming soon -->
+            </menu>
+            <menu name="TTS">
+                <item module="TTS" name="Controller"/>
+                <item module="MaryTTS Client" name="MaryTTS Client"/>
+                <item module="CereProc" name="CereProc"/>
+                <item module="AzureTTS" name="AzureTTS"/>
+            </menu>
+
+            <menu name="Network Connections">
+                <menu name="ActiveMQ">
+                    <item module="ActiveMQ Broker" name="Broker"/>
+                    <menu name="Senders">
+                        <item module="ActiveMQ FML Sender" name="FML Sender"/>
+                        <item module="ActiveMQ BML Sender" name="BML Sender"/>
+                        <item module="ActiveMQ BML Callbacks Sender" name="BML Callbacks Sender"/>
+                        <item module="ActiveMQ EmotionML Sender" name="EmotionML Sender"/>
+                        <item module="ActiveMQ KeyFrame Sender" name="KeyFrame Sender"/>
+                        <item module="ActiveMQ Feedbacks Sender" name="Feedbacks Sender"/>
+                        <item module="ActiveMQ BAP Sender" name="BAP Sender"/>
+                        <item module="ActiveMQ FAP Sender" name="FAP Sender"/>
+                        <item module="ActiveMQ Audio Sender" name="Audio Sender"/>
+                        <item module="ActiveMQ SSI Sender" name="SSI Sender"/>
+                      
+                    </menu>
+                    <menu name="Receivers">
+                        <item module="ActiveMQ FML Receiver" name="FML Receiver"/>
+                        <item module="ActiveMQ Meaning Miner FML Receiver" name="Meaning Miner FML Receiver"/>
+                        <item module="ActiveMQ BML Receiver" name="BML Receiver"/>
+                        <item module="ActiveMQ FML_BML File Name Receiver" name="FML/BML File Name Receiver"/>
+                        <item module="ActiveMQ EmotionML Receiver" name="EmotionML Receiver"/>
+                        <item module="ActiveMQ BAP Receiver" name="BAP Receiver"/>
+                        <item module="ActiveMQ FAP Receiver" name="FAP Receiver"/>
+                        <item module="ActiveMQ Callbacks Receiver" name="Callbacks Receiver"/>
+                        <item module="ActiveMQ SSI Translator" name="SSI XML-to-Frame Translator"/>
+                        <item module="ActiveMQ SSI Filter" name="SSI XML Filter"/>
+                        <item module="ActiveMQ SSI Frame To Signal" name="SSI Frame-to-Signal Translator"/>
+                        <item module="ActiveMQ Message Logger" name="Message Logger"/>
+                        <item module="ActiveMQ BML Callbacks Receiver" name="BML Callbacks Receiver"/>
+                        <!--<item module="ActiveMQ ASR Receiver" name="ASR Receiver"/>-->
+                    </menu>
+                    <item module="ActiveMQ Text Editor" name="Text Editor"/>
+                    <item module="ActiveMQ Intention Queuing" name="Intention Queuing"/>
+                </menu>
+            
+                <menu name="Greta Furhat Interface">
+                    <item module="Greta Furhat Rotation Sender" name="GretaFurhatRotationSender"/>
+                    <item module="Greta Furhat AUs Sender" name="GretaFurhatAUSender"/>
+                    <item module="Greta Furhat AUs Sender GUI" name="GretaFurhatAUSenderGUI"/>
+                    <item module="Greta Furhat Audio Sender" name="GretaFurhatAudioSender"/>
+                </menu>
+            
+                <menu name="Thrift">
+                    <menu name="Senders">
+                        <item module="Thrift FAP Sender" name="FAP Sender"/>
+                        <item module="Thrift FAP Server To External" name="FAP ServerToExternal"/>
+                        <item module="Thrift BAP Server To External" name="BAP ServerToExternal"/>
+                        <item module="Thrift Audio Server To External" name="Audio Server to External"/>
+                        <item module="Thrift BAP Sender" name="BAP Sender"/>
+                        <item module="Thrift FML Sender" name="FML Sender"/>
+                        <item module="Thrift BML Sender" name="BML Sender"/>
+                        <item module="Thrift Audio Sender" name="Audio Sender"/>
+                    </menu>
+                    <menu name="Receivers">
+                        <item module="Thrift FAP Receiver" name="FAP Receiver"/>
+                        <item module="Thrift Command Receiver" name="Command Receiver"/>
+                        <item module="Thrift FAP External Client" name="FAP External Client"/>
+                        <item module="Thrift BAP Receiver" name="BAP Receiver"/>
+                        <item module="Thrift FML Receiver" name="FML Receiver"/>
+                        <item module="Thrift BML Receiver" name="BML Receiver"/>
+                        <item module="Thrift Shore Receiver To Signal" name="Shore Receiver to Signal"/>
+                        <item module="Thrift Shore Receiver To AU" name="Shore Receiver to AU"/>
+                        <item module="Thrift Message To Logs" name="Message to Logs"/>
+                    </menu>
+                </menu>
+            </menu>
+
+            <menu name="Dialogue">
+                <menu name="Flipper">
+                    <item module="FlipperLauncher" name="FlipperLauncher"/>
+                    <item module="FlipperDemo" name="FlipperDemo"/>
+                </menu>
+                <menu name="LLM">
+                    <item module="ChatGPT" name="ChatGPT"/>
+                    <item module="Mistral" name="Mistral"/>
+                    <item module="MistralIncremental" name="Mistral Incremental"/>
+                    <item module="MI Counselor" name="MI Counselor"/>
+                    <item module="MI Counselor RL" name="MI Counselor RL"/>
+                    <item module="MICounselorIncremental" name="MI Counselor Incremental"/>
+                    <item module="MICounselorIncrementalDA" name="MI Counselor Incremental DA"/>
+                </menu>
+                <menu name="DeepASR">
+                    <item module="DeepGram" name="DeepGram"/>
+                    <item module="DeepGramContinuous" name="DeepGramContinuous"/>
+                </menu>
+                <menu name="TurnManagement">
+                    <item module="TurnManagement" name="turnManagement"/>
+                    <item module="TurnManagementContinuous" name="turnManagementContinuous"/>
+                </menu>
+            </menu>
+
+            <!-- Core: end -->
+
+
+            <!-- others: start -->
+
+            <item module="Group Behavior" name="Group Behavior"/>
+            <item module="Speech Recognizer" name="Speech Recognizer"/>
+
+            <menu name="Interruptions">
+                <item module="Interruption Manager" name="Interruption Manager"/>
+                <item module="InterruptionTester" name="Interruption Tester"/>
+            </menu>
+            <item module="IrcamAlign" name="IrcamAlign"/>
+
+            <menu name="Laugh Synthetizer">
+                <item module="Laugh Synthetizer" name="Controller"/>
+                <item module="Phoneme Generator Laugh Synthetizer" name="Phoneme Generator Laugh Synthetizer"/>
+            </menu>
+
+            <menu name="Face-to-Face Conversation">
+                <item module="Agent Gaze User" name="Agent Gaze User"/>
+                <item module="User" name="User"/>
+                <item module="Conversational Group" name="Conversational Group"/>
+            </menu>
+
+            <!-- others: end -->
+
+        </menu>
+    </menus>
+
+    <!--
+    ##############
+    ### Module ###
+    ##############
+    -->
+
+    <!-- list of all modules that can be used -->
+    <modules>
+
+        <module name="Ini Manager" restrict="1" style="DEFAULT">
+            <object class="greta.core.utilx.gui.GlobalIniManagerFrame" lib_id="greta_utilx"/>
+            <frame type="object"/>
+            <parameter default="" get_method="getDefinition" get_on="object" name="file" set_method="setDefinition" set_on="object" type="string"/>
+            <!-- TODO set/get ini file -->
+        </module>
+        <module name="Environment Editor" style="DEFAULT">
+            <object class="greta.tools.editors.environment.EnvTool" lib_id="greta_editors"/>
+            <frame type="object"/>
+        </module>
+        <module name="Character Manager" style="CharacterManager">
+            <object class="greta.core.util.CharacterManager" lib_id="greta_util"/>
+            <frame class="greta.core.utilx.gui.CharacterIniManagerFrame" lib_id="greta_utilx" type="frame">
+                <link method="setCharacterManager" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getCharacterName" get_on="frame" name="character_name" set_method="setCharacterName" set_on="frame" type="string"/>
+        </module>
+        <module name="Logs" restrict="1" style="DEFAULT">
+            <object class="greta.core.utilx.gui.LogsController" lib_id="greta_utilx"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="hasDebug" get_on="object" name="debug" set_method="setDebug" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="hasInfo" get_on="object" name="info" set_method="setInfo" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="hasWarning" get_on="object" name="warning" set_method="setWarning" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="hasError" get_on="object" name="error" set_method="setError" set_on="object" type="boolean"/>
+        </module>
+        <module name="Log Printer" restrict="1" style="DEFAULT">
+            <object class="greta.core.util.log.LogPrinter" lib_id="greta_util"/>
+        </module>
+        <module name="Log File" style="DEFAULT">
+            <object class="greta.core.utilx.gui.LogFileAccessor" lib_id="greta_utilx"/>
+            <frame type="object"/>
+            <parameter default="./Log/greta.log" get_method="getLogFile" get_on="object" name="file" set_method="setLogFile" set_on="object" type="string"/>
+        </module>
+        <module name="Log Frame" style="DEFAULT">
+            <object class="greta.core.utilx.gui.DocOutput" lib_id="greta_utilx"/>
+            <frame class="greta.core.utilx.gui.DocOutputFrame" lib_id="greta_utilx" type="frame">
+                <link method="setDocOutput" on="frame"/>
+            </frame>
+            <parameter default="false" get_method="isBlack" get_on="frame" name="blackBackground" set_method="setBlack" set_on="frame" type="boolean"/>
+        </module>
+
+        <!-- Incrementality modules -->
+        <module name="Incremental Realizer V2" style="BehaviorRealizer">
+            <object class="greta.auxiliary.incrementality.IncrementalRealizerV2" lib_id="greta_incrementality"/>
+        </module>
+        <module name="IncRealizerInteraction" style="BehaviorRealizer">
+            <object class="greta.auxiliary.incrementality.IncRealizerInteraction" lib_id="greta_incrementality"/>
+            <frame class="greta.auxiliary.incrementality.IncrRealizerInteractionGUI_" lib_id="greta_incrementality" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <!-- Incrementality modules -->
+
+        <module name="FML File Reader" style="Intentions">
+            <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="FML File Reader Meaning Miner" style="Intentions">
+            <object class="greta.auxiliary.MeaningMiner.FMLFileReader_MeaningMiner" lib_id="greta_meaning_miner"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="Watson" style="Intentions">
+            <object class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
+            <frame class="greta.core.utilx.gui.Watson" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="EmotionML File Reader" style="Intentions">
+            <object class="greta.auxiliary.emotionml.EmotionMLFileReader" lib_id="greta_emotionml"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="BML File Reader" style="Signals">
+            <object class="greta.core.signals.BMLFileReader" lib_id="greta_signals"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="Keyframe File Reader" style="Animations">
+            <object class="greta.core.keyframes.KeyframeFileReader" lib_id="greta_signals"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="FAP File Reader" style="Animations">
+            <object class="greta.core.animation.mpeg4.fap.file.FAPFileReader" lib_id="greta_mpeg4"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="FAP Head File Reader" style="Animations">
+            <object class="greta.core.animation.mpeg4.fap.file.FAPHeadFileReader" lib_id="greta_mpeg4"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="MPEG4 File Reader" style="Animations">
+            <object class="greta.core.animation.mpeg4.MPEG4FileReader" lib_id="greta_mpeg4"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="BVH File Reader" style="Animations">
+            <object class="greta.auxiliary.BVHMocap.BVHReaderGUI" lib_id="greta_bvh_mocap"/>
+            <frame type="object"/>
+        </module>
+        <module name="Face Library Viewer" style="Animations">
+            <object class="greta.tools.editors.facelibrary.FaceLibraryEditor" lib_id="greta_editors"/>
+            <frame type="object"/>
+        </module>
+        <module name="AU Library Editor" style="Animations">
+            <object class="greta.tools.editors.aulibrary.AULibraryEditor" lib_id="greta_editors"/>
+            <frame type="object"/>
+        </module>
+        <module name="Synchro BVH File Reader" style="Animations">
+            <object class="greta.auxiliary.BVHMocap.SynchroBVHReader" lib_id="greta_bvh_mocap"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="BAP File Reader" style="Animations">
+            <object class="greta.core.animation.mpeg4.bap.file.BAPFileReader" lib_id="greta_mpeg4"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="Old BAP To New BAP" style="Animations">
+            <object class="greta.core.animation.mpeg4.bap.file.oldBAP2newBAP" lib_id="greta_mpeg4"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="Listener Intent Planner" style="IntentPlanner">
+            <object class="greta.core.intentplanner.listener.ListenerIntentPlanner" lib_id="greta_listener_intent_planner"/>
+        </module>
+        <module name="Behavior Planner" style="BehaviorPlanner">
+            <object class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <frame class="greta.core.behaviorplanner.gui.UpdateLexiconPlanner" lib_id="greta_behavior_planner" type="frame">
+                <link method="UpdateLexicon" on="frame"/>
+            </frame>
+        </module>
+        <module name="ActiveMQ SSI Translator" style="DEFAULT">
+            <object class="greta.auxiliary.ssi.SSIXMLToFrameTranslator" lib_id="greta_ssi"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="semaine.data.ssi.text" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ SSI Filter" style="DEFAULT">
+            <object class="greta.auxiliary.ssi.SSIFilterForm" lib_id="greta_ssi"/>
+            <frame type="object"/>
+        </module>
+        <module name="ActiveMQ SSI Frame To Signal" style="DEFAULT">
+            <object class="greta.auxiliary.ssi.SSIFrameToSignal" lib_id="greta_ssi"/>
+        </module>
+        <module name="Agent Gaze User" style="Signals">
+            <object class="greta.auxiliary.conversationalGaze.AgentGazeUser" lib_id="greta_conversational_gaze"/>
+            <frame class="greta.auxiliary.conversationalGaze.Gui.SetCamPos" lib_id="greta_conversational_gaze" type="frame">
+                <link method="setPosandOrient" on="frame"/>
+            </frame>
+            <parameter default="6000" get_method="getMutualGaze" get_on="frame" name="agent_MG" set_method="setAgentMG" set_on="frame" type="double"/>
+            <parameter default="1500" get_method="getLookAway" get_on="frame" name="agent_LA" set_method="setAgentLA" set_on="frame" type="double"/>
+            <parameter default="5000" get_method="getAU_MG" get_on="frame" name="AU_mutualGaze" set_method="setAU_MG" set_on="frame" type="double"/>
+            <parameter default="1500" get_method="getAU_LA" get_on="frame" name="AU_lookAway" set_method="setAU_LA" set_on="frame" type="double"/>
+            <parameter default="0.2" get_method="getThreshold" get_on="frame" name="threshold" set_method="setThreshold" set_on="frame" type="double"/>
+        </module>
+        <module name="User" style="Signals">
+            <object class="greta.auxiliary.conversationalGaze.User" lib_id="greta_conversational_gaze"/>
+            <frame class="greta.auxiliary.conversationalGaze.Gui.UserGui" lib_id="greta_conversational_gaze" type="frame">
+                <link method="setUserParticipant" on="frame"/>
+            </frame>
+            <parameter default="0" get_method="getCoordinateX" get_on="frame" name="pos_x" set_method="setCoordinateX" set_on="frame" type="double"/>
+            <parameter default="0" get_method="getCoordinateY" get_on="frame" name="pos_y" set_method="setCoordinateY" set_on="frame" type="double"/>
+            <parameter default="0" get_method="getCoordinateZ" get_on="frame" name="pos_z" set_method="setCoordinateZ" set_on="frame" type="double"/>
+            <parameter default="0" get_method="getOrientationX" get_on="frame" name="rot_yaw" set_method="setOrientationX" set_on="frame" type="double"/>
+            <parameter default="0" get_method="getOrientationY" get_on="frame" name="rot_pitch" set_method="setOrientationY" set_on="frame" type="double"/>
+            <parameter default="0" get_method="getOrientationZ" get_on="frame" name="rot_roll" set_method="setOrientationZ" set_on="frame" type="double"/>
+        </module>
+        <module name="Conversational Group" style="Signals">
+            <object class="greta.auxiliary.conversationalGaze.ConversationalGroup" lib_id="greta_conversational_gaze"/>
+            <frame class="greta.auxiliary.conversationalGaze.Gui.ConversationGroup_Gui" lib_id="greta_conversational_gaze" type="frame">
+                <link method="setGui" on="frame"/>
+            </frame>
+        </module>
+        <module name="Behavior Realizer" style="BehaviorRealizer">
+            <object class="greta.core.behaviorrealizer.Realizer" lib_id="greta_behavior_realizer"/>
+            <frame class="greta.core.behaviorrealizer.gui.RealizerGui" lib_id="greta_behavior_realizer" type="frame">
+                <link method="UpdateLibraries" on="frame"/>
+            </frame>
+        </module>
+        <module name="FML File Writer" style="Intentions">
+            <object class="greta.core.intentions.FMLFileWriter" lib_id="greta_intentions"/>
+        </module>
+        <module name="BML File Writer" style="Signals">
+            <object class="greta.core.signals.BMLFileWriter" lib_id="greta_signals"/>
+        </module>
+        <module name="FAP File Writer" style="Animations">
+            <object class="greta.core.animation.mpeg4.fap.file.FAPFileWriter" lib_id="greta_mpeg4"/>
+        </module>
+        <module name="Audio File Writer" style="Animations">
+            <object class="greta.core.util.audio.SaveAudioPerformer" lib_id="greta_util"/>
+        </module>
+        <module name="BAP File Writer" style="Animations">
+            <object class="greta.core.animation.mpeg4.bap.file.BAPFileWriter" lib_id="greta_mpeg4"/>
+            <frame class="greta.core.utilx.gui.OpenAndLoad" lib_id="greta_utilx" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+            <parameter default="" get_method="getFileName" get_on="frame" name="fileName" set_method="setFileName" set_on="frame" type="string"/>
+        </module>
+        <module name="Laugh Synthetizer" restrict="1" style="DEFAULT">
+            <object class="greta.core.utilx.gui.LaughSynthetizerController" lib_id="greta_utilx"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
+        </module>
+        <module name="Phoneme Generator Laugh Synthetizer">
+            <object class="greta.core.util.laugh.PhonemeGeneratorLaughSynthetizer" lib_id="greta_util"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="TTS" style="DEFAULT">
+            <!-- restrict="1"-->
+            <object class="greta.core.utilx.gui.TTSController" lib_id="greta_utilx"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="getDoTemporize" get_on="object" name="doTemporize" set_method="setDoTemporize" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoAudio" get_on="object" name="doAudio" set_method="setDoAudio" set_on="object" type="boolean"/>
+            <parameter default="true" get_method="getDoPhonemes" get_on="object" name="doPhonemes" set_method="setDoPhonemes" set_on="object" type="boolean"/>
+        </module>
+		
+        <module name="NVBG_MM_Controller" style="DEFAULT">
+            <!-- restrict="1"-->
+            <object class="greta.core.utilx.gui.NVBG_MM_Controller" lib_id="greta_utilx"/>
+        <frame type="object"/>
+        </module>
+        <module name="Rest_Pose_Setter" style="Signals">
+            <object class="greta.core.signals.Rest_Pose_Setter" lib_id="greta_signals"/>
+            <frame type="object"/>
+        </module>
+        <module name="ObjectNodeController" style="DEFAULT">
+            <!-- restrict="1"-->
+            <object class="greta.core.utilx.gui.ObjectNodeController" lib_id="greta_utilx"/>
+            <frame type="object"/>
+        </module>
+        <module name="OSC" style="DEFAULT">
+            <object class="greta.auxiliary.osc.OSC_Sender" lib_id="greta_osc"/>
+            <frame type="object"/>
+        </module>
+        <module name="MaryTTS Client">
+            <object class="greta.auxiliary.tts.marytts.MaryTTSClient" lib_id="greta_marytts"/>
+            <frame type="noFrame"/>
+            <!-- TODO -->
+        </module>
+        <module name="CereProc">
+            <object class="greta.auxiliary.tts.cereproc.CereProcTTS" lib_id="greta_cereproc"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Voxygen">
+            <object class="greta.auxiliary.tts.voxygen.VoxygenTTS" lib_id="greta_voxygen"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="AzureTTS">
+            <object class="greta.auxiliary.tts.azuretts.AzureTTSFrame" lib_id="greta_azuretts"/>
+            <frame type="object"/>            
+        </module>
+        <module name="ActiveMQ Broker">
+            <object class="greta.auxiliary.activemq.Broker" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.BrokerFrame" lib_id="greta_activemq" type="frame">
+                <link method="setBroker" on="frame"/>
+            </frame>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="ASAP">
+            <object class="greta.auxiliary.asap.ASAPFrame" lib_id="greta_asap"/>
+            <frame type="object"/>
+        </module>
+        <module name="MODIFF">
+            <object class="greta.auxiliary.modiff.MODIFFFrame" lib_id="greta_modiff"/>
+            <frame type="object"/>
+        </module>
+        <module name="ActiveMQ FML Sender">
+            <object class="greta.auxiliary.activemq.semaine.FMLSender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ FML Receiver">
+            <object class="greta.auxiliary.activemq.semaine.FMLReceiver" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <!--
+        <module name="ActiveMQ ASR Receiver">
+            <object class="greta.auxiliary.asr.ASRMain" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.ASR" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        -->
+        <module name="ActiveMQ Meaning Miner FML Receiver">
+            <object class="greta.auxiliary.MeaningMiner.FMLReceiver_MeaningMiner" lib_id="greta_meaning_miner"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.input.FML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ EmotionML Receiver">
+            <object class="greta.auxiliary.activemq.semaine.EmotionMLReceiver" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="EmotionML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ EmotionML Sender">
+            <object class="greta.auxiliary.activemq.semaine.EmotionMLSender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="EmotionML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ BML Receiver">
+            <object class="greta.auxiliary.activemq.semaine.BMLReceiver" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ FML_BML File Name Receiver">
+            <object class="greta.auxiliary.activemq.semaine.FmlBmlFileNameReceiver" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="FileNames" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ BAP Receiver">
+            <object class="greta.auxiliary.activemq.semaine.BAPReceiver" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ FAP Receiver">
+            <object class="greta.auxiliary.activemq.semaine.FAPReceiver" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="FAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ BML Sender">
+            <object class="greta.auxiliary.activemq.semaine.BMLSender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ Intention Queuing">
+            <object class="greta.auxiliary.activemq.semaine.IntentionQueuing" lib_id="greta_activemq"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="ActiveMQ Text Editor">
+            <object class="greta.auxiliary.activemq.semaine.TextEditor" lib_id="greta_activemq"/>
+            <frame type="object"/>
+        </module>
+        <module name="ActiveMQ KeyFrame Sender">
+            <object class="greta.auxiliary.activemq.semaine.KeyFrameSender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Keyframes" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ BAP Sender">
+            <object class="greta.auxiliary.activemq.semaine.BAPSender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ FAP Sender">
+            <object class="greta.auxiliary.activemq.semaine.FAPSender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="semaine.data.synthesis.lowlevel.video.FAP" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="IK Keyframe Performer" style="Animations">
+            <object class="greta.core.animation.common.IKKeyframePerformer" lib_id="greta_gesture_animation"/>
+            <parameter default="true" get_method="getExpressiveTorso" get_on="object" name="ExpressiveTorso" set_method="setExpressiveTorso" set_on="object" type="boolean"/>
+        </module>
+        <module name="Body Head Noise" style="Animations">
+            <object class="greta.core.animation.performer.BodyAnimationNoiseGenerator" lib_id="greta_body_animation_performer"/>
+            <frame class="greta.core.animation.performer.BodyNoiseGui" lib_id="greta_body_animation_performer" type="frame">
+                <link method="setGui" on="frame"/>
+            </frame>
+            <!--<parameter default="false" get_method="isUseHead" get_on="object" name="useHead" set_method="setUseHead" set_on="object" type="boolean"/>
+            <parameter default="false" get_method="isUseTorso" get_on="object" name="useTorso" set_method="setUseTorso" set_on="object" type="boolean"/>
+            <parameter default="false" get_method="isUseLowerBody" get_on="object" name="useLowerBody" set_method="setUseLowerBody" set_on="object" type="boolean"/>
+            <parameter default="1" get_method="getIntensityHead" get_on="object" name="setIntensityHead" set_method="setIntensityHead" set_on="object" type="double"/>
+            <parameter default="1" get_method="getIntensityTorso" get_on="object" name="setIntensityTorso" set_method="setIntensityTorso" set_on="object" type="double"/>
+            <parameter default="1" get_method="getStep" get_on="object" name="step" set_method="setStep" set_on="object" type="double"/> -->
+        </module>
+        <module name="Lip Model" style="Animations">
+            <object class="greta.core.animation.lipmodel.LipModel" lib_id="greta_lip_model"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Audio Keyframe Performer" style="Animations">
+            <object class="greta.core.keyframes.AudioKeyFramePerformer" lib_id="greta_signals"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Face Keyframe Performer" style="Animations">
+            <object class="greta.core.keyframes.face.FaceKeyframePerformer" lib_id="greta_signals"/>
+            <parameter default="true" get_method="isBlinking" get_on="object" name="blinking" set_method="setBlinking" set_on="object" type="boolean"/>
+        </module>
+        <module name="Simple AU Performer" style="Animations">
+            <object class="greta.core.keyframes.face.SimpleAUPerformer" lib_id="greta_signals"/>
+            <frame class="greta.core.keyframes.face.SimpleAUPerfGui" lib_id="greta_signals" type="frame">
+                <link method="UpdateLexicon" on="frame"/>
+            </frame>
+        </module>
+        <module name="Simple Head Performer" style="Animations">
+            <object class="greta.core.keyframes.face.SimpleHeadPerformer" lib_id="greta_signals"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Nul Filter" style="Animations">
+            <object class="greta.core.animation.mpeg4.fap.filters.NulFilter" lib_id="greta_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Idle Movement Filter" style="Animations">
+            <object class="greta.core.animation.mpeg4.fap.filters.IdleMovementFilter" lib_id="greta_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Head Noise" style="Animations">
+            <object class="greta.core.animation.mpeg4.bap.filters.HeadNoise" lib_id="greta_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Idle Movement Emitter" style="Animations">
+            <object class="greta.core.animation.mpeg4.fap.filters.IdleMovementEmitter" lib_id="greta_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="ActiveMQ Callbacks Receiver">
+            <object class="greta.auxiliary.activemq.semaine.CallbacksReceiver" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="semaine.callback.output.Animation" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ Feedbacks Sender">
+            <object class="greta.auxiliary.activemq.semaine.FeedbacksSender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="semaine.callback.output.feedback" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="Feedbacks" style="DEFAULT">
+            <object class="greta.core.feedbacks.gui.FeedbackFrame" lib_id="greta_feedbacks"/>
+                    <frame type="object"/>
+        </module>
+        <module name="Feedbacks To Logs" style="DEFAULT">
+            <object class="greta.core.feedbacks.Feedbacks2Logs" lib_id="greta_feedbacks"/>
+            <frame class="greta.core.feedbacks.gui.FeedbackPerformerFrame" lib_id="greta_feedbacks" type="frame">
+                <link method="setFeedbackPerformer" on="frame"/>
+            </frame>
+            <parameter default="false" get_method="getDetailedFeedbacks" get_on="frame" name="detailedFeedbacks" set_method="setDetailedFeedbacks" set_on="frame" type="boolean"/>
+            <parameter default="false" get_method="getDetailsOnFace" get_on="frame" name="face" set_method="setDetailsOnFace" set_on="frame" type="boolean"/>
+            <parameter default="false" get_method="getDetailsOnGestures" get_on="frame" name="gesture" set_method="setDetailsOnGestures" set_on="frame" type="boolean"/>
+        </module>
+        <module name="Environment" style="Environment">
+            <object class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+        </module>
+        <module name="MPEG4 Animatable" style="Animations">
+            <object class="greta.core.animation.mpeg4.MPEG4Animatable" lib_id="greta_mpeg4"/>
+            <frame class="greta.core.utilx.gui.TreeNodeController" lib_id="greta_utilx" type="frame">
+                <link method="setTreeNode" on="frame"/>
+            </frame>
+            <parameter default="0" get_method="getCoordinateX" get_on="object" name="posX" set_method="setCoordinateX" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCoordinateY" get_on="object" name="posY" set_method="setCoordinateY" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCoordinateZ" get_on="object" name="posZ" set_method="setCoordinateZ" set_on="object" type="double"/>
+            <parameter default="0" get_method="getOrientationX" get_on="object" name="rotX" set_method="setOrientationX" set_on="object" type="double"/>
+            <parameter default="0" get_method="getOrientationY" get_on="object" name="rotY" set_method="setOrientationY" set_on="object" type="double"/>
+            <parameter default="0" get_method="getOrientationZ" get_on="object" name="rotZ" set_method="setOrientationZ" set_on="object" type="double"/>
+            <parameter default="1" get_method="getOrientationW" get_on="object" name="rotW" set_method="setOrientationW" set_on="object" type="double"/>
+            <parameter default="1" get_method="getScaleX" get_on="object" name="scaleX" set_method="setScaleX" set_on="object" type="double"/>
+            <parameter default="1" get_method="getScaleY" get_on="object" name="scaleY" set_method="setScaleY" set_on="object" type="double"/>
+            <parameter default="1" get_method="getScaleZ" get_on="object" name="scaleZ" set_method="setScaleZ" set_on="object" type="double"/>
+        </module>
+        <module name="Ogre Player" style="Player">
+            <object class="greta.auxiliary.player.ogre.OgreFrame" lib_id="greta_ogre_player"/>
+            <frame type="object" windowed_only="true"/>
+            <parameter default="0" get_method="getCameraPositionX" get_on="object" name="posX" set_method="setCameraPositionX" set_on="object" type="double"/>
+            <parameter default="1.5" get_method="getCameraPositionY" get_on="object" name="posY" set_method="setCameraPositionY" set_on="object" type="double"/>
+            <parameter default="1.3" get_method="getCameraPositionZ" get_on="object" name="posZ" set_method="setCameraPositionZ" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCameraPitch" get_on="object" name="pitch" set_method="setCameraPitch" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCameraYaw" get_on="object" name="yaw" set_method="setCameraYaw" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCameraRoll" get_on="object" name="roll" set_method="setCameraRoll" set_on="object" type="double"/>
+        </module>
+        <module name="WebGL Avatar Player" style="Player">
+            <object class="greta.auxiliary.player.webavatar.WebAvatarPlayer" lib_id="greta_web_avatar"/>
+            <frame type="object" windowed_only="true"/>
+            <parameter default="8081" get_method="getWebSocketPort" get_on="object" name="websocket_port" set_method="setWebSocketPort" set_on="object" type="int"/>
+            <parameter default="alice" get_method="getCurrentCharacter" get_on="object" name="character" set_method="setCurrentCharacter" set_on="object" type="string"/>
+        </module>
+        <module name="Capture Controller" style="Player">
+            <object class="greta.auxiliary.player.ogre.capture.Capturecontroller" lib_id="greta_ogre_player"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="isRealTimeCapture" get_on="object" name="RealTime" set_method="setRealTimeCapture" set_on="object" type="boolean"/>
+            <parameter default="false" get_method="isUseTexture" get_on="object" name="UseTexture" set_method="setUseTexture" set_on="object" type="boolean"/>
+        </module>
+        <module name="BVH Capture Controller" style="Player">
+            <object class="greta.auxiliary.player.ogre.capture.BVHCapturecontroller" lib_id="greta_ogre_player"/>
+            <frame type="object"/>
+            <parameter default="true" get_method="isRealTimeCapture" get_on="object" name="RealTime" set_method="setRealTimeCapture" set_on="object" type="boolean"/>
+            <parameter default="false" get_method="isUseTexture" get_on="object" name="UseTexture" set_method="setUseTexture" set_on="object" type="boolean"/>
+        </module>
+        <module name="Xuggle Video Capture" style="Player">
+            <object class="greta.tools.ogre.capture.video.XuggleVideoCapture" lib_id="greta_video_capture"/>
+            <frame class="greta.tools.ogre.capture.video.CodecSelector" lib_id="greta_video_capture" type="frame">
+                <link method="setXuggleVideoCapture" on="frame"/>
+            </frame>
+        </module>
+        <module name="FML Editor" style="Intentions">
+            <object class="greta.tools.editors.fml.FMLEditor" lib_id="greta_editors"/>
+            <frame type="object"/>
+            <parameter default="false" get_method="isUpdatedFromEvent" get_on="object" name="updatedFromEvent" set_method="setUpdatedFromEvent" set_on="object" type="boolean"/>
+        </module>
+        <module name="BML Editor" style="Signals">
+            <object class="greta.tools.editors.bml.BMLEditor" lib_id="greta_editors"/>
+            <frame type="object"/>
+            <parameter default="false" get_method="isUpdatedFromEvent" get_on="object" name="updatedFromEvent" set_method="setUpdatedFromEvent" set_on="object" type="boolean"/>
+        </module>
+        <module name="Hand Shape Editor" style="Animations">
+            <object class="greta.tools.editors.handshape.HandShapeEditor" lib_id="greta_editors"/>
+            <frame type="object"/>
+        </module>
+        <module name="Concatenate Joints" style="Animations">
+            <description>This module simplify BAPs for a more simple skeleton</description>
+            <object class="greta.core.animation.mpeg4.bap.filters.ConcatenateJoints" lib_id="greta_mpeg4"/>
+            <frame class="greta.tools.editors.ConcatenateJointsFrame" lib_id="greta_editors" type="frame">
+                <link method="setConcatenateJoints" on="frame"/>
+            </frame>
+            <parameter default="111111111111111111111111111111111111111001111111111111111111111111111111111111111111111110" get_method="getJointToUseString" get_on="object" name="jointToUse" set_method="parseJointToUseString" set_on="object" type="string"/>
+        </module>
+        <module name="Gesture Animation Editor" style="BehaviorRealizer">
+            <object class="greta.tools.animation.gestureeditor.GestureEditor" lib_id="greta_gesture_animation_editor"/>
+            <frame type="object"/>
+        </module>
+        <module name="Torso Editor" style="BehaviorRealizer">
+            <object class="greta.core.animation.body.TorsoEditor" lib_id="greta_body_animation_performer"/>
+            <frame type="object"/>
+        </module>
+        <module name="ActiveMQ Audio Sender">
+            <object class="greta.auxiliary.activemq.semaine.AudioSender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="audio" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="Face Blender" style="Animations">
+            <object class="greta.core.animation.mpeg4.fap.filters.FaceBlender" lib_id="greta_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Lip Blender" style="Animations">
+            <object class="greta.core.animation.mpeg4.fap.filters.LipBlender" lib_id="greta_mpeg4"/>
+            <frame type="noFrame"/>
+        </module>
+        <module name="Body Blender" style="Animations">
+            <object class="greta.core.animation.mpeg4.bap.filters.BodyBlender" lib_id="greta_mpeg4"/>
+            <frame type="noFrame"/>
+            <parameter default="1" get_method="getK_factor" get_on="object" name="k_factor" set_method="setK_factor" set_on="object" type="double"/>
+        </module>
+        <module name="Thrift FAP Sender">
+            <object class="greta.auxiliary.thrift.FAPSender" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift FAP Server To External">
+            <object class="greta.auxiliary.thrift.FAPServerToExternal" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="MultiLayerSequencePlanner" style="BehaviorPlanner">
+            <object class="greta.auxiliary.multilayerattitudeplanner.SequencePlanner" lib_id="multilayer_attitude_planner"/>
+        </module>
+        <module name="AttitudeSetter" style="DEFAULT">
+            <object class="greta.auxiliary.multilayerattitudeplanner.AttitudeFrame" lib_id="multilayer_attitude_planner"/>
+            <frame type="object"/>
+        </module>
+        <module name="Thrift BAP Server To External">
+            <object class="greta.auxiliary.thrift.BAPServerToExternal" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9900" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift FAP Receiver">
+            <object class="greta.auxiliary.thrift.FAPReceiver" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift FAP External Client">
+            <object class="greta.auxiliary.thrift.FAPExternalClient" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift BAP Sender">
+            <object class="greta.auxiliary.thrift.BAPSender" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift BAP Receiver">
+            <object class="greta.auxiliary.thrift.BAPReceiver" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift FML Sender">
+            <object class="greta.auxiliary.thrift.FMLSender" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift BML Sender">
+            <object class="greta.auxiliary.thrift.BMLSender" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift Audio Sender">
+            <object class="greta.auxiliary.thrift.AudioSender" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="true" get_method="getSendAudioBuffer" get_on="object" name="sendAudioBuffer" set_method="setSendAudioBuffer" set_on="object" type="boolean"/>
+        </module>
+        <module name="Thrift Audio Server To External">
+            <object class="greta.auxiliary.thrift.AudioServerToExternal" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9009" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="true" get_method="getSendAudioBuffer" get_on="object" name="sendAudioBuffer" set_method="setSendAudioBuffer" set_on="object" type="boolean"/>
+        </module>
+        <module name="Thrift Command Receiver">
+            <object class="greta.auxiliary.thrift.CommandReceiver" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9911" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift Shore Receiver To Signal">
+            <object class="greta.auxiliary.thrift.ShoreReceiverToSignal" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift Shore Receiver To AU">
+            <object class="greta.auxiliary.thrift.ShoreReceiverToAU" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift FML Receiver">
+            <object class="greta.auxiliary.thrift.FMLReceiver" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="OpenFace1 AU Parser Files Reader" style="Signals">
+            <object class="greta.auxiliary.openface1.AUParserFilesReader" lib_id="greta_openface"/>
+            <frame class="greta.auxiliary.openface1.gui.AUParserFilesReaderFrame" lib_id="greta_openface" type="frame">
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="OpenFace2 Output Stream Reader" style="Signals">
+            <object class="greta.auxiliary.openface2.gui.OpenFaceOutputStreamReader" lib_id="greta_openface"/>
+            <frame type="object"/>
+            <parameter default="" get_method="getTabIndex" get_on="object" name="tabIndex" set_method="setTabIndex" set_on="object" type="integer"/>
+            <parameter default="" get_method="getCSVFileName" get_on="object" name="csvFileName" set_method="setCSVFileName" set_on="object" type="string"/>
+            <parameter default="" get_method="getZeroMQHost" get_on="object" name="zeroMQHost" set_method="setZeroMQHost" set_on="object" type="string"/>
+            <parameter default="" get_method="getZeroMQPort" get_on="object" name="zeroMQPort" set_method="setZeroMQPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift BML Receiver">
+            <object class="greta.auxiliary.thrift.BMLReceiver" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Thrift Message To Logs">
+            <object class="greta.auxiliary.thrift.ThriftMessageToLogs" lib_id="greta_thrift"/>
+            <frame class="greta.auxiliary.thrift.gui.ThriftFrame" lib_id="greta_thrift" type="frame">
+                <link method="setConnector" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="9090" get_method="getPortString" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+        </module>
+        <module name="Subject Planner" style="IntentPlanner">
+            <object class="greta.core.SubjectPlanner.SubjectPlanner" lib_id="greta_subject_planner"/>
+            <parameter default="5" get_method="getUserEngagementValue" get_on="object" name="userEngagement" set_method="setUserEngagementValue" set_on="object" type="double"/>
+        </module>
+        <module name="Intention Queue" style="Intentions">
+            <object class="greta.core.behaviorplanner.IntentionQueue" lib_id="greta_behavior_planner"/>
+        </module>
+        <module name="ActiveMQ SSI Sender">
+            <object class="greta.auxiliary.activemq.semaine.SSISender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="SSI" get_method="getTopic" get_on="object" name="Topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="Port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="Host" set_method="setHost" set_on="object" type="string"/>
+        </module>
+        <module name="ActiveMQ BML Callbacks Sender">
+            <object class="greta.auxiliary.activemq.semaine.BMLCallbacksSender" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.output.feedback.BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="ActiveMQ Message Logger">
+            <object class="greta.auxiliary.activemq.semaine.MessageLogger" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="Interruption Manager" style="Intentions">
+            <object class="greta.core.interruptions.InterruptionManager" lib_id="greta_interruptions"/>
+        </module>
+        <module name="InterruptionTester" style="Intentions">
+            <object class="greta.core.interruptions.InterruptionTester" lib_id="greta_interruptions"/>
+            <frame type="object"/>
+            <parameter default="" get_method="getMainFileName" get_on="object" name="saveMainFileName" set_method="setMainFileName" set_on="object" type="string"/>
+            <parameter default="" get_method="getReactionReplanFileName" get_on="object" name="saveReactionReplanFileName" set_method="setReactionReplanFileName" set_on="object" type="string"/>
+        </module>
+        <module name="ActiveMQ BML Callbacks Receiver">
+            <object class="greta.auxiliary.activemq.semaine.BMLCallbacksReceiver" lib_id="greta_activemq"/>
+            <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
+                <link method="setWhitboard" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="BML" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+        <module name="Body Arm Noise" style="Animations">
+            <object class="greta.core.animation.performer.BodyAnimationArmNoise" lib_id="greta_body_animation_performer"/>
+        </module>
+        <module name="Animation Keyframe Performer" style="Animations">
+            <object class="greta.core.animation.performer.AnimationKeyframePerformer" lib_id="greta_body_animation_performer"/>
+        </module>
+        <module name="AU Parser File Reader" style="Signals">
+            <object class="greta.core.signals.AUParserFileReader" lib_id="greta_signals"/>
+            <frame class="greta.core.utilx.gui.AUParserFileReaderController" lib_id="greta_utilx" type="frame">
+                <!-- <frame class="greta.core.signals.AUParserFileReader" lib_id="greta_utilx" type="frame"> -->
+                <link method="setLoader" on="frame"/>
+            </frame>
+        </module>
+        <module name="Meaning Miner Capture Controller" style="Player">
+            <object class="greta.auxiliary.plancapture.MeaningMinerCaptureController" lib_id="greta_plan_capture"/>
+            <frame type="object"/>
+        </module>
+        <module name="Parser Capture Controller AU" style="Player">
+            <object class="greta.auxiliary.plancapture.ParserCaptureController_AU" lib_id="greta_plan_capture"/>
+            <frame type="object"/>
+        </module>
+        <module name="Image Schema Extractor" style="DEFAULT">
+            <object class="greta.auxiliary.MeaningMiner.ImageSchemaExtractor" lib_id="greta_meaning_miner"/>
+            <frame class="greta.auxiliary.MeaningMiner.MeaningMinerFrame" lib_id="greta_meaning_miner" type="frame">
+                <link method="setModule" on="frame"/>
+            </frame>
+        </module>
+         <module name="IrcamAlign" style="DEFAULT">
+            <object class="greta.auxiliary.ircamalign.IrcamAlignFrame" lib_id="greta_ircamalign"/>
+             <frame type="object"/>
+        </module>
+        <module name="FML Annotator" style="Intentions">
+            <object class="greta.auxiliary.fmlannotator.View" lib_id="greta_fml_annotator"/>
+            <frame type="object"/>
+        </module>
+        <module name="Generic Environment Manager" style="DEFAULT">
+            <object class="greta.auxiliary.environmentmanager.core.mvc.EnvironmentManagerController" lib_id="greta_environment_manager_generic"/>
+            <frame type="object"/>
+            <!--
+            <frame class="greta.auxiliary.environmentmanager.core.mvc.EnvironmentManagerFrame" lib_id="greta_environment_manager_generic" type="frame">
+                <link method="setCore" on="frame"/>
+            </frame>
+            -->
+        </module>
+        <module name="ActiveMQ Primary Environment Server" style="DEFAULT">
+            <object class="greta.auxiliary.environmentmanager.impl.activemq.PrimaryEnvironmentServer" lib_id="greta_environment_manager_activemq"/>
+            <frame class="greta.auxiliary.environmentmanager.core.mvc.EnvironmentManagerFrame" lib_id="greta_environment_manager_activemq" type="frame">
+                <link method="setCore" on="frame"/>
+            </frame>
+        </module>
+        <module name="ActiveMQ Replica Environment Server" style="DEFAULT">
+            <object class="greta.auxiliary.environmentmanager.impl.activemq.ReplicaEnvironmentServer" lib_id="greta_environment_manager_activemq"/>
+            <frame class="greta.auxiliary.environmentmanager.core.mvc.EnvironmentManagerFrame" lib_id="greta_environment_manager_activemq" type="frame">
+                <link method="setCore" on="frame"/>
+            </frame>
+        </module>
+        <module name="Group Behavior" style="DEFAULT">
+            <object class="greta.auxiliary.groupbehavior.GroupBehaviorMain" lib_id="greta_group_behavior"/>
+            <frame class="greta.auxiliary.groupbehavior.GroupBehaviorFrame" lib_id="greta_group_behavior" type="frame">
+                <link method="setGroupBehaviorMain" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="COUCH/GBM/REQUEST" get_method="getRequestTopic" get_on="object" name="requestTopic" set_method="setRequestTopic" set_on="object" type="string"/>
+            <parameter default="COUCH/GBM/RESPONSE" get_method="getResponseTopic" get_on="object" name="responseTopic" set_method="setResponseTopic" set_on="object" type="string"/>
+        </module>
+		
+        <module name="Speech Recognizer" style="DEFAULT">
+            <object class="greta.auxiliary.asr.ASRMain" lib_id="greta_speech_recognizer"/>
+            <frame class="greta.auxiliary.asr.SpeechRecognizerFrame" lib_id="greta_speech_recognizer" type="frame">
+                <link method="setGroupBehaviorMain" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.asr.request" get_method="getRequestTopic" get_on="object" name="requestTopic" set_method="setRequestTopic" set_on="object" type="string"/>
+            <parameter default="greta.asr.response" get_method="getResponseTopic" get_on="object" name="responseTopic" set_method="setResponseTopic" set_on="object" type="string"/>
+        </module>		
+        <module name="FlipperLauncher" style="DEFAULT">
+            <object class="hmi.flipper2.launcher.FlipperLauncher" lib_id="greta_flipperLib"/>
+        </module>
+        <module name="FlipperDemo">
+            <object class="greta.FlipperDemo.main.FlipperLauncherMain" lib_id="greta_FlipperDemo"/>
+            <frame class="greta.FlipperDemo.main.FlipperDemoGUIFrame" lib_id="greta_FlipperDemo" type="frame">
+                <link method="setFlipperDemoMain" on="frame"/>
+            </frame>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.asr.response" get_method="getGretaASRTopic" get_on="object" name="gretaASRTopic" set_method="setGretaASRTopic" set_on="object" type="string"/>
+            <parameter default="greta.input.FML" get_method="getGretaInputTopic" get_on="object" name="gretaInputTopic" set_method="setGretaInputTopic" set_on="object" type="string"/>
+        </module>
+        <module name="ChatGPT">
+            <object class="greta.auxiliary.chatgpt.ChatGPT" lib_id="greta_ChatGPT"/>
+            <frame class="greta.auxiliary.chatgpt.ChatGPTFrame" lib_id="greta_ChatGPT" type="frame"/>
+        </module>
+        <module name="Mistral" style="Intentions">
+            <object class="greta.auxiliary.llm.MistralFrame" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
+	
+        <module name="Greta Furhat AUs Sender" style="DEFAULT">
+            <object class="greta.furhat.activemq.GretaFurhatAUSender" lib_id="libGretaFurhatInterface"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Furhat AUs Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+
+        <module name="Greta Furhat AUs Sender GUI" style="DEFAULT">
+            <object class="greta.furhat.activemq.GretaFurhatAUSenderGUI" lib_id="libGretaFurhatInterface"/>
+            <frame type="object"/>
+        </module>
+
+        <module name="Greta Furhat Rotation Sender" style="DEFAULT">
+            <object class="greta.furhat.activemq.GretaFurhatRotationSender" lib_id="libGretaFurhatInterface"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Furhat Rotation Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+
+        <module name="Greta Furhat Audio Sender" style="DEFAULT">
+            <object class="greta.furhat.activemq.GretaFurhatAudioSender" lib_id="libGretaFurhatInterface"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="Furhat Audio Sender" get_method="getTopic" get_on="object" name="topic" set_method="setTopic" set_on="object" type="string"/>
+            <parameter default="false" get_method="isQueue" get_on="object" name="isQueue" set_method="setIsQueue" set_on="object" type="boolean"/>
+        </module>
+
+        <module name="MistralIncremental" style="Intentions">
+            <object class="greta.auxiliary.llm.MistralFrameIncremental" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
+        <module name="MI Counselor" style="Intentions">
+            <object class="greta.auxiliary.llm.MICounselor" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
+
+        <module name="MI Counselor RL" style="Intentions">
+            <object class="greta.auxiliary.llm.MICounselorRL" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
+
+        <module name="MICounselorIncremental" style="Intentions">
+            <object class="greta.auxiliary.llm.MICounselorIncremental" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
+            <module name="MICounselorIncrementalDA" style="Intentions">
+            <object class="greta.auxiliary.llm.MICounselorIncrementalDA" lib_id="greta_llm"/>
+            <frame type="object"/>
+        </module>
+        <module name="DeepGram">
+            <object class="greta.auxiliary.deepasr.DeepGramFrame" lib_id="greta_deepasr"/>
+            <frame type="object"/>
+        </module>
+        
+        <module name="DeepGramContinuous">
+            <object class="greta.auxiliary.deepasr.DeepGramFrameContinuous" lib_id="greta_deepasr"/>
+            <frame type="object"/>
+        </module>
+        
+        <module name="Microphone" >
+            <object class="greta.auxiliary.Microphone.MicrophoneFrame" lib_id="greta_microphone"/>
+            <frame type="object"/>
+        </module>
+
+        <module name="TurnManagement" >
+            <object class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
+            <frame type="object"/>
+        </module> 
+
+        <module name="TurnManagementContinuous" >
+            <object class="greta.auxiliary.TurnManagement.TurnManagementContinuousFrame" lib_id="greta_turnmanagement"/>
+            <frame type="object"/>
+        </module> 
+      
+        <module name="RestPoseSetterWithFeedback" style="Signals">
+            <object class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
+            <frame type="object"/>
+        </module>
+        
+        <module name="Microsaccade" style="Signals">
+            <object class="greta.auxiliary.Microsaccade.MicrosaccadeFrame" lib_id="greta_microsaccade"/>
+            <frame type="object"/>
+        </module>
+                                                                                                            
+    </modules>
+
+    <!--
+    ###########
+    ### Lib ###
+    ###########
+    -->
+
+    <!-- list of libraries and their dependencies -->
+    <libs>
+        <lib id="ext_activemq-all" path="./Common/Lib/External/activemq-all-5.15.10.jar"/>
+        <lib id="ext_cereproc" path="./Common/Lib/External/cereproc/cerevoice_eng.jar">
+            <needs path="./Common/Data/CereProc/**"/>
+        </lib>
+        <lib id="ext_commons-math_3" path="./Common/Lib/External/commons-math3-3.6.1.jar"/>
+        <lib id="ext_jackson-annotations" path="./Common/Lib/External/jackson/jackson-annotations-2.9.9.jar"/>
+        <lib id="ext_jackson-core" path="./Common/Lib/External/jackson/jackson-core-2.9.9.jar"/>
+        <lib id="ext_jackson-databind" path="./Common/Lib/External/jackson/jackson-databind-2.9.9.3.jar"/>
+        <lib id="ext_jwiwordnet" path="./Common/Lib/External/edu.mit.jwi_2.4.0_jdk.jar">
+            <needs path="./Common/Data/wordnet30/dict/data.adj"/>
+            <needs path="./Common/Data/wordnet30/dict/data.adv"/>
+            <needs path="./Common/Data/wordnet30/dict/data.noun"/>
+            <needs path="./Common/Data/wordnet30/dict/data.verb"/>
+            <needs path="./Common/Data/wordnet30/dict/index.adj"/>
+            <needs path="./Common/Data/wordnet30/dict/index.adv"/>
+            <needs path="./Common/Data/wordnet30/dict/index.noun"/>
+            <needs path="./Common/Data/wordnet30/dict/index.sense"/>
+            <needs path="./Common/Data/wordnet30/dict/index.verb"/>
+        </lib>
+        <lib id="ext_lwjgl" path="./Common/Lib/External/lwjgl/jar/lwjgl.jar"/>
+        <lib id="ext_marytts-client" path="./Common/Lib/External/marytts-client-5.2.jar"/>
+        <lib id="ext_opennlp" path="./Common/Lib/External/opennlp-tools-1.8.2.jar"/>
+        <lib id="ext_stanfordparser" path="./Common/Lib/External/stanford-parser.jar">
+            <needs path="./Common/Data/stanfordparser/englishPCFG.ser.gz"/>
+        </lib>
+        <lib id="ext_thrift.commons-codec" path="./Common/Lib/External/thrift/commons-codec-1.10.jar"/>
+        <lib id="ext_thrift.commons-logging" path="./Common/Lib/External/thrift/commons-logging-1.2.jar"/>
+        <lib id="ext_thrift.httpclient" path="./Common/Lib/External/thrift/httpclient-4.5.6.jar"/>
+        <lib id="ext_thrift.httpcore" path="./Common/Lib/External/thrift/httpcore-4.4.10.jar"/>
+        <lib id="ext_thrift.javax.annotation-api" path="./Common/Lib/External/thrift/javax.annotation-api-1.3.2.jar"/>
+        <lib id="ext_thrift.libthrift" path="./Common/Lib/External/thrift/libthrift-0.13.0.jar"/>
+        <lib id="ext_thrift.servlet-api" path="./Common/Lib/External/thrift/servlet-api-2.5.jar"/>
+        <lib id="ext_thrift.slf4j-api" path="./Common/Lib/External/thrift/slf4j-api-1.7.25.jar"/>
+        <lib id="ext_voxygen" path="./Common/Lib/External/voxygen/voxygen.jar">
+            <needs path="./Common/Data/Voxygen/**"/>
+        </lib>
+        <lib id="ext_xuggle-xuggler" path="./Player/Lib/External/xuggle-xuggler-5.4.jar"/>
+        <lib id="greta_activemq" path="./Common/Lib/Internal/ActiveMQ.jar">
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="ext_jackson-annotations"/>
+            <depends lib_id="ext_jackson-core"/>
+            <depends lib_id="ext_jackson-databind"/>
+            <depends lib_id="greta_emotionml"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_social_parameters"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_animation_core" path="./Common/Lib/Internal/AnimationCore.jar">
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_ircamalign" path="./Common/Lib/Internal/IrcamAlign.jar">
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_animation_dynamics" path="./Common/Lib/Internal/AnimationDynamics.jar">
+            <depends lib_id="ext_commons-math_3"/>
+            <depends lib_id="ext_lwjgl"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_behavior_planner" path="./Common/Lib/Internal/BehaviorPlanner.jar">
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./BehaviorPlanner/**"/>
+            <needs path="./Common/Data/xml/behaviorsets.xsd"/>
+            <needs path="./Common/Data/xml/profiles.xsd"/>
+            <needs path="./Common/Data/xml/qualifiers.xsd"/>
+            <needs path="./Common/Data/xml/multimodal.dtd"/>
+        </lib>
+        <lib id="greta_behavior_realizer" path="./Common/Lib/Internal/BehaviorRealizer.jar">
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_body_animation_performer" path="./Common/Lib/Internal/BodyAnimationPerformer.jar">
+            <depends lib_id="ext_commons-math_3"/>
+            <depends lib_id="greta_animation_core"/>
+            <depends lib_id="greta_animation_dynamics"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./BehaviorRealizer/AnimationLexicon/*"/>
+            <needs path="./BehaviorRealizer/Skeleton/*"/>
+        </lib>
+        <lib id="greta_bvh_mocap" path="./Common/Lib/Internal/BVHMocap.jar">
+            <depends lib_id="greta_animation_core"/>
+            <depends lib_id="greta_gesture_animation"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_utilx"/>
+        </lib>
+        <lib id="greta_cereproc" path="./Common/Lib/Internal/CereProc.jar">
+            <depends lib_id="ext_cereproc"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./Common/Data/CereProc/*"/>
+            <needs path="./Common/Lib/External/cereproc/**"/>
+        </lib>
+        <lib id="greta_azuretts" path="./Common/Lib/Internal/AzureTTS.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="libGretaFurhatInterface"/>
+            <depends lib_id="greta_behavior_realizer"/>
+        </lib>
+        <lib id="greta_conversational_gaze" path="./Common/Lib/Internal/ConversationalGaze.jar">
+            <depends lib_id="greta_activemq"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_ssi"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_editors" path="./Common/Lib/Internal/Editors.jar">
+            <depends lib_id="greta_behavior_planner"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_utilx"/>
+            <needs path="./BehaviorRealizer/AnimationLexicon/HandShape*"/>
+        </lib>
+        <lib id="greta_emotionml" path="./Common/Lib/Internal/EmotionML.jar">
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_social_parameters"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_environment_manager_generic" path="./Common/Lib/Internal/EnvironmentManager.jar">
+            <depends lib_id="greta_environment_manager_activemq"/>
+            <depends lib_id="greta_environment_manager_thrift"/>
+        </lib>
+        <lib id="greta_environment_manager_activemq" path="./Common/Lib/Internal/EnvironmentManager.jar">
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="greta_activemq"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_environment_manager_thrift" path="./Common/Lib/Internal/EnvironmentManager.jar">
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_thrift"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_feedbacks" path="./Common/Lib/Internal/Feedbacks.jar">
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_fml_annotator" path="./Common/Lib/Internal/FMLAnnotator.jar">
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_gesture_animation" path="./Common/Lib/Internal/GestureAnimation.jar">
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./BehaviorRealizer/AnimationLexicon/*"/>
+            <needs path="./BehaviorRealizer/Skeleton/*"/>
+        </lib>
+        <lib id="greta_gesture_animation_editor" path="./Common/Lib/Internal/GestureAnimationEditor.jar">
+            <depends lib_id="greta_animation_core"/>
+            <depends lib_id="greta_body_animation_performer"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_utilx"/>
+        </lib>
+        <lib id="greta_group_behavior" path="./Common/Lib/Internal/GroupBehavior.jar">
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="ext_jackson-annotations"/>
+            <depends lib_id="ext_jackson-core"/>
+            <depends lib_id="ext_jackson-databind"/>
+            <depends lib_id="greta_activemq"/>
+        </lib>
+        <lib id="greta_intentions" path="./Common/Lib/Internal/Intentions.jar">
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_interruptions" path="./Common/Lib/Internal/Interruptions.jar">
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_lip_model" path="./Common/Lib/Internal/LipModel.jar">
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./BehaviorRealizer/LipModel/*"/>
+        </lib>
+        <lib id="greta_listener_intent_planner" path="./Common/Lib/Internal/ListenerIntentPlanner.jar">
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./Common/Data/xml/profiles.xsd"/>
+            <needs path="./ListenerIntentPlanner/**"/>
+        </lib>
+        <lib id="greta_marytts" path="./Common/Lib/Internal/MaryTTS.jar">
+            <depends lib_id="ext_marytts-client"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_meaning_miner" path="./Common/Lib/Internal/MeaningMiner.jar">
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="ext_jwiwordnet"/>
+            <depends lib_id="ext_opennlp"/>
+            <depends lib_id="ext_stanfordparser"/>
+            <depends lib_id="greta_activemq"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./Common/Data/MeaningMiner/imageschemaGesture.dtd"/>
+            <needs path="./Common/Data/MeaningMiner/imageschemaGesture.xml"/>
+            <needs path="./Common/Data/MeaningMiner/imageschemaSynset.xml"/>
+            <needs path="./Common/Data/MeaningMiner/imageschemaSynset.dtd"/>
+        </lib>
+        <lib id="greta_mpeg4" path="./Common/Lib/Internal/MPEG4.jar">
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_ogre_player" path="./Player/Lib/Internal/OgrePlayer.jar">
+            <depends lib_id="greta_bvh_mocap"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./Player/Data/*"/>
+            <needs path="./Player/Data/media/*"/>
+            <needs path="./Player/Data/media/dynamicfacialcolor/**"/>
+            <needs path="./Player/Data/media/greta/**"/>
+            <needs path="./Player/Data/media/obadiah/**"/>
+            <needs path="./Player/Data/media/office/*"/>
+            <needs path="./Player/Data/media/poppy/**"/>
+            <needs path="./Player/Data/media/prudence/**"/>
+            <needs path="./Player/Data/media/spike/**"/>
+            <needs path="./Player/Data/media/camille/**"/>
+            <needs path="./Player/Data/Shaders/**"/>
+            <needs path="./Player/Lib/External/Linux32/**"/>
+            <needs path="./Player/Lib/External/Linux64/**"/>
+            <needs path="./Player/Lib/External/Win32/**"/>
+            <needs path="./Player/Lib/External/Win64/**"/>
+            <needs path="./Player/Lib/External/xuggle-xuggler-5.4.jar"/>
+        </lib>
+        <lib id="greta_openface" path="./Common/Lib/Internal/OpenFaceFix.jar">
+            <depends lib_id="ext_jeromq"/>
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_utilx"/>
+        </lib>
+        <lib id="greta_plan_capture" path="./Common/Lib/Internal/PlanCapture.jar">
+            <depends lib_id="greta_behavior_planner"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_ogre_player"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_social_parameters"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_signals" path="./Common/Lib/Internal/Signals.jar">
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./Common/Data/xml/*.xsd"/>
+            <needs path="./BehaviorRealizer/Constraint/GestureSpace.xml"/>
+            <needs path="./BehaviorRealizer/BehaviorLexicon/*.dtd"/>
+            <needs path="./BehaviorRealizer/BehaviorLexicon/*.xml"/>
+            <needs path="./BehaviorRealizer/BehaviorLexicon/*.xsd"/>
+        </lib>
+        <lib id="greta_social_parameters" path="./Common/Lib/Internal/SocialParameters.jar">
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_ssi" path="./Common/Lib/Internal/SSI.jar">
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="greta_activemq"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_subject_planner" path="./Common/Lib/Internal/SubjectPlanner.jar">
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_thrift" path="./Common/Lib/Internal/Thrift.jar">
+            <depends lib_id="ext_thrift.commons-codec"/>
+            <depends lib_id="ext_thrift.commons-logging"/>
+            <depends lib_id="ext_thrift.httpclient"/>
+            <depends lib_id="ext_thrift.httpcore"/>
+            <depends lib_id="ext_thrift.javax.annotation-api"/>
+            <depends lib_id="ext_thrift.libthrift"/>
+            <depends lib_id="ext_thrift.servlet-api"/>
+            <depends lib_id="ext_thrift.slf4j-api"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_social_parameters"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="videoCapture" path="./Player/Lib/Internal/VideoCapture.jar">
+            <depends lib_id="greta_ogre_player"/>
+            <depends lib_id="ext_xuggle-xuggler"/>
+            <depends lib_id="ext_slf4j1.7.25"/>
+        </lib>
+        <lib id="greta_util" path="./Common/Lib/Internal/Util.jar">
+            <needs path="./Common/Data/characters/*"/>
+            <needs path="./Environments/empty.xml"/>
+            <needs path="./Greta.ini"/>
+            <needs path="./Locale/*"/>
+        </lib>
+        <lib id="greta_utilx" path="./Common/Lib/Internal/Utilx.jar">
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_voxygen" path="./Common/Lib/Internal/Voxygen.jar">
+            <depends lib_id="ext_voxygen"/>
+            <depends lib_id="greta_util"/>
+            <needs path="./Common/Data/Voxygen/*"/>
+            <needs path="./Common/Lib/External/voxygen/**"/>
+        </lib>
+        <lib id="greta_video_capture" path="./Player/Lib/Internal/VideoCapture.jar">
+            <depends lib_id="ext_xuggle-xuggler"/>
+            <depends lib_id="greta_ogre_player"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+        <lib id="greta_speech_recognizer" path="Common/Lib/Internal/SpeechRecognizer.jar">
+            <depends lib_id="ext_grizzly-http-all"/>
+            <depends lib_id="ext_gson-2.8.0"/>
+            <depends lib_id="ext_guava-21.0"/>
+            <depends lib_id="ext_httpclient-4.5.3"/>
+            <depends lib_id="ext_httpcore-4.4.6"/>
+            <depends lib_id="ext_selenium-remote-driver-3.4.0"/>
+            <depends lib_id="ext_jna-4.1.0"/>
+            <depends lib_id="ext_jna-platform-4.1.0"/>
+            <depends lib_id="ext_selenium-api-3.4.0"/>
+            <depends lib_id="ext_selenium-chrome-driver-3.4.0"/>
+            <depends lib_id="ext_selenium-api-3.4.0"/>
+            <depends lib_id="ext_cglib-nodep-3.2.4"/>
+            <depends lib_id="ext_commons-codec-1.10"/>
+            <depends lib_id="ext_commons-exec-1.3"/>
+            <depends lib_id="ext_activemq-all"/>
+            <depends lib_id="greta_activemq"/>
+            <depends lib_id="ext_jackson-annotations"/>
+            <depends lib_id="ext_jackson-core"/>
+            <depends lib_id="ext_jackson-databind"/>
+        </lib>
+        <lib id="ext_grizzly-http-all" path="Common/Lib/External/seleniumWebDriver/grizzly-http-all-2.4.4.jar">
+            <depends lib_id="ext_selenium-api-3.4.0"/>
+        </lib>
+        <lib id="ext_selenium-api-3.4.0" path="Common/Lib/External/seleniumWebDriver/selenium-api-3.4.0.jar"/>
+        <lib id="ext_selenium-chrome-driver-3.4.0" path="Common/Lib/External/seleniumWebDriver/selenium-chrome-driver-3.4.0.jar"/>
+        <lib id="ext_selenium-remote-driver-3.4.0" path="Common/Lib/External/seleniumWebDriver/selenium-remote-driver-3.4.0.jar"/>
+        <lib id="ext_httpclient-4.5.3" path="Common/Lib/External/seleniumWebDriver/httpclient-4.5.3.jar"/>
+        <lib id="ext_httpcore-4.4.6" path="Common/Lib/External/seleniumWebDriver/httpcore-4.4.6.jar"/>
+        <lib id="ext_jna-4.1.0" path="Common/Lib/External/seleniumWebDriver/jna-4.1.0.jar"/>
+        <lib id="ext_jna-platform-4.1.0" path="Common/Lib/External/seleniumWebDriver/jna-platform-4.1.0.jar"/>
+        <lib id="ext_gson-2.8.0" path="Common/Lib/External/seleniumWebDriver/gson-2.8.0.jar"/>
+        <lib id="ext_guava-21.0" path="Common/Lib/External/seleniumWebDriver/guava-21.0.jar"/>
+        <lib id="ext_cglib-nodep-3.2.4" path="Common/Lib/External/seleniumWebDriver/cglib-nodep-3.2.4.jar"/>
+        <lib id="ext_commons-codec-1.10" path="Common/Lib/External/seleniumWebDriver/commons-codec-1.10.jar"/>
+        <lib id="ext_commons-exec-1.3" path="Common/Lib/External/seleniumWebDriver/commons-exec-1.3.jar"/>
+        <lib id="ext_commons-logging-1.2" path="Common/Lib/External/seleniumWebDriver/commons-logging-1.2.jar"/>
+        <lib id="greta_flipperLib" path="Common/Lib/Internal/FlipperLib.jar">
+            <depends lib_id="ext_lobbackcore1.0.13"/>
+            <depends lib_id="ext_javax_json1.1"/>
+            <depends lib_id="ext_javax.json-api-1.1"/>
+            <depends lib_id="ext_junit4.1.2"/>
+            <depends lib_id="ext_jackson-annotations"/>
+            <depends lib_id="ext_jackson-core"/>
+            <depends lib_id="ext_jackson-databind"/>
+            <depends lib_id="ext_slf4j1.7.25"/>
+	     
+        </lib>
+        <lib id="ext_junit4.1.2" path="Common/Lib/External/Flipper/junit-4.12.jar"/>
+        <lib id="ext_javax_json1.1" path="Common/Lib/External/Flipper/javax.json-1.1.jar"/>
+        <lib id="ext_javax.json-api-1.1" path="Common/Lib/External/Flipper/javax.json-api-1.1.jar"/>
+        <lib id="ext_javax.jms" path="Common/Lib/External/javax.jms.jar"/>
+        <lib id="ext_posttresql42.1.1" path="Common/Lib/External/Flipper/postgresql-42.1.1.jar"/>
+        <lib id="ext_slf4j1.7.25" path="Common/Lib/External/HMIFlipper/slf4j-api-1.7.25.jar"/>
+        <lib id="ext_lobbackcore1.0.13" path="Common/Lib/External/HMIFlipper/logback-core-0.9.21.jar"/>
+        <lib id="greta_FlipperDemo" path="Common/Lib/Internal//FlipperDemoExample.jar">
+            <depends lib_id="greta_flipperLib"/>
+            <depends lib_id="ext_posttresql42.1.1"/>
+            <depends lib_id="ext_slf4j1.7.25"/>
+            <depends lib_id="ext_junit4.1.2"/>
+            <depends lib_id="ext_Translator.0.1"/>
+        </lib>
+        <lib id="ext_Translator.0.1" path="Common/Lib/External/Flipper/Translator-0.1.jar"/>		
+        <lib id="greta_osc" path="./Common/Lib/Internal/OSC.jar">
+            <depends lib_id="ext_jeromq"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_utilx"/>
+        </lib>
+        <lib id="multilayer_attitude_planner" path="./Common/Lib/Internal/MultiLayerAttitudePlanner.jar">
+            <depends lib_id="greta_behavior_planner"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="sequence_mining"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_social_parameters"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="ext_opencsv_2.3"/>
+            <depends lib_id="ext_weka"/>
+            <depends lib_id="ext_weka_src"/>
+            <needs path="./Common/Data/MultiLayerAttitude"/>
+        </lib>
+        <lib id="greta_asap" path="./Common/Lib/Internal/ASAP.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_mpeg4"/>
+        </lib>
+        <lib id="greta_modiff" path="./Common/Lib/Internal/MODIFF.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_behavior_realizer"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_incrementality"/>
+        </lib>
+        <lib id="sequence_mining" path="./Common/Lib/Internal/SequenceMining.jar">
+            <depends lib_id="ext_bfograph"/>
+            <depends lib_id="ext_clodhopper_core"/>
+            <depends lib_id="ext_opencsv_2.3"/>
+            <depends lib_id="ext_spmf"/>
+        </lib>
+        
+        <lib id="ext_opencsv_2.3" path="./Common/Lib/External/opencsv-2.3.jar"/>
+        <lib id="ext_weka" path="./Common/Lib/External/weka/weka.jar"/>
+        <lib id="ext_weka_src" path="./Common/Lib/External/weka/weka-src.jar"/>
+        <lib id="ext_bfograph" path="./Common/Lib/External/sequencemining/bfograph.jar"/>
+        <lib id="ext_clodhopper_core" path="./Common/Lib/External/sequencemining/clodhopper-core-1.0.0.jar"/>
+        <lib id="ext_spmf" path="./Common/Lib/External/sequencemining/spmf.jar"/>
+        
+        <lib id="greta_incrementality" path="./Common/Lib/Internal/Incrementality.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_behavior_realizer"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_mpeg4"/>
+        </lib>
+	
+        <lib id="ext_jackson-annotations-2.15" path="./Common/Lib/External/jackson/jackson-annotations-2.15.2.jar"/>
+        <lib id="ext_jackson-core-2.15" path="./Common/Lib/External/jackson/jackson-core-2.15.2.jar"/>
+        <lib id="ext_jackson-databind-2.15" path="./Common/Lib/External/jackson/jackson-databind-2.15.2.jar"/>        
+        <lib id="ext_jeromq" path="./Common/Lib/External/jeromq-0.5.1.jar"/>
+        
+        <!-- Greta Furhat Interface library adding -->
+        <lib id="libGretaFurhatInterface" path="./Common/Lib/Internal/GretaFurhatInterface.jar">
+            <depends lib_id="ext_jackson-annotations-2.15"/>
+            <depends lib_id="ext_jackson-core-2.15"/>
+            <depends lib_id="ext_jackson-databind-2.15"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_activemq"/>
+        </lib>
+        
+        <lib id="greta_ChatGPT" path="./Common/Lib/Internal/ChatGPT.jar">
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_meaning_miner"/>
+            <depends lib_id="ext_javax.jms"/>
+        </lib>
+        <lib id="greta_llm" path="./Common/Lib/Internal/LLM.jar">
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_meaning_miner"/>
+            <depends lib_id="ext_javax.jms"/>
+        </lib>
+        <lib id="greta_deepasr" path="./Common/Lib/Internal/DeepASR.jar">
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_meaning_miner"/>
+            <depends lib_id="greta_activemq"/>
+            <depends lib_id="ext_javax.jms"/>
+        </lib>
+        
+        <lib id="greta_microphone" path="./Common/Lib/Internal/Microphone.jar"/>
+        
+        <lib id="greta_turnmanagement" path="./Common/Lib/Internal/TurnManagement.jar">
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+        </lib>      
+        
+        <lib id="greta_microsaccade" path="./Common/Lib/Internal/Microsaccade.jar">
+            <depends lib_id="greta_intentions"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_util"/>
+        </lib>
+                  
+    </libs>
+
+    <!--
+    #################
+    ### Connector ###
+    #################
+    -->
+
+    <!-- list of how to connect and disconnect modules -->
+    <connectors>
+    
+        <!-- Phil start -->
+        <!-- <connector id="connectCharacterInstanceFrameToRealizer" unique="true">
+            <input class="greta.core.utilx.gui.CharacterInstanceFrame" lib_id="greta_utilx"/>
+            <output class="greta.core.behaviorrealizer.Realizer" lib_id="greta_behavior_realizer"/>
+            <connect from="input" method="setCharacter" to="output"/>
+            <disconnect from="input" method="unsetCharacter" to="output"/>
+        </connector> -->
+        <!-- Phil end -->
+
+        <connector id="ASRToLLM">
+            <input class="greta.auxiliary.deepasr.DeepASRFrame"  lib_id="greta_deepasr"/>
+            <output class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
+            <connect from="input" method="addLLMFrame" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
+            <disconnect from="input" method="removeLLMFrame" to="output"/>
+            <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
+        </connector>
+        
+        <connector id="ObjectNodeControllerGaze_SIgnalEmitterToSignalPerformer">
+            <input class="greta.core.utilx.gui.ObjectNodeController" lib_id="greta_utilx"/>
+            <output class="greta.core.signals.SignalPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="addSignalPerformer" to="output"/>    <!-- it will call input.addIntentionPerformer(output) on arrow connection -->
+            <disconnect from="input" method="removeSignalPerformer" to="output"/>    <!-- it will call input.removeIntentionPerformer(output) on arrow disconnection  -->
+        </connector>
+        <connector id="SSIFrameEmitterToSSIFramePerformer">
+            <input class="greta.auxiliary.ssi.SSIFrameEmitter" lib_id="greta_ssi"/>
+            <output class="greta.auxiliary.ssi.SSIFramePerfomer" lib_id="greta_ssi"/>
+            <connect from="input" method="addSSIFramePerformer" to="output"/>
+            <disconnect from="input" method="removeSSIFramePerformer" to="output"/>
+        </connector>
+        <connector id="InterruptionReactionEmitterToInterruptionReactionPerformer">
+            <input class="greta.core.interruptions.reactions.InterruptionReactionEmitter" lib_id="greta_interruptions"/>
+            <output class="greta.core.interruptions.reactions.InterruptionReactionPerformer" lib_id="greta_interruptions"/>
+            <connect from="input" method="addInterruptionReactionPerformer" to="output"/>
+            <disconnect from="input" method="removeInterruptionReactionPerformer" to="output"/>
+        </connector>
+        <connector id="IntentionEmitterToIntentionPerformer">
+            <input class="greta.core.intentions.IntentionEmitter" lib_id="greta_intentions"/>
+            <output class="greta.core.intentions.IntentionPerformer" lib_id="greta_intentions"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
+            <!-- it will call input.removeIntentionPerformer(output) -->
+        </connector>
+        <connector id="SignalEmitterToSignalPerformer">
+            <input class="greta.core.signals.SignalEmitter" lib_id="greta_signals"/>
+            <output class="greta.core.signals.SignalPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="addSignalPerformer" to="output"/>
+            <!-- it will call input.addSignalPerformer(output) -->
+            <disconnect from="input" method="removeSignalPerformer" to="output"/>
+            <!-- it will call input.removeSignalPerformer(output) -->
+        </connector>
+        <connector id="AudioEmitter To AudioPerformer">
+            <input class="greta.core.util.audio.AudioEmitter" lib_id="greta_util"/>
+            <output class="greta.core.util.audio.AudioPerformer" lib_id="greta_util"/>
+            <connect from="input" method="addAudioPerformer" to="output"/>
+            <disconnect from="input" method="removeAudioPerformer" to="output"/>
+        </connector>
+        <connector id="SignalEmitterToBMLSignalPerformer">
+            <input class="greta.core.signals.BMLSignalEmitter" lib_id="greta_signals"/>
+            <output class="greta.core.signals.BMLSignalPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="add" to="output"/>
+            <!-- it will call input.add(output) -->
+            <disconnect from="null" method="" to="null"/>
+            <!-- TODO -->
+        </connector>
+        <connector id="SignalEmitterToFMLIntentionPerformer">
+            <input class="greta.core.signals.FMLIntentionEmitter" lib_id="greta_signals"/>
+            <output class="greta.core.signals.FMLIntentionPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="add" to="output"/>
+            <!-- it will call input.add(output) -->
+            <disconnect from="null" method="" to="null"/>
+            <!-- TODO -->
+        </connector>
+        <connector id="addSignalSelectorInBehaviorPlanner">
+            <input class="greta.core.behaviorplanner.SignalSelector" lib_id="greta_behavior_planner"/>
+            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <connect from="output" method="addSelector" to="input"/>
+            <!-- it will call output.addSelector(input) -->
+            <disconnect from="null" method="" to="null"/>
+            <!-- TODO -->
+        </connector>
+        <connector id="AnimationFrameEmitter To AnimationFramePerformer">
+            <input class="greta.core.util.animation.AnimationFrameEmitter" lib_id="greta_util"/>
+            <output class="greta.core.util.animation.AnimationFramePerformer" lib_id="greta_util"/>
+            <connect from="input" method="addAnimationFramePerformer" to="output"/>
+            <disconnect from="input" method="removeAnimationFramePerformer" to="output"/>
+        </connector>
+        <connector id="BAPFrameEmitterToBAPFramePerformer">
+            <input class="greta.core.animation.mpeg4.bap.BAPFrameEmitter" lib_id="greta_mpeg4"/>
+            <output class="greta.core.animation.mpeg4.bap.BAPFramePerformer" lib_id="greta_mpeg4"/>
+            <connect from="input" method="addBAPFramePerformer" to="output"/>
+            <!-- it will call input.addBAPFramePerformer(output) -->
+            <disconnect from="input" method="removeBAPFramePerformer" to="output"/>
+            <!-- it will call input.removeBAPFramePerformer(output) -->
+        </connector>
+        <connector id="FAPFrameEmitterToFAPFramePerformer">
+            <input class="greta.core.animation.mpeg4.fap.FAPFrameEmitter" lib_id="greta_mpeg4"/>
+            <output class="greta.core.animation.mpeg4.fap.FAPFramePerformer" lib_id="greta_mpeg4"/>
+            <connect from="input" method="addFAPFramePerformer" to="output"/>
+            <!-- it will call input.addFAPFramePerformer(output) -->
+            <disconnect from="input" method="removeFAPFramePerformer" to="output"/>
+            <!-- it will call input.removeFAPFramePerformer(output) -->
+        </connector>
+        <connector id="FaceSourceForFaceBlender">
+            <input class="greta.core.animation.mpeg4.fap.FAPFrameEmitter" lib_id="greta_mpeg4"/>
+            <output class="greta.core.animation.mpeg4.fap.filters.FaceBlender" lib_id="greta_mpeg4"/>
+            <connect from="output" method="setFace2Source" to="input"/>
+            <disconnect from="output" method="dettachFace2Source" to="input"/>
+        </connector>
+        <connector id="LipSourceForLipBlender">
+            <input class="greta.core.animation.mpeg4.fap.FAPFrameEmitter" lib_id="greta_mpeg4"/>
+            <output class="greta.core.animation.mpeg4.fap.filters.LipBlender" lib_id="greta_mpeg4"/>
+            <connect from="output" method="setLipSource" to="input"/>
+            <disconnect from="output" method="dettachLipSource" to="input"/>
+        </connector>
+        <connector id="LaughterSourceForBodyBlender">
+            <input class="greta.core.animation.mpeg4.bap.BAPFrameEmitter" lib_id="greta_mpeg4"/>
+            <output class="greta.core.animation.mpeg4.bap.filters.BodyBlender" lib_id="greta_mpeg4"/>
+            <connect from="output" method="setLaughterSource" to="input"/>
+            <disconnect from="output" method="dettachLaughterSource" to="input"/>
+        </connector>
+        <connector id="AUEmitterToAUPerformer">
+            <input class="greta.core.keyframes.face.AUEmitter" lib_id="greta_signals"/>
+            <output class="greta.core.keyframes.face.AUPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="addAUPerformer" to="output"/>
+            <!-- it will call input.add(output) -->
+            <disconnect from="input" method="removeAUPerformer" to="output"/>
+            <!-- TODO -->
+        </connector>
+        <connector id="addLogOutput">
+            <input class="greta.core.utilx.gui.LogsController" lib_id="greta_utilx"/>
+            <output class="greta.core.util.log.LogOutput" lib_id="greta_util"/>
+            <connect from="input" method="addLogOutput" to="output"/>
+            <disconnect from="input" method="removeLogOutput" to="output"/>
+        </connector>
+        <connector id="setTTS" unique="true">
+            <input class="greta.core.utilx.gui.TTSController" lib_id="greta_utilx"/>
+            <output class="greta.core.util.speech.TTS" lib_id="greta_util"/>
+            <connect from="input" method="setTTS" to="output"/>
+            <disconnect from="input" method="setTTS" to="null"/>
+        </connector>
+        <connector id="setLaughSynthetizer" unique="true">
+            <input class="greta.core.utilx.gui.LaughSynthetizerController" lib_id="greta_utilx"/>
+            <output class="greta.core.util.laugh.LaughSynthetizer" lib_id="greta_util"/>
+            <connect from="input" method="setLaughSynthetizer" to="output"/>
+            <disconnect from="input" method="setLaughSynthetizer" to="null"/>
+        </connector>
+        <connector id="SignalEmitterToKeyFramePerformer">
+            <input class="greta.core.keyframes.KeyframeEmitter" lib_id="greta_signals"/>
+            <output class="greta.core.keyframes.KeyframePerformer" lib_id="greta_signals"/>
+            <connect from="input" method="addKeyframePerformer" to="output"/>
+            <!-- it will call input.addKeyframePerformer(output) -->
+            <disconnect from="input" method="removeKeyframePerformer" to="output"/>
+            <!-- it will call input.removeKeyframePerformer(output) -->
+        </connector>
+        <connector id="TextEditor" unique="true">
+            <input class="greta.auxiliary.activemq.semaine.TextEditor" lib_id="greta_activemq"/>
+            <output class="greta.auxiliary.activemq.TextSender" lib_id="greta_activemq"/>
+            <connect from="input" method="setSender" to="output"/>
+            <disconnect from="input" method="setSender" to="null"/>
+        </connector>
+        <connector id="addFeedbackInput">
+            <input class="greta.core.feedbacks.CallbackEmitter" lib_id="greta_feedbacks"/>
+            <output class="greta.core.feedbacks.CallbackPerformer" lib_id="greta_feedbacks"/>
+            <connect from="input" method="addCallbackPerformer" to="output"/>
+            <disconnect from="input" method="removeCallbackPerformer" to="output"/>
+        </connector>
+        <connector id="addFeedbackOutput">
+            <input class="greta.core.feedbacks.FeedbackEmitter" lib_id="greta_feedbacks"/>
+            <output class="greta.core.feedbacks.FeedbackPerformer" lib_id="greta_feedbacks"/>
+            <connect from="input" method="addFeedbackPerformer" to="output"/>
+            <disconnect from="input" method="removeFeedbackPerformer" to="output"/>
+        </connector>
+        <connector id="connectPlayerToEnvironment" unique="true">
+            <input class="greta.auxiliary.player.ogre.OgreFrame" lib_id="greta_ogre_player"/>
+            <output class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+            <connect from="input" method="setEnvironment" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="EnvToolToEnvironment" unique="true">
+            <input class="greta.tools.editors.environment.EnvTool" lib_id="greta_editors"/>
+            <output class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+            <connect from="input" method="setEnvironment" to="output"/>
+            <disconnect from="input" method="setEnvironment" to="null"/>
+        </connector>
+        <connector id="connectActiveMQPrimaryEnvironmentServerToEnvironment" unique="true">
+            <input class="greta.auxiliary.environmentmanager.impl.activemq.PrimaryEnvironmentServer" lib_id="greta_environment_manager_activemq"/>
+            <output class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+            <connect from="input" method="setLocalEnvironment" to="output"/>
+            <disconnect from="input" method="setLocalEnvironment" to="null"/>
+        </connector>
+        <connector id="connectActiveMQReplicaEnvironmentServerToEnvironment" unique="true">
+            <input class="greta.auxiliary.environmentmanager.impl.activemq.ReplicaEnvironmentServer" lib_id="greta_environment_manager_activemq"/>
+            <output class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+            <connect from="input" method="setLocalEnvironment" to="output"/>
+            <disconnect from="input" method="setLocalEnvironment" to="null"/>
+        </connector>
+        <connector id="connectCaptureControllerToCapturable" unique="true">
+            <input class="greta.auxiliary.player.ogre.capture.Capturecontroller" lib_id="greta_ogre_player"/>
+            <output class="greta.auxiliary.player.ogre.capture.Capturable" lib_id="greta_ogre_player"/>
+            <connect from="input" method="setCapturable" to="output"/>
+            <disconnect from="input" method="setCapturable" to="null"/>
+        </connector>
+        <connector id="connectCaptureControllerToCaptureOutput" unique="true">
+            <input class="greta.auxiliary.player.ogre.capture.Capturecontroller" lib_id="greta_ogre_player"/>
+            <output class="greta.auxiliary.player.ogre.capture.CaptureOutput" lib_id="greta_ogre_player"/>
+            <connect from="input" method="setCaptureOutput" to="output"/>
+            <disconnect from="input" method="setCaptureOutput" to="null"/>
+        </connector>
+        <connector id="connectEnvironmentToRealizer" unique="true">
+            <input class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+            <output class="greta.core.behaviorrealizer.Realizer" lib_id="greta_behavior_realizer"/>
+            <connect from="output" method="setEnvironment" to="input"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="connectAnimatableToEnvironment" unique="true">
+            <input class="greta.core.util.environment.Animatable" lib_id="greta_util"/>
+            <output class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+            <connect from="output" method="addNode" to="input"/>
+            <disconnect from="output" method="removeNode" to="input"/>
+        </connector>
+        <connector id="Semaine Command Bridge">
+            <input class="greta.auxiliary.activemq.semaine.SemaineCommandEmitter" lib_id="greta_activemq"/>
+            <output class="greta.auxiliary.activemq.semaine.SemaineCommandPerformer" lib_id="greta_activemq"/>
+            <connect from="input" method="addSemaineCommandPerformer" to="output"/>
+            <disconnect from="input" method="removeSemaineCommandPerformer" to="output"/>
+        </connector>
+        <connector id="FileNameEmitterToFileNamePerformer">
+            <input class="greta.core.util.file.FileNameEmitter" lib_id="greta_util"/>
+            <output class="greta.core.util.file.FileNamePerformer" lib_id="greta_util"/>
+            <connect from="input" method="addFileNamePerformer" to="output"/>
+            <disconnect from="input" method="removeFileNamePerformer" to="output"/>
+        </connector>
+        <connector id="SocialParameterEmitterToSocialParameterPerformer">
+            <input class="greta.auxiliary.socialparameters.SocialParameterEmitter" lib_id="greta_social_parameters"/>
+            <output class="greta.auxiliary.socialparameters.SocialParameterPerformer" lib_id="greta_social_parameters"/>
+            <connect from="input" method="addSocialParameterPerformer" to="output"/>
+            <disconnect from="input" method="removeSocialParameterPerformer" to="output"/>
+        </connector>
+        <connector id="connectSSIFilterToSSITranslator" unique="true">
+            <input class="greta.auxiliary.ssi.SSIFilterForm" lib_id="greta_ssi"/>
+            <output class="greta.auxiliary.ssi.SSIXMLToFrameTranslator" lib_id="greta_ssi"/>
+            <connect from="input" method="setSSITranslator" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="connectPlanCaptureControllerToCapturable" unique="true">
+            <input class="greta.auxiliary.plancapture.PlanCapturecontroller" lib_id="greta_plan_capture"/>
+            <output class="greta.auxiliary.player.ogre.capture.Capturable" lib_id="greta_ogre_player"/>
+            <connect from="input" method="setCapturable" to="output"/>
+            <disconnect from="input" method="setCapturable" to="null"/>
+        </connector>
+        <connector id="connectPlanCaptureControllerToCaptureOutput" unique="true">
+            <input class="greta.auxiliary.plancapture.PlanCapturecontroller" lib_id="greta_plan_capture"/>
+            <output class="greta.auxiliary.player.ogre.capture.CaptureOutput" lib_id="greta_ogre_player"/>
+            <connect from="input" method="setCaptureOutput" to="output"/>
+            <disconnect from="input" method="setCaptureOutput" to="null"/>
+        </connector>
+        <connector id="connectFMLAttitudeControllerToFMLFileReader" unique="true">
+            <input class="greta.auxiliary.player.ogre.capture.Capturecontroller" lib_id="greta_ogre_player"/>
+            <output class="greta.core.intentions.FMLFileReader" lib_id="greta_intentions"/>
+            <connect from="input" method="setFMLFileReader" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="ParticipantsAddedintheGroup">
+            <input class="greta.auxiliary.conversationalGaze.AgentGazeUser" lib_id="greta_conversational_gaze"/>
+            <output class="greta.auxiliary.conversationalGaze.ConversationalGroup" lib_id="greta_conversational_gaze"/>
+            <connect from="output" method="AddParticipant" to="input"/>
+            <disconnect from="output" method="RemoveParticipant" to="input"/>
+        </connector>
+        <connector id="AddedUser">
+            <input class="greta.auxiliary.conversationalGaze.User" lib_id="greta_conversational_gaze"/>
+            <output class="greta.auxiliary.conversationalGaze.AgentGazeUser" lib_id="greta_conversational_gaze"/>
+            <connect from="output" method="AddParticipant" to="input"/>
+            <disconnect from="output" method="RemoveParticipant" to="input"/>
+        </connector>
+        <connector id="AddUserinGroup">
+            <input class="greta.auxiliary.conversationalGaze.User" lib_id="greta_conversational_gaze"/>
+            <output class="greta.auxiliary.conversationalGaze.ConversationalGroup" lib_id="greta_conversational_gaze"/>
+            <connect from="output" method="AddParticipantUser" to="input"/>
+            <disconnect from="output" method="RemoveParticipantUser" to="input"/>
+        </connector>
+        <connector id="connectParserCaptureController_AUToAUParserFileReader" unique="true">
+            <input class="greta.auxiliary.plancapture.ParserCaptureController_AU" lib_id="greta_plan_capture"/>
+            <output class="greta.core.signals.AUParserFileReader" lib_id="greta_signals"/>
+            <connect from="input" method="setAUParserFileReader" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="connectAUCapturecontrollerToCapturable" unique="true">
+            <input class="greta.auxiliary.player.ogre.capture.AUCapturecontroller" lib_id="greta_ogre_player"/>
+            <output class="greta.auxiliary.player.ogre.capture.Capturable" lib_id="greta_ogre_player"/>
+            <connect from="input" method="setCapturable" to="output"/>
+            <disconnect from="input" method="setCapturable" to="null"/>
+        </connector>
+        <connector id="connectAUCapturecontrollerToCaptureOutput" unique="true">
+            <input class="greta.auxiliary.player.ogre.capture.AUCapturecontroller" lib_id="greta_ogre_player"/>
+            <output class="greta.auxiliary.player.ogre.capture.CaptureOutput" lib_id="greta_ogre_player"/>
+            <connect from="input" method="setCaptureOutput" to="output"/>
+            <disconnect from="input" method="setCaptureOutput" to="null"/>
+        </connector>
+        <connector id="connectBVHCaptureControllerToCapturable" unique="true">
+            <input class="greta.auxiliary.player.ogre.capture.BVHCapturecontroller" lib_id="greta_ogre_player"/>
+            <output class="greta.auxiliary.player.ogre.capture.Capturable" lib_id="greta_ogre_player"/>
+            <connect from="input" method="setCapturable" to="output"/>
+            <disconnect from="input" method="setCapturable" to="null"/>
+        </connector>
+        <connector id="connectBVHCaptureControllerToCaptureOutput" unique="true">
+            <input class="greta.auxiliary.player.ogre.capture.BVHCapturecontroller" lib_id="greta_ogre_player"/>
+            <output class="greta.auxiliary.player.ogre.capture.CaptureOutput" lib_id="greta_ogre_player"/>
+            <connect from="input" method="setCaptureOutput" to="output"/>
+            <disconnect from="input" method="setCaptureOutput" to="null"/>
+        </connector>
+        <connector id="connectBVHAttitudeControllerToFMLFileReader" unique="true">
+            <input class="greta.auxiliary.player.ogre.capture.BVHCapturecontroller" lib_id="greta_ogre_player"/>
+            <output class="greta.auxiliary.BVHMocap.BVHReaderGUI" lib_id="greta_bvh_mocap"/>
+            <connect from="input" method="setBVHFileReader" to="output"/>
+            <disconnect from="null" method="" to="null"/>
+        </connector>
+        <connector id="connectActiveMQPrimaryEnvironmentServerToEnvironment" unique="true">
+            <input class="greta.auxiliary.environmentmanager.impl.activemq.PrimaryEnvironmentServer" lib_id="greta_environment_manager_activemq"/>
+            <output class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+            <connect from="input" method="setLocalEnvironment" to="output"/>
+            <disconnect from="input" method="setLocalEnvironment" to="null"/>
+        </connector>
+        <connector id="connectActiveMQReplicaEnvironmentServerToEnvironment" unique="true">
+            <input class="greta.auxiliary.environmentmanager.impl.activemq.ReplicaEnvironmentServer" lib_id="greta_environment_manager_activemq"/>
+            <output class="greta.core.util.environment.Environment" lib_id="greta_util"/>
+            <connect from="input" method="setLocalEnvironment" to="output"/>
+            <disconnect from="input" method="setLocalEnvironment" to="null"/>
+        </connector>
+        <connector id="addAttitudePerformerToAttitudeEmitter">
+            <input class="greta.auxiliary.multilayerattitudeplanner.AttitudeEmitter" lib_id="multilayer_attitude_planner"/>
+            <output class="greta.auxiliary.multilayerattitudeplanner.AttitudePerformer" lib_id="multilayer_attitude_planner"/>
+            <connect from="input" method="addAttitudePerformer" to="output"/>
+            <disconnect from="input" method="removeAttitudePerformer" to="output"/>
+        </connector>
+        <connector id="connectIncInteractionToRealizer">
+            <input class="greta.auxiliary.incrementality.IncrementalityInteractionEmitter" lib_id="greta_incrementality"/>
+            <output class="greta.auxiliary.incrementality.IncrementalityInteractionPerformer" lib_id="greta_incrementality"/>
+            <connect from="input" method="addIncInteractionPerformer" to="output"/>
+            <disconnect from="input" method="removeIncInteractionPerformer" to="output"/>
+        </connector>
+
+        <connector id="TurnManagerToIntentionPerformer">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementFrame" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+        </connector>
+
+        <connector id="TurnManagerContinuousToIntentionPerformer">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementContinuousFrame" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+        </connector>
+
+        <connector id="TurnManagerContinuousToIntentionLLM">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementContinuousFrame" lib_id="greta_turnmanagement"/>
+            <output class="greta.auxiliary.llm.LLMFrame" lib_id="greta_llm"/>
+            <connect from="input" method="addLLMFrame" to="output"/>
+            <disconnect from="input" method="removeLLMFrame" to="output"/>
+        </connector>
+
+        <connector id="DeepASRToReceiver">
+            <input class="greta.auxiliary.deepasr.DeepASRFrame"  lib_id="greta_deepasr"/>
+            <output class="greta.auxiliary.deepasr.ASRReceiver" lib_id="greta_deepasr"/>
+            <connect from="input" method="addASRReceiver" to="output"/>
+            <disconnect from="input" method="removeASRReceiver" to="output"/>
+        </connector>
+        
+        <!--
+        <connector id="RestPoseSetterWithFeedbackToSignalPerformer">
+            <input class="greta.core.feedbacks.FeedbackEmitter" lib_id="greta_feedbacks"/>
+            <input class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
+            <connect from="input" method="addFeedbackPerformer" to="output"/>
+            <disconnect from="input" method="removeFeedbackPerformer" to="output"/>
+        </connector>
+        -->
+
+        <connector id="RestPoseSetterWithFeedbackToSignalPerformer">
+            <input class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.signals.SignalPerformer" lib_id="greta_signals"/>
+            <connect from="input" method="addSignalPerformer" to="output"/>
+            <!-- it will call input.addSignalPerformer(output) -->
+            <disconnect from="input" method="removeSignalPerformer" to="output"/>
+            <!-- it will call input.removeSignalPerformer(output) -->
+        </connector>
+
+    </connectors>
+
+    <!--
+    ##############
+    ### Styles ###
+    ##############
+    -->
+
+    <!-- list of styles -->
+    <styles>
+        <style color="0x88FFDD" name="Animations"/>
+        <style color="0xFFFF88" name="BehaviorPlanner"/>
+        <style color="0x88FF88" name="BehaviorRealizer"/>
+        <style color="0xFFBBAA" name="CharacterManager" v-align="top"/>
+        <style color="0x80AAFF" name="Environment" v-align="top"/>
+        <style color="0xFFDD99" name="Intentions"/>
+        <style color="0xFFAAAA" name="IntentPlanner"/>
+        <style color="0x77EEFF" name="Player"/>
+        <style color="0xDDFF88" name="Signals"/>
+        <style color="0xCCCCFF" name="DEFAULT"/>
+        <default/>
+    </styles>
+
+</modular>

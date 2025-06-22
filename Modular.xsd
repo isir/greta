@@ -1,0 +1,335 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<xs:complexType name="libdependent" >
+		<xs:attribute name="lib_id" type="xs:string" use="required"/>
+	</xs:complexType>
+
+	<xs:complexType name="objecttype">
+		<xs:complexContent>
+			<xs:extension base="libdependent">
+				<xs:attribute name="class" type="class_name" use="required"/>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+
+	<xs:simpleType name="edgeformat">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="none"/>
+			<xs:enumeration value="arrow"/>
+			<xs:enumeration value="oval"/>
+			<xs:enumeration value="diamond"/>
+		</xs:restriction>
+	</xs:simpleType>
+	
+	<xs:simpleType name="v-align-format">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="center"/>
+			<xs:enumeration value="top"/>
+			<xs:enumeration value="bottom"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="style">
+		<xs:complexType>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="color" type="xs:string" default="0xFDFDFD" />
+			<xs:attribute name="edge-color" type="xs:string"/>
+			<xs:attribute name="edge-dash" type="xs:string" default=""/>
+			<xs:attribute name="edge-start" type="edgeformat" default="none"/>
+			<xs:attribute name="edge-end" type="edgeformat" default="arrow"/>
+			<xs:attribute name="v-align" type="v-align-format" default="center"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="menu">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice minOccurs="1" maxOccurs="unbounded">
+					<xs:element name="item">
+						<xs:complexType>
+							<xs:attribute name="name" type="xs:string" use="required"/>
+							<xs:attribute name="module" type="xs:string" use="required"/>
+						</xs:complexType>
+					</xs:element>
+					<xs:element ref="menu" />
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:simpleType name="fromto">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="null"/>
+			<xs:enumeration value="input"/>
+			<xs:enumeration value="output"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="setongeton">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="object"/>
+			<xs:enumeration value="frame"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:complexType name="connectionmethodtype" >
+		<xs:attribute name="from" type="fromto" use="required"/>
+		<xs:attribute name="to" type="fromto" use="required"/>
+		<xs:attribute name="method" type="method_name" use="required"/>
+	</xs:complexType>
+
+	<xs:simpleType name="parametertype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="boolean"/>
+			<xs:enumeration value="byte"/>
+			<xs:enumeration value="short"/>
+			<xs:enumeration value="integer"/>
+			<xs:enumeration value="long"/>
+			<xs:enumeration value="float"/>
+			<xs:enumeration value="double"/>
+			<xs:enumeration value="string"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="frametype">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="object"/>
+			<xs:enumeration value="frame"/>
+			<xs:enumeration value="noFrame"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="method_name" >
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([a-zA-Z_$]([0-9])*)*"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="class_name" >
+		<xs:restriction base="xs:string">
+			<xs:pattern value="([a-zA-Z_$]([0-9])*)+([.]([a-zA-Z_$]([0-9])*)+)*"/>
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="modular">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="menus">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="menu" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="modules" >
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="module" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="description" minOccurs="0" maxOccurs="1" />
+										<xs:element name="object" type="objecttype" />
+										<xs:element name="frame" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence>
+													<xs:element name="link" minOccurs="0">
+														<xs:complexType>
+															<xs:attribute name="on" type="setongeton" use="required"/>
+															<xs:attribute name="method" type="method_name" use="required"/>
+														</xs:complexType>
+													</xs:element>
+												</xs:sequence>
+												<xs:attribute name="type" type="frametype" use="required"/>
+												<xs:attribute name="class" type="class_name" />
+												<xs:attribute name="lib_id" type="xs:string" />
+												<xs:attribute name="windowed_only" type="xs:boolean" default="false"/>
+											</xs:complexType>
+										</xs:element>
+										<xs:element name="parameter" minOccurs="0" maxOccurs="unbounded">
+											<xs:complexType>
+												<xs:attribute name="name" type="xs:string" use="required"/>
+												<xs:attribute name="type" type="parametertype" use="required"/>
+												<xs:attribute name="default" type="xs:string" use="required"/>
+												<xs:attribute name="set_on" type="setongeton" use="required"/>
+												<xs:attribute name="get_on" type="setongeton" use="required"/>
+												<xs:attribute name="get_method" type="method_name" use="required"/>
+												<xs:attribute name="set_method" type="method_name" use="required"/>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+									<xs:attribute name="name" type="xs:string" use="required"/>
+									<xs:attribute name="style" type="xs:string" default="default"/>
+									<xs:attribute name="restrict" type="xs:nonNegativeInteger" default="0"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+					<xs:key name="modulename" >
+						<xs:selector xpath="module"/>
+						<xs:field xpath="@name"/>
+					</xs:key>
+				</xs:element>
+				<xs:element name="libs" >
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="lib" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:choice minOccurs="0" maxOccurs="unbounded">
+										<xs:element name="depends" type="libdependent"/>
+										<xs:element name="needs">
+											<xs:complexType>
+												<xs:attribute name="path" type="xs:string" use="required"/>
+												<xs:attribute name="targetos" type="xs:string"/> <!-- Usefull ? -->
+											</xs:complexType>
+										</xs:element>
+									</xs:choice>
+								</xs:sequence>
+								<xs:attribute name="id" type="xs:string" use="required"/>
+								<xs:attribute name="path" type="xs:string" use="required"/>
+								<xs:attribute name="licence" type="xs:string" /> <!-- TODO -->
+							</xs:complexType>
+						</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+					<xs:key name="libid" >
+						<xs:selector xpath="lib"/>
+						<xs:field xpath="@id"/>
+					</xs:key>
+				</xs:element>
+				<xs:element name="connectors">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="connector" maxOccurs="unbounded" >
+								<xs:complexType>
+									<xs:all>
+										<xs:element name="input" type="objecttype"/>
+										<xs:element name="output" type="objecttype"/>
+										<xs:element name="connect" type="connectionmethodtype"/>
+										<xs:element name="disconnect" type="connectionmethodtype"/>
+									</xs:all>
+									<xs:attribute name="id" type="xs:string" use="required"/>
+									<xs:attribute name="unique" type="xs:boolean" default="false"/>
+									<xs:attribute name="style" type="xs:string" default="default"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+					<xs:key name="connectionid" >
+						<xs:selector xpath="connection"/>
+						<xs:field xpath="@id"/>
+					</xs:key>
+				</xs:element>
+				<xs:element name="styles" >
+					<xs:complexType>
+						<xs:sequence>
+							<xs:sequence>
+								<xs:element ref="style" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+							<xs:element name="default">
+								<xs:complexType>
+									<xs:attribute name="name" type="xs:string" fixed="default"/>
+									<xs:attribute name="color" type="xs:string" default="0xFDFDFD" />
+                                                                        <xs:attribute name="edge-color" type="xs:string"/>
+                                                                        <xs:attribute name="edge-dash" type="xs:string" fixed=""/>
+                                                                        <xs:attribute name="edge-start" type="edgeformat" fixed="none"/>
+                                                                        <xs:attribute name="edge-end" type="edgeformat" fixed="arrow"/>
+								</xs:complexType>
+							</xs:element>
+							<xs:sequence>
+								<xs:element ref="style" minOccurs="0" maxOccurs="unbounded"/>
+							</xs:sequence>
+						</xs:sequence>
+					</xs:complexType>
+					<xs:key name="stylename" >
+						<xs:selector xpath="./*"/>
+						<xs:field xpath="@name"/>
+					</xs:key>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+		<xs:keyref name="lib_id" refer="libid">
+			<xs:selector xpath=".//*"/>
+			<xs:field xpath="@lib_id"/>
+		</xs:keyref>
+		<xs:keyref name="moduleref" refer="modulename">
+			<xs:selector xpath=".//*"/>
+			<xs:field xpath="@module"/>
+		</xs:keyref>
+		<xs:keyref name="style" refer="stylename">
+			<xs:selector xpath=".//module"/>
+			<xs:field xpath="@style"/>
+		</xs:keyref>
+	</xs:element>
+	
+	<xs:element name="element">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="parameter" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:attribute name="name" type="xs:string" use="required"/>
+						<xs:attribute name="value" type="xs:string" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="window" minOccurs="0" maxOccurs="1">
+					<xs:complexType>
+						<xs:attribute name="visible" type="xs:boolean" use="required"/>
+						<xs:attribute name="x" type="xs:integer" use="required"/>
+						<xs:attribute name="y" type="xs:integer" use="required"/>
+						<xs:attribute name="w" type="xs:integer" use="required"/>
+						<xs:attribute name="h" type="xs:integer" use="required"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="element" minOccurs="0" maxOccurs="unbounded" />
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:string" use="required"/>
+			<xs:attribute name="module" type="xs:string" use="required"/>
+			<xs:attribute name="name" type="xs:string" use="required"/>
+			<xs:attribute name="x" type="xs:decimal" use="required"/>
+			<xs:attribute name="y" type="xs:decimal" use="required"/>
+			<xs:attribute name="w" type="xs:decimal" use="required"/>
+			<xs:attribute name="h" type="xs:decimal" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="modulated">
+		<xs:complexType>
+			<xs:all>
+				<xs:element name="elements">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="element" minOccurs="0" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+					<xs:key name="elementid" >
+						<xs:selector xpath=".//element"/>
+						<xs:field xpath="@id"/>
+					</xs:key>
+				</xs:element>
+				<xs:element name="connections" >
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="connection" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:attribute name="connector" type="xs:string" use="required"/>
+									<xs:attribute name="source" type="xs:string" use="required"/>
+									<xs:attribute name="target" type="xs:string" use="required"/>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:all>
+		</xs:complexType>
+		<xs:keyref name="elementidsource" refer="elementid">
+			<xs:selector xpath=".//connection"/>
+			<xs:field xpath="@source"/>
+		</xs:keyref>
+		<xs:keyref name="elementidtarget" refer="elementid">
+			<xs:selector xpath=".//connection"/>
+			<xs:field xpath="@target"/>
+		</xs:keyref>
+	</xs:element>
+</xs:schema>

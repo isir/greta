@@ -147,19 +147,24 @@ RUN echo '#!/bin/bash' > /app/start-greta.sh && \
     echo 'echo "Main JAR: $MAIN_JAR"' >> /app/start-greta.sh && \
     echo 'echo "Available Memory: $HEAP_SIZE MB"' >> /app/start-greta.sh && \
     echo '' >> /app/start-greta.sh && \
-    echo '# In Docker, always run in headless mode' >> /app/start-greta.sh && \
-    echo 'echo "Starting in headless mode for Docker container..."' >> /app/start-greta.sh && \
-    echo 'if [ -f "HeadlessServer.class" ]; then' >> /app/start-greta.sh && \
-    echo '    echo "Starting HeadlessServer on port 8080..."' >> /app/start-greta.sh && \
-    echo '    exec java HeadlessServer' >> /app/start-greta.sh && \
+    echo '# Check if we have X11 display' >> /app/start-greta.sh && \
+    echo 'if [ ! -z "$DISPLAY" ]; then' >> /app/start-greta.sh && \
+    echo '    echo "Display detected: $DISPLAY"' >> /app/start-greta.sh && \
+    echo '    echo "Starting Greta GUI application..."' >> /app/start-greta.sh && \
+    echo '    exec java $JAVA_OPTS -jar "$MAIN_JAR" "$@"' >> /app/start-greta.sh && \
     echo 'else' >> /app/start-greta.sh && \
-    echo '    echo "HeadlessServer.class not found, keeping container alive..."' >> /app/start-greta.sh && \
-    echo '    echo "Container is running. Access via: docker exec -it greta-dev bash"' >> /app/start-greta.sh && \
-    echo '    # Keep container running with a simple process' >> /app/start-greta.sh && \
-    echo '    while true; do' >> /app/start-greta.sh && \
-    echo '        echo "[$(date)] Greta container running in headless mode"' >> /app/start-greta.sh && \
-    echo '        sleep 60' >> /app/start-greta.sh && \
-    echo '    done' >> /app/start-greta.sh && \
+    echo '    echo "No display detected, starting in headless mode..."' >> /app/start-greta.sh && \
+    echo '    if [ -f "HeadlessServer.class" ]; then' >> /app/start-greta.sh && \
+    echo '        echo "Starting HeadlessServer on port 8080..."' >> /app/start-greta.sh && \
+    echo '        exec java HeadlessServer' >> /app/start-greta.sh && \
+    echo '    else' >> /app/start-greta.sh && \
+    echo '        echo "HeadlessServer.class not found, keeping container alive..."' >> /app/start-greta.sh && \
+    echo '        echo "Container is running. Access via: docker exec -it greta-dev bash"' >> /app/start-greta.sh && \
+    echo '        while true; do' >> /app/start-greta.sh && \
+    echo '            echo "[$(date)] Greta container running in headless mode"' >> /app/start-greta.sh && \
+    echo '            sleep 60' >> /app/start-greta.sh && \
+    echo '        done' >> /app/start-greta.sh && \
+    echo '    fi' >> /app/start-greta.sh && \
     echo 'fi' >> /app/start-greta.sh
 RUN chmod +x /app/start-greta.sh
 

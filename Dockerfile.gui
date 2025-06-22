@@ -1,0 +1,42 @@
+# GUI-enabled Dockerfile for Greta Platform
+FROM eclipse-temurin:11-jdk
+
+# Install X11 and GUI dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    # X11 libraries
+    libx11-6 libxext-6 libxrender1 libxtst6 libxi6 libxrandr2 \
+    # GTK and desktop integration
+    libgtk-3-0 libgtk2.0-0 \
+    # Fonts
+    fonts-dejavu-core fonts-dejavu-extra \
+    # Audio
+    libasound2 \
+    # Graphics
+    mesa-utils libgl1-mesa-glx libgl1-mesa-dri \
+    # Utilities
+    x11-utils x11-xserver-utils \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Create user
+RUN groupadd -g 1001 greta && \
+    useradd -r -u 1001 -g greta -s /bin/bash -m greta
+
+# Set working directory
+WORKDIR /app
+
+# Copy the built artifacts from your local system
+COPY --chown=greta:greta application/*/target/*.jar ./
+COPY --chown=greta:greta core/*/target/*.jar ./lib/
+COPY --chown=greta:greta auxiliary/*/target/*.jar ./lib/
+COPY --chown=greta:greta bin/Common/Data/ ./data/
+
+# Switch to greta user
+USER greta
+
+# Set environment
+ENV GRETA_HOME=/app \
+    GRETA_DATA=/app/data
+
+# Default command - run the GUI application
+CMD ["java", "-jar", "greta-application-modular-1.0.0-SNAPSHOT.jar"]

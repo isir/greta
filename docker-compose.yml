@@ -22,6 +22,7 @@ services:
       - JAVA_OPTS=-Xmx2g -Xms512m -XX:+UseG1GC -Dfile.encoding=UTF-8
       - GRETA_LOG_LEVEL=DEBUG
       - TZ=UTC
+      - DISPLAY=  # Explicitly unset DISPLAY to force headless mode
       # - DISPLAY=host.docker.internal:0  # Uncomment for GUI mode
     
     # Enable GUI applications (requires X11 forwarding)

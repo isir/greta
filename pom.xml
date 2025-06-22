@@ -95,6 +95,16 @@
         <!-- TTS Modules -->
         <module>auxiliary/TTS/AzureTTS</module>
         <module>auxiliary/TTS/MaryTTS</module>
+        <module>auxiliary/TTS/CereProc</module>
+        <module>auxiliary/TTS/Voxygen</module>
+        
+        <!-- Core System Modules -->
+        <module>auxiliary/Microphone</module>
+        <module>auxiliary/OSC</module>
+        <module>auxiliary/TurnManagement</module>
+        
+        <!-- 3D Player -->
+        <module>auxiliary/Player/Ogre</module>
         
         <!-- Application -->
         <module>application/Modular</module>

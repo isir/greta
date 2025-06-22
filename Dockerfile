@@ -74,12 +74,15 @@ FROM eclipse-temurin:11-jdk AS runtime
 
 # Install runtime dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    # Basic X11 support for GUI compatibility
-    libx11-6 libxext6 libxrender1 libxtst6 \
-    # Font support
-    fontconfig \
+    # Essential X11 libraries for GUI
+    libx11-6 libxext6 libxrender1 libxtst6 libxi6 libxrandr2 \
+    libxinerama1 libxcursor1 libxcomposite1 libxdamage1 libxfixes3 \
+    # Font and graphics support
+    fontconfig fonts-dejavu-core \
     # Audio support
     libasound2t64 \
+    # Additional GUI dependencies
+    libgtk-3-0 libcairo2 libpango-1.0-0 libgdk-pixbuf-2.0-0 \
     || echo "Some packages failed to install, continuing..." \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*

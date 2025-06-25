@@ -65,7 +65,7 @@ bin/Common/Data/AzureTTS/python_log.txt
 
 bin/Common/Data/MICounselorRL/logs/log_*
 
-bin\Common\Data\DiffSHEG\checkpoints\beat\beat_GesExpr_unify_addHubert_encodeHubert_mlpIncludeX_condRes_LN\model\fgd_best.tar
+bin/Common/Data/DiffSHEG/checkpoints/beat/beat_GesExpr_unify_addHubert_encodeHubert_mlpIncludeX_condRes_LN/model/fgd_best.tar
 
 bin/Examples/NotNecessary
 backup

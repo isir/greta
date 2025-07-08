@@ -1,14 +1,17 @@
 package greta.auxiliary.DiffSHEG;
 
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.feedbacks.Callback;
 import greta.core.feedbacks.FeedbackPerformer;
-import greta.core.signals.SpeechSignal;
-import greta.core.util.id.ID;
-import greta.core.util.time.TimeMarker;
+import greta.core.intentions.IntentionPerformer;
 
 import java.io.IOException;
 import java.util.List;
-import greta.core.util.time.Temporizable;
+
+/**
+ *
+ * @author Leroux Paul
+ */
 
 public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerformer {
     private DiffSHEG diffSHEG;
@@ -19,12 +22,23 @@ public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerform
         diffSHEG = new DiffSHEG(null);
     }
 
-    @Override
+    public void addBAPFramePerformer(BAPFramePerformer performer) {
+        if (diffSHEG != null) {
+            diffSHEG.addBAPFramePerformer(performer);
+        }
+    }
+
     public void performFeedback(String type) {
         System.out.println("DiffSHEGFrame received feedback: " + type);
         if (type.equals("start") || type.equals("end")) {
             diffSHEG.sendFeedbackToPython(type);
         }
+    }
+
+    private void initComponents() {
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("DiffSHEG Controller");
+        pack();
     }
     
     @Override
@@ -41,10 +55,6 @@ public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerform
     public void performFeedback(Callback clbck) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-    public void performFeedback(String str) {
-        turnManager.performFeedback(str);
-    }    
     
     @Override
     public void setDetailsOption(boolean bln) {
@@ -84,14 +94,4 @@ public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerform
     private javax.swing.JLabel jLabel1;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
-
-    public void addIntentionPerformer(IntentionPerformer performer) {
-        performers = turnManager.getPerformers();
-        performers.add(performer);
-    }
-    
-    public void removeIntentionPerformer(IntentionPerformer performer) {
-        performers.remove(performer);
-    }
-    
 }

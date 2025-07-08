@@ -1,6 +1,5 @@
 package greta.auxiliary.DiffSHEG;
 
-import greta.auxiliary.BVHMocap.BapAnimationConverter;
 import greta.core.animation.mpeg4.bap.BAPFrame;
 import greta.core.animation.mpeg4.bap.BAPType;
 import greta.core.animation.mpeg4.bap.JointType;
@@ -13,6 +12,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+/**
+ *
+ * @author Leroux Paul
+ */
 
 public class BVHProcessor {
 
@@ -63,7 +67,7 @@ public class BVHProcessor {
         }
     }
 
-    public BAPFrame convertLineToBap(String frameLine) {
+    public BAPFrame convertLineToBAP(String frameLine) {
         String[] values = frameLine.trim().split("\\s+");
         if (values.length != channelOrder.size()) {
             System.err.println("Error: Motion data size (" + values.length + ") does not match expected channel count (" + channelOrder.size() + ")");
@@ -77,8 +81,8 @@ public class BVHProcessor {
             BVHChannelInfo info = channelOrder.get(i);
             float value = Float.parseFloat(values[i]);
 
-            eulerAngles.putIfAbsent(info.jointName, new Vec3d(0, 0, 0));
-            Vec3d angles = eulerAngles.get(info.jointName);
+            eulerAngles.putIfAbsent(info.JointName, new Vec3d(0, 0, 0));
+            Vec3d angles = eulerAngles.get(info.JointName);
 
             String channelTypeLower = info.channelType.toLowerCase();
             switch (channelTypeLower) {
@@ -97,7 +101,7 @@ public class BVHProcessor {
             String bvhJointName = entry.getKey();
             Vec3d angles = entry.getValue();
         
-            Quaternion rotation = JointQuaternion(angles.x(), angles.y(), angles.z(), this.eulerAngleOrder);
+            Quaternion rotation = JointQuaternion((float) angles.x(), (float) angles.y(), (float) angles.z(), this.eulerAngleOrder);
 
             String bapJointName = dictionary.GetJointName(bvhJointName);
             if (bapJointName != null && !bapJointName.isEmpty()) {
@@ -118,13 +122,61 @@ public class BVHProcessor {
         Quaternion rotationz = new Quaternion(new Vec3d(0, 0, 1), (float) Math.toRadians(vz));
 
         switch (eulerOrder) {
-            case 120: q = rotationz.multiply(rotationx).multiply(rotationy); break; // ZXY
-            case 102: q = rotationy.multiply(rotationx).multiply(rotationz); break; // YXZ
-            case 12:  q = rotationx.multiply(rotationy).multiply(rotationz); break; // XYZ
-            case 21:  q = rotationx.multiply(rotationz).multiply(rotationy); break; // XZY
-            case 210: q = rotationz.multiply(rotationy).multiply(rotationx); break; // ZYX
-            case 201: q = rotationy.multiply(rotationz).multiply(rotationx); break; // YZX
-            default:  q = rotationx.multiply(rotationy).multiply(rotationz); break; // Default to XYZ
+            case 120://zxy
+            {
+                q = Quaternion.multiplication(q, rotationz);//z x y
+                q = Quaternion.multiplication(q, rotationx);
+                q = Quaternion.multiplication(q, rotationy);
+                //System.out.println("zxy");
+                break;
+            }
+            case 102://yxz
+            {
+                q = Quaternion.multiplication(q, rotationy);//yxz
+                q = Quaternion.multiplication(q, rotationx);
+                q = Quaternion.multiplication(q, rotationz);
+                // System.out.println("yxz");
+                break;
+            }
+            case 012://xyz
+            {
+                q = Quaternion.multiplication(q, rotationx);
+                q = Quaternion.multiplication(q, rotationy);
+                q = Quaternion.multiplication(q, rotationz);
+//             System.out.println("xyz");
+                break;
+            }
+            case 021://xzy
+            {
+                q = Quaternion.multiplication(q, rotationx);
+                q = Quaternion.multiplication(q, rotationz);
+                q = Quaternion.multiplication(q, rotationy);
+//             System.out.println("xzy");
+                break;
+            }
+            case 210://zyx
+            {
+                q = Quaternion.multiplication(q, rotationz);
+                q = Quaternion.multiplication(q, rotationy);
+                q = Quaternion.multiplication(q, rotationx);
+//             System.out.println("zyx");
+                break;
+            }
+            case 201://yzx
+            {
+                q = Quaternion.multiplication(q, rotationy);
+                q = Quaternion.multiplication(q, rotationz);
+                q = Quaternion.multiplication(q, rotationx);
+//             System.out.println("yzx");
+                break;
+                 
+            }
+            default:// Default to XYZ
+            {
+                q = Quaternion.multiplication(q, rotationx);
+                q = Quaternion.multiplication(q, rotationy);
+                q = Quaternion.multiplication(q, rotationz);
+            }
         }
         return q;
     }
@@ -152,24 +204,43 @@ public class BVHProcessor {
 }
 
 class BapAnimationConverter {
-    public BAPFrame setBAPframeRotation(BAPFrame frame, String jointName, Quaternion q) {
-        JointType joint = JointType.get(jointName);
-        if (joint != null) {
-            Vec3d angles = q.getEulerAngleXYZ(); // Using a consistent final representation
-            if(joint.rotationX != null) frame.setRadianValue(joint.rotationX, angles.x());
-            if(joint.rotationY != null) frame.setRadianValue(joint.rotationY, angles.y());
-            if(joint.rotationZ != null) frame.setRadianValue(joint.rotationZ, angles.z());
-        }
-        return frame;
+    public BAPFrame setBAPframeRotation(BAPFrame bapframe, String name, Quaternion q) {
+
+
+    JointType joint = JointType.get(name);
+
+    BAPType tx = joint.rotationX;
+    BAPType ty = joint.rotationY;
+    BAPType tz = joint.rotationZ;
+    // System.out.println(name);
+    Vec3d angle = q.getEulerAngleXYZ();
+
+    bapframe.setRadianValue(tx, angle.x());
+    bapframe.setRadianValue(ty, angle.y());
+    bapframe.setRadianValue(tz, angle.z());
+
+    return bapframe;
     }
 
     public BAPFrame setBAPframeTranslation(BAPFrame frame, String jointName, Vec3d t) {
         JointType joint = JointType.get(jointName);
-        if (joint != null) {
-            if(joint.translationX != null) frame.setRadianValue(joint.translationX, t.x());
-            if(joint.translationY != null) frame.setRadianValue(joint.translationY, t.y());
-            if(joint.translationZ != null) frame.setRadianValue(joint.translationZ, t.z());
-        }
+        if (joint != JointType.HumanoidRoot) {
+        // Only the root is allowed to translate
         return frame;
-    }
+        }
+
+        BAPType tx = BAPType.HumanoidRoot_tr_lateral;
+        BAPType ty = BAPType.HumanoidRoot_tr_vertical;
+        BAPType tz = BAPType.HumanoidRoot_tr_frontal;
+
+        double valuex = t.x() * 10;
+        double valuey = t.y() * 10;
+        double valuez = t.z() * 10;
+
+        frame.applyValue(tx, ((Number)valuex).intValue());
+        frame.applyValue(ty, ((Number)valuey).intValue());
+        frame.applyValue(tz, ((Number)valuez).intValue());
+
+    return frame;
+}
 }

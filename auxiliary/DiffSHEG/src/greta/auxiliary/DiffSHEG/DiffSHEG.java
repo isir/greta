@@ -7,65 +7,30 @@ package greta.auxiliary.DiffSHEG;
 
 import greta.auxiliary.DiffSHEG.BVHProcessor;
 
-import greta.core.animation.common.Skeleton;
-import greta.core.intentions.Intention;
-import greta.core.intentions.IntentionPerformer;
-import greta.core.intentions.FMLTranslator;
-import greta.core.signals.Signal;
-import greta.core.signals.SignalPerformer;
-import greta.core.signals.BMLTranslator;
+
 import greta.core.util.CharacterManager;
-import greta.core.util.Mode;
-import greta.core.util.enums.CompositionType;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
-import greta.core.util.xml.XML;
-import greta.core.util.xml.XMLParser;
-import greta.core.util.xml.XMLTree;
 import greta.core.animation.mpeg4.bap.BAPFrame;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
+import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
 import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.StringReader;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.nio.charset.StandardCharsets;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 
-import javax.jms.JMSException;
 /**
  *
  * @author Leroux Paul
  */
-public class DiffSHEG {
+public class DiffSHEG implements BAPFrameEmitter {
     private final String base_bvh_path = "Common\\Data\\DiffSHEG\\data\\GRETA\\Base_greta_fingers_bis.bvh";
     private final String python_env_checker_path = "Common\\Data\\DiffSHEG\\check_env.py";
     private final String batch_env_installer_path = "Common\\Data\\DiffSHEG\\init_env.bat";
@@ -86,7 +51,10 @@ public class DiffSHEG {
 
     private CharacterManager cm;
 
+    private final BAPFrameEmitterImpl bapFrameEmitterImpl = new BAPFrameEmitterImpl();
+
     public DiffSHEG (CharacterManager cm) throws IOException {
+        this.cm = cm;
         System.out.println("greta.auxiliary.DiffSHEG.DiffSHEG()");
         
         feedback_server = new Server(); 
@@ -106,41 +74,26 @@ public class DiffSHEG {
             e.printStackTrace();
         }
         ///////////////////////
-        // Check environment
-        ///////////////////////
-
-        try{
-            server_process = new ProcessBuilder("python", python_env_checker_path).redirectErrorStream(true).start();
-            // server_process.waitFor();
-        } catch (Exception e){
-           e.printStackTrace();
-        }
-        inputStream = server_process.getInputStream();
-        result = new BufferedReader(
-                new InputStreamReader(inputStream, StandardCharsets.UTF_8))
-                .lines()
-                .collect(Collectors.joining("\n")
-                );
-        System.out.println(".init_DiffSHEG_server(): DiffSHEG, python env exist: " + result);        
+        // Check environment ; Create environment if not exit
+        ///////////////////////    
         
-        ///////////////////////
-        // Create environment if not exit
-        ///////////////////////
-
         checkAndInstallEnvironment();
+
+        ///////////////////////
+        // Start Servers and Python
+        ///////////////////////    
 
         startServersAndPython();
     }
 
-        
-    public void sendFeedbackToPython(String type) {
-        try {
-            System.out.println("Sending feedback to Python: " + type);
-            feedback_server.sendMessage(type);
-            feedback_server.receiveMessage(); // Wait for 'ok' acknowledgment
-        } catch (IOException e) {
-            System.err.println("Failed to send feedback to python: " + e.getMessage());
-        }
+    @Override
+    public void addBAPFramePerformer(BAPFramePerformer perfomer) {
+        this.bapFrameEmitterImpl.addBAPFramePerformer(perfomer);
+    }
+
+    @Override
+    public void removeBAPFramePerformer(BAPFramePerformer performer) {
+        this.bapFrameEmitterImpl.removeBAPFramePerformer(performer);
     }
 
     private void startServersAndPython() {
@@ -152,7 +105,7 @@ public class DiffSHEG {
             } catch (IOException ex) {
                 Logger.getLogger(DiffSHEG.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }).start()
+        }).start();
     
         new Thread(() -> {
             try {
@@ -184,28 +137,7 @@ public class DiffSHEG {
             e.printStackTrace();
         }
     }
-
-    private void receiveGestureDataLoop() {
-        System.out.println("Starting gesture reception loop...");
-        while (true) {
-            try {
-                String bvhFrameLine = gesture_server.receiveMessage();
-                if (bvhFrameLine != null && !bvhFrameLine.isEmpty()) {
-
-                    BAPFrame bapFrame = bvhProcessor.convertLineToBAP(bvhFrameLine);
-
-                    if (bapFrame != null) {
-                        // HHHHHHHHEEEEEEEEEEEEEEEERRRRRRRRRRRRRREEEEEEEEEEE
-                    }
-
-                    gesture_server.sendMessage("ok");
-                }
-            } catch (IOException e) {
-                System.err.println("Connection lost with Python script: " + e.getMessage());
-                break;
-            }
-        }
-    }
+    
     private void checkAndInstallEnvironment() throws IOException {
         try { //
             server_process = new ProcessBuilder("python", python_env_checker_path).redirectErrorStream(true).start(); //
@@ -224,6 +156,39 @@ public class DiffSHEG {
             } catch (Exception e) { //
                 e.printStackTrace(); //
             }
+        }
+    }
+
+    private void receiveGestureDataLoop() {
+        System.out.println("Starting gesture reception loop...");
+        while (true) {
+            try {
+                String bvhFrameLine = gesture_server.receiveMessage();
+                if (bvhFrameLine != null && !bvhFrameLine.isEmpty()) {
+
+                    BAPFrame bapFrame = bvhProcessor.convertLineToBAP(bvhFrameLine);
+
+                    if (bapFrame != null) {
+                        ID id = IDProvider.createID("DiffSHEG_GESTURE");
+                        bapFrameEmitterImpl.sendBAPFrame(id, bapFrame);
+                    }
+
+                    gesture_server.sendMessage("ok");
+                }
+            } catch (IOException e) {
+                System.err.println("Connection lost with Python script: " + e.getMessage());
+                break;
+            }
+        }
+    }
+
+    public void sendFeedbackToPython(String type) {
+        try {
+            System.out.println("Sending feedback to Python: " + type);
+            feedback_server.sendMessage(type);
+            feedback_server.receiveMessage(); // Wait for 'ok' acknowledgment
+        } catch (IOException e) {
+            System.err.println("Failed to send feedback to python: " + e.getMessage());
         }
     }
 }

@@ -5,7 +5,7 @@
  */
 package greta.auxiliary.DiffSHEG;
 
-import greta.auxiliary.DiffSHEG.BVHFrameToBAPFrame;
+import greta.auxiliary.DiffSHEG.BVHProcessor;
 
 import greta.core.animation.common.Skeleton;
 import greta.core.intentions.Intention;
@@ -22,6 +22,8 @@ import greta.core.util.id.IDProvider;
 import greta.core.util.xml.XML;
 import greta.core.util.xml.XMLParser;
 import greta.core.util.xml.XMLTree;
+import greta.core.animation.mpeg4.bap.BAPFrame;
+import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -71,39 +73,36 @@ public class DiffSHEG {
     private final String batch_kill_path = "Common\\Data\\DiffSHEG\\kill_server.bat";
     private Process server_process;
 
-    private Server DiffSHEG_server;
+    private Thread server_shutdownHook;
+
+    private Server feedback_server;
+    private String response;
+
+    private Server gesture_server;
     private InputStream inputStream;
     private String result;
 
-    private Server input_server;
-    private String audio;
-
-    private BVHFrameToBAPFrame frameConverter;
+    private BVHProcessor bvhProcessor;
 
     private CharacterManager cm;
-    
-    /**
-     *
-     * @throws IOException
-     */
 
     public DiffSHEG (CharacterManager cm) throws IOException {
         System.out.println("greta.auxiliary.DiffSHEG.DiffSHEG()");
         
-        input_server = new Server();
-        input_server.setAddress("localhost");
-        input_server.setPort("6501");
+        feedback_server = new Server(); 
+        feedback_server.setAddress("localhost"); 
+        feedback_server.setPort("6500"); 
 
 
-        DiffSHEG_server = new Server();
-        DiffSHEG_server.setAddress("localhost");
-        DiffSHEG_server.setPort("6500");
+        gesture_server = new Server();
+        gesture_server.setAddress("localhost"); 
+        gesture_server.setPort("6501"); 
 
-        frameConverter = new BVHFrameToBAPFrame();
+        bvhProcessor = new BVHProcessor();
         try (BufferedReader br = new BufferedReader(new FileReader(base_bvh_path))) {
-            Skeleton skeleton = frameConverter.BVHSkeleton(br);
-            frameConverter.setSkeleton(skeleton);
+            bvhProcessor.parseBVHHeader(br);
         } catch (IOException e) {
+            System.err.println("FATAL: Could not read BVH header file. " + e.getMessage());
             e.printStackTrace();
         }
         ///////////////////////
@@ -128,18 +127,103 @@ public class DiffSHEG {
         // Create environment if not exit
         ///////////////////////
 
-        if(result.equals("0")){
-            System.out.println(".init_DiffSHEG_server(): DiffSHEG, installing python environment...");
-            try{
-                server_process = new ProcessBuilder(batch_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
-                server_process.waitFor();
-            } catch (Exception e){
-                e.printStackTrace();
-            }            
-        }
+        checkAndInstallEnvironment();
 
-
-    
+        startServersAndPython();
     }
 
+        
+    public void sendFeedbackToPython(String type) {
+        try {
+            System.out.println("Sending feedback to Python: " + type);
+            feedback_server.sendMessage(type);
+            feedback_server.receiveMessage(); // Wait for 'ok' acknowledgment
+        } catch (IOException e) {
+            System.err.println("Failed to send feedback to python: " + e.getMessage());
+        }
+    }
+
+    private void startServersAndPython() {
+        new Thread(() -> {
+            try {
+                System.out.println("Feedback server waiting for connection on port 6500...");
+                feedback_server.startConnection();
+                System.out.println("Feedback server connected.");
+            } catch (IOException ex) {
+                Logger.getLogger(DiffSHEG.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start()
+    
+        new Thread(() -> {
+            try {
+                System.out.println("Gesture server waiting for connection on port 6501...");
+                gesture_server.startConnection();
+                System.out.println("Gesture server connected.");
+                // Once connected, send a confirmation to Python
+                gesture_server.sendMessage("ok");
+
+                // Start the main loop to receive gesture data
+                receiveGestureDataLoop();
+
+            } catch (IOException ex) {
+                Logger.getLogger(DiffSHEG.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }).start();
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            System.out.println("Launching Python script: " + batch_main_path);
+            server_process = new ProcessBuilder(batch_main_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+            Runtime.getRuntime().addShutdownHook(new shutdownHook(server_process, batch_kill_path)); // Your hook
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void receiveGestureDataLoop() {
+        System.out.println("Starting gesture reception loop...");
+        while (true) {
+            try {
+                String bvhFrameLine = gesture_server.receiveMessage();
+                if (bvhFrameLine != null && !bvhFrameLine.isEmpty()) {
+
+                    BAPFrame bapFrame = bvhProcessor.convertLineToBAP(bvhFrameLine);
+
+                    if (bapFrame != null) {
+                        // HHHHHHHHEEEEEEEEEEEEEEEERRRRRRRRRRRRRREEEEEEEEEEE
+                    }
+
+                    gesture_server.sendMessage("ok");
+                }
+            } catch (IOException e) {
+                System.err.println("Connection lost with Python script: " + e.getMessage());
+                break;
+            }
+        }
+    }
+    private void checkAndInstallEnvironment() throws IOException {
+        try { //
+            server_process = new ProcessBuilder("python", python_env_checker_path).redirectErrorStream(true).start(); //
+        } catch (Exception e) { //
+            e.printStackTrace(); //
+        }
+        InputStream inputStream = server_process.getInputStream(); //
+        result = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8)).lines().collect(Collectors.joining("\n")); //
+        System.out.println(".init_DiffSHEG_server(): DiffSHEG, python env exist: " + result); //
+
+        if (result.equals("0")) { //
+            System.out.println(".init_DiffSHEG_server(): DiffSHEG, installing python environment..."); //
+            try { //
+                server_process = new ProcessBuilder(batch_env_installer_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start(); //
+                server_process.waitFor(); //
+            } catch (Exception e) { //
+                e.printStackTrace(); //
+            }
+        }
+    }
 }

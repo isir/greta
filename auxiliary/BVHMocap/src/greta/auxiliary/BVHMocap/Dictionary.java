@@ -112,7 +112,7 @@ public class Dictionary {
         dict.put("RightElbow", "r_elbow");
         dict.put("RightHand", "r_wrist");
         dict.put("RightWrist", "r_wrist");
-        dict.put("RighttHandThumb1", "r_thumb1");
+        dict.put("RightHandThumb1", "r_thumb1");
         dict.put("RightHandThumb2", "r_thumb2");
         dict.put("RightHandThumb3", "r_thumb3");
         dict.put("RightHandThumb4", "r_thumb4");

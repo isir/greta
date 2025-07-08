@@ -1,10 +1,13 @@
-import numpy
+import numpy as np
 import os
 import socket
 import json
 from os.path import join as pjoin
 import queue
 import time
+from threading import Thread, Lock
+import librosa
+import traceback
 
 #import utils.paramUtil as paramUtil
 from options.train_options import TrainCompOptions
@@ -32,7 +35,7 @@ import torch.utils.data.distributed
 import sys
 sys.path.append(os.path.join(sys.path[2], "A_TalkSHOW_ori"))
 
-
+agent_speaking_state = False
 
 def build_models(opt, dim_pose, audio_dim=128, audio_latent_dim=256, style_dim=4):
     if opt.unidiffuser:
@@ -69,51 +72,10 @@ def build_fgd_val_model(opt):
     #print(f"init 'HalfEmbeddingNet' success")
     return eval_model
 
-def start_realtime_loop(runner, test_dataset, host="localhost", port=6500,
-                        SR=16000, hop_size=1200, buffer_sec=10):
-    print("starting loop")
-
-
-    receiver = SimpleReceiver(host=host, port=port)
-    sender = SimpleSender(host=host, port=port+1)
-
-    receiver.connect()
-    sender.connect()
-
-    buffer_audio = []
-
-    try:
-        while True:
-            header = receiver.sock.recv(4).decode()
-            if header == "kill":
-                print("[Server] Kill command received. Exiting.")
-                break
-            elif header == "audi":
-                length_bytes = receiver.sock.recv(4)
-                total_len = struct.unpack('>I', length_bytes)[0]
-                payload = b""
-                while len(payload) < total_len:
-                    payload += receiver.sock.recv(total_len - len(payload))
-                audio_array = pickle.loads(payload)
-                print(f"[Receiver] Received audio array of shape {audio_array.shape}")
-
-                gen = runner.generate_realtime_frame(audio_array, buffer_audio, test_dataset, hop_size=hop_size, sr=SR)
-                for frame in gen:
-                    sender.send_frame(frame)
-    # Keyboardinterrupt for now
-    except KeyboardInterrupt:
-        print("Loop Stopped by keyboard (to change)")
-
-
-            
-            
-
-    
-
-
-
-
 def main():
+    
+    print("[DiffSHEG Greta] Python start")
+
     parser = TrainCompOptions()
     opt = parser.parse()
 
@@ -141,8 +103,197 @@ def main():
     model.to(opt.device)
 
     runner = ddpm_beat_trainer(opt,model)
+    
+    text_buffer_size = 1024
 
-    start_realtime_loop(runner, test_dataset)
+    feedback_server_host = socket.gethostname()
+    feedback_server_port = 6500
+    
+    greta_host = socket.gethostname()
+    greta_port = 6501
 
-if __name__=='__main()__':
+    system_ready = False
+
+    global_lock = Lock()
+
+    feedback_socket = socket.socket()
+    try:
+        feedback_socket.connect((feedback_server_host, feedback_server_port))
+    except ConnectionRefusedError:
+        print(f"[DiffSHEG Greta] Feedback server not available at {feedback_server_host}:{feedback_server_port}. Exiting.")
+        return
+    
+    feedback_thread = Thread(target=feedback_loop, args= (feedback_socket, global_lock, text_buffer_size))
+    feedback_thread.start()
+
+    greta_socket = socket.socket()
+    try:
+        greta_socket.connecr((greta_host,greta_port))
+    except ConnectionRefusedError:
+        print(f"[DiffSHEG Greta] greta server not available at {greta_host}:{greta_port}. Exiting.")
+        return
+    greta_socket.connect((greta_host, greta_port))
+
+    
+
+    agent_audio_path = "../../../output.wav"
+    audio_sr = 16000
+    audio_buffer = np.zeros(int(audio_sr * 10.0))
+    agent = Agent(agent_audio_path, audio_sr, 10.0)
+    gesture_generator = None
+    while True:
+        try:
+            with global_lock:
+                is_speaking = agent_speaking_state
+
+                if is_speaking:
+                    if gesture_generator == None:
+                        print("[DiffSHEG Greta] Agent started speaking. Initializing gesture generator.")
+                        initial_audio_chunk = np.zeros(1200, dtype=np.float32)
+                        gesture_generator = runner.generate_realtime_frame(initial_audio_chunk, [], test_dataset)
+                    current_audio_chunk, _ = agent.get(audio_buffer)
+
+                    if gesture_generator:
+                        try:
+                            generated_motion = next(gesture_generator)
+
+                            motion_str = ' '.join(map(str,generated_motion))
+
+                            greta_socket.send('{}\r\n'.format(motion_str).encode())
+
+                            greta_socket.recv(text_buffer_size)
+                        except StopIteration:
+                            gesture_generator = None
+                            print("[DiffSHEG Greta] Gesture generator finished.")
+                else:
+                    if gesture_generator is not None:
+                        print("[DiffSHEG Greta] Agent stopped speaking")
+                        gesture_generator = None
+                    time.sleep(0.01)
+                time.sleep(1)
+            
+        except KeyboardInterrupt:
+            print("[DiffSHEG Greta] Keyboard interrupt")
+            break
+        except Exception as e:
+            print(f"[DiffSHEG Greta] Error in main loop: {e}")
+            traceback.print_exc()
+            break
+
+    feedback_socket.close()
+    greta_socket.close()
+
+    print("[DiffSHEG Greta] Python end")
+                        
+
+class Agent:
+    def __init__(self, agent_audio_path="output.wav", rate=16000, input_length=20.0):
+        self.audio_path = agent_audio_path
+        self.rate = rate
+        self.input_length = input_length
+        self.agent_speech = None
+    
+    def get(self, prev_chunk):
+        if agent_speaking_state:
+
+            if self.agent_speech is None:
+                print("[DiffSHEG Agent] Agent started speaking, loading new audio file.")
+                self.agent_speech = AgentSpeech(self.audio_path, self.rate, self.input_length)
+            
+            curr_chunk, OVER = self.agent_speech.get(prev_chunk)
+
+            if OVER:
+                self.agent_speech = None
+            return curr_chunk, OVER
+        else:
+            silence = np.zeros(int(self.rate * 0.1), dtype=np.float32)
+            curr_chunk = np.concatenate((prev_chunk, silence))[-int(self.rate * self.input_length):]
+            self.agent_speech = None
+            return curr_chunk, True
+
+class AgentSpeech:
+    def __init__(self, audio_path="output.wav", rate=16000, input_length=20.0):
+        self.rate = rate
+        self.input_length = input_length
+        self.audio = None
+        self.s_time = time.time()
+        self.duration = 0
+        self.curr_index = 0
+        self.OVER = False
+
+        for _ in range(5):
+            try:
+                self.audio, sr = librosa.load(audio_path, sr=self.rate, mono=True)
+                self.duration = librosa.get_duration(y=self.audio, sr=sr)
+                if self.duration > 0:
+                    print(f"[DiffSHEG AgentSpeech] Loaded audio file '{audio_path}' with duration: {self.duration:.2f}s")
+                    break
+            except Exception as e:
+                print(f"Waiting for audio file to be ready... ({e})")
+                time.sleep(0.1)
+
+        if self.audio is None:
+             print(f"[DiffSHEG AgentSpeech] Failed to load audio file: {audio_path}")
+             self.OVER = True
+    
+    def get(self, prev_chunk):
+        if self.OVER or self.audio is None:
+            return prev_chunk, True
+
+        elapsed_time = time.time() - self.s_time
+        
+        if elapsed_time >= self.duration:
+            self.OVER = True
+            return prev_chunk, True
+            
+        target_index = int(elapsed_time * self.rate)
+        
+        new_audio_segment = self.audio[self.curr_index:target_index]
+        self.curr_index = target_index
+        
+        updated_chunk = np.concatenate((prev_chunk, new_audio_segment))
+        curr_chunk = updated_chunk[-int(self.rate * self.input_length):]
+        
+        return curr_chunk, self.OVER
+
+def feedback_loop(feedback_socket, global_lock, text_buffer_size):
+    global agent_speaking_state
+    print('[DiffSHEG feedback] loop started')
+    while True:
+        try:
+            data = feedback_socket.recv(text_buffer_size).decode().strip()
+            if not data:
+                print('[DiffSHEG feedback] Empty data received, connection may be closing.')
+                time.sleep(0.5)
+                continue
+
+            with global_lock:
+                if data == 'end':
+                    agent_speaking_state = False
+                elif data == 'start':
+                    agent_speaking_state = True
+            
+            # Send acknowledgment back
+            feedback_socket.sendall('ok\r\n'.encode())
+
+        except socket.timeout:
+            continue
+        except ConnectionResetError:
+            print('[DiffSHEG feedback] ConnectionReset')
+            break
+        except BrokenPipeError:
+            print("[DiffSHEG feedback] Broken pipe error.")
+            break
+        except Exception as e:
+            if isinstance(e, socket.error) and e.errno == 10057: # Not connected
+                 print("[DiffSHEG feedback] Socket not connected.")
+                 break
+            print(f"[DiffSHEG feedback] Error: {e}")
+            traceback.print_exc()
+            break
+    
+    feedback_socket.close()
+    print('[DiffSHEG feedback] loop ended')
+
+if __name__=='__main__':
     main()

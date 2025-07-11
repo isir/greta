@@ -29,6 +29,12 @@ public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerform
         }
     }
 
+    public void removeBAPFramePerformer(BAPFramePerformer perfomer) {
+        if (diffSHEG != null) {
+            diffSHEG.removeBAPFramePerformer(perfomer);
+        }
+    }
+
     public void performFeedback(String type) {
         System.out.println("DiffSHEGFrame received feedback: " + type);
         if (type.equals("start") || type.equals("end")) {

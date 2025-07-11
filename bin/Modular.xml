@@ -124,6 +124,7 @@
                 <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
                 <item module="ASAP" name="ASAP"/>
                 <item module="MODIFF" name="MODIFF"/>
+                <item module="DiffSHEG" name="DiffSHEG"/>
                 <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
                 <item module="RestPoseSetterWithFeedback" name="RestPoseSetterWithFeedback"/>
                 <item module="ObjectNodeController" name="ObjectNodeController"/>
@@ -585,6 +586,10 @@
         </module>
         <module name="MODIFF">
             <object class="greta.auxiliary.modiff.MODIFFFrame" lib_id="greta_modiff"/>
+            <frame type="object"/>
+        </module>
+        <module name="DiffSHEG">
+            <object class="greta.auxiliary.DiffSHEG.DiffSHEGFrame" lib_id="greta_diffsheg"/>
             <frame type="object"/>
         </module>
         <module name="ActiveMQ FML Sender">
@@ -1747,6 +1752,17 @@
             <depends lib_id="greta_behavior_realizer"/>
             <depends lib_id="greta_feedbacks"/>
             <depends lib_id="greta_incrementality"/>
+        </lib>
+        <lib id="greta_diffsheg" path="./Common/Lib/Internal/DiffSHEG.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_behavior_realizer"/>
+            <depends lib_id="greta_behavior_planner"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_gesture_animation"/>
+            <depends lib_id="greta_animation_core"/>
+            <depends lib_id="greta_intentions"/>
         </lib>
         <lib id="sequence_mining" path="./Common/Lib/Internal/SequenceMining.jar">
             <depends lib_id="ext_bfograph"/>

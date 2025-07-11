@@ -89,12 +89,11 @@ public class Server {
   
     public void startConnection() throws IOException {
         
-        
-        InetAddress addr= InetAddress.getByName(address);
-        System.out.println("Trying to open port " + port + "... at address:"+address);
-        serverSocket = new ServerSocket(Integer.valueOf(port),MAX_PRIORITY,addr);
-        System.out.println("Trying to open port " + port + "... at address:"+address);
+        System.out.println("Trying to open port " + port + "...");
+        serverSocket = new ServerSocket(Integer.valueOf(port));
+        System.out.println("Server listening on port " + port + ". Waiting for client...");
         clientSocket = serverSocket.accept();
+        System.out.println("Client connected!");
         System.out.println("Instantiating input and output streams...");
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in =  new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));

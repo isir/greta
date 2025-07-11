@@ -4,11 +4,9 @@ call conda activate diffsheg_env
 
 cd /d %~dp0
 
-call conda install cudatoolkit=11.7 -y
+call pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 
 if errorlevel 1 goto ERROR
-
-call pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 
 call pip install -r requirements.txt
 
@@ -20,4 +18,6 @@ call pip install torch torchvision torchaudio
 call pip install -r requirements.txt
 
 :END
+python -c "import torch; print(torch.__version__); print('CUDA available:', torch.cuda.is_available())"
+
 echo Setup complete

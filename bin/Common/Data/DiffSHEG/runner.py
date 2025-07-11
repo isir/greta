@@ -14,7 +14,7 @@ from options.train_options import TrainCompOptions
 # from utils.plot_script import *
 
 from models import MotionTransformer, UniDiffuser
-from trainers import ddpm_beat_trainer
+from trainers import DDPMRunner_beat
 from datasets import ShowDataset
 from Deps import *
 
@@ -79,11 +79,6 @@ def main():
     parser = TrainCompOptions()
     opt = parser.parse()
 
-    opt.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    opt.distributed = False
-    opt.gpu_id = 0 if torch.cuda.is_available() else None
-    test_dataset = __import__(f"datasets.{opt.dataset_name}", fromlist=["something"]).BeatDataset(opt, "test")
-
     opt.data_root = 'data/BEAT'
     opt.fps = 15
     opt.dim_pose = 141
@@ -95,14 +90,52 @@ def main():
     if opt.use_aud_feat:
         opt.audio_dim = 1024
     opt.pose_fps = 15       # 15 fps is required; interpolation is done elsewhere
-    opt.n_poses = 150 if not hasattr(opt, 'n_poses') else opt.n_poses
+    opt.n_poses = 34
     opt.model_dir = './checkpoints/beat/beat_GesExpr_unify_addHubert_encodeHubert_mlpIncludeX_condRes_LN/model'
-    opt.ckpt='fgd_best.tar'
+    opt.ckpt='fgd_best.tar'        
+    opt.audio_dim = 128
+    if opt.use_aud_feat:
+        opt.audio_dim = 1024
+    opt.style_dim = 30 # totally 30 subjects
+    opt.speaker_dim = 30
+    opt.word_index_num = 5793
+    opt.word_dims = 300
+    opt.word_f = 128
+    opt.emotion_f = 8
+    opt.emotion_dims = 8
+    opt.freeze_wordembed = False
+    opt.hidden_size = 256
+    opt.n_layer = 4
+    opt.stride = 10
+    opt.pose_fps = 15
+    opt.vae_length = 300
+    opt.new_cache = False
+    opt.audio_norm = False
+    opt.facial_norm = True
+    opt.pose_norm = True
+    opt.train_data_path = f'data/BEAT/beat_cache/{opt.beat_cache_name}/train/'
+    opt.val_data_path = f'data/BEAT/beat_cache/{opt.beat_cache_name}/val/'
+    opt.test_data_path = f'data/BEAT/beat_cache/{opt.beat_cache_name}/test/'
+    opt.mean_pose_path = f'data/BEAT/beat_cache/{opt.beat_cache_name}/train/'
+    opt.std_pose_path = f'data/BEAT/beat_cache/{opt.beat_cache_name}/train/'
+    opt.multi_length_training = [1.0]
+    opt.audio_rep = 'wave16k'
+    opt.facial_rep = 'facial52'
+    opt.speaker_id = 'id'
+    opt.pose_rep = 'bvh_rot'
+    opt.word_rep = 'text'
+    opt.sem_rep = 'sem'
+    opt.emo_rep = 'emo'
+    opt.dataset_name = 'beat'
+    opt.mode = 'test_custom_audio'
+    opt.device = torch.device("cuda")
+
+    test_dataset = __import__(f"datasets.{opt.dataset_name}", fromlist=["something"]).BeatDataset(opt, "test")
 
     model = build_models(opt, opt.net_dim_pose, opt.audio_dim, opt.audio_latent_dim, opt.style_dim)
     model.to(opt.device)
 
-    runner = ddpm_beat_trainer(opt,model)
+    runner = DDPMRunner_beat(opt,model)
     
     text_buffer_size = 1024
 
@@ -128,11 +161,10 @@ def main():
 
     greta_socket = socket.socket()
     try:
-        greta_socket.connecr((greta_host,greta_port))
+        greta_socket.connect((greta_host,greta_port))
     except ConnectionRefusedError:
         print(f"[DiffSHEG Greta] greta server not available at {greta_host}:{greta_port}. Exiting.")
         return
-    greta_socket.connect((greta_host, greta_port))
 
     
 

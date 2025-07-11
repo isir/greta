@@ -77,17 +77,17 @@ class BeatDataset(Dataset):
             self.aud_feat_path = preloaded_dir.replace(cache_dir_name, "aud_feat_cache/hubert_large_ls960_ft")
             
         
-        self.mean_pose = np.load(args.mean_pose_path+f"{args.pose_rep}/bvh_mean.npy")
-        self.std_pose = np.load(args.mean_pose_path+f"{args.pose_rep}/bvh_std.npy")
-        self.mean_pose_axis_angle = np.load(args.mean_pose_path+"axis_angle_mean.npy")
-        self.std_pose_axis_angle = np.load(args.mean_pose_path+"axis_angle_std.npy")
+        self.mean_pose = np.load("./data/bvh_mean.npy")
+        self.std_pose = np.load("./data/bvh_std.npy")
+        self.mean_pose_axis_angle = np.load("./data/axis_angle_mean.npy")
+        self.std_pose_axis_angle = np.load("./data/axis_angle_std.npy")
         self.audio_norm = args.audio_norm
         self.facial_norm = args.facial_norm
         if self.audio_norm:
             self.mean_audio = np.load(args.mean_pose_path+f"{args.audio_rep}/npy_mean.npy")
             self.std_audio = np.load(args.mean_pose_path+f"{args.audio_rep}/npy_std.npy")
-        self.mean_facial = np.load(args.mean_pose_path+f"{args.facial_rep}/json_mean.npy")
-        self.std_facial = np.load(args.mean_pose_path+f"{args.facial_rep}/json_std.npy")
+        self.mean_facial = np.load("./data/json_mean.npy")
+        self.std_facial = np.load("./data/json_std.npy")
         
         if self.opt.expression_only or self.opt.gesCondition_expression_only:
                 self.motion_std = self.std_facial 

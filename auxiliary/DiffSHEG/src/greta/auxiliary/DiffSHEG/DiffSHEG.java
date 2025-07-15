@@ -49,12 +49,9 @@ public class DiffSHEG implements BAPFrameEmitter {
 
     private BVHProcessor bvhProcessor;
 
-    private CharacterManager cm;
-
     private final BAPFrameEmitterImpl bapFrameEmitterImpl = new BAPFrameEmitterImpl();
 
-    public DiffSHEG (CharacterManager cm) throws IOException {
-        this.cm = cm;
+    public DiffSHEG () throws IOException {
         System.out.println("greta.auxiliary.DiffSHEG.DiffSHEG()");
         
         feedback_server = new Server(); 
@@ -74,7 +71,7 @@ public class DiffSHEG implements BAPFrameEmitter {
             e.printStackTrace();
         }
         ///////////////////////
-        // Check environment ; Create environment if not exit
+        // Check environment ; Create environment if it does not exist
         ///////////////////////    
         
         checkAndInstallEnvironment();
@@ -161,27 +158,24 @@ public class DiffSHEG implements BAPFrameEmitter {
 
     private void receiveGestureDataLoop() {
         System.out.println("Starting gesture reception loop...");
-        while (true) {
-            try {
-                String bvhFrameLine = gesture_server.receiveMessage();
-                if (bvhFrameLine != null && !bvhFrameLine.isEmpty()) {
-
+        try {
+            String bvhFrameLine;
+            while ((bvhFrameLine = gesture_server.receiveMessage()) != null) {
+                if (!bvhFrameLine.isEmpty()) {
                     BAPFrame bapFrame = bvhProcessor.convertLineToBAP(bvhFrameLine);
-
                     if (bapFrame != null) {
                         ID id = IDProvider.createID("DiffSHEG_GESTURE");
                         bapFrameEmitterImpl.sendBAPFrame(id, bapFrame);
                     }
-
                     gesture_server.sendMessage("ok");
                 }
-            } catch (IOException e) {
-                System.err.println("Connection lost with Python script: " + e.getMessage());
-                break;
             }
+        } catch (IOException e) {
+            System.err.println("Connection lost or IO error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
-
+    
     public void sendFeedbackToPython(String type) {
         try {
             System.out.println("Sending feedback to Python: " + type);

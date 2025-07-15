@@ -5,6 +5,7 @@ import greta.core.animation.mpeg4.bap.BAPFramePerformer;
 import greta.core.feedbacks.Callback;
 import greta.core.feedbacks.FeedbackPerformer;
 import greta.core.intentions.IntentionPerformer;
+import greta.core.util.CharacterManager;
 
 import java.io.IOException;
 import java.util.List;
@@ -17,10 +18,13 @@ import java.util.List;
 public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerformer, BAPFrameEmitter {
     private DiffSHEG diffSHEG;
 
-    public DiffSHEGFrame() throws IOException {
+    public CharacterManager cm;
+
+    public DiffSHEGFrame (CharacterManager cm) throws IOException {
+        this.cm = cm;
         initComponents();
         System.out.println("greta.auxiliary.DiffSHEGFrame()");
-        diffSHEG = new DiffSHEG(null);
+        diffSHEG = new DiffSHEG();
     }
 
     public void addBAPFramePerformer(BAPFramePerformer performer) {

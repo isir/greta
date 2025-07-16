@@ -2,10 +2,12 @@
 call conda create -n diffsheg_env python=3.9 -y
 call conda activate diffsheg_env
 
+REM "You might need to activate this line if error happens"
+REM set "CUDA_HOME=%CONDA_PREFIX%"
+
 cd /d %~dp0
 
-call conda install cudatoolkit=11.7 -y
-
+call conda install -c conda-forge cudatoolkit-dev=11.7 -y
 call pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 
 if errorlevel 1 goto ERROR

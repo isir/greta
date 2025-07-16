@@ -4,6 +4,8 @@ call conda activate diffsheg_env
 
 cd /d %~dp0
 
+call conda install cudatoolkit=11.7 -y
+
 call pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu117
 
 if errorlevel 1 goto ERROR

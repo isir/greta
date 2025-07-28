@@ -6,6 +6,7 @@ import greta.core.feedbacks.Callback;
 import greta.core.feedbacks.FeedbackPerformer;
 import greta.core.intentions.IntentionPerformer;
 import greta.core.util.CharacterManager;
+import greta.core.util.CharacterDependent;
 
 import java.io.IOException;
 import java.util.List;
@@ -15,19 +16,21 @@ import java.util.List;
  * @author Leroux Paul
  */
 
-public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerformer, BAPFrameEmitter {
+public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerformer, BAPFrameEmitter, CharacterDependent {
     private DiffSHEG diffSHEG;
 
-    public CharacterManager cm;
+    private CharacterManager cm;
 
     public DiffSHEGFrame (CharacterManager cm) throws IOException {
-        this.cm = cm;
         initComponents();
-        System.out.println("greta.auxiliary.DiffSHEGFrame()");
-        diffSHEG = new DiffSHEG();
+        this.cm = cm;
+        cm.add(this);
+        diffSHEG = new DiffSHEG(cm);
+        System.out.println("[Greta DiffSHEG]greta.auxiliary.DiffSHEGFrame()");
     }
 
     public void addBAPFramePerformer(BAPFramePerformer performer) {
+        System.out.println("[Greta DiffSHEG] adding BAP Frame Performer");
         if (diffSHEG != null) {
             diffSHEG.addBAPFramePerformer(performer);
         }
@@ -39,10 +42,9 @@ public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerform
         }
     }
 
-    public void performFeedback(String type) {
-        System.out.println("DiffSHEGFrame received feedback: " + type);
-        if (type.equals("start") || type.equals("end")) {
-            diffSHEG.sendFeedbackToPython(type);
+    public void performFeedback(Callback clbck) {
+        if (diffSHEG != null) {
+            diffSHEG.performFeedback(clbck);
         }
     }
 
@@ -59,11 +61,6 @@ public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerform
 
     @Override
     public void performFeedback(greta.core.util.id.ID id, String string, List<greta.core.util.time.Temporizable> list) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void performFeedback(Callback clbck) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
@@ -98,6 +95,21 @@ public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerform
     public boolean areDetailsOnGestures() {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
         return false;
+    }
+
+    @Override
+    public void setCharacterManager(CharacterManager cm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }   
+    
+    @Override
+    public CharacterManager getCharacterManager() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void onCharacterChanged() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

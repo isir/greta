@@ -42,7 +42,7 @@ import soundfile as sf
 
 class DDPMRunner_beat(object):
 
-    def __init__(self, args, encoder, eval_model=None):
+    def __init__(self, args, encoder, test_dataset, eval_model=None):
         from transformers import Wav2Vec2Processor, HubertModel
         self.wav2vec2_processor = Wav2Vec2Processor.from_pretrained("facebook/hubert-large-ls960-ft")
         self.hubert_model = HubertModel.from_pretrained("facebook/hubert-large-ls960-ft")
@@ -53,6 +53,19 @@ class DDPMRunner_beat(object):
         self.epoch = 0
         self.eval_model = eval_model
         self.opt.is_train = False  # Ensure inference mode
+
+        self.ori_list = data_tools.joints_list["greta_ori_fingers_bis"]
+        self.target_list = data_tools.joints_list["spine_neck_141_renamed"]
+        self.gt_bvh_path = "data/GRETA/Base_greta_fingers_bis.bvh"
+        self.file_content_length = 411
+        with open(self.gt_bvh_path, 'r') as bvh_base:
+            self.offset_data = bvh_base.readlines()[self.file_content_length]
+            self.offset_data = np.fromstring(self.offset_data, dtype=float, sep=' ')
+        offset_base = torch.tensor([0., 0., -np.pi/2])
+        self.base_R_offset = rot_cvt.euler_angles_to_matrix(offset_base, "XYZ").float()
+        self.thumb1_R_offset = rot_cvt.euler_angles_to_matrix(torch.tensor([10., 42., -7.]) * np.pi / 180, "XYZ").float()
+        self.thumb2_R_offset = rot_cvt.euler_angles_to_matrix(torch.tensor([10., 0., 0.]) * np.pi / 180, "XYZ").float()
+        self.arm_joints = ("Elbow", "Wrist")
 
         if eval_model is not None and 'test' not in self.opt.mode:
             self.load_fid_net(args.e_path)
@@ -93,8 +106,8 @@ class DDPMRunner_beat(object):
         self.to(self.device)
 
         if self.opt.dataset_name == 'beat' and (self.opt.expression_only or self.opt.net_dim_pose == 192):
-            self.face_mean = np.load(f"data/BEAT/beat_cache/{self.opt.beat_cache_name}/train/facial52/json_mean.npy")
-            self.face_std = np.load(f"data/BEAT/beat_cache/{self.opt.beat_cache_name}/train/facial52/json_std.npy")
+            self.face_mean = np.load("./data/json_mean.npy")
+            self.face_std = np.load("./data/json_std.npy")
             self.facial_list = ['browDownLeft', 'browDownRight', 'browInnerUp', 'browOuterUpLeft', 
                                 'browOuterUpRight', 'cheekPuff', 'cheekSquintLeft', 'cheekSquintRight', 
                                 'eyeBlinkLeft', 'eyeBlinkRight', 'eyeLookDownLeft', 'eyeLookDownRight', 
@@ -108,9 +121,15 @@ class DDPMRunner_beat(object):
                                 'mouthRollUpper', 'mouthShrugLower', 'mouthShrugUpper', 'mouthSmileLeft', 
                                 'mouthSmileRight', 'mouthStretchLeft', 'mouthStretchRight', 'mouthUpperUpLeft', 
                                 'mouthUpperUpRight', 'noseSneerLeft', 'noseSneerRight']
+        
+        self.std_pose_axis_angle = test_dataset.std_pose_axis_angle
+        self.mean_pose_axis_angle = test_dataset.mean_pose_axis_angle
+        self._audio_buffer = np.array([], dtype=np.float32)
             
         model_dir = os.path.join(self.opt.model_dir, self.opt.ckpt)
         self.epoch, _, _, _, _ = self.load(model_dir)
+        
+        self.encoder.eval()
 
         self.eval_mode()  # Put encoder into eval mode
 
@@ -222,32 +241,29 @@ class DDPMRunner_beat(object):
         return result[np.newaxis, ...]  # (1, target_T, J, 4)
     
 
-    def generate_realtime_frame(self, aud_ori, buffer_audio, test_dataset, hop_size=1200, sr=16000):
-        n_poses = self.opt.n_poses
-        step = n_poses - self.opt.overlap_len
-        win_samples = n_poses * hop_size
-        buffer_audio.extend(aud_ori.tolist())
-    
-        p_id = torch.ones((1, 1)) * 1
-        p_id = self.one_hot(p_id, self.opt.speaker_dim).detach().to(self.device)
-    
-        aud = librosa.resample(aud_ori, orig_sr=sr, target_sr=18000)
-        mel = librosa.feature.melspectrogram(y=aud, sr=18000, hop_length=1200, n_mels=128)
-        mel = mel[..., :-1]
-        audio_emb = torch.from_numpy(np.swapaxes(mel, -1, -2)).unsqueeze(0).to(self.device)
-        B, N, _ = audio_emb.shape
-        C = self.opt.net_dim_pose
-        motions = torch.zeros((B, N, C)).to(self.device)
+    def generate_realtime_frame(self, audio_data, hop_size=1200, sr=16000):
+        print(f"[Greta DiffSHEG] self.opt.overlap_len: {self.opt.overlap_len}")
+
+        print("[Greta DiffSHEG] Received audio chunk of shape", audio_data.shape)
+
+        audio_emb = torch.from_numpy(
+            np.swapaxes(librosa.feature.melspectrogram(y=librosa.resample(audio_data, orig_sr=sr, target_sr=18000), 
+                                                      sr=18000, hop_length=hop_size, n_mels=128), -1, -2).astype(np.float32)
+        ).unsqueeze(0).to(self.device)
+        print(f"[Greta DiffSHEG] self.opt.n_poses: {self.opt.n_poses}")
+
+        motions = torch.zeros((1, audio_emb.shape[1], self.opt.net_dim_pose)).to(self.opt.device)
         window_step = self.opt.n_poses - self.opt.overlap_len
-        window_step_post_interp = window_step * 25 // 15
         audio_emb_list = self.get_windows(audio_emb, self.opt.n_poses, window_step)
         motions_list = self.get_windows(motions, self.opt.n_poses, window_step)
-    
+        print(f"[Greta DiffSHEG] Length of audio_emb_list: {len(audio_emb_list)}")
+        print(f"[Greta DiffSHEG] Length of motions_list: {len(motions_list)}")
+
         add_cond = {}
         if self.opt.expAddHubert or self.opt.addHubert:
             add_cond["pretrain_aud_feat"] = get_hubert_from_16k_speech_long(
                 self.hubert_model, self.wav2vec2_processor,
-                torch.from_numpy(aud_ori).unsqueeze(0).to(self.device),
+                torch.from_numpy(audio_data).unsqueeze(0).to(self.device),
                 device=self.device
             )
             add_cond["pretrain_aud_feat"] = F.interpolate(
@@ -257,28 +273,14 @@ class DDPMRunner_beat(object):
         if isinstance(add_cond, dict):
             for key in add_cond.keys():
                 add_cond[key] = add_cond[key].to(self.device)
-        if add_cond:
-            add_cond_list = self.get_windows(add_cond, self.opt.n_poses, window_step)
-    
-        std_pose_axis_angle = test_dataset.std_pose_axis_angle
-        mean_pose_axis_angle = test_dataset.mean_pose_axis_angle
-        mean_pose = test_dataset.mean_pose
-        std_pose = test_dataset.std_pose
-    
-        ori_list = data_tools.joints_list["greta_ori_fingers_bis"]
-        target_list = data_tools.joints_list["spine_neck_141_renamed"]
-        gt_bvh_path = "data/GRETA/Base_greta_fingers_bis.bvh"
-        file_content_length = 411
-        with open(gt_bvh_path, 'r') as bvh_base:
-            offset_data = bvh_base.readlines()[file_content_length]
-            offset_data = np.fromstring(offset_data, dtype=float, sep=' ')
-        offset_base = torch.tensor([0., 0., -np.pi/2])
-        base_R_offset = rot_cvt.euler_angles_to_matrix(offset_base, "XYZ").float()
-        thumb1_R_offset = rot_cvt.euler_angles_to_matrix(torch.tensor([10., 42., -7.]) * np.pi / 180, "XYZ").float()
-        thumb2_R_offset = rot_cvt.euler_angles_to_matrix(torch.tensor([10., 0., 0.]) * np.pi / 180, "XYZ").float()
-        arm_joints = ("Elbow", "Wrist")
-    
-        for ii, [audio_emb, motions] in enumerate(zip(audio_emb_list, motions_list)):
+
+        add_cond_list = self.get_windows(add_cond, self.opt.n_poses, window_step) if add_cond else [{} for _ in audio_emb_list]
+        inpaint_dict = {}
+        
+        p_id = torch.ones((1, 1)) * 1
+        p_id = self.one_hot(p_id, self.opt.speaker_dim).detach().to(self.device)
+
+        for ii, (audio_emb, motions) in enumerate(zip(audio_emb_list, motions_list)):
             local_add_cond = add_cond_list[ii] if add_cond else {}
             inpaint_dict = {}
             if self.opt.overlap_len > 0:
@@ -288,50 +290,54 @@ class DDPMRunner_beat(object):
                     inpaint_dict['outpainting_mask'][..., :self.opt.overlap_len, :] = True
                     inpaint_dict['gt'][:, :self.opt.overlap_len, ...] = motions[:, -self.opt.overlap_len:, ...]
                 elif ii > 0:
+                    print("_______________")
+                    print(inpaint_dict['gt'].shape)
+                    print(inpaint_dict['gt'][:, :self.opt.overlap_len, ...].shape)
+                    print(outputs[:, -self.opt.overlap_len:, ...].shape)
+                    print(outputs.shape)
+                    print("_______________")
                     inpaint_dict['outpainting_mask'][..., :self.opt.overlap_len, :] = True
                     inpaint_dict['gt'][:, :self.opt.overlap_len, ...] = outputs[:, -self.opt.overlap_len:, ...]
-    
-            outputs = self.generate_batch(audio_emb, p_id, self.opt.net_dim_pose, local_add_cond, inpaint_dict)
-    
-            outputs_np = outputs.cpu().numpy()
-            outputs_np = torch.from_numpy(outputs_np)
-            denorm_out = outputs_np * std_pose_axis_angle + mean_pose_axis_angle
-            B, T, C = denorm_out.shape
-            T_interp = T * 25 // 15
-            C_quat = C * 4 // 3
-            quat_out = rot_cvt.axis_angle_to_quaternion(denorm_out.reshape(B, T, C // 3, 3)).reshape(B, T, C_quat // 4, 4)
-            quat_out = torch.tensor(self.slerp_interpolate_quat(seq=quat_out, target_fps=25, original_fps=15))
-            denorm_out = rot_cvt.quaternion_to_axis_angle(quat_out.reshape(B, T_interp, C_quat // 4, 4)).reshape(B, T_interp, C)
-            euler_out = rot_cvt.axis_angle_to_euler_angles(denorm_out.reshape(B, T_interp, C // 3, 3), convention='XYZ').reshape(B, T_interp, C)
-            euler_out = euler_out * (180 / np.pi)
-            outputs_np = (euler_out - mean_pose) / std_pose
-            outputs_np = outputs_np.numpy()
-            out_motions, _ = np.split(outputs_np, [self.opt.split_pos], axis=-1)
-    
-            for i in range(T_interp):
-                data = out_motions[0, i, :].copy()
-                data_rotation = offset_base.clone()
-                for iii, (k, v) in enumerate(target_list.items()):
-                    if k in ori_list:
-                        is_right = k.startswith("R")
-                        R_offset = base_R_offset if is_right else base_R_offset.T
-                        R_joint = rot_cvt.euler_angles_to_matrix(data[iii * 3:iii * 3 + 3] * np.pi / 180, "XYZ").float()
-                        if k.endswith("Shoulder"):
-                            R_joint = R_joint @ R_offset
-                        elif k.endswith('HandT1'):
-                            R_joint = thumb1_R_offset @ R_joint
-                        elif k.endswith('HandT2'):
-                            R_joint = thumb2_R_offset @ R_joint
-                        elif k.endswith(arm_joints):
-                            R_joint = R_offset.T @ R_joint @ R_offset
-                        data[iii * 3:iii * 3 + 3] = rot_cvt.matrix_to_euler_angles(R_joint, "XYZ") * 180 / np.pi
-                        data_rotation[ori_list[k][1] - v:ori_list[k][1]] = data[iii * 3:iii * 3 + 3]
-                yield data_rotation.numpy()
+                
+                print(f"[Greta DiffSHEG] audio_emb dtype: {audio_emb.dtype}")
+                print(f"[Greta DiffSHEG] audio_emb shape: {audio_emb.shape}")
+                outputs = self.generate_batch(audio_emb, p_id, self.opt.net_dim_pose, local_add_cond, inpaint_dict)
 
+                outputs_out = outputs.cpu().clone()
+                outputs_out = outputs_out[:,:,:self.opt.split_pos]
+                denorm_out = outputs_out * self.std_pose_axis_angle + self.mean_pose_axis_angle
+                B, T, C = denorm_out.shape
+                T_interp = T * 25 // 15
+                C_quat = C * 4 // 3
+                quat_out = rot_cvt.axis_angle_to_quaternion(denorm_out.reshape(B, T, C // 3, 3)).reshape(B, T, C_quat // 4, 4)
+                quat_out = torch.tensor(self.slerp_interpolate_quat(seq=quat_out, target_fps=25, original_fps=15))
+                denorm_out = rot_cvt.quaternion_to_axis_angle(quat_out.reshape(B, T_interp, C_quat // 4, 4)).reshape(B, T_interp, C)
+                euler_out = rot_cvt.axis_angle_to_euler_angles(denorm_out.reshape(B, T_interp, C // 3, 3), convention='XYZ').reshape(B, T_interp, C)
+                euler_out = euler_out * (180 / np.pi)
 
-                    
-
-
+                frames_for_this_chunk = []
+                for i in range(T_interp):
+                    data = euler_out[0, i, :].clone()
+                    data_rotation = self.offset_data.copy()
+                    for iii, (k, v) in enumerate(self.target_list.items()):
+                        if k in self.ori_list:
+                            is_right = k.startswith("R")
+                            R_offset = self.base_R_offset if is_right else self.base_R_offset.T
+                            R_joint = rot_cvt.euler_angles_to_matrix(data[iii * 3:iii * 3 + 3] * np.pi / 180, "XYZ").float()
+                            if k.endswith("Shoulder"):
+                                R_joint = R_joint @ R_offset
+                            elif k.endswith('HandT1'):
+                                R_joint = self.thumb1_R_offset @ R_joint
+                            elif k.endswith('HandT2'):
+                                R_joint = self.thumb2_R_offset @ R_joint
+                            elif k.endswith(self.arm_joints):
+                                R_joint = R_offset.T @ R_joint @ R_offset
+                            data[iii * 3:iii * 3 + 3] = rot_cvt.matrix_to_euler_angles(R_joint, "XYZ") * 180 / np.pi
+                            data_rotation[self.ori_list[k][1] - v:self.ori_list[k][1]] = data[iii * 3:iii * 3 + 3]
+                    frames_for_this_chunk.append(data_rotation)
+                print(f"[Greta DiffSHEG] output shape of model {len(frames_for_this_chunk)}")
+                yield frames_for_this_chunk
+            
 @torch.no_grad()
 def get_hubert_from_16k_speech_long(hubert_model, wav2vec2_processor, speech, device="cuda:0"):
     hubert_model = hubert_model.to(device)

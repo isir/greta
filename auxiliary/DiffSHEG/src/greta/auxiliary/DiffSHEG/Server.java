@@ -97,8 +97,8 @@ public class Server {
         System.out.println("Instantiating input and output streams...");
         out = new PrintWriter(clientSocket.getOutputStream(), true);
         in =  new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-        System.out.println("greta.auxiliary.asap.Server.startConnection()");
-        System.out.println("greta.auxiliary.asap.Server.startConnection()");
+        System.out.println("greta.auxiliary.GretaDIFFSHEG.Server.startConnection()");
+        System.out.println("greta.auxiliary.GretaDIFFSHEG.Server.startConnection()");
     }
 
     public void sendMessage(String msg) throws IOException {

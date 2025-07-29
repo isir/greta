@@ -242,22 +242,17 @@ class DDPMRunner_beat(object):
     
 
     def generate_realtime_frame(self, audio_data, hop_size=1200, sr=16000):
-        print(f"[Greta DiffSHEG] self.opt.overlap_len: {self.opt.overlap_len}")
-
-        print("[Greta DiffSHEG] Received audio chunk of shape", audio_data.shape)
+        #start_realtime_frame = time.time()
 
         audio_emb = torch.from_numpy(
             np.swapaxes(librosa.feature.melspectrogram(y=librosa.resample(audio_data, orig_sr=sr, target_sr=18000), 
                                                       sr=18000, hop_length=hop_size, n_mels=128), -1, -2).astype(np.float32)
         ).unsqueeze(0).to(self.device)
-        print(f"[Greta DiffSHEG] self.opt.n_poses: {self.opt.n_poses}")
 
-        motions = torch.zeros((1, audio_emb.shape[1], self.opt.net_dim_pose)).to(self.opt.device)
+        motions = torch.zeros((1, audio_emb.shape[-2], self.opt.net_dim_pose)).to(self.opt.device)
         window_step = self.opt.n_poses - self.opt.overlap_len
         audio_emb_list = self.get_windows(audio_emb, self.opt.n_poses, window_step)
         motions_list = self.get_windows(motions, self.opt.n_poses, window_step)
-        print(f"[Greta DiffSHEG] Length of audio_emb_list: {len(audio_emb_list)}")
-        print(f"[Greta DiffSHEG] Length of motions_list: {len(motions_list)}")
 
         add_cond = {}
         if self.opt.expAddHubert or self.opt.addHubert:
@@ -274,14 +269,15 @@ class DDPMRunner_beat(object):
             for key in add_cond.keys():
                 add_cond[key] = add_cond[key].to(self.device)
 
-        add_cond_list = self.get_windows(add_cond, self.opt.n_poses, window_step) if add_cond else [{} for _ in audio_emb_list]
-        inpaint_dict = {}
+        if add_cond not in [None, {}]:
+            add_cond_list = self.get_windows(add_cond, self.opt.n_poses, window_step) if add_cond else [{} for _ in audio_emb_list]
         
         p_id = torch.ones((1, 1)) * 1
         p_id = self.one_hot(p_id, self.opt.speaker_dim).detach().to(self.device)
 
         for ii, (audio_emb, motions) in enumerate(zip(audio_emb_list, motions_list)):
-            local_add_cond = add_cond_list[ii] if add_cond else {}
+            if add_cond not in [None, {}]:
+                add_cond = add_cond_list[ii]
             inpaint_dict = {}
             if self.opt.overlap_len > 0:
                 inpaint_dict['gt'] = torch.zeros_like(motions)
@@ -290,21 +286,19 @@ class DDPMRunner_beat(object):
                     inpaint_dict['outpainting_mask'][..., :self.opt.overlap_len, :] = True
                     inpaint_dict['gt'][:, :self.opt.overlap_len, ...] = motions[:, -self.opt.overlap_len:, ...]
                 elif ii > 0:
-                    print("_______________")
-                    print(inpaint_dict['gt'].shape)
-                    print(inpaint_dict['gt'][:, :self.opt.overlap_len, ...].shape)
-                    print(outputs[:, -self.opt.overlap_len:, ...].shape)
-                    print(outputs.shape)
-                    print("_______________")
                     inpaint_dict['outpainting_mask'][..., :self.opt.overlap_len, :] = True
                     inpaint_dict['gt'][:, :self.opt.overlap_len, ...] = outputs[:, -self.opt.overlap_len:, ...]
                 
-                print(f"[Greta DiffSHEG] audio_emb dtype: {audio_emb.dtype}")
-                print(f"[Greta DiffSHEG] audio_emb shape: {audio_emb.shape}")
-                outputs = self.generate_batch(audio_emb, p_id, self.opt.net_dim_pose, local_add_cond, inpaint_dict)
+                #start_generate_batch = time.time()
+
+                outputs = self.generate_batch(audio_emb, p_id, self.opt.net_dim_pose, add_cond, inpaint_dict)
+
+                #print(f"[Greta DiffSHEG] generate_batch returned after {time.time() - start_generate_batch:.4f} seconds")
 
                 outputs_out = outputs.cpu().clone()
                 outputs_out = outputs_out[:,:,:self.opt.split_pos]
+                if ii < len(motions_list)-1:
+                    outputs_out = outputs_out[:, :window_step, :]
                 denorm_out = outputs_out * self.std_pose_axis_angle + self.mean_pose_axis_angle
                 B, T, C = denorm_out.shape
                 T_interp = T * 25 // 15
@@ -335,8 +329,9 @@ class DDPMRunner_beat(object):
                             data[iii * 3:iii * 3 + 3] = rot_cvt.matrix_to_euler_angles(R_joint, "XYZ") * 180 / np.pi
                             data_rotation[self.ori_list[k][1] - v:self.ori_list[k][1]] = data[iii * 3:iii * 3 + 3]
                     frames_for_this_chunk.append(data_rotation)
-                print(f"[Greta DiffSHEG] output shape of model {len(frames_for_this_chunk)}")
+                #print(f"[Greta DiffSHEG] Exiting generate_realtime_frame (total time for this chunk): {time.time() - start_realtime_frame:.4f} seconds"
                 yield frames_for_this_chunk
+
             
 @torch.no_grad()
 def get_hubert_from_16k_speech_long(hubert_model, wav2vec2_processor, speech, device="cuda:0"):

@@ -189,7 +189,7 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
                         bapFrame.setFrameNumber(timer);
                         ID id = IDProvider.createID("DiffSHEG_GESTURE");
                         bapFrameEmitterImpl.sendBAPFrame(id, bapFrame);
-                        System.out.println("[Greta DiffSHEG] Gesture sent for frame: " + timer);
+                        // System.out.println("[Greta DiffSHEG] Gesture sent for frame: " + timer);
                     }
                     gesture_server.sendMessage("ok");
                 }

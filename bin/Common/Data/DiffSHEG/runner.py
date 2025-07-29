@@ -151,8 +151,6 @@ def main():
     greta_host = socket.gethostname()
     greta_port = 6501
 
-    system_ready = False
-
     global_lock = Lock()
 
     feedback_socket = socket.socket()
@@ -180,12 +178,15 @@ def main():
     #agent = Agent(agent_audio_path=agent_audio_path, rate=audio_sr, input_length=2.0)
     #prev_chunk = np.zeros(int(audio_sr * agent.input_length), dtype=np.float32)
 
+    is_generating = False
     gesture_queue = queue.Queue()
 
     def producer_task(audio_data):
-        print("Prod task started")
+        print("[Greta DiffSHEG] Prod task started")
         try:
+            #start_generator_init = time.time()
             generator = runner.generate_realtime_frame(audio_data)
+            #print(f"[Greta DiffSHEG] Time to initialize generator: {time.time() - start_generator_init:.4f} seconds")
             for frame in generator:
                 gesture_queue.put(frame)
             gesture_queue.put(None)
@@ -194,16 +195,18 @@ def main():
             print(f"[Greta DiffSHEG] Error in producer thread: {e}")
             traceback.print_exc()
             gesture_queue.put(None)
-
+    
     try:
         producer_thread = None
         while True:
             with global_lock:
                 is_speaking = agent_speaking_state
 
-            if is_speaking and (producer_thread is None or not producer_thread.is_alive()):
-                print("[Greta DiffSHEG] Agent started speaking. Initializing gesture generator.")
+            if is_speaking and not is_generating:
+                is_generating = True
+                #start_load_time = time.time() 
                 audio_data, _ = librosa.load(agent_audio_path, sr=audio_sr)
+                #print(f"[Greta DiffSHEG] Time to load audio: {time.time() - start_load_time:.4f} seconds")
                 audio_data = audio_data.astype(np.float32)
                 producer_thread = Thread(target=producer_task, args=(audio_data,))
                 producer_thread.start()
@@ -216,7 +219,9 @@ def main():
                     if producer_thread is not None:
                         producer_thread.join()
                         producer_thread = None
+                    is_generating = False
                 else:
+                    print("[Greta DiffSHEG] sending batch of frame")
                     for frame in frame_chunk:
                         motion_str = ' '.join(map(str, frame))
                         greta_socket.send('{}\r\n'.format(motion_str).encode())
@@ -249,7 +254,7 @@ def feedback_loop(feedback_socket, global_lock, text_buffer_size):
             data = feedback_socket.recv(text_buffer_size).decode().strip()
             if not data:
                 print('[DiffSHEG feedback] Empty data received, connection may be closing.')
-                time.sleep(0.5)
+                time.sleep(0.01)
                 continue
 
             with global_lock:

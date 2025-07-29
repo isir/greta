@@ -22,7 +22,6 @@ public class shutdownHook extends Thread{
     
     public shutdownHook(Process process, String server_killer_path){
         this.process = process;
-        this.killer_path = server_killer_path;
     }
     
     public void run(){

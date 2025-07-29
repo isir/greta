@@ -93,6 +93,7 @@ def main():
     opt.pose_fps = 15       # 15 fps is required; interpolation is done elsewhere
     opt.n_poses = 30
     opt.overlap_len = 4
+    opt.fix_very_first = True
     opt.ddim = True
     opt.timestep_respacing = "ddim25"
     opt.model_dir = './checkpoints/beat/beat_GesExpr_unify_addHubert_encodeHubert_mlpIncludeX_condRes_LN/model'
@@ -170,6 +171,7 @@ def main():
     except ConnectionRefusedError:
         print(f"[DiffSHEG Greta] greta server not available at {greta_host}:{greta_port}. Exiting.")
         return
+    greta_socket.setblocking(False)
 
     
 
@@ -225,10 +227,21 @@ def main():
                     for frame in frame_chunk:
                         motion_str = ' '.join(map(str, frame))
                         greta_socket.send('{}\r\n'.format(motion_str).encode())
-                        time.sleep(1/25)
+                        time.sleep(1/25)        # Greta's framerate is 25
             
             except queue.Empty:
                 pass
+            
+            try:
+                incoming = greta_socket.recv(text_buffer_size).decode().strip()
+                if incoming == 'kill':
+                    print("[Greta DiffSHEG] Kill command received. Exiting main loop.")
+                    break
+            except BlockingIOError:
+                pass  # No data available, continue loop
+            except Exception as e:
+                print(f"[Greta DiffSHEG] Error reading from greta_socket: {e}")
+                traceback.print_exc()
 
 
             time.sleep(1/60)
@@ -241,6 +254,7 @@ def main():
     finally:
         feedback_socket.close()
         greta_socket.close()    
+        os._exit(0)
         print("[Greta DiffSHEG] Python end")
                     
 def feedback_loop(feedback_socket, global_lock, text_buffer_size):
@@ -286,85 +300,6 @@ def feedback_loop(feedback_socket, global_lock, text_buffer_size):
     
     feedback_socket.close()
     print('[DiffSHEG feedback] loop ended')
-
-
-class Agent:
-    
-    def __init__(self, agent_audio_path = "output.wav", rate = 16000, input_length = 20.0):
-        
-        self.audio_path = agent_audio_path
-
-        self.rate = rate
-        self.input_length = input_length
-        
-        self.agent_speech = None
-        self.prev_agent_update = time.time()
-    
-    def get(self, prev_chunk):
-        OVER = False
-        
-        if agent_speaking_state:
-            
-            if self.agent_speech == None:
-                print("[Greta DIFFSHEG] updated agent speech wav")
-                self.agent_speech = AgentSpeech(self.audio_path, self.rate, self.input_length)
-
-            curr_chunk, OVER = self.agent_speech.get(prev_chunk)
-
-            if OVER:
-                self.agent_speech = None
-            
-        else:
-            
-            over_frames = int(self.rate * (time.time() - self.prev_agent_update))
-            curr_chunk = np.concatenate((prev_chunk, np.zeros(over_frames)), axis = 0)[-int(self.rate * self.input_length):]
-            
-            self.agent_speech = None
-
-        return curr_chunk, OVER
-            
-class AgentSpeech:
-    
-    def __init__(self, audio_path = "output.wav", rate=16000, input_length=20.0):
-        
-        self.rate = rate
-        self.input_length = input_length
-    
-        self.audio, sr = librosa.load(audio_path, sr=self.rate, mono=True)
-        self.s_time = time.time()
-        self.duration = librosa.get_duration(y=self.audio, sr=sr)
-        
-        self.curr_index = 0
-                
-        self.OVER = False
-    
-    def get(self, prev_chunk):
-        
-        curr_sec = time.time() - self.s_time
-
-        print('duration: {:.2f}, curr_sec: {:.2f}'.format(self.duration, curr_sec))
-                
-        if self.duration < curr_sec:
-
-            over_frames = int(self.rate * (curr_sec - self.duration))
-            
-            # To deal with the case (self.duration < self.input_length), add self.chunk at the front
-            prev_chunk = np.concatenate((prev_chunk, self.audio, np.zeros(over_frames, dtype=float)))
-            
-            curr_chunk = prev_chunk[-int(self.rate * self.input_length):]
-            
-            self.OVER = True
-                
-        else:
-            print(f"--- Audio chunking start at {time.time()} ---")
-            prev_chunk = np.concatenate((prev_chunk, self.audio[self.curr_index:int(len(self.audio) * curr_sec / self.duration)]))
-            curr_chunk = prev_chunk[-int(self.rate * self.input_length):]
-            self.curr_index = int(len(self.audio) * curr_sec / self.duration)
-            print(f"--- Audio chunking end at {time.time()} ---")
-        curr_chunk = np.ascontiguousarray(curr_chunk)
-                
-        return curr_chunk, self.OVER
-    
 
 if __name__=='__main__':
     main()

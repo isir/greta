@@ -272,6 +272,13 @@ class DDPMRunner_beat(object):
         if add_cond not in [None, {}]:
             add_cond_list = self.get_windows(add_cond, self.opt.n_poses, window_step) if add_cond else [{} for _ in audio_emb_list]
         
+        if self.opt.fix_very_first:
+            zero_pose = (-self.mean_pose_axis_angle) / self.std_pose_axis_angle
+            zero_pose[14] = 80 * np.pi/180
+            zero_pose[80] = -70 * np.pi/180
+            zero_pose = np.pad(zero_pose,(0,51))
+            base_inpaint = torch.tensor(np.tile(zero_pose,(self.opt.overlap_len,1)), device=self.device).unsqueeze(0)
+        
         p_id = torch.ones((1, 1)) * 1
         p_id = self.one_hot(p_id, self.opt.speaker_dim).detach().to(self.device)
 
@@ -284,7 +291,7 @@ class DDPMRunner_beat(object):
                 inpaint_dict['outpainting_mask'] = torch.zeros_like(motions, dtype=torch.bool, device=motions.device)
                 if ii == 0 and self.opt.fix_very_first:
                     inpaint_dict['outpainting_mask'][..., :self.opt.overlap_len, :] = True
-                    inpaint_dict['gt'][:, :self.opt.overlap_len, ...] = motions[:, -self.opt.overlap_len:, ...]
+                    inpaint_dict['gt'][:, :self.opt.overlap_len, ...] = base_inpaint
                 elif ii > 0:
                     inpaint_dict['outpainting_mask'][..., :self.opt.overlap_len, :] = True
                     inpaint_dict['gt'][:, :self.opt.overlap_len, ...] = outputs[:, -self.opt.overlap_len:, ...]

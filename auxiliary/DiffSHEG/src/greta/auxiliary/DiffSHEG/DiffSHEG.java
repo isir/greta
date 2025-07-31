@@ -47,6 +47,10 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
     private final String batch_kill_path = "Common\\Data\\DiffSHEG\\kill_server.bat";
     private Process server_process;
 
+    private int frameCounter = 0;
+    private int baseFrameTime = 0;
+    private boolean isFirstFrame = true;
+
     private Thread server_shutdownHook;
 
     private Server feedback_server;
@@ -110,6 +114,9 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
         String type = clbck.type();
         System.out.println("[Greta DiffSHEG]received feedback event");
         if (type.equals("start") || type.equals("end")) {
+            if (type.equals("start")){
+                this.isFirstFrame = true;
+            }
             sendFeedbackToPython(type);
         }
     }
@@ -180,16 +187,31 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
     private void receiveGestureDataLoop() {
         System.out.println("[Greta DiffSHEG]Starting gesture reception loop...");
         try {
-            String bvhFrameLine;
-            while ((bvhFrameLine = gesture_server.receiveMessage()) != null) {
-                if (!bvhFrameLine.isEmpty()) {
-                    BAPFrame bapFrame = bvhProcessor.convertLineToBAP(bvhFrameLine);
-                    if (bapFrame != null) {
-                        int timer = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
-                        bapFrame.setFrameNumber(timer);
-                        ID id = IDProvider.createID("DiffSHEG_GESTURE");
-                        bapFrameEmitterImpl.sendBAPFrame(id, bapFrame);
-                        // System.out.println("[Greta DiffSHEG] Gesture sent for frame: " + timer);
+            String bvhbatch;
+            while ((bvhbatch = gesture_server.receiveMessage()) != null) {
+                if (!bvhbatch.isEmpty()) {
+                    ArrayList<BAPFrame> bapFrameBatch = new ArrayList<>();
+                    String[] bvhFrameLines = bvhbatch.split((";"));
+
+                    for (String bvhFrameLine : bvhFrameLines){
+                        BAPFrame bapFrame = bvhProcessor.convertLineToBAP(bvhFrameLine);
+                        if (bapFrame != null) {
+                            if (isFirstFrame) {
+                                baseFrameTime = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
+                                frameCounter = 0;
+                                isFirstFrame = false;
+                            }
+                            int currentFrameNumber = baseFrameTime + frameCounter;
+                            bapFrame.setFrameNumber(currentFrameNumber);
+
+                            bapFrameBatch.add(bapFrame);
+
+                            frameCounter ++;
+                        }
+                    }
+                    if (!bapFrameBatch.isEmpty()) {
+                        ID id = IDProvider.createID("DiffSHEG_GESTURE_BATCH");
+                        bapFrameEmitterImpl.sendBAPFrames(id, bapFrameBatch);
                     }
                     gesture_server.sendMessage("ok");
                 }
@@ -214,6 +236,9 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
     public void performFeedback(ID id, String string, SpeechSignal ss, TimeMarker tm) {
         System.out.println("[Greta DiffSHEG]received feedback event for SpeechSignal: " + string);
         if (string.equals("start") || string.equals("end")) {
+            if (string.equals("start")){
+                this.isFirstFrame = true;
+            }
             sendFeedbackToPython(string);
         }
     }
@@ -222,6 +247,9 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
     public void performFeedback(ID id, String string, List<Temporizable> list) {
         System.out.println("[Greta DiffSHEG]received feedback event for Temporizable list: " + string);
         if (string.equals("start") || string.equals("end")) {
+            if (string.equals("start")){
+                this.isFirstFrame = true;
+            }
             sendFeedbackToPython(string);
         }
     }

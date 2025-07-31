@@ -76,6 +76,7 @@ def main():
     
     print("[Greta DiffSHEG] Python start")
 
+    # We define all the model's options here
     parser = TrainCompOptions()
     opt = parser.parse()
 
@@ -90,8 +91,8 @@ def main():
     opt.audio_dim = 128
     if opt.use_aud_feat:
         opt.audio_dim = 1024
-    opt.pose_fps = 15       # 15 fps is required; interpolation is done elsewhere
-    opt.n_poses = 30
+    opt.pose_fps = 15       # We generate in 15 FPS and interpolate up to 25
+    opt.n_poses = 30        # This is the number of frames generated pre-interpolated
     opt.overlap_len = 4
     opt.fix_very_first = True
     opt.ddim = True
@@ -134,7 +135,11 @@ def main():
     opt.name = 'beat_GesExpr_unify_addHubert_encodeHubert_mlpIncludeX_condRes_LN'
     opt.dataset_name = 'beat'
     opt.mode = 'test_custom_audio'
-    opt.device = torch.device("cuda")
+    if torch.cuda.is_available():
+        opt.device = torch.device("cuda")
+    else:
+        opt.device = torch.device("cpu")
+        print(f"[Greta DiffSHEG] Cuda not available, this will be slow")
     print(f"[Greta DiffSHEG] opt.device is {opt.device}")
 
     test_dataset = __import__(f"datasets.{opt.dataset_name}", fromlist=["something"]).BeatDataset(opt, "test")
@@ -174,7 +179,7 @@ def main():
     greta_socket.setblocking(False)
 
     
-
+    # for the generation loop, we have a producer - consumer logic
     agent_audio_path = "../../../output.wav"
     audio_sr = 16000
     #agent = Agent(agent_audio_path=agent_audio_path, rate=audio_sr, input_length=2.0)
@@ -197,7 +202,8 @@ def main():
             print(f"[Greta DiffSHEG] Error in producer thread: {e}")
             traceback.print_exc()
             gesture_queue.put(None)
-    
+    # We check if the agent starts speaking, if so we start the generation
+    # Once the queue is not empty we send our frames one by one
     try:
         producer_thread = None
         while True:
@@ -221,13 +227,12 @@ def main():
                     if producer_thread is not None:
                         producer_thread.join()
                         producer_thread = None
-                    is_generating = False
+                    #is_generating = False
                 else:
                     print("[Greta DiffSHEG] sending batch of frame")
-                    for frame in frame_chunk:
-                        motion_str = ' '.join(map(str, frame))
-                        greta_socket.send('{}\r\n'.format(motion_str).encode())
-                        time.sleep(1/25)        # Greta's framerate is 25
+                    frame_strings = [' '.join(map(str, frame)) for frame in frame_chunk]
+                    batch_motion_str = ';'.join(frame_strings)
+                    greta_socket.send('{}\r\n'.format(batch_motion_str).encode())
             
             except queue.Empty:
                 pass
@@ -256,7 +261,8 @@ def main():
         greta_socket.close()    
         os._exit(0)
         print("[Greta DiffSHEG] Python end")
-                    
+
+# We are connected to greta through a socket and get a start message when the agent starts speaking
 def feedback_loop(feedback_socket, global_lock, text_buffer_size):
     global agent_speaking_state
     print('[DiffSHEG feedback] loop started')

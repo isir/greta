@@ -222,7 +222,7 @@ class DDPMRunner_beat(object):
                 if win_num - int(win_num) != 0:
                     out.append(x[:, int(win_num)*step:, ...])  
                 return out
-            
+    # To go from 15 FPS to 25, we will interpolate with SLERP : https://en.wikipedia.org/wiki/Slerp
     def slerp_interpolate_quat(self, seq, target_fps=25, original_fps=15):
         # seq: (1, T, J, 4) — quaternions per joint
         assert seq.shape[0] == 1, "Only batch size of 1 supported."
@@ -272,6 +272,10 @@ class DDPMRunner_beat(object):
         if add_cond not in [None, {}]:
             add_cond_list = self.get_windows(add_cond, self.opt.n_poses, window_step) if add_cond else [{} for _ in audio_emb_list]
         
+        # Here we fix the initial position. For now it is just a A-pose
+        # The zero pose defined by (-self.mean_pose_axis_angle) / self.std_pose_axis_angle is a T-pose
+        # To change it to whatever we want we can spin each joint (see datasets.data_tools : spine_neck_141_renamed)
+        # To keep continuity with precedent speech we could just save the last position output (before changing it)
         if self.opt.fix_very_first:
             zero_pose = (-self.mean_pose_axis_angle) / self.std_pose_axis_angle
             zero_pose[14] = 80 * np.pi/180
@@ -289,9 +293,11 @@ class DDPMRunner_beat(object):
             if self.opt.overlap_len > 0:
                 inpaint_dict['gt'] = torch.zeros_like(motions)
                 inpaint_dict['outpainting_mask'] = torch.zeros_like(motions, dtype=torch.bool, device=motions.device)
+                # We inpaint the first batch with out initial position
                 if ii == 0 and self.opt.fix_very_first:
                     inpaint_dict['outpainting_mask'][..., :self.opt.overlap_len, :] = True
                     inpaint_dict['gt'][:, :self.opt.overlap_len, ...] = base_inpaint
+                # Further batches are inpainted with the last few positions
                 elif ii > 0:
                     inpaint_dict['outpainting_mask'][..., :self.opt.overlap_len, :] = True
                     inpaint_dict['gt'][:, :self.opt.overlap_len, ...] = outputs[:, -self.opt.overlap_len:, ...]
@@ -317,6 +323,7 @@ class DDPMRunner_beat(object):
                 euler_out = euler_out * (180 / np.pi)
 
                 frames_for_this_chunk = []
+                # We have to correct some joints to adapt the model to greta's skeleton
                 for i in range(T_interp):
                     data = euler_out[0, i, :].clone()
                     data_rotation = self.offset_data.copy()

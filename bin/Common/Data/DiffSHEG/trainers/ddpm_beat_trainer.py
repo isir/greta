@@ -39,6 +39,8 @@ import datasets.rotation_converter as rot_cvt
 
 import soundfile as sf
 
+import sys
+
 
 class DDPMRunner_beat(object):
 
@@ -242,7 +244,6 @@ class DDPMRunner_beat(object):
     
 
     def generate_realtime_frame(self, audio_data, hop_size=1200, sr=16000):
-        #start_realtime_frame = time.time()
 
         audio_emb = torch.from_numpy(
             np.swapaxes(librosa.feature.melspectrogram(y=librosa.resample(audio_data, orig_sr=sr, target_sr=18000), 
@@ -287,6 +288,7 @@ class DDPMRunner_beat(object):
         p_id = self.one_hot(p_id, self.opt.speaker_dim).detach().to(self.device)
 
         for ii, (audio_emb, motions) in enumerate(zip(audio_emb_list, motions_list)):
+            start_realtime_frame = time.time()
             if add_cond not in [None, {}]:
                 add_cond = add_cond_list[ii]
             inpaint_dict = {}
@@ -343,7 +345,8 @@ class DDPMRunner_beat(object):
                             data[iii * 3:iii * 3 + 3] = rot_cvt.matrix_to_euler_angles(R_joint, "XYZ") * 180 / np.pi
                             data_rotation[self.ori_list[k][1] - v:self.ori_list[k][1]] = data[iii * 3:iii * 3 + 3]
                     frames_for_this_chunk.append(data_rotation)
-                #print(f"[Greta DiffSHEG] Exiting generate_realtime_frame (total time for this chunk): {time.time() - start_realtime_frame:.4f} seconds"
+                print(f"[Greta DiffSHEG] Exiting generate_realtime_frame (total time for this chunk): {time.time() - start_realtime_frame:.4f} seconds")
+                sys.stdout.flush()
                 yield frames_for_this_chunk
 
             

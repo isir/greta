@@ -112,7 +112,7 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
     @Override
     public void performFeedback(Callback clbck) {
         String type = clbck.type();
-        System.out.println("[Greta DiffSHEG]received feedback event");
+        System.out.println("[Greta DiffSHEG] received feedback event");
         if (type.equals("start") || type.equals("end")) {
             if (type.equals("start")){
                 this.isFirstFrame = true;
@@ -139,9 +139,15 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
                 System.out.println("[Greta DiffSHEG] Gesture server connected.");
                 // Once connected, send a confirmation to Python
                 gesture_server.sendMessage("ok");
-
+                String readySignal = gesture_server.receiveMessage();
+                if (readySignal != null && readySignal.equals("READY")){
+                    System.out.println("[Greta DiffSHEG] READY signal received from Python. Starting gesture loop.");
+                    receiveGestureDataLoop();
+                } else {
+                System.err.println("[Greta DiffSHEG] Did not receive READY signal. Gesture loop will not start.");
+                }
                 // Start the main loop to receive gesture data
-                receiveGestureDataLoop();
+                
 
             } catch (IOException ex) {
                 Logger.getLogger(DiffSHEG.class.getName()).log(Level.SEVERE, null, ex);
@@ -185,7 +191,7 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
     }
 
     private void receiveGestureDataLoop() {
-        System.out.println("[Greta DiffSHEG]Starting gesture reception loop...");
+        System.out.println("[Greta DiffSHEG] Starting gesture reception loop...");
         try {
             String bvhbatch;
             while ((bvhbatch = gesture_server.receiveMessage()) != null) {

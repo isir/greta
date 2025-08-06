@@ -182,8 +182,19 @@ def main():
     # for the generation loop, we have a producer - consumer logic
     agent_audio_path = "../../../output.wav"
     audio_sr = 16000
-    #agent = Agent(agent_audio_path=agent_audio_path, rate=audio_sr, input_length=2.0)
-    #prev_chunk = np.zeros(int(audio_sr * agent.input_length), dtype=np.float32)
+
+    # System warmup
+    try:
+        warmup_audio = np.zeros(audio_sr * 2, dtype=np.float32) # Empty audio
+        warmup_generator = runner.generate_realtime_frame(audio_data=warmup_audio) # Create generator and loop through it
+        for _ in warmup_generator:
+            pass
+        print("[Greta DiffSHEG] System warmup finished")
+    except Exception as e:
+        print(f"[Greta DiffSHEG] WARNING: Warmup failed. Error: {e}")
+    # Send the ready signal
+    greta_socket.send('READY\r\n'.encode())
+    print("[Greta DiffSHEG] READY signal sent to Java.")
 
     is_generating = False
     gesture_queue = queue.Queue()
@@ -191,9 +202,9 @@ def main():
     def producer_task(audio_data):
         print("[Greta DiffSHEG] Prod task started")
         try:
-            #start_generator_init = time.time()
-            generator = runner.generate_realtime_frame(audio_data)
-            #print(f"[Greta DiffSHEG] Time to initialize generator: {time.time() - start_generator_init:.4f} seconds")
+            start_generator_init = time.time()
+            generator = runner.generate_realtime_frame(audio_data=audio_data)
+            print(f"[Greta DiffSHEG] Time to initialize generator: {time.time() - start_generator_init:.4f} seconds")
             for frame in generator:
                 gesture_queue.put(frame)
             gesture_queue.put(None)
@@ -212,9 +223,9 @@ def main():
 
             if is_speaking and not is_generating:
                 is_generating = True
-                #start_load_time = time.time() 
+                start_load_time = time.time() 
                 audio_data, _ = librosa.load(agent_audio_path, sr=audio_sr)
-                #print(f"[Greta DiffSHEG] Time to load audio: {time.time() - start_load_time:.4f} seconds")
+                print(f"[Greta DiffSHEG] Time to load audio: {time.time() - start_load_time:.4f} seconds")
                 audio_data = audio_data.astype(np.float32)
                 producer_thread = Thread(target=producer_task, args=(audio_data,))
                 producer_thread.start()
@@ -227,7 +238,6 @@ def main():
                     if producer_thread is not None:
                         producer_thread.join()
                         producer_thread = None
-                    #is_generating = False
                 else:
                     print("[Greta DiffSHEG] sending batch of frame")
                     frame_strings = [' '.join(map(str, frame)) for frame in frame_chunk]
@@ -236,6 +246,9 @@ def main():
             
             except queue.Empty:
                 pass
+            
+            if not is_speaking:
+                is_generating = False
             
             try:
                 incoming = greta_socket.recv(text_buffer_size).decode().strip()
@@ -267,7 +280,6 @@ def feedback_loop(feedback_socket, global_lock, text_buffer_size):
     global agent_speaking_state
     print('[DiffSHEG feedback] loop started')
     while True:
-        print(f"[Greta DIFFSHEG] FEEDBACK LOOP waiting for message at {time.time()}")
         print(f"[Greta DIFFSHEG] agent_speaking_state {agent_speaking_state}")
         sys.stdout.flush()
         try:
@@ -278,11 +290,14 @@ def feedback_loop(feedback_socket, global_lock, text_buffer_size):
                 continue
 
             with global_lock:
+                print("[Greta DiffSHEG] feedback data received", data)
                 if data == 'end':
                     print("[Greta DIFFSHEG] end feedback received by python")
+                    sys.stdout.flush()
                     agent_speaking_state = False
                 elif data == 'start':
                     print("[Greta DIFFSHEG] start feedback received by python")
+                    sys.stdout.flush()
                     agent_speaking_state = True
             
             # Send acknowledgment back

@@ -245,4 +245,12 @@ public class MPEG4Animatable extends Animatable implements CancelableFAPFramePer
     protected String getXMLNodeName() {
         return "mpeg4animatable";
     }
+    
+    public BAPFrameEmitterImpl getBapEmitter() {
+        return this.bapEmitter;
+    }
+    
+    public APFrameList<BAPFrame> getBapFrames() {
+        return this.bapFrames;
+    }
 }

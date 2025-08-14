@@ -2,21 +2,17 @@ package greta.auxiliary.DiffSHEG;
 
 import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
 import greta.core.animation.mpeg4.bap.BAPFramePerformer;
-import greta.core.feedbacks.Callback;
-import greta.core.feedbacks.FeedbackPerformer;
-import greta.core.intentions.IntentionPerformer;
 import greta.core.util.CharacterManager;
 import greta.core.util.CharacterDependent;
 
 import java.io.IOException;
-import java.util.List;
 
 /**
  *
  * @author Leroux Paul
  */
 
-public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerformer, BAPFrameEmitter, CharacterDependent {
+public class DiffSHEGFrame extends javax.swing.JFrame implements BAPFrameEmitter, CharacterDependent {
     private DiffSHEG diffSHEG;
 
     private CharacterManager cm;
@@ -42,59 +38,10 @@ public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerform
         }
     }
 
-    public void performFeedback(Callback clbck) {
-        if (diffSHEG != null) {
-            diffSHEG.performFeedback(clbck);
-        }
-    }
-
     private void initComponents() {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("DiffSHEG Controller");
         pack();
-    }
-    
-    @Override
-    public void performFeedback(greta.core.util.id.ID id, String string, greta.core.signals.SpeechSignal ss, greta.core.util.time.TimeMarker tm) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void performFeedback(greta.core.util.id.ID id, String string, List<greta.core.util.time.Temporizable> list) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    @Override
-    public void setDetailsOption(boolean bln) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean areDetailedFeedbacks() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return false;
-    }
-
-    @Override
-    public void setDetailsOnFace(boolean bln) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean areDetailsOnFace() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return false;
-    }
-
-    @Override
-    public void setDetailsOnGestures(boolean bln) {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean areDetailsOnGestures() {
-//        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        return false;
     }
 
     @Override
@@ -111,7 +58,7 @@ public class DiffSHEGFrame extends javax.swing.JFrame implements FeedbackPerform
     public void onCharacterChanged() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

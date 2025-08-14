@@ -5,23 +5,14 @@
  */
 package greta.auxiliary.DiffSHEG;
 
-import greta.auxiliary.DiffSHEG.BVHProcessor;
-
-
 import greta.core.util.CharacterManager;
+import greta.core.util.CharacterDependent;
 import greta.core.util.id.ID;
 import greta.core.util.id.IDProvider;
 import greta.core.util.time.Timer;
 import greta.core.util.Constants;
 import greta.core.animation.mpeg4.bap.BAPFrame;
-import greta.core.animation.mpeg4.bap.BAPFrameEmitter;
 import greta.core.animation.mpeg4.bap.BAPFrameEmitterImpl;
-import greta.core.animation.mpeg4.bap.BAPFramePerformer;
-import greta.core.feedbacks.Callback;
-import greta.core.feedbacks.FeedbackPerformer;
-import greta.core.signals.SpeechSignal;
-import greta.core.util.time.Temporizable;
-import greta.core.util.time.TimeMarker;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,13 +24,12 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
  * @author Leroux Paul
  */
-public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
+public class DiffSHEG extends BAPFrameEmitterImpl implements CharacterDependent {
     private final String base_bvh_path = "Common\\Data\\DiffSHEG\\data\\GRETA\\Base_greta_fingers_bis.bvh";
     private final String python_env_checker_path = "Common\\Data\\DiffSHEG\\check_env.py";
     private final String batch_env_installer_path = "Common\\Data\\DiffSHEG\\init_env.bat";
@@ -51,33 +41,22 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
     private int baseFrameTime = 0;
     private boolean isFirstFrame = true;
 
-    private Thread server_shutdownHook;
-
-    private Server feedback_server;
-    private String response;
-
     private Server gesture_server;
-    private InputStream inputStream;
     private String result;
 
     private BVHProcessor bvhProcessor;
 
     private CharacterManager cm;
 
-    private final BAPFrameEmitterImpl bapFrameEmitterImpl = new BAPFrameEmitterImpl();
-
     public DiffSHEG (CharacterManager cm) throws IOException {
         System.out.println("[Greta DiffSHEG] greta.auxiliary.DiffSHEG.DiffSHEG()");
         this.cm = cm;
-        feedback_server = new Server(); 
-        feedback_server.setAddress("localhost"); 
-        feedback_server.setPort("6500"); 
-
+        this.cm.setHoldFrame(true);
 
         gesture_server = new Server();
         gesture_server.setAddress("localhost"); 
         gesture_server.setPort("6501"); 
-
+        
         bvhProcessor = new BVHProcessor();
         try (BufferedReader br = new BufferedReader(new FileReader(base_bvh_path))) {
             bvhProcessor.parseBVHHeader(br);
@@ -98,40 +77,7 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
         startServersAndPython();
     }
 
-    @Override
-    public void addBAPFramePerformer(BAPFramePerformer perfomer) {
-        System.out.println("[Greta DiffSHEG] adding BAP Frame Performer");
-        this.bapFrameEmitterImpl.addBAPFramePerformer(perfomer);
-    }
-
-    @Override
-    public void removeBAPFramePerformer(BAPFramePerformer performer) {
-        this.bapFrameEmitterImpl.removeBAPFramePerformer(performer);
-    }
-    
-    @Override
-    public void performFeedback(Callback clbck) {
-        String type = clbck.type();
-        System.out.println("[Greta DiffSHEG] received feedback event");
-        if (type.equals("start") || type.equals("end")) {
-            if (type.equals("start")){
-                this.isFirstFrame = true;
-            }
-            sendFeedbackToPython(type);
-        }
-    }
-
     private void startServersAndPython() {
-        new Thread(() -> {
-            try {
-                System.out.println("[Greta DiffSHEG] Feedback server waiting for connection on port 6500...");
-                feedback_server.startConnection();
-                System.out.println("[Greta DiffSHEG] Feedback server connected.");
-            } catch (IOException ex) {
-                Logger.getLogger(DiffSHEG.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }).start();
-    
         new Thread(() -> {
             try {
                 System.out.println("[Greta DiffSHEG] Gesture server waiting for connection on port 6501...");
@@ -195,7 +141,12 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
         try {
             String bvhbatch;
             while ((bvhbatch = gesture_server.receiveMessage()) != null) {
-                if (!bvhbatch.isEmpty()) {
+                if (bvhbatch.equals("END_OF_GENERATION")) {
+                    System.out.println("[Greta DiffSHEG] Received end signal. Holding frame and resetting state.");
+                    this.cm.setHoldFrame(true);
+                    this.isFirstFrame = true;
+                    //gesture_server.sendMessage("ok_end");
+                } else if (!bvhbatch.isEmpty()) {
                     ArrayList<BAPFrame> bapFrameBatch = new ArrayList<>();
                     String[] bvhFrameLines = bvhbatch.split((";"));
 
@@ -206,6 +157,7 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
                                 baseFrameTime = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
                                 frameCounter = 0;
                                 isFirstFrame = false;
+                                this.cm.setHoldFrame(false);
                             }
                             int currentFrameNumber = baseFrameTime + frameCounter;
                             bapFrame.setFrameNumber(currentFrameNumber);
@@ -217,9 +169,10 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
                     }
                     if (!bapFrameBatch.isEmpty()) {
                         ID id = IDProvider.createID("DiffSHEG_GESTURE_BATCH");
-                        bapFrameEmitterImpl.sendBAPFrames(id, bapFrameBatch);
+                        this.sendBAPFrames(id, bapFrameBatch);
+                        System.out.println("[Greta DiffSHEG] Sending a batch od size" + bapFrameBatch.size());
                     }
-                    gesture_server.sendMessage("ok");
+                    //gesture_server.sendMessage("ok_frame");
                 }
             }
         } catch (IOException e) {
@@ -227,66 +180,19 @@ public class DiffSHEG implements BAPFrameEmitter, FeedbackPerformer {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public void setCharacterManager(CharacterManager cm) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }   
     
-    public void sendFeedbackToPython(String type) {
-        try {
-            System.out.println("[Greta DiffSHEG] Sending feedback to Python: " + type);
-            feedback_server.sendMessage(type);
-            feedback_server.receiveMessage(); // Wait for 'ok' acknowledgment
-        } catch (IOException e) {
-            System.err.println("[Greta DiffSHEG] Failed to send feedback to python: " + e.getMessage());
-        }
-    }
-
     @Override
-    public void performFeedback(ID id, String string, SpeechSignal ss, TimeMarker tm) {
-        System.out.println("[Greta DiffSHEG]received feedback event for SpeechSignal: " + string);
-        if (string.equals("start") || string.equals("end")) {
-            if (string.equals("start")){
-                this.isFirstFrame = true;
-            }
-            sendFeedbackToPython(string);
-        }
-    }
-
-    @Override
-    public void performFeedback(ID id, String string, List<Temporizable> list) {
-        System.out.println("[Greta DiffSHEG]received feedback event for Temporizable list: " + string);
-        if (string.equals("start") || string.equals("end")) {
-            if (string.equals("start")){
-                this.isFirstFrame = true;
-            }
-            sendFeedbackToPython(string);
-        }
-    }
-
-    @Override
-    public void setDetailsOption(boolean bln) {
+    public CharacterManager getCharacterManager() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean areDetailedFeedbacks() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setDetailsOnFace(boolean bln) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean areDetailsOnFace() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public void setDetailsOnGestures(boolean bln) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public boolean areDetailsOnGestures() {
+    public void onCharacterChanged() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

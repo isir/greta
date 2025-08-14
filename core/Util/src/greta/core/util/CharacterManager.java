@@ -50,6 +50,7 @@ public class CharacterManager {
     private static int count=0;
     private boolean positive_manager=false;
     private boolean phoneme_manager = false;
+    private boolean holdFrame = false;
 
     public boolean isPositive_manager() {
         return positive_manager;
@@ -66,7 +67,15 @@ public class CharacterManager {
     public void setPhoneme_manager(boolean phoneme_manager) {
         this.phoneme_manager = phoneme_manager;
     }
+    
+    public boolean getHoldFrame() {
+        return holdFrame;
+    }
 
+    public void setHoldFrame (boolean holdFrame) {
+        this.holdFrame = holdFrame;
+}
+    
     private Gaze_Target gaze_t;
 
     private Map<String, String> characterMapFile;

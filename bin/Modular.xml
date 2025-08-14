@@ -19,6 +19,7 @@
             <menu name="Environment">
                 <item module="Environment" name="Environment"/>
                 <item module="MPEG4 Animatable" name="MPEG-4 Animatable"/>
+                <item module="MPEG4 Animatable with BAP Holding" name="MPEG-4 Animatable with BAP Holding"/>
                 <menu name="Environment Manager">
                     <menu name="Generic">
                         <item module="Generic Environment Manager" name="Environment Manager"/>
@@ -834,6 +835,22 @@
         </module>
         <module name="MPEG4 Animatable" style="Animations">
             <object class="greta.core.animation.mpeg4.MPEG4Animatable" lib_id="greta_mpeg4"/>
+            <frame class="greta.core.utilx.gui.TreeNodeController" lib_id="greta_utilx" type="frame">
+                <link method="setTreeNode" on="frame"/>
+            </frame>
+            <parameter default="0" get_method="getCoordinateX" get_on="object" name="posX" set_method="setCoordinateX" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCoordinateY" get_on="object" name="posY" set_method="setCoordinateY" set_on="object" type="double"/>
+            <parameter default="0" get_method="getCoordinateZ" get_on="object" name="posZ" set_method="setCoordinateZ" set_on="object" type="double"/>
+            <parameter default="0" get_method="getOrientationX" get_on="object" name="rotX" set_method="setOrientationX" set_on="object" type="double"/>
+            <parameter default="0" get_method="getOrientationY" get_on="object" name="rotY" set_method="setOrientationY" set_on="object" type="double"/>
+            <parameter default="0" get_method="getOrientationZ" get_on="object" name="rotZ" set_method="setOrientationZ" set_on="object" type="double"/>
+            <parameter default="1" get_method="getOrientationW" get_on="object" name="rotW" set_method="setOrientationW" set_on="object" type="double"/>
+            <parameter default="1" get_method="getScaleX" get_on="object" name="scaleX" set_method="setScaleX" set_on="object" type="double"/>
+            <parameter default="1" get_method="getScaleY" get_on="object" name="scaleY" set_method="setScaleY" set_on="object" type="double"/>
+            <parameter default="1" get_method="getScaleZ" get_on="object" name="scaleZ" set_method="setScaleZ" set_on="object" type="double"/>
+        </module>
+        <module name="MPEG4 Animatable with BAP Holding" style="Animations">
+            <object class="greta.core.animation.mpeg4.MPEG4AnimatableHold" lib_id="greta_mpeg4"/>
             <frame class="greta.core.utilx.gui.TreeNodeController" lib_id="greta_utilx" type="frame">
                 <link method="setTreeNode" on="frame"/>
             </frame>

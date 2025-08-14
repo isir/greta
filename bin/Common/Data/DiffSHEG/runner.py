@@ -35,8 +35,6 @@ import torch.utils.data.distributed
 import sys
 sys.path.append(os.path.join(sys.path[2], "A_TalkSHOW_ori"))
 
-agent_speaking_state = False
-
 def build_models(opt, dim_pose, audio_dim=128, audio_latent_dim=256, style_dim=4):
     if opt.unidiffuser:
         encoder = UniDiffuser(
@@ -92,7 +90,7 @@ def main():
     if opt.use_aud_feat:
         opt.audio_dim = 1024
     opt.pose_fps = 15       # We generate in 15 FPS and interpolate up to 25
-    opt.n_poses = 30        # This is the number of frames generated pre-interpolated
+    opt.n_poses = 34        # This is the number of frames generated pre-interpolated (n-poses - overlap_len is the number of frames really generated)
     opt.overlap_len = 4
     opt.fix_very_first = True
     opt.ddim = True
@@ -150,25 +148,11 @@ def main():
     runner = DDPMRunner_beat(opt,model, test_dataset)
     
     text_buffer_size = 1024
-
-    feedback_server_host = socket.gethostname()
-    feedback_server_port = 6500
     
     greta_host = socket.gethostname()
     greta_port = 6501
 
     global_lock = Lock()
-
-    feedback_socket = socket.socket()
-    try:
-        feedback_socket.connect((feedback_server_host, feedback_server_port))
-    except ConnectionRefusedError:
-        print(f"[DiffSHEG Greta] Feedback server not available at {feedback_server_host}:{feedback_server_port}. Exiting.")
-        return
-    
-    feedback_thread = Thread(target=feedback_loop, args= (feedback_socket, global_lock, text_buffer_size))
-    feedback_thread.daemon = True
-    feedback_thread.start()
 
     greta_socket = socket.socket()
     try:
@@ -195,8 +179,8 @@ def main():
     # Send the ready signal
     greta_socket.send('READY\r\n'.encode())
     print("[Greta DiffSHEG] READY signal sent to Java.")
+    sys.stdout.flush()
 
-    is_generating = False
     gesture_queue = queue.Queue()
 
     def producer_task(audio_data):
@@ -213,22 +197,33 @@ def main():
             print(f"[Greta DiffSHEG] Error in producer thread: {e}")
             traceback.print_exc()
             gesture_queue.put(None)
+
     # We check if the agent starts speaking, if so we start the generation
     # Once the queue is not empty we send our frames one by one
     try:
+        agent_audio_path = "../../../output.wav"
         producer_thread = None
-        while True:
-            with global_lock:
-                is_speaking = agent_speaking_state
+        last_file_mod_time = os.path.getmtime(agent_audio_path) if os.path.exists(agent_audio_path) else None
+        is_generating = False
 
-            if is_speaking and not is_generating:
-                is_generating = True
-                start_load_time = time.time() 
-                audio_data, _ = librosa.load(agent_audio_path, sr=audio_sr)
-                print(f"[Greta DiffSHEG] Time to load audio: {time.time() - start_load_time:.4f} seconds")
-                audio_data = audio_data.astype(np.float32)
-                producer_thread = Thread(target=producer_task, args=(audio_data,))
-                producer_thread.start()
+        while True:
+            if os.path.exists(agent_audio_path):
+                current_file_mod_time = os.path.getmtime(agent_audio_path)
+                if current_file_mod_time != last_file_mod_time and not is_generating:
+                    print("[Greta DiffSHEG] Detected new audio file. Starting generation.")
+                    print("[Greta DiffSHEG] time of change :",os.path.getmtime(agent_audio_path))
+                    is_generating = True
+                    last_file_mod_time = current_file_mod_time
+                    
+                    start_load_time = time.time()
+                    audio_data, sr = librosa.load(agent_audio_path, sr=audio_sr)
+                    audio_data = audio_data.astype(np.float32)
+                    print(f"[Greta DiffSHEG] Time to load audio: {time.time() - start_load_time:.4f} seconds")
+                    audio_duration = audio_data.shape[0] / sr
+
+                    generation_start_time = time.time()
+                    producer_thread = Thread(target=producer_task, args=(audio_data,))
+                    producer_thread.start()
 
             try:
                 frame_chunk = gesture_queue.get_nowait()
@@ -236,19 +231,26 @@ def main():
                 if frame_chunk is None:
                     print("[Greta DiffSHEG] Producer finished.")
                     if producer_thread is not None:
+                        final_send_time = time.time()
                         producer_thread.join()
                         producer_thread = None
+                        is_generating = False
+                        generation_duration = final_send_time - generation_start_time
+                        time_to_wait = audio_duration - generation_duration
+                        wait_buffer = 0.1
+                        time.sleep(wait_buffer + time_to_wait)
+                        greta_socket.send('END_OF_GENERATION\r\n'.encode())
+                        print(f"[Greta DiffSHEG] Python sent END_OF_GENERATION to Java.")
+                        sys.stdout.flush()
+                        
                 else:
-                    print("[Greta DiffSHEG] sending batch of frame")
+                    sys.stdout.flush()
                     frame_strings = [' '.join(map(str, frame)) for frame in frame_chunk]
                     batch_motion_str = ';'.join(frame_strings)
                     greta_socket.send('{}\r\n'.format(batch_motion_str).encode())
-            
+
             except queue.Empty:
                 pass
-            
-            if not is_speaking:
-                is_generating = False
             
             try:
                 incoming = greta_socket.recv(text_buffer_size).decode().strip()
@@ -270,57 +272,9 @@ def main():
         print(f"[DiffSHEG Greta] Error in main loop: {e}")
         traceback.print_exc()
     finally:
-        feedback_socket.close()
         greta_socket.close()    
         os._exit(0)
         print("[Greta DiffSHEG] Python end")
-
-# We are connected to greta through a socket and get a start message when the agent starts speaking
-def feedback_loop(feedback_socket, global_lock, text_buffer_size):
-    global agent_speaking_state
-    print('[DiffSHEG feedback] loop started')
-    while True:
-        print(f"[Greta DIFFSHEG] agent_speaking_state {agent_speaking_state}")
-        sys.stdout.flush()
-        try:
-            data = feedback_socket.recv(text_buffer_size).decode().strip()
-            if not data:
-                print('[DiffSHEG feedback] Empty data received, connection may be closing.')
-                time.sleep(0.01)
-                continue
-
-            with global_lock:
-                print("[Greta DiffSHEG] feedback data received", data)
-                if data == 'end':
-                    print("[Greta DIFFSHEG] end feedback received by python")
-                    sys.stdout.flush()
-                    agent_speaking_state = False
-                elif data == 'start':
-                    print("[Greta DIFFSHEG] start feedback received by python")
-                    sys.stdout.flush()
-                    agent_speaking_state = True
-            
-            # Send acknowledgment back
-            feedback_socket.sendall('ok\r\n'.encode())
-
-        except socket.timeout:
-            continue
-        except ConnectionResetError:
-            print('[DiffSHEG feedback] ConnectionReset')
-            break
-        except BrokenPipeError:
-            print("[DiffSHEG feedback] Broken pipe error.")
-            break
-        except Exception as e:
-            if isinstance(e, socket.error) and e.errno == 10057: # Not connected
-                 print("[DiffSHEG feedback] Socket not connected.")
-                 break
-            print(f"[DiffSHEG feedback] Error: {e}")
-            traceback.print_exc()
-            break
-    
-    feedback_socket.close()
-    print('[DiffSHEG feedback] loop ended')
 
 if __name__=='__main__':
     main()

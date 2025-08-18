@@ -15,6 +15,7 @@ import greta.core.util.time.Timer;
 import greta.core.util.Constants;
 
 import java.util.List;
+import java.lang.Integer;
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
 
@@ -22,9 +23,9 @@ public class MPEG4AnimatableHold extends MPEG4Animatable{
     
     private boolean previousHoldFrame = this.getCharacterManager().getHoldFrame();
     private int newBaseFrameTime = 0;
-    private int fapFrameCounter = 0;
-    private int bapFrameCounter = 0;
-    private int audioFrameCounter = 0;
+    private Integer fapShift = null;
+    private Integer bapShift = null;
+    private boolean isShiftCalculated = false;
 
     public MPEG4AnimatableHold(CharacterManager cm) {
         super(cm,true);
@@ -46,9 +47,8 @@ public class MPEG4AnimatableHold extends MPEG4Animatable{
         if (this.previousHoldFrame && !this.getCharacterManager().getHoldFrame()){
             this.newBaseFrameTime = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND);
             System.out.println("[Greta MPEG4AnimatableHold] Stopped Holding, new base for time :" + this.newBaseFrameTime);
-            this.fapFrameCounter = 0;
-            this.bapFrameCounter = 0;
-            this.audioFrameCounter = 0;
+            this.fapShift = null;
+            this.bapShift = null;
             
         this.previousHoldFrame = false;
         }
@@ -58,13 +58,13 @@ public class MPEG4AnimatableHold extends MPEG4Animatable{
     public void performFAPFrames(List<FAPFrame> newFapFrames, ID requestId) {
         System.out.println("[Greta MPEG4AnimatableHold] just entered performFAPFrames.");
         waitForHoldRelease();
-        for (FAPFrame fapframe : newFapFrames) {
-            int currentFapFrameNumber = this.newBaseFrameTime + this.fapFrameCounter;
-            fapframe.setFrameNumber(currentFapFrameNumber);
-            this.fapFrameCounter++;
+        if (fapShift == null) {
+            fapShift = this.newBaseFrameTime - newFapFrames.get(0).getFrameNumber();
+            System.out.println("[Greta MPEG4AnimatableHold] Calculated FAP shift: " + fapShift);
         }
-        System.out.println("[Greta MPEG4AnimatableHold] fap counter." + this.fapFrameCounter);
-        System.out.println("[Greta MPEG4AnimatableHold]Received a FAP batch of size" + newFapFrames.size());
+        for (FAPFrame fapframe : newFapFrames) {
+            fapframe.setFrameNumber(fapframe.getFrameNumber() + fapShift);
+        }
         super.performFAPFrames(newFapFrames,requestId);
     }
 
@@ -72,9 +72,11 @@ public class MPEG4AnimatableHold extends MPEG4Animatable{
     public void performFAPFrame(FAPFrame fapFrame, ID requestId) {
         System.out.println("[Greta MPEG4AnimatableHold] just entered performFAPFrame.");
         waitForHoldRelease();
-        int currentFapFrameNumber = this.newBaseFrameTime + this.fapFrameCounter;
-        fapFrame.setFrameNumber(currentFapFrameNumber);
-        System.out.println("[Greta MPEG4AnimatableHold] fap counter." + this.fapFrameCounter);
+        if (fapShift == null) {
+            fapShift = this.newBaseFrameTime - fapFrame.getFrameNumber();
+            System.out.println("[Greta MPEG4AnimatableHold] Calculated FAP shift: " + fapShift);
+        }
+        fapFrame.setFrameNumber(fapFrame.getFrameNumber() + fapShift);
         super.performFAPFrame(fapFrame, requestId);
     }
 
@@ -82,13 +84,13 @@ public class MPEG4AnimatableHold extends MPEG4Animatable{
     public void performBAPFrames(List<BAPFrame> newBapFrames, ID requestId) {
         System.out.println("[Greta MPEG4AnimatableHold] just entered performBAPFrames.");
         waitForHoldRelease();
-        for (BAPFrame bapframe : newBapFrames) {
-            int currentBapFrameNumber = this.newBaseFrameTime + this.bapFrameCounter;
-            bapframe.setFrameNumber(currentBapFrameNumber);
-            this.bapFrameCounter++;
+        if (bapShift == null) {
+            bapShift = this.newBaseFrameTime - newBapFrames.get(0).getFrameNumber();
+            System.out.println("[Greta MPEG4AnimatableHold] Calculated BAP shift: " + bapShift);
         }
-        System.out.println("[Greta MPEG4AnimatableHold] bap counter." + this.bapFrameCounter);
-        System.out.println("[Greta MPEG4AnimatableHold] Received a BAP batch of size" + newBapFrames.size());
+        for (BAPFrame bapframe : newBapFrames) {
+            bapframe.setFrameNumber(bapframe.getFrameNumber() + bapShift);
+        }
         super.performBAPFrames(newBapFrames, requestId);
     }
 
@@ -96,10 +98,8 @@ public class MPEG4AnimatableHold extends MPEG4Animatable{
     public void performAudios(List<Audio> list, ID requestId, Mode mode) {
         System.out.println("[Greta MPEG4AnimatableHold] just entered performAudios.");
         waitForHoldRelease();
-        System.out.println("[Greta MPEG4AnimatableHold] audio counter." + this.audioFrameCounter);
         if (!list.isEmpty()) {
             double newbaseTimeSeconds = (double) this.newBaseFrameTime / Constants.FRAME_PER_SECOND;
-                
             list.get(0).setTime(newbaseTimeSeconds);
         }
         super.performAudios(list, requestId, mode);

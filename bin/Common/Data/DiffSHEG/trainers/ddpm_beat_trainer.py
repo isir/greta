@@ -67,6 +67,7 @@ class DDPMRunner_beat(object):
         self.base_R_offset = rot_cvt.euler_angles_to_matrix(offset_base, "XYZ").float()
         self.thumb1_R_offset = rot_cvt.euler_angles_to_matrix(torch.tensor([10., 42., -7.]) * np.pi / 180, "XYZ").float()
         self.thumb2_R_offset = rot_cvt.euler_angles_to_matrix(torch.tensor([10., 0., 0.]) * np.pi / 180, "XYZ").float()
+        self.chest_R_offset = rot_cvt.euler_angles_to_matrix(torch.tensor([-10.0, 0.0, 0.0]) * np.pi / 180, "XYZ").float()
         self.arm_joints = ("Elbow", "Wrist")
 
         if eval_model is not None and 'test' not in self.opt.mode:
@@ -342,6 +343,8 @@ class DDPMRunner_beat(object):
                                 R_joint = self.thumb2_R_offset @ R_joint
                             elif k.endswith(self.arm_joints):
                                 R_joint = R_offset.T @ R_joint @ R_offset
+                            elif k == "Chest3":
+                                R_joint = R_joint @ self.chest_R_offset
                             data[iii * 3:iii * 3 + 3] = rot_cvt.matrix_to_euler_angles(R_joint, "XYZ") * 180 / np.pi
                             data_rotation[self.ori_list[k][1] - v:self.ori_list[k][1]] = data[iii * 3:iii * 3 + 3]
                     frames_for_this_chunk.append(data_rotation)

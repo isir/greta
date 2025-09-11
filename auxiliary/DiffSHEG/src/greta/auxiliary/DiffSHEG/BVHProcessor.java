@@ -18,6 +18,8 @@ import java.util.Map;
  * @author Leroux Paul
  */
 
+// This class is used to process a BVH file or line into a BAP file or frame.
+// The logic is equivalent as the one found in the BVHMocap project, but adapted for the direct reading of frame(s)
 public class BVHProcessor {
 
     private final List<BVHChannelInfo> channelOrder = new ArrayList<>();

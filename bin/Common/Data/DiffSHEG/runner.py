@@ -175,6 +175,7 @@ def main():
             pass
         print("[Greta DiffSHEG] System warmup finished")
     except Exception as e:
+        
         print(f"[Greta DiffSHEG] WARNING: Warmup failed. Error: {e}")
     # Send the ready signal
     greta_socket.send('READY\r\n'.encode())
@@ -184,11 +185,8 @@ def main():
     gesture_queue = queue.Queue()
 
     def producer_task(audio_data):
-        print("[Greta DiffSHEG] Prod task started")
         try:
-            start_generator_init = time.time()
             generator = runner.generate_realtime_frame(audio_data=audio_data)
-            print(f"[Greta DiffSHEG] Time to initialize generator: {time.time() - start_generator_init:.4f} seconds")
             for frame in generator:
                 gesture_queue.put(frame)
             gesture_queue.put(None)
@@ -211,7 +209,6 @@ def main():
                 current_file_mod_time = os.path.getmtime(agent_audio_path)
                 if current_file_mod_time != last_file_mod_time and not is_generating:
                     print("[Greta DiffSHEG] Detected new audio file. Starting generation.")
-                    print("[Greta DiffSHEG] time of change :",os.path.getmtime(agent_audio_path))
                     is_generating = True
                     last_file_mod_time = current_file_mod_time
                     
@@ -229,7 +226,6 @@ def main():
                 frame_chunk = gesture_queue.get_nowait()
 
                 if frame_chunk is None:
-                    print("[Greta DiffSHEG] Producer finished.")
                     if producer_thread is not None:
                         final_send_time = time.time()
                         producer_thread.join()
@@ -238,13 +234,11 @@ def main():
                         generation_duration = final_send_time - generation_start_time
                         time_to_wait = audio_duration - generation_duration
                         wait_buffer = 0.1
+                        # Since our generation is faster than the animation, we wait a bit to avoid sending an end statement beforethe actual end of the animation
                         time.sleep(wait_buffer + time_to_wait)
                         greta_socket.send('END_OF_GENERATION\r\n'.encode())
-                        print(f"[Greta DiffSHEG] Python sent END_OF_GENERATION to Java.")
-                        sys.stdout.flush()
                         
                 else:
-                    sys.stdout.flush()
                     frame_strings = [' '.join(map(str, frame)) for frame in frame_chunk]
                     batch_motion_str = ';'.join(frame_strings)
                     greta_socket.send('{}\r\n'.format(batch_motion_str).encode())

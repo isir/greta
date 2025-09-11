@@ -19,7 +19,7 @@
             <menu name="Environment">
                 <item module="Environment" name="Environment"/>
                 <item module="MPEG4 Animatable" name="MPEG-4 Animatable"/>
-                <item module="MPEG4 Animatable with BAP Holding" name="MPEG-4 Animatable with BAP Holding"/>
+                <item module="MPEG4 Animatable with Holding" name="MPEG-4 Animatable with Holding"/>
                 <menu name="Environment Manager">
                     <menu name="Generic">
                         <item module="Generic Environment Manager" name="Environment Manager"/>
@@ -849,7 +849,7 @@
             <parameter default="1" get_method="getScaleY" get_on="object" name="scaleY" set_method="setScaleY" set_on="object" type="double"/>
             <parameter default="1" get_method="getScaleZ" get_on="object" name="scaleZ" set_method="setScaleZ" set_on="object" type="double"/>
         </module>
-        <module name="MPEG4 Animatable with BAP Holding" style="Animations">
+        <module name="MPEG4 Animatable with Holding" style="Animations">
             <object class="greta.core.animation.mpeg4.MPEG4AnimatableHold" lib_id="greta_mpeg4"/>
             <frame class="greta.core.utilx.gui.TreeNodeController" lib_id="greta_utilx" type="frame">
                 <link method="setTreeNode" on="frame"/>

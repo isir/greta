@@ -51,12 +51,18 @@ public class DiffSHEG extends BAPFrameEmitterImpl implements CharacterDependent 
     public DiffSHEG (CharacterManager cm) throws IOException {
         System.out.println("[Greta DiffSHEG] greta.auxiliary.DiffSHEG.DiffSHEG()");
         this.cm = cm;
+        // Since our generation has a startup delay, we use the holdable version of MPEGAnimatable.
+        // Check MPEG4AnimatableHold to know more.
         this.cm.setHoldFrame(true);
 
         gesture_server = new Server();
         gesture_server.setAddress("localhost"); 
         gesture_server.setPort("6501"); 
-        
+
+        ///////////////////////
+        // BVH file processing. Check BVHProcessor.java to know more.
+        // We also use a "base bvh file" to know the skeleton.
+        ///////////////////////
         bvhProcessor = new BVHProcessor();
         try (BufferedReader br = new BufferedReader(new FileReader(base_bvh_path))) {
             bvhProcessor.parseBVHHeader(br);
@@ -86,6 +92,7 @@ public class DiffSHEG extends BAPFrameEmitterImpl implements CharacterDependent 
                 // Once connected, send a confirmation to Python
                 gesture_server.sendMessage("ok");
                 String readySignal = gesture_server.receiveMessage();
+                // We do a system warmup on the python side, so we wait a ready signal
                 if (readySignal != null && readySignal.equals("READY")){
                     System.out.println("[Greta DiffSHEG] READY signal received from Python. Starting gesture loop.");
                     receiveGestureDataLoop();

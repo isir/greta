@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing] Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]It's nice to meet you, [NAME]. How are you doing today?
+User: [Backchannel; Greeting or Closing] You.
+Agent: [Baseline]I'm doing well, thank you for asking. How about you, [NAME]? How's your day been so far?
+User: [Sharing positive feeling or emotion; Greeting or Closing] Pretty good.
+Agent: [Baseline]That's great to hear. What's been the highlight of your day?
+User: [Sharing personal information or Describe past event; Understanding or New Perspective] Think I'm doing the test.
+Agent: [Baseline]Ah, got it. So, your doctor mentioned you might be here to chat about alcohol use. Is that something you'd be open to discussing today?

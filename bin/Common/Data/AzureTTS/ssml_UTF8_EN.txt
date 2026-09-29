@@ -1,0 +1,2 @@
+
+<speak version="1.0" xml:lang="en-US" xmlns="http://www.w3.org/2001/10/synthesis" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.w3.org/2001/10/synthesis http://www.w3.org/TR/speech-synthesis/synthesis.xsd"><prosody pitch="0.0%" rate="0.0%"> <mark name="tm1"/> Hello, <mark name="tm2"/> My name is Camille. <mark name="tm3"/><emphasis level="moderate"> I am one of the virtual character </emphasis><mark name="tm4"/> of the Greta platform. <mark name="tm5"/><break time="500ms"/> <mark name="end"/></prosody></speak>

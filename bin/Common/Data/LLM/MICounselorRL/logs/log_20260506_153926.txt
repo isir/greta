@@ -1,0 +1,15 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [La catégorie pour l'énoncé du patient "Je suis Ney, comment tu vas aujourd'hui" est "Accueil ou clôture".]Je suis [NAME], comment tu vas aujourd'hui
+Agent: [Baseline]EnchantÃ©e, [NAME]Je vais bien, merci. Comment allez-vous aujourd'hui ?
+User: [Catégorie : Accueil ou clôture]Je vais très bien merci de demander écoute
+Agent: [Baseline] C'est trais bien a entendre ! Comment se passe votre consommation actuelle d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]Consommation d'alcool actuelle est très élevée et donc du coup je sais pas comment m'en sortir en fait.
+Agent: [Baseline]Il peut aitre difficile de raiduire la consommation d'alcool lorsque celle-ci est importante. Avez-vous daija raiflaichi a des raisons pour lesquelles vous souhaitez changer votre comportement vis-a-vis de l'alcool ?
+User: [Contexte : Thérapeute : Il peut être difficile de réduire la consommation d'alcool lorsque celle-ci est importante. Avez-vous déjà réfléchi à des raisons pour lesquelles vous souhaitez changer votre comportement vis-à-vis]Raison notamment par rapport à ma famille, je suis un peu j'abuse un peu dans la consommation donc je les impacte.
+Agent: [Baseline]Je comprends que cela peut aitre inquiaitant pour votre famille et que vous voulez changer votre comportement en consaiquence. Quels changements spaicifiques avez-vous envisajai de mettre en place?
+User: [inconnu]Rien de spécial justement c'est pour ça que je suis venu vous parler de mon habitat en fait.
+Agent: [Baseline] Je vois. Pourquoi est-ce difficile pour vous de raiduire votre consommation d'alcool ? Quelles sont les difficultais ou les obstacles que vous rencontrez ?
+User: [Partager des informations personnelles ou décrire un événement passé]Simplement c'est dur c'est dur d'arrêter et j'arrive plus à ravir ça en fait ça me ça me permet de de 
+Agent: [Baseline] Je comprends que cela peut Ãªtre difficile de rÃ©duire sa consommation d'alcool. Avez-vous essayÃ© avant de mettre fin Ã  votre consommation dâ€™alcool? Si oui, quelle avait Ã©tÃ© lâ€™expÃ©rience et quelles sont les difficultÃ©s que vous aviez rencontrÃ©es ?
+User: [LeMAINENT D'UN COMPORTEMENT MAUVAIS À L'AVENIR]À plusieurs reprises mais sans sans forcément réussir à réduire non à chaque fois je retombe.
+Agent: [Baseline]  Cela peut arriver. Est-ce que vous avez une idai de ce qui daiclencheur votre consommation d'alcool, ou ce qui vous pousse a bu plus que vous l'aimerait?

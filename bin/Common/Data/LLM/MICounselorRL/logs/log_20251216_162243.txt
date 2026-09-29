@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel] How are you?
+Agent: [Baseline]Don't worry, we can continue without it.Hi Camille, I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing; Backchannel] I'm fine. How are you?
+Agent: [Baseline]I'm doing well, thank you. I appreciate you taking the time to chat with me today. What brings you in to see me?
+User: [Sharing personal information or Describe past event; Changing unhealthy behavior in the future] It was I assume it's a smoking problem.
+Agent: [Baseline]I see. How do you feel about that being the reason for our visit today?

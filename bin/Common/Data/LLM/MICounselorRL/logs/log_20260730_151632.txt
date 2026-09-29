@@ -1,0 +1,25 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good. And you?
+Agent: [Baseline]I'm well, thank you. [NAME], I understand you've been referred here because of your alcohol use. How's that been going for you?
+User: [unknown]There is something different.
+Agent: [Baseline]What makes you say that, [NAME]?
+User: [unknown]Even when she's speaking, we have, like, some smaller
+Agent: [Baseline]I see. So, you're noticing some changes in your drinking, but you're not sure what to make of them.
+User: [Greeting or Closing]Thank you.
+Agent: [Baseline]Of course, [NAME]. Can you tell me more about these changes? What's been different?
+User: [Sharing negative feeling or emotion]I'm more angry than before.
+Agent: [Baseline]It sounds like you're feeling frustrated, [NAME]. How does that make you feel?
+User: [unknown]What what can I do to stop drinking?
+Agent: [Baseline]Let's explore that together. Why do you want to stop drinking, [NAME]?
+User: [Sharing negative feeling or emotion]Makes me feel stressed and sad.
+Agent: [Baseline]I see. So, you're feeling stressed and sad when you drink. How does that make you feel about continuing to drink?
+User: [unknown]You. Which difference because if we put zero,
+Agent: [Baseline][NAME], I hear you're feeling unsure about whether to change. Let's explore that. What are some reasons you might want to cut back on drinking?
+User: [unknown]She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. She should be understand why you have gaps. I don't know. Yeah. Your your inference time is faster than the
+Agent: [Baseline][NAME], it sounds like you're feeling stuck. Let's try something different. What's one small step you could take to drink less in the next week?
+User: [unknown]Should be, like, maximum one frame.
+Agent: [Baseline]How about limiting yourself to 1 drink per day, [NAME]?
+User: [unknown]I like it too.
+Agent: [Baseline]That's a great start, [NAME]. Why do you think you can do this?

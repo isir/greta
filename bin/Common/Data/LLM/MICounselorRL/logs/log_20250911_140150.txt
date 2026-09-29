@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing] My name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How are you doing today?
+User: [Sharing positive feeling or emotion; Greeting or Closing] Doing great, actually.
+Agent: [Baseline]That's good to hear, [NAME]. I understand you've been referred here to talk about your alcohol use. Can you tell me a bit about that?

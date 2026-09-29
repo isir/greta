@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing][NAME]
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How’s your day been so far?
+User: [Greeting or Closing]My name is ney
+Agent: [Baseline]Got it, [NAME]. How’s your week shaping up? Anything good happen lately? *(keeping it light, building rapport)*
+User: [Greeting or Closing] I'm I'm fine.
+Agent: [Baseline]That’s good to hear. What do you enjoy doing to unwind after a long day? *(open-ended, exploring values/routines)*

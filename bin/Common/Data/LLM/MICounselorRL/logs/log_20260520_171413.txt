@@ -1,0 +1,11 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME]. Je suis Jonathan et je suis enchanté de vous parler.
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, Jonathan ?
+User: [inconnu]Ecoutez, je vais je vais plutôt bien, ce n'est Ecoutez, je vais je vais plutôt bien, ce n'est pas à moi de de le dire en fait.
+Agent: [Baseline]Je comprends. Vous avez peut-aitre des choses en taite qui vous praioccupent. Voulez-vous en parler ?
+User: [Accueil ou clôture]Parler d'autres choses.
+Agent: [Baseline]Bien sûr, Jonathan. De quoi aimeriez-vous parler ?
+User: [inconnu]Moi, je ne sais pas, je m'ai parlé de Moi, je ne sais pas, je m'ai parlé de Moi, je ne sais pas, je m'ai parlé de Moi, je ne sais pas, je m'ai parlé de Moi, je ne sais pas, je m'ai parlé de mal de choses. À vous de me dire lesquelles.
+Agent: [Baseline]D'accord, Jonathan. Pourrions-nous discuter de votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Oui, on peut on peut très bien discuter de ça, mais c'est Oui, on peut on peut très bien discuter de ça, mais c'est Oui, on peut on peut très bien discuter de ça, mais c'est Oui, on peut on peut très bien discuter de ça, mais c'est Oui, on peut on peut très bien discuter de ça, mais c'est Oui, on peut on peut très bien discuter de ça, mais c'est c'est complètement étrange ce qui se passe, je n'arrive pas. c'est complètement étrange ce qui se passe, je n'arrive pas. c'est complètement étrange ce qui se passe, je n'arrive pas. c'est complètement étrange ce qui se passe, je n'arrive pas. c'est complètement étrange ce qui se passe, je n'arrive pas. c'est complètement étrange ce qui se passe, je n'arrive pas. Comprendre.
+Agent: [Baseline]Je suis daisolai pour les problaimes de communication que vous rencontrez, Jonathan. Pouvez-vous me dire ce qui vous inquiaite a propos de votre consommation d'alcool ?

@@ -1,0 +1,31 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good. Thank you.
+Agent: [Baseline]That's great to hear, [NAME]. I'm glad you're doing well. I understand your doctor referred you to me. How do you feel about that?
+User: [Sharing negative feeling or emotion]I feel a bit stressed.
+Agent: [Baseline]I see. It's understandable to feel that way, [NAME]. Can you tell me more about what's causing you stress?
+User: [unknown]Yeah. I know.
+Agent: [Baseline]It sounds like you're feeling some pressure, [NAME]. What's making you feel that way?
+User: [Changing unhealthy behavior in the future]Because I have a lot of things to do at work.
+Agent: [Baseline]I see. How does that relate to what we're talking about today, [NAME]?
+User: [unknown]Because I have a lot of things to do at work.
+Agent: [Baseline]I understand, [NAME]. But I'm here to talk about your alcohol use. How does that fit into your busy schedule?
+User: [unknown]Because after work, I drink alcohol alcohol. Because after work, I drink alcohol alcohol. Because after work, I drink alcohol alcohol. Because after work, I drink alcohol alcohol. Because after work, I drink alcohol alcohol. Because after work, I drink alcohol alcohol. Because after work, I drink alcohol alcohol. Because after work, I drink alcohol alcohol. Because after work, I drink alcohol alcohol
+Agent: [Baseline][NAME], it sounds like you're feeling stuck in a pattern. Let's explore that together. How many drinks do you typically have after work?
+User: [Changing unhealthy behavior in the future]Like, five
+Agent: [Baseline]Five drinks in one go? That's considered binge drinking, [NAME]. Did you know that?
+User: [unknown]No. I had no idea.
+Agent: [Baseline]I understand, [NAME]. It's not uncommon. But binge drinking can have serious health consequences. Have you ever thought about cutting back?
+User: [unknown]Yeah. Every day.
+Agent: [Baseline]What stops you from making a change, [NAME]?
+User: [unknown]That is difficult.
+Agent: [Baseline]I hear you, [NAME]. It can be hard to make changes. But let's explore why it's important for you to make a change. Why do you want to cut back?
+User: [Changing unhealthy behavior in the future]Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to Because I want to be less dependent.
+Agent: [Baseline]It sounds like you have a strong desire to reduce your dependence on alcohol, [NAME]. That's a great start. Let's find one small step you can take this week to move towards that goal. What do you think that could be?
+User: [Changing unhealthy behavior in the future]Maybe drink one less cup.
+Agent: [Baseline]That's a great first step, [NAME]. So, you're planning to have four drinks instead of five after work this week?
+User: [Changing unhealthy behavior in the future]Yes. Exactly.
+Agent: [Baseline] Thank you for taking the time to chat with me. I hope this discussion has been helpful. You've already taken a big step by thinking things through. I wish you every success in your endeavours!
+User: [unknown]Yeah. I see it better, but, like,
+Agent: [Baseline]It's okay, [NAME]. We all have our struggles. If you ever need to talk again, you know where to find me. Take care.  Thank you for taking the time to chat with me. I hope this discussion has been helpful. You've already taken a big step by thinking things through. I wish you every success in your endeavours!

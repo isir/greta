@@ -1,0 +1,23 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture]bonjour je suis selma
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [inconnu] Enchant? qui, ?a va de tr?s tr?s tr?s loin
+Agent: [Baseline]Ça fait plaisir de vous entendre, [NAME]. Comment vous sentez-vous par rapport à votre activité physique en ce moment ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] En ce moment je ne fais pas beaucoup de sport parce que je suis
+Agent: [Baseline]Je comprends, [NAME]. Qu'est-ce qui vous empêche de faire du sport en ce moment ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Ce qui m'emp?che, c'est que j'ai mont? ton livre.
+Agent: [Baseline]Merci pour votre honnêteté, [NAME]. Qu'est-ce qui vous motive à vouloir augmenter votre activité physique ?
+User: [inconnu] C'est qui me dit va vouloir monter dans la soci?t? parce que je me sens
+Agent: [Baseline]Merci pour votre honnêteté, [NAME]. C'est une excellente raison pour vouloir augmenter votre activité physique. Quelle petite étape pourriez-vous envisager pour commencer à bouger davantage cette semaine ?
+User: [inconnu] C'est qui me dit va vouloir monter dans la soci?t? parce que je me sens C'est qui me dit va vouloir monter dans la soci?t? parce que je me sens C'est qui me dit va vouloir monter dans la soci?t? parce que je me sens C'est qui me dit va vouloir monter dans la soci?t? parce que je me sens Est-ce que tu peux r?p?ter ta question
+Agent: [Baseline]Bien sûr, [NAME]. Quelle petite étape pourriez-vous envisager pour commencer à bouger davantage cette semaine ?
+User: [Modifier les comportements malsains � l'avenir] Je sais pas peut-?tre devenir ce que j'ai ? faire.
+Agent: [Baseline]C'est une bonne idée, [NAME]. Pourquoi ne pas commencer par décider d'une activité que vous aimez et que vous pouvez intégrer facilement dans votre quotidien ? Par exemple, une courte marche chaque jour ?
+User: [Modifier les comportements malsains � l'avenir] C'est vrai que tu as raison, d?j? je le fais,
+Agent: [Baseline]Super, [NAME] ! Quelle distance ou durée pensez-vous pouvoir ajouter à vos marches cette semaine ?
+User: [Modifier les comportements malsains � l'avenir] Peut-?tre 30 minutes.
+Agent: [Baseline]C'est un excellent objectif, [NAME]. Comment vous sentez-vous à l'idée d'ajouter 30 minutes de marche par jour cette semaine ?
+User: [Partager un sentiment ou une �motion positive] C'est d?j? tr?s bien et puis c'est une bonne ?tape pour reprendre le sport.
+Agent: [Baseline]Je suis ravie de l'entendre, [NAME]. Avez-vous une idée de quand vous pourriez intégrer ces 30 minutes de marche dans votre journée ?
+User: [Modifier les comportements malsains � l'avenir] Je ne sais pas peut-?tre ? la fin de la journ?e, il fait beau,
+Agent: [Baseline]Très bonne idée, [NAME]. Marcher en fin de journée peut être très agréable. Avez-vous besoin de soutien ou de rappels pour vous aider à rester motivée ?  END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !

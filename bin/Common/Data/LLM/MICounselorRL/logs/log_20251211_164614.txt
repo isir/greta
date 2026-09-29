@@ -1,0 +1,6 @@
+User: [Greeting or Closing;] Hello?
+Agent: [Baseline]Hello! I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing; Backchannel] I'm doing fine. And you?
+Agent: [Baseline]I'm doing well, thank you for asking. It's good to have you here today. What brings you some comfort or joy in your day-to-day life?
+User: [Unknown] You tell me.
+Agent: [Baseline]I appreciate your honesty. I’d love to hear what *you* enjoy—maybe a hobby, time with friends, or even a quiet moment that helps you unwind? What’s something that makes your day a little brighter?

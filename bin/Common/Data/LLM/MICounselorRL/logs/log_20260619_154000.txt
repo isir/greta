@@ -1,0 +1,61 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [inconnu]Je m'ai pas testé là.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Trais bien, comment allez-vous aujourd'hui ?
+User: [Backchannel]Et toi
+Agent: [Baseline]Je suis une intelligence artificielle, je n'ai pas de sentiments. Mais je suis la pour vous aider. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais bien.
+Agent: [Baseline]C'est bien. Est-ce que vous avez des soucis ou des questions qui vous praioccupent en ce moment ?
+User: [k]non
+Agent: [Baseline]Trais bien. Je suis ici pour vous aider a amailiorer votre santai. Je sais que vous avez aitai orientai vers moi par votre maidecin traitant pour discuter de votre activitai physique. Comment vous sentez-vous par rapport a cela ?
+User: [Compréhension ou nouvelle perspective]Bien, enfin je voudrais peut-être faire plus de sport.
+Agent: [Baseline]C'est une excellente idai ! Qu'est-ce qui vous motive a vouloir faire plus de sport ?
+User: [Compréhension ou nouvelle perspective]La passion.
+Agent: [Baseline]C'est jainial que vous ayez une passion pour le sport. Quels sont les sports ou les activitais physiques que vous appraiciez le plus ?
+User: [Partager des informations personnelles ou décrire un événement passé]L'escalade et la natation.
+Agent: [Baseline]C'est fantastique ! L'escalade et la natation sont de tres bonnes activitais physiques. Est-ce que vous avez eu l'occasion de pratiquer ces activitais recemment ?
+User: [Compréhension ou nouvelle perspective]Oui, j'ai l'occasion d'en pratiquer.
+Agent: [Baseline]C'est tres bien. Est-ce que vous avez des objectifs specifiques en termes d'activitai physique pour les prochaines semaines ou les prochains mois ?
+User: [Compréhension ou nouvelle perspective]La course à pied
+Agent: [Baseline]La course a pied est une excellente activitai physique pour amailiorer la forme physique et la santai. Est-ce que vous avez daija couru auparavant ?
+User: [Partager des informations personnelles ou décrire un événement passé]Oui, ça remonte à un an.
+Agent: [Baseline]C'est tres bien que vous ayez de l'experience en course a pied. Qu'est-ce qui vous a empachai de continuer a courir regulierement ?
+User: [Backchannel]Pourrez la météo.
+Agent: [Baseline]Je comprends. La maitaio peut parfois rendre difficile la pratique d'une activitai en extreiur comme la course a pied. Est-ce que vous avez pense a des options pour courir a l'intreiur ou dans un environnement controle ?
+User: [Compréhension ou nouvelle perspective]Oui, mais je n'aime pas coureur à l'intérieur.
+Agent: [Baseline]Je comprends. Il existe d'autres activitais physiques que vous pourriez pratiquer a l'intreiur si la maitaio est un obstacle. Est-ce que vous avez pense a des activitais que vous pourriez faire a l'intreiur pour rester actif ?
+User: [Compréhension ou nouvelle perspective]La piscine, l'escalade et la musculation.
+Agent: [Baseline]C'est fantastique que vous ayez autant d'options pour rester actif a l'intreiur. Est-ce que vous avez des preferences parmi ces activitais ?
+User: [Partager des informations personnelles ou décrire un événement passé]La natation.
+Agent: [Baseline]La natation est une excellente activitai physique pour amailiorer la forme physique et la santai. Est-ce que vous avez des objectifs specifiques en termes de natation pour les prochaines semaines ou les prochains mois ?
+User: [Compréhension ou nouvelle perspective]Nager plus longtemps sans être essoufflé.
+Agent: [Baseline]C'est un objectif tres louable. Qu'est-ce qui vous empachai de nager plus longtemps sans etre essouffle en ce moment ?
+User: [inconnu]Je sais voir.
+Agent: [Baseline]Je vois. Est-ce que vous avez deja essaye des techniques de respiration pour vous aider a nager plus longtemps sans etre essouffle ?
+User: [Compréhension ou nouvelle perspective]Oui mais c'est pas le fait d'être essoufflé, c'est le fait d'être fatigué.
+Agent: [Baseline]Je comprends. Est-ce que vous avez pense a augmenter progressivement la durai de vos saiances de natation pour amailiorer votre endurance ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non enfin quand je suis fatiguée je m'arrête, je me repose après je reprends.
+Agent: [Baseline]Je comprends. Est-ce que vous avez pense a faire des pauses plus courtes et a augmenter progressivement la durai de vos saiances de natation pour amailiorer votre endurance ?
+User: [inconnu]Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé. Non, je n'ai pas pensé.
+Agent: [Baseline]Je comprends. Est-ce que vous seriez interesse par des conseils pour augmenter progressivement la durai de vos saiances de natation et amailiorer votre endurance ?
+User: [Compréhension ou nouvelle perspective]oui
+Agent: [Baseline]Parfait. Est-ce que vous avez une idee de la durai que vous pourriez nager actuellement sans vous fatiguer trop rapidement ?
+User: [Compréhension ou nouvelle perspective]Quarante cinq minutes une heure je pense si c'est sur du dos.
+Agent: [Baseline]C'est tres bien. Est-ce que vous pourriez me donner une idee de la distance que vous pourriez nager en une heure ?
+User: [Compréhension ou nouvelle perspective]Quinze vingt, ça dépend.
+Agent: [Baseline]D'accord. Est-ce que vous seriez interesse par des conseils pour augmenter progressivement la distance que vous pouvez nager en une heure ?
+User: [Compréhension ou nouvelle perspective]oui
+Agent: [Baseline]Parfait. Est-ce que vous pourriez me donner une idee de la frequence a laquelle vous pratiquez la natation en ce moment ?
+User: [Backchannel]Par semaine
+Agent: [Baseline]Je vois. Est-ce que vous seriez interesse par des conseils pour augmenter la frequence de vos saiances de natation ?
+User: [Modifier les comportements malsains à l'avenir]oui
+Agent: [Baseline]Parfait. Est-ce que vous pourriez me donner une idee de la frequence a laquelle vous pratiquez d'autres activitais physiques en ce moment ?
+User: [Backchannel]Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une fois par semaine, y a la musculation, ça dépend des semaines. Une à trois fois.
+Agent: [Baseline]Je comprends. Est-ce que vous seriez interesse par des conseils pour augmenter la frequence de vos saiances de musculation ?
+User: [Partager des informations personnelles ou décrire un événement passé]non je veux la natation
+Agent: [Baseline]D'accord, est-ce que vous seriez interesse par des conseils pour augmenter la frequence de vos saiances de natation ?
+User: [Compréhension ou nouvelle perspective]oui donne moi des conseils
+Agent: [Baseline]Bien sur. Voici quelques conseils pour augmenter la frequence de vos saiances de natation .    Trouvez un horaire qui vous conviendra et qui sera regulier pour vos saiances de natation. Par exemple, vous pourriez nager trois fois par semaine a des heures fixes.   Trouvez un lieu de natation qui vous plait et qui est accessible pour vous. Par exemple, vous pourriez nager dans une piscine municipale ou dans un club de natation.   Fixez-vous des objectifs realistes pour chaque s
+User: [Accueil ou clôture]merci beaucoup pour les conseils
+Agent: [Baseline]Je vous en prie, n'hesitez pas a me contacter si vous avez d'autres questions ou si vous avez besoin de plus de conseils. Merci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.
+User: [Accueil ou clôture]D'accord.
+Agent: [Baseline]Merci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.

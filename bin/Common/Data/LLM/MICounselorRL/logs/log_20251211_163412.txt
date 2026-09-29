@@ -1,0 +1,12 @@
+User: [Greeting or Closing;] Hello?
+Agent: [Baseline]Hello! I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing; Backchannel] Fine. And you?
+Agent: [Baseline]I'm doing well, thank you for asking. I appreciate you taking the time to chat with me today. What brings you in to see me?
+User: [Sharing personal information or Describe past event; Asking for Medical Information] Discuss about alcohol.
+Agent: [Baseline]I see. How has alcohol been fitting into your life lately?
+User: [Unknown] Hockey.
+Agent: [Baseline]Hockey—sounds like a big part of your routine. How does alcohol connect with hockey for you?
+User: [Unknown] Turkey. I said Turkey.
+Agent: [Baseline]Ah, got it—Turkey! How does alcohol fit into your time with friends or watching games?
+User: [Backchannel; Asking for Medical Information] Repeat. What's the problem?
+Agent: [Baseline]No problem at all—just curious. Some folks enjoy a drink during games. How many would you say you have in a typical week?

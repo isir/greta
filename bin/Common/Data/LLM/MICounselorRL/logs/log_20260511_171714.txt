@@ -1,0 +1,17 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis David. Comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je vais bien, merci. Comment allez-vous aujourd'hui, David ?
+User: [Accueil ou clôture]Je vais très bien, merci de demander.
+Agent: [Baseline]C'est bien. Je suis heureux d'entendre cela. Avez-vous des soucis en ce moment ?
+User: [Le maintien d'un comportement malsain à l'avenir]Oui oui, j'ai un gros souci notamment par rapport à l'alcool. Oui oui, j'ai un gros souci notamment par rapport à l'alcool. Oui oui, j'ai un gros souci notamment par rapport à l'alcool. Oui oui, j'ai un gros souci notamment par rapport à l'alcool. Je crois que je bois beaucoup et c'est problématique. Je crois que je bois beaucoup et c'est problématique. Je crois que je bois beaucoup et c'est problématique. Je crois que je bois beaucoup et c'est problématique.
+Agent: [Baseline]Je suis daisolai d'entendre cela, David. Je suis la pour vous aider. Pouvez-vous me parler de votre consommation d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]Ma consommation d'alcool est très élevée, ça devient problématique. Ma consommation d'alcool est très élevée, ça devient problématique. Ma consommation d'alcool est très élevée, ça devient problématique. Ma consommation d'alcool est très élevée, ça devient problématique. Ma consommation d'alcool est très élevée, ça devient problématique. Dans ma vie, ça me cause des problèmes.
+Agent: [Baseline]Je comprends que cela peut aitre difficile a admettre, mais je suis heureux que vous ayez reconnu que votre consommation d'alcool est un problaime. Pouvez-vous me dire ce qui vous a amenai a raialiser cela ?
+User: [Compréhension ou nouvelle perspective]C'est mon entourage. Mon entourage a constaté que je buvais beaucoup trop.
+Agent: [Baseline]Je vois. Et comment cela vous fait-il sentir lorsque vous entendez cela de la part de votre entourage ?
+User: [Partager un sentiment ou une émotion négative]Je ressens énormément de culpabilité. Je ressens énormément de culpabilité. Je ressens énormément de culpabilité. Je ressens énormément de culpabilité. Je ressens énormément de culpabilité. Je ressens énormément de culpabilité. Je ressens énormément de culpabilité. Et d'ailleurs Greta, pourquoi est-ce que tu ne fais pas Et d'ailleurs Greta, pourquoi est-ce que tu ne fais pas Et d'ailleurs Greta, pourquoi est-ce que tu ne fais pas Et d'ailleurs Greta, pourquoi est-ce que tu ne fais pas Et d'ailleurs Greta, pourquoi est-ce que tu ne fais pas Et d'ailleurs Greta, pourquoi est-ce que tu ne fais pas Et d'ailleurs Greta, pourquoi est-ce que tu ne fais pas de back channel, bordel de merde.
+Agent: [Baseline]Je suis daisolai, David, mais je ne suis pas Greta. Je suis [NAME], votre thairapeute. Revenons a notre conversation, voulez-vous ?
+User: [Accueil ou clôture]Oui, je veux bien revenir à notre conversation bien sûr. Désolé pour le contretemps.
+Agent: [Baseline]Pas de problaime, David. Revenons a votre consommation d'alcool. Vous avez mentionnai que vous vous sentiez coupable. Qu'est-ce qui vous fait vous sentir ainsi ?
+User: [inconnu]Donc bon, je ne sais pas.
+Agent: [Baseline]C'est okay, David. Nous allons y travailler ensemble. Pouvez-vous me dire ce qui vous a motivai a venir me voir aujourd'hui ?

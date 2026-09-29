@@ -1,0 +1,21 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour, je m'appelle [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Partager un sentiment ou une émotion négative]Bien, je suis un peu stressé.
+Agent: [Baseline]Je comprends, [NAME]. Le stress peut aitre difficile a jairer. Est-ce que quelque chose en particulier vous praioccupe en ce moment ?
+User: [Partager un sentiment ou une émotion négative]Reli.
+Agent: [Baseline]Je suis daisolai d'entendre cela, [NAME]. Est-ce que vous voulez en parler ? Je suis la pour vous aicouter.
+User: [Compréhension ou nouvelle perspective]Que ça se stabilise au début en fait quand on lance trop vite
+Agent: [Baseline]Je vois. Et comment cela vous affecte-t-il, [NAME] ?
+User: [Compréhension ou nouvelle perspective]Et après tu vas avoir continué ça va ça va revenir normal.
+Agent: [Baseline]Je comprends. Et comment cela vous affecte-t-il, [NAME] ? Est-ce que cela vous inquiaite ou vous frustre ?
+User: [Partager un sentiment ou une émotion négative]Oui ça me stresse.
+Agent: [Baseline]Je suis daisolai d'entendre cela, [NAME]. Est-ce que vous avez daija essayai de faire quelque chose pour raiduire votre stress ?
+User: [inconnu]No.
+Agent: [Baseline]Je vois. Et est-ce que vous seriez ouvert a l'idai d'essayer quelque chose de nouveau pour vous aider a raiduire votre stress ?
+User: [inconnu]Non mais ce voilà il a il a il a téléporté enfin Non mais ce voilà il a il a il a téléporté enfin Non mais ce voilà il a il a il a téléporté enfin Non mais ce voilà il a il a il a téléporté enfin Non mais ce voilà il a il a il a téléporté enfin Non mais ce voilà il a il a il a téléporté enfin Non mais ce voilà il a il a il a téléporté enfin Non mais ce voilà il a il a il a téléporté enfin tu vois, il a téléporté quand quand elle a arrêté de parler,
+Agent: [Baseline]Je suis un peu perdu, [NAME]. Pouvez-vous m'expliquer ce que vous voulez dire par "tailaiportai" ?
+User: [inconnu]Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler Ça rend bizarre parce que ça ça bouge tout tout ça tout de suite après parler ça
+Agent: [Baseline]Je suis daisolai, [NAME], mais je ne comprends pas ce que vous essayez de me dire. Pouvez-vous reformuler votre phrase, s'il vous plait ?
+User: [inconnu]Oui, mais l'a pas fait.
+Agent: [Baseline]Je vois. Et comment cela vous affecte-t-il, [NAME] ? Est-ce que cela vous praioccupe ou vous frustre ?

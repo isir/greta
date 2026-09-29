@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\isir\Documents\NetBeansProjects\greta_20240917_demo_v2_Lucie\greta\bin\Modular.jar</jar>
+  <outfile>C:\Users\isir\Documents\NetBeansProjects\greta_20240917_demo_v2_Lucie\greta\bin\Greta_Facial_expressions.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine>&quot;greta\bin\Configurations\Greta\Advanced\20250128 Greta - Expé Lucie_ful2len.xml&quot;</cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl></downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon></icon>
+  <jre>
+    <path>%JAVA_HOME%;%PATH%</path>
+    <requiresJdk>false</requiresJdk>
+    <requires64Bit>false</requires64Bit>
+    <minVersion></minVersion>
+    <maxVersion></maxVersion>
+  </jre>
+</launch4jConfig>

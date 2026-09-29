@@ -1,0 +1,17 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello?
+Agent: [Baseline]Don't worry, we can continue without it.Hello, Camille. It's nice to meet you. How are you doing today?
+User: [Backchannel]Good on you.
+Agent: [Baseline]That's great to hear! I appreciate you being open with me.  You mentioned you're doing well-what's something that's going well for you lately?
+User: [Sharing negative feeling or emotion]I don't know. Don't work.
+Agent: [Baseline]I hear you-work can be really tough right now. What's something else that's been keeping you busy or giving you a little joy lately? Even small things count.
+User: [Sharing positive feeling or emotion]Family and friends.
+Agent: [Baseline]That's really important. Family and friends can make a big difference. When you're with them, what do you enjoy most about those moments?
+User: [Sustaining unhealthy behavior in the future]Going out and drink Going out and drink Going out and drink Going out and drink Going out and drink something in a bar. I don't know.
+Agent: [Baseline]I see. Bars can be a fun way to unwind with friends. When you go out, what's the best part for you-just the company, the music, or maybe the drinks themselves?
+User: [Backchannel]The company.
+Agent: [Baseline]That makes sense-the people matter most. So when you're with friends, what's one thing you'd  really  miss if you couldn't go out like you usually do?
+User: [unknown]I didn't understand the question.
+Agent: [Baseline]No worries. Let me rephrase. If you couldn't go out with friends for a little while, what would you feel most like you were missing? The laughter, the stories, or something else?
+User: [Sharing negative feeling or emotion]My think they laughed her.
+Agent: [Baseline]I hear you. It sounds like the connection with your friends is really important. When you think about those times, what's one thing you'd want to keep feeling, even if things changed a little?   .. Thank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.

@@ -1,0 +1,21 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Je suis [NAME].
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture]tres bien
+Agent: [Baseline]Super, [NAME]. Votre médecin m'a dit que vous cherchez à augmenter votre activité physique. Comment vous sentez-vous par rapport à cela ?
+User: [Partager un sentiment ou une �motion positive] Je sens que je faire plus d'activit? physique pour me sentir mieux dans ma peau.
+Agent: [Baseline]C'est une excellente motivation, [NAME]. Quelles activités physiques aimez-vous ou avez-vous déjà essayées ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Le badminton, la musculation,
+Agent: [Baseline]Génial, [NAME]. Avez-vous une préférence entre le badminton et la musculation ?
+User: [inconnu] Venite, ufficialmente.
+Agent: [Baseline]D'accord, [NAME]. Quelle serait une petite étape que vous pourriez envisager pour commencer à augmenter votre activité physique cette semaine ?
+User: [inconnu] Commencer directement, il est r?gul? et faire le.
+Agent: [Baseline]C'est une bonne idée de commencer par une activité que vous aimez. Que pensez-vous de planifier une séance de badminton cette semaine ? Peut-être avec un ami ou en solo ?
+User: [Modifier les comportements malsains � l'avenir]avec un ami
+Agent: [Baseline]Super, [NAME]. Quel jour et quelle heure vous conviendraient le mieux pour cette séance de badminton ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Le samedi matin.
+Agent: [Baseline]Parfait, [NAME]. Avez-vous besoin d'aide pour organiser cette séance, comme trouver un endroit ou du matériel ?
+User: [inconnu] J'ai besoin de r?server un un cours de manipal
+Agent: [Baseline]Très bien, [NAME]. Pensez-vous que vous pourriez réserver ce cours d'ici la fin de la semaine ?
+User: [Accueil ou cl�ture] Oui
+Agent: [Baseline]Excellent, [NAME]. Vous avez déjà fait un grand pas en planifiant cette séance. Pensez-vous que ce sera facile ou difficile de respecter cet engagement ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

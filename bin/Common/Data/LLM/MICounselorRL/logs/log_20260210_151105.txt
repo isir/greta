@@ -1,0 +1,3 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing;] My name is April. How are you doing?
+Agent: [Baseline]Pleased to meet you, [NAME]Here's the completed turn with a natural follow-up:  **Therapist:** Pleased to meet you, April. How are you feeling today, coming in to chat?  --- **If the name wasn't extracted (e.g., " NO "), you could say:** No worries at all. How are you feeling today, coming in to talk?

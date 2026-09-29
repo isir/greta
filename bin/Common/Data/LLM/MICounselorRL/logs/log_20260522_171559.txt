@@ -1,0 +1,37 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je m'appelle Ney. Comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je vais bien, merci. Et vous, Ney, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Ecoutez, je vais bien, il fait beau, donc ça va.
+Agent: [Baseline]C'est super que vous vous sentiez bien, Ney. Vous avez des projets pour aujourd'hui ?
+User: [Le maintien d'un comportement malsain à l'avenir]Oui oui, j'ai prévu du coup de sortir avec des amis et de et de boire tout le long de la nuit.
+Agent: [Baseline]Je vois. Et comment vous sentez-vous par rapport a cette soirai ?
+User: [Partager un sentiment ou une émotion positive]Moi je me sens tout excité et très content. Pourquoi
+Agent: [Baseline]C'est bien que vous vous sentiez excitai, Ney. Mais je me demandais si vous aviez daija envisajai de raiduire votre consommation d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]pour quelle raison.
+Agent: [Baseline]Il y a des risques pour la santai liais a la consommation excessive d'alcool, comme les maladies cardiaques, les cancers et les accidents. Il est recommandai de ne pas daipasser 2 verres par jour et de ne pas boire tous les jours.
+User: [Compréhension ou nouvelle perspective]Oui, je suis conscient de ça, mais c'est plus facile à dire qu'à faire.
+Agent: [Baseline]Je comprends que cela puisse aitre difficile, Ney. Avez-vous daija essayai de raiduire votre consommation d'alcool auparavant ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non, je n'ai jamais essayé. C'est, ça m'a l'air trop dur.
+Agent: [Baseline]Je vois. Et comment cela vous affecte-t-il dans votre vie quotidienne ?
+User: [Partager un sentiment ou une émotion négative]Normalement en fait et du coup le lendemain sont, les lendemains sont Normalement en fait et du coup le lendemain sont, les lendemains sont Normalement en fait et du coup le lendemain sont, les lendemains sont Normalement en fait et du coup le lendemain sont, les lendemains sont Normalement en fait et du coup le lendemain sont, les lendemains sont Normalement en fait et du coup le lendemain sont, les lendemains sont Normalement en fait et du coup le lendemain sont, les lendemains sont Normalement en fait et du coup le lendemain sont, les lendemains sont très très durs en fait.
+Agent: [Baseline]Je suis daisolai d'entendre cela, Ney. Cela peut aitre difficile de faire face a ces lendemains difficiles. Avez-vous daija envisajai de demander de l'aide pour votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Un médecin qui m'a orienté vers vous
+Agent: [Baseline]Je vois. Et comment vous sentez-vous par rapport a votre consommation d'alcool en ce moment ?
+User: [Partager un sentiment ou une émotion négative]Je sens que je bois un peu trop.
+Agent: [Baseline]Je comprends. Et comment cela vous affecte-t-il dans votre vie quotidienne ?
+User: [Partager un sentiment ou une émotion négative]Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu Ça m'éloigne de mes amis et ça devient un peu problématique de plus en plus quoi.
+Agent: [Baseline]Je suis daisolai d'entendre cela, Ney. Cela peut aitre difficile de se sentir ailoignai de ses amis a cause de la consommation d'alcool. Avez-vous daija envisajai de faire un changement dans votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour Oui, j'ai déjà envisagé de faire un changement et peut-être pour pas commencer aujourd'hui.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous retient de faire ce changement maintenant ?
+User: [inconnu]C'est pas rien de spécial.
+Agent: [Baseline]Je vois. Et si nous discutions de ce que cela pourrait aitre pour vous de raiduire votre consommation d'alcool ? Quels pourraient aitre les avantages pour vous ?
+User: [Compréhension ou nouvelle perspective]Oui, bien sûr, peut très bien faire cela. Allons-y.
+Agent: [Baseline]Super, Ney. Qu'est-ce qui vous a motivai a daicidai de faire ce changement maintenant ?
+User: [Partager des informations personnelles ou décrire un événement passé]C'est l'âge peut-être, j'ai atteint un âge où faudrait que j'essaye de réduire.
+Agent: [Baseline]C'est une excellente raison, Ney. Et comment pourriez-vous commencer a raiduire votre consommation d'alcool cette semaine ?
+User: [Le patient exprime une intention de modifier son comportement malsain à l'avenir en réduisant sa consommation d'alcool cette semaine. Par conséquent, la catégorie appropriée est : "Modifier les comportements malsains à l'avenir".]On peut essayer de ne pas voir ce week-end.
+Agent: [Baseline]Trais bien, Ney. Et comment vous sentez-vous par rapport a cette daicision ?
+User: [Compréhension ou nouvelle perspective]Très confiant.
+Agent: [Baseline]C'est super, Ney. N'oubliez pas que vous pouvez toujours me contacter si vous avez besoin d'aide ou de soutien. Bonne chance pour cette semaine ! END_CONVOMerci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le controle. Prenez soin de vous.
+User: [Accueil ou clôture]Merci beaucoup et au revoir.
+Agent: [Baseline]Au revoir, Ney. Prenez soin de vous.

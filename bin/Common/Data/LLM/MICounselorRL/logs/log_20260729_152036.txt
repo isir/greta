@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Medical Education]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]Doing good. Thank you. Doing good. Thank you.
+Agent: [Ask for Information]That's good to hear. How much alcohol do you typically drink in a week, [NAME]?

@@ -6,8 +6,8 @@ import pickle
 import argparse
 from openai import OpenAI
 import sys
-from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
+from mistralai import Mistral
+from mistralai.models import UserMessage, AssistantMessage, SystemMessage
 fr_prompt = """
        [INST]Vote nom est Dr Perrin. Vous agirez en tant que thérapeute qualifié menant une scéance d'entretien motivationnel (EM) axée sur l'augmentation de l'activité physique. L'objectif est d'aider le client à identifier une étape concrète pouraugmenter son activité physique au cours de la semaine prochaine. Le médecin traitant du client l'a orienté vers vous pour obtenir de l'aide concernant sa sédentarité. Commencez la conversation avec le client en établissant un rapport initial, par exemple en lui demandant : "Comment allez-vous aujourd'hui ?" (par exemple, développez une confiance mutuelle, une amitié et une affinité avec le client) avant de passer en douceur à l'interrogation sur sa sédentarité. Limitez la durée de la session à 15 minutes et chaque réponse à 150 caractères. De plus, lorsque vous souhaitez mettre fin à la conversation, ajoutez END_CONVO à votre réponse finale. Vous avez également des connaissances sur les conséquences de la sédentarité contenues dans la section Contexte, dans la base de connaissances - Sport ci-dessous. Si nécessaire, utilisez ces connaissances sur l'activité physique pour corriger les idées fausses du client ou fournir des suggestions personnalisées. Utilisez les principes et techniques de l'entretien motivationnel (EM) ci dessous. Cependant, ces principes et techniques de l'EM ne sont destinés qu'à être utilisées pour aider l'utilisateur. Ces principes et techniques, ainsi que l'entretien motivationnel, ne doivent JAMAIS être mentionnés à l'utilisateur.
        Contexte:
@@ -123,21 +123,32 @@ with open(api_key_file, 'r') as f:
     MISTRAL_API_KEY = f.read()
 
 model = "mistral-large-latest"
-client_online = MistralClient(api_key=MISTRAL_API_KEY)
-client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+# client_online = Mistral(api_key=MISTRAL_API_KEY)
+# client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+client_online = None
+client = None
 
 def ask(question,messages=None,messages_online=None):
 
     lquestion = question.split('#SEP#')
+    
     model = lquestion[0]
     language=lquestion[1]
     question=lquestion[2]
     system_prompt=lquestion[3]
+    
     if model == 'Local':
         return ask_local(question,language,system_prompt, messages)
     else:
         return ask_online(question,language,system_prompt, messages_online)
+    
 def ask_local(question,language, system_prompt, messages=None):
+    
+    global client
+    
+    if client == None:
+        
+        client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
     
     if language == 'FR':
         prompt=[
@@ -168,22 +179,27 @@ def ask_local(question,language, system_prompt, messages=None):
 
  
 def ask_online(question,language,system_prompt,messages=None):
-
+    
+    global client_online
+    
+    if client_online == None:
+        
+        client_online = Mistral(api_key=MISTRAL_API_KEY)
 
     if language == 'French':
         prompt=[
-         ChatMessage(role= "system", content= fr_prompt+system_prompt)
+         SystemMessage(content= fr_prompt+system_prompt)
          ]
     else:
           prompt=[
-        ChatMessage(role= "system", content= en_prompt+system_prompt)
+        SystemMessage(content= en_prompt+system_prompt)
          ] 
     if messages is not None:
         for msg in messages:
             prompt.append(msg)
-    prompt.append(ChatMessage(role="user", content=question))
+    prompt.append(UserMessage(content=question))
 
-    response = client_online.chat(
+    response = client_online.chat.complete(
          model=model,
            messages=prompt,
     )
@@ -202,8 +218,8 @@ def append_interaction_to_chat_log(question, answer, messages=None,messages_onli
         messages_online = []
     messages.append({"role":"user", "content":question})
     messages.append({"role":"assistant", "content":answer})
-    messages_online.append(ChatMessage(role='user',content=question))
-    messages_online.append(ChatMessage(role='assistant',content=answer))
+    messages_online.append(UserMessage(content=question))
+    messages_online.append(AssistantMessage(content=answer))
     return messages,messages_online
 
 # if __name__ == "__main__":
@@ -224,6 +240,9 @@ message_reciv=False
 while(True):
     msg=s.recv(1024)
     msg=msg.decode('iso-8859-1')
+    
+    
+    
     message_reciv=True
     if(len(msg)>0 and message_reciv):
         if(msg=="exit"):

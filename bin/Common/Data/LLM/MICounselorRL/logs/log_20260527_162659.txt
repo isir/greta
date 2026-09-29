@@ -1,0 +1,17 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis nausé. Comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je vais bien, merci. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais bien. Il fait un peu chaud, mais on on tient le coup.
+Agent: [Baseline]Je comprends. Est-ce que vous avez des soucis qui vous praioccupent en ce moment ?
+User: [Modifier les comportements malsains à l'avenir]Oui là en ce moment j'aimerais bien arrêter la cigarette. Oui là en ce moment j'aimerais bien arrêter la cigarette. Oui là en ce moment j'aimerais bien arrêter la cigarette. Puisque c'est problématique.
+Agent: [Baseline]Je vois. Qu'est-ce qui vous a daicidai a vouloir arraiter de fumer ?
+User: [Le patient partage un sentiment ou une émotion négative.]Je ne sais pas, je pense que c'est c'est c'est très nocif pour la Je ne sais pas, je pense que c'est c'est c'est très nocif pour la Je ne sais pas, je pense que c'est c'est c'est très nocif pour la Je ne sais pas, je pense que c'est c'est c'est très nocif pour la et donc du coup à un moment donné, il faudrait essayer de d'arrêter ça quoi. et donc du coup à un moment donné, il faudrait essayer de d'arrêter ça quoi. et donc du coup à un moment donné, il faudrait essayer de d'arrêter ça quoi. et donc du coup à un moment donné, il faudrait essayer de d'arrêter ça quoi.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empaiche d'arraiter en ce moment ?
+User: [inconnu]Je ne sais pas, c'est les, c'est l'entourage, c'est Je ne sais pas, c'est les, c'est l'entourage, c'est Je ne sais pas, c'est les, c'est l'entourage, c'est Je ne sais pas, c'est les, c'est l'entourage, c'est Je ne sais pas, c'est les, c'est l'entourage, c'est les fréquentations, je pense.
+Agent: [Baseline]Je vois. Quels sont les avantages que vous voyez a arraiter de fumer ?
+User: [Compréhension ou nouvelle perspective]Les avantages que je vois, c'est surtout au niveau de la santé. Les avantages que je vois, c'est surtout au niveau de la santé. Les avantages que je vois, c'est surtout au niveau de la santé. Les avantages que je vois, c'est surtout au niveau de la santé. Les avantages que je vois, c'est surtout au niveau de la santé. Les avantages que je vois, c'est surtout au niveau de la santé. Et aussi financièrement.
+Agent: [Baseline]C'est vrai que la cigarette peut aitre couteuse. Qu'est-ce qui vous empaiche d'arraiter en ce moment ?
+User: [Compréhension ou nouvelle perspective]Je pense les fréquentations comme comme je le disais juste avant.
+Agent: [Baseline]Je vois. Quelles sont les personnes qui vous incitent a continuer de fumer ?
+User: [inconnu]Baseline
+Agent: [Baseline]Je pense les personnes qui m'as incitent a continuer de fumer, c'est mes amis, mais en fait chaque qu'on sort au bar, on fume.

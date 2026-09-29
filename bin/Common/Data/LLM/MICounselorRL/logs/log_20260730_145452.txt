@@ -1,0 +1,29 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing great. Thank you.
+Agent: [Baseline]That's good to hear. I'm glad you're having a good day. [NAME], your doctor mentioned you've been drinking quite a bit lately. How do you feel about that?
+User: [unknown]I feel a bit stressed.
+Agent: [Baseline]I see. It sounds like you're feeling stressed, [NAME]. How has alcohol been helping with that?
+User: [Sharing negative feeling or emotion]I don't know. Maybe it makes me feel sad and I don't know. Maybe it makes me feel sad and I don't know. Maybe it makes me feel sad and I don't know. Maybe it makes me feel sad and happy, like, for a moment and then sad.
+Agent: [Baseline]It sounds like alcohol has been giving you some temporary relief, but it's also leaving you feeling sad and stressed. That's a tough situation to be in.
+User: [unknown]Yeah. I guess.
+Agent: [Baseline][NAME], what are some reasons you might want to cut back on your drinking?
+User: [unknown]I mean, I would like to drink less.
+Agent: [Baseline]What's stopping you from drinking less, [NAME]?
+User: [unknown]That I like it.
+Agent: [Baseline]I see. So, you enjoy drinking. What do you like about it?
+User: [unknown]Let me feel in the moment, not after.
+Agent: [Baseline]It sounds like alcohol helps you escape from your worries and stress. But it also leaves you feeling sad. Is that right?
+User: [unknown]Yes. That's that's exactly what is it.
+Agent: [Baseline]So, you're feeling stuck, [NAME]. You want to drink less, but you also enjoy the momentary escape.
+User: [unknown]Yeah.
+Agent: [Baseline]What concerns do you have about drinking less, [NAME]?
+User: [unknown]I don't know.
+Agent: [Baseline]Let's explore that together. What's the worst thing that might happen if you cut back on drinking?
+User: [unknown]Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm Listen. I'm not wrong. I'm I'm a bit boring.
+Agent: [Baseline]It sounds like you're feeling defensive, [NAME]. Let's take a step back. What's one small step you could take to drink less in the next week?
+User: [unknown]Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less Maybe try to drink less like, less bottles of wines of wine.
+Agent: [Baseline]That's a great start, [NAME]. How about trying to have no more than 2 bottles of wine per day?
+User: [Changing unhealthy behavior in the future]Yeah. That could be a very good idea.
+Agent: [Baseline]Thank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.

@@ -1,0 +1,15 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Backchannel]heyyyy
+Agent: [Baseline]Don't worry, we can continue without it.Got it! How about we start with something simple-how's your week been so far?
+User: [Backchannel]heyyyy
+Agent: [Baseline]Hey there! I'm glad you're here. How about we take a moment to just chat-what's been on your mind lately? No pressure, just getting to know each other.
+User: [Backchannel]heyyyy
+Agent: [Baseline] leans in slightly with warm tone  Hey, I hear you-sometimes it's just nice to start with a little energy. How about we take it down a notch for a sec? What's one thing that's been going well for you lately? Even small stuff counts.
+User: [Backchannel]heyyyy
+Agent: [Baseline] chuckles softly  Okay, I'll meet you halfway-how about we focus on something a little lighter? What's your go-to drink when you're unwinding after work? No judgment, just curious.
+User: [Backchannel]heyyyy
+Agent: [Baseline] adjusts tone, keeps it light but steady  Hey, I get it-sometimes it's hard to slow down. Let's just take a breath. What's one thing you enjoy doing that doesn't involve drinking? Even if it's just for a few minutes.
+User: [Backchannel;]heyyyy
+Agent: [Baseline] softly  Okay, I'll pause there. You seem to want to keep things light-but I want to make sure we're both comfortable. How about this. If you could change  one small thing  about how you feel after drinking, what would it be? No pressure, just thinking out loud.   .Waiting for response-no rush.. 
+User: [Backchannel]heyyyy
+Agent: [Baseline] leans back slightly, voice calm and steady  Got it. Let's try this. If you could have  one  drink that didn't mess with your sleep or mood, what would it look like? Even if it's just a thought experiment. No wrong answers here.

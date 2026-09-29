@@ -1,0 +1,19 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [unknown]Hello. I'm done.
+Agent: [Baseline]Don't worry, we can continue without it.How are you doing today?
+User: [Sharing negative feeling or emotion]Being a bit I'm a bit sad, actually.
+Agent: [Baseline]I'm sorry to hear that. What's been making you feel sad?
+User: [Sharing negative feeling or emotion]I don't know. I'm trying to quit alcohol. I don't know. I'm trying to quit alcohol. I don't know. I'm trying to quit alcohol. And I'm not really being able to do it.
+Agent: [Baseline]It sounds like you're feeling frustrated about your attempts to cut back on alcohol.
+User: [unknown]Yeah. That's exactly how I feel.
+Agent: [Baseline]I appreciate you sharing that with me. What makes it difficult for you to quit?
+User: [unknown]I mean, it's like every time we go out with friends and whatever, I mean, it's like every time we go out with friends and whatever, I mean, it's like every time we go out with friends and whatever, I mean, it's like every time we go out with friends and whatever, I mean, it's like every time we go out with friends and whatever, they drink alcohol, and I feel like that I have to do it.
+Agent: [Baseline]It sounds like you're feeling peer pressure to drink.
+User: [unknown]That's exactly what I feel.
+Agent: [Baseline]I hear you. It's tough to resist when others are drinking. How do you feel about your drinking when you're not with them?
+User: [Sustaining unhealthy behavior in the future]I mean, I want to drink when I'm alone as well, and I do it. So I mean, I want to drink when I'm alone as well, and I do it. So I mean, I want to drink when I'm alone as well, and I do it. So I mean, I want to drink when I'm alone as well, and I do it. So I mean, I want to drink when I'm alone as well, and I do it. So I mean, I want to drink when I'm alone as well, and I do it. So I mean, I want to drink when I'm alone as well, and I do it. So I mean, I want to drink when I'm alone as well, and I do it. So
+Agent: [Baseline]I understand. It seems like you're feeling torn about your drinking. On one hand, you want to quit, but on the other hand, you enjoy it and feel like you can't resist.
+User: [unknown]Yeah. That's exactly what I feel.
+Agent: [Baseline]What would make it easier for you to cut back?
+User: [unknown]Getting white outside of it.
+Agent: [Baseline]What do you mean by "getting white outside of it"?

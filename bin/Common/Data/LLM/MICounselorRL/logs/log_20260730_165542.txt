@@ -1,0 +1,15 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]My name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [unknown]Hello?
+Agent: [Baseline]I'm here to listen, [NAME]. How are you feeling today?
+User: [unknown]No.
+Agent: [Baseline]It sounds like you're not in the mood to chat right now. That's okay.
+User: [unknown]Blah blah blah. Okay. Thank you.
+Agent: [Baseline][NAME], I hear you're not really interested in talking about your drinking.
+User: [Greeting or Closing]Hello.
+Agent: [Baseline]What's on your mind, [NAME]?
+User: [unknown]Good if you bless him.
+Agent: [Baseline]It sounds like you have some concerns about your drinking, [NAME].
+User: [unknown]Good if you bless him.
+Agent: [Baseline]I see. Can you tell me more about that, [NAME]?

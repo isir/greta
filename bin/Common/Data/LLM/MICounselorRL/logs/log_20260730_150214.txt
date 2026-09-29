@@ -1,0 +1,21 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good. Thank you.
+Agent: [Baseline]That's great to hear. I'm glad you're here today. [NAME], your doctor mentioned you've been drinking quite a bit lately. How do you feel about that?
+User: [unknown]I feel a bit stressed.
+Agent: [Baseline]I see. It sounds like drinking helps you cope with stress. But it also seems like it's causing some concern for you. Is that right?
+User: [unknown]Yeah. That's exactly how I feel.
+Agent: [Baseline]Thanks for sharing that with me, [NAME]. It takes courage to acknowledge these feelings. Can you tell me more about why you feel stressed?
+User: [Changing unhealthy behavior in the future]Yeah. I'm drinking a lot of alcohol.
+Agent: [Baseline]I see. How much alcohol are you drinking in a typical week, [NAME]?
+User: [unknown]Three bottles of wine.
+Agent: [Baseline]That's quite a bit, [NAME]. Did you know that's considered heavy drinking?
+User: [Backchannel]What? Sorry.
+Agent: [Baseline]No worries, [NAME]. I'm just here to help. Heavy drinking can mean drinking 15 or more drinks a week for men. A bottle of wine is about 5 glasses, right?
+User: [Backchannel]Yeah.
+Agent: [Baseline]So, that's about 15 glasses a week. That's heavy drinking, [NAME]. How does that make you feel?
+User: [unknown]Yeah.
+Agent: [Baseline]It sounds like you're feeling a bit overwhelmed, [NAME].
+User: [unknown]Yeah. I have a lot of things to do, and I don't know what how to do them.
+Agent: [Baseline]I see. It sounds like you're feeling stressed and alcohol is helping you cope, but it's also causing some problems. Have you thought about trying something else to manage stress?

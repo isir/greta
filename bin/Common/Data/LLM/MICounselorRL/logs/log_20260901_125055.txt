@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, Camille. My name is [NAME]. How are you?
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. I'm doing well-how about you? It sounds like you've got a lot on your mind, and I'm here to listen.
+User: [Changing unhealthy behavior in the future; Asking for Medical Information;]Yes. It's true. I've been drinking too much recently, and I would like to have some advice. Yes. It's true. I've been drinking too much recently, and I would like to have some advice. If you could help me.
+Agent: [Baseline]I hear you, [NAME]. It takes real courage to acknowledge that. What's been going on that's made drinking feel like a bigger part of your life lately?
+User: [Asking for Medical Information]Could you please tell us something?
+Agent: [Baseline]Of course, [NAME]. What would you like to know? Maybe something about how drinking affects people differently, or how others have handled similar situations?

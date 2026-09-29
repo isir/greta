@@ -51,3 +51,31 @@ bin/Common/Data/MultiLayerAttitude/BML/ComputedSequences.csv
 
 bin/Examples/NotNecessary
 /.idea
+/core/MPEG4/build
+# Sam VAP (TurnManagement) ? large artifacts; see bin/Common/Data/TurnManagement/sam_vap/checkpoints/README.md
+bin/Common/Data/TurnManagement/sam_vap/checkpoints/*.ckpt
+bin/Common/Data/TurnManagement/sam_vap/demo/noxi/**/*.wav
+bin/Common/Data/TurnManagement/sam_vap/demo/noxi/**/*.npy
+bin/Common/Data/TurnManagement/sam_vap/demo/noxi/video_paris/
+
+bin/Common/Data/MODIFFVQ/model/*.pt
+bin/Common/Data/MODIFFVQ/model/*.pth
+bin/Common/Data/MODIFFVQ/model/*.ckpt
+
+# MODIFF / MODIFFVQ saved weights at repo paths (not under model/)
+bin/Common/Data/MODIFF/saved_model*.pth
+bin/Common/Data/MODIFF/**/*.pth
+bin/Common/Data/MODIFFVQ/saved_model*.pth
+bin/Common/Data/MODIFFVQ/*.pth
+bin/Common/Data/RealTimeMod/MODIFF/saved_model*.pth
+bin/Common/Data/RealTimeMod/MODIFF/**/*.pth
+
+# Sam VAP vendored tree: no large media or duplicate MODIFF weights
+bin/Common/Data/TurnManagement/sam_vap/**/*.pth
+bin/Common/Data/TurnManagement/sam_vap/**/*.ckpt
+
+# Video anywhere (noxi demos, face_extract, Nezih exports)
+**/*.mp4
+**/*.MP4
+**/*.mov
+**/*.MOV

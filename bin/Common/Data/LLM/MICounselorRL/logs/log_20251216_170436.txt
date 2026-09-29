@@ -1,0 +1,13 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture; Backchannel] Bonjour,
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Ah, d'accord ! Alors, comment ssa va aujourd'hui, Camille ? Pas trop fatiguaie ?
+User: [Partager un sentiment ou une émotion négative; Accueil ou clôture] Oui, un petit peu, c'est la fin de journ?e.
+Agent: [Baseline]Je comprends. La fin de journaie peut peser. Vous avez passai beaucoup de temps assis·e aujourd'hui ?
+User: [Partager des informations personnelles ou décrire un événement passé.] Oui oui oui je je passais beaucoup le temps dans ma chaise.
+Agent: [Baseline]Ah, je vois... Ça arrive a tout le monde. Et ssa vous paise parfois, cette position assise ?
+User: [Inconnu] Oui, je passe par foire, oui, cette petite.
+Agent: [Baseline]*petite gaine ?* C'est vrai que rester assis·e longtemps peut donner cette impression. Vous avez daija remarquai des moments ou vous auriez pu bouger un peu ?
+User: [Backchannel; Partager des informations personnelles ou décrire un événement passé] C'est vraiment une petite gang.
+Agent: [Baseline]Une petite gaine, oui... Et si on essayait de la soulager un peu cette semaine ? Par exemple, en se levant 1 minute toutes les heures ? Qu'en pensez-vous ?
+User: [Backchannel; Modifier les comportements malsains à l'avenir] Vais essayer ?a.
+Agent: [Baseline]C'est daija une super idaie ! Et si on commenssait par un petit objectif : 1 jour cette semaine ou vous vous levez 3 fois ? Ça vous semble faisable ?

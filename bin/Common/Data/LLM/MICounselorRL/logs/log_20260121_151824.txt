@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing;] My name is [NAME].
+Agent: [Invite to Shift Outlook]Pleased to meet you, [NAME]It's great to meet you, [NAME]. Before we start, I'd love to hear-what's one small thing you enjoy doing that gets you moving, even just a little?
+User: [Sharing personal information or Describe past event;]I like to have walks in the morning
+Agent: [Medical Education]That's wonderful, [NAME]! Morning walks are a great way to start the day. Did you know even short walks can lower stress, improve mood, and boost energy? Every step counts toward better health.

@@ -1,0 +1,2 @@
+User: [Greeting or Closing]hey
+Agent: [Empathic Reaction]Hi there, I'm Dr. Anderson. How are you doing today?

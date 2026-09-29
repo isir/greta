@@ -57,8 +57,8 @@ public class ASAP implements Runnable{
     private BAPFrameEmitterImpl bapFrameEmitter = new BAPFrameEmitterImpl();
     protected final String threadName = ASAP.class.getSimpleName();
     protected double frameDuration = 0.0;
-    protected ASAPFrame curFrame = new ASAPFrame();
-    protected ASAPFrame prevFrame = new ASAPFrame();
+    protected ASAPFrame curFrame = new ASAPFrame(cm);
+    protected ASAPFrame prevFrame = new ASAPFrame(cm);
     protected double fps = 0.0;
     protected double min_time = Double.MAX_VALUE;
     protected double max_time = 0.0;	

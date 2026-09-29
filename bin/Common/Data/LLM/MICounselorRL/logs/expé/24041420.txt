@@ -1,0 +1,37 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je suis avec [NAME].
+Agent: [Reflection]Enchantée, [NAME]Bonjour, je suis Camille. Enchantée, [NAME]. Il semble que vous soyez ici pour parler de votre sédentarité. Comment allez-vous aujourd'hui ?
+User: [Partager un sentiment ou une �motion positive] Bien, je me suis r?veill?, donc je vais bien.
+Agent: [Medical Education]C'est super de commencer la journée du bon pied ! Je suis là pour vous aider à augmenter votre activité physique. Saviez-vous que même de petits changements peuvent avoir un impact positif sur votre santé ? Par exemple, marcher un peu plus chaque jour peut vraiment faire une différence. Comment voyez-vous votre niveau d'activité physique actuellement ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�;] J'essaie de rester quand m?me assez active, mais je pense que je pourrais faire plus.
+Agent: [Invite to Shift Outlook]C'est une excellente prise de conscience. Imaginons que vous parveniez à intégrer un peu plus d'activité physique dans votre quotidien. Comment pensez-vous que cela pourrait améliorer votre journée ?
+User: [Partager un sentiment ou une �motion positive] Je pense que d?j? au cours de la semaine, ?a m'aiderait ? ?tre
+Agent: [Ask for Consent]Est-ce que vous seriez d'accord pour discuter de quelques idées pour augmenter votre activité physique cette semaine ?
+User: [Backchannel]oui bien sur
+Agent: [Ask for Consent]Merci pour votre accord. Pour commencer, quelles activités physiques aimez-vous le plus ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Ce que j'aime c'est la marche, j'aime bien les sports individuels type tennis, badminton,
+Agent: [Reflection]Je comprends que vous appréciez la marche et les sports individuels comme le tennis et le badminton. C'est super que vous ayez déjà des activités que vous aimez. Comment vous sentez-vous lorsque vous pratiquez ces activités ?
+User: [Partager un sentiment ou une �motion positive] Je me sens bien, j'aime bien le fait de pouvoir me d?passer,
+Agent: [Reflection]C'est formidable que vous trouviez du plaisir et une sensation de dépassement dans ces activités. Il semble que la marche et les sports individuels vous apportent beaucoup de bien-être. Comment pensez-vous pouvoir intégrer davantage de ces activités dans votre semaine prochaine ?
+User: [inconnu] Dans la semaine prochaine, je pense qu'il faudrait qu'il me l'a un peu plus t?t,
+Agent: [Reflection]Il semble que vous souhaitiez vous lever un peu plus tôt pour avoir plus de temps pour l'activité physique. C'est une excellente idée pour commencer votre journée de manière active. Comment pensez-vous que cela pourrait affecter votre routine actuelle ?
+User: [Modifier les comportements malsains � l'avenir; Compr�hension ou nouvelle perspective] Je pense que ?a pourrait l'affecter en bien parce que j'aurais plus une routine
+Agent: [Greeting or Closing]Merci pour votre partage, [NAME]. Il semble que vous avez une bonne idée pour intégrer plus d'activité physique dans votre routine. Que diriez-vous de commencer par vous lever 15 minutes plus tôt chaque jour et de faire une petite marche ou quelques étirements ? Cela pourrait être un bon début. Qu'en pensez-vous ?Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.
+User: [Accueil ou cl�ture]oui
+Agent: [Invite to Shift Outlook]Imaginez-vous dans une semaine, après avoir pris l'habitude de vous lever 15 minutes plus tôt pour marcher ou faire des étirements. Comment vous sentez-vous à l'idée d'avoir cette nouvelle routine ? Quels bénéfices pensez-vous que cela pourrait vous apporter ? END_CONVO
+User: [Modifier les comportements malsains � l'avenir] Je pense que je ferais plus de choses.
+Agent: [Ask for Information]C'est une belle perspective. Pour mieux vous aider, pourriez-vous me dire quelles activités spécifiques vous aimeriez intégrer dans ces 15 minutes supplémentaires ? Par exemple, une marche rapide, des étirements, ou autre chose ?
+User: [Backchannel]totalement d'accord
+Agent: [Ask about current Emotions]Comment vous sentez-vous à l'idée de commencer cette nouvelle routine ? Est-ce que cela vous rend nerveux, enthousiaste, ou peut-être un peu des deux ?
+User: [Partager un sentiment ou une �motion n�gative] Je dirais que j'appr?hende un petit peu, est-ce que je vais pouvoir faire, est-ce que je vais pouvoir
+Agent: [Backchannel]Je comprends, c'est normal d'appréhender les changements. Comment pensez-vous que vous pourriez surmonter cette appréhension ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Modifier les comportements malsains � l'avenir;] Je pense que c'est juste le fait de commencer, je pense qu'une fois commencer, c'est apr?s ?a la partie.
+Agent: [Progress Acknowledgment]Vous avez raison, commencer est souvent la partie la plus difficile. Une fois que vous aurez intégré cette nouvelle routine, cela deviendra plus facile. Vous avez déjà fait un grand pas en identifiant ce que vous aimez et en étant prêt à essayer. Félicitations pour cette prise de conscience et cette détermination ! END_CONVO
+User: [Partager un sentiment ou une �motion positive] Merci.
+Agent: [Backchannel]Vous êtes sur la bonne voie, [NAME]. Vous avez déjà fait un grand pas en identifiant ce que vous aimez et en étant prêt à essayer. Félicitations pour cette prise de conscience et cette détermination !
+User: [Partager un sentiment ou une �motion positive]c'ets aps facile de commencer mais il faut le faire � un moment
+Agent: [Give Solution]Vous avez raison, commencer peut être difficile, mais c'est important de faire le premier pas. Voici une suggestion concrète : pourquoi ne pas essayer de vous lever 15 minutes plus tôt chaque jour cette semaine et de faire une courte marche ou quelques étirements ? Vous pouvez commencer par 5 minutes et augmenter progressivement. Cela vous aidera à intégrer cette nouvelle habitude en douceur. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains � l'avenir] Je pense que c'est une excellente id?e. Le fait de se lever, d?j? ?a me force ? me lever plus t?t,
+Agent: [Medical Education]C'est une excellente idée ! Le fait de vous lever plus tôt est un bon moyen de commencer la journée de manière active. Pour vous aider, voici quelques conseils : commencez par vous lever 15 minutes plus tôt chaque jour cette semaine et faites une courte marche ou quelques étirements. Vous pouvez commencer par 5 minutes et augmenter progressivement. Cela vous aidera à intégrer cette nouvelle habitude en douceur. N'oubliez pas que chaque petit pas compte et peut avoir un impact positif sur votre santé. Prenez soin de vous et bonne chance dans votre nouvelle routine ! END_CONVO
+Agent: []Merci d�avoir pris ce temps pour �changer avec moi. J�esp�re que cette discussion vous a �t� utile. Vous avez d�j� fait un grand pas en r�fl�chissant � tout cela. Je vous souhaite plein de r�ussite dans votre d�marche !
+

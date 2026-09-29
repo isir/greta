@@ -1,0 +1,61 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour, je suis [NAME].
+Agent: [Baseline]EnchantÃ©e, MailanieComment allez-vous aujourd'hui, Mailanie ?
+User: [Accueil ou clôture]Bien merci
+Agent: [Baseline]Je suis ravie d'entendre cela. Je suis ici pour discuter de votre activitai physique, si vous aites d'accord.
+User: [Accueil ou clôture]Oui oui je suis d'accord.
+Agent: [Baseline]Trais bien. Pouvez-vous me parler de votre niveau d'activitai physique actuelle ?
+User: [Compréhension ou nouvelle perspective]3 fois par semaine
+Agent: [Baseline]C'est un bon daibut. Quels types d'activitais physiques faites-vous ?
+User: [Compréhension ou nouvelle perspective]La natation
+Agent: [Baseline]La natation est une excellente activitai physique. Elle vous aide Ã  maintenir une bonne santÃ© cardiaque et Ã  renforcer vos muscles. Combien de temps passez-vous Ã  nager en moyenne ?
+User: [Backchannel]Par semaine
+Agent: [Baseline]Je voulais dire combien de temps passez-vous Ã  nager pendant chaque sÃ©ance.
+User: [Partager des informations personnelles ou décrire un événement passé]Trente minutes.
+Agent: [Baseline]C'est trais bien. Avez-vous d'autres activitais physiques que vous faites en plus de la natation ?
+User: [Backchannel]De la marche.
+Agent: [Baseline]C'est excellent. Combien de temps marchez-vous par semaine ?
+User: [Compréhension ou nouvelle perspective]À peu près des mille pas par jour
+Agent: [Baseline]C'est un bon daibut. Savez-vous que la recommandation est de faire au moins 10 000 pas par jour pour maintenir une bonne santai ?
+User: [Backchannel]Oui.
+Agent: [Baseline]Je suis ravi d'entendre que vous aites au courant de cette recommandation. Avez-vous daijÃ  essayÃ© d'augmenter votre nombre de pas par jour ?
+User: [Compréhension ou nouvelle perspective]Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Il m'arrive de temps en temps de faire entre dix mille, quinze mille, vingt mille pas. Tout dépend des jours. Mais la plupart du temps, c'est au moins dix mille.
+Agent: [Baseline]C'est trais bien. Avez-vous des jours ou vous avez du mal Ã  atteindre ces 10 000 pas ?
+User: [Partager un sentiment ou une émotion négative]Je ne peux pas me libérer
+Agent: [Baseline]Je vois. Qu'est-ce qui vous empaiche de vous libairer pour faire plus d'exercice ?
+User: [Accueil ou clôture]Bye
+Agent: [Baseline]Au revoir, Mailanie. N'oubliez pas de faire au moins 10 000 pas par jour pour maintenir une bonne santai. END_CONVOMerci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.
+User: [k]mon travail
+Agent: [Baseline]Je comprends. Il est important de trouver un aiquilibre entre le travail et l'exercice physique. Avez-vous daija essayai de faire des pauses raiguliaires dans votre journai de travail pour faire une petite promenade ou faire quelques aitirements ?
+User: [Compréhension ou nouvelle perspective]Environ une à deux fois par jour
+Agent: [Baseline]C'est un bon daibut. Avez-vous des moments de la journai que vous praifairez pour faire de l'exercice ?
+User: [Compréhension ou nouvelle perspective]Matin
+Agent: [Baseline]C'est une excellente idai de faire de l'exercice le matin. Cela peut vous aider Ã  vous rÃ©veiller et Ã  vous donner de l'Ã©nergie pour la jour
+User: [Backchannel]Oui tout à fait.
+Agent: [Baseline]Je suis ravi d'entendre cela. Avez-vous des activitais physiques en particulier que vous praifairez faire le matin ?
+User: [Compréhension ou nouvelle perspective]Piscine
+Agent: [Baseline]La natation est une excellente activitai physique. Avez-vous des horaires de travail qui vous empachent de vous rendre Ã  la piscine le matin ?
+User: [Backchannel]En général non.
+Agent: [Baseline]C'est trais bien. Avez-vous des jours ou vous avez plus de mal Ã  vous motiver Ã  faire de l'exercice le matin ?
+User: [Compréhension ou nouvelle perspective]Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou Ça dépend si j'ai déjà des rendez-vous ou ou le travail qui m'en empêche.
+Agent: [Baseline]Je comprends. Il est normal d'avoir des jours avec plus de stress et de pression. Avez-vous daija essayai de planifier vos activitais physiques Ã  l'avance pour vous assurer de les faire mÃªme les jours oÃ¹ vous Ãªtes plus occupÃ© ?
+User: [Backchannel]Non, pas vraiment.
+Agent: [Baseline]Je vois. Avez-vous des moments de la journai ou vous vous sentez plus ainergique et motivai pour faire de l'exercice ?
+User: [Compréhension ou nouvelle perspective]Par exemple à la peau déjeuner
+Agent: [Baseline]C'est une excellente idai. Avez-vous des activitais physiques en particulier que vous praifairez faire Ã  ce moment-lÃ ?
+User: [Compréhension ou nouvelle perspective]La marche, c'est plutôt facile.
+Agent: [Baseline]C'est vrai que la marche est une activitai physique accessible Ã  tous. Avez-vous des endroits praifairais pour marcher ?
+User: [Partager des informations personnelles ou décrire un événement passé]En général au parc.
+Agent: [Baseline]C'est une excellente idai. La nature peut aitre trais inspirante pour faire de l'exercice. Avez-vous des moments de la journai ou vous avez plus de mal Ã  vous motiver Ã  faire de l'exercice ?
+User: [Partager des informations personnelles ou décrire un événement passé]Non pas vraiment, sauf si je ne me suis pas bien alimentée.
+Agent: [Baseline]Je comprends. Il est important de s'alimenter correctement pour avoir de l'ainergie pour faire de l'exercice. Avez-vous des idais pour vous aider Ã  mieux vous alimenter ?
+User: [Compréhension ou nouvelle perspective]Oui manger plus équilibré, donc surtout manger des protéines et fibres.
+Agent: [Baseline]C'est une excellente idai. Manger des aliments riches en protaiines et en fibres peut vous aider Ã  vous sentir rassasiai plus longtemps et Ã  maintenir un niveau d'ainergie Ã©levai. Avez-vous des difficultais Ã  maintenir une alimentation aiquilibrai ?
+User: [Accueil ou clôture]Pas de difficulté.
+Agent: [Baseline]C'est trais bien. Avez-vous des objectifs spaiificaies en termes d'activitais physiques que vous praifairez atteindre ?
+User: [inconnu]Non, je n'ai pas d'objectif.
+Agent: [Baseline]D'accord. Avez-vous des moments de la journai ou vous avez plus de mal Ã  trouver le temps ou l'ainergie pour faire de l'exercice ?
+User: [Backchannel]Je pense qu'on en a déjà parlé.
+Agent: [Baseline]Je m'excuse si je me suis raipait. Je voulais juste m'assurer que nous avons couvert tous les aspects importants de votre pratique d'exercice physique. Avez-vous des questions ou des praioccupation
+User: [Accueil ou clôture]Je n'ai pas de questions.
+Agent: [Baseline]Trais bien. Je suis ravi d'avoir pu discuter avec vous aujourd'hui. N'oubliez pas que l'exercice physique est important pour votre santai et votre bien-aitre g

@@ -1,0 +1,37 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Je suis [NAME].
+Agent: [Ask for Consent]EnchantÃ©e, [NAME]Bonjour, je suis Camille. Et vous ?  Enchantée, [NAME]. Est-ce que vous êtes d'accord pour que nous discutions de votre activité physique aujourd'hui ?
+User: [Backchannel] Oui, je suis d'accord.
+Agent: [Greeting or Closing]Parfait, merci beaucoup. Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture] Je veux dire merci.
+Agent: [Reflection]Je comprends, [NAME]. Vous êtes prête à discuter de votre activité physique. Merci de votre confiance.
+User: [Partager un sentiment ou une émotion positive] Je vais bie merci
+Agent: [Reflection]Je comprends, [NAME]. Vous vous sentez bien aujourd'hui. C'est une bonne base pour notre discussion. Comment voyez-vous votre niveau d'activité physique actuellement ?
+User: [Partager des informations personnelles ou décrire un événement passé] Je pratique aucune activit? physique actuellement.
+Agent: [Reflection]Je comprends, [NAME]. Vous ne pratiquez aucune activité physique actuellement. C'est une situation courante pour beaucoup de gens. Comment vous sentez-vous par rapport à cela ?
+User: [Partager un sentiment ou une émotion positive] Parfois je sens que je suis l'id?e de souffler, mais sinon je vis bien.
+Agent: [Ask for Consent]C'est bon à savoir, [NAME]. Vous vous sentez parfois essoufflée, mais globalement, vous vous sentez bien. Est-ce que vous seriez d'accord pour explorer ensemble quelques petits changements que vous pourriez apporter à votre routine quotidienne pour augmenter votre activité physique ?
+User: [Modifier les comportements malsains à l'avenir;] Oui, je suis d'accord.
+Agent: [Medical Education]Super, [NAME]. Saviez-vous que même de petites augmentations d'activité physique peuvent avoir des effets bénéfiques sur la santé ? Par exemple, marcher un peu plus chaque jour peut déjà faire une différence. Qu'en pensez-vous ?
+User: [Partager un sentiment ou une émotion négative] Je pense que quand on est une journ?e tr?s longue, c'est difficile de marcher plus longtemps.
+Agent: [Empathic Reaction]Je comprends, [NAME]. Après une longue journée, il peut être vraiment difficile de trouver l'énergie pour marcher davantage. Comment pourrions-nous intégrer de petites activités physiques dans votre routine sans que cela soit trop fatigant ?
+User: [Modifier les comportements malsains à l'avenir] Il faudrait que les activit?s sportives se d?roulent le week-end.
+Agent: [Medical Education]C'est une excellente idée, [NAME]. Faire des activités physiques le week-end peut être une bonne solution. Saviez-vous que même 10 000 pas par jour, ce qui équivaut à environ 1h30 à 2h de marche, peuvent avoir des effets bénéfiques sur la santé ? Et même un nombre de pas inférieur peut déjà être bénéfique. Qu'en pensez-vous ?
+User: [inconnu] Alors oui j'?tais au courant, j'ai d?j? essay?
+Agent: [Invite to Shift Outlook]Je vois, [NAME]. Vous avez déjà essayé de marcher plus. Comment pourrions-nous envisager cette activité différemment pour qu'elle soit plus agréable et moins contraignante pour vous ? Peut-être en choisissant des endroits que vous aimez ou en marchant avec quelqu'un que vous appréciez ?
+User: [Partager un sentiment ou une émotion positive] C'est une bonne id?e de pouvoir marcher avec quelqu'un qui est pr?cis, en effet.
+Agent: [Ask about current Emotions]Comment allez-vous aujourd'hui ?
+User: [inconnu] C'est une bonne id?e de pouvoir marcher avec quelqu'un qui est pr?cis, en effet.
+Agent: [Greeting or Closing]Bonjour ! Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]je vais tres bien
+Agent: [Medical Education]C'est super d'entendre que vous allez bien ! Vous savez, l'activitÃ© physique est vraiment importante pour notre santÃ©. MÃªme de petits pas peuvent faire une grande diffÃ©rence. Par exemple, marcher 10 minutes par jour peut dÃ©jÃ  avoir des effets bÃ©nÃ©fiques. Vous avez dÃ©jÃ  pensÃ© Ã  intÃ©grer des moments de marche dans votre quotidien ?
+User: [Partager des informations personnelles ou décrire un événement passé] Oui, rentrez chez moi, marche, je marche environ vingt minutes.
+Agent: [Progress Acknowledgment]C'est formidable que vous marchiez déjà 20 minutes en rentrant chez vous ! C'est un excellent début. Chaque pas supplémentaire est bénéfique pour votre santé. Avez-vous pensé à des moments supplémentaires où vous pourriez marcher davantage ?
+User: [Modifier les comportements malsains à l'avenir] Je pourrais marcher davantage le week-end.
+Agent: [Medical Education]C'est une excellente idée ! Marcher davantage le week-end peut vraiment faire une différence. Saviez-vous que les experts recommandent de faire de l'exercice au moins cinq jours par semaine ? Même de petites augmentations, comme ajouter 10 à 30 minutes de marche le week-end, peuvent avoir des effets positifs sur votre santé. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir] Je pense que je pourrais essayer de marcher le week-end et un peu plus le soir.
+Agent: [Planning with the Patient]Super ! Parlons de comment vous pouvez intégrer cela dans votre routine. Que diriez-vous de marcher 30 minutes supplémentaires le week-end et peut-être 10 minutes de plus le soir en semaine ? Cela pourrait être un bon début. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir] Le week-end je pourrais facilement faire trente minutes de marche et le soir c'?tait pendant ? coeur du temps travail, je pourrais acheter des minutes de trajet.
+Agent: [Give Solution]C'est une excellente idée ! Pourquoi ne pas essayer de marcher 30 minutes le week-end et d'ajouter 10 minutes à votre trajet de retour du travail en semaine ? Cela pourrait vraiment faire une différence. Qu'en pensez-vous ? END_CONVO
+Agent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+

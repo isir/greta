@@ -1,0 +1,7 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] [NAME].
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] ?a va bien et vous
+Agent: [Baseline]Merci, [NAME]. Je vais bien. Vous consommez des cigarettes en ce moment ?
+User: [inconnu] Je conserve la cigarette ?lectronique
+Agent: [Baseline]Merci pour cette précision, [NAME]. Comment vous sentez-vous par rapport à votre consommation de cigarettes électroniques ?

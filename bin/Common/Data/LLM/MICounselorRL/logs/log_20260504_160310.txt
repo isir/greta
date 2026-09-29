@@ -1,0 +1,15 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, Camille. My name is [NAME]. How are you doing?
+Agent: [Baseline]Pleased to meet you, [NAME]How about yourself? How are you doing today?
+User: [Greeting or Closing]I am doing fine. Thank you for asking.
+Agent: [Baseline]That's good to hear. Did anyone bring you here today or did you come alone?
+User: [unknown]Have to talk about my oncologist. It's getting a bit hard to deal with.
+Agent: [Baseline] I'm sorry that's difficult, [NAME]. It sounds like you're feeling some stress lately. How is alcohol helping or hurting with that?
+User: [Sharing personal information or Describe past event]Alcohol and getting up with my girlfriends helped me a lot to deal with it.
+Agent: [Baseline]I see. Tell me more about how drinking helps with your stress.
+User: [Changing unhealthy behavior in the future]Don't know when I'm a bit stressed and I have, like, an exam or something very stressful. I go out and drink.
+Agent: [Baseline] Got it. How many drinks are you typically having on those nights?
+User: [unknown]If it's if it's on the weekend, it can be, like, 10 or 15 drinks.
+Agent: [Baseline]I see. That sounds like quite a bit. Have there been any times you thought about cutting back or stopping for good?
+User: [Understanding or New Perspective]I thought about stopping back on a on a like, two or three years ago, then I changed my mind.
+Agent: [Baseline] That's common, [NAME]. Many people think about change but find reasons not to. What made you want to stop last time?

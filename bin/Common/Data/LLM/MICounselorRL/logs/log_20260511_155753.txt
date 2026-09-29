@@ -1,0 +1,19 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME]. Je suis John. Comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je vais bien, merci. Comment allez-vous aujourd'hui, John ?
+User: [Accueil ou clôture]Je vais bien. Écoute, c'est le début de la semaine, donc ça se passe. Je vais bien. Écoute, c'est le début de la semaine, donc ça se passe. Merci de demander.
+Agent: [Baseline]Je suis heureux d'entendre cela, John. Vous avez des projets pour cette semaine ?
+User: [Backchannel]Non pas particulièrement, c'est rien de spécial. Non pas particulièrement, c'est rien de spécial. Non pas particulièrement, c'est rien de spécial. Ça va.
+Agent: [Baseline]Je vois. Avez-vous daija raiflaichi a votre consommation d'alcool cette semaine ?
+User: [Compréhension ou nouvelle perspective]Oui oui, mais j'ai pas mal réfléchi Oui oui, mais j'ai pas mal réfléchi Oui oui, mais j'ai pas mal réfléchi Oui oui, mais j'ai pas mal réfléchi et du coup c'est pour ça que je viens vous voir aujourd'hui.
+Agent: [Baseline]Je vois. Qu'est-ce qui vous a fait raiflaichir a votre consommation d'alcool, John ?
+User: [Compréhension ou nouvelle perspective]m'a constaté que ça avait un impact négatif
+Agent: [Baseline]Je comprends. Pouvez-vous me donner un exemple de cet impact naigatif ?
+User: [inconnu]Je ne sais pas à vous de me le dire, mais Je ne sais pas à vous de me le dire, mais Je ne sais pas à vous de me le dire, mais Je ne sais pas à vous de me le dire, mais Je ne sais pas à vous de me le dire, mais Je ne sais pas à vous de me le dire, mais problème est que
+Agent: [Baseline]Je suis daisolai, je ne comprends pas bien votre raiponse. Pouvez-vous s'il vous plaît reformuler ?
+User: [Backchannel]Oui je peux reformuler en fait ce que, Oui je peux reformuler en fait ce que, Oui je peux reformuler en fait ce que, Oui je peux reformuler en fait ce que, Oui je peux reformuler en fait ce que, Oui je peux reformuler en fait ce que, Oui je peux reformuler en fait ce que, Oui je peux reformuler en fait ce que, ce que je comprends pas c'est que il y a un module qui ne s'active pas quoi.
+Agent: [Baseline]Je suis daisolai pour la confusion. Pouvez-vous me dire quel est le problaime avec votre consommation d'alcool ?
+User: [inconnu]Le problème est que, il me semble que ça doit Le problème est que, il me semble que ça doit Le problème est que, il me semble que ça doit Le problème est que, il me semble que ça doit Le problème est que, il me semble que ça doit Le problème est que, il me semble que ça doit Le problème est que, il me semble que ça doit Le problème est que, il me semble que ça doit Le problème est que, il me semble que ça doit potentiellement être lié
+Agent: [Baseline]Je vois. Pouvez-vous m'en dire plus sur ce que vous voulez dire par "liai" ?
+User: [inconnu]Je ne sais pas, je blablabla, blablabla, blablabla. Je ne sais pas, je blablabla, blablabla, blablabla. Je ne sais pas, je blablabla, blablabla, blablabla. Je ne sais pas, je blablabla, blablabla, blablabla. Je ne sais pas, je blablabla, blablabla, blablabla. Je ne sais pas, je blablabla, blablabla, blablabla. Je ne sais pas, je blablabla, blablabla, blablabla. Je ne sais pas, je blablabla, blablabla, blablabla. Je ne sais pas, je blablabla, blablabla, blablabla. Je ne sais pas, je blablabla, blablabla, blablabla. Blablabla, blablabla.
+Agent: [Baseline]Je suis daisolai, je ne comprends pas bien ce que vous voulez dire. Pouvez-vous s'il vous plaît reformuler votre raiponse ?

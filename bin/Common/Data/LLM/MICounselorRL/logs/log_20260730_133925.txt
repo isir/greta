@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]i AM TOM
+Agent: [Ask for Consent]Pleased to meet you, [NAME]Hi [NAME], I'm Dr. Anderson. May I ask how you're doing today?
+User: [Greeting or Closing]I'm doing good. Thank you.
+Agent: [Ask for Consent]Before we start, [NAME], is it okay if I ask you some questions about your alcohol use?
+User: [Backchannel]Yeah. It's fine.
+Agent: [Reflection]It sounds like you're feeling open to discussing this today, [NAME].

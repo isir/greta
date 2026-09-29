@@ -1,0 +1,19 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, je m'appelle.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Ah, d'accord ! Alors, Camille, comment ssa va aujourd'hui ? Qu'est-ce qui vous amaine a me parler ?
+User: [Accueil ou clôture; Backchannel] ?a va ?a va et toi
+Agent: [Baseline]Ça va bien, merci ! Je vois que votre maidecin vous a orientai vers moi pour bouger un peu plus. Ça vous dit d'en parler ?
+User: [Le maintien d'un comportement malsain à l'avenir] Mais je vais bouger un peu plus.
+Agent: [Baseline]Ah, vous sentez que vous bougez daija assez ? Qu'est-ce qui vous fait dire ssa ?
+User: [Partager des informations personnelles ou décrire un événement passé.] Je vais ?tre debout parfois pendant la journ?e.
+Agent: [Baseline]C'est vrai, se lever c'est daija un bon daibut. Et si on trouvait une petite action en plus, juste pour essayer ?
+User: [Backchannel; Accueil ou clôture] Oui merci pour le conseil.
+Agent: [Baseline]Avec plaisir ! Par exemple, marcher 5 min en plus par jour, ssa vous tente ? Ou autre chose ?
+User: [Inconnu] ?a me fassait trop.
+Agent: [Baseline]Je comprends, c'est pas facile. Et si on commenssait par quelque chose de vraiment petit, comme monter un aitage a pied ?
+User: [Inconnu] Je pense que ne pourrais pas dire, tomber Brady. Je pense que ne pourrais pas dire, tomber Brady. Je pense que ne pourrais pas dire, tomber Brady. Je pense que ne pourrais pas dire, tomber Brady. Je pense que ne pourrais pas dire, tomber Brady. Je pense que ne pourrais pas dire, tomber Brady. Je pense que ne pourrais pas dire, tomber Brady. Je pense que ne pourrais pas dire, tomber Brady. C'est une bonne id?e.
+Agent: [Baseline]Ah, vous craignez de perdre l'aiquilibre... Et si on essayait juste de se lever toutes les heures pour marcher 1 minute ? Juste pour voir ?
+User: [Le maintien d'un comportement malsain à l'avenir] Une miette c'est trop court.
+Agent: [Baseline]D'accord, alors 2 minutes ? Ou juste se lever et s'aitirer ? Qu'est-ce qui vous semblerait faisable ?
+User: [Inconnu] Ich muss mach ich jetzt ein Gut. Sehr viel sauber.
+Agent: [Baseline]Je vois que vous avez daija beaucoup a faire. Et si on notait juste une petite action pour la semaine ? Maime 1 minute de plus debout ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

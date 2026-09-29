@@ -50,6 +50,7 @@ import greta.core.feedbacks.FeedbackPerformer;
 import greta.core.signals.SpeechSignal;
 import greta.core.util.time.Temporizable;
 import greta.core.util.time.TimeMarker;
+import java.text.Normalizer;
 
 /**
  *
@@ -68,6 +69,18 @@ public class DeepGramFrame extends DeepASRFrame {
     private Thread server_shutdownHook;
     
     private volatile boolean automaticListenBool = false;
+    private volatile boolean agentSpeaking = false;
+    
+    /** Source prefixes that identify LLM-generated FML animations (as opposed to listener backchannels, mimicry, etc.). */
+    private static final String[] LLM_SOURCE_PREFIXES = {
+        "fml_mistral",       // intermediate streaming chunks (fml_mistral.xml / fml_mistral_renew.xml)
+        "fml_endSentence"    // end-of-answer marker loaded by incremental LLM frames
+    };
+    
+    private static final long DUPLICATE_WINDOW_MS = 3000;
+    private volatile String lastSentTranscript = "";
+    private volatile long lastSentTimeMs = 0;
+    private volatile boolean sentThisTurn = false;
     
     private ArrayList<MistralFrame> mistrals = new ArrayList<MistralFrame>();
     private static String markup = "fml-apml";
@@ -77,6 +90,109 @@ public class DeepGramFrame extends DeepASRFrame {
     
 //    private volatile Boolean IsListenning = Boolean.FALSE;
 
+    private void updateListeningUi(boolean listening) {
+        synchronized (lock) {
+            IsListenning = listening;
+            listen.setText(listening ? "Stop" : "Listen");
+            System.out.println("[DeepGram] UI updated: IsListenning=" + listening);
+        }
+    }
+
+    private void startListeningNow() throws IOException {
+        String language = cm.getLanguage();
+        System.out.println("[DeepGram] startListeningNow() called | language=" + language + " | automaticListenBool=" + automaticListenBool + " | agentSpeaking=" + agentSpeaking);
+        sentThisTurn = false;
+        server.sendMessage(language);
+        updateListeningUi(true);
+    }
+
+    private void stopListeningNow() throws IOException {
+        System.out.println("[DeepGram] stopListeningNow() called | IsListenning=" + IsListenning);
+        server.sendMessage("STOP");
+        updateListeningUi(false);
+    }
+
+    private void startListeningAsync() {
+        System.out.println("[DeepGram] startListeningAsync() requested | IsListenning=" + IsListenning);
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    if (!IsListenning) {
+                        startListeningNow();
+                    } else {
+                        System.out.println("[DeepGram] startListeningAsync() skipped: already listening");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        t.start();
+    }
+
+    private void stopListeningAsync() {
+        System.out.println("[DeepGram] stopListeningAsync() requested | IsListenning=" + IsListenning);
+        Thread t = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    if (IsListenning) {
+                        stopListeningNow();
+                    } else {
+                        System.out.println("[DeepGram] stopListeningAsync() skipped: not listening");
+                    }
+                } catch (Exception ex) {
+                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        };
+        t.start();
+    }
+
+    /**
+     * Strip accents, punctuation, and lowercase so that e.g.
+     * "D'accord." and "d'accord" compare as equal.
+     */
+    private static String normalizeFuzzy(String text) {
+        if (text == null) return "";
+        String s = text.trim().toLowerCase();
+        s = Normalizer.normalize(s, Normalizer.Form.NFD);
+        s = s.replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        s = s.replaceAll("[^a-z0-9 ]", "");
+        s = s.replaceAll("\\s+", " ").trim();
+        return s;
+    }
+
+    private boolean shouldSendTranscript(String transcript) {
+        String raw = transcript == null ? "" : transcript.trim();
+        if (raw.isEmpty()) {
+            System.out.println("[DeepGram] shouldSendTranscript() -> FALSE (empty transcript)");
+            return false;
+        }
+
+        if (sentThisTurn) {
+            System.out.println("[DeepGram] shouldSendTranscript() -> FALSE (already sent this turn): \"" + raw + "\"");
+            return false;
+        }
+
+        String fuzzy = normalizeFuzzy(raw);
+        String lastFuzzy = normalizeFuzzy(lastSentTranscript);
+        long now = System.currentTimeMillis();
+        long elapsed = now - lastSentTimeMs;
+
+        if (fuzzy.equals(lastFuzzy) && elapsed < DUPLICATE_WINDOW_MS) {
+            System.out.println("[DeepGram] shouldSendTranscript() -> FALSE (fuzzy duplicate within " + elapsed + "ms): \"" + raw + "\" normalized=\"" + fuzzy + "\"");
+            return false;
+        }
+
+        System.out.println("[DeepGram] shouldSendTranscript() -> TRUE (new transcript, " + elapsed + "ms since last): \"" + raw + "\" normalized=\"" + fuzzy + "\"");
+        lastSentTranscript = raw;
+        lastSentTimeMs = now;
+        sentThisTurn = true;
+        return true;
+    }
+
     public DeepGramFrame(CharacterManager cm)throws InterruptedException {
         super(cm);
         initComponents();
@@ -84,87 +200,84 @@ public class DeepGramFrame extends DeepASRFrame {
         this.cm=cm;
     }
     
-    @Override
-    public void performFeedback(String type){
-        
-        Boolean IsStreaming = Boolean.FALSE;
-        for (LLMFrame llm : llms){
-            IsStreaming = llm.IsStreaming | IsStreaming;                  
+    private boolean matchesLLMSource(String source) {
+        if (source == null) return false;
+        for (String prefix : LLM_SOURCE_PREFIXES) {
+            if (source.startsWith(prefix)) return true;
         }
-        if (IsStreaming){
-            System.out.println("The LLM Is still straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
-        }else{
-            System.out.println("The LLM Is NOT straming !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");   
+        return false;
+    }
+
+    private boolean isLLMAnimation(ID animId) {
+        if (animId == null) {
+            System.out.println("[DeepGram] isLLMAnimation() -> false (animId is null)");
+            return false;
         }
-       
-//        if (type.equals("end") & !IsStreaming){
-        if (type.equals("end") | type.equals("stopped")){
-            
-            System.out.println("greta.auxiliary.deepasr.DeepGramFrame.performFeedback(): received feedback end: " + type);
-            
-            if (!IsListenning & automaticListenBool){
-                Thread r3 = new Thread() {
-                    @Override
-                    public void run() {
-
-                        try {
-
-                            String language= cm.getLanguage();
-                            System.out.println("Language selected : "+language);
-
-                            server.sendMessage(language);
-                            System.out.println("Listenning");
-                            
-                            synchronized (lock) {
-                                listen.setText("Stop");
-                                IsListenning = Boolean.TRUE;                                
-                            }
-
-                        } catch (Exception ex) {
-                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        
-                    }
-                };
-                r3.start();
+        String directSource = animId.getSource();
+        if (matchesLLMSource(directSource)) {
+            System.out.println("[DeepGram] isLLMAnimation() -> TRUE (direct source matches: \"" + directSource + "\")");
+            return true;
+        }
+        List<ID> allParents = animId.getAllParents();
+        StringBuilder parentSources = new StringBuilder();
+        for (ID parent : allParents) {
+            String ps = parent.getSource();
+            if (parentSources.length() > 0) parentSources.append(", ");
+            parentSources.append(ps);
+            if (matchesLLMSource(ps)) {
+                System.out.println("[DeepGram] isLLMAnimation() -> TRUE (parent source matches: \"" + ps + "\") | direct=\"" + directSource + "\" | all parents=[" + parentSources + "]");
+                return true;
             }
         }
-        if (type.equals("start")){
+        System.out.println("[DeepGram] isLLMAnimation() -> FALSE | direct=\"" + directSource + "\" | parents=[" + parentSources + "]");
+        return false;
+    }
 
-            System.out.println("greta.auxiliary.deepasr.DeepGramFrame.performFeedback(): received feedback start: " + type);
+    @Override
+    public void performFeedback(String type){
+        System.out.println("[DeepGram] performFeedback(String) called with type=\"" + type + "\" -- no-op (routed via Callback path)");
+    }
 
-            Thread r3 = new Thread() {
-                @Override
-                public void run() {
-                    
-                    try{
-                        Thread.sleep(100);
-                    }catch (Exception ex) {
-                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    
-                    if (IsListenning){
-                        
-                        try{
-                            
-                            server.sendMessage("STOP");
-                            System.out.println("Stopping");
-                            
-                            synchronized (lock) {
-                                IsListenning = Boolean.FALSE;
-                                listen.setText("Listen");                                
-                            }
-                            
-                        }catch (Exception ex) {
-                            Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+    @Override
+    public void performFeedback(Callback callback){
+        String type = callback.type();
+        ID animId = callback.animId();
+        String directSource = animId != null ? animId.getSource() : "null";
+        String idStr = animId != null ? animId.toString() : "null";
+        System.out.println("[DeepGram] ============ performFeedback(Callback) ============");
+        System.out.println("[DeepGram]   type=\"" + type + "\" | animId=" + idStr + " | directSource=\"" + directSource + "\"");
+        System.out.println("[DeepGram]   state: IsListenning=" + IsListenning + " | automaticListenBool=" + automaticListenBool + " | agentSpeaking=" + agentSpeaking);
 
-                    }
+        boolean isLLM = isLLMAnimation(animId);
+
+        if ("start".equals(type)){
+            if (isLLM){
+                agentSpeaking = true;
+                System.out.println("[DeepGram]   -> LLM animation STARTED. agentSpeaking=true");
+                if (IsListenning){
+                    System.out.println("[DeepGram]   -> Stopping ASR (agent is speaking)");
+                    stopListeningAsync();
                 }
-            };
-            r3.start();
-
+            } else {
+                System.out.println("[DeepGram]   -> Non-LLM start (ignored for auto-listen): source=\"" + directSource + "\"");
+            }
+        } else if ("end".equals(type) || "stopped".equals(type)){
+            if (isLLM){
+                agentSpeaking = false;
+                System.out.println("[DeepGram]   -> LLM animation ENDED. agentSpeaking=false");
+                if (!IsListenning && automaticListenBool){
+                    System.out.println("[DeepGram]   -> Auto-starting ASR (LLM speech finished, automatic mode ON)");
+                    startListeningAsync();
+                } else {
+                    System.out.println("[DeepGram]   -> NOT auto-starting ASR: IsListenning=" + IsListenning + " automaticListenBool=" + automaticListenBool);
+                }
+            } else {
+                System.out.println("[DeepGram]   -> Non-LLM end/stopped (ignored for auto-listen): source=\"" + directSource + "\"");
+            }
+        } else {
+            System.out.println("[DeepGram]   -> Unhandled callback type: \"" + type + "\"");
         }
+        System.out.println("[DeepGram] ================================================");
     }
 
     /**
@@ -182,14 +295,15 @@ public class DeepGramFrame extends DeepASRFrame {
         portLabel = new javax.swing.JLabel();
         addressLabel = new javax.swing.JLabel();
         address = new javax.swing.JTextField();
-        listen = new javax.swing.JButton();
         answer = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TranscriptText = new javax.swing.JTextArea();
         enable = new javax.swing.JCheckBox();
         automaticListen = new javax.swing.JCheckBox();
+        listen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(810, 300));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "DeepGram", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 1, 18))); // NOI18N
 
@@ -208,14 +322,6 @@ public class DeepGramFrame extends DeepASRFrame {
 
         address.setText("localhost");
 
-        listen.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        listen.setText("Listen");
-        listen.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listenActionPerformed(evt);
-            }
-        });
-
         answer.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         answer.setText("Transcript");
 
@@ -229,27 +335,24 @@ public class DeepGramFrame extends DeepASRFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(listen)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(addressLabel)
-                            .addComponent(portLabel))
-                        .addGap(32, 32, 32)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(44, 44, 44)
-                        .addComponent(answer)
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(24, 26, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(addressLabel)
+                    .addComponent(portLabel))
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(44, 44, 44)
+                .addComponent(answer)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(port, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,12 +361,9 @@ public class DeepGramFrame extends DeepASRFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(addressLabel)
-                            .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(listen)
-                .addContainerGap())
+                            .addComponent(address, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         enable.setText("Enable");
@@ -280,28 +380,40 @@ public class DeepGramFrame extends DeepASRFrame {
             }
         });
 
+        listen.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        listen.setText("Listen");
+        listen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                listenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(enable)
-                .addGap(28, 28, 28)
-                .addComponent(automaticListen)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(enable)
+                        .addGap(28, 28, 28)
+                        .addComponent(automaticListen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(listen))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(enable)
-                    .addComponent(automaticListen))
+                    .addComponent(automaticListen)
+                    .addComponent(listen))
                 .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -315,7 +427,10 @@ public class DeepGramFrame extends DeepASRFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -403,23 +518,51 @@ public class DeepGramFrame extends DeepASRFrame {
 
                                         if(s.length()>1){
                                             System.out.println("CLIENT:"+s);
-                                            if (s.contains("Speech Final:") | s.contains("Is Final:")){
 
-                                                TranscriptText.setText(s.replace("Speech Final:","").replace("Is Final:",""));
-                                                if (IsListenning){
-                                                    for (LLMFrame llm : llms){
-                                                        llm.setRequestTextandSend(s.replace("Speech Final:","").replace("Is Final:",""));
-                                                    }
-                                                    try{
-                                                        server.sendMessage("STOP");
-                                                        System.out.println("Stopping");
-                                                        IsListenning = Boolean.FALSE;
-                                                        listen.setText("Listen");
-                                                    }catch (IOException ex) {
-                                                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                                                    }
+                                            if (s.contains("Speech Started")){
+                                                System.out.println("[DeepGram][ASR] Speech Started detected | automaticListenBool=" + automaticListenBool + " | IsListenning=" + IsListenning);
+                                                if (automaticListenBool && !IsListenning) {
+                                                    System.out.println("[DeepGram][ASR] Updating UI to reflect user speaking");
+                                                    updateListeningUi(true);
                                                 }
 
+                                            } else if (s.contains("Speech Final:")){
+                                                String transcript = s.replace("Speech Final:","").trim();
+                                                System.out.println("[DeepGram][ASR] Speech Final received | transcript=\"" + transcript + "\" | IsListenning=" + IsListenning);
+                                                final String finalTranscript1 = transcript;
+                                                javax.swing.SwingUtilities.invokeLater(() -> TranscriptText.setText(finalTranscript1));
+                                                if (IsListenning && shouldSendTranscript(transcript)){
+                                                    System.out.println("[DeepGram][ASR] Sending transcript to " + llms.size() + " LLM(s)");
+                                                    for (LLMFrame llm : llms){
+                                                        llm.setRequestTextandSend(transcript);
+                                                    }
+                                                    stopListeningAsync();
+                                                } else {
+                                                    System.out.println("[DeepGram][ASR] Speech Final NOT sent to LLM: IsListenning=" + IsListenning + " (shouldSend checked above)");
+                                                }
+
+                                            } else if (s.contains("Utterance End:")){
+                                                String transcript = s.replace("Utterance End:","").trim();
+                                                System.out.println("[DeepGram][ASR] Utterance End (with text) | transcript=\"" + transcript + "\" | automaticListenBool=" + automaticListenBool + " | IsListenning=" + IsListenning);
+                                                final String finalTranscript2 = transcript;
+                                                javax.swing.SwingUtilities.invokeLater(() -> TranscriptText.setText(finalTranscript2));
+                                                if (automaticListenBool && IsListenning){
+                                                    System.out.println("[DeepGram][ASR] Stopping listening (Utterance End fallback, no LLM send)");
+                                                    stopListeningAsync();
+                                                }
+
+                                            } else if (s.contains("Utterance End")){
+                                                System.out.println("[DeepGram][ASR] Utterance End (bare, no text) | automaticListenBool=" + automaticListenBool + " | IsListenning=" + IsListenning);
+                                                if (automaticListenBool && IsListenning){
+                                                    System.out.println("[DeepGram][ASR] Stopping listening (bare Utterance End)");
+                                                    stopListeningAsync();
+                                                }
+
+                                            } else if (s.contains("Is Final:")){
+                                                String partial = s.replace("Is Final:","").trim();
+                                                System.out.println("[DeepGram][ASR] Is Final (partial) | text=\"" + partial + "\"");
+                                                final String finalPartial = partial;
+                                                javax.swing.SwingUtilities.invokeLater(() -> TranscriptText.setText(finalPartial));
                                             }
 
                                         }
@@ -461,19 +604,7 @@ public class DeepGramFrame extends DeepASRFrame {
         }else{
             try{
                 if(IsListenning){
-
-                    try{
-                        server.sendMessage("STOP");
-                        System.out.println("Stopping");
-                        
-                        synchronized (lock) {
-                            IsListenning = Boolean.FALSE;
-                            listen.setText("Listen");                            
-                        }
-                        
-                    }catch (IOException ex) {
-                        Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                    stopListeningNow();
 
                 }
                 server.stopConnection();
@@ -492,17 +623,8 @@ public class DeepGramFrame extends DeepASRFrame {
 
 
         if (IsListenning){
-            
             try{
-
-                server.sendMessage("STOP");
-                System.out.println("Stopping");
-                
-                synchronized (lock) {
-                    IsListenning = Boolean.FALSE;
-                    listen.setText("Listen");                    
-                }
-                
+                stopListeningNow();
             }catch (IOException ex) {
                 Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -510,17 +632,7 @@ public class DeepGramFrame extends DeepASRFrame {
         }else{
 
             try {
-
-                System.out.println("Language selected : "+language);
-
-                server.sendMessage(language);
-                System.out.println("Listenning");
-                
-                synchronized (lock) {
-                    listen.setText("Stop");
-                    IsListenning = Boolean.TRUE;                    
-                }
-
+                startListeningNow();
             } catch (IOException ex) {
                 Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -535,49 +647,12 @@ public class DeepGramFrame extends DeepASRFrame {
     }//GEN-LAST:event_portActionPerformed
 
     private void automaticListenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_automaticListenActionPerformed
-        // TODO add your handling code here:
-        // TODO add your handling code here:
-        automaticListenBool = automaticListen.isEnabled();
-        if(automaticListenBool){
+        automaticListenBool = automaticListen.isSelected();
+        System.out.println("[DeepGram] Automatic listening toggled: " + automaticListenBool + " | agentSpeaking=" + agentSpeaking + " | IsListenning=" + IsListenning + " | enabled=" + enable.isSelected());
 
-            String language= cm.getLanguage();
-
-            if (IsListenning){
-
-                try{
-
-                    server.sendMessage("STOP");
-                    System.out.println("Stopping");
-
-                    synchronized (lock) {
-                        IsListenning = Boolean.FALSE;
-                        listen.setText("Listen");                                
-                    }
-
-                }catch (IOException ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }else{
-
-                try {
-
-                    System.out.println("Language selected : "+language);
-
-                    server.sendMessage(language);
-                    System.out.println("Listenning");
-
-                    synchronized (lock) {
-                        listen.setText("Stop");
-                        IsListenning = Boolean.TRUE;                                
-                    }
-
-                } catch (IOException ex) {
-                    Logger.getLogger(DeepASRFrame.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
-            }
-
+        if (automaticListenBool && !agentSpeaking && !IsListenning && enable.isSelected()) {
+            System.out.println("[DeepGram] Agent is silent and not listening -> auto-starting ASR now");
+            startListeningAsync();
         }
     }//GEN-LAST:event_automaticListenActionPerformed
 

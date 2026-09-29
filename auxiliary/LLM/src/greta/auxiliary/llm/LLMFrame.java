@@ -141,7 +141,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
         
         System.out.println("TEXT TO TRANSFORM:"+text); 
         if(text.length()>1){
-            String construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n" +
+            String construction="<?xml version=\"1.0\" encoding=\"utf-8\" ?>\n" +
                                 "<fml-apml>\n<bml>"+
                                 "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
                                 "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
@@ -171,7 +171,7 @@ public class LLMFrame extends javax.swing.JFrame implements IntentionEmitter{
             }else{
                 file_path = System.getProperty("user.dir")+"\\fml_mistral.xml";
             }
-            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(new File(file_path)),"ISO-8859-1");                        
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(new File(file_path)),"utf-8");                        
             StreamResult result = new StreamResult(writer);
             transformer.setOutputProperty(OutputKeys.INDENT, "yes");
             transformer.transform(source, result);

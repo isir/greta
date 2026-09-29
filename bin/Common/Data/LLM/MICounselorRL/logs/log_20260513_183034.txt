@@ -1,0 +1,9 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis à l'aise. Comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je vais bien, merci. Comment allez-vous aujourd'hui ?
+User: [Compréhension ou nouvelle perspective]C'est le moment de ça qui m'envoie vous parler en fait.
+Agent: [Baseline]Je suis lÃ pour vous Ã©couter. Qu'est-ce qui vous prÃ©occupe ?
+User: [Partager des informations personnelles ou décrire un événement passé]Julien pour parler de ma dépendance à Valcolm.
+Agent: [Baseline]Je vois. Vous voulez parler de votre consommation d'alcool ?
+User: [Partager des informations personnelles ou décrire un événement passé]Exactement.
+Agent: [Baseline]Je comprends que cela peut Ãªtre difficile Ã  aborder. Pouvez-vous me parler un peu plus de votre consommation d'alcool ?

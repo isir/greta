@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel]Hello, Can you? My name is [NAME]. How are you?
+Agent: [Baseline]Pleased to meet you, [NAME]I'm doing well, thanks-how about you? I appreciate you taking the time to meet today.
+User: [Changing unhealthy behavior in the future; Asking for Medical Information;]I don't know. I'm here to talk about my alcohol use. I don't know. I'm here to talk about my alcohol use. So I was wondering if you could help me with it.
+Agent: [Baseline]I hear you, [NAME]-it sounds like you're feeling a bit unsure about why you're here today. That's completely normal. What's been going through your mind since your doctor mentioned this?
+User: [unknown]Make a list for, which kind of
+Agent: [Baseline]I'd rather focus on what's important to  you -not just a list. What's one thing about your drinking that feels most  bothersome  right now? Even if it's small.
+User: [Backchannel]Make a list for, which kind of
+Agent: [Baseline]Got it, [NAME]. Let's focus on what's  most  pressing for you. If you had to pick   one   thing-like health, relationships, or just feeling in control-what's the  heaviest  weight on your mind right now? .No need to rush..   .I'm here to listen-no pressure.. 

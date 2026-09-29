@@ -1,0 +1,2 @@
+User: [Accueil ou clôture;] Bonjour.
+Agent: [Baseline]Bonjour Camille, comment allez-vous aujourd'hui ? Je vois que vous avez été orienté par votre médecin, ça vous dit de m'en parler un peu ?

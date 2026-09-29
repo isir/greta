@@ -1,0 +1,3 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Je m'appelle.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Ah, d'accord ! Alors, comment ssa va aujourd'hui, Camille ? Pas trop fatiguaie ?

@@ -1,0 +1,35 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour St?phane.
+Agent: [Medical Education]EnchantÃ©e, [NAME]Bonjour, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture] ?a devrait y aller.
+Agent: [Ask for Consent]Est-ce que ça vous va si on parle un peu de votre activité physique aujourd'hui ?
+User: [Backchannel] On peut en parler de
+Agent: [Reflection]Je comprends que vous êtes prêt à discuter de votre activité physique. C'est un bon point de départ. Comment vous sentez-vous par rapport à votre niveau d'activité actuel ?
+User: [Partager un sentiment ou une émotion positive] Je me sens calme
+Agent: [Reflection]Je comprends que vous vous sentez calme. C'est important de se sentir bien dans sa peau. Comment trouvez-vous le temps pour des activités physiques dans votre quotidien ?
+User: [inconnu] Je pratique des activit?s figu en week-end apr?s
+Agent: [Reflection]Je comprends que vous pratiquez des activités physiques le week-end. C'est un bon début. Comment vous sentez-vous par rapport à cette routine ?
+User: [Partager un sentiment ou une émotion positive; Partager des informations personnelles ou décrire un événement passé] Je me sens bien, je pr?f?re faire des routines que de choisir dynamiquement
+Agent: [Empathic Reaction]Je comprends que vous préférez avoir une routine stable. C'est tout à fait normal de se sentir plus à l'aise avec une structure fixe. Comment pourrions-nous intégrer cette préférence pour la routine dans votre objectif d'augmenter votre activité physique ?
+User: [Partager des informations personnelles ou décrire un événement passé] En me lavant plut?t
+Agent: [Planning with the Patient]D'accord, parlons de cela. Seriez-vous prêt à essayer d'ajouter une courte marche ou une autre activité physique à votre routine quotidienne, par exemple en semaine ? Cela pourrait être quelque chose de simple, comme marcher 10 minutes chaque jour après le déjeuner. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir]c'est enviasageable
+Agent: [Ask about current Emotions]Super, je suis contente que ce soit envisageable pour vous. Comment vous sentez-vous à l'idée d'ajouter cette courte marche à votre routine ?
+User: [Modifier les comportements malsains à l'avenir] Apr?s manger je peux faire un petit tour ? c?t? de mon universit? de chez moi,
+Agent: [Reflection]Cela semble être une excellente idée. Vous avez trouvé une manière pratique et accessible d'intégrer une activité physique dans votre quotidien. Bravo pour cette initiative. Comment vous sentez-vous à l'idée de commencer cette semaine ? END_CONVO
+User: [inconnu] Comme vous l'avez dit,
+Agent: [Reflection]Je suis ravie que vous trouviez cette idée pratique et accessible. C'est un excellent point de départ. Comment vous sentez-vous à l'idée de commencer cette semaine ?
+User: [inconnu] Il y a une question qui est fait.
+Agent: [Reflection]Je comprends que vous êtes prêt à commencer cette semaine. C'est un bon signe que vous soyez motivé à intégrer cette nouvelle habitude dans votre routine. Comment pouvons-nous rendre cela encore plus facile pour vous ?
+User: [Partager un sentiment ou une émotion négative]c'est ennuyant
+Agent: [Reflection]Je comprends que l'idée de marcher après le déjeuner puisse sembler ennuyeuse. C'est important de trouver une activité qui vous plaît. Y a-t-il une autre activité physique que vous aimeriez essayer ou que vous trouveriez plus agréable ?
+User: [Partager des informations personnelles ou décrire un événement passé] Et c'est ? part mes aptitudes que j'ai d?velopp? peut-?tre de tir ? l'arc
+Agent: [Reflection]Je comprends que vous trouvez la marche ennuyeuse et que vous préférez des activités qui correspondent mieux à vos aptitudes, comme le tir à l'arc. C'est important de choisir des activités qui vous motivent et vous plaisent. Quelles autres activités pourriez-vous envisager pour augmenter votre activité physique tout en restant motivé ?
+User: [inconnu] Le nombre d'heures des activit?s physiques
+Agent: [Reflection]Il semble que vous cherchez des activités physiques qui vous motivent et correspondent à vos aptitudes. Le tir à l'arc est une excellente option si cela vous plaît. Quelles autres activités pourriez-vous envisager pour rester actif tout en vous amusant ?
+User: [inconnu]tu parles d'autre actuivite ?
+Agent: [Empathic Reaction]Je comprends que vous cherchez des activités qui vous motivent et correspondent à vos aptitudes. Le tir à l'arc est une excellente option si cela vous plaît. Quelles autres activités pourriez-vous envisager pour rester actif tout en vous amusant ?
+User: [Modifier les comportements malsains à l'avenir] Je pratiquerai l'id?e d'actualit? le basket-ball.
+Agent: [Progress Acknowledgment]C'est formidable que vous envisagiez de pratiquer le basket-ball. C'est une activité dynamique et amusante qui peut vraiment vous motiver. Bravo pour cette initiative ! END_CONVO
+Agent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+

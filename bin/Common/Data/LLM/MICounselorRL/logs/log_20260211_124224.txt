@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Sharing personal information or Describe past event] My name is [NAME], and I'm here to talk about my alcohol consumption.
+Agent: [Baseline]Pleased to meet you, [NAME]It's good to meet you too, [NAME]. How are you doing today?
+User: [Sharing personal information or Describe past event; Sharing positive feeling or emotion] I am doing great. I I work a lot these times, but it's still fine. And
+Agent: [Baseline]That sounds busy. How do you usually unwind after a long day at work?
+User: [Unknown] Usually usually work at home and and then I I I was in a net net net net net net net
+Agent: [Baseline]It sounds like you have a lot on your plate. When you do take a break, what helps you relax?
+User: [Sharing personal information or Describe past event; Changing unhealthy behavior in the future] That helps me to have a break is to, like, do some sport or practice, or create some music
+Agent: [Baseline]That's great-sounds like you have healthy outlets. How does alcohol fit into your routine when you're not doing those things?

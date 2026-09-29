@@ -1,0 +1,8 @@
+# Normalize line endings (reduces LF/CRLF noise on Windows; GitHub Desktop may still warn once)
+* text=auto
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.py text eol=lf
+*.java text eol=lf
+*.xml text eol=lf
+*.md text eol=lf

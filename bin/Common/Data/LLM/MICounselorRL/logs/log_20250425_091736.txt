@@ -1,0 +1,7 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] [NAME],
+Agent: [Baseline]EnchantÃ©e, [NAME]EnchantÃ©e, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture] [NAME],
+Agent: [Baseline]EnchantÃ©e, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]ca va bien
+Agent: [Baseline]C'est super ! Comment puis-je vous aider aujourd'hui ?

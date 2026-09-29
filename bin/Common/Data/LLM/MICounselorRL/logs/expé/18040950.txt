@@ -1,0 +1,21 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour [NAME].
+Agent: [Baseline]Enchantée, [NAME]Bonjour [NAME], enchantée. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture; Partager un sentiment ou une �motion positive]je vais tr�s biene t vous ?
+Agent: [Baseline]Je vais bien, merci. Votre médecin m'a dit que vous souhaitiez augmenter votre activité physique. Comment vous sentez-vous par rapport à cela ?
+User: [Modifier les comportements malsains � l'avenir; Partager un sentiment ou une �motion positive] Je pense que c'est la meilleure d?cision, donc ?a ?a m'aidera ? ? ?tre mieux de mani?re g?n?rale. Donc voil?.
+Agent: [Baseline]C'est super que vous soyez motivée à améliorer votre bien-être. Quelles sont les activités physiques que vous aimez ou que vous avez déjà pratiquées ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Alors donc j'ai d?j? pratiqu? le volet, la natation
+Agent: [Baseline]La natation et le vélo sont d'excellentes activités. Qu'est-ce qui vous plaît le plus dans ces activités ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Donc c'est le, c'est, c'est pas seulement le fait que je puisse me d?fouler pendant un certain
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empêche actuellement de pratiquer ces activités plus régulièrement ?
+User: [Backchannel]j'ai pas entendu
+Agent: [Baseline]Je vous demandais ce qui vous empêche actuellement de pratiquer la natation et le vélo plus régulièrement ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] C'est surtout un manque de temps et je n'ai pas retrouv? de club qui qui faisaient ?a, qui
+Agent: [Baseline]Je comprends. Avez-vous pensé �  intégrer des activités plus simples dans votre quotidien, comme la marche ou des pauses actives ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Seul, donc je peux courir seul, donc c'est c'est un sport qui me correspond
+Agent: [Baseline]C'est une excellente idée. Quelle serait une première étape réalisable pour commencer à courir cette semaine ?
+User: [inconnu] Donc je dirais comment ?a pourrait avoir une fr?quence
+Agent: [Baseline]Pour commencer, vous pourriez essayer de courir deux fois par semaine. Qu'en pensez-vous ?
+User: [inconnu] Donc je dirais comment ?a pourrait avoir une fr?quence Donc je dirais comment ?a pourrait avoir une fr?quence Donc je dirais comment ?a pourrait avoir une fr?quence Donc je dirais comment ?a pourrait avoir une fr?quence Donc je dirais comment ?a pourrait avoir une fr?quence Donc je dirais comment ?a pourrait avoir une fr?quence Donc je dirais comment ?a pourrait avoir une fr?quence mod?r?e peut-?tre mod?r?e peut-?tre mod?r?e peut-?tre mod?r?e peut-?tre mod?r?e peut-?tre mod?r?e peut-?tre mod?r?e peut-?tre J'ai pris rendez-vous ? la question.
+Agent: [Baseline]D'accord, une fréquence modérée est une bonne idée. Que diriez-vous de commencer par courir 10 minutes, deux fois par semaine ? Qu'en pensez-vous ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

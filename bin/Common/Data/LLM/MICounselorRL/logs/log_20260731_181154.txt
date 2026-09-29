@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. My name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How are you doing today? It's good to have this time to talk.
+User: [Sharing negative feeling or emotion]I'm a bit overwhelmed.
+Agent: [Baseline]That makes sense-life can feel heavy sometimes. What's weighing on you the most right now?
+User: [Sharing negative feeling or emotion;]I'm I'm I'm having a lot of work right now, and I'm a bit I'm I'm I'm having a lot of work right now, and I'm a bit I'm I'm I'm having a lot of work right now, and I'm a bit I'm I'm I'm having a lot of work right now, and I'm a bit overwhelmed and stressed.
+Agent: [Baseline]I hear how much stress you're carrying right now. That's a lot to handle-work, stress, and everything else. When you're this busy, what usually helps you unwind or take a break?

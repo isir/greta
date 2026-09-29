@@ -45,7 +45,8 @@ public class IdleMovementFilter extends FAPFrameEmitterImpl implements FAPFrameP
         Random randomGenerator = new Random();
         frameind = randomGenerator.nextInt(40);
         while (frameind < newlist.size() - 8) {
-            bioblink(newlist, frameind);
+            System.out.println("[BLINK]");
+            //bioblink(newlist, frameind);
             frameind += 71 + (randomGenerator.nextInt(50)); //  4.8 sec ~= 120 frames
         }
 

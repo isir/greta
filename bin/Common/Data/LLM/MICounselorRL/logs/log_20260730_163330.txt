@@ -1,0 +1,3 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [unknown]Hello?
+Agent: [Baseline]Don't worry, we can continue without it.Hi Camille, how are you doing today?

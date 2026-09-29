@@ -1,0 +1,11 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis John. Comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je vais bien, merci. Et vous, John, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je suis là pour discuter d'un sujet
+Agent: [Baseline]Bien sûr, je suis la pour vous aider. De quoi voulez-vous discuter ?
+User: [Modifier les comportements malsains à l'avenir]Pourriez m'aider à réduire ma consommation d'alcool s'il vous plaît
+Agent: [Baseline]Bien sûr, je suis la pour vous aider. Pouvez-vous me dire un peu plus sur votre consommation d'alcool en ce moment ?
+User: [Compréhension ou nouvelle perspective]Ma consommation ne fait qu'augmenter ces derniers temps et du coup j'aimerais bien Ma consommation ne fait qu'augmenter ces derniers temps et du coup j'aimerais bien Ma consommation ne fait qu'augmenter ces derniers temps et du coup j'aimerais bien Ma consommation ne fait qu'augmenter ces derniers temps et du coup j'aimerais bien Ma consommation ne fait qu'augmenter ces derniers temps et du coup j'aimerais bien faire attention et trouver le moyen de réduire celle-là.
+Agent: [Baseline]Je comprends que vous voulez raiduire votre consommation d'alcool. C'est une aitape importante et je suis la pour vous aider. Pouvez-vous me dire ce qui vous a incitai a vouloir raiduire votre consommation ?
+User: [Compréhension ou nouvelle perspective]Vous là ce qui se passe
+Agent: [Baseline]Je suis daisolai, je ne comprends pas bien votre question. Pouvez-vous reformuler s'il vous plaît ?

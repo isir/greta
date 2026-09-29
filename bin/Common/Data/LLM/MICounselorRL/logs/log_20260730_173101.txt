@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, Camille. My name is, [NAME]. How are you doing today?
+Agent: [Baseline]Pleased to meet you, [NAME]Nice to meet you too, [NAME]. How are you doing today?
+User: [unknown]I don't know. Could you talk to me a bit about you?
+Agent: [Baseline]Of course, [NAME]. I'm here to listen and understand. But first, I'd like to hear more about how you're feeling today. What's been on your mind lately?
+User: [unknown]I am I I don't feel good because I drink too much. I am I I don't feel good because I drink too much. I am I I don't feel good because I drink too much. Recently. So maybe you could help me with that.
+Agent: [Baseline]It sounds like you're feeling frustrated, [NAME]. You've noticed that your drinking is affecting how you feel. That's a good first step.
+User: [unknown]Yes. Maybe you could help me with, that. Yes. Maybe you could help me with, that. Yes. Maybe you could help me with, that. Yes. Maybe you could help me with, that. I don't know.
+Agent: [Baseline]I'd be happy to help, [NAME]. Let's start by exploring what's been bothering you about your drinking. What concerns do you have about it?

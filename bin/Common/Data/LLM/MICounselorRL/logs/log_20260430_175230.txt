@@ -1,0 +1,3 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]hello
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Je suis heureux de vous aider. Comment allez-vous aujourd'hui ?

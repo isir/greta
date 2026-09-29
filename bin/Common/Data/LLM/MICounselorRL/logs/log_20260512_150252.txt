@@ -1,0 +1,23 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME]. Je suis John, comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je suis heureux de vous rencontrer, John. Comment allez-vous aujourd'hui ?
+User: [Backchannel]Comment tu
+Agent: [Baseline]Je suis une intelligence artificielle, donc je n'ai pas de sentiments. Comment allez-vous aujourd'hui, John ?
+User: [Compréhension ou nouvelle perspective]Je vais très bien. Écoute, je suis en train de Je vais très bien. Écoute, je suis en train de Je vais très bien. Écoute, je suis en train de Je vais très bien. Écoute, je suis en train de voir comment régler les problèmes
+Agent: [Baseline]Je suis heureux d'entendre que vous allez bien, John. De quoi voulez-vous parler lorsque vous mentionnez "raigler les problaimes" ?
+User: [Le maintien d'un comportement malsain à l'avenir]Bois, je bois énormément et je Bois, je bois énormément et je Bois, je bois énormément et je Bois, je bois énormément et je Bois, je bois énormément et je pas à sortir de ce trou parce que
+Agent: [Baseline]Je vois. Vous voulez donc parler de votre consommation d'alcool ?
+User: [Accueil ou clôture]Hello, hello, hello, hello, hello, hello.
+Agent: [Baseline]Bonjour, John. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais bien.
+Agent: [Baseline]C'est bien. Je suis heureux d'entendre cela. Avez-vous des soucis en ce moment ?
+User: [inconnu]baisser le volume. baisser le volume. baisser le volume. baisser le volume. baisser le volume. baisser le volume. baisser le volume. baisser le volume. baisser le volume. Faire ça.
+Agent: [Baseline]Je suis daisolai, je ne comprends pas ce que vous voulez dire par "baisser le volume". Pouvez-vous s'il vous plaît praiciser ce que vous voulez dire ?
+User: [Partager un sentiment ou une émotion négative]En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. En fait ce que j'ai envie de dire c'est que tu m'en rends dingue. Que tu comprends ça
+Agent: [Baseline]Je suis daisolai si je vous ai ainervai, John. Je ne voulais pas vous offenser. Comment puis-je vous aider aujourd'hui ?
+User: [Backchannel]Je suis pas énervé, c'est juste que bon,
+Agent: [Baseline]Je comprends. Vous avez l'air frustrai. Voulez-vous en parler ?
+User: [Partager un sentiment ou une émotion négative]Oui j'aimerais bien en parler, oui effectivement.
+Agent: [Baseline]Trais bien. De quoi voulez-vous parler, John ?
+User: [Compréhension ou nouvelle perspective]En fait ce qui est fou, c'est que tu es hyper fluide là.
+Agent: [Baseline]Merci, John. Je suis conssu pour communiquer de maniaire fluide et compraihensible. De quoi voulez-vous parler aujourd'hui ?

@@ -1,0 +1,11 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour Camille, comment tu vas Je m'appelle [NAME] et je viens de mon alcoolisme.
+Agent: [Baseline]Enchantai, [NAME]Je suis heureux de vous rencontrer, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Partager un sentiment ou une émotion négative]Franchement aujourd'hui ça va, mais en général dans la vie ça trop.
+Agent: [Baseline]Je suis daisolai d'entendre cela, [NAME]. Qu'est-ce qui rend votre vie difficile en ce moment ?
+User: [Compréhension ou nouvelle perspective]Pense que c'est forcément lié à une certaine addiction que j'ai.
+Agent: [Baseline]Je vois. Pouvez-vous me parler de cette addiction, [NAME] ? Qu'est-ce qui vous inquiaite le plus a ce sujet ?
+User: [Partager un sentiment ou une émotion négative]Plus c'est que ça risque de d'impacter ma santé énormément. Plus c'est que ça risque de d'impacter ma santé énormément. Plus c'est que ça risque de d'impacter ma santé énormément. Plus c'est que ça risque de d'impacter ma santé énormément.
+Agent: [Baseline]Je comprends que vous vous inquiaitiez pour votre santai, [NAME]. Savez-vous quelles sont les consaiquences de votre consommation d'alcool sur votre corps ?
+User: [Le maintien d'un comportement malsain à l'avenir]Je suis pas très sûr parce que là,
+Agent: [Baseline]Je peux vous aider a comprendre les risques pour la santai liais a la consommation d'alcool. Savez-vous que maime une petite quantitai d'alcool peut avoir des effets naifastes sur votre corps ?

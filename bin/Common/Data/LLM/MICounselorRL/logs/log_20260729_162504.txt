@@ -1,0 +1,11 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing] Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing] I'm doing great. Thank you.
+Agent: [Baseline]That's good to hear, [NAME]. I'm glad you're having a good day. [NAME], your doctor mentioned you've been drinking quite a bit lately. How do you feel about that?
+User: [Sharing negative feeling or emotion] I feel a bit sad about that.
+Agent: [Baseline]I see. It sounds like you're feeling some sadness about your drinking. Can you tell me more about that?
+User: [unknown] I don't really want to talk about that.
+Agent: [Baseline]Of course, [NAME]. It's okay if you don't want to talk about it right now. What do you think about your drinking? Is it something you'd like to change?
+User: [Sustaining unhealthy behavior in the future] I don't really want to change it.
+Agent: [Baseline]I understand, [NAME]. It's common to feel that way. Can you tell me why you don't want to change your drinking?

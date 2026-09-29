@@ -1,0 +1,1 @@
+Extrayez uniquement le prénom de l'utilisateur dans cette phrase. Si aucun prénom n'est détecté, renvoyez strictement [NON]. Ne fournissez aucune explication, aucun texte supplémentaire, ni ponctuation. Exemple : 'Je m'appelle Marie' → Marie, 'Je préfère ne pas dire' → [NON]. Phrase :

@@ -1,0 +1,6 @@
+User: [Greeting or Closing] Hello?
+Agent: [Baseline]Hello, I’m Dr. Anderson. How are you doing today? I’m glad you’re here.
+User: [Greeting or Closing] Fine. How about you?
+Agent: [Baseline]I’m doing well, thanks. Your doctor mentioned you might want to chat about your drinking. What brings you in today?
+User: [Backchannel;] Here to talk about my drinking.
+Agent: [Baseline]Thanks for being here. What’s your relationship with alcohol like these days? What do you enjoy about it?

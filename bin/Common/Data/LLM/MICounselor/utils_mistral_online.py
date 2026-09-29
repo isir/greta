@@ -6,21 +6,27 @@ import pandas as pd
 import openai
 from tqdm import tqdm
 import codecs
-from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
+from mistralai import Mistral
+from mistralai.models import UserMessage, AssistantMessage, SystemMessage
 
 api_key_file = os.path.join(os.path.dirname(__file__), 'api_key.txt')
 with open(api_key_file, 'r') as f:
     MISTRAL_API_KEY = f.read()
 
-model = "mistral-large-latest"
+model = "mistral-small-latest"
 
 def read_prompt_csv(role):
   if role == 'therapist':
 
      filename = 'Common/Data/LLM/MICounselor/prompts/therapist_prompts.csv'
+     #FR
+     #filename = 'Common/Data/LLM/MICounselor/prompts/therapist_promptsFR.csv'
+
   if role == 'client':
       filename = 'Common/Data/LLM/MICounselor/prompts/client_prompts.csv'
+      #FR
+      #filename = 'Common/Data/LLM/MICounselor/prompts/client_promptsFR.csv'
+
   df = pd.read_csv(filename)
   intent_detail_list = []
   for index, row in df.iterrows():
@@ -29,16 +35,42 @@ def read_prompt_csv(role):
       intent_detail_list.append({'intent': row['intent'].strip(),'definition': row['definition'],'positive_examples': positive_examples})
   return intent_detail_list
 
-def get_completion_from_messages_local(messages, temperature=0.7):
-    client = MistralClient(api_key=MISTRAL_API_KEY)
+# def get_completion_from_messages_local(messages, temperature=0.7, max_tokens=50):
+#     client = Mistral(api_key=MISTRAL_API_KEY)
+#
+#
+#     response = client.chat.complete(
+#         model=model,
+#         messages=messages,
+#         temperature=temperature,
+#         max_tokens=max_tokens,
+#     )
+#
+#     answer = response.choices[0].message.content
+#     answer = answer.replace('\n', ' ')
+#     answer = answer.replace('[', ' ')
+#     answer = answer.replace(']', ' ')
+#
+#     return answer
 
 
-    response = client.chat(
-         model=model,
-           messages=messages,
+def get_completion_from_messages_local(client,messages, temperature=0.7, max_tokens=50):
+
+
+    # response = client.chat.complete(
+    #     model=model,
+    #     messages=messages,
+    #     temperature=temperature,
+    #     max_tokens=max_tokens,
+    # )
+
+    response = client.chat.complete(
+        model=model,
+        messages=messages,
+        temperature=temperature,
+        max_tokens=max_tokens,
     )
-    
-  
+
     answer = response.choices[0].message.content
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
@@ -77,7 +109,24 @@ def create_message_client(intent_detail_list, utterance, context):
                                        Patient's utterance: {utterance}
                                      >>>
                                      """
-    messages = [ChatMessage(role= 'system', content= system_prompt_template)]
+    ##FR
+    # system_prompt_template = f""" Vous êtes un thérapeute virtuel. Votre tâche est d'évaluer l'intention du patient et de catégoriser l'énoncé du patient après <<<>>> \
+    #                                dans l'une des catégories prédéfinies suivantes :\n {intent_definition}\
+    #                                  Si le texte ne correspond à aucune des catégories ci-dessus, classez-le comme : \n inconnu\
+    #                                  Vous n'inventerez pas de nouvelles catégories. \
+    #                                  Si plusieurs catégories s'appliquent, listez-les toutes.\
+    #                                  Vous ne répondrez qu'avec la catégorie. Ne fournissez pas d'explications ou de notes.\
+    #                                  ####
+    #                                    Voici quelques exemples :\n {exemples}
+    #                                  ####
+    #
+    #                                  <<<
+    #                                    Contexte : {context}
+    #                                    Énoncé du patient : {utterance}
+    #                                  >>>
+    #                                  """
+
+    messages = [SystemMessage(content=system_prompt_template)]
     return messages
 
 def create_message_therapist(intent_detail_list, utterance, context):
@@ -113,8 +162,26 @@ def create_message_therapist(intent_detail_list, utterance, context):
                                        Therapist's utterance: {utterance}
                                      >>>
                                      """
+    # #FR
+    # system_prompt_template = f""" Vous êtes un thérapeute virtuel. Votre tâche est d'évaluer l'intention du thérapeute et de catégoriser l'énoncé du thérapeute après le contexte \
+    #                                 dans l'une des catégories prédéfinies suivantes :\n {intent_definition}\
+    #                                   Seulement si le texte ne correspond à aucune des catégories ci-dessus, classez-le comme : \n inconnu\
+    #                                   Vous n'inventerez pas de nouvelles catégories. \
+    #                                   Une catégorie peut seulement s'appliquer à une portion du texte.\
+    #                                   Si plusieurs catégories s'appliquent, listez-les toutes.\
+    #                                   Vous ne répondrez qu'avec les catégories. Ne fournissez pas d'explications ou de notes.\
+    #                                    ####
+    #                                    Voici quelques exemples :\n {exemples}
+    #                                  ####
+    #
+    #                                  <<<
+    #                                    Contexte : {context}
+    #                                    Énoncé du thérapeute : {utterance}
+    #                                  >>>
+    #                                  """
 
-    messages = [ChatMessage(role= 'system', content= system_prompt_template)]
+
+    messages = [SystemMessage(content=system_prompt_template)]
 
     return messages
 

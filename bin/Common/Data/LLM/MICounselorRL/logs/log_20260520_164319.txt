@@ -1,0 +1,7 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Partager un sentiment ou une émotion négative][NAME], comment tu vas Moi ça va pas trop.
+Agent: [Baseline]Enchantai, [NAME]Je suis daisolai a entendre cela. Qu'est-ce qui vous praioccupe en ce moment ?
+User: [Partager des informations personnelles ou décrire un événement passé]Là, on se demande rien de spécial, mais en fait c'est mon médecin qui m'orientait vers vous, du coup je voulais avoir votre avis sur certains aspects.
+Agent: [Baseline]Je suis la pour vous aider. De quoi voulez-vous discuter ?
+User: [Le maintien d'un comportement malsain à l'avenir]Consommation de drogue qui devient de plus en plus impactante.
+Agent: [Baseline]Je vois. Pouvez-vous me donner plus de daitails sur votre consommation de drogue ?

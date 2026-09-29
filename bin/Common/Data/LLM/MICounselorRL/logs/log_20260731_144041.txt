@@ -1,0 +1,11 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Backchannel]hey
+Agent: [Baseline]Don't worry, we can continue without it.Got it. Thanks for sharing-how have you been feeling lately?
+User: [Greeting or Closing; Sharing positive feeling or emotion;]Pretty good. Thank you. And you?
+Agent: [Baseline]That's great to hear. I'm doing well too-just here to listen and support you. How's your week been so far? Anything you've been looking forward to?
+User: [Greeting or Closing; Backchannel]Pretty good. Thank you. And you?
+Agent: [Baseline]I'm glad you're doing well. So, I've noticed your doctor mentioned something about alcohol use-how have you been feeling about that lately? No rush to answer, just curious.
+User: [Backchannel]What, sorry?
+Agent: [Baseline]No problem. I was just wondering-how have you been thinking about your drinking lately? No need to rush.
+User: [Backchannel]Can you repeat?
+Agent: [Baseline]Sure. I was curious-how have you been feeling about your alcohol use recently? No pressure, just checking in.

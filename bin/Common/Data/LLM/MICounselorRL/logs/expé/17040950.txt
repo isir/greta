@@ -1,0 +1,25 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je suis [NAME].
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] Et toi
+Agent: [Baseline]Merci, je vais bien. Votre médecin m'a dit que vous souhaitiez parler de votre activité physique. Comment vous sentez-vous par rapport à cela ?
+User: [inconnu] J'aimerais pratiquer plus souvent la critique.
+Agent: [Baseline]D'accord, [NAME]. Pouvez-vous me dire ce qui vous motive à vouloir pratiquer plus souvent la critique ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]l'activite sportive pour mieux dormir
+Agent: [Baseline]Merci pour cette précision, [NAME]. Comment pensez-vous que l'activité physique pourrait améliorer votre sommeil ?
+User: [Compr�hension ou nouvelle perspective]l'activite sportive pour mieux dormir
+Agent: [Baseline]Merci pour cette précision, [NAME]. Quel type d'activité physique envisagez-vous de pratiquer pour mieux dormir ?
+User: [inconnu] D?pensant plus, on arrive ? obtenir un sommeil
+Agent: [Baseline]C'est une excellente observation, [NAME]. Quel type d'activité physique vous plairait le plus pour commencer ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] La natation.
+Agent: [Baseline]Super choix, [NAME] ! La natation est une activité très bénéfique. Avez-vous une idée de la fréquence à laquelle vous aimeriez nager chaque semaine ?
+User: [Modifier les comportements malsains � l'avenir] 2 fois.
+Agent: [Baseline]Deux fois par semaine, c'est un bon début. Quand pensez-vous pouvoir commencer cette semaine ?
+User: [Modifier les comportements malsains � l'avenir] Samedi,
+Agent: [Baseline]Parfait, [NAME]. Y a-t-il une piscine près de chez vous ou un endroit où vous aimez nager ?
+User: [Backchannel]Oui
+Agent: [Baseline]Très bien, [NAME]. Avez-vous une heure spécifique en tête pour votre séance de natation samedi ?
+User: [inconnu] Le soir,
+Agent: [Baseline]Super, [NAME]. Le soir, c'est une bonne idée pour bien terminer la journée. Avez-vous un ami ou un membre de la famille qui pourrait vous accompagner ?
+User: [Backchannel] Oui oui ?a peut arriver si je demande.
+Agent: [Baseline]C'est une bonne idée d'avoir de la compagnie. Y a-t-il autre chose que vous aimeriez ajouter ou discuter pour vous aider à rester motivé ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

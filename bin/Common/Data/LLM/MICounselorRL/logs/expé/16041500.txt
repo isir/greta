@@ -1,0 +1,24 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, je suis [NAME].
+Agent: [Ask for Consent]EnchantÃ©e, [NAME][NAME], est-ce que ça vous va si on parle un peu de votre santé et de votre activité physique aujourd'hui ?
+User: [Accueil ou clôture] Bonjour, je suis [NAME].
+Agent: [Reflection]Merci, [NAME]. Vous semblez ouvert à discuter de votre santé et de votre activité physique aujourd'hui. Comment vous sentez-vous par rapport à votre niveau d'activité physique actuel ?
+User: [Partager un sentiment ou une émotion négative]Je sens que j'i  uen activité faible
+Agent: [Medical Education]Merci pour votre honnêteté, [NAME]. Saviez-vous que même de petites augmentations de votre activité physique peuvent avoir des effets positifs sur votre santé ? Par exemple, marcher un peu plus chaque jour peut faire une grande différence. Comment vous sentez-vous à l'idée d'augmenter légèrement votre activité physique ?
+User: [Partager des informations personnelles ou décrire un événement passé] Je sens que j'ai une activité physique très élevée.
+Agent: [Ask for Consent][NAME], est-ce que ça vous va si on explore ensemble des moyens d'augmenter encore un peu votre activité physique ?
+User: [Accueil ou clôture] Très
+Agent: [Give Solution]Bien sûr, [NAME]. Une façon simple d'augmenter votre activité physique est de vous fixer un objectif réalisable, comme marcher 10 minutes de plus chaque jour. Vous pouvez commencer par intégrer des marches courtes dans votre routine quotidienne, par exemple en descendant du bus un arrêt plus tôt ou en allant faire une promenade après le dîner. Qu'en pensez-vous ?
+User: [Partager un sentiment ou une émotion négative] Je pense que c'est une bonne idée, mais c'est une opinion compliquée à mettre en place.
+Agent: [Medical Education]Je comprends, [NAME]. Parfois, il peut sembler difficile de commencer. Saviez-vous que même de petites augmentations de votre activité physique peuvent avoir des effets positifs sur votre santé ? Par exemple, marcher 10 minutes de plus chaque jour peut améliorer votre bien-être général. Il n'est pas nécessaire de faire de grands changements d'un coup. Essayez de commencer par de petites étapes et augmentez progressivement. Qu'en pensez-vous ?
+User: [Partager un sentiment ou une émotion négative]C'est une bonne idée mais la régulatrité est dure
+Agent: [Ask for Information]Je comprends, [NAME]. Pouvez-vous me dire quelles sont les principales difficultés que vous rencontrez pour maintenir une activité physique régulière ?
+User: [inconnu]la principale difficult" est la rigeur
+Agent: [Ask for Consent]Merci pour votre partage, [NAME]. Est-ce que ça vous va si on explore ensemble des moyens de surmonter cette difficulté ?
+User: [Backchannel]ui bien sur
+Agent: [Ask for Consent]Super, [NAME]. Commençons par identifier une petite étape que vous pourriez intégrer dans votre routine quotidienne. Par exemple, pourriez-vous marcher 10 minutes de plus chaque jour ? Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir]oui c'est une bonne idée
+Agent: [Planning with the Patient]Génial, [NAME] ! Alors, pour cette semaine, essayons de marcher 10 minutes de plus chaque jour. Vous pouvez le faire en descendant du bus un arrêt plus tôt ou en allant faire une promenade après le dîner. Qu'en dites-vous ? Est-ce que cela vous semble réalisable ?
+User: [Modifier les comportements malsains à l'avenir]oui cela me semble réalisable
+Agent: [Reflection]C'est formidable, [NAME]. Vous semblez prêt à faire ce premier pas. Ajouter 10 minutes de marche chaque jour peut vraiment faire une différence. Si vous rencontrez des obstacles, n'hésitez pas à ajuster. L'important est de commencer doucement et de progresser à votre rythme. Vous avez déjà fait un grand pas en acceptant ce défi. END_CONVOAgent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+

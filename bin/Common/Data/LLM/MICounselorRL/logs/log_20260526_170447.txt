@@ -1,0 +1,39 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour Camille, je m'appelle [NAME]. Comment tu vas aujourd'hui
+Agent: [Baseline]Enchantai, [NAME]Je vais bien, merci. Et vous, [NAME], comment allez-vous aujourd'hui ?
+User: [Backchannel]Très bien merci de demander tout mon médecin qui m'a remonté par vous et donc je vais pas discuter en fait.
+Agent: [Baseline]Je comprends, [NAME]. Vous n'aites peut-aitre pas encore prait a discuter de votre consommation d'alcool. Cela dit, je suis la pour vous aicouter et vous aider si vous en avez besoin. Qu'est-ce qui vous amaine a consulter aujourd'hui ?
+User: [Compréhension ou nouvelle perspective]Je crois que c'est c'est ma transformation d'alcool je trouve que je le vois beaucoup trop récemment et ça m'a posé des problèmes quoi
+Agent: [Baseline]Je vois. Vous avez donc remarquai que votre consommation d'alcool a augmentai raicemment et cela vous a causai des problaimes. Pouvez-vous me donner plus de daitails sur ces problaimes ?
+User: [Modifier les comportements malsains à l'avenir]Complètement ça m'a posé énormément de problèmes par rapport à mon entourage et tout donc j'aimerais arrêter ça.
+Agent: [Baseline]Je suis content d'entendre que vous voulez arrater de boire de l'alcool, [NAME]. Pouvez-vous me dire ce qui vous a motivai a prendre cette daicision ?
+User: [Compréhension ou nouvelle perspective]En soi ce qui m'a motivé à prendre cette décision c'est du coup mon entourage que j'ai constaté que je devenais de plus en plus violent à un vigueur.
+Agent: [Baseline]Je comprends, [NAME]. Il est important de prendre en compte les consaiquences de notre consommation d'alcool sur nous-maimes et sur les autres. Avez-vous daija essayai d'arrater de boire de l'alcool avant ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non, je n'ai jamais essayé, j'ai toujours dû me le faire.
+Agent: [Baseline]Je vois. Cela peut aitre difficile de changer des habitudes bien ancrais. Mais je suis la pour vous aider a trouver des strategies pour vous aider a reduire votre consommation d'alcool. Etes-vous ouvert a discuter de cela maintenant ?
+User: [Modifier les comportements malsains à l'avenir]Tout à fait, complètement.
+Agent: [Baseline]Parfait, [NAME]. Pour commencer, pouvez-vous me dire quelle est votre consommation d'alcool actuelle ? Combien de verres buvez-vous en moyenne par semaine ?
+User: [Modifier les comportements malsains à l'avenir]Je dirais trois fois par semaine, quatre vers ou non,
+Agent: [Baseline]D'accord, donc en moyenne, vous buvez environ 12 verres d'alcool par semaine. Savez-vous que la consommation maximale recommandai est de 10 verres par semaine et de 2 verres par jour ?
+User: [Compréhension ou nouvelle perspective]Fait deux verres par jour ça fait ça fait quatorze verres donc il y un problème.
+Agent: [Baseline]Oui, en effet, [NAME]. Si vous buvez plus de 14 verres par semaine, vous daipassez les repaires de consommation d'alcool recommandais. Cela peut augmenter le risque de problaimes de santai a long terme. Etes-vous prait a discuter de maniaires de reduire votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Je suis tout
+Agent: [Baseline]Trais bien, [NAME]. Pour commencer, quels sont les avantages et les inconvainients de reduire votre consommation d'alcool selon vous ?
+User: [Compréhension ou nouvelle perspective]Je serai moins fatigué, j'économiserai plus d'argent et je serai plus agréable dans mon entourage.
+Agent: [Baseline]C'est tres bien, [NAME]. Il est important de reflechir aux avantages de reduire sa consommation d'alcool. Et qu'en est-il des inconvainients ? Y a-t-il des choses qui vous manqueront si vous buvez moins d'alcool ?
+User: [Compréhension ou nouvelle perspective]Ah oui oui tout le tout l'aspect social de de la colle quoi.
+Agent: [Baseline]Je comprends, [NAME]. L'alcool peut jouer un role important dans les evenements sociaux. Mais il existe d'autres maniaries de passer du temps avec des amis et de se divertir sans boire de l'alcool. Etes-vous ouvert a explorer ces options ?
+User: [Compréhension ou nouvelle perspective]Je suis complètement ouvert à explorer c'est ça je moi.
+Agent: [Baseline]C'est tres bien, [NAME]. Pour commencer, quelle serait une petite etape concrete que vous pourriez faire cette semaine pour reduire votre consommation d'alcool ? Il pourrait s'agir de choses comme limiter le nombre de verres que vous buvez lors d'une soiree, ou de ne pas boire d'alcool pendant quelques jours de la semaine. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir]Passer à moins de divers par semaine donc là je suis à douze je vais essayer de passer à dix
+Agent: [Baseline]C'est une excellente idee, [NAME]. Reduire votre consommation d'alcool de 12 a 10 verres par semaine est une etape importante. Etes-vous prait a discuter de maniaries de mettre en place pour atteindre cet objectif ?
+User: [Backchannel]Oui bien sûr, je vous suis. D'accord très bien.
+Agent: [Baseline]Parfait, [NAME]. Pour commencer, quelles sont les situations dans lesquelles vous avez tendance a boire de l'alcool ? Par exemple, buvez-vous de l'alcool lorsque vous sortez avec des amis, ou bien buvez-vous de l'alcool pour vous detendre apr
+User: [Partager des informations personnelles ou décrire un événement passé]Je bois de l'alcool quand je sors surtout avec mes amis.
+Agent: [Baseline]D'accord, [NAME]. Une idee pourrait etre de planifier a l'avance les soirees ou vous sortez avec vos amis et de decidez a l'avance combien de verres vous allez boire. Cela pourrait vous aider a controler votre consommation d'alcool. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir]C'est vrai c'est une bonne idée je vais appliquer ça.
+Agent: [Baseline]C'est tres bien, [NAME]. N'oubliez pas que reduire votre consommation d'alcool est un processus qui prend du temps et qui necessite de la patience. Il est normal de rencontrer des difficultes en chemin, mais il est important de ne pas se daicourager et de continuer a avancer. Etes-vous d'accord avec cela ?
+User: [Compréhension ou nouvelle perspective]Entièrement d'accord avec vous merci beaucoup vraiment très d'abord.
+Agent: [Baseline]Je suis heureux d'avoir pu vous aider, [NAME]. N'hesitez pas a me contacter si vous avez besoin de plus de soutien dans votre parcours pour reduire votre consommation d'alcool. Prenez soin de vous et bonne chance ! END\_CONVO
+User: [Accueil ou clôture]Merci beaucoup au revoir.
+Agent: [Baseline]Au revoir, [NAME]. Prenez soin de vous !

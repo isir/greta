@@ -1,0 +1,43 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Je m'appelle [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]Bien. Il fait chaud mais ça va.
+Agent: [Baseline]Je suis content d'entendre que vous allez bien, [NAME]. Je suis la pour discuter de votre consommation de cigarettes avec vous, si vous aites d'accord. Qu'en pensez-vous ?
+User: [Accueil ou clôture]Je suis d'accord.
+Agent: [Baseline]Trais bien, [NAME]. Pour commencer, pouvez-vous me dire depuis combien de temps vous fumez et combien de cigarettes vous fumez par jour en moyenne ?
+User: [Le maintien d'un comportement malsain à l'avenir]Depuis deux ans et environ cinq. Depuis deux ans et environ cinq. Depuis deux ans et environ cinq. Depuis deux ans et environ cinq. Cigarettes par jour.
+Agent: [Baseline]Merci pour cette information, [NAME]. Savez-vous quels sont les effets naigatifs de la consommation de cigarettes sur votre santai ?
+User: [inconnu]Concert,
+Agent: [Baseline]Je suis content que vous soyez conscient des effets naigatifs de la consommation de cigarettes, [NAME]. Avez-vous daija essayai d'arraiter de fumer ou de reduire votre consommation ?
+User: [Compréhension ou nouvelle perspective]J'ai arrêté de fumer pendant cinq ans.
+Agent: [Baseline]C'est une raiussite impressionnante, [NAME] ! Qu'est-ce qui vous a aidai a arraiter la derniaire fois ?
+User: [Compréhension ou nouvelle perspective]La pratique sportive.
+Agent: [Baseline]C'est une excellente maithode pour arraiter de fumer, [NAME]. Avez-vous des intentions de recommencer a fumer ou de reduire votre consommation de cigarettes dans le futur ?
+User: [Le maintien d'un comportement malsain à l'avenir]Bien réduire oui mais j'attends l'hiver.
+Agent: [Baseline]Je comprends, [NAME]. Qu'est-ce qui vous empaiche de reduire votre consommation de cigarettes maintenant ?
+User: [Compréhension ou nouvelle perspective]Que c'est l'été et c'est Que c'est l'été et c'est Que c'est l'été et c'est Que c'est l'été et c'est Que c'est l'été et c'est Que c'est l'été et c'est Que c'est l'été et c'est Que c'est l'été et c'est Que c'est l'été et c'est plus tentant de fumer l'été
+Agent: [Baseline]Je comprends, [NAME]. Mais avez-vous sonjai aux avantages de reduire votre consommation de cigarettes maintenant, maime si c'est l'aitai ?
+User: [Le maintien d'un comportement malsain à l'avenir]Oui, mais je n'aurais pas la volonté.
+Agent: [Baseline]Je comprends, [NAME]. Mais avez-vous songai a des maithodes pour vous aider a reduire votre consommation de cigarettes ? Par exemple, la pratique sportive vous a aidai la derniaire fois.
+User: [Compréhension ou nouvelle perspective]Oui je pense que je vais me remettre à la natation en septembre.
+Agent: [Baseline]C'est une excellente idee, [NAME] ! La natation est un excellent moyen de reduire le stress et de rester en forme. Avez-vous des idees sur la quantite de cigarettes que vous pourriez reduire par jour ?
+User: [Modifier les comportements malsains à l'avenir]Au moins trois, je pense.
+Agent: [Baseline]C'est un excellent debut, [NAME] ! Avez-vous pense a des moments ou vous pourriez fumer moins de cigarettes ? Par exemple, en marchant dans la rue ou en etant avec des amis ?
+User: [Compréhension ou nouvelle perspective]Oui, ça m'arrive.
+Agent: [Baseline]Trais bien, [NAME]. Qu'est-ce qui vous empache de reduire votre consommation de cigarettes dans ces moments-la ?
+User: [Le patient partage un sentiment ou une émotion négative.]Oui, ça m'arrive.Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie. Je n'ai pas forcément envie.
+Agent: [Baseline]Je comprends, [NAME]. Mais avez-vous pense a des avantages que vous pourriez retirer de reduire votre consommation de cigarettes ? Par exemple, une meilleure sante, plus d'argent pour d'autres activites, etc.
+User: [Le maintien d'un comportement malsain à l'avenir]Oui c'est prévu mais du coup pas tout de suite.
+Agent: [Baseline]Je comprends, [NAME]. Mais avez-vous pense a des etapes concretes que vous pourriez suivre pour reduire votre consommation de cigarettes maintenant, plutot que d'attendre l'hiver ? Par exemple, pourriez-vous reduire votre consommation de cigarettes d'une cigarette par jour pendant une semaine, puis d'une autre cigarette la semaine suivante, et ainsi de suite ?
+User: [Modifier les comportements malsains à l'avenir]Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour Je peux essayer de réduire une cigarette par jour pour tout l'été.
+Agent: [Baseline]C'est une excellente idee, [NAME] ! Etes-vous pret a essayer cette strategie ?
+User: [Accueil ou clôture]Oui, pourquoi pas
+Agent: [Baseline]C'est fantastique, [NAME] ! Nous avons donc un plan concree pour reduire votre consommation de cigarettes. Quelles sont les choses qui pourraient vous aider a rester sur la bonne voie ?
+User: [inconnu]Je ne sais pas.
+Agent: [Baseline]Il est normal de ne pas savoir tout de suite, [NAME]. Nous pouvons y reflechir ensemble. Qu'est-ce qui vous a aidai a arraiter de fumer la derniaire fois ?
+User: [Compréhension ou nouvelle perspective]La notation.
+Agent: [Baseline]La natation est une excellente maithode pour vous aider a reduire votre consommation de cigarettes, [NAME]. Avez-vous d'autres activites ou habitudes qui pourraient vous aider a rester sur la bonne voie ?
+User: [Accueil ou clôture]non merci pour les conseil
+Agent: [Baseline]De rien, [NAME]. N'hesitez pas a me contacter si vous avez d'autres questions ou si vous avez besoin de plus de soutien. Bonne chance avec votre plan de reduire votre consommation de cigarettes ! Merci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.
+User: [Accueil ou clôture]Ouais.
+Agent: [Baseline]Merci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.

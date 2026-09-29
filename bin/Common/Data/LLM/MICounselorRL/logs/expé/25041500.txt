@@ -1,0 +1,36 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je suis [NAME].
+Agent: [Progress Acknowledgment]Enchantée, [NAME]Bonjour, je suis Camille. Enchantée, Gaëlle. C'est un plaisir de vous rencontrer. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] ?a va tr?s bien et vous
+Agent: [Progress Acknowledgment]C'est super que vous alliez très bien, Gaëlle. Je suis ravie de l'entendre. C'est un bon départ pour notre discussion. Vous avez déjà fait un premier pas en venant ici, et cela montre votre volonté de prendre soin de vous. Comment vous sentez-vous par rapport à votre niveau d'activité physique actuellement ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Partager un sentiment ou une �motion positive] Tr?s bien, pratique du sport, ?a fait longtemps.
+Agent: [Ask for Consent]D'accord, Gaëlle. Puis-je vous poser quelques questions sur vos habitudes d'activité physique actuelles ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Je fais du, je vais ? la salle, je fais de l'insulation.
+Agent: [Backchannel]D'accord, Gaëlle. Vous allez à la salle et faites de l'isolation. Pouvez-vous m'en dire plus sur votre routine actuelle ?
+User: [inconnu] Donc je vais
+Agent: [Progress Acknowledgment]C'est super que vous alliez à la salle et que vous fassiez de l'isolation, Gaëlle. Cela montre que vous avez déjà une bonne base d'activité physique. Comment vous sentez-vous à propos de ces activités ? Est-ce que vous en tirez du plaisir ?
+User: [Partager un sentiment ou une �motion positive] Oui ?a me permet de me sentir beaucoup plus ? l'aise, r?duit le stress.
+Agent: [Reflection]C'est formidable que ces activités vous permettent de vous sentir plus à l'aise et de réduire le stress. Cela montre que vous avez déjà trouvé des moyens efficaces de prendre soin de vous. Comment pensez-vous que ces activités influencent votre bien-être global ?
+User: [Partager un sentiment ou une �motion positive] ?a va r?duire le stress, on se sent beaucoup plus tranquille pendant la journ?e, n'est pas tout le temps ?nerv?.
+Agent: [Reflection]C'est vraiment positif que ces activités vous aident à réduire le stress et à vous sentir plus tranquille tout au long de la journée. Cela montre que vous avez déjà trouvé des moyens efficaces pour améliorer votre bien-être. Comment voyez-vous l'intégration de ces activités dans votre routine quotidienne ?
+User: [Partager un sentiment ou une �motion positive] ?a va r?duire le stress, on se sent beaucoup plus tranquille pendant la journ?e, n'est pas tout le temps ?nerv?. ?a va r?duire le stress, on se sent beaucoup plus tranquille pendant la journ?e, n'est pas tout le temps ?nerv?. ?a va r?duire le stress, on se sent beaucoup plus tranquille pendant la journ?e, n'est pas tout le temps ?nerv?. ?a va r?duire le stress, on se sent beaucoup plus tranquille pendant la journ?e, n'est pas tout le temps ?nerv?. ?a va r?duire le stress, on se sent beaucoup plus tranquille pendant la journ?e, n'est pas tout le temps ?nerv?. ?a va r?duire le stress, on se sent beaucoup plus tranquille pendant la journ?e, n'est pas tout le temps ?nerv?. ?a va r?duire le stress, on se sent beaucoup plus tranquille pendant la journ?e, n'est pas tout le temps ?nerv?. C'est bien, mais j'aimerais faire plus, mais l? je n'ai pas beaucoup de temps.
+Agent: [Reflection]Je comprends, Gaëlle. Vous avez déjà remarqué les bienfaits de l'activité physique sur votre stress et votre bien-être, mais vous souhaiteriez en faire davantage. Le manque de temps est un défi courant. Comment pourrions-nous trouver des petites astuces pour intégrer plus d'activité physique dans votre quotidien ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Il faut bien g?rer les les t?ches et trouver
+Agent: [Experience Normalization]C'est tout à fait normal de ressentir que le manque de temps est un obstacle pour augmenter son activité physique. Beaucoup de personnes sont dans la même situation et cherchent des moyens d'intégrer plus d'exercice dans leur routine quotidienne. Vous n'êtes pas seule à ressentir cela. Avez-vous déjà pensé à des petites astuces pour bouger un peu plus chaque jour ?
+User: [Backchannel] Non pas vraiment.
+Agent: [Planning with the Patient]D'accord, Gaëlle. Essayons de trouver ensemble une petite étape concrète que vous pourriez intégrer dans votre routine la semaine prochaine. Par exemple, pourriez-vous essayer de marcher 10 minutes de plus chaque jour ? Cela pourrait être en allant au travail, en faisant une promenade pendant votre pause déjeuner ou en sortant avec votre chien. Qu'en pensez-vous ?
+User: [inconnu] Where is somebody
+Agent: [Progress Acknowledgment]C'est formidable que vous soyez ouverte à l'idée d'intégrer plus d'activité physique dans votre routine, Gaëlle. Marcher 10 minutes de plus chaque jour est un excellent début. Vous avez déjà fait un grand pas en reconnaissant l'importance de l'activité physique pour votre bien-être. Comment vous sentez-vous à l'idée de commencer par cette petite étape ?
+User: [Modifier les comportements malsains � l'avenir] Il faut se lever un peu plus t?t, tous les jours et
+Agent: [Reflection]Je comprends, Gaëlle. Se lever un peu plus tôt chaque jour pour intégrer une marche de 10 minutes peut sembler difficile au début, mais c'est une étape réalisable. Vous avez déjà identifié une solution pratique pour ajouter plus d'activité physique à votre routine. Comment pensez-vous que cette petite modification pourrait influencer votre bien-être global ?
+User: [Inconnu] ?a peut augmenter
+Agent: [Planning with the Patient]C'est une excellente idée, Gaëlle. Se lever un peu plus tôt pour marcher 10 minutes de plus chaque jour est une étape réalisable et bénéfique. Comment vous sentez-vous à l'idée de commencer par cette petite étape ? END_CONVO
+User: [Demande d'informations m�dicales] Pourriez-vous r?p?ter la question
+Agent: [Progress Acknowledgment]Bien sûr, Gaëlle. Se lever un peu plus tôt pour marcher 10 minutes de plus chaque jour est une excellente idée. Comment vous sentez-vous à l'idée de commencer par cette petite étape ?
+User: [Modifier les comportements malsains � l'avenir] Il faut d?j? se coucher plus t?t.
+Agent: [Invite to Shift Outlook]D'accord, Gaëlle. Se coucher plus tôt pour pouvoir se lever plus tôt est une bonne stratégie. Imaginez comment vous vous sentiriez après avoir intégré cette nouvelle routine dans votre quotidien. Comment pensez-vous que cela pourrait améliorer votre journée et votre bien-être ?
+User: [Modifier les comportements malsains � l'avenir] On sent que la journ?e elle est plus longue et
+Agent: [Planning with the Patient]Très bien, Gaëlle. Prenons un moment pour planifier cette nouvelle routine. Que diriez-vous de vous coucher 15 minutes plus tôt chaque soir et de vous lever 15 minutes plus tôt chaque matin pour marcher 10 minutes de plus ? Cela vous semble-t-il réalisable ?
+User: [Backchannel]oui
+Agent: [Reflection]C'est super, Gaëlle. Vous avez donc envisagé de vous coucher 15 minutes plus tôt chaque soir et de vous lever 15 minutes plus tôt chaque matin pour marcher 10 minutes de plus. Cela montre que vous êtes prête à faire des ajustements pour améliorer votre bien-être. Comment vous sentez-vous à l'idée de commencer cette nouvelle routine ?
+

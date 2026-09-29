@@ -1,0 +1,3 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je m'appelle Ney. Comment tu vas
+Agent: [Baseline]Enchantaie, [NAME]Je vais bien, merci. Et vous, Ney, comment allez-vous aujourd'hui ?

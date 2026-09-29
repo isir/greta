@@ -1,0 +1,41 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Je suis [NAME].
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] Je vais tr?s bien vous-m?me.
+Agent: [Baseline]C'est super à entendre, [NAME]. Comment se passe votre quotidien en ce moment ? Y a-t-il des choses qui vous préoccupent ?
+User: [inconnu] Pas vraiment de pr?occupation, j'ai des concours qui arrivent donc
+Agent: [Baseline]Merci pour votre partage, [NAME]. Avec vos concours en approche, comment trouvez-vous du temps pour vous-même et pour faire de l'exercice physique ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�;] J'alterne p?riode de r?vision et un petit peu d'entra?nement
+Agent: [Baseline]C'est bien d'alterner. Comment vous sentez-vous après ces séances d'entraînement ? Est-ce que cela vous aide à vous sentir mieux ou à vous détendre ?
+User: [Partager un sentiment ou une �motion positive; Backchannel] Oui totalement.
+Agent: [Baseline]C'est excellent à entendre, [NAME]. Quel type d'activité physique préférez-vous ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] J'ai d?j? pratiqu? la musculation, j'ai d?j? pratiqu? la natation en ce moment
+Agent: [Baseline]La musculation et la natation sont d'excellentes activités. Avez-vous un objectif spécifique en ce moment concernant votre activité physique ?
+User: [inconnu] Mon objectif pr?cis, je le fais vraiment pour
+Agent: [Baseline]Pour quelle raison faites-vous de l'activité physique, [NAME] ? Quels sont les bénéfices que vous en retirez ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] ?a me permet d'?tre un petit peu plus concentr? au travail, d'?tre
+Agent: [Baseline]C'est un excellent bénéfice. Y a-t-il une activité physique que vous aimeriez intégrer davantage dans votre quotidien pour améliorer encore plus votre concentration et votre bien-être ?
+User: [Backchannel;]peux tu repeter
+Agent: [Baseline]Bien sûr, [NAME]. Je disais : C'est un excellent bénéfice. Y a-t-il une activité physique que vous aimeriez intégrer davantage dans votre quotidien pour améliorer encore plus votre concentration et votre bien-être ?
+User: [Le maintien d'un comportement malsain � l'avenir] Il n'y a pas d'activit? que que je vais int?grer
+Agent: [Baseline]D'accord, [NAME]. Y a-t-il une activité physique que vous appréciez particulièrement et que vous pourriez augmenter un peu cette semaine ?
+User: [inconnu] Je dirais
+Agent: [Baseline]Oui, allez-y, dites-moi. Quelle activité physique vous plaît le plus ?
+User: [inconnu]un peu plus de muscu
+Agent: [Baseline]Super choix, [NAME]. Quelle serait une étape concrète que vous pourriez faire pour augmenter votre musculation cette semaine ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]j'aime beaucoup la natation
+Agent: [Baseline]La natation est une excellente activité. Y a-t-il une façon spécifique dont vous pourriez l'intégrer davantage cette semaine ? Par exemple, une séance supplémentaire ou une durée plus longue ?
+User: [Le maintien d'un comportement malsain � l'avenir] Monsieur, c'est un objectif r?gulier, ne va y aller uniquement quand j'en ai envie.
+Agent: [Baseline]Je comprends, [NAME]. Et si vous essayiez de fixer une petite routine, comme aller à la piscine une fois par semaine ? Qu'en pensez-vous ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Totalement c'est d?j? ce que je fais, je gagne fois par semaine tous les mardis.
+Agent: [Baseline]C'est formidable que vous ayez déjà une routine établie. Y a-t-il une autre activité physique que vous aimeriez ajouter ou augmenter cette semaine ? Par exemple, une petite marche quotidienne ?
+User: [Compr�hension ou nouvelle perspective] Pour moi la marche n'est pas vraiment une activit? physique, c'est quelque chose qu'on devrait tous faire r?guli?rement
+Agent: [Baseline]Vous avez raison, [NAME]. Marcher fait partie de notre quotidien. Y a-t-il une autre activité que vous aimeriez essayer ou augmenter cette semaine ? Peut-être du vélo ou du jogging ?
+User: [inconnu]non
+Agent: [Baseline]D'accord, [NAME]. Pensez-vous qu'il y a des moments dans votre journée où vous pourriez intégrer une petite pause active, comme des étirements ou des exercices de respiration ? Cela pourrait vous aider à vous sentir mieux et à rester concentré.
+User: [Modifier les comportements malsains � l'avenir]oui c'ets possible
+Agent: [Baseline]Super, [NAME]. Quelle serait une petite pause active que vous pourriez faire cette semaine ? Par exemple, des étirements pendant 5 minutes chaque jour ?
+User: [Backchannel] Oui, je vous ai dit, je pouvais le faire oui.
+Agent: [Baseline]Parfait, [NAME]. Essayez de faire 5 minutes d'étirements chaque jour cette semaine. Comment vous sentez-vous à l'idée de commencer cela ?
+User: [Partager un sentiment ou une �motion positive] Tr?s enthousiaste.
+Agent: [Baseline]C'est formidable, [NAME]. Vous avez déjà un bon équilibre avec la natation et la musculation. Ajouter des étirements quotidiens sera bénéfique. Bonne chance et n'hésitez pas à revenir si vous avez besoin de soutien. END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

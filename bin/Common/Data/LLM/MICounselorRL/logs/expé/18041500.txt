@@ -1,0 +1,12 @@
+User: [inconnu] Pas encore, quand je m'ai encore fix?, enfin quand je m'ai encore fait, c'est ?a que je je n'ai pas pens? ? ma motivation. 
+Agent: [Baseline]Bonjour, comment allez-vous aujourd'hui ? C'est un plaisir de vous rencontrer.
+User: [inconnu] Pas encore, quand je m'ai encore fix?, enfin quand je m'ai encore fait, c'est ?a que je je n'ai pas pens? ? ma motivation. 
+Agent: [Baseline]Je comprends, il arrive souvent que la motivation fluctue. Pouvez-vous me dire ce qui vous a poussé Ã  vouloir augmenter votre activitÃ© physique ?
+User: [Partager un sentiment ou une émotion positive] Plus j'ai envie de mieux sentir niveau cardio et pas gal?rer
+Agent: [Baseline]C'est une excellente raison. Comment vous sentez-vous physiquement en ce moment par rapport Ã  votre activitÃ© physique ?
+User: [Partager un sentiment ou une émotion négative] Je trouve qu'elle est un peu faible en ce moment, elle m?riterait d'?tre remont?e
+Agent: [Baseline]Merci pour votre honnÃªtetÃ©. Quelles activitÃ©s physiques aimez-vous ou avez-vous dÃ©jÃ  pratiquÃ©es ?
+User: [Partager des informations personnelles ou décrire un événement passé] Quand j'?tais jeune et j'ai arr?t? pour mes ?tudes. Souvent le sport principal que je faisais l? c'est plus ?a.
+Agent: [Baseline]Quel sport pratiquiez-vous quand vous Ã©tiez jeune ?
+User: [Partager des informations personnelles ou décrire un événement passé]natatino
+Agent: [Baseline]La natation est une excellente activitÃ©. Qu'est-ce qui vous empÃªche de reprendre la natation aujourd'hui ?

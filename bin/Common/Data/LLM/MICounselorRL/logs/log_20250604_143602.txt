@@ -1,0 +1,32 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]
+I am stephane
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How are you doing today?
+User: [Greeting or Closing] Fine. Fine. And you?
+Agent: [Baseline]I'm doing well, thanks for asking. To start, can you tell me a bit about what brought you here today?
+User: [unknown]you have beautiful eyes
+Agent: [Baseline]Thank you, [NAME]. I appreciate that. Now, can we talk about your alcohol use? What's been going on with that?
+User: [Sharing personal information or Describe past event]i drink too much beer
+Agent: [Baseline]I see. How much beer would you say you drink in a typical week?
+User: [Sharing personal information or Describe past event] Four four five.
+Agent: [Baseline]That's four or five beers a day?
+User: [Sharing personal information or Describe past event] Yes.
+Agent: [Baseline]Thank you for sharing that, [NAME]. How do you feel about that amount? Does it concern you at all?
+User: [Asking for Medical Information] It's difficult to to say. What do you think?
+Agent: [Baseline]I'm here to support you, not to judge. How does your drinking affect your daily life and activities?
+User: [Sharing personal information or Describe past event; Sharing negative feeling or emotion] I'm it's difficult for me to wake up in the morning. I've lost some friends.
+Agent: [Baseline]It sounds like you're noticing some negative effects from your drinking. How do you feel about that?
+User: [Backchannel]repeat
+Agent: [Baseline]It sounds like you're noticing some negative effects from your drinking, like trouble waking up and losing friends. How does that make you feel?
+User: [Sharing negative feeling or emotion]sad
+Agent: [Baseline]I appreciate your honesty, [NAME]. What's one small step you might be willing to take to reduce your drinking in the next week?
+User: [unknown] Next week. I I
+Agent: [Baseline]That's okay, let's take our time. What about just for tomorrow? Is there a small change you'd be willing to try?
+User: [Changing unhealthy behavior in the future] Yes. Drink less.
+Agent: [Baseline]Great. How much less do you think you could manage for tomorrow?
+User: [Sustaining unhealthy behavior in the future] Only two weeks.
+Agent: [Baseline]I mean for just tomorrow, how many beers do you think you could have? Maybe one or two less than usual?
+User: [Changing unhealthy behavior in the future]two beerq Only two weeks.
+Agent: [Baseline]Got it. So, you'll aim to have only two beers tomorrow. How does that plan sound to you?
+User: [Backchannel]okay
+Agent: [Baseline]Great, [NAME]. Remember, it's just a small step, and you can always adjust as needed. Let's check in next time to see how it went. Take care. END_CONVOThank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.

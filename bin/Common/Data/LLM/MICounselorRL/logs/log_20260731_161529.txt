@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Backchannel]hey
+Agent: [Baseline]Don't worry, we can continue without it.Got it. How are you feeling today, Camille? It's good to take a moment to check in.
+User: [Sharing positive feeling or emotion; Backchannel;]good
+Agent: [Baseline]That's great to hear. I appreciate you taking the time today.  Tell me, what's been going well for you lately? Sometimes it's the small things that make a difference.

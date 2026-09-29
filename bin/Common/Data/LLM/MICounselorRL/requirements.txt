@@ -1,0 +1,12 @@
+openai==1.35.13
+mistralai==0.4.2
+pandas
+torch
+gym
+numpy
+learn2learn
+sentence_transformers
+einops
+langchain-google-genai
+deep-translator
+google-generativeai

@@ -1,0 +1,26 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, c'est [NAME].
+Agent: [Baseline]EnchantÃ©e, [NAME]Bonjour, je suis Camille. Et vous ?  EnchantÃ©e, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture; Partager un sentiment ou une émotion positive] ?a va tr?s bien avec vous.
+Agent: [Baseline]Super, [NAME]. Comment vous sentez-vous par rapport Ã  votre activitÃ© physique en ce moment ?
+User: [Partager un sentiment ou une émotion négative] J'en fais pas tant que ?a, du coup pas tr?s salesfette.
+Agent: [Baseline]Je comprends, [NAME]. Qu'est-ce qui vous empÃªche de faire plus d'activitÃ© physique en ce moment ?
+User: [Partager des informations personnelles ou décrire un événement passé;] La motivation.
+Agent: [Baseline]Merci pour votre honnÃªtetÃ©, [NAME]. Qu'est-ce qui pourrait vous aider Ã  trouver cette motivation ?
+User: [inconnu] Avoir plus de temps
+Agent: [Baseline]D'accord, [NAME]. Pensez-vous que vous pourriez trouver 10 minutes par jour pour marcher ou faire une activitÃ© que vous aimez ?
+User: [Backchannel] Oui,
+Agent: [Baseline]GÃ©nial, [NAME]. Quelle activitÃ© aimeriez-vous essayer pendant ces 10 minutes ?
+User: [Backchannel] Tu as constat?
+Agent: [Baseline]Parfait, [NAME]. Marcher est une excellente idÃ©e. Pensez-vous pouvoir commencer dÃ¨s cette semaine ?
+User: [Modifier les comportements malsains à l'avenir]Oui
+Agent: [Baseline]Super, [NAME]. Quels jours de la semaine pensez-vous pouvoir marcher 10 minutes ?
+User: [inconnu] Vendredi
+Agent: [Baseline]TrÃ¨s bien, [NAME]. OÃ¹ prÃ©fÃ©rez-vous marcher ? PrÃ¨s de chez vous ou dans un parc, par exemple ?
+User: [inconnu] Plut?t pr?cis?ment,
+Agent: [Baseline]D'accord, [NAME]. Avez-vous un horaire prÃ©fÃ©rÃ© pour marcher ? Matin, aprÃ¨s-midi ou soir ?
+User: [inconnu]après midi
+Agent: [Baseline]Parfait, [NAME]. Donc, vendredi aprÃ¨s-midi, vous marcherez 10 minutes prÃ¨s de chez vous. Comment vous sentez-vous par rapport Ã  ce plan ? END_CONVOMerci dâ€™avoir pris ce temps pour Ã©changer avec moi. Jâ€™espÃ¨re que cette discussion vous a Ã©tÃ© utile. Quoi que vous dÃ©cidiez, câ€™est vous qui avez le contrÃ´le. Prenez soin de vous.
+User: [Partager un sentiment ou une émotion positive; Accueil ou clôture]ça me parait raisonnable
+Agent: [Baseline]Super, [NAME]. N'hÃ©sitez pas Ã  revenir me voir si vous avez besoin de plus de soutien. Bonne marche pour vendredi ! END_CONVOMerci dâ€™avoir pris ce temps pour Ã©changer avec moi. Jâ€™espÃ¨re que cette discussion vous a Ã©tÃ© utile. Quoi que vous dÃ©cidiez, câ€™est vous qui avez le contrÃ´le. Prenez soin de vous.
+Agent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !

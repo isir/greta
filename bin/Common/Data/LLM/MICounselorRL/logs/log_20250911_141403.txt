@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing;] Hello? Okay. Just a Hello. One minute. What's your name?
+Agent: [Baseline]Don't worry, we can continue without it.Hello! Don't worry about the name. How are you doing today?
+User: [Greeting or Closing;] Hello? Okay. Just a Hello. One minute. What's your name? Doing great.
+Agent: [Baseline]That's good to hear! What brings you in to chat with me today?
+User: [unknown] Alcohol agents.
+Agent: [Baseline]I see. How does alcohol fit into your life currently?
+User: [Asking for Medical Information] Yes. Could you help me, please?
+Agent: [Baseline]Of course, I'm here to help. Can you tell me more about your drinking? How much and how often do you drink?

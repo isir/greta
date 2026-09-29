@@ -1,0 +1,53 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Monsieur
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Trais bien, comment allez-vous aujourd'hui ?
+User: [Backchannel]D'accord, dois ralentir un peu.
+Agent: [Baseline]Je comprends. Nous irons a votre rythme. Qu'est-ce qui vous amaine a vouloir ralentir ?
+User: [Backchannel]J'ai besoin d'un peu de temps pour répondre aux questions.
+Agent: [Baseline]Prenez tout le temps dont vous avez besoin. Nous avons 15 minutes pour discuter. Qu'est-ce qui vous amaine a vouloir ralentir ?
+User: [k]Je n'ai plus de réponse à cette question. On peut commencer l'entretien.
+Agent: [Baseline]Bien sur, je suis la. Vous avez aitai orientai vers moi pour discuter de votre activitai physique. Comment vous sentez-vous par rapport a cela ?
+User: [Compréhension ou nouvelle perspective]Je pense que je fais assez de sport mais que j'aimerais en faire un peu plus, mais je ne trouve pas Je pense que je fais assez de sport mais que j'aimerais en faire un peu plus, mais je ne trouve pas Je pense que je fais assez de sport mais que j'aimerais en faire un peu plus, mais je ne trouve pas Je pense que je fais assez de sport mais que j'aimerais en faire un peu plus, mais je ne trouve pas Je pense que je fais assez de sport mais que j'aimerais en faire un peu plus, mais je ne trouve pas de manière pour me motiver.
+Agent: [Baseline]Je vois. Qu'est-ce qui vous motive a vouloir faire plus d'exercice ?
+User: [Modifier les comportements malsains à l'avenir]J'ai envie d'avoir une meilleure forme physique et être en meilleure santé.
+Agent: [Baseline]C'est un excellent objectif. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Compréhension ou nouvelle perspective]Je reste trop à la maison et je ne sais pas
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empacherait de sortir plus souvent pour faire de l'exercice ?
+User: [Le patient partage un sentiment ou une émotion négative.]Je n'ai pas assez de transport autour de chez moi pour aller à la salle.
+Agent: [Baseline]Je vois. Il y a d'autres fassons de faire de l'exercice en dehors de la salle de sport. Quelles sont les activitais physiques que vous appraiciez le plus ?
+User: [Compréhension ou nouvelle perspective]J'aime beaucoup le tennis de table.
+Agent: [Baseline]C'est une excellente activitai. Avez-vous deja essayai de jouer en plein air ? Il y a peut-etre des tables de tennis de table dans des parcs ou des espaces publics pres de chez vous.
+User: [Backchannel]Oui, il y en a dans un parc Roche chez moi.
+Agent: [Baseline]C'est une excellente nouvelle. Qu'est-ce qui vous empacherait de vous y rendre pour jouer au tennis de table ?
+User: [Partager un sentiment ou une émotion négative]Mes amis ne sont pas disponibles pour jouer.
+Agent: [Baseline]Je comprends. Et si vous y allez seul ? Vous pourriez peut-etre rencontrer d'autres personnes qui jouent au tennis de table et faire de nouvelles connaissances.
+User: [Backchannel]Le parc près de chez moi est très souvent vide.
+Agent: [Baseline]Je vois. Qu'est-ce qui vous empacherait de jouer au tennis de table dans votre jardin ou dans votre salon ? Il y a des tables de tennis de table portables que vous pouvez acheter pour jouer chez vous.
+User: [Le maintien d'un comportement malsain à l'avenir]Je n'ai pas assez de place, donc je considère faire un autre sport.
+Agent: [Baseline]Quels autres sports appraiciez-vous ? Il y a peut-etre des activitais physiques que vous pouvez faire chez vous ou a proximitai de chez vous.
+User: [Compréhension ou nouvelle perspective]J'aime un peu tout sinon et j'aimerais bien avoir des avis.
+Agent: [Baseline]Je peux vous aider a trouver des activitais physiques qui vous conviendraient. Qu'est-ce qui est important pour vous dans un sport ou une activitai physique ?
+User: [Compréhension ou nouvelle perspective]Je dirais d'engagement.
+Agent: [Baseline]Je vois. Qu'est-ce qui vous aiderait a vous engager dans une activitai physique reguliere ?
+User: [Le patient partage un sentiment ou une émotion négative.]Je pense que le plus dur c'est de commencer à s'y mettre.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empacherait de commencer ?
+User: [inconnu]Je ne suis pas très sûr.
+Agent: [Baseline]Je peux vous aider a y voir plus clair. Qu'est-ce qui vous motive a vouloir faire plus d'exercice ?
+User: [Backchannel]J'ai déjà répondu à cette question.
+Agent: [Baseline]Je m'excuse pour cette repetition. Qu'est-ce qui vous empacherait de commencer a faire plus d'exercice ?
+User: [Compréhension ou nouvelle perspective]Je pense que j'ai besoin de soutien moral.
+Agent: [Baseline]Je peux vous aider a trouver des moyens de vous soutenir moralement dans votre parcours vers une vie plus active. Qu'est-ce qui vous aiderait a vous sentir plus motive et plus soutenu ?
+User: [Compréhension ou nouvelle perspective]Faire du score à plusieurs.
+Agent: [Baseline]C'est une excellente idee. Avez-vous des amis ou des membres de votre famille qui aimeraient se joindre a vous pour faire de l'exercice regulierement ?
+User: [Accueil ou clôture]Oui.
+Agent: [Baseline]C'est une excellente nouvelle. Qu'est-ce qui vous empacherait de les inviter a se joindre a vous pour faire de l'exercice ?
+User: [Compréhension ou nouvelle perspective]Je les invite et on en fait ensemble, mais on trouve très peu de moments en commun pour en faire.
+Agent: [Baseline]Je comprends. Quelles sont vos disponibilites pour faire de l'exercice ? Et quelles sont les disponibilites de vos amis ? Il est possible de trouver un moment qui conviendra a tout le monde.
+User: [Compréhension ou nouvelle perspective]Mes disponibilités sont surtout le matin, mais en général les gens n'aiment pas se lover très tôt.
+Agent: [Baseline]Je comprends. Et si vous essayiez de trouver un moment qui conviendrait a tout le monde, meme si ce n'est pas votre moment prefere ? Il est possible que vos amis soient plus disposes a se lever tot pour vous rejoindre.
+User: [Accueil ou clôture]Oui.
+Agent: [Baseline]C'est une excellente idee. Qu'est-ce qui vous empacherait de proposer un moment qui conviendrait a tout le monde pour faire de l'exercice ensemble ?
+User: [Accueil ou clôture]Rien ne m'en empêche.
+Agent: [Baseline]Parfait. Qu'est-ce qui vous empacherait de proposer un moment cette semaine pour faire de l'exercice ensemble ?
+User: [Accueil ou clôture]Je peux le faire.
+Agent: [Baseline]C'est une excellente nouvelle. Qu'est-ce qui vous empacherait de proposer un moment cette semaine pour faire de l'exercice ensemble ?

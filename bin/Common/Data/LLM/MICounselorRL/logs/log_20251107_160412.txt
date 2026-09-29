@@ -1,0 +1,3 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing;] Hi.
+Agent: [Baseline]Don't worry, we can continue without it.Got it. Thanks for coming in today—how’ve you been holding up lately? It’s not always easy to talk about these things.

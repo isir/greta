@@ -262,7 +262,8 @@ public abstract class OpenFaceOutputStreamAbstractReader implements Runnable {
             sendOSC("/au_filtered/", valuesFiltered);
         }           
         
-        // blink						  
+        // blink	
+        
         au_frame.setAUAPboth(43, curFrame.blink);
         return au_frame;
     }

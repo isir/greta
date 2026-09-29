@@ -1,0 +1,18 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(-60deg, #ff5858 0%, #f09819 100%);
+}
+
+.center{
+    text-align: center;
+}
+
+p{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 30px;
+    font-weight: 700;
+    color: #fff;
+}

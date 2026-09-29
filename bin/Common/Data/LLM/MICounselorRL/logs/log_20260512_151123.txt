@@ -1,0 +1,11 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis John. Comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je suis heureux de vous rencontrer, John. Comment allez-vous aujourd'hui ?
+User: [inconnu]Qui est envoyé, je trouve ça bizarre.
+Agent: [Baseline]Je suis daisolai si cela semble bizarre. Je suis un programme informatique conssu pour aider les gens a communiquer et a raisoudre leurs problaimes. Mon but est de vous aider a identifier une aitape concraite pour raiduire votre consommation d'alcool au cours de la semaine prochaine. Comment vous sentez-vous aujourd'hui ?
+User: [inconnu]Justement, je me sens bien, mais je n'arrive pas à comprendre Justement, je me sens bien, mais je n'arrive pas à comprendre Justement, je me sens bien, mais je n'arrive pas à comprendre Justement, je me sens bien, mais je n'arrive pas à comprendre une chose, c'est que
+Agent: [Baseline]Je suis daisolai pour la raipaitition. Pouvez-vous me dire ce que vous ne comprenez pas ? Je ferai de mon mieux pour vous aider.
+User: [inconnu]Merci merci pour ton aide [NAME], c'est très joindre Merci merci pour ton aide [NAME], c'est très joindre Merci merci pour ton aide [NAME], c'est très joindre Merci merci pour ton aide [NAME], c'est très joindre Merci merci pour ton aide [NAME], c'est très joindre mais ça ne m'aide pas énormément ce que tu dis là.
+Agent: [Baseline]Je suis daisolai que cela ne vous aide pas. Pouvez-vous me donner plus de daitails sur ce que vous ne comprenez pas ? Je ferai de mon mieux pour vous aider a clarifier les choses.
+User: [inconnu]Pourquoi est-ce que
+Agent: [Baseline]Je suis daisolai, je ne suis pas sûr de comprendre votre question. Pouvez-vous la reformuler, s'il vous plaît ?

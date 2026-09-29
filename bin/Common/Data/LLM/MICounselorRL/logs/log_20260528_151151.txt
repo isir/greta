@@ -1,0 +1,35 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Appelle vous
+Agent: [Baseline]Je m'appelle Camille. Et vous, comment vous appelez-vous ?
+User: [Accueil ou clôture]Je m'appelle Gousslan.
+Agent: [Baseline]Enchantai, Gousslan. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Très bien et vous
+Agent: [Baseline]Je suis bien, merci. Je suis heureux d'aitre ici pour discuter avec vous. Comment vous sentez-vous aujourd'hui ?
+User: [Backchannel]Je me sens très bien. Et toi
+Agent: [Baseline]C'est bien que vous vous sentiez bien. Je suis heureux de l'entendre. Je voulais discuter avec vous de votre consommation d'alcool, si cela vous convient.
+User: [Accueil ou clôture]Oui avec grand plaisir.
+Agent: [Baseline]Trais bien. Pour commencer, pouvez-vous me dire combien de verres d'alcool vous buvez en moyenne par semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]Entre dix et vingt,
+Agent: [Baseline]Je vois. Savez-vous que la consommation excessive d'alcool peut avoir des effets naifastes sur la santai ?
+User: [Compréhension ou nouvelle perspective]Oui, je rends à tes consciences.
+Agent: [Baseline]C'est bien que vous soyez conscient de cela. Avez-vous daija essayai de raiduire votre consommation d'alcool auparavant ?
+User: [Compréhension ou nouvelle perspective]Oui et j'ai réussi à partir à radio, on François
+Agent: [Baseline]C'est trais bien que vous ayez raiussi a raiduire votre consommation dans le passai. Qu'est-ce qui vous a aidai a le faire ?
+User: [Compréhension ou nouvelle perspective]Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide Je me suis accompagné dans l'ami pour le faire et j'ai mon entourage aussi qui m'aide
+Agent: [Baseline]C'est excellent que vous ayez eu un bon soutien pour vous aider a raiduire votre consommation d'alcool. Est-ce que vous avez des objectifs spaicifiques en matiaire de consommation d'alcool pour les semaines a venir ?
+User: [Objectif: Modifier les comportements malsains à l'avenir]Oui,
+Agent: [Baseline]Formidable. Pourriez-vous me dire ce que c'est ?
+User: [Compréhension ou nouvelle perspective]Je ne veux pas dépasser deux soirs par semaine et trois heures par soir.
+Agent: [Baseline]C'est un objectif raialiste et positif. Qu'est-ce qui vous motive a vouloir atteindre cet objectif ?
+User: [Compréhension ou nouvelle perspective]Avoir une meilleure santé, un meilleur rythme de vie et pouvoir mieux dormir.
+Agent: [Baseline]C'est excellent que vous ayez des motivations saines pour raiduire votre consommation d'alcool. Qu'est-ce qui pourrait vous aider a atteindre cet objectif cette semaine ?
+User: [Compréhension ou nouvelle perspective]Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et Un bon entourage et bonité à nous sortir chaque samedi soir.
+Agent: [Baseline]C'est trais bien que vous ayez un bon soutien pour vous aider a atteindre votre objectif. Est-ce qu'il y a des obstacles que vous pouvez anticiper cette semaine ?
+User: [k]Non, cette semaine n'y va d'opérer pour l'instant.
+Agent: [Baseline]C'est excellent. Si vous rencontrez des difficultais, n'haisitez pas a me contacter. Nous pouvons travailler ensemble pour trouver des solutions. Avez-vous des questions pour moi avant de terminer notre saiance d'aujourd'hui ?
+User: [Accueil ou clôture]Non c'était très clair merci beaucoup.
+Agent: [Baseline]Je suis heureux d'avoir pu vous aider. N'haisitez pas a me contacter si vous avez besoin de plus de soutien dans l'avenir. Prenez soin de vous, Gousslan. END\_CONVO
+User: [Accueil ou clôture]Merci à vous.
+Agent: [Baseline]De rien, c'aitait un plaisir de discuter avec vous. Prenez soin de vous.

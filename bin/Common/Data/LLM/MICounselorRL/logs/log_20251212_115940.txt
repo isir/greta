@@ -1,0 +1,8 @@
+User: [Greeting or Closing;] Hello?
+Agent: [Baseline]Hello! I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing; Backchannel] I'm doing fine. And you?
+Agent: [Baseline]I'm doing well, thank you for asking. It's good to hear you're doing fine. How have the past few days been treating you?
+User: [Backchannel; Greeting or Closing]Fine
+Agent: [Baseline]That's good to hear. I know life can get busy-what's one thing that's been going well for you lately? Even something small.
+User: [Sharing personal information or Describe past event; Sharing positive feeling or emotion] Rachel's okay.
+Agent: [Baseline]Rachel? That sounds important to you. Tell me more about her.

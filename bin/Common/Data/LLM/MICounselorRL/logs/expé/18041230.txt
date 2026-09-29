@@ -1,0 +1,41 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Camille, je suis [NAME].
+Agent: [Backchannel]Enchantée, [NAME]Enchantée, [NAME].
+User: [Accueil ou cl�ture]bonjour
+Agent: [Ask about current Emotions]Comment allez-vous aujourd'hui, [NAME] ?
+User: [inconnu] Je vais tr?s bien avec un inertie.
+Agent: [Medical Education][NAME], l'inertie peut souvent être un signe de sédentarité. Votre médecin vous a orienté vers moi pour parler de votre activité physique. Savez-vous que même de petits changements peuvent avoir un impact positif sur votre santé ? Par exemple, marcher un peu plus chaque jour peut faire une grande différence. Comment vous sentez-vous à l'idée de bouger un peu plus ?
+User: [Partager un sentiment ou une �motion positive; Backchannel;] Tr?s bien.
+Agent: [Progress Acknowledgment]C'est formidable que vous vous sentiez bien à l'idée de bouger plus, [NAME]. C'est un excellent premier pas. Quelles sont vos idées pour augmenter votre activité physique cette semaine ?
+User: [inconnu] L'Arcypus, d?couvrir
+Agent: [Empathic Reaction][NAME], je comprends que l'idée de bouger plus peut être défi ou difficile à envisager. Parfois, il est aussi normal de ressentir une certaine résistance ou incertitude. Qu'est-ce qui vous préoccupe le plus à propos d'augmenter votre activité physique ?
+User: [Accueil ou cl�ture] On est presque ? la fin.
+Agent: [Ask for Consent][NAME], seriez-vous d'accord pour discuter de quelques idées concrètes pour augmenter votre activité physique la semaine prochaine ?
+User: [Modifier les comportements malsains � l'avenir] Oui bien s?r avec plaisir.
+Agent: [Greeting or Closing][NAME], je suis ravie de votre ouverture. Parlons de quelques idées concrètes pour augmenter votre activité physique la semaine prochaine. Y a-t-il une activité que vous aimez particulièrement, comme la marche ou le jardinage ?
+User: [Modifier les comportements malsains � l'avenir]plutot marche.
+Agent: [Reflection][NAME], il semble que la marche soit une activité qui vous plaît. C'est un excellent point de départ. Comment vous sentez-vous à l'idée d'intégrer des promenades régulières dans votre routine quotidienne ?
+User: [Modifier les comportements malsains � l'avenir]plutot marche.
+Agent: [Reflection][NAME], il semble que la marche soit une activité qui vous plaît. C'est un excellent point de départ. Comment vous sentez-vous à l'idée d'intégrer des promenades régulières dans votre routine quotidienne ?
+User: [Modifier les comportements malsains � l'avenir]c'ets ue bonne idee
+Agent: [Ask for Information][NAME], est-ce que vous avez une idée de la durée ou de la fréquence des promenades que vous aimeriez faire ? Par exemple, 10 minutes par jour ou une marche plus longue une fois par semaine ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] 10 m?tres par jour environ.
+Agent: [Ask for Information][NAME], 10 minutes par jour est un excellent début ! Avez-vous un moment préféré de la journée pour faire ces promenades ? Par exemple, le matin, l'après-midi ou le soir ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Backchannel] Oui plut?t le matin, tr?s t?t ou le soir.
+Agent: [Invite to Shift Outlook][NAME], imaginez comment vous vous sentiriez après une semaine de promenades quotidiennes de 10 minutes. Pensez-vous que cela pourrait améliorer votre énergie et votre bien-être ? Quels bénéfices voyez-vous à cette nouvelle habitude ?
+User: [Compr�hension ou nouvelle perspective; Partager un sentiment ou une �motion positive] Je pense qu'il y aurait un changement positif.
+Agent: [Planning with the Patient][NAME], c'est encourageant que vous voyiez des bénéfices potentiels. Pour la semaine prochaine, que diriez-vous de planifier des promenades de 10 minutes chaque matin ou soir ? Cela vous semble réalisable ? Avez-vous besoin de soutien ou d'encouragement pour commencer ?
+User: [Modifier les comportements malsains � l'avenir] Oui, c'est possible.
+Agent: [Experience Normalization][NAME], beaucoup de personnes trouvent qu'intégrer de petites promenades dans leur routine quotidienne est un bon moyen de commencer à bouger plus. Vous n'êtes pas seul dans cette démarche, et chaque petit pas compte. Comment vous sentez-vous à l'idée de commencer cette nouvelle habitude ?
+User: [Partager un sentiment ou une �motion positive] Tr?s bien.
+Agent: [Invite to Shift Outlook][NAME], imaginez-vous dans une semaine, après avoir marché 10 minutes chaque jour. Comment pensez-vous que cela pourrait améliorer votre journée et votre bien-être général ? Visualiser les bénéfices peut être une grande motivation. END_CONVO
+User: [Backchannel] C'est vrai.
+Agent: [Invite to Shift Outlook][NAME], imaginez-vous dans une semaine, après avoir marché 10 minutes chaque jour. Comment pensez-vous que cela pourrait améliorer votre journée et votre bien-être général ? Visualiser les bénéfices peut être une grande motivation. END_CONVO
+User: [Partager un sentiment ou une �motion positive] Il faut plus se calme.
+Agent: [Experience Normalization][NAME], il est tout à fait normal de ressentir de l'anxiété ou de l'incertitude lorsqu'on commence une nouvelle habitude. Beaucoup de personnes passent par cette phase. Prenez votre temps et soyez indulgent envers vous-même. Chaque petit pas compte. Comment pouvez-vous vous aider à rester calme et motivé ?
+User: [Compr�hension ou nouvelle perspective;] Je pense que la marche en soi, elle est, c'est d?j? un facteur qui joue.
+Agent: [Give Solution][NAME], pour rester calme et motivé, vous pouvez essayer de vous concentrer sur les sensations positives que la marche procure. Par exemple, prenez le temps de respirer profondément pendant vos promenades et remarquez les petites choses autour de vous, comme la nature ou les gens que vous croisez. Vous pouvez également écouter de la musique apaisante ou un podcast intéressant pour rendre vos promenades encore plus agréables.
+User: [inconnu]tres bonne idee
+Agent: [Experience Normalization][NAME], beaucoup de gens trouvent que la marche est une excellente façon de se détendre et de se ressourcer. Vous n'êtes pas seul à ressentir les bienfaits de cette activité. De nombreuses personnes ont trouvé que la marche les aidait à se sentir plus calmes et plus énergiques. Comment pensez-vous que cela pourrait vous aider dans votre quotidien ? END_CONVO
+Agent: []Merci d�avoir pris ce temps pour �changer avec moi. J�esp�re que cette discussion vous a �t� utile. Vous avez d�j� fait un grand pas en r�fl�chissant � tout cela. Je vous souhaite plein de r�ussite dans votre d�marche !
+

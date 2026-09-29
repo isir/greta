@@ -1,0 +1,31 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture][NAME]
+Agent: [Medical Education]Enchantée, [NAME]Bonjour, je suis Camille. Et vous ?  Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] Je vais te dire merci. Et vous
+Agent: [Backchannel]Merci, [NAME]. Et vous ?
+User: [Accueil ou cl�ture]ca va je bous remercie
+Agent: [Reflection]Je comprends, [NAME]. C'est important de prendre un moment pour soi. Comment vous sentez-vous à l'idée de discuter de votre activité physique aujourd'hui ?
+User: [Partager un sentiment ou une �motion positive.] Je me sens bien et j'ai envie de parler de ma activit? physique actuelle avec vous.
+Agent: [Reflection]Je vois que vous vous sentez bien et que vous êtes motivée à parler de votre activité physique. C'est un bon point de départ. Comment décririez-vous votre niveau d'activité physique actuel ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Modifier les comportements malsains � l'avenir] Je fais du sport deux fois par semaine, mais j'aimerais en faire plus.
+Agent: [Reflection]Je comprends que vous faites du sport deux fois par semaine et que vous aimeriez en faire plus. C'est un bon signe que vous soyez déjà actif et que vous souhaitiez augmenter votre activité. Qu'est-ce qui vous motive à vouloir en faire plus ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Modifier les comportements malsains � l'avenir] Surtout rester en bonne sant?, gagner en force physique, mais gagner du coup
+Agent: [Empathic Reaction]Je comprends tout à fait votre motivation à rester en bonne santé et à gagner en force physique. C'est une décision importante pour votre bien-être. Comment pensez-vous pouvoir intégrer plus d'activité physique dans votre semaine ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Compr�hension ou nouvelle perspective] C'est assez compliqu? parce que je travaille beaucoup, mais je pense plut?t
+Agent: [Progress Acknowledgment]Je comprends que c'est compliqué avec votre emploi du temps chargé, mais je vois que vous êtes déjà en train de réfléchir à des solutions. C'est un excellent point de départ. Quelles idées avez-vous en tête pour intégrer plus d'activité physique malgré votre emploi du temps ?
+User: [Modifier les comportements malsains � l'avenir] Peut-?tre faire une session de sport le midi pendant ma pause d?jeuner.
+Agent: [Progress Acknowledgment]C'est une excellente idée, [NAME] ! Faire une session de sport pendant votre pause déjeuner peut être une façon efficace de rester actif malgré un emploi du temps chargé. Bravo pour cette initiative ! Qu'est-ce qui pourrait vous aider à mettre cette idée en pratique cette semaine ?
+User: [Modifier les comportements malsains � l'avenir] Peut-?tre un rappel sur mon t?l?phone me permet mot qui j'ai de faire faire, une application de motivation, je pense vraiment que c'est leur besoin de
+Agent: [Reflection]Il semble que vous ayez déjà bien réfléchi à des moyens concrets pour intégrer plus d'activité physique dans votre quotidien. Utiliser un rappel sur votre téléphone et une application de motivation sont d'excellentes idées pour rester sur la bonne voie. C'est formidable que vous soyez déjà en train de penser à des solutions pratiques. Quelle première étape pourriez-vous prendre cette semaine pour mettre cela en place ?
+User: [Modifier les comportements malsains � l'avenir] Je pourrais commencer par
+Agent: [Reflection]Il semble que vous soyez très motivée et que vous ayez déjà des idées concrètes pour augmenter votre activité physique. C'est formidable ! Commencer par un rappel sur votre téléphone ou utiliser une application de motivation sont d'excellentes premières étapes. Quelle serait la première chose que vous pourriez faire cette semaine pour mettre cela en place ?
+User: [Modifier les comportements malsains � l'avenir] Regardez mon planning de semaine pour choisir quel jour je pourrais faire du sport.
+Agent: [Reflection]C'est une excellente idée de commencer par regarder votre planning de la semaine pour choisir le meilleur jour pour faire du sport. Cela montre que vous êtes déjà engagée dans le processus de planification. Comment vous sentez-vous à l'idée de faire ce premier pas ?
+User: [inconnu] Une saveur motive ? vrai ?t?.
+Agent: [Planning with the Patient]Super, [NAME] ! Regarder votre planning pour choisir le meilleur jour pour faire du sport est une excellente première étape. Quel jour de la semaine prochaine pensez-vous être le plus disponible pour une session de sport pendant votre pause déjeuner ?
+User: [Modifier les comportements malsains � l'avenir] Je pense que le mercredi, la journ?e, j'ai j'ai moins de travail au bureau, je pense que ce sera mercredi.
+Agent: [Ask about current Emotions]C'est parfait, [NAME] ! Le mercredi semble être un bon choix. Comment vous sentez-vous à l'idée de commencer cette nouvelle routine mercredi prochain ?
+User: [Partager un sentiment ou une �motion positive] Je me sens motiv?e, pleine d'espoir.
+Agent: [Empathic Reaction]C'est formidable de voir que vous vous sentez motivée et pleine d'espoir, [NAME]. Votre engagement est vraiment inspirant. N'hésitez pas à me faire savoir si vous avez besoin de plus de soutien ou de conseils. Vous êtes sur la bonne voie ! END_CONVO
+Agent: []Merci d�avoir pris ce temps pour �changer avec moi. J�esp�re que cette discussion vous a �t� utile. Vous avez d�j� fait un grand pas en r�fl�chissant � tout cela. Je vous souhaite plein de r�ussite dans votre d�marche !
+

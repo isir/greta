@@ -55,7 +55,7 @@ public abstract class KeyframeGenerator {
         return result;
     }
 
-    protected abstract void generateKeyframes(List<Signal> inputSignals, List<Keyframe> outputKeyframes);
+    protected abstract void generateKeyframes(List<Signal> inputSignals, List<Keyframe> outputKeyframe);
     protected abstract Comparator<Signal> getComparator();
 
     protected static Comparator<Signal> emptyComparator = new Comparator<Signal>() {

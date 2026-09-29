@@ -1,0 +1,53 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture][NAME]
+Agent: [Baseline]EnchantÃ©e, ChloaiComment allez-vous aujourd'hui, Chloai ?
+User: [Accueil ou clôture]Ça va bien.
+Agent: [Baseline]C'est bien, Chloai. Je suis heureux d'entendre cela. Je suis ici pour discuter de votre activitai physique. Comment vous sentez-vous Ã  propos de cela ?
+User: [Compréhension ou nouvelle perspective]Ça va Ça Ça va Ça Ça va Ça mais je pourrais quand même en faire plus.
+Agent: [Baseline]Je comprends, Chloai. Beaucoup de gens se sentent comme ssa. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Le patient partage un sentiment ou une émotion négative.]Il fait trop chaud.
+Agent: [Baseline]Je comprends, Chloai. Il peut faire trais chaud en cette saison. Avez-vous pensai Ã  des activitÃ©s intÃ©rieures ou Ã  des horaires diffÃ©rents pour Ã©viter la chaleur ?
+User: [Le maintien d'un comportement malsain à l'avenir]Oui, mais ça ne s'accorde pas avec ce que j'ai envie Oui, mais ça ne s'accorde pas avec ce que j'ai envie Oui, mais ça ne s'accorde pas avec ce que j'ai envie Oui, mais ça ne s'accorde pas avec ce que j'ai envie Oui, mais ça ne s'accorde pas avec ce que j'ai envie faire ou mon rythme de vie.
+Agent: [Baseline]Je vois, Chloai. Il est important de trouver des activitais qui vous conviennent et qui s'intaigrent bien dans votre vie quotidienne. Qu'est-ce qui vous plairait comme activitai physique ?
+User: [Compréhension ou nouvelle perspective]De l'escalade.
+Agent: [Baseline]C'est une excellente idaie, Chloai ! L'escalade est un excellent moyen de faire de l'exercice et de se divertir en maime temps. Avez-vous daijÃ  essayÃ© l'escalade ?
+User: [Compréhension ou nouvelle perspective]Oui.
+Agent: [Baseline]Formidable, Chloai ! Qu'est-ce qui vous empache de reprenai l'escalade ?
+User: [Partager un sentiment ou une émotion négative]Je n'ai personne avec qui être, avec qui m'accompagner.
+Agent: [Baseline]Je comprends, Chloai. Il est souvent plus facile de faire de l'exercice avec quelqu'un d'autre. Avez-vous pensai Ã  rejoindre un club d'escalade ou Ã  trouver un partenaire d'entrainement ?
+User: [Compréhension ou nouvelle perspective]J'ai envie de déjà connaître la personne.
+Agent: [Baseline]Je comprends, Chloai. Il est important de se sentir Ã  l'aise avec les personnes avec lesquelles on fait de l'exercice. Avez-vous des amis qui pourraient aitre intairessais par l'escalade ? Ou peut-aitre pourriez-vous vous joindre Ã  un groupe d'escalade local ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non, pas d'amis intéressés. Non, pas d'amis intéressés. Non, pas d'amis intéressés. Non, pas d'amis intéressés. Non, pas d'amis intéressés. Non, pas d'amis intéressés. Non, pas d'amis intéressés. Non, pas d'amis intéressés. Non, pas d'amis intéressés. Non, pas d'amis intéressés. Et je n'ai pas envie de me joindre à un groupe de gens que je connais pas.
+Agent: [Baseline]Je comprends, Chloai. Il est important de se sentir Ã  l'aise avec les personnes avec lesquelles on fait de l'exercice. Avez-vous pensai Ã  d'autres activitais que vous pourriez faire seul ?
+User: [Compréhension ou nouvelle perspective]La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper La salle de sport, mais ce pas hyper intéressant.
+Agent: [Baseline]Je comprends, Chloai. Il est important de trouver des activitais qui vous conviennent et qui vous motivent. Qu'est-ce qui vous empache de vous inscrire dans une salle de sport ?
+User: [Partager un sentiment ou une émotion négative]Ce n'est pas hyper intéressant.
+Agent: [Baseline]Je comprends, Chloai. Il est important de trouver des activitais qui vous conviennent et qui vous motivent. Avez-vous pensai Ã  d'autres activitais que vous pourriez faire seul ?
+User: [Backchannel]non
+Agent: [Baseline]D'accord, Chloai. Il est important de trouver des activitais qui vous conviennent et qui vous motivent. Qu'est-ce qui vous plairait comme activitai physique ?
+User: [inconnu]Donne une liste d'activités.
+Agent: [Baseline]Voici quelques idais d'activitais physiques que vous pourriez essayer .    La natation   La course Ã  pied   Le cyclisme   Le yoga   La danse   Le fitness   Le tai-chi   Le jogging   La marche rapide   Le stretching  Qu'est-ce qui vous tente le plus, Chloai ?
+User: [inconnu]Donne une liste d'activités.
+Agent: [Baseline]Voici quelques idais d'activitais physiques que vous pourriez essayer .    La natation   La course Ã  pied   Le cyclisme   Le yoga   La danse   Le fitness   Le tai-chi   Le jogging   La marche rapide   Le stretching  Qu'est-ce qui vous tente le plus, Chloai ?
+User: [Backchannel]Répète.
+Agent: [Baseline]Voici quelques idais d'activitais physiques que vous pourriez essayer .    La natation   La course Ã  pied   Le cyclisme   Le yoga   La danse   Le fitness   Le tai-chi   Le jogging   La marche rapide   Le stretching  Qu'est-ce qui vous tente le plus, Chloai ?
+User: [Compréhension ou nouvelle perspective]La danse.
+Agent: [Baseline]C'est une excellente idaie, Chloai ! La danse est un excellent moyen de faire de l'exercice et de se divertir en maime temps. Avez-vous pensai Ã  un style de danse en particulier ?
+User: [Backchannel]No,
+Agent: [Baseline]Il y a de nombreux styles de danse Ã  essayer, comme la salsa, le hip-hop, le ballet, la danse de salon, etc. Avez-vous une praifairence pour un style en particulier ?
+User: [Le patient partage un sentiment ou une émotion positive.]Jazz vous dans deux seulement.
+Agent: [Baseline]C'est une excellente idaie, Chloai ! La danse jazz est un excellent moyen de faire de l'exercice et de se divertir en maime temps. Avez-vous pensai Ã  rejoindre un club de danse jazz ou Ã  trouver un professeur particulier ?
+User: [Partager des informations personnelles ou décrire un événement passé]Un professeur particulier coûte trop cher.
+Agent: [Baseline]Je comprends, Chloai. Il y a souvent des cours de danse jazz dans les centres communautaires ou les salles de sport Ã  des prix plus abordables. Avez-vous pensai Ã  chercher des options dans votre rÃ©gion ?
+User: [Backchannel]non
+Agent: [Baseline]D'accord, Chloai. Il y a aussi des vidaios en ligne et des applications qui proposent des cours de danse jazz que vous pouvez suivre Ã  la maison. Avez-vous pensai Ã  essayer cette option ?
+User: [Compréhension ou nouvelle perspective]Oui, mais pense, mais il y a longtemps.
+Agent: [Baseline]Je comprends, Chloai. Il est important de trouver une activitai physique qui vous convient et qui vous motive. Qu'est-ce qui vous empache de vous inscrire dans un cours de danse jazz ?
+User: [Backchannel]Encore une fois je n'ai personne avec qui y aller.
+Agent: [Baseline]Je comprends, Chloai. Il est souvent plus facile de faire de l'exercice avec quelqu'un d'autre. Avez-vous pensai Ã  inviter un ami ou un membre de votre famille Ã  vous accompagner ?
+User: [Le maintien d'un comportement malsain à l'avenir]Personne ne serait intéressée ou disponible.
+Agent: [Baseline]Je comprends, Chloai. Dans ce cas, peut-aitre pourriez-vous vous inscrire dans un cours de danse jazz en ligne ou suivre des vidaios sur YouTube ? Cela vous permettrait de faire de l'exercice Ã  votre propre rythme et Ã  tout moment de la jour
+User: [Accueil ou clôture]oui bonne idée
+Agent: [Baseline]Formidable, Chloai ! Il existe de nombreuses vidaios en ligne et applications qui proposent des cours de danse jazz pour tous les niveaux. Avez-vous pensai Ã  en essayer quelques-unes pour voir ce qui vous convient le mieux ?
+User: [Accueil ou clôture]oui je vais le faire merci
+Agent: [Baseline]De rien, Chloai ! Je suis heureux d'avoir pu vous aider. N'oubliez pas que chaque pas compte, alors profitez de votre pratique de la danse jazz et amusez-vous bien ! Si vous avez besoin de plus de conseils ou de soutien, n'haisitez pas Ã  me contacter. Merci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.

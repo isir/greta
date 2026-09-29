@@ -1,0 +1,1 @@
+Extract only the first name of the user in this sentence. If no first name is detected, return strictly [NO]. Do not provide any explanations, additional text or punctuation. Example: 'My name is Marie' → Marie, 'I'd rather not say' → [NO]. Sentence:

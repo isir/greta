@@ -29,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Map;
@@ -145,7 +146,14 @@ public class OpenFaceFrame {
     private final Lock lock = new ReentrantLock();
 
     private Server server ;
-    
+
+    // --- RealTimeGreta feature streaming ---
+    private static Socket realTimeGretaSocket;
+    private static PrintWriter realTimeGretaWriter;
+    private static volatile boolean realTimeGretaEnabled = false;
+    private static final int REALTIME_GRETA_PORT_DEFAULT = 5963;
+    private static volatile int realTimeGretaFramesSent = 0;
+
     public OpenFaceFrame(CharacterManager cm){
         this.cm=cm;
         isNull = true;
@@ -241,25 +249,21 @@ public class OpenFaceFrame {
         }
     }*/
     
-    //Envoi les valeurs d'au vers flipper via un thread.
-    public void sendPositivityAus(Server server, double au_1, double au_12, double au_2){
-       //if (lock.tryLock()) {
-       if (server.connected == true){
+    // Envoi des valeurs d'AUs vers le serveur via un thread.
+    // Désormais on envoie l'ensemble du vecteur des AUs (tableau "aus"),
+    // et non plus uniquement AU01, AU12 et AU02.
+    public void sendPositivityAus(Server server, double[] aus) {
+        if (server.connected == true) {
             new Thread(() -> {
-                try {       
-                    server.sendPositivity(au_1, au_12, au_2);
-                    System.out.println("LA VALEURS AU_1 :"+ String.valueOf(au_1)+ " A ETE ENVOYEE");
-                    System.out.println("LA VALEURS AU_12 :"+ String.valueOf(au_12)+ " A ETE ENVOYEE");
-                    System.out.println("LA VALEURS AU_2 :"+ String.valueOf(au_2)+ " A ETE ENVOYEE");
-                    
-                    
-                    } catch (IOException e) {
-                //}finally {
-                //lock.unlock();
-            }
-                }).start();  
-       }
-       }
+                try {
+                    server.sendPositivity(aus);
+                    //System.out.println("LES " + aus.length + " VALEURS D'AUs ONT ÉTÉ ENVOYÉES");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        }
+    }
          
    private String readDataCol(String key, String[] cols, Map<String, Integer> set) {
         if (isFeatureSelected(key)) {
@@ -342,22 +346,147 @@ public class OpenFaceFrame {
                 auMasks[i++] = readAUDataCol(key, outputs, auFeatureMasksMap);
         }
 
-        //check si le server tourne via un flag sur l'interface graphique qui lance le server (OpenfaceOutputStreamReader
+        // check si le server tourne via un flag sur l'interface graphique qui lance le server (OpenfaceOutputStreamReader)
         if( OpenFaceOutputStreamReader.getFlag() == true){
             
-            System.out.println("Flag Onn preparation d'envoi des données");
-    // instantiation du server en static créer dans le code de l'interface Gui.
+            //System.out.println("Flag Onn preparation d'envoi des données");
+            // instantiation du server en static créer dans le code de l'interface Gui.
             server = OpenFaceOutputStreamReader.getServer();
-    // Envoi des données
-            sendPositivityAus(server, au_1, au_12, au_2); //ligne bug
+            // Envoi de toutes les AUs normalisées (tableau aus)
+            sendPositivityAus(server, aus);
         }
         else {
-            System.out.println("Flag off aucun envoi de donnée");
+            //System.out.println("Flag off aucun envoi de donnée");
         }
         
+        // Stream features to RealTimeGreta Python server if connected
+        if (realTimeGretaEnabled) {
+            sendToRealTimeGreta();
+        }
+
         isNull = false;
     }
-    
+
+    /**
+     * Connect to the RealTimeGreta Python server to stream OpenFace features.
+     * Python must be running an OpenFaceReceiver server on the given port.
+     *
+     * @param host hostname (e.g. "localhost")
+     * @param port TCP port (e.g. 5963)
+     */
+    public static void connectToRealTimeGreta(String host, int port) {
+        new Thread(() -> {
+            try {
+                realTimeGretaSocket = new Socket(host, port);
+                realTimeGretaWriter = new PrintWriter(realTimeGretaSocket.getOutputStream(), true);
+                realTimeGretaEnabled = true;
+                LOGGER.info("[OpenFaceFrame] Connected to RealTimeGreta at " + host + ":" + port);
+                System.out.println("[OpenFaceFrame] Connected to RealTimeGreta at " + host + ":" + port);
+            } catch (IOException e) {
+                LOGGER.warning("[OpenFaceFrame] Failed to connect to RealTimeGreta: " + e.getMessage());
+                System.out.println("[OpenFaceFrame] Failed to connect to RealTimeGreta: " + e.getMessage());
+            }
+        }).start();
+    }
+
+    /**
+     * Convenience overload using the default port (5963).
+     */
+    public static void connectToRealTimeGreta(String host) {
+        connectToRealTimeGreta(host, REALTIME_GRETA_PORT_DEFAULT);
+    }
+
+    /**
+     * Disconnect from the RealTimeGreta Python server.
+     */
+    public static void disconnectFromRealTimeGreta() {
+        realTimeGretaEnabled = false;
+        try {
+            if (realTimeGretaWriter != null) {
+                realTimeGretaWriter.close();
+            }
+            if (realTimeGretaSocket != null) {
+                realTimeGretaSocket.close();
+            }
+        } catch (IOException e) {
+            LOGGER.warning("[OpenFaceFrame] Error disconnecting from RealTimeGreta: " + e.getMessage());
+        }
+        realTimeGretaWriter = null;
+        realTimeGretaSocket = null;
+        System.out.println("[OpenFaceFrame] Disconnected from RealTimeGreta");
+    }
+
+    public static boolean isRealTimeGretaEnabled() {
+        return realTimeGretaEnabled;
+    }
+
+    /**
+     * Serialize current frame features and send to RealTimeGreta Python server.
+     *
+     * Format (CSV, newline-terminated):
+     *   timestamp, AU01..AU17 (17 AUs, normalized 0-1),
+     *   gazeAngleX, gazeAngleY, gaze0.x, gaze0.y,
+     *   headPoseR.x, headPoseR.y, headPoseR.z, headPoseT.x, headPoseT.y, headPoseT.z
+     *
+     * Total: 1 + 17 + 4 + 6 = 28 values
+     */
+    private void sendToRealTimeGreta() {
+        if (realTimeGretaWriter == null) {
+            return;
+        }
+        try {
+            StringBuilder sb = new StringBuilder();
+
+            // 1) Timestamp
+            sb.append(timestamp);
+
+            // 2) 17 AUs (already normalized 0-1 in readDataLine by /5)
+            int auCount = Math.min(aus.length, 17);
+            for (int i = 0; i < auCount; i++) {
+                sb.append(',').append(aus[i]);
+            }
+            // Pad if fewer than 17
+            for (int i = auCount; i < 17; i++) {
+                sb.append(",0.0");
+            }
+
+            // 3) Gaze: gazeAngleX, gazeAngleY, gaze0.x, gaze0.y (4 values)
+            sb.append(',').append(gazeAngleX);
+            sb.append(',').append(gazeAngleY);
+            sb.append(',').append(gaze0.x());
+            sb.append(',').append(gaze0.y());
+
+            // 4) Head pose: Rx, Ry, Rz, Tx, Ty, Tz (6 values)
+            sb.append(',').append(headPoseR.x());
+            sb.append(',').append(headPoseR.y());
+            sb.append(',').append(headPoseR.z());
+            sb.append(',').append(headPoseT.x());
+            sb.append(',').append(headPoseT.y());
+            sb.append(',').append(headPoseT.z());
+
+            realTimeGretaWriter.println(sb.toString());
+            realTimeGretaFramesSent++;
+
+            if (realTimeGretaFramesSent == 1) {
+                System.out.println("[OpenFaceFrame] First frame sent to RealTimeGreta: " + sb.toString().substring(0, Math.min(80, sb.length())) + "...");
+            }
+            if (realTimeGretaFramesSent % 300 == 0) {
+                System.out.println("[OpenFaceFrame] Sent " + realTimeGretaFramesSent + " frames to RealTimeGreta");
+            }
+
+            // Detect silent write failures
+            if (realTimeGretaWriter.checkError()) {
+                System.out.println("[OpenFaceFrame] PrintWriter error detected after " + realTimeGretaFramesSent + " frames - disabling streaming");
+                realTimeGretaEnabled = false;
+                realTimeGretaFramesSent = 0;
+            }
+
+        } catch (Exception e) {
+            System.out.println("[OpenFaceFrame] Error sending to RealTimeGreta: " + e.getMessage());
+            realTimeGretaEnabled = false;
+        }
+    }
+
     @Override
     public String toString(){
         if(isNull)

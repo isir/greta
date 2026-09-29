@@ -1,0 +1,21 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing;] Hello. Ah, okay. My name is [NAME]. Hello. How are you?
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How's your day going so far?
+User: [Greeting or Closing] Yeah. Good.
+Agent: [Baseline]I'm glad to hear that. [NAME], can you tell me a bit about what brought you here today?
+User: [unknown] How about you?
+Agent: [Baseline]I'm doing well, thank you. We're here to focus on you, though. How have things been going lately?
+User: [Sharing personal information or Describe past event;] So so I I'm going to Paris.
+Agent: [Baseline]That sounds exciting! What do you like about Paris?
+User: [unknown] I like kalei very much.
+Agent: [Baseline]I see. How does alcohol fit into your life currently, [NAME]?
+User: [unknown] How is alcohol? Alcohol life.
+Agent: [Baseline]Tell me more about that. How often do you find yourself drinking alcohol?
+User: [Sustaining unhealthy behavior in the future;] I don't drink I don't drink alcohol a lot.
+Agent: [Baseline]I see. Can you give me an idea of what "not a lot" means to you? How many drinks do you have in a week, for example?
+User: [Backchannel;] Okay. Zero maybe.
+Agent: [Baseline]Zero drinks in a week? Tell me more about that.
+User: [unknown] Okay. Zero maybe. Okay. Zero maybe. Okay. Zero maybe. Okay. Zero maybe. Okay. Zero maybe. Okay. Zero maybe. Okay. Zero maybe. Okay. Zero maybe. I don't think. I don't think.
+Agent: [Baseline]It seems like you're unsure, [NAME]. Let's explore this a bit more. How does alcohol affect your life currently? What are some positives and negatives you see?
+User: [Sharing personal information or Describe past event;] Positive? Yeah. But not not so. Drink a lot.
+Agent: [Baseline]You mentioned drinking a lot. How much is "a lot" for you?

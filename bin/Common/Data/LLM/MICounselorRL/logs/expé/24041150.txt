@@ -1,0 +1,37 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, ici [NAME].
+Agent: [Ask about current Emotions]Enchantée, [NAME]Enchantée, [NAME]. Comment vous sentez-vous aujourd'hui ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Partager un sentiment ou une �motion positive] L? c'est en forme, sauf que ?a fait un moment que je voulais faire le sport, ce n'est pas tout ? fait.
+Agent: [Medical Education]Je comprends, [NAME]. Il est important de savoir que l'activité physique, même modérée, peut avoir des effets bénéfiques sur la santé. Par exemple, marcher équivaut �  une activité physique et peut être intégrée facilement dans la vie quotidienne. Même de petits pas en plus peuvent faire une grande différence.
+User: [Backchannel] Ok donc que des petits pas, ces phases ont fait tellement
+Agent: [Reflection]Il semble que vous soyez conscient de l'importance de l'activité physique et que vous avez déjà réfléchi à des moyens de l'intégrer dans votre quotidien. Vous mentionnez que de petits pas peuvent faire une grande différence. Comment vous sentez-vous par rapport à cette idée ?
+User: [Partager un sentiment ou une �motion positive] Ok donc que des petits pas, ces phases ont fait tellement Ok donc que des petits pas, ces phases ont fait tellement Ok donc que des petits pas, ces phases ont fait tellement Oui,
+Agent: [Reflection]Je comprends que l'idée de faire de petits pas vers une activité physique régulière résonne avec vous. C'est une bonne approche pour commencer. Comment vous sentez-vous par rapport à cette idée ?
+User: [Partager un sentiment ou une �motion positive]prende les escalier ca fait uen diff
+Agent: [Reflection]Il semble que vous ayez déjà identifié une action concrète : prendre les escaliers. C'est une excellente idée pour commencer à intégrer plus d'activité physique dans votre quotidien. Comment vous sentez-vous à l'idée de commencer par cela ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Partager un sentiment ou une �motion positive]tres bien je le pratique tout le temps je prend pas l'ascenseur parceque j'ai pas le temps d'aller � la salle j'integre dans mon quotidien ca
+Agent: [Planning with the Patient]C'est super que vous preniez déjà les escaliers régulièrement. Pour aller encore plus loin, que diriez-vous d'ajouter une autre petite activité cette semaine ? Par exemple, marcher 10 minutes de plus chaque jour ou faire une pause active toutes les heures ? Qu'en pensez-vous ?
+User: [Modifier les comportements malsains � l'avenir] Peut-?tre que ?a peut faire une diff?rence au sien, peut-?tre que je vais y penser.
+Agent: [Ask for Consent]D'accord, [NAME]. Est-ce que ça vous convient si on explore ensemble quelques idées supplémentaires pour augmenter votre activité physique ?
+User: [Modifier les comportements malsains � l'avenir]oui je susis ouvert ca peurx m'aider
+Agent: [Ask for Consent]Merci, [NAME]. Est-ce que vous seriez d'accord pour qu'on discute de quelques idées supplémentaires pour augmenter votre activité physique ?
+User: [Modifier les comportements malsains � l'avenir] Oui je suis d'accord, sur l'id?e vraiment, ?a peut m'aider, ?a fait vraiment aussi m'aider
+Agent: [Reflection]Merci pour votre ouverture, [NAME]. Il semble que vous soyez prêt à explorer de nouvelles idées pour augmenter votre activité physique. C'est un excellent point de départ. Quelles activités pensez-vous pouvoir intégrer facilement dans votre quotidien ?
+User: [inconnu] L? g?n?ralement j'ai pens?
+Agent: [Reflection]Il semble que vous ayez déjà réfléchi à des activités que vous pourriez intégrer dans votre quotidien. C'est un bon point de départ. Quelles sont les activités que vous avez envisagées ?
+User: [Inconnu] Id?e. Premi?rement, les jeux qu'on appelle par la salle ont couru ensemble
+Agent: [Reflection]Il semble que vous ayez déjà pensé à intégrer des jeux ou des activités de groupe dans votre routine. C'est une excellente idée pour rendre l'exercice plus amusant et motivant. Qu'est-ce qui vous attire le plus dans cette idée ?
+User: [inconnu] Ce qui m'amuse, ce qui m'amuse plus
+Agent: [Ask about current Emotions]Merci pour cette clarification, [NAME]. Comment vous sentez-vous à l'idée d'intégrer des jeux ou des activités de groupe dans votre routine ? Est-ce que cela vous rend enthousiaste ou peut-être un peu nerveux ?
+User: [Partager un sentiment ou une �motion positive] Ce quipas d u tout nerveux
+Agent: [Planning with the Patient]D'accord, [NAME]. Pour commencer, que diriez-vous de choisir une activité de groupe que vous aimez et de la pratiquer une fois par semaine ? Par exemple, rejoindre un club de sport ou organiser un match de foot avec des amis. Qu'en pensez-vous ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] J'ai tout le cas c'est bien, pour ce qui est de faire le sport avec mes amis, je fais du foot avec
+Agent: [Reflection]Il semble que vous preniez déjà l'initiative de faire du sport avec vos amis, notamment en jouant au foot. C'est une excellente manière d'intégrer de l'activité physique tout en s'amusant. Comment vous sentez-vous à l'idée de continuer cette activité et peut-être d'ajouter une autre petite activité en plus ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Partager un sentiment ou une �motion n�gative; Le maintien d'un comportement malsain � l'avenir] On fait du foot ensemble et ?a vient un peu de lib?rer, mais ce n'est pas tout le temps. Et aussi, je ne peux pas d?s que ?a va ?tre r?gulier,
+Agent: [Medical Education]Je comprends, [NAME]. Il est normal de ne pas pouvoir être régulier tout le temps. Saviez-vous que même de petites augmentations d'activité physique peuvent avoir des effets bénéfiques sur la santé ? Par exemple, marcher 10 minutes de plus chaque jour ou faire une pause active toutes les heures peut faire une grande différence. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains � l'avenir]marcher 10 minutes faire du sport tres bien
+Agent: [Give Solution]Super, [NAME]. Voici une solution concrète pour cette semaine : essayez de marcher 10 minutes de plus chaque jour. Vous pouvez le faire en allant au travail, en faisant les courses ou simplement en vous promenant. Cela peut être une façon simple et efficace d'augmenter votre activité physique. Qu'en pensez-vous ? END_CONVO
+User: [inconnu] Alors c'est trop c'est bien, c'est bien, c'est surtout que l?
+Agent: [Progress Acknowledgment]C'est formidable que vous trouviez cette idée positive. Essayez de marcher 10 minutes de plus chaque jour cette semaine. Vous verrez, cela peut vraiment faire une différence. Bonne chance et prenez soin de vous ! END_CONVO
+User: [Accueil ou cl�ture; Modifier les comportements malsains � l'avenir]c'est bien merci pour la proposition je vais essayer et si grosse diff je vais l'appliquer mais d'abbord experimenter
+Agent: [Greeting or Closing]Merci pour votre ouverture, [NAME]. C'est un excellent point de départ. Bonne chance et prenez soin de vous ! END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !

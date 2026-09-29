@@ -1,0 +1,15 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour Camille, je m'appelle [NAME] comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je vais bien, merci. Comment allez-vous aujourd'hui, [NAME] ?
+User: [Backchannel]Je vais bien merci ces gens t'es demandé ça se passe écoute et de ton côté comment tu vas
+Agent: [Baseline]Je suis la pour vous aicouter, [NAME]. Je suis content que vous alliez bien. Pour ma part, je suis prait a vous aider comme je peux. Vous avez aitai orientai vers moi pour discuter de votre consommation d'alcool, est-ce que je me trompe ?
+User: [Partager des informations personnelles ou décrire un événement passé]Oui et c'est bien ça, j'ai été envoyé par mon médecin et du coup je suis là pour traiter ça de ma consommation d'alcool effectivement.
+Agent: [Baseline]Je vois. Et comment vous sentez-vous par rapport a cela, [NAME] ? Est-ce que vous avez des sentiments ou des pensais spaicifiques concernant votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Je je trouve que je bois beaucoup ces derniers temps et j'aimerais bien réduire mon taux de confirmation quoi.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous a amenai a vouloir raiduire votre consommation d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]Je crois que c'est mon entourage ils m'ont ils m'ont parlé, ont fait que je buvais beaucoup et du coup ils m'ont recommandé. Je crois que c'est mon entourage ils m'ont ils m'ont parlé, ont fait que je buvais beaucoup et du coup ils m'ont recommandé. Je crois que c'est mon entourage ils m'ont ils m'ont parlé, ont fait que je buvais beaucoup et du coup ils m'ont recommandé. Je crois que c'est mon entourage ils m'ont ils m'ont parlé, ont fait que je buvais beaucoup et du coup ils m'ont recommandé. Je crois que c'est mon entourage ils m'ont ils m'ont parlé, ont fait que je buvais beaucoup et du coup ils m'ont recommandé. De réduire et d'aller consulter quelqu'un pour trouver une solution sur ça parce que le temps ça risque de dégénérer quoi.
+Agent: [Baseline]Je comprends. C'est courageux de votre part de vouloir prendre des mesures pour raiduire votre consommation d'alcool. Qu'est-ce qui vous a fait raialiser que vous buviez trop ?
+User: [Compréhension ou nouvelle perspective]Ce qui m'a fait réaliser que me fais trop, c'est surtout le côté
+Agent: [Baseline]Je vois. Et comment vous sentez-vous par rapport a cela, [NAME] ? Est-ce que vous avez des sentiments ou des pensamientos spcifiques concernant votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Oui je trouve que
+Agent: [Baseline]Je suis la pour vous ecouter, [NAME]. Prenez votre temps et dites-moi ce que vous ressentez.

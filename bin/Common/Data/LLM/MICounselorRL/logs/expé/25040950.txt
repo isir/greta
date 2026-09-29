@@ -1,0 +1,23 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je m'appelle [NAME].
+Agent: [Baseline]Enchantée, [NAME]Bonjour, je suis Camille. Et vous ?  ---  Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture; Backchannel] Je vais bien et toi
+Agent: [Baseline]Merci, [NAME]. Je vais bien aussi. Votre médecin m'a parlé de votre sédentarité. Comment vous sentez-vous par rapport à cela ?
+User: [Partager un sentiment ou une �motion positive] Je me sens plut?t bien.
+Agent: [Baseline]C'est bien de se sentir bien. Comment passez-vous vos journées en général ? Que faites-vous pour vous détendre ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Pour les attendre, je vais voir mes amis.
+Agent: [Baseline]C'est super de passer du temps avec des amis. Pensez-vous que vous pourriez intégrer une activité physique dans ces moments avec eux ? Par exemple, une promenade ou un sport ensemble ?
+User: [Modifier les comportements malsains � l'avenir] Oui je pense qu'on est plusieurs, on se met plus facilement.
+Agent: [Baseline]C'est une excellente idée ! Quelle activité vous plairait le plus de faire avec vos amis ? Une promenade, du vélo, ou autre chose ?
+User: [inconnu] Du v?lo ou de la course ? pied ou du revenu.
+Agent: [Baseline]Ce sont de très bonnes options ! Laquelle de ces activités pensez-vous pouvoir faire régulièrement avec vos amis ?
+User: [inconnu]velo
+Agent: [Baseline]Super choix ! Quand pensez-vous pouvoir commencer à faire du vélo avec vos amis ? Peut-être une fois par semaine pour commencer ?
+User: [inconnu] C'est pas mal et quand je fais beau aussi c'est mieux pour faire du v?lo
+Agent: [Baseline]C'est une bonne idée de profiter du beau temps. Quel jour de la semaine préférez-vous pour faire du vélo avec vos amis ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Le week-end c'est plus sympa parce qu'on est tous plus de temps et on a pas les contraintes du travail.
+Agent: [Baseline]Cela semble parfait. Donc, vous pourriez planifier une sortie à vélo avec vos amis ce week-end ? Qu'en pensez-vous ?
+User: [inconnu] Vesti un
+Agent: [Baseline]Génial ! Vous avez donc une première étape concrète : faire du vélo ce week-end avec vos amis. Comment vous sentez-vous à l'idée de commencer cela ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.
+User: [Partager un sentiment ou une �motion positive; Accueil ou cl�ture]tres bonne idee
+Agent: [Baseline]C'est super ! N'hésitez pas à me faire savoir comment ça s'est passé la prochaine fois. Bonne journée, [NAME] ! END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

@@ -61,9 +61,6 @@ public class FaceKeyframeGenerator extends KeyframeGenerator {
 
     @Override
     protected void generateKeyframes(List<Signal> inputSignals, List<Keyframe> outputKeyframes) {
-        
-        findExistingAU(outputKeyframes);
-        
         for (Signal signal : inputSignals) {
             FaceSignal face = (FaceSignal) signal;
             //if not scheduled it does not contain good time markers

@@ -1,0 +1,6 @@
+setup.py
+DialogueEnv.egg-info/PKG-INFO
+DialogueEnv.egg-info/SOURCES.txt
+DialogueEnv.egg-info/dependency_links.txt
+DialogueEnv.egg-info/requires.txt
+DialogueEnv.egg-info/top_level.txt

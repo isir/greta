@@ -77,7 +77,7 @@ public class Server {
         address="localhost";
     }
     
-    public Server(String p, String a){
+    public Server(String a, String p){
         port=p;
         address=a;
     }
@@ -104,7 +104,7 @@ public class Server {
 
         
                 InetAddress addr= InetAddress.getByName(address);
-                System.out.println("Trying to open port " + port + "... at address:"+address);
+                System.out.println("Trying to open port " + port + "... at address:"+address + " (" + addr.toString() + ")");
                 serverSocket = new ServerSocket(Integer.valueOf(port),MAX_PRIORITY,addr);
                 System.out.println("Trying to open port " + port + "... at address:"+address);
                 System.out.println("Waiting for client to connect...");
@@ -120,13 +120,13 @@ public class Server {
     }     
 
     //La methode qui envoient les paramètre par socketing via le server. (cette méthode est applé dans la methode sendPositivityAus dans la loop d'envoi sur Openface Frame)
-    public void sendPositivity( double au1, double au12, double au2) throws IOException {
-
-                out.writeDouble(au1);
-                out.writeDouble(au12);
-                out.writeDouble(au2);
+    public void sendPositivity( double[] aus) throws IOException {
+                for (double au:aus){
+                    out.writeDouble(au);
+                }
                 out.flush();
-                System.out.println("Data sent: au1 = " + au1 + ", au12 = " + au12+ ", au2 = " + au2);
+                
+                //System.out.println("Data sent:" +aus);
             
     }
     

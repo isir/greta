@@ -1,0 +1,35 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour, je m'appelle [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]Je vais très bien, ils vont.
+Agent: [Baseline]C'est bien a entendre. Vous avez des soucis ou des praioccupations en ce moment ?
+User: [Modifier les comportements malsains à l'avenir]Alors oui j'aimerais faire un peu plus de sport.
+Agent: [Baseline]C'est une excellente idee, [NAME]. Qu'est-ce qui vous retient de commencer ou de continuer a faire du sport regulierement ?
+User: [Partager un sentiment ou une émotion négative]Déjà la motivation, je n'ai pas beaucoup de motivation et y peut-être le temps.
+Agent: [Baseline]Je vois. Quels avantages pourriez-vous tirer d'une pratique reguliere de sport ?
+User: [inconnu]Alors j'ai des certains problèmes de santé qui pourraient, enfin on ne se pourrait prémédérer ça. Alors j'ai des certains problèmes de santé qui pourraient, enfin on ne se pourrait prémédérer ça. Alors j'ai des certains problèmes de santé qui pourraient, enfin on ne se pourrait prémédérer ça. Alors j'ai des certains problèmes de santé qui pourraient, enfin on ne se pourrait prémédérer ça. Alors j'ai des certains problèmes de santé qui pourraient, enfin on ne se pourrait prémédérer ça. Et aussi concernant ma forme physique en général.
+Agent: [Baseline]Je comprends. Quels sont les defis que vous pourriez rencontrer en essayant de faire plus de sport ?
+User: [Le patient partage des informations personnelles ou décrit un événement passé.]Des douleurs justement à cause de mes problèmes de santé, je n'ai mal de douleur, donc essayer de surpasser des douleurs. Et ne pas avoir la flemme.
+Agent: [Baseline]Je vois. Qu'est-ce qui pourrait vous aider a surmonter ces obstacles et a commencer a faire du sport regulierement ?
+User: [Compréhension ou nouvelle perspective]Déjà commencer à le faire je pense, serait pas mal et découvrir une routine adaptée.
+Agent: [Baseline]C'est une excellente idee, [NAME]. Qu'est-ce qui pourrait vous aider a maintenir cette routine une fois que vous avez commence ?
+User: [Compréhension ou nouvelle perspective]Et des méthodes pour me motiver à tout temps garder cette routine.
+Agent: [Baseline]Quelles sont les choses qui vous motivent habituellement, [NAME] ?
+User: [inconnu]Alors là je ne sais pas, je n'ai pas de choses qui m'ont dit en génération.
+Agent: [Baseline]Je vois. Qu'est-ce qui pourrait vous motiver a faire du sport regulierement ?
+User: [Compréhension ou nouvelle perspective]Les résultats que ça pourrait me donner
+Agent: [Baseline]C'est une tres bonne raison, [NAME]. Quels resultats espeerez-vous obtenir en faisant du sport regulierement ?
+User: [Compréhension ou nouvelle perspective]Bonne forme physique et moins de douleur.
+Agent: [Baseline]C'est tres important. Qu'est-ce qui pourrait vous aider a atteindre ces objectifs ?
+User: [k]Alors, est-ce que tu aurais décidé
+Agent: [Baseline]Je suis la pour vous aider, [NAME]. Qu'est-ce que vous aimeriez decidez aujourd'hui ?
+User: [Modifier les comportements malsains à l'avenir]Des choses à mettre en place pour me motiver à faire du sport.
+Agent: [Baseline]C'est une tres bonne idee, [NAME]. Quelles sont les choses que vous pourriez mettre en place pour vous motiver a faire du sport regulierement ?
+User: [inconnu]Est-ce que tu aurais décidé toi
+Agent: [Baseline]Je suis la pour vous aider a decidez, [NAME]. Qu'est-ce que vous aimeriez decidez aujourd'hui ?
+User: [Backchannel]Est-ce que tu aurais des idées à me proposer
+Agent: [Baseline]Bien sur, [NAME]. Qu'est-ce qui vous interessera le plus ?
+User: [Modifier les comportements malsains à l'avenir]Trouver des moyens de motiver.
+Agent: [Baseline]Voici quelques idees pour vous motiver a faire du sport regulierement :  * Trouver un partenaire d'entrainement pour vous soutenir et vous motiver * Se fixer des objectifs realistes et atteignables * Vari
+User: [inconnu]Baseline
+Agent: [Baseline]Je suis desole, mais je ne comprends pas ce que vous voulez dire par "baseline". Pouvez-vous preciser votre demande ?

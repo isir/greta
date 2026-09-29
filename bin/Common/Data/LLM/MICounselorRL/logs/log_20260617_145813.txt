@@ -1,0 +1,49 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Je m'appelle [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]En pleine forme.
+Agent: [Baseline]C'est super, [NAME]. Je suis heureux d'entendre cela. Je suis ici pour discuter de votre activitai physique. Comment vous en sortez-vous en termes de mouvement et d'exercice ?
+User: [Compréhension ou nouvelle perspective]Plutôt bien. J'ai repris le sport il y a peu de temps.
+Agent: [Baseline]C'est fantastique, [NAME]. Quels types de sport pratiquez-vous ?
+User: [Compréhension ou nouvelle perspective]À l'arc Pilate natation.
+Agent: [Baseline]Trais bien, [NAME]. Cela semble aitre un excellent mailange d'activitais. Combien de fois par semaine pratiquez-vous ces activitais ?
+User: [Partager des informations personnelles ou décrire un événement passé]La natation deux fois par semaine attire à l'arc une à deux fois. La natation deux fois par semaine attire à l'arc une à deux fois. La natation deux fois par semaine attire à l'arc une à deux fois. La natation deux fois par semaine attire à l'arc une à deux fois. La natation deux fois par semaine attire à l'arc une à deux fois. Pilates une fois par semaine.
+Agent: [Baseline]C'est jainial, [NAME]. Cela semble aitre un excellent daibut. Avez-vous des difficultais a maintenir cette routine ?
+User: [Partager des informations personnelles ou décrire un événement passé]Ah c'est, je n'aime pas la natation.
+Agent: [Baseline]Je comprends, [NAME]. Il est important de trouver des activitais que vous aimez pour les maintenir a long terme. Avez-vous envisajai d'essayer d'autres activitais pour remplacer la natation ?
+User: [inconnu]Oui et non. Non, parce que Oui et non. Non, parce que Oui et non. Non, parce que Oui et non. Non, parce que Oui et non. Non, parce que Oui et non. Non, parce que Oui et non. Non, parce que c'est une des disciplines la mieux
+Agent: [Baseline]Je comprends, [NAME]. Mais si vous n'aimez pas la natation, il est peutaitre temps d'essayer autre chose. Quelles autres activitais vous intairessent ?
+User: [k]Boudo
+Agent: [Baseline]C'est une excellente idai, [NAME]. La marche est un excellent moyen de rester actif et en forme. Avez-vous envisajai de marcher plus souvent ?
+User: [k]Pas de marche, il s'agit d'un art martial japonais.
+Agent: [Baseline]Je m'excuse pour la confusion, [NAME]. Le boudo est en effet un art martial fascinant. Avez-vous envisajai de pratiquer le boudo regulirement ?
+User: [Compréhension ou nouvelle perspective]C'est une séance test, donc on va dire une fois par semaine.
+Agent: [Baseline]C'est un excellent daibut, [NAME]. Une saiance par semaine, c'est un bon daibut. Avez-vous envisajai d'augmenter la fraiquence de vos saiances de boudo ?
+User: [k]Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas Non, parce qu'ils ne proposent pas de, il ne propose pas plusieurs séances.
+Agent: [Baseline]Je comprends, [NAME]. Dans ce cas, avez-vous envisajai d'essayer d'autres activitais en plus du boudo ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non.
+Agent: [Baseline]D'accord, [NAME]. Avez-vous envisajai de marcher plus souvent dans votre vie quotitienne ? Par exemple, en marchant a pied plutot que de prendre la voiture ou en utilisant les escaliers plutot que l'ascenseur ?
+User: [Compréhension ou nouvelle perspective]Exactement, je suis à
+Agent: [Baseline]Je suis daisolai, [NAME], je n'ai pas compris votre raiponse. Pouvez-vous raipaiter s'il vous plait ?
+User: [Backchannel]Et quinze-mille pas par jour.
+Agent: [Baseline]C'est une excellente idai, [NAME]. Marcher 15 000 pas par jour est un excellent moyen de rester actif et en forme. Avez-vous envisajai de marcher plus souvent pour atteindre cet objectif ?
+User: [Le maintien d'un comportement malsain à l'avenir]Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence. Ce n'est pas volontaire, mais j'essaie quand même de maintenir une cadence.
+Agent: [Baseline]Je comprends, [NAME]. C'est fantastique que vous essayiez de maintenir une cadence de marche reguliere. Avez-vous des difficultais a maintenir cette cadence ?
+User: [Le maintien d'un comportement malsain à l'avenir]Oui, parce que je me fais souvent des entorses.
+Agent: [Baseline]Je suis daisolai d'entendre cela, [NAME]. Les entorses peuvent aitre douloureuses et incapacitantes. Avez-vous envisajai de consulter un professionnel de la santai pour vous aider a gerer ces entorses ?
+User: [Partager un sentiment ou une émotion négative]Plusieurs fois par semaine.
+Agent: [Baseline]C'est une bonne idai, [NAME]. Avez-vous envisajai de faire des exercices de renforcement musculaire pour aider a praivenir les entorses ?
+User: [Compréhension ou nouvelle perspective]Voyons se muscle les mollets.
+Agent: [Baseline]C'est une excellente idai, [NAME]. Les exercices de renforcement musculaire pour les mollets peuvent aider a praivenir les entorses. Avez-vous envisajai de faire ces exercices regulierement ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non, j'ai la flemme.
+Agent: [Baseline]Je comprends, [NAME]. La flemme peut aitre un obstacle au changement. Avez-vous des motivations pour faire ces exercices ?
+User: [inconnu]Pas vraiment.
+Agent: [Baseline]Je comprends, [NAME]. Il est important de trouver des motivations pour faire des activitais qui nous aideront a rester en forme et en bonne santai. Avez-vous envisajai de trouver des activitais que vous aimez faire et qui vous aideront a rester en forme ?
+User: [Compréhension ou nouvelle perspective]Le Pilate.
+Agent: [Baseline]C'est une excellente idai, [NAME]. Le Pilate est un excellent moyen de renforcer les muscles et d'amailiorer la flexibilitai. Avez-vous envisajai de faire du Pilate regulierement ?
+User: [Accueil ou clôture]Oui.
+Agent: [Baseline]C'est fantastique, [NAME]. Le Pilate est un excellent moyen de rester en forme et en bonne santai. Avez-vous des difficultais a maintenir une routine de Pilate reguliere ?
+User: [Backchannel]NonSauva.
+Agent: [Baseline]Merci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.
+User: [Accueil ou clôture]Merci.
+Agent: [Baseline]De rien, [NAME]. N'haisitez pas a me contacter si vous avez d'autres questions ou si vous avez besoin de plus de conseils. Prenez soin de vous. END\_CONVO

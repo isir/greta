@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [unknown]No. I'm dumb.
+Agent: [Ask about current Emotions]Don't worry, we can continue without it.How are you feeling right now?
+User: [Greeting or Closing]Good. And you?
+Agent: [Greeting or Closing]Nice to meet you. I'm Dr. Anderson.

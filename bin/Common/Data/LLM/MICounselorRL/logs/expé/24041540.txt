@@ -1,0 +1,39 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clÙture] Bonjour, je suis [NAME].
+Agent: [Baseline]Enchant√©e, [NAME]Bonjour, je suis Camille. Et vous ?  Enchant√©e, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clÙture] ?a va Et vous
+Agent: [Baseline]Merci, [NAME]. Je vais bien. Comment se passe votre journ√©e jusqu'√† pr√©sent ?
+User: [Partager un sentiment ou une Èmotion nÈgative] Pas terrible. Et vous
+Agent: [Baseline]Je suis d√©sol√©e d'entendre cela, [NAME]. Comment puis-je vous aider √† vous sentir mieux aujourd'hui ?
+User: [inconnu] On peut parler du sujet qui nous r?unit aujourd'hui ici Qu'en pensez-vous
+Agent: [Baseline]Bien s√ªr, [NAME]. Comment vous sentez-vous par rapport √† votre consommation d'alcool en ce moment ?
+User: [inconnu] On peut parler du sujet qui nous r?unit aujourd'hui ici Qu'en pensez-vous On peut parler du sujet qui nous r?unit aujourd'hui ici Qu'en pensez-vous On peut parler du sujet qui nous r?unit aujourd'hui ici Qu'en pensez-vous On peut parler du sujet qui nous r?unit aujourd'hui ici Qu'en pensez-vous Qu'elle peut ?tre inqui?tante et qu'il faudrait la diminuer.
+Agent: [Baseline]Merci pour votre honn√™tet√©, [NAME]. Qu'est-ce qui vous inqui√®te le plus dans votre consommation actuelle ?
+User: [Partager un sentiment ou une Èmotion nÈgative] Les cons?quences futures.
+Agent: [Baseline]C'est tout √† fait comprÈhensible. Quelles consÈquences futures vous prÈoccupent le plus ?
+User: [inconnu] Je ne sais pas vraiment
+Agent: [Baseline]C'est normal d'avoir des incertitudes. Parfois, il peut √™tre utile de penser √† ce que vous aimeriez changer. Qu'est-ce qui vous motive √† vouloir diminuer votre consommation d'alcool ?
+User: [ComprÈhension ou nouvelle perspective] Je me rends compte que j'y pense trop souvent.
+Agent: [Baseline]C'est un bon point de dÈpart. Qu'est-ce que cela signifie pour vous de penser trop souvent √† l'alcool ?
+User: [Partager des informations personnelles ou dÈcrire un ÈvÈnement passÈ] C'est-?-dire que le soir, je
+Agent: [Baseline]Je comprends. Que se passe-t-il le soir quand vous pensez √† l'alcool ?
+User: [Partager des informations personnelles ou dÈcrire un ÈvÈnement passÈ] G?n?ralement je n'en prends pas parce que je me rends compte que ce comportement peut ?tre inqui?tant.
+Agent: [Baseline]C'est une prise de conscience importante. Comment vous sentez-vous quand vous r√©ussissez √† ne pas en prendre ?
+User: [inconnu] J'ai mis.
+Agent: [Baseline]Pouvez-vous m'en dire plus sur ce que vous ressentez √† ce moment-l√† ?
+User: [Partager un sentiment ou une Èmotion nÈgative] Moi je je m'en veux d'avoir ces pens?es.
+Agent: [Baseline]Merci pour votre honn√™tet√©, [NAME]. Qu'est-ce qui vous fait vous en vouloir ?
+User: [Partager un sentiment ou une Èmotion nÈgative] Parce que je vous rencontre que les gens g?n?ralement ne voient pas tous les jours.
+Agent: [Baseline]C'est une r√©flexion profonde. Comment aimeriez-vous que votre relation avec l'alcool √©volue dans les prochains jours ?
+User: [Modifier les comportements malsains ‡ l'avenir] Quelle devine inexistante
+Agent: [Baseline]D'accord, [NAME]. Y a-t-il une √©tape concr√®te que vous pourriez envisager pour commencer √† r√©duire votre consommation d'alcool cette semaine ?
+User: [Modifier les comportements malsains ‡ l'avenir] Quand je vais boire un verre avec des amis prendre plut?t quelque chose de non alcoolis?
+Agent: [Baseline]C'est une excellente id√©e, [NAME]. Qu'est-ce qui vous aiderait √† choisir une boisson non alcoolis√©e dans ces moments-l√† ?
+User: [inconnu]le prix
+Agent: [Baseline]C'est une bonne raison. Y a-t-il d'autres avantages pour vous √† choisir une boisson non alcoolis√©e ?
+User: [inconnu] Le fait que je sais que mes amis ?a les droge pas
+Agent: [Baseline]C'est un bon point. Qu'est-ce que cela signifie pour vous de savoir que vos amis ne seront pas d√©rang√©s par votre choix ?
+User: [Partager un sentiment ou une Èmotion positive] C'est assez rassurant.
+Agent: [Baseline]C'est une bonne chose. Comment pensez-vous que vous vous sentirez apr√®s avoir choisi une boisson non alcoolis√©e ?
+User: [Partager un sentiment ou une Èmotion positive] Je pense que je serai assez contente et aussi
+Agent: [Baseline]C'est une belle motivation. Qu'est-ce qui vous rendra contente dans ce choix ? END_CONVOMerci d‚Äôavoir pris ce temps pour √©changer avec moi. J‚Äôesp√®re que cette discussion vous a √©t√© utile. Quoi que vous d√©cidiez, c‚Äôest vous qui avez le contr√¥le. Prenez soin de vous.

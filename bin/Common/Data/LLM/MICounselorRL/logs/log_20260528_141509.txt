@@ -1,0 +1,45 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Je m'appelle [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [k]Vous, Camille
+Agent: [Baseline]Je vais bien, merci. Je suis la pour vous aider, [NAME]. Comment vous sentez-vous en ce moment ?
+User: [Accueil ou clôture]Je me sens bien.
+Agent: [Baseline]C'est bien. Je suis heureux de l'entendre. [NAME], je suis ici pour discuter de votre activitai physique. Comment vous sentez-vous par rapport a cela en ce moment ?
+User: [Compréhension ou nouvelle perspective]Je ne fais pas du tout de sport et je pense qu'il devrait en faire plus.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Backchannel]Je suis très prise.
+Agent: [Baseline]Je vois. Qu'est-ce qui est le plus important pour vous en ce moment ?
+User: [Compréhension ou nouvelle perspective]Le plus important, c'est l'école.
+Agent: [Baseline]Je comprends. L'aicole est importante, mais l'exercice physique est aigalement crucial pour votre santai. Avez-vous daija essayai de trouver un moyen de combiner les deux ?
+User: [Compréhension ou nouvelle perspective]Oui j'ai pensé à faire du sport cette année, mais j'ai avant l'idée parce que j'ai oublié.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a vous souvenir de faire du sport cette fois-ci ?
+User: [Compréhension ou nouvelle perspective]Faudrait que j'insorte en planning je pense.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a trouver le temps de faire du sport dans votre emploi du temps charjai ?
+User: [inconnu]Je sais pas du tout.
+Agent: [Baseline]Pourriez-vous me donner une idai de ce que vous pourriez faire pour augmenter votre activitai physique cette semaine ?
+User: [Compréhension ou nouvelle perspective]Plus sortir je pense
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a sortir plus souvent cette semaine ?
+User: [Compréhension ou nouvelle perspective]Après avoir des trucs avec mes proches
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a planifier des activitais avec vos proches cette semaine ?
+User: [Partager des informations personnelles ou décrire un événement passé]Qu'on propose de sortir.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a demander a vos proches de vous accompagner pour faire de l'exercice cette semaine ?
+User: [Compréhension ou nouvelle perspective]Faudrait qu'il le propose deux je pense.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a demander a vos proches de vous accompagner pour faire de l'exercice cette semaine ?
+User: [Compréhension ou nouvelle perspective]Qui me proposent plus et que j'ai plus de motivation à sortir.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a demander a vos proches de vous accompagner pour faire de l'exercice cette semaine ?
+User: [k]change se dujet
+Agent: [Baseline]D'accord, [NAME]. Qu'est-ce qui vous empache de faire plus d'exercice en ce moment ?
+User: [inconnu]Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Je sais pas. Procharger.
+Agent: [Baseline]Je comprends que vous n'aites pas sur de ce qui vous empache de faire plus d'exercice. Qu'est-ce qui pourrait vous aider a surmonter ces obstacles ?
+User: [inconnu]Olivier Luton.
+Agent: [Baseline]Je suis daisolai, je ne suis pas sur de comprendre. Pouvez-vous m'en dire plus sur ce que vous entendez par "Olivier Luton" ?
+User: [inconnu]Je voulais dire me libérer du temps.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a vous libairer du temps pour faire de l'exercice cette semaine ?
+User: [Compréhension ou nouvelle perspective]Prévoir moins de choses pour avoir plus de temps.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a planifier moins de choses cette semaine pour avoir plus de temps pour faire de l'exercice ?
+User: [Compréhension ou nouvelle perspective]Juste supprimer des événements.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a supprimer des aivainements de votre emploi du temps cette semaine pour avoir plus de temps pour faire de l'exercice ?
+User: [Modifier les comportements malsains à l'avenir]Juste que je le choisisse.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a choisir quels aivainements supprimer de votre emploi du temps cette semaine pour avoir plus de temps pour faire de l'exercice ?
+User: [inconnu]Baseline
+Agent: [Baseline]Je suis daisolai, je ne suis pas sur de comprendre ce que vous voulez dire par "baseline". Pouvez-vous m'en dire plus ?

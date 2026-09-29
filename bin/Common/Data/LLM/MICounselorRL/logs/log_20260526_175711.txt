@@ -1,0 +1,7 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], comment tu vas Je m'appelle Nazeh.
+Agent: [Baseline]Enchantai, [NAME]Je vais bien, merci. Comment allez-vous aujourd'hui, Nazeh ?
+User: [Compréhension ou nouvelle perspective]Je vais très bien, mais du coup j'aimerais bien Je vais très bien, mais du coup j'aimerais bien discuter avec vous de mon exercice discuter avec vous de mon exercice de mon activité sportive.
+Agent: [Baseline]Trais bien, je suis la pour vous aider. Pouvez-vous me dire comment vous en aites venu a vouloir discuter de votre activitai sportive ?
+User: [Partager un sentiment ou une émotion négative]Je trouve que je ne fais pas assez de sport en ce moment.
+Agent: [Baseline]Je vois. Qu'est-ce qui vous a fait raialiser cela ?

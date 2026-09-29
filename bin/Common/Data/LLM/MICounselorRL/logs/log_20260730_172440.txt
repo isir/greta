@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, Kami. My name is [NAME]. How are you doing today?
+Agent: [Baseline]Pleased to meet you, [NAME]Nice to meet you too, [NAME]. How's your day been so far?
+User: [Greeting or Closing]I'm, fine. Thank you. Thank you for asking.
+Agent: [Baseline]That's good to hear. I'm here to talk about your alcohol use, if that's okay with you?
+User: [unknown]Yes. I'm, okay. That's something I can understand, but yes.
+Agent: [Baseline]Thanks for being open to discussing it. Can you tell me, how much alcohol do you typically have in a week?

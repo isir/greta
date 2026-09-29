@@ -1,4 +1,5 @@
 /*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -19,9 +20,12 @@ import java.util.List;
  */
 
 public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackPerformer {
+
     private String feedback_bat_path = "";
     private Process server_process;
-        
+
+    private String batch_main_path = "Common\\Data\\TurnManagement\\run_turnManager.bat";
+    
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private TurnManagement turnManager;
     
@@ -32,10 +36,10 @@ public class TurnManagementFrame extends javax.swing.JFrame implements FeedbackP
     /**
      * Creates new form TurnManagementFrame
      */
-    public TurnManagementFrame() throws IOException {
+    public TurnManagementFrame(CharacterManager cm) throws IOException {
         initComponents();
         System.out.println("greta.auxiliary.TurnManagement.TurnManagementFrame()");
-        turnManager = new TurnManagement(cm);
+        turnManager = new TurnManagement(cm, batch_main_path);
     }
 
     /**

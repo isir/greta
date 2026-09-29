@@ -1,0 +1,19 @@
+Agent: []Thank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.
+Agent: []Thank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Sharing negative feeling or emotion]I'm doing a bit stressed.
+Agent: [Baseline]I see, [NAME]. It sounds like you're having a tough time. Can you tell me more about what's been stressing you?
+User: [unknown]Yeah. I'm trying to quit drinking. Yeah. I'm trying to quit drinking. Yeah. I'm trying to quit drinking. But I'm not being really able
+Agent: [Baseline]It sounds like you're feeling stuck, [NAME]. What makes it hard for you to cut back on drinking?
+User: [unknown]It makes me feel happy at the moment.
+Agent: [Baseline]I understand, [NAME]. It's common for people to use alcohol as a way to cope with stress or to feel happy. But it sounds like it's causing more problems than it's solving.
+User: [unknown]Do you think so?
+Agent: [Baseline]I do, [NAME]. Drinking heavily can actually make stress worse in the long run. It can also affect your health and relationships.
+User: [unknown]Yeah. I've already have some Yeah. I've already have some Yeah. I've already have some Yeah. I've already have some Yeah. I've already have some Yeah. I've already have some Yeah. I've already have some Yeah. I've already have some Yeah. I've already have some Yeah. I've already have some fights with my boyfriend. fights with my boyfriend. fights with my boyfriend. fights with my boyfriend. fights with my boyfriend. fights with my boyfriend. fights with my boyfriend. fights with my boyfriend. fights with my boyfriend. fights with my boyfriend.
+Agent: [Baseline]I'm sorry to hear that, [NAME]. It sounds like drinking is causing some real problems in your life.
+User: [unknown]Yeah. It release.
+Agent: [Baseline]It sounds like you're feeling torn, [NAME]. Part of you wants to stop drinking, but another part likes how it makes you feel.
+User: [unknown]I don't know
+Agent: [Baseline]It's okay, [NAME]. It's normal to feel unsure about making changes. Can you tell me more about why you want to stop drinking?

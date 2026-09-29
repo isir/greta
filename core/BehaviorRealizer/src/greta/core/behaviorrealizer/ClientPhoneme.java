@@ -33,7 +33,7 @@ public class ClientPhoneme {
 
     private static void InitPhonemes() {
         // Example mappings, add as needed
-    
+        // "ɛ, ɝ": added by Takeshi
         
         phonemeMapping.put("ɡ", PhonemeType.g); // Assuming 'ɡ' corresponds to the Greta phoneme type 'g'
         phonemeMapping.put("o", PhonemeType.o); // Assuming 'o' corresponds to the Greta phoneme type 'o'
@@ -53,6 +53,8 @@ public class ClientPhoneme {
         phonemeMapping.put("ʊ", PhonemeType.u); // "good"
         phonemeMapping.put("uː", PhonemeType.u1); // "shoot"
         phonemeMapping.put("e", PhonemeType.e); // "bed"
+        phonemeMapping.put("ɛ", PhonemeType.e); // "e in bed" (Takeshi modified)
+        phonemeMapping.put("ɝ", PhonemeType.e); // "e in singer" (Takeshi modified)
         phonemeMapping.put("ə", PhonemeType.e1); // "teacher" (schwa sound, may need adjustment)
         phonemeMapping.put("ɜː", PhonemeType.E1);
         phonemeMapping.put("ɜ", PhonemeType.E1);// "bird" (may need adjustment)
@@ -91,6 +93,10 @@ public class ClientPhoneme {
         phonemeMapping.put("w", PhonemeType.w); // "wet"
         phonemeMapping.put("j", PhonemeType.y); // "yes"
        
+    }
+    
+    public PhonemeType convertIPAPhoneme2GretaPhoneme(String IPAPhoneme) {
+        return phonemeMapping.get(IPAPhoneme);
     }
     
  

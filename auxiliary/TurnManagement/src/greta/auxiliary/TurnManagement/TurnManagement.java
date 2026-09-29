@@ -5,6 +5,7 @@
  */
 package greta.auxiliary.TurnManagement;
 
+import greta.auxiliary.llm.LLMFrame;
 import greta.core.intentions.Intention;
 import greta.core.intentions.IntentionPerformer;
 import greta.core.intentions.FMLTranslator;
@@ -64,12 +65,14 @@ import javax.jms.JMSException;
 
 public class TurnManagement {
 
-    private final String python_env_checker_path = "Common\\Data\\TurnManagement\\check_env.py";
-    private final String batch_env_installer_path = "Common\\Data\\TurnManagement\\init_env.bat";
-    private final String batch_main_path = "Common\\Data\\TurnManagement\\run_turnManager.bat";
-    private final String batch_kill_path = "Common\\Data\\TurnManagement\\kill_server.bat";
+    private String python_env_checker_path = "Common\\Data\\TurnManagement\\check_env.py";
+    private String batch_env_installer_path = "Common\\Data\\TurnManagement\\init_env.bat";
+    private String batch_main_path;
+    private String batch_kill_path = "Common\\Data\\TurnManagement\\kill_server.bat";
     private Process server_process;
 
+    private Thread server_shutdownHook;
+    
     private Server feedback_server;
     private String response;
 
@@ -77,9 +80,29 @@ public class TurnManagement {
     private InputStream inputStream;
     private String result;
     
+    private static final Logger LOG = Logger.getLogger(TurnManagement.class.getName());
+
     private CharacterManager cm;
+
+    // Head nod FML paths (same as TurnManagementModel)
+    private String nodShortPath     = ".\\Examples\\DemoEN\\backchannel\\woz_nod_short.xml";
+    private String nodLongPath      = ".\\Examples\\DemoEN\\backchannel\\woz_nod_long.xml";
+    private String nodLongTwicePath = ".\\Examples\\DemoEN\\backchannel\\woz_nod_long_twice.xml";
+
+    // Legacy random nod folder (kept for backward compat with reactiveBackchannel/responsiveBackchannel)
     private String[] backChannelFMLFileList;
-    private String backChannelFMLFileDir_path = ".\\Examples\\DemoEN\\backchannel";    
+    private String backChannelFMLFileDir_path = ".\\Examples\\DemoEN\\backchannel";
+
+    // Verbal backchannel FML folders
+    private static final String CONTINUER_DIR = ".\\Examples\\DemoEN\\backchannel\\verbal_backchannel\\continuer";
+    private static final String ASSESSMENT_DIR = ".\\Examples\\DemoEN\\backchannel\\verbal_backchannel\\assessment";
+
+    private String[] continuerFMLFileList;
+    private String[] assessmentFMLFileList;
+    private double[] continuerWeights;
+    private double[] assessmentWeights;
+    private Random rand = new Random();
+
     private ArrayList<IntentionPerformer> performers = new ArrayList<IntentionPerformer>();
     private ArrayList<SignalPerformer> signal_performers = new ArrayList<SignalPerformer>();
     private XMLParser fmlparser = XML.createParser();
@@ -88,19 +111,28 @@ public class TurnManagement {
 
     private String prevTurnState = "";
 
+    protected ArrayList<LLMFrame> llms = new ArrayList<LLMFrame>();    
+    
+    private ArrayList<String> transcriptList = new ArrayList<String>();    
+    
+    
     /**
      *
      * @throws IOException
      */
-    public TurnManagement (CharacterManager cm) throws IOException {
+    public TurnManagement (CharacterManager cm, String main_path) throws IOException {
 
         System.out.println("greta.auxiliary.TurnManagement.TurnManagement()");
+        this.cm = cm;
+        batch_main_path = main_path;
 
         ArrayList<String> arrayList = new ArrayList<String>();
         Files.list(Paths.get(backChannelFMLFileDir_path)).forEach(s -> arrayList.add(s.toString()));        
         backChannelFMLFileList = arrayList.stream().toArray(String[]::new);
 
-        
+        // Load verbal backchannel FML file lists with uniform probabilities
+        loadVerbalBackchannelLists();
+
         feedback_server = new Server();
         feedback_server.setAddress("localhost");
         feedback_server.setPort("5960");
@@ -205,7 +237,28 @@ public class TurnManagement {
                 System.out.println(".init_TurnManagement_server(): TurnManagement, starting TurnManagement server...");
 
                 try {
+                    
                     server_process = new ProcessBuilder(batch_main_path).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.INHERIT).start();
+                    
+                    server_shutdownHook = new Thread(() -> {
+                            try {
+                                System.out.println("greta.auxiliary.TurnManagement.TurnManagement(): server shutdown hook start");
+                                while (server_process.isAlive()) {
+                                    try {
+                                        turnManagement_server.sendMessage("kill");
+                                    } catch (IOException ex) {
+                                        Logger.getLogger(TurnManagement.class.getName()).log(Level.SEVERE, null, ex);
+                                    }
+                                }
+                                server_process.waitFor();
+                                System.out.println("greta.auxiliary.TurnManagement.TurnManagement(): server shutdown hook end");
+                            } catch (InterruptedException ex) {
+                                Logger.getLogger(TurnManagement.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                    );
+                    Runtime.getRuntime().addShutdownHook(server_shutdownHook);
+                    
                 } catch (IOException ex) {
                     Logger.getLogger(TurnManagement.class.getName()).log(Level.SEVERE, null, ex);
                 }
@@ -237,50 +290,35 @@ public class TurnManagement {
 
                     try {
 
-                        double s_time = greta.core.util.time.Timer.getTime();
-
                         result = turnManagement_server.receiveMessage();
+                        if (result == null || result.isEmpty()) continue;
 
                         turnManagement_server.sendMessage("ok");
-                        
-//                        System.out.format("prevTurnState(%s), result(%s)%n", prevTurnState, result);
 
                         if (!prevTurnState.equals(result)) {
 
-//                            System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: check - " + result);
+                            System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: check - " + result);
 
                             prevTurnState = result;
 
-                            if (result.contains("reactiveBackchannel")) {
-                                System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: behavior - " + result);
-                                String backChannelFML = pickBackChannelFML();
-                                System.out.format("Backchannel %s is emitted%n", backChannelFML);
-                                load(backChannelFML);
-                            }
-                            if (result.contains("responsiveBackchannel")) {
-                                System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: behavior - " + result);
-                                String backChannelFML = pickBackChannelFML();
-                                System.out.format("Backchannel %s is emitted%n", backChannelFML);
-                                load(backChannelFML);
-                            }
-//                            if (result.contains("turnShift")) {
-//                                System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [main]: behavior - " + result);
-//                                // send FML signal
-//                            }
-
-                        }
-                        else {
-                            
+                            // Dispatch action on a NEW THREAD so this command-receive loop
+                            // is never blocked by TTS/performIntentions (same fix as TurnManagementModel).
+                            final String actionResult = result;
+                            new Thread(() -> {
+                                try {
+                                    dispatchAction(actionResult);
+                                } catch (Exception ex) {
+                                    System.out.println("[TurnManagement] DISPATCH ERROR: " + ex.getMessage());
+                                    ex.printStackTrace();
+                                }
+                            }).start();
                         }
 
-                        double e_time = greta.core.util.time.Timer.getTime();
-
-//                        System.out.format("greta.auxiliary.TurnManagement.TurnManagement(): loop time: %.2f%n", e_time - s_time);
                     }
                     catch (Exception e) {
-
+                        System.out.println("[TurnManagement] DISPATCH LOOP EXCEPTION: " + e.getMessage());
+                        e.printStackTrace();
                     }
-
 
                 }
 
@@ -309,9 +347,9 @@ public class TurnManagement {
 
                     try {
                         feedback_server.sendMessage(type);
-                        System.out.println("greta.auxiliary.TurnManagement.performFeedback(): Feedback - " + type);
+                        // System.out.println("greta.auxiliary.TurnManagement.performFeedback(): Feedback - " + type);
                         response = feedback_server.receiveMessage();
-                        System.out.println("greta.auxiliary.TurnManagement.performFeedback(): response - " + response);
+                        // System.out.println("greta.auxiliary.TurnManagement.performFeedback(): response - " + response);
 
                     } catch (Exception ex) {
                         Logger.getLogger(TurnManagementFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -325,187 +363,242 @@ public class TurnManagement {
         
     }
 
+    // ===== Action dispatch (runs on a NEW thread per action to avoid blocking the command loop) =====
+
+    private static final int TURN_SHIFT_TIMEOUT_MS = 15000; // max wait for ASR transcript before giving up
+
+    private void dispatchAction(String result) {
+        // --- Head nods / Verbal BCs ---
+        if (result.contains("shortNod")) {
+            sendShortNod();
+        }
+        else if (result.contains("longNodTwice")) {
+            sendLongNodTwice();
+        }
+        else if (result.contains("longNod")) {
+            sendLongNod();
+        }
+        else if (result.contains("continuerBC")) {
+            sendContinuerBackchannel();
+        }
+        else if (result.contains("assessmentBC")) {
+            sendAssessmentBackchannel();
+        }
+        else if (result.contains("reactiveBackchannel") || result.contains("responsiveBackchannel")) {
+            System.out.println("[TurnManagement] -> Legacy Backchannel (random nod)");
+            String backChannelFML = pickBackChannelFML();
+            System.out.format("Backchannel %s is emitted%n", backChannelFML);
+            try { load(backChannelFML); } catch (Exception ex) { LOG.log(Level.SEVERE, "Legacy BC error", ex); }
+        }
+
+        // --- Turn shift (wait for ASR with timeout to prevent infinite hang) ---
+        if (result.contains("turnShiftUserToAgent")) {
+            System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [dispatch]: behavior - " + result);
+
+            int prevLength = transcriptList.size();
+            long deadline = System.currentTimeMillis() + TURN_SHIFT_TIMEOUT_MS;
+            boolean received = false;
+
+            while (System.currentTimeMillis() < deadline) {
+                if (prevLength != transcriptList.size()) {
+                    received = true;
+                    break;
+                }
+                try { Thread.sleep(50); } catch (InterruptedException ie) { break; }
+            }
+
+            if (received) {
+                String transcript = transcriptList.get(transcriptList.size() - 1);
+                System.out.println("greta.auxiliary.TurnManagement.TurnManagement() [dispatch]: sent to LLM - " + transcript);
+                for (LLMFrame llm : llms) {
+                    llm.setRequestTextandSend(transcript);
+                }
+            } else {
+                System.out.println("[TurnManagement] WARNING: turnShift timed out after " + TURN_SHIFT_TIMEOUT_MS + "ms waiting for ASR transcript. Skipping LLM request.");
+            }
+        }
+    }
+
+    // ===== Verbal BC file loading with uniform probabilities =====
+
+    private void loadVerbalBackchannelLists() {
+        try {
+            ArrayList<String> continuerList = new ArrayList<>();
+            Files.list(Paths.get(CONTINUER_DIR))
+                .filter(p -> p.toString().endsWith(".xml"))
+                .forEach(s -> continuerList.add(s.toString()));
+            continuerFMLFileList = continuerList.stream().toArray(String[]::new);
+
+            ArrayList<String> assessmentList = new ArrayList<>();
+            Files.list(Paths.get(ASSESSMENT_DIR))
+                .filter(p -> p.toString().endsWith(".xml"))
+                .forEach(s -> assessmentList.add(s.toString()));
+            assessmentFMLFileList = assessmentList.stream().toArray(String[]::new);
+
+            continuerWeights  = buildUniformWeights(continuerFMLFileList.length);
+            assessmentWeights = buildUniformWeights(assessmentFMLFileList.length);
+
+            System.out.println("[TurnManagement] Loaded " + continuerFMLFileList.length + " continuer FML files (uniform)");
+            for (int i = 0; i < continuerFMLFileList.length; i++) {
+                System.out.println("  " + continuerFMLFileList[i] + " -> p=" + String.format("%.3f", continuerWeights[i]));
+            }
+            System.out.println("[TurnManagement] Loaded " + assessmentFMLFileList.length + " assessment FML files (uniform)");
+            for (int i = 0; i < assessmentFMLFileList.length; i++) {
+                System.out.println("  " + assessmentFMLFileList[i] + " -> p=" + String.format("%.3f", assessmentWeights[i]));
+            }
+        } catch (Exception e) {
+            System.out.println("[TurnManagement] Warning - could not load verbal backchannel FML files: " + e.getMessage());
+            continuerFMLFileList = new String[0];
+            assessmentFMLFileList = new String[0];
+            continuerWeights = new double[0];
+            assessmentWeights = new double[0];
+        }
+    }
+
+    private double[] buildUniformWeights(int count) {
+        double[] weights = new double[count];
+        double uniform = 1.0 / Math.max(count, 1);
+        java.util.Arrays.fill(weights, uniform);
+        return weights;
+    }
+
+    private int weightedRandomIndex(double[] weights) {
+        double r = rand.nextDouble();
+        double cumulative = 0;
+        for (int i = 0; i < weights.length; i++) {
+            cumulative += weights[i];
+            if (r <= cumulative) return i;
+        }
+        return weights.length - 1;
+    }
+
+    // ===== Legacy random nod pick =====
+
     public String pickBackChannelFML() {
-        Random rand = new Random();
-        
         return backChannelFMLFileList[rand.nextInt(backChannelFMLFileList.length)];
     }
-    
-    public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
-        String fml_name = TextToFML(text, true);
-        return fml_name;
-    }
-    
-    public String TextToFML(String text, boolean renew) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
-        
-        String file_path = "";        
-        
-        System.out.println("TEXT TO TRANSFORM:"+text); 
-        if(text.length()>1){
-            String construction="<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n" +
-                                "<fml-apml>\n<bml>"+
-                                "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">"+
-                                "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
-            System.out.println("greta.core.intentions.FMLFileReader.TextToFML()");
-            String[] sp=text.split(" ");
-            int i=1;
-            System.out.println("greta.auxiliary.llm.LLMFrame.TextToFML() "+sp.length);
-            for(int j=0;j<sp.length;j++){
-                construction=construction+"\n<tm id=\"tm"+i+"\"/>"+sp[j];
-                i++;
-            }
-            construction=construction+"\n<tm id=\"tm"+i+"\"/>";
 
-            construction=construction+"\n<boundary id=\"b1\" type=\"LL\" start=\"s1:tm1\" end=\"s1:tm"+i+"\"/>";
+    // ===== Head Nod dispatch (same as TurnManagementModel) =====
 
-            construction=construction+"\n</speech>\n</bml>\n<fml>\n";
-            construction=construction+ "</fml>\n</fml-apml>";
-            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
-            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
-            Document document = docBuilder.parse(new InputSource(new StringReader(construction)));
-            TransformerFactory transformerFactory = TransformerFactory.newInstance();
-            Transformer transformer = transformerFactory.newTransformer();
-            DOMSource source = new DOMSource(document);
-
-            if(renew){
-                file_path = System.getProperty("user.dir")+"\\fml_mistral_renew.xml";
-            }else{
-                file_path = System.getProperty("user.dir")+"\\fml_mistral.xml";
-            }
-            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(new File(file_path)),"ISO-8859-1");                        
-            StreamResult result = new StreamResult(writer);
-            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
-            transformer.transform(source, result);
-        }
-        
-        return file_path;
-        
-    }
-    
-    public String FMLToBML(String filename) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException{
-        
-        System.out.println("greta.core.intentions.FMLFileReader.FMLToBML()");
-        BufferedReader br = null;
-        PrintWriter pw = null; 
+    public void sendShortNod() {
         try {
-            br = new BufferedReader(new FileReader(filename));
-            pw =  new PrintWriter(new FileWriter(System.getProperty("user.dir")+"\\fml_to_bml.xml"));
-            String line;
-            while ((line = br.readLine()) != null) {
-
-                   if(!line.contains("fml") && !line.contains("<?xml") && !line.contains("<rest") && !line.contains("<certainty") && !line.contains("<emotion")&& !line.contains("<performative") && !line.contains("<iconic") && !line.contains("<deictic") && !line.contains("<beat")){
-                       if(line.contains("<speech")){
-                            pw.println(line);
-                           pw.println("<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>");
-                       }else{
-                       pw.println(line);
-                       }
-                   }
-            }
-            br.close();
-            pw.close();
-        }catch (Exception e) {
-             e.printStackTrace();
+            System.out.println("[TurnManagement] -> Short Nod");
+            load(nodShortPath);
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "Error sending short nod", ex);
         }
-        return System.getProperty("user.dir")+"\\fml_to_bml.xml";
     }
+
+    public void sendLongNod() {
+        try {
+            System.out.println("[TurnManagement] -> Long Nod");
+            load(nodLongPath);
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "Error sending long nod", ex);
+        }
+    }
+
+    public void sendLongNodTwice() {
+        try {
+            System.out.println("[TurnManagement] -> Long Nod Twice");
+            load(nodLongTwicePath);
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "Error sending long nod twice", ex);
+        }
+    }
+
+    // ===== Verbal Backchannel dispatch (same as TurnManagementModel) =====
+
+    public void sendContinuerBackchannel() {
+        if (continuerFMLFileList == null || continuerFMLFileList.length == 0) return;
+        int idx = weightedRandomIndex(continuerWeights);
+        String fml = continuerFMLFileList[idx];
+        try {
+            System.out.println("[TurnManagement] -> Continuer BC: " + fml + " (p=" + String.format("%.3f", continuerWeights[idx]) + ")");
+            load(fml);
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "Error sending continuer BC", ex);
+        }
+    }
+
+    public void sendAssessmentBackchannel() {
+        if (assessmentFMLFileList == null || assessmentFMLFileList.length == 0) return;
+        int idx = weightedRandomIndex(assessmentWeights);
+        String fml = assessmentFMLFileList[idx];
+        try {
+            System.out.println("[TurnManagement] -> Assessment BC: " + fml + " (p=" + String.format("%.3f", assessmentWeights[idx]) + ")");
+            load(fml);
+        } catch (Exception ex) {
+            LOG.log(Level.SEVERE, "Error sending assessment BC", ex);
+        }
+    }
+
+    // ===== FML Loading (exact same as TurnManagementModel) =====
 
     public ID load(String fmlFileName) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
-        
-        ID id = load(fmlFileName, CompositionType.replace);
-        return id;
+        return load(fmlFileName, CompositionType.blend);
     }
-    
-    public ID load(String fmlFileName, CompositionType compositionType) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
-   
-        double load_start = greta.core.util.time.Timer.getTime();
-        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): START: %.3f ##############################%n", load_start);
 
-        System.out.println("CompositionType: " + compositionType);
-        
+    public ID load(String fmlFileName, CompositionType compositionType) throws IOException, TransformerException, SAXException, ParserConfigurationException, JMSException {
         String base = (new File(fmlFileName)).getName().replaceAll("\\.xml$", "");
-        String bml_file=FMLToBML(fmlFileName);
-        String base_bml= (new File(bml_file)).getName().replaceAll("\\.xml$", "");
+        String bml_file = FMLToBML(fmlFileName);
 
         String fml_id = "";
-        boolean text_brut=false;
-        
-        //get the intentions of the FML file
+        boolean text_brut = false;
+
         fmlparser.setValidating(true);
         bmlparser.setValidating(true);
-        BufferedReader reader;
-        String text="";
-        
-        
-        
-        boolean flag=false;
+        String text = "";
+
+        boolean flag = false;
         try {
             File myObj = new File(fmlFileName);
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                //System.out.println(data);
-                if(!data.contains("<?xml")){
-                    System.out.println(data);
-                    if(!flag)
-                        text_brut=true;
-                    text+=data;
-
-                }
-                else{
-                    flag=true;
-                    text+=data;
+                if (!data.contains("<?xml")) {
+                    if (!flag) text_brut = true;
+                    text += data;
+                } else {
+                    flag = true;
+                    text += data;
                 }
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
         }
-                        
-			
-                
-	if(text_brut){
-            System.out.println(text);
-            fmlFileName=TextToFML(text);
-            bml_file=FMLToBML(fmlFileName);
-            System.out.println("Nome nuovo file "+fmlFileName);
-       }
-        
+
+        if (text_brut) {
+            fmlFileName = TextToFML(text);
+            bml_file = FMLToBML(fmlFileName);
+        }
+
         XMLTree fml = fmlparser.parseFile(fmlFileName);
-        if(!text_brut){
-             bml_file=FMLToBML(fmlFileName);
-             System.out.println("Nome nuovo file "+bml_file);
+        if (!text_brut) {
+            bml_file = FMLToBML(fmlFileName);
         }
         XMLTree bml = bmlparser.parseFile(bml_file);
-        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml,cm);
-        List<Signal> signals = BMLTranslator.BMLToSignals(bml,cm);
-        System.out.println("greta.core.intentions.FMLFileReader.load()");
-        for (int i =0;i>signals.size();i++){
-                   System.out.println("greta.core.intentions.FMLFileReader.load()"+signals.get(i).toString());
-        }
+        List<Intention> intentions = FMLTranslator.FMLToIntentions(fml, cm);
+        List<Signal> signals = BMLTranslator.BMLToSignals(bml, cm);
+
         Mode mode = FMLTranslator.getDefaultFMLMode();
         Mode mode_bml = BMLTranslator.getDefaultBMLMode();
         for (XMLTree fmlchild : fml.getChildrenElement()) {
-            // store the bml id in the mode class in order
             if (fmlchild.isNamed("bml")) {
-                //System.out.println(fmlchild.getName());
-                if(fmlchild.hasAttribute("id")){
+                if (fmlchild.hasAttribute("id")) {
                     mode.setBml_id(fmlchild.getAttribute("id"));
                 }
             }
         }
-        if(fml.hasAttribute("id")){
+        if (fml.hasAttribute("id")) {
             fml_id = fml.getAttribute("id");
-        }else{
+        } else {
             fml_id = "fml_1";
         }
-        
-//        if (fml.hasAttribute("composition")) {
-//            mode.setCompositionType(fml.getAttribute("composition"));
-//        }
+
         mode.setCompositionType(compositionType);
-        
+
         if (fml.hasAttribute("reaction_type")) {
             mode.setReactionType(fml.getAttribute("reaction_type"));
         }
@@ -518,33 +611,80 @@ public class TurnManagement {
 
         ID id = IDProvider.createID(base);
         id.setFmlID(fml_id);
-        
-        double preprocess_end = greta.core.util.time.Timer.getTime();
-        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): preprocess - %.3f%n", preprocess_end - load_start);        
-
-        double MM_end = greta.core.util.time.Timer.getTime();
-        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): MeaningMiner - %.3f%n", MM_end - preprocess_end);        
-        
-        for(int i=0; i<intentions.size();i++){
-            System.out.println("[INFO]: Intention_type:"+intentions.get(i).getType()+"   "+intentions.get(i).getName());
-            if(this.cm.getGesture_map().containsKey(intentions.get(i).getType())){
-                this.cm.setTouch_computed(true);
-                this.cm.setTouch_gesture_computed(this.cm.getGesture_map().get(intentions.get(i).getType()));
-                //REMOVE TOUCH GESTURE AND DO IT AFTER (IF NEAR OTHER CHARACTER/HUMAN
-                intentions.remove(i);
-            }
-        }
 
         for (IntentionPerformer performer : performers) {
             performer.performIntentions(intentions, id, mode, signals);
         }
 
-        double load_end = greta.core.util.time.Timer.getTime();
-        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): total - %.3f%n", load_end - load_start);          
-        System.out.format("[PROCESS TIME] greta.auxiliary.llm.LLMFrame.load(): END: %.3f ##############################%n", load_end);                
-        
         return id;
-        
+    }
+
+    public String TextToFML(String text) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+        return TextToFML(text, true);
+    }
+
+    public String TextToFML(String text, boolean renew) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+        String file_path = "";
+        if (text.length() > 1) {
+            String construction = "<?xml version=\"1.0\" encoding=\"ISO-8859-1\" ?>\n" +
+                    "<fml-apml>\n<bml>" +
+                    "\n<speech id=\"s1\" language=\"english\" start=\"0.0\" text=\"\" type=\"SAPI4\" voice=\"marytts\" xmlns=\"\">" +
+                    "\n<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>";
+            String[] sp = text.split(" ");
+            int i = 1;
+            for (int j = 0; j < sp.length; j++) {
+                construction = construction + "\n<tm id=\"tm" + i + "\"/>" + sp[j];
+                i++;
+            }
+            construction = construction + "\n<tm id=\"tm" + i + "\"/>";
+            construction = construction + "\n<boundary id=\"b1\" type=\"LL\" start=\"s1:tm1\" end=\"s1:tm" + i + "\"/>";
+            construction = construction + "\n</speech>\n</bml>\n<fml>\n</fml>\n</fml-apml>";
+            DocumentBuilderFactory docBuilderFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder docBuilder = docBuilderFactory.newDocumentBuilder();
+            Document document = docBuilder.parse(new InputSource(new StringReader(construction)));
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource source = new DOMSource(document);
+
+            if (renew) {
+                file_path = System.getProperty("user.dir") + "\\fml_turnmgmt_renew.xml";
+            } else {
+                file_path = System.getProperty("user.dir") + "\\fml_turnmgmt.xml";
+            }
+            OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(new File(file_path)), "ISO-8859-1");
+            StreamResult result = new StreamResult(writer);
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.transform(source, result);
+        }
+        return file_path;
+    }
+
+    public String FMLToBML(String filename) throws ParserConfigurationException, SAXException, IOException, TransformerConfigurationException, TransformerException {
+        BufferedReader br = null;
+        PrintWriter pw = null;
+        try {
+            br = new BufferedReader(new FileReader(filename));
+            pw = new PrintWriter(new FileWriter(System.getProperty("user.dir") + "\\fml_to_bml_turnmgmt.xml"));
+            String line;
+            while ((line = br.readLine()) != null) {
+                if (!line.contains("fml") && !line.contains("<?xml") && !line.contains("<rest")
+                        && !line.contains("<certainty") && !line.contains("<emotion")
+                        && !line.contains("<performative") && !line.contains("<iconic")
+                        && !line.contains("<deictic") && !line.contains("<beat")) {
+                    if (line.contains("<speech")) {
+                        pw.println(line);
+                        pw.println("<description level=\"1\" type=\"gretabml\"><reference>tmp/from-fml-apml.pho</reference></description>");
+                    } else {
+                        pw.println(line);
+                    }
+                }
+            }
+            br.close();
+            pw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return System.getProperty("user.dir") + "\\fml_to_bml_turnmgmt.xml";
     }
     
     public ArrayList<IntentionPerformer> getPerformers() {
@@ -562,5 +702,8 @@ public class TurnManagement {
         }
     }
 
+    public void addTranscript(String transcript) {
+        transcriptList.add(transcript);
+    }
     
 }

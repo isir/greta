@@ -1,0 +1,69 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture][NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]Ça va bien et vous
+Agent: [Baseline]Je suis bien, merci. Je suis heureux d'aitre ici avec vous aujourd'hui, [NAME]. J'ai entendu dire que vous aviez des questions sur l'activitai physique ?
+User: [Backchannel]Pas spécialement.
+Agent: [Baseline]D'accord, [NAME]. Je suis ici pour discuter de tout ce qui vous praioccupe. Est-ce qu'il y a quelque chose qui vous tracasse en ce moment ?
+User: [inconnu]Non pas vraiment.
+Agent: [Baseline]Trais bien, [NAME]. Je suis la pour vous aider si vous avez des questions ou des soucis. Savez-vous que l'activitai physique raiguliaire peut avoir des effets positifs sur la santai ?
+User: [Backchannel]Oui.
+Agent: [Baseline]C'est bien, [NAME]. L'activitai physique peut aider a praivenir de nombreuses maladies et a maintenir une bonne santai. Avez-vous des questions sur l'activitai physique ou sur la santai en general ?
+User: [Backchannel]non
+Agent: [Baseline]Trais bien, [NAME]. Je suis la pour vous aider si vous avez des questions ou des soucis. Savez-vous que l'activitai physique peut aider a reduire le temps passe en position sedentaire ?
+User: [Backchannel]Oui.
+Agent: [Baseline]C'est bien, [NAME]. L'activitai physique peut aider a reduire le temps passe en position sedentaire et a maintenir une bonne santai. Avez-vous deja essaye de faire de l'exercice regulierement ?
+User: [Backchannel]Oui.
+Agent: [Baseline]C'est bien, [NAME]. Qu'est-ce qui vous a empaiche de continuer a faire de l'exercice regulierement ?
+User: [Compréhension ou nouvelle perspective]Un emploi du temps trop
+Agent: [Baseline]Je comprends, [NAME]. L'emploi du temps peut etre difficile a gerer parfois. Avez-vous pense a des manieres de faire de l'exercice qui s'adaptent a votre emploi du temps ? Par exemple, faire une petite promenade pendant la pause dejeuner ou faire des exercices a la maison le soir ?
+User: [Compréhension ou nouvelle perspective]Oui.
+Agent: [Baseline]C'est bien, [NAME]. Qu'est-ce qui vous empacherait de mettre en place ces idees ?
+User: [Compréhension ou nouvelle perspective]C'est déjà en place.
+Agent: [Baseline]C'est bien, [NAME]. Qu'est-ce qui vous empacherait de continuer a faire de l'exercice regulierement ?
+User: [Modifier les comportements malsains à l'avenir]Un emploi du temps trop compliqué.
+Agent: [Baseline]Je comprends, [NAME]. L'emploi du temps peut etre difficile a gerer parfois. Avez-vous pense a des manieres de faire de l'exercice qui s'adaptent a votre emploi du temps ? Par exemple, faire une petite promenade pendant la pause dejeuner ou faire des exercices a la maison le soir ?
+User: [Backchannel]Oui.
+Agent: [Baseline]C'est bien, [NAME]. Qu'est-ce qui vous empacherait de continuer a faire de l'exercice regulierement ?
+User: [Backchannel]Faire une boucle là.
+Agent: [Baseline]Je suis daisolai, [NAME]. Je ne voulais pas vous ennuyer avec les maimes questions. Qu'est-ce qui vous empacherait de continuer a faire de l'exercice regulierement ?
+User: [Contexte : Therapist:Je suis daisolai, David. Je ne voulais pas vous ennuyer avec les maimes questions. Qu'est-ce qui vous empacherait de continuer à faire de l'exercice régulièrement ? Énoncé du patient : Un emploi du temps trop compliqué à gérer Catégorie : Partager des informations personnelles ou décrire un événement passé]Un emploi du temps trop compliqué à gérer
+Agent: [Baseline]Je comprends, [NAME]. Est-ce qu'il y a des moments de la journee ou vous pourriez trouver du temps pour faire de l'exercice ? Par exemple, le matin avant de partir au travail ou le soir apres le diner ?
+User: [Accueil ou clôture]Oui.
+Agent: [Baseline]C'est bien, [NAME]. Qu'est-ce qui vous empacherait de trouver du temps pour faire de l'exercice a ces moments-la ?
+User: [Le maintien d'un comportement malsain à l'avenir]Le manque de temps.
+Agent: [Baseline]Je comprends, [NAME]. Il est vrai que le temps peut etre une preoccupation importante. Cependant, meme une petite quantite de temps peut faire une grande difference. Avez-vous deja essaye de trouver des activites physiques qui ne prennent pas beaucoup de temps, comme faire une petite promenade ou faire des exercices a la maison ?
+User: [Le patient répond "Non" sans fournir plus de détails ou exprimer une émotion. La réponse est courte et ne fournit pas suffisamment d'informations pour la classer dans l'une des catégories prédéfinies. Par conséquent, la réponse du patient peut être classée dans la catégorie "inconnu".]Non.
+Agent: [Baseline]Je vois. Est-ce que cela vous interesse de trouver des activites physiques qui ne prennent pas beaucoup de temps ?
+User: [Compréhension ou nouvelle perspective]Oui.
+Agent: [Baseline]C'est bien, [NAME]. Qu'est-ce qui vous empacherait de trouver du temps pour faire de l'exercice regulierement, meme si c'est seulement quelques minutes par jour ?
+User: [k]Rien.
+Agent: [Baseline]C'est bien, [NAME]. Alors, qu'est-ce qui vous empacherait de commencer a faire de l'exercice regulierement des maintenant ?
+User: [Le patient partage un sentiment ou une émotion négative.]Le manque de motivation.
+Agent: [Baseline]Je comprends, [NAME]. Il est normal de manquer de motivation de temps en temps. Qu'est-ce qui vous motive a faire de l'exercice ? Quels sont les avantages que vous en retirez ?
+User: [Compréhension ou nouvelle perspective]Un bénéfice sur la santé.
+Agent: [Baseline]C'est vrai, [NAME]. Faire de l'exercice regulierement peut avoir des effets positifs sur la santai. Avez-vous deja essaye de trouver des activites physiques qui vous plaisent ?
+User: [Backchannel]Wait.
+Agent: [Baseline]Je suis daisolai, [NAME]. Qu'est-ce que vous voulez dire par "wait" ?
+User: [k]Oui,
+Agent: [Baseline]Je suis content que vous etes interesse par l'activitai physique, [NAME]. Qu'est-ce qui vous interesse le plus dans l'activitai physique ?
+User: [Compréhension ou nouvelle perspective]Le bénéfice sur la santé.
+Agent: [Baseline]C'est bien, [NAME]. L'activitai physique peut avere des effets tres positifs sur la santai. Avez-vous deja essaye de faire de l'exercice regulierement ?
+User: [inconnu]Oi?
+Agent: [Baseline]Je suis daisolai, [NAME]. Je voulais savoir si vous aviez deja essaye de faire de l'exercice regulierement dans le passe.
+User: [Compréhension ou nouvelle perspective]Oui.
+Agent: [Baseline]C'est bien, [NAME]. Qu'est-ce qui vous a empache de continuer a faire de l'exercice regulierement ?
+User: [Backchannel]Le manque de temps.
+Agent: [Baseline]Je comprends, [NAME]. Est-ce que vous avez deja essaye de trouver des moments dans votre emploi du temps pour faire de l'exercice ? Par exemple, pendant votre pause dejeuner ou le soir apres le travail ?
+User: [Compréhension ou nouvelle perspective]Oui.
+Agent: [Baseline]C'est bien, [NAME]. Qu'est-ce qui vous empacherait de continuer a faire de l'exercice regulierement ?
+User: [Le patient partage un sentiment ou une émotion négative.]Le manque de motivation.
+Agent: [Baseline]Je comprends, [NAME]. Il est normal de manquer de motivation de temps en temps. Qu'est-ce qui vous motive a faire de l'exercice ? Quels sont les avantages que vous en retirez ?
+User: [inconnu]Dites-moi,
+Agent: [Baseline]Je suis la pour vous aider, [NAME]. Qu'est-ce que vous voulez savoir sur l'activitai physique ?
+User: [Compréhension ou nouvelle perspective]Quels sont les avantages sur la santé
+Agent: [Baseline]Faire de l'exercice regulierement peut avere de nombreux avantages pour la santai, tels que:    Ameliorer la forme physique et la force musculaire   Perdre du poids ou maintenir un poids sain   Ameliorer la sante cardiovasculaire   Reduire le risque de maladies chroniques, comme le diabete et l'hypertension artairielle   Ameliorer l'humeur et reduire le stress   Ameliorer la qualitai du sommeil   Ameliorer la flexibilitai et l'equilibre   Renforcer le systeme immunitaire  Il y a beaucoup d'autres avantages que l'exercice peut avere sur la santai. Est-ce qu'il y a un avantage en particulier qui vous interesse ?
+User: [inconnu]Non.
+Agent: [Baseline]D'accord, [NAME]. Est-ce qu'il y a autre chose que vous voulez savoir sur l'activitai physique ?
+User: [Accueil ou clôture]non merci
+Agent: [Baseline]Trais bien, [NAME]. N'haisitez pas a me contacter si vous avez d'autres questions ou si vous avez besoin d'aide. Passez une bonne journai ! END\_CONVO

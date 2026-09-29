@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel]Okay. My name is [NAME]. How are doing today?
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. Hope you're having a better day than yesterday-how's that going for you?
+User: [Greeting or Closing; Backchannel]It's going going on actually fine. And you? How about you?
+Agent: [Baseline]I'm doing well, [NAME]-thanks for asking! It's great to meet someone who's doing okay despite everything. What's something small that's been going right for you lately?
+User: [Sharing negative feeling or emotion; Backchannel;]I think my, alcohol, I think my, alcohol, I think my, alcohol, use is going very
+Agent: [Baseline] leans in slightly, nodding slowly  It sounds like alcohol's been a big part of your days lately-even when things aren't going perfectly. What's that like for you?  pauses  Hard to put into words, huh?
+User: [Sharing negative feeling or emotion]Is really
+Agent: [Baseline] softly  It sounds like you're carrying a lot with that word. When you say "really," what's the story behind it? Like, what's the alcohol doing for you when life feels heavy?   .pauses, letting space for reflection. 

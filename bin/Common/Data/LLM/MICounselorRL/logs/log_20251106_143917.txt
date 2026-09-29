@@ -1,0 +1,2 @@
+User: [Greeting or Closing]Bonjour
+Agent: [Baseline]Bonjour! Je suis le Dr. Anderson. Comment allez-vous aujourd’hui? Qu’est-ce qui vous amène ici? *(sourire chaleureux)*

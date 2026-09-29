@@ -1,0 +1,25 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, je suis [NAME] Corella.
+Agent: [Baseline]EnchantÃ©e, [NAME]Bonjour, je suis Camille. Et vous ?  [NAME] Corella : EnchantÃ©e, [NAME]. Comment allez-vous aujourd'hui ?
+User: [inconnu] Je reviens et vous
+Agent: [Baseline]Merci pour votre retour, [NAME]. Comment vous sentez-vous aujourd'hui ?
+User: [Partager un sentiment ou une émotion positive] Plut?t bien.
+Agent: [Baseline]C'est super à entendre, [NAME]. Votre médecin vous a orienté vers moi pour discuter de votre activité physique. Comment vous sentez-vous par rapport à cela ?
+User: [Partager des informations personnelles ou décrire un événement passé; Modifier les comportements malsains à l'avenir] Je pense que je dois faire plus d'activit?s physiques.
+Agent: [Baseline]C'est un bon début, [NAME]. Qu'est-ce qui vous motive à vouloir augmenter votre activité physique ?
+User: [Partager des informations personnelles ou décrire un événement passé] C'est parce que j'ai derni?rement perdu beaucoup de masses musculaires et je dois revenir ? ma forme d'antan
+Agent: [Baseline]Je comprends, [NAME]. C'est une motivation forte. Avez-vous une idée de ce que vous pourriez faire pour commencer à augmenter votre activité physique ?
+User: [Modifier les comportements malsains à l'avenir] Reprendre la course.
+Agent: [Baseline]Excellente idée, [NAME]. Quand pensez-vous pouvoir commencer à courir ?
+User: [Partager des informations personnelles ou décrire un événement passé] J'avoue que je ne suis pas, ce n'est pas une priorit? puisque j'ai
+Agent: [Baseline]Pas de souci, [NAME]. Qu'est-ce qui vous empêche de commencer à courir ?
+User: [Partager des informations personnelles ou décrire un événement passé] C'est parce que j'ai un j'organise le mariage de l'un des proches notamment donc
+Agent: [Baseline]Je comprends que vous avez beaucoup à gérer en ce moment. Y a-t-il une petite activité physique que vous pourriez intégrer dans votre routine quotidienne, même avec votre emploi du temps chargé ?
+User: [Modifier les comportements malsains à l'avenir;] Je priorise la marche plut?t que les transports ou la voiture.
+Agent: [Baseline]C'est un excellent début, [NAME]. Pensez-vous pouvoir marcher un peu plus chaque jour ? Par exemple, ajouter 10 minutes de marche à votre routine quotidienne ?
+User: [Modifier les comportements malsains à l'avenir] Oui c'est tout ? fait possible, c'est d'ailleurs m?me d?j? le cas et je suis plut?t sur une
+Agent: [Baseline]Formidable, [NAME]. Quel serait un petit objectif réaliste pour augmenter encore un peu cette marche quotidienne la semaine prochaine ?
+User: [inconnu] Regardez notamment
+Agent: [Baseline]Bien sûr, [NAME]. Quel serait un petit objectif réaliste pour augmenter encore un peu cette marche quotidienne la semaine prochaine ?
+User: [Modifier les comportements malsains à l'avenir] Faire tout ce que je fais peut-?tre au lieu de prendre les transports
+Agent: [Baseline]C'est une excellente idée, [NAME]. Comment pensez-vous pouvoir intégrer cela dans votre routine quotidienne ? END_CONVOMerci dâ€™avoir pris ce temps pour Ã©changer avec moi. Jâ€™espÃ¨re que cette discussion vous a Ã©tÃ© utile. Vous avez dÃ©jÃ  fait un grand pas en rÃ©flÃ©chissant Ã  tout cela. Je vous souhaite plein de rÃ©ussite dans votre dÃ©marche !

@@ -1,0 +1,17 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Là ça commence Ok, [NAME].
+Agent: [Baseline]EnchantÃ©e, FailixComment allez-vous aujourd'hui, Failix ?
+User: [Accueil ou clôture]Bien,
+Agent: [Baseline]Je suis heureux d'entendre cela. Comment se passe votre semaine jusqu'a praisent ?
+User: [Partager un sentiment ou une émotion positive]Elle vient de commencer, mais bien également.
+Agent: [Baseline]C'est super ! Je suis ici pour discuter de votre activitai physique, si vous aites d'accord. Comment vous sentez-vous par rapport Ã  votre niveau actuel d'activitÃ© physique ?
+User: [Le patient partage un sentiment ou une émotion négative.]J'ai un peu diminué mon activité physique. J'ai un peu diminué mon activité physique. J'ai un peu diminué mon activité physique. J'ai un peu diminué mon activité physique. Ces derniers temps.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous a amenai Ã  diminuer votre activitÃ© physique ?
+User: [Partager des informations personnelles ou décrire un événement passé]Le fait d'avoir commencé en stage.
+Agent: [Baseline]Je vois. Et comment vous sentez-vous Ã  propos de cela ? Est-ce que cela vous inquiaite ?
+User: [Backchannel]non
+Agent: [Baseline]Je comprends. Est-ce que vous avez des objectifs en termes d'activitai physique ?
+User: [Compréhension ou nouvelle perspective]oui plussieurs
+Agent: [Baseline]Pourriez-vous m'en parler un peu plus ? Quels sont vos objectifs en termes d'activitai physique ?
+User: [Compréhension ou nouvelle perspective]la salle, judo et longterm
+Agent: [Baseline]C'est trais bien ! Qu'est-ce qui vous motive Ã  pratiquer ces activitÃ©s ?

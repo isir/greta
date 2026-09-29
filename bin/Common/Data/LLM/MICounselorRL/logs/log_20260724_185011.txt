@@ -1,0 +1,2 @@
+User: [Greeting or Closing]heyl, how are you?
+Agent: [Planning with the Patient]Hey, I'm here to help. What's been on your mind lately?

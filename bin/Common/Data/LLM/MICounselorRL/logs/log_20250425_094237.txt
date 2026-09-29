@@ -1,0 +1,10 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Accueil ou clôture][NAME]
+Agent: [Baseline]EnchantÃ©e, [NAME]Bonjour [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]très bien merci
+Agent: [Baseline]Super ! Comment se passe votre semaine jusqu'Ã  prÃ©sent ?
+User: [Partager un sentiment ou une émotion positive]très bien
+Agent: [Baseline]C'est bon Ã  entendre, [NAME]. J'aimerais discuter un peu de votre consommation d'alcool. Est-ce que vous consommez de l'alcool rÃ©guliÃ¨rement ?
+User: [Partager des informations personnelles ou décrire un événement passé;]non pas du tout
+
+Agent: [Baseline]Je comprends. Parfois, il peut Ãªtre utile de discuter de nos habitudes mÃªme si elles ne semblent pas problÃ©matiques. Comment vous sentez-vous par rapport Ã  votre consommation d'alcool actuelle ?

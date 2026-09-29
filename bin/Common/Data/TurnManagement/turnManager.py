@@ -7,6 +7,7 @@ Created on Fri Sep  6 11:10:55 2024
 """
 import pprint as pp
 import numpy as np
+import random
 import traceback
 import shutil
 import math
@@ -14,6 +15,8 @@ import time
 import csv
 import sys
 import os
+import argparse
+from datetime import datetime
 
 import socket
 import torch
@@ -21,17 +24,83 @@ from silero_vad import load_silero_vad, read_audio, get_speech_timestamps
 
 from threading import Thread, Lock
 
+from session_recording import (
+    WavSessionRecorder,
+    ClassicTurnTimelineLogger,
+    SystemAudioCapture,
+    MicRecordCapture,
+)
+
 import multiprocessing
 process = multiprocessing.current_process()
 print('[TurnManagement Greta] PID = {}'.format(process.pid))
 
 agent_speaking_state = False
 
+# =============================================================================
+# Backchannel probability parameters (adjust here)
+# =============================================================================
+# When a backchannel slot fires, probability of choosing a verbal BC
+# instead of a head nod. Head nod probability = 1 - VERBAL_BC_PROBABILITY.
+VERBAL_BC_PROBABILITY = 0.20
+
+# Among verbal BCs: continuer vs assessment selection probability.
+# From dataset stats: continuer 4051 (93.6%), assessment 277 (6.4%).
+CONTINUER_PROBABILITY = 0.936
+
+# Among head nods: type selection probabilities (must sum to 1.0).
+SHORT_NOD_PROBABILITY = 0.50
+LONG_NOD_PROBABILITY = 0.35
+LONG_NOD_TWICE_PROBABILITY = 0.15
+
 def main():
     
     print("[TurnMangement Greta] Python start")
     
     "Main function"
+
+    parser = argparse.ArgumentParser(description="Classic TurnManagement (VAD + rule-based behaviors)")
+    parser.add_argument("--record", action="store_true", default=False,
+                        help="Save aligned user+agent WAV and classic action CSV")
+    parser.add_argument("--record_csv_only", action="store_true", default=True,
+                        help="Save only the action CSV (no audio WAVs)")
+    parser.add_argument("--record_dir", type=str, default='C:/Users/Pelachaud/Documents/',
+                        help="Output folder (required with --record or --record_csv_only)")
+    parser.add_argument("--mic_device", type=int, default=None,
+                        help="sounddevice input device index for user recording (None = default)")
+    args_ns, _unknown = parser.parse_known_args()
+    record_csv = args_ns.record or args_ns.record_csv_only
+    record_audio = args_ns.record and not args_ns.record_csv_only
+    if record_csv and not args_ns.record_dir:
+        print("[TurnManager] ERROR: --record/--record_csv_only requires --record_dir PATH")
+        sys.exit(1)
+
+    RATE = 16000
+
+    session_t0 = time.perf_counter()
+    recorder_user = None
+    recorder_agent = None
+    action_logger = None
+    system_audio_capture = None
+    mic_record_capture = None
+    action_csv = None
+    if record_csv:
+        os.makedirs(args_ns.record_dir, exist_ok=True)
+        stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        base = os.path.join(os.path.abspath(args_ns.record_dir), f"turnmgr_classic_{stamp}")
+        action_csv = base + "_actions.csv"
+        if record_audio:
+            user_wav = base + "_user.wav"
+            agent_wav = base + "_agent.wav"
+            print("[TurnManager] Session recording ENABLED (audio + CSV)")
+            print("  User (sounddevice mic):", user_wav)
+            print("  Agent (loopback):      ", agent_wav)
+            print("  Actions (CSV):         ", action_csv)
+            recorder_user = WavSessionRecorder(user_wav, RATE, session_t0=session_t0)
+            recorder_agent = WavSessionRecorder(agent_wav, RATE, session_t0=session_t0)
+        else:
+            print("[TurnManager] Session recording ENABLED (CSV only, no audio)")
+            print("  Actions (CSV):         ", action_csv)
 
     #######################################
 
@@ -44,13 +113,24 @@ def main():
     
     greta_host = socket.gethostname()
     greta_port = 5961
-    
-    RATE = 16000
 
     audio_buffer_size = 4096
     text_buffer_size = 100
     
     vad_interval = 0.05
+    frame_hz = 1.0 / vad_interval
+    if record_csv:
+        action_logger = ClassicTurnTimelineLogger(action_csv, frame_hz=frame_hz)
+    if record_audio:
+        system_audio_capture = SystemAudioCapture(
+            sample_rate=RATE,
+            wav_recorder=recorder_agent,
+        )
+        mic_record_capture = MicRecordCapture(
+            sample_rate=RATE,
+            device_index=args_ns.mic_device,
+            wav_recorder=recorder_user,
+        )
     
     #######################################
 
@@ -66,7 +146,7 @@ def main():
     IPU_threshold = 0.5
 
     # non-silence threshold in seconds to determine user has started to speak
-    # utterance_start_threshold = 03
+    # utterance_start_threshold = 0.3
     utterance_start_threshold = 0.5
 
     vad_history = []
@@ -90,7 +170,11 @@ def main():
 
     vad_client = VAD(mic_host, mic_port, RATE, audio_buffer_size)
     vad_client.start()
-    
+    if system_audio_capture is not None:
+        system_audio_capture.start()
+    if mic_record_capture is not None:
+        mic_record_capture.start()
+
     global_lock = Lock()
 
     feedback_socket = socket.socket()
@@ -173,6 +257,9 @@ def main():
                 
                 greta_socket.send('{}\r\n'.format(action).encode())
 
+            if action_logger is not None:
+                action_logger.add_event(time.perf_counter() - session_t0, action)
+
                 # print("cnt {:>10d}, vad: {:>2d}, agent_speaking_state: {:>02d}, action: {:>10s}, cnt: {:>02d}".format(cnt, vad_result_binary, agent_speaking_state, action, behavior_cnt))
                 # greta_socket.send(
                 #     "cnt {:>10d}, vad: {:>2d}, agent_speaking_state: {:>02d}, action: {:>10s}, cnt: {:>02d}".format(
@@ -218,8 +305,24 @@ def main():
             break
         
     vad_client.stop()
+    if mic_record_capture is not None:
+        mic_record_capture.stop()
+    if system_audio_capture is not None:
+        system_audio_capture.stop()
+    if mic_record_capture is not None:
+        mic_record_capture.join(timeout=3.0)
+    if system_audio_capture is not None:
+        system_audio_capture.join(timeout=3.0)
     feedback_socket.close()
     greta_socket.close()
+
+    session_end = max(0.0, time.perf_counter() - session_t0)
+    if recorder_user is not None:
+        recorder_user.finalize(total_duration_sec=session_end)
+    if recorder_agent is not None:
+        recorder_agent.finalize(total_duration_sec=session_end)
+    if action_logger is not None:
+        action_logger.finalize(total_duration_sec=session_end)
     
     print("[TurnManagement Greta] Python end")
 
@@ -425,10 +528,11 @@ def generate_behavior(vad_result_binary, vad_history, agent_speaking_state, agen
     # Final decision
     ##################################################
         
+    # CHANGE HERE THE BEHAVIORS TO BEHAVIORS.NOTHING IN ORDER TO HAVE THE BASELINE CONDITION
     if utterance_start_detected:
         
         if (vad_result_binary == 1) and (cnt == utterance_start_threshold_size):
-            result = behaviors.reactive
+            result = _pick_backchannel(behaviors)
         else:
             result = behaviors.nothing
     
@@ -440,7 +544,7 @@ def generate_behavior(vad_result_binary, vad_history, agent_speaking_state, agen
 
         elif IPU_detected:
             
-            result = behaviors.responsive
+            result = _pick_backchannel(behaviors)
     
     elif (not utterance_start_detected):
 
@@ -451,6 +555,23 @@ def generate_behavior(vad_result_binary, vad_history, agent_speaking_state, agen
         result = behaviors.nothing
     
     return result, cnt, utterance_start_detected, check_turn_shift
+
+
+def _pick_backchannel(behaviors):
+    """Two-stage random draw: head nod vs verbal BC, then sub-type selection."""
+    if random.random() < VERBAL_BC_PROBABILITY:
+        if random.random() < CONTINUER_PROBABILITY:
+            return behaviors.continuer
+        else:
+            return behaviors.assessment
+    else:
+        r = random.random()
+        if r < SHORT_NOD_PROBABILITY:
+            return behaviors.short_nod
+        elif r < SHORT_NOD_PROBABILITY + LONG_NOD_PROBABILITY:
+            return behaviors.long_nod
+        else:
+            return behaviors.long_nod_twice
             
             
         
@@ -460,12 +581,14 @@ class Behaviors():
     def __init__(self):
         
         self.nothing = 'nothing'
-
-        self.reactive = 'reactiveBackchannel'
-        self.responsive = 'responsiveBackchannel'
-        self.shift = 'turnShift'
-
         self.waiting = 'waiting'
+
+        self.short_nod = 'shortNod'
+        self.long_nod = 'longNod'
+        self.long_nod_twice = 'longNodTwice'
+        self.continuer = 'continuerBC'
+        self.assessment = 'assessmentBC'
+        self.shift = 'turnShift'
         
                 
 class VAD(object):
@@ -517,9 +640,10 @@ class VAD(object):
                 data = self.client_socket.recv(self.buffer_size)  # receive response
                 
                 np_int16 = np.frombuffer(data, dtype=np.int16)
-                                
-                np_float32 = int2float(np_int16)
 
+                np_float_full = int2float(np_int16)
+
+                np_float32 = np_float_full
                 if self.rate == 16000:
                     np_float32 = np_float32[:512]
                 if self.rate == 8000:

@@ -1,0 +1,15 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, [NAME]. I'm Tom.
+Agent: [Reflection]Pleased to meet you, [NAME]It sounds like you're feeling a bit nervous today, Tom.
+User: [unknown]No. Actually, I'm fine. I'm pretty fine. No. Actually, I'm fine. I'm pretty fine. Today, I think. I know.
+Agent: [Give Solution]I see. Well, Tom, if you ever do feel nervous or overwhelmed, remember that it's okay to ask for help.
+User: [Changing unhealthy behavior in the future]I will actually, I really need help, I think.
+Agent: [Reflection]It sounds like you're feeling like you need some help with something, Tom.
+User: [unknown]Like, some problems at home because I'm drinking too much. Like, some problems at home because I'm drinking too much. Like, some problems at home because I'm drinking too much. Like, some problems at home because I'm drinking too much.
+Agent: [Reflection]It sounds like you're feeling stuck in a cycle of drinking too much and it's causing problems at home.
+User: [unknown]That's exactly what is happening.
+Agent: [Reflection]It sounds like you're really struggling with your drinking, Tom, and it's causing some tension at home.
+User: [Changing unhealthy behavior in the future]I don't know what to do. Like, what should I do?
+Agent: [Reflection]It sounds like you're feeling unsure about what to do next, Tom.
+User: [unknown]Yeah. I mean, I'm Yeah. I mean, I'm Yeah. I mean, I'm Yeah. I mean, I'm Yeah. I mean, I'm Yeah. I mean, I'm Yeah. I mean, I'm I'm pretty unsure. Like, I don't know what to do. I don't know what to do to drink less. I'm pretty unsure. Like, I don't know what to do. I don't know what to do to drink less. I'm pretty unsure. Like, I don't know what to do. I don't know what to do to drink less. I'm pretty unsure. Like, I don't know what to do. I don't know what to do to drink less. I'm pretty unsure. Like, I don't know what to do. I don't know what to do to drink less. I'm pretty unsure. Like, I don't know what to do. I don't know what to do to drink less. I'm pretty unsure. Like, I don't know what to do. I don't know what to do to drink less.
+Agent: [Reflection]It sounds like you're feeling really stuck and unsure about how to cut back on your drinking, Tom.

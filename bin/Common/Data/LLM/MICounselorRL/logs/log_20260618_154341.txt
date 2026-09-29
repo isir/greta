@@ -1,0 +1,47 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour, je suis [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Backchannel]Vous.
+Agent: [Baseline]Je vais bien, merci. Je suis la pour vous aider. Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]Aujourd'hui, ça va très bien.
+Agent: [Baseline]C'est bien. Je suis heureux d'entendre cela. [NAME], je suis ici pour discuter de votre consommation de cigarettes. Comment cela se passe-t-il pour vous en ce moment ?
+User: [Compréhension ou nouvelle perspective]En ce moment, je fume des cigarettes uniquement En ce moment, je fume des cigarettes uniquement En ce moment, je fume des cigarettes uniquement En ce moment, je fume des cigarettes uniquement en soirée, mais au quotidien, je vapote.
+Agent: [Baseline]Je vois. Savez-vous qu'il y a des risques pour votre santai associais a la consommation de cigarettes et de vapotage ?
+User: [k]Oui, je suis au courant.
+Agent: [Baseline]Je suis heureux d'entendre que vous aites conscient des risques. Avez-vous daija envisajai de reduire votre consommation de cigarettes ?
+User: [Compréhension ou nouvelle perspective]Oui, j'ai déjà envisagé plusieurs fois de réduire ma consommation.
+Agent: [Baseline]C'est une bonne chose que vous y ayez daija raiflaichi. Qu'est-ce qui vous empaiche de le faire ?
+User: [Le maintien d'un comportement malsain à l'avenir]Je pense que ce qui m'empêche de le faire c'est l'habitude, l'addiction et ce que ça procure.
+Agent: [Baseline]Je comprends. Il est normal de ressentir ces difficultais. Avez-vous daija essayai de raiduire votre consommation de cigarettes auparavant ?
+User: [Le patient partage un sentiment ou une émotion négative.]J'ai déjà arrêté pendant une période et puis j'ai repris.
+Agent: [Baseline]Je vois. Qu'est-ce qui vous a aidai a arraiter la derniaire fois que vous avez raiussi a le faire ?
+User: [Compréhension ou nouvelle perspective]Ce qui m'a arrêté, c'est le dégoût et un livre aussi.
+Agent: [Baseline]C'est intairaissant. Le daigout et le livre ont donc aitai des facteurs importants pour vous. Avez-vous des objectifs pour votre santai que vous aimeriez atteindre ?
+User: [Compréhension ou nouvelle perspective]Réduire la cigarette et potentiellement faire plus de cardio. Réduire la cigarette et potentiellement faire plus de cardio. Réduire la cigarette et potentiellement faire plus de cardio. Réduire la cigarette et potentiellement faire plus de cardio. Réduire la cigarette et potentiellement faire plus de cardio. Réduire la cigarette et potentiellement faire plus de cardio. Réduire la cigarette et potentiellement faire plus de cardio. Réduire la cigarette et potentiellement faire plus de cardio. Réduire la cigarette et potentiellement faire plus de cardio. Réduire la cigarette et potentiellement faire plus de cardio.
+Agent: [Baseline]C'est une excellente idai de vouloir faire plus de cardio. Avez-vous daija essayai de raiduire votre consommation de cigarettes en maime temps que vous faites plus d'exercice ?
+User: [Compréhension ou nouvelle perspective]Oui parce que l'exercice donne envie de moins consommer de cigarettes.
+Agent: [Baseline]C'est une bonne observation. Avez-vous daija essayai de raiduire votre consommation de cigarettes en maime temps que vous faites plus d'exercice ?
+User: [Compréhension ou nouvelle perspective]Oui,
+Agent: [Baseline]C'est bien. Qu'est-ce qui vous empache de le faire regulierement ?
+User: [Le maintien d'un comportement malsain à l'avenir]L'habitude et peut-être le manque de d'envie.
+Agent: [Baseline]Je comprends. Il est normal de ressentir ces difficultais. Avez-vous daija essayai de raiduire votre consommation de cigarettes en maime temps que vous faites plus d'exercice ?
+User: [Le patient partage un sentiment ou une émotion négative.]Oui, mais c'est toujours difficile.
+Agent: [Baseline]Je comprends. Il est normal de ressentir des difficultais lors de l'essai de raiduire sa consommation de cigarettes. Avez-vous des idais sur ce qui pourrait vous aider a le faire cette fois-ci ?
+User: [Modifier les comportements malsains à l'avenir]Un petit peu plus d'envie, de motivation personnelle.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous motiver personnellement a raiduire votre consommation de cigarettes ?
+User: [Modifier les comportements malsains à l'avenir]Peut-être faire un petit peu plus de sport et améliorer mon hygiène de vie.
+Agent: [Baseline]C'est une excellente idai. Avez-vous daija essayai de raiduire votre consommation de cigarettes en maime temps que vous faites plus d'exercice ?
+User: [Backchannel]Cette question m'a déjà été posée.
+Agent: [Baseline]Je suis daisolai si cela vous a semblai raipaititif. Je suis la pour vous aider a trouver des solutions pour raiduire votre consommation de cigarettes. Avez-vous des idais sur ce qui pourrait vous aider a le faire cette fois-ci ?
+User: [Le patient partage un sentiment ou une émotion négative.]J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. J'ai été déjà donné mes idées qui sont de avoir plus d'envie. D'améliorer mon hygiène de vie.
+Agent: [Baseline]Je comprends. Avez-vous daija essayai de raiduire votre consommation de cigarettes en maime temps que vous faites plus d'exercice ?
+User: [Backchannel]Tu m'as déjà posé cette question.
+Agent: [Baseline]Je suis daisolai si cela vous a semblai raipaititif. Je suis la pour vous aider a trouver des solutions pour raiduire votre consommation de cigarettes. Avez-vous des idais sur ce qui pourrait vous aider a le faire cette fois-ci ?
+User: [Partager un sentiment ou une émotion négative]Pas plus d'idées que ça. Je pense avoir
+Agent: [Baseline]Je comprends. Avez-vous daija essayai de raiduire votre consommation de cigarettes en maime temps que vous faites plus d'exercice ?
+User: [inconnu]donne moi une liste
+Agent: [Baseline]Voici quelques idais qui pourraient vous aider a raiduire votre consommation de cigarettes .    Trouver des activitais qui vous plaisent et qui vous aideront a vous distraire lorsque vous avez envie de fumer.   Faire une liste des raisons pour lesquelles vous voulez raiduire votre consommation de cigarettes et la consulter regulierement.   Demander de l'aide a vos amis et votre famille pour vous soutenir dans votre projet.   Trouver un remplacai pour la cigarette, comme la nicotine replacement therapy.   Faire de l'exercice regulierement pour vous aider a gerer le stress et les envies de fumer.   Fixer des objectifs realisables pour vous aider a progresser petit a petit.   Utiliser des applications ou des outils en ligne pour vous aider a suivre votre progression et vous motiver.  Je vous encourage a reflechi a ces idais et a trouver celles qui vous conviennent le mieux. N'oubliez pas que chaque personne est unique et que ce qui fonctionne pour une personne ne fonctionnera pas necessairement pour une autre. L'important est de trouver ce qui vous aidera a vous a
+User: [k]stop
+Agent: [Baseline]Merci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.
+User: [Accueil ou clôture]Merci beaucoup.
+Agent: [Baseline]De rien, n'hesitez pas a me contacter si vous avez besoin d'aide supplementaire. Merci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.

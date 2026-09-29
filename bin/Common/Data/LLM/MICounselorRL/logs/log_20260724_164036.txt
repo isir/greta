@@ -1,0 +1,2 @@
+User: [Greeting or Closing]How are doing today?
+Agent: [Baseline]Hi there, I'm Dr. Anderson. How are you doing today?

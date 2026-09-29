@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing] Hello.
+Agent: [Baseline]Don't worry, we can continue without it.Hello. Don't worry, we can continue without it. How are you doing today?
+User: [Greeting or Closing] I'm fine.
+Agent: [Baseline]That's good to hear. I understand you're here to talk about your alcohol use. Can you tell me more about that?

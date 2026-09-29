@@ -1,0 +1,23 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good. Thank you.
+Agent: [Baseline]That's good to hear. I'm glad you're here today. [NAME], I understand your doctor referred you to me. Can you tell me why that is?
+User: [unknown]I don't know.
+Agent: [Baseline]It's okay, [NAME]. Let's figure it out together. Have you been drinking alcohol recently?
+User: [unknown]No.
+Agent: [Baseline]I see. How about in the past month?
+User: [unknown]So
+Agent: [Baseline]How much would you say you've been drinking on average?
+User: [unknown]I don't know. Why do you care that much?
+Agent: [Baseline]I care because I want to understand your experience, [NAME]. How does drinking affect your daily life?
+User: [unknown]What do you care that much? I don't I don't really get it what I'm what I'm doing here.
+Agent: [Baseline]It's okay to feel that way, [NAME]. I'm here to help you explore your drinking, if you're open to it. Why do you think your doctor wanted you to come see me?
+User: [unknown]I don't know because he he thinks I have a problem with I don't know because he he thinks I have a problem with I don't know because he he thinks I have a problem with I don't know because he he thinks I have a problem with I don't know because he he thinks I have a problem with I don't know because he he thinks I have a problem with I don't know because he he thinks I have a problem with I don't know because he he thinks I have a problem with alcohol, but I don't think so.
+Agent: [Baseline]I understand, [NAME]. It's common to have different perspectives on our drinking habits. Can you tell me more about why you don't think you have a problem with alcohol?
+User: [unknown]I have nothing to say.
+Agent: [Baseline]That's okay, [NAME]. Let's try something else. How does drinking make you feel, in general?
+User: [unknown]Makes me feel fine.
+Agent: [Baseline]I see. So, drinking helps you feel good. What about when you don't drink? How do you feel then?
+User: [unknown]Better.
+Agent: [Baseline]That's interesting, [NAME]. So, there are times when you feel better not drinking. Have you ever thought about cutting back or stopping?

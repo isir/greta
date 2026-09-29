@@ -1,0 +1,15 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Sharing negative feeling or emotion]I'm a bit sad.
+Agent: [Baseline]I'm sorry to hear that, [NAME]. What's been making you feel this way?
+User: [unknown]Yeah. I'm out. We see we see if I
+Agent: [Baseline]I see. You're feeling down because you're not drinking right now?
+User: [Sustaining unhealthy behavior in the future]Yes. I'm trying to quit drinking, and I'm Yes. I'm trying to quit drinking, and I'm Yes. I'm trying to quit drinking, and I'm Yes. I'm trying to quit drinking, and I'm Yes. I'm trying to quit drinking, and I'm Yes. I'm trying to quit drinking, and I'm Yes. I'm trying to quit drinking, and I'm Yes. I'm trying to quit drinking, and I'm Yes. I'm trying to quit drinking, and I'm Yes. I'm trying to quit drinking, and I'm not being able to do it.
+Agent: [Baseline]It sounds like you're feeling frustrated, [NAME]. You've been trying to quit drinking, but it's been tough.
+User: [unknown]Allez, m'appelle.
+Agent: [Baseline]I'm sorry, [NAME]. I didn't understand that. Can you please say it again in English?
+User: [unknown]This bottle and that didn't work.
+Agent: [Baseline]I see. What do you mean by "this bottle and that didn't work"?
+User: [unknown]No. I've
+Agent: [Baseline]I see. You've tried different methods to quit drinking, but they haven't worked for you.

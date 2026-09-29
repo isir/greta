@@ -1,0 +1,17 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, je m'appelle.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Ah, d'accord ! Alors, Camille, comment ssa va aujourd'hui ? Qu'est-ce qui vous amaine a me parler ?
+User: [Accueil ou clôture.] Bonjour, je m'appelle.
+Agent: [Baseline]Enchantaie ! Alors Camille, comment allez-vous en ce moment ? Un peu de fatigue, peut-aitre ?
+User: [Backchannel]OUi 
+Agent: [Baseline]Je vois... La fatigue, c'est souvent liai a notre rythme de vie. Vous sentez que ssa vient de quoi, pour vous ?
+User: [Partager des informations personnelles ou décrire un événement passé.] Parce que je pense que je travaille toute la journ?e dans ma chaise.
+Agent: [Baseline]Ah, ces longues heures assises... Ça paise, hein ? Vous avez daija remarquai des moments ou vous auriez pu bouger un peu ?
+User: [Modifier les comportements malsains à l'avenir] Oui, je veux bien bouger un petit peu.
+Agent: [Baseline]C'est daija une super intention ! Quel petit mouvement vous ferait du bien, maime 5 minutes ? Monter les escaliers, peut-aitre ?
+User: [Modifier les comportements malsains à l'avenir] Oui, pense montrer l'escalier, c'est important.
+Agent: [Baseline]Super ! Et si on essayait de le faire demain, juste un aitage pour commencer ? Ça vous semble faisable ?
+User: [Backchannel; Partager des informations personnelles ou décrire un événement passé] Je pense qu'il faisait avant.
+Agent: [Baseline]Ah, vous l'avez daija fait ! Qu'est-ce qui vous plaisait dans ce moment-la ? (Un souvenir positif peut aider)
+User: [Inconnu] Je ne sais pas.
+Agent: [Baseline]Pas grave... Et si on tentait juste 1 aitage demain, pour voir ? Juste pour le plaisir de tester ?

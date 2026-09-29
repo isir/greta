@@ -1,0 +1,55 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture][NAME].
+Agent: [Baseline]EnchantÃ©e, ZoaiBonjour Zoai, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Ça va.
+Agent: [Baseline]Je suis heureux d'entendre cela, ZoaiJe me demandais si vous aviez des soucis avec votre activitai physique ?
+User: [Partager des informations personnelles ou décrire un événement passé]N'en fait pas beaucoup à part marcher de temps en temps.
+Agent: [Baseline]Je vois. Savez-vous que l'activitai physique raiguliaire peut avoir des effets positifs sur votre santai ?
+User: [Backchannel]OUI
+Agent: [Baseline]C'est trai bien. Avez-vous daijÃ  pensÃ© Ã  augmenter votre activitai physique ?
+User: [inconnu]Je n'ai pas compris.
+Agent: [Baseline]Je suis daisolaie, Zoai. Je voulais dire . Avez-vous daijÃ  pensÃ© Ã  augmenter votre activitai physique ?
+User: [inconnu]Je comprends pas.
+Agent: [Baseline]Je suis daisolaie, Zoai. Je voulais dire . Avez-vous daijÃ  pensÃ© Ã  faire plus d'exercice physique ?
+User: [inconnu]Passer à une autre question, je ne sais pas.
+Agent: [Baseline]D'accord, Zoai. Avez-vous des motivations pour augmenter votre activitai physique ?
+User: [Compréhension ou nouvelle perspective]Être en meilleure forme,
+Agent: [Baseline]C'est une excellente raison, Zoai. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Partager un sentiment ou une émotion négative]Chaleur
+Agent: [Baseline]Je comprends. Il peut aitre difficile de trouver l'ainergie pour faire de l'exercice par temps chaud. Avez-vous pensai Ã  des activitai physiques intÃ©rieures ou Ã  des horaires diffÃ©rents pour Ã©viter la chaleur ?
+User: [Le patient partage un sentiment ou une émotion négative: "Non pas vraiment car j'ai beaucoup de fatigue."]Non pas vraiment car j'ai beaucoup de fatigue.
+Agent: [Baseline]Je vois. Il est normal de se sentir fatiguai, mais l'exercice peut en raialitai vous donner plus d'ainergie. Avez-vous pensai Ã  commencer par de petites choses, comme une promenade quotidienne de 10 minutes ?
+User: [Backchannel]Oui, mais
+Agent: [Baseline]Mais quoi, Zoai ? Je suis la pour vous aider.
+User: [Partager des informations personnelles ou décrire un événement passé]Et j'oublie de le faire.
+Agent: [Baseline]Je comprends. Il peut aitre difficile de se rappeler de faire quelque chose de nouveau. Avez-vous pensai Ã  mettre un rappelaie dans votre tÃ©lÃ©phone ou Ã  demander de l'aide Ã  un ami pour vous rappeler ?
+User: [Backchannel]j'neleve les rappel
+Agent: [Baseline]Je comprends. Il peut aitre difficile de trouver la motivation pour faire quelque chose de nouveau. Avez-vous pensai Ã  trouver une activitai que vous aimez et qui vous donne de l'ainergie ?
+User: [Modifier les comportements malsains à l'avenir]Allez à la salle de sport.
+Agent: [Baseline]C'est une excellente idai, Zoai. Avez-vous pensai Ã  un horaire qui vous conviendrait pour aller Ã  la salle de sport ?
+User: [Partager des informations personnelles ou décrire un événement passé]Le problème, c'est que c'est très cher.
+Agent: [Baseline]Je comprends. Il y a beaucoup d'autres activitai physiques que vous pouvez faire sans avoir Ã  aller Ã  la salle de sport. Avez-vous pensai Ã  faire une promenade Ã  pied ou Ã  faire du yoga Ã  la maison ?
+User: [Backchannel]Oui.
+Agent: [Baseline]C'est une excellente idai, Zoai. Qu'est-ce qui vous empachai de commencer Ã  faire plus d'exercice physique ?
+User: [Partager un sentiment ou une émotion négative]Fatigue
+Agent: [Baseline]Je comprends. Il est normal de se sentir fatiguai, mais l'exercice peut en raialitai vous donner plus d'ainergie. Avez-vous pensai Ã  commencer par de petites choses, comme une promenade quotidienne de 10 minutes ?
+User: [Backchannel]Oui.
+Agent: [Baseline]C'est une excellente idai, Zoai. Qu'est-ce qui vous empachai de commencer Ã  faire cette promenade de 10 minutes par jour ?
+User: [inconnu]Je sais pas
+Agent: [Baseline]Je comprends. Est-ce que vous avez des difficultai Ã  trouver le temps ou l'endroit pour faire cette promenade ?
+User: [Backchannel]oui
+Agent: [Baseline]Je comprends. Il peut aitre difficile de trouver le temps et l'endroit pour faire de l'exercice. Avez-vous pensai Ã  faire une promenade pendant votre pause dÃ©jeuner ou aprÃ¨s le travail ?
+User: [Backchannel]Non.
+Agent: [Baseline]Je comprends. Il peut aitre difficile de trouver le temps et l'endroit pour faire de l'exercice. Avez-vous pensai Ã  faire une promenade pendant votre pause dÃ©jeuner ou aprÃ¨s le travail ?
+User: [Backchannel]No.
+Agent: [Baseline]Je comprends. Il peut aitre difficile de trouver le temps et l'endroit pour faire de l'exercice. Avez-vous pensai Ã  faire une promenade pendant votre pause dÃ©jeuner ou aprÃ¨s le travail ?
+User: [Modifier les comportements malsains à l'avenir]oui je vais le faire
+Agent: [Baseline]C'est une excellente nouvelle, Zoai. Qu'est-ce qui vous empachai de commencer Ã  faire cette promenade de 10 minutes par jour ?
+User: [inconnu]Je ne sais pas.
+Agent: [Baseline]Je comprends. Est-ce que vous avez des difficultai Ã  trouver le temps ou l'endroit pour faire cette promenade ?
+User: [Partager des informations personnelles ou décrire un événement passé]oui aidez moi
+Agent: [Baseline]Bien sur, Zoai. Qu'est-ce qui vous empachai de trouver le temps ou l'endroit pour faire cette promenade de 10 minutes par jour ?
+User: [Backchannel]donnez moi des conseils
+Agent: [Baseline]Voici quelques conseils qui pourraient vous aider Ã  trouver le temps et l'endroit pour faire une promenade de 10 minutes par jour .    Trouvez un endroit prÃ¨s de chez vous ou de votre travail oÃ¹ vous pouvez faire une promenade.   Mettez votre alarme Ã  une heure oÃ¹ vous pouvez faire une promenade avant de commencer votre journÃ©e.   Faites une promenade pendant votre pause dÃ©jeuner ou aprÃ¨s le travail.   Demandez Ã  un ami ou Ã  un membre de votre famille de vous accompagner pendant votre promenade.   Trouvez une activitai physique que vous aimez et qui vous donne de l'ainergie, comme la danse ou le yoga.  J'espÃ¨re que ces conseils vous aideront Ã  trouver le temps et l'endroit pour faire une promenade de 10 minutes par jour. N'oubliez pas que chaque pas compte et que vous pouvez toujours augmenter la duraie de votre promenade Ã  mesure que vous vous sentez plus Ã  l'aise. Bonne chance, Zoai ! Merci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.
+User: [k]C'est c'est fini non
+Agent: [Baseline]Oui, c'est fini. Au revoir, Zoai.

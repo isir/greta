@@ -1,0 +1,3 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel]Hello, [NAME]. My name is Rene. How are doing?
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, Rene. I'm glad you're here today-how's your week been so far?

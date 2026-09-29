@@ -460,7 +460,13 @@ public class LipModel extends CharacterDependentAdapterThread implements Keyfram
         }
 
         if (targetPhonem.isVowel()) {
-            return lipdata.datas.get(refPhonem.getPhonemeType()).get(getBaseVowel(targetPhonem.getPhonemeType()));
+            return lipdata.datas.get(
+                    refPhonem.getPhonemeType()
+            ).get(
+                    getBaseVowel(
+                            targetPhonem.getPhonemeType()
+                    )
+            );
             //==== getBaseVowel seen in lines below
         }
         return lipdata.datas.get(refPhonem.getPhonemeType()).get(targetPhonem.getPhonemeType());

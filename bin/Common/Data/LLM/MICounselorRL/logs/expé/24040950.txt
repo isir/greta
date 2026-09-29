@@ -1,0 +1,29 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture]je m'apelle [NAME]
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] Tr?s bien.
+Agent: [Baseline]C'est super à entendre ! Alors, comment vous sentez-vous par rapport à votre niveau d'activité physique actuellement ?
+User: [inconnu] J'en ai en plus.
+Agent: [Baseline]Je vois. Pouvez-vous me dire ce qui vous motive à vouloir augmenter votre activité physique ?
+User: [inconnu] Pour y arriver fort partiellement.
+Agent: [Baseline]C'est un bon point de départ. Quelle serait une petite étape que vous pourriez envisager de faire cette semaine pour augmenter votre activité physique ?
+User: [Modifier les comportements malsains � l'avenir]uen heure en plus d esport
+Agent: [Baseline]C'est un objectif ambitieux. Pensez-vous que c'est réalisable pour vous cette semaine ?
+User: [inconnu]si ej me motive
+Agent: [Baseline]La motivation est clé ! Comment pensez-vous vous motiver pour atteindre cet objectif ?
+User: [inconnu]avec de  la musique
+Agent: [Baseline]Excellente idée ! La musique peut vraiment aider. Quel type d'activité physique aimeriez-vous faire pendant cette heure supplémentaire ?
+User: [inconnu] Quelque chose de ce genre.
+Agent: [Baseline]Compris. Quelle activité spécifique vous intéresse, comme la marche, la course, ou autre chose ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]l'escalade le roller le vel
+Agent: [Baseline]Ce sont de super activités ! Laquelle vous attire le plus cette semaine ?
+User: [inconnu]ca depend du temps si beau troller
+Agent: [Baseline]D'accord, donc si le temps est beau, vous ferez du roller. Et si le temps n'est pas idéal, quelle autre activité choisiriez-vous ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]musculation en interieur
+Agent: [Baseline]Parfait ! Donc, si le temps est beau, vous ferez du roller, et sinon, vous ferez de la musculation à l'intérieur. Cela semble être un bon plan. Comment vous sentez-vous par rapport à ce plan ?
+User: [Partager un sentiment ou une �motion positive] Bien.
+Agent: [Baseline]Super ! Avez-vous des obstacles potentiels en tête qui pourraient vous empêcher de suivre ce plan cette semaine ?
+User: [Modifier les comportements malsains � l'avenir;] Le temps je compte sur nos activit?s.
+Agent: [Baseline]C'est une bonne approche. Avez-vous besoin d'aide pour planifier ou organiser ces activités ?
+User: [inconnu] Non.
+Agent: [Baseline]Très bien, [NAME]. Vous avez un plan solide. N'hésitez pas à revenir si vous avez besoin de plus de soutien. Passez une excellente semaine ! END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modulated>
+    <elements>
+        <element h="50.0" id="Ini Manager - 1544700691170-189"
+            module="Ini Manager" name="Ini Manager" w="80.0" x="90.0" y="30.0">
+            <parameter name="file" value="Greta.ini"/>
+            <window h="531" visible="false" w="505" x="10" y="10"/>
+        </element>
+        <element h="50.0" id="Logs - 1544700696093-682" module="Logs"
+            name="Logs" w="80.0" x="190.0" y="30.0">
+            <parameter name="debug" value="true"/>
+            <parameter name="warning" value="true"/>
+            <parameter name="error" value="true"/>
+            <parameter name="info" value="true"/>
+            <window h="173" visible="false" w="324" x="10" y="10"/>
+        </element>
+        <element h="50.0" id="Log Frame - 1544700702468-724"
+            module="Log Frame" name="Log Frame" w="80.0" x="290.0" y="30.0">
+            <parameter name="blackBackground" value="true"/>
+            <window h="307" visible="false" w="466" x="494" y="2"/>
+        </element>
+        <element h="620.0" id="Environment - 1544700713383-564"
+            module="Environment" name="Environment" w="700.0" x="30.0" y="110.0">
+            <element h="560.0"
+                id="Character Manager - 1544700726358-960"
+                module="Character Manager" name="Character Manager"
+                w="650.0" x="20.0" y="30.0">
+                <parameter name="character_name" value="CAMILLE"/>
+                <window h="531" visible="false" w="505" x="10" y="10"/>
+                <element h="50.0" id="TTS - 1544700939858-569"
+                    module="TTS" name="TTS" w="80.0" x="440.0" y="30.0">
+                    <parameter name="doPhonemes" value="true"/>
+                    <parameter name="doTemporize" value="true"/>
+                    <parameter name="doAudio" value="true"/>
+                    <window h="127" visible="false" w="437" x="10" y="10"/>
+                </element>
+                <element h="230.0"
+                    id="Behavior Planner - 1544700734561-356"
+                    module="Behavior Planner" name="Behavior Planner"
+                    w="80.0" x="40.0" y="100.0">
+                    <window h="120" visible="false" w="324" x="10" y="10"/>
+                </element>
+                <element h="50.0"
+                    id="Animation Keyframe Performer - 1544700747777-220"
+                    module="Animation Keyframe Performer" name="Body"
+                    w="280.0" x="240.0" y="100.0"/>
+                <element h="50.0"
+                    id="Face Keyframe Performer - 1554477289165-429"
+                    module="Face Keyframe Performer" name="Face"
+                    w="80.0" x="240.0" y="160.0">
+                    <parameter name="blinking" value="true"/>
+                </element>
+                <element h="50.0"
+                    id="Simple AU Performer - 1544700795765-328"
+                    module="Simple AU Performer" name="AU to FAP"
+                    w="80.0" x="340.0" y="350.0">
+                    <window h="338" visible="false" w="416" x="10" y="10"/>
+                </element>
+                <element h="50.0" id="Lip Blender - 1554477283159-751"
+                    module="Lip Blender" name="Lip Blender" w="80.0"
+                    x="340.0" y="220.0"/>
+                <element h="50.0"
+                    id="Audio Keyframe Performer - 1554477294171-845"
+                    module="Audio Keyframe Performer" name="Audio"
+                    w="280.0" x="240.0" y="280.0"/>
+                <element h="230.0"
+                    id="MPEG4 Animatable - 1544700808257-513"
+                    module="MPEG4 Animatable" name="MPEG4 Animatable"
+                    w="80.0" x="540.0" y="100.0">
+                    <parameter name="posX" value="0.0"/>
+                    <parameter name="scaleX" value="1.0"/>
+                    <parameter name="posY" value="0.0"/>
+                    <parameter name="scaleY" value="1.0"/>
+                    <parameter name="posZ" value="0.0"/>
+                    <parameter name="rotX" value="0.0"/>
+                    <parameter name="rotW" value="1.0"/>
+                    <parameter name="rotZ" value="0.0"/>
+                    <parameter name="rotY" value="0.0"/>
+                    <parameter name="scaleZ" value="1.0"/>
+                    <window h="178" visible="false" w="457" x="10" y="10"/>
+                </element>
+                <element h="50.0"
+                    id="NVBG_MM_Controller - 1619462027713-169"
+                    module="NVBG_MM_Controller"
+                    name="NVBG_MM_Controller" w="80.0" x="540.0" y="420.0">
+                    <window h="92" visible="false" w="324" x="-5" y="102"/>
+                </element>
+                <element h="50.0" id="Feedbacks - 1721057588907-99"
+                    module="Feedbacks" name="Feedbacks" w="80.0"
+                    x="140.0" y="420.0">
+                    <window h="345" visible="false" w="405" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="Lip Model - 1721381426095-674"
+                    module="Lip Model" name="Lip Model" w="80.0"
+                    x="240.0" y="220.0"/>
+                <element h="50.0" id="DeepGram - 1722345283838-187"
+                    module="DeepGram" name="DeepGram" w="80.0" x="40.0" y="420.0">
+                    <window h="337" visible="true" w="974" x="132" y="481"/>
+                </element>
+                <element h="230.0"
+                    id="Incremental Realizer V2 - 1726674405648-41"
+                    module="Incremental Realizer V2"
+                    name="Incremental Realizer V2" w="80.0" x="140.0" y="100.0"/>
+                <element h="50.0" id="ASAP - 1726674506560-267"
+                    module="ASAP" name="ASAP" w="80.0" x="240.0" y="420.0">
+                    <window h="404" visible="true" w="972" x="-1058" y="128"/>
+                </element>
+                <element h="50.0"
+                    id="MICounselorIncrementalDA - 1726674556897-235"
+                    module="MICounselorIncrementalDA"
+                    name="MICounselorIncrementalDA" w="80.0" x="40.0" y="350.0">
+                    <window h="560" visible="true" w="973" x="553" y="169"/>
+                </element>
+                <element h="50.0"
+                    id="OpenFace2 Output Stream Reader - 1726674640320-771"
+                    module="OpenFace2 Output Stream Reader"
+                    name="OpenFace2 Output Stream Reader" w="180.0"
+                    x="340.0" y="420.0">
+                    <parameter name="zeroMQHost" value="localhost"/>
+                    <parameter name="csvFileName" value=""/>
+                    <parameter name="zeroMQPort" value="5000"/>
+                    <parameter name="tabIndex" value="1"/>
+                    <window h="492" visible="true" w="973" x="-1418" y="493"/>
+                </element>
+                <element h="50.0"
+                    id="FML File Reader Meaning Miner - 1726675336104-41"
+                    module="FML File Reader Meaning Miner"
+                    name="FML File Reader Meaning Miner" w="80.0"
+                    x="40.0" y="30.0">
+                    <parameter name="fileName" value="C:\Users\isir\Documents\greta_20240917_demo_v2\greta\bin\Examples\DemoEN\MeaningMiner_FML_Example.xml"/>
+                    <window h="100" visible="true" w="497" x="-5" y="4"/>
+                </element>
+                <element h="50.0"
+                    id="Body Head Noise - 1726712038420-309"
+                    module="Body Head Noise" name="Body Head Noise"
+                    w="80.0" x="540.0" y="350.0">
+                    <window h="262" visible="true" w="264" x="543" y="139"/>
+                </element>
+                <element h="110.0" id="Face Blender - 1733245963207-254"
+                    module="Face Blender" name="Face Blender" w="80.0"
+                    x="440.0" y="160.0"/>
+                <element h="50.0"
+                    id="Simple AU Performer - 1733246052071-548"
+                    module="Simple AU Performer"
+                    name="Simple AU Performer" w="80.0" x="340.0" y="160.0">
+                    <window h="339" visible="false" w="416" x="0" y="0"/>
+                </element>
+                <element h="50.0" id="Microsaccade - 1733503581249-40"
+                    module="Microsaccade" name="Microsaccade" w="80.0"
+                    x="400.0" y="480.0">
+                    <window h="339" visible="true" w="416" x="-1594" y="97"/>
+                </element>
+                <element h="50.0" id="AzureTTS - 1737993630268-603"
+                    module="AzureTTS" name="AzureTTS" w="80.0" x="540.0" y="30.0">
+                    <window h="335" visible="false" w="411" x="0" y="0"/>
+                </element>
+            </element>
+        </element>
+        <element h="620.0" id="Ogre Player - 1720626419025-143"
+            module="Ogre Player" name="Ogre Player" w="80.0" x="750.0" y="110.0">
+            <parameter name="posX" value="0.00467294454574585"/>
+            <parameter name="posY" value="1.5909990072250366"/>
+            <parameter name="posZ" value="0.6788739562034607"/>
+            <parameter name="roll" value="0.0"/>
+            <parameter name="pitch" value="-0.018661770969629288"/>
+            <parameter name="yaw" value="-0.011051664128899574"/>
+            <window h="1039" visible="true" w="974" x="953" y="0"/>
+        </element>
+        <element h="50.0" id="Microphone - 1725636945037-440"
+            module="Microphone" name="Microphone" w="80.0" x="390.0" y="30.0">
+            <window h="347" visible="false" w="418" x="0" y="0"/>
+        </element>
+        <element h="50.0" id="ActiveMQ Broker - 1726327376029-783"
+            module="ActiveMQ Broker" name="ActiveMQ Broker" w="80.0"
+            x="490.0" y="30.0">
+            <parameter name="port" value="61616"/>
+            <window h="387" visible="false" w="356" x="0" y="0"/>
+        </element>
+        <element h="50.0"
+            id="RestPoseSetterWithFeedback - 1726674529272-347"
+            module="RestPoseSetterWithFeedback"
+            name="RestPoseSetterWithFeedback" w="80.0" x="290.0" y="490.0">
+            <window h="118" visible="false" w="503" x="-7" y="190"/>
+        </element>
+        <element h="50.0" id="TurnManagement - 1733245872015-22"
+            module="TurnManagement" name="TurnManagement" w="80.0"
+            x="190.0" y="630.0">
+            <window h="335" visible="false" w="396" x="0" y="0"/>
+        </element>
+    </elements>
+    <connections>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Incremental Realizer V2 - 1726674405648-41" target="Animation Keyframe Performer - 1544700747777-220"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Incremental Realizer V2 - 1726674405648-41" target="Face Keyframe Performer - 1554477289165-429"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Incremental Realizer V2 - 1726674405648-41" target="Lip Model - 1721381426095-674"/>
+        <connection connector="SignalEmitterToKeyFramePerformer"
+            source="Incremental Realizer V2 - 1726674405648-41" target="Audio Keyframe Performer - 1554477294171-845"/>
+        <connection connector="addFeedbackInput"
+            source="Incremental Realizer V2 - 1726674405648-41" target="Feedbacks - 1721057588907-99"/>
+        <connection connector="ASRToLLM"
+            source="DeepGram - 1722345283838-187" target="MICounselorIncrementalDA - 1726674556897-235"/>
+        <connection connector="LipSourceForLipBlender"
+            source="Lip Model - 1721381426095-674" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="Face Keyframe Performer - 1554477289165-429" target="Simple AU Performer - 1733246052071-548"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="FML File Reader Meaning Miner - 1726675336104-41" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="IntentionEmitterToIntentionPerformer"
+            source="MICounselorIncrementalDA - 1726674556897-235" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="setTTS" source="TTS - 1544700939858-569" target="AzureTTS - 1737993630268-603"/>
+        <connection connector="connectPlayerToEnvironment"
+            source="Ogre Player - 1720626419025-143" target="Environment - 1544700713383-564"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Lip Blender - 1554477283159-751" target="Face Blender - 1733245963207-254"/>
+        <connection connector="AudioEmitter To AudioPerformer"
+            source="Audio Keyframe Performer - 1554477294171-845" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1721057588907-99" target="DeepGram - 1722345283838-187"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1721057588907-99" target="ASAP - 1726674506560-267"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1721057588907-99" target="RestPoseSetterWithFeedback - 1726674529272-347"/>
+        <connection connector="addFeedbackOutput"
+            source="Feedbacks - 1721057588907-99" target="TurnManagement - 1733245872015-22"/>
+        <connection connector="addLogOutput"
+            source="Logs - 1544700696093-682" target="Log Frame - 1544700702468-724"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Behavior Planner - 1544700734561-356" target="Incremental Realizer V2 - 1726674405648-41"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Simple AU Performer - 1544700795765-328" target="Lip Blender - 1554477283159-751"/>
+        <connection connector="AUEmitterToAUPerformer"
+            source="ASAP - 1726674506560-267" target="Simple AU Performer - 1544700795765-328"/>
+        <connection connector="SignalEmitterToSignalPerformer"
+            source="Microsaccade - 1733503581249-40" target="Incremental Realizer V2 - 1726674405648-41"/>
+        <connection connector="TurnManagerToIntentionPerformer"
+            source="TurnManagement - 1733245872015-22" target="Behavior Planner - 1544700734561-356"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Animation Keyframe Performer - 1544700747777-220" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="FAPFrameEmitterToFAPFramePerformer"
+            source="Face Blender - 1733245963207-254" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection connector="connectAnimatableToEnvironment"
+            source="MPEG4 Animatable - 1544700808257-513" target="Environment - 1544700713383-564"/>
+        <connection connector="FaceSourceForFaceBlender"
+            source="Simple AU Performer - 1733246052071-548" target="Face Blender - 1733245963207-254"/>
+        <connection connector="BAPFrameEmitterToBAPFramePerformer"
+            source="Body Head Noise - 1726712038420-309" target="MPEG4 Animatable - 1544700808257-513"/>
+        <connection
+            connector="RestPoseSetterWithFeedbackToSignalPerformer"
+            source="RestPoseSetterWithFeedback - 1726674529272-347" target="Incremental Realizer V2 - 1726674405648-41"/>
+        <connection
+            connector="RestPoseSetterWithFeedbackToSignalPerformer"
+            source="RestPoseSetterWithFeedback - 1726674529272-347" target="Feedbacks - 1721057588907-99"/>
+    </connections>
+</modulated>

@@ -6,8 +6,8 @@ import pickle
 import argparse
 from openai import OpenAI
 import sys
-from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
+from mistralai import Mistral
+from mistralai.models import UserMessage, AssistantMessage, SystemMessage
 
 
 messages = None
@@ -18,8 +18,10 @@ with open(api_key_file, 'r') as f:
     MISTRAL_API_KEY = f.read()
 
 model = "mistral-large-latest"
-client_online = MistralClient(api_key=MISTRAL_API_KEY)
-client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+# client_online = MistralClient(api_key=MISTRAL_API_KEY)
+# client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+client_online = None
+client = None
 
 def ask(question,messages=None,messages_online=None):
 
@@ -35,6 +37,12 @@ def ask(question,messages=None,messages_online=None):
 
 
 def ask_local_chunk(question,language, system_prompt, messages=None):
+
+    global client
+    
+    if client == None:
+        
+        client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
     
     if language == 'FR':
         prompt=[
@@ -77,6 +85,11 @@ def ask_local_chunk(question,language, system_prompt, messages=None):
  
 def ask_online_chunk(question,language,system_prompt,messages=None):
 
+    global client_online
+    
+    if client_online == None:
+        
+        client_online = Mistral(api_key=MISTRAL_API_KEY)
 
     if language == 'FR':
         fr_prompt = """
@@ -85,7 +98,7 @@ def ask_online_chunk(question,language,system_prompt,messages=None):
        Base de connaissances - Entretien  Motivationnel (EM): Principes clés: Exprimer de l'empathie: Démontre activement sa compréhension et son acceptation des expériences, des sentiments et des points de vue du client. Utiliser l'écoute réflexive pour transmettre cette compréhension. Développer la divergence: Aider les clients à identifier l'écart entre leurs comportements actuels et les objectifs souhaités. Développer la divergence: Aider le client à identifier l'écart entre leurs comportements actuels et les objectifs souhaités. Se concentrer sur les conséquences négatives des actions actuelles et les avantages potentiels du changement. Evitez les arguments: Résister à l'envie de confronter ou persuader directement le client. Les arguments peuvent le mettre sur la défensive et le rendre moins susceptible de changer. Faire face à la résistance: Reconnaitre et explorer la réticence ou l'ambivalence du client à l'égard du changement. Evitez la confrontation ou les tentatives de surmonter la résistence. Au lieu de cela, reformuler ses déclarations pour mettre en évidence le potentiel de changements. Soutenir l'auto-efficacité: Encourager la croyance du client en sa capacité à apporter des changements positifs. Mettre en évidence les réussites et les points forts passés et renforcer sa capacité à surmonter les obstacles. Techniques de base (OARS): Questions ouvertes: Utiliser des questions pour encourager les clients à élaborer et à partager leurs pensées, leurs sentiments et leurs expériences. Exemples: A quoi ce changement ressemblerait-il ? Quelles sont vos inquiétudes concernat ce changement ?  Affirmations: Reconnaissez les points forts, les efforts et les changements positifs du client. Exemples: Il faut beaucoup de courage pour parler de cela; C'est une excellente idée; Vous avez déjà fait des progrès, et cela mérite d'être reconnu. Ecoute reflexive: Résumez et réflétez les déclarations du client dans le contenu et les émotions sous-jacentes. Exemples: Il semble que vous vous sentiez frustré et incertain sur la façon d'avancer; Vous dites donc que vous voulez faire un changement et les défis potentiels qu'il a identifiés. Exemple: Pour résumer, nous avons discuté de X, Y et Z. Les quatres processus de l'EM: Engagement: Construisez une relation de collaboration et de confiance avec le client grâce à l'empathie, au respect et à l'écoute active. Ciblage: Aidez le client à identifier un comportement cible spécifique pour le changement, en explorant les raisons et les motivations qui le sous-tendent. 2vocation: Guidez le client pour qu'il exprime ses raisons de changer (discours sur le changement). Renforcez leurs motivations et aidez-les à visualiser les avantages du changement. Planification: Aidez le client à élaborer un plan concret avec des étapes réalisables vers son objectif. Aidez-le à anticiper les obstacles et à développer des stratégies pour les surmonter. Partenariat, acceptation, compassion et évocation (PACE): Le partenariat est une collaboration active entre le prestataire et le client. Un client est plus disposé à exprimer ses préoccupations lorsque le prestataire est empathique et montre une véritable curiosité à l'égard de son point de vue. Dans ce partenariat, le prestataire influence doucement le client, mais c'est le client qui mène la conversation. L'acceptation est l'acte de démontrer du respect et de l'approbation du client. Elle montre l'intention du prestataire de comprendre le point de vue et les préoccupations du client. Les prestataires peuvent utiliser les quatres composantes de l'acceptation de l'EM (valeur absolue, empathie précise, soutien à l'automonie et affirmation) pour les décisions du client. La compassion fait référence au fait que le prestataire promeut activement le bien-être du client et donne la priorité à ses besoins. L'évocation est le processus de susciter et d'explorer les motivations, les valeurs, les forces et les ressources existantes d'un client. Distinguer le discours de soutien et le discours de changement: le discours de changement consiste en des déclarations qui favorisent les changements (je dois arreter de boire de l'alcool fort ou je vais à nouveau atterir en prison). Il est normal que les individus aient deux sentiments différents à l'idée d'apporter des changements fondamentaux à leur vie. Cette ambivalence peut être un obstacle au changement, mais n'indique pas un manque de connaissances ou de compétences sur la manière de changer. Le discours de soutien consiste en des déclarations du client qui soutiennent le fait de ne pas changer un comportement à risque pour la santé 'par exemple, l'alcool ne m'a jamais affecté). Reconnaitre le discours de soutien et le discours de changements chez les clients aidera les prestataires à mieux gérer l'ambivalence. Des études montrent qu'encourager, susciter et refléter correctement le discours de changement est associé à de meilleurs résultats dans le comportement de consommation de substances du client. EM avec les clients toxicomanes : Comprendre l'ambivalence : les clients toxicomanes éprouvent souvent des sentiments contradictoires à propos du changement. Soutenez-les et motivez-les à changer tout en favorisant l'autonomie du client et en guidant la conversation d'une manière qui ne semble pas coercitive. Évitez les étiquettes : concentrez-vous sur les comportements et les conséquences plutôt que d'utiliser des étiquettes comme toxicomane ou alcoolique. Concentrez-vous sur les objectifs du client : Aidez le client à relier la consommation de substances à ses objectifs et valeurs plus larges, augmentant ainsi sa motivation à changer.
        Base de connaissances – Tabagisme : Tabagisme et décès : Selon le CDC, le tabagisme est la principale cause de décès évitables aux États-Unis. Le tabagisme est responsable d'environ 90 % (ou 9 décès sur 10) de tous les décès par cancer du poumon.1,2 Chaque année, plus de femmes meurent du cancer du poumon que du cancer du sein. Le tabagisme cause plus de décès chaque année que les causes suivantes combinées : virus de l'immunodéficience humaine (VIH), consommation de drogues illicites, consommation d'alcool, blessures liées à des accidents de la route, incidents liés aux armes à feu. Tabagisme et risques accrus pour la santé : Les fumeurs sont plus susceptibles que les non-fumeurs de développer une maladie cardiaque, un accident vasculaire cérébral et un cancer du poumon. Le tabagisme entraîne une diminution de la santé générale, une augmentation de l'absentéisme au travail et une augmentation de l'utilisation et du coût des soins de santé. Tabagisme et maladies cardiovasculaires : Les fumeurs sont plus à risque de maladies qui affectent le cœur et les vaisseaux sanguins (maladies cardiovasculaires). Le tabagisme provoque des accidents vasculaires cérébraux et des maladies coronariennes, qui sont parmi les principales causes de décès aux États-Unis. Même les personnes qui fument moins de cinq cigarettes par jour peuvent présenter des signes précoces de maladie cardiovasculaire. Le tabagisme endommage les vaisseaux sanguins et peut les faire s'épaissir et se rétrécir. Cela accélère le rythme cardiaque et augmente la tension artérielle. Des caillots peuvent également se former. Un accident vasculaire cérébral se produit lorsque : Un caillot bloque le flux sanguin vers une partie de votre cerveau ; Un vaisseau sanguin dans ou autour de votre cerveau éclate. Les blocages causés par le tabagisme peuvent également réduire le flux sanguin vers vos jambes et votre peau. Tabagisme et maladies respiratoires : Le tabagisme peut provoquer une maladie pulmonaire en endommageant vos voies respiratoires et les petits sacs d'air (alvéoles) présents dans vos poumons. Les maladies pulmonaires causées par le tabagisme comprennent la BPCO, qui comprend l'emphysème et la bronchite chronique. Le tabagisme provoque la plupart des cas de cancer du poumon. Si vous souffrez d'asthme, la fumée de tabac peut déclencher une crise ou l'aggraver. Les fumeurs ont 12 à 13 fois plus de risques de mourir de la BPCO que les non-fumeurs. Tabagisme et cancer : Le tabagisme peut provoquer un cancer presque partout dans votre corps : vessie, sang (leucémie myéloïde aiguë), col de l’utérus, côlon et rectum (colorectal), œsophage, rein et uretère, larynx, foie, oropharynx (comprend des parties de la gorge, de la langue, du palais mou et des amygdales), pancréas, estomac, trachée, bronches et poumons. Le tabagisme augmente également le risque de mourir d’un cancer et d’autres maladies chez les patients atteints de cancer et les survivants. Si personne ne fumait, un décès par cancer sur trois aux États-Unis ne se produirait pas. Tabagisme et autres risques pour la santé : Le tabagisme nuit à presque tous les organes du corps et affecte la santé globale d’une personne. Le tabagisme peut rendre plus difficile pour une femme de devenir enceinte. Il peut également affecter la santé de son bébé avant et après la naissance. Le tabagisme augmente les risques de : Accouchement prématuré (précoce), Mortinatalité (décès du bébé avant la naissance), Faible poids à la naissance, Syndrome de mort subite du nourrisson (MSN ou mort au berceau), Grossesse extra-utérine, Fentes orofaciales chez les nourrissons. Le tabagisme peut également affecter le sperme des hommes, ce qui peut réduire la fertilité et également augmenter les risques de malformations congénitales et de fausses couches. Le tabagisme peut affecter la santé des os. Les femmes qui ont dépassé l’âge de procréer et qui fument ont des os plus fragiles que les femmes qui n’ont jamais fumé. Elles sont également plus à risque de fractures osseuses. Le tabagisme affecte la santé de vos dents et de vos gencives et peut entraîner la perte de dents. Le tabagisme peut augmenter le risque de cataracte (opacification du cristallin de l’œil qui rend la vision difficile). Il peut également provoquer une dégénérescence maculaire liée à l’âge (DMLA). La DMLA est une lésion d’une petite tache près du centre de la rétine, la partie de l’œil nécessaire à la vision centrale. Le tabagisme est une cause de diabète sucré de type 2 et peut le rendre plus difficile à contrôler. Le risque de développer un diabète est de 30 à 40 % plus élevé chez les fumeurs actifs que chez les non-fumeurs. Le tabagisme entraîne des effets indésirables généraux sur l’organisme, notamment une inflammation et une diminution de la fonction immunitaire. Le tabagisme est une cause de polyarthrite rhumatoïde. Arrêter de fumer et réduire les risques : Arrêter de fumer est l’une des mesures les plus importantes que les gens peuvent prendre pour améliorer leur santé. Cela est vrai quel que soit leur âge ou depuis combien de temps ils fument. Visitez la page Avantages de l’arrêt du tabac pour plus d’informations sur la façon dont l’arrêt du tabac peut améliorer votre santé. [/INST]"""
         prompt=[
-         ChatMessage(role= "user", content= fr_prompt+system_prompt)
+         UserMessage(content= fr_prompt+system_prompt)
          ]
     else:
         en_prompt = """
@@ -99,14 +112,14 @@ Knowledge Base – Smoking: Smoking and Death: According to the CDC, Cigarette s
    """
 
         prompt=[
-        ChatMessage(role= "user", content= en_prompt+system_prompt)
+        UserMessage(content= en_prompt+system_prompt)
          ] 
     if messages is not None:
         for msg in messages:
             prompt.append(msg)
-    prompt.append(ChatMessage(role="user", content=question))
+    prompt.append(UserMessage(content=question))
 
-    response = client_online.chat_stream(
+    response = client_online.chat.stream(
          model=model,
            messages=prompt
     )
@@ -114,8 +127,8 @@ Knowledge Base – Smoking: Smoking and Death: According to the CDC, Cigarette s
     curr_sent= ""
     min_response_time = 1
     start = time.perf_counter() 
-    for chunk in response:
-        
+    for event in response:
+        chunk = event.data
         if chunk.choices[0].delta.content is None:
             pass
         elif chunk.choices[0].delta.content in [".","?","!",";"]:
@@ -143,8 +156,8 @@ def append_interaction_to_chat_log(question, answer, messages=None,messages_onli
         messages_online = []
     messages.append({"role":"user", "content":question})
     messages.append({"role":"assistant", "content":answer})
-    messages_online.append(ChatMessage(role='user',content=question,tools=None))
-    messages_online.append(ChatMessage(role='assistant',content=answer,tools=None))
+    messages_online.append(UserMessage(content=question))
+    messages_online.append(AssistantMessage(content=answer))
     return messages,messages_online
 
 # if __name__ == "__main__":

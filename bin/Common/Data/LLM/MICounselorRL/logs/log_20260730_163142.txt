@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good. And you?
+Agent: [Baseline]I'm doing well, thanks for asking. I understand your doctor referred you to me. How do you feel about that?
+User: [Sharing negative feeling or emotion]A bit A bit A bit worried.
+Agent: [Baseline]It's completely normal to feel that way, [NAME]. Can you tell me more about what's making you worried?
+User: [Changing unhealthy behavior in the future]Yeah. Because I'm drinking too much.
+Agent: [Baseline]I see. How much is too much for you, [NAME]?

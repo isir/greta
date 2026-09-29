@@ -1,0 +1,29 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel] Hello?
+Agent: [Baseline]Don't worry, we can continue without it.How are you today, and what brings you here to chat with me?
+User: [Sharing personal information or Describe past event; Changing unhealthy behavior in the future] Wanted to discuss about my activity physical activity.
+Agent: [Baseline]That's great to hear. How do you feel about your current level of physical activity?
+User: [Sharing negative feeling or emotion; Understanding or New Perspective] Think it's not enough.
+Agent: [Baseline]What makes you feel it's not enough? Any specific concerns?
+User: [Sharing negative feeling or emotion;] I feel tired.
+Agent: [Baseline]It sounds like fatigue is weighing on you. What do you think contributes to that tiredness?
+User: [Asking for Medical Information] Could you help me figure it out?
+Agent: [Baseline]Of course. When do you feel most tired-morning, afternoon, or evening?
+User: [Asking for Medical Information; Sharing personal information or Describe past event] Could you help me figure it out? Could you help me figure it out? Could you help me figure it out? Could you help me figure it out? Could you help me figure it out? Morning.
+Agent: [Baseline]Got it. Do you feel rested when you wake up, or does the tiredness start right away?
+User: [Sharing negative feeling or emotion;] Stops right away.
+Agent: [Baseline]That must be frustrating. How much time do you spend sitting or lying down during the day?
+User: [Sharing personal information or Describe past event;] I'm an office worker, so I I work in, like, for eight hours a day at least.
+Agent: [Baseline]I see. Do you take any breaks to stand or move during those 8 hours?
+User: [Sharing personal information or Describe past event;] I'm an office worker, so I I work in, like, for eight hours a day at least. I'm an office worker, so I I work in, like, for eight hours a day at least. I'm an office worker, so I I work in, like, for eight hours a day at least. I'm an office worker, so I I work in, like, for eight hours a day at least. I'm an office worker, so I I work in, like, for eight hours a day at least. I'm an office worker, so I I work in, like, for eight hours a day at least. I'm an office worker, so I I work in, like, for eight hours a day at least. I'm an office worker, so I I work in, like, for eight hours a day at least. Some words of the minutes, I guess, around ten to fifteen minutes.
+Agent: [Baseline]That's a good start. What do you usually do during those breaks? Walk, stretch, or something else?
+User: [Sharing personal information or Describe past event;] Just walk walking.
+Agent: [Baseline]That's great! Even short walks help. Would you like to try adding one more small movement this week?
+User: [Asking for Medical Information; Changing unhealthy behavior in the future] Why not? What kind of moves are you talking about?
+Agent: [Baseline]How about standing up every hour to stretch or walk to the water cooler? Just 1-2 minutes each time.
+User: [Backchannel; Sharing personal information or Describe past event] I do so.
+Agent: [Baseline]That's excellent! What if we aim for *two* short walks this week-maybe one extra lap around the office? Would that feel doable?
+User: [Backchannel; Changing unhealthy behavior in the future] Yes, of course. It is.
+Agent: [Baseline]Great! Let's try that. How about we check in next week to see how it went? Take care, and remember-every step counts. **END_CONVO**Thank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.
+User: [Greeting or Closing;] Very much. See you.
+Agent: [Baseline]You're very welcome. Wishing you energy and small wins this week! **END_CONVO** Thank you for taking the time to chat with me. I hope this discussion has been helpful. You've already taken a big step by thinking things through. I wish you every success in your endeavours!

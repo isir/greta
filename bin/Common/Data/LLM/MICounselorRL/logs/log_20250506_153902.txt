@@ -1,0 +1,29 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Moi je suis [NAME].
+Agent: [Ask about current Emotions]Enchantée, [NAME]Bonjour, je suis Camille. Enchantée, [NAME]. Comment vous sentez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] Je vais bien. Merci.
+Agent: [Ask for Consent]D'accord, [NAME]. Est-ce que vous êtes d'accord pour que nous parlions de votre activité physique aujourd'hui ?
+User: [Backchannel] J'ai fait expr?s de parler quoi qu'elle parle, ?a marche aussi. ?a ne marchait pas Ah, d'accord, oui.
+Agent: [Empathic Reaction]Je comprends, [NAME]. Parfois, il peut être difficile de parler de certains sujets. Merci de votre confiance. Comment trouvez-vous votre niveau d'activité physique actuel ?
+User: [inconnu] J'ai fait expr?s de parler quoi qu'elle parle, ?a marche aussi. ?a ne marchait pas Ah, d'accord, oui.
+Agent: [Empathic Reaction]Je comprends que ce n'est pas toujours facile de parler de ces sujets, [NAME]. Merci de votre confiance. Comment trouvez-vous votre niveau d'activité physique actuel ?
+User: [Backchannel] Oui.
+Agent: [Progress Acknowledgment]Merci de partager cela, [NAME]. C'est un bon premier pas pour discuter de votre activité physique. Comment vous sentez-vous par rapport à votre niveau d'activité physique actuel ?
+User: [inconnu] Que
+Agent: [Reflection]Je comprends que vous êtes prêt à parler de votre activité physique, [NAME]. C'est un bon premier pas. Comment vous sentez-vous par rapport à votre niveau d'activité physique actuel ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Partager un sentiment ou une �motion n�gative;] Moyen.
+Agent: [Planning with the Patient]Merci pour votre honnêteté, [NAME]. Quelle petite étape pourriez-vous envisager pour augmenter votre activité physique cette semaine ?
+User: [Modifier les comportements malsains � l'avenir] Marcher, marcher beaucoup, j'ai march?.
+Agent: [Medical Education]C'est un excellent point de départ, [NAME]. Marcher est une activité simple et bénéfique. Chaque pas en plus est bénéfique pour la santé. Avez-vous une idée de combien de temps vous pourriez marcher chaque jour la semaine prochaine ?
+User: [Modifier les comportements malsains � l'avenir] Une heure et demie par jour.
+Agent: [Reflection]Marcher une heure et demie par jour est un objectif ambitieux, [NAME]. Chaque pas en plus est bénéfique pour la santé. Seriez-vous à l'aise de commencer par une durée plus courte, par exemple 30 minutes par jour, pour voir comment cela se passe ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Mais je fais d?j? plus de trente mille par jour.
+Agent: [Reflection]C'est impressionnant, [NAME] ! Vous faites déjà beaucoup d'efforts pour marcher. Comment vous sentez-vous à ce sujet ?
+User: [Partager un sentiment ou une �motion positive]Vous etes gentille
+Agent: [Reflection]Merci, [NAME]. C'est gentil de votre part. Vous semblez déjà très actif avec vos 30 000 pas par jour. Comment vous sentez-vous par rapport à cette activité ?
+User: [Partager un sentiment ou une �motion positive]Vous etes gentille
+Agent: [Give Solution]Merci, [NAME]. Si vous marchez déjà beaucoup, c'est excellent. Une idée pourrait être d'intégrer des pauses actives dans votre journée, comme vous lever toutes les heures pour marcher un peu. Cela peut aider à réduire la sédentarité. Qu'en pensez-vous ?
+User: [inconnu] Une remise ? quatre-mille-pains.
+Agent: [Backchannel]Merci de partager cela, [NAME]. C'est impressionnant. Y a-t-il quelque chose de spécifique que vous aimeriez discuter ou améliorer concernant votre activité physique ?
+User: [Modifier les comportements malsains � l'avenir]J'aimerai faire 30 milles pas
+Agent: [Ask for Consent]Bien sûr, [NAME]. Êtes-vous d'accord pour discuter de la façon d'atteindre cet objectif de 30 000 pas par jour ?

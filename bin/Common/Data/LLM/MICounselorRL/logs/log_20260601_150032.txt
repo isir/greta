@@ -1,0 +1,27 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]je m'apelle rachelle
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Partager un sentiment ou une émotion négative]Je vais bien, je suis un peu stressÃ©e.
+Agent: [Baseline]Je comprends, [NAME]. Le stress est une aimotion normale. Qu'est-ce qui vous stresse en ce moment ?
+User: [Partager un sentiment ou une émotion négative]Un mÃ©moire de fin de master.
+Agent: [Baseline]Ah, je vois. Les aitudes peuvent aitre stressantes, surtout avec un maimoire en jeu. Comment jairez-vous jainairalement le stress, [NAME] ?
+User: [Compréhension ou nouvelle perspective]Je vois des amis et je sors.
+Agent: [Baseline]Je comprends. Il est important de prendre soin de soi et de se daitendre. Cependant, je remarquai que vous avez mentionnai que vous sortez souvent. Combien de verres d'alcool buvez-vous jainairalement lorsque vous sortez avec des amis ?
+User: [Le maintien d'un comportement malsain à l'avenir]EnvironDeux.
+Agent: [Baseline]Je vois. Savez-vous que la consommation d'alcool peut augmenter le stress et les niveaux de stress ? Il peut aigalement affecter votre santai de maniaire naigative. Avez-vous daija envisajai de raiduire votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Oui d'ailleurs, j'ai rÃ©duit ma consommation d'alcool au fil des annÃ©es.
+Agent: [Baseline]C'est une excellente nouvelle, [NAME]. Qu'est-ce qui vous a motivai a raiduire votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Les migraines du Long BenoÃ®t.
+Agent: [Baseline]Je comprends. Les migraines peuvent aitre trais daisagraiables. Avez-vous daija envisajai de raiduire davantage votre consommation d'alcool pour aiviter les migraines ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non pas vraiment.
+Agent: [Baseline]Je comprends. Cependant, la consommation d'alcool peut augmenter la fraiquence et la gravitai des migraines. Avez-vous daija envisajai de fixer un objectif de consommation d'alcool pour cette semaine ? Par exemple, limiter votre consommation a un ou deux verres par jour, maximum ?
+User: [Compréhension ou nouvelle perspective]Non, je n'y avais pas pensÃ©, parce que je ne bois pas tous les jours.
+Agent: [Baseline]Je comprends. Cependant, maime une consommation modaiiai peut avoir des effets naigatifs sur votre santai. Avez-vous daija envisajai de prendre des jours sans alcool dans la semaine ?
+User: [Compréhension ou nouvelle perspective]Je n'y avais pas pensÃ©.
+Agent: [Baseline]C'est une excellente idai, [NAME]. Prendre des jours sans alcool dans la semaine peut vous aider a raiduire votre consommation globale d'alcool et a amailiorer votre santai. Avez-vous daija envisajai de fixer un objectif de consommation d'alcool pour cette semaine ? Par exemple, prendre deux jours sans alcool dans la semaine ?
+User: [Compréhension ou nouvelle perspective]Je n'y avais pas pensÃ©, mais c'est une bonne idÃ©e.
+Agent: [Baseline]Je suis ravi que vous le pensiez, [NAME]. Qu'est-ce qui vous empachai de fixer un objectif de consommation d'alcool pour cette semaine ?
+User: [Compréhension ou nouvelle perspective]Je n'avais pas eu le temps de rÃ©flÃ©chir.
+Agent: [Baseline]Je comprends. Prenez-vous du temps pour vous-maime et pour raiflaichir a vos habitudes de consommation d'alcool ?
+User: [inconnu]WeiÃ ich.
+Agent: [Baseline]END_CONVOMerci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.

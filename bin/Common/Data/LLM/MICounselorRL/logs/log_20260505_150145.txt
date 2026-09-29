@@ -1,0 +1,17 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME]. Je suis
+Agent: [Baseline]Enchantaie, [NAME]Je comprends tout a fait que vous souhaitiez discuter de quelque chose qui vous praioccupe actuellement. Que diriez-vous d'en parler ensemble aujourd'hui ?
+User: [Compréhension ou nouvelle perspective;]Oui, je serai ravi d'en parler. Merci pour ta proposition.
+Agent: [Baseline]Super ! Pour commencer, comment allez-vous en ce moment? Avez-vous des soucis ou des difficultais ces derniers temps? Je suis a votre aicoute et prait a vous aider dans tout ce que vous voulez aborder aujourd'hui.
+User: [Partager des informations personnelles ou décrire un événement passé]Franchement, je vais bien. Franchement, je vais bien. Franchement, je vais bien. Enfin, il fait un peu moche cette semaine, mais �a va.
+Agent: [Baseline] Je comprends que parfois les choses peuvent paraatres difficiles sans 'tre r'elles. Et vous avez des changements que vous souhaitez apporter ' votre vie currently ?
+User: [Catégorie: Modifier les comportements malsains à l'avenir]Oui oui, j'aimerais bien diminuer Oui oui, j'aimerais bien diminuer Oui oui, j'aimerais bien diminuer Oui oui, j'aimerais bien diminuer quantit� de boissons que je prends chaque semaine.
+Agent: [Baseline] C'est une bonne d'id'e ! Qu'est-ce qui vous a pouss' 'vouzer r'duire votre consommation ? Vous arrive-t-il parfois d'avoir des r 'vussions ' cause de votre consommation d'alcool?
+User: [Categorie: Partager un sentiment ou une émotion positive;]�norm�ment justement. C'est pour �a que je suis venu �norm�ment justement. C'est pour �a que je suis venu �norm�ment justement. C'est pour �a que je suis venu �norm�ment justement. C'est pour �a que je suis venu �norm�ment justement. C'est pour �a que je suis venu vous parler aujourd'hui.
+Agent: [Baseline]Je comprends mieux maintenant. Nous avons 'changer votre consommation d'alcool, mais j'aimerais savoir davantage sur vous : quel est votre m''tier , 'tes-vous mari'(e), avez-vous des enfants et vivez-vous seul(e) ou avec quelqu'un?
+User: [Catégorie: Modifier les comportements malsains à l'avenir]Je tout seul justement et j'ai bien peur que ce soit �a le probl�me. Je me noie dans l'alcool du coup.
+Agent: [Baseline] Ah, je comprends mieux maintenant. Nous avons identifiai un sujet important a aborder ensemble: votre consommation d'alcool. Pouvez-vous me donner une idaie de la quantitai d'alcool que vous consommez habituellement par semaine?
+User: [Modifier les comportements malsains à l'avenir]Je bois environ une quinzaine de verres. Je bois environ une quinzaine de verres. Je bois environ une quinzaine de verres. Je bois environ une quinzaine de verres. Je bois environ une quinzaine de verres. Je bois environ une quinzaine de verres. Je bois environ une quinzaine de verres. Quand je suis tout seul et apr�s quand je suis entour�, �a peut aller jusqu'� vingt.
+Agent: [Baseline]Je voy que vous buvez souvent plus que les rep'hres recommandes pour une consommation a moindre risque. Vous avez deja essaye de reduire votre consommation ?
+User: [Catégorie: Modifier les comportements malsains à l'avenir; Le patient parle de l'avenir et fait preuve d'une intention ou d'une action visant à modifier activement l'un de ses comportements à l'avenir.]Oui, j'ai d�j� essay�, mais je n'ai jamais r�ussi � le faire.
+Agent: [Baseline]Je suis d'esol' a vos efforts pr'hents et passs. Pourriez-vous me dire ce qui vous a empachai de raiussir a raiduir votre consommation jusqu'a praisent?

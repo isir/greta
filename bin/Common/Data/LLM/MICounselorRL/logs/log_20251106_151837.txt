@@ -1,0 +1,2 @@
+User: [Greeting or Closing]Hi How are you
+Agent: [Baseline]Hi Mark, I’m Dr. Anderson. Thanks for coming in today. How’ve you been holding up lately? Anything on your mind you’d like to start with?

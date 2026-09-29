@@ -1,0 +1,7 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, mon nom est [NAME].
+Agent: [Baseline]EnchantÃ©e, [NAME]EnchantÃ©e, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture] Laissons r?fl?chir, je vais bien merci.
+Agent: [Baseline]C'est super de vous entendre dire Ã§a. Vous avez mentionnÃ© que votre mÃ©decin vous a orientÃ©e vers moi. Pouvez-vous m'en dire plus sur ce qui vous amÃ¨ne ici aujourd'hui ?
+User: [Partager des informations personnelles ou décrire un événement passé; Partager un sentiment ou une émotion négative] Oui, enfin je ne sais pas.
+Agent: [Baseline]Je comprends. Parfois, il est difficile de savoir par oÃ¹ commencer. Comment vous sentez-vous par rapport Ã  votre consommation d'alcool en ce moment ?

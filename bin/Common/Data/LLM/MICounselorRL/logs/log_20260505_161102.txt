@@ -1,0 +1,9 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME]. Je suis Naïc, comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je vais bien grâce, comment allez-vous aujourd'hui ?  :
+User: [La catégorie à laquelle appartient cet énoncé est "Accueil ou clôture". Le patient répond simplement au thérapeute qui s'enquiert de son état en répondant qu'il se sent bien lui aussi. Il n'y a pas d'autre intention sous-jacente dans cet échange.]Je vais bien merci de demander et toi comment tu vas
+Agent: [Baseline]Je suis ravi d'entendre cela. Ecoutez, je serai votre thairapeute qualifiai pour la duraie de cette session. pouvez-vous m'aiclairer sur votre consommation d'alcool ces derniaires semaines?
+User: [Inconnu]Cette dernière semaine j'ai dû boire au moins mille litres d'alcool.
+Agent: [Baseline]Merci pour votre honnaitetai, Naïc . Il est important de noter qu'une consommation excessive peut aitre nocive pour la santai.Cela pose aigalement des questions importantes. Comment vous sentez-vous physiquement et aimotionnellement aprais une telle quantitai d'alcool?
+User: [ modificateurles comportementsmalsains à l'avenir]Que c'est pas assez grand, pense que je peux viser plus.
+Agent: [Baseline]Je comprends que vous souhaitez faire vos propres choix, Naïc, mais il est important de noter que boire plus d'un litre d'alcool par semaine peut augmenter le risque de daivelopper des problaimes de santai graves a long terme tels que des problaimes haipatiques, des cancers et des maladies cardiaques. Savez-vous que la Santai publique France a daifini de nouveaux repaires pour une consommation d'alcool moins risquaie ?

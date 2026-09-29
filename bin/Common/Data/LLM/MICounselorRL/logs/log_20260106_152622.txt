@@ -1,0 +1,8 @@
+User: [Greeting or Closing;] Hi.
+Agent: [Baseline]Hello! I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing; Backchannel] Hello?
+Agent: [Baseline]Hi there! I'm glad you're here. How's your day been so far? Anything on your mind?
+User: [Sharing positive feeling or emotion;] I love your British accent.
+Agent: [Baseline]Thank you! I appreciate that. How about you-how are you feeling today?
+User: [Asking for Medical Information; unknown] Do you know about Gallatin France?
+Agent: [Baseline]I'm familiar with Gallatin, Tennessee-home of some great music and history! How about you? What brings you to our conversation today?

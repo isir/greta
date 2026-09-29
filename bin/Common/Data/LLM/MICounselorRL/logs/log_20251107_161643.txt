@@ -1,0 +1,5 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Je m'appelle [NAME].
+Agent: [Baseline]EnchantÃ©e, [NAME]Enchantée, [NAME]. Alors, comment ça va pour vous aujourd’hui ? *(ton chaleureux, en le regardant avec attention)*
+User: [Backchannel]oui
+Agent: [Baseline]Je vois que vous êtes là... Est-ce que c’est facile pour vous d’être ici aujourd’hui ? *(voix douce, en laissant un silence pour l’inviter à s’exprimer)*

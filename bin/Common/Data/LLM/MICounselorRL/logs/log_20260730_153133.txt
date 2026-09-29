@@ -1,0 +1,11 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Sharing negative feeling or emotion]I'm a bit stressed.
+Agent: [Baseline]I see. It sounds like you've been dealing with some stress. Can you tell me more about that?
+User: [unknown]Yeah. I'm I'm trying to stop drinking, and and I'm not being able Yeah. I'm I'm trying to stop drinking, and and I'm not being able Yeah. I'm I'm trying to stop drinking, and and I'm not being able
+Agent: [Baseline]It sounds like you're struggling with cutting back on your drinking, [NAME].
+User: [Backchannel]Yeah.
+Agent: [Baseline]I hear that you're finding it tough. What makes it so challenging for you?
+User: [unknown]That it makes me That it makes me That it makes me That it makes me That it makes me feel happy at the moment, but then it's, like, worse. feel happy at the moment, but then it's, like, worse. feel happy at the moment, but then it's, like, worse. feel happy at the moment, but then it's, like, worse. feel happy at the moment, but then it's, like, worse.
+Agent: [Baseline]So, you're enjoying the moment but later regret it. That's a common experience.

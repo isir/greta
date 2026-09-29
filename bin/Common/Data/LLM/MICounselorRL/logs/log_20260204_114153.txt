@@ -1,0 +1,5 @@
+Agent: []Hello, I'm [NAME]. What's your name?
+User: [Greeting or Closing;] Hello, [NAME]. I'm Joy.
+Agent: [Baseline]Pleased to meet you, [NAME]It's nice to meet you too, Joy. How are you doing today?
+User: [Greeting or Closing; Sharing personal information or Describe past event] Today, I'm good, and I'm here because I would like to talk to about
+Agent: [Baseline]I appreciate you coming in, Joy. What's been on your mind lately that you'd like to discuss?

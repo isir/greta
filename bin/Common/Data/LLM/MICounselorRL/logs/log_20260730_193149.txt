@@ -1,0 +1,25 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [unknown]Hello I'm done
+Agent: [Planning with the Patient]Pleased to meet you, [NAME]Great to meet you, [NAME]. How are you doing today?
+User: [Greeting or Closing]I'm doing good. And you?
+Agent: [Medical Education]That's good to hear. I'm here to talk about your alcohol use. Did you know that the Dietary Guidelines recommend no more than 1 drink a day for women?
+User: [unknown]No. I didn't know that.
+Agent: [Medical Education]I'm glad you're learning. So, how many drinks do you usually have in a week?
+User: [unknown]I usually have more than three per day.
+Agent: [Ask about current Emotions]How does that make you feel, [NAME]?
+User: [Sharing negative feeling or emotion]Sad because I don't think I have control in myself.
+Agent: [Ask about current Emotions]It sounds like you're feeling a bit overwhelmed and frustrated, [NAME].
+User: [unknown]No.
+Agent: [Give Solution]Here's a suggestion. Try tracking your drinks this week. It's a first step to gaining awareness and control.
+User: [Changing unhealthy behavior in the future]Okay. I will I will try to do it. Thank you.
+Agent: [Ask for Consent]Before we proceed, is it okay if I ask you some more questions about this?
+User: [Greeting or Closing]Yeah. Sure. It's fine.
+Agent: [Medical Education]Great. Did you know that drinking more than 3 drinks a day can increase your risk of health problems?
+User: [unknown]No. I had no idea.
+Agent: [Empathic Reaction]I appreciate your honesty, [NAME]. It's understandable to feel surprised.
+User: [unknown]Yeah. I guess.
+Agent: [Empathic Reaction]I can see this is new information for you, [NAME]. It's a lot to take in.
+User: [Backchannel]Can you repeat that?
+Agent: [Give Solution]Of course. Try limiting yourself to no more than 3 drinks per day this week.
+User: [Changing unhealthy behavior in the future]Okay. Yeah. We'll try to do it.
+Agent: [Greeting or Closing]Thank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.

@@ -1,0 +1,5 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME] je suis Nezih
+Agent: [Baseline]Enchantaie, [NAME]Je suis ravi de faire votre connaissance, Nezih. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Tr�s bien et vous ?
+Agent: [Baseline]Je suis bien, merci. Je suis heureux d'aitre ici pour discuter avec vous. Comment vous sentez-vous par rapport a votre consommation d'alcool en ce moment ?

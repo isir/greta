@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing] My name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How are you doing today?
+User: [Greeting or Closing; Backchannel] I'm good. How are you?
+Agent: [Baseline]I'm doing well, thank you for asking. It's nice to have this time to chat with you. What brings you some joy these days?

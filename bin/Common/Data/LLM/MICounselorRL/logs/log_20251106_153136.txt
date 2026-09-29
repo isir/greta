@@ -1,0 +1,4 @@
+User: [Greeting or Closing] Hello. How are you?
+Agent: [Baseline]Good morning! I’m Dr. Anderson—nice to meet you. How’s your day treating you so far? (I’ll keep it casual to start.)
+User: [Greeting or Closing;] Okay. Let's go.
+Agent: [Baseline]Fair enough. Your doctor mentioned you might chat about alcohol—how’s that been fitting into your life lately? No pressure, just curious.

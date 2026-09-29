@@ -1,0 +1,19 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Reflection]Pleased to meet you, [NAME]It's good to meet you, [NAME]. How are you doing today?
+User: [Sharing negative feeling or emotion]I'm doing a bit I'm a bit sad, actually.
+Agent: [Give Solution]I'm sorry to hear that, [NAME]. It sounds like you're going through a tough time. Have you considered talking to someone about how you're feeling?
+User: [unknown]Now that's why I'm here.
+Agent: [Experience Normalization]It's great that you're here, [NAME]. Many people feel sad at times, and it's important to talk about it. You're not alone in this.
+User: [Greeting or Closing]Thank you.
+Agent: [Invite to Shift Outlook]Imagine if you could feel a bit better tomorrow. What would that look like for you?
+User: [Sharing positive feeling or emotion]I don't know. Like, a good day with my family and friends.
+Agent: [Give Solution]How about we try to make that happen? Let's think of one small step you could take today to help you feel better and connect with your loved ones.
+User: [Sustaining unhealthy behavior in the future]Yeah. But, like, I'm a bit angry with them because I are trying Yeah. But, like, I'm a bit angry with them because I are trying Yeah. But, like, I'm a bit angry with them because I are trying Yeah. But, like, I'm a bit angry with them because I are trying Yeah. But, like, I'm a bit angry with them because I are trying Yeah. But, like, I'm a bit angry with them because I are trying me, like, to stop drinking alcohol, and I don't really want to stop drinking me, like, to stop drinking alcohol, and I don't really want to stop drinking me, like, to stop drinking alcohol, and I don't really want to stop drinking me, like, to stop drinking alcohol, and I don't really want to stop drinking me, like, to stop drinking alcohol, and I don't really want to stop drinking me, like, to stop drinking alcohol, and I don't really want to stop drinking alcohol.
+Agent: [Experience Normalization]It's completely normal to feel angry when we're trying to make changes, [NAME]. Many people feel that way.
+User: [unknown]Yeah. But it makes me feel sad. Yeah. But it makes me feel sad. Yeah. But it makes me feel sad. Yeah. But it makes me feel sad. Yeah. But it makes me feel sad. Yeah. But it makes me feel sad. Yeah. But it makes me feel sad.
+Agent: [Medical Education]I see. [NAME], did you know that alcohol can sometimes make us feel more angry and sad? It can interfere with our moods and make it harder to manage our feelings.
+User: [unknown]I know that, but it's really hard for me.
+Agent: [Medical Education]I understand, [NAME]. It's like trying to quit smoking while being around others who are smoking, right? It's tough, but it's important to know that alcohol affects our brains and makes it harder for us to manage our emotions.
+User: [unknown]What could I do to, like,
+Agent: [Reflection]You're feeling really stuck, aren't you, [NAME]? Like you want to make changes, but it's just so hard.

@@ -1,0 +1,13 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Je m'appelle Girard.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Ah, enchantaie Girard ! Comment allez-vous aujourd'hui ? (Un peu de soleil, ce matin ?)
+User: [Inconnu] Wunderbar, so er will mich.
+Agent: [Baseline]Ah, vous parlez allemand ? C'est chouette ! Alors, dites-moi... Qu'est-ce qui vous amaine a me voir aujourd'hui, a part cette petite visite ?
+User: [ Inconnu] Je ne sais pas.
+Agent: [Baseline]Je vois... Et si on parlait un peu de vos journaies ? Qu'est-ce qui vous occupe le plus, en ce moment ?
+User: [Accueil ou clôture] Hi.
+Agent: [Baseline]D'accord, Girard. Alors, entre nous... Qu'est-ce qui vous fait du bien dans votre routine actuelle ? (Un cafai, une sairie, une balade ?)
+User: [Partager des informations personnelles ou décrire un événement passé; Partager un sentiment ou une émotion positive;] Je pense qu'une balade.
+Agent: [Baseline]Ah, la balade... Ça vous daitend ? Vous la faites souvent, ou c'est plutot rare ?
+User: [Partager des informations personnelles ou décrire un événement passé] C'est plut?t rare.
+Agent: [Baseline]Je vois. Et quand vous marchez, c'est pour aller ou ? (Travail, courses, juste comme ssa ?)

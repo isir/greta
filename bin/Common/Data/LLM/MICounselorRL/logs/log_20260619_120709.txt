@@ -1,0 +1,47 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [inconnu]Je vais, je vais faire.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Trais bien, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Très bien et vous
+Agent: [Baseline]Je vais bien, merci. Je suis heureux d'aitre ici pour discuter avec vous. Je suis votre thairapeute et je suis la pour vous aider a augmenter votre activitai physique. Comment vous sentez-vous par rapport a cela ?
+User: [Backchannel]C'est normal.
+Agent: [Baseline]Je comprends. Vous avez peutaitre des sentiments mitijais a l'idai de changer votre mode de vie. C'est normal. Nous allons travailler ensemble pour trouver un moyen de vous aider a augmenter votre activitai physique. Qu'est-ce qui vous inquiaite le plus a ce sujet ?
+User: [Compréhension ou nouvelle perspective]La santé
+Agent: [Baseline]C'est une praioccupation importante. L'activitai physique raiguliaire peut avoir des effets positifs sur la santai. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Le maintien d'un comportement malsain à l'avenir]La flemme.
+Agent: [Baseline]Je comprends. La flemme peut etre un obstacle difficile a surmonter. Mais rappelez-vous, chaque pas compte. Qu'est-ce qui pourrait vous motiver a faire plus d'exercice ?
+User: [Compréhension ou nouvelle perspective]Avoir plus de motivation.
+Agent: [Baseline]C'est une excellente idee. Qu'est-ce qui pourrait vous aider a trouver cette motivation ?
+User: [inconnu]J'ai aucune idée.
+Agent: [Baseline]C'est okay. Nous allons travailler ensemble pour trouver une solution. Qu'est-ce qui vous plairait de faire pour etre plus actif ?
+User: [Backchannel]D'accord.
+Agent: [Baseline]C'est un bon debut. Qu'est-ce qui vous plairait de faire pour etre plus actif ?
+User: [Modifier les comportements malsains à l'avenir]Courir.
+Agent: [Baseline]C'est une excellente idee ! Courir peut etre une activitai tres benefique pour la santai. Combien de temps pourriez-vous courir par semaine ?
+User: [Backchannel]Par semaine, c'est-à-dire
+Agent: [Baseline]Je veux dire, combien de temps pourriez-vous courir chaque semaine ? Par exemple, 15 minutes, 30 minutes, etc.
+User: [Compréhension ou nouvelle perspective]Trente minutes,
+Agent: [Baseline]Trente minutes par semaine, c'est un excellent debut ! Nous pourrions travailler ensemble pour augmenter ce temps au fil du temps. Qu'est-ce qui pourrait vous aider a tenir ce rythme de 30 minutes par semaine ?
+User: [inconnu]je ne sais pas
+Agent: [Baseline]C'est okay. Nous allons travailler ensemble pour trouver une solution. Qu'est-ce qui pourrait vous aider a tenir ce rythme de 30 minutes par semaine ?
+User: [Compréhension ou nouvelle perspective]Écoutez de la musique.
+Agent: [Baseline]C'est une excellente idee ! Ecouter de la musique peut rendre l'exercice plus agreable. Qu'est-ce qui pourrait vous aider a tenir ce rythme de 30 minutes par semaine ?
+User: [Compréhension ou nouvelle perspective]J'ai plus d'idées.
+Agent: [Baseline]C'est okay. Nous avons deja trouve une idee qui pourrait vous aider a tenir ce rythme de 30 minutes par semaine. C'est deja un bon debut. Nous pourrions travailler ensemble pour trouver d'autres idees si vous le souhaitez. Qu'est-ce qui vous plairait de faire pour etre plus actif ?
+User: [Backchannel]J'ai pas d'autres idées.
+Agent: [Baseline]C'est okay. Nous avons deja trouve une idee qui pourrait vous aider a tenir ce rythme de 30 minutes par semaine. C'est deja un bon debut. Nous pourrions travailler ensemble pour trouver d'autres idees si vous le souhaitez. Qu'est-ce qui vous plairait de faire pour etre plus actif ?
+User: [inconnu]Je ne suis répondre.
+Agent: [Baseline]Pas de probleme. Nous avons deja trouve une idee qui pourrait vous aider a tenir ce rythme de 30 minutes par semaine. C'est deja un bon debut. Nous pourrions travailler ensemble pour trouver d'autres idees si vous le souhaitez. Qu'est-ce qui vous plairait de faire pour etre plus actif ?
+User: [Compréhension ou nouvelle perspective]donnez moi des idées
+Agent: [Baseline]Voici quelques idees pour augmenter votre activite physique .    Marcher plus souvent   Pratiquer un sport que vous aimez   Faire des etirements regulierement   Monter les escaliers au lieu de prendre l'ascenseur   Faire du jardinage   Faire du yoga ou de la meditation  Qu'est-ce qui vous plairait de faire pour etre plus actif ?
+User: [Backchannel]donnez moi des idées
+Agent: [Baseline]Voici quelques idees pour augmenter votre activite physique .    Marcher plus souvent   Pratiquer un sport que vous aimez   Faire des etirements regulierement   Monter les escaliers au lieu de prendre l'ascenseur   Faire du jardinage   Faire du yoga ou de la meditation  Qu'est-ce qui vous plairait de faire pour etre plus actif ?
+User: [Compréhension ou nouvelle perspective]De la marche et du regard peut-être.
+Agent: [Baseline]C'est une excellente idee ! La marche est une activitai tres benefique pour la santai et le jardinage peut etre tres agreable. Combien de temps pourriez-vous dedier a la marche et au jardinage par semaine ?
+User: [Partager des informations personnelles ou décrire un événement passé]Une heure
+Agent: [Baseline]C'est un excellent debut ! Nous pourrions travailler ensemble pour augmenter ce temps au fil du temps. Qu'est-ce qui pourrait vous aider a tenir ce rythme d'une heure par semaine ?
+User: [Compréhension ou nouvelle perspective]Ne pas marcher tout seul.
+Agent: [Baseline]Je comprends. Marcher avec quelqu'un peut rendre l'exercice plus agreable. Qui pourriez-vous inviter a vous accompagner lors de vos marches ?
+User: [Partager des informations personnelles ou décrire un événement passé]Nami.
+Agent: [Baseline]C'est une excellente idee ! Inviter un ami ou un membre de votre famille a vous accompagner lors de vos marches peut rendre l'exercice plus agreable et vous motiver a tenir votre rythme. Qu'est-ce qui vous plairait de faire pour etre plus actif ?
+User: [inconnu]Et c'est tout
+Agent: [Baseline]C'est tout pour aujourd'hui. Nous avons trouve quelques idees pour augmenter votre activite physique. N'oubliez pas de marcher avec Nami pour rendre l'exercice plus agreable. Nous pourrions continuer a travailler ensemble pour trouver d'autres idees si vous le souhaitez. A la prochaine fois ! END\_CONVO

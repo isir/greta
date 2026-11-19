@@ -1,4 +1,5 @@
 import socket
+import keyboard
 from threading import Thread, Lock
 
 def main():
@@ -52,10 +53,10 @@ def greta_loop(greta_conn, lock):
     
     while True:
         
-        response = greta_conn.recv(100).decode()
-        print(response)
+        response = greta_conn.recv(1024).decode()
+        print("greta:", response)
         if "Generator started" in response:
-            greta_conn.send(message.encode())
+            # greta_conn.send(message.encode())
             break
     
     while True:
@@ -69,7 +70,7 @@ def greta_loop(greta_conn, lock):
             #     message = "reactive"
             # lock.release()
                 
-            response = greta_conn.recv(100).decode()
+            response = greta_conn.recv(1024).decode()
             print("greta:", response)
 
             greta_conn.send(message.encode())
@@ -84,22 +85,55 @@ def greta_loop(greta_conn, lock):
 def feedback_loop(feedback_conn, lock):
     
     message = "end"
+    message_id = '0'
+
+    message_choice = {'0':'end', '1':'start'}
+
+    print('greta speech end: 0, greta speech start: 1 (now: {})'.format(message))
+    
+    loop_cnt = 0
+    
+    prev_message_id = message_id
     
     while True:
         
         try:
+
+            # message_id = inputimeout(prompt='greta speech end: 0, greta speech start: 1 (now: {})'.format(message), timeout=0.01)
+            # message_id = inputimeout(prompt='greta speech end: 0, greta speech start: 1 (now: {})'.format(message), timeout=0.01)
             
-            # lock.acquire()
-            # if feedback == "start":
-            #     message = "end"
-            # else:
-            #     message = "start"
-            # lock.release()
+            if keyboard.is_pressed('0'):
+                curr_message_id = '0'
+            elif keyboard.is_pressed('1'):
+                curr_message_id = '1'
+            else:
+                curr_message_id = prev_message_id
+            
+            
+            # if not(message_id in message_choice):
+            #     message_id = '0'
+            
+            if curr_message_id != prev_message_id:
                 
-            feedback_conn.send(message.encode())
-            
-            response = feedback_conn.recv(100).decode()
-            # print("feedback:", response)
+                message_id = curr_message_id
+                prev_message_id = curr_message_id
+
+                message = message_choice[message_id]            
+                
+                # lock.acquire()
+                # if feedback == "start":
+                #     message = "end"
+                # else:
+                #     message = "start"
+                # lock.release()
+                    
+                feedback_conn.send(message.encode())
+                
+                response = feedback_conn.recv(1024).decode()
+                # print("feedback:", response)
+
+                print('greta speech end: 0, greta speech start: 1 (now: {})'.format(message))
+
         
         except Exception as e:
             

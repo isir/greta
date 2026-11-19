@@ -51,7 +51,6 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     private OgreRenderTexture textureCapturable;
     protected Capturer currentVideoCapturer;
 
-
     private ActionListener startCaptureAction = new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -91,6 +90,9 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
         offLineVideoCapturer.addCaptureListener(this);
         videoButton.addActionListener(startCaptureAction);
         jFileChooser1 = new JFileChooser();
+        
+        fileName = baseNameTextBox.getText();        
+
     }
 
     public void setCapturable(Capturable capturable) {
@@ -144,7 +146,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
     public void startVideoCapture() {
         Capturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         ensureCapturable(currentVideoCapturer);
-        currentVideoCapturer.startCapture(fileName);
+        currentVideoCapturer.startCapture(fileName, useFixedIndexCheckBox.isSelected());
         //System.out.println(fileName);
     }
 
@@ -188,7 +190,7 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
 
     public void screenShot() {
         ensureCapturable(screenShotCapturer);
-        screenShotCapturer.startCapture(fileName);
+        screenShotCapturer.startCapture(fileName, useFixedIndexCheckBox.isSelected());
     }
 
     public void FMLVideoRecord() throws IOException{
@@ -278,6 +280,9 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
         FMLVideo = new javax.swing.JButton();
         FolderName = new javax.swing.JTextField();
         SelectFolder = new javax.swing.JButton();
+        baseNameTextBox = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        useFixedIndexCheckBox = new javax.swing.JCheckBox();
 
         screenShotButton.setText("Screen Shot");
         screenShotButton.addActionListener(new java.awt.event.ActionListener() {
@@ -314,6 +319,23 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
             }
         });
 
+        baseNameTextBox.setText("Capture_");
+        baseNameTextBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                baseNameTextBoxActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Base name");
+
+        useFixedIndexCheckBox.setText("fixed index (0)");
+        useFixedIndexCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                useFixedIndexCheckBoxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -321,10 +343,12 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(FMLVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(screenShotButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(videoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(videoButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(FMLVideo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -332,10 +356,14 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(textureCheckBox))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(FolderName, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(baseNameTextBox, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(FolderName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(SelectFolder)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(SelectFolder)
+                            .addComponent(useFixedIndexCheckBox))))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -353,8 +381,16 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
                     .addComponent(FMLVideo)
                     .addComponent(FolderName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(SelectFolder))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(baseNameTextBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(useFixedIndexCheckBox))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
+
+        baseNameTextBox.getAccessibleContext().setAccessibleName("baseNameTextBox");
+        useFixedIndexCheckBox.getAccessibleContext().setAccessibleName("fixed index (0)");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -390,13 +426,25 @@ public class Capturecontroller extends javax.swing.JFrame implements CallbackPer
         }
     }//GEN-LAST:event_SelectFolderActionPerformed
 
+    private void useFixedIndexCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_useFixedIndexCheckBoxActionPerformed
+
+    }//GEN-LAST:event_useFixedIndexCheckBoxActionPerformed
+
+    private void baseNameTextBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baseNameTextBoxActionPerformed
+        fileName = baseNameTextBox.getText();
+//        imageCaptureOutput = new AWTImageCaptureOutput();
+    }//GEN-LAST:event_baseNameTextBoxActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton FMLVideo;
     private javax.swing.JTextField FolderName;
     private javax.swing.JButton SelectFolder;
+    private javax.swing.JTextField baseNameTextBox;
+    private javax.swing.JLabel jLabel1;
     protected javax.swing.JCheckBox realTimeCheckBox;
     protected javax.swing.JButton screenShotButton;
     protected javax.swing.JCheckBox textureCheckBox;
+    private javax.swing.JCheckBox useFixedIndexCheckBox;
     protected javax.swing.JButton videoButton;
     // End of variables declaration//GEN-END:variables
 

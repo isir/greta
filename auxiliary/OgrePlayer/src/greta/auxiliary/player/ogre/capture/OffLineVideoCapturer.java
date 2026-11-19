@@ -38,6 +38,8 @@ public class OffLineVideoCapturer implements Runnable, Capturer{
     private boolean alreadyStarted;
     private CaptureListenerListManager captureListeners;
     private String currentId;
+    
+    private boolean useFixedIndex;
 
     public OffLineVideoCapturer(){
         this(null,null);
@@ -80,13 +82,21 @@ public class OffLineVideoCapturer implements Runnable, Capturer{
                 for(MPEG4Agent agent : OgreEnvironementListener.agents){
                     agent.update();
                 }
+
                 Ogre.callSync(new OgreThread.Callback() {
                     @Override
                     public void run() {
                         Ogre.getRoot().renderOneFrame();
                     }
                 });
-                captureOutput.newFrame(capturable.getCaptureData(), currentTime);
+//                Ogre.call(new OgreThread.Callback() {
+//                    @Override
+//                    public void run() {
+//                        Ogre.getRoot().renderOneFrame();
+//                    }
+//                });
+ 
+                captureOutput.newFrame(capturable.getCaptureData(), currentTime, useFixedIndex);
                 captureListeners.notifyCaptureNewFrame(this, currentTime);
             }
             myController.stepMillis(Constants.FRAME_DURATION_MILLIS);
@@ -103,11 +113,13 @@ public class OffLineVideoCapturer implements Runnable, Capturer{
     }
 
     @Override
-    public void startCapture(String id){
+    public void startCapture(String id, boolean useFixedIndexLocal){
+        useFixedIndex = useFixedIndexLocal;
         if(!alreadyStarted && capturable!=null && captureOutput!=null){
             alreadyStarted = true;
             stop = false;
             currentId = id;
+//            captureOutput.setBaseFileName(currentId);
             Thread t = new Thread(this);
             t.start();
         }

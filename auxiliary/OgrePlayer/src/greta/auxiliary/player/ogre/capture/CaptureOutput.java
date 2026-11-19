@@ -38,8 +38,18 @@ public interface CaptureOutput {
      * @param data the pixel data of the frame.
      * @param time the Greta's time in milliseconds of the frame.
      */
-    public void newFrame(byte[] data, long time);
+//    public void newFrame(byte[] data, long time);
 
+    /**
+     * Adds a new frame.<br/>
+     * It is supposed that the pixel are in 3 bytes RGB.
+     * @param data the pixel data of the frame.
+     * @param time the Greta's time in milliseconds of the frame.
+     * @param useFixedIndex the flag to fix output frame index.
+     */
+    public void newFrame(byte[] data, long time, boolean useFixedIndex);
+    
+    
     /**
      * Adds a new audio packet.<br/>
      * It is supposed that the audio is in Greta's audio format.
@@ -53,5 +63,11 @@ public interface CaptureOutput {
      * Notifies that the capture ends.
      */
     public void end();
-
+    
+    /**
+     * Sets base file name of saved image file.<br/>
+     * @param fileName
+     */    
+    public void setBaseFileName(String fileName);
+    
 }

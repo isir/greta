@@ -146,7 +146,7 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
     public void startVideoCapture() {
         BVHCapturecontroller.this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         ensureCapturable(currentVideoCapturer);
-        currentVideoCapturer.startCapture(fileName);
+        currentVideoCapturer.startCapture(fileName, false);
 
         //System.out.println(fileName);
     }
@@ -195,7 +195,7 @@ public class BVHCapturecontroller extends javax.swing.JFrame implements CaptureL
 
     public void screenShot() {
         ensureCapturable(screenShotCapturer);
-        screenShotCapturer.startCapture(fileName);
+        screenShotCapturer.startCapture(fileName, false);
     }
 
     public void FMLVideoRecord() {

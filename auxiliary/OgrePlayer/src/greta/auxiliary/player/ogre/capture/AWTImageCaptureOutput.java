@@ -33,7 +33,7 @@ public class AWTImageCaptureOutput implements CaptureOutput {
     private int height;
     private long count;
     private String baseFileName = "Capture";
-
+    
     @Override
     public void begin(int w, int h, long beginTime, String id) {
         image = new BufferedImage(w, h, BufferedImage.TYPE_3BYTE_BGR);
@@ -45,6 +45,11 @@ public class AWTImageCaptureOutput implements CaptureOutput {
         }
         this.height = h;
         this.width = w;
+    }
+    
+    @Override
+    public void setBaseFileName(String fileName) {
+        baseFileName = fileName;
     }
 
     /**
@@ -61,7 +66,7 @@ public class AWTImageCaptureOutput implements CaptureOutput {
     }
 
     @Override
-    public void newFrame(byte[] data, long time) {
+    public void newFrame(byte[] data, long time, boolean useFixedIndex) {
         //Copy pixels from data to the BufferedImage
         for (int j = 0; j < height; j++) {
             for (int i = 0; i < width; i++) {
@@ -73,7 +78,16 @@ public class AWTImageCaptureOutput implements CaptureOutput {
 
         //save the image
         try {
-            javax.imageio.ImageIO.write(image, "png", new File(baseFileName + (count++) + ".png"));
+            if(useFixedIndex){
+                // save FPS (12.5) = greta's FPS (25) / 2
+                if (count % 2 == 0) {
+                    javax.imageio.ImageIO.write(image, "png", new File(baseFileName + "0" + ".png"));
+                }
+                count++;
+            }
+            else{
+                javax.imageio.ImageIO.write(image, "png", new File(baseFileName + (count++) + ".png"));
+            }
         } catch (Exception ex) {
             Logs.error("Fail to save capture");
         }

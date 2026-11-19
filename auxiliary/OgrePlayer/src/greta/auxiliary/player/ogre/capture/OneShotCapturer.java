@@ -28,6 +28,8 @@ public class OneShotCapturer implements Capturer{
     private Capturable capturable;
     private CaptureOutput captureOutput;
     private CaptureListenerListManager captureListeners;
+    
+    private boolean useFixedIndex;
 
     public OneShotCapturer(){
         this(null,null);
@@ -40,7 +42,8 @@ public class OneShotCapturer implements Capturer{
     }
 
     @Override
-    public synchronized void startCapture(String id){
+    public synchronized void startCapture(String id, boolean useFixedIndexLocal){
+        useFixedIndex = useFixedIndexLocal;
         if(capturable!=null && captureOutput!=null){
             long time = Timer.getTimeMillis();
 
@@ -48,7 +51,7 @@ public class OneShotCapturer implements Capturer{
             capturable.prepareCapture();
             captureOutput.begin(capturable.getCaptureWidth(), capturable.getCaptureHeight(), time, id);
 
-            captureOutput.newFrame(capturable.getCaptureData(), time);
+            captureOutput.newFrame(capturable.getCaptureData(), time, useFixedIndex);
             captureListeners.notifyCaptureNewFrame(this, time);
 
             captureOutput.end();

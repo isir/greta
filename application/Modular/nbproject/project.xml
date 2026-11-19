@@ -320,14 +320,6 @@
                 <id>jar</id>
             </reference>
             <reference>
-                <foreign-project>OSC_CORE_LIB</foreign-project>
-                <artifact-type>jar</artifact-type>
-                <script>build.xml</script>
-                <target>jar</target>
-                <clean-target>clean</clean-target>
-                <id>jar</id>
-            </reference>
-            <reference>
                 <foreign-project>OgrePlayer</foreign-project>
                 <artifact-type>jar</artifact-type>
                 <script>build.xml</script>

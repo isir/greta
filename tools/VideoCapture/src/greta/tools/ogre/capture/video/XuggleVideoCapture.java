@@ -294,7 +294,7 @@ public class XuggleVideoCapture implements CaptureOutput {
     }
 
     @Override
-    public void newFrame(byte[] data, long time) {
+    public void newFrame(byte[] data, long time, boolean useFixedIndex) {
         if (outContainer != null && outVideoStreamCoder != null) {
             IPacket packet = IPacket.make();
 
@@ -385,5 +385,10 @@ public class XuggleVideoCapture implements CaptureOutput {
 
         // return the resample picture
         return picture2;
+    }
+
+    @Override
+    public void setBaseFileName(String string) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

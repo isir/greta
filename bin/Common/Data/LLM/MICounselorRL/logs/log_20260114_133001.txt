@@ -1,0 +1,19 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing;] Hello, Camille. My name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]It's nice to meet you, [NAME]. How are you doing today?
+User: [Greeting or Closing; Sharing personal information or Describe past event] Nice to meet you also for me. I'm working. And you?
+Agent: [Baseline]I'm doing well, thanks for asking. Work can be demanding-how's your day going so far?
+User: [Greeting or Closing; Backchannel] Is going well. Thank you.
+Agent: [Baseline]That's great to hear. What do you enjoy most about your work?
+User: [Backchannel; Unknown] Talk about that. Sorry.
+Agent: [Baseline]No need to apologize! What's something that helps you unwind after a busy workday?
+User: [Backchannel; Unknown] I don't know.
+Agent: [Baseline]It sounds like you're still figuring that out. Many people find different ways to relax-some enjoy quiet time, others like being active. What's something you've tried that felt good, even if just for a moment?
+User: [Asking for Medical Information; Changing unhealthy behavior in the future] Maybe I can try any sport, or I can also go walking. What do you suggest for me?
+Agent: [Baseline]Walking is a great start-it's gentle and can clear your mind. Have you noticed times when you feel more relaxed than others?
+User: [Asking for Medical Information; Changing unhealthy behavior in the future;] Maybe I can try any sport, or I can also go walking. What do you suggest for me? Maybe I can try any sport, or I can also go walking. What do you suggest for me? Maybe I can try any sport, or I can also go walking. What do you suggest for me? Maybe I can try any sport, or I can also go walking. What do you suggest for me? Maybe I can try any sport, or I can also go walking. What do you suggest for me? Maybe I can try any sport, or I can also go walking. What do you suggest for me? Maybe I can also cook something. Do you think this could be another idea?
+Agent: [Baseline]You've got some great ideas! Walking, sports, or even cooking could all help you unwind. Which one feels most doable for you this week? Even small steps count.
+User: [Asking for Medical Information; Sustaining unhealthy behavior in the future] And what do you think if I want to drink something? Some alcohol? Do you think this is a good idea?
+Agent: [Baseline]I hear you-alcohol can feel like a way to relax. How has it worked for you in the past when you've had a drink after work?
+User: [Changing unhealthy behavior in the future; Asking for Medical Information] It worked a lot, but I don't know if this could also help me in future. What do you think?
+Agent: [Baseline]It sounds like alcohol gives you short-term relief but leaves you wondering about the bigger picture. What's one thing you'd like to feel more of after work-long-term?

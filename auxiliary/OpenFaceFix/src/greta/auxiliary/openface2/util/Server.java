@@ -120,13 +120,13 @@ public class Server {
     }     
 
     //La methode qui envoient les paramètre par socketing via le server. (cette méthode est applé dans la methode sendPositivityAus dans la loop d'envoi sur Openface Frame)
-    public void sendPositivity( double au1, double au12, double au2) throws IOException {
-
-                out.writeDouble(au1);
-                out.writeDouble(au12);
-                out.writeDouble(au2);
+    public void sendPositivity( double[] aus) throws IOException {
+                for (double au:aus){
+                    out.writeDouble(au);
+                }
                 out.flush();
-                System.out.println("Data sent: au1 = " + au1 + ", au12 = " + au12+ ", au2 = " + au2);
+                
+                //System.out.println("Data sent:" +aus);
             
     }
     

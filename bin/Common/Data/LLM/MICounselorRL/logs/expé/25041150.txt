@@ -1,0 +1,29 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je m'appelle [NAME].
+Agent: [Backchannel]Enchantée, [NAME]Bonjour, je m'appelle [NAME].  D'accord, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] ?a va merci ? vous.
+Agent: [Planning with the Patient]Merci, je vais bien aussi. [NAME], votre médecin m'a parlé de votre sédentarité. Avez-vous une idée de ce que vous pourriez faire pour augmenter votre activité physique cette semaine ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Je passe d?j? la marche, je
+Agent: [Empathic Reaction]Je comprends que vous faites déjà des efforts pour marcher. C'est un bon début. Comment vous sentez-vous à propos de cela ?
+User: [Partager un sentiment ou une �motion positive] Je me sens plut?t bien.
+Agent: [Empathic Reaction]C'est super que vous vous sentiez bien en marchant. C'est un excellent signe que vous prenez soin de votre santé. Y a-t-il quelque chose que vous aimez particulièrement dans la marche ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] D?couvrir de nouveaux endroits, visiter une ville.
+Agent: [Invite to Shift Outlook]C'est formidable que vous appréciiez découvrir de nouveaux endroits en marchant. Imaginez si vous pouviez intégrer plus de ces moments dans votre semaine. Par exemple, vous pourriez explorer un nouveau parc ou un quartier que vous ne connaissez pas encore. Qu'en pensez-vous ?
+User: [Backchannel] Oui, c'est une bonne id?e.
+Agent: [Invite to Shift Outlook]Imaginez comment vous vous sentiriez après avoir exploré un nouveau parc ou un quartier. Cela pourrait non seulement être une belle expérience, mais aussi une façon agréable d'augmenter votre activité physique. Qu'en pensez-vous ?
+User: [Backchannel] Oui je suis d'accord avec ce que vous venez de dire.
+Agent: [Progress Acknowledgment]C'est formidable que vous soyez d'accord. Vous avez déjà fait un bon pas en avant en reconnaissant l'importance de l'activité physique. Quelle serait une petite étape que vous pourriez prendre cette semaine pour explorer un nouvel endroit en marchant ? END_CONVO
+User: [inconnu] Je ne sais pas trop.
+Agent: [Give Solution]Que diriez-vous de planifier une petite promenade de 15 minutes dans un parc ou un quartier que vous n'avez jamais visité ? Cela pourrait être une bonne façon de commencer et de découvrir de nouveaux endroits. Qu'en pensez-vous ?
+User: [Backchannel] Oui, c'est une bonne id?e.
+Agent: [Invite to Shift Outlook]Super ! Imaginez la satisfaction que vous ressentirez après cette promenade. Vous aurez non seulement bougé, mais aussi découvert quelque chose de nouveau. Cela pourrait vraiment enrichir votre semaine. Quel jour de la semaine pourriez-vous essayer cela ?
+User: [Modifier les comportements malsains � l'avenir] Le le week-end.
+Agent: [Experience Normalization]Beaucoup de gens trouvent qu'explorer de nouveaux endroits est une excellente manière de se motiver à marcher davantage. Vous n'êtes pas seule dans cette démarche. Prévoir une promenade le week-end est une idée parfaite pour commencer. Comment vous sentez-vous à l'idée de faire cela ?
+User: [Partager un sentiment ou une �motion positive] Bien.
+Agent: [Reflection]C'est encourageant de voir que vous vous sentez bien à l'idée de faire une promenade le week-end. Cela montre que vous êtes motivée et prête à faire des changements positifs pour votre santé.
+User: [Backchannel]oui
+Agent: [Planning with the Patient]Super ! Alors, planifions cela. Le week-end, vous pourriez prévoir une promenade de 15 minutes dans un endroit que vous n'avez jamais visité. Cela vous semble faisable ?
+User: [Modifier les comportements malsains � l'avenir] Oui, cela me semble faisable.
+Agent: [Ask about current Emotions]Parfait ! Comment vous sentez-vous à l'idée de planifier cette promenade pour le week-end ?
+User: [Backchannel] Va bien, bien.
+Agent: [Ask about current Emotions]C'est super de vous sentir bien à l'idée de cette promenade. Comment vous sentez-vous émotionnellement en ce moment ?

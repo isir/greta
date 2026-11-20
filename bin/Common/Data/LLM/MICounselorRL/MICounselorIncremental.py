@@ -6,8 +6,6 @@ import pickle
 import argparse
 from openai import OpenAI
 import sys
-from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
 from therapist_behavior_inference import get_therapist_intent
 from client_behavior_inference import get_client_intent
 from RL_client import RL_client
@@ -59,12 +57,14 @@ def create_server(da, host='localhost', port=50200):
 messages = None
 messages_online = None
 n_change = 0
-api_key_file = os.path.join(os.path.dirname(__file__), 'api_key.txt')
-with open(api_key_file, 'r') as f:
-    MISTRAL_API_KEY = f.read()
-
-model = "mistral-large-latest"
-client_online = MistralClient(api_key=MISTRAL_API_KEY)
+if LOCAL_MODE:
+    client_online = OpenAI(base_url=LOCAL_BASE_URL, api_key="ollama")
+else:
+    from mistralai.client import Mistral
+    api_key_file = os.path.join(os.path.dirname(__file__), 'api_key.txt')
+    with open(api_key_file, 'r', encoding='utf-8-sig') as f:
+        MISTRAL_API_KEY = f.read().strip()
+    client_online = Mistral(api_key=MISTRAL_API_KEY)
 start_turns = False
 RL = RL_client()
 n_turn=0
@@ -108,15 +108,11 @@ def ask(question,messages=None,messages_online=None,start_turns=False,n_change=0
 def get_name(question,language):
 
     prompt =  open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_get_name.txt"), "r").read()
-    chat_response = client_online.chat(
-    model = model,
-    messages = [
-        {
-            "role": "user",
-            "content": prompt+question,
-        },
-    ]
-)
+    msgs = [{"role": "user", "content": prompt+question}]
+    if LOCAL_MODE:
+        chat_response = client_online.chat.completions.create(model=model, messages=msgs)
+    else:
+        chat_response = client_online.chat.complete(model=model, messages=msgs)
     return chat_response.choices[0].message.content
 
 
@@ -139,7 +135,7 @@ def ask_online_chunk(question,language,condition,type,subject,system_prompt,mess
             cond_prompt="You will be provided with context of the conversation and the name of the patient."+descr_type
 
     prompt=[
-        ChatMessage(role= "user", content="[INST]"+subject_prompt+mi_prompt+system_prompt + cond_prompt+"[/INST]")
+        {"role": "user", "content": "[INST]"+subject_prompt+mi_prompt+system_prompt + cond_prompt+"[/INST]"}
          ] 
     context=""
     if messages is not None:
@@ -147,11 +143,11 @@ def ask_online_chunk(question,language,condition,type,subject,system_prompt,mess
         for i,msg in enumerate(messages):
             prompt.append(msg)
             if l-i<2:
-                if (msg.role) =='user':
+                if msg["role"] =='user':
                     context += "Patient: "
                 else:
                     context += "Therapist:"
-                context+= msg.content
+                context+= msg["content"]
 
     da = get_client_intent(question, context, language)
     time.sleep(2)
@@ -163,51 +159,52 @@ def ask_online_chunk(question,language,condition,type,subject,system_prompt,mess
         start_turns=False
         name_user = get_name(question,language)
         if name_user == "[NON]" or name_user == "[NO]":
-            welcome = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_no_name.txt"), "r").read()
-            print(welcome)
-            name_user=""
+        #     welcome = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_no_name.txt"), "r").read()
+        #     print(welcome)
+              name_user=""
 
-        else :
-            welcome = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_name.txt"), "r").read() + name_user
-            print(welcome)
-            
-        time.sleep(2)
+
+        #  else :
+        #      welcome = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_name.txt"), "r").read() + name_user
+        #       print(welcome)
+
+        #   time.sleep(2)
     if condition=="RL":
         therapist_da = RL.step(da)
     #print("Therapist Action: "+str(therapist_da))
         if welcome != "":
             if language == "FR":
-                prompt.append(ChatMessage(role="user", content=question + "Therapist : "+welcome+ "COMPLETE LA FIN DU TOUR EN REALISANT L'ACTION:"+str(therapist_da)))
+                prompt.append({"role": "user", "content": question + "Therapist : "+welcome+ "COMPLETE LA FIN DU TOUR EN REALISANT L'ACTION:"+str(therapist_da)})
             else:
-                prompt.append(ChatMessage(role="user", content=question + "Therapist : "+welcome+ "COMPLEATE THE END OF THE TURN BY PERFORMING THE ACTION:"+str(therapist_da)))
+                prompt.append({"role": "user", "content": question + "Therapist : "+welcome+ "COMPLEATE THE END OF THE TURN BY PERFORMING THE ACTION:"+str(therapist_da)})
         if language == "FR":
-            prompt.append(ChatMessage(role="user", content=question + "REALISE L'ACTION:"+str(therapist_da)))
+            prompt.append({"role": "user", "content": question + "REALISE L'ACTION:"+str(therapist_da)})
         else:
-            prompt.append(ChatMessage(role="user", content=question + "PERFORM THE ACTION:"+str(therapist_da)))
+            prompt.append({"role": "user", "content": question + "PERFORM THE ACTION:"+str(therapist_da)})
     else:
         if welcome != "":
             if language == "FR":
-                prompt.append(ChatMessage(role="user", content=question + "Therapist : "+welcome+ "COMPLETE LA FIN DU TOUR AVEC UNE PHRASE"))
+                prompt.append({"role": "user", "content": question + "Therapist : "+welcome+ "COMPLETE LA FIN DU TOUR AVEC UNE PHRASE"})
             else:
-                prompt.append(ChatMessage(role="user", content=question + "Therapist : "+welcome+ "COMPLEATE THE END OF THE TURN WITH A SENTENCE"))
+                prompt.append({"role": "user", "content": question + "Therapist : "+welcome+ "COMPLEATE THE END OF THE TURN WITH A SENTENCE"})
         else:
-            prompt.append(ChatMessage(role="user", content=question))
+            prompt.append({"role": "user", "content": question})
 
    
     #create_server(da,port =50201)
     context += "Patient: "+question
-    response = client_online.chat_stream(
-         model=model,
-           messages=prompt
-    )
+    if LOCAL_MODE:
+        response = client_online.chat.completions.create(model=model, messages=prompt, stream=True)
+    else:
+        response = client_online.chat.stream(model=model, messages=prompt)
     answer = ""
     curr_sent= ""
 
     min_response_time = 1
     start = time.perf_counter()
     FIRST_SENTENCE = True
-    for chunk in response:
-        
+    for event in response:
+        chunk = event.data if not LOCAL_MODE else event
         if chunk.choices[0].delta.content is None:
             pass
         elif chunk.choices[0].delta.content in [".","?","!",";"," ?"]:
@@ -244,7 +241,7 @@ def ask_online_chunk(question,language,condition,type,subject,system_prompt,mess
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
     answer = answer.replace(']', ' ')
-    if "END_CONVO" in answer or (condition=="RL" and "Closing" in therapist_da and n_turn >=5) or (condition=="RL" and "clôture" in therapist_da and n_turn >=5):
+    if ("END_CONVO" in answer and (n_turn >=20)) or (condition=="RL" and ("Closing" in therapist_da) and (n_turn >=20)) or (condition=="RL" and ("clôture" in therapist_da) and (n_turn >=20)):
         if n_change > 2:
             stop_phrase = open(os.path.join(os.path.dirname(__file__), "prompts/" + language + "_stop_good.txt"), "r").read()
         else:
@@ -276,8 +273,8 @@ def append_interaction_to_chat_log(question, answer, messages=None,messages_onli
         messages_online = []
     messages.append({"role":"user", "content":question})
     messages.append({"role":"assistant", "content":answer})
-    messages_online.append(ChatMessage(role='user',content=question))
-    messages_online.append(ChatMessage(role='assistant',content=answer))
+    messages_online.append({"role": "user", "content": question})
+    messages_online.append({"role": "assistant", "content": answer})
     return messages,messages_online
 
 #if __name__ == "__main__":
@@ -297,7 +294,7 @@ s.connect(("localhost",port))
 message_reciv=False
 while(True):
     msg=s.recv(1024)
-    msg=msg.decode('iso-8859-1')
+    msg=msg.decode('utf-8, errors="replace")')
     message_reciv=True
     if(len(msg)>0 and message_reciv):
         if(msg=="exit"):

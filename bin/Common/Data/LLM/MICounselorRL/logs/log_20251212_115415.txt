@@ -1,0 +1,12 @@
+User: [Greeting or Closing;] Hello?
+Agent: [Baseline]Hello! I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing; Backchannel] Fine. Thank you for asking.
+Agent: [Baseline]I'm glad to hear you're doing fine. What brings you some comfort or joy in your day-to-day life?
+User: [Sharing positive feeling or emotion; Greeting or Closing] Talking with you.
+Agent: [Baseline]That's kind of you to say. I appreciate you being here today. How have things been going for you since your doctor suggested we talk?
+User: [Sharing personal information or Describe past event; Sharing negative feeling or emotion] I don't know. I drink too much.
+Agent: [Baseline]I hear that. What does "too much" look like for you lately?
+User: [Sharing personal information or Describe past event;] Like, maybe three or four drinks per day.
+Agent: [Baseline]That's a lot to carry. How does that amount feel for you-physically or emotionally?
+User: [Sharing negative feeling or emotion;] It feels very hard.
+Agent: [Baseline]What feels hardest about it? The aftereffects? Or something else?

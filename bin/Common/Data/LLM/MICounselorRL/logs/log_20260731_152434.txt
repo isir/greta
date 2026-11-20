@@ -1,0 +1,3 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello.
+Agent: [Baseline]Don't worry, we can continue without it.Nice to meet you, Camille. How are you feeling today? It's good to take some time for yourself.

@@ -1,0 +1,17 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Empathic Reaction]Pleased to meet you, [NAME]That's great, [NAME]. I'm really glad you're here. How are you doing today?
+User: [Greeting or Closing]I'm doing good.
+Agent: [Medical Education]That's great to hear, [NAME]. Before we dive in, I want to share some information about smoking. Did you know that even smoking a few cigarettes a day can increase your risk of heart disease?
+User: [unknown]No. I didn't know that.
+Agent: [Ask about current Emotions]How does that make you feel, [NAME], learning about that risk?
+User: [unknown]But
+Agent: [Progress Acknowledgment]It's great that you're here today, [NAME], taking this step to learn more about your health.
+User: [Sharing negative feeling or emotion]It makes me feel sad.
+Agent: [Ask for Consent]Would it be okay if I ask you a few questions about your smoking, [NAME]?
+User: [Greeting or Closing]Yeah. It's fine.
+Agent: [Progress Acknowledgment]That's great, [NAME]. I appreciate your openness. It takes courage to talk about these things.
+User: [unknown]What?
+Agent: [Experience Normalization]It's completely normal to feel sad when we learn about the impact of our actions on our health, [NAME]. Many people feel this way.
+User: [unknown]Yeah. I guess.
+Agent: [Planning with the Patient][NAME], let's think about one small step you could take this week to reduce your smoking. What do you think might be a realistic goal for you?

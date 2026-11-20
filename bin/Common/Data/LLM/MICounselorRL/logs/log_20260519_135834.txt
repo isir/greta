@@ -1,0 +1,23 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Je suis [NAME], comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je suis heureux de vous rencontrer, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Bien merci toi comment tu vas
+Agent: [Baseline]Je vais bien, merci. Je suis ici pour vous aider. Comment vous sentez-vous par rapport Ã  votre consommation d'alcool ?
+User: [Modifier les comportements malsains à l'avenir]Je pense que je bois beaucoup et donc du coup je pense qu'il faut faire quelque chose par rapport à ça.
+Agent: [Baseline]Je comprends que vous vous souciez de votre consommation d'alcool, [NAME]. Qu'est-ce qui vous amaine Ã  vouloir faire un changement aujourd'hui ?
+User: [Compréhension ou nouvelle perspective]Aujourd'hui c'est votre entourage.
+Agent: [Baseline]Je vois. Qu'est-ce que cela signifie pour vous de faire un changement dans votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Signifie essayer de devenir quelqu'un de meilleur.
+Agent: [Baseline]C'est un objectif louable, [NAME]. Qu'est-ce qui vous empaiche de faire ce changement maintenant ?
+User: [Partager un sentiment ou une émotion négative]Je sais pas ce qui m'empêche c'est la volonté je crois.
+Agent: [Baseline]Je comprends que cela puisse Ãªtre difficile, [NAME]. Quelles sont les choses qui vous motivent Ã  faire ce changement ?
+User: [inconnu]Comme je disais mon entourage est surtout à vingt-center.
+Agent: [Baseline]Je vois. Qu'est-ce que cela signifie pour vous de faire un changement dans votre consommation d'alcool pour votre entourage ?
+User: [Compréhension ou nouvelle perspective]Du coup je vais être un peu plus présent pour eux et être avoir moins de ça d'émergence.
+Agent: [Baseline]C'est une excellente raison pour faire un changement, [NAME]. Qu'est-ce qui pourrait vous aider Ã  atteindre cet objectif cette semaine ?
+User: [Modifier les comportements malsains à l'avenir]Peut-être essayer de de de rencontrer des amis beaucoup de gens à ne pas boire. Je pense que ça sera mon début.
+Agent: [Baseline]C'est une excellente idÃ©e, [NAME]. Quelles sont les choses qui pourraient vous aider Ã  mettre en place cette idÃ©e cette semaine ?
+User: [Compréhension ou nouvelle perspective]Je ne sais pas peut-être prendre rendez-vous avec vous ou essayer de me concentrer quoi.
+Agent: [Baseline]Il est important de trouver des moyens de vous soutenir dans votre objectif, [NAME]. Quelles sont les choses qui pourraient vous aider Ã  rester motivÃ© et Ã  surmonter les obstacles cette semaine ?
+User: [Partager des informations personnelles ou décrire un événement passé]Je sais pas penser aux avantages et aux bienfaits de la consommation.
+Agent: [Baseline]C'est une excellente idÃ©e, [NAME]. Quels sont les avantages que vous espÃ©rez retirer de la rÃ©duction de votre consommation d'alcool ?

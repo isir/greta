@@ -2,16 +2,20 @@ import numpy as np
 from MLSH_agent3 import MLSH_agent
 import gym
 import os
-
+from deep_translator import GoogleTranslator
+import google.generativeai as genai
+from getpass import getpass
 gym.register(
     id='DialogueEnv-v0',
     entry_point='DialogueEnvs.DialogueEnvMIparra:DialogueEnvMI'
 )
+
 class RL_client:
 
     def __init__(self):
         self.state = 0
         self.action = 0
+
 
         self.user_da_list = ["SharingpersonalinformationorDescribepastevent",
              "Changingunhealthybehaviorinthefuture",
@@ -56,15 +60,16 @@ class RL_client:
         self.rapport=0
         self.perspective = 0
         self.context = 0
+        self.n_parra=1
         self.user_da = np.zeros((1,len(self.user_da_list)-1))
         self.agent_da = np.zeros((1,len(self.agent_da_en)))
         self.user_da[0,-1] = 6
         self.agent_da[0,12] = 8
         self.env =  gym.make('DialogueEnv-v0',n_parra=1)
         path = os.path.join(os.path.dirname(__file__), "models/" )
-        self.agents = [MLSH_agent(self.env,6,master_len_replay_buffer=500,sub_len_replay_buffer=2000,master_replay_mini_batch_size=64,sub_replay_mini_batch_size=100,master_learning_rate=10**-4,sub_learning_rate=10**-5,master_mbpo=False,use_maml=True),
-                       MLSH_agent(self.env,6,master_len_replay_buffer=500,sub_len_replay_buffer=2000,master_replay_mini_batch_size=64,sub_replay_mini_batch_size=100,master_learning_rate=10**-4,sub_learning_rate=10**-5,master_mbpo=False,use_maml=True),
-                       MLSH_agent(self.env,6,master_len_replay_buffer=500,sub_len_replay_buffer=2000,master_replay_mini_batch_size=64,sub_replay_mini_batch_size=100,master_learning_rate=10**-4,sub_learning_rate=10**-5,master_mbpo=False,use_maml=True)]
+        self.agents = [MLSH_agent(self.env,6,master_len_replay_buffer=50000,sub_len_replay_buffer=50000,master_replay_mini_batch_size=1000,sub_replay_mini_batch_size=1000,master_learning_rate=10**-3,sub_learning_rate=10**-4,master_mbpo=False,use_maml=True),
+                       MLSH_agent(self.env,6,master_len_replay_buffer=50000,sub_len_replay_buffer=50000,master_replay_mini_batch_size=1000,sub_replay_mini_batch_size=1000,master_learning_rate=10**-3,sub_learning_rate=10**-4,master_mbpo=False,use_maml=True),
+                       MLSH_agent(self.env,6,master_len_replay_buffer=50000,sub_len_replay_buffer=50000,master_replay_mini_batch_size=1000,sub_replay_mini_batch_size=1000,master_learning_rate=10**-3,sub_learning_rate=10**-4,master_mbpo=False,use_maml=True)]
         self.agents[0].load_agent(path+"hesitant/")
         self.agents[1].load_agent(path+"resistant/")
         self.agents[2].load_agent(path+"open/")
@@ -76,6 +81,9 @@ class RL_client:
         self.type_to_id = {'Hesitant':0,"Resistant":1,"Open":2}
         self.type = 0
 
+    def translate_text(self,text):
+       # response = GoogleTranslator(source='fr', target='en').translate(text)
+        return text
     def reset(self):
         self.turn_id = 0
         self.rapport=0
@@ -86,6 +94,7 @@ class RL_client:
         self.user_da[0,-1] = 6
         self.agent_da[0,12] = 8
         self.subpolicy = [0]
+        self.n_parra=1
         self.master_ob = np.array([[self.context/3,self.rapport/3,self.perspective/3] ])
         self.ob = np.concatenate([self.user_da,self.agent_da],axis=1)
     def set_type(self,type):
@@ -95,9 +104,42 @@ class RL_client:
         self.agent.eval()
     def update_obs(self):
         self.master_ob = np.array([[self.context/3,self.rapport/3,self.perspective/3] ])
-        self.ob = np.concatenate([self.user_da,self.agent_da],axis=1)
+        self.ob = np.concatenate([self.user_da,self.agent_da,self.env.user.encoded_text],axis=1)
 
-    def step(self,da,lang='EN'):
+    def update_therapist_text(self,text):
+        text = self.translate_text(text)
+        self.env.user.last_therapist_text = self.env.user.therapist_text
+        self.env.user.turn = [self.env.user.turn[i] + 1 for i in range(self.n_parra)]
+        error = True
+        essai = 0
+        self.env.user.therapist_text = [text for i in range(self.n_parra)]
+    def step(self,patient_text,da,lang='EN'):
+
+
+
+
+
+        for i in range(self.n_parra):
+            self.env.user.text_context[i] += "Therapist: "
+            self.env.user.text_context[i]+=self.env.user.therapist_text[i]
+
+        self.env.user.encoded_text = self.env.user.embedding_model.encode(["classification: " + c for c in self.env.user.create_context(self.turn_id)], convert_to_tensor=True)
+        self.env.user.encoded_text = self.env.user.encoded_text.cpu()
+        #en  = GoogleTranslator(source='fr', target='en').translate(text=patient_text)
+        en= self.translate_text(patient_text)
+        text = [en for i in range(self.n_parra)]
+
+        for i in range(self.n_parra):
+            self.env.user.patient_text[i] = text[i]
+
+        for i in range(self.n_parra):
+            self.env.user.text_context[i] += "Patient: "
+            self.env.user.text_context[i] += self.env.user.patient_text[i]
+
+
+        self.env.user.last_patient_text = self.env.user.patient_text
+
+
         self.turn_id += 1 
         r = self.get_reward(da.replace(" ",""))
         try:
@@ -106,8 +148,8 @@ class RL_client:
             self.user_state = self.da_to_id["Unknown"]
         self.update_obs()
         if self.turn_id %3 == 0:
-            self.subpolicy =  self.agent.get_next_master_action(self.master_ob, evaluation_episode=True)
-        self.action =  self.agent.get_next_action(self.ob,self.subpolicy, evaluation_episode=True)
+            self.subpolicy =  self.agent.get_next_master_action(self.master_ob, evaluation_episode=False)
+        self.action =  self.agent.get_next_action(self.ob,self.subpolicy, evaluation_episode=False)
 
         if lang=="FR":
             return self.agent_da_fr[self.action[0]]

@@ -1,0 +1,33 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour Camille, moi c'est [NAME].
+Agent: [Baseline]EnchantÃ©e, GraigoireComment allez-vous aujourd'hui, Graigoire ?
+User: [Partager un sentiment ou une émotion négative]Ça va bien, mais je suis un peu fatigué. Ça va bien, mais je suis un peu fatigué.
+Agent: [Baseline]Je comprends, Graigoire. Fatiguai comment ?
+User: [Le maintien d'un comportement malsain à l'avenir]je bois bcp
+Agent: [Baseline]Je vois. Combien de verres d'alcool buvez-vous en jainairal par semaine, Graigoire ?
+User: [Le maintien d'un comportement malsain à l'avenir]De douze à treize bouteilles de vin
+Agent: [Baseline]Wow, c'est beaucoup. Savez-vous que la consommation excessive d'alcool peut avoir des consaiquences naifastes sur votre santai ?
+User: [Backchannel]Oui, je sais.
+Agent: [Baseline]Je comprends que vous aites au courant des risques, mais avez-vous daija envisajai de raiduire votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Envisager, ouais.
+Agent: [Baseline]Qu'est-ce qui vous empaiche de le faire, Graigoire ?
+User: [Partager un sentiment ou une émotion positive]Disons que ça me procure plus plus de plaisir que Disons que ça me procure plus plus de plaisir que Disons que ça me procure plus plus de plaisir que Disons que ça me procure plus plus de plaisir que Disons que ça me procure plus plus de plaisir que Disons que ça me procure plus plus de plaisir que Disons que ça me procure plus plus de plaisir que Disons que ça me procure plus plus de plaisir que que d'arrêter.
+Agent: [Baseline]Je comprends, mais avez-vous daija envisajai les avantages de raiduire votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Penser que les bénéfices immédiats.
+Agent: [Baseline]Je vois. Quels sont les avantages que vous voyez a raiduire votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]une meilleure qualité de sommeil
+Agent: [Baseline]C'est une excellente raison pour envisager de raiduire votre consommation d'alcool. Avez-vous daija essayai de mettre en place des changements dans votre consommation d'alcool auparavant ?
+User: [Le maintien d'un comportement malsain à l'avenir]Oui, j'ai déjà essayé, mais ça n'a pas marché.
+Agent: [Baseline]Je suis daisolai d'entendre cela, Graigoire. Qu'est-ce qui vous empaiche de raiussir a raiduire votre consommation d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]Bon, mon manque de motivation, je pense principalement.
+Agent: [Baseline]Je comprends. Avez-vous des objectifs ou des valeurs qui sont importants pour vous ?
+User: [Compréhension ou nouvelle perspective]Ça commence à très bien.
+Agent: [Baseline]C'est jainial a entendre, Graigoire. Qu'est-ce qui vous a aidai a vous sentir mieux ?
+User: [inconnu]Quoi Je n'ai pas compris.
+Agent: [Baseline]Je voulais dire, qu'est-ce qui vous a aidai a vous sentir mieux ces derniers temps ?
+User: [Le maintien d'un comportement malsain à l'avenir]Ah bien, le l'alcool
+Agent: [Baseline]Je vois. Avez-vous daija envisajai de raiduire votre consommation d'alcool pour vous sentir mieux ?
+User: [Le maintien d'un comportement malsain à l'avenir]Ah bien, le l'alcool
+Agent: [Baseline]Je comprends. Avez-vous des idais sur ce qui pourrait vous aider a raiduire votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Pas pas pour le moment. Est-ce que tu aurais des idées toi
+Agent: [Baseline]Il y a plusieurs choses que vous pourriez essayer, comme fixer des limites a votre consommation d'alcool, trouver des activitais alternatives pour vous daitendre ou vous amuser, ou encore demander de l'aide a un professionnel de la santai. Qu'est-ce qui vous semble le plus adaptai pour vous, Graigoire ?

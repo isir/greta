@@ -1,0 +1,65 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour je suis [NAME]
+Agent: [Backchannel]EnchantÃ©e, [NAME]Bonjour [NAME], enchantée ! Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]ça va pour le mieux et vous ?
+Agent: [Empathic Reaction]Je suis ravie de l'entendre, [NAME]. Merci de demander. Comment vous sentez-vous aujourd'hui ?
+User: [Partager un sentiment ou une émotion positive] Je me sens, je me sens bien.
+Agent: [Progress Acknowledgment]C'est formidable de vous entendre dire que vous vous sentez bien. Qu'est-ce qui vous fait sentir bien aujourd'hui ?
+User: [Partager un sentiment ou une émotion positive] Le fait qu'il fasse beau et j'ai un
+Agent: [Reflection]C'est super que le beau temps vous mette de bonne humeur. Il semble que les conditions météorologiques ont un impact positif sur votre bien-être.
+User: [Partager un sentiment ou une émotion positive] Effectivement,
+Agent: [Reflection]Il semble que le beau temps a vraiment un effet positif sur votre humeur. C'est une belle journée pour vous sentir bien.
+User: [Accueil ou clôture; Backchannel;] Oui je reviens.
+Agent: [Reflection]Je comprends que le beau temps vous apporte une sensation de bien-être. Cela montre que des éléments simples de votre environnement peuvent avoir un impact positif sur votre humeur.
+User: [Partager un sentiment ou une émotion positive] Quand il quand il fait beau,
+Agent: [Reflection]Il semble que le beau temps a un effet très positif sur votre humeur. Cela montre à quel point les conditions météorologiques peuvent influencer votre bien-être. Comment cela se traduit-il dans votre quotidien ?
+User: [Partager un sentiment ou une émotion positive] Je suis moins aigri, je me sens mieux mentalement.
+Agent: [Reflection]Il semble que le beau temps vous aide à vous sentir moins aigri et mieux mentalement. C'est une belle manière de voir comment l'environnement peut influencer votre bien-être.
+User: [Backchannel]c'est vra
+Agent: [Medical Education]Le beau temps peut vraiment avoir un impact positif sur notre humeur et notre bien-être mental. D'ailleurs, saviez-vous que l'activité physique peut également améliorer votre humeur et votre santé mentale ? Même de petites augmentations d'activité physique, comme marcher un peu plus chaque jour, peuvent avoir des effets bénéfiques. Avez-vous déjà pensé à intégrer plus d'activité physique dans votre quotidien ?
+User: [Partager des informations personnelles ou décrire un événement passé] Moi, avant je faisais du sport, j'ai arr?t?,
+Agent: [Ask about current Emotions]Je comprends que vous avez arrêté de faire du sport. Comment vous sentez-vous à ce sujet maintenant ?
+User: [Partager un sentiment ou une émotion négative] Maintenant je me sens plus lourd
+Agent: [Empathic Reaction]Je comprends que vous vous sentez plus lourd maintenant. Cela peut être difficile à vivre. Comment cela affecte-t-il votre quotidien ?
+User: [Partager un sentiment ou une émotion négative] ?a, c'est g?nant, on a on a dit tous les jours qu'on est acheteuse
+Agent: [Ask for Consent]Merci pour votre honnêteté, [NAME]. Voulez-vous que nous discutions de ce que vous ressentez et de comment vous pourriez peut-être intégrer à nouveau de l'activité physique dans votre quotidien ?
+User: [Accueil ou clôture] Oui pourquoi pas.
+Agent: [Reflection]Il semble que vous ressentez un certain inconfort par rapport à votre poids et à votre inactivité physique. Cela montre que vous êtes conscient de l'importance de l'activité physique pour votre bien-être. Comment envisagez-vous de reprendre une activité physique ?
+User: [inconnu] De passer plus de temps
+Agent: [Experience Normalization]Il est tout à fait normal de se sentir gêné ou mal à l'aise lorsqu'on arrête de faire du sport. Beaucoup de personnes passent par des périodes d'inactivité et ressentent les mêmes choses. C'est un sentiment très courant. Comment pensez-vous pouvoir intégrer à nouveau de l'activité physique dans votre quotidien ?
+User: [inconnu] Je ne sais pas encore.
+Agent: [Reflection]Je comprends que vous n'avez pas encore trouvé comment intégrer à nouveau de l'activité physique dans votre quotidien. C'est tout à fait normal de ne pas avoir de réponse immédiate. Prendre le temps de réfléchir à ce qui pourrait vous convenir est une bonne première étape.
+User: [inconnu]ca peux aider
+Agent: [Reflection]Il est tout à fait normal de ne pas savoir par où commencer. Prendre le temps de réfléchir à ce qui pourrait vous convenir est une étape importante. Avez-vous des activités que vous aimiez particulièrement faire auparavant ?
+User: [Partager des informations personnelles ou décrire un événement passé]courir faire du judo aller à la sale
+Agent: [Reflection]Il semble que vous aimiez courir, faire du judo et aller à la salle de sport auparavant. Ces activités vous apportaient probablement beaucoup de satisfaction et de bien-être. Comment vous sentez-vous à l'idée de reprendre l'une de ces activités ?
+User: [Partager un sentiment ou une émotion positive] Je me sens plus d'attaque ? recommencer ? faire ce point-l? parce que
+Agent: [Reflection]Il semble que vous ne vous sentez pas encore prêt à recommencer ces activités. C'est tout à fait compréhensible. Parfois, il faut du temps pour retrouver la motivation et l'énergie nécessaires. Comment pourrions-nous envisager de petites étapes pour vous aider à vous remettre en mouvement ?
+User: [Partager un sentiment ou une émotion négative] Je ne sais pas encore comment
+Agent: [Empathic Reaction]Je comprends que cela puisse être difficile de savoir par où commencer. Il est tout à fait normal de se sentir indécis. Prenez le temps dont vous avez besoin pour réfléchir à ce qui pourrait vous convenir le mieux.
+User: [Compréhension ou nouvelle perspective] Tu as raison.
+Agent: [Progress Acknowledgment]C'est une bonne chose de prendre le temps de réfléchir à ce qui pourrait vous convenir le mieux. Il est important de ne pas se précipiter et de trouver une activité qui vous plaît vraiment. Avez-vous des idées de petites activités que vous pourriez intégrer dans votre quotidien pour commencer ?
+User: [inconnu] Faire du sport ? la maison.
+Agent: [Ask about current Emotions]Comment vous sentez-vous à l'idée de faire du sport à la maison ? Quelles émotions cela suscite-t-il en vous ?
+User: [inconnu] La sensation.
+Agent: [Progress Acknowledgment]C'est une excellente idée de commencer par faire du sport à la maison. Cela peut être une manière douce et accessible de reprendre une activité physique. Quelles sensations cela vous procure-t-il de penser à faire du sport à la maison ?
+User: [Partager un sentiment ou une émotion positive] La satisfaction est
+Agent: [Backchannel]Je vois, la satisfaction. C'est un bon début. Quelles activités spécifiques pourriez-vous envisager de faire à la maison ?
+User: [Partager des informations personnelles ou décrire un événement passé; Modifier les comportements malsains à l'avenir] C'est pas des pompes, les squats.
+Agent: [Ask for Consent]Cela semble être une bonne idée. Seriez-vous d'accord pour que nous discutions de la manière dont vous pourriez intégrer ces exercices dans votre routine quotidienne ?
+User: [Partager un sentiment ou une émotion positive]pourquoi pas
+Agent: [Medical Education]Très bien, [NAME]. Laissez-moi vous donner quelques conseils pour intégrer des exercices comme les pompes et les squats dans votre routine quotidienne.  Les pompes et les squats sont des exercices simples et efficaces qui peuvent être faits à la maison sans équipement. Voici quelques suggestions pour commencer :  1. **Démarrez en douceur** : Si vous n'avez pas fait d'exercice depuis un moment, commencez par de petites séries. Par exemple, faites 5 pompes et 5 squats par jour.  2. **Augmentez progressivement** : Une fois que vous vous sentez à l'aise avec les petites séries, augmentez graduellement le nombre de répétitions. Par exemple, passez à 10 pompes et 10 squats par jour.  3. **Fixez des objectifs réalistes** : Définissez des objectifs que vous pouvez atteindre sans trop de pression. Par exemple, vous pouvez viser à faire 3 séries de 10 pompes et squats chaque jour.  4. **Intégrez dans votre routine** : Trouvez des moments dans votre journée où vous pouvez facilement faire ces exercices. Par exemple, faites-les en regardant la télévision ou en attendant que votre repas cuise.  5. **Soyez constant** : La clé est de faire ces exercices régulièrement. Même si vous ne pouvez pas faire beaucoup de répétitions, la constance est plus importante.  N'oubliez pas que l'important est de commencer et de rester régulier. Vous pouvez toujours ajuster vos exercices en fonction de vos capacités et de vos objectifs.  Comment vous sentez-vous à l'idée de commencer par ces petites étapes ?
+User: [Compréhension ou nouvelle perspective] Je pense que c'est faisable.
+Agent: [Ask about current Emotions]C'est formidable que vous trouviez cela faisable. Comment vous sentez-vous à l'idée de commencer par ces petites étapes ? Quelles émotions ressentez-vous en ce moment ?
+User: [inconnu] Je ne dais pas
+Agent: [Reflection]Il semble que vous vous sentez incertain ou peut-être un peu anxieux à l'idée de commencer ces petites étapes. C'est tout à fait normal de ressentir cela lorsqu'on se lance dans quelque chose de nouveau ou après une pause. Comment pouvons-nous rendre cela plus confortable pour vous ?
+User: [inconnu]je ne me suis pas posé la quesiton
+Agent: [Reflection]Il semble que vous n'avez pas encore réfléchi à la manière dont vous vous sentez à l'idée de commencer ces petites étapes. C'est tout à fait normal de ne pas avoir toutes les réponses immédiatement. Prendre le temps de réfléchir à vos sentiments et à vos besoins est une étape importante. Comment pouvons-nous avancer ensemble pour rendre cela plus clair pour vous ?
+User: [inconnu] En allant, on en doit, 3, 3, 3, 3, 3, 4,
+Agent: [Reflection]Il semble que vous soyez prêt à essayer de commencer par de petites séries d'exercices. Cela montre que vous êtes ouvert à l'idée de faire des changements progressifs. Comment vous sentez-vous par rapport à cette décision ?
+User: [Backchannel]d'accord
+Agent: [Reflection]Je comprends que vous êtes prêt à essayer de commencer par de petites séries d'exercices. Cela montre que vous êtes ouvert à l'idée de faire des changements progressifs. Comment vous sentez-vous par rapport à cette décision ?
+User: [Modifier les comportements malsains à l'avenir] Je suis, je suis pour.
+Agent: [Reflection]Je vois que vous êtes ouvert à l'idée de commencer par de petites séries d'exercices. Cela montre que vous êtes prêt à faire des changements progressifs pour améliorer votre bien-être. Comment vous sentez-vous par rapport à cette décision ?
+Agent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+

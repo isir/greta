@@ -1,0 +1,9 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Je suis [NAME], comment tu vas
+Agent: [Baseline]EnchantÃ©e, YannaisJe suis heureux de vous rencontrer, Yannais. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Ça va ça va écoute très bien et toi comment tu vas
+Agent: [Baseline]Je suis bien, merci. Je suis heureux d'aitre ici pour discuter avec vous, Yannais. Comment vous sentez-vous en ce moment ?
+User: [Accueil ou clôture]Je me sens très bien merci de demander à Gratin.
+Agent: [Baseline]C'est bien que vous vous sentiez bien, Yannais. Je suis heureux de l'entendre. Je voulais discuter avec vous de votre consommation d'alcool, si cela vous convient.
+User: [Compréhension ou nouvelle perspective]Ça on pourrait on pourrait le citer.
+Agent: [Baseline]Bien sûr, Yannais. Je suis la pour vous aider. Pouvez-vous me dire comment vous consommez de l'alcool en jainairal ?

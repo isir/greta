@@ -1,0 +1,27 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je suis [NAME].
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture]je vais bien
+Agent: [Baseline]C'est super à entendre, [NAME]. Comment vous sentez-vous par rapport à votre niveau d'activité physique en ce moment ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]je fais du sport pas regulierement mais ca va
+Agent: [Baseline]D'accord, [NAME]. Qu'est-ce qui vous empêche de faire du sport plus régulièrement ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Les cours.
+Agent: [Baseline]Je comprends, les cours peuvent être très prenants. Avez-vous déjà pensé à des moyens de intégrer plus d'activité physique dans votre emploi du temps ?
+User: [Backchannel] Oui,
+Agent: [Baseline]C'est un bon début. Quelles idées avez-vous eues jusqu'à présent pour augmenter votre activité physique ?
+User: [Modifier les comportements malsains � l'avenir] Marcher plus, courir,
+Agent: [Baseline]Ce sont de bonnes idées, [NAME]. Quelle activité vous semble la plus réalisable pour commencer cette semaine ?
+User: [Modifier les comportements malsains � l'avenir] Marcher plus.
+Agent: [Baseline]Très bien, marcher plus est une excellente idée. Quelle étape concrète pourriez-vous prendre pour marcher davantage cette semaine ?
+User: [inconnu] Vous voulez prendre le bus march?
+Agent: [Baseline]Oui, par exemple, vous pourriez descendre un arrêt plus tôt pour marcher le reste du chemin. Qu'en pensez-vous ?
+User: [Compr�hension ou nouvelle perspective] C'est ?a.
+Agent: [Baseline]Super, [NAME]. Est-ce que vous pensez pouvoir essayer cela au moins une fois cette semaine ?
+User: [Modifier les comportements malsains � l'avenir] Cette semaine, je ne pense pas, mais il faut y revenir pourquoi.
+Agent: [Baseline]D'accord, [NAME]. Qu'est-ce qui vous empêche de le faire cette semaine ?
+User: [inconnu] Lu, pourquoi pas.
+Agent: [Baseline]C'est un bon plan, [NAME]. Quel jour pensez-vous pouvoir commencer à marcher plus ?
+User: [inconnu]je sais pas
+Agent: [Baseline]Pas de souci, [NAME]. Que diriez-vous de choisir un jour spécifique pour commencer, par exemple lundi prochain ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�;  Le maintien d'un comportement malsain � l'avenir] Peut-?tre oui.
+Agent: [Baseline]Super, [NAME]. Donc, vous essayerez de marcher plus lundi prochain. Comment vous sentez-vous à cette idée ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !

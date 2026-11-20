@@ -1,0 +1,9 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour Camille, je m'appelle [NAME] et toi comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je suis heureux de vous rencontrer, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais très bien. Je suis très content de discuter avec vous aujourd'hui.
+Agent: [Baseline]C'est trais bien, [NAME]. Je suis heureux d'entendre cela. Vous avez mentionnai que vous aites heureux de discuter avec moi aujourd'hui. Qu'est-ce qui vous amaine a vouloir discuter avec moi ?
+User: [Le patient partage un sentiment ou une émotion négative.]Je suis venu discuter avec vous de ma consommation d'alcool qui je trouve Je suis venu discuter avec vous de ma consommation d'alcool qui je trouve Je suis venu discuter avec vous de ma consommation d'alcool qui je trouve commence à être exagérée.
+Agent: [Baseline]Je vois, [NAME]. Merci de me partager cela. Il est courageux de votre part de reconnaitre que votre consommation d'alcool est devenue excessive. Pouvez-vous me dire plus sur ce qui vous amaine a penser cela ?
+User: [Compréhension ou nouvelle perspective]Je crois que c'est mon entourage et mon ma famille qui m'a un peu Je crois que c'est mon entourage et mon ma famille qui m'a un peu Je crois que c'est mon entourage et mon ma famille qui m'a un peu Je crois que c'est mon entourage et mon ma famille qui m'a un peu signalé que j'abusais un peu.
+Agent: [Baseline]Je comprends, [NAME]. Il peut aitre difficile d'entendre que nos proches sont praioccupais par notre consommation d'alcool. Comment cela vous fait-il sentir ?

@@ -1,0 +1,23 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture][NAME]
+Agent: [Experience Normalization]Enchantée, [NAME]Bonjour [NAME]. Enchantée de vous rencontrer. Beaucoup de personnes trouvent difficile de commencer à augmenter leur activité physique, mais avec un peu de soutien, c'est tout à fait possible. Comment allez-vous aujourd'hui ?
+User: [inconnu] Voil?
+Agent: [Ask for Consent][NAME], ça vous va si nous parlons de votre activité physique et de ce que vous aimeriez améliorer ?
+User: [Backchannel] Oui, c'est bon.
+Agent: [Reflection]Merci, [NAME]. Il semble que vous soyez prête à discuter de votre activité physique et de ce que vous aimeriez améliorer. C'est un bon point de départ. Comment vous sentez-vous à l'idée d'augmenter votre activité physique ?
+User: [inconnu] Je vous en pr?te.
+Agent: [Ask for Information]Merci, [NAME]. Pour mieux comprendre, pouvez-vous me dire combien de temps par semaine vous passez à faire de l'activité physique en ce moment ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Entre une heure trente et trois heures.
+Agent: [Planning with the Patient]C'est un bon début, [NAME]. Pour la semaine prochaine, seriez-vous d'accord pour essayer d'ajouter 30 minutes d'activité physique supplémentaires, comme une promenade ou une activité que vous aimez ?
+User: [Backchannel] Am
+Agent: [Give Solution]Bien sûr, [NAME]. Une façon simple d'augmenter votre activité physique serait d'ajouter quelques marches supplémentaires dans votre routine quotidienne. Par exemple, vous pourriez essayer de marcher 10 minutes de plus par jour. Cela pourrait être une promenade après le dîner ou un petit tour pendant votre pause déjeuner. Qu'en pensez-vous ?
+User: [inconnu] Apr?s je vais
+Agent: [Backchannel]D'accord, cela semble être une bonne idée. Y a-t-il un moment de la journée qui vous conviendrait le mieux pour ajouter ces 10 minutes de marche ?
+User: [inconnu]plutot le matin
+Agent: [Empathic Reaction]Je comprends, [NAME]. Le matin peut être un moment agréable pour marcher et commencer la journée de manière active. Comment vous sentez-vous à l'idée de marcher 10 minutes de plus le matin ?
+User: [Modifier les comportements malsains � l'avenir] ?a va, c'est possible.
+Agent: [Empathic Reaction]C'est super, [NAME]. Je vois que vous êtes ouverte à cette idée, et c'est un excellent premier pas. Vous avez déjà fait des progrès en y réfléchissant. Y a-t-il quelque chose qui pourrait vous aider à vous motiver davantage pour cette marche matinale ?
+User: [Modifier les comportements malsains � l'avenir] Non je pense que ?a va aller.
+Agent: [Invite to Shift Outlook]Super, [NAME]. Imaginez comment vous vous sentirez après une semaine de ces marches matinales. Vous pourriez ressentir une énergie accrue et une sensation de bien-être. Qu'en pensez-vous ?
+User: [Partager un sentiment ou une �motion n�gative] Je suis pas s?r que dix minutes par jour ?a suffise pour un grand changement.
+Agent: [Greeting or Closing]Je comprends vos doutes, [NAME]. Même de petits changements peuvent avoir un impact positif sur votre bien-être. Et si on essayait ces 10 minutes et qu'on en reparlait la semaine prochaine ? Qu'en dites-vous ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

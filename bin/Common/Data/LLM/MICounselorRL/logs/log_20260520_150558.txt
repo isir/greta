@@ -1,0 +1,15 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [k]Bonjour [NAME], je suis nazi. Comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je suis heureux de faire votre connaissance, Nazi. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais bien, merci et toi Comment tu vas
+Agent: [Baseline]Je suis bien aussi, merci. Je suis ici pour discuter avec vous de votre consommation d'alcool. Comment cela se passe-t-il pour vous en ce moment ?
+User: [Partager un sentiment ou une émotion négative]J'ai envie de vous dire que c'est plutôt compliqué. J'ai envie de vous dire que c'est plutôt compliqué. J'ai envie de vous dire que c'est plutôt compliqué. Je bois beaucoup et j'ai du mal à gérer ça.
+Agent: [Baseline]Je suis daisolai d'entendre que vous rencontrez des difficultais avec votre consommation d'alcool. Il est courageux de votre part de vouloir en parler. Pouvez-vous me dire ce qui vous inquiaite le plus a propos de votre consommation actuelle ?
+User: [Le maintien d'un comportement malsain à l'avenir]à mettre fin à tout ça
+Agent: [Baseline]Je comprends que vous souhaitiez mettre fin a votre consommation d'alcool. Pouvez-vous me dire ce qui vous motive a vouloir changer ?
+User: [Compréhension ou nouvelle perspective]Je sais pas, j'ai l'impression que j'ai un très gros impact sur mon Je sais pas, j'ai l'impression que j'ai un très gros impact sur mon Je sais pas, j'ai l'impression que j'ai un très gros impact sur mon Je sais pas, j'ai l'impression que j'ai un très gros impact sur mon Je sais pas, j'ai l'impression que j'ai un très gros impact sur mon entourage et j'aimerais réduire ça.
+Agent: [Baseline]Je comprends. Il est important de prendre en compte les consaiquences de votre consommation d'alcool sur vous et sur les autres. Avez-vous daija essayai de raiduire votre consommation dans le passai ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non malheureusement je n'ai jamais essayé, je n'ai jamais eu le courage de le faire.
+Agent: [Baseline]Je comprends que cela puisse aitre difficile. Mais je suis fier de vous pour avoir pris la daicision de vouloir changer aujourd'hui. Pouvez-vous me dire ce qui vous a motivai a vouloir changer maintenant ?
+User: [Compréhension ou nouvelle perspective]Mais ce qui me motive à changer, c'est que tu Mais ce qui me motive à changer, c'est que tu Mais ce qui me motive à changer, c'est que tu Mais ce qui me motive à changer, c'est que tu Mais ce qui me motive à changer, c'est que tu Mais ce qui me motive à changer, c'est que tu Mais ce qui me motive à changer, c'est que tu me fais pas de là, c'est bizarre, pourquoi
+Agent: [Baseline]Je suis daisolai si j'ai craiai de la confusion. Je suis ici pour vous aider a explorer vos motivations pour changer votre consommation d'alcool. Pouvez-vous me dire ce qui vous a motivai a vouloir changer maintenant ?

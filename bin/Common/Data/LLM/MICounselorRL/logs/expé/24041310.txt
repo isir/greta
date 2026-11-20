@@ -1,0 +1,19 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je suis [NAME].
+Agent: [Medical Education]Enchantée, [NAME]Bonjour, je suis Camille. Enchantée, [NAME]. Je suis ici pour vous aider à discuter de votre consommation d'alcool. Savez-vous qu'il est recommandé de ne pas dépasser 2 verres par jour, et pas tous les jours, pour éviter des risques pour la santé ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Non je ne le savais pas.
+Agent: [Empathic Reaction]Je comprends, [NAME]. Il est normal de ne pas connaître tous les repères. Parlons-en ensemble pour mieux comprendre et voir comment vous pouvez adapter votre consommation. Comment vous sentez-vous par rapport à votre consommation d'alcool actuelle ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Elle est plut?t rare.
+Agent: [Reflection]Je comprends que votre consommation d'alcool est plutôt rare. C'est un bon point de départ. Comment vous sentez-vous par rapport à cette consommation ? Y a-t-il des moments où vous vous sentez plus tenté de boire ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Plut?t dans les moments festifs.
+Agent: [Reflection]Je comprends que vous buvez principalement dans les moments festifs. Il est normal de vouloir célébrer avec des amis ou en famille. Comment vous sentez-vous après ces moments de consommation ?
+User: [Partager un sentiment ou une �motion positive] ?a d?pend de la consommation, mais plut?t bien.
+Agent: [Reflection]Je comprends que votre bien-être après avoir bu dépend de la quantité consommée, mais globalement, vous vous sentez bien. C'est important de prendre en compte ces sentiments. Y a-t-il des moments où vous avez ressenti des effets négatifs après avoir bu ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Seulement quand on m'a rendu malade,
+Agent: [Medical Education]C'est tout à fait normal de ressentir des effets négatifs après une consommation excessive. Saviez-vous que même une consommation modérée peut avoir des impacts sur la santé ? Par exemple, dépasser 2 verres par jour peut augmenter les risques d'hémorragie cérébrale, de cancers et d'hypertension. Qu'en pensez-vous ?
+User: [Compr�hension ou nouvelle perspective] Je je comprends.
+Agent: [Medical Education]Merci de votre compréhension, [NAME]. Il est important de savoir que la consommation d'alcool, même modérée, peut avoir des effets sur la santé. Les nouveaux repères recommandent de ne pas dépasser 10 verres par semaine, avec un maximum de 2 verres par jour, et d'avoir des jours sans consommation. Cela permet de réduire les risques d'hémorragie cérébrale, de cancers et d'hypertension. Comment pouvons-nous travailler ensemble pour que vous respectiez ces repères ? END_CONVO
+User: [Modifier les comportements malsains � l'avenir] Un planning peut-?tre
+Agent: [Planning with the Patient]Excellente idée, [NAME]. Un planning peut vraiment aider. Que diriez-vous de fixer un objectif pour la semaine prochaine ? Par exemple, essayer de ne pas dépasser 2 verres par jour et avoir au moins 2 jours sans alcool ? Qu'en pensez-vous ?
+User: [Modifier les comportements malsains � l'avenir] C'est largement possible oui.
+Agent: [Greeting or Closing]Parfait, [NAME]. Je suis ravie que vous trouviez cela possible. N'hésitez pas à me contacter si vous avez besoin de soutien supplémentaire. Prenez soin de vous. END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

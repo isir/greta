@@ -1,0 +1,10 @@
+Agent: []Thank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.
+Agent: []Hello, I'm Camille. What's your name?
+User: [unknown]No. I'm done.
+Agent: [Greeting or Closing]Don't worry, we can continue without it.Understood. Let's get started whenever you're ready. How are you doing today?
+User: [Greeting or Closing]I'm doing good.
+Agent: [Empathic Reaction]Glad to hear that. It sounds like you're having a good day.
+User: [Greeting or Closing]Yes.
+Agent: [Reflection]It sounds like you're feeling pretty good today.
+User: [unknown]Not really.
+Agent: [Reflection]It sounds like you're feeling a bit mixed today.

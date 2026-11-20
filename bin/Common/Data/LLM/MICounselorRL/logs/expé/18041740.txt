@@ -1,0 +1,37 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture]je m'apelle [NAME]
+Agent: [Give Solution]Enchantée, [NAME]Bonjour Ines. Enchantée de vous rencontrer. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture]je vais bien merci
+Agent: [Planning with the Patient]Super, je suis ravie de l'entendre. Pourriez-vous me parler un peu de votre consommation d'alcool actuelle ? Comment cela se passe pour vous ?
+User: [Modifier les comportements malsains � l'avenir]actuellemnt j'ai beaucoup diminue aprceque avent 4 a 5 fois maintenant 1 fos
+Agent: [Reflection]Il semble que vous avez fait un effort notable pour réduire votre consommation d'alcool, en passant de 4 à 5 fois par semaine à une seule fois. C'est un progrès important. Comment vous sentez-vous par rapport à ce changement ?
+User: [Partager un sentiment ou une �motion positive]je trouve qeu c'est bien
+Agent: [Reflection]Il semble que vous êtes satisfaite de cette réduction de votre consommation d'alcool. C'est un bon signe que vous reconnaissez les bénéfices de ce changement. Comment envisagez-vous de continuer sur cette voie ?
+User: [Modifier les comportements malsains � l'avenir]je pense continuer sur la meme periodicite de condo 1 foiq
+Agent: [Reflection]Il semble que vous êtes déterminée à maintenir cette fréquence de consommation, c'est-� -dire une fois par semaine. C'est une bonne décision, et il est important de reconnaître les efforts que vous avez déjà faits. Comment vous sentez-vous par rapport à cette décision ?
+User: [Partager un sentiment ou une �motion positive]je me sens bien
+Agent: [Ask for Consent]Ines, est-ce que vous seriez d'accord pour que nous discutions un peu plus en détail de votre consommation actuelle et de la façon dont vous pouvez continuer à maintenir cette réduction ?
+User: [Accueil ou cl�ture]oui bien sur
+Agent: [Progress Acknowledgment]Merci, Ines. Il est vraiment encourageant de voir que vous vous sentez bien avec cette réduction de consommation. C'est un grand pas en avant. Avez-vous des stratégies spécifiques qui vous aident à maintenir cette réduction ?
+User: [Modifier les comportements malsains � l'avenir]eviter de sortir en soiree ou boire un verre avec des amis sans alcol
+Agent: [Planning with the Patient]C'est une excellente stratégie. Pour continuer sur cette voie, serait-il possible de fixer une étape concrète pour la semaine prochaine ? Par exemple, pourriez-vous essayer de boire un verre sans alcool lors de chaque sortie avec des amis ? Qu'en pensez-vous ?
+User: [Modifier les comportements malsains � l'avenir; Backchannel]oui possible
+Agent: [Reflection]Il semble que vous êtes prête à continuer à faire des efforts pour maintenir cette réduction. C'est vraiment encourageant. Avez-vous d'autres idées ou stratégies qui pourraient vous aider à atteindre cet objectif ?
+User: [Accueil ou cl�ture; Backchannel]non je ne pense pas c'est bien
+Agent: [Empathic Reaction]Je comprends, Ines. Il est tout à fait normal de se sentir bien avec les efforts que vous avez déjà faits. Vous avez déjà accompli beaucoup en réduisant votre consommation, et c'est une excellente base pour continuer. Si vous avez besoin de plus de soutien ou d'idées, n'hésitez pas à en parler. END_CONVO
+User: [Accueil ou cl�ture; Backchannel]d'accord
+Agent: [Ask for Consent]Ines, avant de clôturer notre session, avez-vous d'autres questions ou y a-t-il quelque chose d'autre dont vous aimeriez parler ?
+User: [Accueil ou cl�ture]non je en pense pas
+Agent: [Backchannel]D'accord, Ines. Merci pour cette conversation. N'hésitez pas à revenir si vous avez besoin de plus de soutien. Bonne continuation ! END_CONVO
+User: [Accueil ou cl�ture]merci
+Agent: [Planning with the Patient]Ines, pour établir un plan concret pour la semaine prochaine, pourriez-vous essayer de boire un verre sans alcool lors de chaque sortie avec des amis ? Cela pourrait vous aider à maintenir votre réduction de consommation. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains � l'avenir; Backchannel]bonne idee c'est possible
+Agent: [Backchannel]Super, c'est une excellente décision. Avez-vous des inquiétudes ou des défis que vous anticipez pour cette semaine ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]cette semaine j'ai un anniversaire avec beaucoup d'alcool
+Agent: [Reflection]Je comprends, Ines. Les événements comme les anniversaires peuvent être particuliers et présentent des défis. Il est important de reconnaître que ce sera peut-être plus difficile, mais vous avez déjà montré que vous êtes capable de faire des choix positifs. Comment pensez-vous gérer cette situation ?
+User: [inconnu]je pense mes verrs
+Agent: [Reflection]Il semble que vous avez une bonne stratégie pour gérer la situation lors de l'anniversaire. C'est important de se préparer et d'avoir un plan. Avez-vous d'autres idées ou besoins pour vous sentir plus confiante dans cette situation ?
+User: [Accueil ou cl�ture]non j'ai pas d'autres idee
+Agent: [Reflection]Ines, il semble que vous avez un bon plan pour gérer la situation lors de l'anniversaire en prévoyant de boire des verres sans alcool. C'est une excellente stratégie pour rester sur la voie de la réduction de votre consommation. Vous montrez vraiment de la détermination et de la prévoyance.
+Agent: []Merci d�avoir pris ce temps pour �changer avec moi. J�esp�re que cette discussion vous a �t� utile. Vous avez d�j� fait un grand pas en r�fl�chissant � tout cela. Je vous souhaite plein de r�ussite dans votre d�marche !
+

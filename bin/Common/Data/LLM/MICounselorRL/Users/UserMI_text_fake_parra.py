@@ -4,7 +4,7 @@ import numpy as np
 
 from openai import OpenAI
 import torch
-
+from sentence_transformers import SentenceTransformer
 import json
 
 
@@ -65,7 +65,8 @@ class UserMI:
         self.text_context = ["Context: " for i in range(self.n_parra)]
         self.turn = [0 for i in range(self.n_parra)]
         self.cluster = False
-
+        self.embedding_model = SentenceTransformer("nomic-ai/nomic-embed-text-v1.5",trust_remote_code=True)
+                 
         self.encoded_text = torch.zeros((n_parra,768))
 
 

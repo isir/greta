@@ -1,0 +1,25 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]Thank you for asking.
+Agent: [Baseline]I'm glad you're here, [NAME]. I understand your doctor suggested we talk about your drinking. How do you feel about that?
+User: [Sharing negative feeling or emotion]I feel a bit stressed. I feel a bit stressed. I feel a bit stressed. I feel a bit stressed. I feel a bit stressed. A little bit.
+Agent: [Baseline]It sounds like you're feeling overwhelmed, [NAME]. That's understandable. Can you tell me more about what's been stressing you lately?
+User: [Sharing negative feeling or emotion]I'm drinking a lot of alcohol, and I'm feeling a bit sad.
+Agent: [Invite to Shift Outlook]Imagine if you could feel less stressed and sad. What would that look like for you, [NAME]?
+User: [unknown]I mean, I think
+Agent: [Ask about current Emotions]How intense is the sadness you're feeling right now, [NAME], on a scale of 1 to 10?
+User: [Sharing negative feeling or emotion]I think 10.
+Agent: [Empathic Reaction]I'm really sorry to hear that you're feeling so overwhelmed, [NAME]. It sounds like you're going through a tough time.
+User: [Backchannel]Yeah.
+Agent: [Ask for Consent]Before we go on, [NAME], is it okay if I ask you some questions to better understand your situation?
+User: [Greeting or Closing]Yeah. It's fine.
+Agent: [Ask about current Emotions]How are you feeling right now, [NAME], besides the sadness?
+User: [unknown]Good. I mean, normal.
+Agent: [Ask for Consent]Is it okay if I share some information about alcohol use, [NAME]?
+User: [Greeting or Closing]It's fine.
+Agent: [Experience Normalization]You're not alone in feeling this way, [NAME]. Many people struggle with feeling overwhelmed and turn to alcohol for relief.
+User: [unknown]Good.
+Agent: [Ask for Consent]Would it be okay if we explore some ways to help you feel less stressed and sad, [NAME]?
+User: [unknown]Oh, it's okay.
+Agent: [Reflection]It sounds like you're not sure if you want to make changes, [NAME].

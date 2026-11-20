@@ -159,15 +159,20 @@ class Microphone(Thread):
                 
                 print(device_info)
         
-        mic_index = 0
-        mic_name = self.p.get_device_info_by_host_api_device_index(0, mic_index).get('name').encode('ascii', 'ignore')
-        print("### Selected mic is {} with index {}".format(mic_name, mic_index))
-        
-        print("##############################################################################")
-        print("[INFO] If you want to specify microphone to use,")
-        print("       please specify device index by changing \"input_device_index\"")
-        print("       in bin\Common\Data\microphone\mic_server.py")
-        print("##############################################################################")
+        # -------------------------------------------------------------------
+        # Set mic_index to a specific device ID (e.g. 1) to force a mic,
+        # or set to None to use the Windows default recording device.
+        # -------------------------------------------------------------------
+        mic_index = 1
+
+        if mic_index is not None:
+            mic_name = self.p.get_device_info_by_host_api_device_index(0, mic_index).get('name').encode('ascii', 'ignore')
+            print("### Selected mic is {} with index {}".format(mic_name, mic_index))
+        else:
+            default_info = self.p.get_default_input_device_info()
+            print("### Using system default mic: {} (index {})".format(
+                default_info.get('name', '?').encode('ascii', 'ignore'),
+                default_info.get('index', '?')))
         
         def callback(in_data, frame_count, time_info, status):
             return (in_data, pyaudio.paContinue)

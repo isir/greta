@@ -476,7 +476,13 @@ public class MICounselorRL extends LLMFrame{
                                     System.getProperty("user.dir")+python_path_llm,server.getPort(),
                                 };
                                 Runtime rt = Runtime.getRuntime();
-                                System.out.println("command:"+cmd[0]+" "+cmd[1]+" "+cmd[2]);
+                                String command = "command: ";
+                                for(String i : cmd){
+                                    command += i;
+                                    command += " ";
+                                }
+                                    
+                                System.out.println(command);
 
                                 Process proc = rt.exec(cmd);
 
@@ -493,7 +499,15 @@ public class MICounselorRL extends LLMFrame{
 
                                     if(s.contains("STOP")){
 
-                                        load(endSentenceFile, CompositionType.append, false, true);
+                                        // Run TTS load on a separate thread so we never block
+                                        // the stdout reader (prevents pipe buffer deadlock).
+                                        new Thread(() -> {
+                                            try {
+                                                load(endSentenceFile, CompositionType.append, false, true);
+                                            } catch (Exception ex) {
+                                                System.out.println("[MICounselorRL] endSentence load error: " + ex.getMessage());
+                                            }
+                                        }).start();
 
                                         synchronized (lock) {
                                             IsStreaming = Boolean.FALSE;                                            
@@ -503,41 +517,48 @@ public class MICounselorRL extends LLMFrame{
 
                                         if(s.length()>1){
 
-                                            synchronized (lock) {
-                                                System.out.println("Already on answer:"+AnswerText.getText());
-                                                System.out.println("answer:"+s);
-                                                AnswerText.setText(AnswerText.getText()+ s);                                                    
-                                            }
+                                            final String answerChunk = s;
+                                            javax.swing.SwingUtilities.invokeLater(() -> {
+                                                AnswerText.setText(AnswerText.getText() + answerChunk);
+                                            });
+                                            System.out.println("answer:"+s);
 
                                             if(s.contains("START:")){
 
                                                 System.out.println("TEXTE:"+s);
                                                 s = s.replace("START:", "");
-                                                String file=TextToFML(s, false);
+                                                final String fmlText = s;
                                                 s=null;                                                        
 
-                                                //load(file, CompositionType.append);
-                                                load(file, CompositionType.replace, true, false);
+                                                // Run TTS on separate thread to keep reader unblocked
+                                                new Thread(() -> {
+                                                    try {
+                                                        String file = TextToFML(fmlText, false);
+                                                        load(file, CompositionType.replace, true, false);
+                                                    } catch (Exception ex) {
+                                                        System.out.println("[MICounselorRL] START load error: " + ex.getMessage());
+                                                    }
+                                                }).start();
 
                                             }
                                             else{
 
                                                 System.out.println("TEXTE:"+s);
-                                                String file=TextToFML(s, false);
-                                                
-                                                if (s.contains("END_CONVO")) {
-                                                    
-                                                    s = s.replace("END_CONVO", "");
-                                                    s=null;                                            
-                                                    load(file, CompositionType.append, true, false);
+                                                final String chunkText = s;
 
-                                                    // String finalSentence = "This is the end of the session, see you later.";
-                                                    // file=TextToFML(finalSentence, false);
-                                                    // load(file, CompositionType.append, true, false);
-
-                                                } else {
-                                                    load(file, CompositionType.append, true, false);
-                                                }
+                                                // Run TTS on separate thread to keep reader unblocked
+                                                new Thread(() -> {
+                                                    try {
+                                                        String file = TextToFML(chunkText, false);
+                                                        if (chunkText.contains("END_CONVO")) {
+                                                            load(file, CompositionType.append, true, false);
+                                                        } else {
+                                                            load(file, CompositionType.append, true, false);
+                                                        }
+                                                    } catch (Exception ex) {
+                                                        System.out.println("[MICounselorRL] chunk load error: " + ex.getMessage());
+                                                    }
+                                                }).start();
                                                 
                                             }
                                         }
@@ -551,14 +572,6 @@ public class MICounselorRL extends LLMFrame{
                                 }
 
                             } catch (IOException ex) {
-                                Logger.getLogger(MICounselorRL.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (ParserConfigurationException ex) {
-                                Logger.getLogger(MICounselorRL.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (SAXException ex) {
-                                Logger.getLogger(MICounselorRL.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (TransformerException ex) {
-                                Logger.getLogger(MICounselorRL.class.getName()).log(Level.SEVERE, null, ex);
-                            } catch (JMSException ex) {
                                 Logger.getLogger(MICounselorRL.class.getName()).log(Level.SEVERE, null, ex);
                             }
                         } 
@@ -598,6 +611,14 @@ public class MICounselorRL extends LLMFrame{
 
     private void sendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendActionPerformed
         
+        // Prevent sending while a previous request is still streaming
+        synchronized (lock) {
+            if (IsStreaming) {
+                System.out.println("[MICounselorRL] WARNING: Cannot send - previous request still streaming. Please wait.");
+                return;
+            }
+        }
+
         AnswerText.setText("");
         Thread r1 = new Thread() {
             @Override
@@ -655,6 +676,12 @@ public class MICounselorRL extends LLMFrame{
     }//GEN-LAST:event_CondBoxActionPerformed
 
     private void startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startActionPerformed
+        synchronized (lock) {
+            if (IsStreaming) {
+                System.out.println("[MICounselorRL] WARNING: Cannot start - previous request still streaming.");
+                return;
+            }
+        }
         AnswerText.setText("");
         Thread r1 = new Thread() {
             @Override
@@ -730,23 +757,34 @@ public class MICounselorRL extends LLMFrame{
      * @param args the command line arguments
      */
      public void setRequestText(String content){
-        request.setText(content);
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            request.setText(content);
+        });
     }
 
     @Override
     public void setRequestTextandSend(String content){
      
-        request.setText(content);
-        AnswerText.setText("");
-        
+        // Prevent sending while a previous request is still streaming
         synchronized (lock) {
-            IsStreaming = Boolean.TRUE;        
+            if (IsStreaming) {
+                System.out.println("[MICounselorRL] WARNING: setRequestTextandSend blocked - previous request still streaming. Dropping: " + 
+                    (content.length() > 50 ? content.substring(0, 50) + "..." : content));
+                return;
+            }
+            IsStreaming = Boolean.TRUE;
         }
 
+        javax.swing.SwingUtilities.invokeLater(() -> {
+            request.setText(content);
+            AnswerText.setText("");
+        });
+
+        final String capturedContent = content;
         Thread r1 = new Thread() {
             @Override
             public void run() {
-                String text=request.getText();
+                String text = capturedContent;
                 String language= cm.getLanguage();
                 String model= (String) modelBox.getSelectedItem();
                 String systemPromptText = systemPrompt.getText();

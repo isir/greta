@@ -7,7 +7,7 @@ import argparse
 from openai import OpenAI
 import sys
 from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
+from mistralai.client.models.chat_completion import ChatMessage
 
 
 messages = None

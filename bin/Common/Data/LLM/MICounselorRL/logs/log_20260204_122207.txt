@@ -1,0 +1,13 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel] My name is. And you?
+Agent: [Invite to Shift Outlook]Don't worry, we can continue without it.It's lovely to meet you. How about we focus on *you*-what's one small thing you'd enjoy doing to move more this week? Even a tiny step counts.
+User: [Changing unhealthy behavior in the future; Asking for Medical Information] Yes. Maybe I want to practice more sport, but I don't know how to achieve that. So I was wondering if you could help.
+Agent: [Planning with the Patient]That's a great starting point! What kind of movement or activity sounds even *slightly* appealing to you? Walking? Stretching? Something else?
+User: [Changing unhealthy behavior in the future; Asking for Medical Information] Yes. Maybe I want to practice more sport, but I don't know how to achieve that. So I was wondering if you could help. Yes. Maybe I want to practice more sport, but I don't know how to achieve that. So I was wondering if you could help. Yes. Maybe I want to practice more sport, but I don't know how to achieve that. So I was wondering if you could help. Think walking would fit more in my schedule.
+Agent: [Reflection]It sounds like walking feels like the most doable option for you right now. You're already thinking about how it could fit into your daily routine-that's a great start.
+User: [Backchannel; Greeting or Closing] Thank you. Yes.
+Agent: [Reflection]It seems like you're feeling a bit stuck, but also hopeful that walking could be a simple way to start moving more. Does that sound right?
+User: [Changing unhealthy behavior in the future; Sharing positive feeling or emotion] You're absolutely right. I will try to work more this this week.
+Agent: [Reflection]It sounds like you're ready to give walking a real try this week. You're seeing it as a manageable first step. What might that look like for you?
+User: [Changing unhealthy behavior in the future; Sharing positive feeling or emotion] It's a good starting, like, for as a first steps. I I I will I'll try to walk five minutes after lunch.
+Agent: [Reflection]That sounds like a very realistic plan - five minutes after lunch feels doable. You're already thinking about when and how to make it happen.

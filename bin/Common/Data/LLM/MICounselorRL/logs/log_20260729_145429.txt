@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Planning with the Patient]Pleased to meet you, [NAME]That's great, [NAME]. To start, what brings you here today?
+User: [Changing unhealthy behavior in the future]I'm here because I want to stop I'm here because I want to stop drinking alcohol.
+Agent: [Backchannel]I see
+User: [Changing unhealthy behavior in the future]I'm here because I want to stop I'm here because I want to stop drinking alcohol.
+Agent: [Reflection]It sounds like you're feeling ready to make a change with your drinking, [NAME].
+User: [Backchannel]Yeah.
+Agent: [Reflection]You're feeling ready to make a change with your drinking.

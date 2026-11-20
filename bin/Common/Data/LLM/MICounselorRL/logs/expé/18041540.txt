@@ -1,0 +1,45 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] C'est [NAME]?dion.
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] C'est John
+Agent: [Baseline]Enchantée, John. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture]bien
+Agent: [Baseline]C'est super, John. Votre médecin m'a dit que vous aviez envie de parler de votre activité physique. Comment vous sentez-vous à ce sujet ?
+User: [Partager un sentiment ou une �motion positive] Bien.
+Agent: [Baseline]D'accord, John. Comment trouvez-vous le temps pour faire de l'exercice en ce moment ?
+User: [inconnu] Bien.
+Agent: [Baseline]Très bien. Y a-t-il des activités physiques que vous aimez particulièrement ?
+User: [Partager un sentiment ou une �motion n�gative] Un peu difficile.
+Agent: [Baseline]Je comprends. Est-ce qu'il y a des activités que vous aimeriez essayer ou reprendre ?
+User: [inconnu]la p�tise
+Agent: [Baseline]La pétanque, c'est une bonne idée ! Est-ce que vous avez déj�  pratiqué la pétanque ?
+User: [inconnu]l'athl�tisme
+Agent: [Baseline]L'athlétisme, c'est une excellente activité. Qu'est-ce qui vous attire dans l'athlétisme ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] La diversit?, la diversit?.
+Agent: [Baseline]La diversité de l'athlétisme est en effet très intéressante. Y a-t-il une discipline en particulier qui vous plaît ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]la course
+Agent: [Baseline]La course est une excellente activité. Qu'est-ce qui vous plaît dans la course ?
+User: [inconnu]etre rapide
+Agent: [Baseline]Être rapide, c'est un objectif motivant ! Avez-vous déj�  couru régulièrement ?
+User: [Backchannel]oui
+Agent: [Baseline]Super ! Quelle distance ou durée préférez-vous pour vos courses ?
+User: [inconnu]5 minutes
+Agent: [Baseline]Cinq minutes, c'est un bon début. Aimeriez-vous augmenter progressivement ce temps ?
+User: [Modifier les comportements malsains � l'avenir]oui
+Agent: [Baseline]C'est super ! Quel serait un objectif réaliste pour la semaine prochaine ? Par exemple, ajouter 1 ou 2 minutes de plus ?
+User: [Backchannel]oui
+Agent: [Baseline]Génial ! Donc, pour la semaine prochaine, vous pourriez essayer de courir 7 minutes. Qu'en pensez-vous ?
+User: [Backchannel]d'accord
+Agent: [Baseline]Parfait, John ! À présent, pensez-vous qu'il y a des moments spécifiques dans la journée où vous pourriez facilement ajouter ces minutes supplémentaires ?
+User: [inconnu] La la premi?re
+Agent: [Baseline]La première heure de la journée, c'est une excellente idée. Comment vous sentez-vous à l'idée de courir 7 minutes le matin ?
+User: [Backchannel]bien
+Agent: [Baseline]C'est super, John. Avez-vous besoin de quelque chose pour vous aider à rester motivé, comme un ami pour courir avec vous ou une application de suivi ?
+User: [Partager un sentiment ou une �motion n�gative]je me sens pas a l'aise pour courir le matin
+Agent: [Baseline]Je comprends. Y a-t-il un autre moment de la journée où vous vous sentiriez plus à l'aise pour courir ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]l'apres midi
+Agent: [Baseline]L'après-midi, c'est une excellente idée. Quel jour de la semaine prochaine pensez-vous pouvoir commencer à courir 7 minutes ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Modifier les comportements malsains � l'avenir;]lundi
+Agent: [Baseline]Parfait, John. Donc, vous allez courir 7 minutes lundi après-midi. Comment vous sentez-vous à cette idée ?
+User: [Partager un sentiment ou une �motion positive]enthousiqste
+Agent: [Baseline]C'est formidable ! Si vous avez besoin de soutien ou de conseils supplémentaires, n'hésitez pas à revenir me voir. Bonne chance pour lundi ! END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

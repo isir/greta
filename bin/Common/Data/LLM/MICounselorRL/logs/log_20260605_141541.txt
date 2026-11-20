@@ -1,0 +1,79 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture][NAME]
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui ?
+User: [Backchannel]Samez-vous
+Agent: [Baseline]Je suis daisolai, je ne suis pas sur de comprendre votre question. Pouvez-vous reformuler, s'il vous plait ?
+User: [inconnu]CA AV ET VOUS
+Agent: [Baseline]Je suis daisolai, je ne suis pas sur de comprendre ce que vous voulez dire par "CA AV". Pouvez-vous s'il vous plait clarifier votre question ?
+User: [Backchannel]Ça va et vous
+Agent: [Baseline]Ah, je comprends maintenant. Je vais bien, merci. Et vous, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Ça va.
+Agent: [Baseline]Je suis heureux d'entendre cela. Je suis ici pour vous aider a amailiorer votre santai en augmentant votre activitai physique. Comment vous sentez-vous par rapport a cela en ce moment ?
+User: [Accueil ou clôture]Très bien.
+Agent: [Baseline]C'est bien. Je suis heureux que vous vous sentiez bien. Avez-vous des preoccupations ou des inquietudes concernant l'augmentation de votre activite physique ?
+User: [Backchannel]Non pas particulièrement.
+Agent: [Baseline]C'est bien. Avez-vous deja essaye de faire plus d'exercice regulierement dans le passe ?
+User: [Partager des informations personnelles ou décrire un événement passé]oui
+Agent: [Baseline]Qu'est-ce qui vous a empaiche de continuer a faire de l'exercice regulierement ?
+User: [inconnu]Rien.
+Agent: [Baseline]Je comprends. Il peut etre difficile de maintenir une routine d'exercice reguliere. Qu'est-ce qui vous a empache de commencer a faire de l'exercice regulierement en premier lieu ?
+User: [inconnu]Rien.
+Agent: [Baseline]D'accord. Est-ce que vous avez des idees sur ce qui pourrait vous aider a commencer a faire de l'exercice regulierement maintenant ?
+User: [Le maintien d'un comportement sain à l'avenir]Je fais déjà de l'exercice régulièrement.
+Agent: [Baseline]C'est fantastique ! Quels types d'exercice faites-vous regulierement ?
+User: [Compréhension ou nouvelle perspective]Marche course à pied,
+Agent: [Baseline]C'est tres bien ! Combien de temps passez-vous a faire de l'exercice par semaine en moyenne ?
+User: [Compréhension ou nouvelle perspective]TroisHeuresÀQuatreHeures.
+Agent: [Baseline]C'est tres bien ! Avez-vous des objectifs specifiques en termes d'exercice pour les prochaines semaines ou mois ?
+User: [Backchannel]No.
+Agent: [Baseline]Je vois. Est-ce que vous etes interesse par l'idee d'augmenter votre activite physique reguliere ?
+User: [Le maintien d'un comportement malsain à l'avenir.]Non pas particulièrement.
+Agent: [Baseline]D'accord, je comprends. Est-ce que vous avez des preoccupations ou des inquietudes concernant l'augmentation de votre activite physique ?
+User: [inconnu]Non.
+Agent: [Baseline]Trais bien. Avez-vous des idees sur ce qui pourrait vous aider a maintenir votre activite physique actuelle ?
+User: [Compréhension ou nouvelle perspective]Pratiquez l'activité physique aux mêmes horaires que d'habitude.
+Agent: [Baseline]C'est une excellente idee ! Est-ce que vous avez des horaires reguliers pour faire de l'exercice en ce moment ?
+User: [Backchannel]oui
+Agent: [Baseline]C'est fantastique ! Est-ce que vous etes ouvert a l'idee d'essayer une nouvelle activite physique pour varier votre routine ?
+User: [Compréhension ou nouvelle perspective]Oui éventuellement.
+Agent: [Baseline]C'est bien. Quelles sont les activites physiques que vous avez deja essayees et que vous avez appreciees dans le passe ?
+User: [Partager des informations personnelles ou décrire un événement passé]Le handal.
+Agent: [Baseline]Le handball est une excellente activite physique ! Est-ce que vous seriez interesse par l'idee de rejoindre un club de handball local pour jouer regulierement ?
+User: [Demande d'informations]Pourquoi
+Agent: [Baseline]Parce que cela pourrait etre une bonne facon de varier votre routine d'exercice et de rencontrer de nouvelles personnes qui ont les memes interets que vous. Qu'en pensez-vous ?
+User: [k]Pourquoi pas
+Agent: [Baseline]C'est une excellente attitude ! Il y a beaucoup de benefices a tirer de l'exercice regulier, et je suis la pour vous aider a trouver des facons de maintenir et d'augmenter votre activite physique. Etes-vous interesse par l'idee de discuter de vos objectifs et de vos strategies pour les atteindre ?
+User: [inconnu]Pourquoi ça
+Agent: [Baseline]Parce que cela peut vous aider a clarifier vos pensees et a trouver des solutions concretes pour atteindre vos objectifs. Qu'en pensez-vous ?
+User: [Accueil ou clôture]C'est bien.
+Agent: [Baseline]Je suis heureux que vous le pensiez. Pour commencer, pouvez-vous me parler de vos objectifs en termes d'exercice physique ? Qu'est-ce que vous voulez accomplir ?
+User: [Compréhension ou nouvelle perspective]J'aimerais garder un bon cardio.
+Agent: [Baseline]C'est un excellent objectif ! Quelles sont les activites physiques que vous faites actuellement pour maintenir votre cardio en forme ?
+User: [Compréhension ou nouvelle perspective]La marche et la course à pied.
+Agent: [Baseline]C'est tres bien ! Avez-vous des objectifs specifiques en termes de temps ou de distance pour votre course a pied ?
+User: [Backchannel]Non, je vais à mon rythme.
+Agent: [Baseline]C'est une excellente approche ! Etes-vous interesse par l'idee d'essayer de nouvelles activites pour varier votre routine et garder votre cardio en forme ?
+User: [Compréhension ou nouvelle perspective]Oui.
+Agent: [Baseline]C'est fantastique ! Quelles sont les activites physiques que vous avez deja essayees et que vous avez appreciees dans le passe ?
+User: [Partager des informations personnelles ou décrire un événement passé]Le handball.
+Agent: [Baseline]Le handball est une excellente activite physique ! Est-ce que vous seriez interesse par l'idee de rejoindre un club de handball local pour jouer regulierement ?
+User: [Backchannel]Déjà posé la question et j'ai dit oui.
+Agent: [Baseline]Parfait ! Il y a beaucoup de benefices a tirer de l'exercice regulier, et je suis la pour vous aider a trouver des facons de maintenir et d'augmenter votre activite physique. Etes-vous interesse par l'idee de discuter de vos objectifs et de vos strategies pour les atteindre ?
+User: [Backchannel]J'ai déjà dit oui.
+Agent: [Baseline]Je suis desole, j'ai rate votre precedente reponse. Pour clarifier, voulez-vous discuter de vos objectifs et de vos strategies pour les atteindre en ce qui concerne votre activite physique ?
+User: [Compréhension ou nouvelle perspective]oui
+Agent: [Baseline]Parfait ! Pour commencer, pouvez-vous me parler de vos objectifs en termes d'exercice physique ? Qu'est-ce que vous voulez accomplir ?
+User: [Partager des informations personnelles ou décrire un événement passé]Comme j'avais dit, j'aimerais garder un mon cardio.
+Agent: [Baseline]Trais bien. Quelles sont les activitais physiques que vous faites actuellement pour maintenir votre cardio en forme ?
+User: [inconnu]Je t'ai déjà dit.
+Agent: [Baseline]Je suis desole, j'ai rate votre precedente reponse. Pouvez-vous me rappeler quelles activites physiques vous faites pour maintenir votre cardio en forme ?
+User: [Compréhension ou nouvelle perspective]Marche, c'est la course à pied.
+Agent: [Baseline]Merci pour cette information. Avez-vous des objectifs specifiques en termes de temps ou de distance pour votre course a pied ?
+User: [Partager des informations personnelles ou décrire un événement passé]J'y consacre une heure.
+Agent: [Baseline]C'est tres bien ! Est-ce que vous etes interesse par l'idee d'essayer de nouvelles activites pour varier votre routine et garder votre cardio en forme ?
+User: [Backchannel]Oui, comme je te l'ai déjà dit.
+Agent: [Baseline]Je suis desole, j'ai rate votre precedente reponse. Pour clarifier, voulez-vous essayer de nouvelles activites pour varier votre routine et garder votre cardio en forme ?
+User: [Compréhension ou nouvelle perspective]oui merci pour votre aide je vais faire du handball
+Agent: [Baseline]C'est fantastique ! Je suis heureux de vous avoir aide. N'oubliez pas de continuer a faire de l'exercice regulierement et a varier vos activites pour garder votre corps en forme. Bonne chance avec le handball ! END\_CONVO
+User: [Accueil ou clôture]Merci.
+Agent: [Baseline]De rien, n'hesitez pas a me contacter si vous avez d'autres questions ou si vous avez besoin d'aide. Passez une bonne journee ! END\_CONVO

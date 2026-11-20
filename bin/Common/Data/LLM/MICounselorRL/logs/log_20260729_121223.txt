@@ -1,0 +1,19 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME]. Nice to meet you.
+Agent: [Medical Education]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]Great. Thank you.
+Agent: [Empathic Reaction]I'm glad to hear that, [NAME]. It's good to see you're having a good day.
+User: [Greeting or Closing]Thank you.
+Agent: [Invite to Shift Outlook][NAME], imagine it's a week from now. You've decided to cut back on your drinking. What might that look like?
+User: [unknown]Sorry. I didn't understand.
+Agent: [Ask for Information]What do you mean by 'cut back' on drinking, [NAME]?
+User: [unknown]You know what could make me feel happy?
+Agent: [Medical Education]Sure, [NAME]. Let's talk about that. Can you tell me more about how alcohol makes you feel happy?
+User: [unknown]I mean, alcohol doesn't make me feel happy.
+Agent: [Reflection]It sounds like you're feeling a bit confused about your drinking, [NAME].
+User: [unknown]Yeah. I'm I'm really confused. I don't know what to do.
+Agent: [Reflection]It sounds like you're feeling stuck, [NAME].
+User: [unknown]Yeah.
+Agent: [Reflection]It sounds like you're feeling stuck, [NAME].
+User: [unknown]That's exactly what I how I feel.
+Agent: [Greeting or Closing]Thank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.

@@ -1,0 +1,2 @@
+User: [Greeting or Closing]hey how are you
+Agent: [Baseline]Hi, I'm Dr. Anderson. I'm here to talk about your alcohol use, if that's okay with you. How are you feeling today?

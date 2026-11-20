@@ -1,0 +1,53 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Du coup je commence. Ok, bonjour je m'appelle [NAME] du coup.
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Partager un sentiment ou une émotion négative]Non, désolé.
+Agent: [Baseline]Pas de problaime, [NAME]. Qu'est-ce qui vous amaine a consulter aujourd'hui ?
+User: [Compréhension ou nouvelle perspective]J'aimerais que vous conseiller en faire du sport des exercices faciles.
+Agent: [Baseline]Je vois. Pouvez-vous me dire pourquoi vous voulez commencer a faire du sport, [NAME] ?
+User: [Compréhension ou nouvelle perspective]Pour être bien en cardio
+Agent: [Baseline]C'est une excellente raison, [NAME]. Qu'est-ce qui vous empaiche de commencer a faire du sport en ce moment ?
+User: [Le maintien d'un comportement malsain à l'avenir]Un peu la flemme.
+Agent: [Baseline]Je comprends, [NAME]. Nous avons tous des moments de flemme. Qu'est-ce qui vous empacherait de commencer a faire du sport regulierement ?
+User: [Backchannel]Les cours j'ai pas trop le temps.
+Agent: [Baseline]Je vois. Il existe des activites physiques que vous pouvez faire facilement dans votre vie quotienne, sans avoir besoin de vous inscrire a des cours. Quelles activites physiques vous interessent, [NAME] ?
+User: [Partager des informations personnelles ou décrire un événement passé]Du poids.
+Agent: [Baseline]Je vois. Qu'est-ce qui vous a donne l'idee de vouloir perdre du poids, [NAME] ?
+User: [Compréhension ou nouvelle perspective]Pour être bien physiquement quoi.
+Agent: [Baseline]C'est une excellente raison, [NAME]. Quelles sont les activites physiques que vous preferez ?
+User: [inconnu]Du coup je connais pas du monde qui me conseiller.
+Agent: [Baseline]Je peux vous aider a trouver des activites physiques qui vous conviendraient, [NAME]. Pour commencer, quelles sont vos objectifs en termes de perte de poids et de forme physique ?
+User: [inconnu]À filmer encore.
+Agent: [Baseline]D'accord, [NAME]. Pour commencer, quelles sont les activites physiques que vous avez deja essayees par le passe ?
+User: [Partager des informations personnelles ou décrire un événement passé]j'ai ajami fait de sport
+Agent: [Baseline]Je vois. Qu'est-ce qui vous a empacher de continuer a faire du sport par le passe, [NAME] ?
+User: [Partager des informations personnelles ou décrire un événement passé]Du coup j'ai jamais fait de sport.
+Agent: [Baseline]Pas de problaime, [NAME]. Nous pouvons commencer par des activites physiques simples et progresser a partir de la. Quelles sont vos disponibilites pour faire du sport dans la semaine qui vient ?
+User: [Accueil ou clôture]Weekend.
+Agent: [Baseline]Parfait, [NAME]. Qu'est-ce qui vous plairait de faire comme activite physique le weekend ?
+User: [Compréhension ou nouvelle perspective]En courir.
+Agent: [Baseline]Courir est une excellente activite physique, [NAME]. Combien de temps pourriez-vous courir pendant votre premiere seance, selon vous ?
+User: [Compréhension ou nouvelle perspective]Vingt minutes
+Agent: [Baseline]Trente minutes serait peut-etre plus realiste pour votre premiere seance, [NAME]. Quelles sont vos attentes pour votre premiere seance de course a pied ?
+User: [Modifier les comportements malsains à l'avenir]Réusir.
+Agent: [Baseline]C'est une excellente attente, [NAME]. Quelles sont les choses qui pourraient vous empacher de reussir votre premiere seance de course a pied ?
+User: [Partager un sentiment ou une émotion négative]Elle fatigue.
+Agent: [Baseline]C'est normal de se sentir fatigue au debut, [NAME]. Qu'allez-vous faire pour vous motiver a continuer a courir meme si vous vous sentez fatigue ?
+User: [Le maintien d'un comportement malsain à l'avenir]me forcer
+Agent: [Baseline]Forcer n'est pas la meilleure solution, [NAME]. Quelles sont les choses qui vous motivent a faire des choses qui sont bonnes pour vous, meme si elles sont difficiles au debut ?
+User: [Compréhension ou nouvelle perspective]Le rappelement d'objectifs.
+Agent: [Baseline]C'est une excellente strategie, [NAME]. Quels sont vos objectifs en termes de course a pied pour les prochaines semaines ?
+User: [Compréhension ou nouvelle perspective]Augmenter le temps de course.
+Agent: [Baseline]C'est un excellent objectif, [NAME]. Combien de temps voulez-vous courir pendant votre prochaine seance de course a pied ?
+User: [Compréhension ou nouvelle perspective]Dix minutes depuis.
+Agent: [Baseline]C'est un objectif realiste, [NAME]. Qu'allez-vous faire pour vous preparer a votre prochaine seance de course a pied ?
+User: [Partager des informations personnelles ou décrire un événement passé]Bien réchauffer.
+Agent: [Baseline]C'est une excellente idee, [NAME]. Quelles sont les choses qui pourraient vous empacher de vous preparer correctement avant votre seance de course a pied ?
+User: [Partager des informations personnelles ou décrire un événement passé]dormir
+Agent: [Baseline]Dormir est tres important, [NAME]. Combien d'heures de sommeil avez-vous en general par nuit ?
+User: [inconnu]Sinon,
+Agent: [Baseline]Qu'est-ce qui vous preoccupe en ce moment, [NAME] ?
+User: [Accueil ou clôture]rien merci
+Agent: [Baseline]Je suis heureux d'entendre cela, [NAME]. Avez-vous des questions ou des inquietudes avant de terminer notre seance ?
+User: [Accueil ou clôture]non
+Agent: [Baseline]Parfait, [NAME]. N'oubliez pas de vous preparer correctement avant votre prochaine seance de course a pied et de vous rappeler vos objectifs. Bonne chance et a bientot ! END\_CONVO

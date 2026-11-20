@@ -1,0 +1,17 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]Thank you. And you?
+Agent: [Baseline]I'm here to help, [NAME]. How's life been treating you lately?
+User: [Sharing negative feeling or emotion]Overwhelmed.
+Agent: [Baseline]I see. What's been making you feel that way, [NAME]?
+User: [unknown]I mean, I'm trying to quit I mean, I'm trying to quit I mean, I'm trying to quit I mean, I'm trying to quit I mean, I'm trying to quit shrinking, but I'm not being really able to do it.
+Agent: [Baseline]It sounds like you're feeling stuck, [NAME]. What makes it hard for you to quit drinking?
+User: [unknown]I mean, it's because, like, I feel very well when I'm drinking. You know? I mean, it's because, like, I feel very well when I'm drinking. You know? I mean, it's because, like, I feel very well when I'm drinking. You know? I mean, it's because, like, I feel very well when I'm drinking. You know? I mean, it's because, like, I feel very well when I'm drinking. You know? I mean, it's because, like, I feel very well when I'm drinking. You know? But afterwards, I feel terribly bad.
+Agent: [Baseline]It sounds like you're enjoying the moment when you're drinking, but it's causing you trouble later on. Have you thought about why that might be?
+User: [unknown]NO
+Agent: [Baseline]I see. How do you feel about cutting back on your drinking, [NAME]?
+User: [unknown]It's easy to say it. Right?
+Agent: [Baseline]What makes it hard to follow through, [NAME]?
+User: [unknown]I mean, I I think it's pretty obvious. Right?
+Agent: [Baseline]Can you help me understand, [NAME]? What's making it tough for you to cut back?

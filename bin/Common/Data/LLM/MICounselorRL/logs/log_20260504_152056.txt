@@ -1,0 +1,27 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. Can you my name is [NAME]. How are you?
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]? It seems like we have some things to talk about...
+User: [Greeting or Closing]Hello. Can you my name is [NAME]. How are you?
+Agent: [Baseline]Hi [NAME], I'm here for you. I notice your doctor wanted us to chat about your alcohol use. How's that been going?
+User: [Greeting or Closing]Yes. I am doing fine. How are you?
+Agent: [Baseline]I appreciate it! So what's made you want to talk about drinking today?
+User: [unknown]Yes. Yes. Definitely. Let's talk about that.
+Agent: [Baseline]Great, [NAME]. Tell me about how much and how often you drink these days?
+User: [unknown]Don't know if maybe you can tell me.
+Agent: [Baseline]About once a week, five or six drinks each time, right?
+User: [Changing unhealthy behavior in the future]Like, around ten drinks a day.
+Agent: [Baseline] Ah, [NAME], that's quite a lot. That puts you at risk for heavy drinking according to the NIAAA
+User: [Changing unhealthy behavior in the future]Yes. Around around that. Yes. It's too much.
+Agent: [Baseline] It sounds like you're wanting to cut back then? What makes you think about this now?
+User: [Backchannel]Yes. Yes. You're going too fast.
+Agent: [Baseline] Sorry, [NAME]. Let's slow down. Why do you feel like I'm rushing things?
+User: [unknown]I don't know if you can tell me.
+Agent: [Baseline] How does drinking make you feel afterwards, [NAME]?
+User: [unknown]Yes. I think that you're rushing things.
+Agent: [Baseline] Not at all, [NAME]. This is your pace. What makes you feel rushed? END_CONVOThank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.
+User: [unknown]I I hang over tonight. I'm very sick.
+Agent: [Baseline]I see, [NAME]. Are you open to taking a smaller step today to feel better tomorrow? What might that look like for you?
+User: [Backchannel]That's fine. Thank you.
+Agent: [Baseline] Great. How about committing to no more than 2 drinks in the next few hours? Can we agree on that, [NAME]?
+User: [Changing unhealthy behavior in the future]I completely agree on that. Thank you.
+Agent: [Baseline]Good job, [NAME]! Here's to feeling better tomorrow. Stay strong. END_CONVO if no more questionsThank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.

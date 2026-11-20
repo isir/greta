@@ -1,0 +1,13 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. [NAME]. I'm Tom.
+Agent: [Ask for Consent]Pleased to meet you, [NAME]Before we start, [NAME], is it okay if I ask you some questions about your drinking habits?
+User: [Greeting or Closing]Yeah. Sure. It's fine.
+Agent: [Ask for Consent]Great, [NAME]. Before we dive in, I want to make sure you're comfortable with this conversation. Is it okay if I ask you some questions about your alcohol use?
+User: [Greeting or Closing]Yeah. It's okay.
+Agent: [Experience Normalization]It's great that you're open to talking about this, [NAME]. Many people struggle with alcohol use, and it's nothing to be ashamed of.
+User: [unknown]Yeah. I I I know.
+Agent: [Ask for Information]How much alcohol do you typically drink in a week, [NAME]?
+User: [unknown]Maybe three times a week.
+Agent: [Greeting or Closing]
+User: [unknown]Maybe three times a week.
+Agent: [Backchannel]Desole, je rencontre un probleme technique. Pouvez-vous repeter ?

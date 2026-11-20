@@ -1,0 +1,11 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME]. Comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je vais bien, merci. Et vous, comment allez-vous aujourd'hui ?
+User: [Partager un sentiment ou une émotion négative]Non ça va, ça peut ça peut aller mieux mais ça va.
+Agent: [Baseline]Je suis daisolai a entendre cela. Qu'est-ce qui vous praioccupe en ce moment ?
+User: [Partager un sentiment ou une émotion négative]Je sais pas, je n'arrive pas Je sais pas, je n'arrive pas Je sais pas, je n'arrive pas je ne sais pas, je me sens fatigué, j'ai l'impression que je bois que je bois trop. je ne sais pas, je me sens fatigué, j'ai l'impression que je bois que je bois trop. je ne sais pas, je me sens fatigué, j'ai l'impression que je bois que je bois trop. Avec les beaux jours et du coup c'est compliqué.
+Agent: [Baseline]Je comprends que cela puisse aitre difficile. Vous avez daija sonjai a raiduire votre consommation d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]Changer, mais je je n'ai jamais réussi à le faire.
+Agent: [Baseline]Je suis daisolai d'entendre cela. Qu'est-ce qui vous empaiche de changer ?
+User: [Compréhension ou nouvelle perspective]Je ne sais pas plusieurs facteurs. Déjà je crois que j'ai une addiction, donc c'est Je ne sais pas plusieurs facteurs. Déjà je crois que j'ai une addiction, donc c'est Je ne sais pas plusieurs facteurs. Déjà je crois que j'ai une addiction, donc c'est Je ne sais pas plusieurs facteurs. Déjà je crois que j'ai une addiction, donc c'est Je ne sais pas plusieurs facteurs. Déjà je crois que j'ai une addiction, donc c'est compliqué.
+Agent: [Baseline]Je comprends que cela puisse aitre difficile. Vous avez deja essaye de reduire votre consommation d'alcool ?

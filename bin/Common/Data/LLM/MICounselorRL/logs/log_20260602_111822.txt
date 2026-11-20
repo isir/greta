@@ -1,0 +1,39 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]On commence
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Trais bien, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Bien et vous
+Agent: [Baseline]Je suis bien aussi, merci. Je suis heureux d'aitre ici pour discuter avec vous. Je comprends que vous avez aitai recommandai pour discuter de votre activitai physique. Comment vous sentez-vous par rapport a cela ?
+User: [Le patient partage un sentiment ou une émotion négative.]Je ne fais aucun sport. Je ne fais aucun sport. Je ne fais aucun sport.
+Agent: [Baseline]Je comprends que vous n'aites pas trais actif en ce moment. Pouvez-vous me dire ce qui vous empaiche de faire de l'exercice ?
+User: [Le patient partage un sentiment ou une émotion négative.]Parce que je n'ai aucune motivation.
+Agent: [Baseline]Je comprends. Il est normal de ne pas avoir de motivation pour faire de l'exercice. Pouvez-vous me dire ce qui vous empaiche de faire de l'exercice ?
+User: [inconnu]Je ne sais pas.
+Agent: [Baseline]D'accord. Pouvez-vous me dire ce qui vous empaiche de faire de l'exercice ?
+User: [Le patient partage un sentiment ou une émotion négative.]Parce que je n'obtiens pas des rÃ©sultats.
+Agent: [Baseline]Je comprends. Il est normal de se sentir daicourajai lorsque l'on ne voit pas de raisultats. Cependant, il est important de se rappeler que chaque petit pas compte. Avez-vous daija essayai de faire de l'exercice auparavant ?
+User: [Le maintien d'un comportement malsain à l'avenir]Puis j'ai dÃ©jÃ  essayÃ©.
+Agent: [Baseline]Je comprends. Pouvez-vous me dire ce qui vous a empachai de continuer ?
+User: [Partager des informations personnelles ou décrire un événement passé]Il n'y avait aucun rÃ©sultat.
+Agent: [Baseline]Je comprends. Cependant, il est important de se rappeler que les raisultats ne sont pas toujours immaidiats. Il est important de continuer a faire de l'exercice raiguliairement pour voir des raisultats a long terme. Avez-vous des idais sur ce qui pourrait vous motiver a faire de l'exercice ?
+User: [Compréhension ou nouvelle perspective]Non, peux-tu m'en donner
+Agent: [Baseline]Bien sur. Qu'est-ce qui vous plairait de faire comme activitai physique ?
+User: [Compréhension ou nouvelle perspective]De la musculation
+Agent: [Baseline]Trais bien. Qu'est-ce qui vous empachai de faire de la musculation en ce moment ?
+User: [Partager un sentiment ou une émotion négative]Je trouve aucun rÃ©sultat.
+Agent: [Baseline]Je comprends. Cependant, il est important de se rappeler que les raisultats ne sont pas toujours immaidiats. Il est important de continuer a faire de l'exercice raiguliairement pour voir des raisultats a long terme. Avez-vous des idais sur ce qui pourrait vous motiver a faire de la musculation ?
+User: [Compréhension ou nouvelle perspective]Un nouveau programme.
+Agent: [Baseline]Trais bien. Qu'est-ce qui vous plairait de faire comme programme de musculation ?
+User: [inconnu]Ã vous de me dire.
+Agent: [Baseline]Je peux vous aider a trouver un programme qui vous conviendrait. Cependant, il est important que vous soyez impliquai dans le choix pour que vous soyez motiver a le suivre. Quels sont vos objectifs en termes de musculation ?
+User: [Modifier les comportements malsains à l'avenir]PiÃ¨ce de masse
+Agent: [Baseline]Trais bien. Pour augmenter la masse musculaire, il est important de faire des exercices de musculation qui ciblent les differents groupes musculaires et de suivre une alimentation adaptee. Etes-vous interessai par un programme de musculation en particulier ?
+User: [Partager des informations personnelles ou décrire un événement passé]La prise de masse
+Agent: [Baseline]Je comprends. Pour prendre de la masse musculaire, il est important de faire des exercices de musculation qui ciblent les differents groupes musculaires et de suivre une alimentation adaptee. Etes-vous interessai par un programme de musculation en particulier ?
+User: [Partager des informations personnelles ou décrire un événement passé]Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression Quel exercice pourrais-je, Ã©gression pour avoir des rÃ©sultats
+Agent: [Baseline]Il est important de varier les exercices pour cibler differents groupes musculaires et eviter les plateaux. Vous pouvez egalement augmenter la charge ou le nombre de repetitions pour augmenter la difficulte et stimuler la croissance musculaire. Il est egalement important de se rappeler que les raisultats ne sont pas toujours immaidiats et qu'il est important de continuer a faire de l'exercice raiguliairement pour voir des raisultats a long terme. Avez-vous des questions sur les exercices que vous pourriez faire pour atteindre vos objectifs de musculation ?
+User: [Compréhension ou nouvelle perspective]Je vais me donner une liste d'exercices Ã  faire.
+Agent: [Baseline]C'est une excellente idee ! Quels exercices avez-vous en mente ?
+User: [inconnu]Je ne sais pas.
+Agent: [Baseline]Pas de problemes, je peux vous aider a trouver des exercices qui vous conviendraient. Pouvez-vous me dire quels groupes musculaires vous voulez cibler ?
+User: [Partager des informations personnelles ou décrire un événement passé]Les biceps.
+Agent: [Baseline]Trais bien. Voici quelques exercices qui ciblent les biceps :    Les curls biceps avec haltaires   Les curls biceps a la poulie   Les tractions   Les curls biceps avec une barre   Les curls biceps inverses avec une barre  Ces exercices peuvent etre realise avec differentes charges et repetitions pour varier la difficulte. Il est important de se rappeler de bien travailler tous les groupes musculaires pour eviter les desequilibres. Avez-vous des questions sur ces exercices ?

@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hi, [NAME]. I'm Tom.
+Agent: [Ask for Consent]Pleased to meet you, [NAME]Before we start, Tom, is it okay if I ask you some questions about your drinking habits?
+User: [Greeting or Closing]Yeah. It's totally fine. Thanks.
+Agent: [Ask for Information]Great, Tom. How much alcohol do you typically drink in a week?
+User: [unknown]Maybe, like, five cups per week. Maybe, like, five cups per week. Maybe, like, five cups per week. Like, one per day.
+Agent: [Backchannel]Got it, Tom. So, roughly one drink per day.

@@ -1,0 +1,13 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good.
+Agent: [Baseline]That's good to hear, [NAME]. I'm here to talk about your alcohol use, if that's okay with you?
+User: [Greeting or Closing]Yes. It's fine.
+Agent: [Baseline]Great, [NAME]. Your doctor mentioned you've been drinking quite a bit lately. How do you feel about that?
+User: [Sharing negative feeling or emotion]A bit sad.
+Agent: [Baseline]It sounds like you're feeling down about your drinking, [NAME]. What makes you feel that way?
+User: [unknown]I think I'm drinking too much.
+Agent: [Baseline]It's good you're aware of that, [NAME]. What concerns you the most about your drinking?
+User: [unknown]That I drink five bottles That I drink five bottles That I drink five bottles That I drink five bottles That I drink five bottles That I drink five bottles That I drink five bottles each week.
+Agent: [Baseline]So, you're drinking 35 drinks a week, [NAME]. That's considered heavy drinking. How does that make you feel?

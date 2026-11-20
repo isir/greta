@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Backchannel]hey
+Agent: [Baseline]Don't worry, we can continue without it.Got it. How are you feeling today, Camille? It's good to see you.
+User: [Backchannel]hey
+Agent: [Baseline]Hey there. I'm glad you're here. How's your day been so far? Anything on your mind?
+User: [Backchannel]hey
+Agent: [Baseline] leans in slightly, warm but calm   Hey-taking it slow. What's been on your mind lately? No rush, just checking in.

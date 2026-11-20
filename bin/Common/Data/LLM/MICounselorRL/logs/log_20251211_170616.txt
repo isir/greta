@@ -1,0 +1,4 @@
+User: [Backchannel;] Two.
+Agent: [Baseline]Hello! I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing; Backchannel] Okay.
+Agent: [Baseline]Thanks for sharing. What’s been on your mind lately? Anything you’d like to talk about?

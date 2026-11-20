@@ -1,0 +1,5 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis Jonathan, comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je vais bien merci, et vous Jonathan ? Comment allez-vous aujourd'hui ?
+User: [Modifier les comportements malsains à l'avenir]Très bien merci de demander d'ailleurs je suis venu vous parler parce que je me sentais en forme après aborder votre interaction.
+Agent: [Baseline]C'est excellente ð Dites-moi ce qui vous a amenÃ© Ã  dÃ©cider de venir me voir aujourd'hui ?C'est excellente ð Dites-moi ce qui vous a amenÃ© Ã  dÃ©cider de venir me voir aujourd'hui ?Ah, trais bien!Ah tant mieux! C'est quoi les raisons qui vous ont poussai a venir me voir?

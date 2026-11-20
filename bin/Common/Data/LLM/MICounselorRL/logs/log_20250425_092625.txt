@@ -1,0 +1,6 @@
+User: [inconnu] ?a m'adore et vous
+Agent: [Baseline]Bonjour, Camille. Comment allez-vous aujourd'hui ? Je suis ravi de vous rencontrer.
+User: [inconnu] ?a m'adore et vous
+Agent: [Baseline]Bonjour, Camille. Comment allez-vous aujourd'hui ? Je suis ravi de vous rencontrer.
+User: [Accueil ou clôture] ?a va bien et vous
+Agent: [Baseline]Merci, Camille. Je vais bien. Est-ce que vous êtes à l'aise pour discuter de votre habitude de fumer aujourd'hui ?

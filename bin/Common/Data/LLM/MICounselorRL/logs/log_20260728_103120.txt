@@ -1,0 +1,8 @@
+User: [Greeting or Closing]hello greta
+Agent: [Baseline]Hi there, I'm Dr. Anderson. How are you doing today, Greta?
+User: [Greeting or Closing]good and you?
+Agent: [Baseline]I'm doing well, thank you. I'm glad to hear that you're doing good too. Greta, your doctor mentioned that you've been drinking quite a bit lately. How do you feel about that?
+User: [Sharing negative feeling or emotion]a bit sad
+Agent: [Baseline]I see. It sounds like you're feeling some sadness about your drinking. Can you tell me more about that?
+User: [unknown]a bit sad
+Agent: [Baseline]It sounds like you're feeling a bit down about your drinking. I appreciate you sharing that with me. Have you thought about why that might be?

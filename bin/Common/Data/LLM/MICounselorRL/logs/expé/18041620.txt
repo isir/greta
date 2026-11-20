@@ -1,0 +1,19 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je suis [NAME] Moutot.
+Agent: [Backchannel]Enchantée, [NAME]Bonjour, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] Bonjour, je suis Line
+Agent: [Ask about current Emotions]Bonjour, Line. Comment allez-vous aujourd'hui ? Comment vous sentez-vous ?
+User: [Accueil ou cl�ture] Je vous sens tr?s bien et vous
+Agent: [Reflection]Je suis ravie d'entendre que vous vous sentez bien. C'est un bon point de départ. Comment se passe votre quotidien en ce moment ? Y a-t-il des choses que vous aimeriez changer ou améliorer ?
+User: [Modifier les comportements malsains � l'avenir] Alors oui, j'aimerais pratiquer une activit? sportive un peu
+Agent: [Reflection]Je comprends que vous aimeriez intégrer une activité sportive dans votre quotidien. Pouvez-vous m'en dire plus sur ce qui vous motive à faire ce changement ?
+User: [Modifier les comportements malsains � l'avenir] Pratiquer une activit? sportive, ?a pourrait me d?tendre, et peut-?tre que je pourrais me travailler, dormir le soir et puis
+Agent: [Reflection]Je comprends que pratiquer une activité sportive pourrait vous aider à vous détendre, à mieux dormir et à vous sentir mieux. Il semble que vous voyez plusieurs avantages à intégrer du sport dans votre quotidien.
+User: [Backchannel]oui
+Agent: [Ask about current Emotions]Comment vous sentez-vous en ce moment en pensant à intégrer une activité sportive dans votre quotidien ? Quelles émotions cela vous procure-t-il ?
+User: [Partager un sentiment ou une �motion positive; Modifier les comportements malsains � l'avenir] Pratiquer une activit? sportive, ?a pourrait me d?tendre, et peut-?tre que je pourrais me travailler, dormir le soir et puis Pratiquer une activit? sportive, ?a pourrait me d?tendre, et peut-?tre que je pourrais me travailler, dormir le soir et puis Pratiquer une activit? sportive, ?a pourrait me d?tendre, et peut-?tre que je pourrais me travailler, dormir le soir et puis Pratiquer une activit? sportive, ?a pourrait me d?tendre, et peut-?tre que je pourrais me travailler, dormir le soir et puis Je suis enthousiaste, je suis contente.
+Agent: [Give Solution]C'est formidable que vous soyez enthousiaste à l'idée de pratiquer une activité sportive. Une manière simple de commencer serait de marcher régulièrement. Par exemple, vous pourriez essayer de marcher 10 minutes par jour cette semaine. Augmenter progressivement la durée et l'intensité peut être très bénéfique. Qu'en pensez-vous ?
+User: [Backchannel] Oui, c'est une tr?s bonne id?e de marcher, de commencer par march? d'abord.
+Agent: [Ask for Information]Très bien, Line. Quand pensez-vous pouvoir commencer à marcher régulièrement ? Avez-vous un moment de la journée qui vous conviendrait le mieux ?
+User: [Modifier les comportements malsains � l'avenir] Alors soit tr?s t?t le matin, soit ? la pause de midi ou bien le soir apr?s travail.
+Agent: [Greeting or Closing]Super, Line. Vous avez plusieurs options pour commencer. Pouvez-vous choisir un moment spécifique pour cette semaine ? Par exemple, demain matin ou à la pause de midi ?  Merci d'avoir partagé vos réflexions. END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !

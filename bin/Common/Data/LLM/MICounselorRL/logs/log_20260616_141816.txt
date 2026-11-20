@@ -1,0 +1,51 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour moi c'est [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]Ça va très bien et toi
+Agent: [Baseline]Je suis content d'entendre ssa. Je suis ici pour discuter de votre santai avec vous. Je sais que vous avez aitai orientai vers moi par votre maidecin pour discuter de votre activitai physique. Comment vous sentez-vous par rapport a cela ?
+User: [Partager un sentiment ou une émotion positive]Je me sens très bien.
+Agent: [Baseline]C'est jainial a entendre. Je suis ici pour vous aider a trouver des moyens de rester actif et en bonne santai. Pouvez-vous me dire ce que vous faites actuellement pour rester actif ?
+User: [Compréhension ou nouvelle perspective]Je vais à la salle régulièrement.
+Agent: [Baseline]C'est fantastique, [NAME]. Combien de fois par semaine allez-vous a la salle de sport en jainairal ?
+User: [Compréhension ou nouvelle perspective]Je dirais trois à quatre fois par semaine.
+Agent: [Baseline]C'est une excellente fraiquence, [NAME]. Cela vous aide-t-il a vous sentir plus energique et en forme ?
+User: [Compréhension ou nouvelle perspective]On peut dire ça oui.
+Agent: [Baseline]C'est jainial a entendre. Avez-vous deja pense a augmenter votre activitai physique en dehors de la salle de sport ? Par exemple, en marchant plus ou en faisant d'autres activitais physiques ?
+User: [Compréhension ou nouvelle perspective]Oui totalement.
+Agent: [Baseline]C'est fantastique, [NAME]. Qu'est-ce qui vous motive a vouloir augmenter votre activitai physique en dehors de la salle de sport ?
+User: [Compréhension ou nouvelle perspective]Tout simplement parce que j'aime le sport.
+Agent: [Baseline]C'est une excellente raison, [NAME]. Quels sont les sports que vous pratiquez en dehors de la salle de sport ?
+User: [Compréhension ou nouvelle perspective]Le football
+Agent: [Baseline]Le football est un excellent moyen de rester actif et en forme. Avez-vous deja pense a integrer plus de marche dans votre routine quotidienne ? Par exemple, en marchant plutot qu'en prenant la voiture pour aller travailler ou faire des courses ?
+User: [Compréhension ou nouvelle perspective]Oui,
+Agent: [Baseline]C'est une excellente idee, [NAME]. Combien de pas faites-vous en moyenne par jour en ce moment ?
+User: [Le patient partage des informations personnelles ou décrit un événement passé.]Pas beaucoup.
+Agent: [Baseline]Je vois. Avez-vous deja essaye de mesurer le nombre de pas que vous faites dans une journee ? Il existe des podometres et des applications pour telephone qui peuvent vous aider a le faire. Qu'en pensez-vous ?
+User: [Compréhension ou nouvelle perspective]Justement, j'ai déjà une application qui mesure mes parts.
+Agent: [Baseline]C'est fantastique, [NAME]. Savez-vous combien de pas vous faites en moyenne par jour en ce moment ?
+User: [Compréhension ou nouvelle perspective]Cinq-mille
+Agent: [Baseline]C'est un excellent debut, [NAME]. Savez-vous que les adultes sont recommandes de faire au moins 10 000 pas par jour pour rester en bonne santai ? Qu'en pensez-vous de travailler vers cet objectif au cours des prochaines semaines ?
+User: [Compréhension ou nouvelle perspective]On va essayer.
+Agent: [Baseline]C'est une excellente idee, [NAME]. Qu'est-ce qui pourrait vous aider a augmenter votre nombre de pas par jour ? Pensez-vous a des activitais que vous pourriez faire pour atteindre cet objectif ?
+User: [Compréhension ou nouvelle perspective]Marcher après manger par exemple.
+Agent: [Baseline]C'est une excellente idee, [NAME]. Qu'est-ce qui pourrait vous aider a rester motive pour atteindre cet objectif de 10 000 pas par jour ?
+User: [inconnu]Je n'ai pas réponse à la question.
+Agent: [Baseline]C'est okay, [NAME]. Nous pouvons travailler ensemble pour trouver des strategies pour vous aider a rester motive. Qu'est-ce qui vous motive le plus a rester actif et en forme ?
+User: [Modifier les comportements malsains à l'avenir]Allez à la salle de sport.
+Agent: [Baseline]C'est fantastique, [NAME]. Avez-vous deja pense a trouver d'autres activitais que vous pourriez aimer faire en plus de la salle de sport ? Par exemple, la natation, la course a pied ou le cyclisme ?
+User: [Compréhension ou nouvelle perspective]Ça m'arrive de courir à la salle de sport justement.
+Agent: [Baseline]C'est fantastique, [NAME]. Avez-vous deja pense a integrer la course a pied dans votre routine quotidienne ? Par exemple, en courant le matin avant d'aller travailler ou pendant votre pause dejeuner ?
+User: [inconnu]Je n'y ai pas pensé.
+Agent: [Baseline]C'est une excellente idee, [NAME]. Qu'est-ce qui pourrait vous aider a integrer la course a pied dans votre routine quotidienne ? Pensez-vous a des obstacles qui pourraient se mettre en travers de votre chemin ?
+User: [Le patient partage un sentiment ou une émotion négative.]Courir après le travail, c'est, ça peut être fatiguant.
+Agent: [Baseline]Je comprends, [NAME]. Qu'est-ce qui pourrait vous aider a vous sentir moins fatigue apres le travail ? Pensez-vous a des strategies que vous pourriez utiliser pour vous donner plus d'energie ?
+User: [inconnu]Je n'en vois pas.
+Agent: [Baseline]C'est okay, [NAME]. Nous pouvons travailler ensemble pour trouver des strategies qui pourraient vous aider. Qu'est-ce qui vous donnerait plus d'energie pour courir apres le travail ? Pensez-vous a des aliments ou des boissons que vous pourriez prendre avant de courir pour vous donner plus d'energie ?
+User: [inconnu]Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie. Il n'y a aucun aliment et aucune boisson qui peut qui pourrait me donner plus d'énergie.
+Agent: [Baseline]Je comprends, [NAME]. Qu'est-ce qui pourrait vous aider a vous sentir moins fatigue apres le travail pour que vous puissiez courir ? Pensez-vous a des strategies que vous pourriez utiliser pour vous donner plus d'energie ?
+User: [inconnu]Je n'en vois aucune.
+Agent: [Baseline]C'est okay, [NAME]. Nous pouvons travailler ensemble pour trouver des strategies qui pourraient vous aider. Qu'est-ce qui vous donnerait plus d'energie pour courir apres le travail ? Pensez-vous a des activitais que vous pourriez faire pendant votre pause dejeuner pour vous donner plus d'energie ? Par exemple, faire une petite sieste ou faire une breve marche ?
+User: [Partager des informations personnelles ou décrire un événement passé]C'est compliqué de faire une sieste au travail.
+Agent: [Baseline]Je comprends, [NAME]. Qu'est-ce qui pourrait vous aider a vous sentir moins fatigue apres le travail pour que vous puissiez courir ? Pensez-vous a des strategies que vous pourriez utiliser pour vous donner plus d'energie ?
+User: [inconnu]Je n'en vois aucune pour la troisième fois.
+Agent: [Baseline]Je comprends, [NAME]. Nous avons explore plusieurs options pour vous aider a rester actif et en forme. Je suis fier de vous pour avoir reflechi a ces options et pour etre ouvert a essayer de nouvelles choses. Si vous avez des questions ou des preoccupations au cours des prochaines semaines, n'hesitez pas a me contacter. Nous pouvons travailler ensemble pour trouver des solutions qui vous conviennent le mieux. END\_CONVO

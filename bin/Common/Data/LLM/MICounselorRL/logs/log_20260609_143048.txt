@@ -1,0 +1,23 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour, moi c'est [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]ca va et vous
+Agent: [Baseline]Je vais bien, merci. Je suis heureux d'aitre ici pour vous aider. Je comprends que vous avez aitai orientai vers moi pour discuter de votre activitai physique. Comment vous sentez-vous a propos de cela ?
+User: [Compréhension ou nouvelle perspective]Je fais du sport une fois par semaine.
+Agent: [Baseline]C'est un bon daibut, [NAME]. Mais est-ce que cela vous semble suffisant pour atteindre vos objectifs en matiaire de santai et de bien-aitre ?
+User: [Compréhension ou nouvelle perspective]Pour moi oui, mais après pour les performances sportives un peu moins.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empaiche de faire plus d'exercice dans votre semaine actuelle ?
+User: [Le maintien d'un comportement malsain à l'avenir]De les cours, j'y cours de huit heures à dix huit heures tous les jours. De les cours, j'y cours de huit heures à dix huit heures tous les jours. De les cours, j'y cours de huit heures à dix huit heures tous les jours. De les cours, j'y cours de huit heures à dix huit heures tous les jours. De les cours, j'y cours de huit heures à dix huit heures tous les jours. Et le week-end, je travaille le dimanche matin Et le week-end, je travaille le dimanche matin Et le week-end, je travaille le dimanche matin Et le week-end, je travaille le dimanche matin Et le week-end, je travaille le dimanche matin en job étudiant.
+Agent: [Baseline]Je vois que vous avez un emploi du temps charjai, [NAME]. Cela peut rendre difficile de trouver du temps pour faire plus d'exercice. Qu'est-ce qui serait le plus facile pour vous de faire cette semaine pour augmenter votre activitai physique ?
+User: [Demande d'informations médicales]Et je n'ai pas compris la question.
+Agent: [Baseline]Je suis daisolai, [NAME]. Je vais reformuler ma question. Qu'est-ce qui serait le plus facile pour vous de faire cette semaine pour augmenter votre activitai physique, en tenant compte de votre emploi du temps charjai ?
+User: [Compréhension ou nouvelle perspective]Faire plus de sport, mais un plus petite
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empachai de faire plus de sport cette semaine ?
+User: [inconnu]A posé la question.
+Agent: [Baseline]Je suis daisolai, [NAME]. Je vais reformuler ma question. Qu'est-ce qui vous empachai de faire plus de sport cette semaine, en tenant compte de votre emploi du temps charjai ?
+User: [inconnu]Est-ce qu'on peut changer de question
+Agent: [Baseline]Bien sur, [NAME]. De quoi aimeriez-vous parler ?
+User: [inconnu]Je crois que c'est fini.
+Agent: [Baseline]END_CONVOMerci d'avoir pris ce temps pour aichanger avec moi. J'espaire que cette discussion vous a aitai utile. Quoi que vous daicidiez, c'est vous qui avez le control. Prenez soin de vous.
+User: [Accueil ou clôture]C'est bon
+Agent: [Baseline]Au revoir, [NAME]. Prenez soin de vous.

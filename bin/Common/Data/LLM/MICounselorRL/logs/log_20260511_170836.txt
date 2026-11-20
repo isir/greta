@@ -1,0 +1,9 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis John. Comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je suis heureux de vous rencontrer, John. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Très bien, merci de demander. Et vous comment allez-vous
+Agent: [Baseline]Je vais bien, merci. Je suis heureux d'aitre ici pour discuter avec vous. Comment puis-je vous aider aujourd'hui, John ?
+User: [inconnu]Sais pas comment on pourrait nous aider. J'ai été envoyé par mon médecin et du coup j'aimerais savoir comment
+Agent: [Baseline]Je comprends. Votre maidecin vous a-t-il donnai une raison pour laquelle il a recommandai que vous veniez me voir ?
+User: [Le maintien d'un comportement malsain à l'avenir]Mais oui, m'a donné une raison, c'est que je bois un peu trop ces derniers temps. Mais oui, m'a donné une raison, c'est que je bois un peu trop ces derniers temps. Mais oui, m'a donné une raison, c'est que je bois un peu trop ces derniers temps. Mais oui, m'a donné une raison, c'est que je bois un peu trop ces derniers temps.
+Agent: [Baseline]Je vois. Et comment vous sentez-vous par rapport a cela ? Est-ce quelque chose que vous aimeriez changer ?

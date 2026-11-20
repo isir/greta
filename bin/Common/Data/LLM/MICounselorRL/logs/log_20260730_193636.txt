@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing][NAME].
+Agent: [Give Solution]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Sharing negative feeling or emotion]Actually, I'm a bit sad.
+Agent: [Experience Normalization]It's okay to feel sad, [NAME]. Many people feel this way sometimes. Can you tell me more about what's been making you feel this way?

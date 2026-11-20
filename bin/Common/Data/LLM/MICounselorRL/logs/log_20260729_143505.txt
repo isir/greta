@@ -1,0 +1,3 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [unknown] I'm good. Thank you. I'm done.
+Agent: [Give Solution]Don't worry, we can continue without it.I understand you're feeling ready to stop drinking. Let's discuss a specific step you can take this week to reduce your alcohol intake.

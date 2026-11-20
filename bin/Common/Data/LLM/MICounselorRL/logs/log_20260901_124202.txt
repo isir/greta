@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, [NAME]. My name is Ernie. How are doing?
+Agent: [Baseline]Pleased to meet you, [NAME]Nice to meet you too, Ernie. I'm really glad you're here today-it takes courage to talk about this. How's your week been so far?
+User: [Sharing positive feeling or emotion;]i am fine
+Agent: [Baseline]That's good to hear. I appreciate you taking the time to be here.  I know your doctor thought this might be helpful-what's been going through your mind since they mentioned it?
+User: [Sharing negative feeling or emotion]Everything. I don't know what you think about it, but
+Agent: [Baseline]I hear you-it's a lot to think about. Maybe you're wondering how this fits into your life right now? What's been on your mind most since your doctor brought it up?

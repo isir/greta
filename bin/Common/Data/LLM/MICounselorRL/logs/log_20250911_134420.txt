@@ -1,0 +1,14 @@
+User: [Greeting or Closing] Hello?
+Agent: [Baseline]Hello! How are you doing today?
+User: [Greeting or Closing] I'm fine. Thank you.
+Agent: [Baseline]That's good to hear. I understand you've been referred by your primary care doctor. Can you tell me a bit about why?
+User: [Sharing personal information or Describe past event;] That I I'm drinking too much.
+Agent: [Baseline]I see. Can you tell me more about your drinking? How much do you typically drink in a day?
+User: [Sustaining unhealthy behavior in the future;] Have drinks for breakfast.
+Agent: [Baseline]I see. What kind of drinks and how many?
+User: [Sharing personal information or Describe past event] Four for you, whiskey.
+Agent: [Baseline]Thank you for sharing that. What do you like about drinking whiskey for breakfast?
+User: [Sharing negative feeling or emotion] Pain sober.
+Agent: [Baseline]I understand. So, drinking helps you manage pain. What kind of pain are you experiencing?
+User: [unknown] You're not smiling. I don't understand why.
+Agent: [Baseline]It's okay, I'm here to listen and understand, not to judge. Can you tell me more about the pain you're feeling when you're sober?

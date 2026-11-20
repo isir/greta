@@ -1,0 +1,23 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour je suis [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais très bien avec vous.
+Agent: [Baseline]Je suis heureux d'entendre cela. Je suis ici pour discuter de votre consommation d'alcool, si vous aites prait a en parler.
+User: [Backchannel]Oui, je suis comparé.
+Agent: [Baseline]Trais bien. Pouvez-vous me dire combien de verres d'alcool vous buvez en moyenne par semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]entre 10 et 20
+Agent: [Baseline]Je vois. Savez-vous que la consommation excessive d'alcool peut avoir des consaiquences naifastes sur votre santai ?
+User: [Backchannel]oui
+Agent: [Baseline]Je suis heureux que vous soyez conscient de cela. Avez-vous daija essayai de raiduire votre consommation d'alcool auparavant ?
+User: [Modifier les comportements malsains à l'avenir]oui
+Agent: [Baseline]Qu'est-ce qui vous a empaiai de continuer a boire malgrai les efforts que vous avez faits pour raiduire votre consommation ?
+User: [Le maintien d'un comportement malsain à l'avenir]J'ai plutôt réussi jusque-là, mais ça va être des trop d'occasion par semaine.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empaiche de raiduire votre consommation d'alcool davantage ?
+User: [Le maintien d'un comportement malsain à l'avenir]Le trop d'occasion par semaine de voir des amis Le trop d'occasion par semaine de voir des amis Le trop d'occasion par semaine de voir des amis Le trop d'occasion par semaine de voir des amis Le trop d'occasion par semaine de voir des amis Le trop d'occasion par semaine de voir des amis Le trop d'occasion par semaine de voir des amis Le trop d'occasion par semaine de voir des amis et caetera.
+Agent: [Baseline]Je comprends. Il est important de trouver un aiquilibre entre les moments de daitente avec des amis et la prise en charge de votre santai. Avez-vous daija envisajai de trouver des alternatives a l'alcool pour passer du temps avec vos amis ?
+User: [inconnu]Oui, je sais tout. Oui j'ai pu, je réduis par semaine en me mettant à deux-cent par semaine. Oui, je sais tout. Oui j'ai pu, je réduis par semaine en me mettant à deux-cent par semaine. Oui, je sais tout. Oui j'ai pu, je réduis par semaine en me mettant à deux-cent par semaine. Oui, je sais tout. Oui j'ai pu, je réduis par semaine en me mettant à deux-cent par semaine. Oui, je sais tout. Oui j'ai pu, je réduis par semaine en me mettant à deux-cent par semaine. Oui, je sais tout. Oui j'ai pu, je réduis par semaine en me mettant à deux-cent par semaine. Oui, je sais tout. Oui j'ai pu, je réduis par semaine en me mettant à deux-cent par semaine. Oui, je sais tout. Oui j'ai pu, je réduis par semaine en me mettant à deux-cent par semaine. Oui, je sais tout. Oui j'ai pu, je réduis par semaine en me mettant à deux-cent par semaine. Maximum.
+Agent: [Baseline]Je comprends. Il est important de trouver un aiquilibre entre les moments de daitente avec des amis et la prise en charge de votre santai. Avez-vous daija envisajai de trouver des alternatives a l'alcool pour passer du temps avec vos amis ?
+User: [Compréhension ou nouvelle perspective]Prendre des softs en soirée et m'en sortir par semaine.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui vous empaiche de mettre en place cette strataigie ?
+User: [Compréhension ou nouvelle perspective]Baseline
+Agent: [Baseline]Je suis daisolai, je ne comprends pas ce que vous voulez dire par "baseline". Pouvez-vous s'il vous plait expliquer ce que vous entendez par la ?

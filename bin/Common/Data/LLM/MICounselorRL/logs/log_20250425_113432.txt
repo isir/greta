@@ -1,0 +1,34 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Je suis In?s.
+Agent: [Invite to Shift Outlook]EnchantÃ©e, [NAME]Bonjour, je suis Camille. Et vous ? Enchantée, [NAME]. Imaginez un instant comment vous vous sentiriez si vous ajoutiez un peu plus d'activité physique à votre quotidien ?
+User: [Partager un sentiment ou une émotion positive] Je pense que je me sentirais plus en forme.
+Agent: [Ask for Consent]D'accord, [NAME]. Est-ce que ça vous va si on parle un peu plus de votre activité physique ?
+User: [Backchannel] Oui
+Agent: [Reflection]Je comprends que vous ressentiriez une amélioration de votre forme si vous augmentiez votre activité physique. Comment envisagez-vous cela dans votre quotidien ?
+User: [Partager des informations personnelles ou décrire un événement passé; Compréhension ou nouvelle perspective;] Je pense que cela m'aiderait ? mieux dormir
+Agent: [Reflection]Je comprends que vous pensez que cela vous aiderait à mieux dormir. C'est une excellente motivation. Est-ce qu'il y a une activité physique que vous aimez particulièrement ?
+User: [inconnu]repetes
+Agent: [Reflection]Il semble que vous voyez un lien direct entre l'activité physique et une meilleure qualité de sommeil. C'est une observation très pertinente. Est-ce qu'il y a une activité physique que vous aimez particulièrement ?
+User: [Partager des informations personnelles ou décrire un événement passé] En ce moment, pratique beaucoup l'escalade.
+Agent: [Reflection]Il semble que l'escalade soit une activité que vous appréciez beaucoup en ce moment. C'est une excellente manière de rester actif. Comment vous sentez-vous après une session d'escalade ?
+User: [Partager un sentiment ou une émotion positive] Je me sens vraiment d?tendue
+Agent: [Reflection]Vous vous sentez vraiment détendue après une session d'escalade. C'est un excellent moyen de vous ressourcer. Est-ce que vous pratiquez l'escalade régulièrement ?
+User: [Partager des informations personnelles ou décrire un événement passé] Oui, au minimum une fois par semaine et au maximum trois fois par semaine.
+Agent: [Reflection]Il semble que l'escalade soit une activité que vous pratiquez régulièrement, au moins une fois par semaine et jusqu'à trois fois par semaine. Vous trouvez cela très relaxant. C'est formidable que vous ayez déjà intégré cette activité dans votre routine.
+User: [Backchannel]oui
+Agent: [Empathic Reaction]Je suis vraiment contente d'entendre que l'escalade vous apporte autant de bien-être. C'est formidable que vous ayez trouvé une activité qui vous détend et vous aide à vous sentir mieux. Comment pourriez-vous envisager d'ajouter encore plus d'activité physique à votre quotidien, en plus de l'escalade ?
+User: [Modifier les comportements malsains à l'avenir] J'aimerais bien reprendre la course ? pied car c'est une activit? qui m'aide ?
+Agent: [Ask for Consent]D'accord, [NAME]. Est-ce que ça vous va si on parle un peu plus de la course à pied et de comment vous pourriez l'intégrer à votre routine ?
+User: [Backchannel]oui
+Agent: [Ask for Consent]Super, [NAME]. Quand aimeriez-vous commencer à courir ? Y a-t-il un jour ou une heure de la semaine qui vous conviendrait le mieux ?
+User: [Modifier les comportements malsains à l'avenir] Pense qu'un jour qui me conviendrait le mieux est un jour o? je n'ai pas cours ou j'ai suffisamment tard ou bien un week-end.
+Agent: [Invite to Shift Outlook]Imaginez comment vous vous sentiriez après une course à pied en fin de journée ou pendant le week-end. Vous pourriez ressentir la même détente qu'après une session d'escalade. Qu'en pensez-vous ?
+User: [Partager un sentiment ou une émotion positive] Je trouve que ce n'est pas vraiment le m?me effort quand je cours je suis plus ?tendue parce que je me d?foul?
+Agent: [Ask for Consent]D'accord, [NAME]. Est-ce que ça vous va si on explore comment vous pourriez intégrer la course à pied dans votre routine hebdomadaire ?
+User: [Backchannel]repetes
+Agent: [Empathic Reaction]Je comprends que la course à pied vous permet de vous défouler et de vous détendre d'une manière différente de l'escalade. C'est une excellente observation. Comment pourriez-vous envisager d'intégrer cette activité dans votre routine hebdomadaire ?
+User: [inconnu] Peut-?tre que le week-end serait moins ad?quat.
+Agent: [Reflection]Il semble que vous trouvez que la course à pied vous permet de vous défouler et de vous détendre d'une manière différente de l'escalade. Vous pensez que le week-end pourrait être moins adéquat pour intégrer cette activité. C'est important de trouver le bon moment pour vous. Y a-t-il un autre moment de la semaine qui pourrait mieux convenir ?
+User: [Modifier les comportements malsains à l'avenir] Peut-?tre le lundi quand je n'ai pas beaucoup de cours ou bien le vendredi apr?s-midi quand je n'ai pas cours non plus.
+Agent: [Reflection]Il semble que vous trouviez que la course à pied vous permet de vous défouler et de vous détendre d'une manière différente de l'escalade. Vous pensez que le lundi, quand vous n'avez pas beaucoup de cours, ou le vendredi après-midi, quand vous n'avez pas cours non plus, pourraient être des moments appropriés pour intégrer cette activité. C'est une excellente idée de trouver des moments dans votre semaine où vous avez plus de temps disponible. END_CONVO
+Agent: []Merci dâ€™avoir pris ce temps pour Ã©changer avec moi. Jâ€™espÃ¨re que cette discussion vous a Ã©tÃ© utile. Vous avez dÃ©jÃ  fait un grand pas en rÃ©flÃ©chissant Ã  tout cela. Je vous souhaite plein de rÃ©ussite dans votre dÃ©marche !

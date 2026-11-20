@@ -1,0 +1,5 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour comme tu vas
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Comment allez-vous aujourd'hui ?
+User: [inconnu]Je vais
+Agent: [Baseline]Je suis heureux d'entendre cela. Vous avez des soucis avec votre consommation d'alcool ?

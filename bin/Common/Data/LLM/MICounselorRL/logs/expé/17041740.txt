@@ -1,0 +1,55 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, je suis [NAME].
+Agent: [Empathic Reaction]EnchantÃ©e, [NAME]Bonjour, je suis [NAME].  Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]je vais très bien moi c'est charlène
+Agent: [Ask for Consent]Merci, Charlène. Est-ce que vous seriez d'accord pour discuter de votre activité physique aujourd'hui ?
+User: [Backchannel]oui
+Agent: [Reflection]Je comprends que vous êtes ouverte à discuter de votre activité physique. C'est un bon point de départ. Comment vous sentez-vous par rapport à votre niveau d'activité actuel ?
+User: [Partager un sentiment ou une émotion négative]je n'en fait aps assez
+Agent: [Reflection]Il semble que vous ayez le sentiment de ne pas faire assez d'activité physique. Pouvez-vous m'en dire plus sur ce qui vous fait ressentir cela ?
+User: [Partager des informations personnelles ou décrire un événement passé] Tout simplement parce que je fais une activit? sportive une fois par semaine et que
+Agent: [Reflection]Il semble que vous ayez le sentiment de ne pas faire assez d'activité physique parce que vous pratiquez une activité sportive seulement une fois par semaine. C'est un bon point de départ pour discuter de vos besoins et de vos objectifs.
+User: [Modifier les comportements malsains à l'avenir]mon objectif serait de eperdre 10 kilos et augmenter activite
+Agent: [Ask about current Emotions]Merci pour votre partage, Charlène. Comment vous sentez-vous par rapport à votre objectif de perdre 10 kilos et d'augmenter votre activité physique ?
+User: [inconnu] Sur une p?riode
+Agent: [Ask about current Emotions]Comment vous sentez-vous émotionnellement par rapport à votre objectif de perdre 10 kilos et d'augmenter votre activité physique ?
+User: [inconnu] ?tre un peu perdant.
+Agent: [Backchannel]Je comprends, être un peu perdu est tout à fait normal. Comment envisagez-vous de commencer à augmenter votre activité physique ?
+User: [Modifier les comportements malsains à l'avenir]essayer mardi en ayant le temps de récupérer
+Agent: [Medical Education]C'est une excellente idée de commencer par une activité supplémentaire le mardi, tout en vous laissant du temps pour récupérer. Avez-vous une activité spécifique en tête que vous aimeriez essayer ?
+User: [Backchannel]pardon ?
+Agent: [Backchannel]Je comprends. Avez-vous une activité spécifique en tête que vous aimeriez essayer ?
+User: [inconnu]la course à pied
+Agent: [Ask for Information]Très bien, la course à pied est une excellente activité. À quelle fréquence aimeriez-vous courir en plus de votre activité actuelle ?
+User: [Modifier les comportements malsains à l'avenir]1 fois par semaine donc 2 au total
+Agent: [Ask for Consent]D'accord, ça semble être un bon début. Seriez-vous d'accord pour discuter de la manière dont vous pourriez intégrer cette deuxième séance de course à pied dans votre semaine ?
+User: [Modifier les comportements malsains à l'avenir]j'essaierai de rajouter le lundi
+Agent: [Give Solution]C'est une excellente idée de rajouter une séance de course à pied le lundi. Cela vous permettra de commencer la semaine de manière active. Essayez de prévoir un créneau horaire fixe pour cette séance, par exemple le lundi soir, afin de créer une routine régulière. Vous pouvez également envisager de marcher davantage dans votre quotidien, comme en descendant du bus un arrêt plus tôt ou en prenant les escaliers au lieu de l'ascenseur. Ces petits changements peuvent grandement aider à augmenter votre activité physique globale. END_CONVO
+User: [Backchannel]ok
+Agent: [Ask for Consent]Êtes-vous d'accord pour que nous discutions de la manière dont vous pouvez intégrer cette nouvelle séance de course à pied dans votre routine hebdomadaire ?
+User: [Backchannel]oui
+Agent: [Backchannel]D'accord, commençons par le lundi. Quelle heure de la journée serait la plus pratique pour vous pour courir ?
+User: [Modifier les comportements malsains à l'avenir]en rentrant du travail vers 8h mais je veux dinner avant 20h
+Agent: [Experience Normalization]Beaucoup de personnes trouvent difficile de jongler entre le travail, les repas et l'exercice. C'est tout à fait normal. Avez-vous déjà envisagé de courir avant le dîner, peut-être vers 18h30, pour avoir le temps de vous doucher et de manger avant 20h ?
+User: [inconnu] Donc ?a sera un peu tard si donc si je je fais ?a le soir ce sera forc?ment
+Agent: [Experience Normalization]Beaucoup de personnes trouvent qu'il est plus facile de s'en tenir à une routine d'exercice en l'intégrant à leur emploi du temps de manière réaliste. Courir après le travail peut être une bonne option, même si cela signifie dîner un peu plus tard. Vous pouvez essayer de préparer votre dîner à l'avance pour gagner du temps. Aimeriez-vous discuter d'autres stratégies pour intégrer cette nouvelle habitude dans votre routine ?
+User: [Modifier les comportements malsains à l'avenir] Je pense notamment pourquoi pas courir pour rentrer
+Agent: [Reflection]Il semble que vous envisagez de courir pour rentrer du travail, ce qui est une excellente idée pour intégrer l'exercice dans votre routine quotidienne. Comment vous sentez-vous à l'idée de courir pour rentrer chez vous après le travail ?
+User: [Backchannel]vous pouvez répéter
+Agent: [Reflection]Il semble que vous envisagez de courir pour rentrer du travail, ce qui est une excellente idée pour intégrer l'exercice dans votre routine quotidienne. Comment vous sentez-vous à l'idée de courir pour rentrer chez vous après le travail ?
+User: [Modifier les comportements malsains à l'avenir]bonne idee uen fosi par semaine
+Agent: [Reflection]Il semble que vous trouvez l'idée de courir pour rentrer du travail une fois par semaine comme une bonne option. C'est un excellent moyen d'intégrer l'exercice dans votre routine quotidienne. Comment pensez-vous organiser cela dans votre emploi du temps ?
+User: [inconnu]c'est a dire
+Agent: [Backchannel]Quels jours de la semaine pensez-vous courir pour rentrer du travail ?
+User: [Partager des informations personnelles ou décrire un événement passé]lundi
+Agent: [Backchannel]D'accord, le lundi. Cela semble être une bonne option. Comment vous sentez-vous à l'idée de commencer cette nouvelle routine ?
+User: [Modifier les comportements malsains à l'avenir]c'est un objectif atteignable
+Agent: [Backchannel]C'est un objectif atteignable. Vous vous sentez prête à commencer cette nouvelle routine le lundi ?
+User: [Modifier les comportements malsains à l'avenir]oui
+Agent: [Ask about current Emotions]Super ! Comment vous sentez-vous émotionnellement à l'idée de commencer cette nouvelle routine de course à pied le lundi ?
+User: [Partager un sentiment ou une émotion positive; Modifier les comportements malsains à l'avenir]je me réjouis je pense que c'est une bonne diee ca me motive lundi et vendredi je sors tot je peux m'organiser rajouter une deuxieme est bien
+Agent: [Planning with the Patient]C'est génial de voir que vous êtes motivée ! Donc, pour résumer, vous allez courir pour rentrer du travail le lundi et le vendredi. Cela vous permettra d'ajouter deux séances de course à pied à votre routine hebdomadaire. Comment vous sentez-vous par rapport à ce plan ?
+User: [Partager un sentiment ou une émotion positive]bien
+Agent: [Experience Normalization]C'est tout à fait normal de se sentir bien et motivé lorsqu'on établit de nouveaux objectifs d'activité physique. Beaucoup de gens ressentent la même chose. C'est un excellent début pour améliorer votre santé. Avez-vous d'autres questions ou préoccupations concernant ce nouveau plan ? END_CONVO
+Agent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+

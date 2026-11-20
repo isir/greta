@@ -1,0 +1,4 @@
+User: [Accueil ou clôture;] Bonjour.
+Agent: [Baseline]Bonjour Camille, comment allez-vous aujourd'hui ? Je vois que vous avez été orienté par votre médecin, ça vous dit d'en parler un peu ?
+User: [Accueil ou clôture; Backchannel] C'est vrai, venez en parler.
+Agent: [Baseline]D'accord, merci de votre confiance. Est-ce que ça vous pèse parfois, cette histoire d'alcool ? Ou c'est plutôt quelque chose qui vous semble normal ?

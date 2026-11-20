@@ -1,0 +1,45 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Bonjour, je suis Camille. Pas de souci, nous pouvons continuer sans cela. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture] Je vais bient?t
+Agent: [Baseline]C'est bien. Comment se passe votre consommation d'alcool en ce moment ?
+User: [Le maintien d'un comportement malsain à l'avenir]ma conso se passe bien un peu plsu que d'habitude
+Agent: [Baseline]Je vois. Qu'est-ce qui a changÃ© rÃ©cemment pour que vous consommiez un peu plus ?
+User: [inconnu]il fait beau
+Agent: [Baseline]Je comprends, le beau temps peut influencer nos habitudes. Comment vous sentez-vous aprÃ¨s avoir consommÃ© plus d'alcool que d'habitude ?
+User: [Partager un sentiment ou une émotion positive] Je me sens normal, ?a ne change pas de chose.
+Agent: [Baseline]D'accord. Avez-vous remarquÃ© des effets nÃ©gatifs ou positifs sur votre santÃ© ou votre vie quotidienne ?
+User: [Partager des informations personnelles ou décrire un événement passé] Non j'avais remarqu? n?gatif ? part au niveau du sport o? je suis du coup fatigu? un peu plus vite mais sinon
+Agent: [Baseline]Merci pour cette information. Seriez-vous intÃ©ressÃ© par des stratÃ©gies pour rÃ©duire votre consommation d'alcool, surtout pour amÃ©liorer votre performance sportive ?
+User: [Le maintien d'un comportement malsain à l'avenir]non
+Agent: [Baseline]D'accord. Y a-t-il d'autres aspects de votre vie que vous aimeriez amÃ©liorer ou des objectifs que vous souhaitez atteindre ?
+User: [Partager des informations personnelles ou décrire un événement passé; Partager un sentiment ou une émotion négative] Non j'avais remarqu? n?gatif ? part au niveau du sport o? je suis du coup fatigu? un peu plus vite mais sinon Non j'avais remarqu? n?gatif ? part au niveau du sport o? je suis du coup fatigu? un peu plus vite mais sinon Non j'avais remarqu? n?gatif ? part au niveau du sport o? je suis du coup fatigu? un peu plus vite mais sinon Non j'avais remarqu? n?gatif ? part au niveau du sport o? je suis du coup fatigu? un peu plus vite mais sinon Non pas particuli?rement.
+Agent: [Baseline]Merci pour votre honnÃªtetÃ©. Qu'est-ce qui vous a motivÃ© Ã  venir me voir aujourd'hui ?
+User: [Partager des informations personnelles ou décrire un événement passé]l'argent
+Agent: [Baseline]Je comprends. Y a-t-il quelque chose de spÃ©cifique que vous aimeriez discuter ou explorer en lien avec votre consommation d'alcool et votre santÃ© ?
+User: [Accueil ou clôture]non je ne vois pas
+Agent: [Baseline]D'accord. Pouvons-nous parler de ce que vous ressentez par rapport Ã  votre consommation d'alcool en gÃ©nÃ©ral ?
+User: [Backchannel]oui si tu as des questions
+Agent: [Baseline]Parfait. Qu'est-ce qui vous plaÃ®t dans le fait de boire de l'alcool ?
+User: [inconnu] ?a peut d'abord un petit coup avec les coll?gues
+Agent: [Baseline]Je comprends. Avez-vous dÃ©jÃ  envisagÃ© de limiter votre consommation d'alcool, mÃªme un peu, pour voir comment vous vous sentez ?
+User: [Le maintien d'un comportement malsain à l'avenir] Non pas particuli?rement, je pense que je ne suis pas non plus
+Agent: [Baseline]C'est une rÃ©flexion intÃ©ressante. Qu'est-ce qui vous fait penser que vous n'Ãªtes pas un gros consommateur d'alcool ?
+User: [inconnu] Bonne question. Ce qui me fait penser que je suis pas un bon consommateur d'alcool, c'est que
+Agent: [Baseline]Merci pour votre rÃ©flexion. Quelles sont vos habitudes de consommation d'alcool en ce moment ? Combien de verres par semaine, par exemple ?
+User: [inconnu] Faire par semaine ?a peut aller, enfin ?a d?pend en fait de
+Agent: [Baseline]D'accord. Pouvez-vous me donner une idÃ©e gÃ©nÃ©rale de votre consommation hebdomadaire ? Par exemple, combien de verres par semaine en moyenne ?
+User: [inconnu] En moyenne sur une ann?e.
+Agent: [Baseline]Merci pour ces dÃ©tails. Avez-vous des jours dans la semaine oÃ¹ vous ne consommez pas d'alcool ?
+User: [Modifier les comportements malsains à l'avenir] Mais plusieurs.
+Agent: [Baseline]C'est bien. Avez-vous dÃ©jÃ  pensÃ© Ã  essayer de fixer des jours sans alcool chaque semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]non je fixe pas
+Agent: [Baseline]Je comprends. Seriez-vous intÃ©ressÃ© par des conseils pour maintenir cette habitude de jours sans alcool ? Cela pourrait aider Ã  amÃ©liorer votre Ã©nergie pour le sport.
+User: [Modifier les comportements malsains à l'avenir]j'accepte tes conseils
+Agent: [Baseline]Super. Que diriez-vous d'essayer de fixer deux jours sans alcool par semaine ? Cela pourrait aider Ã  amÃ©liorer votre performance sportive. Quels jours pensez-vous Ãªtre les meilleurs pour cela ? END_CONVOMerci dâ€™avoir pris ce temps pour Ã©changer avec moi. Jâ€™espÃ¨re que cette discussion vous a Ã©tÃ© utile. Quoi que vous dÃ©cidiez, câ€™est vous qui avez le contrÃ´le. Prenez soin de vous.
+User: [Modifier les comportements malsains à l'avenir; Accueil ou clôture] Le lundi, le mardi, le mercredi, le jeudi.
+Agent: [Baseline]TrÃ¨s bien. Choisir ces jours pour ne pas consommer d'alcool est une excellente idÃ©e. Comment pensez-vous vous y prendre pour respecter cela ? Avez-vous des idÃ©es ou des stratÃ©gies en tÃªte ?
+User: [Modifier les comportements malsains à l'avenir] Le lundi, le mardi, le mercredi, le jeudi.
+Agent: [Baseline]Parfait. Avez-vous des activitÃ©s ou des routines spÃ©cifiques que vous pourriez mettre en place ces jours-lÃ  pour vous aider Ã  ne pas consommer d'alcool ?
+Agent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+

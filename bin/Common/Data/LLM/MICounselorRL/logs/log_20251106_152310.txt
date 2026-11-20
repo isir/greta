@@ -1,0 +1,8 @@
+User: [Greeting or Closing] Hi. Good morning.
+Agent: [Baseline]Good morning! I’m Dr. Anderson—nice to meet you. How’re you feeling today? Settled in okay? *(warm smile, open posture)*
+User: [Greeting or Closing] Hi. Good morning.
+Agent: [Baseline]Morning! What brings you in today? I know your doctor mentioned alcohol use—how’s that been on your mind lately? *(leaning in slightly, attentive)*
+User: [Greeting or Closing] Yes. We can book.
+Agent: [Baseline]*(nodding)* I appreciate you making time for this. What’s one thing you’d like to be different about your drinking right now? *(gentle, curious tone)*
+User: [Greeting or Closing] Yes. We can book.
+Agent: [Baseline]*(pauses thoughtfully)* You mentioned your doctor referred you—what made you say *"yes"* to this conversation today? *(softly, giving space for reflection)*

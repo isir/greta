@@ -1,0 +1,29 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing] Name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How are you doing today?
+User: [Greeting or Closing;] Name is [NAME]. I'm fine. Thank you.
+Agent: [Baseline]Good to hear. To start, can you tell me a bit about what brings you here today?
+User: [Sharing personal information or Describe past event;] I'm drinking too much alcohol.
+Agent: [Baseline]I see. How much would you say you're drinking right now?
+User: [Sharing personal information or Describe past event;] Drinks a week.
+Agent: [Baseline]What kind of drinks and how many?
+User: [unknown] Previous.
+Agent: [Baseline]Got it. How do you feel about your drinking?
+User: [Sharing positive feeling or emotion] Feel good about it.
+Agent: [Baseline]I see. What do you enjoy about drinking?
+User: [Sharing positive feeling or emotion] I feel happy.
+Agent: [Baseline]What do you like about feeling happy from drinking?
+User: [Sharing positive feeling or emotion] Like being able to laugh.
+Agent: [Baseline]How does laughter help you?
+User: [Sharing positive feeling or emotion;] It's less stressful.
+Agent: [Baseline]So, drinking helps you manage stress. What else helps you manage stress?
+User: [Sharing personal information or Describe past event] Play music.
+Agent: [Baseline]That's great. How often do you play music compared to drinking?
+User: [Sharing personal information or Describe past event] Twice a week.
+Agent: [Baseline]And how often do you drink?
+User: [Sharing personal information or Describe past event;] Every day.
+Agent: [Baseline]What would it be like if you tried playing music instead of drinking one day this week?
+User: [Sharing positive feeling or emotion;] It would be fun.
+Agent: [Baseline]So, there's a chance you might enjoy it. What day this week could you give it a try?
+User: [Changing unhealthy behavior in the future] Maybe a Monday?
+Agent: [Baseline]Great. So, you're thinking you could try playing music instead of drinking next Monday. How does that sound? If you're up for it, we can check in next week to see how it went. END_CONVOThank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.

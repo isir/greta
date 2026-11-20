@@ -1,0 +1,25 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good.
+Agent: [Baseline]That's good to hear, [NAME]. I'm glad you're here today. Your doctor suggested we talk about your alcohol use. How do you feel about that?
+User: [Sharing negative feeling or emotion]I feel a bit stressed.
+Agent: [Baseline]I see, [NAME]. It's understandable to feel that way. Can you tell me more about what's stressing you?
+User: [unknown]I'm trying to
+Agent: [Baseline]Take your time, [NAME]. What's been on your mind lately?
+User: [unknown]A lot of work and a lot of problems at home.
+Agent: [Baseline]I see. How does alcohol help with that, [NAME]?
+User: [unknown]It may It may It may It may It may It may me think less in those problems.
+Agent: [Baseline]So, alcohol helps you cope with stress. But how does it make you feel afterwards, [NAME]?
+User: [Sharing negative feeling or emotion]It makes me feel sad and angry.
+Agent: [Baseline]I see. That's a lot to deal with. Have you ever thought about cutting back on drinking?
+User: [unknown]Yes. I'm I've been Yes. I'm I've been Yes. I'm I've been Yes. I'm I've been Yes. I'm I've been Yes. I'm I've been Yes. I'm I've been Yes. I'm I've been thinking about it.
+Agent: [Baseline]What's holding you back, [NAME]?
+User: [unknown]That it makes me feel happy in the moment.
+Agent: [Baseline]I see. But it also makes you feel sad and angry later, right?
+User: [unknown]Okay.
+Agent: [Baseline]So, would you like to try cutting back a bit, [NAME]?
+User: [Changing unhealthy behavior in the future]Yeah.
+Agent: [Baseline]Great. What's one small step you could take in the next week?
+User: [unknown]I know.
+Agent: [Baseline]What do you know, [NAME]?

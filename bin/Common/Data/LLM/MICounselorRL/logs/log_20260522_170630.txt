@@ -1,0 +1,13 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Je suis [NAME], comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je suis heureux de vous rencontrer, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Ecoute, je fais très bien. Merci de demander. Et toi, comment tu te Ecoute, je fais très bien. Merci de demander. Et toi, comment tu te sens
+Agent: [Baseline]Je suis bien, merci. Je suis heureux d'aitre ici pour discuter avec vous, [NAME]. Comment puis-je vous aider aujourd'hui ?
+User: [k]Je suis venu vous
+Agent: [Baseline]Je suis heureux que vous soyez venu me voir, [NAME]. Qu'est-ce qui vous amaine a discuter avec moi aujourd'hui ?
+User: [Partager des informations personnelles ou décrire un événement passé]Je crois que c'est ma consommation d'alcool. Mon médecin m'a dit que j'avais un Je crois que c'est ma consommation d'alcool. Mon médecin m'a dit que j'avais un Je crois que c'est ma consommation d'alcool. Mon médecin m'a dit que j'avais un Je crois que c'est ma consommation d'alcool. Mon médecin m'a dit que j'avais un petit peu exagéré, donc
+Agent: [Baseline]Je vois. Pouvez-vous me parler un peu plus de votre consommation d'alcool ? Qu'est-ce qui vous inquiaite le plus a ce sujet ?
+User: [Compréhension ou nouvelle perspective]Ça m'impacte moi et mon entourage, ce qui me fait un peu peur.
+Agent: [Baseline]Je comprends que cela puisse aitre praioccupant. Qu'est-ce qui vous fait le plus peur dans tout cela ?
+User: [Partager un sentiment ou une émotion négative]Ce qui me fait le plus peur, c'est le fait de Ce qui me fait le plus peur, c'est le fait de Ce qui me fait le plus peur, c'est le fait de Ce qui me fait le plus peur, c'est le fait de Ce qui me fait le plus peur, c'est le fait de Ce qui me fait le plus peur, c'est le fait de Ce qui me fait le plus peur, c'est le fait de frapper les gens.
+Agent: [Baseline]Je comprends. Cela peut aitre trais difficile a jairer. Avez-vous daija essayai de raiduire votre consommation d'alcool ?

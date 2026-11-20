@@ -1,0 +1,21 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture]moi c'zes [NAME]
+Agent: [Baseline]Enchantée, [NAME]Bonjour, Clément. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] Je vais bien et vous.
+Agent: [Baseline]Je vais bien aussi, merci. Votre médecin m'a parlé de votre sédentarité. Comment vous sentez-vous par rapport à cela ?
+User: [Partager un sentiment ou une �motion positive] Je me sens bien, mais je pourrais me sentir encore mieux si je faisais avoir plus d'espoir.
+Agent: [Baseline]C'est un bon point de départ. Qu'est-ce qui vous motive à vouloir faire plus d'exercice ?
+User: [Partager un sentiment ou une �motion positive] Il n'y a que des bienfaits.
+Agent: [Baseline]Absolument, les bienfaits sont nombreux. Quelle activité physique aimeriez-vous essayer cette semaine ?
+User: [Inconnu]pardon ?
+Agent: [Baseline]Pas de souci. Y a-t-il une activité physique que vous aimeriez essayer cette semaine ?
+User: [Modifier les comportements malsains � l'avenir] Cette semaine, j'aimerais bien aller ? la salle de sport.
+Agent: [Baseline]C'est une excellente idée ! Quelle journée pensez-vous être la meilleure pour commencer ?
+User: [Modifier les comportements malsains � l'avenir] Le dimanche.
+Agent: [Baseline]Parfait. Quelle heure vous conviendrait le mieux pour aller à la salle de sport le dimanche ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] 10 ou 11 heures du matin.
+Agent: [Baseline]Très bien. Quelle durée prévoyez-vous pour cette première séance à la salle de sport ?
+User: [Modifier les comportements malsains � l'avenir] Une heure, une heure ? une heure et quart pas plus.
+Agent: [Baseline]Cela semble raisonnable. Comment vous sentez-vous à l'idée de commencer ce dimanche à 10h ou 11h pour une heure ?
+User: [Partager un sentiment ou une �motion positive; Accueil ou cl�ture;]je me sens bien j'qi enie
+Agent: [Baseline]C'est super ! Si vous avez besoin de soutien ou de conseils, n'hésitez pas à me contacter. Bon courage pour dimanche ! END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !

@@ -1068,11 +1068,11 @@ public class MODIFFFrame extends javax.swing.JFrame implements AUEmitter, BAPFra
                 if (this.parent != null && this.IsRunning == Boolean.TRUE){
                     performer.performAUAPFrame(frame, id);
                     this.parent.addAnimation(id, absoluteStartTime, time_frame);
-                        System.out.println(" LE ADD ANIMATION EST PASSEee 2");
+                       
                 }
                 else{
                     performer.performAUAPFrame(frame, id);
-                    System.out.println(" LE ADD ANIMATION EST PASSEee 3");
+                    
                 }
                 
                 // Parent 

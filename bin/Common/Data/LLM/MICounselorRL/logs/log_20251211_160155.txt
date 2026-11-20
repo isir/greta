@@ -1,0 +1,17 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing;] My name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How are you doing today?
+User: [Greeting or Closing; Sharing positive feeling or emotion] Doing great. And you?
+Agent: [Baseline]I'm doing well, thank you for asking. It's nice to have a moment to connect. What brings you some joy these days?
+User: [Sharing personal information or Describe past event; Sharing positive feeling or emotion] Traveling. I really love traveling.
+Agent: [Baseline]That sounds wonderful! What’s your favorite place you’ve visited so far?
+User: [Sharing personal information or Describe past event;] Went to Japan.
+Agent: [Baseline]Japan is amazing—what did you enjoy most there? The food, culture, or something else?
+User: [Sharing personal information or Describe past event;] Something else.
+Agent: [Baseline]Sounds intriguing! What was that "something else" for you?
+User: [unknown] Suck it.
+Agent: [Baseline]I hear how much you enjoyed that experience. Travel can be so refreshing.  I’m curious—how’s your week been outside of that? Any challenges or highlights?
+User: [unknown] Special.
+Agent: [Baseline]That’s great to hear! What made it feel special for you?
+User: [Sustaining unhealthy behavior in the future; Sharing negative feeling or emotion] The fact that I drink too much.
+Agent: [Baseline]Ah, I see. So drinking has been part of what’s made things feel special lately. How does it fit into your routine when you’re not traveling?

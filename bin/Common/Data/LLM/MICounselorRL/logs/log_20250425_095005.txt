@@ -1,0 +1,11 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture][NAME]
+Agent: [Backchannel]EnchantÃ©e, [NAME]Bonjour, je suis Camille. Et vous ?  D'accord, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]très bien
+Agent: [Give Solution]Super, [NAME]. Pour commencer, avez-vous une idÃ©e de ce qui vous a amenÃ©e ici aujourd'hui ?
+User: [inconnu]non
+Agent: [Empathic Reaction]Je comprends, [NAME]. Parfois, il peut Ãªtre difficile de savoir par oÃ¹ commencer. Comment vous sentez-vous Ã  l'idÃ©e de discuter de votre consommation d'alcool aujourd'hui ?
+User: [Backchannel]d'accord
+Agent: [Ask for Information]Merci, [NAME]. Pouvez-vous me parler un peu de votre consommation d'alcool actuelle ? Par exemple, combien de verres buvez-vous par semaine ?
+User: [Partager des informations personnelles ou décrire un événement passé]5 verres
+Agent: [Give Solution]Merci pour votre partage, [NAME]. Selon les nouveaux repÃ¨res de consommation, il est recommandÃ© de ne pas dÃ©passer 10 verres par semaine, avec un maximum de 2 verres par jour, et des jours sans consommation. Comment vous sentez-vous par rapport Ã  ces recommandations ?

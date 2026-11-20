@@ -1,0 +1,41 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour [NAME], suivez Merkel.
+Agent: [Ask about current Emotions]Enchantée, [NAME]Bonjour Merkel, comment allez-vous aujourd'hui ? Comment vous sentez-vous en ce moment ?
+User: [Partager un sentiment ou une �motion positive] Je me sens bien.
+Agent: [Experience Normalization]Je suis ravi de l'entendre, Merkel. Beaucoup de gens ressentent des difficultés à augmenter leur activité physique, mais il est tout à fait normal de se sentir parfois démotivé ou incertain. C'est une expérience courante.
+User: [Backchannel]c'est vrai
+Agent: [Reflection]Je comprends que vous vous sentez bien aujourd'hui, Merkel. C'est un bon point de départ. Comment vous sentez-vous par rapport à votre activité physique en ce moment ?
+User: [Partager un sentiment ou une �motion positive] Je me sens tr?s bien et je l'ai presque r?guli?rement.
+Agent: [Reflection]C'est formidable que vous vous sentiez très bien et que vous ayez une activité physique presque régulière, Merkel. Il semble que vous avez déjà fait des efforts pour intégrer l'exercice dans votre routine. Comment vous sentez-vous à ce sujet ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Partager un sentiment ou une �motion positive] Tr?s bien, Jean-Baptiste, 10 heures par semaine.
+Agent: [Reflection]C'est impressionnant que vous fassiez 10 heures d'activité physique par semaine, Merkel. Vous semblez vraiment engagé et motivé. Comment ressentez-vous les bénéfices de cette routine sur votre bien-être ?
+User: [Partager un sentiment ou une �motion positive; Partager des informations personnelles ou d�crire un �v�nement pass�]j'ai perdu 8 kilos je susi satidfaite
+Agent: [Reflection]C'est fantastique que vous ayez perdu 8 kilos, Merkel. Vous devez être vraiment satisfaite de vos progrès. Cela montre que vos efforts portent leurs fruits. Comment vous sentez-vous par rapport à ces résultats ?
+User: [Partager un sentiment ou une �motion positive]jj'ai pas totalement attient mais je susis saisfaite
+Agent: [Reflection]Il semble que vous soyez satisfaite de vos progrès jusqu'à présent, même si vous n'avez pas encore atteint tous vos objectifs. C'est une étape importante et cela montre que vos efforts commencent à porter leurs fruits.
+User: [Backchannel]oui
+Agent: [Reflection]Il semble que vous soyez satisfaite de vos progrès, même si vous n'avez pas encore atteint tous vos objectifs. C'est encourageant de voir que vos efforts commencent à porter leurs fruits. Comment envisagez-vous la suite pour continuer sur cette lancée positive ?
+User: [inconnu] Pas Merkel.
+Agent: [Reflection]Je comprends que vous êtes satisfaite de vos progrès, même si vous n'avez pas encore atteint tous vos objectifs. Cela montre que vous reconnaissez vos efforts et que vous êtes motivée à continuer. Comment envisagez-vous la suite pour maintenir cette dynamique positive ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass� Modifier les comportements malsains � l'avenir] Il faut que je continue
+Agent: [Reflection]Vous avez raison, il est important de continuer sur cette lancée positive. Vous avez déjà fait des progrès significatifs, et cela montre que vous avez la capacité et la détermination pour aller encore plus loin. Comment pensez-vous pouvoir maintenir cette motivation et cette régularité dans votre routine d'activité physique ?
+User: [inconnu] En continuant ? bien alimenter les gens.
+Agent: [Reflection]Vous avez raison, continuer à bien vous alimenter est une excellente façon de soutenir vos efforts physiques. Cela montre que vous comprenez l'importance d'une approche équilibrée pour votre bien-être. Comment ressentez-vous l'impact de cette alimentation sur votre énergie et votre motivation ?
+User: [Accueil ou cl�ture]le plus important se apse dans l'assiette
+Agent: [Give Solution]Je comprends que l'alimentation joue un rôle crucial dans votre bien-être. Pour continuer sur cette lancée positive, vous pourriez essayer d'intégrer des aliments riches en nutriments dans votre alimentation. Par exemple, des fruits, des légumes, des protéines maigres et des grains entiers peuvent vous fournir l'énergie nécessaire pour vos activités physiques. Cela vous aidera à maintenir votre motivation et votre régularité. Qu'en pensez-vous ?
+User: [Partager un sentiment ou une �motion positive] Tu es tr?s d'accord avec toi.
+Agent: [Medical Education]Merci pour votre confiance, Merkel. Pour soutenir vos efforts, il est important de comprendre que l'alimentation joue un rôle crucial dans votre bien-être et votre performance physique. Intégrer des aliments riches en nutriments comme des fruits, des légumes, des protéines maigres et des grains entiers peut vous fournir l'énergie nécessaire pour vos activités physiques. Cela vous aidera à maintenir votre motivation et votre régularité. Avez-vous des questions ou des préoccupations concernant votre alimentation ?
+User: [Accueil ou cl�ture]non j'ai un rapport sain
+Agent: [Ask for Information]Merkel, pouvez-vous me donner plus de détails sur les types d'activités physiques que vous pratiquez régulièrement ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]du baden club et de la course � pied
+Agent: [Backchannel]D'accord, du badminton et de la course à pied. Ce sont d'excellentes activités pour maintenir votre forme. Comment vous sentez-vous après ces séances ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Partager un sentiment ou une �motion positive]trop bien surtout pour le bad la course � pied plsu compliqu� mais 10 h de bad
+Agent: [Ask about current Emotions]Je comprends que vous appréciez particulièrement le badminton et que la course à pied est plus compliquée pour vous. Comment vous sentez-vous émotionnellement après une séance de badminton ou de course à pied ?
+User: [Compr�hension ou nouvelle perspective] Paradoxalement,
+Agent: [Planning with the Patient]Merkel, étant donné que vous appréciez le badminton et que vous trouvez la course à pied plus compliquée, que diriez-vous d'essayer d'ajouter une petite marche après vos séances de badminton ? Par exemple, 10 minutes de marche après chaque séance pour commencer. Cela pourrait être une façon douce d'augmenter votre activité physique sans ressentir autant de difficulté. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains � l'avenir] C'est vrai, j'ai d?j? vingt-cinq minutes de marche aller et retour apr?s.
+Agent: [Medical Education]C'est formidable que vous fassiez déjà 25 minutes de marche aller-retour après vos séances de badminton. Cela montre que vous avez déjà intégré une activité physique supplémentaire dans votre routine. Savez-vous que la marche est une excellente façon de maintenir et d'améliorer votre santé cardiovasculaire ? En continuant à marcher régulièrement, vous contribuez à réduire les risques de maladies chroniques et à améliorer votre bien-être général. Avez-vous d'autres questions ou préoccupations concernant votre activité physique ? END_CONVO
+User: [Backchannel] non.
+Agent: [Experience Normalization]Merkel, il est tout à fait normal de ressentir des difficultés ou des préférences pour certaines activités physiques. Beaucoup de gens trouvent certaines activités plus agréables que d'autres. Le fait que vous appréciez le badminton et que vous trouviez la course à pied plus compliquée est tout à fait courant. L'important est que vous continuiez à intégrer des activités physiques qui vous plaisent et qui vous permettent de rester actif. Vous faites déjà beaucoup en marchant régulièrement après vos séances de badminton. C'est une excellente façon de maintenir un mode de vie actif et de prendre soin de votre santé. Continuez à écouter votre corps et à choisir des activités qui vous apportent du plaisir.
+Agent: []Merci d�avoir pris ce temps pour �changer avec moi. J�esp�re que cette discussion vous a �t� utile. Vous avez d�j� fait un grand pas en r�fl�chissant � tout cela. Je vous souhaite plein de r�ussite dans votre d�marche !
+

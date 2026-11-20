@@ -1,0 +1,33 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, m'appelle [NAME].
+Agent: [Ask for Consent]EnchantÃ©e, [NAME]Bonjour, je suis Camille. Et vous ?  Enchantée, [NAME]. Est-ce que vous seriez d'accord pour discuter de votre activité physique aujourd'hui ?
+User: [Backchannel;] Je suis d'accord.
+Agent: [Give Solution]Super, [NAME]. Pour augmenter votre activité physique, vous pourriez commencer par marcher 10 minutes par jour. C'est un bon début et c'est bénéfique pour la santé. Qu'en pensez-vous ?
+User: [Backchannel] Je suis d'accord.
+Agent: [Invite to Shift Outlook]C'est excellent, [NAME]. Imaginez comment vous vous sentirez aprÃ¨s une semaine de marche quotidienne. Vous pourriez ressentir plus d'Ã©nergie et de bien-Ãªtre. Qu'en pensez-vous ?
+User: [Partager un sentiment ou une émotion positive] Je trouve que c'est tr?s bien et
+Agent: [Planning with the Patient]Parfait, [NAME]. Pensez-vous que marcher 10 minutes par jour est rÃ©alisable pour vous cette semaine ? Si oui, quel moment de la journÃ©e vous conviendrait le mieux pour cette activitÃ© ?
+User: [Modifier les comportements malsains à l'avenir] Oui je trouve que c'est r?alisable,
+Agent: [Empathic Reaction]C'est formidable, [NAME]. Je suis vraiment contente que vous trouviez cela réalisable. C'est un excellent premier pas pour améliorer votre santé. Quel moment de la journée pensez-vous être le meilleur pour cette marche ?
+User: [Modifier les comportements malsains à l'avenir] Le matin ou le soir, en allant au travail, rentrant du travail.
+Agent: [Reflection]Je comprends, [NAME]. Marcher le matin ou le soir en allant ou en rentrant du travail semble être une bonne idée pour intégrer cette activité dans votre routine. Cela vous permettra de commencer ou de terminer votre journée de manière active. Comment vous sentez-vous à l'idée de commencer cette nouvelle habitude ? END_CONVO
+User: [Partager un sentiment ou une émotion positive] Je me sens bien de commencer cette nouvelle habitude.
+Agent: [Reflection]C'est excellent, [NAME]. Il semble que vous soyez vraiment motivée et prête à commencer cette nouvelle habitude. C'est un grand pas en avant pour votre santé et votre bien-être. Bravo !
+User: [Partager un sentiment ou une émotion positive]merci
+Agent: [Reflection]Je suis ravie de voir que vous vous sentez bien à l'idée de commencer cette nouvelle habitude. Cela montre que vous êtes motivée et prête à faire des changements positifs pour votre santé. Félicitations !
+User: [Partager un sentiment ou une émotion positive]merci
+Agent: [Ask about current Emotions]Comment vous sentez-vous en ce moment, [NAME] ?
+User: [Partager un sentiment ou une émotion positive] Par rapport au sport, je me sens bien parce
+Agent: [Progress Acknowledgment]Je suis ravie d'entendre que vous vous sentez bien par rapport au sport, [NAME]. C'est un excellent début. Vous avez déjà fait un grand pas en acceptant de marcher 10 minutes par jour. Comment pouvez-vous vous assurer de maintenir cette habitude ?
+User: [Modifier les comportements malsains à l'avenir] En me disant si je me suis dit que je le fais, je m'y tiens et ?a peut ?tre l'occasion aussi
+Agent: [Progress Acknowledgment]C'est une excellente approche, [NAME]. Vous avez déjà fait un grand pas en vous engageant à marcher 10 minutes par jour. Votre détermination à vous y tenir est un signe de votre motivation. C'est formidable !
+User: [Partager un sentiment ou une émotion positive]merci
+Agent: [Ask about current Emotions]Comment vous sentez-vous en ce moment, [NAME] ?
+User: [Partager un sentiment ou une émotion positive] Je me sens bien
+Agent: [Ask for Consent]C'est super de vous sentir bien, [NAME]. Est-ce que vous seriez d'accord pour qu'on discute de la manière dont vous pourriez intégrer cette marche dans votre routine quotidienne ?
+User: [Backchannel]oui
+Agent: [Ask for Consent]Merci, [NAME]. Pour intégrer cette marche dans votre routine, pensez-vous qu'il serait utile de planifier un horaire spécifique chaque jour ? Par exemple, marcher 10 minutes avant ou après le travail ?
+User: [Modifier les comportements malsains à l'avenir] Oui, je pense que le seul moyen
+Agent: [Give Solution]D'accord, [NAME]. Pourquoi ne pas essayer de marcher 10 minutes chaque matin avant de partir au travail ou chaque soir en rentrant ? Cela peut devenir une routine agréable et bénéfique pour votre santé. Qu'en pensez-vous ?
+User: [Backchannel] Oui, c'est la v?rit?.
+Agent: [Greeting or Closing]Merci beaucoup, [NAME]. Je suis vraiment contente que vous soyez prête à intégrer cette nouvelle habitude dans votre routine. N'hésitez pas à revenir me voir si vous avez besoin de soutien ou de conseils supplémentaires. Passez une excellente journée ! END_CONVOMerci dâ€™avoir pris ce temps pour Ã©changer avec moi. Jâ€™espÃ¨re que cette discussion vous a Ã©tÃ© utile. Vous avez dÃ©jÃ  fait un grand pas en rÃ©flÃ©chissant Ã  tout cela. Je vous souhaite plein de rÃ©ussite dans votre dÃ©marche !

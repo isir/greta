@@ -1,0 +1,14 @@
+User: [Partager un sentiment ou une émotion positive] C'est une bonne id?e de pouvoir marcher avec quelqu'un qui est pr?cis, en effet.
+Agent: [Ask about current Emotions]Comment allez-vous aujourd'hui ?
+User: [inconnu] C'est une bonne id?e de pouvoir marcher avec quelqu'un qui est pr?cis, en effet.
+Agent: [Greeting or Closing]Bonjour ! Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]je vais tres bien
+Agent: [Medical Education]C'est super d'entendre que vous allez bien ! Vous savez, l'activitÃ© physique est vraiment importante pour notre santÃ©. MÃªme de petits pas peuvent faire une grande diffÃ©rence. Par exemple, marcher 10 minutes par jour peut dÃ©jÃ  avoir des effets bÃ©nÃ©fiques. Vous avez dÃ©jÃ  pensÃ© Ã  intÃ©grer des moments de marche dans votre quotidien ?
+User: [Partager des informations personnelles ou décrire un événement passé] Oui, rentrez chez moi, marche, je marche environ vingt minutes.
+Agent: [Progress Acknowledgment]C'est formidable que vous marchiez déjà 20 minutes en rentrant chez vous ! C'est un excellent début. Chaque pas supplémentaire est bénéfique pour votre santé. Avez-vous pensé à des moments supplémentaires où vous pourriez marcher davantage ?
+User: [Modifier les comportements malsains à l'avenir] Je pourrais marcher davantage le week-end.
+Agent: [Medical Education]C'est une excellente idée ! Marcher davantage le week-end peut vraiment faire une différence. Saviez-vous que les experts recommandent de faire de l'exercice au moins cinq jours par semaine ? Même de petites augmentations, comme ajouter 10 à 30 minutes de marche le week-end, peuvent avoir des effets positifs sur votre santé. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir] Je pense que je pourrais essayer de marcher le week-end et un peu plus le soir.
+Agent: [Planning with the Patient]Super ! Parlons de comment vous pouvez intégrer cela dans votre routine. Que diriez-vous de marcher 30 minutes supplémentaires le week-end et peut-être 10 minutes de plus le soir en semaine ? Cela pourrait être un bon début. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir] Le week-end je pourrais facilement faire trente minutes de marche et le soir c'?tait pendant ? coeur du temps travail, je pourrais acheter des minutes de trajet.
+Agent: [Give Solution]C'est une excellente idée ! Pourquoi ne pas essayer de marcher 30 minutes le week-end et d'ajouter 10 minutes à votre trajet de retour du travail en semaine ? Cela pourrait vraiment faire une différence. Qu'en pensez-vous ? END_CONVO

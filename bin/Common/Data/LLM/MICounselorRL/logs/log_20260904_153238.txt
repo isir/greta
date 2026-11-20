@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel;]Hello, Camille. My name is [NAME]. How are you doing?
+Agent: [Baseline]Pleased to meet you, [NAME]I'm doing well, thanks-how about you? It's nice to meet you too.
+User: [Greeting or Closing]I am doing fine. Thank you for asking.
+Agent: [Baseline]That's great to hear, [NAME]. I appreciate you sharing that.  You mentioned your doctor referred you here-what's been on your mind lately about that?
+User: [Changing unhealthy behavior in the future; Sustaining unhealthy behavior in the future;]I think I've been drinking too much recently, so I would like I think I've been drinking too much recently, so I would like I think I've been drinking too much recently, so I would like to discuss about that.
+Agent: [Baseline]It sounds like you've been thinking a lot about your drinking lately-that takes real honesty. What's been making it harder to cut back when you've tried in the past?

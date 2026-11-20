@@ -1,0 +1,18 @@
+User: [Modifier les comportements malsains � l'avenir]Oui je peux essayer de reduire.
+Agent: [Baseline]Bonjour, je suis Camille. Comment allez-vous aujourd'hui ?
+User: [Modifier les comportements malsains � l'avenir]Oui je peux essayer de reduire.
+Agent: [Baseline]C'est un bon point de départ. Pouvez-vous me dire ce qui vous motive à vouloir réduire votre consommation d'alcool ?
+User: [Le maintien d'un comportement malsain � l'avenir] Et l? ?a reprend au d?but c'est normal
+Agent: [Baseline]Merci pour votre honnêteté. Pouvez-vous me dire pourquoi vous avez envie de réduire votre consommation d'alcool ?
+User: [Modifier les comportements malsains � l'avenir] Je veux r?duire ma consommation d'alcool parce ?a m'inqui?te pour ma sant?.
+Agent: [Baseline]C'est une excellent raison. Quelles sont vos inquiétudes spécifiques concernant votre santé ?
+User: [Partager un sentiment ou une �motion n�gative] J'ai peur d'?tre plus fatigu?e, plus stress?e.
+Agent: [Baseline]Je comprends vos préoccupations. Avez-vous remarqué des moments spécifiques où vous vous sentez plus fatigué ou stressé après avoir consommé de l'alcool ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] G?n?ralement le surlendemain.
+Agent: [Baseline]Merci pour cette précision. Quelle serait une première étape concrète que vous pourriez prendre cette semaine pour réduire votre consommation d'alcool ?
+User: [Modifier les comportements malsains � l'avenir] Juste ? ne pas sortir.
+Agent: [Baseline]C'est une bonne idée. Y a-t-il d'autres activités que vous pourriez faire à la place de sortir, qui vous aideraient à vous détendre sans consommer d'alcool ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Regardez un film, cuisiner.
+Agent: [Baseline]Excellent. Quand pensez-vous pouvoir commencer à mettre en pratique ces activités ?
+User: [Modifier les comportements malsains � l'avenir] D?s la semaine prochaine.
+Agent: [Baseline]Très bien. Y a-t-il quelqu'un dans votre entourage qui pourrait vous soutenir dans cette démarche ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !

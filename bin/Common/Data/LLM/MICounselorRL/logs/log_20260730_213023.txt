@@ -1,0 +1,15 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good. And you?
+Agent: [Baseline]I'm well, thank you. [NAME], I understand you've been referred to me by your doctor. They're concerned about your alcohol use. How do you feel about that?
+User: [unknown]I feel fine.
+Agent: [Baseline]It sounds like you're feeling okay with things as they are. Can you tell me more about why you feel that way?
+User: [Backchannel]Yeah. Sure.
+Agent: [Baseline]Great. What makes you feel that alcohol isn't a problem for you?
+User: [unknown]I mean, I get angry easily.
+Agent: [Baseline]I see. So, you're saying that drinking helps you manage your anger?
+User: [unknown]Yeah.
+Agent: [Baseline]It's understandable that you might find it helpful in the moment. But have there been any times when drinking made things worse or caused problems?
+User: [unknown]Bye. I'm gonna go.
+Agent: [Baseline]Wait, [NAME]. I'm here to listen and understand. Let's talk about this together. What's making you want to leave?

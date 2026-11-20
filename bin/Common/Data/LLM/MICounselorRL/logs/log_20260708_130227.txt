@@ -1,0 +1,7 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis Ney. Comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je vais bien, merci. Et vous, comment allez-vous aujourd'hui, Ney ?
+User: [Accueil ou clôture]Bien, ça va très bien. Merci de demander, c'est gentil.
+Agent: [Baseline]Je suis heureux d'entendre cela. Je suis ici pour vous aider si vous avez besoin de parler de quelque chose. Y a-t-il quelque chose qui vous praioccupe en ce moment ?
+User: [Compréhension ou nouvelle perspective]J'ai été envoyé du coup par mon médecin pour J'ai été envoyé du coup par mon médecin pour J'ai été envoyé du coup par mon médecin pour parler de ma consommation d'alcool.
+Agent: [Baseline]Je vois. Et comment vous sentez-vous par rapport a votre consommation d'alcool en ce moment ?

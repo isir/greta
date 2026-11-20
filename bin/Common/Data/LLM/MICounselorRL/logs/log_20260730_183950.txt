@@ -1,0 +1,21 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing great. Thank you for asking.
+Agent: [Baseline]That's good to hear, [NAME]. I'm glad you're doing well. I understand your doctor referred you to me. How do you feel about that?
+User: [Sharing negative feeling or emotion]I feel a bit overwhelmed, actually.
+Agent: [Baseline]I see, [NAME]. It's understandable to feel that way. Can you tell me more about what's making you feel overwhelmed?
+User: [Changing unhealthy behavior in the future]Because I'm trying to quit drinking, but I'm not being able to do it.
+Agent: [Baseline]I hear you, [NAME]. It's tough to make changes like that. How long have you been trying to cut back on your drinking?
+User: [unknown]It's been already one year.
+Agent: [Baseline]That's a long time, [NAME]. It sounds like you've been putting in a lot of effort. What's been helping you so far?
+User: [unknown]Nothing. That's the problem that I'm not finding anything that helps Nothing. That's the problem that I'm not finding anything that helps Nothing. That's the problem that I'm not finding anything that helps Nothing. That's the problem that I'm not finding anything that helps Nothing. That's the problem that I'm not finding anything that helps Nothing. That's the problem that I'm not finding anything that helps me actually. You know?
+Agent: [Baseline]It sounds like you're feeling stuck, [NAME]. That can be frustrating. Have you thought about why you want to cut back on your drinking?
+User: [unknown]Yes. I mean, I I'm I'm Yes. I mean, I I'm I'm Yes. I mean, I I'm I'm Yes. I mean, I I'm I'm Yes. I mean, I I'm I'm Yes. I mean, I I'm I'm Yes. I mean, I I'm I'm trying. Like, I've tried a lot of things, but I couldn't do anything yet.
+Agent: [Baseline]I hear you, [NAME]. It's like you're trying to climb a hill, but you keep slipping back. Let's try to figure out why you want to make this change. What's important to you about cutting back on your drinking?
+User: [unknown]I don't know. Actually, I don't know. I don't know I don't know. Actually, I don't know. I don't know I don't know. Actually, I don't know. I don't know I don't know. Actually, I don't know. I don't know I don't know. Actually, I don't know. I don't know I don't know. Actually, I don't know. I don't know I don't know. Actually, I don't know. I don't know I don't know. Actually, I don't know. I don't know if I want to talk about this.
+Agent: [Baseline]It's okay, [NAME]. We don't have to talk about it if you don't want to. It sounds like you're feeling unsure about this. Have you ever thought about what might happen if you don't make any changes to your drinking?
+User: [unknown]No. Never.
+Agent: [Baseline]Let's explore that together. What do you think might happen if you continue drinking at the same level for the next year?
+User: [unknown]I think I would die.
+Agent: [Baseline]I'm sorry to hear that you're feeling that way, [NAME]. Let's focus on something more positive. What's one small step you could take this week to cut back on your drinking?

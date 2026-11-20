@@ -1,0 +1,15 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]Nice to meet you too, [NAME]. How have you been feeling lately?
+User: [Sharing negative feeling or emotion]Sad. A bit sad.
+Agent: [Baseline]I hear that sadness-it can be really heavy. What's been weighing on you lately?
+User: [Sharing negative feeling or emotion;]And that I have a lot of work.
+Agent: [Baseline]That sounds really demanding. Work can take a lot out of you. How do you usually unwind after a long day?
+User: [Sustaining unhealthy behavior in the future]I drink, I drink, I drink, I drink, three bottles of wine.
+Agent: [Baseline]I see. That's a lot. How does that feel for you after you've had those bottles?
+User: [Sharing negative feeling or emotion]I feel guilty.
+Agent: [Baseline]That guilt must be tough to carry. What do you think that guilt is trying to tell you?
+User: [Sharing negative feeling or emotion] I need to stop thinking.
+Agent: [Baseline]I hear you-sometimes it's hard to quiet the noise. What would it look like if you took just  one  break from drinking this week? Even a small change could help.
+User: [Changing unhealthy behavior in the future]It would be great.
+Agent: [Baseline]That sounds promising. What's one small step you could take  this week  to make that happen? Maybe skipping one night, or switching to something lighter? What feels doable for you?

@@ -1,0 +1,4 @@
+User: [Greeting or Closing]hey
+Agent: [Baseline]Hi there, I'm Dr. Anderson. How are you doing today?
+User: [Greeting or Closing]i am doing great and you ?
+Agent: [Baseline]I'm doing well, thanks for asking. I understand your doctor referred you to me. How do you feel about that?

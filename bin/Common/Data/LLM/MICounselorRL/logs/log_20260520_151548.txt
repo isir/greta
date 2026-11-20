@@ -1,0 +1,13 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Comment ça va
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Trais bien, merci. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Bien très très bien. Merci de demander. Et vous Bien très très bien. Merci de demander. Et vous Comment allez-vous madame
+Agent: [Baseline]Je vais bien, merci. Je suis heureux d'aitre ici pour discuter avec vous aujourd'hui. Comment vous sentez-vous en ce moment ?
+User: [Partager un sentiment ou une émotion négative]Je me sens un peu fatigué, j'ai du mal à
+Agent: [Baseline]Je comprends. Il y a beaucoup de choses qui peuvent causer de la fatigue. Est-ce que vous avez des soucis en ce moment qui pourraient vous causer du stress ou de l'inquiaitude ?
+User: [Compréhension ou nouvelle perspective]Oui, j'ai des examens à passer, ça me fait peur.
+Agent: [Baseline]Je comprends que cela puisse aitre stressant. Comment jairez-vous jainairalement le stress ?
+User: [Le maintien d'un comportement malsain à l'avenir]Le stress en général, le gère en buvant du vin. Le stress en général, le gère en buvant du vin. Le stress en général, le gère en buvant du vin. Le stress en général, le gère en buvant du vin. Le stress en général, le gère en buvant du vin. Et de la bière.
+Agent: [Baseline]Je vois. Combien de verres de vin et de biaire buvez-vous en jainairal par semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]Comment on va dire cinq verres de rouge et Comment on va dire cinq verres de rouge et Comment on va dire cinq verres de rouge et Comment on va dire cinq verres de rouge et Comment on va dire cinq verres de rouge et Comment on va dire cinq verres de rouge et et dix verres de bière.
+Agent: [Baseline]Merci de me donner ces informations. Savez-vous que la consommation excessive d'alcool peut avoir des effets naifastes sur la santai ?

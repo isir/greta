@@ -1,0 +1,11 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, Camille. My name is [NAME]. How are you doing today? I'm very glad to speak with you.
+Agent: [Baseline]Pleased to meet you, [NAME]I'm doing well, thank you. How about you, [NAME]?
+User: [Greeting or Closing]Very good actually here in
+Agent: [Baseline]That's great to hear. I understand you've been referred to me by your doctor. How do you feel about that?
+User: [Sharing positive feeling or emotion]Glad.
+Agent: [Baseline]I see. What do you think your doctor was hoping for when they made that referral?
+User: [unknown]Actually, it is very strange.
+Agent: [Baseline]Strange in what way, [NAME]?
+User: [unknown]I don't know because I I have put some gate I don't know because I I have put some gate I don't know because I I have put some gate I don't know because I I have put some gate I don't know because I I have put some gate I don't know because I I have put some gate I don't know because I I have put some gate I don't know because I I have put some gate in order to activate the buttons, but it's not working. in order to activate the buttons, but it's not working. in order to activate the buttons, but it's not working. in order to activate the buttons, but it's not working. in order to activate the buttons, but it's not working. in order to activate the buttons, but it's not working. in order to activate the buttons, but it's not working. in order to activate the buttons, but it's not working.
+Agent: [Baseline]I apologize, [NAME]. It seems there's a technical issue. Let's try again. How about your alcohol use? How's that been going?

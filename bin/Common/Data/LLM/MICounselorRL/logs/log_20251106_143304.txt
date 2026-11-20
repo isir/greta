@@ -1,0 +1,4 @@
+User: [Greeting or Closing] How are you?
+Agent: [Baseline]Hi, I’m Dr. Anderson. Thanks for coming in today. How’ve you been holding up lately? Anything on your mind you’d like to start with?
+User: [Greeting or Closing;] Hi. I am doctor Anderson. Thanks
+Agent: [Baseline]*Smiles warmly* No need for formalities—just call me Anderson. What brings you in today? Your doctor mentioned alcohol might be part of the conversation. How do you feel about that?

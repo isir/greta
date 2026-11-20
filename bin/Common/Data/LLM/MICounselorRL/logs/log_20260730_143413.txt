@@ -1,0 +1,13 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. My name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [unknown]Bitsar
+Agent: [Baseline]It sounds like you're having a tough time right now, [NAME]. I'm here to listen and support you.
+User: [Changing unhealthy behavior in the future]I don't know what to do with my alcohol problems.
+Agent: [Baseline]I see. It's understandable to feel stuck, [NAME]. Can you tell me more about what's been going on with your drinking?
+User: [unknown]So?
+Agent: [Baseline]It seems like you're not sure if you want to talk about it. That's okay, [NAME]. We can take this at your pace.
+User: [Backchannel]Yes.
+Agent: [Baseline]What concerns do you have about changing your drinking, [NAME]?
+User: [Changing unhealthy behavior in the future]I don't know how to do it.
+Agent: [Baseline]It's common to feel that way, [NAME]. Let's explore that together. What would make it easier for you to cut back on drinking?

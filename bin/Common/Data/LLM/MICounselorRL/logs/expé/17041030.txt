@@ -1,0 +1,57 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, je suis [NAME].
+Agent: [Ask for Consent]EnchantÃ©e, [NAME]Bonjour, je suis Camille. EnchantÃ©e, [NAME]. ÃŠtes-vous d'accord pour que nous discutions de votre activitÃ© physique aujourd'hui ?
+User: [Backchannel] Oui,
+Agent: [Ask about current Emotions]Merci, [NAME]. Comment vous sentez-vous en ce moment concernant votre activitÃ© physique ?
+User: [Partager un sentiment ou une émotion négative] J'essaye de faire des efforts, mais je pense que ce n'est pas encore optimal.
+Agent: [Ask for Consent]Je comprends. ÃŠtes-vous d'accord pour que nous discutions de ce qui pourrait vous aider Ã  optimiser votre activitÃ© physique ?
+User: [Backchannel] Je suis d'accord.
+Agent: [Ask about current Emotions]Merci, [NAME]. Comment vous sentez-vous Ã©motionnellement par rapport Ã  votre activitÃ© physique actuelle ?
+User: [inconnu]mitige
+Agent: [Ask for Consent]Merci de partager cela, [NAME]. Puis-je vous demander ce qui vous fait ressentir cette ambivalence ?
+User: [Partager un sentiment ou une émotion négative Compréhension ou nouvelle perspective] J'ai, je fais des efforts, mais je pense que je peux faire mieux.
+Agent: [Empathic Reaction]Je comprends, [NAME]. Il est normal de ressentir cette ambivalence lorsqu'on essaye de faire des changements. Vous avez dÃ©jÃ  fait des efforts, et c'est un bon premier pas. Parlez-moi de ce que vous faites actuellement pour Ãªtre plus actif.
+User: [inconnu] Et
+Agent: [Empathic Reaction]Je comprends que vous ressentez une certaine frustration et incertitude quant Ã  votre activitÃ© physique. C'est tout Ã  fait normal de vouloir faire mieux tout en reconnaissant les efforts dÃ©jÃ  accomplis.
+User: [Backchannel] oui
+Agent: [Ask about current Emotions]Je comprends. Comment vous sentez-vous Ã©motionnellement par rapport Ã  votre activitÃ© physique actuelle ?
+User: [Partager un sentiment ou une émotion positive;] Bien, je suis
+Agent: [Reflection]Je comprends, [NAME]. Il est tout Ã  fait normal de se sentir bien tout en ressentant une certaine ambivalence. C'est un signe que vous Ãªtes consciente de vos efforts et de vos aspirations. Parlez-moi de ce que vous faites actuellement pour Ãªtre plus actif.
+User: [Partager un sentiment ou une émotion positive] Je fais du sport quand j'arrive ? ?tre patient, que j'ai assez d'?nergie.
+Agent: [Reflection]Il semble que vous ayez une approche flexible et que vous essayez de faire du sport lorsque vous vous sentez prÃªte et que vous avez assez d'Ã©nergie. C'est dÃ©jÃ  un bon point de dÃ©part. Comment vous sentez-vous par rapport Ã  cette approche ?
+User: [Partager un sentiment ou une émotion négative] Je ne me sens pas tout ? fait satisfaite parce que je pense que si
+Agent: [Reflection]Merci de partager cela, [NAME]. Il est tout Ã  fait normal de ne pas se sentir entiÃ¨rement satisfait lorsqu'on pense pouvoir faire mieux. Vous avez dÃ©jÃ  une bonne base en faisant du sport quand vous avez de l'Ã©nergie. Qu'est-ce qui vous empÃªche de faire plus d'activitÃ© physique selon vous ?
+User: [inconnu] Plus de rigueur peut-?tre.
+Agent: [Progress Acknowledgment]Bonjour, je suis Camille. Comment allez-vous aujourd'hui ?
+User: [inconnu] Plus de rigueur peut-?tre.
+Agent: [Invite to Shift Outlook]Vous avez raison, parfois un peu plus de rigueur peut aider à atteindre nos objectifs. Si vous imaginiez un futur où vous êtes plus actif, à quoi ressemblerait cette version de vous ?
+User: [Backchannel] Plus de rigueur peut-?tre.
+Agent: [Ask for Consent]Est-ce que vous seriez d'accord pour que nous discutions de votre activité physique et de comment vous pourriez l'augmenter ?
+User: [Demande d'informations médicales] Est-ce que vous pouvez r?p?ter la question ? quelle est-ce que je vais r?pondre
+Agent: [Invite to Shift Outlook]Bien sûr. Imaginez un futur où vous êtes plus actif. À quoi ressemblerait cette version de vous ?
+User: [inconnu] Cette version elle nourrit plus d'?nergie, c'est s?rement meilleure sant?
+Agent: [Ask about current Emotions]Comment vous sentez-vous en imaginant cette version plus active de vous-même ? Quelles émotions cela suscite-t-il en vous ?
+User: [Partager un sentiment ou une émotion positive] La joie est boucl?e quoi.
+Agent: [Empathic Reaction]C'est merveilleux de ressentir cette joie en imaginant une version plus active de vous-même. Cela montre que vous avez déjà une motivation intérieure pour ce changement. Comment pouvons-nous concrétiser cette vision ensemble ?
+User: [inconnu] Je ne sais pas.
+Agent: [Progress Acknowledgment]C'est tout à fait normal de ne pas savoir par où commencer. Le fait que vous envisagiez déjà un futur plus actif est un excellent premier pas. Vous avez déjà fait preuve de beaucoup de réflexion et de motivation. Comment pourrions-nous transformer cette vision en une étape concrète pour la semaine prochaine ?
+User: [inconnu] On a le grand plan.
+Agent: [Reflection]Merci pour votre ouverture. Il semble que vous avez déjà une bonne compréhension de ce que cela pourrait signifier pour vous d'être plus actif. Vous avez mentionné que vous ressentiriez plus d'énergie et une meilleure santé. C'est un excellent point de départ. Comment pourrions-nous intégrer cette vision dans votre quotidien ?
+User: [Modifier les comportements malsains à l'avenir] En faisant un programme
+Agent: [Ask about current Emotions]Merci pour votre ouverture. Il semble que vous avez déjà une bonne compréhension de ce que cela pourrait signifier pour vous d'être plus actif. Vous avez mentionné que vous ressentiriez plus d'énergie et une meilleure santé. C'est un excellent point de départ. Comment vous sentez-vous en ce moment en discutant de cette possibilité ?
+User: [Partager un sentiment ou une émotion négative]rien de spécial, c'est pas facile
+Agent: [Empathic Reaction]Je comprends que ce ne soit pas facile. C'est tout à fait normal d'avoir des sentiments mitigés face à un changement. Comment pouvons-nous rendre ce processus plus accessible pour vous ?
+User: [Modifier les comportements malsains à l'avenir]en étavlissant une stratégie
+Agent: [Planning with the Patient]Bien sûr, établissons une stratégie ensemble. Quelle petite étape pourriez-vous envisager de faire cette semaine pour augmenter votre activité physique ? Par exemple, une courte marche quotidienne ?
+User: [Modifier les comportements malsains à l'avenir]une scénace tout les matins
+Agent: [Medical Education]C'est une excellente idée ! Faire une séance d'exercice tous les matins peut vraiment faire une différence. Avez-vous une idée de la durée ou du type d'exercice que vous aimeriez faire ?
+User: [Modifier les comportements malsains à l'avenir] Le plus facile de mettre en place ces s?ances de renforcement musculaire, mais
+Agent: [Ask about current Emotions]Comment vous sentez-vous à l'idée de commencer des séances de renforcement musculaire tous les matins ? Quelles émotions cela suscite-t-il en vous ?
+User: [Partager un sentiment ou une émotion négative] ?a me para?t un peu difficile de tenir enfin je sais que les fois o? je r?ussis ? pas le faire je serais d??ue
+Agent: [Give Solution]Je comprends que cela puisse paraître difficile au début. Une bonne stratégie pourrait être de commencer par des séances courtes, peut-être 5 à 10 minutes, et d'augmenter progressivement la durée. Vous pouvez également choisir des exercices simples comme des pompes, des squats ou des étirements. L'important est de commencer doucement et de progresser à votre rythme. Qu'en pensez-vous ?
+User: [Backchannel]c'ets vrai tres bien
+Agent: [Backchannel]Je suis d'accord, commencer doucement est une excellente approche. Comment vous sentez-vous à l'idée de débuter avec des séances courtes ?
+User: [Modifier les comportements malsains à l'avenir] J'ai h?te d'essayer pour voir si
+Agent: [Medical Education]C'est formidable que vous soyez enthousiaste à l'idée d'essayer. Pour commencer, vous pourriez faire des séances de 5 à 10 minutes de renforcement musculaire tous les matins. Cela peut inclure des exercices simples comme des pompes, des squats ou des étirements. L'important est de commencer doucement et de progresser à votre rythme. Vous pouvez également utiliser des applications ou des vidéos en ligne pour vous guider. Qu'en pensez-vous ?
+Agent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+

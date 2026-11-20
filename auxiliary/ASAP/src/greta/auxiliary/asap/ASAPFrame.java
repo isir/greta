@@ -374,7 +374,7 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
 
         jLabel1.setText("Port");
 
-        port.setText("4000");
+        port.setText("50151");
         port.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 portActionPerformed(evt);
@@ -1026,7 +1026,6 @@ public class ASAPFrame extends javax.swing.JFrame implements AUEmitter, BAPFrame
                 if (this.parent != null && this.IsRunning == Boolean.TRUE){
                     performer.performAUAPFrame(frame, id);
                     this.parent.addAnimation(id, absoluteStartTime, time_frame);
-                    //System.out.println(" LE ADD ANIMATION EST PASSEee 2");
                 }
                 else{
                 performer.performAUAPFrame(frame, id);

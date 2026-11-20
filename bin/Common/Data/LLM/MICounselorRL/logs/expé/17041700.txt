@@ -1,0 +1,43 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je suis [NAME].
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] Comment je fais aujourd'hui ?a va, ?a va merci.
+Agent: [Baseline]Super, je suis ravie de l'entendre. Comment vous sentez-vous par rapport à votre activité physique en ce moment ?
+User: [Demande d'informations m�dicales] J'ai une qu?te,
+Agent: [Baseline]Bien sûr, [NAME]. Comment puis-je vous aider ?
+User: [inconnu] Franchement ce n'est pas du tout.
+Agent: [Baseline]Merci pour votre honnêteté, [NAME]. Qu'est-ce qui vous empêche d'être plus actif physiquement ?
+User: [Inconnu] J'imagine le capitalisme ? soci?t?, je sais pas.
+Agent: [Baseline]C'est une bonne question. Quelles sont les principales raisons qui vous empêchent de faire plus d'exercice ?
+User: [Partager un sentiment ou une �motion n�gative; Partager des informations personnelles ou d�crire un �v�nement pass�;] J'imagine le capitalisme ? soci?t?, je sais pas. J'imagine le capitalisme ? soci?t?, je sais pas. J'imagine le capitalisme ? soci?t?, je sais pas. J'imagine le capitalisme ? soci?t?, je sais pas. J'imagine le capitalisme ? soci?t?, je sais pas. Le manque de temps, le manque d'argent,
+Agent: [Baseline]Je comprends, [NAME]. Le manque de temps et d'argent peut être un vrai défi. Y a-t-il des moments dans votre journée où vous pourriez intégrer une petite activité physique, comme marcher à la place de prendre la voiture ou les transports en commun ?
+User: [Partager un sentiment ou une �motion n�gative]c'es tennuyeux
+Agent: [Baseline]Je comprends que cela puisse sembler ennuyeux. Y a-t-il une activité physique que vous aimez particulièrement ou que vous aimeriez essayer ?
+User: [Compr�hension ou nouvelle perspective] J'aurais bien essay?, je ne sais pas trop l? comme ?a,
+Agent: [Baseline]C'est un bon point de départ. Quelles activités avez-vous déjà essayées et appréciées dans le passé, même un peu ?
+User: [inconnu] J'ai regard? le panettum,
+Agent: [Baseline]Le panneton ? Vous voulez dire la pâtisserie ? Ou une autre activité ?
+User: [inconnu] Le badminton, c'est Capitaine Nice.
+Agent: [Baseline]Ah, le badminton ! C'est une excellente activité. Qu'est-ce qui vous attire dans le badminton ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]c'est amrrant
+Agent: [Baseline]C'est super que vous trouviez le badminton amusant. Aimeriez-vous essayer de l'intégrer dans votre semaine prochaine ? Peut-être juste une fois pour commencer ?
+User: [inconnu] Non,
+Agent: [Baseline]D'accord, [NAME]. Y a-t-il une autre activité que vous aimeriez essayer ou que vous trouvez intéressante ?
+User: [Backchannel] Non,
+Agent: [Baseline]Je comprends. Parfois, il est difficile de trouver la motivation. Avez-vous remarqué des moments dans votre journée où vous pourriez faire une petite pause pour marcher ou bouger un peu ?
+User: [Compr�hension ou nouvelle perspective] Je peux faire beaucoup de pauses, mais
+Agent: [Baseline]C'est une bonne nouvelle. Que pensez-vous de commencer par une petite marche pendant une de ces pauses ? Peut-être 5 minutes pour commencer ?
+User: [inconnu] J'avais le plus march?.
+Agent: [Baseline]C'est un bon point de départ. Que diriez-vous de marcher un peu plus chaque jour ? Peut-être 10 minutes de plus que d'habitude ?
+User: [Le maintien d'un comportement malsain � l'avenir]non ca va pas etre possible
+Agent: [Baseline]Je comprends. Y a-t-il une autre activité que vous pourriez envisager, même quelque chose de très simple ? Peut-être monter les escaliers au lieu de prendre l'ascenseur ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]j'habite au deuxieme
+Agent: [Baseline]D'accord, [NAME]. Peut-être pourriez-vous essayer de monter les escaliers au lieu de prendre l'ascenseur ou l'escalator quand vous êtes ailleurs ? Cela pourrait être un bon début. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains � l'avenir] Autant que je peux.
+Agent: [Baseline]C'est un bon point de départ. Que diriez-vous de commencer par prendre les escaliers chaque fois que c'est possible cette semaine ? Cela pourrait être une petite étape vers plus d'activité physique. Qu'en pensez-vous ?
+User: [inconnu] C'est une bonne nouvelle, je pratique des lasa pour te dire la v?rit?.
+Agent: [Baseline]C'est super, [NAME]. Qu'est-ce qui vous motive à pratiquer le lasa ?
+User: [Backchannel] Non, je disais que je pratique d?j? ?a.
+Agent: [Baseline]D'accord, c'est une bonne habitude. Aimeriez-vous essayer d'ajouter une autre petite activité cette semaine, comme marcher un peu plus ou faire une pause pour étirer vos jambes ?
+User: [Le maintien d'un comportement malsain � l'avenir] Non, je ne crois pas.
+Agent: [Baseline]Je comprends, [NAME]. Parfois, il est difficile de trouver la motivation. Y a-t-il une raison particulière pour laquelle vous ne voulez pas ajouter une autre activité ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

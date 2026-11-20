@@ -1,0 +1,5 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture][NAME], je suis David. Comment tu vas aujourd'hui Est-ce que ça va Est-ce que ça se passe bien
+Agent: [Baseline]EnchantÃ©e, [NAME]Je vais bien, merci. Et vous, David, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Très bien, Gretha, merci de demander.
+Agent: [Baseline]Je suis heureux d'entendre cela, David. Comment puis-je vous aider aujourd'hui ?

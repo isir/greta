@@ -90,6 +90,9 @@ def preprocess_real_time(input_frames, processor):
 def real_time_inference_loop(model, device, client, sender, processor, miror, tensor_client, N =10, K = 30, guide_weight=0.0):
     model.eval()
 
+    print(torch.cuda.memory_allocated() / 1024 ** 3, "GB allocated")
+    print(torch.cuda.memory_reserved() / 1024 ** 3, "GB reserved")
+
     # A commmenter for server reciving MI dialogs
     batch_size = 1
     previous_z_tensor, _ = generate_random_tensors_numpy(batch_size)
@@ -234,6 +237,8 @@ def real_time_inference_loop(model, device, client, sender, processor, miror, te
 
             last_16_rows = df.tail(processor.buffer_size).to_csv(index=False, header=False)
             sender.queue_data(last_16_rows.splitlines())
+            
+            # print("[MODIFF-TEST]", last_16_rows)
 
             previous_input_tensor = input_tensor
 
@@ -329,6 +334,8 @@ def main():
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     print(f"Using device: {device}")
+    print(torch.cuda.memory_allocated() / 1024 ** 3, "GB allocated")
+    print(torch.cuda.memory_reserved() / 1024 ** 3, "GB reserved")
 
     observation_embedder = ObservationEmbedder(num_facial_types, facial_embed_dim, cnn_output_dim, lstm_hidden_dim,
                                                sequence_length)
@@ -361,6 +368,7 @@ def main():
     sender = Sender(5561, "localhost")
 
     real_time_inference_loop(model, device, client, sender,  processor, mirror, tensor_client, N , K, guide_weight=guide_w)
+
 
 
 

@@ -1,0 +1,11 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis Ney. Comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je vais bien, merci. Et vous, Ney ? Comment allez-vous aujourd'hui ?
+User: [Backchannel]Soir merci de demander voilà on fait on fait avec quoi.
+Agent: [Baseline]Je suis heureux d'entendre que vous vous en sortez bien. Je suis la pour vous aider a amailiorer votre bien-aitre en augmentant votre activitai physique. Comment vous sentez-vous par rapport a votre niveau actuel d'activitai physique ?
+User: [Partager un sentiment ou une émotion négative]Mon niveau actuel est on va dire très très bas et ouais c'est bas j'en fais passer.
+Agent: [Baseline]Je comprends que cela peut etre difficile de trouver la motivation pour augmenter son activite physique, surtout si on a ete sedentaire pendant longtemps. Qu'est-ce qui vous a empaiche de faire plus d'exercice jusqu'a present ?
+User: [Partager des informations personnelles ou décrire un événement passé]Je sais pas, je pense que le travail je vais passer tant.
+Agent: [Baseline]Je vois. Et comment vous sentez-vous par rapport a votre travail ? Est-ce que cela vous fatigue beaucoup ?
+User: [Partager un sentiment ou une émotion négative]Je pense que le travail me prend énormément d'énergie et donc du coup c'est très fatiguant.
+Agent: [Baseline]Je comprends. Il est normal de se sentir fatigue apres une journee de travail. Cependant, l'exercice physique peut en realite vous donner plus d'energie et vous aider a vous sentir moins fatigue. Avez-vous deja essaye de faire de l'exercice regulierement ?

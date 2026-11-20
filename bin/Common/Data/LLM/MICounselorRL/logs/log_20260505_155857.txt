@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, Cammy. My name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME] How are you doing today, [NAME]?
+User: [Greeting or Closing]Doing fine. Thank you for asking, can you? And how about you? Are you okay?
+Agent: [Baseline]I appreciate that. I'm feeling well too. Let's talk a bit about why your doctor thought it might be helpful for us to chat today. Have there been some things on your mind regarding alcohol?

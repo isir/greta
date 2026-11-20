@@ -42,10 +42,10 @@ def main(language):
 
     print("language : "+language)
     if language == "EN":
-        language = "en-US"
+        language = "en"
         
     else:
-        language = "fr"
+        language = "multi"
     print("language : "+language)
     try:
         # example of setting up a client config. logging values: WARNING, VERBOSE, DEBUG, SPAM
@@ -129,7 +129,7 @@ def main(language):
             utterance_end_ms="1000",
             vad_events=True,
             # Time in milliseconds of silence to wait for before finalizing speech
-            endpointing=300,
+            endpointing=500,
         )
 
         addons = {

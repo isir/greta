@@ -1,0 +1,13 @@
+Agent: []Hello, I'm [NAME]. What's your name?
+User: [unknown] Enjoy.
+Agent: [Baseline]Don't worry, we can continue without it.Hi Camille, I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing; Sharing positive feeling or emotion] I'm good today. Thank you. And you?
+Agent: [Baseline]I'm doing well, thank you for asking. It's a pleasure to meet you. What brings you some joy these days?
+User: [Sharing personal information or Describe past event; Sharing positive feeling or emotion] In these days, I go out often with my friends.
+Agent: [Baseline]That sounds like fun! What do you and your friends usually do when you go out?
+User: [Sustaining unhealthy behavior in the future; Sharing personal information or Describe past event] We usually drink. We drink, for example, wine or other type of drinks.
+Agent: [Baseline]It sounds like drinking is a big part of your social time. How does it feel when you're out with friends like that?
+User: [Sharing personal information or Describe past event; Sharing positive feeling or emotion; Sustaining unhealthy behavior in the future] I feel very good with with this type of situation, but I don't know if my drinking
+Agent: [Baseline]It sounds like drinking helps you relax and enjoy time with friends. What makes you wonder about it?
+User: [Sustaining unhealthy behavior in the future; Sharing positive feeling or emotion] Yeah. It's it's as you said. Because when I drink, feel very, very well. It's something that helps me a lot.
+Agent: [Baseline]I hear how much drinking adds to your good times. What's one thing you'd want to keep the same about those nights?

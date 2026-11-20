@@ -1,0 +1,25 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Salut [NAME], comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je vais bien, merci. Et vous, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais très bien merci de demander, ça se passe plutôt bien dans le que tu en donner ça va.
+Agent: [Baseline]C'est trais bien a entendre. Je suis heureux pour vous. Est-ce que vous buvez de l'alcool raiguliairement ?
+User: [Le patient partage un sentiment ou une émotion positive.]Souvent surtout quand je avec tes amis, je t'entends ça beaucoup boire.
+Agent: [Baseline]Je vois. Et comment cela vous affecte-t-il ?
+User: [Partager des informations personnelles ou décrire un événement passé]Ça m'affecte énormément dans mon quotidien que soit dans le travail ou dans la vie sociale. Ça m'affecte énormément dans mon quotidien que soit dans le travail ou dans la vie sociale. Ça m'affecte énormément dans mon quotidien que soit dans le travail ou dans la vie sociale. Ça m'affecte énormément dans mon quotidien que soit dans le travail ou dans la vie sociale. Ça m'affecte énormément dans mon quotidien que soit dans le travail ou dans la vie sociale.
+Agent: [Baseline]Je suis daisolai d'entendre cela. Il semble que l'alcool ait un impact naigatif sur votre vie. Avez-vous daija envisajai de raiduire votre consommation ?
+User: [Le maintien d'un comportement malsain à l'avenir]Oui oui, j'ai souvent envisagé de la réduire, mais j'ai jamais trouvé la force de faire.
+Agent: [Baseline]Je comprends. Il peut aitre difficile de changer des habitudes bien ancrais. Qu'est-ce qui vous empaiche de raiduire votre consommation d'alcool ?
+User: [inconnu]Je ne sais pas peut-être l'inventer.
+Agent: [Baseline]Il est normal de se sentir incertain face au changement. Pouvez-vous me dire ce qui vous inquiaite le plus a propos de la raiduction de votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]C'est du combat santé et surtout mon avenir.
+Agent: [Baseline]Je comprends. Il est important de prendre soin de sa santai et de penser a l'avenir. Avez-vous des idais sur ce que vous pourriez faire pour raiduire votre consommation d'alcool cette semaine ?
+User: [Modifier les comportements malsains à l'avenir]Ouais je pense que je pourrais essayer d'éviter de boire un jour sur deux.
+Agent: [Baseline]C'est une excellente idai ! Qu'est-ce qui vous fait penser que cela pourrait fonctionner pour vous ?
+User: [Compréhension ou nouvelle perspective]Je sais pas je pense que ça peut améliorer les choses.
+Agent: [Baseline]C'est une bonne raison pour essayer. Qu'est-ce qui pourrait vous aider a mettre en place cette nouvelle habitude ?
+User: [Compréhension ou nouvelle perspective]Je pense que c'est vous qui pourriez m'aider à mettre en place madame Thibault.
+Agent: [Baseline]Je suis la pour vous aider. Qu'est-ce qui vous empache de commencer a mettre en place cette nouvelle habitude dais maintenant ?
+User: [inconnu]Un especial.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a surmonter cet obstacle ?
+User: [Compréhension ou nouvelle perspective]Je sais pas comment ça le faire, comment ça y en début à tout.
+Agent: [Baseline]Nous pouvons travailler ensemble pour trouver un plan qui vous conviendra. Que diriez-vous de commencer par identifier les moments ou vous avez tendance a boire de l'alcool et trouver des alternatives saines pour ces moments ?

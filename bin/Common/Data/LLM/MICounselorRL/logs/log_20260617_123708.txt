@@ -1,0 +1,37 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour, moi c'est [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]Très bien et toi
+Agent: [Baseline]Je suis bien, merci. Je suis heureux de vous rencontrer, [NAME]. Comment vous sentez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je me sens bien.
+Agent: [Baseline]C'est bien. Je suis heureux d'entendre cela. Je suis ici pour discuter de votre santai avec vous aujourd'hui. Comment vous sentez-vous physiquement en ce moment ?
+User: [Partager un sentiment ou une émotion négative]Je me sens un peu fatiguée.
+Agent: [Baseline]Je suis daisolai d'entendre cela, [NAME]. La fatigue peut aitre causai par de nombreuses choses. Avez-vous eu l'occasion de faire de l'exercice raiguliairement ces derniers temps ?
+User: [Backchannel]No.
+Agent: [Baseline]Je vois. L'exercice peut aider a raiduire la fatigue et a amailiorer l'ainergie. Avez-vous envisajai de commencer a faire de l'exercice reguliairement ?
+User: [Le maintien d'un comportement malsain à l'avenir]Oui, mais je n'ai pas encore commencé.
+Agent: [Baseline]Je comprends. Il est normal de se sentir un peu daicourajai au daibut, mais rappelez-vous que chaque petit pas compte. Avez-vous une idai de ce que vous pourriez faire pour commencer a faire de l'exercice ?
+User: [Compréhension ou nouvelle perspective]Faire des joggings.
+Agent: [Baseline]C'est une excellente idai, [NAME]. Le jogging est un excellent moyen de faire de l'exercice et de rester en forme. Avez-vous deja essayai de faire du jogging avant ?
+User: [Le maintien d'un comportement malsain à l'avenir]Oui, mais je ne tiens pas sur le long terme.
+Agent: [Baseline]Je comprends. Il est normal d'avoir des difficultai a rester motivai au debut. Mais rappelez-vous que chaque fois que vous sortez et que vous faites un peu d'exercice, vous etes en train de prendre soin de vous-mame. Avez-vous pense a vous fixer un objectif concreti pour cette semaine ? Par exemple, pourriez-vous vous engager a faire un jogging de 10 minutes par jour ?
+User: [Compréhension ou nouvelle perspective]Oui, je pourrais essayer.
+Agent: [Baseline]C'est une excellente idai, [NAME]. N'oubliez pas que chaque petit pas compte et que vous pouvez toujours augmenter la durai au fil du temps. Etes-vous pret a vous engager a faire un jogging de 10 minutes par jour cette semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non, pas tous les jours.
+Agent: [Baseline]Je comprends. Commencer par faire un jogging de 10 minutes trois fois par semaine serait deja un excellent debut. Qu'en pensez-vous, [NAME] ? Etes-vous pret a vous engager a faire un jogging de 10 minutes trois fois cette semaine ?
+User: [Compréhension ou nouvelle perspective]Je pense que c'est faisable.
+Agent: [Baseline]C'est fantastique, [NAME]. Je suis fier de vous. N'oubliez pas que chaque fois que vous sortez et que vous faites un peu d'exercice, vous etes en train de prendre soin de vous-mame. Si vous avez des difficultai a rester motivai, n'hesitez pas a me contacter. Nous pouvons travailler ensemble pour trouver des solutions. Avez-vous des questions ou des inquietai avant que nous nous separions ?
+User: [Modifier les comportements malsains à l'avenir]Que me conseilles-tu pour rester motivée
+Agent: [Baseline]Il est important de trouver ce qui vous motive personnellement. Cela peut etre de la musique, un ami avec qui faire de l'exercice, ou simplement se rappeler pourquoi vous avez commence. Il est egalement important de se fixer des objectifs realistes et de celebrer ses progres, meme les plus petits. N'oubliez pas que chaque petit pas compte.
+User: [Compréhension ou nouvelle perspective]Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait Si je fais de la marche à la place du jogging, est-ce que ça irait
+Agent: [Baseline]Oui, la marche est egalement un excellent moyen de faire de l'exercice et de rester en forme. Il est important de trouver une activite que vous aimez et qui vous convient. Combien de temps pensez-vous pouvoir marcher chaque jour, [NAME] ?
+User: [Demande d'informations médicales]Combien de temps il faudrait que je marche par jour
+Agent: [Baseline]Il est recommandai de faire au moins 30 minutes d'exercice modai par jour pour rester en bonne santai. Mais rappelez-vous que chaque petit pas compte, alors commencez par ce qui vous convient le mieux et augmenter progressivement la durai. Qu'en pensez-vous, [NAME] ? Etes-vous pret a vous engager a faire une marche de 10 minutes par jour cette semaine ?
+User: [Accueil ou clôture]Oui.
+Agent: [Baseline]C'est fantastique, [NAME]. N'oubliez pas que chaque petit pas compte et que vous pouvez toujours augmenter la durai au fil du temps. Etes-vous pret a vous engager a faire une marche de 10 minutes par jour cette semaine ?
+User: [Le patient exprime une intention ou une action visant à modifier activement l'un de ses comportements à l'avenir, donc la catégorie est : "Modifier les comportements malsains à l'avenir".]Pas tous les jours, mais mais je vais essayer.
+Agent: [Baseline]C'est une excellente idai, [NAME]. Commencer par faire une marche de 10 minutes trois fois par semaine serait deja un excellent debut. Qu'en pensez-vous, [NAME] ? Etes-vous pret a vous engager a faire une marche de 10 minutes trois fois cette semaine ?
+User: [La catégorie pour l'énoncé du patient <<< oui je le ferai >>> est : "Modifier les comportements malsains à l'avenir". Le patient exprime son intention de prendre une action positive pour améliorer sa santé en s'engageant à faire une marche de 10 minutes trois fois par semaine.]oui je le ferai
+Agent: [Baseline]C'est fantastique, [NAME]. Je suis fier de vous. N'oubliez pas que chaque petit pas compte et que vous pouvez toujours augmenter la durai au fil du temps. Si vous avez des difficultai a rester motivai, n'hesitez pas a me contacter. Nous pouvons travailler ensemble pour trouver des solutions. Avez-vous des questions ou des inquietai avant que nous nous separions ? END\_CONVO
+User: [Accueil ou clôture]Je n'ai pas d'autres questions.
+Agent: [Baseline]Trais bien, [NAME]. Je suis ravi d'avoir pu vous aider aujourd'hui. N'oubliez pas de faire ces marches cette semaine et de rester motivai. Si vous avez besoin de plus d'aide ou de conseils, n'hesitez pas a me contacter. Passez une bonne semaine ! END\_CONVO

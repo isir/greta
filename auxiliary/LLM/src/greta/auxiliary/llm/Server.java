@@ -104,7 +104,7 @@ public class Server {
         out = new PrintWriter(new OutputStreamWriter(clientSocket.getOutputStream(), "ISO-8859-1"), true);
     }
 
-    public void sendMessage(String msg) throws IOException {
+    public synchronized void sendMessage(String msg) throws IOException {
         out.println(msg);
     }
     

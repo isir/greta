@@ -1,0 +1,3 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture;] Je m'appelle Girard.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Ah, enchantaie Girard ! Comment allez-vous aujourd'hui ? (Un peu de soleil, un cafai... ssa va ?)

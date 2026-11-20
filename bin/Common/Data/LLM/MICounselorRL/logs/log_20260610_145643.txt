@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [unknown]Alright.
+Agent: [Baseline]Don't worry, we can continue without it.How are you doing today?
+User: [unknown]No way.
+Agent: [Baseline]I hear you're not feeling great. What's been going on?

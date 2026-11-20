@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [unknown]Hello greta and tom
+Agent: [Experience Normalization]Pleased to meet you, [NAME]It's great to meet you, [NAME]. I'm here to help. Many people struggle with alcohol use, and it's nothing to be ashamed of. It's quite common.
+User: [Greeting or Closing]Thank you.
+Agent: [Medical Education]How much alcohol do you typically drink in a week, [NAME]?

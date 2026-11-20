@@ -1,0 +1,5 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture;]Je m'apelle [NAME]
+Agent: [Baseline]EnchantÃ©e, [NAME]Enchantaie Alafate ! Comment allez-vous aujourd'hui ? (Un peu de soleil, j'espère ?)
+User: [Partager un sentiment ou une émotion négative; Inconnu] J'esp?re. Attends attends attends attends j'ai un probl?me
+Agent: [Baseline]Ah, je vois... Vous semblez un peu tendu. Vous voulez en parler ? (Sans pression, hein)

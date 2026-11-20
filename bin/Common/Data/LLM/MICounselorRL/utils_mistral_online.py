@@ -6,14 +6,27 @@ import pandas as pd
 import openai
 from tqdm import tqdm
 import codecs
-from mistralai.client import MistralClient
-from mistralai.models.chat_completion import ChatMessage
 
-api_key_file = os.path.join(os.path.dirname(__file__), 'api_key.txt')
-with open(api_key_file, 'r') as f:
-    MISTRAL_API_KEY = f.read()
+# ============================================================
+# LOCAL_MODE: set to True to use a local Ollama server,
+#             set to False to use the Mistral cloud API.
+# ============================================================
+LOCAL_MODE = False
 
-model = "mistral-large-latest"
+LOCAL_BASE_URL = "http://localhost:11434/v1"
+LOCAL_MODEL = "mistral-nemo"
+ONLINE_MODEL = "open-mistral-nemo"
+
+if LOCAL_MODE:
+    from openai import OpenAI as _ClientClass
+    MISTRAL_API_KEY = "ollama"
+    model = LOCAL_MODEL
+else:
+    from mistralai.client import Mistral
+    api_key_file = os.path.join(os.path.dirname(__file__), 'api_key.txt')
+    with open(api_key_file, 'r', encoding='utf-8-sig') as f:
+        MISTRAL_API_KEY = f.read().strip()
+    model = ONLINE_MODEL
 
 def read_prompt_csv(role):
   if role == 'therapist':
@@ -34,15 +47,19 @@ def read_prompt_csv(role):
   return intent_detail_list
 
 def get_completion_from_messages_local(messages, temperature=0.7):
-    client = MistralClient(api_key=MISTRAL_API_KEY)
+    if LOCAL_MODE:
+        client = _ClientClass(base_url=LOCAL_BASE_URL, api_key="ollama")
+        response = client.chat.completions.create(
+            model=model,
+            messages=messages,
+        )
+    else:
+        client = Mistral(api_key=MISTRAL_API_KEY, server_url="https://api.mistral.ai")
+        response = client.chat.complete(
+            model=model,
+            messages=messages,
+        )
 
-
-    response = client.chat(
-         model=model,
-           messages=messages,
-    )
-    
-  
     answer = response.choices[0].message.content
     answer = answer.replace('\n', ' ')
     answer = answer.replace('[', ' ')
@@ -83,7 +100,7 @@ def create_message_client(intent_detail_list, utterance, context,language="EN"):
                                        Patient's utterance: {utterance}
                                      >>>
                                      """
-        messages = [ChatMessage(role= 'system', content= system_prompt_template)]
+        messages = [{"role": "user", "content": system_prompt_template}]
     else:
         for intent_detail in intent_detail_list:
             intent_text = intent_detail['intent']
@@ -112,7 +129,7 @@ def create_message_client(intent_detail_list, utterance, context,language="EN"):
                                        Énoncé du patient : {utterance}
                                      >>>
                                      """
-        messages = [ChatMessage(role= 'system', content= system_prompt_template)]
+        messages = [{"role": "user", "content": system_prompt_template}]
     return messages
 
 def create_message_therapist(intent_detail_list, utterance, context):
@@ -149,7 +166,7 @@ def create_message_therapist(intent_detail_list, utterance, context):
                                      >>>
                                      """
 
-    messages = [ChatMessage(role= 'system', content= system_prompt_template)]
+    messages = [{"role": "user", "content": system_prompt_template}]
 
     return messages
 

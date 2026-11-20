@@ -1,0 +1,59 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Je m'appelle [NAME].
+Agent: [Baseline]Enchantai, CaisarComment allez-vous aujourd'hui, Caisar ?
+User: [Accueil ou clôture]Ãa va trÃ¨s bien.
+Agent: [Baseline]Je suis heureux d'entendre cela. Vous avez des soucis avec quelque chose en particulier ?
+User: [inconnu]Non, particulier Ã  signaler.
+Agent: [Baseline]Trais bien. Je suis ici pour vous aider si vous avez besoin de parler de quelque chose. Avez-vous daija raiflaichi a votre consommation d'alcool ?
+User: [Compréhension ou nouvelle perspective]Oui, j'ai dÃ©jÃ  rÃ©flÃ©chi.
+Agent: [Baseline]C'est trais bien que vous ayez raiflaichi a cela. Qu'est-ce qui vous a fait raiflaichir a votre consommation d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]Le fait que des fois on puisse en en consommer dans des barres ou de consommer autre chose.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empaiche de changer votre consommation d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]Rien, il n'y a rien de particulier qui qui empÃªche cela.
+Agent: [Baseline]Je vois. Qu'est-ce qui vous empache de raiduire votre consommation d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]Peut-Ãªtre les, la pression des groupes.
+Agent: [Baseline]Je comprends. Il est souvent difficile de changer des comportements qui sont acceptais par les groupes sociaux. Quels sont les avantages que vous voyez dans le fait de raiduire votre consommation d'alcool ?
+User: [Partager des informations personnelles ou décrire un événement passé]Je pense que la colle n'est trÃ¨s bonne pour la santÃ©.
+Agent: [Baseline]C'est vrai, la consommation excessive d'alcool peut avoir des effets naifastes sur la santai. Qu'est-ce qui vous empache de mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]Cette semaine, rien.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Compréhension ou nouvelle perspective]Peut-Ãªtre voir plus d'amikis, une boite Ã  l'Ã©cole.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui vous empache de mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Partager des informations personnelles ou décrire un événement passé]Des Ã©vÃ©nements prÃ©vus oÃ¹ les gens vont boire de l'alcool
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a aiviter de boire de l'alcool dans ces aivainements ?
+User: [Compréhension ou nouvelle perspective]Que les gens prÃ©sents Ã  l'Ã©vÃ©nement ne boivent pas collectivement.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empache de parler a ces gens pour leur demander de ne pas boire d'alcool ?
+User: [inconnu]LatimitÃ©.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a surmonter cette latimitai ?
+User: [Compréhension ou nouvelle perspective]Que quelqu'un d'autre propose avant
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empache de proposer vous-maime de ne pas boire d'alcool ?
+User: [Le maintien d'un comportement malsain à l'avenir]La pression passe au plus grand moment.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a jairer cette pression ?
+User: [Compréhension ou nouvelle perspective]Que quelqu'un fasse le premier pas avant
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empache de faire le premier pas vous-maime ?
+User: [Le maintien d'un comportement malsain à l'avenir]Toujours la mÃªme chose, le la pression face au plus grand nombre.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a surmonter cette pression ?
+User: [Compréhension ou nouvelle perspective]Et que quelqu'un fasse le premier pas avant moi
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empache de faire le premier pas vous-maime ?
+User: [Compréhension ou nouvelle perspective]Je vais essayer.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Compréhension ou nouvelle perspective]Sortir moi.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Compréhension ou nouvelle perspective]Participer Ã  mon Ã©vÃ©nement.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]Le pas comandi d'alcool.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Modifier les comportements malsains à l'avenir]Ne pas aller Ã  des endroits oÃ¹ il a la commande.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Modifier les comportements malsains à l'avenir]Ne pas aller Ã  des endroits oÃ¹ il a la commande.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Le patient partage un sentiment ou une émotion négative.]Ne pas sortir.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empache de sortir cette semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]Non rien ne m'empÃªche de sortir, mais si je ne sors pas, il y plus de chance que je ne boivent pas ta colle.
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous aider a mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]Ne me restaient chez soi Ã  ne pas sortir.
+Agent: [Baseline]C'est une excellente idai. Qu'est-ce qui pourrait vous aider a mettre en place un plan pour raiduire votre consommation d'alcool cette semaine ?
+User: [Compréhension ou nouvelle perspective]donnez des conseils
+Agent: [Baseline]Voici quelques conseils qui pourraient vous aider a raiduire votre consommation d'alcool cette semaine :    Fixez-vous des limites claires sur la quantitai d'alcool que vous allez boire chaque jour.   aivitez les endroits ou vous savez que vous serez tentai de boire plus que praivu.   Trouvez des activitais alternatives pour vous divertir qui ne soient pas liais a l'alcool.   Demandez de l'aide a vos amis et votre famille pour vous soutenir dans votre daicision de raiduire votre consommation d'alcool.   Faites une liste des raisons pour lesquelles vous voulez raiduire votre consommation d'alcool et lisez-la chaque jour pour vous motiver.  N'oubliez pas que chaque petit pas compte et que vous pouvez y arriver. Si vous avez besoin de plus d'aide, n'haisitez pas a consulter un professionnel de la santai.
+User: [Accueil ou clôture]Merci.
+Agent: [Baseline]De rien, n'haisitez pas a me contacter si vous avez besoin d'aide supplementaire.

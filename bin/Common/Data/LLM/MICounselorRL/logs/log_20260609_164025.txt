@@ -1,0 +1,27 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis
+Agent: [Baseline]Enchantai, [NAME]Je suis ravi de faire votre connaissance. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]tres bien
+Agent: [Baseline]C'est trais bien a entendre. Je suis heureux que vous vous sentiez bien. Je suis ici pour discuter de votre santai avec vous aujourd'hui. Savez-vous pourquoi votre maidecin vous a recommandai de me voir ?
+User: [Compréhension ou nouvelle perspective]Je ne fais pas énormément de sport à cause de mes études, donc je pense que ça devrait être l'âge principal.
+Agent: [Baseline]Je vois. Il est vrai que les aitudes peuvent prendre beaucoup de temps et d'ainergie. Cependant, il est important de trouver du temps pour l'activitai physique, mme si c'est juste une petite quantitai chaque jour. Savez-vous quelles sont les consquences de la santai pour votre corps ?
+User: [Backchannel]repetez la question
+Agent: [Baseline]Savez-vous quelles sont les consquences de la santai pour votre corps ?
+User: [Compréhension ou nouvelle perspective]Les constantes les constantes enfin de rythme cardiaque et l'autre ou les conséquences
+Agent: [Baseline]Je vois. Savez-vous que la santai peut augmenter le risque de maladies chroniques, telles que les maladies cardiovasculaires, le diabete et l'obesitai ? Il est important de trouver un moyen de rester actif, mme si c'est juste une petite quantitai chaque jour. Etes-vous interessai par l'idee de trouver un moyen de rester plus actif ?
+User: [Compréhension ou nouvelle perspective]bien sur
+Agent: [Baseline]C'est trais bien. Qu'est-ce qui vous empche de rester plus actif en ce moment ?
+User: [Partager des informations personnelles ou décrire un événement passé]Pour le moment je suis en stage et je dois faire un mémoire d'otage, coup ça prend beaucoup de temps.
+Agent: [Baseline]Je comprends. Il peut etre difficile de trouver du temps pour l'activitai physique lorsque nous sommes occupai par d'autres choses. Cependant, il est important de se rappeler que l'activitai physique peut nous aider a nous sentir plus energiques et plus concentrati, ce qui peut nous aider a mieux gerer notre temps et notre stress. Etes-vous interessai par l'idee de trouver un moyen de rester plus actif meme avec votre emploi du temps charge ?
+User: [Compréhension ou nouvelle perspective]Oui, d'exercice pour cérébral.
+Agent: [Baseline]Je suis heureux d'entendre que vous etes interessai par l'idee de rester plus actif. Qu'est-ce qui vous plairait comme activitai physique ? Il peut s'agir de n'importe quoi, de la marche a la natation ou au yoga.
+User: [Compréhension ou nouvelle perspective]Lequel me permettrait de garantir une fin de la santé tout en restant en me prenant le minimum de temps libre.
+Agent: [Baseline]Il est possible de trouver des activites physiques qui ne prennent pas beaucoup de temps et qui peuvent tout de meme avoir un impact positif sur votre santai. Par exemple, la marche est une activitai simple et accessible qui peut etre facilement integree dans votre vie quotienne. Il est recommande de faire au moins 10 000 pas par jour pour obtenir des benefices pour la santai. Etes-vous interessai par l'idee de commencer a marcher plus regulierement ?
+User: [Compréhension ou nouvelle perspective]S'agirait de la marche, je me rappelle ça beaucoup, parce que j'aime beaucoup ça.
+Agent: [Baseline]C'est trais bien que vous aimiez marcher. Combien de temps pourriez-vous dedier a la marche chaque jour ? Il est important de commencer par une quantitai raisonnable et de progresser au fil du temps.
+User: [Compréhension ou nouvelle perspective]Je pense que je peux transformer en une partie de mon trajet à l'éclair à pied, dirais une heure une heure et à peu près.
+Agent: [Baseline]C'est une excellente idee de transformer une partie de votre trajet en marche. Une heure par jour est une tres bonne quantitai pour commencer. Etes-vous d'accord pour essayer de faire une heure de marche par jour la semaine prochaine ?
+User: [Backchannel]Est-ce que ça serait suffisant
+Agent: [Baseline]Oui, faire une heure de marche par jour est une tres bonne quantitai pour obtenir des benefices pour la santai. Cela peut aider a reduire le risque de maladies chroniques, a maintenir un poids sain et a ameliorer l'humeur et le bien-etre general. Etes-vous pret a vous engager a faire une heure de marche par jour la semaine prochaine ?
+User: [Accueil ou clôture]oui merci
+Agent: [Baseline]Parfait, je suis heureux de vous avoir aide. N'oubliez pas que chaque pas compte, alors profitez de chaque opportunitai pour vous deplacer a pied. Si vous avez des questions ou des inquietudes au cours de la semaine prochaine, n'hesitez pas a me contacter. Prenez soin de vous et bonne chance avec votre marche ! END\_CONVO

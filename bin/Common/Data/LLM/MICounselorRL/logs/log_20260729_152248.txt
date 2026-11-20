@@ -1,0 +1,3 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME]. Nice to meet you.
+Agent: [Experience Normalization]Pleased to meet you, [NAME]Nice to meet you too, [NAME]. It's not uncommon to feel a bit nervous at first when meeting someone new. How are you feeling right now?

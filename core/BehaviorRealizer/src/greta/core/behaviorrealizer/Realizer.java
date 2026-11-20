@@ -228,9 +228,7 @@ public class Realizer extends CallbackSender implements CancelableSignalPerforme
         else {
 
             this.sendKeyframes(keyframes, requestId, mode);
-            // Add animation to callbacks
 
-            //System.out.println("GGGGGGGGGG:"+mode.getCompositionType());
             if (mode.getCompositionType() == CompositionType.replace) {
                 this.stopAllAnims();
             }

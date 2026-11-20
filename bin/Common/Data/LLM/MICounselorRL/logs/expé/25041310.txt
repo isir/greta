@@ -1,0 +1,19 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture][NAME]
+Agent: [Ask for Information]EnchantÃ©e, [NAME]EnchantÃ©e, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture] Je suis Cl?ment.
+Agent: [Empathic Reaction]Merci, Clément. Je suis ravie de faire votre connaissance. Comment vous sentez-vous aujourd'hui ?
+User: [Partager un sentiment ou une émotion négative] Par contre, j'ai peu cru, je me suis fatigu?, je me suis stress?.
+Agent: [Planning with the Patient]Merci de partager cela, Clément. Parfois, le stress et la fatigue peuvent être réduits par de petites activités physiques. Aimeriez-vous que nous discutions de quelques étapes simples pour intégrer plus d'activité physique dans votre quotidien cette semaine ?
+User: [inconnu] Jo?lien et vous
+Agent: [Ask for Information]Merci pour votre réponse, Clément. Pouvez-vous me dire ce qui vous a particulièrement stressé ou fatigué récemment ?
+User: [inconnu] C'est parce que
+Agent: [Progress Acknowledgment]Merci de partager cela, Clément. Il est tout à fait normal de se sentir stressé et fatigué parfois. Reconnaître ces sentiments est déjà un grand pas en avant. Avez-vous une idée de ce qui pourrait vous aider à vous sentir mieux ?
+User: [Modifier les comportements malsains à l'avenir] Pourrait me permettre de me sentir mieux serait de respirer et de boire de l'eau.
+Agent: [Reflection]Je comprends, Clément. Respirer et boire de l'eau sont de bonnes stratégies pour se sentir mieux. Parfois, ajouter une petite activité physique peut aussi aider à réduire le stress et la fatigue. Aimeriez-vous que nous discutions de quelques étapes simples pour intégrer plus d'activité physique dans votre quotidien cette semaine ?
+User: [Modifier les comportements malsains à l'avenir; Backchannel] Oui, pourquoi pas
+Agent: [Reflection]Merci de partager cela, Clément. Il est tout à fait normal de se sentir stressé et fatigué parfois. Reconnaître ces sentiments est déjà un grand pas en avant. Avez-vous une idée de ce qui pourrait vous aider à vous sentir mieux ?
+User: [Modifier les comportements malsains à l'avenir] Oui, ce qui pourrait me permettre de me sentir mieux serait de boire de l'eau.
+Agent: [Reflection]Merci de partager cela, Clément. Il est tout à fait normal de se sentir stressé et fatigué parfois. Reconnaître ces sentiments est déjà un grand pas en avant. Avez-vous une idée de ce qui pourrait vous aider à vous sentir mieux ?
+User: [Partager des informations personnelles ou décrire un événement passé; Modifier les comportements malsains à l'avenir;] Oui, ce qui pourrait me permettre de me sentir mieux serait de boire de l'eau.
+Agent: [Greeting or Closing]Merci, Clément. Boire de l'eau est une excellente idée pour se sentir mieux. Avez-vous déjà pensé à ajouter une petite activité physique à votre routine quotidienne pour réduire le stress et la fatigue ?Merci dâ€™avoir pris ce temps pour Ã©changer avec moi. Jâ€™espÃ¨re que cette discussion vous a Ã©tÃ© utile. Vous avez dÃ©jÃ  fait un grand pas en rÃ©flÃ©chissant Ã  tout cela. Je vous souhaite plein de rÃ©ussite dans votre dÃ©marche !

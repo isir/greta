@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [unknown]Yes.
+Agent: [Baseline]That's good to hear, [NAME]. I understand you've been referred here by your doctor. Can you tell me why that is?

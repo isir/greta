@@ -1,0 +1,7 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel] My name is
+Agent: [Baseline]Don't worry, we can continue without it.Hi there, I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Unknown] I travel in Paris.
+Agent: [Baseline]That sounds exciting! What's your favorite part about being in Paris so far?
+User: [Sharing personal information or Describe past event;] I travel in Paris. I travel in Paris. It's my first day.
+Agent: [Baseline]Ah, first day in Paris-how's it going? What's been the highlight so far? (And I promise we'll circle back to why you're here-just want to hear about your trip!)

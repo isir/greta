@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel]How are you?
+Agent: [Baseline]Don't worry, we can continue without it.I'm doing well-thanks for asking. How about you? I'm really glad your doctor thought you might benefit from talking about this today.
+User: [Greeting or Closing]Hello.
+Agent: [Baseline]Nice to meet you. So, you mentioned your doctor referred you here. What's been going through your mind since then?
+User: [Sharing negative feeling or emotion;]I'm anxious about my exams.
+Agent: [Baseline]That sounds tough-exams can really add stress. How's that anxiety showing up for you lately? Like, do you find yourself reaching for something to help you relax?
+User: [Sharing negative feeling or emotion;]Yeah. It's almost that. How they
+Agent: [Baseline]Almost like what? When you're feeling stressed, what do you notice yourself doing or thinking?

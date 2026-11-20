@@ -1,0 +1,47 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour, je m'appelle
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]Non, je m'appelle Nami Zetta.
+Agent: [Baseline]Je suis daisolai, Nami Zetta. Comment allez-vous aujourd'hui ?
+User: [Partager un sentiment ou une émotion négative]Un peu fatiguÃ©, mais Ã§a va.
+Agent: [Baseline]Je suis daisolai d'entendre cela, Nami Zetta. Qu'est-ce qui vous fatigue en ce moment ?
+User: [Backchannel]Un peu courir partout, mais sinon Ã§a va.
+Agent: [Baseline]Je comprends, Nami Zetta. Courir partout peut aitre aipuisant. Avez-vous eu l'occasion de prendre du temps pour vous-maime raicemment ?
+User: [Compréhension ou nouvelle perspective]OUI.
+Agent: [Baseline]C'est bien, Nami Zetta. Qu'est-ce que vous avez fait pour vous daitendre ?
+User: [Partager des informations personnelles ou décrire un événement passé]Je suis partie au restaurant.
+Agent: [Baseline]Ah, c'est une excellente idai, Nami Zetta. Manger au restaurant peut aitre une expairience agraiable et relaxante. Avez-vous manjai des aliments sains au restaurant ?
+User: [Compréhension ou nouvelle perspective]Oui, je pense.
+Agent: [Baseline]C'est bien, Nami Zetta. Il est important de manger des aliments sains pour rester en bonne santai. Avez-vous des habitudes alimentaires raiguliaires ?
+User: [Compréhension ou nouvelle perspective]Malheureusement non, mais j'essaye de manger plus de frais de lÃ©gumes. Malheureusement non, mais j'essaye de manger plus de frais de lÃ©gumes. Malheureusement non, mais j'essaye de manger plus de frais de lÃ©gumes. Malheureusement non, mais j'essaye de manger plus de frais de lÃ©gumes. Malheureusement non, mais j'essaye de manger plus de frais de lÃ©gumes. Malheureusement non, mais j'essaye de manger plus de frais de lÃ©gumes. Malheureusement non, mais j'essaye de manger plus de frais de lÃ©gumes. Malheureusement non, mais j'essaye de manger plus de frais de lÃ©gumes.
+Agent: [Baseline]Je suis daisolai d'entendre que vous essayez de manger plus de frais de laigumes, Nami Zetta. C'est une excellente initiative pour votre santai. Avez-vous des difficultaiis pour maintenir cette habitude ?
+User: [Partager des informations personnelles ou décrire un événement passé]Oui par moment.
+Agent: [Baseline]Je comprends, Nami Zetta. Qu'est-ce qui rend difficile de maintenir cette habitude pour vous ?
+User: [Backchannel]Le manque de temps.
+Agent: [Baseline]Je comprends, Nami Zetta. Le temps peut aitre un facteur limitant pour de nombreuses personnes. Avez-vous pensai a des moyens de raisier votre temps pour inclure des activita-sains dans votre routine quotidienne ?
+User: [inconnu]Non, je n'ai pas vraiment pensÃ©.
+Agent: [Baseline]Je vois, Nami Zetta. Avez-vous des activita-s que vous aimez faire ?
+User: [Compréhension ou nouvelle perspective]Les activitÃ©s sportives,
+Agent: [Baseline]C'est bien, Nami Zetta. Les activita-s sportives peuvent aitre une excellente faon de rester en forme et de se daitendre. Avez-vous pensai a inclure des activita-s sportives dans votre routine quotidienne ?
+User: [inconnu]Non pas encore.
+Agent: [Baseline]Je comprends, Nami Zetta. Avez-vous des idees sur les activita-s sportives que vous pourriez faire ?
+User: [Compréhension ou nouvelle perspective]De la natation.
+Agent: [Baseline]La natation est une excellente activita-s, Nami Zetta. Avez-vous deja essayai de nager regulieirement ?
+User: [inconnu]Non.
+Agent: [Baseline]Je vois, Nami Zetta. Est-ce que cela vous interesse de commencer a nager regulieirement ?
+User: [inconnu]Three.
+Agent: [Baseline]Je suis daisolai, Nami Zetta. Il semble que nous ayons un petit malentendu. Je suis Camille, votre therapeute. Nous sommes la pour discuter de votre activita-s physiques et de la maniere de les augmenter. Est-ce que cela vous convient ?
+User: [inconnu]Oi?
+Agent: [Baseline]Je suis daisolai, Nami Zetta. Il semble que nous ayons un petit malentendu. Je suis Camille, votre therapeute. Nous sommes la pour discuter de votre activita-s physiques et de la maniere de les augmenter. Est-ce que cela vous convient ?
+User: [Accueil ou clôture]Oui
+Agent: [Baseline]Parfait, Nami Zetta. Pour commencer, pouvez-vous me parler de votre niveau d'activita-s physique actuelle ?
+User: [Le maintien d'un comportement malsain à l'avenir]En ce moment il est inexistant.
+Agent: [Baseline]Je comprends, Nami Zetta. Cela peut aitre difficile de trouver le temps et l'energie pour faire de l'exercice regulie-
+User: [inconnu]Je n'ai pas compris la question.
+Agent: [Baseline]Je suis daisolai, Nami Zetta. Je voulais savoir si vous avez deja essayai de faire de l'exercice regulie-ment dans le passe ?
+User: [Partager des informations personnelles ou décrire un événement passé]Oui avant j'en faisais plusieurs fois par semaine.
+Agent: [Baseline]C'est bien, Nami Zetta. Qu'est-ce qui vous a empache de continuer a faire de l'exercice regulie-ment ?
+User: [Le patient partage un sentiment ou une émotion négative.]Le manque de discipline.
+Agent: [Baseline]Je comprends, Nami Zetta. Le manque de discipline peut aitre un obstacle difficile a surmonter. Avez-vous des idees sur ce qui pourrait vous aider a retrouver votre discipline et a recommencer a faire de l'exercice regulie-ment ?
+User: [Compréhension ou nouvelle perspective]Oui mettre un rÃ©veil,
+Agent: [Baseline]C'est une excellente idee, Nami Zetta. Mettre un reveil pour se lever plus tot le matin peut vous donner plus de temps pour faire de l'exercice. Avez-vous essayai cette methode par le passe ?

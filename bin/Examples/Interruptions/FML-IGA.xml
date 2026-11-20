@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<fml-apml composition="overlap">
+	<bml>
+		<speech id="s1" start="0.0" language="english" text="" voice="cereproc">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				Alice in 
+			<tm id="tm2"/>
+				wonderland
+			<tm id="tm3"/>
+				is an amazing 
+			<tm id="tm4"/>	
+				book about
+			<tm id="tm5"/>	
+				a little girl and a white rabbit.
+			<tm id="tm6"/>	
+		</speech>
+	</bml>
+	<fml>
+		
+		<performative id="p1" type="informIGA" start="s1:tm1" end="s1:tm2+0.25" importance="1.0"/>
+		<performative id="p2" type="informIGA2" start="s1:tm4" end="s1:tm5" importance="1.0"/>
+	</fml>
+</fml-apml>

@@ -1,0 +1,17 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis John. Comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Je vais bien, merci. Et vous, John, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais très bien. Merci de demander.
+Agent: [Baseline]C'est bien. Je suis heureux d'entendre cela. Je suis ici pour discuter de votre consommation d'alcool, si vous aites d'accord.
+User: [Compréhension ou nouvelle perspective]Oui oui justement c'est mon médecin qui m'a orienté vers vous donc j'aimerais bien Oui oui justement c'est mon médecin qui m'a orienté vers vous donc j'aimerais bien Oui oui justement c'est mon médecin qui m'a orienté vers vous donc j'aimerais bien de ma consommation d'alcool en effet.
+Agent: [Baseline]Trais bien, je suis la pour vous aider. Pouvez-vous me dire un peu plus sur votre consommation d'alcool ? Combien de verres buvez-vous en moyenne par semaine ?
+User: [Le maintien d'un comportement malsain à l'avenir]J'en bois pas mal,
+Agent: [Baseline]Je vois. Pouvez-vous me donner une idai de la quantitai que vous buvez en une semaine ? Cela peut m'aider a mieux comprendre votre consommation.
+User: [Le maintien d'un comportement malsain à l'avenir]Je bois beaucoup.
+Agent: [Baseline]D'accord, pouvez-vous me donner un exemple de combien de verres vous buvez en une soirÃ©e ?
+User: [Le maintien d'un comportement malsain à l'avenir]Je dirais six à sept verts par soirée. Donc je ne sais pas si c'est problématique ou pas.
+Agent: [Baseline]Il est possible que votre consommation d'alcool soit supairieure aux repaires de consommation a moindre risque. Les nouveaux repaires recommandent un maximum de 10 verres par semaine, maximum 2 verres par jour, et des jours dans la semaine sans consommation. Voulez-vous en savoir plus sur les risques liais a une consommation excessive d'alcool ?
+User: [inconnu]Je n'arrive pas à comprendre une chose là, vous ne faites plus de
+Agent: [Baseline]Je suis daisolai, je ne comprends pas bien votre question. Pouvez-vous la reformuler s'il vous plaît ?
+User: [inconnu]Ne comprends pas pourquoi blablablabla,
+Agent: [Baseline]Je suis daisolai, je ne comprends pas bien ce que vous voulez dire. Pouvez-vous m'expliquer plus clairement ce que vous voulez dire ?

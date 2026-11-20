@@ -1,0 +1,59 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]je suis marion
+Agent: [Baseline]Enchantai, [NAME]Je suis ravi de faire votre connaissance, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]je vais bien et vous
+Agent: [Baseline]C'est trais bien, je suis heureux de l'entendre. Je suis ici pour discuter de votre santai avec vous. Savez-vous pourquoi votre maidecin vous a recommandai de me consulter ?
+User: [inconnu]Non je ne sais pas.
+Agent: [Baseline]Votre maidecin s'inquiaite peutaitre de votre niveau d'activitai physique. Avez-vous des questions sur ce sujet ?
+User: [Demande d'informations médicales]Oui, j'ai des questions sur ce sujet.
+Agent: [Baseline]Trais bien, je suis la pour y raipondre. Pouvez-vous me dire ce que vous comprenez de l'importance de l'activitai physique pour la santai ?
+User: [Compréhension ou nouvelle perspective]L'activitÃ© physique permet Ã  notre corps d'Ãªtre, de se rÃ©guler. L'activitÃ© physique permet Ã  notre corps d'Ãªtre, de se rÃ©guler. L'activitÃ© physique permet Ã  notre corps d'Ãªtre, de se rÃ©guler. L'activitÃ© physique permet Ã  notre corps d'Ãªtre, de se rÃ©guler. L'activitÃ© physique permet Ã  notre corps d'Ãªtre, de se rÃ©guler. Afin de pouvoir vivre longtemps en bonne santÃ©.
+Agent: [Baseline]C'est une excellente compraihension, [NAME]. L'activitai physique est en effet essentielle pour maintenir une bonne santai et praivenir de nombreuses maladies. Avez-vous des questions sur la maniaire de commencer a aitre plus actif ?
+User: [Demande d'informations médicales]oui
+Agent: [Baseline]Parfait, je suis la pour vous aider. Pouvez-vous me dire ce qui vous empache de commencer a aitre plus actif en ce moment ?
+User: [Le patient partage un sentiment ou une émotion négative.]Le manque de motivation pour commencer.
+Agent: [Baseline]Je comprends, [NAME]. Le manque de motivation est un obstacle commun pour de nombreuses personnes qui cherchent a aitre plus actives. Pouvez-vous me dire ce qui vous motive a aitre plus actif ?
+User: [Modifier les comportements malsains à l'avenir]Le fait de pouvoir perdre du poids.
+Agent: [Baseline]C'est une excellente motivation, [NAME]. L'activitai physique peut aider a perte de poids, mais il est important de se rappeler que c'est seulement un des nombreux avantages de l'exercice. Avez-vous des idees sur le type d'activitai physique que vous pourriez faire pour atteindre votre objectif de perte de poids ?
+User: [Partager des informations personnelles ou décrire un événement passé]N'importe quelle activitÃ© physique.
+Agent: [Baseline]C'est une bonne nouvelle, [NAME]. Il y a de nombreuses activitai physiques differentes que vous pouvez essayer, comme la marche, la natation, le cyclisme, ou meme des activitai plus intensives comme la course a pied ou la gym. Avez-vous deja essaye certaines de ces activitai ?
+User: [Partager des informations personnelles ou décrire un événement passé]oui
+Agent: [Baseline]C'est fantastique, [NAME]. Quelles activitai avez-vous essaye jusqu'a present ?
+User: [Compréhension ou nouvelle perspective]Le teinier, ce judo, la course Ã  pied, la natation, la boxe.
+Agent: [Baseline]Il y a de nombreuses activitai physiques differentes que vous pouvez essayer, comme la marche, la natation, le cyclisme, ou meme des activitai plus intensives comme la course a pied ou la gym. Avez-vous deja essaye certaines de ces activitai ?
+User: [Compréhension ou nouvelle perspective]oui le judo, la course Ã  pied, la natation, la boxe.
+Agent: [Baseline]C'est fantastique, [NAME]. Quelles activitai avez-vous essaye jusqu'a present ?
+User: [Compréhension ou nouvelle perspective]oui le judo, la course Ã  pied, la natation, la boxe.
+Agent: [Baseline]C'est une excellente nouvelle, [NAME]. Il est evident que vous avez deja une bonne base en activitai physique. Avez-vous des idees sur le type d'activitai physique que vous pourriez faire pour atteindre votre objectif de perte de poids ?
+User: [Compréhension ou nouvelle perspective]De la natation et de la course Ã  pied.
+Agent: [Baseline]C'est une excellente idee, [NAME]. La natation et la course a pied sont toutes deux de tres bonnes activitai physiques pour la perte de poids. Avez-vous deja essaye de les integrer dans votre routine quotienne ?
+User: [Compréhension ou nouvelle perspective]oui
+Agent: [Baseline]C'est fantastique, [NAME]. Avez-vous des idees sur la frequence et la durie de ces activitai que vous pourriez faire pour atteindre votre objectif de perte de poids ?
+User: [Modifier les comportements malsains à l'avenir]Deux fois par semaine.
+Agent: [Baseline]C'est un debut fantastique, [NAME]. Deux fois par semaine, c'est un excellent debut pour integrer l'exercice dans votre routine quotienne. Avez-vous des idees sur la durie de ces sessions d'exercice ?
+User: [Partager des informations personnelles ou décrire un événement passé]deux heures
+Agent: [Baseline]C'est une excellente durie, [NAME]. Deux heures par semaine, c'est un excellent debut pour integrer l'exercice dans votre routine quotienne. Avez-vous des idees sur la maniere dont vous pourriez integrer ces sessions d'exercice dans votre emploi du temps ?
+User: [Compréhension ou nouvelle perspective]en soirÃ©e
+Agent: [Baseline]C'est une excellente idee, [NAME]. L'exercice en soiraie peut aitre une excellente maniere de se daitendre aprais une longue journaie de travail. Avez-vous des idees sur la maniere dont vous pourriez vous motiver a rester constant dans votre pratique de l'exercice en soiraie ?
+User: [Le maintien d'un comportement malsain à l'avenir]Je vais forcer Ã  le faire.
+Agent: [Baseline]C'est une excellente idee, [NAME]. Il est important de se motiver a rester constant dans la pratique de l'exercice. Avez-vous des idees sur la maniere dont vous pourriez vous raicompenser pour avoir atteint vos objectifs d'exercice ?
+User: [Partager des informations personnelles ou décrire un événement passé]M'acheter de nouveaux habits.
+Agent: [Baseline]C'est une excellente idee, [NAME]. Se raicompenser pour avoir atteint ses objectifs d'exercice peut aitre une excellente maniere de maintenir la motivation. Avez-vous des idees sur la maniere dont vous pourriez surmonter les obstacles qui pourraient se presenter sur votre chemin vers vos objectifs d'exercice ?
+User: [inconnu]non
+Agent: [Baseline]C'est parfait, [NAME]. Nous avons discute de l'importance de l'exercice pour la santai et de la maniere dont vous pourriez integrer l'exercice dans votre routine quotienne. Avez-vous des questions ou des preoccupations concernant l'exercice ou la santai ?
+User: [Demande d'informations médicales]oui
+Agent: [Baseline]TrÃs bien, je suis la pour y raipondre. De quoi s'agit-il ?
+User: [Compréhension ou nouvelle perspective]Comment rester constant sur les exercices
+Agent: [Baseline]C'est une excellente question, [NAME]. Il y a plusieurs strategies que vous pouvez utiliser pour rester constant dans votre pratique de l'exercice. Une de ces strategies est de se fixer des objectifs realistes et atteignables. Avez-vous des idees sur la maniere dont vous pourriez vous fixer des objectifs realistes et atteignables pour votre pratique de l'exercice ?
+User: [inconnu]je ne sais pas
+Agent: [Baseline]C'est parfait, [NAME]. Nous allons travailler ensemble pour vous aider a vous fixer des objectifs realistes et atteignables pour votre pratique de l'exercice. Pouvez-vous me dire ce que vous espereriez accomplir en termes d'exercice dans les prochaines semaines ou mois ?
+User: [Partager des informations personnelles ou décrire un événement passé]J'aimerais faire plusieurs longueurs pendant une heure Ã  la piscine.
+Agent: [Baseline]C'est une excellente idee, [NAME]. Faire plusieurs longueurs pendant une heure a la piscine est un excellent objectif realiste et atteignable. Avez-vous des idees sur la maniere dont vous pourriez vous preparer pour atteindre cet objectif ?
+User: [Partager des informations personnelles ou décrire un événement passé]Non j'ai besoin qu'on m'aide.
+Agent: [Baseline]Je suis la pour vous aider, [NAME]. Nous allons travailler ensemble pour vous aider a atteindre votre objectif de faire plusieurs longueurs pendant une heure a la piscine. Pouvez-vous me dire ce qui vous empache de commencer a atteindre cet objectif maintenant ?
+User: [Partager un sentiment ou une émotion négative]Le manque de motivation.
+Agent: [Baseline]Je comprends, [NAME]. Le manque de motivation est un obstacle commun pour de nombreuses personnes qui cherchent a atteindre leurs objectifs d'exercice. Pouvez-vous me dire ce qui vous motive a atteindre votre objectif de faire plusieurs longueurs pendant une heure a la piscine ?
+User: [Partager un sentiment ou une émotion positive]Le fait de me sentir mieux dans mon corps.
+Agent: [Baseline]C'est une excellente motivation, [NAME]. Le fait de se sentir mieux dans son corps est un excellent objectif a atteindre grace a l'exercice. Avez-vous des idees sur la maniere dont vous pourriez vous preparer pour atteindre votre objectif de faire plusieurs longueurs pendant une heure a la piscine ?
+User: [k]Non je ne sais pas donnez moi une liste qu'on finisse l'interaction
+Agent: [Baseline]TrÃs bien, voici quelques idees pour vous preparer pour atteindre votre objectif de faire plusieurs longueurs pendant une heure a la piscine :    Trouvez un partenaire d'exercice pour vous aider a rester motive et accountable.   Etablissez un emploi du temps regulier pour vos seances d'exercice a la piscine.   Commencez par des seances plus courtes et augmentez progressivement la durie.   Utilisez des applications ou des trackers d'exercice pour suivre vos progres.   Faites des pauses regulieres pour vous hydrater et vous reposer.  J'espere que ces idees vous aideront a atteindre votre objectif, [NAME]. N'oubliez pas de rester constant et de vous motiver a chaque etape du processus. Bonne chance ! END\_CONVO

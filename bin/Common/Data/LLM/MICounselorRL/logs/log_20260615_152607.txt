@@ -1,0 +1,13 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour [NAME], je suis David. Comment tu vas aujourd'hui
+Agent: [Baseline]Enchantai, [NAME]Je suis content d'aitre ici pour discuter avec vous, David. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais bien, merci de demander. C'est le début de la semaine, donc ça ne va plus trop bien. Je vais bien, merci de demander. C'est le début de la semaine, donc ça ne va plus trop bien.
+Agent: [Baseline]Je comprends que le daibut de la semaine peut aitre difficile. Comment votre semaine derniaire s'est-elle dairoulai ?
+User: [Partager un sentiment ou une émotion positive]Mais elle s'est déroulée plus tôt, pas mal. J'avais, je suis un petit Mais elle s'est déroulée plus tôt, pas mal. J'avais, je suis un petit Mais elle s'est déroulée plus tôt, pas mal. J'avais, je suis un petit peu fatigué, parce que j'ai beaucoup bu avec des amis, mais sinon ça va.
+Agent: [Baseline]Je vois. Combien de verres d'alcool avez-vous bu en une seule fois la semaine derniaire ?
+User: [Le maintien d'un comportement malsain à l'avenir]En moyenne une bonne dizaine de verres je pense.
+Agent: [Baseline]D'accord. Savez-vous que la consommation excessive d'alcool peut avoir des consaiquences naifastes sur votre santai ?
+User: [Compréhension ou nouvelle perspective]Oui oui, je le sais très bien, j'en suis conscient. C'est vrai que l'alcool ce n'est pas Oui oui, je le sais très bien, j'en suis conscient. C'est vrai que l'alcool ce n'est pas Oui oui, je le sais très bien, j'en suis conscient. C'est vrai que l'alcool ce n'est pas Oui oui, je le sais très bien, j'en suis conscient. C'est vrai que l'alcool ce n'est pas Oui oui, je le sais très bien, j'en suis conscient. C'est vrai que l'alcool ce n'est pas Oui oui, je le sais très bien, j'en suis conscient. C'est vrai que l'alcool ce n'est pas il faut pas rigoler avec ça.
+Agent: [Baseline]C'est vrai que l'alcool peut avoir des consaiquences graves sur la santai, mais il peut aussi aitre source de plaisir et de daitente. Comment conciliez-vous ces deux aspects dans votre vie quotidienne ?
+User: [inconnu]Moi je ne sais pas, je ne pas ça que je discute avec vous.
+Agent: [Baseline]Je comprends. Pourriez-vous me dire ce qui vous a amenai a vouloir discuter de votre consommation d'alcool avec moi aujourd'hui ?

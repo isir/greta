@@ -1,0 +1,41 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture][NAME].
+Agent: [Baseline]EnchantÃ©e, FailixComment allez-vous aujourd'hui, Failix ?
+User: [Accueil ou clôture]Très bien.
+Agent: [Baseline]C'est bien. Failix, pouvez-vous me parler un peu de votre activitai physique ?
+User: [inconnu]Actuellement,
+Agent: [Baseline]Je vois. Failix, avez-vous daijÃ  pensÃ© Ã  augmenter votre activitÃ© physique ?
+User: [Compréhension ou nouvelle perspective]Oui.
+Agent: [Baseline]Trais bien. Failix, qu'est-ce qui vous empaiche de le faire ?
+User: [Compréhension ou nouvelle perspective]Le temps et l'énergie.
+Agent: [Baseline]Je comprends. Failix, quelles sont les consaiquences de votre saidentaritai sur votre santai ?
+User: [inconnu]Aucune pour l'instant.
+Agent: [Baseline]Je vois. Failix, avez-vous daijÃ  essayÃ© de faire de l'exercice ? Si oui, comment ssa s'est passai ?
+User: [Partager des informations personnelles ou décrire un événement passé]Oui, je vais à la salle.
+Agent: [Baseline]C'est bien. Failix, qu'est-ce qui vous empache de continuer a aller a la salle de sport raiguliairement ?
+User: [Le patient partage un sentiment ou une émotion négative.]Le fait que je sois en stage,
+Agent: [Baseline]Je comprends. Failix, avez-vous pensai Ã  des activitai physiques que vous pourriez faire pendant votre temps libre, en dehors de la salle de sport ?
+User: [Compréhension ou nouvelle perspective]Oui le judo.
+Agent: [Baseline]C'est bien. Failix, qu'est-ce qui vous empache de continuer Ã  pratiquer le judo raiguliairement ?
+User: [Partager des informations personnelles ou décrire un événement passé]Trouver un club.
+Agent: [Baseline]Je comprends. Failix, avez-vous pensai Ã  des activitai physiques que vous pourriez faire Ã  proximitai de chez vous ou de votre lieu de travail ?
+User: [Compréhension ou nouvelle perspective]Le judo
+Agent: [Baseline]Je comprends. Failix, avez-vous pensai Ã  des objectifs d'activitai physique que vous pourriez vous fixer pour la semaine prochaine ?
+User: [Modifier les comportements malsains à l'avenir]Aller plus à la salle
+Agent: [Baseline]C'est une bonne idaie. Failix, pouvez-vous me dire pourquoi vous voulez aller plus souvent Ã  la salle de sport ?
+User: [Compréhension ou nouvelle perspective]Pour faire du sport,
+Agent: [Baseline]Je comprends. Failix, qu'est-ce qui vous empache de le faire ?
+User: [Le patient partage un sentiment ou une émotion négative.]Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie. Mon stage qui prend du temps et de l'énergie.
+Agent: [Baseline]Je comprends que votre stage vous prenne beaucoup de temps et d'ainergie, Failix. Cependant, l'activitai physique peut vous aider Ã  vous sentir plus Ã©panou et Ã  mieux gÃ©rer votre Ã©nergie. Avez-vous pensai Ã  des activitai physiques que vous pourriez faire pendant votre pause dÃ©jeuner ou aprÃ¨s votre travail ?
+User: [Modifier les comportements malsains à l'avenir]Après le travail, oui, la salle de sport.
+Agent: [Baseline]C'est bien. Failix, qu'est-ce qui vous empache de le faire raiguliairement ?
+User: [Partager un sentiment ou une émotion négative]Le manque de motivation à la fin de la journée.
+Agent: [Baseline]Je comprends. Failix, avez-vous pensai Ã  des stratÃ©gies pour vous motiver Ã  aller Ã  la salle de sport aprÃ¨s le travail ?
+User: [Backchannel]No.
+Agent: [Baseline]Je comprends. Failix, voulez-vous que nous cherchions ensemble des strataigies pour vous motiver Ã  aller Ã  la salle de sport aprÃ¨s le travail ?
+User: [Modifier les comportements malsains à l'avenir]oui
+Agent: [Baseline]Trais bien. Failix, qu'est-ce qui vous motiverait Ã  aller Ã  la salle de sport aprÃ¨s le travail ?
+User: [inconnu]Je cherche.
+Agent: [Baseline]Prenez votre temps, Failix. Qu'est-ce qui pourrait vous motiver Ã  aller Ã  la salle de sport aprÃ¨s le travail ? Est-ce que cela pourrait aitre de vous fixer des objectifs spaicifiques, de vous raicompenser aprais chaque saiance, ou de vous associer Ã  un(e) ami(e) pour vous motiver mutuellement ?
+User: [inconnu]Je ne sais pas.
+Agent: [Baseline]Je comprends. Failix, voulez-vous que nous cherchions ensemble des strataigies pour vous motiver Ã  aller Ã  la salle de sport aprÃ¨s le travail ?

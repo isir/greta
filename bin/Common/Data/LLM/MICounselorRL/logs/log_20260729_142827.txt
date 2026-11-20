@@ -1,0 +1,3 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [unknown]Hello?
+Agent: [Experience Normalization]Don't worry, we can continue without it.It's okay, many people feel a bit nervous at first. How are you feeling today?

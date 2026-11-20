@@ -1,0 +1,22 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] Bonjour, je suis [NAME].
+Agent: [Ask for Consent]Enchantée, [NAME]Bonjour, je suis Camille. Et vous ?  Enchantée, [NAME]. Est-ce que vous seriez d'accord pour que nous discutions de votre sédentarité aujourd'hui ?
+User: [Backchannel] Mais je suis tout ? fait d'accord.
+Agent: [Give Solution]D'accord, [NAME]. Pour commencer, une petite marche quotidienne peut faire une grande différence. Essayez de marcher 10 minutes par jour. C'est un bon début pour augmenter votre activité physique. Qu'en pensez-vous ?
+User: [inconnu] Pense que c'est une travail
+Agent: [Reflection][NAME], je comprends que vous trouvez cela difficile. Comment vous sentez-vous à l'idée de commencer par une petite marche de 10 minutes par jour ?
+User: [inconnu] Je tr?s
+Agent: [Reflection]Je comprends que l'idée de commencer une nouvelle routine peut sembler difficile, [NAME]. Comment vous sentez-vous par rapport à cela ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Modifier les comportements malsains � l'avenir] Je pense que c'est pas mal de marcher dix minutes par jour prononc?.
+Agent: [Reflection]Je comprends, [NAME]. Marcher 10 minutes par jour peut sembler un bon début pour augmenter votre activité physique. Comment voyez-vous cela vous aider à long terme ?
+User: [Modifier les comportements malsains � l'avenir] ?a pourrait m'aider occasionnellement
+Agent: [Reflection]Je comprends que vous pensez que marcher 10 minutes par jour pourrait vous aider occasionnellement. C'est un bon point de départ. Avez-vous une idée de quand vous pourriez intégrer cette marche dans votre journée ?
+User: [Modifier les comportements malsains � l'avenir] Je pense le dimanche.
+Agent: [Reflection][NAME], vous pensez que marcher 10 minutes le dimanche pourrait être un bon début. C'est une excellente idée de commencer par un jour spécifique. Comment vous sentez-vous à l'idée de faire cela chaque dimanche ?
+User: [Partager un sentiment ou une �motion positive] C'est une bonne motivation je pense.
+Agent: [Reflection]Je comprends que vous trouvez l'idée de marcher 10 minutes chaque dimanche motivante. C'est un bon point de départ pour intégrer plus d'activité physique dans votre routine. Comment vous sentez-vous par rapport à cette décision ? END_CONVO
+User: [Partager un sentiment ou une �motion positive]c'est une bonne decison
+Agent: [Planning with the Patient][NAME], c'est une excellente décision. Pour vous aider à rester motivé, pourquoi ne pas planifier un rappel sur votre téléphone pour chaque dimanche ? Cela peut vous aider à ne pas oublier et à garder cette habitude. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains � l'avenir; Backchannel] Je pense que c'est une tr?s bonne id?e aussi.
+Agent: [Medical Education][NAME], c'est une très bonne idée. Marcher régulièrement, même 10 minutes par jour, peut avoir des effets bénéfiques sur votre santé. Cela peut aider à réduire le risque de maladies cardiovasculaires, améliorer votre humeur et augmenter votre énergie. N'hésitez pas à augmenter progressivement la durée de vos marches si vous vous sentez à l'aise. Vous pouvez aussi utiliser un podomètre ou une application sur votre téléphone pour suivre vos progrès. Cela peut être très motivant de voir vos pas s'accumuler. Bonne chance et prenez soin de vous ! END_CONVO
+Agent: []Merci d�avoir pris ce temps pour �changer avec moi. J�esp�re que cette discussion vous a �t� utile. Vous avez d�j� fait un grand pas en r�fl�chissant � tout cela. Je vous souhaite plein de r�ussite dans votre d�marche !

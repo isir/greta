@@ -6,14 +6,14 @@ import time
 import threading
 from therapist_behavior_inference import get_therapist_intent
 from client_behavior_inference import get_client_intent
-from mistralai.client import MistralClient
+from mistralai.client import Mistral
 import os
 import json
 
 api_key_file = os.path.join(os.path.dirname(__file__), 'api_key.txt')
 with open(api_key_file, 'r') as f:
     MISTRAL_API_KEY = f.read()
-client_online = MistralClient(api_key=MISTRAL_API_KEY)
+client_online = Mistral(api_key=MISTRAL_API_KEY)
 
 
 

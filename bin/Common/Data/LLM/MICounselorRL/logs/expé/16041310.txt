@@ -1,0 +1,35 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]je suis [NAME]
+Agent: [Give Solution]EnchantÃ©e, [NAME]Valentin, je suis ravie de vous rencontrer. Comment allez-vous aujourd'hui ?
+User: [inconnu                                inconnu I have asked several questions about the context, such as inquietud(what does it need to be), triste(is that what you mean ?), peprester(and what is the meaning of that in your situation) and backchannel( how about if you got distracted by unrelated noise tha was meant for somebody else).  alors que j'ai discuté des questions avec le patient, y a-t-il des choses que vous voudriez ajouter ou remplacer ? Parce que je peux vous donner des suggestions.] Retourne bien une cabienne.
+Agent: [Empathic Reaction]Je comprends, Valentin. Parfois, il peut Ãªtre difficile de trouver la motivation pour commencer quelque chose de nouveau. Comment vous sentez-vous par rapport Ã  cela ?
+User: [Backchannel                                       <<<                                        Contexte: Therapist: Comment vous sentez-vous aujourd'hui ? patient:   Je me sens calme et mieux dans ma peau.                                        Contexte: Therapist: Je n'ai pas encore ressenti cela.                                        Énoncé du patient : Merci.                                      >>>] Bonne question.
+Agent: [Reflection]Il semble que vous ressentiez une certaine rÃ©sistance Ã  l'idÃ©e de faire plus d'activitÃ© physique. Pouvez-vous me dire ce qui vous rend hÃ©sitant ?
+User: [Partager des informations personnelles ou décrire un événement passé]le temps qu'im eme manque
+Agent: [Reflection]Il semble que le manque de temps soit un obstacle important pour vous. C'est tout Ã  fait compréhensible, surtout avec un emploi du temps chargé. Comment cela vous fait-il ressentir ?
+User: [inconnu]qu'el est el sens de la quesion ?
+Agent: [Reflection]Je vois que le manque de temps est un vrai dÃ©fi pour vous. Cela peut Ãªtre frustrant de vouloir faire plus d'activitÃ© physique mais de ne pas trouver le temps. Comment cela vous fait-il ressentir ?
+User: [inconnu] En fait, formulation de des questions d'avis un peu étrange.
+Agent: [Reflection]Je comprends, Valentin. Le manque de temps peut Ãªtre un vrai dÃ©fi. Comment vous sentez-vous par rapport Ã  cette situation ?
+User: [Partager un sentiment ou une émotion négative] Je ne me sens pas de qui j'ai par rapport cette
+Agent: [Reflection]Il semble que le manque de temps soit un obstacle important pour vous. Cela peut Ãªtre frustrant de vouloir faire plus d'activitÃ© physique mais de ne pas trouver le temps. Est-ce que cela vous fait ressentir de la frustration ou de l'impuissance ?
+User: [inconnu                                       Partager des informations personnelles ou décrire un événement passé                                       ####                                       <<<                                        Contexte : Therapist:Avez-vous repris contact avec vos amis depuis quelques temps?                                        Énoncé du patient : je ne sais pas comment ils                                      >>>] Je ne me sens pas de qui j'ai par rapport cette parce que justement j'entends refuser ça, je m'étais préoccupé.
+Agent: [Reflection]Je comprends que vous essayez de ne pas trop y penser, peut-Ãªtre parce que cela vous prÃ©occupe. C'est tout Ã  fait normal de se sentir ainsi. Comment pourrions-nous aborder cela ensemble ?
+User: [Compréhension ou nouvelle perspective] Donc tu penses que tu peux m'être utile pour prioriser par rapport à ça
+Agent: [Progress Acknowledgment]Je suis lÃ  pour vous aider Ã  trouver des solutions adaptÃ©es Ã  votre situation. ReconnaÃ®tre que le manque de temps est un obstacle est une premiÃ¨re Ã©tape importante. Ensemble, nous pouvons explorer des moyens de prioriser et d'intÃ©grer l'activitÃ© physique dans votre quotidien. Ã‰tes-vous prÃªt Ã  en discuter ?
+User: [Backchannel]Naturellement
+Agent: [Ask for Information]TrÃ¨s bien, Valentin. Pour commencer, pouvez-vous me dire combien de temps par semaine vous pensez pouvoir consacrer Ã  l'activitÃ© physique, mÃªme si c'est trÃ¨s peu ?
+User: [Partager des informations personnelles ou décrire un événement passé]Je dirais 5 h
+Agent: [Ask for Consent]D'accord, 5 heures par semaine, c'est un bon point de dÃ©part. Pouvons-nous explorer ensemble comment intÃ©grer cette activitÃ© physique dans votre emploi du temps ?
+User: [Compréhension ou nouvelle perspective] Oui bien sûr, mais tu sais je crois que j'ai réalisé sur la question
+Agent: [Ask for Consent]Valentin, Ãªtes-vous d'accord pour que nous discutions de la maniÃ¨re dont vous pourriez intÃ©grer ces 5 heures d'activitÃ© physique dans votre semaine ?
+User: [Accueil ou clôture] Oui bien sûr, mais tu sais je crois que j'ai réalisé sur la question tout prévu pour le prochain.
+Agent: [Backchannel]Je vois, c'est encourageant. Pouvez-vous me dire ce que vous avez prÃ©vu pour la semaine prochaine ?
+User: [Partager des informations personnelles ou décrire un événement passé]je n'ai encore rien prévu
+Agent: [Reflection]Il semble que vous ayez une bonne intention de commencer, mais que vous n'ayez pas encore de plan concret. C'est tout Ã  fait normal. Parfois, il peut Ãªtre utile de discuter de petites Ã©tapes pour rendre les choses plus gÃ©rables. Comment pourrions-nous dÃ©composer cela ensemble ?
+User: [inconnu]tu voudrais que je m'organise comment, quelle activité
+Agent: [Progress Acknowledgment]C'est un excellent point de dÃ©part. Pourquoi ne pas commencer par quelque chose de simple, comme marcher 30 minutes par jour ? Vous pouvez intÃ©grer cela dans vos trajets quotidiens ou pendant votre pause dÃ©jeuner. Qu'en pensez-vous ?
+User: [Partager des informations personnelles ou décrire un événement passé]il se trouve que je marche déjà plusieurs heures par jour
+Agent: [Planning with the Patient]C'est formidable que vous marchiez dÃ©jÃ  plusieurs heures par jour. Pourquoi ne pas essayer d'ajouter une autre activitÃ© que vous apprÃ©ciez, comme de la natation ou une promenade Ã  vÃ©lo, pendant 30 minutes, deux fois par semaine ? Cela pourrait Ãªtre un bon complÃ©ment. Qu'en pensez-vous ?
+User: [Partager un sentiment ou une émotion négative] C'est difficile d'accord, vais déjà un peu, rassurez-vous,
+Agent: [Greeting or Closing]Merci d'avoir partagÃ© cela, Valentin. Il est important de reconnaÃ®tre vos efforts actuels. Nous pouvons continuer Ã  explorer des moyens d'intÃ©grer davantage d'activitÃ© physique dans votre quotidien. Prenez soin de vous et n'hÃ©sitez pas Ã  revenir si vous avez besoin de plus de soutien. Passez une excellente journÃ©e ! END_CONVOMerci dâ€™avoir pris ce temps pour Ã©changer avec moi. Jâ€™espÃ¨re que cette discussion vous a Ã©tÃ© utile. Quoi que vous dÃ©cidiez, câ€™est vous qui avez le contrÃ´le. Prenez soin de vous.

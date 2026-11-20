@@ -1,0 +1,4 @@
+User: [Greeting or Closing] Hello.
+Agent: [Baseline]Hello, I’m Dr. Anderson. It’s nice to meet you. How are you doing today?
+User: [Greeting or Closing; Sharing positive feeling or emotion;] I am doing great.
+Agent: [Baseline]That’s good to hear! What’s been the highlight of your week so far?

@@ -1,0 +1,15 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Je m'apelle [NAME]
+Agent: [Baseline]EnchantÃ©e, [NAME]Enchantaie Alafate ! Comment ssa va aujourd'hui ? (Un peu de fatigue ou plutot en forme ?)
+User: [Inconnu] We are on TV.
+Agent: [Baseline]Ah, d'accord ! On est en direct, alors. Pas de pression, hein. Comment ssa va *vraiment* aujourd'hui, en dehors des projecteurs ?
+User: [Inconnu] J'ai dit anti fatigue.
+Agent: [Baseline]Ah, l'anti-fatigue, c'est souvent un verre ou deux, c'est ssa ? Ça vous aide a tenir le coup ?
+User: [Inconnu] Das hier war. Tsch?s.
+Agent: [Baseline]Daisolaie, j'ai pas tout saisi... Vous disiez que l'alcool vous aide a "tenir" ? Comme un coup de boost ?
+User: [Le maintien d'un comportement malsain à l'avenir]OUi always
+Agent: [Baseline]Je vois... Et quand vous dites "always", c'est tous les jours ? Ou plutot dans certains moments praicis ?
+User: [Partager des informations personnelles ou décrire un événement passé.] Le matin, le soir et le midi.
+Agent: [Baseline]Ah... Donc ssa rythme vos journaies, en quelque sorte. Ça vous soulage de quoi, exactement ? (Stress ? Ennui ?)
+User: [Inconnu] Le matin, le soir et le midi.
+Agent: [Baseline]Je comprends... Et si un jour vous deviez sauter un de ces moments, lequel serait le plus facile a laisser tomber ? (Matin, midi ou soir ?)

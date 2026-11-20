@@ -44,6 +44,7 @@ public class IdleMovementEmitter extends FAPFrameEmitterImpl {
             public void run() {
                 while (!stop) {
                     Timer.sleep((long)Functions.changeInterval(Math.random(), 0, 1, 2500, 5000));
+                    System.out.println("[BLINK]");
                     blink();
                 }
             }

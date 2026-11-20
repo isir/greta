@@ -1,0 +1,21 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing] [NAME], I'm, Trent. How are you?
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, Trent. How are you today?
+User: [Sharing personal information or Describe past event; Sharing negative feeling or emotion] Fine, but I'm feeling a bit too tired. I think maybe it's because I work out, too little.
+Agent: [Baseline]It sounds like you're noticing a connection between your energy and activity. What does your typical day look like?
+User: [Sharing personal information or Describe past event;] My typical day is going to the office and working for many hours.
+Agent: [Baseline]That sounds like a lot of sitting. How do you feel about that long stretch at your desk?
+User: [Sharing personal information or Describe past event; Sustaining unhealthy behavior in the future] I think it's okay. But I used to do a lot of sports, but now less.
+Agent: [Baseline]What kind of sports did you enjoy before? And what changed?
+User: [Sharing personal information or Describe past event;] I used to do a lot of running and, some workouts in the gym, but, then I
+Agent: [Baseline]What made you stop running and going to the gym? Was it time, motivation, or something else?
+User: [Sharing personal information or Describe past event;] Stress level that, there was so much to do that I didn't have time.
+Agent: [Baseline]That makes sense-stress can really take over. If you could find even 10 minutes a day to move, what might that look like for you?
+User: [Sharing personal information or Describe past event; Changing unhealthy behavior in the future] Actually, I do work back and forth to the office. So
+Agent: [Baseline]That's a great start! How many minutes would you say you walk during your commute each way?
+User: [Sharing personal information or Describe past event;] Yeah. I work for maybe half an hour each day.
+Agent: [Baseline]That's already 30 minutes of movement-well done! What if you added just 5 more minutes somewhere in your day? Where could that fit?
+User: [Changing unhealthy behavior in the future; Sharing personal information or Describe past event] I might get lunch when I get, something to eat. I could, walk around for five minutes.
+Agent: [Baseline]That sounds like a simple, doable step. How would you feel about trying that this week? Just 5 minutes after lunch?
+User: [Changing unhealthy behavior in the future; Sharing positive feeling or emotion;] Sounds like a bit of a I'll try it out. Thanks.
+Agent: [Baseline]Great! I'm here if you want to check in next week. Take care, Trent. END_CONVOThank you for taking the time to chat with me. I hope this discussion has been helpful. Whatever you decide, you're in control. Take care of yourself.

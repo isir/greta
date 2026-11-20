@@ -1,0 +1,36 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture]Bonjour je m'appelle [NAME]
+Agent: [Baseline]Enchantée, [NAME]Bonjour, je suis Camille. Et vous ? Enchantée, Céline. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture]bien e tvous ?
+Agent: [Baseline]Je vais bien, merci. Vous semblez avoir été orientée vers moi par votre médecin. Comment vous sentez-vous par rapport à votre niveau d'activité physique actuel ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Je ne fais pratiquement pas de sport sauf quand je cours apr?s les transports.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empêche de faire plus d'activité physique en ce moment ?
+User: [Partager un sentiment ou une �motion n�gative] Pas la motivation pour
+Agent: [Baseline]Merci pour votre honnêteté, Céline. Qu'est-ce qui pourrait vous motiver à augmenter votre activité physique, même un peu ?
+User: [inconnu] Je pense qu'une personne qui pourrait ?tre ? faire ce parler avec moi ou par exemple
+Agent: [Baseline]C'est une excellente idée. Aimeriez-vous que nous discutions d'une activité spécifique que vous pourriez essayer cette semaine ? Peut-être quelque chose de simple comme marcher un peu plus chaque jour ?
+User: [Backchannel]vous pouvez r�p�ter
+Agent: [Baseline]Bien sûr. Aimeriez-vous que nous discutions d'une activité spécifique que vous pourriez essayer cette semaine ? Par exemple, marcher un peu plus chaque jour ?
+User: [Modifier les comportements malsains � l'avenir] Alors on peut peut-?tre parler de la natation
+Agent: [Baseline]La natation est une excellente activité. Qu'est-ce qui vous attire dans la natation ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�]flotter
+Agent: [Baseline]Flotter est une sensation agréable et relaxante. Avez-vous accès à une piscine ou un endroit où nager près de chez vous ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�; Modifier les comportements malsains � l'avenir;] Le plus proche est ? 30 ? 40 minutes je crois.
+Agent: [Baseline]D'accord, c'est un peu loin. Serait-il possible de prévoir une visite à la piscine une fois par semaine pour commencer ? Qu'en pensez-vous ?
+User: [Partager un sentiment ou une �motion n�gative]c'est loin e tca coute cher
+Agent: [Baseline]Je comprends, cela peut être un obstacle. Y a-t-il une autre activité physique que vous pourriez envisager, qui soit plus accessible et moins coûteuse ? Par exemple, marcher ou faire du vélo ?
+User: [Modifier les comportements malsains � l'avenir]j'aimerais bie le velo
+Agent: [Baseline]Super ! Avez-vous un vélo ou connaissez-vous un endroit où vous pourriez en louer un ?
+User: [inconnu] Non.
+Agent: [Baseline]Pas de souci. Peut-être pourrions-nous commencer par une activité plus accessible, comme la marche ? Aimeriez-vous essayer de marcher un peu plus chaque jour ? Par exemple, en allant vous promener après le dîner ?
+User: [Modifier les comportements malsains � l'avenir]pourquoi pas
+Agent: [Baseline]Génial ! Combien de temps pensez-vous pouvoir marcher chaque jour pour commencer ? Même 10 minutes peuvent faire une différence.
+User: [Modifier les comportements malsains � l'avenir]je pense 20 �  30 minutes
+
+Agent: [Baseline]C'est parfait, Céline. Marcher 20 à 30 minutes chaque jour est un excellent début. Y a-t-il un moment de la journée qui vous conviendrait le mieux pour cette promenade ?
+User: [Modifier les comportements malsains � l'avenir] Je pense le soir vers la fin des cours,
+Agent: [Baseline]Très bien, c'est un bon moment. Comment vous sentez-vous à l'idée de marcher 20 à 30 minutes chaque soir après les cours ? Quel serait votre premier pas pour commencer cette semaine ?
+User: [Modifier les comportements malsains � l'avenir]je pense ce soir
+Agent: [Baseline]Fantastique ! Vous avez un plan concret. Comment vous sentez-vous à l'idée de commencer ce soir ? Y a-t-il quelque chose que je peux faire pour vous aider à rester motivée ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+User: [Accueil ou cl�ture] Merci.
+Agent: [Baseline]Avec plaisir, Céline. N'hésitez pas à revenir si vous avez besoin de plus de soutien ou de conseils. Bonne chance et profitez bien de vos promenades ! END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !

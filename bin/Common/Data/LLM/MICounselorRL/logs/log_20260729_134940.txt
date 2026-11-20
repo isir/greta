@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Empathic Reaction]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. I appreciate you taking the time to come in today. How are you feeling right now?
+User: [Greeting or Closing]I'm doing good. I'm doing good. I'm doing good. Thank you.
+Agent: [Give Solution]I'm glad to hear that, [NAME]. I understand that you've been referred to me because you've been drinking more than you'd like to.
+User: [unknown]I'm sorry. What?
+Agent: [Ask about current Emotions]How does that make you feel, [NAME], when you think about your drinking?
+User: [Sharing negative feeling or emotion]I mean, it makes me feel bad, a bit sad.
+Agent: [Greeting or Closing]

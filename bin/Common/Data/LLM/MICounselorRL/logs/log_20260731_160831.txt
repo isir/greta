@@ -1,0 +1,13 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello?
+Agent: [Baseline]Don't worry, we can continue without it.Hello, Camille. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing]good
+Agent: [Baseline]That's great to hear. I appreciate you taking the time to talk today.  Tell me, what's been going well for you lately?
+User: [unknown]No. Like, even if it if it only receives the leaves, No. Like, even if it if it only receives the leaves, No. Like, even if it if it only receives the leaves, it's blending both. Yes.
+Agent: [Baseline]I hear you saying you're feeling frustrated-like things aren't quite working out as you'd hoped. That makes sense. What's been weighing on you the most lately?
+User: [Backchannel]Yeah.
+Agent: [Baseline]I hear you. It sounds like there's a lot on your mind. Let's take a moment to focus on something that might feel lighter-like a small part of your day that's going okay. What's one thing, even if it's tiny, that's been going  just  right for you recently?
+User: [Backchannel]I can yeah.
+Agent: [Baseline]That's good to know. You've got that ability to notice small things-that's a strength. Now, I'm curious. when you think about your week ahead, what's one thing you'd like to feel different about? Even if it's just a little shift.
+User: [Backchannel]Yes, sir.
+Agent: [Baseline]Got it. So, you're saying there's  something  you'd like to change-even if it's small. What would that look like for you? Like, what's one tiny step that might help?

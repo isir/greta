@@ -124,6 +124,8 @@
                 <item module="NVBG_MM_Controller" name="NVBG_MM_Controller"/>
                 <item module="ASAP" name="ASAP"/>
                 <item module="MODIFF" name="MODIFF"/>
+                <item module="MODIFF_VQ" name="MODIFF_VQ"/>
+
                 <item module="Rest_Pose_Setter" name="Rest_Pose_Setter"/>
                 <item module="RestPoseSetterWithFeedback" name="RestPoseSetterWithFeedback"/>
                 <item module="ObjectNodeController" name="ObjectNodeController"/>
@@ -247,6 +249,8 @@
                 <menu name="TurnManagement">
                     <item module="TurnManagement" name="turnManagement"/>
                     <item module="TurnManagementContinuous" name="turnManagementContinuous"/>
+                    <item module="TurnManagementWoZ" name="turnManagementWoZ"/>
+                    <item module="TurnManagementModel" name="turnManagementModel"/>
                 </menu>
             </menu>
 
@@ -261,6 +265,7 @@
             <menu name="Interruptions">
                 <item module="Interruption Manager" name="Interruption Manager"/>
                 <item module="InterruptionTester" name="Interruption Tester"/>
+                <item module="InterruptionClicker" name="Interruption Clicker"/>
             </menu>
             <item module="IrcamAlign" name="IrcamAlign"/>
 
@@ -585,6 +590,10 @@
         </module>
         <module name="MODIFF">
             <object class="greta.auxiliary.modiff.MODIFFFrame" lib_id="greta_modiff"/>
+            <frame type="object"/>
+        </module>
+        <module name="MODIFF_VQ">
+            <object class="greta.auxiliary.modiff_vq.MODIFF_VQFrame" lib_id="greta_modiff_vq"/>
             <frame type="object"/>
         </module>
         <module name="ActiveMQ FML Sender">
@@ -1128,6 +1137,12 @@
             <parameter default="" get_method="getMainFileName" get_on="object" name="saveMainFileName" set_method="setMainFileName" set_on="object" type="string"/>
             <parameter default="" get_method="getReactionReplanFileName" get_on="object" name="saveReactionReplanFileName" set_method="setReactionReplanFileName" set_on="object" type="string"/>
         </module>
+        <module name="InterruptionClicker" style="Intentions">
+            <object class="greta.core.interruptions.InterruptionClicker" lib_id="greta_interruptions"/>
+            <frame type="object"/>
+            <parameter default="" get_method="getMainFileName" get_on="object" name="saveMainFileName" set_method="setMainFileName" set_on="object" type="string"/>
+            <parameter default="" get_method="getReactionReplanFileName" get_on="object" name="saveReactionReplanFileName" set_method="setReactionReplanFileName" set_on="object" type="string"/>
+        </module>
         <module name="ActiveMQ BML Callbacks Receiver">
             <object class="greta.auxiliary.activemq.semaine.BMLCallbacksReceiver" lib_id="greta_activemq"/>
             <frame class="greta.auxiliary.activemq.gui.WhitboardFrame" lib_id="greta_activemq" type="frame">
@@ -1311,8 +1326,24 @@
         <module name="TurnManagementContinuous" >
             <object class="greta.auxiliary.TurnManagement.TurnManagementContinuousFrame" lib_id="greta_turnmanagement"/>
             <frame type="object"/>
-        </module> 
-      
+        </module>
+
+        <module name="TurnManagementWoZ" >
+            <object class="greta.auxiliary.TurnManagement.TurnManagementFrameWoZ" lib_id="greta_turnmanagement"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="61616" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <parameter default="greta.turnmanagement.request" get_method="getRequestTopic" get_on="object" name="requestTopic" set_method="setRequestTopic" set_on="object" type="string"/>
+            <parameter default="greta.turnmanagement.response" get_method="getResponseTopic" get_on="object" name="responseTopic" set_method="setResponseTopic" set_on="object" type="string"/>
+            <frame type="object"/>
+        </module>
+
+        <module name="TurnManagementModel" >
+            <object class="greta.auxiliary.TurnManagement.TurnManagementFrameModel" lib_id="greta_turnmanagement"/>
+            <parameter default="localhost" get_method="getHost" get_on="object" name="host" set_method="setHost" set_on="object" type="string"/>
+            <parameter default="5961" get_method="getPort" get_on="object" name="port" set_method="setPort" set_on="object" type="string"/>
+            <frame type="object"/>
+        </module>
+
         <module name="RestPoseSetterWithFeedback" style="Signals">
             <object class="greta.auxiliary.TurnManagement.RestPoseSetterWithFeedback" lib_id="greta_turnmanagement"/>
             <frame type="object"/>
@@ -1740,6 +1771,15 @@
             <depends lib_id="greta_mpeg4"/>
         </lib>
         <lib id="greta_modiff" path="./Common/Lib/Internal/MODIFF.jar">
+            <depends lib_id="greta_util"/>
+            <depends lib_id="greta_signals"/>
+            <depends lib_id="greta_mpeg4"/>
+            <depends lib_id="greta_osc"/>
+            <depends lib_id="greta_behavior_realizer"/>
+            <depends lib_id="greta_feedbacks"/>
+            <depends lib_id="greta_incrementality"/>
+        </lib>
+        <lib id="greta_modiff_vq" path="./Common/Lib/Internal/MODIFF_VQ.jar">
             <depends lib_id="greta_util"/>
             <depends lib_id="greta_signals"/>
             <depends lib_id="greta_mpeg4"/>
@@ -2195,6 +2235,22 @@
             <!-- it will call input.addIntentionPerformer(output) -->
             <disconnect from="input" method="removeIntentionPerformer" to="output"/>
             <!-- it will call input.addIntentionPerformer(output) -->
+        </connector>
+
+        <connector id="TurnManagerWoZToIntentionPerformer">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementFrameWoZ" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <!-- it will call input.addIntentionPerformer(output) -->
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
+            <!-- it will call input.removeIntentionPerformer(output) -->
+        </connector>
+
+        <connector id="TurnManagerModelToIntentionPerformer">
+            <input class="greta.auxiliary.TurnManagement.TurnManagementFrameModel" lib_id="greta_turnmanagement"/>
+            <output class="greta.core.behaviorplanner.Planner" lib_id="greta_behavior_planner"/>
+            <connect from="input" method="addIntentionPerformer" to="output"/>
+            <disconnect from="input" method="removeIntentionPerformer" to="output"/>
         </connector>
 
         <connector id="TurnManagerContinuousToIntentionLLM">

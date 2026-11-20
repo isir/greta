@@ -1,0 +1,2 @@
+User: [Greeting or Closing] Hello?
+Agent: [Baseline]Hello, I’m Dr. Anderson. How are you doing today? It’s nice to meet you.

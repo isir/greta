@@ -1,0 +1,27 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello, [NAME] Anto.
+Agent: [Medical Education]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good. Thank you.
+Agent: [Reflection]It sounds like you're feeling pretty good today, [NAME]. That's great to hear.
+User: [Sharing negative feeling or emotion]Actually, I'm a bit sad.
+Agent: [Ask about current Emotions]I see. Can you tell me more about that sadness, [NAME]? What's been making you feel this way?
+User: [unknown]Because I'm having some problems with alcohol. I'm drinking a lot. Because I'm having some problems with alcohol. I'm drinking a lot. Because I'm having some problems with alcohol. I'm drinking a lot. Because I'm having some problems with alcohol. I'm drinking a lot. Lately.
+Agent: [Empathic Reaction]I'm really sorry to hear that you're feeling this way, [NAME]. It sounds like you're going through a tough time.
+User: [Backchannel]Yeah.
+Agent: [Reflection]It sounds like you're feeling overwhelmed by your drinking, [NAME].
+User: [unknown]Yeah. But it's a bit
+Agent: [Reflection]It sounds like you're feeling a bit conflicted about your drinking, [NAME].
+User: [Changing unhealthy behavior in the future]I mean, I'm pretty sure that I could do it better.
+Agent: [Reflection]You think you could cut back on your drinking, [NAME]?
+User: [Changing unhealthy behavior in the future]Yes. I'm pretty sure.
+Agent: [Reflection]It sounds like you're feeling ready to make a change with your drinking, [NAME].
+User: [Sharing negative feeling or emotion]But I'm scared as well.
+Agent: [Ask for Consent]Before we go any further, [NAME], is it okay if I ask you some questions about your drinking?
+User: [Greeting or Closing]Yeah. No problem.
+Agent: [Give Solution]How about we start with a small, achievable goal for this week? Like limiting yourself to no more than 1 drink per day.
+User: [Changing unhealthy behavior in the future]I don't know if that's possible.
+Agent: [Medical Education]I understand, [NAME]. Did you know that the recommended limit for women is no more than 1 drink per day?
+User: [unknown]I had no idea.
+Agent: [Reflection]It sounds like you're surprised by that, [NAME].
+User: [unknown]Yeah. But
+Agent: [Reflection]You're feeling surprised by that, [NAME].

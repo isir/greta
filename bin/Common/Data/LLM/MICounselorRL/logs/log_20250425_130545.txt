@@ -1,0 +1,25 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, je m'appelle B?atrice.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Bonjour Béatrice, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture; Partager un sentiment ou une émotion positive] Tr?s bien merci.
+Agent: [Baseline]C'est super à entendre, Béatrice. Vous êtes ici pour parler de votre consommation d'alcool. Pouvez-vous me dire comment vous vous sentez par rapport à cela en ce moment ?
+User: [Partager des informations personnelles ou décrire un événement passé; Partager un sentiment ou une émotion positive] ?a va ?a fait juste l? quelques semaines que je
+Agent: [Baseline]D'accord, Béatrice. Pouvez-vous me dire ce qui vous a poussé à vouloir changer votre consommation d'alcool ces dernières semaines ?
+User: [Modifier les comportements malsains à l'avenir] C'est parce que quand je bois je suis fatigu?e au lendemain et donc pour travailler aussi dans mes cours c'est pas pratique.
+Agent: [Baseline]Je comprends, Béatrice. La fatigue peut vraiment affecter votre quotidien. Avez-vous déjà pensé à des étapes concrètes pour réduire votre consommation d'alcool la semaine prochaine ?
+User: [inconnu] Il y avait un petit bug et j'ai pas bien compris ?a dit. Il y avait un petit bug et j'ai pas bien compris ?a dit. Il y avait un petit bug et j'ai pas bien compris ?a dit. Il y avait un petit bug et j'ai pas bien compris ?a dit. Il y avait un petit bug et j'ai pas bien compris ?a dit. Non juste sortir moins.
+Agent: [Baseline]C'est une bonne idée, Béatrice. Sortir moins peut aider à réduire votre consommation. Avez-vous pensé à des jours spécifiques où vous pourriez éviter de boire complètement ?
+User: [Modifier les comportements malsains à l'avenir] Toute la semaine.
+Agent: [Baseline]C'est un excellent début, Béatrice. Pensez-vous que c'est réaliste pour vous de ne pas boire toute la semaine, ou préférez-vous fixer des jours spécifiques sans alcool ?
+User: [Modifier les comportements malsains à l'avenir] Je peux essayer mais pas s?r.
+Agent: [Baseline]C'est déjà un bon début de vouloir essayer. Que diriez-vous de commencer par choisir deux jours sans alcool cette semaine ? Cela pourrait être plus facile à gérer. Qu'en pensez-vous ?
+User: [Accueil ou clôture]c'ets une bonne idee
+Agent: [Baseline]Parfait, Béatrice. Quels jours de la semaine pensez-vous pouvoir éviter de boire ? Choisissez deux jours qui vous semblent les plus faciles pour commencer.
+User: [Modifier les comportements malsains à l'avenir] Lundi et mardi.
+Agent: [Baseline]Super choix, Béatrice. Avez-vous des idées sur ce que vous pourriez faire à la place de boire ces jours-là ? Par exemple, une activité que vous aimez ?
+User: [Partager des informations personnelles ou décrire un événement passé] Non juste restez chez moi regardez en film.
+Agent: [Baseline]C'est une excellente idée, Béatrice. Regarder un film peut être une bonne alternative. Comment vous sentez-vous à l'idée de passer ces deux jours sans alcool ?
+User: [Partager un sentiment ou une émotion négative] Un peu stress? parce que je sais pas si je vais r?ussir ? devenir.
+Agent: [Baseline]C'est normal de se sentir un peu stressé face au changement. Souvenez-vous, chaque petit pas compte. Avez-vous quelqu'un à qui vous pourriez parler si vous avez besoin de soutien ?
+User: [inconnu] Non pas ? ce propos parce que tout monde voit dans l'entourage donc
+Agent: [Baseline]Je comprends, Béatrice. Parfois, écrire ses pensées et sentiments dans un journal peut aussi être utile. Pensez-vous que cela pourrait vous aider ?

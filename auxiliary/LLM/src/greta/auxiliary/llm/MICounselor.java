@@ -426,7 +426,7 @@ public class MICounselor extends LLMFrame{
 
                                 Process proc = rt.exec(cmd);
 
-                                BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream(), "ISO-8859-1"));
+                                BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream(), "UTF-8"));
                                 BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
 
                                 // Read the output from the command

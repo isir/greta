@@ -1,0 +1,7 @@
+To run the MODIFFVQ MODEL, Select the appropriate VQ_VAE config. 
+
+(1) : Openface interface
+
+(2) : VQ_VAE interface
+
+Clique on: launch(1) => perform (1)=> enable(2)=> sam_vap(1)=> perform (2)

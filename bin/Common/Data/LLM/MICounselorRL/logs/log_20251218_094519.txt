@@ -1,0 +1,21 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture;] Je m'appelle [NAME].
+Agent: [Baseline]EnchantÃ©e, [NAME]Enchantaie [NAME] ! Comment ssa va aujourd'hui ? (Un peu de soleil, un coup de fatigue ?)
+User: [Accueil ou clôture; Backchannel] ?a va un peu fatigu? et vous
+Agent: [Baseline]Je vais bien, merci ! La fatigue, c'est souvent un signe qu'on a besoin de bouger un peu... Vous la ressentez souvent comme ssa ?
+User: [Backchannel;] Oui, on peut voir.
+Agent: [Baseline]Ah... Et cette fatigue, elle vous paise dans votre quotidien ? (Travail, loisirs ?)
+User: [Partager un sentiment ou une émotion négative; Partager des informations personnelles ou décrire un événement passé] Non, il n'y a pas d'impact dans mon quotidien.
+Agent: [Baseline]D'accord. Et si on parlait un peu de vos journaies ? Vous passez beaucoup de temps assis, par exemple ?
+User: [Partager des informations personnelles ou décrire un événement passé.] Non, je fais beaucoup de sport, mais j'instains beaucoup aussi.
+Agent: [Baseline]Ah, vous faites daija du sport ! C'est super. Et quand vous dites "instains", c'est plutot des moments calmes ou devant des aicrans ?
+User: [Backchannel;] Oui.
+Agent: [Baseline]Je vois... Et ces moments assis, ils vous apportent quoi, au final ? (Daitente, ennui ?)
+User: [Partager un sentiment ou une émotion positive] Ils apportent de la d?tente.
+Agent: [Baseline]C'est vrai que se poser, c'est agraiable. Et si on trouvait un petit aiquilibre ? Juste 1-2 min debout toutes les heures, ssa vous tenterait ?
+User: [Backchannel] Oui pourquoi pas
+Agent: [Baseline]Super ! Et si on commenssait par un petit daifi cette semaine ? Par exemple, se lever 1 min toutes les heures... Ça vous semble faisable ?
+User: [Inconnu] Ahorita.
+Agent: [Baseline]Parfait ! Et pour vous rappeler, vous pourriez mettre une alarme sur votre tailaiphone ? Ou associer ssa a un rituel (ex : aprais un cafai) ?
+User: [Backchannel;] Okay.
+Agent: [Baseline]Gainial ! On en reparle la prochaine fois ? Prenez soin de vous, [NAME]. END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

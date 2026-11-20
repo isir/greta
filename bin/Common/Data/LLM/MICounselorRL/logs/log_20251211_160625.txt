@@ -1,0 +1,14 @@
+User: [Greeting or Closing;] Hello?
+Agent: [Baseline]Hello! I'm Dr. Anderson. It's nice to meet you. How are you doing today?
+User: [Greeting or Closing; Backchannel] Doing fine. And you?
+Agent: [Baseline]I'm doing well, thank you for asking. It's good to hear you're doing fine. What brings you in to see me today?
+User: [Sharing personal information or Describe past event; Asking for Medical Information] Medical abuse.
+Agent: [Baseline]I see. That sounds frustrating. Can you tell me more about what you mean by "medical abuse"?
+User: [Sharing personal information or Describe past event; Sustaining unhealthy behavior in the future] Drinking too much.
+Agent: [Baseline]I appreciate you sharing that. How has drinking been fitting into your life lately?
+User: [Sharing personal information or Describe past event; Sustaining unhealthy behavior in the future] Hardly.
+Agent: [Baseline]It sounds like it’s been a struggle. What’s been the hardest part for you?
+User: [Unknown] Necessarily.
+Agent: [Baseline]Necessary? That’s an interesting word. What makes drinking feel necessary for you?
+User: [Sharing negative feeling or emotion;] I feel lost.
+Agent: [Baseline]That sounds really tough. When you say "lost," what does that feel like for you?

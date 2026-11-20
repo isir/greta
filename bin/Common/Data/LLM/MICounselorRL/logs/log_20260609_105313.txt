@@ -1,0 +1,35 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Bonjour, je m'appelle [NAME].
+Agent: [Baseline]EnchantÃ©e, MainaComment allez-vous aujourd'hui, Maina ?
+User: [Accueil ou clôture]Merci.
+Agent: [Baseline]Je suis heureux d'entendre cela. Je suis ici pour discuter de votre activitai physique, si cela vous convient. Comment vous sentez-vous par rapport Ã  cela ?
+User: [Compréhension ou nouvelle perspective]Ça va. Il y a des choses que j'aimerais faire plus peut-être.
+Agent: [Baseline]C'est trais bien. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Backchannel]Le temps et l'énergie
+Agent: [Baseline]Je comprends. Il peut aitre difficile de trouver du temps et de l'ainergie pour faire de l'exercice. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Compréhension ou nouvelle perspective]J'ai un très bon rythme de sommeil, donc je pas assez d'énergie pour faire du sport sur J'ai un très bon rythme de sommeil, donc je pas assez d'énergie pour faire du sport sur J'ai un très bon rythme de sommeil, donc je pas assez d'énergie pour faire du sport sur J'ai un très bon rythme de sommeil, donc je pas assez d'énergie pour faire du sport sur J'ai un très bon rythme de sommeil, donc je pas assez d'énergie pour faire du sport sur le temps libre que j'ai systématiquement.
+Agent: [Baseline]Je comprends. Il peut aitre difficile de trouver de l'ainergie pour faire de l'exercice, surtout si vous avez un emploi du temps charjai. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Partager un sentiment ou une émotion négative]Le manque de sommeil qui
+Agent: [Baseline]Je comprends. Il peut aitre difficile de trouver de l'ainergie pour faire de l'exercice, surtout si vous avez un emploi du temps charjai. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [k]J'ai rien à rajouter, une question suivante.
+Agent: [Baseline]D'accord. Quels sont les avantages que vous voyez a faire plus d'exercice ?
+User: [inconnu]Attends mes objectifs sportifs
+Agent: [Baseline]Bien sur, je suis la pour vous aider a atteindre vos objectifs sportifs. Quels sont-ils ?
+User: [Compréhension ou nouvelle perspective]Avoir un bon écart et courir dix kilomètres trente cinquante minutes.
+Agent: [Baseline]C'est un objectif ambitieux et louable. Qu'est-ce qui vous empaiche de le raialiser en ce moment ?
+User: [Compréhension ou nouvelle perspective]Mon durance musculaire.
+Agent: [Baseline]Je comprends. Il peut aitre difficile de construire de la masse musculaire sans faire d'exercice. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Backchannel]L'énergie m'est déjà répondu à cette question.
+Agent: [Baseline]Je comprends. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Backchannel]Vous poser une question
+Agent: [Baseline]Bien sur, je suis la pour raipondre a vos questions. De quoi s'agit-il ?
+User: [inconnu]Non posez-moi la question, n'ai pas de question.
+Agent: [Baseline]D'accord, qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [Compréhension ou nouvelle perspective]J'ai des questions d'ordre sportif, mais pas d'ordre de motivation.
+Agent: [Baseline]Je comprends. Quelles sont vos questions d'ordre sportif ?
+User: [Compréhension ou nouvelle perspective]On n'a pas le temps de courir ça en une semaine, y a une petite répartition d'efforts il faut avoir.
+Agent: [Baseline]Vous avez raison, il est important de progresser de maniaire progressive et raialiste. Qu'est-ce qui vous empaiche de faire plus d'exercice en ce moment ?
+User: [inconnu]Si vous n'avez pas d'autres questions, pense que c'est bon pour moi. Est-ce que vous avez d'autres questions
+Agent: [Baseline]Je suis heureux d'avoir pu vous aider. Avez-vous des questions avant de mettre fin a cette conversation ?
+User: [Accueil ou clôture]non merci
+Agent: [Baseline]Trais bien, n'haisitez pas a me contacter si vous avez d'autres questions ou si vous avez besoin d'aide. Passez une bonne journai ! END\_CONVO

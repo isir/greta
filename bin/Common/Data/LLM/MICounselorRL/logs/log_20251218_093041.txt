@@ -1,0 +1,5 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour, je suis
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Ah, d'accord ! Comment allez-vous aujourd'hui, Camille ? On dirait que la journaie a aitai chargaie ?
+User: [Inconnu] So was ahora.
+Agent: [Baseline]Ah, une journaie bien remplie... Ça peut aipuiser, non ? Qu'est-ce qui vous prend le plus d'ainergie dans votre routine ?

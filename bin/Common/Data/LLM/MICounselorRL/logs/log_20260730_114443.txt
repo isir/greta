@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Ask for Consent]Pleased to meet you, [NAME][NAME], is it okay if we talk about your alcohol use today?
+User: [Greeting or Closing]Yeah. It's fine.
+Agent: [Greeting or Closing]Great, [NAME]. Let's start. How are you doing today?

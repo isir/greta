@@ -23,13 +23,13 @@ class DialogueEnvMI(gym.Env):
         high = np.array(
             [
                 1,
-            ]*( self.n_agent_da+ self.n_user_da+2),
+            ]*( self.n_agent_da+ self.n_user_da+2+768),
             dtype=np.int32,
         )
         low = np.array(
             [
                 0,
-            ] * (self.n_agent_da + self.n_user_da+2),
+            ] * (self.n_agent_da + self.n_user_da+2+768),
             dtype=np.int32,
         )
         master_high = np.array(
@@ -71,7 +71,7 @@ class DialogueEnvMI(gym.Env):
 
         master_ob = np.array([[self.user.context[i]/3,self.user.rapport[i]/3,self.user.perspective[i]/3,self.turn_id[i]/40] for i in range(self.n_parra)])
         print(master_ob)
-        ob = np.concatenate([master_ob,user_da,agent_da],axis=1)
+        ob = np.concatenate([master_ob,user_da,agent_da,self.user.encoded_text],axis=1)
         return master_ob,ob
 
     def seed(self, seed):

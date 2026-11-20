@@ -1,0 +1,3 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello.
+Agent: [Invite to Shift Outlook]Don't worry, we can continue without it.That makes sense. I'm glad you're here today.  I wonder-if you could look ahead just a week from now, what would you hope to notice about how things are going differently with your drinking? Maybe it's just one small change that feels manageable. What might that look like for you?

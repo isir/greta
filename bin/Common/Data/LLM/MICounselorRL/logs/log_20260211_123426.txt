@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing;] Name is [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How are you doing today?
+User: [Sharing positive feeling or emotion; Unknown] I'm doing great, and I don't know how to
+Agent: [Baseline]That's good to hear you're doing great! What's been the highlight of your week so far?
+User: [Unknown] Don't know if we started, like,
+Agent: [Baseline]No rush at all. We can take our time. What brings you in to see me today, [NAME]?
+User: [Sharing personal information or Describe past event; Changing unhealthy behavior in the future] Came here to talk about my alcohol consumption because I think it is going
+Agent: [Baseline]I see. What makes you think your alcohol consumption might be something to talk about?

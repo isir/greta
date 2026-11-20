@@ -1,0 +1,3 @@
+Agent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+User: [Accueil ou cl�ture] Merci ? vous.
+Agent: [Empathic Reaction]Pas de souci, nous pouvons continuer sans cela.Merci � vous. Je comprends que cela peut �tre difficile de parler de ces sujets, mais je suis l� pour vous soutenir. Comment allez-vous aujourd'hui ?

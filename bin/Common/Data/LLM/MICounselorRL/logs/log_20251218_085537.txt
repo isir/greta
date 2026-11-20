@@ -1,0 +1,7 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture; Backchannel] Bonjour. Je m'appelle.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Ah, d'accord ! Alors, comment allez-vous aujourd'hui, en dehors de cette consultation ?
+User: [Partager un sentiment ou une émotion positive] Je me sens bien aujourd'hui.
+Agent: [Baseline]C'est super a entendre ! Qu'est-ce qui vous fait du bien en ce moment ? Un petit plaisir, une routine ?
+User: [ Inconnu] Je ne sais pas.
+Agent: [Baseline]Pas de problaime. Et si on parlait un peu de vos journaies ? Comment elles se passent en gainairal ?

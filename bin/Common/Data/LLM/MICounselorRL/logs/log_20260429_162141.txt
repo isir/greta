@@ -1,0 +1,19 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [inconnu]Je suis d�sique comme tu vois.
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Je comprends, nous pouvons continuer sans cela. Comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Je vais bien remercier vous.
+Agent: [Baseline]Je suis heureux d'entendre cela. Comment se passe votre semaine jusqu'à présent ?
+User: [Accueil ou clôture]�a passe bien merci de demander.
+Agent: [Baseline]C'est bien. Je suis ici pour discuter de votre consommation d'alcool si vous êtes prêt à en parler.
+User: [Compréhension ou nouvelle perspective]Oui je suis pr�t pour en parler oui, �a d�range pas
+Agent: [Baseline]Très bien. Pouvez-vous me dire comment vous consommez de l'alcool en général ?
+User: [Le maintien d'un comportement malsain à l'avenir]En moyenne une dizaine de heures par par soir.
+Agent: [Baseline]Je vois. Savez-vous que la consommation excessive d'alcool peut avoir des effets néfastes sur votre santé ?
+User: [Compréhension ou nouvelle perspective]Comment est-ce que je peux d�bloquer �a
+Agent: [Baseline]Il existe plusieurs façons de réduire votre consommation d'alcool. Avez-vous déjà essayé de réduire votre consommation auparavant ?
+User: [Compréhension ou nouvelle perspective]Oui j'ai d�j� essay�, merci de demander.
+Agent: [Baseline]Je suis heureux d'entendre que vous avez déjà essayé de réduire votre consommation. Qu'est-ce qui vous a empêché de continuer sur cette voie ?
+User: [inconnu]Est-ce que vous pouvez, est-ce on peut jouer un jeu
+Agent: [Baseline]Bien sûr, nous pouvons jouer à un jeu si vous le souhaitez. Quel genre de jeu aimeriez-vous jouer ?
+User: [inconnu]Dire. �a me voit.
+Agent: [Baseline]D'accord, je vais vous poser une question et vous devrez répondre avec un mot ou une phrase qui commence par la dernière lettre du mot que j'ai utilisé. Je commence : Chat.

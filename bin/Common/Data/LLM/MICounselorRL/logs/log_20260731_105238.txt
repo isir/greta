@@ -1,0 +1,15 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [unknown]Fuck.
+Agent: [Baseline]It sounds like you're feeling frustrated, [NAME]. I'm here to listen.
+User: [Sharing negative feeling or emotion]I'm doing a bit sad.
+Agent: [Baseline]I'm sorry to hear that, [NAME]. What's been making you feel sad lately?
+User: [Changing unhealthy behavior in the future]I'm trying to quit alcohol.
+Agent: [Baseline]It's great that you're thinking about quitting, [NAME]. What makes you want to make that change?
+User: [Changing unhealthy behavior in the future]Think I'm too dependent to alcohol, and I'm not being able to Think I'm too dependent to alcohol, and I'm not being able to Think I'm too dependent to alcohol, and I'm not being able to Think I'm too dependent to alcohol, and I'm not being able to Think I'm too dependent to alcohol, and I'm not being able to to do the things that that I like without drinking alcohol.
+Agent: [Baseline]It sounds like you're feeling trapped, [NAME]. That's understandable. What would it be like if you could enjoy those activities without alcohol?
+User: [Understanding or New Perspective]Yeah. That could be amazing.
+Agent: [Baseline]So, you see some benefits to cutting back on drinking. What's holding you back?
+User: [Sharing negative feeling or emotion]I'm super sad.
+Agent: [Baseline]It's normal to feel sad when thinking about change, [NAME]. But remember, you've made changes before. What helped you in the past?

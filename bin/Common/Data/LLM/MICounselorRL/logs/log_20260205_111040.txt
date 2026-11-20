@@ -1,0 +1,13 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing;] Hello, [NAME]. I'm Joy. Nice to meet you.
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, Joy? It's good to have you here.
+User: [Sharing positive feeling or emotion; Greeting or Closing] I'm good today. Thank you.
+Agent: [Baseline]That's great to hear. What's been going well for you lately?
+User: [Sustaining unhealthy behavior in the future;] I think that I would like to go out with some friends and drink.
+Agent: [Baseline]It sounds like you enjoy socializing with friends. What do you like most about those times?
+User: [Sustaining unhealthy behavior in the future; Sharing negative feeling or emotion] Really like to go out and drink alcohol, super alcoholics, and drinks.
+Agent: [Baseline]I see. It sounds like those moments help you relax and have fun. How often do you find yourself drinking like that?
+User: [Sustaining unhealthy behavior in the future; Sharing negative feeling or emotion] Usually drink three or four times during the week, and I feel myself better.
+Agent: [Baseline]It sounds like drinking helps you unwind. What else do you do to relax or feel good?
+User: [Sustaining unhealthy behavior in the future; Sharing personal information or Describe past event] Maybe working sometimes can help me have to drink.
+Agent: [Baseline]Work can be a good distraction. Do you ever feel like drinking affects your work or other parts of your life?

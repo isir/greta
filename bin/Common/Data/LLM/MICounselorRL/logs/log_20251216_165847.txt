@@ -1,0 +1,7 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture] Bonjour
+Agent: [Baseline]Pas de souci, nous pouvons continuer sans cela.Ah, d'accord ! Comment ssa va aujourd'hui, en dehors de cette question ?
+User: [Accueil ou clôture.] Va savoir normal. Et toi
+Agent: [Baseline]Moi ssa va, merci ! Toi, qu'est-ce qui te fait du bien dans une journaie type ? Un petit plaisir ?
+User: [Le maintien d'un comportement malsain à l'avenir] Je bois je bois un petit peu ? pour aujourd'hui.
+Agent: [Baseline]Ah, un petit verre pour daicompresser... C'est souvent comme ssa pour toi ? Tu dirais que c'est plutôt un rituel ou un coup de pouce ?

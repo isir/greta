@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel] Hello?
+Agent: [Baseline]Don't worry, we can continue without it.Got it! How are you doing today, Camille? It's good to meet you.
+User: [Greeting or Closing; Backchannel] Good. And you?
+Agent: [Baseline]I'm doing well, thank you for asking. How's your week been so far?

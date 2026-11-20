@@ -614,21 +614,19 @@ def coactivate_aus(input_csv_path, output_csv_path):
     df = pd.read_csv(input_csv_path)
 
     # Copy values from 'AU12_r' to 'AU06_r' and 'AU25_r'
-    df['AU12_r'] = df['AU12_r'] * 3.5
-    df['AU06_r'] = df['AU12_r'] * 0.5
-    df['AU25_r'] = df['AU12_r'] * 0.5
-    df['AU02_r'] = df['AU12_r'] * 0.6
-
+    df['AU12_r'] = df['AU12_r'] * 2.5
+    df['AU06_r'] = df['AU12_r'] * 0.35
+    df['AU25_r'] = df['AU12_r'] * 0.35
+    df['AU02_r'] = df['AU12_r'] * 0.5
 
     # Copy values from 'AU09_r' to 'AU10_r'
     df['AU20_r'] = df['AU09_r'] * 0.7
     df['AU09_r'] = df['AU20_r'] * 2
     df['AU04_r'] = df['AU20_r'] * 3
 
-
     # Copy values from 'AU15_r' to 'AU14_r'
-    df['AU15_r'] = df['AU15_r'] * 3
-    #df['AU10_r'] = df['AU15_r'] * 0.6
+    df['AU15_r'] = df['AU15_r'] * 2
+    # df['AU10_r'] = df['AU15_r'] * 0.6
     df['AU10_r'] = df['AU15_r'] * 0.3
     df['AU01_r'] = df['AU15_r'] * 0.5
 

@@ -1,0 +1,23 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou cl�ture] [NAME].
+Agent: [Baseline]Enchantée, [NAME]Enchantée, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] Mon nom, c'est Ana?s.
+Agent: [Baseline]Je suis désolée, Anaïs. Comment allez-vous aujourd'hui ?
+User: [Accueil ou cl�ture] ?a va
+Agent: [Baseline]C'est super, Anaïs. Comment vous sentez-vous par rapport à votre niveau d'activité physique en ce moment ?
+User: [Partager un sentiment ou une �motion positive] Bien, je suis contente.
+Agent: [Baseline]C'est formidable, Anaïs. Quelles activités physiques pratiquez-vous actuellement, si vous en faites ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] Je fais de la piscine, je cours,
+Agent: [Baseline]C'est excellent, Anaïs. Quelle fréquence pour ces activités ?
+User: [Partager des informations personnelles ou d�crire un �v�nement pass�] 2 ? 3 fois semaine en tout.
+Agent: [Baseline]C'est un bon début, Anaïs. Qu'est-ce qui vous motive à augmenter votre activité physique ?
+User: [Partager un sentiment ou une �motion n�gative]rien
+Agent: [Baseline]Je comprends. Qu'est-ce qui pourrait vous encourager à faire plus d'activité physique ?
+User: [Partager un sentiment ou une �motion n�gative]rien j'ai peur de me blesser
+Agent: [Baseline]Je comprends votre préoccupation, Anaïs. Y a-t-il une activité que vous aimez particulièrement et que vous pourriez faire sans risque ?
+User: [inconnu] Celle que je fais d?j?.
+Agent: [Baseline]C'est super, Anaïs. Comment pourriez-vous intégrer ces activités plus souvent dans votre semaine sans vous blesser ? Peut-être en augmentant progressivement ?
+User: [inconnu] deja Celle que je fais d?j?.
+Agent: [Baseline]D'accord, Anaïs. Qu'est-ce qui vous empêche d'augmenter un peu la fréquence ou la durée de ces activités ?
+User: [Le maintien d'un comportement malsain � l'avenir] Sachant que je ne vais pas faire d'histoire de comp?tition, je suis contente avec ce que je fais
+Agent: [Baseline]Je comprends, Anaïs. Y a-t-il une petite chose que vous pourriez ajouter, comme marcher un peu plus chaque jour ? END_CONVOMerci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Quoi que vous décidiez, c’est vous qui avez le contrôle. Prenez soin de vous.

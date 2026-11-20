@@ -1,0 +1,9 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Camille, comment tu vas Je m'appelle [NAME] et je suis là pour discuter de plein de choses, donc voilà. Comment tu vas
+Agent: [Baseline]Enchantai, [NAME]Je suis heureux de vous rencontrer, [NAME]. Comment allez-vous aujourd'hui ?
+User: [Compréhension ou nouvelle perspective]Ça va j'essaye de comprendre globalement ce qui se passe avec la détection là, j'ai l'impression qu'il a un problème.
+Agent: [Baseline]Je suis daisolai d'entendre cela, [NAME]. Pouvez-vous me dire ce qui vous inquiaite ?
+User: [inconnu]Je sais pas mais un problème tu ne je ne dis pas les les pas tu n'as pas prévu du coup je me pose des questions. Je sais pas mais un problème tu ne je ne dis pas les les pas tu n'as pas prévu du coup je me pose des questions. Je sais pas mais un problème tu ne je ne dis pas les les pas tu n'as pas prévu du coup je me pose des questions. C'est pas normal.
+Agent: [Baseline]Je comprends que vous soyez praioccupai, [NAME]. Pouvez-vous me donner plus de daitails sur ce qui vous inquiaite ?
+User: [inconnu]Bon écoute on va voir.
+Agent: [Baseline]D'accord, [NAME]. Qu'est-ce que vous voulez voir ?

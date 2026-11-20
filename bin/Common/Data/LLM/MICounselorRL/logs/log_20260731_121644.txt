@@ -1,0 +1,17 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]Doing good. Thank you.
+Agent: [Baseline]That's good to hear. I'm glad you're here today. [NAME], your doctor mentioned you've been drinking more than they'd like to see. How do you feel about that?
+User: [Sharing negative feeling or emotion]I feel a bit overwhelmed.
+Agent: [Baseline]I see. It sounds like you're feeling a bit stressed. How does drinking help with that feeling?
+User: [unknown]I don't know.
+Agent: [Baseline]It's okay not to know. Have you ever thought about trying something else to manage stress?
+User: [unknown]Yeah. Like, drugs.
+Agent: [Baseline]I see. But you're here because you're concerned about your drinking, right?
+User: [unknown]Set.
+Agent: [Baseline]What's one thing you'd like to change about your drinking, [NAME]?
+User: [Changing unhealthy behavior in the future]I would like to stop drinking one bottle of wine I would like to stop drinking one bottle of wine I would like to stop drinking one bottle of wine I would like to stop drinking one bottle of wine I would like to stop drinking one bottle of wine I would like to stop drinking one bottle of wine I would like to stop drinking one bottle of wine per day.
+Agent: [Baseline]I hear you, [NAME]. That's a big goal. Let's start smaller. What's one step you could take this week to drink less?
+User: [unknown]Maybe when I'm want to train, do something else, like, a hobby or something. Maybe when I'm want to train, do something else, like, a hobby or something. Maybe when I'm want to train, do something else, like, a hobby or something. Maybe when I'm want to train, do something else, like, a hobby or something. Maybe when I'm want to train, do something else, like, a hobby or something. Maybe when I'm want to train, do something else, like, a hobby or something. Maybe when I'm want to train, do something else, like, a hobby or something. Maybe when I'm want to train, do something else, like, a hobby or something.
+Agent: [Baseline]That's a great idea, [NAME]. What hobby are you thinking of?

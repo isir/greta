@@ -195,7 +195,7 @@ public class AUParserFileReader extends FAPFrameEmitterImpl implements AUEmitter
 
             double prev_blink = 0.0;
             int col_blink = 412;
-            double alpha = 0.75;//1.0;
+            double alpha = 0.2;//1.0 ou 0.75
 
             double timeConstantFrame = 0;
 

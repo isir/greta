@@ -54,6 +54,17 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
     private List<FAPIDPair> faceAnimation;
     private List<FAPIDPair> lipAnimation;
 
+    // Latest known state from each stream. The blender thread emits exactly
+    // one blended frame per tick at the current time, so frame numbers are
+    // always monotonic and both sources are always combined.
+    private FAPIDPair currentFaceState = null;
+    private FAPIDPair currentLipState = null;
+    private int lastEmittedFrameNb = -1;
+
+    // How many frames after the last lip frame we keep blending with it
+    // before considering speech finished (~200ms at 25fps).
+    private static final int LIP_STATE_HOLD_FRAMES = 5;
+
     /**
      * this enclosed {@code FAPFramePerformer} is used to collect FAPs from the lips.
      */
@@ -92,28 +103,75 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
 
         @Override
         public void run() {
-            while(!end){
-
-                    //
-                    //synchronized (this) {
-                    //    computeAndSend();
-                    //    popLatestFrame();
-                    //}
-                    //
-                    // CHECK Blender() in FaceBlender for tech note for this modification
-                    //
-
-
-                    frameByFrame();
-
-                    try { sleep(10); } catch (Throwable t) {}
-                    
+            // Clock-driven: emit one blended frame per Greta frame tick.
+            // This avoids out-of-order frame numbers that caused AU/lip flicker.
+            long sleepMs = Math.max(1, 1000 / Constants.FRAME_PER_SECOND);
+            while (!end) {
+                tick();
+                try { sleep(sleepMs); } catch (Throwable t) {}
             }
         }
     }
     
     private void startBlending(){
         blender.start();
+    }
+
+    /**
+     * One output tick:
+     *  1) absorb all pending face frames (MODIFF is real-time → keep latest)
+     *  2) absorb lip frames whose scheduled time has been reached
+     *  3) emit exactly one blend stamped with the current frame number
+     */
+    private void tick() {
+        synchronized (LipBlender.this) {
+            int nowFrame = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND) + blendingDelay;
+
+            // Face stream (MODIFF / AU): always take the latest pending frame
+            while (!faceAnimation.isEmpty()) {
+                currentFaceState = faceAnimation.remove(0);
+            }
+
+            // Lip stream: apply frames that are due for the current time
+            while (!lipAnimation.isEmpty()
+                    && lipAnimation.get(0).frame.getFrameNumber() <= nowFrame) {
+                currentLipState = lipAnimation.remove(0);
+            }
+
+            // Speech ended: drop stale lip state so face AUs are not stuck
+            // blended with the last viseme.
+            if (currentLipState != null
+                    && lipAnimation.isEmpty()
+                    && currentLipState.frame.getFrameNumber() + LIP_STATE_HOLD_FRAMES < nowFrame) {
+                currentLipState = null;
+            }
+
+            if (currentFaceState == null && currentLipState == null) {
+                return;
+            }
+
+            // Enforce monotonic frame numbers for the MPEG4 player
+            int outFrameNb = nowFrame;
+            if (outFrameNb <= lastEmittedFrameNb) {
+                outFrameNb = lastEmittedFrameNb + 1;
+            }
+
+            ID outId;
+            FAPFrame out;
+            if (currentFaceState != null && currentLipState != null) {
+                out = blend(currentFaceState.frame, currentLipState.frame);
+                outId = currentFaceState.animId;
+            } else if (currentFaceState != null) {
+                out = new FAPFrame(currentFaceState.frame);
+                outId = currentFaceState.animId;
+            } else {
+                out = new FAPFrame(currentLipState.frame);
+                outId = currentLipState.animId;
+            }
+            out.setFrameNumber(outFrameNb);
+            sendFAPFrame(outId, out);
+            lastEmittedFrameNb = outFrameNb;
+        }
     }
 
     @Override
@@ -134,7 +192,12 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
 
     @Override
     public void cancelFAPFramesById(ID requestId) {
-        faceAnimation.removeIf(fapIdPair -> fapIdPair.animId == requestId);
+        synchronized (LipBlender.this) {
+            faceAnimation.removeIf(fapIdPair -> fapIdPair.animId == requestId);
+            if (currentFaceState != null && currentFaceState.animId == requestId) {
+                currentFaceState = null;
+            }
+        }
         cancelFramesWithIDInLinkedPerformers(requestId);
     }
 
@@ -191,110 +254,6 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
         }
     }
 
-    private void frameByFrame(){
-        FAPIDPair faceAnimationPair;
-        FAPIDPair lipAnimationPair;
-
-        // Not work
-        // int faceFrameNb;
-        //int lipFrameNb;
-
-        // Work
-        int faceFrameNb = 0;
-        int lipFrameNb = 0;
-
-        long duration;
-        while (!faceAnimation.isEmpty() || !lipAnimation.isEmpty()) {
-            synchronized (LipBlender.this) {
-
-                duration = Timer.getTimeMillis();
- 
-                if (!faceAnimation.isEmpty() && !lipAnimation.isEmpty()) {
-                    
-                    faceAnimationPair = faceAnimation.get(0);
-                    lipAnimationPair = lipAnimation.get(0);
-                    faceFrameNb = faceAnimationPair.frame.getFrameNumber();
-                    lipFrameNb = lipAnimationPair.frame.getFrameNumber();
-
-                    if (faceFrameNb < lipFrameNb) {
-                        
-//                        if (faceFrameNb < Timer.getTime()*Constants.FRAME_PER_SECOND) {
-                            sendFAPFrame(faceAnimationPair.animId, faceAnimationPair.frame);                        
-//                        }
-                        faceAnimation.remove(0);
-
-                    } else if (faceFrameNb == lipFrameNb) {
-                        
-//                        if (faceFrameNb < Timer.getTime()*Constants.FRAME_PER_SECOND) {
-                            sendFAPFrame(faceAnimationPair.animId, blend(faceAnimationPair.frame, lipAnimationPair.frame));                        
-//                        }
-                        faceAnimation.remove(0);
-                        lipAnimation.remove(0);
-
-                    } else if (faceFrameNb > lipFrameNb) {
-                        
-//                        if (lipFrameNb < Timer.getTime()*Constants.FRAME_PER_SECOND) {
-                            sendFAPFrame(lipAnimationPair.animId, lipAnimationPair.frame);
-//                        }
-                        lipAnimation.remove(0);
-
-                    } else {
-
-                        System.out.println("[LipBlender] blend frame index match: something wrong...");
-
-                    }
- 
-                } else if (!faceAnimation.isEmpty()) {
-                    
-                    faceAnimationPair = faceAnimation.get(0);
-//                    if (faceAnimationPair.frame.getFrameNumber() < Timer.getTime()*Constants.FRAME_PER_SECOND) {
-                        sendFAPFrame(faceAnimationPair.animId, faceAnimationPair.frame);
-//                    }
-                    faceAnimation.remove(0);                        
- 
-                } else if (!lipAnimation.isEmpty()) {
- 
-                    lipAnimationPair = lipAnimation.get(0);
-//                    if (lipAnimationPair.frame.getFrameNumber() < Timer.getTime()*Constants.FRAME_PER_SECOND) {
-                        sendFAPFrame(lipAnimationPair.animId, lipAnimationPair.frame);
-//                    }
-                    lipAnimation.remove(0);
- 
-                }
-                
-                duration = Timer.getTimeMillis() - duration;
-                //System.out.println("[LipBlender] duration - " + duration + "/ faceFrameNb - " + faceFrameNb + " / lipFrameNb - " + lipFrameNb);
-                
-//                try { sleep((int) 1 / Constants.FRAME_PER_SECOND * 1000);} catch (Throwable t) {}
-                
-                
-                
-//                FAPIDPair faceAnimationPair = faceAnimation.get(faceAnimationIndex);
-//                int faceFrameNb = faceAnimationPair.frame.getFrameNumber();
-//                FAPIDPair lipAnimationPair = lipAnimation.get(lipAnimationIndex);
-//                int lipFrameNb = lipAnimationPair.frame.getFrameNumber();
-//                if (faceFrameNb < lipFrameNb){
-//                    ++faceAnimationIndex;
-//                } else if (faceFrameNb > lipFrameNb){
-//                    ++lipAnimationIndex;
-//                } else {
-//                    // We choose to consider face movement more important than lip movement.
-//                    // If IDs are equal, the common id is used, otherwise the face id is used : the face id is always used.
-//                    if (!blendedFapFramesWithId.containsKey(faceAnimationPair.animId)) {
-//                        blendedFapFramesWithId.put(faceAnimationPair.animId, new ArrayList<>());
-//                    }
-//                    blendedFapFramesWithId.get(faceAnimationPair.animId).add(blend(faceAnimationPair.frame, lipAnimationPair.frame));
-//                    faceAnimation.remove(faceAnimationIndex);
-//                    lipAnimation.remove(lipAnimationIndex);
-//                }
- 
-            }
-        }
-//        for (Map.Entry<ID, List<FAPFrame>> idWithCorrespondingFrames : blendedFapFramesWithId.entrySet()) {
-//            sendFAPFrames(idWithCorrespondingFrames.getKey(), idWithCorrespondingFrames.getValue());
-//        }
-    }
-    
     private FAPFrame blend(FAPFrame face, FAPFrame lip){
         FAPFrame blended = new FAPFrame(face);
         
@@ -308,46 +267,50 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
 
         
         //UPPER LIP OPENING - 6Faps 4, 8, 9, 51, 55, 56
-        blendValueFrom(4, blended, lip);
-        blendValueFrom(8, blended, lip);
-        blendValueFrom(9, blended, lip);
-        blendValueFrom(51, blended, lip);
-        blendValueFrom(55, blended, lip);
-        blendValueFrom(56, blended, lip);
+        addValueFrom(4, blended, lip);
+        addValueFrom(8, blended, lip);
+        addValueFrom(9, blended, lip);
+        addValueFrom(51, blended, lip);
+        addValueFrom(55, blended, lip);
+        addValueFrom(56, blended, lip);
 
         //UPPER LIP PROTRUSION - 2Faps 17, 63
-        blendValueFrom(17, blended, lip);
-        blendValueFrom(63, blended, lip);
+        addValueFrom(17, blended, lip);
+        addValueFrom(63, blended, lip);
 
         //LOWER LIP OPENING - 6Faps 5, 10, 11, 52, 57, 58
-        blendValueFrom(5, blended, lip);
-        blendValueFrom(10, blended, lip);
-        blendValueFrom(11, blended, lip);
-        blendValueFrom(52, blended, lip);
-        blendValueFrom(57, blended, lip);
-        blendValueFrom(58, blended, lip);
+        addValueFrom(5, blended, lip);
+        addValueFrom(10, blended, lip);
+        addValueFrom(11, blended, lip);
+        addValueFrom(52, blended, lip);
+        addValueFrom(57, blended, lip);
+        addValueFrom(58, blended, lip);
 
         //LOWER LIP PROTRUSION - 1Faps 16
-        blendValueFrom(16, blended, lip);
+        addValueFrom(16, blended, lip);
 
         //JAW - 3Faps 3, 41, 42
-        blendValueFrom(3, blended, lip);
-        addValueFrom(41, blended, lip);
-        addValueFrom(42, blended, lip);
+        addValueFrom(3, blended, lip);
+        
+        
+        
+        
+        blendValueFrom(41, blended, lip);
+        blendValueFrom(42, blended, lip);
 
         //LIP WIDTH - 6Faps 6, 7, 53, 54, 61, 62
-        addValueFrom(6, blended, lip);
-        addValueFrom(7, blended, lip);
-        addValueFrom(53, blended, lip);
-        addValueFrom(54, blended, lip);
-        addValueFrom(61, blended, lip);
-        addValueFrom(62, blended, lip);
+        blendValueFrom(6, blended, lip);
+        blendValueFrom(7, blended, lip);
+        blendValueFrom(53, blended, lip);
+        blendValueFrom(54, blended, lip);
+        blendValueFrom(61, blended, lip);
+        blendValueFrom(62, blended, lip);
 
         //CORNER LIP - 4Faps 12, 13, 59, 60
-        addValueFrom(12, blended, lip);
-        addValueFrom(13, blended, lip);
-        addValueFrom(59, blended, lip);
-        addValueFrom(60, blended, lip);
+        blendValueFrom(12, blended, lip);
+        blendValueFrom(13, blended, lip);
+        blendValueFrom(59, blended, lip);
+        blendValueFrom(60, blended, lip);
 
         return blended;
     }
@@ -360,8 +323,8 @@ public class LipBlender extends FAPFrameEmitterImpl implements CancelableFAPFram
 
     private void blendValueFrom(int fapIndex, FAPFrame target, FAPFrame source) {
         double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000; //BLEND COEF VALUE IS 0.5
-        //target.applyValue(fapIndex, (int) (target.getValue(fapIndex)*(1-blendCoef) + source.getValue(fapIndex)*(blendCoef)));
-        target.applyValue(fapIndex, (int) ( ( 7/6 * target.getValue(fapIndex)+ source.getValue(fapIndex))/2));
+        target.applyValue(fapIndex, (int) (target.getValue(fapIndex)*(1-blendCoef) + source.getValue(fapIndex)*(blendCoef)));
+        //target.applyValue(fapIndex, (int) ( ( 7/6 * target.getValue(fapIndex)+ source.getValue(fapIndex))/2));
         
     }
 

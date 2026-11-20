@@ -1,0 +1,23 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing good. Thank you.
+Agent: [Baseline]That's great to hear, [NAME]. I'm glad you're doing well. Your doctor referred you to me because they're concerned about your alcohol use. How do you feel about that?
+User: [unknown]Abid Saad.
+Agent: [Baseline]I see. [NAME], can you tell me more about your alcohol use? How much do you typically drink in a week?
+User: [unknown]I typically drink
+Agent: [Baseline]Understood. How many drinks would you say that is, on average?
+User: [unknown]On average, that is three times a week.
+Agent: [Baseline]I see. That's about 15 drinks a week. Do you ever drink more than that in a single day?
+User: [unknown]Yes. In a single day, I may be Yes. In a single day, I may be Yes. In a single day, I may be Yes. In a single day, I may be Yes. In a single day, I may be Yes. In a single day, I may be can drink, like, five glasses.
+Agent: [Baseline]So, you might have 5 drinks in a day. That's considered binge drinking, [NAME]. Have you heard that term before?
+User: [unknown]No. Never.
+Agent: [Baseline]It's when you have 4 or more drinks for women, or 5 or more for men, in about 2 hours. It can raise your blood alcohol concentration to 0.08 or higher. Have you ever felt any negative effects from drinking like that?
+User: [Sharing negative feeling or emotion]Yeah.
+Agent: [Baseline]Like what, [NAME]? I'm here to listen.
+User: [unknown]I don't know if I want to talk about this.
+Agent: [Baseline]It's okay, [NAME]. We can take this at your pace. You mentioned you don't want to change your drinking. Can you tell me why that is?
+User: [Sustaining unhealthy behavior in the future]Because I feel comfortable when I'm drinking alcohol.
+Agent: [Baseline]I see. So, alcohol helps you feel comfortable. It's like a way to relax for you. Is that right?
+User: [unknown]Yeah. That's it.
+Agent: [Baseline]I understand, [NAME]. But at the same time, you've also felt some negative effects from drinking. Is that correct?

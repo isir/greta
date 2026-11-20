@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE fml-apml SYSTEM "../../../../Common/Data/ARIA-ValuspaFMLTranslator/fml-apml.dtd" []>
+<fml-apml composition="replace">
+	<bml>
+		<speech id="s1" start="0.0" language="english" text="" voice="cereproc">
+			<description level="1" type="gretabml">
+				<reference>tmp/from-fml-apml.pho</reference>
+			</description>
+				
+			<tm id="tm1"/>
+				I can display several behaviors
+			<tm id="tm2"/>	
+				to interact with you.
+			<tm id="tm3"/>
+				Thus, you can guess my personality
+			<tm id="tm4"/>
+				from my emotions
+			<tm id="tm5"/>	
+				and my attitudes.
+			<tm id="tm6"/>	
+			<pitchaccent end="s1:tm4" id="pa2" importance="1" level="moderate" start="s1:tm3" type="Hstar" />
+			<boundary end="s1:tm6+0.5" id="b1" start="s1:tm6" type="LL" />
+		</speech>
+	</bml>
+	<fml>
+	<emotion id="e1" type="joy" start="s1:tm1" end="s1:tm3" importance="1.0" intensity="0.8"/>
+	<performative id="p1" type="inform" start="s1:tm1" end="s1:tm2" importance="1.0"/>
+	<performative id="p2" type="inform" start="s1:tm3" end="s1:tm4" importance="1.0"/>	
+	</fml>
+</fml-apml>

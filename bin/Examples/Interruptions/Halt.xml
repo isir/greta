@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE fml-apml SYSTEM "../../../../Common/Data/ARIA-ValuspaFMLTranslator/fml-apml.dtd" []>
+<fml-apml composition="replace" reaction_type="halt" reaction_duration="extra_short">
+	<bml>
+		<speech id="s1" start="0.0" language="english" text="" voice="cereproc">
+
+		</speech>
+	</bml>
+	<fml>
+	</fml>
+</fml-apml>

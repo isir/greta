@@ -54,8 +54,14 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
     private List<FAPIDPair> face1Animation;
     private List<FAPIDPair> face2Animation;
 
+    // Latest state from each face stream; one blended output per clock tick
+    private FAPIDPair currentFace1State = null;
+    private FAPIDPair currentFace2State = null;
+    private int lastEmittedFrameNb = -1;
+    private static final int FACE2_STATE_HOLD_FRAMES = 5;
+
     /**
-     * this enclosed {@code FAPFramePerformer} is used to collect FAPs from the lips.
+     * this enclosed {@code FAPFramePerformer} is used to collect FAPs from the second face source.
      */
     private FAPFramePerformer face2Receiver;
     private Blender blender;
@@ -90,34 +96,64 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
 
         @Override
         public void run() {
-            while(!end){
-                
-                    //
-                    //synchronized (this) {
-                    //    computeAndSend();
-                    //    popLatestFrame();
-                    //    try { sleep(10); } catch (Throwable t) {}                    
-                    //}
-                    //
-                    ////////////////
-                    // Why this (computeAndSend, popLatestFrame) caused lip/face flickering?
-                    ////////////////
-                    // Because this loop alows registration of new frames to face1Animation only at the transition between computeAndSend() and popLatestFrameInList(),
-                    // those functions block the registration while running.
-                    // In fact, this caused hugely delayed frame execution.
-                    //
-                    
-                    frameByFrame();
-
-                    try { sleep(10); } catch (Throwable t) {}
-                    
-//                }
+            long sleepMs = Math.max(1, 1000 / Constants.FRAME_PER_SECOND);
+            while (!end) {
+                tick();
+                try { sleep(sleepMs); } catch (Throwable t) {}
             }
         }
     }    
     
     private void startBlending(){
         blender.start();
+    }
+
+    /**
+     * Clock-driven blend: keep latest face1 (e.g. MODIFF) and due face2
+     * (e.g. scheduled Behavior Realizer face), emit one combined frame per tick.
+     */
+    private void tick() {
+        synchronized (FaceBlender.this) {
+            int nowFrame = (int) (Timer.getTime() * Constants.FRAME_PER_SECOND) + blendingDelay;
+
+            while (!face1Animation.isEmpty()) {
+                currentFace1State = face1Animation.remove(0);
+            }
+            while (!face2Animation.isEmpty()
+                    && face2Animation.get(0).frame.getFrameNumber() <= nowFrame) {
+                currentFace2State = face2Animation.remove(0);
+            }
+            if (currentFace2State != null
+                    && face2Animation.isEmpty()
+                    && currentFace2State.frame.getFrameNumber() + FACE2_STATE_HOLD_FRAMES < nowFrame) {
+                currentFace2State = null;
+            }
+
+            if (currentFace1State == null && currentFace2State == null) {
+                return;
+            }
+
+            int outFrameNb = nowFrame;
+            if (outFrameNb <= lastEmittedFrameNb) {
+                outFrameNb = lastEmittedFrameNb + 1;
+            }
+
+            ID outId;
+            FAPFrame out;
+            if (currentFace1State != null && currentFace2State != null) {
+                out = blend(currentFace1State.frame, currentFace2State.frame);
+                outId = currentFace1State.animId;
+            } else if (currentFace1State != null) {
+                out = new FAPFrame(currentFace1State.frame);
+                outId = currentFace1State.animId;
+            } else {
+                out = new FAPFrame(currentFace2State.frame);
+                outId = currentFace2State.animId;
+            }
+            out.setFrameNumber(outFrameNb);
+            sendFAPFrame(outId, out);
+            lastEmittedFrameNb = outFrameNb;
+        }
     }
 
     @Override
@@ -138,7 +174,12 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
 
     @Override
     public void cancelFAPFramesById(ID requestId) {
-        face1Animation.removeIf(fapIdPair -> fapIdPair.animId == requestId);
+        synchronized (FaceBlender.this) {
+            face1Animation.removeIf(fapIdPair -> fapIdPair.animId == requestId);
+            if (currentFace1State != null && currentFace1State.animId == requestId) {
+                currentFace1State = null;
+            }
+        }
         cancelFramesWithIDInLinkedPerformers(requestId);
     }
 
@@ -193,92 +234,6 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
                 firstFapIdPair = animation.isEmpty() ? null : animation.get(0);
             }
         }
-    }
-
-    private void frameByFrame(){
-        
-        FAPIDPair face1AnimationPair;
-        FAPIDPair face2AnimationPair;
-
-        // Not work
-//        int face1FrameNb;
-//        int face2FrameNb;
-
-        // Work
-        int face1FrameNb = 0;
-        int face2FrameNb = 0;
-
-        
-        while (!face1Animation.isEmpty() || !face2Animation.isEmpty()) {
-            synchronized (this) {
- 
-                if (!face1Animation.isEmpty() && !face2Animation.isEmpty()) {
-                    
-                    face1AnimationPair = face1Animation.get(0);
-                    face2AnimationPair = face2Animation.get(0);
-                    face1FrameNb = face1AnimationPair.frame.getFrameNumber();
-                    face2FrameNb = face2AnimationPair.frame.getFrameNumber();
-                    
-                    if (face1FrameNb < face2FrameNb) {
-
-                        sendFAPFrame(face1AnimationPair.animId, face1AnimationPair.frame);
-                        face1Animation.remove(0);
-
-                    } else if (face1FrameNb == face2FrameNb) {
-
-                        sendFAPFrame(face1AnimationPair.animId, blend(face1AnimationPair.frame, face2AnimationPair.frame));
-                        face1Animation.remove(0);
-                        face2Animation.remove(0);
-
-                    } else if (face1FrameNb > face2FrameNb) {
-
-                        sendFAPFrame(face2AnimationPair.animId, face2AnimationPair.frame);
-                        face2Animation.remove(0);
-
-                    } else {
-
-                        System.out.println("[LipBlender] blend frame index match: something wrong...");
-
-                    }
- 
-                } else if (!face1Animation.isEmpty()) {
-                    
-                    face1AnimationPair = face1Animation.get(0);
-                    sendFAPFrame(face1AnimationPair.animId, face1AnimationPair.frame);
-                    face1Animation.remove(0);
- 
-                } else if (!face2Animation.isEmpty()) {
- 
-                    face2AnimationPair = face2Animation.get(0);
-                    sendFAPFrame(face2AnimationPair.animId, face2AnimationPair.frame);
-                    face2Animation.remove(0);                    
- 
-                }
-                
-//                FAPIDPair faceAnimationPair = faceAnimation.get(faceAnimationIndex);
-//                int face1FrameNb = faceAnimationPair.frame.getFrameNumber();
-//                FAPIDPair lipAnimationPair = lipAnimation.get(lipAnimationIndex);
-//                int face2FrameNb = lipAnimationPair.frame.getFrameNumber();
-//                if (face1FrameNb < face2FrameNb){
-//                    ++faceAnimationIndex;
-//                } else if (face1FrameNb > face2FrameNb){
-//                    ++lipAnimationIndex;
-//                } else {
-//                    // We choose to consider face movement more important than lip movement.
-//                    // If IDs are equal, the common id is used, otherwise the face id is used : the face id is always used.
-//                    if (!blendedFapFramesWithId.containsKey(faceAnimationPair.animId)) {
-//                        blendedFapFramesWithId.put(faceAnimationPair.animId, new ArrayList<>());
-//                    }
-//                    blendedFapFramesWithId.get(faceAnimationPair.animId).add(blend(faceAnimationPair.frame, lipAnimationPair.frame));
-//                    faceAnimation.remove(faceAnimationIndex);
-//                    lipAnimation.remove(lipAnimationIndex);
-//                }
- 
-            }
-        }
-//        for (Map.Entry<ID, List<FAPFrame>> idWithCorrespondingFrames : blendedFapFramesWithId.entrySet()) {
-//            sendFAPFrames(idWithCorrespondingFrames.getKey(), idWithCorrespondingFrames.getValue());
-//        }
     }
 
     private FAPFrame blend(FAPFrame face1, FAPFrame face2){
@@ -381,18 +336,45 @@ public class FaceBlender extends FAPFrameEmitterImpl implements CancelableFAPFra
     }
     
     private void addValueFrom(int fapIndex, FAPFrame target, FAPFrame source){
-//        target.applyValue(fapIndex, target.getValue(fapIndex) + source.getValue(fapIndex));  
-        
-        target.applyValue(fapIndex, ( 7/6 * target.getValue(fapIndex) + source.getValue(fapIndex))/2);
-        System.out.println(" IT WORKED aaaaaaaa!!dfsfsfd!!!!!!!!!");
+        if (!source.getMask(fapIndex)) {
+            return; // source does not drive this FAP → keep target (face1 / MODIFF)
+        }
+        if (!target.getMask(fapIndex)) {
+            target.applyValue(fapIndex, source.getValue(fapIndex));
+            return;
+        }
+        target.applyValue(fapIndex, (target.getValue(fapIndex) + source.getValue(fapIndex)) / 2);
     }
 
+    /**
+     * Merge one FAP from face2 into target (face1 copy).
+     * Critical: only touch FAPs that are masked in the source.
+     * Idle blinks (AU43) only mask eyelids — without this check, unmasked
+     * zero values from the blink stream were averaged into brows (AU1/2/4)
+     * and caused upper-face flicker.
+     */
     private void blendValueFrom(int fapIndex, FAPFrame target, FAPFrame source) {
-        // double blendCoef = ((double) source.getValue(FAPType.viseme)) / 1000; //BLEND COEF VALUE IS 0.5
-        double blendCoef = 0.5; //BLEND COEF VALUE IS 0.5
-        target.applyValue(fapIndex, (int) (target.getValue(fapIndex)*(1-blendCoef) + source.getValue(fapIndex)*(blendCoef)));
-        //target.applyValue(fapIndex, (int) ( ( 7/6 * target.getValue(fapIndex)+ source.getValue(fapIndex))/2));
-        
+        if (!source.getMask(fapIndex)) {
+            return; // keep face1 / MODIFF value untouched
+        }
+        if (!target.getMask(fapIndex)) {
+            target.applyValue(fapIndex, source.getValue(fapIndex));
+            return;
+        }
+        // Eyelids (AU43 idle blink / AU45): take the stronger closure so blink
+        // and MODIFF don't half-cancel each other.
+        if (isEyelidFap(fapIndex)) {
+            target.applyValue(fapIndex, Math.max(target.getValue(fapIndex), source.getValue(fapIndex)));
+            return;
+        }
+        double blendCoef = 0.5;
+        target.applyValue(fapIndex, (int) (target.getValue(fapIndex) * (1 - blendCoef)
+                + source.getValue(fapIndex) * blendCoef));
+    }
+
+    /** FAP indices for close_t/b left/right eyelids (see FAPType). */
+    private static boolean isEyelidFap(int fapIndex) {
+        return fapIndex >= 19 && fapIndex <= 22;
     }
 
     public void setFace2Source(FAPFrameEmitter face2Source){

@@ -1,0 +1,41 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Backchannel]Pleased to meet you, [NAME]Hi [NAME], nice to meet you. How are you doing today?
+User: [Sharing negative feeling or emotion]I'm a bit sad, actually.
+Agent: [Ask for Information]I'm sorry to hear that, [NAME]. What's been making you feel sad lately?
+User: [unknown]The thing is, like, I don't know. I'm I'm feeling a bit The thing is, like, I don't know. I'm I'm feeling a bit The thing is, like, I don't know. I'm I'm feeling a bit stressed about all the things that that are happening in my life. stressed about all the things that that are happening in my life. stressed about all the things that that are happening in my life. And I'm drinking a lot of alcohol.
+Agent: [Invite to Shift Outlook][NAME], imagine if you could find a way to manage that stress without alcohol. How would that feel?
+User: [Understanding or New Perspective]I mean, I would feel better, I think.
+Agent: [Progress Acknowledgment]That's a great insight, [NAME]. You've already identified that alcohol isn't helping with your stress.
+User: [unknown]I'm aware of that, but it's difficult. You know?
+Agent: [Ask for Information]What makes it difficult for you to cut back on drinking, [NAME]?
+User: [unknown]Don't know. It's a bit difficult to Don't know. It's a bit difficult to Don't know. It's a bit difficult to Don't know. It's a bit difficult to Don't know. It's a bit difficult to Don't know. It's a bit difficult to to not drinking when I'm drinking every day.
+Agent: [Reflection]It sounds like you're feeling stuck, [NAME].
+User: [unknown]That's it.
+Agent: [Reflection]It sounds like you're feeling stuck, [NAME].
+User: [unknown]Yeah. I mean, yeah, that's what I said.
+Agent: [Reflection]It sounds like you're feeling stuck, [NAME].
+User: [Changing unhealthy behavior in the future]And what do you propose?
+Agent: [Ask for Consent]Before we explore this further, [NAME], is it okay if I ask you some questions to better understand your situation?
+User: [Backchannel]It's fine.
+Agent: [Invite to Shift Outlook]Imagine it's a week from now, and you've taken a small step to cut back on your drinking. What might that look like?
+User: [Understanding or New Perspective]I mean, I would feel better.
+Agent: [Medical Education][NAME], did you know that even a small reduction in alcohol can help improve your mood and sleep?
+User: [unknown]No. I didn't know.
+Agent: [Experience Normalization]Many people find that even small changes can make a big difference.
+User: [Backchannel]Okay.
+Agent: [Backchannel]Mhm, I see.
+User: [Greeting or Closing]Thank you.
+Agent: [Progress Acknowledgment]You've taken the first step today by talking about this, [NAME]. That's really courageous.
+User: [Greeting or Closing]I would like to go now.
+Agent: [Ask about current Emotions]Before you go, [NAME], can you tell me how you're feeling right now?
+User: [Sharing positive feeling or emotion]I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I'm feeling good. I mean, I feel less stressed.
+Agent: [Backchannel]Good.
+User: [Greeting or Closing]Okay. Bye.
+Agent: [Planning with the Patient][NAME], before we wrap up, let's think about one small step you could take this week to cut back on your drinking. What do you think might be a good first step for you?
+User: [unknown]I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I think trying to drink less. I mean, one cup less.
+Agent: [Medical Education][NAME], did you know that limiting yourself to one drink a day can significantly reduce the risk of alcohol-related problems?
+User: [unknown]I mean, I already knew that.
+Agent: [Medical Education]
+User: [Greeting or Closing]Okay. Bye.
+Agent: [Empathic Reaction]Desole, je rencontre un probleme technique. Pouvez-vous repeter ?

@@ -1,0 +1,13 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Accueil ou clôture]Pois c'est [NAME].
+Agent: [Baseline]Enchantai, [NAME]Comment allez-vous aujourd'hui, [NAME] ?
+User: [Accueil ou clôture]Je vais bien merci. Et vous
+Agent: [Baseline]Je suis la pour vous aider, [NAME]. Je suis heureux d'aitre ici avec vous aujourd'hui. Comment vous sentez-vous en ce moment ?
+User: [Backchannel]Ah, pues, que si.
+Agent: [Baseline]Je suis daisolai d'entendre cela, [NAME]. Qu'est-ce qui vous tracasse en ce moment ?
+User: [Compréhension ou nouvelle perspective]J'ai remis moi Ã  Ã©crire.
+Agent: [Baseline]C'est une excellente nouvelle, [NAME] ! Qu'est-ce qui vous a motivai a recommencer a aicrire ?
+User: [Compréhension ou nouvelle perspective]d'avoir bientot fini
+Agent: [Baseline]C'est une excellente raison, [NAME]. Avez-vous des projets d'aicriture pour les semaines a venir ?
+User: [Partager des informations personnelles ou décrire un événement passé]oui je finis cette semaine mon memoire
+Agent: [Baseline]C'est formidable, [NAME] ! Avez-vous des plans pour celebrer la fin de votre memoire ?

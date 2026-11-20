@@ -427,7 +427,8 @@ public class MICounselorIncrementalDA extends LLMFrame{
 
                                 Process proc = rt.exec(cmd);
 
-                                BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream(), "ISO-8859-1"));
+                                //BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream(), "ISO-8859-1"));
+                                BufferedReader stdInput = new BufferedReader(new InputStreamReader(proc.getInputStream(), "UTF-8"));
                                 BufferedReader stdError = new BufferedReader(new InputStreamReader(proc.getErrorStream()));
 
                                 // Read the output from the command
@@ -450,11 +451,15 @@ public class MICounselorIncrementalDA extends LLMFrame{
 
                                         if(s.length()>1){
 
-                                            synchronized (lock) {
-                                                System.out.println("Already on answer:"+AnswerText.getText());
-                                                System.out.println("answer:"+s);
-                                                AnswerText.setText(AnswerText.getText()+ s);                                                    
-                                            }
+                                            // Swing text components are NOT thread-safe: mutating them
+                                            // from this (background) reader thread while holding "lock"
+                                            // can deadlock the EDT. Post the append to the EDT instead and
+                                            // keep it out of the lock critical section.
+                                            final String chunk = s;
+                                            System.out.println("answer:"+chunk);
+                                            javax.swing.SwingUtilities.invokeLater(() -> {
+                                                AnswerText.setText(AnswerText.getText() + chunk);
+                                            });
 
                                             if(s.contains("START:")){
 
@@ -493,7 +498,7 @@ public class MICounselorIncrementalDA extends LLMFrame{
                                     
                                         }else{
                                              System.out.println("LE MESSAGE EST EMPTY*******************************************");
-                                             AnswerText.setText("");
+                                             javax.swing.SwingUtilities.invokeLater(() -> AnswerText.setText(""));
         Thread r1 = new Thread() {
             @Override
             public void run() {

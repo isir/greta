@@ -1,0 +1,44 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [inconnu] Va ser buena.
+Agent: [Planning with the Patient]Pas de souci, nous pouvons continuer sans cela.D'accord, comment allez-vous aujourd'hui ?
+User: [Accueil ou clôture]Moi c'est Owen
+Agent: [Ask about current Emotions]Bonjour Owen, comment vous sentez-vous aujourd'hui ?
+User: [Accueil ou clôture] ?a tr?s bien, je vous remercie.
+Agent: [Invite to Shift Outlook]C'est super à entendre, Owen. Parfois, il peut être utile de voir les choses sous un nouvel angle. Y a-t-il quelque chose en particulier que vous aimeriez aborder aujourd'hui ?
+User: [inconnu] ?a va, je me souviens aujourd'hui.
+Agent: [Ask for Consent]Parfait, Owen. Est-ce que ça vous va si nous parlons un peu de votre activité physique et de votre sédentarité aujourd'hui ?
+User: [Accueil ou clôture]parlons en
+Agent: [Reflection]D'accord, Owen. Vous avez mentionné que vous vous sentez bien aujourd'hui. C'est super. Comment vous sentez-vous par rapport à votre niveau d'activité physique en ce moment ? Est-ce que c'est quelque chose qui vous préoccupe ou qui vous motive ?
+User: [Partager des informations personnelles ou décrire un événement passé; Partager un sentiment ou une émotion négative] ?a me pr?occupe, je pense que je pourrais faire plus de sport.
+Agent: [Give Solution]Je comprends votre préoccupation, Owen. Que diriez-vous de commencer par une petite marche quotidienne ? Même 10 minutes par jour peuvent faire une grande différence. On peut aussi essayer de prendre les escaliers au lieu de l'ascenseur. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir; Partager un sentiment ou une émotion négative] Mais j'ai du mal ? trouver beaucoup de motivation. En ce moment je commence ? faire un petit peu plus de musculation que d'habitude,
+Agent: [Greeting or Closing]C'est déjà un bon début, Owen. Faire plus de musculation est une excellente initiative. Parfois, il suffit de petits pas pour commencer à voir des changements positifs. Pour terminer, je vous encourage à continuer sur cette voie et à ajouter peut-être une petite marche quotidienne. Prenez soin de vous et à bientôt ! END_CONVO
+User: [Accueil ou clôture] Ecco.
+Agent: [Ask for Information]Merci de partager ça, Owen. Est-ce que vous pouvez me dire ce qui vous motive à faire plus de musculation en ce moment ?
+User: [Backchannel]d'accord
+Agent: [Planning with the Patient]Super, Owen. Pour vous aider à augmenter votre activité physique, pourriez-vous choisir une petite étape concrète à intégrer dans votre routine cette semaine ? Par exemple, ajouter 10 minutes de marche chaque jour ou monter les escaliers au lieu de prendre l'ascenseur. Qu'en pensez-vous ?
+User: [Inconnu] Alors je pense que d?j?
+Agent: [Greeting or Closing]D'accord, Owen. Pour commencer, pourriez-vous choisir une petite étape concrète à intégrer dans votre routine cette semaine ? Par exemple, ajouter 10 minutes de marche chaque jour ou monter les escaliers au lieu de prendre l'ascenseur. Qu'en pensez-vous ?Merci dâ€™avoir pris ce temps pour Ã©changer avec moi. Jâ€™espÃ¨re que cette discussion vous a Ã©tÃ© utile. Quoi que vous dÃ©cidiez, câ€™est vous qui avez le contrÃ´le. Prenez soin de vous.
+User: [Modifier les comportements malsains à l'avenir; Accueil ou clôture] Oui alors ce serait ce serait une une bonne id?e apr?s en fait je marche d?j? un peu
+Agent: [Reflection]C'est formidable que vous marchiez déjà un peu, Owen. C'est un bon début. Peut-être pourriez-vous augmenter cette durée de marche de quelques minutes chaque jour ? Qu'en pensez-vous ? Cela pourrait être une étape concrète et réalisable pour cette semaine.
+User: [Modifier les comportements malsains à l'avenir] Oui alors ce serait ce serait une une bonne id?e apr?s en fait je marche d?j? un peu peu dix minutes par jour je je marche d?j?.
+Agent: [Reflection]C'est super que vous marchiez déjà 10 minutes par jour, Owen. C'est un bon début et cela montre que vous êtes déjà actif. Avez-vous remarqué des bénéfices de cette marche quotidienne ?
+User: [Partager un sentiment ou une émotion négative] Non je ne pas, je n'ai pas marqu? mon b?n?fice non.
+Agent: [Ask for Information]D'accord, Owen. Pouvez-vous me dire combien de temps vous passez assis chaque jour, en moyenne ? Cela pourrait nous aider à mieux comprendre votre routine actuelle.
+User: [Partager des informations personnelles ou décrire un événement passé] Au moins au moins dix heures par jour ici.
+Agent: [Backchannel]D'accord, Owen. Ça fait beaucoup de temps assis. Avez-vous des idées sur ce que vous pourriez faire pour réduire ce temps ?
+User: [Modifier les comportements malsains à l'avenir; Partager des informations personnelles ou décrire un événement passé] Malheureusement il n'y a pas grand chose ? faire quand on ?tudie et qu'on travaille ? la biblioth?que j'ai aucune id?e de quand on pourrait r?duire ce temps.
+Agent: [Ask for Consent]Je comprends, Owen. Est-ce que ça vous va si nous explorons ensemble quelques petites pauses que vous pourriez prendre pour bouger un peu plus pendant vos études et votre travail à la bibliothèque ?
+User: [Backchannel]très bien
+Agent: [Progress Acknowledgment]C'est génial que vous soyez ouvert à explorer des solutions, Owen. C'est un premier pas important. Voyons ensemble comment vous pourriez intégrer des petites pauses actives dans votre routine. Par exemple, vous pourriez faire une pause de 5 minutes toutes les heures pour marcher ou faire quelques étirements. Qu'en pensez-vous ?
+User: [Partager des informations personnelles ou décrire un événement passé] J'y ai pens?, apr?s c'est compliqu? parce que parfois il faut, il a certains travaux qui n?cessitent plus d'une heure
+Agent: [Empathic Reaction]Je comprends, Owen. Il peut être difficile de trouver du temps pour des pauses quand on a beaucoup de travail. C'est tout à fait normal de ressentir cela. Essayons de trouver une solution qui vous convient.
+User: [Partager un sentiment ou une émotion négative] on a envie de rester concentr? pendant une heure et demie, deux heures et j'ai peur que la petite marge de cinq minutes coupe ma concentration.
+Agent: [Backchannel]Je comprends, Owen. C'est tout à fait normal de vouloir rester concentré. Peut-être pourriez-vous essayer de faire une pause après chaque tâche importante, plutôt que toutes les heures ? Cela pourrait vous aider à rester concentré tout en bougeant un peu. Qu'en pensez-vous ?
+User: [Compréhension ou nouvelle perspective] Oui, c'est une tr?s bonne id?e, c'est une tr?s bonne id?e.
+Agent: [Invite to Shift Outlook]Super, Owen. Essayons de voir cela sous un autre angle. En prenant une pause après chaque tâche importante, vous pourriez non seulement bouger un peu, mais aussi revenir à votre travail avec un esprit plus frais et concentré. Qu'en pensez-vous ?
+User: [Compréhension ou nouvelle perspective] Oui, c'est c'est tr?s vrai, c'est tr?s vrai. Je
+Agent: [Experience Normalization]Owen, beaucoup de personnes ressentent la même chose que vous. Il est tout à fait normal de vouloir rester concentré sur son travail. Prendre des pauses peut sembler contre-intuitif, mais cela peut en fait améliorer votre concentration et votre productivité. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir] Oui, c'est c'est tr?s vrai, c'est tr?s vrai. Je de faire ?a prochainement.
+Agent: [Medical Education]C'est une excellente idée, Owen. Prendre des pauses après chaque tâche importante peut vraiment aider à améliorer votre concentration et votre bien-être. Vous pouvez commencer par des pauses de quelques minutes pour marcher ou faire des étirements. Cela peut faire une grande différence.  Pour vous aider à intégrer ces pauses, voici quelques conseils :  1. **Planifiez vos pauses** : Décidez à l'avance quand vous prendrez vos pauses. Cela peut être après avoir terminé une section de votre travail ou après une heure de concentration. 2. **Soyez flexible** : Si vous êtes vraiment concentré et ne voulez pas interrompre votre travail, prenez une pause dès que vous sentez que votre concentration commence à baisser. 3. **Bougez un peu** : Utilisez ces pauses pour marcher, faire des étirements ou même monter et descendre quelques marches. Cela vous aidera à vous sentir plus énergisé.  Essayez cela pendant la semaine prochaine et voyez comment vous vous sentez. Prenez soin de vous, Owen. END_CONVOAgent: []Merci d’avoir pris ce temps pour échanger avec moi. J’espère que cette discussion vous a été utile. Vous avez déjà fait un grand pas en réfléchissant à tout cela. Je vous souhaite plein de réussite dans votre démarche !
+

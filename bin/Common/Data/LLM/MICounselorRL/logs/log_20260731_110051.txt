@@ -1,0 +1,17 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]I'm doing pretty good. Thank you. And you?
+Agent: [Baseline]I'm doing well, thanks for asking. I'm here to chat about some things if you're up for it.
+User: [unknown]Yeah. Sure. Why not?
+Agent: [Baseline]Great. I understand you've been referred here to talk about your alcohol use. How do you feel about that?
+User: [Sharing negative feeling or emotion]I feel a bit sad and stressed, actually.
+Agent: [Baseline]I see. It sounds like you're feeling a bit down about this. Can you tell me more about that?
+User: [Sharing negative feeling or emotion]Yeah. I don't know. I'm Yeah. I don't know. I'm Yeah. I don't know. I'm Yeah. I don't know. I'm Yeah. I don't know. I'm Yeah. I don't know. I'm really trying hard to quit drinking, but I don't know what to do.
+Agent: [Baseline]It sounds like you're feeling stuck and unsure about how to cut back on drinking. That's a common feeling.
+User: [unknown]Yeah. But
+Agent: [Baseline]But what? I'm here to listen.
+User: [Changing unhealthy behavior in the future]I I feel trapped. I don't know what to do.
+Agent: [Baseline]It sounds like you're feeling trapped in your current situation with drinking. What makes you feel that way?
+User: [unknown]Because I try Because I try Because I try Because I try Because I try Because I try Because I try Because I try Because I try like, to drink less, and I don't I don't really do it. I don't really, like, like, to drink less, and I don't I don't really do it. I don't really, like, like, to drink less, and I don't I don't really do it. I don't really, like, like, to drink less, and I don't I don't really do it. I don't really, like, like, to drink less, and I don't I don't really do it. I don't really, like, like, to drink less, and I don't I don't really do it. I don't really, like, like, to drink less, and I don't I don't really do it. I don't really, like, like, to drink less, and I don't I don't really do it. I don't really, like, like, to drink less, and I don't I don't really do it. I don't really, like, achieve the goal.
+Agent: [Baseline]It sounds like you're feeling frustrated and stuck. You've tried to drink less but haven't been able to.

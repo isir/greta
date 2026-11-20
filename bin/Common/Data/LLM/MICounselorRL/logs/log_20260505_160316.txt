@@ -1,0 +1,7 @@
+Agent: []Bonjour, je suis Camille. Et vous ?
+User: [Categorisation: Accueil ou clôture]Bonjour [NAME], je suis John. Comment tu vas
+Agent: [Baseline]EnchantÃ©e, [NAME]Oh, bonjour ! Je suis [NAME], votre thérapeute qualifié pour aujourd'hui. Ravi de faire votre connaissance. Comment allez-vous ?
+User: [Backchannel]Bien merci de demander. Et toi Comment ça se passe
+Agent: [Baseline]Je vais bien,Gracias, John. Je suis la pour vous aider aujourd'hui. Nous allons travailler ensemble afin de trouver un moyen de réduire votre consommation d'alcool et de maintenir une meilleure santé en jainéral. Qu'en pensez-vous ?
+User: [Modifier les comportements malsains à l'avenir]Voilà je pense que c'est une très bonne idée, merci de commencer.
+Agent: [Baseline]Parfait ! Commencons par discuter de la consommation d'alcool et son impact sur votre santÃ© generale. Pouvez-vous me dire combien vous buvez en jainéral par semaine, John?

@@ -1,0 +1,9 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing]Hello. I'm [NAME].
+Agent: [Baseline]Pleased to meet you, [NAME]How are you doing today, [NAME]?
+User: [Greeting or Closing]Okay.
+Agent: [Baseline]I'm glad to hear that. How about your drinking, [NAME]? How's that been going?
+User: [unknown]It's a a semi poly
+Agent: [Baseline]I see. Can you tell me more about that? What does a "semi poly" drinking pattern look like for you?
+User: [unknown]If it's, like, one, it should I have changed If it's, like, one, it should I have changed If it's, like, one, it should I have changed If it's, like, one, it should I have changed something because that he wouldn't be doing this something because that he wouldn't be doing this something because that he wouldn't be doing this something because that he wouldn't be doing this He he would be just doing, like, the
+Agent: [Baseline]It sounds like you're feeling a bit stuck, [NAME]. Can you tell me what's making it hard for you to make a change?

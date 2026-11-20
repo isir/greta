@@ -169,6 +169,7 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
     }
 
     private void processLine() throws IOException {
+        long t0 = System.currentTimeMillis();
         String line = null;
         try {
             line = zSubscriber.recvStr(ZMQ.DONTWAIT);
@@ -185,14 +186,17 @@ public class OpenFaceOutputStreamZeroMQReader extends OpenFaceOutputStreamAbstra
             } else {
                 LOGGER.warning(String.format("Line not recognized: %s", line));
             }
-				
-														  
+            
+            long elapsed = System.currentTimeMillis() - t0; 
+            if (elapsed > 5) System.out.println("[ZMQ] processLine took "+elapsed+"ms");
+
         }
         else
             lineNullCount++;
         // Send null data when missing too many frames
         if(lineNullCount > MAX_LINENULLCOUNT)
             processNullData();
+        
     }
 
     private void processHeader(String line) {

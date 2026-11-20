@@ -1,0 +1,5 @@
+Agent: []Hello, I'm Camille. What's your name?
+User: [Greeting or Closing; Backchannel]Tammy, my name is [NAME]. How are you doing today?
+Agent: [Baseline]Pleased to meet you, [NAME]Pleased to meet you, [NAME]. How's your week been so far? I'm glad you came in today.
+User: [Backchannel; Asking for Medical Information]to tal about alcohol
+Agent: [Baseline]I hear you, [NAME]. Let's take it slow-what's been on your mind lately when you think about alcohol? No rush.
